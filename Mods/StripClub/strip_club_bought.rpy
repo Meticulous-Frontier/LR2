@@ -81,7 +81,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         call strip_club_evaluate_stripper(the_person) from _call_strip_club_evaluate_stripper_selection
 
     $ strip_club_call_in_all_strippers()
-    $ renpy.scene("Active")
+    $ clear_scene()
 
     if __builtin__.len(stripclub_strippers) > 1:
         $ the_person = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])

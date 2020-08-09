@@ -260,7 +260,7 @@ label late_for_work_action_label:
         "The client wires the money to your company account, but must have forgot to actually place an order."
         $ mc.business.change_funds(250)
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     return

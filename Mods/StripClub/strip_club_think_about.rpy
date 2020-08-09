@@ -148,7 +148,7 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
             $ add_talk_again_buying_club_starbuck_action()
             $ add_strip_club_offer_expire_action()
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label talk_again_buying_club_starbuck_label(the_person):
@@ -171,7 +171,7 @@ label talk_again_buying_club_starbuck_label(the_person):
             $ set_strip_club_foreclosed_stage(3) # stay at stage 3 with updated last action day
             $ add_talk_again_buying_club_starbuck_action()
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label starbuck_celebration_strip_event(the_person):

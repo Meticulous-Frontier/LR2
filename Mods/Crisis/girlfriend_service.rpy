@@ -123,7 +123,7 @@ label girlfriend_service_label():
                 the_person.char "Ah, right, of course..."
                 "You can tell she is a little saddened, but she backs off and goes back to her work."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     return

@@ -66,5 +66,5 @@ label downtown_bar_drink_label():
 
     call advance_time from downtown_bar_drink_1
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

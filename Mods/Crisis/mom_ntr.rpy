@@ -2485,5 +2485,5 @@ label mom_ntr_mod_action_label:
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

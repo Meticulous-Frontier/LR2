@@ -573,7 +573,7 @@ label quest_cuckold_employee_gloryhole_label():
             "As you step out of the stall, you almost bump into [the_person.title] as she is entering the stall next to yours."
             $ the_person.draw_person()
             the_person.char "Oh! You're done... I mean... Excuse me!"
-            $ renpy.scene("Active")
+            $ clear_scene()
             "She quickly enters the stall and closes the door."
             "Hmm... was she trying to follow you in here? You wonder if your refusal to try and knock her up has anything to do with it..."
             $ quest_cuckold_employee.set_quest_flag(39)

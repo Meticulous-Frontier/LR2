@@ -120,5 +120,5 @@ label stripclub_dance_enhanced_label():
     "[title] blows a kiss and struts off stage."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

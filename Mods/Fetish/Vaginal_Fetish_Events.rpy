@@ -486,7 +486,7 @@ label SB_cowgirl_wakeup_label(the_person):
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "stand3")
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."
-    $ renpy.scene("Active")
+    $ clear_scene()
     "Looks like you slept in!"
     return
 

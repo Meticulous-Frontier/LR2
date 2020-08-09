@@ -165,7 +165,7 @@ label SB_fetish_anal_label(the_person):
             "[the_person.possessive_title] quickly sulks off."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label SB_fetish_anal_label_non_employee(the_person):
@@ -235,7 +235,7 @@ label SB_fetish_anal_label_non_employee(the_person):
             "[the_person.possessive_title] quickly sulks off."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA2
@@ -464,7 +464,7 @@ label SB_fetish_anal_recurring_label():
             "[the_person.possessive_title] quickly sulks off."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label SB_fetish_anal_recurring_non_employee_label():
@@ -520,7 +520,7 @@ label SB_fetish_anal_recurring_non_employee_label():
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe another time?"
             "You hang up your phone and continue with your day."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 init 2 python:
@@ -764,7 +764,7 @@ label SB_mom_anal_pay_label():
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA50
@@ -851,7 +851,7 @@ label SB_mom_anal_friday_label():
     $ add_mom_weekly_anal_action()  # re-add event for next week
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA60
@@ -971,7 +971,7 @@ label SB_lily_anal_dp_fetish_label():
     $ male_strapon_unlock()  #TODO test this
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA70
@@ -1058,7 +1058,7 @@ label SB_starbuck_anal_intro():
     "You say goodbye and head out so she can finish locking up the sex shop."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 init 2 python:
@@ -1434,7 +1434,7 @@ label SB_stephanie_anal_fetish_label():
                 "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
                 $ the_person.apply_planned_outfit()
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
         "She gives a deep sigh of relief."
         the_person.char "You have NO idea how glad I am to hear that."
@@ -1518,7 +1518,7 @@ label SB_stephanie_anal_fetish_label():
 
     $ scene_manager.clear_scene()
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA100

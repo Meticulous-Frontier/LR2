@@ -180,5 +180,5 @@ label slave_attention_crisis_action_label:
             the_person.char "Yes Master, please forgive me..."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

@@ -70,5 +70,5 @@ label breeding_mom_enhanced_label(the_person):
             $ the_person.change_stats(slut_temp = -2, love = -2)
             the_person.char "Of course... I was just being silly. I should know better."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

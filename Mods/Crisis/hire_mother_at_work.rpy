@@ -86,7 +86,7 @@ label hire_mother_work_crisis_label():
                             "She takes the resume back and steps away from your desk, defeated."
                             $ the_person.draw_person(emotion = "sad")
                             the_person.char "Right, of course. Sorry for wasting up your time."
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         return
             elif promised_sex:
                 the_person.char "There's nothing I could do? Nothing at all?"
@@ -104,7 +104,7 @@ label hire_mother_work_crisis_label():
                     "She takes the resume back and steps away from your desk, defeated."
                     $ the_person.draw_person(emotion = "sad")
                     the_person.char "Right, of course. Sorry for wasting up your time."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
 
             else:
@@ -112,7 +112,7 @@ label hire_mother_work_crisis_label():
                 $ the_person.change_happiness(-3)
                 the_person.char "I understand. Sorry for taking up your time."
                 "She collects the resume and leaves your office."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
 
     $ the_mother = the_person.generate_mother(lives_with_daughter = in_private) #Produces a person who has a high chance to share characteristics with her mother.
@@ -164,5 +164,5 @@ label hire_mother_work_crisis_label():
             the_person.char "I understand, thank you for at least taking a look for me."
 
     $ del the_mother
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

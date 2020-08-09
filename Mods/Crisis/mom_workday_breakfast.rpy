@@ -392,7 +392,7 @@ label mom_commando_day_selfie_label():
     "A moment later."
     the_person.char "Don't tempt me! See you at home tonight!"
     "You smile and resume your day."
-    $ renpy.scene("Active")
+    $ clear_scene()
     $ the_person.apply_planned_outfit()
     return
 

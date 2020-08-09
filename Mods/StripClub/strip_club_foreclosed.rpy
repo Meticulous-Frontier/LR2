@@ -140,7 +140,7 @@ label cousin_talk_about_strip_club_label(the_person):
 
     $ set_strip_club_foreclosed_stage(1)
     $ add_starbuck_talk_about_strip_club_action()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label club_foreclosed_strip_label(the_person):
@@ -165,7 +165,7 @@ label club_foreclosed_strip_label(the_person):
             the_person.char "Really? I never got cash this easily!"
             the_person.char "Ok, you're a pervert, but I admit you're a generous pervert!"
             $ the_person.change_stats(happiness = 5, obedience = -1, love = 2)
-            $ renpy.scene("Active")
+            $ clear_scene()
             "It looks like [the_person.title] is her usual obnoxious self again... a moment later she's back in the bathroom changing her clothes."
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy", position = "stand4")
@@ -180,7 +180,7 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.change_arousal(10)
             $ the_person.draw_person(position = "walking_away")
             "Happily [the_person.title] turns around leaving the room, closing the door behind her."
-            $ renpy.scene("Active")
+            $ clear_scene()
 
         "Let's start":
             mc.name "Enough chit chat [the_person.title], less talking and more stripping!"
@@ -233,7 +233,7 @@ label club_foreclosed_strip_label(the_person):
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."
                 the_person.char "Finally... Pervert!"
-                $ renpy.scene("Active")
+                $ clear_scene()
                 "A moment later she's back in the bathroom changing her clothes again."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
@@ -275,7 +275,7 @@ label club_foreclosed_strip_label(the_person):
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."
                 the_person.char "Finally... Pervert!"
-                $ renpy.scene("Active")
+                $ clear_scene()
                 "A moment later she's back in the bathroom changing again her clothes."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
@@ -317,7 +317,7 @@ label club_foreclosed_strip_label(the_person):
                 mc.name "You're right, I like your ass!"
                 $ the_person.draw_person(position = "stand4")
                 the_person.char "Pervert!"
-                $ renpy.scene("Active")
+                $ clear_scene()
                 "A moment later she's back in the bathroom changing again her clothes."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
@@ -331,5 +331,5 @@ label club_foreclosed_strip_label(the_person):
 
     $ the_item = None
     $ the_person.review_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

@@ -164,5 +164,5 @@ label milk_employee_crisis_label():
     "Once you are finished, you leave [the_person.title] in the break room and get back to work."
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

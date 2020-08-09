@@ -284,7 +284,7 @@ label advance_time_enhanced(no_events = False):
             if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
                 # $ renpy.say("", "Run: " + act.name)
                 $ advance_time_action_list[count].call_action()
-                $ renpy.scene("Active")
+                $ clear_scene()
 
         $ count += 1
 
@@ -344,7 +344,7 @@ label advance_time_mandatory_crisis_label():
                 $ crisis.call_action()
                 if _return == "Advance Time":
                     $ mandatory_advance_time = True
-                $ renpy.scene("Active")
+                $ clear_scene()
                 $ clear_list.append(crisis)
             $ del crisis
         $ mandatory_crisis_count += 1
@@ -406,7 +406,7 @@ label advance_time_mandatory_morning_crisis_label():
             $ crisis.call_action()
             if _return == "Advance Time":
                 $ mandatory_advance_time = True
-            $ renpy.scene("Active")
+            $ clear_scene()
             $ clear_list.append(crisis)
         $ mandatory_morning_crisis_count += 1
         $ del crisis

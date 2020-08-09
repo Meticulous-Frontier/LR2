@@ -192,7 +192,7 @@ label mistress_hunt_for_me_label(the_person):
     mc.name "Ok, let's find a more appropriate place, follow me girls!"
     $ mc.change_location(downtown_hotel)
     $ mc.location.show_background()
-    $ renpy.scene("active")
+    $ clear_scene()
     "A couple of minutes later you are in the downtown hotel where you get a room."
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_two, position = "walking_away")

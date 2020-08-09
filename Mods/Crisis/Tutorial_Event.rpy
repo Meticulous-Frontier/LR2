@@ -36,5 +36,5 @@ label SB_tutorial_event():
             $ the_person.change_happiness(5)
 
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

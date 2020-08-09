@@ -46,5 +46,5 @@ label lady_of_the_night_label_enhanced():
             the_person.char "Suit yourself."
             $ the_person.remove_person_from_game()
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return    

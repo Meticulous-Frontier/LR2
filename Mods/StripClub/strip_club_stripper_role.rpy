@@ -443,7 +443,7 @@ label stripper_performance_review_label(the_person):
                         the_person.char "What? I... I can't believe that [the_person.mc_title], why would you ever think I would stay here for less money?"
                         mc.name "Like I said, I'm sorry but it has to be done."
                         the_person.char "Well you know what, I think I'm just going to find somewhere else to work. I quit."
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "[the_person.title] stands up and storms out of the room."
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
@@ -494,7 +494,7 @@ label stripper_performance_review_label(the_person):
                     else:
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
                         the_person.char "What? You want me to beg to stay at this shitty job? If you don't want me here I think it's best I just move on. I quit!"
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "[the_person.title] stands up and storms out."
                         $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
                         $ strip_club_fire_stripper(the_person)
@@ -531,5 +531,5 @@ label stripper_performance_review_label(the_person):
             $ the_person.change_stats(happiness = 2, obedience = 1)
             the_person.char "Thank you, I'll do my best."
     "You stand up and open the door for [the_person.title] at the end of her performance review."
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

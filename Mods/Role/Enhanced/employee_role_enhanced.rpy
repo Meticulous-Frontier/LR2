@@ -79,7 +79,7 @@ label employee_find_out_home_location_label(the_person):
     mc.name "Well, well, that is indeed a great place to live. Thank you for the talk, i'm sorry to cut this short, but I do have to get back to work."
     the_person.char "Any time [the_person.mc_title], I really enjoyed our little parley."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label activate_employee_role_enhancement(stack):

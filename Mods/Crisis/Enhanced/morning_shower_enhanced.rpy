@@ -69,7 +69,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                         the_person.char "Knock next time, okay? I'll be done in a minute."
                         "She shoos you out of the room, seeming more upset about being interrupted than being seen naked."
                         $ hall.show_background()
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         $ the_person.change_stats(love = -2, slut_temp = 2, happiness = -2)
                         call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_4
                     else:
@@ -101,7 +101,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 the_person.char "Knock next time, okay? I'll be done in a minute."
                 "She shoos you out of the room, seeming more upset about being interrupted than being seen naked."
                 $ hall.show_background()
-                $ renpy.scene("Active")
+                $ clear_scene()
                 $ the_person.change_love(-1)
                 $ the_person.change_slut_temp(2)
                 call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_3
@@ -119,7 +119,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label morning_shower_masturbation():
@@ -195,7 +195,7 @@ label girl_shower_enter_enhanced(the_person):
             $ apply_towel_outfit(the_person)
             $ the_person.draw_person()
             the_person.char "There you go. Enjoy!"
-            $ renpy.scene("Active")
+            $ clear_scene()
             "She steps past you and leaves. You get into the shower and enjoy the relaxing water yourself."
             $ mc.change_energy(20)
 
@@ -223,7 +223,7 @@ label girl_shower_enter_enhanced(the_person):
                 $ apply_towel_outfit(the_person)
                 $ the_person.draw_person()
                 the_person.char "See you next time."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 "She leaves the room and you finish your shower alone, feeling refreshed by the water."
                 $ mc.change_location(bedroom)
 
@@ -260,7 +260,7 @@ label girl_shower_enter_enhanced(the_person):
                         else:
                             the_person.char "Well maybe we can pick this up some other time. See you later."
 
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "She leaves the room and you finish your shower alone, feeling refreshed by the water."
                         $ mc.change_location(bedroom)
 

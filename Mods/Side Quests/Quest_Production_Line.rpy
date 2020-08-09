@@ -346,14 +346,14 @@ label quest_production_line_help_move_label():
         "She wraps her arms around you and gives you a lingering hug."
         "Eventually, she lets go."
     the_person.char "Okay... let's get to work!"
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You spend about an hour helping [the_person.title] loading her things into a small rental trailer."
     "When you are done, you ride with her over to her new apartment."
     #TODO her apartment which is actually different than the place she was earlier.
     $ the_person.draw_person()
     $ the_person.learn_home()
     "Before we get to work, would you do me a favor? Could you grab a couple bottles of water from the fridge? I'm so thirsty!"
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You grab a couple of water bottles. [the_person.title] is still out in the trailer. Now would be a good time to drop a serum in her drink..."
     menu:
         "Add a dose of serum to [the_person.title]'s drink.":

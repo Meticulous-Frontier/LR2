@@ -591,7 +591,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    #$ renpy.scene("Active")
+    #$ clear_scene()
     #$ scene_manager.clear_scene()
     "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice.char "Hello [person_choice.mc_title]."
@@ -1224,7 +1224,7 @@ label HR_director_mind_control_attempt_label(the_person):
 
     $ del HR_employee_list
     the_person.char "Okay. I'll go get her."
-    $ renpy.scene("Active")
+    $ clear_scene()
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
 
     $ scene_manager.clear_scene()

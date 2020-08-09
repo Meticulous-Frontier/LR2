@@ -145,7 +145,7 @@ label SB_fetish_cum_non_employee_label(the_person):
             "You watch her walk away while you put away your dick. You turn around and go to bed."
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBC1
@@ -217,7 +217,7 @@ label SB_fetish_cum_label(the_person):
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 init 2 python:
@@ -371,7 +371,7 @@ label SB_fetish_cum_dosage_non_employee_label():
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe another time?"
             "You hang up your phone and continue with your day."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBC3
@@ -763,7 +763,7 @@ label SB_fetish_stephanie_cum_label():
                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
                 $ the_person.apply_planned_outfit()
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
         "She gives a deep sigh of relief."
         the_person.char "You have NO idea how glad I am to hear that."
@@ -829,5 +829,5 @@ label SB_fetish_stephanie_cum_label():
 
     $ scene_manager.clear_scene()
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

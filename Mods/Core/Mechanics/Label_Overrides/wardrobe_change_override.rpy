@@ -22,7 +22,7 @@ label wardrobe_change_label_enhanced(the_person):
 
     if picked_option == "add":
         mc.name "[the_person.title], I've got something I'd like you to wear for me."
-        $ renpy.scene("Active")
+        $ clear_scene()
         call screen outfit_select_manager()
         $ the_person.draw_person()
         if _return == "No Return":
@@ -44,14 +44,14 @@ label wardrobe_change_label_enhanced(the_person):
 
     elif picked_option == "delete":
         mc.name "[the_person.title], lets have a talk about what you've been wearing."
-        $ renpy.scene("Active")
+        $ clear_scene()
         call screen outfit_delete_manager(the_person.wardrobe)
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person()
 
     elif picked_option == "wear":
         mc.name "[the_person.title], I want you to get changed for me."
-        $ renpy.scene("Active")
+        $ clear_scene()
         call screen girl_outfit_select_manager(the_person.wardrobe, show_sets = True, slut_limit = the_person.effective_sluttiness() + 20)
         if _return != "None":
             $ the_person.set_outfit(_return)

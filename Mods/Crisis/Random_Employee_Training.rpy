@@ -147,5 +147,5 @@ label SB_one_on_one_label():
     else:
         the_person.char "That's okay, [the_person.mc_title], I understand. Maybe another time then!"
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

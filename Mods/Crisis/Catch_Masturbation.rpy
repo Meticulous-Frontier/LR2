@@ -314,5 +314,5 @@ label SB_caught_masturbating_crisis_label():
         $ mc.location.show_background()
     $ the_clothing = None
     $ the_person_two = None
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
