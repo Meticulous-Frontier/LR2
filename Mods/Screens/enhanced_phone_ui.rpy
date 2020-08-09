@@ -2,8 +2,8 @@ init 2:
 
     screen phone_hud_ui():
         default phone_up = False
-        default start_phone_pos = 1.4
-        default end_phone_pos = 1.4
+        default start_phone_pos = 1.45
+        default end_phone_pos = 1.45
         default ui_xsize = 360
         modal False
         frame:
@@ -11,7 +11,7 @@ init 2:
             xsize ui_xsize + 20
             ysize 440
             xanchor 1.0
-            xalign 0.99
+            xalign 1.0
             at phone_slide(start_phone_pos, end_phone_pos)
             frame:
                 background None
@@ -53,6 +53,6 @@ init 2:
                     ysize 440
                     action [
                         ToggleScreenVariable("phone_up"),
-                        ToggleScreenVariable("end_phone_pos",1.0, 1.4),
-                        ToggleScreenVariable("start_phone_pos",1.4, 1.0),
+                        ToggleScreenVariable("end_phone_pos",1.0, 1.45),
+                        ToggleScreenVariable("start_phone_pos",1.45, 1.0),
                         ]
