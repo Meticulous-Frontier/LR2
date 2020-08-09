@@ -16,16 +16,17 @@ init 2 python:
         #global ashley_role
         #TODO make most variables identical to Stephanie
         global ashley
-        ashley = create_random_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="brown", hair_style = ponytail, skin="white" , \
+        ashley = make_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="brown", hair_style = ponytail, skin="white" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ashley_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            title = "Ashley", possessive_title = "Your intern", mc_title = mc.name, relationship = "Single", kids = 0)
+            title = "Ashley", possessive_title = "Your intern", mc_title = mc.name, relationship = "Single", kids = 0,
+            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
+            forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
 
         ashley.set_schedule([0,1,2,3,4], stephanie.home)
-
         ashley.home = stephanie.home
-
         ashley.home.add_person(ashley)
+
         ashley.event_triggers_dict["intro_complete"] = False    #
         ashley.event_triggers_dict["excitement_overhear"] = False   #
         ashley.event_triggers_dict["attitude_discussed"] = False   #
@@ -42,20 +43,10 @@ init 2 python:
         ashley_intro = Action("ashley_intro",ashley_intro_requirement,"ashley_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.mandatory_crises_list.append(ashley_intro) #Add the event here so that it pops when the requirements are met.
 
-        ashley.opinions["production work"] = [2, True]  # she loves prod work
-        ashley.opinions["work uniforms"] = [-1, False]  # uniforms stifle creativity
-        ashley.opinions["flirting"] = [1, False]  # she likes attention, even if she is awkward
-        ashley.opinions["working"] = [1, False]  # Her first real job
-        ashley.opinions["the colour green"] = [2, False] #She loves green!
-        ashley.opinions["pants"] = [1, False]  #And pants
-        ashley.opinions["the colour blue"] = [-2, False] #She hates blue
-        ashley.opinions["classical"] = [1, False]  #like calm, relaxing music.
-
-
-        ashley.sexy_opinions["taking control"] = [2, False]  # she likes taking control, closet dom
-        ashley.sexy_opinions["getting head"] = [2, False] # Loves to be serviced
-        ashley.sexy_opinions["giving blowjobs"] = [-2, False]  # ultimate act of submission
-        ashley.sexy_opinions["public sex"] = [2, False]   #Risky behavior turns her on
+        # set relationships
+        town_relationships.update_relationship(ashley, stephanie, "Sister")
+        town_relationships.update_relationship(nora, ashley, "Friend")
+        town_relationships.update_relationship(lily, ashley, "Rival")
 
         #TODO make her know Nora from before graduation. She is familiar with serums and their effects
         #TODO add ashley to unique characters list?
@@ -169,23 +160,10 @@ init -1 python:
                 return True
         return False
 
-
-
-
-
     def add_ashley_hire_later_action():
         ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
             menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
         head_researcher.add_action(ashley_hire_directed)
-        return
-
-    def hire_ashley():
-        mc.business.add_employee_production(ashley)
-        ashley.set_work([1,2,3], mc.business.p_div)  #New in 31.1 #TODO
-        ashley.special_role.append(employee_role)
-        town_relationships.update_relationship(ashley, stephanie, "Sister")
-        town_relationships.update_relationship(nora, ashley, "Friend")
-        town_relationships.update_relationship(lily, ashley, "Rival")
         return
 
 #Story labels
@@ -234,10 +212,9 @@ label ashley_intro_label():
         $ the_person.change_obedience(5)
         the_person.char "Oh! I didn't think you would say yes. This is great news! I'm sure she'll probably want to get started right away!"
 
-        $ hire_ashley()
+        $ mc.business.hire_person(ashley, "Production")
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
-        #TODO make sure her home is set to Stephanie's house somehow.
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         the_person.char "Hey Ash! Guess what? I got you a starting position at that place I've been..."
@@ -271,10 +248,9 @@ label ashley_hire_directed_label(the_person):
         $ the_person.change_obedience(5)
         the_person.char "Oh! This is great news! I'm sure she'll probably want to get started right away!"
         $ head_researcher.remove_action("ashley_hire_directed_label")
-        $ hire_ashley()
+        $ mc.business.hire_person(ashley, "Production")
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
-        #TODO make sure her home is set to Stephanie's house somehow.
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
         the_person.char "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as you leave the room. You hope you made the right decision!"
@@ -469,8 +445,7 @@ label ashley_classical_concert_date_label():
     mc.name "Alright, don't forget work tomorrow. I'll see you both then."
     the_person.char "Bye!"
     stephanie.char "See ya then!"
-    $ scene_manager.remove_actor(the_person, reset_actor = True)
-    $ scene_manager.remove_actor(stephanie)
+    $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["concert_date"] = 2
     if ashley_get_porn_discussed():
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
@@ -553,6 +528,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     the_person.char "Yes sir... and the same for you."
     "You both walk back to the [mc.location.formalName]."
     $ mc.location.show_background()
+    $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["porn_discussed"] = True
     if ashley_get_concert_date_stage > 1:
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
@@ -673,6 +649,7 @@ label ashley_ask_about_porn_label(the_person):
     "You'll have to consider how to approach both girls carefully before you talk to them next."
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
 
+    $ scene_manager.clear_scene()
     return
 
 
