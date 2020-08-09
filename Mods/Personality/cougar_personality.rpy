@@ -1387,9 +1387,61 @@ label cougar_body_cum_taboo_break(the_person):
     return
 
 label cougar_creampie_taboo_break(the_person):
+    if the_person.wants_creampie():
+        if the_person.on_birth_control:
+            if the_person.relationship != "Single":
+                $ so_title = girl_relationship_to_title(the_person.relationship)
+                the_person.char "Oh... I feel like such a bad [so_title], but I think I needed this. I'm sure he would understand."
 
+            else:
+                the_person.char "Oh lord, I've wanted this so badly for so long!"
+
+        elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "Oh lord, I've needed this so badly!"
+                the_person.char "I don't care about my [so_title], I just want you to treat me like a real woman and get me pregnant!"
+            else:
+                the_person.char "Oh lord, I've needed this so badly! I want you to treat me like a real woman and get me pregnant!"
+
+            "She sighs happily."
+            the_person.char "If you've got the energy we should do it again, to give me the best chance."
+
+        else:
+            if the_person.relationship != "Single":
+                $ so_title = girl_relationship_to_title(the_person.relationship)
+                the_person.char "I can't believe I let you do that... I'm such a terrible [so_title], but it felt so good!"
+            else:
+                the_person.char "I can't believe I let you do that, but it feels so good!"
+
+            the_person.char "I'll just have to hope you haven't gotten me pregnant. We shouldn't do this again, it's too risky."
+
+    else:
+        if not the_person.on_birth_control:
+            the_person.char "Oh no, did you just finish [the_person.mc_title]?"
+            "She sighs unhappily."
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person.char "What if I get pregnant now? My [so_title] will start asking a lot of questions. Perhaps I should just fuck him tonight to avoid them."
+
+            else:
+                the_person.char "Have you thought about what you would do if you got this lady pregnant?"
+
+            the_person.char "Maybe next time you should wear a condom, in case you get carried away again."
+
+        elif the_person.relationship != "Single":
+            $ so_title = girl_relationship_to_title(the_person.relationship)
+            the_person.char "[the_person.mc_title], I told you to pull out."
+            the_person.char "I'm already a terrible [so_title] for doing this and you just made me feel even worse."
+            the_person.char "Maybe next time you should wear a condom in case you get too excited again."
+
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person.char "Oh [the_person.mc_title], I told you to pull out. I hope you're satisfied, you've made such a mess."
+
+        else:
+            the_person.char "[the_person.mc_title], did you just finish inside?"
+            the_person.char "I guess boys will be boys, but try not to make a habit of it when I tell you to pull out."
     return
 
 label cougar_anal_creampie_taboo_break(the_person):
-
     return
