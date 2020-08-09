@@ -22,28 +22,22 @@ init 2 python:
         person.discover_opinion("creampies")
 
         # Pregnancy Check #
-        if persistent.pregnancy_pref > 0 and not person.is_pregnant():
-            if persistent.pregnancy_pref == 1 and person.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
-                bc_percent = 100 - person.bc_penalty
-            elif persistent.pregnancy_pref == 2 and person.on_birth_control:
-                bc_percent = 90 - person.bc_penalty
+        if persistent.pregnancy_pref > 0 and not pregnant_role in self.special_role:
+            if persistent.pregnancy_pref == 1 and self.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
+                bc_percent = 100 - self.bc_penalty
+            elif persistent.pregnancy_pref == 2 and self.on_birth_control:
+                bc_percent = 90 - self.bc_penalty
             else:
                 bc_percent = 0
 
-            preg_chance = renpy.random.randint(0,100)
-            bc_chance = renpy.random.randint(0,100)
             if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
-                day_difference = abs((day % 30) - person.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
-                if day_difference > 15:
-                    day_difference = 30 - day_difference #Wrap around to get correct distance between months.
-                multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
-                modified_fertility = person.fertility_percent * multiplier
+                modified_fertility = self.calculate_realistic_fertility()
             else:
-                modified_fertility = person.fertility_percent
+                modified_fertility = self.fertility_percent
 
-            if preg_chance < modified_fertility: #There's a chance she's pregnant
-                if bc_chance >= bc_percent : # Birth control failed to prevent the pregnancy
-                    become_pregnant(person, mc_father = False) #Function in role_pregnant establishes all of the pregnancy related variables and events.
+            if renpy.random.randint(0,100) < modified_fertility:
+                if renpy.random.randint(0,100) >= bc_percent : # Birth control failed to prevent the pregnancy
+                    become_pregnant(self) #Function in role_pregnant establishes all of the pregnancy related variables and events.
 
     def cum_in_mouth_ntr(person): 
         if person.outfit.can_add_accessory(mouth_cum):
