@@ -945,9 +945,6 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
-        if position == "standing_doggy":
-            position = "doggy"
-
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -991,9 +988,6 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
-        if position == "standing_doggy":
-            position = "doggy"
-
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -1007,12 +1001,6 @@ init -1 python:
             the_animation = None
         elif the_animation is None:
             the_animation = self.idle_animation
-
-        renpy.scene("Active") # clear layer for new draw action
-        if scene_manager is None:
-            renpy.show_screen("person_info_ui",self)
-        else:   # when we are called from the scene manager we have to draw the other characters
-            scene_manager.draw_scene_without(self)
 
         if the_animation:
             # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
@@ -1035,6 +1023,12 @@ init -1 python:
             renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
 
         else:
+            renpy.scene("Active") # clear layer for new draw action
+            if scene_manager is None:
+                renpy.show_screen("person_info_ui",self)
+            else:   # when we are called from the scene manager we have to draw the other characters
+                scene_manager.draw_scene_without(self)
+
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
             self.outfit.remove_clothing(the_clothing)
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
