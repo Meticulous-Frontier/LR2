@@ -36,9 +36,9 @@ label intro_cowgirl_cunnilingus(the_girl, the_location, the_object):
 label taboo_break_cowgirl_cunnilingus(the_girl, the_location, the_object):  #because this is a girl in charge position only it makes sense to bypass normal taboo break dialogue which usually assumes MC is in charge
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_cunnilingus.redraw_scene(the_girl)
-    mc.char "What are you doing?"
+    mc.name "What are you doing?"
     the_person.char "I know we've never done this but... I want you to kiss me."
-    mc.char "That hardly seems like a big deal..."
+    mc.name "That hardly seems like a big deal..."
     the_person.char "Not on my lips..."
     "She slowly climbs up your body until her cunt is inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
