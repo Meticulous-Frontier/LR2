@@ -137,6 +137,8 @@ init 5 python:
             return False
         if mc.business.funds < 500:
             return "Requires $500"
+        if not mc.is_at_work():
+            return "Only in the office"
         if not mc.business.is_open_for_business():
             return "Only during work hours"
         return True
@@ -148,17 +150,27 @@ init 5 python:
             return False
         if mc.business.funds < 1500:
             return "Requires $1500"
+        if not mc.is_at_work():
+            return "Only in the office"
         if not mc.business.is_open_for_business():
             return "Only during work hours"
         return True
 
     def HR_director_gym_membership_tier_1_requirement(the_person):
         if mc.business.get_employee_count() > 6 and get_HR_director_tag("business_HR_gym_tier", 0)  == 0:
+            if not mc.is_at_work():
+                return "Only in the office"
+            if not mc.business.is_open_for_business():
+                return "Only during work hours"
             return True
         return False
 
     def HR_director_gym_membership_tier_2_requirement(the_person):
         if mc.business.get_employee_count() > 14 and get_HR_director_tag("business_HR_gym_tier", 0)  == 1:
+            if not mc.is_at_work():
+                return "Only in the office"
+            if not mc.business.is_open_for_business():
+                return "Only during work hours"
             return True
         return False
 
