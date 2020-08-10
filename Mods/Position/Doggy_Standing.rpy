@@ -212,52 +212,53 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s creamy cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
-    if the_girl.get_opinion_score("creampies") > 0:
-        the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
-    if the_girl.get_opinion_score("bareback sex") > 0:
-        the_girl.char "Don't let a drop of that seed go to waste!"
-    else:
-        the_girl.char "That's it, cum for me!"
-
+    $ the_girl.call_dialogue("cum_pullout")
     menu:
         "Cum inside of her":
             "[the_girl.possessive_title]'s drenched cunt is just too good. You decide to cum inside it."
             if mc.condom:
-                "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
-                "You wait until your orgasm has passed completely, then pull out and stand back. You condom is bulged on the end where it is filled with your seed."
-                "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
-                the_girl.char "Wow that was good. Look at all that cum you made for me..."
-                return
+                "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
+                $ the_girl.call_dialogue("cum_condom")
+                "You wait until your orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
+                if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                    $ the_girl.discover_opinion("drinking cum")
+                    "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
+                    the_girl.char "It would be a shame to waste all of this, right?"
+                    "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
+                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                else:
+                    "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
+                "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
             else:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
-            if the_girl.get_opinion_score("creampies") > 0:
-                the_girl.char  "Yes! Fill me with your cum!"
-            if the_girl.arousal > 110:
-                "You feel her pussy convulsing around your dick as she also starts to orgasm."
-                $ the_girl.change_happiness(5)
-            $ the_girl.cum_in_vagina()
-            $ SB_doggy_standing.redraw_scene(the_girl)
-            if the_girl.has_role(cum_internal_role):
-                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
-                "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            if the_girl.get_opinion_score("bareback sex") > 0:
-                the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
-                "[the_girl.possessive_title]'s voice starts to trail off."
-            elif the_girl.sluttiness > 110:
-                the_girl.char "Oh god it's so deep."
-            elif the_girl.on_birth_control:
-                the_girl.char "Oh fuck...  Good thing I'm on the pill..."
-            else:
-                the_girl.char "Oh fuck... I could get pregnant you know.."
 
+                if the_girl.get_opinion_score("creampies") > 0:
+                    the_girl.char  "Yes! Fill me with your cum!"
+                if the_girl.arousal > 110:
+                    "You feel her pussy convulsing around your dick as she also starts to orgasm."
+                    $ the_girl.change_happiness(5)
+                $ the_girl.cum_in_vagina()
+                $ SB_doggy_standing.redraw_scene(the_girl)
+                if the_girl.has_role(cum_internal_role):
+                    "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                    the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                    "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
+                if the_girl.get_opinion_score("bareback sex") > 0:
+                    the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
+                    "[the_girl.possessive_title]'s voice starts to trail off."
+                elif the_girl.sluttiness > 110:
+                    the_girl.char "Oh god it's so deep."
+                elif the_girl.on_birth_control:
+                    the_girl.char "Oh fuck...  Good thing I'm on the pill..."
+                else:
+                    the_girl.char "Oh fuck... I could get pregnant you know.."
 
-            "You wait until your orgasm has passed completely, then pull out and stand back."
+                "You wait until your orgasm has passed completely, then pull out and stand back."
 
-            if the_girl.get_opinion_score("bareback sex") > 0:
-                "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
-            else:
-                "You cum leaks out of her well used pussy."
+                if the_girl.get_opinion_score("bareback sex") > 0:
+                    "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
+                else:
+                    "You cum leaks out of her dripping wet pussy."
 
         "Cum on her ass":
             if mc.condom:
@@ -315,8 +316,6 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
             "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")
-
-
     return
 
 label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
