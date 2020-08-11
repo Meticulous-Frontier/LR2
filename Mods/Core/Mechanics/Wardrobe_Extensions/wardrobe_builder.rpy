@@ -10,6 +10,19 @@ init 5 python:
     opinions_list.insert(15, "the colour purple")
     opinions_list.insert(15, "the colour white")
 
+    # evaluation function mapping for in-game color preferences in HSL values
+    color_pref_eval_map =  {
+        "the colour black": "s <= 5 and v <= 5",
+        "the colour white": "s <= 5 and v >= 95",
+        "the colour blue": "s > 5 and v < 95 and h >= 210 and h <= 270",
+        "the colour yellow": "s > 5 and v < 95 and h >= 30 and h <= 90",
+        "the colour red": "s > 5 and v < 95 and (h <= 30 or h >= 330)",
+        "the colour pink": "s > 5 and v < 95 and h >= 300 and h <= 330",
+        "the colour green": "s > 5 and v < 95 and h >= 90 and h <= 150",
+        "the colour purple": "s > 5 and v < 95 and h >= 270 and h <= 300",
+    }
+
+
     # make business vest layer 2
     shirts_list.remove(business_vest)
     business_vest = Clothing("Business Vest", 2, True, True, "Tight_Vest", True, False, 2, opacity_adjustment = 1.3)
@@ -33,17 +46,17 @@ init 5 python:
 
         while __builtin__.len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
             outfit = outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)])
-            if outfit.has_overwear():
+            if outfit.has_overwear() and outfit_builder.approves_outfit_color(outfit):
                 person.wardrobe.add_outfit(outfit)
 
         while __builtin__.len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
             overwear = outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)])
-            if overwear.is_suitable_overwear_set():
+            if overwear.is_suitable_overwear_set() and outfit_builder.approves_outfit_color(overwear):
                 person.wardrobe.add_overwear_set(overwear)
 
         while __builtin__.len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
             underwear = outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)])
-            if underwear.is_suitable_underwear_set():
+            if underwear.is_suitable_underwear_set() and outfit_builder.approves_outfit_color(underwear):
                 person.wardrobe.add_underwear_set(underwear)
 
         return
@@ -226,6 +239,22 @@ init 5 python:
                 if score == 2:
                     item_list.append(pref)
             return item_list
+
+        def get_color_hate_list(self):
+            item_list = []
+            for pref in self.color_prefs.keys():
+                score = self.person.get_opinion_score(pref)
+                if score == -2:
+                    item_list.append(pref)
+            return item_list
+
+        def approves_outfit_color(self, outfit):
+            for clothing in outfit.feet + outfit.lower_body + outfit.upper_body:
+                h, s, v = rgb_to_hsv(clothing.colour[0], clothing.colour[1], clothing.colour[2])
+                for pref in self.get_color_hate_list():
+                    if eval( color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "v" : v} ):
+                        return False
+            return True
 
         def build_overwear(self, points = 0):
             outfit = Outfit("Overwear")

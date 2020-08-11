@@ -194,21 +194,22 @@ init -1 python:
 
         base_wardrobe = Wardrobe("[person.name]_[person.last_name]_wardrobe")
         preferences = WardrobePreference(person)
+        outfit_builder = WardrobeBuilder(person)
 
         for outfit in renpy.random.sample(default_wardrobe.outfits, __builtin__.len(default_wardrobe.outfits)):
-            if outfit.has_overwear() and preferences.evaluate_outfit(outfit, 999):
+            if outfit.has_overwear() and preferences.evaluate_outfit(outfit, 999) and outfit_builder.approves_outfit_color(outfit):
                 base_wardrobe.add_outfit(outfit)
             if __builtin__.len(base_wardrobe.outfits) > 7:
                 break
 
         for overwear in renpy.random.sample(default_wardrobe.overwear_sets, __builtin__.len(default_wardrobe.overwear_sets)):
-            if overwear.is_suitable_overwear_set() and preferences.evaluate_outfit(overwear, 999):
+            if overwear.is_suitable_overwear_set() and preferences.evaluate_outfit(overwear, 999) and outfit_builder.approves_outfit_color(overwear):
                 base_wardrobe.add_overwear_set(overwear)
             if __builtin__.len(base_wardrobe.overwear_sets) > 7:
                 break
 
         for underwear in renpy.random.sample(default_wardrobe.underwear_sets, __builtin__.len(default_wardrobe.underwear_sets)):
-            if underwear.is_suitable_underwear_set() and preferences.evaluate_outfit(underwear, 999):
+            if underwear.is_suitable_underwear_set() and preferences.evaluate_outfit(underwear, 999) and outfit_builder.approves_outfit_color(underwear):
                 base_wardrobe.add_underwear_set(underwear)
             if __builtin__.len(base_wardrobe.underwear_sets) > 7:
                 break
