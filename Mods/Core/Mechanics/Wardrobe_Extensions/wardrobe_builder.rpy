@@ -32,13 +32,19 @@ init 5 python:
         outfit_builder = WardrobeBuilder(person)
 
         while __builtin__.len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)]))
+            outfit = outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)])
+            if outfit.has_overwear():
+                person.wardrobe.add_outfit(outfit)
 
         while __builtin__.len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)]))
+            overwear = outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)])
+            if overwear.is_suitable_overwear_set():
+                person.wardrobe.add_overwear_set(overwear)
 
         while __builtin__.len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)]))
+            underwear = outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)])
+            if underwear.is_suitable_underwear_set():
+                person.wardrobe.add_underwear_set(underwear)
 
         return
 
