@@ -100,7 +100,7 @@ label candace_goes_clothes_shopping_label(the_person):
     "You leave the business and soon find yourself at the mall. You let [the_person.possessive_title] lead the way into the first store."
     "She browses through the racks of clothes but eventually finds a couple things she likes."
     the_person.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
-    $ renpy.scene("Active")
+    $ clear_scene()
     call trying_on_clothes_label(the_person) from _clothes_shopping_candace_intro_01
     if _return > 0: # we bought some clothes
         "You walk with [the_person.title] up to the checkout line."
@@ -143,7 +143,7 @@ label invite_to_clothes_shopping_label():
         the_person.char "Hey there! Thanks for offering! Let's see what we can find."
         "She browses through the racks of clothes and eventually finds a couple things she likes."
         the_person.char "Okay, you wait right here, I'll be right back to show you what I picked out!"
-        $ renpy.scene("Active")
+        $ clear_scene()
         call trying_on_clothes_label(the_person) from _clothes_shopping_choice_01
         if _return > 0: # we bought some clothes
             "You walk with [the_person.title] up to the checkout line."
@@ -196,7 +196,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             mc.name "I'm not sure that is the best look for you. Maybe try something else?"
             the_person.char "Hmm, yeah, I think you might be right."
     the_person.char "Okay, stay right there, I'll be right back with the next one."
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You hang out for a bit. Your mind wanders a bit, thinking about [the_person.title] getting naked in the dressing room..."
     $ the_person.apply_outfit(outfits[1])
     $ the_person.draw_person()
@@ -217,7 +217,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         "Try something else":
             mc.name "I'm not sure that outfit works. What else do you have?"
     the_person.char "Okay, I have one more, I'll be right back with the last one."
-    $ renpy.scene("Active")
+    $ clear_scene()
     "Hmm... [the_person.title] is back there right now, stripping down, slipping into something else... maybe you should try and sneak a peak..."
     $ the_person.apply_outfit(outfits[2])
     $ the_person.draw_person()
@@ -240,7 +240,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         the_person.char "Seriously? Not a single outfit? You are impossible!"
         the_person.char "Tell you what. I'm gonna go change out of this. While I'm in there, pick out something for me to try on that YOU think is good and I'll try it on, okay?"
         mc.name "Okay."
-        $ renpy.scene("Active")
+        $ clear_scene()
         "[the_person.possessive_title] disappears to the back room to change. You look around at the different clothing racks, looking for something for her to try on."
         call screen outfit_creator(Outfit("New Outfit"))
         if _return != "Not_New":
@@ -257,7 +257,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                 the_person.char "I umm... I don't think I can come out of here in this."
                 mc.name "What are you talking about? It looks fantastic!"
                 the_person.char "No. Get your looks in, [the_person.mc_title], but I understand now why you want me to come clothes shopping with you!"
-                $ renpy.scene("Active")
+                $ clear_scene()
                 "She closes the door. Damn, you must have gone a little overboard with that outfit..."
                 the_person.char "I'm going to change back into, you know, DECENT clothes."
                 $ the_person.change_stats(happiness = -5, slut_temp = 5)
@@ -278,7 +278,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         the_person.char "Geeze, you're awful! Whatever, I liked the last outfit, I'm gonna get it even if you didn't like it!"
                         $ the_person.wardrobe.add_outfit(outfits[2])
                 the_person.char "Alright, I'm gonna change back into my other clothes now..."
-                $ renpy.scene("Active")
+                $ clear_scene()
             $ created_outfit = None
         else:
             mc.name "I'm sorry [the_person.title], but I can't find anything that would suit you."
@@ -290,7 +290,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
         $ the_person.draw_person()
     else:
         the_person.char "Alright! I feel like this was actually a productive trip! I'm gonna go get changed back into my normal clothes."
-        $ renpy.scene("Active")
+        $ clear_scene()
         $ the_person.apply_planned_outfit()
         "You give her a minute to change back into her regular outfit."
         $ the_person.draw_person()
@@ -307,7 +307,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             the_person.char "I'm gonna go try these on real quick..."
             mc.name "Go ahead, I'll wait outside the door."
             the_person.char "Okay!"
-            $ renpy.scene("Active")
+            $ clear_scene()
             $ the_person.apply_outfit(outfits[3])
             "Behind the closed door, you hear [the_person.title] shuffling around a bit."
             the_person.char "Okay... I can't decide if I like this set or not. I know this is kinda crazy but, would you tell me what you think?"
@@ -325,7 +325,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty! Okay that's enough peaking..."
                     $ the_person.change_stats(slut_temp = 2, obedience = 2)
-            $ renpy.scene("Active")
+            $ clear_scene()
             $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
             $ the_person.draw_person()
@@ -339,7 +339,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             the_person.char "I'll be looking for your expert opinion, so stay by the door, okay [the_person.mc_title]?"
             mc.name "Hell yeah I'll be right there."
             "She giggles and heads off to the dressing room."
-            $ renpy.scene("Active")
+            $ clear_scene()
             $ the_person.apply_outfit(outfits[3])
             "Behind the closed door, you hear [the_person.title] shuffling around a bit."
             the_person.char "Okay, are you ready out there?"
@@ -450,13 +450,13 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     pass
 
                     $ the_person.change_stats(slut_temp = 2, happiness = 2)
-                    $ the_person.wardrobe.add_outfit(outfits[3])
+                    $ the_person.wardrobe.add_underwear_set(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty!"
                     $ the_person.change_stats(slut_temp = 2, obedience = 2)
                     "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
-            $ renpy.scene("Active")
+            $ clear_scene()
             $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
             $ the_person.draw_person()

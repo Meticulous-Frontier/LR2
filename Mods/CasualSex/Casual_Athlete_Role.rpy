@@ -453,7 +453,7 @@ label casual_athlete_race_crisis_label(the_person):
     $ the_person.draw_person(position = "walking_away")
     "The official starts the race with a shot from the gun and the race begins! [the_person.title] jumps out in front of you, setting a fast pace."
     "You are tempted to chase after her, but think better of it. This is a long race, and you need to pace yourself."
-    $ renpy.scene("Active")
+    $ clear_scene()
     "As you near the first kilometer, you lose sight of [the_person.title] in the crowd of racers, but you are sure you aren't far behind."
     "You settle into your pace, determined to let your energy carry you through the race, no matter what happens. You pass the second kilometer marker"
     "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
@@ -468,7 +468,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
     the_person.char "[the_person.mc_title]? Oh god..."
     "She barely gets her words out as you pass her."
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You keep pushing forward, not daring to turn around."
     "You round a corner. The finish line! You give it everything you have! Your breathing is heavy and ragged, sucking in every ounce of air you can."
     "You cross the finish line. You beat her!!!"
@@ -548,7 +548,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
     mc.name "Hey [the_person.name], I see you're working pretty hard today! Can I get you a protein shake?"
     "[the_person.possessive_title] looks at you and smiles."
     the_person.char "That sounds great!"
-    $ renpy.scene("Active")
+    $ clear_scene()
 
     "You head over to the counter where they have the supplements. You order her a protein shake."
     $ mc.business.change_funds(-5)
@@ -560,7 +560,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
             "You mix the serum into [the_person.title]'s protein shake. You take it over to her."
             the_person.char "Thanks [the_person.mc_title]."
             mc.name "No problem at all."
-            $ renpy.scene("Active")
+            $ clear_scene()
 
 
         "Leave her drink alone.":
@@ -568,7 +568,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
             $ the_person.draw_person(emotion = "happy")
             the_person.char "Thanks [the_person.mc_title]"
             mc.name "No problem at all."
-            $ renpy.scene("Active")
+            $ clear_scene()
 
     $ the_person.apply_planned_outfit()
     call advance_time from _call_advance_casual_athlete_smoothie

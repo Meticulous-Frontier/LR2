@@ -73,7 +73,7 @@ label business_meeting_action_label:
 
     $ hr_employee = None
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label business_meeting_introduction(the_person):

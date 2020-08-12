@@ -19,6 +19,17 @@ init -1 python:
 
     Outfit.feet_visible = feet_visible
 
+    def has_overwear(self): #Returns true if the outfit has layer 2 clothing items for upper and lower body.
+        if any(x in [nightgown_dress] for x in self.upper_body):
+            return False
+        if not any(x.layer >= 2 for x in self.upper_body):
+            return False
+        if not any(x.layer >= 2 for x in self.lower_body):
+            return False
+        return True
+
+    Outfit.has_overwear = has_overwear
+
     def remove_all_cum(self):
         remove_list = []
         for acc in self.accessories:

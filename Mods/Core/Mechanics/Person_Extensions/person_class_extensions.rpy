@@ -7,7 +7,7 @@ init -1 python:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
             list_of_places.remove(self.home) # remove home location from list_of_places
-        if self.home in mc.known_home_locations: 
+        if self.home in mc.known_home_locations:
             mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
 
         if "people_to_process" in globals():
@@ -28,7 +28,7 @@ init -1 python:
         # remove from strippers
         if self in stripclub_strippers:
             stripclub_strippers.remove(self)
-        
+
         # other stripclub teams
         if "stripclub_bdsm_performers" in globals():
             for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
@@ -232,7 +232,7 @@ init -1 python:
             return False
 
         if self.height > upper_limit:
-            self.height == upper_limit
+            self.height = upper_limit
 
         if self.height < lower_limit:
             self.height = lower_limit
@@ -346,7 +346,10 @@ init -1 python:
         age = renpy.random.randint(18, self.age-16)
 
         if renpy.random.randint(0,100) < 60:
-            body_type = self.body_type
+            if self.has_role(pregnant_role):
+                body.type = self.event_triggers_dict.get("pre_preg_body", None)
+            else:
+                body_type = self.body_type
         else:
             body_type = None
 
@@ -361,7 +364,10 @@ init -1 python:
             hair_colour = None
 
         if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
-            tits = self.tits
+            if self.has_role(pregnant_role):
+                tits = self.event_triggers_dict.get("pre_preg_tits", None)
+            else:
+                tits = self.tits
         else:
             tits = None
 
@@ -405,7 +411,10 @@ init -1 python:
         age = renpy.random.randint(self.age + 16, 55)
 
         if renpy.random.randint(0,100) < 60:
-            body_type = self.body_type
+            if self.has_role(pregnant_role):
+                body.type = self.event_triggers_dict.get("pre_preg_body", None)
+            else:
+                body_type = self.body_type
         else:
             body_type = None
 
@@ -420,7 +429,10 @@ init -1 python:
             hair_colour = None
 
         if renpy.random.randint(0,100) < 60: # 60% they share the same breast size
-            tits = self.tits
+            if self.has_role(pregnant_role):
+                tits = self.event_triggers_dict.get("pre_preg_tits", None)
+            else:
+                tits = self.tits
         else:
             tits = None
 
@@ -637,14 +649,17 @@ init -1 python:
 
             # some girls like to go out at night (bar or stripclub) - exclude unique characters
             if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
-                party_destinations = [downtown_bar]
-                if "get_strip_club_foreclosed_stage" in globals():
-                    if get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5: # only when stripclub is open for business
+                # since downtown is generic there could be other party locations there
+                party_destinations = [downtown_bar, downtown]
+                # after MC buys the stripclub, it is open to public
+                if strip_club.public:
+                    if "get_strip_club_foreclosed_stage" in globals():
+                        if not strip_club_is_closed():
+                            party_destinations.append(strip_club)
+                            if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                                party_destinations.append(bdsm_room)
+                    else:
                         party_destinations.append(strip_club)
-                    if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                        party_destinations.append(bdsm_room)
-                else:
-                    party_destinations.append(strip_club)
 
                 location.move_person(self, get_random_from_list(party_destinations))
             else:
@@ -930,9 +945,6 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
-        if position == "standing_doggy":
-            position = "doggy"
-
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -976,9 +988,6 @@ init -1 python:
         if position is None:
             position = self.idle_pose
 
-        if position == "standing_doggy":
-            position = "doggy"
-
         if emotion is None:
             emotion = self.get_emotion()
 
@@ -992,12 +1001,6 @@ init -1 python:
             the_animation = None
         elif the_animation is None:
             the_animation = self.idle_animation
-
-        renpy.scene("Active") # clear layer for new draw action
-        if scene_manager is None:
-            renpy.show_screen("person_info_ui",self)
-        else:   # when we are called from the scene manager we have to draw the other characters
-            scene_manager.draw_scene_without(self)
 
         if the_animation:
             # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
@@ -1020,6 +1023,12 @@ init -1 python:
             renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
 
         else:
+            renpy.scene("Active") # clear layer for new draw action
+            if scene_manager is None:
+                renpy.show_screen("person_info_ui",self)
+            else:   # when we are called from the scene manager we have to draw the other characters
+                scene_manager.draw_scene_without(self)
+
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
             self.outfit.remove_clothing(the_clothing)
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
@@ -1119,20 +1128,32 @@ init -1 python:
         return False
     Person.remove_role = remove_role
 
+    # helper function to determine if person is dominant
+    def is_dominant(self):
+        if self.get_opinion_score("taking control") > 0:
+            return True
+        if self.personality is alpha_personality:
+            return True
+        return False
+    Person.is_dominant = is_dominant
+
+
 ################################################
 # Outfit functions - wear a specialized outfit #
 ################################################
 
     def apply_gym_outfit(self):
-        # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
-        self.apply_outfit(workout_wardrobe.decide_on_outfit2(self).get_copy())
+        if workout_wardrobe:
+            # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
+            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self).get_copy())
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
 
     def apply_university_outfit(self):
-        # get personal copy of outfit, so we don't change the university wardrobe (in any events)
-        self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
+        if university_wardrobe:
+            # get personal copy of outfit, so we don't change the university wardrobe (in any events)
+            self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
         return
 
     Person.apply_university_outfit = apply_university_outfit
@@ -1390,15 +1411,40 @@ init -1 python:
 
     Person.is_highly_fertile = is_highly_fertile
 
-    def effective_fertility_percent(self):
-        if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
-            day_difference = abs((day % 30) - self.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
-            if day_difference > 15:
-                day_difference = 30 - day_difference #Wrap around to get correct distance between months.
-            multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
-            modified_fertility = self.fertility_percent * multiplier
-        else:
-            modified_fertility = self.fertility_percent        
-        return modified_fertility
+##########################################
+# Position Specific functions            #
+##########################################
 
-    Person.effective_fertility_percent = effective_fertility_percent
+    def unlock_spanking(self, add_to_log = True):
+        if self.can_be_spanked():
+            return False
+        self.event_triggers_dict["unlock_spanking"] = True
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " can now be spanked during sex.",  "float_text_green")
+        return True
+
+    def can_be_spanked(self):
+        return self.event_triggers_dict.get("unlock_spanking", False)
+
+    Person.unlock_spanking = unlock_spanking
+    Person.can_be_spanked = can_be_spanked
+
+
+##########################################
+# Girl in Charge Functions               #
+##########################################
+
+    def set_sex_goal(self, the_goal):
+        self.event_triggers_dict["sex_goal"] = the_goal
+        return
+
+    def get_sex_goal(self):
+        return self.event_triggers_dict.get("sex_goal", None)
+
+    def reset_sex_goal(self):
+        self.event_triggers_dict["sex_goal"] = None
+        return
+
+    Person.set_sex_goal = set_sex_goal
+    Person.get_sex_goal = get_sex_goal
+    Person.reset_sex_goal = reset_sex_goal

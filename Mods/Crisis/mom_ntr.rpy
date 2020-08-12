@@ -22,28 +22,22 @@ init 2 python:
         person.discover_opinion("creampies")
 
         # Pregnancy Check #
-        if persistent.pregnancy_pref > 0 and not person.is_pregnant():
-            if persistent.pregnancy_pref == 1 and person.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
-                bc_percent = 100 - person.bc_penalty
-            elif persistent.pregnancy_pref == 2 and person.on_birth_control:
-                bc_percent = 90 - person.bc_penalty
+        if persistent.pregnancy_pref > 0 and not pregnant_role in self.special_role:
+            if persistent.pregnancy_pref == 1 and self.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
+                bc_percent = 100 - self.bc_penalty
+            elif persistent.pregnancy_pref == 2 and self.on_birth_control:
+                bc_percent = 90 - self.bc_penalty
             else:
                 bc_percent = 0
 
-            preg_chance = renpy.random.randint(0,100)
-            bc_chance = renpy.random.randint(0,100)
             if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
-                day_difference = abs((day % 30) - person.ideal_fertile_day) # Gets the distance between the current day and the ideal fertile day.
-                if day_difference > 15:
-                    day_difference = 30 - day_difference #Wrap around to get correct distance between months.
-                multiplier = 2 - (float(day_difference)/10.0) # The multiplier is 2 when the day difference is 0, 0.5 when the day difference is 15.
-                modified_fertility = person.fertility_percent * multiplier
+                modified_fertility = self.calculate_realistic_fertility()
             else:
-                modified_fertility = person.fertility_percent
+                modified_fertility = self.fertility_percent
 
-            if preg_chance < modified_fertility: #There's a chance she's pregnant
-                if bc_chance >= bc_percent : # Birth control failed to prevent the pregnancy
-                    become_pregnant(person, mc_father = False) #Function in role_pregnant establishes all of the pregnancy related variables and events.
+            if renpy.random.randint(0,100) < modified_fertility:
+                if renpy.random.randint(0,100) >= bc_percent : # Birth control failed to prevent the pregnancy
+                    become_pregnant(self) #Function in role_pregnant establishes all of the pregnancy related variables and events.
 
     def cum_in_mouth_ntr(person): 
         if person.outfit.can_add_accessory(mouth_cum):
@@ -204,7 +198,7 @@ label mom_ntr_mod_action_label:
             "Keep looking":
                 "You decide to see what they are up to."
                 "They go on kissing. After a while, [man_name] places his hands on [the_person.possessive_title]'s ass, caressing it."
-                if the_person.sluttiness <= 30 or (the_person.get_opinion_score("taking control") > 0 and the_person.sluttiness <= 45):
+                if the_person.sluttiness <= 30 or (the_person.is_dominant() and the_person.sluttiness <= 45):
                     "[the_person.possessive_title] looks surprised by [man_name]'s actions."
                     the_person.char "No, [man_name]. We work together, we should not cross some lines."
                     the_person.char "It's late. Thanks for the wonderful evening. I'll see you in the office."
@@ -552,10 +546,10 @@ label mom_ntr_mod_action_label:
                                     the_person.char "Y-yes sir. Please, u-use them however you wish."
                                     man_name "Ha! I knew I could fuck the defiance out of your whore mouth. Fuck, I'm close!"
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
-                                    $ the_person.draw_person(position = "doggy")
-                                    "[man_name] keeps pumping his hips, groaning as his cum shoots up between them. {the_person.possessive_title] flinches as it splashes off her chin and covers her tits."
+                                    $ the_person.draw_person(position = "blowjob")
+                                    "[man_name] keeps pumping his hips, groaning as his cum shoots up between them. [the_person.possessive_title] flinches as it splashes off her chin and covers her tits."
                                     $ cum_on_stomach_ntr(the_person) #$ the_person.cum_on_stomach()
-                                    $ the_person.draw_person(position = "doggy")
+                                    $ the_person.draw_person(position = "blowjob")
                                     "There's so much it even drips down on her stomach. With a final sated sigh, [man_name] steps back and rreleases her, enjoying the sight of his handiwork."
                                     man_name "There, now isn't it easier when you don't fight, [the_person.name]?"
                                 else:
@@ -2485,5 +2479,5 @@ label mom_ntr_mod_action_label:
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

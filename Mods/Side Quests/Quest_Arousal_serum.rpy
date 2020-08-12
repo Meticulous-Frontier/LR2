@@ -147,7 +147,7 @@ label quest_arousal_serum_intro_label():
     "... or is it? The work you have been doing is beyond what many people would have considered possible just a few years ago."
     "You decide to look it up. You head to your room and pull up the info on your PC."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
 
@@ -178,7 +178,7 @@ label quest_arousal_serum_receive_drug_label():
     mc.name "Thanks [mom.title]."
     $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You open up the package. Its the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
     "Hmm... what to do with this? With two doses, you figure you could test one dose, and if it works, use the second one to try and reverse engineer the drug."

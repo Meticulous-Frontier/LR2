@@ -148,4 +148,28 @@ init 5 python:
 
     Position.call_transition_taboo_break = call_transition_taboo_break
 
+    def get_girl_outro(self):
+        if not hasattr(self, "_girl_outro"):
+            self._girl_outro = None
+        return self._girl_outro
 
+    def set_girl_outro(self, value):
+        self._girl_outro = value
+
+    def del_girl_outro(self):
+        del self._girl_outro
+
+    # add girl_outro attribute to position class (without sub-classing)
+    Position.girl_outro = property(get_girl_outro, set_girl_outro, del_girl_outro, "Girl in charge label")
+
+    def call_outro_enhanced(self, the_person, the_location, the_object):
+        if self.girl_outro:  #Rely on girl outro tocall default outro if appropriate
+            renpy.call(self.girl_outro,the_person, the_location, the_object)
+        else:
+            self.call_default_outro(the_person, the_location, the_object)
+
+    def call_default_outro(self, the_person, the_location, the_object):
+        renpy.call(self.outro,the_person, the_location, the_object)
+
+    Position.call_outro = call_outro_enhanced
+    Position.call_default_outro = call_default_outro

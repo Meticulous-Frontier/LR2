@@ -69,5 +69,5 @@ label salon_manager_greetings(the_person):
             else:
                 the_person.char "Is there anything I can help you with?"
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

@@ -455,9 +455,14 @@ label candace_convince_to_quit_label(the_person):
     "You stand up and stretch."
     mc.name "Well... I don't know about you two, but I'm pretty worn out. Take care. And [the_person.title], I'll see you at the office!"
     the_person.char "Sure thing boss! Oh! Should I call you boss now? Oh that sounds nice!"
-    mc.name "That's fine, if you want to, but you don't have to..."
-    $ the_person.set_mc_title("Boss")
-    the_person.char "No no, [the_person.mc_title] is perfect!"
+    menu:
+        "Boss{color=#ff0000}{size=18}+20 Obedience{/size}{/color}":
+            $ the_person.set_mc_title("Boss")
+            $ the_person.change_obedience(20)
+        "[mc.name]{color=#ff0000}{size=18}+20 Happiness{/size}{/color}":
+            $ the_person.set_mc_title(mc.name)
+            $ the_person.change_happiness(20)
+    the_person.char "Whatever you say [the_person.mc_title]!"
     "Well, you now have your very own office bimbo. While before you were just looking to get her out of a bad situation, you are now considering some of the possibilities open to you..."
     $ the_person.set_possessive_title("Your Office Bimbo")
     mc.name "Alright, well have a good night."
@@ -500,7 +505,7 @@ init 3 python:
         return False
 
     def candace_get_ready_to_quit():
-        if candace.event_triggers_dict.get("relationship_doubt_score", 0) >= 8:
+        if candace.event_triggers_dict.get("relationship_doubt_score", 0) >= 5:
             return True
         return False
 
@@ -515,7 +520,7 @@ init 3 python:
         return candace.event_triggers_dict.get("quit_job", 0)
 
     def candace_can_talk():
-        return candace.event_triggers_dict.get("last_talk_day", 0) + 1 < day
+        return candace.event_triggers_dict.get("last_talk_day", 0) < day
 
     def candace_increase_doubt():
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)

@@ -2,10 +2,12 @@
 # Original idea by BadRabbit
 
 init 5 python:
-    def hijack_beg_finish_labels():
+    def inject_sex_beg_finish_labels():
         for lbl in renpy.get_all_labels():
             if lbl.endswith("sex_beg_finish"):
-                add_label_hijack(lbl, "sex_beg_finish_enhanced")  
+                # use AST label hook to execute python function while calling the original label
+                hook_label(lbl, enhanced_sex_beg_finish)
+        return
 
     def remove_clothing_based_on_preference(person):
         if person.get_opinion_score("showing her tits") > person.get_opinion_score("showing her ass"):
@@ -18,13 +20,8 @@ init 5 python:
             # no preference
             return person.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20)
 
-    hijack_beg_finish_labels()
-
-# she is desperate to continue and takes off some extra clothes based on her sluttiness.
-label sex_beg_finish_enhanced(stack, *args, **kwargs):
-    "[the_person.possessive_title] looks at you and..."
-
-    python:
+    def enhanced_sex_beg_finish(hook):
         remove_clothing_based_on_preference(the_person)
-        execute_hijack_call(stack)
-    return
+        return
+
+    inject_sex_beg_finish_labels()

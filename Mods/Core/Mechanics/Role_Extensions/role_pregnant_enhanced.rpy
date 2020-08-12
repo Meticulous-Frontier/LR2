@@ -2,6 +2,10 @@
 
 init 2 python:
     def silent_pregnant_tits_start_person(person):
+        # prevent duplicate announcement
+        if person.event_triggers_dict.get("preg_knows", False) == True:
+            return
+
         person.event_triggers_dict["preg_knows"] = True
         person.tits = get_larger_tits(person.tits) #Her tits start to swell.
         person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
@@ -13,6 +17,10 @@ init 2 python:
         return
 
     def silent_pregnant_transform_person(person):
+        # prevent duplicate transform
+        if person.body_type == "standard_preg_body":
+            return
+
         person.event_triggers_dict["pre_preg_body"] = person.body_type
         person.body_type = "standard_preg_body"
         person.tits = get_larger_tits(person.tits) # Her tits get even larger
@@ -41,6 +49,10 @@ init 2 python:
         return
 
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
+        # prevent issues when function is called for already pregnant person
+        if person.is_pregnant():
+            return
+
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
         person.event_triggers_dict["preg_start_date"] = day
         person.event_triggers_dict["preg_tits_date"] = day + 14 + renpy.random.randint(0,5)
@@ -84,7 +96,7 @@ init 2 python:
             preg_transform_action = Action("Pregnancy Transform", (preg_transform_requirement if not bugfix_installed else pregnant_transform_requirement), target_label, args = person, requirement_args = person)
             mc.business.mandatory_morning_crises_list.append(preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
-        person.special_role.append(pregnant_role)
+        person.add_role(pregnant_role)
         return
 
 label silent_pregnant_announce(the_person):
@@ -118,14 +130,11 @@ label silent_pregnant_transform_announce(start_day, the_person):
     $ the_person.change_happiness(10)
     if the_person.has_role(employee_role):
         the_person.char "Thank you! So obviously, when the baby comes, I'll need some time off work..."
-        mc.name "Just let me know when the time comes, if you can. We'll make due without you while you are off."
+        mc.name "Just let me know when the time comes, if you can. We'll make due without you while you are giving birth."
     the_person.char "Thank you!"
     return
 
 label silent_pregnant_finish_announce(the_person): #TODO: have more variants for girlfriend_role, affair_role, etc.
-    if the_person == None or the_person.title == None or the_person.title == "None":  #This person is no longer in the game
-        #"DEBUG silent pregnant girl no longer in game."
-        return
     # The girl tells you she'll need a few days to have the kid and recover, and she'll be back in a few days.
     "You get a call from [the_person.possessive_title]. You answer it."
     mc.name "Hey [the_person.title], what's up?"

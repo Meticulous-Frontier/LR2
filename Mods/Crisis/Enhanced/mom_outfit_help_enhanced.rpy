@@ -20,7 +20,7 @@ label mom_outfit_help_crisis_label_enhanced():
             "Say you're busy":
                 mc.name "Sorry [the_person.title], I'm a little busy at the moment."
                 the_person.char "Okay, I'll ask your sister."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
     else:
         #She's in the room with you right now (how? no clue, but maybe it'll happen one day!)
@@ -34,7 +34,7 @@ label mom_outfit_help_crisis_label_enhanced():
             "Say you're busy":
                 mc.name "Sorry Mom, I should really be getting to bed."
                 the_person.char "That's okay [the_person.mc_title], I'll ask your sister then."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
 
     the_person.char "I've got a meeting with an important client tomorrow and I don't know what I should wear."
@@ -49,13 +49,13 @@ label mom_outfit_help_crisis_label_enhanced():
         the_person.char "Okay, I'll need a moment to get changed."
         mc.name "I can just turn around, if that would be faster."
         the_person.char "I'll just be a second. Go on, out."
-        $ renpy.scene("Active")
+        $ clear_scene()
         "[the_person.possessive_title] shoos you out of her bedroom. You lean against her door and wait."
         the_person.char "Okay, all done. Come on in!"
 
     elif the_person.effective_sluttiness(["underwear_nudity","bare_pussy","bare_tits"]) + the_person.love < 50: #She just asks you to turn your back, so you can peek if you want.
         the_person.char "Okay, I'll need a moment to get changed. Could you just turn around for a second?"
-        $ renpy.scene("Active")
+        $ clear_scene()
         "You nod and turn your back to [the_person.possessive_title]. You hear her moving behind you as she starts to get undressed."
         menu:
             "Try and peek":
@@ -77,7 +77,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         mc.name "No, I... The mirror was just sort of there."
                         "She covers herself with her hands and motions for the door."
                         the_person.char "Could you wait outside, please?"
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "You hurry outside and close the door to [the_person.possessive_title]'s bedroom behind you."
                         the_person.char "Okay, you can come back in."
                         $ caught = True
@@ -88,7 +88,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
                             "Stop peeking.":
                                 "You pull your eyes away from the mirror and do your best not to peek."
-                                $ renpy.scene("Active")
+                                $ clear_scene()
                 $ strip_choice = None
 
                 if not caught:
@@ -157,13 +157,13 @@ label mom_outfit_help_crisis_label_enhanced():
     #Strip choices for the second peek section
     if the_person.effective_sluttiness() + the_person.love < 35 or caught: #She really doesn't want you to see anything
         the_person.char "Okay, I just need to get changed again."
-        $ renpy.scene("Active")
+        $ clear_scene()
         "[the_person.possessive_title] shoos you out of the room while she changes into her new outfit."
         the_person.char "Okay, come in!"
 
     elif the_person.effective_sluttiness(["underwear_nudity","bare_pussy","bare_tits"]) + the_person.love < 50: #She just asks you to turn your back, so you can peek if you want.
         the_person.char "I'm going to need to get changed again."
-        $ renpy.scene("Active")
+        $ clear_scene()
         "You turn around to give her some privacy."
         menu:
             "Try and peek":
@@ -185,7 +185,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         mc.name "No, I... The mirror was just sort of there."
                         "She covers herself with her hands and motions for the door."
                         the_person.char "Could you wait outside, please?"
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "You hurry outside and close the door to [the_person.possessive_title]'s bedroom behind you."
                         the_person.char "Okay, you can come back in."
                         $ caught = True
@@ -196,7 +196,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
                             "Stop peeking":
                                 "You pull your eyes away from the mirror and do your best not to peek."
-                                $ renpy.scene("Active")
+                                $ clear_scene()
                 $ strip_choice = None
 
                 if not caught:
@@ -245,7 +245,7 @@ label mom_outfit_help_crisis_label_enhanced():
         "Suggest your own outfit":
             mc.name "They both look good, but I think I have another idea for something you could wear..."
             "You go to [the_person.possessive_title]'s closet and start to put together an outfit of your own for her."
-            $ renpy.scene("Active")
+            $ clear_scene()
             call screen outfit_select_manager(slut_limit = the_person.sluttiness + 10)
             $ third_outfit = _return
             $ the_person.draw_person()
@@ -261,13 +261,13 @@ label mom_outfit_help_crisis_label_enhanced():
                 the_person.char "I'll try it on, but I think I like it!"
 
                 if the_person.effective_sluttiness() + the_person.love < 35 or caught: #She really doesn't want you to see anything
-                    $ renpy.scene("Active")
+                    $ clear_scene()
                     "[the_person.possessive_title] shoos you out of the room while she changes into her new outfit."
                     the_person.char "Okay, come back!"
 
                 elif the_person.effective_sluttiness(["underwear_nudity","bare_pussy","bare_tits"]) + the_person.love < 50: #She just asks you to turn your back, so you can peek if you want.
                     the_person.char "I'm just going to get changed one last time, if you could turn around for a second."
-                    $ renpy.scene("Active")
+                    $ clear_scene()
                     "You turn around to give her some privacy."
                     menu:
                         "Try and peek":
@@ -289,7 +289,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                     mc.name "No, I... The mirror was just sort of there."
                                     "She covers herself with her hands and motions for the door."
                                     the_person.char "Could you wait outside, please?"
-                                    $ renpy.scene("Active")
+                                    $ clear_scene()
                                     "You hurry outside and close the door to [the_person.possessive_title]'s bedroom behind you."
                                     the_person.char "Okay, you can come back in."
                                     $ caught = True
@@ -300,7 +300,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
                                         "Stop peeking":
                                             "You pull your eyes away from the mirror and do your best not to peek."
-                                            $ renpy.scene("Active")
+                                            $ clear_scene()
                             $ strip_choice = None
 
                             if not caught:

@@ -39,9 +39,9 @@ label interview_action_description_enhanced:
     $ count = get_candidate_count()
     "Bringing in [count] people for an interview will cost $50. Do you want to spend time interviewing potential employees?"
     menu:
-        "Yes, I'll pay the cost   -$50":
+        "Yes, I'll pay the cost\n{color=#ff0000}{size=18}Costs: $50{/size}{/color}":
             $ mc.business.change_funds(-50)
-            $ renpy.scene("Active")
+            $ clear_scene()
 
             $ candidates = interview_build_candidates_list(count)
             call hire_select_process(candidates + [1]) from _call_hire_select_process_interview_action_enhanced

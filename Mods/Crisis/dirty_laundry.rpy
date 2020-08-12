@@ -60,7 +60,7 @@ label dirty_laundry_action_label:
     else:
         call dirty_laundry_stuck_in_dryer(the_person) from call_dirty_laundry_stuck_in_dryer
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     $ the_person.apply_planned_outfit()
     return
 
@@ -163,7 +163,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         "She cuts you off mid-sentence."
                         the_person.char "No, you've done quite enough already! Thanks though!"
                         "She grabs her cum filled panties from your hands, then grabs her laundry and quickly leaves the room."
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                         "You walk by [the_person.title]'s room as you go. You stop for a second outside her door and can hear soft moans coming from inside. You wonder if she is playing with those panties..."
                         "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
@@ -209,7 +209,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     the_person.char "Mmm... that was hot! I can't wait to wear these tomorrow."
                     $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
                     "She grabs her other laundry and you say goodnight before she leaves you alone in the laundry room, recovering."
-                    $ renpy.scene("Active")
+                    $ clear_scene()
                     "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                     "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
                     #TODO event having her wear the panties the next day
@@ -300,12 +300,12 @@ label dirty_laundry_wash_your_clothes(the_person):
                             mc.name "Damn, that was hot."
                             the_person.char "Ahh, thanks for the help. I really needed that..."
                             "[the_person.title] slowly gets up. She grabs her laundry and says goodnight."
-                            $ renpy.scene("Active")
+                            $ clear_scene()
                             "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                             "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
                         "Say Goodnight":
                             "You say goodnight to [the_person.title]. She slowly walks out of the laundry room. You note that she forgot to take her laundry with her."
-                            $ renpy.scene("Active")
+                            $ clear_scene()
                             "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                             "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
                         "Masturbate for me\n{color=#ff0000}{size=18}Requires 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:

@@ -58,17 +58,15 @@ label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This shoul
     "You grab onto [the_girl.title]'s ankles and lift them up, bringing her knees up to your shoulders."
     if the_girl.effective_sluttiness(piledriver_DP.associated_taboo) > piledriver_DP.slut_cap:
         the_girl.char "Ooh, I like it!"
-        "She reaches down between her legs and holds onto your cock, lining it up with her pussy for you."
-        "She rubs your tip against her clit a few times before moving it down, just barely spreading her slit open for you."
-
-
+        "With one hand she reaches down between her legs positioning your cock, while her other hand lines up the dildo for her sphincter."
+        "She rubs your tip against her clit a few times before moving it down and slightly pushing the dildo inside her ass."
     else:
         the_girl.char "Ah! What are you doing?"
         mc.name "Trust me, this will feel great."
         "You reach down between your legs and hold onto your cock, lining it up with [the_girl.possessive_title]'s pussy."
-        "She gasps as your tip flicks over her clit and into place, just barely spreading open her slit."
+        "At the same time you place the dildo against her sphincter, slightly opening it up."
 
-    "You hold onto [the_girl.title]'s legs and push forward. After a moment of resistance you slide smoothly into her slippery, warm cunt."
+    "You hold onto [the_girl.title]'s legs and push forward. After a moment of resistance you slide smoothly into both her holes."
     the_girl.char "Ohhhh....."
     "You hold yourself deep inside of her for a few seconds, then pull back and begin slowly thrust in and out."
     return
@@ -150,6 +148,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
     "[the_girl.title]'s pussy is warm, tight and wet as you pump in and out of it, pulling you closer and closer to climaxing with each thrust."
     "You reach your limit and feel your orgasm approaching quickly."
     mc.name "Fuck me, I'm going to cum!"
+    $ the_girl.call_dialogue("cum_pullout")
     menu:
         "Cum inside of her.":
             if the_girl.sluttiness > 120 or mc.condom:
@@ -157,6 +156,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 if mc.condom:
                     "You had no intention of stopping, but hearing her ask for it makes you cum even harder."
                     "You push yourself as deep as you can manage and pump your load out into her cunt, hopefully contained by your condom."
+                    $ the_girl.call_dialogue("cum_vagina")
                     "You take a moment to catch your breath, then you pull your cock out of [the_girl.title] and sit back down. Her ass gapes slightly where the strap-on was previously buried."
                     "The condom tip is ballooned out, hanging to one side and filled with your cum."
                     if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:

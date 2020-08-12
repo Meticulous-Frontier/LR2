@@ -65,6 +65,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                                         text "Significant Other: [mc.name]" style "menu_text_style"
                                     if the_person.kids > 0:
                                         text "Kids: [the_person.kids]" style "menu_text_style"
+
                                     if persistent.pregnancy_pref > 0:
                                         if the_person.knows_pregnant():
                                             text "Pregnant: Yes" style "menu_text_style"
@@ -73,10 +74,12 @@ init 2: # Need to allow for None name roles in this screen as well.
                                             elif day < the_person.get_due_day():
                                                 text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
                                         else:
-                                            text "Fertility: " + str(__builtin__.round(the_person.effective_fertility_percent(), 1)) + "%" style "menu_text_style"
+                                            if persistent.pregnancy_pref == 1:
+                                                text "Fertility: " + str(round(the_person.fertility_percent)) + "%" style "menu_text_style"
                                             if persistent.pregnancy_pref == 2:
-                                                text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
-                                                text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style"
+                                                text "Fertility: " + str(round(the_person.calculate_realistic_fertility(), 1)) + "%" style "menu_text_style"
+                                                text "Monthly Peak Day: " + str(the_person.ideal_fertile_day ) style "menu_text_style"
+                                            text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style" #TODO less specific info
 
                 frame:
                     background "#1a45a1aa"

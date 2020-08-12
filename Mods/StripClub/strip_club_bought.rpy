@@ -2,12 +2,19 @@
 # You actually buy the stripclub and hire the strippers.
 
 init 5 python:
+    # imported from bugfix
+    cousin_strip_pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5"] #A list to let us randomly get some poses so each dance is a little different.
+
     def strip_club_call_in_all_strippers():
         for stripper in stripclub_strippers:
             stripper.location().move_person(stripper, strip_club)
         return
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
+    python:
+        for person in strip_club.people:
+            if person is not cousin:
+                strip_club.move_person(person, downtown) # Failsafe to remove anyone improperly scheduled to be at the strip club
     $ the_person.draw_person()
     mc.name "Hey [the_person.title], good, you came."
     the_person.char "Yeah, I'm here, now tell me why I'm here."
@@ -74,7 +81,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         call strip_club_evaluate_stripper(the_person) from _call_strip_club_evaluate_stripper_selection
 
     $ strip_club_call_in_all_strippers()
-    $ renpy.scene("Active")
+    $ clear_scene()
 
     if __builtin__.len(stripclub_strippers) > 1:
         $ the_person = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])
@@ -89,6 +96,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         mc.name "I'd better hurry and find someone to work here fast, if I want to reopen this place."
 
     $ set_strip_club_foreclosed_stage(5)
+    $ strip_club.public = True
     $ strip_club.add_action(strip_club_show_action)
     $ add_strip_club_hire_employee_action_to_mc_actions()
 

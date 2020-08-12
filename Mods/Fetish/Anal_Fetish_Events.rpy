@@ -9,7 +9,7 @@ init 1 python:
     def SB_fetish_anal_requirement_non_employee():
         if mc_asleep():
             return True
-        return False        
+        return False
 
     def SB_mom_anal_pay_requirement():
         if time_of_day == 4 and day%7 == 4: #It is the end of the day on friday
@@ -165,7 +165,7 @@ label SB_fetish_anal_label(the_person):
             "[the_person.possessive_title] quickly sulks off."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label SB_fetish_anal_label_non_employee(the_person):
@@ -235,7 +235,7 @@ label SB_fetish_anal_label_non_employee(the_person):
             "[the_person.possessive_title] quickly sulks off."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA2
@@ -364,6 +364,11 @@ init 2 python:
             return not get_anal_fetish_non_employee() is None
         return False
 
+    def SB_aggressive_anal_employee_requirement():
+        if mc.is_at_work() and  mc.business.is_open_for_business():
+            return not get_anal_fetish_non_employee() is None
+        return False
+
     def get_anal_fetish_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
@@ -380,13 +385,16 @@ init 2 python:
                 if person.event_triggers_dict.get("LastAnalFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
-        return get_random_from_list(meets_fetish_list)        
+        return get_random_from_list(meets_fetish_list)
 
     SB_fetish_anal_recurring_crisis = Action("Anal Fetish Recurring Crisis",SB_fetish_anal_recurring_requirement,"SB_fetish_anal_recurring_label")
     crisis_list.append([SB_fetish_anal_recurring_crisis, 5])
 
     SB_fetish_anal_recurring_non_employee_crisis = Action("Anal Fetish Recurring Crisis",SB_fetish_anal_recurring_non_employee_requirement,"SB_fetish_anal_recurring_non_employee_label")
     crisis_list.append([SB_fetish_anal_recurring_non_employee_crisis, 5])
+
+    SB_aggressive_anal_employee = Action("Anal Fetish Agressive Anal",SB_aggressive_anal_employee_requirement,"SB_aggressive_anal_employee_label")
+    crisis_list.append([SB_aggressive_anal_employee, 5])
 
 
 #SBA3
@@ -456,7 +464,7 @@ label SB_fetish_anal_recurring_label():
             "[the_person.possessive_title] quickly sulks off."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label SB_fetish_anal_recurring_non_employee_label():
@@ -496,7 +504,7 @@ label SB_fetish_anal_recurring_non_employee_label():
             "You drop your pant, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
 
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SB_fetish_anal_recurring_non_employee
-            
+
             the_person.char "That was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."
             $ the_person.apply_planned_outfit()
@@ -510,9 +518,9 @@ label SB_fetish_anal_recurring_non_employee_label():
             "[the_person.possessive_title] is caught completely off guard by your refusal."
             $ the_person.change_stats(happiness = -5, obedience = -5)
             the_person.char "Oh!... Okay... Well... hey I understand... Maybe another time?"
-            "You hang up your phone and continue with your day."                
+            "You hang up your phone and continue with your day."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 init 2 python:
@@ -756,7 +764,7 @@ label SB_mom_anal_pay_label():
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA50
@@ -843,13 +851,13 @@ label SB_mom_anal_friday_label():
     $ add_mom_weekly_anal_action()  # re-add event for next week
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA60
 label SB_lily_anal_dp_fetish_label():
     $ the_person = lily # make sure we use lily for the event
-    $ the_person.event_triggers_dict["LastAnalFetish"] = day    
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
     the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
@@ -963,7 +971,7 @@ label SB_lily_anal_dp_fetish_label():
     $ male_strapon_unlock()  #TODO test this
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 #SBA70
@@ -1050,7 +1058,7 @@ label SB_starbuck_anal_intro():
     "You say goodbye and head out so she can finish locking up the sex shop."
 
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 init 2 python:
@@ -1066,7 +1074,7 @@ init 2 python:
 #SBA80
 label SB_starbuck_anal_swing_demo(the_person):
     $ the_person = starbuck
-    $ the_person.event_triggers_dict["LastAnalFetish"] = day    
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
     mc.name "Hey, I was just wondering, you wanna go for a swing in the back?"
     "[the_person.possessive_title] gives you a big smile."
     the_person.char "That sounds great!"
@@ -1426,7 +1434,7 @@ label SB_stephanie_anal_fetish_label():
                 "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
                 $ the_person.apply_planned_outfit()
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
         "She gives a deep sigh of relief."
         the_person.char "You have NO idea how glad I am to hear that."
@@ -1510,5 +1518,66 @@ label SB_stephanie_anal_fetish_label():
 
     $ scene_manager.clear_scene()
     $ the_person.apply_planned_outfit()
-    $ renpy.scene("Active")
+    $ clear_scene()
+    return
+
+#SBA100
+label SB_aggressive_anal_employee_label():
+    $ the_person = get_anal_fetish_employee()
+    if the_person is None:
+        return
+    "You get a text message from [the_person.title]"
+    the_person.char "Hey, I really need your help with something. Can you meet me in your office really quick?"
+    mc.name "Sure, I'll meet you there in five."
+    $ mc.change_location(office)
+    $ mc.location.show_background()
+    "You step into your office. [the_person.possessive_title] isn't there yet so you sit down at your desk."
+    $ the_person.draw_person()
+    "In a minute, you see her step into your office, close the door and lock it."
+    mc.name "Ah, hello [the_person.title]. Is there something I..."
+    "She interrupts you."
+    the_person.char "Yes, there's something I need very much right now."
+    "You stand up and start to walk around your desk. She wraps her arms around you."
+    $ the_person.draw_person(position = "kissing")
+    if the_person.obedience < 100:
+        the_person.char "I don't know how long it's been since you've been in my ass, but its been too long!"
+        "She pushes you back onto the desk."
+        if the_person.vagina_available():
+            the_person.char "Don't worry, I'll take care of everything, you just lay back."
+        else:
+            "As you lay back on the desk, she starts to strip."
+            $ the_person.strip_outfit(exclude_upper = True)
+            the_person.char "There we go. Don't worry, I'll take care of everything, you just lay back."
+        call get_fucked(the_person,  private= True, start_position = SB_anal_cowgirl) from _call_get_fucked_SBA100
+    else:
+        "She looks up at you and bats her eye lashes."
+        the_person.char "I... I just really need you in my ass. I don't know how longs its been, but its been too long!"
+        the_person.char "Please? I'll take care of everything, all you have to do is lay back."
+        menu:
+            "Let her":
+                "You gave her the serums that resulted in her anal fetish in the first place, so you feel a little obliged to let her work her fetish out."
+                mc.name "Go ahead."
+                the_person.char "Oh thank god! Don't worry, I'll take care of everything."
+                "She pushes you back on to your desk."
+                if not the_person.vagina_available():
+                    "As you lay back on the desk, she starts to strip."
+                    $ the_person.strip_outfit(exclude_upper = True)
+                call get_fucked(the_person,  private= True, start_position = SB_anal_cowgirl) from _call_get_fucked_SBA101
+            "Too busy":
+                "You chastise her for being so aggressive."
+                mc.name "I know the cravings are strong, but I have a lot to get done today. Get back to work, I'll try to relieve your urges later."
+                $ the_person.draw_person(emotion = "sad")
+                the_person.char "But sir..."
+                mc.name "I have spoken."
+                $ the_person.change_stats(happiness = -10, obedience = 10, love = -5)
+                "[the_person.possessive_title] backs away and quietly leaves your office. You feel a bit bad for chastising her, but that bitch should know better."
+                return
+    if the_person.outfit.has_creampie_cum():
+        the_person.char "Mmmm, your cum feels good in my ass..."
+    "[the_person.title] gets up."
+    $ the_person.draw_person()
+    the_person.char "I feel like I can think clearly again... thank you, I REALLY needed that."
+    $ the_person.review_outfit()
+    $ the_person.draw_person()
+    "[the_person.possessive_title] cleans herself up a bit. You both leave your office and get back to work."
     return

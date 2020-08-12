@@ -162,7 +162,7 @@ label modification_process(person = the_person): # when called without specific 
             del body_modification_options
 
         if act_choice == "Back":
-            $ renpy.scene("Active")
+            $ clear_scene()
             return
         else:
             $ act_choice.call_action()

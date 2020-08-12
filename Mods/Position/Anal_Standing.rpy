@@ -113,7 +113,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                 mc.name "That's right bitch, you're here to pleasure me, when, how, and wherever I want."
                 $ the_girl.discover_opinion("being submissive")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3)
-            elif the_girl.get_opinion_score("taking control") > 0 or the_girl.obedience < 80:
+            elif the_girl.is_dominant() or the_girl.obedience < 80:
                 "[the_girl.possessive_title] looks back at you and smiles."
                 the_girl.char "It's definitely a... unique feeling [the_girl.mc_title]. Maybe you should let me peg you sometime?"
                 "You give [the_girl.possessive_title] a good, hard thrust in response."

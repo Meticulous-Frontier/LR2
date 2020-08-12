@@ -32,10 +32,11 @@ init 1 python:
     def get_quest_production_line_person():
         able_person_list = []
         for person in mc.business.production_team:
-            if person.age < 25:
+            if person.age < 25 and person.kids == 0: # young enough and no kids (she's daddy's little girl)
                 if not quest_director.is_person_blocked(person):
                     if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for atleast 7 days#
-                        able_person_list.append(person)
+                        if len(town_relationships.get_existing_parents(person)) == 0 and len(town_relationships.get_existing_sisters(person)) == 0: # no mother / sisters in game
+                            able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
     def setup_quest_production_line():
@@ -147,10 +148,12 @@ init 1 python:
             return True
         return False
 
-    def prod_line_target_unique_sex_positions(person, foreplay_positions, oral_positions, vaginal_positions, anal_positions,  prohibit_tags = []):
-        willingness = spanking.build_position_willingness_string(person, ignore_taboo = True)
-        foreplay_positions.insert(1, [willingness, spanking])
-        return [foreplay_positions, oral_positions, vaginal_positions, anal_positions]
+    def prod_line_target_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
+        if "Foreplay" not in prohibit_tags:
+            positions.append([spanking, 1])
+
+        return positions
 
     quest_production_line_intro = Action("Begin Production Quest", quest_production_line_intro_requirement, "quest_production_line_intro_label")
     quest_production_line_coffee_reminder = Action("Meeting Remind", quest_production_line_coffee_reminder_requirement, "quest_production_line_coffee_reminder_label")
@@ -343,14 +346,14 @@ label quest_production_line_help_move_label():
         "She wraps her arms around you and gives you a lingering hug."
         "Eventually, she lets go."
     the_person.char "Okay... let's get to work!"
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You spend about an hour helping [the_person.title] loading her things into a small rental trailer."
     "When you are done, you ride with her over to her new apartment."
     #TODO her apartment which is actually different than the place she was earlier.
     $ the_person.draw_person()
     $ the_person.learn_home()
     "Before we get to work, would you do me a favor? Could you grab a couple bottles of water from the fridge? I'm so thirsty!"
-    $ renpy.scene("Active")
+    $ clear_scene()
     "You grab a couple of water bottles. [the_person.title] is still out in the trailer. Now would be a good time to drop a serum in her drink..."
     menu:
         "Add a dose of serum to [the_person.title]'s drink.":
@@ -451,6 +454,7 @@ label quest_production_line_help_move_label():
             the_person.char "Yes Sir!"
             "As you turn from her door, you process all the events of the last few days."
             "One of your employees, recently had an amicable breakup... with her dad? And now she calls you Daddy... And she likes to get spanked."
+            $ the_person.unlock_spanking()
             "While it is unlikely this relationship is going to last, you decide to make sure you have as much fun with it as you can while it lasts."
             $ quest_production_line.set_quest_flag(103)
         else:
@@ -496,6 +500,7 @@ label quest_production_line_daddy_title_label(the_person): #This label is activa
     call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_02
     $ the_person.increase_opinion_score("being submissive")
     the_person.char "Oh god... that was wonderful [the_person.mc_title]."
+    $ the_person.unlock_spanking()
     $ the_person.draw_person()
     return
 

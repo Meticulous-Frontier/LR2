@@ -46,7 +46,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                 "You push your tongue deep and twirl it all around her juicy canal. Your nose is pressing up against her clit, making her gasp."
                 if the_girl.has_creampie_cum():
                     "Your tongue is deep. The salty cum deposited there flows out and begins to run down your chin."
-                if the_girl.get_opinion_score("taking control") > 0:
+                if the_girl.is_dominant():
                     "[the_girl.possessive_title] puts her hand on the back of your head, urging your tongue deeper and your nose more firmly against her clit."
                     "She starts to rock her hips, grinding herself against your face."
                     the_girl.char "Mmm, that's it [the_girl.mc_title]! Fuck that feels good!"
@@ -185,12 +185,12 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
 label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Submit // Control her
     "[the_girl.possessive_title]'s hips are beginning to rock side to side, grinding against you as you lick her."
-    "You feel her legs cross behind your back while she runs her hands through your hair. She starts to grind against you more aggresively."
+    "You feel her legs cross behind your back while she runs her hands through your hair. She starts to grind against you more aggressively."
     "It feels like [the_girl.possessive_title] is trying to take control!"
     menu:
         "Let Her Take Control":
             "You take her enthusiasm as a sign that you must be doing well. You double down on her clit, sucking and licking at it."
-            if the_girl.get_opinion_score("taking control") > 0:
+            if the_girl.is_dominant():
                 "[the_girl.possessive_title] uses the leverage her legs give her, wrapped around your back, to force your face down into her cunt roughly."
                 if the_girl.has_creampie_cum():
                     "She starts to rock her hips. Your face is getting slick from the combination of juices around her pussy."

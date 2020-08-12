@@ -32,6 +32,7 @@ init 5 python:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.set_schedule([3, 4], work_location)
 
+        person.event_triggers_dict["stripclub_hire_day"] = day
         person.stripper_salary = calculate_stripper_salary(person)
 
         if role is stripper_role and not person in stripclub_strippers:
@@ -110,6 +111,15 @@ init 5 python:
             return "Asked too recently"
         return True
 
+    def strip_club_review_requirement(person):
+        if is_strip_club_stripper_requirement(person):
+            if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
+                return "Too recently promoted"
+            if day - person.event_triggers_dict.get("day_last_performance_review", -7) < 7:
+                return "Too recently reviewed"
+            return True
+        return False
+
     def add_strip_club_hire_employee_action_to_mc_actions():
         strip_club_hire_employee_action = Action("Employ at [strip_club.formalName]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
         mc.main_character_actions.append(strip_club_hire_employee_action)
@@ -121,7 +131,9 @@ init 5 python:
             if person.int < 4 or person.charisma < 5:
                 return "Requires: intelligence >=4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
-                return "Only in [strip_club.formalName]"                
+                return "Only in [strip_club.formalName]"
+            if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:
+                return "Too recently hired"
             return True
         return False
 
@@ -142,7 +154,7 @@ init 5 python:
     promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
 
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
-    strip_club_stripper_performance_review_action = Action("Review her performance", is_strip_club_stripper_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
+    strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
     bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
     stripper_role = Role("Stripper", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
@@ -157,9 +169,6 @@ label update_strip_club_show_requirement(stack):
             stripclub_bdsm_performers = []
         if not "stripclub_waitresses" in globals():
             stripclub_waitresses = []
-
-        # make strip club roaming location for people (why would woman not go into a strip club)
-        strip_club.public = True
 
         execute_hijack_call(stack)
     return
@@ -270,7 +279,7 @@ label strip_club_hire_employee_label(the_person):
             the_person.char "That sounds like something interesting... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "You are absolutely right, where should I sign?"
-        if the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
+        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
             the_person.char "I don't know... I really don't know... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "Ok, your offer is really tempting, where should I sign?"
@@ -434,7 +443,7 @@ label stripper_performance_review_label(the_person):
                         the_person.char "What? I... I can't believe that [the_person.mc_title], why would you ever think I would stay here for less money?"
                         mc.name "Like I said, I'm sorry but it has to be done."
                         the_person.char "Well you know what, I think I'm just going to find somewhere else to work. I quit."
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "[the_person.title] stands up and storms out of the room."
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
@@ -485,7 +494,7 @@ label stripper_performance_review_label(the_person):
                     else:
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
                         the_person.char "What? You want me to beg to stay at this shitty job? If you don't want me here I think it's best I just move on. I quit!"
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         "[the_person.title] stands up and storms out."
                         $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
                         $ strip_club_fire_stripper(the_person)
@@ -522,5 +531,5 @@ label stripper_performance_review_label(the_person):
             $ the_person.change_stats(happiness = 2, obedience = 1)
             the_person.char "Thank you, I'll do my best."
     "You stand up and open the door for [the_person.title] at the end of her performance review."
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

@@ -924,7 +924,7 @@ label starbuck_sex_store_promo_two_label(the_person):
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return #Masturbation, ends in sex
 
 #SBS90
@@ -1090,7 +1090,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ perk_system.add_stat_perk(Stat_Perk(description = "Increase oral skill after helping Starbuck demonstrate edible panties. + 1 Oral Skill", oral_bonus = 1, bonus_is_temp =False), "Starbuck Oral Bonus")
     "Getting [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
     $ mc.location.show_background()
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 
@@ -1484,7 +1484,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "I'm kinda sweaty from a long day at the shop, so I was just getting ready to hop in the shower. Why don't you get comfortable? I won't be long."
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] turns and walks into her bathroom. She closes the door... mostly... leaving it open a crack. You're sure she left it open on purpose, but you decide for now to let her get started solo."
-        $ renpy.scene("Active")
+        $ clear_scene()
         "You head into her kitchen and notice her coffee pot is on and full. Was she expecting you? You pour yourself a cup and take a few sips."
         "You sit down and enjoy your coffee. It has been about 5 minutes now. The crack in the door is calling you. Should you join her in the shower? Or let her finish?"
         menu:
@@ -1587,7 +1587,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     $ the_roll = renpy.random.randint(0,100)
     if the_roll < morning_fun_chance:        #Roll for morning sex is successful
         "[the_person.title]'s naked body against yours makes for a very pleasant night of sleep. A couple times throughout the night you stirred for a bit and gave her a grope, but quickly fell back asleep."
@@ -1615,7 +1615,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title] heads to the bathroom. You grab your stuff and head out."
     $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
-    $ renpy.scene("Active")
+    $ clear_scene()
     return "Advance Time"
 
 #SBS130
@@ -1688,7 +1688,10 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     "[the_person.title] lets out a big yawn."
     the_person.char "You really wore me out! Good night [the_person.mc_title]."
     "She walks you to the door of the business and you walk out together, before going your separate ways."
-    return
+
+    # time goes forward and exit the talk menu by jumping to game loop
+    call advance_time from _call_advance_time_starbuck_close_up_label
+    jump game_loop
 
 #SBS140
 label starbuck_replay_dressup_label(the_person):
@@ -1842,7 +1845,7 @@ label starbuck_intro():
         the_person.char "We've just opened, so stock is still fairly limited, but feel free to browse and I'm here to answer any questions you might have!"
         "You smile at [the_person.possessive_title] and promise to take a look."
         the_person.char "Sounds great!"
-        $ renpy.scene("Active")
+        $ clear_scene()
         "After [the_person.possessive_title] goes back to the counter, you walk around the shop a bit. Unfortunately, things are pretty bare. There are several shelves with just labels on them."
         "You walk by one labeled as anal toys, but there aren't any on the shelf available for purchase."
         "You walk over to the counter."
@@ -1887,7 +1890,7 @@ label starbuck_intro():
             the_person.char "I'll be forever in your debt. Is there anything I can help you with?"
         else:
             the_person.char "Is there anything I can help you with?"
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 ####Starbuck Unique Personality####
 

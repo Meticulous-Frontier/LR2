@@ -137,6 +137,8 @@ init 5 python:
             return False
         if mc.business.funds < 500:
             return "Requires $500"
+        if not mc.is_at_work():
+            return "Only in the office"
         if not mc.business.is_open_for_business():
             return "Only during work hours"
         return True
@@ -148,17 +150,27 @@ init 5 python:
             return False
         if mc.business.funds < 1500:
             return "Requires $1500"
+        if not mc.is_at_work():
+            return "Only in the office"
         if not mc.business.is_open_for_business():
             return "Only during work hours"
         return True
 
     def HR_director_gym_membership_tier_1_requirement(the_person):
         if mc.business.get_employee_count() > 6 and get_HR_director_tag("business_HR_gym_tier", 0)  == 0:
+            if not mc.is_at_work():
+                return "Only in the office"
+            if not mc.business.is_open_for_business():
+                return "Only during work hours"
             return True
         return False
 
     def HR_director_gym_membership_tier_2_requirement(the_person):
         if mc.business.get_employee_count() > 14 and get_HR_director_tag("business_HR_gym_tier", 0)  == 1:
+            if not mc.is_at_work():
+                return "Only in the office"
+            if not mc.business.is_open_for_business():
+                return "Only during work hours"
             return True
         return False
 
@@ -167,6 +179,10 @@ init 5 python:
             return False
         if mc.business.funds < 5000:
             return "Requires $5000"
+        if not mc.is_at_work():
+            return "Only in the office"
+        if not mc.business.is_open_for_business():
+            return "Only during work hours"
         return True
 
     def HR_director_mind_control_attempt_requirement(the_person):
@@ -587,7 +603,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    #$ renpy.scene("Active")
+    #$ clear_scene()
     #$ scene_manager.clear_scene()
     "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice.char "Hello [person_choice.mc_title]."
@@ -1220,7 +1236,7 @@ label HR_director_mind_control_attempt_label(the_person):
 
     $ del HR_employee_list
     the_person.char "Okay. I'll go get her."
-    $ renpy.scene("Active")
+    $ clear_scene()
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
 
     $ scene_manager.clear_scene()

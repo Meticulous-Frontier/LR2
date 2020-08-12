@@ -269,7 +269,7 @@ label slave_alarm_clock_label(the_person):
                             the_person.char "Well done [the_person.mc_title]. I'll make sure to clean that up while you're out today."
                             "She leans over and kisses you on the forehead."
                             the_person.char "Now get dressed or you'll be late for work."
-                            $ renpy.scene("Active")
+                            $ clear_scene()
 
 
                 "Ask her to leave":
@@ -410,7 +410,7 @@ label slave_alarm_clock_label(the_person):
     call slave_training_label(the_person) from _call_slave_training_slave_alarm_clock_label
 
     # At the end we would want the "Slave" to be in the room and intractable after the crisis event. Moving them during the event causes issues with scheduled destinations on run_move
-    $ renpy.scene("Active")
+    $ clear_scene()
     return
 
 label increase_slave_submission_label(the_person):

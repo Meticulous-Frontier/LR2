@@ -12,7 +12,7 @@
         taboo_break_description = "taboo_break_missionary",
         orgasm_description = "orgasm_SB_anal_cowgirl",
         verb = "ass fuck",
-        opinion_tags = ["taking control", "anal sex"], record_class = "Anal Sex",
+        opinion_tags = ["taking control", "anal sex", "anal creampie"], record_class = "Anal Sex",
         associated_taboo = "anal_sex")
 
     list_of_girl_positions.append(SB_anal_cowgirl)
@@ -292,4 +292,4 @@ label taboo_break_SB_anal_cowgirl(the_girl, the_location, the_object):
         mc.name "Come on, you'll get there."
         "She spits on your cock and tries again. This time making better progress, sliding the tip of your dick into her ass."
         the_girl.char "Oh god... Fuck!"
-    return    
+    return

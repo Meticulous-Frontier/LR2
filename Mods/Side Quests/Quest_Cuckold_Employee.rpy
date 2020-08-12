@@ -208,7 +208,7 @@ label quest_cuckold_employee_decision_label():
     mc.name "Hello [the_person.title]. Can I help you?"
     the_person.char "Well, kind of yes, kind of no."
     mc.name "I'm sorry?"
-    the_person.char "I just... I need to vent to someone about something, but I don't trust the other girls around her not to gossip about it."
+    the_person.char "I just... I need to vent to someone about something, but I don't trust the other girls around here not to gossip about it."
     mc.name "Of course, you can talk to me about anything."
     the_person.char "Well... my husband and I... we've been trying to have baby lately, but after months of trying, still nothing."
     the_person.char "I did something I probably shouldn't have... I took a semen sample when we had sex a few days ago secretly and had it analyzed."
@@ -294,7 +294,7 @@ label quest_cuckold_employee_decision_label():
                     mc.name "Oh?"
                     the_person.char "I've been tracking my cycles... I'm going to ovulate in the next few days almost for certain."
                     the_person.char "Do you think... we could go to your office?"
-                    mc.name "Let's go, we can definitely find some privacy in my officer."
+                    mc.name "Let's go, we can definitely find some privacy in my office."
                     the_person.char "Oh! Oh fuck, I can't believe it. Okay. Let's go."
                 "Can't help":
                     mc.name "I understand what you are going through, but I just don't think I can do that. Not without having your husband on board with it."
@@ -411,7 +411,7 @@ label quest_cuckold_employee_rethink_decision_label():
     mc.name "Its okay. Do you need a few days off? Get out from the office for a while?"
     the_person.char "No, not at all. I want to be here, every day, as much as possible, around you."
     the_person.char "You offered... you know... to help me. Are you still willing to do that?"
-    mc.name "I'll do everything in my power to get your pregnant if that is what you want."
+    mc.name "I'll do everything in my power to get you pregnant if that is what you want."
     "She looks a little relieved, but also still nervous."
     the_person.char "My hormones are going nuts. I'm going to ovulate... probably any day now!"
     "You move a little closer to her."
@@ -573,7 +573,7 @@ label quest_cuckold_employee_gloryhole_label():
             "As you step out of the stall, you almost bump into [the_person.title] as she is entering the stall next to yours."
             $ the_person.draw_person()
             the_person.char "Oh! You're done... I mean... Excuse me!"
-            $ renpy.scene("Active")
+            $ clear_scene()
             "She quickly enters the stall and closes the door."
             "Hmm... was she trying to follow you in here? You wonder if your refusal to try and knock her up has anything to do with it..."
             $ quest_cuckold_employee.set_quest_flag(39)
@@ -694,7 +694,7 @@ label quest_cuckold_employee_knocked_up_label():
             the_person.char "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
             # she becomes your girlfriend
             $ the_person.add_role(girlfriend_role)
-            the_person.char "I cant believe it, I'm really doing this. You're my one and only bull now."
+            the_person.char "I can't believe it, I'm really doing this. You're my one and only bull now."
 
         "You're doing the right thing.":      #Be the good guy
             mc.name "I'm really happy for you. Don't worry, your secret is safe with me. For all purposes, the baby IS his."

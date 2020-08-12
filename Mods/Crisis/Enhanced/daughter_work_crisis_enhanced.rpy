@@ -71,7 +71,7 @@ label daughter_work_crisis_label_enhanced():
                             $ the_person.change_obedience(1)
                             "She takes the resume back and steps away from your desk, defeated."
                             the_person.char "Right, of course. Sorry for wasting up your time."
-                        $ renpy.scene("Active")
+                        $ clear_scene()
                         return
             elif promised_sex:
                 the_person.char "There's nothing I could do? Nothing at all?"
@@ -87,7 +87,7 @@ label daughter_work_crisis_label_enhanced():
                     $ the_person.change_obedience(1)
                     "She takes the resume back and steps away from your desk, defeated."
                     the_person.char "Right, of course. Sorry for wasting up your time."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
 
             else:
@@ -95,7 +95,7 @@ label daughter_work_crisis_label_enhanced():
                 $ the_person.change_happiness(-3)
                 the_person.char "I understand. Sorry for taking up your time."
                 "She collects the resume and leaves your office."
-                $ renpy.scene("Active")
+                $ clear_scene()
                 return
 
     $ the_daughter = the_person.generate_daughter() #Produces a person who has a high chance to share characteristics with her mother.
@@ -145,5 +145,5 @@ label daughter_work_crisis_label_enhanced():
             the_person.char "I understand, thank you for at least taking a look for me."
 
     $ the_daughter = None
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

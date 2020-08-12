@@ -69,7 +69,8 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
-                renpy.invoke_in_thread(mi.load)
+                if not renpy.mobile: # don't load person on mobile
+                    renpy.invoke_in_thread(mi.load)
 
             if isinstance(item, Action):
                 mi.title = ""
@@ -160,7 +161,7 @@ init 2:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
                                             text_align (0.5,0.5)
-                                            if item.display_key:
+                                            if not renpy.mobile and item.display_key:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(renpy.scene, "Active")]
                                             action [

@@ -76,5 +76,5 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     $ person.remove_role(suggestable_role)
     $ mc.log_event((person.title or person.name) + " is no longer suggestible.", "float_text_blue")
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

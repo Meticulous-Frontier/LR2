@@ -286,7 +286,7 @@ label quest_essential_oils_decision_label(the_person):
             $ quest_essential_oils.set_quest_flag(49)
             $ quest_essential_oils.quest_completed()
             return
-    $ renpy.scene("Active")
+    $ clear_scene()
     #$ add_essential_oil_serum_trait()
     $ list_of_traits.append(essential_oil_trait)
     $ quest_essential_oils_cleanup()

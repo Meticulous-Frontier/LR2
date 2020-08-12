@@ -99,21 +99,21 @@ label alpha_introduction(the_person):
     return
 
 label alpha_clothing_accept(the_person):
-    if the_person.obedience > 140:
-        the_person.char "Well, I will use it if my mood will decide so."
+    if the_person.obedience < 140:
+        the_person.char "Well, I will wear it when I feel like it."
         the_person.char "Thank you for the outfit, [the_person.mc_title]."
     else:
-        the_person.char "Oh that's a nice combination! I'll try it at home later and I'll check how it fit."
+        the_person.char "Oh that's a nice combination! I'll try it at home later and see how it fits."
     return
 
 label alpha_clothing_reject(the_person):
     if the_person.obedience > 140:
         the_person.char "I know it would make your day if I wore this for you [the_person.mc_title]!"
-        the_person.char "I'm sorry, I know you are disappointed, but I will make it up to you."
+        the_person.char "I'm sorry, I know you are disappointed, you will need to convince me to wear something like this."
     else:
         if the_person.sluttiness > 60:
             the_person.char "I... [the_person.mc_title], do you think that's the best for a woman with my... 'assets'?"
-            "[the_person.possessive_title] wink, smile but shakes her head."
+            "[the_person.possessive_title] gives you a wink, smiles, but shakes her head."
             the_person.char "No, you should find something better to wear for me..."
         else:
             the_person.char "[the_person.mc_title], I'm a lady... I can't show my face in public with something like that!"
@@ -137,7 +137,7 @@ label alpha_strip_reject(the_person):
     if the_person.obedience > 130:
         the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take anything else off. I'm a lady, after all."
     elif the_person.obedience < 70:
-        the_person.char "Not yet sweety. You just need to relax and let [the_person.title] take care of you."
+        the_person.char "Not yet [the_person.mc_title]. You just need to relax and let [the_person.title] take care of you."
     else:
         the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if it came off?"
     return
@@ -145,7 +145,7 @@ label alpha_strip_reject(the_person):
 label alpha_sex_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
-            the_person.char "Such a nice body you have [the_person.mc_title] and I love sex... Let's try it with you!"
+            the_person.char "Such a nice body you have [the_person.mc_title] and I love sex... Let's give it a try and see how it feels!"
         else:
             the_person.char "I love sex [the_person.mc_title], and I love it more when it's with you!"
     else:
@@ -154,26 +154,30 @@ label alpha_sex_accept(the_person):
 
 label alpha_sex_obedience_accept(the_person):
     if the_person.sluttiness > 70:
-        the_person.char "I know I shouldn't do this, I'm not a slut..."
-        the_person.char "But you look so strong and nice... Let me feel your body!"
+        the_person.char "I know I shouldn't do this, I'm not some cheap slut..."
+        the_person.char "But you look so strong and handsome... Let me feel your body!"
     else:
         if the_person.obedience > 130:
-            the_person.char "I... We really shouldn't... But I know this will makes both of us happy: lets do it [the_person.mc_title]..."
+            the_person.char "I... We really shouldn't... But I know this will make me happy, lets do it [the_person.mc_title]..."
         else:
             the_person.char "How does this keep happening [the_person.mc_title]? I like you but we shouldn't be doing this..."
             "[the_person.possessive_title] looks straight in your eyes, conflicted."
             if not the_person.relationship == "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person.char "Ok... You just have to make sure my [so_title] never finds out about this..."
+            elif person.has_role(girlfriend_role):
+                the_person.char "Ok, since you have been so good to me, I will do this for you."
             else:
-                the_person.char "Ok... But that doesn't means we're more than just friends, ok?"
+                the_person.char "Ok... But this doesn't mean we're more than just friends."
     return
 
 label alpha_sex_gentle_reject(the_person):
     if the_person.sluttiness > 50:
         the_person.char "Not yet [the_person.mc_title], I need to get warmed up first. Let's start a little slower and enjoy ourselves."
+    elif not the_person.relationship == "Single":
+        the_person.char "I... we can't do that [the_person.mc_title]. I'm seeing someone else..."
     else:
-        the_person.char "I... we can't do that [the_person.mc_title]. I see someone else..."
+        the_person.char "I can't...at least not yet."
     return
 
 label alpha_sex_angry_reject(the_person):
@@ -183,9 +187,9 @@ label alpha_sex_angry_reject(the_person):
         "She glares at you and walks away."
     elif the_person.sluttiness < 20:
         the_person.char "Oh god, what did you just say [the_person.mc_title]?"
-        the_person.char "I'm the best, how could you even think about that!"
+        the_person.char "I'm a lady, how could you even think I would do something like that!"
     else:
-        the_person.char "What? Oh god, I'm steps over you [the_person.mc_title]! We can't do things like that, ever."
+        the_person.char "What? Oh god, [the_person.mc_title], how could you suggest that! We can't do things like that, ever."
         "[the_person.possessive_title] turns away from you."
         the_person.char "You should go. This was a mistake. I should have known it was a mistake. I don't know what came over me."
     return
@@ -228,14 +232,14 @@ label alpha_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person.char "Do you need the touch of a skilled woman, [the_person.mc_title]? I know how stressed you can get you."
         else:
-            the_person.char "Oh sweety... What do you need my help with [the_person.mc_title]?."
+            the_person.char "Oh darling... What do you need my help with [the_person.mc_title]?."
     else:
         if the_person.sluttiness > 50:
             the_person.char "Well, how about you let me take care of you for a change? I'm the best..."
         elif the_person.sluttiness > 20:
             the_person.char "What do you mean [the_person.mc_title]? Do you want to spend some good time with me?"
         else:
-            the_person.char "I'm not sure I understand: what do you need from me, [the_person.mc_title]?"
+            the_person.char "I'm not sure I understand, what do you need from me [the_person.mc_title]?"
     return
 
 label alpha_seduction_accept_crowded(the_person):
@@ -605,7 +609,6 @@ label alpha_flirt_response_girlfriend(the_person):
                     "You give her butt one last squeeze, then slide your hand off."
 
         else:
-            # the_person.char "Oh [the_person, mc_title], you're so sweet. Come on, kiss me!"
             "She smiles with a smirk."
             the_person.char "Ahh, you're so nice. Here..."
             "[the_person.possessive_title] leans in and kisses you. Her lips lingering against yours for a few long seconds."

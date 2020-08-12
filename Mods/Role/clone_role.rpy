@@ -52,5 +52,5 @@ label clone_rent_apartment_label(the_person):
 
             "You make all the necessary arrangements, your clone [the_person.name] will now stay at her own place at night and live her life."
 
-    $ renpy.scene("Active")
+    $ clear_scene()
     return

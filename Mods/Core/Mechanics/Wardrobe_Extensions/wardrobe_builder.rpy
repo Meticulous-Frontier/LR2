@@ -1,7 +1,8 @@
 init 5 python:
+    from collections import OrderedDict
+
     #def casual_sex_mod_initialization(action_mod):
     university_wardrobe = wardrobe_from_xml("University_Wardrobe")
-
 
     opinions_list.insert(7, "boots")
     opinions_list.insert(10, "high heels")
@@ -9,6 +10,20 @@ init 5 python:
     opinions_list.insert(15, "the colour green")
     opinions_list.insert(15, "the colour purple")
     opinions_list.insert(15, "the colour white")
+    opinions_list.insert(15, "the colour orange")
+
+    # evaluation function mapping for in-game color preferences in HSL values
+    color_pref_eval_map = OrderedDict([
+        ( "the colour black", "(s < 40 and l <= 30) or l <= 18"),
+        ( "the colour white", "l >= 95"),
+        ( "the colour yellow", "l > 55 and h >= 32 and h <= 78"),
+        ( "the colour orange", "l > 30 and h >= 20 and h <= 55"),
+        ( "the colour pink", "s > 5 and l > 50 and h >= 300 and h <= 335"),
+        ( "the colour purple", "s > 5 and l < 95 and h >= 270 and h <= 330"),
+        ( "the colour green", "s > 5 and l < 95 and h >= 65 and h <= 170"),
+        ( "the colour blue", "s > 5 and l < 95 and h >= 210 and h <= 270"),
+        ( "the colour red", "s > 5 and l < 95 and (h <= 35 or h >= 330)"),
+    ])
 
     # make business vest layer 2
     shirts_list.remove(business_vest)
@@ -21,8 +36,8 @@ init 5 python:
             [0, .278, .671, .95],  [.392, .584, .929, .95], [.282, .239, .545, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
             [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
             [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
-            [.95, .95, .95, .95], [.15, .15, .15, .95],
-            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 6 unused user definable colors
+            [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95],
+            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 4 unused user definable colors
         ]
 
     # array for determining the sluttiness of an outfit
@@ -32,13 +47,19 @@ init 5 python:
         outfit_builder = WardrobeBuilder(person)
 
         while __builtin__.len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_outfit(outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)]))
+            outfit = outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)])
+            if outfit.has_overwear() and outfit_builder.approves_outfit_color(outfit):
+                person.wardrobe.add_outfit(outfit)
 
         while __builtin__.len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_overwear_set(outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)]))
+            overwear = outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)])
+            if overwear.is_suitable_overwear_set() and outfit_builder.approves_outfit_color(overwear):
+                person.wardrobe.add_overwear_set(overwear)
 
         while __builtin__.len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
-            person.wardrobe.add_underwear_set(outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)]))
+            underwear = outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)])
+            if underwear.is_suitable_underwear_set() and outfit_builder.approves_outfit_color(underwear):
+                person.wardrobe.add_underwear_set(underwear)
 
         return
 
@@ -112,42 +133,51 @@ init 5 python:
         matching_underwear["Strappy_Bra"] = [strappy_panties]
         matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
 
-        clashing_overwear = {}
-        clashing_overwear[""] = []
-
         color_prefs = {}
-        color_prefs["the colour blue"] = {}
-        color_prefs["the colour blue"]["cobalt blue"] = [0, .278, .671, .95]
-        color_prefs["the colour blue"]["cornflower blue"] = [.392, .584, .929, .95]
-        color_prefs["the colour blue"]["dark slate blue"] = [.282, .239, .545, .95]
-        color_prefs["the colour yellow"] = {}
-        color_prefs["the colour yellow"]["indian yellow"] = [.89, .65, .34, .95]
-        color_prefs["the colour yellow"]["saffron"] = [.96, .77, .19, .95]
-        color_prefs["the colour yellow"]["corn"] = [.98, .92, .36, .95]
-        color_prefs["the colour red"] = {}
-        color_prefs["the colour red"]["bordeaux red"] = [.33, .10, .06, .95]
-        color_prefs["the colour red"]["sinopia"] = [.80, .26, .04, .95]
-        color_prefs["the colour red"]["debian red"] = [.843, .039, .325, .95]
-        color_prefs["the colour pink"] = {}
-        color_prefs["the colour pink"]["thulian pink"] = [.87, .44, .63, .95]
-        color_prefs["the colour pink"]["hot pink"] = [1, .41, .71, .95]
-        color_prefs["the colour pink"]["cotton candy"] = [1, .73, .85, .95]
-        color_prefs["the colour black"] = {}
-        color_prefs["the colour black"]["midnight black"] = [.15, .15, .15, .95]
-        color_prefs["the colour black"]["warm black"] = [0, .26, .36, .95]
-        color_prefs["the colour black"]["charcoal"] = [.21, .27, .34, .95]
-        color_prefs["the colour green"] = {}
-        color_prefs["the colour green"]["army green"] = [.29, .32, .12, .95]
-        color_prefs["the colour green"]["sea green"] = [.18, .54, .34, .95]
-        color_prefs["the colour green"]["caribbean green"] = [.0, .8, .6, .95]
-        color_prefs["the colour purple"] = {}
-        color_prefs["the colour purple"]["palatinate purple"] = [.41, .16, .38, .95]
-        color_prefs["the colour purple"]["dark lavender"] = [.45, .31, .59, .95]
-        color_prefs["the colour purple"]["rich lilac"] = [.71, .4, .85, .95]
-        color_prefs["the colour white"] = {}
-        color_prefs["the colour white"]["white smoke"] = [.95, .95, .95, .95]
-        color_prefs["the colour white"]["ghost white"] = [.97, .97, 1, .95]
-        color_prefs["the colour white"]["bright white"] = [1, 1, 1, .95]
+        color_prefs["the colour blue"] = {
+            "cobalt blue": [0, .278, .671, .95],
+            "cornflower blue": [.392, .584, .929, .95],
+            "dark slate blue": [.282, .239, .545, .95]
+        }
+        color_prefs["the colour yellow"] = {
+            "indian yellow": [.89, .65, .34, .95],
+            "saffron": [.96, .77, .19, .95],
+            "corn": [.98, .92, .36, .95]
+        }
+        color_prefs["the colour red"] = {
+            "bordeaux red": [.33, .10, .06, .95],
+            "sinopia": [.80, .26, .04, .95],
+            "debian red": [.843, .039, .325, .95]
+        }
+        color_prefs["the colour pink"] = {
+            "thulian pink": [.87, .44, .63, .95],
+            "hot pink": [1, .41, .71, .95],
+            "cotton candy": [1, .73, .85, .95]
+        }
+        color_prefs["the colour black"] = {
+            "midnight black": [.15, .15, .15, .95],
+            "warm black": [0, .26, .36, .95],
+            "charcoal": [.21, .27, .34, .95]
+        }
+        color_prefs["the colour green"] = {
+            "army green": [.29, .32, .12, .95],
+            "sea green": [.18, .54, .34, .95],
+            "caribbean green": [.0, .8, .6, .95]
+        }
+        color_prefs["the colour purple"] = {
+            "palatinate purple": [.41, .16, .38, .95],
+            "dark lavender": [.45, .31, .59, .95],
+            "rich lilac": [.71, .4, .85, .95]
+        }
+        color_prefs["the colour orange"] = {
+            "honey orange": [.89, .6, .16, .95],
+            "burnt orange": [.8, .33, 0, .95]
+        }
+        color_prefs["the colour white"] = {
+            "white smoke": [.95, .95, .95, .95],
+            "ghost white": [.97, .97, 1, .95],
+            "bright white": [1, 1, 1, .95]
+        }
         #color_prefs[""][""] = [, , , ]
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
@@ -172,6 +202,13 @@ init 5 python:
             # person hates all main clothing items, make her like skirts.
             if skirts_score + pants_score + dress_score == -6:
                 self.person.opinions["skirts"] = [1, True]
+
+        def validate_colors(self):
+            for cp in sorted(self.color_prefs):
+                for col in sorted(self.color_prefs[cp]):
+                    name = self.get_color_name(self.color_prefs[cp][col])
+                    print(cp + " - " + col + " -> " + (name if name else "Unknown"))
+            return
 
         def build_outfit(self, outfit_type, points):
             if (outfit_type == "OverwearSets"):
@@ -220,6 +257,22 @@ init 5 python:
                 if score == 2:
                     item_list.append(pref)
             return item_list
+
+        def get_color_hate_list(self):
+            item_list = []
+            for pref in self.color_prefs.keys():
+                score = self.person.get_opinion_score(pref)
+                if score == -2:
+                    item_list.append(pref)
+            return item_list
+
+        def approves_outfit_color(self, outfit):
+            for clothing in outfit.feet + outfit.lower_body + outfit.upper_body:
+                h, s, l = rgb_to_hsl(clothing.colour[0], clothing.colour[1], clothing.colour[2])
+                for pref in self.get_color_hate_list():
+                    if eval( color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "l" : l} ):
+                        return False
+            return True
 
         def build_overwear(self, points = 0):
             outfit = Outfit("Overwear")
@@ -316,7 +369,7 @@ init 5 python:
 
         def get_main_color_scheme(self, match_percent = 60):
             primary_color = self.get_color()
-            alternate_color = self.get_color()
+            alternate_color = self.get_color(primary_color)
 
             col_choice = renpy.random.randint(0, 100)
             lower_percent = (100 - match_percent) // 2
@@ -360,7 +413,7 @@ init 5 python:
                 item = item.get_copy() # get copy before applying pattern
                 key_value = get_random_from_list(list(item.supported_patterns.keys()))
                 item.pattern = item.supported_patterns[key_value]
-                item.colour_pattern = self.get_color()
+                item.colour_pattern = self.get_color(item.colour)
 
             return item
 
@@ -378,13 +431,39 @@ init 5 python:
 
             return [x for x in item_list if x[1] > 0]
 
-        def get_color(self):
+        def get_color_name(self, colour):
+            return self.get_color_name_rgb(colour[0], colour[1], colour[2])
+
+        def get_color_name_rgb(self, r, g, b):
+            h, s, l = rgb_to_hsl(r, g, b)
+            for pref in color_pref_eval_map:
+                if eval(color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "l" : l} ):
+                    return pref
+            return None
+
+        def get_color(self, base_color = None):
+            def get_excluded(base_color):
+                if base_color:
+                    color_name = self.get_color_name(base_color)
+                    if color_name == "the colour red":
+                        return ["the colour pink", "the colour purple"]
+                    if color_name == "the colour pink":
+                        return ["the colour red", "the colour purple"]
+                    if color_name == "the colour purple":
+                        return ["the colour red", "the colour pink", "the colour blue"]
+                    if color_name == "the colour blue":
+                        return ["the colour purple"]
+                    if color_name == "the colour orange":
+                        return ["the colour yellow"]
+                    if color_name == "the colour yellow":
+                        return ["the colour orange"]
+                return []
+
             color_list = []
-            for cp in self.color_prefs:
+            for cp in [x for x in self.color_prefs if x not in get_excluded(base_color)]:
                 score = self.person.get_opinion_score(cp)
-                if score != -2:
-                    for col in self.color_prefs[cp]:
-                        color_list.append([self.color_prefs[cp][col], (score + 2) * 10])
+                for col in self.color_prefs[cp]:
+                    color_list.append([self.color_prefs[cp][col], (score + 2) * 10])
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
