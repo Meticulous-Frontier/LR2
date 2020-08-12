@@ -83,6 +83,11 @@ init -1 python:
         fix_opinion_exclusion(person, "lingerie", "not wearing underwear")
         fix_opinion_exclusion(person, "skimpy outfits", "not wearing anything")
         fix_opinion_exclusion(person, "being submissive", "taking control")
+        fix_opinion_exclusion(person, "the colour red", "the colour pink") # red and pink clash
+        fix_opinion_exclusion(person, "the colour red", "the colour purple") # red and purple clash
+        fix_opinion_exclusion(person, "the colour pink", "the colour purple") # pink and purple clash
+        fix_opinion_exclusion(person, "the colour blue", "the colour purple") # pink and purple clash
+        fix_opinion_exclusion(person, "the colour orange", "the colour yellow") # orange and yellow clash
         return
 
     # when she doesn't like base_topic, she should not like / love related topic (invert likeness of related topic)
