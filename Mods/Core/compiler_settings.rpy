@@ -20,6 +20,9 @@ init -2 python:
     build.classify("game/Mods/Core/Images/**.icns", None) 
     build.classify("game/Mods/Core/Images/**.pdn", None)
 
+    # include existing .rpa files
+    build.classify("**.rpa", "all")
+
     build.archive("background_images") #When building all mod background images are placed into an archive.
     build.classify("game/Mods/Room/images/**.jpg", "background_images")
     build.classify("game/Mods/Room/images/**.png", "background_images")
