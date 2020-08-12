@@ -53,7 +53,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                           the_girl.char "Just shove it in deep and dump it right in my ass. You know I need your cum inside me, right where it belongs!"
                       elif the_girl.has_role(cum_external_role):
                          the_girl.char "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
-                      elif the_girl.get_opinion_score("creampies") > 0:
+                      elif the_girl.get_opinion_score("anal creampies") > 0:
                            the_girl.char "You should just shove it in as deep as you can and cum inside me."
                       elif the_girl.get_opinion_score("being covered in cum") > 0:
                            the_girl.char "You should pull out and cum all over my ass. That would be so hot..."
@@ -161,7 +161,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
                 "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
                 mc.name "Don't worry, slut. This won't be the last time I fill your ass with my cock."
                 "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."
-            elif the_girl.get_opinion_score("creampies") > 0:
+            elif the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl.char "Holy hell that is deep... tell me... tell me you'll push it this deep again when you cum... that would be so hot!"
                 $mc.change_arousal(5)
                 "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title]'s ass, even when you pull out not a drop of your seed leaks out."
