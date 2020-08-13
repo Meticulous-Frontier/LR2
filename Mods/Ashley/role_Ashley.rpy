@@ -439,7 +439,7 @@ label ashley_classical_concert_date_label():
     the_person.char "Steph! We had a great time. The performers were amazing..."
     stephanie.char "And I assume you were a perfect gentleman?"
     "[stephanie.title] gives you a look. She smiles, but you can tell she is genuinely protective of [the_person.title]"
-    mc.name "Of course"
+    mc.name "As always, [stephanie.title]."
     the_person.char "He really was. Thanks again [the_person.mc_title]!"
     "It's late, so you all agree to part ways."
     mc.name "Alright, don't forget work tomorrow. I'll see you both then."
