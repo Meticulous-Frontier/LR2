@@ -589,7 +589,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person.char "Did... you know... you like it?"
     "Wow, the conversation appears to be turning quickly."
     mc.name "I did. You're very sexy."
-    "She gets a wide smile on my face."
+    "She gets a wide smile on her face."
     the_person.char "I'll admit it... I kind of like it... when guys let me take over a little bit..."
     $ the_person.discover_opinion("taking control")
     "Good to know for certain, but this was fairly obvious at this point."
