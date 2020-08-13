@@ -148,7 +148,7 @@ init -1 python:
         return False
 
     def ashley_mandatory_ask_about_porn_requirement():
-        if day > ashley_get_porn_convo_day():
+        if day > ashley_get_porn_convo_day() and ashley_get_concert_date_stage() >= 2:
             if time_of_day > 1:
                 if ashley.core_sluttiness >= 20:
                     return True
@@ -530,7 +530,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["porn_discussed"] = True
-    if ashley_get_concert_date_stage > 1:
+    if ashley_get_concert_date_stage() > 1:
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
     $ mc.business.mandatory_crises_list.append(ashley_mandatory_ask_about_porn)
     return
