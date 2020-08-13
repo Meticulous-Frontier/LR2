@@ -263,7 +263,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] looks back at you with a scowl."
                 the_girl.char "Don't get used to it, [the_girl.mc_title]... I'm not sure how I let you talk me into this..."
                 $ the_girl.discover_opinion("anal sex")
-                "You decide for now to keep your pace nice a slow."
+                "You decide for now to keep your pace nice and slow."
             else:
                 "[the_girl.possessive_title] looks back at you and manages to smile through the intense sensation of having her ass fucked."
                 the_girl.char "You are stretching me out so much... Be careful back there, I'm not sure how much of this I can take!"

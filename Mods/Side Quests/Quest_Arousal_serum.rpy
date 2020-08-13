@@ -288,7 +288,7 @@ label quest_arousal_serum_test_label():
         if the_report.get("girl orgasms", 0) > 0:
             $ the_person.draw_person(position = "missionary")
             "Completely spent, [the_person.title] sprawls out on the table."
-            the_person.char "Fuck. I'd say that stuff works. I haven't had sex like that in... I don't know I've had sex that good before..."
+            the_person.char "Fuck. I'd say that stuff works. I haven't had sex like that in... I don't know I've ever had sex that good before..."
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
         mc.name "Are you okay?"

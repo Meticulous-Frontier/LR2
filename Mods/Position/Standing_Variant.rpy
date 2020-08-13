@@ -60,7 +60,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object):
     #  "taking control"
 
 label scene_SB_facing_wall_1(the_girl, the_location, the_object):
-    "You grab [the_girl.possessive_title] hips an begin trusting eagerly. You hips slap against her ass in lewd smacking noises as you fuck her."
+    "You grab [the_girl.possessive_title] hips and begin trusting eagerly. You hips slap against her ass in lewd smacking noises as you fuck her."
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced, option to dominate her a bit
         "[the_girl.possessive_title] is getting overwhelmed by the sensation. She is clearly enjoying your fucking but is having a hard time keeping up."

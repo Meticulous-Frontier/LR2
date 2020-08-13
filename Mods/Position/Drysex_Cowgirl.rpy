@@ -91,7 +91,7 @@ label scene_drysex_cowgirl_1(the_girl, the_location, the_object):
                     "Her mouth is hanging open and her eyes a closed tight as she submissively dry humps you."
                     $ the_girl.change_arousal(5)
                 else:
-                    "[the_girl.title] starts to protest, but is soon silenced as you squeeze her neck. She stops dry humping you and reches up, trying to pull your hand away."
+                    "[the_girl.title] starts to protest, but is soon silenced as you squeeze her neck. She stops dry humping you and reaches up, trying to pull your hand away."
                     "You release her neck and she begins to gasp."
                     the_girl.char "Fuck, take it easy, okay? No need to do that!"
                     $ the_girl.change_love(-1)
@@ -105,16 +105,16 @@ label scene_drysex_cowgirl_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title] continues to ride you, with just that thin cloth of your pants in the way between your cock and her steamy cunt."
         "You reach down and start to rub along her clit."
         if the_girl.get_opinion_score("being fingered") < 0:
-            "She moans as you touch her, but doesn't reall seem t pick up the pace any."
+            "She moans as you touch her, but doesn't really seem to pick up the pace."
         else:
             the_girl.char "Oh! Mmm..."
-            "She moans as your fingeres circle her clit. Her body responds, bucking her hips harder against you."
+            "She moans as your fingers circle her clit. Her body responds, bucking her hips harder against you."
             "The pressure of her body against yours feels good."
             $ the_girl.change_arousal(7)
             $ mc.change_arousal(3)
     else:
         if the_girl.outfit.tits_available():
-            "[the_girl.possessive_title] continues to ride you. Her tits heaving up and down above you present an irresistable target."
+            "[the_girl.possessive_title] continues to ride you. Her tits heaving up and down above you present an irresistible target."
             "You reach up with both hands and begin to fondle them."
             if the_girl.get_sex_goal() == "waste cum" or the_girl.get_sex_goal() == "hate fuck":
                 "You grab her tits roughly. She moans as you play with them."
