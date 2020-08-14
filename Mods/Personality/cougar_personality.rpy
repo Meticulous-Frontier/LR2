@@ -779,7 +779,7 @@ label cougar_cum_pullout(the_person):
             elif the_person.get_opinion_score("creampies") < 0:
                 the_person.char "I want you to pull out, okay? You can finish anywhere but inside of me!"
             else:
-                the_person.char "Just pull out and finish somewhere else [the_person.possessive_title]!"
+                the_person.char "Just pull out and finish somewhere else [the_person.mc_title]!"
     return
 
 label cougar_cum_condom(the_person):

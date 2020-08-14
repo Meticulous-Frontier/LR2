@@ -587,7 +587,7 @@ label Sarah_third_wheel_label():
     "You decide not to stoop to her level and to end your conversation there. You grab you and [the_person.title]'s drink and get up, not bothering to say goodbye."
     $ scene_manager.remove_actor(sarah_friend, reset_actor = False)
     "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
-    "You don't seen anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
+    "You don't see anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
     $ scene_manager.add_actor(the_person, position = "stand2", emotion = "sad")
     "Inside you see [the_person.title] looking at herself in the mirror. She is forlorn and from the look of her makeup has obviously been crying."
     mc.name "Hey, are you okay? I don't mean to invade your privacy, but I was starting to get worried about you."

@@ -99,11 +99,11 @@ label return_from_seminar_action_label(the_person):
         the_person.char "[the_person.mc_title], you have such a nice cock, it'll be perfect inside of my mouth..."
         $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
         "[the_person.title] opens her mouth and begins to vigorously suck on your dick with the full intent of giving you at least $500's worth of suction." #Nice. SUUUCTIIIIOOON
-        mc.name "I truly appreciate having such gratuitous employees, just keep on going [the_person.title]."
+        mc.name "I truly appreciate having such a grateful employee, just keep on going [the_person.title]."
         $ the_person.draw_person(position="blowjob")
-        "[the_person.title] lets your cock drop out of her mouth as she grabs a hold of it, administrating an enthusiastic handjob as she looks at your eyes with a smile plastered onto her face."
+        "[the_person.title] lets your cock drop out of her mouth as she grabs a hold of it, administrating an enthusiastic handjob as she looks in your eyes with a smile plastered onto her face."
         the_person.char "And I truly appreciate working for such a wonderful man!"
-        "While she keeps tugging at your length, cherishing your compliment."
+        "Meanwhile, she keeps tugging at your length, cherishing your compliment."
         the_person.char "You know... [the_person.mc_title], I owe you and your company a lot. I hope you know that I'll go to any lengths to make the company succeed."
         "She speeds up stroking your dick while cupping and massaging your balls with her other hand."
         the_person.char "I hope the company will come to benefit from the techniques the seminar taught me... Don't you agree, [the_person.mc_title]?"
