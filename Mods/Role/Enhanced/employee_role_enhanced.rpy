@@ -51,7 +51,9 @@ label employee_find_out_home_location_label(the_person):
         the_person.char "I'm married and my husband's name is [the_person.SO_name], we have been married for about [ran_num] [opinion]."
 
     if the_person.kids == 0:
-        if the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "I've got no children, but that will change pretty soon."
+        elif the_person.on_birth_control:
             the_person.char "I've got no children and to be honest I don't plan on getting any soon."
         else:
             the_person.char "I've got no children, but I wouldn't mind getting pregnant."
