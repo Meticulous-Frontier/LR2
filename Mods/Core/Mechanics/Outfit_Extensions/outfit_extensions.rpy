@@ -19,6 +19,24 @@ init -1 python:
 
     Outfit.feet_visible = feet_visible
 
+    def can_remove_bra(self):
+        if not self.wearing_bra():
+            return False
+        bra = self.get_bra()
+        unanchored = self.get_upper_unanchored()
+        return bra in unanchored
+
+    Outfit.can_remove_bra = can_remove_bra
+
+    def can_remove_panties(self):
+        if not self.wearing_panties():
+            return False
+        panties = self.get_panties()
+        unanchored = self.get_lower_unanchored()
+        return panties in unanchored
+
+    Outfit.can_remove_panties = can_remove_panties
+
     def has_overwear(self): #Returns true if the outfit has layer 2 clothing items for upper and lower body.
         if any(x in [nightgown_dress] for x in self.upper_body):
             return False

@@ -1289,6 +1289,26 @@ init -1 python:
 
     Person.panties_covered = person_panties_covered
 
+    def person_get_bra(self):
+        return self.outfit.get_bra()
+
+    Person.get_bra = person_get_bra
+
+    def person_get_panties(self):
+        return self.outfit.get_panties()
+
+    Person.get_panties = person_get_panties
+
+    def person_can_remove_bra(self):
+        return self.outfit.can_remove_bra()
+
+    Person.can_remove_bra = person_can_remove_bra
+
+    def person_can_remove_panties(self):
+        return self.outfit.can_remove_panties()
+
+    Person.can_remove_panties = person_can_remove_panties
+
     def person_has_mouth_cum(self):
         return self.outfit.has_mouth_cum()
 
