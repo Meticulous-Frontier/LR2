@@ -316,11 +316,11 @@ label casual_hotwife_get_a_drink_label(the_person):
             "Wow, she wants you to come to her house and fuck her in front of her husband! You should probably get on that before the opportunity passes!"
             "You and [the_person.title] finish your drinks and then you say goodbye."
 
-    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:  #She's invied you over
+    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:  #She's invited you over
         "You chat with [the_person.title] for a while, but you can definitely feel some tension in the air about your arrangement for tonight."
         mc.name "So... tonight at your place? I'll see you there?"
         the_person.char "Sounds good. See you then, [the_person.mc_title]."
-    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her hustband
+    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her husband
         the_person.char "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, its nice to have a break from fucking and just enjoy a stiff drink."
         mc.name "Yeah, so is [the_person.SO_name] still enjoying your new lifestyle?"
         the_person.char "Oh god, we both are. I've started fucking around with a couple other guys too. Last time I came home, he tied me up and umm... reclaimed me in every hole he could fit it in..."
@@ -332,7 +332,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         "DEBUG: How did you get here?"
 
     call advance_time from _call_advance_casual_hotwife_drink
-    return
+    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
 
 #CSH10
 label casual_hotwife_bathroom_blowjob_label(the_person):
@@ -641,7 +641,7 @@ label casual_hotwife_dancing_sex_label(the_person):
 
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_casual_hotwife_dancing
-    return
+    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
 
 #CSH30
 label casual_hotwife_sex_invite_label(the_person):
@@ -752,7 +752,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ mc.location.show_background()
 
     call advance_time from _call_advance_casual_hotwife_home_sex
-    return
+    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
 
 label casual_hotwife_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."

@@ -392,16 +392,16 @@ label casual_FA_get_a_drink_label(the_person):
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves. You wonder if you will see her again."
         call advance_time from _call_advance_casual_FA_drink01
-        return
+        jump game_loop # talk event, advance time might trigger event, so we exit the talk event
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 1:
         mc.name "So, I'm going to be honest... I'm surprised to see you here again! Do you find yourself in town very often?"
-        the_person.char "Yeah well, I guess I didn't really bring it up last time, but, I'm actuallly based here. So everytime I start a trip, I usually come to town the night before and spend the night."
+        the_person.char "Yeah well, I guess I didn't really bring it up last time, but, I'm actually based here. So every time I start a trip, I usually come to town the night before and spend the night."
         mc.name "Oh wow... from Pittsburgh? That's an awfully long drive..."
         the_person.char "Oh! I don't drive it. With my flight benefits I can fly space available, so if there is an open seat, I'll grab it to get to work!"
         mc.name "What if everything is full?"
         the_person.char "Honestly? I usually just call in sick. We can get it as an excused absence, but we don't get paid, so I usually just burn sick time."
-        mc.name "That's a pretty interesting setup. Do you stay with friends or family in tonw here?"
+        mc.name "That's a pretty interesting setup. Do you stay with friends or family in town here?"
         the_person.char "Well, I used to have a crash pad... A crash pad is like, a bunch of flight attendants go in together and rent out an apartment close to the apartment and share the costs of it."
         mc.name "Used to?"
         "You notice [the_person.title] gives a slight smile before continuing."
@@ -426,7 +426,7 @@ label casual_FA_get_a_drink_label(the_person):
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves."
         call advance_time from _call_advance_casual_FA_drink02
-        return
+        jump game_loop # talk event, advance time might trigger event, so we exit the talk event
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 2:
         "You can see [the_person.title] blush a bit as you approach her."
