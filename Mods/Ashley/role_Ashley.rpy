@@ -600,6 +600,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person.char "Oh, but I want to..."
     "She leans closer to you and whispers."
     the_person.char "I really want to... I want to make you feel good..."
+    $ mc.change_arousal(30)
     "DAMN. You feel your pants get a little tight after that. You remember from the video the way [the_person.title] took control and rode her ex..."
     mc.name "I mean, you don't have to do that..."
     $ scene_manager.update_actor(the_person, position = "stand4")
@@ -642,6 +643,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person.char "I'm sorry [the_person.mc_title]. I have to go!"
     "[the_person.title] quickly rushes to leave. You've barely had time to process everything that just happened."
     mc.name "[the_person.title]..."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     the_person.char "Don't say anything... I just need to go..."
     $ scene_manager.remove_actor(the_person)
     "[the_person.possessive_title] quickly leaves the room."
@@ -650,8 +652,7 @@ label ashley_ask_about_porn_label(the_person):
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
 
     $ scene_manager.clear_scene()
-    return
-
+    jump game_loop # this is a talk event, since she left, jump out of talking with her.
 
 
 #Python wrappers for Ashley's story progression.
