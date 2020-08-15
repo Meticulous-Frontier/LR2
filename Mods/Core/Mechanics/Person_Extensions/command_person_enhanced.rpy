@@ -68,7 +68,7 @@ label give_panties_label(the_person):
         the_person.char "Here you are, anything else I can do for you?"
         $ removed_something = True
     else:
-        "[the_person.possessive_title] takes a quick look around and pulls of her panties, placing them in your hand."
+        "[the_person.possessive_title] takes a quick look around and pulls off her panties, placing them in your hand."
         the_person.char "Is this what you were looking for?"
 
     python:

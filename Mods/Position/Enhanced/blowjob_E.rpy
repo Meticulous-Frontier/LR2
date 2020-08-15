@@ -66,7 +66,7 @@ label outro_deepthroat_enhanced(the_girl, the_location, the_object):
             $ blowjob.current_modifier = "blowjob"
             $ blowjob.redraw_scene(the_girl)
             "You use your hand on the back of [the_girl.title]'s head to hold her in place, with your cock far in to her mouth."
-            "You grunt and twitch as you start to empty your balls passed her tongue and into her stomach."
+            "You grunt and twitch as you start to empty your balls past her tongue and into her stomach."
             call blowjob_enhanced_kneel_throat_cum(the_girl) from _call_blowjob_enhanced_kneel_throat_cum_outro_deepthroat
     return
 

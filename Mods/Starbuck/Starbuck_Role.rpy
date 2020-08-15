@@ -986,7 +986,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You chew the hole a little wider. You can now access her clit easily through the hole. You take the opportunity to roll her clit between your lips for a few seconds before resuming your panty eating."
     $ the_person.change_arousal(15)#35
     the_person.char "Oooohhhhh, he just go through to my clit... Mmmm that feels so good."
-    "[the_person.possessive_title] reaches down and tears a piece of her panties off, now giving you almost free reign to eat her pussy."
+    "[the_person.possessive_title] reaches down and tears a piece off her panties, now giving you almost free reign to eat her pussy."
     the_person.char "Okay, lets see how they taste..."
     "She takes a bite of the panties, chews and swallows. While she does that you push your tongue deep into her cunt."
     $ the_person.change_arousal(15)#50
