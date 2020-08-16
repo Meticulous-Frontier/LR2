@@ -153,7 +153,7 @@ init -1 python:
     def Sarah_third_wheel_requirement():
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
             return False
-        if time_of_day > 1:
+        if time_of_day > 2:
             if sarah.sluttiness > 15:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
@@ -163,7 +163,7 @@ init -1 python:
     def Sarah_get_drinks_requirement():
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
             return False
-        if time_of_day > 1:
+        if time_of_day > 2:
             if sarah.sluttiness > 30:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
