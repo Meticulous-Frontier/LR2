@@ -341,7 +341,7 @@ label quest_arousal_serum_researched_label():
     mc.name "Hello [the_person.title]. What have you got?"
     the_person.char "I've just finished up synthesizing our first batch of the arousal serum. I followed your idea, to make something that takes effect over time."
     the_person.char "The results have been mixed, but overall I think successful. When combined with one of our serums, the drug slowly builds arousal over the course of the day."
-    the_person.char "However, due to the extended time it takes to act, often time the tests show that the person is able to calm down to ignore the full effect."
+    the_person.char "However, most tests show that the person is able to calm down to ignore the full effect, due to the extended time it takes to act."
     the_person.char "Once we mixed it with our serums, however, we immediately noticed a pattern. The greater the person's suggestibility, the greater the arousal we were able to achieve."
     mc.name "Those sound like great results."
     the_person.char "Just let me know, and we can start to integrate it into our serums effective immediately."
