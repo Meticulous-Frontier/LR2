@@ -652,7 +652,7 @@ label ashley_ask_about_porn_label(the_person):
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
 
     $ scene_manager.clear_scene()
-    jump game_loop # this is a talk event, since she left, jump out of talking with her.
+    return
 
 
 #Python wrappers for Ashley's story progression.

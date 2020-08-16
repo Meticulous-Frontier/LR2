@@ -1691,7 +1691,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
 
     # time goes forward and exit the talk menu by jumping to game loop
     call advance_time from _call_advance_time_starbuck_close_up_label
-    jump game_loop
+    return
 
 #SBS140
 label starbuck_replay_dressup_label(the_person):

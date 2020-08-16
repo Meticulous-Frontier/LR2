@@ -210,7 +210,7 @@ label casual_athlete_get_to_know_label(the_person):
 
     $ the_person.review_outfit()
     call advance_time from _call_advance_casual_athlete_get_to_know
-    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+    return
 
 #CSA10
 label casual_athlete_phase_one_label(the_person):
@@ -572,7 +572,7 @@ label casual_athlete_buy_protein_shake_label(the_person):
 
     $ the_person.apply_planned_outfit()
     call advance_time from _call_advance_casual_athlete_smoothie
-    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+    return
 
 #CSA40
 label casual_athlete_house_call_label(the_person):
@@ -605,7 +605,7 @@ label casual_athlete_house_call_label(the_person):
 
     $ mc.change_location(bedroom) # go home
     call advance_time from _call_advance_casual_athlete_house_call
-    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+    return
 
 label casual_athlete_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."

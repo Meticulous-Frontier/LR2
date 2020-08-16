@@ -332,7 +332,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         "DEBUG: How did you get here?"
 
     call advance_time from _call_advance_casual_hotwife_drink
-    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+    return
 
 #CSH10
 label casual_hotwife_bathroom_blowjob_label(the_person):
@@ -641,7 +641,7 @@ label casual_hotwife_dancing_sex_label(the_person):
 
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_casual_hotwife_dancing
-    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+    return
 
 #CSH30
 label casual_hotwife_sex_invite_label(the_person):
@@ -752,7 +752,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ mc.location.show_background()
 
     call advance_time from _call_advance_casual_hotwife_home_sex
-    jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+    return
 
 label casual_hotwife_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."

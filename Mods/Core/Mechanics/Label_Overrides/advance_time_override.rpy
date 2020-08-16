@@ -262,10 +262,10 @@ init 5 python:
 label advance_time_move_to_next_day(no_events = True):
     $ current_day = day
     while day == current_day:
-        call advance_time_enhanced(no_events = no_events) from _call_advance_time_advance_time_move_to_next_day
+        call advance_time_enhanced(no_events = no_events, jump_to_game_loop = False) from _call_advance_time_advance_time_move_to_next_day
     return
 
-label advance_time_enhanced(no_events = False):
+label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
     # 1) Turns are processed _before_ the time is advanced.
     # 1a) crises are processed if they are triggered.
     # 2) Time is advanced, day is advanced if required.
@@ -299,7 +299,9 @@ label advance_time_enhanced(no_events = False):
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
-    return
+    if no_events or not jump_to_game_loop:
+        return
+    jump game_loop
 
 label advance_time_bankrupt_check_label():
     python:

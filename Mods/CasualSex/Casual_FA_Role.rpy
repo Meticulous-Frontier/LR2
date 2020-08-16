@@ -392,7 +392,7 @@ label casual_FA_get_a_drink_label(the_person):
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves. You wonder if you will see her again."
         call advance_time from _call_advance_casual_FA_drink01
-        jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+        return
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 1:
         mc.name "So, I'm going to be honest... I'm surprised to see you here again! Do you find yourself in town very often?"
@@ -426,7 +426,7 @@ label casual_FA_get_a_drink_label(the_person):
         the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves."
         call advance_time from _call_advance_casual_FA_drink02
-        jump game_loop # talk event, advance time might trigger event, so we exit the talk event
+        return
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 2:
         "You can see [the_person.title] blush a bit as you approach her."

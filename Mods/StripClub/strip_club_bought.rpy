@@ -106,7 +106,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     $ add_strip_club_manager_reminder_action()
     call advance_time from _call_advance_time_club_bought_strippers_selection
     # since we are in a talk event with Gabrielle, we need to exit using a jump.
-    jump game_loop
+    return
 
 label strip_club_evaluate_stripper(the_person):
     $ mc.location.show_background()
