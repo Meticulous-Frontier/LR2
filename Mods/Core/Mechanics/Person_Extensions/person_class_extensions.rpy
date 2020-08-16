@@ -1468,3 +1468,59 @@ init -1 python:
     Person.set_sex_goal = set_sex_goal
     Person.get_sex_goal = get_sex_goal
     Person.reset_sex_goal = reset_sex_goal
+
+###########################################
+# Sex record wrappers                     #
+###########################################
+    def get_sex_record_handjobs(self):
+        return self.sex_record.get("Handjobs", 0)
+
+    def get_sex_record_blowjobs(self):
+        return self.sex_record.get("Blowjobs", 0)
+
+    def get_sex_record_cunnilingus(self):
+        return self.sex_record.get("Cunnilingus", 0)
+
+    def get_sex_record_tit_fucks(self):
+        return self.sex_record.get("Tit Fucks", 0)
+
+    def get_sex_record_vaginal_sex(self):
+        return self.sex_record.get("Vaginal Sex", 0)
+
+    def get_sex_record_anal_sex(self):
+        return self.sex_record.get("Anal Sex", 0)
+
+    def get_sex_record_facials(self):
+        return self.sex_record.get("Cum Facials", 0)
+
+    def get_sex_record_swallows(self):
+        return self.sex_record.get("Cum in Mouth", 0)
+
+    def get_sex_record_bodyshots(self):
+        return self.sex_record.get("Cum Covered", 0)
+
+    def get_sex_record_creampies(self):
+        return self.sex_record.get("Vaginal Creampies", 0)
+
+    def get_sex_record_anal_creampies(self):
+        return self.sex_record.get("Anal Creampies", 0)
+
+    def get_sex_record_fingered(self):
+        return self.sex_record.get("Fingered", 0)
+
+    def get_sex_record_kissing(self):
+        return self.sex_record.get("Kissing", 0)
+
+    Person.get_sex_record_handjobs = get_sex_record_handjobs
+    Person.get_sex_record_blowjobs = get_sex_record_blowjobs
+    Person.get_sex_record_cunnilingus = get_sex_record_cunnilingus
+    Person.get_sex_record_tit_fucks = get_sex_record_tit_fucks
+    Person.get_sex_record_vaginal_sex = get_sex_record_vaginal_sex
+    Person.get_sex_record_anal_sex = get_sex_record_anal_sex
+    Person.get_sex_record_facials = get_sex_record_facials
+    Person.get_sex_record_swallows = get_sex_record_swallows
+    Person.get_sex_record_bodyshots = get_sex_record_bodyshots
+    Person.get_sex_record_creampies = get_sex_record_creampies
+    Person.get_sex_record_anal_creampies = get_sex_record_anal_creampies
+    Person.get_sex_record_fingered = get_sex_record_fingered
+    Person.get_sex_record_kissing = get_sex_record_kissing
