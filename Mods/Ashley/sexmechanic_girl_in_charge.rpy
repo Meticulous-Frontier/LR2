@@ -1,5 +1,5 @@
 #GLOBAL TODO before releasing this mechanic into the wild
-#Need atleast three positions that qualify for each sex goal for variety.
+#Need at least three positions that qualify for each sex goal for variety.
 #Add new personality dialogue.
 #Add dialogue based on sex goals
 #Control where MC finishes based on sex goals to have a better chance of meeting the goal.
@@ -143,7 +143,7 @@ init 2:
             if the_person.love < 0:
                 for goal in list_of_selfish_dom_sex_goals:
                     dom_sex_goal_weighted_list.append ([goal,-the_person.love])
-            else: #Always have atleast one option in the list
+            else: #Always have at least one option in the list
                 dom_sex_goal_weighted_list.append(["get mc off", 30])
 
             #Next, we add individual goals based on her sluttiness. #TODO consider a list of constants declared at the top that can be changed for setting sluttiness threshholds for these.
@@ -301,7 +301,7 @@ init 2:
             if the_position != None:
                 if not the_position.check_clothing(the_person):
                     return False
-                if the_person.energy < the_position.girl_energy * 2:  #Enough for atleast 2 more rounds
+                if the_person.energy < the_position.girl_energy * 2:  #Enough for at least 2 more rounds
                     return False
 
                 if mc.energy < the_position.guy_energy * 2:
@@ -479,7 +479,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Beg her to continue":
                     mc.name "Oh god, please keep going. I'm so close, just a little bit farther!"
                     "She laughs at your plight while she considers what to do."
-                    if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continueing
+                    if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continuing
                         the_person.char "Hmm, I guess it's only fair. Maybe I'll even finish again!"
                         $ the_person.change_stats(obedience = -5, slut_temp = 5)
                         call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
@@ -494,7 +494,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         elif sex_can_continue(the_person) and the_person.love > 50: #She loves you, so she leaves it up to you if you want to keep going.
             "As she finishes up, [the_person.title] cuddles up beside you."
             the_person.char "Mmm, thank you. I needed that really bad."
-            "She paues for a moment."
+            "She pauses for a moment."
             the_person.char "Are you good? Or do you want to keep going?"
             menu:
                 "Take over":
