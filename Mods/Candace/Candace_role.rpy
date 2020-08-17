@@ -17,26 +17,20 @@ init 2 python:
                 if not candace_can_talk():
                     return "Wait a few days"
                 return True
-            else:
-                return False
         return False
 
     def candace_convince_to_quit_requirement(person):
-        if candace_get_can_convince_to_quit():
-            if ophelia_get_will_help_candace():
-                if mc.business.max_employee_count == mc.business.get_employee_count():
-                    return "You have too many employees!"
-                else:
-                    if candace_get_has_quit_job():
-                        pass
-                    else:
-                        return True
+        if candace_get_can_convince_to_quit() and ophelia_get_will_help_candace():
+            if mc.business.max_employee_count == mc.business.get_employee_count():
+                return "At employee limit."
+            if not candace_get_has_quit_job():
+                return True
         return False
 
     def candace_goes_clothes_shopping_requirement(person):
-        if candace_get_hire_date() == -1:
+        if candace_get_hire_date() == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
-        if day > candace_get_hire_date() + 7:  #She's been working atleast a week.
+        if day > candace_get_hire_date() + 7:  #She's been working at least a week.
             if mc.business.funds > 500 and candace.location() is candace.work:
                 return True
         return False
