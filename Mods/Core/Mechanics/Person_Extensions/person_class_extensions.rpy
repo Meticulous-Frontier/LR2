@@ -412,7 +412,7 @@ init -1 python:
 
         if renpy.random.randint(0,100) < 60:
             if self.has_role(pregnant_role):
-                body.type = self.event_triggers_dict.get("pre_preg_body", None)
+                body_type = self.event_triggers_dict.get("pre_preg_body", None)
             else:
                 body_type = self.body_type
         else:
