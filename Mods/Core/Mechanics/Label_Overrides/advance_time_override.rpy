@@ -301,6 +301,8 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         call advance_time from _call_advance_time_advance_time_enhanced
     if no_events or not jump_to_game_loop:
         return
+    
+    $ renpy.pop_call()  
     jump game_loop
 
 label advance_time_bankrupt_check_label():
