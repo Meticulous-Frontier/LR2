@@ -1310,7 +1310,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "As you get close behind her, you put your hands on her hips. She reaches back and grasps your cock, and begins to guide it toward her bottom."
     "When you cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
     $ mc.change_arousal(10)
-    "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with wonderful pop. With more gentle pressure you are soon deep inside her bowel."
+    "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with a wonderful pop. With more gentle pressure you are soon deep inside her bowel."
     the_person.char "Mmm... as you can see... I'm able to completely relax with my ass off the back of the swing, so I can just sit and enjoy the sensations."
     "You give her a modest thrust. The swing bounces forward for a second, but gravity soon causes her ass to pendulum back and smack against your hip."
     "The feeling is exquisite. You grab her hips and get ready to fuck [the_person.possessive_title]'s brains out."
