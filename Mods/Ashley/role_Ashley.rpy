@@ -607,7 +607,7 @@ label ashley_ask_about_porn_label(the_person):
     "She gets up and walks around your desk. You stand up too."
     the_person.char "It's okay. I'm going to. You just enjoy."
     "With nothing else to say, [the_person.possessive_title] reaches down and begins to stroke your cock through your pants."
-    the_person.char "Mmmm, I can tell you want to too!"
+    the_person.char "Mmmm, I can tell you want it too!"
     "[the_person.title] has some skilled hands... You close your eyes and enjoy her stroking you for a moment."
     $ mc.change_arousal(10)
     "You hear a zipper some fabric rustle for a moment, then suddenly feel her warm hand on your dick, skin to skin. You look down and see her pulling your dick out."
@@ -629,7 +629,7 @@ label ashley_ask_about_porn_label(the_person):
         "You stand there with your eyes closed, slowly recovering. When you open them, you survey the mess you made."
     else:
         "You haven't finished, but [the_person.title] is still standing there with your dick in her hand."
-    "Suddenly you here your office doorknob click and the door start to open. You forgot to lock it!!!"
+    "Suddenly you hear your office doorknob click and the door start to open. You forgot to lock it!!!"
     $ scene_manager.add_actor(stephanie, character_placement = character_left_flipped)
     stephanie.char "Hey [stephanie.mc_title] sorry to bug you but... oh fuck!"
     "It doesn't take [stephanie.title] long to survey the situation."
