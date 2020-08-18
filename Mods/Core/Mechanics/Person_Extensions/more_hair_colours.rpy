@@ -19,3 +19,8 @@ init -1 python:
     list_of_hairs.append(["saturated" , [0.905, 0.898, 0.513,1]])
     list_of_hairs.append(["emerald" , [0.098, 0.721, 0.541,1]])
     list_of_hairs.append(["light brown", [0.652, 0.520, 0.414,1]])
+    list_of_hairs.append(["bleached blonde", [0.859, 0.812, 0.733,1]])
+    list_of_hairs.append(["chestnut brown", [0.414, 0.305, 0.258,1]])
+    list_of_hairs.append(["barn red", [0.484, 0.039, 0.008,1]])
+    list_of_hairs.append(["dark auburn", [0.367, 0.031, 0.031,1]])
+    list_of_hairs.append(["toasted wheat", [0.848, 0.75, 0.469,1]])
