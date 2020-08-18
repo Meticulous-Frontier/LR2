@@ -13,6 +13,9 @@ init 1310 python:
         requirement = sell_research_policy_requirement,
     )
 
+    # Policy will not become active when bought (requires user action)
+    sell_research_policy.enabled_on_buy = False
+
     serum_policies_list.append(sell_research_policy)
 
     # extend the default business research_progress function
