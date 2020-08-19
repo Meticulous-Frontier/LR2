@@ -151,7 +151,7 @@ label candace_meet_at_office_store_label(the_person):
 
 label candace_get_to_know_label(the_person):
     if the_person.happiness > 80: #Cap her happiness until we set her free.
-        $the_person.happiness = 75
+        $ the_person.happiness = 80
     if candace_get_learned_about_unhappy():  #We have already learned she is unhappy, so learn more about why.
         "You consider what to talk to her about."
         menu:
@@ -214,7 +214,8 @@ label candace_get_to_know_label(the_person):
         "Maybe you could convince her to work for you? She seems to have quite the knack for maintaining office supplies... maybe she would have a similar skill for medical and chemical supplies?"
 
     $ candace.event_triggers_dict["last_talk_day"] = day # prevent talk spamming (at least two days need to pass before you can plant the next seed)
-    return "Advance Time"
+    call advance_time from _call_advance_time_candace_get_to_know_label
+    return
 
 label candace_talk_about_bf_control(the_person):
     if candace_get_learned_about_bf_control():
