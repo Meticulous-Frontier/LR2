@@ -4,9 +4,9 @@ init -1 python:
 init 3 python:
     def biotech_clone_person_requirement():
         if time_of_day == 4:
-            return "Too late."
+            return "Too late"
         elif not dungeon.visible:
-            return "Dungeon required."
+            return "Dungeon required"
         return True
 
     biotech_clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", biotech_clone_person_requirement, "biotech_clone_person",

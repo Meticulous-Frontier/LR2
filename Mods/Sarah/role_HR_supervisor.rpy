@@ -136,7 +136,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
             return False
         if mc.business.funds < 500:
-            return "Requires $500"
+            return "Requires: $500"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -149,7 +149,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) <= 1:
             return False
         if mc.business.funds < 1500:
-            return "Requires $1500"
+            return "Requires: $1,500"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -178,7 +178,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) != 3:
             return False
         if mc.business.funds < 5000:
-            return "Requires $5000"
+            return "Requires: $5,000"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():

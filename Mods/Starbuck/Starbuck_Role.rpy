@@ -86,7 +86,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $500"
         return False
 
 
@@ -96,7 +96,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $800"
         return False
 
     def starbuck_foreplay_skillup_requirement(the_person):
@@ -105,7 +105,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $100"
         return False
 
     def starbuck_oral_skillup_requirement(the_person):
@@ -114,7 +114,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $250"
         return False
 
     def starbuck_arousal_reduction_one_requirement(the_person):
@@ -123,7 +123,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money"
+                return "Requires: $500"
         return False
 
     def starbuck_arousal_reduction_two_requirement(the_person):
@@ -132,7 +132,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money"
+                return "Requires: $5,000"
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
@@ -140,7 +140,7 @@ init -1 python:
             if mc.business.funds >= 1000:
                 return True
             else:
-                return "You need more money"
+                return "Requires: $1,00"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
         if the_person.shop_progress_stage == 1:
@@ -148,7 +148,7 @@ init -1 python:
                 if mc.business.funds >= 5000:
                     return True
                 else:
-                    return "You need more money"
+                    return "Requires: $5,000"
             else:
                 return "Wait for her stock to balance out"
 
@@ -158,7 +158,7 @@ init -1 python:
                 if mc.business.funds >= 15000:
                     return True
                 else:
-                    return "You need more money"
+                    return "Requires: $15,000"
             else:
                 return "Wait for her stock to balance out"
 
@@ -181,9 +181,9 @@ init -1 python:
                     if starbuck.love > 50:
                         return True
                     else:
-                        return "Requires 50 Love"
+                        return "Requires: 50+ Love"
                 else:
-                    return "Requires 60 sluttiness"
+                    return "Requires: 60+ sluttiness"
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
@@ -193,9 +193,9 @@ init -1 python:
                     if starbuck.love > 60:
                         return True
                     else:
-                        return "Requires 60 Love"
+                        return "Requires: 60+ Love"
                 else:
-                    return "Requires 70 sluttiness"
+                    return "Requires: 70+ sluttiness"
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
@@ -205,15 +205,15 @@ init -1 python:
                     if starbuck.love > 70:
                         return True
                     else:
-                        return "Requires 70 Love"
+                        return "Requires: 70+ Love"
                 else:
-                    return "Requires 90 sluttiness"
+                    return "Requires: 90+ sluttiness"
         return False
 
     def starbuck_spend_the_night_requirement(the_person):
         if the_person.shop_investment_rate == 6.0:
             if time_of_day < 4:
-                return "It isn't night"
+                return "Only at night"
             else:
                 return True
 

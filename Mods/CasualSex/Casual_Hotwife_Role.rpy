@@ -99,7 +99,7 @@ init -2 python:
             if mc.location == person.home:
                 return True
             else:
-                return "Only at her place."
+                return "Only at her place"
         return False
 
     def casual_hotwife_ghost_requirement():

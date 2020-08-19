@@ -15,14 +15,14 @@ init 2 python:
         if person.location() is office_store:
             if not candace_get_has_quit_job():
                 if not candace_can_talk():
-                    return "Wait a few days"
+                    return "Already talked today"
                 return True
         return False
 
     def candace_convince_to_quit_requirement(person):
         if candace_get_can_convince_to_quit() and ophelia_get_will_help_candace():
             if mc.business.max_employee_count == mc.business.get_employee_count():
-                return "At employee limit."
+                return "At employee limit"
             if not candace_get_has_quit_job():
                 return True
         return False

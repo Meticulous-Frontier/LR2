@@ -7,7 +7,7 @@ init 2 python:
         if not person.home is dungeon:
             return False
         if mc.business.funds < 25000:
-            return "Insufficient funds."
+            return "Requires: $25,000"
         return person.home is dungeon
 
     # Clone Recall - Brings the clone back to base

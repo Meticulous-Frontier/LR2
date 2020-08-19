@@ -127,9 +127,9 @@ init 5 python:
     def allow_promote_to_manager_requirement(person):
         if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
             if person.age < 25:
-                return "Requires: Age >= 25"
+                return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:
-                return "Requires: intelligence >=4 and charisma >= 5"
+                return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:

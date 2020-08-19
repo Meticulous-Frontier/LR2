@@ -31,16 +31,16 @@ init 2 python: # Declare variables to use
      # Note that the class Room have a bunch of useful variables already for restricting access, adding objects etc.
     def salon_requirement():
         if day%7 == 6: # Can be removed
-            return "Closed on Sundays."
+            return "Closed on Sundays"
 
         elif time_of_day == 0:
-            return "Opens in the morning."
+            return "Opens in the morning"
 
         elif time_of_day == 4: # Can be removed
-            return "Closed for the night."
+            return "Closed for the night"
 
         elif mc.business.funds < salon_total_cost: # $60 for hair cut, $30 for dye. You wont be spending your last money on haircuts.
-            return "Requires $[salon_total_cost]."
+            return "Requires $[salon_total_cost]"
         else:
             return True
 

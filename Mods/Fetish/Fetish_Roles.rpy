@@ -13,8 +13,8 @@ init -1 python:
                 if mc.energy > 30:
                     return True
                 else:
-                    return "You're too tired for sex."
-            return "You aren't in the kitchen."
+                    return "You're too tired for sex"
+            return "You aren't in the kitchen"
         return
 
     def SB_fetish_anal_mom_kitchen_requirement(person):
@@ -23,8 +23,8 @@ init -1 python:
                 if mc.energy > 30:
                     return True
                 else:
-                    return "You're too tired for sex."
-            return "You aren't in the kitchen."
+                    return "You're too tired for sex"
+            return "You aren't in the kitchen"
         return
 
     def SB_lily_anal_in_room_requirement(person): #She'll only strip if you're in her bedroom and alone.

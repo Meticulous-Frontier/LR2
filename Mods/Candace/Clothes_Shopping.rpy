@@ -9,11 +9,11 @@ init 2 python:
         if not candace_get_has_gone_clothes_shopping():
             return False
         if time_of_day == 0:
-            return "Opens in the morning."
+            return "Opens in the morning"
         elif time_of_day == 4: # Can be removed
-            return "Closed for the night."
+            return "Closed for the night"
         elif mc.business.funds < 500:
-            return "Requires $500."
+            return "Requires $500"
         else:
             return True
 

@@ -43,7 +43,7 @@ init -2 python: #Requirement Declarations#
         if person.event_triggers_dict.get("FA_sex_discussion_text_enable", 0) == 1:
             return False
         if mc.charisma + mc.market_skill < 3:   #Average 1.5 skills
-            return "Charisma / Marketing skill too low."
+            return "Charisma / Marketing skill too low"
         return True
 
     def casual_FA_get_out_of_here_requirement(person):
@@ -51,7 +51,7 @@ init -2 python: #Requirement Declarations#
             if person.event_triggers_dict.get("FA_one_night_avail", 0) == 1:
                 return True
             if mc.charisma + mc.market_skill < 6:   #Average 3 skills
-                return "Charisma / Marketing skill too low."
+                return "Charisma / Marketing skill too low"
             if person.sluttiness < 25:
                 return "Requires more sluttiness"
         return False
@@ -64,7 +64,7 @@ init -2 python: #Requirement Declarations#
     def casual_FA_my_place_requirement(person):
         if person.event_triggers_dict.get("FA_progress", 0) == 2:
             if mc.charisma + mc.market_skill < 9:   #Average 4.5 skills
-                return "Charisma / Marketing skill too low."
+                return "Charisma / Marketing skill too low"
             if person.sluttiness < 40:
                 return "Requires more sluttiness"
             return True
