@@ -82,6 +82,7 @@ label employee_find_out_home_location_label(the_person):
     the_person.char "Any time [the_person.mc_title], I really enjoyed our little parley."
 
     $ clear_scene()
+    $ jump_game_loop()    
     return
 
 label activate_employee_role_enhancement(stack):

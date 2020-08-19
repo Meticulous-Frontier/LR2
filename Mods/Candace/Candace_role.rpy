@@ -467,7 +467,9 @@ label candace_convince_to_quit_label(the_person):
     # she has quit her job, give her a new wardrobe
     $ rebuild_wardrobe(candace)
     $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
-    return "Advance Time"
+    call advance_time from _call_advance_time_candace_convince_to_quit_label
+    return
+
 #Character variable wrappers
 init 3 python:
     def candace_get_day_met():

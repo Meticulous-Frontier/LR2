@@ -47,6 +47,12 @@ init -1 python:
             return mandatory_vibe_policy.is_active()
         return False
 
+    def jump_game_loop():
+        # make sure we empty the call stack before jumping to main loop
+        while renpy.call_stack_depth() > 1:
+            renpy.pop_call()
+        renpy.jump("game_loop")
+
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
@@ -302,8 +308,8 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
     if no_events or not jump_to_game_loop:
         return
     
-    $ renpy.pop_call()  
-    jump game_loop
+    $ jump_game_loop()
+    return
 
 label advance_time_bankrupt_check_label():
     python:
