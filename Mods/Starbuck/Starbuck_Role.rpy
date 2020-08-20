@@ -1655,7 +1655,9 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     else:
         mc.name "It's no problem. Take care!"
         "You say goodbye to [the_person.title] and head out."
+        call advance_time from _call_advance_time_starbuck_close_up_label_1
         return
+
     menu: #This menu is just to weed out if we don't want to have fun
         "Have some fun with her":
             pass
@@ -1664,6 +1666,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             "You can tell she is a little disappointed, but soon she is stretching and yawning."
             the_person.char "You know what?... I'm pretty tired too. Good night [the_person.mc_title]."
             "She walks you to the door of the business and you walk out together, before going your separate ways."
+            call advance_time from _call_advance_time_starbuck_close_up_label_2
             return
     mc.name "I can definitely think of something."
     the_person.char "Oh yeah? I hope its the same thing I'm thinking..."
@@ -1690,7 +1693,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     "She walks you to the door of the business and you walk out together, before going your separate ways."
 
     # time goes forward and exit the talk menu by jumping to game loop
-    call advance_time from _call_advance_time_starbuck_close_up_label
+    call advance_time from _call_advance_time_starbuck_close_up_label_3
     return
 
 #SBS140
