@@ -69,12 +69,10 @@ label give_panties_label(the_person):
         $ removed_something = True
     else:
         "[the_person.possessive_title] takes a quick look around and pulls off her panties, placing them in your hand."
-        the_person.char "Is this what you were looking for?"
 
     python:
         # remove panties from outfit
         test_outfit.remove_clothing(the_item)
-
         # put on outfit without panties
         the_person.apply_outfit(test_outfit)
         the_person.draw_person()
@@ -83,4 +81,6 @@ label give_panties_label(the_person):
 
     if removed_something:
         "She quickly puts her clothes back on."
+    else:
+        the_person.char "Is this what you were looking for?"
     return
