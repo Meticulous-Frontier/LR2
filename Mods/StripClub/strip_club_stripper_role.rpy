@@ -112,7 +112,9 @@ init 5 python:
         return True
 
     def strip_club_review_requirement(person):
-        if is_strip_club_stripper_requirement(person):
+        if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
+            if not mc.location in [strip_club, bdsm_room]:
+                return "Only in [strip_club.formalName]"
             if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
                 return "Too recently promoted"
             if day - person.event_triggers_dict.get("day_last_performance_review", -7) < 7:
