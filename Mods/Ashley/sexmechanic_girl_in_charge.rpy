@@ -503,6 +503,33 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person.char "Okay."
+        elif the_person.stamina < 50 and mc.arousal > 70 and the_person.stamina > 20 and mc.energy > 30: #She's exhausted and can't defend herself briefly from your advances.
+            "You get up, but notice that [the_person.title] is a bit slower. She is breathing heavily and appears to be really worn out."
+            the_person.char "Oh god... just give me a minute, okay?"
+            $ the_person.draw_person(position = "doggy")
+            "She gets on her hands and knees and is obviously worn out. Her current position leaves her ass obviously exposed. You give your rock hard cock a couple strokes and consider taking advantage."
+            "She doesn't have the energy to stop you, but if she doesn't like you she might get pretty upset..."
+            menu:
+                "Fuck her":
+                    "You get behind her. You line yourself up with her cunt."
+                    the_person.char "Hey... [the_perosn.mc_title]... what are you doing?"
+                    mc.name "Shhh, quiet."
+                    "With one smooth motion you push yourself inside of her."
+                    if the_person.effective_sluttiness() > 100:
+                        the_person.char "Ohhh god. Go ahead and take what you want, I'll just be along for the ride."
+                    elif the_person.effective_sluttiness() > 60:
+                        the_person.char "Ohhhhhh. I'm not sure how long I can do this but if you need to finish that bad go ahead..."
+                    else:
+                        the_person.char "What the fuck? Are you kidding me?"
+                        "You give her ass a sharp spank."
+                        mc.name "Quiet. I'm close to cumming, this will only take a minute."
+                        $ the_person.add_situational_obedience("finish_him",40,"Whatever, just hurry up and finish.")
+                        $ the_person.change_stats(happiness = -5, love = -5)
+                    call fuck_person(the_person,start_position = doggy, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_05
+                    $ the_person.clear_situational_obedience("finish_him")
+                "Finish":
+                    "You decide to leave her be."
+
 
     python:
         clear_sex_modifiers(the_person)
