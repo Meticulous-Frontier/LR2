@@ -107,7 +107,7 @@ init 5 python:
             return False
         if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
-        if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 7:
+        if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 3:
             return "Asked too recently"
         return True
 
