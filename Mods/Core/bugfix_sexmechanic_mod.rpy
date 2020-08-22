@@ -105,18 +105,18 @@ init 5 python:
         elif person.relationship == "Girlfriend":
             if person.get_opinion_score("cheating on men") > 0:
                 person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 5, "I'm cheating on my boyfriend!")
-            else:
-                person.add_situational_slut("cheating", -5 + (person.get_opinion_score("cheating on men") * -10), "I can't cheat on my boyfriend!")
+            elif person.get_opinion_score("cheating on men") < 0:
+                person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 10, "I can't cheat on my boyfriend!")
         elif person.relationship == "Fiancée":
             if person.get_opinion_score("cheating on men") > 0:
                 person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 8, "I'm cheating on my fiancé!")
-            else:
-                person.add_situational_slut("cheating", -15 + (person.get_opinion_score("cheating on men") * -15), "I could never cheat on my fiancé!")
+            elif person.get_opinion_score("cheating on men") < 0:
+                person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 15, "I could never cheat on my fiancé!")
         elif person.relationship == "Married":
             if person.get_opinion_score("cheating on men") > 0:
                 person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 10, "I'm cheating on my husband!")
-            else:
-                person.add_situational_slut("cheating", -20 + (person.get_opinion_score("cheating on men") * -20), "I could never cheat on my husband!")
+            elif person.get_opinion_score("cheating on men") < 0:
+                person.add_situational_slut("cheating", person.get_opinion_score("cheating on men") * 20, "I could never cheat on my husband!")
 
         #Privacy modifiers
         if not private:
