@@ -176,7 +176,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
                 "You tighten your grip on her hips and fuck her faster."
             "You fuck her a little faster for a while then settle back down to a slower, more sustainable rhythm."
         "Spank her ass":
-            "You take a hand off of [the_girl_1.title]'s hips and squeeze her ass cheeks with it. When she gives a yelp in response you give her a hard slap."
+            "You take a hand off of [the_girl_2.title]'s hips and squeeze her ass cheeks with it. When she gives a yelp in response you give her a hard slap."
             the_girl_1.char "Oh! She's been a bad girl [the_girl_1.mc_title]. Give her a good spanking!"
             if the_girl_2.get_opinion_score("being submissive") > 0: #She likes it
                 "[the_girl_2.possessive_title] leans forward a little farther, making sure her ass is as high as she can get it."

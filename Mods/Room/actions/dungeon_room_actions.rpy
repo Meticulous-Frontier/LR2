@@ -41,8 +41,8 @@ label dungeon_intro_label():
     "By yourself on the weekend at work, you are taking a moment to relax. Suddenly you are struck by a brilliant idea..."
     "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires."
     "You pick up the phone and make a call."
-    mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], i need some construction work done at my house."
-    "You go over the details with the constructor and agree on a price of $10,000 for converting your existing cellar into a dungeon, fully soundproof of course."
+    mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
+    "You go over the details with the constructor and agree on a price of $10,000 for converting your existing cellar into a dungeon, fully soundproofed of course."
     $ mc.business.change_funds(-10000)
     $ add_dungeon_completed_action()
     return

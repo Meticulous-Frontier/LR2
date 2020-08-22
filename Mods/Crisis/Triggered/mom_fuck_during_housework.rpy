@@ -32,7 +32,7 @@ label mom_fuck_during_housework_label(the_person):
     the_person.char "Hi [the_person.mc_title], I hope you've had a great day. Dinner should be ready soon!"
     "She turns back, wiggling her butt as she works. Her ass is supple. You are tempted to do something with it while she works..."
     menu:
-        "Spank her{size=18}May increase submissiveness": #chance to increase her submissiveness based on if she orgasms and if she is currently suggestable.
+        "Spank her\n{color=#ffff00}{size=18}May increase submissiveness{/size}{/color}": #chance to increase her submissiveness based on if she orgasms and if she is currently suggestible.
             $ ass_desc = spanking_get_ass_description(the_person)
             "The swaying of [the_person.title]'s ass is hypnotic. It is [ass_desc]."
             mc.name "I don't mind you dressing like this, [the_person.title], but it is kind of naughty."
@@ -41,12 +41,12 @@ label mom_fuck_during_housework_label(the_person):
             call fuck_person(the_person, start_position = spanking) from _spank_mommy_during_housework_01
             $ the_report = _return
             if the_person.get_opinion_score("being submissive") < 2:
-                if renpy.random.randint(0,100)< ( the_report.get("girl orgasms", 0) + the_person.suggestibility):  #Odds for improvement are 10% per orgasm plus suggestability.
+                if renpy.random.randint(0,100)< (the_report.get("girl orgasms", 0) * 10) + the_person.suggestibility:  #Odds for improvement are 10% per orgasm plus suggestibility.
                     the_person.char "Oh... it good to know I have a son who will discipline me if I get too naughty!"
                     $ the_person.increase_opinion_score("being submissive")
             elif not the_person.can_be_spanked():
                 $ the_person.unlock_spanking()
-                the_person.char "Oh god honey, it's amazing knowing I have such a good son, who keeps her naughty mother in line!"
+                the_person.char "Oh god honey, it's amazing knowing I have such a good son, who keeps his naughty mother in line!"
                 "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
             "It takes [the_person.possessive_title] a few moments, but she gets back to work, making dinner for the family."
         #TODO fuck her branch

@@ -87,7 +87,9 @@ init 2 python:
         menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True, crisis_weight = SB_working_weekend_crisis_weight)
 
 label SB_working_weekend_crisis_label():
-    $ person_one = get_random_employees(1)    
+    $ person_one = get_random_employees(1)
+    if person_one == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't give sarah during epic tits weekend
+        return
 
     if person_one is None:
         return
@@ -128,9 +130,9 @@ label SB_working_weekend_crisis_label_high(person_one):
             person_one.char "I can do that, [person_one.mc_title]... I hope you like the show!"
             $ person_one.change_slut_temp(5)
             call SB_free_strip_scene(person_one) from _SB_free_strip_scene_3
-           
+
             $ person_two = get_random_employees(1)
-            if person_one is person_two or person_two.sluttiness < 70:
+            if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1):
                 "You're pretty sure she's ready for next step if you are ready."
                 menu:
                     "Fuck her on your desk":
@@ -197,7 +199,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 $ person_one.apply_planned_outfit()
                 $ scene_manager.update_actor(person_one, position = "stand3")
                 "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
-               
+
             $ del person_two
 
         "Just Talk":

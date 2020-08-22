@@ -40,6 +40,7 @@ init 2 python:
         cs.scope["body_options"] = False
         cs.scope["breast_options"] = False
         cs.scope["hair_style_options"] = False
+        cs.scope["hair_colour_options"] = False
         cs.scope["pubes_options"] = False
         cs.scope["pubes_color_options"] = False
         cs.scope["font_color_options"] = False
@@ -74,6 +75,7 @@ screen cheat_menu():
     default body_options = False
     default breast_options = False
     default hair_style_options = False
+    default hair_colour_options = False
     default pubes_options = False
     default pubes_color_options = False
     default font_color_options = False
@@ -150,6 +152,7 @@ screen cheat_menu():
     default available_body_types = list_of_body_types
     default available_breast_sizes = [x[0] for x in list_of_tits]
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
+    default available_hair_colours = sorted(list_of_hairs, key = lambda x: x[0])
     default available_pubes_styles = sorted(pube_styles, key = lambda x: x.name)
 
     default list_of_bodies = [white_skin, tan_skin, black_skin] #Assemble the cloth items into a list. Revisit this later if a default list is created
@@ -563,6 +566,15 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("hair_style_options")]
 
+                        textbutton "Hair Colour":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if hair_colour_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("hair_colour_options")]
+
                         textbutton "Pubes Style":
                             style "textbutton_no_padding_highlight"
                             text_style "cheat_text_style"
@@ -720,6 +732,29 @@ screen cheat_menu():
                                                 SetField(editing_target,"hair_style", x),
                                                 Function(cheat_redraw_hair)
                                             ]
+
+                        if hair_colour_options:
+                            viewport:
+                                mousewheel True
+                                scrollbars "vertical"
+                                xsize 500
+
+                                vbox:
+                                    for x in available_hair_colours:
+                                        if hasattr(editing_target, "hair_colour"):
+                                            textbutton str(x[0]):
+                                                xfill True
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "cheat_text_style"
+
+                                                if editing_target.hair_colour[0] == x[0]:
+                                                    background "#4f7ad6"
+                                                    hover_background "#4f7ad6"
+
+                                                action [
+                                                    SetField(editing_target,"hair_colour", x),
+                                                    Function(cheat_redraw_hair)
+                                                ]
 
                         if pubes_options:
                             vbox:

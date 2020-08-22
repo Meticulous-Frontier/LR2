@@ -60,7 +60,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object):
     #  "taking control"
 
 label scene_SB_facing_wall_1(the_girl, the_location, the_object):
-    "You grab [the_girl.possessive_title] hips an begin trusting eagerly. You hips slap against her ass in lewd smacking noises as you fuck her."
+    "You grab [the_girl.possessive_title]'s hips and begin thrusting eagerly. Your hips slap against her ass in lewd smacking noises as you fuck her."
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced, option to dominate her a bit
         "[the_girl.possessive_title] is getting overwhelmed by the sensation. She is clearly enjoying your fucking but is having a hard time keeping up."
@@ -373,7 +373,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
             #"Neutral answer":
             #    "Neutral stuff"
     else:    #She is better at vaginal sex than MC
-        "The soft, velet flesh of [the_girl.possessive_title]'s cunt is bliss around your dick. It is almost overwhelming how tight she is."
+        "The soft, velvet flesh of [the_girl.possessive_title]'s cunt is bliss around your dick. It is almost overwhelming how tight she is."
         the_girl.char "[the_girl.mc_title], let me work it for a minute... I promise you won't be disappointed!"
         "You give her a couple quick thrusts while you consider it. You're sure with how skilled she is, that whatever she has in mind is probably very pleasurable..."
         menu:

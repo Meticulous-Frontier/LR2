@@ -68,7 +68,7 @@ init 5 python:
                 tuple_list.append([position.title(), position])
         tuple_list.append(["Surprise me", "any"])
 
-        return renpy.display_menu(tuple_list,True,"Choice") 
+        return renpy.display_menu(tuple_list,True,"Choice")
 
     def create_HR_review_topic_list(the_person):
         topic_list = ["working"]
@@ -136,7 +136,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
             return False
         if mc.business.funds < 500:
-            return "Requires $500"
+            return "Requires: $500"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -149,7 +149,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) <= 1:
             return False
         if mc.business.funds < 1500:
-            return "Requires $1500"
+            return "Requires: $1,500"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -178,7 +178,7 @@ init 5 python:
         if get_HR_director_tag("business_HR_serum_tier", 0) != 3:
             return False
         if mc.business.funds < 5000:
-            return "Requires $5000"
+            return "Requires: $5,000"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -414,7 +414,7 @@ label HR_director_initial_hire_label(the_person):
             mc.business.remove_employee(the_person)
 
         mc.business.hire_person(the_person, "HR")
-        
+
         # assign special HR director role
         mc.business.hr_director.add_role(HR_director_role)
 
@@ -554,7 +554,7 @@ label HR_director_monday_meeting_label(the_person):
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 if _return:
                     $ set_HR_director_tag("business_HR_meeting_last_day", day)
-                $ scene_manager.update_actor(the_person, position = "sitting")                    
+                $ scene_manager.update_actor(the_person, position = "sitting")
             "Let's not this week":
                 $ del HR_employee_list
 
@@ -679,7 +679,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     $ scene_manager.update_actor(person_choice, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
-    # start threesome attempt when sluttiness is high enough and she doesn't hate threesomes 
+    # start threesome attempt when sluttiness is high enough and she doesn't hate threesomes
     # when HR Director is Sarah, also wait for threesome unlock event
     if (person_choice.sluttiness > 80 and the_person.sluttiness > 80
         and person_choice.get_opinion_score("threesomes") > -2
@@ -728,7 +728,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
 label HR_director_review_discoveries_label(the_person):
     # shorten the dialog when all research is reviewed
-    if not (get_HR_director_tag("business_HR_serum_tier", 0) >= 3 
+    if not (get_HR_director_tag("business_HR_serum_tier", 0) >= 3
         and (not the_person is sarah or get_HR_director_tag("business_HR_serum_breast", False) == True)):
 
         "[the_person.title] pulls out a report on all the latest achievements of the research department."
@@ -989,7 +989,7 @@ label HR_director_meeting_on_demand_label(the_person):
         the_person.char "I'd say that went pretty well! I'm going to head back to work, if that is okay with you, [the_person.mc_title]?"
     else:
         the_person.char "No problem, we can pick this up another time."
-    
+
     "You thank her for her help and excuse her. She gets up and leaves you to get back to work."
     $ scene_manager.clear_scene()
     call advance_time from hr_advance_time_one
@@ -1048,6 +1048,10 @@ label HR_director_sexy_meeting_start_label(the_person):
             "Eventually she cleans herself up and makes herself presentable again."
             $ the_person.apply_planned_outfit()
             return
+
+    if Sarah_unlock_special_tit_fuck_requirement() and the_person == sarah:
+        call Sarah_unlock_special_tit_fuck(the_person) from _new_sarah_titfuck_position
+        return
 
     if get_HR_director_unlock("missionary on desk") == False:
         if (the_person.sluttiness + the_person.get_opinion_score("vaginal sex") * 5) >= 60:
@@ -1147,7 +1151,10 @@ label HR_director_sexy_meeting_start_label(the_person):
         "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
-        call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
+        if the_person == sarah and sarah_get_special_titfuck_unlocked():
+            call fuck_person(the_person, start_position = sarah_tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_special_titfuck_1
+        else:
+            call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
 
     elif position_choice == "missionary on desk":
         if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
@@ -1530,7 +1537,7 @@ init 1200 python:
         if get_HR_director_tag("recruit_dept") == "HR":
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
-            recruit.focus -= other_stat           
+            recruit.focus -= other_stat
             recruit.opinions["HR work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "supply":
             recruit.focus = main_stat

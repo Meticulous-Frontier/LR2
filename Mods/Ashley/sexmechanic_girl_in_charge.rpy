@@ -1,5 +1,5 @@
 #GLOBAL TODO before releasing this mechanic into the wild
-#Need atleast three positions that qualify for each sex goal for variety.
+#Need at least three positions that qualify for each sex goal for variety.
 #Add new personality dialogue.
 #Add dialogue based on sex goals
 #Control where MC finishes based on sex goals to have a better chance of meeting the goal.
@@ -143,7 +143,7 @@ init 2:
             if the_person.love < 0:
                 for goal in list_of_selfish_dom_sex_goals:
                     dom_sex_goal_weighted_list.append ([goal,-the_person.love])
-            else: #Always have atleast one option in the list
+            else: #Always have at least one option in the list
                 dom_sex_goal_weighted_list.append(["get mc off", 30])
 
             #Next, we add individual goals based on her sluttiness. #TODO consider a list of constants declared at the top that can be changed for setting sluttiness threshholds for these.
@@ -294,6 +294,27 @@ init 2:
                 sex_path.append(final_node)
                 return sex_path
 
+        def get_sex_finish_req(the_goal):
+            if the_goal == "get off":
+                return dom_requirement_get_off
+            if the_goal =="waste cum":
+                return dom_requirement_waste_cum
+            if the_goal =="hate fuck":
+                return dom_requirement_hate_fuck
+            if the_goal =="vaginal creampie":
+                return dom_requirement_creampie
+            if the_goal =="anal creampie":
+                return dom_requirement_anal_creampie
+            if the_goal =="facial":
+                return dom_requirement_facial
+            if the_goal =="body shot":
+                return dom_requirement_body_shot
+            if the_goal =="get mc off":
+                return dom_requirement_get_mc_off
+            if the_goal =="oral creampie":
+                return dom_requirement_oral_creampie
+            return dom_requirement_get_mc_off
+
         def sex_can_continue(the_person, the_position = None, the_node = None): #Use this to check and see if girl would be up to continue the current position
             if the_node != None:
                 the_position = the_node.position
@@ -301,7 +322,7 @@ init 2:
             if the_position != None:
                 if not the_position.check_clothing(the_person):
                     return False
-                if the_person.energy < the_position.girl_energy * 2:  #Enough for atleast 2 more rounds
+                if the_person.energy < the_position.girl_energy * 2:  #Enough for at least 2 more rounds
                     return False
 
                 if mc.energy < the_position.guy_energy * 2:
@@ -333,8 +354,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
 
     if start_position != None and sex_path == None:
-        $ sex_path = [dom_sex_path_node(start_position, dom_requirement_get_mc_off)]  #If we have a start position only, we set the path to be the start position with MC getting off as the goal
-        $ the_goal = "get mc off"
+        if the_goal == None:
+            $ the_goal = "get mc off"
+        $ sex_path = [dom_sex_path_node(start_position, get_sex_finish_req(the_goal))]  #If we have a start position only, we set the path to be the start position with MC getting off as the goal
+
 
     if the_goal == None:
         $ the_goal = create_sex_goal(the_person, report_log)
@@ -355,7 +378,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
     elif object_choice == None:
         $ object_choice = girl_choose_object_enhanced(the_person, sex_path[0].position)
-        $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
+    $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
     #Next we mimic fuck_person() but only with applicable girl in charge parameters.
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private:
@@ -479,7 +502,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Beg her to continue":
                     mc.name "Oh god, please keep going. I'm so close, just a little bit farther!"
                     "She laughs at your plight while she considers what to do."
-                    if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continueing
+                    if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continuing
                         the_person.char "Hmm, I guess it's only fair. Maybe I'll even finish again!"
                         $ the_person.change_stats(obedience = -5, slut_temp = 5)
                         call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
@@ -494,7 +517,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         elif sex_can_continue(the_person) and the_person.love > 50: #She loves you, so she leaves it up to you if you want to keep going.
             "As she finishes up, [the_person.title] cuddles up beside you."
             the_person.char "Mmm, thank you. I needed that really bad."
-            "She paues for a moment."
+            "She pauses for a moment."
             the_person.char "Are you good? Or do you want to keep going?"
             menu:
                 "Take over":
@@ -503,6 +526,33 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person.char "Okay."
+        elif the_person.stamina < 50 and mc.arousal > 70 and the_person.stamina > 20 and mc.energy > 30: #She's exhausted and can't defend herself briefly from your advances.
+            "You get up, but notice that [the_person.title] is a bit slower. She is breathing heavily and appears to be really worn out."
+            the_person.char "Oh god... just give me a minute, okay?"
+            $ the_person.draw_person(position = "doggy")
+            "She gets on her hands and knees and is obviously worn out. Her current position leaves her ass obviously exposed. You give your rock hard cock a couple strokes and consider taking advantage."
+            "She doesn't have the energy to stop you, but if she doesn't like you she might get pretty upset..."
+            menu:
+                "Fuck her":
+                    "You get behind her. You line yourself up with her cunt."
+                    the_person.char "Hey... [the_perosn.mc_title]... what are you doing?"
+                    mc.name "Shhh, quiet."
+                    "With one smooth motion you push yourself inside of her."
+                    if the_person.effective_sluttiness() > 100:
+                        the_person.char "Ohhh god. Go ahead and take what you want, I'll just be along for the ride."
+                    elif the_person.effective_sluttiness() > 60:
+                        the_person.char "Ohhhhhh. I'm not sure how long I can do this but if you need to finish that bad go ahead..."
+                    else:
+                        the_person.char "What the fuck? Are you kidding me?"
+                        "You give her ass a sharp spank."
+                        mc.name "Quiet. I'm close to cumming, this will only take a minute."
+                        $ the_person.add_situational_obedience("finish_him",40,"Whatever, just hurry up and finish.")
+                        $ the_person.change_stats(happiness = -5, love = -5)
+                    call fuck_person(the_person,start_position = doggy, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_05
+                    $ the_person.clear_situational_obedience("finish_him")
+                "Finish":
+                    "You decide to leave her be."
+
 
     python:
         clear_sex_modifiers(the_person)

@@ -16,6 +16,7 @@
         associated_taboo = "anal_sex")
 
     list_of_girl_positions.append(SB_anal_cowgirl)
+    SB_anal_cowgirl.girl_outro = "GIC_outro_SB_anal_cowgirl"
 
 #init 1:
 #    python:
@@ -162,9 +163,10 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
     if mc.condom:
         the_girl.char "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
+        "Your cock erupts and begins filling the condom. She sighs when she feels the heat from it."
         the_girl.char "Ah... I hope the condom didn't break!"
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
-        "Your condom is full of your potent seed."
+        "The condom is full of your potent seed."
         if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
             $ the_girl.discover_opinion("drinking cum")
             "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -293,3 +295,74 @@ label taboo_break_SB_anal_cowgirl(the_girl, the_location, the_object):
         "She spits on your cock and tries again. This time making better progress, sliding the tip of your dick into her ass."
         the_girl.char "Oh god... Fuck!"
     return
+
+label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = None):
+    $ the_goal = the_girl.get_sex_goal()
+
+    #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
+    if the_goal == "hate fuck" or the_goal == "waste cum":
+        if mc.condom:
+            $ SB_anal_cowgirl.call_default_outro(the_girl, the_location, the_object)
+        "With each stroke of her hips [the_girl.possessive_title]'s impossibly tight ass brings you closer and closer to cumming. You're finally driven past the point of no return."
+        mc.name "Fuck, I'm going to cum!"
+        the_person.char "Thank god, I was about to hop off and just leave you hanging."
+        "She stops moving her hips."
+        the_person.char "Maybe I should do that anyway..."
+        "She starts to pull up off of you."
+        menu:
+            "Grab her hips":
+                mc.name "You'll get up when I tell you to."
+                "You grab [the_girl.possessive_title]'s hips and force her back down."
+                the_person.char "Hey, what the fuck!"
+                $ the_person.change_stats(obedience = 5, love = -3)
+                "You hold her in place as you cum into her tight ass. She squirms a little bit but she also gasps a bit."
+                $ the_girl.cum_in_ass()
+                $ SB_anal_cowgirl.redraw_scene(the_girl)
+                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto you chest."
+                the_person.char "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
+            "Beg her to finish inside":
+                mc.name "No! Stop! Please! I want to cum inside you so bad!"
+                "[the_person.title] smiles and stops, leaving just the tip of your cock in her puckered hole."
+                the_person.char "Oh, is that so? Is my ass so good, you want to defile it with your awful sperm?"
+                "You try to thrust your hips, but she backs off even further, leaving you too close to popping out."
+                mc.name "Oh fuck, just finish me off please!"
+                if the_goal == "hate fuck":
+                    the_person.char "Oh fuck it."
+                    "[the_person.possessive_title] drops her hips back down onto you, sheathing your cock in her tight asshole completely."
+                    "There's a hint of develish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
+                    "You finally erupt. She gasps as she feels the heat of it in her body."
+                    $ the_girl.cum_in_ass()
+                    $ SB_anal_cowgirl.redraw_scene(the_girl)
+                    "As soon as you finish she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto you chest."
+                else:
+                    the_person.char "I love to hear you beg, but not a chance."
+                    "She pulls of you completely and starts to stroke you with her hand. You groan but are immediately firing off your sperm into the air. It lands on your stomach, making a mess."
+                    "When you finish, she wipes her hand on your leg."
+                    the_person.char "All that wasted seed... oh well! Better luck next time!"
+
+
+    elif the_goal == "anal creampie":
+        if mc.condom:
+            the_person.char "Oh my god... hang on! I need to feel this!"
+            "She suddenly pops off you. You look down confused, but then see her pulling desperately at the condom, ripping it off."
+            "She quickly lines you up and sits back down on your cock, burying it deep in her ass."
+            $ mc.condom = False
+        "Instead of going up and down, she starts rocking her hips forward and back, milking your cock while keeping it buried deep."
+        the_person.char "Do it... I want to feel it deep!"
+        "Her words push you over the edge. You cock explodes deep inside her bowel. She moans a she feels her body filling up."
+        $ the_girl.change_obedience(3)
+        $ the_girl.cum_in_ass()
+        $ SB_anal_cowgirl.redraw_scene(the_girl)
+        "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slides off of your dick and collapses beside you."
+    elif the_goal = "body shot":
+        "[the_person.possessive_title] pulls off."
+        if mc.condom:
+            "She quickly reaches down and pulls off  your condom, throwing it to the side."
+        "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
+        the_girl.char "Cum for me [the_girl.mc_title], I want you to cum on me!"
+        "You tense up and cum, shooting your thick load up and onto [the_girl.possessive_title]'s stomach. She keeps grinding against your cock until you are completely spent."
+        $ the_girl.cum_on_stomach()
+        $ SB_anal_cowgirl.redraw_scene(the_girl)
+        "She rolls off and lies next to you on the [the_object.name]."
+    else:
+        $ SB_anal_cowgirl.call_default_outro(the_girl, the_location, the_object)

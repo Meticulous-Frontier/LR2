@@ -88,7 +88,7 @@ label serum_give_label_enhanced(the_person):
 
     elif _return == "slave":
         #Auto success
-        mc.name "[the_person.title], I'll help you becoming a good slave. Take this."
+        mc.name "[the_person.title], I'll help you to become a good slave. Take this."
         call give_serum(the_person) from _call_give_serum_enhanced_2
 
     elif _return == "ask":

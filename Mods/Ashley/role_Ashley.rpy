@@ -148,7 +148,7 @@ init -1 python:
         return False
 
     def ashley_mandatory_ask_about_porn_requirement():
-        if day > ashley_get_porn_convo_day():
+        if day > ashley_get_porn_convo_day() and ashley_get_concert_date_stage() >= 2:
             if time_of_day > 1:
                 if ashley.core_sluttiness >= 20:
                     return True
@@ -439,7 +439,7 @@ label ashley_classical_concert_date_label():
     the_person.char "Steph! We had a great time. The performers were amazing..."
     stephanie.char "And I assume you were a perfect gentleman?"
     "[stephanie.title] gives you a look. She smiles, but you can tell she is genuinely protective of [the_person.title]"
-    mc.name "Of course"
+    mc.name "As always, [stephanie.title]."
     the_person.char "He really was. Thanks again [the_person.mc_title]!"
     "It's late, so you all agree to part ways."
     mc.name "Alright, don't forget work tomorrow. I'll see you both then."
@@ -530,7 +530,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["porn_discussed"] = True
-    if ashley_get_concert_date_stage > 1:
+    if ashley_get_concert_date_stage() > 1:
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
     $ mc.business.mandatory_crises_list.append(ashley_mandatory_ask_about_porn)
     return
@@ -565,8 +565,8 @@ label ashley_ask_about_porn_label(the_person):
     "[the_person.title] smiles and blushes a bit. She is so shy, but so cute when she does that."
     mc.name "So, before I move on, I just want you to know that I want to support you and help you in any way that I can."
     "Her face changes to a look of confusion."
-    the_person.char "Help with that?"
-    mc.name "I'm sorry, this is difficult topic but... I was watching some pornography before I went to bed not long ago..."
+    the_person.char "Help with what?"
+    mc.name "I'm sorry, this is a difficult topic but... I was watching some pornography before I went to bed not long ago..."
     "The look on her face changes to pure horror."
     mc.name "I... was rather shocked to see a familiar face..."
     "She begins to stutter out a response."
@@ -589,7 +589,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person.char "Did... you know... you like it?"
     "Wow, the conversation appears to be turning quickly."
     mc.name "I did. You're very sexy."
-    "She gets a wide smile on my face."
+    "She gets a wide smile on her face."
     the_person.char "I'll admit it... I kind of like it... when guys let me take over a little bit..."
     $ the_person.discover_opinion("taking control")
     "Good to know for certain, but this was fairly obvious at this point."
@@ -600,13 +600,14 @@ label ashley_ask_about_porn_label(the_person):
     the_person.char "Oh, but I want to..."
     "She leans closer to you and whispers."
     the_person.char "I really want to... I want to make you feel good..."
+    $ mc.change_arousal(30)
     "DAMN. You feel your pants get a little tight after that. You remember from the video the way [the_person.title] took control and rode her ex..."
     mc.name "I mean, you don't have to do that..."
     $ scene_manager.update_actor(the_person, position = "stand4")
     "She gets up and walks around your desk. You stand up too."
     the_person.char "It's okay. I'm going to. You just enjoy."
     "With nothing else to say, [the_person.possessive_title] reaches down and begins to stroke your cock through your pants."
-    the_person.char "Mmmm, I can tell you want to too!"
+    the_person.char "Mmmm, I can tell you want it too!"
     "[the_person.title] has some skilled hands... You close your eyes and enjoy her stroking you for a moment."
     $ mc.change_arousal(10)
     "You hear a zipper some fabric rustle for a moment, then suddenly feel her warm hand on your dick, skin to skin. You look down and see her pulling your dick out."
@@ -628,7 +629,7 @@ label ashley_ask_about_porn_label(the_person):
         "You stand there with your eyes closed, slowly recovering. When you open them, you survey the mess you made."
     else:
         "You haven't finished, but [the_person.title] is still standing there with your dick in her hand."
-    "Suddenly you here your office doorknob click and the door start to open. You forgot to lock it!!!"
+    "Suddenly you hear your office doorknob click and the door start to open. You forgot to lock it!!!"
     $ scene_manager.add_actor(stephanie, character_placement = character_left_flipped)
     stephanie.char "Hey [stephanie.mc_title] sorry to bug you but... oh fuck!"
     "It doesn't take [stephanie.title] long to survey the situation."
@@ -642,6 +643,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person.char "I'm sorry [the_person.mc_title]. I have to go!"
     "[the_person.title] quickly rushes to leave. You've barely had time to process everything that just happened."
     mc.name "[the_person.title]..."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     the_person.char "Don't say anything... I just need to go..."
     $ scene_manager.remove_actor(the_person)
     "[the_person.possessive_title] quickly leaves the room."
@@ -651,7 +653,6 @@ label ashley_ask_about_porn_label(the_person):
 
     $ scene_manager.clear_scene()
     return
-
 
 
 #Python wrappers for Ashley's story progression.

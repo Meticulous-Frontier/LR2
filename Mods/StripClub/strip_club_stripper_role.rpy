@@ -107,12 +107,14 @@ init 5 python:
             return False
         if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
-        if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 7:
+        if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 3:
             return "Asked too recently"
         return True
 
     def strip_club_review_requirement(person):
-        if is_strip_club_stripper_requirement(person):
+        if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
+            if not mc.location in [strip_club, bdsm_room]:
+                return "Only in [strip_club.formalName]"
             if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
                 return "Too recently promoted"
             if day - person.event_triggers_dict.get("day_last_performance_review", -7) < 7:
@@ -127,9 +129,9 @@ init 5 python:
     def allow_promote_to_manager_requirement(person):
         if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
             if person.age < 25:
-                return "Requires: Age >= 25"
+                return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:
-                return "Requires: intelligence >=4 and charisma >= 5"
+                return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
             if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:

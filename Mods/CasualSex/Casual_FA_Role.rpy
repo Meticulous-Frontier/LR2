@@ -43,7 +43,7 @@ init -2 python: #Requirement Declarations#
         if person.event_triggers_dict.get("FA_sex_discussion_text_enable", 0) == 1:
             return False
         if mc.charisma + mc.market_skill < 3:   #Average 1.5 skills
-            return "Charisma / Marketing skill too low."
+            return "Charisma / Marketing skill too low"
         return True
 
     def casual_FA_get_out_of_here_requirement(person):
@@ -51,7 +51,7 @@ init -2 python: #Requirement Declarations#
             if person.event_triggers_dict.get("FA_one_night_avail", 0) == 1:
                 return True
             if mc.charisma + mc.market_skill < 6:   #Average 3 skills
-                return "Charisma / Marketing skill too low."
+                return "Charisma / Marketing skill too low"
             if person.sluttiness < 25:
                 return "Requires more sluttiness"
         return False
@@ -64,7 +64,7 @@ init -2 python: #Requirement Declarations#
     def casual_FA_my_place_requirement(person):
         if person.event_triggers_dict.get("FA_progress", 0) == 2:
             if mc.charisma + mc.market_skill < 9:   #Average 4.5 skills
-                return "Charisma / Marketing skill too low."
+                return "Charisma / Marketing skill too low"
             if person.sluttiness < 40:
                 return "Requires more sluttiness"
             return True
@@ -396,12 +396,12 @@ label casual_FA_get_a_drink_label(the_person):
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 1:
         mc.name "So, I'm going to be honest... I'm surprised to see you here again! Do you find yourself in town very often?"
-        the_person.char "Yeah well, I guess I didn't really bring it up last time, but, I'm actuallly based here. So everytime I start a trip, I usually come to town the night before and spend the night."
+        the_person.char "Yeah well, I guess I didn't really bring it up last time, but, I'm actually based here. So every time I start a trip, I usually come to town the night before and spend the night."
         mc.name "Oh wow... from Pittsburgh? That's an awfully long drive..."
         the_person.char "Oh! I don't drive it. With my flight benefits I can fly space available, so if there is an open seat, I'll grab it to get to work!"
         mc.name "What if everything is full?"
         the_person.char "Honestly? I usually just call in sick. We can get it as an excused absence, but we don't get paid, so I usually just burn sick time."
-        mc.name "That's a pretty interesting setup. Do you stay with friends or family in tonw here?"
+        mc.name "That's a pretty interesting setup. Do you stay with friends or family in town here?"
         the_person.char "Well, I used to have a crash pad... A crash pad is like, a bunch of flight attendants go in together and rent out an apartment close to the apartment and share the costs of it."
         mc.name "Used to?"
         "You notice [the_person.title] gives a slight smile before continuing."

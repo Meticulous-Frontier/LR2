@@ -73,6 +73,12 @@ init 2 python:
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
         sarah.event_triggers_dict["favorite_drink"] = "appletini"
+        sarah.event_triggers_dict["special_tit_fuck"] = False
+        sarah.event_triggers_dict["foreplay_position_filter"] = sarah_foreplay_position_filter
+        sarah.event_triggers_dict["oral_position_filter"] = sarah_oral_position_filter
+        sarah.event_triggers_dict["vaginal_position_filter"] = sarah_vaginal_position_filter
+        sarah.event_triggers_dict["anal_position_filter"] = sarah_anal_position_filter
+        sarah.event_triggers_dict["unique_sex_positions"] = sarah_unique_sex_positions
 
         # add appoint
         office.add_action(HR_director_appointment_action)
@@ -147,7 +153,7 @@ init -1 python:
     def Sarah_third_wheel_requirement():
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
             return False
-        if time_of_day > 1:
+        if time_of_day > 2:
             if sarah.sluttiness > 15:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
@@ -157,7 +163,7 @@ init -1 python:
     def Sarah_get_drinks_requirement():
         if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
             return False
-        if time_of_day > 1:
+        if time_of_day > 2:
             if sarah.sluttiness > 30:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
@@ -252,6 +258,12 @@ init -1 python:
                     if mc.is_at_work():
                         return True
         return False
+
+    def Sarah_unlock_special_tit_fuck_requirement():  #Not an action, but make a requirement to make it easy to test anyway.
+        if sarah.get_sex_record_tit_fucks() > 5:
+            if not sarah_get_special_titfuck_unlocked():
+                return True
+        False
 
     def roll_dart_odds(target = 50, focus_score = 0):
         dart_roll = 0
@@ -587,7 +599,7 @@ label Sarah_third_wheel_label():
     "You decide not to stoop to her level and to end your conversation there. You grab you and [the_person.title]'s drink and get up, not bothering to say goodbye."
     $ scene_manager.remove_actor(sarah_friend, reset_actor = False)
     "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
-    "You don't seen anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
+    "You don't see anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
     $ scene_manager.add_actor(the_person, position = "stand2", emotion = "sad")
     "Inside you see [the_person.title] looking at herself in the mirror. She is forlorn and from the look of her makeup has obviously been crying."
     mc.name "Hey, are you okay? I don't mean to invade your privacy, but I was starting to get worried about you."
@@ -659,7 +671,7 @@ label Sarah_get_drinks_label():
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
     "You look up to see the now familiar face of [the_person.title] standing in the doorway."
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    "It is crazy to think that just a short time ago, she was out of your life completely, but after you chance encounter, you feel like you have been friends forever."
+    "It's crazy to think that just a short time ago, she was out of your life completely, but after your chance encounter, you feel like you've been friends forever."
     mc.name "Hey [the_person.title]. You look great! Are you going out tonight?"
     the_person.char "Actually, I'm not sure yet. I hope so! But I'm not sure if the guy I want to go out with is going to be able to go yet or not..."
     mc.name "Is that so? I hope he can make it and that he treats you well!"
@@ -3004,6 +3016,45 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ scene_manager.update_actor(the_person, position = "sitting", character_placement = character_right)
     return
 
+label Sarah_unlock_special_tit_fuck(the_person):
+    the_person.char "So umm... I have a little confession to make."
+    "You raise an eyebrow."
+    mc.name "Oh? Go ahead then."
+    the_person.char "Last night... I was playing with one of my special toys... pretending it was you... obviously."
+    the_person.char "It was nice... but I just couldn't get off. I don't know why, it just wasn't feeling right."
+    the_person.char "So I took it out, then put it, you know, between my tits..."
+    "Interesting"
+    the_person.char "I kept imagining you, fucking my tits, cumming all over me."
+    $ the_person.change_arousal(20)
+    "Her cheeks are starting to get a little flushed."
+    the_person.char "I actually came, without even touching myself, you know, down there."
+    mc.name "Those serums have made your tits very sensitive. I think it is normal to want to explore all these new sensations you have been having."
+    the_person.char "Yeah, of course..."
+    "Absent mindedly, she reaches up with one hand and starts to play with one of her breasts."
+    $ the_person.change_arousal(20)
+    the_person.char "I can't stop thinking about it. Can I... Can I service you with them? Please?"
+    mc.name "Go ahead. I want to see if your practice has been paying off."
+    if the_person.outfit.tits_available():
+        "With her tits already out and ready to be used, she just gives you a big smile."
+    else:
+        "[the_person.possessive_title] begins to take off her top."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+        "With her tits out and ready to be used, she gives you a big smile."
+    "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."
+    "She gets on her knees and gives you a couple strokes with her hand."
+    $ mc.change_arousal(10)
+    $ the_person.change_arousal(10)
+    the_person.char "Oh god, here we go! Don't hold back, use me like I'm your big titted cum slut!"
+    "With her hands on each side of her chest, she wraps her sizable boobs around you and begins to bounce them up and down."
+    "Your cock disappears inside of her ample cleavage."
+    $ sarah.update_sex_skill("Foreplay", 6)
+    $ sarah.max_opinion_score("giving tit fucks")
+    call fuck_person(the_person, start_position = sarah_tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _unlock_special_tit_fuck_actual_1
+    "Finished, she takes a few moments to recover. You have to admit, she has refined her technique and is very good."
+    $ the_person.event_triggers_dict["special_tit_fuck"] = True
+    $ the_person.apply_planned_outfit()
+    return
+
 label Sarah_fertile_period_start_label():
     $ the_person = sarah
     $ the_person.event_triggers_dict["fertile_start_creampie_count"] = the_person.sex_record["Vaginal Creampies"]
@@ -3020,3 +3071,43 @@ label Sarah_fertile_period_end_label():
     else:
         $ add_sarah_fertile_period_start_action()
     return
+
+init 2 python:
+    def sarah_foreplay_position_filter(foreplay_positions):
+        if sarah_get_special_titfuck_unlocked():
+            filter_out = [tit_fuck]
+            if foreplay_positions[1] in filter_out:
+                return False
+            else:
+                return True
+        return True
+
+    def sarah_oral_position_filter(oral_positions):
+
+        return True
+
+    def sarah_vaginal_position_filter(vaginal_positions):
+        if sarah_get_sex_unlocked():
+            return True
+        return False
+
+    def sarah_anal_position_filter(anal_positions):
+        if sarah_get_sex_unlocked():
+            return True
+        return False
+
+    def sarah_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
+        if sarah_get_special_titfuck_unlocked() and "Foreplay" not in prohibit_tags:
+            positions.append([sarah_tit_fuck, 1])
+
+        return positions
+
+init 1 python:
+    def sarah_get_special_titfuck_unlocked():
+        return sarah.event_triggers_dict.get("special_tit_fuck", False)
+
+    def sarah_get_sex_unlocked():
+        if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:
+            return True
+        return False

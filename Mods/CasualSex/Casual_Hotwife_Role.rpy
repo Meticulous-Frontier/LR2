@@ -99,7 +99,7 @@ init -2 python:
             if mc.location == person.home:
                 return True
             else:
-                return "Only at her place."
+                return "Only at her place"
         return False
 
     def casual_hotwife_ghost_requirement():
@@ -316,11 +316,11 @@ label casual_hotwife_get_a_drink_label(the_person):
             "Wow, she wants you to come to her house and fuck her in front of her husband! You should probably get on that before the opportunity passes!"
             "You and [the_person.title] finish your drinks and then you say goodbye."
 
-    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:  #She's invied you over
+    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 4:  #She's invited you over
         "You chat with [the_person.title] for a while, but you can definitely feel some tension in the air about your arrangement for tonight."
         mc.name "So... tonight at your place? I'll see you there?"
         the_person.char "Sounds good. See you then, [the_person.mc_title]."
-    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her hustband
+    elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her husband
         the_person.char "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, its nice to have a break from fucking and just enjoy a stiff drink."
         mc.name "Yeah, so is [the_person.SO_name] still enjoying your new lifestyle?"
         the_person.char "Oh god, we both are. I've started fucking around with a couple other guys too. Last time I came home, he tied me up and umm... reclaimed me in every hole he could fit it in..."
@@ -479,7 +479,7 @@ label casual_hotwife_blowjob_text_label(the_person):
     "[the_person.possessive_title] gives you a quick smile."
     the_person.char "Well, I sent them off to him before I left the bar the other night, and I got an almost immediate response. 'Come home now'. No explanation or anything..."
     the_person.char "At first I got really scared. Did I just completely fuck up? So I went straight home..."
-    the_person.char "When I got home, he was waiting for me... He umm... he handcuffed with my hands behind my back... I didn't even know he had handcuffs!"
+    the_person.char "When I got home, he was waiting for me... He umm... he handcuffed me with my hands behind my back... I didn't even know he had handcuffs!"
     "Her voice is starting to get excited as she recounts some of the details."
     the_person.char "He forced me down on my knees and then said... he said that I was a dirty little slut, and that after using my mouth on another man he would have to... reclaim it."
     the_person.char "So I opened up and I let him use my mouth... god I never could have imagined my husband doing that to me could be so hot."

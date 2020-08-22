@@ -86,7 +86,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $500"
         return False
 
 
@@ -96,7 +96,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $800"
         return False
 
     def starbuck_foreplay_skillup_requirement(the_person):
@@ -105,7 +105,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $100"
         return False
 
     def starbuck_oral_skillup_requirement(the_person):
@@ -114,7 +114,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money."
+                return "Requires: $250"
         return False
 
     def starbuck_arousal_reduction_one_requirement(the_person):
@@ -123,7 +123,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money"
+                return "Requires: $500"
         return False
 
     def starbuck_arousal_reduction_two_requirement(the_person):
@@ -132,7 +132,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "You need more money"
+                return "Requires: $5,000"
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
@@ -140,7 +140,7 @@ init -1 python:
             if mc.business.funds >= 1000:
                 return True
             else:
-                return "You need more money"
+                return "Requires: $1,00"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
         if the_person.shop_progress_stage == 1:
@@ -148,7 +148,7 @@ init -1 python:
                 if mc.business.funds >= 5000:
                     return True
                 else:
-                    return "You need more money"
+                    return "Requires: $5,000"
             else:
                 return "Wait for her stock to balance out"
 
@@ -158,7 +158,7 @@ init -1 python:
                 if mc.business.funds >= 15000:
                     return True
                 else:
-                    return "You need more money"
+                    return "Requires: $15,000"
             else:
                 return "Wait for her stock to balance out"
 
@@ -181,9 +181,9 @@ init -1 python:
                     if starbuck.love > 50:
                         return True
                     else:
-                        return "Requires 50 Love"
+                        return "Requires: 50+ Love"
                 else:
-                    return "Requires 60 sluttiness"
+                    return "Requires: 60+ sluttiness"
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
@@ -193,9 +193,9 @@ init -1 python:
                     if starbuck.love > 60:
                         return True
                     else:
-                        return "Requires 60 Love"
+                        return "Requires: 60+ Love"
                 else:
-                    return "Requires 70 sluttiness"
+                    return "Requires: 70+ sluttiness"
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
@@ -205,15 +205,15 @@ init -1 python:
                     if starbuck.love > 70:
                         return True
                     else:
-                        return "Requires 70 Love"
+                        return "Requires: 70+ Love"
                 else:
-                    return "Requires 90 sluttiness"
+                    return "Requires: 90+ sluttiness"
         return False
 
     def starbuck_spend_the_night_requirement(the_person):
         if the_person.shop_investment_rate == 6.0:
             if time_of_day < 4:
-                return "It isn't night"
+                return "Only at night"
             else:
                 return True
 
@@ -986,7 +986,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You chew the hole a little wider. You can now access her clit easily through the hole. You take the opportunity to roll her clit between your lips for a few seconds before resuming your panty eating."
     $ the_person.change_arousal(15)#35
     the_person.char "Oooohhhhh, he just go through to my clit... Mmmm that feels so good."
-    "[the_person.possessive_title] reaches down and tears a piece of her panties off, now giving you almost free reign to eat her pussy."
+    "[the_person.possessive_title] reaches down and tears a piece off her panties, now giving you almost free reign to eat her pussy."
     the_person.char "Okay, lets see how they taste..."
     "She takes a bite of the panties, chews and swallows. While she does that you push your tongue deep into her cunt."
     $ the_person.change_arousal(15)#50
@@ -1310,7 +1310,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "As you get close behind her, you put your hands on her hips. She reaches back and grasps your cock, and begins to guide it toward her bottom."
     "When you cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
     $ mc.change_arousal(10)
-    "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with wonderful pop. With more gentle pressure you are soon deep inside her bowel."
+    "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with a wonderful pop. With more gentle pressure you are soon deep inside her bowel."
     the_person.char "Mmm... as you can see... I'm able to completely relax with my ass off the back of the swing, so I can just sit and enjoy the sensations."
     "You give her a modest thrust. The swing bounces forward for a second, but gravity soon causes her ass to pendulum back and smack against your hip."
     "The feeling is exquisite. You grab her hips and get ready to fuck [the_person.possessive_title]'s brains out."
@@ -1655,7 +1655,9 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     else:
         mc.name "It's no problem. Take care!"
         "You say goodbye to [the_person.title] and head out."
+        call advance_time from _call_advance_time_starbuck_close_up_label_1
         return
+
     menu: #This menu is just to weed out if we don't want to have fun
         "Have some fun with her":
             pass
@@ -1664,6 +1666,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             "You can tell she is a little disappointed, but soon she is stretching and yawning."
             the_person.char "You know what?... I'm pretty tired too. Good night [the_person.mc_title]."
             "She walks you to the door of the business and you walk out together, before going your separate ways."
+            call advance_time from _call_advance_time_starbuck_close_up_label_2
             return
     mc.name "I can definitely think of something."
     the_person.char "Oh yeah? I hope its the same thing I'm thinking..."
@@ -1690,8 +1693,8 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
     "She walks you to the door of the business and you walk out together, before going your separate ways."
 
     # time goes forward and exit the talk menu by jumping to game loop
-    call advance_time from _call_advance_time_starbuck_close_up_label
-    jump game_loop
+    call advance_time from _call_advance_time_starbuck_close_up_label_3
+    return
 
 #SBS140
 label starbuck_replay_dressup_label(the_person):

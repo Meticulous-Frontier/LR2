@@ -267,7 +267,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             "[the_person.possessive_title] is being a good sport, so you decide to try and do that for her. You start to fuck her now, your hips smacking up against her ass."
                             "With all the action you've had up until this point, you feel yourself getting ready to finish."
                             "At the last second, you pull back just enough to pull out of her pussy."
-                            "Your first couple of spurts erupt and splash up against her cunt and all long the front of her panties. She moans when she feels the splash."
+                            "Your first couple of spurts erupt and splash up against her cunt and along the front of her panties. She moans when she feels the splash."
                             "You pull back completely now and grab your cock. You aim another spurt and one ass check, then for the next one at the other."
                             $ the_person.cum_on_ass()
 
@@ -275,7 +275,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             "You decide to humor [the_person.title]'s wishes and continue the way you are going now."
                             "The heat coming from her sopping wet slit feels amazing, sliding up and down your erection."
                             "With all the action you've had up until this point, you feel yourself getting ready to finish."
-                            "Your first couple of spurts erupt and splash up against her cunt and all long the front of her panties. She moans when she feels the splash."
+                            "Your first couple of spurts erupt and splash up against her cunt and along the front of her panties. She moans when she feels the splash."
                             "You pull back completely now and grab your cock. You aim another spurt and one ass check, then for the next one at the other."
                             $ the_person.cum_on_ass()
 

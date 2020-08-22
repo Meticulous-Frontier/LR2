@@ -380,14 +380,14 @@ label strip_ask_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the
 label orgasm_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     if the_girl.arousal > 150:
         "[the_girl.possessive_title] has stopped being able to put together coherent sentences. She moans and gasps as yet another orgasm wracks her body."
-        "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
+        "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
         "Her body is now in a near constant state of orgasm. The constant quivering and her sexy moans are almost too much to bear."
         $ mc.change_arousal(10)
         the_girl.char "Oh fuck... fuck... yes!"
         return
     "[the_girl.possessive_title]'s tight back passage start to quiver, and suddenly tenses up."
     $ the_girl.call_dialogue("climax_responses_anal")
-    "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
+    "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("anal sex") < 0:
         the_girl.char "I can't believe that just happened... oh god now you're going to keep going, aren't you?"

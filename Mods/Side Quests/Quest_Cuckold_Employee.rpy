@@ -545,7 +545,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
     $ the_person.apply_planned_outfit() # make sure she is dressed when back at workstation
     call advance_time from cuckold_advance_time
-    jump game_loop  # this a talk event, if another event triggers on advance time we pop back to talking to her, if we just "Return", the jump makes sure we go back to the main game menu
+    return
 
 label quest_cuckold_employee_gloryhole_label():
     $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)

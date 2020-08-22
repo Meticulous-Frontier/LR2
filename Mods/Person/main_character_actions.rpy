@@ -40,7 +40,7 @@ init 2 python:
 
         if person not in mc.business.get_employee_list() + unique_character_list:
             if mc.business.get_employee_count() >= mc.business.max_employee_count:
-                return "At employee limit."
+                return "At employee limit"
             return True
         return False
 

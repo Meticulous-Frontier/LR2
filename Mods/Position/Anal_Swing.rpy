@@ -113,7 +113,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object):
 label scene_SB_anal_swing_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] quivers as you slow up the pace a bit. You pull the straps on the swing towards you and thrust your hips forward, burying your cock as deep in her ass as you can."
     if the_girl.outfit.tits_available():
-        "You reach around her body with both hands and grab her tits. You pinch and pull at her nipple roughly being careful to keep your cock deep inside her."
+        "You reach around her body with both hands and grab her tits. You pinch and pull at her nipples roughly being careful to keep your cock deep inside her."
     else:
         "You reach around her body with both hands and grab as her tits. The fabric covering them is maddening. You decide to strip her down."
         mc.name "[the_girl.title]... I need to feel your skin!"
@@ -128,7 +128,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
             "You can see a blush in [the_girl.possessive_title]'s cheeks. She likes to show off her [the_girl.tits] tits!"
             $ the_girl.discover_opinion("showing her tits")
             $ the_girl.change_arousal(5)
-    "You roll each of nipples between your thump and index fingers. [the_girl.possessive_title] arches her back and moans."
+    "You roll each of nipples between your thumb and index fingers. [the_girl.possessive_title] arches her back and moans."
     "You grasp her tits with both hands and hold her in place and start to give her rapid thrusts with your hips."
     the_girl.char "Oh fuck! Yes! [the_girl.mc_title]!"
     "She is writhing in the swing back against you, but she has no leverage. You have all the control."
@@ -331,7 +331,7 @@ label strip_ask_SB_anal_swing(the_girl, the_clothing, the_location, the_object):
 label orgasm_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s whole body starts to tremble, and then suddenly she tenses up."
     $ the_girl.call_dialogue("climax_responses_anal")
-    "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."
+    "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("anal sex") < 0:
         the_girl.char "I can't believe that just happened... oh god now you're going to keep going, aren't you?"

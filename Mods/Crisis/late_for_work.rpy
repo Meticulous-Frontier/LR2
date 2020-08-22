@@ -114,7 +114,7 @@ label late_for_work_action_label:
         $ the_person.draw_person(position = 'walking_away')
         "[the_person.possessive_title] rushes to the ladies room to cleanup."
         $ upper_clothing = None
-    elif the_person.sluttiness < 80:
+    elif the_person.sluttiness < 80 or the_person.has_role(girlfriend_role):
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person.char "[the_person.mc_title]! I know this looks bad. I have a great excuse for being late, I swear!"
         "You feel yourself roll you eyes for a moment involuntarily."

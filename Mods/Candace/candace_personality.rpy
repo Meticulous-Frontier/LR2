@@ -143,7 +143,7 @@ label candace_sex_responses_vaginal(the_person):
             the_person.char "Yes! Keep fucking me!"
             "She giggles happily, clearly having a good time."
         else:
-            the_person.char "Oh wow! Mmmm, you're cock is driving me crazy [the_person.mc_title]!"
+            the_person.char "Oh wow! Mmmm, your cock is driving me crazy [the_person.mc_title]!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":

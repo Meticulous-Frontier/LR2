@@ -17,13 +17,13 @@ init -2 python:
             else:
                 return "Wait until you see her at the gym"
         else:
-            return "Requires 110 maximum energy"
+            return "Requires: 110 maximum energy"
 
     def casual_athlete_phase_one_requirement(person):
         if person.event_triggers_dict.get("athlete_progress", 0) < 1:
             return False
         if person.love > 50:
-            return "She is uneasy about falling for you."
+            return "She is uneasy about falling for you"
         if person.event_triggers_dict.get("athlete_workout", 0) < 1:
             return False
         if time_of_day < 4:
@@ -33,9 +33,9 @@ init -2 python:
                 elif mc.location == gym:
                     return True
                 else:
-                    return "Not at the gym"
+                    return "Only at the gym"
             else:
-                return "Requires 120 maximum energy"
+                return "Requires: 120 maximum energy"
         return False
 
     def casual_athlete_phase_two_requirement(person):
@@ -44,14 +44,14 @@ init -2 python:
             if person.event_triggers_dict.get("athlete_progress", 0) > 3:
                 return False
         if person.love > 50:
-            return "She is uneasy about falling for you."
+            return "She is uneasy about falling for you"
         if time_of_day < 4:
             if mc.max_energy >= 140:
                 if person.effective_sluttiness() < 40:
-                    return "Requires 40 Sluttiness"
+                    return "Requires: 40 sluttiness"
                 return True
             else:
-                return "Requires 140 maximum energy"
+                return "Requires: 140 maximum energy"
         return False
 
     def casual_athlete_race_crisis_requirement():
@@ -66,7 +66,7 @@ init -2 python:
         if mc.location == gym:
             return True
         else:
-            return "You need to be at the Gym"
+            return "Only at the Gym"
 
     def casual_athlete_house_call_requirement(person):
         if person.event_triggers_dict.get("athlete_progress", 0) == 4:
@@ -606,7 +606,6 @@ label casual_athlete_house_call_label(the_person):
     $ mc.change_location(bedroom) # go home
     call advance_time from _call_advance_casual_athlete_house_call
     return
-
 
 label casual_athlete_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."

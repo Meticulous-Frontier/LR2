@@ -263,7 +263,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] looks back at you with a scowl."
                 the_girl.char "Don't get used to it, [the_girl.mc_title]... I'm not sure how I let you talk me into this..."
                 $ the_girl.discover_opinion("anal sex")
-                "You decide for now to keep your pace nice a slow."
+                "You decide for now to keep your pace nice and slow."
             else:
                 "[the_girl.possessive_title] looks back at you and manages to smile through the intense sensation of having her ass fucked."
                 the_girl.char "You are stretching me out so much... Be careful back there, I'm not sure how much of this I can take!"
@@ -524,7 +524,7 @@ label strip_ask_SB_anal_standing(the_girl, the_clothing, the_location, the_objec
 label orgasm_SB_anal_standing(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s legs start to quiver, and then suddenly she tenses up."
     $ the_girl.call_dialogue("climax_responses_anal")
-    "You bury your cock in deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."
+    "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("anal sex") < 0:
         the_girl.char "I can't believe that just happened... oh god now you're going to keep going, aren't you?"
