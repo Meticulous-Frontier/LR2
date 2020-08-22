@@ -41,7 +41,7 @@ label enhanced_special_training_crisis_label():
             if _return != "None":
                 $ mc.business.change_funds(-500)
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
-                $ mc.log_event("[the_person.title]: " + "+2 " + get_work_skills()[_return][0], "float_text_grey")
+                $ mc.log_event(the_person.title + ": +2 " + get_work_skills()[_return][0], "float_text_grey")
                 "[the_person.title] leaves work for a few hours to attend the training seminar. When she returns she has learned several useful techniques." # NOTE: Make this less generic
                 if the_person.effective_sluttiness() >= 20:
                     # follow up on promise made
