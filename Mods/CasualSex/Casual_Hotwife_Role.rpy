@@ -479,7 +479,7 @@ label casual_hotwife_blowjob_text_label(the_person):
     "[the_person.possessive_title] gives you a quick smile."
     the_person.char "Well, I sent them off to him before I left the bar the other night, and I got an almost immediate response. 'Come home now'. No explanation or anything..."
     the_person.char "At first I got really scared. Did I just completely fuck up? So I went straight home..."
-    the_person.char "When I got home, he was waiting for me... He umm... he handcuffed with my hands behind my back... I didn't even know he had handcuffs!"
+    the_person.char "When I got home, he was waiting for me... He umm... he handcuffed me with my hands behind my back... I didn't even know he had handcuffs!"
     "Her voice is starting to get excited as she recounts some of the details."
     the_person.char "He forced me down on my knees and then said... he said that I was a dirty little slut, and that after using my mouth on another man he would have to... reclaim it."
     the_person.char "So I opened up and I let him use my mouth... god I never could have imagined my husband doing that to me could be so hot."
