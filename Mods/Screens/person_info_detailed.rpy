@@ -77,7 +77,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                                             if persistent.pregnancy_pref == 1:
                                                 text "Fertility: " + str(round(the_person.fertility_percent)) + "%" style "menu_text_style"
                                             if persistent.pregnancy_pref == 2:
-                                                text "Fertility: " + str(round(the_person.calculate_realistic_fertility(), 1)) + "%" style "menu_text_style"
+                                                text "Fertility: " + str(round(the_person.calculate_realistic_fertility(), 1)) + "% -> " + the_person.fertility_cycle_string() style "menu_text_style"
                                                 text "Monthly Peak Day: " + str(the_person.ideal_fertile_day ) style "menu_text_style"
                                             text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style" #TODO less specific info
 
