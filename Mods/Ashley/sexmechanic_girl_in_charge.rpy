@@ -294,6 +294,27 @@ init 2:
                 sex_path.append(final_node)
                 return sex_path
 
+        def get_sex_finish_req(the_goal):
+            if the_goal == "get off":
+                return dom_requirement_get_off
+            if the_goal =="waste cum":
+                return dom_requirement_waste_cum
+            if the_goal =="hate fuck":
+                return dom_requirement_hate_fuck
+            if the_goal =="vaginal creampie":
+                return dom_requirement_creampie
+            if the_goal =="anal creampie":
+                return dom_requirement_anal_creampie
+            if the_goal =="facial":
+                return dom_requirement_facial
+            if the_goal =="body shot":
+                return dom_requirement_body_shot
+            if the_goal =="get mc off":
+                return dom_requirement_get_mc_off
+            if the_goal =="oral creampie":
+                return dom_requirement_oral_creampie
+            return dom_requirement_get_mc_off
+
         def sex_can_continue(the_person, the_position = None, the_node = None): #Use this to check and see if girl would be up to continue the current position
             if the_node != None:
                 the_position = the_node.position
@@ -333,8 +354,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
 
     if start_position != None and sex_path == None:
-        $ sex_path = [dom_sex_path_node(start_position, dom_requirement_get_mc_off)]  #If we have a start position only, we set the path to be the start position with MC getting off as the goal
-        $ the_goal = "get mc off"
+        if the_goal == None:
+            $ the_goal = "get mc off"
+        $ sex_path = [dom_sex_path_node(start_position, get_sex_finish_req(the_goal))]  #If we have a start position only, we set the path to be the start position with MC getting off as the goal
+
 
     if the_goal == None:
         $ the_goal = create_sex_goal(the_person, report_log)
@@ -355,7 +378,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
     elif object_choice == None:
         $ object_choice = girl_choose_object_enhanced(the_person, sex_path[0].position)
-        $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
+    $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
     #Next we mimic fuck_person() but only with applicable girl in charge parameters.
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private:
