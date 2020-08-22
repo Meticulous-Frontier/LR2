@@ -671,7 +671,7 @@ label Sarah_get_drinks_label():
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
     "You look up to see the now familiar face of [the_person.title] standing in the doorway."
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    "It is crazy to think that just a short time ago, she was out of your life completely, but after you chance encounter, you feel like you have been friends forever."
+    "It's crazy to think that just a short time ago, she was out of your life completely, but after your chance encounter, you feel like you've been friends forever."
     mc.name "Hey [the_person.title]. You look great! Are you going out tonight?"
     the_person.char "Actually, I'm not sure yet. I hope so! But I'm not sure if the guy I want to go out with is going to be able to go yet or not..."
     mc.name "Is that so? I hope he can make it and that he treats you well!"
