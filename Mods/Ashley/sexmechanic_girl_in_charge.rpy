@@ -526,7 +526,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person.char "Okay."
-        elif the_person.stamina < 50 and mc.arousal > 70 and the_person.stamina > 20 and mc.energy > 30: #She's exhausted and can't defend herself briefly from your advances.
+        elif the_person.energy < 50 and mc.arousal > 70 and the_person.energy > 20 and mc.energy > 30: #She's exhausted and can't defend herself briefly from your advances.
             "You get up, but notice that [the_person.title] is a bit slower. She is breathing heavily and appears to be really worn out."
             the_person.char "Oh god... just give me a minute, okay?"
             $ the_person.draw_person(position = "doggy")
