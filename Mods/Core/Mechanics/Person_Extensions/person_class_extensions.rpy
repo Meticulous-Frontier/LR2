@@ -1524,3 +1524,32 @@ init -1 python:
     Person.get_sex_record_anal_creampies = get_sex_record_anal_creampies
     Person.get_sex_record_fingered = get_sex_record_fingered
     Person.get_sex_record_kissing = get_sex_record_kissing
+
+##################################################
+#    Body descriptor python wrappers             #
+##################################################
+
+    def body_is_thin(self):
+        if self.body_type == "thin_body":
+            return True
+        return False
+
+    def body_is_average(self):
+        if self.body_type == "standard_body":
+            return True
+        return False
+
+    def body_is_thick(self):
+        if self.body_type == "curvy_body":
+            return True
+        return False
+
+    def body_is_pregnant(self):
+        if self.body_type == "standard_preg_body":
+            return True
+        return False
+
+    Person.body_is_thin = body_is_thin
+    Person.body_is_average = body_is_average
+    Person.body_is_thick = body_is_thick
+    Person.body_is_pregnant = body_is_pregnant
