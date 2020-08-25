@@ -5,7 +5,7 @@ init python:
         guy_arousal = 20, guy_energy = 10,
         connections = [],
         intro = "intro_SB_doggy_standing",
-        scenes = ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2"],
+        scenes = ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2", "scene_SB_doggy_standing_3"],
         outro = "outro_SB_doggy_standing",
         transition_default = "transition_default_SB_doggy_standing",
         strip_description = "strip_SB_doggy_standing",  strip_ask_description = "strip_ask_SB_doggy_standing",
@@ -255,8 +255,12 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
                 "As you finger her ass, her hips remain stationary. She wills herself to relax, and manages to enjoy the stimulation."
                 $ the_girl.change_arousal(mc.sex_skills["Anal"])
                 "Soon though, you feel the urge in your hips to start fucking her again, so you pull your finger out so you can grab both her hips."
-
-
+        "Grope her ass":
+            "You hands are drawn to her cheeks. With a soft touch you trace your finger down around their delicious curve."
+            "You grab a handful, her ass flesh feels tight and full in your hand. She moans and you give her a couple vigorous thrusts."
+            mc.name "Your ass is a amazing. Maybe I'll fuck you back there next..."
+            "She moans and pushes back against you as you fuck."
+    return
 
 
 label outro_SB_doggy_standing(the_girl, the_location, the_object):
