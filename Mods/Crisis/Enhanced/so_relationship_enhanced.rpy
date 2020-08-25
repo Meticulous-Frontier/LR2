@@ -37,7 +37,7 @@ init 2 python:
         potential_people = []
         for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
             if person.title and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
-                if not person.has_role([girlfriend_role, affair_role, casual_athlete_role]): # when in relationship with MC or Casual Athlete she will not improve her relationship with her SO
+                if not person.has_role([girlfriend_role, affair_role]): # when in relationship with MC or Casual Athlete she will not improve her relationship with her SO
                     potential_people.append(person)
         return get_random_from_list(potential_people)
 
@@ -121,7 +121,7 @@ label so_relationship_worsen_label_enhanced():
         "It looks like [the_person.title] has left her [so_title] and is single now."
 
     $ the_person.relationship = "Single"
-    $ the_person.SO_name = None        
+    $ the_person.SO_name = None
     return
 
 # triggered randomly for a person (fight with her SO)
@@ -139,5 +139,5 @@ label so_relationship_quarrel_label(the_person):
         mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
 
     $ the_person.relationship = "Single"
-    $ the_person.SO_name = None        
+    $ the_person.SO_name = None
     return

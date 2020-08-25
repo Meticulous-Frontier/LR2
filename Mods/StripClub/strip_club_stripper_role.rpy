@@ -5,7 +5,7 @@
 init 5 python:
     add_label_hijack("normal_start", "update_strip_club_show_requirement")
     add_label_hijack("after_load", "update_strip_club_show_requirement")
-   
+
     # override default strip_club show requirement
     def strip_club_show_requirement_enhanced():
         # check available strippers in club (not possible strippers)
@@ -99,7 +99,7 @@ init 5 python:
         return False
 
     def strip_club_hire_employee_requirement(person):
-        if person.has_role([casual_hotwife_role, casual_athlete_role, casual_FA_role]):
+        if person.has_role([casual_hotwife_role, casual_FA_role]):
             return False
         if person.has_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
             return False
