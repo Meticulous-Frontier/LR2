@@ -25,7 +25,7 @@ init 5 python:
             work_location = bdsm_room
 
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
-        if person.is_employee() or person in [lily, mom, aunt]:
+        if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule([4], work_location)
         else:
@@ -54,7 +54,7 @@ init 5 python:
 
         person.remove_role(role)
         # restore default schedules
-        if person.is_employee() or person in [lily, mom, aunt]:
+        if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.set_schedule([4], person.home)
         else:
             person.set_schedule([0, 4], person.home)
@@ -103,7 +103,7 @@ init 5 python:
             return False
         if person.has_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
             return False
-        if person.has_role(employee_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily])): # disqualified from action
+        if person.has_role(employee_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
         if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
@@ -128,14 +128,14 @@ init 5 python:
 
     def allow_promote_to_manager_requirement(person):
         if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
-            if person.age < 25:
-                return "Requires: age >= 25"
+            # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
+                # return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:
                 return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
-            if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:
-                return "Too recently hired"
+            # if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7: # Maybe I hired her just to have her as manager (immediately)
+                # return "Too recently hired"
             return True
         return False
 
@@ -143,7 +143,7 @@ init 5 python:
         available_roles = []
         if __builtin__.len(stripclub_strippers) < 5:
             available_roles.append(["Stripper", stripper_role])
-        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2:
+        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2 and mc.business.event_triggers_dict.get("strip_club_has_waitresses", False):
             available_roles.append(["Waitress", waitress_role])
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and __builtin__.len(stripclub_bdsm_performers) < 5:
             available_roles.append(["BDSM Performer", bdsm_performer_role])
@@ -535,3 +535,70 @@ label stripper_performance_review_label(the_person):
     "You stand up and open the door for [the_person.title] at the end of her performance review."
     $ clear_scene()
     return
+
+label advance_time_stripclub_daily_serum_dosage_label(stack):
+    python:
+        if hasattr(mc.business, "strippers_serum"):
+            if mc.business.strippers_serum:
+                serum_count = mc.business.inventory.get_serum_count(mc.business.strippers_serum)
+                if serum_count > 0:
+                    for (person,place) in people_to_process:
+                        if employee_role in person.special_role:
+                            continue
+                        if not stripper_role in person.special_role:
+                            continue
+                        mc.business.inventory.change_serum(mc.business.strippers_serum,-1)
+                        person.give_serum(copy.copy(mc.business.strippers_serum), add_to_log = False)
+                        serum_count -= 1
+                        if serum_count == 0:
+                            break
+
+        if hasattr(mc.business, "waitresses_serum"):
+            if mc.business.waitresses_serum:
+                serum_count = mc.business.inventory.get_serum_count(mc.business.waitresses_serum)
+                if serum_count > 0:
+                    for (person,place) in people_to_process:
+                        if employee_role in person.special_role:
+                            continue
+                        if not waitress_role in person.special_role:
+                            continue
+                        mc.business.inventory.change_serum(mc.business.waitresses_serum,-1)
+                        person.give_serum(copy.copy(mc.business.waitresses_serum), add_to_log = False)
+                        serum_count -= 1
+                        if serum_count == 0:
+                            break
+
+        if hasattr(mc.business, "bdsm_performers_serum"):
+            if mc.business.bdsm_performers_serum:
+                serum_count = mc.business.inventory.get_serum_count(mc.business.bdsm_performers_serum)
+                if serum_count > 0:
+                    for (person,place) in people_to_process:
+                        if employee_role in person.special_role:
+                            continue
+                        if not bdsm_performer_role in person.special_role:
+                            continue
+                        mc.business.inventory.change_serum(mc.business.bdsm_performers_serum,-1)
+                        person.give_serum(copy.copy(mc.business.bdsm_performers_serum), add_to_log = False)
+                        serum_count -= 1
+                        if serum_count == 0:
+                            break
+
+        if hasattr(mc.business, "manager_serum"):
+            if mc.business.manager_serum:
+                serum_count = mc.business.inventory.get_serum_count(mc.business.manager_serum)
+                if serum_count > 0:
+                    for (person,place) in people_to_process:
+                        if employee_role in person.special_role:
+                            continue
+                        if not manager_role in person.special_role and not mistress_role in person.special_role:
+                            continue
+                        mc.business.inventory.change_serum(mc.business.manager_serum,-1)
+                        person.give_serum(copy.copy(mc.business.manager_serum), add_to_log = False)
+                        serum_count -= 1
+                        if serum_count == 0:
+                            break
+
+        execute_hijack_call(stack)
+
+init 5 python:
+    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_stripclub_daily_serum_dosage_label")

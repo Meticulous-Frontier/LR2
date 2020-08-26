@@ -1,5 +1,5 @@
-# Assign Division Daily Serum UI
-# Based on screen designed by DaMatt
+# Assign Division Daily Serum UI - Based on screen designed by DaMatt
+# to be put in \game\Mods\Screens\Serum_Screens\
 
 init 2 python:
     config.label_overrides["set_serum_description"] = "set_serum_description_enhanced"
@@ -12,6 +12,8 @@ init 2 python:
             return "No serum"
 
     def get_division_serum(division):
+        if not hasattr(division[1], division[2]):
+            setattr( division[1], division[2], None);
         return getattr(division[1], division[2])
 
     def set_division_serum(division, serum):
@@ -32,7 +34,11 @@ init 2:
             ["Production", mc.business, "p_serum"],
             ["Supply", mc.business, "s_serum"],
             ["Marketing", mc.business, "m_serum"],
-            ["Human Resources", mc.business, "h_serum"]
+            ["Human Resources", mc.business, "h_serum"],
+            ["Strippers", mc.business, "strippers_serum"],
+            ["Waitresses", mc.business, "waitresses_serum"],
+            ["BDSM performers", mc.business, "bdsm_performers_serum"],
+            ["Manager/Mistress", mc.business, "manager_serum"],
         ]
 
         vbox:
@@ -63,7 +69,7 @@ init 2:
                                     xsize 500
                                     ysize 50
                                     background "#000080"
-                                    text "Division" style "serum_text_style_header" 
+                                    text "Division" style "serum_text_style_header"
 
                                 viewport:
                                     xsize 500
@@ -105,7 +111,7 @@ init 2:
                                         xsize 500
                                         ysize 50
                                         background "#000080"
-                                        text "Assign Serum" style "serum_text_style_header" 
+                                        text "Assign Serum" style "serum_text_style_header"
 
                                     viewport:
                                         scrollbars "vertical"
@@ -152,7 +158,7 @@ init 2:
                                                     ]
                                                     unhovered [
                                                         Hide("serum_tooltip")
-                                                    ]                                   
+                                                    ]
                                                     action Function(set_division_serum, division_serums[division_selected], serum[0])
 
             frame:
