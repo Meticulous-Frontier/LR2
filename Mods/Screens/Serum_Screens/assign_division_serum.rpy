@@ -12,6 +12,8 @@ init 2 python:
             return "No serum"
 
     def get_division_serum(division):
+        if not hasattr(division[1], division[2]):
+            setattr( division[1], division[2], None);
         return getattr(division[1], division[2])
 
     def set_division_serum(division, serum):
@@ -32,7 +34,11 @@ init 2:
             ["Production", mc.business, "p_serum"],
             ["Supply", mc.business, "s_serum"],
             ["Marketing", mc.business, "m_serum"],
-            ["Human Resources", mc.business, "h_serum"]
+            ["Human Resources", mc.business, "h_serum"],
+            ["Strippers", mc.business, "strippers_serum"],
+            ["Waitresses", mc.business, "waitresses_serum"],
+            ["BDSM performers", mc.business, "bdsm_performers_serum"],
+            ["Manager/Mistress", mc.business, "manager_serum"],
         ]
 
         vbox:
