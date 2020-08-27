@@ -1,4 +1,4 @@
-# A collection of various Lab Rats 2 - Back to Business modifications**
+# A collection of various "Lab Rats 2 - Down to Business" modifications**
 
 This mod collection extends the base game with a range of new features and enhancements to make the game more enjoyable and configurable to your own preferences.
 
