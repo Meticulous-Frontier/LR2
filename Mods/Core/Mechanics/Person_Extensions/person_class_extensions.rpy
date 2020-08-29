@@ -1553,3 +1553,56 @@ init -1 python:
     Person.body_is_average = body_is_average
     Person.body_is_thick = body_is_thick
     Person.body_is_pregnant = body_is_pregnant
+
+##################################################
+#     Fetish related wrappers                    #
+##################################################
+
+    def get_fetish_count(self):
+        fetish_count = 0
+        for role in self.special_role:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+                fetish_count += 1
+        return fetish_count
+
+    def get_fetishes_description(self):
+        description = ""
+        for role in self.special_role:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+                if __builtin__.len(description) > 0:
+                    description += ", "
+                description += role.role_name
+        return description
+
+    def has_vaginal_fetish(self):
+        if vaginal_fetish_role in self.special_role:
+            return True
+        return False
+
+    def has_anal_fetish(self):
+        if anal_fetish_role in self.special_role:
+            return True
+        return False
+
+    def has_oral_fetish(self):
+        if oral_fetish_role in self.special_role:
+            return True
+        return False
+
+    def has_internal_cum_fetish(self):
+        if cum_internal_role in self.special_role:
+            return True
+        return False
+
+    def has_external_cum_fetish(self):
+        if cum_external_role in self.special_role:
+            return True
+        return False
+
+    Person.get_fetish_count = get_fetish_count
+    Person.get_fetishes_description = get_fetishes_description
+    Person.has_vaginal_fetish = has_vaginal_fetish
+    Person.has_anal_fetish = has_anal_fetish
+    Person.has_oral_fetish = has_oral_fetish
+    Person.has_internal_cum_fetish = has_internal_cum_fetish
+    Person.has_external_cum_fetish = has_external_cum_fetish

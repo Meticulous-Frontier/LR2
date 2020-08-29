@@ -3,7 +3,7 @@
 #This position is to help flesh out oral options in the game to prepare for the oral fetish.
 
 init python:
-    SB_sixty_nine = Position(name = "Sixty-Nine", slut_requirement = 45, slut_cap = 65, requires_hard = True, requires_large_tits = False,
+    SB_sixty_nine = Position(name = "Sixty-Nine", slut_requirement = 45, slut_cap = 65, requires_hard = False, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Oral",
         girl_arousal = 15, girl_energy = 10,
         guy_arousal = 15, guy_energy = 10,
@@ -17,12 +17,14 @@ init python:
         taboo_break_description = "taboo_break_SB_sixty_nine",
         verb = "sixty-nine",
         verbing = "sixty-nining",
-        opinion_tags = ["giving blowjobs", "getting head"], record_class = "Cunnilingus",
+        opinion_tags = ["giving blowjobs", "getting head", "oral creampie", "get mc off", "get off"], record_class = "Cunnilingus",
         associated_taboo = "sucking_cock")
 
         # only one associated taboo is allowed in code ["sucking_cock", "licking_pussy", "touching_penis", "touching_vagina"]
 
     list_of_positions.append(SB_sixty_nine)
+    list_of_girl_positions.append(SB_sixty_nine)
+    SB_sixty_nine.girl_outro = "GIC_outro_SB_sixty_nine"
 
 #init 1:
     #python:
@@ -55,6 +57,9 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object):
 
 label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
     $ SB_sixty_nine.redraw_scene(the_girl)
+    if mc.recently_orgasmed:
+        call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_00
+        return
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
@@ -250,6 +255,9 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
     return
 
 label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
+    if mc.recently_orgasmed:
+        call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_01
+        return
 
     "[the_girl.possessive_title] pulls your cock out of her her mouth and starts to stroke you with her hand while her tongue circles around the tip."
     if the_girl.arousal > 50:
@@ -387,7 +395,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
             "When you're completely finished, you can feel her swallow the contents of her mouth, before slowly pulling off."
 
         $ the_girl.call_dialogue("cum_mouth")
-        "You give [the_girl.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
+        "You give [the_girl.possessive_title]'s slit a few more appreciative licks."
     elif the_girl.sex_skills["Oral"] > 5: #She is amazing at oral
         "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
         "You grunt and twitch as you start to empty your balls right into her stomach."
@@ -474,3 +482,61 @@ label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
 label taboo_break_SB_sixty_nine(the_girl, the_location, the_object):
     # TODO: Add custom taboo break
     return
+
+label get_hard_SB_sixty_nine(the_girl, the_location, the_object):
+    "[the_girl.possessive_title] is planting kisses all over your cock and groin. She is eager to get you hard again."
+    "She takes your cock in her mouth, swallowing the whole thing. She makes gentle suckling motions, coaxing life back into it."
+    "Despite having just cum, after only a minute or so of this treatment, your cock is beginning to harden again."
+    the_girl.char "Mmm, that's it. Get hard for me [the_girl.mc_title]."
+    "With her encouragement, you feel yourself regaining an erection."
+    return
+
+label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = None):
+    $ the_goal = the_girl.SB_sixty_nine()
+
+    if the_goal == "waste cum" or the_goal == "hate fuck":
+        "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        mc.name "Ah, I'm going to cum!"
+        "[the_girl.possessive_title]'s mouth suddenly pops of your cock and she strokes you with her hand."
+        the_girl.char "I'm not letting your spunk touch me!"
+        "You groan as you feel yourself erupt. You feel a couple spurts of cum on your hip as [the_girl.title] points you to the side."
+        "When you finish you lay back, looking up at [the_girl.possessive_title]'s ass."
+        $ the_girl.change_happiness(2)
+        $ the_girl.change_obedience(-3)
+    elif the_goal == "facial" or the_goal == "body shot":
+        "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        mc.name "Fuck, here I come!"
+        "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
+        the_girl.char "That's it, [the_girl.mc_title], cum all over me!"
+        $ the_girl.cum_on_face()
+        if the_girl.has_role(cum_external_role):
+            "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
+        "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
+        $ the_girl.call_dialogue("cum_face")
+    elif the_goal == "get mc off" or the_goal == "anal creampie" or the_goal == "vaginal creampie" or the_goal == "get off" or the_goal == None:
+        $ SB_sixty_nine.call_default_outro(the_girl, the_location, the_object)
+    elif the_goal == "oral creampie":
+        "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        mc.name "Fuck, here I come!"
+        if the_girl.has_role(cum_internal_role):
+            "[the_girl.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
+            "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
+            "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
+        elif the_girl.sex_skills["Oral"] > 5:
+            "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
+            "You grunt and twitch as you start to empty your balls right into her stomach."
+            "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
+            $ the_girl.cum_in_mouth()
+            #$ SB_sixty_nine.redraw_scene(the_girl)
+            "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
+        else:
+            "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
+            "She moans as you fill up her mouth with your sperm."
+            $ the_girl.cum_in_mouth()
+            #$ SB_sixty_nine.redraw_scene(the_girl)
+            "When you're completely finished, you can feel her swallow the contents of her mouth, before slowly pulling off."
+
+        $ the_girl.call_dialogue("cum_mouth")
+        "You give [the_girl.possessive_title]'s slit a few appreciative licks."
+    else:
+        $ SB_sixty_nine.call_default_outro(the_girl, the_location, the_object)
