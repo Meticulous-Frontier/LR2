@@ -55,8 +55,11 @@ init 2 python:
 
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
-            person.set_schedule([1,2,3], None)
-            person.set_schedule([0, 4], person.home)
+            if person.has_role(employee_role):
+                person.set_schedule([0, 4], person.home)
+            else:
+                person.set_schedule([1,2,3], None)
+                person.set_schedule([0, 4], person.home)
         return
 
     def add_cousin_talk_about_strip_club_action():
