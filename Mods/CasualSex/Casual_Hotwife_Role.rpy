@@ -391,7 +391,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         $ the_person.change_arousal(20)
         $ mc.change_arousal(20)
         "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
-        call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH010
+        # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH010
+        call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH010
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
@@ -450,7 +451,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             mc.name "Oh fuck!"
             "You make sure to snap more pictures of her. She's getting good at this!"
             "You decide to just enjoy her skilled mouth going down on you."
-            call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH011
+            # call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH011
+            call get_fucked(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH011
         else:
             the_person.char "Mmmm, I can't wait any longer... I have to taste it!"
             $ the_person.break_taboo("sucking_cock")
@@ -458,7 +460,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
+            # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
+            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH012
 
         if the_person.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."

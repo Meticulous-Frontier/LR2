@@ -478,6 +478,13 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             if len(sex_path) > 0:
                 $ current_node = sex_path.pop(0)
                 $ object_choice = girl_choose_object_enhanced(the_person, current_node.position)
+                if object_choice == None:
+                    if current_node.position.requires_location == "kneel" or current_node.position.requires_location == "lay":
+                        $ object_choice = make_floor()
+                    elif current_node.position.requires_location == "lean":
+                        $ object_choice = make_wall()
+                    else:
+                        $ object_choice = make_chair()
                 the_person.char "Mmm, I think we're ready. Let's move on now!"
                 if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom and not mc.condom:
                     the_person.char "Hang on a second. I need to wrap this thing up first."

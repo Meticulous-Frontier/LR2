@@ -242,12 +242,13 @@ label mom_breakfast_action_label_high():
             $ the_person.break_taboo("sucking_cock")
             "She opens her mouth and slides your penis in. She dances circles all around it while she suckles the tip. You look down and notice that she is touching herself."
             $ the_person.change_arousal(20)
-            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
+            # call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
+            call get_fucked(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_workday_breakfast_01
             "Finished with her breakfast, [the_person.title] gets up from the table and excuses herself."
             $ scene_manager.update_actor(mom, position = "walking_away")
             the_person.char "Have a good day at work, I'm gonna go get ready for the day!"
             return "Advance Time"
-        
+
         "Long Day Ahead":
             mc.name "I'm sorry [the_person.title], but I have a long day scheduled today. I think I had better save my energy!"
             $ scene_manager.update_actor(mom, position = "sitting", emotion="sad")
@@ -420,7 +421,7 @@ label mom_breakfast_action_mom_and_lily_label():
             "Join them":
                 lily.char "Hi [lily.mc_title], why don't you join us."
                 mc.name "Wait a second [the_person.title], let me take care of that for you."
-                "You quickly undress and..."               
+                "You quickly undress and..."
                 call start_threesome(the_person, lily, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, round = 1) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_1
                 "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
@@ -444,7 +445,7 @@ label mom_breakfast_action_mom_and_lily_label():
             "Join them":
                 the_person.char "Hello [the_person.mc_title], why don't you join us."
                 mc.name "Wait a second [lily.title], let me take care of that for you."
-                "You quickly undress and..."               
+                "You quickly undress and..."
                 call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, start_object = make_floor(), position_locked = True, round = 1) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_2
                 "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)

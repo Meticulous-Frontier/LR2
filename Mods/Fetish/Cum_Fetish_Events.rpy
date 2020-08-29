@@ -115,7 +115,8 @@ label SB_fetish_cum_non_employee_label(the_person):
             $ the_person.break_taboo("sucking_cock")
             the_person.char "Mmh, I love it when I can feel it grow in my mouth."
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
+            # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
+            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC10B
             $ add_cum_fetish_role_based_on_cum(the_person)
 
             "[the_person.possessive_title] is moaning ecstatically."
@@ -191,7 +192,8 @@ label SB_fetish_cum_label(the_person):
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
             ###cum Scene, standing variant###
-            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10
+            # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10
+            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC10
             $ add_cum_fetish_role_based_on_cum(the_person)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
             if the_person.has_role(cum_external_role):
@@ -508,7 +510,8 @@ label SB_fetish_lily_cum_label():
     $ the_person.break_taboo("sucking_cock")
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
-    call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
+    # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
+    call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC40
     $ add_cum_fetish_role_based_on_cum(the_person)
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
     if the_person.has_role(cum_external_role):
@@ -559,7 +562,8 @@ label SB_fetish_shower_cum_label():
     "[the_person.possessive_title] gets down on her knees."
     the_person.char "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
     "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
-    call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC50
+    # call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC50
+    call get_fucked(the_person, private= True, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC50
     the_person.char "Oh my god, thank you [the_person.mc_title]. I needed that so bad."
     "[the_person.possessive_title] stands up. Her hunger for cum satisfied for now."
     $ the_person.draw_person(position = "stand4")

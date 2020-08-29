@@ -700,7 +700,8 @@ label SB_mom_anal_pay_label():
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
             $ the_person.break_taboo("anal_sex")
-            call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA41
+            # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA41
+            call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_sex_description_SBA41
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 the_person.char "Oh god, I came so hard..."
@@ -798,7 +799,8 @@ label SB_mom_anal_friday_label():
             $ the_person.draw_person(position = "cowgirl")
             the_person.char "Now, just let [the_person.title] take care of you. I'm gonna stick it into my most intimate hole now..."
             "[the_person.title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
-            call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA51
+            # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA51
+            call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_sex_description_SBA51
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 the_person.char "Oh god, I came so hard..."
@@ -1447,7 +1449,8 @@ label SB_stephanie_anal_fetish_label():
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
-        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
+        # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
+        call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_desk(), allow_continue = False) from _call_sex_description_SBA093
         $ the_person.max_opinion_score("anal sex")
         $ the_person.max_opinion_score("anal creampies")
         $ the_person.add_role(anal_fetish_role)
@@ -1496,7 +1499,8 @@ label SB_stephanie_anal_fetish_label():
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
-        call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
+        # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
+        call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, allow_continue = False) from _call_sex_description_SBA094
         $ the_person.max_opinion_score("anal sex")
         $ the_person.max_opinion_score("anal creampies")
         $ the_person.add_role(anal_fetish_role)
