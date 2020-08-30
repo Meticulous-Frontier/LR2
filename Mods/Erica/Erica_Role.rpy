@@ -1,7 +1,7 @@
 
 
 init 2 python:
-    erica_workout_wardrobe = wardrobe_from_xml("Erica_Workout_Wardrobe")
+    erica_workout_wardrobe = wardrobe_from_xml("Erica_W_Wardrobe")
     def erica_mod_initialization(): #Add actionmod as argument#
 
         erica_wardrobe = wardrobe_from_xml("Erica_Workout_Wardrobe")
@@ -64,7 +64,7 @@ init -2 python:
 
     def erica_apply_gym_outfit(): #No access to self in object specific override
         if erica_workout_wardrobe:
-            erica.apply_outfit(workout_wardrobe.decide_on_outfit2(erica).get_copy())
+            erica.apply_outfit(erica_workout_wardrobe.decide_on_outfit2(erica).get_copy())
         return
 
     def erica_intro_requirement(person):
