@@ -57,7 +57,7 @@ label mall_introduction_action_label:
         stranger.set_title(title_choice)
         stranger.set_possessive_title(get_random_possessive_title(stranger))
 
-    known_person.char "Let me, introduce my friend [formatted_title]."
+    known_person.char "Let me introduce my friend [formatted_title]."
     "[formatted_title] holds her hand out to shake yours."
 
     # sets your title for unknown person
