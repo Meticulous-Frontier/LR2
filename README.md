@@ -56,16 +56,16 @@ This mod collection extends the base game with a range of new features and enhan
 * BadRabbit
 
 ## How to Install:
-1. Download the .zip files from the both of the repository links below.
-2. Please note that zip-files cannot be extracted directly, but need some manual labor, since they are packaged zip files from their respective GIT repositories.
-3. Extract the "Mods" folder of the lr2-mods.zip into the <Lab Rats 2/game/> folder.
-4. You now should have a <Lab Rats 2/game/Mods> folder.
-5. Extract "game" folder of the lab-rats2-v0.x.x-bf.zip into the the <Lab Rats 2> folder replacing the original game folder files with the bug-fix files.
-6. Launch Lab Rats 2
-7. Disable the animations in the preference screen, this original game feature is unstable and slow at best....
-8. Start fresh game (when using bugfix, old saves from base game are no longer supported).
-9. The MOD settings can be configured or en-/disabled from your bedroom.
-10 Done.
+ 1. Download the .zip files from the both of the repository links below.
+ 2. Please note that zip-files cannot be extracted directly, but need some manual labor, since they are packaged zip files from their respective GIT repositories.
+ 3. Extract the "Mods" folder of the lr2-mods.zip into the <Lab Rats 2/game/> folder.
+ 4. You now should have a <Lab Rats 2/game/Mods> folder.
+ 5. Extract "game" folder of the lab-rats2-v0.x.x-bf.zip into the the <Lab Rats 2> folder replacing the original game folder files with the bug-fix files.
+ 6. Launch Lab Rats 2
+ 7. Disable the animations in the preference screen, this original game feature is unstable and slow at best....
+ 8. Start fresh game (when using bugfix, old saves from base game are no longer supported).
+ 9. The MOD settings can be configured or en-/disabled from your bedroom.
+10. Done.
 
 ## Android
 The android version of the game including the mod is available on MEGA at https://mega.nz/#F!SvZEDIrR!NBqa7nibwW4toHCxlztLcg
