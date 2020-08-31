@@ -77,8 +77,8 @@ init -1 python:
             if mc.business.get_employee_count() < mc.business.max_employee_count:
                 return True
                 #TODO Consider making this true only if recruiting increased via HR director? Would be much delayed intro
-                if sedatives_trait.researched or obedience_enhancer.researched or large_obedience_enhancer.researched: #TODO find a better trigger for this since we aren't doing MC serums anymore.
-                    return False
+                # if sedatives_trait.researched or obedience_enhancer.researched or large_obedience_enhancer.researched: #TODO find a better trigger for this since we aren't doing MC serums anymore.
+                #     return False
         return False
 
     def ashley_hire_directed_requirement(the_person):
