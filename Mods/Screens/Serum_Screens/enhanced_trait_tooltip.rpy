@@ -11,24 +11,26 @@ init 2:
                 xalign 0.5
                 frame:
                     background "#000080"
-                    xsize 500
+                    xsize 505
                     text "[the_trait.name]" style "serum_text_style"
 
                 hbox:
                     spacing 5
                     frame:
                         background "#007000"
-                        xsize 220
+                        xsize 250
+                        xfill True
                         text "[the_trait.positive_slug]" style "serum_text_style_traits"
 
                     frame:
                         background "#930000"
-                        xsize 220
+                        xsize 250
+                        xfill True
                         $ negative_slug_text = the_trait.build_negative_slug()
                         text "[negative_slug_text]" style "serum_text_style_traits"
                 frame:
                     background "#000080"
-                    xsize 500
+                    xsize 505
                     text "[the_trait.desc]" style "serum_text_style"
 
     screen trait_list_tooltip(the_traits, y_height = 0):
@@ -44,7 +46,7 @@ init 2:
                     xanchor 1.0
                     yanchor 0.0
                     vbox:
-                        xsize 500
+                        xsize 505
                         text trait.name style "menu_text_style" xalign 0.5 xanchor 0.5
                         text trait.positive_slug style "menu_text_style" size 14 color "#98fb98" xalign 0.5 xanchor 0.5
                         text trait.build_negative_slug() style "menu_text_style" size 14 color "#ff0000" xalign 0.5 xanchor 0.5
