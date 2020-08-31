@@ -132,7 +132,7 @@ init -1 python:
                 if mc.location == sex_store:
                     return True
             else:
-                return "Requires: $5,000"
+                return "Requires: $5000"
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
@@ -140,7 +140,7 @@ init -1 python:
             if mc.business.funds >= 1000:
                 return True
             else:
-                return "Requires: $1,00"
+                return "Requires: $1000"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
         if the_person.shop_progress_stage == 1:
@@ -148,7 +148,7 @@ init -1 python:
                 if mc.business.funds >= 5000:
                     return True
                 else:
-                    return "Requires: $5,000"
+                    return "Requires: $5000"
             else:
                 return "Wait for her stock to balance out"
 
@@ -158,7 +158,7 @@ init -1 python:
                 if mc.business.funds >= 15000:
                     return True
                 else:
-                    return "Requires: $15,000"
+                    return "Requires: $15000"
             else:
                 return "Wait for her stock to balance out"
 
