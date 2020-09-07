@@ -6,7 +6,7 @@
             guy_arousal = 16, guy_energy = 5,
             connections = [],
             intro = "intro_cowgirl_blowjob",
-            scenes = ["scene_cowgirl_blowjob_1","scene_cowgirl_blowjob_2"],
+            scenes = ["scene_cowgirl_blowjob_1","scene_cowgirl_blowjob_2", "scene_cowgirl_blowjob_3"],
             outro = "outro_cowgirl_blowjob",
             transition_default = "transition_default_cowgirl_blowjob",
             strip_description = "strip_cowgirl_blowjob", strip_ask_description = "strip_ask_cowgirl_blowjob",
@@ -56,8 +56,6 @@ label scene_cowgirl_blowjob_1(the_girl, the_location, the_object):
     "She pauses for a second while she licks the tip."
     the_person.char "Mmm, its so musky. It tastes good... mmmm"
     "Her mouth opens and her silky lips descend your cock again. You try to keep yourself from bucking your hips while she controls the pace."
-
-
     return
 
 label scene_cowgirl_blowjob_2(the_girl, the_location, the_object):
@@ -77,6 +75,16 @@ label scene_cowgirl_blowjob_2(the_girl, the_location, the_object):
     $ cowgirl_blowjob.current_modifier = "blowjob"
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] goes back down on you, stroking you quickly, using her hand to guide her lips up and down."
+
+    return
+
+label scene_cowgirl_blowjob_3(the_girl, the_location, the_object):
+    $ cowgirl_blowjob.current_modifier = "blowjob"
+    $ cowgirl_blowjob.redraw_scene(the_girl)
+    "[the_girl.possessive_title] is looking up at you, smiling with the corner of her lips and her eyes as she services you."
+    mc.name "Mmm [the_girl.title], that feels so good."
+    "Moaning her name only makes her work faster. Her smile and her eye contact is enchanting."
+    "She starts swirling her tongue around the tip, driving you crazy."
 
     return
 
