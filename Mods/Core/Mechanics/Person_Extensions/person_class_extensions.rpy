@@ -882,6 +882,81 @@ init -1 python:
 
     Person.decrease_sex_skill = decrease_sex_skill
 
+    # Change the work skill of a person to a specified score
+    def update_work_skill(self, skill, score, add_to_log = True):
+        skill_name = None
+        if skill == 0 or skill == "hr_skill":
+            skill_name = "HR Skill"
+            current = self.hr_skill
+        elif skill == 1 or skill == "market_skill":
+            skill_name = "Market Skill"
+            current = self.market_skill
+        elif skill == 2 or skill == "research_skill":
+            skill_name = "Research Skill"
+            current = self.research_skill
+        elif skill == 3 or skill == "production_skill":
+            skill_name = "Production Skill"
+            current = self.production_skill
+        elif skill == 4 or skill == "supply_skill":
+            skill_name = "Supply Skill"
+            current = self.supply_skill
+
+        if skill_name == None:
+            return
+
+        if current == score:
+            return
+        if skill_name == "HR Skill":
+            self.hr_skill = score
+        elif skill_name == "Market Skill":
+            self.market_skill = score
+        elif skill_name == "Research Skill":
+            self.research_skill = score
+        elif skill_name == "Production Skill":
+            self.production_skill = score
+        elif skill_name == "Supply Skill":
+            self.supply_skill = score
+
+        self.sex_skills[skill] = score
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " " + skill_name + " is now at level " + str(score), "float_text_green")
+        return
+
+    Person.update_work_skill = update_work_skill
+
+    # increase skill of person by one until max_value is reached.
+    def increase_work_skill(self, skill, max_value = 6, add_to_log = True):
+        if skill == 0 or skill == "hr_skill":
+            self.update_work_skill("hr_skill", min(max_value, self.hr_skill + 1), add_to_log = add_to_log)
+        elif skill == 1 or skill == "market_skill":
+            self.update_work_skill("market_skill", min(max_value, self.market_skill + 1), add_to_log = add_to_log)
+        elif skill == 2 or skill == "research_skill":
+            self.update_work_skill("research_skill", min(max_value, self.research_skill + 1), add_to_log = add_to_log)
+        elif skill == 3 or skill == "production_skill":
+            self.update_work_skill("production_skill", min(max_value, self.production_skill + 1), add_to_log = add_to_log)
+        elif skill == 4 or skill == "supply_skill":
+            self.update_work_skill("supply_skill", min(max_value, self.supply_skill + 1), add_to_log = add_to_log)
+
+        return
+
+    Person.increase_work_skill = increase_work_skill
+
+    def decrease_work_skill(self, skill, add_to_log = True):
+        if skill == 0 or skill == "hr_skill":
+            self.update_work_skill("hr_skill", max(0, self.hr_skill - 1), add_to_log = add_to_log)
+        elif skill == 1 or skill == "market_skill":
+            self.update_work_skill("market_skill", max(0, self.market_skill - 1), add_to_log = add_to_log)
+        elif skill == 2 or skill == "research_skill":
+            self.update_work_skill("research_skill", max(max_value, self.research_skill - 1), add_to_log = add_to_log)
+        elif skill == 3 or skill == "production_skill":
+            self.update_work_skill("production_skill", max(max_value, self.production_skill - 1), add_to_log = add_to_log)
+        elif skill == 4 or skill == "supply_skill":
+            self.update_work_skill("supply_skill", max(max_value, self.supply_skill - 1), add_to_log = add_to_log)
+
+        return
+
+    Person.decrease_work_skill = decrease_work_skill
+
     # Change Multiple Stats for a person at once (less lines of code, better readability)
     def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
         if not obedience is None:
@@ -1606,3 +1681,43 @@ init -1 python:
     Person.has_oral_fetish = has_oral_fetish
     Person.has_internal_cum_fetish = has_internal_cum_fetish
     Person.has_external_cum_fetish = has_external_cum_fetish
+
+    #Additional functions
+
+    def is_submissive(self):
+        if self.get_opinion_score("being submissive") > 0:
+            return True
+        elif self.get_opinion_score("being submissive") > -2 and self.obedience > 150:
+            return True
+        return False
+
+    Person.is_submissive = is_submissive
+
+    def is_jealous(self):
+        if self.event_triggers_dict.get("is_jealous", True) == True:
+            if self.love > 90 and self.obedience > 200:
+                self.event_triggers_dict["is_jealous"] = False
+                return False
+            return True
+        else:
+            return False
+
+    Person.is_jealous = is_jealous
+
+    def attempt_opinion_training(self, the_opinion, modifier = 0):
+        if self.suggestability + modifier > renpy.random.randint(0, 100):
+            self.increase_opinion_score(the_opinion)
+        return
+
+    def attempt_sex_skill_training(self, the_skill, modifier = 0):
+        if self.suggestability + modifier > renpy.random.randint(0, 100):
+            self.increase_sex_skill(the_skill)
+        return
+
+    def attempt_skill_training(self, the_skill, modifier = 0):
+        if self.suggestability + modifier > renpy.random.randint(0, 100):
+            self.increase_opinion_score(the_opinion)
+
+        return
+
+    Person.attempt_opinion_training = attempt_opinion_training
