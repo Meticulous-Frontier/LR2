@@ -86,7 +86,7 @@ label scene_cowgirl_blowjob_3(the_girl, the_location, the_object):
     "Moaning her name only makes her work faster. Her smile and her eye contact is enchanting."
     "She starts swirling her tongue around the tip, driving you crazy."
     "Her lips close around the tip and she suckles it a bit, her tongue still circling it."
-    
+    "She closes her eyes, clearly just enjoying the taste as she suckles a bit of pre-cum from the tip."
     return
 
 label outro_cowgirl_blowjob(the_girl, the_location, the_object):

@@ -639,12 +639,13 @@ init 3 python:
         return False
 
     def candace_calculate_discount():
-        if candace.is_employee():
-            if candace_is_giving_supply_discount():
-                if candace_is_bimbo():
-                    return 0.90
-                else:
-                    return 0.80
+        if "candace" in globals():
+            if candace.is_employee():
+                if candace_is_giving_supply_discount():
+                    if candace_is_bimbo():
+                        return 0.90
+                    else:
+                        return 0.80
         return 1.0
 
 
