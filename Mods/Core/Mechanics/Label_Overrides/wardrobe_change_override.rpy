@@ -23,13 +23,13 @@ label wardrobe_change_label_enhanced(the_person):
     if picked_option == "add":
         mc.name "[the_person.title], I've got something I'd like you to wear for me."
         $ clear_scene()
-        call screen outfit_select_manager()
+        call screen outfit_select_manager() #NOTE: This returns a list of [choice, outfit] e.g ["selected", outfit]
         $ the_person.draw_person()
         if _return == "No Return":
             mc.name "On second thought, never mind."
             return
 
-        $ new_outfit = _return
+        $ new_outfit = _return[1] #Select the outfit from the returned list
         
         call screen enhanced_main_choice_display(build_menu_items([build_wardrobe_change_save_menu(new_outfit)]))
         $ outfit_type = _return
