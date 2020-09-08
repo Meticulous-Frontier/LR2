@@ -1080,7 +1080,18 @@ init -1 python:
         if the_animation:
             # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the starting image without the frame
-            self.outfit.remove_clothing(the_clothing) #Remove the clothing
+            if isinstance(the_clothing, list):  #Handle the half-off state for whether it should be removed or not.
+                    for cloth in the_clothing:
+                        if half_off_instead:
+                            self.outfit.half_off_clothing(cloth) #Half-off the clothing
+                        else:
+                            self.outfit.remove_clothing(cloth) #Remove the clothing
+            else:
+                if half_off_instead:
+                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
+                else:
+                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
+
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the top image without the frame
 
             x_size, y_size = position_size_dict.get(position)
@@ -1105,6 +1116,18 @@ init -1 python:
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+            
+            if isinstance(the_clothing, list): #Handle the half-off state for whether it should be removed or not.
+                    for cloth in the_clothing:
+                        if half_off_instead:
+                            self.outfit.half_off_clothing(cloth) #Half-off the clothing
+                        else:
+                            self.outfit.remove_clothing(cloth) #Remove the clothing
+            else:
+                if half_off_instead:
+                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
+                else:
+                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
             self.outfit.remove_clothing(the_clothing)
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
