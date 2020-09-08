@@ -258,7 +258,7 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
         "Grope her ass":
             "You hands are drawn to her cheeks. With a soft touch you trace your finger down around their delicious curve."
             "You grab a handful, her ass flesh feels tight and full in your hand. She moans and you give her a couple vigorous thrusts."
-            mc.name "Your ass is a amazing. Maybe I'll fuck you back there next..."
+            mc.name "Your ass is amazing. Maybe I'll fuck you back there next..."
             "She moans and pushes back against you as you fuck."
     return
 

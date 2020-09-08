@@ -40,12 +40,13 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
                     "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                     "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
-                the_person.char "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
-                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
-                $ the_girl.cum_in_vagina()
-                $ cowgirl.redraw_scene(the_girl)
-                "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
-                "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
+                else:
+                    the_person.char "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
+                    "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                    $ the_girl.cum_in_vagina()
+                    $ cowgirl.redraw_scene(the_girl)
+                    "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+                    "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
             else:
                 the_person.char "Already? Is my cunt to just too much for you to handle?"
                 if the_person.get_opinion_score("creampies") > 0:

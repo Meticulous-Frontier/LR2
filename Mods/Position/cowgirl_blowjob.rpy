@@ -6,7 +6,7 @@
             guy_arousal = 16, guy_energy = 5,
             connections = [],
             intro = "intro_cowgirl_blowjob",
-            scenes = ["scene_cowgirl_blowjob_1","scene_cowgirl_blowjob_2"],
+            scenes = ["scene_cowgirl_blowjob_1","scene_cowgirl_blowjob_2", "scene_cowgirl_blowjob_3"],
             outro = "outro_cowgirl_blowjob",
             transition_default = "transition_default_cowgirl_blowjob",
             strip_description = "strip_cowgirl_blowjob", strip_ask_description = "strip_ask_cowgirl_blowjob",
@@ -18,6 +18,7 @@
             associated_taboo = "sucking_cock")
 
         list_of_girl_positions.append(cowgirl_blowjob)
+        cowgirl_blowjob.girl_outro = "GIC_outro_cowgirl_blowjob"
 
 
 label intro_cowgirl_blowjob(the_girl, the_location, the_object):
@@ -55,8 +56,6 @@ label scene_cowgirl_blowjob_1(the_girl, the_location, the_object):
     "She pauses for a second while she licks the tip."
     the_person.char "Mmm, its so musky. It tastes good... mmmm"
     "Her mouth opens and her silky lips descend your cock again. You try to keep yourself from bucking your hips while she controls the pace."
-
-
     return
 
 label scene_cowgirl_blowjob_2(the_girl, the_location, the_object):
@@ -77,6 +76,17 @@ label scene_cowgirl_blowjob_2(the_girl, the_location, the_object):
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] goes back down on you, stroking you quickly, using her hand to guide her lips up and down."
 
+    return
+
+label scene_cowgirl_blowjob_3(the_girl, the_location, the_object):
+    $ cowgirl_blowjob.current_modifier = "blowjob"
+    $ cowgirl_blowjob.redraw_scene(the_girl)
+    "[the_girl.possessive_title] is looking up at you, smiling with the corner of her lips and her eyes as she services you."
+    mc.name "Mmm [the_girl.title], that feels so good."
+    "Moaning her name only makes her work faster. Her smile and her eye contact is enchanting."
+    "She starts swirling her tongue around the tip, driving you crazy."
+    "Her lips close around the tip and she suckles it a bit, her tongue still circling it."
+    "She closes her eyes, clearly just enjoying the taste as she suckles a bit of pre-cum from the tip."
     return
 
 label outro_cowgirl_blowjob(the_girl, the_location, the_object):
@@ -193,4 +203,56 @@ label orgasm_cowgirl_blowjob(the_girl, the_location, the_object):
     "You notice she has one hand between her legs, getting herself off while she blows you."
     "She stops moving her head and a long moans vibrates around your cock. She is cumming!"
     "When she finishes she looks at you and smiles before resuming stroking your cock with her plush lips."
+    return
+
+label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = None):
+    $ the_goal = the_girl.get_sex_goal()
+
+    if the_goal == "get off" or the_goal == "hate fuck" or the_goal == "vaginal creampie" or the_goal == "anal creampie" or the_goal == None or the_goal == "get mc off":
+        $ cowgirl_blowjob.call_default_outro(the_girl, the_location, the_object)
+    elif the_goal == "waste cum":
+        "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        mc.name "Fuck, here I come!"
+        "[the_girl.possessive_title]'s mouth suddenly pops of your cock and she strokes you with her hand. She points your cock... up at you?"
+        the_girl.char "I'm not letting your spunk touch me!"
+        "You groan but you don't have time to take over, so you just lay back and let your orgasm overtake you."
+        "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
+        "When you finish you lay back and [the_girl.title] stops stroking you. She has a naughty smile on her face."
+        $ the_girl.change_happiness(2)
+        $ the_girl.change_obedience(-3)
+        "She wipes her hand on your leg and starts to get up."
+    elif the_goal == "facial" or the_goal == "body shot":
+        "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        mc.name "Fuck, here I come!"
+        "[the_girl.possessive_title]'s mouth pulls back with a satisfyingly wet pop. She aims it at her face."
+        $ cowgirl_blowjob.current_modifier = None
+        $ cowgirl_blowjob.redraw_scene(the_girl)
+        the_girl.char "Do it... I want it all over me!"
+        "Her encouraging words push you over the edge. She sticks out her tongue to try and catch some as your cock erupts."
+        $ the_girl.cum_on_face()
+        $ cowgirl_blowjob.redraw_scene(the_girl)
+        "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
+
+
+    elif the_goal == "oral creampie":
+        "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        mc.name "Fuck, here I come!"
+        "[the_girl.title]'s head keeps bobbing up and down, making it clear where she wants you to cum. She keeps blowing you until you tense up and start to pump your load out into her mouth."
+        if the_girl.effective_sluttiness() > 70:
+            "[the_girl.possessive_title] doesn't even flinch as you shoot your hot cum across the back of her throat."
+            "She keeps bobbing her head up and down until you've let out every last drop, then slides back carefully and looks up with a mouth full of sperm."
+        else:
+            "[the_girl.possessive_title] stops when you shoot your first blast of hot cum across the back of her throat."
+            "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off and looks up to show you a mouth full of sperm."
+
+        $ the_girl.cum_in_mouth()
+        $ cowgirl_blowjob.redraw_scene(the_girl)
+        if the_girl.effective_sluttiness() > 80:
+            "Once you've had a good long look at your work [the_girl.title] closes her mouth and swallows loudly."
+            "It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
+        else:
+            "Once you've had a good long look at your work [the_girl.title] leans over to the side and lets your cum dribble out slowly onto the ground."
+            "She straightens up and wipes her lips with the back of her hand."
+    else:
+        $ cowgirl_blowjob.call_default_outro(the_girl, the_location, the_object)
     return

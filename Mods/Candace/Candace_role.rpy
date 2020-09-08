@@ -35,11 +35,27 @@ init 2 python:
                 return True
         return False
 
+    def candace_overhear_supply_order_requirement(person):
+        if day > candace_get_hire_date() + 14:
+            if time_of_day > 1:
+                if person.sluttiness > 80:
+                    if person.location() == person.work:
+                        return True
+        return False
+
+    def candace_supply_order_discount_requirement():
+        if time_of_day == 1:
+            if mc.is_at_work() and mc.business.is_open_for_business():
+                return True
+        return False
+
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
     candace_get_to_know = Action("Get to know her", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
     candace_convince_to_quit = Action("Convince her to quit", candace_convince_to_quit_requirement, "candace_convince_to_quit_label", menu_tooltip = "Quit her current job and join your company.")
     candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
+    candace_overhear_supply_order = Action("Overhear supply call", candace_overhear_supply_order_requirement, "candace_overhear_supply_order_label")
+    candace_supply_order_discount = Action("Candi reports success", candace_supply_order_discount_requirement, "candace_supply_order_discount_label")
 
 
     def candace_mod_initialization():
@@ -104,6 +120,8 @@ init 2 python:
         candace.event_triggers_dict["quit_job"] = 0
         candace.event_triggers_dict["last_talk_day"] = 0
         candace.event_triggers_dict["clothes_shopping"] = 0
+        candace.event_triggers_dict["supply_discount_active"] = False
+        candace.event_triggers_dict["is_bimbo"] = True
 
         candace.add_role(candace_role)
 
@@ -467,7 +485,85 @@ label candace_convince_to_quit_label(the_person):
     # she has quit her job, give her a new wardrobe
     $ rebuild_wardrobe(candace)
     $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
+    $ candace.add_unique_on_room_enter_event(candace_overhear_supply_order)
     call advance_time from _call_advance_time_candace_convince_to_quit_label
+    return
+
+label candace_overhear_supply_order_label(the_person):
+    "You step into the office and look around. You see your employees hard at work. Close to you, you hear [the_person.title], on the phone with a supplier."
+    "You can't help but overhear the conversation. As you look closer, you realize she is doing a video call."
+    $ scene_manager = Scene()  #Clean Scene
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    the_person.char "Yes sir that's right. We need more of this stuff! Looks like its called up... cal... calcium... phos... oh balls"
+    "????" "I'm not sure I understand what you need. Do you have a label you can show me?"
+    the_person.char "Oh! Certainly... I'd be glad to show you anything you want... let me see here."
+    "She goes through a draw in her desk and pulls out an empty vial. She tries holding it up to the camera."
+    if the_person.outfit.tits_available():
+        "????" "Its too close... can you back it up a little bit?... Yeah a bit farther..."
+        "With her tits out, she pulls the vial back until it is resting in her cleavage."
+        "????" "Now its having a hard time focusing... can you move the camera closer?"
+        "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
+    else:
+        "????" "I can't make out the label, theres too many colors in the background..."
+        the_person.char "Oh! I know how to fix that."
+        "You are hardly surprised when you see [the_person.title] start to take her top off."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+        the_person.char "How about now?"
+        "????" "Its too close... can you back it up a little bit?... Yeah a bit farther..."
+        "With her tits out, she pulls the vial back until it is resting in her cleavage."
+        "????" "Now its having a hard time focusing... can you move the camera closer?"
+        "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
+    the_person.char "Are you getting a good look sir? Of the label of course!"
+    "????" "Yeah, I see it now. Calcium phosphide. You've been most helpful! I can get you a discount on those if you'd like, as thanks for your big... help"
+    "[the_person.title] chuckles. You notice her nipples are getting a little stiffer... she seems to really be enjoying this..."
+    the_person.char "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
+    "She trades numbers with the supplier. Wait did she just turn down a discount? You watch as she says goodbye, making sure to lick her lips and wink before ending the call."
+    "You decide to talk to her about it. You don't want to stifle her... creativity... but if she's getting discounts just for doing what she would already be doing, there's nothing wrong with that, right?"
+    "You walk up to her discounts. She smiles at you when she sees you approach."
+    the_person.char "Hello [the_person.mc_title]! Anything I can do for you today?"
+    "You get ready to speak... but you notice her posture subtly change as she finishes that sentence. Did she just push her chest out a bit? You shake it off."
+    mc.name "Yes, sorry I couldn't help but overheard your conversation with that supplier."
+    the_person.char "Yes... sorry I just couldn't help but have a little fun with the guy..."
+    mc.name "That's perfectly fine, I didn't mind that at all."
+    the_person.char "Oh? That's good!"
+    mc.name "Yeah, I'm just curirous. Why did you turn down the discount? If they are offering to discount the product..."
+    the_person.char "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
+    the_person.char "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like the owe me!"
+    mc.name "I'm sure that if you accepted their offer of a discount, they would still send you dick pics."
+    "She thinks about what you said for a bit."
+    the_person.char "I don't know... are you sure?"
+    mc.name "I'll tell you what, try it on your next call and see what happens. If it doesn't go the way you want, you don't have to accept it anymore."
+    the_person.char "Oh! That's a good idea! I mean yeah I miss out on one... but I suppose its worth it to try!"
+    "You are glad you get her to agree. You decide to let her get back to work."
+    mc.name "Let me know how it goes."
+    the_person.char "Yes sir!"
+    $ scene_manager.clear_scene()
+    $ mc.business.mandatory_crises_list.append(candace_supply_order_discount)
+    return
+
+
+
+    return
+
+label candace_supply_order_discount_label():
+    $ the_person = candace
+    $ scene_manager = Scene()  #Clean Scene
+    $ scene_manager.add_actor(the_person)
+    "As you arrive at work, [the_person.title] is wandering around, apparently looking for you."
+    the_person.char "Ah! [the_person.mc_title]! I need to talk to you!"
+    mc.name "Yes?"
+    the_person.char "I tried what you said, and it worked! Our supplier for... for... fuck what was the chemical name..."
+    "She stops talking for a second as she thinks."
+    the_person.char "Ahh fuck it who cares. Whatever it was, they gave me a 10% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
+    "That was... a lot of details."
+    the_person.char "So... I kept going, and got almost all of suppliers to give me some kind of discount! And it hasn't effect my umm... success rate... with sexting afterwards at all!"
+    "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
+    "Fuck it, you decide to just let her get whatever discounts she happens to get and take the extra money without pushing your luck."
+    mc.name "That's great. Thank you for your hard work."
+    the_person.char "Yes sir!"
+    $ candace.event_triggers_dict["supply_discount_active"] = True
+    $ scene_manager.clear_scene()
+    "You now receive a 10% discount on all supply orders."
     return
 
 #Character variable wrappers
@@ -535,3 +631,25 @@ init 3 python:
             if not candace_get_has_gone_clothes_shopping():
                 candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
         return
+
+    def candace_is_giving_supply_discount():
+        if candace.is_employee():
+            if candace.event_triggers_dict.get("supply_discount_active", False) == True:
+                return True
+        return False
+
+    def candace_calculate_discount():
+        if "candace" in globals():
+            if candace.is_employee():
+                if candace_is_giving_supply_discount():
+                    if candace_is_bimbo():
+                        return 0.90
+                    else:
+                        return 0.80
+        return 1.0
+
+
+    def candace_is_bimbo():
+        if candace.event_triggers_dict.get("is_bimbo", True) == True:
+            return True
+        return False

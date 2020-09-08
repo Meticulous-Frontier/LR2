@@ -181,7 +181,7 @@ label SB_fetish_vaginal_label(the_person):
             $ add_breed_me_collar_to_base_outfit(the_person)
             $ the_person.update_sex_skill("Vaginal", 6)
             $ the_person.event_triggers_dict["LastVaginalFetish"] = day
-            
+
         "Refuse":       # allow for player to decide if he wants to induce fetish
             mc.name "I'm sorry [the_person.title], I really need to get some sleep."
             $ the_person.change_obedience(-10)
@@ -333,7 +333,7 @@ label SB_fetish_vaginal_event_label(the_person):
 #SBV3
 label SB_fetish_mom_vaginal_label():
     $ the_person = mom
-    $ the_person.event_triggers_dict["LastVaginalFetish"] = day    
+    $ the_person.event_triggers_dict["LastVaginalFetish"] = day
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You are just starting to drift off to sleep, when you hear a knock at your door."
@@ -366,7 +366,7 @@ label SB_fetish_mom_vaginal_label():
     "[the_person.possessive_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
     the_person.char "[the_person.mc_title]! Please, I need you inside me again. Will you please... make love to me?"
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
-    $ the_person.break_taboo("vaginal_sex")    
+    $ the_person.break_taboo("vaginal_sex")
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV30
     #$ the_person.SB_fetish = "vaginal sex"
@@ -427,7 +427,7 @@ label SB_fetish_lily_vaginal_label():
     "[the_person.possessive_title] begins to pull off your clothes. It isn't long until you are naked, your flesh now against hers."
     the_person.char "[the_person.mc_title]! Please, I need you inside me again. Fuck me [the_person.mc_title]!!!"
     "You moan into her mouth and quickly prepare yourself to penetrate [the_person.possessive_title]."
-    $ the_person.break_taboo("vaginal_sex")    
+    $ the_person.break_taboo("vaginal_sex")
     ###Sex scene, missionary###   ###TODO: consider writing a variant of this because the default intro is going to be confusing###
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV40
     #$ the_person.SB_fetish = "vaginal sex"
@@ -472,7 +472,8 @@ label SB_cowgirl_wakeup_label(the_person):
     the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
-    call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
+    # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBV50
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person is mom:
         "[the_person.possessive_title] looks at you and smiles."

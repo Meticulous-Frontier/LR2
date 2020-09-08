@@ -59,7 +59,7 @@ init 1 python:
         return
 
     def quest_cure_discovery_start_requirement():
-        if day < 60: # we need to have put in some research for this event to occur
+        if day < 30: # we need to have put in some research for this event to occur
             return False
         if mc.business.head_researcher == None:
             return False

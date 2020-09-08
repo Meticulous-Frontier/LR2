@@ -79,17 +79,18 @@ init 5 python:
     def cheating_check_get_watcher(person):
         other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         for a_person in other_people:
-            if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
-                caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
-                if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
-                    a_person.add_unique_on_room_enter_event(caught_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+            if a_person.is_jealous():  #Only trigger cheating dialogue if girl is prone to jealousy
+                if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness/2): #You can get away with stuff half as slutty as she would do
+                    caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
+                    if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
+                        a_person.add_unique_on_room_enter_event(caught_cheating_action)
+                        renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
-            elif a_person.has_role(affair_role) and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
-                caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
-                if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
-                    a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                elif a_person.has_role(affair_role) and the_position.slut_requirement > ((a_person.sluttiness*2)/3): #You can get away with stuff two thirds as slutty as what she would do.
+                    caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
+                    if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
+                        a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
+                        renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
@@ -501,7 +502,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # In 13% of the cases she takes control regardless of obedience, but only when she came only once
             # higher chance when she likes taking control lower when she doesn't
-            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 20 > the_person.obedience or renpy.random.randint(1, 7 - (the_person.get_opinion_score("taking control") * 2)) == 1):
+            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience):
                 $ the_person.change_obedience(-3)
                 $ girl_in_charge = True
                 $ finished = False

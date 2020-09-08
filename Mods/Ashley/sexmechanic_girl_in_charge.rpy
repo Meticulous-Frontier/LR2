@@ -122,12 +122,10 @@ init -1:
 
         def construct_mc_turn_on_weighted_list(the_person, prohibit_tags = []):
             position_option_list = []
-            position_option_list.append(kissing, 30 + the_person.get_opinion_score("kissing"))
-            position_option_list.append(handjob, 30 + the_person.get_opinion_score("giving handjobs"))
-            position_option_list.append(drysex_cowgirl, 30 + the_person.get_opinion_score("taking control"))
+            position_option_list.append([kissing, 30 + the_person.get_opinion_score("kissing")])
+            position_option_list.append([handjob, 30 + the_person.get_opinion_score("giving handjobs")])
+            position_option_list.append([drysex_cowgirl, 30 + the_person.get_opinion_score("taking control")])
             return get_random_from_weighted_list(position_option_list)
-
-
 
 init 2:
     python:
@@ -139,6 +137,22 @@ init 2:
                     pass #TODO do this here or in the original call?
 
             dom_sex_goal_weighted_list = []
+
+            if SB_get_fetish_count(the_person) > 0: #She has fetishes, so use those to set a goal.
+                if the_person.has_vaginal_fetish():
+                    dom_sex_goal_weighted_list.append(["vaginal creampie", 100])
+                if the_person.has_anal_fetish():
+                    dom_sex_goal_weighted_list.append(["anal creampie", 100])
+                if the_person.has_oral_fetish():
+                    dom_sex_goal_weighted_list.append(["oral creampie", 100])
+                if the_person.has_internal_cum_fetish():
+                    dom_sex_goal_weighted_list.append(["vaginal creampie", 50])
+                    dom_sex_goal_weighted_list.append(["oral creampie", 50])
+                if the_person.has_external_cum_fetish():
+                    dom_sex_goal_weighted_list.append(["body shot", 50])
+                    dom_sex_goal_weighted_list.append(["facial", 50])
+                return get_random_from_weighted_list(dom_sex_goal_weighted_list)  #Hopefully this works if list only has one entry
+
             # If love is less than 0, we consider selfish sex goals
             if the_person.love < 0:
                 for goal in list_of_selfish_dom_sex_goals:
@@ -147,7 +161,6 @@ init 2:
                 dom_sex_goal_weighted_list.append(["get mc off", 30])
 
             #Next, we add individual goals based on her sluttiness. #TODO consider a list of constants declared at the top that can be changed for setting sluttiness threshholds for these.
-            #TODO adjust weights based on fetishes
             #body shot
             if the_person.sluttiness > 30:
                 body_shot_weight = 40 + (the_person.get_opinion_score("being covered in cum") * 10)
@@ -196,7 +209,7 @@ init 2:
 
 
             # when she enjoys tit fucks, add it to her position choices
-            if the_person.sex_skills["Foreplay"] > 2 and the_person.get_opinion_score("giving tit fucks") > 1 and the_person.has_large_tits():
+            if the_person.sex_skills["Foreplay"] > 2 and the_person.get_opinion_score("giving tit fucks") >= 1 and the_person.has_large_tits():
                 extra_positions.append(tit_fuck)
 
 
@@ -331,7 +344,16 @@ init 2:
                 return False
             return True
 
+        def requires_condom(the_person):
+            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold(situational_modifier = 10):  #
+                return True
+            return False
 
+        def go_raw_mid_sex(the_person):
+            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold(situational_modifier = 25):
+                if renpy.random.randint(0,100) < 10:  #10% chance per round over sluttiness threshold
+                    return True
+            return False
 
 
 
@@ -352,7 +374,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = []
 
-
+    if skip_intro:  #If we are alrady having sex, using whatever condom status presently is
+        $ using_condom = mc.condom
+    else:
+        $ using_condom = requires_condom(the_person)
     if start_position != None and sex_path == None:
         if the_goal == None:
             $ the_goal = "get mc off"
@@ -376,8 +401,13 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         if unit_test: #unit_test is for debug dialogue
             "No viable path."
 
-    elif object_choice == None:
+    if object_choice == None:
         $ object_choice = girl_choose_object_enhanced(the_person, sex_path[0].position)
+    if object_choice == None:
+        "[the_person.title] can't find a good place to have fun with you."
+        $ finished = True
+        if unit_test:
+            "No suitable object"
     $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
     #Next we mimic fuck_person() but only with applicable girl in charge parameters.
     #Privacy modifiers
@@ -404,6 +434,11 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     #We should be able to initiate sex. If we need to, call initial intros and taboo breaks.
     if not skip_intro and not finished:
         $ the_person.draw_person()
+        if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom:
+            the_person.char "Hang on a second. I need to wrap this thing up first."
+            "[the_person.title] gets a condom out of their own bag and opens it."
+            "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
+            $ mc.condom = True
         if not ignore_taboo and the_person.has_taboo(current_node.position.associated_taboo):
             # call mod taboo break
             $ current_node.position.call_transition_taboo_break(None, the_person, mc.location, object_choice)
@@ -413,7 +448,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
     #Now begin the sex loop
     while not finished:
-
+        if mc.condom and go_raw_mid_sex(the_person):
+            call remove_condom_go_raw(the_person, current_node.position) from _go_raw__girl_in_charge_01
+            $ mc.condom = False
+            $ using_condom = False
         if current_node.position.requires_hard and mc.recently_orgasmed:
             "Your post orgasm cock softens, stopping [the_person.possessive_title] for now."
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?
@@ -440,7 +478,19 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             if len(sex_path) > 0:
                 $ current_node = sex_path.pop(0)
                 $ object_choice = girl_choose_object_enhanced(the_person, current_node.position)
+                if object_choice == None:
+                    if current_node.position.requires_location == "kneel" or current_node.position.requires_location == "lay":
+                        $ object_choice = make_floor()
+                    elif current_node.position.requires_location == "lean":
+                        $ object_choice = make_wall()
+                    else:
+                        $ object_choice = make_chair()
                 the_person.char "Mmm, I think we're ready. Let's move on now!"
+                if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom and not mc.condom:
+                    the_person.char "Hang on a second. I need to wrap this thing up first."
+                    "[the_person.title] gets a condom out of their own bag and opens it."
+                    "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
+                    $ mc.condom = True
                 $ current_node.position.redraw_scene(the_person)
                 if not ignore_taboo and the_person.has_taboo(current_node.position.associated_taboo):
                     # call mod taboo break
@@ -461,7 +511,6 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
 
     #TODO create positive feedback here for accomplishing sex goal
-    #TODO conditions where sex can be continued. E.G. If she got off but leaves mc aroused, she may offer to keep going or relinquish control
     #First condition, she is obedient. offers to keep going or to let MC take over.
 
     if allow_continue: #Allows sex to keep going after girl finishes objectives
@@ -580,7 +629,17 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
 
-
+label remove_condom_go_raw(the_person, the_position):
+    the_person.char "Hang on a second..."
+    "[the_person.title] slowly pulls off your cock. You feel her give you a couple strokes with her hand."
+    "She slowly pulls the condom off your cock."
+    mc.name "[the_person.title]?"
+    the_person.char "Sssshhh... I need to feel it... inside me..."
+    "[the_person.possessive_title] slowly sinks band down onto your shaft, raw this time."
+    $ the_person.change_arousal(5)
+    $ mc.change_arousal(5)
+    "The heat from her body translates perfectly now that you have that piece of latex removed between you. It feels wonderful."
+    return
 
 init 1000 python:
     def GIC_unit_test(count = 1):#Count is the number of times we repeat the unit test.

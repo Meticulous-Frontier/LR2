@@ -16,6 +16,7 @@ init python:
         associated_taboo = "vaginal_sex")
 
     list_of_girl_positions.append(SB_reverse_cowgirl)
+    SB_reverse_cowgirl.girl_outro = "GIC_outro_SB_reverse_cowgirl"
 
 init 1:
     python:
@@ -359,7 +360,7 @@ label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] leads you to the [the_object.name]."
     the_girl.char "Lie down for me [the_girl.mc_title]..."
     "You nod and follow her instructions. She steps over you and kneels down, giving you a perfect view of her ass."
-    if the_girl.effective_sluttiness(cowgirl.associated_taboo) > cowgirl.slut_cap:
+    if the_girl.effective_sluttiness(SB_reverse_cowgirl.associated_taboo) > SB_reverse_cowgirl.slut_cap:
         "She reaches between her legs and grabs your cock, bringing it towards her and running the tip against her clit."
         "You feel her thighs tremble with pleasure."
     else:
@@ -370,3 +371,104 @@ label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "She closes her eyes and moans, holding your entire length inside of her for a few seconds."
     "When she's ready she leans forward, grabs your legs and starts to move her hips up and down, giving you a perfect view of her ass bouncing up and down on your cock."
     return
+
+label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal = None):
+    $ the_goal = the_girl.get_sex_goal()
+
+    if the_goal == "get off" or the_goal == "anal creampie" or the_goal == "facial" or the_goal == "oral creampie" or the_goal == None or the_goal == "get mc off":
+        $ SB_reverse_cowgirl.call_default_outro(the_girl, the_location, the_object)
+    elif the_goal == "waste cum":
+        "[the_girl.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
+        mc.name "Ah, I'm going to cum!"
+        "[the_girl.possessive_title] looks back at you and gives you a naughty smile."
+        if mc.condom:
+            "At the last second, she pulls off you and pulls your condom off."
+        else:
+            "Her hips lift up off you. Your cock is suddenly cold and aching to be back inside of her as you get ready to cum."
+        the_girl.char "I'm not letting you cum in me!"
+        "You groan but you don't have time to take over, so you just lay back and let your orgasm overtake you."
+        "She reaches down between her legs and strokes your cock, pointing it at you."
+        "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
+        "When you finish you lay back and [the_girl.title] stops stroking you. She wipes her hand on your leg."
+        $ the_girl.change_happiness(2)
+        $ the_girl.change_obedience(-3)
+    elif the_goal == "hate fuck":
+        if the_person.on_birth_control or mc.condom:
+            the_person.char "Already? I guess the view of my ass was just too much for you to handle."
+            if mc.condom:
+                the_person.char "Whatever, I'm sure the condom can handle your pathetic load."
+                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+                "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
+            else:
+                the_person.char "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
+                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                $ the_girl.cum_in_vagina()
+                $ SB_reverse_cowgirl.redraw_scene(the_girl)
+                "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+                "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
+        else:
+            the_person.char "Already? Is my cunt to just too much for you to handle?"
+            if the_person.get_opinion_score("creampies") > 0:
+                the_person.char "Whatever. I want to feel you cum insdie me. Not like your swimmers are strong enough to knock me up anyway."
+                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                $ the_girl.cum_in_vagina()
+                $ SB_reverse_cowgirl.redraw_scene(the_girl)
+                "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+                "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
+            else:
+                the_person.char "Whatever. Hurry up and cum."
+                "She starts to speed up. You moan as you get ready to fire your load up inside her."
+                "At the last second she pulls off, you groan as your start to cum, spraying all over your stomach."
+                "She watches as your cock twitches and finishes."
+                the_person.char "Look at all that wasted cum... Too bad, [the_person.mc_title]!"
+                "She rolls off and lies next to you on the [the_object.name]."
+    elif the_goal == "vaginal creampie":
+        the_girl.char "Yes! Ah!"
+        "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
+        "Her breath catches in her throat when you pulse out your hot load of cum deep inside of her."
+        #the_girl.char "Oh my god... Give it all to me [the_girl.mc_title]... Fill me up..."
+        if mc.condom:
+            "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+            "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
+            if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                $ the_girl.discover_opinion("drinking cum")
+                "[the_girl.possessive_title] reaches below her for your cock. With delicate fingers she slides your condom off, pinching above the bulge to keep your cum from spilling out."
+                the_girl.char "It would be a shame to waste all of this, right?"
+                "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+            else:
+                "[the_girl.possessive_title] reaches for your cock, removes the condom carefully, and ties the end in a knot."
+                the_girl.char "Look at all that cum. Well done."
+        else:
+            $ the_girl.call_dialogue("cum_vagina")
+            $ the_girl.cum_in_vagina()
+            $ SB_reverse_cowgirl.redraw_scene(the_girl)
+            "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+            "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
+        "She rolls off and lies next to you on the [the_object.name]."
+    elif the_goal == "body shot":
+        the_person.char "Ohhh, cum all over my ass!"
+        if mc.condom:
+            "[the_girl.possessive_title] pulls off you, reaches down and pulls your condom off and begins stroking you."
+        else:
+            "[the_girl.possessive_title] pulls off you, reaches down and begins to stroke you."
+        "She strokes you and simultaneously points your cock at her ass."
+        $ the_girl.cum_on_ass()
+        $ SB_reverse_cowgirl.redraw_scene(the_girl)
+        "She rolls off and lies next to you on the [the_object.name]."
+    elif the_goal == "oral creampie":
+        the_person.char "Wait! I want it in my mouth!"
+        if mc.condom:
+            "[the_girl.possessive_title] pulls off you, but quickly moves down your body. She pulls off the condom and takes you into her mouth."
+        else:
+            "[the_girl.possessive_title] pulls off you, but quickly moves down your body and takes you into her mouth."
+        $ the_person.draw_person(position = "kneeling1")
+        "She moans as your cum begins to spill into her mouth"
+        $ the_girl.cum_in_mouth()
+        $ the_person.draw_person(position = "kneeling1")
+        "You let out a shuddering moan as you cum, pumping your sperm into [the_girl.possessive_title]'s eager mouth. She makes sure to wait until you're completely finished."
+        "[the_girl.title] closes her mouth and swallows loudly."
+        "It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
+    else:
+        $ SB_reverse_cowgirl.call_default_outro(the_girl, the_location, the_object)
