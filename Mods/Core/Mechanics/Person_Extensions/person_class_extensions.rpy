@@ -1058,7 +1058,7 @@ init -1 python:
     # add location to store original personality
     Person.original_personality = None
 
-    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None, show_person_info = False): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None, show_person_info = False, half_off_instead = False): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
         #Note: this function includes a call to remove_clothing, it is not needed seperately.
         if position is None:
             position = self.idle_pose
