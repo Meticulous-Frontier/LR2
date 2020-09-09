@@ -134,7 +134,7 @@ init 5 python:
                 return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
-            # if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7: # Maybe I hired her just to have her as manager (immediately)
+            # if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7: # Maybe I hired her just because I want to have her as manager (immediately)
                 # return "Too recently hired"
             return True
         return False
