@@ -22,9 +22,6 @@
 
 init 2 python:
     sarah_strip_pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
-    sarah_weekend_surprise_action = ActionMod("Sarah's Weekend Surprise",Sarah_weekend_surprise_crisis_requirement,"Sarah_weekend_surprise_crisis_label",
-        menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = 7)
-
     sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
     def Sarah_mod_initialization(): #Add actionmod as argument#
