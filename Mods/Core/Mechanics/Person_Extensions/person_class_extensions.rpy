@@ -33,7 +33,7 @@ init -1 python:
         if "stripclub_bdsm_performers" in globals():
             for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
                 if self in team:
-                    team.remove(self)
+                    team.rsemove(self)
 
         # remove from relationships array
         town_relationships.remove_all_relationships(self)
@@ -1128,7 +1128,6 @@ init -1 python:
                     self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
                 else:
                     self.outfit.remove_clothing(the_clothing) #Remove the clothing
-            self.outfit.remove_clothing(the_clothing)
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
             renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
