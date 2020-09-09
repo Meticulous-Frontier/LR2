@@ -247,7 +247,7 @@ label mom_outfit_help_crisis_label_enhanced():
             "You go to [the_person.possessive_title]'s closet and start to put together an outfit of your own for her."
             $ clear_scene()
             call screen outfit_select_manager(slut_limit = the_person.sluttiness + 10)
-            $ third_outfit = _return
+            $ third_outfit = _return[1]
             $ the_person.draw_person()
 
             if third_outfit == "No Return":
