@@ -33,7 +33,7 @@ init -1 python:
         if "stripclub_bdsm_performers" in globals():
             for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
                 if self in team:
-                    team.rsemove(self)
+                    team.remove(self)
 
         # remove from relationships array
         town_relationships.remove_all_relationships(self)
