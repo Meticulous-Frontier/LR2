@@ -505,7 +505,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         elif len(sex_path) > 0:
             if not sex_path[0].position.check_clothing(the_person): #We don't meet the clothing requirements for the next position, so we strip some
                 $ the_clothing = the_person.choose_strip_clothing_item()
-                $ current_node.position.call_strip(the_person, the_clothing, mc.location, the_object)
+                $ current_node.position.call_strip(the_person, the_clothing, mc.location, object_choice)
             else:
                 call girl_strip_event(the_person, current_node.position, object_choice) from _call_girl_strip_event_girl_in_charge_01
 
