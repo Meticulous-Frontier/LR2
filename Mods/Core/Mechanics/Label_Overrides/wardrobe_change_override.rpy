@@ -29,7 +29,10 @@ label wardrobe_change_label_enhanced(the_person):
             mc.name "On second thought, never mind."
             return
 
-        $ new_outfit = _return[1] #Select the outfit from the returned list
+        if isinstance(_return, list): # Newer versions
+            $ new_outfit = _return[1] #Select the outfit from the returned list
+        else: #Compatability for older versions.
+            $ new_outfit = _return
         
         call screen enhanced_main_choice_display(build_menu_items([build_wardrobe_change_save_menu(new_outfit)]))
         $ outfit_type = _return
