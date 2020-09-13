@@ -95,7 +95,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             else:
                 $ the_girl.cum_on_stomach()
                 $ missionary.redraw_scene(the_girl)
-                if pregnant_role in the_subject.special_role and the_subject.event_triggers_dict.get("preg_transform_day",day) < day:
+                if pregnant_role in the_person.special_role and the_person.event_triggers_dict.get("preg_transform_day",day) < day:
                     if mc.condom:
                         "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s pregnancy bump."
                     else:
