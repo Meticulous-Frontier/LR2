@@ -798,15 +798,20 @@ screen cheat_menu():
 
 
                         if font_color_options:
-                            vbox:
-                                for c in readable_color_list:
-                                    textbutton "{color=[c]}[the_person.name]{/color}":
-                                        xfill True
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "cheat_text_style"
+                            viewport:
+                                mousewheel True
+                                scrollbars "vertical"
+                                xsize 500
 
-                                        if editing_target.char.what_args["color"] == c:
-                                            background "#4f7ad6"
-                                            hover_background "#4f7ad6"
+                                vbox:
+                                    for c in readable_color_list:
+                                        textbutton "{color=[c]}[the_person.name]{/color}":
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
 
-                                        action [Function(cheat_person_font_color, editing_target, c)]
+                                            if editing_target.char.what_args["color"] == c:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
+
+                                            action [Function(cheat_person_font_color, editing_target, c)]

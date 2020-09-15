@@ -554,7 +554,7 @@ label candace_supply_order_discount_label():
     mc.name "Yes?"
     the_person.char "I tried what you said, and it worked! Our supplier for... for... fuck what was the chemical name..."
     "She stops talking for a second as she thinks."
-    the_person.char "Ahh fuck it who cares. Whatever it was, they gave me a 10% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
+    the_person.char "Ahh fuck it who cares. Whatever it was, they gave me a 10\% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
     "That was... a lot of details."
     the_person.char "So... I kept going, and got almost all of suppliers to give me some kind of discount! And it hasn't effect my umm... success rate... with sexting afterwards at all!"
     "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
@@ -563,7 +563,7 @@ label candace_supply_order_discount_label():
     the_person.char "Yes sir!"
     $ candace.event_triggers_dict["supply_discount_active"] = True
     $ scene_manager.clear_scene()
-    "You now receive a 10% discount on all supply orders."
+    "You now receive a 10\% discount on all supply orders."
     return
 
 #Character variable wrappers
