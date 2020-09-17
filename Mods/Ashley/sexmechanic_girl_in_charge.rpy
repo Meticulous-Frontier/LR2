@@ -584,7 +584,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             menu:
                 "Fuck her":
                     "You get behind her. You line yourself up with her cunt."
-                    the_person.char "Hey... [the_perosn.mc_title]... what are you doing?"
+                    the_person.char "Hey... [the_person.mc_title]... what are you doing?"
                     mc.name "Shhh, quiet."
                     "With one smooth motion you push yourself inside of her."
                     if the_person.effective_sluttiness() > 100:
