@@ -276,7 +276,7 @@ label quest_arousal_serum_test_label():
     $ the_person.change_slut_temp(5)
     $ the_person.change_happiness(5)
     "Seconds later her body convulses as she orgasms. She moans a bunch of incomprehensible noises."
-    $ the_person.change_arousal(-the_person.arousal/3)
+    $ the_person.change_arousal(-the_person.arousal/3, add_to_log = False)
     the_person.char "Oh my god... that felt so good."
     if the_person.sluttiness > 60:
         $ the_person.draw_person(position = "doggy")
