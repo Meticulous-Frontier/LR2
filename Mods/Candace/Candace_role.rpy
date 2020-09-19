@@ -604,7 +604,7 @@ init 3 python:
 
     def candace_get_can_convince_to_quit():
         if candace_get_ready_to_quit():
-            if candace_get_learned_about_pay() and candace_get_learned_about_previous_work() and candace_get_learned_about_uniform() and candace_get_learned_about_bf_control:
+            if candace_get_learned_about_pay() and candace_get_learned_about_previous_work() and candace_get_learned_about_uniform() and candace_get_learned_about_bf_control():
                 if candace_get_employees_have_lax_uniforms() or candace_get_mc_is_sexually_skilled():
                     return True
         return False
