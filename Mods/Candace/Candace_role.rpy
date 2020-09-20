@@ -469,10 +469,10 @@ label candace_convince_to_quit_label(the_person):
     mc.name "Well... I don't know about you two, but I'm pretty worn out. Take care. And [the_person.title], I'll see you at the office!"
     the_person.char "Sure thing boss! Oh! Should I call you boss now? Oh that sounds nice!"
     menu:
-        "Boss{color=#ff0000}{size=18}+20 Obedience{/size}{/color}":
+        "Boss\n{color=#00ff00}{size=18}+20 Obedience{/size}{/color}":
             $ the_person.set_mc_title("Boss")
             $ the_person.change_obedience(20)
-        "[mc.name]{color=#ff0000}{size=18}+20 Happiness{/size}{/color}":
+        "[mc.name]\n{color=#00FF00}{size=18}+20 Happiness{/size}{/color}":
             $ the_person.set_mc_title(mc.name)
             $ the_person.change_happiness(20)
     the_person.char "Whatever you say [the_person.mc_title]!"
