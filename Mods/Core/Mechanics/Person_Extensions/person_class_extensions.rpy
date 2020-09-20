@@ -1003,19 +1003,6 @@ init -1 python:
     # attach to person object
     Person.change_willpower = change_willpower
 
-    def review_outfit_enhanced(self, dialogue = True):
-        self.outfit.remove_all_cum()
-        self.outfit.update_slut_requirement()
-
-        if self.should_wear_uniform():
-            self.wear_uniform() # Reset uniform
-        elif self.outfit.slut_requirement > self.sluttiness:
-            self.apply_planned_outfit()
-            if dialogue:
-                self.call_dialogue("clothing_review") # must be last call in function
-
-    Person.review_outfit = review_outfit_enhanced
-
     def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
         if position is None:
             position = self.idle_pose
@@ -1239,6 +1226,20 @@ init -1 python:
 # Outfit functions - wear a specialized outfit #
 ################################################
 
+    def review_outfit_enhanced(self, dialogue = True):
+        self.outfit.remove_all_cum()
+        self.outfit.update_slut_requirement()
+
+        if self.should_wear_uniform():
+            self.wear_uniform() # Reset uniform
+        elif self.outfit.slut_requirement > self.sluttiness:
+            self.apply_planned_outfit()
+            if dialogue:
+                self.call_dialogue("clothing_review") # must be last call in function
+
+    Person.review_outfit = review_outfit_enhanced
+
+
     def apply_gym_outfit(self):
         if workout_wardrobe:
             # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
@@ -1259,7 +1260,7 @@ init -1 python:
         if self.should_wear_uniform():
             self.wear_uniform()
         else:
-            self.apply_outfit(self.planned_outfit)
+            self.location().apply_outfit(self)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
