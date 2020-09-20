@@ -27,7 +27,6 @@ init 2 python:
             forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["anal creampies", -2, False], ["public sex", -2, False]])
 
 
-
         erica.max_energy = 120
         erica.home = erica.generate_home()
         erica.home.add_person(erica)
@@ -54,8 +53,8 @@ init 2 python:
         erica.apply_gym_outfit = erica_apply_gym_outfit
 
         game_hints.append(Hint("College Athlete", "Get to know Erica to learn to give her a protein shake.", "erica_get_progress() > 0 and not erica_get_protein_unlock()", "erica_get_protein_unlock()"))
-        game_hints.append(Hint("College Athlete", "Get atleast 120 max energy and Erica to atleast 20 sluttiness.", "erica_get_progress() == 1 and erica_get_protein_unlock()", "erica_get_progress() > 1"))
-        game_hints.append(Hint("College Athlete", "Get atleast 140 max energy and Erica to atleast 40 sluttiness. Then challenge her to a race.", "erica_get_progress() == 2", "erica_get_progress() > 2"))
+        game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 20 sluttiness.", "erica_get_progress() == 1 and erica_get_protein_unlock()", "erica_get_progress() > 1"))
+        game_hints.append(Hint("College Athlete", "Get at least 140 max energy and Erica to at least 40 sluttiness. Then challenge her to a race.", "erica_get_progress() == 2", "erica_get_progress() > 2"))
 
         return
 
@@ -535,7 +534,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
             "Fuck her":
                 "You step closer to her. You put your hands on her hips and pull her in."
                 $ the_person.draw_person(position = "kissing")
-                "You lean in and kiss [the_perosn.possessive_title] hungrily. Her hips are grinding against yours."
+                "You lean in and kiss [the_person.possessive_title] hungrily. Her hips are grinding against yours."
                 $ the_person.change_arousal(10)
                 $ mc.change_arousal(10)
                 $ the_person.add_situational_slut("horny", 10, "She submits to you")
@@ -554,7 +553,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
             "[the_person.title] sits down on the bench, you can see her trembling, caused by aftershocks from her orgasm."
             the_person.char "Mmm... god I'm glad you know how to use that cock."
         else:
-            "[the_person.title] sits down on the brench, catching her breath."
+            "[the_person.title] sits down on the bench, catching her breath."
         $ the_person.clear_situational_slut("horny")
         "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
         "You share a quick kiss before you part ways."
@@ -606,12 +605,13 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     "She is excited to take the lead."
                     call get_fucked(the_person, private= True) from _erica_pleases_her_man_in_lockerroom_02
 
+            $ the_report = _return
             $ the_person.clear_situational_slut("horny")
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.title] sits down on the bench, you can see her trembling, caused by aftershocks from her orgasm."
                 the_person.char "Mmm... god I'm glad you know how to make a girl cum so hard."
             else:
-                "[the_person.title] sits down on the brench, catching her breath."
+                "[the_person.title] sits down on the bench, catching her breath."
             $ the_person.clear_situational_slut("horny")
             "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
     return
@@ -874,15 +874,20 @@ label erica_post_race_love_label(the_person):
     $ the_person.discover_opinion("doggy style sex")
     "Mmm, seems she likes it doggy style... and maybe has a bit of a submissive streak? You aren't sure about the latter yet, but you look forward to finding out."
     call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed()) from _call_casual_sex_mod_CS033
+    $ the_report = _return
     "When you finish you are both spent."
+    if the_report.get("girl orgasms", 0) > 0:
+        the_person.char "Wow, I didn't think you could do that to me again."
+
     the_person.char "That was amazing... but I need to study, I've got a test on Monday. I love spending time with you, but you ARE a bit distracting..."
     mc.name "I understand. Tell you what, I'll head out, but before I go I'll order some lunch to get delivered, that way you can study without having to worry about making food."
     $ the_person.change_love(5)
     the_person.char "Aww, you don't have to do that. You are such a sweetheart."
     $ the_person.review_outfit()
-    "While [the_person.possessive_title] gets cleaned up, you order her a healthy lunch to be deliverd on your phone. You know she is college student, so she probably doesn't have much disposable income."
+    "While [the_person.possessive_title] gets cleaned up, you order her a healthy lunch on your phone. You know she is college student, so she probably doesn't have much disposable income."
     $ mc.business.change_funds(-10)
-    mc.name "Alright, I got you a Keto special, it should be here soon. Good luck with your studying!"
+    $ title_choice = get_random_from_list(["BBQ Rainbow Beef salad", "Fresh Salmon with Thai noodle salad", "Spicy Chicken and Avocado wrap"])
+    mc.name "Alright, I got you a [title_choice], it should be here soon. Good luck with your studying!"
     the_person.char "Goodbye [the_person.mc_title]. I'll see you soon! And you know where I live now. Feel free to swing by once in a while..."
     "You let yourself out and start to walk away. Wow, what an amazing day! You've managed to convince [the_person.title] to go out with you."
     "You can't wait to explore her tight little body more... but one thing at a time now."

@@ -16,7 +16,7 @@ init -1 python:
 
     # Hints for Cousin
     game_hints.append(Hint("Cousin at your house", "You should go home in the afternoon, why is your cousin in your house?", "bool(exists_in_room_enter_list(cousin, 'cousin_house_phase_two_label')) and cousin.schedule[2] == hall", "bool(exists_in_mandatory_crisis_list('cousin_house_phase_three_label')) or bool(exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label')) or cousin.event_triggers_dict.get('blackmail_level', 0) > 0"))
-    game_hints.append(Hint("Catch Cousin", "You should check your sisters bedroom in the afternoon, something is happening there.", "bool(exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label')) and cousin.schedule[2] == lily_bedroom", "not bool(exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label'))"))
+    game_hints.append(Hint("Catch Cousin", "You should check your sisters bedroom in the afternoon, something is happening there.", "bool(exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label')) and cousin.schedule[2] == lily_bedroom", "cousin.event_triggers_dict.get('blackmail_level',99) < 1 and not bool(exists_in_room_enter_list(cousin, 'cousin_blackmail_intro_label'))"))
 
     # Hints for Alexia
     game_hints.append(Hint("Meet Alexia", "You should go downtown and see if you run into someone you know.", "alexia in downtown.people and bool(exists_in_room_enter_list(alexia, 'alexia_intro_phase_one_label'))", "not bool(exists_in_room_enter_list(alexia, 'alexia_intro_phase_one_label'))"))

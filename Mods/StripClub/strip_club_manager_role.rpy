@@ -11,7 +11,7 @@ init 3303 python:
             person.change_stats(happiness = 20, love = 20, obedience = 50, add_to_log = False)
 
         person.update_opinion_with_score("taking control", 2, add_to_log = False)
-        if not person.personality is alpha_personality:
+        if not person in unique_character_list and not person.personality is alpha_personality:
             person.original_personality = person.personality
             person.personality = alpha_personality
         return
