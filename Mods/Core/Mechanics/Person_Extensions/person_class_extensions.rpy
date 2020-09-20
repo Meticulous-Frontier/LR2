@@ -1239,7 +1239,6 @@ init -1 python:
 
     Person.review_outfit = review_outfit_enhanced
 
-
     def apply_gym_outfit(self):
         if workout_wardrobe:
             # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
@@ -1260,7 +1259,15 @@ init -1 python:
         if self.should_wear_uniform():
             self.wear_uniform()
         else:
-            self.location().apply_outfit(self)
+            if not self.follow_mc:
+                if self.location() is gym:
+                    self.apply_gym_outfit()
+                    return
+                if self.location() is university and not self is nora:
+                    self.apply_university_outfit()
+                    return
+
+            self.apply_outfit(self.planned_outfit)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
