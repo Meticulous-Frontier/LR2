@@ -64,9 +64,10 @@ init -1 python:
         if not person.follow_mc:
             if self is gym:  # people change clothes when going to the gym
                 person.apply_gym_outfit()
+                return
             if self is university and not person is nora: # people wear university uniform
                 person.apply_university_outfit()
-            return
+                return
 
         person.apply_outfit(person.planned_outfit)
         return
