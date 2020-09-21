@@ -141,21 +141,21 @@ label strip_club_manager_hire_more_waitresses_reminder_label(): # phone call
 label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
     "Suddenly your smartphone rings: it's your StripClub manager."
     $ the_person = strip_club_get_manager()
-    the_person.char "Ehi [the_person.mc_title] ! Can you join me here at the Club ? I need to talk with you..."
+    the_person.char "Ehi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you..."
     mc.name "Sure [the_person.title], I'm coming."
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
-    $ the_person.draw_person(emotion = "happy", position = "stand1")
+    $ the_person.draw_person(emotion = "happy", position = "stand3")
     mc.name "Here I am [the_person.title], how things are going here ?"
     the_person.char "That's exactly what I wanna talk to you about: you spent a lot of money to buy this place, don't you wanna make it more profitable ?"
     mc.name "Of course I do: what do you have in mind ?"
     the_person.char "A lot of customers here get a drink at the bar then sit at the border of the stage to watch the girls stripping, right ?"
     mc.name "Yes, that's how the business here works..."
-    the_person.char "Exactly ! After they got their drink, the customers don't wanna move anymore from the stage, only a few come back to get another drink..."
+    the_person.char "Exactly! After they got their drink, the customers don't wanna move anymore from the stage, only a few come back to get another drink..."
     mc.name "I think I got where are you going with this..."
-    the_person.char "Yeah ! What if we had a couple of waitresses serving the drinks directly at the customer's seat, and maybe some peanuts or some chips..."
-    the_person.char "They would be more thirsty, so the drinks sold at the end of the day would be a lot, lot more !"
-    mc.name "Thank you [the_person.title], that's really a good idea, I think I'll find someone to work as waitress here !"
+    the_person.char "Yeah! What if we had a couple of waitresses serving the drinks directly at the customer's seat, and maybe some peanuts or some chips..."
+    the_person.char "They would be more thirsty, so the drinks sold at the end of the day would be a lot, lot more!"
+    mc.name "Thank you [the_person.title], that's really a good idea, I think I'll find someone to work as waitress here!"
     $ the_person.draw_person(emotion = "happy", position = "stand4")
     "[the_person.title] smile back to you, proud to have proof herself worthy."
     $ mc.business.event_triggers_dict["strip_club_has_waitresses"] = True
