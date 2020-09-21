@@ -260,7 +260,11 @@ label strip_club_hire_employee_label(the_person):
         return
 
     if _return is stripper_role:
-        if the_person.effective_sluttiness() > 70:
+        if the_person.has_role(prostitute_role):
+            the_person.char "Could I still turn tricks, when I like the guy?"
+            mc.name "As long as you don't do it inside the club, you can do what ever you like."
+            the_person.char "Great, then I'll be a stripper for you."
+        elif the_person.effective_sluttiness() > 70:
             the_person.char "I admit, I love turning men on, just making them horny while they ogle my body, mmm... Where should I sign?"
         elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
             the_person.char "I admit, I always wanted to do something like that. Seducing men, with my body on full display, mmm... Where should I sign?"
@@ -277,7 +281,11 @@ label strip_club_hire_employee_label(the_person):
 
     elif _return is bdsm_performer_role:
         mc.name "I was thinking you might like to perform in the BDSM room..."
-        if the_person.effective_sluttiness() > 70:
+        if the_person.has_role(prostitute_role):
+            the_person.char "Could I still turn tricks, when I like the guy?"
+            mc.name "As long as you don't do it inside the club, you can do what ever you like."
+            the_person.char "Great, then I'll be your naughty girl on stage."
+        elif the_person.effective_sluttiness() > 70:
             the_person.char "That sounds like something interesting... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "You are absolutely right, where should I sign?"
@@ -298,7 +306,11 @@ label strip_club_hire_employee_label(the_person):
 
     else:
         mc.name "I was thinking you might like to become a waitress..."
-        if the_person.effective_sluttiness() > 50:
+        if the_person.has_role(prostitute_role):
+            the_person.char "Could I still turn tricks, when I like the guy?"
+            mc.name "As long as you don't do it inside the club, you can do what ever you like."
+            the_person.char "Great, then I'll be one of the best waitresses you will ever see."
+        elif the_person.effective_sluttiness() > 50:
             the_person.char "I would love being a waitress, showing some skin, have them groping my ass... Ok, where should I sign?"
         elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 0:
             the_person.char "If it's just to be a waitress there, I don't mind showing some skin... Ok, where should I sign?"
