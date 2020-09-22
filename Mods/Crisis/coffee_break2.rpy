@@ -191,7 +191,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "You decide to go back to work and let the girls sort this out."
 
     else:
-        loser.char "This is not fair [winner_one.name], you wanted me to loose."
+        loser.char "This is not fair [winner_one.name], you wanted me to lose."
         winner_one.char "No I didn't. And you know the rules!"
 
         $ scene_manager.update_actor(loser, emotion = "angry")
