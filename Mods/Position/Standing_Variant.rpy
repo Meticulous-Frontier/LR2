@@ -39,7 +39,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object):
     if the_girl.arousal > 60:
         "[the_girl.possessive_title]'s cunt is already slick and wet with arousal. She places on hand on top of yours, encouraging you fuck her."
     else:
-        "[the_girl.possessive_title] gives a grunt as you being to fuck her."
+        "[the_girl.possessive_title] gives a grunt as you begin to fuck her."
     if the_girl.get_opinion_score("sex standing up") > 0 :
         the_girl.char "Oh my god, it feels so good to get fucked like this."
         $ the_girl.change_arousal(5)
@@ -602,7 +602,7 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
     if the_girl.arousal > 60:
         "[the_girl.possessive_title]'s cunt is already slick and wet with arousal. She places on hand on top of yours, encouraging you fuck her."
     else:
-        "[the_girl.possessive_title] gives a grunt as you being to fuck her."
+        "[the_girl.possessive_title] gives a grunt as you begin to fuck her."
     if the_girl.get_opinion_score("sex standing up") > 0 :
         the_girl.char "Oh my god, it feels so good to get fucked like this."
         $ the_girl.change_arousal(5)
