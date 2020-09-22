@@ -268,7 +268,7 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
 
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
             "You can feel [the_girl_1.title] trembling beneath you. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
-            "She orgasms, per pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
+            "She orgasms, her pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
             "You don't even both to slow down. As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking."
             return
 
@@ -287,7 +287,7 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
             return
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
             "You can feel [the_girl_1.title] trembling at your touch. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
-            "She orgasms, per pussy quivering around your fingers. You thrust them into her roughly."
+            "She orgasms, her pussy quivering around your fingers. You thrust them into her roughly."
             "As [the_girl_1.title] comes down from her orgasm you continue stimulating her with your hand."
             return
 

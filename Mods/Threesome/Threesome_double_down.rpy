@@ -200,7 +200,7 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "[the_girl_1.title] is moaning loudly now. [the_girl_2.title] is pinching and twisting her nipples, driving her over the edge."
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
-        "She orgasms, per pussy quivering around your cock. You enjoy the sensation of her pussy convulsing around you.."
+        "She orgasms, her pussy quivering around your cock. You enjoy the sensation of her pussy convulsing around you.."
         "She takes a moment to recover, but soon [the_girl_1.title] begins to bounce up and down again on top of you.."
         return
 
