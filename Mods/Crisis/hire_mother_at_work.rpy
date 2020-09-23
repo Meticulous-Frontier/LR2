@@ -12,7 +12,7 @@ init 2 python:
 
     def hire_mother_work_crisis_get_daughter():
         valid_people_list = []
-        for person in mc.business.get_employee_list():
+        for person in [x for x in mc.business.get_employee_list() if x not in quest_director.unavailable_people()]:
             if person.age < 34 and town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
                 valid_people_list.append(person)
 

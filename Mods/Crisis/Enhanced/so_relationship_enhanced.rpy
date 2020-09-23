@@ -18,6 +18,9 @@ init 2 python:
         return not get_so_relationship_worsen_person() is None
 
     def so_relationship_quarrel_requirement(person):
+        if person in quest_director.unavailable_people():
+            return False
+
         # for people you know, set quarrel chance to 20% else too many relationships will be split up by the limited time event selector.
         if person.relationship != "Single" and not (person.mc_title == "Stranger" or not person.title) and renpy.random.randint(0, 100) < 20:
             if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
@@ -35,7 +38,7 @@ init 2 python:
 
     def get_so_relationship_improve_person():
         potential_people = []
-        for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
+        for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()):
             if person.title and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
                 if not person.has_role([girlfriend_role, affair_role]): # when in relationship with MC or Casual Athlete she will not improve her relationship with her SO
                     potential_people.append(person)
@@ -43,7 +46,7 @@ init 2 python:
 
     def get_so_relationship_worsen_person():
         potential_people = []
-        for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list):
+        for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()):
             if person.title and not person.relationship == "Single" and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
                 if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
                     potential_people.append(person)
