@@ -78,6 +78,7 @@ label give_panties_label(the_person):
         the_person.draw_person()
         test_outfit = None
         the_item = None
+        the_person.change_stats(obedience = 1, slut_temp = 1)
 
     if removed_something:
         "She quickly puts her clothes back on."
