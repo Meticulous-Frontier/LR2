@@ -158,9 +158,7 @@ init 5 python:
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
-    bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
     stripper_role = Role("Stripper", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
-    waitress_role = Role("Waitress", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
 
 label update_strip_club_show_requirement(stack):
     python:
@@ -548,7 +546,7 @@ label stripper_performance_review_label(the_person):
     $ clear_scene()
     return
 
-label advance_time_stripclub_daily_serum_dosage_label(stack):
+label advance_time_strippers_daily_serum_dosage_label(stack):
     python:
         if hasattr(mc.business, "strippers_serum"):
             if mc.business.strippers_serum:
@@ -565,52 +563,7 @@ label advance_time_stripclub_daily_serum_dosage_label(stack):
                         if serum_count == 0:
                             break
 
-        if hasattr(mc.business, "waitresses_serum"):
-            if mc.business.waitresses_serum:
-                serum_count = mc.business.inventory.get_serum_count(mc.business.waitresses_serum)
-                if serum_count > 0:
-                    for (person,place) in people_to_process:
-                        if employee_role in person.special_role:
-                            continue
-                        if not waitress_role in person.special_role:
-                            continue
-                        mc.business.inventory.change_serum(mc.business.waitresses_serum,-1)
-                        person.give_serum(copy.copy(mc.business.waitresses_serum), add_to_log = False)
-                        serum_count -= 1
-                        if serum_count == 0:
-                            break
-
-        if hasattr(mc.business, "bdsm_performers_serum"):
-            if mc.business.bdsm_performers_serum:
-                serum_count = mc.business.inventory.get_serum_count(mc.business.bdsm_performers_serum)
-                if serum_count > 0:
-                    for (person,place) in people_to_process:
-                        if employee_role in person.special_role:
-                            continue
-                        if not bdsm_performer_role in person.special_role:
-                            continue
-                        mc.business.inventory.change_serum(mc.business.bdsm_performers_serum,-1)
-                        person.give_serum(copy.copy(mc.business.bdsm_performers_serum), add_to_log = False)
-                        serum_count -= 1
-                        if serum_count == 0:
-                            break
-
-        if hasattr(mc.business, "manager_serum"):
-            if mc.business.manager_serum:
-                serum_count = mc.business.inventory.get_serum_count(mc.business.manager_serum)
-                if serum_count > 0:
-                    for (person,place) in people_to_process:
-                        if employee_role in person.special_role:
-                            continue
-                        if not manager_role in person.special_role and not mistress_role in person.special_role:
-                            continue
-                        mc.business.inventory.change_serum(mc.business.manager_serum,-1)
-                        person.give_serum(copy.copy(mc.business.manager_serum), add_to_log = False)
-                        serum_count -= 1
-                        if serum_count == 0:
-                            break
-
         execute_hijack_call(stack)
 
 init 5 python:
-    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_stripclub_daily_serum_dosage_label")
+    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_strippers_daily_serum_dosage_label")
