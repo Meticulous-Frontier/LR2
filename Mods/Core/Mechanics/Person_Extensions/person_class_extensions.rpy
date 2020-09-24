@@ -1255,6 +1255,41 @@ init -1 python:
 
     Person.apply_university_outfit = apply_university_outfit
 
+    def stripper_apply_outfit(self):
+        if stripclub_wardrobe:
+            self.apply_outfit(stripclub_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.stripper_apply_outfit = stripper_apply_outfit
+    
+    def waitress_apply_outfit(self):
+        if waitress_wardrobe:
+            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.waitress_apply_outfit = waitress_apply_outfit
+
+    def BDSM_performer_apply_outfit(self):
+        if BDSM_performer_wardrobe:
+            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.BDSM_performer_apply_outfit = BDSM_performer_apply_outfit
+
+    def manager_apply_outfit(self):
+        if manager_wardrobe:
+            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.manager_apply_outfit = manager_apply_outfit
+
+    def mistress_apply_outfit(self):
+        if mistress_wardrobe:
+            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.mistress_apply_outfit = mistress_apply_outfit
+
     def apply_planned_outfit(self):
         if self.should_wear_uniform():
             self.wear_uniform()
@@ -1266,11 +1301,13 @@ init -1 python:
                 if self.location() is university and not self is nora:
                     self.apply_university_outfit()
                     return
-                if self.location() is strip_club or self.location() is BDSM_room:
+                if time_of_day >= 3 and (self.location() is strip_club or self.location() is bdsm_room):
                     if self.has_role(waitress_role):
                         self.waitress_apply_outfit()
                     if self.has_role(bdsm_performer_role):
                         self.BDSM_performer_apply_outfit()
+                    if self.has_role(stripper_role):
+                        self.stripper_apply_outfit()
                     if self.has_role(manager_role):
                         self.manager_apply_outfit()
                     if self.has_role(mistress_role):

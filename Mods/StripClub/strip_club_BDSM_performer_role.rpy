@@ -5,13 +5,6 @@
 init 3305 python:
     BDSM_performer_wardrobe = wardrobe_from_xml("BDSM_Wardrobe")
 
-    def BDSM_performer_apply_outfit(self):
-        if BDSM_performer_wardrobe:
-            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.BDSM_performer_apply_outfit = BDSM_performer_apply_outfit
-
     bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
 
 label advance_time_BDSM_performers_daily_serum_dosage_label(stack):

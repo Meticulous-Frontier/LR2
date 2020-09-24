@@ -5,13 +5,6 @@
 init 3304 python:
     waitress_wardrobe = wardrobe_from_xml("Waitresses_Wardrobe")
 
-    def waitress_apply_outfit(self):
-        if waitress_wardrobe:
-            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.waitress_apply_outfit = waitress_apply_outfit
-
     waitress_role = Role("Waitress", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
 
 label advance_time_waitresses_daily_serum_dosage_label(stack):
