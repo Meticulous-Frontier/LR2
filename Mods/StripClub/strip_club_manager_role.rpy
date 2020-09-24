@@ -4,6 +4,23 @@
 # The role is incompatible with: low Charisma, slave_role, having collar.
 
 init 3303 python:
+    manager_wardrobe = wardrobe_from_xml("Manager_Wardrobe")
+    mistress_wardrobe = wardrobe_from_xml("Mistress_Wardrobe")
+
+    def manager_apply_outfit(self):
+        if manager_wardrobe:
+            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.manager_apply_outfit = manager_apply_outfit
+
+    def mistress_apply_outfit(self):
+        if mistress_wardrobe:
+            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.mistress_apply_outfit = mistress_apply_outfit
+
     def manager_role_status_acquisition(person):
         if slave_role in person.special_role:
             slave_release_slave(person)
@@ -230,3 +247,4 @@ label advance_time_manager_daily_serum_dosage_label(stack): #Should works for bo
 
 init 5 python:
     add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_manager_daily_serum_dosage_label")
+
