@@ -1266,7 +1266,7 @@ init -1 python:
                 if self.location() is university and not self is nora:
                     self.apply_university_outfit()
                     return
-                if self.location() is strip_club or self.location() is BDSM_room:
+                if self.location() is strip_club or self.location() is bdsm_room:
                     if self.has_role(waitress_role):
                         self.waitress_apply_outfit()
                     if self.has_role(bdsm_performer_role):
