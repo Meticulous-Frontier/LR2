@@ -51,17 +51,17 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                 "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
 
         "Cum outside":
-            if mc.condom == False and (the_girl.has_role(cum_internal_role) or (the_person.wants_creampie() and the_girl.obedience <150 and the_person.get_opinion_score("taking control") > -1 and the_person.get_opinion_score("creampies") > 0)):
+            if mc.condom == False and (the_girl.has_role(cum_internal_role) or (the_girl.wants_creampie() and the_girl.obedience <150 and the_girl.get_opinion_score("taking control") > -1 and the_girl.get_opinion_score("creampies") > 0)):
                 "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
                 $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh.. OH! Yes "])
                 $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
-                if the_person.love < 0:
+                if the_girl.love < 0:
                     "Where do think you're going, [the_girl.mc_title]?"
                 else:
                     the_girl.char "[wordchoice][the_girl.mc_title]! [wordchoice2]"
                 "The entire strength of her legs prevents you from pulling out."
-                $ randnr = renpy.random.randint(0,1)
-                if randnr == 0:
+                $ ran_num = renpy.random.randint(0,1)
+                if ran_num == 0:
                     mc.name "What the fuck!"
                 if the_girl.sex_skills["Vaginal"] > 3:
                     "[the_girl.possessive_title] pulls your body close to hers, burying your cock as deep as she can and milks it with the muscles inside her pussy."
@@ -78,24 +78,24 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
                 $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
                 $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
-                if the_person.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
-                    the_person.char "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
+                if the_girl.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
+                    the_girl.char "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
                 elif the_girl.on_birth_control:
-                    the_person.char "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."
-                elif the_person.relationship != "Single":
-                    $ so_title = SO_relationship_to_title(the_person.relationship)
-                    the_person.char "[wordchoice], [the_girl.mc_title]. If anything happens I'll tell my [so_title] it's his."
+                    the_girl.char "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."
+                elif the_girl.relationship != "Single":
+                    $ so_title = SO_relationship_to_title(the_girl.relationship)
+                    the_girl.char "[wordchoice], [the_girl.mc_title]. If anything happens I'll tell my [so_title] it's his."
                 else:
                     if the_girl.love >59:
-                        the_person.char "I love you, [the_girl.mc_title]. We should make a baby together."
+                        the_girl.char "I love you, [the_girl.mc_title]. We should make a baby together."
                     elif the_girl.love >0:
                         pass
                     else:
-                        the_person.char "I hope you enjoy paying child support, [the_girl.mc_title]."
+                        the_girl.char "I hope you enjoy paying child support, [the_girl.mc_title]."
             else:
                 $ the_girl.cum_on_stomach()
                 $ missionary.redraw_scene(the_girl)
-                if pregnant_role in the_person.special_role and the_person.event_triggers_dict.get("preg_transform_day",day) < day:
+                if pregnant_role in the_girl.special_role and the_girl.event_triggers_dict.get("preg_transform_day",day) < day:
                     if mc.condom:
                         "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s pregnancy bump."
                     else:
@@ -163,17 +163,17 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 "You wait until your orgasm has passed, then step back and sigh happily. [the_girl.title] stays leaning against the [the_object.name] for a few seconds as your semen drips down her leg."
 
         "Cum on her stomach":
-            if mc.condom == False and (the_girl.has_role(cum_internal_role) or (the_person.wants_creampie() and the_girl.obedience <150 and the_person.get_opinion_score("taking control") > -1 and the_person.get_opinion_score("creampies") > 0)):
+            if mc.condom == False and (the_girl.has_role(cum_internal_role) or (the_girl.wants_creampie() and the_girl.obedience <150 and the_girl.get_opinion_score("taking control") > -1 and the_girl.get_opinion_score("creampies") > 0)):
                 "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
                 $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh.. OH! Yes "])
                 $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
-                if the_person.love < 0:
+                if the_girl.love < 0:
                     "Where do think you're going, [the_girl.mc_title]?"
                 else:
                     the_girl.char "[wordchoice][the_girl.mc_title]! [wordchoice2]"
                 "The strength of her legs prevents you from pulling out."
-                $ randnr = renpy.random.randint(0,1)
-                if randnr == 0:
+                $ ran_num = renpy.random.randint(0,1)
+                if ran_num == 0:
                     mc.name "What the fuck!"
                 if the_girl.sex_skills["Vaginal"] > 3:
                     "[the_girl.possessive_title] pulls your body close to hers, burying your cock as deep as she can and milks it with the muscles inside her pussy."
@@ -191,20 +191,20 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
                 $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
                 $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
-                if the_person.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
-                    the_person.char "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
+                if the_girl.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
+                    the_girl.char "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
                 elif the_girl.on_birth_control:
-                    the_person.char "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."
-                elif the_person.relationship != "Single":
-                    $ so_title = SO_relationship_to_title(the_person.relationship)
-                    the_person.char "[wordchoice], [the_girl.mc_title]. If anything happens I'll tell my [so_title] it's his."
+                    the_girl.char "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."
+                elif the_girl.relationship != "Single":
+                    $ so_title = SO_relationship_to_title(the_girl.relationship)
+                    the_girl.char "[wordchoice], [the_girl.mc_title]. If anything happens I'll tell my [so_title] it's his."
                 else:
                     if the_girl.love >59:
-                        the_person.char "I love you, [the_girl.mc_title]. We should make a baby together."
+                        the_girl.char "I love you, [the_girl.mc_title]. We should make a baby together."
                     elif the_girl.love >0:
                         pass
                     else:
-                        the_person.char "I hope you enjoy paying child support, [the_girl.mc_title]."
+                        the_girl.char "I hope you enjoy paying child support, [the_girl.mc_title]."
             else:
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_on_stomach()
@@ -219,5 +219,4 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 else:
                     the_girl.char "Oh wow, there's so much of it. It feels so warm..."
                 "You sigh contentedly and relax for a moment, enjoying the sight of [the_girl.title] covered in your semen."
-
     return

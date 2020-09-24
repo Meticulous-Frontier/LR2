@@ -53,10 +53,8 @@ init -1 python:
             org_func(room, person, destination)
             # run extension code
             if not person.follow_mc and not room is destination:
-                if destination is gym:  # people change clothes when going to the gym
-                    person.apply_gym_outfit()
-                if destination is university and not person is nora: # people wear university uniform
-                    person.apply_university_outfit()
+                person.apply_planned_outfit()
+
             return
 
         return move_person_wrapper

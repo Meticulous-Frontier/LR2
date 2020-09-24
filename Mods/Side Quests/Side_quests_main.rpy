@@ -137,6 +137,13 @@ init python: #For now default init. May change later if we know better.
             if not person.identifier in self.unavailable_person_identifiers:
                 self.unavailable_person_identifiers.append(person.identifier)
 
+        def unavailable_people(self):
+            result = []
+            for person in known_people_in_the_game():
+                if person.identifier in self.unavailable_person_identifiers:
+                    result.append(person)
+            return result
+
         def is_person_blocked(self, person):
             # compatibility code for old saves (remove for version 0.30)
             if hasattr(self, "unavailable_persons"):

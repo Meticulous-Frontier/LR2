@@ -58,7 +58,7 @@ label stripclub_dance_enhanced_label():
     "A new song starts playing over the speakers and a girl steps out onto the stage."
     if title is not None:
         if cousin_role in the_person.special_role:
-            if the_person.event_triggers_dict.get("blackmail_level",-1) < 2 and not the_person.event_triggers_dict.get("seen_cousin_stripping",False):
+            if the_person.event_triggers_dict.get("blackmail_level", 999) < 2 and not the_person.event_triggers_dict.get("seen_cousin_stripping",False):
                 $ add_cousin_blackmail_2_confront_action()
 
                 "It takes you a moment to recognize your cousin, [the_person.title], as she struts out onto the stage."

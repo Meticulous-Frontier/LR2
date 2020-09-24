@@ -614,7 +614,7 @@ label Sarah_third_wheel_label():
     "You step out of he lady's room and shortly after [the_person.title] steps out and joins you. You hand her the appletini."
     the_person.char "Thanks for waiting! I'm so sorry, I honestly thought you were going to go with them."
     the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
-    mc.name "You're crazy, it's not everyday a long last childhood friend literally knocks on your front door."
+    mc.name "You're crazy, it's not everyday a long lost childhood friend literally knocks on your front door."
     the_person.char "You've always been amazing to me. I should have known better."
     $ the_person.change_stats(happiness = 20, obedience = 10, love = 10)
     "She takes a long sip of her drink. You begin to chat and catch up a bit."
@@ -1365,7 +1365,7 @@ label Sarah_stripclub_story_label():
         "You get up and head over to the counter where the owner is."
     else:
         "You get up and head over to the counter and talk with the manager."
-    if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role(stripper_role):
+    if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role(stripper_role):
         if showgirl is cousin:
             "You arrange two private lap dances. For [the_person.title], you get [cousin.possessive_title], since she enjoyed her so much."
         else:
@@ -1379,7 +1379,7 @@ label Sarah_stripclub_story_label():
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl, character_placement = character_center_flipped)
-    if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role(stripper_role):  #We have blackmailed Gabrielle about stripping already#
+    if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role(stripper_role):  #We have blackmailed Gabrielle about stripping already#
         if showgirl is cousin:
             $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x != showgirl])
         else:
@@ -1952,7 +1952,7 @@ label Sarah_arrange_threesome_label(the_person):
         mc.name "There's this girl I've been seeing lately. She is pretty bi-curious, and has never had a threesome before."
         the_person.char "Oh jesus I can tell where this is going already."
         mc.name "Anyway, she's been asking, so I promised her I'd try to arrange something for Saturday. I need you to come over to my place Saturday night."
-        if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role([stripper_role, waitress_role, bdsm_performer_role]):
+        if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role([stripper_role, waitress_role, bdsm_performer_role]):
             the_person.char "That's ridiculous. I'm gonna make a ton of money in tips on a Saturday night. You're gonna have to convince me..."
             mc.name "How about I promise not to tell your mom where you make all those tips at? Does that sound good?"
             the_person.char "Look, I need that money. I'm sorry but I can't just give up the most lucrative night of the week."
@@ -2892,7 +2892,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     else:
         "You get up and head over to the counter and talk with the manager."
     "You look through the list of girls available for private dances."
-    if cousin.event_triggers_dict["blackmail_level"] >= 2 and cousin.has_role(stripper_role):
+    if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role(stripper_role):
         "You spot your cousin on the list. You could ask for her to dance for either you or [the_person.possessive_title]..."
         menu:
             "Dance for [the_person.title]":
