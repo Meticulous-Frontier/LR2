@@ -662,7 +662,7 @@ label Sarah_get_drinks_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_one()
-    $ the_person.apply_planned_outfit()
+    $ the_person.apply_outfit(the_person.planned_outfit)
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
@@ -1257,7 +1257,7 @@ label Sarah_tits_reveal_label():
 label Sarah_stripclub_story_label():
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
-    $ the_person.apply_planned_outfit()
+    $ the_person.apply_outfit(the_person.planned_outfit)
 
     $ scene_manager = Scene()
     #TODO going out outfit
@@ -2546,7 +2546,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
 label Sarah_weekend_surprise_crisis_label():
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
-    $ the_person.apply_planned_outfit()
+    $ the_person.apply_outfit(the_person.planned_outfit)
     $ scene_manager = Scene()
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
