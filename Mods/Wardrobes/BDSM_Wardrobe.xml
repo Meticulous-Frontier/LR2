@@ -3,18 +3,19 @@
     <FullSets>
         <Outfit name="BDSM_White_40">
             <UpperBody>
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Bralette" red="1.0" />
+                <Item alpha="0.95" blue="1" green="1" name="Bralette" red="1" />
             </UpperBody>
             <LowerBody>
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Boy_Shorts" red="1.0" />
+                <Item alpha="0.95" blue="1" green="1" name="Boy_Shorts" red="1" />
             </LowerBody>
             <Feet>
-                <Item alpha="0.9" blue="1.0" green="1.0" name="Slips" red="1.0" />
+                <Item alpha="0.95" blue="1" green="1.0" name="Slips" red="1" />
             </Feet>
             <Accessories>
                 <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
                 <Item alpha="0.3" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Spiked_Choker" red="1.0" />
+                <Item alpha="0.9" blue="1" green="1" name="Secret_Mask" red="1" />
+                <Item alpha="1.0" blue="1" green="1" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
         <Outfit name="BDSM_Purple_55">
@@ -28,10 +29,11 @@
                 <Item alpha="0.95" blue="0.59" green="0.31" name="Thigh_Boots" red="0.45" />
             </Feet>
             <Accessories>
-                <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
-                <Item alpha="0.3" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
+                <Item alpha="0.2" blue="0.0" green="0.0" name="Blush" red="0.8" />
+                <Item alpha="0.5" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
                 <Item alpha="0.6" blue="0.59" green="0.31" name="Forearm_Gloves" red="0.45" />
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Spiked_Choker" red="1.0" />
+                <Item alpha="0.9" blue="0.59" green="0.31" name="Secret_Mask" red="0.45" />
+                <Item alpha="0.9" blue="1" green="1" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
         <Outfit name="BDSM_Pink_80">
@@ -45,9 +47,10 @@
                 <Item alpha="0.9" blue="0.325" green="0.04" name="Slips" red="0.843" />
             </Feet>
             <Accessories>
-                <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
-                <Item alpha="0.3" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Spiked_Choker" red="1.0" />
+                <Item alpha="0.2" blue="0.0" green="0.0" name="Blush" red="0.8" />
+                <Item alpha="0.5" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
+                <Item alpha="0.9" blue="0.325" green="0.04" name="Secret_Mask" red="0.843" />
+                <Item alpha="0.9" blue="1" green="1.0" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
         <Outfit name="BDSM_Purple_100">
@@ -57,13 +60,15 @@
             <LowerBody />
             <Feet>
                 <Item alpha="0.75" blue="0.545" green="0.24" name="Thigh_Highs" red="0.282" />
-                <Item alpha="0.9" blue="0.55" green="0.24" name="Slips" red="0.28" />
+                <Item alpha="0.95" blue="0.55" green="0.24" name="Slips" red="0.28" />
             </Feet>
             <Accessories>
-                <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
+                <Item alpha="0.2" blue="0.0" green="0.0" name="Blush" red="0.8" />
                 <Item alpha="0.35" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
+                <Item alpha="0.9" blue="0.1" green="0.1" name="Upper_Eye_Shadow" red="0.1" />
                 <Item alpha="0.95" blue="0.545" green="0.239" name="Full_Shimmer" red="0.282" />
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Spiked_Choker" red="1.0" />
+                <Item alpha="0.9" blue="0.545" green="0.239" name="Secret_Mask" red="0.282" />
+                <Item alpha="0.9" blue="1" green="1" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
         <Outfit name="BDSM_Black_121">
@@ -73,12 +78,13 @@
             <LowerBody />
             <Feet>
                 <Item alpha="0.8" blue="0.1" green="0.1" name="Garter_and_Fishnets" red="0.1" />
-                <Item alpha="0.8" blue="0.1" green="0.1" name="High_Heels" red="0.1" />
+                <Item alpha="0.95" blue="0.1" green="0.1" name="High_Heels" red="0.1" />
             </Feet>
             <Accessories>
-                <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
+                <Item alpha="0.2" blue="0.0" green="0.0" name="Blush" red="0.8" />
                 <Item alpha="0.6" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Spiked_Choker" red="1.0" />
+                <Item alpha="0.9" blue="0.1" green="0.1" name="Secret_Mask" red="0.1" />
+                <Item alpha="0.9" blue="1" green="1" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
         <Outfit name="BDSM_Red_145">
@@ -90,10 +96,13 @@
                 <Item alpha="0.95" blue="0.0" green="0.0" name="Thigh_Boots" red="0.6" />
             </Feet>
             <Accessories>
-                <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
+                <Item alpha="0.2" blue="0.0" green="0.0" name="Blush" red="0.8" />
                 <Item alpha="0.6" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
-                <Item alpha="1.0" blue="1.0" green="1.0" name="Spiked_Choker" red="1.0" />
+                <Item alpha="0.9" blue="1" green="1" name="Mouth_Dribble" red="1" />
+                <Item alpha="0.9" blue="0.1" green="0.1" name="Upper_Eye_Shadow" red="0.1" />
                 <Item alpha="0.95" blue="0.545" green="0.239" name="Full_Shimmer" red="0.282" />
+                <Item alpha="0.9" blue="0.0" green="0.0" name="Secret_Mask" red="0.9" />
+                <Item alpha="0.9" blue="1" green="1" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
     </FullSets>

@@ -223,7 +223,6 @@ label strip_club_manager_bdsm_room_built_label(): # (time event)
     "The BDSM room at the strip club is now ready for use."
     $ strip_club.add_action(strip_club_switch_rooms_action)
     $ bdsm_room.add_action(strip_club_switch_rooms_action)
-    $ bdsm_room.public = True # people can roam here
     $ mc.business.event_triggers_dict["strip_club_has_bdsm_room"] = True
     return
 
