@@ -882,6 +882,81 @@ init -1 python:
 
     Person.decrease_sex_skill = decrease_sex_skill
 
+    # Change the work skill of a person to a specified score
+    def update_work_skill(self, skill, score, add_to_log = True):
+        skill_name = None
+        if skill == 0 or skill == "hr_skill":
+            skill_name = "HR Skill"
+            current = self.hr_skill
+        elif skill == 1 or skill == "market_skill":
+            skill_name = "Market Skill"
+            current = self.market_skill
+        elif skill == 2 or skill == "research_skill":
+            skill_name = "Research Skill"
+            current = self.research_skill
+        elif skill == 3 or skill == "production_skill":
+            skill_name = "Production Skill"
+            current = self.production_skill
+        elif skill == 4 or skill == "supply_skill":
+            skill_name = "Supply Skill"
+            current = self.supply_skill
+
+        if skill_name == None:
+            return
+
+        if current == score:
+            return
+        if skill_name == "HR Skill":
+            self.hr_skill = score
+        elif skill_name == "Market Skill":
+            self.market_skill = score
+        elif skill_name == "Research Skill":
+            self.research_skill = score
+        elif skill_name == "Production Skill":
+            self.production_skill = score
+        elif skill_name == "Supply Skill":
+            self.supply_skill = score
+
+        self.sex_skills[skill] = score
+        if add_to_log:
+            mc.log_event((self.title or self.name) + " " + skill_name + " is now at level " + str(score), "float_text_green")
+        return
+
+    Person.update_work_skill = update_work_skill
+
+    # increase skill of person by one until max_value is reached.
+    def increase_work_skill(self, skill, max_value = 6, add_to_log = True):
+        if skill == 0 or skill == "hr_skill":
+            self.update_work_skill("hr_skill", min(max_value, self.hr_skill + 1), add_to_log = add_to_log)
+        elif skill == 1 or skill == "market_skill":
+            self.update_work_skill("market_skill", min(max_value, self.market_skill + 1), add_to_log = add_to_log)
+        elif skill == 2 or skill == "research_skill":
+            self.update_work_skill("research_skill", min(max_value, self.research_skill + 1), add_to_log = add_to_log)
+        elif skill == 3 or skill == "production_skill":
+            self.update_work_skill("production_skill", min(max_value, self.production_skill + 1), add_to_log = add_to_log)
+        elif skill == 4 or skill == "supply_skill":
+            self.update_work_skill("supply_skill", min(max_value, self.supply_skill + 1), add_to_log = add_to_log)
+
+        return
+
+    Person.increase_work_skill = increase_work_skill
+
+    def decrease_work_skill(self, skill, add_to_log = True):
+        if skill == 0 or skill == "hr_skill":
+            self.update_work_skill("hr_skill", max(0, self.hr_skill - 1), add_to_log = add_to_log)
+        elif skill == 1 or skill == "market_skill":
+            self.update_work_skill("market_skill", max(0, self.market_skill - 1), add_to_log = add_to_log)
+        elif skill == 2 or skill == "research_skill":
+            self.update_work_skill("research_skill", max(max_value, self.research_skill - 1), add_to_log = add_to_log)
+        elif skill == 3 or skill == "production_skill":
+            self.update_work_skill("production_skill", max(max_value, self.production_skill - 1), add_to_log = add_to_log)
+        elif skill == 4 or skill == "supply_skill":
+            self.update_work_skill("supply_skill", max(max_value, self.supply_skill - 1), add_to_log = add_to_log)
+
+        return
+
+    Person.decrease_work_skill = decrease_work_skill
+
     # Change Multiple Stats for a person at once (less lines of code, better readability)
     def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
         if not obedience is None:
@@ -928,19 +1003,6 @@ init -1 python:
     # attach to person object
     Person.change_willpower = change_willpower
 
-    def review_outfit_enhanced(self, dialogue = True):
-        self.outfit.remove_all_cum()
-        self.outfit.update_slut_requirement()
-
-        if self.should_wear_uniform():
-            self.wear_uniform() # Reset uniform
-        elif self.outfit.slut_requirement > self.sluttiness:
-            self.apply_planned_outfit()
-            if dialogue:
-                self.call_dialogue("clothing_review") # must be last call in function
-
-    Person.review_outfit = review_outfit_enhanced
-
     def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
         if position is None:
             position = self.idle_pose
@@ -983,7 +1045,7 @@ init -1 python:
     # add location to store original personality
     Person.original_personality = None
 
-    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None, show_person_info = False, half_off_instead = False): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
         #Note: this function includes a call to remove_clothing, it is not needed seperately.
         if position is None:
             position = self.idle_pose
@@ -1005,7 +1067,18 @@ init -1 python:
         if the_animation:
             # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the starting image without the frame
-            self.outfit.remove_clothing(the_clothing) #Remove the clothing
+            if isinstance(the_clothing, list):  #Handle the half-off state for whether it should be removed or not.
+                for cloth in the_clothing:
+                    if half_off_instead:
+                        self.outfit.half_off_clothing(cloth) #Half-off the clothing
+                    else:
+                        self.outfit.remove_clothing(cloth) #Remove the clothing
+            else:
+                if half_off_instead:
+                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
+                else:
+                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
+
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the top image without the frame
 
             x_size, y_size = position_size_dict.get(position)
@@ -1030,7 +1103,18 @@ init -1 python:
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-            self.outfit.remove_clothing(the_clothing)
+            
+            if isinstance(the_clothing, list): #Handle the half-off state for whether it should be removed or not.
+                for cloth in the_clothing:
+                    if half_off_instead:
+                        self.outfit.half_off_clothing(cloth) #Half-off the clothing
+                    else:
+                        self.outfit.remove_clothing(cloth) #Remove the clothing
+            else:
+                if half_off_instead:
+                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
+                else:
+                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
             renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
@@ -1142,6 +1226,19 @@ init -1 python:
 # Outfit functions - wear a specialized outfit #
 ################################################
 
+    def review_outfit_enhanced(self, dialogue = True):
+        self.outfit.remove_all_cum()
+        self.outfit.update_slut_requirement()
+
+        if self.should_wear_uniform():
+            self.wear_uniform() # Reset uniform
+        elif self.outfit.slut_requirement > self.sluttiness:
+            self.apply_planned_outfit()
+            if dialogue:
+                self.call_dialogue("clothing_review") # must be last call in function
+
+    Person.review_outfit = review_outfit_enhanced
+
     def apply_gym_outfit(self):
         if workout_wardrobe:
             # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
@@ -1158,10 +1255,65 @@ init -1 python:
 
     Person.apply_university_outfit = apply_university_outfit
 
+    def stripper_apply_outfit(self):
+        if stripclub_wardrobe:
+            self.apply_outfit(stripclub_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.stripper_apply_outfit = stripper_apply_outfit
+    
+    def waitress_apply_outfit(self):
+        if waitress_wardrobe:
+            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.waitress_apply_outfit = waitress_apply_outfit
+
+    def BDSM_performer_apply_outfit(self):
+        if BDSM_performer_wardrobe:
+            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.BDSM_performer_apply_outfit = BDSM_performer_apply_outfit
+
+    def manager_apply_outfit(self):
+        if manager_wardrobe:
+            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.manager_apply_outfit = manager_apply_outfit
+
+    def mistress_apply_outfit(self):
+        if mistress_wardrobe:
+            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self).get_copy())
+        return
+
+    Person.mistress_apply_outfit = mistress_apply_outfit
+
     def apply_planned_outfit(self):
         if self.should_wear_uniform():
             self.wear_uniform()
         else:
+            if not self.follow_mc:
+                if self.location() is gym:
+                    self.apply_gym_outfit()
+                    return
+                if self.location() is university and not self is nora:
+                    self.apply_university_outfit()
+                    return
+                if time_of_day >= 3 and (self.location() is strip_club or self.location() is bdsm_room):
+                    if self.has_role(waitress_role):
+                        self.waitress_apply_outfit()
+                    if self.has_role(bdsm_performer_role):
+                        self.BDSM_performer_apply_outfit()
+                    if self.has_role(stripper_role):
+                        self.stripper_apply_outfit()
+                    if self.has_role(manager_role):
+                        self.manager_apply_outfit()
+                    if self.has_role(mistress_role):
+                        self.mistress_apply_outfit()
+                    return
+
             self.apply_outfit(self.planned_outfit)
         return
 
@@ -1524,3 +1676,125 @@ init -1 python:
     Person.get_sex_record_anal_creampies = get_sex_record_anal_creampies
     Person.get_sex_record_fingered = get_sex_record_fingered
     Person.get_sex_record_kissing = get_sex_record_kissing
+
+##################################################
+#    Body descriptor python wrappers             #
+##################################################
+
+    def body_is_thin(self):
+        if self.body_type == "thin_body":
+            return True
+        return False
+
+    def body_is_average(self):
+        if self.body_type == "standard_body":
+            return True
+        return False
+
+    def body_is_thick(self):
+        if self.body_type == "curvy_body":
+            return True
+        return False
+
+    def body_is_pregnant(self):
+        if self.body_type == "standard_preg_body":
+            return True
+        return False
+
+    Person.body_is_thin = body_is_thin
+    Person.body_is_average = body_is_average
+    Person.body_is_thick = body_is_thick
+    Person.body_is_pregnant = body_is_pregnant
+
+##################################################
+#     Fetish related wrappers                    #
+##################################################
+
+    def get_fetish_count(self):
+        fetish_count = 0
+        for role in self.special_role:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+                fetish_count += 1
+        return fetish_count
+
+    def get_fetishes_description(self):
+        description = ""
+        for role in self.special_role:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+                if __builtin__.len(description) > 0:
+                    description += ", "
+                description += role.role_name
+        return description
+
+    def has_vaginal_fetish(self):
+        if vaginal_fetish_role in self.special_role:
+            return True
+        return False
+
+    def has_anal_fetish(self):
+        if anal_fetish_role in self.special_role:
+            return True
+        return False
+
+    def has_oral_fetish(self):
+        if oral_fetish_role in self.special_role:
+            return True
+        return False
+
+    def has_internal_cum_fetish(self):
+        if cum_internal_role in self.special_role:
+            return True
+        return False
+
+    def has_external_cum_fetish(self):
+        if cum_external_role in self.special_role:
+            return True
+        return False
+
+    Person.get_fetish_count = get_fetish_count
+    Person.get_fetishes_description = get_fetishes_description
+    Person.has_vaginal_fetish = has_vaginal_fetish
+    Person.has_anal_fetish = has_anal_fetish
+    Person.has_oral_fetish = has_oral_fetish
+    Person.has_internal_cum_fetish = has_internal_cum_fetish
+    Person.has_external_cum_fetish = has_external_cum_fetish
+
+    #Additional functions
+
+    def is_submissive(self):
+        if self.get_opinion_score("being submissive") > 0:
+            return True
+        elif self.get_opinion_score("being submissive") > -2 and self.obedience > 150:
+            return True
+        return False
+
+    Person.is_submissive = is_submissive
+
+    def is_jealous(self):
+        if self.event_triggers_dict.get("is_jealous", True) == True:
+            if self.love > 90 and self.obedience > 200:
+                self.event_triggers_dict["is_jealous"] = False
+                return False
+            return True
+        else:
+            return False
+
+    Person.is_jealous = is_jealous
+
+    def attempt_opinion_training(self, the_opinion, modifier = 0):
+        if self.suggestability + modifier > renpy.random.randint(0, 100):
+            self.increase_opinion_score(the_opinion)
+        return
+
+    def attempt_sex_skill_training(self, the_skill, modifier = 0):
+        if self.suggestability + modifier > renpy.random.randint(0, 100):
+            self.increase_sex_skill(the_skill)
+        return
+
+    def attempt_skill_training(self, the_skill, modifier = 0):
+        if self.suggestability + modifier > renpy.random.randint(0, 100):
+            self.increase_opinion_score(the_opinion)
+
+        return
+
+    Person.attempt_opinion_training = attempt_opinion_training

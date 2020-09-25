@@ -185,7 +185,7 @@ label unisex_restroom_sexy_overhear_label():
     #$ anon_char_two.name = "?????"
     "You step into the restroom and walk into one of the stalls."
     "As you are relieving yourself, you hear a couple girls enter the restroom, talking. They seem to be talking about some interesting stuff."
-    anon_char_one "I know right? His dick is perfect, and he knows how to use it to."
+    anon_char_one "I know right? His dick is perfect, and he knows how to use it too."
     anon_char_two "Damn, maybe I should see if he wants to come over for Netflix and chill sometime..."
     "Huh. You wonder who walked in and who they are talking about."
     "You try to focus on the voices and see if you recognize them."

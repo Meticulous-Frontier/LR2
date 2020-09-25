@@ -5,7 +5,7 @@ init python:
         guy_arousal = 20, guy_energy = 10,
         connections = [],
         intro = "intro_SB_doggy_standing",
-        scenes = ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2"],
+        scenes = ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2", "scene_SB_doggy_standing_3"],
         outro = "outro_SB_doggy_standing",
         transition_default = "transition_default_SB_doggy_standing",
         strip_description = "strip_SB_doggy_standing",  strip_ask_description = "strip_ask_SB_doggy_standing",
@@ -205,6 +205,61 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
                 the_girl.char "You are so deep... It feels good having you so deep inside me."
                 "You stir the depths of her pussy with your erection by moving your hips side to side."
 
+    return
+
+label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
+    if the_girl.body_is_thin():
+        "Your hips begin to slap up against [the_girl.possessive_title] gloriously fit ass."
+        "Her cheeks are tight from the exercise and care she puts into her body."
+    elif the_girl.body_is_average():
+        "Your hips begin to slap up against [the_girl.possessive_title] delicious ass."
+        "Her cheeks are round but firm with just a hint of quaking with each impact."
+    elif the_girl.body_is_thick():
+        "Your hips begin to slap up against [the_girl.possessive_title] thick ass."
+        "Her cheeks are full and generous, and they quake back and forth enticingly as you pound her."
+    elif the_girl.body_is_pregnant():
+        "Your hips begin to slap up against [the_girl.possessive_title] wide ass."
+        "Her cheeks make a pleasing heart shape since her body has been changing with the baby growing in her belly."
+    else:
+        "Your hips begin to slap up against [the_girl.possessive_title] ass."
+        "Her cheeks respond delightfully with each thrust."
+    "[the_girl.title] is thrusting back against you, using [the_object.name] as leverage to push herself back. Her ass is mesmerising."
+    menu:
+        "Finger her ass":
+            "You decide to give her ass a little extra attention. You work up some saliva in your mouth then pause fucking her for a second."
+            the_person.char "Hey... why did you stop?"
+            "Instead of answering, you let the saliva drop from your mouth onto her crack. She feels it and realizes what you are about to do when you start to work it into her crack with your finger."
+            if the_girl.get_opinion_score("anal sex") > 0:
+                "[the_girl.possessive_title] bucks her hips slightly as you start to push your finger into her tight back passage. Her back arches in pleasure."
+                the_girl.char "Mmm! [the_girl.mc_title] that feels so good."
+                $ the_girl.discover_opinion("anal sex")
+                $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") + mc.sex_skills["Anal"])
+                "You slowly give her a long, deliberate stroke, pushing your cock and finger into her at the same time."
+                "With your shaft buried inside her, you start to stroke yourself with your finger in her ass. An odd but very pleasurable feeling."
+                "[the_girl.title] starts to get impatient and begins to move her hips forward and back. It feels so good, soon your are matching her."
+                "You speed up and start to really pound her, her moans increasing in pitch from the double penetration."
+                "Soon though, you feel the urge to really give it to her, so you pull your finger out so you can grab both her hips and fuck her rough."
+
+            elif the_girl.get_opinion_score("anal sex") < 0:
+                the_girl.char "WHOA! Hey I'm not really into that..."
+                "She starts to pull away from you."
+                "It seems that [the_girl.possessive_title] doesn't like having her ass played with."
+                $ the_girl.discover_opinion("anal sex")
+                $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex"))
+                "You quickly mumble an apology. Instead of fingering her, you grab her hips with both hands and start to pound her."
+            else:
+                "[the_girl.possessive_title] tenses slightly as you start to push your finger into her back passage, but otherwise doesn't resist."
+                the_girl.char "Go slow... I don't let just anyone touch me like this..."
+                "She forces herself to relax. You can feel her rectum physically unclench and begin to slowly move your finger in and out of her."
+                the_girl.char "That feels good [the_girl.mc_title]... just be careful with me back there!"
+                "As you finger her ass, her hips remain stationary. She wills herself to relax, and manages to enjoy the stimulation."
+                $ the_girl.change_arousal(mc.sex_skills["Anal"])
+                "Soon though, you feel the urge in your hips to start fucking her again, so you pull your finger out so you can grab both her hips."
+        "Grope her ass":
+            "You hands are drawn to her cheeks. With a soft touch you trace your finger down around their delicious curve."
+            "You grab a handful, her ass flesh feels tight and full in your hand. She moans and you give her a couple vigorous thrusts."
+            mc.name "Your ass is amazing. Maybe I'll fuck you back there next..."
+            "She moans and pushes back against you as you fuck."
     return
 
 

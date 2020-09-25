@@ -10,7 +10,7 @@ init -1 python:
         return the_bdsmbed
 
     def make_pillory():
-        the_pillory = Object("Pillory", ["Pillory", "Stand", "Lean", "Kneel"], sluttiness_modifier = 15, obedience_modifier = 25)
+        the_pillory = Object("Pillory", ["Pillory", "Stand", "Lean", "Kneel", "Low"], sluttiness_modifier = 15, obedience_modifier = 25)
         return the_pillory
 
     def make_woodhorse():

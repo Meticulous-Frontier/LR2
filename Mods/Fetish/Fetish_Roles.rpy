@@ -151,7 +151,7 @@ label SB_fetish_vaginal_visit_label(the_person):
         mc.name "Don't forget to bring a toothbrush, [the_person.title]..."
         "[the_person.possessive_title] smiles, clearly enjoying your obvious innuendo."
         the_person.char "I'll see you tonight then!"
-    
+
     $ add_sb_fetish_vaginal_event(the_person)
     return
 
@@ -229,7 +229,8 @@ label SB_fetish_cum_getdosage_label(the_person):
     the_person.char "Oh!? Yes! its my favorite!"
     "[the_person.possessive_title] immediately drops to her knees. She doesn't even seem to care that there could be other people around."
     $ the_person.draw_person(position = "blowjob")
-    call fuck_person(the_person, private = False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True, position_locked = True) from _call_fuck_person_SBR30
+    # call fuck_person(the_person, private = False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True, position_locked = True) from _call_fuck_person_SBR30
+    call get_fucked(the_person, private= False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), allow_continue = False) from _call_get_fucked_SBR030
     return
 
 #SBR40

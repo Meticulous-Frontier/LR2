@@ -4,14 +4,17 @@
 # The role is incompatible with: low Charisma, slave_role, having collar.
 
 init 3303 python:
+    manager_wardrobe = wardrobe_from_xml("Manager_Wardrobe")
+    mistress_wardrobe = wardrobe_from_xml("Mistress_Wardrobe")
+
     def manager_role_status_acquisition(person):
         if slave_role in person.special_role:
             slave_release_slave(person)
             # restore stat loss from removing slave
             person.change_stats(happiness = 20, love = 20, obedience = 50, add_to_log = False)
-            
+
         person.update_opinion_with_score("taking control", 2, add_to_log = False)
-        if not person.personality is alpha_personality:
+        if not person in unique_character_list and not person.personality is alpha_personality:
             person.original_personality = person.personality
             person.personality = alpha_personality
         return
@@ -22,7 +25,7 @@ init 3303 python:
                 return "Only in [strip_club.formalName]"
             return True
         return False
-    
+
     def allow_promote_to_mistress_requirement(person):
         if person.has_role(manager_role) and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and not strip_club_get_mistress():
             if not mc.location in [strip_club, bdsm_room]:
@@ -72,7 +75,7 @@ init 3303 python:
             stripclub_waitresses.remove(person)
 
         # change to correct schedule
-        if person.is_employee() or person in [lily, mom, aunt]:
+        if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule([4], strip_club)
         else:
@@ -82,6 +85,8 @@ init 3303 python:
         manager_role_status_acquisition(person)
 
         add_strip_club_manager_hire_more_stripper_reminder_action()
+        add_strip_club_manager_hire_more_waitresses_reminder_action()
+        add_strip_club_manager_waitresses_suggestion_action()
         add_strip_club_manager_bdsm_room_suggestion_action()
         return
 
@@ -89,7 +94,7 @@ init 3303 python:
         person.remove_role(manager_role)
         person.add_role(mistress_role)
         # change default work location
-        if person.is_employee() or person in [lily, mom, aunt]:
+        if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule([4], bdsm_room)
         else:
@@ -204,3 +209,28 @@ label mistress_hunt_for_me_label(the_person):
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
     return
+
+label advance_time_manager_daily_serum_dosage_label(stack): #Should works for both roles: manager and mistress
+    python:
+        if hasattr(mc.business, "manager_serum"):
+            if mc.business.manager_serum:
+                serum_count = mc.business.inventory.get_serum_count(mc.business.manager_serum)
+                if serum_count > 0:
+                    for (person,place) in people_to_process:
+                        if employee_role in person.special_role:
+                            continue
+                        if not manager_role in person.special_role:
+                            continue
+                        if not mistress_role in person.special_role:
+                            continue
+                        mc.business.inventory.change_serum(mc.business.manager_serum,-1)
+                        person.give_serum(copy.copy(mc.business.manager_serum), add_to_log = False)
+                        serum_count -= 1
+                        if serum_count == 0:
+                            break
+
+        execute_hijack_call(stack)
+
+init 5 python:
+    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_manager_daily_serum_dosage_label")
+

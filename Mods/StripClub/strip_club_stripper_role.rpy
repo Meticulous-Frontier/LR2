@@ -5,7 +5,7 @@
 init 5 python:
     add_label_hijack("normal_start", "update_strip_club_show_requirement")
     add_label_hijack("after_load", "update_strip_club_show_requirement")
-   
+
     # override default strip_club show requirement
     def strip_club_show_requirement_enhanced():
         # check available strippers in club (not possible strippers)
@@ -25,7 +25,7 @@ init 5 python:
             work_location = bdsm_room
 
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
-        if person.is_employee() or person in [lily, mom, aunt]:
+        if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule([4], work_location)
         else:
@@ -54,7 +54,7 @@ init 5 python:
 
         person.remove_role(role)
         # restore default schedules
-        if person.is_employee() or person in [lily, mom, aunt]:
+        if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.set_schedule([4], person.home)
         else:
             person.set_schedule([0, 4], person.home)
@@ -99,11 +99,11 @@ init 5 python:
         return False
 
     def strip_club_hire_employee_requirement(person):
-        if person.has_role([casual_hotwife_role, casual_athlete_role, casual_FA_role]):
+        if person.has_role([casual_hotwife_role, casual_FA_role]):
             return False
         if person.has_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
             return False
-        if person.has_role(employee_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily])): # disqualified from action
+        if person.has_role(employee_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
         if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
@@ -128,14 +128,14 @@ init 5 python:
 
     def allow_promote_to_manager_requirement(person):
         if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
-            if person.age < 25:
-                return "Requires: age >= 25"
+            # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
+                # return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:
                 return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
-            if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:
-                return "Too recently hired"
+            # if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7: # Maybe I hired her just because I want to have her as manager (immediately)
+                # return "Too recently hired"
             return True
         return False
 
@@ -143,7 +143,7 @@ init 5 python:
         available_roles = []
         if __builtin__.len(stripclub_strippers) < 5:
             available_roles.append(["Stripper", stripper_role])
-        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2:
+        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2 and mc.business.event_triggers_dict.get("strip_club_has_waitresses", False):
             available_roles.append(["Waitress", waitress_role])
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and __builtin__.len(stripclub_bdsm_performers) < 5:
             available_roles.append(["BDSM Performer", bdsm_performer_role])
@@ -158,9 +158,7 @@ init 5 python:
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
-    bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
     stripper_role = Role("Stripper", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
-    waitress_role = Role("Waitress", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
 
 label update_strip_club_show_requirement(stack):
     python:
@@ -260,7 +258,11 @@ label strip_club_hire_employee_label(the_person):
         return
 
     if _return is stripper_role:
-        if the_person.effective_sluttiness() > 70:
+        if the_person.has_role(prostitute_role):
+            the_person.char "Could I still turn tricks, when I like the guy?"
+            mc.name "As long as you don't do it inside the club, you can do what ever you like."
+            the_person.char "Great, then I'll be a stripper for you."
+        elif the_person.effective_sluttiness() > 70:
             the_person.char "I admit, I love turning men on, just making them horny while they ogle my body, mmm... Where should I sign?"
         elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
             the_person.char "I admit, I always wanted to do something like that. Seducing men, with my body on full display, mmm... Where should I sign?"
@@ -277,7 +279,11 @@ label strip_club_hire_employee_label(the_person):
 
     elif _return is bdsm_performer_role:
         mc.name "I was thinking you might like to perform in the BDSM room..."
-        if the_person.effective_sluttiness() > 70:
+        if the_person.has_role(prostitute_role):
+            the_person.char "Could I still turn tricks, when I like the guy?"
+            mc.name "As long as you don't do it inside the club, you can do what ever you like."
+            the_person.char "Great, then I'll be your naughty girl on stage."
+        elif the_person.effective_sluttiness() > 70:
             the_person.char "That sounds like something interesting... What do you think I should do?"
             mc.name "You're a beautiful, sexy and attractive girl, you'll be amazing on stage!"
             the_person.char "You are absolutely right, where should I sign?"
@@ -298,7 +304,11 @@ label strip_club_hire_employee_label(the_person):
 
     else:
         mc.name "I was thinking you might like to become a waitress..."
-        if the_person.effective_sluttiness() > 50:
+        if the_person.has_role(prostitute_role):
+            the_person.char "Could I still turn tricks, when I like the guy?"
+            mc.name "As long as you don't do it inside the club, you can do what ever you like."
+            the_person.char "Great, then I'll be one of the best waitresses you will ever see."
+        elif the_person.effective_sluttiness() > 50:
             the_person.char "I would love being a waitress, showing some skin, have them groping my ass... Ok, where should I sign?"
         elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 0:
             the_person.char "If it's just to be a waitress there, I don't mind showing some skin... Ok, where should I sign?"
@@ -535,3 +545,25 @@ label stripper_performance_review_label(the_person):
     "You stand up and open the door for [the_person.title] at the end of her performance review."
     $ clear_scene()
     return
+
+label advance_time_strippers_daily_serum_dosage_label(stack):
+    python:
+        if hasattr(mc.business, "strippers_serum"):
+            if mc.business.strippers_serum:
+                serum_count = mc.business.inventory.get_serum_count(mc.business.strippers_serum)
+                if serum_count > 0:
+                    for (person,place) in people_to_process:
+                        if employee_role in person.special_role:
+                            continue
+                        if not stripper_role in person.special_role:
+                            continue
+                        mc.business.inventory.change_serum(mc.business.strippers_serum,-1)
+                        person.give_serum(copy.copy(mc.business.strippers_serum), add_to_log = False)
+                        serum_count -= 1
+                        if serum_count == 0:
+                            break
+
+        execute_hijack_call(stack)
+
+init 5 python:
+    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_strippers_daily_serum_dosage_label")

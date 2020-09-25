@@ -16,7 +16,7 @@ init 3304 python:
 
     def strip_club_manager_reminder_requirement():
         if day >= (get_strip_club_foreclosed_last_action_day() + 7): # the event start to trigger after 7 days MC bought the club.
-            if get_strip_club_foreclosed_stage() == 5: # the event only trigger if there's no Manager yet
+            if get_strip_club_foreclosed_stage() == 5 and not strip_club_get_manager(): # the event only trigger if there's no Manager yet
                 if day % 5 == 0 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (toughts)
                     return True
         return False
@@ -37,6 +37,29 @@ init 3304 python:
         if __builtin__.len(stripclub_strippers) < 5:
             strip_club_manager_hire_more_stripper_reminder_action = Action("A simple reminder from the strip club manager to hire more stripper", strip_club_manager_hire_more_stripper_reminder_requirement, "strip_club_manager_hire_more_stripper_reminder_label")
             mc.business.mandatory_crises_list.append(strip_club_manager_hire_more_stripper_reminder_action)
+
+    def strip_club_manager_waitresses_suggestion_requirement():
+        if __builtin__.len(stripclub_waitresses) < 3: # the event only trigger if there's not the max nr. of waitresses (2)
+            if strip_club_get_manager(): # the event only trigger if there's a Manager
+                if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
+                    return True
+        return False
+
+    def add_strip_club_manager_waitresses_suggestion_action():
+        if not mc.business.event_triggers_dict.get("strip_club_has_waitresses", False):
+            strip_club_manager_waitresses_suggestion_action = Action("Your strip club manager suggest to hire a couple of waitresses.", strip_club_manager_waitresses_suggestion_requirement, "strip_club_manager_waitresses_suggestion_label")
+            mc.business.mandatory_crises_list.append(strip_club_manager_waitresses_suggestion_action)
+
+    def strip_club_manager_hire_more_waitresses_reminder_requirement():
+        if __builtin__.len(stripclub_waitresses) < 3: # the event only trigger if there's not the max nr. of waitresses (2)
+            if mc.business.event_triggers_dict.get("strip_club_has_waitresses", False): # the event only trigger if the Manager already suggested to hire some waitresses
+                if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
+                    return True
+        return False
+
+    def add_strip_club_manager_hire_more_waitresses_reminder_action():
+        strip_club_manager_hire_more_waitresses_reminder_action = Action("A simple reminder from the strip club manager to hire more waitresses", strip_club_manager_hire_more_waitresses_reminder_requirement, "strip_club_manager_hire_more_waitresses_reminder_label")
+        mc.business.mandatory_crises_list.append(strip_club_manager_hire_more_waitresses_reminder_action)
 
     def strip_club_manager_bdsm_room_suggestion_requirement():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
@@ -68,7 +91,7 @@ init 3304 python:
             if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
                 if strip_club_get_manager():
                     if not mc.business.is_open_for_business():
-                        return "Only during work hours"                    
+                        return "Only during work hours"
                     return True
         return False
 
@@ -104,9 +127,39 @@ label strip_club_manager_hire_more_stripper_reminder_label(): # phone call
     the_person.char "Hello [the_person.mc_title], I called just to remember you we can have five girls here, performing on the stage."
     the_person.char "To have them would make setting up the shifts more easy and, of course, it would be more profitable for you."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
-    the_person.char "And don't forget, we also need some waitresses, we can't have our strippers do that."
-    mc.name "Right, I'll get on that too."
     the_person.char "Ok [the_person.mc_title], thank you!"
+    return
+
+label strip_club_manager_hire_more_waitresses_reminder_label(): # phone call
+    "Suddenly your smartphone rings, it's your strip club manager."
+    $ the_person = strip_club_get_manager()
+    the_person.char "Hello [the_person.mc_title], I called just to remember you we need two waitresses, we can't have our strippers do that."
+    mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
+    the_person.char "Ok [the_person.mc_title], thank you!"
+    return
+
+label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
+    "Suddenly your smartphone rings: it's your StripClub manager."
+    $ the_person = strip_club_get_manager()
+    the_person.char "Ehi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you..."
+    mc.name "Sure [the_person.title], I'm coming."
+    $ mc.change_location(strip_club)
+    $ mc.location.show_background()
+    $ the_person.draw_person(emotion = "happy", position = "stand3")
+    mc.name "Here I am [the_person.title], how things are going here ?"
+    the_person.char "That's exactly what I wanna talk to you about: you spent a lot of money to buy this place, don't you wanna make it more profitable ?"
+    mc.name "Of course I do: what do you have in mind ?"
+    the_person.char "A lot of customers here get a drink at the bar then sit at the border of the stage to watch the girls stripping, right ?"
+    mc.name "Yes, that's how the business here works..."
+    the_person.char "Exactly! After they got their drink, the customers don't wanna move anymore from the stage, only a few come back to get another drink..."
+    mc.name "I think I got where are you going with this..."
+    the_person.char "Yeah! What if we had a couple of waitresses serving the drinks directly at the customer's seat, and maybe some peanuts or some chips..."
+    the_person.char "They would be more thirsty, so the drinks sold at the end of the day would be a lot, lot more!"
+    mc.name "Thank you [the_person.title], that's really a good idea, I think I'll find someone to work as waitress here!"
+    $ the_person.draw_person(emotion = "happy", position = "stand4")
+    "[the_person.title] smile back to you, proud to have proof herself worthy."
+    $ mc.business.event_triggers_dict["strip_club_has_waitresses"] = True
+    $ add_strip_club_manager_hire_more_waitresses_reminder_action()
     return
 
 label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)

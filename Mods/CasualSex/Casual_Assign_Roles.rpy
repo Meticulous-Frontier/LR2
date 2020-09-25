@@ -17,11 +17,11 @@ init 2 python:
             if __builtin__.len(people.special_role) > 0: # Checking for any role since generic_people_role is removed
                 disqualifying_role = 1
             if disqualifying_role == 0:         #Assign new casual sex roles#
-                if people.age < 30:
-                    assign_casual_athlete_role(people)
-                    people.wardrobe = copy.copy(workout_wardrobe)
+                # if people.age < 30:
+                #     assign_casual_athlete_role(people)
+                #     people.wardrobe = copy.copy(workout_wardrobe)
 
-                elif people.age < 40:
+                if people.age < 40:
                     assign_casual_hotwife_role(people)
 
                 #else:
@@ -154,8 +154,8 @@ init 2 python:
         return
 
 init 3 python:
-    college_athlete_personality_action = ActionMod("College Athlete Personality", college_athlete_personality_requirement, "college_athlete_personality_dummy_label",
-        menu_tooltip = "Enable or disable the college athlete personality.", category="Personality", initialization = init_college_athlete_personality, on_enabled_changed = change_college_athlete_personality_enabled)
+    # college_athlete_personality_action = ActionMod("College Athlete Personality", college_athlete_personality_requirement, "college_athlete_personality_dummy_label",
+    #     menu_tooltip = "Enable or disable the college athlete personality.", category="Personality", initialization = init_college_athlete_personality, on_enabled_changed = change_college_athlete_personality_enabled)
 
     hot_wife_personality_action = ActionMod("Hot Wife Personality", hot_wife_personality_requirement, "hot_wife_personality_dummy_label",
         menu_tooltip = "Enable or disable the Hot Wife personality.", category="Personality", initialization = init_hot_wife_personality, on_enabled_changed = change_hot_wife_personality_enabled)

@@ -23,7 +23,7 @@ init 10 python:
             return False
         if the_person.has_role(slave_role):
             return True
-        return False        
+        return False
 
     def uncollar_slave_requirement(the_person):
         return the_person.slave_collar
@@ -379,7 +379,8 @@ label slave_alarm_clock_label(the_person):
                 mc.name "That would be great [the_person.title]."
                 $ the_person.change_stats(happiness = 5, love = 2)
                 "You lie back relax as [the_person.possessive_title] lowers herself down onto your hard cock."
-                call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
+                # call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
+                call get_fucked(the_person, the_goal = "vaginal creampie", private= True, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, allow_continue = False) from _slave_alarm_clock_label_2
                 $ the_report = _return
                 if the_report.get("girl orgasms", 0) > 0:
                     $ the_person.change_love(5)

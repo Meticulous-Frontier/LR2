@@ -17,7 +17,7 @@ init 2 python:
         return get_random_from_list(list_of_possible_people)
 
     girlfriend_service = ActionMod("Girlfriend Service", girlfriend_service_requirement, "girlfriend_service_label",
-        menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business", 
+        menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business",
         initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = girlfriend_service_weight)
 
@@ -93,14 +93,14 @@ label girlfriend_service_label():
                 mc.name "Now... what exactly did you have in mind?"
                 "[the_person.possessive_title] smiles and moves toward you."
                 call get_fucked(the_person, private = True) from _girlfriend_service_initiate_03
-                $ the_person.change_stats (happiness = 5, temp_slut = 5)
+                $ the_person.change_stats (happiness = 5, slut_temp = 5)
             "Service me here" if mc.energy >= 50:
                 if not mc.location.people or (len(mc.location.people) == 1 and the_person == mc.location.people[0]):
                     "Looking around, [the_person.title] realizes you two are the only two people around."
                     the_person.char "Okay, let's do it right here!"
                     "[the_person.possessive_title] moves toward you."
                     call get_fucked(the_person, private = True) from _girlfriend_service_initiate_01
-                    $ the_person.change_stats (happiness = 5, temp_slut = 5)
+                    $ the_person.change_stats (happiness = 5, slut_temp = 5)
                 else:
                     "She looks around at the other girls in the room."
                     if the_person.effective_sluttiness() > 80 or (the_person.get_opinion_score("public sex") == 0 and the_person.effective_sluttiness() > 40):
@@ -111,7 +111,7 @@ label girlfriend_service_label():
                         the_person.char "Okay, If you're sure about it."
                     "[the_person.possessive_title] moves toward you."
                     call get_fucked(the_person, private = False) from _girlfriend_service_initiate_02
-                    $ the_person.change_stats (obedience = 5, temp_slut = 5)
+                    $ the_person.change_stats (obedience = 5, slut_temp = 5)
             "Too tired" if mc.energy < 50:
                 mc.name "I'm sorry. Its been a long day and I'm just too tired right now. But I think I would like to do this another time..."
                 "She seems a little disappointed, but understanding."

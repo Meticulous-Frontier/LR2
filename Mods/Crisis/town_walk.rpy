@@ -5,8 +5,8 @@ init -1 python:
 
 init 2 python:
     def town_walk_crisis_requirement():
-        if mc.location in get_mall_locations():
-            if time_of_day == 1 or time_of_day == 2: # only morning and afternoon
+        if mc.location in [downtown, downtown_bar, downtown_hotel]:
+            if time_of_day >= 1 or time_of_day <= 3: 
                 return True
         return False
 
@@ -16,8 +16,8 @@ init 2 python:
         else:
             return get_random_known_person_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc] + mc.business.get_employee_list())
 
-    town_walk_crisis_action = ActionMod("Town Walk",town_walk_crisis_requirement,"town_walk_crisis_action_label", category = "Mall",
-        menu_tooltip = "On occasion you take an afternoon stroll through town, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)
+    town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",
+        menu_tooltip = "On occasion when you walk down town, you notice, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)
 
 label town_walk_crisis_action_label:
     ## You spy on a neighbor during your town walk activities

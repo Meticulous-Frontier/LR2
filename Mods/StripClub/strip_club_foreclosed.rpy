@@ -38,7 +38,7 @@ init 2 python:
             return False
         if mc.business.funds > 60000:
             if time_of_day > 2:
-                if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True and cousin.event_triggers_dict.get("blackmail_level", 0) >= 2:
+                if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True and cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
                     return True
         return False
 
@@ -55,8 +55,11 @@ init 2 python:
 
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
-            person.set_schedule([1,2,3], None)
-            person.set_schedule([0, 4], person.home)
+            if person.has_role(employee_role):
+                person.set_schedule([0, 4], person.home)
+            else:
+                person.set_schedule([1,2,3], None)
+                person.set_schedule([0, 4], person.home)
         return
 
     def add_cousin_talk_about_strip_club_action():

@@ -12,6 +12,8 @@ init 2 python:
             return "No serum"
 
     def get_division_serum(division):
+        if not hasattr(division[1], division[2]):
+            setattr( division[1], division[2], None);
         return getattr(division[1], division[2])
 
     def set_division_serum(division, serum):
@@ -34,6 +36,15 @@ init 2:
             ["Marketing", mc.business, "m_serum"],
             ["Human Resources", mc.business, "h_serum"]
         ]
+        python:
+            if mc.business.event_triggers_dict.get("foreclosed_stage", 0) >= 5 and not ["Strippers", mc.business, "strippers_serum"] in division_serums:
+                division_serums.append(["Strippers", mc.business, "strippers_serum"])
+            if mc.business.event_triggers_dict.get("strip_club_has_waitresses", False) == True and not ["Waitresses", mc.business, "waitresses_serum"] in division_serums:
+                division_serums.append(["Waitresses", mc.business, "waitresses_serum"])
+            if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) == True and not ["BDSM performers", mc.business, "bdsm_performers_serum"] in division_serums:
+                division_serums.append(["BDSM performers", mc.business, "bdsm_performers_serum"])
+            if strip_club_get_manager() and not ["Manager/Mistress", mc.business, "manager_serum"] in division_serums:
+                division_serums.append(["Manager/Mistress", mc.business, "manager_serum"])
 
         vbox:
             xalign 0.5

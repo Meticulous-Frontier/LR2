@@ -6,6 +6,7 @@ init -2 python:
     build.classify("**.back", None)
     build.classify("**.txt", None)
     build.classify("**.save", None)
+    build.classify("**.drawio", None)
     build.classify("**/game/saves/**.**", None)
     build.classify("**.rpyb", None)
     build.classify("**.code-workspace", None)
@@ -27,6 +28,9 @@ init -2 python:
     build.classify("game/Mods/Room/images/**.jpg", "background_images")
     build.classify("game/Mods/Room/images/**.png", "background_images")
 
+    build.archive("extra_character_images")
+    build.classify("game/Mods/Core/Images/character_images/**.png", "extra_character_images")
+
     build.archive("gui")
     build.classify("game/gui/**.png", "gui")
     build.classify("game/Mods/Core/Images/**.png", "gui")
@@ -47,10 +51,16 @@ init -2 python:
     build.classify("game/**.ttf", "fonts")
     build.classify("game/**.otf", "fonts")
 
+    build.archive("character_images")
+    build.classify("game/images/character_images/**.png", "character_images")
+
     build.archive("tutorial_images")
     build.classify("game/images/**.png", "tutorial_images")
     build.classify("game/images/**.jpg", "tutorial_images")
     build.classify("game/Mods/Tutorial/**.png", "tutorial_images")
+
+
+
 
 init 2 python:
     build.name = "Lab_Rats_2_Mod"
