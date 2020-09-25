@@ -53,8 +53,25 @@ init -1 python:
             org_func(room, person, destination)
             # run extension code
             if not person.follow_mc and not room is destination:
-                person.apply_planned_outfit()
-
+                if person.location() is gym:
+                    person.apply_gym_outfit()
+                elif person.location() is university and not person is nora:
+                    person.apply_university_outfit()
+                elif time_of_day >= 3 and (person.location() is strip_club or person.location() is bdsm_room):
+                    if person.has_role(waitress_role):
+                        person.waitress_apply_outfit()
+                    elif person.has_role(bdsm_performer_role):
+                        person.BDSM_performer_apply_outfit()
+                    elif person.has_role(stripper_role):
+                        person.stripper_apply_outfit()
+                    elif person.has_role(manager_role):
+                        person.manager_apply_outfit()
+                    elif person.has_role(mistress_role):
+                        person.mistress_apply_outfit()
+                    else:
+                        person.apply_planned_outfit()
+                else:
+                    person.apply_planned_outfit()
             return
 
         return move_person_wrapper

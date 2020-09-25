@@ -651,15 +651,13 @@ init -1 python:
             if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
                 # since downtown is generic there could be other party locations there
                 party_destinations = [downtown_bar, downtown]
-                # after MC buys the stripclub, it is open to public
-                if strip_club.public:
-                    if "get_strip_club_foreclosed_stage" in globals():
-                        if not strip_club_is_closed():
-                            party_destinations.append(strip_club)
-                            if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                                party_destinations.append(bdsm_room)
-                    else:
+                if "get_strip_club_foreclosed_stage" in globals():
+                    if not strip_club_is_closed():
                         party_destinations.append(strip_club)
+                        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                            party_destinations.append(bdsm_room)
+                else:
+                    party_destinations.append(strip_club)
 
                 location.move_person(self, get_random_from_list(party_destinations))
             else:
@@ -1294,26 +1292,6 @@ init -1 python:
         if self.should_wear_uniform():
             self.wear_uniform()
         else:
-            if not self.follow_mc:
-                if self.location() is gym:
-                    self.apply_gym_outfit()
-                    return
-                if self.location() is university and not self is nora:
-                    self.apply_university_outfit()
-                    return
-                if time_of_day >= 3 and (self.location() is strip_club or self.location() is bdsm_room):
-                    if self.has_role(waitress_role):
-                        self.waitress_apply_outfit()
-                    if self.has_role(bdsm_performer_role):
-                        self.BDSM_performer_apply_outfit()
-                    if self.has_role(stripper_role):
-                        self.stripper_apply_outfit()
-                    if self.has_role(manager_role):
-                        self.manager_apply_outfit()
-                    if self.has_role(mistress_role):
-                        self.mistress_apply_outfit()
-                    return
-
             self.apply_outfit(self.planned_outfit)
         return
 
@@ -1582,6 +1560,34 @@ init -1 python:
         return False
 
     Person.is_highly_fertile = is_highly_fertile
+
+    def pregnancy_chance_string(self): #Turns the difference of days from her ideal fertile day into a string
+        if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+            preg_chance = self.calculate_realistic_fertility()
+        else:
+            preg_chance = self.fertility_percent
+
+        if not self.on_birth_control:
+            preg_chance *= .9
+        else:
+            preg_chance *= (.1 + (self.bc_penalty / 10))
+
+        # mc.log_event("Pregnancy chance: " + the_person.name + ": " + str(preg_chance), "float_text_grey")
+
+        if preg_chance < 3:
+            return "Very Safe"
+        elif preg_chance < 5:
+            return "Safe"
+        elif preg_chance < 10:
+            return "Normal"
+        elif preg_chance < 20:
+            return "Risky"
+        elif preg_chance < 40:
+            return "Very Risky"
+        else:
+            return "Extremely Risky"
+
+    Person.pregnancy_chance_string = pregnancy_chance_string
 
 ##########################################
 # Position Specific functions            #

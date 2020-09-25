@@ -96,7 +96,6 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         mc.name "I'd better hurry and find someone to work here fast, if I want to reopen this place."
 
     $ set_strip_club_foreclosed_stage(5)
-    $ strip_club.public = True
     $ strip_club.add_action(strip_club_show_action)
     $ add_strip_club_hire_employee_action_to_mc_actions()
 
