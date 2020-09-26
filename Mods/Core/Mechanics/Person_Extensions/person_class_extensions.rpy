@@ -1240,7 +1240,7 @@ init -1 python:
     def apply_gym_outfit(self):
         if workout_wardrobe:
             # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
-            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
@@ -1248,42 +1248,42 @@ init -1 python:
     def apply_university_outfit(self):
         if university_wardrobe:
             # get personal copy of outfit, so we don't change the university wardrobe (in any events)
-            self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_university_outfit = apply_university_outfit
 
     def stripper_apply_outfit(self):
         if stripclub_wardrobe:
-            self.apply_outfit(stripclub_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(stripclub_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3))
         return
 
     Person.stripper_apply_outfit = stripper_apply_outfit
     
     def waitress_apply_outfit(self):
         if waitress_wardrobe:
-            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self))
         return
 
     Person.waitress_apply_outfit = waitress_apply_outfit
 
     def BDSM_performer_apply_outfit(self):
         if BDSM_performer_wardrobe:
-            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self))
         return
 
     Person.BDSM_performer_apply_outfit = BDSM_performer_apply_outfit
 
     def manager_apply_outfit(self):
         if manager_wardrobe:
-            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self))
         return
 
     Person.manager_apply_outfit = manager_apply_outfit
 
     def mistress_apply_outfit(self):
         if mistress_wardrobe:
-            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self))
         return
 
     Person.mistress_apply_outfit = mistress_apply_outfit
