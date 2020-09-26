@@ -145,6 +145,24 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+
+    # work-outfit for strippers / waitresses and bdsm room performers
+
+    def get_person_work_outfit(self):
+        if not hasattr(self, "_work_outfit"):
+            self._work_outfit = None
+        return self._work_outfit
+
+    def set_person_work_outfit(self, value):
+        self._work_outfit = value
+
+    def del_person_work_outfit(self):
+        del self._work_outfit
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
+
+
     def get_person_weight(self):
         if not hasattr(self, "_weight"):
             if self.body_type == "thin_body":
@@ -628,8 +646,10 @@ init -1 python:
                 self.next_day_outfit = None
             else:
                 self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+
             self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
+            self.work_outfit = None
 
         destination = self.schedule[time_of_day] #None destination means they have free time
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
@@ -1223,6 +1243,32 @@ init -1 python:
 ################################################
 # Outfit functions - wear a specialized outfit #
 ################################################
+    def should_wear_work_outfit(self):
+        shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
+        if ((time_of_day == 3 and shifts == 2) or (time_of_day == 4)) and self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
+            return True
+        return False
+
+    Person.should_wear_work_outfit = should_wear_work_outfit
+
+    def wear_work_outfit(self):
+        if self.work_outfit is None:
+            if self.has_role(stripper_role):
+                self.work_outfit = stripclub_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
+            if self.has_role(waitress_role):
+                self.work_outfit = waitress_wardrobe.decide_on_outfit2(self)
+            if self.has_role(bdsm_performer_role):
+                self.work_outfit = BDSM_performer_wardrobe.decide_on_outfit2(self)
+            if self.has_role(mistress_role):
+                self.work_outfit = mistress_wardrobe.decide_on_outfit2(self)
+            if self.has_role(manager_role):
+                self.work_outfit = manager_wardrobe.decide_on_outfit2(self)
+
+        if self.work_outfit is not None: #If our planned uniform is STILL None it means we are unable to construct a valid uniform. Only assign it as our outfit if we have managed to construct a uniform.
+            self.apply_outfit(self.work_outfit) #We apply clothing taboos to uniforms because the character is assumed to have seen them in them.
+        return
+
+    Person.wear_work_outfit = wear_work_outfit
 
     def review_outfit_enhanced(self, dialogue = True):
         self.outfit.remove_all_cum()
@@ -1252,45 +1298,12 @@ init -1 python:
         return
 
     Person.apply_university_outfit = apply_university_outfit
-
-    def stripper_apply_outfit(self):
-        if stripclub_wardrobe:
-            self.apply_outfit(stripclub_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3))
-        return
-
-    Person.stripper_apply_outfit = stripper_apply_outfit
-    
-    def waitress_apply_outfit(self):
-        if waitress_wardrobe:
-            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self))
-        return
-
-    Person.waitress_apply_outfit = waitress_apply_outfit
-
-    def BDSM_performer_apply_outfit(self):
-        if BDSM_performer_wardrobe:
-            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self))
-        return
-
-    Person.BDSM_performer_apply_outfit = BDSM_performer_apply_outfit
-
-    def manager_apply_outfit(self):
-        if manager_wardrobe:
-            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self))
-        return
-
-    Person.manager_apply_outfit = manager_apply_outfit
-
-    def mistress_apply_outfit(self):
-        if mistress_wardrobe:
-            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self))
-        return
-
-    Person.mistress_apply_outfit = mistress_apply_outfit
-
+  
     def apply_planned_outfit(self):
         if self.should_wear_uniform():
             self.wear_uniform()
+        elif self.should_wear_work_outfit():
+            self.wear_work_outfit()
         else:
             self.apply_outfit(self.planned_outfit)
         return
