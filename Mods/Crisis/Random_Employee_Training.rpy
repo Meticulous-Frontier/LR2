@@ -110,26 +110,26 @@ label SB_one_on_one_label():
     the_person.char "Oh, hey [the_person.mc_title]!"
     "You keep chatting with [the_person.possessive_title] for a while. Eventually, the subject of your role in the company and the various jobs you fulfill around the lab comes up."
     the_person.char "Yeah, I've heard that you are pretty skilled at some of the different jobs are the lab here. I was wondering if maybe you could give me some pointers?"
-    "You consider [the_person.possessive_title]'s request for a moment."
+    "You consider [the_person.possessive_title]'s request for a moment, taking into account her personal ambitions and skill level."
     $ done = False
     menu:
-        "Train HR" if the_person.hr_skill < mc.hr_skill:
+        "Train HR" if the_person.hr_skill < mc.hr_skill and the_person.get_opinion_score("HR work") > -1:
             "You explain to [the_person.possessive_title] the ins and outs of HR work. You do it in pretty broad terms, but it seems like she gets the hang of it pretty quickly."
             $ done = one_on_one_update_HR_skill(the_person)
 
-        "Train Supply" if the_person.supply_skill < mc.supply_skill:
+        "Train Supply" if the_person.supply_skill < mc.supply_skill and the_person.get_opinion_score("supply work") > -1:
             "You do some hands on with [the_person.possessive_title], showing her various methods for securing the different chemicals required for serum production."
             $ done = one_on_one_update_supply_skill(the_person)
 
-        "Train Marketing" if the_person.market_skill < mc.market_skill:
+        "Train Marketing" if the_person.market_skill < mc.market_skill and the_person.get_opinion_score("marketing work") > -1:
             "You spend some time with [the_person.possessive_title], giving all kind of advice on the art of the sale. It's not just all about good deals, but making people understand they need the product you offer."
             $ done = one_on_one_update_marketing_skill(the_person)
 
-        "Train Research" if the_person.research_skill < mc.research_skill:
+        "Train Research" if the_person.research_skill < mc.research_skill and the_person.get_opinion_score("research work") > -1:
             "You talk with [the_person.possessive_title] about various chemicals and scientific methods, and how they apply do different portions of the brain."
             $ done = one_on_one_update_research_skill(the_person)
 
-        "Train Production" if the_person.production_skill < mc.production_skill:
+        "Train Production" if the_person.production_skill < mc.production_skill and the_person.get_opinion_score("production work") > -1:
             "You share some insights with [the_person.possessive_title] about the chemical processes and reactions between common serum elements."
             $ done = one_on_one_update_production_skill(the_person)
 
