@@ -157,7 +157,7 @@ init -1 python:
             if not outfit:
                 # Dive into the default wardrobe
                 outfit = default_wardrobe.get_random_appropriate_outfit(slut_limit_remaining, preferences = preferences)
-        return outfit
+        return outfit.get_copy()
 
     def get_random_appropriate_underwear_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):
         # We also want to make sure it's something she would personally wear.

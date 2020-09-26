@@ -88,6 +88,27 @@ init -1 python:
         fix_opinion_exclusion(person, "the colour pink", "the colour purple") # pink and purple clash
         fix_opinion_exclusion(person, "the colour blue", "the colour purple") # pink and purple clash
         fix_opinion_exclusion(person, "the colour orange", "the colour yellow") # orange and yellow clash
+
+        # set work opinions (based on stats / skills)
+        set_work_opinion(person, "research work", person.int, person.research_skill)
+        set_work_opinion(person, "marketing work", person.charisma, person.market_skill)
+        set_work_opinion(person, "HR work", person.charisma, person.hr_skill)
+        set_work_opinion(person, "supply work", person.focus, person.supply_skill)
+        set_work_opinion(person, "production work", person.focus, person.production_skill)
+        return
+
+    def set_work_opinion(person, skill, stat_level, skill_level):
+        known = True # renpy.random.randint(0, 2) == 1
+        if skill_level < 2 and stat_level < 3:
+            person.opinions[skill] = [-2, known]
+        elif skill_level < 3 and stat_level < 4:
+            person.opinions[skill] = [-1, known]
+        elif skill_level > 4 and stat_level > 5:
+            person.opinions[skill] = [2, known]
+        elif skill_level > 3 and stat_level > 4:
+            person.opinions[skill] = [1, known]
+        elif skill in person.opinions:
+            del person.opinions[skill]
         return
 
     # when she doesn't like base_topic, she should not like / love related topic (invert likeness of related topic)

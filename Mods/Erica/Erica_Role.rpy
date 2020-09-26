@@ -63,7 +63,7 @@ init -2 python:
 
     def erica_apply_gym_outfit(): #No access to self in object specific override
         if erica_workout_wardrobe:
-            erica.apply_outfit(erica_workout_wardrobe.decide_on_outfit2(erica).get_copy())
+            erica.apply_outfit(erica_workout_wardrobe.decide_on_outfit2(erica))
         return
 
     def erica_intro_requirement(person):
