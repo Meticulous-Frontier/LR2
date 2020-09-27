@@ -412,9 +412,9 @@ init -1 python:
         if not outfit_over or not outfit_under:
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
             full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
-            if not full_outfit = None:
+            if full_outfit:
                 return full_outfit.get_copy()
-            else
+            else:
                 return Outfit("Nude")
 
         return build_assembled_outfit(outfit_under, outfit_over)
