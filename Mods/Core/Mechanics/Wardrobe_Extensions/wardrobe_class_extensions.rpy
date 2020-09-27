@@ -332,7 +332,7 @@ init -1 python:
                 chance_to_use_full = 70
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
-            if outfit_choice > chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
+            if outfit_choice < chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
                 while not full_outfit and count < 2:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not successful
