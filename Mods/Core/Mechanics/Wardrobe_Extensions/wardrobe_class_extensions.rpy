@@ -327,9 +327,9 @@ init -1 python:
         if __builtin__.len(self.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
-            chance_to_use_full = (50 / 8.0) * __builtin__.len(self.outfits)   # when 8 outfits chance is 50%.
-            if chance_to_use_full > 70:
-                chance_to_use_full = 70
+            chance_to_use_full = (50 / 12.0) * __builtin__.len(self.outfits)   # when 12 outfits chance is 50%.
+            if chance_to_use_full > 60: # cap at 60%
+                chance_to_use_full = 60
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
             if outfit_choice < chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
