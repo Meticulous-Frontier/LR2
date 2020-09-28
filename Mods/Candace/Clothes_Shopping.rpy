@@ -115,7 +115,7 @@ label candace_goes_clothes_shopping_label(the_person):
         the_person.char "God, that was fun! Just a shame we didn't find anything we both like!"
         mc.name "I'm sure we will find something next time."
         the_person.char "Oh that's so nice, I can't wait for our next shopping trip!"
-    
+
     mc.name "I'm not going back to work right away. Feel free to take the rest of the day off if you want."
     the_person.char "You're sweet. Thanks for the shopping trip!"
     $ the_person.draw_person(position = "walking_away")
@@ -129,7 +129,7 @@ label candace_goes_clothes_shopping_label(the_person):
 
 label invite_to_clothes_shopping_label():
     "You decide to invite someone out for some clothes shopping."
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes shopping", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(people_not_met_yet()), "Clothes shopping", ["Back"])]))
     $ the_person = _return
     if the_person != "Back":
         "You send a message to [the_person.name] about going clothes shopping."

@@ -8,9 +8,9 @@ init 2 python:
     salon_total_cost = salon_style_cost + salon_dye_cost
 
 label salon_label():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Salon appointment", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(people_not_met_yet()), "Salon appointment", ["Back"])]))
     $ person_choice = _return
-    
+
     if person_choice != "Back":
         "You send a message to [person_choice.name] about the appointment."
         "After some time you get a response..."

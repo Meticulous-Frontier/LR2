@@ -49,9 +49,9 @@ label import_wardrobe_label():
     return
 
 label give_wardrobe_label():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes for", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(people_not_met_yet()), "Clothes for", ["Back"])]))
     $ person_choice = _return
-    
+
     if not person_choice == "Back":
         call give_wardrobe_input(person_choice) from _call_give_wardrobe_input# What to do if "Back" was not the choice taken.
         $ del person_choice
@@ -100,6 +100,6 @@ label give_uniform_label():
         $ import_wardrobe(target_wardrobe, xml_filename)
         "Speaker" "Uniforms assigned"
     else:
-        "Speaker" "File not found."            
+        "Speaker" "File not found."
 
     return

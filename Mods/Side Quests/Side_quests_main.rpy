@@ -139,7 +139,7 @@ init python: #For now default init. May change later if we know better.
 
         def unavailable_people(self):
             result = []
-            for person in known_people_in_the_game():
+            for person in known_people_in_the_game(people_not_met_yet()):
                 if person.identifier in self.unavailable_person_identifiers:
                     result.append(person)
             return result
