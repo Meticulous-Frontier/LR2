@@ -34,8 +34,8 @@ init 3 python:
         dawn.generate_home()
         dawn.set_schedule([1,2,3], mall)
         dawn.add_role(lifestyle_coach_role)
-
         dawn.home.add_person(dawn)
+        dawn.event_triggers_dict["met"] = 0
         dawn.add_unique_on_room_enter_event(lifestyle_coach_intro)
         return
 
@@ -65,6 +65,7 @@ label lifestyle_coach_intro_label(the_person):
     $ show_ui()
     the_person.char "I hope that was helpful! Come back again and see me if you want to adjust your goals again in the future!"
     mc.name "I think it was. I'll be sure to check back with you again if I need to. Thanks!"
+    $ dawn.event_triggers_dict["met"] = 1
     $ scene_manager.clear_scene()
     return
 
