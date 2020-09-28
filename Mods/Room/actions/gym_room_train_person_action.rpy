@@ -31,7 +31,7 @@ init 3 python:
         initialization = gym_workout_initialization, menu_tooltip = "You train in the gym yourself.", category="Mall")
 
 label select_person_for_gym():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(people_not_met_yet()), "Train with", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])]))
     $ the_person = _return
     if the_person != "Back":
         "You send a text message to [the_person.title] about a gym session."

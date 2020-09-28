@@ -14,7 +14,7 @@ init -1 python:
     def get_random_person_in_location(location, excluded_people = []):
         return get_random_from_list([x for x in location.people if x not in excluded_people])
 
-    def people_not_met_yet(): # TODO The check should be standardized, but some people are vanilla, some are different modders or different 'style'.
+    def unique_characters_not_known(): # TODO The check should be standardized, but some people are vanilla, some are different modders or different 'style'.
         not_met_yet_list = []
         if alexia.schedule[1] == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
@@ -44,7 +44,7 @@ init -1 python:
             not_met_yet_list.append(sarah)
         if not starbuck.event_triggers_dict.get("starbuck_intro_complete"):
             not_met_yet_list.append(starbuck)
-        return
+        return not_met_yet_list
 
     def known_people_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         known_people = []
@@ -57,9 +57,10 @@ init -1 python:
         return get_random_from_list(known_people)
 
     def known_people_at_location(location, excluded_people = []):
+        not_met_yet_list = unique_characters_not_known()
         known_people = []
         for person in [x for x in location.people if not x in excluded_people]:
-            if not (person.mc_title == "Stranger" or not person.title):
+            if not (person.mc_title == "Stranger" or not person.title) and not person in not_met_yet_list:
                 known_people.append(person)
         return known_people
 

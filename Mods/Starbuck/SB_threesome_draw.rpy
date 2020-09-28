@@ -84,13 +84,13 @@ label SB_threesome_setup_helper(): #This function is designed to help come up wi
     # (person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0):
 
     "Please select person one."
-    $ tuple_list = known_people_in_the_game(people_not_met_yet()) + ["Back"]
+    $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
     call screen person_choice(tuple_list, draw_hearts = True, show_person_preview = False)
     $ the_person_one = _return
     $ del tuple_list
 
     "Please select person two."
-    $ tuple_list = known_people_in_the_game(people_not_met_yet()) + ["Back"]
+    $ tuple_list = known_people_in_the_game([mc]) + ["Back"]
     call screen person_choice(tuple_list, draw_hearts = True, show_person_preview = False)
     $ the_person_two = _return
     $ del tuple_list
