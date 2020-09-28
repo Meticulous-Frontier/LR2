@@ -621,7 +621,7 @@ screen cheat_menu():
                             style "textbutton_no_padding_highlight"
                             text_style "cheat_text_style"
                             xfill True
-                            action ToggleScreen("hair_creator", None, editing_target, editing_target.hair_style, editing_target.hair_colour) # If the screen doesn't exist it provides an ignorable error. While it removes its standalone functionality, maintaining code twice is a hazzle.
+                            action ToggleScreen("hair_creator", None, editing_target, editing_target.hair_style.get_copy(), editing_target.pubes_style.get_copy()) # If the screen doesn't exist it provides an ignorable error. While it removes its standalone functionality, maintaining code twice is a hazzle.
 
 
                     vbox:

@@ -157,7 +157,8 @@ init -1 python:
             if not outfit:
                 # Dive into the default wardrobe
                 outfit = default_wardrobe.get_random_appropriate_outfit(slut_limit_remaining, preferences = preferences)
-        return outfit.get_copy()
+
+        return outfit
 
     def get_random_appropriate_underwear_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):
         # We also want to make sure it's something she would personally wear.
@@ -251,7 +252,11 @@ init -1 python:
 
         if __builtin__.len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
-            return get_random_appropriate_outfit_from_wardrobes(valid_wardrobe, person, target_sluttiness, None)
+            full_outfit = get_random_appropriate_outfit_from_wardrobes(valid_wardrobe, person, target_sluttiness, None)
+            if full_outfit:
+                return full_outfit.get_copy()
+            else:
+                return Outfit("Nude")
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         uniform_over = None
@@ -304,7 +309,11 @@ init -1 python:
         if not uniform_over or not uniform_under:
             # renpy.say("", "Failed to find any combined uniform, select generic outfit.")
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
-            return get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
+            full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
+            if full_outfit:
+                return full_outfit.get_copy()
+            else:
+                return Outfit("Nude")
 
         return build_assembled_outfit(uniform_under, uniform_over)
 
@@ -327,12 +336,12 @@ init -1 python:
         if __builtin__.len(self.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
             outfit_choice = renpy.random.randint(0,100)
-            chance_to_use_full = (50 / 8.0) * __builtin__.len(self.outfits)   # when 8 outfits chance is 50%.
-            if chance_to_use_full > 70:
-                chance_to_use_full = 70
+            chance_to_use_full = (50 / 12.0) * __builtin__.len(self.outfits)   # when 12 outfits chance is 50%.
+            if chance_to_use_full > 60: # cap at 60%
+                chance_to_use_full = 60
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
-            if outfit_choice > chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
+            if outfit_choice < chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
                 full_outfit = None
                 count = 0
                 while not full_outfit and count < 2:    # Try to find a valid outfit by stretching the sluttiness range, returns none when not successful
@@ -347,7 +356,11 @@ init -1 python:
 
         if __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a outfit out of. Use default builder function.
-            return get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
+            full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
+            if full_outfit:
+                return full_outfit.get_copy()
+            else:
+                return Outfit("Nude")
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = None
@@ -398,7 +411,11 @@ init -1 python:
         #At this point we have our under and over, if at all possible.
         if not outfit_over or not outfit_under:
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
-            return get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
+            full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
+            if full_outfit:
+                return full_outfit.get_copy()
+            else:
+                return Outfit("Nude")
 
         return build_assembled_outfit(outfit_under, outfit_over)
 

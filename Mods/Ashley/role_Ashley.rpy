@@ -27,7 +27,7 @@ init 2 python:
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
 
-        ashley.event_triggers_dict["intro_complete"] = False    #
+        ashley.event_triggers_dict["intro_complete"] = False    # True after first talk
         ashley.event_triggers_dict["excitement_overhear"] = False   #
         ashley.event_triggers_dict["attitude_discussed"] = False   #
         ashley.event_triggers_dict["porn_discovered"] = False       #
@@ -198,7 +198,7 @@ label ashley_intro_label():
             mc.name "Of course, but being reminded of your blowjob skills will probably help me make up my mind if I want to hire someone you are related too."
             call fuck_person(the_person, start_position = blowjob, skip_intro = False, position_locked = True) from _call_sex_description_ashley_intro_bonus_BJ_1
             $ the_report = _return
-            $scene_manager.update_actor(the_person, position = "stand4")
+            $ scene_manager.update_actor(the_person, position = "stand4")
             if the_report.get("guy orgasms", 0) > 0:
                 mc.name "God your mouth is amazing. If your sister sucks anything like you this will be a no-brainer..."
                 the_person.char "Hah! Well, to be honest, I don't think she really cares for giving blowjobs, but I guess you never know."
@@ -252,6 +252,7 @@ label ashley_hire_directed_label(the_person):
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
+        $ scene_manager.update_actor(the_person, position = "walking_away")
         the_person.char "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as you leave the room. You hope you made the right decision!"
         $ ashley.add_unique_on_talk_event(ashley_first_talk)
@@ -278,6 +279,7 @@ label ashley_first_talk_label(the_person):
     mc.name "[the_person.title] it is then."
     "You chit chat with [the_person.title] for a minute, but she speaks in short, one or two word replies. She seems very reserved."
     "Maybe she is just shy? You decide to let her get back to work."
+    $ ashley.event_triggers_dict["intro_complete"] = True
     $ ashley.add_unique_on_room_enter_event(ashley_room_excitement_overhear)
     return
 

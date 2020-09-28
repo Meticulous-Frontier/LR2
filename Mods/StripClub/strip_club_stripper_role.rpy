@@ -143,7 +143,7 @@ init 5 python:
         available_roles = []
         if __builtin__.len(stripclub_strippers) < 5:
             available_roles.append(["Stripper", stripper_role])
-        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2 and mc.business.event_triggers_dict.get("strip_club_has_waitresses", False):
+        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2:
             available_roles.append(["Waitress", waitress_role])
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and __builtin__.len(stripclub_bdsm_performers) < 5:
             available_roles.append(["BDSM Performer", bdsm_performer_role])
