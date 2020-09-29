@@ -496,7 +496,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]. I need to talk to you about something... sensitive. Could you please come with me to my office?"
     the_person.char "Of course."
-    $ office.show_background()
+    $ ceo_office.show_background()
     "You enter your office an gesture for her to sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
     if the_person.sluttiness > 50:
@@ -549,8 +549,8 @@ label ashley_ask_about_porn_label(the_person):
     "You decide to breach the difficult topic of the porn video you discovered."
     mc.name "I was hoping to talk to you about something a little sensitive. Would you mind if we went to my office?"
     the_person.char "Oh... sure..."
+    $ ceo_office.show_background()
     "[the_person.possessive_title] follows you to your office. After you enter, you close the door behind you."
-    $ office.show_background()
     mc.name "Go ahead and have a seat."
     $ scene_manager.update_actor(the_person, position = "sitting", emotion = "sad")
     "You can tell she looks a little scared."

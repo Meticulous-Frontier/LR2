@@ -1191,7 +1191,8 @@ label Sarah_tits_reveal_label():
         the_person.char "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
         "You put your phone in your pocket and head to your office."
         $ mc.change_location(office)
-        $ mc.location.show_background()
+    
+    $ ceo_office.show_background()
 
     $ the_person.draw_person()
     "[the_person.title] steps confidently into your office."

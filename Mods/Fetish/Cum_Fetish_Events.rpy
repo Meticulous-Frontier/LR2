@@ -286,6 +286,7 @@ label SB_fetish_cum_dosage_label():
     $ the_person.event_triggers_dict["LastCumFetish"] = day
 
     "As you finish up with one of your work tasks, you decide to take a quick break."
+    $ ceo_office.show_background()
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
@@ -590,7 +591,7 @@ label SB_fetish_stephanie_cum_label():
         "You text her back."
     mc.name "Sure, meet me in my office."
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
     "[the_person.title] meets you there. You sit down and notice she closes the office door... and then locks it."

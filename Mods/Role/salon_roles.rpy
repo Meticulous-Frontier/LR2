@@ -935,6 +935,7 @@ label ophelia_increased_service_begin_label(the_person):
 label ophelia_choose_service_test_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
 
+    $ ceo_office.show_background()
     "Sitting down, alone, in your office, you pull up the employee list. Who should you have be the test case for [salon_manager.title]?"
     python:
         able_person_list = []

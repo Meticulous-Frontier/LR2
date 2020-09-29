@@ -249,6 +249,7 @@ label SB_fetish_anal_staylate_event_label(the_person):
         the_person.char "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
         return
 
+    $ ceo_office.show_background()
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
     $ the_person.apply_outfit(SB_anal_outfit)
     $ the_person.draw_person()
@@ -1222,7 +1223,7 @@ label SB_stephanie_anal_fetish_label():
         "You text her back."
     mc.name "Sure, meet me in my office."
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
     "[the_person.title] meets you there. You sit down and notice she closes the office door... and then locks it."
@@ -1534,7 +1535,7 @@ label SB_aggressive_anal_employee_label():
     the_person.char "Hey, I really need your help with something. Can you meet me in your office really quick?"
     mc.name "Sure, I'll meet you there in five."
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     "You step into your office. [the_person.possessive_title] isn't there yet so you sit down at your desk."
     $ the_person.draw_person()
     "In a minute, you see her step into your office, close the door and lock it."

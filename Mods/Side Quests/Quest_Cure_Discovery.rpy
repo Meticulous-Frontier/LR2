@@ -292,7 +292,7 @@ label quest_cure_discovery_patent_kept_label():
             if the_person.effective_sluttiness() > 50: #MC can push for make up sex.
                 mc.name "I think I know how you can make it up to me. Come to my office."
                 the_person.char "Yes sir!"
-                #TODO change background to office
+                $ ceo_office.show_background()
                 $ the_person.draw_person()
                 "You hear a knock. You look up and see [the_person.possessive_title]"
                 the_person.char "You wanted to see me?"
