@@ -95,18 +95,20 @@ init -1 python:
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
     #TODO: Add some actions when 'afflicted'
 
+    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [])
+
 init 1 python:
     def SB_get_fetish_count(person):
         fetish_count = 0
         for role in person.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
     def SB_get_fetishes_description(person):
         description = ""
         for role in person.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name

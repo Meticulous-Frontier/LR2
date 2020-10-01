@@ -662,7 +662,7 @@ label SB_mom_anal_pay_label():
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
     "She is fidgeting a bit. You can tell she is a little nervous about something."
-    the_person.char "[the_person.mc_title], I'm really sorry about this. Some things have come up around the house that need repair but I'm not sure have the money to have the work done..."
+    the_person.char "[the_person.mc_title], I'm really sorry about this. Some things have broken around the house that need repaired but I don't have the money to have the work done..."
     the_person.char "I know that you've been working so hard at your new business and I'm so proud of you, and I'm happy we've been so close lately."
     the_person.char "I wouldn't feel right about just taking your hard earned money though, so I was hoping we could make a deal..."
     mc.name "What sort of deal [the_person.title]?"

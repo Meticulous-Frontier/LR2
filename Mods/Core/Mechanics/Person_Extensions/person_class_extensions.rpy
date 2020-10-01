@@ -1121,7 +1121,7 @@ init -1 python:
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-            
+
             if isinstance(the_clothing, list): #Handle the half-off state for whether it should be removed or not.
                 for cloth in the_clothing:
                     if half_off_instead:
@@ -1239,6 +1239,13 @@ init -1 python:
         return False
     Person.is_dominant = is_dominant
 
+    def is_girlfriend(self):
+        if girlfriend_role in self.special_role:
+            return True
+        return False
+
+    Person.is_girlfriend = is_girlfriend
+
 
 ################################################
 # Outfit functions - wear a specialized outfit #
@@ -1298,7 +1305,7 @@ init -1 python:
         return
 
     Person.apply_university_outfit = apply_university_outfit
-  
+
     def apply_planned_outfit(self):
         if self.should_wear_uniform():
             self.wear_uniform()
@@ -1732,14 +1739,14 @@ init -1 python:
     def get_fetish_count(self):
         fetish_count = 0
         for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
     def get_fetishes_description(self):
         description = ""
         for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
@@ -1770,6 +1777,11 @@ init -1 python:
             return True
         return False
 
+    def has_breeding_fetish(self):
+        if breeding_fetish_role in self.special_role:
+            return True
+        return False
+
     Person.get_fetish_count = get_fetish_count
     Person.get_fetishes_description = get_fetishes_description
     Person.has_vaginal_fetish = has_vaginal_fetish
@@ -1777,6 +1789,7 @@ init -1 python:
     Person.has_oral_fetish = has_oral_fetish
     Person.has_internal_cum_fetish = has_internal_cum_fetish
     Person.has_external_cum_fetish = has_external_cum_fetish
+    Person.has_breeding_fetish = has_breeding_fetish
 
     #Additional functions
 

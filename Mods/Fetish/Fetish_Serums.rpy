@@ -150,6 +150,29 @@ init -1 python:
                             add_sb_fetish_cum_crisis_non_employee(person)
         return
 
+    def fetish_breeding_function_on_turn(person, add_to_log):
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        fetish_random_roll_2 = renpy.random.randint(0,100)
+
+        tier = get_suggest_tier(person)
+        if fetish_random_roll_1 < 10 + (tier * 5):
+            person.increase_sex_skill("Vaginal", 2 + tier)
+        if fetish_random_roll_2 < 25 + (tier * 5):
+            increase_fetish_sexy_opinion(person, FETISH_BREEDING_OPINION_LIST, tier - 1)
+
+        #TODO add chance here for the girl to decide to go off birth control if she happens to be on it. She texts you about it even.
+
+        # if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
+        #     return
+
+        if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("bareback sex") >= 2:
+            if person.sluttiness >= 80 and SB_get_breeding_score(person) >= 8:
+                if SB_get_fetish_count(person) < store.max_fetishes_per_person:
+                    # renpy.say("", "Trigger vaginal fetish " + person.name)
+                    pass
+                    #TODO add breeding fetish events here.
+        return
+
     def add_fetish_serum_traits():
         FETISH_RESEARCH_PERCENT = 1     #1 = 100%
         FETISH_PRODUCTION_COST = 20     #Default 100
