@@ -104,7 +104,7 @@ label cousin_talk_about_strip_club_label(the_person):
     $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
     the_person.char "Actually the business was running very well, but looks like [name_string], the boss there, just disappeared a few days ago with all the Club's money..."
     the_person.char "That fucking asshole didn't even pay me nor the other girls for our last week."
-    "She looks and you and suddenly shifts her demeanor."    
+    "She looks at you and suddenly shifts her demeanor."    
     $ the_person.draw_person(emotion = "happy", position = "stand2")
     the_person.char "Oh, speaking about money, can you lend me 300 bucks?"
     the_person.char "I could do a special performance just for you, you know..."
