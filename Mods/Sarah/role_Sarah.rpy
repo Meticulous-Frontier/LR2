@@ -121,8 +121,8 @@ init -1 python:
                     return True
         return False
 
-    def Sarah_hire_requirement():
-        if HR_director_creation_policy.is_owned():
+    def Sarah_hire_requirement(day_trigger):
+        if day > day_trigger and HR_director_creation_policy.is_owned():
             return True
         return False
 
@@ -329,7 +329,7 @@ init -1 python:
         mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action)
 
     def add_sarah_hire_action():
-        Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label")
+        Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label", requirement_args = day)
         mc.business.mandatory_crises_list.append(Sarah_hire_action)
 
     def add_sarah_new_tits_action():
