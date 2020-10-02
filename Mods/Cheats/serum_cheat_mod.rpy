@@ -10,11 +10,11 @@ init -2 style serum_cheat_text_style: # cheat_text_style already defined in chea
 
 init -1 python:
     if "keybindS" not in config.overlay_screens:
-        config.overlay_screens.append("keybindS")
+        config.overlay_screens.append("keybindT")
 
-screen keybindS():
-    key "s" action ToggleScreen("serum_cheat_menu")
-    key "S" action ToggleScreen("serum_cheat_menu")
+screen keybindT():
+    key "t" action ToggleScreen("serum_cheat_menu")
+    key "T" action ToggleScreen("serum_cheat_menu")
 
 screen serum_cheat_menu:
     add "Science_Menu_Background.png"
