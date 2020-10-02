@@ -43,7 +43,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Trollden Cheat Mod (press 'z' in game)
 * Cheat Mod new version ('x' key or 'cheats' in bottom action menu)
 * Opinion Editor (press 'p' while talking to someone or 'opinions' in bottom action menu)
-* Serums Research Cheat Mod (press 's' in game)
+* Serums Research Cheat Mod (press 't' in game)
 
 ## Authors:
 * Trollden
