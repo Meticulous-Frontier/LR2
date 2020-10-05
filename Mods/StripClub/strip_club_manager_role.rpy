@@ -209,23 +209,3 @@ label mistress_hunt_for_me_label(the_person):
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
     return
-
-label advance_time_manager_daily_serum_dosage_label(stack): #Should works for both roles: manager and mistress
-    python:
-        if hasattr(mc.business, "manager_serum") and mc.business.manager_serum:
-            serum_count = mc.business.inventory.get_serum_count(mc.business.manager_serum)
-            if serum_count > 0:
-                for (person,place) in people_to_process:
-                    if person.is_employee() or not person.has_role([manager_role, mistress_role]):
-                        continue
-                    mc.business.inventory.change_serum(mc.business.manager_serum,-1)
-                    person.give_serum(copy.copy(mc.business.manager_serum), add_to_log = False)
-                    serum_count -= 1
-                    if serum_count == 0:
-                        break
-
-        execute_hijack_call(stack)
-
-init 5 python:
-    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_manager_daily_serum_dosage_label")
-

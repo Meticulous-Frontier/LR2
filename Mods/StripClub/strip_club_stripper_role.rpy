@@ -545,23 +545,3 @@ label stripper_performance_review_label(the_person):
     "You stand up and open the door for [the_person.title] at the end of her performance review."
     $ clear_scene()
     return
-
-label advance_time_strippers_daily_serum_dosage_label(stack):
-    python:
-        if hasattr(mc.business, "strippers_serum"):
-            if mc.business.strippers_serum:
-                serum_count = mc.business.inventory.get_serum_count(mc.business.strippers_serum)
-                if serum_count > 0:
-                    for (person,place) in people_to_process:
-                        if person.is_employee() or not person.has_role(stripper_role):
-                            continue
-                        mc.business.inventory.change_serum(mc.business.strippers_serum,-1)
-                        person.give_serum(copy.copy(mc.business.strippers_serum), add_to_log = False)
-                        serum_count -= 1
-                        if serum_count == 0:
-                            break
-
-        execute_hijack_call(stack)
-
-init 5 python:
-    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_strippers_daily_serum_dosage_label")
