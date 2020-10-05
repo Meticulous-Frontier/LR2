@@ -14,9 +14,7 @@ label advance_time_BDSM_performers_daily_serum_dosage_label(stack):
                 serum_count = mc.business.inventory.get_serum_count(mc.business.bdsm_performers_serum)
                 if serum_count > 0:
                     for (person,place) in people_to_process:
-                        if employee_role in person.special_role:
-                            continue
-                        if not bdsm_performer_role in person.special_role:
+                        if person.is_employee() or not person.has_role(bdsm_performer_role):
                             continue
                         mc.business.inventory.change_serum(mc.business.bdsm_performers_serum,-1)
                         person.give_serum(copy.copy(mc.business.bdsm_performers_serum), add_to_log = False)
