@@ -219,9 +219,7 @@ label advance_time_manager_daily_serum_dosage_label(stack): #Should works for bo
                     for (person,place) in people_to_process:
                         if employee_role in person.special_role:
                             continue
-                        if not manager_role in person.special_role:
-                            continue
-                        if not mistress_role in person.special_role:
+                        if not (manager_role in person.special_role or mistress_role in person.special_role):
                             continue
                         mc.business.inventory.change_serum(mc.business.manager_serum,-1)
                         person.give_serum(copy.copy(mc.business.manager_serum), add_to_log = False)
