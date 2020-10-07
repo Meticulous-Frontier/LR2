@@ -225,7 +225,7 @@ init 5 python:
         else:
             object_option_list = []
             for loc_object in mc.location.objects:
-                if loc_object.has_trait(position_choice.requires_location):
+                if loc_object.has_trait(position.requires_location):
                     object_option_list.append([loc_object.get_formatted_name(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
 
             # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
