@@ -51,6 +51,19 @@ init -2 python:
     build.classify("game/**.ttf", "fonts")
     build.classify("game/**.otf", "fonts")
 
+    # extra classifications for images
+    build.archive("character_images_thin_body")
+    build.classify("game/images/character_images/thin_body/**.png", "character_images_thin_body")
+
+    build.archive("character_images_standard_body")
+    build.classify("game/images/character_images/standard_body/**.png", "character_images_standard_body")
+
+    build.archive("character_images_curvy_body")
+    build.classify("game/images/character_images/curvy_body/**.png", "character_images_curvy_body")
+
+    build.archive("character_images_standard_preg_body")
+    build.classify("game/images/character_images/standard_preg_body/**.png", "character_images_standard_preg_body")
+
     build.archive("character_images")
     build.classify("game/images/character_images/**.png", "character_images")
 
