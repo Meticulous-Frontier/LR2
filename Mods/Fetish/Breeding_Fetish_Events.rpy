@@ -1,4 +1,6 @@
 init -1 python:
+    high_fertility_weight = 5
+
     def SB_get_breeding_score(the_person):
         breeding_score = 0
         for breedListEntry in FETISH_BREEDING_OPINION_LIST:
@@ -74,10 +76,21 @@ init -1 python:
         return False
 
     def breeding_fetish_high_fertility_crisis_requirement():
+        if mc_at_home() and time_of_day==4:
+            if get_highly_fertile_breeder() != None:
+                return True
         return False
 
     def breeding_fetish_going_off_BC_requirement(the_person):
         return True
+
+    def breeding_fetish_bend_her_over_requirement(the_person):
+        if the_person.energy < 50:
+            return "She's too tired"
+        if mc.energy < 50:
+            return "You're too tired"
+        return True
+
 
 
 #Actions
@@ -96,12 +109,16 @@ init -1 python:
     breeding_fetish_erica_intro = Action("Erica breeding fetish intro", breeding_fetish_erica_intro_requirement, "breeding_fetish_erica_intro_label")
     breeding_fetish_candace_intro = Action("Candace breeding fetish intro", breeding_fetish_candace_intro_requirement, "breeding_fetish_candace_intro_label")
     breeding_fetish_ashley_intro = Action("Ashley breeding fetish intro", breeding_fetish_ashley_intro_requirement, "breeding_fetish_ashley_intro_label")
-    breeding_fetish_high_fertility_crisis = Action("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label")
+
     breeding_fetish_going_off_BC = Action("She goes off BC", breeding_fetish_going_off_BC_requirement, "breeding_fetish_going_off_BC_label")
+    breeding_fetish_bend_her_over = Action("Bend her over", breeding_fetish_bend_her_over_requirement, "breeding_fetish_bend_her_over_label", menu_tooltip = "Bend her over right here and give your breeding stock a creampie")
 
 
 #Other breeding fetish calls
 init 3 python:
+    breeding_fetish_high_fertility_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
+        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = high_fertility_weight)
+
     def add_breeding_fetish(person):
         person.add_role(breeding_fetish_role)
         person.update_sex_skill("Vaginal", 6)
@@ -160,6 +177,15 @@ init 3 python:
             if breeding_fetish_role in person.special_role:
                 breeder_list.append(person)
         return breeder_list
+
+    def get_highly_fertile_breeder():
+        breeder_list = []
+        for person in get_breeding_fetish_list():
+            if person.is_highly_fertile():
+                breeder_list.append(person)
+        if len(breeder_list) > 0:
+            return get_random_from_list(breeder_list)
+        return None
 
 
 #Fetish Intro Labels
@@ -950,6 +976,88 @@ label breeding_fetish_ashley_intro_label():
     return
 
 label breeding_fetish_high_fertility_crisis_label():
+    $ the_person = get_highly_fertile_breeder()
+    if the_person == None:
+        return
+    if the_person.energy < 80:
+        $ the_person.energy = 80
+    if mc.energy < 80:
+        $ mc.energy = 80
+    if the_person == mom or the_person == lily:
+        "You hear a knock on your door."
+        mc.name "Its open!"
+        $ the_person.draw_person()
+        "Its [the_person.possessive_title]. She steps into your room, closes your door, and locks it..."
+        mc.name "Something you need tonight [the_person.title]?"
+        the_person.char "Yeah... something like that!"
+    else:
+        "You get a text on your phone. It's from [the_person.possessive_title]"
+        the_person.char "Hey. I need your help with something. I'm on my way over."
+        "Hmm, she's inviting herself over? You text her back."
+        mc.name "Ok, text me when you get here."
+        "A few minutes later, she texts you again."
+        the_person.char "I'm here! Let me in!"
+        "You go out to your front door and open it."
+        $ the_person.draw_person()
+        the_person.char "Hey! Let's go to your room."
+        mc.name "Okay... this is a little weird..."
+        the_person.char "I'll explain when we get there..."
+        "You quickly lead her back to your room. When you walk in, she closes the bedroom door and locks it."
+    the_person.char "I've been following my cycles on this app... Today it gave me a notification that I am highly fertile!"
+    "She comes closer, wrapping her arms around you."
+    the_person.char "You need to cum inside me tonight... I'm not taking no for an answer!"
+    if the_person.is_dominant():
+        "She pushes you back onto your bed. She seems pretty intent on taking what she wants from you."
+        "You watch as she starts to strip down."
+        $ the_person.strip_outfit()
+        $ the_person.change_arousal(10)
+        "She runs a hand down her belly, to her mound and across her slit. You can see moisture already starting to collect there."
+        $ the_person.draw_person(position = "cowgirl")
+        "[the_person.possessive_title] reaches down and pulls your pants off and then climbs up on top of you, your cock at her entrance."
+        the_person.char "Oh god... this is it. I can feel it! Tonight's the night you finally knock me up..."
+        "She holds your cock with one hand and slowly starts to sink down onto you. She gasps when your dick parts her labia."
+        the_person.char "Yes! Oh [the_person.mc_title]..."
+        "She descends slowly, but finally bottoms out with a sigh. She takes a moment to adjust to your girth before she starts to rock her hips some."
+        the_person.char "Oh god... here we go!"
+        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _highly_fertile_breeding_901
+        if the_person.has_creampie_cum():
+            the_person.char "Its inside me! It worked! Don't ask me how I know... I can just feel it!"
+            "She rubs her belly and sighs."
+            $ become_pregnant(the_person, mc_father = True) #Gaurenteed to knock her up
+            $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+        else:
+            "Too tired to continue, [the_person.possessive_title] pulls off you a little frustrated."
+            the_person.char "I can't believe it... just... lets make sure we try again soon okay?"
+
+    else:
+        mc.name "One knocked up cum slut, coming right up!"
+        "You reach down and start to pull her bottoms off."
+        $ the_person.strip_outfit(exclude_upper = True)
+        "When you finish, you pick her up and throw her down on your bed."
+        $ the_person.draw_person(position = "missionary")
+        "You pull out your cock and slowly crawl up her body. Soon your cock is at her entrance. You whisper in her ear."
+        mc.name "Are you ready for this? Once I knock you up, there's no going back..."
+        "She moans and bucks her hips. She wraps her legs around you and pulls you down inside of her forcefully."
+        mc.name "Mmm, fuck I guess so!"
+        "You start to piston your hips, savoring the highly fertile, bare pussy that is wrapped around you."
+        the_person.char "Give it to me [the_person.mc_title]! Give me a fucking I'll never forget and pour your seed deep!"
+        call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _highly_fertile_breeding_night_02
+        if the_person.has_creampie_cum():
+            the_person.char "Its inside me! I'm pregnant! Don't ask me how I know... I can just feel it!"
+            "She rubs her belly and sighs."
+            $ become_pregnant(the_person, mc_father = True) #Gaurenteed to knock her up
+            $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+        else:
+            "Too tired to continue, [the_person.possessive_title] looks up at you little frustrated."
+            the_person.char "I can't believe it... just... lets make sure we try again soon okay?"
+        "Finished for now, [the_person.title] excuses herself."
+    the_person.char "I'd better get going..."
+    if the_person.has_creampie_cum():
+        the_person.char "It'll be a few days before a test shows a definite positive... but I'm almost positive we just made a baby!"
+    else:
+        the_person.char "I'm still going to be fertile for a few days... please try again? Okay? I don't want to wait anymore, I want your baby inside me..."
+    $ the_person.review_outfit()
+    $ the_person.draw_person(position = "walking_away")
 
 
     return
@@ -961,4 +1069,63 @@ label breeding_fetish_going_off_BC_label(the_person):
     the_person.char "Just thought you'd like to know... I decided to go off my birth control..."
     "She leans back. You should be careful if you decide to fuck her, she might be fertile!"
     the_person.char "Is there something I can do for you?"
+    return
+
+label breeding_fetish_bend_her_over_label(the_person):
+    "You decide that it is time for [the_person.possessive_title] to take a load. You decide to bend her over and fuck her right here, right now."
+    mc.name "[the_person.title], you haven't taken a load of cum in a while. Turn around, I'm going to give you one."
+    if len( mc.location.people) < 2:
+        "With no one around, [the_person.title] happily turns around for you."
+    elif mc.is_at_work():
+        the_person.char "Oh! Right here at the office? In front of... everyone?"
+        mc.name "Of course."
+        the_person.char "Oh... well okay... I guess you're the boss!"
+    elif mc_at_home():
+        the_person.char "Oh... right here? Like in front of the family?"
+        mc.name "Of course."
+        the_person.char "Oh my god... okay... if that's what you want!"
+    elif mc.location == dungeon:
+        if the_person.has_role(slave_role):
+            the_person.char "Right here? In front of the other slaves?"
+            mc.name "Of course."
+            the_person.char "Oh! Yes master!"
+        else:
+            the_person.char "Right here? In front of your slaves?"
+            mc.name "Of course."
+            the_person.char "Oh my god... okay... if that's what you want!"
+    elif mc.location == sex_store:
+        if the_person == starbuck:
+            the_person.char "Right here? In front of all of my customers?"
+            mc.name "Of course"
+            the_person.char "Oh god, this is gonna be hot... okay!"
+        else:
+            the_person.char "Right here? At the sex shop?"
+            mc.name "Of course"
+            the_person.char "Oh god, this is gonna be hot... okay!"
+    elif mc.location == mall_salon:
+        if the_person == salon_manager:
+            the_person.char "Right here at the salon? In front of all my customers?"
+            mc.name "Of course. Don't you want to?"
+            the_person.char "Okay... I'm trusting you!"
+        else:
+            the_person.char "At the salon? That's kind of a weird place don't you think?"
+            mc.name "Not at all. Don't you want to?"
+            the_person.char "Of course!.. Okay... I'll do it!"
+    else:
+        the_person.char "Right here? In front of everyone?"
+        mc.name "Of course"
+        the_person.char "Oh god, this is gonna be hot... okay!"
+    $ the_person.draw_person(position = "standing_doggy")
+    "[the_person.title] turns around. You quickly get her ready to fuck."
+    $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
+    the_person.char "Oh my god... okay... where do you want me?"
+    call fuck_person(the_person, start_position = bent_over_breeding, private = False) from _call_bend_over_breeder_01
+    if the_person.has_creampie_cum():
+        the_person.char "Oh fuck... every time you finish inside me is just so good..."
+        "She rubs her belly and sighs."
+        $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+    "When you finish, [the_person.possessive_title] cleans herself up a bit."
+    $ the_person.review_outfit()
+    $ the_person.draw_person()
+    the_person.char "Mmm, that was nice..."
     return

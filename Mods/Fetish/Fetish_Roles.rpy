@@ -95,7 +95,7 @@ init -1 python:
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
     #TODO: Add some actions when 'afflicted'
 
-    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [])
+    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over])
 
 init 1 python:
     def SB_get_fetish_count(person):
