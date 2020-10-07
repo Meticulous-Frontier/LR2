@@ -460,7 +460,6 @@ label stripper_performance_review_label(the_person):
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
                         $ person.location().move(the_person.home)
-                        $ renpy.screen("Active")
                         return
                 "Threaten to fire her": #She may ask to stay in exchange for some sort of favour, or get fired on the spot.
                     mc.name "I'll be honest with you [the_person.title], your performance here at the club leaves a lot to be desired."
@@ -501,7 +500,6 @@ label stripper_performance_review_label(the_person):
                                     the_person.char "I understand. I'll clear out my locker at the end of the shift."
                                     $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
                                     $ strip_club_fire_stripper(the_person)
-                                    $ renpy.screen("Active")
                                     return
                     else:
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
@@ -510,7 +508,6 @@ label stripper_performance_review_label(the_person):
                         "[the_person.title] stands up and storms out."
                         $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
                         $ strip_club_fire_stripper(the_person)
-                        $ renpy.screen("Active")
                         return
                 "Punish her sexually" if the_person.effective_sluttiness() >= 40 and the_person.obedience >= 120: #Orgasm denial and/or make her service you.
                     "You sigh dramatically, stand up and walk over to [the_person.title]."
