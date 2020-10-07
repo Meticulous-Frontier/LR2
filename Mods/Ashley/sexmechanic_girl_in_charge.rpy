@@ -151,6 +151,8 @@ init 2:
                 if the_person.has_external_cum_fetish():
                     dom_sex_goal_weighted_list.append(["body shot", 50])
                     dom_sex_goal_weighted_list.append(["facial", 50])
+                if the_person.has_breeding_fetish():
+                    dom_sex_goal_weighted_list.append(["vaginal creampie", 100])
                 return get_random_from_weighted_list(dom_sex_goal_weighted_list)  #Hopefully this works if list only has one entry
 
             # If love is less than 0, we consider selfish sex goals

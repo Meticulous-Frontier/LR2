@@ -76,6 +76,16 @@ label family_morning_breakfast_enhanced_label():
         mom.char "No, just on time."
         $ scene_manager.update_actor(mom, position = "stand3")
         "She turns around and hands one plate to you and one plate to [lily.title]."
+        if mom.lactation_sources > 0 and mom.tits_available():
+            mom.char "Want a little milk for your coffee, honey?"
+            "[mom.title] gives you a quick wink."
+            mc.name "Sure mom."
+            "[mom.possessive_title] bends over slight over your coffee. She takes one of her breasts in her hand and starts to squeeze."
+            "It takes a second, but soon a stream of her milk is pouring out into you coffee."
+            mom.char "Just say when!"
+            "You let her continue for a few more moments, until you can see the cream start to circulate around your hot coffee."
+            $ mom.change_stats(slut_temp = 3, happiness = 5)
+            mc.name "That's good!"
         lily.char "Thanks Mom, you're the best!"
         $ scene_manager.update_actor(mom, position = "sitting")
         mom.char "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
