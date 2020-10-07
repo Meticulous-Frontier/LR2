@@ -29,7 +29,7 @@ label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
     if the_girl.outfit.vagina_visible():
         "She leans back and grinds herself against you. The shaft of your cock rubs against the lips of her pussy."
     else:
-        $ blocking_item = the_girl.outift.get_lower_visible()[0]
+        $ blocking_item = the_girl.outfit.get_lower_visible()[0]
         "She leans back and grinds herself against you. Underneath her [blocking_item.name] you can feel the lips of her pussy sliding along the length of your shaft."
     "She grinds up against you for several seconds, until your cock glides pleasingly along her wet slit."
     the_girl.char "Ready?"

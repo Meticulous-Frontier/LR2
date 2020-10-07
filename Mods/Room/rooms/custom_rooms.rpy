@@ -66,6 +66,14 @@ init 15 python:
     ]
     bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds[:], bdsm_room_objects,[], [], False, [-6,-6], None, False, lighting_conditions = standard_indoor_lighting)
 
+    ceo_office_objects = [
+        make_chair(),
+        make_desk(),
+        make_floor(),
+    ]
+
+    ceo_office = Room("ceo_office", "CEO Office", [], standard_ceo_office_backgrounds[:], ceo_office_objects, [], [], False, [-7, -7], None, False, lighting_conditions = standard_indoor_lighting)
+
 init 5  python:
     add_label_hijack("normal_start", "activate_custom_rooms")
     add_label_hijack("after_load", "update_custom_rooms")
@@ -77,6 +85,7 @@ label activate_custom_rooms(stack):
     call store_fancy_restaurant() from _call_store_fancy_restaurant_1
     call store_bdsm_room() from _call_store_bdsm_room_1
     call store_purgatory_room() from _call_store_purgatory_room_1
+    call store_ceo_office() from _call_store_ceo_office_1
 
     # initialize dungeon room creation action
     $ add_dungeon_intro_action()
@@ -95,6 +104,7 @@ label update_custom_rooms(stack):
     call store_fancy_restaurant() from _call_store_fancy_restaurant_2
     call store_bdsm_room() from _call_store_bdsm_room_2
     call store_purgatory_room() from _call_store_purgatory_room_2
+    call store_ceo_office() from _call_store_ceo_office_2
 
     $ execute_hijack_call(stack)
     return
@@ -150,4 +160,11 @@ label store_bdsm_room():
 
     # This refreshes the properties of the existing bar, e.g move the position of the Room on the map, objects, actions, connections, background etc.
     $ bdsm_room = update_custom_rooms(bdsm_room)
+    return
+
+label store_ceo_office():
+    if ceo_office not in list_of_places:
+        $ list_of_places.append(ceo_office)
+
+    $ ceo_office = update_custom_rooms(ceo_office)
     return

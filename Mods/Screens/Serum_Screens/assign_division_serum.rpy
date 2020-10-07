@@ -1,5 +1,5 @@
-# Assign Division Daily Serum UI
-# Based on screen designed by DaMatt
+# Assign Division Daily Serum UI - Based on screen designed by DaMatt
+# to be put in \game\Mods\Screens\Serum_Screens\
 
 init 2 python:
     config.label_overrides["set_serum_description"] = "set_serum_description_enhanced"
@@ -39,7 +39,7 @@ init 2:
         python:
             if mc.business.event_triggers_dict.get("foreclosed_stage", 0) >= 5 and not ["Strippers", mc.business, "strippers_serum"] in division_serums:
                 division_serums.append(["Strippers", mc.business, "strippers_serum"])
-            if mc.business.event_triggers_dict.get("strip_club_has_waitresses", False) == True and not ["Waitresses", mc.business, "waitresses_serum"] in division_serums:
+            if __builtin__.len(stripclub_waitresses) > 0 and not ["Waitresses", mc.business, "waitresses_serum"] in division_serums:
                 division_serums.append(["Waitresses", mc.business, "waitresses_serum"])
             if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) == True and not ["BDSM performers", mc.business, "bdsm_performers_serum"] in division_serums:
                 division_serums.append(["BDSM performers", mc.business, "bdsm_performers_serum"])
@@ -74,7 +74,7 @@ init 2:
                                     xsize 500
                                     ysize 50
                                     background "#000080"
-                                    text "Division" style "serum_text_style_header" 
+                                    text "Division" style "serum_text_style_header"
 
                                 viewport:
                                     xsize 500
@@ -116,7 +116,7 @@ init 2:
                                         xsize 500
                                         ysize 50
                                         background "#000080"
-                                        text "Assign Serum" style "serum_text_style_header" 
+                                        text "Assign Serum" style "serum_text_style_header"
 
                                     viewport:
                                         scrollbars "vertical"
@@ -163,7 +163,7 @@ init 2:
                                                     ]
                                                     unhovered [
                                                         Hide("serum_tooltip")
-                                                    ]                                   
+                                                    ]
                                                     action Function(set_division_serum, division_serums[division_selected], serum[0])
 
             frame:

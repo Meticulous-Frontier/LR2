@@ -121,8 +121,8 @@ init -1 python:
                     return True
         return False
 
-    def Sarah_hire_requirement():
-        if HR_director_creation_policy.is_owned():
+    def Sarah_hire_requirement(day_trigger):
+        if day > day_trigger and HR_director_creation_policy.is_owned():
             return True
         return False
 
@@ -329,7 +329,7 @@ init -1 python:
         mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action)
 
     def add_sarah_hire_action():
-        Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label")
+        Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label", requirement_args = day)
         mc.business.mandatory_crises_list.append(Sarah_hire_action)
 
     def add_sarah_new_tits_action():
@@ -662,7 +662,7 @@ label Sarah_get_drinks_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_one()
-    $ the_person.apply_planned_outfit()
+    $ the_person.apply_outfit(the_person.planned_outfit)
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."
     the_person.char "[the_person.mc_title]! I figured I'd find you around here on a Saturday again!"
@@ -1191,7 +1191,8 @@ label Sarah_tits_reveal_label():
         the_person.char "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
         "You put your phone in your pocket and head to your office."
         $ mc.change_location(office)
-        $ mc.location.show_background()
+    
+    $ ceo_office.show_background()
 
     $ the_person.draw_person()
     "[the_person.title] steps confidently into your office."
@@ -1257,7 +1258,7 @@ label Sarah_tits_reveal_label():
 label Sarah_stripclub_story_label():
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
-    $ the_person.apply_planned_outfit()
+    $ the_person.apply_outfit(the_person.planned_outfit)
 
     $ scene_manager = Scene()
     #TODO going out outfit
@@ -2546,7 +2547,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
 label Sarah_weekend_surprise_crisis_label():
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
-    $ the_person.apply_planned_outfit()
+    $ the_person.apply_outfit(the_person.planned_outfit)
     $ scene_manager = Scene()
 
     "Lost in thought as you get your work done in the silence of the weekend, a sudden voice startles you."

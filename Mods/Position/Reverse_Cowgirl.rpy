@@ -440,6 +440,13 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             else:
                 "[the_girl.possessive_title] reaches for your cock, removes the condom carefully, and ties the end in a knot."
                 the_girl.char "Look at all that cum. Well done."
+        elif the_girl.has_role(breeding_fetish_role):
+            the_girl.char "That's it! Inside me! I need that seed deep!"
+            $ the_girl.cum_in_vagina()
+            $ SB_reverse_cowgirl.redraw_scene(the_girl)
+            "As you finish, you can feel her working her vaginal muscles, milking the cum from you cock as best as a she can."
+            "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+            "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
         else:
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()

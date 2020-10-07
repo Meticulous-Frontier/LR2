@@ -145,6 +145,24 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+
+    # work-outfit for strippers / waitresses and bdsm room performers
+
+    def get_person_work_outfit(self):
+        if not hasattr(self, "_work_outfit"):
+            self._work_outfit = None
+        return self._work_outfit
+
+    def set_person_work_outfit(self, value):
+        self._work_outfit = value
+
+    def del_person_work_outfit(self):
+        del self._work_outfit
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
+
+
     def get_person_weight(self):
         if not hasattr(self, "_weight"):
             if self.body_type == "thin_body":
@@ -628,8 +646,10 @@ init -1 python:
                 self.next_day_outfit = None
             else:
                 self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+
             self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
+            self.work_outfit = None
 
         destination = self.schedule[time_of_day] #None destination means they have free time
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
@@ -651,15 +671,13 @@ init -1 python:
             if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
                 # since downtown is generic there could be other party locations there
                 party_destinations = [downtown_bar, downtown]
-                # after MC buys the stripclub, it is open to public
-                if strip_club.public:
-                    if "get_strip_club_foreclosed_stage" in globals():
-                        if not strip_club_is_closed():
-                            party_destinations.append(strip_club)
-                            if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                                party_destinations.append(bdsm_room)
-                    else:
+                if "get_strip_club_foreclosed_stage" in globals():
+                    if not strip_club_is_closed():
                         party_destinations.append(strip_club)
+                        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                            party_destinations.append(bdsm_room)
+                else:
+                    party_destinations.append(strip_club)
 
                 location.move_person(self, get_random_from_list(party_destinations))
             else:
@@ -1103,7 +1121,7 @@ init -1 python:
                 scene_manager.draw_scene_without(self)
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-            
+
             if isinstance(the_clothing, list): #Handle the half-off state for whether it should be removed or not.
                 for cloth in the_clothing:
                     if half_off_instead:
@@ -1221,10 +1239,43 @@ init -1 python:
         return False
     Person.is_dominant = is_dominant
 
+    def is_girlfriend(self):
+        if girlfriend_role in self.special_role:
+            return True
+        return False
+
+    Person.is_girlfriend = is_girlfriend
+
 
 ################################################
 # Outfit functions - wear a specialized outfit #
 ################################################
+    def should_wear_work_outfit(self):
+        shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
+        if ((time_of_day == 3 and shifts == 2) or (time_of_day == 4)) and self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
+            return True
+        return False
+
+    Person.should_wear_work_outfit = should_wear_work_outfit
+
+    def wear_work_outfit(self):
+        if self.work_outfit is None:
+            if self.has_role(stripper_role):
+                self.work_outfit = stripclub_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
+            if self.has_role(waitress_role):
+                self.work_outfit = waitress_wardrobe.decide_on_outfit2(self)
+            if self.has_role(bdsm_performer_role):
+                self.work_outfit = BDSM_performer_wardrobe.decide_on_outfit2(self)
+            if self.has_role(mistress_role):
+                self.work_outfit = mistress_wardrobe.decide_on_outfit2(self)
+            if self.has_role(manager_role):
+                self.work_outfit = manager_wardrobe.decide_on_outfit2(self)
+
+        if self.work_outfit is not None: #If our planned uniform is STILL None it means we are unable to construct a valid uniform. Only assign it as our outfit if we have managed to construct a uniform.
+            self.apply_outfit(self.work_outfit) #We apply clothing taboos to uniforms because the character is assumed to have seen them in them.
+        return
+
+    Person.wear_work_outfit = wear_work_outfit
 
     def review_outfit_enhanced(self, dialogue = True):
         self.outfit.remove_all_cum()
@@ -1242,7 +1293,7 @@ init -1 python:
     def apply_gym_outfit(self):
         if workout_wardrobe:
             # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
-            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
@@ -1250,70 +1301,17 @@ init -1 python:
     def apply_university_outfit(self):
         if university_wardrobe:
             # get personal copy of outfit, so we don't change the university wardrobe (in any events)
-            self.apply_outfit(university_wardrobe.decide_on_outfit2(self).get_copy())
+            self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_university_outfit = apply_university_outfit
 
-    def stripper_apply_outfit(self):
-        if stripclub_wardrobe:
-            self.apply_outfit(stripclub_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.stripper_apply_outfit = stripper_apply_outfit
-    
-    def waitress_apply_outfit(self):
-        if waitress_wardrobe:
-            self.apply_outfit(waitress_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.waitress_apply_outfit = waitress_apply_outfit
-
-    def BDSM_performer_apply_outfit(self):
-        if BDSM_performer_wardrobe:
-            self.apply_outfit(BDSM_performer_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.BDSM_performer_apply_outfit = BDSM_performer_apply_outfit
-
-    def manager_apply_outfit(self):
-        if manager_wardrobe:
-            self.apply_outfit(manager_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.manager_apply_outfit = manager_apply_outfit
-
-    def mistress_apply_outfit(self):
-        if mistress_wardrobe:
-            self.apply_outfit(mistress_wardrobe.decide_on_outfit2(self).get_copy())
-        return
-
-    Person.mistress_apply_outfit = mistress_apply_outfit
-
     def apply_planned_outfit(self):
         if self.should_wear_uniform():
             self.wear_uniform()
+        elif self.should_wear_work_outfit():
+            self.wear_work_outfit()
         else:
-            if not self.follow_mc:
-                if self.location() is gym:
-                    self.apply_gym_outfit()
-                    return
-                if self.location() is university and not self is nora:
-                    self.apply_university_outfit()
-                    return
-                if time_of_day >= 3 and (self.location() is strip_club or self.location() is bdsm_room):
-                    if self.has_role(waitress_role):
-                        self.waitress_apply_outfit()
-                    if self.has_role(bdsm_performer_role):
-                        self.BDSM_performer_apply_outfit()
-                    if self.has_role(stripper_role):
-                        self.stripper_apply_outfit()
-                    if self.has_role(manager_role):
-                        self.manager_apply_outfit()
-                    if self.has_role(mistress_role):
-                        self.mistress_apply_outfit()
-                    return
-
             self.apply_outfit(self.planned_outfit)
         return
 
@@ -1583,6 +1581,34 @@ init -1 python:
 
     Person.is_highly_fertile = is_highly_fertile
 
+    def pregnancy_chance_string(self): #Turns the difference of days from her ideal fertile day into a string
+        if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+            preg_chance = self.calculate_realistic_fertility()
+        else:
+            preg_chance = self.fertility_percent
+
+        if not self.on_birth_control:
+            preg_chance *= .9
+        else:
+            preg_chance *= (.1 + (self.bc_penalty / 10))
+
+        # mc.log_event("Pregnancy chance: " + the_person.name + ": " + str(preg_chance), "float_text_grey")
+
+        if preg_chance < 3:
+            return "Very Safe"
+        elif preg_chance < 5:
+            return "Safe"
+        elif preg_chance < 10:
+            return "Normal"
+        elif preg_chance < 20:
+            return "Risky"
+        elif preg_chance < 40:
+            return "Very Risky"
+        else:
+            return "Extremely Risky"
+
+    Person.pregnancy_chance_string = pregnancy_chance_string
+
 ##########################################
 # Position Specific functions            #
 ##########################################
@@ -1713,14 +1739,14 @@ init -1 python:
     def get_fetish_count(self):
         fetish_count = 0
         for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
     def get_fetishes_description(self):
         description = ""
         for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role]:
+            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
@@ -1751,6 +1777,11 @@ init -1 python:
             return True
         return False
 
+    def has_breeding_fetish(self):
+        if breeding_fetish_role in self.special_role:
+            return True
+        return False
+
     Person.get_fetish_count = get_fetish_count
     Person.get_fetishes_description = get_fetishes_description
     Person.has_vaginal_fetish = has_vaginal_fetish
@@ -1758,6 +1789,7 @@ init -1 python:
     Person.has_oral_fetish = has_oral_fetish
     Person.has_internal_cum_fetish = has_internal_cum_fetish
     Person.has_external_cum_fetish = has_external_cum_fetish
+    Person.has_breeding_fetish = has_breeding_fetish
 
     #Additional functions
 

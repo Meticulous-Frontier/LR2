@@ -14,6 +14,38 @@ init -1 python:
     def get_random_person_in_location(location, excluded_people = []):
         return get_random_from_list([x for x in location.people if x not in excluded_people])
 
+    def unique_characters_not_known(): # TODO The check should be standardized, but some people are vanilla, some are different modders or different 'style'.
+        not_met_yet_list = []
+        if alexia.schedule[1] == alexia.home: # She'll be scheduled otherwise when met.
+            not_met_yet_list.append(alexia)
+        if ashley.event_triggers_dict.get("intro_complete", False) == False:
+            not_met_yet_list.append(ashley)
+        if not "candace" in globals(): # She's not been created yet.
+            pass
+        elif candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
+            not_met_yet_list.append(candace)
+        if christina.mc_title == 'Stranger': #She'll call MC differently when met.
+            not_met_yet_list.append(christina)
+        if dawn.event_triggers_dict.get("met", 0) == 0:
+            not_met_yet_list.append(dawn)
+        if emily.mc_title == 'Stranger': #She'll call MC differently when met.
+            not_met_yet_list.append(emily)
+        if erica.event_triggers_dict.get("erica_progress", 0) == 0:
+            not_met_yet_list.append(erica)
+        if cousin.schedule[1] == cousin.home: # She'll be scheduled otherwise when met.
+            not_met_yet_list.append(cousin)
+        if nora.schedule[1] == nora.home: # She'll be scheduled otherwise when met.
+            not_met_yet_list.append(nora)
+        if salon_manager.mc_title == 'Stranger': #She'll call MC differently when met.
+            not_met_yet_list.append(salon_manager)
+        if aunt.schedule[2] == aunt_bedroom: # She'll be scheduled otherwise when met.
+            not_met_yet_list.append(aunt)
+        if sarah.schedule[1] == sarah.home: # She'll be scheduled otherwise when met.
+            not_met_yet_list.append(sarah)
+        if starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
+            not_met_yet_list.append(starbuck)
+        return not_met_yet_list
+
     def known_people_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         known_people = []
         for location in list_of_places:
@@ -25,9 +57,10 @@ init -1 python:
         return get_random_from_list(known_people)
 
     def known_people_at_location(location, excluded_people = []):
+        not_met_yet_list = unique_characters_not_known()
         known_people = []
         for person in [x for x in location.people if not x in excluded_people]:
-            if not (person.mc_title == "Stranger" or not person.title):
+            if not (person.mc_title == "Stranger" or not person.title) and not person in not_met_yet_list:
                 known_people.append(person)
         return known_people
 

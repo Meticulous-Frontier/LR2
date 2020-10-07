@@ -103,7 +103,7 @@ init 5 python:
             return False
         if person.has_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
             return False
-        if person.has_role(employee_role) or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
+        if person.is_employee() or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
         if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
@@ -143,7 +143,7 @@ init 5 python:
         available_roles = []
         if __builtin__.len(stripclub_strippers) < 5:
             available_roles.append(["Stripper", stripper_role])
-        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2 and mc.business.event_triggers_dict.get("strip_club_has_waitresses", False):
+        if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2:
             available_roles.append(["Waitress", waitress_role])
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and __builtin__.len(stripclub_bdsm_performers) < 5:
             available_roles.append(["BDSM Performer", bdsm_performer_role])
@@ -460,7 +460,6 @@ label stripper_performance_review_label(the_person):
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
                         $ person.location().move(the_person.home)
-                        $ renpy.screen("Active")
                         return
                 "Threaten to fire her": #She may ask to stay in exchange for some sort of favour, or get fired on the spot.
                     mc.name "I'll be honest with you [the_person.title], your performance here at the club leaves a lot to be desired."
@@ -501,7 +500,6 @@ label stripper_performance_review_label(the_person):
                                     the_person.char "I understand. I'll clear out my locker at the end of the shift."
                                     $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
                                     $ strip_club_fire_stripper(the_person)
-                                    $ renpy.screen("Active")
                                     return
                     else:
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
@@ -510,7 +508,6 @@ label stripper_performance_review_label(the_person):
                         "[the_person.title] stands up and storms out."
                         $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
                         $ strip_club_fire_stripper(the_person)
-                        $ renpy.screen("Active")
                         return
                 "Punish her sexually" if the_person.effective_sluttiness() >= 40 and the_person.obedience >= 120: #Orgasm denial and/or make her service you.
                     "You sigh dramatically, stand up and walk over to [the_person.title]."
@@ -545,25 +542,3 @@ label stripper_performance_review_label(the_person):
     "You stand up and open the door for [the_person.title] at the end of her performance review."
     $ clear_scene()
     return
-
-label advance_time_strippers_daily_serum_dosage_label(stack):
-    python:
-        if hasattr(mc.business, "strippers_serum"):
-            if mc.business.strippers_serum:
-                serum_count = mc.business.inventory.get_serum_count(mc.business.strippers_serum)
-                if serum_count > 0:
-                    for (person,place) in people_to_process:
-                        if employee_role in person.special_role:
-                            continue
-                        if not stripper_role in person.special_role:
-                            continue
-                        mc.business.inventory.change_serum(mc.business.strippers_serum,-1)
-                        person.give_serum(copy.copy(mc.business.strippers_serum), add_to_log = False)
-                        serum_count -= 1
-                        if serum_count == 0:
-                            break
-
-        execute_hijack_call(stack)
-
-init 5 python:
-    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_strippers_daily_serum_dosage_label")

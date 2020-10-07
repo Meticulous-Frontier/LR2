@@ -318,7 +318,7 @@ label quest_cuckold_employee_decision_label():
     # only get here if we are gonna breed in the office.
     "[the_person.possessive_title] follows you to your office."
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     "After you walk in, you close the door and lock it."
     the_person.char "Let's do this. I'm ready. I'm ready to get bred!"
     $ the_person.draw_person(position = "kissing")
@@ -403,7 +403,7 @@ label quest_cuckold_employee_rethink_decision_label():
     mc.name "Certainly, let's go to my office."
     "[the_person.possessive_title] follows you to your office."
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     mc.name "So, what is on your mind?"
     "She is fidgeting a bit. She is clearly nervous about what she has to say."
     the_person.char "Well... ever since the other day, when you offered to help me with my... you know... fertility issue? I just can't seem to get the idea out of my head!"
@@ -502,7 +502,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     the_person.char "Of course! Let's go!"
     "[the_person.possessive_title] follows you to your office."
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     "After you walk in, you close the door and lock it."
     the_person.char "I've been looking forward to this. I know that we're doing this for practical reasons, but that doesn't mean it doesn't feel really good..."
     mc.name "Get naked, cow. I'm just here to breed you."
@@ -680,7 +680,7 @@ label quest_cuckold_employee_knocked_up_label():
     "You get a text message from [the_person.title]."
     the_person.char "Hey! I need to see you in your office, ASAP!"
     $ mc.change_location(office)
-    $ mc.location.show_background()
+    $ ceo_office.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.event_triggers_dict["preg_knows"] = True
     "As you step into your office, you see [the_person.possessive_title]."

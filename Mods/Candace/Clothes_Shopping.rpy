@@ -20,7 +20,7 @@ init 2 python:
     def build_outfit_selection(person):
         outfits = []
         builder = WardrobeBuilder(person)
-        outfit_slut_points = __builtin__.max(__builtin__.int(person.effective_sluttiness() / 8), 12)
+        outfit_slut_points = __builtin__.min(__builtin__.int(person.effective_sluttiness() / 8), 12)
         for i in range(3):
             outfits.append(builder.build_outfit(None, outfit_slut_points))
         outfits.append(builder.build_outfit("UnderwearSets", outfit_slut_points))
@@ -115,7 +115,7 @@ label candace_goes_clothes_shopping_label(the_person):
         the_person.char "God, that was fun! Just a shame we didn't find anything we both like!"
         mc.name "I'm sure we will find something next time."
         the_person.char "Oh that's so nice, I can't wait for our next shopping trip!"
-    
+
     mc.name "I'm not going back to work right away. Feel free to take the rest of the day off if you want."
     the_person.char "You're sweet. Thanks for the shopping trip!"
     $ the_person.draw_person(position = "walking_away")

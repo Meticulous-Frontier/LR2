@@ -77,7 +77,7 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
                     "[the_girl.title] submissively opens her mouth. You push the dildo into her mouth, making her clean her own juices from it."
                     "As she strokes the dildo with her mouth, you reciprocate, pushing your fingers into her at the same time."
                     "Soon she is eagerly sucking the dildo, your fingers stroking her silky insides in turn."
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") + 1)
+                    $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive") + 1, obedience = 1)
                     "Suddenly, you pull the dildo out of her mouth. You bring it back down to her cunt and push it back inside her."
                 else:
                     the_girl.char "Fuck that. Why don't you do it?"

@@ -35,7 +35,7 @@ label intro_drysex_cowgirl(the_girl, the_location, the_object):
     else:
         "She leans back and grinds herself against you. It feels good, even with your clothes on."
     the_girl.char "Ah..."
-    if not mc.recently_orgasmed:
+    if mc.recently_orgasmed:
         "[the_person.possessive_title]'s body rubbing against yours feels great. You feel yourself getting hard in response."
         $ mc.recently_orgasmed = False
     the_girl.char "Your body feels so good..."
