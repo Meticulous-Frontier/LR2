@@ -9,7 +9,95 @@ init -1 python:
 
 #Requirement functions
     def breeding_fetish_employee_intro_requirement():
+        if time_of_day == 3:
+            if mc.business.is_open_for_business():
+                if mc.is_at_work():
+                    return True
+        return False
+
+    def breeding_fetish_non_employee_intro_requirement():
+        return False
+
+    def breeding_fetish_mom_intro_requirement(): #TODO this should be a morning mandatory crisis event.
+        return True #??? Is this right?
+
+    def breeding_fetish_lily_intro_requirement(the_person):
+        if lily.location() == lily.home:
+            if len(lily_bedroom.people) == 1:
+                return True
+        return False
+
+    def breeding_fetish_rebecca_intro_requirement():
+        return False
+
+    def breeding_fetish_gabrielle_intro_requirement():
+        return False
+
+    def breeding_fetish_stephanie_intro_requirement():
+        if mc.business.is_open_for_business():
+            if stephanie.location() == stephanie.work:
+                if renpy.random.randint(0,100) < 15:
+                    return True
+        return False
+
+    def breeding_fetish_emily_intro_requirement():
+        return False
+
+    def breeding_fetish_christina_intro_requirement():
+        return False
+
+    def breeding_fetish_starbuck_intro_requirement():
+        if starbuck.shop_progress_stage > 0:
+            if time_of_day == 3:
+                return True
+        return False
+
+
+    def breeding_fetish_sarah_intro_requirement():
+        if mc_asleep():
+            if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+                return True
+        return False
+
+    def breeding_fetish_ophelia_intro_requirement():
+        return False
+
+    def breeding_fetish_erica_intro_requirement():
+        return False
+
+    def breeding_fetish_candace_intro_requirement(the_person):
+        if candace.location() == candace.work:
+            return True
+        return False
+
+    def breeding_fetish_ashley_intro_requirement():
+        return False
+
+    def breeding_fetish_high_fertility_crisis_requirement():
+        return False
+
+    def breeding_fetish_going_off_BC_requirement(the_person):
         return True
+
+
+#Actions
+    # breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
+    breeding_fetish_non_employee = Action("Non Employee breeding fetish intro", breeding_fetish_non_employee_intro_requirement, "breeding_fetish_non_employee_intro_label")
+    breeding_fetish_mom_intro = Action("Mom breeding fetish intro", breeding_fetish_mom_intro_requirement, "breeding_fetish_mom_intro_label")
+    breeding_fetish_lily_intro = Action("Lily breeding fetish intro", breeding_fetish_lily_intro_requirement, "breeding_fetish_lily_intro_label")
+    breeding_fetish_rebecca_intro = Action("Rebecca breeding fetish intro", breeding_fetish_rebecca_intro_requirement, "breeding_fetish_rebecca_intro_label")
+    breeding_fetish_gabrielle_intro = Action("Gabrielle breeding fetish intro", breeding_fetish_gabrielle_intro_requirement, "breeding_fetish_gabrielle_intro_label")
+    breeding_fetish_stephanie_intro = Action("Stephanie breeding fetish intro", breeding_fetish_stephanie_intro_requirement, "breeding_fetish_stephanie_intro_label")
+    breeding_fetish_emily_intro = Action("Emily breeding fetish intro", breeding_fetish_emily_intro_requirement, "breeding_fetish_emily_intro_label")
+    breeding_fetish_christina_intro = Action("Christina breeding fetish intro", breeding_fetish_christina_intro_requirement, "breeding_fetish_christina_intro_label")
+    breeding_fetish_starbuck_intro = Action("Starbuck breeding fetish intro", breeding_fetish_starbuck_intro_requirement, "breeding_fetish_starbuck_intro_label")
+    breeding_fetish_sarah_intro = Action("Sarah breeding fetish intro", breeding_fetish_sarah_intro_requirement, "breeding_fetish_sarah_intro_label")
+    breeding_fetish_ophelia_intro = Action("Ophelia breeding fetish intro", breeding_fetish_ophelia_intro_requirement, "breeding_fetish_ophelia_intro_label")
+    breeding_fetish_erica_intro = Action("Erica breeding fetish intro", breeding_fetish_erica_intro_requirement, "breeding_fetish_erica_intro_label")
+    breeding_fetish_candace_intro = Action("Candace breeding fetish intro", breeding_fetish_candace_intro_requirement, "breeding_fetish_candace_intro_label")
+    breeding_fetish_ashley_intro = Action("Ashley breeding fetish intro", breeding_fetish_ashley_intro_requirement, "breeding_fetish_ashley_intro_label")
+    breeding_fetish_high_fertility_crisis = Action("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label")
+    breeding_fetish_going_off_BC = Action("She goes off BC", breeding_fetish_going_off_BC_requirement, "breeding_fetish_going_off_BC_label")
 
 
 #Other breeding fetish calls
@@ -21,9 +109,62 @@ init 3 python:
         add_breed_me_collar_to_base_outfit(person)
         return
 
+    def start_breeding_fetish_quest(the_person):
+        #Determine who it is, then add the appropriate quest.
+        if persistent.pregnancy_pref == 0:
+            return False
+        if the_person == mom:
+            if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
+        elif the_person == lily:
+            lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
+        elif the_person == aunt:
+            pass
+        elif the_person == cousin:
+            pass
+        elif the_person == stephanie:
+            if breeding_fetish_stephanie_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_stephanie_intro)
+        elif the_person == emily:
+            pass
+        elif the_person == christina:
+            pass
+        elif the_person == starbuck:
+            if breeding_fetish_starbuck_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_starbuck_intro)
+        elif the_person == sarah:
+            if breeding_fetish_sarah_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_sarah_intro)
+        elif the_person == salon_manager:
+            pass
+        elif the_person == erica:
+            pass
+        elif "candace" in globals():
+            if the_person == candace:
+                candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
+        elif the_person == ashley:
+            pass
+        elif the_person.is_employee():
+            if mc.business.event_triggers_dict.get("Employee_breeding_fetish_not_avail", False) == False:
+                mc.business.event_triggers_dict["Employee_breeding_fetish_not_avail"] = True
+                breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = the_person)
+                mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
+        else:
+            pass
+
+        return
+
+    def get_breeding_fetish_list():
+        breeder_list = []
+        for person in known_people_in_the_game([mc]):
+            if breeding_fetish_role in person.special_role:
+                breeder_list.append(person)
+        return breeder_list
+
 
 #Fetish Intro Labels
 label breeding_fetish_employee_intro_label(the_person):
+    $ mc.business.event_triggers_dict["Employee_breeding_fetish_not_avail"] = False
     "You are finishing up the last of your work today and closing up. All your employees should be gone for the day."
     "However, you are surprised when you are interrupted by someone."
     $ the_person.draw_person()
@@ -55,7 +196,7 @@ label breeding_fetish_employee_intro_label(the_person):
     mc.name "... I just pushed you back..."
     "You keep her backing up until her ass runs into the edge of someone's desk."
     mc.name "... Onto this desk..."
-    $ the_person.draw_person(position = missionary)
+    $ the_person.draw_person(position = "missionary")
     "You force her down onto her back."
     the_person.char "Oh my god..."
     mc.name "...and fucked you..."
@@ -74,7 +215,7 @@ label breeding_fetish_employee_intro_label(the_person):
     mc.name "...and didn't stop until I dump my cum deep?"
     the_person.char "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, hide_leave = True, position_locked = True) from _employee_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _employee_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person.char "Oh god! Its so deep! Oh thank you so much [the_person.mc_title]!"
     else:
@@ -131,7 +272,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
         the_person.char "Oh god I know I'm already pregnant, but I just want you to fuck your cum into me over and over!"
     else:
         the_person.char "Oh god, can we really do this? Will you fuck your cum into me over and over until I'm pregnant? I want that so bad!"
-    mc.name "Of course I'll give you my cum. From now on, you'll by my own personal mare. I'll breed you every chance I get."
+    mc.name "Of course I'll give you my cum. From now on, you'll be my own personal mare. I'll breed you every chance I get."
     $ the_person.change_arousal(15)
     the_person.char "Oh [the_person.mc_title], that's so hot... I want it now! I'm going the ride the cum out of you now!"
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _mom_breeding_fetish_intro_01
@@ -156,10 +297,11 @@ label breeding_fetish_mom_intro_label(): # Needs testing
 
     return #Needs testing
 
-label breeding_fetish_lily_intro_label(): #NEeds testing, evening room entry event
+label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room entry event
     $ the_person = lily
     "Note: This scene was written assuming that eventually you fuck [the_person.title] on a live stream, but so far Vren has not written this step."
     "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
+    $ the_person.draw_person()
     the_person.char "Oh hey [the_person.mc_title]! I was wondering if you were going to be around tonight. Want to stream with me tonight?"
     "Your sister's job, over the last few months, has slowly evolved. From taking sexy snaps, to streaming sex live with you live. Having sex with your sister, AND getting paid for it? Its amazing."
     "You think about it. Do you want to do another stream tonight?"
@@ -208,8 +350,8 @@ label breeding_fetish_lily_intro_label(): #NEeds testing, evening room entry eve
     mc.name "Ok... from now on, you are my personal cum dumpster. I'll use you like you want!"
     the_person.char "Oh god... this is amazing! Let's do it!"
     "Suddenly she remembers."
-    the_person.char "Can we... can we do it on stream? No one on their believes we are actually siblings. They think its all just for show!"
-    "Go ahead, set it up."
+    the_person.char "Can we... can we do it on stream? No one on there believes we are actually siblings. They think its all just for show!"
+    mc.name "Go ahead, set it up."
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] walks over to her laptop. You give her a few minutes to get everything setup."
     the_person.char "Okay... I promised all the viewers a crazy show! Oh god I can't beleive it..."
@@ -251,7 +393,7 @@ label breeding_fetish_lily_intro_label(): #NEeds testing, evening room entry eve
     $ the_person.change_arousal(30)
     $ mc.change_arousal(30)
     "[the_person.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
-    the_girl.char "Do you like that, bro? Ah! That is so good..."
+    the_person.char "Do you like that, bro? Ah! That is so good..."
     "[the_person.possessive_title] reaches back between her legs and cups your balls."
     the_person.char "Mmm you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
     $ the_person.change_arousal(30)
@@ -616,7 +758,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     the_person.char "Stick it in [the_person.mc_title]! Fuck me hard and cum as deep as you can!"
     "You grab her hips to stop the wiggling. You line yourself up with her thirsty cunt and push into her. She gasps when you bottom out."
     the_person.char "Oh yes! Give it to me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, hide_leave = True, position_locked = True) from _starbuck_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person.char "Oh god! Babymaking sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
@@ -711,7 +853,7 @@ label breeding_fetish_erica_intro_label():
 
     return
 
-label breeding_fetish_candace_intro_label(): #This is going to be two intros, depending on if candace is still a bimbo or not NEeds Testing
+label breeding_fetish_candace_intro_label(the_person): #This is going to be two intros, depending on if candace is still a bimbo or not NEeds Testing
     $ the_person = candace
     $ camera_person = None
     $ room_list = []
@@ -769,7 +911,7 @@ label breeding_fetish_candace_intro_label(): #This is going to be two intros, de
         the_person.char "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
         "Wow, that didn't take much encouragement. You grab her hips, line yourelf up and push yourself in deep."
         the_person.char "Yes!!!"
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, hide_leave = True, position_locked = True) from _bimbo_candace_gets_breeding_fetish_01
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
         else:
@@ -810,4 +952,13 @@ label breeding_fetish_ashley_intro_label():
 label breeding_fetish_high_fertility_crisis_label():
 
 
+    return
+
+label breeding_fetish_going_off_BC_label(the_person):
+    "[the_person.title] smiles as you walk up to her."
+    the_person.char "Oh hey [the_person.mc_title]. Glad you are here, I wanted to tell you something."
+    "She leans forward and whispers into your ear."
+    the_person.char "Just thought you'd like to know... I decided to go off my birth control..."
+    "She leans back. You should be careful if you decide to fuck her, she might be fertile!"
+    the_person.char "Is there something I can do for you?"
     return

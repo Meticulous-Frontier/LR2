@@ -160,17 +160,19 @@ init -1 python:
         if fetish_random_roll_2 < 25 + (tier * 5):
             increase_fetish_sexy_opinion(person, FETISH_BREEDING_OPINION_LIST, tier - 1)
 
-        #TODO add chance here for the girl to decide to go off birth control if she happens to be on it. She texts you about it even.
+        if persistent.pregnancy_pref == 0:
+            return
 
-        # if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
-        #     return
+        if SB_get_breeding_score(person) >= 5 and person.on_birth_control:
+            person.on_birth_control = False
+            person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
-        if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("bareback sex") >= 2:
-            if person.sluttiness >= 80 and SB_get_breeding_score(person) >= 8:
-                if SB_get_fetish_count(person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Trigger vaginal fetish " + person.name)
-                    pass
-                    #TODO add breeding fetish events here.
+        if persistent.pregnancy_pref > 0:
+            if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("bareback sex") >= 2:
+                if not (person.has_role(breeding_fetish_role)):
+                    if person.sluttiness >= 80 and SB_get_breeding_score(person) >= 8:
+                        if SB_get_fetish_count(person) < store.max_fetishes_per_person:
+                            start_breeding_fetish_quest(person) #Breeding quest manages who can get teh quest and conditions around it
         return
 
     def add_fetish_serum_traits():
@@ -260,20 +262,28 @@ init -1 python:
                 negative_slug = "+200 Serum Research, +20 Production Cost",
                 value_added = 25,
                 research_added = 200 * FETISH_RESEARCH_PERCENT,
-        #     slots_added = a_number,
                 production_added = FETISH_PRODUCTION_COST,
-        #     duration_added = a_number,
                 base_side_effect_chance = 75,
-        #     on_apply = submission_function_on_apply,
-        #     on_remove = submission_function_on_remove,
                 on_turn = fetish_cum_function_on_turn,
-        #     on_day = a_function,
                 requires = [fetish_oral_ther],
                 tier = FETISH_RESEARCH_FINAL_TIER,
                 start_researched =  False,
                 research_needed = 800 * FETISH_RESEARCH_PERCENT,
-        #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
+            )
+
+        fetish_breeding_ther = SerumTraitMod(name = "Breeding Fetish Therapy",
+                desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
+                positive_slug = "Slowly increases Vaginal sexual opinions, Slowly increases Vaginal skill, +$20 Value",
+                negative_slug = "+200 Serum Research, +20 Production Cost",
+                value_added = 25,
+                research_added = 200 * FETISH_RESEARCH_PERCENT,
+                production_added = FETISH_PRODUCTION_COST,
+                base_side_effect_chance = 75,
+                on_turn = fetish_breeding_function_on_turn,
+                requires = [fetish_vaginal_ther],
+                tier = FETISH_RESEARCH_FINAL_TIER,
+                start_researched =  False,
+                research_needed = 800 * FETISH_RESEARCH_PERCENT,
             )
 
 # any label that starts with serum_mod is added to the serum mod list
