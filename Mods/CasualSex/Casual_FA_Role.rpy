@@ -137,7 +137,7 @@ init -1 python:
 
             self.home = purgatory #The room the character goes to at night. If none a default location is used.
             self.work = None #The room the character goes to for work.
-            self.schedule = {0:self.home,1:self.home,2:self.home,3:self.home,4:self.home} #A character's schedule is a dict of 0,1,2,3,4 (time periods) mapped to locations.
+            # self.schedule = {0:self.home,1:self.home,2:self.home,3:self.home,4:self.home} #A character's schedule is a dict of 0,1,2,3,4 (time periods) mapped to locations.
             #If there is a place in the schedule the character will go there. Otherwise they have free time and will do whatever they want.
             self.job = get_random_job() #Probably replace this
 

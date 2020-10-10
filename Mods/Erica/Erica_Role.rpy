@@ -30,8 +30,11 @@ init 2 python:
         erica.max_energy = 120
         erica.generate_home()
         erica.home.add_person(erica)
-        erica.set_schedule(gym, times = [1,3])
-        erica.set_schedule(university, times = [2])
+
+        erica.set_schedule(gym, days = [5,6], times = [1, 2])
+        erica.set_schedule(university, days = [0, 1, 2, 3, 4], times = [2])
+        erica.set_schedule(gym, days = [0, 1, 2, 3, 4], times = [1, 3])
+
         erica.event_triggers_dict["reject_position"] = "standing_doggy"
         erica.event_triggers_dict["erica_progress"] = 0
         erica.event_triggers_dict["erica_workout"] = 0
