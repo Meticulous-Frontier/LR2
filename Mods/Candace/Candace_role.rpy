@@ -519,14 +519,14 @@ label candace_overhear_supply_order_label(the_person):
     the_person.char "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
     "She trades numbers with the supplier. Wait did she just turn down a discount? You watch as she says goodbye, making sure to lick her lips and wink before ending the call."
     "You decide to talk to her about it. You don't want to stifle her... creativity... but if she's getting discounts just for doing what she would already be doing, there's nothing wrong with that, right?"
-    "You walk up to her discounts. She smiles at you when she sees you approach."
+    "You walk up to her desk. She smiles at you when she sees you approach."
     the_person.char "Hello [the_person.mc_title]! Anything I can do for you today?"
     "You get ready to speak... but you notice her posture subtly change as she finishes that sentence. Did she just push her chest out a bit? You shake it off."
     mc.name "Yes, sorry I couldn't help but overheard your conversation with that supplier."
     the_person.char "Yes... sorry I just couldn't help but have a little fun with the guy..."
     mc.name "That's perfectly fine, I didn't mind that at all."
     the_person.char "Oh? That's good!"
-    mc.name "Yeah, I'm just curirous. Why did you turn down the discount? If they are offering to discount the product..."
+    mc.name "Yeah, I'm just curious. Why did you turn down the discount? If they are offering to discount the product..."
     the_person.char "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
     the_person.char "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like the owe me!"
     mc.name "I'm sure that if you accepted their offer of a discount, they would still send you dick pics."
@@ -539,10 +539,6 @@ label candace_overhear_supply_order_label(the_person):
     the_person.char "Yes sir!"
     $ scene_manager.clear_scene()
     $ mc.business.mandatory_crises_list.append(candace_supply_order_discount)
-    return
-
-
-
     return
 
 label candace_supply_order_discount_label():
