@@ -614,7 +614,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     # initialize
     #$ scene_manager = Scene()
-    $ scene_manager.add_actor(person_choice, position = "stand3", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(person_choice, position = "stand3", display_transform = character_left_flipped)
     mc.name "Hello [person_choice.title], come in and take a seat."
 
     $ scene_manager.update_actor(person_choice, position = "sitting")
@@ -713,8 +713,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     if person_choice.get_opinion_score(opinion_chat) < max_opinion:
         $ person_choice.update_opinion_with_score(opinion_chat, max_opinion)
     $ mc.listener_system.fire_event("HR_opinion_improvement", the_person = person_choice)
-    $ scene_manager.update_actor(person_choice, position = "walking_away", character_placement = character_left_flipped)
-    $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
+    $ scene_manager.update_actor(person_choice, position = "walking_away", display_transform = character_left_flipped)
+    $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_right)
     "[the_person.title] gets up and walks [person_choice.title] to the door."
     "They exchange a few pleasantries before [person_choice.title] leaves the room."
     $ scene_manager.remove_actor(person_choice)
@@ -1260,7 +1260,7 @@ label HR_director_mind_control_attempt_label(the_person):
 label HR_mind_control_attempt(the_person, the_HR_dir):
     "[the_HR_dir.title] returns with [the_person.title]."
     $ scene_manager.add_actor(the_HR_dir)
-    $ scene_manager.add_actor(the_person,  character_placement = character_left_flipped)
+    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped)
     the_person.char "You wanted to see me sir?"
     mc.name "Ah, yes, thank you for coming. [the_person.title], we are trying a new experimental counseling method, that we are combining with one our recent serum developments."
     mc.name "I've asked you to come, because I would like you to help us test it. [the_HR_dir.title] here is going to administer the session."

@@ -52,9 +52,9 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
     python:
         scene_manager = Scene()
 
-        scene_manager.add_actor(pick_1, position = "stand4", character_placement = character_center_flipped)
-        scene_manager.add_actor(pick_2, position = "stand3", character_placement = character_left_flipped)
-        scene_manager.add_actor(pick_3, position = "stand2", character_placement = character_right)
+        scene_manager.add_actor(pick_1, position = "stand4", display_transform = character_center_flipped)
+        scene_manager.add_actor(pick_2, position = "stand3", display_transform = character_left_flipped)
+        scene_manager.add_actor(pick_3, position = "stand2", display_transform = character_right)
 
     the_person.char "Well then, we have some special testing to get through today! Who would like to go first?"
     $ go_first = pick_1
@@ -76,7 +76,7 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
         if go_first != pick_2:
             scene_manager.remove_actor(pick_2)
 
-        scene_manager.add_actor(the_person, position="stand4", emotion="happy", character_placement = scene_manager.get_free_position_tuple()[1])
+        scene_manager.add_actor(the_person, position="stand4", emotion="happy", display_transform = scene_manager.get_free_position_tuple()[1])
 
     the_person.char "Are you ready [go_first.name]? Come with me, you two can wait here until we're done."
 

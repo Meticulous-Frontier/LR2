@@ -328,7 +328,7 @@ label SB_fetish_cum_dosage_label():
             "[the_person.possessive_title] quickly sulks off."
     python:
         the_person.apply_planned_outfit()
-        renpy.scene("Active")
+        clear_scene()
     return
 
 label SB_fetish_cum_dosage_non_employee_label():
@@ -469,7 +469,7 @@ label SB_fetish_mom_cum_label():
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        renpy.scene("Active")
+        clear_scene()
     return "Advance Time"
 
 
@@ -538,7 +538,7 @@ label SB_fetish_lily_cum_label():
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        renpy.scene("Active")
+        clear_scene()
     return
 
 #SBC5
@@ -574,7 +574,7 @@ label SB_fetish_shower_cum_label():
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        renpy.scene("Active")
+        clear_scene()
     return
 
 
@@ -602,7 +602,7 @@ label SB_fetish_stephanie_cum_label():
         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
         the_person.char "I went along with things for a while because... well I don't know why. I guess I was just really into the science of things."
         "She shifts uncomfortably in her seat."
-        $ scene_manager.update_actor(the_person, character_placement = character_right_flipped)
+        $ scene_manager.update_actor(the_person, display_transform = character_right_flipped)
         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
@@ -702,7 +702,7 @@ label SB_fetish_stephanie_cum_label():
         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
         the_person.char "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
         "She shifts uncomfortably in her seat."
-        $ scene_manager.update_actor(the_person, character_placement = character_right_flipped)
+        $ scene_manager.update_actor(the_person, display_transform = character_right_flipped)
         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"

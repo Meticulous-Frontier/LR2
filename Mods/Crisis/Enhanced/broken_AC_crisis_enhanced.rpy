@@ -140,7 +140,7 @@ label broken_AC_crisis_label_enhanced:
 
         "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=18}Requires: [casual_uniform_policy.name]{/size}{/color} (disabled)" if not casual_uniform_policy.is_active():
             pass
-    $renpy.scene("Active")
+    $ clear_scene()
     return
 
 label broken_AC_crisis_break_taboo(the_girl):

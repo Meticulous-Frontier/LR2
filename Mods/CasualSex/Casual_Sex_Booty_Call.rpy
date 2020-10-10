@@ -46,5 +46,5 @@ label casual_sex_booty_call_label:
             "She sends you a pic of herself masturbating."
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
-    $renpy.scene("Active")
+    $ clear_scene()
     return

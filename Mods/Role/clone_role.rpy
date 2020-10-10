@@ -48,7 +48,7 @@ label clone_rent_apartment_label(the_person):
                 the_person.home = None
                 the_person.generate_home()
                 mc.business.change_funds(-25000)
-                the_person.set_schedule([1,2,3], None)
+                the_person.set_schedule(None, times = [1,2,3])
 
             "You make all the necessary arrangements, your clone [the_person.name] will now stay at her own place at night and live her life."
 

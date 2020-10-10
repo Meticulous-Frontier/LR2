@@ -44,7 +44,7 @@ label mall_introduction_action_label:
     python:
         scene_manager = Scene()
 
-        scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", character_placement = character_center_flipped)
+        scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", display_transform = character_center_flipped)
         scene_manager.add_actor(stranger, position = "stand3")
 
     known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."

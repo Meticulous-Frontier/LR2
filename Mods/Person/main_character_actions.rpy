@@ -261,10 +261,10 @@ label mc_start_follow_label(person):
 
 label mc_stop_follow_label(person):
     python:
-        if the_person.schedule[time_of_day] is the_person.home:
+        if the_person.get_destination() is the_person.home:
             schedule_destination = "my room"
-        elif the_person.schedule[time_of_day]:
-            schedule_destination = "the " + the_person.schedule[time_of_day].formalName
+        elif the_person.get_destination():
+            schedule_destination = "the " + the_person.get_destination().formalName
         else:
             schedule_destination = "somewhere else"
 

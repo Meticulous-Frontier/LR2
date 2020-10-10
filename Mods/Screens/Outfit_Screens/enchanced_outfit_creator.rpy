@@ -49,7 +49,7 @@ init 10 python:
 
     def preview_outfit(outfit = "demo_outfit"):
 
-        renpy.scene("Active")
+        clear_scene()
         cs = renpy.current_screen()
         if cs.scope["mannequin"] == "mannequin":
             renpy.show_screen("mannequin", cs.scope[outfit])

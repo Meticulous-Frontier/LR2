@@ -40,7 +40,7 @@ init 2 python:
 
     def silent_pregnant_finish_announce_person(person):
         person.event_triggers_dict["preg_old_schedule"] = person.schedule.copy() #Take a shallow copy so we can change their current schedule to nothing
-        person.set_schedule([0,1,2,3,4], person.home)
+        person.set_schedule(person.home, times = [0,1,2,3,4])
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
 

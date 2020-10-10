@@ -168,7 +168,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "[person_one.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
                 $ person_one.break_taboo("touching_penis")
                 person_two.char "Wow, looks like you guys are getting ready for some fun!"
-                $ scene_manager.add_actor(person_two, position = "stand3", character_placement = character_left, emotion = "happy")
+                $ scene_manager.add_actor(person_two, position = "stand3", display_transform = character_left, emotion = "happy")
                 "You turn and see [person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
                 person_two.char "This is so sexy... [person_two.mc_title], can I join? Please!?! You won't regret it!"
                 "Dumbfounded, you can only nod."
@@ -184,10 +184,10 @@ label SB_working_weekend_crisis_label_high(person_one):
                 #call SB_threesome_description(person_one, person_two, SB_threesome_sixty_nine, make_desk(), 0, private = True, girl_in_charge = False) from _SB_EVENT_THREESOME_WEEKEND_SB10
                 "Wow, you just had sex with [person_one.title] and [person_two.title]! You can't believe how lucky you are."
                 "Eventually, [person_two.possessive_title] gets up."
-                $ scene_manager.update_actor(person_two, position = "stand3", character_placement = character_center)
+                $ scene_manager.update_actor(person_two, position = "stand3", display_transform = character_center)
                 person_two.char "Mmm... wow... I guess I should stop by on the weekend more often..."
                 $ person_two.apply_planned_outfit()
-                $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_left)
+                $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_left)
                 "[person_two.possessive_title] puts on her clothes and heads for the door."
                 $ scene_manager.remove_actor(person_two)
                 if the_report.get("girl orgasms", 0) > 0:

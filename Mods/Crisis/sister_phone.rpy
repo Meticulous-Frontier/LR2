@@ -214,5 +214,5 @@ label sister_phone_crisis_action_label:
             "It's so sweet of her to think of you."
 
     $ the_person.apply_planned_outfit()
-    $renpy.scene("Active")
+    $ clear_scene()
     return

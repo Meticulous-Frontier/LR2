@@ -53,8 +53,8 @@ label SB_caught_masturbating_crisis_label():
         $ the_person.strip_outfit(delay = 0)
         $ the_person_two.strip_outfit(delay = 0)
 
-        $ scene_manager.add_actor(the_person, position = "missionary", character_placement = character_69_bottom)
-        $ scene_manager.add_actor(the_person_two, position = "cowgirl", character_placement = character_69_on_top)
+        $ scene_manager.add_actor(the_person, position = "missionary", display_transform = character_69_bottom)
+        $ scene_manager.add_actor(the_person_two, position = "cowgirl", display_transform = character_69_on_top)
 
         "Looking inside, you see [the_person.title] and [the_person_two.title] eating each other out."
 

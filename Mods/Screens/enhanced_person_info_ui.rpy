@@ -77,7 +77,7 @@ init -1 python:
 
 init 2:
     screen person_info_ui(person): #Used to display stats for a person while you're talking to them.
-        layer "Active" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
+        layer "solo" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
 
         frame:
             background "gui/topbox.png"

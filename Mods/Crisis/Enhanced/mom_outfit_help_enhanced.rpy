@@ -342,5 +342,5 @@ label mom_outfit_help_crisis_label_enhanced():
         del first_outfit
         del second_outfit
         del third_outfit
-        renpy.scene("Active")
+        clear_scene()
     return

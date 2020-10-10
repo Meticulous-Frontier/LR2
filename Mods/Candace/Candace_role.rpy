@@ -106,8 +106,8 @@ init 2 python:
             ])
 
         candace.generate_home()
-        candace.set_schedule([1,2], candace.home)
-        candace.set_schedule([3], office_store) #Buying office supplies for her employer.
+        candace.set_schedule(candace.home, times = [1,2])
+        candace.set_schedule(office_store, times = [3]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
         candace.event_triggers_dict["day_met"] = -1 #Might eventually change the code where candi gets INIT other than when you meet her, so leave this -1 for now
@@ -447,7 +447,7 @@ label candace_convince_to_quit_label(the_person):
     "You complete the necessary paperwork and hire [the_person.title], assigning her to the supply department."
     #TODO make sure her home is set to Stephanie's house somehow.
     "As you finish up, you notice [salon_manager.possessive_title] is walking over to the table."
-    $ scene_manager.add_actor(salon_manager, position = "sitting", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
     salon_manager.char "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
     the_person.char "Hi! You can call me [the_person.name]."
     salon_manager.char "You know, I used to date [the_person.SO_name] too!"

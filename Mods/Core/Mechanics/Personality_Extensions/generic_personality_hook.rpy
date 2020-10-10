@@ -393,7 +393,7 @@ init -1 python:
 
         for i in __builtin__.range(0,4):
             person = create_stripper()
-            person.set_schedule([3,4],strip_club)
+            person.set_schedule(strip_club, times = [3,4])
             stripclub_strippers.append(person)
         return
 

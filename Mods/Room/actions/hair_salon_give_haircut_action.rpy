@@ -40,7 +40,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
         the_person.char "I'm not in the mood for a haircut right now."
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-2)
-        $renpy.scene("Active")
+        $ clear_scene()
         return
 
     elif the_person.happiness > 120 or the_person.obedience > 120:

@@ -498,7 +498,7 @@ init -1 python:
     # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
         # Can be an array of messages for variation in message per clothing item or just a single string or None for silent stripping
     # scene manager parameter is filled from that class so that all people present in scene are drawn
-    def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, narrator_messages = None, character_placement = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None):
+    def strip_outfit_to_max_sluttiness(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, narrator_messages = None, display_transform = None, lighting = None, temp_sluttiness_boost = 0, position = None, emotion = None, scene_manager = None, wipe_scene = False):
         # internal function to strip top clothing first.
         def get_strip_choice_max(outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
             strip_choice = None
@@ -528,7 +528,7 @@ init -1 python:
         # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
         while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
             if delay > 0:
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 if msg_count == 0:
                     renpy.pause(delay) # if no message to show, wait a short while before automatically continue stripping
             else:
@@ -548,7 +548,7 @@ init -1 python:
     # Monkey wrench Person class to have automatic strip function
     Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
-    def strip_outfit_to_underwear(self, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
+    def strip_outfit_to_underwear(self, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, scene_manager = None, wipe_scene = False):
         if position is None:
             self.position = self.idle_pose
 
@@ -558,13 +558,13 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        if character_placement is None:
-            self.character_placement = character_right
+        if display_transform is None:
+            self.display_transform = display_transform
 
         strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
         while not strip_choice is None and self.outfit.bra_covered():
             if delay > 0:
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
             else:
                 self.outfit.remove_clothing(strip_choice)
@@ -573,7 +573,7 @@ init -1 python:
         strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
         while not strip_choice is None and self.outfit.panties_covered():
             if delay > 0:
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
             else:
                 self.outfit.remove_clothing(strip_choice)
@@ -581,7 +581,7 @@ init -1 python:
 
     Person.strip_outfit_to_underwear = strip_outfit_to_underwear
 
-    def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, character_placement = None, position = None, emotion = None, lighting = None, scene_manager = None):
+    def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, scene_manager = None, wipe_scene = False):
         def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
             done = exclude_upper or person.outfit.tits_available()
             if done and (exclude_lower or person.outfit.vagina_available()):
@@ -599,13 +599,13 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        if character_placement is None:
-            self.character_placement = character_right
+        if display_transform is None:
+            self.display_transform = character_right
 
         strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
         while not strip_choice is None and extra_strip_check(self, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
             if delay > 0:
-                self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
             else:
                 self.outfit.remove_clothing(strip_choice)
@@ -616,7 +616,7 @@ init -1 python:
             strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
             while not strip_choice is None:
                 if delay > 0:
-                    self.draw_animated_removal(strip_choice, character_placement = character_placement, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager) #Draw the strip choice being removed from our current outfit
+                    self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                     renpy.pause(delay)
                 else:
                     self.outfit.remove_clothing(strip_choice)
@@ -651,12 +651,12 @@ init -1 python:
             self.planned_uniform = None
             self.work_outfit = None
 
-        destination = self.schedule[time_of_day] #None destination means they have free time
+        destination = self.get_destination() #None destination means they have free time
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
             destination = None
 
         if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
-            if self.schedule[time_of_day] == self.work: #We're going to work.
+            if self.get_destination() == self.work: #We're going to work.
                 if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
                     self.wear_uniform()
                     self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
@@ -1021,7 +1021,8 @@ init -1 python:
     # attach to person object
     Person.change_willpower = change_willpower
 
-    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, from_scene = False): #Draw the person, standing as default if they aren't standing in any other position.
+    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, 
+        draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
         if position is None:
             position = self.idle_pose
 
@@ -1033,37 +1034,51 @@ init -1 python:
         elif the_animation is None:
             the_animation = self.idle_animation
 
-        if character_placement is None: # make sure we don't need to pass the position with each draw
-            character_placement = character_right
+        if display_transform is None:
+            display_transform = character_right
 
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        if not from_scene:
-            renpy.scene("Active")
+        at_arguments = [display_transform, scale_person(self.height)]
+        if extra_at_arguments:
+            if isinstance(extra_at_arguments, list):
+                at_arguments.extend(extra_at_arguments)
+            else:
+                at_arguments.append(extra_at_arguments)
+        else:
+            extra_at_arguments = []
+
+        if display_zorder is None:
+            display_zorder = 0
+
+        character_tag = str(self.character_number)
+
+        self.draw_number[draw_layer] += 1
+        self.hide_person()
+        if wipe_scene:
+            clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        final_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-        renpy.show(self.name + self.last_name,at_list=[character_placement, scale_person(self.height)],layer="Active",what=final_image,tag=self.name + self.last_name)
+        character_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+        renpy.show(character_tag, at_list=at_arguments, layer=draw_layer, what=character_image, tag=character_tag)
 
         if the_animation:
-            global person_being_drawn
-            person_being_drawn = self
-
-            global current_draw_number
-            current_draw_number += 1
+            global global_draw_number
+            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
 
             global prepared_animation_arguments
-            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number] #Effectively these are being stored and passed to draw_person_animation once take_animation_screenshot returns the surface
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render, position, emotion, special_modifier, lighting, background_fill, current_draw_number) #This thread prepares the render. When it is finished it is caught by the interact_callback function take_animation_screenshot
+            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder] #Effectively these are being stored and passed to draw_person_animation once take_animation_screenshot returns the surface
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render, position, emotion, special_modifier, lighting, background_fill, animation_draw_number, draw_layer) #This thread prepares the render. When it is finished it is caught by the interact_callback function take_animation_screenshot
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
     # add location to store original personality
     Person.original_personality = None
 
-    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, character_placement = None, scene_manager = None, show_person_info = False, half_off_instead = False): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, show_person_info = True, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, half_off_instead = False,
+        draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
         #Note: this function includes a call to remove_clothing, it is not needed seperately.
         if position is None:
             position = self.idle_pose
@@ -1074,13 +1089,32 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
-        if character_placement is None: # make sure we don't need to pass the position with each draw
-            character_placement = character_right
-
         if not can_use_animation():
             the_animation = None
         elif the_animation is None:
             the_animation = self.idle_animation
+
+        global draw_layers
+        if draw_layer not in draw_layers:
+            add_draw_layer(draw_layer)
+
+        if display_transform is None: # make sure we don't need to pass the position with each draw
+            display_transform = character_right
+
+        at_arguments = [display_transform, scale_person(self.height)]
+        if extra_at_arguments:
+            if isinstance(extra_at_arguments, list):
+                at_arguments.extend(extra_at_arguments)
+            else:
+                at_arguments.append(extra_at_arguments)
+        else:
+            extra_at_arguments = []
+
+        self.draw_number[draw_layer] += 1
+
+        if display_zorder is None:
+            display_zorder = 0
+
 
         if the_animation:
             # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
@@ -1114,8 +1148,10 @@ init -1 python:
             renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
 
         else:
-            renpy.scene("Active") # clear layer for new draw action
-            if scene_manager is None:
+            if wipe_scene:
+                clear_scene()
+
+            if scene_manager is None and show_person_info:
                 renpy.show_screen("person_info_ui",self)
             else:   # when we are called from the scene manager we have to draw the other characters
                 scene_manager.draw_scene_without(self)
@@ -1135,8 +1171,10 @@ init -1 python:
                     self.outfit.remove_clothing(the_clothing) #Remove the clothing
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
-            renpy.show(self.name+self.last_name+"_new", at_list=[character_placement, scale_person(self.height)], layer = "Active", what = top_displayable, tag = self.name + self.last_name +"_new")
-            renpy.show(self.name+self.last_name+"_old", at_list=[character_placement, scale_person(self.height), clothing_fade], layer = "Active", what = bottom_displayable, tag = self.name + self.last_name +"_old")
+            self.hide_person()
+            character_tag = str(self.character_number)
+            renpy.show(character_tag, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = character_tag)
+            renpy.show(character_tag + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = character_tag + "_extra") #Blend from old to new.
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced

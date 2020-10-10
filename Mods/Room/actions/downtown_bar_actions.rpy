@@ -32,7 +32,7 @@ label downtown_bar_drink_label():
 
         python: # release variables
             new_person.remove_person_from_game()
-            renpy.scene("Active")
+            clear_scene()
             del new_person
 
         return # Where to go if you hit "Back".

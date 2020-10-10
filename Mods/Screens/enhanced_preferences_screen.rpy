@@ -50,11 +50,11 @@ init 2: # Add some additional
                             textbutton "Enable" action SetField(persistent, "vren_animation", True)
                             textbutton "Disable" action SetField(persistent, "vren_animation", False)
 
-                        vbox:
-                            style_prefix "radio"
-                            label "Animation Scaling"
-                            textbutton "1.0" action SetField(persistent, "vren_mac_scale", 1.0)
-                            textbutton "2.0" action SetField(persistent, "vren_mac_scale", 2.0)
+                        # vbox:
+                        #     style_prefix "radio"
+                        #     label "Animation Scaling"
+                        #     textbutton "1.0" action SetField(persistent, "vren_mac_scale", 1.0)
+                        #     textbutton "2.0" action SetField(persistent, "vren_mac_scale", 2.0)
 
                     vbox:
                         style_prefix "check"

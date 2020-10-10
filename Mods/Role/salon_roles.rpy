@@ -594,7 +594,7 @@ label ophelia_revenge_date_label():
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     "You continue to wait for a few moments. You hear someone walk up behind you in line. At first, you pay the person no attention, but then you feel a tap on your shoulder."
     "You turn to the person."
-    $ scene_manager.add_actor(candace, character_placement = character_left_flipped)
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped)
     candace.char "Hi! Sorry, I'm meeting someone here, could you please take me to my table?"
     "At first you just stand there dumbfounded. Jesus this woman is stacked."
     mc.name "I umm, don't work here. I'm waiting for a table also."
@@ -639,7 +639,7 @@ label ophelia_revenge_date_label():
     "You sit down across from her. She is looking around the room. After a minute she spots her ex and points him out."
     the_person.char "There they are! Over there..."
     "You look in the direction that [the_person.title] is indicating."
-    $ scene_manager.add_actor(candace, character_placement = character_left_flipped_distant, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
     "Sure enough, her ex is sitting across from the woman you ran into earlier."
     "She must be incredible in bed, for him to be with her instead of [the_person.title], with the mental disadvatages she has."
     the_person.char "Alright, let's just play it cool for now. I'm sure he'll notice us eventually."
@@ -652,12 +652,12 @@ label ophelia_revenge_date_label():
     $ scene_manager.remove_actor(candace, reset_actor = False)
     the_person.char "Okay... I guess it's now or never... I'm gonna go talk to him!"
     "[the_person.title] gets up and walks towards the bathroom, but then stops next to her ex's table, pretending to be surprised to see him."
-    $ scene_manager.update_actor(the_person, character_placement = character_left_flipped_distant, position = "walking_away")
+    $ scene_manager.update_actor(the_person, display_transform = character_left_flipped_distant, position = "walking_away")
     the_person.char "[ex_name]! Oh I just noticed you there..."
     "You zone out a bit. Maybe it is the half a bottle of wine getting to you? Or you decide to just let their conversation be private."
     "Damn, that [candace.title] though. What you wouldn't give to get your hands on those tits..."
     "You spend some time daydreaming... how long? You aren't sure, but are quickly snapped back to attention when [the_person.title] sits down across from you."
-    $ scene_manager.update_actor(the_person, character_placement = character_right, position = "sitting", emotion = "angry")
+    $ scene_manager.update_actor(the_person, display_transform = character_right, position = "sitting", emotion = "angry")
     "From the look on her face, you can guess how the conversation went."
     mc.name "Hey... you okay?"
     "You see a small tear at the corner of her eye."
@@ -668,10 +668,10 @@ label ophelia_revenge_date_label():
     the_person.char "I tried to reason with him... but I started getting mad! That airhead isn't anyone's type! He's just dating her for the sex..."
     "No shit."
     the_person.char "I don't know... I just can't believe it..."
-    $ scene_manager.add_actor(candace, character_placement = character_left_flipped_distant, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
     "You notice the aforementioned airhead return from the restroom. You can see that dessert has just arrived at the other table."
     "You see [ex_name] lean across the table and whisper something into [candace.title]'s ear. She gets a big smile and nods. You wonder what is going on over there..."
-    $ scene_manager.update_actor(candace, position = "blowjob", character_placement = character_left_flipped_distant)
+    $ scene_manager.update_actor(candace, position = "blowjob", display_transform = character_left_flipped_distant)
     "You watch as [candace.title] gets down on her knees, then lifts the tablecloth up and disappears under it."
     $ scene_manager.remove_actor(candace, reset_actor = False)
     "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, inches over towards [ex_name]."
@@ -687,7 +687,7 @@ label ophelia_revenge_date_label():
     "While you imagined their previous conversation as a likely outcome of tonight's event, you would not have expected for them to do something so brazenly sexual in public."
     "For a moment, you consider alerting one of the staff to the current situation, but you decide against it. If that were you, you would appreciate the discretion, even if you don't agree with how [ex_name] used it against [the_person.title]."
     $ candace.cum_on_face()
-    $ scene_manager.add_actor(candace, character_placement = character_left_flipped_distant, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
     "You ask for the check. You decide to just go ahead and pick it up. As you are waiting, you notice the bimbo return to her seat. It is hard to tell from this distance, but assume the liquid on her face is cum."
     $ mc.business.change_funds(-200)
     $ scene_manager.remove_actor(candace)
@@ -977,7 +977,7 @@ label ophelia_choose_service_test_label():
     $ mc.change_location(mall_salon)
     $ mc.location.show_background()
     "You go with [the_person.title] over to the salon."
-    $ scene_manager.add_actor(salon_manager, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(salon_manager, display_transform = character_center_flipped)
     "[salon_manager.title] spots you as you walk in."
     salon_manager.char "Oh hey [salon_manager.mc_title]. What can I do for you?"
     mc.name "I brought you a customer, for that special service we talked about."

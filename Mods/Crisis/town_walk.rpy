@@ -140,5 +140,5 @@ label town_walk_crisis_action_label:
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        renpy.scene("Active")
+        clear_scene()
     return

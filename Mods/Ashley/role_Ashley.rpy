@@ -23,7 +23,7 @@ init 2 python:
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
 
-        ashley.set_schedule([0,1,2,3,4], stephanie.home)
+        ashley.set_schedule(stephanie.home, times = [0,1,2,3,4])
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
 
@@ -376,7 +376,7 @@ label ashley_classical_concert_date_label():
     $ mc.location.show_background()
     "Soon, you see the sisters."
     $ scene_manager.add_actor (the_person, position = "stand4", emotion = "happy")
-    $ scene_manager.add_actor(stephanie, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(stephanie, display_transform = character_center_flipped)
     stephanie.char "Oh hey, there's [stephanie.mc_title]. Don't worry I'm sure everything will be great."
     the_person.char "I know, I know... are you sure you don't want to go?"
     stephanie.char "Don't be silly, you've only got two tickets. You two will have a blast!"
@@ -436,7 +436,7 @@ label ashley_classical_concert_date_label():
     the_person.char "It was, and more. I really had a good time tonight."
     mc.name "Great! If you hear about another orchestra in town, I'd love to go again."
     the_person.char "I haven't heard anything, but I'll definitely keep it in mind. I'd like to do this again."
-    $ scene_manager.add_actor(stephanie, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(stephanie, display_transform = character_center_flipped)
     stephanie.char "Hey Ash! Hey [stephanie.mc_title]! How'd it go?"
     the_person.char "Steph! We had a great time. The performers were amazing..."
     stephanie.char "And I assume you were a perfect gentleman?"
@@ -632,7 +632,7 @@ label ashley_ask_about_porn_label(the_person):
     else:
         "You haven't finished, but [the_person.title] is still standing there with your dick in her hand."
     "Suddenly you hear your office doorknob click and the door start to open. You forgot to lock it!!!"
-    $ scene_manager.add_actor(stephanie, character_placement = character_left_flipped)
+    $ scene_manager.add_actor(stephanie, display_transform = character_left_flipped)
     stephanie.char "Hey [stephanie.mc_title] sorry to bug you but... oh fuck!"
     "It doesn't take [stephanie.title] long to survey the situation."
     stephanie.char "Holy shit, Ash! I didn't mean... I forgot to knock! Oh fuck!"

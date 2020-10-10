@@ -204,7 +204,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.apply_planned_outfit()
             $ scene_manager.draw_scene()
             "She grabs some cereal and sits at the table with you and [the_person.title]"
-            $ scene_manager.add_actor(lily, position = "sitting", character_placement = character_left_flipped)
+            $ scene_manager.add_actor(lily, position = "sitting", display_transform = character_left_flipped)
             lily.char "Good morning! Thanks for the coffee mom!"
             the_person.char "Good... Good morning dear..."
             "[lily.title] looks over at [the_person.title] with some concern."
@@ -276,7 +276,7 @@ label mom_breakfast_action_label_high():
                 mc.name "Me and mom are gonna have some fun, you should join us."
                 lily.char "Huh? Really!?! I'll be right there!"
                 "You walk back to the kitchen and [lily.title] quickly joins you."
-                $ scene_manager.add_actor(lily, character_placement = character_center)
+                $ scene_manager.add_actor(lily, display_transform = character_center)
                 if lily.outfit.full_access():
                     "Already basically ready to go, [lily.title] looks to you for direction."
                 else:
@@ -408,8 +408,8 @@ label mom_breakfast_action_mom_and_lily_label():
         "As you walk into the kitchen, you see your sister and your mom eating each other out on the breakfast table."
         $ the_person.strip_outfit(delay = 0)
         $ lily.strip_outfit(delay = 0)
-        $ scene_manager.add_actor(the_person, position = "missionary", character_placement = character_69_bottom)
-        $ scene_manager.add_actor(lily, position = "cowgirl", character_placement = character_69_on_top)
+        $ scene_manager.add_actor(the_person, position = "missionary", display_transform = character_69_bottom)
+        $ scene_manager.add_actor(lily, position = "cowgirl", display_transform = character_69_on_top)
 
         the_person.char "Oh yes baby, keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)
@@ -433,8 +433,8 @@ label mom_breakfast_action_mom_and_lily_label():
         "As you walk into the kitchen, you see your sister on her knees eating out your mom."
         $ the_person.strip_outfit(delay = 0)
         $ lily.strip_outfit(delay = 0)
-        $ scene_manager.add_actor(the_person, position = "missionary", character_placement = Threesome_doggy_deluxe_girl_one_transform)
-        $ scene_manager.add_actor(lily, position = "doggy", character_placement = Threesome_doggy_deluxe_girl_two_transform)
+        $ scene_manager.add_actor(the_person, position = "missionary", display_transform = Threesome_doggy_deluxe_girl_one_transform)
+        $ scene_manager.add_actor(lily, position = "doggy", display_transform = Threesome_doggy_deluxe_girl_two_transform)
 
         the_person.char "Oh yes baby, keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)

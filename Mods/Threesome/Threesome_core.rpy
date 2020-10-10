@@ -48,11 +48,11 @@ init -1 python:
         # requires the existence of a scene_manager with both actors
         def update_scene(self, person_one, person_two):
             if girl_swap_pos:
-                scene_manager.update_actor(person_two, position = self.position_one_tag, character_placement = self.p1_transform, z_order = self.p1_z_order)
-                scene_manager.update_actor(person_one, position = self.position_two_tag, character_placement = self.p2_transform, z_order = self.p2_z_order)
+                scene_manager.update_actor(person_two, position = self.position_one_tag, display_transform = self.p1_transform, z_order = self.p1_z_order)
+                scene_manager.update_actor(person_one, position = self.position_two_tag, display_transform = self.p2_transform, z_order = self.p2_z_order)
             else:
-                scene_manager.update_actor(person_one, position = self.position_one_tag, character_placement = self.p1_transform, z_order = self.p1_z_order)
-                scene_manager.update_actor(person_two, position = self.position_two_tag, character_placement = self.p2_transform, z_order = self.p2_z_order)
+                scene_manager.update_actor(person_one, position = self.position_one_tag, display_transform = self.p1_transform, z_order = self.p1_z_order)
+                scene_manager.update_actor(person_two, position = self.position_two_tag, display_transform = self.p2_transform, z_order = self.p2_z_order)
             scene_manager.draw_scene()
             return
 
@@ -208,7 +208,7 @@ init -1 python:
 label threesome_test():
     $ scene_manager = Scene()
     $ scene_manager.add_actor(mom)
-    $ scene_manager.add_actor(lily, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
     $ scene_manager.strip_actor_outfit(mom)
     $ scene_manager.strip_actor_outfit(lily)
     call start_threesome(mom, lily) from threesome_test_call_1
@@ -488,7 +488,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 $ scene_manager.remove_actor(the_person_one, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
                                 call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
-                                $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
+                                $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
                                 $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
                             "Done for now":
@@ -510,7 +510,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 $ scene_manager.remove_actor(the_person_two, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
                                 call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
-                                $ scene_manager.add_actor(the_person_two, character_placement = character_center_flipped)
+                                $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
                                 $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet

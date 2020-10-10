@@ -47,7 +47,7 @@ label select_person_for_gym_response(the_person):
         $ the_person.draw_person(emotion = "sad")
         the_person.char "I'm not in the mood for gym session, right now."
         $ the_person.change_obedience(-2)
-        $renpy.scene("Active")
+        $ clear_scene()
         return
 
     if the_person.personality == bimbo_personality:

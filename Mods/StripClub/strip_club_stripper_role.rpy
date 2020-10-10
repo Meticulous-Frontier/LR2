@@ -27,10 +27,10 @@ init 5 python:
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
         if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule([4], work_location)
+            person.set_schedule(work_location, times = [4])
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule([3, 4], work_location)
+            person.set_schedule(work_location, times = [3, 4])
 
         person.event_triggers_dict["stripclub_hire_day"] = day
         person.stripper_salary = calculate_stripper_salary(person)
@@ -55,10 +55,10 @@ init 5 python:
         person.remove_role(role)
         # restore default schedules
         if person.is_employee() or person in [lily, mom, aunt, nora]:
-            person.set_schedule([4], person.home)
+            person.set_schedule(person.home, times = [4])
         else:
-            person.set_schedule([0, 4], person.home)
-            person.set_schedule([1, 2, 3], None)
+            person.set_schedule(person.home, times = [0, 4])
+            person.set_schedule(None, times = [1, 2, 3])
 
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)

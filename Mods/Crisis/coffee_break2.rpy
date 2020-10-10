@@ -34,8 +34,8 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     python:
         office.show_background()
         scene_manager = Scene()
-        scene_manager.add_actor(person_one, emotion="default", character_placement = character_left_flipped)
-        scene_manager.add_actor(person_two, emotion="default", character_placement = character_center_flipped)
+        scene_manager.add_actor(person_one, emotion="default", display_transform = character_left_flipped)
+        scene_manager.add_actor(person_two, emotion="default", display_transform = character_center_flipped)
         scene_manager.add_actor(person_three, emotion="default")
         scene_manager.draw_scene()
 
@@ -116,10 +116,10 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 $ scene_manager.update_actor(loser, position = "walking_away")
                 if winner_one.effective_sluttiness() > 60 and winner_two.effective_sluttiness() > 60:
                     "You follow [loser.possessive_title] as she takes the delivery to the break room."
-                    $ scene_manager.update_actor(loser, character_placement = character_center_flipped)
+                    $ scene_manager.update_actor(loser, display_transform = character_center_flipped)
                     "She steps into the break room and sets the food on the table."
                     loser.char "Lunch is here!"
-                    $ scene_manager.add_actor(winner_one, emotion="happy", character_placement = character_left_flipped)
+                    $ scene_manager.add_actor(winner_one, emotion="happy", display_transform = character_left_flipped)
                     $ scene_manager.add_actor(winner_two, emotion="happy")
                     if persistent.show_ntr:
                         "You enter the room and see [winner_one.title] and [winner_two.title] waiting. They see you enter the room and fall silent."

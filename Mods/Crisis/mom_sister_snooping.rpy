@@ -28,7 +28,7 @@ label mom_sister_snooping_action_label():
     "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peak."
     $ scene_manager = Scene()
     if mom.sluttiness < 20 and lily.sluttiness < 20:
-        $ scene_manager.add_actor(mom, character_placement = character_center_flipped)
+        $ scene_manager.add_actor(mom, display_transform = character_center_flipped)
         $ scene_manager.add_actor(lily, position = "sitting")
         "[lily.title] is sitting on her bed while [mom.possessive_title] talks with her."
         "It seems like they are having a pretty lively conversation."
@@ -47,7 +47,7 @@ label mom_sister_snooping_action_label():
             "Wow, you didn't realize they talked about basically everything."
         "They keep talking, but you decide to keep headed to bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif mom.sluttiness < 50 and lily.sluttiness < 50 and mom.sluttiness >=20 and lily.sluttiness >= 20: #Both mid range sluttiness
-        $ scene_manager.add_actor(mom, character_placement = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
         "[lily.title] and [mom.title] are sitting on her bed while chatting."
         "It seems like they are having a pretty lively conversation."
@@ -66,7 +66,7 @@ label mom_sister_snooping_action_label():
             "Wow, you didn't realize they talked about sex in such detail with each other."
         "They keep talking, but you decide to keep headed to bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif mom.sluttiness >= 50 and lily.sluttiness >= 50 and not mc.business.event_triggers_dict.get("family_threesome", False) == True: #Both high slut but no threesome yet
-        $ scene_manager.add_actor(mom, character_placement = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
         "[lily.title] and [mom.title] are sitting on her bed while chatting."
         mom.char "Nonsense honey, they look great. They're young and perky, just like you!"
@@ -104,7 +104,7 @@ label mom_sister_snooping_action_label():
         $ lily.arousal = 40
         $ mom.apply_outfit(Outfit("Nude"), update_taboo = True)
         $ lily.apply_outfit(Outfit("Nude"), update_taboo = True)
-        $ scene_manager.add_actor(mom, character_placement = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
         $ Threesome_sixty_nine.update_scene(lily, mom)
         "When you peak around the corner, you see [mom.title] on top of [lily.title]. They are eating each other out."
@@ -120,15 +120,15 @@ label mom_sister_snooping_action_label():
         mom.char "Oh thank you honey. I really appreciate this."
         "You quickly get undressed, your cock springing free of its confines, and step toward [lily.title] and [mom.title]"
         call start_threesome(lily, mom, start_position = Threesome_sixty_nine, position_locked = False) from _mom_sister_snooping_threesome_01
-        $ scene_manager.update_actor(mom, character_placement = character_center_flipped, position = "missionary")
-        $ scene_manager.update_actor(lily, character_placement = character_right, position = "missionary")
+        $ scene_manager.update_actor(mom, display_transform = character_center_flipped, position = "missionary")
+        $ scene_manager.update_actor(lily, display_transform = character_right, position = "missionary")
         "When you finish, [mom.possessive_title] and your sister flop down on her bed next to each other."
         lily.char "Thanks [lily.mc_title]. I think I'm just gonna... go back to sleep for a little bit..."
         "As fun as it would be to join them, you decide to excuse yourself to get ready for the day."
         mc.name "No problem. You two take it easy, I'm gonna go shower."
     elif mom.sluttiness >= 20:
         $ lily.apply_university_outfit()
-        $ scene_manager.add_actor(mom, character_placement = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
         "You peak in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
         mom.char "I know, I know there's a uniform at the university, but that doesn't mean you can't express yourself a little!"
@@ -146,7 +146,7 @@ label mom_sister_snooping_action_label():
         "They keep talking, but you decide to keep headed to bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif lily.sluttiness >= 20:
         $ lily.apply_university_outfit()
-        $ scene_manager.add_actor(mom, character_placement = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
         "You peak in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
         mom.char "Isn't there a uniform at the university? That skirt seems a little short..."

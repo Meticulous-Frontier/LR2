@@ -61,7 +61,7 @@ init -1 python:
             div_func[target_division][0].append(person)
         person.add_role(employee_role)
         person.job = self.get_employee_title(person)
-        person.set_work([1,2,3], div_func[target_division][1])
+        person.set_work(div_func[target_division][1])
         self.update_employee_status(person)
         if add_to_location:
             div_func[target_division][1].add_person(person)

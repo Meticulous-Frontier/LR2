@@ -15,7 +15,7 @@ init 1 python:
 
     def SB_draw_two_person_scene(person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0, lighting = None): #Draw two people.
         #NOTE person two is always drawn second.
-        renpy.scene("Active")
+        clear_scene()
         renpy.show_screen("SB_two_person_info_ui", person_one, person_two)
         if one_position is None:
             one_position = person_one.idle_pose #Easiest change is to call this and get a random standing posture instead of a specific idle pose. We redraw fairly frequently so she will change position frequently.
@@ -31,7 +31,7 @@ init 1 python:
         transform_one.zoom = one_scale
 
         one_final_image = Flatten(person_one.build_person_displayable(one_position, one_emotion, one_special_modifier, lighting = lighting, background_fill = False))
-        renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="Active",what=one_final_image,tag=person_one.name)
+        renpy.show(person_one.name,at_list=[transform_one, scale_person(person_one.height)],layer="solo",what=one_final_image,tag=person_one.name)
 
         #Now do person two
 
@@ -46,7 +46,7 @@ init 1 python:
         transform_two.zoom = two_scale
 
         two_final_image = Flatten(person_two.build_person_displayable(two_position, two_emotion, two_special_modifier, lighting = lighting, background_fill = False))
-        renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="Active",what=two_final_image,tag=person_two.name)
+        renpy.show(person_two.name,at_list=[transform_two, scale_person(person_two.height)],layer="solo",what=two_final_image,tag=person_two.name)
         return
 
 label SB_threesome_setup_helper(): #This function is designed to help come up with number for threesome positions.
@@ -225,13 +225,13 @@ label SB_test_draw_scene_two():
 label trist_draw_69():
     python:
         scene_manager = Scene()
-        scene_manager.add_actor(lily, position = "missionary", character_placement = character_69_bottom, z_order = 0)
-        scene_manager.add_actor(mom, position = "cowgirl", character_placement = character_69_on_top, z_order = 1)
+        scene_manager.add_actor(lily, position = "missionary", display_transform = character_69_bottom, z_order = 0)
+        scene_manager.add_actor(mom, position = "cowgirl", display_transform = character_69_on_top, z_order = 1)
         scene_manager.draw_scene() # required for draw with z_order
     return
 
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.
-    layer "Active"
+    layer "solo"
     frame:
         background "gui/topbox.png"
         xsize 1100

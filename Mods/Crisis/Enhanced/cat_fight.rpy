@@ -29,7 +29,7 @@ label cat_fight_crisis_enhanced_label():
 
     person_one.char "Excuse me, [person_one.mc_title]?"
     $ scene_manager.add_actor(person_one, emotion = "angry")
-    $ scene_manager.add_actor(person_two, emotion = "angry", character_placement = character_center_flipped)
+    $ scene_manager.add_actor(person_two, emotion = "angry", display_transform = character_center_flipped)
     "You feel a tap on your back while you're working. [person_one.title] and [person_two.title] are glaring at each other while they wait to get your attention."
     person_one.char "I was just in the break room and saw [person_two.title] digging around in the fridge looking for other people's lunches."
     $ scene_manager.update_actor(person_two, position = "stand4")
@@ -303,8 +303,8 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_two, emotion="sad")
                 person_two.char "Understood sir, there won't be any more problems."
                 mc.name "Good to hear. Now get back to work."
-                $ scene_manager.update_actor(person_one, position = "walking_away", character_placement = character_right)
-                $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_center_flipped)
+                $ scene_manager.update_actor(person_one, position = "walking_away", display_transform = character_right)
+                $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
 
             $ town_relationships.improve_relationship(person_one, person_two)
 
