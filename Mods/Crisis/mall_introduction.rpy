@@ -87,9 +87,9 @@ label mall_introduction_action_label:
     if known_person.sluttiness > 20 or known_person.love > 20:
         if known_person.is_employee():
             if known_person.sluttiness > 40:
-                known_person.char "You should get to know him more intimately [stranger.name], you should apply for a position in his company."
+                known_person.char "You should get to know him more intimately [stranger.name], you should apply for a position in the company."
             else:
-                known_person.char "I promise you [stranger.name], he is a great boss, you should go out with him sometime."
+                known_person.char "I promise you [stranger.name], he is a great boss: you should go out with him sometime."
         else:
             if known_person.sluttiness > 40:
                 known_person.char "He can show you a really good time [stranger.name], if you know what i mean."
