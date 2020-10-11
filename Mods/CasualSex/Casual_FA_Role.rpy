@@ -320,8 +320,8 @@ init -1 python:
                 self.set_schedule(purgatory, times = [0, 1, 2, 3, 4])
             else:
                 self.home = downtown_hotel
-                self.set_schedule(downtown_bar, days = [4, 5] times = [2, 3])
-                self.set_schedule(downtown_hotel, days = [5, 6] times = [4])
+                self.set_schedule(downtown_bar, days = [4, 5], times = [2, 3])
+                self.set_schedule(downtown_hotel, days = [5, 6], times = [4])
             #TODO Find a way to cancel dates made.
             super(Casual_Flight_Attendant, self)
         pass
