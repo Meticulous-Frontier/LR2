@@ -242,7 +242,7 @@ init 1302 python:
         local_FA_personality.response_dict["hookup_accept"] = "FA_hookup_accept"
         the_person.personality = local_FA_personality
         the_person.event_triggers_dict["reject_position"] = "blowjob"
-        the_person.schedule[3] = downtown_bar
+        the_person.set_schedule(downtown_bar, days = [4, 5], times = [3])
 
         return
 
@@ -262,7 +262,6 @@ init 1302 python:
         else:
             the_person.personality = relaxed_personality  #Catch all for personalities#
 
-        the_person.schedule[2] = None    #Reset their schedule
-        the_person.schedule[3] = None
+        the_person.set_schedule(None, days = [4, 5], times = [3])
 
         return

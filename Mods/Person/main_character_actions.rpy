@@ -244,7 +244,7 @@ label mc_schedule_person_label(*args):
     if room_choice == "Back":
         return
     else:
-        $ person.schedule[time_slot] = room_choice
+        $ person.set_schedule(room_choice, times = [time_slot])
         $ renpy.say("", time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
         return
 

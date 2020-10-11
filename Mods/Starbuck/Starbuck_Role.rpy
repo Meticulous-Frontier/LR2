@@ -57,7 +57,8 @@ init 2 python:
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
-        starbuck.set_schedule(sex_store, times = [1, 2, 3])
+        starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
+        starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
 
         # Add a counter to the sex shop

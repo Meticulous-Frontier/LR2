@@ -107,7 +107,7 @@ init 2 python:
 
         candace.generate_home()
         candace.set_schedule(candace.home, times = [1,2])
-        candace.set_schedule(office_store, times = [3]) #Buying office supplies for her employer.
+        candace.set_schedule(office_store, times = [3], days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
         candace.event_triggers_dict["day_met"] = -1 #Might eventually change the code where candi gets INIT other than when you meet her, so leave this -1 for now

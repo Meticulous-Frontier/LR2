@@ -32,7 +32,7 @@ init 3 python:
             ])
 
         dawn.generate_home()
-        dawn.set_schedule(mall, times = [1,2,3])
+        dawn.set_schedule(mall, times = [1,2,3], days = [0, 1, 2, 3, 4])
         dawn.add_role(lifestyle_coach_role)
         dawn.home.add_person(dawn)
         dawn.event_triggers_dict["met"] = 0

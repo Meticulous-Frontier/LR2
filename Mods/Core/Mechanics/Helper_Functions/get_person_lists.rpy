@@ -16,7 +16,7 @@ init -1 python:
 
     def unique_characters_not_known(): # TODO The check should be standardized, but some people are vanilla, some are different modders or different 'style'.
         not_met_yet_list = []
-        if alexia.schedule[1] == alexia.home: # She'll be scheduled otherwise when met.
+        if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
         if ashley.event_triggers_dict.get("intro_complete", False) == False:
             not_met_yet_list.append(ashley)
@@ -32,15 +32,15 @@ init -1 python:
             not_met_yet_list.append(emily)
         if erica.event_triggers_dict.get("erica_progress", 0) == 0:
             not_met_yet_list.append(erica)
-        if cousin.schedule[1] == cousin.home: # She'll be scheduled otherwise when met.
+        if cousin.get_destination(specified_time = 1) == cousin.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(cousin)
-        if nora.schedule[1] == nora.home: # She'll be scheduled otherwise when met.
+        if nora.get_destination(specified_time = 1) == nora.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(nora)
         if salon_manager.mc_title == 'Stranger': #She'll call MC differently when met.
             not_met_yet_list.append(salon_manager)
-        if aunt.schedule[2] == aunt_bedroom: # She'll be scheduled otherwise when met.
+        if aunt.get_destination(specified_time = 2) == aunt_bedroom: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(aunt)
-        if sarah.schedule[1] == sarah.home: # She'll be scheduled otherwise when met.
+        if sarah.get_destination(specified_time = 1) == sarah.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(sarah)
         if starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
             not_met_yet_list.append(starbuck)
