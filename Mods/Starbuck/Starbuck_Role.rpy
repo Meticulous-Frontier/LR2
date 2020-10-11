@@ -178,8 +178,8 @@ init -1 python:
     def starbuck_sex_store_promo_three_requirement(the_person):
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
-                if starbuck.sluttiness > 60:
-                    if starbuck.love > 50:
+                if starbuck.sluttiness >= 60:
+                    if starbuck.love >= 50:
                         return True
                     else:
                         return "Requires: 50+ Love"
@@ -190,8 +190,8 @@ init -1 python:
     def starbuck_sex_store_promo_four_requirement(the_person):
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
-                if starbuck.sluttiness > 70:
-                    if starbuck.love > 60:
+                if starbuck.sluttiness >= 70:
+                    if starbuck.love >= 60:
                         return True
                     else:
                         return "Requires: 60+ Love"
@@ -202,8 +202,8 @@ init -1 python:
     def starbuck_sex_store_promo_five_requirement(the_person):
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:
-                if starbuck.sluttiness > 90:
-                    if starbuck.love > 70:
+                if starbuck.sluttiness >= 90:
+                    if starbuck.love >= 70:
                         return True
                     else:
                         return "Requires: 70+ Love"
