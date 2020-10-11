@@ -221,7 +221,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
     the_girl_1.char "I know it feels good, but don't forget you need to get me off too!"
     "[the_girl_1.possessive_title] reaches down and runs her hands through [the_girl_2.title]'s hair."
     if the_girl_1.is_dominant(): #She gets rough with her
-        "You watch as [the_girl_1.title] stop being gently and grasps [the_girl_2.possessive_title] by the hair."
+        "You watch as [the_girl_1.title] stop being gentle and grasps [the_girl_2.possessive_title] by the hair."
         "You slow your pace a bit and just watch. [the_girl_1.title] is starting to move her hips aggressively, humping [the_girl_2.possessive_title]'s face."
         the_girl_1.char "Mmmm, that's it. Atta girl!"
         $ the_girl_1.change_arousal(5)
