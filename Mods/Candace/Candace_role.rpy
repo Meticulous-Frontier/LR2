@@ -369,7 +369,7 @@ label candace_talk_about_pay(the_person):
         mc.name "I'm always on the lookout for talented employees. I think you would make a good employee. You interested? I promise you'll make a lot more than you are now!"
         $ candace_increase_doubt()
         if candace_get_ready_to_quit():
-            the_person.char "You know, I can't believe I'm saying this, but I've been seriously considering it!."
+            the_person.char "You know, I can't believe I'm saying this, but I've been seriously considering it!"
         else:
             the_person.char "Oh, I'm okay, I don't need the money. But I suppose it would be nice to have."
     else:
