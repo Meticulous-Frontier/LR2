@@ -114,7 +114,7 @@ init 2 python:
             item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
 
         clear_scene()
-        renpy.show_screen("person_info_ui", item.return_value)
+        # renpy.show_screen("person_info_ui", item.return_value)
         renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
         return
 
