@@ -22,57 +22,39 @@ init -2 python:
     build.classify("game/Mods/Core/Images/**.pdn", None)
 
     # include existing .rpa files
-    build.classify("**.rpa", "all")
+    build.classify("**.rpa", "renpy")
 
-    build.archive("background_images") #When building all mod background images are placed into an archive.
+    build.archive("background_images", "renpy") #When building all mod background images are placed into an archive.
     build.classify("game/Mods/Room/images/**.jpg", "background_images")
     build.classify("game/Mods/Room/images/**.png", "background_images")
 
-    build.archive("extra_character_images")
+    build.archive("extra_character_images", "renpy")
     build.classify("game/Mods/Core/Images/character_images/**.png", "extra_character_images")
 
-    build.archive("gui")
+    build.archive("gui", "renpy")
     build.classify("game/gui/**.png", "gui")
     build.classify("game/Mods/Core/Images/**.png", "gui")
 
-    build.archive("wardrobes")
+    build.archive("wardrobes", "renpy")
     build.classify("game/wardrobes/Exported_Wardrobe.xml", "all") # make sure exported wardrobe file is included (but not archived)
     build.classify("game/wardrobes/**.xml", "wardrobes")
     build.classify("game/Mods/Wardrobes/**.xml", "wardrobes")
 
-    build.archive("OpenGL")
+    build.archive("OpenGL", "renpy")
     build.classify("game/OpenGL/**.**", "OpenGL")
     build.classify("game/shader/**.**", "OpenGL")
 
-    build.archive("scripts")
+    build.archive("scripts", "renpy")
     build.classify("game/**.rpyc", "scripts") # put compiled game files into scripts.rpa
 
-    build.archive("fonts")
+    build.archive("fonts", "renpy")
     build.classify("game/**.ttf", "fonts")
     build.classify("game/**.otf", "fonts")
 
-    # extra classifications for images
-    build.archive("character_images_thin_body")
-    build.classify("game/images/character_images/thin_body/**.png", "character_images_thin_body")
-
-    build.archive("character_images_standard_body")
-    build.classify("game/images/character_images/standard_body/**.png", "character_images_standard_body")
-
-    build.archive("character_images_curvy_body")
-    build.classify("game/images/character_images/curvy_body/**.png", "character_images_curvy_body")
-
-    build.archive("character_images_standard_preg_body")
-    build.classify("game/images/character_images/standard_preg_body/**.png", "character_images_standard_preg_body")
-
-    build.archive("character_images")
-    build.classify("game/images/character_images/**.png", "character_images")
-
-    build.archive("tutorial_images")
+    build.archive("tutorial_images", "renpy")
     build.classify("game/images/**.png", "tutorial_images")
     build.classify("game/images/**.jpg", "tutorial_images")
     build.classify("game/Mods/Tutorial/**.png", "tutorial_images")
-
-
 
 
 init 2 python:
