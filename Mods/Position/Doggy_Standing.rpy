@@ -101,7 +101,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
                 "You give her plaint ass another swat, this time not quite as hard."
                 "Her ass quivers slightly as you spank her. Her pussy clenches around you each time you spank her."
             if mc.arousal > 70:
-                "[the_girl.possessive_title]'s' tight pussy feels so good. You are getting close to cumming."
+                "[the_girl.possessive_title]'s tight pussy feels so good. You are getting close to cumming."
                 mc.name "You feel amazing. You're gonna make me cum soon."
                 if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("bareback sex") > 0:
                     "[the_girl.possessive_title] looks back at you and smiles."
