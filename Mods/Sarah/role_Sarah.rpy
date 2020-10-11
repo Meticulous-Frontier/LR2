@@ -361,7 +361,7 @@ init -1 python:
         mc.business.mandatory_crises_list.append(Sarah_fertile_period_end)
 
     def add_hr_director_initial_hire_action(person):
-        HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person)
+        HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person, requirement_args = day)
         mc.business.mandatory_crises_list.append(HR_director_initial_hire_action)
 
     def get_sarah_date_outfit_one():
@@ -480,7 +480,6 @@ label Sarah_hire_label():
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
     $ add_hr_director_initial_hire_action(the_person)
-    $ set_HR_director_tag("business_HR_meeting_last_day", day) # used to make sure we meet the next day
     return
 
 label Sarah_third_wheel_label():

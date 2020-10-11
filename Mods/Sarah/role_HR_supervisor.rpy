@@ -106,10 +106,10 @@ init 5 python:
         return
 
 
-    def HR_director_initial_hire_requirement():
-        if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
-            return False
+    def HR_director_initial_hire_requirement(hire_day):
         if not mc.business.is_open_for_business():
+            return False
+        if day <= hire_day:
             return False
         if time_of_day != 1:
             return False
