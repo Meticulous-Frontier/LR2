@@ -57,11 +57,11 @@ init -2 python:
             if not actor is None:
                 actor.person.strip_outfit(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, display_transform = actor.display_transform, lighting = actor.lighting, position = actor.position, emotion = actor.emotion, delay = delay, scene_manager = self, wipe_scene = False)
 
-        def draw_animated_removal(self, person, the_clothing, lighting = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
+        def draw_animated_removal(self, person, the_clothing, lighting = None, half_off_instead = False): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
             actor = find_in_list(lambda x: x.person is person, self.actors)
             if not actor is None:
                 #mc.log_event("Remove clothing " + actor.person.title, "gray_float_text")
-                actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self)
+                actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = half_off_instead)
 
         def get_free_position_tuple(self):
             if find_in_list(lambda x: x.display_transform == character_right, self.actors) is None and find_in_list(lambda x: x.display_transform == character_right_flipped, self.actors) is None:
