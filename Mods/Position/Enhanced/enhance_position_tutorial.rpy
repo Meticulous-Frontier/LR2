@@ -56,7 +56,15 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ doggy.redraw_scene(the_girl)
                 "After you finish, you leave your cock deep inside her. A few drops of your cum start to drip out of her."
                 "[the_girl.title] reaches between her legs and feels it, realizing you just finished inside of her."
-                if the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
+                if the_girl.has_role(prostitute_role):
+                    if the_girl.on_birth_control:
+                        the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! I know I'm just a working girl, but you can't treat me like this."
+                    else:
+                        the_girl.char "What? You took the condom off? And then came inside me!?! Fuck, I could get pregnant, not all working girls take birth control, you asshole!"
+                    $ the_girl.change_happiness(-5)
+                    $ the_girl.change_obedience(3)
+                    $ the_girl.change_love(-5)          #She loses trust
+                elif the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
                     the_girl.char "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
                     if the_girl.on_birth_control:
