@@ -126,6 +126,10 @@ init 3 python:
         add_breed_me_collar_to_base_outfit(person)
         return
 
+    def reset_breeding_fetish(person):
+        person.special_role.remove (breeding_fetish_role)
+        person.add_role(breeding_fetish_role)
+
     def start_breeding_fetish_quest(the_person):
         #Determine who it is, then add the appropriate quest.
         if persistent.pregnancy_pref == 0:
