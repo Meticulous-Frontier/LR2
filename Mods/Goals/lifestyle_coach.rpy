@@ -7,10 +7,10 @@ init -1 python:
         return False
 
     def lifestyle_coach_review_goals_requirement(person):
-        if mc.location is mall:
+        if mc.business.is_open_for_business() and mc.location is mall:
             return True
         else:
-            return "Wait until she is working to ask about that!"
+            return "Only during work hours"
         return False
 
     lifestyle_coach_review_goals = Action("Review Goals", lifestyle_coach_review_goals_requirement, "lifestyle_coach_review_goals_label")
