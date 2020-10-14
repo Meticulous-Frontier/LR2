@@ -425,7 +425,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             person_two.char "I haven't had it in my mouth before, and I really want to. Would you let me suck you off?"
 
                     menu:
-                        "Let [person_one.title] give you a blowjob":
+                        "Let [person_two.title] give you a blowjob":
                             mc.name "I'm not about to say no to an offer like that."
                             $ scene_manager.update_actor(person_two, emotion = "happy")
                             if girlfriend_role in person_one.special_role or affair_role in person_one.special_role:
