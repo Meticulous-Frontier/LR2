@@ -43,7 +43,7 @@ init 2 python:
             renpy.say("Warning", "Something went wrong with setting the pregnancy for " + person.name + ", she is already giving birth.")
             return # she is already giving birth
 
-        person.event_triggers_dict["preg_old_schedule"] = person.schedule.copy()
+        person.event_triggers_dict["preg_old_schedule"] = copy.deepcopy(person.schedule)
         person.set_schedule(person.home, times = [0,1,2,3,4])
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
