@@ -50,7 +50,8 @@ init -2 python:
             actor = find_in_list(lambda x: x.person is person, self.actors)
             if not actor is None:
                 #mc.log_event("Strip " + actor.person.title, "gray_float_text")
-                actor.person.strip_outfit_to_max_sluttiness(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, narrator_messages = narrator_messages, display_transform = actor.display_transform, lighting = actor.lighting, temp_sluttiness_boost = temp_sluttiness_boost, position = actor.position, emotion = actor.emotion, scene_manager = self)
+                return actor.person.strip_outfit_to_max_sluttiness(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, narrator_messages = narrator_messages, display_transform = actor.display_transform, lighting = actor.lighting, temp_sluttiness_boost = temp_sluttiness_boost, position = actor.position, emotion = actor.emotion, scene_manager = self)
+            return False
 
         def strip_actor_outfit(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1):
             actor = find_in_list(lambda x: x.person is person, self.actors)
