@@ -70,6 +70,21 @@ init 2 python:
     def ashley_get_days_employed():
         return day - ashley.event_triggers_dict.get("employed_since", 9999)
 
+    def ashley_steph_relationship_status():  #This function should return limited options back, to summarize the current status of MC relationship with Steph and Ashley
+        if (ashley.sluttiness > 70 or ashley.is_girlfriend()) and (stephanie.sluttiness > 70 or stephanie.is_girlfriend()):
+            return "both"
+        elif ashley.is_girlfriend():
+            return "ashley"
+        elif stephanie.is_girlfriend():
+            return "stephanie"
+        elif ashley.love - stephanie.love < 20 and ashley.love - stephanie.love > -20:
+            return "both"
+        elif ashley.love > stephanie.love:
+            return "ashley"
+        elif ashley.love < stephanie.love:
+            return "stephanie"
+
+
 #Requirement Labels
 init -1 python:
     def ashley_intro_requirement():   #After discovering an obedience serum trait and there is a position available. must be at work
@@ -654,6 +669,82 @@ label ashley_ask_about_porn_label(the_person):
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
 
     $ scene_manager.clear_scene()
+    return
+
+label ashley_post_handjob_convo_label(the_person):
+    "You decide not to give [the_person.title] too much time to overthink what happened in your office. You swing by her desk."
+    $ the_person.draw_person()
+    mc.name "Hey [the_person.title]..."
+    the_person.char "Oh... haha yeah I figured something like this was coming... its okay I'll clean out my desk and be out before you know it..."
+    mc.name "Clean out your desk? I'm not firing you. Come on let's go get some coffee."
+    the_person.char "Oh, coffee? Ok, I'm right behind you..."
+    "[the_person.possessive_title] is blushing hard. It's kind of cute actually."
+    #TODO downtown background
+    "As you step out of the offce building, [the_person.title] is following along behind you. You give her a second to catch up so you can walk side by side."
+    "She's looking down at her feet. She's so shy, you can tell she is uncomfortable."
+    menu:
+        "Hold her hand" if the_person.love >= 20:
+            mc.name "Don't worry, [the_person.title]. I just wanted to get out of the office to chat about things. Also to limit the possibility of an interruption..."
+            "You reach your hand down and take her hand in yours. It startles her a little, but she quickly looks up at you."
+            mc.name "I've really been enjoying spending time with you."
+            the_person.char "Oh... that's... nice to hear. Thank you."
+            $ the_person.change_stats(love = 5, happiness = 5, obedience = 5)
+        "Hold her hand \n{color=#ff0000}{size=18}Requires 20 Love{/size}{/color} (disabled)" if the_person.love < 20:
+            pass
+        "Reassure her":
+            mc.name "Don't worry, [the_person.title]. I know we both need a chance to think about things, and I always find that coffee helps me think."
+            the_person.char "Yeah... I suppose a coffee would be good for that..."
+            $ the_person.change_stats(obedience = 10)
+        "Tell her it was hot" if the_person.sluttiness >= 20:
+            mc.name "Don't worry, [the_person.title]. I had a great time at the concert... and what happened in my office was fucking hot..."
+            "[the_person.possessive_title] looks up at you, a bit surprised by your comment."
+            the_person.char "Oh... I'm glad you think so..."
+            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+        "Tell her it was hot \n{color=#ff0000}{size=18}Requires 20 Sluttiness{/size}{/color} (disabled)" if the_person.sluttiness < 20:
+            pass
+    "You get to the coffee shop. You order a couple coffees and sit down in a booth across from [the_person.possessive_title]"
+    #TODO coffeeshop background
+    #TODO if Alexia still works here
+    $ the_person.draw_person(position = "sitting")
+    "You take a few sips of your coffee. Finally you break the silence."
+    mc.name "So... obviously working in an office with your sister, we shold be careful about what we do... around the office..."
+    "She takes a sip. She nods a bit, but doesn't yet chip in with her opinion."
+    mc.name "I mean... I would like for things to continue... Is that what you are thinking?"
+    "She takes a deep breath before speaking."
+    if ashley_steph_relationship_status() == "stephanie":
+        the_person.char "Well... I mean... we're sisters, so we talk about everything. Ever since you started the business up, she's been talking about you, almost non-stop..."
+        the_person.char "She definitely has a thing for you... it would be wrong for me to let you pursue anything further with me..."
+        mc.name "I understand that, but isn't what I want important too? I've known Stephanie for years, but I've only just recently met you."
+        the_person.char "I... I guess..."
+    elif ashley_steph_relationship_status() == "ashley":
+        the_person.char "Yeah... I mean, I guess this whole thing has just happened really fast, but I would be lying if I said it wasn't exciting me."
+        the_person.char "I'm just not sure what to tell Steph... she means the world to me, and I feel like she might've sort of had a thing for you, but I'm not sure."
+        mc.name "Yeah, that is something to consider."
+    else:
+        the_person.char "Honestly... I'm just really confused right now. Steph and I... we're sisters! She means the world to me and we talk about everything!"
+        the_person.char "Ever since you started this business thing up, she's been talking about you non-stop. I can tell she really likes you..."
+        the_person.char "But... I know we only just met... but I... errm..."
+        mc.name "Yes?"
+        "She sighs"
+        the_person.char "I guess... I kinda like you too..."
+        the_person.char "I know this is kinda weird but... I guess you'll just have to like... decide? Who do you want to be with more?"
+    "You consider your conversation carefully before deciding on how you want to proceed."
+    "WARNING: This decision will have lasting consequence on your relationships with [the_person.title] and [stephanie.title]!"
+    menu:
+        "I want to be with you":
+            pass
+        "Let's keep us secret":
+            pass
+        "I want both of you":
+            pass
+    "test"
+
+
+
+
+
+
+
     return
 
 
