@@ -17,9 +17,9 @@ init 2 python:
         return
 
     def silent_pregnant_transform_person(person):
-        # prevent duplicate transform
-        if person.body_type == "standard_preg_body":
-            return
+        if "pre_preg_body" in person.event_triggers_dict:
+            renpy.say("Warning", "Something went wrong with pregnancy transform for " + person.name + ", she is already transformed.")
+            return # already transformed
 
         person.event_triggers_dict["pre_preg_body"] = person.body_type
         person.body_type = "standard_preg_body"
@@ -39,7 +39,11 @@ init 2 python:
         return
 
     def silent_pregnant_finish_announce_person(person):
-        person.event_triggers_dict["preg_old_schedule"] = person.schedule.copy() #Take a shallow copy so we can change their current schedule to nothing
+        if "preg_old_schedule" in person.event_triggers_dict:
+            renpy.say("Warning", "Something went wrong with setting the pregnancy for " + person.name + ", she is already giving birth.")
+            return # she is already giving birth
+
+        person.event_triggers_dict["preg_old_schedule"] = person.schedule.copy()
         person.set_schedule(person.home, times = [0,1,2,3,4])
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
