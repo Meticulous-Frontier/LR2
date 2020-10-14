@@ -432,20 +432,21 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 person_one.char "I didn't think you would sweetheart."
                                 "[person_one.title] leans over your desk and gives you a kiss, then whispers in your ear."
                                 person_one.char "A little gift from me. You two have fun."
-                                $ scene_manager.update_actor(person_one, emotion = "walking_away")
+                                $ scene_manager.update_actor(person_one, position = "walking_away")
                                 "She smiles and steps out of the room, leaving you and [person_two.title] alone."
                                 $ scene_manager.remove_actor(person_one)
 
                             else:
                                 person_one.char "I didn't think you would. You two enjoy yourselves."
                                 "She gives [person_two.title] a smack on the ass as she leaves the room."
-                                $ scene_manager.update_actor(person_one, emotion = "walking_away")
+                                $ scene_manager.update_actor(person_one, position= "walking_away")
                                 person_one.char "Go get him girl."
                                 $ scene_manager.remove_actor(person_one)
 
                             $ scene_manager.clear_scene()
                             $ person_two.draw_person()
-                            call fuck_person(person_two, start_position = blowjob,  position_locked = True, affair_ask_after = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
+                            $ person_two.change_stats(arousal = 50)
+                            call fuck_person(person_two, start_position = blowjob, position_locked = True, self_strip = False, affair_ask_after = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
                             $ the_report = _return
                             if the_report.get("guy orgasms", 0) > 0:
                                 "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, seemingly proud of her work."
@@ -463,7 +464,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                         "Decline her offer":
                             mc.name "I'm flattered, but I'm not in the mood right now."
                             person_two.char "Of course, sorry I even brought it up [person_two.mc_title]!"
-                            $ scene_manager.update_actor(person_two, "walking_away")
+                            $ scene_manager.update_actor(person_two, position = "walking_away")
                             "She hurries out of your office. [person_one.title] shakes her head and sighs."
                             $ scene_manager.remove_actor(person_two)
                             $ scene_manager.update_actor(person_one, emotion = "angry")
