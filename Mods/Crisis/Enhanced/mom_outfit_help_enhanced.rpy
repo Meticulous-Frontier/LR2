@@ -254,7 +254,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ third_outfit = _return
             $ the_person.draw_person()
 
-            if third_outfit == "No Return":
+            if third_outfit == "No Return" or third_outfit == None:
                 "You try a few different combinations, but you can't come up with anything you think Mom will like."
                 mc.name "Sorry Mom, I thought I had an idea but I guess I was wrong."
                 the_person.char "That's fine [the_person.mc_title]. I think I'm going to go with the first one anyway."
@@ -336,6 +336,58 @@ label mom_outfit_help_crisis_label_enhanced():
 
     the_person.char "Thank you so much for the help [the_person.mc_title]. I don't know why but I've been feeling much more unsure about the way I dress lately."
     mc.name "Any time, I'm just glad to help."
+    if the_person.sluttiness > 50:
+        the_person.char "Is there any I could show you how thankful I am? You are such a helpful son..."
+        if mc.energy < 50:
+            mc.name "I'm sure you could think of something, but honestly I'm exhausted. I think I'll just head for bed."
+            the_person.char "Of course honey. Have a good night!"
+        else:
+            mc.name "I don't know [the_person.title]. Did you have anthing in mind?"
+            the_person.char "Oh, I wouldn't say I have something specific..."
+            "[the_person.possessive_title] starts to take off her outfit. Saving her clothes for tomorrow you guess?"
+            $ the_person.strip_outfit(exclude_lower = True)
+            if the_person.sluttiness < 70: #Mid sluttiness path.
+                "With her tits out, she starts to walk over to you."
+                the_person.char "I'm it was hard for you... to watch your mother undress like that... right in front of you..."
+                $ the_person.draw_person(position = "kissing")
+                "She wraps her arms around you. The heat coming from her chest radiates against you. It feels great."
+                "You pull her close as your embrace. Your erection is now rubbing up against her belly..."
+                the_person.char "Oh my... you feel so hard. Why don't you let your mother take care of that for you?"
+                "Slowly, [the_person.possessive_title] slides down to her knees. She pulls your zipper down and takes your cock out."
+                $ the_person.draw_person(position = "blowjob")
+                the_person.char "You have become such a virile young man..."
+                if the_person.get_opinion_score("giving blowjobs") > the_person.get_opinion_score("giving tit fucks"):
+                    "[the_person.possessive_title]'s lips part and she runs the tip of your cock back and forth across her tongue."
+                    if the_person.has_taboo("sucking_cock"):
+                        the_person.char "Oh my god... I just can't stop myself. I'm sorry honey, I know I should be doing this..."
+                        the_person.char "I'll stop if you want me too. You probably think I'm crazy!"
+                        mc.name "I don't think your crazy. This is a great way to say thank you. I can't believe I'm so lucky."
+                        the_person.char "I'm glad to hear that... I just... need to taste it!!!"
+                        $ the_person.break_taboo("sucking_cock")
+                    "Suddenly, she opens a bit wider and takes your cock into her mouth. Your hands run through her hair as her head starts to bob up and down."
+                    call fuck_person(the_person, start_position = blowjob, skip_intro = True, position_locked = True) from _mom_changing_thanks_hijack_01
+
+                else:
+                    "You watch in amazement as she wraps your cock between her tits, you erection now enveloped in her creamy cleavage."
+                    if the_person.has_taboo("touching_body"):
+                        the_person.char "Oh my god... its so hot... I just want to make it feel good!"
+                        the_person.char "I'll stop if you want me too. You probably think I'm crazy!"
+                        mc.name "I don't think your crazy. This is a great way to say thank you. I can't believe I'm so lucky."
+                        the_person.char "I'm glad to hear that... I just... want to feel it blow all over me!"
+                        $ the_person.break_taboo("touching_body")
+                    "[the_person.possessive_title] slowly starts to rock her body up and down, stroking your cock with her tits."
+                    call fuck_person(the_person, start_position = tit_fuck, skip_intro = True, position_locked = True) from _mom_changing_thanks_hijack_02
+                mc.name "That was nice... if you ever need any more outfit advice, let me know!"
+            else:
+                the_person.char "I mean... you are such a virile young man... maybe you could think of some way I could thank you..."
+                "[the_person.possessive_title] turns around and bends over as she starts to take off what is left over her outfit. She takes her time..."
+                $ the_person.strip_outfit(position = "standing_doggy")
+                "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
+                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]"
+                call fuck_person(the_person, start_position = SB_doggy_standing, position_locked = True) from _mom_changing_thanks_hijack_03
+                "When you finish up, you put your dick away."
+                mc.name "That was nice... if you ever need any more outfit advice, let me know!"
+
     "You leave [the_person.possessive_title] in her room as she starts to pack her clothes away."
 
     python:

@@ -11,13 +11,24 @@ label breeding_mom_enhanced_label(the_person):
     $ the_person.draw_person(position = "sitting")
     $ the_person.update_outfit_taboos()
     "You walk into [the_person.title]'s room and find her sitting on the edge of her bed, dressed sexy without any panties."
-    the_person.char "[the_person.mc_title], close the door, please. I have something I need to ask you."
-    "You close the door to [the_person.possessive_title]'s bedroom and walk over to her bed."
-    "She pats the bed beside her and you sit down."
-    the_person.char "I've been thinking a lot about this. You're all grown up and [lily.title] isn't far behind."
-    the_person.char "Soon you'll both be leaving home, but I don't think I'm done being a mother yet."
-    "She takes your hands in hers and looks passionately into your eyes."
-    the_person.char "I want you to give me a child. I want you to breed me."
+    if the_person.has_breeding_fetish():
+        if the_person.knows_pregnant():
+            "She is idly rubbing her belly. Your seed has already taken root there and a baby is growing."
+            the_person.char "I was just thinking about... you know... the night where you knocked me up..."
+            the_person.char "Do you want to re-enact it? It would be nice..."
+        elif the_person.is_highly_fertile():
+            the_person.char "Why don't you come here? I was just getting ready to come find you..."
+            "She lowers her voice a bit."
+            the_person.char "I'm pretty sure I'm fertile right now... and you know how bad I've been wanting you to knock me up!"
+        return
+    else:
+        the_person.char "[the_person.mc_title], close the door, please. I have something I need to ask you."
+        "You close the door to [the_person.possessive_title]'s bedroom and walk over to her bed."
+        "She pats the bed beside her and you sit down."
+        the_person.char "I've been thinking a lot about this. You're all grown up and [lily.title] isn't far behind."
+        the_person.char "Soon you'll both be leaving home, but I don't think I'm done being a mother yet."
+        "She takes your hands in hers and looks passionately into your eyes."
+        the_person.char "I want you to give me a child. I want you to breed me."
 
     if the_person.has_large_tits():
         "Her face is flush and her breathing rapid. Her large breasts heave up and down."
