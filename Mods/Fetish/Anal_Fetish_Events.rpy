@@ -1083,7 +1083,7 @@ label SB_starbuck_anal_swing_demo(the_person):
     the_person.char "That sounds great!"
     $ in_private = True
     #TODO determine if there are people here
-    if __builtin__.len(mc.location.people) > 1: #If Starbuck is not the only girl
+    if mc.location.get_person_count() > 1: #If Starbuck is not the only girl
         the_person.char "I've got an idea! I've got a few customers in here... want to do a demonstration for anyone who wants to attend?"
         "You consider her proposition carefully."
         menu:

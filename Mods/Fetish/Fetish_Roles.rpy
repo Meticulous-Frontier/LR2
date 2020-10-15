@@ -32,7 +32,7 @@ init -1 python:
             return
         if not mc.location is lily_bedroom:
             return "Must be in Lily's bedroom"
-        elif __builtin__.len(lily_bedroom.people) > 1:
+        elif lily_bedroom.get_person_count() > 1:
             return "Must be alone with Lily"
         elif mc.energy > 30:
             return True

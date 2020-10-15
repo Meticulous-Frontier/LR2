@@ -25,7 +25,7 @@ init -1 python:
 
     def breeding_fetish_lily_intro_requirement(the_person):
         if lily.location() == lily.home:
-            if len(lily_bedroom.people) == 1:
+            if lily_bedroom.get_person_count() == 1:
                 return True
         return False
 
@@ -908,9 +908,9 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             the_person.char "I was thinking like, maybe we could do that! Take a video of you cumming inside me and knocking me up!"
             mc.name "You want me to get you pregnant?"
             the_person.char "Fuck yeah! That's like, so hot! And can you imagine having that on video? Holy fuck!"
-        "Lately, you've been slipping her serums to increase her drive to reproduce. Unsurpisingly, it sounds like she has developed a breeding fetish."
+        "Lately, you've been slipping her serums to increase her drive to reproduce. Unsurprisingly, it sounds like she has developed a breeding fetish."
         mc.name "Okay. I'll give you my cum. Now turn around, I'm going to take you over your desk."
-        if len(mc.location.people) == 1:
+        if mc.location.get_person_count() == 1:
             "You look around the room, but no one else is around to record it, so you set up your phone to record and prop it up on a nearby desk as best you can."
         else:
             python:

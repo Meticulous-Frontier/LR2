@@ -75,7 +75,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     mc.name "Okay girls, if we haven't met before, do a quick introduction and then start stripping. Let's get the music started, and show me your best! Who wants to go first?"
 
     # loop remaining strippers and hire
-    while __builtin__.len(mc.location.people) > 0:
+    while mc.location.get_person_count() > 0:
         $ the_person = get_random_from_list(mc.location.people)
         $ the_person.stripper_salary = calculate_stripper_salary(the_person)
         call strip_club_evaluate_stripper(the_person) from _call_strip_club_evaluate_stripper_selection

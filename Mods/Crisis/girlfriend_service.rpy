@@ -35,7 +35,7 @@ label girlfriend_service_label():
         the_person.char "There are so many girls here. Just wanted to make sure you aren't getting to tempted."
         "She starts to rub your crotch through your pants."
         the_person.char "I was thinking, I could take care of you... right here..."
-        if len(mc.location.people) > 1 or (len(mc.location.people) == 1 and the_person != mc.location.people[0]):
+        if mc.location.get_person_count() > 1 or (mc.location.get_person_count() == 1 and the_person != mc.location.people[0]):
             "You glance around. Some of your employees are already starting to notice what is going on."
         else:
             "You glance around. You are the only two people around..."
@@ -95,7 +95,7 @@ label girlfriend_service_label():
                 call get_fucked(the_person, private = True) from _girlfriend_service_initiate_03
                 $ the_person.change_stats (happiness = 5, slut_temp = 5)
             "Service me here" if mc.energy >= 50:
-                if not mc.location.people or (len(mc.location.people) == 1 and the_person == mc.location.people[0]):
+                if not mc.location.people or (mc.location.get_person_count() == 1 and the_person == mc.location.people[0]):
                     "Looking around, [the_person.title] realizes you two are the only two people around."
                     the_person.char "Okay, let's do it right here!"
                     "[the_person.possessive_title] moves toward you."
