@@ -348,7 +348,7 @@ label mom_outfit_help_crisis_label_enhanced():
             $ the_person.strip_outfit(exclude_lower = True)
             if the_person.sluttiness < 70: #Mid sluttiness path.
                 "With her tits out, she starts to walk over to you."
-                the_person.char "I'm it was hard for you... to watch your mother undress like that... right in front of you..."
+                the_person.char "I'm sure it was hard for you... to watch your mother undress like that... right in front of you..."
                 $ the_person.draw_person(position = "kissing")
                 "She wraps her arms around you. The heat coming from her chest radiates against you. It feels great."
                 "You pull her close as your embrace. Your erection is now rubbing up against her belly..."
