@@ -36,6 +36,7 @@ init 2 python:
         ashley.event_triggers_dict["concert_date"] = 0   #0 = not started, 1 = date arranged, 2 = date complete
         ashley.event_triggers_dict["porn_convo_day"] = 9999
         ashley.event_triggers_dict["porn_convo_avail"] = False
+        ashley.event_triggers_dict["story_path"] = None
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -731,11 +732,27 @@ label ashley_post_handjob_convo_label(the_person):
     "You consider your conversation carefully before deciding on how you want to proceed."
     "WARNING: This decision will have lasting consequence on your relationships with [the_person.title] and [stephanie.title]!"
     menu:
-        "I want to be with you":
+        "I want to be with you" if (ashley_steph_relationship_status() == "ashley" or ashley.love > 30):
             pass
-        "Let's keep us secret":
-            pass
-        "I want both of you":
+        "Let's keep us secret" if (ashley_steph_relationship_status() == "stephanie" or ashley.sluttiness > 30):
+            mc.name "I think I know what to do, where we can all be happy."
+            the_person.char "Oh?"
+            mc.name "Alright, let me explain the whole thing before you make up your mind. What if we keep things between us strictly physical, and don't tell [stephanie.title]?"
+            the_person.char "Errrm... you want to do what now?"
+            $ the_person.change_stats(love = -5, happiness = -5, obedience = 5)
+            mc.name "Look, [stephanie.title] was the one in the first place that told me to ask you out. She wants you to be happy, and I think she knows you're going through a dry spell."
+            mc.name "I'll help take care of your phsical needs... then if you happen to find another guy or if things with your sister don't work out..."
+            the_person.char "I don't know... I'm not sure I'll be able to lie to her about this..."
+            mc.name "You don't have to lie about it, just don't talk about it. It'll be just like friends with benefits... but just between you and me."
+            "She is struggling with the idea a bit, but finally makes up her mind."
+            the_person.char "I guess we could try... but if it gets weird, I'm out, okay?"
+            mc.name "Okay."
+            the_person.char "And you have to go talk to her about what happened... you know... in your office..."
+            mc.name "I'm sure I can handle that."
+            "She bites her lip."
+            the_person.char "Okay... let's get it a shot."
+            $ the_person.event_triggers_dict["story_path"] = "secret"
+        "I want both of you" if (ashley_steph_relationship_status() == "both" or mc.charisma > 4):
             pass
     "test"
 
@@ -776,3 +793,21 @@ init 3 python:
 
     def ashley_get_porn_convo_avail():
         return ashley.event_triggers_dict.get("porn_convo_avail", False)
+
+    def ashley_get_story_path():
+        return ashley.event_triggers_dict.get("story_path", None)
+
+    def ashley_is_secret_path():
+        if ashley.event_triggers_dict.get("story_path", None) == "secret":
+            return True
+        return False
+
+    def ashley_is_harem_path():
+        if ashley.event_triggers_dict.get("story_path", None) == "harem":
+            return True
+        return False
+
+    def ashley_is_normal_path():
+        if ashley.event_triggers_dict.get("story_path", None) == "normal":
+            return True
+        return False
