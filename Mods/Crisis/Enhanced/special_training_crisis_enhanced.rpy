@@ -13,7 +13,7 @@ init 2 python:
         return [work_seminar]
 
     def return_from_seminar_action_requirement():
-        return mc.is_at_work()
+        return mc.business.is_open_for_business() and mc.is_at_work()
 
     def add_return_from_seminar_action(person):
         return_from_seminar_action = Action("Return From Seminar Thank You",return_from_seminar_action_requirement,"return_from_seminar_action_label", args = person)
