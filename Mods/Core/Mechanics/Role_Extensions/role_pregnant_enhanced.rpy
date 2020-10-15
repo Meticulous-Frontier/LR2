@@ -38,12 +38,20 @@ init 2 python:
         mc.business.mandatory_crises_list.append(preg_finish_announce_action)
         return
 
+    def clone_schedule(person):
+        schedule = {}
+        for day in range(0, 7):
+            schedule[day] = {}
+            for tod in range(0, 5):
+                schedule[day][tod] = person.schedule[day][tod]
+        return schedule
+
     def silent_pregnant_finish_announce_person(person):
         if "preg_old_schedule" in person.event_triggers_dict:
             renpy.say("Warning", "Something went wrong with setting the pregnancy for " + person.name + ", she is already giving birth.")
             return # she is already giving birth
 
-        person.event_triggers_dict["preg_old_schedule"] = copy.deepcopy(person.schedule)
+        person.event_triggers_dict["preg_old_schedule"] = clone_schedule(person)
         person.set_schedule(person.home, times = [0,1,2,3,4])
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
