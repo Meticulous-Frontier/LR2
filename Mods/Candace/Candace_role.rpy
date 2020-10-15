@@ -51,7 +51,7 @@ init 2 python:
 
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
-    candace_get_to_know = Action("Get to know her", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
+    candace_get_to_know = Action("Get to know her {image=gui/heart/Time_Advance.png}", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
     candace_convince_to_quit = Action("Convince her to quit", candace_convince_to_quit_requirement, "candace_convince_to_quit_label", menu_tooltip = "Quit her current job and join your company.")
     candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
     candace_overhear_supply_order = Action("Overhear supply call", candace_overhear_supply_order_requirement, "candace_overhear_supply_order_label")
