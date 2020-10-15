@@ -308,31 +308,34 @@ label friends_help_friends_be_sluts_enhanced_label():
                                     "[person_one.title] jiggles her tits."
                                     person_one.char "Look at me, I'm doing it! Here, let me help you."
                                     $ scene_manager.update_actor(person_two, emotion = "sad")
+                                    $ scene_manager.update_actor(person_one, display_transform = character_center(.10), z_order = - 10)
                                     "[person_one.title] moves behind [person_two.title] and starts to dress her down, starting with her [the_item.name]."
 
                                 python:
                                     if half_off_instead:
                                         for clothing in strip_list: # TODO: Loops like this should probably have some way of stripping only what is required, and half-offing the rest
-                                            scene_manager.draw_animated_removal(person_one, the_clothing = clothing, half_off_instead = True)
-                                            if person_one.outfit.tits_visible(): #Last loop
-                                                if person_one.has_large_tits():
+                                            scene_manager.draw_animated_removal(person_two, the_clothing = clothing, half_off_instead = True)
+                                            if person_two.outfit.tits_visible(): #Last loop
+                                                if person_two.has_large_tits():
                                                     renpy.say("", "Her breasts drop free as she pulls her " + clothing.display_name + " up, jiggling briefly.")
                                                 else:
                                                     renpy.say("", "She pulls her " + clothing.display_name + " up, letting her well shaped breasts jump free.")
                                             else:
-                                                renpy.say("",person_one.title + " pulls her " + clothing.display_name + " up and out of the way.")
+                                                renpy.say("",person_two.title + " pulls her " + clothing.display_name + " up and out of the way.")
 
                                     else: #We need to strip something off completely.
-                                        strip_list = person_one.outfit.get_tit_strip_list()
+                                        strip_list = person_two.outfit.get_tit_strip_list()
                                         for clothing in strip_list:
-                                            scene_manager.draw_animated_removal(person_one, the_clothing = clothing)
-                                            if person_one.outfit.tits_visible(): #Last loop
-                                                if person_one.has_large_tits():
+                                            scene_manager.draw_animated_removal(person_two, the_clothing = clothing)
+                                            if person_two.outfit.tits_visible(): #Last loop
+                                                if person_two.has_large_tits():
                                                     renpy.say("", "Her breasts drop free as she pulls her " + clothing.display_name + " off. They jiggle briefly before coming to a stop.")
                                                 else:
                                                     renpy.say("", "She pulls her " + clothing.display_name + " off, and her well shaped breasts jump free as soon as possible.")
                                             else:
-                                                renpy.say("",person_one.title + " pulls her " + clothing.display_name + " off and puts it to the side.")
+                                                renpy.say("",person_two.title + " pulls her " + clothing.display_name + " off and puts it to the side.")
+
+                                $ scene_manager.update_actor(person_one, display_transform = character_right)
 
                                 if person_two.get_opinion_score("showing her tits") > 0:
                                     "When she has her tits out she crosses her arms in front of her in a small attempt to preserve her modesty."
