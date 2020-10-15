@@ -63,7 +63,7 @@ label slave_attention_crisis_action_label:
                     "You take a leather flogger from the wall and start to give [the_person.possessive_title] a good whipping."
 
                     python:
-                        for count in range(1, 11):
+                        for count in __builtin__.range(1, 11):
                             renpy.say(the_person.char, "(Smack " + str(count) + "!!)..."  + (renpy.random.choice(["Ouch!", "Yes!", "Fuck!", "Oh!"]) if count%3 == 0 else ""), interact = False)
                             the_person.change_arousal(5)
                             renpy.pause(.8)
@@ -131,7 +131,7 @@ label slave_attention_crisis_action_label:
                     mc.name "I'm going to spank your cute ass until it has a nice shade and you will count along."
                     
                     python:
-                        for count in range(1, 11):
+                        for count in __builtin__.range(1, 11):
                             renpy.say(the_person.char, str(count) + "..."  + (renpy.random.choice(["Ouch!", "Fuck!", "Damn!"]) if count%3 == 0 else ""), interact = False)
                             the_person.change_arousal(5)
                             renpy.pause(.8)

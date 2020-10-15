@@ -40,9 +40,9 @@ init 2 python:
 
     def clone_schedule(person):
         schedule = {}
-        for day in range(0, 7):
+        for day in __builtin__.range(0, 7):
             schedule[day] = {}
-            for tod in range(0, 5):
+            for tod in __builtin__.range(0, 5):
                 schedule[day][tod] = person.schedule[day][tod]
         return schedule
 

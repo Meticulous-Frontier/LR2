@@ -2388,7 +2388,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ finished = True
     $ finished_chance = 0
     python:
-        for x in range(6):
+        for x in __builtin__.range(6):
             scene_manager.update_actor(showgirl, position = get_random_from_list(sarah_strip_pose_list))
             if renpy.random.randint(0,100) <76: #Take something off
                 showgirl.outfit.remove_random_any(top_layer_first = True)

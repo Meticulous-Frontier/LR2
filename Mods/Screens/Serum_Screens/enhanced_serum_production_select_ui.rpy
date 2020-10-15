@@ -60,7 +60,7 @@ init 2:
                             spacing 20
                             xfill True
 
-                            for count in range(1,mc.business.production_lines+1): #For the non-programmers we index our lines to 1 through production_lines.
+                            for count in __builtin__.range(1,mc.business.production_lines+1): #For the non-programmers we index our lines to 1 through production_lines.
                                 vbox:
                                     xfill True
                                     frame:

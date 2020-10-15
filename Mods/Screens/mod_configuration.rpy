@@ -65,7 +65,7 @@ init 2:
                         mousewheel True
                         vbox:
                             xsize 470
-                            for i in range(1, 4):
+                            for i in __builtin__.range(1, 4):
                                 frame:
                                     background "#000080"
                                     xsize 460

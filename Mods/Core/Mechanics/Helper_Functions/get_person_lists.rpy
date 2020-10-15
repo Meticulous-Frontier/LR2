@@ -94,11 +94,11 @@ init -1 python:
                 return None
                 
             result.add(None) # build up tuple with correct number of items
-            for i in range(1, number_of_employees):
+            for i in __builtin__.range(1, number_of_employees):
                 result.add(i)
             return tuple(result)
 
-        for i in range(number_of_employees):
+        for i in __builtin__.range(number_of_employees):
             person = get_random_from_list(list_of_possible_people)
             result.add(person)
             list_of_possible_people.remove(person)

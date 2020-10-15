@@ -125,13 +125,13 @@ init 2 python:
 
     def init_college_athlete_personality(self):
         # create 2 athletes
-        for x in range(0, 2):
+        for x in __builtin__.range(0, 2):
             casual_sex_create_athlete()
         return
 
     def init_hot_wife_personality(self):
         # create 2 hot wifes
-        for x in range(0, 2):
+        for x in __builtin__.range(0, 2):
             casual_sex_create_hotwife()
         return
 

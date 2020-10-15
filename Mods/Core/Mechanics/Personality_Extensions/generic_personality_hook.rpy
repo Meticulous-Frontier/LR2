@@ -412,11 +412,11 @@ label activate_generic_personality(stack):
         create_bimbo()
 
         # create two random people with the alpha personality (they have a very low chance of being created at random)
-        for i in range(2):
+        for i in __builtin__.range(2):
             create_alpha_personality()
 
         # add two random hookers to the game (on start of game)
-        for i in range(2):
+        for i in __builtin__.range(2):
             create_hooker()
 
         update_main_character_actions()
