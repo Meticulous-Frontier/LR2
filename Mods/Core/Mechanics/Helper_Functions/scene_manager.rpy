@@ -150,29 +150,29 @@ init -1:
         xanchor 1.0
         xzoom -1
 
-    transform character_center():
+    transform character_center(xoffset = 0):
         yalign 0.85
         yanchor 1.0
-        xalign 0.75
+        xalign (0.75 + xoffset)
         xanchor 1.0
 
-    transform character_center_flipped():
+    transform character_center_flipped(xoffset = 0):
         yalign 0.85
         yanchor 1.0
-        xalign 0.75
+        xalign (0.75 + xoffset)
         xanchor 1.0
         xzoom -1
 
-    transform character_left():
+    transform character_left(xoffset = 0):
         yalign 0.85
         yanchor 1.0
-        xalign 0.5
+        xalign (0.5 + xoffset)
         xanchor 1.0
 
-    transform character_left_flipped():
+    transform character_left_flipped(xoffset = 0):
         yalign 0.85
         yanchor 1.0
-        xalign 0.5
+        xalign (0.5 + xoffset)
         xanchor 1.0
         xzoom -1
 
