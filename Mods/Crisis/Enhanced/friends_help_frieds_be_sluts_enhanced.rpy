@@ -176,15 +176,15 @@ label friends_help_friends_be_sluts_enhanced_label():
                     # Note: At high love she hints that she's doing this as a favour to you.
                     if rank_tits(person_one.tits) < rank_tits(person_two.tits):
                         # The slutty girl wants smaller, perkier tits.
-                        person_one.char "Look at them though, they're the perfect shape. Mine just don't have the same perk yours do."
-                        person_two.char "But they're so nice and big, I'd kill to have them like that. I bet they're nice and soft, too."
-                        person_one.char "Want to give them a feel? I... Oh, hey [person_one.mc_title]."
+                        person_two.char "Look at them though, they're the perfect shape. Mine just don't have the same perk yours do."
+                        person_one.char "But they're so nice and big, I'd kill to have them like that. I bet they're nice and soft, too."
+                        person_two.char "Want to give them a feel? I... Oh, hey [person_one.mc_title]."
 
                     else:
                         # The slutty girl wants larger tits.
-                        person_one.char "Look at those puppies, they're the perfect size. I'd kill for a pair of tits like yours."
-                        person_two.char "They're big, but yours look perkier. I know lots of guys who are into that."
-                        person_one.char "I still just want to grab yours by the handful and... Oh, hey [person_one.mc_title]."
+                        person_two.char "Look at those puppies, they're the perfect size. I'd kill for a pair of tits like yours."
+                        person_one.char "They're big, but yours look perkier. I know lots of guys who are into that."
+                        person_two.char "I still just want to grab yours by the handful and... Oh, hey [person_one.mc_title]."
                     "[person_one.possessive_title] notices you at the door."
                     $ scene_manager.update_actor(person_two, emotion = "sad")
                     person_two.char "Ah, hi... We were just getting back to work, right [person_one.title]?"
