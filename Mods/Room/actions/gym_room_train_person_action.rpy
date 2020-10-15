@@ -9,6 +9,8 @@ init 3 python:
             return "Opens in the morning"
         elif mc.business.funds < 40: # $40 per session.
             return "Requires: $40"
+        elif mc.energy < 30:
+            return "Requires: 30 energy"
         else:
             return True
 
@@ -101,6 +103,7 @@ label train_in_gym(the_person):
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
 
+    $ mc.change_energy(-30)
     $ body_changed = False
     if not the_person.is_pregnant():
         $ body_changed = the_person.change_weight(-ran_num, 100)
