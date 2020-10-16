@@ -18,6 +18,13 @@ init -2 python:
         def __init__(self):
             self.actors = []
 
+        def add_group(self, people, position = None, emotion = None, special_modifier = None, lighting = None, z_order = None):
+            xoffset = 0.1
+            for person in people:
+                self.actors.append(Actor(person, position, emotion, special_modifier, lighting, character_center(xoffset), z_order))
+                xoffset -= .1
+            self.draw_scene()
+
         def add_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
             self.actors.append(Actor(person, position, emotion, special_modifier, lighting, display_transform, z_order))
             self.draw_scene()
@@ -85,6 +92,9 @@ init -2 python:
 
         def draw_info_ui(self):
             clear_scene()
+            if __builtin__.len(self.actors) > 3:
+                return  # we cannot display more info than 3
+
             if __builtin__.len(self.actors) > 1:
                 renpy.show_screen("multi_person_info_ui", self.actors)
             elif __builtin__.len(self.actors) == 1:
@@ -143,10 +153,18 @@ init -2 python:
 # Transformation for display_transform   #
 ##########################################
 init -1:
-    transform character_right_flipped():
+    transform character_right(xoffset = 0):
         yalign 0.85
         yanchor 1.0
-        xalign 1.0
+        xalign (1.0 + xoffset)
+        xanchor 1.0
+        xzoom -1
+
+
+    transform character_right_flipped(xoffset = 0):
+        yalign 0.85
+        yanchor 1.0
+        xalign (1.0 + xoffset)
         xanchor 1.0
         xzoom -1
 
