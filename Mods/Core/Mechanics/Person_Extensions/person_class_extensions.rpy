@@ -1429,6 +1429,24 @@ init -1 python:
 
     Person.__ne__ = person__ne__
 
+
+###################
+# DEBUG FUNCTIONS *
+###################
+
+    # check if current outfit is an actual outfit in the wardrobe (should always be a copy)
+    def validate_outfit(self):
+        for outfit in self.wardrobe.outfits + self.wardrobe.overwear_sets + self.wardrobe.underwear_sets:
+            if id(self.outfit) == id(outfit):
+                renpy.say("WARNING", "Current outfit is not a copy of the wardrobe item.")
+            elif id(self.planned_outfit) == id(outfit):
+                renpy.say("WARNING", "Current planned outfit is not a copy of the wardrobe item.")
+            elif id(self.planned_uniform) == id(outfit):
+                renpy.say("WARNING", "Current uniform is not a copy of the wardrobe item.")
+        return
+
+    Person.validate_outfit = validate_outfit
+
 ##########################################
 # Expose outfit methods on Person object #
 ##########################################
