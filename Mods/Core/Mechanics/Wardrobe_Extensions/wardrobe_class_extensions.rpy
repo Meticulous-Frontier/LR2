@@ -256,7 +256,7 @@ init -1 python:
             if full_outfit:
                 return full_outfit.get_copy()
             else:
-                return Outfit("Nude")
+                return default_outfit.get_copy()
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         uniform_over = None
@@ -313,7 +313,7 @@ init -1 python:
             if full_outfit:
                 return full_outfit.get_copy()
             else:
-                return Outfit("Nude")
+                return default_outfit.get_copy()
 
         return build_assembled_outfit(uniform_under, uniform_over)
 
