@@ -121,6 +121,8 @@ label scene_spanking_1(the_girl, the_location, the_object):
         $ the_girl.change_obedience(-spank_factor)
         $ the_girl.change_love(spank_factor)
     $ spank_factor_increment(the_girl)
+    if mc.arousal < 20:
+        $ mc.change_arousal(5)
     return
 
 label scene_spanking_2(the_girl, the_location, the_object):
@@ -169,6 +171,8 @@ label scene_spanking_2(the_girl, the_location, the_object):
 
         "Finger her ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
             pass
+    if mc.arousal < 20:
+        $ mc.change_arousal(5)
     return
 
 
