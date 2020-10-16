@@ -352,7 +352,7 @@ init -1 python:
                     full_outfit = self.pick_outfit_with_lowest_sluttiness()
 
                 if full_outfit:
-                    return full_outfit
+                    return full_outfit.get_copy()
 
         if __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a outfit out of. Use default builder function.
