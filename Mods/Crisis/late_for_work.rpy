@@ -217,7 +217,7 @@ label late_for_work_action_label:
                 mc.name "Very good, now I require the same level of dedication, make your boss happy and get on your knees."
                 if the_person.get_opinion_score("being submissive") > 0:
                     $ the_person.change_stats(arousal = 50, obedience = 5, happiness = 5, slut_temp = 5)
-                    the_person.char "Yes boss, I love it when command me..."
+                    the_person.char "Yes boss, I love it when you command me..."
                 else:
                     $ the_person.change_stats(arousal = 30, obedience = 2, happiness = 2, slut_temp = 2)
                     the_person.char "If you insist, [the_person.mc_title]!"
