@@ -1350,6 +1350,9 @@ init -1 python:
         elif self.should_wear_work_outfit():
             self.wear_work_outfit()
         else:
+            if not self.planned_outfit: # extra validation to make sure we have a planned outfit
+                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+
             self.apply_outfit(self.planned_outfit)
         return
 
