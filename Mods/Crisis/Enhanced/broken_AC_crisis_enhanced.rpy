@@ -34,7 +34,7 @@ init 5 python:
                     other_girl.break_taboo("underwear_nudity")
             else:
                 scene_manager.update_actor(other_girl, emotion = "sad")
-                renpy.say("", person_title + " glances at the other girls, but decides against taking off some clothes.")
+                renpy.say("", other_girl.title + " glances at the other girls, but decides against taking off some clothes.")
             scene_manager.remove_actor(other_girl)
         return
 
