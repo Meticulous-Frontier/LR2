@@ -982,8 +982,12 @@ label ophelia_choose_service_test_label():
     salon_manager.char "Oh hey [salon_manager.mc_title]. What can I do for you?"
     mc.name "I brought you a customer, for that special service we talked about."
     "[salon_manager.title] notices [the_person.title] with you."
-    salon_manager.char "Oh! This is perfect! Hi I'm [salon_manager.name]."
-    the_person.char "[the_person.name], nice to meet you."
+    if the_person == candace:
+        salon_manager.char "Oh! Hello again. I suppose you would make a good candidate for this..."
+        "[the_person.possessive_title] is looking around the salon, completely oblivious to your conversation with [salon_manager.title]"
+    else:
+        salon_manager.char "Oh! This is perfect! Hi I'm [salon_manager.name]."
+        the_person.char "[the_person.name], nice to meet you."
     salon_manager.char "I have a private room all setup for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
     "You and [the_person.title] follow [salon_manager.possessive_title] to the private room. Its a great setup, with a very comfy looking styling chair."
     salon_manager.char "When I open it, I plan to have wine coolers or mimosas I can offer, along with a hot towel."
@@ -1004,8 +1008,9 @@ label ophelia_choose_service_test_label():
     call screen hair_creator(the_person, hair_style_check, pubes_style_check)
     "You stay and observe as [salon_manager.title] does her work. She does an exceptional job."
     "When she finishes, you check out [the_person.title], while she examines herself in the mirror"
-
-    if the_person.sluttiness > 50:
+    if the_person == candace:
+        the_person.char "Oh. My. God. The carpet even matches the drapes! This is great!"
+    elif the_person.sluttiness > 50:
         the_person.char "Wow! Great job! I'm going to have to come here from now on."
     else:
         the_person.char "That was... an interesting experience. My hair looks great though! And everything matches."
