@@ -18,9 +18,9 @@ init 5 python:
 
 label wardrobe_change_label_enhanced(the_person):
     call screen enhanced_main_choice_display(build_menu_items([build_wardrobe_change_menu()]))
-    $ picked_option = _return
+    $ strip_choice = _return
 
-    if picked_option == "add":
+    if strip_choice == "add":
         mc.name "[the_person.title], I've got something I'd like you to wear for me."
         $ clear_scene()
         call outfit_master_manager(main_selectable = True) from _call_outfit_master_manager_change_enhanced
@@ -45,14 +45,14 @@ label wardrobe_change_label_enhanced(the_person):
                 $ the_person.call_dialogue("clothing_reject")
         $ del new_outfit
 
-    elif picked_option == "delete":
+    elif strip_choice == "delete":
         mc.name "[the_person.title], lets have a talk about what you've been wearing."
         $ clear_scene()
         call screen outfit_delete_manager(the_person.wardrobe)
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person()
 
-    elif picked_option == "wear":
+    elif strip_choice == "wear":
         mc.name "[the_person.title], I want you to get changed for me."
         $ clear_scene()
         call screen girl_outfit_select_manager(the_person.wardrobe, show_sets = True, slut_limit = the_person.effective_sluttiness() + 20)
