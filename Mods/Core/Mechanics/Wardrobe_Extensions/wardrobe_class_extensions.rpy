@@ -248,7 +248,7 @@ init -1 python:
                     full_outfit = valid_wardrobe.pick_outfit_with_lowest_sluttiness()
 
                 if full_outfit:
-                    return full_outfit
+                    return full_outfit.get_copy()
 
         if __builtin__.len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
