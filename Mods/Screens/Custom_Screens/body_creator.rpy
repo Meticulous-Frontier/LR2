@@ -206,7 +206,7 @@ screen body_customizer(the_person = the_person):
 
                         style "textbutton_no_padding_highlight"
                         text_style "serum_text_style"
-                        action [Hide("body_customizer"), Function(renpy.scene, "Active")]
+                        action [Hide("body_customizer"), Function(clear_scene)]
 
                     textbutton "Discard | Undo":
                         xfill True
