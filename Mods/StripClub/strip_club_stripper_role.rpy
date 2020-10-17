@@ -245,8 +245,12 @@ label strip_club_hire_employee_label(the_person):
         the_person.char "Maybe, but not right now, I'm really busy at the moment, so there's not too many jobs I can do..."
         mc.name "Then my proposal will be perfect for you!"
 
-    mc.name "I own the [strip_club.formalName] downtown, and I need some workers for the place..."
-    the_person.char "Oh my God, really? You're proposing me a job in a strip club? I don't know..."
+    if mc.location is strip_club:
+        mc.name "I own this strip club and I could see you working here..."
+    else:
+        mc.name "I own the [strip_club.formalName] downtown, and I need some workers for the place..."
+
+    the_person.char "Oh my God, really? You're proposing a job in your strip club? I don't know..."
 
     $ ran_num = calculate_stripper_salary(the_person)
 
