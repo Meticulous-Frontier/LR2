@@ -203,11 +203,13 @@ label horny_at_work_crisis_enhanced_label():
                     "You catch your breath and sit up."
                     mc.name "Whew. Now you can be helpful by getting that cleaned up for me."
                     if licker is not None:
-                        $ scene_manager.update_actor(licker, position = "doggy")
+                        $ scene_manager.update_actor(licker, display_transform = character_right, position = "doggy")
                         "Before you even finish the sentence [licker.title] is on her hands and knees, lowering her face to the floor."
                         licker.char "Right away!"
                         $ licker.change_obedience(2)
-                        "She licks your still-warm cum directly off of the floor, drinking it down eagerly. When she's finished she stands up and wipes her lips with the back of her hand."
+                        "She licks your still-warm cum directly off of the floor, drinking it down eagerly." 
+                        $ scene_manager.update_actor(licker, position = "stand3")
+                        "When she's finished she stands up and wipes her lips with the back of her hand."
                         $ licker = None
                     else:
                         "You pull your pants up and get back to work, basking in your post orgasm clarity."
