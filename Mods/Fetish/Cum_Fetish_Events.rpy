@@ -58,7 +58,7 @@ init 1 python:
 
     def add_sb_fetish_lily_cum_event():
         SB_fetish_lily_cum_event = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
-        mc.business.mandatory_crises_list.append(SB_fetish_lily_cum_event)
+        mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum_event)
         return
 
     def add_sb_fetish_cum_crisis(person):
