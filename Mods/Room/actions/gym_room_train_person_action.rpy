@@ -105,7 +105,7 @@ label train_in_gym(the_person):
 
     $ mc.change_energy(-30)
     $ body_changed = False
-    if not the_person.is_pregnant():
+    if not the_person.knows_pregnant():
         $ body_changed = the_person.change_weight(-ran_num, 100)
         $ new_weight = get_person_weight_string(the_person)
 
