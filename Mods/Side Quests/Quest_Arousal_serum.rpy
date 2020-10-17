@@ -63,6 +63,7 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_arousal_serum_receive_drug_label")
         remove_mandatory_crisis_list_action("quest_arousal_serum_researched_label")
         remove_mandatory_crisis_list_action("quest_arousal_serum_test_label")
+        remove_mandatory_crisis_list_action("quest_arousal_serum_pills_expire_label")
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_arousal_serum_arrange_test)
         quest_arousal_serum.quest_event_dict.clear()
