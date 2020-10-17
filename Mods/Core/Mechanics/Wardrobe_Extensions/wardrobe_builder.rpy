@@ -19,6 +19,7 @@ init 5 python:
         ( "the colour white", "l >= 95"),
         ( "the colour yellow", "l > 55 and h >= 32 and h <= 78"),
         ( "the colour orange", "l > 30 and h >= 20 and h <= 55"),
+        ( "the colour brown", "s >= 10 and s <= 40 and l <= 30 and (h <= 35 or h >= 330)" ),
         ( "the colour pink", "s > 5 and l > 50 and h >= 300 and h <= 335"),
         ( "the colour purple", "s > 5 and l < 95 and h >= 270 and h <= 330"),
         ( "the colour green", "s > 5 and l < 95 and h >= 65 and h <= 170"),
@@ -37,8 +38,8 @@ init 5 python:
             [0, .278, .671, .95],  [.392, .584, .929, .95], [.282, .239, .545, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
             [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
             [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
-            [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95],
-            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 4 unused user definable colors
+            [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95], [.435, .305, .215, .95], [.352, 0.239, .239, .95],
+            [1,1,1,1], [1,1,1,1]    # allow for 1 unused user definable colors
         ]
 
     # array for determining the sluttiness of an outfit
@@ -180,9 +181,9 @@ init 5 python:
             "bright white": [1, 1, 1, .95]
         }
         color_prefs["the colour brown"] = {
-            "saddle brown": [.55, .27, .07, .95],
-            "chocolate": [.82, .41, .12, .95],
-            "dark chocolate": [.28, 0, .04, .95]
+            "saddle brown": [.451, .313, .235, .95],
+            "coffee": [.435, .305, .215, .95],
+            "chocolate noir": [.352, 0.239, .239, .95]
         }
         #color_prefs[""][""] = [, , , ]
 
