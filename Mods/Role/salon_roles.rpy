@@ -1040,7 +1040,15 @@ label ophelia_choose_service_test_label():
     return # Where to go if you hit "Back".
 
 label ophelia_add_service_full_body_massage_label(the_person):
-    pass
+    $ the_person.draw_person()
+    the_person.char "Aha! Just the man I wanted to see."
+    mc.name "For some reason everytime I hear that phrase, good things happen. What can I do for you [the_person.title]?"
+    "She smiles wide at you."
+    the_person.char "I have another idea for how I can expand my business again! I wanted to hear what you think about it again... and maybe provide another 'test subject'."
+    mc.name "I'm listening. What's the idea?"
+    "She takes a deep breath."
+    the_person.char "Well... my full body hair styling has been a great success... especially with some of the girls from your office..."
+    the_person.char "I was thinking about what I could do to take the service to the next level, you know. "
     return
 
 

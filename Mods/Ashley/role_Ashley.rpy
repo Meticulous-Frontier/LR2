@@ -764,6 +764,79 @@ label ashley_post_handjob_convo_label(the_person):
 
     return
 
+label ashley_stephanie_saturday_coffee_intro_label(the_person):
+    $ the_person_one = the_person
+    $ the_person_two = stephanie
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped, position = "sitting")
+    $ scene_manager.add_actor(the_person_two, position = "sitting")
+    "As you are walking downtown, you pass by the coffee shop. Looking inside, you are surprised to see Ashley and Stephanie sitting inside."
+    "You decide to step inside and say hello."
+    mc.name "Hey girls, good to see you."
+    "They are surprised to see you. Ashley blushes and looks down at her coffee as Stephanie responds."
+    the_person_two.char "Hey boss! Me and Ash are just having a cup of coffee before we go our separate ways. It's kind of become our little tradition every Saturday morning, since she moved in with me."
+    "She looks over at her sister and starts to tease her. "
+    the_person_two.char "I think she said something about hitting up the gym today... I think there's a guy she's trying to impress!"
+    the_person_one.char "Oh my gosh Steph, stop it!"
+    "[the_person_one.title] is blushing, and once in a while sneaks a peak up at you. Even though you've already discussed with her how you want things to be with her, it is cute to see her squirm a little."
+    mc.name "Is that true [the_person_one.title]? Who might this lucky guy be?"
+    the_person_one.char "Ah. Errm... Well..."
+    "She's sputtering out unintelligible mumbles."
+    the_person_two.char "Don't worry Ash. I'm sure whoever it is will appreciate you putting in the time to keep your body fit!"
+    "[the_person_one.possessive_title] is relieved when her sister intervenes and changes the subject."
+    the_person_two.char "Hey, why don't you grab a coffee and join us? It's kind of nice to hangout in a non work environment."
+    mc.name "Oh, I wouldn't want to interrupt you two having some family time together..."
+    "Surprisingly, it's [the_person_one.title] that interrupts you."
+    the_person_one.char "It's fine! We live together remember?"
+    "You raise an eyebrow. It's not often that she speaks up, but clearly [the_person_one.title] wants you to hang out too. Suddenly, she realizes she is speaking up and quiets down."
+    the_person_one.char "I mean... It would be okay, right? We don't mind at all..."
+    mc.name "Okay. Just give me a moment and I'll get something. Either of you two want something while I'm in line?"
+    "The sisters look at each other. [the_person_one.title] shakes her head and [the_person_two.possessive_title] responds."
+    the_person_two.char "No thanks! We're good for now, but maybe another time we'll let you buy us coffees!"
+    "You excuse yourself and head up to the counter. You glance back at the two sisters as you wait in line."
+    "It's amazing how similar the girls are, but still so different. [the_person_one.title] is so quiet and shy, but sometimes when you talk with her you can see glimpses of the fiery passions that drive [the_person_two.title]."
+    "You order your coffee, and soon the hot brew is in your hand. As you walk back to the table, you decide to use the opportunity to try and get to know them both a little better."
+    "The sisters are sitting opposite to each other at the booth... Who should you sit next to?"
+    menu:
+        "[the_person_one.title]" if not ashley_is_secret_path():    #Depending on previous choices, MC may have to sit next to a particular girl.
+            "[the_person_one.possessive_title] scoots over to give you room to sit next to her. She sneaks a peak at you and you see a slight smile on her lips."
+            $ the_person_one.change_stats(love = 3, happiness = 5)
+        "[the_person_two.title]" if not ashley_is_normal_path():
+            "[the_person_two.possessive_title] scoots over so you have room to sit next to her."
+            the_person_two.char "Have a seat [the_person_two.mc_title]"
+            "She pats the seat next to her. You sit down and see her smirking at you before she keeps talking to her sister."
+            $ the_person_two.change_stats(love = 3, happiness = 5)
+    "You listen to the two sisters chat for a bit as you enjoy your coffee. [the_person_one.title] seems to almost forget you are at the table, and you get a glimpse into her personality as she talks with her older sibling."
+    $ overhear_topic = the_person_one.get_random_opinion(include_sexy = False)
+    $ text_one = person_opinion_to_string(the_person_one, overhear_topic)[1]
+    $ text_two = get_topic_text(overhear_topic)
+    the_person_one.char "... but yeah, I have to say I [text_one] [text_two]"
+    if the_person_one.discover_opinion(overhear_topic):
+        "Oh! You didn't realize that [the_person_one.title] felt that way."
+    "The sisters discuss it for a bit. You kind of zone out for a little bit as the conversation changes to clothing. The girls are discussing some different brands..."
+    "Suddenly the girls stop talking. You look up and notice they are both looking out the window. A woman is walking by the coffee shop window out in the street."
+    #TODO [Generate random woman within a specific outfit variety]
+    the_person_two.char "Wow, what an outfit!"
+    "Stephanie gushes. [Dialogue specific if she likes the color or not][second dialogue if she likes the type of outfit]"
+    # TODO [Ashley responds similarly]
+    the_person_two.char "What do you think? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think we would look good in a [outfit description]?"
+    menu:
+        "Yes":
+            pass
+        "No":
+            pass
+    "Ashley listens to your response intently. You can tell she is interested in your opinion."
+    the_person_two.char "Well, I'd better get going. I've got some errands to run!"
+    "You stand up and both girls also get up."
+    mc.name "Thank you for the pleasant morning. You two have a good day."
+    the_person_two.char "You bet boss! We do this pretty much every Saturday. Feel free to join us!"
+    "[the_person_two.possessive_title]'s invitation is tempting. [the_person_one.title] is smiling at you, clearly mirroring her sisters invitation to join again."
+    the_person_two.char "Next week you're buying the coffees though!"
+    mc.name "That's acceptable. With us all being employees, I'll just put it down as a company expense."
+    "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about about the sisters."
+    return
+
+
 
 #Python wrappers for Ashley's story progression.
 init 3 python:
@@ -811,3 +884,24 @@ init 3 python:
         if ashley.event_triggers_dict.get("story_path", None) == "normal":
             return True
         return False
+
+
+label ashley_test_outfit_command():
+    $ the_person = stephanie
+    $ builder = WardrobeBuilder(the_person)
+    $ the_person.apply_outfit(builder.build_specific_outfit("the colour brown", "dress"))
+    $ the_person.draw_person()
+    "This should be a brown dress! [the_person.outfit.name]"
+    $ the_person.apply_outfit(builder.build_specific_outfit("the colour pink", "skirt"))
+    $ the_person.draw_person()
+    "This should be a pink skirt! [the_person.outfit.name]"
+    $ the_person.apply_outfit(builder.build_specific_outfit("the colour black", "pants"))
+    $ the_person.draw_person()
+    "This should be a black pants! [the_person.outfit.name]"
+    #random test
+    $ the_color = get_random_from_list(["the colour green", "the colour pink", "the colour black", "the colour yellow", "the colour red", "the colour green", "the colour blue"])
+    $ the_style = get_random_from_list(["dress", "skirt", "pants"])
+    $ the_person.apply_outfit(builder.build_specific_outfit(the_color, the_style))
+    $ the_person.draw_person()
+    "[the_color] [the_style]! [the_person.outfit.name]"
+    return
