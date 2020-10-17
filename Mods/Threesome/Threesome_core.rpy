@@ -773,8 +773,12 @@ init python:
         if person_two in [mom, lily, cousin, aunt]:
             person_two_slut_req += 5 #Incest modifier
 
-        if person_one.effective_sluttiness("threesomes") < person_one_slut_req:
+        # threesome opinion modifier
+        person_one_slut_req += (person_one.get_opinion_score("threesomes") * -5)
+        person_two_slut_req += (person_two.get_opinion_score("threesomes") * -5)
+
+        if person_one.effective_sluttiness() < person_one_slut_req:
             return False
-        if person_two.effective_sluttiness("threesomes") < person_two_slut_req:
+        if person_two.effective_sluttiness() < person_two_slut_req:
             return False
         return True

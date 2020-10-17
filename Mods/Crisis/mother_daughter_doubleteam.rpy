@@ -15,15 +15,15 @@ init 2 python:
 
     def get_mother_with_daughter_for_doubleteam():
         mother_list = []
-        for person in town_relationships.get_business_relationships(["Daughter"]):
-            if willing_to_threesome(person.person_a, person.person_b):
-                mother_list.append(person.person_a)
+        for relationship in town_relationships.get_business_relationships(["Daughter"]):
+            if willing_to_threesome(relationship.person_a, relationship.person_b):
+                mother_list.append(relationship.person_b)
         mother = get_random_from_list(mother_list)
 
         daughter_list = []
-        for person in town_relationships.get_existing_children(mother):
-            if willing_to_threesome(mother, person):
-                daughter_list.append(person)
+        for daughter in town_relationships.get_existing_children(mother):
+            if willing_to_threesome(mother, daughter):
+                daughter_list.append(daughter)
         return (mother, get_random_from_list(daughter_list))
 
     mother_daughter_doubleteam_action = ActionMod("Mother Daughter Blowjob", mother_daughter_doubleteam_requirement, "mother_daughter_doubleteam_action_label",
