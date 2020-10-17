@@ -18,11 +18,9 @@ init -1 python:
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
-        if ashley.event_triggers_dict.get("intro_complete", False) == False:
+        if "ashley" in globals() and ashley.event_triggers_dict.get("intro_complete", False) == False:
             not_met_yet_list.append(ashley)
-        if not "candace" in globals(): # She's not been created yet.
-            pass
-        elif candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
+        if "candace" in globals() and candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
             not_met_yet_list.append(candace)
         if christina.mc_title == 'Stranger': #She'll call MC differently when met.
             not_met_yet_list.append(christina)
@@ -36,11 +34,11 @@ init -1 python:
             not_met_yet_list.append(cousin)
         if nora.get_destination(specified_time = 1) == nora.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(nora)
-        if salon_manager.mc_title == 'Stranger': #She'll call MC differently when met.
+        if "salon_manager" in globals() and salon_manager.mc_title == 'Stranger': #She'll call MC differently when met.
             not_met_yet_list.append(salon_manager)
         if aunt.get_destination(specified_time = 2) == aunt_bedroom: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(aunt)
-        if sarah.get_destination(specified_time = 1) == sarah.home: # She'll be scheduled otherwise when met.
+        if "sarah" in globals() and sarah.get_destination(specified_time = 1) == sarah.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(sarah)
         if starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
             not_met_yet_list.append(starbuck)
