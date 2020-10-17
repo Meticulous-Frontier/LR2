@@ -37,7 +37,6 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         scene_manager.add_actor(person_one, emotion="default", display_transform = character_left_flipped)
         scene_manager.add_actor(person_two, emotion="default", display_transform = character_center_flipped)
         scene_manager.add_actor(person_three, emotion="default")
-        scene_manager.draw_scene()
 
         loser_index = renpy.random.randint(0, 2)
         if loser_index == 0:

@@ -35,7 +35,6 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         scene_manager.add_actor(person_one, emotion="default", display_transform = character_left_flipped)
         scene_manager.add_actor(person_two, emotion="default", display_transform = character_center_flipped)
         scene_manager.add_actor(person_three, emotion="default")
-        scene_manager.draw_scene()
 
     if person_one.sluttiness > 70 and person_three.sluttiness > 70:
         person_one.char "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
