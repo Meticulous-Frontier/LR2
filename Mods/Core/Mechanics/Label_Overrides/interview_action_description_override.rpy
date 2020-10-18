@@ -13,7 +13,7 @@ init 2 python:
 
     def interview_build_candidates_list(count):
         candidates = []
-        for x in range(0, count): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
+        for x in __builtin__.range(0, count): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
             candidates.append(make_person())
 
         reveal_count = 0

@@ -44,7 +44,7 @@ label mall_introduction_action_label:
     python:
         scene_manager = Scene()
 
-        scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", character_placement = character_center_flipped)
+        scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", display_transform = character_center_flipped)
         scene_manager.add_actor(stranger, position = "stand3")
 
     known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."
@@ -87,9 +87,9 @@ label mall_introduction_action_label:
     if known_person.sluttiness > 20 or known_person.love > 20:
         if known_person.is_employee():
             if known_person.sluttiness > 40:
-                known_person.char "You should get to know him more intimate [stranger.name], you should apply for a position in his company."
+                known_person.char "You should get to know him more intimately [stranger.name], you should apply for a position in the company."
             else:
-                known_person.char "I promise you [stranger.name], he is a great boss, you should go out with him sometime."
+                known_person.char "I promise you [stranger.name], he is a great boss: you should go out with him sometime."
         else:
             if known_person.sluttiness > 40:
                 known_person.char "He can show you a really good time [stranger.name], if you know what i mean."
@@ -100,7 +100,7 @@ label mall_introduction_action_label:
         $ stranger.change_happiness(10)
 
         if stranger.sluttiness > 5:
-            stranger.char "He is very cute [known_person.name], i might just do that."
+            stranger.char "He is very cute [known_person.name], I might just do that."
         else:
             stranger.char "I trust your judgement [known_person.name], perhaps we could go out sometime."
 

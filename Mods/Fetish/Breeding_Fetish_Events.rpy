@@ -25,7 +25,7 @@ init -1 python:
 
     def breeding_fetish_lily_intro_requirement(the_person):
         if lily.location() == lily.home:
-            if len(lily_bedroom.people) == 1:
+            if lily_bedroom.get_person_count() == 1:
                 return True
         return False
 
@@ -125,6 +125,10 @@ init 3 python:
         person.event_triggers_dict["LastBreedingFetish"] = day
         add_breed_me_collar_to_base_outfit(person)
         return
+
+    def reset_breeding_fetish(person):
+        person.special_role.remove (breeding_fetish_role)
+        person.add_role(breeding_fetish_role)
 
     def start_breeding_fetish_quest(the_person):
         #Determine who it is, then add the appropriate quest.
@@ -492,7 +496,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
         the_person.char "I went along with things for a while because... well I don't know why. I guess I was just really into the science of things."
         "She shifts uncomfortably in her seat."
-        $ scene_manager.update_actor(the_person, character_placement = character_right)
+        $ scene_manager.update_actor(the_person, display_transform = character_right)
         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
@@ -592,7 +596,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
         the_person.char "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
         "She shifts uncomfortably in her seat."
-        $ scene_manager.update_actor(the_person, character_placement = character_right)
+        $ scene_manager.update_actor(the_person, display_transform = character_right)
         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
@@ -904,9 +908,9 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             the_person.char "I was thinking like, maybe we could do that! Take a video of you cumming inside me and knocking me up!"
             mc.name "You want me to get you pregnant?"
             the_person.char "Fuck yeah! That's like, so hot! And can you imagine having that on video? Holy fuck!"
-        "Lately, you've been slipping her serums to increase her drive to reproduce. Unsurpisingly, it sounds like she has developed a breeding fetish."
+        "Lately, you've been slipping her serums to increase her drive to reproduce. Unsurprisingly, it sounds like she has developed a breeding fetish."
         mc.name "Okay. I'll give you my cum. Now turn around, I'm going to take you over your desk."
-        if len(mc.location.people) == 1:
+        if mc.location.get_person_count() == 1:
             "You look around the room, but no one else is around to record it, so you set up your phone to record and prop it up on a nearby desk as best you can."
         else:
             python:

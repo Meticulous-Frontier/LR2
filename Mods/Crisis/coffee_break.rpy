@@ -32,10 +32,9 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
         office.show_background()
         scene_manager = Scene()
-        scene_manager.add_actor(person_one, emotion="default", character_placement = character_left_flipped)
-        scene_manager.add_actor(person_two, emotion="default", character_placement = character_center_flipped)
+        scene_manager.add_actor(person_one, emotion="default", display_transform = character_left_flipped)
+        scene_manager.add_actor(person_two, emotion="default", display_transform = character_center_flipped)
         scene_manager.add_actor(person_three, emotion="default")
-        scene_manager.draw_scene()
 
     if person_one.sluttiness > 70 and person_three.sluttiness > 70:
         person_one.char "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
@@ -100,8 +99,8 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
 
                     person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."
-                    $ scene_manager.update_actor(person_two, position = "walking_away", character_placement = character_center_flipped)
-                    $ scene_manager.update_actor(person_three, position = "walking_away", character_placement = character_right)
+                    $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
+                    $ scene_manager.update_actor(person_three, position = "walking_away", display_transform = character_right)
                     "They pickup their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene

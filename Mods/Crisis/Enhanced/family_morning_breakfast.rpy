@@ -38,7 +38,7 @@ label family_morning_breakfast_enhanced_label():
     "You get up, get dressed, and head for the kitchen."
     $ mc.change_location(kitchen)
     $ kitchen.show_background()
-    $ scene_manager.add_actor(mom, position = "walking_away", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(mom, position = "walking_away", display_transform = character_left_flipped)
 
     if mom.effective_sluttiness() > 40:
         if mom.outfit.vagina_visible():
@@ -115,8 +115,8 @@ label family_morning_breakfast_enhanced_label():
                         "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
                     else:
                         "Finished for now, you decide to put your cock away while [mom.possessive_title] and [lily.possessive_title] get up."
-                    $ scene_manager.update_actor(mom, position="stand3", character_placement = character_center_flipped)
-                    $ scene_manager.update_actor(lily, position = "stand4", character_placement = character_right)
+                    $ scene_manager.update_actor(mom, position="stand3", display_transform = character_center_flipped)
+                    $ scene_manager.update_actor(lily, position = "stand4", display_transform = character_right)
                     mc.name "Mmm, thanks for breakfast mom!"
                     if the_report["guy orgasms"] > 0:
                         "[lily.title] laughs and jokes back."
@@ -124,7 +124,7 @@ label family_morning_breakfast_enhanced_label():
                 "Refuse":
                     mc.name "That's okay, I have a ton of stuff to get done today. Maybe tonight after dinner?"
                     mom.char "Okay, if that's what you want [mom.mc_title]."
-                    $ scene_manager.update_actor(mom, position="walking_away", character_placement = character_left_flipped)
+                    $ scene_manager.update_actor(mom, position="walking_away", display_transform = character_left_flipped)
                     "[mom.possessive_title] gets up and starts to do the dishes."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
@@ -166,12 +166,12 @@ label family_morning_breakfast_enhanced_label():
                     $ mom.change_stats(obedience = 5, slut_temp = 5)
                     mom.char "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
                     $ scene_manager.remove_actor(mom)
-                    $ scene_manager.update_actor(lily, position = "walking_away", character_placement = character_left_flipped)
+                    $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_left_flipped)
                     "Your mother leaves to get dressed. [lily.possessive_title] ends up serving out breakfast for all three of you."
                     $ scene_manager.update_actor(lily, position = "sitting")
                     $ mom.apply_outfit(mom.planned_outfit)
                     lily.char "She's been so weird lately. I don't know what's going on with her..."
-                    $ scene_manager.add_actor(mom, position = "sitting", character_placement = character_right)
+                    $ scene_manager.add_actor(mom, position = "sitting", display_transform = character_right)
                     $ lily.change_happiness(5)
                     $ mom.change_happiness(5)
                     "When [mom.possessive_title] gets back she sits down at the table and the three of you enjoy your breakfast together."

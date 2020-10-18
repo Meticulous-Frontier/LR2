@@ -14,7 +14,7 @@ init 2 python:
         return tooltip
 
 screen multi_person_info_ui(actors):
-    layer "Active"
+    layer "solo"
     frame:
         background Frame("gui/topbox.png")
         xsize 1100

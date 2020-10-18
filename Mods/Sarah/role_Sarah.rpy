@@ -57,7 +57,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
-        sarah.set_schedule([1,2,3], sarah.home)
+        sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
         sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic, -1 = convinced her not to do it
@@ -361,7 +361,7 @@ init -1 python:
         mc.business.mandatory_crises_list.append(Sarah_fertile_period_end)
 
     def add_hr_director_initial_hire_action(person):
-        HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person)
+        HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person, requirement_args = day)
         mc.business.mandatory_crises_list.append(HR_director_initial_hire_action)
 
     def get_sarah_date_outfit_one():
@@ -462,7 +462,7 @@ label Sarah_intro_label():
             the_person.char "Thanks... well, it was good seeing you. I'd better keep at it."
             "You say goodbye to [the_person.title]. If you want to hire an HR director, you will need to create the position via the policy menu."
             $ sarah.event_triggers_dict["rejected"] = True
-            $ sarah.set_schedule([1,2,3], None)   # make her a free roaming character
+            $ sarah.set_schedule(None, times = [1,2,3])   # make her a free roaming character
 
     $ sarah.event_triggers_dict["first_meeting"] = True
     return
@@ -480,7 +480,6 @@ label Sarah_hire_label():
     the_person.char "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
     $ add_hr_director_initial_hire_action(the_person)
-    $ set_HR_director_tag("business_HR_meeting_last_day", day) # used to make sure we meet the next day
     return
 
 label Sarah_third_wheel_label():
@@ -553,7 +552,7 @@ label Sarah_third_wheel_label():
     $ sarah_friend.set_mc_title(mc.name)
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
     $ scene_manager.update_actor(the_person, position = "sitting")
-    $ scene_manager.add_actor(sarah_friend, position = "sitting", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(sarah_friend, position = "sitting", display_transform = character_left_flipped)
     the_person.char "Hey [sarah_friend.title]! Good to see you."
     sarah_friend.char "Hey girl! Is he with you?"
     "She nods towards you."
@@ -925,7 +924,7 @@ label Sarah_get_drinks_label():
         "Barely clothed, [the_person.title] is shivering from the cold."
     mc.name "I'm sorry, I didn't realize it was going to rain like that!"
     "You made quite a bit of noise when you came in the door, and [mom.title] pokes her head out from the kitchen to see what is going on."
-    $ scene_manager.add_actor(mom, position = "stand2", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(mom, position = "stand2", display_transform = character_left_flipped)
     mom.char "Oh! You two look absolutely soaked! Are you okay?"
     mc.name "Thanks [mom.title]! This is [the_person.title]! We got caught out in the rain walking back. Do you think you could grab us a few towels, and maybe have some dry clothes for her to wear for a bit?"
     if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
@@ -1375,11 +1374,11 @@ label Sarah_stripclub_story_label():
     "You arrange two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage. You pick a random girl for yours."
     $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
-    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
-    $ scene_manager.add_actor(showgirl, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(showgirl, display_transform = character_center_flipped)
     if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role(stripper_role):  #We have blackmailed Gabrielle about stripping already#
         if showgirl is cousin:
             $ showgirl_2 = get_random_from_list([x for x in stripclub_strippers if x != showgirl])
@@ -1468,9 +1467,9 @@ label Sarah_stripclub_story_label():
     "You both head out and are soon walking through your front door."
     $ mc.change_location(hall)
     $ mc.location.show_background()
-    $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
+    $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_right)
     the_person.char "Oh god I can't wait to get to your bedroom and..."
-    $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
+    $ scene_manager.add_actor(mom, display_transform = character_left_flipped)
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Hey [mom.mc_title]. You missed dinner! Leftovers are in the fridge. Oh! Hello again!"
     mc.name "Thanks, we're just going to go to my room for a bit to discuss some... work related matters."
@@ -1719,7 +1718,7 @@ label Sarah_threesome_request_label():
     the_person.char "Oh hell yeah, one sec..."
     "[the_person.title] fumbles around on her phone for a second. She is pretty drunk, so it takes her a while to find them."
     $ gossip_target.strip_outfit_to_max_sluttiness()
-    $ scene_manager.add_actor(gossip_target, position = "cowgirl", emotion = "orgasm", character_placement = character_center)
+    $ scene_manager.add_actor(gossip_target, position = "cowgirl", emotion = "orgasm", display_transform = character_center)
     "She shows you her phone. It shows [gossip_target.title] in the backseat of a Jeep, riding some guy you don't recognize while he is sitting."
     mc.name "Damn! She looks like she is enjoying herself there!"
     "You enjoy the picture for a few more moments before [the_person.title] takes her phone back."
@@ -1834,8 +1833,8 @@ label Sarah_threesome_request_label():
     $ mc.location.show_background()
 
     if person_choice is aunt:
-        $ scene_manager.add_actor(mom, character_placement = character_left_flipped, position = "sitting")
-        $ scene_manager.add_actor(aunt, character_placement = character_center, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_left_flipped, position = "sitting")
+        $ scene_manager.add_actor(aunt, display_transform = character_center, position = "sitting")
         "As you walk down the hall, you see that [aunt.possessive_title] is sitting with [mom.possessive_title], having coffee."
         "They notice you as you enter."
         aunt.char "Oh hey! Good to see you [aunt.mc_title]. And who is this?"
@@ -1855,7 +1854,7 @@ label Sarah_threesome_request_label():
         $ scene_manager.remove_actor(mom)
         $ scene_manager.remove_actor(aunt)
     elif person_choice is mom:
-        $ scene_manager.add_actor(mom, character_placement = character_left, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_left, position = "sitting")
         "As you walk down the hall past the kitchen, you see [mom.possessive_title] sitting at the table, having a cup of coffee. She notices you in the hall."
         mom.char "Oh, hey [mom.mc_title]."
         "She notices [the_person.possessive_title] walking beside you."
@@ -1871,8 +1870,8 @@ label Sarah_threesome_request_label():
         mom.char "Make sure you drink a glass of water so you aren't hungover in the morning. Goodnight you two!"
         $ scene_manager.remove_actor(mom)
     elif person_choice is lily:
-        $ scene_manager.add_actor(mom, character_placement = character_left_flipped, position = "sitting")
-        $ scene_manager.add_actor(lily, character_placement = character_center, position = "sitting")
+        $ scene_manager.add_actor(mom, display_transform = character_left_flipped, position = "sitting")
+        $ scene_manager.add_actor(lily, display_transform = character_center, position = "sitting")
         "As you walk down the hall and past the living room, you see [mom.possessive_title] and [lily.possessive_title] sitting at the couch, watching a movie."
         "They notice you walking by."
         lily.char "Hey Bro, we're watching a movie if you wanna join us... Wow! Whose the girl?"
@@ -2024,7 +2023,7 @@ label Sarah_initial_threesome_label():
     "You head to the front door and invite her in."
     $ scene_manager.add_actor(the_person_one)
     "You head back to your bedroom and she sits on your bed."
-    $ scene_manager.update_actor(the_person_one, position = "sitting", character_placement = character_center_flipped)
+    $ scene_manager.update_actor(the_person_one, position = "sitting", display_transform = character_center_flipped)
     the_person_one.char "Oh god, I've got butterflies in my stomach. I cant believe this is finally happening. Do I look okay?"
     mc.name "You look incredible, as always."
     if the_person_two is lily or the_person_two is mom:
@@ -2053,7 +2052,7 @@ label Sarah_initial_threesome_label():
 
     the_person_two.char "Come here. This will help..."
     $ scene_manager.update_actor(the_person_two, position = "walking_away")
-    $ scene_manager.update_actor(the_person_one, position = "kissing", character_placement = character_right)
+    $ scene_manager.update_actor(the_person_one, position = "kissing", display_transform = character_right)
     "The two girls embrace. They begin to run their hands along each others bodies. Then they begin to kiss."
     the_person_one.char "Mmm... your skin is so soft..."
     "Damn! They are starting to get into it. [the_person_two.title] has her hands around her back, while [the_person_one.possessive_title] is grabbing her ass."
@@ -2076,14 +2075,14 @@ label Sarah_initial_threesome_label():
     the_person_one.char "I want you to fuck me... fuck me while I eat out another woman!"
     mc.name "Glady! But I think everyone here is still wearing way too many clothes..."
     "The girls chuckle and then quickly agree."
-    $ scene_manager.update_actor(the_person_two, position = "stand2", character_placement = character_center_flipped)
+    $ scene_manager.update_actor(the_person_two, position = "stand2", display_transform = character_center_flipped)
     $ scene_manager.update_actor(the_person_one, position = "stand3")
     $ scene_manager.strip_actor_outfit(the_person_one)
     $ scene_manager.strip_actor_outfit(the_person_two)
     "After everyone is naked, the action moves to the bed."
     call start_threesome(the_person_one, the_person_two, start_position = Threesome_doggy_deluxe, swapped = True) from sarah_initial_threesome_1
-    $ scene_manager.update_actor(the_person_one, position = "missionary", character_placement = character_center)
-    $ scene_manager.update_actor(the_person_two, position = "back_peek", character_placement = character_right)
+    $ scene_manager.update_actor(the_person_one, position = "missionary", display_transform = character_center)
+    $ scene_manager.update_actor(the_person_two, position = "back_peek", display_transform = character_right)
     "As the activity winds down, you all lay down next to each other. You have [the_person_one.possessive_title] on one side and [the_person_two.possessive_title] on the other."
     the_person_one.char "Oh my god... that was so good. I never knew it could be so good, to be with another woman like that..."
     $ sarah.event_triggers_dict["threesome_unlock"] = 1
@@ -2293,7 +2292,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ scene_manager.add_actor(threesome_partner, position = "cowgirl")
         "[threesome_partner.possessive_title] is on top of you, your cock inside of her. Holy fuck!"
         "You open your eyes completely."
-        $ scene_manager.add_actor(the_person, position = "kneeling1", character_placement = character_center_flipped)
+        $ scene_manager.add_actor(the_person, position = "kneeling1", display_transform = character_center_flipped)
         "[the_person.title] is beside her, touching herself while [threesome_partner.title] fucks you. She notices you wakeup."
         the_person.char "Good morning! [threesome_partner.name] came in this morning looking for you, so I invited her to hop on for a bit."
         threesome_partner.char "I'm sorry, I didn't realize your girlfriend was spending the night, and I was feeling needy this morning..."
@@ -2307,8 +2306,8 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         # TODO change this scene if the girls both like anal? Need to figure out how to handle starting in a specific threesome action
         call start_threesome(threesome_partner, the_person, start_position = Threesome_double_down, round = 1, private = True, position_locked = False, affair_ask_after = False, hide_leave = False) from sarah_overnight_threesome_wakeup
         $ the_report = _return
-        $ scene_manager.update_actor(the_person, position = "missionary", character_placement = character_center_flipped)
-        $ scene_manager.update_actor(threesome_partner, position = "missionary", character_placement = character_right)
+        $ scene_manager.update_actor(the_person, position = "missionary", display_transform = character_center_flipped)
+        $ scene_manager.update_actor(threesome_partner, position = "missionary", display_transform = character_right)
         "All finished, the girls flop onto their backs, one on each side of you."
         if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0:  #They both finished.
             the_person.char "Oh wow, that was so hot..."
@@ -2372,7 +2371,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ showgirl = get_random_from_list(stripclub_strippers)
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     "You watch as a girl gets on stage and starts to do her routine."
-    $ scene_manager.add_actor(showgirl, character_placement = character_left_flipped)
+    $ scene_manager.add_actor(showgirl, display_transform = character_left_flipped)
     if showgirl is cousin:
         if showgirl.event_triggers_dict.get("blackmail_level",-1) < 2 and cousin.has_role(stripper_role) and not showgirl.event_triggers_dict.get("seen_cousin_stripping",False):
             python:
@@ -2389,7 +2388,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
     $ finished = True
     $ finished_chance = 0
     python:
-        for x in range(6):
+        for x in __builtin__.range(6):
             scene_manager.update_actor(showgirl, position = get_random_from_list(sarah_strip_pose_list))
             if renpy.random.randint(0,100) <76: #Take something off
                 showgirl.outfit.remove_random_any(top_layer_first = True)
@@ -2813,17 +2812,17 @@ label Sarah_weekend_date_strip_club_label():
 label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.change_location(hall)
     $ mc.location.show_background()
-    $ scene_manager.update_actor(the_person, position = "stand2", character_placement = character_right)
+    $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_right)
     if Sarah_is_fertile():
         the_person.char "Oh god, I can't wait to feel you fill me up again..."
     else:
         the_person.char "Oh god, I can't wait to feel your hands all over me again..."
-    $ scene_manager.add_actor(mom, character_placement = character_left_flipped)
+    $ scene_manager.add_actor(mom, display_transform = character_left_flipped)
     "[mom.title] pops around the corner when she hears you walking down the hall and unknowingly interrupts."
     mom.char "Ah! It's [the_person.name] again!"
     "[mom.possessive_title] raises her arms and gives [the_person.title] a hug."
     $ scene_manager.update_actor(the_person, position = "kissing")
-    $ scene_manager.update_actor(mom, position = "walking_away", character_placement = character_right)
+    $ scene_manager.update_actor(mom, position = "walking_away", display_transform = character_right)
     if mom.sluttiness > 40:
         "[mom.possessive_title] embraces her warmly. In fact it seems to be going on for quite some time..."
         if mom.sluttiness > 80 and the_person.sluttiness > 80:
@@ -2833,7 +2832,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         elif the_person.sluttiness < 40:
             the_person.char "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]"
     "Eventually they back away from each other."
-    $ scene_manager.update_actor(mom, position = "stand4", character_placement = character_left_flipped)
+    $ scene_manager.update_actor(mom, position = "stand4", display_transform = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2")
     mom.char "Alright, well don't let me keep you. You two have fun!"
     $ scene_manager.update_actor(mom, position = "walking_away")
@@ -2909,11 +2908,11 @@ label Sarah_date_strip_club_private_dance_label(the_person):
 
     $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
-    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
     $ showgirl_1.apply_outfit(stripclub_wardrobe.pick_random_outfit())
-    $ scene_manager.add_actor(showgirl_1, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(showgirl_1, display_transform = character_center_flipped)
 
     $ showgirl_2.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ scene_manager.add_actor(showgirl_2)
@@ -3015,7 +3014,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ del showgirl_1
     $ del showgirl_2
     "You head back out to the main room and sit down at a booth."
-    $ scene_manager.update_actor(the_person, position = "sitting", character_placement = character_right)
+    $ scene_manager.update_actor(the_person, position = "sitting", display_transform = character_right)
     return
 
 label Sarah_unlock_special_tit_fuck(the_person):

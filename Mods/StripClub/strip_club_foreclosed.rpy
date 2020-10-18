@@ -26,7 +26,7 @@ init 2 python:
         return
 
     def strip_club_is_closed():
-        return __builtin__.len(stripclub_strippers) == 0 or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
+        return strip_club.name == "Foreclosed" or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
 
     def get_strip_club_foreclosed_last_action_day():
         return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)
@@ -56,10 +56,10 @@ init 2 python:
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
             if person.is_employee():
-                person.set_schedule([0, 4], person.home)
+                person.set_schedule(person.home, times = [0, 4])
             else:
-                person.set_schedule([1,2,3], None)
-                person.set_schedule([0, 4], person.home)
+                person.set_schedule(None, times = [1,2,3])
+                person.set_schedule(person.home, times = [0, 4])
         return
 
     def add_cousin_talk_about_strip_club_action():

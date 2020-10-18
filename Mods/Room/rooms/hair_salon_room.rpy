@@ -71,7 +71,9 @@ init 2 python: # Declare variables to use
         salon_manager.home.add_person(salon_manager)
 
         # We want whoever the salon_manager is to be in the salon during work hours.
-        salon_manager.set_schedule([1,2,3], mall_salon)
+        salon_manager.set_schedule(mall_salon, days = [0, 1, 2, 3, 4], times = [1,2,3])
+        salon_manager.set_schedule(mall_salon, days = [5], times = [1,2])
+       
         salon_manager.event_triggers_dict["introduced"] = 0
         salon_manager.event_triggers_dict["day_met"] = -1
         salon_manager.event_triggers_dict["dump_witnessed"] = 0

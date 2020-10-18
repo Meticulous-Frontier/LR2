@@ -63,6 +63,7 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_arousal_serum_receive_drug_label")
         remove_mandatory_crisis_list_action("quest_arousal_serum_researched_label")
         remove_mandatory_crisis_list_action("quest_arousal_serum_test_label")
+        remove_mandatory_crisis_list_action("quest_arousal_serum_pills_expire_label")
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_arousal_serum_arrange_test)
         quest_arousal_serum.quest_event_dict.clear()
@@ -97,9 +98,10 @@ init 1 python:
         return False
 
     def quest_arousal_serum_researched_requirement():
-        if time_of_day == 3:
-            if day >= quest_arousal_serum.quest_event_dict.get("ready_day", 0):
-                return True
+        if mc.business.is_open_for_business():
+            if time_of_day == 3:
+                if day >= quest_arousal_serum.quest_event_dict.get("ready_day", 0):
+                    return True
         return False
 
     def quest_arousal_serum_pills_expire_requirement():

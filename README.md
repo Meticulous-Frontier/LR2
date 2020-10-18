@@ -6,7 +6,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Adds over 25 new crisis events with new dialogs and situations;
 * Adds In-game hint system that helps you find the more hidden quest and story lines in the game;
 * Adds Perks System that unlock special positions, give stat boosts or help you recover energy;
-* Adds 7 new Side Quests, you got one week to complete each of them;
+* Adds 6 Side Quests (Essential Oils, Arousal Serum, Breeding, Cure Discovery, Chemists Daughter, Porn Star);
 * The sex shop owner Cara with a complete story-line;
 * The hair salon Ophelia owner with a complete story-line;
 * Meet Candace the bimbo and open the clothes shop for shopping;
@@ -15,9 +15,9 @@ This mod collection extends the base game with a range of new features and enhan
 * Become the new Stripclub's owner, hire more girls and open a new BDSM room for special shows;
 * The HR director position (with Sarah story-line and enhanced employee recruitment);
 * Lifestyle Coach Dawn in the Mall (change active goals for main character skills-up);
-* Adds 15 new sex positions with dialogs and unique positions for some characters;
+* Adds 18 new sex positions with dialogs and unique positions for some characters;
 * Adds 5 threesome positions (triggered in various situations);
-* Enhances 11 existing sex positions with new dialogs;
+* Enhances 8 existing sex positions with new dialogs;
 * Unisex company bathrooms story-line with various new events;
 * Outfit generator built into the outfit creator (use mannequin selector for wardrobe edit);
 * A hair salon with options to change hair styles, colors and pubes trims;

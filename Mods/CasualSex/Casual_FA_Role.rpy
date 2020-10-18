@@ -137,7 +137,7 @@ init -1 python:
 
             self.home = purgatory #The room the character goes to at night. If none a default location is used.
             self.work = None #The room the character goes to for work.
-            self.schedule = {0:self.home,1:self.home,2:self.home,3:self.home,4:self.home} #A character's schedule is a dict of 0,1,2,3,4 (time periods) mapped to locations.
+            # self.schedule = {0:self.home,1:self.home,2:self.home,3:self.home,4:self.home} #A character's schedule is a dict of 0,1,2,3,4 (time periods) mapped to locations.
             #If there is a place in the schedule the character will go there. Otherwise they have free time and will do whatever they want.
             self.job = get_random_job() #Probably replace this
 
@@ -317,16 +317,11 @@ init -1 python:
             #renpy.say("","DEBUG: run day running correctly")
             if day%7 == 3 or renpy.random.randint(0,100) < 50: #If the new day is Friday or random roll is out of town.
                 self.home = purgatory
-                self.schedule[0] = purgatory
-                self.schedule[1] = purgatory
-                self.schedule[2] = purgatory
-                self.schedule[3] = purgatory
-                self.schedule[4] = purgatory
+                self.set_schedule(purgatory, times = [0, 1, 2, 3, 4])
             else:
                 self.home = downtown_hotel
-                self.schedule[2] = downtown_bar
-                self.schedule[3] = downtown_bar
-                self.schedule[4] = downtown_hotel
+                self.set_schedule(downtown_bar, days = [4, 5], times = [2, 3])
+                self.set_schedule(downtown_hotel, days = [5, 6], times = [4])
             #TODO Find a way to cancel dates made.
             super(Casual_Flight_Attendant, self)
         pass

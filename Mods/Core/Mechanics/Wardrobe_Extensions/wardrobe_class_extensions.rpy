@@ -248,7 +248,7 @@ init -1 python:
                     full_outfit = valid_wardrobe.pick_outfit_with_lowest_sluttiness()
 
                 if full_outfit:
-                    return full_outfit
+                    return full_outfit.get_copy()
 
         if __builtin__.len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
@@ -256,7 +256,7 @@ init -1 python:
             if full_outfit:
                 return full_outfit.get_copy()
             else:
-                return Outfit("Nude")
+                return default_outfit.get_copy()
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         uniform_over = None
@@ -313,7 +313,7 @@ init -1 python:
             if full_outfit:
                 return full_outfit.get_copy()
             else:
-                return Outfit("Nude")
+                return default_outfit.get_copy()
 
         return build_assembled_outfit(uniform_under, uniform_over)
 
@@ -352,7 +352,7 @@ init -1 python:
                     full_outfit = self.pick_outfit_with_lowest_sluttiness()
 
                 if full_outfit:
-                    return full_outfit
+                    return full_outfit.get_copy()
 
         if __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a outfit out of. Use default builder function.

@@ -2,7 +2,7 @@
 init -2 python:
     # splits a item_array in even chunks of blok_size
     def split_list_in_blocks(list, blok_size):
-        for i in range(0, len(list), blok_size):
+        for i in __builtin__.range(0, __builtin__.len(list), blok_size):
             yield list[i:i + blok_size]
 
     # splits an item_array in a number of blocks about equal in size (remainders are added to last bloks)

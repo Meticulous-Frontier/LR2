@@ -83,7 +83,7 @@ init 2:
                                     spacing 0
 
                                     vbox:
-                                        for division in range(0,__builtin__.len(division_serums)):
+                                        for division in __builtin__.range(0,__builtin__.len(division_serums)):
                                             button:
                                                 vbox:
                                                     xalign 0.5

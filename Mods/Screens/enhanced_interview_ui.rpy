@@ -25,20 +25,20 @@ init 2:
                         text "Personal Information" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the person: age, height, happiness, obedience, etc.
                         text "Age: [the_candidate.age]" style "menu_text_style" size 16
                         text "Required Salary: $[the_candidate.salary]/day" style "menu_text_style" size 16
-                        if recruitment_knowledge_one_policy.is_owned():
+                        if recruitment_knowledge_one_policy.is_active():
                             text "Personality: " + the_candidate.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
-                        if recruitment_knowledge_two_policy.is_owned():
+                        if recruitment_knowledge_two_policy.is_active():
                             text "Relationship: " + the_candidate.relationship style "menu_text_style" size 16
                             if the_candidate.relationship != "Single":
                                 text "Significant Other: " + the_candidate.SO_name style "menu_text_style" size 16
                             if the_candidate.kids > 0:
                                 text "Kids: " + str(the_candidate.kids) style "menu_text_style" size 16
-                        if recruitment_stat_improvement_policy.is_owned():
+                        if recruitment_stat_improvement_policy.is_active():
                             text "" style "menu_text_style" size 16
                             text "Happiness: [the_candidate.happiness]" style "menu_text_style" size 16
                             text "Sluttiness: [the_candidate.sluttiness] - " + get_gold_heart(the_candidate.sluttiness) style "menu_text_style" size 16
                             text "Obedience: [the_candidate.obedience] - " + get_obedience_plaintext(the_candidate.obedience) style "menu_text_style" size 16
-                        if recruitment_knowledge_three_policy.is_owned():
+                        if recruitment_knowledge_three_policy.is_active():
                             text "" style "menu_text_style" size 16
 
                             text "Height: " + height_to_string(the_candidate.height) style "menu_text_style" size 16
@@ -60,7 +60,7 @@ init 2:
                         text "    Research: [the_candidate.research_skill]" style "menu_text_style" size 16
                         text "    Production: [the_candidate.production_skill]" style "menu_text_style" size 16
                         text "    Supply: [the_candidate.supply_skill]" style "menu_text_style" size 16
-                        if recruitment_knowledge_four_policy.is_owned():
+                        if recruitment_knowledge_four_policy.is_active():
                             text "Sex Skills" style "menu_text_style" size 20
                             text "    Foreplay: " + str(the_candidate.sex_skills["Foreplay"]) style "menu_text_style" size 16
                             text "    Oral: " + str(the_candidate.sex_skills["Oral"]) style "menu_text_style" size 16

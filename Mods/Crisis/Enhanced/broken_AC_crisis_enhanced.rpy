@@ -22,8 +22,9 @@ init 5 python:
 
     def broken_ac_crisis_strip_other_girls(person, girl):
         for other_girl in [x for x in mc.business.production_team if x not in [person, girl]]:
+            scene_manager.add_actor(other_girl, display_transform = character_left)
             # only remove clothing, don't show it on screen
-            removed_something = other_girl.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20)
+            removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(other_girl, temp_sluttiness_boost = 20)
             if removed_something:
                 if other_girl.outfit.tits_visible():
                     other_girl.break_taboo("bare_tits")
@@ -31,6 +32,10 @@ init 5 python:
                     other_girl.break_taboo("bare_pussy")
                 if (other_girl.outfit.wearing_panties() and not other_girl.outfit.panties_covered()) or (other_girl.outfit.wearing_bra() and not other_girl.outfit.bra_covered()):
                     other_girl.break_taboo("underwear_nudity")
+            else:
+                scene_manager.update_actor(other_girl, emotion = "sad")
+                renpy.say("", other_girl.title + " glances at the other girls, but decides against taking off some clothes.")
+            scene_manager.remove_actor(other_girl)
         return
 
     def broken_AC_crisis_get_watch_list_menu(person):
@@ -43,12 +48,13 @@ label broken_AC_crisis_label_enhanced:
     if the_person is None:
         return
 
+    $ scene_manager = Scene()
     "There is a sudden bang in the office, followed by a strange silence. A quick check reveals the air conditioning has died!"
     "The machines running at full speed in the production department kick out a significant amount of heat. Without air condition the temperature quickly rises to uncomfortable levels."
     $ mc.business.p_div.show_background()
     #We're going to use the most slutty girl of the group lead the pack. She'll be the one we pay attention to.
-    $ the_person.draw_person()
-    if __builtin__.len(mc.business.production_team) == 0:
+    $ scene_manager.add_actor(the_person)
+    if __builtin__.len(mc.business.production_team) == 1:
         "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then [the_person.name] wants to know what to do."
     else:
         "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then, the production staff want to know what to do."
@@ -70,6 +76,7 @@ label broken_AC_crisis_label_enhanced:
                 mc.name "I know it's uncomfortable in here right now, but we're just going to have to make due."
                 mc.name "If anyone feels the need to take something off to get comfortable, I'm lifting the dress code until the air conditioning is fixed."
 
+                $ scene_manager.update_actor(the_person, emotion = "happy")
                 if the_person.effective_sluttiness() < 20:
                     the_person.char "He's got a point girls. Come on, we're all adults here."
                 elif the_person.effective_sluttiness() < 60:
@@ -78,7 +85,7 @@ label broken_AC_crisis_label_enhanced:
                     the_person.char "Let's do it girls! I can't be the only one who loves an excuse to flash her tits, right?"
 
             else: #There's just one person here, have them strip down.
-                $ the_person.draw_person()
+                $ scene_manager.update_actor(the_person, emotion = "sad")
                 mc.name "[the_person.title], I know it's uncomfortable in here right now, but we're going to have to make due."
                 mc.name "If you feel like it would help to take something off, I'm lifting the dress code until the air condition is fixed."
                 if the_person.effective_sluttiness() < 20:
@@ -86,7 +93,7 @@ label broken_AC_crisis_label_enhanced:
                 else:
                     the_person.char "I might as well. You don't mind seeing a little skin, do you?"
 
-            $ removed_something = the_person.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20) 
+            $ removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(the_person, temp_sluttiness_boost = 20) 
 
             if removed_something:
                 call broken_AC_crisis_break_taboo(the_person) from _call_broken_AC_crisis_break_taboo_the_person
@@ -104,13 +111,18 @@ label broken_AC_crisis_label_enhanced:
 
                     "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."
 
-                    $ removed_something = girl_choice.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20) 
+                    $ scene_manager.draw_scene()
+                    $ scene_manager.add_actor(girl_choice, display_transform = character_center_flipped)
+
+                    $ removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(girl_choice, temp_sluttiness_boost = 20) 
                     if removed_something:
                         call broken_AC_crisis_break_taboo(girl_choice) from _call_broken_AC_crisis_break_taboo_other_girl
                         $ slut_report = girl_choice.change_slut_temp(10)
                         if girl_choice.effective_sluttiness() < 40:
+                            $ scene_manager.update_actor(girl_choice, emotion = "sad")
                             "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you and blushes slightly and avoids making eye contact."
                         else:
+                            $ scene_manager.update_actor(girl_choice, emotion = "happy")
                             $ girl_choice.change_love(2)
                             "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you and gives a quick wink before turning back to [the_person.title]."
                     else:
@@ -140,7 +152,9 @@ label broken_AC_crisis_label_enhanced:
 
         "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=18}Requires: [casual_uniform_policy.name]{/size}{/color} (disabled)" if not casual_uniform_policy.is_active():
             pass
-    $renpy.scene("Active")
+
+    $ scene_manager.clear_scene()
+    $ clear_scene()
     return
 
 label broken_AC_crisis_break_taboo(the_girl):

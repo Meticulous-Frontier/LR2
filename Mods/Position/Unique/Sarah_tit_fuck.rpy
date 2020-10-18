@@ -129,7 +129,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
             "As your orgasm builds to it's peak you step back, sliding your cock out from her cleavage and take it up in your own hand."
             if the_girl.effective_sluttiness() > 40 or the_girl.get_opinion_score("cum facials") > 0:
                 "[the_girl.title] understands immediately what is about to happens and tilts her head up, giving you a clear target."
-                "You stroke yourself to completion and blast your load over her face, throwing thick ropes of cum her lips and nose and eyes."
+                "You stroke yourself to completion and blast your load over her face, throwing thick ropes of cum on her lips, nose, and eyes."
             else:
                 the_girl.char "What's wrong? I...!"
                 "You grunt and climax, blasting thick ropes of cum over [the_girl.title]'s surprised face. She jerks back, then waits until you're finished."

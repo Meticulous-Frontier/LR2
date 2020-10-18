@@ -51,7 +51,7 @@ init 2 python:
 
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
-    candace_get_to_know = Action("Get to know her", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
+    candace_get_to_know = Action("Get to know her {image=gui/heart/Time_Advance.png}", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
     candace_convince_to_quit = Action("Convince her to quit", candace_convince_to_quit_requirement, "candace_convince_to_quit_label", menu_tooltip = "Quit her current job and join your company.")
     candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
     candace_overhear_supply_order = Action("Overhear supply call", candace_overhear_supply_order_requirement, "candace_overhear_supply_order_label")
@@ -106,8 +106,8 @@ init 2 python:
             ])
 
         candace.generate_home()
-        candace.set_schedule([1,2], candace.home)
-        candace.set_schedule([3], office_store) #Buying office supplies for her employer.
+        candace.set_schedule(candace.home, times = [1,2])
+        candace.set_schedule(office_store, times = [3], days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
         candace.event_triggers_dict["day_met"] = -1 #Might eventually change the code where candi gets INIT other than when you meet her, so leave this -1 for now
@@ -369,7 +369,7 @@ label candace_talk_about_pay(the_person):
         mc.name "I'm always on the lookout for talented employees. I think you would make a good employee. You interested? I promise you'll make a lot more than you are now!"
         $ candace_increase_doubt()
         if candace_get_ready_to_quit():
-            the_person.char "You know, I can't believe I'm saying this, but I've been seriously considering it!."
+            the_person.char "You know, I can't believe I'm saying this, but I've been seriously considering it!"
         else:
             the_person.char "Oh, I'm okay, I don't need the money. But I suppose it would be nice to have."
     else:
@@ -447,7 +447,7 @@ label candace_convince_to_quit_label(the_person):
     "You complete the necessary paperwork and hire [the_person.title], assigning her to the supply department."
     #TODO make sure her home is set to Stephanie's house somehow.
     "As you finish up, you notice [salon_manager.possessive_title] is walking over to the table."
-    $ scene_manager.add_actor(salon_manager, position = "sitting", character_placement = character_left_flipped)
+    $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
     salon_manager.char "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
     the_person.char "Hi! You can call me [the_person.name]."
     salon_manager.char "You know, I used to date [the_person.SO_name] too!"
@@ -519,14 +519,14 @@ label candace_overhear_supply_order_label(the_person):
     the_person.char "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
     "She trades numbers with the supplier. Wait did she just turn down a discount? You watch as she says goodbye, making sure to lick her lips and wink before ending the call."
     "You decide to talk to her about it. You don't want to stifle her... creativity... but if she's getting discounts just for doing what she would already be doing, there's nothing wrong with that, right?"
-    "You walk up to her discounts. She smiles at you when she sees you approach."
+    "You walk up to her desk. She smiles at you when she sees you approach."
     the_person.char "Hello [the_person.mc_title]! Anything I can do for you today?"
     "You get ready to speak... but you notice her posture subtly change as she finishes that sentence. Did she just push her chest out a bit? You shake it off."
     mc.name "Yes, sorry I couldn't help but overheard your conversation with that supplier."
     the_person.char "Yes... sorry I just couldn't help but have a little fun with the guy..."
     mc.name "That's perfectly fine, I didn't mind that at all."
     the_person.char "Oh? That's good!"
-    mc.name "Yeah, I'm just curirous. Why did you turn down the discount? If they are offering to discount the product..."
+    mc.name "Yeah, I'm just curious. Why did you turn down the discount? If they are offering to discount the product..."
     the_person.char "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
     the_person.char "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like the owe me!"
     mc.name "I'm sure that if you accepted their offer of a discount, they would still send you dick pics."
@@ -539,10 +539,6 @@ label candace_overhear_supply_order_label(the_person):
     the_person.char "Yes sir!"
     $ scene_manager.clear_scene()
     $ mc.business.mandatory_crises_list.append(candace_supply_order_discount)
-    return
-
-
-
     return
 
 label candace_supply_order_discount_label():

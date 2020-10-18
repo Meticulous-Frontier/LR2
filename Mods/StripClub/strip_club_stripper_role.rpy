@@ -27,10 +27,10 @@ init 5 python:
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
         if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule([4], work_location)
+            person.set_schedule(work_location, times = [4])
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule([3, 4], work_location)
+            person.set_schedule(work_location, times = [3, 4])
 
         person.event_triggers_dict["stripclub_hire_day"] = day
         person.stripper_salary = calculate_stripper_salary(person)
@@ -55,10 +55,10 @@ init 5 python:
         person.remove_role(role)
         # restore default schedules
         if person.is_employee() or person in [lily, mom, aunt, nora]:
-            person.set_schedule([4], person.home)
+            person.set_schedule(person.home, times = [4])
         else:
-            person.set_schedule([0, 4], person.home)
-            person.set_schedule([1, 2, 3], None)
+            person.set_schedule(person.home, times = [0, 4])
+            person.set_schedule(None, times = [1, 2, 3])
 
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
@@ -245,8 +245,12 @@ label strip_club_hire_employee_label(the_person):
         the_person.char "Maybe, but not right now, I'm really busy at the moment, so there's not too many jobs I can do..."
         mc.name "Then my proposal will be perfect for you!"
 
-    mc.name "I own the [strip_club.formalName] downtown, and I need some workers for the place..."
-    the_person.char "Oh my God, really? You're proposing me a job in a strip club? I don't know..."
+    if mc.location is strip_club:
+        mc.name "I own this strip club and I could see you working here..."
+    else:
+        mc.name "I own the [strip_club.formalName] downtown, and I need some workers for the place..."
+
+    the_person.char "Oh my God, really? You're proposing a job in your strip club? I don't know..."
 
     $ ran_num = calculate_stripper_salary(the_person)
 

@@ -11,13 +11,15 @@ init 5 python:
     opinions_list.insert(15, "the colour purple")
     opinions_list.insert(15, "the colour white")
     opinions_list.insert(15, "the colour orange")
+    opinions_list.insert(15, "the colour brown")
 
     # evaluation function mapping for in-game color preferences in HSL values
     color_pref_eval_map = OrderedDict([
         ( "the colour black", "(s < 40 and l <= 30) or l <= 18"),
         ( "the colour white", "l >= 95"),
         ( "the colour yellow", "l > 55 and h >= 32 and h <= 78"),
-        ( "the colour orange", "l > 30 and h >= 20 and h <= 55"),
+        ( "the colour orange", "s > 60 and  l > 30 and h >= 20 and h <= 55"),
+        ( "the colour brown", "s > 10 and s <= 60 and l <= 35 and (h <= 35 or h >= 330)" ),
         ( "the colour pink", "s > 5 and l > 50 and h >= 300 and h <= 335"),
         ( "the colour purple", "s > 5 and l < 95 and h >= 270 and h <= 330"),
         ( "the colour green", "s > 5 and l < 95 and h >= 65 and h <= 170"),
@@ -36,8 +38,8 @@ init 5 python:
             [0, .278, .671, .95],  [.392, .584, .929, .95], [.282, .239, .545, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
             [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
             [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
-            [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95],
-            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 4 unused user definable colors
+            [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95], [.435, .305, .215, .95], [.352, 0.239, .239, .95],
+            [1,1,1,1], [1,1,1,1]    # allow for 1 unused user definable colors
         ]
 
     # array for determining the sluttiness of an outfit
@@ -177,6 +179,11 @@ init 5 python:
             "white smoke": [.95, .95, .95, .95],
             "ghost white": [.97, .97, 1, .95],
             "bright white": [1, 1, 1, .95]
+        }
+        color_prefs["the colour brown"] = {
+            "saddle brown": [.451, .313, .235, .95],
+            "coffee": [.435, .305, .215, .95],
+            "chocolate noir": [.352, 0.239, .239, .95]
         }
         #color_prefs[""][""] = [, , , ]
 
@@ -388,7 +395,7 @@ init 5 python:
 
             return (color_upper, color_lower, color_feet)
 
-        def get_item_from_list(self, item_group, filtered_list, points = 0, empty_item_opinions = []):
+        def get_item_from_list(self, item_group, filtered_list, points = 0, empty_item_opinions = [], no_pattern = False):
             weighted_list = self.build_weighted_list(item_group, filtered_list)
 
             for pref in self.preferences:
@@ -407,6 +414,9 @@ init 5 python:
             # renpy.random.shuffle(weighted_list)
 
             item = get_random_from_weighted_list(weighted_list)
+
+            if no_pattern:
+                return item
 
             # force pattern for certain items, others random 50/50
             if item and hasattr(item, "supported_patterns") and item.supported_patterns and (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
@@ -467,3 +477,109 @@ init 5 python:
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
+
+        def build_specific_outfit(self, color_opinion, outfit_type):
+            points = get_random_from_list(slut_scores)
+
+            # underwear = self.build_underwear(points)
+            underwear = Outfit("Underwear")
+            outfit = Outfit("Overwear")
+            upper_item_list = None
+            lower_item_list = None
+
+            if outfit_type == "dress":
+                upper_item_list = real_dress_list
+            else:
+                upper_item_list = shirts_list
+
+            if outfit_type == "skirt":
+                lower_item_list = skirts_list
+            elif outfit_type == "pants":
+                lower_item_list = pants_list
+
+            color_list = []
+            for col in self.color_prefs[color_opinion]:
+                color_list.append(self.color_prefs[color_opinion][col])
+
+            color_upper = get_random_from_list(color_list)
+            color_lower = get_random_from_list(color_list)
+            color_feet = get_random_from_list(color_list)
+            color_under = get_random_from_list(color_list)
+
+            ###Build Main Outfit
+
+            # find upper body item
+            filtered_upper_list = list(filter(lambda x: x.slut_value <= points, upper_item_list))
+            item = self.get_item_from_list("upper_body", filtered_upper_list, points, [], no_pattern = True)
+            if item:
+                outfit.add_upper(item.get_copy(), color_upper)
+
+            # find lowerbody item
+            if lower_item_list:
+                filtered_lower_list = list(filter(lambda x: x.slut_value <= points, lower_item_list))
+                if item is None or (not item.has_extension or item is leotard):
+                    item = self.get_item_from_list("lower_body", filtered_lower_list, points, [], no_pattern = True)
+                    if item:
+                        outfit.add_lower(item.get_copy(), [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])
+
+            # find feet item
+            filtered_feet_list = list(filter(lambda x: x.slut_value <= points, shoes_list))
+            item = self.get_item_from_list("feet", filtered_feet_list, no_pattern = True)
+            if item:
+                outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
+
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, self.person.base_outfit.accessories), 3, color_upper)
+
+            outfit.build_outfit_name()
+
+            ### Build Underwear ###
+            item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points), points, ["showing her tits", "not wearing underwear"], no_pattern = True)
+            if item:
+                underwear.add_upper(item.get_copy(), color_under)
+
+            # find lower body item
+            if not item or not item.has_extension:
+                if item and item.proper_name in self.matching_underwear:
+                    item = self.get_item_from_list("lower_body", self.build_filter_list(self.matching_underwear[item.proper_name], points), points, ["showing her ass", "not wearing underwear"], no_pattern = True)
+                else:
+                    item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"], no_pattern = True)
+                if item:
+                    underwear.add_lower(item.get_copy(), color_under if item in [cincher, heart_pasties] else color_under)
+
+            if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
+                if points >= 5:
+                    item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points), no_pattern = True)
+                else:
+                    item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points), no_pattern = True)
+                if item:
+                    underwear.add_feet(item.get_copy(), color_under)
+
+
+
+            ### Merge outfits ###
+
+            for item in underwear.upper_body:
+                if outfit.can_add_upper(item):
+                    outfit.add_upper(item)
+
+            for item in underwear.lower_body:
+                if outfit.can_add_lower(item):
+                    outfit.add_lower(item)
+
+            for item in underwear.feet:
+                if outfit.can_add_feet(item):
+                    outfit.add_feet(item)
+
+            for item in underwear.accessories:
+                if outfit.can_add_accessory(item):
+                    outfit.add_accessory(item)
+
+            # prevent any item from having no colour set
+            for cloth in outfit.upper_body + outfit.lower_body + outfit.feet + outfit.accessories:
+                if __builtin__.len(cloth.colour) < 4:
+                    cloth.colour = [1, 1, 1, .5]    # transparant white is easy to spot for debuggin
+
+            return outfit

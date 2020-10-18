@@ -95,7 +95,7 @@ label sister_phone_crisis_action_label:
 
             "[the_person.possessive_title] doesn't wait for a reply and starts sending selfies."
             python:
-                for i in range(3):
+                for i in __builtin__.range(3):
                     the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output = True))
                     the_person.draw_person(emotion = "happy")
                     renpy.pause(2)
@@ -214,5 +214,5 @@ label sister_phone_crisis_action_label:
             "It's so sweet of her to think of you."
 
     $ the_person.apply_planned_outfit()
-    $renpy.scene("Active")
+    $ clear_scene()
     return

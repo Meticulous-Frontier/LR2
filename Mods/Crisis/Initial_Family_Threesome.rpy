@@ -79,12 +79,12 @@ label SB_fetish_vaginal_family_threesome_label():
             "[the_person_one.possessive_title] winks at you before stripping down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_person_one, temp_sluttiness_boost = 50)
             mc.name "Damn [the_person_one.title], you are really getting good at that..."
-            $ scene_manager.update_actor(the_person_one, position="kneeling1", character_placement = character_center_flipped)
+            $ scene_manager.update_actor(the_person_one, position="kneeling1", display_transform = character_center_flipped)
             "She begins to crawl up your bed towards you."
         "Hop in!" if the_person_one.outfit.full_access():
             mc.name "I was just thinking my bed felt cold."
             the_person_one.char "Mmmm, I can think of a few ways to keep you warm."
-            $ scene_manager.update_actor(the_person_one, position="kneeling1", character_placement = character_center_flipped)
+            $ scene_manager.update_actor(the_person_one, position="kneeling1", display_transform = character_center_flipped)
             "[the_person_one.possessive_title] gives you a wink and then begins to crawl up the bed towards you."
 
     "You are so busy checking out [the_person_one.possessive_title], your brain barely registers a knock on your door. [the_person_one.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
@@ -101,8 +101,8 @@ label SB_fetish_vaginal_family_threesome_label():
         "They both look to you."
         the_person_two.char "[the_person_two.mc_title], you're the man here. What do you want to do?"
         call start_threesome(lily, mom) from _threesome_family_evening_event_1
-        $ scene_manager.update_actor(the_person_one, position = "back_peek", character_placement = character_center_flipped)
-        $ scene_manager.update_actor(the_person_two, position = "missionary", character_placement = character_right)
+        $ scene_manager.update_actor(the_person_one, position = "back_peek", display_transform = character_center_flipped)
+        $ scene_manager.update_actor(the_person_two, position = "missionary", display_transform = character_right)
         $ the_report = _return
         if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0:  #Happy family
             "[the_person_one.possessive_title] falls into your bed on one side of you on her side, while [the_person_two.title] lays on her back next to you."
@@ -117,7 +117,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ scene_manager.update_actor(the_person_two, position = "walking_away")
         the_person_one.char "Goodnight mom! Actually, I should probably get to bed as well, I just remembered I have to get up early..."
         $ scene_manager.remove_actor(the_person_two)
-        $ scene_manager.update_actor(the_person_one, position = "walking_away", character_placement = character_right)
+        $ scene_manager.update_actor(the_person_one, position = "walking_away", display_transform = character_right)
         "You watch as [the_person_one.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
         "God damn you love this family!"
         $ scene_manager.remove_actor(the_person_one)
@@ -163,8 +163,8 @@ label SB_fetish_vaginal_family_threesome_label():
         "Wow, you just had sex with [the_person_one.possessive_title] and [the_person_two.possessive_title]! You can't believe how lucky you are."
         "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
         "Eventually, the girls get up."
-        $ scene_manager.update_actor(the_person_one, position = "stand2", character_placement = character_center_flipped)
-        $ scene_manager.update_actor(the_person_two, position = "stand4", character_placement = character_right)
+        $ scene_manager.update_actor(the_person_one, position = "stand2", display_transform = character_center_flipped)
+        $ scene_manager.update_actor(the_person_two, position = "stand4", display_transform = character_right)
         the_person_two.char "Mmm... wow... I guess... that was really good actually... Maybe we should do this more often..."
         $ scene_manager.update_actor(the_person_two, position = "walking_away")
         "[the_person_two.possessive_title] turns and starts to walk out."
@@ -188,5 +188,5 @@ label SB_fetish_vaginal_family_threesome_label():
         del the_person_two
 
         mc.location.show_background()
-        renpy.scene("Active")
+        clear_scene()
     return

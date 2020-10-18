@@ -27,7 +27,7 @@ init -1 python:
         return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_daily_serum_dosage_requirement():
-        return time_of_day == 1 and daily_serum_dosage_policy.is_active() # This runs if you have the corresponding policy
+        return time_of_day == 1 and daily_serum_dosage_policy.is_active() and mc.business.is_work_day() # This runs if you have the corresponding policy
 
     def advance_time_people_run_day_requirement():
         return time_of_day == 4

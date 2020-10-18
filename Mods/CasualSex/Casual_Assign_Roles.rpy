@@ -125,13 +125,13 @@ init 2 python:
 
     def init_college_athlete_personality(self):
         # create 2 athletes
-        for x in range(0, 2):
+        for x in __builtin__.range(0, 2):
             casual_sex_create_athlete()
         return
 
     def init_hot_wife_personality(self):
         # create 2 hot wifes
-        for x in range(0, 2):
+        for x in __builtin__.range(0, 2):
             casual_sex_create_hotwife()
         return
 
@@ -168,9 +168,9 @@ init 1302 python:
         athlete_personality.response_dict["hookup_accept"] = "athlete_hookup_accept"
         the_person.personality = athlete_personality
         the_person.event_triggers_dict["reject_position"] = "standing_doggy"
-        the_person.schedule[1] = gym
-        the_person.schedule[2] = university
-        the_person.schedule[3] = gym
+        the_person.set_schedule(gym, days = [5,6], times = [1, 2])
+        the_person.set_schedule(university, days = [0, 1, 2, 3, 4], times = [2])
+        the_person.set_schedule(gym, days = [0, 1, 2, 3, 4], times = [1, 3])
         the_person.relationship = "Single"
         the_person.SO_name = None
         the_person.kids = 0
@@ -193,9 +193,7 @@ init 1302 python:
         else:
             the_person.personality = relaxed_personality  #Catch all for personalities#
 
-        the_person.schedule[1] = None    #Reset their schedule
-        the_person.schedule[2] = None
-        the_person.schedule[3] = None
+        the_person.set_schedule(None, times = [1, 2, 3])
         return
 
     def assign_casual_hotwife_role(the_person):
@@ -205,8 +203,7 @@ init 1302 python:
         hotwife_personality.response_dict["hookup_accept"] = "hotwife_hookup_accept"
         the_person.personality = hotwife_personality
         the_person.event_triggers_dict["reject_position"] = "blowjob"
-        the_person.schedule[2] = downtown_bar
-        the_person.schedule[3] = downtown_bar
+        the_person.set_schedule(downtown_bar, times = [2,3])
         the_person.relationship = "Married"
         the_person.SO_name = get_random_male_name()
         the_person.kids = 0
@@ -229,9 +226,7 @@ init 1302 python:
         else:
             the_person.personality = relaxed_personality  #Catch all for personalities#
 
-        the_person.schedule[2] = None    #Reset their schedule
-        the_person.schedule[3] = None
-
+        the_person.set_schedule(None, times = [1, 2, 3])
         return
 
 
@@ -247,7 +242,7 @@ init 1302 python:
         local_FA_personality.response_dict["hookup_accept"] = "FA_hookup_accept"
         the_person.personality = local_FA_personality
         the_person.event_triggers_dict["reject_position"] = "blowjob"
-        the_person.schedule[3] = downtown_bar
+        the_person.set_schedule(downtown_bar, days = [4, 5], times = [3])
 
         return
 
@@ -267,7 +262,6 @@ init 1302 python:
         else:
             the_person.personality = relaxed_personality  #Catch all for personalities#
 
-        the_person.schedule[2] = None    #Reset their schedule
-        the_person.schedule[3] = None
+        the_person.set_schedule(None, days = [4, 5], times = [3])
 
         return

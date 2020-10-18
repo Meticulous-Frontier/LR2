@@ -57,7 +57,8 @@ init 2 python:
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
-        starbuck.set_schedule([1, 2, 3], sex_store)
+        starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
+        starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
 
         # Add a counter to the sex shop
@@ -136,6 +137,8 @@ init -1 python:
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage == 0:
             if mc.business.funds >= 1000:
                 return True
@@ -143,6 +146,8 @@ init -1 python:
                 return "Requires: $1000"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage == 1:
             if (the_person.event_triggers_dict.get("shop_stage_one_day", 9999) + 7) < day:
                 if mc.business.funds >= 5000:
@@ -153,6 +158,8 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_investment_three_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage == 2:
             if (the_person.event_triggers_dict.get("shop_stage_two_day", 9999) + 7) < day:
                 if mc.business.funds >= 15000:
@@ -163,22 +170,28 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_promo_one_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 1.0:
                 return True
         return False
 
     def starbuck_sex_store_promo_two_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 2.0:
                 return True
         return False
 
     def starbuck_sex_store_promo_three_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
-                if starbuck.sluttiness > 60:
-                    if starbuck.love > 50:
+                if starbuck.sluttiness >= 60:
+                    if starbuck.love >= 50:
                         return True
                     else:
                         return "Requires: 50+ Love"
@@ -187,10 +200,12 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
-                if starbuck.sluttiness > 70:
-                    if starbuck.love > 60:
+                if starbuck.sluttiness >= 70:
+                    if starbuck.love >= 60:
                         return True
                     else:
                         return "Requires: 60+ Love"
@@ -199,10 +214,12 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
+        if not starbuck.location() is sex_store:
+            return False
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:
-                if starbuck.sluttiness > 90:
-                    if starbuck.love > 70:
+                if starbuck.sluttiness >= 90:
+                    if starbuck.love >= 70:
                         return True
                     else:
                         return "Requires: 70+ Love"
@@ -775,7 +792,7 @@ label starbuck_sex_store_promo_one_label(the_person):
         del SB_advert_three_outfit
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        renpy.scene("Active")
+        clear_scene()
     return #Toy modeling, ends in blowjob
 
 #SBS80

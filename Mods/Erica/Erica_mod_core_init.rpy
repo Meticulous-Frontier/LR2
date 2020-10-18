@@ -12,10 +12,6 @@ label activate_erica_mod_core(stack):
 
 label update_erica_mod_core(stack):
     python:
-        # assign correct weight to relative recruitment status
-        # if get_HR_director_tag("business_HR_relative_recruitment", 0) == 2:
-        #     update_hire_daughter_crisis(10)
-        # if get_HR_director_tag("business_HR_relative_recruitment", 0) == 1:
-        #     update_hire_daughter_crisis(2)
+
         execute_hijack_call(stack)
     return

@@ -142,7 +142,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
 
     "During the workday, you get up and head towards the restroom."
     $ scene_manager = Scene()
-    $ scene_manager.add_actor(the_person_one, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person_two)
     "As you step in the door, you pause for a second when you see [the_person_one.title] and [the_person_two.title] there at the sinks, freshing up."
     "You recently made all the bathrooms in the office unisex, and you aren't quite used to having women in the restroom when you walk in yet."

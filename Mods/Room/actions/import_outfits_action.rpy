@@ -71,7 +71,7 @@ label give_wardrobe_input(person = the_person): # when called from action defaul
     else:
         "Speaker" "File not found."
 
-    $renpy.scene("Active")
+    $ clear_scene()
     return
 
 label give_uniform_label():

@@ -15,15 +15,15 @@ init 2 python:
 
     def get_mother_with_daughter_for_doubleteam():
         mother_list = []
-        for person in town_relationships.get_business_relationships(["Daughter"]):
-            if willing_to_threesome(person.person_a, person.person_b):
-                mother_list.append(person.person_a)
+        for relationship in town_relationships.get_business_relationships(["Daughter"]):
+            if willing_to_threesome(relationship.person_a, relationship.person_b):
+                mother_list.append(relationship.person_b)
         mother = get_random_from_list(mother_list)
 
         daughter_list = []
-        for person in town_relationships.get_existing_children(mother):
-            if willing_to_threesome(mother, person):
-                daughter_list.append(person)
+        for daughter in town_relationships.get_existing_children(mother):
+            if willing_to_threesome(mother, daughter):
+                daughter_list.append(daughter)
         return (mother, get_random_from_list(daughter_list))
 
     mother_daughter_doubleteam_action = ActionMod("Mother Daughter Blowjob", mother_daughter_doubleteam_requirement, "mother_daughter_doubleteam_action_label",
@@ -39,7 +39,7 @@ label mother_daughter_doubleteam_action_label():
     "As you are walking around the office, you hear some arguing coming from the break room."
     "When you look inside, you see [the_mother.possessive_title] having a discussion with her daughter."
     $ scene_manager.add_actor(the_mother)
-    $ scene_manager.add_actor(the_daughter, character_placement = character_center_flipped)
+    $ scene_manager.add_actor(the_daughter, display_transform = character_center_flipped)
     the_daughter.char "I know, I know, dad always said you were good in bed. I'm not disputing that! I'm just saying I'm pretty good at giving blowjobs and I might even be better than you..."
     the_mother.char "Honey, blowjobs are an art that takes YEARS to master. I understand that you have enthusiasm, but that doesn't make up for practiced technique."
     the_daughter.char "What makes you think I don't have practice? Oh! Hey [the_daughter.mc_title]"
@@ -79,8 +79,8 @@ label mother_daughter_doubleteam_action_label():
                     "[the_mother.title] is stunned by your verdict."
                     the_mother.char "That... I can't believe it. Have I let myself get comfortable after all these years? Maybe I should practice more."
                     the_mother.char "Alright, I'll make dinner tonight, but this isn't over girl! We'll revisit this another time!"
-            $ scene_manager.update_actor(the_mother, position = "walking_away", character_placement = character_right)
-            $ scene_manager.update_actor(the_daughter, position = "walking_away", character_placement = character_center_flipped)
+            $ scene_manager.update_actor(the_mother, position = "walking_away", display_transform = character_right)
+            $ scene_manager.update_actor(the_daughter, position = "walking_away", display_transform = character_center_flipped)
             "The two girls walk out of the break room, the competition settled.... for now..."
         "Too busy":
             mc.name "I'm sorry, I have a lot on my to do list right now. Perhaps another time."

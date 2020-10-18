@@ -84,7 +84,7 @@ label serum_give_label_enhanced(the_person):
                 the_person.char "Were you about to put that in my drink? Oh my god [the_person.mc_title]!"
                 mc.name "Me? Never!"
                 "[the_person.title] shakes her head and storms off. You can only hope this doesn't turn into something more serious."
-                $renpy.scene("Active")
+                $ clear_scene()
 
     elif _return == "slave":
         #Auto success

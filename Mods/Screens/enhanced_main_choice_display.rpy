@@ -113,8 +113,9 @@ init 2 python:
         if not item.display_image:
             item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
 
-        renpy.scene("Active")
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="Active", what= item.display_image, tag=item.display_key)
+        clear_scene()
+        # renpy.show_screen("person_info_ui", item.return_value)
+        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
         return
 
 init 2:
@@ -163,7 +164,7 @@ init 2:
                                             text_align (0.5,0.5)
                                             if not renpy.mobile and item.display_key:
                                                 hovered [Function(show_menu_person, item)]
-                                                unhovered [Function(renpy.scene, "Active")]
+                                                unhovered [Function(clear_scene)]
                                             action [
                                                 Function(renpy.invoke_in_thread, clear_menu_items_list, menu_items),
                                                 Return(item.return_value)

@@ -9,6 +9,8 @@ init 3 python:
             return "Opens in the morning"
         elif mc.business.funds < 40: # $40 per session.
             return "Requires: $40"
+        elif mc.energy < 30:
+            return "Requires: 30 energy"
         else:
             return True
 
@@ -47,7 +49,7 @@ label select_person_for_gym_response(the_person):
         $ the_person.draw_person(emotion = "sad")
         the_person.char "I'm not in the mood for gym session, right now."
         $ the_person.change_obedience(-2)
-        $renpy.scene("Active")
+        $ clear_scene()
         return
 
     if the_person.personality == bimbo_personality:
@@ -101,8 +103,9 @@ label train_in_gym(the_person):
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
 
+    $ mc.change_energy(-30)
     $ body_changed = False
-    if not the_person.is_pregnant():
+    if not the_person.knows_pregnant():
         $ body_changed = the_person.change_weight(-ran_num, 100)
         $ new_weight = get_person_weight_string(the_person)
 

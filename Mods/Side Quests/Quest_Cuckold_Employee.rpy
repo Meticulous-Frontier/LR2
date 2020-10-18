@@ -535,6 +535,8 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         mc.name "Okay. I'll lock the door behind me  when I leave."
         the_person.char "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
+        $ clear_scene()
+        $ mc.location.show_background()
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
     else:

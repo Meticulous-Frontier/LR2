@@ -69,7 +69,7 @@ init 2 python:
     def mc_action_pay_to_strip_requirement(person):
         if not person is lily:
             if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
-                if __builtin__.len(mc.location.people) > 1:
+                if mc.location.get_person_count() > 1:
                     return "Must be alone with " + person.title
                 return True
         return False
@@ -244,7 +244,7 @@ label mc_schedule_person_label(*args):
     if room_choice == "Back":
         return
     else:
-        $ person.schedule[time_slot] = room_choice
+        $ person.set_schedule(room_choice, times = [time_slot])
         $ renpy.say("", time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
         return
 
@@ -261,10 +261,10 @@ label mc_start_follow_label(person):
 
 label mc_stop_follow_label(person):
     python:
-        if the_person.schedule[time_of_day] is the_person.home:
+        if the_person.get_destination() is the_person.home:
             schedule_destination = "my room"
-        elif the_person.schedule[time_of_day]:
-            schedule_destination = "the " + the_person.schedule[time_of_day].formalName
+        elif the_person.get_destination():
+            schedule_destination = "the " + the_person.get_destination().formalName
         else:
             schedule_destination = "somewhere else"
 

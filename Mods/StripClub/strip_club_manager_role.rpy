@@ -77,10 +77,10 @@ init 3303 python:
         # change to correct schedule
         if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule([4], strip_club)
+            person.set_schedule(strip_club, times = [4])
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule([3, 4], strip_club)
+            person.set_schedule(strip_club, times = [3, 4])
 
         manager_role_status_acquisition(person)
 
@@ -96,10 +96,10 @@ init 3303 python:
         # change default work location
         if person.is_employee() or person in [lily, mom, aunt, nora]:
             person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule([4], bdsm_room)
+            person.set_schedule(bdsm_room, times = [4])
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule([3, 4], bdsm_room)
+            person.set_schedule(bdsm_room, times = [3, 4])
         return
 
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")

@@ -15,7 +15,7 @@ init 3302 python:
         strip_club.formalName = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button
         for person in stripclub_strippers: # rehire strippers
-            person.set_schedule([3,4], strip_club)
+            person.set_schedule(strip_club, times = [3,4])
         set_strip_club_foreclosed_stage(-1) # end story line
         starbuck.remove_on_talk_event("talk_again_buying_club_starbuck_label")
         return
@@ -47,7 +47,7 @@ init 3302 python:
 
     def add_cousin_meet_at_strip_club():
         cousin_meet_at_strip_club_action = Action("Meet cousin at strip club", cousin_meet_at_strip_club_requirement, "strip_club_bought_strippers_selection_label", requirement_args = day + 1)
-        cousin.set_schedule([3], strip_club)
+        cousin.set_schedule(strip_club, times = [3])
         cousin.add_unique_on_room_enter_event(cousin_meet_at_strip_club_action)
 
     def add_think_about_buying_strip_club_action():

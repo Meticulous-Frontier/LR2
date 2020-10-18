@@ -224,19 +224,19 @@ init -1 python:
 
         for outfit in renpy.random.sample(default_wardrobe.outfits, __builtin__.len(default_wardrobe.outfits)):
             if outfit.has_overwear() and preferences.evaluate_outfit(outfit, 999) and outfit_builder.approves_outfit_color(outfit):
-                base_wardrobe.add_outfit(outfit)
+                base_wardrobe.add_outfit(outfit.get_copy())
             if __builtin__.len(base_wardrobe.outfits) > 7:
                 break
 
         for overwear in renpy.random.sample(default_wardrobe.overwear_sets, __builtin__.len(default_wardrobe.overwear_sets)):
             if overwear.is_suitable_overwear_set() and preferences.evaluate_outfit(overwear, 999) and outfit_builder.approves_outfit_color(overwear):
-                base_wardrobe.add_overwear_set(overwear)
+                base_wardrobe.add_overwear_set(overwear.get_copy())
             if __builtin__.len(base_wardrobe.overwear_sets) > 7:
                 break
 
         for underwear in renpy.random.sample(default_wardrobe.underwear_sets, __builtin__.len(default_wardrobe.underwear_sets)):
             if underwear.is_suitable_underwear_set() and preferences.evaluate_outfit(underwear, 999) and outfit_builder.approves_outfit_color(underwear):
-                base_wardrobe.add_underwear_set(underwear)
+                base_wardrobe.add_underwear_set(underwear.get_copy())
             if __builtin__.len(base_wardrobe.underwear_sets) > 7:
                 break
 
@@ -316,7 +316,10 @@ init -1 python:
 
     def update_characters():
         for person in all_people_in_the_game(unique_character_list):
+            update_person_opinions(person)
             update_random_person(person)
+            rebuild_wardrobe(person)
+            update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
         return
 
     def update_special_characters_opinions():
@@ -393,7 +396,7 @@ init -1 python:
 
         for i in __builtin__.range(0,4):
             person = create_stripper()
-            person.set_schedule([3,4],strip_club)
+            person.set_schedule(strip_club, times = [3,4])
             stripclub_strippers.append(person)
         return
 
@@ -412,11 +415,11 @@ label activate_generic_personality(stack):
         create_bimbo()
 
         # create two random people with the alpha personality (they have a very low chance of being created at random)
-        for i in range(2):
+        for i in __builtin__.range(2):
             create_alpha_personality()
 
         # add two random hookers to the game (on start of game)
-        for i in range(2):
+        for i in __builtin__.range(2):
             create_hooker()
 
         update_main_character_actions()
@@ -440,8 +443,6 @@ label update_generic_personality(stack):
         create_unique_character_list()
 
         update_main_character_actions()
-
-        update_characters()
 
         update_lingerie_wardrobe()
 

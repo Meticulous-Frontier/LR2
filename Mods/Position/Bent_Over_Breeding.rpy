@@ -96,7 +96,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
                 "You give her plaint ass another swat, this time not quite as hard."
                 "Her ass quivers slightly as you spank her. Her pussy clenches around you each time you spank her."
             if mc.arousal > 70:
-                "[the_girl.possessive_title]'s' tight pussy feels so good. You are getting close to cumming."
+                "[the_girl.possessive_title]'s tight pussy feels so good. You are getting close to cumming."
                 mc.name "You feel amazing. You're gonna make me cum soon."
                 "[the_girl.title] throws her ass back against you hard, forcing you deep."
                 the_girl.char "You better put it in deep! I need your seed planted as deep as it will go!"

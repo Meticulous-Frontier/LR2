@@ -903,7 +903,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, the_report): 
                         watcher.char "Yes! Thank you [watcher.mc_title]!"
                         $ scene_manager = Scene()
                         $ scene_manager.add_actor(the_person, position = the_position.position_tag)
-                        $ scene_manager.add_actor(watcher, character_placement = character_center_flipped)
+                        $ scene_manager.add_actor(watcher, display_transform = character_center_flipped)
                         watcher.char "Let me take off some clothes."
                         $ scene_manager.strip_actor_outfit(watcher)
                         call join_threesome(the_person, watcher, the_position.position_tag) from _call_join_threesome_watcher_check_enhanced
