@@ -350,7 +350,7 @@ label Sarah_flirt_response_mid(the_person):
         the_person.char "I guess I'm just not used to hearing the guy I used to play hide and seek with when I was little call me \"hot\"."
         mc.name "Well I suppose you'd better get used to, since its true and I'm not going to stop reminding you anytime soon."
         "[the_person.title] rolls her eyes at you, but you also notice the corner of her mouth turn up in a slight smile."
-        the_person.char "Thank Romeo, though I will admit it is nice to hear."
+        the_person.char "Thanks Romeo, though I will admit it is nice to hear."
 
     else:
         the_person.char "Buttering me up again, are you?"
