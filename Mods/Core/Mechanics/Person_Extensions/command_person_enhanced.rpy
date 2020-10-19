@@ -72,7 +72,8 @@ label give_panties_label(the_person):
 
     python:
         # remove panties from outfit
-        test_outfit.remove_clothing(the_item)
+        if the_item:
+            test_outfit.remove_clothing(the_item)
         # put on outfit without panties
         the_person.apply_outfit(test_outfit)
         the_person.draw_person()
