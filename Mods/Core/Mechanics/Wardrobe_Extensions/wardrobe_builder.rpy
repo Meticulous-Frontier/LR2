@@ -4,15 +4,6 @@ init 5 python:
     #def casual_sex_mod_initialization(action_mod):
     university_wardrobe = wardrobe_from_xml("University_Wardrobe")
 
-    opinions_list.insert(7, "boots")
-    opinions_list.insert(10, "high heels")
-    opinions_list.insert(13, "dresses")
-    opinions_list.insert(15, "the colour green")
-    opinions_list.insert(15, "the colour purple")
-    opinions_list.insert(15, "the colour white")
-    opinions_list.insert(15, "the colour orange")
-    opinions_list.insert(15, "the colour brown")
-
     # evaluation function mapping for in-game color preferences in HSL values
     color_pref_eval_map = OrderedDict([
         ( "the colour black", "(s < 40 and l <= 30) or l <= 18"),
