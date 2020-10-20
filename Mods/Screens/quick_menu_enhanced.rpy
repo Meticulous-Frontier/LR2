@@ -38,6 +38,7 @@ init 5:
             xalign 0.5
             yalign 1.0
 
+            textbutton _("Back") action Rollback()
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Menu") action ShowMenu()
             textbutton _("Auto") action Preference("auto-forward", "toggle")
