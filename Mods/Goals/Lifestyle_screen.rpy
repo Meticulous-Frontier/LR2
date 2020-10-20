@@ -10,6 +10,9 @@ screen lifestyle_goal_sheet():
     add "Paper_Background.png"
     modal True
     zorder 100
+
+    default tt = Tooltip("")
+
     vbox:
         xanchor 0.5
         xalign 0.5
@@ -18,12 +21,17 @@ screen lifestyle_goal_sheet():
             background "#1a45a1aa"
             xanchor 0.5
             xalign 0.5
-            vbox:
-                xsize 770
-                text mc.name + " " + mc.last_name style "menu_text_style" size 40
-                text "Goal Lists" style "menu_text_style" size 30
-                text "Each category requires a minimum of 2 selections" size 24
-        null height 60
+            hbox:
+                xsize 1600
+                ysize 110
+                vbox:
+                    xsize 600
+                    text "Goal Lists" + " " + mc.name + " " + mc.last_name style "menu_text_style" size 36 
+                    text "Each category requires a minimum of 2 selections" size 20 
+                vbox:
+                    xsize 1000
+                    text tt.value size 20
+        null height 40
         hbox:
             xanchor 0.5
             xalign 0.5
@@ -54,7 +62,7 @@ screen lifestyle_goal_sheet():
                                         Function(goal.toggle_enabled)
                                     ]
                                     hovered [
-                                        None
+                                        tt.Action(goal.name + "\n" + goal.description)
                                     ]
                             else:
                                 textbutton goal.name:
@@ -67,7 +75,7 @@ screen lifestyle_goal_sheet():
                                         Function(goal.toggle_enabled)
                                     ]
                                     hovered [
-                                        None
+                                        tt.Action(goal.name + "\n" + goal.description)
                                     ]
             frame:
                 background "#1a45a1aa"
@@ -92,7 +100,7 @@ screen lifestyle_goal_sheet():
                                         Function(goal.toggle_enabled)
                                     ]
                                     hovered [
-                                    None
+                                        tt.Action(goal.name + "\n" + goal.description)
                                     ]
                             else:
                                 textbutton goal.name:
@@ -105,7 +113,7 @@ screen lifestyle_goal_sheet():
                                         Function(goal.toggle_enabled)
                                     ]
                                     hovered [
-                                    None
+                                        tt.Action(goal.name + "\n" + goal.description)
                                     ]
 
             frame:
@@ -132,7 +140,7 @@ screen lifestyle_goal_sheet():
                                         Function(goal.toggle_enabled)
                                     ]
                                     hovered [
-                                    None
+                                        tt.Action(goal.name + "\n" + goal.description)
                                     ]
                             else:
                                 textbutton goal.name:
@@ -145,7 +153,7 @@ screen lifestyle_goal_sheet():
                                         Function(goal.toggle_enabled)
                                     ]
                                     hovered [
-                                    None
+                                        tt.Action(goal.name + "\n" + goal.description)
                                     ]
 
 
