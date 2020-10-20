@@ -124,6 +124,11 @@ init 5 python:
                 #renpy.say("", "Calling custom taboo break: " + transition_scene)
                 renpy.call(transition_scene, person, the_location, the_object)
 
+            #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
+            if renpy.has_label(new_position.taboo_break_description):
+                #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
+                renpy.call(self.taboo_break_description, person, the_location, the_object)
+
             transition_scene = new_position.transition_default
             for position_tuple in self.transitions:
                 if position_tuple[0] == new_position: ##Does the position match the one we are looking for?
@@ -134,16 +139,16 @@ init 5 python:
                 #renpy.say("", "Calling default transition scene: " + transition_scene)
                 renpy.call(transition_scene, person, the_location, the_object)
 
-            #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
-            if renpy.has_label(new_position.taboo_break_description):
-                #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
-                renpy.call(self.taboo_break_description, person, the_location, the_object)
-
         else: # we are calling from the new position (we don't have an old position to start from)
             #renpy.say("", "Default taboo break function: " + self.taboo_break_description)
             if renpy.has_label(self.taboo_break_description):
                 #renpy.say("", "Calling default taboo break: " + self.taboo_break_description)
                 renpy.call(self.taboo_break_description, person, the_location, the_object)
+
+            transition_scene = self.transition_default
+            if renpy.has_label(transition_scene):
+                #renpy.say("", "Calling default transition: " + transition_scene)
+                renpy.call(transition_scene, person, the_location, the_object)
         return
 
     Position.call_transition_taboo_break = call_transition_taboo_break
