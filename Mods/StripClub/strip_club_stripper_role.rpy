@@ -25,9 +25,12 @@ init 5 python:
             work_location = bdsm_room
 
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
-        if person.is_employee() or person in [lily, mom, aunt, nora]:
+        if person.is_employee() or person is nora:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(work_location, times = [4])
+        elif person in [lily, mom, aunt]:
+            person.event_triggers_dict["strip_club_shifts"] = 1
+            person.set_schedule(work_location, days=[0, 1, 3, 4, 5, 6], times =[4]) # Mom, Sis & Aunt on Wednesday play cards.
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.set_schedule(work_location, times = [3, 4])
