@@ -175,6 +175,16 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         "You gaze at her shapely ass. She reaches back and carefully removes your condom."
         the_girl.char "Wow that was good. Look at all that cum you made for me..."
         return
+    elif the_girl.knows_pregnant():
+        the_girl.char "That's it, shoot your seed deep inside me! Shower my baby with your cum!"
+        "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
+        "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy. She slowly moves as you dump your load deep inside her."
+        $ the_girl.cum_in_vagina()
+        $ SB_reverse_cowgirl.redraw_scene(the_girl)
+        the_girl.char "Oh Yes! Cum for me! It feels so good when you shoot your cum into my pussy!"
+        "[the_girl.possessive_title] slowly pulls herself up, rubbing her drenched pussy, while she smiles at you."
+        if the_girl.event_triggers_dict.get("preg_accident", False): # she got pregnant by accident
+            the_girl.char "This is how I got pregnant in the first place, too much potent cum in my fertile pussy."
     elif the_girl.has_role(cum_internal_role):
         the_girl.char "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
@@ -236,7 +246,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         the_girl.char "Thank you [the_girl.mc_title]. Do I look good? With your sticky seed painted all over my backside?"
         "[the_girl.possessive_title] shakes her hips side to side for you, showing off her prize. In a couple places your cum starts drip down from her shapely ass."
         "You lay back and take a few moments to enjoy the view."
-    elif the_girl.sex_skills["Vaginal"] > 5:
+    elif the_girl.sex_skills["Vaginal"] >= 5:
         the_girl.char "Oh god, it feels too good to pull off now... just shoot it up inside me!"
         if the_girl.arousal > 130:
             "[the_girl.possessive_title] is riding you with wild abandon, as yet another orgasm wracks her body. Too late to stop, you begin cumming at the same time."
