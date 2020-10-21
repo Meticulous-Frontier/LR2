@@ -115,7 +115,7 @@ init 2 python:
     difficulty_scale_function = give_serum_count_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction)
 
     face_cum_goal = Goal("Paint the Town White", "Show the world that various girls belong to you, by cumming all over their faces.", "sex_cum_on_face", "MC", always_valid_goal_function, face_cum_count_function,
-    {"count": 0, "required": 1},
+    {"count": 0, "required": 1, "people": []},
     difficulty_scale_function = face_cum_count_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     sex_goals.append(face_cum_goal)
