@@ -230,7 +230,7 @@ init 5 python:
 
             # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
             if __builtin__.len(object_option_list) == 0:
-                picked_object = make_floor()
+                picked_object = get_random_from_list(mc.location.objects)
             elif __builtin__.len(object_option_list) == 1:
                 picked_object = object_option_list[0][1]
             else:
