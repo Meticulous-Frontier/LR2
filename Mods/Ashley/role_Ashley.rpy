@@ -285,6 +285,7 @@ label ashley_hire_directed_label(the_person):
 
 
 label ashley_first_talk_label(the_person):
+    $ the_person.draw_person()
     mc.name "Hello there. You must be [the_person.name]. I'm [mc.name], the one who owns this place."
     "She looks at you, and see a hint of surprise on her face."
     the_person.char "Oh!... hello sir. It's nice to meet you. I'm sorry, my sister said this place was all women..."
@@ -300,10 +301,11 @@ label ashley_first_talk_label(the_person):
     return
 
 label ashley_room_excitement_overhear_label(the_person):
-    $ the_person.draw_person()
+    $ the_person.draw_person(position = "standing_doggy")
     "As you step into the production room, you can overhear [the_person.title] talking excitedly to another co-worker."
     the_person.char "I know! I can't wait to go. All of my friends say that is so much fun..."
     "But as you enter the room, she notices, and immediately stops talking."
+    $ the_person.draw_person()
     the_person.char "..."
     "Clearly she has no issue talking to her co-workers... why is she so quiet with you? Maybe you should ask her sister about it."
     $ stephanie.add_unique_on_talk_event(ashley_ask_sister_about_attitude)
@@ -311,6 +313,7 @@ label ashley_room_excitement_overhear_label(the_person):
     return
 
 label ashley_ask_sister_about_attitude_label(the_person):
+    $ the_person.draw_person()
     "You approach [the_person.title], intent to ask her about her sister."
     mc.name "Hello [the_person.title]. Do you have a moment?"
     the_person.char "Of course sir. What can I do for you?"
@@ -335,9 +338,11 @@ label ashley_ask_sister_about_attitude_label(the_person):
     return
 
 label ashley_room_warming_up_label(the_person):
+    $ the_person.draw_person(position = "standing_doggy")
     "As you step into the production room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person.char "I know, I just need to find someone to go with!"
     "As you enter the room, she looks and stops talking."
+    $ the_person.draw_person()
     the_person.char "Ahh... hello sir. Having a good day?"
     "Whoa. She actually said hi to you? Maybe she is warming up to you a little bit?"
     mc.name "It's been great so far. And you?"
@@ -348,9 +353,11 @@ label ashley_room_warming_up_label(the_person):
     return
 
 label ashley_room_overhear_classical_label(the_person):
+    $ the_person.draw_person(position = "standing_doggy")
     "As you step into the production room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person.char "I know, the city symphony is performing a collection of Johannes Brahms' symphonies. I want to go so bad but I can't find anyone to go with..."
     "As you enter the room, she looks and stops talking."
+    $ the_person.draw_person()
     the_person.char "Ahh... hello sir. Having a good day?"
     "She has been slowly warming up to you over the last couple weeks."
     mc.name "It's been great so far. And you?"
@@ -361,6 +368,7 @@ label ashley_room_overhear_classical_label(the_person):
     return
 
 label ashley_ask_date_classic_concert_label(the_person):
+    $ the_person.draw_person()
     mc.name "So... I couldn't help hearing earlier, you are looking to go to the Brahms Symphony recital, but you don't have anyone to go with?"
     the_person.char "Ummm yeah, something like that..."
     "She is looking down, avoiding eye contact with you."
