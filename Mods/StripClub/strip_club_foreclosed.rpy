@@ -149,6 +149,9 @@ label cousin_talk_about_strip_club_label(the_person):
 label club_foreclosed_strip_label(the_person):
     $ mc.change_location(downtown_hotel)
     $ mc.location.show_background()
+    "You walk up to the reception and hire a hotel room for one night. You and [the_person.title] go up to your room."
+    $ mc.business.change_funds(-80)
+    $ downtown_hotel_room.show_background()
     mc.name "Ok, here's your money, now lets get this show started."
     $ mc.business.change_funds(-amount)
     "[the_person.possessive_title] quickly disappears into the bathroom to change her clothes."

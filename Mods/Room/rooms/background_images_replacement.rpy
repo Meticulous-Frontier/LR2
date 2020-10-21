@@ -29,7 +29,7 @@ init -1 python:
     enhanced_marketing_backgrounds = room_background_image("Marketing_Background.jpg")
     enhanced_production_backgrounds = room_background_image("Production_Background.jpg")
     enhanced_research_backgrounds = room_background_image("RandD_Background.jpg")
-    enhanced_lobby_backgrounds = room_background_image("Lobby_Background.jpg")
+    enhanced_lobby_backgrounds = room_background_image("Office_Lobby_Background.jpg")
     # updated (no existing backgrounds)
     standard_sex_store_backgrounds = room_background_image("Sex_Shop_Background.jpg")
     standard_gym_backgrounds = room_background_image("Gym_Background.jpg")
@@ -37,7 +37,8 @@ init -1 python:
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
-    standard_hotel_backgrounds = room_background_image("Hotel_Room_Background.jpg")
+    standard_hotel_backgrounds = room_background_image("Hotel_Lobby_Background.jpg")
+    standard_hotel_room_backgrounds = room_background_image("Hotel_Room_Background.jpg")
     standard_fancy_restaurant_backgrounds = room_background_image("Fancy_Restaurant_Background.jpg")
     standard_gym_shower_backgrounds = room_background_image("Gym_Shower_Background.jpg")
     standard_salon_backgrounds = room_background_image("Salon_Background.jpg")
@@ -45,7 +46,21 @@ init -1 python:
     standard_bdsm_room_backgrounds = room_background_image("BDSM_Room_Background.jpg")
     standard_ceo_office_backgrounds = room_background_image("CEO_Office_Background.jpg")
 
+    def update_rd_div_with_genetics_unlocked():
+        if not genetic_modification_policy.is_owned():
+            return
+
+        found = find_in_list(lambda x: x.name == "R&D division", list_of_places)
+        if found:
+            found.background_image = standard_biotech_backgrounds[:]
+        return
+
+
 label updated_room_background(stack):
+    # Load extra GUI images
+    image serum_vial = "[vial_image.filename]"
+    image question_mark = "[question_image.filename]"
+
     python:
         # as long as the base game has no nice images, we use these to make navigating a little more fun
         office.background_image = enhanced_office_backgrounds[:]
@@ -59,11 +74,9 @@ label updated_room_background(stack):
         gym.background_image = standard_gym_backgrounds[:]
         clothing_store.background_image = standard_clothing_store_backgrounds[:]
 
+        # update rd division when genetics are unlocked
+        update_rd_div_with_genetics_unlocked()
+
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
-
-    # Load extra GUI images
-    image serum_vial = "[vial_image.filename]"
-    image question_mark = "[question_image.filename]"
-
     return
