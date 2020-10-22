@@ -50,6 +50,7 @@ init 2 python:
                 ["the colour purple", 2, False], #She loves purple!
                 ["skirts", 1, False],        #And Skirts
                 ["the colour red", -2, False], #She hates red
+                ["yoga", 2, False]          #She helps us establish the yoga class
             ], forced_sexy_opinions = [
                 ["taking control", 1, False], # she likes taking control, type A
                 ["giving handjobs", 2, False], # Not afraid to get her hands dirty ;)
@@ -1190,7 +1191,7 @@ label Sarah_tits_reveal_label():
         the_person.char "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
         "You put your phone in your pocket and head to your office."
         $ mc.change_location(office)
-    
+
     $ ceo_office.show_background()
 
     $ the_person.draw_person()

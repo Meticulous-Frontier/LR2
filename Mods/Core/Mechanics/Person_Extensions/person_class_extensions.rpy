@@ -1344,6 +1344,15 @@ init -1 python:
 
     Person.apply_university_outfit = apply_university_outfit
 
+    def apply_yoga_outfit(self):
+        if self.event_triggers_dict.get("yoga_outfit", None) == None or renpy.random.randint(0, 4) == 0: #We don't have one yet, or once in a while change things up a bit
+            builder = WardrobeBuilder(self)
+            self.event_triggers_dict["yoga_outfit"] = builder.build_workout_outfit(points = sluttiness_to_points(self.sluttiness), neutral_underwear = renpy.random.randint(0, 1), neutral_bottoms = renpy.random.randint(0, 1), neutral_shoes = renpy.random.randint(0, 1))
+        self.apply_outfit(self.event_triggers_dict.get("yoga_outfit", None))
+        return
+
+    Person.apply_yoga_outfit = apply_yoga_outfit
+
     def apply_planned_outfit(self):
         if self.should_wear_uniform():
             self.wear_uniform()

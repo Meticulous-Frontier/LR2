@@ -900,6 +900,9 @@ label ashley_test_outfit_command():
     $ the_person.apply_outfit(builder.build_specific_outfit("the colour brown", "dress"))
     $ the_person.draw_person()
     "This should be a brown dress! [the_person.outfit.name]"
+    $ the_person.apply_outfit(builder.build_specific_outfit(None, "workout", points = 12))
+    $ the_person.draw_person()
+    "This should be a random workout outfit! [the_person.outfit.name]"
     $ the_person.apply_outfit(builder.build_specific_outfit("the colour pink", "skirt"))
     $ the_person.draw_person()
     "This should be a pink skirt! [the_person.outfit.name]"
@@ -908,8 +911,29 @@ label ashley_test_outfit_command():
     "This should be a black pants! [the_person.outfit.name]"
     #random test
     $ the_color = get_random_from_list(["the colour green", "the colour pink", "the colour black", "the colour yellow", "the colour red", "the colour green", "the colour blue"])
-    $ the_style = get_random_from_list(["dress", "skirt", "pants"])
+    $ the_style = get_random_from_list(["dress", "skirt", "pants", "workout"])
     $ the_person.apply_outfit(builder.build_specific_outfit(the_color, the_style))
     $ the_person.draw_person()
     "[the_color] [the_style]! [the_person.outfit.name]"
+    return
+
+label ashley_test_workout_outfit():
+    $ the_person = stephanie
+    $ builder = WardrobeBuilder(the_person)
+    $ the_person.apply_outfit(builder.build_workout_outfit())
+    $ the_person.draw_person()
+    "This should be a random workout outfit! [the_person.outfit.name]"
+    $ the_person.apply_outfit(builder.build_workout_outfit(color_opinion ="the colour green", points = 1, neutral_underwear = True, neutral_bottoms = True, neutral_shoes = True))
+    $ the_person.draw_person()
+    "This should be a convservative green workout outfit with neutral accessories! [the_person.outfit.name]"
+    $ the_person.apply_outfit(builder.build_workout_outfit(color_opinion ="the colour pink", points = 12, neutral_shoes = True))
+    $ the_person.draw_person()
+    "This should be a slutty pink workout outfit with neutral shoes! [the_person.outfit.name]"
+    "Now running a gradually sluttier increasing outfit generation!"
+    $ poss_score = 0
+    while poss_score < 14:
+        $ the_person.apply_outfit(builder.build_workout_outfit(points = poss_score))
+        $ the_person.draw_person()
+        "[the_person.outfit.name]"
+        $ poss_score = poss_score + 1
     return
