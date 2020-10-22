@@ -592,5 +592,4 @@ label horny_at_work_crisis_enhanced_label():
                             "Frustrated, her rejection has at least taken your mind off of your erection and you're able to get back to work eventually."
 
     $ clear_scene()
-    $ scene_manager.clear_scene()
     return
