@@ -676,8 +676,9 @@ label ashley_ask_about_porn_label(the_person):
     "[the_person.possessive_title] quickly leaves the room."
     "Welp, you just got a handjob from [the_person.title]... and then her sister promptly walks in and witnesses the whole thing."
     "You'll have to consider how to approach both girls carefully before you talk to them next."
+    "You walk back to the [mc.location.formalName]."
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
-
+    $ mc.location.show_background()
     $ scene_manager.clear_scene()
     return
 
