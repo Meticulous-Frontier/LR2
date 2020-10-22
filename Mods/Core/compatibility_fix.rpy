@@ -34,6 +34,12 @@ init -1 python:
     config.predict_screen_statements = False
     config.predict_screens = False
 
+    # disable auto save
+    config.autosave_on_choice = False
+    config.has_autosave = False
+    config.autosave_slots = 6
+    # config.autosave_frequency = 200 # default: 200
+
     # for DEBUG only (uncomment when you get a cPickle error)
     # config.use_cpickle = False
     # config.debug_image_cache = True
