@@ -1079,7 +1079,15 @@ init -1 python:
 
     def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, show_person_info = True, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, half_off_instead = False,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
-        #Note: this function includes a call to remove_clothing, it is not needed seperately.
+
+        if the_clothing is None:  #we need something to take off
+            renpy.say("WARNING", "Draw animated removal called without passing a clothing item.")
+            return
+
+        if self.outfit is None:
+            renpy.say("WARNING", self.name + " is not wearing any outfit to remove an item from, aborting draw animated removal.")
+            return
+
         if position is None:
             position = self.idle_pose
 
