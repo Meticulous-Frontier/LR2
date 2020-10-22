@@ -302,7 +302,7 @@ label ashley_first_talk_label(the_person):
 
 label ashley_room_excitement_overhear_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
-    "As you step into the production room, you can overhear [the_person.title] talking excitedly to another co-worker."
+    "As you step into the room, you can overhear [the_person.title] talking excitedly to another co-worker."
     the_person.char "I know! I can't wait to go. All of my friends say that is so much fun..."
     "But as you enter the room, she notices, and immediately stops talking."
     $ the_person.draw_person()
@@ -339,7 +339,7 @@ label ashley_ask_sister_about_attitude_label(the_person):
 
 label ashley_room_warming_up_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
-    "As you step into the production room, you can overhear [the_person.title] talking excitedly to another coworker."
+    "As you step into the room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person.char "I know, I just need to find someone to go with!"
     "As you enter the room, she looks and stops talking."
     $ the_person.draw_person()
@@ -354,7 +354,7 @@ label ashley_room_warming_up_label(the_person):
 
 label ashley_room_overhear_classical_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
-    "As you step into the production room, you can overhear [the_person.title] talking excitedly to another coworker."
+    "As you step into the room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person.char "I know, the city symphony is performing a collection of Johannes Brahms' symphonies. I want to go so bad but I can't find anyone to go with..."
     "As you enter the room, she looks and stops talking."
     $ the_person.draw_person()
