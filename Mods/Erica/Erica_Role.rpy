@@ -389,9 +389,9 @@ label erica_get_to_know_label(the_person):
 
         #You've won the race#
     elif the_person.event_triggers_dict.get("erica_progress", 0) == 4:
-        if erica_is_looking_for_work() == False:
-            call erica_money_problems_label(the_person) from _erica_start_job_quest_01
-        else:
+        # if erica_is_looking_for_work() == False:
+        #     call erica_money_problems_label(the_person) from _erica_start_job_quest_01
+        # else:
             mc.name "Hey [the_person.title]."
             the_person.char "Hey. [the_person.mc_title]!"
             "You catch up with her for a bit with what she's been up to."
