@@ -50,7 +50,8 @@ init 2 python:
     def starbuck_talk_about_strip_club_requirement(person):
         if get_strip_club_foreclosed_stage() == 1:
             if day > get_strip_club_foreclosed_last_action_day() + 2:
-                return True
+                if starbuck in sex_store.people:
+                    return True
         return False
 
     def strip_club_foreclosed_change_stripper_schedules():
@@ -164,7 +165,7 @@ label club_foreclosed_strip_label(the_person):
             mc.name "Enough! I know how desperate for money you are, [the_person.title]."
             $ the_person.draw_person(emotion = "sad", position = "stand4")
             "She think she just lost her opportunity to gain some cash and looks disheartened..."
-            mc.name "Despite your usual attitude, I'll let you keep the money I gave you and I'll add $100 more...because if you believe it or not, but family matters to me."
+            mc.name "Despite your usual attitude, I'll let you keep the money I gave you and I'll add $100 more...because, believe it or not, family matters to me."
             $ mc.business.change_funds(-100)
             "When you give her another $100, you can see the puzzled look on her face, she can't believe what's happening..."
             $ the_person.draw_person(emotion = "happy", position = "stand4")
