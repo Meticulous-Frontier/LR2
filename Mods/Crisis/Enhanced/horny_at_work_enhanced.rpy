@@ -218,8 +218,8 @@ label horny_at_work_crisis_enhanced_label():
                     $ scene_manager.update_actor(the_choice, position = "stand3")
                     "You stand up, pants around your ankles, and motion for [the_choice.title] to come over to you."                   
                     $ clear_scene()
-                    call fuck_person(the_choice, private = False, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_1
-                    $ the_report = _return
+                    $ the_report = defaultdict(int)
+                    call fuck_person(the_choice, private = False, skip_intro = True, report_log = the_report) from _call_fuck_person_horny_at_work_enhanced_1
                     $ the_choice.review_outfit()
                     $ helpful_people.remove(the_choice)
                     $ wants_to_continue = True
@@ -255,8 +255,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ scene_manager.update_actor(the_choice, position = "stand3")
                             "She nods and smiles, stepping forward."
                             $ clear_scene()
-                            call fuck_person(the_choice, private = False) from _call_fuck_person_horny_at_work_enhanced_2
-                            $ the_report = _return
+                            call fuck_person(the_choice, private = False, report_log = the_report) from _call_fuck_person_horny_at_work_enhanced_2
                             $ the_choice.review_outfit()
                             $ helpful_people.remove(the_choice)
 
@@ -264,10 +263,12 @@ label horny_at_work_crisis_enhanced_label():
                         "You've worn yourself out, but you still haven't gotten off. You relax in your office chair and stroke yourself off until you cum."
                         "With that finally taken care of, you get yourself cleaned up and get back to work."
                         "Thanks to your post orgasm clarity you're able to focus perfectly."
-                    else:
+                    elif the_report.get("guy orgasms",0) == 1:
                         "You sit back down in your office chair, feeling satisfied."
                         "After getting yourself cleaned up you're able to focus perfectly again and you get back to work."
-
+                    elif the_report.get("guy orgasms",0) > 1:
+                        "You sit back down in your office chair, feeling completely drained, being satisfied multiple times."
+                        "After getting yourself cleaned up you're able to focus perfectly again and you get back to work."
 
 
             else: #You get yourself off.
@@ -415,11 +416,11 @@ label horny_at_work_crisis_enhanced_label():
                             "You smile and turn your chair to face her. You unzip your pants and grab onto your hard cock, stroking it slowly."
 
                         $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True) #If that fails we need to strip off her top, because she might have a dress style thing on blocking it.
-                        while the_item is not None:
+                        while the_item:
                             $ scene_manager.draw_animated_removal(the_person, the_clothing = the_item)
                             "[the_person.title] strips off her [the_item.name] while you watch."
                             $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-                        $ the_item = None
+
                         "When [the_person.possessive_title] is finished stripping down she puts her hands on her hips and watches you jerk off."
 
                         $ the_person.discover_opinion("not wearing anything")
@@ -514,6 +515,7 @@ label horny_at_work_crisis_enhanced_label():
                             if desk is not None:
                                 "You grab [the_person.possessive_title] by her hips and lift her up, putting her down on your desk and positioning yourself between her legs."
                             else:
+                                $ desk = make_floor() # fallback to floor
                                 "You grab [the_person.possessive_title] by her hips and lay her down in front of you, spreading her legs around you."
 
                             $ scene_manager.update_actor(the_person, display_transform = character_right, position = "missionary")
@@ -531,7 +533,7 @@ label horny_at_work_crisis_enhanced_label():
                                 $ strip_list = the_person.outfit.get_half_off_to_vagina_list()
                                 python:
                                     for clothing in strip_list:
-                                        the_person.draw_animated_removal(the_item, half_off_instead = True)
+                                        scene_manager.draw_animated_removal(the_person, clothing, half_off_instead = True)
                                         if the_person.outfit.vagina_available():
                                             renpy.say("","You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
                                         else:
@@ -539,8 +541,8 @@ label horny_at_work_crisis_enhanced_label():
 
                             else: #We need to strip her down completely. TODO: We need a way to determine if we can strip someone half down, then pull things aside (ie. pull off pants, pull panties to the side)
                                 $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True) #Start by stripping off her bottom.
-                                while (the_item is not None and not the_person.outfit.vagina_available()):
-                                    $ the_person.draw_animated_removal(the_item)
+                                while (the_item and not the_person.outfit.vagina_available()):
+                                    $ scene_manager.draw_animated_removal(the_person, the_item)
                                     if the_person.outfit.vagina_available():
                                         "You pull off her [the_item.name] and reveal her pussy, ready for you to use."
                                     else:
@@ -548,8 +550,8 @@ label horny_at_work_crisis_enhanced_label():
                                     $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True)
 
                                 $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove= True) #If that fails we need to strip off her top, because she might have a dress style thing on blocking it.
-                                while (the_item is not None and not the_person.outfit.vagina_available()):
-                                    $ the_person.draw_animated_removal(the_item)
+                                while (the_item and not the_person.outfit.vagina_available()):
+                                    $ scene_manager.draw_animated_removal(the_person, the_item)
                                     if the_person.outfit.vagina_available():
                                         "You pull off her [the_item.name] and reveal her pussy, ready for you to use."
                                     else:
@@ -566,7 +568,7 @@ label horny_at_work_crisis_enhanced_label():
                                 else:
                                     "You pull back a little and line the tip of your dick up with [the_person.title]'s cunt."
                                     "With one smooth thrust you push yourself inside of her. She arches her head back and moans as you bottom out inside of her."
-                                    call fuck_person(the_person, private = False, start_position = missionary, start_object = desk, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_5
+                                    call fuck_person(the_person, private = False, start_position = missionary, start_object = desk, asked_for_condom = True, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_5
                                     $ the_report = _return
                                     $ the_person.review_outfit()
                                     $ scene_manager.update_actor(the_person, position = "stand3")
@@ -592,5 +594,4 @@ label horny_at_work_crisis_enhanced_label():
                             "Frustrated, her rejection has at least taken your mind off of your erection and you're able to get back to work eventually."
 
     $ clear_scene()
-    $ scene_manager.clear_scene()
     return

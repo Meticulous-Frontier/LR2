@@ -198,7 +198,10 @@ label mistress_hunt_for_me_label(the_person):
     $ mc.change_location(downtown_hotel)
     $ mc.location.show_background()
     $ clear_scene()
-    "A couple of minutes later you are in the downtown hotel where you get a room."
+    "A couple of minutes later you are in the hotel and walk up to the reception to get a hotel room for one night."
+    $ mc.business.change_funds(-80)
+    $ downtown_hotel_room.show_background()
+
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_two, position = "walking_away")
     $ scene_manager.add_actor(the_person, position = "back_peek")

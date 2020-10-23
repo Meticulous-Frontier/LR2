@@ -77,7 +77,7 @@ init -1 python:
 
     def breeding_fetish_high_fertility_crisis_requirement():
         if mc_at_home() and time_of_day==4:
-            if get_highly_fertile_breeder() != None:
+            if get_highly_fertile_breeder():
                 return True
         return False
 
@@ -134,36 +134,35 @@ init 3 python:
         #Determine who it is, then add the appropriate quest.
         if persistent.pregnancy_pref == 0:
             return False
-        if the_person == mom:
+        if the_person is mom:
             if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
-        elif the_person == lily:
+        elif the_person is lily:
             lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
-        elif the_person == aunt:
+        elif the_person is aunt:
             pass
-        elif the_person == cousin:
+        elif the_person is cousin:
             pass
-        elif the_person == stephanie:
+        elif the_person is stephanie:
             if breeding_fetish_stephanie_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_stephanie_intro)
-        elif the_person == emily:
+        elif the_person is emily:
             pass
-        elif the_person == christina:
+        elif the_person is christina:
             pass
-        elif the_person == starbuck:
+        elif the_person is starbuck:
             if breeding_fetish_starbuck_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_starbuck_intro)
-        elif the_person == sarah:
+        elif the_person is sarah:
             if breeding_fetish_sarah_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_sarah_intro)
-        elif the_person == salon_manager:
+        elif the_person is salon_manager:
             pass
-        elif the_person == erica:
+        elif the_person is erica:
             pass
-        elif "candace" in globals():
-            if the_person == candace:
-                candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
-        elif the_person == ashley:
+        elif "candace" in globals() and the_person is candace:
+            candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
+        elif the_person is ashley:
             pass
         elif the_person.is_employee():
             if mc.business.event_triggers_dict.get("Employee_breeding_fetish_not_avail", False) == False:
@@ -206,7 +205,7 @@ label breeding_fetish_employee_intro_label(the_person):
     the_person.char "I umm... I mean... sorry."
     "She looks a bit flustered for a second, but quickly gathers her thoughts and starts to talk to you."
     if the_person.age < 35:
-        the_person.char "Well, you know sir, I'm still pretty young, and lately I've been dealing with some pretty instense biological... urges..."
+        the_person.char "Well, you know sir, I'm still pretty young, and lately I've been dealing with some pretty intense biological... urges..."
     else:
         the_person.char "Well, you know sire, I'm starting to get a bit older, and as my biological clock is ticking I've been getting some pretty intense... urges..."
     the_person.char "I'm not sure why, but lately I've been having these fantasies about having sex, raw, over and over, and getting filled with cum!"
@@ -214,7 +213,7 @@ label breeding_fetish_employee_intro_label(the_person):
     if the_person.knows_pregnant():
         the_person.char "Obviously I'm already pregnant, but umm, I've really been craving your cock inside me, twitching and pulsing your loads deep, over and over..."
     else:
-        the_person.char "I don't know how to say this but, I've been craving you, and your cock, twitching and pulsing load aftet load deep inside me! Knocking me up!"
+        the_person.char "I don't know how to say this but, I've been craving you, and your cock, twitching and pulsing load after load deep inside me! Knocking me up!"
     "The serums must really be effecting her, for her to be this forward with you. You decide to take advantage of the situation... and of her."
     "You get close to her. She wraps her arms around you as you get close."
     $ the_person.draw_person(position = "kissing")
@@ -344,7 +343,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
             pass
             #TODO add this event back into lily's list, and politely decline.
     the_person.char "Great! I'll get it setup..."
-    "You notice she hesitates a bit. She bites her lower lip before continueing."
+    "You notice she hesitates a bit. She bites her lower lip before continuing."
     the_person.char "So umm, I've been getting some requests recently..."
     mc.name "Oh? What are the thirsty anonymous internet guys want?"
     "She chuckles a second, but you sense a nervous tone."
@@ -384,7 +383,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Go ahead, set it up."
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] walks over to her laptop. You give her a few minutes to get everything setup."
-    the_person.char "Okay... I promised all the viewers a crazy show! Oh god I can't beleive it..."
+    the_person.char "Okay... I promised all the viewers a crazy show! Oh god I can't believe it..."
     "She stands up."
     $ the_person.draw_person()
     the_person.char "Just one more thing to do..."
@@ -393,7 +392,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "How do you think we should do this?"
     the_person.char "I was thinking... you could just lay back and hold the camera. I'll ride you reverse cowgirl, then when you finish you'll be to uhhh, you know, see it."
     mc.name "Mmm... that sounds amazing... for the viewers too!"
-    "She punches your arm half heartedly and laughs."
+    "She punches your arm half heartily and laughs."
     "You walk over to her bed and lay down on it. After a minute she brings you the camera."
     "She goes back over to a the computer, and after a moment, she gives a countdown."
     the_person.char "Okay, we are streaming in 5, 4, 3..."
@@ -790,7 +789,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     the_person.char "Oh yes! Give it to me good!"
     call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
-        the_person.char "Oh god! Babymaking sex is so hot, I can't believe it..."
+        the_person.char "Oh god! Baby making sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
     else:
         #TODO what to put here?
@@ -939,7 +938,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         the_person.char "Just, like, put it in me already!"
         mc.name "I want to hear you beg."
         the_person.char "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
-        "Wow, that didn't take much encouragement. You grab her hips, line yourelf up and push yourself in deep."
+        "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person.char "Yes!!!"
         call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
@@ -1027,7 +1026,7 @@ label breeding_fetish_high_fertility_crisis_label():
         if the_person.has_creampie_cum():
             the_person.char "Its inside me! It worked! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
-            $ become_pregnant(the_person, mc_father = True) #Gaurenteed to knock her up
+            $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
             $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         else:
             "Too tired to continue, [the_person.possessive_title] pulls off you a little frustrated."
@@ -1049,7 +1048,7 @@ label breeding_fetish_high_fertility_crisis_label():
         if the_person.has_creampie_cum():
             the_person.char "Its inside me! I'm pregnant! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
-            $ become_pregnant(the_person, mc_father = True) #Gaurenteed to knock her up
+            $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
             $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         else:
             "Too tired to continue, [the_person.possessive_title] looks up at you little frustrated."

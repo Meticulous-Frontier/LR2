@@ -15,6 +15,19 @@ init -1 python:
             if found: # remove from processing list
                 people_to_process.remove(found)
 
+        # cleanup crisis events where person is in argument list
+        for crisis in mc.business.mandatory_crises_list + mc.business.mandatory_morning_crises_list:
+            args = crisis.args
+            if not isinstance(args, list):
+                args = [args]
+            
+            for arg in args:
+                if arg is self:
+                    if crisis in mc.business.mandatory_crises_list:
+                        mc.business.mandatory_crises_list.remove(crisis)
+                    if crisis in mc.business.mandatory_morning_crises_list:
+                        mc.business.mandatory_morning_crises_list.remove(crisis)
+
         # remove from business teams
         for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
             if self in team:
@@ -1021,7 +1034,7 @@ init -1 python:
     # attach to person object
     Person.change_willpower = change_willpower
 
-    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, 
+    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
         if position is None:
             position = self.idle_pose
@@ -1079,7 +1092,15 @@ init -1 python:
 
     def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, show_person_info = True, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, half_off_instead = False,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
-        #Note: this function includes a call to remove_clothing, it is not needed seperately.
+
+        if the_clothing is None:  #we need something to take off
+            renpy.say("WARNING", "Draw animated removal called without passing a clothing item.")
+            return
+
+        if self.outfit is None:
+            renpy.say("WARNING", self.name + " is not wearing any outfit to remove an item from, aborting draw animated removal.")
+            return
+
         if position is None:
             position = self.idle_pose
 
@@ -1343,6 +1364,24 @@ init -1 python:
         return
 
     Person.apply_university_outfit = apply_university_outfit
+
+    def apply_yoga_outfit(self):
+        if self.event_triggers_dict.get("yoga_outfit", None) == None or renpy.random.randint(0, 4) == 0: #We don't have one yet, or once in a while change things up a bit
+            builder = WardrobeBuilder(self)
+            self.event_triggers_dict["yoga_outfit"] = builder.build_workout_outfit(points = sluttiness_to_points(self.sluttiness), neutral_underwear = renpy.random.randint(0, 1), neutral_bottoms = renpy.random.randint(0, 1), neutral_shoes = renpy.random.randint(0, 1))
+        self.apply_outfit(self.event_triggers_dict.get("yoga_outfit", None))
+        return
+
+    Person.apply_yoga_outfit = apply_yoga_outfit
+
+    def apply_yoga_shoes(self):
+        if self.event_triggers_dict.get("yoga_shoes", None) == None:
+            builder = WardrobeBuilder(self)
+            self.event_triggers_dict["yoga_shoes"] = builder.get_workout_shoes(points = sluttiness_to_points(self.sluttiness), neutral_shoes = renpy.random.randint(0, 1))
+        self.apply_outfit(self.event_triggers_dict.get("yoga_shoes", None))
+        return
+
+    Person.apply_yoga_shoes = apply_yoga_shoes
 
     def apply_planned_outfit(self):
         if self.should_wear_uniform():

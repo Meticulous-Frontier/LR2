@@ -7,3 +7,8 @@ init -1 python:
         return
 
     MainCharacter.change_location = change_location_enhanced
+
+    def has_dungeon(self):
+        return mc.business.event_triggers_dict.get("dungeon_owned", False) == True
+
+    MainCharacter.has_dungeon = has_dungeon

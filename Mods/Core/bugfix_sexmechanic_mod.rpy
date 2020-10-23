@@ -229,7 +229,9 @@ init 5 python:
                     object_option_list.append([loc_object.get_formatted_name(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
 
             # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
-            if __builtin__.len(object_option_list) == 1:
+            if __builtin__.len(object_option_list) == 0:
+                picked_object = get_random_from_list(mc.location.objects)
+            elif __builtin__.len(object_option_list) == 1:
                 picked_object = object_option_list[0][1]
             else:
                 picked_object = renpy.display_menu(object_option_list,True,"Choice")
@@ -432,7 +434,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         $ the_person.draw_person() #Draw her standing until we pick a new position
                         if not ignore_taboo and the_person.has_taboo(position_choice.associated_taboo):
                             # call mod taboo break
-                            $ position_choice.call_transition_taboo_break(None, the_person, mc.location, object_choice)
+                            $ position_choice.call_transition_taboo_break(position_choice, the_person, mc.location, object_choice)
                             $ the_person.break_taboo(position_choice.associated_taboo)
                         else:
                             $ position_choice.call_intro(the_person, mc.location, object_choice)
@@ -441,10 +443,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         $ mc.change_arousal(-5)
                         if not ignore_taboo and the_person.has_taboo(position_choice.associated_taboo):
                             # call mod taboo break
-                            $ position_choice.call_transition_taboo_break(None, the_person, mc.location, object_choice)
+                            $ position_choice.call_transition_taboo_break(position_choice, the_person, mc.location, object_choice)
                             $ the_person.break_taboo(position_choice.associated_taboo)
                         else:
-                            $ position_choice.call_transition(None, the_person, mc.location, object_choice)
+                            $ position_choice.call_transition(start_position, the_person, mc.location, object_choice)
                     # redraw after transition not before
                     $ position_choice.redraw_scene(the_person)
 

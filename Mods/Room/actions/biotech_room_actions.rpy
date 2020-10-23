@@ -5,7 +5,7 @@ init 3 python:
     def biotech_clone_person_requirement():
         if time_of_day == 4:
             return "Too late"
-        elif not dungeon.visible:
+        elif not mc.has_dungeon():
             return "Dungeon required"
         return True
 

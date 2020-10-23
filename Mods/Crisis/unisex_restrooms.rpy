@@ -144,7 +144,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person_two)
-    "As you step in the door, you pause for a second when you see [the_person_one.title] and [the_person_two.title] there at the sinks, freshing up."
+    "As you step in the door, you pause for a second when you see [the_person_one.title] and [the_person_two.title] there at the sinks, freshening up."
     "You recently made all the bathrooms in the office unisex, and you aren't quite used to having women in the restroom when you walk in yet."
     "However, the girls seem completely unfazed when you walk through the door."
     the_person_one.char "Oh hey [the_person_one.mc_title]. So anyway..."

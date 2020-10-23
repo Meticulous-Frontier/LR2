@@ -11,8 +11,6 @@ transform transform_two():
     xanchor 1.0
 
 init 1 python:
-    sexy_opinions_list.append("threesomes")
-
     def SB_draw_two_person_scene(person_one, person_two, one_position = None, one_emotion = None, one_special_modifier = None, one_pos_x = 1.0, one_pos_y = 1.0, one_scale = 1.0, two_position = None, two_emotion = None, two_special_modifier = None, two_pos_x = 1.0, two_pos_y = 1.0, two_scale = 1.0, lighting = None): #Draw two people.
         #NOTE person two is always drawn second.
         clear_scene()

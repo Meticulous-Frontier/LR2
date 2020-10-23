@@ -53,6 +53,7 @@ label dungeon_completed_label():
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
     "The dungeon at your house is now ready for use."
+    $ mc.business.event_triggers_dict["dungeon_owned"] = True
     $ dungeon.visible = True
     return
 

@@ -358,16 +358,13 @@ init 2:
             return False
 
 
-
-
-
 label get_fucked(the_person, the_goal = None, sex_path = None, private= True, start_position = None, start_object = None, skip_intro = False, report_log = None, ignore_taboo = False, prohibit_tags = [], unit_test = False, allow_continue = True):
     $ apply_sex_modifiers(the_person) #Apply sex modifiers before choosing goals and positions to avoid choosing positions girl shouldn't accept
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ object_choice = start_object
     $ start_mc_orgasm = 0
     $ start_girl_orgasm = 0
-    if report_log != None:  #We set orgasms in the report to zero for now so that requirement functions can check for them easier.
+    if report_log:  #We set orgasms in the report to zero for now so that requirement functions can check for them easier.
         $ start_mc_orgasm = report_log.get("guy orgasms", 0)
         $ start_girl_orgasm = report_log.get("girl orgasms", 0)
         $ report_log["guy orgasms"] = 0
@@ -380,37 +377,38 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ using_condom = mc.condom
     else:
         $ using_condom = requires_condom(the_person)
-    if start_position != None and sex_path == None:
-        if the_goal == None:
+
+    if start_position and not sex_path:
+        if not the_goal:
             $ the_goal = "get mc off"
         $ sex_path = [dom_sex_path_node(start_position, get_sex_finish_req(the_goal))]  #If we have a start position only, we set the path to be the start position with MC getting off as the goal
 
-
-    if the_goal == None:
+    if not the_goal:
         $ the_goal = create_sex_goal(the_person, report_log)
         if unit_test: #unit_test is for debug dialogue
             "The goal for this session is [the_goal]."
 
-    if sex_path == None:
+    if the_goal and not sex_path:
         $ sex_path = create_sex_path(the_person, the_goal, prohibit_tags)
         if unit_test:
             "The first position for this session is [sex_path[0].position.name]."
 
-    if sex_path == None:  #We couldn't find a sex path, so abort the session, or possibly rerun it relaxing conditions? #TODO
-
+    if not sex_path:  #We couldn't find a sex path, so abort the session, or possibly rerun it relaxing conditions? #TODO
         "[the_person.title] can't think of anything more to do with you."
         $ finished = True
         if unit_test: #unit_test is for debug dialogue
             "No viable path."
 
-    if object_choice == None:
+    if not object_choice and sex_path:
         $ object_choice = girl_choose_object_enhanced(the_person, sex_path[0].position)
-    if object_choice == None:
+    if not object_choice:
         "[the_person.title] can't find a good place to have fun with you."
         $ finished = True
         if unit_test:
             "No suitable object"
-    $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
+
+    if sex_path:
+        $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
     #Next we mimic fuck_person() but only with applicable girl in charge parameters.
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private:
@@ -428,11 +426,12 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             the_person.char "I'm tired. Maybe we will continue this another time."
             $ finished = True
 
-    if len(sex_path) > 1 and not finished:
+    if sex_path and len(sex_path) > 1 and not finished:
         the_person.char "Let's get warmed up a little bit first..."
     #TODO determine condom usage. Can probably just call a method from the sex bugfix file
 
-    $ the_person.set_sex_goal(the_goal)
+    if the_goal:
+        $ the_person.set_sex_goal(the_goal)
     #We should be able to initiate sex. If we need to, call initial intros and taboo breaks.
     if not skip_intro and not finished:
         $ the_person.draw_person()

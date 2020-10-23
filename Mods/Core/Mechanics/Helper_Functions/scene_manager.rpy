@@ -30,10 +30,10 @@ init -2 python:
             self.draw_scene()
 
         # Removes all actors from the scene
-        def clear_scene(self):
+        def clear_scene(self, reset_actor = True):
             people_in_scene = [actor.person for actor in self.actors]
             for person in people_in_scene:
-                self.remove_actor(person)
+                self.remove_actor(person, reset_actor = reset_actor)
 
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
             actor = find_in_list(lambda x: x.person is person, self.actors)

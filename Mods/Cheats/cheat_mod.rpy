@@ -776,26 +776,29 @@ screen cheat_menu():
                                             ]
 
                         if pubes_color_options:
-                            vbox:
-                                for x in list_of_hairs[:14]:
-                                    $ color = x[1]
-                                    $ color[3] = 1
-                                    if hasattr(editing_target, "pubes_colour"):
-                                        textbutton str(x[0]):
-                                            xfill True
-                                            style "textbutton_no_padding_highlight"
-                                            text_style "cheat_text_style"
+                            viewport:
+                                mousewheel True
+                                scrollbars "vertical"
+                                xsize 500
+                                vbox:
+                                    for x in list_of_hairs:
+                                        $ color = x[1]
+                                        $ color[3] = 1
+                                        if hasattr(editing_target, "pubes_colour"):
+                                            textbutton str(x[0]):
+                                                xfill True
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "cheat_text_style"
 
-                                            if editing_target.pubes_colour == color:
-                                                background "#4f7ad6"
-                                                hover_background "#4f7ad6"
+                                                if editing_target.pubes_colour == color:
+                                                    background "#4f7ad6"
+                                                    hover_background "#4f7ad6"
 
-                                            action [
-                                                SetField(editing_target, "pubes_colour", color),
-                                                SetField(editing_target, "pubes_style.colour", color),
-                                                Function(cheat_appearance)
-                                            ]
-
+                                                action [
+                                                    SetField(editing_target, "pubes_colour", color),
+                                                    SetField(editing_target, "pubes_style.colour", color),
+                                                    Function(cheat_appearance)
+                                                ]
 
                         if font_color_options:
                             viewport:

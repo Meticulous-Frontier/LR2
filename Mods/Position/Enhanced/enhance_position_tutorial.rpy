@@ -136,11 +136,26 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object):
     #transition from anal to normal doggy style.
     $ stealth_orgasm = False
 
-    if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
-        "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
+    "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
+    "You shift your cock downwards and rub the tip of it along the slit of her vagina."
+    
+    if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
+        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+    elif not mc.condom:
+        if the_girl.on_birth_control:
+            the_girl.char "Wait, please put on a condom, I feel safer that way."
+        else:
+            the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+        menu:
+            "Put on a condom":
+                "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
+                $ mc.condom = True
+            "Ram it home!":
+                mc.name "Don't worry, I'll pull out."
+                $ the_girl.change_happiness(-5)
+        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
 
-    "You line your cock up with her asshole, the tip just barely pressing against it."
-    call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_3
+    "You pull on her hips and thrust yourself inside her tight, wet pussy."
     return
 
 label transition_doggy_to_anal_doggy_taboo_break_label(the_girl, the_location, the_object):

@@ -32,6 +32,13 @@ init 2 python:
             for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
                 a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = reveal_sex),add_to_log = False) #Get a random opinion and reveal it.
 
+            # new candidate could be pregnant
+            if persistent.pregnancy_pref > 0:
+                if renpy.random.randint(0,100) < (58 - a_candidate.age) // 5: # chance she is already pregnant decreases with age
+                    #Can hire her up to 10 days from due date. Probably not hiring anyone a week from due!
+                    become_pregnant(a_candidate, mc_father = False, progress_days = renpy.random.randint(5,80))
+                    #renpy.say("Pregnant", "Candidate: " + a_candidate.name + " " + a_candidate.last_name + " is pregnant.")
+
         return candidates
 
 
@@ -50,12 +57,6 @@ label interview_action_description_enhanced:
                 $ new_person = _return
                 $ new_person.generate_home() #Generate them a home location so they have somewhere to go at night.
                 $ candidates.remove(new_person)
-
-                # new candidate could be pregnant
-                if persistent.pregnancy_pref > 0:
-                    if renpy.random.randint(0,100) < 5: # 5% chance she is already pregnant
-                        #Can hire her up to 10 days from due date. Probably not hiring anyone a week from due!
-                        $ become_pregnant(new_person, mc_father = False, progress_days = renpy.random.randint(5,80))    
 
                 call hire_someone(new_person, add_to_location = True) from _call_hire_someone_interview_action_enhanced
                 $ new_person.set_title(get_random_title(new_person))

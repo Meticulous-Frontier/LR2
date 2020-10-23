@@ -485,7 +485,8 @@ label transition_SB_anal_standing_SB_doggy_standing(the_girl, the_location, the_
             "Ram it home!":
                 mc.name "Don't worry, I'll pull out."
                 $ the_girl.change_happiness(-5)
-    the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        
     "You grab her by the hips and thrust yourself deep inside her tight, pulsating pussy."
     return
 
