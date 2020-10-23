@@ -15,6 +15,19 @@ init -1 python:
             if found: # remove from processing list
                 people_to_process.remove(found)
 
+        # cleanup crisis events where person is in argument list
+        for crisis in mc.business.mandatory_crises_list + mc.business.mandatory_morning_crises_list:
+            args = crisis.args
+            if not isinstance(args, list):
+                args = [args]
+            
+            for arg in args:
+                if arg is self:
+                    if crisis in mc.business.mandatory_crises_list:
+                        mc.business.mandatory_crises_list.remove(crisis)
+                    if crisis in mc.business.mandatory_morning_crises_list:
+                        mc.business.mandatory_morning_crises_list.remove(crisis)
+
         # remove from business teams
         for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
             if self in team:
