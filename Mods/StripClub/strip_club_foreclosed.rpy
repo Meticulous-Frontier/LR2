@@ -50,7 +50,8 @@ init 2 python:
     def starbuck_talk_about_strip_club_requirement(person):
         if get_strip_club_foreclosed_stage() == 1:
             if day > get_strip_club_foreclosed_last_action_day() + 2:
-                return True
+                if starbuck in sex_store.people:
+                    return True
         return False
 
     def strip_club_foreclosed_change_stripper_schedules():
