@@ -219,6 +219,7 @@ label horny_at_work_crisis_enhanced_label():
                     "You stand up, pants around your ankles, and motion for [the_choice.title] to come over to you."                   
                     $ clear_scene()
                     $ the_report = defaultdict(int)
+                    $ the_report["positions_used"] = []
                     call fuck_person(the_choice, private = False, skip_intro = True, report_log = the_report) from _call_fuck_person_horny_at_work_enhanced_1
                     $ the_choice.review_outfit()
                     $ helpful_people.remove(the_choice)
