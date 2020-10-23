@@ -641,6 +641,7 @@ init 5 python:
 
             item = None
             outfit = Outfit("Overwear")
+            shoes_outfit = self.get_workout_shoes(color_opinion = color_opinion, points = points, neutral_shoes = neutral_shoes)
 
             color_list = []
             if color_opinion == None:
@@ -691,12 +692,12 @@ init 5 python:
                     if item:
                         outfit.add_lower(item.get_copy(), [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])
 
-            #Always wear shoes
-            item =  self.get_item_from_list("feet", self.build_filter_list([x for x in workout_shoes_list if x not in []], points), no_pattern = True)
-            if neutral_shoes:
-                outfit.add_feet(item.get_copy(), neutral_colors["dark grey"])
-            else:
-                outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
+            # #Always wear shoes
+            # item =  self.get_item_from_list("feet", self.build_filter_list([x for x in workout_shoes_list if x not in []], points), no_pattern = True)
+            # if neutral_shoes:
+            #     outfit.add_feet(item.get_copy(), neutral_colors["dark grey"])
+            # else:
+            #     outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
             ### Build Underwear ###
             #Bra
@@ -713,15 +714,46 @@ init 5 python:
                 if item:
                     outfit.add_lower(item.get_copy(), color_under if item in [cincher, heart_pasties] else color_under)
 
-            if renpy.random.randint(0, 1) == 0:
-                item = self.get_item_from_list("feet", self.build_filter_list([x for x in workout_socks_list if x not in []], points), no_pattern = True)
-                outfit.add_feet(item.get_copy(), neutral_colors["cotton white"])
+            # if renpy.random.randint(0, 1) == 0:
+            #     item = self.get_item_from_list("feet", self.build_filter_list([x for x in workout_socks_list if x not in []], points), no_pattern = True)
+            #     outfit.add_feet(item.get_copy(), neutral_colors["cotton white"])
 
             outfit.build_outfit_name()
+
+            for item in shoes_outfit.feet:
+                if outfit.can_add_feet(item):
+                    outfit.add_feet(item)
 
             # prevent any item from having no colour set
             for cloth in outfit.upper_body + outfit.lower_body + outfit.feet + outfit.accessories:
                 if __builtin__.len(cloth.colour) < 4:
                     cloth.colour = [1, 1, 1, .5]    # transparant white is easy to spot for debuggin
+
+            return outfit
+
+        def get_workout_shoes(self, color_opinion = None, points = None, neutral_shoes = False):
+            item = None
+            outfit = Outfit("Yoga Shoes")
+            if points == None:
+                points = 1
+
+            if neutral_shoes:
+                color_feet = neutral_colors["dark grey"]
+            elif color_opinion == None:
+                color_upper, color_lower, color_feet = self.get_main_color_scheme()
+
+            if renpy.random.randint(0, 1) == 0:
+                item = self.get_item_from_list("feet", self.build_filter_list([x for x in workout_socks_list if x not in []], points), no_pattern = True)
+                outfit.add_feet(item.get_copy(), neutral_colors["cotton white"])
+
+            item =  self.get_item_from_list("feet", self.build_filter_list([x for x in workout_shoes_list if x not in []], points), no_pattern = True)
+
+            if item and hasattr(item, "supported_patterns") and item.supported_patterns:
+                item = item.get_copy() # get copy before applying pattern
+                key_value = get_random_from_list(list(item.supported_patterns.keys()))
+                item.pattern = item.supported_patterns[key_value]
+                item.colour_pattern = neutral_colors["cotton white"]
+
+            outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
             return outfit

@@ -1021,7 +1021,7 @@ init -1 python:
     # attach to person object
     Person.change_willpower = change_willpower
 
-    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, 
+    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
         if position is None:
             position = self.idle_pose
@@ -1360,6 +1360,15 @@ init -1 python:
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
+
+    def apply_yoga_shoes(self):
+        if self.event_triggers_dict.get("yoga_shoes", None) == None:
+            builder = WardrobeBuilder(self)
+            self.event_triggers_dict["yoga_shoes"] = builder.get_workout_shoes(points = sluttiness_to_points(self.sluttiness), neutral_shoes = renpy.random.randint(0, 1))
+        self.apply_outfit(self.event_triggers_dict.get("yoga_shoes", None))
+        return
+
+    Person.apply_yoga_shoes = apply_yoga_shoes
 
     def apply_planned_outfit(self):
         if self.should_wear_uniform():

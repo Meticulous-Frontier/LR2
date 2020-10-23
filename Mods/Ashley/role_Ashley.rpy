@@ -938,4 +938,8 @@ label ashley_test_workout_outfit():
         $ the_person.draw_person()
         "[the_person.outfit.name]"
         $ poss_score = poss_score + 1
+    "Now a yoga shoes test."
+    $ the_person.apply_yoga_shoes()
+    $ the_person.draw_person()
+    "[the_person.outfit.name]"
     return
