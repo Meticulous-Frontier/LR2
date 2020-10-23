@@ -22,22 +22,22 @@ init 2 python:
         person.discover_opinion("creampies")
 
         # Pregnancy Check #
-        if persistent.pregnancy_pref > 0 and not pregnant_role in self.special_role:
-            if persistent.pregnancy_pref == 1 and self.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
-                bc_percent = 100 - self.bc_penalty
-            elif persistent.pregnancy_pref == 2 and self.on_birth_control:
-                bc_percent = 90 - self.bc_penalty
+        if persistent.pregnancy_pref > 0 and not pregnant_role in person.special_role:
+            if persistent.pregnancy_pref == 1 and person.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
+                bc_percent = 100 - person.bc_penalty
+            elif persistent.pregnancy_pref == 2 and person.on_birth_control:
+                bc_percent = 90 - person.bc_penalty
             else:
                 bc_percent = 0
 
             if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
-                modified_fertility = self.calculate_realistic_fertility()
+                modified_fertility = person.calculate_realistic_fertility()
             else:
-                modified_fertility = self.fertility_percent
+                modified_fertility = person.fertility_percent
 
             if renpy.random.randint(0,100) < modified_fertility:
                 if renpy.random.randint(0,100) >= bc_percent : # Birth control failed to prevent the pregnancy
-                    become_pregnant(self) #Function in role_pregnant establishes all of the pregnancy related variables and events.
+                    become_pregnant(person, mc_father = False) #Function in role_pregnant establishes all of the pregnancy related variables and events.
 
     def cum_in_mouth_ntr(person): 
         if person.outfit.can_add_accessory(mouth_cum):
