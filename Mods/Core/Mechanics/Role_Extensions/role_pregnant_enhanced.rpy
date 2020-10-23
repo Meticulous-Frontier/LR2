@@ -65,15 +65,18 @@ init 2 python:
         if person.is_pregnant():
             return
 
+        # historic start date of pregnancy
+        start_day = day - progress_days
+
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
-        person.event_triggers_dict["preg_start_date"] = day
-        person.event_triggers_dict["preg_tits_date"] = day + 14 + renpy.random.randint(0,5)
-        person.event_triggers_dict["preg_transform_day"] = day + 30 + renpy.random.randint(0,10)
-        person.event_triggers_dict["preg_finish_announce_day"] = day + 90 + renpy.random.randint(0,10)
+        person.event_triggers_dict["preg_start_date"] = start_day
+        person.event_triggers_dict["preg_tits_date"] = start_day + 14 + renpy.random.randint(0,5)
+        person.event_triggers_dict["preg_transform_day"] = start_day + 30 + renpy.random.randint(0,10)
+        person.event_triggers_dict["preg_finish_announce_day"] = start_day + 90 + renpy.random.randint(0,10)
         person.event_triggers_dict["pre_preg_tits"] = person.tits
         person.event_triggers_dict["preg_mc_father"] = mc_father
 
-        if day > person.event_triggers_dict.get("preg_start_date", 0) + 15:
+        if day > person.event_triggers_dict.get("preg_start_date", 0) + 14:
             person.event_triggers_dict["preg_knows"] = True
         else:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
