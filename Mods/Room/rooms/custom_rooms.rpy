@@ -111,7 +111,18 @@ init 10 python:
                     found.public = room.public
                     found.map_pos = room.map_pos
                     found.visible = room.visible
-        return       
+        return
+
+    def update_room_visibility():
+        # cleanup old hotel (save compatibility)
+        found = find_in_list(lambda x: x.name == "hotel", list_of_places)
+        if found:
+            list_of_places.remove(found)
+
+        # update dungeon visibility
+        dungeon.visible = mc.has_dungeon()
+        return
+
 
 label activate_custom_rooms(stack):
     python:
@@ -126,6 +137,8 @@ label activate_custom_rooms(stack):
 label update_custom_rooms(stack):
     python:
         store_custom_rooms()
+
+        update_room_visibility()
         
         execute_hijack_call(stack)
     return
