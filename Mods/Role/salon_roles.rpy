@@ -1111,12 +1111,6 @@ init 2 python:
     def ophelia_get_is_over_her_ex():
         return salon_manager.event_triggers_dict.get("over_her_ex", 0)
 
-    def ophelia_is_latest_version():
-        if salon_manager.event_triggers_dict.get("ophelia_version", -1) < 2:   #Just increment the compare and set value when you have a new version
-            salon_manager.event_triggers_dict["ophelia_version"] = 2
-            return False
-        return True
-
     def ophelia_get_can_talk_about_candace():
         return salon_manager.event_triggers_dict.get("talk_about_candace", 0)
 

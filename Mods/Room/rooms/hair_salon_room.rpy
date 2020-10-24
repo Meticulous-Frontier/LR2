@@ -1,29 +1,3 @@
-init 5 python:
-    add_label_hijack("after_load", "ophelia_on_load")
-
-label ophelia_on_load(stack):
-    python:
-        if not ophelia_is_latest_version():
-            # reapply salon_manager role
-            salon_manager.remove_role(salon_manager_role)
-            salon_manager.add_role(salon_manager_role)
-            if ophelia_get_ex_pics_sent() == 1:
-                if ophelia_blowjob_pics_review not in salon_manager.on_room_enter_event_list:
-                    salon_manager.add_unique_on_room_enter_event(ophelia_blowjob_pics_review)
-            if ophelia_get_first_date_finished():
-                if ophelia_is_over_her_ex not in salon_manager.on_room_enter_event_list:
-                    salon_manager.add_unique_on_room_enter_event(ophelia_is_over_her_ex)
-                    candace.event_triggers_dict["day_met"] = day
-        #remove these in a future version
-        salon_manager.event_triggers_dict["foreplay_position_filter"] = ophelia_foreplay_position_filter
-        salon_manager.event_triggers_dict["oral_position_filter"] = ophelia_oral_position_filter
-        salon_manager.event_triggers_dict["vaginal_position_filter"] = ophelia_vaginal_position_filter
-        salon_manager.event_triggers_dict["anal_position_filter"] = ophelia_anal_position_filter
-        salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
-        execute_hijack_call(stack)
-
-    return
-
 init 2 python: # Declare variables to use
     # Wardrobe for employees in the salon
     salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
