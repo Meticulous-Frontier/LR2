@@ -1668,7 +1668,7 @@ label Sarah_threesome_request_label():
     if gossip_target is None:
         return
 
-    "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
+    "Another Saturday, another extra workday for you. You are hardly surprised when you hear [the_person.title]'s familiar voice."
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]."
