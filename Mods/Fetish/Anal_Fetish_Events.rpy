@@ -773,7 +773,7 @@ label SB_mom_anal_pay_label():
 label SB_mom_anal_friday_label():
     $ the_person = mom
     $ bedroom.show_background()
-    "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
+    "You're hanging out in your room when you hear [the_person.possessive_title] call from her room."
     the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
     mc.name "Sure, down in a second."
     $ mom_bedroom.show_background()
