@@ -44,6 +44,19 @@ init -1 python:
     # config.use_cpickle = False
     # config.debug_image_cache = True
 
+    def restore_employees_to_schedules():
+        for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
+            if employee.location():
+                continue
+            # somehow she is lost in limbo                
+            scheduled_location = employee.get_destination()
+            if not scheduled_location: # pick random location
+                scheduled_location = get_random_from_list([x for x in list_of_places if x.public])
+
+            if scheduled_location:
+                scheduled_location.add_person(employee)
+        return
+
     def update_pinned_cache():
         # cache all GUI images in memory
         for fn in renpy.list_files():
@@ -78,6 +91,8 @@ label update_compatibility_fix(stack):
         $ crisis_tracker_dict = {}
 
     $ update_pinned_cache()
+
+    $ restore_employees_to_schedules()
 
     $ execute_hijack_call(stack)
     return
