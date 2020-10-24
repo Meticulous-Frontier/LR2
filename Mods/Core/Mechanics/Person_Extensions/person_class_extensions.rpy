@@ -1065,8 +1065,6 @@ init -1 python:
         if display_zorder is None:
             display_zorder = 0
 
-        character_tag = str(self.character_number)
-
         self.draw_number[draw_layer] += 1
         self.hide_person()
         if wipe_scene:
@@ -1075,7 +1073,7 @@ init -1 python:
                 renpy.show_screen("person_info_ui",self)
 
         character_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-        renpy.show(character_tag, at_list=at_arguments, layer=draw_layer, what=character_image, tag=character_tag)
+        renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
 
         if the_animation:
             global global_draw_number
@@ -1193,9 +1191,8 @@ init -1 python:
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
             self.hide_person()
-            character_tag = str(self.character_number)
-            renpy.show(character_tag, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = character_tag)
-            renpy.show(character_tag + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = character_tag + "_extra") #Blend from old to new.
+            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
+            renpy.show(self.identifier + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = self.identifier + "_extra") #Blend from old to new.
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
