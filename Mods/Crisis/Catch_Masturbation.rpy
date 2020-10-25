@@ -15,20 +15,14 @@ init -1 python:
 
 init 2 python:
     def SB_caught_masturbating_requirement():
-        if mc.business.get_employee_count() > 0:
-            if mc.business.is_open_for_business():
-                if mc.is_at_work():
-                    for person in mc.business.get_employee_list():
-                        if person.get_opinion_score("masturbating") > 0:
-                            return True
-                        elif person.sluttiness > 50:
-                            return True
+        if mc.business.is_open_for_business() and mc.is_at_work():
+            return not select_girl_masturbating() is None
         return False
 
     def select_girl_masturbating():
         masturbating_people = []
         for person in mc.business.get_employee_list():
-            if person.get_opinion_score("masturbating") > 0 or person.sluttiness > 50:
+            if person.effective_sluttiness() < 40 - (5 * person.get_opinion_score("masturbating")):
                 masturbating_people.append(person)
         return get_random_from_list(masturbating_people)
 
