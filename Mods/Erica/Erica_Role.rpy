@@ -62,8 +62,8 @@ init 2 python:
         erica.apply_gym_outfit = erica_apply_gym_outfit
 
         game_hints.append(Hint("College Athlete", "Get to know Erica to learn to give her a protein shake.", "erica_get_progress() > 0 and not erica_get_protein_unlock()", "erica_get_protein_unlock()"))
-        game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 20 sluttiness.", "erica_get_progress() == 1 and erica_get_protein_unlock()", "erica_get_progress() > 1"))
-        game_hints.append(Hint("College Athlete", "Get at least 140 max energy and Erica to at least 40 sluttiness. Then challenge her to a race.", "erica_get_progress() == 2", "erica_get_progress() > 2"))
+        game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 40 sluttiness.", "erica_get_progress() == 1 and erica_get_protein_unlock()", "erica_get_progress() > 1"))
+        game_hints.append(Hint("College Athlete", "Get at least 140 max energy and Erica to at least 60 sluttiness. Then challenge her to a race.", "erica_get_progress() == 2", "erica_get_progress() > 2"))
 
         return
 
@@ -138,8 +138,8 @@ init -2 python:
             return False
         if time_of_day < 4:
             if mc.max_energy >= 120:
-                if person.effective_sluttiness() < 20:
-                    return "Requires 20 Sluttiness"
+                if person.effective_sluttiness() < 40:
+                    return "Requires 40 Sluttiness"
                 elif mc.location == gym:
                     return True
                 else:
@@ -155,8 +155,8 @@ init -2 python:
                 return False
         if time_of_day < 4:
             if mc.max_energy >= 140:
-                if person.effective_sluttiness() < 40:
-                    return "Requires: 40 sluttiness"
+                if person.effective_sluttiness() < 60:
+                    return "Requires: 60 sluttiness"
                 return True
             else:
                 return "Requires: 140 maximum energy"
@@ -328,6 +328,8 @@ label erica_get_to_know_label(the_person):
         $ the_person.event_triggers_dict["erica_progress"] = 0
         call erica_intro_label(the_person) from _erica_recall_intro_if_skipped_somehow_01
         #Introduction scene#
+    # elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False:
+    #     call erica_money_problems_label(the_person) from _erica_start_job_quest_01
     elif the_person.event_triggers_dict.get("erica_progress", 0) == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
         mc.name "I see you here a lot. Are you getting ready for a race?"
@@ -401,16 +403,13 @@ label erica_get_to_know_label(the_person):
 
         #You've won the race#
     elif the_person.event_triggers_dict.get("erica_progress", 0) == 4:
-        # if erica_is_looking_for_work() == False:
-        #     call erica_money_problems_label(the_person) from _erica_start_job_quest_01
-        # else:
-            mc.name "Hey [the_person.title]."
-            the_person.char "Hey. [the_person.mc_title]!"
-            "You catch up with her for a bit with what she's been up to."
-            the_person.char "Well, it was good to see you. We should work out again sometime, or... you haven't lost my address have you?"
-            mc.name "Of course not!"
-            the_person.char "Then swing by some evening, it would be good to get a little time working out some tension!"
-            "You tell her you'll look her up soon, say goodbye and head on your way."
+        mc.name "Hey [the_person.title]."
+        the_person.char "Hey. [the_person.mc_title]!"
+        "You catch up with her for a bit with what she's been up to."
+        the_person.char "Well, it was good to see you. We should work out again sometime, or... you haven't lost my address have you?"
+        mc.name "Of course not!"
+        the_person.char "Then swing by some evening, it would be good to get a little time working out some tension!"
+        "You tell her you'll look her up soon, say goodbye and head on your way."
 
     else:
         "Debug: How did you end up here???"
@@ -777,8 +776,6 @@ label erica_phase_two_label(the_person):
     call advance_time from _call_advance_erica_race_challenge
     return
 
-
-
 #CSA30
 label erica_race_crisis_label(the_person):
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
@@ -1123,15 +1120,19 @@ label erica_money_problems_label(the_person):
     mc.name "I'm sorry, I don't have anything at this time."
     the_person.char "It's okay, I figured as much..."
     "You continue some small talk with [the_person.title], but you keep trying to think about something you could have her do."
-    "Maybe you could check with [mc.business.hr_director.title] and see if she has any ideas?"
-    if lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
-        "Or maybe even talk to [lily.title], joining her for some of her picture sessions once in a while?"
+    if mc.business.get_hr_director():
+        "Maybe you could check with [mc.business.hr_director.title] and see if she has any ideas?"
+        $ erica.event_triggers_dict["yoga_quest_started"] = True
+        $ erica.event_triggers_dict["yoga_sessions_started"] = False
+        $ mc.business.hr_director.add_unique_on_talk_event(erica_money_problems_sarah_talk)
+        if lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
+            "Or maybe even talk to [lily.title], joining her for some of her picture sessions once in a while?"
+            $ erica.event_triggers_dict["insta_pic_started"] = True
+    elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
+        "Maybe you could talk to [lily.title] into letting [the_person.title] join her for some of her picture sessions once in a while?"
         $ erica.event_triggers_dict["insta_pic_started"] = True
-
-    $ erica.event_triggers_dict["yoga_quest_started"] = True
-    $ erica.event_triggers_dict["yoga_sessions_started"] = False
     $ erica.event_triggers_dict["looking_for_work"] = True
-    $ mc.business.hr_director.add_unique_on_talk_event(erica_money_problems_sarah_talk)
+
     return
 
 
@@ -1140,12 +1141,16 @@ label erica_money_problems_update_label(the_person):
         the_person.char "Actually, since you helped me out, my financial situation has been much improved!"
     elif erica_get_is_doing_yoga_sessions() or erica_get_is_doing_insta_sessions():
         the_person.char "It's going ok... Since you helped me out, I'm at least treading water, but it would be nice to find just a little more somewhere."
-        if the_person.event_triggers_dict.get("insta_pic_started", False) == False and lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
-            "Maybe you should try talking to [lily.title]? You recently started taking insta pics of her. Maybe [the_person.title] could join in for a session once in a while?"
-            $ the_person.event_triggers_dict["insta_pic_started"] = True
     else:
         the_person.char "Oh hey. I'm still looking for a part time job... Heard of anything?"
         mc.name "Not yet, sorry"
+    if the_person.event_triggers_dict.get("insta_pic_started", False) == False and lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
+        "Maybe you should try talking to [lily.title]? You recently started taking insta pics of her. Maybe [the_person.title] could join in for a session once in a while?"
+        $ the_person.event_triggers_dict["insta_pic_started"] = True
+    if the_person.event_triggers_dict.get("yoga_quest_started", False) == False and mc.business.get_hr_director():
+        "Maybe you could check with [mc.business.hr_director.title] and see if she has any ideas?"
+        $ erica.event_triggers_dict["yoga_quest_started"] = True
+        $ mc.business.hr_director.add_unique_on_talk_event(erica_money_problems_sarah_talk)
     return
 
 label erica_money_problems_sarah_talk_label(the_person):
@@ -1168,7 +1173,8 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person.char "You could make it something low impact? And focus on general well-being... Maybe like a yoga class?"
     "Hmm. Having [erica.title] come in and teach a yoga class once a week is actually a pretty good idea. But having it start before normal business hours, you wonder if there would be enough participation to make it worth it."
     mc.name "Can you do something for me? Take an informal poll with the employees... See how many would be interested in something like that. I don't want to arrange it just to have nobody show up."
-    the_person.char "Well I can tell you straight away I'll come. How many do you think we need to make it happen?"
+    the_person.char "Well I can tell you straight away I'll come. I love yoga! How many do you think we need to make it happen?"
+    $ the_person.update_opinion_with_score("yoga", 2, add_to_log = True)        #If she doesn't already love yoga, she does now. TODO Maybe make different dialogue and let her not like it, but go along with it?
     mc.name "I think at least 5 total, so with you hopefully we can get 4 more."
     the_person.char "What about you? Can I count you to come also?"
     "Hmm... A bunch of your employees... In gym gear... Doing a bunch of crazy poses... That would be a pleasant use of the morning. But you don't want to effect the numbers too much."
@@ -1177,7 +1183,10 @@ label erica_money_problems_sarah_talk_label(the_person):
     "She looks a bit disappointed. Your company is pretty small, so you may not have the numbers. She seems to have another idea though."
     the_person.char "What if umm... You know... When we do our employee meetings... We could add counseling about...errm... Yoga?"
     "You sigh. It seems [the_person.char] really likes this idea and is looking for ways to make it happen."
-    mc.name "Tell you what. We don't need to push it officially, but if you happen to take some of the serum and use it for that purpose... I would be willing to look the other way."
+    if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
+        mc.name "Tell you what. We don't need to push it officially, but if you happen to take some of the serum and use it for that purpose... I would be willing to look the other way."
+    else:
+        mc.name "I don't think that is a good idea. But if you really want to make it happen, you could always use the power of persuasion to see if you can get people to come."
     "Sarah gets a mischievous smile."
     the_person.char "Okay! I'll let you know in a couple days if we have the people to make it happen... And if we don't... We'll see."
     "You part ways with [the_person.title] for now. You feel pretty confident at this point that, even if you don't have the numbers now, you'll have enough people to make it happen soon."
@@ -1193,9 +1202,13 @@ label erica_money_problems_sarah_update_label():
     "[the_person.title] seeks you out as you work. She seems a bit disappointed."
     the_person.char "Hey... So I was asking around with the girls... Unfortunately I could only get [number] interested in joining the morning yoga class... For now..."
     "You admit you are a bit disappointed as well."
-    the_person.char "So... Do you think that... You know... It would be okay if umm... Used some of the serum we have for the one on ones..."
-    "You had forgotten about her using the serum, and you are glad she reminded you."
-    mc.name "Yeah, that sounds fine. Let me know if you manage to... Convince... Enough employees and I'll speak with [erica.title] about starting that morning yoga class."
+    if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
+        the_person.char "So... Do you think that... You know... It would be okay if umm... Used some of the serum we have for the one on ones..."
+        "You had forgotten about her using the serum, and you are glad she reminded you."
+        mc.name "Yeah, that sounds fine. Let me know if you manage to... Convince... Enough employees and I'll speak with [erica.title] about starting that morning yoga class."
+    else:
+        the_person.char "So, do you think it would be okay if I tried to talk people into coming? I think over time I might be able to convince enough people to come."
+        mc.name "That sounds fine. Let me know if you manage to convince enough people and I'll speak with [erica.title] about starting that program."
     $ the_person.draw_person(emotion = "happy")
     "[the_person.possessive_title] smiles wide. She seems to really be into this..."
     the_person.char "Yes sir! Don't worry, I'm sure we'll be able to get this going soon!"
@@ -1215,12 +1228,25 @@ label erica_money_problem_sarah_convincing_employee_label():
     "As you go about your work, you walk by the break room. Inside you can hear [the_person.possessive_title] talking to someone else."
     the_person.char "Yeah, it has lots of health benefits too!"
     the_target.char "I've heard that, but I don't know, I'm just really busy right now."
-    the_person.char "I'm sure you are... more coffee? I just brewed some up!"
-    the_target.char "Yeah! That looks nice."
-    the_person.char "Here you go... now, I know, we're all busy, but trust me, the benefits of doing yoga really are worth the time!"
-    the_target.char "Yeah... maybe you're right..."
-    "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
-    $ the_target.update_opinion_with_score("yoga", 1)
+    if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
+        the_person.char "I'm sure you are... more coffee? I just brewed some!"
+        the_target.char "Yeah! That looks nice."
+        "Sounds like she is using some of the serum you produced for HR meetings to help her persuade [the_target.possessive_title] to come to the yoga class."
+        the_person.char "Here you go... now, I know, we're all busy, but trust me, the benefits of doing yoga really are worth the time!"
+        the_target.char "Yeah... maybe you're right..."
+        "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
+        $ the_target.update_opinion_with_score("yoga", 1)
+    else:
+        if (the_person.charisma * 10 + the_target.suggestability) > renpy.random.randint(0,100):
+            the_person.char "The science is behind it! People who do yoga live longer, happier lives. Not to mention the general benefits of the extra flexibility."
+            the_target.char "Yeah... maybe you're right..."
+            "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
+            $ the_target.update_opinion_with_score("yoga", 1)
+        else:
+            the_person.char "Its good for you! I'm sure of it!"
+            the_target.char "There's a lot of things that are good for you. I'm sorry I just don't think I'm interested."
+            the_person.char "... I undertsand."
+            "Sounds like [the_person.possessive_title] is still trying to convince employees to give the yoga class a try. You appreciate her dedication to it."
     if len(erica_get_yoga_class_list()) < 4:
         $ mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
     else:
@@ -1232,7 +1258,7 @@ label erica_money_problems_sarah_final_update_label():
     $ the_person = mc.business.hr_director
     $ the_person.draw_person()
     "[the_person.title] comes and finds you as you work. She seems excited."
-    the_person.char "Hey! Guess what! As of this morning, I have enough girls willing to attend a morning yoga class once a week! As soon as you give me day, I'll put out a notice."
+    the_person.char "Hey! Guess what! As of this morning, I have enough girls willing to attend a morning yoga class once a week! As soon as you give me the day, I'll put out a notice."
     mc.name "Great! Let me talk to [erica.title] about it. I'm not sure what day it will be yet, it will probably depend on her class schedule, but I will let you know."
     the_person.char "Alright. I'm going to get back to work. Looking forward to it though!"
     $ erica.add_unique_on_talk_event(erica_money_problems_yoga_start)
@@ -1296,7 +1322,7 @@ label erica_yoga_event_intro_label():
             yoga_assistant.char "Yeah... I recently umm... Filled out a bit... Running long distances isn't really practical with these!"
             "[yoga_assistant.title] gives her pleasantly large chest a shake."
         else:
-            yoga_assistant.char "I've been keeping in shape by doing some exercises, but I'm not there yet."              
+            yoga_assistant.char "I've been keeping in shape by doing some exercises, but I'm not there yet."
             the_person.char "Hey, I'm glad your are still taking steps to stay fit though. You gotta work with the assets you've been given!"
         "The girls share a laugh."
     else:
@@ -1319,16 +1345,20 @@ label erica_yoga_event_intro_label():
     "You watch as your employees start out doing so light stretching. Everyone seems to be paying attention and trying their best."
     "This really does seem like it could be a good benefit for your employees who are willing to come out a bit early. You turn back to the computer and get to work."
     call erica_yoga_loop_label(the_person, yoga_assistant) from _erica_yoga_loop_call_01
+    $ watched_count = _return
     "As you finish up with your work, you hear [the_person.title] calling out instructions for the cool down. Sounds like the yoga session is wrapping up as well. The girls finish and start rolling up their mats."
     $ scene_manager.add_actor(the_person)
+    "You walk up to [the_person.possessive_title]."
+    mc.name "Congratulations, that seemed like a very successful first meeting!"
+    the_person.char "Thank you!"
+    call erica_getting_watched_reaction_label(the_person, watched_count) from _erica_gets_watched_during_yoga_intro_01
     $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
     yoga_assistant.char "Alright, I know everyone is thirsty. Anyone who needs waters, head for the break room."
-    "You can hear [yoga_assistant.possessive_title] calling out. The room starts to clear. You get up and walk over to [the_person.possessive_title] and [yoga_assistant.title]."
-    mc.name "How'd it go? Seemed like it went well from where I was at."
-    yoga_assistant.char "It went great!"
+    "You can hear [yoga_assistant.possessive_title] calling out. The room starts to clear. She walks over to you and [the_person.possessive_title]."
+    yoga_assistant.char "That went great!"
     "[yoga_assistant.title] seems pretty enthusiastic."
     the_person.char "You think so? I honestly wasn't sure... But it seemed like everyone did well."
-    "[the_person.[possessive_title]] seems a little apprehensive, but you think she probably just need to build some confidence."
+    "[the_person.possessive_title] seems a little apprehensive, but you think she probably just need to build some confidence."
     mc.name "Well, is there anything I can do to help for next time?"
     "[the_person.title] think about it for a bit, but [yoga_assistant.possessive_title] quickly speaks up."
     yoga_assistant.char "It's actually kind of a pain, having to go all the way to the break room to get water. Maybe we could get one of those 5 gallon water dispensers?"
@@ -1337,20 +1367,22 @@ label erica_yoga_event_intro_label():
     yoga_assistant.char "Yes sir!"
     mc.name "Also, could you make sure [the_person.title] gets paid? For now her standard fee is $100 per session."
     yoga_assistant.char "Sure thing!"
+    mc.name "One last thing... I think I'd like to follow your previous request, and add yoga as a topic to discuss with employees and their HR meetings."
+    mc.name "With a little work, I think we could really make something special here."
     "You say goodbye to [the_person.title] and [yoga_assistant.title]. They turn and walk off, with [the_person.possessive_title] following so they can work out payment details. You can hear them chattering as they start to walk off."
     the_person.char "You did great! I was overall really impressed with all the girls who came. Seems like most of the girls here take care of themselves..."
     yoga_assistant.char "Yeah but not all of them were here today... Hopefully I can drag more of them out here next week..."
     "It seems the two girls have struck up a friendship. You wonder how things will develop between them."
     $ town_relationships.update_relationship(the_person, yoga_assistant, "Best Friend")
 
-
-    python: 
+    python:
         # setup yoga events
         erica.event_triggers_dict["yoga_sessions_started"] = True
         erica.add_unique_on_room_enter_event(erica_weekly_yoga)
 
         # cleanup yoga class
-        erica_after_class_outfit_cleanup(yoga_list)
+        yoga_list.append(yoga_assistant)                #Add assistant to yoga list to make sure she gets appropriate energy increase and outfit cleanup.
+        erica_after_class_outfit_cleanup(yoga_list)     #NOTE we rely on Erica moving to gym next to make sure her outfit gets cleaned up.
         erica_class_energy_increase(yoga_list)
 
         scene_manager.clear_scene()
@@ -1367,6 +1399,7 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
         slutty_class = erica_get_class_average_sluttiness(yoga_list) > 50
         nude_class = erica_get_is_yoga_nude()
         back_row = erica_get_back_of_class(yoga_list)
+        erica_num_watched = 0
 
     "As you start your morning paperwork, you come across a personnel list of possible personality conflicts from the HR department."
     "If you focus on this, you could probably improve company efficiency by quite a bit."
@@ -1385,6 +1418,7 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
             $ switch_to_class_front(the_person, yoga_assistant, the_pose)
             $ display_yoga_dialog(the_pose)
             "You watch for a while, but soon turn your attention back to the computer."
+            $ erica_num_watched += 1
         "Watch the class":
             "You decide to watch the girls in their class instead. How often do you get the chance to watch a show like this?"
             $ switch_to_back_of_class(back_row, the_pose)
@@ -1411,6 +1445,7 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
             $ switch_to_class_front(the_person, yoga_assistant, the_pose)
             $ display_yoga_dialog(the_pose)
             "You watch for a while, but soon turn your attention back to the computer."
+            $ erica_num_watched += 1
         "Watch the class":
             "You decide to watch the girls in their class instead. Your eyes are treated to the girls in the back of the class."
             $ switch_to_back_of_class(back_row, the_pose)
@@ -1436,6 +1471,7 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
             "You look up at and see [the_person.possessive_title] and [yoga_assistant.title] near the front of the class."
             $ switch_to_class_front(the_person, yoga_assistant, the_pose)
             $ display_yoga_dialog(the_pose)
+            $ erica_num_watched += 1
         "Watch the class":
             "You can't help it, this might be your last chance for today to watch the girls posing. You look up at the class and watch intently"
             $ switch_to_back_of_class(back_row, the_pose)
@@ -1456,7 +1492,7 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
         scene_manager.clear_scene(reset_actor = False)
         back_row = None
 
-    return
+    return erica_num_watched
 
 label erica_weekly_yoga_label(the_person):
     python: # setup yoga class
@@ -1483,7 +1519,7 @@ label erica_weekly_yoga_label(the_person):
 
     the_person.char "Oh hey [the_person.mc_title]!"
     if not erica_get_is_yoga_nude():
-        if erica_get_class_average_sluttiness(erica_get_yoga_class_list()) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
+        if erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
             the_person.char "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
             the_person.char "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
             the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au natural."
@@ -1530,14 +1566,25 @@ label erica_weekly_yoga_label(the_person):
     "You watch as your employees start out doing so light stretching. Everyone seems to be paying attention and trying their best."
     "You turn back to the computer and get to work."
     call erica_yoga_loop_label(the_person, yoga_assistant) from _erica_yoga_loop_call_02
-    "As you finish up with your work, you hear [the_person.title] calling out instructions for the cool down. Sounds like the yoga session is wrapping up as well. The girls finish and start rolling up their mats."
+    if erica_get_is_yoga_nude():
+        "As the all nude yoga session finishes you, several girls are REALLY celebrating the feminine form."
+        "As you walk over to [the_person.possessive_title], you pass a pair of girls in a sixty nine, moaning as the eat each other out."
+        "Another couple are on their hands and knees, ass to ass... with a double sided dildo? Where the hell did that come from?"
+    else:
+        "As you finish up with your work, you hear [the_person.title] calling out instructions for the cool down. Sounds like the yoga session is wrapping up as well. The girls finish and start rolling up their mats."
     $ scene_manager.add_actor(the_person)
+    "You walk up to [the_person.title]."
+    mc.name "Looks like another highly successful yoga class."
+    the_person.char "Thank you!"
+    "She has a definite hint of pride in her voice."
+    call erica_getting_watched_reaction_label(the_person, _return) from _erica_gets_watched_during_yoga_recurrent_01
     $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
-    "The room starts to clear. You get up and walk over to [the_person.possessive_title] and [yoga_assistant.title]."
-    mc.name "Great class girls!"
-    if mc.arousal > 50:
-        "Unfortunately, there is no hiding your erection from the duo."
-        if willing_to_threesome(the_person, yoga_assistant):
+    "As you are talking, [yoga_assistant.title] walks up to you."
+    yoga_assistant.char "Great class!"
+    $ remaining_person = None
+    if mc.arousal >= 30: #Use 30 so that this is possible from the start
+        "Unfortunately, there is no hiding your erection from the duo. Watching the class has you way too excited."
+        if willing_to_threesome(the_person, yoga_assistant) and renpy.random.randint(0,2) == 0:  #Give a chance, if possible, to get a double blowjob after the show
             "[yoga_assistant.title] is blatantly gawking at your tent, when [the_person.title] speaks up."
             the_person.char "Yup, there's only one thing left to do!"
             mc.name "Oh? Whats that?"
@@ -1560,28 +1607,128 @@ label erica_weekly_yoga_label(the_person):
             yoga_assistant.char "I know! Starting the day off right."
             the_person.char "Yeah. Sorry, but I need to get going. [yoga_assistant.name], did you want to hang out later this week?"
             yoga_assistant.char "I'll have to text you later, I'm not sure yet."
-            the_person.char "Ok! "
+            the_person.char "Ok! " #Make a small chance, if possible, to have a threesome.
         elif renpy.random.randint(0,1) == 0:
-            "[the_person.title] looks at you longingly, but you can tell she has to get going."
+            if the_person.sluttiness > 40:
+                "[the_person.title] looks at you longingly, but you can tell she has to get going."
             the_person.char "Sorry, I really need to get going."
             "As she starts to walk by you, she whispers in your ear."
             the_person.char "If you need help with that later, swing by the gym..."
             "She walks off leaving you with [yoga_assistant.title]"
             $ scene_manager.remove_actor(the_person)
-            call erica_after_yoga_office_session_label(yoga_assistant) from _sarah_after_yoga_fun_01
+            $ remaining_person = yoga_assistant
+            # call erica_after_yoga_office_session_label(yoga_assistant) from _sarah_after_yoga_fun_01
         else:
-            "[yoga_assistant.title] looks at you longingly, but you can tell she has to get going."
+            if yoga_assistant.sluttiness > 40:
+                "[yoga_assistant.title] looks at you longingly, but you can tell she has to get going."
             yoga_assistant.char "Sorry, I really need to get going."
             "As she starts to walk by you, she whispers in your ear."
-            yoga_assistant.char "If you need help with that, I'm sure we can find a private place after te workday starts..."
+            yoga_assistant.char "If you need help with that, I'm sure we can find a private place after the workday starts..."
             "She walks off leaving you with [the_person.title]"
             $ scene_manager.remove_actor(the_person)
-            call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_01
+            $ remaining_person = the_person
+            # call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_01
+        if remaining_person.sluttiness > 40:
+            "[remaining_person.title] looks at you, smiling."
+            remaining_person.char "Guess its just you and me. Why don't we find somewhere... private?"
+            $ threesome_partner = get_random_from_list(yoga_list)
+            menu:
+                "Head to your office":
+                    mc.name "I know just the place."
+                    call erica_after_yoga_office_session_label(remaining_person) from _erica_after_yoga_fun_01
+                "Ask her to join the orgy with you" if remaining_person.sluttiness < 80 and erica_get_is_yoga_nude() and willing_to_threesome(remaining_person, threesome_partner):
+                    mc.name "Private? Look around... why would we have to go somewhere private?"
+                    remaining_person.char "Ah, okay."
+                    "Off to one side, you see [threesome_partner.possessive_title], apparently taking a break by herself."
+                    mc.name "Let's go over there and have some fun with [threesome_partner.title]."
+                    remaining_person.char "Sounds good! I'll follow your lead!"
+                    "You and [remaining_person.title] walk over to [threesome_partner.title]. Her eyes light up when she see you two approaching her."
+                    $ scene_manager.add_actor(threesome_partner)
+                    threesome_partner.char "Hello! I was just getting ready to get to work sir..."
+                    mc.name "No need for that yet. Let's have a little fun first."
+                    threesome_partner.char "Yay! I was hoping you would say that!"
+                    call start_threesome(remaining_person, threesome_partner) from _nude_yoga_aftermath_threesome_01
+                    "Satisfied for now, you decide to get cleaned up and ready for work."
+                    call erica_nude_yoga_office_aftermath_label() from _nude_yoga_lobby_survey_01
+                "Decline":
+                    mc.name "Sorry, but the workday is approaching quickly. I have a lot to get done today."
+                    $ remaining_person.change_happiness(-3)
+                    remaining_person.char "Wow... okay I guess..."
+                    "Rejected, [remaining_person] quickly walks off."
+        else:
+            "[remaining_person.title] gives you a shy smile."
+            remaining_person.char "Well... I umm... I'm glad you enjoyed the class. I should probably get going as well..."
 
+    elif erica_get_is_yoga_nude():  #You didn't really watch, but the girls having sex all around you is distracting.
+        "You try to make conversation with the duo, but the sounds of sex building in the room is getting to be distracting."
+        yoga_assistant.char "It's amazing, isn't it? A group of women, getting together, getting empowered, taking their pleasure into their own hands."
+        mc.name "Yes, its amazing for sure."
+        if willing_to_threesome(the_person, yoga_assistant):
+            the_person.char "I have some time before I have to get to class... want to mess around some?"
+            yoga_assistant.char "Oh! Yeah me too me too!"
+            "The girls look at you, hungrily. It is clear they want to have some fun with you before the clean up."
+            menu:
+                "Have a threesome":
+                    "The girls watch you hungrily as you get undressed. When you take your underwear off, your cock springs free."
+                    call start_threesome(the_person, yoga_assistant) from _nude_yoga_aftermath_threesome_02
+                    "Satisfied for now, you decide to get cleaned up and ready for work."
+                    the_person.char "Mmm, that was great!"
+                    yoga_assistant.char "Hey [the_person.name], did you want to get together this weekend?"
+                    the_person.char "I'm not sure yet, I'll have to see how much homework I get! I'll text you."
+                    "It's been amazing witnessing the two girls develop such a deep friendship."
+                    call erica_nude_yoga_office_aftermath_label() from _nude_yoga_lobby_survey_02
+                "Decline":
+                    mc.name "Sorry, but the workday is approaching quickly. I have a lot to get done today."
+                    $ the_person.change_happiness(-3)
+                    $ yoga_assistant.change_happiness(-3)
+                    yoga_assistant.char "Wow... okay I guess..."
+                    the_person.char "You loss!"
+                    "Rejected, [remaining_person] quickly walks off."
+                    yoga_assistant.char "Guess we'll just have some fun without you..."
+                    $ scene_manager.update_actor(the_person, position = "kissing")
+                    $ scene_manager.update_actor(yoga_assistant, position = "walking_away", display_transform = character_right)
+                    "The two girls embrace each other and start to kiss as you walk away."
+        elif the_person.sluttiness > 40 and yoga_assistant.sluttiness > 40:
+            "The two girls look at you a bit awkwardly, as if waiting for you to do something."
+            the_person.char "So... umm... you want to do anything, [the_person.mc_title]?"
+            yoga_assistant.char "Yeah... I mean... didn't you want to talk to me, in your office or something?"
+            "The girls seem to want you to pick one of them."
+            menu:
+                "Private time with [the_person.title]":
+                    "You're right [the_person.title]. Do you have a minute? I need to discuss something with you in my office."
+                    $ the_person.change_stats(happiness = 10, love = 5)
+                    $ yoga_assistant.change_stats(happines = -10, love = -5)
+                    the_person.char "Oh! Yeah I definitely have some time."
+                    "[yoga_assistant.possessive_title] clearly looks a little rejected."
+                    yoga_assistant.char "I guess I'll get to work..."
+                    call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_02
+                "Private time with [yoga_assistant.title]":
+                    "You're right [yoga_assistant.title]. I have a problem with some times sheets. I printed them in my office, can you follow me?."
+                    $ the_person.change_stats(happiness = -10, love = -5)
+                    $ yoga_assistant.change_stats(happines = 10, love = 5)
+                    yoga_assistantchar "Oh! Yeah I remember now! Let's go."
+                    "[the_person.possessive_title] clearly looks a little rejected."
+                    the_person.char "I guess I'll get to the university..."
+                    call erica_after_yoga_office_session_label(yoga_assistant) from _erica_after_yoga_fun_03
+                "Get to work":
+                    mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
+                    "They both look at you disappointed, but nothing more comes of it. You say your goodbyes and soon your are starting your workday."
+        "Awkwardly, you decide it would be best to get to work."
+        mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
+        "They are both watching the orgy unfolding. You say your goodbyes and soon your are starting your workday."
+        $ the_person.change_stats(slut_temp = 5, slut_core = 5)
+        $ yoga_assistant.change_stats(slut_temp = 5, slut_core = 5)
+
+    else:
+        the_person.char "Yeah, that was great!"
+        yoga_assistant.char "Hey [the_person.name], did you want to get together this weekend?"
+        the_person.char "I'm not sure yet, I'll have to see how much homework I get! I'll text you."
+        "It's been amazing witnessing the two girls develop such a deep friendship. You decide it is time for you to start your workday proper now also."
     python:
         # setup next event
-        erica.add_unique_on_room_enter_event(erica_weekly_yoga)        
-
+        erica.add_unique_on_room_enter_event(erica_weekly_yoga)
+        remaining_person = None
+        threesome_partner = None
         # cleanup yoga class
         erica_after_class_outfit_cleanup(yoga_list)
         erica_class_energy_increase(yoga_list)
@@ -1593,8 +1740,127 @@ label erica_weekly_yoga_label(the_person):
     call advance_time from _call_advance_erica_yoga_weekly_recurrent_
     return
 
-label erica_after_yoga_office_session_label(the_person): #Theoretically this could be anyone, don't use any specific reference to a person.
+label erica_getting_watched_reaction_label(the_person, watched_count):  #A short label to describe how Erica feels when you watch her doing yoga.
+    if (watched_count * 20) > the_person.sluttiness and watched_count > 1:  #She is embarassed how much you watched her. sluttiness gain.
+        if watched_count == 1:
+            the_person.char "I couldn't help but notice you sneaking glances at me... during the session."
+            "She is blushing slightly."
+            mc.name "Sorry, being in the same room as you doing yoga is a little bit distracting."
+            the_person.char "It's okay! I actually don't mind. That's totally normal, right?"
+            mc.name "Of course."
+            $ the_person.change_stats(slut_core = 1, slut_temp = 1, love = 1)
+        elif watched_count == 2:
+            the_person.char "I couldn't help but notice you looking at me during the session."
+            "She is blushing."
+            mc.name "You're a beautiful woman, [the_person.title]. I'm sorry, I'll try not to stare so much next time."
+            the_person.char "It's okay! I mean, I guess that's pretty normal, considering the circumstances."
+            $ the_person.change_stats(slut_core = 2, slut_temp = 2, happiness = 2)
+        else:
+            the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes everytime I posed..."
+            "She is blushing heavily and looking down."
+            mc.name "I'm sorry. You're a sexy woman, and having you in the same room doing yoga is very distracting."
+            "She smiles at you, but you can tell she is a little uncomfortable."
+            the_person.char "It's okay I guess... considering the circumstances."
+            $ the_person.change_stats(slut_core = 3, slut_temp = 3, love = -3)
+    else:
+        if watched_count == 1:
+            the_person.char "I couldn't help but notice you sneaking glances at me during the session."
+            "She is smiling at you."
+            the_person.char "It's kind of nice, having you here to watch. Did you like what you saw?"
+            mc.name "Of course. You're very flexible, and a great yoga instructor."
+            the_person.char "Aww, thank you."
+            $ the_person.change_stats(love = 1, happiness = 1)
+        elif watched_count == 2:
+            the_person.char "I couldn't help but notice you looking at me during the session."
+            "She is smiling wide."
+            the_person.char "I can't say I blame you. Should I assume from the drool that was coming out of the side of your mouth that you liked what you saw?"
+            mc.name "Definitely. You have a great figure, and being in the same room during yoga, I couldn't help but watch."
+            the_person.char "Aww, you're sweet."
+            $ the_person.change_stats(love = 2, slut_temp = 2, happiness = 2)
+        else:
+            the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes everytime I posed..."
+            "She is giving you a mischievous smile."
+            if erica_get_is_yoga_nude():
+                the_person.char "I love the atmopshere in here, with everyone naked. But I love it even more that your eyes were glued to me the entire time."
+                mc.name "I can't help it, your figure is absolutely stunning."
+                the_person.char "Thank you... do you think we have time to help you take care of... this?"
+                "She puts her hand on your erection and gives it a few strokes."
+            else:
+                the_person.char "I could feel you undressing me with your eyes everytime I posed."
+                "She lowers her voice to a soft growl."
+                the_person.char "Maybe later you can undress me with your hands."
+                mc.name "Don't worry, I intend to."
+            $ the_person.change_stats(happiness = 3, slut_temp = 3, love = 3)
     return
+
+label erica_after_yoga_office_session_label(the_person): #Theoretically this could be anyone, don't use any specific reference to a person.
+    "You head to your office, bringing [the_person.possessive_title] with you. You open the door, walk in, then close and lock it behind you."
+    "You quickly grab her and pin her to the wall."
+    $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_right)
+    "She wraps her arms around you and you start to make out, your mouths meeting and exploring each other."
+    "[the_person.title] moans when she feels your erection pressing against her."
+    $ the_person.change_arousal(20)
+    menu:
+        "Fuck her against the wall" if the_person.sluttiness >= 70:
+            "You don't have the patience to wait any longer, you are going to fuck her right here against the wall."
+            if the_person.vagina_available():
+                "You quickly pull your cock out and put it in between her legs, getting it into position."
+            else:
+                $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+                "You quickly strip away every piece of cloth between you and [the_person.possessive_title]'s cunt."
+                "You pull your cock out and put it in between her legs, getting it into position."
+            $ scene_manager.update_actor(the_person, position = "against_wall")
+            "She lifts one leg to give you better access. Your grab her ass with both hands, lifting her up slightly."
+            "She looks you right in the eyes as you slowly lower her, your cock sliding inside her. She gasps as you bottom out inside of her."
+            #TODO relevent you better pull out / cum inside / knock me up / other appropriate dialogue here.
+            $ the_person.change_arousal(20)
+            "All she can do is cling to you as your start to fuck her."
+            call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_fuck_after_yoga_01
+
+        "Fuck her against the wall (disabled) " if the_person.sluttiness < 70:
+            pass
+        "Make her service you" if the_person.obedience >= 130:
+            "As things are starting to get heated, you slowly back off. You walk over to your desk and sit down at the edge of it, leaving her confused."
+            the_person.char "Sir?"
+            "You unzip your pants and take your cock out."
+            mc.name "I want you to come take care of this for me."
+            if the_person.love < 0:
+                the_person.char "You? What about what I want? I didn't come in here so you could have all the fun."
+                mc.name "Shut up slut. You came in here because you love cock and you know it. If you want to have some fun, then use your pussy. Either way, service me."
+                $ the_person.change_stats(obedience = 5, love = -3, slut_temp = 5)
+                "She looks upset, but you can tell her obedience and her sluttiness are overcoming her."
+                the_person.char "Fine, since  you asked so nicely."
+                "She spits her last sentence out sarcastically. But it doesn't matter, she starts walking over to you."
+                the_person.char "I'll be damned before I let your cum touch me though."
+                call get_fucked(the_person, the_goal = "waste cum") from _after_yoga_hate_fuck_01
+            else:
+                the_person.char "Yes [the_person.mc_title]... with my mouth? or?"
+                mc.name "You can use your imagination."
+                "She smiles as she starts to walk over to you."
+                the_person.char "Okay! I think I can think of a good way to do this..."
+                call get_fucked(the_person) from _after_yoga_get_serviced
+        "Make her service you (disabled) " if the_person.obedience < 130:
+            pass
+        "Mess around":
+            "You reach down and grab her ass, pulling her close to you. Through your pants, you grind your erection against her mound."
+            "Soon, you decide its time to take things to the next level."
+            call fuck_person(the_person, private = True) from _call_fuck_after_yoga_02
+    "Finished, you get yourself cleaned up and walk over to your desk."
+    if the_person == erica:
+        the_person.char "Mmm, that was fun! I guess I'll head to class now..."
+    else:
+        the_person.char "I suppose I'll get back to work now..."
+    "[the_person.title] turns and opens the door to your office, leaving you to begin your work day properly."
+    return
+
+label erica_nude_yoga_office_aftermath_label():    #We use this to describe the state of the lobby after the nude yoga orgy.
+    "As the orgy that resulted from the nude yoga class is winding down, you do a quick survey of the lobby."
+    "The girls are all winding down. A couple of them are cuddling but most have gotten up and either cleared out or are getting cleaned up."
+    "You notice the absolutely undeniable scent of feminine musk in the room. It smells of pussy and sex in the best way possible."
+    "You are pretty sure that any employees who weren't at the class this morning will know exactly what happened when the walk in the door."
+    "And even if they don't, you're sure that word will get around quick about it."
+    return
+
 
 label erica_lily_instapic_setup_label(the_person):#This should be an event assigned to Lily
     mc.name "Hey sis. I have an idea for your insta pic channel."
@@ -1669,17 +1935,17 @@ init 2 python:
         # we assume we have a scene manager
         scene_manager.clear_scene(reset_actor = False)
         scene_manager.add_actor(the_person, position = pose)
-        scene_manager.add_actor(yoga_assistant, position = pose, display_transform = character_left_flipped)        
+        scene_manager.add_actor(yoga_assistant, position = pose, display_transform = character_left_flipped)
         return
 
     def switch_to_back_of_class(back_row, pose):
-        transforms = [ character_right, character_center, character_left ]
+        transforms = [ character_right, character_center_flipped, character_left ]
 
         scene_manager.clear_scene(reset_actor = False)
         for idx in range(0, 3):
             renpy.say("", "Add actor: " + back_row[idx].name)
             scene_manager.add_actor(back_row[idx], position = pose, display_transform = transforms[idx])
-        
+
         scene_manager.draw_scene()
         return
 

@@ -88,6 +88,8 @@ init 5 python:
             topic_list.append("skimpy uniforms")
         if get_HR_director_tag("business_HR_gym_tier", 0) > 1: # unlocks after health program
             topic_list.append("sports")
+        if erica_get_is_doing_yoga_sessions():
+            topic_list.append("yoga")
 
         return topic_list
 

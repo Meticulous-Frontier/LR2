@@ -10,7 +10,7 @@ init -2:
     python:
         list_of_selfish_dom_sex_goals = []
         list_of_selfish_dom_sex_goals.append("get off")
-        #list_of_selfish_dom_sex_goals.append("waste cum")  #Unrealistic until we can control where MC finishes. Thru new sex options?
+        list_of_selfish_dom_sex_goals.append("waste cum")  #Unrealistic until we can control where MC finishes. Thru new sex options?
         #list_of_selfish_dom_sex_goals.append("hate fuck")  #We can't yet reliably path to this. Not enough pathing options
 
         list_of_unselfish_dom_sex_goals = []
