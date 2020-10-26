@@ -117,7 +117,7 @@ label strip_club_evaluate_stripper(the_person):
         $ the_person.set_title(get_random_from_list(get_titles(the_person)))
         $ the_person.set_mc_title("Boss")
         $ the_person.set_possessive_title("The stripper")
-        the_person.char "Hi [the_person.mc_title], my name is [the_person.title]."
+        the_person.char "Hi [the_person.mc_title], my name is [the_person.title] and I'm [the_person.age] years old."
 
     "She shows off a few poses, then she starts to strut down the walkway and stops at the end of the stage."
     "[the_person.title] starts to dance to the music, swinging her hips and turning slowly to show herself off."
