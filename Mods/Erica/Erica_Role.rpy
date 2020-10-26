@@ -1348,7 +1348,7 @@ label erica_money_problem_sarah_convincing_employee_label():
         "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
         $ the_target.update_opinion_with_score("yoga", 1)
     else:
-        if (the_person.charisma * 10 + the_target.suggestability) > renpy.random.randint(0,100):
+        if (the_person.charisma * 10 + the_target.suggestibility) > renpy.random.randint(0,100):
             the_person.char "The science is behind it! People who do yoga live longer, happier lives. Not to mention the general benefits of the extra flexibility."
             the_target.char "Yeah... maybe you're right..."
             "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
@@ -1356,7 +1356,7 @@ label erica_money_problem_sarah_convincing_employee_label():
         else:
             the_person.char "Its good for you! I'm sure of it!"
             the_target.char "There's a lot of things that are good for you. I'm sorry I just don't think I'm interested."
-            the_person.char "... I undertsand."
+            the_person.char "... I understand."
             "Sounds like [the_person.possessive_title] is still trying to convince employees to give the yoga class a try. You appreciate her dedication to it."
     if len(erica_get_yoga_class_list()) < 4:
         $ mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
@@ -1809,7 +1809,7 @@ label erica_weekly_yoga_label(the_person):
                 "Private time with [the_person.title]":
                     "You're right [the_person.title]. Do you have a minute? I need to discuss something with you in my office."
                     $ the_person.change_stats(happiness = 10, love = 5)
-                    $ yoga_assistant.change_stats(happines = -10, love = -5)
+                    $ yoga_assistant.change_stats(happiness = -10, love = -5)
                     the_person.char "Oh! Yeah I definitely have some time."
                     "[yoga_assistant.possessive_title] clearly looks a little rejected."
                     yoga_assistant.char "I guess I'll get to work..."
@@ -1817,7 +1817,7 @@ label erica_weekly_yoga_label(the_person):
                 "Private time with [yoga_assistant.title]":
                     "You're right [yoga_assistant.title]. I have a problem with some times sheets. I printed them in my office, can you follow me?."
                     $ the_person.change_stats(happiness = -10, love = -5)
-                    $ yoga_assistant.change_stats(happines = 10, love = 5)
+                    $ yoga_assistant.change_stats(happiness = 10, love = 5)
                     yoga_assistant.char "Oh! Yeah I remember now! Let's go."
                     "[the_person.possessive_title] clearly looks a little rejected."
                     the_person.char "I guess I'll get to the university..."
@@ -1853,7 +1853,7 @@ label erica_weekly_yoga_label(the_person):
     return
 
 label erica_getting_watched_reaction_label(the_person, watched_count):  #A short label to describe how Erica feels when you watch her doing yoga.
-    if (watched_count * 20) > the_person.sluttiness and watched_count > 1:  #She is embarassed how much you watched her. sluttiness gain.
+    if (watched_count * 20) > the_person.sluttiness and watched_count > 1:  #She is embarrassed how much you watched her. sluttiness gain.
         if watched_count == 1:
             the_person.char "I couldn't help but notice you sneaking glances at me... during the session."
             "She is blushing slightly."
@@ -1868,7 +1868,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count):  #A short
             the_person.char "It's okay! I mean, I guess that's pretty normal, considering the circumstances."
             $ the_person.change_stats(slut_core = 2, slut_temp = 2, happiness = 2)
         else:
-            the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes everytime I posed..."
+            the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes every time I posed..."
             "She is blushing heavily and looking down."
             mc.name "I'm sorry. You're a sexy woman, and having you in the same room doing yoga is very distracting."
             "She smiles at you, but you can tell she is a little uncomfortable."
@@ -1890,15 +1890,15 @@ label erica_getting_watched_reaction_label(the_person, watched_count):  #A short
             the_person.char "Aww, you're sweet."
             $ the_person.change_stats(love = 2, slut_temp = 2, happiness = 2)
         else:
-            the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes everytime I posed..."
+            the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes every time I posed..."
             "She is giving you a mischievous smile."
             if erica_get_is_yoga_nude():
-                the_person.char "I love the atmopshere in here, with everyone naked. But I love it even more that your eyes were glued to me the entire time."
+                the_person.char "I love the atmosphere in here, with everyone naked. But I love it even more that your eyes were glued to me the entire time."
                 mc.name "I can't help it, your figure is absolutely stunning."
                 the_person.char "Thank you... do you think we have time to help you take care of... this?"
                 "She puts her hand on your erection and gives it a few strokes."
             else:
-                the_person.char "I could feel you undressing me with your eyes everytime I posed."
+                the_person.char "I could feel you undressing me with your eyes every time I posed."
                 "She lowers her voice to a soft growl."
                 the_person.char "Maybe later you can undress me with your hands."
                 mc.name "Don't worry, I intend to."
@@ -1924,7 +1924,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             $ scene_manager.update_actor(the_person, position = "against_wall")
             "She lifts one leg to give you better access. Your grab her ass with both hands, lifting her up slightly."
             "She looks you right in the eyes as you slowly lower her, your cock sliding inside her. She gasps as you bottom out inside of her."
-            #TODO relevent you better pull out / cum inside / knock me up / other appropriate dialogue here.
+            #TODO relevant you better pull out / cum inside / knock me up / other appropriate dialogue here.
             $ the_person.change_arousal(20)
             "All she can do is cling to you as your start to fuck her."
             call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_fuck_after_yoga_01
@@ -2094,7 +2094,7 @@ init 2 python:
 
         scene_manager.clear_scene(reset_actor = False)
         for idx in range(0, 3):
-            renpy.say("", "Add actor: " + back_row[idx].name)
+            # renpy.say("", "Add actor: " + back_row[idx].name)
             scene_manager.add_actor(back_row[idx], position = pose, display_transform = transforms[idx])
 
         scene_manager.draw_scene()

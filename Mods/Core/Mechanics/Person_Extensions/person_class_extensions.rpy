@@ -1909,17 +1909,17 @@ init -1 python:
     Person.is_jealous = is_jealous
 
     def attempt_opinion_training(self, the_opinion, modifier = 0):
-        if self.suggestability + modifier > renpy.random.randint(0, 100):
+        if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_opinion_score(the_opinion)
         return
 
     def attempt_sex_skill_training(self, the_skill, modifier = 0):
-        if self.suggestability + modifier > renpy.random.randint(0, 100):
+        if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_sex_skill(the_skill)
         return
 
     def attempt_skill_training(self, the_skill, modifier = 0):
-        if self.suggestability + modifier > renpy.random.randint(0, 100):
+        if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_opinion_score(the_opinion)
 
         return
