@@ -159,7 +159,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     person_two.char "Uh... See you around."
                     $ scene_manager.update_actor(person_one, position = "walking_away")
                     $ scene_manager.update_actor(person_two, position = "walking_away")
-                    "They head for the door. [person_one.title] pauses and waits for [person_two.title] to pass her."                   
+                    "They head for the door. [person_one.title] pauses and waits for [person_two.title] to pass her."
                     $ scene_manager.update_actor(person_one, position = "back_peek")
                     "She looks at you and winks, then gives her friend a hard slap on the ass."
                     person_one.char "After you!"
@@ -347,7 +347,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                     person_one.char "That's it, look at these puppies [person_one.mc_title]..."
                                     "She gets behind her friend and cups her breasts, giving them a squeeze."
 
-                                $ person_one.break_taboo("bare_tits")
+                                $ person_two.break_taboo("bare_tits")
                                 $ scene_manager.update_actor(person_one, position = "stand2", emotion = "default")
                                 person_two.char "Hey, go easy on them! Well then [person_two.mc_title], who's your pick? Me or [person_one.title]?"
                             menu:
@@ -357,7 +357,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                         mc.name "I've got to give it to [person_one.title]. I like them perky."
                                     else:
                                         mc.name "I've got to give it to [person_one.title]. I like them big."
-                                    
+
                                     $ person_one.change_happiness(5)
                                     $ person_one.change_love(1 + person_one.get_opinion_score("showing her tits"))
                                     $ person_two.change_slut_temp(2 + person_two.get_opinion_score("showing her tits"))
@@ -388,14 +388,14 @@ label friends_help_friends_be_sluts_enhanced_label():
                             "[person_one.title] gives you a smile and a wink, then leaves the room with [person_two.title]."
                             $ scene_manager.remove_actor(person_one)
 
-                else: #She wants to suck your dick, but is embarassed about it.
+                else: #She wants to suck your dick, but is embarrassed about it.
                     "They're talking quietly with each other, occasionally glancing in your direction. When [person_two.title] sees you watching she looks away quickly."
                     "[person_one.title] grabs her friend's hand and they walk over to you together."
                     person_one.char "[person_one.mc_title], could me and [person_two.title] talk to you privately for a moment?"
                     mc.name "Sure, follow me to my office."
                     $ ceo_office.show_background()
 
-                    if person_two.effective_sluttiness("sucking_cock") < 50: #She's embarassed, but wants to do it
+                    if person_two.effective_sluttiness("sucking_cock") < 50: #She's embarrassed, but wants to do it
                         person_two.char "It's nothing important, it could probably wait until later. In fact, never mind at all."
                         person_one.char "[person_two.title], I know you want to do this. Don't chicken out now."
                         mc.name "I can spare a moment. Close the door."
@@ -452,6 +452,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             "You motion [person_two.title] to get down on her knees, while you unzip and take out your already swollen member."
                             $ person_two.draw_person(position = "blowjob")
                             "She opens her mouth and slides your penis between her moist lips."
+                            $ person.break_taboo("sucking_cock")
                             call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
                             $ the_report = _return
                             if the_report.get("guy orgasms", 0) > 0:
