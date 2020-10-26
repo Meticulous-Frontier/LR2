@@ -48,11 +48,12 @@ init 2 python:
         erica.event_triggers_dict["yoga_sessions_started"] = False
         erica.event_triggers_dict["nude_yoga"] = False
         erica.event_triggers_dict["looking_for_work"] = False
+        erica.event_triggers_dict["yoga_assistant"] = None
 
 
 
         town_relationships.update_relationship(nora, erica, "Friend")
-        town_relationships.update_relationship(lily, erica, "Friend")
+        # town_relationships.update_relationship(lily, erica, "Friend")
 
 
         erica.add_role(erica_role)
@@ -328,8 +329,8 @@ label erica_get_to_know_label(the_person):
         $ the_person.event_triggers_dict["erica_progress"] = 0
         call erica_intro_label(the_person) from _erica_recall_intro_if_skipped_somehow_01
         #Introduction scene#
-    # elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False:
-    #     call erica_money_problems_label(the_person) from _erica_start_job_quest_01
+    elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False:
+        call erica_money_problems_label(the_person) from _erica_start_job_quest_01
     elif the_person.event_triggers_dict.get("erica_progress", 0) == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
         mc.name "I see you here a lot. Are you getting ready for a race?"
@@ -778,6 +779,8 @@ label erica_phase_two_label(the_person):
 
 #CSA30
 label erica_race_crisis_label(the_person):
+    $ scene_manager = Scene()
+    $ yoga_assistant = erica_get_yoga_assistant()
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
@@ -785,48 +788,156 @@ label erica_race_crisis_label(the_person):
     "You look around and eventually find [the_person.title]."
     $ the_person.apply_gym_outfit()
     $ the_person.draw_person(position = "stand3")
+    $ scene_manager.add_actor(the_person)
     the_person.char "Hey, there you are! I was starting to think you had chickened out!"
     mc.name "Not a chance. I hope you don't have any plans for tomorrow, because when I get done with you tonight you won't be able to get out of bed until Monday at least!"
     the_person.char "Oh my, brave words for a brave boy! Let's just see what happens!"
+    if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
+        "As you are trash talking each other, [lily.title] and [yoga_assistant.title] surprise you when they walk up."
+        $ scene_manager.add_actor(lily)
+        $ scene_manager.add_Actor(yoga_assistant)
+        lily.char "Wow bro, you are running in a charity race? And I had to hear about it from [the_person.name]?"
+        yoga_assistant.char "I know right? And for breast cancer research? I probably would've signed up if I'd known about it earlier!"
+        the_person.char "Ah! Thanks for coming out!"
+        "Caught by surprise, you can't think of anything to say, so you let the girls chat."
+        yoga_assistant.char "Wouldn't miss it!"
+        lily.char "You should have told mom [lily.mc_title]. I bet she would have come out to help cheer you on too!"
+        mc.name "Sorry. Honestly, this is the first time I've ever done something like this. I didn't realize it was normal for people to come watch."
+        yoga_assistant.char "Maybe next time they do one of these races, we could do some kind of corporate sponsorship?"
+        "You chat with the girls, but soon it is about time for the race to begin."
+        yoga_assistant.char "We're gonna find a place to go cheer you on. Good luck you two!"
+        $ scene_manager.remove_actor(lily, reset_actor = False)
+        $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
+    elif erica_get_is_doing_yoga_sessions():
+        "As you are trash talking each other, [yoga_assistant.title] surprises you when she walks up."
+        $ scene_manager.add_Actor(yoga_assistant)
+        yoga_assistant.char "Wow, a charity race? This is great!"
+        the_person.char "Ah! Thanks for coming out!"
+        yoga_assistant.char "Of course! I'm surprise to you see you here, [yoga_assistant.mc_title]! I'm glad you are doing your part for breast cancer research though!"
+        mc.name "Yeah, this is my first time doing something like this."
+        yoga_assistant.char "Well I think its great. Maybe next time they do one of these races, we could do some kind of corporate sponsorship?"
+        "You chat with the girls, but soon it is about time for the race to begin."
+        yoga_assist.char "I'm gonna find a place to go cheer you on. Good luck you two!"
+        $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
+    elif erica_get_is_doing_insta_sessions():
+        "As you are trash talking each other, [lily.title] surprises you when she walks up."
+        $ scene_manager.add_actor(lily)
+        lily.char "Wow, so it is true? My brother is running a charity race? And I had to hear it from [the_person.name]."
+        the_person.char "Ah! Thanks for coming out!"
+        lily.char "I wouldn't miss it! This is going to be so exciting, watching you whip [lily.mc_title] in the race!"
+        "You start to defend yourself, but [the_person.possessive_title] jumps in first."
+        the_person.char "It's all for a good cause. It's not about winning or losing!"
+        "She gives you a quick wink. Yeah right its not about winning! You have a prize to claim!"
+        lily.char "You should have told mom [lily.mc_title]. I bet she would have come out to help cheer you on too!"
+        mc.name "Sorry. Honestly, this is the first time I've ever done something like this. I didn't realize it was normal for people to come watch."
+        "You chat with the girls, but soon it is about time for the race to begin."
+        $ scene_manager.remove_actor(lily, reset_actor = False)
     "You and [the_person.title] do some stretching and warmups, but soon it is time for the race to begin."
     "You line up together at the starting line, ready for the race to begin."
     "*BANG*"
-    $ the_person.draw_person(position = "walking_away")
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     "The official starts the race with a shot from the gun and the race begins! [the_person.title] jumps out in front of you, setting a fast pace."
     "You are tempted to chase after her, but think better of it. This is a long race, and you need to pace yourself."
-    $ clear_scene()
+    $ scene_manager.clear_scene(reset_actor = False)
     "As you near the first kilometer, you lose sight of [the_person.title] in the crowd of racers, but you are sure you aren't far behind."
     "You settle into your pace, determined to let your energy carry you through the race, no matter what happens. You pass the second kilometer marker"
+    if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
+        $ scene_manager.add_actor(lily)
+        $ scene_manager.add_Actor(yoga_assistant)
+        "[lily.title] and [yoga_assistant.possessive_title] are standing next to the course, and they begin cheering when they see you."
+        yoga_assistant.char "Go [yoga_assistant.mc_title]!"
+        lily.char "She's just barely ahead, you can do it!"
+        $ scene_manager.clear_scene(reset_actor = False)
+        "You pass the girls and keep running."
+    elif erica_get_is_doing_yoga_sessions():
+        $ scene_manager.add_Actor(yoga_assistant)
+        "[yoga_assistant.possessive_title] is standing next to the course, and begins cheering when she sees you."
+        yoga_assistant.char "Go [yoga_assistant.mc_title]! She's just ahead of you, you can do it!"
+        $ scene_manager.clear_scene(reset_actor = False)
+        "You pass by her and keep running."
+    elif erica_get_is_doing_insta_sessions():
+        $ scene_manager.add_actor(lily)
+        "[lily.possessive_title] is standing next to the course, and begins cheering when she sees you."
+        lily.char "You can do it bro! Keep going!"
+        $ scene_manager.clear_scene(reset_actor = False)
+        "You pass by her and keep running."
     "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
     "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
-    $ the_person.draw_person(position = "walking_away")
+    $ scene_manager.add_actor(the_person, position = "walking_away")
     "God she is hot, her ass sways back and forth with each step she takes. You imagine all the things you want to do with those delightfully tight cheeks."
     "You are breathing hard. It's getting so hard to keep up. She starts to pull away from you."
-    "No! It's time to dig deep! You pump your arms and breath deep."
-    "After a few moments, you catch your second wind. You get a burst of energy and race faster."
+    "No! It's time to dig deep! You pump your arms and breath."
+    "After a few moments, you catch your second wind. You get a burst of energy and run faster."
     "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, day dreaming about [the_person.possessive_title]."
     "You pass the marker for the fourth kilometer. This is it, it's now or never!"
     "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
     the_person.char "[the_person.mc_title]? Oh god..."
     "She barely gets her words out as you pass her."
-    $ clear_scene()
+    $ scene_manager.clear_scene(reset_actor = False)
     "You keep pushing forward, not daring to turn around."
     "You round a corner. The finish line! You give it everything you have! Your breathing is heavy and ragged, sucking in every ounce of air you can."
     "You cross the finish line. You beat her!!!"
     "You are catching your breath, and turn to see her cross the finish line just a few seconds behind you."
-    $ the_person.draw_person(position = "standing_doggy")
+    $ scene_manager.add_actor(the_person, position = "standing_doggy")
     "[the_person.title] is breathing hard. She walks up to a table nearby and bends over with her hands on it, trying desperately to catch her breath."
     "You walk up behind her and put your hands on her back. You are careful not to be too obvious, but you make some contact with her backside with your hips."
     mc.name "Hey there, [the_person.title]! Nice race! I'm so glad you invited me out here to support such a charitable cause..."
-    $ the_person.draw_person(position = "stand4")
+    $ scene_manager.update_actor(the_person, position = "stand4")
     "She stands up and turns to face you."
     the_person.char "Yeah!... I mean, it's all for a good cause, right?"
     $ the_person.change_max_energy(10)
-    $ the_person.draw_person(position = "stand4", emotion = "happy")
+    #$ the_person.draw_person(position = "stand4", emotion = "happy")
     "You think you see a little smirk on the corner of her mouth."
+
+    if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
+        "[lily.title] and [yoga_assistant.title] walk up as you are catching your breath."
+        $ scene_manager.add_actor(lily)
+        $ scene_manager.add_Actor(yoga_assistant)
+        yoga_assistant.char "Wow! What a finish! That was amazing! And you won [yoga_assistant.mc_title]!"
+        lily.char "But don't get a big head. She probably let you win!"
+        "[the_person.possessive_title] is still catching her breath so she doesn't have a response yet."
+        mc.name "Maybe so. Maybe she wanted me to win all along? That's definitely a possibility."
+        the_person.char "No no... I gave it my all..."
+        yoga_assistant.char "Well it was a great race, thank you so much for inviting us!"
+        the_person.char "Do you want to... go get some coffee?"
+        "You aren't sure if she's just being polite, or if she's putting off paying up from the bet."
+        yoga_assistant.char "Unfortunately, I have other commitments."
+        lily.char "Same here, I'm going to meet up with a classmate to do some studying."
+        the_person.char "Ah, okay. Well thanks for coming!"
+        "The girls say goodbye, leaving you with [the_person.possessive_title]."
+        $ scene_manager.remove_actor(lily)
+        $ scene_manager.remove_actor(yoga_assistant)
+        $ yoga_assistant = None
+    elif erica_get_is_doing_yoga_sessions():
+        "[yoga_assistant.title] walks up as you are catching your breath."
+        $ scene_manager.add_Actor(yoga_assistant)
+        yoga_assistant.char "Wow! What a finish! That was amazing! And you won [yoga_assistant.mc_title]!"
+        mc.name "Thank you! I'm not sure though, I think maybe [the_person.title] let me win on purpose..."
+        the_person.char "No no... I gave it my all..."
+        yoga_assistant.char "Well it was a great race, thank you so much for inviting me!"
+        the_person.char "Do you want to... go get some coffee?"
+        "You aren't sure if she's just being polite, or if she's putting off paying up from the bet."
+        yoga_assistant.char "Unfortunately, I have other commitments."
+        the_person.char "Ah, okay. Well thanks for coming!"
+        "She says goodbye, leaving you with [the_person.possessive_title]."
+        $ scene_manager.remove_actor(yoga_assistant)
+    elif erica_get_is_doing_insta_sessions():
+        "[lily.title] walks up as you are catching your breath."
+        $ scene_manager.add_actor(lily)
+        lily.char "Wow, can't say I saw that coming! It was a great race, but you won [lily.mc_title]."
+        mc.name "Thank you! I'm not sure though, I think maybe [the_person.title] let me win on purpose..."
+        the_person.char "No no... I gave it my all..."
+        lily.char "Well it was a great race, thank you so much for inviting me!"
+        the_person.char "Do you want to... go get some coffee?"
+        "You aren't sure if she's just being polite, or if she's putting off paying up from the bet."
+        lily.char "Unfortunately, I have other commitments."
+        the_person.char "Ah, okay. Well thanks for coming!"
+        "She says goodbye, leaving you with [the_person.possessive_title]."
+        $ scene_manager.remove_actor(lilye)
+
     "You both take a few minutes to recover, and soon you are ready to go."
     the_person.char "Alright, you won the race. I guess it's time to head back to my place?"
-    "You call for an Uber and she gives you here address. Soon you are walking into [the_person.title]'s apartment."
+    "You call for an Uber and she gives you her address. Soon you are walking into [the_person.title]'s apartment."
     "Your mind is racing. She is going to be completely at your mercy. Its now or never, time to make a decision on which direction you want to take things."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
@@ -1308,6 +1419,7 @@ label erica_yoga_event_intro_label():
         erica.apply_yoga_outfit()
         yoga_assistant.apply_yoga_outfit()
         erica_apply_yoga_outfit_to_class(yoga_list)
+        erica.event_triggers_dict["yoga_assistant"] = yoga_assistant
 
     "It's Tuesday morning. That means that, starting this week, it is morning yoga day! While you don't think you'll need to go every time, since this the inaugural session, it might be good for you to oversee, just in case there are any issues. You head in to work early."
     "When you arrive, you walk in the building. I'm the main lobby, you see some of your employees just getting ready to set up."
@@ -1499,7 +1611,7 @@ label erica_weekly_yoga_label(the_person):
         scene_manager = Scene() # only use one scene manager per event
 
         the_person = erica
-        yoga_assistant = mc.business.hr_director
+        yoga_assistant = erica_get_yoga_assistant()
         yoga_list = erica_get_yoga_class_list()
 
 
@@ -1706,7 +1818,7 @@ label erica_weekly_yoga_label(the_person):
                     "You're right [yoga_assistant.title]. I have a problem with some times sheets. I printed them in my office, can you follow me?."
                     $ the_person.change_stats(happiness = -10, love = -5)
                     $ yoga_assistant.change_stats(happines = 10, love = 5)
-                    yoga_assistantchar "Oh! Yeah I remember now! Let's go."
+                    yoga_assistant.char "Oh! Yeah I remember now! Let's go."
                     "[the_person.possessive_title] clearly looks a little rejected."
                     the_person.char "I guess I'll get to the university..."
                     call erica_after_yoga_office_session_label(yoga_assistant) from _erica_after_yoga_fun_03
@@ -1883,6 +1995,7 @@ label erica_lily_instapic_setup_label(the_person):#This should be an event assig
     the_person.char "Yeah, we have a deal. You think this will really help my channel?"
     mc.name "Speaking as a guy... Yes... Having two hot college girls dressing up for pics will be perfect!"
     the_person.char "Okay. Did you need anything else?"
+
     return
 
 label erica_lily_instapic_proposal_label(the_person): #This should be assigned to Erica
@@ -1916,6 +2029,44 @@ label erica_lily_instapic_proposal_label(the_person): #This should be assigned t
 
 label erica_lily_instapic_intro_label():
     $ erica.event_triggers_dict["insta_pic_intro_complete"] = True
+    "It's Saturday evening, which means it's time for a sexy photo shoot with Lily and Erica! You head home and knock on Lily's door. She swings it open."
+    "Hey, any word from your friend?"
+    mc.name "Not yet."
+    "Are you sure she's gonna make it? I teased on my channel that I have a surprise for them tonight. It's gonna be hard to come up with something if she doesn't show up!"
+    mc.name "She'll be here."
+    "You chat with Lily for a bit. Soon you feel a vibration in your pocket as your phone goes off."
+    "I'm here! Come let me in!"
+    "You go to your front door and open it. Erica gives you a nervous smile as she steps inside."
+    "Sorry I'm late. I almost didn't come... This whole thing is just a little... Crazier than I would normally do."
+    mc.name "Don't worry, Lily is great at this. I was pretty skeptical about it at first too, but she's been pretty successful with this."
+    "You lead her to Lily's room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
+    "Oh my gosh... Erica? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
+    "Ah! Yes I remember you now! You were at the study group for the midterm!"
+    "I never realized you were on the track team! But God, I can tell now! You look amazing! No wonder my brother is crushing on you."
+    "Aww, thank you! Wait, your brother what?"
+    "Lily let's not..."
+    "He's totally into you. Did he tell how much the fee was for today?"
+    "He just said $100..."
+    "Lily could you not do this right now..."
+    "Yeah! That's totally his normal camera man fee. He offered to donate it to you to help you out!"
+    "Erica looks at you, surprise in her face."
+    "[MC]... Is that true?"
+    "Well... Yeah... I mean about where the fee is coming from. I just want everyone here to be successful. This is gonna be great for both of you, and there's no strings attached to the money."
+    "Erica smirks at you."
+    "I see. Well, I'm here now! We should get started."
+    "Right! Let me show you what I got for us for tonight!"
+    "The girls start to chat as Lily pulls out a few outfits. You are glad that they seem to be hitting it off so well... But also a little fearful. Lily seems to be enjoying this a little TOO much."
+    "After a bit, Lily moves to get things started."
+    "Alright, let's go with these!"
+    "Lily starts to take her clothes off, surprising Erica."
+    "Whoa, like, right here? In front of him?"
+    "Erica seems a little unsure."
+    "It's okay, he doesn't mind!"
+    "Erica starts to protest again, but Lily continues to strip down. Soon she decided to just follow her and starts to strip also."
+    "[If taboo] Erica uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
+    "When they finish, Lily hands her the outfit. They both quickly get dressed. The outfits look great."
+    "It's... A little skimpy, don't you think?"
+    "That's the point! A little showy, but leave the guys thirsty and they'll come back again and again!"
     return
 
 label erica_ghost_label(the_person):
@@ -1996,6 +2147,9 @@ init 2 python:
             if person.get_opinion_score("yoga") > 0 and person != mc.business.hr_director:
                 yoga_list.append(person)
         return yoga_list
+
+    def erica_get_yoga_assistant():
+        return erica.event_triggers_dict.get("yoga_assistant", None)
 
     def erica_apply_yoga_outfit_to_class(yoga_list):
         for person in yoga_list:
