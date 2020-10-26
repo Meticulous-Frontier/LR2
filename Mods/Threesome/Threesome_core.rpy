@@ -769,9 +769,9 @@ init python:
 
     def willing_to_threesome(person_one, person_two):    #Use this function to check and see if two people are willing to engage in a threesome
         # only allow threesomes when we had sex before (without condom)
-        if person_one.has_taboo("sucking_cock") or person_one.has_taboo("condomless_sex"):
+        if person_one.has_taboo(["sucking_cock", "condomless_sex"]):
             return False
-        if person_two.has_taboo("sucking_cock") or person_two.has_taboo("condomless_sex"):
+        if person_two.has_taboo(["sucking_cock", "condomless_sex"]):
             return False
 
         person_one_slut_req = THREESOME_BASE_SLUT_REQ
