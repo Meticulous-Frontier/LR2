@@ -11,6 +11,21 @@ init 5 python: # add to stack later then other mods
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
 
+init 100 python:
+    def parse_version_string(version):
+        parts = version.split(".")
+        return int(parts[0].strip("v")), int(parts[1]), int(parts[2])
+
+    def get_loaded_version():
+        if "game_version" in globals():
+            loaded_version = game_version
+        else:
+            loaded_version = "v0.33.3"
+        return loaded_version
+
+    add_label_hijack("normal_start", "store_game_version")
+    add_label_hijack("after_load", "check_save_version")
+
 init -1 python:
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
@@ -48,7 +63,7 @@ init -1 python:
         for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
             if employee.location():
                 continue
-            # somehow she is lost in limbo                
+            # somehow she is lost in limbo
             scheduled_location = employee.get_destination()
             if not scheduled_location: # pick random location
                 scheduled_location = get_random_from_list([x for x in list_of_places if x.public])
@@ -60,7 +75,7 @@ init -1 python:
     def update_pinned_cache():
         # cache all GUI images in memory
         for fn in renpy.list_files():
-            if (re.search("gui", fn, re.IGNORECASE) 
+            if (re.search("gui", fn, re.IGNORECASE)
                 and fn.endswith(".png")):
                 renpy.cache_pin(fn)
         return
@@ -97,4 +112,15 @@ label update_compatibility_fix(stack):
     $ execute_hijack_call(stack)
     return
 
+label store_game_version(stack):
+    $ game_version = config.version
+    $ execute_hijack_call(stack)
+    return
 
+label check_save_version(stack):
+    if parse_version_string(get_loaded_version())[1] < parse_version_string(config.version)[1]:
+        "Warning" "You are loading and incompatible game version. Please start a new game."
+    elif parse_version_string(get_loaded_version())[2] < parse_version_string(config.version)[2]:
+        "Warning" "You are loading a game created by a previous build, you might run into errors because of this. Before reporting errors, please start a new game and see if the problem persists."
+    $ execute_hijack_call(stack)
+    return
