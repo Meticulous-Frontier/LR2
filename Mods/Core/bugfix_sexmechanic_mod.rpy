@@ -418,7 +418,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
 
                 if position_choice and object_choice:
-                    call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix
+                    call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix
                     if not _return == 1: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
                         if _return == -1: # angry reject ends interactions
                             $ finished = True
@@ -480,7 +480,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
-            call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix_1
+            call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix_1
             if _return:
                 $ round_choice.redraw_scene(the_person)
                 if not ignore_taboo and the_person.has_taboo(round_choice.associated_taboo):
