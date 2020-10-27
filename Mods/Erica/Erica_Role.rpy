@@ -1294,7 +1294,7 @@ label erica_money_problems_sarah_talk_label(the_person):
     "She looks a bit disappointed. Your company is pretty small, so you may not have the numbers. She seems to have another idea though."
     the_person.char "What if umm... You know... When we do our employee meetings... We could add counseling about...errm... Yoga?"
     "You sigh. It seems [the_person.char] really likes this idea and is looking for ways to make it happen."
-    if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
+    if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         mc.name "Tell you what. We don't need to push it officially, but if you happen to take some of the serum and use it for that purpose... I would be willing to look the other way."
     else:
         mc.name "I don't think that is a good idea. But if you really want to make it happen, you could always use the power of persuasion to see if you can get people to come."
@@ -1318,7 +1318,7 @@ label erica_money_problems_sarah_update_label():
         the_person.char "Hey... So I was asking around with the girls... Unfortunately I could find nobody interested in joining the morning yoga class... For now..."
 
     "You admit you are a bit disappointed as well."
-    if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
+    if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         the_person.char "So... Do you think that... You know... It would be okay if umm... Used some of the serum we have for the one on ones..."
         "You had forgotten about her using the serum, and you are glad she reminded you."
         mc.name "Yeah, that sounds fine. Let me know if you manage to... Convince... Enough employees and I'll speak with [erica.title] about starting that morning yoga class."
@@ -1332,41 +1332,56 @@ label erica_money_problems_sarah_update_label():
     return
 
 label erica_money_problem_sarah_convincing_employee_label():
-    $ the_person = mc.business.hr_director
-    $ the_target = None
     python:
+        scene_manager = Scene()
+        the_person = mc.business.hr_director
+        the_target = None
         eligible_list = [x for x in mc.business.get_employee_list() if x not in erica_get_yoga_class_list()]
         eligible_list.remove(mc.business.hr_director)
         the_target = get_random_from_list(eligible_list)
+
     if the_target == None:
         #Figure out how to fix this
         return
+
     "As you go about your work, you walk by the break room. Inside you can hear [the_person.possessive_title] talking to someone else."
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    $ scene_manager.add_actor(the_target, position = "sitting", display_transform = character_center_flipped)
     the_person.char "Yeah, it has lots of health benefits too!"
     the_target.char "I've heard that, but I don't know, I'm just really busy right now."
-    if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
+    if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         the_person.char "I'm sure you are... more coffee? I just brewed some!"
+        $ scene_manager.update_actor(the_person, position = "back_peek")
         the_target.char "Yeah! That looks nice."
         "Sounds like she is using some of the serum you produced for HR meetings to help her persuade [the_target.possessive_title] to come to the yoga class."
+        $ scene_manager.update_actor(the_person, position = "stand3")
         the_person.char "Here you go... now, I know, we're all busy, but trust me, the benefits of doing yoga really are worth the time!"
+        $ scene_manager.update_actor(the_person, position = "sitting")
         the_target.char "Yeah... maybe you're right..."
+        $ scene_manager.update_actor(the_person, emotion = "happy")
         "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
         $ the_target.update_opinion_with_score("yoga", 1)
     else:
         if (the_person.charisma * 10 + the_target.suggestibility) > renpy.random.randint(0,100):
             the_person.char "The science is behind it! People who do yoga live longer, happier lives. Not to mention the general benefits of the extra flexibility."
             the_target.char "Yeah... maybe you're right..."
+            $ scene_manager.update_actor(the_target, emotion = "sad")
             "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
             $ the_target.update_opinion_with_score("yoga", 1)
         else:
             the_person.char "Its good for you! I'm sure of it!"
             the_target.char "There's a lot of things that are good for you. I'm sorry I just don't think I'm interested."
+            $ scene_manager.update_actor(the_person, emotion = "sad")
             the_person.char "... I understand."
             "Sounds like [the_person.possessive_title] is still trying to convince employees to give the yoga class a try. You appreciate her dedication to it."
-    if len(erica_get_yoga_class_list()) < 4:
-        $ mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
-    else:
-        $ mc.business.mandatory_crises_list.append(erica_money_problems_sarah_final_update)
+
+    python:
+        scene_manager.clear_scene()
+        clear_scene()
+        if len(erica_get_yoga_class_list()) < 4:
+            mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
+        else:
+            mc.business.mandatory_crises_list.append(erica_money_problems_sarah_final_update)
     return
 
 
@@ -1665,10 +1680,22 @@ label erica_weekly_yoga_label(the_person):
     yoga_assistant.char "Hello [yoga_assistant.mc_title]! I was just getting ready to fill up the water jug for the attendants."
     "You consider offering to fill it for her. It would give you a chance to distribute a dose of serum to all the girls gathered."
     menu:
-        "Fill it for her":
-            "Unfortunately, Starbuck hasn't figured out how to code this shit yet."
-            "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
-            pass
+        "Fill it for her\n{color=#000000}{size=18}Give class serum{/size}{/color}":
+            call screen serum_inventory_select_ui(mc.inventory)
+            if not _return == "None":
+                $ the_serum = _return
+                if mc.business.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
+                    "You decide to add several doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
+                    python:
+                        for yca in [the_person, yoga_assistant] + yoga_list:
+                            mc.inventory.change_serum(the_serum, -1)
+                            yca.give_serum(copy.copy(the_serum))
+                else:
+                    "You have insufficient doses, to make the serum in the water jug effective."
+                    "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
+                $ the_serum = None
+            else:
+                "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
         "Chat with [the_person.title]":
             mc.name "Don't let me keep you."
             yoga_assistant.char "Right..."
