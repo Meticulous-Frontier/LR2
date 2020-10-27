@@ -99,6 +99,8 @@ init 10 python:
     add_label_hijack("normal_start", "activate_custom_rooms")
     add_label_hijack("after_load", "update_custom_rooms")
 
+    # this update is needed due to the fact that mod rooms are created at python init
+    # default rooms are initialized at game creation
     def store_custom_rooms():
         for room in room_storage_list:
             if room not in list_of_places:
@@ -107,10 +109,14 @@ init 10 python:
                 found = find_in_list(lambda x: x.name == room.name, list_of_places)
                 if found: # update existing room
                     found.background_image = room.background_image
+                    found.accessable = room.accessable
+                    found.formalName = room.formalName
+                    found.actions = room.actions
+                    found.map_pos = room.map_pos
                     found.objects = room.objects
                     found.public = room.public
                     found.map_pos = room.map_pos
-                    found.visible = room.visible
+                    # dont update visibility
         return
 
     def update_room_visibility():
@@ -139,6 +145,6 @@ label update_custom_rooms(stack):
         store_custom_rooms()
 
         update_room_visibility()
-        
+
         execute_hijack_call(stack)
     return
