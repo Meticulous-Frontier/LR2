@@ -1311,7 +1311,12 @@ label erica_money_problems_sarah_update_label():
     $ the_person = mc.business.hr_director
     $ the_person.draw_person(emotion = "sad")
     "[the_person.title] seeks you out as you work. She seems a bit disappointed."
-    the_person.char "Hey... So I was asking around with the girls... Unfortunately I could only get [number] interested in joining the morning yoga class... For now..."
+    $ count = __builtin__.len(erica_get_yoga_class_list())
+    if count > 0:
+        the_person.char "Hey... So I was asking around with the girls... Unfortunately I could only get [count] interested in joining the morning yoga class... For now..."
+    else:
+        the_person.char "Hey... So I was asking around with the girls... Unfortunately I could find nobody interested in joining the morning yoga class... For now..."
+
     "You admit you are a bit disappointed as well."
     if get_HR_director_unlock("business_HR_coffee_tier", 0) > 0:
         the_person.char "So... Do you think that... You know... It would be okay if umm... Used some of the serum we have for the one on ones..."
@@ -2143,8 +2148,8 @@ init 2 python:
 
     def erica_get_yoga_class_list():
         yoga_list = []
-        for person in mc.business.get_employee_list():
-            if person.get_opinion_score("yoga") > 0 and person != mc.business.hr_director:
+        for person in [x for x in mc.business.get_employee_list() if x.is_available() and x.get_opinion_score("yoga") > 0]:
+            if not person is mc.business.hr_director:
                 yoga_list.append(person)
         return yoga_list
 
