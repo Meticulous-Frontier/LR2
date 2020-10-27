@@ -2,26 +2,26 @@ init 5 python:
     config.label_overrides["broken_AC_crisis_label"] = "broken_AC_crisis_label_enhanced"
 
     def broken_AC_crisis_get_sluttiest_person():
-        person = get_random_from_list(mc.business.p_div)
-        for girl in mc.business.p_div:
+        person = get_random_from_list(mc.business.p_div.people)
+        for girl in mc.business.p_div.people:
             if girl.sluttiness > person.sluttiness:
                 person = girl
         return person
 
     def broken_AC_crisis_update_stats(happiness, obedience):
-        for person in mc.business.p_div:
+        for person in mc.business.p_div.people:
             person.change_happiness(happiness)
             person.change_obedience(obedience)
         return
 
     def broken_AC_crisis_update_sluttiness():
-        for person in mc.business.p_div:
+        for person in mc.business.p_div.people:
             person.change_slut_temp(10, add_to_log = False)
         mc.log_event("All Production Staff: +10 Sluttiness","float_text_pink")
         return
 
     def broken_ac_crisis_strip_other_girls(person, girl):
-        for other_girl in [x for x in mc.business.p_div if x not in [person, girl]]:
+        for other_girl in [x for x in mc.business.p_div.people if x not in [person, girl]]:
             scene_manager.add_actor(other_girl, display_transform = character_left)
             # only remove clothing, don't show it on screen
             removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(other_girl, temp_sluttiness_boost = 20)
@@ -39,7 +39,7 @@ init 5 python:
         return
 
     def broken_AC_crisis_get_watch_list_menu(person):
-        people_list = [x for x in mc.business.p_div if not x is person]
+        people_list = [x for x in mc.business.p_div.people if not x is person]
         people_list.insert(0, "Watch")
         return people_list
 
@@ -54,7 +54,7 @@ label broken_AC_crisis_label_enhanced:
     $ mc.business.p_div.show_background()
     #We're going to use the most slutty girl of the group lead the pack. She'll be the one we pay attention to.
     $ scene_manager.add_actor(the_person)
-    if __builtin__.len(mc.business.p_div) == 1:
+    if __builtin__.len(mc.business.p_div.people) == 1:
         "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then [the_person.name] wants to know what to do."
     else:
         "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then, the production staff want to know what to do."
@@ -72,7 +72,7 @@ label broken_AC_crisis_label_enhanced:
             "The repair man shows up early and it turns out to be an easy fix. The lab is soon back up and running."
 
         "Tell everyone to strip down and keep working" if casual_uniform_policy.is_active():
-            if __builtin__.len(mc.business.p_div) > 1: #We have more than one person, do a group strip scene.
+            if __builtin__.len(mc.business.p_div.people) > 1: #We have more than one person, do a group strip scene.
                 mc.name "I know it's uncomfortable in here right now, but we're just going to have to make due."
                 mc.name "If anyone feels the need to take something off to get comfortable, I'm lifting the dress code until the air conditioning is fixed."
 
@@ -101,7 +101,7 @@ label broken_AC_crisis_label_enhanced:
                 "[the_person.possessive_title] fiddles with some of her clothing, then shrugs."
                 the_person.char "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
 
-            if __builtin__.len(mc.business.p_div) > 1:
+            if __builtin__.len(mc.business.p_div.people) > 1:
                 if removed_something:
                     "The rest of the department follows the lead of [the_person.title], stripping off various amounts of clothing."
                         #Gives you the chance to watch one of the other girls in the department strip.
@@ -129,7 +129,7 @@ label broken_AC_crisis_label_enhanced:
                         "[girl_choice.title] fiddles with some of her clothing, then shrugs meekly."
                         girl_choice.char "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
 
-                    if __builtin__.len(mc.business.p_div) > 2:
+                    if __builtin__.len(mc.business.p_div.people) > 2:
                         "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
                         "For a while all of the girls work in various states of undress while under your watchful eye."
                         $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
