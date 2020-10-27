@@ -1370,19 +1370,15 @@ init -1 python:
     Person.apply_university_outfit = apply_university_outfit
 
     def apply_yoga_outfit(self):
-        if self.event_triggers_dict.get("yoga_outfit", None) == None or renpy.random.randint(0, 4) == 0: #We don't have one yet, or once in a while change things up a bit
-            builder = WardrobeBuilder(self)
-            self.event_triggers_dict["yoga_outfit"] = builder.build_workout_outfit(points = sluttiness_to_points(self.sluttiness), neutral_underwear = renpy.random.randint(0, 1), neutral_bottoms = renpy.random.randint(0, 1), neutral_shoes = renpy.random.randint(0, 1))
-        self.apply_outfit(self.event_triggers_dict.get("yoga_outfit", None))
+        builder = WardrobeBuilder(self)
+        self.apply_outfit(builder.build_workout_outfit(points = sluttiness_to_points(self.sluttiness), neutral_underwear = renpy.random.randint(0, 1), neutral_bottoms = renpy.random.randint(0, 1), neutral_shoes = renpy.random.randint(0, 1)))
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
 
     def apply_yoga_shoes(self):
-        if self.event_triggers_dict.get("yoga_shoes", None) == None:
-            builder = WardrobeBuilder(self)
-            self.event_triggers_dict["yoga_shoes"] = builder.get_workout_shoes(points = sluttiness_to_points(self.sluttiness), neutral_shoes = renpy.random.randint(0, 1))
-        self.apply_outfit(self.event_triggers_dict.get("yoga_shoes", None))
+        builder = WardrobeBuilder(self)
+        self.apply_outfit(builder.get_workout_shoes(points = sluttiness_to_points(self.sluttiness), neutral_shoes = renpy.random.randint(0, 1)))
         return
 
     Person.apply_yoga_shoes = apply_yoga_shoes
