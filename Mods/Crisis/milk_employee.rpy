@@ -26,9 +26,8 @@ init 2 python:
 
     def select_girl_lactating():
         lactating_people = []
-        for person in mc.business.get_employee_list():
-            if person.lactation_sources > 0:
-                lactating_people.append(person)
+        for person in [x for x in mc.business.get_employee_list() if x.is_available() and x.lactation_sources > 0]:
+            lactating_people.append(person)
         if len(lactating_people) == 0:
             return None
         return get_random_from_list(lactating_people)

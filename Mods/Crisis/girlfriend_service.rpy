@@ -10,7 +10,7 @@ init 2 python:
 
     def girlfriend_service_get_person():
         list_of_possible_people = []
-        for person in mc.business.get_employee_list():
+        for person in [x for x in mc.business.get_employee_list() if x.is_available()]:
             if person.has_role(girlfriend_role):
                 list_of_possible_people.append(person)
 

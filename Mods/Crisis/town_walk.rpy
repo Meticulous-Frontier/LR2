@@ -6,15 +6,16 @@ init -1 python:
 init 2 python:
     def town_walk_crisis_requirement():
         if mc.location in [downtown, downtown_bar, downtown_hotel]:
-            if time_of_day >= 1 or time_of_day <= 3: 
+            if time_of_day >= 1 or time_of_day <= 3:
                 return True
         return False
 
     def get_town_walk_person():
         if mc.business.is_weekend():
-            return get_random_known_person_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc])
+            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc]) if x.is_available()]
         else:
-            return get_random_known_person_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc] + mc.business.get_employee_list())
+            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc] + mc.business.get_employee_list()) if x.is_available()]
+        return get_random_from_list(candidates)
 
     town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",
         menu_tooltip = "On occasion when you walk down town, you notice, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)

@@ -34,10 +34,8 @@ init 2 python:
 
     def get_training_employee():
         training_eligible = []
-        for person in mc.business.get_employee_list():
-            if person.obedience > 110:
-                if person.int > 1:
-                    training_eligible.append(person)
+        for person in [x for x in mc.business.get_employee_list() if x.is_available() and x.obedience > 110 and x.int > 1]:
+            training_eligible.append(person)
         return get_random_from_list(training_eligible)
 
     def one_on_one_update_HR_skill(person):

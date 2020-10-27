@@ -50,10 +50,6 @@ init -1 python:
             known_people += known_people_at_location(location, excluded_people)
         return known_people
 
-    def get_random_known_person_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        known_people = known_people_in_the_game(excluded_people)
-        return get_random_from_list(known_people)
-
     def known_people_at_location(location, excluded_people = []):
         not_met_yet_list = unique_characters_not_known()
         known_people = []
@@ -84,13 +80,14 @@ init -1 python:
 
     # returns a single employee when number of employees == 1
     # returns a tuple of employees when number of employees > 1
+    # only returns employees available for events
     def get_random_employees(number_of_employees, exclude_list = None, **employee_args):
         result = set([])
-        list_of_possible_people = mc.business.get_requirement_employee_list(exclude_list = exclude_list, **employee_args)
+        list_of_possible_people = [x for x in mc.business.get_requirement_employee_list(exclude_list = exclude_list, **employee_args) if x.is_available()]
         if len(list_of_possible_people) < number_of_employees:
             if number_of_employees == 1:
                 return None
-                
+
             result.add(None) # build up tuple with correct number of items
             for i in __builtin__.range(1, number_of_employees):
                 result.add(i)

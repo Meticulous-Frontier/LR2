@@ -1302,6 +1302,13 @@ init -1 python:
 
     Person.is_girlfriend = is_girlfriend
 
+    # helper function, to determine if person is available for crisis events
+    # for now only girls giving birth are not available (but is extendable for future conditions)
+    def is_available(self):
+        return not self.is_giving_birth()
+
+    Person.is_available = is_available
+
 
 ################################################
 # Outfit functions - wear a specialized outfit #
@@ -1639,6 +1646,11 @@ init -1 python:
             return True
         return False
     Person.is_lactating = is_lactating
+
+    def is_giving_birth(self):
+        return "preg_old_schedule" in self.event_triggers_dict or "pre_preg_body" in self.event_triggers_dict
+
+    Person.is_giving_birth = is_giving_birth
 
     def get_due_day(self):
         if self.is_pregnant():
