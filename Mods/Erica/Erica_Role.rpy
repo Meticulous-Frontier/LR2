@@ -221,7 +221,7 @@ init -2 python:
         return False
 
     def erica_money_problems_yoga_start_requirement(person):
-        if mc.business.hr_director and the_person.location() == gym:
+        if mc.business.hr_director and person.location() == gym:
             return True
         return False
 
@@ -230,8 +230,8 @@ init -2 python:
             return True
         return False
 
-    def erica_weekly_yoga_requirement(the_person):
-        if mc.business.hr_director and the_person.location() == office and day%7 == 1:
+    def erica_weekly_yoga_requirement(person):
+        if mc.business.hr_director and person.location() == office and day%7 == 1:
             return True
         return False
 
