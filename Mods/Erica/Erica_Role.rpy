@@ -1436,9 +1436,7 @@ label erica_yoga_event_intro_label():
         yoga_assistant = mc.business.hr_director
         yoga_list = erica_get_yoga_class_list()
 
-        erica.apply_yoga_outfit()
-        yoga_assistant.apply_yoga_outfit()
-        erica_apply_yoga_outfit_to_class(yoga_list)
+        erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
         erica.event_triggers_dict["yoga_assistant"] = yoga_assistant
 
     "It's Tuesday morning. That means that, starting this week, it is morning yoga day! While you don't think you'll need to go every time, since this the inaugural session, it might be good for you to oversee, just in case there are any issues. You head in to work early."
@@ -1634,15 +1632,11 @@ label erica_weekly_yoga_label(the_person):
         yoga_assistant = erica_get_yoga_assistant()
         yoga_list = erica_get_yoga_class_list()
 
+        erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
 
     "As you walk into the lobby, you see the now familiar sight of some of your employees gathering for their weekly yoga session."
     if erica_get_is_yoga_nude():
         "The girls are all naked, as has been previously decided. Nude yoga is probably your favorite spectator sport right now."
-        $ erica.apply_yoga_shoes()
-        $ yoga_assistant.apply_yoga_shoes()
-    else:
-        $ erica.apply_yoga_outfit()
-        $ yoga_assistant.apply_yoga_outfit()
 
     $ scene_manager.add_actor(the_person)
     $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
@@ -1680,7 +1674,7 @@ label erica_weekly_yoga_label(the_person):
     yoga_assistant.char "Hello [yoga_assistant.mc_title]! I was just getting ready to fill up the water jug for the attendants."
     "You consider offering to fill it for her. It would give you a chance to distribute a dose of serum to all the girls gathered."
     menu:
-        "Fill it for her\n{color=#000000}{size=18}Give class serum{/size}{/color}":
+        "Fill it for her\n{color=#00FF00}{size=18}Give class serum{/size}{/color}":
             call screen serum_inventory_select_ui(mc.inventory)
             if not _return == "None":
                 $ the_serum = _return
@@ -1798,7 +1792,7 @@ label erica_weekly_yoga_label(the_person):
                     mc.name "Sorry, but the workday is approaching quickly. I have a lot to get done today."
                     $ remaining_person.change_happiness(-3)
                     remaining_person.char "Wow... okay I guess..."
-                    "Rejected, [remaining_person] quickly walks off."
+                    "Rejected, [remaining_person.possessive_title] quickly walks off."
         else:
             "[remaining_person.title] gives you a shy smile."
             remaining_person.char "Well... I umm... I'm glad you enjoyed the class. I should probably get going as well..."
@@ -1827,7 +1821,7 @@ label erica_weekly_yoga_label(the_person):
                     $ yoga_assistant.change_happiness(-3)
                     yoga_assistant.char "Wow... okay I guess..."
                     the_person.char "You loss!"
-                    "Rejected, [remaining_person] quickly walks off."
+                    "Rejected, [remaining_person.possessive_title] quickly walks off."
                     yoga_assistant.char "Guess we'll just have some fun without you..."
                     $ scene_manager.update_actor(the_person, position = "kissing")
                     $ scene_manager.update_actor(yoga_assistant, position = "walking_away", display_transform = character_right)
@@ -1874,6 +1868,7 @@ label erica_weekly_yoga_label(the_person):
         remaining_person = None
         threesome_partner = None
         # cleanup yoga class
+        yoga_list.append(yoga_assistant)                #Add assistant to yoga list to make sure she gets appropriate energy increase and outfit cleanup.
         erica_after_class_outfit_cleanup(yoga_list)
         erica_class_energy_increase(yoga_list)
 
@@ -2189,7 +2184,6 @@ init 2 python:
                 person.apply_yoga_shoes()
             else:
                 person.apply_yoga_outfit()
-
         return
 
     def erica_after_class_outfit_cleanup(yoga_list):
