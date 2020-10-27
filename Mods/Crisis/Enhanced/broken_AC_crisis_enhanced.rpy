@@ -133,7 +133,10 @@ label broken_AC_crisis_label_enhanced:
                         "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
                         "For a while all of the girls work in various states of undress while under your watchful eye."
                         $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
-                        "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
+                        if time_of_day >= 3:
+                            "The repair man shows up quickly, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature the next day."
+                        else:
+                            "The repair man shows up quickly, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature within an hour."
 
                     $ girl_choice = None
                 else:
