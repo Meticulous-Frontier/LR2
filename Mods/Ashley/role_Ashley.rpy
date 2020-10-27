@@ -680,7 +680,7 @@ label ashley_ask_about_porn_label(the_person):
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
-    return
+    jump game_loop # she runs after her sister so end talk with Ashley
 
 label ashley_post_handjob_convo_label(the_person):
     "You decide not to give [the_person.title] too much time to overthink what happened in your office. You swing by her desk."
