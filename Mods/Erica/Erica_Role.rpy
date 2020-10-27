@@ -1231,7 +1231,7 @@ label erica_money_problems_label(the_person):
     mc.name "I'm sorry, I don't have anything at this time."
     the_person.char "It's okay, I figured as much..."
     "You continue some small talk with [the_person.title], but you keep trying to think about something you could have her do."
-    if mc.business.get_hr_director():
+    if mc.business.hr_director:
         "Maybe you could check with [mc.business.hr_director.title] and see if she has any ideas?"
         $ erica.event_triggers_dict["yoga_quest_started"] = True
         $ erica.event_triggers_dict["yoga_sessions_started"] = False
@@ -1258,7 +1258,7 @@ label erica_money_problems_update_label(the_person):
     if the_person.event_triggers_dict.get("insta_pic_started", False) == False and lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
         "Maybe you should try talking to [lily.title]? You recently started taking insta pics of her. Maybe [the_person.title] could join in for a session once in a while?"
         $ the_person.event_triggers_dict["insta_pic_started"] = True
-    if the_person.event_triggers_dict.get("yoga_quest_started", False) == False and mc.business.get_hr_director():
+    if the_person.event_triggers_dict.get("yoga_quest_started", False) == False and mc.business.hr_director:
         "Maybe you could check with [mc.business.hr_director.title] and see if she has any ideas?"
         $ erica.event_triggers_dict["yoga_quest_started"] = True
         $ mc.business.hr_director.add_unique_on_talk_event(erica_money_problems_sarah_talk)
