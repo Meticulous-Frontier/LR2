@@ -1,5 +1,4 @@
 
-
 init 2 python:
     erica_workout_wardrobe = wardrobe_from_xml("Erica_W_Wardrobe")
     def erica_mod_initialization(): #Add actionmod as argument#
@@ -1280,7 +1279,7 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person.char "What if we like... Hired her... To come in, like once a week, and ran a personal fitness class?"
     mc.name "Here at the office?"
     the_person.char "Sure! It could be company sanctioned, and optional, but I think if it were supported, we would get good attendance. You could even start it like an hour before normal start time so it doesn't effect productivity."
-    mc.name "Wouldn't having people work out in the morning like that effect their energy for the test of the day?"
+    mc.name "Wouldn't having people work out in the morning like that effect their energy for the rest of the day?"
     the_person.char "You could make it something low impact? And focus on general well-being... Maybe like a yoga class?"
     "Hmm. Having [erica.title] come in and teach a yoga class once a week is actually a pretty good idea. But having it start before normal business hours, you wonder if there would be enough participation to make it worth it."
     mc.name "Can you do something for me? Take an informal poll with the employees... See how many would be interested in something like that. I don't want to arrange it just to have nobody show up."
