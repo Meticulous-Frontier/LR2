@@ -77,7 +77,7 @@ init 2 python:
 
 init -1 python:
     def starbuck_introduction_requirement(the_person):
-        if starbuck.location() is sex_store:    # only trigger event when starbuck is there
+        if starbuck.location() == sex_store:    # only trigger event when starbuck is there
             return True
         return False
 
@@ -137,7 +137,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage == 0:
             if mc.business.funds >= 1000:
@@ -146,7 +146,7 @@ init -1 python:
                 return "Requires: $1000"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage == 1:
             if (the_person.event_triggers_dict.get("shop_stage_one_day", 9999) + 7) < day:
@@ -158,7 +158,7 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_investment_three_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage == 2:
             if (the_person.event_triggers_dict.get("shop_stage_two_day", 9999) + 7) < day:
@@ -170,7 +170,7 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_promo_one_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 1.0:
@@ -178,7 +178,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_two_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 2.0:
@@ -186,7 +186,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_three_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
@@ -200,7 +200,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
@@ -214,7 +214,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:

@@ -47,7 +47,7 @@ init 2 python: # Declare variables to use
         # We want whoever the salon_manager is to be in the salon during work hours.
         salon_manager.set_schedule(mall_salon, days = [0, 1, 2, 3, 4], times = [1,2,3])
         salon_manager.set_schedule(mall_salon, days = [5], times = [1,2])
-       
+
         salon_manager.event_triggers_dict["introduced"] = 0
         salon_manager.event_triggers_dict["day_met"] = -1
         salon_manager.event_triggers_dict["dump_witnessed"] = 0
@@ -82,7 +82,7 @@ init 2 python: # Declare variables to use
     def salon_introduction_action_requirement(the_person):
         if not "mall_salon" in globals():
             return False
-        if the_person.location() is mall_salon:    # only trigger event when ophelia is there
+        if the_person.location() == mall_salon:    # only trigger event when ophelia is there
             return True
         return False
 
