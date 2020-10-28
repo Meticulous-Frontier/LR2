@@ -1370,6 +1370,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
                 the_person.char "Oh! That is such a relief to hear."
                 "You see her digging around in her pocket."
                 the_person.char "Here... I want you to have this. It's a key to my apartment. You don't have to come over if you don't want to, but I just want you to know, you're always welcome in my bed."
+                $ the_person.learn_home()
                 mc.name "Thanks [the_person.title]. It will be nice to be able to share a warm bed with a beautiful woman like you once in a while."
                 $the_person.draw_person(position = "kissing")
                 "She hugs you again and begins kissing you on your neck."
