@@ -13,8 +13,7 @@ init 2 python:
     def production_failure_increase_sluttiness(person):
         for team_member in person.work.people:
             team_member.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
-            team_member.change_slut_temp(3, add_to_log = False)
-            team_member.change_slut_core(3, add_to_log = False)
+            team_member.change_stats(slut_temp = 3, slut_core = 3, arousal = 50, add_to_log = False)
 
         mc.log_event("All " + person.work.formalName + " staff: +3 sluttiness","float_text_pink")
         return
@@ -48,7 +47,7 @@ label production_failure_action_label:
     $ the_person = get_random_from_list(rd_division.people + p_division.people)
     if the_person is None or the_person.work is None:
         return
-    
+
     "While monitoring the equipment you notice a problem in the [the_person.work.formalName], it seems a gas mixture is building up."
     "Without halting work and alerting everyone to the problem there is no way to fix it. You also can't be sure what the effects of this will be on your employees."
     menu:
@@ -78,14 +77,14 @@ label production_failure_action_label:
                 "[the_person.possessive_title] shoves her hand down your pants and begs for your cock."
 
                 call fuck_person(the_person, private = False, skip_intro = True) from _call_fuck_person_production_failure_action_label
-                
+
                 the_person.char "*Panting* Oh god, [the_person.mc_title]. Thank you... thank you so much."
 
                 $ production_failure_clear_situational_sluttiness(the_person)
 
                 "You leave [the_person.possessive_title] to get cleaned up and get back to work."
             elif ran_num > 30: # 15% chance
-                $ production_failure_change_obedience(the_person, 3)               
+                $ production_failure_change_obedience(the_person, 3)
                 "The girls seem slightly more respectful."
             elif ran_num > 15: # 15% chance
                 "Everyone appears fine, there doesn't seem to be an effect."
