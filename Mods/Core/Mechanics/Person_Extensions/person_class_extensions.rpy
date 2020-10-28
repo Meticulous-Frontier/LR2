@@ -1942,11 +1942,12 @@ init -1 python:
         if times is None:
             times = []
 
-        # find active room object in list_of_place
-        found = find_in_list(lambda x: x.name == the_location.name, list_of_places)
-        if not found:
-            found = the_location # fallback to original room object (VREN rooms, required at start of game)
-            #renpy.say("Warning", "Unable to locate room '" + the_location.formalName + "' for set schedule of " + self.name + " " + self.last_name + ".")
+        if the_location:
+            # find active room object in list_of_place
+            found = find_in_list(lambda x: x.name == the_location.name, list_of_places)
+            if not found:
+                found = the_location # fallback to original room object (VREN rooms, required at start of game)
+                #renpy.say("Warning", "Unable to locate room '" + the_location.formalName + "' for set schedule of " + self.name + " " + self.last_name + ".")
 
         for the_day in days:
             for time_chunk in times:
