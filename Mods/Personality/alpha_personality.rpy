@@ -846,36 +846,37 @@ label alpha_talk_busy(the_person):
     return
 
 label alpha_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "[the_person.mc_title]! Why do you want me to watch that!"
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
-        "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person(emotion = "sad")
         $ the_person.change_happiness(-1)
         the_person.char "[the_person.mc_title]! Could you at least try a more private place?"
-        "[the_person.possessive_title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person.char "[the_person.mc_title], why are you doing this here..."
         $ the_person.change_slut_temp(1)
-        "[the_person.possessive_title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
+        "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Well, [the_person.mc_title]! I might show you my personal skills someday..."
         $ the_person.change_slut_temp(2)
-        "[the_person.possessive_title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
+        "[title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person, "slut")
         the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[the_person.possessive_title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
+        "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
     return
 

@@ -304,34 +304,35 @@ label starbuck_talk_busy(the_person):
     return
 
 label starbuck_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         the_person.char "Could you two at least keep it down? This is fucking ridiculous."
         $ the_person.change_happiness(-1)
-        "[the_person.possessive_title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person.char "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
         $ change_report = the_person.change_slut_temp(1)
-        "[the_person.possessive_title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
+        "[title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person.char "Oh wow that's hot. I should sell tickets to this!"
         $ change_report = the_person.change_slut_temp(2)
-        "[the_person.possessive_title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
-        "[the_person.possessive_title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
     return
 
 label starbuck_being_watched(the_person, the_watcher, the_position):

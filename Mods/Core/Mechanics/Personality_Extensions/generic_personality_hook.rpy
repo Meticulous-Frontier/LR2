@@ -23,6 +23,9 @@ init -1 python:
         if height is None:
             height = 0.825 + (renpy.random.random()/7)
 
+        if mc_title = None:
+            mc_title = "Stranger"
+
         if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
             # Use larger height range of person object (not full)
             return_character = create_random_person(name = name, last_name = last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
