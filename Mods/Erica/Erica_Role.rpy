@@ -1154,9 +1154,12 @@ label erica_buy_protein_shake_label(the_person):
     $ erica.event_triggers_dict["protein_day"] = day
     "Before you take it back to her, you have a moment with no one around. You can add a serum to it if you do it quickly!"
     menu:
-        "Add a dose of serum to [the_person.title]'s shake":
+        "Add a dose of serum to [the_person.title]'s shake" if mc.inventory.get_any_serum_count() > 0:
             call give_serum(the_person) from _call_give_serum_erica
             "You mix the serum into [the_person.title]'s protein shake. You take it over to her."
+
+        "Add a dose of serum to [the_person.title]'s shake\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+            pass
 
         "Leave her drink alone.":
             "You decide not to test a dose of serum out on [the_person.title] and take the shake back to her."

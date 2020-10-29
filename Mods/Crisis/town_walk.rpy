@@ -41,9 +41,13 @@ label town_walk_crisis_action_label:
     "You see [the_person.possessive_title] is standing in front of a mirror, studying herself."
     "There is a glass of water right near the window. This is a good opportunity to test a serum for free."
     menu:
-        "Add a dose of serum to [the_person.title]'s drink":
+        "Add a dose of serum to [the_person.title]'s drink" if mc.inventory.get_any_serum_count() > 0:
             call give_serum(the_person) from _call_give_serum_town_walk_1
             "You quickly retreat away from the window."
+
+        "Add a dose of serum to [the_person.title]'s drink\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+            pass
+
         "Keep watching":
             "You decide not to risk being seen and stay away from her sight"
     the_person.char "I should get dressed for lunch. Don't have much time..."
