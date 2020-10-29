@@ -111,8 +111,17 @@ init 10 python:
         if found:
             list_of_places.remove(found)
 
-        # update dungeon visibility
-        dungeon.visible = mc.has_dungeon()
+        remove_list = []
+        for i in range(0, len(list_of_places) - 1):
+            for j in range(i + 1, len(list_of_places)):
+                if not list_of_places[j] in remove_list:
+                    if i == j:
+                        remove_list.append(list_of_places[j])
+
+        if len(remove_list) > 0:
+            for room in remove_list:
+                renpy.say("Warning", "Duplicate room " + room.name + ", game is corrupt, your are advised to start a new game.")
+
         return
 
 label update_custom_rooms(stack):

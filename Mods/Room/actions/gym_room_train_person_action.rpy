@@ -14,6 +14,13 @@ init 3 python:
         else:
             return True
 
+    # for save compatibility remove in next version
+    def gym_workout_initialization():
+        # add passed action to the gym room
+        gym.add_action(self)
+        return
+
+
     def gym_initialization(self):
         # add passed action to the gym room
         gym.add_action(self)
