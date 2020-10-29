@@ -207,7 +207,7 @@ label horny_at_work_crisis_enhanced_label():
                         "Before you even finish the sentence [licker.title] is on her hands and knees, lowering her face to the floor."
                         licker.char "Right away!"
                         $ licker.change_obedience(2)
-                        "She licks your still-warm cum directly off of the floor, drinking it down eagerly." 
+                        "She licks your still-warm cum directly off of the floor, drinking it down eagerly."
                         $ scene_manager.update_actor(licker, position = "stand3")
                         "When she's finished she stands up and wipes her lips with the back of her hand."
                         $ licker = None
@@ -216,7 +216,7 @@ label horny_at_work_crisis_enhanced_label():
 
                 else:
                     $ scene_manager.update_actor(the_choice, position = "stand3")
-                    "You stand up, pants around your ankles, and motion for [the_choice.title] to come over to you."                   
+                    "You stand up, pants around your ankles, and motion for [the_choice.title] to come over to you."
                     $ clear_scene()
                     $ the_report = defaultdict(int)
                     $ the_report["positions_used"] = []
@@ -251,7 +251,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ wants_to_continue = False
 
                         else:
-                            $ the_choice = _return                           
+                            $ the_choice = _return
                             mc.name "[the_choice.title], you're next."
                             $ scene_manager.update_actor(the_choice, position = "stand3")
                             "She nods and smiles, stepping forward."
@@ -301,10 +301,8 @@ label horny_at_work_crisis_enhanced_label():
             if your_follower is not None:
                 #You were followed.
                 $ old_location = mc.location
-                $ work_bathroom = Room("work bathroom", "Work Bathroom", [], bathroom_background, [], [], [], False, [0,0], visible = False)
+                $ work_bathroom = Room("work bathroom", "Work Bathroom", [], bathroom_background, [make_floor(), make_wall(), make_toilet()], [], [], False, [0,0], visible = False)
                 $ work_bathroom.show_background()
-                $ work_bathroom.add_object(make_wall())
-                $ work_bathroom.add_object(make_floor())
                 $ mc.change_location(work_bathroom)
                 "You relax when you reach the bathroom, but a moment after you enter [your_follower.title] opens the door and comes inside too."
                 $ your_follower.draw_person()
@@ -335,7 +333,7 @@ label horny_at_work_crisis_enhanced_label():
                         $ your_follower.draw_person(emotion = "sad")
                         your_follower.char "I... Oh, I'm sorry [your_follower.mc_title], I don't know what I was thinking..."
                         $ your_follower.draw_person(position = "walking_away")
-                        "She blushes and turns around, leaving quickly." 
+                        "She blushes and turns around, leaving quickly."
                         $ clear_scene()
                         "You pull up some porn on your phone and get comfortable, jerking yourself off until you cum."
                         "When you're finished you clean up and get back to work, your mind now crystal clear."

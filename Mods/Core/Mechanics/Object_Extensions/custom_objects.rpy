@@ -20,3 +20,7 @@ init -1 python:
     def make_cage():
         the_cage = Object("Cage", ["Lay", "Low", "Kneel"], sluttiness_modifier = 10, obedience_modifier = 20)
         return the_cage
+
+    def make_toilet():
+        the_toilet = Object("Toilet", ["Sit", "Low"], sluttiness_modifier = 10, obedience_modifier = 5)
+        return the_toilet
