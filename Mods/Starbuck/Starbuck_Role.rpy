@@ -35,11 +35,6 @@ init 2 python:
         common_sexy_dislikes = [ "masturbating", "giving handjobs"],
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
-        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [make_wall(), make_floor(), make_bed(), make_window()],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
-
-        #starbuck_home.link_locations_two_way(downtown)
-        list_of_places.append(starbuck_home)
-
         # init starbuck role
         starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up])
 
@@ -49,10 +44,11 @@ init 2 python:
         starbuck_lipstick = lipstick.get_copy()
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
-        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
+        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.92,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
+            work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
+        starbuck.generate_home()
         starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
         starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
