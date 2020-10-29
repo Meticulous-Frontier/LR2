@@ -35,11 +35,7 @@ init 2 python:
         common_sexy_dislikes = [ "masturbating", "giving handjobs"],
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
-        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
-        starbuck_home.add_object(make_wall())
-        starbuck_home.add_object(make_floor())
-        starbuck_home.add_object(make_bed())
-        starbuck_home.add_object(make_window())
+        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [make_wall(), make_floor(), make_bed(), make_window()],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
 
         #starbuck_home.link_locations_two_way(downtown)
         list_of_places.append(starbuck_home)
