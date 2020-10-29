@@ -23,7 +23,7 @@ init -1 python:
         if height is None:
             height = 0.825 + (renpy.random.random()/7)
 
-        if mc_title = None:
+        if mc_title is None:
             mc_title = "Stranger"
 
         if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
