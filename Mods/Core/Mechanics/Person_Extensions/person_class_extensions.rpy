@@ -1933,25 +1933,3 @@ init -1 python:
         return
 
     Person.attempt_opinion_training = attempt_opinion_training
-
-    # the mod rooms are created at init, so the object reference does not match
-    # the object in the list of places.
-    def set_schedule_enhanced(self, the_location, days = None, times = None):
-        if days is None:
-            days = [0,1,2,3,4,5,6] #Full week if not specified
-        if times is None:
-            times = []
-
-        if the_location:
-            # find active room object in list_of_place
-            found = find_in_list(lambda x: x.name == the_location.name, list_of_places)
-            if not found:
-                found = the_location # fallback to original room object (VREN rooms, required at start of game)
-                #renpy.say("Warning", "Unable to locate room '" + the_location.formalName + "' for set schedule of " + self.name + " " + self.last_name + ".")
-
-        for the_day in days:
-            for time_chunk in times:
-                self.schedule[the_day][time_chunk] = found
-        return
-
-    Person.set_schedule = set_schedule_enhanced
