@@ -567,7 +567,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations

@@ -1180,7 +1180,7 @@ label SB_starbuck_anal_swing_demo(the_person):
         "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
         the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
 
-    call fuck_person(the_person, private = in_private, start_position = SB_anal_swing, start_object = SB_make_swing(), skip_intro = True) from _call_sex_description_SBA080
+    call fuck_person(the_person, private = in_private, start_position = SB_anal_swing, start_object = make_swing(), skip_intro = True) from _call_sex_description_SBA080
 
     #TODO the rest of this scene.
     if in_private:

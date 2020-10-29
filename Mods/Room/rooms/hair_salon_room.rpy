@@ -19,16 +19,8 @@ init 2 python: # Declare variables to use
             return True
 
     def hair_salon_mod_initialization(self):
-        # Create the room(s) I want to use.
-        global mall_salon
-        mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds[:], [make_floor(), make_wall(), make_chair(), make_window()], [], [salon_action], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
-        # Add to map
-        list_of_places.append(mall_salon)
-
-
         # Place the stylist character so it is in a room in the world.
         global salon_manager
-
         salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body", skin="black",
             personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", sex_array = [1,5,3,1], start_sluttiness = 10,
             possessive_title = "Your Stylist", relationship = "Single", force_random = True,  forced_opinions = [["dark chocolate", 2, False], ["hiking", 2, False]],forced_sexy_opinions = [
@@ -77,6 +69,9 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["help_candace"] = 0
         salon_manager.event_triggers_dict["full_style_state"] = 0
         salon_manager.event_triggers_dict["offers_full_style"] = False
+
+        # add haircut action to mall salon
+        mall_salon.actions.append(self)
         return
 
     def salon_introduction_action_requirement(the_person):
@@ -85,9 +80,6 @@ init 2 python: # Declare variables to use
         if the_person.location() == mall_salon:    # only trigger event when ophelia is there
             return True
         return False
-
-
-
 
     salon_action = ActionMod("Schedule a haircut {image=gui/heart/Time_Advance.png}", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization,
         menu_tooltip = "Change a persons hair style and color.", category="Mall")

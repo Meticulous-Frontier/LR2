@@ -52,6 +52,14 @@ init 15 python:
         Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5)
     ]
 
+    def make_swing():
+        the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
+        return the_swing
+
+    def make_counter():
+        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
+        return the_counter
+
 
 label build_custom_rooms(stack):
     python:
@@ -94,6 +102,9 @@ label build_custom_rooms(stack):
 
         home_shower = Room("home shower", "Home Shower", [], standard_home_shower_backgrounds[:], gym_shower_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(home_shower)
+
+        mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds[:], [make_floor(), make_wall(), make_chair(), make_window(), make_counter()], [], [], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
+        list_of_places.append(mall_salon)
 
         # initialize dungeon room creation action
         add_dungeon_intro_action()

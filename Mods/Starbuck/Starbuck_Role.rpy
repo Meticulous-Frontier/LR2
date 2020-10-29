@@ -19,14 +19,6 @@ init 2 python:
 
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
-    def SB_make_swing():
-        the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
-        return the_swing
-
-    def SB_make_counter():
-        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_counter
-
     def SB_mod_initialization(action_mod):
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
@@ -54,7 +46,7 @@ init 2 python:
         starbuck.home.add_person(starbuck)
 
         # Add a counter to the sex shop
-        sex_store.add_object(SB_make_counter())
+        sex_store.add_object(make_counter())
 
         # Add StarBuck introduction event to sex store
         starbuck.add_unique_on_room_enter_event(starbuck_introduction_event_action)
@@ -1324,7 +1316,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You give her a modest thrust. The swing bounces forward for a second, but gravity soon causes her ass to pendulum back and smack against your hip."
     "The feeling is exquisite. You grab her hips and get ready to fuck [the_person.possessive_title]'s brains out."
     #Call sex scene#
-    call fuck_person(the_person, start_position = SB_anal_swing, start_object = SB_make_swing(), skip_intro = True) from _call_sex_description_SBS110
+    call fuck_person(the_person, start_position = SB_anal_swing, start_object = make_swing(), skip_intro = True) from _call_sex_description_SBS110
 
     "Turning off the video camera, you turn to [the_person.possessive_title]."
     $ the_person.shop_investment_rate = 6.0
@@ -1374,8 +1366,8 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."
     $ perk_system.add_stat_perk(Stat_Perk(description = "Increase sexual skill cap from repeated sexual activity with Starbuck. +1 Sex Skill Cap", sex_cap = 1, bonus_is_temp =False), "Starbuck Sex Bonus")
     "After having multiple sexual encounters with a woman like [the_person.title], you feel like if you put in the effort, you could become an even more skilled lover."
-    $ sex_store.add_object(SB_make_swing())
-    $ bedroom.add_object(SB_make_swing())
+    $ sex_store.add_object(make_swing())
+    $ bedroom.add_object(make_swing())
     return
 
 #SBS120
