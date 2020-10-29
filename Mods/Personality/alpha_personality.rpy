@@ -573,7 +573,7 @@ label alpha_flirt_response_high(the_person):
                     "You lean in and kiss her. She presses her body up against yours."
                 else:
                     "When you lean in and kiss her she responds by pressing her body tight against you."
-                call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_person_alpha_flirt_response_high_2
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_alpha_flirt_response_high_2
 
             "Just flirt":
                 $ the_person.draw_person()

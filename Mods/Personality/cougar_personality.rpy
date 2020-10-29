@@ -566,14 +566,14 @@ label cougar_flirt_response_high(the_person):
                     "You lean in and kiss her. She presses her body up against yours."
                 else:
                     "When you lean in and kiss her she responds by pressing her body tight against you."
-                call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_high_2
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_high_2
 
             "Just flirt":
                 $ the_person.draw_person()
                 mc.name "Nothing right now, but I've got a few ideas for later."
                 "If [the_person.title] is disappointed she does a good job hiding it. She nods and smiles."
                 the_person.char "Well maybe if you take me out for dinner we can talk about those ideas, I'm interested to hear about them."
-    return    
+    return
 
 label cougar_flirt_response_girlfriend(the_person):
     # Lead in: mc.name "You're so beautiful [the_person.title], I'm so lucky to have a woman like you in my life."
@@ -684,7 +684,7 @@ label cougar_flirt_response_affair(the_person):
                 "You wrap your arms around [the_person.possessive_title]'s waist, resting your hands on her ass."
                 "Then you pull her tight against you, squeezing her tight butt. She sighs happily and starts to kiss your neck."
                 "You massage her ass for a moment, then spin her around and cup a tit with one hand. You move your other hand down to caress her inner thigh."
-                call fuck_person(the_person, private = True, start_position = standing_grope, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_2
+                call fuck_person(the_person, start_position = standing_grope, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_2
 
             "Just flirt":
                 mc.name "I want to, but I'm going to have to wait until we have more time together for that."
