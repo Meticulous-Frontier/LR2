@@ -1730,6 +1730,7 @@ label erica_weekly_yoga_label(the_person):
             yoga_assistant.char "Oh! That sounds good! Can I get some too!"
             mc.name "I think there's enough for both of you. Let's step into my office really quick."
             "The duo quickly follow you to your office. As you walk in, you turn and lock the door."
+            $ ceo_office.show_background()
             "Before you can say anything, the girls are already getting down on their knees, ready to earn their protein."
             "You take out your cock and let them get to work."
             call start_threesome(the_person, yoga_assistant, start_position = threesome_double_blowjob, position_locked = True) from _after_yoga_protein_yum_1
@@ -1933,6 +1934,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count):  #A short
 
 label erica_after_yoga_office_session_label(the_person): #Theoretically this could be anyone, don't use any specific reference to a person.
     "You head to your office, bringing [the_person.possessive_title] with you. You open the door, walk in, then close and lock it behind you."
+    $ ceo_office.show_background()
     "You quickly grab her and pin her to the wall."
     $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_right)
     "She wraps her arms around you and you start to make out, your mouths meeting and exploring each other."
