@@ -15,7 +15,7 @@ init 15 python:
         make_chair(),
         make_floor()
     ]
-    downtown_hotel_objects = [
+    downtown_hotel_lobby_objects = [
         make_desk(),
         make_chair(),
         make_floor(),
@@ -24,6 +24,7 @@ init 15 python:
         make_desk(),
         make_chair(),
         make_floor(),
+        make_window(),
         make_bed()
     ]
     purgatory_objects = [
@@ -42,6 +43,7 @@ init 15 python:
         make_chair(),
         make_desk(),
         make_wall(),
+        make_window(),
         make_floor(),
     ]
     gym_shower_objects = [
@@ -67,7 +69,7 @@ label build_custom_rooms(stack):
 
         # Hotel Lobby - The Hotel | No actions at this time.
         # This hotel gets updated when a save game is loaded, regardless of its existence
-        downtown_hotel = Room("hotel lobby", "The Hotel", [], standard_hotel_backgrounds[:], downtown_hotel_objects,[], [], True, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
+        downtown_hotel = Room("hotel lobby", "The Hotel", [], standard_hotel_backgrounds[:], downtown_hotel_lobby_objects,[], [], True, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(downtown_hotel)
 
         downtown_hotel_room = Room("hotel room", "The Hotel Room", [], standard_hotel_room_backgrounds[:], downtown_hotel_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
