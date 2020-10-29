@@ -63,12 +63,11 @@ label build_custom_rooms(stack):
         list_of_places.append(dungeon)
 
         # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
-        # This bar gets updated when a save game is loaded, regardless of its existence
         downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_drink_action], True, [5,4], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(downtown_bar)
 
         # Hotel Lobby - The Hotel | No actions at this time.
-        # This hotel gets updated when a save game is loaded, regardless of its existence
+        # room is public, so girls can wander here too
         downtown_hotel = Room("hotel lobby", "The Hotel", [], standard_hotel_backgrounds[:], downtown_hotel_lobby_objects,[], [], True, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(downtown_hotel)
 
@@ -83,7 +82,6 @@ label build_custom_rooms(stack):
         list_of_places.append(fancy_restaurant)
 
         # Stripclub BDSM Room | No actions at this time.
-        # This hotel gets updated when a save game is loaded, regardless of its existence
         bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds[:], bdsm_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(bdsm_room)
 
