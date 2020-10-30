@@ -575,7 +575,7 @@ init -1 python:
             self.display_transform = display_transform
 
         strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
-        while not strip_choice is None and self.outfit.bra_covered():
+        while not strip_choice is None and strip_choice.layer > 1:
             if delay > 0:
                 self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
@@ -584,7 +584,7 @@ init -1 python:
             strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
 
         strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
-        while not strip_choice is None and self.outfit.panties_covered():
+        while not strip_choice is None and strip_choice.layer > 1:
             if delay > 0:
                 self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
@@ -1370,15 +1370,26 @@ init -1 python:
     Person.apply_university_outfit = apply_university_outfit
 
     def apply_yoga_outfit(self):
-        builder = WardrobeBuilder(self)
-        self.apply_outfit(builder.build_workout_outfit(points = sluttiness_to_points(self.sluttiness), neutral_underwear = renpy.random.randint(0, 1), neutral_bottoms = renpy.random.randint(0, 1), neutral_shoes = renpy.random.randint(0, 1)))
+        self.apply_planned_outfit()
+        # strip to underwear or else pick workout outfit
+        if self.effective_sluttiness("underwear_nudity") >= 60:
+            # use her current planned underwear
+            self.strip_outfit_to_underwear(delay = 0)
+            # take off shoes and socks
+            self.strip_outfit(delay = 0, exclude_upper = True, exclude_lower = True, exclude_feet = False)
+            # add black slips
+            self.outfit.add_feet(slips.get_copy(), colour_black)
+        elif workout_wardrobe:
+            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
 
     def apply_yoga_shoes(self):
-        builder = WardrobeBuilder(self)
-        self.apply_outfit(builder.get_workout_shoes(points = sluttiness_to_points(self.sluttiness), neutral_shoes = renpy.random.randint(0, 1)))
+        # for now, just apply a nude outfit with black slips
+        outfit = Outfit("Nude")
+        outfit.add_feet(slips.get_copy(), colour_black)
+        self.apply_outfit(outfit)
         return
 
     Person.apply_yoga_shoes = apply_yoga_shoes
