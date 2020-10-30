@@ -29,13 +29,13 @@ label starbuck_clothing_review(the_person):
             the_person.char "Oh my god, I shouldn't be dressed like this at the shop! Just give me a moment."
     return
 
-label starbuck_strip_reject(the_person):
+label starbuck_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "I wish I could let you, but I don't think I should be taking that off yet."
+        the_person.char "I wish I could let you, but I don't think I should be taking my [the_clothing.display_name] off yet."
     elif the_person.obedience < 70:
-        the_person.char "Sorry [the_person.mc_title], but I love being a tease. I'm going to leave that on for a bit."
+        the_person.char "Sorry [the_person.mc_title], but I love being a tease. I'm going to leave my [the_clothing.display_name] on for a bit."
     else:
-        the_person.char "I can't take that off right now [the_person.mc_title]!"
+        the_person.char "I can't take my [the_clothing.display_name] off right now [the_person.mc_title]!"
     return
 
 label starbuck_sex_accept(the_person):

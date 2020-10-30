@@ -145,7 +145,7 @@ label erica_clothing_review(the_person):
             the_person.char "My clothes are a mess! I'll be back in a moment, I'm going to go get cleaned up."
     return
 
-#label erica_strip_reject(the_person):
+#label erica_strip_reject(the_person, the_clothing, strip_type = "Full"):
 #    if the_person.obedience > 130:
 #        the_person.char "I'm sorry, but can we leave that where it is for now?"
 #    elif the_person.obedience < 70:

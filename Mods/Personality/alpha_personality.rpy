@@ -133,13 +133,13 @@ label alpha_clothing_review(the_person):
             the_person.char "Oh [the_person.mc_title], I'm at my best! Turn around now, I need to get dressed."
     return
 
-label alpha_strip_reject(the_person):
+label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take anything else off. I'm a lady, after all."
+        the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take my [the_clothing.display_name] off. I'm a lady, after all."
     elif the_person.obedience < 70:
         the_person.char "Not yet [the_person.mc_title]. You just need to relax and let [the_person.title] take care of you."
     else:
-        the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if it came off?"
+        the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off?"
     return
 
 label alpha_sex_accept(the_person):

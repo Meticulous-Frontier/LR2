@@ -176,11 +176,11 @@ label Sarah_clothing_review(the_person):
             the_person.char "Damn, everything's out of place after that. Wait here a moment, I'm just going to find a mirror and try and look presentable."
     return
 
-label Sarah_strip_reject(the_person):
+label Sarah_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "Could we leave that where it is for now, please?"
+        the_person.char "Could we leave my [the_clothing.display_name] on for now, please?"
     elif the_person.obedience < 70:
-        the_person.char "No, no, no, I'll decide what comes off and when, okay?"
+        the_person.char "No, no, no, I'll decide when my [the_clothing.display_name] come off, okay?"
     else:
         the_person.char "Not yet... get me a little warmed up first, okay?"
     return
