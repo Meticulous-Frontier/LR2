@@ -1389,7 +1389,10 @@ label cougar_body_cum_taboo_break(the_person):
 
 label cougar_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Oh lord, I just love getting pumped full with cum!"
+
+        elif the_person.on_birth_control:
             if the_person.relationship != "Single":
                 $ so_title = girl_relationship_to_title(the_person.relationship)
                 the_person.char "Oh... I feel like such a bad [so_title], but I think I needed this. I'm sure he would understand."
@@ -1418,7 +1421,10 @@ label cougar_creampie_taboo_break(the_person):
             the_person.char "I'll just have to hope you haven't gotten me pregnant. We shouldn't do this again, it's too risky."
 
     else:
-        if not the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Well, it's not like I can get more pregnant, but perhaps next time you can cum somewhere else?"
+
+        elif not the_person.on_birth_control:
             the_person.char "Oh no, did you just finish [the_person.mc_title]?"
             "She sighs unhappily."
             if the_person.relationship != "Single":

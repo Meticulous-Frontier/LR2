@@ -1061,7 +1061,11 @@ label Sarah_body_cum_taboo_break(the_person):
     return
 label Sarah_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Oh yes, fill me up with your hot semen."
+            the_person.char "It feels so good when you cum deep inside me, promise me you will do that again."
+
+        elif the_person.on_birth_control:
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person.char "I can't believe it... your cum is inside me! Oh god what am I gonna tell my [so_title]..."
@@ -1086,14 +1090,16 @@ label Sarah_creampie_taboo_break(the_person):
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person.char "Ah, I should have told you to pull out, but it just feels so good..."
-                the_person.cahr "We shouldn't do that again though, if I get pregnant I'm going to have to explain it to my [so_title]."
+                the_person.char "We shouldn't do that again though, if I get pregnant I'm going to have to explain it to my [so_title]."
 
             else:
                 the_person.char "Ah, I really should have told you to pull out... I'm not on the pill..."
                 the_person.char "It's just this once, right? It's probably fine..."
 
     else:
-        if not the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Oh my, well I can't get any more pregnant."
+        elif not the_person.on_birth_control:
             the_person.char "Oh my god, [the_person.mc_title]! Did you really just cum inside me?"
             "She groans unhappily."
             if the_person.relationship != "Single":
