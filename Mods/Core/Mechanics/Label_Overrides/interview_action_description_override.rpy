@@ -34,7 +34,7 @@ init 2 python:
 
             # new candidate could be pregnant
             if persistent.pregnancy_pref > 0:
-                if renpy.random.randint(0,100) < (58 - a_candidate.age) // 5: # chance she is already pregnant decreases with age
+                if a_candidate.age > 21 and renpy.random.randint(0,100) < (58 - a_candidate.age) // 5: # chance she is already pregnant decreases with age
                     #Can hire her up to 10 days from due date. Probably not hiring anyone a week from due!
                     become_pregnant(a_candidate, mc_father = False, progress_days = renpy.random.randint(5,80))
                     #renpy.say("Pregnant", "Candidate: " + a_candidate.name + " " + a_candidate.last_name + " is pregnant.")
