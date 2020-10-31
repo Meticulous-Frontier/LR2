@@ -132,9 +132,9 @@ label scene_piledriver_DP_2(the_girl, the_location, the_object):
             the_girl.char "AH! Oh fuck me!"
             "You give her slow but forceful thrusts."
             if the_girl.outfit.tits_available():
-                "[the_girl.possessive_title]'s tits jiggle enticingly with every thrust. Shock waves erupting from her crotch ech through her entire body."
+                "[the_girl.possessive_title]'s tits jiggle enticingly with every thrust. Shock waves erupting from her crotch arc through her entire body."
             else:
-                "Shock waves erupting from her crotch ech through her entire body."
+                "Shock waves erupting from her crotch arc through her entire body."
             "The slapping noise echoes throughout the room. It is occasionally punctuated by a moan or a gasp from [the_girl.title]."
 
         "Pound her fast":
