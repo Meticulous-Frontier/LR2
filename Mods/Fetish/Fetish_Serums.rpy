@@ -31,7 +31,7 @@ init -1 python:
         person.increase_opinion_score(random_fetish_key, max_score)
         return
 
-    def fetish_basic_function_on_turn(person, add_to_log): #Developes basic sexual desires based on suggestability. At low tiers, turns hates to neutral.
+    def fetish_basic_function_on_turn(person, add_to_log): #Developes basic sexual desires based on suggestibility. At low tiers, turns hates to neutral.
         fetish_random_roll_1 = renpy.random.randint(0,100)
         fetish_random_roll_2 = renpy.random.randint(0,100)
 

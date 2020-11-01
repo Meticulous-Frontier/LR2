@@ -88,6 +88,8 @@ init 5 python:
             topic_list.append("skimpy uniforms")
         if get_HR_director_tag("business_HR_gym_tier", 0) > 1: # unlocks after health program
             topic_list.append("sports")
+        if erica_get_is_doing_yoga_sessions():
+            topic_list.append("yoga")
 
         return topic_list
 
@@ -121,7 +123,7 @@ init 5 python:
         return False
 
     def HR_director_monday_meeting_requirement():
-        if not mc.business.hr_director:
+        if not mc.business.hr_director or not mc.business.hr_director.is_available():
             return False
         if day%7 == 0 and time_of_day == 1: #Monday
             return True

@@ -142,12 +142,58 @@ label transition_blowjob_deepthroat_enhanced(the_girl, the_location, the_object)
 
 label transition_default_deepthroat_enhanced(the_girl, the_location, the_object):
     if mc.condom:
-        "You pull the condom off your dick as [the_girl.title] gets ready in front of you, on her knees with her mouth open. You place a hand on the back of her head and pull her towards you, sliding your cock down her throat."
+        "You pull the condom off your dick as [the_girl.title] gets ready in front of you, on her knees with her mouth open."
         $ mc.condom = False
     else:
-        "[the_girl.title] gets ready in front of you, on her knees with her mouth open. You place a hand on the back of her head and pull her towards you, sliding your cock down her throat."
+        "[the_girl.title] gets ready in front of you, on her knees with her mouth open."
+    $ blowjob.redraw_scene(the_girl)
 
-    "After giving her a second to get used to your size you start to guide her back and forth, with each trust forward burying yourself nice and deep in her throat."
+    menu:
+        "Ask for deepthroat":
+            mc.name "Why don't you take it nice and deep?"
+            if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("giving blowjobs") > 1:
+                "Without hesitation, [the_girl.possessive_title] leans forward and slides your dick down her throat."
+            else:
+                "She gives a nod and slowly slides you cock half way down, until she starts gagging and pulls back."
+                the_girl.char "Erm, I still need to get used to your size."
+
+        "Guide her":
+            "You place a hand on the back of her head and slowly pull her towards you, sliding your cock down her throat."
+            if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("being submissive") > 0:
+                "She doesn't resist and lets you push her all the way down, while looking lovingly into your eyes."
+            elif the_girl.get_opinion_score("taking control") > 0:
+                if the_girl.sex_skills["Oral"] >= 3:
+                    "She pushes away your hand, smiles, and pushes your cock all the way down, squeezing your balls just a little too hard."
+                else:
+                    "She slaps your hand away, and continues to suck your dick, albeit a little deeper than before."
+                    $ the_girl.change_stats(arousal = -10)
+            else:
+                if the_girl.sex_skills["Oral"] >= 3:
+                    "Slowly she takes your hand away, but slides your cock all the way down her throat."
+                else:
+                    "She shifts her position so you can no longer guide her, but she slides your cock down a little further."
+                    $ the_girl.change_stats(arousal = -5)
+
+        "Push her down":
+            "You place a hand on the back of her head and you push your cock down her throat."
+            if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("being submissive") > 0:
+                "She doesn't resist and lets you push her all the way down, while looking lovingly into your eyes."
+            elif the_girl.get_opinion_score("taking control") > 0:
+                if the_girl.sex_skills["Oral"] >= 4:
+                    "She is resisting your push, slowly sliding your cock all the way down, squeezing your balls just a little too hard."
+                else:
+                    "She resists your push, spitting out your cock."
+                    the_girl.char "Hey, I'm not your fleshlight! Let me do this on my own."
+                    $ the_girl.change_stats(arousal = -10, happiness = -2)
+            else:
+                if the_girl.sex_skills["Oral"] >= 4:
+                    "She doesn't resist and lets you push her down, while looking into your eyes."
+                else:
+                    "She resists your push, coming back up."
+                    the_girl.char "Don't be so rough, let us enjoy this."
+                    $ the_girl.change_stats(arousal = -5, happiness = -1)
+
+    "After taking a few seconds to get used to your size she starts to move back and forth, with each thrust forward, burying your cock nice and deep in her throat."
     return
 
 label blowjob_enhanced_kneel_throat_cum(the_girl):

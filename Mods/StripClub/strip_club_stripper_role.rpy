@@ -30,7 +30,7 @@ init 5 python:
             person.set_schedule(work_location, times = [4])
         elif person in [lily, mom, aunt]:
             person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule(work_location, days=[0, 1, 3, 4, 5, 6], times =[4]) # Mom, Sis & Aunt on Wednesday play cards.
+            person.set_schedule(work_location, days = [0, 1, 3, 4, 5, 6], times =[4]) # Mom, Sis & Aunt on Wednesday play cards.
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.set_schedule(work_location, times = [3, 4])
@@ -57,11 +57,13 @@ init 5 python:
 
         person.remove_role(role)
         # restore default schedules
-        if person.is_employee() or person in [lily, mom, aunt, nora]:
+        if person.is_employee():
             person.set_schedule(person.home, times = [4])
+        elif person in [lily, mom, aunt]:
+            person.set_schedule(person.home, days = [0, 1, 3, 4, 5, 6], times = [4])
         else:
-            person.set_schedule(person.home, times = [0, 4])
-            person.set_schedule(None, times = [1, 2, 3])
+            person.set_schedule(None, times = [3])
+            person.set_schedule(person.home, times = [4])
 
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
@@ -130,7 +132,7 @@ init 5 python:
         mc.main_character_actions.append(strip_club_hire_employee_action)
 
     def allow_promote_to_manager_requirement(person):
-        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
+        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager() and not strip_club_get_mistress():
             # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
                 # return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:

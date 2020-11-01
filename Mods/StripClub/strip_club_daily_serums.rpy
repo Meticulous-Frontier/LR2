@@ -1,6 +1,6 @@
-init 5 python:
+init -1 python:
     def strip_club_give_daily_serum():
-        for (person, place) in people_to_process:
+        for person in people_in_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
             if person.is_employee():
                 continue
 
@@ -22,11 +22,16 @@ init 5 python:
         person.give_serum(copy.copy(group_serum), add_to_log = False)
         return
 
+    # extend the default run day function
+    def business_give_daily_serum_extended(org_func):
+        def give_daily_serum_wrapper(business):
+            # run original function
+            org_func(business)
+            # run extension code
+            if get_strip_club_foreclosed_stage() >= 5:  # only when player owns strip club
+                strip_club_give_daily_serum()
 
-    add_label_hijack("advance_time_daily_serum_dosage_label", "advance_time_strip_club_daily_serum_dosage_label")
+        return give_daily_serum_wrapper
 
-label advance_time_strip_club_daily_serum_dosage_label(stack):
-    python:
-        strip_club_give_daily_serum()
-        execute_hijack_call(stack)
-    return
+    # wrap up the give_daily_serum function
+    Business.give_daily_serum = business_give_daily_serum_extended(Business.give_daily_serum)

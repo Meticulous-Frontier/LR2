@@ -20,7 +20,7 @@ init -1 python:
             args = crisis.args
             if not isinstance(args, list):
                 args = [args]
-            
+
             for arg in args:
                 if arg is self:
                     if crisis in mc.business.mandatory_crises_list:
@@ -575,7 +575,7 @@ init -1 python:
             self.display_transform = display_transform
 
         strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
-        while not strip_choice is None and self.outfit.bra_covered():
+        while not strip_choice is None and strip_choice.layer > 1:
             if delay > 0:
                 self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
@@ -584,7 +584,7 @@ init -1 python:
             strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
 
         strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
-        while not strip_choice is None and self.outfit.panties_covered():
+        while not strip_choice is None and strip_choice.layer > 1:
             if delay > 0:
                 self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
@@ -680,22 +680,22 @@ init -1 python:
             elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            # some girls like to go out at night (bar or stripclub) - exclude unique characters
-            if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
-                # since downtown is generic there could be other party locations there
-                party_destinations = [downtown_bar, downtown]
-                if "get_strip_club_foreclosed_stage" in globals():
-                    if not strip_club_is_closed():
-                        party_destinations.append(strip_club)
-                        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                            party_destinations.append(bdsm_room)
-                else:
-                    party_destinations.append(strip_club)
+            # # some girls like to go out at night (bar or stripclub) - exclude unique characters
+            # if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
+            #     # since downtown is generic there could be other party locations there
+            #     party_destinations = [downtown_bar, downtown_hotel, downtown]
+            #     if "get_strip_club_foreclosed_stage" in globals():
+            #         if not strip_club_is_closed():
+            #             party_destinations.append(strip_club)
+            #             if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+            #                 party_destinations.append(bdsm_room)
+            #     else:
+            #         party_destinations.append(strip_club)
 
-                location.move_person(self, get_random_from_list(party_destinations))
-            else:
+            #     location.move_person(self, get_random_from_list(party_destinations))
+            # else:
                 # location might change outfit, so moved call to end of this loop
-                location.move_person(self, destination) #Always go where you're scheduled to be.
+            location.move_person(self, destination) #Always go where you're scheduled to be.
 
         else:
             #She finds somewhere to burn some time
@@ -1065,8 +1065,6 @@ init -1 python:
         if display_zorder is None:
             display_zorder = 0
 
-        character_tag = str(self.character_number)
-
         self.draw_number[draw_layer] += 1
         self.hide_person()
         if wipe_scene:
@@ -1075,7 +1073,7 @@ init -1 python:
                 renpy.show_screen("person_info_ui",self)
 
         character_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-        renpy.show(character_tag, at_list=at_arguments, layer=draw_layer, what=character_image, tag=character_tag)
+        renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
 
         if the_animation:
             global global_draw_number
@@ -1193,9 +1191,8 @@ init -1 python:
             top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
             self.hide_person()
-            character_tag = str(self.character_number)
-            renpy.show(character_tag, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = character_tag)
-            renpy.show(character_tag + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = character_tag + "_extra") #Blend from old to new.
+            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
+            renpy.show(self.identifier + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = self.identifier + "_extra") #Blend from old to new.
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
@@ -1305,6 +1302,13 @@ init -1 python:
 
     Person.is_girlfriend = is_girlfriend
 
+    # helper function, to determine if person is available for crisis events
+    # for now only girls giving birth are not available (but is extendable for future conditions)
+    def is_available(self):
+        return not self.is_giving_birth()
+
+    Person.is_available = is_available
+
 
 ################################################
 # Outfit functions - wear a specialized outfit #
@@ -1366,19 +1370,26 @@ init -1 python:
     Person.apply_university_outfit = apply_university_outfit
 
     def apply_yoga_outfit(self):
-        if self.event_triggers_dict.get("yoga_outfit", None) == None or renpy.random.randint(0, 4) == 0: #We don't have one yet, or once in a while change things up a bit
-            builder = WardrobeBuilder(self)
-            self.event_triggers_dict["yoga_outfit"] = builder.build_workout_outfit(points = sluttiness_to_points(self.sluttiness), neutral_underwear = renpy.random.randint(0, 1), neutral_bottoms = renpy.random.randint(0, 1), neutral_shoes = renpy.random.randint(0, 1))
-        self.apply_outfit(self.event_triggers_dict.get("yoga_outfit", None))
+        self.apply_planned_outfit()
+        # strip to underwear or else pick workout outfit
+        if self.effective_sluttiness("underwear_nudity") >= 60:
+            # use her current planned underwear
+            self.strip_outfit_to_underwear(delay = 0)
+            # take off shoes and socks
+            self.strip_outfit(delay = 0, exclude_upper = True, exclude_lower = True, exclude_feet = False)
+            # add black slips
+            self.outfit.add_feet(slips.get_copy(), colour_black)
+        elif workout_wardrobe:
+            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
 
     def apply_yoga_shoes(self):
-        if self.event_triggers_dict.get("yoga_shoes", None) == None:
-            builder = WardrobeBuilder(self)
-            self.event_triggers_dict["yoga_shoes"] = builder.get_workout_shoes(points = sluttiness_to_points(self.sluttiness), neutral_shoes = renpy.random.randint(0, 1))
-        self.apply_outfit(self.event_triggers_dict.get("yoga_shoes", None))
+        # for now, just apply a nude outfit with black slips
+        outfit = Outfit("Nude")
+        outfit.add_feet(slips.get_copy(), colour_black)
+        self.apply_outfit(outfit)
         return
 
     Person.apply_yoga_shoes = apply_yoga_shoes
@@ -1642,6 +1653,11 @@ init -1 python:
             return True
         return False
     Person.is_lactating = is_lactating
+
+    def is_giving_birth(self):
+        return "preg_old_schedule" in self.event_triggers_dict or "pre_preg_body" in self.event_triggers_dict
+
+    Person.is_giving_birth = is_giving_birth
 
     def get_due_day(self):
         if self.is_pregnant():
@@ -1912,17 +1928,17 @@ init -1 python:
     Person.is_jealous = is_jealous
 
     def attempt_opinion_training(self, the_opinion, modifier = 0):
-        if self.suggestability + modifier > renpy.random.randint(0, 100):
+        if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_opinion_score(the_opinion)
         return
 
     def attempt_sex_skill_training(self, the_skill, modifier = 0):
-        if self.suggestability + modifier > renpy.random.randint(0, 100):
+        if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_sex_skill(the_skill)
         return
 
     def attempt_skill_training(self, the_skill, modifier = 0):
-        if self.suggestability + modifier > renpy.random.randint(0, 100):
+        if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_opinion_score(the_opinion)
 
         return

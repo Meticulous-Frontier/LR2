@@ -145,7 +145,7 @@ label erica_clothing_review(the_person):
             the_person.char "My clothes are a mess! I'll be back in a moment, I'm going to go get cleaned up."
     return
 
-#label erica_strip_reject(the_person):
+#label erica_strip_reject(the_person, the_clothing, strip_type = "Full"):
 #    if the_person.obedience > 130:
 #        the_person.char "I'm sorry, but can we leave that where it is for now?"
 #    elif the_person.obedience < 70:
@@ -621,34 +621,35 @@ label erica_talk_busy(the_person):
 #    return
 
 label erica_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.effective_sluttiness() < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Holy shit, are you really doing this in front of everyone?"
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
-        "[the_person.title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         $ the_person.change_happiness(-1)
-        "[the_person.title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person.char "Oh my god, you two are just... Wow..."
         $ change_report = the_person.change_slut_temp(1)
-        "[the_person.title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
+        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
         $ the_person.draw_person()
         the_person.char "Oh my god that's... Wow that looks...Hot."
         $ change_report = the_person.change_slut_temp(2)
-        "[the_person.title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Come on [the_person.mc_title], you can give her a little more than that. I'm sure she can handle it."
-        "[the_person.title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
 
     return
 

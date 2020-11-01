@@ -130,13 +130,13 @@ label cougar_clothing_review(the_person):
             the_person.char "Oh [the_person.mc_title], I'm not decent! Turn around now, I need to cover myself!"
     return
 
-label cougar_strip_reject(the_person):
+label cougar_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take anything else off. I'm a lady, after all."
+        the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take my [the_clothing.display_name] off. I'm a lady, after all."
     elif the_person.obedience < 70:
         the_person.char "Not yet sweety. You just need to relax and let [the_person.title] take care of you."
     else:
-        the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if it came off? I could be your mother, we shouldn't do this."
+        the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off? I could be your mother, we shouldn't do this."
     return
 
 label cougar_sex_accept(the_person):
@@ -566,14 +566,14 @@ label cougar_flirt_response_high(the_person):
                     "You lean in and kiss her. She presses her body up against yours."
                 else:
                     "When you lean in and kiss her she responds by pressing her body tight against you."
-                call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_high_2
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_high_2
 
             "Just flirt":
                 $ the_person.draw_person()
                 mc.name "Nothing right now, but I've got a few ideas for later."
                 "If [the_person.title] is disappointed she does a good job hiding it. She nods and smiles."
                 the_person.char "Well maybe if you take me out for dinner we can talk about those ideas, I'm interested to hear about them."
-    return    
+    return
 
 label cougar_flirt_response_girlfriend(the_person):
     # Lead in: mc.name "You're so beautiful [the_person.title], I'm so lucky to have a woman like you in my life."
@@ -684,7 +684,7 @@ label cougar_flirt_response_affair(the_person):
                 "You wrap your arms around [the_person.possessive_title]'s waist, resting your hands on her ass."
                 "Then you pull her tight against you, squeezing her tight butt. She sighs happily and starts to kiss your neck."
                 "You massage her ass for a moment, then spin her around and cup a tit with one hand. You move your other hand down to caress her inner thigh."
-                call fuck_person(the_person, private = True, start_position = standing_grope, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_2
+                call fuck_person(the_person, start_position = standing_grope, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_2
 
             "Just flirt":
                 mc.name "I want to, but I'm going to have to wait until we have more time together for that."
@@ -903,36 +903,37 @@ label cougar_talk_busy(the_person):
     return
 
 label cougar_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "[the_person.mc_title]! Why do you want me to watch that!"
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
-        "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person(emotion = "sad")
         $ the_person.change_happiness(-1)
         the_person.char "[the_person.mc_title]! Could you at least try a more private place?"
-        "[the_person.possessive_title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person.char "[the_person.mc_title], Why are you doing this here..."
         $ the_person.change_slut_temp(1)
-        "[the_person.possessive_title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
+        "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Oh my, [the_person.mc_title]? You might want to teach me that someday..."
         $ the_person.change_slut_temp(2)
-        "[the_person.possessive_title] studies [the_sex_person.name] while you [the_position.verb] her."
+        "[title] studies [the_sex_person.name] while you [the_position.verb] her."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person, "slut")
         the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[the_person.possessive_title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
+        "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
     return
 
@@ -1388,7 +1389,10 @@ label cougar_body_cum_taboo_break(the_person):
 
 label cougar_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Oh lord, I just love getting pumped full with cum!"
+
+        elif the_person.on_birth_control:
             if the_person.relationship != "Single":
                 $ so_title = girl_relationship_to_title(the_person.relationship)
                 the_person.char "Oh... I feel like such a bad [so_title], but I think I needed this. I'm sure he would understand."
@@ -1417,7 +1421,10 @@ label cougar_creampie_taboo_break(the_person):
             the_person.char "I'll just have to hope you haven't gotten me pregnant. We shouldn't do this again, it's too risky."
 
     else:
-        if not the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Well, it's not like I can get more pregnant, but perhaps next time you can cum somewhere else?"
+
+        elif not the_person.on_birth_control:
             the_person.char "Oh no, did you just finish [the_person.mc_title]?"
             "She sighs unhappily."
             if the_person.relationship != "Single":

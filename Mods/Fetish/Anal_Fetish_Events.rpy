@@ -773,7 +773,7 @@ label SB_mom_anal_pay_label():
 label SB_mom_anal_friday_label():
     $ the_person = mom
     $ bedroom.show_background()
-    "You're hanging out in your room when you here [the_person.possessive_title] call form her room."
+    "You're hanging out in your room when you hear [the_person.possessive_title] call from her room."
     the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
     mc.name "Sure, down in a second."
     $ mom_bedroom.show_background()
@@ -1180,7 +1180,7 @@ label SB_starbuck_anal_swing_demo(the_person):
         "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
         the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
 
-    call fuck_person(the_person, private = in_private, start_position = SB_anal_swing, start_object = SB_make_swing(), skip_intro = True) from _call_sex_description_SBA080
+    call fuck_person(the_person, private = in_private, start_position = SB_anal_swing, start_object = make_swing(), skip_intro = True) from _call_sex_description_SBA080
 
     #TODO the rest of this scene.
     if in_private:

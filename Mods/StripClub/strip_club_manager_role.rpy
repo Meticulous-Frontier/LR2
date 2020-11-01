@@ -85,7 +85,6 @@ init 3303 python:
         manager_role_status_acquisition(person)
 
         add_strip_club_manager_hire_more_stripper_reminder_action()
-        add_strip_club_manager_hire_more_waitresses_reminder_action()
         add_strip_club_manager_waitresses_suggestion_action()
         add_strip_club_manager_bdsm_room_suggestion_action()
         return

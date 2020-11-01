@@ -29,13 +29,13 @@ label starbuck_clothing_review(the_person):
             the_person.char "Oh my god, I shouldn't be dressed like this at the shop! Just give me a moment."
     return
 
-label starbuck_strip_reject(the_person):
+label starbuck_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "I wish I could let you, but I don't think I should be taking that off yet."
+        the_person.char "I wish I could let you, but I don't think I should be taking my [the_clothing.display_name] off yet."
     elif the_person.obedience < 70:
-        the_person.char "Sorry [the_person.mc_title], but I love being a tease. I'm going to leave that on for a bit."
+        the_person.char "Sorry [the_person.mc_title], but I love being a tease. I'm going to leave my [the_clothing.display_name] on for a bit."
     else:
-        the_person.char "I can't take that off right now [the_person.mc_title]!"
+        the_person.char "I can't take my [the_clothing.display_name] off right now [the_person.mc_title]!"
     return
 
 label starbuck_sex_accept(the_person):
@@ -304,34 +304,35 @@ label starbuck_talk_busy(the_person):
     return
 
 label starbuck_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         the_person.char "Could you two at least keep it down? This is fucking ridiculous."
         $ the_person.change_happiness(-1)
-        "[the_person.possessive_title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person.char "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
         $ change_report = the_person.change_slut_temp(1)
-        "[the_person.possessive_title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
+        "[title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person.char "Oh wow that's hot. I should sell tickets to this!"
         $ change_report = the_person.change_slut_temp(2)
-        "[the_person.possessive_title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
-        "[the_person.possessive_title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
     return
 
 label starbuck_being_watched(the_person, the_watcher, the_position):
@@ -456,7 +457,7 @@ label starbuck_flirt_response_high(the_person):
                     pass
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
-                call fuck_person(the_person, start_position = kissing, skip_intro = True) from _starbuck_flirt_response_high_2
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _starbuck_flirt_response_high_2
 
             "Just flirt.":
                 mc.name "I wish we could, but I'll need to take a rain check."

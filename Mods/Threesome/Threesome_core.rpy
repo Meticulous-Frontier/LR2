@@ -358,7 +358,7 @@ init 5 python:
                 option_list.append([options.description,options.name])
         option_list.append(["Change your mind and leave.", "Leave"])
         return renpy.display_menu(option_list,True,"Choice")
-    
+
     def get_mc_active_position(position_choice, round_choice):
         for options in position_choice.mc_position:
             if round_choice == options.name:
@@ -487,7 +487,8 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
                                 $ scene_manager.remove_actor(the_person_one, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
-                                call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
+                                $ the_person = the_person_two   # make sure we set the_person for detailed info ui
+                                call fuck_person(the_person, private = private, report_log = report_log) from threesome_to_twosome_transition_1
                                 $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
                                 $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
@@ -509,7 +510,8 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
                                 $ scene_manager.remove_actor(the_person_two, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
-                                call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
+                                $ the_person = the_person_one   # make sure we set the_person for detailed info ui
+                                call fuck_person(the_person, private = private, report_log = report_log) from threesome_to_twosome_transition_2
                                 $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
                                 $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
@@ -766,6 +768,12 @@ init python:
         return return_bool
 
     def willing_to_threesome(person_one, person_two):    #Use this function to check and see if two people are willing to engage in a threesome
+        # only allow threesomes when we had sex before (without condom)
+        if person_one.has_taboo(["sucking_cock", "condomless_sex"]):
+            return False
+        if person_two.has_taboo(["sucking_cock", "condomless_sex"]):
+            return False
+
         person_one_slut_req = THREESOME_BASE_SLUT_REQ
         person_two_slut_req = THREESOME_BASE_SLUT_REQ
         if person_one in [mom, lily, cousin, aunt]:

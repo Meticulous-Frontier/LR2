@@ -10,13 +10,17 @@ init -1 python:
         return the_bdsmbed
 
     def make_pillory():
-        the_pillory = Object("Pillory", ["Pillory", "Stand", "Lean", "Kneel", "Low"], sluttiness_modifier = 15, obedience_modifier = 25)
+        the_pillory = Object("Pillory", ["Stand", "Lean", "Kneel", "Low"], sluttiness_modifier = 15, obedience_modifier = 25)
         return the_pillory
 
     def make_woodhorse():
-        the_woodhorse = Object("Wood Horse", ["Horse", "Sit", "Lay"], sluttiness_modifier = 20, obedience_modifier = 30)
+        the_woodhorse = Object("Wood Horse", ["Sit", "Lean", "Lay"], sluttiness_modifier = 20, obedience_modifier = 30)
         return the_woodhorse
 
     def make_cage():
-        the_cage = Object("Cage", ["Cage", "Lay", "Low", "Kneel"], sluttiness_modifier = 10, obedience_modifier = 20)
+        the_cage = Object("Cage", ["Lay", "Low", "Kneel"], sluttiness_modifier = 10, obedience_modifier = 20)
         return the_cage
+
+    def make_toilet():
+        the_toilet = Object("Toilet", ["Sit", "Low"], sluttiness_modifier = 10, obedience_modifier = 5)
+        return the_toilet

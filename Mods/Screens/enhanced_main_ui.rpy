@@ -1,5 +1,9 @@
 init 2:
     screen main_ui(): #The UI that shows most of the important information to the screen.
+        python:
+            known = len(known_people_in_the_game([mc]))
+            total = len(all_people_in_the_game([mc]))
+
         frame:
             background "Info_Frame_1.png"
             xsize 600
@@ -27,5 +31,12 @@ init 2:
                     ysize 28
                     text_style "menu_text_style"
                     tooltip "Many actions require energy to perform, sex especially. Energy comes back slowly throughout the day, and most of it is recovered after a good nights sleep."
+                    action NullAction()
+                    sensitive True
+
+                textbutton "World: [known]/[total]":
+                    ysize 28
+                    text_style "menu_text_style"
+                    tooltip "Shows the number of known and total people in your world."
                     action NullAction()
                     sensitive True

@@ -1368,11 +1368,12 @@ label Sarah_stripclub_story_label():
         "You get up and head over to the counter and talk with the manager."
     if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role(stripper_role):
         if showgirl is cousin:
-            "You arrange two private lap dances. For [the_person.title], you get [cousin.possessive_title], since she enjoyed her so much."
+            "You arrange two private lap dances: for [the_person.title] you get [cousin.possessive_title] since she enjoyed her so much, and you pick a random girl for yours."
         else:
-            "You arrange two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage."
-            "You smile when you look at the list of stage names for the different strippers. You see the one that must be referring to [cousin.title] and pick her for yours."
-    "You arrange two private lap dances. For [the_person.title], you ask for the girl that did the second dance on stage. You pick a random girl for yours."
+            "You arrange two private lap dances: for [the_person.title] you ask for the girl that did the second dance on stage since she enjoyed her so much."
+            "You smile when you look at the list of stage names for the available strippers: you see the one that must be referring to [cousin.title] and pick her for yours."
+    else:
+        "You arrange two private lap dances: for [the_person.title] you ask for the girl that did the second dance on stage, and you pick a random girl for yours."
     $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
     $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
@@ -1668,7 +1669,7 @@ label Sarah_threesome_request_label():
     if gossip_target is None:
         return
 
-    "Another Saturday, another extra workday for you. You are hardly surprised when you here [the_person.title]'s familiar voice."
+    "Another Saturday, another extra workday for you. You are hardly surprised when you hear [the_person.title]'s familiar voice."
     the_person.char "Hey [the_person.mc_title]. I figured you'd be around here."
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]."

@@ -190,7 +190,7 @@ init 2:
                                 background None
                                 xsize 120
                                 ysize 80
-                                textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed",None,person) xfill True xalign 0.0 yfill True margin [0, 0]
+                                textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed", the_person = person) xfill True xalign 0.0 yfill True margin [0, 0]
                             for attributes in sort_attributes[1:]:
                                 frame:
                                     background None

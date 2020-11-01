@@ -44,7 +44,7 @@ init 2 python:
 
     def ophelia_ex_bf_phone_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 14: #Wait atleast two weeks after getting dumped
-            if person.location() is mall_salon:
+            if person.location() == mall_salon:
                 if person.sluttiness >= 20:
                     return True
         return False
@@ -53,7 +53,7 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
             return False
-        if person.location() is mall_salon:
+        if person.location() == mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
@@ -74,7 +74,7 @@ init 2 python:
 
     def ophelia_revenge_date_plan_requirement(person):
         if person.sluttiness >= 40:
-            if person.location() is mall_salon:
+            if person.location() == mall_salon:
                 if day >= ophelia_get_day_dumped() + 21:
                     return True
         return False
@@ -91,7 +91,7 @@ init 2 python:
 
     def ophelia_is_over_her_ex_requirement(person):
         if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
-            if person.location() is mall_salon:
+            if person.location() == mall_salon:
                 return True
         return False
 
@@ -113,7 +113,7 @@ init 2 python:
     def ophelia_increased_service_begin_requirement(person):
         if ophelia_get_is_over_her_ex():
             if person.sluttiness_tier >= 3:
-                if person.location() is mall_salon:
+                if person.location() == mall_salon:
                     return True
         return False
 
@@ -1110,12 +1110,6 @@ init 2 python:
 
     def ophelia_get_is_over_her_ex():
         return salon_manager.event_triggers_dict.get("over_her_ex", 0)
-
-    def ophelia_is_latest_version():
-        if salon_manager.event_triggers_dict.get("ophelia_version", -1) < 2:   #Just increment the compare and set value when you have a new version
-            salon_manager.event_triggers_dict["ophelia_version"] = 2
-            return False
-        return True
 
     def ophelia_get_can_talk_about_candace():
         return salon_manager.event_triggers_dict.get("talk_about_candace", 0)

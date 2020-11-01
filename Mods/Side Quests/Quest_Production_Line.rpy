@@ -356,9 +356,13 @@ label quest_production_line_help_move_label():
     $ clear_scene()
     "You grab a couple of water bottles. [the_person.title] is still out in the trailer. Now would be a good time to drop a serum in her drink..."
     menu:
-        "Add a dose of serum to [the_person.title]'s drink.":
+        "Add a dose of serum to [the_person.title]'s drink"  if mc.inventory.get_any_serum_count() > 0:
             call give_serum(the_person) from _call_give_prod_line_girl_serum_01
-        "Leave her drink alone.":
+
+        "Add a dose of serum to [the_person.title]'s drink\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+            pass
+
+        "Leave her drink alone":
             pass
     "You take the water bottle out to [the_person.title]."
     $ the_person.draw_person(emotion = "happy")
@@ -524,18 +528,21 @@ init 1301 python:
 label princess_greetings(the_person):
     $ update_ass_condition(the_person)
     if the_person.sluttiness > 40:
-        if the_person.event_triggers_dict.get("spank_level", 0) < 2: #Flawless
-            the_person.char "Hi [the_person.mc_title]! I've been so good lately!"
-            "She lowers her voice a little."
-            the_person.char "But maybe a little too good... Are you sure I don't need a spanking?"
-        elif the_person.event_triggers_dict.get("spank_level", 0) < 6: #Flawless
-            the_person.char "Hi [the_person.mc_title]! I'm trying to be good!'"
-            "She lowers her voice a little."
-            the_person.char "I'm still a little sore, but if you need to spank me, I understand!"
+        if renpy.random.randint(0,2) == 1: # only bring up spanking once in a while
+            if the_person.event_triggers_dict.get("spank_level", 0) < 2: #Flawless
+                the_person.char "Hi [the_person.mc_title]! I've been so good lately!"
+                "She lowers her voice a little."
+                the_person.char "But maybe a little too good... Are you sure I don't need a spanking?"
+            elif the_person.event_triggers_dict.get("spank_level", 0) < 6: #Flawless
+                the_person.char "Hi [the_person.mc_title]! I'm trying to be good!'"
+                "She lowers her voice a little."
+                the_person.char "I'm still a little sore, but if you need to spank me, I understand!"
+            else:
+                the_person.char "Hi [the_person.mc_title]! I'm being good I promise!"
+                the_person.char "I'm still sore, I swear I don't need a spanking!"
+            mc.name "Hello [the_person.title]. I'll be the judge of when you need spanking."
         else:
-            the_person.char "Hi [the_person.mc_title]! I'm being good I promise!"
-            the_person.char "I'm still sore, I swear I don't need a spanking!"
-        mc.name "Hello [the_person.title]. I'll be the judge of when you need spanking."
+            the_person.char "Hi [the_person.mc_title]!"
     elif the_person.love < 0:
         the_person.char "Ugh, what do you want?"
     elif the_person.happiness < 90:

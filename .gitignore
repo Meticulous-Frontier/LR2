@@ -60,10 +60,14 @@ target/
 # Exclude Game Folders
 animation/
 cache/
+crises/
+game_roles/
 gui/
 images/
 OpenGL/
+personality_types/
 saves/
+sex_positions/
 shader/
 wardrobes/
 # Files from Game Folder

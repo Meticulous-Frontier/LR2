@@ -567,7 +567,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = SB_make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
@@ -906,7 +906,7 @@ label hotwife_clothing_accept(the_person):
 #             the_person.char "My clothes are a mess! I'll be back in a moment, I'm going to go get cleaned up."
 #     return
 
-#label hotwife_strip_reject(the_person):
+#label hotwife_strip_reject(the_person, the_clothing, strip_type = "Full"):
 #    if the_person.obedience > 130:
 #        the_person.char "I'm sorry, but can we leave that where it is for now?"
 #    elif the_person.obedience < 70:

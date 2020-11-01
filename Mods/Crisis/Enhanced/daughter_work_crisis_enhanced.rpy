@@ -3,12 +3,12 @@ init 5 python:
 
     def get_random_mother_from_company_with_children():
         valid_people_list = []
-        for person in [x for x in mc.business.get_employee_list() if x not in quest_director.unavailable_people()]:
+        for person in [x for x in mc.business.get_employee_list() if x.is_available() and x not in quest_director.unavailable_people()]:
             if person.kids != 0 and person.age >= 34 and person.kids > town_relationships.get_existing_child_count(person): #They have undiscovered kids we can add in.
                 valid_people_list.append(person)
 
         return get_random_from_list(valid_people_list) #Pick someone appropriate from the company.
-    
+
 
 label daughter_work_crisis_label_enhanced():
     if mc.business.get_employee_count() >= mc.business.max_employee_count:
@@ -103,9 +103,9 @@ label daughter_work_crisis_label_enhanced():
 
     # block rollback before this point
     $ renpy.block_rollback()
-    
+
     call hire_select_process([the_daughter, 1]) from _call_hire_select_process_daughter_work_crisis_enhanced #Hire her or reject her. Padded with an extra item in the array or we crash due to trying to pre-calculate forward/backwards buttons
-    
+
     if _return == the_daughter: #You've chosen to hire her.
         if promised_sex:
             mc.name "Alright, I'll admit this looks promising, but I need some convincing."

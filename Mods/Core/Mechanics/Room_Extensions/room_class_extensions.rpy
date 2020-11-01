@@ -1,11 +1,4 @@
 init -1 python:
-    def assign_room_label(room, label_name): # Call labels through renpy.call(room.labels[0]) or through a for loop.
-        if label_name not in room.labels:    # NOTE: This can be considered a useless function OR a shortcut to calling labels without having to go through Actions.
-            room.labels.append(label_name)
-        return "Label added"
-
-    Room.assign_room_label = assign_room_label
-
     ###########################################
     # Custom Compare Functions For Room Class #
     ###########################################
@@ -53,9 +46,9 @@ init -1 python:
             org_func(room, person, destination)
             # run extension code
             if not person.follow_mc and not room is destination:
-                if person.location() is gym:
+                if person.location() == gym:
                     person.apply_gym_outfit()
-                elif person.location() is university and not person is nora:
+                elif person.location() == university and not person is nora:
                     person.apply_university_outfit()
                 else:
                     person.apply_planned_outfit()
@@ -68,43 +61,6 @@ init -1 python:
     ########################
     # Added Room Functions #
     ########################
-    def update_custom_rooms(room): # Replaces the room in the list with the updated version.
-        room_update = find_in_list(lambda x: x.name == room.name, list_of_places)
-
-        # did not find a room to update
-        if not room_update:
-            return
-
-        # renpy.say("", "Update room " + room_update.name)
-
-        room_update.formalName = room.formalName
-
-        room_update.map_pos = room.map_pos
-        room_update.background_image = room.background_image
-
-        # room_update.visible = room.visible    DON'T UPDATE VISIBILITY
-        room_update.accessable = room.accessable
-
-        # room_update.connections = room.connections    DON'T UPDATE CONNECTIONS
-
-        room_update.objects = room.objects
-
-        if not room.has_object_with_trait("Stand"): # Was creating a standing object for each room on every save reload
-            room_update.objects.append(Object("stand",["Stand"], sluttiness_modifier = 0, obedience_modifier = -5)) #Add a standing position that you can always use.
-
-        # update available actions in room
-        room_update.actions = room.actions
-
-        if room_update.tutorial_label != room.tutorial_label:
-            room_update.tutorial_label = room.tutorial_label
-            room_update.trigger_tutorial = True
-
-        # old saves don't have hide_in_known_housemap
-        if hasattr(room_update, "hide_in_known_housemap"): # Deal with this somehow else. Thought ModRooms should have the attribute as True by default?
-            room_update.hide_in_known_housemap = room.hide_in_known_housemap
-
-        return room_update
-
     def purchase_room_on_buy_function(room):
         room.visible = True
 
@@ -133,7 +89,7 @@ init -1 python:
             add_location(hall)
             for c in hall.connections:
                 add_location(c)
-        # special character aunt and cousing locations
+        # special character aunt and cousin locations
         if person in [aunt, cousin]:
             add_location(aunt_apartment)
             for c in aunt_apartment.connections:

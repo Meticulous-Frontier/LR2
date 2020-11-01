@@ -1,7 +1,7 @@
 ## Slave Attention Crisis Mod by Tristimdorion
 # One of your slaves feels you are ignoring her and demands some attention
 init -1 python:
-    slave_attention_mod_weight = 5    
+    slave_attention_mod_weight = 5
 
 init 3 python:
     def slave_attention_crisis_requirement():
@@ -11,8 +11,8 @@ init 3 python:
 
     def get_unhappy_slave():
         qualified = []
-        for person in known_people_in_the_game([mc]):
-            if person.has_role(slave_role) and person.sex_record.get("Last Sex Day", 0) > day + 7:
+        for person in [x for x in known_people_in_the_game([mc]) if x.is_available() and x.has_role(slave_role)]:
+            if person.sex_record.get("Last Sex Day", 0) > day + 7:
                 qualified.append(person)
         return get_random_from_list(qualified)
 
@@ -129,7 +129,7 @@ label slave_attention_crisis_action_label:
                 "Punish her (keep)":
                     mc.name "Very well, your eagerness to serve me has convinced me, but your insolence has to be punished."
                     mc.name "I'm going to spank your cute ass until it has a nice shade and you will count along."
-                    
+
                     python:
                         for count in __builtin__.range(1, 11):
                             renpy.say(the_person.char, str(count) + "..."  + (renpy.random.choice(["Ouch!", "Fuck!", "Damn!"]) if count%3 == 0 else ""), interact = False)

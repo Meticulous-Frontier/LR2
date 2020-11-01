@@ -176,11 +176,11 @@ label Sarah_clothing_review(the_person):
             the_person.char "Damn, everything's out of place after that. Wait here a moment, I'm just going to find a mirror and try and look presentable."
     return
 
-label Sarah_strip_reject(the_person):
+label Sarah_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "Could we leave that where it is for now, please?"
+        the_person.char "Could we leave my [the_clothing.display_name] on for now, please?"
     elif the_person.obedience < 70:
-        the_person.char "No, no, no, I'll decide what comes off and when, okay?"
+        the_person.char "No, no, no, I'll decide when my [the_clothing.display_name] come off, okay?"
     else:
         the_person.char "Not yet... get me a little warmed up first, okay?"
     return
@@ -635,35 +635,36 @@ label Sarah_sex_strip(the_person):
     return
 
 label Sarah_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
-        "[the_person.title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         the_person.char "Could you two at least keep it down? This is fucking ridiculous."
         $ the_person.change_happiness(-1)
-        "[the_person.title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person.char "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
         $ change_report = the_person.change_slut_temp(1)
-        "[the_person.title] watches for a moment, then turns away while you and [the_sex_person.name] keep [the_position.verb]."
+        "[title] watches for a moment, then turns away while you and [the_sex_person.name] keep [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person.char "Oh wow that's hot. You don't mind if I watch, do you?"
         $ change_report = the_person.change_slut_temp(2)
-        "[the_person.title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
-        "[the_person.title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
     return
 
 label Sarah_being_watched(the_person, the_watcher, the_position):
@@ -1060,7 +1061,11 @@ label Sarah_body_cum_taboo_break(the_person):
     return
 label Sarah_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Oh yes, fill me up with your hot semen."
+            the_person.char "It feels so good when you cum deep inside me, promise me you will do that again."
+
+        elif the_person.on_birth_control:
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person.char "I can't believe it... your cum is inside me! Oh god what am I gonna tell my [so_title]..."
@@ -1085,14 +1090,16 @@ label Sarah_creampie_taboo_break(the_person):
             if the_person.relationship != "Single":
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person.char "Ah, I should have told you to pull out, but it just feels so good..."
-                the_person.cahr "We shouldn't do that again though, if I get pregnant I'm going to have to explain it to my [so_title]."
+                the_person.char "We shouldn't do that again though, if I get pregnant I'm going to have to explain it to my [so_title]."
 
             else:
                 the_person.char "Ah, I really should have told you to pull out... I'm not on the pill..."
                 the_person.char "It's just this once, right? It's probably fine..."
 
     else:
-        if not the_person.on_birth_control:
+        if the_person.knows_pregnant():
+            the_person.char "Oh my, well I can't get any more pregnant."
+        elif not the_person.on_birth_control:
             the_person.char "Oh my god, [the_person.mc_title]! Did you really just cum inside me?"
             "She groans unhappily."
             if the_person.relationship != "Single":

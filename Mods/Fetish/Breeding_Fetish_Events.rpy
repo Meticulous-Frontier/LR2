@@ -345,7 +345,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     the_person.char "Great! I'll get it setup..."
     "You notice she hesitates a bit. She bites her lower lip before continuing."
     the_person.char "So umm, I've been getting some requests recently..."
-    mc.name "Oh? What are the thirsty anonymous internet guys want?"
+    mc.name "Oh? What are the thirsty anonymous internet guys wanting?"
     "She chuckles a second, but you sense a nervous tone."
     the_person.char "Well... they've been asking to see us take things one step farther... For you to finish inside me!"
     if the_person.knows_pregnant():
@@ -361,7 +361,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She gives a telltale sign. As she says that, she looks away from you and to the side. She is lying to you."
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
-    the_person.char "Oh me? Want to knocked up? By my brother? That's... I mean thats CRAZY!... right?"
+    the_person.char "Oh me? Want to get knocked up? By my brother? That's... I mean thats CRAZY!... right?"
     "She is struggling to give a reasonable explanation. It is pretty clear now that she is just fishing for an excuse to fuck you raw, and to get filled with your potent seed."
     mc.name "Yeah, I mean, wouldn't that be crazy? For a woman to want to get fucked? To have a man dominate her and do what he wants with her, then fill her up with his seed, consequences be damned?"
     $ the_person.change_arousal(10)
@@ -432,7 +432,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Ah, I'm going to cum!"
     the_person.char "Oh god me too! Oh fuck bro I'm cumming! Fill me up I need your cum too!"
     "She slams her hips down. As deep as your cock can go, you start to cum, filling [the_person.possessive_title]."
-    "Her hole is quiver as she cums at the same time, milking your cock for every last drop of seed."
+    "Her hole is quivering as she cums at the same time, milking your cock for every last drop of seed."
     $ the_person.cum_in_vagina()
     $ the_person.change_stats(happiness = 5,  slut_temp = 5, slut_core = 5)
     $ the_person.draw_person(position = "doggy")

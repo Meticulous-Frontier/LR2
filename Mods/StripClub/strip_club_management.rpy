@@ -202,7 +202,7 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
 
 label strip_club_manager_bdsm_room_build_label(): # (action button)
     "You pick up the phone and call your usual contractor."
-    mc.name "Hello, this is [mc.name] [mc.last_name] from [strip_club.formalName], i need some construction work done here at my club."
+    mc.name "Hello, this is [mc.name] [mc.last_name] from [strip_club.formalName], I need some construction work done here at my club."
     "You go over the details and agree on a price of $10,000 for converting some unused space into a fully equipped and soundproofed BDSM room."
     $ mc.business.change_funds(-10000)
     $ add_strip_club_manager_bdsm_room_built_event()

@@ -418,7 +418,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
 
                 if position_choice and object_choice:
-                    call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix
+                    call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix
                     if not _return == 1: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
                         if _return == -1: # angry reject ends interactions
                             $ finished = True
@@ -480,7 +480,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
-            call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix_1
+            call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix_1
             if _return:
                 $ round_choice.redraw_scene(the_person)
                 if not ignore_taboo and the_person.has_taboo(round_choice.associated_taboo):
@@ -504,7 +504,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # In 13% of the cases she takes control regardless of obedience, but only when she came only once
             # higher chance when she likes taking control lower when she doesn't
-            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and (renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience):
+            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and ((renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience) or renpy.random.randint(0, 6) == 3):
                 $ the_person.change_obedience(-3)
                 $ girl_in_charge = True
                 $ finished = False
@@ -942,32 +942,33 @@ label watcher_check_enhanced(the_person, the_position, the_object, the_report): 
     return
 
 label relationship_sex_watch(the_person, the_relation, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
         $ the_person.change_stats(obedience = -2, happiness = -1)
-        "[the_person.title] looks away while you and her [the_relation] [the_position.verb]."
+        "[title] looks away while you and her [the_relation] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         $ the_person.change_happiness(-1)
-        "[the_person.title] shakes her head and tries to avoid watching you and her [the_relation] [the_position.verb]."
+        "[title] shakes her head and tries to avoid watching you and her [the_relation] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         $ change_report = the_person.change_slut_temp(1)
-        "[the_person.title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
+        "[title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person.char "Oh my..."
         $ change_report = the_person.change_slut_temp(2)
-        "[the_person.title] watches quietly while you and her [the_relation] [the_position.verb]."
+        "[title] watches quietly while you and her [the_relation] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Glad to see you two are having a good time. [the_person.mc_title], careful you aren't too rough with my [the_relation]."
-        "[the_person.title] watches quietly while you and her [the_relation] [the_position.verb]."
+        "[title] watches quietly while you and her [the_relation] [the_position.verb]."
     return
 
 label relationship_being_watched(the_person, the_watcher, the_relation, the_position):

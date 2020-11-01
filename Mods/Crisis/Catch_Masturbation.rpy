@@ -15,20 +15,14 @@ init -1 python:
 
 init 2 python:
     def SB_caught_masturbating_requirement():
-        if mc.business.get_employee_count() > 0:
-            if mc.business.is_open_for_business():
-                if mc.is_at_work():
-                    for person in mc.business.get_employee_list():
-                        if person.get_opinion_score("masturbating") > 0:
-                            return True
-                        elif person.sluttiness > 50:
-                            return True
+        if mc.business.is_open_for_business() and mc.is_at_work():
+            return not select_girl_masturbating() is None
         return False
 
     def select_girl_masturbating():
         masturbating_people = []
-        for person in mc.business.get_employee_list():
-            if person.get_opinion_score("masturbating") > 0 or person.sluttiness > 50:
+        for person in [x for x in mc.business.get_employee_list() if x.is_available()]:
+            if person.effective_sluttiness() < 40 - (5 * person.get_opinion_score("masturbating")):
                 masturbating_people.append(person)
         return get_random_from_list(masturbating_people)
 
@@ -68,20 +62,20 @@ label SB_caught_masturbating_crisis_label():
             "Join them":
                 the_person.char "Hi [the_person_two.mc_title], why don't you join us."
                 mc.name "Wait a second [the_person.title], let me take care of that for you."
-                "You quickly undress and..."               
+                "You quickly undress and..."
                 call start_threesome(the_person, the_person_two, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, round = 1) from _call_start_threesome_SB_caught_masturbating_crisis_label
 
                 if the_person.energy > 20 and the_person_two.energy > 20:
                     "Once you're finished you quickly get dressed and say goodbye to the girls, who seem determined to continue for a while."
                 else:
                     "Once you're finished you quickly get dressed and say goodbye to the girls."
-                    
+
             "Keep walking":
                 pass
 
         $ scene_manager.clear_scene()
         $ mc.location.show_background()
-    else:        
+    else:
         "Looking inside, you see [the_person.possessive_title] on all fours, with her back to you, quietly moaning."
         $ the_person.draw_person(position = "doggy")
         the_person.char "mmmmmmmfff... oh..."
@@ -306,7 +300,7 @@ label SB_caught_masturbating_crisis_label():
                                 "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
-                
+
             "Keep walking":
                 "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking."
 

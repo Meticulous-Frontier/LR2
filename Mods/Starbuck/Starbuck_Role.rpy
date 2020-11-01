@@ -19,14 +19,6 @@ init 2 python:
 
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
-    def SB_make_swing():
-        the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
-        return the_swing
-
-    def SB_make_counter():
-        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_counter
-
     def SB_mod_initialization(action_mod):
         starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
@@ -34,15 +26,6 @@ init 2 python:
         common_dislikes = ["working", "research work", "production work"],
         common_sexy_dislikes = [ "masturbating", "giving handjobs"],
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
-
-        starbuck_home = Room("Starbuck's home", "Starbuck's home", [], apartment_background, [],[],[],False,[0.5,0.5], visible = False, hide_in_known_house_map = False, lighting_conditions = standard_indoor_lighting)
-        starbuck_home.add_object(make_wall())
-        starbuck_home.add_object(make_floor())
-        starbuck_home.add_object(make_bed())
-        starbuck_home.add_object(make_window())
-
-        #starbuck_home.link_locations_two_way(downtown)
-        list_of_places.append(starbuck_home)
 
         # init starbuck role
         starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up])
@@ -53,16 +36,17 @@ init 2 python:
         starbuck_lipstick = lipstick.get_copy()
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
-        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E",  height = 0.95,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
+        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.92,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            home = starbuck_home, work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
+            work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
+        starbuck.generate_home()
         starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
         starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
 
         # Add a counter to the sex shop
-        sex_store.add_object(SB_make_counter())
+        sex_store.add_object(make_counter())
 
         # Add StarBuck introduction event to sex store
         starbuck.add_unique_on_room_enter_event(starbuck_introduction_event_action)
@@ -77,7 +61,7 @@ init 2 python:
 
 init -1 python:
     def starbuck_introduction_requirement(the_person):
-        if starbuck.location() is sex_store:    # only trigger event when starbuck is there
+        if starbuck.location() == sex_store:    # only trigger event when starbuck is there
             return True
         return False
 
@@ -137,7 +121,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage == 0:
             if mc.business.funds >= 1000:
@@ -146,7 +130,7 @@ init -1 python:
                 return "Requires: $1000"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage == 1:
             if (the_person.event_triggers_dict.get("shop_stage_one_day", 9999) + 7) < day:
@@ -158,7 +142,7 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_investment_three_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage == 2:
             if (the_person.event_triggers_dict.get("shop_stage_two_day", 9999) + 7) < day:
@@ -170,7 +154,7 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_promo_one_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 1.0:
@@ -178,7 +162,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_two_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 2.0:
@@ -186,7 +170,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_three_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
@@ -200,7 +184,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
@@ -214,7 +198,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
-        if not starbuck.location() is sex_store:
+        if not starbuck.location() == sex_store:
             return False
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:
@@ -1332,7 +1316,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You give her a modest thrust. The swing bounces forward for a second, but gravity soon causes her ass to pendulum back and smack against your hip."
     "The feeling is exquisite. You grab her hips and get ready to fuck [the_person.possessive_title]'s brains out."
     #Call sex scene#
-    call fuck_person(the_person, start_position = SB_anal_swing, start_object = SB_make_swing(), skip_intro = True) from _call_sex_description_SBS110
+    call fuck_person(the_person, start_position = SB_anal_swing, start_object = make_swing(), skip_intro = True) from _call_sex_description_SBS110
 
     "Turning off the video camera, you turn to [the_person.possessive_title]."
     $ the_person.shop_investment_rate = 6.0
@@ -1370,6 +1354,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
                 the_person.char "Oh! That is such a relief to hear."
                 "You see her digging around in her pocket."
                 the_person.char "Here... I want you to have this. It's a key to my apartment. You don't have to come over if you don't want to, but I just want you to know, you're always welcome in my bed."
+                $ the_person.learn_home()
                 mc.name "Thanks [the_person.title]. It will be nice to be able to share a warm bed with a beautiful woman like you once in a while."
                 $the_person.draw_person(position = "kissing")
                 "She hugs you again and begins kissing you on your neck."
@@ -1381,8 +1366,8 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."
     $ perk_system.add_stat_perk(Stat_Perk(description = "Increase sexual skill cap from repeated sexual activity with Starbuck. +1 Sex Skill Cap", sex_cap = 1, bonus_is_temp =False), "Starbuck Sex Bonus")
     "After having multiple sexual encounters with a woman like [the_person.title], you feel like if you put in the effort, you could become an even more skilled lover."
-    $ sex_store.add_object(SB_make_swing())
-    $ bedroom.add_object(SB_make_swing())
+    $ sex_store.add_object(make_swing())
+    $ bedroom.add_object(make_swing())
     return
 
 #SBS120

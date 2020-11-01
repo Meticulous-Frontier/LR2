@@ -14,15 +14,15 @@ init 3 python:
         else:
             return True
 
-    # the gym is initialized when the action mod is loaded and also links the gym_shower to the gym
-    def gym_initialization(self):
-        # add gym shower to active places
-        list_of_places.append(gym_shower)
-        gym.link_locations_two_way(gym_shower)
+    # for save compatibility remove in next version
+    def gym_workout_initialization():
+        # add passed action to the gym room
         gym.add_action(self)
         return
 
-    def gym_workout_initialization(self):
+
+    def gym_initialization(self):
+        # add passed action to the gym room
         gym.add_action(self)
         return
 
@@ -30,7 +30,7 @@ init 3 python:
         initialization = gym_initialization, menu_tooltip = "Bring a person to the gym to train their body.", category="Mall")
 
     train_gym_workout_action = ActionMod("Workout in Gym {image=gui/heart/Time_Advance.png}", gym_requirement, "train_gym_workout",
-        initialization = gym_workout_initialization, menu_tooltip = "You train in the gym yourself.", category="Mall")
+        initialization = gym_initialization, menu_tooltip = "You train in the gym yourself.", category="Mall")
 
 label select_person_for_gym():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Train with", ["Back"])]))

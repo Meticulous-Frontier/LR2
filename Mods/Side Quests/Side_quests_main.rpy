@@ -128,12 +128,6 @@ init python: #For now default init. May change later if we know better.
             return ""
 
         def add_unavailable_person(self, person):
-            # compatibility code for old saves (remove for version 0.30)
-            if hasattr(self, "unavailable_persons"):
-                if not person in self.unavailable_persons:
-                    self.unavailable_persons.append(person)
-                return
-
             if not person.identifier in self.unavailable_person_identifiers:
                 self.unavailable_person_identifiers.append(person.identifier)
 
@@ -145,10 +139,6 @@ init python: #For now default init. May change later if we know better.
             return result
 
         def is_person_blocked(self, person):
-            # compatibility code for old saves (remove for version 0.30)
-            if hasattr(self, "unavailable_persons"):
-                return not person in self.unavailable_persons
-
             return person.identifier in self.unavailable_person_identifiers
 
 

@@ -132,9 +132,9 @@ label scene_piledriver_DP_2(the_girl, the_location, the_object):
             the_girl.char "AH! Oh fuck me!"
             "You give her slow but forceful thrusts."
             if the_girl.outfit.tits_available():
-                "[the_girl.possessive_title]'s tits jiggle enticingly with every thrust. Shock waves erupting from her crotch ech through her entire body."
+                "[the_girl.possessive_title]'s tits jiggle enticingly with every thrust. Shock waves erupting from her crotch arc through her entire body."
             else:
-                "Shock waves erupting from her crotch ech through her entire body."
+                "Shock waves erupting from her crotch arc through her entire body."
             "The slapping noise echoes throughout the room. It is occasionally punctuated by a moan or a gasp from [the_girl.title]."
 
         "Pound her fast":
@@ -184,6 +184,8 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                         "[the_girl.possessive_title]'s voice starts to trail off."
                     elif the_girl.sluttiness > 110:
                         the_girl.char "Oh god it's so deep."
+                    elif the_girl.knows_pregnant():
+                        the_girl.char "Oh yes, fill me up with your hot semen!"
                     elif the_girl.on_birth_control:
                         the_girl.char "Oh fuck...  Good thing I'm on the pill..."
                     else:
@@ -196,7 +198,9 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 "It's a little late for that now. You gasp and push yourself as deep as you can, draining your balls into [the_girl.possessive_title]'s cunt."
                 $ the_girl.cum_in_vagina()
                 $ piledriver_DP.redraw_scene(the_girl)
-                if not the_girl.on_birth_control:
+                if the_girl.knows_pregnant():
+                    the_girl.char "Oh fuck... thats a lot, next time spray it all over me."
+                elif not the_girl.on_birth_control:
                     the_girl.char "Oh fuck... what if I get pregnant [the_girl.mc_title]?"
                 "You take a moment to catch your breath, then sit back and pull your cock out of [the_girl.title]. Her ass gapes slightly where the strap-on was previously buried."
                 "You keep her on her back for a few more seconds, enjoying the way the position keeps your semen inside of her."

@@ -133,13 +133,13 @@ label alpha_clothing_review(the_person):
             the_person.char "Oh [the_person.mc_title], I'm at my best! Turn around now, I need to get dressed."
     return
 
-label alpha_strip_reject(the_person):
+label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
-        the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take anything else off. I'm a lady, after all."
+        the_person.char "I know it would make your day [the_person.mc_title], but I don't think I should take my [the_clothing.display_name] off. I'm a lady, after all."
     elif the_person.obedience < 70:
         the_person.char "Not yet [the_person.mc_title]. You just need to relax and let [the_person.title] take care of you."
     else:
-        the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if it came off?"
+        the_person.char "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off?"
     return
 
 label alpha_sex_accept(the_person):
@@ -573,7 +573,7 @@ label alpha_flirt_response_high(the_person):
                     "You lean in and kiss her. She presses her body up against yours."
                 else:
                     "When you lean in and kiss her she responds by pressing her body tight against you."
-                call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_person_alpha_flirt_response_high_2
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_alpha_flirt_response_high_2
 
             "Just flirt":
                 $ the_person.draw_person()
@@ -846,36 +846,37 @@ label alpha_talk_busy(the_person):
     return
 
 label alpha_sex_watch(the_person, the_sex_person, the_position):
+    $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person.char "[the_person.mc_title]! Why do you want me to watch that!"
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
-        "[the_person.possessive_title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person(emotion = "sad")
         $ the_person.change_happiness(-1)
         the_person.char "[the_person.mc_title]! Could you at least try a more private place?"
-        "[the_person.possessive_title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person.char "[the_person.mc_title], why are you doing this here..."
         $ the_person.change_slut_temp(1)
-        "[the_person.possessive_title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
+        "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person.char "Well, [the_person.mc_title]! I might show you my personal skills someday..."
         $ the_person.change_slut_temp(2)
-        "[the_person.possessive_title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
+        "[title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person, "slut")
         the_person.char "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[the_person.possessive_title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
+        "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
     return
 
