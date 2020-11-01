@@ -20,8 +20,41 @@ init -1 python:
         if not force_random and renpy.random.randint(1,100) < 20:
             return_character = get_premade_character()
 
-        if height is None:
-            height = 0.825 + (renpy.random.random()/7)
+        if height is None: # use non-linear distribution similar to the 2 dice role curve
+            height = 0.825 + (renpy.random.random()/14) + (renpy.random.random()/14)
+
+        if age is None: # use linear decreasing distribution (more young than old)
+            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + 55 - 18) + 18))
+
+        if relationship is None:
+            if age < 21:
+                relationship = get_random_from_weighted_list([["Single", 70], ["Girlfriend", 30]])
+            elif age < 26:
+                relationship = get_random_from_weighted_list([["Single", 30], ["Girlfriend", 50], ["Fiancée", 20]])
+            elif age < 31:
+                relationship = get_random_from_weighted_list([["Single", 10], ["Girlfriend", 30], ["Fiancée", 40], ["Married", 20]])
+            else:
+                relationship = get_random_from_weighted_list([["Single", 80 - age], ["Girlfriend", 100 - age], ["Fiancée", age * 3], ["Married", age * 4]])
+
+        if kids is None:
+            kids = 0
+            if relationship == "Single":
+                kids += get_random_from_list([0, 0, 0, 0, 1])
+            if relationship == "Girlfriend":
+                kids += get_random_from_list([0, 0, 0, 1, 1])
+            if relationship == "Fiancée":
+                kids += get_random_from_list([0, 0, 1, 1, 1])
+                kids += get_random_from_list([0, 0, 1, 1, 1])
+            if relationship == "Married":
+                kids += get_random_from_list([0, 1, 1, 1, 1])
+                kids += get_random_from_list([0, 1, 1, 1, 1])
+
+            if age < 25:
+                kids -= 1
+            if age > 35:
+                kids += renpy.random.randint(0, 1)
+            if kids < 0:
+                kids = 0
 
         if mc_title is None:
             mc_title = "Stranger"
