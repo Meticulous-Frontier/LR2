@@ -1,4 +1,3 @@
-
 init 2 python:
     erica_workout_wardrobe = wardrobe_from_xml("Erica_W_Wardrobe")
     def erica_mod_initialization(): #Add actionmod as argument#
@@ -1275,14 +1274,14 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person.char "Well... Things are running fairly smoothly here to be honest... I'm not sure what we could have her do. What are her qualifications?"
     "You share what you know about her and what she is studying. Nothing really seems to pique her interest until you mention her doing track and field."
     the_person.char "Oh! She's an athlete?"
-    mc.name "Yeah. Very accomplished in fact. Sometimes we work out together at the gym, in fact."
+    mc.name "Yeah. Very accomplished in fact. Sometimes we work out together at the gym."
     "The wheels in her head are turning. She seems to have the beginning of an idea in her head."
     the_person.char "Some of the girls here are really enjoying the gym membership you've offered... But I've gotten some complaints that after a long day here they are just too tired to make it to the gym."
     "You consider what she is saying, but you aren't sure how [erica.title] could help. After pause though, [the_person.title] continues, clearly brainstorming out loud."
     the_person.char "What if we like... Hired her... To come in, like once a week, and ran a personal fitness class?"
     mc.name "Here at the office?"
-    the_person.char "Sure! It could be company sanctioned, and optional, but I think if it were supported, we would get good attendance. You could even start it like an hour before normal start time so it doesn't effect productivity."
-    mc.name "Wouldn't having people work out in the morning like that effect their energy for the rest of the day?"
+    the_person.char "Sure! It could be company sanctioned, and optional, but I think if it were supported, we would get good attendance. You could even start it like an hour before normal start time so it doesn't affect productivity."
+    mc.name "Wouldn't having people work out in the morning like that affect their energy for the rest of the day?"
     the_person.char "You could make it something low impact? And focus on general well-being... Maybe like a yoga class?"
     "Hmm. Having [erica.title] come in and teach a yoga class once a week is actually a pretty good idea. But having it start before normal business hours, you wonder if there would be enough participation to make it worth it."
     mc.name "Can you do something for me? Take an informal poll with the employees... See how many would be interested in something like that. I don't want to arrange it just to have nobody show up."
