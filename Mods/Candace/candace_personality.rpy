@@ -740,7 +740,7 @@ label candace_sex_end_early(the_person):
                 the_person.char "That's all? Aww, I hope you had a good time with me..."
         else:
             if the_person.arousal > 60:
-                "Wait, you're stopping? Aren't crazy horny right now too?"
+                "Wait, you're stopping? Aren't you crazy horny right now too?"
             else:
                 the_person.char "Don't you want to play with me any more? Oh well, your loss."
 

@@ -193,7 +193,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
                     the_girl.char "Don't be so rough, let us enjoy this."
                     $ the_girl.change_stats(arousal = -5, happiness = -1)
 
-    "After giving her a few seconds to get used to your size she starts to move back and forth, with each trust forward burying yourself nice and deep in her throat."
+    "After taking a few seconds to get used to your size she starts to move back and forth, with each thrust forward, burying your cock nice and deep in her throat."
     return
 
 label blowjob_enhanced_kneel_throat_cum(the_girl):
