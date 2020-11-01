@@ -552,7 +552,7 @@ label candace_supply_order_discount_label():
     "She stops talking for a second as she thinks."
     the_person.char "Ahh fuck it who cares. Whatever it was, they gave me a 10\% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
     "That was... a lot of details."
-    the_person.char "So... I kept going, and got almost all of suppliers to give me some kind of discount! And it hasn't effect my umm... success rate... with sexting afterwards at all!"
+    the_person.char "So... I kept going, and got almost all of our suppliers to give me some kind of discount! And it hasn't effect my umm... success rate... with sexting afterwards at all!"
     "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
     "Fuck it, you decide to just let her get whatever discounts she happens to get and take the extra money without pushing your luck."
     mc.name "That's great. Thank you for your hard work."
