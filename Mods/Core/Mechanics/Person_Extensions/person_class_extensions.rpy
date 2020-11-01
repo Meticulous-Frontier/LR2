@@ -114,6 +114,40 @@ init -1 python:
 
     Person.location = location
 
+    def create_empty_schedule():
+        schedule = {}
+        for x in range(7):
+            schedule[x] = { 0: None, 1: None, 2: None, 3: None, 4: None }
+        return schedule
+
+    def get_alt_schedule(self):
+        if not hasattr(self, "_alt_schedule"):
+            self._alt_schedule = create_empty_schedule()
+        return self._alt_schedule
+
+    def set_alt_schedule(self, location, days = None, times = None):
+        if days is None:
+            days = [0,1,2,3,4,5,6] #Full week if not specified
+        if times is None:
+            times = []
+
+        for the_day in days:
+            for time_chunk in times:
+                self.alt_schedule[the_day][time_chunk] = location
+        return
+
+    Person.set_alt_schedule = set_alt_schedule
+
+    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
+    # clear alternative schedule by calling the_person.clear_alt_schedule()
+    Person.alt_schedule = property(get_alt_schedule, None, None, "Alternative schedule property.")
+
+    def clear_alt_schedule(self):
+        self._alt_schedule = create_empty_schedule()
+        return
+
+    Person.clear_alt_schedule = clear_alt_schedule
+
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
             self._follow_me = False
@@ -680,23 +714,7 @@ init -1 python:
             elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            # # some girls like to go out at night (bar or stripclub) - exclude unique characters
-            # if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
-            #     # since downtown is generic there could be other party locations there
-            #     party_destinations = [downtown_bar, downtown_hotel, downtown]
-            #     if "get_strip_club_foreclosed_stage" in globals():
-            #         if not strip_club_is_closed():
-            #             party_destinations.append(strip_club)
-            #             if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-            #                 party_destinations.append(bdsm_room)
-            #     else:
-            #         party_destinations.append(strip_club)
-
-            #     location.move_person(self, get_random_from_list(party_destinations))
-            # else:
-                # location might change outfit, so moved call to end of this loop
             location.move_person(self, destination) #Always go where you're scheduled to be.
-
         else:
             #She finds somewhere to burn some time
             if not location is destination: # only change outfit if we change location
@@ -759,6 +777,21 @@ init -1 python:
                 event_list.remove(action_to_remove)
 
     Person.run_move = run_move_enhanced
+
+    # enhanced get destination function, that checks the alternative schedule for a destination prior to regular schedule.
+    def get_destination_enhanced(self, specified_day = None, specified_time = None):
+        if specified_day is None:
+            specified_day = day%7 #Today
+        if specified_time is None:
+            specified_time = time_of_day #Now
+
+        alt_destination = self.alt_schedule[specified_day][specified_time]
+        if alt_destination: # if we have an alternative schedule, return that location
+            return alt_destination
+
+        return self.schedule[specified_day][specified_time] #Returns the Room this person should be in during the specified time chunk.
+
+    Person.get_destination = get_destination_enhanced
 
     # extend the default run day function
     def person_run_day_extended(org_func):

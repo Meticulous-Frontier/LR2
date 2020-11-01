@@ -1425,8 +1425,8 @@ label erica_money_problems_yoga_start_label(the_person):
     mc.name "Okay. I'm going to give your number to my HR director. She'll contact you to set up the final details. Her name is [mc.business.hr_director.name]."
     the_person.char "I'll look for it. I'm going to get back to my workout, thank you so much!"
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
-    $ the_person.set_schedule(office, days = [1], times = [0])
-    $ mc.business.hr_director.set_schedule(office, days = [1], times =[0])
+    $ the_person.set_alt_schedule(office, days = [1], times = [0])
+    $ mc.business.hr_director.set_alt_schedule(office, days = [1], times =[0])
     $ mc.business.mandatory_crises_list.append(erica_yoga_event_intro)
     return
 

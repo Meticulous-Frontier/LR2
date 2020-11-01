@@ -210,6 +210,12 @@ init 5 python:
                 people.append([person, place])
         return people
 
+    def update_party_schedules(people):
+        for (person, place) in people:
+            if not person in unique_character_list: # exclude unique characters as to not to interfere with story lines
+                create_party_schedule(person)
+        return
+
     def advance_time_run_turn(people):
         for (person, place) in people: #Run the results of people spending their turn in their current location.
             person.run_turn()
@@ -310,7 +316,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         call advance_time from _call_advance_time_advance_time_enhanced
     if no_events or not jump_to_game_loop:
         return
-    
+
     $ jump_game_loop()
     return
 
@@ -389,6 +395,10 @@ label advance_time_people_run_day_label():
     $ gc.collect()
     #$ renpy.profile_memory(.5, 1024)
     $ renpy.block_rollback()
+
+    # update party schedules once a week (sunday night)
+    if day%7 == 6:
+        $ update_party_schedules(people_to_process)
     return
 
 label advance_time_end_of_day_label():
