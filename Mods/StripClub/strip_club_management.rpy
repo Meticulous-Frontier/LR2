@@ -162,7 +162,7 @@ label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
     the_person.char "They would be more thirsty, so the drinks sold at the end of the day would be a lot, lot more!"
     mc.name "Thank you [the_person.title], that's really a good idea! I'll look into hiring some waitresses as soon as possible."
     $ the_person.draw_person(emotion = "happy", position = "stand4")
-    "[the_person.title] smile back to you, proud to have proven herself worthy."
+    "[the_person.title] smiles back to you, proud to have proven herself worthy."
     $ add_strip_club_manager_hire_more_waitresses_reminder_action()
     return
 
