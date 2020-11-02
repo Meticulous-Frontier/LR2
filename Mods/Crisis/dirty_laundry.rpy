@@ -435,7 +435,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person.char "It's still not cool that you took advantage of me like that, though."
             else:
-                 "Feeling satisfied, you pull [the_person.title] out of the dryer."
+                "Feeling satisfied, you pull [the_person.title] out of the dryer."
                 $ the_person.change_stats(happiness = -5, obedience = -1)
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 the_person.char "You take advantage of me like that and don't even get me off? Not cool, [the_person.mc_title], not cool."
