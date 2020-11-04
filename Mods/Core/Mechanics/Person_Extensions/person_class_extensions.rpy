@@ -214,10 +214,17 @@ init -1 python:
         if not hasattr(self, "_idle_pose"):
             self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
 
-        # for this to work, in all events the_person.draw_person() needs a position parameter from one of the default stand positions
-        # otherwise the girl will be seated when the event starts
-        # if self.location() == self.work:
-        #     return "sitting"
+        if renpy.call_stack_depth() < 2:
+            # we are in the main menu (alternative idle_pos)
+            if self.location() == self.work or self.location() == downtown_bar:
+                 return "sitting"
+            if self.location() == gym:
+                pose = self.event_triggers_dict.get("gym_pose", None)
+                if not pose: # store preferred position in bdsm room (prevent switching on hover)
+                    pose = get_random_from_list(["missionary", "stand2", "back_peek", "stand4", "sitting"])
+                    self.event_triggers_dict["gym_pose"] = pose
+                return pose
+
         if self.location() == bdsm_room:
             pose = self.event_triggers_dict.get("bdsm_room_pose", None)
             if not pose: # store preferred position in bdsm room (prevent switching on hover)
