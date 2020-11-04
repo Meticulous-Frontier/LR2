@@ -209,6 +209,27 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    # change idle position based on location
+    def get_person_idle_pose(self):
+        if not hasattr(self, "_idle_pose"):
+            self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
+
+        # for this to work, in all events the_person.draw_person() needs a position parameter from one of the default stand positions
+        # otherwise the girl will be seated when the event starts
+        # if self.location() == self.work:
+        #     return "sitting"
+        if self.location() == bdsm_room:
+            pose = self.event_triggers_dict.get("bdsm_room_pose", None)
+            if not pose: # store preferred position in bdsm room (prevent switching on hover)
+                pose = get_random_from_list(["cowgirl", "kneeling1", "blowjob"])
+                self.event_triggers_dict["bdsm_room_pose"] = pose
+            return pose
+        return self._idle_pose
+
+    def set_person_idle_pose(self, value):
+        self._idle_pose = value
+
+    Person.idle_pose = property(get_person_idle_pose, set_person_idle_pose, None, "Overrides default idle pose behavior.")
 
     def get_person_weight(self):
         if not hasattr(self, "_weight"):
