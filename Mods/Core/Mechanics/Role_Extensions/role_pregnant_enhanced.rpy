@@ -192,13 +192,34 @@ label silent_pregnant_finish(the_person):
     $ pregnant_finish_person(the_person)
 
     "You get a call from [the_person.possessive_title] early in the morning. You answer it."
-    the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl! I'll be coming back to work today." #Obviously they're all girls for extra fun in 18 years.
-    mc.name "That's amazing, but are you sure you don't need more rest?"
-    if the_person.relationship != "Single":
-        $ so_title = SO_relationship_to_title(the_person.relationship)
-        the_person.char "I'll be fine, I'll be leaving her with my [so_title], so I can come back to work sooner."
+
+    if the_person in [aunt, mom]:
+        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
+        mc.name "That's amazing, where is she now?"
+        the_person.char "I'll be leaving her with my mother, your grand-mother for now."
+
+    elif the_person in [lily, cousin]:
+        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
+        mc.name "That's amazing, where is she now?"
+        the_person.char "I'll be leaving her with our grandma for now, so I can get back to a normal life."
+
+    elif employee_role in the_person.special_role:
+        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl! I'll be coming back to work today." #Obviously they're all girls for extra fun in 18 years.
+        mc.name "That's amazing, but are you sure you don't need more rest?"
+        if the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person.char "I'll be fine, I'll be leaving her with my [so_title], so I can come back to work sooner."
+        else:
+            the_person.char "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
+
     else:
-        the_person.char "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
+        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
+        mc.name "That's amazing, how are you doing?"
+        if the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person.char "I'll be fine, I'll be leaving her with my [so_title]."
+        else:
+            the_person.char "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
 
     the_person.char "I just wanted to let you know. I'll talk to you soon."
     "You say goodbye and [the_person.title] hangs up."
