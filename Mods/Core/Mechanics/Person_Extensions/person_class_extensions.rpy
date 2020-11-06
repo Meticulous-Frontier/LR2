@@ -1090,7 +1090,7 @@ init -1 python:
         self.willpower += amount
         if self.willpower < 0:
             self.willpower = 0
-        return person.willpower
+        return self.willpower
 
     # attach to person object
     Person.change_willpower = change_willpower
@@ -1521,25 +1521,24 @@ init -1 python:
 #########################################
 
     def person__hash__(self):
-        return hash((self.name, self.last_name, self.age))
+        return hash(self.identifier)
 
     Person.__hash__ = person__hash__
     Person.hash = person__hash__
 
     def person__eq__(self, other):
         if isinstance(self, other.__class__):
-            return hash((self.name, self.last_name, self.age)) == hash((other.name, other.last_name, other.age))
+            return hash(self.identifier) == hash(other.identifier)
         return False
 
     Person.__eq__ = person__eq__
 
     def person__ne__(self, other):
         if isinstance(self, other.__class__):
-            return hash((self.name, self.last_name, self.age)) != hash((other.name, other.last_name, other.age))
+            return hash(self.identifier) != hash(other.identifier)
         return True
 
     Person.__ne__ = person__ne__
-
 
 ###################
 # DEBUG FUNCTIONS *
