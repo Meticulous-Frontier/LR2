@@ -1768,36 +1768,38 @@ label erica_weekly_yoga_label(the_person):
             $ scene_manager.remove_actor(the_person)
             $ remaining_person = the_person
             # call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_01
-        if remaining_person.sluttiness > 40:
-            "[remaining_person.title] looks at you, smiling."
-            remaining_person.char "Guess its just you and me. Why don't we find somewhere... private?"
-            $ threesome_partner = get_random_from_list(yoga_list)
-            menu:
-                "Head to your office":
-                    mc.name "I know just the place."
-                    call erica_after_yoga_office_session_label(remaining_person) from _erica_after_yoga_fun_01
-                "Ask her to join the orgy with you" if remaining_person.sluttiness < 80 and erica_get_is_yoga_nude() and willing_to_threesome(remaining_person, threesome_partner):
-                    mc.name "Private? Look around... why would we have to go somewhere private?"
-                    remaining_person.char "Ah, okay."
-                    "Off to one side, you see [threesome_partner.possessive_title], apparently taking a break by herself."
-                    mc.name "Let's go over there and have some fun with [threesome_partner.title]."
-                    remaining_person.char "Sounds good! I'll follow your lead!"
-                    "You and [remaining_person.title] walk over to [threesome_partner.title]. Her eyes light up when she see you two approaching her."
-                    $ scene_manager.add_actor(threesome_partner)
-                    threesome_partner.char "Hello! I was just getting ready to get to work sir..."
-                    mc.name "No need for that yet. Let's have a little fun first."
-                    threesome_partner.char "Yay! I was hoping you would say that!"
-                    call start_threesome(remaining_person, threesome_partner) from _nude_yoga_aftermath_threesome_01
-                    "Satisfied for now, you decide to get cleaned up and ready for work."
-                    call erica_nude_yoga_office_aftermath_label() from _nude_yoga_lobby_survey_01
-                "Decline":
-                    mc.name "Sorry, but the workday is approaching quickly. I have a lot to get done today."
-                    $ remaining_person.change_happiness(-3)
-                    remaining_person.char "Wow... okay I guess..."
-                    "Rejected, [remaining_person.possessive_title] quickly walks off."
-        else:
-            "[remaining_person.title] gives you a shy smile."
-            remaining_person.char "Well... I umm... I'm glad you enjoyed the class. I should probably get going as well..."
+
+        if remaining_person:
+            if remaining_person.effective_sluttiness() > 40:
+                "[remaining_person.title] looks at you, smiling."
+                remaining_person.char "Guess its just you and me. Why don't we find somewhere... private?"
+                $ threesome_partner = get_random_from_list(yoga_list)
+                menu:
+                    "Head to your office":
+                        mc.name "I know just the place."
+                        call erica_after_yoga_office_session_label(remaining_person) from _erica_after_yoga_fun_01
+                    "Ask [threesome_partner.title] to join" if erica_get_is_yoga_nude() and willing_to_threesome(remaining_person, threesome_partner):
+                        mc.name "Private? Look around... why would we have to go somewhere private?"
+                        remaining_person.char "Ah, okay."
+                        "Off to one side, you see [threesome_partner.possessive_title], apparently taking a break by herself."
+                        mc.name "Let's go over there and have some fun with [threesome_partner.title]."
+                        remaining_person.char "Sounds good! I'll follow your lead!"
+                        "You and [remaining_person.title] walk over to [threesome_partner.title]. Her eyes light up when she see you two approaching her."
+                        $ scene_manager.add_actor(threesome_partner)
+                        threesome_partner.char "Hello! I was just getting ready to get to work sir..."
+                        mc.name "No need for that yet. Let's have a little fun first."
+                        threesome_partner.char "Yay! I was hoping you would say that!"
+                        call start_threesome(remaining_person, threesome_partner) from _nude_yoga_aftermath_threesome_01
+                        "Satisfied for now, you decide to get cleaned up and ready for work."
+                        call erica_nude_yoga_office_aftermath_label() from _nude_yoga_lobby_survey_01
+                    "Decline":
+                        mc.name "Sorry, but the workday is approaching quickly. I have a lot to get done today."
+                        $ remaining_person.change_happiness(-3)
+                        remaining_person.char "Wow... okay I guess..."
+                        "Rejected, [remaining_person.possessive_title] quickly walks off."
+            else:
+                "[remaining_person.title] gives you a shy smile."
+                remaining_person.char "Well... I umm... I'm glad you enjoyed the class. I should probably get going as well..."
 
     elif erica_get_is_yoga_nude():  #You didn't really watch, but the girls having sex all around you is distracting.
         "You try to make conversation with the duo, but the sounds of sex building in the room is getting to be distracting."
