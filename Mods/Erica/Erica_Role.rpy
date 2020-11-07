@@ -793,7 +793,7 @@ label erica_race_crisis_label(the_person):
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
         "As you are trash talking each other, [lily.title] and [yoga_assistant.title] surprise you when they walk up."
         $ scene_manager.add_actor(lily)
-        $ scene_manager.add_Actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant)
         lily.char "Wow bro, you are running in a charity race? And I had to hear about it from [the_person.name]?"
         yoga_assistant.char "I know right? And for breast cancer research? I probably would've signed up if I'd known about it earlier!"
         the_person.char "Ah! Thanks for coming out!"
@@ -808,7 +808,7 @@ label erica_race_crisis_label(the_person):
         $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
     elif erica_get_is_doing_yoga_sessions():
         "As you are trash talking each other, [yoga_assistant.title] surprises you when she walks up."
-        $ scene_manager.add_Actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant)
         yoga_assistant.char "Wow, a charity race? This is great!"
         the_person.char "Ah! Thanks for coming out!"
         yoga_assistant.char "Of course! I'm surprise to you see you here, [yoga_assistant.mc_title]! I'm glad you are doing your part for breast cancer research though!"
@@ -841,14 +841,14 @@ label erica_race_crisis_label(the_person):
     "You settle into your pace, determined to let your energy carry you through the race, no matter what happens. You pass the second kilometer marker"
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
         $ scene_manager.add_actor(lily)
-        $ scene_manager.add_Actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant)
         "[lily.title] and [yoga_assistant.possessive_title] are standing next to the course, and they begin cheering when they see you."
         yoga_assistant.char "Go [yoga_assistant.mc_title]!"
         lily.char "She's just barely ahead, you can do it!"
         $ scene_manager.clear_scene(reset_actor = False)
         "You pass the girls and keep running."
     elif erica_get_is_doing_yoga_sessions():
-        $ scene_manager.add_Actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant)
         "[yoga_assistant.possessive_title] is standing next to the course, and begins cheering when she sees you."
         yoga_assistant.char "Go [yoga_assistant.mc_title]! She's just ahead of you, you can do it!"
         $ scene_manager.clear_scene(reset_actor = False)
@@ -890,7 +890,7 @@ label erica_race_crisis_label(the_person):
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
         "[lily.title] and [yoga_assistant.title] walk up as you are catching your breath."
         $ scene_manager.add_actor(lily)
-        $ scene_manager.add_Actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant)
         yoga_assistant.char "Wow! What a finish! That was amazing! And you won [yoga_assistant.mc_title]!"
         lily.char "But don't get a big head. She probably let you win!"
         "[the_person.possessive_title] is still catching her breath so she doesn't have a response yet."
@@ -908,7 +908,7 @@ label erica_race_crisis_label(the_person):
         $ yoga_assistant = None
     elif erica_get_is_doing_yoga_sessions():
         "[yoga_assistant.title] walks up as you are catching your breath."
-        $ scene_manager.add_Actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant)
         yoga_assistant.char "Wow! What a finish! That was amazing! And you won [yoga_assistant.mc_title]!"
         mc.name "Thank you! I'm not sure though, I think maybe [the_person.title] let me win on purpose..."
         the_person.char "No no... I gave it my all..."
