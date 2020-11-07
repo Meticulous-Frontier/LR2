@@ -579,6 +579,8 @@ label HR_director_monday_meeting_label(the_person):
     mc.name "Alright, I think that is all for today. Unless something comes up, same time next week?"
     $ the_person.draw_person(position = "stand2")
     the_person.char "Sounds great! I'll see you then!"
+
+    $ add_hr_director_monday_meeting_action(the_person)
     $ the_person.apply_planned_outfit()
     return
 
