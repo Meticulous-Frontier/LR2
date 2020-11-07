@@ -1217,15 +1217,13 @@ init -1 python:
             bottom_render = bottom_displayable.render(x_size, y_size, 0, 0)
             top_render = top_displayable.render(x_size, y_size, 0, 0)
 
-            global current_draw_number
-            current_draw_number += 1
+            global global_draw_number
+            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
 
             global prepared_animation_arguments
-            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number]
+            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder]
 
-            global person_being_drawn
-            person_being_drawn = self
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, animation_draw_number, draw_layer)
 
         else:
             if wipe_scene:
