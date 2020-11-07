@@ -12,6 +12,7 @@ init 5 python:
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
     python:
+        cousin.set_alt_schedule(None, times = [3])  # reset alternative schedule
         for person in strip_club.people:
             if person is not cousin:
                 strip_club.move_person(person, downtown) # Failsafe to remove anyone improperly scheduled to be at the strip club

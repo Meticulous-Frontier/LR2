@@ -31,7 +31,8 @@ init 3 python:
     night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_pink)
 
     night_clothes_slutty = Outfit("Slutty Night Clothes")
-    night_clothes_slutty.add_upper(lingerie_one_piece.get_copy(),colour_yellow)
+    night_clothes_slutty.add_upper(strappy_bra.get_copy(),colour_yellow)
+    night_clothes_slutty.add_lower(strappy_panties.get_copy(),colour_yellow)
     night_clothes_slutty.add_feet(pumps.get_copy(),colour_black)
     night_clothes_slutty.add_feet(fishnets.get_copy(),colour_black)
 
@@ -401,13 +402,11 @@ label dirty_laundry_stuck_in_dryer(the_person):
             mc.name "Don't worry, I know how to help you."
 
             $ the_item = the_person.outfit.get_lower_top_layer()
-            if the_item.is_extension:
-                $ the_item = the_person.outfit.get_upper_top_layer()
             if the_item:
-                "You move your hands along [the_person.possessive_title]'s ass and remove her [the_item.display_name]"
-                $ the_person.draw_animated_removal(the_item, position = "doggy")
+                "You move your hands along [the_person.possessive_title]'s ass and slide her [the_item.display_name] to the side."
+                $ the_person.draw_animated_removal(the_item, position = "doggy", half_off_instead = True)
 
-            the_person.char "[the_person.mc_title]? I don't think taking off my [the_item.display_name] will get me out of here."
+            the_person.char "[the_person.mc_title]? I don't moving my [the_item.display_name] will get me out of here."
             mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
             the_person.char "Okay, go ahead, just don't pull too much on my head."
 
@@ -417,24 +416,26 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
 
             "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
-            the_person.char "What the fuck! You're going to fuck me like {i}this?{/i}"
+            the_person.char "What the fuck! You're going to fuck me like {i}this{/i}?"
             mc.name "Yes, and don't pretend that you don't like it, because I know you do."
             call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer
             $ the_report = _return
-            "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."
             if the_report.get("girl orgasms", 0) > 1:
+                "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."
                 $ the_person.change_stats(happiness = 10, obedience = 5)
                 $ the_person.draw_person(position = "stand4", emotion = "orgasm")
                 the_person.char "Oh my god, I came so much... I didn't think that would be possible in this position."
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person.char "It's still not cool that you took advantage of me like that, even if it was really good."
             elif the_report.get("girl orgasms", 0) > 0:
+                "After you are done, you help [the_person.title] out of the dryer."
                 $ the_person.change_stats(happiness = 5, obedience = 3)
                 $ the_person.draw_person(position = "stand4", emotion = "orgasm")
                 the_person.char "Oh wow, that really felt good, thank you [the_person.mc_title]."
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person.char "It's still not cool that you took advantage of me like that, though."
             else:
+                "Feeling satisfied, you pull [the_person.title] out of the dryer."
                 $ the_person.change_stats(happiness = -5, obedience = -1)
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 the_person.char "You take advantage of me like that and don't even get me off? Not cool, [the_person.mc_title], not cool."

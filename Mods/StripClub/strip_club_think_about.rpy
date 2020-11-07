@@ -39,15 +39,15 @@ init 3302 python:
     def cousin_meet_at_strip_club_requirement(the_person, target_day):
         if time_of_day == 3 and day >= target_day:
             return True
-        return False 
-    
+        return False
+
     def add_strip_club_offer_expire_action():
         strip_club_offer_expire_action = Action("Strip club offer is expiring", strip_club_offer_expire_requirement, "strip_club_offer_expire_label")
         mc.business.mandatory_crises_list.append(strip_club_offer_expire_action)
 
     def add_cousin_meet_at_strip_club():
         cousin_meet_at_strip_club_action = Action("Meet cousin at strip club", cousin_meet_at_strip_club_requirement, "strip_club_bought_strippers_selection_label", requirement_args = day + 1)
-        cousin.set_schedule(strip_club, times = [3])
+        cousin.set_alt_schedule(strip_club, times = [3]) # set alternative schedule
         cousin.add_unique_on_room_enter_event(cousin_meet_at_strip_club_action)
 
     def add_think_about_buying_strip_club_action():

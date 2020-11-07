@@ -156,7 +156,7 @@ init 2 python:
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
     ophelia_gets_dumped = Action("Ophelia gets dumped", ophelia_gets_dumped_requirement, "ophelia_gets_dumped_label", menu_tooltip = "Ophelia is back on the market")
-    ophelia_coworker_conversation_overhear = Action("Ophelia talks with a coworker", ophelia_coworker_conversation_overhear_requirement, "ophelia_coworker_conversation_overhear_label", menu_tooltip = "Ophelia vents to a coworker")
+    ophelia_coworker_conversation_overhear = Action("Ophelia talks with a co-worker", ophelia_coworker_conversation_overhear_requirement, "ophelia_coworker_conversation_overhear_label", menu_tooltip = "Ophelia vents to a co-worker")
     ophelia_give_chocolate = Action("Buy Ophelia Dark Chocolates", ophelia_give_chocolate_requirement, "ophelia_give_chocolate_label", menu_tooltip = "Buy Ophelia some chocolates. Can use to apply serum")
     ophelia_learn_chocolate_love = Action("Learn Ophelia loves chocolate", ophelia_learn_chocolate_love_requirement, "ophelia_learn_chocolate_love_label")
     ophelia_ex_bf_plan_pics = Action("Ask about Ex", ophelia_ex_bf_plan_pics_requirement, "ophelia_ex_bf_plan_pics_label", menu_tooltip = "See if you can help")
@@ -215,7 +215,7 @@ label ophelia_gets_dumped_label(the_person):
 
 label ophelia_coworker_conversation_overhear_label(the_person):
     $ ex_name = ophelia_get_ex_name()
-    "You walk into the salon. You notice [the_person.title] talking to one of her coworkers, probably about her recent breakup."
+    "You walk into the salon. You notice [the_person.title] talking to one of her co-workers, probably about her recent breakup."
     the_person.char "I know! But it gets worse! He is still friends with me on Facebook, you know?"
     the_person.char "This morning I got a notification, [ex_name] is now in a relationship. I was like... what the fuck?"
     the_person.char "So I look her up. Its the fucking secretary at his office! They're already planning a vacation together this summer!"
@@ -224,7 +224,7 @@ label ophelia_coworker_conversation_overhear_label(the_person):
     "[the_person.title] motions her hands in a way that makes it clear that this woman her ex is dating is very well endowed."
     "?????" "It's not her fault she's blessed in the chest."
     the_person.char "In her photo history was a pic of her in a bikini... there's absolutely no way they are real."
-    "[the_person.title] and her coworker continue their banter for a bit."
+    "[the_person.title] and her co-worker continue their banter for a bit."
     $ the_person.event_triggers_dict["coworker_overhear"] = 1
     "Maybe you should chat with her for a bit? See if you can learn something about her that would give you an opportunity to cheer her up?"
     "You never know what you might learn with some small talk."
@@ -589,7 +589,7 @@ label ophelia_revenge_date_label():
     $ mc.change_location(fancy_restaurant)
     $ mc.location.show_background()
     "You arrive at the restaurant. There are a few people in front of you, also waiting on their tables. It seems they are running a little bit behind tonight."
-    the_person.char "Hey, I'm just gonna run the lady's room to check my hair, I'll be right back!"
+    the_person.char "Hey, I'm just gonna run to the lady's room to check my hair, I'll be right back!"
     mc.name "Sure thing."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     "You continue to wait for a few moments. You hear someone walk up behind you in line. At first, you pay the person no attention, but then you feel a tap on your shoulder."
@@ -641,14 +641,14 @@ label ophelia_revenge_date_label():
     "You look in the direction that [the_person.title] is indicating."
     $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
     "Sure enough, her ex is sitting across from the woman you ran into earlier."
-    "She must be incredible in bed, for him to be with her instead of [the_person.title], with the mental disadvatages she has."
+    "She must be incredible in bed, for him to be with her instead of [the_person.title], with the mental disadvantages she has."
     the_person.char "Alright, let's just play it cool for now. I'm sure he'll notice us eventually."
     "You decide to enjoy this wonderful meal and restaurant for now. You do your best to make conversation with [the_person.title], but you can tell she is a little distracted."
-    "You share a nice bottle of wine. The salad is crisp and fresh. Soon your entrees arrive."
+    "You share a nice bottle of wine. The salad is crisp and fresh. Soon your entrées arrive."
     "You steal a glance over at the other table now and then. Once in a while, [candace.title] gives you a wink, but [ex_name] seems to be completely oblivious."
     "[the_person.possessive_title]'s mood seems to be deteriorating by the minute."
     $ scene_manager.update_actor(candace, position = "walking_away")
-    "You notice that [candace.title] get's up and goes to the lady's room. You nudge [the_person.title]."
+    "You notice that [candace.title] gets up and goes to the lady's room. You nudge [the_person.title]."
     $ scene_manager.remove_actor(candace, reset_actor = False)
     the_person.char "Okay... I guess it's now or never... I'm gonna go talk to him!"
     "[the_person.title] gets up and walks towards the bathroom, but then stops next to her ex's table, pretending to be surprised to see him."
@@ -720,9 +720,9 @@ label ophelia_revenge_date_label():
     the_person.char "Umm, I have some gin and some lemons. I love gin sours, so that's usually all I really keep around the house..."
     $ the_person.event_triggers_dict["favorite_drink"] = "gin sour"  #If not already set
     mc.name "That sounds great. Why don't we just have a couple of drinks and relax for a bit? We can call it even."
-    the_person.char "Relax, huh? Alright, I suppose I could be convinced to along with that."
+    the_person.char "Relax, huh? Alright, I suppose I could be convinced to go along with that."
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "[the_person.possessive_title] disappears for a bit. You take of your shoes and get comfortable on her couch."
+    "[the_person.possessive_title] disappears for a bit. You take off your shoes and get comfortable on her couch."
     "She returns with a couple of drinks."
     $ scene_manager.update_actor(the_person, position = "stand4")
     the_person.char "Two gin sours!"
@@ -856,9 +856,9 @@ label ophelia_talk_about_candace_label(the_person):
     mc.name "So, I was wondering if I could talk to you for a few minutes about something."
     the_person.char "Sure! You know I always have time for you, [the_person.mc_title]."
     mc.name "Right, well, this might be kind of a sore subject, so please just hear me out before you rush to any judgement."
-    the_person.char "Ok... I'm listening..."
-    mc.name "Ok, well, I found out some things about [ex_name], your ex? And they have me a little bit concerned."
-    the_person.char "Concerned? Honey, me and him are over, theres no reason for you to be concerned."
+    the_person.char "I'm listening..."
+    mc.name "OK, well, I found out some things about [ex_name], your ex? And they have me a little bit concerned."
+    the_person.char "Concerned? Honey, me and him are over, there's no reason for you to be concerned."
     mc.name "For you, sure."
     the_person.char "Then for who? And how did you learn more about [ex_name], anyway?"
     mc.name "Well, you see, I've been talking a little with the girl he is dating, [candace.name]."
@@ -886,7 +886,7 @@ label ophelia_talk_about_candace_label(the_person):
     mc.name "For the last few weeks, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
     the_person.char "Ok... why are you talking to me about this again? Seems like you've got it all figured out."
     mc.name "[ex_name] has told her that if she quits, he is dumping her. But you and I both know, she isn't smart enough to secure her personal accounts and other things."
-    mc.name "Remember when you found his facebook logged on in your laptop? You said, locking down social media accounts is part of breakup 101!"
+    mc.name "Remember when you found his Facebook logged on in your laptop? You said, locking down social media accounts is part of breakup 101!"
     the_person.char "Yeah, that's true."
     mc.name "I can get her job security, but I don't know how to handle [ex_name]. You have more experience with that!"
     the_person.char "So... let me get this straight."

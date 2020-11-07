@@ -114,6 +114,40 @@ init -1 python:
 
     Person.location = location
 
+    def create_empty_schedule():
+        schedule = {}
+        for x in range(7):
+            schedule[x] = { 0: None, 1: None, 2: None, 3: None, 4: None }
+        return schedule
+
+    def get_alt_schedule(self):
+        if not hasattr(self, "_alt_schedule"):
+            self._alt_schedule = create_empty_schedule()
+        return self._alt_schedule
+
+    def set_alt_schedule(self, location, days = None, times = None):
+        if days is None:
+            days = [0,1,2,3,4,5,6] #Full week if not specified
+        if times is None:
+            times = []
+
+        for the_day in days:
+            for time_chunk in times:
+                self.alt_schedule[the_day][time_chunk] = location
+        return
+
+    Person.set_alt_schedule = set_alt_schedule
+
+    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
+    # clear alternative schedule by calling the_person.clear_alt_schedule()
+    Person.alt_schedule = property(get_alt_schedule, None, None, "Alternative schedule property.")
+
+    def clear_alt_schedule(self):
+        self._alt_schedule = create_empty_schedule()
+        return
+
+    Person.clear_alt_schedule = clear_alt_schedule
+
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
             self._follow_me = False
@@ -175,6 +209,34 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    # change idle position based on location
+    def get_person_idle_pose(self):
+        if not hasattr(self, "_idle_pose"):
+            self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
+
+        if renpy.call_stack_depth() < 2:
+            # we are in the main menu (alternative idle_pos)
+            if self.location() == self.work or self.location() == downtown_bar:
+                 return "sitting"
+            if self.location() == gym:
+                pose = self.event_triggers_dict.get("gym_pose", None)
+                if not pose: # store preferred position in bdsm room (prevent switching on hover)
+                    pose = get_random_from_list(["missionary", "stand2", "back_peek", "stand4", "sitting"])
+                    self.event_triggers_dict["gym_pose"] = pose
+                return pose
+
+        if self.location() == bdsm_room:
+            pose = self.event_triggers_dict.get("bdsm_room_pose", None)
+            if not pose: # store preferred position in bdsm room (prevent switching on hover)
+                pose = get_random_from_list(["cowgirl", "kneeling1", "blowjob"])
+                self.event_triggers_dict["bdsm_room_pose"] = pose
+            return pose
+        return self._idle_pose
+
+    def set_person_idle_pose(self, value):
+        self._idle_pose = value
+
+    Person.idle_pose = property(get_person_idle_pose, set_person_idle_pose, None, "Overrides default idle pose behavior.")
 
     def get_person_weight(self):
         if not hasattr(self, "_weight"):
@@ -680,23 +742,7 @@ init -1 python:
             elif not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
 
-            # # some girls like to go out at night (bar or stripclub) - exclude unique characters
-            # if time_of_day == 4 and not self in unique_character_list and destination is self.home and renpy.random.randint(0, 100) <= 10:
-            #     # since downtown is generic there could be other party locations there
-            #     party_destinations = [downtown_bar, downtown_hotel, downtown]
-            #     if "get_strip_club_foreclosed_stage" in globals():
-            #         if not strip_club_is_closed():
-            #             party_destinations.append(strip_club)
-            #             if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-            #                 party_destinations.append(bdsm_room)
-            #     else:
-            #         party_destinations.append(strip_club)
-
-            #     location.move_person(self, get_random_from_list(party_destinations))
-            # else:
-                # location might change outfit, so moved call to end of this loop
             location.move_person(self, destination) #Always go where you're scheduled to be.
-
         else:
             #She finds somewhere to burn some time
             if not location is destination: # only change outfit if we change location
@@ -759,6 +805,21 @@ init -1 python:
                 event_list.remove(action_to_remove)
 
     Person.run_move = run_move_enhanced
+
+    # enhanced get destination function, that checks the alternative schedule for a destination prior to regular schedule.
+    def get_destination_enhanced(self, specified_day = None, specified_time = None):
+        if specified_day is None:
+            specified_day = day%7 #Today
+        if specified_time is None:
+            specified_time = time_of_day #Now
+
+        alt_destination = self.alt_schedule[specified_day][specified_time]
+        if alt_destination: # if we have an alternative schedule, return that location
+            return alt_destination
+
+        return self.schedule[specified_day][specified_time] #Returns the Room this person should be in during the specified time chunk.
+
+    Person.get_destination = get_destination_enhanced
 
     # extend the default run day function
     def person_run_day_extended(org_func):
@@ -1029,7 +1090,7 @@ init -1 python:
         self.willpower += amount
         if self.willpower < 0:
             self.willpower = 0
-        return person.willpower
+        return self.willpower
 
     # attach to person object
     Person.change_willpower = change_willpower
@@ -1156,15 +1217,13 @@ init -1 python:
             bottom_render = bottom_displayable.render(x_size, y_size, 0, 0)
             top_render = top_displayable.render(x_size, y_size, 0, 0)
 
-            global current_draw_number
-            current_draw_number += 1
+            global global_draw_number
+            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
 
             global prepared_animation_arguments
-            prepared_animation_arguments = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, current_draw_number]
+            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder]
 
-            global person_being_drawn
-            person_being_drawn = self
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, current_draw_number)
+            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, animation_draw_number, draw_layer)
 
         else:
             if wipe_scene:
@@ -1460,25 +1519,24 @@ init -1 python:
 #########################################
 
     def person__hash__(self):
-        return hash((self.name, self.last_name, self.age))
+        return hash(self.identifier)
 
     Person.__hash__ = person__hash__
     Person.hash = person__hash__
 
     def person__eq__(self, other):
         if isinstance(self, other.__class__):
-            return hash((self.name, self.last_name, self.age)) == hash((other.name, other.last_name, other.age))
+            return hash(self.identifier) == hash(other.identifier)
         return False
 
     Person.__eq__ = person__eq__
 
     def person__ne__(self, other):
         if isinstance(self, other.__class__):
-            return hash((self.name, self.last_name, self.age)) != hash((other.name, other.last_name, other.age))
+            return hash(self.identifier) != hash(other.identifier)
         return True
 
     Person.__ne__ = person__ne__
-
 
 ###################
 # DEBUG FUNCTIONS *

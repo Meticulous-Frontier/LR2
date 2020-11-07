@@ -20,8 +20,41 @@ init -1 python:
         if not force_random and renpy.random.randint(1,100) < 20:
             return_character = get_premade_character()
 
-        if height is None:
-            height = 0.825 + (renpy.random.random()/7)
+        if height is None: # use non-linear distribution similar to the 2 dice role curve
+            height = 0.825 + (renpy.random.random()/14) + (renpy.random.random()/14)
+
+        if age is None: # use linear decreasing distribution (more young than old)
+            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + 55 - 18) + 18))
+
+        if relationship is None:
+            if age < 21:
+                relationship = get_random_from_weighted_list([["Single", 70], ["Girlfriend", 30]])
+            elif age < 26:
+                relationship = get_random_from_weighted_list([["Single", 30], ["Girlfriend", 50], ["Fiancée", 20]])
+            elif age < 31:
+                relationship = get_random_from_weighted_list([["Single", 10], ["Girlfriend", 30], ["Fiancée", 40], ["Married", 20]])
+            else:
+                relationship = get_random_from_weighted_list([["Single", 80 - age], ["Girlfriend", 100 - age], ["Fiancée", age * 3], ["Married", age * 4]])
+
+        if kids is None:
+            kids = 0
+            if relationship == "Single":
+                kids += get_random_from_list([0, 0, 0, 0, 1])
+            if relationship == "Girlfriend":
+                kids += get_random_from_list([0, 0, 0, 1, 1])
+            if relationship == "Fiancée":
+                kids += get_random_from_list([0, 0, 1, 1, 1])
+                kids += get_random_from_list([0, 0, 1, 1, 1])
+            if relationship == "Married":
+                kids += get_random_from_list([0, 1, 1, 1, 1])
+                kids += get_random_from_list([0, 1, 1, 1, 1])
+
+            if age < 25:
+                kids -= 1
+            if age > 35:
+                kids += renpy.random.randint(0, 1)
+            if kids < 0:
+                kids = 0
 
         if mc_title is None:
             mc_title = "Stranger"
@@ -53,6 +86,8 @@ init -1 python:
         if not starting_wardrobe:
             rebuild_wardrobe(return_character)
         update_person_outfit(return_character, -0.2) # choose a less slutty outfit as planned outfit
+
+        create_party_schedule(return_character)
 
         return return_character
 
@@ -259,6 +294,50 @@ init -1 python:
         enhance_existing_wardrobe(person, 8)
         return
 
+    def get_party_destinations():
+        party_destinations = []
+
+        def add_party_destination_by_room(room):    # add correct room object from list_of_places (prevents people disappearing)
+            found = find_in_list(lambda x: x.name == room.name, list_of_places)
+            if found:
+                party_destinations.append(found)
+
+        for room in [downtown_bar, downtown_hotel, downtown]:
+            add_party_destination_by_room(room)
+
+        if "get_strip_club_foreclosed_stage" in globals():
+            if not strip_club_is_closed():
+                add_party_destination_by_room(strip_club)
+                if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                    add_party_destination_by_room(bdsm_room)
+        else:
+            party_destinations.append(strip_club)
+
+        return party_destinations
+
+
+    def create_party_schedule(person):
+        person.set_alt_schedule(None, times = [4])
+
+        count = 0
+        party_destinations = get_party_destinations()
+        if person.get_opinion_score("Mondays") > 0:
+            person.alt_schedule[0][4] = get_random_from_list(party_destinations)
+            count += 1
+        if person.get_opinion_score("Fridays") > 0:
+            person.alt_schedule[4][4] = get_random_from_list(party_destinations)
+            count += 1
+        if person.get_opinion_score("the weekend") > 0:
+            person.alt_schedule[5][4] = get_random_from_list(party_destinations)
+            person.alt_schedule[6][4] = get_random_from_list(party_destinations)
+            count += 2
+
+        while count < 2:
+            rnd_day = renpy.random.randint(0, 6)
+            person.alt_schedule[rnd_day][4] = get_random_from_list(party_destinations)
+            count += 1
+        return
+
     def create_bimbo():
         # add one bimbo to the game (on start of game)
         person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
@@ -323,6 +402,7 @@ init -1 python:
             update_random_person(person)
             rebuild_wardrobe(person)
             update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
+            create_party_schedule(person)
         return
 
     def update_special_characters_opinions():
@@ -336,6 +416,7 @@ init -1 python:
                 update_random_person(person)
                 rebuild_wardrobe(person)
                 update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
+                create_party_schedule(person)
         return
 
     def update_unique_character_wardrobes():
@@ -415,14 +496,15 @@ label activate_generic_personality(stack):
     python:
         create_unique_character_list()
 
-        create_bimbo()
+        for i in __builtin__.range(2):
+            create_bimbo()
 
         # create two random people with the alpha personality (they have a very low chance of being created at random)
-        for i in __builtin__.range(2):
+        for i in __builtin__.range(3):
             create_alpha_personality()
 
         # add two random hookers to the game (on start of game)
-        for i in __builtin__.range(2):
+        for i in __builtin__.range(3):
             create_hooker()
 
         update_main_character_actions()

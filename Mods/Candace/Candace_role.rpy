@@ -160,7 +160,7 @@ label candace_meet_at_office_store_label(the_person):
     $ the_person.draw_person(position = "walking_away")
     "You watch as [the_person.title] walks to the back room to pick up her supplies."
     "There is something that just doesn't seem right here. You aren't sure what it is exactly, but you feel like you should really get to know [the_person.title] better."
-    "If nothing else, maybe you could convince to have a little fun sometime..."
+    "If nothing else, maybe you could convince her to have a little fun sometime..."
     $ the_person.event_triggers_dict["met_at_store"] = 1
     # make sure candace is in unique character list (prevent MC hire button)
     if candace not in unique_character_list:
@@ -267,7 +267,7 @@ label candace_talk_about_bf_control(the_person):
         mc.name "I'm not sure. Is there something in particular that is bothering you?"
         the_person.char "Well, I don't mean to complain, but, it just feels like everyday there are more and more rules!"
         mc.name "He gives you... rules?"
-        the_person.char "I mean, at first it was okay, and kinda made sense. No fucking other guys, stop spending all your paycheck at the strip club."
+        the_person.char "I mean, at first it was okay, and kinda made sense. No fucking other guys, stop spending all your pay-check at the strip club."
         the_person.char "But it feels like everyday he's adding some kind of new rule! I can hardly keep track of them all!"
         the_person.char "No going to the bar without him. No talking with the other men at his business. Leave my location setting shared with him on my phone."
         "It really does seem to be what you feared it might be. Her boyfriend is an overbearing psychopath."
@@ -305,7 +305,7 @@ label candace_talk_about_previous_work(the_person):
         $ candace_increase_doubt()
         mc.name "Yeah, my business does the same thing? You know, if you quit, I would totally hire you to work for me."
         if candace_get_ready_to_quit():
-            the_person.char "That sounds amazing. Are you sure? I mean, I feel like theres something wrong with me sometimes. Are you sure you would take me?"
+            the_person.char "That sounds amazing. Are you sure? I mean, I feel like there's something wrong with me sometimes. Are you sure you would take me?"
         else:
             the_person.char "That sounds too good to be true... so it must be! My boyfriend keeps telling me he's the only one who would put up with me. Are you sure you would take me?"
         mc.name "You would be great, I would love have someone like you on board."
@@ -499,21 +499,21 @@ label candace_overhear_supply_order_label(the_person):
     the_person.char "Oh! Certainly... I'd be glad to show you anything you want... let me see here."
     "She goes through a draw in her desk and pulls out an empty vial. She tries holding it up to the camera."
     if the_person.outfit.tits_available():
-        "????" "Its too close... can you back it up a little bit?... Yeah a bit farther..."
+        "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
         "????" "Now its having a hard time focusing... can you move the camera closer?"
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
     else:
-        "????" "I can't make out the label, theres too many colors in the background..."
+        "????" "I can't make out the label, there's too many colors in the background..."
         the_person.char "Oh! I know how to fix that."
         "You are hardly surprised when you see [the_person.title] start to take her top off."
         $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
         the_person.char "How about now?"
-        "????" "Its too close... can you back it up a little bit?... Yeah a bit farther..."
+        "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
-        "????" "Now its having a hard time focusing... can you move the camera closer?"
+        "????" "Now it's having a hard time focusing... can you move the camera closer?"
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
-    the_person.char "Are you getting a good look sir? Of the label of course!"
+    the_person.char "Are you getting a good look sir? Of the label, of course!"
     "????" "Yeah, I see it now. Calcium phosphide. You've been most helpful! I can get you a discount on those if you'd like, as thanks for your big... help"
     "[the_person.title] chuckles. You notice her nipples are getting a little stiffer... she seems to really be enjoying this..."
     the_person.char "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
@@ -552,7 +552,7 @@ label candace_supply_order_discount_label():
     "She stops talking for a second as she thinks."
     the_person.char "Ahh fuck it who cares. Whatever it was, they gave me a 10\% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
     "That was... a lot of details."
-    the_person.char "So... I kept going, and got almost all of suppliers to give me some kind of discount! And it hasn't effect my umm... success rate... with sexting afterwards at all!"
+    the_person.char "So... I kept going, and got almost all of our suppliers to give me some kind of discount! And it hasn't affected my umm... success rate... with sexting afterwards at all!"
     "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
     "Fuck it, you decide to just let her get whatever discounts she happens to get and take the extra money without pushing your luck."
     mc.name "That's great. Thank you for your hard work."
