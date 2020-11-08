@@ -136,7 +136,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                 "Her eyes are glued to yours while she slowly slips the big dildos in both her holes."
             "You lock the belts on her legs, arms, neck and stomach: she can't move anymore."
             the_person.char "Oh my god! I feel..."
-            mc.name "That your master own you? You're my good slave, and good slaves should be rewarded."
+            mc.name "That your master owns you? You're my good slave, and good slaves should be rewarded."
             $ the_person.change_obedience (5)
             "You turn on the chair and set the vibrations at:"
             menu dildochair_reward_menu:
@@ -281,7 +281,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                 "Her eyes are glued to yours while she slowly slips the big dildos in both her holes."
             "You lock the belts on her legs, arms, neck and stomach: she can't move anymore."
             the_person.char "Oh my god! I feel..."
-            mc.name "That your master own you? So that's the right feeling, even if you're not yet a good slave."
+            mc.name "That your master owns you? So that's the right feeling, even if you're not yet a good slave."
             $ the_person.change_obedience (5)
             "You turn on the chair and set the vibrations at:"
             menu dildochair_punish_menu:
@@ -431,7 +431,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
     $ the_group = GroupDisplayManager([mistress, the_person], mistress)
     $ the_group.draw_group()
     $ the_group.draw_person(mistress, position = "stand4", emotion = "happy")
-    mistress.char "Sure [mistress.mc_title], how many dildos do you want I install on the chair?"
+    mistress.char "Sure [mistress.mc_title], how many dildos do you want me to install on the chair?"
     menu:
         "One dildo":
             $ the_person.event_triggers_dict["dildochair_dildos"] = 1
@@ -496,7 +496,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
             the_person.char "Oh my god! I feel..."
             $ the_group.set_primary(mistress)
             $ the_group.draw_person(mistress, position = "standing_doggy", emotion = "happy")
-            mistress.char "That your master own you? You're a good slave, and good slaves should be rewarded."
+            mistress.char "That your master owns you? You're a good slave, and good slaves should be rewarded."
             $ the_group.draw_person(mistress, position = "stand4", emotion = "happy")
             $ the_group.set_primary(the_person)
             $ the_group.draw_person(the_person, position = "sitting", emotion = "happy")
@@ -670,7 +670,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
             the_person.char "Oh my god! I feel..."
             $ the_group.set_primary(mistress)
             $ the_group.draw_person(mistress, position = "standing_doggy", emotion = "happy")
-            mistress.char "That your master own you? You're a bad slave, and bad slaves should be punished."
+            mistress.char "That your master owns you? You're a bad slave, and bad slaves should be punished."
             $ the_group.draw_person(mistress, position = "stand4", emotion = "happy")
             $ the_group.set_primary(the_person)
             $ the_group.draw_person(the_person, position = "sitting", emotion = "sad")
