@@ -1338,11 +1338,15 @@ init -1 python:
         return added
     Person.add_role = add_role
 
-    def remove_role(self, role):
+    def remove_role(self, role, remove_all = False, remove_linked = True):
         if role in self.special_role:
+            if remove_linked:
+                for linked_role in role.linked_roles:
+                    self.remove_role(role, remove_all, remove_linked)
             self.special_role.remove(role)
             return True
         return False
+
     Person.remove_role = remove_role
 
     # helper function to determine if person is dominant
