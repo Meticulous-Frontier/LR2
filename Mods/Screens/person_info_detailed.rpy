@@ -18,21 +18,53 @@ init 2: # Need to allow for None name roles in this screen as well.
                 ysize 120
                 xalign 0.5
                 background "#1a45a1aa"
-                vbox:
-                    xalign 0.5 xanchor 0.5
-                    text "[the_person.name] [the_person.last_name]" style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
-                    if not mc.business.get_employee_title(the_person) == "None":
-                        text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
+                hbox:
+                    vbox:
+                        xsize (1100 if persistent.pregnancy_pref > 0 else 1700)
+                        xalign 0.5 xanchor 0.5
+                        text "[the_person.name] [the_person.last_name]" style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
+                        if not mc.business.get_employee_title(the_person) == "None":
+                            text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
 
-                    $ visible_roles = []
-                    $ role_string = "Special Roles: "
-                    python:
-                        for role in [x for x in the_person.special_role if not x.hidden]:
-                            visible_roles.append(role.role_name)
-                            
-                    if visible_roles:
-                        $ role_string += ", ".join(visible_roles)
-                        text role_string style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
+                        $ visible_roles = []
+                        $ role_string = "Special Roles: "
+                        python:
+                            for role in [x for x in the_person.special_role if not x.hidden]:
+                                visible_roles.append(role.role_name)
+
+                        if visible_roles:
+                            $ role_string += ", ".join(visible_roles)
+                            text role_string style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
+
+                    if isinstance(the_person, Person) and persistent.pregnancy_pref > 0:
+                        vbox:
+                            xsize 350
+                            if the_person.knows_pregnant():
+                                text "Pregnant: Yes" style "menu_text_style"
+                                if day < the_person.pregnancy_show_day():
+                                    text "- Visible Day: " + str(the_person.pregnancy_show_day()) style "menu_text_style"
+                                elif day < the_person.get_due_day():
+                                    text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
+                            else:
+                                if persistent.pregnancy_pref == 1:
+                                    text "Fertility: " + str(round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
+                                if persistent.pregnancy_pref == 2:
+                                    $ modified_fertility = the_person.calculate_realistic_fertility()
+                                    $ named_chance = the_person.pregnancy_chance_string()
+                                    text "Fertility: " + str(round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
+                                    text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
+
+                        vbox:
+                            xsize 350
+                            if the_person.event_triggers_dict.get("birth_control_status", None) is None:
+                                text "Birth Control: Unknown" style "menu_text_style"
+                            else:
+                                hbox:
+                                    text "Birth Control:" style "menu_text_style"
+                                    vbox:
+                                        text ("Yes" if the_person.on_birth_control else "No") style "menu_text_style"
+                                        text "Known " + str(day - the_person.event_triggers_dict.get("birth_control_known_day", 0)) + " days ago" size 12 style "menu_text_style"
+
             hbox:
                 xsize 1750
                 xalign 0.5
@@ -66,22 +98,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     if the_person.kids > 0:
                                         text "Kids: [the_person.kids]" style "menu_text_style"
 
-                                    if isinstance(the_person, Person) and persistent.pregnancy_pref > 0:
-                                        if the_person.knows_pregnant():
-                                            text "Pregnant: Yes" style "menu_text_style"
-                                            if day < the_person.pregnancy_show_day():
-                                                text "- Visible Day: " + str(the_person.pregnancy_show_day()) style "menu_text_style"
-                                            elif day < the_person.get_due_day():
-                                                text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
-                                        else:
-                                            if persistent.pregnancy_pref == 1:
-                                                text "Fertility: " + str(round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
-                                            if persistent.pregnancy_pref == 2:
-                                                $ modified_fertility = the_person.calculate_realistic_fertility()
-                                                $ named_chance = the_person.pregnancy_chance_string()
-                                                text "Fertility: " + str(round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
-                                                text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
-                                            text "Birth Control: " + ("Yes" if the_person.on_birth_control else "No") style "menu_text_style" #TODO less specific info
 
                 frame:
                     background "#1a45a1aa"
