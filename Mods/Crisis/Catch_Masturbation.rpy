@@ -70,6 +70,18 @@ label SB_caught_masturbating_crisis_label():
                 else:
                     "Once you're finished you quickly get dressed and say goodbye to the girls."
 
+            "Punish them for inappropriate behaviour" if office_punishment.is_active():
+                mc.name "[the_person.title], [the_person_two.title], this is totally inappropriate behaviour during office hours, even when you are on a break."
+                mc.name "I don't have any choice but to record you both for disciplinary actions later."
+                $ the_person.add_infraction(infraction.inappropriate_behaviour_factory())
+                $ the_person_two.add_infraction(Infraction.inappropriate_behaviour_factory())
+                $ scene_manager.update_actor(the_person, emotion = "sad")
+                the_person.char "Really? I..."
+                $ scene_manager.update_actor(the_person_two, emotion = "sad")
+                the_person_two.char "But [the_person_two.mc_title], we..."
+                mc.name "Stop, that's enough, you can finish what you are doing, but my decision stands."
+                "You turn around and walk away."
+
             "Keep walking":
                 pass
 
@@ -300,6 +312,11 @@ label SB_caught_masturbating_crisis_label():
                                 "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
+            "Punish her for inappropriate behaviour" if office_punishment.is_active():
+                mc.name "[the_person.title], this isn't appropriate for the office. I'm going to have to write you up for this."
+                the_person.char "Oh, I... I'm sorry [the_person.mc_title], I didn't think you would care..."
+                $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
+                mc.name "I'm sure you'll have learned your lesson in the future."
 
             "Keep walking":
                 "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking."

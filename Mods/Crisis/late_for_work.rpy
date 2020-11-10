@@ -33,6 +33,14 @@ label late_for_work_action_label:
                 mc.name "I don't care what you have to do, but I need you to be here on time. Now get going..."
                 $ the_person.change_stats(obedience = 3, happiness = -2)
 
+            "Punish her for being late" if office_punishment.is_active():
+                mc.name "Do you know what time we start here [the_person.title]?"
+                the_person.char "Sorry [the_person.mc_title], I missed my bus."
+                mc.name "That's not my problem [the_person.title]. I'm going to have to write you up for this."
+                the_person.char "Oh, I... I'm sorry [the_person.mc_title]..."
+                $ the_person.add_infraction(Infraction.disobedience_factory())
+                mc.name "I'm sure you'll learn your lesson in the future."
+
             "Let it slide":
                 $ the_person.draw_person(emotion = 'happy')
                 mc.name "Well, ok, now quickly run along [the_person.title]."
@@ -55,6 +63,13 @@ label late_for_work_action_label:
                 else:
                     mc.name "I don't care, next time be on time and make your tits presentable."
                 $ the_person.change_stats(obedience = 3, happiness = -2)
+
+            "Punish her for being late" if office_punishment.is_active():
+                mc.name "Do you know what time we start here [the_person.title]?"
+                the_person.char "I am really sorry [the_person.mc_title]."
+                mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
+                $ the_person.add_infraction(Infraction.disobedience_factory())
+                mc.name "I'm sure you'll learn your lesson in the future."
 
             "Let it slide":
                 $ the_person.draw_person(emotion = 'happy')
@@ -138,7 +153,14 @@ label late_for_work_action_label:
                 mc.name "Well, ok, now quickly run along [the_person.title]."
                 $ the_person.change_stats(obedience = -2, happiness = 2)
 
-            "Spank her":
+            "Punish her for trying to seduce you" if office_punishment.is_active():
+                mc.name "Do you know what time we start here [the_person.title]?"
+                the_person.char "I am really sorry [the_person.mc_title]."
+                mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
+                $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
+                mc.name "I'm sure you'll learn your lesson in the future."
+
+            "Spank her right here":
                 mc.name "A naughty employee like you needs to be punished. But just lecturing you wouldn't do the trick, would it?"
                 the_person.char "I'm not sure what you're saying..."
                 mc.name "Turn around, [the_person.title]. I'm going to give you the spanking you deserve."
@@ -213,6 +235,14 @@ label late_for_work_action_label:
                     the_person.char "Definitely, I hate feeling all sticky."
                 else:
                     the_person.char "Of course [the_person.mc_title]."
+
+            "Punish her for inappropriate behaviour" if office_punishment.is_active():
+                mc.name "That's not how we do business around here [the_person.title]."
+                the_person.char "Really, I thought..."
+                mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
+                $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
+                mc.name "I'm sure you'll learn your lesson in the future."
+
             "Request her service":
                 mc.name "Very good, now I require the same level of dedication, make your boss happy and get on your knees."
                 if the_person.get_opinion_score("being submissive") > 0:

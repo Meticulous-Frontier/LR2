@@ -338,6 +338,16 @@ label horny_at_work_crisis_enhanced_label():
                         "You pull up some porn on your phone and get comfortable, jerking yourself off until you cum."
                         "When you're finished you clean up and get back to work, your mind now crystal clear."
 
+                    "Punish her for inappropriate behaviour" if office_punishment.is_active():
+                        mc.name "[the_person.title], this isn't appropriate. I'm going to have to write you up."
+                        your_follower.char "I... Oh, I'm sorry [your_follower.mc_title], I don't know what I was thinking..."
+                        $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
+                        $ your_follower.draw_person(position = "walking_away")
+                        "She blushes and turns around, leaving quickly."
+                        $ clear_scene()
+                        "You pull up some porn on your phone and get comfortable, jerking yourself off until you cum."
+                        "When you're finished you clean up and get back to work, your mind now crystal clear."
+
                 $ del your_follower
                 $ del work_bathroom
                 $ mc.change_location(old_location)
@@ -537,6 +547,7 @@ label horny_at_work_crisis_enhanced_label():
                                             renpy.say("","You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
                                         else:
                                             renpy.say("","You pull her " + clothing.display_name + " out of the way.")
+                                    strip_list = None
 
                             else: #We need to strip her down completely. TODO: We need a way to determine if we can strip someone half down, then pull things aside (ie. pull off pants, pull panties to the side)
                                 $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True) #Start by stripping off her bottom.

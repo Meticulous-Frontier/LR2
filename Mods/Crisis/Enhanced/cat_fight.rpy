@@ -7,7 +7,7 @@ init 5 python:
         the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Rival","Nemesis"])) #Get a random rival or nemesis relationship within the company
         if the_relationship is None:
             return (None, None)
-            
+
         if renpy.random.randint(0,1) == 1: #Randomize the order so that repeated events with the same people alternate who is person_one and two.
             person_one = the_relationship.person_a
             person_two = the_relationship.person_b
@@ -270,6 +270,20 @@ label cat_fight_crisis_enhanced_label():
                     "[winner.title] leaves and you get back to work."
             $ del winner
             $ del loser
+
+        "Punish them for inappropriate behaviour" if office_punishment.is_active():
+            mc.name "[person_one.title], [person_two.title], I cannot tolerate that my employees are accusing each other of stealing."
+            mc.name "I don't have any choice but to record you both for disciplinary actions later."
+            $ person_one.add_infraction(infraction.inappropriate_behaviour_factory())
+            $ person_two.add_infraction(Infraction.inappropriate_behaviour_factory())
+            $ scene_manager.update_actor(person_one, emotion = "sad")
+            person_one "Really? I..."
+            $ scene_manager.update_actor(person_two, emotion = "sad")
+            person_two "See what happens when you go around making things up [person_one.title]. Sorry [person_two.mc_title], we'll get back to work right away."
+            person_one "Ugh, whatever. Come on [person_two.title], let's go."
+            $ scene_manager.update_actor(person_one, position = "walking_away")
+            $ scene_manager.update_actor(person_two, position = "walking_away")
+            "They turn and leave the room together."
 
         "Have a team building exercise" if willing_to_threesome(person_one, person_two) and mc.energy > 30:
             mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
