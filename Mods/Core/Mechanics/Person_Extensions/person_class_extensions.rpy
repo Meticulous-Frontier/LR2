@@ -1979,13 +1979,13 @@ init -1 python:
     Person.is_submissive = is_submissive
 
     def is_jealous(self):
-        if self.event_triggers_dict.get("is_jealous", True) == True:
-            if self.love > 90 and self.obedience > 200:
-                self.event_triggers_dict["is_jealous"] = False
-                return False
-            return True
-        else:
-            return False
+        if self.is_girlfriend():
+            if self.event_triggers_dict.get("is_jealous", True) == True:
+                if self.love > 90 and self.obedience > 200:
+                    self.event_triggers_dict["is_jealous"] = False
+                    return False
+                return True
+        return False
 
     Person.is_jealous = is_jealous
 

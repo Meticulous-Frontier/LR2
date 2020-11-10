@@ -1972,7 +1972,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 the_person.char "You? What about what I want? I didn't come in here so you could have all the fun."
                 mc.name "Shut up slut. You came in here because you love cock and you know it. If you want to have some fun, then use your pussy. Either way, service me."
                 $ the_person.change_stats(obedience = 5, love = -3, slut_temp = 5)
-                "She looks upset, but you can tell her obedience and her sluttiness are overcoming her."
+                "She looks upset, but you can tell her obedience and her sluttiness are overcoming her reservations."
                 the_person.char "Fine, since  you asked so nicely."
                 "She spits her last sentence out sarcastically. But it doesn't matter, she starts walking over to you."
                 the_person.char "I'll be damned before I let your cum touch me though."
