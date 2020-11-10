@@ -16,6 +16,7 @@ init 2 python:
     starbuck_sex_store_promo_five = Action("Ask if couples are coming in", starbuck_sex_store_promo_five_requirement, "starbuck_sex_store_promo_five_label")
     starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
     starbuck_close_up = Action("Help close the store", starbuck_close_up_requirement, "starbuck_close_up_label")
+    starbuck_candace_product_demo = Action("Candace helps with product demo", starbuck_candace_product_demo_requirement, "starbuck_candace_product_demo_label")
 
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
@@ -225,6 +226,12 @@ init -1 python:
                     return True
                 else:
                     return "She closes in the evening"
+
+    def starbuck_candace_product_demo_requirement(the_person):
+        if starbuck.location() == sex_store:
+            if the_person.location() == the_person.work:
+                return True
+        return False
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
@@ -1815,6 +1822,317 @@ label starbuck_replay_anal_on_swing_label(the_person):
 
     return
 
+label starbuck_cargo_shipment_label(the_person):
+    $ the_person.event_triggers_dict["Candi_event_start"] = True
+    the_person "Hey partner. I was wondering if I might see you! I just got in some new stock. Want to check it out?"
+    "Normally, going through freight at a mall store would be about the most boring thing you could imagine"
+    "But this is not just any store! Going through boxes of sex store merchandise with [the_person.possessive_title] actually sounds pretty fun..."
+    mc.name"Sure. Let's go take a look."
+    "[the_person.title] puts a sign on the counter to ring the bell for service and motions for you to follow her. In the back storage area is a pallet of assorted toys, lingerie, videos, and other sex related items."
+    "As you start to break down some of the boxes, you can't help but make jokes about some of the items."
+    mc.name "Battery powered nipple clamps? Wow I didn't realize I was missing out on these!"
+    "[the_person.title] laughs but also gets a little defensive."
+    the_person "You might be surprised how popular they are! Especially with the cougars!"
+    mc.name "Oh... Cougars eh? You mean like you?"
+    the_person "Wow, okay, so we're gonna fight today? Is that what were gonna do?"
+    "[the_person.title] sticks her tongue out at you, making it obvious she is just teasing."
+    the_person "Oh. My. God... They're here!"
+    "[the_person.title] is pulling a box out from the middle of the pallet. On the side of the box is a picture of dildos, with the questionable name of 'Double Girth Max 5000'."
+    mc.name "Are those... Billy clubs?"
+    the_person "No, but they might be the same size. It's the largest, suction cup mounted double dildo on the market!"
+    "Hmmm... Suction cups?"
+    mc.name "So you like... Mount that to the wall? Then back onto it?"
+    the_person "Or on the floor, or rail, or a saddle, or... I mean whatever really. I've got to see this!"
+    "She takes a box cutter and opens the box... She frowns a bit as she takes one out. It's enormous."
+    the_person "Jesus... There's no way this fits in a person... This must be for stimulating cows or something!"
+    mc.name "So are you going to make a demonstration video?"
+    the_person "I had hoped to... But there's just no way..."
+    "[the_person.possessive_title] seems a little disappointed. You can tell she had been looking forward to trying the toy, but the sheer size of it has her too afraid to even consider it."
+    "Quietly, you continue working on the pallet of merchandise. You wonder if there is any way you could help her out."
+    "As you think about it though, the amount of straight... Training... It would take to fuck that size is prohibitive. Maybe you could find someone else who could do it?"
+    "You continue to think about it. Do you know anyone who might be capable of such a feat? Someone who never backs down from a sexual challenge?"
+    "Someone who enjoys getting stretched to her limit? Who, let's face it, is probably also not that bright?"
+    "Of course you know someone like that. [candace.title], the bimbo who you recently convinced to dump her boyfriend and work for you."
+    "You aren't sure if she's ever ridden something that big, but you do know she would be up for trying. Now, you just consider how to bring it up with [the_person.title]..."
+    mc.name "So... Let's say I knew someone... Who could do a demonstration video for us..."
+    "[the_person.possessive_title] looks at your incredulously."
+    the_person "I mean... I guess if there is a woman out there whose super power is taking enormous dildos, but I don't see how any normal person could manage this!"
+    mc.name "Well... I have an employee who I sort of recruited from another company."
+    mc.name "I don't know all the details of it, but I'm pretty sure she was drugged with something that has what seems to be permanent side effects. Some of which are an enormous sex drive, and the ability to take just about anything..."
+    the_person "That's... Interesting? What other kind of side effects did it have?"
+    mc.name "Well, unfortunately, it also destroyed most of her common sense. She is basically a dim witted bimbo."
+    mc.name "I recruited her from her previous employer because he was taking advantage of her, paying her criminally low wages and forcing her to have sex for his own financial benefit."
+    the_person "That's very kind of you... But won't asking her to let us do a demonstration video be basically the same thing?"
+    mc.name "Honestly, I think if we showed it to her, I'm not sure we could stop her from trying it. For sure though, we won't force her to do anything."
+    mc.name "Maybe I could just bring her out here for a bit? We won't necessarily ask her to do it, but just get a feel for how she might respond. It would only be fair though, that we pay her some for her part in the demo."
+    "[the_person.title] considers your proposal for a moment."
+    the_person "I guess. Honestly, I kind of like doing the advertising, just me and you, ya know? But I guess once in a while bringing in a little extra talent couldn't hurt."
+    mc.name "Don't worry, I won't let this impact our other endeavors."
+    the_person "Okay... Bring her out sometime and we'll see what happens. What's the worst that could happen?"
+    "You continue chatting with [the_person.title] as you finish breaking down her merchandise. Between the two of you, soon the job is done."
+    the_person "Alright partner, I'll see you again soon? With your friend?"
+    mc.name "Sounds good."
+    "Alright, now just need to talk to [candace.possessive_title]. You aren't sure how to bring it up with her. Maybe just bring her out to the shop sometime, without telling her where you are going?"
+    $ candace.add_unique_on_talk_event(starbuck_candace_product_demo)
+    return
+
+label starbuck_candace_product_demo_label(the_person_one):
+    $ the_person_two = starbuck
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person_one)
+    mc.name "I have somewhere I want to take you. I think you'll enjoy it."
+    "[the_person_one.title] cocks her head to the side and perks up a bit."
+    the_person_one "Right now? In the middle of the work day?"
+    mc.name "Yeah. I want you to meet a friend of mine."
+    the_person_one "Oh! Okay! Does he have a nice dick too?"
+    mc.name "My friend is a woman, but trust me, you won't regret this."
+    the_person_one "Okay boss! You know I'm always up for whatever... Even other chicks!"
+    "You exit the office and start walking over to the mall with [the_person_one.possessive_title] tagging along. She checks out a few people on the way over."
+    # [Change to mall background]
+    $ mall.show_background()
+    "As you enter the mall, you've made up your mind. [the_person_one.title] is perfect for this. If anyone can take the Girth Max, it's her!"
+    the_person_one "The mall? Did you bring me out here to try on some more clothes? We had so much fun last time... Remember?"
+    mc.name "We aren't going to the clothes store today. I have somewhere else in mind."
+    "You walk up to [the_person_two.title]'s sex shop. As you walk inside, you look at [the_person_one.possessive_title]. Her eyes are wide with amazement."
+    $ sex_store.show_background()
+    the_person_one "Oh my God... Boss... That's... Oh my God what is this place??? Is this heaven?"
+    "You are actually a little surprised. You had assumed that she had been into a place like this before, but it appears that you were mistaken."
+    mc.name "No, this is a sex shop. And it's owned and operated by the friend I wanted to introduce you to."
+    $ scene_manager.update_actor(the_person_one, position = "kissing")
+    "[the_person_one.title] literally throws herself at you, wrapping her arms around you in a giant hug."
+    the_person_one "Boss! I can't believe it! I must have been so good for you to bring me here! This is like, the best day ever!!!"
+    $ the_person_one.change_arousal(15)
+    "Hearing the commotion, [the_person_two.title] appears from an aisle and walks over. She looks at you a bit concerned."
+    $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
+    the_person_two "Hey partner... Everything okay?"
+    "You start to answer but [the_person_one.possessive_title] immediately starts talking over you."
+    the_person_one "Oh my God I'm more than okay! My boss just brought me here for the first time to this AMAZING PLACE. He said he even knows the owner? Can you believe it!?!"
+    "Realization dawns on [the_person_two.title]'s face."
+    mc.name "Right. [the_person_one.name], this is [the_person_two.name]. She's the one who owns this shop."
+    the_person_one "Oh my god! It's so good to meet you!"
+    $ scene_manager.update_actor(the_person_one, display_transform = character_center, position = "walking_away", z_order = 2)
+    $ scene_manager.update_actor(the_person_two, position = "kissing", z_order = 1)
+    "[the_person_one.title] let's go of you. She immediately wraps her arms around [the_person_two.title] and embraces her..."
+    "Is she whispering in her ear? Well, so far it seems that [the_person_one.possessive_title] atleast is enjoying her new acquaintance."
+    "Hopefully [the_person_two.possessive_title] has the patience for this too."
+    the_person_two "Hello there, it's nice to meet you too..."
+    "[the_person_two.title] gives her a hug back. Soon, [the_person_one.title] lets go and starts to look around the store."
+    $ scene_manager.update_actor(the_person_one, display_transform = character_right, position = "walking_away")
+    $ scene_manager.update_actor(the_person_two, position = "stand4")
+    the_person_one "Oh my! I didn't know this existed! Oh... Oh my..."
+    "As [the_person_one.possessive_title] starts to wander off, you get a moment with [the_person_one.title]."
+    mc.name "Ah, well, as you can see, she's pretty enthusiastic."
+    the_person_two "Yeah! That was... Something else. I've never had a customer whisper in my ear that I'm doing gods work before."
+    "She shakes her head and then chuckles."
+    the_person_two "I think I understand why you brought her out."
+    mc.name "I tell you what. I'm going to walk with her around the store for a bit to get her acclimated, then we'll see about the toy in the back..."
+    the_person_two "Okay! I'll be up at the counter. Have fun!"
+    "As [the_person_two.possessive_title] heads up to the front of the store, you walk quickly and catch up with [the_person_one.title]. At the moment, she is going thru a selection of crotchless panties."
+    $ scene_manager.remove_actor(the_person_two, reset_actor = False)
+    $ scene_manager.update_actor(the_person_one, position = "stand3")
+    the_person_one "Oh! Boss! Look at these! If I wore these to work with a skirt, you could just bend me over anywhere! You wouldn't even have to like, move my panties over or anything!"
+    "A couple are browsing a couple bins away and hear her. The girl starts laughing and the guy gives you a grin and a thumbs up."
+    mc.name "You're right. Let's take a few minutes and just walk around. There's all kinds of possibilities here."
+    "You walk around with [the_person_one.possessive_title] for a bit, checking out the different items. Once in a while she'll ask you about something."
+    the_person_one "But why do the nipple clamps need batteries?"
+    mc.name "Well they can be programmed to give a small electrical shock..."
+    $ the_person_one.change_arousal(15)
+    the_person_one "Oh! That sounds... Amazing! Damn I should have brought a pen and paper, I need to start making a list..."
+    "It really does have the same feeling as a kid in a candy shop. You're pretty sure she has decided to try and buy one of everything."
+    the_person_one "I... Can't believe I had no idea this place existed... [the_person_one.mc_title]! Thank you for showing me this place!"
+    $ scene_manager.update_actor(the_person_one, position = "kissing")
+    "[the_person_one.possessive_title] gets close to you. She reaches down and starts to rub your rapidly hardening cock through your pants. You quickly decide now is the time to bring up why your brought her here."
+    mc.name "Actually, there's a reason I brought you out here. I was actually pretty certain you'd been here before now..."
+    the_person_one "Oh? Does it involve that hard thing in your pants? Because looking at this sex stuff is really getting me, like, all worked up..."
+    mc.name "I've got something different in mind. My friend? The one who runs the place? She's looking for help making an advertisement for a new product she just got in."
+    mc.name "She's concerned about the size of it... I thought maybe you would be willing to give it a try and let us take a video."
+    $ scene_manager.update_actor(the_person_one, position = "stand4")
+    "[the_person_one.title] is looking at you confused. You can tell she is having trouble understanding what you are asking her to do."
+    mc.name "I want you to fuck a giant double dildo while my friend and I take a video... If you want to I mean..."
+    $ the_person_one.change_arousal(15)
+    the_person_one "Oh! God boss, why didn't you just say so? That sounds like fun to me. Do you think... Do you think maybe your friend would be willing to mess around some? She is like, so fucking hot!"
+    "Oh my. You hadn't considered trying to get both of them in the video some how. That would be a damn good video!"
+    mc.name "That's a great idea... I'm not sure! Why don't we go talk to her!"
+    the_person_one "Okay [the_person_one.mc_title]!"
+    $ scene_manager.add_actor(the_person_two)
+    "You walk with [the_person_one.title] up to the front of the store where [the_person_two.possessive_title]is at. She looks at you two and hesitantly starts to ask."
+    the_person_two "Hey, so umm... Did [the_person_two.mc_title] talk to you about..."
+    the_person_one "I'll do it. Are you going to be in it too?"
+    the_person_two "Ah! I umm... I don't think I can't the toy is just a little too big for me..."
+    the_person_one "You don't like, have to use the toy! Just like, maybe you could hold it and fuck me with it, or just let me eat you out or something!"
+    "[the_person_two.title] eyes are a little wide. It seems, even as a sex shop owner, she was not expecting this level of excitement."
+    the_person_two "Well, I mean it does have suction cups... So I could probably mount it to some of the latex panties..."
+    mc.name "It would probably be good, too, if we can work you into the video anyway, since you're the shop owner!"
+    the_person_two "Wow... Okay... Are you sure? The size of this thing is something else!"
+    the_person_one "Damn right! Let's do it!"
+    the_person_two "Okay. [the_person_two.mc_title], want to take her in the back room and maybe start getting her lubed up a bit? I'll see if I can rig something."
+    $ scene_manager.remove_actor(the_person_two, reset_actor = False)
+    "You walk with [the_person_one.title] to the back. She starts to strip down as you grab some lube."
+    $ scene_manager.strip_actor_outfit(the_person_one)
+    $ scene_manager.update_actor(the_person_one, position = "missionary")
+    "When she finishes, she hops up on the counter, spreading her legs for you."
+    the_person_one "Alright boss, lube me up! Don't be gentle with it either!"
+    "You can see she is already pretty excited, so you decide to concentrate most of the lube on her anus. Soon you have two fingers buried in her ass and pumping them in and out."
+    $ the_person_one.change_arousal(10)
+    the_person_one "Mmm, that feels good..."
+    "You stop for a second to squirt some more lube. You do your best to work it deep into her ass."
+    $ scene_manager.add_actor(the_person_two)
+    "[the_person_one.title] is starting to moan when [the_person_two.possessive_title] walks into the room. She's rigged the enormous double dick to some leather panties with some straps and velcro."
+    the_person_two "Glad to hear you are getting warmed up. Took me a bit to rig this. It's not perfect, but I think it will work!"
+    the_person_one "Oh my God! That thing looks, like, amazing!"
+    "You watch intently as [the_person_two.title] start to strip down..."
+    $ scene_manager.strip_actor_outfit(the_person_two)
+    "You never thought you would ever be in a position like this. You're about to film [the_person_two.title], the sex shop owner, as she fucks [the_person_one.title], your bimbo office girl, with an enormous double headed dildo."
+    "You pinch your arm. Yeah! You aren't dreaming this!"
+    "[the_person_two.possessive_title] puts on the strap on. You hand her the lube so she can get it ready."
+    # TODO add something like dark brown leather panties to Starbucks outfit? try to atleast make it look like she has something on#
+    mc.name "Okay... It would probably be best if [the_person_two.title] can be facing the camera since she is the shop owner. [the_person_one.title] why don't you get down on your hands and knees and she can get behind you?"
+    the_person_one "Mmm that sounds good. And then you can come over boss and I'll suck your..."
+    mc.name "I have to run the camera. Maybe when we are done with the video we can have some fun though."
+    if the_person_two.is_jealous():
+        the_person_two.char "Hey now... I'm your girlfriend [the_person_two.mc_title], don't be planning anything like that without me!"
+    else:
+        the_person_two.char "I'll be surprised if you can walk after this hun, but if so I'm sure we can do something fun!"
+    $ scene_manager.update_actor(the_person_one, display_transform = character_center, z_order = 2, position = "cowgirl")
+    $ scene_manager.update_actor(the_person_two, display_transform = character_center_flipped, z_order = 1, position = "kneeling1")
+    "The girls get into position. [the_person_one.title] is already wiggling her ass back an forth."
+    the_person_one "I'm ready, stick it in!"
+    mc.name "Hang on, we have to start the video first. Usually [the_person_two.title] does an intro too, then we'll get to the demo."
+    the_person_one "Ugh, fine! What a tease!"
+    "Everything appears to be all setup. You give a quick countdown, and then begin the video."
+    the_person_two "Hello folks! This is [the_person_two.name], from [the_person_two.name]'s Sex Shop, here with another demonstration video! This time we are demonstrating the brand new, Double Girth Maxx 5000!"
+    "[the_person_two.title] has an extra that she picks up and begins to go over the details to the camera."
+    the_person_two "Have a size queen in your life that won't shut up about big dicks? This double dildo has a full moneyback gaurentee that it will shut her up! Made with..."
+    "You kind of zone out a bit as she goes over the construction and cleaning requirements. You notice [the_person_one.title] is starting to get a bit impatient also."
+    the_person_one "Hey, are you gonna put that thing in me or not?"
+    "[the_person_two.title] just smiles and then introduces her assistant."
+    the_person_two "Today, to help me with the demonstration, is [the_person_one.name]. One of my favorite features of this product is the suction cups, which have allowed me to attach it to these!"
+    "[the_person_two.possessive_title] motions at the strap on she's fashioned."
+    the_person_two "Now, let's see if that gaurentee holds up! Are you ready dear?"
+    the_person_one "About time! I wasn't sure you were ever gonna... OHHHH!"
+    "[the_person_one.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [the_person_two.title] holds her hips in place as she starts to push. [the_person_one.title] groans, only managing to sputtering a couple of words out."
+    the_person_one "So...full..."
+    the_person_two "Don't worry dear, it's about halfway in."
+    "For a short moment, you think you notice a look of fear on [the_person_one.possessive_title]'s face, but it quickly changes to resolve."
+    the_person_one "Ughhh... Keep.... Going!"
+    "With a firm grip on her hips, [the_person_two.title] drives a bit deeper. [the_person_one.title] is gasping as she tries to take the final few inches. Despite her near constant sexual escapades, the toy is nearly too much."
+    the_person_two "Okay, here we go, one last push!"
+    "With great effort, [the_person_two.possessive_title] drives the last of the toy inside of her. [the_person_one.title]'s foot raises off the ground reflexively."
+    the_person_two "Wow! You did it! How does it feel girl?"
+    the_person_one "It's... So... Full...!"
+    "For once, [the_person_one.title] appears to be mostly speechless. You suppose there might be something to that 'shut her up' gaurentee."
+    the_person_two "Let me know when you're ready for me to move."
+    the_person_one "Just... Mmmmmmm! Give me a... a minute!"
+    "[the_person_two.title] takes the opportunity to talk about the product."
+    the_person_two "One thing I noticed, even though it's made from silicone, the product has a pleasant firmness to it as well. If you need to be pushy with it, it feels good and sturdy and should be able to handle it."
+    "fter a few more moments, [the_person_one.possessive_title] starts to slowly move her hips."
+    the_person_one "Okay... Let's do this..."
+    "[the_person_two.possessive_title] gives her one slow, firm stroke. [the_person_one.title] just gasps as it starts to slide back in. It takes both hands on her rump for [the_person_two.title] to push it all the way back in."
+    the_person_two "Wow, she is taking this thing like a champ! How are you holding up babe?"
+    the_person_one "I'm... Good. It's good! Intense..."
+    "[the_person_one.possessive_title] is having trouble making words. [the_person_two.title] gives her another stroke. This time when she pushes back in she doesn't have to be quite as forceful."
+    the_person_one "Ahh! Oh god sorry I'm not gonna last long!"
+    the_person_two "I can imagine why!"
+    #TODO orgasm code, IE goal updates, happiness, etc
+    "[the_person_two.possessive_title] gives another smooth stroke. [the_person_one.title] is starting to get into it now, willing herself to accept the enormous dildo."
+    "This time she doesn't stop when it is all the way, she pulls back right into another stroke."
+    "Stroke...... Stroke..... Stroke....."
+    "A slow, methodical pace is being set. [the_person_one.title] is panting and groaning with each stroke."
+    the_person_one "Oh god... Oh god!"
+    $ the_person_one.change_arousal(60)
+    $ the_person_two.change_arousal(15)
+    $ mc.change_arousal(10)
+    "[the_person_one.title]'s body begins to convulse as she begins to orgasm. [the_person_two.possessive_title] keeps fucking her with the same methodical pace."
+    "Her orgasm should be winding down now... But incredibly, it doesn't. [the_person_two.title] speeds up just slightly and soon [the_person_one.possessive_title] is getting ready to orgasm again."
+    the_person_one "Gah!!! Fuck oh fuck!"
+    $ the_person_one.change_arousal(60)
+    $ the_person_two.change_arousal(15)
+    $ mc.change_arousal(10)
+    "[the_person_one.title] orgasms again, her body getting weak as she succumbs to the incredible pleasure and pressure the toy is providing her. [the_person_two.possessive_title] responds by speeding up again."
+    "She still isn't going that fast, but the size of the toy makes the sensations overwhelming. She cries out as another orgasm begins to take her."
+    the_person_one "Ahh! Holy fucking hell!"
+    $ the_person_one.change_arousal(60)
+    $ the_person_two.change_arousal(15)
+    $ mc.change_arousal(10)
+    "[the_person_two.possessive_title] is forced to stop literally mid stroke as [the_person_one.title] orgasms forcefully, her holes squeezing so hard she momentarily can't push the dildo back in."
+    "She grabs her hips and slowly but forcefully push the toy deep and then leaves it there, fully sheathed as [the_person_one.title] orgasms."
+    "Completely spent, [the_person_one.possessive_title]'s arms give out and she collapses forward. The toy pulls out from her rump making a lewd squelch."
+    "[the_person_one.title] is now in a heap on the floor. Once in a while an arm or a leg twitches as she tries to recover."
+    $ scene_manager.update_actor(the_person_one, position = "missionary")
+    $ scene_manager.update_actor(the_person_two, display_transform = character_right, position = "stand4")
+    "She manages to roll on her back, her breathing ragged. [the_person_two.title] stands up, her enormous double dildo glistening in victory."
+    the_person_two "Well, I'd say the product works as advertised!"
+    "[the_person_two.title] gives a run down on the product price, and soon the video is complete. You stop recording."
+    the_person_one ".... ffuuuuuuuck... boss I don't think I can get up..."
+    mc.name "Its okay. Take your time and recover."
+    the_person_one "Yeah... you two... can I watch? Like... I can't do anything... now but... if you want to fuck... can I just watch?"
+    "Even after getting the pounding of a lifetime, [the_person_one.possessive_title] still wants to be involved with sexy times."
+    "[the_person_two.title] looks at you hesitantly. Your cock aches after witnessing the previous spectacle, and you're sure she could get off too."
+    mc.name "Sounds good. I think you deserve to be able to watch, after helping us make that video!"
+    the_person_two "That's true... okay, how do you want to... HEY!"
+    $ scene_manager.update_actor(the_person_two, position = "back_peek")
+    "You grab [the_person_two.title] and spin her around. You push her against the wall and quickly strip off her augmented panties."
+    $ scene_manager.strip_actor_outfit(the_person_two)
+    "Your cock is out in an instant, and soon you are behind her."
+    "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
+    "[the_person_two.possessive_title] arches her back a bit. She steals a glance back at you while you enjoy the warm, slick grip of her pussy."
+    "You both look over at [the_person_one.title]. She is watching intently and was one hand between her legs, lightly touching herself."
+    "You put your hands on [the_person_two.title]'s hips as you begin to fuck her. She moans and puts her hand on top of yours, encouraging you."
+    the_person_two "Give it to me [the_person_two.mc_title]! I'm so hot from earlier..."
+    $ the_person_two.change_arousal(20)
+    $ mc.change_arousal(20)
+    "You immediately set the pace, giving it to her hard and rough. Her ass cheeks clap with each thrust."
+    "[the_person_two.title] pushes back against you, meeting every single thrust. Your balls swing forward and smack her clit with each thrust."
+    the_person_two "Oh fuck! Oh that's it, yes!"
+    "[the_person_one.title] continues to watch, her fingers working circles around her clit as you go at it with [the_person_two.possessive_title]."
+    $ the_person_two.change_arousal(20)
+    $ mc.change_arousal(25)
+    "[the_person_two.title]'s is so smooth, its getting to be too much to bear. Instead of slowing down to try and last longer though, you speed up even more."
+    the_person_two "Oh my god I'm gonna cum... I'm gonna cum!"
+    mc.name "Oh fuck me too."
+    the_person_two "Cum with me [the_person_two.mc_title]! Shove it in deep and don't pull out until we're both finished!"
+    mc.name "Like you could stop me if you tried!"
+    $ the_person_two.change_arousal(40)
+    $ mc.change_arousal(40)
+    "You push yourself in as deep as you can. [the_person_two.title]'s feet are actually off the ground as your forcefully pin her to the wall."
+    "You feel her pussy start to quiver around you as she starts to cum and that's it, you can't take anymore."
+    "You hear a gasp from across the room as you begin to fire your load deep inside of [the_person_two.possessive_title]."
+    the_person_one "Oh my god, I can see it pulsating..."
+    the_person_two "Yes! Fuck yes!"
+    "Your control over [the_person_two.possessive_title] is complete as she helplessly cums all over you. Your cock is planting your seed deep in her spasming cunt."
+    "You keep her pinned there until the last of your aftershocks wash over both of you."
+    $ the_person_two.cum_in_vagina()
+    "As you slowly pull out, your cum immediately starts pouring out of [the_person_two.possessive_title] and down her leg."
+    the_person_one "Oh god... I wish I had some..."
+    "[the_person_one.possessive_title] starts crawling over to [the_person_two.title]. When she finally turns around, [the_person_one.title] is on her hands and knees below her."
+    $ scene_manager.update_actor(the_person_two, position = "against_wall", z_order = 1)
+    $ scene_manager.update_actor(the_person_one, position = "doggy", display_transform = character_right_flipped, z_order = 2)
+    "When she turns around, without even asking, [the_person_one.title] lifts her leg and starts to lick your cum off of [the_person_two.possessive_title]'s leg."
+    the_person_two "Oh! Oh my..."
+    "[the_person_two.title] runs her hands through [the_person_one.title]'s hair as her tongue goes higher between her legs. She moans as [the_person_one.possessive_title] licks around her pussy."
+    the_person_two "Oh fuck... sorry I... I can't do that right now!"
+    "[the_person_two.possessive_title] stops, understanding. Damn what a scene."
+    mc.name "Well... I'd call today a complete success. I'm going to go ahead and edit that video while you two recover..."
+    $ scene_manager.update_actor(the_person_two, position = "stand4")
+    $ scene_manager.update_actor(the_person_one, display_transform = character_center_flipped, position = "stand3")
+    the_person_two "Ah... yes that would be good. [the_person_one.name]... how would you like to help me do more product demos sometime?"
+    the_person_one "Oh. my. god. YES! Yes please!"
+    the_person_two "What do you think about Saturday? We could even make it a regular thing."
+    "You go over to [the_person_two.possessive_title] computer and start to work on the video. The two girls are talking about ideas for new videos."
+    "By the time you finish a quick edit of the video, the two girls are talking like old friends. You feel like they have REALLY hit it off!"
+    "Of course, sharing a love for sex and all things sex related has really helped."
+    mc.name "Alright, the video is done. I'm going to head out now. Need anything before I go?"
+    the_person_two "Nope! [the_person_one.name] and I are going to hang out for a bit. Thanks for bringing her out [the_person_two.mc_title]!"
+    the_person_one "Yeah! I like... can't believe how amazing today has been!"
+    "You turn to leave the two girls as they chat... still naked..."
+    "They have become almost instant best friends, and it sounds like they are planning to get together every Saturday here at the shop. Maybe you should swing by and join them sometime?"
+    $ town_relationships.update_relationship(the_person_one, the_person_two, "Best Friend")
+    $ the_person_one.set_alt_schedule(sex_store, days = [5], times = [3])
+    $ the_person_two.set_alt_schedule(sex_store, days = [5], times = [3])
+    return
+
+
+
 
 init 2 python:
     def starbuck_intro_choose_title(person):
@@ -1882,13 +2200,16 @@ label starbuck_intro():
             the_person.char "I was just thinking about you. Anything I can help you with?"
         else:
             the_person.char "Is there anything I can help you with?"
-    elif (the_person.shop_progress_stage) == 2:
-        the_person.char "[the_person.mc_title]! I'm so glad to see you! This place is starting to do really well, thanks to you!"
-        if the_person.sluttiness > 60:
+    elif (the_person.shop_progress_stage) >= 2 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
+        if candace.sluttiness > 60: #Seperate candace slut check since I never check to make sure she exists in globals
+            call starbuck_cargo_shipment_label(the_person) from _begin_candi_duo_event_intro_01
+        else:
             "[the_person.possessive_title] smiles playfully."
             the_person.char "I don't think I could ever repay you, is there anything I can help you with?"
-        else:
-            the_person.char "Is there anything I can help you with?"
+    elif (the_person.shop_progress_stage) == 2:
+        the_person.char "[the_person.mc_title]! I'm so glad to see you! This place is starting to do really well, thanks to you!"
+        "[the_person.possessive_title] smiles playfully."
+        the_person.char "Is there anything I can help you with?"
     elif (the_person.shop_progress_stage) == 3:
         the_person.char "[the_person.mc_title]! Thanks for checking in! Thing are going amazing here, all thanks to you and your generous investments!"
         if the_person.sluttiness > 60:
