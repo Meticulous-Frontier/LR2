@@ -1340,10 +1340,10 @@ init -1 python:
 
     def remove_role(self, role, remove_all = False, remove_linked = True):
         if role in self.special_role:
+            self.special_role.remove(role)
             if remove_linked:
                 for linked_role in role.linked_roles:
                     self.remove_role(role, remove_all, remove_linked)
-            self.special_role.remove(role)
             return True
         return False
 
