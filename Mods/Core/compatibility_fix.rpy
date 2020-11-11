@@ -118,9 +118,12 @@ label store_game_version(stack):
     return
 
 label check_save_version(stack):
-    if parse_version_string(get_loaded_version())[1] < parse_version_string(config.version)[1]:
-        "Warning" "You are loading and incompatible game version. Please start a new game."
-    elif parse_version_string(get_loaded_version())[2] < parse_version_string(config.version)[2]:
-        "Warning" "You are loading a game created by a previous build, you might run into errors because of this. Before reporting errors, please start a new game and see if the problem persists."
+    $ loaded_version = get_loaded_version()
+    if not "game_version" in globals():
+        "Warning" "You are loading a save game from an un-modded game. This is not supported, start a new modded game."
+    elif parse_version_string(loaded_version)[1] < parse_version_string(config.version)[1]:
+        "Warning" "You are loading an incompatible game version ([loaded_version]). Please start a new game."
+    elif parse_version_string(loaded_version)[2] < parse_version_string(config.version)[2]:
+        "Warning" "You are loading a game created by a previous build ([loaded_version]), you might run into errors because of this. Before reporting errors, please start a new modded game and see if the problem persists."
     $ execute_hijack_call(stack)
     return
