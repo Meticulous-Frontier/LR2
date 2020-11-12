@@ -17,8 +17,8 @@ init -2 python:
     # exclude debug file from build
     build.classify("game/debug.**", None)
     # exclude icon images from build
-    build.classify("game/Mods/Core/Images/**.ico", None) 
-    build.classify("game/Mods/Core/Images/**.icns", None) 
+    build.classify("game/Mods/Core/Images/**.ico", None)
+    build.classify("game/Mods/Core/Images/**.icns", None)
     build.classify("game/Mods/Core/Images/**.pdn", None)
 
     # include existing .rpa files
@@ -55,14 +55,6 @@ init -2 python:
     build.classify("game/images/**.png", "tutorial_images")
     build.classify("game/images/**.jpg", "tutorial_images")
     build.classify("game/Mods/Tutorial/**.png", "tutorial_images")
-
-
-init -50 python:
-    # add android game path to search path (will be added in renpy 7.4)
-    if renpy.android and ("ANDROID_PUBLIC" in os.environ):
-        android_game = os.path.join(os.environ["ANDROID_PUBLIC"], "game")
-        if os.path.exists(android_game):
-            renpy.config.searchpath.insert(0, android_game)
 
 init 2 python:
     build.name = "Lab_Rats_2_Mod"
