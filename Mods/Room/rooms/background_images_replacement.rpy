@@ -45,8 +45,8 @@ init -1 python:
     standard_home_shower_backgrounds = room_background_image("Home_Shower_Background.jpg")
     standard_bdsm_room_backgrounds = room_background_image("BDSM_Room_Background.jpg")
     standard_ceo_office_backgrounds = room_background_image("CEO_Office_Background.jpg")
-    standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg")
-    standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg")
+    standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg", darken = False)
+    standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
 
     def update_rd_div_with_genetics_unlocked():
         if not genetic_modification_policy.is_owned():
