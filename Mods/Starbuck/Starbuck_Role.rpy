@@ -1060,7 +1060,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.change_arousal(20)
     $ mc.change_arousal(25)#105
     "You can't take anymore. You let go of her shoulders and her upper body crashes roughly to the table. You grab her hips and plow deep into her pussy."
-    $the_person.call_dialogue("sex_responses_vaginal")
+    $ the_person.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     "You bottom out and explode deep inside of [the_person.possessive_title]. The heat of your semen painting her vaginal walls sends her into another orgasm."
     the_person.char "OH! I'M CUMMING AGAIN! YES [the_person.mc_title]!"
@@ -1068,6 +1068,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.cum_in_vagina()
     $ the_person.draw_person(position = "doggy")
     "You are completely spent. [the_person.possessive_title] is a sweaty, handcuffed mess beneath you. She takes a few seconds to recover."
+    $ mc.reset_arousal()
     the_person.char "So... as you can see... the handcuffs... fuck... they can hold up to... some pretty intense... amazing... mind-blowing... fucking..."
     "You move of the side to exit the frame. You can see in the camera your seed slowly dripping out of [the_person.possessive_title], when you press the stop button."
     mc.name "Wow, that amazing. I'd be surprised if we don't get at least a little bit of traffic from couples out of that!"
@@ -1091,7 +1092,6 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     $ the_person.draw_person(position = "walking_away")
     the_person.char "I'm gonna go get cleaned up now... Get to work on that video!"
     $ the_person.shop_investment_rate = 4.0
-    $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
