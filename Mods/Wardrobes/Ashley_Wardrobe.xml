@@ -67,7 +67,9 @@
             <LowerBody>
                 <Item alpha="0.95" blue="0.5" green="0.5" name="Jean_Hotpants" red="0.5" />
             </LowerBody>
-            <Feet />
+            <Feet>
+                <Item alpha="0.95" blue="0.15" green="0.15" name="Heels" red="0.15" />
+            </Feet>
             <Accessories />
         </Outfit>
         <Outfit name="AshleyTopless">
@@ -171,7 +173,9 @@
             <LowerBody>
                 <Item alpha="0.95" blue="0.14" green="0.21" name="Capris" red="0.26" />
             </LowerBody>
-            <Feet />
+            <Feet>
+                <Item alpha="0.95" blue="0.15" green="0.15" name="Heels" red="0.15" />
+            </Feet>
             <Accessories />
         </Outfit>
         <Outfit name="AshleyOnlyKhakis">

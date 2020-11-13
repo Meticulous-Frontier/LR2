@@ -96,7 +96,7 @@ init 2:
                         text person.title style "menu_text_style" size 30
                     else:
                         text "???" style "menu_text_style" font person.char.what_args["font"] color person.char.what_args["color"] size 40
-                    
+
                     if mc.business.get_employee_title(person) != "None":
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
 
@@ -112,28 +112,28 @@ init 2:
                 vbox:
                     if person.arousal > 0:
                         textbutton "Arousal: [person.arousal]/[person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
-                            ysize 28
+                            style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
                             action NullAction()
                             sensitive True
                     else:
                         textbutton "Arousal: 0%":
-                            ysize 28
+                            style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
                             action NullAction()
                             sensitive True
 
                     textbutton "Energy: [person.energy]/[person.max_energy] {image=gui/extra_images/energy_token.png}":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
                         action NullAction()
                         sensitive True
 
                     textbutton "Happiness: [person.happiness]":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The happier a girl the more tolerant she will be of low pay and unpleasant interactions. High or low happiness will return to it's default value over time."
                         action NullAction()
@@ -148,7 +148,7 @@ init 2:
 
                     hbox:
                         textbutton "Sluttiness: " + get_heart_image_list(person):
-                            ysize 28
+                            style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
                             action NullAction()
@@ -157,13 +157,13 @@ init 2:
                         if any(x[0] > 0 or x[0] < 0 for x in person.situational_sluttiness.itervalues()):
                             textbutton "{image=question_mark_small}":
                                 yoffset 6
-                                ysize 28
+                                style "transparent_style"
                                 tooltip person_info_ui_get_formatted_tooltip(person)
                                 action NullAction()
                                 sensitive True
 
                     textbutton "Love: [person.love]":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Girls who love you will be more willing to have sex when you're in private (as long as they aren't family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."
                         action NullAction()
@@ -171,7 +171,7 @@ init 2:
 
                     hbox:
                         textbutton "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience):
-                            ysize 28
+                            style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
                             action NullAction()
@@ -180,7 +180,7 @@ init 2:
                         if any(x[0] > 0 or x[0] < 0 for x in person.situational_obedience.itervalues()):
                             textbutton "{image=question_mark_small}":
                                 yoffset 6
-                                ysize 28
+                                style "transparent_style"
                                 tooltip person_info_ui_get_formatted_obedience_tooltip(person)
                                 action NullAction()
                                 sensitive True
@@ -191,21 +191,21 @@ init 2:
                         if person.serum_effects:
                             textbutton "{image=serum_vial} +[person.suggestibility]%":
                                 yoffset 6
-                                ysize 24
+                                style "transparent_style"
                                 text_style "menu_text_style"
                                 tooltip person_info_ui_get_serum_info_tooltip(person)
                                 action NullAction()
                                 sensitive True
 
                     textbutton "Age: [person.age]":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The age of the girl."
                         action NullAction()
                         sensitive True
 
                     textbutton "Height: " + height_to_string(person.height):
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         if use_imperial_system:
                             tooltip "The length of the girl in feet and inches."
@@ -215,14 +215,14 @@ init 2:
                         sensitive True
 
                     textbutton "Cup size: [person.tits]":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The size of the breasts."
                         action NullAction()
                         sensitive True
 
                     textbutton "Weight: " + get_person_weight_string(person):
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         if use_imperial_system:
                             tooltip "The weight of the girl in pounds.\nDetermines the body type."

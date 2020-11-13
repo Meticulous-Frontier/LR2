@@ -1338,11 +1338,15 @@ init -1 python:
         return added
     Person.add_role = add_role
 
-    def remove_role(self, role):
+    def remove_role(self, role, remove_all = False, remove_linked = True):
         if role in self.special_role:
             self.special_role.remove(role)
+            if remove_linked:
+                for linked_role in role.linked_roles:
+                    self.remove_role(role, remove_all, remove_linked)
             return True
         return False
+
     Person.remove_role = remove_role
 
     # helper function to determine if person is dominant
@@ -1975,13 +1979,13 @@ init -1 python:
     Person.is_submissive = is_submissive
 
     def is_jealous(self):
-        if self.event_triggers_dict.get("is_jealous", True) == True:
-            if self.love > 90 and self.obedience > 200:
-                self.event_triggers_dict["is_jealous"] = False
-                return False
-            return True
-        else:
-            return False
+        if self.is_girlfriend():
+            if self.event_triggers_dict.get("is_jealous", True) == True:
+                if self.love > 90 and self.obedience > 200:
+                    self.event_triggers_dict["is_jealous"] = False
+                    return False
+                return True
+        return False
 
     Person.is_jealous = is_jealous
 

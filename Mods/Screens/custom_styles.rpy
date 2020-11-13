@@ -74,6 +74,10 @@ init 2 style textbutton_text_style: ##The generic style used for text button bac
     outlines [(2,"#222222",0,0)]
     text_align 0.5
 
+init 2 style transparent_style:
+    background None
+    padding [5, -3]
+
 init 2 style menu_text_style:
     size 18
     italic False

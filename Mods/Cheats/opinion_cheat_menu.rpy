@@ -21,7 +21,7 @@ init python:
         if topic in self.sexy_opinions:
             del self.sexy_opinions[topic]
 
-    Person.remove_opinion = remove_opinion 
+    Person.remove_opinion = remove_opinion
 
     def get_opinion_status(self, topic): #topic is a string matching the topics given in our random list (ie. "the colour blue", "sports"). Returns a tuple containing the score: -2 for hates, -1 for dislikes, 0 for no opinion, 1 for likes, and 2 for loves, and a bool to say if the opinion is known or not.
         if topic in self.opinions:
@@ -75,7 +75,7 @@ screen opinion_edit_menu():
                                     hbox:
                                         textbutton x.title():
                                             style "textbutton_no_padding_highlight"
-                                            text_style "serum_trait_style"
+                                            text_style "serum_text_style"
                                             xsize 370
                                             padding [4,2]
                                             action Function(target.update_opinion_score, x, categories[n][1], 1)
@@ -85,21 +85,21 @@ screen opinion_edit_menu():
                                             padding [0,2]
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
-                                            text_style "serum_trait_style" 
+                                            text_style "serum_text_style"
                                             action [
                                                 Function(target.update_opinion_score, x, categories[n][1], -1)
                                             ]
-                                        frame:
-                                            background "#000080"
-                                            margin [1,2]
+                                        textbutton cheat_opinion_score_to_string(target.get_opinion_score(x)).title() + " | " + "Discovered: " + str(target.get_opinion_status(x)):
+                                            padding [0,2]
                                             xsize 440
-                                            text cheat_opinion_score_to_string(target.get_opinion_score(x)).title() + " | " + "Discovered: " + str(target.get_opinion_status(x)):
-                                                style "serum_text_style"
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "serum_text_style"
+                                            action NullAction()
                                         textbutton " + ":
                                             padding [0,2]
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
-                                            text_style "serum_trait_style" 
+                                            text_style "serum_text_style"
                                             action [
                                                 Function(target.update_opinion_score, x, categories[n][1], 1)
                                             ]
@@ -107,7 +107,7 @@ screen opinion_edit_menu():
                                             padding [0,2]
                                             xsize 44
                                             style "textbutton_no_padding_highlight"
-                                            text_style "serum_trait_style" 
+                                            text_style "serum_text_style"
                                             action [
                                                 Function(target.remove_opinion, x, categories[n][1])
                                             ]

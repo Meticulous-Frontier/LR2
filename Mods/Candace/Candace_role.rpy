@@ -606,10 +606,14 @@ init 3 python:
         return False
 
     def candace_get_has_quit_job():
-        return candace.event_triggers_dict.get("quit_job", 0)
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("quit_job", 0) != 0
+        return False
 
     def candace_can_talk():
-        return candace.event_triggers_dict.get("last_talk_day", 0) < day
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("last_talk_day", 0) < day
+        return False
 
     def candace_increase_doubt():
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
@@ -617,10 +621,14 @@ init 3 python:
         return
 
     def candace_get_hire_date():
-        return candace.event_triggers_dict.get("employed_since", -1)
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("employed_since", -1)
+        return 0
 
     def candace_get_has_gone_clothes_shopping():
-        return candace.event_triggers_dict.get("clothes_shopping", 0)
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("clothes_shopping", 0) != 0
+        return False
 
     def candace_update_action_lists():  #This function is designed to try and bring action lists up to date, from update to update, so we don't have to start a new game every time.
         if candace_get_has_quit_job():
@@ -646,6 +654,6 @@ init 3 python:
 
 
     def candace_is_bimbo():
-        if candace.event_triggers_dict.get("is_bimbo", True) == True:
-            return True
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("is_bimbo", False)
         return False

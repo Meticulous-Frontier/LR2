@@ -13,7 +13,7 @@ init 2:
                 spacing 5
                 text "[mc.business.name]" style "menu_text_style" size 18 xalign 0.2
                 textbutton "Employee Count: " + str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count):
-                    ysize 28
+                    style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "Your current and maximum number of employees. Purchase new business policies from your main office to increase the number of employees you can have."
                     action NullAction()
@@ -21,7 +21,7 @@ init 2:
 
                 if mc.business.funds < 0:
                     textbutton "Company Funds: $" + str(__builtin__.int(mc.business.funds)):
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         text_color "#DD0000"
                         tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
@@ -29,28 +29,28 @@ init 2:
                         sensitive True
                 else:
                     textbutton "Company Funds: $" + str(__builtin__.int(mc.business.funds)):
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
                         action NullAction()
                         sensitive True
 
                 textbutton "Daily Salary Cost: $"+ str(__builtin__.int(mc.business.calculate_salary_cost())):
-                    ysize 28
+                    style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The amount of money spent daily to pay your employees. Employees are not paid on weekends."
                     action NullAction()
                     sensitive True
 
                 textbutton "Company Efficiency: [mc.business.team_effectiveness]%":
-                    ysize 28
+                    style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The more employees you have the faster your company will become inefficient. Perform HR work at your office or hire someone to do it for you to raise your company Efficiency. All productivity is modified by company Efficiency."
                     action NullAction()
                     sensitive True
 
                 textbutton "Current Raw Supplies: " + str(__builtin__.int(mc.business.supply_count)) +"/[mc.business.supply_goal]":
-                    ysize 28
+                    style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "Your current and goal amounts of serum supply. Manufacturing serum requires supplies, spend time ordering supplies from your office or hire someone to do it for you. Raise your supply goal from your office if you want to keep more supply stockpiled."
                     action NullAction()
@@ -59,7 +59,7 @@ init 2:
                 if not mc.business.active_research_design is None:
                     text "  Current Research: " style "menu_text_style"
                     textbutton "    [mc.business.active_research_design.name] (" + str(__builtin__.int(mc.business.active_research_design.current_research))+"/[mc.business.active_research_design.research_needed])":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The current research task of your R&D division. Visit them to set a new goal or to assemble a new serum design."
                         action NullAction()
@@ -67,7 +67,7 @@ init 2:
 
                 else:
                     textbutton "Current Research: None!":
-                        ysize 28
+                        style "transparent_style"
                         text_style "menu_text_style"
                         text_color "#DD0000"
                         tooltip "The current research task of your R&D division. Visit them to set a new goal or to assemble a new serum design."
@@ -87,7 +87,7 @@ init 2:
                                 ypos 55
                                 textbutton "{image=question_mark}":
                                     text_style "textbutton_text_style"
-                                    action NullAction() 
+                                    action NullAction()
                                     hovered [
                                         Show("game_hints_tooltip")
                                     ]

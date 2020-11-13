@@ -46,6 +46,12 @@ init 15 python:
         make_window(),
         make_floor(),
     ]
+    police_jail_objects = [
+        Object("cell bars", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 10),
+        make_wall(),
+        make_bed(),
+        make_floor(),
+    ]
     gym_shower_objects = [
         make_floor(),
         make_wall(),
@@ -106,22 +112,23 @@ label build_custom_rooms(stack):
         mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds[:], [make_floor(), make_wall(), make_chair(), make_window(), make_counter()], [], [], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(mall_salon)
 
+        # added police station (and jail) at request of Starbuck
+        police_station = Room("police_station", "Police Station", [], standard_police_station_backgrounds[:], ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        list_of_places.append(police_station)
+
+        police_jail = Room("police_jail", "Police Jail", [], standard_police_jail_backgrounds[:], police_jail_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        list_of_places.append(police_jail)
+
         # initialize dungeon room creation action
         add_dungeon_intro_action()
 
         execute_hijack_call(stack)
     return
 
-
 init 10 python:
     add_label_hijack("after_load", "update_custom_rooms")
 
     def update_room_visibility():
-        # cleanup old hotel (save compatibility)
-        found = find_in_list(lambda x: x.name == "hotel", list_of_places)
-        if found:
-            list_of_places.remove(found)
-
         remove_list = []
         for i in range(0, len(list_of_places) - 1):
             for j in range(i + 1, len(list_of_places)):
