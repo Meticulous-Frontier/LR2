@@ -297,6 +297,9 @@ init -1 python:
     def get_party_destinations():
         party_destinations = []
 
+        if not "downtown_bar" in globals():     # skip party locations while running tutorial
+            return party_destinations
+
         def add_party_destination_by_room(room):    # add correct room object from list_of_places (prevents people disappearing)
             found = find_in_list(lambda x: x.name == room.name, list_of_places)
             if found:
