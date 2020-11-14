@@ -274,7 +274,7 @@ label cat_fight_crisis_enhanced_label():
         "Punish them for inappropriate behaviour" if office_punishment.is_active():
             mc.name "[person_one.title], [person_two.title], I cannot tolerate that my employees are accusing each other of stealing."
             mc.name "I don't have any choice but to record you both for disciplinary actions later."
-            $ person_one.add_infraction(infraction.inappropriate_behaviour_factory())
+            $ person_one.add_infraction(Infraction.inappropriate_behaviour_factory())
             $ person_two.add_infraction(Infraction.inappropriate_behaviour_factory())
             $ scene_manager.update_actor(person_one, emotion = "sad")
             person_one "Really? I..."
