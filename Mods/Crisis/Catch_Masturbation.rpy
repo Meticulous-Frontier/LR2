@@ -73,7 +73,7 @@ label SB_caught_masturbating_crisis_label():
             "Punish them for inappropriate behaviour" if office_punishment.is_active():
                 mc.name "[the_person.title], [the_person_two.title], this is totally inappropriate behaviour during office hours, even when you are on a break."
                 mc.name "I don't have any choice but to record you both for disciplinary actions later."
-                $ the_person.add_infraction(infraction.inappropriate_behaviour_factory())
+                $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
                 $ the_person_two.add_infraction(Infraction.inappropriate_behaviour_factory())
                 $ scene_manager.update_actor(the_person, emotion = "sad")
                 the_person.char "Really? I..."
