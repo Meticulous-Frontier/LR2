@@ -46,7 +46,6 @@ init 2:
         style_prefix "game_menu"
 
         frame:
-            background None
             style "game_menu_outer_frame"
 
             hbox:
