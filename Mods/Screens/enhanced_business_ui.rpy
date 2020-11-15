@@ -86,6 +86,7 @@ init 2:
                                 xpos 85
                                 ypos 55
                                 textbutton "{image=question_mark}":
+                                    background None
                                     text_style "textbutton_text_style"
                                     action NullAction()
                                     hovered [

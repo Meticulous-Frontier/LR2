@@ -7,16 +7,15 @@ init 2:
         default ui_xsize = 360
         modal False
         frame:
-            background "#1a45a1aa"
+            background "#1a45a1"
             xsize ui_xsize + 20
             ysize 440
             xanchor 1.0
             xalign 1.0
             at phone_slide(start_phone_pos, end_phone_pos)
+
             frame:
                 background None
-
-
 
                 null height 5
                 viewport:
@@ -33,12 +32,12 @@ init 2:
                                     $ time_diff = fade_time
 
                                 frame:
-                                    background "#33333388"
+                                    background "#333333"
                                     xsize ui_xsize
                                     padding (0,0)
                                     text log_item[0] style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 20
                                 frame:
-                                    background "#ff0000aa"
+                                    background "#ff0000"
                                     xsize ui_xsize
                                     ysize 2
                                     yanchor 1.0
@@ -48,6 +47,7 @@ init 2:
                                     at background_fade(5, time_diff)
                                 null height 2
                 button:
+                    style "transparent_style"
                     focus_mask None
                     margin [-20, -20]
                     ysize 440
