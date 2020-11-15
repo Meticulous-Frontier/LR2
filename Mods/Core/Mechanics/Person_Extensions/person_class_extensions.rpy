@@ -211,6 +211,9 @@ init -1 python:
 
     # change idle position based on location
     def get_person_idle_pose(self):
+        if not "downtown_bar" in globals(): # skip this when running tutorial
+            return self._idle_pose
+
         if not hasattr(self, "_idle_pose"):
             self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
 

@@ -1,3 +1,13 @@
+style quick_transparent_style:
+    background "#00000066"
+    padding [40, 5]
+    xalign 0.5
+
+style quick_text_style:
+    size 28
+    outlines [(2,"#222222",0,0)]
+
+
 init 5:
     ## Quick Menu screen ###########################################################
     ##
@@ -38,9 +48,9 @@ init 5:
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Back") action Rollback()
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Menu") action ShowMenu()
-            #textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Cheat") action ToggleScreen("cheat_menu")
-            textbutton _("Opinions") action ToggleScreen("opinion_edit_menu")
+            textbutton _("Back") style "quick_transparent_style" text_style "quick_text_style" action Rollback()
+            textbutton _("Skip") style "quick_transparent_style" text_style "quick_text_style" action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("Menu") style "quick_transparent_style" text_style "quick_text_style" action ShowMenu()
+            textbutton _("Auto") style "quick_transparent_style" text_style "quick_text_style" action Preference("auto-forward", "toggle")
+            textbutton _("Cheat") style "quick_transparent_style" text_style "quick_text_style" action ToggleScreen("cheat_menu")
+            textbutton _("Opinions") style "quick_transparent_style" text_style "quick_text_style" action ToggleScreen("opinion_edit_menu")

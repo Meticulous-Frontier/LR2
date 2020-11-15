@@ -8,6 +8,9 @@ init 2:
         right_margin 30
         top_margin 60
 
+    style navigation_button:
+        background None
+
     screen main_menu():
 
         # This ensures that any other menu screen is replaced.
@@ -16,10 +19,6 @@ init 2:
         style_prefix "main_menu"
 
         add gui.main_menu_background
-
-        # This empty frame darkens the main menu.
-        frame:
-            pass
 
         ## The use statement includes another screen inside this one. The actual
         ## contents of the main menu are in the navigation screen.
@@ -35,7 +34,7 @@ init 2:
                     style "main_menu_version"
 
         imagebutton idle mod_image hover mod_hover_image action OpenURL("https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913") xpos 20 ypos 980
-                
+
 
     screen game_menu(title, scroll=None):
         # Add the backgrounds.
@@ -91,7 +90,7 @@ init 2:
         use navigation
 
         if "stephanie" in globals():
-            textbutton _("Back To Game") ypos 970:
+            textbutton _("Back To Game") ypos 990:
                 style "return_button"
 
                 action Return()

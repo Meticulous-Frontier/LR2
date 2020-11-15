@@ -113,7 +113,7 @@ init 2:
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
                 action Return(mc.location)
-            textbutton "Return" align [0.5,0.5] text_style "return_button_style"
+            textbutton "Return" align [0.5,0.5] style "transparent_style" text_style "return_button_style"
 
 
         $ tooltip = GetTooltip()
