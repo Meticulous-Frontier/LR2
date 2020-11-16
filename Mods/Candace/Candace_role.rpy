@@ -562,6 +562,420 @@ label candace_supply_order_discount_label():
     "You now receive a 10\% discount on all supply orders."
     return
 
+label candace_midnight_wakeup_label():
+    $ the_person = candace
+
+    "Your phone goes off in the middle of the night, waking you up. You look over at it."
+    "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
+    mc.name "Hello?"
+    "?????" "Hi. Is this [first name last name]?"
+    mc.name "Yes..."
+    "?????" "This is [name] with the police department. We have a [the_person.name] [the_person.last_name] here who asked us to call you."
+    "Candace? Who do you know named Candace?"
+    mc.name "I'm sorry I'm not sure who that is..."
+    "?????" "She also goes by Candi."
+    "Oh shit! What is [the_person.title] doing at the police department?"
+    mc.name "Oh! Is she okay?"
+    "?????" "She's fine. She got swept up last night in a prostitution sting. Apparently she was going around a strip club last night offering services..."
+    "?????" "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
+    "?????" "We were just gonna send her off, but the chief didn't feel good about her walking home alone this time of night so she asked if she could call anyone and she gave us your name and number."
+    "That... Sounds exactly like something [the_person.title] would do."
+    mc.name "Okay... I'll be there in 20 minutes."
+    "You hang up the phone and take a minute. [the_person.title], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
+    "You get up and quickly get yourself dressed. You leave a quick note on the counter in case anyone notices you are gone in the middle of the night and head out. It's a fairly short walk to the police station."
+    #Change to police station
+    "As you walk in, you walk up to the front desk. There's a good looking girl behind the desk. She smiles when she greets you."
+    "?????" "Hello. Can I help you?"
+    mc.name "Yeah. I'm hear to pick up Candace."
+    "?????" "Ahh. Sure thing. First though, the chief wants to to you in her office, privately..."
+    mc.name "Okay..."
+    "?????" "Her office is right down the hall there."
+    "The kind officer points you the way to go. You head down the hall, take a breath and knock."
+    "?????" "It's open"
+    "You let yourself in."
+    "?????" "Close it"
+    "You close the door behind you. Behind the desk is an official looking officer. She greets you with a scowl."
+    "?????" "So you must be here to pick up that crazy bitch, Candace."
+    mc.name "Yeah, something like that..."
+    "?????" "We need to chat. I got a call from my deputy a few hours ago at home, saying I needed to get here right away. They said they had arrested someone they didn't know what to do with."
+    "Oh boy, this is going to be interesting..."
+    "?????" "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
+    "?????" "When he said no and walked away, he could hear her making passes at the other girls in the cell."
+    "?????" "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing. She says she doesn't know, so I ask about friends and she says she just has a couple..."
+    "?????" "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
+    "You take a moment to consider how to answer this. You are going to need to proceed carefully."
+    mc.name "Well, when I met Candace, she was in a bad relationship. The guy she was with was taking advantage of her."
+    mc.name "I did some work on her background, and although I'm not sure where, I think she may have been involved in some sort of pharmaceutical experiment that made her like that."
+    mc.name "I helped her get out of the relationship and set her up with a job at my business, trying to help her get independent again."
+    "?????" "Hmm. I see. That's unfortunate, but she doesn't seem to understand that she can't just wander around downtown hittin' on everything with a pulse. She's gonna wind up getting kidnapped... Or worse."
+    mc.name "I agree. To be honest, I didn't realize she had been doing that."
+    "The chief ponders for a few moments."
+    "?????" "Look... I can't force you to do this... But it is something you might consider. It's clear to me that Candace can't really take care of herself."
+    "?????" "We can't find any records pertaining to family in the area either. If you put in a motion with the local courts filing for her power of conservatorship on the grounds that she is unable to function independently, I'd be willing to sign that in support."
+    "?????" "With that, you could have her sent somewhere better designed to take of folks like her. It'd be for her own good."
+    mc.name "That seems... extreme? Maybe she would be willing to move in with a friend or something?"
+    "?????" "Yeah... Maybe... Look, you don't HAVE to do anything. But for her sake, you should consider doing SOMETHING. Otherwise, if she winds up back in here, I won't be able to just let her go, I'll have to get her committed somewhere."
+    mc.name "I understand ma'am."
+    "?????" "Alright. Well, good luck. I'll call down to lockup and have them bring her up."
+    "You excuse yourself from the police chief's office. As you are walking back to the entrance, you start thinking about what you could do for [the_person.title]. Maybe she could move in with someone?"
+    "She has been pretty close with [starbuck.title] recently. Maybe she would be willing to have a roommate?"
+    "Maybe you could even have her move in with you? It might be a little cramped, but you think if you explain things to [mom.title] and [lily.title] they would understand."
+    "You think a little more. What about the bimboism itself? Maybe there is some way it could be reversed? You've made some incredible strides recently with the serums at your business, but you've never considered trying to undo their effects."
+    "Is such a thing possible? Maybe you could talk to [stephanie.title] about it?"
+    "As you stand at the entrance, lost in thought, an officer brings [the_person.title] out."
+    if the_person.love > 20:
+        the_person "Hey boss! Sorry to have them call you. They kept asking me who would come and get me and you were the only one I could think of!"
+    elif the_person.love < 20:
+        the_person "Oh, hey boss... I'm sorry to drag you out here in the middle of the night like this..."
+    else:
+        the_person "Hey [the_person.mc_title]. Sorry about this..."
+    mc.name "It's okay. Let's just get you home. We can talk about this when we get there."
+    "The officer says you are free to go, so you step out into the night with her."
+    #downtown background
+    "As you walk towards her house, you sigh when she tries to lead you into a back alley."
+    the_person "Its been a frustrating night... I just thought, like, maybe we could..."
+    mc.name "Let's get back to your place first, okay?"
+    the_person "Aww, okay."
+    "It's pretty clear you that if you don't do anything, [the_person.title] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
+    "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
+    #candi home background
+    the_person "Finally! Let's have some fun!"
+    mc.name "Wait... We need to talk first."
+    the_person "God damnit why does everyone just want to talk? Just like... Let's get naked and then like... Let our bodies do the talking?"
+    mc.name "This is important."
+    "It's time to make a decision. What are you going to do?"
+    menu:
+        "Move in with you (disabled) ":
+            pass
+        "Move in with [starbuck.title] (disabled) ":
+            pass
+        "Research a cure":
+            pass
+        "Do nothing (disabled)":
+            pass
+    return
+
+label candace_love_path_intro_label():
+    $ the_person = candace
+    "You've made up your mind. While the current [the_person.title] certainly has her charms, the drug she was given is ruining her life."
+    "You have to do it what you can to research it and see if you can reverse the effects."
+    mc.name "Candi... Tomorrow we are going to talk to [head researcher]. I want to see if we can try and reverse the experiment that made you like this."
+    the_person "Made me... Like this? I don't understand... Don't you like me?"
+    mc.name "Of course I do. But the changes that it caused, you're a danger to yourself. How long have you been going out and wandering around, looking for a fuck?"
+    the_person"I.. err... I mean... Sometimes I just get the urge..."
+    mc.name "And you can't control it?"
+    the_person "I mean... Why should I? It's just for fun!"
+    mc.name "I get that, but you can't just wander the streets. I got you out of your previous relationship because I care about you and and couldn't stand to see you getting taken advantage of like that."
+    mc.name "If you keep doing this, someone even worse is going to come along and who knows what will happen."
+    $ the_person.draw_person(emotion = "sad")
+    the_person "I... I..."
+    "A small tear is coming down her eye."
+    the_person "I don't want to be... Like... A burden..."
+    "You step closer to her, pulling her into a hug."
+    the_person "If that is what you think... I trust you boss."
+    "You feel relieved. You could have gone through court to file to be her conservator, but it sounds like it won't come to that. You hold her close for a while. Soon, you feel a little movement."
+    "[the_person.title]'s hand makes it way from your back to your front, as she begins stroking your crotch."
+    the_person "Is it... Is it time now?"
+    "She truly is insatiable."
+    if mc.energy < 50:
+        "You are exhausted from a long day, but you dig deep, knowing there's no way you don't leave her with giving [the_person.title] a decent dicking."
+        $ mc.change_energy(50)
+    "[the_person.title] gives a little yelp as you pick her up."
+    mc.name "Yes, it's time now."
+    $ the_person.draw_person(position = "against_wall", emotion = "happy")
+    the_person "Yay! I've been needing this all night!"
+    "[the_person.title] wraps her legs around you is grinding against you as you carry her over to her kitchen counter."
+    $ the_person.change_arousal(15)
+    if not the_person.vagina_available():
+        "You pull off everything between you and her cunt."
+        #strip her
+    "[the_person.title] reaches down and starts to play with herself as you start to get undressed. She starts to moan as you pull your cock out."
+    $ the_person.change_arousal(15)
+    the_person "Just put it in me, I'm ready for it... Whoa!"
+    $ the_person.draw_person(position = "missionary")
+    "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
+    the_person "Oh! Fucking... Finally!"
+    "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
+    "[Sex scene]"
+    "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
+    mc.name "Hey... It's really late... Can I crash here tonight?"
+    "[the_person.title]'s face gets disturbingly excited."
+    the_person "Oh. My. God. A slumber party! Let's do it!"
+    $ the_person.draw_person(position = "stand4")
+    "She starts to lead you into her bedroom."
+    mc.name "[the_person.title] I just need to get some sleep..."
+    the_person "Don't worry, you'll wake up and be all like, I've never slept better!'"
+    "She modulates her voice lower when she imitates you. Oh god what are you getting yourself in to..."
+    "In her bedroom, you lay down on her bed, pulling blankets up over yourself. Her bed smells flowery."
+    the_person "Okay, let me just get into some jammies..."
+    $ the_person.draw_person(position = "walking_away")
+    "You try to stay awake for her, but your eyes are getting so heavy."
+    "You are starting to feel yourself drift off when you hear the bedroom door close as [the_person.title] comes back."
+    #TODO change outfit
+    $ the_person.draw_person(position = "stand4")
+    "She is wearing a sheer pink nightgown, and absolutely nothing else. Normally a sight like that would be enough to get your blood boiling, but right now you are just too tired."
+    "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
+    $ the_person.draw_person(position = "walking_away")
+    "Still naked, you cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
+    "She grabs your hand and brings it around her front, placing it on her chest. She sighs, then turns her head."
+    the_person "Goodnight boss. Thanks for spending the night... I've... Like... always wanted to try sleeping like this..."
+    mc.name "Goodnight..."
+    the_person "Hopefully in the morning my nightgown will be covered in cum..."
+    "You know you should probably be alarmed by that statement... But you are too tired to care at this point."
+    mc.name "Yeah... Me too..."
+    "You drift off to sleep."
+    "You are exhausted, but begin to dream sexy dreams about [the_person.title], the bomb shell bimbo you are cuddled up with. At one point, you are dreaming that she has climbed on top of you and is riding your cock aggressively."
+    "However, the feelings are so intense, you aren't sure... Could this be real?"
+    $ the_person.draw_person(position = "cowgirl")
+    the_person "That's it boss... It's okay I'm like, just letting you work that boner off..."
+    "You reach up and grab her tits. This definitely feels real. And you are really close to finishing."
+    mc.name "I'm... I'm!"
+    "You try to warn her. She quickly pops off and starts to jack you off. You cum, blowing your load all over her nightgown covered belly."
+    $ the_person.cum_on_stomach()
+    "When you finish, [the_person.title] starts to lick her fingers. She seems happy as she lays back in bed next to you. Sleep rapidly overtakes you."
+    "You sleep for a while longer. You aren't surprised though when you feel warm, wet sensations enveloping your cock again."
+    "The delicious suction and the sound of [the_person.possessive_title]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
+    $ the_person.draw_person(position = "blowjob")
+    "You crack your eyes open and see Candi, working diligently to get you off with her mouth. You aren't sure how long she has been doing this, but it's definitely working."
+    "You reach down and run your hand through her hair, helping keep it out of her way. She looks up at you an makes eye contact... And then maintains is as she starts to give you long, slow strokes with her mouth."
+    mc.name "God... I thought I was empty last time... Get ready here it cums again!"
+    "She takes you out of her mouth and strokes you with her hands. She points you down at her chest as you begin to fire off your load."
+    $ the_person.cum_on_tits()
+    $ the_person.cum_on_ass()
+    "She keeps eye contact and doesn't say a word as you drop your load all over her chest. It immediately starts soaking into her nightgown. You can see the stains from earlier still on her belly."
+    "You aren't sure what happens after that, because you pass out again. Your last thought as you fall back asleep, is that [the_person.title] must think a slumber party means getting as much cum as possible on her nightgown."
+    "You open your eyes. Sunlight? Next to you, the bed is empty. Crap, what time is it? You get up and reach for your phone."
+    "The battery is dead. Is that coffee you smell? [the_person.title] must hear you stirring, she soon appears in the door to her bedroom."
+    $ the_person.draw_person(position = "stand4")
+    "She is still wearing the same nightgown. Evidence of your long, sex filled night apparent."
+    the_person "Good morning sleepyhead!"
+    mc.name "Hey... Is that coffee?"
+    the_person "Yup! I have some eggs and toast ready too!"
+    mc.name "Wow, you didn't have to do that."
+    "She looks at you, a bit puzzled."
+    the_person "I don't? My last boyfriend always told me to, like, always have breakfast ready whenever he gets up!"
+    "That's right, her last boyfriend was a controlling asshole. You forget that sometimes."
+    "You shake your head."
+    mc.name "That sounds great, but you don't HAVE to do that. I appreciate it though!"
+    "You start to get up. As you push the blankets down, you remember that you are completely naked."
+    mc.name "Are my clothes still out there?"
+    the_person "Oh... Well... Maybe I shouldn't have done this but... Like... I threw your stuff in the washer..."
+    "You grimace. You doubt she has anything extra you can wear."
+    the_person "It's okay though! They'll be clean before it's time to go to work."
+    mc.name "Ah, okay. What time is it?"
+    the_person "It's about 7."
+    "That should work out okay. Eat some breakfast, and you can head in to work with [the_person.title] and go straight to [head researcher]."
+    "A timer goes off in the other room."
+    the_person "Oh! I gotta get back to the kitchen!"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.title] turns and leaves the room. As she turns, you notice her nightgown has cum stains on the ass too... When did that happen? Did she make you cum while you were completely asleep too?"
+    "You slowly get up, your feet a little unsteady. You work your way out of the bedroom."
+    "Next to the kitchen, there is a small table with two chairs. You walk over and sit down at one."
+    $ the_person.draw_person(position = "back_peek")
+    the_person "It's almost ready. Sorry I, like, only know how to make scrambled eggs..."
+    mc.name "It's quite alright. Listen... I just want to make sure you know this... You didn't have to make me cum so much last night either..."
+    the_person "Oh, I know. I just... Wanted to. I haven't had someone stay over since... Well, as far as I can remember anyway! I thought that like, if you had a good time, maybe you'd stay over again sometime..."
+    "She turns and sets down two plates of eggs and toast, then turns back and starts pouring a couple cups of coffee."
+    mc.name "Your old boyfriend, he never stayed over here?"
+    "She turns around with two cups, then sits down across from you."
+    $ the_person.draw_person(position = "sitting")
+    the_person "No, he used to make me come to his place, he never really came here... He didn't let me umm... Do stuff... In the night either. Said he needed his sleep."
+    mc.name "I umm... It might be good to ask next time... I didn't mind it, but I'm definitely pretty tired today."
+    the_person "I'm sorry! I just... I could feel it, you know, get hard? And I couldn't help myself!"
+    mc.name "It's okay, really. I could have said no, and it... Well it's pretty amazing, to wake up to a woman like you pleasuring me."
+    the_person "Yay! That's why you should stay over again!"
+    "You take a bite of the eggs. It's actually pretty good. The coffee is hot and helps wake you up."
+    mc.name "Listen... Today we are going to go talk with [head researcher]. I promised we'll definitely do this again sometime, but for now, I want you to work with her, okay? I want to find out if we can reverse the effects of the lab experiment."
+    "She picks at her breakfast."
+    the_person "There are times... You know? Like where I feel like I almost... Remember. Like, I remember being so excited. Like I was on the verge of something! But there was a deadline... Our funding was gonna get cut..."
+    $ the_person.draw_person(position = "sitting", emotion = "angry")
+    "She furrows her brow."
+    the_person "I just... Ugh! I can't remember! I can't remember anything..."
+    mc.name "It's okay. Thank you for breakfast. It's very good."
+    $ the_person.draw_person(position = "sitting", emotion = "happy")
+    the_person "Like, totally!"
+    "It's amazing how quickly her personality changes back to her normal, bubbly self."
+    "You finish your breakfast and sit sipping your coffee. Candi finishes up as well. She stands up and grabs your plates."
+    $ the_person.draw_person(position = "stand2")
+    "She takes them over to the her sink and begins to wash them. As you watch, she bends over, scrubbing them clean..."
+    $ the_person.draw_person(position = "standing_doggy")
+    "God, her ass is great. Even after cumming over and over last night, you feel blood flowing to your dick as you watch her bent over."
+    "Still completely naked, you know there is no way you can hide it from her. Maybe you should take charge, and give her a good fuck before you both head in to work."
+
+    "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up? Then you notice... She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
+    "You grip her hips with your hands, and then push your fully erect cock against her ass."
+    the_person "Oh, thank God, I was, like, REALLY hoping to get one more before work..."
+    "You slowly lift up her nightgown, exposing her rear. You position the head of your cock against her entrance and then start to rub it up and down her slit. When you pull back for a second, your tip is slick with her arousal."
+    $ the_person.change_arousal(15)
+    the_person "Stop teasing... I'm ready. I'm always ready!"
+    mc.name "I know, but someone has to teach you patience."
+    the_person "I'm patient! I can totally be patient, I'm the most... Ohhh!!!"
+    "You cut her off mid sentence as you thrust yourself all the way into her. You don't give her time to recover, as you start to roughly fuck her."
+    # TODO fuck scene
+
+    # You decide to just wait and see what happens. You continue to enjoy the view of Candi's ass as she scrubs your plates clean, then sets them on a drying rack. She turns around and immediately notices your erection.
+    # "Oh, thank God, I was, like, REALLY hoping to get one more in before work..."
+    # She starts to walk over to you. You give her a simple ultimatum.
+    # "We can do it one more time... But this time I finish inside you. Your choice of what hole."
+    # She gives you a smile. "Mmm... Decisions... Decisions..."
+    "As you are both recovering, you hear a buzzer go off."
+    the_person "Oh! The dryer is done! I guess it's about time to head into the office..."
+    "[the_person.title] disappears for a moment then comes back, holding your clothes."
+    $ the_person.draw_person(position = "stand4")
+    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title] also getting ready for the day."
+    # TODO [Change Candi outfit to planned outfit]
+    mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [head researcher]."
+    the_person "Okay! See you later!"
+    "You step out of Candi's apartment. You should make it a priority to talk to your head researcher."
+    return
+
+label candace_begin_cure_research_label(the_person):
+    #scene_manager init
+    mc.name "I need to talk to you about something. Can come with me to my office?"
+    "Your head researcher looks up from her work and nods."
+    the_person "Sure, I'll be right there."
+    "She follows you to your office. You close the door in the way in, and you both have a seat."
+    # [Sitting down]
+    mc.name "I need to talk to you about [candace.title]. Before she came here, she worked at another pharmaceutical company similar to this one."
+    #[If you have already researched the bimbo serum]
+    mc.name "I think she may have been involved in a trial in something similar to our bimbo serum."
+    #else:
+    mc.name "I think she may have been involved in some sort of trial on a drug that affected her mental capacities."
+    the_person "I actually thought something similar. I didn't know that she came from a competitor, but her personality exhibits all of the traits that we've seen from the serum, both physical and mental."
+    mc.name "Unfortunately, it has inhibited her ability to function independently. Do you think there is any way of reversing the serum effects? Or even just partially?"
+    the_person "Wow... That's a difficult question. Up until now, just about all of our work has been on making the serums MORE effective, not nullifying them."
+    mc.name "I understand that this is a difficult question... But unfortunately [candi.title] is no longer able to manage. I can't sit idly by and watch her life get ruined, if there is something we can do to help her."
+    "Your head researcher ponders the issue for a bit."
+    the_person "Can you give me some time to study her? With a few tests... Maybe I could figure something out."
+    mc.name "That is fine. I actually need to find her a place to stay for a bit..."
+    "You explain to [the_person.title] what happened with [candi.possessive_title] getting arrested and your conversation with the police chief."
+    the_person "Wow... Tell you what. Why don't you have her move in with me for a bit? I can work on it on the side, and between me and [ashley.name] we should be able to keep an eye on her..."
+    mc.name "[the_person.title], you're amazing. Let me call her in and we'll talk to her."
+    "You call [candace.title] and ask her to come to your office. In a minute there's a knock on your door."
+    mc.name "Come in"
+    # [Draw Candi]
+    candace "You need something?"
+    mc.name "Have a seat."
+    "[candace.title] walks in and sits down next to [the_person.possessive_title]."
+    mc.name "Remember how we talked about having [the_person.title] examining you and doing some research?"
+    "She looks at you with a puzzled look."
+    candace "I... I remember we had a slumber party..."
+    "You can tell that she is struggling to remember."
+    mc.name "You got arrested, remember?"
+    candace "Right! And I told the nice police officer I was hiding drugs 'somewhere special' and so he had to do a strip search and..."
+    mc.name "[candace.title], we said we would talk with [the_person.title] about helping you control some of your... Urges... Among other things."
+    candace "If you say so boss!"
+    mc.name "Okay. Well, in order to keep things from impacting the business too much, [the_person.title] would like you to stay with her for a while. It will make it easier for her to run tests on you as necessary."
+    candace "You mean... You want me to move in? With [the_person.title]?"
+    mc.name "Don't worry, it would only be temporary. A couple weeks at most."
+    mc.name "Think of it, like a slumber party."
+    candace "Oh! A slumber party! That will be like, so much fun!"
+    "[the_person.possessive_title ]gives you a little glare, but she goes along with it."
+    the_person "I'll come over after work today and help you pack a few things."
+    mc.name "Good. Let me know if you either of you need anything."
+    "With that, you dismiss the meeting. Hopefully [the_person.title] will be able to find some way to reverse the effects of the serum that made [candace.possessive_title] this way."
+    return
+
+label candace_anti_bimbo_serum_label():
+    $ the_person = stephanie
+    "You get a text from [the_person.title]."
+    the_person "Hey! Meet me in your office ASAP!"
+    $ the_person.draw_person(position = "sitting")
+    "You quickly head to your office and find [the_person.possessive_title] sitting behind your desk with her feet up."
+    the_person "Guess what? I'm a fucking genius."
+    mc.name "Oh? Do you have something to report from your research with Candi?"
+    the_person "Something like that. You see, at first, I was racking my brain, trying to come up with some crazy chemical compound that could go back and undo a complex drug with multiple binding points and effects. But then I realized, I was doing it all wrong."
+    mc.name "Oh?"
+    the_person "Yeah! You don't need to UN-do all the previous serums effects, I just needed to create NEW serums that countered the undesirable side effects. Specifically for [candace.title], the effect that makes her a total dumbass, the loss of her intelligence."
+    mc.name "And you were successful in creating something to do that?"
+    the_person "Well... Kind of. I have a pretty good idea of how to do that, but I'm going to need help researching it. I added my idea to the serum trait database."
+    the_person "If you want us to look into it more, the research team will get to work on it. It is something that could be very useful, in general. If someone were to accidentally ingest the bimbo serum or something, this could atleast counteract the effect on their mental state and personality."
+    mc.name "That sounds very useful. Let me think about it and I'll swing by research later if I decide to have the research department focus on it."
+    if the_person.sluttiness > 60:
+        the_person "Okay... In the mean time, [candace.title] can feel free to keep staying with me. We've, umm, had a lot of fun, living together the last few weeks!"
+        "You remember the night you spent with her. You are certain they've been having lots of fun together."
+        mc.name "Sounds good, I appreciate it."
+        #TODO [Set Steph and Candi to best friends]
+    else:
+        the_person "Okay... Well, don't delay it, okay? Living with her has been... Stressful."
+        the_person "She keeps 'accidentally' walking in on me when I'm showering and sometimes when I wake up in the morning she's in my bed next to me!"
+        mc.name "It won't be too much longer. I appreciate it."
+        the_person "Okay... She's driving me crazy, okay!"
+        #TODO [Set Candi and Steph to nemesis]
+    "[the_person.title] le
+
+    aves your office. You now have a new serum trait available to research. It has the powerful effect of reversing the bimbo serum's personality change and intelligence penalty!"
+    return
+
+label candace_cure_bimbo_label():
+    $ the_person = stephanie
+    "You have now finished researching the anti bimbo serum trait. You text your lead researcher."
+    mc.name "Hey, can you make me a single dose anti bimbo serum for [candace.title]?"
+    the_person "Already done. I figured you would want that."
+    mc.name "Thanks, bring it to my office. I'll have her meet us there."
+    "You walk to your office and sit down. You call Candi and have her come. You admit that you are very nervous about what is about to happen. Will [candace.possessive_title]suddenly remember everything that's happened?"
+    "Will she hold you responsible for all the times you fucked her in her current state? There are so many possibilities, it's impossible to know what is about to happen."
+    "Both girls walk into your office at about the same time."
+    candace "Yeah boss?"
+    mc.name "Sit down. [candace.title] I have some good news. [the_person.title] has designed a serum to help you get back to your old self. It won't be a complete reversal, but it should help a lot with some of the issues you've been having with your memory and impulse control"
+    candace "Okay boss. If that's what you want, I'd be happy to try it."
+    mc.name "Thank you for trusting me. It means a lot. [the_person.title]?"
+    the_person "Okay... Do you mind if I take notes? This will be our first human trial..."
+    candace "Sure."
+    "[the_person.title] hands [candace.possessive_title] the vial."
+    the_person "Here you go. I made it a little salty, the way you said you like it. I couldn't recreate the other properties you asked for reliably..."
+    candace "Oh! Well thanks for trying."
+    "Without further ado, she pops the cap and downs it. She hands the vial back to [the_person.title] and you wait."
+    "[candace.title] closes her eyes and begins to breath deeply. So far she doesn't seem to be having any major negative reactions, but you are starting to get concerned."
+    "It's only been a minute or two, but it feels like an eternity. Finally she opens her eyes and looks at you. Her pupils narrow and you can her focus on you with a startling level of concentration."
+    candace "[candace.mc_title]... This is incredible!"
+    mc.name "Candi, are you okay?"
+    candace "Candi? Yes that's what I went by... But you can call me Candace."
+    $ candace.set_title = "Candace"
+    "You feel a sense of relief, but also a bit of fear. Is this the same person still? Or is she someone completely different now?"
+    mc.name "How are you feeling [candace.title]? Do you know where you are? What has been happening recently?"
+    "She turns to [the_person.title]."
+    candace "Yes. Yes I remember... Everything."
+    the_person "Anything you can tell us? About what originally happened to you? Or how you got here?"
+    "Her brow furrows as she starts to recall."
+    candace "I was the lead researcher, at another company, but we had just received word that our government funding was going to get cut if we couldn't get results."
+    "She clears her throat and continues."
+    candace "I was desperate, but also overconfident. I decided to rush human trials, but my boss said no. So I decided to take it myself."
+    the_person "What were you trying to make?"
+    candace "It seems so silly now. It was a drug designed for espionage. To reduce someone to their basest desires and to be completely open to suggestion and to be truthful. The implications of the drug in the hands of the intelligence agency were immense."
+    candace "But it was supposed to be temporary. In animal testing, the drug worked it's way out of the body within 24 hours. Something went wrong with mine... The effects... Appear to have been permanent?"
+    "She shakes her head. Her fists clench as she remembers the next events."
+    candace "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met [ex name]..."
+    candace "I was out in front of this strip club... Trying to find someone to take me home that night, when I ran into him. He could tell I was in a bad spot... And totally took advantage of it."
+    candace "Soon I was his 'personal secretary', but he wasn't even paying me anything. I was doing all sorts of errands for him, trading sexual favors for discounts, among other things."
+    "[candace.title] turns to you, her expression softening."
+    candace "But then, I met you... At that restaurant. You convinced me to quit, and to leave that controlling asshole... And gave me a job..."
+    mc.name "I'm glad I was able to help..."
+    candace "You did more than just help. You brought stability back to my life, gave me hope... You even bailed me out of jail! I owe you a great debt Mr [name]."
+    mc.name "Please, just [name]. I'm sorry about the times I also took advantage of your mental state."
+    candace "What? I don't remember you doing anything like that."
+    mc.name "We've been intimate. A lot actually."
+    candace "Yes. And I'd like for that to continue. You weren't taking advantage, you were giving me exactly what I wanted."
+    mc.name "I see. What about your work? Would you like to move over to the research department? We are doing amazing things here."
+    candace "No, no. Not right now anyway. I need some time away all that. I think for now I'd like to continue where I am now. It is actually quite enjoyable."
+    candace "Actually, I think I know of a few suppliers I might be able to secure better contracts with, if I use a little persuasion anyway."
+    mc.name "You don't need to keep using your body to secure discounts from suppliers if you don't want to."
+    "She looks at you a bit puzzled."
+    candace "Why wouldn't I want to? [Name], a woman's body is an incredible tool to wield as they choose. If I want to be the best I can be, why would I deny myself the use of that tool?"
+    "[candace.title] gives you a wink."
+    candace "Plus, it's really really fun to be a tease."
+    "Oh god, what have you created? You realize any man who tries to negotiate unfavorable contract terms with this woman is absolutely fucked."
+    "It is clear that even though she has her intelligence back, [candace.title] still has her previous opinions on her sexuality."
+    "You look over and see [the_person.title] scribbling down notes at an incredible pace."
+    the_person "Wow... This is just absolutely amazing. Candi... Err... [candace.title]... Tonight after work, I suppose I'll help you pack up so you can move back to your place then?"
+    candace "Yes I would like that. You've been very nice, letting me stay with you, but I think I would like my personal space back. Really, the work that has been done to help me... I don't think I will ever be able to repay you."
+    the_person "Well, when [name] came to me and asked me to do it... I knew I couldn't say no. I'm so relieved that it has all worked out."
+    candace "Ah, so you were the architect of the whole thing [name]? I suppose I shouldn't be surprised."
+    mc.name "Well... That night at the police station. The chief talked to me before I bailed you out. He wanted me to apply to be your conservator. I knew I needed to do everything I could to get the effects reversed..."
+    candace "Wow... I didn't realize things had gone that far. I'm going to have to think about that for a bit. Now, unless there's more to discuss, I think I have some new supply contracts to negotiate."
+    "The girls turn and leave you in your office. The progress made with [candace.title] has been incredible, for sure. It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
+    return
+
 #Character variable wrappers
 init 3 python:
     def candace_get_day_met():
