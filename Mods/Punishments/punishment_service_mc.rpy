@@ -22,14 +22,15 @@ init 1 python: #Original code is at -1, so make sure we are higher than that for
 
         # Practice adding a time gated work discipline.
         def add_practice_cocksucking_work_action(person):
-            person.add_role(employee_practice_cocksucking_work_role)
-            clear_action = Action("Clear employee cocksucking practice", employee_cocksucking_practice_remove_requirement, "employee_cocksucking_practice_remove_label", args = person, requirement_args = [person, day + 7])
-            mc.business.mandatory_crises_list.append(clear_action)
+            if not person.has_role(employee_practice_cocksucking_work_role): # prevent adding it twice
+                person.add_role(employee_practice_cocksucking_work_role)
+                clear_action = Action("Clear employee cocksucking practice", employee_cocksucking_practice_remove_requirement, "employee_cocksucking_practice_remove_label", args = person, requirement_args = [person, day + 7])
+                mc.business.mandatory_crises_list.append(clear_action)
             return
 
+        employee_practice_cocksucking_work_role = Role("Practicing Cocksucking", [], hidden = True)
 
         punishment_service_mc_action = Action("Service Me", punishment_service_mc_requirement, "punishment_service_mc_label") #Let's follow previous naming conventions and add label to labe names
-
         list_of_punishments.append(punishment_service_mc_action)
 
 label punishment_service_mc_label(the_person, the_infraction):
@@ -70,11 +71,8 @@ label punishment_service_mc_label(the_person, the_infraction):
         mc.name "I have a new punishment for you. I want you to practice sucking cock for the next week. Then come back to me and try again."
         the_person "That's... that's crazy!"
         mc.name "What's crazy is how bad at giving head you are. You heard me, now get back to work."
-        $ the_person.change_happiness(-5)
-        $ the_person.change_obedience(3)
-        $ the_person.change_slut_temp(3)
-        $ employee_practice_cocksucking_work_role = Role("Practicing Cocksucking", [], hidden = True) #TODO I think its okay to declare this here...
-        $ employee_role.link_role(employee_practice_cocksucking_work_role) #Code looks like its okay to run this more than once... but should probably pull this out into an init type label at some point
+
+        $ the_person.change_stats(happiness = -5, obedience = 3, slut_temp = 3)
         $ add_practice_cocksucking_work_action(the_person)
     else:
         "You give a sigh, satisfied after [the_person.possessive_title] drained your balls."
@@ -88,20 +86,23 @@ label punishment_service_mc_label(the_person, the_infraction):
 
 label employee_cocksucking_practice_remove_label(the_person):
     python:
-        if employee_practice_cocksucking_work_role in the_person.special_role:
+        if the_person.has_role(employee_practice_cocksucking_work_role):
             the_person.remove_role(employee_practice_cocksucking_work_role, remove_linked = False)
 
-        if employee_role in the_person.special_role: #She may have quit/been fired since then.
+        if the_person.has_role(employee_role): #She may have quit/been fired since then.
+            the_person.sex_skills["Oral"] = min(4, the_person.sex_skills["Oral"] + 1)
+
+            if the_person.get_opinion_score("giving blowjobs") <= -2:
+                the_person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she atleast tries to give MC a blowjob.
+
             practice_cocksucking_report_action = Action("Cocksucking practice report crisis", employee_cocksucking_practice_report_requirement, "employee_cocksucking_practice_report_label", args = the_person, requirement_args = the_person)
             mc.business.mandatory_crises_list.append(practice_cocksucking_report_action)
-        the_person.sex_skills["Oral"] = min(4, the_person.sex_skills["Oral"] + 1)
-        if the_person.get_opinion_score("giving blowjobs") <= -2:
-            the_person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she atleast tries to give MC a blowjob.
     return
 
 label employee_cocksucking_practice_report_label(the_person):
-    if employee_role not in the_person.special_role: #She doesn't work here, bail out!
+    if not in the_person.has_role(employee_role): #She doesn't work here, bail out!
         return
+
     $ the_person.draw_person()
     "[the_person.title] catches your attention while you are working."
     the_person "Do you have a moment [the_person.title]?"
@@ -128,16 +129,13 @@ label employee_cocksucking_practice_report_label(the_person):
         mc.name "Fine... next time I'll just have you service me with a different hole."
         the_person "Yes sir."
         mc.name "What's crazy is how bad at giving head you are. You heard me, now get back to work."
-        $ the_person.change_happiness(-5)
-        $ the_person.change_obedience(3)
-        $ the_person.change_slut_temp(3)
+        $ the_person.change_stats(happiness = -5, obedience = 3, slut_temp = 3)
     else:
         "You give a sigh, satisfied after [the_person.possessive_title] drained your balls."
         mc.name "Much better performance."
         mc.name "You look good like that. Next time this happens, I'll have you wear my cum on your face for the rest of the day."
         the_person "Yes sir..."
-        $ the_person.change_happiness(-5)
-        $ the_person.change_obedience(4)
+        $ the_person.change_stats(happiness = -5, obedience = 4)
     mc.name "Alright, I hope you learned something. Now get back to work."
     $ clear_scene()
     return
