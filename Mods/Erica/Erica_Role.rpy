@@ -1679,7 +1679,7 @@ label erica_weekly_yoga_label(the_person):
             call screen serum_inventory_select_ui(mc.inventory)
             if not _return == "None":
                 $ the_serum = _return
-                if mc.business.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
+                if mc.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
                     "You decide to add several doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
                     python:
                         for yca in [the_person, yoga_assistant] + yoga_list:
