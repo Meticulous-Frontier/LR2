@@ -475,12 +475,12 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ position_choice = None
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):
-                    the_person_one.char "I'm exhausted [the_person_one.mc_title], I can't keep this up..."
+                    the_person_one "I'm exhausted [the_person_one.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_two.energy > 30:
                         #TODO give option to continue fucking the second girl
-                        the_person_two.char "Don't worry, I'm still good to go!"
+                        the_person_two "Don't worry, I'm still good to go!"
                         "Do you want to continue?"
                         menu:
                             "Fuck [the_person_two.title]":
@@ -495,14 +495,14 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
                     else:
-                        the_person_two.char "Yeah me too. I think I need a break!"
+                        the_person_two "Yeah me too. I think I need a break!"
                         $ finished = True
                 elif not active_mc_position.check_girl_two_energy(the_person_two):
-                    the_person_two.char "I'm exhausted [the_person_two.mc_title], I can't keep this up..."
+                    the_person_two "I'm exhausted [the_person_two.mc_title], I can't keep this up..."
                     $ position_choice = None
                     $ active_mc_position = None
                     if the_person_one.energy > 30:
-                        the_person_one.char "Don't worry, I'm still good to go!"
+                        the_person_one "Don't worry, I'm still good to go!"
                         "Do you want to continue?"
                         menu:
                             "Fuck [the_person_one.title]":
@@ -518,7 +518,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
                         pass
                     else:
-                        the_person_one.char "Yeah me too. I think I need a break!"
+                        the_person_one "Yeah me too. I think I need a break!"
                         $ finished = True
                 #else: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
                 #for now disable stripping
@@ -691,12 +691,12 @@ label threesome_strip_menu(the_person_one, the_person_two):
 
     if strip_choice == "strip_one":
         mc.name "[the_person_one.title], I want you to give me full access."
-        the_person_one.char "Of course!"
+        the_person_one "Of course!"
         $ scene_manager.strip_actor_outfit(the_person_one)
         $ scene_manager.draw_scene()
     elif strip_choice == "strip_two":
         mc.name "[the_person_two.title], I want you to give me full access."
-        the_person_two.char "Sounds good!"
+        the_person_two "Sounds good!"
         $ scene_manager.strip_actor_outfit(the_person_two)
         $ scene_manager.draw_scene()
     else:

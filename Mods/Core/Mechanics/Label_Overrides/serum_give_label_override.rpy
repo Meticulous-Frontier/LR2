@@ -64,7 +64,7 @@ label serum_give_label_enhanced(the_person):
         else:
             #Caught!
             "You finally distract [the_person.title] and have a chance to give her a dose of serum."
-            the_person.char "Hey, what's that?"
+            the_person "Hey, what's that?"
             "You nearly jump as [the_person.title] points down at the small vial of serum you have clutched in your hand."
             $ ran_num = renpy.random.randint(0,10)
             if ran_num < mc.charisma:
@@ -81,7 +81,7 @@ label serum_give_label_enhanced(the_person):
                 $ the_person.change_obedience(-10)
                 $ the_person.change_happiness(-10)
                 $ the_person.change_love(-5)
-                the_person.char "Were you about to put that in my drink? Oh my god [the_person.mc_title]!"
+                the_person "Were you about to put that in my drink? Oh my god [the_person.mc_title]!"
                 mc.name "Me? Never!"
                 "[the_person.title] shakes her head and storms off. You can only hope this doesn't turn into something more serious."
                 $ clear_scene()
@@ -101,17 +101,17 @@ label serum_give_label_enhanced(the_person):
             #Success
             if mc.business.get_employee_title(the_person) == "None":
                 if the_person.personality.personality_type_prefix == "nora":
-                    the_person.char "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
+                    the_person "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
                 else:
-                    the_person.char "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
+                    the_person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
             else:
-                the_person.char "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
+                the_person "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
             mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
             call give_serum(the_person) from _call_give_serum_enhanced_3
         else:
             #Denies
             $ the_person.change_obedience(-2)
-            the_person.char "I'm... I don't think I would be comfortable with that. Is that okay?"
+            the_person "I'm... I don't think I would be comfortable with that. Is that okay?"
             mc.name "Of course it is, that's why I'm asking in the first place."
 
     elif _return == "policy":
@@ -122,11 +122,11 @@ label serum_give_label_enhanced(the_person):
     elif _return == "demand":
         mc.name "[the_person.title], you're going to drink this for me."
         "You pull out a vial of serum and present it to [the_person.title]."
-        the_person.char "What is it for, is it important?"
+        the_person "What is it for, is it important?"
         mc.name "Of course it is, I wouldn't ask you to if it wasn't."
         if ran_num <= chances[2]:
             #Success
-            the_person.char "Okay, if that's what you need me to do..."
+            the_person "Okay, if that's what you need me to do..."
             call give_serum(the_person) from _call_give_serum_enhanced_5
         else:
             #Refuse
@@ -134,7 +134,7 @@ label serum_give_label_enhanced(the_person):
             $ the_person.change_obedience(-2)
             $ the_person.change_happiness(-2)
             $ the_person.change_love(-2)
-            the_person.char "You expect me to just drink random shit you hand to me? I'm sorry, but that's just ridiculous."
+            the_person "You expect me to just drink random shit you hand to me? I'm sorry, but that's just ridiculous."
 
     elif _return == "pay":
         #Pay cost and proceed

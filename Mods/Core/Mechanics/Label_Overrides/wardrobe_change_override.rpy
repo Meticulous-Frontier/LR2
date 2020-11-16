@@ -33,7 +33,7 @@ label wardrobe_change_label_enhanced(the_person):
             $ new_outfit = _return[1] #Select the outfit from the returned list
         else: #Compatability for older versions.
             $ new_outfit = _return
-        
+
         call screen enhanced_main_choice_display(build_menu_items([build_wardrobe_change_save_menu(new_outfit)]))
         $ outfit_type = _return
 
@@ -60,7 +60,7 @@ label wardrobe_change_label_enhanced(the_person):
             $ the_person.set_outfit(_return)
             if the_person.update_outfit_taboos():
                 "[the_person.title] seems nervous wearing her new outfit in front of you, but quickly warms up to it."
-            the_person.char "Is this better?"
+            the_person "Is this better?"
         else:
             $ the_person.apply_planned_outfit()
         $ the_person.draw_person()

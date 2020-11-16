@@ -423,11 +423,11 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             "[the_person.title] looks around, but can't see anywhere to have fun with you."
             $ finished = True
         elif the_person.energy < 15 :
-            the_person.char "I'm tired. Maybe we will continue this another time."
+            the_person "I'm tired. Maybe we will continue this another time."
             $ finished = True
 
     if sex_path and len(sex_path) > 1 and not finished:
-        the_person.char "Let's get warmed up a little bit first..."
+        the_person "Let's get warmed up a little bit first..."
     #TODO determine condom usage. Can probably just call a method from the sex bugfix file
 
     if the_goal:
@@ -436,7 +436,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     if not skip_intro and not finished:
         $ the_person.draw_person()
         if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom:
-            the_person.char "Hang on a second. I need to wrap this thing up first."
+            the_person "Hang on a second. I need to wrap this thing up first."
             "[the_person.title] gets a condom out of their own bag and opens it."
             "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
             $ mc.condom = True
@@ -471,7 +471,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ finished = True
 
         elif current_node.position.girl_energy > the_person.energy:
-            the_person.char "I'm exhausted [the_person.mc_title], I can't keep this up..."
+            the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
             $ finished = True
 
         #Determine if the current node has completed its finished requirement.
@@ -486,9 +486,9 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                         $ object_choice = make_wall()
                     else:
                         $ object_choice = make_chair()
-                the_person.char "Mmm, I think we're ready. Let's move on now!"
+                the_person "Mmm, I think we're ready. Let's move on now!"
                 if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom and not mc.condom:
-                    the_person.char "Hang on a second. I need to wrap this thing up first."
+                    the_person "Hang on a second. I need to wrap this thing up first."
                     "[the_person.title] gets a condom out of their own bag and opens it."
                     "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
                     $ mc.condom = True
@@ -502,7 +502,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
             else:
                 $ finished = True    #Sex goal has been accomplished
-                the_person.char "Mmm, that was exactly what I was hoping for!"
+                the_person "Mmm, that was exactly what I was hoping for!"
         elif len(sex_path) > 0:
             if not sex_path[0].position.check_clothing(the_person): #We don't meet the clothing requirements for the next position, so we strip some
                 $ the_clothing = the_person.choose_strip_clothing_item()
@@ -517,83 +517,83 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     if allow_continue: #Allows sex to keep going after girl finishes objectives
         if sex_can_continue(the_person, the_node = current_node) and the_person.obedience > 100 and mc.arousal > 50:
             "As she finishes up, [the_person.title] gives your erection a couple strokes."
-            the_person.char "Actually, do you want me to keep going? Or maybe you should take over..."
+            the_person "Actually, do you want me to keep going? Or maybe you should take over..."
             menu:
                 "Keep going":
                     mc.name 'Keep going, this is hot.'
-                    the_person.char "Yes sir!"
+                    the_person "Yes sir!"
                     call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_01
                 "Take over":
                     mc.name "Come here, I'm not done with you yet."
                     call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_01
                 "Finish":
                     mc.name "Let's be done for now."
-                    the_person.char "Okay."
+                    the_person "Okay."
         #Second condition, she isn't obedient but atleast likes MC a little bit. She offers to continue
         elif sex_can_continue(the_person, the_node = current_node) and the_person.love > 0 and mc.arousal > 50:
             "As she finishes up, [the_person.title] gives your erection a couple strokes."
-            the_person.char "Wow, you are still rock hard. Do you want me to keep going?"
+            the_person "Wow, you are still rock hard. Do you want me to keep going?"
             menu:
                 "Keep going":
                     mc.name 'Yes, please keep going.'
-                    the_person.char "Okay, I can do that!"
+                    the_person "Okay, I can do that!"
                     call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_02
                 "Finish":
                     mc.name "Let's be done for now."
-                    the_person.char "Okay."
+                    the_person "Okay."
 
         #Third condition, she doesn't care for MC. She forces him to beg. She may or may not comply (think Gabrielle)
         elif sex_can_continue(the_person, the_node = current_node) and mc.arousal > 50:
             "As she finishes up, [the_person.title] looks at your rock hard cock."
-            the_person.char "Still hard? I bet you want me to keep going, don't you..."
+            the_person "Still hard? I bet you want me to keep going, don't you..."
             "She takes a pause before she continues."
-            the_person.char "If you want me to keep going, you're going to have to beg for it. Want me to?"
+            the_person "If you want me to keep going, you're going to have to beg for it. Want me to?"
             menu:
                 "Beg her to continue":
                     mc.name "Oh god, please keep going. I'm so close, just a little bit farther!"
                     "She laughs at your plight while she considers what to do."
                     if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continuing
-                        the_person.char "Hmm, I guess it's only fair. Maybe I'll even finish again!"
+                        the_person "Hmm, I guess it's only fair. Maybe I'll even finish again!"
                         $ the_person.change_stats(obedience = -5, slut_temp = 5)
                         call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
                     else:
-                        the_person.char "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
+                        the_person "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
                         "[the_person.possessive_title] gets up, leaving you hanging."
                         $ the_person.change_stats(obedience = -5, slut_temp = 5)
                 "Finish":
                     mc.name "There's nothing special about you. Let's be done, I can always get a more willing cunt."
-                    the_person.char "Whatever [the_person.mc_title], your loss!"
+                    the_person "Whatever [the_person.mc_title], your loss!"
                     $ the_person.change_stats(obedience = 2, love = -5)
         elif sex_can_continue(the_person) and the_person.love > 50: #She loves you, so she leaves it up to you if you want to keep going.
             "As she finishes up, [the_person.title] cuddles up beside you."
-            the_person.char "Mmm, thank you. I needed that really bad."
+            the_person "Mmm, thank you. I needed that really bad."
             "She pauses for a moment."
-            the_person.char "Are you good? Or do you want to keep going?"
+            the_person "Are you good? Or do you want to keep going?"
             menu:
                 "Take over":
                     mc.name "Come here, I'm not done with you yet."
                     call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_03
                 "Finish":
                     mc.name "Let's be done for now."
-                    the_person.char "Okay."
+                    the_person "Okay."
         elif the_person.energy < 50 and mc.arousal > 70 and the_person.energy > 20 and mc.energy > 30: #She's exhausted and can't defend herself briefly from your advances.
             "You get up, but notice that [the_person.title] is a bit slower. She is breathing heavily and appears to be really worn out."
-            the_person.char "Oh god... just give me a minute, okay?"
+            the_person "Oh god... just give me a minute, okay?"
             $ the_person.draw_person(position = "doggy")
             "She gets on her hands and knees and is obviously worn out. Her current position leaves her ass obviously exposed. You give your rock hard cock a couple strokes and consider taking advantage."
             "She doesn't have the energy to stop you, but if she doesn't like you she might get pretty upset..."
             menu:
                 "Fuck her":
                     "You get behind her. You line yourself up with her cunt."
-                    the_person.char "Hey... [the_person.mc_title]... what are you doing?"
+                    the_person "Hey... [the_person.mc_title]... what are you doing?"
                     mc.name "Shhh, quiet."
                     "With one smooth motion you push yourself inside of her."
                     if the_person.effective_sluttiness() > 100:
-                        the_person.char "Ohhh god. Go ahead and take what you want, I'll just be along for the ride."
+                        the_person "Ohhh god. Go ahead and take what you want, I'll just be along for the ride."
                     elif the_person.effective_sluttiness() > 60:
-                        the_person.char "Ohhhhhh. I'm not sure how long I can do this but if you need to finish that bad go ahead..."
+                        the_person "Ohhhhhh. I'm not sure how long I can do this but if you need to finish that bad go ahead..."
                     else:
-                        the_person.char "What the fuck? Are you kidding me?"
+                        the_person "What the fuck? Are you kidding me?"
                         "You give her ass a sharp spank."
                         mc.name "Quiet. I'm close to cumming, this will only take a minute."
                         $ the_person.add_situational_obedience("finish_him",40,"Whatever, just hurry up and finish.")
@@ -631,11 +631,11 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     return report_log
 
 label remove_condom_go_raw(the_person, the_position):
-    the_person.char "Hang on a second..."
+    the_person "Hang on a second..."
     "[the_person.title] slowly pulls off your cock. You feel her give you a couple strokes with her hand."
     "She slowly pulls the condom off your cock."
     mc.name "[the_person.title]?"
-    the_person.char "Sssshhh... I need to feel it... inside me..."
+    the_person "Sssshhh... I need to feel it... inside me..."
     "[the_person.possessive_title] slowly sinks band down onto your shaft, raw this time."
     $ the_person.change_arousal(5)
     $ mc.change_arousal(5)

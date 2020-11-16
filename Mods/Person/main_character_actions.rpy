@@ -283,18 +283,18 @@ label mc_stop_follow_label(person):
 # Lasik surgery Labels
 label mc_action_lasik_surgery_label(the_person):
     mc.name "[the_person.title], your have beautiful eyes, but they are always hidden behind your glasses."
-    the_person.char "Don't you like them? I can wear different glasses tomorrow."
+    the_person "Don't you like them? I can wear different glasses tomorrow."
     mc.name "I mean, that I really would like to see you without any glasses."
     if renpy.random.randint(1,2) == 1:
-        the_person.char "I'm sorry, but I can't wear lenses."
+        the_person "I'm sorry, but I can't wear lenses."
         mc.name "That's fine."
     else:
-        the_person.char "If you like, I can start wearing lenses."
+        the_person "If you like, I can start wearing lenses."
         mc.name "I don't think that's the right solution."
     mc.name "I made an appointment for you in the clinic for a LASIK surgery where your eyesight will be corrected."
     "[the_person.title] gives you a spontaneous hug."
     $ the_person.draw_person(position = "kissing")
-    the_person.char "You make me so happy [the_person.mc_title], thank you so much!"
+    the_person "You make me so happy [the_person.mc_title], thank you so much!"
     python:
         the_person.change_happiness(10)
         the_person.change_love(5, max_modified_to = 80)
@@ -325,18 +325,18 @@ label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the
                 #Success
                 if mc.business.get_employee_title(person) == "None":
                     if person.personality.personality_type_prefix == "nora":
-                        person.char "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
+                        person "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
                     else:
-                        person.char "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
+                        person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
                 else:
-                    person.char "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
+                    person "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
                 mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
                 call give_serum(person) from _call_give_serum_modded_addition_2
 
             else:
                 #Denies
                 $ person.change_obedience(-2)
-                person.char "I'm... I don't think I would be comfortable with that. Is that okay?"
+                person "I'm... I don't think I would be comfortable with that. Is that okay?"
                 mc.name "Of course it is, that's why I'm asking in the first place."
         "Reconsider":
             pass
