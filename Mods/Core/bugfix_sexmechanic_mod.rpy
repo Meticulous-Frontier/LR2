@@ -605,7 +605,8 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
     if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal") and not mc.condom: #We might need a condom, which means she might say no. TODO: Add an option to pull _off_ a condom while having sex.
         if not ask_for_condom:
             $ ask_for_condom = True
-            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50:
+            # if still has taboo, always ask
+            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
                 # she is not slutty enough and we have the condom dialog
                 call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
                 $ willing = _return
