@@ -68,21 +68,21 @@ label small_talk_person_enhanced(person, apply_energy_cost = True):
             $ opinion_string = opinion_score_to_string(opinion_state[0])
 
             "The two of you chat pleasantly for half an hour."
-            person.char "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
+            person "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
 
             call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
 
             $ prediction_difference = __builtin__.abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
-                person.char "Really? Wow, we really don't agree about [opinion_learned], that's for sure."
+                person "Really? Wow, we really don't agree about [opinion_learned], that's for sure."
             elif prediction_difference == 3:
-                person.char "You really think so? Huh, I guess we'll just have to agree to disagree."
+                person "You really think so? Huh, I guess we'll just have to agree to disagree."
             elif prediction_difference == 2:
-                person.char "I guess I could understand that."
+                person "I guess I could understand that."
             elif prediction_difference == 1:
-                person.char "Yeah, I'm glad you get it. I feel like we're both on the same wavelength."
+                person "Yeah, I'm glad you get it. I feel like we're both on the same wavelength."
             else: #prediction_difference == 0
-                person.char "Exactly! It's so rare that someone feels exactly the same way about [opinion_learned] as me!"
+                person "Exactly! It's so rare that someone feels exactly the same way about [opinion_learned] as me!"
 
             if opinion_state[1]:
                 "You listen while [person.possessive_title] talks about how she [opinion_string] [opinion_learned]."
@@ -97,17 +97,17 @@ label small_talk_person_enhanced(person, apply_energy_cost = True):
 
         $ person.change_happiness(person.get_opinion_score("small talk") + 1)
         if person.get_opinion_score("small talk") >= 0:
-            person.char "It was nice chatting [person.mc_title], we should do it more often!"
+            person "It was nice chatting [person.mc_title], we should do it more often!"
         else:
-            person.char "So uh... I guess that's all I have to say about that..."
-            "[person.char] trails off awkwardly."
+            person "So uh... I guess that's all I have to say about that..."
+            "[person.possessive_title] trails off awkwardly."
     else:
         if person.get_opinion_score("small talk") < 0:
-            person.char "Oh, not much."
+            person "Oh, not much."
             $ person.change_happiness(person.get_opinion_score("small talk"))
             "You try and keep the conversation going, but making small talk with [person.title] is like talking to a wall."
         else:
-            person.char "Oh, not much honestly. How about you?"
+            person "Oh, not much honestly. How about you?"
             $ person.change_happiness(person.get_opinion_score("small talk"))
             "[person.possessive_title] seems happy to chitchat, and you spend a couple of hours just hanging out."
             "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."

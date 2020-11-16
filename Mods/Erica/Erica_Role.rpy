@@ -1679,7 +1679,7 @@ label erica_weekly_yoga_label(the_person):
             call screen serum_inventory_select_ui(mc.inventory)
             if not _return == "None":
                 $ the_serum = _return
-                if mc.business.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
+                if mc.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
                     "You decide to add several doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
                     python:
                         for yca in [the_person, yoga_assistant] + yoga_list:
@@ -1765,7 +1765,7 @@ label erica_weekly_yoga_label(the_person):
             "As she starts to walk by you, she whispers in your ear."
             yoga_assistant.char "If you need help with that, I'm sure we can find a private place after the workday starts..."
             "She walks off leaving you with [the_person.title]"
-            $ scene_manager.remove_actor(the_person)
+            $ scene_manager.remove_actor(yoga_assistant)
             $ remaining_person = the_person
             # call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_01
 

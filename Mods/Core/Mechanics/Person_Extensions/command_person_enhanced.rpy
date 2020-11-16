@@ -21,7 +21,7 @@ init 2 python:
 
 label command_person_enhanced(the_person):
     mc.name "[the_person.title], I want you to do something for me."
-    the_person.char "Yes [the_person.mc_title]?"
+    the_person "Yes [the_person.mc_title]?"
 
     if "action_mod_list" in globals():
         call screen enhanced_main_choice_display(build_menu_items([build_command_person_actions_menu2(the_person)]))
@@ -37,20 +37,20 @@ label give_panties_label(the_person):
     mc.name "I want you to give me your panties..."
 
     if not the_person.wearing_panties():
-        the_person.char "I would love to do that [the_person.mc_title], except that I'm not wearing any..."
+        the_person "I would love to do that [the_person.mc_title], except that I'm not wearing any..."
         mc.name "Ah, I see, you were expecting something to happen today..."
         return
 
     if not the_person.can_remove_panties() and the_person.effective_sluttiness() < 60:
         if mc.location.people > 1:
-            the_person.char "I could do that [the_person.mc_title], but other people might notice if I start stripping down."
+            the_person "I could do that [the_person.mc_title], but other people might notice if I start stripping down."
             mc.name "Why don't you stop wearing panties, so I don't have to ask for them?"
-            the_person.char "Maybe next time..."
+            the_person "Maybe next time..."
         else:
-            the_person.char "I'm sorry [the_person.mc_title], but I'm not stripping down, just to give you my panties."
-            mc.name "Next time wear something that allows you to take them off without stripping."    
+            the_person "I'm sorry [the_person.mc_title], but I'm not stripping down, just to give you my panties."
+            mc.name "Next time wear something that allows you to take them off without stripping."
         return
-    
+
     # store outfit and panties
     $ test_outfit = the_person.outfit.get_copy()
     $ the_item = the_person.get_panties()
@@ -59,13 +59,13 @@ label give_panties_label(the_person):
     $ removed_something = False
 
     if not the_person.can_remove_panties():
-        the_person.char "This might take a minute..."
+        the_person "This might take a minute..."
         if mc.location.people > 1:
             "[the_person.possessive_title] takes a quick look around and starts stripping down."
         else:
             "[the_person.possessive_title] starts stripping down, giving you her panties."
         $ the_person.strip_outfit(exclude_upper = True)
-        the_person.char "Here you are, anything else I can do for you?"
+        the_person "Here you are, anything else I can do for you?"
         $ removed_something = True
     else:
         "[the_person.possessive_title] takes a quick look around and pulls off her panties, placing them in your hand."
@@ -84,5 +84,5 @@ label give_panties_label(the_person):
     if removed_something:
         "She quickly puts her clothes back on."
     else:
-        the_person.char "Is this what you were looking for?"
+        the_person "Is this what you were looking for?"
     return
