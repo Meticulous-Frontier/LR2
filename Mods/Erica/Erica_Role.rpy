@@ -1765,7 +1765,7 @@ label erica_weekly_yoga_label(the_person):
             "As she starts to walk by you, she whispers in your ear."
             yoga_assistant.char "If you need help with that, I'm sure we can find a private place after the workday starts..."
             "She walks off leaving you with [the_person.title]"
-            $ scene_manager.remove_actor(the_person)
+            $ scene_manager.remove_actor(yoga_assistant)
             $ remaining_person = the_person
             # call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_01
 
