@@ -1913,14 +1913,14 @@ label starbuck_candace_product_demo_label(the_person_one):
     $ scene_manager.update_actor(the_person_one, display_transform = character_center, position = "walking_away", z_order = 2)
     $ scene_manager.update_actor(the_person_two, position = "kissing", z_order = 1)
     "[the_person_one.title] let's go of you. She immediately wraps her arms around [the_person_two.title] and embraces her..."
-    "Is she whispering in her ear? Well, so far it seems that [the_person_one.possessive_title] atleast is enjoying her new acquaintance."
+    "Is she whispering in her ear? Well, so far it seems that [the_person_one.possessive_title] at least is enjoying her new acquaintance."
     "Hopefully [the_person_two.possessive_title] has the patience for this too."
     the_person_two "Hello there, it's nice to meet you too..."
     "[the_person_two.title] gives her a hug back. Soon, [the_person_one.title] lets go and starts to look around the store."
     $ scene_manager.update_actor(the_person_one, display_transform = character_right, position = "walking_away")
     $ scene_manager.update_actor(the_person_two, position = "stand4")
     the_person_one "Oh my! I didn't know this existed! Oh... Oh my..."
-    "As [the_person_one.possessive_title] starts to wander off, you get a moment with [the_person_one.title]."
+    "As [the_person_one.possessive_title] starts to wander off, you get a moment with [the_person_two.title]."
     mc.name "Ah, well, as you can see, she's pretty enthusiastic."
     the_person_two "Yeah! That was... Something else. I've never had a customer whisper in my ear that I'm doing gods work before."
     "She shakes her head and then chuckles."
@@ -2002,13 +2002,13 @@ label starbuck_candace_product_demo_label(the_person_one):
     "Everything appears to be all setup. You give a quick countdown, and then begin the video."
     the_person_two "Hello folks! This is [the_person_two.name], from [the_person_two.name]'s Sex Shop, here with another demonstration video! This time we are demonstrating the brand new, Double Girth Maxx 5000!"
     "[the_person_two.title] has an extra that she picks up and begins to go over the details to the camera."
-    the_person_two "Have a size queen in your life that won't shut up about big dicks? This double dildo has a full moneyback gaurentee that it will shut her up! Made with..."
+    the_person_two "Have a size queen in your life that won't shut up about big dicks? This double dildo has a full money-back guarantee that it will shut her up! Made with..."
     "You kind of zone out a bit as she goes over the construction and cleaning requirements. You notice [the_person_one.title] is starting to get a bit impatient also."
     the_person_one "Hey, are you gonna put that thing in me or not?"
     "[the_person_two.title] just smiles and then introduces her assistant."
     the_person_two "Today, to help me with the demonstration, is [the_person_one.name]. One of my favorite features of this product is the suction cups, which have allowed me to attach it to these!"
     "[the_person_two.possessive_title] motions at the strap on she's fashioned."
-    the_person_two "Now, let's see if that gaurentee holds up! Are you ready dear?"
+    the_person_two "Now, let's see if that guarantee holds up! Are you ready dear?"
     the_person_one "About time! I wasn't sure you were ever gonna... OHHHH!"
     "[the_person_one.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [the_person_two.title] holds her hips in place as she starts to push. [the_person_one.title] groans, only managing to sputtering a couple of words out."
     the_person_one "So...full..."
