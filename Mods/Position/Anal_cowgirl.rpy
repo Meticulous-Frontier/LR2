@@ -16,7 +16,6 @@ init python:
         associated_taboo = "anal_sex")
 
     list_of_girl_positions.append(SB_anal_cowgirl)
-    list_of_positions.append(SB_anal_cowgirl)
     SB_anal_cowgirl.girl_outro = "GIC_outro_SB_anal_cowgirl"
 
 #init 1:
