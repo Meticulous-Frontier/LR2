@@ -487,7 +487,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
                                 $ scene_manager.remove_actor(the_person_one, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
-                                call fuck_person(the_person, private = private, report_log = report_log) from threesome_to_twosome_transition_1
+                                call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
                                 $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
                                 $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
@@ -509,7 +509,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
                                 $ scene_manager.remove_actor(the_person_two, reset_actor = False)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
-                                call fuck_person(the_person, private = private, report_log = report_log) from threesome_to_twosome_transition_2
+                                call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
                                 $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
                                 $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
