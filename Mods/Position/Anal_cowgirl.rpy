@@ -1,4 +1,4 @@
-﻿init python:
+init python:
     SB_anal_cowgirl = Position("Anal Cowgirl", slut_requirement = 70, slut_cap = 95, requires_hard = True, requires_large_tits = False,
         position_tag = "cowgirl", requires_location = "Lay",  requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 11, girl_energy = 10,
@@ -9,13 +9,14 @@
         outro = "outro_SB_anal_cowgirl",
         transition_default = "transition_default_SB_anal_cowgirl",
         strip_description = "strip_SB_anal_cowgirl", strip_ask_description = "strip_ask_SB_anal_cowgirl",
-        taboo_break_description = "taboo_break_missionary",
+        taboo_break_description = "taboo_break_SB_anal_cowgirl",
         orgasm_description = "orgasm_SB_anal_cowgirl",
         verb = "ass fuck",
         opinion_tags = ["taking control", "anal sex", "anal creampie"], record_class = "Anal Sex",
         associated_taboo = "anal_sex")
 
     list_of_girl_positions.append(SB_anal_cowgirl)
+    list_of_positions.append(SB_anal_cowgirl)
     SB_anal_cowgirl.girl_outro = "GIC_outro_SB_anal_cowgirl"
 
 #init 1:
@@ -277,7 +278,7 @@ label taboo_break_SB_anal_cowgirl(the_girl, the_location, the_object):
     # TODO: initial dialog needs a little more substance.
     "You slap [the_girl.possessive_title]'s ass and give it a squeeze."
     if the_girl.effective_sluttiness(SB_anal_standing.associated_taboo) > SB_anal_standing.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
-        mc.name "Now sit on my cock and shove it into your cute little but."
+        mc.name "Now sit on my cock and shove it into your cute little butt."
         "You lay down on the [the_object.name] and she straddles your body getting herself into position to ride your cock."
     else:
         "You lay down on the [the_object.name] and tell her to crouch down on your dick."
