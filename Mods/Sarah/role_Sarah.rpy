@@ -1771,7 +1771,7 @@ label Sarah_threesome_request_label():
         the_person.char "Oh! Well, I mean, an aunt is fairly distant relation. And it sounds like she could use a good opportunity to cut loose..."
     elif person_choice is starbuck:
         if starbuck.shop_progress_stage >= 1:
-            mc.name "I actually have a joint venture in another business. There's a woman who owns the mall sex shop, and I invested a decent some of money in it recently."
+            mc.name "I actually have a joint venture in another business. There's a woman who owns the mall sex shop, and I invested a decent sum of money in it recently."
             the_person.char "Ah, so, she's a business partner?"
         else:
             mc.name "I actually have a friend who owns the sex shop, over in the mall."
