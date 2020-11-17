@@ -100,7 +100,7 @@ label employee_cocksucking_practice_remove_label(the_person):
     return
 
 label employee_cocksucking_practice_report_label(the_person):
-    if not in the_person.has_role(employee_role): #She doesn't work here, bail out!
+    if not the_person.has_role(employee_role): #She doesn't work here, bail out!
         return
 
     $ the_person.draw_person()
