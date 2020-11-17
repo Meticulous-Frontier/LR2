@@ -129,6 +129,16 @@ init 2 python:
 
         return
 
+    def get_police_uniform_outfit():
+        outfit = Outfit("Police Uniform")
+        outfit.add_upper(lace_bra.get_copy(), [.15, .15, .15, .95])
+        outfit.add_upper(dress_shirt.get_copy(), [.0, .0, .4, 1.0])
+        outfit.add_lower(lace_panties.get_copy(), [.15, .15, .15, .95])
+        outfit.add_lower(suitpants.get_copy(), [.15, .15, .15, 1.0])
+        outfit.add_feet(tall_boots.get_copy(), [.0, .0, .0, .95])
+        outfit.add_feet(short_socks.get_copy(), [.95, .95, .95, .95])
+        return outfit
+
 label candace_meet_at_office_store_label(the_person):
     "As you browse some office furniture for your business, out of the corner of your eye you spot a vaguely familiar figure."
     $ the_person.draw_person()
@@ -563,27 +573,32 @@ label candace_supply_order_discount_label():
     return
 
 label candace_midnight_wakeup_label():
-    $ the_person = candace
+    python:
+        the_person = candace
+        police_chief = get_police_chief()
+        police_chief.apply_outfit(get_police_uniform_outfit())
+
 
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
     mc.name "Hello?"
     "?????" "Hi. Is this [first name last name]?"
     mc.name "Yes..."
-    "?????" "This is [name] with the police department. We have a [the_person.name] [the_person.last_name] here who asked us to call you."
+    "?????" "This is [police_chief.title] with the police department. We have a [the_person.name] [the_person.last_name] here who asked us to call you."
     "Candace? Who do you know named Candace?"
     mc.name "I'm sorry I'm not sure who that is..."
-    "?????" "She also goes by Candi."
+    police_chief "She also goes by Candi."
     "Oh shit! What is [the_person.title] doing at the police department?"
     mc.name "Oh! Is she okay?"
-    "?????" "She's fine. She got swept up last night in a prostitution sting. Apparently she was going around a strip club last night offering services..."
-    "?????" "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
-    "?????" "We were just gonna send her off, but the chief didn't feel good about her walking home alone this time of night so she asked if she could call anyone and she gave us your name and number."
+    police_chief "She's fine. She got swept up last night in a prostitution sting. Apparently she was going around a strip club last night offering services..."
+    police_chief "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
+    police_chief "We were just gonna send her off, but the chief didn't feel good about her walking home alone this time of night so she asked if she could call anyone and she gave us your name and number."
     "That... Sounds exactly like something [the_person.title] would do."
     mc.name "Okay... I'll be there in 20 minutes."
     "You hang up the phone and take a minute. [the_person.title], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
     "You get up and quickly get yourself dressed. You leave a quick note on the counter in case anyone notices you are gone in the middle of the night and head out. It's a fairly short walk to the police station."
     #Change to police station
+    $ police_station.show_background()
     "As you walk in, you walk up to the front desk. There's a good looking girl behind the desk. She smiles when she greets you."
     "?????" "Hello. Can I help you?"
     mc.name "Yeah. I'm hear to pick up Candace."
@@ -591,37 +606,40 @@ label candace_midnight_wakeup_label():
     mc.name "Okay..."
     "?????" "Her office is right down the hall there."
     "The kind officer points you the way to go. You head down the hall, take a breath and knock."
-    "?????" "It's open"
+    police_chief "It's open"
     "You let yourself in."
-    "?????" "Close it"
+    police_chief "Close it"
     "You close the door behind you. Behind the desk is an official looking officer. She greets you with a scowl."
-    "?????" "So you must be here to pick up that crazy bitch, Candace."
+    $ police_chief.draw_person(position = "sitting", emotion = "angry")
+    police_chief "So you must be here to pick up that crazy bitch, Candace."
     mc.name "Yeah, something like that..."
-    "?????" "We need to chat. I got a call from my deputy a few hours ago at home, saying I needed to get here right away. They said they had arrested someone they didn't know what to do with."
+    police_chief "We need to chat. I got a call from my deputy a few hours ago at home, saying I needed to get here right away. They said they had arrested someone they didn't know what to do with."
     "Oh boy, this is going to be interesting..."
-    "?????" "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
-    "?????" "When he said no and walked away, he could hear her making passes at the other girls in the cell."
-    "?????" "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing. She says she doesn't know, so I ask about friends and she says she just has a couple..."
-    "?????" "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
+    police_chief "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
+    police_chief "When he said no and walked away, he could hear her making passes at the other girls in the cell."
+    police_chief "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing. She says she doesn't know, so I ask about friends and she says she just has a couple..."
+    police_chief "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
     "You take a moment to consider how to answer this. You are going to need to proceed carefully."
     mc.name "Well, when I met Candace, she was in a bad relationship. The guy she was with was taking advantage of her."
     mc.name "I did some work on her background, and although I'm not sure where, I think she may have been involved in some sort of pharmaceutical experiment that made her like that."
     mc.name "I helped her get out of the relationship and set her up with a job at my business, trying to help her get independent again."
-    "?????" "Hmm. I see. That's unfortunate, but she doesn't seem to understand that she can't just wander around downtown hittin' on everything with a pulse. She's gonna wind up getting kidnapped... Or worse."
+    police_chief "Hmm. I see. That's unfortunate, but she doesn't seem to understand that she can't just wander around downtown hittin' on everything with a pulse. She's gonna wind up getting kidnapped... Or worse."
     mc.name "I agree. To be honest, I didn't realize she had been doing that."
     "The chief ponders for a few moments."
-    "?????" "Look... I can't force you to do this... But it is something you might consider. It's clear to me that Candace can't really take care of herself."
-    "?????" "We can't find any records pertaining to family in the area either. If you put in a motion with the local courts filing for her power of conservatorship on the grounds that she is unable to function independently, I'd be willing to sign that in support."
-    "?????" "With that, you could have her sent somewhere better designed to take of folks like her. It'd be for her own good."
+    police_chief "Look... I can't force you to do this... But it is something you might consider. It's clear to me that Candace can't really take care of herself."
+    police_chief "We can't find any records pertaining to family in the area either. If you put in a motion with the local courts filing for her power of conservatorship on the grounds that she is unable to function independently, I'd be willing to sign that in support."
+    police_chief "With that, you could have her sent somewhere better designed to take of folks like her. It'd be for her own good."
     mc.name "That seems... extreme? Maybe she would be willing to move in with a friend or something?"
-    "?????" "Yeah... Maybe... Look, you don't HAVE to do anything. But for her sake, you should consider doing SOMETHING. Otherwise, if she winds up back in here, I won't be able to just let her go, I'll have to get her committed somewhere."
+    police_chief "Yeah... Maybe... Look, you don't HAVE to do anything. But for her sake, you should consider doing SOMETHING. Otherwise, if she winds up back in here, I won't be able to just let her go, I'll have to get her committed somewhere."
     mc.name "I understand ma'am."
-    "?????" "Alright. Well, good luck. I'll call down to lockup and have them bring her up."
+    police_chief "Alright. Well, good luck. I'll call down to lockup and have them bring her up."
+    $ clear_scene()
     "You excuse yourself from the police chief's office. As you are walking back to the entrance, you start thinking about what you could do for [the_person.title]. Maybe she could move in with someone?"
     "She has been pretty close with [starbuck.title] recently. Maybe she would be willing to have a roommate?"
     "Maybe you could even have her move in with you? It might be a little cramped, but you think if you explain things to [mom.title] and [lily.title] they would understand."
     "You think a little more. What about the bimboism itself? Maybe there is some way it could be reversed? You've made some incredible strides recently with the serums at your business, but you've never considered trying to undo their effects."
-    "Is such a thing possible? Maybe you could talk to [stephanie.title] about it?"
+    "Is such a thing possible? Maybe you could talk to [mc.business.head_researcher.title] about it?"
+    $ the_person.draw_person()
     "As you stand at the entrance, lost in thought, an officer brings [the_person.title] out."
     if the_person.love > 20:
         the_person "Hey boss! Sorry to have them call you. They kept asking me who would come and get me and you were the only one I could think of!"
@@ -631,7 +649,8 @@ label candace_midnight_wakeup_label():
         the_person "Hey [the_person.mc_title]. Sorry about this..."
     mc.name "It's okay. Let's just get you home. We can talk about this when we get there."
     "The officer says you are free to go, so you step out into the night with her."
-    #downtown background
+
+    $ downtown.show_background()
     "As you walk towards her house, you sigh when she tries to lead you into a back alley."
     the_person "Its been a frustrating night... I just thought, like, maybe we could..."
     mc.name "Let's get back to your place first, okay?"
@@ -639,27 +658,30 @@ label candace_midnight_wakeup_label():
     "It's pretty clear you that if you don't do anything, [the_person.title] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
+    $ the_person.home.show_background()
     the_person "Finally! Let's have some fun!"
     mc.name "Wait... We need to talk first."
     the_person "God damnit why does everyone just want to talk? Just like... Let's get naked and then like... Let our bodies do the talking?"
     mc.name "This is important."
     "It's time to make a decision. What are you going to do?"
     menu:
-        "Move in with you (disabled) ":
+        "Move in with you \n{color=#ff0000}{size=18}Corruption path \n Not yet written{/size}{/color} (disabled) ":
             pass
-        "Move in with [starbuck.title] (disabled) ":
+        "Move in with \n{color=#ff0000}{size=18}FWB path \n Not yet written{/size}{/color} (disabled)":
             pass
         "Research a cure":
+            call candace_love_path_intro_label from _set_candace_to_love_path
+        "Do nothing \n{color=#ff0000}{size=18}Abandon path \n Not yet written{/size}{/color} (disabled)":
             pass
-        "Do nothing (disabled)":
-            pass
+    $ clear_scene()
     return
 
 label candace_love_path_intro_label():
     $ the_person = candace
+    $ the_person.draw_person()
     "You've made up your mind. While the current [the_person.title] certainly has her charms, the drug she was given is ruining her life."
-    "You have to do it what you can to research it and see if you can reverse the effects."
-    mc.name "Candi... Tomorrow we are going to talk to [head researcher]. I want to see if we can try and reverse the experiment that made you like this."
+    "You care about her too much to let that happen. You have to do what you can to research it and see if you can reverse the effects."
+    mc.name "[the_person.title]... Tomorrow we are going to talk to [mc.business.head_researcher.title]. I want to see if we can try and reverse the experiment that made you like this."
     the_person "Made me... Like this? I don't understand... Don't you like me?"
     mc.name "Of course I do. But the changes that it caused, you're a danger to yourself. How long have you been going out and wandering around, looking for a fuck?"
     the_person"I.. err... I mean... Sometimes I just get the urge..."
@@ -688,7 +710,7 @@ label candace_love_path_intro_label():
     $ the_person.change_arousal(15)
     if not the_person.vagina_available():
         "You pull off everything between you and her cunt."
-        #strip her
+        $ the_person.strip_outfit(position = "missionary")
     "[the_person.title] reaches down and starts to play with herself as you start to get undressed. She starts to moan as you pull your cock out."
     $ the_person.change_arousal(15)
     the_person "Just put it in me, I'm ready for it... Whoa!"
@@ -696,7 +718,7 @@ label candace_love_path_intro_label():
     "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
-    "[Sex scene]"
+    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_01
     "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
@@ -711,7 +733,10 @@ label candace_love_path_intro_label():
     $ the_person.draw_person(position = "walking_away")
     "You try to stay awake for her, but your eyes are getting so heavy."
     "You are starting to feel yourself drift off when you hear the bedroom door close as [the_person.title] comes back."
-    #TODO change outfit
+    python:
+        candi_outfit = Outfit("Candi's Pink Nightgown")
+        candi_outfit.add_upper(nightgown_dress.get_copy(), [1.0, .71, .75, .65])
+        the_person.apply_outfit(candi_outfit)
     $ the_person.draw_person(position = "stand4")
     "She is wearing a sheer pink nightgown, and absolutely nothing else. Normally a sight like that would be enough to get your blood boiling, but right now you are just too tired."
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
@@ -744,6 +769,8 @@ label candace_love_path_intro_label():
     $ the_person.cum_on_ass()
     "She keeps eye contact and doesn't say a word as you drop your load all over her chest. It immediately starts soaking into her nightgown. You can see the stains from earlier still on her belly."
     "You aren't sure what happens after that, because you pass out again. Your last thought as you fall back asleep, is that [the_person.title] must think a slumber party means getting as much cum as possible on her nightgown."
+    #Trist I need code here to advance to the next day, making sure not to proc any random crisis or mandatory crisis that might normally pop up.
+    #Also make sure candace stays in her current outfit somehow without cleaning up if possible?
     "You open your eyes. Sunlight? Next to you, the bed is empty. Crap, what time is it? You get up and reach for your phone."
     "The battery is dead. Is that coffee you smell? [the_person.title] must hear you stirring, she soon appears in the door to her bedroom."
     $ the_person.draw_person(position = "stand4")
@@ -785,7 +812,7 @@ label candace_love_path_intro_label():
     mc.name "It's okay, really. I could have said no, and it... Well it's pretty amazing, to wake up to a woman like you pleasuring me."
     the_person "Yay! That's why you should stay over again!"
     "You take a bite of the eggs. It's actually pretty good. The coffee is hot and helps wake you up."
-    mc.name "Listen... Today we are going to go talk with [head researcher]. I promised we'll definitely do this again sometime, but for now, I want you to work with her, okay? I want to find out if we can reverse the effects of the lab experiment."
+    mc.name "Listen... Today we are going to go talk with [mc.business.head_researcher.title]. I promised we'll definitely do this again sometime, but for now, I want you to work with her, okay? I want to find out if we can reverse the effects of the lab experiment."
     "She picks at her breakfast."
     the_person "There are times... You know? Like where I feel like I almost... Remember. Like, I remember being so excited. Like I was on the verge of something! But there was a deadline... Our funding was gonna get cut..."
     $ the_person.draw_person(position = "sitting", emotion = "angry")
@@ -802,7 +829,8 @@ label candace_love_path_intro_label():
     "God, her ass is great. Even after cumming over and over last night, you feel blood flowing to your dick as you watch her bent over."
     "Still completely naked, you know there is no way you can hide it from her. Maybe you should take charge, and give her a good fuck before you both head in to work."
 
-    "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up? Then you notice... She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
+    "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up?"
+    "Then you notice. She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
     "You grip her hips with your hands, and then push your fully erect cock against her ass."
     the_person "Oh, thank God, I was, like, REALLY hoping to get one more before work..."
     "You slowly lift up her nightgown, exposing her rear. You position the head of your cock against her entrance and then start to rub it up and down her slit. When you pull back for a second, your tip is slick with her arousal."
@@ -811,7 +839,7 @@ label candace_love_path_intro_label():
     mc.name "I know, but someone has to teach you patience."
     the_person "I'm patient! I can totally be patient, I'm the most... Ohhh!!!"
     "You cut her off mid sentence as you thrust yourself all the way into her. You don't give her time to recover, as you start to roughly fuck her."
-    # TODO fuck scene
+    call fuck_person(the_person, start_position = SB_doggy_standing, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_02
 
     # You decide to just wait and see what happens. You continue to enjoy the view of Candi's ass as she scrubs your plates clean, then sets them on a drying rack. She turns around and immediately notices your erection.
     # "Oh, thank God, I was, like, REALLY hoping to get one more in before work..."
@@ -823,10 +851,11 @@ label candace_love_path_intro_label():
     "[the_person.title] disappears for a moment then comes back, holding your clothes."
     $ the_person.draw_person(position = "stand4")
     "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title] also getting ready for the day."
-    # TODO [Change Candi outfit to planned outfit]
-    mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [head researcher]."
+    $ the_person.apply_outfit(the_person.planned_outfit)
+    mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [mc.business.head_researcher.title]."
     the_person "Okay! See you later!"
-    "You step out of Candi's apartment. You should make it a priority to talk to your head researcher."
+    "You step out of [the_person.title]'s apartment. You should make it a priority to talk to your head researcher."
+    #TODO add on talk even to head researcher.
     return
 
 label candace_begin_cure_research_label(the_person):
@@ -1071,3 +1100,13 @@ init 3 python:
         if "candace" in globals():
             return candace.event_triggers_dict.get("is_bimbo", False)
         return False
+
+    def get_police_chief():
+        if mc.business.event_triggers_dict.get("Police_Chief", None):
+            return mc.business.event_triggers_dict.get("Police_Chief", None)
+        police_chief = make_person(force_random = True)
+        police_chief.set_possessive_title = "the police chief"
+        police_chief.set_mc_title(mc.name)
+        police_chief.set_title = "Officer [police_chief.last_name]"
+        mc.business.event_triggers_dict["Police_Chief"] = police_chief
+        return police_chief
