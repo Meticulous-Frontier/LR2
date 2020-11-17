@@ -198,7 +198,7 @@ init -2 python:
     def erica_money_problem_sarah_convincing_employee_requirement():
         if mc.business.hr_director and mc.business.hr_director and mc.is_at_work():
             if mc.business.is_open_for_business():
-                if renpy.random.randint(0,100) < 10:
+                if renpy.random.randint(0,100) < 25:
                     return True
         return False
 
