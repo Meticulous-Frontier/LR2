@@ -206,7 +206,6 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                     else:
                         the_girl.char "I hope you enjoy paying child support, [the_girl.mc_title]."
             else:
-                $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_on_stomach()
                 $ against_wall.redraw_scene(the_girl)
                 if mc.condom:

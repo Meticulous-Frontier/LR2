@@ -67,7 +67,6 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             the_girl.char "Yes! Ah!"
             "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
             "Her breath catches in her throat when you pulse out your hot load of cum deep inside of her."
-            $ the_girl.call_dialogue("cum_vagina")
             #the_girl.char "Oh my god... Give it all to me [the_girl.mc_title]... Fill me up..."
             if mc.condom:
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
@@ -82,6 +81,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] reaches for your cock, removes the condom carefully, and ties the end in a knot."
                     the_girl.char "Look at all that cum. Well done."
             else:
+                $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ cowgirl.redraw_scene(the_girl)
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."

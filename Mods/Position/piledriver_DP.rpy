@@ -156,7 +156,6 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 if mc.condom:
                     "You had no intention of stopping, but hearing her ask for it makes you cum even harder."
                     "You push yourself as deep as you can manage and pump your load out into her cunt, hopefully contained by your condom."
-                    $ the_girl.call_dialogue("cum_vagina")
                     "You take a moment to catch your breath, then you pull your cock out of [the_girl.title] and sit back down. Her ass gapes slightly where the strap-on was previously buried."
                     "The condom tip is ballooned out, hanging to one side and filled with your cum."
                     if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
