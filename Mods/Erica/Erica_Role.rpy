@@ -198,7 +198,7 @@ init -2 python:
     def erica_money_problem_sarah_convincing_employee_requirement():
         if mc.business.hr_director and mc.business.hr_director and mc.is_at_work():
             if mc.business.is_open_for_business():
-                if renpy.random.randint(0,100) < 10:
+                if renpy.random.randint(0,100) < 25:
                     return True
         return False
 
@@ -815,7 +815,7 @@ label erica_race_crisis_label(the_person):
         mc.name "Yeah, this is my first time doing something like this."
         yoga_assistant.char "Well I think its great. Maybe next time they do one of these races, we could do some kind of corporate sponsorship?"
         "You chat with the girls, but soon it is about time for the race to begin."
-        yoga_assist.char "I'm gonna find a place to go cheer you on. Good luck you two!"
+        yoga_assistant.char "I'm gonna find a place to go cheer you on. Good luck you two!"
         $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
     elif erica_get_is_doing_insta_sessions():
         "As you are trash talking each other, [lily.title] surprises you when she walks up."
