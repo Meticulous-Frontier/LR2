@@ -110,6 +110,7 @@ init 2:
                                 text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
+                    yoffset 5
                     if person.arousal > 0:
                         textbutton "Arousal: [person.arousal]/[person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
                             style "transparent_style"
