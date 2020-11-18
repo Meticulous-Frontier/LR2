@@ -49,6 +49,37 @@ init 2 python:
                 return True
         return False
 
+    def candace_midnight_wakeup_requirement():
+        if mc.business.research_tier >= 3:
+            if time_of_day == 4:
+                if renpy.random.randint(0,100) < 10: #Average 10 days
+                    return True
+        return False
+
+    def candace_begin_cure_research_requirement(the_person):
+        if the_person.location() == the_person.work:
+            return True
+        return False
+
+    def candace_anti_bimbo_serum_requirement():
+        if mc.business.is_open_for_business():
+            if renpy.random.randint(0,100) < 5:
+                return True
+        return False
+
+    def candace_cure_bimbo_requirement():
+        if mc.business.is_open_for_business():
+            if mc.business.is_trait_researched(anti_bimbo_serum_trait):
+                return True
+        return False
+
+    def candace_meet_doctor_candace_requirement():
+        if mc.business.is_open_for_business():
+            if time_of_day == 2:
+                if day >= candace_get_cure_day() + 7:
+                    return True
+        return False
+
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
     candace_get_to_know = Action("Get to know her {image=gui/heart/Time_Advance.png}", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
@@ -56,7 +87,11 @@ init 2 python:
     candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
     candace_overhear_supply_order = Action("Overhear supply call", candace_overhear_supply_order_requirement, "candace_overhear_supply_order_label")
     candace_supply_order_discount = Action("Candi reports success", candace_supply_order_discount_requirement, "candace_supply_order_discount_label")
-
+    candace_midnight_wakeup = Action("Candi gets arrested", candace_midnight_wakeup_requirement, "candace_midnight_wakeup_label")
+    candace_begin_cure_research = Action("Candi moves", candace_begin_cure_research_requirement, "candace_begin_cure_research_label")
+    candace_anti_bimbo_serum = Action("Head Researcher makes a plan", candace_anti_bimbo_serum_requirement, "candace_anti_bimbo_serum_label")
+    candace_cure_bimbo = Action("Candi gets cured", candace_cure_bimbo_requirement, "candace_cure_bimbo_label")
+    candace_meet_doctor_candace = Action("Meet Doctor Candace", candace_meet_doctor_candace_requirement, "candace_meet_doctor_candace_label")
 
     def candace_mod_initialization():
         #TODO candance wardrobe and base outfit
@@ -570,6 +605,7 @@ label candace_supply_order_discount_label():
     $ candace.event_triggers_dict["supply_discount_active"] = True
     $ scene_manager.clear_scene()
     "You now receive a 10\% discount on all supply orders."
+    $ mc.business.mandatory_crises_list.append(candace_midnight_wakeup)
     return
 
 label candace_midnight_wakeup_label():
@@ -769,8 +805,7 @@ label candace_love_path_intro_label():
     $ the_person.cum_on_ass()
     "She keeps eye contact and doesn't say a word as you drop your load all over her chest. It immediately starts soaking into her nightgown. You can see the stains from earlier still on her belly."
     "You aren't sure what happens after that, because you pass out again. Your last thought as you fall back asleep, is that [the_person.title] must think a slumber party means getting as much cum as possible on her nightgown."
-    #Trist I need code here to advance to the next day, making sure not to proc any random crisis or mandatory crisis that might normally pop up.
-    #Also make sure candace stays in her current outfit somehow without cleaning up if possible?
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_candace_sleepover_01
     "You open your eyes. Sunlight? Next to you, the bed is empty. Crap, what time is it? You get up and reach for your phone."
     "The battery is dead. Is that coffee you smell? [the_person.title] must hear you stirring, she soon appears in the door to her bedroom."
     $ the_person.draw_person(position = "stand4")
@@ -791,7 +826,7 @@ label candace_love_path_intro_label():
     the_person "It's okay though! They'll be clean before it's time to go to work."
     mc.name "Ah, okay. What time is it?"
     the_person "It's about 7."
-    "That should work out okay. Eat some breakfast, and you can head in to work with [the_person.title] and go straight to [head researcher]."
+    "That should work out okay. Eat some breakfast, and you can head in to work with [the_person.title] and go straight to [mc.business.head_researcher.title]."
     "A timer goes off in the other room."
     the_person "Oh! I gotta get back to the kitchen!"
     $ the_person.draw_person(position = "walking_away")
@@ -855,61 +890,71 @@ label candace_love_path_intro_label():
     mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [mc.business.head_researcher.title]."
     the_person "Okay! See you later!"
     "You step out of [the_person.title]'s apartment. You should make it a priority to talk to your head researcher."
-    #TODO add on talk even to head researcher.
+    $ mc.business.head_researcher.add_unique_on_talk_event(candace_begin_cure_research)
     return
 
 label candace_begin_cure_research_label(the_person):
-    #scene_manager init
+    $ scene_manager = Scene()
     mc.name "I need to talk to you about something. Can come with me to my office?"
     "Your head researcher looks up from her work and nods."
     the_person "Sure, I'll be right there."
     "She follows you to your office. You close the door in the way in, and you both have a seat."
-    # [Sitting down]
+    $ ceo_office.show_background()
+    $ scene_manager.add_actor(the_person, position = "sitting")
     mc.name "I need to talk to you about [candace.title]. Before she came here, she worked at another pharmaceutical company similar to this one."
     #[If you have already researched the bimbo serum]
-    mc.name "I think she may have been involved in a trial in something similar to our bimbo serum."
-    #else:
-    mc.name "I think she may have been involved in some sort of trial on a drug that affected her mental capacities."
+    if mc.business.is_trait_researched(permanent_bimbo):
+        mc.name "I think she may have been involved in a trial in something similar to our bimbo serum."
+    else:
+        mc.name "I think she may have been involved in some sort of trial on a drug that affected her mental capacities."
     the_person "I actually thought something similar. I didn't know that she came from a competitor, but her personality exhibits all of the traits that we've seen from the serum, both physical and mental."
     mc.name "Unfortunately, it has inhibited her ability to function independently. Do you think there is any way of reversing the serum effects? Or even just partially?"
     the_person "Wow... That's a difficult question. Up until now, just about all of our work has been on making the serums MORE effective, not nullifying them."
-    mc.name "I understand that this is a difficult question... But unfortunately [candi.title] is no longer able to manage. I can't sit idly by and watch her life get ruined, if there is something we can do to help her."
+    mc.name "I understand that this is a difficult question... But unfortunately [candace.title] is no longer able to manage. I can't sit idly by and watch her life get ruined, if there is something we can do to help her."
     "Your head researcher ponders the issue for a bit."
     the_person "Can you give me some time to study her? With a few tests... Maybe I could figure something out."
     mc.name "That is fine. I actually need to find her a place to stay for a bit..."
-    "You explain to [the_person.title] what happened with [candi.possessive_title] getting arrested and your conversation with the police chief."
-    the_person "Wow... Tell you what. Why don't you have her move in with me for a bit? I can work on it on the side, and between me and [ashley.name] we should be able to keep an eye on her..."
+    "You explain to [the_person.title] what happened with [candace.possessive_title] getting arrested and your conversation with the police chief."
+    if the_person == stephanie:
+        the_person "Wow... Tell you what. Why don't you have her move in with me for a bit? I can work on it on the side, and between me and [ashley.name] we should be able to keep an eye on her..."
+    else:
+        the_person "Wow. Well, I live alone, why don't you have her move in with me for a bit? I could put her in my guest room."
     mc.name "[the_person.title], you're amazing. Let me call her in and we'll talk to her."
     "You call [candace.title] and ask her to come to your office. In a minute there's a knock on your door."
     mc.name "Come in"
-    # [Draw Candi]
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped)
     candace "You need something?"
     mc.name "Have a seat."
     "[candace.title] walks in and sits down next to [the_person.possessive_title]."
+    $ scene_manager.update_actor(candace, position = "sitting")
     mc.name "Remember how we talked about having [the_person.title] examining you and doing some research?"
     "She looks at you with a puzzled look."
     candace "I... I remember we had a slumber party..."
     "You can tell that she is struggling to remember."
     mc.name "You got arrested, remember?"
     candace "Right! And I told the nice police officer I was hiding drugs 'somewhere special' and so he had to do a strip search and..."
-    mc.name "[candace.title], we said we would talk with [the_person.title] about helping you control some of your... Urges... Among other things."
+    mc.name "[candace.title], we said we would talk with [the_person.title] about helping you control some of your... urges... Among other things."
     candace "If you say so boss!"
     mc.name "Okay. Well, in order to keep things from impacting the business too much, [the_person.title] would like you to stay with her for a while. It will make it easier for her to run tests on you as necessary."
     candace "You mean... You want me to move in? With [the_person.title]?"
     mc.name "Don't worry, it would only be temporary. A couple weeks at most."
     mc.name "Think of it, like a slumber party."
     candace "Oh! A slumber party! That will be like, so much fun!"
-    "[the_person.possessive_title ]gives you a little glare, but she goes along with it."
+    "[the_person.possessive_title] gives you a little glare, but she goes along with it."
     the_person "I'll come over after work today and help you pack a few things."
     mc.name "Good. Let me know if you either of you need anything."
     "With that, you dismiss the meeting. Hopefully [the_person.title] will be able to find some way to reverse the effects of the serum that made [candace.possessive_title] this way."
+    $ candace.set_schedule(the_location = the_person.home, times = [0,4])
+    $ mc.business.mandatory_crises_list.append(candace_anti_bimbo_serum)
+    $ scene_manager.clear_scene()
     return
 
 label candace_anti_bimbo_serum_label():
-    $ the_person = stephanie
+    $ the_person = mc.business.head_researcher
     "You get a text from [the_person.title]."
     the_person "Hey! Meet me in your office ASAP!"
     $ the_person.draw_person(position = "sitting")
+    $ ceo_office.show_background()
     "You quickly head to your office and find [the_person.possessive_title] sitting behind your desk with her feet up."
     the_person "Guess what? I'm a fucking genius."
     mc.name "Oh? Do you have something to report from your research with Candi?"
@@ -918,33 +963,39 @@ label candace_anti_bimbo_serum_label():
     the_person "Yeah! You don't need to UN-do all the previous serums effects, I just needed to create NEW serums that countered the undesirable side effects. Specifically for [candace.title], the effect that makes her a total dumbass, the loss of her intelligence."
     mc.name "And you were successful in creating something to do that?"
     the_person "Well... Kind of. I have a pretty good idea of how to do that, but I'm going to need help researching it. I added my idea to the serum trait database."
+    if not mc.business.is_trait_researched(permanent_bimbo):
+        the_person "Also, we really should research the bimbo serum that we have the preliminary results for first. It would give us a better understanding before we attempt this path."
     the_person "If you want us to look into it more, the research team will get to work on it. It is something that could be very useful, in general. If someone were to accidentally ingest the bimbo serum or something, this could atleast counteract the effect on their mental state and personality."
     mc.name "That sounds very useful. Let me think about it and I'll swing by research later if I decide to have the research department focus on it."
     if the_person.sluttiness > 60:
         the_person "Okay... In the mean time, [candace.title] can feel free to keep staying with me. We've, umm, had a lot of fun, living together the last few weeks!"
         "You remember the night you spent with her. You are certain they've been having lots of fun together."
         mc.name "Sounds good, I appreciate it."
-        #TODO [Set Steph and Candi to best friends]
+        $ town_relationships.update_relationship(the_person, candace, "Best Friend")
     else:
         the_person "Okay... Well, don't delay it, okay? Living with her has been... Stressful."
         the_person "She keeps 'accidentally' walking in on me when I'm showering and sometimes when I wake up in the morning she's in my bed next to me!"
         mc.name "It won't be too much longer. I appreciate it."
         the_person "Okay... She's driving me crazy, okay!"
-        #TODO [Set Candi and Steph to nemesis]
-    "[the_person.title] le
-
-    aves your office. You now have a new serum trait available to research. It has the powerful effect of reversing the bimbo serum's personality change and intelligence penalty!"
+        $ town_relationships.update_relationship(the_person, candace, "Rival")
+    "[the_person.title] leaves your office. You now have a new serum trait available to research. It has the powerful effect of reversing the bimbo serum's personality change and intelligence penalty!"
+    $ list_of_traits.append(anti_bimbo_serum_trait)  #This should unlock the trait so it is available for research.
+    $ mc.business.mandatory_crises_list.append(candace_cure_bimbo)
     return
 
 label candace_cure_bimbo_label():
-    $ the_person = stephanie
+    $ scene_manager = Scene()
+    $ the_person = mc.business.head_researcher
     "You have now finished researching the anti bimbo serum trait. You text your lead researcher."
     mc.name "Hey, can you make me a single dose anti bimbo serum for [candace.title]?"
     the_person "Already done. I figured you would want that."
     mc.name "Thanks, bring it to my office. I'll have her meet us there."
-    "You walk to your office and sit down. You call Candi and have her come. You admit that you are very nervous about what is about to happen. Will [candace.possessive_title]suddenly remember everything that's happened?"
+    $ ceo_office.show_background()
+    "You walk to your office and sit down. You call [candace.title] and have her come. You admit that you are very nervous about what is about to happen. Will [candace.possessive_title] suddenly remember everything that's happened?"
     "Will she hold you responsible for all the times you fucked her in her current state? There are so many possibilities, it's impossible to know what is about to happen."
     "Both girls walk into your office at about the same time."
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_center_flipped, position = "sitting")
     candace "Yeah boss?"
     mc.name "Sit down. [candace.title] I have some good news. [the_person.title] has designed a serum to help you get back to your old self. It won't be a complete reversal, but it should help a lot with some of the issues you've been having with your memory and impulse control"
     candace "Okay boss. If that's what you want, I'd be happy to try it."
@@ -957,6 +1008,10 @@ label candace_cure_bimbo_label():
     "Without further ado, she pops the cap and downs it. She hands the vial back to [the_person.title] and you wait."
     "[candace.title] closes her eyes and begins to breath deeply. So far she doesn't seem to be having any major negative reactions, but you are starting to get concerned."
     "It's only been a minute or two, but it feels like an eternity. Finally she opens her eyes and looks at you. Her pupils narrow and you can her focus on you with a startling level of concentration."
+    $ candace.personality = genius_personality
+    $ candace.event_triggers_dict["is_bimbo"] = False
+    $ candace.event_triggers_dict["cure_day"] = day
+    $ candace.int = 9       #Scary smart
     candace "[candace.mc_title]... This is incredible!"
     mc.name "Candi, are you okay?"
     candace "Candi? Yes that's what I went by... But you can call me Candace."
@@ -966,6 +1021,7 @@ label candace_cure_bimbo_label():
     "She turns to [the_person.title]."
     candace "Yes. Yes I remember... Everything."
     the_person "Anything you can tell us? About what originally happened to you? Or how you got here?"
+    $ scene_manager.update_actor(candace, emotion = "sad")
     "Her brow furrows as she starts to recall."
     candace "I was the lead researcher, at another company, but we had just received word that our government funding was going to get cut if we couldn't get results."
     "She clears her throat and continues."
@@ -973,36 +1029,209 @@ label candace_cure_bimbo_label():
     the_person "What were you trying to make?"
     candace "It seems so silly now. It was a drug designed for espionage. To reduce someone to their basest desires and to be completely open to suggestion and to be truthful. The implications of the drug in the hands of the intelligence agency were immense."
     candace "But it was supposed to be temporary. In animal testing, the drug worked it's way out of the body within 24 hours. Something went wrong with mine... The effects... Appear to have been permanent?"
+    $ scene_manager.update_actor(candace, emotion = "angry")
     "She shakes her head. Her fists clench as she remembers the next events."
     candace "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met [ex name]..."
     candace "I was out in front of this strip club... Trying to find someone to take me home that night, when I ran into him. He could tell I was in a bad spot... And totally took advantage of it."
     candace "Soon I was his 'personal secretary', but he wasn't even paying me anything. I was doing all sorts of errands for him, trading sexual favors for discounts, among other things."
+    $ scene_manager.update_actor(candace, emotion = "happy")
     "[candace.title] turns to you, her expression softening."
     candace "But then, I met you... At that restaurant. You convinced me to quit, and to leave that controlling asshole... And gave me a job..."
     mc.name "I'm glad I was able to help..."
     candace "You did more than just help. You brought stability back to my life, gave me hope... You even bailed me out of jail! I owe you a great debt Mr [name]."
-    mc.name "Please, just [name]. I'm sorry about the times I also took advantage of your mental state."
+    mc.name "Please, just [candace.mc_title]. I'm sorry about the times I also took advantage of your mental state."
     candace "What? I don't remember you doing anything like that."
     mc.name "We've been intimate. A lot actually."
     candace "Yes. And I'd like for that to continue. You weren't taking advantage, you were giving me exactly what I wanted."
+    "She says that now... but a lot has happened to her. You still feel a bit uneasy about how much you fucked her while she was in her previous mental state."
     mc.name "I see. What about your work? Would you like to move over to the research department? We are doing amazing things here."
     candace "No, no. Not right now anyway. I need some time away all that. I think for now I'd like to continue where I am now. It is actually quite enjoyable."
     candace "Actually, I think I know of a few suppliers I might be able to secure better contracts with, if I use a little persuasion anyway."
     mc.name "You don't need to keep using your body to secure discounts from suppliers if you don't want to."
     "She looks at you a bit puzzled."
-    candace "Why wouldn't I want to? [Name], a woman's body is an incredible tool to wield as they choose. If I want to be the best I can be, why would I deny myself the use of that tool?"
+    candace "Why wouldn't I want to? [candace.mc_title], a woman's body is an incredible tool to wield as they choose. If I want to be the best I can be, why would I deny myself the use of that tool?"
     "[candace.title] gives you a wink."
     candace "Plus, it's really really fun to be a tease."
-    "Oh god, what have you created? You realize any man who tries to negotiate unfavorable contract terms with this woman is absolutely fucked."
+    "Oh god, what have you done? You realize any man who tries to negotiate unfavorable contract terms with this woman is absolutely fucked."
     "It is clear that even though she has her intelligence back, [candace.title] still has her previous opinions on her sexuality."
     "You look over and see [the_person.title] scribbling down notes at an incredible pace."
     the_person "Wow... This is just absolutely amazing. Candi... Err... [candace.title]... Tonight after work, I suppose I'll help you pack up so you can move back to your place then?"
     candace "Yes I would like that. You've been very nice, letting me stay with you, but I think I would like my personal space back. Really, the work that has been done to help me... I don't think I will ever be able to repay you."
-    the_person "Well, when [name] came to me and asked me to do it... I knew I couldn't say no. I'm so relieved that it has all worked out."
-    candace "Ah, so you were the architect of the whole thing [name]? I suppose I shouldn't be surprised."
+    the_person "Well, when [the_person.mc_title] came to me and asked me to do it... I knew I couldn't say no. I'm so relieved that it has all worked out."
+    candace "Ah, so you were the architect of the whole thing [candace.mc_title]? I suppose I shouldn't be surprised."
     mc.name "Well... That night at the police station. The chief talked to me before I bailed you out. He wanted me to apply to be your conservator. I knew I needed to do everything I could to get the effects reversed..."
     candace "Wow... I didn't realize things had gone that far. I'm going to have to think about that for a bit. Now, unless there's more to discuss, I think I have some new supply contracts to negotiate."
-    "The girls turn and leave you in your office. The progress made with [candace.title] has been incredible, for sure. It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
+    "The girls turn and leave you in your office. The progress made with [candace.title] has been incredible, for sure."
+    "It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
+    #TODO link up the one week event
+    $ candace.event_triggers_dict["sex_record_snapshot"] = candace.sex_record.copy() #This should take a snapshot of our sex record with candace so we can compare it later
+    $ mc.business.mandatory_crises_list.append(candace_meet_doctor_candace)
+    return
+
+label candace_meet_doctor_candace_label():
+    python:
+        the_person = candace
+
+    "It's been about a week since you cured [the_person.title] of her bimboism... Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
+    "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
+    "Yet, everytime she opens her mouth and speaks, she is completely different."
+    "A few days ago you walked by the break room while able trivia show was on, and [the_person.title] was spitting answers out before the host even finished with the question."
+    "When she looks you in the eye and speaks, her words carry weight. You don't blow off her suggestions as if they are non sense anymore."
+    if candace_get_sex_record_difference_tier() == 0:
+        "The changes have made you wary, especially of having sex with her. She still seems willing, but it just feels wrong."
+        "You can't bring yourself to lay your hands on her. And in a business like yours that could be a problem in the long term. You decide to address it."
+    elif candace_get_sex_record_difference_tier() == 1:
+        "The changes have made you wary about how you relate with her, especially sexually. You've gotten touchy feely with her... But so far you haven't gone further."
+        "The tension is starting to get to you. You decide to address it."
+    elif candace_get_sex_record_difference_tier() == 2:
+        "You've tested the waters with her since then. She seems to be just as receptive to your sexual advances as before."
+        "Something about her resurgent intelligence has you wary though. You decide to talk to her about it."
+    elif candace_get_sex_record_difference_tier() >= 3:
+        "Since the change, somehow she has gotten even sexier. Whenever an opportunity arises, you can't seem to keep your hands off of her. And she seems to enjoy it too."
+        if candace_get_sex_record_difference_tier() >= 4:
+            "Even now, you can't help but day dream a bit about dumping your seed inside her yet again."
+            "Something about her resurgent intelligence leaves you wary though. You decide to talk to her about it."
+    $ ceo_office.show_background()
+    "You head to your office. You sit down at your desk and call down to [the_person.title] and ask her to come to your office. Soon she is at your door, stepping inside."
+    $ the_person.draw_person()
+    the_person "Good day [the_person.mc_title]."
+    mc.name "Thank you for coming, [the_person.title]. Would you please close the door?"
+    the_person "Certainly."
+    "[the_person.title] closes the door and walks over to your desk, taking a seat."
+    $ the_person.draw_person(position = "sitting")
+    mc.name "I'm sorry for interrupting your day, but I wanted to talk to you about something."
+    the_person "Ah yes, I calculated you would want to have this talk today."
+    mc.name "Right. So obviously it would be good if we can get some things... Out in the open."
+    the_person "Certainly sir. Do you mind if I go first?"
+    "Oh boy. You aren't sure you are ready for this, but you are hopeful this will be a positive conversation."
+    mc.name "Honestly, I'm not sure how to put this in to words. If you know how, by all means."
+    the_person "Yes sir. So I've spent a lot of the last week, recounting the events I went through in the last few months, replaying them in my head, considering the outcomes and variables."
+    the_person "The outcome that occurred... Where my intelligence was restored... The odds of something like that happening are less than .01 percent."
+    mc.name "I mean, I'm sure it is rare that you chance upon a guy in the same industry..."
+    the_person "Yes, that is certainly rare, sir. But it goes beyond that. To find someone that would take the time that you did, to recognize that I was in an abusive relationship, to do what it took to get me out, to get me a job, to help me make friends."
+    the_person "When that same person COULD have taken a different route... Taken advantage, taken control."
+    mc.name "I... I could never have done something like that..."
+    the_person "I know. For you to have the morales to do that. But beyond that, to be in this industry, to be in a position to actually help, and to make the pushes necessary to formulate the cure, and to give it to me."
+    "[the_person.title] looks you right in the eye and delivers her judgement."
+    the_person "It could have only been you. You saved me. And for that, I owe you everything."
+    mc.name "Don't be rediculous, you don't owe me anything..."
+    the_person "I know you feel that way. But it goes beyond that too. You have your flaws, sure. Every man has a vice. But you mean everything to me."
+    if the_person.is_girlfriend():
+        the_person "I know I've changed a lot, and you may not love me anymore, but I love you. I'm completely yours if you still want me."
+    else:
+        the_person "I know I've changed a lot, and I'm willing to be patient if you want me to. But I love you. I'm completely yours if you want me."
+    "Wow, you hadn't anticipated this."
+    mc.name "You mean... You aren't angry? For the times I was weak... Even though I should have known better... and took advantage of you?"
+    "[the_person.title] begins to laugh."
+    the_person "Took advantage... Of me? I... Did not estimate that you might be fearing reprisal. You really are too good to be true, aren't you?"
+    "[the_person.title] stands up. You worry she is about turn and leave... But instead... She starts getting naked?"
+    $ the_person.outfit.remove_random_upper()
+    $ the_person.outfit.remove_random_lower()
+    $ the_person.draw_person(position = "stand2")
+    mc.name "That's... You don't have to do that..."
+    the_person "I know. But I want to. Sir, I threw myself at you so many times, you never took advantage of me. Your restraint in everything has been incredible."
+    the_person "No man could have resisted being exposed to the amount of lewdity that you were without succumbing."
+    "She continues to disrobe. You are mesmerized by the beautiful woman in front of you."
+    $ the_person.outfit.remove_random_upper()
+    $ the_person.outfit.remove_random_lower()
+    $ the_person.draw_person(position = "stand2")
+    the_person "Besides, even if my brains were scrambled, I still wanted it. And I enjoyed it. A LOT. But I know some part of you still won't believe me."
+    the_person "So now, I'm going to show you. Actions speak louder than words."
+    "She motions to you."
+    the_person "Would you please get naked for me? I want to show you how much I loved it, and how much I STILL love your cock. I want you to just sit back, let me get on top of you, and fuck you."
+    the_person "I want to have intercourse, and then I want to feel you orgasm, and deposit your semen inside me."
+    "Wow... A scientific way of putting it, but also very effective. You pull your cock out while [the_person.title] finishes stripping."
+    $ the_person.strip_outfit()
+    "Her eyes are on you as she walks around the desk. You glance at your unlocked office door..."
+    the_person "Don't worry, we won't get interrupted during this..."
+    mc.name "Have you been monitoring my office traffic?"
+    the_person "No. But I did put up your out to lunch sign and locked the door on my way in without you noticing..."
+    $ the_person.draw_person(position = "cowgirl")
+    "[the_person.title] gets up on top of you. Her eyes are making direct contact with yours as she takes your cock in one hand and starts to run you up and down her slit. Her natural lubrication soon has you wet and ready for penetration."
+    "She leans forward and closes her eyes. Your lips make contact and you begin to kiss. At the same time, she lifts her hips slightly, lines you up with her cunt, and slowly sinks down onto you."
+    "Her tongue dances with yours as the first fledgling thrusts are made of her hips onto yours. Her kisses punctuated with moans."
+    the_person "Mmm... You feel so good. I swear, everytime we fuck is better than the last..."
+    $ the_person.change_arousal(30)
+    $ mc.change_arousal(30)
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _meet_dr_candace_fuck_01
+    "When you finish, she just stays on top of you for a bit. You can feel your seed dribble out of her for a bit, but she doesn't seem to care about the mess. She just holds on to you."
+    the_person "Thank you. I needed that."
+    mc.name "Yes. I admit I was being apprehensive, but that certainly, ermmm, eased my mind."
+    the_person "It certainly is a very relaxing activity. When I was working on my thesis, I was calling up the poor guy I was seeing at the time all the time trying to destress."
+    mc.name "Thesis? You mean... You have a doctorate?"
+    the_person "Yes."
+    mc.name "So... I should be calling you doctor [the_person.last_name]?"
+    the_person "Ahh, let me just stop you right there. I would prefer things between us, and the girls here at the office, to remain more... Informal."
+    "She sits back a bit and smiles."
+    the_person "I'd prefer other titles. Candace is good, but what would be even better would be if you just called me... Your girlfriend..."
+    mc.name "I might take issue with you getting busy with your landlord if we're gonna do this."
+    "She chuckles before responding."
+    the_person "You goof. With a cock as good as yours, I won't need anything else..."
+    "After a moment she adds on to that."
+    the_person "I would like to keep helping [starbuck.name] at the shop though... She's become a good friend."
+    if the_person.is_girlfriend():
+        "Well, it seems that [the_person.title] still has feelings for you and wants to continue being your girlfriend."
+    else:
+        "Well, in quite the reversal of roles, Candace has asked you out officially. Do you want to accept?"
+    menu:
+        "Accept":
+            if not the_person.is_girlfriend():
+                $ the_person.add_role(girlfriend_role)
+            mc.name "So, what is your degree in, anyway?"
+            the_person "I received my doctorate for molecular biology and genetics... Though I'm not sure why that is relevant."
+            mc.name "Oh, I just wanted to know for when I have to introduce you to people as 'my girlfriend Dr. [the_person.last_name]."
+            $ the_person.change_happiness(15)
+            $ the_person.change_love(5)
+            the_person "Ahh! I suppose that would be okay... The first part anyway."
+            "She leans back a bit and gets kinda dreamy eyed."
+            the_person "You know, I truly had no idea if you were going to accept or not."
+            mc.name "Yeah. I was on the fence myself, but then you rode me cowgirl while I was in my office chair and I realized if we were dating I could call you in here anytime during the work day and do it again..."
+            the_person "Errmmm... You know I would do that even if we weren't dating, right?"
+            "You give her a wink. You decide to get busy one more time before you move on for the day..."
+            mc.name "Yeah but now I don't have to use the company punishment manual to do this either."
+            "She gives a little yelp as you suddenly scoot your chair from your desk. You stand up, picking her up as you go, then turn her over and bend her over you desk."
+            $ the_person.draw_person(position = "standing_doggy")
+            mc.name "You've been one naughty doctor."
+            the_person "Oh lord I like where this is going."
+            mc.name "Getting yourself arrested? The cops thought you were a prostitute!"
+            "With your harsh, but playful words you bring your hand down and smack her ass. It wobbles enticingly."
+            $ the_person.change_arousal(10)
+            the_person "Oh! I'm sorry boss!"
+            mc.name "Going out and looking for some stranger to meet your needs... When I was here all along!"
+            "You give her ass another spank."
+            $ the_person.change_arousal(15)
+            the_person "Ahh! I'm sorry, I won't do it again!"
+            "A red handprint starts to appear on her rear, where you spanked her. You lighten you touch a bit and gently rub her ass, soothing it."
+            mc.name "I know. Because you don't need to anymore. When you get those cravings, and it's just too much to bear, come and find me. I'll meet your needs, anytime, anywhere."
+            the_person "Oh... That's amazing..."
+            "She starts to wiggle her hips and giggle a little."
+            the_person "Excuse me, boss? I think I'm feeling those 'needs' again!"
+            "Her playful tone makes it obvious she is playing dumb a little, whereas just a few weeks ago, she would have said something similar to that, but being completely serious."
+            "You let your fingers run their way down the inside of her cheeks, dipping them gently in her pussy. She's still soaking wet from when you fucked earlier."
+            $ the_person.change_arousal(10)
+            "[the_person.title] turns her head back to look at you. Are those puppy dog eyes?"
+            the_person "Please, I need you again sir. Please!"
+            "God damn no wonder she is so good at negotiating supply contracts, she knows just how to ask."
+            "You cock is rock hard and ready to seal the deal. It's time to fuck [the_person.title] properly now that you have everything out in the open."
+            "Your grab her hips and move in close. She reaches between her legs and holds the tip of your erection, guiding you inside of her."
+            "You easily bottom out inside of her in one smooth stroke. She groans at the sensations of being filled again."
+            the_person "Okay... I'm done being cute. You can rough me up now!"
+            "You reach up and grab her hair."
+            mc.name "I think I'll do that."
+            "Pulling her head back, you start to thrust yourself inside of her at a rapid pace. It's time to give it to her good!"
+            call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True) from _fuck_doctor_candace_again_02
+            "When you finish with her, [the_person.title] is sprawled out across your desk. Your light colored cum on her dark skin is a beautiful contrast. Your get yourself cleaned up a bit and looking presentable while she is still recovering."
+            the_person "Oh fuck [the_person.mc_title]... Your dick is amazing..."
+            "Her breathing is finally starting to slow down a bit."
+            the_person "Are we, umm... We doing my place or yours tonight?"
+            mc.name "Honestly, I'm not sure if I'll be able to tonight, but I'll let you know."
+            the_person "Mmm... Okay... You go ahead... I think I would just like to bask a little..."
+            "You consider for a moment getting a nice couch for your office... But then whenever you call a girl in they'd probably assume you were getting ready to make a porno. Better not."
+            mc.name "Rest up, I'm going to get back to work."
+            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]"
+        "Reject (disabled)":
+            pass
+    $ clear_scene()
     return
 
 #Character variable wrappers
@@ -1101,12 +1330,34 @@ init 3 python:
             return candace.event_triggers_dict.get("is_bimbo", False)
         return False
 
+    def candace_get_cure_day():
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("cure_day", 9999)
+        return 9999
+
+    def candace_get_sex_record_difference_tier(): #Use this to determine what dialogue to run after curing her bimboism. Made a function because messy
+        old_dict = candace.event_triggers_dict.get("sex_record_snapshot", None)
+        if old_dict == None:
+            return 0
+        if old_dict["Vaginal Sex"] < candace.sex_record["Vaginal Sex"] or old_dict["Anal Sex"] < candace.sex_record["Anal Sex"]: #You fucked her atleast once
+            if old_dict["Vaginal Sex"] + old_dict["Anal Sex"] + 2 <= candace.sex_record["Vaginal Sex"] + candace.sex_record["Anal Sex"]: #Sex atleast twice
+                if old_dict["Vaginal Creampies"] + old_dict["Anal Creampies"] + 2 <= candace.sex_record["Vaginal Creampies"] + candace.sex_record["Anal Creampies"]:
+                    return 4
+                else:
+                    return 3
+            else:
+                return 2
+        if old_dict["Handjobs"] < candace.sex_record["Handjobs"] or old_dict["Blowjobs"] < candace.sex_record["Cunnilingus"] or old_dict["Cunnilingus"] < candace.sex_record["Blowjobs"]or old_dict["Fingered"] < candace.sex_record["Fingered"]:
+            return 1
+        return 0
+
+
     def get_police_chief():
         if mc.business.event_triggers_dict.get("Police_Chief", None):
             return mc.business.event_triggers_dict.get("Police_Chief", None)
         police_chief = make_person(force_random = True)
-        police_chief.set_possessive_title = "the police chief"
+        police_chief.set_possessive_title("the police chief")
         police_chief.set_mc_title(mc.name)
-        police_chief.set_title = "Officer [police_chief.last_name]"
+        police_chief.set_title("Officer [police_chief.last_name]")
         mc.business.event_triggers_dict["Police_Chief"] = police_chief
         return police_chief
