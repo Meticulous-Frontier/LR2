@@ -3,7 +3,7 @@
 
 init:
     python:
-        sarah_tit_fuck = Position(name = "Special Tit Fuck", slut_requirement = 30, slut_cap = 75, requires_hard = False, requires_large_tits = True,
+        sarah_tit_fuck = Position(name = "Special Tit Fuck", slut_requirement = 30, slut_cap = 75, requires_hard = True, requires_large_tits = True,
             position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "Tits", skill_tag = "Foreplay",
             girl_arousal = 10, girl_energy = 12,
             guy_arousal = 16, guy_energy = 3,
@@ -113,7 +113,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
     "She speeds up."
     menu:
         "Cum between her tits":
-            "You close your eyes. The sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock is to intense to cum anywhere else."
+            "You close your eyes. The sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock is too intense to cum anywhere else."
             "Your orgasm builds to a peak and you grunt, blasting your load up between [the_girl.title]'s tits and out the top of her cleavage."
             $ blocker = the_girl.outfit.get_upper_top_layer()
             if blocker: #There's something on her top
@@ -126,9 +126,9 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
 
         "Cum on her face":
             "You close your eyes and focus on the sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock."
-            "As your orgasm builds to it's peak you step back, sliding your cock out from her cleavage and take it up in your own hand."
+            "As your orgasm builds to its peak, you step back, sliding your cock out from her cleavage and take it up in your own hand."
             if the_girl.effective_sluttiness() > 40 or the_girl.get_opinion_score("cum facials") > 0:
-                "[the_girl.title] understands immediately what is about to happens and tilts her head up, giving you a clear target."
+                "[the_girl.title] understands immediately what is about to happen and tilts her head up, giving you a clear target."
                 "You stroke yourself to completion and blast your load over her face, throwing thick ropes of cum on her lips, nose, and eyes."
             else:
                 the_girl.char "What's wrong? I...!"
