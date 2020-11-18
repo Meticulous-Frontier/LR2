@@ -805,7 +805,8 @@ label candace_love_path_intro_label():
     $ the_person.cum_on_ass()
     "She keeps eye contact and doesn't say a word as you drop your load all over her chest. It immediately starts soaking into her nightgown. You can see the stains from earlier still on her belly."
     "You aren't sure what happens after that, because you pass out again. Your last thought as you fall back asleep, is that [the_person.title] must think a slumber party means getting as much cum as possible on her nightgown."
-    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_candace_sleepover_01
+    $ the_person.next_day_outfit = the_person.outfit # stay in current outfit next day
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_candace_love_path_intro # move time forward without morning events
     "You open your eyes. Sunlight? Next to you, the bed is empty. Crap, what time is it? You get up and reach for your phone."
     "The battery is dead. Is that coffee you smell? [the_person.title] must hear you stirring, she soon appears in the door to her bedroom."
     $ the_person.draw_person(position = "stand4")
@@ -886,7 +887,8 @@ label candace_love_path_intro_label():
     "[the_person.title] disappears for a moment then comes back, holding your clothes."
     $ the_person.draw_person(position = "stand4")
     "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title] also getting ready for the day."
-    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+    $ the_person.apply_planned_outfit()
     mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [mc.business.head_researcher.title]."
     the_person "Okay! See you later!"
     "You step out of [the_person.title]'s apartment. You should make it a priority to talk to your head researcher."
