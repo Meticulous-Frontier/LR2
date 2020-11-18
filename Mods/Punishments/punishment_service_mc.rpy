@@ -120,7 +120,7 @@ label employee_cocksucking_practice_report_label(the_person):
     $ the_person.break_taboo("sucking_cock")
     "Finally relenting, [the_person.possessive_title] finally opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
     $ the_person.add_situational_obedience("punishment", 40, "I'm being punished, I don't have any right to refuse.")
-    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False) from _call_custom_bj_punishment_02
+    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, allow_continue = False, affair_ask_after = False) from _call_custom_bj_punishment_02
     $ report = _return
     $ the_person.clear_situational_obedience("punishment")
     if report.get("guy orgasms", 0) == 0: #She didn't finish you off. Berate her verbally.
