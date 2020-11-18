@@ -980,8 +980,15 @@ label candace_anti_bimbo_serum_label():
         mc.name "It won't be too much longer. I appreciate it."
         the_person "Okay... She's driving me crazy, okay!"
         $ town_relationships.update_relationship(the_person, candace, "Rival")
-    "[the_person.title] leaves your office. You now have a new serum trait available to research. It has the powerful effect of reversing the bimbo serum's personality change and intelligence penalty!"
-    $ list_of_traits.append(anti_bimbo_serum_trait)  #This should unlock the trait so it is available for research.
+    "[the_person.title] leaves your office"
+    $ clear_scene()
+    if mc.business.is_trait_researched(permanent_bimbo):
+        "You now have a new serum trait available to research."
+    else:
+        "As soon as you research permanent bimbofication, you will have a new serum trait available for research."
+    "It has the powerful effect of reversing the bimbo serum's personality change and intelligence penalty!"
+
+    $ unlock_anti_bimbo_serum()
     $ mc.business.mandatory_crises_list.append(candace_cure_bimbo)
     return
 
