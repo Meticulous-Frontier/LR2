@@ -188,6 +188,8 @@ label quest_arousal_serum_receive_drug_label():
         "If only you had a head researcher... Well, if you want to this stuff, you should make sure you appoint a new one."
     else:
         "Your head researcher, [mc.business.head_researcher.title], is the obvious choice for who to give it to. And if it turns out to work, she could use the other one to analyze it."
+        if day%7 == 4:  # the event is not available on fridays, let the user know
+            "You should talk to her next week, to see if there is any use for this stuff."
 
     $ quest_arousal_serum.quest_event_dict["expiration_day"] = day + 7
     $ quest_arousal_serum.set_quest_flag(21)
@@ -325,7 +327,7 @@ label quest_arousal_serum_test_label():
 
     $ mc.business.mandatory_crises_list.append(quest_arousal_serum_researched)
     $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
-    $ quest_arousal_serum.quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish    
+    $ quest_arousal_serum.quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish
 
     "You and [the_person.possessive_title] leave the lab and close up for the day."
     return
