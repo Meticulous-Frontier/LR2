@@ -31,14 +31,6 @@ init 2:
     screen serum_select_ui: #How you select serum and trait research
         add "Science_Menu_Background.png"
 
-        python:
-            exclude_tag_list = []
-            for trait in list_of_traits:
-                if trait.exclude_tags:
-                    for e_tag in trait.exclude_tags:
-                        if not e_tag in exclude_tag_list:
-                            exclude_tag_list.append(e_tag)
-
         vbox:
             xalign 0.08
             yalign 0.4
@@ -80,7 +72,7 @@ init 2:
                             mousewheel True
                             vbox:
                                 xsize 370
-                                for dt in range(mc.business.research_tier, 0, -1):
+                                for dt in range(mc.business.research_tier, -1, -1):
                                     frame:
                                         background "#000000"
                                         xsize 365
@@ -123,7 +115,7 @@ init 2:
                             mousewheel True
                             vbox:
                                 xsize 400
-                                for dt in range(mc.business.research_tier, 0, -1):
+                                for dt in range(mc.business.research_tier, -1, -1):
                                     frame:
                                         background "#000000"
                                         xsize 395
