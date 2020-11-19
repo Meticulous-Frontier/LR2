@@ -73,34 +73,35 @@ init 2:
                             vbox:
                                 xsize 370
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    frame:
-                                        background "#000000"
-                                        xsize 365
-                                        text "Tier " + str(dt) style "serum_text_style" xalign 0.5
+                                    if any([x for x in list_of_traits if x.tier == dt and not x.researched and x.has_required()]):
+                                        frame:
+                                            background "#000000"
+                                            xsize 365
+                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) != 0: # list all traits with tag
-                                            $ trait_title = get_trait_display_title(trait)
-                                            textbutton "[trait_title]":
-                                                style "textbutton_style"
-                                                text_style "serum_text_style_traits"
-                                                action [Hide("trait_tooltip"),Return(trait)]
+                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                            if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) != 0: # list all traits with tag
+                                                $ trait_title = get_trait_display_title(trait)
+                                                textbutton "[trait_title]":
+                                                    style "textbutton_style"
+                                                    text_style "serum_text_style_traits"
+                                                    action [Hide("trait_tooltip"),Return(trait)]
 
-                                                hovered Show("trait_tooltip",None,trait)
-                                                unhovered Hide("trait_tooltip")
-                                                xsize 365
+                                                    hovered Show("trait_tooltip",None,trait)
+                                                    unhovered Hide("trait_tooltip")
+                                                    xsize 365
 
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) == 0: # list all traits without tag
-                                            $ trait_title = get_trait_display_title(trait)
-                                            textbutton "[trait_title]":
-                                                style "textbutton_style"
-                                                text_style "serum_text_style_traits"
-                                                action [Hide("trait_tooltip"),Return(trait)]
+                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                            if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) == 0: # list all traits without tag
+                                                $ trait_title = get_trait_display_title(trait)
+                                                textbutton "[trait_title]":
+                                                    style "textbutton_style"
+                                                    text_style "serum_text_style_traits"
+                                                    action [Hide("trait_tooltip"),Return(trait)]
 
-                                                hovered Show("trait_tooltip",None,trait)
-                                                unhovered Hide("trait_tooltip")
-                                                xsize 365
+                                                    hovered Show("trait_tooltip",None,trait)
+                                                    unhovered Hide("trait_tooltip")
+                                                    xsize 365
 
                     vbox:
                         frame:
@@ -116,42 +117,43 @@ init 2:
                             vbox:
                                 xsize 400
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    frame:
-                                        background "#000000"
-                                        xsize 395
-                                        text "Tier " + str(dt) style "serum_text_style" xalign 0.5
+                                    if any([x for x in list_of_traits if x.tier == dt and x.researched]):
+                                        frame:
+                                            background "#000000"
+                                            xsize 395
+                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and trait.researched and len(trait.exclude_tags) != 0: # list all traits with tag
-                                            $ trait_title = get_trait_display_title(trait)
-                                            $ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                            $ trait_mastery_text = get_trait_mastery_text(trait)
+                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                            if trait.tier == dt and trait.researched and len(trait.exclude_tags) != 0: # list all traits with tag
+                                                $ trait_title = get_trait_display_title(trait)
+                                                $ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                                $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                            textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                                text_xalign 0.5
-                                                text_text_align 0.5
+                                                textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                                    text_xalign 0.5
+                                                    text_text_align 0.5
 
-                                                action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
-                                                text_style "serum_text_style_traits"
-                                                hovered Show("trait_tooltip",None,trait)
-                                                unhovered Hide("trait_tooltip")
-                                                xsize 395
+                                                    action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
+                                                    text_style "serum_text_style_traits"
+                                                    hovered Show("trait_tooltip",None,trait)
+                                                    unhovered Hide("trait_tooltip")
+                                                    xsize 395
 
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and trait.researched and len(trait.exclude_tags) == 0: # list all traits without tag
-                                            $ trait_title = get_trait_display_title(trait)
-                                            $ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                            $ trait_mastery_text = get_trait_mastery_text(trait)
+                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                            if trait.tier == dt and trait.researched and len(trait.exclude_tags) == 0: # list all traits without tag
+                                                $ trait_title = get_trait_display_title(trait)
+                                                $ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                                $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                            textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                                text_xalign 0.5
-                                                text_text_align 0.5
+                                                textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                                    text_xalign 0.5
+                                                    text_text_align 0.5
 
-                                                action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
-                                                text_style "serum_text_style_traits"
-                                                hovered Show("trait_tooltip",None,trait)
-                                                unhovered Hide("trait_tooltip")
-                                                xsize 395
+                                                    action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
+                                                    text_style "serum_text_style_traits"
+                                                    hovered Show("trait_tooltip",None,trait)
+                                                    unhovered Hide("trait_tooltip")
+                                                    xsize 395
 
                     vbox:
                         frame:

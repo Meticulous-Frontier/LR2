@@ -101,34 +101,36 @@ init 2:
 
                             vbox:
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    frame:
-                                        background "#000000"
-                                        xsize 530
-                                        text "Tier " + str(dt) style "serum_text_style" xalign 0.5
+                                    if any([x for x in list_of_traits if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
 
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
-                                            $ trait_tags = get_exclude_tags(trait)
-                                            $ trait_allowed = get_trait_allowed(starting_serum, trait)
+                                        frame:
+                                            background "#000000"
+                                            xsize 530
+                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                            #$ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                            #$ trait_mastery_text = get_trait_mastery_text(trait)
-                                                            #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                            textbutton trait.name + trait_tags:
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-                                                xsize 530
-                                                sensitive trait_allowed
-                                                action [
-                                                    Function(starting_serum.add_trait,trait)
-                                                ]
-                                                hovered [
-                                                    SetScreenVariable("trait_tooltip", trait)
-                                                ]
+                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                            if trait.tier == dt and trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
+                                                $ trait_tags = get_exclude_tags(trait)
+                                                $ trait_allowed = get_trait_allowed(starting_serum, trait)
 
-                                                #unhovered [
-                                                #Hide("trait_tooltip")
-                                                #]
+                                                #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                                #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                                #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                                textbutton trait.name + trait_tags:
+                                                    style "textbutton_style"
+                                                    text_style "serum_text_style"
+                                                    xsize 530
+                                                    sensitive trait_allowed
+                                                    action [
+                                                        Function(starting_serum.add_trait,trait)
+                                                    ]
+                                                    hovered [
+                                                        SetScreenVariable("trait_tooltip", trait)
+                                                    ]
+
+                                                    #unhovered [
+                                                    #Hide("trait_tooltip")
+                                                    #]
             frame:
                 background "#888888"
                 ysize 850
