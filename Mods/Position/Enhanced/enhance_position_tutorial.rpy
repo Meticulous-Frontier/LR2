@@ -89,7 +89,6 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ stealth_orgasm = False                #MAke sure we set this to false so next sex session doesn't get confused
             elif mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps as you dump your load into her, barely contained by your condom."
-                $ the_girl.call_dialogue("cum_vagina")
                 "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
                 if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
@@ -138,7 +137,7 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object):
 
     "You pull out of [the_girl.title]'s asshole, leaving it gaping and her sighing in relief."
     "You shift your cock downwards and rub the tip of it along the slit of her vagina."
-    
+
     if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
         the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
     elif not mc.condom:

@@ -16,7 +16,16 @@ init 2:
 
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
-        
+
+        python:
+            exclude_tag_list = []
+            for trait in list_of_traits:
+                if trait.exclude_tags:
+                    for e_tag in trait.exclude_tags:
+                        if not e_tag in exclude_tag_list:
+                            exclude_tag_list.append(e_tag)
+
+
         add "Science_Menu_Background.png"
         default trait_tooltip = primitive_serum_prod
         python:
@@ -33,7 +42,6 @@ init 2:
             frame:
                 background "#888888"
                 ysize 850
-
 
                 vbox:
                     xsize 530
@@ -78,47 +86,13 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 530
-                        text "Add Suggestion Trait" style "serum_text_style_header"
-                    frame:
-                        background "#666666"
-                        xalign 0.5
-                        xsize 530
-                        ysize 175
-
-                        viewport:
-                            xsize 530
-                            scrollbars "vertical"
-                            mousewheel True
-                            vbox:
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
-                                    if trait not in starting_serum.traits and trait.researched and "Suggest" in trait.exclude_tags:
-                                        $ trait_tags = get_exclude_tags(trait)
-                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
-
-                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
-                                                        # + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                        textbutton trait.name + trait_tags:
-                                            style "textbutton_style"
-                                            text_style "serum_text_style"
-                                            xsize 530
-                                            sensitive trait_allowed
-                                            action [
-                                                Function(starting_serum.add_trait,trait)
-                                            ]
-                                            hovered [
-                                                SetScreenVariable("trait_tooltip", trait)
-                                            ]
-
-                    frame:
-                        background "#000080"
-                        xsize 530
                         text "Add Serum Traits" style "serum_text_style_header"
+
                     frame:
                         background "#666666"
                         xalign 0.5
                         xsize 530
-                        ysize 350
+                        ysize 574
 
                         viewport:
                             xsize 530
@@ -126,29 +100,37 @@ init 2:
                             mousewheel True
 
                             vbox:
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
-                                    if trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
-                                        $ trait_tags = get_exclude_tags(trait)
-                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
+                                for dt in range(mc.business.research_tier, -1, -1):
+                                    if any([x for x in list_of_traits if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
 
-                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
-                                                        #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                        textbutton trait.name + trait_tags:
-                                            style "textbutton_style"
-                                            text_style "serum_text_style"
+                                        frame:
+                                            background "#000000"
                                             xsize 530
-                                            sensitive trait_allowed
-                                            action [
-                                                Function(starting_serum.add_trait,trait)
-                                            ]
-                                            hovered [
-                                                SetScreenVariable("trait_tooltip", trait)
-                                            ]
+                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                            #unhovered [
-                                            #Hide("trait_tooltip")
-                                            #]
+                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                            if trait.tier == dt and trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
+                                                $ trait_tags = get_exclude_tags(trait)
+                                                $ trait_allowed = get_trait_allowed(starting_serum, trait)
+
+                                                #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                                #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                                #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                                textbutton trait.name + trait_tags:
+                                                    style "textbutton_style"
+                                                    text_style "serum_text_style"
+                                                    xsize 530
+                                                    sensitive trait_allowed
+                                                    action [
+                                                        Function(starting_serum.add_trait,trait)
+                                                    ]
+                                                    hovered [
+                                                        SetScreenVariable("trait_tooltip", trait)
+                                                    ]
+
+                                                    #unhovered [
+                                                    #Hide("trait_tooltip")
+                                                    #]
             frame:
                 background "#888888"
                 ysize 850
