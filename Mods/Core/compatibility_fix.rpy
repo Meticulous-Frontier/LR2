@@ -86,6 +86,11 @@ init -1 python:
             renpy.say("Warning", "The mod is not installed correctly, make sure the 'Mod' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
+    def check_bugfix_installed():
+        if not bugfix_installed:
+            renpy.say("Warning", "You are running the game without bugfix installed, this will lead to various issues while playing due to errors in the original game code. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}.")
+        return
+
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
 
@@ -114,11 +119,14 @@ label update_compatibility_fix(stack):
 
 label store_game_version(stack):
     $ game_version = config.version
+    $ check_bugfix_installed()
     $ execute_hijack_call(stack)
     return
 
 label check_save_version(stack):
     $ loaded_version = get_loaded_version()
+    $ check_bugfix_installed()
+
     if not "game_version" in globals():
         "Warning" "You are loading a save game from an un-modded game. This is not supported, start a new modded game."
     elif parse_version_string(loaded_version)[1] < parse_version_string(config.version)[1]:
