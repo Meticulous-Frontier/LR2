@@ -83,7 +83,7 @@ init -1 python:
     def validate_mod_installation_location():
         handle = get_file_handle("mod_icon.png")
         if not handle.startswith("Mods"):
-            renpy.say("Warning", "The mod is not installed correctly, make sure the 'Mod' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
+            renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
     def check_bugfix_installed():
