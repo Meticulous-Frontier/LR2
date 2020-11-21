@@ -20,7 +20,7 @@ init 1 python:
             research_added = 400,
             base_side_effect_chance = 50,
             on_apply = anti_bimbo_serum_function_on_apply,
-            requires = permanent_bimbo,
+            # requires = permanent_bimbo,       don't set, it will be handled by the loader functions.
             tier = 99,
             research_needed = 3000,
             exclude_tags = ["Personality"],
