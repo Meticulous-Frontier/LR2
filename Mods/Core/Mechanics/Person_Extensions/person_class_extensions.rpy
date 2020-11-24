@@ -2009,3 +2009,19 @@ init -1 python:
         return
 
     Person.attempt_opinion_training = attempt_opinion_training
+
+    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, report_log = None):
+        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
+
+        self.change_slut_temp(5)
+        self.change_happiness(5)
+        if half_arousal:
+            self.change_arousal(-the_person.arousal/2)
+        else:
+            self.change_arousal(-the_person.arousal)
+        if report_log != None:
+            report_log["girl orgasms"] += 1
+
+        return
+
+    Person.have_orgasm = have_orgasm
