@@ -50,7 +50,7 @@ init 2 python:
         return False
 
     def candace_midnight_wakeup_requirement():
-        if mc.business.research_tier >= 3:
+        if mc.business.research_tier >= 3 and candace_starbuck_are_friends():
             if time_of_day == 4:
                 if renpy.random.randint(0,100) < 10: #Average 10 days
                     return True
@@ -63,7 +63,7 @@ init 2 python:
 
     def candace_anti_bimbo_serum_requirement():
         if mc.business.is_open_for_business():
-            if renpy.random.randint(0,100) < 5:
+            if renpy.random.randint(0,100) < 15:
                 return True
         return False
 
@@ -1338,6 +1338,10 @@ init 3 python:
         if "candace" in globals():
             return candace.event_triggers_dict.get("is_bimbo", False)
         return False
+
+    def candace_starbuck_are_friends():
+        if "candace" in globals():
+            return candace.event_triggers_dict.get("friends_with_starbuck", False)
 
     def candace_get_cure_day():
         if "candace" in globals():
