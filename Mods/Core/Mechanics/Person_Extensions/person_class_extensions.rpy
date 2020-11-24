@@ -1368,6 +1368,13 @@ init -1 python:
 
     Person.is_girlfriend = is_girlfriend
 
+    def is_affair(self):
+        if affair_role in self.special_role:
+            return True
+        return False
+
+    Person.is_affair = is_affair
+
     # helper function, to determine if person is available for crisis events
     # for now only girls giving birth are not available (but is extendable for future conditions)
     def is_available(self):
@@ -1982,7 +1989,7 @@ init -1 python:
     Person.is_submissive = is_submissive
 
     def is_jealous(self):
-        if self.is_girlfriend():
+        if self.is_girlfriend() or self.is_affair():
             if self.event_triggers_dict.get("is_jealous", True) == True:
                 if self.love > 90 and self.obedience > 200:
                     self.event_triggers_dict["is_jealous"] = False
