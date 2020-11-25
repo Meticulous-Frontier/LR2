@@ -618,7 +618,7 @@ label candace_midnight_wakeup_label():
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
     mc.name "Hello?"
-    "?????" "Hi. Is this [first name last name]?"
+    "?????" "Hi. Is this [mc.name]?"
     mc.name "Yes..."
     "?????" "This is [police_chief.title] with the police department. We have a [the_person.name] [the_person.last_name] here who asked us to call you."
     "Candace? Who do you know named Candace?"
@@ -628,7 +628,7 @@ label candace_midnight_wakeup_label():
     mc.name "Oh! Is she okay?"
     police_chief "She's fine. She got swept up last night in a prostitution sting. Apparently she was going around a strip club last night offering services..."
     police_chief "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
-    police_chief "We were just gonna send her off, but the chief didn't feel good about her walking home alone this time of night so she asked if she could call anyone and she gave us your name and number."
+    police_chief "We were just gonna send her off, but I didn't feel good about her walking home alone this time of night so I asked if she could call anyone and she gave me your name and number."
     "That... Sounds exactly like something [the_person.title] would do."
     mc.name "Okay... I'll be there in 20 minutes."
     "You hang up the phone and take a minute. [the_person.title], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
@@ -694,6 +694,7 @@ label candace_midnight_wakeup_label():
     "It's pretty clear you that if you don't do anything, [the_person.title] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
+    $ mc.change_location(the_person.home)
     $ the_person.home.show_background()
     the_person "Finally! Let's have some fun!"
     mc.name "Wait... We need to talk first."
