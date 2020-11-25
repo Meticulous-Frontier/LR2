@@ -1239,6 +1239,13 @@ label Sarah_tits_reveal_label():
     the_person.char "I can't believe I'm finally doing this. This all feels like a dream!"
     "She looks up at you from her knees. She looks you right in the eyes as she leans forward and slides your cock between her pillowy tits."
     "With both hands holding her breasts together, she slowly starts to move her pillowy flesh up and down your erection."
+
+    # boost sluttiness to prevent tit fuck aborting due to low sluttiness
+    if tit_fuck.slut_requirement > the_person.effective_sluttiness(tit_fuck.associated_taboo):
+        $ the_person.add_situational_slut("first_time", 10 + (5 * (tit_fuck.slut_requirement - the_person.effective_sluttiness(tit_fuck.associated_taboo))), "I can finally do it, no way I'm chickening out!" )
+    else:
+        $ the_person.add_situational_slut("first_time", 10, "I can finally do it, no way I'm chickening out!" )
+
     call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_sarah_tits_reveal_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
@@ -1249,6 +1256,8 @@ label Sarah_tits_reveal_label():
         the_person.char "Mmm that was so hot. I can't wait to try that again..."
         if the_person.get_opinion_score("showing her tits") < 1:
             $ the_person.update_opinion_with_score("showing her tits", 1)
+    $ the_person.clear_situational_slut("first_time")
+
     the_person.char "Okay... let me go get cleaned up... then I'll come back and we can start our regular Monday meeting!"
     $ the_person.draw_person(position = "walking_away")
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
