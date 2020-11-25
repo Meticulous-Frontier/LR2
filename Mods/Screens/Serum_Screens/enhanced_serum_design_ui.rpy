@@ -100,7 +100,7 @@ init 2:
                             mousewheel True
 
                             vbox:
-                                for dt in range(mc.business.research_tier, -1, -1):
+                                for dt in range(mc.business.research_tier + 1, -1, -1):
                                     if any([x for x in list_of_traits if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
 
                                         frame:

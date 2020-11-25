@@ -12,10 +12,10 @@ init 5 python:
         nora_nightmares.name = "Nora's Research Trait CBX"
         nora_obedience_swing.name = "Nora's Research Trait XBR"
         nora_sluttiness_boost.name = "Nora's Research Trait RXC"
-        nora_suggest_up.tier = 1
-        nora_nightmares.tier = 1
-        nora_obedience_swing.tier = 1
-        nora_sluttiness_boost.tier = 1
+        # nora_suggest_up.tier = 1
+        # nora_nightmares.tier = 1
+        # nora_obedience_swing.tier = 1
+        # nora_sluttiness_boost.tier = 1
         return
 
 
