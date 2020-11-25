@@ -498,8 +498,8 @@ init -1 python:
 
     def update_stephanie_opinions():
         # boost her research stats (to increase research boost at game start)
-        stephanie.int = 6
         stephanie.research_skill = 6
+        stephanie.focus = 5
 
         # set opinions to make initial game work
         stephanie.opinions["research work"] = [2, True]  # she loves research work
