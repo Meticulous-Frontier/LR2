@@ -15,7 +15,7 @@ init 2 python:
         if mc.business.research_tier >= 2:
             if mc.business.is_open_for_business():
                 if mc.location != mc.business.r_div:
-                    if renpy.random.randint(0,100) < 80:
+                    if renpy.random.randint(0,100) < 10:
                         return True
         return False
 
