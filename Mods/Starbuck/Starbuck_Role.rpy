@@ -2154,7 +2154,8 @@ label starbuck_candace_recurring_event_label(the_person_one):
     #TODO add links to appropriate random actions that oculd be occuring
 
     if the_person_one.event_triggers_dict.get("knows_candace_cured", False) == True:
-        call starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_two) from _candace_and_Starbuck_denial_Scene_01
+        "Sorry, this event it a work in progress!"
+        # call starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_two) from _candace_and_Starbuck_denial_Scene_01
     elif the_person_one.event_triggers_dict.get("knows_candace_cured", False) == False and candace_is_bimbo():
         #TODO write an event here for candace and starbuck to do together
         "Sorry, this event it a work in progress!"
