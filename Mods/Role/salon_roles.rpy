@@ -63,11 +63,15 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
             return False
+        if not person.location() == mall_salon:
+            return False
         if time_of_day == 3:
             return True
         return False
 
     def ophelia_blowjob_pics_review_requirement(person):
+        if not person.location() == mall_salon:
+            return False
         if time_of_day < 4:
             return True
         return False
