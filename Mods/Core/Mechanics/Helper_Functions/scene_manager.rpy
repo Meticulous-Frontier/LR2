@@ -159,54 +159,51 @@ init -2 python:
 # Transformation for display_transform   #
 ##########################################
 init -1:
-    transform character_right(xoffset = 0):
-        yalign 0.85
+    transform character_right(xoffset = 0, yoffset = 0, zoom = 1):
+        yalign (0.85 + yoffset)
         yanchor 1.0
         xalign (1.0 + xoffset)
         xanchor 1.0
-        xzoom -1
+        zoom zoom
 
 
-    transform character_right_flipped(xoffset = 0):
-        yalign 0.85
+    transform character_right_flipped(xoffset = 0, yoffset = 0, zoom = 1):
+        yalign (0.85 + yoffset)
         yanchor 1.0
         xalign (1.0 + xoffset)
         xanchor 1.0
-        xzoom -1
+        xzoom -(zoom)
+        yzoom zoom
 
-    transform character_center(xoffset = 0):
-        yalign 0.85
+    transform character_center(xoffset = 0, yoffset = 0, zoom = 1):
+        yalign (0.85 + yoffset)
         yanchor 1.0
         xalign (0.75 + xoffset)
         xanchor 1.0
+        zoom zoom
 
-    transform character_center_flipped(xoffset = 0):
-        yalign 0.85
+    transform character_center_flipped(xoffset = 0, yoffset = 0, zoom = 1):
+        yalign (0.85 + yoffset)
         yanchor 1.0
         xalign (0.75 + xoffset)
         xanchor 1.0
-        xzoom -1
+        xzoom -(zoom)
+        yzoom zoom
 
-    transform character_left(xoffset = 0):
-        yalign 0.85
+    transform character_left(xoffset = 0, yoffset = 0, zoom = 1):
+        yalign (0.85 + yoffset)
         yanchor 1.0
         xalign (0.5 + xoffset)
         xanchor 1.0
+        zoom zoom
 
-    transform character_left_flipped(xoffset = 0):
-        yalign 0.85
+    transform character_left_flipped(xoffset = 0, yoffset = 0, zoom = 1):
+        yalign (0.85 + yoffset)
         yanchor 1.0
         xalign (0.5 + xoffset)
         xanchor 1.0
-        xzoom -1
-
-    transform character_left_flipped_distant():
-        yalign 0.5
-        yanchor 0.5
-        xalign 0.5
-        xanchor 1.0
-        xzoom -0.5
-        yzoom 0.5
+        xzoom -(zoom)
+        yzoom zoom
 
     transform character_69_bottom():
         yalign 0.62
