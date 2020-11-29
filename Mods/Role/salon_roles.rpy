@@ -34,7 +34,7 @@ init 2 python:
                 return "Not enough money"
             if time_of_day < 1:
                 return "Wait for shops to open"
-            if time_of_day > 3:
+            if time_of_day > 3 or day%7 == 6:
                 return "Shops are closed"
             if ophelia_get_day_of_last_gift() == day:
                 return "Already gifted today"
