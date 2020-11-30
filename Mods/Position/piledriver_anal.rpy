@@ -38,7 +38,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
         if the_girl.effective_sluttiness() > 100:
             the_girl.char "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
         else:
-            the_girl.char "Oh god, you're gonna guck my ass aren't you?"
+            the_girl.char "Oh god, you're gonna fuck my ass aren't you?"
     else: #She's inexperienced and doesn't quite know what to do.
         if the_girl.effective_sluttiness() > 100:
             the_girl.char "Oh fuck, you want to put it in my ass don't you?"
