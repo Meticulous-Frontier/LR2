@@ -98,7 +98,7 @@ init -1 python:
     Outfit.has_creampie_cum = has_creampie_cum
 
     def full_access(self):
-        return (self.tits_visible() and self.tits_available() and not self.wearing_bra() 
+        return (self.tits_visible() and self.tits_available() and not self.wearing_bra()
             and self.vagina_visible() and self.vagina_available() and not self.wearing_panties()
             and not any(x.layer >= 2 for x in self.upper_body)
             and not any(x.layer >= 2 for x in self.lower_body))
@@ -231,6 +231,11 @@ init 6 python:
                     new_score += 10 # upper part not covered
                 if not any(x for x in self.lower_body if x.layer == 2):
                     new_score += 10 # lower part not covered
+
+        # take transparency of clothing into account for sluttiness score
+        for cloth in self.upper_body + self.lower_body:
+            if cloth.colour[3] < 1:
+                new_score += (1 - cloth.colour[3]) * 50
 
         return new_score if new_score > 0 else 0
 
