@@ -13,7 +13,7 @@ init:
             orgasm_description = "orgasm_piledriver_anal",
             taboo_break_description = "taboo_break_piledriver_anal",
             verb = "ass fuck",
-            opinion_tags = ["doggy style sex","anal sex"], record_class = "Anal Sex",
+            opinion_tags = ["missionary style sex","anal sex"], record_class = "Anal Sex",
             default_animation = blowjob_bob,
             associated_taboo = "anal_sex")
 
@@ -38,7 +38,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
         if the_girl.effective_sluttiness() > 100:
             the_girl.char "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
         else:
-            the_girl.char "Oh god, you're gonna guck my ass aren't you?"
+            the_girl.char "Oh god, you're gonna fuck my ass aren't you?"
     else: #She's inexperienced and doesn't quite know what to do.
         if the_girl.effective_sluttiness() > 100:
             the_girl.char "Oh fuck, you want to put it in my ass don't you?"
