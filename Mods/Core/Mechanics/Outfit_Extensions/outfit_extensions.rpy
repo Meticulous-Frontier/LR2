@@ -235,7 +235,10 @@ init 6 python:
         # take transparency of clothing into account for sluttiness score
         for cloth in self.upper_body + self.lower_body:
             if cloth.colour[3] < 1:
-                new_score += (1 - cloth.colour[3]) * 50
+                if cloth.layer == 2:
+                    new_score += int((1 - cloth.colour[3]) * 50)
+                elif cloth.layer == 1:
+                    new_score += int((1 - cloth.colour[3]) * 20)
 
         return new_score if new_score > 0 else 0
 
