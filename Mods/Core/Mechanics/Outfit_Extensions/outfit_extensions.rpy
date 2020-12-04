@@ -122,9 +122,9 @@ init -1 python:
             new_score += 10
 
         if self.vagina_visible():
-            new_score += 20
+            new_score += 40
         elif self.vagina_available():
-            new_score += 10
+            new_score += 20
 
         new_score += self.get_total_slut_modifiers()
 
@@ -230,7 +230,7 @@ init 6 python:
                 if not any(x for x in self.upper_body if x.layer == 2):
                     new_score += 10 # upper part not covered
                 if not any(x for x in self.lower_body if x.layer == 2):
-                    new_score += 10 # lower part not covered
+                    new_score += 20 # lower part not covered
 
         # take transparency of clothing into account for sluttiness score
         for cloth in self.upper_body + self.lower_body:
