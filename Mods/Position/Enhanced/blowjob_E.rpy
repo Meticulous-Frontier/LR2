@@ -129,15 +129,40 @@ label transition_blowjob_deepthroat_enhanced(the_girl, the_location, the_object)
             "She kisses the tip of your cock, then slides it into her mouth. Gets your length half way down, then gags softly on it and pauses."
             $ deepthroat.current_modifier = "blowjob"
             $ deepthroat.redraw_scene(the_girl)
-            "[the_girl.possessive_title] collects herself then keeps going, fighting her gag reflex until she manages to fit your entire shaft down her throat."
+            "[the_girl.possessive_title] collects herself then keeps going, fighting her gag reflex until she manages to fit three quarters of your shaft down her throat."
         else:
             $ deepthroat.current_modifier = "blowjob"
             $ deepthroat.redraw_scene(the_girl)
             "She kisses the tip of your cock, then slides it into her mouth. Bit by bit she takes it deeper, until you have your entire shaft down her throat."
             "She pauses there for a moment, then starts to bob her head up and down slowly."
+    return
 
-    $ blowjob.current_modifier = "blowjob"
+label transition_blowjob_to_deepthroat_taboo_break_label(the_girl, the_location, the_object):
+    mc.name "Fuck that feels great [the_girl.title]. Could you do something for me?"
+    $ blowjob.current_modifier = None
     $ blowjob.redraw_scene(the_girl)
+    "[the_girl.possessive_title] slides off your dick with a wet pop and takes a few breaths."
+    the_girl "Alright, what dirty thought crossed your mind?"
+    mc.name "Could you slide my dick as deep as possible down your throat?"
+    the_girl "Oh, you want me to deepthroat this monster..."
+    if the_girl.effective_sluttiness() > 60 or the_girl.sex_skills["Oral"] > 3 :
+        if the_girl.get_opinion_score("giving blowjobs") < 0:
+            the_girl.char "Okay [the_girl.mc_title], I'll see what I can do."
+        else:
+            the_girl.char "Okay [the_girl.mc_title], I'll see what I can do, but I'm not very good at it."
+    else:
+        the_girl.char "I'll... I'll give it a try..."
+
+    if the_girl.sex_skills["Oral"] < 3:
+        "She kisses the tip of your cock, then slides it into her mouth. Gets your length half way down, then gags softly on it and pauses."
+        $ deepthroat.current_modifier = "blowjob"
+        $ deepthroat.redraw_scene(the_girl)
+        "[the_girl.possessive_title] collects herself then keeps going, fighting her gag reflex until she manages to fit three quarters of your shaft down her throat."
+    else:
+        $ deepthroat.current_modifier = "blowjob"
+        $ deepthroat.redraw_scene(the_girl)
+        "She kisses the tip of your cock, then slides it into her mouth. Bit by bit she takes it deeper, until you have your entire shaft down her throat."
+        "She pauses there for a moment, then starts to bob her head up and down slowly."
     return
 
 label transition_default_deepthroat_enhanced(the_girl, the_location, the_object):

@@ -80,10 +80,45 @@ init -1 python:
                 renpy.cache_pin(fn)
         return
 
+    # remove full outfits / overwear from default wardrobe that have no shoes or no layer 2 clothing items (nude outfits)
+    # to prevent messed up outfits to be used by girls in daily life
+    def cleanup_default_wardrobe():
+        remove = []
+        for outfit in default_wardrobe.outfits:
+            if not any(x for x in outfit.feet if x.layer == 2):
+                remove.append(outfit)
+            elif not any(x for x in outfit.upper_body if x.layer == 2):
+                remove.append(outfit)
+            elif not any(x for x in outfit.lower_body if x.layer == 2):
+                remove.append(outfit)
+
+        # renpy.say("", "Removing " + str(len(remove)) + " full outfits")
+        for outfit in remove:
+            default_wardrobe.outfits.remove(outfit)
+
+        remove = []
+        for outfit in default_wardrobe.overwear_sets:
+            if not any(x for x in outfit.feet if x.layer == 2):
+                remove.append(outfit)
+            elif not any(x for x in outfit.upper_body if x.layer == 2):
+                remove.append(outfit)
+            elif not any(x for x in outfit.lower_body if x.layer == 2):
+                remove.append(outfit)
+
+        # renpy.say("", "Removing " + str(len(remove)) + " overwear sets")
+        for outfit in remove:
+            default_wardrobe.overwear_sets.remove(outfit)
+        return
+
     def validate_mod_installation_location():
         handle = get_file_handle("mod_icon.png")
         if not handle.startswith("Mods"):
-            renpy.say("Warning", "The mod is not installed correctly, make sure the 'Mod' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
+            renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
+        return
+
+    def check_bugfix_installed():
+        if not bugfix_installed:
+            renpy.say("Warning", "You are running the game without bugfix installed, this will lead to various issues while playing due to errors in the original game code. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}.")
         return
 
 label check_mod_installation(stack):
@@ -98,6 +133,8 @@ label activate_compatibility_fix(stack):
 
     $ update_pinned_cache()
 
+    $ cleanup_default_wardrobe()
+
     $ execute_hijack_call(stack)
     return
 
@@ -107,6 +144,8 @@ label update_compatibility_fix(stack):
 
     $ update_pinned_cache()
 
+    $ cleanup_default_wardrobe()
+
     $ restore_employees_to_schedules()
 
     $ execute_hijack_call(stack)
@@ -114,11 +153,14 @@ label update_compatibility_fix(stack):
 
 label store_game_version(stack):
     $ game_version = config.version
+    $ check_bugfix_installed()
     $ execute_hijack_call(stack)
     return
 
 label check_save_version(stack):
     $ loaded_version = get_loaded_version()
+    $ check_bugfix_installed()
+
     if not "game_version" in globals():
         "Warning" "You are loading a save game from an un-modded game. This is not supported, start a new modded game."
     elif parse_version_string(loaded_version)[1] < parse_version_string(config.version)[1]:

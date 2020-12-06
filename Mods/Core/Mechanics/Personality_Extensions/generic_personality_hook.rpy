@@ -496,6 +496,24 @@ init -1 python:
                     mc.main_character_actions.append(action)
         return
 
+    def update_stephanie_opinions():
+        # boost her research stats (to increase research boost at game start)
+        stephanie.research_skill = 6
+        stephanie.focus = 5
+
+        # set opinions to make initial game work
+        stephanie.opinions["research work"] = [2, True]  # she loves research work
+        stephanie.opinions["small talk"] = [1, False]  # she likes small talk
+        stephanie.opinions["flirting"] = [1, False]  # she likes flirting
+
+        # make sure she has no opinion on conservative outfits (affects happiness)
+        if any("conservative outfits" in s for s in stephanie.opinions):
+            del stephanie.opinions["conservative outfits"]
+
+        stephanie.sexy_opinions["kissing"] = [1, False]  # she likes kissing
+        stephanie.sexy_opinions["vaginal sex"] = [2, False] # she likes having sex
+        return
+
 
 label activate_generic_personality(stack):
     python:
@@ -523,6 +541,8 @@ label activate_generic_personality(stack):
         update_lingerie_wardrobe()
 
         update_stripclub_strippers()
+
+        update_stephanie_opinions()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

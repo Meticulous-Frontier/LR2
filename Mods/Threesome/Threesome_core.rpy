@@ -771,6 +771,8 @@ init python:
             return False
         if person_two.has_taboo(["sucking_cock", "condomless_sex"]):
             return False
+        if person_one.get_opinion_score("threesomes") <= -2 or person_two.get_opinion_score("threesomes") <= -2:
+            return False
 
         person_one_slut_req = THREESOME_BASE_SLUT_REQ
         person_two_slut_req = THREESOME_BASE_SLUT_REQ

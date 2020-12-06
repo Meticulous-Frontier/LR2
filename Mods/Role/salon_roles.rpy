@@ -34,7 +34,7 @@ init 2 python:
                 return "Not enough money"
             if time_of_day < 1:
                 return "Wait for shops to open"
-            if time_of_day > 3:
+            if time_of_day > 3 or day%7 == 6:
                 return "Shops are closed"
             if ophelia_get_day_of_last_gift() == day:
                 return "Already gifted today"
@@ -63,11 +63,15 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
             return False
+        if not person.location() == mall_salon:
+            return False
         if time_of_day == 3:
             return True
         return False
 
     def ophelia_blowjob_pics_review_requirement(person):
+        if not person.location() == mall_salon:
+            return False
         if time_of_day < 4:
             return True
         return False
@@ -639,7 +643,7 @@ label ophelia_revenge_date_label():
     "You sit down across from her. She is looking around the room. After a minute she spots her ex and points him out."
     the_person.char "There they are! Over there..."
     "You look in the direction that [the_person.title] is indicating."
-    $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5), position = "sitting")
     "Sure enough, her ex is sitting across from the woman you ran into earlier."
     "She must be incredible in bed, for him to be with her instead of [the_person.title], with the mental disadvantages she has."
     the_person.char "Alright, let's just play it cool for now. I'm sure he'll notice us eventually."
@@ -652,7 +656,7 @@ label ophelia_revenge_date_label():
     $ scene_manager.remove_actor(candace, reset_actor = False)
     the_person.char "Okay... I guess it's now or never... I'm gonna go talk to him!"
     "[the_person.title] gets up and walks towards the bathroom, but then stops next to her ex's table, pretending to be surprised to see him."
-    $ scene_manager.update_actor(the_person, display_transform = character_left_flipped_distant, position = "walking_away")
+    $ scene_manager.update_actor(the_person, display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5), position = "walking_away")
     the_person.char "[ex_name]! Oh I just noticed you there..."
     "You zone out a bit. Maybe it is the half a bottle of wine getting to you? Or you decide to just let their conversation be private."
     "Damn, that [candace.title] though. What you wouldn't give to get your hands on those tits..."
@@ -668,10 +672,10 @@ label ophelia_revenge_date_label():
     the_person.char "I tried to reason with him... but I started getting mad! That airhead isn't anyone's type! He's just dating her for the sex..."
     "No shit."
     the_person.char "I don't know... I just can't believe it..."
-    $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5), position = "sitting")
     "You notice the aforementioned airhead return from the restroom. You can see that dessert has just arrived at the other table."
     "You see [ex_name] lean across the table and whisper something into [candace.title]'s ear. She gets a big smile and nods. You wonder what is going on over there..."
-    $ scene_manager.update_actor(candace, position = "blowjob", display_transform = character_left_flipped_distant)
+    $ scene_manager.update_actor(candace, position = "blowjob", display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5))
     "You watch as [candace.title] gets down on her knees, then lifts the tablecloth up and disappears under it."
     $ scene_manager.remove_actor(candace, reset_actor = False)
     "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, inches over towards [ex_name]."
@@ -687,7 +691,7 @@ label ophelia_revenge_date_label():
     "While you imagined their previous conversation as a likely outcome of tonight's event, you would not have expected for them to do something so brazenly sexual in public."
     "For a moment, you consider alerting one of the staff to the current situation, but you decide against it. If that were you, you would appreciate the discretion, even if you don't agree with how [ex_name] used it against [the_person.title]."
     $ candace.cum_on_face()
-    $ scene_manager.add_actor(candace, display_transform = character_left_flipped_distant, position = "sitting")
+    $ scene_manager.add_actor(candace, display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5), position = "sitting")
     "You ask for the check. You decide to just go ahead and pick it up. As you are waiting, you notice the bimbo return to her seat. It is hard to tell from this distance, but assume the liquid on her face is cum."
     $ mc.business.change_funds(-200)
     $ scene_manager.remove_actor(candace)
@@ -776,10 +780,13 @@ label ophelia_revenge_date_label():
         the_person.char "Mmm that was so hot. I can't wait to do that again!"
     "As you both recover from your romp, there is an awkward silence in the room. You notice it is getting very late, and tomorrow is Monday."
     mc.name "I'm really sorry, I wish I could stick around longer, but I have to work in the morning..."
+    $ scene_manager.update_actor(the_person, position = "stand3")
     the_person.char "Yeah, yeah, me too. I have to open the salon and all."
     the_person.char "Look... I don't know how we are going to feel about this in the morning, but thank you for tonight."
     the_person.char "You really helped me salvage a rough situation. I appreciate it."
     mc.name "Of course. I had a great time."
+    $ the_person.outfit.add_upper(bath_robe.get_copy(), [.80, .26, .04, .7], "Pattern_1", [.15, .15, .15, .95])
+    $ scene_manager.draw_scene()
     "You get dressed and she walks you to the door."
     the_person.char "Take care!"
     mc.name "Goodnight!"

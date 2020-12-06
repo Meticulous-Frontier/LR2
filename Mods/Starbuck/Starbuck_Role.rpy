@@ -17,6 +17,7 @@ init 2 python:
     starbuck_spend_the_night = Action("Spend the night with her", starbuck_spend_the_night_requirement, "starbuck_spend_the_night_label")
     starbuck_close_up = Action("Help close the store", starbuck_close_up_requirement, "starbuck_close_up_label")
     starbuck_candace_product_demo = Action("Candace helps with product demo", starbuck_candace_product_demo_requirement, "starbuck_candace_product_demo_label")
+    starbuck_candace_recurring_event = Action("Candace and Starbuck hanging out", starbuck_candace_recurring_event_requirement, "starbuck_candace_recurring_event_label")
 
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
@@ -230,6 +231,12 @@ init -1 python:
     def starbuck_candace_product_demo_requirement(the_person):
         if starbuck.location() == sex_store:
             if the_person.location() == the_person.work:
+                return True
+        return False
+
+    def starbuck_candace_recurring_event_requirement(the_person):
+        if starbuck.location() == sex_store and candace.location() == sex_store:
+            if day%7 == 5 and time_of_day == 3:  #Saturday evening
                 return True
         return False
 
@@ -2033,7 +2040,6 @@ label starbuck_candace_product_demo_label(the_person_one):
     "[the_person_one.possessive_title] is having trouble making words. [the_person_two.title] gives her another stroke. This time when she pushes back in she doesn't have to be quite as forceful."
     the_person_one "Ahh! Oh god sorry I'm not gonna last long!"
     the_person_two "I can imagine why!"
-    #TODO orgasm code, IE goal updates, happiness, etc
     "[the_person_two.possessive_title] gives another smooth stroke. [the_person_one.title] is starting to get into it now, willing herself to accept the enormous dildo."
     "This time she doesn't stop when it is all the way, she pulls back right into another stroke."
     "Stroke...... Stroke..... Stroke....."
@@ -2042,18 +2048,21 @@ label starbuck_candace_product_demo_label(the_person_one):
     $ the_person_one.change_arousal(60)
     $ the_person_two.change_arousal(15)
     $ mc.change_arousal(10)
+    $ the_person_one.have_orgasm()
     "[the_person_one.title]'s body begins to convulse as she begins to orgasm. [the_person_two.possessive_title] keeps fucking her with the same methodical pace."
     "Her orgasm should be winding down now... But incredibly, it doesn't. [the_person_two.title] speeds up just slightly and soon [the_person_one.possessive_title] is getting ready to orgasm again."
     the_person_one "Gah!!! Fuck oh fuck!"
     $ the_person_one.change_arousal(60)
     $ the_person_two.change_arousal(15)
     $ mc.change_arousal(10)
+    $ the_person_one.have_orgasm()
     "[the_person_one.title] orgasms again, her body getting weak as she succumbs to the incredible pleasure and pressure the toy is providing her. [the_person_two.possessive_title] responds by speeding up again."
     "She still isn't going that fast, but the size of the toy makes the sensations overwhelming. She cries out as another orgasm begins to take her."
     the_person_one "Ahh! Holy fucking hell!"
     $ the_person_one.change_arousal(60)
     $ the_person_two.change_arousal(15)
     $ mc.change_arousal(10)
+    $ the_person_one.have_orgasm(half_arousal = False)
     "[the_person_two.possessive_title] is forced to stop literally mid stroke as [the_person_one.title] orgasms forcefully, her holes squeezing so hard she momentarily can't push the dildo back in."
     "She grabs her hips and slowly but forcefully push the toy deep and then leaves it there, fully sheathed as [the_person_one.title] orgasms."
     "Completely spent, [the_person_one.possessive_title]'s arms give out and she collapses forward. The toy pulls out from her rump making a lewd squelch."
@@ -2099,9 +2108,11 @@ label starbuck_candace_product_demo_label(the_person_one):
     "You hear a gasp from across the room as you begin to fire your load deep inside of [the_person_two.possessive_title]."
     the_person_one "Oh my god, I can see it pulsating..."
     the_person_two "Yes! Fuck yes!"
+    $ the_person_two.have_orgasm(half_arousal = False)
     "Your control over [the_person_two.possessive_title] is complete as she helplessly cums all over you. Your cock is planting your seed deep in her spasming cunt."
     "You keep her pinned there until the last of your aftershocks wash over both of you."
     $ the_person_two.cum_in_vagina()
+    $ mc.reset_arousal()
     "As you slowly pull out, your cum immediately starts pouring out of [the_person_two.possessive_title] and down her leg."
     the_person_one "Oh god... I wish I had some..."
     "[the_person_one.possessive_title] starts crawling over to [the_person_two.title]. When she finally turns around, [the_person_one.title] is on her hands and knees below her."
@@ -2129,10 +2140,381 @@ label starbuck_candace_product_demo_label(the_person_one):
     $ town_relationships.update_relationship(the_person_one, the_person_two, "Best Friend")
     $ the_person_one.set_alt_schedule(sex_store, days = [5], times = [3])
     $ the_person_two.set_alt_schedule(sex_store, days = [5], times = [3])
+    $ starbuck.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
+    $ candace.event_triggers_dict["friends_with_starbuck"] = True
+    return
+
+label starbuck_candace_recurring_event_label(the_person_one):
+    $ the_person_two = candace
+    "Knowing that [the_person_one.title] and [the_person_two.possessive_title] have started getting together on Saturdays, you decide to swing by the sex shop and see how it is going."
+    "The shop is closed, as it usually is at this time. However, [the_person_one.possessive_title] gave you a key when you became partners."
+    "You quietly unlock and door and slip inside, being careful to lock it behind you."
+    "Once inside, the lights are dark in the shop itself. As you walk behind the counter, you notice the light in the back room is on."
+
+    #TODO add links to appropriate random actions that oculd be occuring
+
+    if the_person_one.event_triggers_dict.get("knows_candace_cured", False) == True:
+        "Sorry, this event it a work in progress!"
+        # call starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_two) from _candace_and_Starbuck_denial_Scene_01
+    elif the_person_one.event_triggers_dict.get("knows_candace_cured", False) == False and candace_is_bimbo():
+        #TODO write an event here for candace and starbuck to do together
+        "Sorry, this event it a work in progress!"
+        pass
+    else:
+        $ scene_manager = Scene()
+        "You hear some lively but friendly discussion coming from the back room. It sounds like [the_person_one.title] and [the_person_two.possessive_title] are catching up."
+        "You round the corner and see the two girls sitting at a table and chatting."
+        $ scene_manager.add_actor(the_person_one, position = "sitting")
+        $ scene_manager.add_actor(the_person_two, position = "sitting", display_transform = character_center_flipped)
+        the_person_one "Wow! That's amazing. This is so incredible [the_person_two.name]..."
+        the_person_two "It really is."
+        "As you enter the room, the girls notice you."
+        the_person_one "Ah!!! [the_person_one.mc_title]! The man of the hour!"
+        $ scene_manager.update_actor(the_person_one, position = "kissing")
+        "[the_person_one.title] jumps up and runs over to you, wrapping her arms around you in a huge hug."
+        the_person_one "I can't believe it! You managed to restore [the_person_two.name]... you know..."
+        "She lets go of you, then punches you in the arm."
+        $ scene_manager.update_actor(the_person_one, position = "stand2", emotion = "angry")
+        the_person_one "You didn't even tell me! God I feel like we've become almost best friends since you introduced us... and you don't even tell me what you were up to!?!"
+        the_person_two "There was no telling if it would even be effective or not. It was truly groundbreaking [the_person_one.name]."
+        the_person_one "I know! I know... I just... I mean that could have gone wrong too, right?"
+        the_person_two "I didn't realize it at the time, but in hindsight, I agree that it was worth the risk. I'm very fortunate [the_person_two.mc_title] made the decisions he did!"
+        "You see her expession soften."
+        $ scene_manager.update_actor(the_person_one, position = "stand2", emotion = "happy")
+        the_person_one "I'm sorry I didn't mean to downplay this. It really is incredible."
+        the_person_one "Thank you partner. Its amazing what you have done for her. I'll never forget it!"
+        $ the_person_one.change_stats(happiness = 20, obedience = 20, love = 20)
+        $ scene_manager.add_actor(the_person_one, position = "sitting")
+
+        "[the_person_one.possessive_title] sits back down and starts talking with [the_person_two.title] again. You can tell they are going to be chatting for a while."
+        mc.name "Well, I can see you two have some catching up to do."
+        the_person_one "See you around partner!"
+        the_person_two "Take care [the_person_two.mc_title]."
+        "You head out from the store, giving the two girls time to catch up on things."
+        $ the_person_one.event_triggers_dict["knows_candace_cured"] = True
+
+
+    $ the_person_one.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
+    $ scene_manager.clear_scene()
     return
 
 
 
+label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_two):
+    $ scene_manager = Scene()
+    $ the_person_one.arousal = 0
+    $ the_person_two.arousal = 0
+
+    "You listen closely and hear... The girls are just chatting?"
+    if the_person_one.event_triggers_dict.get("orgasm_denial_discovered", False) == False:
+        "You peak around the corner and see [the_person_two.title] and [the_person_one.possessive_title], sitting at a table, each with a small cup in front of them. [the_person_one.title] is talking about her day."
+        $ scene_manager.add_actor(the_person_one, position = "sitting")
+        $ scene_manager.add_actor(the_person_two, position = "sitting", display_transform = character_center_flipped)
+        the_person_one "Yeah business was a little slow, except one couple came in. They must have just gotten together or something, because they bought a full set up of stuff."
+        "She takes a sip from her cup."
+        the_person_one "You could see the looks in their eyes, they could barely keep their hands off each other!"
+        "This is considerably more docile than you expected. You decide to make your presence known."
+        mc.name "Good evening ladies. Having some coffee?"
+        the_person_two "Tea, actually. I brought some oolong tea I got from an Asian market. Would you like some?"
+        "You nod. [the_person_two.title] starts to pour you a cup as you come and sit with the two girls."
+        the_person_one "Well [the_person_two.name], so far so good!"
+        mc.name "What is so good?"
+        the_person_one "She bet that you would show up tonight. We decided to make another bet, one you can help us out with here in a bit..."
+        mc.name "Oh? What would that be?"
+        "[the_person_two.title] quickly cuts you off."
+        the_person_two "You'll find out, but we weren't supposed to tell you about it yet, were we [the_person_one.name]!?!"
+        the_person_one "Right you are honey."
+        "[the_person_one.title] shifts in her seat a bit awkwardly."
+        $ the_person_one.change_arousal(15)
+        $ the_person_two.change_arousal(15)
+        the_person_one "So, how was your day [the_person_one.mc_title]"
+
+        "You take a few moments to talk about how your day is going, before taking a sip of your tea. Wow that is really good. The flavor is light but crisp."
+        mc.name "[the_person_two.title] this tea is excellent, where'd you get it from?"
+        "She takes an odd pause before she answers."
+        the_person_two "It's... Ahhh... I think I got it at the Asian market, you know over by the coffee shop downtown?"
+        $ the_person_one.change_arousal(20)
+        $ the_person_two.change_arousal(30)
+        "Ever since you cured her bimboism, [the_person.possessive_title] has been razor sharp, especially with details and memory. Something seems a little weird with her..."
+        "You look over at [the_person_one.possessive_title]. Are her cheeks a little flushed? Her nipples seem firm too. She definitely has some telltale signs of arousal... But why are they acting so funny? You decide to play it cool for now."
+
+        mc.name "Any new product come in lately [the_person_one.title]?"
+        "You think you hear... Is that buzzing?"
+        $ the_person_one.change_arousal(20)
+        $ the_person_two.change_arousal(30)
+        the_person_one "Ohhhhh... mmm... wow, yeah funny you would ask. I'll show you when we get done here..."
+        "You can hear it plainly now, an electric sounding buzz and whirring. Are they wearing some kind of vibrating panties?"
+        "You can feel yourself getting hard. You wonder what exactly the bet is and what they are betting on."
+        $ the_person_one.change_arousal(20)
+        $ the_person_two.change_arousal(30)
+        "[the_person_two.title] is starting to breath hard, once in a while a moan escapes. Suddenly, she breaks."
+        the_person_two "Oh! Oh fuck I'm cumming!"
+        "She leans forward a bit as her body starts to twitch."
+        $ the_person_two.have_orgasm(half_arousal = False)
+
+        "[the_person_one.title] jumps up."
+        $ scene_manager.update_actor(the_person_one, position = "stand2")
+
+        the_person_one "Yes! Ohhh, fuck. I win! Gotta get this thing off..."
+        "[the_person_one.title] quickly strips her bottoms off."
+        $ scene_manager.strip_actor_outfit(the_person_one, exclude_upper = True)
+        "Once naked, she pulls a toy out from her cunt. It is vibrating and twisting in her hand."
+
+        the_person_one "Ahh, so... This is the new product... Its a programmable phallus. I made a sample program that starts slow, but slowly gets faster and the vibrations get stronger over time."
+        $ scene_manager.update_actor(the_person_two, position = "stand4")
+        "You notice that [the_person_two.possessive_title] has recovered and is standing up now also. She it's starting to take her clothes off."
+        $ scene_manager.strip_actor_outfit(the_person_two, exclude_upper = True)
+        "You watch as she takes the same toy out of her snatch."
+        the_person_two "Oh god that was great. Can I keep this one? How much do I owe you?"
+
+        "[the_person_one.title] waves her off."
+        the_person_one "Don't worry about it, this whole thing was totally worth it."
+
+        mc.name "So... What was the bet, anyway?"
+        the_person_one "Oh! That's the fun part. We bet that whoever could go the longest without cumming or tipping you off to what was going on would win. The winner gets to fuck you while the loser has to watch!"
+
+        the_person_two "Oh man... I wanted to win so bad... But as soon as you sat down and the scent of your cologne hit me it was over. You smell so good and manly... Mmmm"
+        mc.name"I mean, I'm sure I could probably go a couple rounds..."
+
+        the_person_one "Not a chance! She thought she could win but I totally called her bluff and now you are mine!"
+        "[the_person_one.title] seems to be really getting into this. But she also looks really aroused... You can tell she was close to finishing too! Her labia are swollen and wet with moisture."
+
+        the_person_two "Don't worry [the_person_two.mc_title]... I don't mind watching!"
+        "[the_person_one.title] looks at you."
+        the_person_one "Why don't you just sit back. I'll take good care of you!"
+
+        call get_fucked(the_person_one, the_goal = "vaginal creampie") from _candace_starbuck_teamup_orgasm_denial_intro_01
+        "Damn... [the_person_one.title] was right. She really did take care of you! You start to clean yourself up."
+
+        $ scene_manager.update_actor(the_person_one, position = None)
+
+        "[the_person_one.title] starts to clean herself up, but [the_person_two.possessive_title] quickly stops her."
+        the_person_two "Hang on!"
+        if the_person_one.has_creampie_cum():
+            $ scene_manager.update_actor(the_person_one, position = "against_wall", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "doggy", display_transform = character_right_flipped, z_order = 2)
+            "[the_person_two.title] lifts [the_person_one.possessive_title] leg. She begins to lick clean the cum that has begun to run down her legs."
+        elif the_person_one.has_ass_cum():
+            $ scene_manager.update_actor(the_person_one, position = "back_peek", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "doggy", display_transform = character_right_flipped, z_order = 2)
+            "[the_person_two.title] gets behind [the_person_one.possessive_title] . She begins to lick clean the cum that has begun to run down her ass."
+        elif the_person_one.has_tits_cum():
+            $ scene_manager.update_actor(the_person_one, position = "kissing", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "walking_away", display_transform = character_right_flipped, z_order = 2)
+            "[the_person_two.title] embraces [the_person_one.possessive_title]. She leans forward and begins to lick clean the cum on [the_person_one.title]'s tits."
+        elif the_person_one.has_stomach_cum():
+            $ scene_manager.update_actor(the_person_one, position = "kissing", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "doggy", display_transform = character_right_flipped, z_order = 2)
+            "[the_person_two.title] gets down next to [the_person_one.possessive_title]. She begins to lick clean the cum that has begun to run down her stomach."
+        elif the_person_one.has_face_cum():
+            $ scene_manager.update_actor(the_person_one, position = "kissing", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "walking_away", display_transform = character_right_flipped, z_order = 2)
+            "[the_person_two.title] embraces [the_person_one.possessive_title]. She leans forward and begins to lick clean the cum on [the_person_one.title]'s face."
+        elif the_person_one.has_mouth_cum():
+            $ scene_manager.update_actor(the_person_one, position = "kissing", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "walking_away", display_transform = character_right_flipped, z_order = 2)
+            "[the_person_two.title] embraces [the_person_one.possessive_title]. The begin to make out, and you can see your cum getting swapped between them."
+        else:
+            $ scene_manager.update_actor(the_person_one, position = "kissing", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "walking_away", display_transform = character_right_flipped, z_order = 2)
+            "The girls embrace, making out out for a bit."
+        "Even though she's been cured of her bimboism, it's good to see that [the_person_one.title] still loves the taste of cum."
+        "As the girls do their thing, you decide to head out. You say goodbye and slip out from the sex shop."
+        $ the_person_one.event_triggers_dict["orgasm_denial_discovered"] = True
+    else:
+        "You peak around the corner and see [the_person_two.title] and [the_person_one.possessive_title], sitting at a table, each with a small cup in front of them. [the_person_one.title] is talking about her day."
+        python:
+            for i in range(3): #This time we start without bottoms
+                the_person_one.outfit.remove_random_lower(top_layer_first = True)
+                the_person_two.outfit.remove_random_lower(top_layer_first = True)
+            scene_manager.add_actor(the_person_one, position = "sitting")
+            scene_manager.add_actor(the_person_two, position = "sitting", display_transform = character_center_flipped)
+        "You quickly notice they are naked below the table. You assume they are sitting on the programmable dildos again."
+        "You decide not waste any time."
+        mc.name "Good evening ladies. Sharing some tea again?"
+        the_person_two "That's right. Care for some?"
+        "You walk over to them. Now that you know what you are listening for, you recognize the faint whir of the sex toys, during their work inside the two beautiful girls."
+        mc.name "Not for me. Having another contest?"
+        the_person_one "You know it! Same stakes as last time. Loser watches the winner get fucked."
+        "You decide not to sit this one out."
+        mc.name "I think that since I'm involved in this wager, I should be able to have a part in the contest."
+        the_person_two "I suppose that would be okay... but don't try to swing the results too much!"
+        mc.name "Or what?"
+        "[the_person_two.title] raises her eyebrow."
+        the_person_one "Hey, all's fair in love and war. If [the_person_one.mc_title] decides to make one of us cum first, I say it's fair game!"
+        "[the_person_two.title] gives a short fake pout."
+        the_person_two "Fine... let's do this!"
+        $ the_round = 1
+        $ cock_available = False
+        while (the_person_one.arousal < 100 and the_person_two.arousal < 100): #Break the loop when someone orgasms.
+            "What do you want to do?"
+            menu:
+                "Kiss [the_person_one.title]'s neck":
+                    "You step over behind [the_person_one.possessive_title]. You rub her shoulders gently and lean down next to her ear. She gets goosebumps when you whisper."
+                    mc.name "Be a good girl and cum for me..."
+                    "You lick and nibble at her ear and slowly work your way down her neck."
+                    the_person_one "Ahhh, fuck... I think its [the_person_two.name]'s turn next!"
+                    $ the_person_one.change_arousal(the_person_one.get_opinion_score("kissing") + 5)
+                "Kiss [the_person_two.title]'s neck":
+                    "You step over behind [the_person_two.possessive_title]. You rub her shoulders gently and lean down next to her ear. She gets goosebumps when you whisper."
+                    mc.name "Be a good girl and cum for me..."
+                    "You lick and nibble at her ear and slowly work your way down her neck."
+                    the_person_two "Isn't it [the_person_one.name]'s turn now?"
+                    $ the_person_two.change_arousal(the_person_two.get_opinion_score("kissing") + 5)
+                "Grope [the_person_one.title]'s tits" if the_person_one.tits_available():
+                    "You get behind [the_person_one.possessive_title]. You run your hands slowly around he neck, collar, and down until they rest on her chest."
+                    if the_person_one.has_large_tits():
+                        "You grope her sizable tits in your hands. The heat and softness of them feel amazing. She cries out when you pinch her nipples."
+                    else:
+                        "You grope her perky tits in your hands. The heat and firmness of them feel amazing. She cries out when you pinch her nipples."
+                    the_person_one "Ah! Oh god that feels nice..."
+                    $ the_person_one.change_arousal(5)
+                "Grope [the_person_two.title]'s tits" if the_person_two.tits_available():
+                    "You get behind [the_person_two.possessive_title]. You run your hands slowly around he neck, collar, and down until they rest on her chest."
+                    if the_person_two.has_large_tits():
+                        "You grope her sizable tits in your hands. The heat and softness of them feel amazing. She cries out when you pinch her nipples."
+                    else:
+                        "You grope her perky tits in your hands. The heat and firmness of them feel amazing. She cries out when you pinch her nipples."
+                    the_person_two "Oh! God boss don't make me lose again please!"
+                    $ the_person_two.change_arousal(5)
+                "Just watch":
+                    pass
+                "Strip [the_person_one.title]'s top" if not the_person_one.tits_available():
+                    "You step behind [the_person_one.possessive_title]. You reach down and grop her tits through her top."
+                    mc.name "It's time to get these girls out in the open now..."
+                    the_person_one "Whatever you say, partner..."
+                    "You reach down and peel off her clothing. She doesn't resist at all."
+                    $ scene_manager.strip_actor_outfit(the_person_one)
+                    "[the_person_one.title] gives a little shiver, now that she's naked, but she doesn't say a word."
+                    $ the_person_one.change_arousal(the_person_one.get_opinion_score("showing her tits") + 5)
+                "Strip [the_person_two.title]'s top" if not the_person_two.tits_available():
+                    "You step behind [the_person_two.possessive_title]. You reach down and grop her tits through her top."
+                    mc.name "It's time to get these girls out in the open now..."
+                    "You reach down and peel off her clothing. She doesn't resist at all."
+                    $ scene_manager.strip_actor_outfit(the_person_two)
+                    "[the_person_two.title] gives a little shiver, now that she's naked."
+                    the_person_two "Mmm... is it cold in here?"
+                    $ the_person_two.change_arousal(the_person_two.get_opinion_score("showing her tits") + 5)
+                "Grope [the_person_one.title]'s tits (disabled)" if not the_person_one.tits_available():
+                    pass
+
+                "Grope [the_person_two.title]'s tits (disabled)" if not the_person_two.tits_available():
+                    pass
+                #TODO brief blowjob, handjob scenes
+            if the_round < 3:
+                "As the game continues, you can hear the faint buzz of the toys the girls are sitting on. You can tell this is going to be a tight game!"
+                $ the_person_one.change_arousal(5)
+                $ the_person_two.change_arousal(5)
+            elif the_round < 6:
+                "You can easily hear the vibrators now, as they work their magic inside of the two girls."
+                $ the_person_one.change_arousal(8)
+                $ the_person_two.change_arousal(8)
+                "Thinking about the pleasure they are getting is starting to arouse you."
+                $ mc.change_arousal(3)
+                if renpy.random.randint(0,2) == 0 and not cock_available:
+                    "The excitment is getting to be too much. You decide to get more comfortable. You quickly disrobe."
+                    "[the_person_one.title] gasps when your cock springs free. [the_person_two.title] is starting at it, hungrily."
+                    mc.name "It's time to take things up a notch."
+            else:
+                "The toys have shifted into their highest settings. The girls are beginning to moan and gasp, just trying to sit still is a challenge."
+                $ the_person_one.change_arousal(10)
+                $ the_person_two.change_arousal(10)
+                "The distinct smell of feminine arousal in the air, mixed with punctuations of moans and gasps is really starting to turn you on."
+                $ mc.change_arousal(3)
+                if not cock_available:
+                    "The excitment is getting to be too much. You decide to get more comfortable. You quickly disrobe."
+                    "[the_person_one.title] gasps when your cock springs free. [the_person_two.title] is starting at it, hungrily."
+                    mc.name "It's time to take things up a notch."
+            if renpy.random.randint(0,1) == 0:
+                if the_person_one.arousal > 80:
+                    "You look at [the_person_one.possessive_title]. Her whole body is jiggling as she continually adjusts herself in her seat, vainly trying to keep from cumming."
+                    "She isn't going to last much longer!"
+                elif the_person_one.arousal > 40:
+                    "You look at [the_person_one.possessive_title]. Her nipples are hard with arousal, and you notice her cheeks getting flush. She is getting excited!"
+                else:
+                    "You look at [the_person_one.possessive_title]. She sits easily for now, but you know the game has only just begun."
+            else:
+                if the_person_two.arousal > 80:
+                    "You look at [the_person_two.possessive_title]. She is panting non stop and is constantly shifting her weight in her seat, trying to manage the pleasure she is getting from the toy."
+                    "She isn't going to last much longer!"
+                elif the_person_two.arousal > 40:
+                    "You look at [the_person_two.possessive_title]. Once in a while she catches her breath when the toy hits a particularly sensitive spot, and she has a far away look in her eyes."
+                else:
+                    "You look at [the_person_two.possessive_title]. She sits easily for now, but you know the game has only just begun."
+            $ the_round += 1
+
+        if (the_person_one.arousal >= 100 and the_person_two.arousal >= 100): #They both orgasm together.
+            the_person_one "Oh... OH! OH FUCK!"
+            the_person_two "Oh fuck me! OH I'M CUMMING!"
+            "The two girls both begin to moan as they cum together in unison. Geeze, this one seems too close to call?"
+            "You give your shaft a couple strokes... two girls orgasming on either side of you is pretty fucking hot!"
+            if willing_to_threesome(the_person_one, the_person_two):
+                $ the_person_one.have_orgasm()
+                $ the_person_two.have_orgasm()
+                "As the girl slowly finish their orgasms, they both notice you, stroking yourself. [the_person_two.title] reaches out and grabs your arm, stopping you."
+                the_person_one "Wow... was that a tie?"
+                the_person_two "Yes it was."
+                the_person_one "Does that mean... we have to share him?"
+                the_person_two "That seems the most reasonable action."
+                $ scene_manager.update_actor(the_person_one, position = None, display_transform = character_center_flipped)
+                $ scene_manager.update_actor(the_person_two, position = None, display_transform = character_right)
+                "The girls get up and start to walk over to you, predatorily. You decide to take charge before things get out of hand."
+                mc.name "Alright, I know just what to do."
+                "The girls stop and wait for your direction."
+                call start_threesome(the_person_one, the_person_two) from _double_winners_means_threesome_time_01
+                "When you are finished, you and the girls all get up together."
+                $ scene_manager.update_actor(the_person_one, position = None, display_transform = character_center_flipped)
+                $ scene_manager.update_actor(the_person_two, position = None, display_transform = character_right)
+                the_person_one "Wow... we should tie again next time."
+                the_person_two "That was certainly an acceptable outcome..."
+                the_person_one "Next week?"
+                "The girls agree to meet again next week."
+            else:
+                "Some how though, you manage the will to stop. The girls are both exhausted from their contest. Slowly, they start to get up."
+                $ scene_manager.update_actor(the_person_one, position = None)
+                $ scene_manager.update_actor(the_person_two, position = None)
+                the_person_one "Damn. A tie? What does that mean?"
+                the_person_two "I guess that means we are both losers. I'm sorry boss... I... I don't think I can manager another round right now."
+                the_person_one "Me neither. Next week though, I'm totally gonna win!"
+                "The girls agree to meet again next week."
+        elif the_person_one.arousal >= 100 : #Starbuck cums first
+            the_person_one "Oh... OH! OH FUCK!"
+            "[the_person_one.possessive_title] squeals as her orgasm hits her. Her chest bounces as her body convulses."
+            $ the_person_one.have_orgasm(half_arousal = False)
+            the_person_two "Yes! Oh my god [the_person_two.mc_title] I need your cock so bad..."
+            $ scene_manager.update_actor(the_person_two, position = None)
+            "[the_person_two.title] stands up, she quickly pulls out the wildly moving dildo and tosses it aside. She pushes you back onto the table then climbs up on top of you."
+            call get_fucked(the_person_two, the_goal = "vaginal creampie", private= False, start_position = cowgirl, start_object = make_table()) from _call_get_fucked_candace_won_orgasm_contest_01
+            $ scene_manager.update_actor(the_person_one, position = None, display_transform = character_center_flipped)
+            $ scene_manager.update_actor(the_person_two, position = None, display_transform = character_right)
+            "After finishing, [the_person_two.title] gets up off of you. You notice [the_person_one.title] has recovered from her earlier orgasm and is standing to the side, watching."
+            the_person_one "Mmm, that was fun. I swear, I'll win next time!"
+            the_person_two "The odds are not in your favor girl. Next week?"
+            "The girls agree to meet again next week."
+
+        else: #Candace loses again
+            the_person_two "Oh fuck me! OH I'M CUMMING!"
+            "[the_person_two.possessive_title] arches her back and moans as her orgasm hits her. Her body quakes with each wave."
+            $ the_person_two.have_orgasm(half_arousal = False)
+            the_person_one "Once again the champion!"
+            $ scene_manager.update_actor(the_person_one, position = None)
+            "[the_person_one.title] stands up. She pull the dildo from her cunt with a squelch and sets it carefull on the table. She pushes you back onto the table."
+            the_person_one "Mmm, don't worry partner, I'll be gentle!"
+            call get_fucked(the_person_one, the_goal = "vaginal creampie", private= False, start_position = cowgirl, start_object = make_table()) from _call_get_fucked_starbuck_won_orgasm_contest_01
+            $ scene_manager.update_actor(the_person_two, position = None, display_transform = character_center_flipped)
+            $ scene_manager.update_actor(the_person_one, position = None, display_transform = character_right)
+            "After finishing, [the_person_one.title] gets up off of you. You notice [the_person_two.title] has recovered from her earlier orgasm and is standing to the side, watching."
+            the_person_two "God I cum so easily. Next time grope [the_person_two.name] the whole time [the_person_one.mc_title]!"
+            the_person_one "Resorting to cheating? I bet I could even handle that! Next week?"
+            "The girls agree to meet again next week."
+            the_person_two "Mmm... I see some cum on you..."
+            "[the_person_two.title] starts to move toward [the_person_one.possessive_title]. They embrace and start to make out."
+            $ scene_manager.update_actor(the_person_one, position = "kissing", z_order = 1, display_transform = character_right)
+            $ scene_manager.update_actor(the_person_two, position = "walking_away", display_transform = character_right_flipped, z_order = 2)
+        "As the girls do their thing, you decide to head out. You say goodbye and slip out from the sex shop."
+
+    $ scene_manager.clear_scene()
+    return
 
 init 2 python:
     def starbuck_intro_choose_title(person):
@@ -2219,7 +2601,6 @@ label starbuck_intro():
             the_person.char "Is there anything I can help you with?"
     $ clear_scene()
     return
-####Starbuck Unique Personality####
 
 label starbuck_anal_fetish_masturbate(alert = False):
     $ the_person = starbuck

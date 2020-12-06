@@ -127,7 +127,7 @@ init 5 python:
             #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
             if renpy.has_label(new_position.taboo_break_description):
                 #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
-                renpy.call(self.taboo_break_description, person, the_location, the_object)
+                renpy.call(new_position.taboo_break_description, person, the_location, the_object)
 
             transition_scene = new_position.transition_default
             for position_tuple in self.transitions:
@@ -178,3 +178,45 @@ init 5 python:
 
     Position.call_outro = call_outro_enhanced
     Position.call_default_outro = call_default_outro
+
+    #Simultaneous orgasm code
+
+    def get_double_orgasm(self):
+        if not hasattr(self, "_double_orgasm"):
+            self._double_orgasm = None
+        return self._double_orgasm
+
+    def set_double_orgasm(self, value):
+        self._double_orgasm = value
+
+    def del_double_orgasm(self):
+        del self._double_orgasm
+
+    # add double_orgasm attribute to position class (without sub-classing)
+    Position.double_orgasm = property(get_double_orgasm, set_double_orgasm, del_double_orgasm, "Double orgasm label")
+
+    def call_orgasm_enhanced(self, the_person, the_location, the_object):
+        if self.double_orgasm and mc.arousal >= mc.max_arousal:  #Rely on girl orgasm tocall default orgasm if appropriate
+            # renpy.say("","Test 4")
+            renpy.call(self.double_orgasm, the_person, the_location, the_object)
+            # report_log["guy orgasms"] += 1  #TODO we need to find a way to add guy orgasm to the report log! #Trist any idea how to do this safely?
+        else:
+            self.call_default_orgasm(the_person, the_location, the_object)
+            # renpy.say("","Test 3")
+        return
+
+    def call_default_orgasm(self, the_person, the_location, the_object):
+        renpy.call(self.orgasm_description, the_person, the_location, the_object)
+
+    Position.call_orgasm = call_orgasm_enhanced
+    Position.call_default_orgasm = call_default_orgasm
+
+    def post_double_orgasm(the_person):
+        # renpy.say("","Test 2")
+        mc.reset_arousal()
+        mc.recently_orgasmed = True
+        the_person.change_obedience(5)
+        if report_log != None:
+            report_log["guy orgasms"] = report_log["guy orgasms"] + 1
+        return
+

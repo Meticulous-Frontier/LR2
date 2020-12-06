@@ -12,6 +12,10 @@ init 5 python:
         nora_nightmares.name = "Nora's Research Trait CBX"
         nora_obedience_swing.name = "Nora's Research Trait XBR"
         nora_sluttiness_boost.name = "Nora's Research Trait RXC"
+        # nora_suggest_up.tier = 1
+        # nora_nightmares.tier = 1
+        # nora_obedience_swing.tier = 1
+        # nora_sluttiness_boost.tier = 1
         return
 
 
@@ -19,5 +23,5 @@ label fix_nora_serum_traits(stack):
     python:
         fix_nora_serum_traits_names()
         # continue on the hijack stack if needed
-        execute_hijack_call(stack)        
+        execute_hijack_call(stack)
     return
