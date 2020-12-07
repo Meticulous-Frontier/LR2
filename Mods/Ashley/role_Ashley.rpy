@@ -176,6 +176,13 @@ init -1 python:
                 return True
         return False
 
+    def ashley_post_handjob_convo_requirement(the_person):
+        if not mod_content_alpha(): #ALPHA
+            return False
+        if the_person.location() == the_person.work:
+            return True
+        return False
+
     def add_ashley_hire_later_action():
         ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
             menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
@@ -680,9 +687,11 @@ label ashley_ask_about_porn_label(the_person):
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
+    $ ashley.add_unique_on_talk_event(ashley_post_handjob_convo)
     jump game_loop # she runs after her sister so end talk with Ashley
 
 label ashley_post_handjob_convo_label(the_person):
+    $ mod_alpha_content_warning()  #ALPHA
     "You decide not to give [the_person.title] too much time to overthink what happened in your office. You swing by her desk."
     $ the_person.draw_person()
     mc.name "Hey [the_person.title]..."
