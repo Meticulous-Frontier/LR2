@@ -1729,7 +1729,7 @@ label starbuck_replay_dressup_label(the_person):
 
     call screen outfit_creator(Outfit("New Outfit"))
     $ the_person.draw_person()
-    if _return:
+    if _return != "Not_New":
         $ created_outfit = _return
         "You pull out a few pieces of clothing and take them to [the_person.possessive_title]."
         "She looks at the outfit you've picked out for her and seems to think for a second."
