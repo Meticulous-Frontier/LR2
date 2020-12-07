@@ -63,7 +63,7 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
             return False
-        if not person.location() == mall_salon:
+        if not salon_manager.location() == mall_salon:
             return False
         if time_of_day == 3:
             return True
