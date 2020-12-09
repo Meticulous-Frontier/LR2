@@ -240,6 +240,8 @@ init 5 python:
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
                 person.location().move_person(person, mc.location)
+
+        mc.business.run_move()
         return
 
     def advance_time_assign_limited_time_events(people):

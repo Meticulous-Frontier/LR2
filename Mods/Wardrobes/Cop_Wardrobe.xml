@@ -14,9 +14,8 @@
                 <Item alpha="1.0" blue="0.15" green="0.15" name="Sneakers" red="0.15" />
             </Feet>
             <Accessories>
-                <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
-                <Item alpha="0.25" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
-                <Item alpha="0.7" blue="0.67" green="0.28" name="Upper_Eye_Shadow" red="0" />
+                <Item alpha="0.85" blue="0.325" green="0.04" name="Lipstick" red="0.843" />
+                <Item alpha="0.95" blue="0.15" green="0.15" name="Upper_Eye_Shadow" red="0.15" />
             </Accessories>
         </Outfit>
     </FullSets>

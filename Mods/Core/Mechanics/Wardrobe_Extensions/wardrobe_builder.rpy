@@ -18,11 +18,6 @@ init 5 python:
         ( "the colour red", "s > 5 and l < 95 and (h <= 35 or h >= 330)"),
     ])
 
-    # make business vest layer 2
-    shirts_list.remove(business_vest)
-    business_vest = Clothing("Business Vest", 2, True, True, "Tight_Vest", True, False, 2, opacity_adjustment = 1.3)
-    shirts_list.append(business_vest)
-
     # generate a more useable default color palette
     if __builtin__.len(persistent.colour_palette) == 10:
         persistent.colour_palette = [
@@ -112,14 +107,16 @@ init 5 python:
         return 13
 
 
-    real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron, nightgown_dress]]
+    real_pants_list = [x for x in pants_list if not x in [cop_pants]]
+    real_shirt_list = [x for x in shirts_list if not x in [cop_blouse]]
+    real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron, nightgown_dress, sweater_dress]]
 
     class WardrobeBuilder():
         default_person = None
 
         preferences = {}
         preferences["skimpy outfits"] = {}
-        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, tanktop, tube_top, business_vest]
+        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, frilly_longsleeve_shirt, tanktop, tube_top, business_vest]
         preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt, micro_skirt]
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
@@ -133,11 +130,11 @@ init 5 python:
         preferences["skirts"] = {}
         preferences["skirts"]["lower_body"] = skirts_list
         preferences["pants"] = {}
-        preferences["pants"]["lower_body"] = pants_list
+        preferences["pants"]["lower_body"] = real_pants_list
         preferences["showing her tits"] = {}
-        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, quarter_cup_bustier, cincher, heart_pasties, thin_dress, two_part_dress, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
+        preferences["showing her tits"]["upper_body"] = [strapless_bra, lace_bra, strappy_bra, quarter_cup_bustier, cincher, heart_pasties, thin_dress, two_part_dress, pinafore, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, lace_sweater, sweater, belted_top, tube_top, business_vest, suit_jacket, vest]
         preferences["showing her ass"] = {}
-        preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, virgin_killer, leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear]
+        preferences["showing her ass"]["upper_body"] = [two_part_dress, thin_dress, summer_dress, virgin_killer, frilly_dress, leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear]
         preferences["showing her ass"]["lower_body"] = [cute_panties, lace_panties, cute_lace_panties, tiny_lace_panties, thong, tiny_g_string, string_panties, strappy_panties, crotchless_panties, leggings, booty_shorts, jean_hotpants, daisy_dukes, micro_skirt]
         preferences["high heels"] = {}
         preferences["high heels"]["feet"] = [sandle_heels, pumps, heels, high_heels, boot_heels, thigh_high_boots]
@@ -157,6 +154,7 @@ init 5 python:
         matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string, crotchless_panties]
         matching_underwear["Strappy_Bra"] = [strappy_panties]
         matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
+        matching_underwear["Kitty_Babydoll"] = [kitty_panties]
 
         color_prefs = {}
         color_prefs["the colour blue"] = {
@@ -309,7 +307,7 @@ init 5 python:
         def build_overwear(self, points = 0):
             def make_upper_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
-                if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in shirts_list + real_dress_list:
+                if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
                     colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
@@ -323,7 +321,7 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
 
-            upper_item_list = real_dress_list + shirts_list
+            upper_item_list = real_dress_list + real_shirt_list
 
             # find upper body item
             filtered_upper_list = list(filter(lambda x: x.slut_value <= points, upper_item_list))
@@ -339,8 +337,8 @@ init 5 python:
                     outfit.add_upper(*make_upper_item_transparent(item, points, color_lower))
 
             # find lowerbody item
-            if item is None or (not item.has_extension or item is leotard):
-                item = self.get_item_from_list("lower_body", self.build_filter_list(pants_list + skirts_list, points), points, ["not wearing anything"])
+            if item is None or (not item.has_extension or item.has_extension.layer == 1):
+                item = self.get_item_from_list("lower_body", self.build_filter_list(real_pants_list + skirts_list, points), points, ["not wearing anything"])
                 if item:
                     outfit.add_lower(*make_lower_item_transparent(item, points, [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]]))
 

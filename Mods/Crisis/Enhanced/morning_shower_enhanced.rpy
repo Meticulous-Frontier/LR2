@@ -176,7 +176,7 @@ label girl_shower_leave_enhanced(the_person):
 
 label girl_shower_enter_enhanced(the_person):
     menu:
-        "Wait and watch her shower.":
+        "Wait and watch her shower":
             "You nod and head to the sink to brush your teeth. You lean on the sink and watch [the_person.title] while you brush."
             if the_person.effective_sluttiness() > 40 - (5 * (the_person.get_opinion_score("showing her tits")+the_person.get_opinion_score("showing her ass"))):
                 $ the_person.discover_opinion("showing her tits")
@@ -199,7 +199,7 @@ label girl_shower_enter_enhanced(the_person):
             "She steps past you and leaves. You get into the shower and enjoy the relaxing water yourself."
             $ mc.change_energy(20)
 
-        "Join her in the shower." if the_person.obedience >= 120:
+        "Join her in the shower" if the_person.obedience >= 120:
             mc.name "How about I just jump in, I can get your back and we'll both save some time."
             if the_person.effective_sluttiness() > 40:
                 the_person.char "Sure, if you're okay with that. I will put you to work though."
@@ -245,7 +245,7 @@ label girl_shower_enter_enhanced(the_person):
                 "She turns around and faces you. It might be the hot water, but her face is flush."
                 $ the_person.change_slut_temp(2)
                 menu:
-                    "Fuck her.":
+                    "Fuck her":
                         $ mc.change_location(home_shower)
                         call fuck_person(the_person, skip_intro = True) from _call_fuck_person_shower_enhanced_1
                         $ the_report = _return
@@ -264,7 +264,7 @@ label girl_shower_enter_enhanced(the_person):
                         "She leaves the room and you finish your shower alone, feeling refreshed by the water."
                         $ mc.change_location(bedroom)
 
-                    "Just have a shower.":
+                    "Just have a shower":
                         mc.name "Maybe some other time, I've got to hurry up though."
                         "She pouts and nods."
                         $ the_person.change_obedience(1)
@@ -273,7 +273,7 @@ label girl_shower_enter_enhanced(the_person):
             $ mc.change_energy(20)
 
 
-        "Join her in the shower.\n{color=#ff0000}{size=18}Requires: 120 Obedience{/size}{/color} (disabled)" if the_person.obedience < 120:
+        "Join her in the shower\n{color=#ff0000}{size=18}Requires: 120 Obedience{/size}{/color} (disabled)" if the_person.obedience < 120:
             pass
 
     return

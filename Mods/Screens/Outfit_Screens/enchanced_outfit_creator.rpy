@@ -351,10 +351,10 @@ init 2:
         $ categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
             "Bras": [bra_list, Outfit.can_add_upper, Outfit.add_upper],
-            "Pants": [pants_list, Outfit.can_add_lower, Outfit.add_lower],
+            "Pants": [[x for x in pants_list if not x in [cop_pants]] , Outfit.can_add_lower, Outfit.add_lower],
             "Skirts": [skirts_list, Outfit.can_add_lower, Outfit.add_lower],
             "Dresses": [dress_list, Outfit.can_add_dress, Outfit.add_dress],
-            "Shirts": [shirts_list, Outfit.can_add_upper, Outfit.add_upper],
+            "Shirts": [[x for x in shirts_list if not x in [cop_blouse]], Outfit.can_add_upper, Outfit.add_upper],
             "Socks": [socks_list, Outfit.can_add_feet, Outfit.add_feet],
             "Shoes": [shoes_list, Outfit.can_add_feet, Outfit.add_feet],
             "Facial": [earings_list, Outfit.can_add_accessory, Outfit.add_accessory],

@@ -12,7 +12,7 @@ init 1 python:
         return False
 
     def SB_mom_anal_pay_requirement():
-        if time_of_day == 4 and day%7 == 4: #It is the end of the day on friday
+        if day%7 == 5: #It is on saturday morning
             return True
         return False
 
@@ -44,8 +44,6 @@ init 1 python:
         person.base_outfit.add_accessory(fd_collar)
         return
 
-
-
     def add_SB_lily_anal_dp_fetish_event():
         SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
         mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
@@ -53,7 +51,7 @@ init 1 python:
 
     def add_mom_anal_fetish_event():
         SB_mom_anal_fetish = Action("Mom Anal Sex", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label")
-        mc.business.mandatory_crises_list.append(SB_mom_anal_fetish)
+        mc.business.mandatory_morning_crises_list.append(SB_mom_anal_fetish)
         return
 
     def add_sb_fetish_anal_crisis(person):
@@ -72,8 +70,8 @@ init 1 python:
         return
 
     def add_mom_weekly_anal_action():
-        SB_mom_weekly_anal_action = Action("mom friday anal ", SB_mom_anal_pay_requirement, "SB_mom_anal_friday_label")
-        mc.business.mandatory_crises_list.append(SB_mom_weekly_anal_action)
+        SB_mom_weekly_anal_action = Action("mom saturday anal ", SB_mom_anal_pay_requirement, "SB_mom_weekly_anal_label")
+        mc.business.mandatory_morning_crises_list.append(SB_mom_weekly_anal_action)
 
     def add_sb_starbuck_anal_intro_event():
         SB_starbuck_anal_intro_event = Action("Starbuck Anal Sex", SB_starbuck_anal_requirement, "SB_starbuck_anal_intro")
@@ -654,7 +652,7 @@ label SB_mom_anal_pay_label():
         mc.change_location(bedroom)
         mc.location.show_background()
 
-    "You're getting ready for bed when [the_person.possessive_title] calls from downstairs."
+    "You're just getting out of bed when [the_person.possessive_title] calls from downstairs."
     the_person.char "[the_person.mc_title], could we talk for a moment?"
     mc.name "Sure, down in a second."
     $ mc.change_location(kitchen)
@@ -729,8 +727,8 @@ label SB_mom_anal_pay_label():
             the_person.char "Good morning sleepy head..."
             "[the_person.possessive_title] starts to tremble at your touch."
             the_person.char "Look, about last night... I'm sorry I asked for money in exchange for... the wonderful thing we did afterword. I promise I won't do that again!"
-            the_person.char "I know that we have this tradition that... every Friday night I work on the budget and things have been really tight lately."
-            the_person.char "I was thinking we should start a new tradition! Every Friday night... Why don't we just plan on doing what we did. It will be something to look forward to with the stress of each week."
+            the_person.char "I know that we have this tradition that... every Saturday morning I work on the budget and things have been really tight lately."
+            the_person.char "I was thinking we should start a new tradition! Every Saturday morning... Why don't we just plan on doing what we did. It will be something to look forward to with the stress of each week."
             "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
             the_person.char "Plus... god I just can't stop fantasizing about you... sticking it in me... back there."
             "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
@@ -750,7 +748,7 @@ label SB_mom_anal_pay_label():
                 "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
             else:
                 "[the_person.possessive_title] lays there on the bed."
-            mc.name "So... every friday night? I think I could get used to that..."
+            mc.name "So... every Saturday morning? I think I could get used to that..."
             "You can see [the_person.possessive_title]'s body quiver slightly at your words."
             mc.name "BUT, I am a man. I may have needs more often then that. Be ready for me with that amazing ass of yours anytime."
             "[the_person.possessive_title] meekly responds."
@@ -770,17 +768,17 @@ label SB_mom_anal_pay_label():
     return
 
 #SBA50
-label SB_mom_anal_friday_label():
+label SB_mom_weekly_anal_label():
     $ the_person = mom
     $ bedroom.show_background()
-    "You're hanging out in your room when you hear [the_person.possessive_title] call from her room."
-    the_person.char "[the_person.mc_title], are you home? It's Friday night! Can you come to my room?"
-    mc.name "Sure, down in a second."
+    "You're just getting out of bed when [the_person.possessive_title] calls out to you."
+    the_person.char "[the_person.mc_title], could we talk for a moment? Can you come to my room?"
+    mc.name "Sure, I'll be there in a second."
     $ mom_bedroom.show_background()
     $ the_person.apply_outfit(lingerie_wardrobe.pick_random_outfit())
     $ the_person.draw_person(position = "stand4")
     "[the_person.title] is standing next to her bed. You quickly shut her door and lock it."
-    the_person.char "[the_person.mc_title]! Hey, it time for our Friday night date! Are you ready for your show and, well you know what comes afterword..."
+    the_person.char "[the_person.mc_title]! Hey, it time for our weekly arrangement! Are you ready for your show and, well you know what comes afterword..."
     "[the_person.title] smiles wide, waiting for your response."
     menu:
         "Strip and ride me":
@@ -843,7 +841,7 @@ label SB_mom_anal_friday_label():
             else:
                 "[the_person.possessive_title] lays there on the bed"
             $ the_person.draw_person(position = "missionary")
-            mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next friday, right?"
+            mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next Saturday, right?"
             the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
 
         "Not this week":

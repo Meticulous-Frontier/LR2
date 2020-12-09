@@ -106,10 +106,10 @@ init -1 python:
                     if person is lily:
                         add_SB_lily_anal_dp_fetish_event()
                     elif person is mom:
-                        mom_weekly_pay = exists_in_mandatory_crisis_list("mom_weekly_pay_label")
+                        mom_weekly_pay = exists_in_morning_crisis_list("mom_weekly_pay_label")
                         if mom_weekly_pay: # replace default mom weekly pay with new event
                             # renpy.say("", "Replacing default mom weekly pay event")
-                            mc.business.mandatory_crises_list.remove(mom_weekly_pay)
+                            mc.business.mandatory_morning_crises_list.remove(mom_weekly_pay)
                             add_mom_anal_fetish_event()
                     elif person is starbuck:
                         if starbuck.shop_investment_rate == 6.0:
