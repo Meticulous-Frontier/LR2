@@ -69,9 +69,9 @@ label alternate_nora_intro_label():
     "[nora.title] leaves and you make your way to your office to look over the folder she gave you."
     #Display office background.
     "The notes contain creation instructions for an unknown serum. She is looking for you to manufacture and test it."
-    "You should bring it up to at least mastery level 2 before you go back to [the_nora.title]."
+    "You should bring it up to at least mastery level 2 before you go back to [nora.title]."
 
-    #The magic sauce. Try to replicate all the variables here that are set in vanilla nora enounters.
+    #The magic sauce. Try to replicate all the variables here that are set in vanilla nora encounters.
     $ mc.business.event_triggers_dict["intro_nora"] = False
 
     $ the_trait = get_random_from_list(list_of_nora_traits)
