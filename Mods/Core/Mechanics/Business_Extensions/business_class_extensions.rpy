@@ -103,3 +103,26 @@ init -1 python:
 
     # wrap up the run_day function
     Business.run_day = business_run_day_extended(Business.run_day)
+
+    # add fire HR director function to Business
+    def fire_HR_director(self):
+        if self.hr_director:
+            self.hr_director.remove_role(HR_director_role)
+            self.hr_director = None
+            cleanup_HR_director_meetings()
+
+    Business.fire_HR_director = fire_HR_director
+
+
+    # wrap default remove_employee function to also trigger the fire_HR_director code when needed
+    def business_remove_employee_extended(org_func):
+        def remove_employee_wrapper(business, person, remove_linked = True):
+            org_func(business, person, remove_linked)
+
+            if person is business.hr_director:
+                business.fire_HR_director()
+
+        return remove_employee_wrapper
+
+    Business.remove_employee = business_remove_employee_extended(Business.remove_employee)
+
