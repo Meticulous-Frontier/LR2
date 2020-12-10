@@ -116,13 +116,13 @@ init 5 python:
 
         preferences = {}
         preferences["skimpy outfits"] = {}
-        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, frilly_longsleeve_shirt, tanktop, tube_top, business_vest]
+        preferences["skimpy outfits"]["upper_body"] = [two_part_dress, thin_dress, leotard, lace_sweater, belted_top, lace_crop_top, frilly_longsleeve_shirt, tanktop, tube_top, business_vest, kitty_babydoll]
         preferences["skimpy outfits"]["lower_body"] = [booty_shorts, jean_hotpants, daisy_dukes, belted_skirt, mini_skirt, micro_skirt]
         preferences['skimpy outfits']["feet"] = [thigh_highs, fishnets, garter_with_fishnets, pumps, heels, high_heels, thigh_high_boots]
         preferences["skimpy outfits"]["accessories"] = [lace_choker, wide_choker, spiked_choker]
         preferences["conservative outfits"] = {}
         preferences["conservative outfits"]["upper_body"] = [long_sweater, sleeveless_top, long_tshirt, camisole, long_sleeve_blouse, short_sleeve_blouse, tie_sweater, dress_shirt, sweater_dress, bra, bralette, sports_bra]
-        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants, panties, plain_panties, cotton_panties, boy_shorts]
+        preferences["conservative outfits"]["lower_body"] = [pencil_skirt, skirt, long_skirt, jeans, suitpants, panties, plain_panties, cotton_panties, boy_shorts, kitty_panties]
         preferences["conservative outfits"]["feet"] = [sandles, shoes, slips, sneakers, short_socks]
         preferences["conservative outfits"]["accessories"] = [wool_scarf]
         preferences["dresses"] = {}
@@ -154,7 +154,8 @@ init 5 python:
         matching_underwear["Lace_Bra"] = [cute_lace_panties, lace_panties, tiny_lace_panties, thong, tiny_g_string, crotchless_panties]
         matching_underwear["Strappy_Bra"] = [strappy_panties]
         matching_underwear["Corset"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
-        matching_underwear["Kitty_Babydoll"] = [kitty_panties]
+        matching_underwear["Kitty_Babydoll"] = [kitty_panties, thong, kitty_panties, strappy_panties, kitty_panties]
+        matching_underwear["Cincher"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
 
         color_prefs = {}
         color_prefs["the colour blue"] = {
