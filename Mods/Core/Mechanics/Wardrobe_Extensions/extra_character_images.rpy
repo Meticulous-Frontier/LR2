@@ -2,6 +2,8 @@ init -10 python:
     config.search_prefixes = [ "", "images/", "Mods/Core/Images/" ]
 
 init 2 python:
+    import threading
+
     secret_mask = Facial_Accessory("Secret Mask", 2, False, False, "Secret_Mask", False, False, 0, display_name = "masks", opacity_adjustment = .5)
     earings_list.append(secret_mask)
 
@@ -25,19 +27,24 @@ init 2 python:
     # override image get functions to allow for mod image retrieval #
     #################################################################
 
+    zipLocks = {}
+    for position in supported_positions:
+        zipLocks[position] = threading.Lock()
+
     mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
+    zipLocks["character_images"] = threading.Lock()
 
     def clothing_get_image(self, body_type, breast_size = "AA" ): #Generates a proper Image object from the file path strings we have stored previously. Prevents object bloat by storing large objects repeatedly for everyone.
         global mobile_zip_dict
 
         index_string = body_type + "_" + breast_size
         if index_string in self.images and self.images[index_string] in mobile_zip_dict[self.position_name].namelist():
-            return VrenZipImage(self.position_name, self.images[index_string])
+            return ZipContainer(self.position_name, self.images[index_string])
 
         if self.clothing_name: # check if we have a mod image for the clothing item
             fileName = self.clothing_name + "_" + self.position_name +  "_" + body_type + "_" + breast_size + ".png"
             if fileName in mobile_zip_dict["character_images"].namelist():
-                return VrenZipImage("character_images", fileName)
+                return ZipContainer("character_images", fileName)
         return Image("character_images/empty_holder.png")
 
     Clothing_Images.get_image = clothing_get_image
@@ -47,15 +54,43 @@ init 2 python:
         index_string = face + "_" + emotion
         if special_modifier is not None:
             if self.images[index_string + "_" + special_modifier] in mobile_zip_dict[self.position_name].namelist():
-                return VrenZipImage(self.position_name, self.images[index_string + "_" + special_modifier])
+                return ZipContainer(self.position_name, self.images[index_string + "_" + special_modifier])
 
         if self.images[index_string] in mobile_zip_dict[self.position_name].namelist():
-            return VrenZipImage(self.position_name, self.images[index_string])
+            return ZipContainer(self.position_name, self.images[index_string])
 
         # check if we have a mod image for the clothing item
         if self.images[index_string] in mobile_zip_dict["character_images"].namelist():
-            return VrenZipImage("character_images", self.images[index_string])
+            return ZipContainer("character_images", self.images[index_string])
 
         return Image("character_images/empty_holder.png")
 
     Facial_Accessory_Images.get_image = facial_accessory_get_image
+
+    class ZipContainer(renpy.display.im.ImageBase): #TODO: Move this to a more obvious file. Probably something to do along with a bunch of other refactoring.
+        def __init__(self, position, filename, mtime=0, **properties):
+            super(ZipContainer, self).__init__(position, filename, mtime, **properties)
+            self.position = position
+            self.filename = filename
+
+        def load(self):
+            global mobile_zip_dict
+            tries = 0
+            while tries < 3:
+                try:
+                    zipLocks[self.position].acquire()
+                    data = mobile_zip_dict[self.position].read(self.filename)
+                    sio = io.BytesIO(data)
+                    return renpy.display.pgrender.load_image(sio, self.filename)
+
+                except:
+                    tries += 1
+                    if tries >= 3:
+                        renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
+                        return renpy.display.pgrender.surface((2, 2), True)
+
+                    mobile_zip_dict[self.position].close()
+                    mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r") #May have to convert to a renpy_file first, but I dthink Zipfile will have alreayd done that
+
+                finally:
+                    zipLocks[self.position].release()
