@@ -51,11 +51,11 @@ init -3 python:
 init 5 python:
 
 
-    def mod_content_beta(version = -1):   #Use a current version number in the call to give the function approximately 1 month beta.
+    def mod_content_beta(version = -1):   #Use a current version number in the call to give the function approximately 1 month beta. This functionality is currently broke
         if enable_beta_mod_content:
             return True
         elif "game_version" in globals():
-            if version > 0 and version + 1 > game_version:             #TRIST can we get the mod version from somewhere?
+            if version > 0 and version + 1 > game_version:
                 return True
         return False
 
@@ -63,7 +63,7 @@ init 5 python:
         renpy.say("","Warning: This content is in alpha. It may contain game breaking bugs or be incomplete. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
         return
 
-    def mod_beta_content_warning(version = -1):
+    def mod_beta_content_warning(version = -1): #Version is broke. It needs some kind of string dissection to work
         renpy.say("","Warning: This content is in beta. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
         return
 

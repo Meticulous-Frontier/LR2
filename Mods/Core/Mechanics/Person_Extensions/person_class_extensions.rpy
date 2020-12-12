@@ -2034,3 +2034,21 @@ init -1 python:
         return
 
     Person.have_orgasm = have_orgasm
+
+    def favorite_colour(self):
+        if self.event_triggers_dict.get("favorite_colour", None): #We already have a favorite colour, so just return it
+            return self.event_triggers_dict.get("favorite_colour", None)
+        #If not, we need to find a favorite colour going forward.
+        list_of_colours = ["the colour blue", "the colour yellow", "the colour red", "the colour pink", "the colour black", "the colour green", "the colour purple", "the colour white", "the colour orange", "the colour brown"]
+        list_of_favorites = []
+        for colour in list_of_colours:
+            if self.get_opinion_score(colour) == 2:
+                list_of_favorites.append(colour)
+        if len(list_of_favorites) > 0:
+            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_favorites)
+        else:
+            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_colours)
+            self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
+        return self.favorite_colour()
+
+    Person.favorite_colour = favorite_colour
