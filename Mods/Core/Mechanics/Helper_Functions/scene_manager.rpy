@@ -158,7 +158,7 @@ init -2 python:
 ##########################################
 # Transformation for display_transform   #
 ##########################################
-init -1:
+init 1:
     transform character_right(xoffset = 0, yoffset = 0, zoom = 1):
         yalign (0.85 + yoffset)
         yanchor 1.0
