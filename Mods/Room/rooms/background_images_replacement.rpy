@@ -22,6 +22,8 @@ init 5 python:
     vial_image = Image(get_file_handle("vial.png"))
     question_image = Image(get_file_handle("question.png"))
 
+    under_construction_image = Image(get_file_handle("under_construction.png"))
+
 
 init -1 python:
     # override default render backgrounds
