@@ -799,6 +799,7 @@ label ashley_post_handjob_convo_label(the_person):
             "She bites her lip."
             the_person.char "Okay... let's give it a shot."
             $ the_person.event_triggers_dict["story_path"] = "secret"
+            $ assign_jealous_sister_role(the_person)
         "I want to be friends with both of you \n{color=#ff0000}{size=18}Friends with benefits path \n Not yet written{/size}{/color}" if (ashley_steph_relationship_status() == "both" or mc.charisma > 4):
             mc.name "There are a lot of feelings going on right now, but I think we all need to calm down a bit."
             mc.name "[stephanie.title] and I go back a ways, but I just think of her as a friend."

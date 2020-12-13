@@ -27,8 +27,10 @@ init 2 python:
     girlfriend_sleepover = Action("Have a sleepover", girlfriend_sleepover_requirement, "girlfriend_sleepover_label")
 
     girlfriend_wakeup_spooning = Action("Spooning wakeup", girlfriend_wakeup_spooning_requirement, "girlfriend_wakeup_spooning_label")
+    girlfriend_wakeup_jealous_sister = Action("Jealous wakeup", girlfriend_wakeup_jealous_sister_requirement, "girlfriend_wakeup_jealous_sister_label")
 
     girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
+    girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
 
 
 
