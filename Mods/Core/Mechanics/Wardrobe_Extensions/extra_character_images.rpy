@@ -67,6 +67,32 @@ init 2 python:
 
     Facial_Accessory_Images.get_image = facial_accessory_get_image
 
+    def expression_generate_emotion_displayable(self,position,emotion, special_modifier = None, eye_colour = None, lighting = None):
+        if not emotion in self.emotion_set:
+            emotion = "default" #Get our default emotion to show if we get an incorrect one.
+        elif special_modifier is not None and special_modifier in self.special_modifiers:
+            emotion = emotion + "_" + special_modifier
+
+        if lighting is None:
+            lighting = [1,1,1]
+
+        if eye_colour is None:
+            eye_colour = [0.8,0.8,0.8,1] #grey by default.
+
+        if not emotion in self.position_dict[position]:
+            return Image("character_images/empty_holder.png")
+
+        base_name = self.position_dict[position][emotion]
+        base_image = ZipContainer(position, base_name)
+
+        mask_name = self.position_dict[position][emotion].replace("_" + self.skin_colour,"_Pattern_1")
+        mask_image = ZipContainer(position, mask_name)
+
+        base_image = im.MatrixColor(base_image, im.matrix.tint(*lighting)) #To support the lighting of the room we also retint it here.
+        return AlphaBlend(mask_image, base_image, im.MatrixColor(base_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)), alpha=False)
+
+    Expression.generate_emotion_displayable = expression_generate_emotion_displayable
+
     class ZipContainer(renpy.display.im.ImageBase): #TODO: Move this to a more obvious file. Probably something to do along with a bunch of other refactoring.
         def __init__(self, position, filename, mtime=0, **properties):
             super(ZipContainer, self).__init__(position, filename, mtime, **properties)
