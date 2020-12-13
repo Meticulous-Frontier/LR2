@@ -1,4 +1,3 @@
-
 init 1301 python:              #Because Vren Init personality functions at 1300
 
     def erica_titles(person):
@@ -26,8 +25,8 @@ init 1301 python:              #Because Vren Init personality functions at 1300
         return mc.name
 
     erica_personality = Personality("athlete", default_prefix = "reserved",
-    common_likes = ["small talk", "the colour blue", "sports", "taking control"],
-    common_sexy_likes = ["doggy style sex", "giving blowjobs", "showing her ass", "drinking cum"],
+    common_likes = ["small talk", "the colour blue", "sports"],
+    common_sexy_likes = ["doggy style sex", "giving blowjobs", "showing her ass", "drinking cum", "taking control"],
     common_dislikes = ["relationships", "conservative outfits", "makeup", "the colour pink", "dresses", "high heels", "the colour purple"],
     common_sexy_dislikes = ["lingerie", "being submissive", "skimpy outfits"],
     titles_function = erica_titles, possessive_titles_function = erica_possessive_titles, player_titles_function = erica_player_titles)
