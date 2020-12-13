@@ -23,6 +23,13 @@ init 2 python:
         "Dark": ["black", 33, 2]
     }
 
+    # update defaults when not exist
+    for pref in generic_preference:
+        for x in generic_preference[pref]:
+            if not (getattr(persistent, generic_preference[pref][x][0]) or isinstance(getattr(persistent, generic_preference[pref][x][0]), int)):
+                setattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1])
+
+
     def get_random_skin():
         return get_random_from_weighted_list(build_generic_weighted_list("Skin Color"))
 
@@ -60,15 +67,8 @@ init 5 python:
     add_label_hijack("normal_start", "activate_generic_preference")
     add_label_hijack("after_load", "activate_generic_preference")
 
-    def set_persistent_generic_preferences():
-        for pref in generic_preference:
-            for x in generic_preference[pref]:
-                if not (getattr(persistent, generic_preference[pref][x][0]) or isinstance(getattr(persistent, generic_preference[pref][x][0]), int)):
-                    setattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1])
-
 label activate_generic_preference(stack):
     python:
-        set_persistent_generic_preferences()
         bedroom.remove_action("show_body_type_preference_ui")
         bedroom.remove_action("show_cup_preference_ui")
         bedroom.remove_action("show_skin_preference_ui")
