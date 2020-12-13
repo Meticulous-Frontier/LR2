@@ -183,29 +183,21 @@ init -1 python:
         return False
 
     def ashley_post_handjob_convo_requirement(the_person):
-        if not mod_content_alpha(): #ALPHA
-            return False
         if the_person.location() == the_person.work:
             return True
         return False
 
     def ashley_stephanie_arrange_relationship_requirement(the_person):
-        if not mod_content_alpha(): #ALPHA
-            return False
         if the_person.location() == the_person.work:
             return True
         return False
 
     def ashley_stephanie_saturday_coffee_intro_requirement(the_person):
-        if not mod_content_alpha(): #ALPHA
-            return False
         if the_person.location() == stephanie.location() and day%7 == 6 and time_of_day == 0:
             return True
         return False
 
     def ashley_stephanie_saturday_coffee_recur_requirement(the_person):
-        if not mod_content_alpha(): #ALPHA
-            return False
         if the_person.location() == stephanie.location() and day%7 == 6 and time_of_day == 0:
             return True
         return False
@@ -1152,6 +1144,18 @@ label coffee_time_steph_gets_handsy_label():
     if the_person_two.sluttiness < 40:
         "You and [the_person_two.title] pet each other for several minutes. You are both getting aroused, but with clothes in the way it's impossible to finish."
         "With the public setting of the booth, you don't dare to push things any farther."
+        if the_person_two.is_girlfriend():
+            "[the_person_two.title] leans over and whispers in your ear."
+            the_person_two "Why don't I come over to your place tonight, and we can do something like this, but with way less clothes..."
+            menu:
+                "Have her come over" if schedule_sleepover_available():
+                    "You give her a nod. She takes that as her cue to stop."
+                    the_person_two "I'll see you tonight then..."
+                    $ schedule_sleepover_in_story(the_person_two)
+                "Have her come over (disabled)" if not schedule_sleepover_available():
+                    pass
+                "Not tonight":
+                    mc.name "I can't tonight, maybe another night..."
     else:
         "You and [the_person_two.title] pet each other for a few minutes, but stroking each other thru you clothes can only take things so far."
         if the_person_two.get_opinion_score("public sex") > 0:
@@ -1213,7 +1217,18 @@ label coffee_time_steph_gets_handsy_label():
                     "Stop":
                         "While [the_person_one.possessive_title] is looking something up on her phone, you whisper into [the_person_two.title]'s ear."
                         mc.name "Sorry, I don't want to make a mess here..."
-                        "TODO: have stephanie offer to come over later if she's your girlfriend"
+                        if the_person_two.is_girlfriend():
+                            "[the_person_two.title] leans over and whispers in your ear."
+                            the_person_two "That's okay... maybe I can come over tonight and make it up to you?"
+                            menu:
+                                "Have her come over" if schedule_sleepover_available():
+                                    "You give her a nod. She takes that as her cue to stop."
+                                    the_person_two "I'll see you tonight then..."
+                                    $ schedule_sleepover_in_story(the_person_two)
+                                "Have her come over (disabled)" if not schedule_sleepover_available():
+                                    pass
+                                "Not tonight":
+                                    mc.name "I can't tonight, maybe another night..."
                         "[the_person_two.possessive_title] release your erection, leaving it aching with need. You quickly put yourself away and zip up as [the_person_one.title] finishes pulling up a picture on her phone."
                         the_person_one "So I was thinking about getting my haircut to something like this... What do you think?"
                         "You continue your coffee date with the sisters, with [the_person_one.title] unaware of you getting her sister off right in front of her."
