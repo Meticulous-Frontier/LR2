@@ -134,7 +134,7 @@ screen generic_preference_ui():
                                     xsize 60
                                     ysize 50
                                     yoffset 5
-                                    text str(getattr(persistent, generic_preference[pref][x][0])) + "%" style "menu_text_style" xsize 100
+                                    text (str(getattr(persistent, generic_preference[pref][x][0])) + "%" if getattr(persistent, generic_preference[pref][x][0]) > 0 else "None") style "menu_text_style" xsize 100
 
             hbox:
                 xsize 800
