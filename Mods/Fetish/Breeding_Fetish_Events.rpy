@@ -54,11 +54,9 @@ init -1 python:
                 return True
         return False
 
-
     def breeding_fetish_sarah_intro_requirement():
-        if mc_asleep():
-            if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
-                return True
+        if not day%7 == 5 and mc_asleep() and sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+            return True
         return False
 
     def breeding_fetish_ophelia_intro_requirement():

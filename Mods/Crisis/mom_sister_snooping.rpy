@@ -10,7 +10,7 @@ init -1 python:
 
 init 2 python:
     def mom_sister_snooping_requirement():
-        if mc_at_home() and time_of_day == 0:
+        if not day%7 == 5 and time_of_day == 0 and mc_at_home(): # not on saturday mornings
             return True
         return False
 

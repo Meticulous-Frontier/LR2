@@ -1,9 +1,7 @@
 init 1 python:
     def SB_fetish_anal_requirement():
-        if time_of_day == 3:
-            if mc.business.is_open_for_business():
-                if mc.is_at_work():
-                    return True
+        if time_of_day == 3 and mc.business.is_open_for_business() and mc.is_at_work():
+            return True
         return False
 
     def SB_fetish_anal_requirement_non_employee():
@@ -17,10 +15,8 @@ init 1 python:
         return False
 
     def SB_starbuck_anal_requirement():
-        if starbuck.shop_investment_rate == 6.0:
-            if time_of_day == 3 and day%7 != 4: #It is the end of the day on friday
-                return True
-
+        if starbuck.shop_investment_rate >= 6.0 and time_of_day == 3:
+            return True
         return False
 
     def SB_stephanie_anal_fetish_requirement():
@@ -30,7 +26,7 @@ init 1 python:
         return False
 
     def SB_fetish_anal_staylate_event_requirement():
-        if time_of_day == 3:
+        if time_of_day == 3 and mc.business.is_open_for_business():
             return True
         return False
 
