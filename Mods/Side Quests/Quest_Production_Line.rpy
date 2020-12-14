@@ -412,7 +412,7 @@ label quest_production_line_help_move_label():
         $ the_person.set_possessive_title("Your Baby Girl")
         "You notice she catches her breath when you say that. It is almost like she is getting excited."
         mc.name "You and your father... you umm, have a very special relationship... don't you?"
-        if the_person.sluttiness > 40:  #She reveals her incest
+        if the_person.effective_sluttiness() > 40:  #She reveals her incest
             the_person.char "That's... I mean... kind of private!"
             mc.name "It's ok, [the_person.title]. You can tell me."
             "You can see her defenses breaking down."
