@@ -350,7 +350,7 @@ label girlfriend_wakeup_spooning_label(the_person):
 
 
 label girlfriend_underwear_shopping_label(the_person):
-    mc.name "Hey, I got an idea. Why don't we go shopping for some new lingier? Spice things up in the bedroom a bit?"
+    mc.name "Hey, I got an idea. Why don't we go shopping for some new lingerie? Spice things up in the bedroom a bit?"
     if the_person.sluttiness < 40:
         the_person "Oh! Ummm... I guess..."
         the_person "I mean, if you want me to. I suppose I could get something new to wear for you once in a while..."
@@ -358,6 +358,8 @@ label girlfriend_underwear_shopping_label(the_person):
         the_person "Oh! That sounds fun!"
         the_person "This will be great! You can tell me what you like and then I'll now what to wear whenever I want to get your engine revving."
     "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
+    $ mc.change_location(clothing_store)
+    $ mc.location.show_background()
     "Normally this would be a bit awkward by yourself, but with [the_person.title], its not so bad..."
     the_person "Hmm, how should we do this? Want me to pick something out first? Or do you want to?"
     $ lingerie_outfit = None
@@ -489,6 +491,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 pass
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
+        $ the_person.wardrobe.add_outfit(lingerie_outfit)
         the_person "Thanks [the_person.mc_title]! This was fun!"
         if schedule_sleepover_available():
             the_person "So... want me to come over tonight? I'm not doing anything later..."
