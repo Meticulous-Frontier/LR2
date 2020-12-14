@@ -1714,7 +1714,7 @@ label erica_weekly_yoga_label(the_person):
             mc.name "Thank you again for doing this. I really feel like this is a huge benefit for the company."
             the_person.char "Of course! Glad to do it. I get the feeling, from talking to the girls here, that you are a great boss to work for too!"
             mc.name "Alright, I'll let you get to it. I'm going to try and get some work done, let me know if you need anything."
-    "Yeah head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [yoga_assistant.possessive_title] starting things up."
+    "Yeah head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [the_person.possessive_title] starting things up."
     the_person.char "Good morning everyone! Thanks for coming out. We are going to start things out slowly this morning with some stretching!"
     "You watch as your employees start out doing so light stretching. Everyone seems to be paying attention and trying their best."
     "You turn back to the computer and get to work."
