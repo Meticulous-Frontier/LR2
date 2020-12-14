@@ -454,6 +454,7 @@ label ophelia_make_blowjob_pics_label():
         mc.name "But who knows how long that'll be? Besides, he's off doing..."
         the_person.char "I know what he's doing. But its okay. He'll come back to me eventually. I can be patient."
         "It is clear you aren't going to be able to reason with her."
+        "[the_person.possessive_title] leads you to the front door."
     else:
         the_person.char "I mean, I'm trying to get back with my ex..."
         mc.name "But who knows how long that'll be? Besides, he's off doing whatever with that other girl. Surely you could let yourself go and get a little relief your self?"
@@ -476,7 +477,9 @@ label ophelia_make_blowjob_pics_label():
             "Her disappointment is obvious."
             the_person.char "Guess I'll just go home and masturbate... again..."
         "You clean yourself up."
-    "[the_person.possessive_title] leads you to the front door."
+        $ the_person.apply_outfit()
+        $ the_person.draw_person()
+        "[the_person.possessive_title] puts on her clothes and leads you to the front door."
     the_person.char "Thanks for your help tonight. I have a couple more things to do before I head home. Gonna send those pics out..."
     "You say goodbye and then walk out of the salon. You wonder what her ex will think when he gets those pictures..."
     $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 3
