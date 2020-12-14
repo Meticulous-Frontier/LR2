@@ -1,8 +1,10 @@
 #This file is to add new options to girlfriends. Ideas include: afternoon delight, my place / your place, sexting, clothes shopping.
+#Roleplays: These are scenes that will involve your girlfriend pretending to be someone/something else. Designed to take the place of the initial fucking scene.
 
 init 2 python:
     girlfriend_morning_action_list = []     #Requirement functions can check mc.location to tell if its myplace/yourplace if necessary.
     girlfriend_sleepover_interruption_list = []     #Ideas, daughter/mother walk in, phone call,
+    girlfriend_roleplay_list = []           #When a roleplay is created, add it here as an option. list of ACTIONS
 
     def girlfriend_myplace_yourplace_requirement(the_person):
         if schedule_sleepover_available():
@@ -348,7 +350,49 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ clear_scene()
     return
 
+label girlfriend_roleplay_step_sister_label(the_person):
+    #First, get the outfit, if we've picked one out for it.
+    if (the_person.event_triggers_dict.get("stepsister_lingerie", None)):
+        $ the_person.apply_outfit(the_person.event_triggers_dict.get("stepsister_lingerie", None))
+    else:
+        $ the_person.change_to_lingerie()
+    #Now set nick names, etc
+    $ the_person.roleplay_title_swap("Step Sis")
+    $ the_person.roleplay_mc_title_swap("Step Brother")
+    $ the_person.roleplay_possessive_title_swap("Your Step Sister")
+    $ the_person.roleplay_personality_swap(lily_personality)
 
+    if mc.business.event_triggers_dict.get("your_place", True):
+        "Your girlfriend doesn't emerge from the bathroom right away, but eventually hear her calling out."
+        the_person "Help me! Someone help!"
+        "You quickly get up and run into the bathroom."
+        $ the_person.draw_person(position = "standing_doggy")
+        the_person "Oh! [the_person.mc_title]? Is that you?"
+        "The roleplaying has begun..."
+        mc.name "It's me, [the_person.title]. What's going on?"
+        "She is bent over and has her head in the sink."
+        the_person "Oh thank god its you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
+        mc.name "You got your hair stuck in the sink, again!?! How does this keep happening [the_person.title]?"
+        "Her hips start to wiggle a bit as you approach her."
+        the_person "I don't know! You've got to help me [the_person.mc_title]!"
+        "She is laying it on pretty thick, but if it wasn't for her ass sticking up in the air, you might find this comical. Instead you are starting to get aroused."
+        if the_person.vagina_available():
+            "[the_person.possesive_title]'s ass, exposed and pointing at you, makes an enticing target. You run your hands along her hips and then grope it."
+        else:
+            "You walk over to [the_person.title]. You pull away at the clothing between you and her ass."
+            $ the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
+        $ the_person.change_arousal(15)
+        the_person "Oh my gooooooddd... [the_person.mc_title], what are you doing back there?"
+        "You dip a finger into her cunt."
+        mc.name "Just checking the plumbing, [the_person.title]. Nothing to worry about..."
+
+
+
+    $ the_person.roleplay_title_revert()
+    $ the_person.roleplay_mc_title_revert()
+    $ the_person.roleplay_possessive_title_revert()
+    $ the_person.roleplay_personality_revert()
+    return
 label girlfriend_underwear_shopping_label(the_person):
     mc.name "Hey, I got an idea. Why don't we go shopping for some new lingerie? Spice things up in the bedroom a bit?"
     if the_person.sluttiness < 40:
@@ -479,16 +523,35 @@ label girlfriend_underwear_shopping_label(the_person):
         $ the_person.draw_person()
         "As you are walking up to the checkout counter, [the_person.title] asks you about the outfit."
         the_person "So... is this something you want me to wear when we like... do some roleplaying? Or just a sexy outfit?"
+        "NOTE! Roleplay scenes are not yet implemented, but you can save outfits for them now..."
         menu:
             "Just a sexy outfit":
                 $ the_person.event_triggers_dict["favorite_lingerie"] = lingerie_outfit
                 the_person "Mmmm, okay! I'll wear this for you when I just want to be sexy!"
-            "Roleplay: My baby girl (disabled)":
-                pass
-            "Roleplay: My employee (disabled)":
-                pass
-            "Roleplay: My student (disabled)":
-                pass
+            "Roleplay: My baby girl":
+                $ the_person.event_triggers_dict["babygirl_lingerie"] = lingerie_outfit
+                if the_person.get_opinion_score("incest") > 0:
+                    the_person "Oh! That sounds hot... You want to spank me while I call you daddy?"
+                else:
+                    the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
+            "Roleplay: My employee":
+                $ the_person.event_triggers_dict["employee_lingerie"] = lingerie_outfit
+                if the_person.is_employee():
+                    the_person "Oh! But... I'm already your employee?"
+                    mc.name "But what if you were a slutty employee who wasn't dating her boss and really needed a promotion."
+                    the_person "Aaahhhh I see where you are going with this..."
+                else:
+                    the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
+            "Roleplay: My student":
+                $ the_person.event_triggers_dict["student_lingerie"] = lingerie_outfit
+                the_person "Ahhh, oh teacher? I'm sorry I forgot to study! What can I do to pass this class?"
+                mc.name "You've got exactly the right idea."
+            "Roleplay: My ditzy stepsister":
+                $ the_person.event_triggers_dict["stepsister_lingerie"] = lingerie_outfit
+                if the_person.get_opinion_score("incest") > 0:
+                    the_person "Oh! That sounds hot... What are you going to do to me... step bro?"
+                else:
+                    the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
         $ the_person.wardrobe.add_outfit(lingerie_outfit)
