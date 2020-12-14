@@ -235,7 +235,7 @@ label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
     mc.name "That's enough spanking [the_girl.title]. Now I'll make it feel all better.."
     the_girl.char "Oh yes, [the_girl.mc_title], make me feel good."
     "You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
-    "You continue your back and forth motion, rubbing your cock along her pussy lips."
+    "You continue your back and forth motion, rubbing your cock along her already wet pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
         the_girl.char "Oh....Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
@@ -248,4 +248,9 @@ label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
         $ the_girl.break_taboo("vaginal_sex")
     else:
         "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
+    return
+
+# when breaking the taboo we don't go into the default transition, so we use this custom label to trigger the transition dialog
+label transition_spanking_to_standing_doggy_taboo_break_label(the_girl, the_location, the_object):
+    call transition_spanking_SB_doggy_standing(the_girl, the_location, the_object) from _call_transition_spanking_to_standing_doggy_taboo_break_label
     return
