@@ -229,7 +229,7 @@ init -2 python:
         return False
 
     def erica_weekly_yoga_requirement(person):
-        if mc.business.hr_director and person.location() == office and day%7 == 1:
+        if mc.business.hr_director and person.location() == lobby and day%7 == 1:
             return True
         return False
 
@@ -1424,8 +1424,8 @@ label erica_money_problems_yoga_start_label(the_person):
     mc.name "Okay. I'm going to give your number to my HR director. She'll contact you to set up the final details. Her name is [mc.business.hr_director.name]."
     the_person.char "I'll look for it. I'm going to get back to my workout, thank you so much!"
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
-    $ the_person.set_alt_schedule(office, days = [1], times = [0])
-    $ mc.business.hr_director.set_alt_schedule(office, days = [1], times =[0])
+    $ the_person.set_alt_schedule(lobby, days = [1], times = [0])
+    $ mc.business.hr_director.set_alt_schedule(lobby, days = [1], times =[0])
     $ mc.business.mandatory_crises_list.append(erica_yoga_event_intro)
     return
 
@@ -1440,11 +1440,21 @@ label erica_yoga_event_intro_label():
         erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
         erica.event_triggers_dict["yoga_assistant"] = yoga_assistant
 
-    "It's Tuesday morning. That means that, starting this week, it is morning yoga day! While you don't think you'll need to go every time, since this the inaugural session, it might be good for you to oversee, just in case there are any issues. You head in to work early."
-    "When you arrive, you walk in the building. I'm the main lobby, you see some of your employees just getting ready to set up."
+    "It's Tuesday morning, it is weekly morning yoga day! While you don't think you'll need to go every time, since this the inaugural session, it might be good for you to oversee, just in case there are any issues."
+    if mc.is_at_work():
+        "You go down to the lobby to see how things are working out."
+        $ mc.change_location(lobby)
+        $ mc.location.show_background()
+        "As you walk into the main lobby, you see some of your employees just getting ready to set up."
+    else:
+        "You go into the office early, to see how things are working out."
+        $ mc.change_location(lobby)
+        $ mc.location.show_background()
+        "When you arrive, you walk into the building, in the main lobby, you see some of your employees just getting ready to set up."
+
     $ scene_manager.add_actor(the_person)
     $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
-    "At the front, you see [the_person.possessive_title] doing some light stretching. She has a speaker out, playing some upbeat music."
+    "At the front, you see [the_person.possessive_title] doing some light stretching. She brought a portable Bluetooth speaker, playing some upbeat music."
     "Next to her you see [yoga_assistant.title]. She has been the biggest supporter of this event since the get go, and it doesn't surprise you to see her at the front of the group. As you walk up, you can hear the two chatting. They seem to be hitting it off..."
     yoga_assistant.char "Oh! Wow that's a really good time! I could never do something like that, I just don't have the endurance..."
     the_person.char "Yeah, I've been running since I was little. I don't know why, I've just always loved it! But I know it's not for everyone."
@@ -1466,10 +1476,10 @@ label erica_yoga_event_intro_label():
     the_person.char "Oh hey [the_person.mc_title]!"
     the_person.char "I'm glad to see you. I wasn't sure if you were going to be here or not."
     yoga_assistant.char "Hello [yoga_assistant.mc_title]! The man of the hour! Here to make sure company funds are being spent wisely?"
-    "[yoga_assistant.title] chuckles."
+    "[the_person.title] chuckles."
     mc.name "I have no doubt that you two will make this class a success. I'm just here to make sure all the first session jitters get worked and to lend a hand if any problems arise."
     the_person.char "Thanks [the_person.mc_title]. I really appreciate your support with this. It's just a yoga class, but having you here definitely helps me feel more confident trying to tackle this!"
-    yoga_assistant.char "Yeah, don't worry [the_person.name], [yoga_assistant.mc_title] is a great guy to work for! He really knows how to treat his employees!"
+    yoga_assistant.char "Yeah, don't worry [the_person.name], [mc.name] is a great guy to work for! He really knows how to treat his employees!"
     mc.name "Alright, I'll be over there, getting some of the morning paperwork started. Let me know if you need anything."
     "Yeah head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [yoga_assistant.possessive_title] starting things up."
     the_person.char "Good morning everyone! Thanks for coming out. Since today is our first session, we are going to start out with just some basic poses and breathing techniques! Does anyone have any questions before we get started?"
@@ -1516,12 +1526,16 @@ label erica_yoga_event_intro_label():
         erica_after_class_outfit_cleanup(yoga_list)     #NOTE we rely on Erica moving to gym next to make sure her outfit gets cleaned up.
         erica_class_energy_increase(yoga_list)
 
+        # make sure we set the schedule right (fixes room change)
+        the_person.set_alt_schedule(lobby, days = [1], times = [0])
+        yoga_assistant.set_alt_schedule(lobby, days = [1], times =[0])
+
         scene_manager.clear_scene()
         yoga_list = None
         yoga_assistant = None
 
 
-    # call advance_time from _call_advance_erica_yoga_intro
+    call advance_time(no_events = True) from _call_advance_time_erica_yoga_intro
     return
 
 label erica_yoga_loop_label(the_person, yoga_assistant):
@@ -1876,11 +1890,15 @@ label erica_weekly_yoga_label(the_person):
         erica_after_class_outfit_cleanup(yoga_list)
         erica_class_energy_increase(yoga_list)
 
+        # make sure we set the schedule right (fixes room change)
+        the_person.set_alt_schedule(lobby, days = [1], times = [0])
+        yoga_assistant.set_alt_schedule(lobby, days = [1], times =[0])
+
         scene_manager.clear_scene()
         yoga_list = None
         yoga_assistant = None
 
-    call advance_time from _call_advance_erica_yoga_weekly_recurrent_
+    call advance_time(no_events = True) from _call_advance_time_erica_yoga_weekly_recurring
     return
 
 label erica_getting_watched_reaction_label(the_person, watched_count):  #A short label to describe how Erica feels when you watch her doing yoga.
