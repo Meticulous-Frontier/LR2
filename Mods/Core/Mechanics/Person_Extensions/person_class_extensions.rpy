@@ -811,6 +811,10 @@ init -1 python:
             for action_to_remove in removal_list:
                 event_list.remove(action_to_remove)
 
+        for a_role in self.special_role:
+            a_role.run_move(self)
+
+
     Person.run_move = run_move_enhanced
 
     # enhanced get destination function, that checks the alternative schedule for a destination prior to regular schedule.
