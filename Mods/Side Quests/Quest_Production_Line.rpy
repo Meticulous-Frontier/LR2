@@ -452,10 +452,13 @@ label quest_production_line_help_move_label():
             the_person.char "Oh god... that was wonderful [the_person.mc_title]."
             $ the_person.draw_person()
             "You stand up and get yourself together."
-            "She walks you to her door."
+            $ the_person.outfit.add_upper(bath_robe.get_copy(), [1, .73, .85, .9], "Pattern_1", [.95, .95, .95, .9])
+            $ the_person.draw_person()
+            "She quickly puts on a robe and walks you to her door."
             the_person.char "Thank you again, for everything!"
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
             the_person.char "Yes Sir!"
+            $ clear_scene()
             "As you turn from her door, you process all the events of the last few days."
             "One of your employees, recently had an amicable breakup... with her dad? And now she calls you Daddy... And she likes to get spanked."
             $ the_person.unlock_spanking()
