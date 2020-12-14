@@ -26,8 +26,9 @@ init -1 python:
     def advance_time_random_morning_crisis_requirement():
         return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
+    # remove in future version (this is no longer in main loop, but in mc.business.run_turn())
     def advance_time_daily_serum_dosage_requirement():
-        return time_of_day == 1 and daily_serum_dosage_policy.is_active() and mc.business.is_work_day() # This runs if you have the corresponding policy
+        return False
 
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
@@ -102,9 +103,6 @@ init 5 python:
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = 9, category = "Gameplay")
 
-    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
-        "advance_time_daily_serum_dosage_label", priority = 10, allow_disable = False)
-
     advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
         "advance_time_people_run_move_label", priority = 15, allow_disable = False)
 
@@ -120,7 +118,7 @@ init 5 python:
         "advance_time_mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
-        advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
+        advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
         advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_mandatory_vibe_company_action]
 
     if "slave_role" in globals():
@@ -463,11 +461,6 @@ label advance_time_next_label():
             day += 1
         else:
             time_of_day += 1 ##Otherwise, just run the end of day code.
-    return
-
-label advance_time_daily_serum_dosage_label():
-    # "advance_time_daily_serum_dosage_label - timeslot [time_of_day]" #DEBUG
-    $ mc.business.give_daily_serum()
     return
 
 label advance_time_people_run_move_label():
