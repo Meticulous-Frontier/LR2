@@ -473,5 +473,44 @@ label orgasm_SB_doggy_standing(the_girl, the_location, the_object):
     return
 
 label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
-    # TODO: Add custom taboo break
+    "You grab [the_girl.possessive_title]'s ass and give it a squeeze, then a hard slap."
+    if the_girl.effective_sluttiness(SB_doggy_standing.associated_taboo) > SB_doggy_standing.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
+        mc.name "Stand over here, let me have a good look from behind."
+        $ the_girl.draw_person(position = "back_peek", the_animation = ass_bob)
+        "She turns around and jiggles her butt playfully for you."
+        the_girl.char "This cute ass? You want to have a closer look?"
+        mc.name "I said stand here, come on."
+        $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
+        "She leans into the [the_object.name] and points her butt in your direction. She lowers her shoulders and works her hips for you."
+    else:
+        mc.name "Stand over here."
+        $ the_girl.draw_person(position = "stand2")
+        "She slowly walks to the indicated position in front of you."
+        mc.name "Good girl, now spin around and show me that ass."
+        "She nods and turns around."
+        $ the_girl.draw_person(position = "walking_away")
+        mc.name "Nice. Now shake it for me."
+        the_girl.char "Like... this?"
+        $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
+        "[the_girl.title] works her hips and jiggles her ass for you."
+        mc.name "Getting there, a little faster now."
+        $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
+        "She speeds up."
+    the_girl.char "Is that what you wanted?"
+    "You move behind her and slide you cock between her thighs, brushing softly along her already wet snatch."
+    mc.name "Not quite, you seem pretty excited, perhaps I should slide it in to see if you can hold up."
+    $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
+    "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her wet hole."
+    if the_girl.sex_skills["Vaginal"] > 2:
+        "She gasps as your tip starts to spread her lips apart. She lowers her shoulders and pushes her hips against you, helping the process."
+        the_girl.char "Oh god... Mfphhhh!"
+    else:
+        "She gasps as your tip slowly spreads her lips apart. She tries to pull away, but you pull on her waist and bring her closer."
+        mc.name "Come on, you'll get there."
+        "As you give it another try, you are making better progress, sliding the tip of your dick into [the_girl.title]'s wet tight cunt."
+        the_girl.char "Oh god... Fuck!"
+    "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
+    "When you cannot go any deeper you give her some time to get used to your girth and length."
+    the_girl.char "I think... I'm ready for you to move some more..."
+    "You pull back a little bit and give her a few testing strokes. When she can handle those, you speed up, until you're thrusting your entire length."
     return
