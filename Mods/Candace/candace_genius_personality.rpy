@@ -220,7 +220,7 @@ label genius_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person.char "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person.char "Oh, it's cute! Thank's [the_person.mc_title]!"
+        the_person.char "Oh, it's cute! Thanks [the_person.mc_title]!"
     return
 
 label genius_clothing_reject(the_person):
@@ -235,7 +235,7 @@ label genius_clothing_reject(the_person):
 
 label genius_clothing_review(the_person):
     if the_person.obedience > 130:
-        the_person.char "I'm sorry [the_person.mc_title], I'm feeling a little self concious. I'll go and get cleaned up so I'm presentable again."
+        the_person.char "I'm sorry [the_person.mc_title], I'm feeling a little self-conscious. I'll go and get cleaned up so I'm presentable again."
     else:
         if the_person.sluttiness > 40:
             the_person.char "Whew, I think we messed up my clothes a bit. Just give me a quick second to get dressed into something more decent."
@@ -739,7 +739,7 @@ label genius_cum_pullout(the_person):
                 "She seems almost desperate as she moans."
                 the_person.char "I don't care if you knock me up! I'm just your... breeding slut!"
 
-            menu: #TODO: Add a varient of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
+            menu: #TODO: Add a variant of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
                 "Take off the condom.":
                     "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
                     $ mc.condom = False
@@ -1200,7 +1200,7 @@ label genius_anal_sex_taboo_break(the_person):
             the_person.char "Oh fuck..."
         else:
             the_person.char "Oh my god, you're actually going to do it! Fuck, I hope you even fit!"
-            mc.name "Don't worry, I'll stetch out your ass like I've stretched out all your other holes."
+            mc.name "Don't worry, I'll stretch out your ass like I've stretched out all your other holes."
     return
 
 label genius_condomless_sex_taboo_break(the_person):
