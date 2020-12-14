@@ -2053,6 +2053,8 @@ init -1 python:
 
     Person.favorite_colour = favorite_colour
 
+##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
+
     def change_to_lingerie(self):
         if self.event_triggers_dict.get("favorite_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.get("favorite_lingerie", None))
@@ -2063,3 +2065,48 @@ init -1 python:
         return
 
     Person.change_to_lingerie = change_to_lingerie
+
+    def roleplay_mc_title_swap(self, new_title):
+        self.event_triggers_dict["backup_mc_title"] = self.mc_title
+        self.set_mc_title(new_title)
+        return
+
+    def roleplay_mc_title_revert(self):
+        self.mc_title = self.event_triggers_dict.get("backup_mc_title", mc.name)
+        return
+
+    def roleplay_title_swap(self, new_title):
+        self.event_triggers_dict["backup_title"] = self.title
+        self.set_title(new_title)
+        return
+
+    def roleplay_title_revert(self):
+        self.title = self.event_triggers_dict.get("backup_title", self.name)
+        return
+
+    def roleplay_possessive_title_swap(self, new_title):
+        self.event_triggers_dict["backup_possessive_title"] = self.possesive_title
+        self.set_possessive_title(new_title)
+        return
+
+    def roleplay_possessive_title_revert(self):
+        self.possesive_title = self.event_triggers_dict.get("backup_possessive_title", self.name)
+        return
+
+    def roleplay_personality_swap(self, personality):
+        self.event_triggers_dict["backup_personality"] = self.personality
+        self.personality = personality
+        return
+
+    def roleplay_personality_revert(self):
+        self.personality = self.event_triggers_dict.get("backup_personality", relaxed_personality)
+        return
+
+    Person.roleplay_mc_title_swap = roleplay_mc_title_swap
+    Person.roleplay_mc_title_revert = roleplay_mc_title_revert
+    Person.roleplay_title_swap = roleplay_title_swap
+    Person.roleplay_title_revert = roleplay_title_revert
+    Person.roleplay_possessive_title_swap = roleplay_possessive_title_swap
+    Person.roleplay_possessive_title_revert = roleplay_possessive_title_revert
+    Person.roleplay_personality_swap = roleplay_personality_swap
+    Person.roleplay_personality_revert = roleplay_personality_revert

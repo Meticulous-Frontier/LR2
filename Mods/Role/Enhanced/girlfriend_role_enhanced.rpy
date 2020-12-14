@@ -22,9 +22,25 @@ init 2 python:
     def girlfriend_wakeup_spooning_requirement(the_person):
         return True
 
+    def girlfriend_underwear_shopping_requirement(the_person):
+        if the_person.love < 80 and the_person.sluttiness < 40:
+            return False
+        if time_of_day == 0:
+            return "Clothes store closed"
+        elif time_of_day == 4: # Can be removed
+            return "Clothes store closed"
+        elif mc.business.funds < 500:
+            return "Requires $500"
+        else:
+            return True
+        return False
+
+
     girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
         menu_tooltip = "Ask your girlfriend if she wants to sleep together tonight.")
     girlfriend_sleepover = Action("Have a sleepover", girlfriend_sleepover_requirement, "girlfriend_sleepover_label")
+    girlfriend_underwear_shopping = Action("Shop for new lingerie", girlfriend_underwear_shopping_requirement , "girlfriend_underwear_shopping_label",
+        menu_tooltip = "Take your girlfriend out to shop for some exciting underwear to wear for you.")
 
     girlfriend_wakeup_spooning = Action("Spooning wakeup", girlfriend_wakeup_spooning_requirement, "girlfriend_wakeup_spooning_label")
     girlfriend_wakeup_jealous_sister = Action("Jealous wakeup", girlfriend_wakeup_jealous_sister_requirement, "girlfriend_wakeup_jealous_sister_label")
@@ -54,7 +70,7 @@ init 5 python:
 label activate_girlfriend_role_enhancement(stack):
     python:
         girlfriend_role.add_action(girlfriend_sleepover_action)
-
+        girlfriend_role.add_action(girlfriend_underwear_shopping)
         execute_hijack_call(stack)
     return
 
@@ -330,4 +346,164 @@ label girlfriend_wakeup_spooning_label(the_person):
     "You both get ready for the day."
     the_person.char "Alright, I need to get some things done today. Thanks for the sleepover!"
     $ clear_scene()
+    return
+
+
+label girlfriend_underwear_shopping_label(the_person):
+    mc.name "Hey, I got an idea. Why don't we go shopping for some new lingier? Spice things up in the bedroom a bit?"
+    if the_person.sluttiness < 40:
+        the_person "Oh! Ummm... I guess..."
+        the_person "I mean, if you want me to. I suppose I could get something new to wear for you once in a while..."
+    else:
+        the_person "Oh! That sounds fun!"
+        the_person "This will be great! You can tell me what you like and then I'll now what to wear whenever I want to get your engine revving."
+    "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
+    "Normally this would be a bit awkward by yourself, but with [the_person.title], its not so bad..."
+    the_person "Hmm, how should we do this? Want me to pick something out first? Or do you want to?"
+    $ lingerie_outfit = None
+    $ done = False
+    while done == False:
+        menu:
+            "Have her pick something out":
+                if lingerie_outfit == None:
+
+                    the_person "Okay! I'll go with something I would normally wear, and you can let me know what you think, okay?"
+                    mc.name "Sounds good. We can always made modifcations to it or try something different if we need to."
+                else:
+                    mc.name "I think we should start over. Why don't you pick something out?"
+                    the_person "Aww, I thought we were getting close. Ah well, I'll go pick something out."
+                    $ the_person.draw_person(position = "kissing" )
+                    "She gives you a quick kiss."
+                    the_person "Thank you for being so patient!"
+                    $ the_person.draw_person (position = "stand2")
+                "You spend a few minutes with [the_person.possessive_title] as she looks through the different clothes racks. Eventually she picks something."
+                "She takes your hand and you follow her to the dressing room."
+                the_person "I'll be right back!"
+                $ clear_scene()
+                $ lingerie_outfit = build_lingerie_selection(the_person)
+                $ the_person.apply_outfit(lingerie_outfit)
+                $ the_person.draw_person()
+                "The door opens, and there stands your girlfriend."
+                the_person "Aha! What do you think?"
+                "You check her out for a bit. Should you change it? Or start over?"
+            "Modify current outfit" if lingerie_outfit != None:
+                mc.name "I like it... but I'd like to make a few changes. Is that okay?"
+                the_person "Okay! Grab what you think would look good, I'll be in the dressing room until you figure it out."
+                $ clear_scene()
+                "You pick out a few items to change her outfit a bit..."
+                call screen outfit_creator(lingerie_outfit)
+                if _return != "Not_New":
+                    $ lingerie_outfit = _return
+                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    mc.name "Here you go, try this."
+                    if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
+                        the_person.char "Are you sure? This seems kinda tame..."
+                        mc.name "I know. I just want to see what it looks like on you."
+                    elif lingerie_outfit.slut_requirement >= 70 and lingerie_outfit.slut_requirement >= the_person.sluttiness:
+                        the_person.char "Wow! I can honestly say I was not expecting you to go all in like this!"
+                        mc.name "If you don't feel comfortable with it, that's okay."
+                        "She is quiet, but you can hear here rustling around inside as she starts getting changed."
+                        the_person.char "It's okay... This is just to wear in private with you anyway... right?"
+                    else:
+                        the_person.char "Ah, this look great! I bet you will like this!"
+                    $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
+                    $ the_person.draw_person()
+                    the_person.char "What do you think?"
+                    "You check her out for a bit. Should you change it? Or start over?"
+                else:
+                    mc.name "Sorry, I can't figure out a way to make it work. Why don't you get dressed really quick..."
+                    the_person "Aww, okay..."
+                    $ the_person.apply_outfit(the_person.planned_outfit)
+                    $ the_person.draw_person()
+                    $ lingerie_outfit = None
+                    "She quickly gets dressed then emerges."
+                    the_person "Okay... do you want to start over then?"
+
+            "Pick something yourself":
+                mc.name "Let me pick something out for you."
+                if lingerie_outfit != None:
+                    the_person "Awww, okay. I kinda like this one, but I don't mind letting you dress me up a bit more."
+                    the_person "I'll get changed, and while I do that, you pick something out for me, okay?"
+                else:
+                    the_person "Oh! Okay! I'll hop in the dressing room. You pick something out for me and just set it on top of the door, okay?"
+                $ clear_scene()
+                ""
+                "You pick out a few items to change her outfit a bit..."
+                call screen outfit_creator(Outfit("New Outfit"))
+                if _return != "Not_New":
+                    $ lingerie_outfit = _return
+                    "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    mc.name "Here you go, try this."
+                    if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
+                        the_person.char "Are you sure? This seems kinda tame..."
+                        mc.name "I know. I just want to see what it looks like on you. We can always make some adjustements..."
+                    elif lingerie_outfit.slut_requirement >= 70 and lingerie_outfit.slut_requirement >= the_person.sluttiness:
+                        the_person.char "Wow! I can honestly say I was not expecting you to pick something like this!"
+                        mc.name "If you don't feel comfortable with it, that's okay."
+                        "She is quiet, but you can hear here rustling around inside as she starts getting changed."
+                        the_person.char "It's okay... This is just to wear in private with you anyway... right?"
+                    else:
+                        the_person.char "Ah, this look great! I bet you will like this!"
+                    $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
+                    $ the_person.draw_person()
+                    the_person.char "What do you think?"
+                    "You check her out for a bit. Should you change it? Or start over?"
+                else:
+                    mc.name "Sorry, I can't figure out a way to make it work. Why don't you get dressed really quick..."
+                    the_person "Aww, okay..."
+                    $ the_person.apply_outfit(the_person.planned_outfit)
+                    $ the_person.draw_person()
+                    $ lingerie_outfit = None
+                    "She quickly gets dressed then emerges."
+                    the_person "Okay... do you want to start over then?"
+
+            "Buy this" if lingerie_outfit != None:
+                $ done = True
+            "Give up" if lingerie_outfit == None:
+                $ done = True
+    if lingerie_outfit == None:
+        $ the_person.draw_person(emotion = "sad")
+        the_person "Ah, okay. That's alright, maybe we could try again another time?"
+        mc.name "Yeah, I think that might be for the better."
+        $ the_person.change_stats(happiness = -3)
+        "You head to the front of the store and walk out without buying anything."
+    else:
+        mc.name "That's it. That is exactly what I want."
+        the_person "Ahh! Okay! Let me change out of it real quick and lets buy it."
+        $ clear_scene()
+        "[the_person.possessive_title] retreats into the dressing room for a minute."
+        "Soon, she emerges, holding the items you've decided to purchase."
+        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.draw_person()
+        "As you are walking up to the checkout counter, [the_person.title] asks you about the outfit."
+        the_person "So... is this something you want me to wear when we like... do some roleplaying? Or just a sexy outfit?"
+        menu:
+            "Just a sexy outfit":
+                $ the_person.event_triggers_dict["favorite_lingerie"] = lingerie_outfit
+                the_person "Mmmm, okay! I'll wear this for you when I just want to be sexy!"
+            "Roleplay: My baby girl (disabled)":
+                pass
+            "Roleplay: My employee (disabled)":
+                pass
+            "Roleplay: My student (disabled)":
+                pass
+        "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
+        $ mc.business.change_funds(-150)
+        the_person "Thanks [the_person.mc_title]! This was fun!"
+        if schedule_sleepover_available():
+            the_person "So... want me to come over tonight? I'm not doing anything later..."
+            menu:
+                "Come over":
+                    mc.name "I'd like to see this outfit in action. My place, say 9pm?"
+                    the_person "Okay! See you then!"
+                    $ schedule_sleepover_in_story(the_person)
+                "Another time":
+                    mc.name "Sorry, I'm running behind on work stuff. Another time, and soon."
+                    the_person "Okay, I understand!"
+
+    "You chat with your girlfriend for a bit, but soon it is time to go."
+    $ the_person.draw_person(position = "kissing")
+    "[the_person.possessive_title] embraces you and gives you a quick kiss before you part ways."
+    $ clear_scene()
+    call advance_time from _call_advance_girlfriend_lingerie_shopping_01
     return

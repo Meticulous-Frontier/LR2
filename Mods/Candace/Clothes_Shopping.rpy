@@ -26,6 +26,11 @@ init 2 python:
         outfits.append(builder.build_outfit("UnderwearSets", outfit_slut_points))
         return outfits
 
+    def build_lingerie_selection(person):
+        builder = WardrobeBuilder(person)
+        outfit_slut_points = __builtin__.min(__builtin__.int(person.effective_sluttiness() / 8), 12)
+        return builder.build_outfit("UnderwearSets", outfit_slut_points)
+
     def clothes_shopping_get_work_wardrobe(person):
         if person in mc.business.research_team:
             return mc.business.r_uniform
