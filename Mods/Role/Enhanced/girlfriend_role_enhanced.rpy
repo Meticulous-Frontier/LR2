@@ -377,7 +377,7 @@ label girlfriend_roleplay_step_sister_label(the_person):
         the_person "I don't know! You've got to help me [the_person.mc_title]!"
         "She is laying it on pretty thick, but if it wasn't for her ass sticking up in the air, you might find this comical. Instead you are starting to get aroused."
         if the_person.vagina_available():
-            "[the_person.possesive_title]'s ass, exposed and pointing at you, makes an enticing target. You run your hands along her hips and then grope it."
+            "[the_person.possessive_title]'s ass, exposed and pointing at you, makes an enticing target. You run your hands along her hips and then grope it."
         else:
             "You walk over to [the_person.title]. You pull away at the clothing between you and her ass."
             $ the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
@@ -414,7 +414,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 if lingerie_outfit == None:
 
                     the_person "Okay! I'll go with something I would normally wear, and you can let me know what you think, okay?"
-                    mc.name "Sounds good. We can always made modifcations to it or try something different if we need to."
+                    mc.name "Sounds good. We can always made modifications to it or try something different if we need to."
                 else:
                     mc.name "I think we should start over. Why don't you pick something out?"
                     the_person "Aww, I thought we were getting close. Ah well, I'll go pick something out."
@@ -482,7 +482,7 @@ label girlfriend_underwear_shopping_label(the_person):
                     mc.name "Here you go, try this."
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
                         the_person.char "Are you sure? This seems kinda tame..."
-                        mc.name "I know. I just want to see what it looks like on you. We can always make some adjustements..."
+                        mc.name "I know. I just want to see what it looks like on you. We can always make some adjustments..."
                     elif lingerie_outfit.slut_requirement >= 70 and lingerie_outfit.slut_requirement >= the_person.sluttiness:
                         the_person.char "Wow! I can honestly say I was not expecting you to pick something like this!"
                         mc.name "If you don't feel comfortable with it, that's okay."
