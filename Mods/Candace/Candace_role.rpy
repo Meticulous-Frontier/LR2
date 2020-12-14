@@ -1367,8 +1367,10 @@ init 3 python:
 
 
     def get_police_chief():
+        # use identifier in dictionary instead of PERSON object
         if mc.business.event_triggers_dict.get("Police_Chief", None):
             return mc.business.event_triggers_dict.get("Police_Chief", None)
+
         police_chief = make_person(force_random = True)
         police_chief.set_possessive_title("the police chief")
         police_chief.set_mc_title(mc.name)

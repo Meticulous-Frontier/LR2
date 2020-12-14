@@ -1438,7 +1438,7 @@ label erica_yoga_event_intro_label():
         yoga_list = erica_get_yoga_class_list()
 
         erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
-        erica.event_triggers_dict["yoga_assistant"] = yoga_assistant
+        erica.event_triggers_dict["yoga_assistant"] = yoga_assistant.identifier
 
     "It's Tuesday morning, it is weekly morning yoga day! While you don't think you'll need to go every time, since this the inaugural session, it might be good for you to oversee, just in case there are any issues."
     if mc.is_at_work():
@@ -2199,7 +2199,12 @@ init 2 python:
         return yoga_list
 
     def erica_get_yoga_assistant():
-        return erica.event_triggers_dict.get("yoga_assistant", None)
+        identifier = erica.event_triggers_dict.get("yoga_assistant", None)
+        if isinstance(identifier, Person):
+            return identifier
+        else:
+            return get_person_by_identifier(identifier)
+        return None
 
     def erica_apply_yoga_outfit_to_class(yoga_list):
         for person in yoga_list:

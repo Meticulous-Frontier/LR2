@@ -1377,10 +1377,15 @@ init 3 python:
         return False
 
     def ashley_get_coffee_partner():
-        return ashley.event_triggers_dict.get("coffee_partner", None)
+        identifier = ashley.event_triggers_dict.get("coffee_partner", None)
+        if isinstance(identifier, Person):
+            return identifier
+        else:
+            return get_person_by_identifier(identifier)
+        return None
 
-    def ashley_set_coffee_partner(the_person):
-        ashley.event_triggers_dict["coffee_partner"] = the_person
+    def ashley_set_coffee_partner(person):
+        ashley.event_triggers_dict["coffee_partner"] = person.identifier
         return
 
     def ashley_reset_coffee_partner():

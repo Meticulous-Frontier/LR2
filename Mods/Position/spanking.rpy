@@ -38,7 +38,7 @@ init 1 python:
         if person.event_triggers_dict.get("spank_level", 0) == 0:
             person.event_triggers_dict["spank_level"] = 1
         else:
-            person.event_triggers_dict["spank_level"] = person.event_triggers_dict["spank_level"] + 1
+            person.event_triggers_dict["spank_level"] += 1
         return
 
     #Returns a string based on the physical appears of the girl's ass

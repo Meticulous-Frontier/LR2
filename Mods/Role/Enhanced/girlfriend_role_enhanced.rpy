@@ -57,12 +57,20 @@ init 5 python:
     add_label_hijack("normal_start", "activate_girlfriend_role_enhancement")
     add_label_hijack("after_load", "activate_girlfriend_role_enhancement")
 
-    def schedule_sleepover_in_story(the_person, your_place = True):
-        mc.business.event_triggers_dict["girlfriend_person"] = the_person
+    def schedule_sleepover_in_story(person, your_place = True):
+        mc.business.event_triggers_dict["girlfriend_person"] = person.identifier
         mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
         mc.business.event_triggers_dict["your_place"] = your_place
         mc.business.mandatory_crises_list.append(girlfriend_sleepover)
         return
+
+    def schedule_sleepover_get_girlfriend_person():
+        identifier = mc.business.event_triggers_dict.get("girlfriend_person", None)
+        if isinstance(identifier, Person):
+            return identifier
+        else:
+            return get_person_by_identifier(identifier)
+        return None
 
     def schedule_sleepover_available():
         if mc.business.event_triggers_dict.get("girlfriend_sleepover_scheduled", False):
@@ -90,14 +98,14 @@ label girlfriend_myplace_yourplace_label(the_person):
             the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
             $ mc.business.event_triggers_dict["your_place"] = False
     the_person "Anything else you need right now?"
-    $ mc.business.event_triggers_dict["girlfriend_person"] = the_person
+    $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.mandatory_crises_list.append(girlfriend_sleepover)
     return
 
 label girlfriend_sleepover_label():
     $ wip_screen_show()
-    $ the_person = mc.business.event_triggers_dict.get("girlfriend_person", None)
+    $ the_person = schedule_sleepover_get_girlfriend_person()
     if the_person == None:
         return
     #TODO give player the option to cancel the sleepover. she's probably sad.
