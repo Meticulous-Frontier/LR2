@@ -1678,6 +1678,26 @@ init -1 python:
 
     Person.has_creampie_cum =person_has_creampie_cum
 
+    def person_get_upper_top_layer(self):
+        return self.outfit.get_upper_top_layer()
+
+    Person.get_upper_top_layer = person_get_upper_top_layer
+
+    def person_get_lower_top_layer(self):
+        return self.outfit.get_lower_top_layer()
+
+    Person.get_lower_top_layer = person_get_lower_top_layer
+
+    def person_restore_all_clothing(self):
+        return self.outfit.restore_all_clothing()
+
+    Person.restore_all_clothing = person_restore_all_clothing
+
+    def person_has_clothing(self, the_clothing):
+        return self.outfit.has_clothing(the_clothing)
+
+    Person.has_clothing = person_has_clothing
+
 ##########################################
 # Unique crisis addition functions       #
 ##########################################
