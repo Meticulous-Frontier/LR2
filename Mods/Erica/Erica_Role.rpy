@@ -1869,12 +1869,12 @@ label erica_weekly_yoga_label(the_person):
                 "Get to work":
                     mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
                     "They both look at you disappointed, but nothing more comes of it. You say your goodbyes and soon your are starting your workday."
-        "Awkwardly, you decide it would be best to get to work."
-        mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
-        "They are both watching the orgy unfolding. You say your goodbyes and soon your are starting your workday."
+        else:
+            "Awkwardly, you decide it would be best to get to work."
+            mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
+            "They are both watching the orgy unfolding. You say your goodbyes and soon your are starting your workday."
         $ the_person.change_stats(slut_temp = 5, slut_core = 5)
         $ yoga_assistant.change_stats(slut_temp = 5, slut_core = 5)
-
     else:
         the_person.char "Yeah, that was great!"
         yoga_assistant.char "Hey [the_person.name], did you want to get together this weekend?"
@@ -1962,6 +1962,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
     "She wraps her arms around you and you start to make out, your mouths meeting and exploring each other."
     "[the_person.title] moans when she feels your erection pressing against her."
     $ the_person.change_arousal(20)
+    $ the_clothing = the_person.outfit  # store outfit
     menu:
         "Fuck her against the wall" if the_person.sluttiness >= 70:
             "You don't have the patience to wait any longer, you are going to fuck her right here against the wall."
@@ -2008,10 +2009,14 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             "Soon, you decide its time to take things to the next level."
             call fuck_person(the_person, private = True) from _call_fuck_after_yoga_02
     "Finished, you get yourself cleaned up and walk over to your desk."
+    $ the_person.apply_outfit(the_clothing)
+    $ the_clothing = None
+    $ the_person.draw_person()
     if the_person == erica:
         the_person.char "Mmm, that was fun! I guess I'll head to class now..."
     else:
         the_person.char "I suppose I'll get back to work now..."
+    $ the_person.draw_person(position = "walking_away")
     "[the_person.title] turns and opens the door to your office, leaving you to begin your work day properly."
     return
 
