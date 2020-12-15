@@ -30,7 +30,7 @@ init 2 python:
         FA_counter = 0
         while FA_counter < num_FAs:
             new_FA = Casual_Flight_Attendant()
-            local_FA_personality = Personality("Stewardess", default_prefix = new_FA.personality.personality_type_prefix,
+            local_FA_personality = Personality("Stewardess", default_prefix = new_FA.personality.default_prefix,
             common_likes = ["traveling"],
             common_sexy_likes = ["casual sex"],
             common_dislikes = ["relationships"],
@@ -232,7 +232,7 @@ init 1302 python:
 
     def assign_casual_FA_role(the_person):
         the_person.add_role(casual_FA_role)
-        local_FA_personality = Personality("Stewardess", default_prefix = the_person.personality.personality_type_prefix,
+        local_FA_personality = Personality("Stewardess", default_prefix = the_person.personality.default_prefix,
         common_likes = ["traveling"],
         common_sexy_likes = ["casual sex"],
         common_dislikes = ["relationships"],

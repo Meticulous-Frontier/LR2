@@ -520,7 +520,7 @@ init 1301 python:
     def daddy_girl_player_titles(the_person):
         return "Daddy"
     def get_daddy_girl_personality(the_person): #Use a function to get this so we can keep the girls prefix so her personality doesn't change TOO much
-        daddy_girl = Personality("princess", default_prefix = the_person.personality.personality_type_prefix,
+        daddy_girl = Personality("princess", default_prefix = the_person.personality.default_prefix,
         common_likes = [],
         common_sexy_likes = [],
         common_dislikes = [],
