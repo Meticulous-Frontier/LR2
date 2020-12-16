@@ -373,6 +373,7 @@ label advance_time_mandatory_crisis_label():
                 mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
 
         del clear_list
+        crisis = None
     return
 
 label advance_time_people_run_turn_label():
@@ -438,6 +439,7 @@ label advance_time_mandatory_morning_crisis_label():
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
 
         del clear_list
+        crisis = None
     return
 
 label advance_time_random_morning_crisis_label():

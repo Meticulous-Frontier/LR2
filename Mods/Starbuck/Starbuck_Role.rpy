@@ -1106,6 +1106,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "Getting [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
     $ mc.location.show_background()
     $ clear_scene()
+    $ strip_choice = None
     return
 
 
@@ -1752,6 +1753,7 @@ label starbuck_replay_dressup_label(the_person):
             "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
+        $ strip_choice = None
         "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
         $ the_person.apply_outfit(created_outfit, update_taboo = True)
         $ the_person.draw_person()

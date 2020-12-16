@@ -539,15 +539,14 @@ label horny_at_work_crisis_enhanced_label():
                                 the_person.char "Ah!"
 
                             if the_person.outfit.can_half_off_to_vagina():
-                                $ strip_list = the_person.outfit.get_half_off_to_vagina_list()
                                 python:
-                                    for clothing in strip_list:
+                                    for clothing in the_person.outfit.get_half_off_to_vagina_list():
                                         scene_manager.draw_animated_removal(the_person, clothing, half_off_instead = True)
                                         if the_person.outfit.vagina_available():
                                             renpy.say("","You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
                                         else:
                                             renpy.say("","You pull her " + clothing.display_name + " out of the way.")
-                                    strip_list = None
+                                    clothing = None
 
                             else: #We need to strip her down completely. TODO: We need a way to determine if we can strip someone half down, then pull things aside (ie. pull off pants, pull panties to the side)
                                 $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True) #Start by stripping off her bottom.
