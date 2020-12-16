@@ -245,9 +245,7 @@ init -2 python:
         return
 
     def make_bench():
-        the_desk = Object("bench",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_desk
-
+        return Object("bench",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
 #*************Create Casual Athlete Role***********#
 init -1 python:
@@ -1336,10 +1334,7 @@ label erica_money_problem_sarah_convincing_employee_label():
     python:
         scene_manager = Scene()
         the_person = mc.business.hr_director
-        the_target = None
-        eligible_list = [x for x in mc.business.get_employee_list() if x not in erica_get_yoga_class_list()]
-        eligible_list.remove(mc.business.hr_director)
-        the_target = get_random_from_list(eligible_list)
+        the_target = get_yoga_convince_employee_target()
 
     if the_target == None:
         #Figure out how to fix this
@@ -1383,6 +1378,7 @@ label erica_money_problem_sarah_convincing_employee_label():
             mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
         else:
             mc.business.mandatory_crises_list.append(erica_money_problems_sarah_final_update)
+        the_target = None
     return
 
 
@@ -1695,10 +1691,7 @@ label erica_weekly_yoga_label(the_person):
                 $ the_serum = _return
                 if mc.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
                     "You decide to add several doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
-                    python:
-                        for yca in [the_person, yoga_assistant] + yoga_list:
-                            mc.inventory.change_serum(the_serum, -1)
-                            yca.give_serum(copy.copy(the_serum))
+                    $ dose_yoga_class_with_serum([the_person, yoga_assistant] + yoga_list, the_serum)
                 else:
                     "You have insufficient doses, to make the serum in the water jug effective."
                     "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
@@ -2155,6 +2148,12 @@ init 2 python:
         scene_manager.draw_scene()
         return
 
+    def dose_yoga_class_with_serum(people, serum):
+        for person in people:
+            mc.inventory.change_serum(serum, -1)
+            person.give_serum(copy.copy(serum))
+        return
+
     #Erica specific python wrappers#
     def erica_on_love_path():
         return erica.event_triggers_dict.get("love_path", False)
@@ -2245,6 +2244,10 @@ init 2 python:
             if person.max_energy < 150:
                 person.change_max_energy(3)
         return
+
+    def get_yoga_convince_employee_target():
+        eligible_list = [x for x in mc.business.get_employee_list() if x not in erica_get_yoga_class_list() + [mc.business.hr_director]]
+        return get_random_from_list(eligible_list)
 
     # def erica_check_class_size_and_add_event():
     #     if len(erica_get_yoga_class_list()) < 4:
