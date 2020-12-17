@@ -1955,7 +1955,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
     "She wraps her arms around you and you start to make out, your mouths meeting and exploring each other."
     "[the_person.title] moans when she feels your erection pressing against her."
     $ the_person.change_arousal(20)
-    $ the_clothing = the_person.outfit  # store outfit
+    $ initial_outfit = the_person.outfit.get_copy()  # store outfit
     menu:
         "Fuck her against the wall" if the_person.sluttiness >= 70:
             "You don't have the patience to wait any longer, you are going to fuck her right here against the wall."
@@ -2002,8 +2002,8 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             "Soon, you decide its time to take things to the next level."
             call fuck_person(the_person, private = True) from _call_fuck_after_yoga_02
     "Finished, you get yourself cleaned up and walk over to your desk."
-    $ the_person.apply_outfit(the_clothing)
-    $ the_clothing = None
+    $ the_person.apply_outfit(initial_outfit)
+    $ initial_outfit = None
     $ the_person.draw_person()
     if the_person == erica:
         the_person.char "Mmm, that was fun! I guess I'll head to class now..."
