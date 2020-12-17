@@ -130,7 +130,9 @@ init 10 python:
 
     def fix_duplicate_objects_in_rooms():
         for room in list_of_places:
-            room.objects = list(set(room.objects))
+            unique = list(set(room.objects))
+            if len(unique) != len(room.objects):    # mismatch update
+                room.objects = unique
         return
 
     def update_room_visibility():
