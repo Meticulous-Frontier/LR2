@@ -8,22 +8,27 @@ init 15 python:
         make_bdsmbed(),
         make_pillory(),
         make_woodhorse(),
+        make_floor(),
     ]
     downtown_bar_objects = [
         make_desk(),
         make_chair(),
+        make_floor()
     ]
     downtown_hotel_lobby_objects = [
         make_desk(),
         make_chair(),
+        make_floor(),
     ]
     downtown_hotel_room_objects = [
         make_desk(),
         make_chair(),
+        make_floor(),
         make_window(),
         make_bed()
     ]
     purgatory_objects = [
+        make_floor()
     ]
     bdsm_room_objects = [
         make_bdsmbed(),
@@ -31,6 +36,7 @@ init 15 python:
         make_woodhorse(),
         make_cage(),
         make_chair(),
+        make_floor(),
         make_bed()
     ]
     ceo_office_objects = [
@@ -38,13 +44,16 @@ init 15 python:
         make_desk(),
         make_wall(),
         make_window(),
+        make_floor(),
     ]
     police_jail_objects = [
         Object("cell bars", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 10),
         make_wall(),
         make_bed(),
+        make_floor(),
     ]
     gym_shower_objects = [
+        make_floor(),
         make_wall(),
         Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5)
     ]
