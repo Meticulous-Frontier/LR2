@@ -128,6 +128,11 @@ label build_custom_rooms(stack):
 init 10 python:
     add_label_hijack("after_load", "update_custom_rooms")
 
+    def fix_duplicate_objects_in_rooms():
+        for room in list_of_places:
+            room.objects = list(set(room.objects))
+        return
+
     def update_room_visibility():
         remove_list = []
         for i in range(0, len(list_of_places) - 1):
@@ -145,6 +150,7 @@ init 10 python:
 label update_custom_rooms(stack):
     python:
         update_room_visibility()
+        fix_duplicate_objects_in_rooms()
 
         execute_hijack_call(stack)
     return
