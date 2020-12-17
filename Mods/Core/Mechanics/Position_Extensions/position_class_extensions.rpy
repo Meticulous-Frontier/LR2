@@ -111,6 +111,26 @@ init 5 python:
 
     Position.build_position_willingness_string = build_position_willingness_string_enhanced
 
+    def get_position_last_scene(self):
+        if not hasattr(self, "_last_scene"):
+            self._last_scene = None
+        return self._last_scene
+
+    def set_position_last_scene(self, value):
+        self._last_scene = value
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Position.last_scene = property(get_position_last_scene, set_position_last_scene, None, "Track the last used scene for this position.")
+
+    # choose random next scene (but don't repeat last scene if possible)
+    def call_scene_enhanced(self, the_person, the_location, the_object):
+        choice_list = [x for x in self.scenes if not x == self.last_scene]
+        new_scene = get_random_from_list(choice_list) if choice_list else get_random_from_list(self.scenes)
+        self.last_scene = new_scene
+        renpy.call(new_scene, the_person, the_location, the_object)
+
+    Position.call_scene = call_scene_enhanced
+
     # try different types of taboo break, the final choice is the break for the actual position broken
     # added an extra check to make sure the label exists, if not the taboo is broken without dialog
     def call_transition_taboo_break(self, new_position, person, the_location, the_object):
