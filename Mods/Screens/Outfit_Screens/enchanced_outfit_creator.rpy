@@ -51,12 +51,21 @@ init 10 python:
 
         clear_scene()
         cs = renpy.current_screen()
+
+        hide_list = []
+        if cs.scope["hide_underwear"]:
+            hide_list.append(1)
+        if cs.scope["hide_base"]:
+            hide_list.append(2)
+        if cs.scope["hide_overwear"]:
+            hide_list.append(3)
+
         if cs.scope["mannequin"] == "mannequin":
-            renpy.show_screen("mannequin", cs.scope[outfit])
+            renpy.show_screen("mannequin", cs.scope[outfit], "mannequin", hide_list)
         else:
             if renpy.get_screen("mannequin"):
                 renpy.hide_screen("mannequin")
-            draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"])
+            draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"], hide_list = hide_list)
 
         renpy.restart_interaction()
 
@@ -190,6 +199,16 @@ init 10 python:
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
 
+        preview_outfit()
+
+    def update_transparency(new_value):
+        cs = renpy.current_screen()
+
+        cs.scope["current_a"] = __builtin__.round(float(new_value),2)
+        if cs.scope["selected_colour"] == "colour_pattern":
+            cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+        else:
+            cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
         preview_outfit()
 
     def update_slut_generation(new_value):
@@ -335,6 +354,9 @@ init 2:
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
         default max_slut = outfit_type == "over" and 8 or 12
+        default hide_underwear = False
+        default hide_base = False
+        default hide_overwear = False
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
@@ -378,7 +400,6 @@ init 2:
 
         default slut_generation = 0
 
-
         # $ current_colour = [1.0,1.0,1.0,1.0] #This is the colour we will apply to all of the clothing
 
         #Each category below has a click to enable button. If it's false, we don't show anything for it.
@@ -417,13 +438,13 @@ init 2:
                     vbox:
                         spacing 15
                         viewport:
-                            ysize 480
+                            ysize 440
                             xminimum 605
                             scrollbars "vertical"
                             mousewheel True
                             frame:
                                 xsize 620
-                                yminimum 480
+                                yminimum 440
                                 background "#888888"
                                 vbox:
                                     #THIS IS WHERE ITEM CHOICES ARE SHOWN
@@ -463,7 +484,7 @@ init 2:
                                                 ]
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
-                            xysize (605, 480)
+                            xysize (605, 520)
                             background "#888888"
                             if selected_clothing is not None:
                                 vbox:
@@ -471,8 +492,7 @@ init 2:
                                     frame:
                                         background "#aaaaaa"
                                         xfill True
-                                        textbutton "Add " + selected_clothing.name + " to outfit" + "\n+" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
-
+                                        textbutton "Add " + selected_clothing.name + " to outfit\n" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             background "#1a45a1"
@@ -634,9 +654,9 @@ init 2:
                                                     hbox:
                                                         spacing 5
                                                         if color_selection:
-                                                            hbox:
+                                                            vbox:
                                                                 spacing 5
-                                                                grid 2 2:
+                                                                grid 3 1:
                                                                     xfill True
                                                                     frame:
 
@@ -710,31 +730,44 @@ init 2:
                                                                                 hovered SetScreenVariable("bar_value", "current_b")
                                                                                 unhovered [SetScreenVariable("current_b",__builtin__.round(current_b,2))]
 
-                                                                    frame:
+                                                                # frame:
+                                                                #     background "#aaaaaa"
+                                                                #     hbox:
+                                                                #         button:
+                                                                #             background "#111111"
+                                                                #             action ToggleScreenVariable("bar_select", 4, 0)
+                                                                #             hovered SetScreenVariable("bar_value", "current_a")
 
-                                                                        background "#aaaaaa"
-                                                                        hbox:
-                                                                            button:
-                                                                                background "#111111"
-                                                                                action ToggleScreenVariable("bar_select", 4, 0)
-                                                                                hovered SetScreenVariable("bar_value", "current_a")
+                                                                #             if bar_select == 4:
+                                                                #                 input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
+                                                                #             else:
+                                                                #                 text "A "+ "%.2f" % current_a style "serum_text_style" yalign 0.5 size 16
+                                                                #             xsize 75
+                                                                #             ysize 45
 
-                                                                                if bar_select == 4:
-                                                                                    input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
-                                                                                else:
-                                                                                    text "A "+ "%.2f" % current_a style "serum_text_style" yalign 0.5 size 16
-                                                                                xsize 75
-                                                                                ysize 45
+                                                                #         bar:
 
-                                                                            bar:
+                                                                #             adjustment ui.adjustment(range = 1.00, value = current_a, step = 0.1, changed = colour_changed_bar)
+                                                                #             xfill True
+                                                                #             ysize 45
+                                                                #             style style.slider
 
-                                                                                adjustment ui.adjustment(range = 1.00, value = current_a, step = 0.1, changed = colour_changed_bar)
-                                                                                xfill True
-                                                                                ysize 45
-                                                                                style style.slider
+                                                                #             hovered SetScreenVariable("bar_value", "current_a")
+                                                                #             unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2))]
 
-                                                                                hovered SetScreenVariable("bar_value", "current_a")
-                                                                                unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2))]
+                                                                hbox:
+                                                                    spacing 5
+                                                                    for trans in ['1.0', '0.95', '0.9', '0.8', '0.75', '0.66', '0.5', '0.33', '0.25']:
+                                                                        $ trans_name = str(int(float(trans)*100)) + "%"
+                                                                        button:
+                                                                            if current_a == float(trans):
+                                                                                background "#4f7ad6"
+                                                                            else:
+                                                                                background "#1a45a1"
+                                                                            text trans_name style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
+                                                                            xysize (60, 40)
+                                                                            action [Function(update_transparency, float(trans))]
+
                                                     if color_selection:
                                                         for block_count, colour_list in __builtin__.enumerate(split_list_in_blocks(persistent.colour_palette, 13)):
                                                             hbox:
@@ -1128,6 +1161,36 @@ init 2:
                                                     ysize 45
                                                     style style.slider
 
+                                    frame:
+                                        background "#888888"
+                                        xsize 250
+                                        vbox:
+                                            frame:
+                                                background "#000080"
+                                                padding [1,1]
+                                                xsize 240
+                                                text "Visible Layers:" style "serum_text_style_traits"
+                                            hbox:
+                                                xfill True
+                                                textbutton "Under":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 78
+                                                    background ("#444444" if hide_underwear else "#000088")
+                                                    action [ToggleScreenVariable("hide_underwear", False, True), Function(preview_outfit)]
+                                                textbutton "Clothing":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 86
+                                                    background ("#444444" if hide_base else "#000088")
+                                                    action [ToggleScreenVariable("hide_base", False, True), Function(preview_outfit)]
+                                                textbutton "Over":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 78
+                                                    background ("#444444" if hide_overwear else "#000088")
+                                                    action [ToggleScreenVariable("hide_overwear", False, True), Function(preview_outfit)]
+
                                     $ love_list = outfit_builder.get_love_list()
                                     $ hate_list = outfit_builder.get_hate_list()
                                     if outfit_builder and len(love_list + hate_list) > 0:
@@ -1305,6 +1368,7 @@ init 2:
                                                             ]
 
                                                             alternate NullAction()
+
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
             xsize 54
