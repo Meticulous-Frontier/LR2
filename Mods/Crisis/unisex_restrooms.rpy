@@ -502,7 +502,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
         "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what's they are doing."
 
     if the_person.has_taboo(["condomless_sex", "vaginal_sex"]):
-        anon_char "I really need to feel you cock, but I didn't bring any condoms, do you mind?"
+        anon_char "I really need to feel your cock, but I didn't bring any condoms, do you mind?"
         mc.name "I don't mind, show me what you can do."
         $ the_person.break_taboo("condomless_sex", add_to_log = False)
         $ the_person.break_taboo("vaginal_sex", add_to_log = False)
