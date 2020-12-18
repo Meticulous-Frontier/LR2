@@ -389,6 +389,7 @@ label Sarah_flirt_response_high(the_person):
                     else:
                         "Before you can take the initiative, she pushes herself on her toes and kisses you. You open your mouth and she devours your tongue eagerly."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_sarah_flirt_01
+                    $ the_person.review_outfit()
 
                 "Just flirt.":
                     mc.name "Believe me, I want to get naked for you too. Hopefully soon I'll have the time."
@@ -419,6 +420,7 @@ label Sarah_flirt_response_high(the_person):
             "Then she wraps her full hand around it and slides it back down to the base."
             "[the_person.possessive_title] begins to stroke you off with long, deliberate motions."
             call fuck_person(the_person, private = True, start_position = handjob, skip_intro = True) from _call_fuck_sarah_flirt_02
+            $ the_person.review_outfit()
 
     else: #She shushes you and rushes you off somewhere private.
         if the_person.effective_sluttiness() > 25: #She's slutty, but you need to find somewhere private so people don't find out.
@@ -439,6 +441,7 @@ label Sarah_flirt_response_high(the_person):
                         the_person.char "Oh god... come here [the_person.mc_title]..."
                         "She pushes herself up on her toes to meet your lips as you bring your head down to kiss her."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_sarah_flirt_03
+                    $ the_person.review_outfit()
 
                 "Just flirt.":
                     mc.name "I know, I just like to tease you."

@@ -420,6 +420,7 @@ label starbuck_flirt_response_high(the_person):
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _starbuck_flirt_response_high_1
+                $ the_person.review_outfit()
 
             "Just flirt.":
                 mc.name "I'm a patient man, I can wait until you close up tonight."
@@ -458,6 +459,7 @@ label starbuck_flirt_response_high(the_person):
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _starbuck_flirt_response_high_2
+                $ the_person.review_outfit()
 
             "Just flirt.":
                 mc.name "I wish we could, but I'll need to take a rain check."
