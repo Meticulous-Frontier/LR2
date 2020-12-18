@@ -117,16 +117,13 @@ label unisex_restroom_overhear_label():
         $ the_person = get_random_from_list(mc.business.get_employee_list())
     "As you pass by the break room, you happen to hear one of your employees complaining to someone else."
     if the_person in mc.business.production_team:
-        if the_person.relationship == "Single":
-            the_person.char "So I went out with this guy the other day I met on Tinder and we had some lunch together. It went okay, but we got food truck tacos."
-        else:
-            the_person.char "So I went out on my lunch break the other day to meet up with [the_person.SO_name] for lunch. He found this awesome food truck that has amazing tacos!"
-        the_person.char "They tasted great, but when I got back here after lunch I swear I had to run to the bathroom all the way down by HR like five times!"
-        the_person.char "I mean, [the_person.mc_title] is the only guy who works here, I wish they would just make both restrooms unisex. Then I wouldn't have to walk clear across the building!"
+        the_person "So, the other day I was working on the latest serum batch, when suddenly all the coffee I drank that morning hit me!"
+        the_person "The only women's restroom we have in the whole place is all the way by HR, on the other side of the building! I almost couldn't hold it!"
+        the_person "I mean, [the_person.mc_title] is the only guy who works here, I wish they would just make both restrooms unisex. Then I wouldn't have to walk clear across the building!"
     else:
-        the_person.char "So, the other day I was down in production, trying to find some notes the serums we've been making lately, when suddenly all the coffee I drank that morning hit me."
-        the_person.char "I realized the only women's restroom we have in the whole place is all the way back by HR, on the other side of the building!"
-        the_person.char "I mean, [the_person.mc_title] is the only guy who works here, I wish they would just make both restrooms unisex. I bet the girls in production would appreciate it too!"
+        the_person "So, the other day I was down in production, trying to find some notes the serums we've been making lately, when suddenly all the coffee I drank that morning hit me."
+        the_person "I realized the only women's restroom we have in the whole place is all the way back by HR, on the other side of the building!"
+        the_person "I mean, [the_person.mc_title] is the only guy who works here, I wish they would just make both restrooms unisex. I bet the girls in production would appreciate it too!"
 
     "The complaint seems... actually fairly reasonable."
     "There are only two restrooms, one men and one women, and they are on opposite sides of the building."
