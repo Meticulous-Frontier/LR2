@@ -28,9 +28,6 @@ init 5 python:
             [1,1,1,1], [1,1,1,1]    # allow for 1 unused user definable colors
         ]
 
-    # array for determining the sluttiness of an outfit
-    slut_scores = [1, 2, 3, 4, 5, 6, 10, 12]
-
     #Use this to define a set of neutral colors, useful for colors that match most anything else.
     neutral_colors = {
         "khaki": [.765, .69, .569, .95],
@@ -45,17 +42,17 @@ init 5 python:
         outfit_builder = WardrobeBuilder(person)
 
         while __builtin__.len(person.wardrobe.outfits) < max_outfits:    # add some generated outfits
-            outfit = outfit_builder.build_outfit("FullSets", slut_scores[__builtin__.len(person.wardrobe.outfits)])
+            outfit = outfit_builder.build_outfit("FullSets", renpy.random.randint(2, 6) * 2)
             if outfit.has_overwear() and outfit_builder.approves_outfit_color(outfit):
                 person.wardrobe.add_outfit(outfit)
 
         while __builtin__.len(person.wardrobe.overwear_sets) < max_outfits:    # add some generated outfits
-            overwear = outfit_builder.build_outfit("OverwearSets", slut_scores[__builtin__.len(person.wardrobe.overwear_sets)])
+            overwear = outfit_builder.build_outfit("OverwearSets", renpy.random.randint(2, 6) * 2)
             if overwear.is_suitable_overwear_set() and outfit_builder.approves_outfit_color(overwear):
                 person.wardrobe.add_overwear_set(overwear)
 
         while __builtin__.len(person.wardrobe.underwear_sets) < max_outfits:    # add some generated outfits
-            underwear = outfit_builder.build_outfit("UnderwearSets", slut_scores[__builtin__.len(person.wardrobe.underwear_sets)])
+            underwear = outfit_builder.build_outfit("UnderwearSets", renpy.random.randint(2, 6) * 2)
             if underwear.is_suitable_underwear_set() and outfit_builder.approves_outfit_color(underwear):
                 person.wardrobe.add_underwear_set(underwear)
 
