@@ -1,0 +1,10 @@
+init 1299 python:
+    Personality.response_label_ending.append("sex_toy_taboo_break")
+    Personality.response_label_ending.append("roleplay_taboo_break")
+    Personality.response_label_ending.append("sleepover_yourplace_response")
+    Personality.response_label_ending.append("sleepover_herplace_response")
+    Personality.response_label_ending.append("sleepover_yourplace_sex_start")
+    Personality.response_label_ending.append("sleepover_herplace_sex_start")
+    Personality.response_label_ending.append("sleepover_impressed_response")
+    Personality.response_label_ending.append("sleepover_good_response")
+    Personality.response_label_ending.append("sleepover_bored_response")

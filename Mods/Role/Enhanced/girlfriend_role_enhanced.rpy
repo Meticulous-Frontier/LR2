@@ -91,11 +91,11 @@ label girlfriend_myplace_yourplace_label(the_person):
     menu:
         "My place":
             mc.name "Come over tonight, you can spend the night."
-            the_person "Sounds great! Save some energy, we can make it a fun night."
+            $ the_person.call_dialogue("sleepover_yourplace_response")
             $ mc.business.event_triggers_dict["your_place"] = True
         "Your place":
             mc.name "How about your place? I'll bring a bottle of wine."
-            the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
+            $ the_person.call_dialogue("sleepover_herplace_response")
             $ mc.business.event_triggers_dict["your_place"] = False
     the_person "Anything else you need right now?"
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
@@ -129,8 +129,7 @@ label girlfriend_sleepover_label():
         $ the_person.draw_person()
         "[the_person.title] has changed into something much more comfortable..."
         mc.name "Damn, you look amazing..."
-        "[the_person.title] slowly walks over to you, purposefully exaggerating her hip movements with each step."
-        the_person "Thanks... you ready for some fun?"
+        $ the_person.call_dialogue("sleepover_yourplace_sex_start")
     else:
         "It's time for your date with [the_person.title]. You swing by the store on the way and pick up a decent bottle of wine."
         $ mc.business.change_funds(-15)
@@ -166,38 +165,26 @@ label girlfriend_sleepover_label():
         "She disappears into her bedroom. You quickly grab the glasses and follow her in. She is sitting on the edge of her bed."
         $ the_person.draw_person(position = "sitting")
         "You hand her the wine glass. She takes a long sip."
-        the_person "Mmm... what do you say we stay in and just cuddle tonight?"
-        "She gives you a smirk. You can't help but frown at the thought of just cuddling..."
-        the_person "Hah! Oh my god, you should have scene your face..."
-        "She sets her wine down on her nightstand."
-        the_person "Get over here! I'm ready for some fun!"
+        $ the_person.call_dialogue("sleepover_herplace_sex_start")
     call fuck_person(the_person, private = True) from _call_fuck_person_sleepover_gf_01
 
     $ the_report = _return
 
     $ done = False
-    $ girl_came = False
+    $ girl_came = the_report.get("girl orgasms", 0)
     $ fuck_time_interrupted = False
     $ energy_gain_amount = 50 #Drops each round, representing your flagging endurance.
     while done == False:
 
-        if the_report.get("girl orgasms", 0) > 5:
+        if girl_came > 5:
             $ the_person.change_love(5)
             $ the_person.change_slut_temp(1)
-            the_person.char "Oh my god, you're making me cum my brains out... this is amazing..."
-            "[the_person.title] lies down in bed and catches her breath."
-            the_person.char "I think I can keep going... I'm gonna be sore in the morning though!"
-            $ girl_came = True
-        elif the_report.get("girl orgasms", 0) > 0:
+            $ the_person.call_dialogue("sleepover_impressed_response")
+        elif girl_came > 0:
             $ the_person.change_love(1)
-            the_person "Ahhh, that was nice..."
-            "[the_person.title] lies down in bed and catches her breath."
-            the_person.char "I'm ready to go again if you are!"
-            $ girl_came = True
+            $ the_person.call_dialogue("sleepover_good_response")
         else:
-            the_person.char "Whew, good job. Get some water and let's go for another!"
-            "You take some time to catch your breath, drink some water, and wait for your refractory period to pass."
-            "You hold [the_person.title] in bed while she caresses you and touches herself, keeping herself ready for you."
+            $ the_person.call_dialogue("sleepover_bored_response")
 
         if mc.energy < 40 and energy_gain_amount <= 20: #Forced to end the fuck date, so we set done to True.
             "The spirit is willing, but the flesh is spent. Try as she might [the_person.title] can't coax your erection back to life."
@@ -230,13 +217,19 @@ label girlfriend_sleepover_label():
                         if interruption_action:
                             $ interruption_action.call_action()
                         else: #default to fuck person if there isn't an interruption here.
-                            call fuck_person(the_person, private = True, report_log = the_report) from _call_fuck_person_sleepover_gf_02
+                            call fuck_person(the_person, private = True) from _call_fuck_person_sleepover_gf_02
+                            $ the_report = _return
+                            $ girl_came += the_report.get("girl orgasms", 0)
                     elif renpy.random.randint(0,100) < ((the_person.get_opinion_score("taking control") + 1) * 15): #Baseline 15% chance, max 45% if she loves it
                         the_person "Mmm, lay back. I want to be on top this time..."
                         "You pushes you on your back, you decide to take it easy for now and let her have her way with you."
-                        call get_fucked(the_person, private = True, report_log = the_report)  from _call_get_fucked_sleepover_gf_03
+                        call get_fucked(the_person, private = True)  from _call_get_fucked_sleepover_gf_03
+                        $ the_report = _return
+                        $ girl_came += the_report.get("girl orgasms", 0)
                     else:
-                        call fuck_person(the_person, private = True, report_log = the_report) from _call_fuck_person_sleepover_gf_04
+                        call fuck_person(the_person, private = True) from _call_fuck_person_sleepover_gf_04
+                        $ the_report = _return
+                        $ girl_came += the_report.get("girl orgasms", 0)
                     if the_person.energy + energy_gain_amount < 30:
                         "[the_person.title] is panting. She is completely out of breath."
                         the_person "That's enough... oh my god, I can't move a muscle..."
