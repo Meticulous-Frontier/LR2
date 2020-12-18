@@ -73,6 +73,20 @@ init 4 python:
     add_label_hijack("normal_start", "update_extra_personalities_list")
     add_label_hijack("after_load", "update_extra_personalities_list")
 
+init 1299 python:
+    Personality.response_label_ending.append("sex_toy_taboo_break")
+    Personality.response_label_ending.append("roleplay_taboo_break")
+    Personality.response_label_ending.append("sleepover_yourplace_response")
+    Personality.response_label_ending.append("sleepover_herplace_response")
+    Personality.response_label_ending.append("sleepover_yourplace_sex_start")
+    Personality.response_label_ending.append("sleepover_herplace_sex_start")
+    Personality.response_label_ending.append("sleepover_impressed_response")
+    Personality.response_label_ending.append("sleepover_good_response")
+    Personality.response_label_ending.append("sleepover_bored_response")
+    Personality.response_label_ending.append("lingerie_shopping_tame_response")
+    Personality.response_label_ending.append("lingerie_shopping_excited_response")
+    Personality.response_label_ending.append("lingerie_shopping_wow_response")
+
 init 1400 python:
     # update default personalities with extra opinions (not in base game)
     relaxed_personality.common_likes.append("high heels")

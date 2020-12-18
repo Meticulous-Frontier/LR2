@@ -879,3 +879,74 @@ label candace_random_dumb_dialogue(the_person):
     "I went to this place that was advertising foot longs. Turns out they are some kind of sandwich?"])
     the_person.char "[rando]"
     return
+
+label candace_sex_toy_taboo_break(the_person):
+    pass
+    return
+
+label candace_roleplay_taboo_break(the_person):
+    pass
+    return
+
+label candace_sleepover_yourplace_response(the_person): #Invited her over to spend the night
+    the_person "Oh. my. god. YES! I can't wait to get fucked senseless in your bed!"
+    "She pauses for a second."
+    the_person "We... umm... you ARE asking me over to fuck all night long, right?"
+    mc.name "Yes, that's exactly what I was thinking."
+    the_person "Yay!"
+    return
+
+label candace_sleepover_herplace_response(the_person): #Spending the night at her place
+    the_person "Oh. my. god. YES! There's so many places in my apartment I haven't had sex yet!"
+    return
+
+
+label candace_sleepover_yourplace_sex_start(the_person): #Right before sexy times at your place
+    the_person "I almost walked out naked, but I thought you might like this."
+    the_person "Let's fuck!"
+    return
+
+
+label candace_sleepover_herplace_sex_start(the_person): #Right before sexy times at her place
+    "[the_person.possessive_title] takes the wine glass. She gulps it down, draining the glass all at once."
+    the_person "Mmm, that was nice! But enough with the booze, lets fuck!"
+    return
+
+label candace_sleepover_impressed_response(the_person):  #If you've made her cum a lot
+    "[the_person.possessive_title] holds up one hand, showing you her fingers."
+    the_person "I came like... this many times... then I lost count..."
+    mc.name "What about your other hand?"
+    the_person "I need to keep that one free... well... mostly free anyway..."
+    "She reaches over and starts to stroke you with her mostly free hand."
+    the_person "My pussy is raw... but I bet I could cum again!"
+    return
+
+
+label candace_sleepover_good_response(the_person):  #If you've made her cum
+    the_person "Oh god I love it when you fuck me like that."
+    "[the_person.title] lies down in bed and catches her breath."
+    the_person.char "Let's go again! Fuck me like this all night!"
+    return
+
+label candace_sleepover_bored_response(the_person):  #If she hasn't cum yet
+    the_person "Get the easy one over with. From here on out, fuck me good!"
+    "You take some time to catch your breath, drink some water, and wait for your refractory period to pass."
+    "[the_person.title] awaits you eagerly as she caresses you and touches herself."
+    return
+
+label candace_lingerie_shopping_tame_response(the_person):
+    the_person "Umm... did you accidentally give me too much stuff? I'm wearing like, way too many clothes!"
+    mc.name "I know. I just want to see what it looks like on you."
+    the_person "I'd rather show you what it looks like OFF of me!"
+    return
+
+label candace_lingerie_shopping_excited_response(the_person):
+    the_person "Oh! Hot damn I can't wait to show this to my boyfriend!"
+    $ the_person.draw_person()
+    the_person "Oh my god! I forgot you were here! Doesn't this, like, make you want to fuck me?"
+    return
+
+label candace_lingerie_shopping_wow_response(the_person):
+    the_person "Wow! I'm so glad you brought me here!"
+    the_person "I'd probably get arrested for wearing this in public, but I can't wait to wear it just for you!"
+    return

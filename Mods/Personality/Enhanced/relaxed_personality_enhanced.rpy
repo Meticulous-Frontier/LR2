@@ -53,3 +53,19 @@ label relaxed_sleepover_bored_response(the_person):  #If she hasn't cum yet
     "You take some time to catch your breath, drink some water, and wait for your refractory period to pass."
     "You hold [the_person.title] in bed while she caresses you and touches herself, keeping herself ready for you."
     return
+
+label relaxed_lingerie_shopping_tame_response(the_person):
+    the_person "Are you sure? This seems kinda tame..."
+    mc.name "I know. I just want to see what it looks like on you."
+    return
+
+label relaxed_lingerie_shopping_excited_response(the_person):
+    the_person "Ah, this look great! I bet you will like this!"
+    return
+
+label relaxed_lingerie_shopping_wow_response(the_person):
+    the_person "Wow! I can honestly say I was not expecting you to go all in like this!"
+    mc.name "If you don't feel comfortable with it, that's okay."
+    "She is quiet, but you can hear here rustling around inside as she starts getting changed."
+    the_person "It's okay... This is just to wear in private with you anyway... right?"
+    return

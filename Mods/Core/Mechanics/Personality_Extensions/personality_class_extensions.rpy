@@ -1,10 +1,3 @@
-init 1299 python:
-    Personality.response_label_ending.append("sex_toy_taboo_break")
-    Personality.response_label_ending.append("roleplay_taboo_break")
-    Personality.response_label_ending.append("sleepover_yourplace_response")
-    Personality.response_label_ending.append("sleepover_herplace_response")
-    Personality.response_label_ending.append("sleepover_yourplace_sex_start")
-    Personality.response_label_ending.append("sleepover_herplace_sex_start")
-    Personality.response_label_ending.append("sleepover_impressed_response")
-    Personality.response_label_ending.append("sleepover_good_response")
-    Personality.response_label_ending.append("sleepover_bored_response")
+
+#I'm sorry Trist, I fucked up and added this file. I'm leaving it blank now so if anyone accidentally downloaded it while it has stuff in it it won't throw a compiling error.
+#Please delete this file before release next master or major version #SB

@@ -188,7 +188,7 @@ label girlfriend_sleepover_label():
 
         if mc.energy < 40 and energy_gain_amount <= 20: #Forced to end the fuck date, so we set done to True.
             "The spirit is willing, but the flesh is spent. Try as she might [the_person.title] can't coax your erection back to life."
-            if girl_came:
+            if girl_came > 0:
                 the_person "Mmm, I wore you out! That was fun."
                 "She kisses you and runs her hand over your back."
             else:
@@ -444,15 +444,11 @@ label girlfriend_underwear_shopping_label(the_person):
                     "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
-                        the_person.char "Are you sure? This seems kinda tame..."
-                        mc.name "I know. I just want to see what it looks like on you."
+                        $ the_person.call_dialogue("lingerie_shopping_tame_response")
                     elif lingerie_outfit.slut_requirement >= 70 and lingerie_outfit.slut_requirement >= the_person.sluttiness:
-                        the_person.char "Wow! I can honestly say I was not expecting you to go all in like this!"
-                        mc.name "If you don't feel comfortable with it, that's okay."
-                        "She is quiet, but you can hear here rustling around inside as she starts getting changed."
-                        the_person.char "It's okay... This is just to wear in private with you anyway... right?"
+                        $ the_person.call_dialogue("lingerie_shopping_wow_response")
                     else:
-                        the_person.char "Ah, this look great! I bet you will like this!"
+                        $ the_person.call_dialogue("lingerie_shopping_excited_response")
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
                     $ the_person.draw_person()
                     the_person.char "What do you think?"
@@ -481,17 +477,14 @@ label girlfriend_underwear_shopping_label(the_person):
                     $ lingerie_outfit = _return
                     "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
-                    if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
-                        the_person.char "Are you sure? This seems kinda tame..."
-                        mc.name "I know. I just want to see what it looks like on you. We can always make some adjustments..."
-                    elif lingerie_outfit.slut_requirement >= 70 and lingerie_outfit.slut_requirement >= the_person.sluttiness:
-                        the_person.char "Wow! I can honestly say I was not expecting you to pick something like this!"
-                        mc.name "If you don't feel comfortable with it, that's okay."
-                        "She is quiet, but you can hear here rustling around inside as she starts getting changed."
-                        the_person.char "It's okay... This is just to wear in private with you anyway... right?"
-                    else:
-                        the_person.char "Ah, this look great! I bet you will like this!"
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
+                    if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
+                        $ the_person.call_dialogue("lingerie_shopping_tame_response")
+                    elif lingerie_outfit.slut_requirement >= 70 and lingerie_outfit.slut_requirement >= the_person.sluttiness:
+                        $ the_person.call_dialogue("lingerie_shopping_wow_response")
+                    else:
+                        $ the_person.call_dialogue("lingerie_shopping_excited_response")
+
                     $ the_person.draw_person()
                     the_person.char "What do you think?"
                     "You check her out for a bit. Should you change it? Or start over?"
