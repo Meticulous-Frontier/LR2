@@ -237,9 +237,9 @@ init 6 python:
         for cloth in self.upper_body + self.lower_body:
             if cloth.colour[3] < 1:
                 if cloth.layer == 2:
-                    new_score += int((1 - cloth.colour[3]) * 50)
+                    new_score += int((1 - cloth.colour[3]) * 40)
                 elif cloth.layer == 1:
-                    new_score += int((1 - cloth.colour[3]) * 20)
+                    new_score += int((1 - cloth.colour[3]) * 10)
 
         return new_score if new_score > 0 else 0
 
