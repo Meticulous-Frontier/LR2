@@ -197,7 +197,10 @@ label cut_hair_label(the_person):
     else:
         the_person.char "It seems you preferred my old look, [the_person.mc_title]."
 
-    $ clear_scene()
+    python:
+        clear_scene()
+        del hair_style_check
+        del pubes_style_check
     return
 
 label ophelia_gets_dumped_label(the_person):

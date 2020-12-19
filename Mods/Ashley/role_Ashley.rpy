@@ -992,6 +992,11 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     $ the_person_one.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     $ ashley_reset_coffee_partner()
     call advance_time from _call_advance_ashley_coffee_advance_01
+
+    python:
+        scene_manager.clear_scene()
+        del the_person_one
+        del the_person_two
     return
 
 label ashley_stephanie_saturday_coffee_recur_label(the_person_one):
@@ -1074,6 +1079,11 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person_one):
     $ hide_wip_screen()
     $ the_person_one.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     call advance_time from _call_advance_ashley_coffee_advance_02
+
+    python:
+        scene_manager.clear_scene()
+        del the_person_one
+        del the_person_two
     return
 
 #Coffee time labels
@@ -1099,11 +1109,9 @@ label coffee_time_innocent_chat_label():
         "Wow, you knew they were sisters, but they really do talk about basically everything!"
 
     python:
-        person_one = None
-        person_two = None
-        overhear_topic = None
-        text_one = None
-        text_two = None
+        del overhear_topic
+        del text_one
+        del text_two
     return
 
 label coffee_time_sexy_chat_label():
@@ -1126,11 +1134,9 @@ label coffee_time_sexy_chat_label():
         "Wow, you didn't realize they talked about sex in such detail with each other."
 
     python:
-        person_one = None
-        person_two = None
-        overhear_topic = None
-        text_one = None
-        text_two = None
+        del overhear_topic
+        del text_one
+        del text_two
     return
 
 label coffee_time_steph_gets_handsy_label():
@@ -1299,10 +1305,6 @@ label coffee_time_steph_gets_handsy_label():
                 "[the_person_one.title] just watches as [the_person_two.title] brings her hand up from underneath the table and begins to lick your cum off of it."
         else:
             "You pick up a napkin and bring it under the table. You hold it in place as [the_person_two.title] wipes her hand off on it. You grab another napkin and use it to clean yourself off as best as you can, hoping no one will notice."
-
-    python:
-        person_one = None
-        person_two = None
     return
 
 init 2 python: #Coffee time requirements function. #TODO should I pull out coffee times stuff to its own file? this file might get too big.

@@ -12,6 +12,15 @@ init 5 python:
                 licker = a_person #The list was randomized, so even if you have multiple people who meet this criteria this should still end up random.
         return licker
 
+    def horny_at_work_strip_down(person):
+        for clothing in person.outfit.get_half_off_to_vagina_list():
+            scene_manager.draw_animated_removal(person, clothing, half_off_instead = True)
+            if person.outfit.vagina_available():
+                renpy.say("","You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
+            else:
+                renpy.say("","You pull her " + clothing.display_name + " out of the way.")
+        return
+
 label horny_at_work_crisis_enhanced_label():
     $ (the_person, the_cause) = horny_at_work_get_person_and_cause()
 
@@ -539,14 +548,7 @@ label horny_at_work_crisis_enhanced_label():
                                 the_person.char "Ah!"
 
                             if the_person.outfit.can_half_off_to_vagina():
-                                python:
-                                    for clothing in the_person.outfit.get_half_off_to_vagina_list():
-                                        scene_manager.draw_animated_removal(the_person, clothing, half_off_instead = True)
-                                        if the_person.outfit.vagina_available():
-                                            renpy.say("","You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
-                                        else:
-                                            renpy.say("","You pull her " + clothing.display_name + " out of the way.")
-                                    clothing = None
+                                $ horny_at_work_strip_down(the_person)
 
                             else: #We need to strip her down completely. TODO: We need a way to determine if we can strip someone half down, then pull things aside (ie. pull off pants, pull panties to the side)
                                 $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True) #Start by stripping off her bottom.

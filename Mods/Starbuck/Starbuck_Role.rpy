@@ -2195,9 +2195,12 @@ label starbuck_candace_recurring_event_label(the_person_one):
         "You head out from the store, giving the two girls time to catch up on things."
         $ the_person_one.event_triggers_dict["knows_candace_cured"] = True
 
+    python:
+        the_person_one.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
+        scene_manager.clear_scene()
 
-    $ the_person_one.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
-    $ scene_manager.clear_scene()
+        del the_person_one
+        del the_person_two
     return
 
 

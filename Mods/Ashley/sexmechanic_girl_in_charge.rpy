@@ -617,15 +617,16 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         report_log["guy orgasms"] = report_log.get("guy orgasms",0) + start_mc_orgasm
         mc.condom = False
         mc.recently_orgasmed = False
+
         #TODO determine if we want to offer an affair from this
     # if affair_ask_after and private and ask_girlfriend_requirement(the_person) is True and not the_person.relationship == "Single":
     #     if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
     #         call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
-    python:
         update_person_sex_record(the_person, report_log)
         the_goal = None
         sex_path = None
+        current_node = None
         the_person.reset_sex_goal()
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
