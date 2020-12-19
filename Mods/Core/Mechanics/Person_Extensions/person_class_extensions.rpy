@@ -1993,6 +1993,11 @@ init -1 python:
             return True
         return False
 
+    def has_cum_fetish(self):  #TODO update this to applicable roles when cum fetish roles have been combined.
+        if cum_external_role in self.special_role or cum_internal_role in self.special_role:
+            return True
+        return False
+
     def has_breeding_fetish(self):
         if breeding_fetish_role in self.special_role:
             return True
@@ -2005,6 +2010,7 @@ init -1 python:
     Person.has_oral_fetish = has_oral_fetish
     Person.has_internal_cum_fetish = has_internal_cum_fetish
     Person.has_external_cum_fetish = has_external_cum_fetish
+    Person.has_cum_fetish = has_cum_fetish
     Person.has_breeding_fetish = has_breeding_fetish
 
     #Additional functions
