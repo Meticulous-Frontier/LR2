@@ -515,37 +515,40 @@ label girlfriend_underwear_shopping_label(the_person):
         "Soon, she emerges, holding the items you've decided to purchase."
         $ the_person.apply_outfit(the_person.planned_outfit)
         $ the_person.draw_person()
-        "As you are walking up to the checkout counter, [the_person.title] asks you about the outfit."
-        the_person "So... is this something you want me to wear when we like... do some roleplaying? Or just a sexy outfit?"
-        "NOTE! Roleplay scenes are not yet implemented, but you can save outfits for them now..."
-        menu:
-            "Just a sexy outfit":
-                $ the_person.event_triggers_dict["favorite_lingerie"] = lingerie_outfit
-                the_person "Mmmm, okay! I'll wear this for you when I just want to be sexy!"
-            "Roleplay: My baby girl":
-                $ the_person.event_triggers_dict["babygirl_lingerie"] = lingerie_outfit
-                if the_person.get_opinion_score("incest") > 0:
-                    the_person "Oh! That sounds hot... You want to spank me while I call you daddy?"
-                else:
-                    the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
-            "Roleplay: My employee":
-                $ the_person.event_triggers_dict["employee_lingerie"] = lingerie_outfit
-                if the_person.is_employee():
-                    the_person "Oh! But... I'm already your employee?"
-                    mc.name "But what if you were a slutty employee who wasn't dating her boss and really needed a promotion."
-                    the_person "Aaahhhh I see where you are going with this..."
-                else:
-                    the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
-            "Roleplay: My student":
-                $ the_person.event_triggers_dict["student_lingerie"] = lingerie_outfit
-                the_person "Ahhh, oh teacher? I'm sorry I forgot to study! What can I do to pass this class?"
-                mc.name "You've got exactly the right idea."
-            "Roleplay: My ditzy stepsister":
-                $ the_person.event_triggers_dict["stepsister_lingerie"] = lingerie_outfit
-                if the_person.get_opinion_score("incest") > 0:
-                    the_person "Oh! That sounds hot... What are you going to do to me... step bro?"
-                else:
-                    the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
+        if the_person.has_taboo("roleplay"):
+            pass
+        else:
+            "As you are walking up to the checkout counter, [the_person.title] asks you about the outfit."
+            the_person "So... is this something you want me to wear when we like... do some roleplaying? Or just a sexy outfit?"
+            "NOTE! Roleplay scenes are not yet implemented, but you can save outfits for them now..."
+            menu:
+                "Just a sexy outfit":
+                    $ the_person.event_triggers_dict["favorite_lingerie"] = lingerie_outfit
+                    the_person "Mmmm, okay! I'll wear this for you when I just want to be sexy!"
+                "Roleplay: My baby girl":
+                    $ the_person.event_triggers_dict["babygirl_lingerie"] = lingerie_outfit
+                    if the_person.get_opinion_score("incest") > 0:
+                        the_person "Oh! That sounds hot... You want to spank me while I call you daddy?"
+                    else:
+                        the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
+                "Roleplay: My employee":
+                    $ the_person.event_triggers_dict["employee_lingerie"] = lingerie_outfit
+                    if the_person.is_employee():
+                        the_person "Oh! But... I'm already your employee?"
+                        mc.name "But what if you were a slutty employee who wasn't dating her boss and really needed a promotion."
+                        the_person "Aaahhhh I see where you are going with this..."
+                    else:
+                        the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
+                "Roleplay: My student":
+                    $ the_person.event_triggers_dict["student_lingerie"] = lingerie_outfit
+                    the_person "Ahhh, oh teacher? I'm sorry I forgot to study! What can I do to pass this class?"
+                    mc.name "You've got exactly the right idea."
+                "Roleplay: My ditzy stepsister":
+                    $ the_person.event_triggers_dict["stepsister_lingerie"] = lingerie_outfit
+                    if the_person.get_opinion_score("incest") > 0:
+                        the_person "Oh! That sounds hot... What are you going to do to me... step bro?"
+                    else:
+                        the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
         $ the_person.wardrobe.add_outfit(lingerie_outfit)
