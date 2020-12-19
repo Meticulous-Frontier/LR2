@@ -20,8 +20,8 @@ init 2: # Moved to screen so that it can be refreshed upon changes made in outfi
         $ clear_scene()
         zorder 102
         fixed: #TODO: Move this to it's own screen so it can be shown anywhere
-            pos (1450,0)
-            add mannequin_average
+            pos (1600,200)
+            add mannequin_average zoom .6
             if outfit is not None:
                 for cloth in outfit.generate_draw_list(None,"stand3", hide_layers = hide_list):
-                    add cloth
+                    add cloth zoom .6
