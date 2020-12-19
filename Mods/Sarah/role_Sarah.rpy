@@ -66,7 +66,7 @@ init 2 python:
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
-        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event,
+        sarah.event_triggers_dict["threesome_unlock"] = False     #\\
         sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
@@ -201,7 +201,7 @@ init -1 python:
 
     def Sarah_ask_for_baby_requirement():
         if mc_asleep():
-            if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+            if sarah.event_triggers_dict.get("threesome_unlock", False):
                 if sarah.sex_record["Vaginal Creampies"] >= 10:
                     if sarah.has_role(girlfriend_role):
                         return True
@@ -293,7 +293,7 @@ init -1 python:
     def get_sarah_spend_night_threesome_possibility():
         threesome_wakeup = False
         threesome_partner = None
-        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and renpy.random.randint(0,100) < 50:
+        if sarah.event_triggers_dict.get("threesome_unlock", False) and renpy.random.randint(0,100) < 50:
             if renpy.random.randint(0,100) < 10: #Try lily first
                 if willing_to_threesome(the_person, lily):
                     threesome_partner = lily
@@ -2096,7 +2096,7 @@ label Sarah_initial_threesome_label():
     $ scene_manager.update_actor(the_person_two, position = "back_peek", display_transform = character_right)
     "As the activity winds down, you all lay down next to each other. You have [the_person_one.possessive_title] on one side and [the_person_two.possessive_title] on the other."
     the_person_one.char "Oh my god... that was so good. I never knew it could be so good, to be with another woman like that..."
-    $ sarah.event_triggers_dict["threesome_unlock"] = 1
+    $ sarah.event_triggers_dict["threesome_unlock"] = True
     "You hear a murmur of approval from [the_person_two.title]."
     "You enjoy the pair of bedwarmers, and are just getting ready to fall asleep when you feel movement."
     $ scene_manager.update_actor(the_person_two, position = "stand4")
@@ -3114,6 +3114,11 @@ init 2 python:
             positions.append([sarah_tit_fuck, 1])
 
         return positions
+
+    def sarah_threesomes_unlocked():
+        if sarah.event_triggers_dict.get("threesome_unlock", False) == True:
+            return True
+        return False
 
 init 1 python:
     def sarah_get_special_titfuck_unlocked():

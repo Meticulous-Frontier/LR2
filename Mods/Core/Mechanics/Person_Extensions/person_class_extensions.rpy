@@ -2020,6 +2020,9 @@ init -1 python:
 
     def is_jealous(self):
         if self.is_girlfriend() or self.is_affair():
+            if self == sarah and sarah_threesomes_unlocked():
+                self.event_triggers_dict["is_jealous"] = False
+                return False
             if self.event_triggers_dict.get("is_jealous", True) == True:
                 if self.love > 90 and self.obedience > 200:
                     self.event_triggers_dict["is_jealous"] = False
