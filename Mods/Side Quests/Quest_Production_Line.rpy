@@ -39,6 +39,9 @@ init 1 python:
                             able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
+    def quest_production_line():
+        return quest_tracker.get_quest("Chemist's Baby Girl")
+
     def setup_quest_production_line():
         person = get_quest_production_line_person()
 
@@ -55,33 +58,39 @@ init 1 python:
         person.update_opinion_with_score("incest", 2, add_to_log = False) # this method updates or adds the opinion
         person.update_opinion_with_score("being submissive", 2, add_to_log = False) # this method updates or adds the opinion
 
-        quest_production_line.quest_event_dict["target"] = person
-        quest_production_line.quest_event_dict["father_name"] = get_random_male_name()
-        quest_production_line.quest_event_dict["initial_meeting_day"] = 9999
-        quest_production_line.quest_event_dict["starting_pay"]  = quest_production_line.quest_event_dict["target"].salary
-        quest_production_line.quest_event_dict["moving_day"] = 9999
-        quest_production_line.set_quest_flag(1)
-        quest_production_line_get_target().add_unique_on_room_enter_event(quest_production_line_intro)
-        game_hints.append(Hint("Chemist's Baby Girl", "Check production for a disturbance.", "quest_production_line.get_quest_flag() <= 1", "quest_production_line.get_quest_flag() > 1"))
-        game_hints.append(Hint("Chemist's Baby Girl", "Don't forget to meet the Chemist at the Mall in the afternoon.", "quest_production_line.get_quest_flag() == 11", "quest_production_line.get_quest_flag() != 11"))
-        hint_string = "Give " + quest_production_line_get_target().title + " a raise with a positive performance review."
-        game_hints.append(Hint("Chemist's Baby Girl", hint_string, "quest_production_line.get_quest_flag() == 31", "quest_production_line.get_quest_flag() != 31"))
-        hint_string_2 = "Give " + quest_production_line_get_target().title + " help moving. Note, for best possible ending, get her sluttiness above 40!"
-        game_hints.append(Hint("Chemist's Baby Girl", hint_string_2, "quest_production_line.get_quest_flag() == 61", "quest_production_line.get_quest_flag() != 61"))
+        quest = quest_production_line()
+
+        quest.quest_event_dict["target"] = person.identifier
+        quest.quest_event_dict["father_name"] = get_random_male_name()
+        quest.quest_event_dict["initial_meeting_day"] = 9999
+        quest.quest_event_dict["starting_pay"]  = person.salary
+        quest.quest_event_dict["moving_day"] = 9999
+        quest.set_quest_flag(1)
+        quest().add_unique_on_room_enter_event(quest_production_line_intro)
+        game_hints.append(Hint("Chemist's Baby Girl", "Check production for a disturbance.", "quest_production_line().get_quest_flag() <= 1", "quest_production_line().get_quest_flag() > 1"))
+        game_hints.append(Hint("Chemist's Baby Girl", "Don't forget to meet the Chemist at the Mall in the afternoon.", "quest_production_line().get_quest_flag() == 11", "quest_production_line().get_quest_flag() != 11"))
+        hint_string = "Give " + person.title + " a raise with a positive performance review."
+        game_hints.append(Hint("Chemist's Baby Girl", hint_string, "quest_production_line().get_quest_flag() == 31", "quest_production_line().get_quest_flag() != 31"))
+        hint_string_2 = "Give " + person.title + " help moving. Note, for best possible ending, get her sluttiness above 40!"
+        game_hints.append(Hint("Chemist's Baby Girl", hint_string_2, "quest_production_line().get_quest_flag() == 61", "quest_production_line().get_quest_flag() != 61"))
         return
 
     def quest_production_line_get_target():
-        return quest_production_line.quest_event_dict.get("target", None)
+        contact = quest_production_line().quest_event_dict.get("target", None)
+        if isinstance(contact, basestring):
+            return get_person_by_identifier(contact)
+        return contact
 
     def quest_production_line_tracker():  #I'm so sorry for anyone who tries to read this function
-        the_person = quest_production_line.quest_event_dict.get("target", None)
-        if quest_production_line.get_quest_flag() < 100:
-            if quest_production_line_get_target() == None:          #quest target is fired or otherwise out of the game
-                quest_production_line.quest_completed()
+        quest = quest_production_line()
+        person = quest_production_line_get_target()
+        if quest.get_quest_flag() < 100:
+            if person == None:          #quest target is fired or otherwise out of the game
+                quest.quest_completed()
                 return
-        if quest_production_line.get_quest_flag() == 31: #agreed to give raise.
-            if the_person.salary > quest_production_line.quest_event_dict.get("starting_pay", 0): #She has received a raise!
-                quest_production_line.set_quest_flag(41)
+        if quest.get_quest_flag() == 31: #agreed to give raise.
+            if person.salary > quest.quest_event_dict.get("starting_pay", 0): #She has received a raise!
+                quest.set_quest_flag(41)
                 mc.business.mandatory_crises_list.append(quest_production_line_after_raise_consult)
                 remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
             if quest_production_line_raise_miss not in mc.business.mandatory_crises_list:
@@ -101,7 +110,7 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
         remove_mandatory_crisis_list_action("quest_production_line_help_move_label")
         # cleanup dictionary (quest is done)
-        quest_production_line.quest_event_dict.clear()
+        quest_production_line().quest_event_dict.clear()
         return
 
     def quest_production_line_intro_requirement(the_person):
@@ -109,25 +118,25 @@ init 1 python:
             return True
 
     def quest_production_line_coffee_reminder_requirement():
-        if day == quest_production_line.quest_event_dict.get("initial_meeting_day", 0):
+        if day == quest_production_line().quest_event_dict.get("initial_meeting_day", 0):
             if time_of_day == 1:
                 return True
         return False
 
     def quest_production_line_coffee_requirement():
-        if day == quest_production_line.quest_event_dict.get("initial_meeting_day", 0):
+        if day == quest_production_line().quest_event_dict.get("initial_meeting_day", 0):
             if time_of_day == 2:
                 return True
         return False
 
     def quest_production_line_coffee_miss_requirement():
-        if day == quest_production_line.quest_event_dict.get("initial_meeting_day", 0) + 1:
+        if day == quest_production_line().quest_event_dict.get("initial_meeting_day", 0) + 1:
             if time_of_day == 1:
                 return True
         return False
 
     def quest_production_line_raise_miss_requirement():
-        if day >= quest_production_line.quest_event_dict.get("initial_meeting_day", 0) + 10: #10 days to giver her a raise. Maybe change this?
+        if day >= quest_production_line().quest_event_dict.get("initial_meeting_day", 0) + 10: #10 days to giver her a raise. Maybe change this?
             if time_of_day == 1:
                 return True
         return False
@@ -138,7 +147,7 @@ init 1 python:
         return False
 
     def quest_production_line_help_move_requirement():
-        if day >= quest_production_line.quest_event_dict.get("moving_day", 0):
+        if day >= quest_production_line().quest_event_dict.get("moving_day", 0):
             if time_of_day == 3:
                 return True
         return False
@@ -169,7 +178,7 @@ label quest_production_line_init_label():
     return
 
 label quest_production_line_intro_label(the_person):
-    $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")
+    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
     "You walk into the production department. You take a moment to look around and see how things are going."
     "At her desk, you notice [the_person.title] struggling a bit with some of her serum."
     $ the_person.draw_person()
@@ -196,25 +205,25 @@ label quest_production_line_intro_label(the_person):
     mc.name "Thank you."
     the_person.char "No problem!"
     $ del dad_name
-    $ quest_production_line.set_quest_flag(11)
-    $ quest_production_line.quest_event_dict["initial_meeting_day"] = (day + 1)
+    $ quest_production_line().set_quest_flag(11)
+    $ quest_production_line().quest_event_dict["initial_meeting_day"] = (day + 1)
     $ mall.add_action(quest_production_line_coffee)
     $ mc.business.mandatory_crises_list.append(quest_production_line_coffee_reminder)
     return
 
 label quest_production_line_coffee_reminder_label():
-    $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")
+    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
     "An alarm on your phone is going off. You check it."
     "Meet [dad_name] at coffee shop at the mall."
     "If you are going to go meet with the chemist, do it after lunch. He should be at the mall."
     $ del dad_name
-    $ quest_production_line.set_quest_flag(21)
+    $ quest_production_line().set_quest_flag(21)
     $ mc.business.mandatory_crises_list.append(quest_production_line_coffee_miss)
     return
 
 label quest_production_line_coffee_label():
-    $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")
-    $ the_person = quest_production_line.quest_event_dict.get("target", None)
+    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
+    $ the_person = quest_production_line_get_target()
     "You text [the_person.title]'s father, [dad_name]. He tells you the name of the coffee shop. You quickly find it."
     #TODO location = shop
     #TODO get generic dad sprite to use? Placeholder? Theres no male images in the game...
@@ -240,40 +249,40 @@ label quest_production_line_coffee_label():
     $ del dad_name
     "You get up and leave the coffee shop. So, if you want his help streamlining your production department, you should give [the_person.title] a raise."
     "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by raise."
-    $ quest_production_line.set_quest_flag(31)
+    $ quest_production_line().set_quest_flag(31)
     $ mall.remove_action(quest_production_line_coffee)
     $ remove_mandatory_crisis_list_action("quest_production_line_coffee_miss_label")
     $ mc.business.mandatory_crises_list.append(quest_production_line_raise_miss)
     return
 
 label quest_production_line_coffee_miss_label():
-    $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")
+    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
     "You have a message on your phone. It is from [dad_name]."
     dad_name "You stood me up at the coffee shop? Tells me a lot about you, as a man."
     dad_name "I'll be telling my daughter to look for work elsewhere ASAP. Good luck with your business, asshole."
     "Yikes! Maybe you shouldn't have missed that meeting. Not much you can do about it now though."
     #TODO lower girl opinions, causing her to probably quit ASAP.
     $ del dad_name
-    $ quest_production_line.set_quest_flag(29)
+    $ quest_production_line().set_quest_flag(29)
     $ mall.remove_action(quest_production_line_coffee)
-    $ quest_production_line.quest_completed()
+    $ quest_production_line().quest_completed()
     return
 
 label quest_production_line_raise_miss_label():
-    $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")
+    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
     "You have a message on your phone. It is from [dad_name]."
     dad_name "I asked my daughter last night if she had any good news about her job to share. She got suspicious and dragged out of me that I'd told you to give her a raise."
     dad_name "I told you to move quick. She missed a potential opportunity to rent a nice condo. The deal is off, good luck with your drug business, asshole."
     "Yikes! Maybe you should have moved a little quicker on that meeting [dad_name]'s daughter..."
     #TODO lower girl opinions, causing her to probably quit ASAP.
     $ del dad_name
-    $ quest_production_line.set_quest_flag(39)
-    $ quest_production_line.quest_completed()
+    $ quest_production_line().set_quest_flag(39)
+    $ quest_production_line().quest_completed()
     return
 
 label quest_production_line_after_raise_consult_label():
-    $ dad_name = quest_production_line.quest_event_dict.get("father_name", "Gregory")
-    $ the_person = quest_production_line.quest_event_dict.get("target", None)
+    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
+    $ the_person = quest_production_line_get_target()
     "Your phone is ringing. It is [dad_name], [the_person.title]'s father. You answer."
     mc.name "Hello?"
     dad_name "Hello there [mc.name]! This is [dad_name]. Guess what."
@@ -307,25 +316,25 @@ label quest_production_line_after_raise_consult_label():
             mc.name "Anything for you baby girl."
             $ the_person.change_arousal(10)
             the_person.char "Ohhh... wow... okay! Sounds good. I'll be expecting you tomorrow night then!"
-            $ quest_production_line.quest_event_dict["moving_day"] = (day + 1)
+            $ quest_production_line().quest_event_dict["moving_day"] = (day + 1)
             "You hang up the phone."
             "So... you're gonna be with [the_person.title] tomorrow, in her apartment."
             "You might want to prep a serum or two... never know if an opportunity might pop up to have some fun!"
-            $ quest_production_line.set_quest_flag(61)
-            $ quest_production_line.quest_event_dict["moving_day"] = (day + 1)
+            $ quest_production_line().set_quest_flag(61)
+            $ quest_production_line().quest_event_dict["moving_day"] = (day + 1)
             $ mc.business.mandatory_crises_list.append(quest_production_line_help_move)
         "Too busy":
             mc.name "I'm sorry, I won't be able to help then."
             the_person.char "Damn... okay, I'm sure I'll be able to find someone."
             "You hang up the phone."
             "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening help her move?"
-            $ quest_production_line.set_quest_flag(69)
-            $ quest_production_line.quest_completed()
+            $ quest_production_line().set_quest_flag(69)
+            $ quest_production_line().quest_completed()
     $ del dad_name
     return
 
 label quest_production_line_help_move_label():
-    $ the_person = quest_production_line.quest_event_dict.get("target", None)
+    $ the_person = quest_production_line_get_target()
     "You promised to help [the_person.title] move now. She texts you the address so you head out."
     $ mc.change_location(the_person.home) #TODO instead of showing this, have it show the elevator background? So when we are at her new place later it actually looks different.
     $ mc.location.show_background()
@@ -397,7 +406,7 @@ label quest_production_line_help_move_label():
         the_person.char "Thank you again, for everything!"
         mc.name "You're welcome [the_person.title]. I'll see you at work?"
         the_person.char "Yes Sir!"
-        $ quest_production_line.set_quest_flag(101)
+        $ quest_production_line().set_quest_flag(101)
         $ the_person.add_unique_on_room_enter_event(quest_production_line_daddy_title)
     else:
         the_person.char "So... I was wondering something."
@@ -463,7 +472,7 @@ label quest_production_line_help_move_label():
             "One of your employees, recently had an amicable breakup... with her dad? And now she calls you Daddy... And she likes to get spanked."
             $ the_person.unlock_spanking()
             "While it is unlikely this relationship is going to last, you decide to make sure you have as much fun with it as you can while it lasts."
-            $ quest_production_line.set_quest_flag(103)
+            $ quest_production_line().set_quest_flag(103)
         else:
             the_person.char "I'm sorry, that's kind of... private!"
             mc.name "That's okay. I understand."
@@ -475,9 +484,9 @@ label quest_production_line_help_move_label():
             the_person.char "Thank you again, for everything!"
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
             the_person.char "Yes Sir!"
-            $ quest_production_line.set_quest_flag(102)
+            $ quest_production_line().set_quest_flag(102)
             $ the_person.add_unique_on_room_enter_event(quest_production_line_daddy_title)
-    $ quest_production_line.quest_completed()
+    $ quest_production_line().quest_completed()
     return
 
 label quest_production_line_daddy_title_label(the_person): #This label is activated if the MC does not gain "daddy" status in the quest but still finished with a good end.

@@ -36,15 +36,17 @@
 init 1 python:
     def setup_quest_arousal_serum():
         #Use this function to set quest specific variables.
-        quest_arousal_serum.quest_event_dict["start_day"] = 9999
-        quest_arousal_serum.quest_event_dict["expiration_day"] = 9999
-        quest_arousal_serum.quest_event_dict["ready_day"] = 9999
-        quest_arousal_serum.set_quest_flag(1)
+        quest = quest_arousal_serum()
+
+        quest.quest_event_dict["start_day"] = 9999
+        quest.quest_event_dict["expiration_day"] = 9999
+        quest.quest_event_dict["ready_day"] = 9999
+        quest.set_quest_flag(1)
         mc.business.mandatory_crises_list.append(quest_arousal_serum_intro)
-        game_hints.append(Hint("Arousal Serum", "Wait for the pills to come in.", "quest_arousal_serum.get_quest_flag() == 11", "quest_arousal_serum.get_quest_flag() != 11"))
-        game_hints.append(Hint("Arousal Serum", "Talk with your head researcher about testing the pills.", "quest_arousal_serum.get_quest_flag() == 21", "quest_arousal_serum.get_quest_flag() != 21"))
-        game_hints.append(Hint("Arousal Serum", "Wait for your head researcher to reverse engineer the pills.", "quest_arousal_serum.get_quest_flag() == 41", "quest_arousal_serum.get_quest_flag() != 41"))
-        game_hints.append(Hint("Arousal Serum", "Wait for your head researcher to reverse engineer the pills.", "quest_arousal_serum.get_quest_flag() == 42", "quest_arousal_serum.get_quest_flag() != 42"))
+        game_hints.append(Hint("Arousal Serum", "Wait for the pills to come in.", "quest_arousal_serum().get_quest_flag() == 11", "quest_arousal_serum().get_quest_flag() != 11"))
+        game_hints.append(Hint("Arousal Serum", "Talk with your head researcher about testing the pills.", "quest_arousal_serum().get_quest_flag() == 21", "quest_arousal_serum().get_quest_flag() != 21"))
+        game_hints.append(Hint("Arousal Serum", "Wait for your head researcher to reverse engineer the pills.", "quest_arousal_serum().get_quest_flag() == 41", "quest_arousal_serum().get_quest_flag() != 41"))
+        game_hints.append(Hint("Arousal Serum", "Wait for your head researcher to reverse engineer the pills.", "quest_arousal_serum().get_quest_flag() == 42", "quest_arousal_serum().get_quest_flag() != 42"))
         return
 
     def quest_arousal_serum_tracker():
@@ -56,6 +58,9 @@ init 1 python:
             return True
         return False
 
+    def quest_arousal_serum():
+        return quest_tracker.get_quest("Arousal Serum")
+
     def quest_arousal_serum_cleanup():
         remove_mandatory_crisis_list_action("quest_arousal_serum_pills_label")
         remove_mandatory_crisis_list_action("quest_arousal_serum_fire_HR_label")
@@ -66,7 +71,7 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_arousal_serum_pills_expire_label")
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_arousal_serum_arrange_test)
-        quest_arousal_serum.quest_event_dict.clear()
+        quest_arousal_serum().quest_event_dict.clear()
         return
 
 ###Declare any requirement functions now
@@ -80,7 +85,7 @@ init 1 python:
 
     def quest_arousal_serum_receive_drug_requirement():
         if time_of_day == 4:
-            if day >= quest_arousal_serum.quest_event_dict.get("start_day", 0) + 2:
+            if day >= quest_arousal_serum().quest_event_dict.get("start_day", 0) + 2:
                 return True
         return False
 
@@ -100,12 +105,12 @@ init 1 python:
     def quest_arousal_serum_researched_requirement():
         if mc.business.is_open_for_business():
             if time_of_day == 3:
-                if day >= quest_arousal_serum.quest_event_dict.get("ready_day", 0):
+                if day >= quest_arousal_serum().quest_event_dict.get("ready_day", 0):
                     return True
         return False
 
     def quest_arousal_serum_pills_expire_requirement():
-        if day >= quest_arousal_serum.quest_event_dict.get("expiration_day", 9999):
+        if day >= quest_arousal_serum().quest_event_dict.get("expiration_day", 9999):
             return True
         return False
 
@@ -159,14 +164,14 @@ label quest_arousal_serum_intro_label():
             $ mc.business.change_funds(-100)
             "What the hell. In terms of your business finances, $100 isn't that much. And who knows? Maybe it turns out to be legitimate."
             "You place an order with standard two day shipping."
-            $ quest_arousal_serum.set_quest_flag(11)
-            $ quest_arousal_serum.quest_event_dict["start_day"] = day
+            $ quest_arousal_serum().set_quest_flag(11)
+            $ quest_arousal_serum().quest_event_dict["start_day"] = day
             $ mc.business.mandatory_crises_list.append(quest_arousal_serum_receive_drug)
             pass
         "Sounds like bullshit":
             "You decide there is absolutely no way this stuff is legitimate. You close your browser and forget about it."
-            $ quest_arousal_serum.set_quest_flag(9)
-            $ quest_arousal_serum.quest_completed()
+            $ quest_arousal_serum().set_quest_flag(9)
+            $ quest_arousal_serum().quest_completed()
     return
 
 label quest_arousal_serum_receive_drug_label():
@@ -191,8 +196,8 @@ label quest_arousal_serum_receive_drug_label():
         if day%7 == 4:  # the event is not available on fridays, let the user know
             "You should talk to her next week, to see if there is any use for this stuff."
 
-    $ quest_arousal_serum.quest_event_dict["expiration_day"] = day + 7
-    $ quest_arousal_serum.set_quest_flag(21)
+    $ quest_arousal_serum().quest_event_dict["expiration_day"] = day + 7
+    $ quest_arousal_serum().set_quest_flag(21)
     $ mc.business.head_researcher.add_unique_on_talk_event(quest_arousal_serum_arrange_test)
     $ mc.business.mandatory_crises_list.append(quest_arousal_serum_pills_expire)
     return
@@ -208,7 +213,7 @@ label quest_arousal_serum_arrange_test_label(the_person):
     mc.name "See you then."
     #We add the event here because if it happens to already be evening then the event won't proc if we wait for quest tracker to add it.
     $ mc.business.mandatory_crises_list.append(quest_arousal_serum_test)
-    $ quest_arousal_serum.set_quest_flag(31)
+    $ quest_arousal_serum().set_quest_flag(31)
     $ mc.business.mandatory_crises_list.append(quest_arousal_serum_fire_HR)
     $ remove_mandatory_crisis_list_action("quest_arousal_serum_pills_label")
     return
@@ -217,7 +222,7 @@ label quest_arousal_serum_test_label():
     $ the_person = mc.business.head_researcher
     $ the_person.arousal = 0 #Make sure we start at zero arousal for this event.
     if the_person == None: #we fired HR, bad end
-        $ quest_arousal_serum.quest_completed()
+        $ quest_arousal_serum().quest_completed()
         return
     "After closing up the lab, it is time for you to test the pills with [the_person.title]."
     $ mc.business.r_div.show_background()
@@ -301,7 +306,7 @@ label quest_arousal_serum_test_label():
         mc.name "Maybe some kind of slower release time frame? Something that would take effect over the course of the day, instead of inside an hour."
         the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
-        $ quest_arousal_serum.set_quest_flag(42)
+        $ quest_arousal_serum().set_quest_flag(42)
     else:
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
@@ -315,19 +320,19 @@ label quest_arousal_serum_test_label():
             "Too Dangerous":
                 mc.name "You know, I think you are right. This drug is dangerous. Thanks for testing it, but lets not pursue it anything further."
                 the_person "Alright."
-                $ quest_arousal_serum.set_quest_flag(49)
-                $ quest_arousal_serum.quest_completed()
+                $ quest_arousal_serum().set_quest_flag(49)
+                $ quest_arousal_serum().quest_completed()
 
         the_person.char "I'll start working on the other pill... see if I can reverse engineer the effects."
         the_person.char "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
         mc.name "Maybe some kind of slower release time frame? Something that would take effect over the course of the day, instead of inside an hour."
         the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
-        $ quest_arousal_serum.set_quest_flag(41)
+        $ quest_arousal_serum().set_quest_flag(41)
 
     $ mc.business.mandatory_crises_list.append(quest_arousal_serum_researched)
-    $ quest_arousal_serum.quest_event_dict["ready_day"] = day + 3
-    $ quest_arousal_serum.quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish
+    $ quest_arousal_serum().quest_event_dict["ready_day"] = day + 3
+    $ quest_arousal_serum().quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish
 
     "You and [the_person.possessive_title] leave the lab and close up for the day."
     return
@@ -335,7 +340,7 @@ label quest_arousal_serum_test_label():
 label quest_arousal_serum_researched_label():
     $ the_person = mc.business.head_researcher
     if the_person == None: #we fired HR, bad end
-        $ quest_arousal_serum.quest_completed()
+        $ quest_arousal_serum().quest_completed()
         return
 
     "After you have closed up, you get a text from your head researcher."
@@ -382,24 +387,24 @@ label quest_arousal_serum_researched_label():
     mc.name "Good work, [the_person.title]."
     "You leave the lab. You have unlocked a new serum trait."
     $ list_of_traits.append(arousal_serum_trait)
-    $ quest_arousal_serum.set_quest_flag(101)
-    $ quest_arousal_serum.quest_completed()
+    $ quest_arousal_serum().set_quest_flag(101)
+    $ quest_arousal_serum().quest_completed()
     return
 
 label quest_arousal_serum_pills_expire_label():
-    if quest_arousal_serum.get_quest_flag() >= 101:
+    if quest_arousal_serum().get_quest_flag() >= 101:
         return
     "The female viagra pills you ordered have expired. You decide the whole thing was probably bullshit anyway, and decide not to pursue it any further."
-    $ quest_arousal_serum.set_quest_flag(29)
-    $ quest_arousal_serum.quest_completed()
+    $ quest_arousal_serum().set_quest_flag(29)
+    $ quest_arousal_serum().quest_completed()
     return
 
 label quest_arousal_serum_fire_HR_label():
-    if quest_arousal_serum.get_quest_flag() >= 101:
+    if quest_arousal_serum().get_quest_flag() >= 101:
         return
     "Unfortunately, since the head researcher position is no longer filled, you doubt you will be able do anything with the female viagra pills you ordered."
-    $ quest_arousal_serum.set_quest_flag(39)
-    $ quest_arousal_serum.quest_completed()
+    $ quest_arousal_serum().set_quest_flag(39)
+    $ quest_arousal_serum().quest_completed()
     return
 
 
