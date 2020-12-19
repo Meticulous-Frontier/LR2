@@ -523,10 +523,15 @@ label erica_phase_one_label(the_person):
                 the_person.char "I'm gonna shower really quick. We should probably get out of here ASAP."
                 mc.name "You're right. I'll join you."
                 the_person.char "Okay, but no funny business."
+                $ gym_shower.show_background()
+                $ the_person.draw_person(position = "back_peek")
                 "You join [the_person.title] in the shower. You splash around a bit and grab her ass once or twice, but go no further."
                 $ the_person.apply_planned_outfit()
+                $ the_person.draw_person()
                 the_person.char "Alright, I'm gonna sneak out. Wait a couple minutes, then leave too, okay?"
                 "You agree. [the_person.title] slips out of the room, leaving you a long with your thoughts."
+                $ mc.location.show_background()
+                $ clear_scene()
                 "You know she is young, and not looking for anything serious, but you are really starting to take a liking to this girl."
                 "Maybe with a bit more time, more serums, and some mind blowing sex, you can convince her to go steady with you."
 
