@@ -2019,8 +2019,9 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
         the_person.char "Mmm, that was fun! I guess I'll head to class now..."
     else:
         the_person.char "I suppose I'll get back to work now..."
+    $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.title] turns and opens the door to your office, leaving you to begin your work day properly."
+    "[the_person.title] puts on her clothes, turns around and opens the door to your office, leaving you to begin your work day properly."
     return
 
 label erica_nude_yoga_office_aftermath_label():    #We use this to describe the state of the lobby after the nude yoga orgy.
