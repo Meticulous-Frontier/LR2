@@ -65,7 +65,12 @@ init -1 python:
         else:
             return "You're too tired"
 
-
+    def SB_breeding_fetish_on_day(person):
+        if person.knows_pregnant() or person.is_lactating():
+            person.change_happiness(2, add_to_log = False)
+        elif person.is_highly_fertile(): #Always aroused when fertile.
+            if person.arousal < 50:
+                person.arousal = 50
 
     # Initialize vaginal fetish role
     SB_fetish_vaginal_visit = Action("Sleepover Tonight (Vaginal)", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
@@ -95,7 +100,7 @@ init -1 python:
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
     #TODO: Add some actions when 'afflicted'
 
-    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over])
+    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
 
 init 1 python:
     def SB_get_fetish_count(person):

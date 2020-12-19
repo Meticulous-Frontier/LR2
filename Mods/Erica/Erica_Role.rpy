@@ -22,7 +22,7 @@ init 2 python:
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True,
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", 2, False], ["classical", 1, False], ["yoga", 2, False]],
-            forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["anal creampies", -2, False], ["public sex", -2, False]])
+            forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", -2, False]])
 
 
         erica.max_energy = 120
@@ -47,6 +47,7 @@ init 2 python:
         erica.event_triggers_dict["nude_yoga"] = False
         erica.event_triggers_dict["looking_for_work"] = False
         erica.event_triggers_dict["yoga_assistant"] = None
+        erica.fertility_percent = -5.0  #Erica refuses to get pregnant for MC, getting pregnant would cause her to be kicked from track team. Enabled with breeding fetish.
 
 
 
@@ -1127,6 +1128,10 @@ label erica_post_race_love_label(the_person):
     return
 
 label erica_buy_protein_shake_label(the_person):
+    if the_person.is_pregnant() and not the_person.knows_pregnant() and time_of_day == 1: #She has morning sickness
+        mc.name "Care for a protein shake today, [the_person.title]?"
+        the_person "Oh... actually no. I'm not sure why, but I've been feeling nauseated all morning... sorry!"
+        return
     if erica_on_love_path():
         mc.name "Hey [the_person.title], looking good! Can I get you a protein shake babe?"
         "[the_person.possessive_title] looks at you and smiles wide."
