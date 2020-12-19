@@ -710,8 +710,8 @@ label ashley_ask_about_porn_label(the_person):
     jump game_loop # she runs after her sister so end talk with Ashley
 
 label ashley_post_handjob_convo_label(the_person):
-    $ mod_alpha_content_warning()  #ALPHA
-    $ wip_screen_show()
+    $ mod_alpha_content_warning(ashley_sisterly_jealousy_feature)
+    $ show_wip_screen(ashley_sisterly_jealousy_feature)
     "You decide not to give [the_person.title] too much time to overthink what happened in your office. You swing by her desk."
     $ the_person.draw_person()
     mc.name "Hey [the_person.title]..."
@@ -720,7 +720,7 @@ label ashley_post_handjob_convo_label(the_person):
     the_person.char "Oh, coffee? OK, I'm right behind you..."
     "[the_person.possessive_title] is blushing hard. It's kind of cute actually."
     #TODO downtown background
-    "As you step out of the offce building, [the_person.title] is following along behind you. You give her a second to catch up so you can walk side by side."
+    "As you step out of the office building, [the_person.title] is following along behind you. You give her a second to catch up so you can walk side by side."
     "She's looking down at her feet. She's so shy, you can tell she is uncomfortable."
     menu:
         "Hold her hand" if the_person.love >= 20:
@@ -788,7 +788,7 @@ label ashley_post_handjob_convo_label(the_person):
             the_person.char "Errrm... you want to do what now?"
             $ the_person.change_stats(love = -5, happiness = -5, obedience = 5)
             mc.name "Look, [stephanie.title] was the one in the first place that told me to ask you out. She wants you to be happy, and I think she knows you're going through a dry spell."
-            mc.name "I'll help take care of your phsical needs... then if you happen to find another guy or if things with your sister don't work out..."
+            mc.name "I'll help take care of your physical needs... then if you happen to find another guy or if things with your sister don't work out..."
             the_person.char "I don't know... I'm not sure I'll be able to lie to her about this..."
             mc.name "You don't have to lie about it, just don't talk about it. It'll be just like friends with benefits... but just between you and me."
             "She is struggling with the idea a bit, but finally makes up her mind."
@@ -820,13 +820,13 @@ label ashley_post_handjob_convo_label(the_person):
     the_person "Ahh, thank you..."
     $ mc.location.show_background()
     $ stephanie.add_unique_on_talk_event(ashley_stephanie_arrange_relationship)
-    $ wip_screen_clear()
+    $ hide_wip_screen()
     call advance_time from _call_advance_ashley_post_hj_01
     return
 
 label ashley_stephanie_arrange_relationship_label(the_person):
-    $ mod_alpha_content_warning()  #ALPHA
-    $ wip_screen_show()
+    $ mod_alpha_content_warning(ashley_sisterly_jealousy_feature)
+    $ show_wip_screen(ashley_sisterly_jealousy_feature)
     "It's time talk to [the_person.title]. You approach her in the lab."
     mc.name "Hey, we need to chat. Can you come with me to my office?"
     the_person "Sounds good."
@@ -903,7 +903,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
-    $ wip_screen_clear()
+    $ hide_wip_screen()
     $ stephanie.set_alt_schedule(downtown, days = [6], times = [0])
     $ ashley.set_alt_schedule(downtown, days = [6], times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
@@ -911,8 +911,8 @@ label ashley_stephanie_arrange_relationship_label(the_person):
     return
 
 label ashley_stephanie_saturday_coffee_intro_label(the_person):
-    $ mod_alpha_content_warning()  #ALPHA
-    $ wip_screen_show()
+    $ mod_alpha_content_warning(ashley_sisterly_jealousy_feature)
+    $ show_wip_screen(ashley_sisterly_jealousy_feature)
     $ the_person_one = the_person
     $ the_person_two = stephanie
     $ scene_manager = Scene()
@@ -988,16 +988,15 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     the_person_two.char "Next week you're buying the coffees though!"
     mc.name "That's acceptable. With us all being employees, I'll just put it down as a company expense."
     "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about about the sisters."
-    $ wip_screen_clear()
-    #$ the_person_one.on_room_enter_event_list = []
+    $ hide_wip_screen()
     $ the_person_one.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     $ ashley_reset_coffee_partner()
     call advance_time from _call_advance_ashley_coffee_advance_01
     return
 
 label ashley_stephanie_saturday_coffee_recur_label(the_person_one):
-    $ mod_alpha_content_warning()  #ALPHA
-    $ wip_screen_show()
+    $ mod_alpha_content_warning(ashley_sisterly_jealousy_feature)
+    $ show_wip_screen(ashley_sisterly_jealousy_feature)
     $ the_person_two = stephanie
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped, position = "sitting")
@@ -1053,39 +1052,29 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person_one):
                 $ ashley_set_coffee_partner(the_person_two)
     "As you sit down, the girls are sharing their plans for the weekend. You take a few sips of your coffee enjoying the flavor."
 
-    python:
-        possible_action_list = []
-        for steph_scene in steph_coffee_time_action_list:
-            if steph_scene.is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                possible_action_list.append(steph_scene) #Build a list of valid crises from ones that pass their requirement.
-    $ steph_action = get_random_from_list(possible_action_list)
+    $ steph_action = steph_coffee_time_get_random_action()
     if steph_action:
         $ steph_action.call_action()
+        $ del steph_action
     else:
         "You sit and have a lively conversation with the girls while you drink your coffee, but nothing of any major consequence comes up."
     "Your coffee is almost gone. You consider getting another one, but continue to sit with the two sisters, enjoying the lively conversation."
-    python:
-        possible_action_list = []
-        for ashley_scene in ashley_coffee_time_action_list:
-            if ashley_scene.is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                possible_action_list.append(ashley_scene) #Build a list of valid crises from ones that pass their requirement.
-    $ ashley_action = get_random_from_list(possible_action_list)
+
+    $ ashley_action = ashley_coffee_time_get_random_action()
     if ashley_action:
         $ ashley_action.call_action()
         $ del ashley_action
     else:
         "You sit and have a lively conversation with the girls while you drink your coffee, but nothing of any major consequence comes up."
-    $ del possible_action_list
+
     "The conversation is starting to die down a bit, and your coffee cup is dry. You decide to head out."
     mc.name "Thank you for the company. I think it's about time for me to go."
     the_person_two "Hey, you know where to find us next week!"
     the_person_one "Bye [the_person_one.mc_title]..."
-    $ wip_screen_clear()
+    $ hide_wip_screen()
     $ the_person_one.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     call advance_time from _call_advance_ashley_coffee_advance_02
     return
-
-
 
 #Coffee time labels
 #Labels in this section are to be randomly called during the coffee time event.
@@ -1108,6 +1097,13 @@ label coffee_time_innocent_chat_label():
     the_person_two.char "...But I [text_one] [text_two], so I'm not sure what to do."
     if the_person_two.discover_opinion(overhear_topic):
         "Wow, you knew they were sisters, but they really do talk about basically everything!"
+
+    python:
+        person_one = None
+        person_two = None
+        overhear_topic = None
+        text_one = None
+        text_two = None
     return
 
 label coffee_time_sexy_chat_label():
@@ -1128,6 +1124,13 @@ label coffee_time_sexy_chat_label():
     the_person_one.char "...But I [text_one] [text_two], so I'm not sure what to do."
     if the_person_one.discover_opinion(overhear_topic):
         "Wow, you didn't realize they talked about sex in such detail with each other."
+
+    python:
+        person_one = None
+        person_two = None
+        overhear_topic = None
+        text_one = None
+        text_two = None
     return
 
 label coffee_time_steph_gets_handsy_label():
@@ -1138,7 +1141,7 @@ label coffee_time_steph_gets_handsy_label():
     "[the_person_two.title] is keeping a completely inconspicuous attitude."
     the_person_two "So Ash, any good concerts coming up soon?"
     "As she asks her sister, her hand drifts up to your crotch. It rapidly hardens as she begins to stroke it carefully."
-    the_person_one "No... Not that I'm aware of anyway... The Chicago symphony is doing a charity livestream later though, so I might watch that..."
+    the_person_one "No... Not that I'm aware of anyway... The Chicago symphony is doing a charity live-stream later though, so I might watch that..."
     $ mc.change_arousal(15)
     "You decide two can play at this game. In the same way, you carefully run your hand along her thigh until it's resting on her mound. She gives a small sigh when you start to apply pressure on it."
     $ the_person_two.change_arousal(15)
@@ -1296,6 +1299,10 @@ label coffee_time_steph_gets_handsy_label():
                 "[the_person_one.title] just watches as [the_person_two.title] brings her hand up from underneath the table and begins to lick your cum off of it."
         else:
             "You pick up a napkin and bring it under the table. You hold it in place as [the_person_two.title] wipes her hand off on it. You grab another napkin and use it to clean yourself off as best as you can, hoping no one will notice."
+
+    python:
+        person_one = None
+        person_two = None
     return
 
 init 2 python: #Coffee time requirements function. #TODO should I pull out coffee times stuff to its own file? this file might get too big.
@@ -1326,6 +1333,21 @@ init 3 python:
     steph_coffee_time_action_list.append(coffee_time_innocent_chat)
     steph_coffee_time_action_list.append(coffee_time_sexy_chat)
     steph_coffee_time_action_list.append(coffee_time_steph_gets_handsy)
+
+    def ashley_coffee_time_get_random_action():
+        possible_action_list = []
+        for ashley_scene in steph_coffee_time_action_list:
+            if ashley_scene.is_action_enabled(): #Get the first element of the weighted tuple, the action.
+                possible_action_list.append(ashley_scene) #Build a list of valid crises from ones that pass their requirement.
+        return get_random_from_list(possible_action_list)
+
+    def steph_coffee_time_get_random_action():
+        possible_action_list = []
+        for steph_scene in steph_coffee_time_action_list:
+            if steph_scene.is_action_enabled(): #Get the first element of the weighted tuple, the action.
+                possible_action_list.append(steph_scene) #Build a list of valid crises from ones that pass their requirement.
+        return get_random_from_list(possible_action_list)
+
 
 #End coffee time code
 

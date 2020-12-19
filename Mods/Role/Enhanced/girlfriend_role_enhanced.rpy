@@ -85,7 +85,7 @@ label activate_girlfriend_role_enhancement(stack):
     return
 
 label girlfriend_myplace_yourplace_label(the_person):
-    $ wip_screen_show()
+    $ show_wip_screen(girlfriend_role_sleepover_feature)
     mc.name "So, I'm kinda busy right now, but I thought that maybe later we could get together."
     the_person "Mmm, that sounds like fun. My place or yours?"
     menu:
@@ -104,7 +104,7 @@ label girlfriend_myplace_yourplace_label(the_person):
     return
 
 label girlfriend_sleepover_label():
-    $ wip_screen_show()
+    $ show_wip_screen(girlfriend_role_sleepover_feature)
     $ the_person = schedule_sleepover_get_girlfriend_person()
     if the_person == None:
         return

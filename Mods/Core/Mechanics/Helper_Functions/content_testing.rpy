@@ -1,23 +1,21 @@
 #This file is designed to make it possible to wall off pieces of content based on the current status of the player, being either Alpha, Beta, or full content only.
 init 5 python:
-    def mod_alpha_content_warning():
-        renpy.say("","Warning: This content is in alpha and is considered WIP. It may contain game breaking bugs or be incomplete. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
+    def mod_alpha_content_warning(feature = True):
+        if not feature:
+            renpy.say("","Warning: This content is considered WIP. It may contain game breaking bugs or be incomplete. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
         return
 
-    def mod_beta_content_warning(version = -1): #Version is broke. It needs some kind of string dissection to work
-        renpy.say("","Warning: This content is in beta. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
+    def show_wip_screen(feature = True):  #TODO if a label crashes or exits before this gets called, screen will show up indefinitely?
+        if not feature:
+            renpy.show_screen("under_construction_ui")
         return
 
-    def wip_screen_show(version = -1):  #TODO if a label crashes or exits before this gets called, screen will show up indefinitely?
-        if "game_version" in globals():
-            if version > 0 and version + 1 > game_version and not renpy.get_screen("under_construction_ui"):
-                renpy.show_screen(under_construction_ui)
+    def hide_wip_screen():
+        renpy.hide_screen("under_construction_ui")
         return
 
-    def wip_screen_clear():
-        if renpy.get_screen("under_construction_ui"):
-            renpy.hide_screen(under_construction_ui)
-        return
+    ashley_sisterly_jealousy_feature = False     #   set to True if no longer WIP
+    girlfriend_role_sleepover_feature = False    #   set to True if no longer WIP
 
     # remove in future versions
     def change_content_setting_requirement():
