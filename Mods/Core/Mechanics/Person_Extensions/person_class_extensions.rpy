@@ -2090,6 +2090,15 @@ init -1 python:
 
     Person.favorite_colour = favorite_colour
 
+    def is_single(self):
+        if self.relationship == "Single":
+            if self.is_girlfriend():
+                return False
+            return True
+        return False
+
+    Person.is_single = is_single
+
 ##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
 
     def change_to_lingerie(self):
