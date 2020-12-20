@@ -111,6 +111,19 @@ init -2 python:
             for actor in sorted(self.actors, key = lambda x: x.z_order):
                 actor.draw_actor()
 
+        # update each actor and draw scene
+        def update_scene(self, position = None, emotion = None, special_modifier = None, lighting = None):
+            for actor in sorted(self.actors, key = lambda x: x.z_order):
+                if not position is None:
+                    actor.position = position
+                if not emotion is None:
+                    actor.emotion = emotion
+                if not special_modifier is None:
+                    actor.special_modifier = special_modifier
+                if not lighting is None:
+                    actor.lighting = lighting
+            self.draw_scene()
+
         # helper function for strip and animated removal functions
         def draw_scene_without(self, person):
             self.draw_info_ui()
