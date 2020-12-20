@@ -210,7 +210,7 @@
 			</Feet>
 			<Accessories />
 		</Outfit>
-		<Outfit name="SarahPinaforeWithSheerTopandBoots">
+		<Outfit name="Sarah Pinafore With Sheer Top and Boots">
 				<UpperBody>
 						<Item alpha="0.95" blue="0.85" green="0.4" name="Pinafore" red="0.71" />
 						<Item alpha="0.75" blue="0.59" green="0.31" name="Tight_Vest" red="0.45" />

@@ -94,7 +94,7 @@
                 <Item alpha="0.95" blue="0.1" green="0.7" name="Necklace_Set" red="0.7" />
             </Accessories>
         </Outfit>
-        <Outfit name="StarbuckYellowFrillyDress">
+        <Outfit name="Starbuck Yellow Frilly Dress">
             <UpperBody>
                 <Item alpha="0.95" blue="0.36" green="0.92" name="Frilly_Dress" red="0.98" />
             </UpperBody>
@@ -106,7 +106,7 @@
                 <Item alpha="0.95" blue="0.34" green="0.65" name="Lace_Choker" red="0.89" />
             </Accessories>
         </Outfit>
-        <Outfit name="StarbuckPinaforeWithSheerTop">
+        <Outfit name="Starbuck Pinafore With SheerTop">
             <UpperBody>
                 <Item alpha="0.95" blue="0.929" green="0.584" name="Pinafore" red="0.392" />
                 <Item alpha="0.66" blue="0.671" green="0.28" name="Tanktop" red="0" />

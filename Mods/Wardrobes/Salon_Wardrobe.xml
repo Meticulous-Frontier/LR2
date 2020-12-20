@@ -82,7 +82,7 @@
                 <Item alpha="1.0" blue="1.0" green="1.0" name="Copper_Ring_Set" red="1.0" />
             </Accessories>
 		</Outfit>
-      <Outfit name="OPheliaRedBlouseWithSkirt">
+      <Outfit name="Ophelia Red Blouse With Skirt">
           <UpperBody>
               <Item alpha="0.95" blue="0.06" green="0.1" name="Wrapped_Blouse" red="0.48" />
           </UpperBody>
@@ -94,7 +94,7 @@
           </Feet>
           <Accessories />
       </Outfit>
-      <Outfit name="OpheliaPinaforeOPen">
+      <Outfit name="Ophelia Pinafore Open">
           <UpperBody>
               <Item alpha="0.95" blue="0.06" green="0.1" name="Pinafore" red="0.49" />
           </UpperBody>
@@ -104,7 +104,7 @@
           </Feet>
           <Accessories />
       </Outfit>
-      <Outfit name="OpheliaPinaforeWithTop">
+      <Outfit name="Ophelia Pinafore With Top">
           <UpperBody>
               <Item alpha="0.95" blue="0.06" green="0.1" name="Pinafore" red="0.49" />
               <Item alpha="0.95" blue="0.06" green="0.1" name="Lace_Crop_Top" red="0.33" />
