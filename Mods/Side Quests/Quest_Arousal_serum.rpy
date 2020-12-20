@@ -59,7 +59,7 @@ init 1 python:
         return False
 
     def quest_arousal_serum():
-        return quest_tracker.get_quest("Arousal Serum")
+        return quest_director.get_quest("Arousal Serum")
 
     def quest_arousal_serum_cleanup():
         remove_mandatory_crisis_list_action("quest_arousal_serum_pills_label")

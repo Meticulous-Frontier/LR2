@@ -46,7 +46,7 @@ init 1 python:
         return
 
     def quest_essential_oils():
-        return quest_tracker.get_quest("Essential Oils")
+        return quest_director.get_quest("Essential Oils")
 
     def quest_essential_oils_tracker():
         quest = quest_essential_oils()

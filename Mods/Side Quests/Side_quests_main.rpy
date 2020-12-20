@@ -40,9 +40,6 @@ init python: #For now default init. May change later if we know better.
             self.quest_cleanup()
             return
 
-        def get_quest(self, name):
-            return next((x for x in self.quest_list if x.name == name), None)
-
         #################################################
         # Custom Compare Functions For Side_Quest Class #
         #################################################
@@ -144,6 +141,8 @@ init python: #For now default init. May change later if we know better.
         def is_person_blocked(self, person):
             return person.identifier in self.unavailable_person_identifiers
 
+        def get_quest(self, name):
+            return next((x for x in self.quest_list if x.quest_name == name), None)
 
         #DEBUG functions
 

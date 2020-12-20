@@ -36,7 +36,7 @@ init 1 python:
         return
 
     def quest_cure_discovery():
-        return quest_tracker.get_quest("Medical Breakthrough")
+        return quest_director.get_quest("Medical Breakthrough")
 
     def quest_cure_get_market_contact():
         contact = quest_cure_discovery().quest_event_dict.get("market_contact", None)

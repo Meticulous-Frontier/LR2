@@ -55,7 +55,7 @@ init 1 python:
         return
 
     def quest_cuckold_employee():
-        return quest_tracker.get_quest("Cuckold Employee")
+        return quest_director.get_quest("Cuckold Employee")
 
     def quest_cuckold_employee_get_target():
         contact = quest_cuckold_employee().quest_event_dict.get("target", None)

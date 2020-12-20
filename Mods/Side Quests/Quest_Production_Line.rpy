@@ -40,7 +40,7 @@ init 1 python:
         return get_random_from_list(able_person_list)
 
     def quest_production_line():
-        return quest_tracker.get_quest("Chemist's Baby Girl")
+        return quest_director.get_quest("Chemist's Baby Girl")
 
     def setup_quest_production_line():
         person = get_quest_production_line_person()

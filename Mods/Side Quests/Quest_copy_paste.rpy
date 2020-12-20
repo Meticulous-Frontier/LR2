@@ -20,7 +20,7 @@
 #         return
 
 #     def QUEST_NAME():
-#         return quest_tracker.get_quest("QUEST NAME")
+#         return quest_director.get_quest("QUEST NAME")
 
 #     def quest_QUEST_NAME_tracker():
 #         return
