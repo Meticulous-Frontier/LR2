@@ -76,9 +76,10 @@ init -1 python:
         self.opinions.clear()
         self.sexy_opinions.clear()
         self.broken_taboos.clear()
-        self.schedule.clear()
 
         # clear all references held by person object.
+        del self.schedule
+        del self.alt_schedule
         self.home = None
         self.work = None
         self.schedule = None
@@ -114,16 +115,20 @@ init -1 python:
 
     Person.location = location
 
-    def create_empty_schedule():
-        schedule = {}
-        for x in range(7):
-            schedule[x] = { 0: None, 1: None, 2: None, 3: None, 4: None }
-        return schedule
-
     def get_alt_schedule(self):
         if not hasattr(self, "_alt_schedule"):
-            self._alt_schedule = create_empty_schedule()
+            self._alt_schedule = Schedule()
         return self._alt_schedule
+
+    def set_alt_schedule(self, value):
+        self._alt_schedule = value
+
+    def del_alt_schedule(self):
+        self._alt_schedule = None
+
+    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
+    # clear alternative schedule by calling the_person.schedule.clear_schedule()
+    Person.alt_schedule = property(get_alt_schedule, set_alt_schedule, del_alt_schedule, "Alternative schedule property.")
 
     def set_alt_schedule(self, location, days = None, times = None):
         if days is None:
@@ -137,16 +142,6 @@ init -1 python:
         return
 
     Person.set_alt_schedule = set_alt_schedule
-
-    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
-    # clear alternative schedule by calling the_person.clear_alt_schedule()
-    Person.alt_schedule = property(get_alt_schedule, None, None, "Alternative schedule property.")
-
-    def clear_alt_schedule(self):
-        self._alt_schedule = create_empty_schedule()
-        return
-
-    Person.clear_alt_schedule = clear_alt_schedule
 
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
