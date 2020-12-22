@@ -49,18 +49,6 @@ init 2 python:
     def change_generic_preferences_requirement():
         return True
 
-    # remove in future version
-    def change_body_type_requirement():
-        return True
-
-    # remove in future version
-    def change_cup_requirement():
-        return True
-
-    # remove in future version
-    def change_skin_requirement():
-        return True
-
     change_generic_preferences_action = Action("Change Preferences", change_generic_preferences_requirement, "show_generic_preference_ui", menu_tooltip = "Change the chance of a certain body type / cup size / skin tone will be generated for a random person.")
 
 init 5 python:

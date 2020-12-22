@@ -17,10 +17,6 @@ init 5 python:
     ashley_sisterly_jealousy_feature = False     #   set to True if no longer WIP
     girlfriend_role_sleepover_feature = False    #   set to True if no longer WIP
 
-    # remove in future versions
-    def change_content_setting_requirement():
-        return True
-
     add_label_hijack("normal_start", "add_content_setting_option")
     add_label_hijack("after_load", "add_content_setting_option")
 

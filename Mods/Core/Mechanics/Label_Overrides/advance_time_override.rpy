@@ -26,10 +26,6 @@ init -1 python:
     def advance_time_random_morning_crisis_requirement():
         return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
-    # remove in future version (this is no longer in main loop, but in mc.business.run_turn())
-    def advance_time_daily_serum_dosage_requirement():
-        return False
-
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
 
