@@ -227,7 +227,7 @@ init -1 python:
                     self.event_triggers_dict["gym_pose"] = pose
                 return pose
 
-        if self.location() == bdsm_room:
+        if self.has_role(caged_role):
             pose = self.event_triggers_dict.get("bdsm_room_pose", None)
             if not pose: # store preferred position in bdsm room (prevent switching on hover)
                 pose = get_random_from_list(["cowgirl", "kneeling1", "blowjob"])
