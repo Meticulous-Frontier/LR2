@@ -31,13 +31,11 @@ init 15 python:
         make_floor()
     ]
     bdsm_room_objects = [
-        make_bdsmbed(),
         make_pillory(),
         make_woodhorse(),
         make_cage(),
         make_chair(),
-        make_floor(),
-        make_bed()
+        make_floor()
     ]
     ceo_office_objects = [
         make_chair(),
