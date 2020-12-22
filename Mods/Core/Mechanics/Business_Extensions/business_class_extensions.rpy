@@ -1,11 +1,14 @@
 init -1 python:
     def get_hr_director(self):
         if not hasattr(self, "_hr_director"):
-            self._hr_director = False
-        return self._hr_director
+            self._hr_director = None
+        return next((x for x in all_people_in_the_game() if x.identifier == self._hr_director), None)
 
-    def set_hr_director(self, value):
-        self._hr_director = value
+    def set_hr_director(self, item):
+        if isinstance(item, Person):
+            self._hr_director = item.identifier
+        else:
+            self._hr_director = None
 
     def del_hr_director(self):
         del self._hr_director

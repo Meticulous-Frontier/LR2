@@ -42,12 +42,6 @@ init -1 python:
     def advance_time_collar_person_requirement():
         return collar_slave_action.enabled
 
-    def advance_time_mandatory_vibe_action_requirement():
-        # Only run while employees are at work.
-        if mc.business.is_open_for_business():
-            return mandatory_vibe_policy.is_active()
-        return False
-
     def jump_game_loop():
         # make sure we empty the call stack before jumping to main loop
         while renpy.call_stack_depth() > 1:
@@ -113,13 +107,9 @@ init 5 python:
     advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
         "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
 
-    # Mandatory Vibe Company Action
-    advance_time_mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", advance_time_mandatory_vibe_action_requirement,
-        "advance_time_mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
-
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_mandatory_vibe_company_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action]
 
     if "slave_role" in globals():
         if advance_time_stay_wet_action not in advance_time_action_list:
@@ -263,11 +253,6 @@ init 5 python:
             person.obedience = 130
         return
 
-    def advance_time_mandatory_vibe():
-        if mc.business.is_open_for_business():
-            for person in [x for x in mc.business.get_employee_list() if x.arousal < 30]:
-                person.arousal = 30
-        return
 
 label advance_time_move_to_next_day(no_events = True):
     $ current_day = day
@@ -477,8 +462,4 @@ label advance_time_stay_wet_label():
 
 label advance_time_collar_person_label():
     $ advance_time_slave_collar(people_to_process)
-    return
-
-label advance_time_mandatory_vibe_company_label():
-    $ advance_time_mandatory_vibe()
     return

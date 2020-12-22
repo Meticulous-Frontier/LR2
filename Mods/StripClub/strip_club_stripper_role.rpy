@@ -171,9 +171,9 @@ label update_strip_club_show_requirement(stack):
 
         # make sure we store the stripclub performers
         if not "stripclub_bdsm_performers" in globals():
-            stripclub_bdsm_performers = []
+            stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
         if not "stripclub_waitresses" in globals():
-            stripclub_waitresses = []
+            stripclub_waitresses = MappedList(Person, all_people_in_the_game)
 
         execute_hijack_call(stack)
     return
