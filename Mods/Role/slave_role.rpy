@@ -76,7 +76,7 @@ init 10 python:
         return
 
     def slave_role_on_turn():
-        for person in [x for x in known_people_in_the_game() if x.has_role(slave_role)]
+        for person in [x for x in known_people_in_the_game() if x.has_role(slave_role)]:
             if person.stay_wet and person.arousal < 50:
                 person.arousal = 50
             if person.slave_collar and person.obedience < 150:
