@@ -6,36 +6,36 @@
 
 
 init 2 python:
-    def jealous_sister_on_turn(the_person):
+    def jealous_sister_on_turn(person):
         pass
         return
 
-    def jealous_sister_on_day(the_person): #Use this function to determine if she is going to act on jealous score.
+    def jealous_sister_on_day(person): #Use this function to determine if she is going to act on jealous score.
         pass
         return
 
-    def jealous_score(the_person):
-        return the_person.event_triggers_dict.get("jealous_score", 0)
+    def jealous_score(person):
+        return person.event_triggers_dict.get("jealous_score", 0)
 
-    def jealous_score_reset(the_person):
-        the_person.event_triggers_dict["jealous_score"] = 0
+    def jealous_score_reset(person):
+        person.event_triggers_dict["jealous_score"] = 0
         return
 
-    def jealous_change_score(the_person, the_score):
-        the_person.event_triggers_dict["jealous_score"] = the_person.event_triggers_dict["jealous_score"] + the_score
+    def jealous_change_score(person, the_score):
+        person.event_triggers_dict["jealous_score"] = person.event_triggers_dict.get("jealous_score", 0) + the_score
         return
 
 
 
     jealous_sister_role = Role("Jealous sister", [], hidden = True,  on_turn = jealous_sister_on_turn, on_move = None, on_day = jealous_sister_on_day)
 
-    def assign_jealous_sister_role(the_person):
-        the_person.event_triggers_dict["jealous_score"] = 0
-        the_person.add_role(jealous_sister_role)
+    def assign_jealous_sister_role(person):
+        person.event_triggers_dict["jealous_score"] = 0
+        person.add_role(jealous_sister_role)
         return
 
-    def is_jealous_sister(the_person):
-        if jealous_sister_role in the_person.special_role:
+    def is_jealous_sister(person):
+        if jealous_sister_role in person.special_role:
             return True
         return False
 
