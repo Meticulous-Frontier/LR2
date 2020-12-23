@@ -32,12 +32,6 @@ init -1 python:
     def advance_time_people_run_turn_requirement():
         return True
 
-    def advance_time_stay_wet_requirement():
-        return stay_wet_action.enabled
-
-    def advance_time_collar_person_requirement():
-        return collar_slave_action.enabled
-
     def jump_game_loop():
         # make sure we empty the call stack before jumping to main loop
         while renpy.call_stack_depth() > 1:
@@ -93,39 +87,13 @@ init 5 python:
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = 9, category = "Gameplay")
 
-    # Caged Role Advance Time Actions
-    advance_time_people_caged_action = ActionMod("Add obedience to caged people", advance_time_next_requirement,
-        "advance_time_people_caged_label", priority = 11, allow_disable = False, menu_tooltip = "Caged people have their obedience increased by 10 for each turn.")
-
-    advance_time_move_back_people_caged_action = ActionMod("Move back caged people to the BDSM room", advance_time_next_requirement,
-        "advance_time_move_back_people_caged_label", priority = 16, allow_disable = False, menu_tooltip = "Caged people should stay in the BDSM room.")
-
     # People run move Actions
     advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
         "advance_time_people_run_move_label", priority = 15, allow_disable = False)
 
-    # Slave Role Advance Time Actions
-    advance_time_stay_wet_action = ActionMod("Execute slave 'stay wet'", advance_time_stay_wet_requirement,
-        "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
-
-    advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
-        "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
-
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
         advance_time_people_run_move_action, advance_time_bankrupt_check_action]
-
-    if "slave_role" in globals():
-        if advance_time_stay_wet_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_stay_wet_action)
-        if advance_time_collar_person_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_collar_person_action)
-
-    if "caged_role" in globals():
-        if advance_time_people_caged_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_people_caged_action)
-        if advance_time_move_back_people_caged_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_move_back_people_caged_action)
 
     # sort list on execution priority
     advance_time_action_list.sort(key = lambda x: x.priority)
@@ -252,33 +220,6 @@ init 5 python:
                     elif crisis[2] == "on_enter" and not any([x for x in person.on_room_enter_event_list if isinstance(x, Limited_Time_Action)]):
                         person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
         return
-
-    def advance_time_slave_stay_wet(people):
-        for (person, place) in [x for x in people if x[0].stay_wet and x[0].arousal < 50]:
-            person.arousal = 50
-        return
-
-    def advance_time_slave_collar(people):
-        for (person,place) in [x for x in people if x[0].slave_collar and x[0].obedience < 130]:
-            person.obedience = 130
-        return
-
-    def advance_time_people_caged():
-        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
-            person.obedience += 10
-            if time_of_day == 0:
-                person.clear_situational_slut("being_caged")
-                person.clear_situational_obedience("being_caged")
-                person.remove_role(caged_role)
-                person.apply_planned_outfit()
-        return
-
-    def advance_time_move_back_people_caged():
-        if time_of_day != 0:
-            for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
-                person.location().move_person(person, bdsm_room)
-        return
-
 
 label advance_time_move_to_next_day(no_events = True):
     $ current_day = day
@@ -480,20 +421,4 @@ label advance_time_people_run_move_label():
     # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
     $ advance_time_run_move(people_to_process)
     $ advance_time_assign_limited_time_events(people_to_process)
-    return
-
-label advance_time_stay_wet_label():
-    $ advance_time_slave_stay_wet(people_to_process)
-    return
-
-label advance_time_collar_person_label():
-    $ advance_time_slave_collar(people_to_process)
-    return
-
-label advance_time_people_caged_label():
-    $ advance_time_people_caged()
-    return
-
-label advance_time_move_back_people_caged_label():
-    $ advance_time_move_back_people_caged()
     return

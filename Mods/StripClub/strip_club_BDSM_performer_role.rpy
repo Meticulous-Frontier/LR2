@@ -60,6 +60,21 @@ init 3305 python:
         strip_club_cage_her_action = Action("Cage her", strip_club_cage_her_requirements, "cage_her_label", menu_tooltip = "Put [the_person.title] in the cage.")
         mc.main_character_actions.append(strip_club_cage_her_action)
 
+    def strip_club_cage_role_on_turn():
+        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
+            person.obedience += 10
+
+    def strip_club_cage_role_on_move():
+        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
+            person.location().move_person(person, bdsm_room)
+
+    def strip_club_cage_role_on_day():
+        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
+            person.clear_situational_slut("being_caged")
+            person.clear_situational_obedience("being_caged")
+            person.remove_role(caged_role)
+            person.apply_planned_outfit()
+
     caged_strip_action = Action("Strip her", strip_club_caged_strip_requirements, "caged_strip_label", menu_tooltip = "Strip the caged [the_person.title].")
     caged_get_milked_action = Action("Milk her", strip_club_caged_actions_requirements, "caged_get_milked_label", menu_tooltip = "Milk the caged [the_person.title].")
     caged_BJ_action = Action("Get a BJ from her", strip_club_caged_actions_requirements, "caged_BJ_label", menu_tooltip = "Get a BJ from the caged [the_person.title].")
@@ -67,7 +82,8 @@ init 3305 python:
     caged_anal_doggy_action = Action("Fuck her anally", strip_club_caged_actions_requirements, "caged_anal_doggy_label", menu_tooltip = "Anal fuck the caged [the_person.title] Doggy style.")
     caged_release_action = Action("Release [the_person.title] from the cage", strip_club_caged_actions_requirements, "caged_release_label", menu_tooltip = "Release [the_person.title] from the cage.")
 
-    caged_role = Role("CAGED !", [caged_strip_action, caged_BJ_action, caged_doggy_action, caged_anal_doggy_action, caged_release_action], hidden = True)
+    caged_role = Role("CAGED !", [caged_strip_action, caged_BJ_action, caged_doggy_action, caged_anal_doggy_action, caged_release_action], \
+        on_turn = strip_club_cage_role_on_turn, on_move = strip_club_cage_role_on_move, on_day = strip_club_cage_role_on_day, hidden = True)
 
 init -1 python:
     def strip_club_bdsm_strip_description(the_person, the_item, the_group):
@@ -122,10 +138,10 @@ init -1 python:
         return
 
 label strip_club_end_of_day_label():
-    "Tired after you spent the night at the stripclub, you come back home."
-    $ mc.change_location(bedroom)
-    $ mc.location.show_background()
-    "It's time for you to go to sleep."
+    if time_of_day == 4:
+        "Tired after you spent the night at the club, you go back home, to have a good nights rest."
+        $ mc.change_location(bedroom)
+        $ mc.location.show_background()
     call advance_time from _call_advance_time_strip_club_end_of_day
     return
 
@@ -134,7 +150,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
     menu:
         "One dildo":
             $ the_person.event_triggers_dict["dildochair_dildos"] = 1
-        "Two dildos" if the_person.get_opinion_score("anal sex") >= 0:
+        "Two dildos" if the_person.get_opinion_score("anal sex") >= 2:
             $ the_person.event_triggers_dict["dildochair_dildos"] = 2
     mc.name "Ok, [the_person.title]... Get naked and come here!"
     the_person.char "Okay, whatever you want [the_person.mc_title]."
@@ -154,7 +170,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
             else:
                 the_person.char "I'm your slave [the_person.mc_title]: I'll do as you command."
             mc.name "Sit on this chair [the_person.title], I'm going to tie you."
-            if the_person.event_triggers_dict.get("dildochair_dildos") == 1 and the_person.get_opinion_score("anal sex") >= 0:
+            if the_person.event_triggers_dict.get("dildochair_dildos") == 1 and the_person.get_opinion_score("anal sex") >= 2:
                 the_person.char "Where should I put the dildo?"
                 menu:
                     "Vaginal fun":
@@ -229,7 +245,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                 "Speed 2\n{color=#ff0000}{size=18}Requires at least 10 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if the_person.energy < 10:
                     pass
                 "Speed 3 (tooltip)Strongly increase her arousal" if the_person.energy >= 10: # Each action use 10 energy and give 30 arousal and 3 obedience
-                    "A buzz can be heard in the room, [the_person.title] bite her lips moaning loudly."
+                    "A buzz can be heard in the room, [the_person.title] bites her lips moaning loudly."
                     python:
                         for count in __builtin__.range(1, 11):
                             renpy.say(the_person.char, "BZZz !!!... " + (renpy.random.choice(["Ahh!", "Yes!", "Fuck!", "Ohh!"]) if count%3 == 0 else ""), interact = False)
@@ -287,10 +303,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                     "Her eyes are full of love for her Master."
             $ the_person.clear_situational_slut("being_chaired")
             $ clear_scene()
-            if time_of_day == 4:
-                call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_1
-            else:
-                call advance_time from _call_advance_strip_club_bdsm_dildochair_MC_11
+            call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_1
             return
 
         "Punish her (tooltip)Prevent her to orgasm":
@@ -440,10 +453,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                     $ increase_bdsm_exhibitions(the_person)
                     "She still can't properly stand on her trembling, after-orgasm, legs."
                     $ clear_scene()
-                    if time_of_day == 4:
-                        call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_2
-                    else:
-                        call advance_time from _call_advance_strip_club_bdsm_dildochair_MC_21
+                    call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_2
                     return
                 "Release her" if the_person.energy < 10:
                     $ the_person.arousal == 0
@@ -456,10 +466,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                     $ increase_bdsm_exhibitions(the_person)
                     "Her eyes are full of love for her Master."
                     $ clear_scene()
-                    if time_of_day == 4:
-                        call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_3
-                    else:
-                        call advance_time from _call_advance_strip_club_bdsm_dildochair_MC_31
+                    call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_3
                     return
                 "Release her" if the_person.arousal >= 90:
                     $ the_person.arousal == 0
@@ -472,10 +479,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
                     $ increase_bdsm_exhibitions(the_person)
                     the_person.char "I promise I'll do my best to please my Master!"
     $ clear_scene()
-    if time_of_day == 4:
-        call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_4
-    else:
-        call advance_time from _call_advance_strip_club_bdsm_dildochair_MC_41
+    call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_MC_4
     return
 
 label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use the dildo chair with her
@@ -678,10 +682,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
                     "Her eyes are full of love for her Master."
             $ the_person.clear_situational_slut("being_chaired")
             $ clear_scene()
-            if time_of_day == 4:
-                call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_1
-            else:
-                call advance_time from _call_advance_strip_club_bdsm_dildochair_Mistress_11
+            call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_1
             return
 
         "Punish her (tooltip)Prevent her to orgasm":
@@ -851,10 +852,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
                     $ mistress.change_stats(obedience = 3, slut_temp = 5, slut_core = 2)
                     $ increase_bdsm_exhibitions(the_person)
                     $ clear_scene()
-                    if time_of_day == 4:
-                        call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_2
-                    else:
-                        call advance_time from _call_advance_strip_club_bdsm_dildochair_Mistress_21
+                    call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_2
                     return
                 "Release her" if the_person.energy < 10:
                     $ the_person.arousal == 0
@@ -872,18 +870,15 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
                     $ the_person.change_stats(obedience = 10, slut_temp = 5, slut_core = 1)
                     $ mistress.change_stats(obedience = 1, slut_temp = 5, slut_core = 1)
                     $ increase_bdsm_exhibitions(the_person)
-                    "She's now very displeased of not have satisfied her Master."
+                    "She's very disappointed, not having satisfied her Master."
                     $ clear_scene()
-                    if time_of_day == 4:
-                        call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_3
-                    else:
-                        call advance_time from _call_advance_strip_club_bdsm_dildochair_Mistress_31
+                    call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_3
                     return
                 "Release her" if the_person.arousal >= 90:
                     $ the_person.arousal == 0
-                    "While you stop the chair she beg you."
+                    "While you stop the chair she begs you."
                     the_person.char "Please [the_person.mc_title]... Master! Yes, Master... Please, let me cum at least one time!"
-                    mc.name "[mistress.title], untie [the_person.title]... I think she got enough fun."
+                    mc.name "[mistress.title], untie [the_person.title]... I think she had enough fun."
                     $ the_group.set_primary(mistress)
                     $ the_group.draw_person(mistress, position = "standing_doggy", emotion = "happy")
                     mistress.char "Sure thing, Master !"
@@ -897,14 +892,11 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
                     $ increase_bdsm_exhibitions(the_person)
                     the_person.char "I promise I'll do my best to please my Master!"
     $ clear_scene()
-    if time_of_day == 4:
-        call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_4
-    else:
-        call advance_time from _call_advance_strip_club_bdsm_dildochair_Mistress_41
+    call strip_club_end_of_day_label from _call_advance_strip_club_bdsm_dildochair_Mistress_4
     return
 
 label cage_her_label(the_person):
-    mc.name "I think a few time in the cage will improve your attitude."
+    mc.name "I think a some time in the cage will improve your attitude."
     if the_person.obedience < 100:
         $ the_person.draw_person(position = "stand3", emotion = "angry")
         the_person.char "What? Are you crazy?"
@@ -918,13 +910,13 @@ label cage_her_label(the_person):
             $ the_person.draw_person(position = "stand3", emotion = "sad")
             the_person.char "It's so degrading... Do you promise me it'll be worth it?"
             mc.name "Have you ever been disappointed by your master?"
-            "She look deeply in your eyes, you can see her deepest dirty fantasies invade her mind."
+            "She looks deeply in your eyes, you can see her deepest dirty fantasies invade her mind."
             "Then, without a word, she kneels and enter the cage."
     elif the_person.obedience < 200:
         $ the_person.draw_person(position = "stand3", emotion = "default")
         the_person.char "Are you sure it's really necessary?"
-        mc.name "That's what I want from you right now: do you want to disappoint your master?"
-        "She know there's no return from this: if she accepts this she will forever be in your power."
+        mc.name "That's what I want from you right now, do you want to disappoint your master?"
+        "She know there's no return from this; if she accepts this she will forever be in your power."
         "Then, without a word, she kneels and enter the cage."
     else:
         $ the_person.draw_person(position = "stand3", emotion = "happy")
@@ -941,11 +933,8 @@ label cage_her_label(the_person):
     else:
         $ the_person.draw_person(position = "cowgirl")
         $ the_person.event_triggers_dict["bdsm_room_pose"] = "cowgirl"
-    $ the_person.event_triggers_dict["caged_actions"] = 0
-    if advance_time_people_caged_action not in advance_time_action_list:
-        $ advance_time_action_list.append(advance_time_people_caged_action)
-    if advance_time_move_back_people_caged_action not in advance_time_action_list:
-        $ advance_time_action_list.append(advance_time_move_back_people_caged_action)
+    if not "caged_actions" in the_person.event_triggers_dict:
+        $ the_person.event_triggers_dict["caged_actions"] = 0
     if the_person.follow_mc:
         $ the_person.follow_mc = False
     if mc.location.get_person_count() > 1: # There's other people around
@@ -960,14 +949,14 @@ label caged_strip_label(the_person):
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")
     $ naked_strip_description(the_person)
     the_person.char "Is my master pleased?"
-    $ the_person.event_triggers_dict["caged_actions"] = the_person.event_triggers_dict.get("caged_actions") + 1
+    $ the_person.event_triggers_dict["caged_actions"] += 1
     return
 
 label caged_get_milked_label(the_person):
     if mc.location.get_person_count() > 1: # There's other people around
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")
     # TODO
-    $ the_person.event_triggers_dict["caged_actions"] = the_person.event_triggers_dict.get("caged_actions") + 1
+    $ the_person.event_triggers_dict["caged_actions"] += 1
     return
 
 label caged_BJ_label(the_person):
@@ -991,11 +980,11 @@ label caged_BJ_label(the_person):
             mc.name "My dear slave... Open your mouth, would you?"
     call fuck_person(the_person, private = False, start_position = blowjob, start_object = bdsm_room.get_object_with_name("Cage"), skip_intro = True, girl_in_charge = False, position_locked = True, ignore_taboo = True, affair_ask_after = False) from _call_caged_BJ
     $ the_person.clear_situational_slut("being_used_in_the_cage")
-    $ the_person.event_triggers_dict["caged_actions"] = the_person.event_triggers_dict.get("caged_actions") + 1
+    $ the_person.event_triggers_dict["caged_actions"] += 1
     return
 
 label caged_doggy_label(the_person):
-    "The sight of [the_person.title] being so willpowerless intrigue you."
+    "The sight of [the_person.title] being so powerless intrigues you."
     "With your hand between the bars you start to caress [the_person.title]'s buttocks."
     if mc.location.get_person_count() > 1: # There's other people around
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")
@@ -1016,7 +1005,7 @@ label caged_doggy_label(the_person):
             mc.name "My dear slave... Push your ass closer, would you?"
     call fuck_person(the_person, private = False, start_position = doggy, start_object = bdsm_room.get_object_with_name("Cage"), skip_intro = True, girl_in_charge = False, position_locked = True, ignore_taboo = True, affair_ask_after = False) from _call_caged_doggy
     $ the_person.clear_situational_slut("being_used_in_the_cage")
-    $ the_person.event_triggers_dict["caged_actions"] = the_person.event_triggers_dict.get("caged_actions") + 1
+    $ the_person.event_triggers_dict["caged_actions"] += 1
     return
 
 label caged_anal_doggy_label(the_person):
@@ -1036,12 +1025,12 @@ label caged_anal_doggy_label(the_person):
         if the_person.obedience >= 150:
             the_person.char "If it's the only way to please my master..."
         else:
-            the_person.char "Don't you think it's degrading enough for me to being inside... 'this'?"
-            "Disappointed by her behaviour, you finger her asshole and [the_person.title] moans loudly: she can't deny anymore what her body disperately want."
+            the_person.char "Don't you think it's degrading enough for me, being inside... 'this'?"
+            "Disappointed by her behaviour, you finger her asshole and [the_person.title] moans loudly, she can't deny anymore what her body disparately wants."
             mc.name "My dear slave... Spread your cheeks, would you?"
     call fuck_person(the_person, private = False, start_position = doggy_anal, start_object = bdsm_room.get_object_with_name("Cage"), skip_intro = True, girl_in_charge = False, position_locked = True, ignore_taboo = True, affair_ask_after = False) from _call_caged_doggy_anal
     $ the_person.clear_situational_slut("being_used_in_the_cage")
-    $ the_person.event_triggers_dict["caged_actions"] = the_person.event_triggers_dict.get("caged_actions") + 1
+    $ the_person.event_triggers_dict["caged_actions"] += 1
     return
 
 label caged_release_label(the_person):
