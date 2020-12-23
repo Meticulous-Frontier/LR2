@@ -206,12 +206,12 @@ label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Everything feels so tight, I want to take it all off... Please can I?"
     "[the_girl.possessive_title] grabs onto her [the_clothing.name], waiting for you to tell her what to do."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off.."
             $ the_girl.draw_animated_removal(the_clothing, position = spanking.position_tag)
             "[the_girl.possessive_title] takes off her [the_clothing.name] and drops it to the side while you grope her ass."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"

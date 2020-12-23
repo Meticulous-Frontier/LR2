@@ -151,7 +151,7 @@ label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object
     "[the_girl.title] pops off your cock and looks up at you from her knees."
     the_girl.char "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = Ophelia_blowjob.position_tag)
             "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back onto her knees and slides your cock all the way to the back of her mouth."
@@ -159,7 +159,7 @@ label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object
             $ Ophelia_blowjob.redraw_scene(the_girl)
 
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 60:
                 the_girl.char "Yeah? Do I look sexy in it?"
@@ -177,7 +177,7 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
     $ Ophelia_blowjob.redraw_scene(the_girl)
     "[the_girl.title] pauses suddenly. You hear her whimper softly - the noise party muffled by your cock."
     menu:
-        "Be rough as she cums.":
+        "Be rough as she cums":
             "[the_girl.possessive_title] starts to pull back off of your cock. You place a firm hand on the back of her head."
             mc.name "Did I tell you to stop sucking, you dirty little slut?"
             if the_girl.sex_skills["Oral"] > 2:
@@ -214,7 +214,7 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
                 $ the_girl.change_happiness(2)
                 the_girl.char "Damn, that was crazy! I couldn't breath!"
 
-        "Be gentle as she cums.":
+        "Be gentle as she cums":
             $ Ophelia_blowjob.current_modifier = None
             $ Ophelia_blowjob.redraw_scene(the_girl)
             mc.name "That's it, cum for me [the_girl.title]."
