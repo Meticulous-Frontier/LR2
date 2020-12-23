@@ -409,6 +409,7 @@ label HR_director_initial_hire_label(the_person):
 
 label HR_director_first_monday_label(the_person):
     if not mc.business.hr_director:
+        "Since you have no HR director, there are no Monday morning meetings, appoint a new HR director, to resume meetings."
         return
 
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
@@ -466,6 +467,7 @@ label HR_director_first_monday_label(the_person):
 
 label HR_director_monday_meeting_label(the_person):
     if not mc.business.hr_director:
+        "Since you have no HR director, there are no Monday morning meetings, appoint a new HR director, to resume meetings."
         return
 
     $ scene_manager = Scene()
@@ -542,7 +544,8 @@ label HR_director_monday_meeting_label(the_person):
                     $ set_HR_director_tag("business_HR_meeting_last_day", day)
                 $ scene_manager.update_actor(the_person, position = "sitting")
             "Let's not this week":
-                $ del HR_employee_list
+                pass
+    $ del HR_employee_list
 
     the_person.char "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
