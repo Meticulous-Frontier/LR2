@@ -14,7 +14,8 @@ init 2 python:
 
     def ophelia_gets_dumped_requirement(person):
         if day >= ophelia_get_day_met() + 4:
-            return True
+            if person.location() == mall_salon:
+                return True
         return False
 
     def ophelia_coworker_conversation_overhear_requirement(person):
