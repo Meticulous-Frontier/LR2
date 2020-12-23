@@ -60,20 +60,18 @@ init 3305 python:
         strip_club_cage_her_action = Action("Cage her", strip_club_cage_her_requirements, "cage_her_label", menu_tooltip = "Put [the_person.title] in the cage.")
         mc.main_character_actions.append(strip_club_cage_her_action)
 
-    def strip_club_cage_role_on_turn():
-        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
+    def strip_club_cage_role_on_turn(person):
+        if person.obedience < 200:
             person.obedience += 10
 
-    def strip_club_cage_role_on_move():
-        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
-            person.location().move_person(person, bdsm_room)
+    def strip_club_cage_role_on_move(person):
+        person.location().move_person(person, bdsm_room)
 
-    def strip_club_cage_role_on_day():
-        for person in [x for x in known_people_in_the_game([mc]) if x.has_role(caged_role)]:
-            person.clear_situational_slut("being_caged")
-            person.clear_situational_obedience("being_caged")
-            person.remove_role(caged_role)
-            person.apply_planned_outfit()
+    def strip_club_cage_role_on_day(person):
+        person.clear_situational_slut("being_caged")
+        person.clear_situational_obedience("being_caged")
+        person.remove_role(caged_role)
+        person.apply_planned_outfit()
 
     caged_strip_action = Action("Strip her", strip_club_caged_strip_requirements, "caged_strip_label", menu_tooltip = "Strip the caged [the_person.title].")
     caged_get_milked_action = Action("Milk her", strip_club_caged_actions_requirements, "caged_get_milked_label", menu_tooltip = "Milk the caged [the_person.title].")
