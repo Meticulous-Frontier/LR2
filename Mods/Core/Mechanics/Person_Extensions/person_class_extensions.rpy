@@ -1788,7 +1788,7 @@ init -1 python:
         else:
             preg_chance = self.fertility_percent
 
-        if the_person.event_triggers_dict.get("birth_control_status", None) is None:
+        if self.event_triggers_dict.get("birth_control_status", None) is None:
             preg_chance *= .5   # coin toss
         elif not self.on_birth_control:
             preg_chance *= .9
