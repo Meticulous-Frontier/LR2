@@ -159,16 +159,8 @@ init -1 python:
 
     def get_person_identifier(self):
         if not hasattr(self, "_identifier"):
-            self._identifier = hashlib.md5(self.name + self.last_name + str(renpy.random.randint(10000, 90000000))).hexdigest()
+            self._identifier = hashlib.md5(self.name + self.last_name + str(self.age)).hexdigest()
         return self._identifier
-
-    # don't allow set
-    # def set_person_identifier(self, value):
-    #     self._identifier = value
-
-    # don't allow delete
-    # def del_person_identifier(self):
-    #     del self._identifier
 
     # add follow_mc attribute to person class (without sub-classing)
     Person.identifier = property(get_person_identifier, None, None, "Unique identifier for person class.")
