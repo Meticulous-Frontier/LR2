@@ -10,6 +10,26 @@ init 5 python:
             stripper.location().move_person(stripper, strip_club)
         return
 
+    # for testing purposes, convert strip club to player owned.
+    def test_strip_club():
+        mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
+        mc.business.event_triggers_dict["foreclosed_day"] = day
+        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formalName
+        strip_club.name = "Starlight Club"
+        strip_club.formalName = "Starlight Club"
+        set_strip_club_foreclosed_stage(5)
+        add_strip_club_hire_employee_action_to_mc_actions()
+        for stripper in stripclub_strippers:
+            stripper.set_title(get_random_from_list(get_titles(stripper)))
+            stripper.set_mc_title("Boss")
+            stripper.set_possessive_title("The stripper")
+
+            stripper.event_triggers_dict["strip_club_shifts"] = 2
+            stripper.set_schedule(strip_club, times = [3, 4])
+            stripper.change_stats(happiness = 10, obedience = 5, love = 5)
+            stripper.add_role(stripper_role)
+        return
+
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
     python:
         cousin.set_alt_schedule(None, times = [3])  # reset alternative schedule
