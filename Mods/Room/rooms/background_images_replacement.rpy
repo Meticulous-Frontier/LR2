@@ -19,6 +19,9 @@ init 5 python:
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
 
+    infraction_token_small_image = im.Scale(Image(get_file_handle("infraction_token.png")), 18, 18)
+    renpy.image("infraction_token_small", infraction_token_small_image)
+
     vial_image = Image(get_file_handle("vial.png"))
     question_image = Image(get_file_handle("question.png"))
 
