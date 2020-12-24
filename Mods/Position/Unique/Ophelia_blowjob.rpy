@@ -195,12 +195,12 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
                 if the_girl.outfit.vagina_visible():
                     "You can see that [the_girl.title]'s pussy is dripping wet as she cums."
                 else:
-                    $ top_piece = the_girl.outfit.get_lower_top_layer()
-                    if top_piece.underwear:
-                        "[the_girl.possessive_title]'s dripping wet pussy has managed to soak through her underwear, leaving a wet mark on her [top_piece.name]."
+                    $ the_item = the_girl.outfit.get_lower_top_layer()
+                    if the_item.underwear:
+                        "[the_girl.possessive_title]'s dripping wet pussy has managed to soak through her underwear, leaving a wet mark on her [the_item.name]."
                     else:
                         "[the_girl.possessive_title] clenches her thighs together and rides out her orgasm."
-                    $ top_piece = None
+                    $ the_item = None
                 $ Ophelia_blowjob.current_modifier = None
                 $ Ophelia_blowjob.redraw_scene(the_girl)
                 "When she's stopped twitching and moaning you let [the_girl.title] slide back. She pants loudly, then licks along the length of your cock."
