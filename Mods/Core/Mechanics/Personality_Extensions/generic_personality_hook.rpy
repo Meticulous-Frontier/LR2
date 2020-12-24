@@ -315,14 +315,14 @@ init -1 python:
                 if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
                     add_party_destination_by_room(bdsm_room)
         else:
-            party_destinations.append(strip_club)
+            add_party_destination_by_room(strip_club)
 
         return party_destinations
 
 
     def create_party_schedule(person):
         person.set_alt_schedule(None, times = [4])
-        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) or person in stripclub_strippers:
+        if person.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
 
         count = 0
