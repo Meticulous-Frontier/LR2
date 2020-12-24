@@ -21,7 +21,7 @@ init 5 python:
         person.add_role(role)
 
         work_location = strip_club
-        if role is bdsm_performer_role:
+        if person.has_role(bdsm_performer_role):
             work_location = bdsm_room
 
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
@@ -47,15 +47,13 @@ init 5 python:
         return
 
     def strip_club_fire_stripper(person):
-        role = None
         if person.has_role(stripper_role):
-            role = stripper_role
-        elif person.has_role(bdsm_performer_role):
-            role = bdsm_performer_role
-        else:
-            role = waitress_role
+            person.remove_role(stripper_role)
+        if person.has_role(bdsm_performer_role):
+            person.remove_role(bdsm_performer_role)
+        if person.has_role(waitress_role):
+            person.remove_role(waitress_role)
 
-        person.remove_role(role)
         # restore default schedules
         if person.is_employee():
             person.set_schedule(person.home, times = [4])
