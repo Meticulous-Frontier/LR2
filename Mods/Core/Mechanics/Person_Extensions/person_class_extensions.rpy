@@ -1048,7 +1048,7 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, energy = None, add_to_log = True):
         if not obedience is None:
             self.change_obedience(obedience, add_to_log)
         if not happiness is None:
@@ -1061,6 +1061,8 @@ init -1 python:
             self.change_slut_temp(slut_temp, add_to_log)
         if not slut_core is None:
             self.change_slut_core(slut_core, add_to_log)
+        if not energy is None:
+            self.change_energy(energy, add_to_log)
         return
 
     Person.change_stats = change_stats
@@ -2043,8 +2045,8 @@ init -1 python:
 
     Person.attempt_opinion_training = attempt_opinion_training
 
-    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, report_log = None):
-        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
+    def have_orgasm(self, position = None, the_object = None, half_arousal = True, report_log = None):
+        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = position, the_object = the_object)
 
         self.change_slut_temp(5)
         self.change_happiness(5)
