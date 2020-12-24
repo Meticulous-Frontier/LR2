@@ -1795,7 +1795,7 @@ init -1 python:
         else:
             preg_chance *= (.1 + (self.bc_penalty / 10))
 
-        # mc.log_event("Pregnancy chance: " + the_person.name + ": " + str(preg_chance), "float_text_grey")
+        # mc.log_event("Pregnancy chance: " + self.name + ": " + str(preg_chance), "float_text_grey")
 
         if preg_chance < 3:
             return "Very Safe"
@@ -2049,9 +2049,9 @@ init -1 python:
         self.change_slut_temp(5)
         self.change_happiness(5)
         if half_arousal:
-            self.change_arousal(-the_person.arousal/2)
+            self.change_arousal(-self.arousal/2)
         else:
-            self.change_arousal(-the_person.arousal)
+            self.change_arousal(-self.arousal)
         if report_log != None:
             report_log["girl orgasms"] += 1
 
