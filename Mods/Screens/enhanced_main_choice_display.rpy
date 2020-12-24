@@ -106,8 +106,8 @@ init 2 python:
                 mi.is_sensitive = False
 
             if mi.display:
-                if the_person and isinstance(the_person.title, basestring) and isinstance(mi.the_tooltip, basestring):
-                    mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", the_person.title)
+                if isinstance(item,Person) and isinstance(item.title, basestring) and isinstance(mi.the_tooltip, basestring):
+                    mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", item.title)
                 result.append(mi)
         return result
 
