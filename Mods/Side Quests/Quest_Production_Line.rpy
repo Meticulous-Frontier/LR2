@@ -66,7 +66,7 @@ init 1 python:
         quest.quest_event_dict["starting_pay"]  = person.salary
         quest.quest_event_dict["moving_day"] = 9999
         quest.set_quest_flag(1)
-        quest().add_unique_on_room_enter_event(quest_production_line_intro)
+        person.add_unique_on_room_enter_event(quest_production_line_intro)
         game_hints.append(Hint("Chemist's Baby Girl", "Check production for a disturbance.", "quest_production_line().get_quest_flag() <= 1", "quest_production_line().get_quest_flag() > 1"))
         game_hints.append(Hint("Chemist's Baby Girl", "Don't forget to meet the Chemist at the Mall in the afternoon.", "quest_production_line().get_quest_flag() == 11", "quest_production_line().get_quest_flag() != 11"))
         hint_string = "Give " + person.title + " a raise with a positive performance review."
