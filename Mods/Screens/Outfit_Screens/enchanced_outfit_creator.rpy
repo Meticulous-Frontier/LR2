@@ -938,7 +938,7 @@ init 2:
                                                     background "#000080"
                                                     xsize 250
                                                     padding [1,1]
-                                                    text "Sluttiness (Full Outfit): " + str(demo_outfit.slut_requirement) style "serum_text_style_traits"
+                                                    text "Sluttiness (Full Outfit): " + str(demo_outfit.get_full_outfit_slut_score()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
                                                     xsize 250

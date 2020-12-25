@@ -128,7 +128,7 @@ init -1 python:
 
         new_score += self.get_total_slut_modifiers()
 
-        return new_score
+        return new_score if new_score > 0 else 0
 
     Outfit.get_overwear_slut_score = get_overwear_slut_score_enhanced
 
@@ -205,8 +205,7 @@ init 6 python:
             if WardrobeBuilder.clothing_in_preferences("skimpy outfits", cloth):
                 new_score += 1
             if WardrobeBuilder.clothing_in_preferences("conservative outfits", cloth):
-                log_message("Decrease sluttiness by 5: " + cloth.name)
-                new_score -= 5
+                new_score -= 3
             if WardrobeBuilder.clothing_in_preferences("showing her tits", cloth):
                 new_score += 2
             if WardrobeBuilder.clothing_in_preferences("showing her ass", cloth):
