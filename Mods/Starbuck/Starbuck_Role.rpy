@@ -2181,7 +2181,7 @@ label starbuck_candace_recurring_event_label(the_person_one):
         the_person_two "There was no telling if it would even be effective or not. It was truly groundbreaking [the_person_one.name]."
         the_person_one "I know! I know... I just... I mean that could have gone wrong too, right?"
         the_person_two "I didn't realize it at the time, but in hindsight, I agree that it was worth the risk. I'm very fortunate [the_person_two.mc_title] made the decisions he did!"
-        "You see her expession soften."
+        "You see her expression soften."
         $ scene_manager.update_actor(the_person_one, position = "stand2", emotion = "happy")
         the_person_one "I'm sorry I didn't mean to downplay this. It really is incredible."
         the_person_one "Thank you partner. Its amazing what you have done for her. I'll never forget it!"
@@ -2417,7 +2417,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 "Thinking about the pleasure they are getting is starting to arouse you."
                 $ mc.change_arousal(3)
                 if renpy.random.randint(0,2) == 0 and not cock_available:
-                    "The excitment is getting to be too much. You decide to get more comfortable. You quickly disrobe."
+                    "The excitement is getting to be too much. You decide to get more comfortable. You quickly disrobe."
                     "[the_person_one.title] gasps when your cock springs free. [the_person_two.title] is starting at it, hungrily."
                     mc.name "It's time to take things up a notch."
             else:
@@ -2427,7 +2427,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 "The distinct smell of feminine arousal in the air, mixed with punctuations of moans and gasps is really starting to turn you on."
                 $ mc.change_arousal(3)
                 if not cock_available:
-                    "The excitment is getting to be too much. You decide to get more comfortable. You quickly disrobe."
+                    "The excitement is getting to be too much. You decide to get more comfortable. You quickly disrobe."
                     "[the_person_one.title] gasps when your cock springs free. [the_person_two.title] is starting at it, hungrily."
                     mc.name "It's time to take things up a notch."
             if renpy.random.randint(0,1) == 0:
@@ -2588,7 +2588,7 @@ label starbuck_intro():
         else:
             the_person.char "Is there anything I can help you with?"
     elif (the_person.shop_progress_stage) >= 2 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
-        if candace.sluttiness > 60: #Seperate candace slut check since I never check to make sure she exists in globals
+        if candace.sluttiness > 60: #Separate candace slut check since I never check to make sure she exists in globals
             call starbuck_cargo_shipment_label(the_person) from _begin_candi_duo_event_intro_01
         else:
             "[the_person.possessive_title] smiles playfully."
