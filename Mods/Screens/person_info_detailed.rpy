@@ -245,7 +245,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                                 xsize 315
                                 background None
                                 vbox:
-                                    for relationship in town_relationships.get_relationship_type_list(the_person, visible = True):
+                                    for relationship in sorted(town_relationships.get_relationship_type_list(the_person, visible = True), key = lambda x: x[0].name):
                                         text "   " + relationship[0].name + " " + relationship[0].last_name + " [[" + relationship[1] + "]" size 14 style "menu_text_style"
 
             hbox:
