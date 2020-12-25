@@ -258,9 +258,6 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         c = None
         people_to_process = []
         person = None
-        # save game
-        if time_of_day == 0:
-            renpy.force_autosave(take_screenshot = True, block = False)
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
