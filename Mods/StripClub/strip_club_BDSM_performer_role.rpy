@@ -47,13 +47,32 @@ init 10 python:
         return False
 
     def strip_club_caged_strip_requirements(the_person):
-        if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible() and the_person.outfit.tits_available() and the_person.outfit.vagina_available():
-            return False
-        return True
-
-    def strip_club_caged_actions_requirements(the_person):
         if the_person.has_role(caged_role):
+            if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+                return False
             return True
+        return False
+
+    def strip_club_caged_actions_milk_her_requirements(the_person):
+        if the_person.has_role(caged_role):
+            if the_person.outfit.tits_available():
+                return True
+            else:
+                return "Obstructed by Clothing"
+        return False
+
+    def strip_club_caged_actions_blowjob_requirements(the_person):
+        return the_person.has_role(caged_role)
+
+    def strip_club_caged_actions_release_requirements(the_person):
+        return the_person.has_role(caged_role)
+
+    def strip_club_caged_actions_sex_requirements(the_person):
+        if the_person.has_role(caged_role):
+            if the_person.vagina_available():
+                return True
+            else:
+                return "Obstructed by Clothing"
         return False
 
     def add_strip_club_cage_her_action_to_mc_actions():
@@ -74,11 +93,11 @@ init 10 python:
         person.apply_planned_outfit()
 
     caged_strip_action = Action("Strip her", strip_club_caged_strip_requirements, "caged_strip_label", menu_tooltip = "Strip the caged girl.")
-    caged_get_milked_action = Action("Milk her", strip_club_caged_actions_requirements, "caged_get_milked_label", menu_tooltip = "Milk the caged girl.")
-    caged_BJ_action = Action("Get a BJ from her", strip_club_caged_actions_requirements, "caged_BJ_label", menu_tooltip = "Get a BJ from the caged girl.")
-    caged_doggy_action = Action("Fuck her Doggy style", strip_club_caged_actions_requirements, "caged_doggy_label", menu_tooltip = "Fuck the caged girl Doggy style.")
-    caged_anal_doggy_action = Action("Fuck her anally", strip_club_caged_actions_requirements, "caged_anal_doggy_label", menu_tooltip = "Anal fuck the caged girl Doggy style.")
-    caged_release_action = Action("Release her from the cage", strip_club_caged_actions_requirements, "caged_release_label", menu_tooltip = "Release girl from the cage.")
+    caged_get_milked_action = Action("Milk her", strip_club_caged_actions_milk_her_requirements, "caged_get_milked_label", menu_tooltip = "Milk the caged girl.")
+    caged_BJ_action = Action("Get a BJ from her", strip_club_caged_actions_blowjob_requirements, "caged_BJ_label", menu_tooltip = "Get a BJ from the caged girl.")
+    caged_doggy_action = Action("Fuck her Doggy style", strip_club_caged_actions_sex_requirements, "caged_doggy_label", menu_tooltip = "Fuck the caged girl Doggy style.")
+    caged_anal_doggy_action = Action("Fuck her anally", strip_club_caged_actions_sex_requirements, "caged_anal_doggy_label", menu_tooltip = "Anal fuck the caged girl Doggy style.")
+    caged_release_action = Action("Release her from the cage", strip_club_caged_actions_release_requirements, "caged_release_label", menu_tooltip = "Release girl from the cage.")
 
     caged_role = Role("CAGED !", [caged_strip_action, caged_BJ_action, caged_doggy_action, caged_anal_doggy_action, caged_release_action], \
         on_turn = strip_club_cage_role_on_turn, on_move = strip_club_cage_role_on_move, on_day = strip_club_cage_role_on_day, hidden = True)
