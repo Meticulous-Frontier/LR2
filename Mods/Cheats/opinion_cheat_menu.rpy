@@ -52,7 +52,10 @@ screen opinion_edit_menu_keybind():
 screen opinion_edit_menu():
 
     default categories = {"Sexy Opinion": [sexy_opinions_list, "sexy_opinions"], "Normal Opinions": [opinions_list, "opinions"]}
-    default target = the_person
+    if "the_person" in globals():
+        default target = the_person
+    else:
+        default target = None
 
     if target is not None:
         grid __builtin__.len(categories) 1:
@@ -111,4 +114,10 @@ screen opinion_edit_menu():
                                             action [
                                                 Function(target.remove_opinion, x, categories[n][1])
                                             ]
-
+    else:
+            frame:
+                background "gui/button/main_choice_idle_background.png"
+                anchor [0.5,0.5]
+                align [0.5,0.55]
+                xysize [600,120]
+                textbutton "Interact with girl first" align [0.5,0.5] text_style "serum_text_style_header"
