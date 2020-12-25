@@ -83,8 +83,12 @@ screen cheat_menu():
     # Input management variables
     default name_select = False #Determines if the name button is currently taking an input or not
 
-    default editable_characters = [mc, the_person, mc.business] # Add unique characters to this list if you want to customize them often
-    default editing_target = the_person # default open the_person cheat menu
+    if "the_person" in globals():
+        default editable_characters = [mc, the_person, mc.business] # Add unique characters to this list if you want to customize them often
+        default editing_target = the_person # default open the_person cheat menu
+    else:
+        default editable_characters = [mc, mc.business] # Add unique characters to this list if you want to customize them often
+        default editing_target = mc.business
 
     # Lists for common skill attributes.
     # The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed], [3 = sort order]
@@ -800,15 +804,16 @@ screen cheat_menu():
                                                     Function(cheat_appearance)
                                                 ]
 
-                        if font_color_options:
+                        if font_color_options and hasattr(editing_target, "name"):
                             viewport:
                                 mousewheel True
                                 scrollbars "vertical"
                                 xsize 500
 
                                 vbox:
+                                    $ name = getattr(editing_target, "name")
                                     for c in readable_color_list:
-                                        textbutton "{color=[c]}[the_person.name]{/color}":
+                                        textbutton "{color=[c]}" + name + "{/color}":
                                             xfill True
                                             style "textbutton_no_padding_highlight"
                                             text_style "cheat_text_style"
