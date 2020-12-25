@@ -36,7 +36,7 @@ init 1 python:
         quest.quest_event_dict["research_day"] = 9999
         quest.quest_event_dict["timeout_day"] = 9999
         quest.set_quest_flag(1)
-        quest().add_unique_on_room_enter_event(quest_essential_oils_intro)
+        contact.add_unique_on_room_enter_event(quest_essential_oils_intro)
         game_hints.append(Hint("Essential Oils", "There is a strange smell around the office.", "quest_essential_oils().get_quest_flag() <= 1", "quest_essential_oils().get_quest_flag() > 1"))
         game_hints.append(Hint("Essential Oils Research", "Talk to your head researcher about essential oils.", "quest_essential_oils().get_quest_flag() == 11", "quest_essential_oils().get_quest_flag() != 11"))
         game_hints.append(Hint("Essential Oils Research Checkup", "Check up on your head researcher.", "quest_essential_oils().get_quest_flag() == 21 and day > quest_essential_oils().quest_event_dict.get('research_day', 0)", "quest_essential_oils().get_quest_flag() != 21"))
