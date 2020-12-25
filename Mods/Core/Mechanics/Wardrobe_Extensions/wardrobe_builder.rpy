@@ -206,7 +206,12 @@ init 5 python:
         }
         #color_prefs[""][""] = [, , , ]
 
-
+        @staticmethod
+        def clothing_in_preferences(topic, clothing):
+            for layer in WardrobeBuilder.preferences[topic].keys():
+                if clothing in WardrobeBuilder.preferences[topic][layer]:
+                    return True
+            return False
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
         neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]]

@@ -199,30 +199,25 @@ init 6 python:
 
 
     def get_total_slut_modifiers_enhanced(self):
-        def clothing_in_preferences(topic, clothing):
-            for layer in WardrobeBuilder.preferences[topic].keys():
-                if clothing in WardrobeBuilder.preferences[topic][layer]:
-                    return True
-            return False
-
         new_score = 0
         for cloth in self.accessories + self.upper_body + self.lower_body + self.feet:
             new_score += cloth.slut_value
-            if clothing_in_preferences("skimpy outfits", cloth):
+            if WardrobeBuilder.clothing_in_preferences("skimpy outfits", cloth):
                 new_score += 1
-            if clothing_in_preferences("conservative outfits", cloth):
-                new_score -= 3
-            if clothing_in_preferences("showing her tits", cloth):
+            if WardrobeBuilder.clothing_in_preferences("conservative outfits", cloth):
+                log_message("Decrease sluttiness by 5: " + cloth.name)
+                new_score -= 5
+            if WardrobeBuilder.clothing_in_preferences("showing her tits", cloth):
                 new_score += 2
-            if clothing_in_preferences("showing her ass", cloth):
+            if WardrobeBuilder.clothing_in_preferences("showing her ass", cloth):
                 new_score += 2
-            if clothing_in_preferences("lingerie", cloth):
+            if WardrobeBuilder.clothing_in_preferences("lingerie", cloth):
                 new_score += 1
-            if clothing_in_preferences("high heels", cloth):
+            if WardrobeBuilder.clothing_in_preferences("high heels", cloth):
                 new_score += 1
             if cloth in [pumps, high_heels, leggings]:
                 new_score += 5 # small extra modifier
-            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt]:
+            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
                 new_score += 10 # extremely slutty clothing (applies extra modifier)
             if cloth in [pinafore]:
                 if not any(x for x in self.upper_body if x.layer == 1 or x.layer == 2):
@@ -241,6 +236,6 @@ init 6 python:
                 elif cloth.layer == 1:
                     new_score += int((1 - cloth.colour[3]) * 10)
 
-        return new_score if new_score > 0 else 0
+        return new_score
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
