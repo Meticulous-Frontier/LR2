@@ -90,7 +90,7 @@ label SB_caught_masturbating_crisis_label():
     else:
         "Looking inside, you see [the_person.possessive_title] on all fours, with her back to you, quietly moaning."
         $ the_person.draw_person(position = "doggy")
-        the_person.char "mmmmmmmfff... oh..."
+        the_person.char "Mmmmmmmfff... oh..."
         $ the_person.change_arousal(50)
         $ the_person.discover_opinion("masturbating")
         if the_person.outfit.vagina_visible(): #If she is naked below
@@ -154,11 +154,8 @@ label SB_caught_masturbating_crisis_label():
                             "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                             the_person.char "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
                             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                            $ the_person.change_happiness(5)
-                            $ the_person.change_obedience(5)
-                            $ the_person.change_slut_core(2)
-                            $ the_person.change_slut_temp(5)
-                            $ the_person.change_love(3)
+                            $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 2, love = 3)
+                            $ the_person.reset_arousal()
                             #show screen float_up_screen(["+5 Happiness","+5 Obedience","+2 Core Sluttiness" ],["float_text_yellow","float_text_grey","float_text_pink"])
                             "[the_person.possessive_title] runs her hands through your hair one last time. You get up and give her a kiss, letting her taste herself on your tongue."
                             "You excuse yourself and then head to the bathroom and get cleaned up before returning to your work."
@@ -185,6 +182,7 @@ label SB_caught_masturbating_crisis_label():
                             "[the_person.possessive_title] whimpers as she cums. Her legs spasm and she gasps for air."
                             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
                             $ the_person.change_stats(happiness = 5, slut_temp = 2)
+                            $ the_person.reset_arousal()
                             "You back out of the room before she has a chance to recover. You can't believe your good luck, catching an employee masturbating... while thinking of you of all people!"
                             "On your way back to your work, you swing by [the_person.possessive_title]'s desk. You write her a quick note."
                             "Thanks for the show!"
@@ -256,7 +254,8 @@ label SB_caught_masturbating_crisis_label():
                         "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
                         "Catching her breath, [the_person.possessive_title] looks up at you but doesn't say a word. It is clear that masturbating in front of her boss has left a lasting impression."
                         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                        $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2)
+                        $ the_person.change_stats(happiness = 5, obedience = 5, slut_temp = 3)
+                        $ the_person.reset_arousal()
                         "You decide to give [the_person.possessive_title] a chance to recover. You nod at her and then back out of the room."
                         "You finish up your walk and return back to your previous work."
                     else: #She is very slutty
@@ -309,6 +308,7 @@ label SB_caught_masturbating_crisis_label():
                                 "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
                                 $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
                                 $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
+                                $ the_person.reset_arousal()
                                 "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
