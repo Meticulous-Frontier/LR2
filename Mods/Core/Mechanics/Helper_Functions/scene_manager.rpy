@@ -164,6 +164,19 @@ init -2 python:
             if display_transform == character_left or display_transform == character_left_flipped:
                 self.sort_order = 0
 
+        @property
+        def person(self):
+            if not hasattr(self, "_person"):
+                self._person = None
+            return next((x for x in all_people_in_the_game() if x.identifier == self._person), None)
+
+        @person.setter
+        def person(self, value):
+            if isinstance(value, Person):
+                self._person = value.identifier
+            else:
+                self._person = None
+
         def draw_actor(self):
             self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, wipe_scene = False)
 
