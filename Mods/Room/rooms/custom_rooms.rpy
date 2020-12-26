@@ -117,9 +117,6 @@ label build_custom_rooms(stack):
         police_jail = Room("police_jail", "Police Jail", [], standard_police_jail_backgrounds[:], police_jail_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(police_jail)
 
-        work_bathroom = Room("work bathroom", "Work Bathroom", [], bathroom_background, [make_wall(), make_floor()], [], [], False, [0,0], visible = False)
-        list_of_places.append(work_bathroom)
-
         # initialize dungeon room creation action
         add_dungeon_intro_action()
 
