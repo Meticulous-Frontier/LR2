@@ -1065,7 +1065,7 @@ init 2 python:
             if girl.sluttiness > 60:
                 count += 1
             else:
-                mc.location.move_person(girl, mall)
+                girl.change_location(mall)
         return count
 
 #SBA80

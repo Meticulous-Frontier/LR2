@@ -118,6 +118,12 @@ init -1 python:
 
     Person.location = location
 
+
+    def person_change_location(self, destination):
+        self.location.move_person(self, destination)
+
+    Person.change_location = person_change_location
+
     def get_alt_schedule(self):
         if not hasattr(self, "_alt_schedule"):
             self._alt_schedule = Schedule()

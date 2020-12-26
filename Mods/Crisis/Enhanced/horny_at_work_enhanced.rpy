@@ -123,7 +123,7 @@ label horny_at_work_crisis_enhanced_label():
                 "She tries to glare at you, but she can't keep her eyes from drifting down to your hard shaft."
                 "When it becomes clear you aren't going to stop, let alone apologize, she stands up and storms out of the room."
                 $ unhappy_people.remove(main_unhappy_person)
-                $ mc.location.move_person(main_unhappy_person, lobby)
+                $ main_unhappy_person.change_location(lobby)
                 $ scene_manager.remove_actor(main_unhappy_person)
                 if len(unhappy_people) == 0: #She was the only other unhappy person, we're done here
                     pass
@@ -137,7 +137,7 @@ label horny_at_work_crisis_enhanced_label():
                 python:
                     for unhappy_person in unhappy_people: #Note that the main person was removed from the list so these penalties aren't being applied twice.
                         unhappy_person.change_stats(happiness = -30, obedience = -2, slut_temp = 2)
-                        mc.location.move_person(unhappy_person, lobby) #Move everyone to the lobby so they aren't considered observers for the rest of teh event.
+                        unhappy_person.change_location(lobby) #Move everyone to the lobby so they aren't considered observers for the rest of teh event.
                         scene_manager.remove_actor(unhappy_person)
                     unhappy_person = None
                     clear_scene() #TODO We should have an event for the angry girls coming back (maybe we need a general apology event?)

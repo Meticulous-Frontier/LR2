@@ -71,7 +71,7 @@ label train_in_gym(the_person):
     python:
         gym.show_background()
         if not the_person in gym.people:
-            the_person.location.move_person(the_person, gym)
+            the_person.change_location(gym)
         ran_num = renpy.random.random() * 4 # Maximum change is 4 pounds
         the_person.draw_person(emotion = "happy")
 
