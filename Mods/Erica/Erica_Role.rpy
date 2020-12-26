@@ -119,7 +119,7 @@ init -2 python:
         return
 
     def erica_intro_requirement(person):
-        if person.location() == gym:
+        if person.location == gym:
             return True
         return False
     def erica_get_to_know_requirement(person):
@@ -186,7 +186,7 @@ init -2 python:
         return False
 
     def erica_money_problems_sarah_talk_requirement(person):
-        if mc.business.hr_director and person.location() == person.work:
+        if mc.business.hr_director and person.location == person.work:
             return True
         return False
 
@@ -220,7 +220,7 @@ init -2 python:
         return False
 
     def erica_money_problems_yoga_start_requirement(person):
-        if mc.business.hr_director and person.location() == gym:
+        if mc.business.hr_director and person.location == gym:
             return True
         return False
 
@@ -230,7 +230,7 @@ init -2 python:
         return False
 
     def erica_weekly_yoga_requirement(person):
-        if mc.business.hr_director and person.location() == lobby and day%7 == 1:
+        if mc.business.hr_director and person.location == lobby and day%7 == 1:
             return True
         return False
 

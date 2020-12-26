@@ -205,7 +205,7 @@ init 5 python:
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
-                person.location().move_person(person, mc.location)
+                person.location.move_person(person, mc.location)
 
         mc.business.run_move()
         return

@@ -2,7 +2,7 @@
 #Found at the mall. Initially can help MC setup new work and personal goals, after corruption can help setup new sex goals and help meet them.
 init -1 python:
     def lifestyle_coach_intro_requirement(person):
-        if person.location() == mall: # only trigger event when Dawn at mall
+        if person.location == mall: # only trigger event when Dawn at mall
             return True
         return False
 

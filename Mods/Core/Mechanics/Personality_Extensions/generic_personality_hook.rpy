@@ -474,7 +474,7 @@ init -1 python:
 
     def update_stripclub_strippers():
         for person in stripclub_strippers:
-            person.location().people.remove(person)
+            person.location.people.remove(person)
             list_of_places.remove(person.home)
             person.remove_person_from_game()
         stripclub_strippers.clear()

@@ -61,7 +61,7 @@ init -1 python:
 
     def restore_employees_to_schedules():
         for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
-            if employee.location():
+            if employee.location:
                 continue
             # somehow she is lost in limbo
             scheduled_location = employee.get_destination()

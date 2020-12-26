@@ -7,12 +7,12 @@
 init 2 python:
     #Requirement functions
     def candace_meet_at_office_store_requirement(person):
-        if person.location() == office_store:
+        if person.location == office_store:
             return True
         return False
 
     def candace_get_to_know_requirement(person):
-        if person.location() == office_store:
+        if person.location == office_store:
             if not candace_get_has_quit_job():
                 if not candace_can_talk():
                     return "Already talked today"
@@ -31,7 +31,7 @@ init 2 python:
         if candace_get_hire_date() == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
         if day > candace_get_hire_date() + 7:  #She's been working at least a week.
-            if mc.business.funds > 500 and candace.location() == candace.work:
+            if mc.business.funds > 500 and candace.location == candace.work:
                 return True
         return False
 
@@ -39,7 +39,7 @@ init 2 python:
         if day > candace_get_hire_date() + 14:
             if time_of_day > 1:
                 if person.sluttiness > 80:
-                    if person.location() == person.work:
+                    if person.location == person.work:
                         return True
         return False
 
@@ -57,7 +57,7 @@ init 2 python:
         return False
 
     def candace_begin_cure_research_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             return True
         return False
 

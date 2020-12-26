@@ -7,7 +7,7 @@ init 5 python:
 
     def strip_club_call_in_all_strippers():
         for stripper in stripclub_strippers:
-            stripper.location().move_person(stripper, strip_club)
+            stripper.location.move_person(stripper, strip_club)
         return
 
     # for testing purposes, convert strip club to player owned.

@@ -96,7 +96,7 @@ init 1 python:
 
     def quest_cure_discovery_market_patent_requirement(the_person):
         if mc.business.is_open_for_business():
-            if the_person.location() == the_person.work:
+            if the_person.location == the_person.work:
                 return True #Only while she is at work
         return False
 

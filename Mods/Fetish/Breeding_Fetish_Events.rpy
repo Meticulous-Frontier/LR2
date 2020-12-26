@@ -24,7 +24,7 @@ init -1 python:
         return True #??? Is this right?
 
     def breeding_fetish_lily_intro_requirement(the_person):
-        if lily.location() == lily.home:
+        if lily.location == lily.home:
             if lily_bedroom.get_person_count() == 1:
                 return True
         return False
@@ -37,7 +37,7 @@ init -1 python:
 
     def breeding_fetish_stephanie_intro_requirement():
         if mc.business.is_open_for_business():
-            if stephanie.location() == stephanie.work:
+            if stephanie.location == stephanie.work:
                 if renpy.random.randint(0,100) < 25:
                     return True
         return False
@@ -66,7 +66,7 @@ init -1 python:
         return False
 
     def breeding_fetish_candace_intro_requirement(the_person):
-        if candace.location() == candace.work:
+        if candace.location == candace.work:
             return True
         return False
 

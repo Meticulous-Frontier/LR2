@@ -84,7 +84,7 @@ init 10 python:
             person.obedience += 10
 
     def strip_club_cage_role_on_move(person):
-        person.location().move_person(person, bdsm_room)
+        person.location.move_person(person, bdsm_room)
 
     def strip_club_cage_role_on_day(person):
         person.clear_situational_slut("being_caged")

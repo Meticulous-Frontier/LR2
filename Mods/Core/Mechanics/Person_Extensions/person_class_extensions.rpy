@@ -2,7 +2,7 @@ init -1 python:
     import hashlib
 
     def remove_person_from_game(self):
-        my_location = self.location()
+        my_location = self.location
         if my_location:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
@@ -108,10 +108,13 @@ init -1 python:
 
     Person.remove_person_from_game = remove_person_from_game
 
-    def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
+    @property
+    def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         for location in list_of_places:
             if self in location.people:
                 return location
+
+        return self.home # fallback location for person is home
 
     Person.location = location
 
@@ -210,9 +213,9 @@ init -1 python:
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pos)
-            if self.location() == self.work or self.location() == downtown_bar:
+            if self.location == self.work or self.location == downtown_bar:
                  return "sitting"
-            if self.location() == gym:
+            if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
                     pose = get_random_from_list(["missionary", "stand2", "back_peek", "stand4", "sitting"])

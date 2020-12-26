@@ -120,32 +120,32 @@ init -1 python:
         return False
 
     def ashley_room_excitement_overhear_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             if ashley_get_days_employed() > 5: #Been working for at least a few days week.
                 return True
         return False
 
     def ashley_ask_sister_about_attitude_requirement(the_person):
         if ashley_get_if_excitement_overheard():
-            if the_person.location() == the_person.work:
+            if the_person.location == the_person.work:
                 return True
         return False
 
     def ashley_room_warming_up_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             if ashley_get_days_employed() > 12: #Been working for at least a week.
                 return True
         return False
 
     def ashley_room_overhear_classical_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             if ashley_get_days_employed() > 18:
                 return True
         return False
 
     def ashley_ask_date_classic_concert_requirement(the_person):
         if ashley_get_concert_overheard() and not ashley_get_concert_date_stage() > 0:
-            if the_person.location() == the_person.work:
+            if the_person.location == the_person.work:
                 return True
         return False
 
@@ -165,7 +165,7 @@ init -1 python:
 
     def ashley_ask_sister_about_porn_video_requirement(the_person):
         if ashley_get_porn_discovered():
-            if the_person.location() == the_person.work:
+            if the_person.location == the_person.work:
                 return True
         return False
 
@@ -178,27 +178,27 @@ init -1 python:
 
     def ashley_ask_about_porn_requirement(the_person):
         if ashley_get_porn_convo_avail():
-            if the_person.location() == the_person.work:
+            if the_person.location == the_person.work:
                 return True
         return False
 
     def ashley_post_handjob_convo_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             return True
         return False
 
     def ashley_stephanie_arrange_relationship_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             return True
         return False
 
     def ashley_stephanie_saturday_coffee_intro_requirement(the_person):
-        if the_person.location() == stephanie.location() and day%7 == 6 and time_of_day == 0:
+        if the_person.location == stephanie.location and day%7 == 6 and time_of_day == 0:
             return True
         return False
 
     def ashley_stephanie_saturday_coffee_recur_requirement(the_person):
-        if the_person.location() == stephanie.location() and day%7 == 6 and time_of_day == 0:
+        if the_person.location == stephanie.location and day%7 == 6 and time_of_day == 0:
             return True
         return False
 
