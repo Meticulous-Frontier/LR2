@@ -282,7 +282,7 @@ label horny_at_work_crisis_enhanced_label():
                     elif the_report.get("guy orgasms",0) > 1:
                         "You sit back down in your office chair, feeling completely drained, being satisfied multiple times."
                         "After getting yourself cleaned up you're able to focus perfectly again and you get back to work."
-
+                $ del the_choice
 
             else: #You get yourself off.
                 "You pull up some porn and, with skill trained over many years."
