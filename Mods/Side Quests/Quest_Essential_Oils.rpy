@@ -243,7 +243,7 @@ label quest_essential_oils_research_end_label(the_person):
     mc.name "Hmm, so I may need to find a supplier."
     the_person.char "Yup! Sorry, I don't know where you could source this stuff. Here's a list of which ones would be appropriate for us to use."
     mc.name "Thanks, that's exactly what I needed."
-    "You think back. It was [oil_target.title] that had some in the first place. Maybe you could ask her where she gets hers from?"
+    $ renpy.say("", "You think back. It was " + quest_essential_oils_get_target().title + " that had some in the first place. Maybe you could ask her where she gets hers from?")
     $ quest_essential_oils_get_target().add_unique_on_talk_event(quest_essential_oils_discover_supplier)
     $ quest_essential_oils().set_quest_flag(31)
     return
