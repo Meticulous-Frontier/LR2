@@ -17,9 +17,9 @@ init 1 python:
         coloured_apron.pattern = "Pattern_1"
         coloured_apron.colour_pattern = [1.0,0.83,0.90,1.0]
         person.outfit.add_dress(coloured_apron)
-        return        
+        return
 
-    mom_fuck_during_housework = Action("Mom being naughty", mom_fuck_during_housework_requirement, "mom_fuck_during_housework_label", event_duration = 5)
+    mom_fuck_during_housework = Action("Mom being naughty", mom_fuck_during_housework_requirement, "mom_fuck_during_housework_label", event_duration = 2)
     limited_time_event_pool.append([mom_fuck_during_housework,4,"on_enter"])
 
 
