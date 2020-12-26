@@ -82,9 +82,10 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
         "Her pussy is dripping wet now, her juices are running down the dildo and onto your hand.."
         menu:
             "Make her lick her juices off":
-                "You pull the dildo out. She immediately starts to protest."
-                the_girl.char "Hey! What are you doing! I'm getting so close..."
-                "Her words stop when you shove your fingers from your free hand into her cunt. You raise the dildo up to her face."
+                if the_girl.event_triggers_dict.get("has_sucked_dildo", False):
+                    "You pull the dildo out. She immediately starts to protest."
+                    the_girl.char "Hey! What are you doing! I'm getting so close..."
+                    "Her words stop when you shove your fingers from your free hand into her cunt. You raise the dildo up to her face."
                 mc.name "Look at how wet you are! I want you to taste it."
                 if the_girl.get_opinion_score("being submissive") >= 0:
                     "[the_girl.title] submissively opens her mouth. You push the dildo into her mouth, making her clean her own juices from it."
@@ -92,6 +93,7 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
                     "Soon she is eagerly sucking the dildo, your fingers stroking her silky insides in turn."
                     $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive") + 1, obedience = 1)
                     "Suddenly, you pull the dildo out of her mouth. You bring it back down to her cunt and push it back inside her."
+                    $ the_girl.event_triggers_dict["has_sucked_dildo"] = True
                 else:
                     the_girl.char "Fuck that. Why don't you do it?"
                     "She doesn't seem particularly interested in tasting herself, so you back off."
