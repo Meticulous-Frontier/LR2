@@ -2858,7 +2858,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     the_person.char "Well, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
     if Sarah_is_fertile():
-        the_person.char "Let's go! Ovulating is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
+        the_person.char "Let's go! Ovulation is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
     else:
         the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
     call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
