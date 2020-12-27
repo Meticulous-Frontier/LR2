@@ -385,6 +385,30 @@ init -1 python:
         outfit.add_accessory(lipstick.get_copy(), [.745, .117, .235, .8])
         return outfit
 
+    def create_sarah_friend():
+        sarah_friend = make_person(tits = "F", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+                ["skirts", 1, False],
+                ["the colour yellow", 2, False],
+                ["the colour blue", 2, False],
+                ["the colour green", -2, False],
+                ["pants", -2, False],
+                ["high heels", 2, False]
+            ], forced_sexy_opinions = [
+                ["taking control", 1, False],
+                ["giving handjobs", -2, False],
+                ["skimpy outfits", 1, False],
+                ["showing her tits", 2, False],
+                ["not wearing underwear", 2, False],
+                ["cheating on men", 1, False]
+            ])
+        sarah_friend.generate_home()
+        downtown_bar.add_person(sarah_friend)
+        sarah_friend.set_title(sarah_friend.name)
+        sarah_friend.set_mc_title(mc.name)
+        sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
+        town_relationships.update_relationship(sarah, sarah_friend, "Friend")
+        return sarah_friend
+
 
 label Sarah_intro_label():
     $ the_person = sarah
@@ -548,9 +572,7 @@ label Sarah_third_wheel_label():
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
 
-    $ sarah_friend = make_person(tits = "F", force_random = True) #TODO figure out how to properly delete this character later
-    $ sarah_friend.set_title(sarah_friend.name)
-    $ sarah_friend.set_mc_title(mc.name)
+    $ sarah_friend = create_sarah_friend()
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
     $ scene_manager.update_actor(the_person, position = "sitting")
     $ scene_manager.add_actor(sarah_friend, position = "sitting", display_transform = character_left_flipped)
@@ -653,7 +675,6 @@ label Sarah_third_wheel_label():
     $ time_of_day = 3
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ sarah_friend.remove_person_from_game()
     $ del sarah_friend
     $ add_sarah_get_drinks_action()
     return
