@@ -22,22 +22,35 @@ init:
 
 label intro_standing_dildo(the_girl, the_location, the_object):
     "You pull [the_girl.title] close against you."
-    mc.name "I have something I think you might enjoy."
-    the_girl.char "Oh? What might that be?"
-    "You pull the dildo out of your backpack. Her eyes fix on it and she realizes what you want to do."
-    if the_girl.sluttiness > 40: #She is excited.
-        the_girl.char "Oh! That looks like fun..."
+
+    if the_girl.event_triggers_dict.get("has_used_dildo", False):
+        mc.name "I have brought your favorite toy."
+        if the_girl.arousal > 50:
+            the_girl "Oh God yes, give it to me [the_girl.mc_title]!"
+        else:
+            the_girl "Oh really, show me what you got."
+        "While you get on your knees she spreads her legs while leaning onto the [the_object.name]."
+        the_girl "Ok, slide that bad boy right in there!"
     else:
-        the_girl.char "Oh my god, its so big! I don't know about this..."
-        mc.name "Don't worry, I'll go slow."
-    "You get down on your knees in front of her. You bring the dildo up to her pussy, and she spreads her legs to give you easier access."
-    the_girl.char "Ok. Ready when you are I guess!"
-    "You bring the dildo up to her slit and begin to apply light pressure."
-    if the_girl.arousal > 50:
-        "It slides into [the_girl.possessive_title]'s sopping cunt easily. Her excitement provides more than enough lube to push it deep."
-    else:
-        "It takes several seconds of gentle pressure to push it up inside of [the_girl.possessive_title]'s cunt. She takes a moment to adjust to the pressure."
-    the_girl.char "You can start moving it."
+        mc.name "I have something I think you might enjoy."
+        the_girl "Oh? What might that be?"
+        "You pull the dildo out of your backpack. Her eyes fix on it and she realizes what you want to do."
+        if the_girl.sluttiness > 40: #She is excited.
+            the_girl "Oh! That looks like fun..."
+        else:
+            the_girl "Oh my god, its so big! I don't know about this..."
+            mc.name "Don't worry, I'll go slow."
+
+        "You get down on your knees in front of her. You bring the dildo up to her pussy, and she spreads her legs to give you easier access."
+        the_girl "Ok. Ready when you are I guess!"
+        "You bring the dildo up to her slit and begin to apply light pressure."
+        if the_girl.arousal > 50:
+            "It slides into [the_girl.possessive_title]'s sopping cunt easily. Her excitement provides more than enough lube to push it deep."
+        else:
+            "It takes several seconds of gentle pressure to push it up inside of [the_girl.possessive_title]'s cunt. She takes a moment to adjust to the pressure."
+        the_girl "You can start moving it."
+
+        $ the_girl.event_triggers_dict["has_used_dildo"] = True
     return
 
 label taboo_break_standing_dildo(the_girl, the_location, the_object):
@@ -69,9 +82,10 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
         "Her pussy is dripping wet now, her juices are running down the dildo and onto your hand.."
         menu:
             "Make her lick her juices off":
-                "You pull the dildo out. She immediately starts to protest."
-                the_girl.char "Hey! What are you doing! I'm getting so close..."
-                "Her words stop when you shove your fingers from your free hand into her cunt. You raise the dildo up to her face."
+                if the_girl.event_triggers_dict.get("has_sucked_dildo", False):
+                    "You pull the dildo out. She immediately starts to protest."
+                    the_girl.char "Hey! What are you doing! I'm getting so close..."
+                    "Her words stop when you shove your fingers from your free hand into her cunt. You raise the dildo up to her face."
                 mc.name "Look at how wet you are! I want you to taste it."
                 if the_girl.get_opinion_score("being submissive") >= 0:
                     "[the_girl.title] submissively opens her mouth. You push the dildo into her mouth, making her clean her own juices from it."
@@ -79,6 +93,7 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
                     "Soon she is eagerly sucking the dildo, your fingers stroking her silky insides in turn."
                     $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive") + 1, obedience = 1)
                     "Suddenly, you pull the dildo out of her mouth. You bring it back down to her cunt and push it back inside her."
+                    $ the_girl.event_triggers_dict["has_sucked_dildo"] = True
                 else:
                     the_girl.char "Fuck that. Why don't you do it?"
                     "She doesn't seem particularly interested in tasting herself, so you back off."
@@ -109,43 +124,11 @@ label outro_standing_dildo(the_girl, the_location, the_object):
 
 label transition_standing_finger_standing_dildo(the_girl, the_location, the_object):
     "You pull your fingers out of [the_girl.title] and turn her to face you."
-    "You pull [the_girl.title] close against you."
-    mc.name "I have something I think you might enjoy."
-    the_girl.char "Oh? What might that be?"
-    "You pull the dildo out of your backpack. Her eyes fix on it and she realizes what you want to do."
-    if the_girl.sluttiness > 40: #She is excited.
-        the_girl.char "Oh! That looks like fun..."
-    else:
-        the_girl.char "Oh my god, its so big! I don't know about this..."
-        mc.name "Don't worry, I'll go slow."
-    "You get down on your knees in front of her. You bring the dildo up to her pussy, and she spreads her legs to give you easier access."
-    the_girl.char "Ok. Ready when you are I guess!"
-    "You bring the dildo up to her slit and begin to apply light pressure."
-    if the_girl.arousal > 50:
-        "It slides into [the_girl.possessive_title]'s sopping cunt easily. Her excitement provides more than enough lube to push it deep."
-    else:
-        "It takes several seconds of gentle pressure to push it up inside of [the_girl.possessive_title]'s cunt. She takes a moment to adjust to the pressure."
-    the_girl.char "You can start moving it."
+    call intro_standing_dildo(the_girl, the_location, the_object) from _call_transition_standing_finger_standing_dildo
     return
 
 label transition_default_standing_dildo(the_girl, the_location, the_object):
-    "You pull [the_girl.title] close against you."
-    mc.name "I have something I think you might enjoy."
-    the_girl.char "Oh? What might that be?"
-    "You pull the dildo out of your backpack. Her eyes fix on it and she realizes what you want to do."
-    if the_girl.sluttiness > 40: #She is excited.
-        the_girl.char "Oh! That looks like fun..."
-    else:
-        the_girl.char "Oh my god, its so big! I don't know about this..."
-        mc.name "Don't worry, I'll go slow."
-    "You get down on your knees in front of her. You bring the dildo up to her pussy, and she spreads her legs to give you easier access."
-    the_girl.char "Ok. Ready when you are I guess!"
-    "You bring the dildo up to her slit and begin to apply light pressure."
-    if the_girl.arousal > 50:
-        "It slides into [the_girl.possessive_title]'s sopping cunt easily. Her excitement provides more than enough lube to push it deep."
-    else:
-        "It takes several seconds of gentle pressure to push it up inside of [the_girl.possessive_title]'s cunt. She takes a moment to adjust to the pressure."
-    the_girl.char "You can start moving it."
+    call intro_standing_dildo(the_girl, the_location, the_object) from _call_transition_default_standing_dildo
     return
 
 label strip_standing_dildo(the_girl, the_clothing, the_location, the_object):
@@ -158,12 +141,12 @@ label strip_ask_standing_dildo(the_girl, the_clothing, the_location, the_object)
     the_girl.char "Everything feels so tight, I need to get this off! Do you mind?"
     "[the_girl.possessive_title] grabs onto her [the_clothing.name], waiting for you to tell her what to do."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off. Strip for me."
             $ the_girl.draw_animated_removal(the_clothing, position = standing_dildo.position_tag)
             "[the_girl.possessive_title] takes off her [the_clothing.name] and drops it to the side while you pump the dildo in and out of her cunt."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"

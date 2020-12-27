@@ -33,36 +33,45 @@
 ### The next three functions define the quest progress tracker, init requirements, and how we clean up after quest is done.
 init 1 python:
     def setup_quest_cuckold_employee():
-        quest_cuckold_employee.quest_event_dict["target"] = quest_cuckold_employee_person_find_employee()
-        quest_cuckold_employee.quest_event_dict["start_day"] = 9999
-        quest_cuckold_employee.quest_event_dict["decision_day"] = 9999
-        quest_cuckold_employee.quest_event_dict["fertility_day"] = 9999
-        quest_cuckold_employee.quest_event_dict["creampie_count"] = 0
-        quest_cuckold_employee.set_quest_flag(1)
-        quest_cuckold_employee_get_target().add_opinion("creampies", 2, discovered = False, add_to_log = False)
-        quest_cuckold_employee_get_target().add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
-        quest_cuckold_employee_get_target().on_birth_control = False
+        person = quest_cuckold_employee_person_find_employee()
+        quest = quest_cuckold_employee()
+        quest.quest_event_dict["target"] = person.identifier
+        quest.quest["start_day"] = 9999
+        quest.quest_event_dict["decision_day"] = 9999
+        quest.quest_event_dict["fertility_day"] = 9999
+        quest.quest_event_dict["creampie_count"] = 0
+        quest.set_quest_flag(1)
+        person.add_opinion("creampies", 2, discovered = False, add_to_log = False)
+        person.add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
+        person.on_birth_control = False
         mc.business.mandatory_crises_list.append(quest_cuckold_employee_intro)
-        game_hints.append(Hint("Cuckold Employee", "An employee is having trouble conceiving.", "quest_cuckold_employee.get_quest_flag() <= 11", "quest_cuckold_employee.get_quest_flag() > 11"))
-        hint_string = "Let " + quest_cuckold_employee_get_target().title + " think about it for a few days."
-        game_hints.append(Hint("Cuckold Employee", hint_string, "quest_cuckold_employee.get_quest_flag() == 21", "quest_cuckold_employee.get_quest_flag() != 21"))
-        hint_string_2 = "Creampie " + quest_cuckold_employee_get_target().title + " as much as possible. Atleast 5 times for best possible outcome."
-        game_hints.append(Hint("Cuckold Employee", hint_string_2, "quest_cuckold_employee.get_quest_flag() == 22", "quest_cuckold_employee.get_quest_flag() != 22"))
-        hint_string_3 = quest_cuckold_employee_get_target().title + " is probably pregnant. She'll let you know in a few days."
-        game_hints.append(Hint("Cuckold Employee", hint_string_3, "quest_cuckold_employee.get_quest_flag() == 91", "quest_cuckold_employee.get_quest_flag() != 91"))
+        game_hints.append(Hint("Cuckold Employee", "An employee is having trouble conceiving.", "quest_cuckold_employee().get_quest_flag() <= 11", "quest_cuckold_employee().get_quest_flag() > 11"))
+        hint_string = "Let " + person.title + " think about it for a few days."
+        game_hints.append(Hint("Cuckold Employee", hint_string, "quest_cuckold_employee().get_quest_flag() == 21", "quest_cuckold_employee().get_quest_flag() != 21"))
+        hint_string_2 = "Creampie " + person.title + " as much as possible. At least 5 times for best possible outcome."
+        game_hints.append(Hint("Cuckold Employee", hint_string_2, "quest_cuckold_employee().get_quest_flag() == 22", "quest_cuckold_employee().get_quest_flag() != 22"))
+        hint_string_3 = person.title + " is probably pregnant. She'll let you know in a few days."
+        game_hints.append(Hint("Cuckold Employee", hint_string_3, "quest_cuckold_employee().get_quest_flag() == 91", "quest_cuckold_employee().get_quest_flag() != 91"))
         return
 
+    def quest_cuckold_employee():
+        return quest_director.get_quest("Cuckold Employee")
+
     def quest_cuckold_employee_get_target():
-        return quest_cuckold_employee.quest_event_dict.get("target", None)
+        contact = quest_cuckold_employee().quest_event_dict.get("target", None)
+        if isinstance(contact, basestring):
+            return get_person_by_identifier(contact)
+        return contact
 
     def quest_cuckold_employee_tracker():
-        if quest_cuckold_employee.get_quest_flag() == 22:
-            if quest_cuckold_employee_get_target() and not quest_cuckold_employee_breeding_session in quest_cuckold_employee_get_target().on_talk_event_list:
+        person = quest_cuckold_employee_get_target()
+        if quest_cuckold_employee().get_quest_flag() == 22:
+            if person and not quest_cuckold_employee_breeding_session in person.on_talk_event_list:
                 # readd the breeding session (we talked to her without breeding)
-                quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
-        if quest_cuckold_employee.get_quest_flag() <= 101:
-            if quest_cuckold_employee_get_target() == None:
-                quest_cuckold_employee.quest_completed()
+                person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+        if quest_cuckold_employee().get_quest_flag() <= 101:
+            if person == None:
+                quest_cuckold_employee().quest_completed()
                 return
         return
 
@@ -84,7 +93,7 @@ init 1 python:
             quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
         #Leave knocked up and reconsider events in the stack to run after quest finishes.
         # cleanup dictionary to save space and memory
-        quest_cuckold_employee.quest_event_dict.clear()
+        quest_cuckold_employee().quest_event_dict.clear()
         return
 
 ###Declare any requirement functions
@@ -97,7 +106,7 @@ init 1 python:
     def quest_cuckold_employee_decision_requirement():
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if quest_cuckold_employee.quest_event_dict.get("start_day", 0) + 2 < day: #Atleast two days after first convo
+                if quest_cuckold_employee().quest_event_dict.get("start_day", 0) + 2 < day: #Atleast two days after first convo
                 #TODO random element so it isn't necessarily in the morning?
                     return True
         return False
@@ -105,7 +114,7 @@ init 1 python:
     def quest_cuckold_employee_rethink_decision_requirement():
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if quest_cuckold_employee.quest_event_dict.get("decision_day", 0) + 2 < day:
+                if quest_cuckold_employee().quest_event_dict.get("decision_day", 0) + 2 < day:
                     return True
         return False
 
@@ -115,20 +124,20 @@ init 1 python:
         return False
 
     def quest_cuckold_employee_after_window_requirement():
-        if quest_cuckold_employee.quest_event_dict.get("fertility_day", 0) + 3 < day:
+        if quest_cuckold_employee().quest_event_dict.get("fertility_day", 0) + 3 < day:
             if time_of_day == 2:
                 return True
         return False
 
     def quest_cuckold_employee_reconsider_requirement(the_person):
-        if quest_cuckold_employee.quest_event_dict.get("fertility_day", 0) + 5 < day:
+        if quest_cuckold_employee().quest_event_dict.get("fertility_day", 0) + 5 < day:
             return True
         return False
 
     def quest_cuckold_employee_knocked_up_requirement():
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if quest_cuckold_employee.quest_event_dict.get("fertility_day", 0) + 7 < day:
+                if quest_cuckold_employee().quest_event_dict.get("fertility_day", 0) + 7 < day:
                     if time_of_day == 2:
                         return True
         return False
@@ -136,7 +145,7 @@ init 1 python:
     def quest_cuckold_employee_gloryhole_requirement():
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if quest_cuckold_employee.quest_event_dict.get("decision_day", 0) + 2 < day:
+                if quest_cuckold_employee().quest_event_dict.get("decision_day", 0) + 2 < day:
                     return True
         return False
 
@@ -169,7 +178,7 @@ label quest_cuckold_employee_intro_label():
     $ the_person = quest_cuckold_employee_get_target()
     if the_person == None:
         #ABORT ABORT, we fucked up somewhere.
-        $ quest_cuckold_employee.quest_completed()
+        $ quest_cuckold_employee().quest_completed()
         return
     # lock selected person out of other quests
     $ quest_director.add_unavailable_person(the_person)
@@ -191,17 +200,17 @@ label quest_cuckold_employee_intro_label():
     mc.name "Take care."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] begins to walk away. Well that was an awkward moment..."
-    $ quest_cuckold_employee.quest_event_dict["start_day"] = day
-    $ quest_cuckold_employee.set_quest_flag(11)
+    $ quest_cuckold_employee().quest_event_dict["start_day"] = day
+    $ quest_cuckold_employee().set_quest_flag(11)
     $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_decision)
     return
 
 label quest_cuckold_employee_decision_label():
     $ the_person = quest_cuckold_employee_get_target()
-    $ quest_cuckold_employee.quest_event_dict["decision_day"] = day
+    $ quest_cuckold_employee().quest_event_dict["decision_day"] = day
     if the_person == None:
         #ABORT ABORT, we fucked up somewhere.
-        $ quest_cuckold_employee.quest_completed()
+        $ quest_cuckold_employee().quest_completed()
         return
     $ the_person.draw_person()
     "You are lost in your work when a feminine voice clearing her throat nearby catches your attention. You look up and see [the_person.title] standing in front of you again."
@@ -238,7 +247,7 @@ label quest_cuckold_employee_decision_label():
                 the_person.char "Oh god... you're right. I know you are. I don't want to admit it, but deep down inside, I know you are right."
                 "She bites her lip for a moment and looks down at the floor."
                 $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
-                $ quest_cuckold_employee.quest_event_dict["fertility_day"] = day + 2
+                $ quest_cuckold_employee().quest_event_dict["fertility_day"] = day + 2
                 the_person.char "I know this is kind of a crazy coincidence... but... I'm actually really fertile. Like right now."
                 mc.name "Oh?"
                 the_person.char "I've been tracking my cycles... I'm going to ovulate in the next few days almost for certain."
@@ -259,7 +268,7 @@ label quest_cuckold_employee_decision_label():
                 $ the_person.draw_person(position = "walking_away")
                 "As [the_person.title] turns and walks away, you can almost see the wheels turning in her head."
                 "Her initial reaction was not great, but you wonder if she will think about it more. Maybe you should try talking to her again in a few days?"
-                $ quest_cuckold_employee.set_quest_flag(21)
+                $ quest_cuckold_employee().set_quest_flag(21)
                 $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_rethink_decision)
                 $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_after_window)
                 return
@@ -289,7 +298,7 @@ label quest_cuckold_employee_decision_label():
                     the_person.char "That's amazing! I can't believe it."
                     "She bites her lip for a moment and looks down at the floor."
                     $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
-                    $ quest_cuckold_employee.quest_event_dict["fertility_day"] = day + 2
+                    $ quest_cuckold_employee().quest_event_dict["fertility_day"] = day + 2
                     the_person.char "I know this is kind of a crazy coincidence... but... I'm actually really fertile. Like right now."
                     mc.name "Oh?"
                     the_person.char "I've been tracking my cycles... I'm going to ovulate in the next few days almost for certain."
@@ -310,10 +319,10 @@ label quest_cuckold_employee_decision_label():
                     "[the_person.possessive_title] turns and walks away. You wonder if you have heard the last of this?"
                     if mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 1: #She can try through the glory hole
                         $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_gloryhole)
-                        $ quest_cuckold_employee.set_quest_flag(25)
+                        $ quest_cuckold_employee().set_quest_flag(25)
                     else:
-                        $ quest_cuckold_employee.set_quest_flag(29)
-                        $ quest_cuckold_employee.quest_completed()
+                        $ quest_cuckold_employee().set_quest_flag(29)
+                        $ quest_cuckold_employee().quest_completed()
                     return
     # only get here if we are gonna breed in the office.
     "[the_person.possessive_title] follows you to your office."
@@ -351,9 +360,9 @@ label quest_cuckold_employee_decision_label():
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
-        $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
-        $ quest_cuckold_employee.set_quest_flag(22)
-        $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+        $ quest_cuckold_employee().quest_event_dict["creampie_count"] = quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) + 1
+        $ quest_cuckold_employee().set_quest_flag(22)
+        $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
         $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_after_window)
         $ the_person.apply_planned_outfit() # make sure she is dressed again after event
     elif the_report.get("guy orgasms", 0) == 0:
@@ -367,8 +376,8 @@ label quest_cuckold_employee_decision_label():
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
             "[the_person.title] stands up, throws on her clothes and storms out of your office."
-            $ quest_cuckold_employee.set_quest_flag(22)
-            $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+            $ quest_cuckold_employee().set_quest_flag(22)
+            $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
             $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_after_window)
         else:
             mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
@@ -376,8 +385,8 @@ label quest_cuckold_employee_decision_label():
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
             "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
-            $ quest_cuckold_employee.set_quest_flag(28)
-            $ quest_cuckold_employee.quest_completed()
+            $ quest_cuckold_employee().set_quest_flag(28)
+            $ quest_cuckold_employee().quest_completed()
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -388,14 +397,14 @@ label quest_cuckold_employee_decision_label():
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
-        $ quest_cuckold_employee.set_quest_flag(28)
-        $ quest_cuckold_employee.quest_completed()
+        $ quest_cuckold_employee().set_quest_flag(28)
+        $ quest_cuckold_employee().quest_completed()
     return
 
 label quest_cuckold_employee_rethink_decision_label():
     $ the_person = quest_cuckold_employee_get_target()
     $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
-    $ quest_cuckold_employee.quest_event_dict["fertility_day"] = day + 2
+    $ quest_cuckold_employee().quest_event_dict["fertility_day"] = day + 2
     "You are lost in paperwork when a figure enters your peripheral vision. You look up and see [the_person.title] standing in front of you."
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]. Can I help you?"
@@ -443,9 +452,9 @@ label quest_cuckold_employee_rethink_decision_label():
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
-        $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
-        $ quest_cuckold_employee.set_quest_flag(22)
-        $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+        $ quest_cuckold_employee().quest_event_dict["creampie_count"] = quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) + 1
+        $ quest_cuckold_employee().set_quest_flag(22)
+        $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
         $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_after_window)
         $ the_person.apply_planned_outfit() # make sure she is dressed again after event
     elif the_report.get("guy orgasms", 0) == 0:
@@ -459,8 +468,8 @@ label quest_cuckold_employee_rethink_decision_label():
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
             "[the_person.title] stands up, throws on her clothes and storms out of your office."
-            $ quest_cuckold_employee.set_quest_flag(22)
-            $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
+            $ quest_cuckold_employee().set_quest_flag(22)
+            $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
             $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_after_window)
         else:
             mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
@@ -468,8 +477,8 @@ label quest_cuckold_employee_rethink_decision_label():
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
             "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
-            $ quest_cuckold_employee.set_quest_flag(28)
-            $ quest_cuckold_employee.quest_completed()
+            $ quest_cuckold_employee().set_quest_flag(28)
+            $ quest_cuckold_employee().quest_completed()
     else:
         "[the_person.title] is completely silent."
         the_person.char "You... you didn't even finish inside of me?"
@@ -480,8 +489,8 @@ label quest_cuckold_employee_rethink_decision_label():
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
-        $ quest_cuckold_employee.set_quest_flag(28)
-        $ quest_cuckold_employee.quest_completed()
+        $ quest_cuckold_employee().set_quest_flag(28)
+        $ quest_cuckold_employee().quest_completed()
     return
 
 label quest_cuckold_employee_breeding_session_label(the_person):
@@ -538,7 +547,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         $ clear_scene()
         $ mc.location.show_background()
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
-        $ quest_cuckold_employee.quest_event_dict["creampie_count"] = quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) + 1
+        $ quest_cuckold_employee().quest_event_dict["creampie_count"] = quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) + 1
     else:
         mc.name "Sorry, I'm just too tired, I shouldn't have tried this right now..."
         the_person.char "It's okay... You've been pushing yourself pretty hard."
@@ -550,14 +559,14 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     return
 
 label quest_cuckold_employee_gloryhole_label():
-    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    $ the_person = quest_cuckold_employee_get_target()
     $ anon_char = get_anon_person(the_person)
     if mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 1:
         pass
     else:
         #We don't have glory hole unlocked.
-        $ quest_cuckold_employee.set_quest_flag(29)
-        $ quest_cuckold_employee.quest_completed()
+        $ quest_cuckold_employee().set_quest_flag(29)
+        $ quest_cuckold_employee().quest_completed()
         return
     "You step into the restroom and walk into one of the stalls."
     if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
@@ -578,8 +587,8 @@ label quest_cuckold_employee_gloryhole_label():
             $ clear_scene()
             "She quickly enters the stall and closes the door."
             "Hmm... was she trying to follow you in here? You wonder if your refusal to try and knock her up has anything to do with it..."
-            $ quest_cuckold_employee.set_quest_flag(39)
-            $ quest_cuckold_employee.quest_completed()
+            $ quest_cuckold_employee().set_quest_flag(39)
+            $ quest_cuckold_employee().quest_completed()
             return
     "As you are waiting, you hear someone enter the restroom and walk into the stall next to yours."
     "This is crazy. It could be anybody in there! You hear on the other side the toilet flush as the person finishes relieving herself. You take a deep breath, then go for it."
@@ -629,16 +638,16 @@ label quest_cuckold_employee_gloryhole_label():
     $ the_person.change_happiness(5, add_to_log = False)
     if not the_person.is_pregnant():
         $ become_pregnant(the_person)
-    $ quest_cuckold_employee.set_quest_flag(35)
-    $ quest_cuckold_employee.quest_completed()
+    $ quest_cuckold_employee().set_quest_flag(35)
+    $ quest_cuckold_employee().quest_completed()
     $ del anon_char
     return
 
 
 label quest_cuckold_employee_after_window_label():
-    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    $ the_person = quest_cuckold_employee_get_target()
     if not the_person.is_pregnant():
-        if quest_cuckold_employee.quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her atleast 5 times via the event. #TODO we should probably track this via person.sex_record instead...
+        if quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her atleast 5 times via the event. #TODO we should probably track this via person.sex_record instead...
             $ become_pregnant(the_person)
 
     if the_person.is_pregnant():#Success
@@ -649,7 +658,7 @@ label quest_cuckold_employee_after_window_label():
         "You text her back."
         mc.name "I'll make time to breed you again cow. Look forward to it."
         $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
-        $ quest_cuckold_employee.set_quest_flag(91)
+        $ quest_cuckold_employee().set_quest_flag(91)
         $ mc.business.mandatory_crises_list.append(quest_cuckold_employee_knocked_up)
         return
 
@@ -660,8 +669,8 @@ label quest_cuckold_employee_after_window_label():
         mc.name "We can try again in a few weeks."
         the_person.char "Hmm... yeah, maybe..."
         "Sounds like she might be having second thoughts..."
-        $ quest_cuckold_employee.set_quest_flag(49)
-        $ quest_cuckold_employee_get_target().add_unique_on_talk_event(quest_cuckold_employee_reconsider)
+        $ quest_cuckold_employee().set_quest_flag(49)
+        $ the_person.add_unique_on_talk_event(quest_cuckold_employee_reconsider)
     return
 
 label quest_cuckold_employee_reconsider_label(the_person):
@@ -674,11 +683,11 @@ label quest_cuckold_employee_reconsider_label(the_person):
     the_person.char "I was letting my hormones run away with me. Messing around was a lot of fun, but, I changed my mind. I don't want to keep trying to get pregnant."
     mc.name "I understand, and I'll do my best to respect that."
     the_person.char "Ah... okay... Thanks! Is there anything else I can do for you?"
-    $ quest_cuckold_employee.quest_completed()
+    $ quest_cuckold_employee().quest_completed()
     return
 
 label quest_cuckold_employee_knocked_up_label():
-    $ the_person = quest_cuckold_employee.quest_event_dict.get("target", None)
+    $ the_person = quest_cuckold_employee_get_target()
     "You get a text message from [the_person.title]."
     the_person.char "Hey! I need to see you in your office, ASAP!"
     $ mc.change_location(office)
@@ -727,9 +736,9 @@ label quest_cuckold_employee_knocked_up_label():
     "It's going to be amazing to watch her belly swell with your seed."
     $ the_person.change_stats(obedience = 20, slut_temp = 20, slut_core = 20)  #She is now your slutty breeding stock.
     #TODO consider giving her a collar?
-    $ quest_cuckold_employee.set_quest_flag(101)
+    $ quest_cuckold_employee().set_quest_flag(101)
     $ the_person.personality = get_breeding_stock_personality(the_person)
-    $ quest_cuckold_employee.quest_completed()
+    $ quest_cuckold_employee().quest_completed()
     return
 
 init 1301 python:
@@ -740,7 +749,7 @@ init 1301 python:
     def breeding_stock_player_titles(the_person):
         return "Bull"
     def get_breeding_stock_personality(the_person): #Use a function to get this so we can keep the girls prefix so her personality doesn't change TOO much
-        breeding_stock = Personality("Breeding Stock", default_prefix = the_person.personality.personality_type_prefix,
+        breeding_stock = Personality("Breeding Stock", default_prefix = the_person.personality.default_prefix,
         common_likes = [],
         common_sexy_likes = [],
         common_dislikes = [],

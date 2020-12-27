@@ -14,7 +14,7 @@ init 2 python:
         if mc.business.is_weekend():
             candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc]) if x.is_available()]
         else:
-            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc] + mc.business.get_employee_list()) if x.is_available()]
+            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin, mc]) if x.is_available() and x not in mc.business.get_employee_list()]
         return get_random_from_list(candidates)
 
     town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",

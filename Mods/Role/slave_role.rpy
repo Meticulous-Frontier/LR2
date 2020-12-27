@@ -75,6 +75,12 @@ init 10 python:
         mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
         return
 
+    def slave_role_on_turn(person):
+        if person.stay_wet and person.arousal < 50:
+            person.arousal = 50
+        if person.slave_collar and person.obedience < 150:
+            person.obedience = 150
+
     stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Order your slave to stay aroused at all times.", category = "Slave Role")
     calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
     slave_trim_pubes_action = ActionMod("Trim pubes", slave_trim_pubes_requirement, "slave_trim_pubes_label", menu_tooltip = "Order her to do a little personal landscaping. Tell her to wax it off, grow it out, or shape it into anything in between.", category = "Slave Role")
@@ -85,7 +91,8 @@ init 10 python:
     wakeup_duty_action = ActionMod("Wake me up in the morning.", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")
 
-    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, wakeup_duty_action], hidden = False)
+    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, wakeup_duty_action], \
+        on_turn = slave_role_on_turn, hidden = False)
 
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
 

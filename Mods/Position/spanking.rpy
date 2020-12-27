@@ -38,7 +38,7 @@ init 1 python:
         if person.event_triggers_dict.get("spank_level", 0) == 0:
             person.event_triggers_dict["spank_level"] = 1
         else:
-            person.event_triggers_dict["spank_level"] = person.event_triggers_dict["spank_level"] + 1
+            person.event_triggers_dict["spank_level"] += 1
         return
 
     #Returns a string based on the physical appears of the girl's ass
@@ -206,12 +206,12 @@ label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
     the_girl.char "Everything feels so tight, I want to take it all off... Please can I?"
     "[the_girl.possessive_title] grabs onto her [the_clothing.name], waiting for you to tell her what to do."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off.."
             $ the_girl.draw_animated_removal(the_clothing, position = spanking.position_tag)
             "[the_girl.possessive_title] takes off her [the_clothing.name] and drops it to the side while you grope her ass."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"
@@ -235,7 +235,7 @@ label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
     mc.name "That's enough spanking [the_girl.title]. Now I'll make it feel all better.."
     the_girl.char "Oh yes, [the_girl.mc_title], make me feel good."
     "You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
-    "You continue your back and forth motion, rubbing your cock along her pussy lips."
+    "You continue your back and forth motion, rubbing your cock along her already wet pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
         the_girl.char "Oh....Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
@@ -248,4 +248,9 @@ label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
         $ the_girl.break_taboo("vaginal_sex")
     else:
         "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
+    return
+
+# when breaking the taboo we don't go into the default transition, so we use this custom label to trigger the transition dialog
+label transition_spanking_to_standing_doggy_taboo_break_label(the_girl, the_location, the_object):
+    call transition_spanking_SB_doggy_standing(the_girl, the_location, the_object) from _call_transition_spanking_to_standing_doggy_taboo_break_label
     return

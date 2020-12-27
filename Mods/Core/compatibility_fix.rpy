@@ -44,7 +44,7 @@ init -1 python:
     config.automatic_images = None
     config.optimize_texture_bounds = True
     config.predict_statements = 32
-    config.rollback_length = 16      # limit rollback to reduce object tracking
+    config.rollback_length = 64      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False
@@ -61,7 +61,7 @@ init -1 python:
 
     def restore_employees_to_schedules():
         for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
-            if employee.location():
+            if employee.location:
                 continue
             # somehow she is lost in limbo
             scheduled_location = employee.get_destination()

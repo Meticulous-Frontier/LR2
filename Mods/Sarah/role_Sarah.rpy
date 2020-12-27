@@ -66,7 +66,7 @@ init 2 python:
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
         sarah.event_triggers_dict["stripclub_progress"] = 0    # 0 = not complete, 1 = strip club even complete
         sarah.event_triggers_dict["initial_threesome_target"] = None    #this will hold who sarah decides she wants to have a threesome with.
-        sarah.event_triggers_dict["threesome_unlock"] = 0     # 0 = not done, 1 = first threesome after event,
+        sarah.event_triggers_dict["threesome_unlock"] = False     #\\
         sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
@@ -201,7 +201,7 @@ init -1 python:
 
     def Sarah_ask_for_baby_requirement():
         if mc_asleep():
-            if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+            if sarah.event_triggers_dict.get("threesome_unlock", False):
                 if sarah.sex_record["Vaginal Creampies"] >= 10:
                     if sarah.has_role(girlfriend_role):
                         return True
@@ -293,7 +293,7 @@ init -1 python:
     def get_sarah_spend_night_threesome_possibility():
         threesome_wakeup = False
         threesome_partner = None
-        if sarah.event_triggers_dict.get("threesome_unlock", 0) == 1 and renpy.random.randint(0,100) < 50:
+        if sarah.event_triggers_dict.get("threesome_unlock", False) and renpy.random.randint(0,100) < 50:
             if renpy.random.randint(0,100) < 10: #Try lily first
                 if willing_to_threesome(the_person, lily):
                     threesome_partner = lily
@@ -384,6 +384,31 @@ init -1 python:
         outfit.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
         outfit.add_accessory(lipstick.get_copy(), [.745, .117, .235, .8])
         return outfit
+
+    def create_sarah_friend():
+        sarah_friend = make_person(tits = "F", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+                ["skirts", 1, False],
+                ["the colour yellow", 2, False],
+                ["the colour blue", 2, False],
+                ["the colour green", -2, False],
+                ["pants", -2, False],
+                ["high heels", 2, False]
+            ], forced_sexy_opinions = [
+                ["taking control", 1, False],
+                ["giving handjobs", -2, False],
+                ["skimpy outfits", 1, False],
+                ["showing her tits", 2, False],
+                ["not wearing underwear", 2, False],
+                ["cheating on men", 1, False]
+            ])
+        sarah_friend.generate_home()
+        downtown_bar.add_person(sarah_friend)
+        sarah_friend.set_title(sarah_friend.name)
+        sarah_friend.set_mc_title(mc.name)
+        sarah_friend.set_possessive_title(get_random_possessive_title(the_person))
+        sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
+        town_relationships.update_relationship(sarah, sarah_friend, "Friend")
+        return sarah_friend
 
 
 label Sarah_intro_label():
@@ -548,9 +573,7 @@ label Sarah_third_wheel_label():
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
 
-    $ sarah_friend = make_person(tits = "F", force_random = True) #TODO figure out how to properly delete this character later
-    $ sarah_friend.set_title(sarah_friend.name)
-    $ sarah_friend.set_mc_title(mc.name)
+    $ sarah_friend = create_sarah_friend()
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
     $ scene_manager.update_actor(the_person, position = "sitting")
     $ scene_manager.add_actor(sarah_friend, position = "sitting", display_transform = character_left_flipped)
@@ -653,7 +676,6 @@ label Sarah_third_wheel_label():
     $ time_of_day = 3
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ sarah_friend.remove_person_from_game()
     $ del sarah_friend
     $ add_sarah_get_drinks_action()
     return
@@ -2096,7 +2118,7 @@ label Sarah_initial_threesome_label():
     $ scene_manager.update_actor(the_person_two, position = "back_peek", display_transform = character_right)
     "As the activity winds down, you all lay down next to each other. You have [the_person_one.possessive_title] on one side and [the_person_two.possessive_title] on the other."
     the_person_one.char "Oh my god... that was so good. I never knew it could be so good, to be with another woman like that..."
-    $ sarah.event_triggers_dict["threesome_unlock"] = 1
+    $ sarah.event_triggers_dict["threesome_unlock"] = True
     "You hear a murmur of approval from [the_person_two.title]."
     "You enjoy the pair of bedwarmers, and are just getting ready to fall asleep when you feel movement."
     $ scene_manager.update_actor(the_person_two, position = "stand4")
@@ -2858,7 +2880,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     the_person.char "Well, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
     if Sarah_is_fertile():
-        the_person.char "Let's go! Ovulating is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
+        the_person.char "Let's go! Ovulation is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
     else:
         the_person.char "What are you staring at? Let's go! I've been looking forward to this all night!"
     call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
@@ -3114,6 +3136,11 @@ init 2 python:
             positions.append([sarah_tit_fuck, 1])
 
         return positions
+
+    def sarah_threesomes_unlocked():
+        if sarah.event_triggers_dict.get("threesome_unlock", False) == True:
+            return True
+        return False
 
 init 1 python:
     def sarah_get_special_titfuck_unlocked():

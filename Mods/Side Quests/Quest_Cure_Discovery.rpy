@@ -18,26 +18,34 @@
 
 init 1 python:
     def setup_quest_cure_discovery():
-        quest_cure_discovery.quest_event_dict["start_day"] = 9999
-        quest_cure_discovery.quest_event_dict["cure_tier"] = mc.business.research_tier  #Snapshot quest tier at the beginning.
-        quest_cure_discovery.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
-        quest_cure_discovery.quest_event_dict["market_contact"] = get_random_from_list(mc.business.market_team)
-        quest_cure_discovery.quest_event_dict["market_day"] = 9999
+        quest = quest_cure_discovery()
+        quest.quest_event_dict["start_day"] = 9999
+        quest.quest_event_dict["cure_tier"] = mc.business.research_tier  #Snapshot quest tier at the beginning.
+        quest.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
+        contact = get_random_from_list(mc.business.market_team)
+        quest.quest_event_dict["market_contact"] = contact.identifier
+        quest.quest_event_dict["market_day"] = 9999
         #TODO add start event
-        quest_cure_discovery.set_quest_flag(1)
+        quest.set_quest_flag(1)
         mc.business.mandatory_crises_list.append(quest_cure_discovery_intro)
-        game_hints.append(Hint("Medical Breakthrough", "Your head researcher has some exciting news.", "quest_cure_discovery.get_quest_flag() <= 1", "quest_cure_discovery.get_quest_flag() > 1"))
-        hint_string = "Talk to " + quest_cure_get_market_contact().title + " about selling your medical patent."
-        game_hints.append(Hint("Medical Breakthrough", hint_string, "quest_cure_discovery.get_quest_flag() == 21", "quest_cure_discovery.get_quest_flag() != 21"))
-        game_hints.append(Hint("Medical Breakthrough", "Wait for your patent rights to sell", "quest_cure_discovery.get_quest_flag() == 31", "quest_cure_discovery.get_quest_flag() != 31"))
+        game_hints.append(Hint("Medical Breakthrough", "Your head researcher has some exciting news.", "quest_cure_discovery().get_quest_flag() <= 1", "quest_cure_discovery().get_quest_flag() > 1"))
+        hint_string = "Talk to " + contact.title + " about selling your medical patent."
+        game_hints.append(Hint("Medical Breakthrough", hint_string, "quest_cure_discovery().get_quest_flag() == 21", "quest_cure_discovery().get_quest_flag() != 21"))
+        game_hints.append(Hint("Medical Breakthrough", "Wait for your patent rights to sell", "quest_cure_discovery().get_quest_flag() == 31", "quest_cure_discovery().get_quest_flag() != 31"))
 
         return
 
+    def quest_cure_discovery():
+        return quest_director.get_quest("Medical Breakthrough")
+
     def quest_cure_get_market_contact():
-        return quest_cure_discovery.quest_event_dict.get("market_contact", None)
+        contact = quest_cure_discovery().quest_event_dict.get("market_contact", None)
+        if isinstance(contact, basestring):
+            return get_person_by_identifier(contact)
+        return contact
 
     def quest_cure_set_market_contact(person):
-        quest_cure_discovery.quest_event_dict["market_contact"] = person
+        quest_cure_discovery().quest_event_dict["market_contact"] = person.identifier
 
     def quest_cure_discovery_disease_name():
         if mc.business.research_tier == 0:
@@ -51,11 +59,10 @@ init 1 python:
 
 #Quest defining functions
     def quest_cure_discovery_tracker():
-
-        if quest_cure_discovery.get_quest_flag() <= 101 and quest_cure_discovery.get_quest_flag() > 1:
+        quest = quest_cure_discovery()
+        if quest.get_quest_flag() <= 101 and quest.get_quest_flag() > 1:
             if quest_cure_get_market_contact() == None: #We lose our marketing contact
-                quest_cure_discovery.quest_completed()
-
+                quest.quest_completed()
         return
 
     def quest_cure_discovery_start_requirement():
@@ -73,9 +80,10 @@ init 1 python:
         remove_mandatory_crisis_list_action("quest_cure_discovery_patent_sold_label")
         remove_mandatory_crisis_list_action("quest_cure_discovery_patent_kept_label")
         remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
-        if quest_cure_get_market_contact():
-            quest_cure_get_market_contact().remove_on_talk_event(quest_cure_discovery_market_patent)
-        quest_cure_discovery.quest_event_dict.clear()
+        person = quest_cure_get_market_contact()
+        if person:
+            person.remove_on_talk_event(quest_cure_discovery_market_patent)
+        quest_cure_discovery().quest_event_dict.clear()
         return
 
 
@@ -88,18 +96,18 @@ init 1 python:
 
     def quest_cure_discovery_market_patent_requirement(the_person):
         if mc.business.is_open_for_business():
-            if the_person.location() == the_person.work:
+            if the_person.location == the_person.work:
                 return True #Only while she is at work
         return False
 
     def quest_cure_discovery_patent_sold_requirement():
-        if day >= quest_cure_discovery.quest_event_dict.get("market_day", 0) + 3:
+        if day >= quest_cure_discovery().quest_event_dict.get("market_day", 0) + 3:
             if mc.business.is_open_for_business():
                 return True
         return False
 
     def quest_cure_discovery_patent_kept_requirement():
-        if day >= (quest_cure_discovery.quest_event_dict.get("start_day", 9999) + 1):
+        if day >= (quest_cure_discovery().quest_event_dict.get("start_day", 9999) + 1):
             if mc.business.is_open_for_business(): # only during office hours and we are at work (dialog depends on it)
                 if mc.is_at_work():
                     if time_of_day > 0:
@@ -107,7 +115,7 @@ init 1 python:
         return False
 
     def quest_cure_discovery_market_missed_requirement():
-        if day >= (quest_cure_discovery.quest_event_dict.get("start_day", 9999) + 7) : #One week to talk to marketing
+        if day >= (quest_cure_discovery().quest_event_dict.get("start_day", 9999) + 7) : #One week to talk to marketing
             if time_of_day == 4:
                 return True
         return False
@@ -128,8 +136,8 @@ label quest_cure_discovery_init_label():
 
 label quest_cure_discovery_intro_label():
     $ the_person = mc.business.head_researcher
-    $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
-    $ quest_cure_discovery.quest_event_dict["start_day"] = day
+    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
+    $ quest_cure_discovery().quest_event_dict["start_day"] = day
     if the_person == None:
         return #Bad end
     if mc.location != rd_division:
@@ -166,7 +174,7 @@ label quest_cure_discovery_intro_label():
             "She really doesn't like your answer. Hopefully you haven't burned any bridges with your answer?"
             "As you turn to leave, you can hear her muttering something."
             $ del the_disease
-            $ quest_cure_discovery.set_quest_flag(18)
+            $ quest_cure_discovery().set_quest_flag(18)
             $ mc.business.mandatory_crises_list.append(quest_cure_discovery_patent_kept)
             return
         "Try and sell the patent":
@@ -184,17 +192,18 @@ label quest_cure_discovery_intro_label():
     mc.name "Thank you, [the_person.title], for your research and for bringing this to my attention."
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
 
-    $ del the_disease
-    $ quest_cure_set_market_contact(the_target)
-    $ del the_target
-    $ quest_cure_discovery.set_quest_flag(21)
-    $ quest_cure_get_market_contact().add_unique_on_talk_event(quest_cure_discovery_market_patent)
-    $ mc.business.mandatory_crises_list.append(quest_cure_discovery_market_missed)
+    python:
+        quest_cure_set_market_contact(the_target)
+        quest_cure_discovery().set_quest_flag(21)
+        the_target.add_unique_on_talk_event(quest_cure_discovery_market_patent)
+        mc.business.mandatory_crises_list.append(quest_cure_discovery_market_missed)
+        del the_disease
+        del the_target
     return
 
 label quest_cure_discovery_market_patent_label(the_person):
     $ the_person.draw_person()
-    $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
+    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     mc.name "Hello [the_person.title], do you have a moment?"
     the_person.char "Of course. What can I do for you sir?"
     if the_person == alexia:
@@ -212,15 +221,15 @@ label quest_cure_discovery_market_patent_label(the_person):
     the_person.char "Okay! I can do that. Give me a couple of days and I'll see what I can find!"
     mc.name "Thank you, [the_person.title]."
     $ quest_cure_set_market_contact(the_person)
-    $ quest_cure_discovery.quest_event_dict["market_day"] = day
+    $ quest_cure_discovery().quest_event_dict["market_day"] = day
     $ del the_disease
-    $ quest_cure_discovery.set_quest_flag(31)
+    $ quest_cure_discovery().set_quest_flag(31)
     $ remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
     $ mc.business.mandatory_crises_list.append(quest_cure_discovery_patent_sold)
     return
 
 label quest_cure_discovery_patent_sold_label():
-    $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
+    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     $ the_person = quest_cure_get_market_contact()
     if the_person == None:
         return
@@ -228,38 +237,38 @@ label quest_cure_discovery_patent_sold_label():
     "You get a text message from [the_person.title]."
     the_person.char "Hey there! I just got some good news on that patent you have for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
-    if quest_cure_discovery.quest_event_dict.get("cure_tier", 0) == 0:
+    if quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 0:
         the_person.char "Well, [the_disease] has very few cases annually, so the prospects of a lucrative deal for the patent rights were pretty slim."
         the_person.char "After negotiating, I was able to sell them for $1500. I hope that is okay."
         $ mc.business.funds += 1500
         mc.name "I understand. That is still very helpful. Thank you [the_person.title]."
-    elif quest_cure_discovery.quest_event_dict.get("cure_tier", 0) == 1:
+    elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 1:
         the_person.char "Well, [the_disease] really only propagates in poor, tropical areas, due to the way it spreads."
         the_person.char "While the good this drug can do is great, the profit potential is pretty low. I was only able to sell it for $3500. I hope that is okay."
         $ mc.business.funds += 3500
         mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
-    elif quest_cure_discovery.quest_event_dict.get("cure_tier", 0) == 2:
+    elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 2:
         the_person.char "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person.char "After negotiating, I was able to sell the patent for $15000. I hope that is okay."
         $ mc.business.funds += 15000
         mc.name "That is still a considerable sum. Thank you [the_person.title]."
-    elif quest_cure_discovery.quest_event_dict.get("cure_tier", 0) >= 3:
+    elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) >= 3:
         the_person.char "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person.char "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
         $ mc.business.funds += 50000
         mc.name "That is still a significant sum. Thank you [the_person.title]."
     "The patent is sold! And you made a little extra money for the business."
     $ del the_disease
-    $ quest_cure_discovery.set_quest_flag(101)
-    $ quest_cure_discovery.quest_completed()
+    $ quest_cure_discovery().set_quest_flag(101)
+    $ quest_cure_discovery().quest_completed()
     return
 
 #Bad Ends and paths
 
 label quest_cure_discovery_patent_kept_label():
     $ the_person = mc.business.head_researcher
-    $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
-    $ quest_cure_discovery.set_quest_flag(19)
+    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
+    $ quest_cure_discovery().set_quest_flag(19)
     "You get a notification on your phone and you check it. It's from the Red Cross?"
     "Red Cross""Thank you for donating your patent for [the_disease]!"
     "Red Cross""With this donation, we promise we will work to the best of our abilities to get this cure into the hands of everyone who needs it, worldwide."
@@ -268,7 +277,7 @@ label quest_cure_discovery_patent_kept_label():
         "Suddenly, you realize what must have happened. After clearing out her desk, the old head researcher must have donated the patent she discovered!"
         "Well, maybe you should have considered selling the patent. Either way, that business opportunity is now gone."
         $del the_disease
-        $ quest_cure_discovery.quest_completed()
+        $ quest_cure_discovery().quest_completed()
         return
     else:
         "Suddenly, you realize what must have happened. [the_person.title], not happy with your intention to keep the patent, must have secretly donated the rights to it."
@@ -335,17 +344,17 @@ label quest_cure_discovery_patent_kept_label():
                 "You say goodbye and hang up the phone."
                 "Well, you may have missed out on a financial opportunity, but it sounds like you've gained some consideration from [the_person.title] in the process."
     $ del the_disease
-    $ quest_cure_discovery.quest_completed()
+    $ quest_cure_discovery().quest_completed()
     return
 
 label quest_cure_discovery_market_missed_label():
-    $ the_disease = quest_cure_discovery.quest_event_dict.get("disease_name", "Rabies")
+    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     "Before headed for bed, you check on the latest news on your computer. A headline catches your attention."
     "NEWS""BREAKING NEWS: Scientists at BIOFIRM announce possible cure for [the_disease]."
     "Wait a minute... isn't that the disease your head researcher recently found a possible cure for?"
     "FUCK, she was right. You probably should have moved on those patent rights faster!"
     #TODO remove on talk event to market target.
     $ del the_disease
-    $ quest_cure_discovery.set_quest_flag(29)
-    $ quest_cure_discovery.quest_completed()
+    $ quest_cure_discovery().set_quest_flag(29)
+    $ quest_cure_discovery().quest_completed()
     return

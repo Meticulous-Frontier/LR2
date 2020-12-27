@@ -84,7 +84,7 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
     the_girl.char "So full... holy hell."
     "You hold yourself in deep. Her holes are completely stuffed. She reaches up and grabs her ankles, helping to hold them apart."
     menu:
-        "Talk dirty to her.":
+        "Talk dirty to her":
             mc.name "You take cock like a champ. I bet you would love it if there were another cock to stuff your throat too, wouldn't you?"
             if the_girl.get_opinion_score("threesomes") >= 0:
                 "She looks up at you and bites her lip."
@@ -150,7 +150,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
     mc.name "Fuck me, I'm going to cum!"
     $ the_girl.call_dialogue("cum_pullout")
     menu:
-        "Cum inside of her.":
+        "Cum inside of her":
             if the_girl.sluttiness > 120 or mc.condom:
                 the_girl.char "Come on, dump it right inside of me!"
                 if mc.condom:
@@ -204,7 +204,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 "You take a moment to catch your breath, then sit back and pull your cock out of [the_girl.title]. Her ass gapes slightly where the strap-on was previously buried."
                 "You keep her on her back for a few more seconds, enjoying the way the position keeps your semen inside of her."
 
-        "Cum on her face.":
+        "Cum on her face":
             if mc.condom:
                 "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title]'s face."
             else:
@@ -266,14 +266,14 @@ label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
     the_girl.char "[the_girl.mc_title], I'd like to ah... take off my... my [the_clothing.name], would you mind?"
     "[the_girl.title] pants as you fuck her hard."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = piledriver_DP.position_tag)
             "You let your cock pop out of [the_girl.possessive_title]'s pussy and watch as she struggles out of her [the_clothing.name] and throws it to the side."
             the_girl.char "Okay, keep going now sir!"
             "You throw her legs over your shoulders and slide yourself as deep into her cunt as you can get it. She guides the strap-on into her puckered hole simultaneously."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"

@@ -7,12 +7,12 @@
 init 2 python:
     #Requirement functions
     def candace_meet_at_office_store_requirement(person):
-        if person.location() == office_store:
+        if person.location == office_store:
             return True
         return False
 
     def candace_get_to_know_requirement(person):
-        if person.location() == office_store:
+        if person.location == office_store:
             if not candace_get_has_quit_job():
                 if not candace_can_talk():
                     return "Already talked today"
@@ -31,7 +31,7 @@ init 2 python:
         if candace_get_hire_date() == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
         if day > candace_get_hire_date() + 7:  #She's been working at least a week.
-            if mc.business.funds > 500 and candace.location() == candace.work:
+            if mc.business.funds > 500 and candace.location == candace.work:
                 return True
         return False
 
@@ -39,7 +39,7 @@ init 2 python:
         if day > candace_get_hire_date() + 14:
             if time_of_day > 1:
                 if person.sluttiness > 80:
-                    if person.location() == person.work:
+                    if person.location == person.work:
                         return True
         return False
 
@@ -57,7 +57,7 @@ init 2 python:
         return False
 
     def candace_begin_cure_research_requirement(the_person):
-        if the_person.location() == the_person.work:
+        if the_person.location == the_person.work:
             return True
         return False
 
@@ -771,9 +771,10 @@ label candace_love_path_intro_label():
     "You try to stay awake for her, but your eyes are getting so heavy."
     "You are starting to feel yourself drift off when you hear the bedroom door close as [the_person.title] comes back."
     python:
-        candi_outfit = Outfit("Candi's Pink Nightgown")
-        candi_outfit.add_upper(nightgown_dress.get_copy(), [1.0, .71, .75, .65])
-        the_person.apply_outfit(candi_outfit)
+        the_outfit = Outfit("Candi's Pink Nightgown")
+        the_outfit.add_upper(nightgown_dress.get_copy(), [1.0, .71, .75, .65])
+        the_person.apply_outfit(the_outfit)
+        del the_outfit
     $ the_person.draw_person(position = "stand4")
     "She is wearing a sheer pink nightgown, and absolutely nothing else. Normally a sight like that would be enough to get your blood boiling, but right now you are just too tired."
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
@@ -1084,7 +1085,7 @@ label candace_meet_doctor_candace_label():
 
     "It's been about a week since you cured [the_person.title] of her bimboism... Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
     "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
-    "Yet, everytime she opens her mouth and speaks, she is completely different."
+    "Yet, every time she opens her mouth and speaks, she is completely different."
     "A few days ago you walked by the break room while able trivia show was on, and [the_person.title] was spitting answers out before the host even finished with the question."
     "When she looks you in the eye and speaks, her words carry weight. You don't blow off her suggestions as if they are non sense anymore."
     if candace_get_sex_record_difference_tier() == 0:
@@ -1124,7 +1125,7 @@ label candace_meet_doctor_candace_label():
     the_person "I know. For you to have the morales to do that. But beyond that, to be in this industry, to be in a position to actually help, and to make the pushes necessary to formulate the cure, and to give it to me."
     "[the_person.title] looks you right in the eye and delivers her judgement."
     the_person "It could have only been you. You saved me. And for that, I owe you everything."
-    mc.name "Don't be rediculous, you don't owe me anything..."
+    mc.name "Don't be ridiculous, you don't owe me anything..."
     the_person "I know you feel that way. But it goes beyond that too. You have your flaws, sure. Every man has a vice. But you mean everything to me."
     if the_person.is_girlfriend():
         the_person "I know I've changed a lot, and you may not love me anymore, but I love you. I'm completely yours if you still want me."
@@ -1140,12 +1141,12 @@ label candace_meet_doctor_candace_label():
     $ the_person.draw_person(position = "stand2")
     mc.name "That's... You don't have to do that..."
     the_person "I know. But I want to. Sir, I threw myself at you so many times, you never took advantage of me. Your restraint in everything has been incredible."
-    the_person "No man could have resisted being exposed to the amount of lewdity that you were without succumbing."
+    the_person "No man could have resisted being exposed to the amount of sex appeal I was displaying without succumbing."
     "She continues to disrobe. You are mesmerized by the beautiful woman in front of you."
     $ the_person.outfit.remove_random_upper()
     $ the_person.outfit.remove_random_lower()
     $ the_person.draw_person(position = "stand2")
-    the_person "Besides, even if my brains were scrambled, I still wanted it. And I enjoyed it. A LOT. But I know some part of you still won't believe me."
+    the_person "Besides, even if my brains were scrambled, I still wanted it. And I enjoyed it. A LOT. But I know some part of you still doesn't believe me."
     the_person "So now, I'm going to show you. Actions speak louder than words."
     "She motions to you."
     the_person "Would you please get naked for me? I want to show you how much I loved it, and how much I STILL love your cock. I want you to just sit back, let me get on top of you, and fuck you."
@@ -1160,7 +1161,7 @@ label candace_meet_doctor_candace_label():
     "[the_person.title] gets up on top of you. Her eyes are making direct contact with yours as she takes your cock in one hand and starts to run you up and down her slit. Her natural lubrication soon has you wet and ready for penetration."
     "She leans forward and closes her eyes. Your lips make contact and you begin to kiss. At the same time, she lifts her hips slightly, lines you up with her cunt, and slowly sinks down onto you."
     "Her tongue dances with yours as the first fledgling thrusts are made of her hips onto yours. Her kisses punctuated with moans."
-    the_person "Mmm... You feel so good. I swear, everytime we fuck is better than the last..."
+    the_person "Mmm... You feel so good. I swear, every time we fuck is better than the last..."
     $ the_person.change_arousal(30)
     $ mc.change_arousal(30)
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _meet_dr_candace_fuck_01
@@ -1367,8 +1368,10 @@ init 3 python:
 
 
     def get_police_chief():
+        # use identifier in dictionary instead of PERSON object
         if mc.business.event_triggers_dict.get("Police_Chief", None):
             return mc.business.event_triggers_dict.get("Police_Chief", None)
+
         police_chief = make_person(force_random = True)
         police_chief.set_possessive_title("the police chief")
         police_chief.set_mc_title(mc.name)

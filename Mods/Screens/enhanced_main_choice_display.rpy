@@ -19,7 +19,7 @@ init 2 python:
         def load(self):
             self.display_image = Flatten(self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args))
             # always predict person displayable (the clear_function will remove them from the prediction cache)
-            renpy.start_predict(self.display_image) 
+            renpy.start_predict(self.display_image)
             return
 
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
@@ -60,6 +60,8 @@ init 2 python:
                 mi.title = format_titles(item)
                 mi.return_value = item
 
+                if item.infractions:
+                    mi.title += " {image=infraction_token_small}"
                 if draw_hearts_for_people:
                     mi.title += "\n" + get_heart_image_list(item)
                 if person_preview_args is None:
@@ -104,8 +106,8 @@ init 2 python:
                 mi.is_sensitive = False
 
             if mi.display:
-                if the_person and isinstance(the_person.title, basestring) and isinstance(mi.the_tooltip, basestring):
-                    mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", the_person.title)
+                if isinstance(item,Person) and isinstance(item.title, basestring) and isinstance(mi.the_tooltip, basestring):
+                    mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", item.title)
                 result.append(mi)
         return result
 

@@ -557,6 +557,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     python:
         update_person_sex_record(the_person, report_log)
+        the_person.restore_all_clothing()   # put all half-off clothing back in place
         position_choice = None
         object_choice = None
 
@@ -609,8 +610,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
                 # she is not slutty enough and we have the condom dialog
                 call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
-                $ willing = _return
-                if willing == 0:
+                if _return == 0:
                     $ ask_for_condom = False # we don't have vag/anal sex so if player tries again, she will ask for condom again
                 else:
                     $ use_condom = mc.condom

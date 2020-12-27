@@ -51,12 +51,23 @@ init 10 python:
 
         clear_scene()
         cs = renpy.current_screen()
+
+        hide_list = []
+        if cs.scope["hide_underwear"]:
+            hide_list.append(1)
+        if cs.scope["hide_base"]:
+            hide_list.append(2)
+        if cs.scope["hide_overwear"]:
+            hide_list.append(3)
+
+        cs.scope["hide_list"] = hide_list
+
         if cs.scope["mannequin"] == "mannequin":
-            renpy.show_screen("mannequin", cs.scope[outfit])
+            renpy.show_screen("mannequin", cs.scope[outfit], "mannequin", hide_list)
         else:
             if renpy.get_screen("mannequin"):
                 renpy.hide_screen("mannequin")
-            draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"])
+            draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"], hide_list = hide_list)
 
         renpy.restart_interaction()
 
@@ -190,6 +201,16 @@ init 10 python:
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
 
+        preview_outfit()
+
+    def update_transparency(new_value):
+        cs = renpy.current_screen()
+
+        cs.scope["current_a"] = __builtin__.round(float(new_value),2)
+        if cs.scope["selected_colour"] == "colour_pattern":
+            cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+        else:
+            cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
         preview_outfit()
 
     def update_slut_generation(new_value):
@@ -335,6 +356,10 @@ init 2:
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
         default max_slut = outfit_type == "over" and 8 or 12
+        default hide_underwear = False
+        default hide_base = False
+        default hide_overwear = False
+        default hide_list = []
 
         if outfit_type == "under":
             $ valid_layers = [0,1]
@@ -351,10 +376,10 @@ init 2:
         $ categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
             "Bras": [bra_list, Outfit.can_add_upper, Outfit.add_upper],
-            "Pants": [pants_list, Outfit.can_add_lower, Outfit.add_lower],
+            "Pants": [[x for x in pants_list if not x in [cop_pants]] , Outfit.can_add_lower, Outfit.add_lower],
             "Skirts": [skirts_list, Outfit.can_add_lower, Outfit.add_lower],
             "Dresses": [dress_list, Outfit.can_add_dress, Outfit.add_dress],
-            "Shirts": [shirts_list, Outfit.can_add_upper, Outfit.add_upper],
+            "Shirts": [[x for x in shirts_list if not x in [cop_blouse]], Outfit.can_add_upper, Outfit.add_upper],
             "Socks": [socks_list, Outfit.can_add_feet, Outfit.add_feet],
             "Shoes": [shoes_list, Outfit.can_add_feet, Outfit.add_feet],
             "Facial": [earings_list, Outfit.can_add_accessory, Outfit.add_accessory],
@@ -377,7 +402,6 @@ init 2:
         default current_a = 1.0
 
         default slut_generation = 0
-
 
         # $ current_colour = [1.0,1.0,1.0,1.0] #This is the colour we will apply to all of the clothing
 
@@ -417,13 +441,13 @@ init 2:
                     vbox:
                         spacing 15
                         viewport:
-                            ysize 480
+                            ysize 440
                             xminimum 605
                             scrollbars "vertical"
                             mousewheel True
                             frame:
                                 xsize 620
-                                yminimum 480
+                                yminimum 440
                                 background "#888888"
                                 vbox:
                                     #THIS IS WHERE ITEM CHOICES ARE SHOWN
@@ -463,7 +487,7 @@ init 2:
                                                 ]
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
-                            xysize (605, 480)
+                            xysize (605, 520)
                             background "#888888"
                             if selected_clothing is not None:
                                 vbox:
@@ -471,8 +495,7 @@ init 2:
                                     frame:
                                         background "#aaaaaa"
                                         xfill True
-                                        textbutton "Add " + selected_clothing.name + " to outfit" + "\n+" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
-
+                                        textbutton "Add " + selected_clothing.name + " to outfit\n" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             background "#1a45a1"
@@ -634,9 +657,9 @@ init 2:
                                                     hbox:
                                                         spacing 5
                                                         if color_selection:
-                                                            hbox:
+                                                            vbox:
                                                                 spacing 5
-                                                                grid 2 2:
+                                                                grid 3 1:
                                                                     xfill True
                                                                     frame:
 
@@ -710,31 +733,49 @@ init 2:
                                                                                 hovered SetScreenVariable("bar_value", "current_b")
                                                                                 unhovered [SetScreenVariable("current_b",__builtin__.round(current_b,2))]
 
+                                                                # frame:
+                                                                #     background "#aaaaaa"
+                                                                #     hbox:
+                                                                #         button:
+                                                                #             background "#111111"
+                                                                #             action ToggleScreenVariable("bar_select", 4, 0)
+                                                                #             hovered SetScreenVariable("bar_value", "current_a")
+
+                                                                #             if bar_select == 4:
+                                                                #                 input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
+                                                                #             else:
+                                                                #                 text "A "+ "%.2f" % current_a style "serum_text_style" yalign 0.5 size 16
+                                                                #             xsize 75
+                                                                #             ysize 45
+
+                                                                #         bar:
+
+                                                                #             adjustment ui.adjustment(range = 1.00, value = current_a, step = 0.1, changed = colour_changed_bar)
+                                                                #             xfill True
+                                                                #             ysize 45
+                                                                #             style style.slider
+
+                                                                #             hovered SetScreenVariable("bar_value", "current_a")
+                                                                #             unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2))]
+
+                                                                hbox:
+                                                                    spacing 5
+                                                                    for trans in ['1.0', '0.95', '0.9', '0.8', '0.75', '0.66', '0.5', '0.33']:
+                                                                        $ trans_name = str(int(float(trans)*100)) + "%"
+                                                                        button:
+                                                                            if current_a == float(trans):
+                                                                                background "#4f7ad6"
+                                                                            else:
+                                                                                background "#1a45a1"
+                                                                            text trans_name style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
+                                                                            xysize (60, 40)
+                                                                            action [Function(update_transparency, float(trans))]
                                                                     frame:
+                                                                        padding [0,0]
+                                                                        xysize (60, 40)
+                                                                        background "#000"
+                                                                        text str(int(float(current_a)*100)) + "%" style "serum_text_style" yalign 0.5 size 16
 
-                                                                        background "#aaaaaa"
-                                                                        hbox:
-                                                                            button:
-                                                                                background "#111111"
-                                                                                action ToggleScreenVariable("bar_select", 4, 0)
-                                                                                hovered SetScreenVariable("bar_value", "current_a")
-
-                                                                                if bar_select == 4:
-                                                                                    input default current_a length 4 changed colour_changed_bar allow ".0123456789" style "serum_text_style" size 16
-                                                                                else:
-                                                                                    text "A "+ "%.2f" % current_a style "serum_text_style" yalign 0.5 size 16
-                                                                                xsize 75
-                                                                                ysize 45
-
-                                                                            bar:
-
-                                                                                adjustment ui.adjustment(range = 1.00, value = current_a, step = 0.1, changed = colour_changed_bar)
-                                                                                xfill True
-                                                                                ysize 45
-                                                                                style style.slider
-
-                                                                                hovered SetScreenVariable("bar_value", "current_a")
-                                                                                unhovered [SetScreenVariable("current_a",__builtin__.round(current_a,2))]
                                                     if color_selection:
                                                         for block_count, colour_list in __builtin__.enumerate(split_list_in_blocks(persistent.colour_palette, 13)):
                                                             hbox:
@@ -886,7 +927,7 @@ init 2:
                                 if outfit_stats:
                                     frame:
                                         background "#888888"
-                                        yfill True
+                                        ysize 354
                                         viewport:
                                             draggable True
                                             mousewheel True
@@ -897,7 +938,7 @@ init 2:
                                                     background "#000080"
                                                     xsize 250
                                                     padding [1,1]
-                                                    text "Sluttiness (Full Outfit): " + str(demo_outfit.slut_requirement) style "serum_text_style_traits"
+                                                    text "Sluttiness (Full Outfit): " + str(demo_outfit.get_full_outfit_slut_score()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
                                                     xsize 250
@@ -969,7 +1010,35 @@ init 2:
                                                 #     if (selected_clothing):
                                                 #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
 
-
+                                frame:
+                                    background "#888888"
+                                    xsize 262
+                                    vbox:
+                                        frame:
+                                            background "#000080"
+                                            padding [1,1]
+                                            xsize 250
+                                            text "Visible Layers:" style "serum_text_style_traits"
+                                        hbox:
+                                            xfill True
+                                            textbutton "Under":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xsize 78
+                                                background ("#444444" if hide_underwear else "#000088")
+                                                action [ToggleScreenVariable("hide_underwear", False, True), Function(preview_outfit)]
+                                            textbutton "Clothing":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xsize 86
+                                                background ("#444444" if hide_base else "#000088")
+                                                action [ToggleScreenVariable("hide_base", False, True), Function(preview_outfit)]
+                                            textbutton "Over":
+                                                style "textbutton_no_padding_highlight"
+                                                text_style "serum_text_style"
+                                                xsize 78
+                                                background ("#444444" if hide_overwear else "#000088")
+                                                action [ToggleScreenVariable("hide_overwear", False, True), Function(preview_outfit)]
 
                             vbox:
                                 frame:
@@ -977,43 +1046,41 @@ init 2:
 
                                     xfill True
                                     viewport:
-                                            scrollbars "vertical"
-                                            mousewheel True
-                                            yfill True
-                                            xfill True
-                                            vbox:
+                                        scrollbars "vertical"
+                                        mousewheel True
+                                        yfill True
+                                        xfill True
+                                        vbox:
+                                            spacing 5
+                                            for cloth in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories:
+                                                if not cloth.is_extension and not cloth.layer in hide_list:
+                                                    button:
+                                                        background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
 
-                                                spacing 5 #TODO: Add a viewport here too.
-                                                for cloth in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories:
-                                                    if not cloth.is_extension: #Don't list extensions for removal.
-                                                        button:
-                                                            background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
+                                                        action [ # NOTE: Left click makes more sense for selection than right clicking
 
-                                                            action [ # NOTE: Left click makes more sense for selection than right clicking
+                                                            SetScreenVariable("selected_from_outfit", cloth),
+                                                            SetScreenVariable("category_selected", get_category(cloth)),
+                                                            SetScreenVariable("selected_clothing", cloth),
+                                                            Function(preview_apply, cloth),
 
-                                                                SetScreenVariable("selected_from_outfit", cloth),
-                                                                SetScreenVariable("category_selected", get_category(cloth)),
-                                                                SetScreenVariable("selected_clothing", cloth),
-                                                                Function(preview_apply, cloth),
+                                                            #Function(preview_restore, cloth),
+                                                            SetScreenVariable("current_r",cloth.colour[0]),
+                                                            SetScreenVariable("current_g",cloth.colour[1]),
+                                                            SetScreenVariable("current_b",cloth.colour[2]),
+                                                            SetScreenVariable("current_a",cloth.colour[3]),
 
-                                                                #Function(preview_restore, cloth),
-                                                                SetScreenVariable("current_r",cloth.colour[0]),
-                                                                SetScreenVariable("current_g",cloth.colour[1]),
-                                                                SetScreenVariable("current_b",cloth.colour[2]),
-                                                                SetScreenVariable("current_a",cloth.colour[3]),
-
-                                                                Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
-                                                            ]
-                                                            alternate [
-                                                                Function(item_outfit.remove_clothing, cloth),
-                                                                Function(demo_outfit.remove_clothing, cloth),
-                                                                Function(preview_outfit)
-                                                            ]
-                                                            xalign 0.5
-                                                            xfill True
-                                                            yfill True
-                                                            text cloth.name xalign 0.5 yalign 0.5 xfill True yfill True style "custom_outfit_style"
-
+                                                            Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                        ]
+                                                        alternate [
+                                                            Function(item_outfit.remove_clothing, cloth),
+                                                            Function(demo_outfit.remove_clothing, cloth),
+                                                            Function(preview_outfit)
+                                                        ]
+                                                        xalign 0.5
+                                                        xfill True
+                                                        yfill True
+                                                        text cloth.name xalign 0.5 yalign 0.5 xfill True yfill True style "custom_outfit_style"
 
                 frame:
                     background "#aaaaaa"
@@ -1305,6 +1372,7 @@ init 2:
                                                             ]
 
                                                             alternate NullAction()
+
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
             xsize 54

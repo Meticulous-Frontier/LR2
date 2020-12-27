@@ -24,7 +24,7 @@ init 2 python:
 label clone_recall_label(the_person):
     "You order [the_person.title] back to [dungeon.name]"
 
-    $ mc.location.move_person(the_person, dungeon)
+    $ the_person.change_location(dungeon)
 
     the_person.char "Okay, [the_person.mc_title]. I'll head there next."
     return

@@ -55,7 +55,11 @@ label salon_response(person_choice): # How does the_person respond to a company 
     call screen hair_creator(the_person, hair_style_check, pubes_style_check) # This is the "store" / "salon" part of the mod. TODO: Find a different way to check for changes in hair color
     call salon_checkout() from _call_salon_checkout #Will return here if nothing qualifies
     call advance_time from _call_advance_time_hair_salon
-    $ clear_scene()
+
+    python:
+        clear_scene()
+        del hair_style_check
+        del pubes_style_check
     return
 
 label salon_checkout():

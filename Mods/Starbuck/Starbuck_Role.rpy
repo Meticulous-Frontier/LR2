@@ -63,7 +63,7 @@ init 2 python:
 
 init -1 python:
     def starbuck_introduction_requirement(the_person):
-        if starbuck.location() == sex_store:    # only trigger event when starbuck is there
+        if starbuck.location == sex_store:    # only trigger event when starbuck is there
             return True
         return False
 
@@ -123,7 +123,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_investment_one_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage == 0:
             if mc.business.funds >= 1000:
@@ -132,7 +132,7 @@ init -1 python:
                 return "Requires: $1000"
 
     def starbuck_sex_store_investment_two_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage == 1:
             if (the_person.event_triggers_dict.get("shop_stage_one_day", 9999) + 7) < day:
@@ -144,7 +144,7 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_investment_three_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage == 2:
             if (the_person.event_triggers_dict.get("shop_stage_two_day", 9999) + 7) < day:
@@ -156,7 +156,7 @@ init -1 python:
                 return "Wait for her stock to balance out"
 
     def starbuck_sex_store_promo_one_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 1.0:
@@ -164,7 +164,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_two_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage > 0:
             if the_person.shop_investment_rate == 2.0:
@@ -172,7 +172,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_three_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 3.0:
@@ -186,7 +186,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_four_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage > 1:
             if the_person.shop_investment_rate == 4.0:
@@ -200,7 +200,7 @@ init -1 python:
         return False
 
     def starbuck_sex_store_promo_five_requirement(the_person):
-        if not starbuck.location() == sex_store:
+        if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage > 2:
             if the_person.shop_investment_rate == 5.0:
@@ -229,13 +229,13 @@ init -1 python:
                     return "She closes in the evening"
 
     def starbuck_candace_product_demo_requirement(the_person):
-        if starbuck.location() == sex_store:
-            if the_person.location() == the_person.work:
+        if starbuck.location == sex_store:
+            if the_person.location == the_person.work:
                 return True
         return False
 
     def starbuck_candace_recurring_event_requirement(the_person):
-        if starbuck.location() == sex_store and candace.location() == sex_store:
+        if starbuck.location == sex_store and candace.location == sex_store:
             if day%7 == 5 and time_of_day == 3:  #Saturday evening
                 return True
         return False
@@ -1106,6 +1106,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "Getting [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
     $ mc.location.show_background()
     $ clear_scene()
+    $ strip_choice = None
     return
 
 
@@ -1752,6 +1753,7 @@ label starbuck_replay_dressup_label(the_person):
             "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
+        $ strip_choice = None
         "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
         $ the_person.apply_outfit(created_outfit, update_taboo = True)
         $ the_person.draw_person()
@@ -2179,7 +2181,7 @@ label starbuck_candace_recurring_event_label(the_person_one):
         the_person_two "There was no telling if it would even be effective or not. It was truly groundbreaking [the_person_one.name]."
         the_person_one "I know! I know... I just... I mean that could have gone wrong too, right?"
         the_person_two "I didn't realize it at the time, but in hindsight, I agree that it was worth the risk. I'm very fortunate [the_person_two.mc_title] made the decisions he did!"
-        "You see her expession soften."
+        "You see her expression soften."
         $ scene_manager.update_actor(the_person_one, position = "stand2", emotion = "happy")
         the_person_one "I'm sorry I didn't mean to downplay this. It really is incredible."
         the_person_one "Thank you partner. Its amazing what you have done for her. I'll never forget it!"
@@ -2193,9 +2195,12 @@ label starbuck_candace_recurring_event_label(the_person_one):
         "You head out from the store, giving the two girls time to catch up on things."
         $ the_person_one.event_triggers_dict["knows_candace_cured"] = True
 
+    python:
+        the_person_one.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
+        scene_manager.clear_scene()
 
-    $ the_person_one.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
-    $ scene_manager.clear_scene()
+        del the_person_one
+        del the_person_two
     return
 
 
@@ -2412,7 +2417,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 "Thinking about the pleasure they are getting is starting to arouse you."
                 $ mc.change_arousal(3)
                 if renpy.random.randint(0,2) == 0 and not cock_available:
-                    "The excitment is getting to be too much. You decide to get more comfortable. You quickly disrobe."
+                    "The excitement is getting to be too much. You decide to get more comfortable. You quickly disrobe."
                     "[the_person_one.title] gasps when your cock springs free. [the_person_two.title] is starting at it, hungrily."
                     mc.name "It's time to take things up a notch."
             else:
@@ -2422,7 +2427,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 "The distinct smell of feminine arousal in the air, mixed with punctuations of moans and gasps is really starting to turn you on."
                 $ mc.change_arousal(3)
                 if not cock_available:
-                    "The excitment is getting to be too much. You decide to get more comfortable. You quickly disrobe."
+                    "The excitement is getting to be too much. You decide to get more comfortable. You quickly disrobe."
                     "[the_person_one.title] gasps when your cock springs free. [the_person_two.title] is starting at it, hungrily."
                     mc.name "It's time to take things up a notch."
             if renpy.random.randint(0,1) == 0:
@@ -2583,7 +2588,7 @@ label starbuck_intro():
         else:
             the_person.char "Is there anything I can help you with?"
     elif (the_person.shop_progress_stage) >= 2 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
-        if candace.sluttiness > 60: #Seperate candace slut check since I never check to make sure she exists in globals
+        if candace.sluttiness > 60: #Separate candace slut check since I never check to make sure she exists in globals
             call starbuck_cargo_shipment_label(the_person) from _begin_candi_duo_event_intro_01
         else:
             "[the_person.possessive_title] smiles playfully."

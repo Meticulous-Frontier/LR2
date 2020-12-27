@@ -14,12 +14,13 @@ init 2 python:
 
     def ophelia_gets_dumped_requirement(person):
         if day >= ophelia_get_day_met() + 4:
-            return True
+            if person.location == mall_salon:
+                return True
         return False
 
     def ophelia_coworker_conversation_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 4:
-            if person.location() == mall_salon:
+            if person.location == mall_salon:
                 return True
         return False
 
@@ -44,7 +45,7 @@ init 2 python:
 
     def ophelia_ex_bf_phone_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 14: #Wait atleast two weeks after getting dumped
-            if person.location() == mall_salon:
+            if person.location == mall_salon:
                 if person.sluttiness >= 20:
                     return True
         return False
@@ -53,7 +54,7 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
             return False
-        if person.location() == mall_salon:
+        if person.location == mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
@@ -63,14 +64,14 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
             return False
-        if not salon_manager.location() == mall_salon:
+        if not salon_manager.location == mall_salon:
             return False
         if time_of_day == 3:
             return True
         return False
 
     def ophelia_blowjob_pics_review_requirement(person):
-        if not person.location() == mall_salon:
+        if not person.location == mall_salon:
             return False
         if time_of_day < 4:
             return True
@@ -78,7 +79,7 @@ init 2 python:
 
     def ophelia_revenge_date_plan_requirement(person):
         if person.sluttiness >= 40:
-            if person.location() == mall_salon:
+            if person.location == mall_salon:
                 if day >= ophelia_get_day_dumped() + 21:
                     return True
         return False
@@ -95,7 +96,7 @@ init 2 python:
 
     def ophelia_is_over_her_ex_requirement(person):
         if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
-            if person.location() == mall_salon:
+            if person.location == mall_salon:
                 return True
         return False
 
@@ -117,7 +118,7 @@ init 2 python:
     def ophelia_increased_service_begin_requirement(person):
         if ophelia_get_is_over_her_ex():
             if person.sluttiness_tier >= 3:
-                if person.location() == mall_salon:
+                if person.location == mall_salon:
                     return True
         return False
 
@@ -197,7 +198,10 @@ label cut_hair_label(the_person):
     else:
         the_person.char "It seems you preferred my old look, [the_person.mc_title]."
 
-    $ clear_scene()
+    python:
+        clear_scene()
+        del hair_style_check
+        del pubes_style_check
     return
 
 label ophelia_gets_dumped_label(the_person):
@@ -454,6 +458,7 @@ label ophelia_make_blowjob_pics_label():
         mc.name "But who knows how long that'll be? Besides, he's off doing..."
         the_person.char "I know what he's doing. But its okay. He'll come back to me eventually. I can be patient."
         "It is clear you aren't going to be able to reason with her."
+        "[the_person.possessive_title] leads you to the front door."
     else:
         the_person.char "I mean, I'm trying to get back with my ex..."
         mc.name "But who knows how long that'll be? Besides, he's off doing whatever with that other girl. Surely you could let yourself go and get a little relief your self?"
@@ -476,7 +481,9 @@ label ophelia_make_blowjob_pics_label():
             "Her disappointment is obvious."
             the_person.char "Guess I'll just go home and masturbate... again..."
         "You clean yourself up."
-    "[the_person.possessive_title] leads you to the front door."
+        $ the_person.apply_outfit()
+        $ the_person.draw_person()
+        "[the_person.possessive_title] puts on her clothes and leads you to the front door."
     the_person.char "Thanks for your help tonight. I have a couple more things to do before I head home. Gonna send those pics out..."
     "You say goodbye and then walk out of the salon. You wonder what her ex will think when he gets those pictures..."
     $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 3

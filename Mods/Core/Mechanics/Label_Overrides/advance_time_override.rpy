@@ -26,26 +26,11 @@ init -1 python:
     def advance_time_random_morning_crisis_requirement():
         return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
 
-    def advance_time_daily_serum_dosage_requirement():
-        return time_of_day == 1 and daily_serum_dosage_policy.is_active() and mc.business.is_work_day() # This runs if you have the corresponding policy
-
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
 
     def advance_time_people_run_turn_requirement():
         return True
-
-    def advance_time_stay_wet_requirement():
-        return stay_wet_action.enabled
-
-    def advance_time_collar_person_requirement():
-        return collar_slave_action.enabled
-
-    def advance_time_mandatory_vibe_action_requirement():
-        # Only run while employees are at work.
-        if mc.business.is_open_for_business():
-            return mandatory_vibe_policy.is_active()
-        return False
 
     def jump_game_loop():
         # make sure we empty the call stack before jumping to main loop
@@ -102,32 +87,13 @@ init 5 python:
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = 9, category = "Gameplay")
 
-    advance_time_daily_serum_dosage_action = ActionMod("Employees daily Serum", advance_time_daily_serum_dosage_requirement,
-        "advance_time_daily_serum_dosage_label", priority = 10, allow_disable = False)
-
+    # People run move Actions
     advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
         "advance_time_people_run_move_label", priority = 15, allow_disable = False)
 
-    # Slave Role Advance Time Actions
-    advance_time_stay_wet_action = ActionMod("Execute slave 'stay wet'", advance_time_stay_wet_requirement,
-        "advance_time_stay_wet_label", priority = 20, allow_disable = False, menu_tooltip = "People with 'stay_wet = True' have their minimum arousal set to 50%")
-
-    advance_time_collar_person_action = ActionMod("Execute slave 'collar'", advance_time_collar_person_requirement,
-        "advance_time_collar_person_label", allow_disable = False, priority = 22, menu_tooltip = "Allows the collar_slave_action to do what it is intended to.")
-
-    # Mandatory Vibe Company Action
-    advance_time_mandatory_vibe_company_action = ActionMod("Attach vibes to outfits", advance_time_mandatory_vibe_action_requirement,
-        "advance_time_mandatory_vibe_company_label", priority = 2, enabled = False, allow_disable = False, category = "Business")
-
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
-        advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action, advance_time_daily_serum_dosage_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_mandatory_vibe_company_action]
-
-    if "slave_role" in globals():
-        if advance_time_stay_wet_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_stay_wet_action)
-        if advance_time_collar_person_action not in advance_time_action_list:
-            advance_time_action_list.append(advance_time_collar_person_action)
+        advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action]
 
     # sort list on execution priority
     advance_time_action_list.sort(key = lambda x: x.priority)
@@ -239,36 +205,20 @@ init 5 python:
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
-                person.location().move_person(person, mc.location)
+                person.change_location(mc.location)
+
+        mc.business.run_move()
         return
 
     def advance_time_assign_limited_time_events(people):
         for (person, place) in people:
-            if person.mc_title != "Stranger" and renpy.random.randint(0,100) < 12: #Only assign one to 12% of people, to cut down on the number of people we're checking.
+            if person.mc_title != "Stranger" and renpy.random.randint(0,100) < 10: #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
-                    #renpy.notify("Created event: " + crisis[0].name + " for " + people.name)
-                    if crisis[2] == "on_talk" and __builtin__.len(person.on_talk_event_list) == 0: # prevent multiple on talk events for person
+                    if crisis[2] == "on_talk" and not any([x for x in person.on_talk_event_list if isinstance(x, Limited_Time_Action)]):
                         person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
-                    elif crisis[2] == "on_enter":
-                        if not exists_in_room_enter_list(person, crisis[0].effect): # prevent adding the same event twice
-                            person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
-        return
-
-    def advance_time_slave_stay_wet(people):
-        for (person, place) in [x for x in people if x[0].stay_wet and x[0].arousal < 50]:
-            person.arousal = 50
-        return
-
-    def advance_time_slave_collar(people):
-        for (person,place) in [x for x in people if x[0].slave_collar and x[0].obedience < 130]:
-            person.obedience = 130
-        return
-
-    def advance_time_mandatory_vibe():
-        if mc.business.is_open_for_business():
-            for person in [x for x in mc.business.get_employee_list() if x.arousal < 30]:
-                person.arousal = 30
+                    elif crisis[2] == "on_enter" and not any([x for x in person.on_room_enter_event_list if isinstance(x, Limited_Time_Action)]):
+                        person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
         return
 
 label advance_time_move_to_next_day(no_events = True):
@@ -308,9 +258,6 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         c = None
         people_to_process = []
         person = None
-        # save game
-        if time_of_day == 0:
-            renpy.force_autosave(take_screenshot = True, block = False)
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
@@ -375,6 +322,7 @@ label advance_time_mandatory_crisis_label():
                 mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
 
         del clear_list
+        crisis = None
     return
 
 label advance_time_people_run_turn_label():
@@ -440,6 +388,7 @@ label advance_time_mandatory_morning_crisis_label():
             mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
 
         del clear_list
+        crisis = None
     return
 
 label advance_time_random_morning_crisis_label():
@@ -465,25 +414,8 @@ label advance_time_next_label():
             time_of_day += 1 ##Otherwise, just run the end of day code.
     return
 
-label advance_time_daily_serum_dosage_label():
-    # "advance_time_daily_serum_dosage_label - timeslot [time_of_day]" #DEBUG
-    $ mc.business.give_daily_serum()
-    return
-
 label advance_time_people_run_move_label():
     # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
     $ advance_time_run_move(people_to_process)
     $ advance_time_assign_limited_time_events(people_to_process)
-    return
-
-label advance_time_stay_wet_label():
-    $ advance_time_slave_stay_wet(people_to_process)
-    return
-
-label advance_time_collar_person_label():
-    $ advance_time_slave_collar(people_to_process)
-    return
-
-label advance_time_mandatory_vibe_company_label():
-    $ advance_time_mandatory_vibe()
     return

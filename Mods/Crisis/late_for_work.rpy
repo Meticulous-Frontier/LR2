@@ -285,6 +285,7 @@ label late_for_work_action_label:
                     the_person.char "Yes boss, as you wish."
                 else:
                     the_person.char "Alright [the_person.mc_title], right away."
+                $ the_person.apply_outfit()
 
         $ the_person.draw_person(position = 'walking_away')
         "The client wires the money to your company account, but must have forgot to actually place an order."

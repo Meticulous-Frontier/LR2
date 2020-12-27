@@ -1,11 +1,14 @@
 init -1 python:
     def get_hr_director(self):
         if not hasattr(self, "_hr_director"):
-            self._hr_director = False
-        return self._hr_director
+            self._hr_director = None
+        return next((x for x in all_people_in_the_game() if x.identifier == self._hr_director), None)
 
-    def set_hr_director(self, value):
-        self._hr_director = value
+    def set_hr_director(self, item):
+        if isinstance(item, Person):
+            self._hr_director = item.identifier
+        else:
+            self._hr_director = None
 
     def del_hr_director(self):
         del self._hr_director
@@ -62,9 +65,9 @@ init -1 python:
         person.add_role(employee_role)
         person.job = self.get_employee_title(person)
         person.set_work(div_func[target_division][1])
-        self.update_employee_status(person)
         if add_to_location:
             div_func[target_division][1].add_person(person)
+        self.update_employee_status(person)
 
     Business.hire_person = hire_person
 
@@ -103,3 +106,26 @@ init -1 python:
 
     # wrap up the run_day function
     Business.run_day = business_run_day_extended(Business.run_day)
+
+    # add fire HR director function to Business
+    def fire_HR_director(self):
+        if self.hr_director:
+            self.hr_director.remove_role(HR_director_role)
+            self.hr_director = None
+            cleanup_HR_director_meetings()
+
+    Business.fire_HR_director = fire_HR_director
+
+
+    # wrap default remove_employee function to also trigger the fire_HR_director code when needed
+    def business_remove_employee_extended(org_func):
+        def remove_employee_wrapper(business, person, remove_linked = True):
+            org_func(business, person, remove_linked)
+
+            if person is business.hr_director:
+                business.fire_HR_director()
+
+        return remove_employee_wrapper
+
+    Business.remove_employee = business_remove_employee_extended(Business.remove_employee)
+

@@ -261,29 +261,29 @@ init -1 python:
         outfit_builder = WardrobeBuilder(person)
 
         for outfit in renpy.random.sample(default_wardrobe.outfits, __builtin__.len(default_wardrobe.outfits)):
-            if outfit.has_overwear() and preferences.evaluate_outfit(outfit, 999) and outfit_builder.approves_outfit_color(outfit):
+            if not outfit.has_clothing(sweater_dress) and outfit.has_overwear() and preferences.evaluate_outfit(outfit, 999) and outfit_builder.approves_outfit_color(outfit):
                 base_wardrobe.add_outfit(outfit.get_copy())
-            if __builtin__.len(base_wardrobe.outfits) > 7:
+            if __builtin__.len(base_wardrobe.outfits) > 5:
                 break
 
         for overwear in renpy.random.sample(default_wardrobe.overwear_sets, __builtin__.len(default_wardrobe.overwear_sets)):
-            if overwear.is_suitable_overwear_set() and preferences.evaluate_outfit(overwear, 999) and outfit_builder.approves_outfit_color(overwear):
+            if not outfit.has_clothing(sweater_dress) and overwear.is_suitable_overwear_set() and preferences.evaluate_outfit(overwear, 999) and outfit_builder.approves_outfit_color(overwear):
                 base_wardrobe.add_overwear_set(overwear.get_copy())
-            if __builtin__.len(base_wardrobe.overwear_sets) > 7:
+            if __builtin__.len(base_wardrobe.overwear_sets) > 5:
                 break
 
         for underwear in renpy.random.sample(default_wardrobe.underwear_sets, __builtin__.len(default_wardrobe.underwear_sets)):
             if underwear.is_suitable_underwear_set() and preferences.evaluate_outfit(underwear, 999) and outfit_builder.approves_outfit_color(underwear):
                 base_wardrobe.add_underwear_set(underwear.get_copy())
-            if __builtin__.len(base_wardrobe.underwear_sets) > 7:
+            if __builtin__.len(base_wardrobe.underwear_sets) > 5:
                 break
 
-        # ensure we have at least 3 auto generated outfits by removing surplus, but keep the most decent outfit from default wardrobe
-        while __builtin__.len(base_wardrobe.outfits) > 5:
+        # ensure we have at least 2 base wardrobe outfits by removing surplus, but keep the most decent outfit from default wardrobe
+        while __builtin__.len(base_wardrobe.outfits) > 3:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.outfits, key = lambda x: x.slut_requirement)[renpy.random.randint(1,__builtin__.len(base_wardrobe.outfits)-1)])
-        while __builtin__.len(base_wardrobe.overwear_sets) > 5:
+        while __builtin__.len(base_wardrobe.overwear_sets) > 3:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.overwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(1,__builtin__.len(base_wardrobe.overwear_sets)-1)])
-        while __builtin__.len(base_wardrobe.underwear_sets) > 5:
+        while __builtin__.len(base_wardrobe.underwear_sets) > 3:
             base_wardrobe.remove_outfit(sorted(base_wardrobe.underwear_sets, key = lambda x: x.slut_requirement)[renpy.random.randint(1,__builtin__.len(base_wardrobe.underwear_sets)-1)])
 
         person.wardrobe = base_wardrobe
@@ -291,7 +291,8 @@ init -1 python:
         # add make-up to base outfit (based on pref)
         add_make_up_to_outfit(person, person.base_outfit)
 
-        enhance_existing_wardrobe(person, 8)
+        # add some auto generated outfits (max 4 outfits per category)
+        enhance_existing_wardrobe(person, 4)
         return
 
     def get_party_destinations():
@@ -314,14 +315,14 @@ init -1 python:
                 if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
                     add_party_destination_by_room(bdsm_room)
         else:
-            party_destinations.append(strip_club)
+            add_party_destination_by_room(strip_club)
 
         return party_destinations
 
 
     def create_party_schedule(person):
         person.set_alt_schedule(None, times = [4])
-        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) or person in stripclub_strippers:
+        if person.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
 
         count = 0
@@ -469,16 +470,11 @@ init -1 python:
         if "erica" in globals():
             unique_character_list.append(erica)
 
-        # disable for now, random outfits remove uniqueness of character in story line
-        # make sure unique characters have at least six outfits / overwear sets to choose from
-        #python:
-        #    for person in unique_character_list:
-        #        enhance_existing_wardrobe(person, 6)
         return
 
     def update_stripclub_strippers():
         for person in stripclub_strippers:
-            person.location().people.remove(person)
+            person.location.people.remove(person)
             list_of_places.remove(person.home)
             person.remove_person_from_game()
         stripclub_strippers.clear()

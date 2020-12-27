@@ -17,27 +17,23 @@ init 1 python:
     SB_vaginal_lily_outfit.add_accessory(lipstick.get_copy(), colour_red)
 
     def SB_fetish_mom_vaginal_requirement():
-        if mc_asleep():
-            if mc.energy > 30:
-                return True
+        if not day%7 == 4 and mc_asleep() and mc.energy > 30:   # not on Friday night
+            return True
         return False
 
     def SB_fetish_lily_vaginal_requirement():
-        if mc_asleep():
-            if mc.energy > 30:
-                return True
+        if not day%7 == 4 and mc_asleep() and mc.energy > 30:   # not on Friday night
+            return True
         return False
 
     def SB_fetish_vaginal_requirement():
-        if mc_asleep():
-            if mc.energy > 30:  #Must have the energy to handle a long sexy night
-                return True
+        if not day%7 == 4 and mc_asleep() and mc.energy > 30:   # not on Friday night
+            return True
         return False
 
     def SB_fetish_vaginal_event_requirement():
-        if mc_asleep():
-            if mc.energy > 30:
-                return True
+        if not day%7 == 4 and mc_asleep() and mc.energy > 30:   # not on Friday night
+            return True
         return False
 
     def add_breed_me_collar_to_base_outfit(person):
@@ -450,7 +446,7 @@ label SB_fetish_lily_vaginal_label():
 
 init 1 python:
     def SB_cowgirl_wakeup_requirement():
-        if time_of_day == 0:
+        if not day%7 == 5 and time_of_day == 0:
             return True
         return False
 
@@ -493,7 +489,7 @@ label SB_cowgirl_wakeup_label(the_person):
 
 init 2 python:
     def SB_fetish_vaginal_recurring_requirement():
-        if mc_asleep() and day % 7 is not 4: # not on Friday nights
+        if mc_asleep() and not day%7 == 4: # not on Friday nights
             return not get_vaginal_fetish_employee() is None
         return False
 
@@ -501,7 +497,7 @@ init 2 python:
     crisis_list.append([SB_fetish_vaginal_recurring_crisis, 5])
 
     def SB_fetish_vaginal_lily_recurring_requirement():
-        if mc_asleep() and day % 7 is not 4: # not on Friday nights
+        if mc_asleep() and not day%7 == 4: # not on Friday nights
             if lily.has_role(vaginal_fetish_role):
                 if lily.event_triggers_dict.get("LastVaginalFetish", 0) + 10 < day:
                     return True

@@ -466,11 +466,11 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         #TODO figure out what to do in the following three cases
 
 
-        if current_node.position.guy_energy > mc.energy:
+        if current_node.position.guy_energy > mc.energy - 5:
             "You're too exhausted to let [the_person.possessive_title] keep [current_node.position.verbing] you."
             $ finished = True
 
-        elif current_node.position.girl_energy > the_person.energy:
+        elif current_node.position.girl_energy > the_person.energy - 5:
             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
             $ finished = True
 
@@ -514,7 +514,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     #TODO create positive feedback here for accomplishing sex goal
     #First condition, she is obedient. offers to keep going or to let MC take over.
 
-    if allow_continue: #Allows sex to keep going after girl finishes objectives
+    if not finished and allow_continue: #Allows sex to keep going after girl finishes objectives
         if sex_can_continue(the_person, the_node = current_node) and the_person.obedience > 100 and mc.arousal > 50:
             "As she finishes up, [the_person.title] gives your erection a couple strokes."
             the_person "Actually, do you want me to keep going? Or maybe you should take over..."
@@ -617,15 +617,16 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         report_log["guy orgasms"] = report_log.get("guy orgasms",0) + start_mc_orgasm
         mc.condom = False
         mc.recently_orgasmed = False
+
         #TODO determine if we want to offer an affair from this
     # if affair_ask_after and private and ask_girlfriend_requirement(the_person) is True and not the_person.relationship == "Single":
     #     if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
     #         call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
-    python:
         update_person_sex_record(the_person, report_log)
         the_goal = None
         sex_path = None
+        current_node = None
         the_person.reset_sex_goal()
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log

@@ -12,13 +12,13 @@ init 1 python:
         return False
 
     def SB_fetish_mom_cum_requirement():
-        if mc_asleep() and day % 7 is not 4: # not on Friday nights
+        if mc_asleep():
             if mc.energy > 30:  #Must have the energy to handle a long sexy night
                 return True
         return False
 
     def SB_fetish_lily_cum_requirement():
-        if mc_at_home() and time_of_day==0:
+        if time_of_day==0 and not day%7 == 5 and mc_at_home():
             return True
         return False
 

@@ -21,7 +21,7 @@ init 5 python:
         person.add_role(role)
 
         work_location = strip_club
-        if role is bdsm_performer_role:
+        if person.has_role(bdsm_performer_role):
             work_location = bdsm_room
 
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
@@ -47,15 +47,13 @@ init 5 python:
         return
 
     def strip_club_fire_stripper(person):
-        role = None
         if person.has_role(stripper_role):
-            role = stripper_role
-        elif person.has_role(bdsm_performer_role):
-            role = bdsm_performer_role
-        else:
-            role = waitress_role
+            person.remove_role(stripper_role)
+        if person.has_role(bdsm_performer_role):
+            person.remove_role(bdsm_performer_role)
+        if person.has_role(waitress_role):
+            person.remove_role(waitress_role)
 
-        person.remove_role(role)
         # restore default schedules
         if person.is_employee():
             person.set_schedule(person.home, times = [4])
@@ -171,9 +169,9 @@ label update_strip_club_show_requirement(stack):
 
         # make sure we store the stripclub performers
         if not "stripclub_bdsm_performers" in globals():
-            stripclub_bdsm_performers = []
+            stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
         if not "stripclub_waitresses" in globals():
-            stripclub_waitresses = []
+            stripclub_waitresses = MappedList(Person, all_people_in_the_game)
 
         execute_hijack_call(stack)
     return
@@ -468,7 +466,7 @@ label stripper_performance_review_label(the_person):
                         "[the_person.title] stands up and storms out of the room."
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
-                        $ person.location().move(the_person.home)
+                        $ person.location.move(the_person.home)
                         return
                 "Threaten to fire her": #She may ask to stay in exchange for some sort of favour, or get fired on the spot.
                     mc.name "I'll be honest with you [the_person.title], your performance here at the club leaves a lot to be desired."

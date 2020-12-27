@@ -43,7 +43,7 @@ init 2 python:
         return False
 
     def cousin_talk_about_strip_club_requirement(person):
-        if not person.location() in [cousin_bedroom]:
+        if not person.location in [cousin_bedroom]:
             return True
         return False
 
@@ -73,7 +73,7 @@ init 2 python:
         starbuck.add_unique_on_room_enter_event(starbuck_talk_about_strip_club_action)
 
     strip_club_foreclosed_mod_action = ActionMod("Strip Club Story Line", strip_club_foreclosed_event_requirement, "club_foreclosed_event_label",
-        menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc", 
+        menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc",
         initialization = init_strip_club_mod, is_mandatory_crisis = True, crisis_weight = 5)
 
 
@@ -89,7 +89,7 @@ label club_foreclosed_event_label():
         strip_club.background_image = Image(get_file_handle("Club_Outside_Background.jpg")) # Till the club doesn't open back again this should be the background
         strip_club_foreclosed_change_stripper_schedules()
         add_cousin_talk_about_strip_club_action()
-    
+
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
     "Perhaps you should talk to your cousin Gabrielle about it, when your aunt cannot overhear your conversation."
     return
@@ -105,7 +105,7 @@ label cousin_talk_about_strip_club_label(the_person):
     $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
     the_person.char "Actually the business was running very well, but looks like [name_string], the boss there, just disappeared a few days ago with all the Club's money..."
     the_person.char "That fucking asshole didn't even pay me nor the other girls for our last week."
-    "She looks at you and suddenly shifts her demeanor."    
+    "She looks at you and suddenly shifts her demeanor."
     $ the_person.draw_person(emotion = "happy", position = "stand2")
     the_person.char "Oh, speaking about money, can you lend me 300 bucks?"
     the_person.char "I could do a special performance just for you, you know..."

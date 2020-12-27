@@ -26,7 +26,8 @@
 
 init 1 python:
     def setup_quest_porn_actress():
-        quest_porn_actress.quest_event_dict["target"] = quest_porn_actress_find_employee()
+        contact = quest_porn_actress_find_employee()
+        quest_porn_actress.quest_event_dict["target"] = contact.identifier
         quest_porn_actress.quest_event_dict["start_day"] = 9999
         quest_porn_actress.quest_event_dict["disease_name"]  = quest_cure_discovery_disease_name()
         quest_porn_actress.quest_event_dict["market_contact"] = None
@@ -44,7 +45,10 @@ init 1 python:
         return get_random_from_list(able_person_list)
 
     def quest_porn_actress_contact():
-        return quest_cure_discovery.quest_event_dict.get("target", None)
+        contact = quest_porn_actress.quest_event_dict.get("target", None)
+        if isinstance(contact, basestring):
+            return get_person_by_identifier(contact)
+        return contact
 
     def rate_porn_video(the_report, the_person):  #Takes a sex report and person and returns a score of 1-10 on how good the video isself.
         porn_score = 0
@@ -121,7 +125,7 @@ label quest_porn_actress_init_label():
     return
 
 label quest_porn_actress_intro_label():
-    $ the_person = quest_porn_actress.quest_event_dict.get("target", None)
+    $ the_person = quest_porn_actress_contact()
     if not the_person:
         return
 

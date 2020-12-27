@@ -10,9 +10,7 @@ init -1 python:
 
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if mc_at_home() and time_of_day == 0:
-            if day % 7 == 5 or day % 7 == 6: #Not on saturday or sunday.
-                return False
+        if time_of_day == 0 and mc_at_home() and mc.business.is_open_for_business():
             return True
         return False
 

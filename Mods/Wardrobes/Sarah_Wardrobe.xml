@@ -183,7 +183,7 @@
                 <Item alpha="0.95" blue="0.95" green="0.7" name="Thigh_Highs" red="0.86" />
             </Feet>
             <Accessories />
-        </Outfit>	
+        </Outfit>
 	</UnderwearSets>
 	<OverwearSets>
 		<Outfit name="Sarah slutty Overwear">
@@ -209,6 +209,17 @@
 				<Item alpha="0.95" blue="0.15" green="0.15" name="High_Heels" red="0.15" />
 			</Feet>
 			<Accessories />
+		</Outfit>
+		<Outfit name="Sarah Pinafore With Sheer Top and Boots">
+				<UpperBody>
+						<Item alpha="0.95" blue="0.85" green="0.4" name="Pinafore" red="0.71" />
+						<Item alpha="0.75" blue="0.59" green="0.31" name="Tight_Vest" red="0.45" />
+				</UpperBody>
+				<LowerBody />
+				<Feet>
+						<Item alpha="0.95" blue="0.15" green="0.15" name="Thigh_Boots" red="0.15" />
+				</Feet>
+				<Accessories />
 		</Outfit>
 		<Outfit name="Sarah Casual Overwear">
 			<UpperBody>

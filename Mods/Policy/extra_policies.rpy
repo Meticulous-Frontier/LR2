@@ -37,8 +37,10 @@ init 1310 python:
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()
 
-    def toggle_mandatory_vibe_company_action():
-        advance_time_mandatory_vibe_company_action.enabled = not advance_time_mandatory_vibe_company_action.enabled
+    def mandatory_vibe_policy_on_turn():
+        if mc.business.is_open_for_business():
+            for person in [x for x in mc.business.get_employee_list() if x.arousal < 30]:
+                person.arousal = 30
 
     mandatory_vibe_policy = Policy(
         name = "Mandatory Vibrator Policy",
@@ -46,8 +48,7 @@ init 1310 python:
         desc = "All employees are required to have a bullet vibrator inserted into their vaginas during work hours, ensuring they are aroused at work all the time.",
         toggleable = True,
         requirement = mandatory_vibe_policy_requirement,
-        on_apply_function = toggle_mandatory_vibe_company_action,
-        on_remove_function = toggle_mandatory_vibe_company_action,
+        on_turn_function = mandatory_vibe_policy_on_turn
     )
     uniform_policies_list.append(mandatory_vibe_policy)
 

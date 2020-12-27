@@ -24,7 +24,7 @@ init -1 python:
         return True #??? Is this right?
 
     def breeding_fetish_lily_intro_requirement(the_person):
-        if lily.location() == lily.home:
+        if lily.location == lily.home:
             if lily_bedroom.get_person_count() == 1:
                 return True
         return False
@@ -37,8 +37,8 @@ init -1 python:
 
     def breeding_fetish_stephanie_intro_requirement():
         if mc.business.is_open_for_business():
-            if stephanie.location() == stephanie.work:
-                if renpy.random.randint(0,100) < 15:
+            if stephanie.location == stephanie.work:
+                if renpy.random.randint(0,100) < 25:
                     return True
         return False
 
@@ -54,11 +54,9 @@ init -1 python:
                 return True
         return False
 
-
     def breeding_fetish_sarah_intro_requirement():
-        if mc_asleep():
-            if sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
-                return True
+        if not day%7 == 5 and mc_asleep() and sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+            return True
         return False
 
     def breeding_fetish_ophelia_intro_requirement():
@@ -68,7 +66,7 @@ init -1 python:
         return False
 
     def breeding_fetish_candace_intro_requirement(the_person):
-        if candace.location() == candace.work:
+        if candace.location == candace.work:
             return True
         return False
 
@@ -886,10 +884,10 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
     $ the_person = candace
     $ camera_person = None
     $ room_list = []
+    "As you step into the office, you see [the_person.possessive_title] looking over at you. She stands up and waves you over to her desk."
+    $ the_person.draw_person()
+    "You walk over to her."
     if candace_is_bimbo(): #She is a bimbo.
-        "As you step into the office, you see [the_person.possessive_title] looking over at you. She stands up and waves you over to her desk."
-        $ the_person.draw_person()
-        "You walk over to her."
         mc.name "Hello [the_person.title]. Something I can help you with?"
         the_person.char "Yeah boss! I'm having trouble concentrating on my work this morning. Could you help me?"
         mc.name "Possibly, what seems to be distracting you?"
@@ -971,7 +969,55 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         "You can hardly believe it. [the_person.possessive_title] now has a fetish to get bred by you!"
         return
     else:
-        "This story is not yet written." #TODO this branch
+        the_person "[the_person.mc_title], I've been thinking about something, and I needed to make you aware of it."
+        mc.name "Okay, what would that be?"
+        the_person "Well, as you know, you and I both have very good... shall we say, genetics?"
+        the_person "We are both very talented, go getters, with good genes."
+        the_person "We owe it to the world to make offspring. As many, and as often as we can."
+        if the_person.knows_pregnant():
+            mc.name "We've been doing pretty good at that so far."
+            "[the_person.title] rubs her pregnant belly."
+            the_person "I agree."
+        the_person "It's important that you cum inside me on a regular basis... As often as possible, really."
+        "Lately, you've been slipping her serums to increase her drive to reproduce. Unsurprisingly, it sounds like she has developed a breeding fetish."
+        mc.name "Are you saying you want to be my personal breeding mare?"
+        the_person "The comparison to livestock is crude... but fitting. Yes, [the_person.mc_title], I want you to breed me over and over as much and as often as possible!"
+        $ the_person.draw_person(position = "standing_doggy")
+        "[the_person.title] stands up and bends over her desk."
+        the_person "You should start right now. It's okay, I'll count it as my 5 minute break."
+        if the_person.outfit.vagina_available():
+            "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you use it smack her ass a couple times."
+        else:
+            "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."
+            $ the_person.strip_outfit(exclude_upper = True)
+            "You give her ass a couple smacks with your cock."
+        $ the_person.change_arousal(10)
+        $ mc.change_arousal(10)
+        mc.name "Are you ready to get bred, bitch?"
+        "[the_person.title] keeps trying to back herself up onto you, but you move your dick around, frustrating her."
+        the_person.char "[the_person.mc_title], its not appropriate to tease a lady like this."
+        mc.name "I want to hear you beg."
+        the_person.char "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
+        "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
+        the_person.char "Yes!!!"
+
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True) from _bimbo_candace_gets_breeding_fetish_02
+        if the_person.has_creampie_cum():
+            "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
+            if the_person.knows_pregnant():
+                the_person.char "Mmm... I think I felt the baby kick when you came inside me!"
+            else:
+                the_person.char "The odds aren't great from just one creampie. Make sure you cum inside me again soon!"
+        else:
+            the_person "You're.... you're done already?"
+            mc.name "Sorry... I'll have to cum inside you another time."
+
+        $ the_person.draw_person(position = "stand2")
+        "[the_person.possessive_title] slowly stands up and turns to you."
+        the_person "Thank you [the_person.mc_title]. Please cum inside me anytime you need a little relief from now on."
+        $ add_breeding_fetish(the_person)
+        "You step away from her desk, letting her get back to her work. You notice her humming a happy tune as you walk away."
+        "You can hardly believe it. [the_person.possessive_title] now has a fetish to get bred by you!"
     return #Needs testing #Needs testing
 
 label breeding_fetish_ashley_intro_label():

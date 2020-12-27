@@ -343,7 +343,7 @@ init 5 python:
         menu_tooltip = "Try and find a new employee for a specific job")
     HR_director_role = Role("HR Director", [HR_director_meeting_on_demand_action, HR_director_coffee_tier_1_action, HR_director_coffee_tier_2_action, HR_director_gym_membership_tier_1_action, HR_director_gym_membership_tier_2_action, HR_director_mind_control_action, HR_director_mind_control_attempt, HR_director_change_relative_recruitment_action, HR_director_headhunt_initiate_action]) #Actions go in block
 
-    HR_director_appointment_action = Action("Appoint HR Director.", can_appoint_HR_director_requirement, "HR_director_appointment_action_label",
+    HR_director_appointment_action = Action("Appoint HR Director", can_appoint_HR_director_requirement, "HR_director_appointment_action_label",
             menu_tooltip = "Pick a member of your HR staff to be your HR director. The HR director will help you manage your employees well-being and motivation.")
 
 
@@ -365,29 +365,11 @@ init 1301 python:
 
 #####HR Director ACTION LABELS#####
 
-label fire_HR_director(the_person):
-    mc.name "[the_person.title], I need to talk to you about your role as my HR director."
-    the_person.char "Yes?"
-    mc.name "I've decided that the role would be better filled by someone else. I hope you understand."
-    if the_person.cha > 2:
-        $ the_person.change_happiness(-5)
-        $ the_person.change_obedience(-1)
-        $ the_person.draw_person(emotion="sad")
-        the_person.char "I... I'm sorry I couldn't do a better job. Good luck filling the position, sir."
-    else:
-        $ the_person.draw_person(emotion="happy")
-        the_person.char "Whew! I have a really hard time working with people to be honest. I hope whoever replaces me can do a better job at it!"
-
-    $ the_person.remove_role(HR_director_role)
-    $ mc.business.hr_director = None
-    $ cleanup_HR_director_meetings()
-    return
-
 label HR_director_initial_hire_label(the_person):
     #TODO if away from work, move MC to work.
-    "You meet with your new HR Director, [the_person.title] in the morning."
     $ the_person.draw_person()
     if the_person is sarah:
+        "You meet with your new HR Director, [the_person.title] in the morning."
         "Since she is new to the company in general, you give [the_person.title] a tour of the company first."
         the_person.char "So... what kind of pharmaceuticals are being researched, exactly?"
         "You decide to just be honest. If she is going to be working here at the company, she is going to figure it out sooner or later anyway."
@@ -410,16 +392,15 @@ label HR_director_initial_hire_label(the_person):
 
     # update employee relationships
     python:
-        mc.business.hr_director = the_person
-        mc.business.hr_director.HR_tags = {}
-        mc.business.hr_director.HR_unlocks = {}
-
         if the_person.is_employee():
             mc.business.remove_employee(the_person)
 
         mc.business.hire_person(the_person, "HR")
 
         # assign special HR director role
+        mc.business.hr_director = the_person
+        mc.business.hr_director.HR_tags = {}
+        mc.business.hr_director.HR_unlocks = {}
         mc.business.hr_director.add_role(HR_director_role)
 
         set_HR_director_tag("business_HR_eff_bonus", mc.business.effectiveness_cap - 100)
@@ -428,6 +409,7 @@ label HR_director_initial_hire_label(the_person):
 
 label HR_director_first_monday_label(the_person):
     if not mc.business.hr_director:
+        "Since you have no HR director, there are no Monday morning meetings, appoint a new HR director, to resume meetings."
         return
 
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
@@ -485,6 +467,7 @@ label HR_director_first_monday_label(the_person):
 
 label HR_director_monday_meeting_label(the_person):
     if not mc.business.hr_director:
+        "Since you have no HR director, there are no Monday morning meetings, appoint a new HR director, to resume meetings."
         return
 
     $ scene_manager = Scene()

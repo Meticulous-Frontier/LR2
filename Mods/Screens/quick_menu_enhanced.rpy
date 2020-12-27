@@ -35,6 +35,7 @@ init 5:
             textbutton _("Q.Load") action QuickLoad()
             textbutton _("Prefs") action ShowMenu('preferences')
             textbutton _("Cheat") action ToggleScreen("cheat_menu")
+            textbutton _("Research") action ToggleScreen("serum_cheat_menu")
             textbutton _("Opinions") action ToggleScreen("opinion_edit_menu")
 
     screen quick_menu():

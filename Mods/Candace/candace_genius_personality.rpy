@@ -220,7 +220,7 @@ label genius_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person.char "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person.char "Oh, it's cute! Thank's [the_person.mc_title]!"
+        the_person.char "Oh, it's cute! Thanks [the_person.mc_title]!"
     return
 
 label genius_clothing_reject(the_person):
@@ -235,7 +235,7 @@ label genius_clothing_reject(the_person):
 
 label genius_clothing_review(the_person):
     if the_person.obedience > 130:
-        the_person.char "I'm sorry [the_person.mc_title], I'm feeling a little self concious. I'll go and get cleaned up so I'm presentable again."
+        the_person.char "I'm sorry [the_person.mc_title], I'm feeling a little self-conscious. I'll go and get cleaned up so I'm presentable again."
     else:
         if the_person.sluttiness > 40:
             the_person.char "Whew, I think we messed up my clothes a bit. Just give me a quick second to get dressed into something more decent."
@@ -518,6 +518,7 @@ label genius_flirt_response_high(the_person):
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_47
+                $ the_person.review_outfit()
 
             "Just flirt":
                 mc.name "I'm a patient man, I can wait until we have some privacy. It's probably for the best; you might get a little loud."
@@ -556,6 +557,7 @@ label genius_flirt_response_high(the_person):
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_genius_48
+                $ the_person.review_outfit()
 
             "Just flirt":
                 mc.name "I wish we could, but I'll need to take a rain check."
@@ -582,6 +584,7 @@ label genius_flirt_response_girlfriend(the_person):
                     "After a few minutes of searching you find a quiet spot and put an arm around [the_person.possessive_title]."
                     "She sighs happily as you pull her close and kiss her. She puts her arms around you and hugs you tight, opening her lips for you."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_71
+                    $ the_person.review_outfit()
 
                 "Just flirt":
                     mc.name "That's depends on what you're going to kiss. I've got a few suggestions..."
@@ -596,6 +599,7 @@ label genius_flirt_response_girlfriend(the_person):
                     "You put your hand on the back of her neck and pull her close again, kissing her slowly and sensually."
                     "She sighs happily and leans her body against you, clearly unworried about anyone else around."
                     call fuck_person(the_person, start_position = kissing, private = False, skip_intro = True) from _call_fuck_genius_72
+                    $ the_person.review_outfit()
 
                 "Just flirt":
                     mc.name "So, is there anything else you want to kiss? I've got some suggestions..."
@@ -624,6 +628,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "You place a gentle hand on her chin and raise her lips back to yours."
                 "This time when you kiss her it's slow and sensual. You hear her sigh happily, and she presses her body against yours."
                 call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_genius_73
+                $ the_person.review_outfit()
 
             "Just flirt":
                 "You place your hands around her and hold her close. You run one hand down her back and rest it on her ass, massaging it gently."
@@ -652,6 +657,7 @@ label genius_flirt_response_affair(the_person):
                     "You put your arm around her waist and rest your hand on her ass as you lean in and kiss her."
                     "She presses her body enthusiastically against you and returns your kiss with just as much excitement."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_74
+                    $ the_person.review_outfit()
 
                 "Just flirt":
                     mc.name "You're that easy, huh? I drop one complement and you're ready to get on your knees."
@@ -681,6 +687,8 @@ label genius_flirt_response_affair(the_person):
                 "You put your arm around her waist, resting your hand on her ass, and pull her into an intense kiss."
                 "She leans into you eagerly, returning the kiss with just as much enthusiasm."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_75
+                $ the_person.review_outfit()
+
             "Just flirt":
                 mc.name "You're always exciting, but I think I'll be able to hold out for a little while longer."
                 "You put your arm around her waist and grab her ass, massaging it as you talk."
@@ -739,7 +747,7 @@ label genius_cum_pullout(the_person):
                 "She seems almost desperate as she moans."
                 the_person.char "I don't care if you knock me up! I'm just your... breeding slut!"
 
-            menu: #TODO: Add a varient of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
+            menu: #TODO: Add a variant of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
                 "Take off the condom.":
                     "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
                     $ mc.condom = False
@@ -1200,7 +1208,7 @@ label genius_anal_sex_taboo_break(the_person):
             the_person.char "Oh fuck..."
         else:
             the_person.char "Oh my god, you're actually going to do it! Fuck, I hope you even fit!"
-            mc.name "Don't worry, I'll stetch out your ass like I've stretched out all your other holes."
+            mc.name "Don't worry, I'll stretch out your ass like I've stretched out all your other holes."
     return
 
 label genius_condomless_sex_taboo_break(the_person):

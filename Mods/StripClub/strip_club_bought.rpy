@@ -7,7 +7,27 @@ init 5 python:
 
     def strip_club_call_in_all_strippers():
         for stripper in stripclub_strippers:
-            stripper.location().move_person(stripper, strip_club)
+            stripper.change_location(strip_club)
+        return
+
+    # for testing purposes, convert strip club to player owned.
+    def test_strip_club():
+        mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
+        mc.business.event_triggers_dict["foreclosed_day"] = day
+        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formalName
+        strip_club.name = "Starlight Club"
+        strip_club.formalName = "Starlight Club"
+        set_strip_club_foreclosed_stage(5)
+        add_strip_club_hire_employee_action_to_mc_actions()
+        for stripper in stripclub_strippers:
+            stripper.set_title(get_random_from_list(get_titles(stripper)))
+            stripper.set_mc_title("Boss")
+            stripper.set_possessive_title("The stripper")
+
+            stripper.event_triggers_dict["strip_club_shifts"] = 2
+            stripper.set_schedule(strip_club, times = [3, 4])
+            stripper.change_stats(happiness = 10, obedience = 5, love = 5)
+            stripper.add_role(stripper_role)
         return
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
@@ -15,7 +35,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         cousin.set_alt_schedule(None, times = [3])  # reset alternative schedule
         for person in strip_club.people:
             if person is not cousin:
-                strip_club.move_person(person, downtown) # Failsafe to remove anyone improperly scheduled to be at the strip club
+                person.change_location(downtown) # Failsafe to remove anyone improperly scheduled to be at the strip club
     $ the_person.draw_person()
     mc.name "Hey [the_person.title], good, you came."
     the_person.char "Yeah, I'm here, now tell me why I'm here."
@@ -63,7 +83,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         mc.name "Goodbye, [the_person.title]!"
     $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
     $ strip_club_fire_stripper(the_person)
-    $ strip_club.move_person(the_person, the_person.home)
+    $ the_person.change_location(the_person.home)
 
     # resume dialog with
     $ the_person = cousin
@@ -158,7 +178,7 @@ label strip_club_evaluate_stripper(the_person):
             $ the_person.set_possessive_title("Your stripper")
             "After a few seconds, when she stops, you give her the promised signing bonus."
             $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
-            $ strip_club.move_person(the_person, the_person.home) # Avoid to process the person again
+            $ the_person.change_location(the_person.home) # Avoid to process the person again
         "Yes\n{color=#ff0000}{size=18}Insufficient funds{/size}{/color} (disabled)" if mc.business.funds <= 500:
             pass
         "Maybe later": # Don't need to reschedule
@@ -173,6 +193,6 @@ label strip_club_evaluate_stripper(the_person):
             else:
                 "Unable to argue with you, [the_person.title] quickly dresses back up and leaves the club, still in tears."
             $ strip_club_fire_stripper(the_person)
-            $ strip_club.move_person(the_person, the_person.home)
+            $ the_person.change_location(the_person.home)
             $ mc.location.show_background()
     return

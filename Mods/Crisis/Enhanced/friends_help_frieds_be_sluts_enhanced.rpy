@@ -288,6 +288,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                     $ scene_manager.update_actor(person_two, emotion = "sad")
                                     $ scene_manager.update_actor(person_one, display_transform = character_center(.10), z_order = - 10)
                                     "[person_one.title] moves behind [person_two.title] and starts to dress her down, starting with her [the_item.name]."
+                                $ del the_item
 
                                 $ scene_manager.strip_actor_strip_list(person_two, strip_list, half_off_instead = half_off_instead)
 

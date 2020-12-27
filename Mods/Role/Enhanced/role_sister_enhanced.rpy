@@ -190,5 +190,8 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     else:
         $ the_sister.event_triggers_dict["sister_instathot_pic_count"] += 1
 
-    $ scene_manager.clear_scene()
+    python:
+        scene_manager.clear_scene()
+        insta_outfit_mom = None
+        insta_outfit_sister = None
     return

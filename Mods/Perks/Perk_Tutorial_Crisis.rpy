@@ -22,7 +22,7 @@ label Perk_Tutorial_Crisis_label():
     $ perk_system.add_ability_perk(Ability_Perk(description = "You dig deep and summon reserves of energy to meet the needs of others. Recovers 100 energy, usable once per week.", toggle = False, usable = True, usable_func = time_of_need_func, usable_cd = 7), "Time of Need")
     "You have gained the Perk: Time of Need!"
     while mc.energy < mc.max_energy * .4:
-        "Open the perk screen and click on your new perk to continue."
+        "Open the 'Perk Sheet' screen (top left UI) and click on the 'Time of Need' perk to continue."
     "You get up and follow your mom to her room."
     the_person.char "Thank you! I just had this overwhelming urge to move some of my furniture around. You know how it is, once you get the urge its hard to put it off..."
     "You help [the_person.possessive_title] move her furniture around. She seems extremely grateful."

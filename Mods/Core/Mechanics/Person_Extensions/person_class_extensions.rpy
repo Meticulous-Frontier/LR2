@@ -2,7 +2,7 @@ init -1 python:
     import hashlib
 
     def remove_person_from_game(self):
-        my_location = self.location()
+        my_location = self.location
         if my_location:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
@@ -76,9 +76,10 @@ init -1 python:
         self.opinions.clear()
         self.sexy_opinions.clear()
         self.broken_taboos.clear()
-        self.schedule.clear()
 
         # clear all references held by person object.
+        del self.schedule
+        del self.alt_schedule
         self.home = None
         self.work = None
         self.schedule = None
@@ -107,23 +108,36 @@ init -1 python:
 
     Person.remove_person_from_game = remove_person_from_game
 
-    def location(self): # Check what location a person is in e.g the_person.location() == downtown. Use to trigger events?
+    @property
+    def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         for location in list_of_places:
             if self in location.people:
                 return location
 
+        return self.home # fallback location for person is home
+
     Person.location = location
 
-    def create_empty_schedule():
-        schedule = {}
-        for x in range(7):
-            schedule[x] = { 0: None, 1: None, 2: None, 3: None, 4: None }
-        return schedule
+
+    def person_change_location(self, destination):
+        self.location.move_person(self, destination)
+
+    Person.change_location = person_change_location
 
     def get_alt_schedule(self):
         if not hasattr(self, "_alt_schedule"):
-            self._alt_schedule = create_empty_schedule()
+            self._alt_schedule = Schedule()
         return self._alt_schedule
+
+    def set_alt_schedule(self, value):
+        self._alt_schedule = value
+
+    def del_alt_schedule(self):
+        self._alt_schedule = None
+
+    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
+    # clear alternative schedule by calling the_person.schedule.clear_schedule()
+    Person.alt_schedule = property(get_alt_schedule, set_alt_schedule, del_alt_schedule, "Alternative schedule property.")
 
     def set_alt_schedule(self, location, days = None, times = None):
         if days is None:
@@ -137,16 +151,6 @@ init -1 python:
         return
 
     Person.set_alt_schedule = set_alt_schedule
-
-    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
-    # clear alternative schedule by calling the_person.clear_alt_schedule()
-    Person.alt_schedule = property(get_alt_schedule, None, None, "Alternative schedule property.")
-
-    def clear_alt_schedule(self):
-        self._alt_schedule = create_empty_schedule()
-        return
-
-    Person.clear_alt_schedule = clear_alt_schedule
 
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
@@ -164,19 +168,15 @@ init -1 python:
 
     def get_person_identifier(self):
         if not hasattr(self, "_identifier"):
-            self._identifier = hashlib.md5(self.name + self.last_name + str(renpy.random.randint(10000, 90000000))).hexdigest()
+            self._identifier = hashlib.md5(self.name + self.last_name + str(self.age)).hexdigest()
         return self._identifier
-
-    # don't allow set
-    # def set_person_identifier(self, value):
-    #     self._identifier = value
-
-    # don't allow delete
-    # def del_person_identifier(self):
-    #     del self._identifier
 
     # add follow_mc attribute to person class (without sub-classing)
     Person.identifier = property(get_person_identifier, None, None, "Unique identifier for person class.")
+
+    # generic function to get a person by its identifier
+    def get_person_by_identifier(identifier):
+        return next((x for x in all_people_in_the_game() if x.identifier == identifier), None)
 
     def get_person_next_day_outfit(self):
         if not hasattr(self, "_next_day_outfit"):
@@ -219,16 +219,16 @@ init -1 python:
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pos)
-            if self.location() == self.work or self.location() == downtown_bar:
+            if self.location == self.work or self.location == downtown_bar:
                  return "sitting"
-            if self.location() == gym:
+            if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
                     pose = get_random_from_list(["missionary", "stand2", "back_peek", "stand4", "sitting"])
                     self.event_triggers_dict["gym_pose"] = pose
                 return pose
 
-        if self.location() == bdsm_room:
+        if self.has_role(caged_role):
             pose = self.event_triggers_dict.get("bdsm_room_pose", None)
             if not pose: # store preferred position in bdsm room (prevent switching on hover)
                 pose = get_random_from_list(["cowgirl", "kneeling1", "blowjob"])
@@ -799,13 +799,17 @@ init -1 python:
         for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
             removal_list = [] #So we can iterate through without removing and damaging the list.
             for an_action in event_list:
-                if isinstance(an_action, Limited_Time_Action): #It's a LTA holder, so it has a turn counter
-                    an_action.turns_valid += -1
+                if isinstance(an_action, Limited_Time_Action) and an_action.is_action_enabled(self): #It's a LTA holder, so it has a turn counter only count down when active
+                    an_action.turns_valid -= 1
                     if an_action.turns_valid <= 0:
                         removal_list.append(an_action)
 
             for action_to_remove in removal_list:
                 event_list.remove(action_to_remove)
+
+        for a_role in self.special_role:
+            a_role.run_move(self)
+
 
     Person.run_move = run_move_enhanced
 
@@ -1053,7 +1057,7 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, energy = None, add_to_log = True):
         if not obedience is None:
             self.change_obedience(obedience, add_to_log)
         if not happiness is None:
@@ -1066,6 +1070,8 @@ init -1 python:
             self.change_slut_temp(slut_temp, add_to_log)
         if not slut_core is None:
             self.change_slut_core(slut_core, add_to_log)
+        if not energy is None:
+            self.change_energy(energy, add_to_log)
         return
 
     Person.change_stats = change_stats
@@ -1670,6 +1676,26 @@ init -1 python:
 
     Person.has_creampie_cum =person_has_creampie_cum
 
+    def person_get_upper_top_layer(self):
+        return self.outfit.get_upper_top_layer()
+
+    Person.get_upper_top_layer = person_get_upper_top_layer
+
+    def person_get_lower_top_layer(self):
+        return self.outfit.get_lower_top_layer()
+
+    Person.get_lower_top_layer = person_get_lower_top_layer
+
+    def person_restore_all_clothing(self):
+        return self.outfit.restore_all_clothing()
+
+    Person.restore_all_clothing = person_restore_all_clothing
+
+    def person_has_clothing(self, the_clothing):
+        return self.outfit.has_clothing(the_clothing)
+
+    Person.has_clothing = person_has_clothing
+
 ##########################################
 # Unique crisis addition functions       #
 ##########################################
@@ -1773,12 +1799,14 @@ init -1 python:
         else:
             preg_chance = self.fertility_percent
 
-        if not self.on_birth_control:
+        if self.event_triggers_dict.get("birth_control_status", None) is None:
+            preg_chance *= .5   # coin toss
+        elif not self.on_birth_control:
             preg_chance *= .9
         else:
             preg_chance *= (.1 + (self.bc_penalty / 10))
 
-        # mc.log_event("Pregnancy chance: " + the_person.name + ": " + str(preg_chance), "float_text_grey")
+        # mc.log_event("Pregnancy chance: " + self.name + ": " + str(preg_chance), "float_text_grey")
 
         if preg_chance < 3:
             return "Very Safe"
@@ -1963,6 +1991,11 @@ init -1 python:
             return True
         return False
 
+    def has_cum_fetish(self):  #TODO update this to applicable roles when cum fetish roles have been combined.
+        if cum_external_role in self.special_role or cum_internal_role in self.special_role:
+            return True
+        return False
+
     def has_breeding_fetish(self):
         if breeding_fetish_role in self.special_role:
             return True
@@ -1975,6 +2008,7 @@ init -1 python:
     Person.has_oral_fetish = has_oral_fetish
     Person.has_internal_cum_fetish = has_internal_cum_fetish
     Person.has_external_cum_fetish = has_external_cum_fetish
+    Person.has_cum_fetish = has_cum_fetish
     Person.has_breeding_fetish = has_breeding_fetish
 
     #Additional functions
@@ -1990,6 +2024,9 @@ init -1 python:
 
     def is_jealous(self):
         if self.is_girlfriend() or self.is_affair():
+            if self == sarah and sarah_threesomes_unlocked():
+                self.event_triggers_dict["is_jealous"] = False
+                return False
             if self.event_triggers_dict.get("is_jealous", True) == True:
                 if self.love > 90 and self.obedience > 200:
                     self.event_triggers_dict["is_jealous"] = False
@@ -2017,18 +2054,103 @@ init -1 python:
 
     Person.attempt_opinion_training = attempt_opinion_training
 
-    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, report_log = None):
-        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
+    def have_orgasm(self, position = None, the_object = None, half_arousal = True, report_log = None):
+        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = position, the_object = the_object)
 
         self.change_slut_temp(5)
         self.change_happiness(5)
         if half_arousal:
-            self.change_arousal(-the_person.arousal/2)
+            self.change_arousal(-self.arousal/2)
         else:
-            self.change_arousal(-the_person.arousal)
+            self.change_arousal(-self.arousal)
         if report_log != None:
             report_log["girl orgasms"] += 1
 
         return
 
     Person.have_orgasm = have_orgasm
+
+    def favorite_colour(self):
+        if self.event_triggers_dict.get("favorite_colour", None): #We already have a favorite colour, so just return it
+            return self.event_triggers_dict.get("favorite_colour", None)
+        #If not, we need to find a favorite colour going forward.
+        list_of_colours = ["the colour blue", "the colour yellow", "the colour red", "the colour pink", "the colour black", "the colour green", "the colour purple", "the colour white", "the colour orange", "the colour brown"]
+        list_of_favorites = []
+        for colour in list_of_colours:
+            if self.get_opinion_score(colour) == 2:
+                list_of_favorites.append(colour)
+        if len(list_of_favorites) > 0:
+            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_favorites)
+        else:
+            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_colours)
+            self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
+        return self.favorite_colour()
+
+    Person.favorite_colour = favorite_colour
+
+    def is_single(self):
+        if self.relationship == "Single":
+            if self.is_girlfriend():
+                return False
+            return True
+        return False
+
+    Person.is_single = is_single
+
+##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
+
+    def change_to_lingerie(self):
+        if self.event_triggers_dict.get("favorite_lingerie", None):
+            self.apply_outfit(self.event_triggers_dict.get("favorite_lingerie", None))
+        elif len(self.wardrobe.underwear_sets) > 0:
+            self.apply_outfit(get_random_from_list(self.wardrobe.underwear_sets))
+        else:
+            self.apply_outfit(lingerie_wardrobe.pick_random_outfit())
+        return
+
+    Person.change_to_lingerie = change_to_lingerie
+
+    def roleplay_mc_title_swap(self, new_title):
+        self.event_triggers_dict["backup_mc_title"] = self.mc_title
+        self.set_mc_title(new_title)
+        return
+
+    def roleplay_mc_title_revert(self):
+        self.mc_title = self.event_triggers_dict.get("backup_mc_title", mc.name)
+        return
+
+    def roleplay_title_swap(self, new_title):
+        self.event_triggers_dict["backup_title"] = self.title
+        self.set_title(new_title)
+        return
+
+    def roleplay_title_revert(self):
+        self.title = self.event_triggers_dict.get("backup_title", self.name)
+        return
+
+    def roleplay_possessive_title_swap(self, new_title):
+        self.event_triggers_dict["backup_possessive_title"] = self.possesive_title
+        self.set_possessive_title(new_title)
+        return
+
+    def roleplay_possessive_title_revert(self):
+        self.possesive_title = self.event_triggers_dict.get("backup_possessive_title", self.name)
+        return
+
+    def roleplay_personality_swap(self, personality):
+        self.event_triggers_dict["backup_personality"] = self.personality
+        self.personality = personality
+        return
+
+    def roleplay_personality_revert(self):
+        self.personality = self.event_triggers_dict.get("backup_personality", relaxed_personality)
+        return
+
+    Person.roleplay_mc_title_swap = roleplay_mc_title_swap
+    Person.roleplay_mc_title_revert = roleplay_mc_title_revert
+    Person.roleplay_title_swap = roleplay_title_swap
+    Person.roleplay_title_revert = roleplay_title_revert
+    Person.roleplay_possessive_title_swap = roleplay_possessive_title_swap
+    Person.roleplay_possessive_title_revert = roleplay_possessive_title_revert
+    Person.roleplay_personality_swap = roleplay_personality_swap
+    Person.roleplay_personality_revert = roleplay_personality_revert
