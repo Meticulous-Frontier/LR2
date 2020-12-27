@@ -1,12 +1,11 @@
 ## Employee Review Mod by Mattt
 # Compliment/Insult all employees based on their happiness
 init 3 python:
-
     def daily_talk_requirement():
-        if not "daily_talk_employees" in mc.business.event_triggers_dict:
-            mc.business.event_triggers_dict["daily_talk_employees"] = None
-        if mc.business.get_employee_count() > 0 and mc.business.event_triggers_dict["daily_talk_employees"] != day and mc.business.is_open_for_business():
-            return True
+        if mc.business.is_open_for_business() and mc.business.get_employee_count() > 0:
+            if mc.business.event_triggers_dict.get("daily_talk_employees", 0) < day:
+                return True
+            return "Only once per day"
         return False
 
     def daily_talk_initialization(self):
@@ -14,7 +13,7 @@ init 3 python:
         return
 
     def daily_talk_update_employee_stats():
-        for person in mc.business.get_employee_list():
+        for person in [x for x in mc.business.get_employee_list() if x.event_triggers_dict.get("day_last_employee_interaction", 0) < day]:
             person.event_triggers_dict["day_last_employee_interaction"] = day
             if person.obedience > 150 and person.love * 2 + 89 < person.obedience:
                 person.change_love(1)
