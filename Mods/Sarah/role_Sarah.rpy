@@ -405,6 +405,7 @@ init -1 python:
         downtown_bar.add_person(sarah_friend)
         sarah_friend.set_title(sarah_friend.name)
         sarah_friend.set_mc_title(mc.name)
+        sarah_friend.set_possessive_title(get_random_possessive_title(the_person))
         sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
         town_relationships.update_relationship(sarah, sarah_friend, "Friend")
         return sarah_friend
