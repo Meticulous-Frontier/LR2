@@ -2088,44 +2088,55 @@ label erica_lily_instapic_proposal_label(the_person): #This should be assigned t
 
 label erica_lily_instapic_intro_label():
     $ erica.event_triggers_dict["insta_pic_intro_complete"] = True
-    "It's Saturday evening, which means it's time for a sexy photo shoot with Lily and Erica! You head home and knock on Lily's door. She swings it open."
-    "Hey, any word from your friend?"
+    $ scene_manager = Scene()  #Clean Scene
+
+    "It's Saturday evening, which means it's time for a sexy photo shoot with [lily.title] and [erica.title]! You head home and knock on [lily.possessive_title]'s door. She swings it open."
+    $ scene_manager.add_actor(the_person)
+    lily "Hey, any word from your friend?"
     mc.name "Not yet."
-    "Are you sure she's gonna make it? I teased on my channel that I have a surprise for them tonight. It's gonna be hard to come up with something if she doesn't show up!"
+    lily "Are you sure she's gonna make it? I teased on my channel that I have a surprise for them tonight. It's gonna be hard to come up with something if she doesn't show up!"
     mc.name "She'll be here."
-    "You chat with Lily for a bit. Soon you feel a vibration in your pocket as your phone goes off."
-    "I'm here! Come let me in!"
-    "You go to your front door and open it. Erica gives you a nervous smile as she steps inside."
-    "Sorry I'm late. I almost didn't come... This whole thing is just a little... Crazier than I would normally do."
-    mc.name "Don't worry, Lily is great at this. I was pretty skeptical about it at first too, but she's been pretty successful with this."
-    "You lead her to Lily's room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
-    "Oh my gosh... Erica? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
-    "Ah! Yes I remember you now! You were at the study group for the midterm!"
-    "I never realized you were on the track team! But God, I can tell now! You look amazing! No wonder my brother is crushing on you."
-    "Aww, thank you! Wait, your brother what?"
-    "Lily let's not..."
-    "He's totally into you. Did he tell how much the fee was for today?"
-    "He just said $100..."
-    "Lily could you not do this right now..."
-    "Yeah! That's totally his normal camera man fee. He offered to donate it to you to help you out!"
-    "Erica looks at you, surprise in her face."
-    "[MC]... Is that true?"
-    "Well... Yeah... I mean about where the fee is coming from. I just want everyone here to be successful. This is gonna be great for both of you, and there's no strings attached to the money."
-    "Erica smirks at you."
-    "I see. Well, I'm here now! We should get started."
-    "Right! Let me show you what I got for us for tonight!"
-    "The girls start to chat as Lily pulls out a few outfits. You are glad that they seem to be hitting it off so well... But also a little fearful. Lily seems to be enjoying this a little TOO much."
-    "After a bit, Lily moves to get things started."
-    "Alright, let's go with these!"
-    "Lily starts to take her clothes off, surprising Erica."
-    "Whoa, like, right here? In front of him?"
-    "Erica seems a little unsure."
-    "It's okay, he doesn't mind!"
-    "Erica starts to protest again, but Lily continues to strip down. Soon she decided to just follow her and starts to strip also."
-    "[If taboo] Erica uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
-    "When they finish, Lily hands her the outfit. They both quickly get dressed. The outfits look great."
-    "It's... A little skimpy, don't you think?"
-    "That's the point! A little showy, but leave the guys thirsty and they'll come back again and again!"
+    "You chat with [lily.possessive_title] for a bit. Soon you feel a vibration in your pocket as your phone goes off."
+    erica "I'm here! Come let me in!"
+    $ scene_manager.clear_scene()
+    "You go to your front door and open it.[erica.title] gives you a nervous smile as she steps inside."
+    $ scene_manager.add_actor(erica)
+    erica "Sorry I'm late. I almost didn't come... This whole thing is just a little... Crazier than I would normally do."
+    mc.name "Don't worry, [lily.title] is great at this. I was pretty skeptical about it at first too, but she's been pretty successful with this."
+    "You lead her to [lily.possessive_title]'s room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
+    $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
+    lily "Oh my gosh... [erica.name]? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
+    erica "Ah! Yes I remember you now! You were at the study group for the midterm!"
+    lily "I never realized you were on the track team! But God, I can tell now! You look amazing! No wonder my brother is crushing on you."
+    erica "Aww, thank you! Wait, your brother what?"
+    mc.name "[lily.title] let's not..."
+    lily "He's totally into you. Did he tell how much the fee was for today?"
+    erica "He just said $100..."
+    mc.name "[lily.title] could you not do this right now..."
+    lily "Yeah! That's totally his normal camera man fee. He offered to donate it to you to help you out!"
+    "[erica.possessive_title] looks at you, surprise in her face."
+    erica "[erica.mc_title]... Is that true?"
+    mc.name "Well... Yeah... I mean about where the fee is coming from. I just want everyone here to be successful. This is gonna be great for both of you, and there's no strings attached to the money."
+    "[erica.title] smirks at you."
+    erica "I see. Well, I'm here now! We should get started."
+    lily "Right! Let me show you what I got for us for tonight!"
+    "The girls start to chat as [lily.title] pulls out a few outfits. You are glad that they seem to be hitting it off so well... But also a little fearful. [lily.possessive_title] seems to be enjoying this a little TOO much."
+    "After a bit, [lily.title] moves to get things started."
+    lily "Alright, let's go with these!"
+    # todo start stripping
+    "[lily.title] starts to take her clothes off, surprising [erica.title]."
+    erica "Whoa, like, right here? In front of him?"
+    "[erica.possessive_title] seems a little unsure."
+    lily "It's okay, he doesn't mind!"
+    "She starts to protest again, but [lily.title] continues to strip down. Soon she decides to just follow her and starts to strip also."
+    if erica.has_taboo(["bare_pussy", "bare_tits"]):
+        "[If taboo] Erica uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
+        $ erica.break_taboo("bare_pussy")
+        $ erica.break_taboo("bare_tits")
+
+    "When they finish, [lily.title] hands her the outfit. They both quickly get dressed. The outfits look great."
+    erica "It's... A little skimpy, don't you think?"
+    lily "That's the point! A little showy, but leave the guys thirsty and they'll come back again and again!"
     return
 
 label erica_ghost_label(the_person):
