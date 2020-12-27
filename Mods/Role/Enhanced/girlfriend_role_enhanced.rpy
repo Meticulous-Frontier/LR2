@@ -101,6 +101,7 @@ label girlfriend_myplace_yourplace_label(the_person):
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.mandatory_crises_list.append(girlfriend_sleepover)
+    $ hide_wip_screen()
     return
 
 label girlfriend_sleepover_label():
@@ -266,6 +267,7 @@ label girlfriend_sleepover_label():
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
+    $ hide_wip_screen()
     return
 
 label girlfriend_wakeup_spooning_label(the_person):
@@ -387,13 +389,12 @@ label girlfriend_roleplay_step_sister_label(the_person):
         "You dip a finger into her cunt."
         mc.name "Just checking the plumbing, [the_person.title]. Nothing to worry about..."
 
-
-
     $ the_person.roleplay_title_revert()
     $ the_person.roleplay_mc_title_revert()
     $ the_person.roleplay_possessive_title_revert()
     $ the_person.roleplay_personality_revert()
     return
+
 label girlfriend_underwear_shopping_label(the_person):
     mc.name "Hey, I got an idea. Why don't we go shopping for some new lingerie? Spice things up in the bedroom a bit?"
     if the_person.sluttiness < 40:
