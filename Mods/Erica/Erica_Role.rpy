@@ -197,15 +197,15 @@ init -2 python:
         return False
 
     def erica_money_problem_sarah_convincing_employee_requirement():
-        if mc.business.hr_director and mc.business.hr_director and mc.is_at_work():
-            if mc.business.is_open_for_business():
+        if mc.business.hr_director and mc.is_at_work():
+            if mc.business.is_open_for_business() and day%7 != 0:   # not on mondays (can cause duplicate meeting)
                 if renpy.random.randint(0,100) < 25:
                     return True
         return False
 
     def erica_money_problems_sarah_update_requirement():
         if mc.business.hr_director and mc.is_at_work():
-            if mc.business.is_open_for_business():
+            if mc.business.is_open_for_business() and day%7 != 0:   # not on mondays (can cause duplicate meeting)
                 if len(erica_get_yoga_class_list()) < 4:
                     if renpy.random.randint(0,100) < 10:
                         return True
@@ -213,7 +213,7 @@ init -2 python:
 
     def erica_money_problems_sarah_final_update_requirement():
         if mc.business.hr_director and mc.is_at_work():
-            if mc.business.is_open_for_business():
+            if mc.business.is_open_for_business() and day%7 != 0:   # not on mondays (can cause duplicate meeting)
                 if len(erica_get_yoga_class_list()) >= 4:
                     if renpy.random.randint(0,100) < 20:
                         return True
