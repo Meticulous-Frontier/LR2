@@ -676,7 +676,6 @@ label Sarah_third_wheel_label():
     $ time_of_day = 3
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ sarah_friend.remove_person_from_game()
     $ del sarah_friend
     $ add_sarah_get_drinks_action()
     return
