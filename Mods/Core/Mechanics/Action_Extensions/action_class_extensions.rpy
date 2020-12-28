@@ -30,3 +30,40 @@ init 1 python:
         return True
 
     Action.__ne__ = action_ne
+
+
+    def get_action_enabled(self):
+        if not hasattr(self, "_enabled"):
+            self._enabled = True
+        return self._enabled
+
+    def set_action_enabled(self, value):
+        self._enabled = value
+
+    Action.enabled = property(get_action_enabled, set_action_enabled, None, "Is the action enabled.")
+
+    def is_action_enabled(self, extra_args = None):
+        if not self.enabled:
+            return False
+
+        requirement_return = self.check_requirement(extra_args)
+        if isinstance(requirement_return, basestring):
+            # Any string returned means the action is not enabled
+            return False
+        else:
+            # If it's not a string it must be a bool
+            return requirement_return
+
+    def is_disabled_slug_shown(self, extra_args = None): # Returns true if this action is not enabled but should show something when it is disabled.
+        if not self.enabled:
+            return False
+
+        requirement_return = self.check_requirement(extra_args)
+        if isinstance(requirement_return, basestring):
+            return True
+        else:
+            return False
+
+    # Monkeywrench the action method overrides in the Action class
+    Action.is_action_enabled = is_action_enabled
+    Action.is_disabled_slug_shown = is_disabled_slug_shown

@@ -31,34 +31,6 @@ if not "bugfix_installed" in globals():
     define bugfix_installed = False
 
 init -1 python:
-    def is_action_enabled(self, extra_args = None):
-        if hasattr(self, "enabled"):
-            if not self.enabled:
-                return False
-
-        requirement_return = self.check_requirement(extra_args)
-        if isinstance(requirement_return, basestring):
-            # Any string returned means the action is not enabled
-            return False
-        else:
-            # If it's not a string it must be a bool
-            return requirement_return
-
-    def is_disabled_slug_shown(self, extra_args = None): # Returns true if this action is not enabled but should show something when it is disabled.
-        if hasattr(self, "enabled"):
-            if not self.enabled:
-                return False
-
-        requirement_return = self.check_requirement(extra_args)
-        if isinstance(requirement_return, basestring):
-            return True
-        else:
-            return False
-
-    # Monkeywrench the action method overrides in the Action class
-    Action.is_action_enabled = is_action_enabled
-    Action.is_disabled_slug_shown = is_disabled_slug_shown
-
     # Initialize the randomizer
     renpy.random.seed()
 
@@ -129,28 +101,21 @@ init 2 python:
                     action_mod.initialize()
 
         # the crisis_list is not stored in save game
-        remove_list = []
         for action_mod in action_mod_list:
-            if not hasattr(action_mod, "is_crisis"):
-                remove_list.append(action_mod)
-            elif action_mod.is_crisis:
-                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+            if action_mod.is_crisis:
+                if action_mod.is_morning_crisis:
                     if not action_mod in [c[0] for c in morning_crisis_list]:
                         morning_crisis_list.append([action_mod, action_mod.crisis_weight])
                 else:
                     if not action_mod in [c[0] for c in crisis_list]:
                         crisis_list.append([action_mod, action_mod.crisis_weight])
-            elif hasattr(action_mod, "is_mandatory_crisis") and action_mod.is_mandatory_crisis:
-                if hasattr(action_mod, "is_morning_crisis") and action_mod.is_morning_crisis:
+            elif action_mod.is_mandatory_crisis:
+                if action_mod.is_morning_crisis:
                     if not action_mod in mc.business.mandatory_morning_crises_list:
                         mc.business.mandatory_morning_crises_list.append(action_mod)
                 else:
                     if not action_mod in mc.business.mandatory_crises_list:
                         mc.business.mandatory_crises_list.append(action_mod)
-
-        # remove not working stuff
-        for action_mod in remove_list:
-            action_mod_list.remove(action_mod)
 
         return
 
