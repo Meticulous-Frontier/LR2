@@ -800,7 +800,10 @@ init -1 python:
                 removal_list.append(an_action)
 
         for action_to_remove in removal_list:
-            event_list.remove(action_to_remove)
+            if action_to_remove in self.on_room_enter_event_list:
+                self.on_room_enter_event_list.remove(action_to_remove)
+            if action_to_remove in self.on_talk_event_list:
+                self.on_talk_event_list.remove(action_to_remove)
 
         for a_role in self.special_role:
             a_role.run_move(self)
