@@ -242,7 +242,7 @@ init 2 python:
     def get_fetish_cum_dosage_employee():
         meets_fetish_list = []
         for person in mc.business.get_employee_list():
-            if person.has_role(cum_internal_role) or person.has_role(cum_external_role):
+            if person.has_role([cum_internal_role, cum_external_role]):
                 if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
@@ -251,7 +251,7 @@ init 2 python:
     def get_fetish_cum_dosage_non_employee():
         meets_fetish_list = []
         for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, mc]):
-            if person.has_role(cum_internal_role) or person.has_role(cum_external_role):
+            if person.has_role([cum_internal_role, cum_external_role]):
                 if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)
 
@@ -259,10 +259,10 @@ init 2 python:
 
     def get_fetish_shower_cum_girl():
         meets_fetish_list = []
-        if mom.has_role(cum_internal_role) or mom.has_role(cum_external_role):
+        if mom.has_role([cum_internal_role, cum_external_role]):
             if mom.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                 meets_fetish_list.append(mom)
-        if lily.has_role(cum_internal_role) or lily.has_role(cum_external_role):
+        if lily.has_role([cum_internal_role, cum_external_role]):
             if lily.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
                 meets_fetish_list.append(lily)
 
