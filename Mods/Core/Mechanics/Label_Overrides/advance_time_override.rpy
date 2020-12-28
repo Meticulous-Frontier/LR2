@@ -113,10 +113,7 @@ init 5 python:
         update_crisis_tracker(active_crisis_list)
 
         # append excluded events to list
-        active_excluded_events = []
-        for ex_crisis in excluded_crisis_tracker_events:
-            if ex_crisis.is_action_enabled():
-                active_excluded_events.append(ex_crisis)
+        active_excluded_events = [x for x in excluded_crisis_tracker_events if x.is_action_enabled()]
 
         # get active events from crisis_tracker_dict (only those with lowest counter)
         tracker_info = { key:value for (key,value) in crisis_tracker_dict.items() if key in [x.effect for x in active_crisis_list] }
@@ -140,40 +137,18 @@ init 5 python:
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
 
     def get_crisis_from_crisis_list():
-        possible_crisis_list = []
-        for crisis in crisis_list:
-            if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                possible_crisis_list.append(crisis[0]) #Build a list of valid crises from ones that pass their requirement.
-
-        return find_next_crisis(possible_crisis_list)
-        #renpy.say("", str(__builtin__.len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
-
-        #return get_random_from_weighted_list(possible_crisis_list)
+        return find_next_crisis([x for x in crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def get_limited_time_action_for_person(person):
-        possible_crisis_list = []
-        for crisis in limited_time_event_pool:
-            if crisis[0].is_action_enabled(person): #Get the first element of the weighted tuple, the action.
-                possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-        #renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
-        return get_random_from_weighted_list(possible_crisis_list, return_everything = True)
-
+        return get_random_from_weighted_list([x for x in limited_time_event_pool if x[0].is_action_enabled(person)], return_everything = True)
 
     def get_morning_crisis_from_crisis_list():
-        possible_morning_crises_list = []
-        for crisis in morning_crisis_list:
-            if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                possible_morning_crises_list.append(crisis[0]) # Build a list of valid crises from ones that pass their requirement.
-
-        return find_next_crisis(possible_morning_crises_list)
-        #renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
-        #return get_random_from_weighted_list(possible_morning_crises_list)
+        return find_next_crisis([x for x in morning_crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:
-            for person in place.people:
-                people.append([person, place])
+            people.extend([[x, place] for x in place.people])
         return people
 
     def update_party_schedules(people):
