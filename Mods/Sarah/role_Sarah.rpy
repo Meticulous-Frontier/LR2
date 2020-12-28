@@ -386,8 +386,10 @@ init -1 python:
         return outfit
 
     def create_sarah_friend():
-        sarah_friend = make_person(tits = "F", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+        sarah_friend = make_person(name = "Helen", last_name = "Brown", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = "alt blond", hair_style = braided_bun, skin="white", relationship = "Fiancée", kids = 0, tits = "DDD", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
                 ["skirts", 1, False],
+                ["other girls", 1, False],
+                ["boots", 1, False],
                 ["the colour yellow", 2, False],
                 ["the colour blue", 2, False],
                 ["the colour green", -2, False],
@@ -395,17 +397,19 @@ init -1 python:
                 ["high heels", 2, False]
             ], forced_sexy_opinions = [
                 ["taking control", 1, False],
+                ["threesomes", 2, False],
                 ["giving handjobs", -2, False],
                 ["skimpy outfits", 1, False],
                 ["showing her tits", 2, False],
                 ["not wearing underwear", 2, False],
-                ["cheating on men", 1, False]
+                ["anal sex", -2, False]
             ])
         sarah_friend.generate_home()
         downtown_bar.add_person(sarah_friend)
         sarah_friend.set_title(sarah_friend.name)
         sarah_friend.set_mc_title(mc.name)
         sarah_friend.set_possessive_title(get_random_possessive_title(the_person))
+        sarah_friend.set_schedule(purgatory, times = [0, 1, 2, 3, 4])
         sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
         town_relationships.update_relationship(sarah, sarah_friend, "Friend")
         return sarah_friend
