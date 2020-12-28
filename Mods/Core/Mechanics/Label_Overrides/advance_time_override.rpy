@@ -137,13 +137,13 @@ init 5 python:
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
 
     def get_crisis_from_crisis_list():
-        return find_next_crisis([x for x in crisis_list if x[1] > 0 and x[0].is_action_enabled()])
+        return find_next_crisis([x[0] for x in crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def get_limited_time_action_for_person(person):
         return get_random_from_weighted_list([x for x in limited_time_event_pool if x[0].is_action_enabled(person)], return_everything = True)
 
     def get_morning_crisis_from_crisis_list():
-        return find_next_crisis([x for x in morning_crisis_list if x[1] > 0 and x[0].is_action_enabled()])
+        return find_next_crisis([x[0] for x in morning_crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
