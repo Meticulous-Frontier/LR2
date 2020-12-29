@@ -425,6 +425,8 @@ label ashley_classical_concert_date_label():
     "You head downtown. The plan is just to meet up at the concert hall itself. [stephanie.title] is going to drop her sister off and pick her up afterwards."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
+    # ashley is wearing something nice
+    $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit2(the_person, sluttiness_modifier = 0.2))
     "Soon, you see the sisters."
     $ scene_manager.add_actor (the_person, position = "stand4", emotion = "happy")
     $ scene_manager.add_actor(stephanie, display_transform = character_center_flipped)
