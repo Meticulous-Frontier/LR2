@@ -33,7 +33,7 @@ init 2 python:
 
     # changed to on-talk event, so it won't light up on the house map
     # she stays mad for two time-slots and if you don't talk to her, she won't break-up
-    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 2)
+    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 3)
     limited_time_event_pool.append([relation_ship_quarrel, 1, "on_talk"])
 
     # replace action requirement functions with newly defined functions (cPickle resolver)

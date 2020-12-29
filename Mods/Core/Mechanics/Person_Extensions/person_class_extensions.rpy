@@ -794,7 +794,7 @@ init -1 python:
             self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
         removal_list = [] #So we can iterate through without removing and damaging the list.
-        for an_action in [x for x in self.on_room_enter_event_list + self.on_talk_event_list if isinstance(x, Limited_Time_Action) and x.is_action_enabled(self)]:
+        for an_action in [x for x in self.on_room_enter_event_list + self.on_talk_event_list if isinstance(x, Limited_Time_Action)]:
             an_action.turns_valid -= 1
             if an_action.turns_valid <= 0:
                 removal_list.append(an_action)
