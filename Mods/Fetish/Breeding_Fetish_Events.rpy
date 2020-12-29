@@ -1123,7 +1123,7 @@ label breeding_fetish_going_off_BC_label(the_person):
 label breeding_fetish_bend_her_over_label(the_person):
     "You decide that it is time for [the_person.possessive_title] to take a load. You decide to bend her over and fuck her right here, right now."
     mc.name "[the_person.title], you haven't taken a load of cum in a while. Turn around, I'm going to give you one."
-    if len( mc.location.people) < 2:
+    if mc.location.get_person_count() < 2:
         "With no one around, [the_person.title] happily turns around for you."
     elif mc.is_at_work():
         the_person.char "Oh! Right here at the office? In front of... everyone?"
