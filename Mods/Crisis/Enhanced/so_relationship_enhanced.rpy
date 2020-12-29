@@ -22,7 +22,7 @@ init 2 python:
         return False
 
     def so_relationship_quarrel_requirement(person):
-        if person in quest_director.unavailable_people():
+        if quest_director.is_person_blocked(person):
             return False
 
         # for people you know, set quarrel chance to 20% else too many relationships will be split up by the limited time event selector.
