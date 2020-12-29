@@ -1042,7 +1042,7 @@ label candace_cure_bimbo_label():
     candace "But it was supposed to be temporary. In animal testing, the drug worked it's way out of the body within 24 hours. Something went wrong with mine... The effects... Appear to have been permanent?"
     $ scene_manager.update_actor(candace, emotion = "angry")
     "She shakes her head. Her fists clench as she remembers the next events."
-    renpy.say(candace.char, "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met " + ophelia_get_ex_name() + "...")
+    $ renpy.say(candace.char, "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met " + ophelia_get_ex_name() + "...")
     candace "I was out in front of this strip club... Trying to find someone to take me home that night, when I ran into him. He could tell I was in a bad spot... And totally took advantage of it."
     candace "Soon I was his 'personal secretary', but he wasn't even paying me anything. I was doing all sorts of errands for him, trading sexual favors for discounts, among other things."
     $ scene_manager.update_actor(candace, emotion = "happy")
