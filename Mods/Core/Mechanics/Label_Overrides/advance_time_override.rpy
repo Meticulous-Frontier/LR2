@@ -186,7 +186,7 @@ init 5 python:
 
     def advance_time_assign_limited_time_events(people):
         for (person, place) in people:
-            if  renpy.random.randint(0,100) < 10 and (person.mc_title != "Stranger" or person.title): #Only assign one to 10% of people, to cut down on the number of people we're checking.
+            if renpy.random.randint(0,100) < 10 and (person.mc_title != "Stranger" or person.title): #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
                     if crisis[2] == "on_talk" and not any([x for x in person.on_talk_event_list if isinstance(x, Limited_Time_Action)]):

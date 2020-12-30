@@ -146,7 +146,7 @@ label strip_club_manager_hire_more_waitresses_reminder_label(): # phone call
 label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
     "Suddenly your smartphone rings: it's your StripClub manager."
     $ the_person = strip_club_get_manager()
-    the_person.char "Ehi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you..."
+    the_person.char "Hi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you..."
     mc.name "Sure [the_person.title], I'm coming."
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
