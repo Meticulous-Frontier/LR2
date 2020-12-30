@@ -96,13 +96,7 @@ init python: #For now default init. May change later if we know better.
             return
 
         def start_new_quest(self):
-            able_quest_list = []
-            for quest in self.quest_list:
-                if not quest.quest_complete:
-                    if quest.start_requirement():
-                        able_quest_list.append(quest)
-
-            self.active_quest = get_random_from_list(able_quest_list)
+            self.active_quest = get_random_from_list([x for x in self.quest_list if not x.quest_complete and x.start_requirement()])
             if not self.active_quest: #No applicable quests available. Reset quest chance.
                 return False
 
@@ -132,11 +126,7 @@ init python: #For now default init. May change later if we know better.
                 self.unavailable_person_identifiers.append(person.identifier)
 
         def unavailable_people(self):
-            result = []
-            for person in known_people_in_the_game([mc]):
-                if person.identifier in self.unavailable_person_identifiers:
-                    result.append(person)
-            return result
+            return [x for x in known_people_in_the_game([mc]) if x.identifier in self.unavailable_person_identifiers]
 
         def is_person_blocked(self, person):
             return person.identifier in self.unavailable_person_identifiers

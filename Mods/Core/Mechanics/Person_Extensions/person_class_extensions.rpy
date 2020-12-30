@@ -734,7 +734,7 @@ init -1 python:
             destination = None
 
         if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
-            if self.get_destination() == self.work: #We're going to work.
+            if destination == self.work: #We're going to work.
                 if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
                     self.wear_uniform()
                     self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
@@ -750,11 +750,8 @@ init -1 python:
             #She finds somewhere to burn some time
             if not location is destination: # only change outfit if we change location
                 self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
-            available_locations = [] #Check to see where is public (or where you are white listed) and move to one of those locations randomly
-            for potential_location in list_of_places:
-                if potential_location.public:
-                    available_locations.append(potential_location)
-            location.move_person(self, get_random_from_list(available_locations))
+
+            location.move_person(self, get_random_from_list([x for x in list_of_places if x.public]))
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
         if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
@@ -796,16 +793,17 @@ init -1 python:
         if self.sluttiness < 80 and self.outfit and self.outfit.full_access():
             self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
-        for event_list in [self.on_room_enter_event_list, self.on_talk_event_list]: #Go through both of these lists and curate them, ie trim out events that should have expired.
-            removal_list = [] #So we can iterate through without removing and damaging the list.
-            for an_action in event_list:
-                if isinstance(an_action, Limited_Time_Action) and an_action.is_action_enabled(self): #It's a LTA holder, so it has a turn counter only count down when active
-                    an_action.turns_valid -= 1
-                    if an_action.turns_valid <= 0:
-                        removal_list.append(an_action)
+        removal_list = [] #So we can iterate through without removing and damaging the list.
+        for an_action in [x for x in self.on_room_enter_event_list + self.on_talk_event_list if isinstance(x, Limited_Time_Action)]:
+            an_action.turns_valid -= 1
+            if an_action.turns_valid <= 0:
+                removal_list.append(an_action)
 
-            for action_to_remove in removal_list:
-                event_list.remove(action_to_remove)
+        for action_to_remove in removal_list:
+            if action_to_remove in self.on_room_enter_event_list:
+                self.on_room_enter_event_list.remove(action_to_remove)
+            if action_to_remove in self.on_talk_event_list:
+                self.on_talk_event_list.remove(action_to_remove)
 
         for a_role in self.special_role:
             a_role.run_move(self)

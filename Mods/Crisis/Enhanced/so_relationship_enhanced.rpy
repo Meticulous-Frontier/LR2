@@ -4,21 +4,25 @@ init 2 python:
 
     # the relationship will only worsen if the love of the person for the MC is higher than this threshold value
     # so as long as you are not pursuing them, their relationships with their partners will only improve
-    relationship_worsen_stats = {
+    relationship_stats = {
         "Married" : 90,
         "Fiancée" : 65,
         "Girlfriend": 40,
         "Single": 25,
     }
 
-    def so_relationship_improve_requirement():
-        return not get_so_relationship_improve_person() is None
+    def so_relationship_improve_requirement_enhanced():
+        if time_of_day > 0 and time_of_day < 4:
+            return not get_so_relationship_improve_person() is None
+        return False
 
-    def so_relationship_worsen_requirement():
-        return not get_so_relationship_worsen_person() is None
+    def so_relationship_worsen_requirement_enhanced():
+        if time_of_day > 0 and time_of_day < 4:
+            return not get_so_relationship_worsen_person() is None
+        return False
 
     def so_relationship_quarrel_requirement(person):
-        if person in quest_director.unavailable_people():
+        if quest_director.is_person_blocked(person):
             return False
 
         # for people you know, set quarrel chance to 20% else too many relationships will be split up by the limited time event selector.
@@ -29,27 +33,25 @@ init 2 python:
 
     # changed to on-talk event, so it won't light up on the house map
     # she stays mad for two time-slots and if you don't talk to her, she won't break-up
-    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 2)
+    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 3)
     limited_time_event_pool.append([relation_ship_quarrel, 1, "on_talk"])
 
     # replace action requirement functions with newly defined functions (cPickle resolver)
-    so_relationship_improve_crisis.requirement = so_relationship_improve_requirement
-    so_relationship_worsen_crisis.requirement = so_relationship_worsen_requirement
+    so_relationship_improve_crisis.requirement = so_relationship_improve_requirement_enhanced
+    so_relationship_worsen_crisis.requirement = so_relationship_worsen_requirement_enhanced
 
     def get_so_relationship_improve_person():
         potential_people = []
-        for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()):
-            if person.title and not person.relationship == "Married" and person.relationship in relationship_worsen_stats and person.love <= relationship_worsen_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5) :
-                if not person.has_role([girlfriend_role, affair_role]): # when in relationship with MC or Casual Athlete she will not improve her relationship with her SO
-                    potential_people.append(person)
+        for person in [x for x in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Married" and not x.has_role([girlfriend_role, affair_role])]:
+            if person.relationship in relationship_stats and person.love <= relationship_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5):
+                potential_people.append(person)
         return get_random_from_list(potential_people)
 
     def get_so_relationship_worsen_person():
         potential_people = []
-        for person in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()):
-            if person.title and not person.relationship == "Single" and person.relationship in relationship_worsen_stats and person.love > relationship_worsen_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
-                if not person.has_role([casual_hotwife_role]): # Hotwife doesn't want to leave her SO
-                    potential_people.append(person)
+        for person in [x for x in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single" and not x.has_role([casual_hotwife_role])]:
+            if person.relationship in relationship_stats and person.love > relationship_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
+                potential_people.append(person)
         return get_random_from_list(potential_people)
 
 label so_relationship_improve_label_enhanced():

@@ -42,7 +42,7 @@ label give_panties_label(the_person):
         return
 
     if not the_person.can_remove_panties() and the_person.effective_sluttiness() < 60:
-        if mc.location.people > 1:
+        if mc.location.get_person_count() > 1:
             the_person "I could do that [the_person.mc_title], but other people might notice if I start stripping down."
             mc.name "Why don't you stop wearing panties, so I don't have to ask for them?"
             the_person "Maybe next time..."
@@ -60,7 +60,7 @@ label give_panties_label(the_person):
 
     if not the_person.can_remove_panties():
         the_person "This might take a minute..."
-        if mc.location.people > 1:
+        if mc.location.get_person_count() > 1:
             "[the_person.possessive_title] takes a quick look around and starts stripping down."
         else:
             "[the_person.possessive_title] starts stripping down, giving you her panties."

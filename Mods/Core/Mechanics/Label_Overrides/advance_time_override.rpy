@@ -104,19 +104,15 @@ init 5 python:
     config.label_overrides["advance_time"] = "advance_time_enhanced"
 
     def update_crisis_tracker(active_crisis_list):
-        for crisis in [x for x in active_crisis_list if x not in excluded_crisis_tracker_events]:
-            if not (crisis.effect in crisis_tracker_dict.keys()):
-                crisis_tracker_dict[crisis.effect] = 0
+        for crisis in [x for x in active_crisis_list if x not in excluded_crisis_tracker_events and not x.effect in crisis_tracker_dict.keys()]:
+            crisis_tracker_dict[crisis.effect] = 0
         return
 
     def find_next_crisis(active_crisis_list):
         update_crisis_tracker(active_crisis_list)
 
         # append excluded events to list
-        active_excluded_events = []
-        for ex_crisis in excluded_crisis_tracker_events:
-            if ex_crisis.is_action_enabled():
-                active_excluded_events.append(ex_crisis)
+        active_excluded_events = [x for x in excluded_crisis_tracker_events if x.is_action_enabled()]
 
         # get active events from crisis_tracker_dict (only those with lowest counter)
         tracker_info = { key:value for (key,value) in crisis_tracker_dict.items() if key in [x.effect for x in active_crisis_list] }
@@ -140,40 +136,18 @@ init 5 python:
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
 
     def get_crisis_from_crisis_list():
-        possible_crisis_list = []
-        for crisis in crisis_list:
-            if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                possible_crisis_list.append(crisis[0]) #Build a list of valid crises from ones that pass their requirement.
-
-        return find_next_crisis(possible_crisis_list)
-        #renpy.say("", str(__builtin__.len(possible_crisis_list)) + " - ".join((o[0].name) for o in possible_crisis_list))
-
-        #return get_random_from_weighted_list(possible_crisis_list)
+        return find_next_crisis([x[0] for x in crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def get_limited_time_action_for_person(person):
-        possible_crisis_list = []
-        for crisis in limited_time_event_pool:
-            if crisis[0].is_action_enabled(person): #Get the first element of the weighted tuple, the action.
-                possible_crisis_list.append(crisis) #Build a list of valid crises from ones that pass their requirement.
-        #renpy.random.shuffle(possible_crisis_list)    # shuffle the list in random order
-        return get_random_from_weighted_list(possible_crisis_list, return_everything = True)
-
+        return get_random_from_weighted_list([x for x in limited_time_event_pool if x[0].is_action_enabled(person)], return_everything = True)
 
     def get_morning_crisis_from_crisis_list():
-        possible_morning_crises_list = []
-        for crisis in morning_crisis_list:
-            if crisis[1] > 0 and crisis[0].is_action_enabled(): #Get the first element of the weighted tuple, the action.
-                possible_morning_crises_list.append(crisis[0]) # Build a list of valid crises from ones that pass their requirement.
-
-        return find_next_crisis(possible_morning_crises_list)
-        #renpy.random.shuffle(possible_morning_crises_list)    # shuffle the list in random order
-        #return get_random_from_weighted_list(possible_morning_crises_list)
+        return find_next_crisis([x[0] for x in morning_crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in list_of_places:
-            for person in place.people:
-                people.append([person, place])
+            people.extend([[x, place] for x in place.people])
         return people
 
     def update_party_schedules(people):
@@ -212,7 +186,7 @@ init 5 python:
 
     def advance_time_assign_limited_time_events(people):
         for (person, place) in people:
-            if person.mc_title != "Stranger" and renpy.random.randint(0,100) < 10: #Only assign one to 10% of people, to cut down on the number of people we're checking.
+            if renpy.random.randint(0,100) < 10 and (person.mc_title != "Stranger" or person.title): #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
                     if crisis[2] == "on_talk" and not any([x for x in person.on_talk_event_list if isinstance(x, Limited_Time_Action)]):
@@ -299,29 +273,24 @@ label advance_time_random_crisis_label():
 label advance_time_mandatory_crisis_label():
     # "advance_time_mandatory_crisis_label - timeslot [time_of_day]" #DEBUG
     python:
-        mandatory_crisis_count = 0
-        mandatory_crisis_max = __builtin__.len(mc.business.mandatory_crises_list)
-        clear_list = []
+        active_crisis_list = [x for x in mc.business.mandatory_crises_list if x.is_action_enabled()]
+        crisis_count = 0
 
-    while mandatory_crisis_count < mandatory_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        if mandatory_crisis_count < __builtin__.len(mc.business.mandatory_crises_list): # extra check to make sure index still exists
-            $ crisis = mc.business.mandatory_crises_list[mandatory_crisis_count]
-            if crisis.is_action_enabled():
-                $ crisis.call_action()
-                if _return == "Advance Time":
-                    $ mandatory_advance_time = True
-                $ clear_scene()
-                $ clear_list.append(crisis)
-            $ del crisis
-        $ mandatory_crisis_count += 1
+    while crisis_count < len(active_crisis_list):
+        # remove from main list before we trigger
+        if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
+            $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
+
+        $ active_crisis_list[crisis_count].call_action()
+        if _return == "Advance Time":
+            $ mandatory_advance_time = True
+        python:
+            clear_scene()
+            crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
-        for crisis in clear_list:
-            if crisis in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
-                mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
-
-        del clear_list
+        del active_crisis_list
         crisis = None
     return
 
@@ -367,27 +336,24 @@ label advance_time_mandatory_morning_crisis_label():
     #"advance_time_mandatory_morning_crisis_label" #DEBUG
     #Now we run mandatory morning crises. Nearly identical to normal crises, but these always trigger at the start of the day (ie when you wake up and before you have control of your character.)
     python:
-        mandatory_morning_crisis_count = 0
-        mandatory_morning_crisis_max = __builtin__.len(mc.business.mandatory_morning_crises_list)
-        clear_list = []
+        active_crisis_list = [x for x in mc.business.mandatory_morning_crises_list if x.is_action_enabled()]
+        crisis_count = 0
 
-    while mandatory_morning_crisis_count < mandatory_morning_crisis_max: #We need to keep this in a renpy loop, because a return call will always return to the end of an entire python block.
-        $ crisis = mc.business.mandatory_morning_crises_list[mandatory_morning_crisis_count]
-        if crisis.is_action_enabled():
-            $ crisis.call_action()
-            if _return == "Advance Time":
-                $ mandatory_advance_time = True
-            $ clear_scene()
-            $ clear_list.append(crisis)
-        $ mandatory_morning_crisis_count += 1
-        $ del crisis
+    while crisis_count < len(active_crisis_list):
+        # remove from main list before we trigger
+        if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
+            $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
+
+        $ active_crisis_list[crisis_count].call_action()
+        if _return == "Advance Time":
+            $ mandatory_advance_time = True
+        python:
+            clear_scene()
+            crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
-        for crisis in clear_list:
-            mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
-
-        del clear_list
+        del active_crisis_list
         crisis = None
     return
 

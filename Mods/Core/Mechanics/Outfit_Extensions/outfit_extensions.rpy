@@ -1,6 +1,44 @@
-
-
 init -1 python:
+    #############################################
+    # Custom Compare Functions For Outfit Class #
+    #############################################
+    def outfit_compare(self, other):
+        if isinstance(self, other.__class__):
+            if self.name == other.name:
+                return 0
+
+        if self.__hash__() < other.__hash__():
+            return -1
+        else:
+            return 1
+
+    Outfit.__cmp__ = outfit_compare
+
+    # add outfit hash function
+    def outfit_hash(self):
+        return hash(self.name)
+
+    Outfit.__hash__ = outfit_hash
+    Outfit.hash = outfit_hash
+
+    def outfit_eq(self, other):
+        if isinstance(self, other.__class__):
+            return self.name == other.name
+        return False
+
+    Outfit.__eq__ = outfit_eq
+
+    def outfit_ne(self, other):
+        if isinstance(self, other.__class__):
+            return self.name != other.name
+        return True
+
+    Outfit.__ne__ = outfit_ne
+
+    ######################################
+    # Extension Methods For Outfit Class #
+    ######################################
+
     def feet_available(self):
         reachable = True
         for cloth in self.feet:

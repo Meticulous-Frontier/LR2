@@ -14,8 +14,8 @@ init 2 python:
         menu_tooltip = "An employee is late for work.", category = "Business", is_crisis = True, crisis_weight = late_for_work_weight)
 
 label late_for_work_action_label:
-    #Lets get the girl of interest.
-    $ the_person = get_random_employees(1)
+    #Lets get the girl of interest (exclude Sarah on mondays).
+    $ the_person = get_random_employees(1, exclude_list = [] if day%7 != 0 else [sarah])
     if the_person is None:
         return
 

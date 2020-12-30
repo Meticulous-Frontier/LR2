@@ -718,7 +718,7 @@ label candace_love_path_intro_label():
     $ the_person.draw_person()
     "You've made up your mind. While the current [the_person.title] certainly has her charms, the drug she was given is ruining her life."
     "You care about her too much to let that happen. You have to do what you can to research it and see if you can reverse the effects."
-    mc.name "[the_person.title]... Tomorrow we are going to talk to [mc.business.head_researcher.title]. I want to see if we can try and reverse the experiment that made you like this."
+    mc.name "[the_person.title]... Tomorrow we are going to talk to [mc.business.head_researcher.name]. I want to see if we can try and reverse the experiment that made you like this."
     the_person "Made me... Like this? I don't understand... Don't you like me?"
     mc.name "Of course I do. But the changes that it caused, you're a danger to yourself. How long have you been going out and wandering around, looking for a fuck?"
     the_person"I.. err... I mean... Sometimes I just get the urge..."
@@ -737,13 +737,13 @@ label candace_love_path_intro_label():
     the_person "Is it... Is it time now?"
     "She truly is insatiable."
     if mc.energy < 50:
-        "You are exhausted from a long day, but you dig deep, knowing there's no way you don't leave her with giving [the_person.title] a decent dicking."
+        "You are exhausted from a long day, but you dig deep, knowing there's no way you would leave her without giving [the_person.title] a decent dicking."
         $ mc.change_energy(50)
     "[the_person.title] gives a little yelp as you pick her up."
     mc.name "Yes, it's time now."
     $ the_person.draw_person(position = "against_wall", emotion = "happy")
-    the_person "Yay! I've been needing this all night!"
-    "[the_person.title] wraps her legs around you is grinding against you as you carry her over to her kitchen counter."
+    the_person "Yay! I've been waiting for this all night!"
+    "[the_person.title] wraps her legs around you, grinding against you, as you carry her over to her kitchen counter."
     $ the_person.change_arousal(15)
     if not the_person.vagina_available():
         "You pull off everything between you and her cunt."
@@ -914,40 +914,40 @@ label candace_begin_cure_research_label(the_person):
     the_person "I actually thought something similar. I didn't know that she came from a competitor, but her personality exhibits all of the traits that we've seen from the serum, both physical and mental."
     mc.name "Unfortunately, it has inhibited her ability to function independently. Do you think there is any way of reversing the serum effects? Or even just partially?"
     the_person "Wow... That's a difficult question. Up until now, just about all of our work has been on making the serums MORE effective, not nullifying them."
-    mc.name "I understand that this is a difficult question... But unfortunately [candace.title] is no longer able to manage. I can't sit idly by and watch her life get ruined, if there is something we can do to help her."
+    mc.name "I understand that this is a difficult question... But unfortunately [candace.name] is no longer able to manage. I can't sit idly by and watch her life get ruined, if there is something we can do to help her."
     "Your head researcher ponders the issue for a bit."
     the_person "Can you give me some time to study her? With a few tests... Maybe I could figure something out."
     mc.name "That is fine. I actually need to find her a place to stay for a bit..."
-    "You explain to [the_person.title] what happened with [candace.possessive_title] getting arrested and your conversation with the police chief."
+    "You explain to [the_person.name] what happened with [candace.name] getting arrested and your conversation with the police chief."
     if the_person == stephanie:
         the_person "Wow... Tell you what. Why don't you have her move in with me for a bit? I can work on it on the side, and between me and [ashley.name] we should be able to keep an eye on her..."
     else:
         the_person "Wow. Well, I live alone, why don't you have her move in with me for a bit? I could put her in my guest room."
-    mc.name "[the_person.title], you're amazing. Let me call her in and we'll talk to her."
-    "You call [candace.title] and ask her to come to your office. In a minute there's a knock on your door."
+    mc.name "[the_person.name], you're amazing. Let me call her in and we'll talk to her."
+    "You call [candace.name] and ask her to come to your office. In a minute there's a knock on your door."
     mc.name "Come in"
     $ scene_manager.add_actor(candace, display_transform = character_left_flipped)
     candace "You need something?"
     mc.name "Have a seat."
-    "[candace.title] walks in and sits down next to [the_person.possessive_title]."
+    "[candace.name] walks in and sits down next to [the_person.name]."
     $ scene_manager.update_actor(candace, position = "sitting")
-    mc.name "Remember how we talked about having [the_person.title] examining you and doing some research?"
+    mc.name "Remember how we talked about having [the_person.name] examining you and doing some research?"
     "She looks at you with a puzzled look."
     candace "I... I remember we had a slumber party..."
     "You can tell that she is struggling to remember."
     mc.name "You got arrested, remember?"
     candace "Right! And I told the nice police officer I was hiding drugs 'somewhere special' and so he had to do a strip search and..."
-    mc.name "[candace.title], we said we would talk with [the_person.title] about helping you control some of your... urges... Among other things."
+    mc.name "[candace.name], we said we would talk with [the_person.name] about helping you control some of your... urges... Among other things."
     candace "If you say so boss!"
-    mc.name "Okay. Well, in order to keep things from impacting the business too much, [the_person.title] would like you to stay with her for a while. It will make it easier for her to run tests on you as necessary."
-    candace "You mean... You want me to move in? With [the_person.title]?"
+    mc.name "Okay. Well, in order to keep things from impacting the business too much, [the_person.name] would like you to stay with her for a while. It will make it easier for her to run tests on you as necessary."
+    candace "You mean... You want me to move in? With [the_person.name]?"
     mc.name "Don't worry, it would only be temporary. A couple weeks at most."
     mc.name "Think of it, like a slumber party."
     candace "Oh! A slumber party! That will be like, so much fun!"
-    "[the_person.possessive_title] gives you a little glare, but she goes along with it."
+    "[the_person.name] gives you a little glare, but she goes along with it."
     the_person "I'll come over after work today and help you pack a few things."
     mc.name "Good. Let me know if you either of you need anything."
-    "With that, you dismiss the meeting. Hopefully [the_person.title] will be able to find some way to reverse the effects of the serum that made [candace.possessive_title] this way."
+    "With that, you dismiss the meeting. Hopefully [the_person.name] will be able to find some way to reverse the effects of the serum that made [candace.name] this way."
     $ candace.set_schedule(the_location = the_person.home, times = [0,4])
     $ mc.business.mandatory_crises_list.append(candace_anti_bimbo_serum)
     $ scene_manager.clear_scene()
@@ -1042,7 +1042,7 @@ label candace_cure_bimbo_label():
     candace "But it was supposed to be temporary. In animal testing, the drug worked it's way out of the body within 24 hours. Something went wrong with mine... The effects... Appear to have been permanent?"
     $ scene_manager.update_actor(candace, emotion = "angry")
     "She shakes her head. Her fists clench as she remembers the next events."
-    candace "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met [ex name]..."
+    $ renpy.say(candace.char, "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met " + ophelia_get_ex_name() + "...")
     candace "I was out in front of this strip club... Trying to find someone to take me home that night, when I ran into him. He could tell I was in a bad spot... And totally took advantage of it."
     candace "Soon I was his 'personal secretary', but he wasn't even paying me anything. I was doing all sorts of errands for him, trading sexual favors for discounts, among other things."
     $ scene_manager.update_actor(candace, emotion = "happy")

@@ -141,6 +141,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person_two)
+    $ work_bathroom.show_background()
     "As you step in the door, you pause for a second when you see [the_person_one.title] and [the_person_two.title] there at the sinks, freshening up."
     "You recently made all the bathrooms in the office unisex, and you aren't quite used to having women in the restroom when you walk in yet."
     "However, the girls seem completely unfazed when you walk through the door."
@@ -163,6 +164,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     "The girls are still talking but you hear the bathroom door open. Their voices fade away as they exit."
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
+    $ mc.location.show_background()
     $ del overhear_topic
     $ del text_one
     $ del text_two
@@ -180,6 +182,7 @@ label unisex_restroom_sexy_overhear_label():
     #$ anon_char_one.name = "?????"
     $ anon_char_two = get_anon_person(the_person_two)
     #$ anon_char_two.name = "?????"
+    $ work_bathroom.show_background()
     "You step into the restroom and walk into one of the stalls."
     "As you are relieving yourself, you hear a couple girls enter the restroom, talking. They seem to be talking about some interesting stuff."
     anon_char_one "I know right? His dick is perfect, and he knows how to use it too."
@@ -221,6 +224,7 @@ label unisex_restroom_sexy_overhear_label():
     "You hear the girls finish up and leave the restroom. You wash your hands and leave as well."
 
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
+    $ mc.location.show_background()
     $ del the_person_one
     $ del the_person_two
     $ del text_one
@@ -242,6 +246,7 @@ label unisex_restroom_fantasy_overhear_label():
     #$ anon_char_one.name = "?????"
     $ anon_char_two = get_anon_person(the_person_two)
     #$ anon_char_two.name = "?????"
+    $ work_bathroom.show_background()
     "You step into the restroom and walk into one of the stalls."
     "As you are relieving yourself, you hear a couple girls enter the restroom, talking. They seem to be talking about some interesting stuff."
     anon_char_one "I know right? I'm so frustrated right now. Last night I had this crazy dream about [the_person_one.mc_title]."
@@ -287,6 +292,7 @@ label unisex_restroom_fantasy_overhear_label():
     # if we don't have the fantasy actout limited time event for the person, add it to the on_talk_event_list.
     if discover_identity:
         $ the_person_one.add_unique_on_talk_event(Limited_Time_Action(unisex_restroom_fantasy_actout, 5))
+    $ mc.location.show_background()
     $ del the_person_one
     $ del the_person_two
     $ del anon_char_one
@@ -342,6 +348,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
 
 label unisex_restroom_unlock_gloryhole_label():
     "You feel the call of nature, so you get up from your work and head to the restroom."
+    $ work_bathroom.show_background()
     "The restroom is empty, so you find an empty stall and enter it."
     "Much to your surprise, you discover a small hole cut out. The girls have made a gloryhole!"
     $ mc.business.unisex_restroom_unlocks["unisex_restroom_gloryhole"] = 1
@@ -354,9 +361,11 @@ label unisex_restroom_unlock_gloryhole_label():
             pass
         "Finish up and maybe try it another time":
             pass
+    $ mc.location.show_background()
     return
 
 label unisex_restroom_gloryhole_option_label():
+    $ work_bathroom.show_background()
     "You step into the restroom and walk into one of the stalls."
     if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
         "You see that someone has drawn multiple hearts in red lipstick around it."
@@ -370,6 +379,7 @@ label unisex_restroom_gloryhole_option_label():
             call unisex_restroom_use_gloryhole_label from _call_use_dat_gloryhole_2
         "Finish up and maybe try it another time":
             pass
+    $ mc.location.show_background()
     return
 
 label unisex_restroom_use_gloryhole_label():
@@ -402,6 +412,7 @@ label unisex_restroom_use_gloryhole_label():
 
 label unisex_restroom_gloryhole_wait_label():
     "You decide you could use a little anonymous action to break up the monotony of the day."
+    $ work_bathroom.show_background()
     "You step into the restroom and walk into one of the stalls."
     "You see the glory hole in the stall that has been cutout."
     if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) < 6:
@@ -412,7 +423,7 @@ label unisex_restroom_gloryhole_wait_label():
         "Below, in different handwriting, someone else has written 'cum inside me please!' with another arrow pointed up to the hole."
     call unisex_restroom_use_gloryhole_label from _call_use_dat_gloryhole_wait_2
     #TODO advance time?
-
+    $ mc.location.show_background()
     return
 
 label unisex_restroom_gloryhole_handjob_label(the_person):
