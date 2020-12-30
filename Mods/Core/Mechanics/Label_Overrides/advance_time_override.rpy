@@ -277,6 +277,10 @@ label advance_time_mandatory_crisis_label():
         crisis_count = 0
 
     while crisis_count < len(active_crisis_list):
+        # remove from main list before we trigger
+        if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
+            $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
+
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -286,9 +290,6 @@ label advance_time_mandatory_crisis_label():
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
-        for crisis in active_crisis_list:
-            if crisis in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
-                mc.business.mandatory_crises_list.remove(crisis) #Clean up the list.
         del active_crisis_list
         crisis = None
     return
@@ -339,6 +340,10 @@ label advance_time_mandatory_morning_crisis_label():
         crisis_count = 0
 
     while crisis_count < len(active_crisis_list):
+        # remove from main list before we trigger
+        if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
+            $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
+
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -348,8 +353,6 @@ label advance_time_mandatory_morning_crisis_label():
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
-        for crisis in active_crisis_list:
-            mc.business.mandatory_morning_crises_list.remove(crisis) #Clean up the list.
         del active_crisis_list
         crisis = None
     return
