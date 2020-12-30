@@ -66,12 +66,12 @@ init -1 python:
 
     def active_hints():
         return [x for x in game_hints if x.is_active and not x.is_complete]
-    
+
     def exists_in_mandatory_crisis_list(effect_name):
         return find_in_list(lambda x: x.effect == effect_name, mc.business.mandatory_crises_list)
 
-    def exists_in_morning_crisis_list(effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, morning_crisis_list)
+    def exists_in_mandatory_morning_crisis_list(effect_name):
+        return find_in_list(lambda x: x.effect == effect_name, mc.business.mandatory_morning_crises_list)
 
     def exists_in_room_enter_list(person, effect_name):
         return find_in_list(lambda x: x.effect == effect_name, person.on_room_enter_event_list)
