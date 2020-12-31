@@ -54,6 +54,9 @@ init -1 python:
         mc.business.event_triggers_dict["fetish_after_hours_available"] = True
         return
 
+    def fetish_serum_unlock_count():
+        return mc.business.event_triggers_dict.get("fetish_serum_count", 0)
+
 
     def start_anal_fetish_quest(the_person):
         return False #For now disable this
@@ -164,7 +167,7 @@ init -1 python:
             if the_person.get_opinion_score(opinion) < max_new_score:
                 avail_opinions.append(opinion)
         if len(avail_opinions) > 0:
-            the_person.increase_opinion_score(get_random_from_list(avail_opinions, max_value = max_new_score, add_to_log = add_to_log))
+            the_person.increase_opinion_score(get_random_from_list(avail_opinions), max_value = max_new_score, add_to_log = add_to_log)
             return True #Return true if we increased an opinion
         return False
 
@@ -288,86 +291,128 @@ init -1 python:
             person.increase_sex_skill("Foreplay", 2 + tier)
         return
 
+    def fetish_unlock_basic_serum():
+        found = find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
+        if found:
+            found.tier = 1
+            mc.business.event_triggers_dict["fetish_serum_count"] = 1
+        return
+
+    def fetish_unlock_anal_serum():
+        found = find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
+        if found:
+            found.tier = 1
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def fetish_unlock_exhibition_serum():
+        found = find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
+        if found:
+            found.tier = 1
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def fetish_unlock_cum_serum():
+        found = find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
+        if found:
+            found.tier = 1
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def fetish_unlock_breeding_serum():
+        found = find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
+        if found:
+            found.tier = 1
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
 
     def add_fetish_serum_traits():
-        FETISH_RESEARCH_PERCENT = 1     #1 = 100%
-        FETISH_PRODUCTION_COST = 20     #Default 100
-        FETISH_RESEARCH_BASE_TIER = 1        #Default = 1
-        FETISH_RESEARCH_MID_TIER = 2          #Default = 2
-        FETISH_RESEARCH_FINAL_TIER = 3      #Default = 3
+        FETISH_PRODUCTION_COST = 20    #Default 100
 
-        fetish_basic_ther = SerumTraitMod(name = "Initial Fetish Therapy",
-                desc = "Over time, increases general positivity towards basic sexual acts. Increases effectiveness with greater suggestibility.",
-                positive_slug = "Slowly increases sexual opinions, Slowly increases Foreplay skill, +$20 Value",
-                negative_slug = "+100 Serum Research, +20 Production Cost",
-                value_added = 20,
-                research_added = 100 * FETISH_RESEARCH_PERCENT,
+        fetish_basic_ther = SerumTraitMod(name = "Sexual Proclivity Nanobots",
+                desc = "Targetted endorphin emitters increase general positive sexual responses based on suggestability.",
+                positive_slug = "Increases sexual opinions, Slowly increases Foreplay skill",
+                negative_slug = "+10 Serum Research, +20 Production Cost",
+                value_added = 0,
+                research_added = 10,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 25,
+                base_side_effect_chance = 0,
+                on_apply = fetish_basic_function_on_apply,
                 on_turn = fetish_basic_function_on_turn,
-                tier = FETISH_RESEARCH_BASE_TIER,
-                start_researched =  False,
-                research_needed = 400 * FETISH_RESEARCH_PERCENT,
+                tier = 99,
+                start_researched =  True,
+                research_needed = 400,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_exhibition_ther = SerumTraitMod(name = "Exhibitionism Fetish Therapy",
+        fetish_exhibition_ther = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
                 desc = "Over time, increases the need to behave in an extravagant way in order to attract attention. Increases effectiveness with greater suggestibility",
                 positive_slug = "Slowly increases exhibitionistic behavior, +$20 Value",
                 negative_slug = "+100 Serum Research, +20 Production Cost",
-                value_added = 20,
-                research_added = 100 * FETISH_RESEARCH_PERCENT,
+                value_added = 0,
+                research_added = 10,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 25,
+                base_side_effect_chance = 0,
+                on_apply = fetish_exhibition_function_on_apply,
                 on_turn = fetish_exhibition_on_turn,
-                requires = [fetish_basic_ther],
-                tier = FETISH_RESEARCH_BASE_TIER,
-                start_researched =  False,
-                research_needed = 400 * FETISH_RESEARCH_PERCENT,
+                tier = 99,
+                start_researched =  True,
+                research_needed = 800,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_anal_ther = SerumTraitMod(name = "Anal Fetish Therapy",
+        fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
                 desc = "Over time, increases general positivity towards Anal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
                 positive_slug = "Slowly increases Anal sexual opinions, Slowly increases Anal skill, +$25 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 25,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
+                value_added = 0,
+                research_added = 10,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 75,
+                base_side_effect_chance = 0,
+                on_apply = fetish_anal_function_on_apply,
                 on_turn = fetish_anal_function_on_turn,
-                requires = [fetish_vaginal_ther],
-                tier = FETISH_RESEARCH_FINAL_TIER,
-                start_researched =  False,
-                research_needed = 800 * FETISH_RESEARCH_PERCENT,
+                tier = 99,
+                start_researched =  True,
+                research_needed = 800,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_cum_ther = SerumTraitMod(name = "Cum Fetish Therapy",
+        fetish_cum_ther = SerumTraitMod(name = "Semen Proclivity Nanobots",
                 desc = "Over time, increases general positivity towards Cum. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
                 positive_slug = "Slowly increases Cum sexual opinions, +$25 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 25,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
+                value_added = 0,
+                research_added = 10,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 75,
+                base_side_effect_chance = 0,
+                on_apply = fetish_cum_function_on_apply,
                 on_turn = fetish_cum_function_on_turn,
-                requires = [fetish_oral_ther],
-                tier = FETISH_RESEARCH_FINAL_TIER,
-                start_researched =  False,
-                research_needed = 800 * FETISH_RESEARCH_PERCENT,
+                tier = 99,
+                start_researched =  True,
+                research_needed = 800,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_breeding_ther = SerumTraitMod(name = "Breeding Fetish Therapy",
+        fetish_breeding_ther = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
                 desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
                 positive_slug = "Slowly increases Vaginal sexual opinions, Slowly increases Vaginal skill, +$20 Value",
                 negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 25,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
+                value_added = 0,
+                research_added = 10,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 75,
+                base_side_effect_chance = 0,
+                on_apply = fetish_breeding_function_on_apply,
                 on_turn = fetish_breeding_function_on_turn,
-                requires = [fetish_vaginal_ther],
-                tier = FETISH_RESEARCH_FINAL_TIER,
-                start_researched =  False,
-                research_needed = 800 * FETISH_RESEARCH_PERCENT,
+                tier = 99,
+                start_researched =  True,
+                research_needed = 800,
+                exclude_tags = ["Nanobots"]
             )
 
 # any label that starts with serum_mod is added to the serum mod list
