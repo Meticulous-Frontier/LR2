@@ -194,7 +194,7 @@ init -1 python:
     # make sure new character has a more appropriate outfit to wear
     def update_person_outfit(person, sluttiness_modifier = 0.0):
         if not "unique_character_list" in globals() or not person in unique_character_list:
-            person.planned_outfit = person.wardrobe.decide_on_outfit2(person, sluttiness_modifier) # Use enhanced outfit selector
+            person.planned_outfit = person.decide_on_outfit(sluttiness_modifier) # Use enhanced outfit selector
             person.apply_outfit(person.planned_outfit)
             person.planned_uniform = None
         return

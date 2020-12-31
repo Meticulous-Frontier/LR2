@@ -263,7 +263,7 @@ label girlfriend_sleepover_label():
         $ wakeup_action.call_action(the_person)
     else:
         "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
-        $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+        $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
@@ -289,7 +289,7 @@ label girlfriend_wakeup_spooning_label(the_person):
             "When you come back, [the_person.title] is awake."
             $ the_person.draw_person(position = "missionary")
             the_person.char "Good morning! I slept great."
-            $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+            $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "stand3")
             "You both get ready for the day before heading out."
@@ -345,7 +345,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.reset_arousal()
     $ mc.arousal = 0
     "You lay in bed together for a little longer, but soon it is time to start the day."
-    $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+    $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "stand4")
     "You both get ready for the day."
