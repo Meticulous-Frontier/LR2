@@ -131,6 +131,7 @@ init 1 python:
         return __builtin__.int((fetish_count / total_count) * 100)
 
 
+
 #Vaginal Fetish Events#
 label SB_fetish_vaginal_visit_label(the_person):
     if the_person is mom:

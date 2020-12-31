@@ -2013,6 +2013,31 @@ init -1 python:
     Person.has_cum_fetish = has_cum_fetish
     Person.has_breeding_fetish = has_breeding_fetish
 
+    def has_started_anal_fetish(self):
+        if self.event_triggers_dict.get("anal_fetish_start", False):
+            return True
+        return False
+
+    def has_started_breeding_fetish(self):
+        if self.event_triggers_dict.get("breeding_fetish_start", False):
+            return True
+        return False
+
+    def has_started_cum_fetish(self):
+        if self.event_triggers_dict.get("cum_fetish_start", False):
+            return True
+        return False
+
+    def has_started_exhibition_fetish(self):
+        if self.event_triggers_dict.get("exhibition_fetish_start", False):
+            return True
+        return False
+
+    Person.has_started_anal_fetish = has_started_anal_fetish
+    Person.has_started_breeding_fetish = has_started_breeding_fetish
+    Person.has_started_cum_fetish = has_started_cum_fetish
+    Person.has_started_exhibition_fetish = has_started_exhibition_fetish
+
     #Additional functions
 
     def is_submissive(self):

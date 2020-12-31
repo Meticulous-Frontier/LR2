@@ -128,50 +128,6 @@ init 3 python:
         person.special_role.remove (breeding_fetish_role)
         person.add_role(breeding_fetish_role)
 
-    def start_breeding_fetish_quest(the_person):
-        #Determine who it is, then add the appropriate quest.
-        if persistent.pregnancy_pref == 0:
-            return False
-        if the_person is mom:
-            if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
-        elif the_person is lily:
-            lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
-        elif the_person is aunt:
-            pass
-        elif the_person is cousin:
-            pass
-        elif the_person is stephanie:
-            if breeding_fetish_stephanie_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_stephanie_intro)
-        elif the_person is emily:
-            pass
-        elif the_person is christina:
-            pass
-        elif the_person is starbuck:
-            if breeding_fetish_starbuck_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_starbuck_intro)
-        elif the_person is sarah:
-            if breeding_fetish_sarah_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_sarah_intro)
-        elif the_person is salon_manager:
-            pass
-        elif the_person is erica:
-            pass
-        elif "candace" in globals() and the_person is candace:
-            candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
-        elif the_person is ashley:
-            pass
-        elif the_person.is_employee():
-            if mc.business.event_triggers_dict.get("Employee_breeding_fetish_not_avail", False) == False:
-                mc.business.event_triggers_dict["Employee_breeding_fetish_not_avail"] = True
-                breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = the_person)
-                mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
-        else:
-            pass
-
-        return
-
     def get_breeding_fetish_list():
         breeder_list = []
         for person in known_people_in_the_game([mc]):
@@ -191,7 +147,7 @@ init 3 python:
 
 #Fetish Intro Labels
 label breeding_fetish_employee_intro_label(the_person):
-    $ mc.business.event_triggers_dict["Employee_breeding_fetish_not_avail"] = False
+    $ fetish_after_hours_unlock()
     "You are finishing up the last of your work today and closing up. All your employees should be gone for the day."
     "However, you are surprised when you are interrupted by someone."
     $ the_person.draw_person()

@@ -157,7 +157,7 @@ label SB_fetish_anal_label(the_person):
             $ the_person.change_stats(happiness = -5, obedience = -5)
             the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
-
+    $ fetish_after_hours_unlock()
     $ the_person.apply_planned_outfit()
     $ clear_scene()
     return
