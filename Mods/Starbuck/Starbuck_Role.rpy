@@ -2149,6 +2149,7 @@ label starbuck_candace_product_demo_label(the_person):
     $ starbuck.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
     $ candace.event_triggers_dict["friends_with_starbuck"] = True
     $ starbuck.apply_planned_outfit()
+    $ candace.apply_planned_outfit()
     $ mc.location.show_background()
     $ jump_game_loop()  # jump out of dialog and return to office
     return
