@@ -55,6 +55,9 @@ label dinner_date_plan_enhanced_label(the_person):
         the_person.char "Thanks, but no, this isn't a social thing."
         return
 
+    # choose an outfit for the date 20% sluttier than default
+    $ the_person.apply_outfit(the_person.decide_on_outfit(sluttiness_modifier = 0.2))
+
     # call original label
     $ del config.label_overrides["dinner_date_plan_label"]
     call dinner_date_plan_label(the_person) from _call_dinner_date_plan_label_enhanced
