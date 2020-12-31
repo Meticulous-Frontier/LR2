@@ -2,24 +2,25 @@
 # instead of clicking return after each choice
 
 init -1 python:
+    def create_tooltip_dictionary():
+        result = {}
+        for place in list_of_places:
+            result[place.name] = get_location_tooltip(place)
+        return result
+
     def get_location_tooltip(location):
         known_people = sorted(known_people_at_location(location), key = lambda x: x.name)
         if __builtin__.len(known_people) == 0:
             return ""
-        tooltip = "You know " + str(__builtin__.len(known_people))
-        if __builtin__.len(known_people) == 1:
-            tooltip += " person here:\n"
-        else:
-            tooltip += " people here:\n"
+        tooltip = "You know " + str(__builtin__.len(known_people)) + (" person here:\n" if __builtin__.len(known_people) == 1 else " people here:\n")
         for person in known_people:
             tooltip += person.name + " " + person.last_name + "\n"
         return tooltip
 
     def get_location_on_enter_events(location):
         for person in [x for x in location.people if x.on_room_enter_event_list]:
-            for an_action in person.on_room_enter_event_list:
-                if an_action.is_action_enabled(person):
-                    return True
+            if any(x for x in person.on_room_enter_event_list if x.is_action_enabled(person)):
+                return True
         return False
 
 init 2:
@@ -27,6 +28,10 @@ init 2:
         add "Paper_Background.png"
         modal True
         zorder 100
+
+
+        default tt_dict = create_tooltip_dictionary()
+        default tt = Tooltip(None)
 
         $ x_size_percent = 0.07
         $ y_size_percent = 0.145
@@ -50,7 +55,7 @@ init 2:
 
                             action [Function(mc.change_location, place), Return(place)]
                             sensitive place.accessable #TODO: replace once we want limited travel again with: place in mc.location.connections
-                            tooltip get_location_tooltip(place)
+                            hovered tt.Action(tt_dict[place.name])
                         text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
                 else:
                     frame:
@@ -64,7 +69,7 @@ init 2:
                             focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
                             action [Function(mc.change_location, place), Return(place)]
                             sensitive True
-                            tooltip get_location_tooltip(place)
+                            hovered tt.Action(tt_dict[place.name])
                         text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
 
 
@@ -116,6 +121,5 @@ init 2:
             textbutton "Return" align [0.5,0.5] style "transparent_style" text_style "return_button_style"
 
 
-        $ tooltip = GetTooltip()
-        if tooltip:
-            text "[tooltip]" style "textbutton_text_style" size 18
+        if tt.value:
+            text tt.value style "textbutton_text_style" size 18
