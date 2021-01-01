@@ -48,10 +48,10 @@ init 3 python:
     fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label")
     fetish_serum_discuss = Action("Discuss Nanobot Programming", fetish_serum_discuss_requirement, "fetish_serum_discuss_label",
         menu_tooltip = "Discuss creation of new Nanobot programs.")
-    fetish_serum_exhibition = Action("Nanobot Discovery", fetish_serum_exhibition_requirement, "fetish_serum_exhibition_label")
-    fetish_serum_anal = Action("Nanobot Discovery", fetish_serum_anal_requirement, "fetish_serum_anal_label")
-    fetish_serum_cum = Action("Nanobot Discovery", fetish_serum_cum_requirement, "fetish_serum_cum_label")
-    fetish_serum_breeding = Action("Nanobot Discovery", fetish_serum_breeding_requirement, "fetish_serum_breeding_label")
+    fetish_serum_exhibition = Action("Exhibition Program", fetish_serum_exhibition_requirement, "fetish_serum_exhibition_label")
+    fetish_serum_anal = Action("Anal Program", fetish_serum_anal_requirement, "fetish_serum_anal_label")
+    fetish_serum_cum = Action("Cum Program", fetish_serum_cum_requirement, "fetish_serum_cum_label")
+    fetish_serum_breeding = Action("Reproduction Program", fetish_serum_breeding_requirement, "fetish_serum_breeding_label")
 
 label fetish_serum_quest_intro_label():
     $ the_person = mc.business.head_researcher

@@ -91,9 +91,13 @@ init 1 python:
 
 #SBA1
 label SB_fetish_anal_label(the_person):
-    "You are just finishing up with business for the day when you hear a pleasant voice call out to you."
+    "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
+    "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
+    "She seems to be using her ass to try and get attention."
+    "Even now, as you walk around he business in your closing rounds, [the_person.possessive_title] bends over her desk when she notices you are nearby."
+
+    $ the_person.draw_person(position = "standing_doggy")
     the_person.char "Hey [the_person.mc_title]."
-    $ the_person.draw_person()
 
     ###Draw the girl###
     "You give her a quick wave as she walks up to you."

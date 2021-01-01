@@ -348,9 +348,9 @@ init -1 python:
             )
 
         fetish_exhibition_ther = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
-                desc = "Over time, increases the need to behave in an extravagant way in order to attract attention. Increases effectiveness with greater suggestibility",
-                positive_slug = "Slowly increases exhibitionistic behavior, +$20 Value",
-                negative_slug = "+100 Serum Research, +20 Production Cost",
+                desc = "Targetted endorphin emitters increase general positive opinions of public sexual encounters based on suggestability.",
+                positive_slug = "Increases exhibitionistic behavior, Slow increases sluttiness",
+                negative_slug = "+10 Serum Research, +20 Production Cost",
                 value_added = 0,
                 research_added = 10,
                 slots_added = 1,
@@ -365,9 +365,9 @@ init -1 python:
             )
 
         fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
-                desc = "Over time, increases general positivity towards Anal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Anal sexual opinions, Slowly increases Anal skill, +$25 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
+                desc = "Targetted endorphin emitters increase general positive opinions of public sexual encounters based on suggestability.",
+                positive_slug = "Increases Anal sexual opinions, Slowly increases Anal skill, Slowly increases obedience",
+                negative_slug = "+10 Serum Research, +20 Production Cost",
                 value_added = 0,
                 research_added = 10,
                 slots_added = 1,
@@ -382,9 +382,9 @@ init -1 python:
             )
 
         fetish_cum_ther = SerumTraitMod(name = "Semen Proclivity Nanobots",
-                desc = "Over time, increases general positivity towards Cum. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Cum sexual opinions, +$25 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
+                desc = "Targetted endorphin emitters increase pleasure received when in contact with semen based on suggestability.",
+                positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
+                negative_slug = "+10 Serum Research, +20 Production Cost",
                 value_added = 0,
                 research_added = 10,
                 slots_added = 1,
@@ -399,9 +399,9 @@ init -1 python:
             )
 
         fetish_breeding_ther = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
-                desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Vaginal sexual opinions, Slowly increases Vaginal skill, +$20 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
+                desc = "Targetted endorphin emitters increase reproduction drive and associated opinions based on suggestability.",
+                positive_slug = "Increases reproduction sexual opinions, Slowly increases Vaginal skill, +$20 Value",
+                negative_slug = "+10 Serum Research, +20 Production Cost",
                 value_added = 0,
                 research_added = 10,
                 slots_added = 1,
@@ -414,6 +414,7 @@ init -1 python:
                 research_needed = 800,
                 exclude_tags = ["Nanobots"]
             )
+        return
 
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_fetish_serum_trait(stack):
