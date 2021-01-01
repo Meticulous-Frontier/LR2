@@ -68,9 +68,7 @@ init 5 python:
         identifier = mc.business.event_triggers_dict.get("girlfriend_person", None)
         if isinstance(identifier, Person):
             return identifier
-        else:
-            return get_person_by_identifier(identifier)
-        return None
+        return get_person_by_identifier(identifier)
 
     def schedule_sleepover_available():
         if mc.business.event_triggers_dict.get("girlfriend_sleepover_scheduled", False):
