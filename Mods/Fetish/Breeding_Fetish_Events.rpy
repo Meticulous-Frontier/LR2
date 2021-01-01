@@ -547,7 +547,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 "She looks at you. Her resolve stumbles, but only for a moment."
                 the_person.char "Don't worry, I'll be a REAL ideal employee for you soon."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ permanent_bimbo_on_apply(the_person, add_to_log = True)
+                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person.char "That's... we were talking about something... right?"
@@ -611,7 +611,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 "She looks at you. You think you see a tear coming down from her eye."
                 the_person.char "It's okay. The science is amazing. And I'm sure I'll enjoy life as a mother."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ permanent_bimbo_on_apply(the_person, add_to_log = True)
+                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person.char "That's... we were talking about something... right?"
