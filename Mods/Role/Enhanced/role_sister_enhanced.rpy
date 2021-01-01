@@ -177,7 +177,7 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     "You give [the_sister.title] her phone back and leave her to upload the pics."
 
     if the_sister.judge_outfit(insta_outfit_sister) and not the_sister.wardrobe.has_outfit_with_name(insta_outfit_sister.name):
-        $ the_mom.wardrobe.add_outfit(insta_outfit_sister)
+        $ the_sister.wardrobe.add_outfit(insta_outfit_sister)
 
     if the_mom.event_triggers_dict.get("mom_instathot_pic_count", 0) == 0:
         $ the_mom.event_triggers_dict["mom_instathot_pic_count"] = 1
