@@ -723,7 +723,7 @@ init -1 python:
                 self.planned_outfit = self.next_day_outfit
                 self.next_day_outfit = None
             else:
-                self.planned_outfit = self.decide_on_outfit(self)
+                self.planned_outfit = self.decide_on_outfit()
 
             self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None

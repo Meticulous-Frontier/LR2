@@ -1343,7 +1343,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     mc.name "Well, it would be rude to say no."
     "[the_person.possessive_title] gives you a big hug."
     the_person.char "Great! Let's get it done. It won't take us long!"
-    $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
+    $ the_person.apply_outfit(the_person.decide_on_outfit(.4))
 
     #TODO move the scene to the player's bedroom. and get dressed
     $ mc.change_location(bedroom)
@@ -1632,7 +1632,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.draw_person(position = "stand3")
         the_person.char "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title] heads to the bathroom. You grab your stuff and head out."
-    $ the_person.apply_outfit(the_person.wardrobe.decide_on_outfit(40))
+    $ the_person.apply_outfit(the_person.decide_on_outfit(.4))
     $ clear_scene()
     return "Advance Time"
 

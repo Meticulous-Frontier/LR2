@@ -439,7 +439,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 the_person "Okay! Grab what you think would look good, I'll be in the dressing room until you figure it out."
                 $ clear_scene()
                 "You pick out a few items to change her outfit a bit..."
-                call screen outfit_creator(lingerie_outfit)
+                call screen outfit_creator(lingerie_outfit, outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
                     "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
@@ -473,7 +473,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 $ clear_scene()
                 ""
                 "You pick out a few items to change her outfit a bit..."
-                call screen outfit_creator(Outfit("New Outfit"))
+                call screen outfit_creator(Outfit("New Outfit"), outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
                     "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
@@ -552,7 +552,7 @@ label girlfriend_underwear_shopping_label(the_person):
                         the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
-        $ the_person.wardrobe.add_outfit(lingerie_outfit)
+        $ the_person.add_outfit(lingerie_outfit, outfit_type = "under")
         the_person "Thanks [the_person.mc_title]! This was fun!"
         if schedule_sleepover_available():
             the_person "So... want me to come over tonight? I'm not doing anything later..."
