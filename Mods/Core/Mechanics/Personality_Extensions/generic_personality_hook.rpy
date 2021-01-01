@@ -510,6 +510,21 @@ init -1 python:
         stephanie.sexy_opinions["vaginal sex"] = [2, False] # she likes having sex
         return
 
+    def update_alexia_opinions():
+        # boost her marketing stats
+        alexia.market_skill = 6
+        alexia.charisma = 5
+
+        alexia.opinions["marketing work"] = [2, True]   # she loves marketing
+        alexia.opinions["flirting"] = [1, False]  # she likes flirting
+
+        # make sure she has no opinion on conservative outfits (affects happiness)
+        if any("conservative outfits" in s for s in stephanie.opinions):
+            del stephanie.opinions["conservative outfits"]
+
+        alexia.sexy_opinions["kissing"] = [1, False]  # she likes kissing
+        alexia.sexy_opinions["cheating on men"] = [-2, False]  # she loves her boyfriend
+        return
 
 label activate_generic_personality(stack):
     python:
@@ -539,6 +554,7 @@ label activate_generic_personality(stack):
         update_stripclub_strippers()
 
         update_stephanie_opinions()
+        update_alexia_opinions()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
