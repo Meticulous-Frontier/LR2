@@ -7,7 +7,7 @@ init 5 python:
     def add_cousin_blackmail_2_confront_action():
         blackmail_2_confront_action = Action("Confront her about her stripping", blackmail_2_confront_requirement, "cousin_blackmail_level_2_confront_label",
             menu_tooltip = "Tell her that you know about her job as a stripper and use it as further leverage.")
-        cousin_role.actions.append(blackmail_2_confront_action)
+        cousin_role.add_action(blackmail_2_confront_action)
         cousin.event_triggers_dict["seen_cousin_stripping"] = True
         return
 
