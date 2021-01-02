@@ -113,7 +113,8 @@ init 2 python:
 
     def show_menu_person(item):
         if not item.display_image:
-            item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
+            item.load()
+            # item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
 
         clear_scene()
         # renpy.show_screen("person_info_ui", item.return_value)
