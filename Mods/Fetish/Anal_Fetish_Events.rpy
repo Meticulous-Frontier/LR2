@@ -42,40 +42,40 @@ init 1 python:
 
     def add_SB_lily_anal_dp_fetish_event():
         SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
-        mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
+        mc.business.add_mandatory_crisis(SB_lily_anal_dp_fetish)
         return
 
     def add_mom_anal_fetish_event():
         SB_mom_anal_fetish = Action("Mom Anal Sex", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label")
-        mc.business.mandatory_morning_crises_list.append(SB_mom_anal_fetish)
+        mc.business.add_mandatory_morning_crisis(SB_mom_anal_fetish)
         return
 
     def add_sb_fetish_anal_crisis(person):
         SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement, "SB_fetish_anal_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_anal_crisis)
         return
 
     def add_sb_fetish_anal_crisis_non_employee(person):
         SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement_non_employee, "SB_fetish_anal_label_non_employee", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_anal_crisis)
         return
 
     def add_sb_fetish_anal_staylate_event(person):
         SB_fetish_anal_staylate_event = Action("Employee stays late", SB_fetish_anal_staylate_event_requirement, "SB_fetish_anal_staylate_event_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_anal_staylate_event)
+        mc.business.add_mandatory_crisis(SB_fetish_anal_staylate_event)
         return
 
     def add_mom_weekly_anal_action():
         SB_mom_weekly_anal_action = Action("mom saturday anal ", SB_mom_anal_pay_requirement, "SB_mom_weekly_anal_label")
-        mc.business.mandatory_morning_crises_list.append(SB_mom_weekly_anal_action)
+        mc.business.add_mandatory_morning_crisis(SB_mom_weekly_anal_action)
 
     def add_sb_starbuck_anal_intro_event():
         SB_starbuck_anal_intro_event = Action("Starbuck Anal Sex", SB_starbuck_anal_requirement, "SB_starbuck_anal_intro")
-        mc.business.mandatory_crises_list.append(SB_starbuck_anal_intro_event)
+        mc.business.add_mandatory_crisis(SB_starbuck_anal_intro_event)
 
     def add_stephanie_anal_fetish_action():
         SB_stephanie_anal_fetish_action = Action("Stephanie Anal Fetish", SB_stephanie_anal_fetish_requirement, "SB_stephanie_anal_fetish_label")
-        mc.business.mandatory_crises_list.append(SB_stephanie_anal_fetish_action)
+        mc.business.add_mandatory_crisis(SB_stephanie_anal_fetish_action)
 
     SB_anal_outfit = Outfit("A Special Night")
     SB_anal_outfit.add_upper(lace_bra.get_copy(),colour_pink)

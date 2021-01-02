@@ -61,7 +61,7 @@ init 5 python:
         mc.business.event_triggers_dict["girlfriend_person"] = person.identifier
         mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
         mc.business.event_triggers_dict["your_place"] = your_place
-        mc.business.mandatory_crises_list.append(girlfriend_sleepover)
+        mc.business.add_mandatory_crisis(girlfriend_sleepover)
         return
 
     def schedule_sleepover_get_girlfriend_person():
@@ -98,7 +98,7 @@ label girlfriend_myplace_yourplace_label(the_person):
     the_person "Anything else you need right now?"
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
-    $ mc.business.mandatory_crises_list.append(girlfriend_sleepover)
+    $ mc.business.add_mandatory_crisis(girlfriend_sleepover)
     $ hide_wip_screen()
     return
 

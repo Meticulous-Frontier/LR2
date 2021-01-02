@@ -82,7 +82,7 @@ init 2 python:
         office.add_action(HR_director_appointment_action)
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
         return
 
     def Sarah_reset_vars():
@@ -315,31 +315,31 @@ init -1 python:
 
     def add_sarah_epic_tits_action():
         Sarah_epic_tits_action = Action("Sarah Epic Tits Action", Sarah_epic_tits_requirement, "Sarah_epic_tits_label")
-        mc.business.mandatory_crises_list.append(Sarah_epic_tits_action)
+        mc.business.add_mandatory_crisis(Sarah_epic_tits_action)
 
     def add_sarah_get_drinks_action():
         Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
-        mc.business.mandatory_crises_list.append(Sarah_get_drinks_action)
+        mc.business.add_mandatory_crisis(Sarah_get_drinks_action)
 
     def add_sarah_stripclub_story_action():
         Sarah_stripclub_story_action = Action("Sarah Strip Club",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")
-        mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action)
+        mc.business.add_mandatory_crisis(Sarah_stripclub_story_action)
 
     def add_sarah_weekend_surprise_action():
         sarah_weekend_surprise_action = Action("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label")
-        mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action)
+        mc.business.add_mandatory_crisis(sarah_weekend_surprise_action)
 
     def add_sarah_hire_action():
         Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label", requirement_args = day)
-        mc.business.mandatory_crises_list.append(Sarah_hire_action)
+        mc.business.add_mandatory_crisis(Sarah_hire_action)
 
     def add_sarah_new_tits_action():
         Sarah_new_tits_action = Action("Sarah new tits",Sarah_new_tits_requirement,"Sarah_new_tits_label")
-        mc.business.mandatory_crises_list.append(Sarah_new_tits_action)
+        mc.business.add_mandatory_crisis(Sarah_new_tits_action)
 
     def add_sarah_threesome_request_action():
         Sarah_threesome_request_action = Action("Sarah Threesome Request",Sarah_threesome_request_requirement,"Sarah_threesome_request_label")
-        mc.business.mandatory_crises_list.append(Sarah_threesome_request_action)
+        mc.business.add_mandatory_crisis(Sarah_threesome_request_action)
 
     def add_sarah_arrange_threesome_action(person):
         Sarah_arrange_threesome_action = Action("Sarah_threesome_arrange",Sarah_arrange_threesome_requirement,"Sarah_arrange_threesome_label")
@@ -347,23 +347,23 @@ init -1 python:
 
     def add_sarah_initial_threesome_action():
         Sarah_initial_threesome_action = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
-        mc.business.mandatory_crises_list.append(Sarah_initial_threesome_action)
+        mc.business.add_mandatory_crisis(Sarah_initial_threesome_action)
 
     def add_sarah_ask_for_baby_action():
         Sarah_ask_for_baby = Action("Sarah asks for a baby", Sarah_ask_for_baby_requirement, "Sarah_ask_for_baby_label")
-        mc.business.mandatory_crises_list.append(Sarah_ask_for_baby)
+        mc.business.add_mandatory_crisis(Sarah_ask_for_baby)
 
     def add_sarah_fertile_period_start_action():
         Sarah_fertile_period_start = Action("Sarah starts a fertile period", Sarah_fertile_period_start_requirement, "Sarah_fertile_period_start_label")
-        mc.business.mandatory_crises_list.append(Sarah_fertile_period_start)
+        mc.business.add_mandatory_crisis(Sarah_fertile_period_start)
 
     def add_sarah_fertile_period_end_action():
         Sarah_fertile_period_end = Action("Sarah ends a fertile period", Sarah_fertile_period_end_requirement, "Sarah_fertile_period_end_label")
-        mc.business.mandatory_crises_list.append(Sarah_fertile_period_end)
+        mc.business.add_mandatory_crisis(Sarah_fertile_period_end)
 
     def add_hr_director_initial_hire_action(person):
         HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person, requirement_args = day)
-        mc.business.mandatory_crises_list.append(HR_director_initial_hire_action)
+        mc.business.add_mandatory_crisis(HR_director_initial_hire_action)
 
     def get_sarah_date_outfit_one():
         outfit = Outfit("Sarah Date Outfit One")

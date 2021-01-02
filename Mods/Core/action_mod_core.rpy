@@ -111,11 +111,9 @@ init 2 python:
                         crisis_list.append([action_mod, action_mod.crisis_weight])
             elif action_mod.is_mandatory_crisis:
                 if action_mod.is_morning_crisis:
-                    if not action_mod in mc.business.mandatory_morning_crises_list:
-                        mc.business.mandatory_morning_crises_list.append(action_mod)
+                    mc.business.add_mandatory_morning_crisis_event(action_mod)
                 else:
-                    if not action_mod in mc.business.mandatory_crises_list:
-                        mc.business.mandatory_crises_list.append(action_mod)
+                    mc.business.add_mandatory_crisis(action_mod)
 
         return
 

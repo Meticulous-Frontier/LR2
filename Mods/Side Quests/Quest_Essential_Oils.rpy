@@ -137,7 +137,7 @@ init 1 python:
 
     def add_quest_essential_oils_invoice():
         quest_essential_oils_invoice = Action("Essential Oil Invoice", quest_essential_oils_invoice_requirement, "quest_essential_oils_invoice_label", requirement_args = day + 5)
-        mc.business.mandatory_crises_list.append(quest_essential_oils_invoice)
+        mc.business.add_mandatory_crisis(quest_essential_oils_invoice)
         return
 
     def quest_essential_oils_invoice_requirement(pay_day):
@@ -205,7 +205,7 @@ label quest_essential_oils_intro_label(the_person):
             $ quest_essential_oils().quest_event_dict["timeout_day"] = day + 7
             $ quest_essential_oils().set_quest_flag(11)
             $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_start)
-            $ mc.business.mandatory_crises_list.append(quest_essential_oils_abandon)
+            $ mc.business.add_mandatory_crisis(quest_essential_oils_abandon)
         "Tell her to knock it off and leave it at home":
             mc.name "Well don't bring them back. This could have triggered an evacuation."
             the_person.char "Oh my... yes sir, I'll leave it at home from now on."

@@ -43,7 +43,7 @@ init 3302 python:
 
     def add_strip_club_offer_expire_action():
         strip_club_offer_expire_action = Action("Strip club offer is expiring", strip_club_offer_expire_requirement, "strip_club_offer_expire_label")
-        mc.business.mandatory_crises_list.append(strip_club_offer_expire_action)
+        mc.business.add_mandatory_crisis(strip_club_offer_expire_action)
 
     def add_cousin_meet_at_strip_club():
         cousin_meet_at_strip_club_action = Action("Meet cousin at strip club", cousin_meet_at_strip_club_requirement, "strip_club_bought_strippers_selection_label", requirement_args = day + 1)
@@ -52,7 +52,7 @@ init 3302 python:
 
     def add_think_about_buying_strip_club_action():
         think_about_buying_strip_club_action = Action("Think About Buying The Club", think_about_buying_strip_club_requirement, "think_about_buying_strip_club_label", args = starbuck)
-        mc.business.mandatory_crises_list.append(think_about_buying_strip_club_action)
+        mc.business.add_mandatory_crisis(think_about_buying_strip_club_action)
 
     def add_discuss_buying_club_with_starbuck_action():
         discuss_buying_club_with_starbuck_action = Action("Buy the Stripclub", discuss_buying_club_with_starbuck_requirement, "discuss_buying_club_with_starbuck_label")

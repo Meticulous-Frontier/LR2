@@ -52,7 +52,7 @@ init 2 python:
         target_label = "pregnant_finish_announce" if person.is_mc_father() else "silent_pregnant_finish_announce"
 
         preg_finish_announce_action = Action("Pregnancy Finish Announcement", preg_finish_announcement_requirement, target_label, args = person, requirement_args = person)
-        mc.business.mandatory_crises_list.append(preg_finish_announce_action)
+        mc.business.add_mandatory_crisis(preg_finish_announce_action)
         return
 
     def clone_schedule(person):
@@ -74,7 +74,7 @@ init 2 python:
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
 
         preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, target_label, args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
-        mc.business.mandatory_morning_crises_list.append(preg_finish_action)
+        mc.business.add_mandatory_morning_crisis(preg_finish_action)
         return
 
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
@@ -110,7 +110,7 @@ init 2 python:
             target_label = "pregnant_tits_start" if person.is_mc_father() else "silent_pregnant_tits_start"
 
             preg_tits_action = Action("Pregnancy Tits Grow", (preg_tits_requirement if not bugfix_installed else pregnant_tits_requirement), target_label, args = person, requirement_args = person)
-            mc.business.mandatory_morning_crises_list.append(preg_tits_action)
+            mc.business.add_mandatory_morning_crisis(preg_tits_action)
 
         if day > person.event_triggers_dict.get("preg_transform_day", 0):
             person.event_triggers_dict["pre_preg_body"] = person.body_type
@@ -122,12 +122,12 @@ init 2 python:
             target_label = "pregnant_finish_announce" if person.is_mc_father() else "silent_pregnant_finish_announce"
 
             preg_finish_announce_action = Action("Pregnancy Finish Announcement", preg_finish_announcement_requirement, target_label, args = person, requirement_args = person)
-            mc.business.mandatory_crises_list.append(preg_finish_announce_action)
+            mc.business.add_mandatory_crisis(preg_finish_announce_action)
         else:
             target_label = "pregnant_transform" if person.is_mc_father() else "silent_pregnant_transform"
 
             preg_transform_action = Action("Pregnancy Transform", (preg_transform_requirement if not bugfix_installed else pregnant_transform_requirement), target_label, args = person, requirement_args = person)
-            mc.business.mandatory_morning_crises_list.append(preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
+            mc.business.add_mandatory_morning_crisis(preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
         person.add_role(pregnant_role)
         return

@@ -48,22 +48,22 @@ init 1 python:
 
     def add_sb_fetish_mom_vaginal_event():
         SB_fetish_mom_vaginal_crisis = Action("Mom Loves Vaginal Sex", SB_fetish_mom_vaginal_requirement, "SB_fetish_mom_vaginal_label")
-        mc.business.mandatory_crises_list.append(SB_fetish_mom_vaginal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_mom_vaginal_crisis)
         return
 
     def add_sb_fetish_lily_vaginal_event():
         SB_fetish_lily_vaginal_crisis = Action("Lily Loves Vaginal Sex", SB_fetish_lily_vaginal_requirement, "SB_fetish_lily_vaginal_label")
-        mc.business.mandatory_crises_list.append(SB_fetish_lily_vaginal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_lily_vaginal_crisis)
         return
 
     def add_sb_fetish_vaginal_crisis(person):
         SB_fetish_vaginal_crisis = Action("Loves Vaginal Sex", SB_fetish_vaginal_requirement, "SB_fetish_vaginal_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_vaginal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_vaginal_crisis)
         return
 
     def add_sb_fetish_vaginal_event(person):
         SB_fetish_vaginal_event = Action("Vaginal Sex Visit", SB_fetish_vaginal_event_requirement, "SB_fetish_vaginal_event_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_vaginal_event)
+        mc.business.add_mandatory_crisis(SB_fetish_vaginal_event)
         return
 
 

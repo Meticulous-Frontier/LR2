@@ -9,7 +9,7 @@ init 5 python:
         global perk_system
         perk_system = Perks()
         mc.business.event_triggers_dict["perk_tutorial"] = 1
-        mc.business.mandatory_crises_list.append(Perk_Tutorial_Crisis)
+        mc.business.add_mandatory_crisis(Perk_Tutorial_Crisis)
         return
 
 label activate_perk_mod_core(stack):
@@ -29,8 +29,7 @@ label update_perk_mod_core(stack):
         if mc.business.event_triggers_dict.get("perk_tutorial", 1) < 2:
             mc.business.event_triggers_dict["perk_tutorial"] = 1
         if not perk_system.has_ability_perk("Time of Need"):
-            if Perk_Tutorial_Crisis not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(Perk_Tutorial_Crisis)
+            mc.business.add_mandatory_crisis(Perk_Tutorial_Crisis)
 
         perk_system.save_load()
 

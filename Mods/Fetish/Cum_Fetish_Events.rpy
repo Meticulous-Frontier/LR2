@@ -54,26 +54,26 @@ init 1 python:
 
     def add_sb_fetish_mom_cum_event():
         SB_fetish_mom_cum_event = Action("Mom Cum Fetish", SB_fetish_mom_cum_requirement, "SB_fetish_mom_cum_label")
-        mc.business.mandatory_crises_list.append(SB_fetish_mom_cum_event)
+        mc.business.add_mandatory_crisis(SB_fetish_mom_cum_event)
 
     def add_sb_fetish_lily_cum_event():
         SB_fetish_lily_cum_event = Action("Sister Cum Fetish", SB_fetish_lily_cum_requirement, "SB_fetish_lily_cum_label")
-        mc.business.mandatory_morning_crises_list.append(SB_fetish_lily_cum_event)
+        mc.business.add_mandatory_morning_crisis(SB_fetish_lily_cum_event)
         return
 
     def add_sb_fetish_cum_crisis(person):
         SB_fetish_cum_crisis = Action("Loves Cum.", SB_fetish_cum_requirement, "SB_fetish_cum_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_cum_crisis)
         return
 
     def add_sb_fetish_stephanie_cum_event():
         SB_fetish_stephanie_cum_action = Action("Stephanie Cum Fetish", SB_stephanie_cum_fetish_requirement, "SB_fetish_stephanie_cum_label")
-        mc.business.mandatory_crises_list.append(SB_fetish_stephanie_cum_action)
+        mc.business.add_mandatory_crisis(SB_fetish_stephanie_cum_action)
         return
 
     def add_sb_fetish_cum_crisis_non_employee(person):
         SB_fetish_cum_crisis_non_employee = Action("Loves Cum", SB_fetish_cum_requirement_non_employee, "SB_fetish_cum_non_employee_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_cum_crisis_non_employee)
+        mc.business.add_mandatory_crisis(SB_fetish_cum_crisis_non_employee)
         return
 
     def add_cum_fetish_role_based_on_cum(person):
