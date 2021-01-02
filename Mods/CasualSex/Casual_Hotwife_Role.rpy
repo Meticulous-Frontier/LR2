@@ -110,7 +110,7 @@ init -2 python:
     def add_hotwife_ghost_action(person):
         remove_mandatory_crisis_list_action("casual_hotwife_ghost_label")
         casual_hotwife_ghost = Action("Casual hotwife Ghosts you", casual_hotwife_ghost_requirement, "casual_hotwife_ghost_label", args = person)
-        mc.business.mandatory_crises_list.append(casual_hotwife_ghost)
+        mc.business.add_mandatory_crisis(casual_hotwife_ghost)
         return
 
     def get_hotwife_lingerie_set_white():
@@ -148,7 +148,7 @@ init -1 python:
 init 1 python:
     def add_hotwife_sex_at_her_place_action(person):
         casual_hotwife_her_place.args = [person]    # set the current person as action argument
-        mc.business.mandatory_crises_list.append(casual_hotwife_her_place) # TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+        mc.business.add_mandatory_crisis(casual_hotwife_her_place) # TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
         return
 
     casual_hotwife_her_place = Action("Her Place", casual_hotwife_her_place_requirement, "casual_hotwife_her_place_label")

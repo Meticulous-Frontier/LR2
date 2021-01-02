@@ -112,7 +112,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.draw_person(position = "walking_away")
             $ the_person.change_stats(slut_temp = 10, obedience = 5)
             if the_person.sluttiness > 50:
-                $ mc.business.mandatory_crises_list.append(mom_commando_day_selfie_action)
+                $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
         "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
             mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"

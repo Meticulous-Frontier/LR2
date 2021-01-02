@@ -24,7 +24,7 @@ init 3304 python:
     def add_strip_club_manager_reminder_action():
         if not strip_club_get_manager():
             strip_club_manager_reminder_action = Action("A simple reminder to appoint someone as strip club manager", strip_club_manager_reminder_requirement, "strip_club_manager_reminder_label")
-            mc.business.mandatory_crises_list.append(strip_club_manager_reminder_action)
+            mc.business.add_mandatory_crisis(strip_club_manager_reminder_action)
 
     def strip_club_manager_hire_more_stripper_reminder_requirement():
         if __builtin__.len(stripclub_strippers) < 5: # the event only trigger if there's not the max nr. of strippers (5 + 1 manager)
@@ -36,7 +36,7 @@ init 3304 python:
     def add_strip_club_manager_hire_more_stripper_reminder_action():
         if __builtin__.len(stripclub_strippers) < 5:
             strip_club_manager_hire_more_stripper_reminder_action = Action("A simple reminder from the strip club manager to hire more stripper", strip_club_manager_hire_more_stripper_reminder_requirement, "strip_club_manager_hire_more_stripper_reminder_label")
-            mc.business.mandatory_crises_list.append(strip_club_manager_hire_more_stripper_reminder_action)
+            mc.business.add_mandatory_crisis(strip_club_manager_hire_more_stripper_reminder_action)
 
     def strip_club_manager_waitresses_suggestion_requirement():
         if __builtin__.len(stripclub_waitresses) < 2: # the event only trigger if there's not the max nr. of waitresses (2)
@@ -48,7 +48,7 @@ init 3304 python:
     def add_strip_club_manager_waitresses_suggestion_action():
         if __builtin__.len(stripclub_waitresses) < 2:
             strip_club_manager_waitresses_suggestion_action = Action("Your strip club manager suggest to hire a couple of waitresses.", strip_club_manager_waitresses_suggestion_requirement, "strip_club_manager_waitresses_suggestion_label")
-            mc.business.mandatory_crises_list.append(strip_club_manager_waitresses_suggestion_action)
+            mc.business.add_mandatory_crisis(strip_club_manager_waitresses_suggestion_action)
 
     def strip_club_manager_hire_more_waitresses_reminder_requirement():
         if __builtin__.len(stripclub_waitresses) < 2: # the event only trigger if there's not the max nr. of waitresses (2)
@@ -60,7 +60,7 @@ init 3304 python:
     def add_strip_club_manager_hire_more_waitresses_reminder_action():
         if __builtin__.len(stripclub_waitresses) < 2: # the event only trigger if there's not the max nr. of waitresses (2)
             strip_club_manager_hire_more_waitresses_reminder_action = Action("A simple reminder from the strip club manager to hire more waitresses", strip_club_manager_hire_more_waitresses_reminder_requirement, "strip_club_manager_hire_more_waitresses_reminder_label")
-            mc.business.mandatory_crises_list.append(strip_club_manager_hire_more_waitresses_reminder_action)
+            mc.business.add_mandatory_crisis(strip_club_manager_hire_more_waitresses_reminder_action)
 
     def strip_club_manager_bdsm_room_suggestion_requirement():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
@@ -74,7 +74,7 @@ init 3304 python:
     def add_strip_club_manager_bdsm_room_suggestion_action():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
             strip_club_manager_bdsm_room_suggestion_action = Action("Your strip club manager suggest to build a new BDSM room.", strip_club_manager_bdsm_room_suggestion_requirement, "strip_club_manager_bdsm_room_suggestion_label")
-            mc.business.mandatory_crises_list.append(strip_club_manager_bdsm_room_suggestion_action)
+            mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_suggestion_action)
 
     def strip_club_manager_bdsm_room_reminder_requirement():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day") == 0: # the event only trigger if the bdsm_room isn't started yet
@@ -85,7 +85,7 @@ init 3304 python:
     def add_strip_club_manager_bdsm_room_reminder_action():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
             strip_club_manager_bdsm_room_reminder_action = Action("A simple reminder from the strip club manager to build a BDSM room.", strip_club_manager_bdsm_room_reminder_requirement, "strip_club_manager_bdsm_room_reminder_label")
-            mc.business.mandatory_crises_list.append(strip_club_manager_bdsm_room_reminder_action)
+            mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_reminder_action)
 
     def strip_club_manager_bdsm_room_build_requirement():
         if mc.business.funds >= 10000:
@@ -106,7 +106,7 @@ init 3304 python:
 
     def add_strip_club_manager_bdsm_room_built_event():
         strip_club_manager_bdsm_room_built_event = Action("Your new BDSM room has been built.", strip_club_manager_bdsm_room_built_requirement, "strip_club_manager_bdsm_room_built_label")
-        mc.business.mandatory_crises_list.append(strip_club_manager_bdsm_room_built_event)
+        mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_built_event)
 
     def strip_club_switch_rooms_requirement():
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):

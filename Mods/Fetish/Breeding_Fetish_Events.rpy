@@ -125,16 +125,18 @@ init 3 python:
         return
 
     def reset_breeding_fetish(person):
-        person.special_role.remove (breeding_fetish_role)
+        person.remove_role(breeding_fetish_role)
         person.add_role(breeding_fetish_role)
 
     def start_breeding_fetish_quest(the_person):
+        if SB_FETISH_EVENT_ACTIVE():
+            return
+
         #Determine who it is, then add the appropriate quest.
         if persistent.pregnancy_pref == 0:
             return False
         if the_person is mom:
-            if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
+            mc.business.add_mandatory_morning_crisis(breeding_fetish_mom_intro)
         elif the_person is lily:
             lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
         elif the_person is aunt:
@@ -142,18 +144,15 @@ init 3 python:
         elif the_person is cousin:
             pass
         elif the_person is stephanie:
-            if breeding_fetish_stephanie_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_stephanie_intro)
+            mc.business.add_mandatory_morning_crisis(breeding_fetish_stephanie_intro)
         elif the_person is emily:
             pass
         elif the_person is christina:
             pass
         elif the_person is starbuck:
-            if breeding_fetish_starbuck_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_starbuck_intro)
+            mc.business.add_mandatory_morning_crisis(breeding_fetish_starbuck_intro)
         elif the_person is sarah:
-            if breeding_fetish_sarah_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_sarah_intro)
+            mc.business.add_mandatory_morning_crisis(breeding_fetish_sarah_intro)
         elif the_person is salon_manager:
             pass
         elif the_person is erica:
@@ -163,35 +162,19 @@ init 3 python:
         elif the_person is ashley:
             pass
         elif the_person.is_employee():
-            if mc.business.event_triggers_dict.get("Employee_breeding_fetish_not_avail", False) == False:
-                mc.business.event_triggers_dict["Employee_breeding_fetish_not_avail"] = True
-                breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = the_person)
-                mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
+            breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = the_person)
+            mc.business.add_mandatory_crisis(breeding_fetish_employee_intro)
         else:
             pass
 
         return
 
-    def get_breeding_fetish_list():
-        breeder_list = []
-        for person in known_people_in_the_game([mc]):
-            if breeding_fetish_role in person.special_role:
-                breeder_list.append(person)
-        return breeder_list
-
     def get_highly_fertile_breeder():
-        breeder_list = []
-        for person in get_breeding_fetish_list():
-            if person.is_highly_fertile():
-                breeder_list.append(person)
-        if len(breeder_list) > 0:
-            return get_random_from_list(breeder_list)
-        return None
+        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.is_highly_fertile()])
 
 
 #Fetish Intro Labels
 label breeding_fetish_employee_intro_label(the_person):
-    $ mc.business.event_triggers_dict["Employee_breeding_fetish_not_avail"] = False
     "You are finishing up the last of your work today and closing up. All your employees should be gone for the day."
     "However, you are surprised when you are interrupted by someone."
     $ the_person.draw_person()

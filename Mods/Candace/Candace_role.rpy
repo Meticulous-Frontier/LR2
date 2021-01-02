@@ -583,7 +583,7 @@ label candace_overhear_supply_order_label(the_person):
     mc.name "Let me know how it goes."
     the_person.char "Yes sir!"
     $ scene_manager.clear_scene()
-    $ mc.business.mandatory_crises_list.append(candace_supply_order_discount)
+    $ mc.business.add_mandatory_crisis(candace_supply_order_discount)
     return
 
 label candace_supply_order_discount_label():
@@ -605,7 +605,7 @@ label candace_supply_order_discount_label():
     $ candace.event_triggers_dict["supply_discount_active"] = True
     $ scene_manager.clear_scene()
     "You now receive a 10\% discount on all supply orders."
-    $ mc.business.mandatory_crises_list.append(candace_midnight_wakeup)
+    $ mc.business.add_mandatory_crisis(candace_midnight_wakeup)
     return
 
 label candace_midnight_wakeup_label():
@@ -949,7 +949,7 @@ label candace_begin_cure_research_label(the_person):
     mc.name "Good. Let me know if you either of you need anything."
     "With that, you dismiss the meeting. Hopefully [the_person.name] will be able to find some way to reverse the effects of the serum that made [candace.name] this way."
     $ candace.set_schedule(the_location = the_person.home, times = [0,4])
-    $ mc.business.mandatory_crises_list.append(candace_anti_bimbo_serum)
+    $ mc.business.add_mandatory_crisis(candace_anti_bimbo_serum)
     $ scene_manager.clear_scene()
     return
 
@@ -991,7 +991,7 @@ label candace_anti_bimbo_serum_label():
     "It has the powerful effect of reversing the bimbo serum's personality change and intelligence penalty!"
 
     $ unlock_anti_bimbo_serum()
-    $ mc.business.mandatory_crises_list.append(candace_cure_bimbo)
+    $ mc.business.add_mandatory_crisis(candace_cure_bimbo)
     return
 
 label candace_cure_bimbo_label():
@@ -1076,7 +1076,7 @@ label candace_cure_bimbo_label():
     "It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
     #TODO link up the one week event
     $ candace.event_triggers_dict["sex_record_snapshot"] = candace.sex_record.copy() #This should take a snapshot of our sex record with candace so we can compare it later
-    $ mc.business.mandatory_crises_list.append(candace_meet_doctor_candace)
+    $ mc.business.add_mandatory_crisis(candace_meet_doctor_candace)
     return
 
 label candace_meet_doctor_candace_label():

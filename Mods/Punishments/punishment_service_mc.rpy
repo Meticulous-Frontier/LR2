@@ -25,7 +25,7 @@ init 1 python: #Original code is at -1, so make sure we are higher than that for
             if not person.has_role(employee_practice_cocksucking_work_role): # prevent adding it twice
                 person.add_role(employee_practice_cocksucking_work_role)
                 clear_action = Action("Clear employee cocksucking practice", employee_cocksucking_practice_remove_requirement, "employee_cocksucking_practice_remove_label", args = person, requirement_args = [person, day + 7])
-                mc.business.mandatory_crises_list.append(clear_action)
+                mc.business.add_mandatory_crisis(clear_action)
             return
 
         employee_practice_cocksucking_work_role = Role("Practicing Cocksucking", [], hidden = True)
@@ -96,7 +96,7 @@ label employee_cocksucking_practice_remove_label(the_person):
                 the_person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she atleast tries to give MC a blowjob.
 
             practice_cocksucking_report_action = Action("Cocksucking practice report crisis", employee_cocksucking_practice_report_requirement, "employee_cocksucking_practice_report_label", args = the_person, requirement_args = the_person)
-            mc.business.mandatory_crises_list.append(practice_cocksucking_report_action)
+            mc.business.add_mandatory_crisis(practice_cocksucking_report_action)
     return
 
 label employee_cocksucking_practice_report_label(the_person):

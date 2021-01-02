@@ -242,7 +242,7 @@ init -2 python:
     def add_erica_ghost_action(person): #Hopefully delete this soon
         remove_mandatory_crisis_list_action("erica_ghost_label")
         erica_ghost = Action("Casual Athlete Ghosts you", erica_ghost_requirement, "erica_ghost_label", args = person)
-        mc.business.mandatory_crises_list.append(erica_ghost)
+        mc.business.add_mandatory_crisis(erica_ghost)
         return
 
     def make_bench():
@@ -281,7 +281,7 @@ init -1 python:
 init 1 python:
     def add_erica_race_crisis(person):
         erica_race_crisis.args = [person]
-        mc.business.mandatory_crises_list.append(erica_race_crisis)
+        mc.business.add_mandatory_crisis(erica_race_crisis)
         return
 
     erica_race_crisis = Action("Charity Race", erica_race_crisis_requirement, "erica_race_crisis_label")
@@ -1311,9 +1311,9 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person.char "Okay! I'll let you know in a couple days if we have the people to make it happen... And if we don't... We'll see."
     "You part ways with [the_person.title] for now. You feel pretty confident at this point that, even if you don't have the numbers now, you'll have enough people to make it happen soon."
     if len(erica_get_yoga_class_list()) < 4:
-        $ mc.business.mandatory_crises_list.append(erica_money_problems_sarah_update)
+        $ mc.business.add_mandatory_crisis(erica_money_problems_sarah_update)
     else:
-        $ mc.business.mandatory_crises_list.append(erica_money_problems_sarah_final_update)
+        $ mc.business.add_mandatory_crisis(erica_money_problems_sarah_final_update)
     return
 
 label erica_money_problems_sarah_update_label():
@@ -1337,7 +1337,7 @@ label erica_money_problems_sarah_update_label():
     $ the_person.draw_person(emotion = "happy")
     "[the_person.possessive_title] smiles wide. She seems to really be into this..."
     the_person.char "Yes sir! Don't worry, I'm sure we'll be able to get this going soon!"
-    $ mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
+    $ mc.business.add_mandatory_crisis(erica_money_problem_sarah_convincing_employee)
     return
 
 label erica_money_problem_sarah_convincing_employee_label():
@@ -1385,9 +1385,9 @@ label erica_money_problem_sarah_convincing_employee_label():
         scene_manager.clear_scene()
         clear_scene()
         if len(erica_get_yoga_class_list()) < 4:
-            mc.business.mandatory_crises_list.append(erica_money_problem_sarah_convincing_employee)
+            mc.business.add_mandatory_crisis(erica_money_problem_sarah_convincing_employee)
         else:
-            mc.business.mandatory_crises_list.append(erica_money_problems_sarah_final_update)
+            mc.business.add_mandatory_crisis(erica_money_problems_sarah_final_update)
         the_target = None
     return
 
@@ -1432,7 +1432,7 @@ label erica_money_problems_yoga_start_label(the_person):
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
     $ the_person.set_alt_schedule(lobby, days = [1], times = [0])
     $ mc.business.hr_director.set_alt_schedule(lobby, days = [1], times =[0])
-    $ mc.business.mandatory_crises_list.append(erica_yoga_event_intro)
+    $ mc.business.add_mandatory_crisis(erica_yoga_event_intro)
     return
 
 label erica_yoga_event_intro_label():

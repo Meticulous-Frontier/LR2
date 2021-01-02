@@ -24,11 +24,11 @@ init 10 python:
 
     def add_dungeon_intro_action():
         dungeon_intro_action = Action("Dungeon Intro", dungeon_intro_action_requirement, "dungeon_intro_label")
-        mc.business.mandatory_crises_list.append(dungeon_intro_action)
+        mc.business.add_mandatory_crisis(dungeon_intro_action)
 
     def add_dungeon_completed_action():
         dungeon_completed_action = Action("Dungeon Completed", dungeon_completed_action_requirement, "dungeon_completed_label", requirement_args = day + 7)
-        mc.business.mandatory_crises_list.append(dungeon_completed_action)
+        mc.business.add_mandatory_crisis(dungeon_completed_action)
 
     def slave_unique_sex_positions(person, prohibit_tags = []):
         positions = []

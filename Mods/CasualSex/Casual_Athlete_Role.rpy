@@ -86,7 +86,7 @@
 #     def add_casual_athlete_ghost_action(person):
 #         remove_mandatory_crisis_list_action("casual_athlete_ghost_label")
 #         casual_athlete_ghost = Action("Casual Athlete Ghosts you", casual_athlete_ghost_requirement, "casual_athlete_ghost_label", args = person)
-#         mc.business.mandatory_crises_list.append(casual_athlete_ghost)
+#         mc.business.add_mandatory_crisis(casual_athlete_ghost)
 #         return
 #
 #
@@ -108,7 +108,7 @@
 # init 1 python:
 #     def add_casual_athlete_race_crisis(person):
 #         casual_athlete_race_crisis.args = [person]    # set the current person as action argument
-#         mc.business.mandatory_crises_list.append(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
+#         mc.business.add_mandatory_crisis(casual_athlete_race_crisis) #Add race crisis    TODO Find out if this breaks if two girls hit this stage a the same point in gameplay
 #         return
 #
 #     casual_athlete_race_crisis = Action("Charity Race", casual_athlete_race_crisis_requirement, "casual_athlete_race_crisis_label")

@@ -128,3 +128,14 @@ init -1 python:
 
     Business.remove_employee = business_remove_employee_extended(Business.remove_employee)
 
+    def business_add_mandatory_crisis(self, crisis_event):
+        if not crisis_event in self.mandatory_crises_list:
+            self.mandatory_crises_list.append(crisis_event)
+
+    Business.add_mandatory_crisis = business_add_mandatory_crisis
+
+    def business_add_mandatory_morning_crisis(self, crisis_event):
+        if not crisis_event in self.mandatory_morning_crises_list:
+            self.mandatory_morning_crises_list.append(crisis_event)
+
+    Business.add_mandatory_morning_crisis = business_add_mandatory_morning_crisis

@@ -72,7 +72,7 @@ init 10 python:
     def slave_add_wakeup_duty_action(person):
         remove_mandatory_crisis_list_action("slave_alarm_clock_label")
         wakeup_duty_crisis.args = [person]
-        mc.business.mandatory_morning_crises_list.append(wakeup_duty_crisis)
+        mc.business.add_mandatory_morning_crisis(wakeup_duty_crisis)
         return
 
     def slave_role_on_turn(person):
