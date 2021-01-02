@@ -248,7 +248,7 @@ label horny_at_work_crisis_enhanced_label():
                         else:
                             $ renpy.say("", helpful_people[0].title + " is still standing next to your desk, and you haven't exhausted yourself quite yet...")
 
-                        $ exit_option = "Finish up."
+                        $ exit_option = "Finish up"
                         if "action_mod_list" in globals():
                             call screen enhanced_main_choice_display(build_menu_items([build_helpful_people_menu(helpful_people, exit_option)]))
                         else:
