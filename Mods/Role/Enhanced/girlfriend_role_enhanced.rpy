@@ -567,5 +567,6 @@ label girlfriend_underwear_shopping_label(the_person):
     $ the_person.draw_person(position = "kissing")
     "[the_person.possessive_title] embraces you and gives you a quick kiss before you part ways."
     $ clear_scene()
+    $ del lingerie_outfit
     call advance_time from _call_advance_girlfriend_lingerie_shopping_01
     return
