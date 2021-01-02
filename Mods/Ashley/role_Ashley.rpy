@@ -205,7 +205,11 @@ init -1 python:
     def add_ashley_hire_later_action():
         ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
             menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
-        head_researcher.add_action(ashley_hire_directed)
+        mc.business.head_researcher.add_action(ashley_hire_directed)
+        return
+
+    def remove_ashley_hire_later_action():
+        mc.business.head_researcher.remove_action("ashley_hire_directed_label")
         return
 
 #Story labels
@@ -289,7 +293,7 @@ label ashley_hire_directed_label(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(5)
         the_person.char "Oh! This is great news! I'm sure she'll probably want to get started right away!"
-        $ head_researcher.remove_action("ashley_hire_directed_label")
+        $ remove_ashley_hire_later_action()
         $ mc.business.hire_person(ashley, "Production")
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
@@ -721,7 +725,7 @@ label ashley_post_handjob_convo_label(the_person):
     mc.name "Clean out your desk? I'm not firing you. Come on let's go get some coffee."
     the_person.char "Oh, coffee? OK, I'm right behind you..."
     "[the_person.possessive_title] is blushing hard. It's kind of cute actually."
-    #TODO downtown background
+    $ downtown.show_background()
     "As you step out of the office building, [the_person.title] is following along behind you. You give her a second to catch up so you can walk side by side."
     "She's looking down at her feet. She's so shy, you can tell she is uncomfortable."
     menu:

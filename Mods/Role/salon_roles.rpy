@@ -942,7 +942,7 @@ label ophelia_increased_service_begin_label(the_person):
     "You probably need an employee who is pretty slutty to do something like this... or very obedient? You guess you could just order a few of your employees to do it."
     "When you decide who, you should probably call them to your office first, so you can come over to the salon together."
     $ salon_manager.event_triggers_dict["full_style_state"] = 1
-    $ office.actions.append(ophelia_choose_service_test)
+    $ office.add_action(ophelia_choose_service_test)
     #TODO change variables
     return
 

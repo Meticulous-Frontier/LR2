@@ -71,7 +71,7 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["offers_full_style"] = False
 
         # add haircut action to mall salon
-        mall_salon.actions.append(self)
+        mall_salon.add_action(self)
         return
 
     def salon_introduction_action_requirement(the_person):

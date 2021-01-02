@@ -18,7 +18,7 @@ init 2 python:
     def find_random_open_time_in_schedules(people_list): #Returns a random day and time that is open schedule wise for all characters.
         return get_random_from_list(find_opening_in_schedules(people_list))
 
-    def get_current_time_tupple():
+    def get_current_time_tuple():
         return ([day%7, time_of_day])
 
     def get_schedule_description(the_time):
@@ -36,7 +36,7 @@ init 2 python:
             string_one = "Friday "
         elif the_time[0] == 5:
             string_one = "Saturday "
-        elif the_time[0] == 1:
+        elif the_time[0] == 6:
             string_one = "Sunday "
 
         if the_time[1] == 0:
