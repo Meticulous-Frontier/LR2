@@ -71,8 +71,8 @@ init 2 python:
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
                 mi.display_func = item.build_person_displayable
-                if not renpy.mobile: # don't load person on mobile
-                    renpy.invoke_in_thread(mi.load)
+                # if not renpy.mobile: # don't load person on mobile
+                #    renpy.invoke_in_thread(mi.load)
 
             if isinstance(item, Action):
                 mi.title = ""
@@ -113,7 +113,8 @@ init 2 python:
 
     def show_menu_person(item):
         if not item.display_image:
-            item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
+            item.load()
+            # item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
 
         clear_scene()
         # renpy.show_screen("person_info_ui", item.return_value)

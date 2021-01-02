@@ -723,7 +723,7 @@ init -1 python:
                 self.planned_outfit = self.next_day_outfit
                 self.next_day_outfit = None
             else:
-                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+                self.planned_outfit = self.decide_on_outfit()
 
             self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
@@ -1478,7 +1478,7 @@ init -1 python:
             self.wear_work_outfit()
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
-                self.planned_outfit = self.wardrobe.decide_on_outfit2(self)
+                self.planned_outfit = self.decide_on_outfit()
 
             self.apply_outfit(self.planned_outfit)
         return
@@ -1694,6 +1694,10 @@ init -1 python:
 
     Person.has_clothing = person_has_clothing
 
+    def person_decide_on_outfit(self, sluttiness_modifier = 0.0):
+        return self.wardrobe.decide_on_outfit2(self, sluttiness_modifier)
+
+    Person.decide_on_outfit = person_decide_on_outfit
 ##########################################
 # Unique crisis addition functions       #
 ##########################################

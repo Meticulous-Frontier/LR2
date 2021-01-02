@@ -240,7 +240,7 @@ init 5 python:
             for cp in sorted(self.color_prefs):
                 for col in sorted(self.color_prefs[cp]):
                     name = self.get_color_name(self.color_prefs[cp][col])
-                    print(cp + " - " + col + " -> " + (name if name else "Unknown"))
+                    # print(cp + " - " + col + " -> " + (name if name else "Unknown"))
             return
 
         def build_outfit(self, outfit_type, points):

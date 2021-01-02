@@ -80,7 +80,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     the_person "Hmm, okay. Thanks for coming over last night... It was nice."
     $ clear_scene()
     "You get yourself dressed and say goodbye. You step out of [the_person.title]'s room and into the hall."
-    $ jealous_sister.planned_outfit = jealous_sister.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+    $ jealous_sister.planned_outfit = jealous_sister.decide_on_outfit() # choose a new outfit for the day
     $ jealous_sister.apply_planned_outfit()
     $ jealous_sister.draw_person(position = "sitting")
     "As you walk to the door, you see [jealous_sister.title] at the table, having a cup of coffee and some toast."
@@ -89,6 +89,6 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     mc.name "I definitely did. Take care [jealous_sister.title]"
     "You walk out the front door. Things in that place are crazy..."
     $ jealous_score_reset(jealous_sister)
-    $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+    $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
     return

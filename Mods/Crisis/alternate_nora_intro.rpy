@@ -38,7 +38,8 @@ label alternate_nora_intro_label():
     else:
         the_person "Hey, I have someone down here in the lab looking for you specifically. Can you please come down?"
     "You quickly make your way down to the lab."
-    #Change background
+    $ mc.change_location(rd_division)
+    $ mc.location.show_background()
     "When you get there, lo and behold, its your former professor, [nora.title]!"
     $ scene_manager.add_actor(nora, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person)
@@ -67,7 +68,8 @@ label alternate_nora_intro_label():
         the_person "Sounds great!"
     $ scene_manager.clear_scene()
     "[nora.title] leaves and you make your way to your office to look over the folder she gave you."
-    #Display office background.
+    $ mc.change_location(office)
+    $ mc.location.show_background()
     "The notes contain creation instructions for an unknown serum. She is looking for you to manufacture and test it."
     "You should bring it up to at least mastery level 2 before you go back to [nora.title]."
 

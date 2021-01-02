@@ -547,14 +547,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 "She looks at you. Her resolve stumbles, but only for a moment."
                 the_person.char "Don't worry, I'll be a REAL ideal employee for you soon."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ the_person.change_happiness(15)
-                if the_person.int > 1:
-                    $ the_person.int = 1
-                    $ mc.log_event(the_person.title + ": Intelligence reduced to 1", "float_text_blue")
-                $ the_person.change_slut_core(20)
-                $ slut_report = the_person.change_slut_temp(20)
-                $ the_person.personality = bimbo_personality
-                $ mc.log_event(the_person.title + ": Personality changed. Now: Bimbo", "float_text_pink")
+                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person.char "That's... we were talking about something... right?"
@@ -618,14 +611,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 "She looks at you. You think you see a tear coming down from her eye."
                 the_person.char "It's okay. The science is amazing. And I'm sure I'll enjoy life as a mother."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ the_person.change_happiness(15)
-                if the_person.int > 1:
-                    $ the_person.int = 1
-                    $ mc.log_event(the_person.title + ": Intelligence reduced to 1", "float_text_blue")
-                $ the_person.change_slut_core(20)
-                $ slut_report = the_person.change_slut_temp(20)
-                $ the_person.personality = bimbo_personality
-                $ mc.log_event(the_person.title + ": Personality changed. Now: Bimbo", "float_text_pink")
+                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person.char "That's... we were talking about something... right?"
@@ -882,8 +868,6 @@ label breeding_fetish_erica_intro_label():
 
 label breeding_fetish_candace_intro_label(the_person): #This is going to be two intros, depending on if candace is still a bimbo or not NEeds Testing
     $ the_person = candace
-    $ camera_person = None
-    $ room_list = []
     "As you step into the office, you see [the_person.possessive_title] looking over at you. She stands up and waves you over to her desk."
     $ the_person.draw_person()
     "You walk over to her."
@@ -907,13 +891,10 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             the_person.char "Fuck yeah! That's like, so hot! And can you imagine having that on video? Holy fuck!"
         "Lately, you've been slipping her serums to increase her drive to reproduce. Unsurprisingly, it sounds like she has developed a breeding fetish."
         mc.name "Okay. I'll give you my cum. Now turn around, I'm going to take you over your desk."
-        if mc.location.get_person_count() == 1:
+        $ camera_person = get_random_from_list(known_people_at_location(mc.location, excluded_people = [the_person]))
+        if not camera_person:
             "You look around the room, but no one else is around to record it, so you set up your phone to record and prop it up on a nearby desk as best you can."
         else:
-            python:
-                room_list = mc.location.people.copy()
-                room_list.remove(the_person)
-                camera_person = get_random_from_list(room_list)
             "You look around the room. You notice that another employee has overheard the conversation and is looking at you with some interest."
             mc.name "[camera_person.title], come here."
             $ camera_person.draw_person()
@@ -949,6 +930,8 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         else:
             camera_person.char "Wow..."
             "You grab your phone from [camera_person.title] and thank her for her help. You quickly put the video in an email to [the_person.title] so she can have a copy of it."
+
+        $ del camera_person
 
         if the_person.knows_pregnant():
             the_person.char "I don't care if I am already pregnant... Please do that again! My body was made to take your cum like that!"

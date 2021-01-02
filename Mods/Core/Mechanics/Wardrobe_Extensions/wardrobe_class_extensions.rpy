@@ -12,6 +12,11 @@ init -1 python:
             if preferences.evaluate_outfit(overwear, sluttiness_limit, sluttiness_min):
                 valid_overwear.append(overwear)
 
+        if not valid_overwear:  # when we find no valid items, only validate sluttiness score
+            for overwear in self.overwear_sets:
+                if overwear.get_overwear_slut_score() <= sluttiness_limit and overwear.get_overwear_slut_score() >= sluttiness_min:
+                    valid_overwear.append(overwear)
+
         the_outfit = get_random_from_list(valid_overwear)
         if the_outfit:
             return the_outfit.get_copy()
@@ -38,6 +43,11 @@ init -1 python:
             if preferences.evaluate_outfit(outfit, sluttiness_limit, sluttiness_min):
                 valid_outfits.append(outfit)
 
+        if not valid_outfits: # when we find no valid items, only validate sluttiness score
+            for outfit in self.outfits:
+                if outfit.get_full_outfit_slut_score() <= sluttiness_limit and outfit.get_full_outfit_slut_score() >= sluttiness_min:
+                    valid_outfits.append(outfit)
+
         the_outfit = get_random_from_list(valid_outfits)
         if the_outfit:
             return the_outfit.get_copy()
@@ -63,7 +73,7 @@ init -1 python:
             if preferences.evaluate_underwear(underwear, sluttiness_limit, sluttiness_min):
                 valid_underwear.append(underwear)
 
-        if not valid_underwear:
+        if not valid_underwear: # when we find no valid items, only validate sluttiness score
             for underwear in self.underwear_sets:
                 if underwear.get_underwear_slut_score() <= sluttiness_limit and underwear.get_underwear_slut_score() >= sluttiness_min:
                     valid_underwear.append(underwear)
@@ -98,7 +108,7 @@ init -1 python:
             if selected_overwear is None or overwear.get_overwear_slut_score() < selected_overwear.get_overwear_slut_score():
                 selected_overwear = overwear
 
-        if selected_overwear:               
+        if selected_overwear:
             return selected_overwear.get_copy()
         return None
 
@@ -109,7 +119,7 @@ init -1 python:
         for underwear in self.underwear_sets:
             if selected_underwear is None or underwear.get_underwear_slut_score() < selected_underwear.get_underwear_slut_score():
                 selected_underwear = underwear
-        
+
         if selected_underwear:
             return selected_underwear.get_copy()
         return None
@@ -262,6 +272,7 @@ init -1 python:
         uniform_over = None
         uniform_under = None
         count = 0
+
         while not uniform_over and count < 2:   # Try to find a valid uniform by stretching the sluttiness range, returns none when not successful
             uniform_over = valid_wardrobe.get_random_appropriate_overwear(target_sluttiness + (count * 5), minimum_sluttiness - (count * 10), preferences = preferences)
             count += 1
@@ -326,10 +337,10 @@ init -1 python:
         skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 20.0
         marketing_score = 0
         # girls working in marketing know they make more sales when wearing a sluttier outfit, so this affects their uniform choice
-        if male_focused_marketing_policy.is_active() and mc.business.get_employee_title(person) == "Marketing":
+        if mc.business.is_work_day() and male_focused_marketing_policy.is_active() and person in mc.business.market_team:
             marketing_score = .05
 
-        target_sluttiness = __builtin__.int(person.sluttiness * (1 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
+        target_sluttiness = __builtin__.int(person.core_sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
         preferences = WardrobePreference(person)
 

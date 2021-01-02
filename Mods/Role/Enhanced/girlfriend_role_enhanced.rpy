@@ -68,9 +68,7 @@ init 5 python:
         identifier = mc.business.event_triggers_dict.get("girlfriend_person", None)
         if isinstance(identifier, Person):
             return identifier
-        else:
-            return get_person_by_identifier(identifier)
-        return None
+        return get_person_by_identifier(identifier)
 
     def schedule_sleepover_available():
         if mc.business.event_triggers_dict.get("girlfriend_sleepover_scheduled", False):
@@ -263,7 +261,7 @@ label girlfriend_sleepover_label():
         $ wakeup_action.call_action(the_person)
     else:
         "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
-        $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+        $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
@@ -289,7 +287,7 @@ label girlfriend_wakeup_spooning_label(the_person):
             "When you come back, [the_person.title] is awake."
             $ the_person.draw_person(position = "missionary")
             the_person.char "Good morning! I slept great."
-            $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+            $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "stand3")
             "You both get ready for the day before heading out."
@@ -345,7 +343,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.reset_arousal()
     $ mc.arousal = 0
     "You lay in bed together for a little longer, but soon it is time to start the day."
-    $ the_person.planned_outfit = the_person.wardrobe.decide_on_outfit2(the_person) # choose a new outfit for the day
+    $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "stand4")
     "You both get ready for the day."
@@ -439,7 +437,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 the_person "Okay! Grab what you think would look good, I'll be in the dressing room until you figure it out."
                 $ clear_scene()
                 "You pick out a few items to change her outfit a bit..."
-                call screen outfit_creator(lingerie_outfit)
+                call screen outfit_creator(lingerie_outfit, outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
                     "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
@@ -473,7 +471,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 $ clear_scene()
                 ""
                 "You pick out a few items to change her outfit a bit..."
-                call screen outfit_creator(Outfit("New Outfit"))
+                call screen outfit_creator(Outfit("New Outfit"), outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
                     "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
@@ -552,7 +550,7 @@ label girlfriend_underwear_shopping_label(the_person):
                         the_person "That's kinda weird... like those porn videos? I guess if you want to try it..."
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
-        $ the_person.wardrobe.add_outfit(lingerie_outfit)
+        $ the_person.add_outfit(lingerie_outfit, outfit_type = "under")
         the_person "Thanks [the_person.mc_title]! This was fun!"
         if schedule_sleepover_available():
             the_person "So... want me to come over tonight? I'm not doing anything later..."
@@ -569,5 +567,6 @@ label girlfriend_underwear_shopping_label(the_person):
     $ the_person.draw_person(position = "kissing")
     "[the_person.possessive_title] embraces you and gives you a quick kiss before you part ways."
     $ clear_scene()
+    $ del lingerie_outfit
     call advance_time from _call_advance_girlfriend_lingerie_shopping_01
     return

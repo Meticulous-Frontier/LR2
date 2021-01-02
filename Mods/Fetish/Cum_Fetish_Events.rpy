@@ -655,14 +655,7 @@ label SB_fetish_stephanie_cum_label():
                 "She looks at you. Her resolve stumbles, but only for a moment."
                 the_person.char "Don't worry, I'll be the bimbo cum slut you've always wanted!"
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ the_person.change_happiness(15)
-                if the_person.int > 1:
-                    $ the_person.int = 1
-                    $ mc.log_event(the_person.title + ": Intelligence reduced to 1", "float_text_blue")
-                $ the_person.change_slut_core(20)
-                $ slut_report = the_person.change_slut_temp(20)
-                $ the_person.personality = bimbo_personality
-                $ mc.log_event(the_person.title + ": Personality changed. Now: Bimbo", "float_text_pink")
+                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person.char "That's... we were talking about something... right?"
@@ -727,14 +720,7 @@ label SB_fetish_stephanie_cum_label():
                 "She looks at you. You think you see a tear coming down from her eye."
                 the_person.char "It's okay. The science is amazing. And I'm sure I'll enjoy life as... a bimbo butt slut."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ the_person.change_happiness(-15)
-                if the_person.int > 1:
-                    $ the_person.int = 1
-                    $ mc.log_event(the_person.title + ": Intelligence reduced to 1", "float_text_blue")
-                $ the_person.change_slut_core(20)
-                $ slut_report = the_person.change_slut_temp(20)
-                $ the_person.personality = bimbo_personality
-                $ mc.log_event(the_person.title + ": Personality changed. Now: Bimbo", "float_text_pink")
+                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person.char "That's... we were talking about something... right?"
