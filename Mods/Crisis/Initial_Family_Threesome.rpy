@@ -127,7 +127,6 @@ label SB_fetish_vaginal_family_threesome_label():
         #call SB_threesome_description(mom, the_person, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
-        $ update_family_threesome_crisis(3)
         "Wow, you just had sex with [the_person.possessive_title] and [mom.possessive_title]! You can't believe how lucky you are."
         "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
         "Eventually, the girls get up."
