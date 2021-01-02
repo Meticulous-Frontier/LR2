@@ -10,7 +10,7 @@ init -1 python:
 
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if time_of_day == 0 and mc_at_home() and mc.business.is_open_for_business():
+        if time_of_day == 0 and mc_at_home() and mc.business.is_work_day():
             return True
         return False
 
@@ -40,7 +40,7 @@ label mom_breakfast_action_label():
     #$ the_person.draw_person(position = "sitting")
 
     # surprise scene, you walk into the kitchen an mom and lily are going at it
-    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 2) == 1:
+    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 3) == 1:
         call mom_breakfast_action_mom_and_lily_label() from _call_mom_breakfast_action_mom_and_lily_label
     else:
         $ scene_manager.add_actor(the_person, position = "sitting")
