@@ -1347,6 +1347,8 @@ label HR_director_headhunt_initiate_label(the_person):
             if get_HR_director_tag("recruit_bust", None) is not None:
                 days_to_find += 1
 
+        days_to_find = min(days_to_find, 7)   #Cap days to find to 7
+
         the_person.char "Okay, I'll go ahead and start the search."
         if days_to_find <= 2:
             the_person.char "This shouldn't take me long. Hopefully just a day or two!"
