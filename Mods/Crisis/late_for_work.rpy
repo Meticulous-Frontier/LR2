@@ -4,9 +4,9 @@ init -1 python:
 
 init 2 python:
     def late_for_work_requirement():
-        if mc.business.get_employee_count() > 0:
-            if time_of_day == 1: #is morning when employees arrive.
-                if mc.business.is_open_for_business() and mc.is_at_work():
+        if mc.business.get_employee_count() > 2:
+            if time_of_day <= 1: #is morning when employees arrive.
+                if mc.business.is_work_day() and mc.is_at_work():
                     return True
         return False
 
