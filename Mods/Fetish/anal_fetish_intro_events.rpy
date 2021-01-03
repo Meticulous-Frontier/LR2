@@ -133,34 +133,31 @@ label anal_fetish_employee_intro_label():
     "[the_perosn.possessive_title] can only moan as you slide two fingers inside her cunt. With your other hand you give her another spank."
     $ the_person.change_arousal(10)
     mc.name "There, that should be good."
-    "You remove yor fingers briefly, then bring them up slightly "
+    "You remove yor fingers briefly, then bring them up slightly. She sighs as you wiggle them around her puckered hole."
+    "You push against her. Your fingers easily begin to slip into [the_person.possessive_title]'s back door."
+    $ the_person.change_arousal(20)
+    the_person "Oh fuck..."
+    "[the_person.title]'s knees buckle a bit as you begin to work your fingers in and out of her."
+    mc.name "Do you like it?"
+    the_person "God yes... keep going!"
+    $ the_person.change_arousal(15)
+    "[the_person.possessive_title]'s breathing is getting erratic as you finger fuck her asshole for a minute or two."
+    the_person "I didn't know... I didn't know it could be this good!"
+    $ the_person.change_arousal(15)
+    "[the_person.title]'s arousal is beginning to run down the inside of her thighs. She is REALLY getting off on this!"
+    "You double your efforts in an attempt to get her to cum from just your fingers."
+    the_person "Oh... OH! Don't stop!"
+    $ the_person.change_arousal(20)
+    "[the_person.possessive_title]'s whole body quivers as she orgasms. You push your fingers as deep as you can get them, feeling her body clench them rhythmically."
+    $ the_person.have_orgasm(half_arousal = True)
+    mc.name "Damn, that was hot. I could feel you cumming, gripping my fingers. I can't wait to feel you do that around my cock."
+    "You start to pull your cock out. Still recovering, [the_person.title] takes a moment to register your words."
+    the_person "Ah... yeah... on your... what?"
+    "Once you pull it out, you smack her ass cheeks back and forth with it a couple times."
+    the_person "Oh! Yeah but... [the_person.mc_title] its so big... I'm not sure..."
+    mc.name "Shhh. Don't worry, I'll give you some time to adjust before I fuck your backdoor raw."
 
 
-    
-    menu:
-        "Accept":
-            mc.name "I suppose I could stay for a bit, let me just finish up a couple things and I'll be right with you."
-            the_person.char "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
-            $ the_person.draw_person(position = "walking_away")
-            "You finish up what you were doing and say goodbye to your employees. You are just starting to wonder what [the_person.possessive_title] needs when she comes back into the room."
-            $ the_person.apply_outfit(SB_anal_outfit)
-            $ the_person.draw_person()
-            "[the_person.possessive_title] has changed into some very nice lingerie. You notice as she walks up that she isn't wearing any panties..."
-            "She walks up and stands next to you by your desk."
-            the_person.char "So, [the_person.mc_title], I don't know why but... I decided recently I really want to try and get better at anal..."
-            "You aren't surprised, it's been a while since you started giving her the serum for increased anal enjoyment."
-            the_person.char "I went over to the sex shop and bought a new toy... I've been wearing it for a few days now... and I was wondering what you thought?"
-            $ the_person.draw_person(position = "standing_doggy")
-            "[the_person.possessive_title] turns and bends over in front of you, with her hands on your desk."
-            "You can see, nestled between her curvaceous ass cheeks, a matching pink jewel on the base of a butt plug."
-            the_person.char "I think I'm ready for something a bit more... substantial... don't you think?"
-            "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
-            $ the_person.change_arousal(the_person.get_opinion_score("anal sex") * 10)
-            "You work a couple fingers into her bottom. It is clear she loves anal sex so much, she keeps herself lubed up with the plug in throughout the day hoping for you to come fuck it."
-            "You decide to tease her before you put it in."
-            mc.name "You're such a buttslut, [the_person.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
-            "[the_person.possessive_title] tries to push back against you and begins to beg."
-            the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
             $ the_person.break_taboo("anal_sex")
             ###Anal Scene, standing variant###
