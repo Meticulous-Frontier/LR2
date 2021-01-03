@@ -243,14 +243,14 @@ init 5 python:
                     # print(cp + " - " + col + " -> " + (name if name else "Unknown"))
             return
 
-        def build_outfit(self, outfit_type, points):
+        def build_outfit(self, outfit_type, points, min_points = 0):
             if (outfit_type == "OverwearSets"):
-                return self.build_overwear(points)
+                return self.build_overwear(points, min_points)
             if (outfit_type == "UnderwearSets"):
-                return self.build_underwear(points)
+                return self.build_underwear(points, min_points)
 
-            underwear = self.build_underwear(points)
-            overwear = self.build_overwear(points)
+            underwear = self.build_underwear(points, min_points)
+            overwear = self.build_overwear(points, min_points)
 
             for item in underwear.upper_body:
                 if overwear.can_add_upper(item):
@@ -307,7 +307,7 @@ init 5 python:
                         return False
             return True
 
-        def build_overwear(self, points = 0):
+        def build_overwear(self, points = 0, min_points = 0):
             def make_upper_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
                 if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
@@ -327,40 +327,37 @@ init 5 python:
             upper_item_list = real_dress_list + real_shirt_list
 
             # find upper body item
-            filtered_upper_list = list(filter(lambda x: x.slut_value <= points, upper_item_list))
-            item = self.get_item_from_list("upper_body", filtered_upper_list, points, ["not wearing anything"])
+            item = self.get_item_from_list("upper_body", self.build_filter_list(upper_item_list, points, min_points), points, ["not wearing anything"])
             if item:
                 outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
 
             # we added a overlay item, so find a real upper item this time
             if item and item.layer == 3:
-                filtered_upper_list = list(filter(lambda x: x.slut_value <= points and x.layer == 2, upper_item_list))
-                item = self.get_item_from_list("upper_body", filtered_upper_list, points, ["not wearing anything"])
+                item = self.get_item_from_list("upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
                 if item:
                     outfit.add_upper(*make_upper_item_transparent(item, points, color_lower))
 
             # find lowerbody item
             if item is None or (not item.has_extension or item.has_extension.layer == 1):
-                item = self.get_item_from_list("lower_body", self.build_filter_list(real_pants_list + skirts_list, points), points, ["not wearing anything"])
+                item = self.get_item_from_list("lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
                 if item:
                     outfit.add_lower(*make_lower_item_transparent(item, points, [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]]))
 
             # find feet item
-            filtered_feet_list = list(filter(lambda x: x.slut_value <= points, shoes_list))
-            item = self.get_item_from_list("feet", filtered_feet_list)
+            item = self.get_item_from_list("feet", self.build_filter_list(shoes_list, points, min_points))
             if item:
                 outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
 
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, self.person.base_outfit.accessories), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, self.person.base_outfit.accessories), 3, color_lower)
-            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, self.person.base_outfit.accessories), 3, color_upper)
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
 
             outfit.build_outfit_name()
 
             return outfit
 
-        def build_underwear(self, points = 0):
+        def build_underwear(self, points = 0, min_points = 0):
             def make_upper_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
                 if points >= 8 and item.slut_value > 0 and item in [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear] + bra_list:
@@ -378,24 +375,24 @@ init 5 python:
             color_upper, color_lower, color_feet = self.get_main_color_scheme(match_percent = 80) # underwear mismatch is less likely
 
             # find upper body item
-            item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points), points, ["showing her tits", "not wearing underwear"])
+            item = self.get_item_from_list("upper_body", self.build_filter_list(bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points, min_points), points, ["showing her tits", "not wearing underwear"])
             if item:
                 outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
 
             # find lower body item
             if not item or not item.has_extension:
                 if item and item.proper_name in self.matching_underwear:
-                    item = self.get_item_from_list("lower_body", self.build_filter_list(self.matching_underwear[item.proper_name], points), points, ["showing her ass", "not wearing underwear"])
+                    item = self.get_item_from_list("lower_body", self.build_filter_list(self.matching_underwear[item.proper_name], points, min_points), points, ["showing her ass", "not wearing underwear"])
                 else:
-                    item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points), points, ["showing her ass", "not wearing underwear"])
+                    item = self.get_item_from_list("lower_body", self.build_filter_list(panties_list, points, min_points), points, ["showing her ass", "not wearing underwear"])
                 if item:
                     outfit.add_lower(*make_lower_item_transparent(item, points, color_lower if item in [cincher, heart_pasties] else color_upper))
 
             if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
                 if points >= 5:
-                    item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points))
+                    item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points, min_points))
                 else:
-                    item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points))
+                    item = self.get_item_from_list("feet", self.build_filter_list(socks_list, points, min_points))
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
 
@@ -409,13 +406,15 @@ init 5 python:
             return outfit
 
 
-        def build_filter_list(self, item_list, points, min_points = 0, filter_list = []):
-            items = []
-            while __builtin__.len(items) == 0 and points < 15:  # make sure we got some items to choose from
-                items = list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x not in filter_list, item_list))
-                points += 1
+        def build_filter_list(self, item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3]):
+            # extend range until we have items
+            while not any(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list, item_list)):
+                if min_points > 0:
+                    min_points -= 1
+                if points < 15:
+                    points += 1
 
-            return list(filter(lambda x: x.slut_value <= points, item_list))
+            return list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x.layer in layers, item_list))
 
         def add_accessory_from_list(self, outfit, filtered_list, chance, item_color = [.8, .1, .1, .95]):
             if renpy.random.randint(0, chance) == 0:
