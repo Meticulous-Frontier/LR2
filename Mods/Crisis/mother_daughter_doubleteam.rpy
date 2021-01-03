@@ -4,7 +4,7 @@ init -1 python:
 
 init 2 python:
     def mother_daughter_doubleteam_requirement():
-        if mc.business.is_open_for_business():
+        if mc.business.is_open_for_business() and mc.is_at_work():
             for person in town_relationships.get_business_relationships(["Mother"]):
                 if willing_to_threesome(person.person_a, person.person_b):
                     return True
