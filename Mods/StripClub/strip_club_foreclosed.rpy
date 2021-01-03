@@ -89,6 +89,7 @@ label club_foreclosed_event_label():
         strip_club.background_image = Image(get_file_handle("Club_Outside_Background.jpg")) # Till the club doesn't open back again this should be the background
         strip_club_foreclosed_change_stripper_schedules()
         add_cousin_talk_about_strip_club_action()
+        remove_mandatory_crisis_list_action("club_foreclosed_event_label")
 
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
     "Perhaps you should talk to your cousin Gabrielle about it, when your aunt cannot overhear your conversation."
