@@ -156,40 +156,33 @@ label anal_fetish_employee_intro_label():
     "Once you pull it out, you smack her ass cheeks back and forth with it a couple times."
     the_person "Oh! Yeah but... [the_person.mc_title] its so big... I'm not sure..."
     mc.name "Shhh. Don't worry, I'll give you some time to adjust before I fuck your backdoor raw."
+    "[the_person.title] submissively whimpers, but doesn't protest any further. Instead, she leans forward a little farther, preparing herself to get fucked."
+    "When you're ready you push forward. Her back passage slowly accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
+    $ the_person.break_taboo("anal_sex")
+    ###Anal Scene, standing variant###
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_anal_fetish_intro_employee_01
+    #$ the_person.SB_fetish = "anal sex"
+    $ the_person.max_opinion_score("anal sex")
+    $ the_person.max_opinion_score("anal creampies")
+    "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    the_person "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
+    "[the_person.possessive_title] blushes and pauses..."
+    mc.name "...And doing what, [the_person.title]?"
+    "You tease her."
+    the_person "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
+    $ the_person.add_role(anal_fetish_role)
+    $ the_person.update_sex_skill("Anal", 6)
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
+    $ add_fuck_doll_collar_to_base_outfit(the_person)
+    mc.name "Here, I have something that might help."
+    "You reach into your desk. Inside is a pink glass anal plug that you would normally use for discipline. Her eyes light up a bit when she see it."
+    mc.name "Take this. Anytime you start getting the urge and its distracting you from work, play with it a bit. I'm sure it will help."
+    "[the_person.possessive_title] takes her butt plug. She slowly pushes it into her ass."
+    the_person "Thank you so much [the_person.mc_title]. We should do this again... and soon."
+    $ the_person.draw_person(position = "walking_away")
+    "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
 
-
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
-            $ the_person.break_taboo("anal_sex")
-            ###Anal Scene, standing variant###
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA10
-            #$ the_person.SB_fetish = "anal sex"
-            $ the_person.max_opinion_score("anal sex")
-            $ the_person.max_opinion_score("anal creampies")
-            "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
-            $ the_person.draw_person()
-            the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
-            "[the_person.possessive_title] blushes and pauses..."
-            mc.name "...And doing what, [the_person.title]?"
-            "You tease her."
-            the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
-            "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
-            $ the_person.add_role(anal_fetish_role)
-            $ the_person.update_sex_skill("Anal", 6)
-            $ the_person.event_triggers_dict["LastAnalFetish"] = day
-            $ add_fuck_doll_collar_to_base_outfit(the_person)
-            "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
-            the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
-            $ the_person.draw_person(position = "walking_away")
-            "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
-        "Refuse":
-            the_person.char "I'm sorry to hear that..." #TODO finish this
-            $ the_person.change_stats(happiness = -10, obedience = -10)
-            "[the_person.possessive_title] quickly sulks off."
-        "Too Tired" if mc.energy < 30:     # not enough energy for the player to induce fetish
-            "[the_person.possessive_title] is surprised by your answer."
-            $ the_person.change_stats(happiness = -5, obedience = -5)
-            the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
-            "[the_person.possessive_title] quickly sulks off."
     $ fetish_after_hours_unlock()
     $ the_person.apply_planned_outfit()
     $ clear_scene()
