@@ -13,6 +13,32 @@ init -1 python:
 
     get_random_last_name = get_unused_last_name
 
+    # Remove default names for unique characters from possible name list
+    if "Candace" in list_of_names:
+        list_of_names.remove("Candace")
+    if "Ashley" in list_of_names:
+        list_of_names.remove("Ashley")
+    if "Emily" in list_of_names:
+        list_of_names.remove("Emily")
+    if "Christina" in list_of_names:
+        list_of_names.remove("Christina")
+    if "Gabrielle" in list_of_names:
+        list_of_names.remove("Gabrielle")
+    if "Rebecca" in list_of_names:
+        list_of_names.remove("Rebecca")
+    if "Stephanie" in list_of_names:
+        list_of_names.remove("Stephanie")
+    if "Cara" in list_of_names:
+        list_of_names.remove("Cara")
+    if "Erica" in list_of_names:
+        list_of_names.remove("Erica")
+    if "Dawn" in list_of_names:
+        list_of_names.remove("Dawn")
+    if "Sarah" in list_of_names:
+        list_of_names.remove("Sarah")
+    if "Ophelia" in list_of_names:
+        list_of_names.remove("Ophelia")
+
     # Extra names provided by LangyMD (based on US consensus)
     list_of_names.append("Mary")
     list_of_names.append("Patricia")
