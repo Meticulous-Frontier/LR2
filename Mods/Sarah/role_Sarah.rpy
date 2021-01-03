@@ -82,7 +82,7 @@ init 2 python:
         office.add_action(HR_director_appointment_action)
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        mc.business.mandatory_crises_list.append(Sarah_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
         return
 
     def Sarah_reset_vars():
@@ -315,31 +315,31 @@ init -1 python:
 
     def add_sarah_epic_tits_action():
         Sarah_epic_tits_action = Action("Sarah Epic Tits Action", Sarah_epic_tits_requirement, "Sarah_epic_tits_label")
-        mc.business.mandatory_crises_list.append(Sarah_epic_tits_action)
+        mc.business.add_mandatory_crisis(Sarah_epic_tits_action)
 
     def add_sarah_get_drinks_action():
         Sarah_get_drinks_action = Action("Sarah get drinks",Sarah_get_drinks_requirement,"Sarah_get_drinks_label")
-        mc.business.mandatory_crises_list.append(Sarah_get_drinks_action)
+        mc.business.add_mandatory_crisis(Sarah_get_drinks_action)
 
     def add_sarah_stripclub_story_action():
         Sarah_stripclub_story_action = Action("Sarah Strip Club",Sarah_stripclub_story_requirement,"Sarah_stripclub_story_label")
-        mc.business.mandatory_crises_list.append(Sarah_stripclub_story_action)
+        mc.business.add_mandatory_crisis(Sarah_stripclub_story_action)
 
     def add_sarah_weekend_surprise_action():
         sarah_weekend_surprise_action = Action("Sarah's Weekend Surprise", Sarah_weekend_surprise_crisis_requirement, "Sarah_weekend_surprise_crisis_label")
-        mc.business.mandatory_crises_list.append(sarah_weekend_surprise_action)
+        mc.business.add_mandatory_crisis(sarah_weekend_surprise_action)
 
     def add_sarah_hire_action():
         Sarah_hire_action = Action("Sarah hire",Sarah_hire_requirement,"Sarah_hire_label", requirement_args = day)
-        mc.business.mandatory_crises_list.append(Sarah_hire_action)
+        mc.business.add_mandatory_crisis(Sarah_hire_action)
 
     def add_sarah_new_tits_action():
         Sarah_new_tits_action = Action("Sarah new tits",Sarah_new_tits_requirement,"Sarah_new_tits_label")
-        mc.business.mandatory_crises_list.append(Sarah_new_tits_action)
+        mc.business.add_mandatory_crisis(Sarah_new_tits_action)
 
     def add_sarah_threesome_request_action():
         Sarah_threesome_request_action = Action("Sarah Threesome Request",Sarah_threesome_request_requirement,"Sarah_threesome_request_label")
-        mc.business.mandatory_crises_list.append(Sarah_threesome_request_action)
+        mc.business.add_mandatory_crisis(Sarah_threesome_request_action)
 
     def add_sarah_arrange_threesome_action(person):
         Sarah_arrange_threesome_action = Action("Sarah_threesome_arrange",Sarah_arrange_threesome_requirement,"Sarah_arrange_threesome_label")
@@ -347,23 +347,23 @@ init -1 python:
 
     def add_sarah_initial_threesome_action():
         Sarah_initial_threesome_action = Action("Sarah initial threesome",Sarah_initial_threesome_requirement,"Sarah_initial_threesome_label")
-        mc.business.mandatory_crises_list.append(Sarah_initial_threesome_action)
+        mc.business.add_mandatory_crisis(Sarah_initial_threesome_action)
 
     def add_sarah_ask_for_baby_action():
         Sarah_ask_for_baby = Action("Sarah asks for a baby", Sarah_ask_for_baby_requirement, "Sarah_ask_for_baby_label")
-        mc.business.mandatory_crises_list.append(Sarah_ask_for_baby)
+        mc.business.add_mandatory_crisis(Sarah_ask_for_baby)
 
     def add_sarah_fertile_period_start_action():
         Sarah_fertile_period_start = Action("Sarah starts a fertile period", Sarah_fertile_period_start_requirement, "Sarah_fertile_period_start_label")
-        mc.business.mandatory_crises_list.append(Sarah_fertile_period_start)
+        mc.business.add_mandatory_crisis(Sarah_fertile_period_start)
 
     def add_sarah_fertile_period_end_action():
         Sarah_fertile_period_end = Action("Sarah ends a fertile period", Sarah_fertile_period_end_requirement, "Sarah_fertile_period_end_label")
-        mc.business.mandatory_crises_list.append(Sarah_fertile_period_end)
+        mc.business.add_mandatory_crisis(Sarah_fertile_period_end)
 
     def add_hr_director_initial_hire_action(person):
         HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person, requirement_args = day)
-        mc.business.mandatory_crises_list.append(HR_director_initial_hire_action)
+        mc.business.add_mandatory_crisis(HR_director_initial_hire_action)
 
     def get_sarah_date_outfit_one():
         outfit = Outfit("Sarah Date Outfit One")
@@ -2045,112 +2045,107 @@ label Sarah_initial_threesome_label():
         $ add_sarah_initial_threesome_action()
         return
 
-    $ the_person_one = sarah
-    $ the_person_two = sarah.event_triggers_dict.pop("initial_threesome_target") # get and remove from dictionary
+    $ the_person = sarah.event_triggers_dict.pop("initial_threesome_target") # get and remove from dictionary
     $ scene_manager = Scene()
 
-    if the_person_two == None:
+    if the_person == None:
         "How did we get here? Tell Starbuck her shitty code is missing the initial threesome target."
         return
     "It's Saturday night. You quickly head home, you have an exciting night ahead of you."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You make sure your bedroom is nice and tidy. Soon you get a text on your phone."
-    the_person_one.char "Hey, I'm here."
+    sarah.char "Hey, I'm here."
     "You head to the front door and invite her in."
-    $ scene_manager.add_actor(the_person_one)
+    $ scene_manager.add_actor(sarah)
     "You head back to your bedroom and she sits on your bed."
-    $ scene_manager.update_actor(the_person_one, position = "sitting", display_transform = character_center_flipped)
-    the_person_one.char "Oh god, I've got butterflies in my stomach. I cant believe this is finally happening. Do I look okay?"
+    $ scene_manager.update_actor(sarah, position = "sitting", display_transform = character_center_flipped)
+    sarah.char "Oh god, I've got butterflies in my stomach. I cant believe this is finally happening. Do I look okay?"
     mc.name "You look incredible, as always."
-    if the_person_two is lily or the_person_two is mom:
-        "Okay, let me go get [the_person_two.title], I'll be right back."
+    if the_person is lily or the_person is mom:
+        "Okay, let me go get [the_person.title], I'll be right back."
         "You walk into her room. She follows you back to your room."
     else:
         "Soon, you get another text on your phone."
-        the_person_two.char "I'm here now. Come let me in?"
+        the_person.char "I'm here now. Come let me in?"
         mc.name "She's here, give me one second."
-        "You go to the front door and let in [the_person_two.title]. She follows you quietly to your room."
+        "You go to the front door and let in [the_person.title]. She follows you quietly to your room."
     # make the second person wear a more sexy outfit (50% sluttiness boost)
-    $ the_person_two.apply_outfit(the_person_two.decide_on_outfit(sluttiness_modifier = .5))
-    $ scene_manager.add_actor(the_person_two)
-    "Alright, here you are, in your room, with [the_person_one.title] and [the_person_two.possessive_title]."
-    the_person_one.char "Hi..."
+    $ the_person.apply_outfit(the_person.decide_on_outfit(sluttiness_modifier = .5))
+    $ scene_manager.add_actor(the_person)
+    "Alright, here you are, in your room, with [sarah.title] and [the_person.possessive_title]."
+    sarah.char "Hi..."
     "She's getting shy. The atmosphere in the room is getting awkward. You'd better do something to break the ice!"
-    mc.name "Hey, why don't you sit on the bed, [the_person_two.title]. I'm gonna turn on some music."
-    the_person_two.char "Okay! Sounds good."
-    $ scene_manager.update_actor(the_person_two, position = "sitting")
+    mc.name "Hey, why don't you sit on the bed, [the_person.title]. I'm gonna turn on some music."
+    the_person.char "Okay! Sounds good."
+    $ scene_manager.update_actor(the_person, position = "sitting")
     "You turn some music on. A soft instrumental that should help set the mood. The girls are starting to chat."
-    the_person_two.char "I'll be honest, after [the_person_two.mc_title] asked me to do this, I was pretty surprised, but I've really been looking forward to it."
-    the_person_one.char "Oh... really?"
-    the_person_two.char "Yeah. Don't worry. It might be awkward at first, but once we get going, this is going to be a LOT of fun."
-    the_person_one.char "That's what I keep hoping!"
-    "[the_person_two.possessive_title] stands up and motions towards [the_person_one.title]"
+    the_person.char "I'll be honest, after [the_person.mc_title] asked me to do this, I was pretty surprised, but I've really been looking forward to it."
+    sarah.char "Oh... really?"
+    the_person.char "Yeah. Don't worry. It might be awkward at first, but once we get going, this is going to be a LOT of fun."
+    sarah.char "That's what I keep hoping!"
+    "[the_person.possessive_title] stands up and motions towards [sarah.title]"
 
-    the_person_two.char "Come here. This will help..."
-    $ scene_manager.update_actor(the_person_two, position = "walking_away")
-    $ scene_manager.update_actor(the_person_one, position = "kissing", display_transform = character_right)
+    the_person.char "Come here. This will help..."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    $ scene_manager.update_actor(sarah, position = "kissing", display_transform = character_right)
     "The two girls embrace. They begin to run their hands along each others bodies. Then they begin to kiss."
-    the_person_one.char "Mmm... your skin is so soft..."
-    "Damn! They are starting to get into it. [the_person_two.title] has her hands around her back, while [the_person_one.possessive_title] is grabbing her ass."
-    $ the_person_one.change_arousal(10)
-    $ the_person_two.change_arousal(10)
+    sarah.char "Mmm... your skin is so soft..."
+    "Damn! They are starting to get into it. [the_person.title] has her hands around her back, while [sarah.possessive_title] is grabbing her ass."
+    $ sarah.change_arousal(10)
+    $ the_person.change_arousal(10)
     "The girls are starting to moan into each other's mouths. Things are heating up quickly!"
-    "You decide its time for you to make your presence known. You step directly behind [the_person_one.title] and hug her from behind."
-    $ scene_manager.update_actor(the_person_one, position = "back_peek")
-    the_person_one.char "Oh... oh my god..."
-    "You wrap your left hand around and begin to fondle her tits. With your other hand you reach all the way to [the_person_two.possessive_title]'s back, pulling you all close together."
-    "With her head to one side, you and [the_person_two.title] begin kissing both sides of [the_person_one.possessive_title]'s neck."
-    $ the_person_one.change_arousal(25)
-    $ the_person_two.change_arousal(10)
+    "You decide its time for you to make your presence known. You step directly behind [sarah.title] and hug her from behind."
+    $ scene_manager.update_actor(sarah, position = "back_peek")
+    sarah.char "Oh... oh my god..."
+    "You wrap your left hand around and begin to fondle her tits. With your other hand you reach all the way to [the_person.possessive_title]'s back, pulling you all close together."
+    "With her head to one side, you and [the_person.title] begin kissing both sides of [sarah.possessive_title]'s neck."
+    $ sarah.change_arousal(25)
+    $ the_person.change_arousal(10)
     "You grind your erection into her backside. She is beginning to pant heavily."
-    the_person_one.char "Oh god... I need to stop... Give me as second!"
-    "You both pause while you wait for her. She looks [the_person_two.title] in the eyes..."
-    the_person_one.char "I want to taste you. I've never kissed another woman down there... I want to try it!"
-    the_person_two.char "Mmm, that sounds nice. Let's do it!"
-    "[the_person_one.possessive_title] looks back at you."
-    the_person_one.char "I want you to fuck me... fuck me while I eat out another woman!"
+    sarah.char "Oh god... I need to stop... Give me as second!"
+    "You both pause while you wait for her. She looks [the_person.title] in the eyes..."
+    sarah.char "I want to taste you. I've never kissed another woman down there... I want to try it!"
+    the_person.char "Mmm, that sounds nice. Let's do it!"
+    "[sarah.possessive_title] looks back at you."
+    sarah.char "I want you to fuck me... fuck me while I eat out another woman!"
     mc.name "Glady! But I think everyone here is still wearing way too many clothes..."
     "The girls chuckle and then quickly agree."
-    $ scene_manager.update_actor(the_person_two, position = "stand2", display_transform = character_center_flipped)
-    $ scene_manager.update_actor(the_person_one, position = "stand3")
-    $ scene_manager.strip_actor_outfit(the_person_one)
-    $ scene_manager.strip_actor_outfit(the_person_two)
+    $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)
+    $ scene_manager.update_actor(sarah, position = "stand3")
+    $ scene_manager.strip_actor_outfit(sarah)
+    $ scene_manager.strip_actor_outfit(the_person)
     "After everyone is naked, the action moves to the bed."
-    call start_threesome(the_person_one, the_person_two, start_position = Threesome_doggy_deluxe, swapped = True) from sarah_initial_threesome_1
-    $ scene_manager.update_actor(the_person_one, position = "missionary", display_transform = character_center)
-    $ scene_manager.update_actor(the_person_two, position = "back_peek", display_transform = character_right)
-    "As the activity winds down, you all lay down next to each other. You have [the_person_one.possessive_title] on one side and [the_person_two.possessive_title] on the other."
-    the_person_one.char "Oh my god... that was so good. I never knew it could be so good, to be with another woman like that..."
+    call start_threesome(sarah, the_person, start_position = Threesome_doggy_deluxe, swapped = True) from sarah_initial_threesome_1
+    $ scene_manager.update_actor(sarah, position = "missionary", display_transform = character_center)
+    $ scene_manager.update_actor(the_person, position = "back_peek", display_transform = character_right)
+    "As the activity winds down, you all lay down next to each other. You have [sarah.possessive_title] on one side and [the_person.possessive_title] on the other."
+    sarah.char "Oh my god... that was so good. I never knew it could be so good, to be with another woman like that..."
     $ sarah.event_triggers_dict["threesome_unlock"] = True
-    "You hear a murmur of approval from [the_person_two.title]."
+    "You hear a murmur of approval from [the_person.title]."
     "You enjoy the pair of bedwarmers, and are just getting ready to fall asleep when you feel movement."
-    $ scene_manager.update_actor(the_person_two, position = "stand4")
-    the_person_two.char "Well, I had a lot of fun, but I should be going. Goodnight you two."
-    "You both say goodbye. [the_person_two.title] grabs her stuff and leaves the room."
-    $ scene_manager.remove_actor(the_person_two)
-    if not the_person_one.has_role(girlfriend_role):
-        the_person_one.char "Ohh, I'm not sure I can walk... but I should get going too..."
-        "[the_person_one.title] slowly gets out of bed."
-        $ scene_manager.update_actor(the_person_one, position = "stand4")
-        the_person_one.char "That was more than I could have hoped for. Thank you so much for this!"
-        $ scene_manager.remove_actor(the_person_one)
+    $ scene_manager.update_actor(the_person, position = "stand4")
+    the_person.char "Well, I had a lot of fun, but I should be going. Goodnight you two."
+    "You both say goodbye. [the_person.title] grabs her stuff and leaves the room."
+    $ scene_manager.remove_actor(the_person)
+    if not sarah.has_role(girlfriend_role):
+        sarah.char "Ohh, I'm not sure I can walk... but I should get going too..."
+        "[sarah.title] slowly gets out of bed."
+        $ scene_manager.update_actor(sarah, position = "stand4")
+        sarah.char "That was more than I could have hoped for. Thank you so much for this!"
+        $ scene_manager.remove_actor(sarah)
         "You say goodbye, and slowly drift off to sleep."
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_initial_threesome_no_overnight
-        $ del the_person_one
-        $ del the_person_two
         return
     mc.name "You're staying tonight... right?"
-    the_person_one.char "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
+    sarah.char "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
     "Worn out, you cuddle up with her and quickly fall asleep as well."
     $ scene_manager.clear_scene()
-    $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
+    $ sarah.next_day_outfit = sarah.planned_outfit # she stays the night so she will have to wear the same outfit again
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_threesome_1
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
     $ add_sarah_ask_for_baby_action()
-    $ del the_person_one
-    $ del the_person_two
     return
 
 label Sarah_ask_for_baby_label():

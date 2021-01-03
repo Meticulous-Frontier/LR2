@@ -17,7 +17,7 @@ init 2 python:
 
     def add_return_from_seminar_action(person):
         return_from_seminar_action = Action("Return From Seminar Thank You",return_from_seminar_action_requirement,"return_from_seminar_action_label", args = person)
-        mc.business.mandatory_crises_list.append(return_from_seminar_action)
+        mc.business.add_mandatory_crisis(return_from_seminar_action)
         return
 
 label enhanced_special_training_crisis_label():

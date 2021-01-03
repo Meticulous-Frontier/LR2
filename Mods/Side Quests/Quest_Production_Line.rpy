@@ -91,10 +91,10 @@ init 1 python:
         if quest.get_quest_flag() == 31: #agreed to give raise.
             if person.salary > quest.quest_event_dict.get("starting_pay", 0): #She has received a raise!
                 quest.set_quest_flag(41)
-                mc.business.mandatory_crises_list.append(quest_production_line_after_raise_consult)
+                mc.business.add_mandatory_crisis(quest_production_line_after_raise_consult)
                 remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
             if quest_production_line_raise_miss not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(quest_production_line_raise_miss)
+                mc.business.add_mandatory_crisis(quest_production_line_raise_miss)
         return
 
     def quest_production_line_start_requirement():
@@ -208,7 +208,7 @@ label quest_production_line_intro_label(the_person):
     $ quest_production_line().set_quest_flag(11)
     $ quest_production_line().quest_event_dict["initial_meeting_day"] = (day + 1)
     $ mall.add_action(quest_production_line_coffee)
-    $ mc.business.mandatory_crises_list.append(quest_production_line_coffee_reminder)
+    $ mc.business.add_mandatory_crisis(quest_production_line_coffee_reminder)
     return
 
 label quest_production_line_coffee_reminder_label():
@@ -218,7 +218,7 @@ label quest_production_line_coffee_reminder_label():
     "If you are going to go meet with the chemist, do it after lunch. He should be at the mall."
     $ del dad_name
     $ quest_production_line().set_quest_flag(21)
-    $ mc.business.mandatory_crises_list.append(quest_production_line_coffee_miss)
+    $ mc.business.add_mandatory_crisis(quest_production_line_coffee_miss)
     return
 
 label quest_production_line_coffee_label():
@@ -252,7 +252,7 @@ label quest_production_line_coffee_label():
     $ quest_production_line().set_quest_flag(31)
     $ mall.remove_action(quest_production_line_coffee)
     $ remove_mandatory_crisis_list_action("quest_production_line_coffee_miss_label")
-    $ mc.business.mandatory_crises_list.append(quest_production_line_raise_miss)
+    $ mc.business.add_mandatory_crisis(quest_production_line_raise_miss)
     return
 
 label quest_production_line_coffee_miss_label():
@@ -322,7 +322,7 @@ label quest_production_line_after_raise_consult_label():
             "You might want to prep a serum or two... never know if an opportunity might pop up to have some fun!"
             $ quest_production_line().set_quest_flag(61)
             $ quest_production_line().quest_event_dict["moving_day"] = (day + 1)
-            $ mc.business.mandatory_crises_list.append(quest_production_line_help_move)
+            $ mc.business.add_mandatory_crisis(quest_production_line_help_move)
         "Too busy":
             mc.name "I'm sorry, I won't be able to help then."
             the_person.char "Damn... okay, I'm sure I'll be able to find someone."

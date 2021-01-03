@@ -7,7 +7,7 @@ init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
             if not (day % 7 == 4 or day % 7 == 5):  # not on friday or saturday night, conflicts with story
-                if lily.sluttiness >= 25:
+                if lily.effective_sluttiness() >= 30:
                     return True
         return False
 
@@ -31,7 +31,7 @@ init 3 python:
         finishes.append ("usual")
         return get_random_from_list(finishes)
 
-    sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label", 
+    sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
         menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR",
         initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = sister_ntr_mod_weight)
@@ -157,7 +157,7 @@ label sister_ntr_crisis_action_label:
                     $ the_person.cum_in_mouth()
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
-                    man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                    man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
@@ -257,7 +257,7 @@ label sister_ntr_crisis_action_label:
                     $ the_person.cum_in_mouth()
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
-                    man_name "Take it all, [the_person.name]. Get you protein coctail of the day!"
+                    man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                     the_person.char "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we go back to our books. I don't want to fail this test."

@@ -4,27 +4,26 @@ init -1 python:
 
 init 2 python:
     def mother_daughter_doubleteam_requirement():
-        if mc.business.is_weekend():
-            return False
-        if mc.is_at_work():
-            if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                for person in town_relationships.get_business_relationships(["Daughter"]):
-                    if willing_to_threesome( person.person_a, person.person_b):
-                        return True
+        if mc.business.is_open_for_business() and mc.is_at_work():
+            for person in town_relationships.get_business_relationships(["Mother"]):
+                if willing_to_threesome(person.person_a, person.person_b):
+                    return True
         return False
 
     def get_mother_with_daughter_for_doubleteam():
         mother_list = []
-        for relationship in town_relationships.get_business_relationships(["Daughter"]):
+        for relationship in town_relationships.get_business_relationships(["Mother"]):
             if willing_to_threesome(relationship.person_a, relationship.person_b):
-                mother_list.append(relationship.person_b)
+                mother_list.append(relationship.person_a)
         mother = get_random_from_list(mother_list)
 
-        daughter_list = []
-        for daughter in town_relationships.get_existing_children(mother):
-            if willing_to_threesome(mother, daughter):
-                daughter_list.append(daughter)
-        return (mother, get_random_from_list(daughter_list))
+        if mother:
+            daughter_list = []
+            for daughter in town_relationships.get_existing_children(mother):
+                if willing_to_threesome(mother, daughter):
+                    daughter_list.append(daughter)
+            return (mother, get_random_from_list(daughter_list))
+        return (None, None)
 
     mother_daughter_doubleteam_action = ActionMod("Mother Daughter Blowjob", mother_daughter_doubleteam_requirement, "mother_daughter_doubleteam_action_label",
         menu_tooltip = "A mother and daughter compete to give a better blowjob.", category = "Business", is_crisis = True, crisis_weight = mother_daughter_doubleteam_weight)
@@ -33,7 +32,7 @@ label mother_daughter_doubleteam_action_label():
     python:
         (the_mother, the_daughter) = get_mother_with_daughter_for_doubleteam()
         if not the_mother or not the_daughter:
-            renpy.return_statement() 
+            renpy.return_statement()
 
         scene_manager = Scene() # make sure we have a clean scene manager
     "As you are walking around the office, you hear some arguing coming from the break room."

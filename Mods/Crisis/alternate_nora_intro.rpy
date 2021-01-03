@@ -13,19 +13,18 @@ label alternate_nora_intro_mod_core(stack):
 init 2 python:
     def alternate_nora_intro_requirement():
         if mc.business.research_tier >= 2:
+            if university.visible:  # make sure crisis is run and removed
+                return True
             if mc.business.is_open_for_business():
                 if mc.location != mc.business.r_div:
-                    if renpy.random.randint(0,100) < 10:
+                    if renpy.random.randint(0,100) < 30:
                         return True
         return False
 
-    alternate_nora_intro_action = Action("Nora contacts you", alternate_nora_intro_requirement, "alternate_nora_intro_label")
-
     def alternate_nora_intro_mod_initialization():
-        if alternate_nora_intro_action not in mc.business.mandatory_crises_list:
-            mc.business.mandatory_crises_list.append(alternate_nora_intro_action)
+        alternate_nora_intro_action = Action("Nora contacts you", alternate_nora_intro_requirement, "alternate_nora_intro_label")
+        mc.business.add_mandatory_crisis(alternate_nora_intro_action)
         return
-
 
 label alternate_nora_intro_label():
     if university.visible == True:   #TODO find a better condition for when to nope tf out of this label

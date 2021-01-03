@@ -27,7 +27,7 @@ init 1 python:
         quest.quest_event_dict["market_day"] = 9999
         #TODO add start event
         quest.set_quest_flag(1)
-        mc.business.mandatory_crises_list.append(quest_cure_discovery_intro)
+        mc.business.add_mandatory_crisis(quest_cure_discovery_intro)
         game_hints.append(Hint("Medical Breakthrough", "Your head researcher has some exciting news.", "quest_cure_discovery().get_quest_flag() <= 1", "quest_cure_discovery().get_quest_flag() > 1"))
         hint_string = "Talk to " + contact.title + " about selling your medical patent."
         game_hints.append(Hint("Medical Breakthrough", hint_string, "quest_cure_discovery().get_quest_flag() == 21", "quest_cure_discovery().get_quest_flag() != 21"))
@@ -175,7 +175,7 @@ label quest_cure_discovery_intro_label():
             "As you turn to leave, you can hear her muttering something."
             $ del the_disease
             $ quest_cure_discovery().set_quest_flag(18)
-            $ mc.business.mandatory_crises_list.append(quest_cure_discovery_patent_kept)
+            $ mc.business.add_mandatory_crisis(quest_cure_discovery_patent_kept)
             return
         "Try and sell the patent":
             mc.name "Some cash infusion to the company would be great. That's a great idea, [the_person.title]."
@@ -196,7 +196,7 @@ label quest_cure_discovery_intro_label():
         quest_cure_set_market_contact(the_target)
         quest_cure_discovery().set_quest_flag(21)
         the_target.add_unique_on_talk_event(quest_cure_discovery_market_patent)
-        mc.business.mandatory_crises_list.append(quest_cure_discovery_market_missed)
+        mc.business.add_mandatory_crisis(quest_cure_discovery_market_missed)
         del the_disease
         del the_target
     return
@@ -225,7 +225,7 @@ label quest_cure_discovery_market_patent_label(the_person):
     $ del the_disease
     $ quest_cure_discovery().set_quest_flag(31)
     $ remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
-    $ mc.business.mandatory_crises_list.append(quest_cure_discovery_patent_sold)
+    $ mc.business.add_mandatory_crisis(quest_cure_discovery_patent_sold)
     return
 
 label quest_cure_discovery_patent_sold_label():

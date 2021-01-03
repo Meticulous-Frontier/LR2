@@ -44,7 +44,7 @@ init 2 python:
         #office.add_action(HR_director_appointment_action)
 
         ashley_intro = Action("ashley_intro",ashley_intro_requirement,"ashley_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        mc.business.mandatory_crises_list.append(ashley_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_crisis(ashley_intro) #Add the event here so that it pops when the requirements are met.
 
         # set relationships
         town_relationships.update_relationship(ashley, stephanie, "Sister")
@@ -379,7 +379,7 @@ label ashley_room_warming_up_label(the_person):
     mc.name "It's been great so far. And you?"
     the_person.char "Oh... it's been good I guess..."
     mc.name "Glad to hear it."
-    $ mc.business.mandatory_crises_list.append(ashley_porn_video_discover)
+    $ mc.business.add_mandatory_crisis(ashley_porn_video_discover)
     $ ashley.add_unique_on_room_enter_event(ashley_room_overhear_classical)
     return
 
@@ -419,7 +419,7 @@ label ashley_ask_date_classic_concert_label(the_person):
     the_person.char "Okay, if you're sure about this..."
     "You feel good about this as you finish up your conversation. Maybe you can finally get her to come out of her shell a little..."
     $ ashley.event_triggers_dict["concert_date"] = 1
-    $ mc.business.mandatory_crises_list.append(ashley_classical_concert_date)
+    $ mc.business.add_mandatory_crisis(ashley_classical_concert_date)
     return
 
 label ashley_classical_concert_date_label():
@@ -591,7 +591,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ ashley.event_triggers_dict["porn_discussed"] = True
     if ashley_get_concert_date_stage() > 1:
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
-    $ mc.business.mandatory_crises_list.append(ashley_mandatory_ask_about_porn)
+    $ mc.business.add_mandatory_crisis(ashley_mandatory_ask_about_porn)
     return
 
 label ashley_mandatory_ask_about_porn_label():

@@ -174,8 +174,7 @@ label horny_at_work_crisis_enhanced_label():
                 $ clear_scene()
                 $ scene_manager.add_group(helpful_people, position = "stand3", emotion = "happy")
                 if len(helpful_people) > 1: #More than one person, so describe them!
-                    $ others = helpful_people[:]
-                    $ others.remove(helpful_person)
+                    $ others = [x for x in helpful_people if x not in [helpful_person]]
                     if len(others) == 1:
                         $ renpy.say("", format_group_of_people(others) + " gets up and stands behind [helpful_person.possessive_title], obviously willing to do the same.")
                     elif len(others) == 2:
@@ -249,7 +248,7 @@ label horny_at_work_crisis_enhanced_label():
                         else:
                             $ renpy.say("", helpful_people[0].title + " is still standing next to your desk, and you haven't exhausted yourself quite yet...")
 
-                        $ exit_option = "Finish up."
+                        $ exit_option = "Finish up"
                         if "action_mod_list" in globals():
                             call screen enhanced_main_choice_display(build_menu_items([build_helpful_people_menu(helpful_people, exit_option)]))
                         else:
@@ -409,14 +408,11 @@ label horny_at_work_crisis_enhanced_label():
                 if mc.location.get_person_count() > 1:
                     $ willingness_value += the_person.get_opinion_score("public sex") * 10
 
-                $ others = mc.location.people[:]
-                $ others.remove(the_person)
-
                 $ scene_manager.add_group(mc.location.people, position = "sitting")
                 menu:
                     "Make her strip while you jerk off": #The basic version if you've picked this path always enabled due to earlier checks, so we don't bother with a failure state
                         mc.name "Well, I'd like you to give me some entertainment while I take care of this. Strip down and give me a little dance."
-                        if others:
+                        if mc.location.get_person_count() > 1:
                             "[the_person.title] looks around the room, then back to you and whispers."
                             the_person.char "What about the other people?"
                             mc.name "I'm sure they won't mind, and if they do they can take it up with me. Come on, I need to get back to work."
@@ -426,9 +422,9 @@ label horny_at_work_crisis_enhanced_label():
                         the_person.char "Fine."
                         $ scene_manager.update_actor(the_person, display_transform = character_right, position = "stand3")
 
-                        if others:
+                        if mc.location.get_person_count() > 1:
                             "You slide your chair back and turn it to face her. You unzip your pants, grabbing your already-hard cock to stroke it."
-                            $ lead_other = get_random_from_list(others)
+                            $ lead_other = get_random_from_list([x for x in mc.location.people if x not in [the_person]])
                             "[lead_other.title] glances over and notices you jerking off at your desk in front of [the_person.title]."
                             if lead_other.effective_sluttiness() < 20:
                                 lead_other.char "Oh my god, [lead_other.mc_title], what are you doing?"
@@ -489,7 +485,6 @@ label horny_at_work_crisis_enhanced_label():
                         "It takes a few moments of deep breathing to recover from the experience."
                         mc.name "Thank you [the_person.title], that's taken care of the problem nicely."
                         "She gives you a quick smile."
-                        $ others = None
                         $ the_person.review_outfit()
                         $ scene_manager.clear_scene()
                         $ clear_scene()

@@ -42,40 +42,40 @@ init 1 python:
 
     def add_SB_lily_anal_dp_fetish_event():
         SB_lily_anal_dp_fetish = Action("Lily Anal Sex", SB_fetish_anal_requirement, "SB_lily_anal_dp_fetish_label")
-        mc.business.mandatory_crises_list.append(SB_lily_anal_dp_fetish)
+        mc.business.add_mandatory_crisis(SB_lily_anal_dp_fetish)
         return
 
     def add_mom_anal_fetish_event():
         SB_mom_anal_fetish = Action("Mom Anal Sex", SB_mom_anal_pay_requirement, "SB_mom_anal_pay_label")
-        mc.business.mandatory_morning_crises_list.append(SB_mom_anal_fetish)
+        mc.business.add_mandatory_morning_crisis(SB_mom_anal_fetish)
         return
 
     def add_sb_fetish_anal_crisis(person):
         SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement, "SB_fetish_anal_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_anal_crisis)
         return
 
     def add_sb_fetish_anal_crisis_non_employee(person):
         SB_fetish_anal_crisis = Action("Loves Anal Sex.", SB_fetish_anal_requirement_non_employee, "SB_fetish_anal_label_non_employee", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_anal_crisis)
+        mc.business.add_mandatory_crisis(SB_fetish_anal_crisis)
         return
 
     def add_sb_fetish_anal_staylate_event(person):
         SB_fetish_anal_staylate_event = Action("Employee stays late", SB_fetish_anal_staylate_event_requirement, "SB_fetish_anal_staylate_event_label", args = person)
-        mc.business.mandatory_crises_list.append(SB_fetish_anal_staylate_event)
+        mc.business.add_mandatory_crisis(SB_fetish_anal_staylate_event)
         return
 
     def add_mom_weekly_anal_action():
         SB_mom_weekly_anal_action = Action("mom saturday anal ", SB_mom_anal_pay_requirement, "SB_mom_weekly_anal_label")
-        mc.business.mandatory_morning_crises_list.append(SB_mom_weekly_anal_action)
+        mc.business.add_mandatory_morning_crisis(SB_mom_weekly_anal_action)
 
     def add_sb_starbuck_anal_intro_event():
         SB_starbuck_anal_intro_event = Action("Starbuck Anal Sex", SB_starbuck_anal_requirement, "SB_starbuck_anal_intro")
-        mc.business.mandatory_crises_list.append(SB_starbuck_anal_intro_event)
+        mc.business.add_mandatory_crisis(SB_starbuck_anal_intro_event)
 
     def add_stephanie_anal_fetish_action():
         SB_stephanie_anal_fetish_action = Action("Stephanie Anal Fetish", SB_stephanie_anal_fetish_requirement, "SB_stephanie_anal_fetish_label")
-        mc.business.mandatory_crises_list.append(SB_stephanie_anal_fetish_action)
+        mc.business.add_mandatory_crisis(SB_stephanie_anal_fetish_action)
 
     SB_anal_outfit = Outfit("A Special Night")
     SB_anal_outfit.add_upper(lace_bra.get_copy(),colour_pink)
@@ -715,44 +715,46 @@ label SB_mom_anal_pay_label():
             $ add_fuck_doll_collar_to_base_outfit(the_person)
             "[the_person.possessive_title] has already fallen asleep. You can hear her murmuring in her dreams about taking stuff in her ass."
             "It seems your serums have given her an anal fetish!"
-            "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBA42
-            $ the_person.apply_outfit(SB_anal_nude_outfit)
-            "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
-            $ mc.change_location(mom_bedroom)
-            #Position peek back
-            $ the_person.draw_person(position = "walking_away")
-            "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
-            the_person.char "Good morning sleepy head..."
-            "[the_person.possessive_title] starts to tremble at your touch."
-            the_person.char "Look, about last night... I'm sorry I asked for money in exchange for... the wonderful thing we did afterword. I promise I won't do that again!"
-            the_person.char "I know that we have this tradition that... every Saturday morning I work on the budget and things have been really tight lately."
-            the_person.char "I was thinking we should start a new tradition! Every Saturday morning... Why don't we just plan on doing what we did. It will be something to look forward to with the stress of each week."
-            "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
-            the_person.char "Plus... god I just can't stop fantasizing about you... sticking it in me... back there."
-            "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
-            the_person.char "[the_person.mc_title], last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
-            "You smile to yourself."
-            mc.name "Are you asking me to fuck you in your ass?"
-            the_person.char "Yes... Please! Please [the_person.mc_title]! I don't know why I keep feeling this way, but I need you in my ass!"
-            "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
-            #Draw doggystyle
-            $ the_person.draw_person(position = "doggy")
-            "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
-            "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
-            the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA43
-            $ the_report = _return
-            if the_report.get("girl orgasms", 0) > 0:
-                "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
-            else:
-                "[the_person.possessive_title] lays there on the bed."
-            mc.name "So... every Saturday morning? I think I could get used to that..."
-            "You can see [the_person.possessive_title]'s body quiver slightly at your words."
-            mc.name "BUT, I am a man. I may have needs more often then that. Be ready for me with that amazing ass of yours anytime."
-            "[the_person.possessive_title] meekly responds."
-            the_person.char "Yes [the_person.mc_title]. You know it will be... take my ass, whenever you want. I'll be ready!"
+            # SINCE THIS IS NOW A MORNING EVENT SKIP SLEEP PART
+            # "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
+
+            # call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBA42
+            # $ the_person.apply_outfit(SB_anal_nude_outfit)
+            # "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
+            # $ mc.change_location(mom_bedroom)
+            # #Position peek back
+            # $ the_person.draw_person(position = "walking_away")
+            # "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
+            # the_person.char "Good morning sleepy head..."
+            # "[the_person.possessive_title] starts to tremble at your touch."
+            # the_person.char "Look, about last night... I'm sorry I asked for money in exchange for... the wonderful thing we did afterword. I promise I won't do that again!"
+            # the_person.char "I know that we have this tradition that... every Saturday morning I work on the budget and things have been really tight lately."
+            # the_person.char "I was thinking we should start a new tradition! Every Saturday morning... Why don't we just plan on doing what we did. It will be something to look forward to with the stress of each week."
+            # "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
+            # the_person.char "Plus... god I just can't stop fantasizing about you... sticking it in me... back there."
+            # "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
+            # the_person.char "[the_person.mc_title], last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
+            # "You smile to yourself."
+            # mc.name "Are you asking me to fuck you in your ass?"
+            # the_person.char "Yes... Please! Please [the_person.mc_title]! I don't know why I keep feeling this way, but I need you in my ass!"
+            # "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
+            # #Draw doggystyle
+            # $ the_person.draw_person(position = "doggy")
+            # "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
+            # "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
+            # the_person.char "That's it [the_person.mc_title]! Fuck me good!"
+            # call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA43
+            # $ the_report = _return
+            # if the_report.get("girl orgasms", 0) > 0:
+            #     "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
+            # else:
+            #     "[the_person.possessive_title] lays there on the bed."
+            # mc.name "So... every Saturday morning? I think I could get used to that..."
+            # "You can see [the_person.possessive_title]'s body quiver slightly at your words."
+            # mc.name "BUT, I am a man. I may have needs more often then that. Be ready for me with that amazing ass of yours anytime."
+            # "[the_person.possessive_title] meekly responds."
+            # the_person.char "Yes [the_person.mc_title]. You know it will be... take my ass, whenever you want. I'll be ready!"
             $ add_mom_weekly_anal_action()
         "Strip and ride me\nPay $1000 (disabled)" if mc.business.funds <1000:
             pass
@@ -808,41 +810,42 @@ label SB_mom_weekly_anal_label():
                 the_person.char "Mmm, that was so good, thank you [the_person.mc_title]..."
                 "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
 
-            "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
+            # SINCE THIS IS NOW A MORNING EVENT, SKIP THE SLEEP PART
+            # "You cuddle up behind her and enjoy the heat of her soft flesh as you slowly drift off to sleep."
 
-            call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBA52
-            $ the_person.apply_outfit(SB_anal_nude_outfit)
-            "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
-            $ mc.change_location(mom_bedroom)
-            $ mc.location.show_background()
-            #Position peek back
-            $ the_person.draw_person(position = "walking_away")
-            "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
-            the_person.char "Good morning sleepy head..."
-            "[the_person.possessive_title] starts to tremble at your touch."
-            the_person.char "I love being so close to you... and so intimate..."
-            "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
-            the_person.char "I just want you to fuck my ass, all weekend long! Is there really anything wrong with that?"
-            "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
-            the_person.char "Honey, last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
-            "You smile to yourself."
-            mc.name "Of course [the_person.title]. I'll fuck you in the ass, just the way you like it."
-            the_person.char "Yes... Please! Please [the_person.mc_title]! Fuck me in the ass!"
-            "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
-            #Draw doggy style
-            $ the_person.draw_person(position = "doggy")
-            "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.mc_title]'s back side. You apply some more to your cock until it is good and slick."
-            "You get yourself lined up with [the_person.possessive_title]'s back passage. You slowly begin your anal penetration."
-            the_person.char "That's it [the_person.mc_title]! Fuck me good!"
-            call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA53
-            $ the_report = _return
-            if the_report.get("girl orgasms", 0) > 0:
-                "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
-            else:
-                "[the_person.possessive_title] lays there on the bed"
-            $ the_person.draw_person(position = "missionary")
-            mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next Saturday, right?"
-            the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
+            # call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBA52
+            # $ the_person.apply_outfit(SB_anal_nude_outfit)
+            # "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
+            # $ mc.change_location(mom_bedroom)
+            # $ mc.location.show_background()
+            # #Position peek back
+            # $ the_person.draw_person(position = "walking_away")
+            # "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
+            # the_person.char "Good morning sleepy head..."
+            # "[the_person.possessive_title] starts to tremble at your touch."
+            # the_person.char "I love being so close to you... and so intimate..."
+            # "[the_person.title] begins to grind her hips up against you, nestling your now quickly hardening dick between her ass cheeks."
+            # the_person.char "I just want you to fuck my ass, all weekend long! Is there really anything wrong with that?"
+            # "You grab her hips and start to grind against her. Her breathing starts to get a bit heavier."
+            # the_person.char "Honey, last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
+            # "You smile to yourself."
+            # mc.name "Of course [the_person.title]. I'll fuck you in the ass, just the way you like it."
+            # the_person.char "Yes... Please! Please [the_person.mc_title]! Fuck me in the ass!"
+            # "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
+            # #Draw doggy style
+            # $ the_person.draw_person(position = "doggy")
+            # "You grab the lube leftover from the night before. You quickly apply another glob to [the_person.mc_title]'s back side. You apply some more to your cock until it is good and slick."
+            # "You get yourself lined up with [the_person.possessive_title]'s back passage. You slowly begin your anal penetration."
+            # the_person.char "That's it [the_person.mc_title]! Fuck me good!"
+            # call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA53
+            # $ the_report = _return
+            # if the_report.get("girl orgasms", 0) > 0:
+            #     "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
+            # else:
+            #     "[the_person.possessive_title] lays there on the bed"
+            # $ the_person.draw_person(position = "missionary")
+            # mc.name "Mmm, thanks [the_person.title]. That ass is amazing. Next Saturday, right?"
+            # the_person.char "Yes [the_person.mc_title]. But don't feel like you HAVE to wait to take my ass. We can do it whenever you want. I'll be ready!"
 
         "Not this week":
             mc.name "Sorry [the_person.title], work was hell and I'm exhausted. Maybe next week, okay?"

@@ -238,7 +238,7 @@ label ophelia_coworker_conversation_overhear_label(the_person):
     "You never know what you might learn with some small talk."
     # Should this just be a python block?
     $ the_person.event_triggers_dict["coworker_overhear"] = 1
-    $ mc.business.mandatory_crises_list.append(ophelia_learn_chocolate_love)
+    $ mc.business.add_mandatory_crisis(ophelia_learn_chocolate_love)
     $ the_person.add_unique_on_room_enter_event(ophelia_ex_bf_phone_overhear)
     $ del ex_name
     return
@@ -379,7 +379,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     "You get the details from her for when she closes up and promise to swing by later."
     the_person.char "See you then!"
     $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 2
-    $ mc.business.mandatory_crises_list.append(ophelia_make_blowjob_pics)
+    $ mc.business.add_mandatory_crisis(ophelia_make_blowjob_pics)
     return
 
 label ophelia_make_blowjob_pics_label():
@@ -569,7 +569,7 @@ label ophelia_revenge_date_plan_label(the_person):
     $ the_person.draw_person(position = "kissing")
     "She steps up and gives you a quick peck on the cheek."
     $ the_person.event_triggers_dict["first_date_planned"] = 1
-    $ mc.business.mandatory_crises_list.append(ophelia_revenge_date)
+    $ mc.business.add_mandatory_crisis(ophelia_revenge_date)
     $ del ex_name
     return
 

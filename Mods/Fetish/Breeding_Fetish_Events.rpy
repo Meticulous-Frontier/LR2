@@ -125,7 +125,7 @@ init 3 python:
         return
 
     def reset_breeding_fetish(person):
-        person.special_role.remove (breeding_fetish_role)
+        person.remove_role(breeding_fetish_role)
         person.add_role(breeding_fetish_role)
 
     def get_breeding_fetish_list():
@@ -136,13 +136,7 @@ init 3 python:
         return breeder_list
 
     def get_highly_fertile_breeder():
-        breeder_list = []
-        for person in get_breeding_fetish_list():
-            if person.is_highly_fertile():
-                breeder_list.append(person)
-        if len(breeder_list) > 0:
-            return get_random_from_list(breeder_list)
-        return None
+        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.is_highly_fertile()])
 
 
 #Fetish Intro Labels

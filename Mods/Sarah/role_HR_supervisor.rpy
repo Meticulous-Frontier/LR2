@@ -282,23 +282,23 @@ init 5 python:
 
     def add_sarah_catch_stealing_action():
         Sarah_catch_stealing_action = Action("Catch Sarah Stealing",Sarah_catch_stealing_requirement,"Sarah_catch_stealing_label")
-        mc.business.mandatory_crises_list.append(Sarah_catch_stealing_action)
+        mc.business.add_mandatory_crisis(Sarah_catch_stealing_action)
 
     def add_sarah_third_wheel_action():
         Sarah_third_wheel_action = Action("Sarah's third wheel event",Sarah_third_wheel_requirement,"Sarah_third_wheel_label")
-        mc.business.mandatory_crises_list.append(Sarah_third_wheel_action)
+        mc.business.add_mandatory_crisis(Sarah_third_wheel_action)
 
     def add_hr_director_first_monday_action(person):
         HR_director_first_monday_action = Action("First Monday",HR_director_first_monday_requirement,"HR_director_first_monday_label", args = person)
-        mc.business.mandatory_crises_list.append(HR_director_first_monday_action)
+        mc.business.add_mandatory_crisis(HR_director_first_monday_action)
 
     def add_hr_director_monday_meeting_action(person):
         HR_director_monday_meeting_action = Action("Monday HR Lunch",HR_director_monday_meeting_requirement,"HR_director_monday_meeting_label", args = person)
-        mc.business.mandatory_crises_list.append(HR_director_monday_meeting_action)
+        mc.business.add_mandatory_crisis(HR_director_monday_meeting_action)
 
     def add_hr_director_headhunt_interview_action(person):
         HR_director_headhunt_interview_action = Action("Prospect Interview",HR_director_headhunt_interview_requirement,"HR_director_headhunt_interview_label", args = person)
-        mc.business.mandatory_crises_list.append(HR_director_headhunt_interview_action)
+        mc.business.add_mandatory_crisis(HR_director_headhunt_interview_action)
 
     def build_HR_interview_discussion_topic_menu(person):
         opinion_list = create_HR_review_topic_list(person_choice)
