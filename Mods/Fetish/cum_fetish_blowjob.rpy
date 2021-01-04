@@ -41,7 +41,7 @@ label scene_SB_cum_fetish_blowjob_1(the_girl, the_location, the_object):
     menu:
         "Talk dirty to her":
             mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
-            "[the_girl.possessive_title] strokes you a few more times with her skill mouth. She twirls her tongue around the tip a few times before taking a second to respond."
+            "[the_girl.possessive_title] strokes you a few more times with her skilled mouth. She twirls her tongue around the tip a few times before taking a second to respond."
             if the_girl.has_role(cum_internal_role) or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
                 the_girl.char "Mmm, its been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
                 $ the_girl.discover_opinion("drinking cum")

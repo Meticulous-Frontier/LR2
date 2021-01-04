@@ -46,8 +46,15 @@ init 3303 python:
         if person.has_role(mistress_role):
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formalName]"
-            if person.core_sluttiness < 80:
-                return "Requires: 80 Core Sluttiness"
+            if person.has_taboo("condomless_sex"):
+                return "Requires: had sex with " + person.name
+            if person.has_taboo("sucking_cock"):
+                return "Requires: blowjob from " + person.name
+            if person.get_opinion_score("threesomes") <= -2:
+                return "Requires: threesome experience " + person.name
+            minimum_sluttiness = THREESOME_BASE_SLUT_REQ + (person.get_opinion_score("threesomes") * -5)
+            if person.effective_sluttiness() < minimum_sluttiness:
+                return "Requires: " + str(minimum_sluttiness) + " Sluttiness"
             return True
         return False
 
@@ -206,7 +213,7 @@ label mistress_hunt_for_me_label(the_person):
     $ scene_manager.add_actor(the_person, position = "back_peek")
     "You open the door of the room and motion the girl's to come in, you notice [the_person.title] already grabbing [the_person_two.title]'s ass."
     call start_threesome(the_person, the_person_two, girl_in_charge = the_person, start_object = make_bed(), affair_ask_after = False) from _call_start_threesome_mistress_hunt_for_me_label
-    "Once you all had your fun, you go back to the Strip Club."
+    "Once you all had your fun, you and the girls go back to the Strip Club."
     $ scene_manager.clear_scene()
     $ mc.change_location(strip_club)
     $ mc.location.show_background()

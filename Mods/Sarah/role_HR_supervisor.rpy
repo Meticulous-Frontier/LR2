@@ -1347,6 +1347,8 @@ label HR_director_headhunt_initiate_label(the_person):
             if get_HR_director_tag("recruit_bust", None) is not None:
                 days_to_find += 1
 
+        $ days_to_find = min(days_to_find, 7)   #Cap days to find to 7
+
         the_person.char "Okay, I'll go ahead and start the search."
         if days_to_find <= 2:
             the_person.char "This shouldn't take me long. Hopefully just a day or two!"
@@ -1445,25 +1447,32 @@ label HR_director_monday_headhunt_update_label(the_person):
         return
 
     the_person.char "Let's see if any recent recruiting policy updates will change how we look for employees."
+    $ hr_recruit_updates = 0
     if get_HR_director_tag("headhunter_obedience", False) == False and recruitment_obedience_improvement_policy.is_owned():
         the_person.char "I can now target a new employee based on their free will! I can either scout for an obedient, or free spirited prospect."
         $ set_HR_director_tag("headhunter_obedience", True)
-    elif get_HR_director_tag("headhunter_focused", False) == False and recruitment_batch_three_policy.is_owned():
+        $ hr_recruit_updates += 1
+    if get_HR_director_tag("headhunter_focused", False) == False and recruitment_batch_three_policy.is_owned():
         the_person.char "I can now target highly specialized prospects. They will be more skilled in an area, but may not be well rounded individuals."
         $ set_HR_director_tag("headhunter_focused", True)
-    elif get_HR_director_tag("headhunter_physical", False) == False and recruitment_knowledge_one_policy.is_owned():
+        $ hr_recruit_updates += 1
+    if get_HR_director_tag("headhunter_physical", False) == False and recruitment_knowledge_one_policy.is_owned():
         the_person.char "With the new software update, I can now search by a variety of physical preferences. Busty? Short? Thick? I can make it happen!"
         $ set_HR_director_tag("headhunter_physical", True)
-    elif get_HR_director_tag("headhunter_marital", False) == False and recruitment_knowledge_two_policy.is_owned():
+        $ hr_recruit_updates += 1
+    if get_HR_director_tag("headhunter_marital", False) == False and recruitment_knowledge_two_policy.is_owned():
         the_person.char "I can now target married or single individuals. It might be illegal in most states, but not here!"
         $ set_HR_director_tag("headhunter_marital", True)
-    elif get_HR_director_tag("headhunter_slut", False) == False and recruitment_slut_improvement_policy.is_owned():
+        $ hr_recruit_updates += 1
+    if get_HR_director_tag("headhunter_slut", False) == False and recruitment_slut_improvement_policy.is_owned():
         the_person.char "I can now narrow down prospects based on general promiscuity. Want a prude or a slut? I can do that."
         $ set_HR_director_tag("headhunter_slut", True)
-    elif get_HR_director_tag("headhunter_kids", False) == False and recruitment_knowledge_three_policy.is_owned():
+        $ hr_recruit_updates += 1
+    if get_HR_director_tag("headhunter_kids", False) == False and recruitment_knowledge_three_policy.is_owned():
         the_person.char "I can now pick prospects based on whether or not they have kids. More MILFs around here? I could handle that!"
         $ set_HR_director_tag("headhunter_kids", True)
-    else:
+        $ hr_recruit_updates += 1
+    if hr_recruit_updates == 0:
         "Looks like I don't have any additions to the prospecting system this week."
     return
 

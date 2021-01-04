@@ -1687,10 +1687,11 @@ label erica_weekly_yoga_label(the_person):
             "When she finishes the announcement, [the_person.title] starts to strip down also."
             $ scene_manager.strip_actor_outfit(the_person)
             "You look around and watch as the all the girls are also stripping. It is a surreal moment."
-            "You walk over to the computer terminal in a daze. You sit down, and let the girls get started in their official, company sponsored, all nude yoga class."
+            # "You walk over to the computer terminal in a daze. You sit down, and let the girls get started in their official, company sponsored, all nude yoga class."
             $ scene_manager.clear_scene(reset_actor = False)
             $ the_person.event_triggers_dict["nude_yoga"] = True
-            call erica_yoga_loop_label(the_person, yoga_assistant) from _erica_yoga_loop_call_03
+            $ erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
+
     the_person.char "Glad you could make it! We are just getting ready to get started."
     yoga_assistant.char "Hello [yoga_assistant.mc_title]! I was just getting ready to fill up the water jug for the attendants."
     "You consider offering to fill it for her. It would give you a chance to distribute a dose of serum to all the girls gathered."

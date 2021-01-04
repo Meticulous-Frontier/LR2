@@ -427,19 +427,14 @@ init -1 python:
 
     def update_unique_character_wardrobes():
         # Extend unique character wardrobes
-        mom.wardrobe = mom.wardrobe.merge_wardrobes(wardrobe_from_xml("Mom_Extended_Wardrobe"))
-        lily.wardrobe = lily.wardrobe.merge_wardrobes(wardrobe_from_xml("Lily_Extended_Wardrobe"))
+        mom.wardrobe = mom.wardrobe.merge_wardrobes(wardrobe_from_xml("Mom_Extended_Wardrobe"), keep_primary_name = True)
+        lily.wardrobe = lily.wardrobe.merge_wardrobes(wardrobe_from_xml("Lily_Extended_Wardrobe"), keep_primary_name = True)
 
         # remove strange outfits (they should not be in her wardrobe at all)
         mom.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "Mom_Apron", mom.wardrobe.outfits))
         mom.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "lingerie_1", mom.wardrobe.outfits))
         lily.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "pink_lingerie", lily.wardrobe.outfits))
         stephanie.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "Nude", stephanie.wardrobe.outfits))
-        return
-
-    def update_lingerie_wardrobe():
-        global lingerie_wardrobe
-        lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"))
         return
 
     unique_character_list = []  # global not stored variable (since not defined in label function)
@@ -526,6 +521,10 @@ init -1 python:
         alexia.sexy_opinions["cheating on men"] = [-2, False]  # she loves her boyfriend
         return
 
+init 2 python:
+    global lingerie_wardrobe
+    lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"), keep_primary_name = True)
+
 label activate_generic_personality(stack):
     python:
         create_unique_character_list()
@@ -549,8 +548,6 @@ label activate_generic_personality(stack):
 
         update_unique_character_wardrobes()
 
-        update_lingerie_wardrobe()
-
         update_stripclub_strippers()
 
         update_stephanie_opinions()
@@ -565,8 +562,6 @@ label update_generic_personality(stack):
         create_unique_character_list()
 
         update_main_character_actions()
-
-        update_lingerie_wardrobe()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

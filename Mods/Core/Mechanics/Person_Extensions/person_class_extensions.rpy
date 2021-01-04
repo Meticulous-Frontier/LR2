@@ -637,7 +637,7 @@ init -1 python:
             lighting = mc.location.get_lighting_conditions()
 
         if display_transform is None:
-            self.display_transform = display_transform
+            display_transform = character_right
 
         strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
         while not strip_choice is None and strip_choice.layer > 1:
@@ -678,7 +678,7 @@ init -1 python:
             lighting = mc.location.get_lighting_conditions()
 
         if display_transform is None:
-            self.display_transform = character_right
+            display_transform = character_right
 
         strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
         while not strip_choice is None and extra_strip_check(self, top_layer_first, exclude_upper, exclude_lower, exclude_feet):

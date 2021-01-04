@@ -428,7 +428,7 @@ label Sarah_flirt_response_high(the_person):
             "[the_person.possessive_title] glances around nervously."
             the_person.char "Take me somewhere private and say something like that again and it might actually happen..."
             menu:
-                "Find someplace quiet.":
+                "Find someplace quiet":
                     mc.name "Then let's find somewhere private. Come on."
                     "You take her hand and start to lead her away. She follows you eagerly."
                     the_person.char "Wow, I wasn't expecting you to actually do it! This is gonna be fun!"
@@ -443,7 +443,7 @@ label Sarah_flirt_response_high(the_person):
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_sarah_flirt_03
                     $ the_person.review_outfit()
 
-                "Just flirt.":
+                "Just flirt":
                     mc.name "I know, I just like to tease you."
                     the_person.char "Oh, is that so? Well two can play at that game."
                     if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:

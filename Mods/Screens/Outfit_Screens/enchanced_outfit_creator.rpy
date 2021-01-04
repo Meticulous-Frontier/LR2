@@ -115,10 +115,10 @@ init 10 python:
             else:
                 return False
 
-    def set_generated_outfit(category, slut_value):
+    def set_generated_outfit(category, slut_value, min_slut_value = 0):
         cs = renpy.current_screen()
 
-        outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value)
+        outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value, min_slut_value)
         cs.scope["item_outfit"] = outfit.get_copy()
         cs.scope["demo_outfit"] = outfit
         switch_outfit_category(category)
@@ -216,12 +216,25 @@ init 10 python:
     def update_slut_generation(new_value):
         cs = renpy.current_screen()
 
-        if new_value < 0:
-            new_value = 1
+        if new_value < cs.scope["min_slut_generation"]:
+            new_value = cs.scope["min_slut_generation"]
         if new_value > 12:
             new_value = 12
 
         cs.scope["slut_generation"] = new_value
+        renpy.restart_interaction()
+
+    def update_min_slut_generation(new_value):
+        cs = renpy.current_screen()
+
+        if new_value < 0:
+            new_value = 0
+        if new_value > 5:
+            new_value = 5
+        elif new_value > cs.scope["slut_generation"]:
+            new_value = cs.scope["slut_generation"]
+
+        cs.scope["min_slut_generation"] = new_value
         renpy.restart_interaction()
 
 init -1 python:
@@ -388,6 +401,7 @@ init 2:
             "Neckwear": [neckwear_list, Outfit.can_add_accessory, Outfit.add_accessory],
             "Not Paint": [fluids_list, Outfit.can_add_accessory, Outfit.add_accessory]}
 
+        default gold_heart = Composite((24, 24), (0, 1), Image(get_file_handle("gold_heart.png")))
 
         default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
         default bar_value = None # Stores information about which bar is being changed and is then passed to colour_changed_bar() as default value
@@ -402,6 +416,7 @@ init 2:
         default current_a = 1.0
 
         default slut_generation = 0
+        default min_slut_generation = 0
 
         # $ current_colour = [1.0,1.0,1.0,1.0] #This is the colour we will apply to all of the clothing
 
@@ -1173,27 +1188,43 @@ init 2:
                                                 # ]
                                     frame:
                                         background "#888888"
-                                        xsize 250
+                                        xsize 254
                                         vbox:
                                             textbutton "Generate [outfit_class_selected]":
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 action [
-                                                    Function(set_generated_outfit, category_selected, slut_generation)
+                                                    Function(set_generated_outfit, category_selected, slut_generation, min_slut_generation)
                                                 ]
 
                                             hbox:
                                                 button:
                                                     background "#505050"
-                                                    text "Slut "+ str(slut_generation) style "serum_text_style" yalign 0.5
+                                                    text "Slut "+ str(slut_generation) style "serum_text_style" yalign 0.5 size 16
                                                     xsize 90
-                                                    ysize 45
+                                                    ysize 24
                                                 bar:
                                                     adjustment ui.adjustment(range = max_slut, value = slut_generation, step = 1, changed = update_slut_generation)
                                                     xfill True
-                                                    ysize 45
+                                                    ysize 24
+                                                    thumb gold_heart
                                                     style style.slider
+
+                                            if slut_generation > 0:
+                                                hbox:
+                                                    button:
+                                                        background "#505050"
+                                                        text "Min "+ str(min_slut_generation) style "serum_text_style" yalign 0.5 size 16
+                                                        xsize 90
+                                                        ysize 24
+                                                    bar:
+                                                        adjustment ui.adjustment(range = (slut_generation if slut_generation < 5 else 5), value = min_slut_generation, step = 1, changed = update_min_slut_generation)
+                                                        xfill True
+                                                        ysize 24
+                                                        thumb gold_heart
+                                                        style style.slider
+
 
                                     $ love_list = outfit_builder.get_love_list()
                                     $ hate_list = outfit_builder.get_hate_list()
