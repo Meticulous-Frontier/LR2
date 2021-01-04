@@ -186,13 +186,122 @@ label anal_fetish_employee_intro_label():
     $ fetish_after_hours_unlock()
     $ the_person.apply_planned_outfit()
     $ clear_scene()
-    return
+    return True
 
 label anal_fetish_family_intro_label():
     return False
 
-label anal_fetish_generic_intro_label():
-    return False
+label anal_fetish_generic_intro_label(the_person):
+    # Concept, spank her while fingering her ass so she can discover her new submissive, anal loving side.
+    $ the_person.arousal = 40
+    $ the_person.draw_person()
+    "You walk up to [the_person.title] to say hello. However, something about her demeanor seems a little off."
+    mc.name "Hello [the_person.title]. How are you doing today?"
+    the_person "Hello [the_person.mc_title]! It's good to see you..."
+    "You take a moment to look at her. Her cheeks seem flushed... Her nipples are poking against the fabric of her shirt. Is she... Aroused?"
+    the_person "... Actually... I do have something you could help me with."
+    "She leans forward and talks quietly in your ear."
+    the_person "I woke up super horny this morning, but none of my usually masturbation techniques seemed to work... Can you help me out?"
+    "Hmm, very interesting. Recently, you've been dosing her with your anal proclivity serums. Maybe that's why she's having trouble getting off?"
+    "Helping her might develop her anal interest into a fetish!"
+    # TODO [If unique character give warning]
+    menu:
+        "Help her":
+            mc.name "Let's find somewhere private first."
+        "Too busy":
+            mc.name "I'm sorry [the_person.title], but I just wanted to talk about something."
+            $ the_person.change_love(-2)
+            $ the_person.change_happiness(-5)
+            the_person "Ah, okay. I see."
+            return False
+
+    "[the_person.title] takes your hand. You take a few minutes to find somewhere private where you won't be interrupted."
+    $ the_person.draw_person(position = "kissing")
+    "She throws her arms around you and you start to make out. You hands drop to her ass and you start to grope her aggressively."
+    the_person "Mmm... that feels nice..."
+    "You give her ass a rough spank."
+    $ the_person.change_arousal(5) #45
+    the_person "Oh! Mmm I've been bad haven't I..."
+    "You give her a couple more spanks. She moans appreciatively."
+    $ the_person.change_arousal(5) # 50
+    mc.name "You really have been bad. Turn around, I need to punish you more appropriately."
+    "[the_person.possessive_title] doesn't say a word, but submissively turns around and bends over for you."
+    $ the_person.draw_person(position = "standing_doggy")
+    if the_person.vagina_available():
+        "You give her ass a smack, admiring the way her cheeks wobble."
+    else:
+        mc.name "Let's get this out of the way first."
+        $ the_person.strip_outfit(exclude_upper = True)
+        "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
+    $ the_person.change_arousal (15) # 65
+    mc.name "You've got an amazing ass [the_person.title]..."
+    "You give her another spank. Her cheeks are starting to redden a bit, but its obvious from her arousal that she loves it."
+    if the_person.has_taboo("anal_sex"):
+        mc.name "Have you ever tried taking it in your ass? I think its clear that your ass needs some attention."
+        the_person "Oh? I umm... not exactly... I not that kind of girl..."
+        "You give her another spank."
+        the_person "Ah! Oh fuck..."
+        $ the_person.change_arousal(5) # 70
+    else:
+        mc.name "It is clear to me that your ass needs some attention. I'm going to spank you until its red and then fuck it."
+        the_person "I... I'm not like... usually that kind of girl..."
+        "You give her another spank."
+        $ the_person.change_arousal(5) # 70
+    mc.name "Are you sure? You certainly seem to be enjoying this so far."
+    "Another spank. You notice goosebumps growing all down her body."
+    $ the_person.change_arousal(10) # 80
+    the_person "I... I can't believe I'm saying this but... my body is telling me to!"
+    mc.name "I'm sorry, what exactly is your body telling you?"
+    "*SPANK*"
+    the_person "Ah! Its telling me it wants you to fuck my ass! Push it in and fuck me raw! Oh god it sounds so good!"
+    "You give her ass two more final spanks."
+    $ the_person.change_arousal(10) # 90
+    mc.name "Alright. First, get on your knees. I want my cock nice and lubed up so it goes in easy."
+    $ the_person.draw_person(position = "blowjob")
+    "[the_person.possessive_title] immediately drops to her knees without a word. You quickly pull your cock out."
+    "She wastes no time and begins slobbering all over your erection. Her tongue runs up and down your full length, multiple times."
+    $ mc.change_arousal(10)
+    mc.name "Good girl. Now get ready for me, I'm going to fuck your ass, just the way you want it."
+    the_person "Oh god..."
+    $ the_person.draw_person(position = "standing_doggy")
+    "[the_person.possessive_title] turns and points her ass at you, bending over. You grab her hip in one hand and your cock in the other."
+    "You run the tip of your saliva soaked meat all around her puckered hole, then start to push. She mewls as you start to push it in."
+    "Slow and steady, you push yourself in until you are completely bottomed out in her bottom."
+    $ the_person.change_arousal (15) #105
+    the_person "Oh my god... its so big! Oh [the_person.mc_title] its so good!"
+    $ the_person.have_orgasm(half_arousal = True)
+    "[the_person.possessive_title]'s ass is twitching wildly all around you as she orgasms. You hold her hips tight and in place with both hands as her body quivers."
+    "It feels amazing to have her body gripping you as she cums."
+    $ mc.change_arousal(10)
+    mc.name "See? You just needed something in your ass so you could cum."
+    the_person "I... I think you might be right... I..."
+    "She stops mid sentence as you give her a quick thrust."
+    mc.name "Its okay to admit you are a buttslut. Now, lets just make sure you needs are sated before we part ways."
+    "[the_person.possessive_title] is unable to reply as you begin to fuck her ass. It's time to show her just how good you can make her feel that way."
+    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True) from _call_fuck_person_anal_fetish_intro_generic_01
+    #$ the_person.SB_fetish = "anal sex"
+    $ the_person.max_opinion_score("anal sex")
+    $ the_person.max_opinion_score("anal creampies")
+    $ the_person.draw_person(position = "doggy")
+    "After you finish with her, [the_person.possessive_title] drops to her knees as she tries to recover."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    the_person "That was amazing, [the_person.mc_title]."
+    the_person "I can't stop thinking about how full it felt, when your cock pushed into my ass..."
+    if starbuck_is_business_partner():
+        mc.name "Hey, I have a friend who runs a sex shop over at the mall. Head over there sometime and tell her I sent you."
+        mc.name "I'll text her to let her know you are coming. She can set you up with some masturbation toys that can help you if you find yourself in this position again."
+    else:
+        mc.name "Hey, maybe you should go to the mall. I heard they have a sex shop there."
+        mc.name "Maybe they have something that would help you out, with masturbating, if you find yourself in this position again."
+    the_person "You know, I think I'll do that. Thank you [the_person.mc_title]. My ass is yours if you want to do this again sometime..."
+    mc.name "A tempting offer to be sure."
+    "You part ways with [the_person.title], confident that her new found anal fetish will bring you a lot of pleasure in the future."
+    $ the_person.add_role(anal_fetish_role)
+    $ the_person.update_sex_skill("Anal", 6)
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
+    $ add_fuck_doll_collar_to_base_outfit(the_person)
+    $ clear_scene() #TODO does this leave you talking to the girl? If so figure out how to part ways cleanly here.
+    return True
 
 label anal_fetish_mom_intro_label():
     return False
