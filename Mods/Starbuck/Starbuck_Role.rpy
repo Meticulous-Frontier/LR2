@@ -240,6 +240,11 @@ init -1 python:
                 return True
         return False
 
+    def starbuck_is_business_partner():
+        if starbuck.shop_progress_stage >= 1:
+            return True
+        return False
+
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
     "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at vaginal sex. You ask if she has any tips or products for further improvement, even if its temporary."
