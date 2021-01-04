@@ -188,7 +188,7 @@ init -1 python:
     def fetish_anal_function_on_apply(person, add_to_log):
         if fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, get_suggest_tier(person) - 1, person):
             return
-        if person.get_opinion_score(FETISH_ANAL_OPINION_LIST[0]) >= 2 and not person.has_started_anal_fetish():
+        if person.get_opinion_score(FETISH_ANAL_OPINION_LIST[0]) >= 2 and not person.has_started_anal_fetish() and person.core_sluttiness > 60:
             if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
                 if start_anal_fetish_quest(person):
                     person.event_triggers_dict["anal_fetish_start"] = True
@@ -201,7 +201,7 @@ init -1 python:
     def fetish_breeding_function_on_apply(person, add_to_log):
         if fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person):
             return
-        if person.get_opinion_score(FETISH_BREEDING_OPINION_LIST[0]) >= 2 and not person.has_started_breeding_fetish():
+        if person.get_opinion_score(FETISH_BREEDING_OPINION_LIST[0]) >= 2 and not person.has_started_breeding_fetish() and person.core_sluttiness > 60:
             if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
                 if start_breeding_fetish_quest(person):
                     person.event_triggers_dict["breeding_fetish_start"] = True
@@ -221,7 +221,7 @@ init -1 python:
     def fetish_cum_function_on_apply(person, add_to_log):
         if fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, get_suggest_tier(person) - 1, person):
             return
-        if person.get_opinion_score(FETISH_CUM_OPINION_LIST[0]) >= 2 and not person.has_started_cum_fetish():
+        if person.get_opinion_score(FETISH_CUM_OPINION_LIST[0]) >= 2 and not person.has_started_cum_fetish() and person.core_sluttiness > 60:
             if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
                 if start_cum_fetish_quest(person):
                     person.event_triggers_dict["cum_fetish_start"] = True
