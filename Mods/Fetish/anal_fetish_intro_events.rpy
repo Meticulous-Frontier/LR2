@@ -188,7 +188,38 @@ label anal_fetish_employee_intro_label():
     $ clear_scene()
     return True
 
-label anal_fetish_family_intro_label():
+label anal_fetish_family_intro_label(the_person):
+    $ the_person.aroual = 30
+    $ the_person.draw_person(position = "standing_doggy")
+    "As you walk into the room, you notice [the_person.possessive_title]. She is bent over and appears to be reading something on her phone."
+    mc.name "Hey [the_person.title]"
+    $ the_person.draw_person(position = "back_peek")
+    "She quickly looks back at you."
+    the_person "Oh hey [the_person.mc_title]."
+    $ the_person.draw_person(position = "standing_doggy")
+    "She turns back to her phone. As you start to walk over to her, you notice she appears to be moving her hips back and forth a bit..."
+    mc.name "Looking at something interesting?"
+    the_person "You could say that."
+    "As you walk closer to her, you being to hear some of the audio her phone is playing. You hear some moaning and the sounds of skin against skin."
+    "When you are right behind her, you can hear enough. She is watching some kind of porn."
+    "You put your hands on her hips. With gentle force, you push your hips against hers. She starts to wiggle her ass up against you."
+    mc.name "Watching something good I take it. Anything you'd like to try?"
+    if the_person.has_taboo("anal_sex"):
+        the_person "Actually yeah... something we haven't really tried before."
+    else:
+        the_person "Ah, well, we've tried it before, but I've been thinking about it a lot lately."
+    "You keep rubbing yourself up against her as she watches her video. She moans as your cock gets hard and presses against her."
+    $ the_person.change_arousal (10) # 40
+    $ mc.change_arousal (10)
+    if the_person.has_breeding_fetish(): #She likes getting pregnant
+        the_person "You know I love it when we fuck and you cum deep inside me... but I was thinking maybe we could have a change of pace."
+    elif the_person.has_taboo("condomless_sex") and not the_person.has_taboo("vaginal_sex"): #you'be fucked but not bare
+        the_person "You know... what if we had sex... bare... and you could cum inside me. Without having to worry about getting me pregnant!"
+        the_person "I know we are related, but I think I know how we could get around that."
+    elif the_person.has_taboo("vaginal_sex") and not the_person.has_taboo("anal_sex"): #You've taken her ass before but not her pussy
+        the_person ""
+
+
     return False
 
 label anal_fetish_generic_intro_label(the_person):
