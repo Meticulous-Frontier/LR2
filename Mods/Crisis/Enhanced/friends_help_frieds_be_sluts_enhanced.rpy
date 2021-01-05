@@ -230,11 +230,10 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 person_one.char "Well, here are mine. Come on [person_two.title], whip 'em out!"
                             else:
                                 person_one.char "Of course."
-                                $ strip_list = person_one.outfit.get_half_off_to_tits_list()
-                                if strip_list:
-                                    $ scene_manager.strip_actor_strip_list(person_one, strip_list, half_off_instead = True)
+                                if person_one.outfit.can_half_off_to_tits():
+                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_half_off_to_tits_list(), half_off_instead = True)
                                 else: #We need to strip something off completely.
-                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_tit_strip_list(), half_off_instead = True)
+                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_tit_strip_list(), half_off_instead = False)
 
                                 if person_two.outfit.tits_visible():
                                     $ person_one.break_taboo("bare_tits")
@@ -291,8 +290,9 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 $ del the_item
 
                                 $ scene_manager.strip_actor_strip_list(person_two, strip_list, half_off_instead = half_off_instead)
-
                                 $ scene_manager.update_actor(person_one, display_transform = character_right)
+
+                                $ del strip_list
 
                                 if person_two.get_opinion_score("showing her tits") > 0:
                                     "When she has her tits out she crosses her arms in front of her in a small attempt to preserve her modesty."
@@ -476,6 +476,5 @@ label friends_help_friends_be_sluts_enhanced_label():
         del person_one
         del person_two
         del the_relationship
-        strip_list = None
         clear_scene()
     return
