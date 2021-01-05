@@ -45,6 +45,11 @@ init 2 python:
         cs.scope["pubes_color_options"] = False
         cs.scope["font_color_options"] = False
 
+    def cheat_set_company_salaries(multiplier = 1):
+        for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
+            person.salary = person.calculate_base_salary() * multiplier
+
+
 init python:
     if "keybind1" not in config.overlay_screens:
         config.overlay_screens.append("keybind1")
@@ -68,6 +73,8 @@ screen cheat_menu():
     default relation_options = True
 
     default appearance_options = True
+
+    default salary_options = False
 
     default personality_options = False
     default face_options = False
@@ -517,7 +524,35 @@ screen cheat_menu():
                                                         yfill True
                                                         style "cheat_text_style"
 
-        if editing_target is not None and type(editing_target) is not Business and type(editing_target) is not MainCharacter:
+        if editing_target and isinstance(editing_target, Business):
+            frame:
+                xoffset 400
+                yoffset 510
+                xysize (515, 520)
+                hbox:
+                    vbox:
+                        xsize 250
+                        textbutton "Salary":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if salary_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("salary_options")]
+                    vbox:
+                        xsize 250
+                        if salary_options:
+                            for x in range(-4, 5):
+                                textbutton "Set to " + str((10 + x) * 10) + "%" :
+                                    xfill True
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "cheat_text_style"
+                                    action [
+                                        Function(cheat_set_company_salaries, 1.0 + (x/10.0))
+                                    ]
+
+        if editing_target and not isinstance(editing_target, Business) and not isinstance(editing_target, MainCharacter):
             frame:
                 xoffset 400
                 yoffset 510
