@@ -5,9 +5,8 @@ init -1 python:
 
 init 2 python:
     def lazy_morning_crisis_requirement():
-        if mc_at_home() and time_of_day == 0:
-            if mc.business.is_weekend():
-                return True
+        if mc_at_home() and mc.business.is_weekend():
+            return True
         return False
 
     def lazy_morning_mod_initialization(self):
