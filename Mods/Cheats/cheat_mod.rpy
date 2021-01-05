@@ -44,6 +44,13 @@ init 2 python:
         cs.scope["pubes_options"] = False
         cs.scope["pubes_color_options"] = False
         cs.scope["font_color_options"] = False
+        cs.scope["salary_options"] = False
+        for div in cs.scope["divisions"]:
+            cs.scope["divisions"][div][1] = False
+
+    def toggle_division_visibility(division):
+        cs = renpy.current_screen()
+        cs.scope["divisions"][division][1] = not cs.scope["divisions"][division][1]
 
     def cheat_set_company_salaries(multiplier = 1):
         for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
@@ -86,6 +93,15 @@ screen cheat_menu():
     default pubes_options = False
     default pubes_color_options = False
     default font_color_options = False
+
+    default divisions = {
+        "Research" : [ mc.business.research_team, False],
+        "Production" : [ mc.business.production_team, False],
+        "Supply" : [ mc.business.supply_team, False ],
+        "Marketing" : [ mc.business.market_team, False ],
+        "HR" : [ mc.business.hr_team, False ]
+    }
+
 
     # Input management variables
     default name_select = False #Determines if the name button is currently taking an input or not
@@ -540,6 +556,17 @@ screen cheat_menu():
                                 background "#4f7ad6"
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("salary_options")]
+
+                        for div in divisions:
+                            textbutton div:
+                                style "textbutton_no_padding_highlight"
+                                text_style "cheat_text_style"
+                                xfill True
+                                if divisions[div][1]:
+                                    background "#4f7ad6"
+                                    hover_background "#4f7ad6"
+                                action [Function(cheat_collapse_menus), Function(toggle_division_visibility, div)]
+
                     vbox:
                         xsize 250
                         if salary_options:
@@ -551,6 +578,14 @@ screen cheat_menu():
                                     action [
                                         Function(cheat_set_company_salaries, 1.0 + (x/10.0))
                                     ]
+                        for div in divisions:
+                            if divisions[div][1]:
+                                for person in divisions[div][0]:
+                                    textbutton person.name + " " + person.last_name:
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+                                        action [SetScreenVariable("editing_target", person)]
 
         if editing_target and not isinstance(editing_target, Business) and not isinstance(editing_target, MainCharacter):
             frame:
