@@ -6,6 +6,8 @@ init -2:
     default persistent.use_free_memory = True   # default is clean memory every day
     default persistent.show_ntr = False     # default turn of NTR
 
+    default debug_event_notification = False    # turn on for event notifications
+
 init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")
     add_label_hijack("after_load", "update_compatibility_fix")
@@ -32,9 +34,9 @@ init -1 python:
     if renpy.variant("pc"):
         # disables renpy.free_memory() daily cleanup, thus requires enough memory to perform operations
         if persistent.memory_mode == 0:
-            config.image_cache_size_mb = 256
+            config.image_cache_size_mb = 384
         elif persistent.memory_mode == 1:
-            config.image_cache_size_mb = 512
+            config.image_cache_size_mb = 768
         else:
             config.image_cache_size_mb = 1536
     else:
