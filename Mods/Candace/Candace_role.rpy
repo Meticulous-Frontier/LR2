@@ -165,16 +165,6 @@ init 2 python:
 
         return
 
-    def get_police_uniform_outfit():
-        outfit = Outfit("Police Uniform")
-        outfit.add_upper(lace_bra.get_copy(), [.15, .15, .15, .95])
-        outfit.add_upper(dress_shirt.get_copy(), [.0, .0, .4, 1.0])
-        outfit.add_lower(lace_panties.get_copy(), [.15, .15, .15, .95])
-        outfit.add_lower(suitpants.get_copy(), [.15, .15, .15, 1.0])
-        outfit.add_feet(tall_boots.get_copy(), [.0, .0, .0, .95])
-        outfit.add_feet(short_socks.get_copy(), [.95, .95, .95, .95])
-        return outfit
-
 label candace_meet_at_office_store_label(the_person):
     "As you browse some office furniture for your business, out of the corner of your eye you spot a vaguely familiar figure."
     $ the_person.draw_person()
@@ -613,8 +603,6 @@ label candace_midnight_wakeup_label():
     python:
         the_person = candace
         police_chief = get_police_chief()
-        police_chief.apply_outfit(get_police_uniform_outfit())
-
 
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
@@ -625,27 +613,27 @@ label candace_midnight_wakeup_label():
     "Candace? Who do you know named Candace?"
     mc.name "I'm sorry I'm not sure who that is..."
     police_chief "She also goes by Candi."
-    "Oh shit! What is [the_person.title] doing at the police department?"
+    "Oh shit! What is [the_person.name] doing at the police department?"
     mc.name "Oh! Is she okay?"
     police_chief "She's fine. She got swept up last night in a prostitution sting. Apparently she was going around a strip club last night offering services..."
     police_chief "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
     police_chief "We were just gonna send her off, but I didn't feel good about her walking home alone this time of night so I asked if she could call anyone and she gave me your name and number."
-    "That... Sounds exactly like something [the_person.title] would do."
+    "That... Sounds exactly like something [the_person.name] would do."
     mc.name "Okay... I'll be there in 20 minutes."
-    "You hang up the phone and take a minute. [the_person.title], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
+    "You hang up the phone and take a minute. [the_person.name], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
     "You get up and quickly get yourself dressed. You leave a quick note on the counter in case anyone notices you are gone in the middle of the night and head out. It's a fairly short walk to the police station."
     #Change to police station
     $ police_station.show_background()
     "As you walk in, you walk up to the front desk. There's a good looking girl behind the desk. She smiles when she greets you."
     "?????" "Hello. Can I help you?"
     mc.name "Yeah. I'm hear to pick up Candace."
-    "?????" "Ahh. Sure thing. First though, the chief wants to to you in her office, privately..."
+    "?????" "Ahh. Sure thing. First though, the chief wants to talk to you in her office, privately..."
     mc.name "Okay..."
     "?????" "Her office is right down the hall there."
     "The kind officer points you the way to go. You head down the hall, take a breath and knock."
-    police_chief "It's open"
+    police_chief "It's open."
     "You let yourself in."
-    police_chief "Close it"
+    police_chief "Close the door, please."
     "You close the door behind you. Behind the desk is an official looking officer. She greets you with a scowl."
     $ police_chief.draw_person(position = "sitting", emotion = "angry")
     police_chief "So you must be here to pick up that crazy bitch, Candace."
@@ -654,30 +642,33 @@ label candace_midnight_wakeup_label():
     "Oh boy, this is going to be interesting..."
     police_chief "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
     police_chief "When he said no and walked away, he could hear her making passes at the other girls in the cell."
-    police_chief "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing. She says she doesn't know, so I ask about friends and she says she just has a couple..."
+    police_chief "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing."
+    police_chief "She says she doesn't know, so I ask about friends and she says she just has a couple..."
     police_chief "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
     "You take a moment to consider how to answer this. You are going to need to proceed carefully."
     mc.name "Well, when I met Candace, she was in a bad relationship. The guy she was with was taking advantage of her."
     mc.name "I did some work on her background, and although I'm not sure where, I think she may have been involved in some sort of pharmaceutical experiment that made her like that."
     mc.name "I helped her get out of the relationship and set her up with a job at my business, trying to help her get independent again."
-    police_chief "Hmm. I see. That's unfortunate, but she doesn't seem to understand that she can't just wander around downtown hittin' on everything with a pulse. She's gonna wind up getting kidnapped... Or worse."
+    police_chief "Hmm. I see. That's unfortunate, but she doesn't seem to understand that she can't just wander around downtown hitting on everything with a pulse. She's gonna wind up getting kidnapped... Or worse."
     mc.name "I agree. To be honest, I didn't realize she had been doing that."
     "The chief ponders for a few moments."
     police_chief "Look... I can't force you to do this... But it is something you might consider. It's clear to me that Candace can't really take care of herself."
-    police_chief "We can't find any records pertaining to family in the area either. If you put in a motion with the local courts filing for her power of conservatorship on the grounds that she is unable to function independently, I'd be willing to sign that in support."
-    police_chief "With that, you could have her sent somewhere better designed to take of folks like her. It'd be for her own good."
+    police_chief "We can't find any records pertaining to family in the area either."
+    police_chief "If you put in a motion with the local courts filing for her power of conservatorship on the grounds that she is unable to function independently, I'd be willing to sign that in support."
+    police_chief "With that, you could have her sent somewhere better designed to take care of folks like her. It'd be for her own good."
     mc.name "That seems... extreme? Maybe she would be willing to move in with a friend or something?"
-    police_chief "Yeah... Maybe... Look, you don't HAVE to do anything. But for her sake, you should consider doing SOMETHING. Otherwise, if she winds up back in here, I won't be able to just let her go, I'll have to get her committed somewhere."
+    police_chief "Yeah... Maybe... Look, you don't HAVE to do anything. But for her sake, you should consider doing SOMETHING."
+    police_chief "Otherwise, if she winds up back in here, I won't be able to just let her go, I'll have to get her committed somewhere."
     mc.name "I understand ma'am."
     police_chief "Alright. Well, good luck. I'll call down to lockup and have them bring her up."
     $ clear_scene()
-    "You excuse yourself from the police chief's office. As you are walking back to the entrance, you start thinking about what you could do for [the_person.title]. Maybe she could move in with someone?"
-    "She has been pretty close with [starbuck.title] recently. Maybe she would be willing to have a roommate?"
-    "Maybe you could even have her move in with you? It might be a little cramped, but you think if you explain things to [mom.title] and [lily.title] they would understand."
+    "You excuse yourself from the police chief's office. As you are walking back to the entrance, you start thinking about what you could do for [the_person.name]. Maybe she could move in with someone?"
+    "She has been pretty close with [starbuck.name] recently. Maybe she would be willing to have a roommate?"
+    "Maybe you could even have her move in with you? It might be a little cramped, but you think if you explain things to Mom and [lily.name] they would understand."
     "You think a little more. What about the bimboism itself? Maybe there is some way it could be reversed? You've made some incredible strides recently with the serums at your business, but you've never considered trying to undo their effects."
-    "Is such a thing possible? Maybe you could talk to [mc.business.head_researcher.title] about it?"
+    "Is such a thing possible? Maybe you could talk to [mc.business.head_researcher.name] about it?"
     $ the_person.draw_person()
-    "As you stand at the entrance, lost in thought, an officer brings [the_person.title] out."
+    "As you stand at the entrance, lost in thought, an officer brings [the_person.name] out."
     if the_person.love > 20:
         the_person "Hey boss! Sorry to have them call you. They kept asking me who would come and get me and you were the only one I could think of!"
     elif the_person.love < 20:
@@ -692,7 +683,7 @@ label candace_midnight_wakeup_label():
     the_person "Its been a frustrating night... I just thought, like, maybe we could..."
     mc.name "Let's get back to your place first, okay?"
     the_person "Aww, okay."
-    "It's pretty clear you that if you don't do anything, [the_person.title] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
+    "It's pretty clear you that if you don't do anything, [the_person.name] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
     $ mc.change_location(the_person.home)
@@ -711,7 +702,10 @@ label candace_midnight_wakeup_label():
             call candace_love_path_intro_label from _set_candace_to_love_path
         "Do nothing \n{color=#ff0000}{size=18}Abandon path \n Not yet written{/size}{/color} (disabled)":
             pass
-    $ clear_scene()
+
+    python:
+        clear_scene()
+        del police_chief
     return
 
 label candace_love_path_intro_label():
@@ -912,7 +906,7 @@ label candace_begin_cure_research_label(the_person):
     "She follows you to your office. You close the door in the way in, and you both have a seat."
     $ ceo_office.show_background()
     $ scene_manager.add_actor(the_person, position = "sitting")
-    mc.name "I need to talk to you about [candace.title]. Before she came here, she worked at another pharmaceutical company similar to this one."
+    mc.name "I need to talk to you about [candace.name]. Before she came here, she worked at another pharmaceutical company similar to this one."
     #[If you have already researched the bimbo serum]
     if mc.business.is_trait_researched(permanent_bimbo):
         mc.name "I think she may have been involved in a trial in something similar to our bimbo serum."
@@ -932,7 +926,7 @@ label candace_begin_cure_research_label(the_person):
         the_person "Wow. Well, I live alone, why don't you have her move in with me for a bit? I could put her in my guest room."
     mc.name "[the_person.name], you're amazing. Let me call her in and we'll talk to her."
     "You call [candace.name] and ask her to come to your office. In a minute there's a knock on your door."
-    mc.name "Come in"
+    mc.name "Come in."
     $ scene_manager.add_actor(candace, display_transform = character_left_flipped)
     candace "You need something?"
     mc.name "Have a seat."
@@ -951,12 +945,12 @@ label candace_begin_cure_research_label(the_person):
     mc.name "Don't worry, it would only be temporary. A couple weeks at most."
     mc.name "Think of it, like a slumber party."
     candace "Oh! A slumber party! That will be like, so much fun!"
-    "[the_person.name] gives you a little glare, but she goes along with it."
+    "[the_person.name] gives you a wink, seeing that [candace.name] is going along with the plan."
     the_person "I'll come over after work today and help you pack a few things."
     mc.name "Good. Let me know if you either of you need anything."
     "With that, you dismiss the meeting. Hopefully [the_person.name] will be able to find some way to reverse the effects of the serum that made [candace.name] this way."
-    $ candace.set_schedule(the_location = the_person.home, times = [0,4])
     $ candace.event_triggers_dict["living_with_stephanie"] = day
+    $ candace.set_schedule(the_location = the_person.home, times = [0,4])
     $ mc.business.add_mandatory_crisis(candace_anti_bimbo_serum)
     $ scene_manager.clear_scene()
     $ mc.location.show_background()
@@ -976,7 +970,7 @@ label candace_anti_bimbo_serum_label():
     the_person "But then I realized, I was doing it all wrong."
     mc.name "Oh?"
     the_person "Yeah! You don't need to UN-do all the previous serums effects, I just needed to create new compounds that counter the undesirable side effects."
-    the_person "Specifically for [candace.title], the effect that makes her a total dumbass, the loss of her intelligence."
+    the_person "Specifically for [candace.name], the effect that makes her a total dumbass, the loss of her intelligence."
     mc.name "And you were successful in creating something to do that?"
     the_person "Well... Kind of. I have a pretty good idea of how to do that, but I'm going to need help researching it. I added my idea to the serum trait database."
     if not mc.business.is_trait_researched(permanent_bimbo):
@@ -985,7 +979,7 @@ label candace_anti_bimbo_serum_label():
     the_person "If someone were to accidentally ingest the bimbo serum or something, this could at least counteract the effect on their mental state and personality."
     mc.name "That sounds very useful. Let me think about it and I'll swing by research later if I decide to have the research department focus on it."
     if the_person.sluttiness > 60:
-        the_person "Okay... In the mean time, [candace.title] can feel free to keep staying with me. We've, umm, had a lot of fun, living together the last few weeks!"
+        the_person "Okay... In the mean time, [candace.name] can feel free to keep staying with me. We've, umm, had a lot of fun, living together the last few weeks!"
         "You remember the night you spent with her. You are certain they've been having lots of fun together."
         mc.name "Sounds good, I appreciate it."
         $ town_relationships.update_relationship(the_person, candace, "Best Friend")
@@ -1103,6 +1097,7 @@ label candace_cure_bimbo_label():
     "It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
     #TODO link up the one week event
     $ candace.event_triggers_dict["sex_record_snapshot"] = candace.sex_record.copy() #This should take a snapshot of our sex record with candace so we can compare it later
+    $ candace.set_schedule(the_location = candace.home, times = [0,4])
     $ mc.business.add_mandatory_crisis(candace_meet_doctor_candace)
     return
 
@@ -1408,13 +1403,19 @@ init 3 python:
 
 
     def get_police_chief():
-        # use identifier in dictionary instead of PERSON object
-        if mc.business.event_triggers_dict.get("Police_Chief", None):
-            return mc.business.event_triggers_dict.get("Police_Chief", None)
-
         police_chief = make_person(force_random = True)
         police_chief.set_possessive_title("the police chief")
-        police_chief.set_mc_title(mc.name)
-        police_chief.set_title("Officer [police_chief.last_name]")
-        mc.business.event_triggers_dict["Police_Chief"] = police_chief
+        police_chief.set_mc_title("Mr." + mc.last_name)
+        police_chief.set_title("Officer " + police_chief.last_name)
+        police_chief.outfit = get_police_uniform_outfit()
         return police_chief
+
+    def get_police_uniform_outfit():
+        outfit = Outfit("Police Uniform")
+        outfit.add_upper(lace_bra.get_copy(), [.15, .15, .15, .95])
+        outfit.add_upper(dress_shirt.get_copy(), [.0, .0, .4, 1.0])
+        outfit.add_lower(lace_panties.get_copy(), [.15, .15, .15, .95])
+        outfit.add_lower(suitpants.get_copy(), [.15, .15, .15, 1.0])
+        outfit.add_feet(tall_boots.get_copy(), [.0, .0, .0, .95])
+        outfit.add_feet(short_socks.get_copy(), [.95, .95, .95, .95])
+        return outfit
