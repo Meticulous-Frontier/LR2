@@ -702,6 +702,13 @@ init -1 python:
 
     Person.strip_outfit = strip_outfit
 
+    def strip_outfit_strip_list(self, strip_list, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, half_off_instead = False):
+        for item in strip_list:
+            self.draw_animated_removal(item, position = position, emotion = emotion, lighting = lighting, display_transform = display_transform, half_off_instead = half_off_instead)
+            renpy.pause(delay)
+
+    Person.strip_outfit_strip_list = strip_outfit_strip_list
+
     def choose_strip_clothing_item(self):
         clothing = None
         # If she has a preference (even a least-bad preference) she'll strip that down first.
