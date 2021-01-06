@@ -311,7 +311,7 @@ label SB_fetish_cum_dosage_label():
             "[the_person.possessive_title] walks over to you and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already too busy stroking your cock."
             $ the_person.draw_person(position = "blowjob")
             ###cum Scene, standing variant###
-            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC20
+            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, skip_intro = True, position_locked = True) from _call_fuck_person_SBC20
             the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             the_person.char "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
@@ -358,7 +358,7 @@ label SB_fetish_cum_dosage_non_employee_label():
             the_person.char "Hey [the_person.mc_title], I came as fast as I could."
             "[the_person.possessive_title] pushes you inside and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already fishing your cock out of your pants."
             $ the_person.draw_person(position = "blowjob")
-            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
+            call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, skip_intro = True, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
             the_person.char "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             $ the_person.apply_planned_outfit()
