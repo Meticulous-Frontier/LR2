@@ -1669,7 +1669,7 @@ label erica_weekly_yoga_label(the_person):
         if erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
             the_person.char "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
             the_person.char "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
-            the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au natural."
+            the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au naturel."
             yoga_assistant.char "Because the office is currently closed, this technically falls outside of the employee uniform requirements..."
             yoga_assistant.char "But we decided that it would probably be better to run it by you before me make it official. It IS your office building, after all!"
             "Holy fuck, they want to do yoga in the nude. You rack your brain, trying to think of a logical reason to say no. Only one thing comes to mind."
