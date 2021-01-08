@@ -409,7 +409,7 @@ init -1 python:
         sarah_friend.set_title(sarah_friend.name)
         sarah_friend.set_mc_title(mc.name)
         sarah_friend.set_possessive_title(get_random_possessive_title(the_person))
-        sarah_friend.set_schedule(purgatory, times = [0, 1, 2, 3, 4])
+        sarah_friend.set_schedule(the_person.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
         sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
         town_relationships.update_relationship(sarah, sarah_friend, "Friend")
         return sarah_friend
