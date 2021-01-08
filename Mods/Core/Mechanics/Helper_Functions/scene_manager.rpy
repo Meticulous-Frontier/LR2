@@ -126,9 +126,9 @@ init -2 python:
             elif __builtin__.len(visible_actors) == 1:
                 renpy.show_screen("person_info_ui", visible_actors[0].person)
 
-        def draw_scene(self):
+        def draw_scene(self, exclude_list = []):
             self.draw_info_ui()
-            for actor in sorted([x for x in self.actors if x.visible], key = lambda x: x.z_order):
+            for actor in sorted([x for x in self.actors if x.visible and x not in exclude_list], key = lambda x: x.z_order):
                 actor.draw_actor()
 
         # update each actor and draw scene
