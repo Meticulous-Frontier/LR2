@@ -21,19 +21,24 @@ init -2 python:
         def add_group(self, people, position = None, emotion = None, special_modifier = None, lighting = None, z_order = None):
             xoffset = 0.1
             for person in people:
-                self.actors.append(Actor(person, position, emotion, special_modifier, lighting, character_center(xoffset), z_order))
+                self.add_actor(person, position, emotion, special_modifier, lighting, character_center(xoffset), z_order)
                 xoffset -= .1
             self.draw_scene()
 
-        def add_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
-            self.actors.append(Actor(person, position, emotion, special_modifier, lighting, display_transform, z_order))
-            self.draw_scene()
+        def add_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None, visible = True):
+            actor = find_in_list(lambda x: x.person is person, self.actors)
+            if actor:   # we have an existing actor object, so use that
+                self.show_actor(actor.person, position, emotion, special_modifier, lighting, display_transform, z_order)
+            else:       # add person as actor
+                self.actors.append(Actor(person, position, emotion, special_modifier, lighting, display_transform, z_order, visible))
+                self.draw_scene()
 
         # Removes all actors from the scene
         def clear_scene(self, reset_actor = True):
             people_in_scene = [actor.person for actor in self.actors]
             for person in people_in_scene:
                 self.remove_actor(person, reset_actor = reset_actor)
+            clear_scene()
 
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
             actor = find_in_list(lambda x: x.person is person, self.actors)
@@ -88,27 +93,42 @@ init -2 python:
 
         # removes specific actor from scene
         def remove_actor(self, person, reset_actor = True):
-            actor_to_remove = find_in_list(lambda x: x.person is person, self.actors)
-            if not actor_to_remove is None:
+            actor = find_in_list(lambda x: x.person is person, self.actors)
+            if not actor is None:
                 if reset_actor:
                     # reset actor clothing
-                    actor_to_remove.person.apply_planned_outfit()
-                self.actors.remove(actor_to_remove)
+                    actor.person.apply_planned_outfit()
+                self.actors.remove(actor)
                 self.draw_scene()
+
+        def hide_actor(self, person):
+            actor = find_in_list(lambda x: x.person is person, self.actors)
+            if actor:
+                actor.visible = False
+                self.draw_scene()
+
+        def show_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
+            actor = find_in_list(lambda x: x.person is person, self.actors)
+            if actor:
+                actor.visible = True
+                self.update_actor(actor.person, position, emotion, special_modifier, lighting, display_transform, z_order)
+            else:
+                self.add_actor(person, position, emotion, special_modifier, lighting, display_transform, z_order)
 
         def draw_info_ui(self):
             clear_scene()
-            if __builtin__.len(self.actors) > 3:
+            visible_actors = [x for x in self.actors if x.visible]
+            if __builtin__.len(visible_actors) > 3:
                 return  # we cannot display more info than 3
 
-            if __builtin__.len(self.actors) > 1:
-                renpy.show_screen("multi_person_info_ui", self.actors)
-            elif __builtin__.len(self.actors) == 1:
-                renpy.show_screen("person_info_ui", self.actors[0].person)
+            if __builtin__.len(visible_actors) > 1:
+                renpy.show_screen("multi_person_info_ui", visible_actors)
+            elif __builtin__.len(visible_actors) == 1:
+                renpy.show_screen("person_info_ui", visible_actors[0].person)
 
         def draw_scene(self):
             self.draw_info_ui()
-            for actor in sorted(self.actors, key = lambda x: x.z_order):
+            for actor in sorted([x for x in self.actors if x.visible], key = lambda x: x.z_order):
                 actor.draw_actor()
 
         # update each actor and draw scene
@@ -124,17 +144,9 @@ init -2 python:
                     actor.lighting = lighting
             self.draw_scene()
 
-        # helper function for strip and animated removal functions
-        def draw_scene_without(self, person):
-            self.draw_info_ui()
-            actor_missing = find_in_list(lambda x: x.person is person, self.actors)
-            for actor in self.actors:
-                if not actor is actor_missing:
-                    actor.draw_actor()
-
     # z_order determines the order in which the actors are drawn, low number first, high number later
     class Actor(renpy.store.object):
-        def __init__(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
+        def __init__(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None, visible = True):
             self.person = person
             self.position = position
             self.emotion = emotion
@@ -143,6 +155,7 @@ init -2 python:
             self.display_transform = display_transform
             self.sort_order = 2
             self.z_order = 0
+            self.visible = visible
 
             if position is None:
                 self.position = person.idle_pose

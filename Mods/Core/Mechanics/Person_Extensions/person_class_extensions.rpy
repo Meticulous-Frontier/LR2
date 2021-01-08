@@ -1246,7 +1246,7 @@ init -1 python:
             if scene_manager is None and show_person_info:
                 renpy.show_screen("person_info_ui",self)
             else:   # when we are called from the scene manager we have to draw the other characters
-                scene_manager.draw_scene_without(self)
+                scene_manager.draw_scene(exclude_list = [self])
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
