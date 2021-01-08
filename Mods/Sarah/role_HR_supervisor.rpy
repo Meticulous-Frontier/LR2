@@ -590,7 +590,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Alright, let me go get her."
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     $ ceo_office.show_background()
     #$ clear_scene()
     #$ scene_manager.clear_scene()
@@ -603,7 +603,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     mc.name "Hello [person_choice.title], come in and take a seat."
 
     $ scene_manager.update_actor(person_choice, position = "sitting")
-    $ scene_manager.add_actor(the_person, position = "stand4")
+    $ scene_manager.show_actor(the_person)
 
     if the_person.sluttiness > 80:
         "You notice that [the_person.title] locks the door as she enters your office."

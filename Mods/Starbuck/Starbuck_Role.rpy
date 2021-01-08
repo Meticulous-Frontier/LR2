@@ -1943,7 +1943,7 @@ label starbuck_candace_product_demo_label(the_person):
     mc.name "I tell you what. I'm going to walk with her around the store for a bit to get her acclimated, then we'll see about the toy in the back..."
     starbuck "Okay! I'll be up at the counter. Have fun!"
     "As [starbuck.possessive_title] heads up to the front of the store, you walk quickly and catch up with [the_person.title]. At the moment, she is going thru a selection of crotchless panties."
-    $ scene_manager.remove_actor(starbuck, reset_actor = False)
+    $ scene_manager.hide_actor(starbuck)
     $ scene_manager.update_actor(the_person, position = "stand3")
     the_person "Oh! Boss! Look at these! If I wore these to work with a skirt, you could just bend me over anywhere! You wouldn't even have to like, move my panties over or anything!"
     "A couple are browsing a couple bins away and hear her. The girl starts laughing and the guy gives you a grin and a thumbs up."
@@ -1969,7 +1969,7 @@ label starbuck_candace_product_demo_label(the_person):
     "Oh my. You hadn't considered trying to get both of them in the video some how. That would be a damn good video!"
     mc.name "That's a great idea... I'm not sure! Why don't we go talk to her!"
     the_person "Okay [the_person.mc_title]!"
-    $ scene_manager.add_actor(starbuck, display_transform = character_center)
+    $ scene_manager.show_actor(starbuck, display_transform = character_center)
     "You walk with [the_person.title] up to the front of the store where [starbuck.possessive_title] is at. She looks at you two and hesitantly starts to ask."
     starbuck "Hey, so umm... Did [starbuck.mc_title] talk to you about..."
     the_person "I'll do it. Are you going to be in it too?"
@@ -1981,7 +1981,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "Wow... Okay... Are you sure? The size of this thing is something else!"
     the_person "Damn right! Let's do it!"
     starbuck "Okay. [starbuck.mc_title], want to take her in the back room and maybe start getting her lubed up a bit? I'll see if I can rig something."
-    $ scene_manager.remove_actor(starbuck, reset_actor = False)
+    $ scene_manager.hide_actor(starbuck)
     "You walk with [the_person.title] to the back. She starts to strip down as you grab some lube."
     $ scene_manager.strip_actor_outfit(the_person)
     $ scene_manager.update_actor(the_person, position = "missionary")
@@ -1996,7 +1996,7 @@ label starbuck_candace_product_demo_label(the_person):
     # Template Holder for something like dark brown leather panties to Starbucks outfit? To make it look like she has something on#
     $ starbuck.outfit.add_lower(booty_shorts.get_copy(), [.15, .15, .15, .95])
     $ starbuck.outfit.add_feet(thigh_high_boots.get_copy(), [.15, .15, .15, .95])
-    $ scene_manager.add_actor(starbuck, display_transform = character_center)
+    $ scene_manager.show_actor(starbuck, display_transform = character_center)
     "[the_person.title] is starting to moan when [starbuck.possessive_title] walks into the room. She's rigged the enormous double dick to some leather panties with some straps and velcro."
     starbuck "Glad to hear you are getting warmed up. Took me a bit to rig this. It's not perfect, but I think it will work!"
     the_person "Oh my God! That thing looks, like, amazing!"
