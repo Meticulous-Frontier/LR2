@@ -28,7 +28,7 @@ init 2 python:
     def cheat_appearance():
         cs = renpy.current_screen()
         editing_target = cs.scope["editing_target"]
-        editing_target.expression_images = Expression("default", editing_target.skin, editing_target.face_style)
+        #editing_target.expression_images = Expression("default", editing_target.skin, editing_target.face_style)
         editing_target.draw_person()
         return
 
@@ -175,7 +175,7 @@ screen cheat_menu():
             if "list_of_extra_personalities" in globals():
                 for x in list_of_extra_personalities: available_personalities[x.personality_type_prefix] = x
 
-    default available_faces = list_of_faces
+    default available_faces = sorted(list_of_faces, key = lambda x: int(x.split("_")[1]))
     default available_body_types = list_of_body_types
     default available_breast_sizes = [x[0] for x in list_of_tits]
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
@@ -816,7 +816,7 @@ screen cheat_menu():
                                 vbox:
                                     for x in available_hair_colours:
                                         if hasattr(editing_target, "hair_colour"):
-                                            textbutton str(x[0]):
+                                            textbutton str(x[0]).title():
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "cheat_text_style"
@@ -859,7 +859,7 @@ screen cheat_menu():
                                         $ color = x[1]
                                         $ color[3] = 1
                                         if hasattr(editing_target, "pubes_colour"):
-                                            textbutton str(x[0]):
+                                            textbutton str(x[0]).title():
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "cheat_text_style"

@@ -89,7 +89,7 @@ init -1 python:
         self.char = None
         self.body_images = None
         self.face_style = None
-        self.expression_images = None
+        #self.expression_images = None
         self.hair_colour = None
         self.hair_style = None
         self.pubes_style = None
@@ -285,7 +285,7 @@ init -1 python:
             self.body_images = tan_skin
         elif self.skin == "black":
             self.body_images = black_skin
-        self.expression_images = Expression("default", self.skin, self.face_style)
+        #self.expression_images = Expression("default", self.skin, self.face_style)
         return
     Person.match_skin = match_skin
 
