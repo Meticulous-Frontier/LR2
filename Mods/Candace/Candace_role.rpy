@@ -564,7 +564,7 @@ label candace_overhear_supply_order_label(the_person):
     the_person.char "Oh? That's good!"
     mc.name "Yeah, I'm just curious. Why did you turn down the discount? If they are offering to discount the product..."
     the_person.char "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
-    the_person.char "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like the owe me!"
+    the_person.char "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like they owe me!"
     mc.name "I'm sure that if you accepted their offer of a discount, they would still send you dick pics."
     "She thinks about what you said for a bit."
     the_person.char "I don't know... are you sure?"
