@@ -530,6 +530,8 @@ label cougar_flirt_response_high(the_person):
                 else:
                     "You answer with a kiss. She closes her eyes and leans her body against yours."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_high_1
+                $ the_person.call_dialogue("sex_review", the_report = _return)
+                $ the_person.review_outfit()
 
             "Just flirt":
                 mc.name "I'll just have to figure out how to get you alone then. Any thoughts?"
@@ -567,6 +569,8 @@ label cougar_flirt_response_high(the_person):
                 else:
                     "When you lean in and kiss her she responds by pressing her body tight against you."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_high_2
+                $ the_person.call_dialogue("sex_review", the_report = _return)
+                $ the_person.review_outfit()
 
             "Just flirt":
                 $ the_person.draw_person()
@@ -594,6 +598,8 @@ label cougar_flirt_response_girlfriend(the_person):
                     the_person.char "Oh, a few things. Let's start with this..."
                     "She leans in and kisses you passionately while rubbing her body against you."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_girlfriend_1
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
+                    $ the_person.review_outfit()
 
                 "Just flirt":
                     mc.name "Aw, you're going to make me wait? That's so cruel."
@@ -613,6 +619,8 @@ label cougar_flirt_response_girlfriend(the_person):
                     "You respond by putting your arm around her waist and pulling her tight against you."
                     "You kiss her, and she eagerly grinds her body against you."
                     call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_girlfriend_2
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
+                    $ the_person.review_outfit()
 
                 "Just flirt":
                     mc.name "It was very nice. I've got some other nice things for you to kiss too, if you'd like."
@@ -635,6 +643,8 @@ label cougar_flirt_response_girlfriend(the_person):
                 "You put your arm around her waist and pull her against you, returning her sensual kiss."
                 "She presses her body against you and hugs you back. Her hands run down your hips and grab at your ass as you make out."
                 call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_girlfriend_3
+                $ the_person.call_dialogue("sex_review", the_report = _return)
+                $ the_person.review_outfit()
 
             "Just flirt":
                 "You reach around [the_person.title] and place a hand on her ass, rubbing it gently. She sighs and leans her body against you."
@@ -660,6 +670,8 @@ label cougar_flirt_response_affair(the_person):
                     "Neither of you say anything as you put your hands around her and pull her into a tight embrace."
                     "You kiss her, slowly and sensually. She moans and presses her body against you in return."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_1
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
+                    $ the_person.review_outfit()
 
                 "Just flirt":
                     mc.name "Well that would just be cruel of me..."
@@ -685,6 +697,8 @@ label cougar_flirt_response_affair(the_person):
                 "Then you pull her tight against you, squeezing her tight butt. She sighs happily and starts to kiss your neck."
                 "You massage her ass for a moment, then spin her around and cup a tit with one hand. You move your other hand down to caress her inner thigh."
                 call fuck_person(the_person, start_position = standing_grope, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_2
+                $ the_person.call_dialogue("sex_review", the_report = _return)
+                $ the_person.review_outfit()
 
             "Just flirt":
                 mc.name "I want to, but I'm going to have to wait until we have more time together for that."

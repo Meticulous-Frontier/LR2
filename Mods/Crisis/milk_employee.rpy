@@ -103,6 +103,7 @@ label milk_employee_crisis_label():
             "Keep groping her":
                 mc.name "I don't think I want to stop yet."
                 call fuck_person(the_person, start_position = standing_grope ) from _milking_cowgirl_02
+                $ the_person.call_dialogue("sex_review", the_report = _return)
             "Let her go":
                 "You hesitantly let go of her body."
 

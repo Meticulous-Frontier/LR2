@@ -1986,6 +1986,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             $ the_person.change_arousal(20)
             "All she can do is cling to you as your start to fuck her."
             call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_fuck_after_yoga_01
+            $ the_person.call_dialogue("sex_review", the_report = _return)
 
         "Fuck her against the wall (disabled) " if the_person.sluttiness < 70:
             pass

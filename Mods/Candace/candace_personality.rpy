@@ -461,6 +461,7 @@ label candace_flirt_response_high(the_person):
                     pass
                 "You kiss her, and she responds by leaning her body against you eagerly."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_person_55123
+                $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
             "Just flirt":
@@ -494,6 +495,7 @@ label candace_flirt_response_high(the_person):
                 else:
                     "You put your arm around [the_person.title]'s waist and pull her close. She leans her body against you eagerly as you kiss her."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_56123
+                $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
             "Just flirt":

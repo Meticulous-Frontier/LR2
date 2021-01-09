@@ -372,6 +372,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
     else:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = []
+        $ report_log["was_public"] = not private
 
     if skip_intro:  #If we are alrady having sex, using whatever condom status presently is
         $ using_condom = mc.condom
