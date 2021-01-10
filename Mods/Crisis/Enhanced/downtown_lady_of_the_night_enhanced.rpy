@@ -33,6 +33,7 @@ label lady_of_the_night_label_enhanced():
                 the_person.char "Maybe I should be paying you... Whew!"
 
             $ the_person.review_outfit()
+            $ the_person.draw_person()
 
             the_person.char "It's been fun, if you ever see me around maybe we can do this again."
             "She gives you a peck on the cheek, then turns and struts off into the night."
@@ -47,4 +48,4 @@ label lady_of_the_night_label_enhanced():
             $ the_person.remove_person_from_game()
 
     $ clear_scene()
-    return    
+    return
