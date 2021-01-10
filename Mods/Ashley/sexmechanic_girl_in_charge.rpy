@@ -374,6 +374,8 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ report_log["positions_used"] = []
         $ report_log["was_public"] = not private
 
+    $ creampie_counter = the_person.sex_record.get("Vaginal Creampies",0)
+
     if skip_intro:  #If we are alrady having sex, using whatever condom status presently is
         $ using_condom = mc.condom
     else:

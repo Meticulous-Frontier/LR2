@@ -323,6 +323,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = [] #This is a list, not an int.
 
+    $ creampie_counter = the_person.sex_record.get("Vaginal Creampies",0)
+
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
