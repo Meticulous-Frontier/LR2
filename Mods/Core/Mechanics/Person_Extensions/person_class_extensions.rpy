@@ -1691,6 +1691,11 @@ init -1 python:
 
     Person.get_lower_top_layer = person_get_lower_top_layer
 
+    def person_get_feet_top_layer(self):
+        return self.outfit.get_feet_top_layer()
+
+    Person.get_feet_top_layer = person_get_feet_top_layer
+
     def person_restore_all_clothing(self):
         return self.outfit.restore_all_clothing()
 
