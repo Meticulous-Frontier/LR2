@@ -28,7 +28,7 @@ init 2 python:
     def cheat_appearance():
         cs = renpy.current_screen()
         editing_target = cs.scope["editing_target"]
-        editing_target.expression_images = Expression("default", editing_target.skin, editing_target.face_style)
+        #editing_target.expression_images = Expression("default", editing_target.skin, editing_target.face_style)
         editing_target.draw_person()
         return
 
@@ -44,6 +44,18 @@ init 2 python:
         cs.scope["pubes_options"] = False
         cs.scope["pubes_color_options"] = False
         cs.scope["font_color_options"] = False
+        cs.scope["salary_options"] = False
+        for div in cs.scope["divisions"]:
+            cs.scope["divisions"][div][1] = False
+
+    def toggle_division_visibility(division):
+        cs = renpy.current_screen()
+        cs.scope["divisions"][division][1] = not cs.scope["divisions"][division][1]
+
+    def cheat_set_company_salaries(multiplier = 1):
+        for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
+            person.salary = person.calculate_base_salary() * multiplier
+
 
 init python:
     if "keybind1" not in config.overlay_screens:
@@ -69,6 +81,8 @@ screen cheat_menu():
 
     default appearance_options = True
 
+    default salary_options = False
+
     default personality_options = False
     default face_options = False
     default skin_options = False
@@ -79,6 +93,15 @@ screen cheat_menu():
     default pubes_options = False
     default pubes_color_options = False
     default font_color_options = False
+
+    default divisions = {
+        "Research" : [ mc.business.research_team, False],
+        "Production" : [ mc.business.production_team, False],
+        "Supply" : [ mc.business.supply_team, False ],
+        "Marketing" : [ mc.business.market_team, False ],
+        "HR" : [ mc.business.hr_team, False ]
+    }
+
 
     # Input management variables
     default name_select = False #Determines if the name button is currently taking an input or not
@@ -152,7 +175,7 @@ screen cheat_menu():
             if "list_of_extra_personalities" in globals():
                 for x in list_of_extra_personalities: available_personalities[x.personality_type_prefix] = x
 
-    default available_faces = list_of_faces
+    default available_faces = sorted(list_of_faces, key = lambda x: int(x.split("_")[1]))
     default available_body_types = list_of_body_types
     default available_breast_sizes = [x[0] for x in list_of_tits]
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
@@ -517,7 +540,54 @@ screen cheat_menu():
                                                         yfill True
                                                         style "cheat_text_style"
 
-        if editing_target is not None and type(editing_target) is not Business and type(editing_target) is not MainCharacter:
+        if editing_target and isinstance(editing_target, Business):
+            frame:
+                xoffset 400
+                yoffset 510
+                xysize (515, 520)
+                hbox:
+                    vbox:
+                        xsize 250
+                        textbutton "Salary":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if salary_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("salary_options")]
+
+                        for div in divisions:
+                            textbutton div:
+                                style "textbutton_no_padding_highlight"
+                                text_style "cheat_text_style"
+                                xfill True
+                                if divisions[div][1]:
+                                    background "#4f7ad6"
+                                    hover_background "#4f7ad6"
+                                action [Function(cheat_collapse_menus), Function(toggle_division_visibility, div)]
+
+                    vbox:
+                        xsize 250
+                        if salary_options:
+                            for x in range(-4, 5):
+                                textbutton "Set to " + str((10 + x) * 10) + "%" :
+                                    xfill True
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "cheat_text_style"
+                                    action [
+                                        Function(cheat_set_company_salaries, 1.0 + (x/10.0))
+                                    ]
+                        for div in divisions:
+                            if divisions[div][1]:
+                                for person in divisions[div][0]:
+                                    textbutton person.name + " " + person.last_name:
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+                                        action [SetScreenVariable("editing_target", person)]
+
+        if editing_target and not isinstance(editing_target, Business) and not isinstance(editing_target, MainCharacter):
             frame:
                 xoffset 400
                 yoffset 510
@@ -746,7 +816,7 @@ screen cheat_menu():
                                 vbox:
                                     for x in available_hair_colours:
                                         if hasattr(editing_target, "hair_colour"):
-                                            textbutton str(x[0]):
+                                            textbutton str(x[0]).title():
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "cheat_text_style"
@@ -789,7 +859,7 @@ screen cheat_menu():
                                         $ color = x[1]
                                         $ color[3] = 1
                                         if hasattr(editing_target, "pubes_colour"):
-                                            textbutton str(x[0]):
+                                            textbutton str(x[0]).title():
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "cheat_text_style"

@@ -485,10 +485,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_two.title]":
                                 "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
-                                $ scene_manager.remove_actor(the_person_one, reset_actor = False)
+                                $ scene_manager.hide_actor(the_person_one)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
                                 call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
-                                $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
+                                $ scene_manager.show_actor(the_person_one, display_transform = character_center_flipped)
                                 $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
                             "Done for now":
@@ -507,10 +507,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_one.title]":
                                 "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
-                                $ scene_manager.remove_actor(the_person_two, reset_actor = False)
+                                $ scene_manager.hide_actor(the_person_two)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
                                 call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
-                                $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
+                                $ scene_manager.show_actor(the_person_two, display_transform = character_center_flipped)
                                 $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet

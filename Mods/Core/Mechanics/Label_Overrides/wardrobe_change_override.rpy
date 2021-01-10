@@ -25,7 +25,7 @@ label wardrobe_change_label_enhanced(the_person):
         $ clear_scene()
         call outfit_master_manager(main_selectable = True) from _call_outfit_master_manager_change_enhanced
         $ the_person.draw_person()
-        if not _return or _return == "No Return":
+        if not _return:
             mc.name "On second thought, never mind."
             return
 

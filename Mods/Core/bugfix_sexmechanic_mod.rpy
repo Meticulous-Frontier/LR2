@@ -339,6 +339,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
+    $ report_log["was_public"] = not private
 
     $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ first_round = True
@@ -577,15 +578,24 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             $ the_person.call_dialogue("sex_accept")
 
     elif the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= final_slut_requirement:
-        # She's willing to be commanded to do it. Reduce her happiness by the difference (increase arousal if she likes being submissive)
-        python:
-            happiness_drop = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #Our initial conditions mean this is a negative number
-            the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
-            the_person.discover_opinion("being submissive")
-            the_person.change_happiness(happiness_drop)
+        "[the_person.possessive_title] doesn't seem enthusiastic, but a little forceful encouragement would probably convince her."
+        menu:
+            "Order her":
+                mc.name "[the_person.title], this is going to happen."
+                python:
+                    happiness_drop = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #Our initial conditions mean this is a negative number
+                    the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
+                    the_person.discover_opinion("being submissive")
+                    the_person.change_happiness(happiness_drop)
 
-        if not the_person.has_taboo(the_taboo):
-            $ the_person.call_dialogue("sex_obedience_accept")
+                if not the_person.has_taboo(the_taboo):
+                    $ the_person.call_dialogue("sex_obedience_accept")
+
+                $ report_log["used_obedience"] = True
+                $ willing = 1
+            "Try something else":
+                mc.name "Let's try something else that you might be more comfortable with."
+                $ willing = 0
 
     elif the_person.effective_sluttiness(the_taboo) > final_slut_requirement * .6:
         # She's not willing to do it, but gives you a soft reject.

@@ -14,6 +14,19 @@ init 3304 python:
             return mistresses[0]
         return None
 
+    def strip_club_get_job_title(person):
+        if person.has_role(stripper_role):
+            return "Stripper"
+        elif person.has_role(waitress_role):
+            return "Waitress"
+        elif person.has_role(bdsm_performer_role):
+            return "BDSM Performer"
+        elif person.has_role(manager_role):
+            return "Strip Club Manager"
+        elif person.has_role(mistress_role):
+            return "Strip Club Mistress"
+        return ""
+
     def strip_club_manager_reminder_requirement():
         if day >= (get_strip_club_foreclosed_last_action_day() + 7): # the event start to trigger after 7 days MC bought the club.
             if get_strip_club_foreclosed_stage() == 5 and not strip_club_get_manager(): # the event only trigger if there's no Manager yet

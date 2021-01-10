@@ -147,6 +147,7 @@ label business_meeting_seduction(the_person):
                         $ the_person.break_taboo("sucking_cock")
 
                     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_business_meeting
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
                     return True
                 "Not now":
                     mc.name "I'm sorry [the_person.title], i've got another meeting to attend."

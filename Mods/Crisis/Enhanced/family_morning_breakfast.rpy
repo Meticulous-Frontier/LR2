@@ -26,19 +26,19 @@ label family_morning_breakfast_enhanced_label():
         mc.name "Thanks [mom.title], I'll be down in a minute."
         $ scene_manager.update_actor(mom, emotion = "happy")
         "She flashes you a smile and closes the door."
-        $ scene_manager.remove_actor(mom, reset_actor = False)
+        $ scene_manager.hide_actor(mom)
     else:
         $ scene_manager.add_actor(lily)
         "[lily.possessive_title] cracks your door open and leans in. She seems just as tired as you are."
         lily.char "Hey, I think Mom's making a family breakfast for us."
         mc.name "Thanks for letting me know [lily.title], I'll be down in a minute."
         "She nods and closes your door as she leaves."
-        $ scene_manager.remove_actor(lily, reset_actor = False)
+        $ scene_manager.hide(lily)
 
     "You get up, get dressed, and head for the kitchen."
     $ mc.change_location(kitchen)
     $ kitchen.show_background()
-    $ scene_manager.add_actor(mom, position = "walking_away", display_transform = character_left_flipped)
+    $ scene_manager.show_actor(mom, position = "walking_away", display_transform = character_left_flipped)
 
     if mom.effective_sluttiness() > 40:
         if mom.outfit.vagina_visible():
@@ -55,7 +55,7 @@ label family_morning_breakfast_enhanced_label():
     mom.char "Good morning [mom.mc_title]. I'm almost ready to serve, hopefully your [lily.name] will be here soon."
     lily.char "I'm coming!"
 
-    $ scene_manager.add_actor(lily)
+    $ scene_manager.show_actor(lily)
 
     if lily.effective_sluttiness() > 40:
         if lily.outfit.vagina_visible():
@@ -165,13 +165,13 @@ label family_morning_breakfast_enhanced_label():
                     $ lily.change_stats(obedience = -2, slut_temp = 2)
                     $ mom.change_stats(obedience = 5, slut_temp = 5)
                     mom.char "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
-                    $ scene_manager.remove_actor(mom)
+                    $ scene_manager.hide_actor(mom)
                     $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_left_flipped)
                     "Your mother leaves to get dressed. [lily.possessive_title] ends up serving out breakfast for all three of you."
                     $ scene_manager.update_actor(lily, position = "sitting")
                     $ mom.apply_outfit(mom.planned_outfit)
                     lily.char "She's been so weird lately. I don't know what's going on with her..."
-                    $ scene_manager.add_actor(mom, position = "sitting", display_transform = character_right)
+                    $ scene_manager.show_actor(mom, position = "sitting", display_transform = character_right)
                     $ lily.change_happiness(5)
                     $ mom.change_happiness(5)
                     "When [mom.possessive_title] gets back she sits down at the table and the three of you enjoy your breakfast together."
@@ -217,13 +217,13 @@ label family_morning_breakfast_enhanced_label():
             lily.char "Fine! I'll go put on some stupid clothes so my stupid mother doesn't keep worrying."
             $ scene_manager.update_actor(lily, position = "walking_away")
             "[lily.title] sulks out of the kitchen."
-            $ scene_manager.remove_actor(lily)
+            $ scene_manager.hide_actor(lily)
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = "sad")
             mom.char "I don't know how I manage to survive with you two around!"
             $ lily.apply_outfit(lily.planned_outfit)
             $ lily.change_stats(obedience = 10, happiness = -5)
             $ mom.change_obedience(-2)
-            $ scene_manager.add_actor(lily, position = "sitting")
+            $ scene_manager.show_actor(lily, position = "sitting")
             "[lily.possessive_title] is back by the time Mom starts to plate breakfast. She sits down and starts to eat without saying anything."
             $ scene_manager.update_actor(mom, position = "sitting")
 

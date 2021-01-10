@@ -796,8 +796,8 @@ label erica_race_crisis_label(the_person):
     the_person.char "Oh my, brave words for a brave boy! Let's just see what happens!"
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
         "As you are trash talking each other, [lily.title] and [yoga_assistant.title] surprise you when they walk up."
-        $ scene_manager.add_actor(lily)
-        $ scene_manager.add_actor(yoga_assistant)
+        $ scene_manager.add_actor(lily, display_transform = character_left)
+        $ scene_manager.add_actor(yoga_assistant, display_transform = character_center)
         lily.char "Wow bro, you are running in a charity race? And I had to hear about it from [the_person.name]?"
         yoga_assistant.char "I know right? And for breast cancer research? I probably would've signed up if I'd known about it earlier!"
         the_person.char "Ah! Thanks for coming out!"
@@ -808,11 +808,11 @@ label erica_race_crisis_label(the_person):
         yoga_assistant.char "Maybe next time they do one of these races, we could do some kind of corporate sponsorship?"
         "You chat with the girls, but soon it is about time for the race to begin."
         yoga_assistant.char "We're gonna find a place to go cheer you on. Good luck you two!"
-        $ scene_manager.remove_actor(lily, reset_actor = False)
-        $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
+        $ scene_manager.hide_actor(lily)
+        $ scene_manager.hide_actor(yoga_assistant)
     elif erica_get_is_doing_yoga_sessions():
         "As you are trash talking each other, [yoga_assistant.title] surprises you when she walks up."
-        $ scene_manager.add_actor(yoga_assistant)
+        $ scene_manager.add_actor(yoga_assistant, display_transform = character_center)
         yoga_assistant.char "Wow, a charity race? This is great!"
         the_person.char "Ah! Thanks for coming out!"
         yoga_assistant.char "Of course! I'm surprise to you see you here, [yoga_assistant.mc_title]! I'm glad you are doing your part for breast cancer research though!"
@@ -820,10 +820,10 @@ label erica_race_crisis_label(the_person):
         yoga_assistant.char "Well I think its great. Maybe next time they do one of these races, we could do some kind of corporate sponsorship?"
         "You chat with the girls, but soon it is about time for the race to begin."
         yoga_assistant.char "I'm gonna find a place to go cheer you on. Good luck you two!"
-        $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
+        $ scene_manager.hide_actor(yoga_assistant)
     elif erica_get_is_doing_insta_sessions():
         "As you are trash talking each other, [lily.title] surprises you when she walks up."
-        $ scene_manager.add_actor(lily)
+        $ scene_manager.add_actor(lily, display_transform = character_center)
         lily.char "Wow, so it is true? My brother is running a charity race? And I had to hear it from [the_person.name]."
         the_person.char "Ah! Thanks for coming out!"
         lily.char "I wouldn't miss it! This is going to be so exciting, watching you whip [lily.mc_title] in the race!"
@@ -833,39 +833,40 @@ label erica_race_crisis_label(the_person):
         lily.char "You should have told mom [lily.mc_title]. I bet she would have come out to help cheer you on too!"
         mc.name "Sorry. Honestly, this is the first time I've ever done something like this. I didn't realize it was normal for people to come watch."
         "You chat with the girls, but soon it is about time for the race to begin."
-        $ scene_manager.remove_actor(lily, reset_actor = False)
+        $ scene_manager.hide_actor(lily)
     "You and [the_person.title] do some stretching and warmups, but soon it is time for the race to begin."
     "You line up together at the starting line, ready for the race to begin."
     "*BANG*"
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "The official starts the race with a shot from the gun and the race begins! [the_person.title] jumps out in front of you, setting a fast pace."
     "You are tempted to chase after her, but think better of it. This is a long race, and you need to pace yourself."
-    $ scene_manager.clear_scene(reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     "As you near the first kilometer, you lose sight of [the_person.title] in the crowd of racers, but you are sure you aren't far behind."
     "You settle into your pace, determined to let your energy carry you through the race, no matter what happens. You pass the second kilometer marker"
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
-        $ scene_manager.add_actor(lily)
-        $ scene_manager.add_actor(yoga_assistant)
+        $ scene_manager.show_actor(lily)
+        $ scene_manager.show_actor(yoga_assistant)
         "[lily.title] and [yoga_assistant.possessive_title] are standing next to the course, and they begin cheering when they see you."
         yoga_assistant.char "Go [yoga_assistant.mc_title]!"
         lily.char "She's just barely ahead, you can do it!"
-        $ scene_manager.clear_scene(reset_actor = False)
+        $ scene_manager.hide_actor(lily)
+        $ scene_manager.hide_actor(yoga_assistant)
         "You pass the girls and keep running."
     elif erica_get_is_doing_yoga_sessions():
-        $ scene_manager.add_actor(yoga_assistant)
+        $ scene_manager.show_actor(yoga_assistant)
         "[yoga_assistant.possessive_title] is standing next to the course, and begins cheering when she sees you."
         yoga_assistant.char "Go [yoga_assistant.mc_title]! She's just ahead of you, you can do it!"
-        $ scene_manager.clear_scene(reset_actor = False)
+        $ scene_manager.hide_actor(yoga_assistant)
         "You pass by her and keep running."
     elif erica_get_is_doing_insta_sessions():
-        $ scene_manager.add_actor(lily)
+        $ scene_manager.show_actor(lily)
         "[lily.possessive_title] is standing next to the course, and begins cheering when she sees you."
         lily.char "You can do it bro! Keep going!"
-        $ scene_manager.clear_scene(reset_actor = False)
+        $ scene_manager.hide_actor(lily)
         "You pass by her and keep running."
     "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
     "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
-    $ scene_manager.add_actor(the_person, position = "walking_away")
+    $ scene_manager.show_actor(the_person, position = "walking_away")
     "God she is hot, her ass sways back and forth with each step she takes. You imagine all the things you want to do with those delightfully tight cheeks."
     "You are breathing hard. It's getting so hard to keep up. She starts to pull away from you."
     "No! It's time to dig deep! You pump your arms and breath."
@@ -875,12 +876,12 @@ label erica_race_crisis_label(the_person):
     "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
     the_person.char "[the_person.mc_title]? Oh god..."
     "She barely gets her words out as you pass her."
-    $ scene_manager.clear_scene(reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     "You keep pushing forward, not daring to turn around."
     "You round a corner. The finish line! You give it everything you have! Your breathing is heavy and ragged, sucking in every ounce of air you can."
     "You cross the finish line. You beat her!!!"
     "You are catching your breath, and turn to see her cross the finish line just a few seconds behind you."
-    $ scene_manager.add_actor(the_person, position = "standing_doggy")
+    $ scene_manager.show_actor(the_person, position = "standing_doggy")
     "[the_person.title] is breathing hard. She walks up to a table nearby and bends over with her hands on it, trying desperately to catch her breath."
     "You walk up behind her and put your hands on her back. You are careful not to be too obvious, but you make some contact with her backside with your hips."
     mc.name "Hey there, [the_person.title]! Nice race! I'm so glad you invited me out here to support such a charitable cause..."
@@ -893,8 +894,8 @@ label erica_race_crisis_label(the_person):
 
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
         "[lily.title] and [yoga_assistant.title] walk up as you are catching your breath."
-        $ scene_manager.add_actor(lily)
-        $ scene_manager.add_actor(yoga_assistant)
+        $ scene_manager.show_actor(lily)
+        $ scene_manager.show_actor(yoga_assistant)
         yoga_assistant.char "Wow! What a finish! That was amazing! And you won [yoga_assistant.mc_title]!"
         lily.char "But don't get a big head. She probably let you win!"
         "[the_person.possessive_title] is still catching her breath so she doesn't have a response yet."
@@ -909,10 +910,10 @@ label erica_race_crisis_label(the_person):
         "The girls say goodbye, leaving you with [the_person.possessive_title]."
         $ scene_manager.remove_actor(lily)
         $ scene_manager.remove_actor(yoga_assistant)
-        $ yoga_assistant = None
+        $ del yoga_assistant
     elif erica_get_is_doing_yoga_sessions():
         "[yoga_assistant.title] walks up as you are catching your breath."
-        $ scene_manager.add_actor(yoga_assistant)
+        $ scene_manager.show_actor(yoga_assistant)
         yoga_assistant.char "Wow! What a finish! That was amazing! And you won [yoga_assistant.mc_title]!"
         mc.name "Thank you! I'm not sure though, I think maybe [the_person.title] let me win on purpose..."
         the_person.char "No no... I gave it my all..."
@@ -923,9 +924,10 @@ label erica_race_crisis_label(the_person):
         the_person.char "Ah, okay. Well thanks for coming!"
         "She says goodbye, leaving you with [the_person.possessive_title]."
         $ scene_manager.remove_actor(yoga_assistant)
+        $ del yoga_assistant
     elif erica_get_is_doing_insta_sessions():
         "[lily.title] walks up as you are catching your breath."
-        $ scene_manager.add_actor(lily)
+        $ scene_manager.show_actor(lily)
         lily.char "Wow, can't say I saw that coming! It was a great race, but you won [lily.mc_title]."
         mc.name "Thank you! I'm not sure though, I think maybe [the_person.title] let me win on purpose..."
         the_person.char "No no... I gave it my all..."
@@ -935,14 +937,15 @@ label erica_race_crisis_label(the_person):
         lily.char "Unfortunately, I have other commitments."
         the_person.char "Ah, okay. Well thanks for coming!"
         "She says goodbye, leaving you with [the_person.possessive_title]."
-        $ scene_manager.remove_actor(lilye)
+        $ scene_manager.remove_actor(lily)
 
     "You both take a few minutes to recover, and soon you are ready to go."
     the_person.char "Alright, you won the race. I guess it's time to head back to my place?"
+    $ scene_manager.clear_scene(reset_actor = False)
     "You call for an Uber and she gives you her address. Soon you are walking into [the_person.title]'s apartment."
-    "Your mind is racing. She is going to be completely at your mercy. Its now or never, time to make a decision on which direction you want to take things."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
+    "Your mind is racing. She is going to be completely at your mercy. Its now or never, time to make a decision on which direction you want to take things."
     $ the_person.learn_home()
     "You walk in the door. What do you want to do? WARNING: This decision is permanent."
     menu:
@@ -1669,7 +1672,7 @@ label erica_weekly_yoga_label(the_person):
         if erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
             the_person.char "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
             the_person.char "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
-            the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au natural."
+            the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au naturel."
             yoga_assistant.char "Because the office is currently closed, this technically falls outside of the employee uniform requirements..."
             yoga_assistant.char "But we decided that it would probably be better to run it by you before me make it official. It IS your office building, after all!"
             "Holy fuck, they want to do yoga in the nude. You rack your brain, trying to think of a logical reason to say no. Only one thing comes to mind."
@@ -1713,7 +1716,7 @@ label erica_weekly_yoga_label(the_person):
             mc.name "Don't let me keep you."
             yoga_assistant.char "Right..."
             "[yoga_assistant.title] grabs the jug and leaves the room."
-            $ scene_manager.remove_actor(yoga_assistant, reset_actor = False)
+            $ scene_manager.hide_actor(yoga_assistant)
             "You turn to [the_person.title]"
             mc.name "Thank you again for doing this. I really feel like this is a huge benefit for the company."
             the_person.char "Of course! Glad to do it. I get the feeling, from talking to the girls here, that you are a great boss to work for too!"
@@ -1803,7 +1806,7 @@ label erica_weekly_yoga_label(the_person):
                         mc.name "Let's go over there and have some fun with [threesome_partner.title]."
                         remaining_person.char "Sounds good! I'll follow your lead!"
                         "You and [remaining_person.title] walk over to [threesome_partner.title]. Her eyes light up when she see you two approaching her."
-                        $ scene_manager.add_actor(threesome_partner)
+                        $ scene_manager.add_actor(threesome_partner, display_transform = character_left)
                         threesome_partner.char "Hello! I was just getting ready to get to work sir..."
                         mc.name "No need for that yet. Let's have a little fun first."
                         threesome_partner.char "Yay! I was hoping you would say that!"
@@ -1983,6 +1986,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             $ the_person.change_arousal(20)
             "All she can do is cling to you as your start to fuck her."
             call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_fuck_after_yoga_01
+            $ the_person.call_dialogue("sex_review", the_report = _return)
 
         "Fuck her against the wall (disabled) " if the_person.sluttiness < 70:
             pass

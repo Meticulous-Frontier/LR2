@@ -7,7 +7,7 @@ init 2:
         default ui_xsize = 360
         modal False
         frame:
-            background "#1a45a1"
+            background "#1a45a188"
             xsize ui_xsize + 20
             ysize 440
             xanchor 1.0
@@ -32,12 +32,12 @@ init 2:
                                     $ time_diff = fade_time
 
                                 frame:
-                                    background "#333333"
+                                    background "#33333388"
                                     xsize ui_xsize
                                     padding (0,0)
                                     text log_item[0] style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 20
                                 frame:
-                                    background "#ff0000"
+                                    background "#ff000088"
                                     xsize ui_xsize
                                     ysize 2
                                     yanchor 1.0

@@ -518,6 +518,7 @@ label genius_flirt_response_high(the_person):
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_47
+                $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
             "Just flirt":
@@ -557,6 +558,7 @@ label genius_flirt_response_high(the_person):
 
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_genius_48
+                $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
             "Just flirt":
@@ -584,6 +586,7 @@ label genius_flirt_response_girlfriend(the_person):
                     "After a few minutes of searching you find a quiet spot and put an arm around [the_person.possessive_title]."
                     "She sighs happily as you pull her close and kiss her. She puts her arms around you and hugs you tight, opening her lips for you."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_71
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
                     $ the_person.review_outfit()
 
                 "Just flirt":
@@ -599,6 +602,7 @@ label genius_flirt_response_girlfriend(the_person):
                     "You put your hand on the back of her neck and pull her close again, kissing her slowly and sensually."
                     "She sighs happily and leans her body against you, clearly unworried about anyone else around."
                     call fuck_person(the_person, start_position = kissing, private = False, skip_intro = True) from _call_fuck_genius_72
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
                     $ the_person.review_outfit()
 
                 "Just flirt":
@@ -628,6 +632,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "You place a gentle hand on her chin and raise her lips back to yours."
                 "This time when you kiss her it's slow and sensual. You hear her sigh happily, and she presses her body against yours."
                 call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_genius_73
+                $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
             "Just flirt":
@@ -657,6 +662,7 @@ label genius_flirt_response_affair(the_person):
                     "You put your arm around her waist and rest your hand on her ass as you lean in and kiss her."
                     "She presses her body enthusiastically against you and returns your kiss with just as much excitement."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_74
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
                     $ the_person.review_outfit()
 
                 "Just flirt":
@@ -687,6 +693,7 @@ label genius_flirt_response_affair(the_person):
                 "You put your arm around her waist, resting your hand on her ass, and pull her into an intense kiss."
                 "She leans into you eagerly, returning the kiss with just as much enthusiasm."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_75
+                $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
             "Just flirt":

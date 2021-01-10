@@ -137,7 +137,10 @@ label SB_caught_masturbating_crisis_label():
                                 "You drop down on the floor in front of her. With her pussy exposed you waste no time diving right in."
                             else:                                              #Otherwise, strip her down.
                                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
-                                $ the_person.strip_outfit(position = "missionary", exclude_upper = True)
+                                if the_person.outfit.can_half_off_to_vagina():
+                                    $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), position = "missionary", half_off_instead = True)
+                                else:
+                                    $ generalised_strip_description(the_person, the_person.outfit.get_full_strip_list(), position = "missionary")
                                 "With her pussy finally exposed you waste no time diving right in."
                             $ the_person.break_taboo("bare_pussy")
                             $ the_person.break_taboo("licking_pussy")

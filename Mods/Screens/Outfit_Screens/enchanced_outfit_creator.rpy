@@ -71,6 +71,29 @@ init 10 python:
 
         renpy.restart_interaction()
 
+    def get_slut_score():
+        cs = renpy.current_screen()
+
+        if cs.scope["outfit_type"] == "full":
+            return cs.scope["demo_outfit"].get_full_outfit_slut_score()
+        elif cs.scope["outfit_type"] == "under":
+            return cs.scope["demo_outfit"].get_underwear_slut_score()
+        elif cs.scope["outfit_type"] == "over":
+            return cs.scope["demo_outfit"].get_overwear_slut_score()
+        return 0
+
+    def get_outfit_type_name():
+        cs = renpy.current_screen()
+
+        if cs.scope["outfit_type"] == "full":
+            return "Full Outfit"
+        elif cs.scope["outfit_type"] == "under":
+            return "Underwear"
+        elif cs.scope["outfit_type"] == "over":
+            return "Overwear"
+        return 0
+
+
     def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
 
         cs = renpy.current_screen()
@@ -338,7 +361,7 @@ init 2:
             wardrobe_tree.write(file_name,encoding="UTF-8")
 
 init 2:
-    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "full"): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
+    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "full", slut_limit = None): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         #add "Paper_Background.png"
         modal True
@@ -454,16 +477,18 @@ init 2:
                                             Function(switch_outfit_category, category) # If a clothing item is selected and currently being previewed then remove it from preview.
                                         ]
                     vbox:
-                        spacing 15
+                        spacing 5
                         viewport:
                             ysize 440
                             xminimum 605
                             scrollbars "vertical"
                             mousewheel True
                             frame:
-                                xsize 620
+                                xsize 605
                                 yminimum 440
                                 background "#888888"
+                                padding 0,0
+
                                 vbox:
                                     #THIS IS WHERE ITEM CHOICES ARE SHOWN
                                     if category_selected in categories_mapping:
@@ -472,34 +497,47 @@ init 2:
                                         $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
 
                                         for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.slut_value, x.name)):
-                                            textbutton cloth.name + (" | " + get_heart_image_list_cloth(cloth.slut_value) if cloth.slut_value > 0 else ""):
-                                                style "textbutton_style"
-                                                text_style "custom_outfit_style"
+                                            frame:
+                                                xsize 605
+                                                ysize 50
+                                                background None
+                                                padding 0,0
 
-                                                if selected_clothing is not None:
-                                                    sensitive outfit_valid_check()
-                                                else: # If we are not editing an item already in the outfit then abide by the valid_layers rules.
-                                                    sensitive cloth.layer in valid_layers
+                                                textbutton cloth.name.title():
+                                                    xalign 0.0
+                                                    ysize 50
+                                                    text_align .5
+                                                    xfill True
+                                                    style "textbutton_style"
+                                                    text_style "custom_outfit_style"
 
-                                                xfill True
-                                                xalign 0.5
+                                                    if selected_clothing is not None:
+                                                        sensitive outfit_valid_check()
+                                                    else: # If we are not editing an item already in the outfit then abide by the valid_layers rules.
+                                                        sensitive cloth.layer in valid_layers
 
-                                                action [
-                                                    SetScreenVariable("selected_clothing", cloth.get_copy()),
-                                                    SetScreenVariable("selected_colour", "colour")
-                                                ]
+                                                    action [
+                                                        SetScreenVariable("selected_clothing", cloth.get_copy()),
+                                                        SetScreenVariable("selected_colour", "colour")
+                                                    ]
 
-                                                hovered [
-                                                    Function(preview_apply, cloth.get_copy()), # Add the hovered outfit to the demo outfit
-                                                    Function(update_outfit_color, cloth.get_copy()),
-                                                    Function(preview_outfit)
-                                                ]
+                                                    hovered [
+                                                        Function(preview_apply, cloth.get_copy()), # Add the hovered outfit to the demo outfit
+                                                        Function(update_outfit_color, cloth.get_copy()),
+                                                        Function(preview_outfit)
+                                                    ]
 
-                                                unhovered [
-                                                    Function(preview_restore, cloth), # Remove the hovered outfit from the demo outfit and focus on the selected item if any.
-                                                    If(selected_clothing is not None, Function(update_outfit_color, selected_clothing)),
-                                                    Function(preview_outfit)
-                                                ]
+                                                    unhovered [
+                                                        Function(preview_restore, cloth), # Remove the hovered outfit from the demo outfit and focus on the selected item if any.
+                                                        If(selected_clothing is not None, Function(update_outfit_color, selected_clothing)),
+                                                        Function(preview_outfit)
+                                                    ]
+                                                text cloth.generate_stat_slug():
+                                                    style "custom_outfit_style"
+                                                    ysize 50
+                                                    xalign .95
+                                                    yalign 1
+                                                    yoffset 10
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
                             xysize (605, 520)
@@ -953,23 +991,7 @@ init 2:
                                                     background "#000080"
                                                     xsize 250
                                                     padding [1,1]
-                                                    text "Sluttiness (Full Outfit): " + str(demo_outfit.get_full_outfit_slut_score()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#000080"
-                                                    xsize 250
-                                                    padding [1,1]
-                                                    if demo_outfit.is_suitable_underwear_set():
-                                                        text "Sluttiness (Underwear): " + str(demo_outfit.get_underwear_slut_score()) style "serum_text_style_traits"
-                                                    else:
-                                                        text "Sluttiness (Underwear): Invalid" style "serum_text_style_traits"
-                                                frame:
-                                                    background "#000080"
-                                                    xsize 250
-                                                    padding [1,1]
-                                                    if demo_outfit.is_suitable_overwear_set():
-                                                        text "Sluttiness (Overwear): " + str(demo_outfit.get_overwear_slut_score()) style "serum_text_style_traits"
-                                                    else:
-                                                        text "Sluttiness (Overwear): Invalid" style "serum_text_style_traits"
+                                                    text "Sluttiness (" + get_outfit_type_name() + "): " + str(get_slut_score()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#000080"
                                                     xsize 250
@@ -1114,10 +1136,16 @@ init 2:
                                         xsize 250
                                         vbox:
                                             xalign 0.5
-                                            textbutton "Save Outfit":
+
+                                            $ save_button_name = "Save Outfit"
+                                            if slut_limit is not None:
+                                                $ save_button_name += " {size=14}{color=#FF0000}Max: " + str(slut_limit) + " slut{/color}{/size}"
+
+                                            textbutton save_button_name:
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xfill True
+                                                sensitive slut_limit is None or get_slut_score() <= slut_limit
 
                                                 action [
                                                     Function(update_outfit_name, item_outfit),
@@ -1171,21 +1199,6 @@ init 2:
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
-                                            textbutton "Type: [outfit_class_selected]":
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-                                                action NullAction()
-                                                # action [
-                                                # If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "OverwearSets")),
-                                                # If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
-                                                # If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "FullSets"))
-                                                # ]
-                                                # alternate [
-                                                # If(outfit_class_selected == "FullSets", SetScreenVariable("outfit_class_selected", "UnderwearSets")),
-                                                # If(outfit_class_selected == "OverwearSets", SetScreenVariable("outfit_class_selected", "FullSets")),
-                                                # If(outfit_class_selected == "UnderwearSets", SetScreenVariable("outfit_class_selected", "OverwearSets"))
-                                                # ]
                                     frame:
                                         background "#888888"
                                         xsize 254

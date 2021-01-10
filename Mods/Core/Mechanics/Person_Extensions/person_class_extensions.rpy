@@ -89,7 +89,7 @@ init -1 python:
         self.char = None
         self.body_images = None
         self.face_style = None
-        self.expression_images = None
+        #self.expression_images = None
         self.hair_colour = None
         self.hair_style = None
         self.pubes_style = None
@@ -285,7 +285,7 @@ init -1 python:
             self.body_images = tan_skin
         elif self.skin == "black":
             self.body_images = black_skin
-        self.expression_images = Expression("default", self.skin, self.face_style)
+        #self.expression_images = Expression("default", self.skin, self.face_style)
         return
     Person.match_skin = match_skin
 
@@ -701,6 +701,13 @@ init -1 python:
                 strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
 
     Person.strip_outfit = strip_outfit
+
+    def strip_outfit_strip_list(self, strip_list, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, half_off_instead = False):
+        for item in strip_list:
+            self.draw_animated_removal(item, position = position, emotion = emotion, lighting = lighting, display_transform = display_transform, half_off_instead = half_off_instead)
+            renpy.pause(delay)
+
+    Person.strip_outfit_strip_list = strip_outfit_strip_list
 
     def choose_strip_clothing_item(self):
         clothing = None
@@ -1239,7 +1246,7 @@ init -1 python:
             if scene_manager is None and show_person_info:
                 renpy.show_screen("person_info_ui",self)
             else:   # when we are called from the scene manager we have to draw the other characters
-                scene_manager.draw_scene_without(self)
+                scene_manager.draw_scene(exclude_list = [self])
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
@@ -1683,6 +1690,11 @@ init -1 python:
         return self.outfit.get_lower_top_layer()
 
     Person.get_lower_top_layer = person_get_lower_top_layer
+
+    def person_get_feet_top_layer(self):
+        return self.outfit.get_feet_top_layer()
+
+    Person.get_feet_top_layer = person_get_feet_top_layer
 
     def person_restore_all_clothing(self):
         return self.outfit.restore_all_clothing()
