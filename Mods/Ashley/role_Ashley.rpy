@@ -103,10 +103,10 @@ init -1 python:
                 #     return False
         return False
 
-    def ashley_hire_directed_requirement(the_person):
-        if not the_person is stephanie:
+    def ashley_hire_directed_requirement():
+        if not mc.business.head_researcher == stephanie:
             return False
-        if ashley.event_triggers_dict.get("employed_since", 0) > 0:
+        if not mc.business.is_open_for_business():
             return False
         if mc.business.max_employee_count == mc.business.get_employee_count():
             return "At employee limit"
@@ -203,13 +203,13 @@ init -1 python:
         return False
 
     def add_ashley_hire_later_action():
-        ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
+        ashley_hire_directed = Action("Reconsider hiring Stephanie's sister", ashley_hire_directed_requirement, "ashley_hire_directed_label",
             menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
-        mc.business.head_researcher.add_action(ashley_hire_directed)
+        mc.business.r_div.add_action(ashley_hire_directed)
         return
 
     def remove_ashley_hire_later_action():
-        mc.business.head_researcher.remove_action("ashley_hire_directed_label")
+        mc.business.r_div.remove_action("ashley_hire_directed_label")
         return
 
 #Story labels
@@ -274,10 +274,8 @@ label ashley_intro_label():
         $ add_ashley_hire_later_action
     return
 
-label ashley_hire_directed_label(the_person):
-    if the_person != stephanie:
-        "Not Steph? How did we get here?"
-        return
+label ashley_hire_directed_label():
+    $ the_person = stephanie
     mc.name "I wanted to talk to you again about your sister."
     the_person.char "Oh? Have you decided to reconsider?"
     mc.name "I have. Do you still have her documents that I could look over them again?"
