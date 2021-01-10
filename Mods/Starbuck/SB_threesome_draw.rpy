@@ -231,7 +231,7 @@ label trist_draw_69():
 screen SB_two_person_info_ui(the_person_one, the_person_two): #Used to display stats for a person while you're talking to them.
     layer "solo"
     frame:
-        background "gui/topbox.png"
+        background im.Alpha("gui/topbox.png", .7)
         xsize 1100
         ysize 200
         yalign 0.0
