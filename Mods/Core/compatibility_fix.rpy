@@ -86,30 +86,18 @@ init -1 python:
     # to prevent messed up outfits to be used by girls in daily life
     def cleanup_default_wardrobe():
         remove = []
-        for outfit in default_wardrobe.outfits:
+        for outfit in default_wardrobe.outfits + default_wardrobe.overwear_sets:
             if not any(x for x in outfit.feet if x.layer == 2):
                 remove.append(outfit)
-            elif not any(x for x in outfit.upper_body if x.layer == 2):
+            elif not any(x for x in outfit.upper_body if x.layer == 2 or x.layer == 3):
                 remove.append(outfit)
-            elif not any(x for x in outfit.lower_body if x.layer == 2):
+            elif not any(x for x in outfit.upper_body if x.layer == 2 and x.has_extension) and \
+                not any(x for x in outfit.lower_body if x.layer == 2):
                 remove.append(outfit)
 
-        # renpy.say("", "Removing " + str(len(remove)) + " full outfits")
         for outfit in remove:
-            default_wardrobe.outfits.remove(outfit)
-
-        remove = []
-        for outfit in default_wardrobe.overwear_sets:
-            if not any(x for x in outfit.feet if x.layer == 2):
-                remove.append(outfit)
-            elif not any(x for x in outfit.upper_body if x.layer == 2):
-                remove.append(outfit)
-            elif not any(x for x in outfit.lower_body if x.layer == 2):
-                remove.append(outfit)
-
-        # renpy.say("", "Removing " + str(len(remove)) + " overwear sets")
-        for outfit in remove:
-            default_wardrobe.overwear_sets.remove(outfit)
+            # print("Removing: " + outfit.name)
+            default_wardrobe.remove_outfit(outfit)
         return
 
     def validate_mod_installation_location():
