@@ -2,9 +2,17 @@ init 1 python:
     #Requirement functions
 
     def anal_fetish_employee_intro_requirement():
+        if time_of_day == 3:
+            if mc.business.is_open_for_business():
+                if mc.is_at_work():
+                    return True
         return False
 
+
     def anal_fetish_family_intro_requirement():
+        if the_person.location == the_person.home:
+            if the_person.location.get_person_count() == 1: #She is alone in her bedroom
+                return True
         return False
 
     def anal_fetish_generic_intro_requirement():
@@ -59,7 +67,9 @@ init 1 python:
         return False
 
 init 2 python: #Other anal fetish related python code
-    pass
+    anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label")
+    anal_fetish_generic_intro = Action("Generic Anal Fetish Intro", anal_fetish_generic_intro_requirement, "anal_fetish_generic_intro_label")
+    anal_fetish_family_intro = Action("Family Anal Fetish Intro", anal_fetish_family_intro_requirement, "anal_fetish_family_intro_label")
 
 
 
@@ -311,7 +321,7 @@ label anal_fetish_generic_intro_label(the_person):
     "Hmm, very interesting. Recently, you've been dosing her with your anal proclivity serums. Maybe that's why she's having trouble getting off?"
     "Helping her might develop her anal interest into a fetish!"
     if the_person in unique_character_list:
-        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss it!"
     menu:
         "Help her":
             mc.name "Let's find somewhere private first."
