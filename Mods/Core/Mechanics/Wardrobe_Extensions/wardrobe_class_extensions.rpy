@@ -126,6 +126,18 @@ init -1 python:
 
     Wardrobe.pick_underwear_with_lowest_sluttiness = pick_underwear_with_lowest_sluttiness
 
+    def wardrobe_remove_outfit(self, outfit):
+        for store in [self.outfits, self.underwear_sets, self.overwear_sets]:
+            if isinstance(outfit, basestring):
+                found = find_in_list(lambda x: x.name == outfit.replace("_", " ").title(), store)
+                if found:
+                    store.remove(found)
+            elif outfit in store:
+                store.remove(outfit)
+
+    Wardrobe.remove_outfit = wardrobe_remove_outfit
+
+
     def calculate_minimum_sluttiness(person, target_sluttiness):
         minimum_sluttiness = target_sluttiness - person.sluttiness # raise minimum sluttiness by the amount over normal sluttiness
         if target_sluttiness > 40 and minimum_sluttiness == 0: # when there is no minimum sluttiness, increase it when the girl is slutty
