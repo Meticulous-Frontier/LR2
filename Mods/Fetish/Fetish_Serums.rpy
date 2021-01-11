@@ -1,10 +1,10 @@
 init -3 python:
     FETISH_BASIC_OPINION_LIST = ["giving handjobs", "giving tit fucks", "being fingered", "kissing", "masturbating", "big dicks", "getting head", "lingerie"]
-    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "anal creampies", "being submissive"]
+    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "anal creampies", "being submissive", "showing her ass"]
     FETISH_ORAL_OPINION_LIST = []
     FETISH_VAGINAL_OPINION_LIST = []
-    FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "taking control"]
-    FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "lactation", "missionary style sex"]
+    FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "taking control", "anal creampies", "creampies"]
+    FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex", "being submissive"]
     FETISH_EXHIBITION_OPINION_LIST = ["public sex", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "skimpy outfits", "skimpy uniforms", "sex standing up" ]
     #relation fetishes (impact relationship with people) still need to workout how to make this happen
     FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
