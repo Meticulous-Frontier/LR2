@@ -8,6 +8,11 @@ init 2: # Need to allow for None name roles in this screen as well.
         default research_base = the_person.int*3 + the_person.research_skill*2 + the_person.focus + 10
         default prod_base = the_person.focus*3 + the_person.production_skill*2 + the_person.int + 10
         default supply_base = the_person.focus*3 + the_person.supply_skill*2 + the_person.charisma + 10
+        default dict_work_skills = get_work_skills()
+        default dict_sex_skills = get_sex_skills()
+        default dict_main_skills = get_main_skills()
+        default master_opinion_dict = dict(the_person.opinions, **the_person.sexy_opinions)
+
         vbox:
             spacing 25
             xalign 0.5
@@ -107,7 +112,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Characteristics" style "menu_text_style" size 22
-                        $ dict_main_skills = get_main_skills()
                         for skill in dict_main_skills:
                             text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
@@ -120,7 +124,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Work Skills" style "menu_text_style" size 22
-                        $ dict_work_skills = get_work_skills()
                         for skill in dict_work_skills:
                             text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
 
@@ -130,7 +133,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Sex Skills" style "menu_text_style" size 22
-                        $ dict_sex_skills = get_sex_skills()
                         for skill in dict_sex_skills:
                             text dict_sex_skills[skill][0] + " Skill: " + str(the_person.sex_skills[dict_sex_skills[skill][0]]) style "menu_text_style"
 
@@ -153,7 +155,6 @@ init 2: # Need to allow for None name roles in this screen as well.
             hbox:
                 xsize 1750
                 spacing 30
-                $ master_opinion_dict = dict(the_person.opinions, **the_person.sexy_opinions)
                 frame:
                     background "#1a45a1aa"
                     xsize 325
