@@ -18,7 +18,7 @@ init -1 python:
         return False
 
     def breeding_fetish_non_employee_intro_requirement(the_person):
-        if the_person.location != the_person.home
+        if the_person.location != the_person.home:
             return True
         return False
 
