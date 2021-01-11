@@ -33,7 +33,7 @@ label family_morning_breakfast_enhanced_label():
         lily.char "Hey, I think Mom's making a family breakfast for us."
         mc.name "Thanks for letting me know [lily.title], I'll be down in a minute."
         "She nods and closes your door as she leaves."
-        $ scene_manager.hide(lily)
+        $ scene_manager.hide_actor(lily)
 
     "You get up, get dressed, and head for the kitchen."
     $ mc.change_location(kitchen)

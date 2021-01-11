@@ -1114,6 +1114,7 @@ label erica_post_race_love_label(the_person):
     $ the_person.change_love(5)
     the_person.char "Aww, you don't have to do that. You are such a sweetheart."
     $ the_person.review_outfit()
+    $ the_person.draw_person()
     "While [the_person.possessive_title] gets cleaned up, you order her a healthy lunch on your phone. You know she is college student, so she probably doesn't have much disposable income."
     $ mc.business.change_funds(-10)
     $ title_choice = get_random_from_list(["BBQ Rainbow Beef salad", "Fresh Salmon with Thai noodle salad", "Spicy Chicken and Avocado wrap"])
