@@ -17,7 +17,15 @@ init -1 python:
                     return True
         return False
 
-    def breeding_fetish_non_employee_intro_requirement():
+    def breeding_fetish_non_employee_intro_requirement(the_person):
+        if the_person.location != the_person.home
+            return True
+        return False
+
+    def breeding_fetish_family_intro_requirement(the_person):
+        if the_person.location == the_person.home:
+            if the_person.location.get_person_count() == 1: #She is alone in her bedroom
+                return True
         return False
 
     def breeding_fetish_mom_intro_requirement(): #TODO this should be a morning mandatory crisis event.
@@ -93,7 +101,9 @@ init -1 python:
 
 #Actions
     # breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
-    breeding_fetish_non_employee = Action("Non Employee breeding fetish intro", breeding_fetish_non_employee_intro_requirement, "breeding_fetish_non_employee_intro_label")
+    breeding_fetish_non_employee_intro = Action("Non Employee breeding fetish intro", breeding_fetish_non_employee_intro_requirement, "breeding_fetish_non_employee_intro_label")
+    breeding_fetish_family_intro = Action("Family Member breeding fetish intro", breeding_fetish_family_intro_requirement, "breeding_fetish_family_intro_label")
+    breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
     breeding_fetish_mom_intro = Action("Mom breeding fetish intro", breeding_fetish_mom_intro_requirement, "breeding_fetish_mom_intro_label")
     breeding_fetish_lily_intro = Action("Lily breeding fetish intro", breeding_fetish_lily_intro_requirement, "breeding_fetish_lily_intro_label")
     breeding_fetish_rebecca_intro = Action("Rebecca breeding fetish intro", breeding_fetish_rebecca_intro_requirement, "breeding_fetish_rebecca_intro_label")
@@ -213,7 +223,169 @@ label breeding_fetish_employee_intro_label(the_person):
     "[the_person.possessive_title] now has a fetish to get bred by you!"
     return #Needs testing
 
+label breeding_fetish_family_intro_label(the_person):
+    $ the_person.draw_person(position = "back_peek")
+    "You walk into [the_person.possesive_title]'s bedroom. She is looking at herself in the mirrow, but turns to when she hears you walk in."
+    the_person "Oh hey [the_person.mc_title]. I was just getting ready to head for bed."
+    "She takes one last look at herself in the mirror, then turns around."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    the_person "Do you want to cuddle with me for a little bit?"
+    mc.name "Sounds nice."
+    $ the_person.draw_person(position = "missionary")
+    "You lay down next to [the_person.possesive_title] as she lays down on her back. You rest your head on her chest and put your arm across her."
+    "For a while you simply enjoy the heat of each other's bodies. She is the first to break the silence."
+    if the_person.knows_pregnant():
+        the_person "Do you think its weird, if I told you I love this feeling? Being pregnant, making babies. It's like my body was made to do this, over and over again."
+        the_person "I'm already looking forward to making another one, and this one isn't even here yet!"
+
+    elif the_person.age < 35:
+        the_person "Do you think I'm too old to have a baby? My hormones are in overdrive lately..."
+        mc.name "No way. With modern medical science, women are having babies older and older, into their late forties even."
+    else:
+        the_person "My hormones are being crazy lately... would it be weird if I told you I... want to get knocked up?"
+        mc.name "I'd imagine that's a pretty normal thing. We don't survive as a species if we don't have a drive to reproduce, right?"
+    the_person "I suppose so."
+    "You move your hand to her belly and begin to rub it. You've been giving her doses of your reproduction proclivity serums recently."
+    "You wonder if she is on the verge of developing a fetish. Do you want to try and push her over the edge?"
+    if the_person in unique_character_list:
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
+    menu:
+        "Attempt to train her breeding fetish" if mc.energy > 40:
+            pass
+        "Too tired" if mc.energy <= 40:
+            pass
+            #TODO re add the event for this person for the next day.
+            return
+        "Too risky, leave her alone":
+            pass
+            return
+    "You decide it's time to train [the_person.possesive_title] to be your own personal breeding stock."
+    "You push yourself up and on top of [the_person.title]. She puts her arms around you as your body begins to press against hers."
+    mc.name "Honestly, I think its pretty normal to have desires like that."
+    the_person "Yeah..."
+    "You start to kiss her along her neck and then whisper in her ear."
+    mc.name "To have a man pin you down, fuck you senseless, then dump his risky load deep inside you, over and over."
+    $ the_person.change_arousal(20)
+    the_person "Ah, that does sound nice..."
+    mc.name "It sounds more than nice though, doesn't it? It's what you NEED. A bull, who fucks you and knocks you up, over and over. Like some kind of livestock."
+    the_person "Ahhh, yeah! Oh god..."
+    $ the_person.change_arousal(20)
+    "You reach down and start to pull your cock out."
+    the_person "but... we're... you know... family..."
+    mc.name "Shhh, its okay. You can trust me, right? We're both consenting adults, who just happen to be related."
+    "She bites her lip. It's clear from the look in her eyes that she wants it badly, but is afraid to take the leap."
+    mc.name "Tell you what, let's go a little farther, and if it feels wrong we can stop."
+    "She nods her head in agreement."
+    if the_person.outfit.vagina_available():
+        "You finish pulling your cock out and begin to rub it along her slit."
+    else:
+        "As you finish pulling your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
+        $ the_person.strip_outfit(exclude_upper = True)
+    $ the_person.change_arousal(10)
+    if the_person.love < 0:
+        the_person "I can't believe I'm saying this, and with you of all people..."
+        the_person "But I'm ready! Just... just put it in me! Raw!"
+    else:
+        the_person "My brain says this is wrong, but my body keeps saying its so right!"
+        the_person "Fuck me [the_person.mc_title], I want you to fill me with your cum!"
+    "You run you cock along her slit a couple more times, then start to push it inside. She moans as you bottom out inside of her and start to fuck."
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _family_gets_breeding_fetish_01
+    $ add_breeding_fetish(the_person)
+    $ the_person.draw_person(position = "missionary")
+    if the_person.knows_pregnant():
+        the_person.char "I know I'm already pregnant... but that was so good. Even after this one comes, I want to keep doing this!"
+    else:
+        the_person.char "Oh god, you're right. It feels so right getting seeded by you."
+    "You slowly roll off of [the_person.title] and lay beside her."
+    mc.name "Make sure you lay like this for a while. Keep those swimmers as deep as you can."
+    "You get up and start to get dressed."
+    the_person "Do you... want to stay with me tonight?"
+    mc.name "I can't stay tonight, but from now on, you are my breeding stock. Be ready to take my cum whenever I tell you to."
+    the_person.char "Yes! Yes sir! I'll be ready, don't worry!"
+    "You say goodbye to [the_person.title]."
+    "[the_person.possessive_title] now has a fetish to get bred by you!"
+    return #Needs testing
+
 label breeding_fetish_non_employee_intro_label(the_person): #This function to be used for generic non employee, non unique girls
+    $ the_person.arousal = 40
+    "As you walk into [mc.location.name], you notice [the_person.title]. She notices you also and approaches."
+    $ the_person.draw_person()
+    the_person "Hello [the_person.mc_title]! It's good to see you!"
+    "You take a moment to look at her. Her cheeks seem flushed... Her nipples are poking against the fabric of her shirt. Is she... Aroused?"
+    mc.name "It's good to see you also."
+    the_person "Hey, I was just thinking about texting you. Are you busy right now?"
+    mc.name "Probably not."
+    "She leans forward and talks quietly in your ear."
+    the_person "My place is right around the corner... want a tour of my bedroom?"
+    "Wow, she is being very forward. It's not surprising though. Recently, you've dosed her with your reproduction proclivity serums."
+    "It's possible she might be on the verge of developing a fetish. If you go back to her place, you can push her over the edge into having a breeding fetish!"
+    if the_person in unique_character_list:
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
+    menu:
+        "Go to her place" if mc.energy > 40:
+            mc.name "A tour would be nice. Lead the way."
+        "Too tired" if mc.energy <= 40:
+            pass
+            #TODO re add the event for this person for the next day.
+            return
+        "Not now":
+            mc.name "I'm sorry [the_person.title], I've got errands to accomplish. Maybe another time."
+            $ the_person.change_love(-2)
+            $ the_person.change_happiness(-5)
+            the_person "Ah, okay. I see."
+            return False
+
+    "[the_person.title] takes your hand and you step away with her. After a few minutes of walking, you find yourself at her place."
+    "She quickly unlocks the front door and pulls you inside."
+    if the_person.home not in mc.known_home_locations:
+        $ mc.known_home_locations.append(the_person.home)
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
+    $ the_person.draw_person(position = "kissing")
+    "She throws her arms around you and you start to make out. You hands drop to her ass and you start to grope her aggressively."
+    the_person "Oh god, I'm not sure I can make it to the bedroom."
+    $ the_person.draw_person(position = "against_wall")
+    $ the_person.change_arousal(10) #50
+    "You pick her up and carry her to her bedroom. She is grinding against you the whole way."
+    "Knowing the reason she is so aroused, you start to talk dirty with her."
+    mc.name "Are you on birth control, [the_person.title]?"
+    the_person "You know I'm not..."
+    mc.name "Good. When we get to your bed, I'm going to throw you down on it, pin you down, and fuck you until until I cum deep inside you."
+    if the_person.knows_pregnant():
+        the_person "Do it! I'm already pregnant, but I want to feel your seed deep inside me!"
+    else:
+        the_person "Oh fuck, but I could... I could get..."
+        mc.name "Pregnant? You're right."
+    $ the_person.draw_person(position = "missionary")
+    mc.name "That's what you want, isn't it? For me to pin you down and breed you, over and over, like the little slut you are."
+    the_person "Oh [the_person.mc_title], I really do!"
+    if the_person.outfit.vagina_available():
+        "You pullyour cock out and begin to rub it along her inviting slit."
+    else:
+        "As you pull your cock out, [the_person.possesive_title] pulls her bottoms off."
+        $ the_person.strip_outfit(exclude_upper = True)
+        "When she finishes you run your cock all along her inviting slit."
+
+    $ the_person.change_arousal(10) #60
+    the_person "Just shove it in! I'm ready!"
+    "You decide to give her what she wants, for now. You grab her hips and then push yourself inside of her sopping wet cunt."
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _generic_anyone_gets_breeding_fetish_01
+    $ add_breeding_fetish(the_person)
+    $ the_person.draw_person(position = "missionary")
+    "When you finish, she lays back, just rubbing her hand along her belly."
+    if the_person.knows_pregnant():
+        the_person.char "I know I'm already pregnant... but that was so good. Even after this one comes, I want to keep doing this!"
+    else:
+        the_person.char "Oh god, that was amazing. I hope... I hope that did it!"
+    "You slowly roll off of [the_person.title] and lay beside her."
+    mc.name "Make sure you lay like this for a while. Keep my semen as deep as you can."
+    "You get up and start to get dressed."
+    the_person "Can we do this again soon?"
+    mc.name "I plan to. Keep your cunt ready for me, anytime I want to dump my load inside you."
+    the_person.char "Yes! Don't worry, I'll be ready!"
+    "You say goodbye to [the_person.title]."
+    "[the_person.possessive_title] now has a fetish to get bred by you!"
+
 
     return
 
