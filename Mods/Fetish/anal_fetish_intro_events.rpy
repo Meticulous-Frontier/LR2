@@ -59,7 +59,7 @@ init 1 python:
         return False
 
 init 2 python: #Other anal fetish related python code
-
+    pass
 
 
 
@@ -75,6 +75,8 @@ label anal_fetish_employee_intro_label():
     $ the_person.draw_person(position = "standing_doggy")
     "She tries to pretend like she doesn't notice you, but you notice subtle shifts in her hips, wiggling a bit as you walk by her."
     "[the_person.possessive_title] has been doses recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
+    if the_person in unique_character_list:
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
     menu:
         "Attempt to train her anal fetish" if mc.energy > 40:
             pass
@@ -217,10 +219,83 @@ label anal_fetish_family_intro_label(the_person):
         the_person "You know... what if we had sex... bare... and you could cum inside me. Without having to worry about getting me pregnant!"
         the_person "I know we are related, but I think I know how we could get around that."
     elif the_person.has_taboo("vaginal_sex") and not the_person.has_taboo("anal_sex"): #You've taken her ass before but not her pussy
-        the_person ""
-
-
-    return False
+        the_person "I know we've done it this way before, but I think I've really started to enjoy it this way."
+    elif the_eprson.has_taboo("anal_sex") and the_person.has_taboo("vaginal_sex"): # You haven't fucked at all
+        the_person "I umm... I'm not ready to go all the way with you... but I think I have an idea for something that would COULD do..."
+    else:
+        the_person "What can I say, the video reminded me of you a little bit..."
+    "She holds her phone up. On the screen is a woman, bent over with her panties pulled down, getting fucked in the ass."
+    "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
+    if the_person in unique_character_list:
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
+    menu:
+        "Attempt to train her anal fetish" if mc.energy > 40:
+            pass
+            return False
+        "Too tired" if mc.energy <= 40:
+            pass
+            #TODO re add the event for this person for the next day.
+        "Not right now":
+            "You decide to leave her alone for now. You might revisit this decision at a later date."
+            $ clear_scene()
+            return
+    mc.name "God you are so naughty. You want me to fuck you in your ass right here, don't you?"
+    the_person "Of course not. It doesn't have to be right here."
+    mc.name "You'd like that though, wouldn't you? My cute litte [the_person.title], getting her ass taken anytime I feel like it. Anytime, anywhere."
+    $ the_person.change_arousal(15) #55
+    the_person "You make it sound bad..."
+    mc.name "It sounds to me like you are being awfully naughty. I think you need a good spanking."
+    if the_person.vagina_available():
+        "You give her ass a smack, admiring the way her cheeks wobble."
+    else:
+        mc.name "Let's get this out of the way first."
+        $ the_person.strip_outfit(exclude_upper = True)
+        "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
+    $ the_person.change_arousal(10) #65
+    "You give her another spank. Her cheeks are starting to redden a bit, but its obvious from her arousal that she loves it."
+    if the_person.has_taboo("anal_sex"):
+        mc.name "I can't believe you want me to stick it in your ass. You are such a naughty little slut."
+        "She stays quiet for now, but her ass wiggles a bit, making an enticing target."
+        "You give her another spank."
+        the_person "Ah! Oh fuck..."
+        $ the_person.change_arousal(5) # 70
+    else:
+        mc.name "It's clear to me you've got a little bit of an obsession going. Can't get enough dick in your ass, even if its a family member?"
+        "She stays quiet for now, but her ass wiggles a bit, making an enticing target."
+        "You give her another spank."
+        $ the_person.change_arousal(5) # 70
+    mc.name "Fine, it's clear what you really want. Don't worry, I'll give it to you."
+    "You pull out your cock. You grab her hand and bring it to your mouth where you spit a big glob of saliva, then make her stroke you a couple times, getting you lubricated."
+    $ mc.change_arousal(5)
+    "When you're ready, you point it at her puckered hole and begin to push. It takes several seconds, but you feel her sphincter give way and part for you."
+    "With sweet, delicious pressure, your erection slowly buries itself in [the_person.possessive_title]'s bowel."
+    $ the_person.change_arousal(15) #85
+    $ mc.change_arousal(15)
+    the_person "Oh god... why does it... feel so good!!!"
+    "[the_person.possessive_title]'s ass feels amazing as you start to fuck it. It's time to show her just how good you can make her feel this way."
+    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True) from _call_fuck_person_anal_fetish_intro_family_01
+    $ the_person.max_opinion_score("anal sex")
+    $ the_person.max_opinion_score("anal creampies")
+    "[the_person.possessive_title] slowly stands up."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    the_person "That was amazing, [the_person.mc_title]."
+    the_person "I... I think I need to get some new toys... something a little more purposefully made for anal use..."
+    "You think about it for a minute."
+    if starbuck_is_business_partner():
+        mc.name "I have a friend who runs a sex shop over at the mall. Head over there sometime and tell her I sent you."
+        mc.name "I'll text her to let her know you are coming. She can set you up with some special toys."
+    else:
+        mc.name "Hey, maybe you should go to the mall. I heard they have a sex shop there."
+        mc.name "Maybe they have something there that would be good for you if I'm not around to fuck that ass."
+    the_person "You know, I think I'll do that. Thank you [the_person.mc_title]. My ass is yours if you want to do this again sometime..."
+    mc.name "A tempting offer to be sure."
+    "You part ways with [the_person.title], confident that her new found anal fetish will bring you a lot of pleasure in the future."
+    $ the_person.add_role(anal_fetish_role)
+    $ the_person.update_sex_skill("Anal", 6)
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
+    $ add_fuck_doll_collar_to_base_outfit(the_person)
+    $ clear_scene() #TODO does this leave you talking to the girl? If so figure out how to part ways cleanly here.
+    return True
 
 label anal_fetish_generic_intro_label(the_person):
     # Concept, spank her while fingering her ass so she can discover her new submissive, anal loving side.
@@ -235,7 +310,8 @@ label anal_fetish_generic_intro_label(the_person):
     the_person "I woke up super horny this morning, but none of my usually masturbation techniques seemed to work... Can you help me out?"
     "Hmm, very interesting. Recently, you've been dosing her with your anal proclivity serums. Maybe that's why she's having trouble getting off?"
     "Helping her might develop her anal interest into a fetish!"
-    # TODO [If unique character give warning]
+    if the_person in unique_character_list:
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
     menu:
         "Help her":
             mc.name "Let's find somewhere private first."
