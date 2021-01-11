@@ -88,7 +88,6 @@ init -1 python:
         return False
 
     def start_breeding_fetish_quest(the_person):
-        return False #For now disable this
         #Determine who it is, then add the appropriate quest.
         if persistent.pregnancy_pref == 0:
             return False
@@ -99,17 +98,17 @@ init -1 python:
         elif the_person is lily:
             lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
             return True
-        elif the_person is aunt:
+        elif the_person is aunt and False:
             pass
-        elif the_person is cousin:
+        elif the_person is cousin and False:
             pass
         elif the_person is stephanie:
             if breeding_fetish_stephanie_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_stephanie_intro)
                 return True
-        elif the_person is emily:
+        elif the_person is emily and False:
             pass
-        elif the_person is christina:
+        elif the_person is christina and False:
             pass
         elif the_person is starbuck:
             if breeding_fetish_starbuck_intro not in mc.business.mandatory_morning_crises_list:
@@ -119,14 +118,16 @@ init -1 python:
             if breeding_fetish_sarah_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_sarah_intro)
                 return True
-        elif the_person is salon_manager:
+        elif the_person is salon_manager and False:
             pass
-        elif the_person is erica:
+        elif the_person is erica and False:
             pass
         elif "candace" in globals() and the_person is candace:
             candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
             return True
-        elif the_person is ashley:
+        elif the_person is ashley and False:
+            pass
+        elif the_person is alexia and False:
             pass
         elif the_person.is_employee():
             if is_fetish_after_hours_available():
@@ -134,8 +135,11 @@ init -1 python:
                 breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = the_person)
                 mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
                 return True
+        elif the_person.is_family():
+            the_person.add_unique_on_room_enter_event(breeding_fetish_family_intro)
+            return True
         else:
-            pass
+            the_person.add_unique_on_talk_event(breeding_fetish_non_employee_intro)
 
         return
 
