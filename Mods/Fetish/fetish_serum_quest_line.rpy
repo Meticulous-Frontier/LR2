@@ -43,6 +43,13 @@ init 2 python:
     def fetish_serum_research_in_progress():
         return mc.business.event_triggers_dict.get("fetish_serum_research_active", False)
 
+    special_fetish_outfit = Outfit("A Special Night")
+    special_fetish_outfit.add_upper(lace_bra.get_copy(),colour_pink)
+    special_fetish_outfit.add_feet(garter_with_fishnets.get_copy(), colour_pink)
+    special_fetish_outfit.add_feet(high_heels.get_copy(), colour_pink)
+
+    special_fetish_nude_outfit = Outfit("Nude")
+
 init 3 python:
     fetish_serum_quest_intro = Action("Nanobot Discovery", fetish_serum_quest_intro_requirement, "fetish_serum_quest_intro_label")
     fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label")

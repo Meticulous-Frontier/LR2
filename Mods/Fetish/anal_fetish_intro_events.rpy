@@ -80,13 +80,6 @@ init 1 python:
         person.base_outfit.add_accessory(fd_collar)
         return
 
-    anal_fetish_outfit = Outfit("A Special Night")
-    anal_fetish_outfit.add_upper(lace_bra.get_copy(),colour_pink)
-    anal_fetish_outfit.add_feet(garter_with_fishnets.get_copy(), colour_pink)
-    anal_fetish_outfit.add_feet(high_heels.get_copy(), colour_pink)
-
-    anal_fetish_nude_outfit = Outfit("Nude")
-
     #This is a list of positions that show off a person's ass. Can grab one randomly for when a girl wants to show off ass specifically
     def get_random_ass_position():
         return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
@@ -522,7 +515,7 @@ label anal_fetish_lily_intro_label():
     $ the_person.draw_person(position = "stand4")
     "Come on [the_person.mc_title], I can't wait to feel you fuck me with this thing on..."
     "[the_person.possessive_title] quickly strips, eager to get started."
-    $ the_person.apply_outfit(SB_anal_nude_outfit)
+    $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "stand4")
     "You get yourself naked as well. On a nearby shelf you spot a bulk size bottle of intimate lube."
     "[the_person.possessive_title] gets down on her knees and starts to secure the toy to your cock."
@@ -602,7 +595,7 @@ label anal_fetish_starbuck_intro_label():
     "You get a text message from [the_person.title]."
     the_person "Hey partner! I was just closing up the shop, butt craving something a little more real than this... want to swing by?"
 
-    $ the_person.apply_outfit(anal_fetish_nude_outfit)
+    $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = get_random_ass_position())
     "She attached a picture. It looks like she is bending over her counter. Between her ass cheeks you spy a good sized glass butt plug!"
     "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
