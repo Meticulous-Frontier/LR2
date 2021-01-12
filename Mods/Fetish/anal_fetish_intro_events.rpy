@@ -106,7 +106,11 @@ init 2 python: #Other anal fetish related python code
         mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
         return
 
+init 50 python:
+    def get_anal_fetish_unique_dialogue_list():
+        anal_list = [lily, starbuck]
 
+        return anal_list
 
 
 ### Function labels
@@ -121,7 +125,7 @@ label anal_fetish_employee_intro_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
     "She tries to pretend like she doesn't notice you, but you notice subtle shifts in her hips, wiggling a bit as you walk by her."
     "[the_person.possessive_title] has been doses recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
-    if the_person in unique_character_list:
+    if the_person in get_anal_fetish_unique_dialogue_list():
         "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
     menu:
         "Attempt to train her anal fetish" if mc.energy > 40:
@@ -269,7 +273,7 @@ label anal_fetish_family_intro_label(the_person):
         the_person "What can I say, the video reminded me of you a little bit..."
     "She holds her phone up. On the screen is a woman, bent over with her panties pulled down, getting fucked in the ass."
     "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
-    if the_person in unique_character_list:
+    if the_person in get_anal_fetish_unique_dialogue_list():
         "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
     menu:
         "Attempt to train her anal fetish" if mc.energy > 40:
@@ -350,7 +354,7 @@ label anal_fetish_generic_intro_label(the_person):
     the_person "I woke up super horny this morning, but none of my usually masturbation techniques seemed to work... Can you help me out?"
     "Hmm, very interesting. Recently, you've been dosing her with your anal proclivity serums. Maybe that's why she's having trouble getting off?"
     "Helping her might develop her anal interest into a fetish!"
-    if the_person in unique_character_list:
+    if the_person in get_anal_fetish_unique_dialogue_list():
         "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss it!"
     menu:
         "Help her":

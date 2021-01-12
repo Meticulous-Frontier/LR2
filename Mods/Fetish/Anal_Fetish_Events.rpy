@@ -88,83 +88,83 @@ init 1 python:
     def SB_get_random_ass_position():
         return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
 
-
-#SBA1
-label SB_fetish_anal_label(the_person):
-    "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
-    "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
-    "She seems to be using her ass to try and get attention."
-    "Even now, as you walk around he business in your closing rounds, [the_person.possessive_title] bends over her desk when she notices you are nearby."
-
-    $ the_person.draw_person(position = "standing_doggy")
-    the_person.char "Hey [the_person.mc_title]."
-
-    ###Draw the girl###
-    "You give her a quick wave as she walks up to you."
-    the_person.char "Hey, I really hate to bug you but... "
-    "She places extra emphasis on the word but before moving on."
-    the_person.char "I was wondering if you would stay for a bit after work? I need help with something."
-    "[the_person.possessive_title] looks at you with hopeful eyes."
-    menu:
-        "Accept":
-            mc.name "I suppose I could stay for a bit, let me just finish up a couple things and I'll be right with you."
-            the_person.char "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
-            $ the_person.draw_person(position = "walking_away")
-            "You finish up what you were doing and say goodbye to your employees. You are just starting to wonder what [the_person.possessive_title] needs when she comes back into the room."
-            $ the_person.apply_outfit(SB_anal_outfit)
-            $ the_person.draw_person()
-            "[the_person.possessive_title] has changed into some very nice lingerie. You notice as she walks up that she isn't wearing any panties..."
-            "She walks up and stands next to you by your desk."
-            the_person.char "So, [the_person.mc_title], I don't know why but... I decided recently I really want to try and get better at anal..."
-            "You aren't surprised, it's been a while since you started giving her the serum for increased anal enjoyment."
-            the_person.char "I went over to the sex shop and bought a new toy... I've been wearing it for a few days now... and I was wondering what you thought?"
-            $ the_person.draw_person(position = "standing_doggy")
-            "[the_person.possessive_title] turns and bends over in front of you, with her hands on your desk."
-            "You can see, nestled between her curvaceous ass cheeks, a matching pink jewel on the base of a butt plug."
-            the_person.char "I think I'm ready for something a bit more... substantial... don't you think?"
-            "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
-            $ the_person.change_arousal(the_person.get_opinion_score("anal sex") * 10)
-            "You work a couple fingers into her bottom. It is clear she loves anal sex so much, she keeps herself lubed up with the plug in throughout the day hoping for you to come fuck it."
-            "You decide to tease her before you put it in."
-            mc.name "You're such a buttslut, [the_person.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
-            "[the_person.possessive_title] tries to push back against you and begins to beg."
-            the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
-            $ the_person.break_taboo("anal_sex")
-            ###Anal Scene, standing variant###
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA10
-            #$ the_person.SB_fetish = "anal sex"
-            $ the_person.max_opinion_score("anal sex")
-            $ the_person.max_opinion_score("anal creampies")
-            "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
-            $ the_person.draw_person()
-            the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
-            "[the_person.possessive_title] blushes and pauses..."
-            mc.name "...And doing what, [the_person.title]?"
-            "You tease her."
-            the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
-            "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
-            $ the_person.add_role(anal_fetish_role)
-            $ the_person.update_sex_skill("Anal", 6)
-            $ the_person.event_triggers_dict["LastAnalFetish"] = day
-            $ add_fuck_doll_collar_to_base_outfit(the_person)
-            "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
-            the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
-            $ the_person.draw_person(position = "walking_away")
-            "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
-        "Refuse":
-            the_person.char "I'm sorry to hear that..." #TODO finish this
-            $ the_person.change_stats(happiness = -10, obedience = -10)
-            "[the_person.possessive_title] quickly sulks off."
-        "Too Tired" if mc.energy < 30:     # not enough energy for the player to induce fetish
-            "[the_person.possessive_title] is surprised by your answer."
-            $ the_person.change_stats(happiness = -5, obedience = -5)
-            the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
-            "[the_person.possessive_title] quickly sulks off."
-    $ fetish_after_hours_unlock()
-    $ the_person.apply_planned_outfit()
-    $ clear_scene()
-    return
+#
+# #SBA1
+# label SB_fetish_anal_label(the_person):
+#     "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
+#     "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
+#     "She seems to be using her ass to try and get attention."
+#     "Even now, as you walk around he business in your closing rounds, [the_person.possessive_title] bends over her desk when she notices you are nearby."
+#
+#     $ the_person.draw_person(position = "standing_doggy")
+#     the_person.char "Hey [the_person.mc_title]."
+#
+#     ###Draw the girl###
+#     "You give her a quick wave as she walks up to you."
+#     the_person.char "Hey, I really hate to bug you but... "
+#     "She places extra emphasis on the word but before moving on."
+#     the_person.char "I was wondering if you would stay for a bit after work? I need help with something."
+#     "[the_person.possessive_title] looks at you with hopeful eyes."
+#     menu:
+#         "Accept":
+#             mc.name "I suppose I could stay for a bit, let me just finish up a couple things and I'll be right with you."
+#             the_person.char "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
+#             $ the_person.draw_person(position = "walking_away")
+#             "You finish up what you were doing and say goodbye to your employees. You are just starting to wonder what [the_person.possessive_title] needs when she comes back into the room."
+#             $ the_person.apply_outfit(SB_anal_outfit)
+#             $ the_person.draw_person()
+#             "[the_person.possessive_title] has changed into some very nice lingerie. You notice as she walks up that she isn't wearing any panties..."
+#             "She walks up and stands next to you by your desk."
+#             the_person.char "So, [the_person.mc_title], I don't know why but... I decided recently I really want to try and get better at anal..."
+#             "You aren't surprised, it's been a while since you started giving her the serum for increased anal enjoyment."
+#             the_person.char "I went over to the sex shop and bought a new toy... I've been wearing it for a few days now... and I was wondering what you thought?"
+#             $ the_person.draw_person(position = "standing_doggy")
+#             "[the_person.possessive_title] turns and bends over in front of you, with her hands on your desk."
+#             "You can see, nestled between her curvaceous ass cheeks, a matching pink jewel on the base of a butt plug."
+#             the_person.char "I think I'm ready for something a bit more... substantial... don't you think?"
+#             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
+#             $ the_person.change_arousal(the_person.get_opinion_score("anal sex") * 10)
+#             "You work a couple fingers into her bottom. It is clear she loves anal sex so much, she keeps herself lubed up with the plug in throughout the day hoping for you to come fuck it."
+#             "You decide to tease her before you put it in."
+#             mc.name "You're such a buttslut, [the_person.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
+#             "[the_person.possessive_title] tries to push back against you and begins to beg."
+#             the_person.char "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
+#             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
+#             $ the_person.break_taboo("anal_sex")
+#             ###Anal Scene, standing variant###
+#             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA10
+#             #$ the_person.SB_fetish = "anal sex"
+#             $ the_person.max_opinion_score("anal sex")
+#             $ the_person.max_opinion_score("anal creampies")
+#             "[the_person.possessive_title] takes a few minutes to recover, then turns to you."
+#             $ the_person.draw_person()
+#             the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
+#             "[the_person.possessive_title] blushes and pauses..."
+#             mc.name "...And doing what, [the_person.title]?"
+#             "You tease her."
+#             the_person.char "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
+#             "She's been under the influence of your serums for a while now... you wonder if she's developed an anal fetish..."
+#             $ the_person.add_role(anal_fetish_role)
+#             $ the_person.update_sex_skill("Anal", 6)
+#             $ the_person.event_triggers_dict["LastAnalFetish"] = day
+#             $ add_fuck_doll_collar_to_base_outfit(the_person)
+#             "[the_person.possessive_title] gets her butt plug. She slowly pushes it back into her ass."
+#             the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
+#             $ the_person.draw_person(position = "walking_away")
+#             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
+#         "Refuse":
+#             the_person.char "I'm sorry to hear that..." #TODO finish this
+#             $ the_person.change_stats(happiness = -10, obedience = -10)
+#             "[the_person.possessive_title] quickly sulks off."
+#         "Too Tired" if mc.energy < 30:     # not enough energy for the player to induce fetish
+#             "[the_person.possessive_title] is surprised by your answer."
+#             $ the_person.change_stats(happiness = -5, obedience = -5)
+#             the_person.char "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
+#             "[the_person.possessive_title] quickly sulks off."
+#     $ fetish_after_hours_unlock()
+#     $ the_person.apply_planned_outfit()
+#     $ clear_scene()
+#     return
 
 label SB_fetish_anal_label_non_employee(the_person):
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
@@ -858,212 +858,212 @@ label SB_mom_weekly_anal_label():
     $ clear_scene()
     return
 
-#SBA60
-label SB_lily_anal_dp_fetish_label():
-    $ the_person = lily # make sure we use lily for the event
-    $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
-    the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
-    "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
-    $ mall.show_background()
-    "When you get to the mall, you look around for a minute, then spot Lily. She waves to you then comes running over to you, giving you a big hug."
-    $ the_person.draw_person(position = "stand4")
-    the_person.char "Hey! Thanks for coming with me! I need your help with something!"
-    "You are a little hesitant. She wants you to go shopping with her?"
-    mc.name "Are you sure you need me for this?"
-    "She gives you a mischievous smile."
-    the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
-    "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
-    "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
-    $ sex_store.show_background()
-    if starbuck.sluttiness > 50 or starbuck.love > 30:
-        $ starbuck.draw_person(emotion = "happy")
-        starbuck.char "Hello! Welcome to... Oh hey [the_person.mc_title]! Good to see you! Oh and you brought a partner! Hi I'm [starbuck.title]!"
-    else:
-        $ starbuck.draw_person(emotion = "happy")
-        starbuck.char "Hello! Welcome to Starbuck's Sex Shop! It's so great to see a couple come in."
-    starbuck.char "Is there anything I can help you find?"
-    $ the_person.draw_person(position = "stand4")
-    "Lily takes the lead."
-    the_person.char "Yeah so, I was wondering, do you sell a special type of strap on that came be used to... umm... strap on to a guy so he can fuck your pussy and ass at the same time?"
-    "You can barely believe your ears. You knew that the serums you had been giving Lily were starting to really corrupt her, but you had no idea she was ready for something like this."
-    $ starbuck.draw_person(emotion = "happy")
-    starbuck.char "Oh! I've got just the thing! Follow me!"
-    $ starbuck.draw_person(position = "walking_away")
-    if perk_system.has_item_perk("Male Strapon"):
-        "As you are following, remembering you already have something similar, you show [the_person.title] what you have in your backpack."
-        mc.name "Hey... I already kinda have something like that..."
-        "She looks at what you've got and her eyes get bright."
-        the_person.char "Ah! Bro! Why didn't you tell me you had one of these?"
-        "[starbuck.possessive_title] turns to you as you reach a selection of dildos."
-        the_person.char "Just pretend like we are looking then, that will totally work!"
-    else:
-        "[starbuck.possessive_title] leads you over to a selection of dildos. They have special straps that go around the man so that they are secured, just below penis, and can be used for double penetration."
+# #SBA60
+# label SB_lily_anal_dp_fetish_label():
+#     $ the_person = lily # make sure we use lily for the event
+#     $ the_person.event_triggers_dict["LastAnalFetish"] = day
+#     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
+#     the_person.char "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
+#     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
+#     $ mall.show_background()
+#     "When you get to the mall, you look around for a minute, then spot Lily. She waves to you then comes running over to you, giving you a big hug."
+#     $ the_person.draw_person(position = "stand4")
+#     the_person.char "Hey! Thanks for coming with me! I need your help with something!"
+#     "You are a little hesitant. She wants you to go shopping with her?"
+#     mc.name "Are you sure you need me for this?"
+#     "She gives you a mischievous smile."
+#     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
+#     "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
+#     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
+#     $ sex_store.show_background()
+#     if starbuck.sluttiness > 50 or starbuck.love > 30:
+#         $ starbuck.draw_person(emotion = "happy")
+#         starbuck.char "Hello! Welcome to... Oh hey [the_person.mc_title]! Good to see you! Oh and you brought a partner! Hi I'm [starbuck.title]!"
+#     else:
+#         $ starbuck.draw_person(emotion = "happy")
+#         starbuck.char "Hello! Welcome to Starbuck's Sex Shop! It's so great to see a couple come in."
+#     starbuck.char "Is there anything I can help you find?"
+#     $ the_person.draw_person(position = "stand4")
+#     "Lily takes the lead."
+#     the_person.char "Yeah so, I was wondering, do you sell a special type of strap on that came be used to... umm... strap on to a guy so he can fuck your pussy and ass at the same time?"
+#     "You can barely believe your ears. You knew that the serums you had been giving Lily were starting to really corrupt her, but you had no idea she was ready for something like this."
+#     $ starbuck.draw_person(emotion = "happy")
+#     starbuck.char "Oh! I've got just the thing! Follow me!"
+#     $ starbuck.draw_person(position = "walking_away")
+#     if perk_system.has_item_perk("Male Strapon"):
+#         "As you are following, remembering you already have something similar, you show [the_person.title] what you have in your backpack."
+#         mc.name "Hey... I already kinda have something like that..."
+#         "She looks at what you've got and her eyes get bright."
+#         the_person.char "Ah! Bro! Why didn't you tell me you had one of these?"
+#         "[starbuck.possessive_title] turns to you as you reach a selection of dildos."
+#         the_person.char "Just pretend like we are looking then, that will totally work!"
+#     else:
+#         "[starbuck.possessive_title] leads you over to a selection of dildos. They have special straps that go around the man so that they are secured, just below penis, and can be used for double penetration."
+#
+#     $ the_person.draw_person(position = "stand4")
+#     the_person.char "Hmm... I don't know, what do you think about this one?"
+#     "Lily picks up one. It has an extra little vibrating unit."
+#     mc.name "That looks pretty good, actually."
+#     "Lily takes it up to the counter."
+#     $ starbuck.draw_person(emotion = "happy", position = "stand2")
+#     starbuck.char "Great! This one is actually on sale, but I hadn't gotten around to marking it yet. Its only $200!"
+#     "You decide to offer to pay for it."
+#     mc.name "Here, let me just put this on the company card..."
+#     $ mc.business.change_funds(-200)
+#     if perk_system.has_item_perk("Male Strapon"):
+#         "Well, now you have an extra, in case anything ever happens to your other one..."
+#     starbuck.char "Okay! You're all set! Do you two want to try it out? I have a special room in the back, sometimes people just can't WAIT to get home before trying out a purchase!"
+#     $ the_person.draw_person(position = "stand4")
+#     "Lily quickly speaks up."
+#     the_person.char "That would be great! Come on [the_person.mc_title]!"
+#     $ the_person.draw_person(position = "walking_away")
+#     "[the_person.possessive_title] grabs your hand and you follow her to the backroom. It has a familiar smell of body fluids and sweat."
+#     $ the_person.draw_person(position = "stand4")
+#     "Come on [the_person.mc_title], I can't wait to feel you fuck me with this thing on..."
+#     "[the_person.possessive_title] quickly strips, eager to get started."
+#     $ the_person.apply_outfit(SB_anal_nude_outfit)
+#     $ the_person.draw_person(position = "stand4")
+#     "You get yourself naked as well. On a nearby shelf you spot a bulk size bottle of intimate lube."
+#     "[the_person.possessive_title] gets down on her knees and starts to secure the toy to your cock."
+#     $ the_person.draw_person(position = "blowjob")
+#     mc.name "Mmm, you look amazing on your knees [the_person.title]."
+#     "[the_person.possessive_title] looks up at you."
+#     the_person.char "Yeah, you like it anytime I'm near your dick. Trust me, I'd love to blow you, but I've got something else in mind..."
+#     $ the_person.draw_person(position = "doggy")
+#     "[the_person.possessive_title] turns over and gets on her hands and knees in front of you on the floor. She lifts her hips and starts waving her ass in the air."
+#     "You grab a few squirts of the lube and get your cock and the dildo all lubed up. You grab another squirt and start working it in her rear entry."
+#     the_person.char "Mmm... that is so good... I don't know why, lately I just haven't been to stop thinking about your cock fucking me back there..."
+#     "You've been having her test some of your anal enhancing serums. It sounds like she might be developing an anal fetish!"
+#     "You push two fingers into her tight rump. They grip and squeeze at your fingers."
+#     $ the_person.change_arousal(10)
+#     the_person.char "Oh! That feels good... but I'm ready for you. Let me have it [the_person.mc_title]!"
+#     "You use your hand to line yourself cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
+#     "With one slow, smooth motion, you push your cock past her well lubed sphincter. It goes in with a small pop, and then you continue with a slow thrust until your cock is buried in her ass."
+#     $ the_person.break_taboo("anal_sex")
+#     the_person.char "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
+#     "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
+#     the_person.char "Okay... Go slow... but I'm ready!"
+#     call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _call_sex_description_SBA60
+#     $ the_report = _return
+#     if the_report.get("girl orgasms", 0) > 1:
+#         "[the_person.possessive_title] is a sweaty, heaving mess. You know she had multiple orgasms from the intense sensations of the double penetration."
+#         "She looks back at you in awe."
+#     elif the_report.get("girl orgasms", 0) > 0:
+#         "[the_person.possessive_title] is laying on the floor, exhausted from the intensity of the double penetration."
+#         "She looks back at you and smiles"
+#     the_person.char "[the_person.mc_title]... That felt amazing. I'm not sure though... are we going to able to keep this from mom? I don't think I can stay quiet enough when I'm getting fucked in both holes like that..."
+#     "You give her a reassuring smile."
+#     mc.name "Don't worry [the_person.title], we'll be careful."
+#     the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
+#     $ the_person.add_role(anal_fetish_role)
+#     $ add_fuck_doll_collar_to_base_outfit(the_person)
+#
+#     #TODO come back and change other events involving lily to account for her anal fetish.
+#     "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
+#     $ mc.change_location(sex_store)
+#     "After you both clean up, you leave the back room of the sex shop."
+#     $ starbuck.draw_person(emotion = "happy")
+#     starbuck.char "Have a good day! Thank you for shopping at Starbuck's sex shop!"
+#     if starbuck.sluttiness > 50:
+#         "You wave goodbye to [the_person.possessive_title]. You note some telltale signs of arousal, flushed cheeks, and you can see her nipples are erect."
+#         "Was she watching you somehow? Oh well, you decide to head out."
+#     else:
+#         "You wave goodbye to [the_person.possessive_title] and head out."
+#
+#     #$ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
+#     # $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
+#     $ male_strapon_unlock()  #TODO test this
+#
+#     $ the_person.apply_planned_outfit()
+#     $ clear_scene()
+#     return
 
-    $ the_person.draw_person(position = "stand4")
-    the_person.char "Hmm... I don't know, what do you think about this one?"
-    "Lily picks up one. It has an extra little vibrating unit."
-    mc.name "That looks pretty good, actually."
-    "Lily takes it up to the counter."
-    $ starbuck.draw_person(emotion = "happy", position = "stand2")
-    starbuck.char "Great! This one is actually on sale, but I hadn't gotten around to marking it yet. Its only $200!"
-    "You decide to offer to pay for it."
-    mc.name "Here, let me just put this on the company card..."
-    $ mc.business.change_funds(-200)
-    if perk_system.has_item_perk("Male Strapon"):
-        "Well, now you have an extra, in case anything ever happens to your other one..."
-    starbuck.char "Okay! You're all set! Do you two want to try it out? I have a special room in the back, sometimes people just can't WAIT to get home before trying out a purchase!"
-    $ the_person.draw_person(position = "stand4")
-    "Lily quickly speaks up."
-    the_person.char "That would be great! Come on [the_person.mc_title]!"
-    $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] grabs your hand and you follow her to the backroom. It has a familiar smell of body fluids and sweat."
-    $ the_person.draw_person(position = "stand4")
-    "Come on [the_person.mc_title], I can't wait to feel you fuck me with this thing on..."
-    "[the_person.possessive_title] quickly strips, eager to get started."
-    $ the_person.apply_outfit(SB_anal_nude_outfit)
-    $ the_person.draw_person(position = "stand4")
-    "You get yourself naked as well. On a nearby shelf you spot a bulk size bottle of intimate lube."
-    "[the_person.possessive_title] gets down on her knees and starts to secure the toy to your cock."
-    $ the_person.draw_person(position = "blowjob")
-    mc.name "Mmm, you look amazing on your knees [the_person.title]."
-    "[the_person.possessive_title] looks up at you."
-    the_person.char "Yeah, you like it anytime I'm near your dick. Trust me, I'd love to blow you, but I've got something else in mind..."
-    $ the_person.draw_person(position = "doggy")
-    "[the_person.possessive_title] turns over and gets on her hands and knees in front of you on the floor. She lifts her hips and starts waving her ass in the air."
-    "You grab a few squirts of the lube and get your cock and the dildo all lubed up. You grab another squirt and start working it in her rear entry."
-    the_person.char "Mmm... that is so good... I don't know why, lately I just haven't been to stop thinking about your cock fucking me back there..."
-    "You've been having her test some of your anal enhancing serums. It sounds like she might be developing an anal fetish!"
-    "You push two fingers into her tight rump. They grip and squeeze at your fingers."
-    $ the_person.change_arousal(10)
-    the_person.char "Oh! That feels good... but I'm ready for you. Let me have it [the_person.mc_title]!"
-    "You use your hand to line yourself cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
-    "With one slow, smooth motion, you push your cock past her well lubed sphincter. It goes in with a small pop, and then you continue with a slow thrust until your cock is buried in her ass."
-    $ the_person.break_taboo("anal_sex")
-    the_person.char "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
-    "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
-    the_person.char "Okay... Go slow... but I'm ready!"
-    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _call_sex_description_SBA60
-    $ the_report = _return
-    if the_report.get("girl orgasms", 0) > 1:
-        "[the_person.possessive_title] is a sweaty, heaving mess. You know she had multiple orgasms from the intense sensations of the double penetration."
-        "She looks back at you in awe."
-    elif the_report.get("girl orgasms", 0) > 0:
-        "[the_person.possessive_title] is laying on the floor, exhausted from the intensity of the double penetration."
-        "She looks back at you and smiles"
-    the_person.char "[the_person.mc_title]... That felt amazing. I'm not sure though... are we going to able to keep this from mom? I don't think I can stay quiet enough when I'm getting fucked in both holes like that..."
-    "You give her a reassuring smile."
-    mc.name "Don't worry [the_person.title], we'll be careful."
-    the_person.char "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
-    $ the_person.add_role(anal_fetish_role)
-    $ add_fuck_doll_collar_to_base_outfit(the_person)
-
-    #TODO come back and change other events involving lily to account for her anal fetish.
-    "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
-    $ mc.change_location(sex_store)
-    "After you both clean up, you leave the back room of the sex shop."
-    $ starbuck.draw_person(emotion = "happy")
-    starbuck.char "Have a good day! Thank you for shopping at Starbuck's sex shop!"
-    if starbuck.sluttiness > 50:
-        "You wave goodbye to [the_person.possessive_title]. You note some telltale signs of arousal, flushed cheeks, and you can see her nipples are erect."
-        "Was she watching you somehow? Oh well, you decide to head out."
-    else:
-        "You wave goodbye to [the_person.possessive_title] and head out."
-
-    #$ item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for dual penetration!")
-    # $ perk_system.add_item_perk(item_perk_male_strapon, "Male Strapon")
-    $ male_strapon_unlock()  #TODO test this
-
-    $ the_person.apply_planned_outfit()
-    $ clear_scene()
-    return
-
-#SBA70
-label SB_starbuck_anal_intro():
-    $ the_person = starbuck
-    $ the_person.event_triggers_dict["LastAnalFetish"] = day
-
-    "You get a text message from [the_person.title]."
-    the_person.char "Hey partner! I was just closing up the shop, butt craving something a little more real than this... want to swing by?"
-
-    $ the_person.apply_outfit(SB_anal_nude_outfit)
-    $ the_person.draw_person(position = SB_get_random_ass_position())
-    "She attached a picture. It looks like she is bending over her counter. Between her ass cheeks you spy a good sized glass butt plug!"
-    "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
-
-    $ mc.change_location(sex_store)
-    $ mc.location.show_background()
-
-    "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
-    the_person.char "[the_person.mc_title]! You came!"
-    "She gives you a quick wink."
-    the_person.char "Hopefully that's not the last time I say that tonight..."
-    "You share a quick laugh."
-    the_person.char "So... I take it you got my picture? We just got that plug in stock. As soon as I saw it I knew I had to try it."
-    mc.name "Yeah... still got it in?"
-    $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] turns and begins to slowly walk away from you."
-    the_person.char "Maybe..."
-    "She slowly bends over the counter. The dark glass butt plug appears as her cheeks spread."
-    $ the_person.draw_person(position = "standing_doggy")
-    the_person.char "I've had it in all day... but all I've been able to think about is your amazing cock, ramming up inside me, filling me up!"
-    "You walk up behind her and begin to run your hands along her delicious hips. You can see goosebumps break out along her skin."
-    mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days?"
-    "[the_person.title] looks back at you."
-    the_person.char "It's true... I don't understand why, but lately I just find myself constantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
-    "Sounds like [the_person.title] has developed an anal fetish!"
-    "You reach down and start to slowly play with her plug. Her body stiffens as she feels it begin to slowly work in and out of her. She lets out a long, low moan."
-    $ the_person.change_arousal(10)
-    the_person.char "Oh thank god... Oh [the_person.mc_title]."
-    mc.name "Don't worry, [the_person.title]. I'm just the man to help you with all these urges you've been dealing with."
-    "You slowly pull the plug out and take a look. She's already got a lot of lube worked in and around her asshole."
-    "You push the plug back up against [the_person.possessive_title]'s pucker. It gives way easily and slides right in."
-    $ the_person.change_arousal(10)
-    the_person.char "Mmm, that feels good [the_person.mc_title], but you don't have to tease me!"
-    "You decide to oblige her. You leave the plug in as you quickly undress yourself. Your cock aches in anticipation, ready for another plunge into [the_person.possessive_title]'s backdoor."
-    "With her plug still in, you slide your cock up and down a few times between her cheeks. She pushes herself back against you, grinding her hips against yours."
-    "Her soft, pliant cheeks feel great pushed up against your hips. You reach down and slowly pull out her plug and set it on the counter."
-    "With her hip in one hand and your dick in the other, you line yourself up and slowly push into [the_person.possessive_title]'s tender behind."
-    $ the_person.break_taboo("anal_sex")
-    "You lean forward and whisper into her ear."
-    mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
-    "Her body shudders from your dirty talk. She wiggles her ass back up against you."
-    the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
-    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA70
-    $ the_person.max_opinion_score("anal sex")
-    $ the_person.max_opinion_score("anal creampies")
-    $ the_person.add_role(anal_fetish_role)
-    $ add_fuck_doll_collar_to_base_outfit(the_person)
-    $ the_person.update_sex_skill("Anal", 6)
-    "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
-    "[the_person.title] takes a few minutes to recover. She eventually stands up and turns to you."
-    $ the_person.draw_person(position = "stand4")
-    the_person.char "Hey so, what you said earlier about, you know, being the man to help me with all these urges I've been dealing with lately... were you being serious?"
-    mc.name "Of course. We've already been through so much together, you know I'd be glad to help you out!"
-    "She thinks for a moment."
-    the_person.char "Ok, stay right here! I'm going to go get something..."
-    $ the_person.draw_person(position = "walking_away")
-    "You watch [the_person.possessive_title]'s shapely bottom as she walks away."
-    "You are definitely looking forward to fucking that ass as much as possible."
-    "She is gone for several minutes, but [the_person.title] soon comes back."
-    $ the_person.draw_person(position = "stand2")
-    "She hands you small card that has a username and password on it, and a logo for some company at the top that advertises being the best in teledildonics."
-    mc.name "Thanks? I'm not sure what this is..."
-    the_person.char "Well, that would be the sign in info for you to control, remotely from your phone, the vibrating plug I have in my ass right now..."
-    "Wow! This should be interesting!"
-    "[the_person.title] helps you download the app and sign in. When you finish signing in you can see all kinds of information about the plug."
-    "Apparently it has some kind of heat sensor, so it can tell whether it is inserted or not and how long its been in."
-    "Theres an icon for making the plug vibrate, and it can even tell when it is moving in and out rapidly so you can see when she is masturbating with it!"
-    "You tap the little vibrate icon. [the_person.title] jumps."
-    the_person.char "Mmm! That felt good! I guess we got it working!"
-    $ the_person.change_arousal(7)
-    "This should allow for some... unique experiences!"
-    the_person.char "Well, I'd better get home. Feel free to uh, check in on me whenever you want [the_person.mc_title]!"
-    "You say goodbye and head out so she can finish locking up the sex shop."
-
-    $ the_person.apply_planned_outfit()
-    $ clear_scene()
-    return
+# #SBA70
+# label SB_starbuck_anal_intro():
+#     $ the_person = starbuck
+#     $ the_person.event_triggers_dict["LastAnalFetish"] = day
+#
+#     "You get a text message from [the_person.title]."
+#     the_person.char "Hey partner! I was just closing up the shop, butt craving something a little more real than this... want to swing by?"
+#
+#     $ the_person.apply_outfit(SB_anal_nude_outfit)
+#     $ the_person.draw_person(position = SB_get_random_ass_position())
+#     "She attached a picture. It looks like she is bending over her counter. Between her ass cheeks you spy a good sized glass butt plug!"
+#     "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
+#
+#     $ mc.change_location(sex_store)
+#     $ mc.location.show_background()
+#
+#     "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
+#     the_person.char "[the_person.mc_title]! You came!"
+#     "She gives you a quick wink."
+#     the_person.char "Hopefully that's not the last time I say that tonight..."
+#     "You share a quick laugh."
+#     the_person.char "So... I take it you got my picture? We just got that plug in stock. As soon as I saw it I knew I had to try it."
+#     mc.name "Yeah... still got it in?"
+#     $ the_person.draw_person(position = "walking_away")
+#     "[the_person.possessive_title] turns and begins to slowly walk away from you."
+#     the_person.char "Maybe..."
+#     "She slowly bends over the counter. The dark glass butt plug appears as her cheeks spread."
+#     $ the_person.draw_person(position = "standing_doggy")
+#     the_person.char "I've had it in all day... but all I've been able to think about is your amazing cock, ramming up inside me, filling me up!"
+#     "You walk up behind her and begin to run your hands along her delicious hips. You can see goosebumps break out along her skin."
+#     mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days?"
+#     "[the_person.title] looks back at you."
+#     the_person.char "It's true... I don't understand why, but lately I just find myself constantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
+#     "Sounds like [the_person.title] has developed an anal fetish!"
+#     "You reach down and start to slowly play with her plug. Her body stiffens as she feels it begin to slowly work in and out of her. She lets out a long, low moan."
+#     $ the_person.change_arousal(10)
+#     the_person.char "Oh thank god... Oh [the_person.mc_title]."
+#     mc.name "Don't worry, [the_person.title]. I'm just the man to help you with all these urges you've been dealing with."
+#     "You slowly pull the plug out and take a look. She's already got a lot of lube worked in and around her asshole."
+#     "You push the plug back up against [the_person.possessive_title]'s pucker. It gives way easily and slides right in."
+#     $ the_person.change_arousal(10)
+#     the_person.char "Mmm, that feels good [the_person.mc_title], but you don't have to tease me!"
+#     "You decide to oblige her. You leave the plug in as you quickly undress yourself. Your cock aches in anticipation, ready for another plunge into [the_person.possessive_title]'s backdoor."
+#     "With her plug still in, you slide your cock up and down a few times between her cheeks. She pushes herself back against you, grinding her hips against yours."
+#     "Her soft, pliant cheeks feel great pushed up against your hips. You reach down and slowly pull out her plug and set it on the counter."
+#     "With her hip in one hand and your dick in the other, you line yourself up and slowly push into [the_person.possessive_title]'s tender behind."
+#     $ the_person.break_taboo("anal_sex")
+#     "You lean forward and whisper into her ear."
+#     mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
+#     "Her body shudders from your dirty talk. She wiggles her ass back up against you."
+#     the_person.char "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
+#     call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBA70
+#     $ the_person.max_opinion_score("anal sex")
+#     $ the_person.max_opinion_score("anal creampies")
+#     $ the_person.add_role(anal_fetish_role)
+#     $ add_fuck_doll_collar_to_base_outfit(the_person)
+#     $ the_person.update_sex_skill("Anal", 6)
+#     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
+#     "[the_person.title] takes a few minutes to recover. She eventually stands up and turns to you."
+#     $ the_person.draw_person(position = "stand4")
+#     the_person.char "Hey so, what you said earlier about, you know, being the man to help me with all these urges I've been dealing with lately... were you being serious?"
+#     mc.name "Of course. We've already been through so much together, you know I'd be glad to help you out!"
+#     "She thinks for a moment."
+#     the_person.char "Ok, stay right here! I'm going to go get something..."
+#     $ the_person.draw_person(position = "walking_away")
+#     "You watch [the_person.possessive_title]'s shapely bottom as she walks away."
+#     "You are definitely looking forward to fucking that ass as much as possible."
+#     "She is gone for several minutes, but [the_person.title] soon comes back."
+#     $ the_person.draw_person(position = "stand2")
+#     "She hands you small card that has a username and password on it, and a logo for some company at the top that advertises being the best in teledildonics."
+#     mc.name "Thanks? I'm not sure what this is..."
+#     the_person.char "Well, that would be the sign in info for you to control, remotely from your phone, the vibrating plug I have in my ass right now..."
+#     "Wow! This should be interesting!"
+#     "[the_person.title] helps you download the app and sign in. When you finish signing in you can see all kinds of information about the plug."
+#     "Apparently it has some kind of heat sensor, so it can tell whether it is inserted or not and how long its been in."
+#     "Theres an icon for making the plug vibrate, and it can even tell when it is moving in and out rapidly so you can see when she is masturbating with it!"
+#     "You tap the little vibrate icon. [the_person.title] jumps."
+#     the_person.char "Mmm! That felt good! I guess we got it working!"
+#     $ the_person.change_arousal(7)
+#     "This should allow for some... unique experiences!"
+#     the_person.char "Well, I'd better get home. Feel free to uh, check in on me whenever you want [the_person.mc_title]!"
+#     "You say goodbye and head out so she can finish locking up the sex shop."
+#
+#     $ the_person.apply_planned_outfit()
+#     $ clear_scene()
+#     return
 
 init 2 python:
     def sb_anal_fetish_prepare_demo_audience(the_person):
