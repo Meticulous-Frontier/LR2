@@ -2093,8 +2093,8 @@ init -1 python:
 
     Person.attempt_opinion_training = attempt_opinion_training
 
-    def have_orgasm(self, position = None, the_object = None, half_arousal = True, report_log = None):
-        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = position, the_object = the_object)
+    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True):
+        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
         self.change_slut_temp(5)
         self.change_happiness(5)
@@ -2102,8 +2102,8 @@ init -1 python:
             self.change_arousal(-self.arousal/2)
         else:
             self.change_arousal(-self.arousal)
-        if report_log != None:
-            report_log["girl orgasms"] += 1
+        if "report_log" in globals():
+            report_log["girl orgasms"] = report_log.get("girl orgasms", 0) + 1
 
         return
 

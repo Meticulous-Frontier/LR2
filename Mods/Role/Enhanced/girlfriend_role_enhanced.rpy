@@ -321,7 +321,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ mc.change_arousal(35) #90
     the_person.char "Oh fuck, yes! YES!"
     "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
-    $ the_person.have_orgasm()
+    $ the_person.have_orgasm(the_position = "back_peek")
     $ mc.change_arousal(20) #110
     mc.name "I'm gonna cum!"
     $ the_person.call_dialogue("cum_pullout")

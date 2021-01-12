@@ -1572,7 +1572,7 @@ label Sarah_stripclub_story_label():
     "You reach up and grab her hips with your hands. You give one cheek a hard spank while your tongue snakes its way inside of her."
     $ the_person.change_arousal(30)
     the_person.char "Yes! Oh fuck I'm gonna cum!!!"
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person)
+    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "standing_doggy")
     $ the_person.change_happiness(5)
     $ the_person.change_obedience(5)
     $ the_person.change_slut_temp(5)
