@@ -84,6 +84,8 @@ init 2 python:
 
 label cum_fetish_employee_intro_label(the_person):
     $ the_person.arousal = 40
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
+    $ fetish_after_hours_unlock()
     "It's the end of the day, and you and your employees are packing up to head out. However, one of your employees is acting a little suspicious and milling around."
     "The rest of the girls in her department pack up and head out, while she clearly is wasting time. You decide to ask her if she's okay."
     $ the_person.draw_person()
@@ -122,9 +124,46 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "Mmm, it looks so tasty."
     "She opens her mouth and slowly licks some of your precum from the tip. You watch as she works her tongue around her mouth, savoring the taste."
     $ mc.arousal = 15
+    if the_person.tits_available():
+        "As she takes you in her mouth, she runs her fingers along her breasts, pinching and pulling at her nipples."
+    else:
+        mc.name "Get your tits out. I want something nice to look at."
+        the_person "Mmm, okay."
+        $ the_person.strip_outfit(exclude_upper = False, exclude_lower = True)
+        "When she finishes, she takes you back in her mouth, she runs her fingers along her breasts, pinching and pulling at her nipples."
     call fuck_person(the_person, start_position = cum_fetish_blowjob, skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_employee_intro_01
-
-
+    mc.name "Damn that was good. You really got off on that, didn't you?"
+    the_person "Mmm... yeah..."
+    mc.name "I want you to wipe some cum on your fingers, and rub it into your tits."
+    the_person "Oh? That's... oh god that sounds hot..."
+    "She takes her hand and wipes a bit of your cum off her face, then brings them down to her breasts..."
+    $ the_person.cum_on_tits()
+    $ the_person.change_arousal(20)
+    mc.name "That's it. Feels good, doesn't it?"
+    the_person "Your cum feels so good on my skin... its electric!"
+    mc.name "Good girl. Keeping going, rub some on your stomach..."
+    the_person "Oh my god..."
+    $ the_person.cum_on_stomach()
+    "Taking what she can, [the_person.possesive_title] goes further, rubbing your cum onto her belly."
+    $ the_person.change_arousal(20)
+    "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dialated. She is REALLY getting off on this!"
+    mc.name "That's a good cumslut. You know whats coming next, right?"
+    the_person "Oh god, probably me soon!"
+    mc.name "Do it. Rub some cum around your cunt and get yourself off for me."
+    the_person "Oh fuck yes!"
+    $ the_person.draw_person(position = "kneeling1")
+    $ the_person.change_arousal (25)
+    "[the_person.possesive_title] immediately begins to finger herself rapidly. Once in a while she will wipe a bit of cum off her face, rub it in circles around her slit, then keep going."
+    the_person "Oh god! [the_person.mc_title] I'm cumming!"
+    $ the_person.have_orgasm()
+    "[the_person.title] cries out as she cums. Her body convulses in waves as a strong orgasm overtakes her."
+    "It takes several seconds for her to catch her breath."
+    $ add_cum_fetish(the_person)
+    the_person "That... was amazing..."
+    "You put your cock back in your pants and grab your stuff."
+    mc.name "You are such a good cum slut. I'll make sure to make use of your mouth again soon. Have a goodnight [the_person.title]."
+    the_person "Good night [the_person.mc_title]!"
+    "You leave the office, setting the doors to lock automatically after [the_person.title] leaves. She definitely seems to have developed a fetish for your cum!"
     return False
 
 label cum_fetish_family_intro_label():
