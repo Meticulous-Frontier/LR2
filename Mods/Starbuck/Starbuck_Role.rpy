@@ -2633,7 +2633,7 @@ label starbuck_anal_fetish_masturbate(alert = False):
             "You decide to have a little fun with the plug vibration. You push and the hold the vibration function for a solid three seconds."
             "The app registers a heart rate spike with the vibration. [the_person.possessive_title] knows you are watching the monitor as she masturbates!"
     #WE can assume we decided to vibrate the plug
-    "You imagine [the_person.title], somewhere in her shop, pushing th plug in and out of herself."
+    "You imagine [the_person.title], somewhere in her shop, pushing the plug in and out of herself."
     "You push and hold the vibrate button again, release it, then pulse again. You make it pulse with vibration every second or two."
     "You watch as her heart rate slowly climbs. It's 100 beats per minute now and still climbing."
     "You pulse the plug a bit faster now. Her heart rate keeps climbing."

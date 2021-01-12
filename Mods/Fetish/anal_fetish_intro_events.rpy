@@ -48,6 +48,8 @@ init 1 python:
         return False
 
     def anal_fetish_starbuck_intro_requirement():
+        if time_of_day == 3 and mc.is_at_work():
+            return True
         return False
 
     def anal_fetish_sarah_intro_requirement():
@@ -78,17 +80,36 @@ init 1 python:
         person.base_outfit.add_accessory(fd_collar)
         return
 
+    anal_fetish_outfit = Outfit("A Special Night")
+    anal_fetish_outfit.add_upper(lace_bra.get_copy(),colour_pink)
+    anal_fetish_outfit.add_feet(garter_with_fishnets.get_copy(), colour_pink)
+    anal_fetish_outfit.add_feet(high_heels.get_copy(), colour_pink)
+
+    anal_fetish_nude_outfit = Outfit("Nude")
+
+    #This is a list of positions that show off a person's ass. Can grab one randomly for when a girl wants to show off ass specifically
+    def get_random_ass_position():
+        return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
+
 init 2 python: #Other anal fetish related python code
-    anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label")
+    # anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label") #Create this per person
     anal_fetish_generic_intro = Action("Generic Anal Fetish Intro", anal_fetish_generic_intro_requirement, "anal_fetish_generic_intro_label")
     anal_fetish_family_intro = Action("Family Anal Fetish Intro", anal_fetish_family_intro_requirement, "anal_fetish_family_intro_label")
     anal_fetish_lily_intro = Action("Lily Anal Fetish Intro", anal_fetish_lily_intro_requirement, "anal_fetish_lily_intro_label")
+    anal_fetish_starbuck_intro = Action("Starbuck Anal Fetish Intro", anal_fetish_starbuck_intro_requirement, "anal_fetish_starbuck_intro_label")
 
     def add_anal_fetish(person):
+        person.max_opinion_score("anal sex")
+        person.max_opinion_score("anal creampies")
         person.add_role(anal_fetish_role)
         person.update_sex_skill("Anal", 6)
         person.event_triggers_dict["LastAnalFetish"] = day
         add_fuck_doll_collar_to_base_outfit(person)
+        return
+
+    def add_employee_anal_fetish_intro(the_person):
+        anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person)
+        mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
         return
 
 
@@ -96,7 +117,7 @@ init 2 python: #Other anal fetish related python code
 
 ### Function labels
 
-label anal_fetish_employee_intro_label():
+label anal_fetish_employee_intro_label(the_person):
     $ fetish_after_hours_unlock()
     "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
     "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
@@ -454,7 +475,7 @@ label anal_fetish_lily_intro_label():
     "[the_person.title] grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
     $ sex_store.show_background()
-    if starbuck.sluttiness > 50 or starbuck.love > 30 or starbuck_is_business_partner()::
+    if starbuck.sluttiness > 50 or starbuck.love > 30 or starbuck_is_business_partner():
         $ starbuck.draw_person(emotion = "happy")
         starbuck "Hello! Welcome to... Oh hey [the_person.mc_title]! Good to see you! Oh and you brought a partner! Hi I'm [starbuck.title]!"
     else:
@@ -574,7 +595,87 @@ label anal_fetish_christina_intro_label():
     return False
 
 label anal_fetish_starbuck_intro_label():
-    return False
+    $ the_person = starbuck
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
+    $ fetish_after_hours_unlock()
+
+    "You get a text message from [the_person.title]."
+    the_person "Hey partner! I was just closing up the shop, butt craving something a little more real than this... want to swing by?"
+
+    $ the_person.apply_outfit(anal_fetish_nude_outfit)
+    $ the_person.draw_person(position = get_random_ass_position())
+    "She attached a picture. It looks like she is bending over her counter. Between her ass cheeks you spy a good sized glass butt plug!"
+    "You decide this is too good of an opportunity to pass up. You head over to the sex shop."
+
+    $ mc.change_location(sex_store)
+    $ mc.location.show_background()
+
+    "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
+    the_person "[the_person.mc_title]! You came!"
+    "She gives you a quick wink."
+    the_person "Hopefully that's not the last time I say that tonight..."
+    "You share a quick laugh."
+    the_person "So... I take it you got my picture? We just got that plug in stock. As soon as I saw it I knew I had to try it."
+    mc.name "Yeah... still got it in?"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] turns and begins to slowly walk away from you."
+    the_person "Maybe..."
+    "She slowly bends over the counter. The dark glass butt plug appears as her cheeks spread."
+    $ the_person.draw_person(position = "standing_doggy")
+    the_person "I've had it in all day... but all I've been able to think about is your amazing cock, ramming up inside me, filling me up!"
+    "You walk up behind her and begin to run your hands along her delicious hips. You can see goosebumps break out along her skin."
+    mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days?"
+    "[the_person.title] looks back at you."
+    the_person "It's true... I don't understand why, but lately I just find myself constantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
+    "Sounds like [the_person.title] has developed an anal fetish!"
+    "You reach down and start to slowly play with her plug. Her body stiffens as she feels it begin to slowly work in and out of her. She lets out a long, low moan."
+    $ the_person.change_arousal(10)
+    the_person "Oh thank god... Oh [the_person.mc_title]."
+    mc.name "Don't worry, [the_person.title]. I'm just the man to help you with all these urges you've been dealing with."
+    "You slowly pull the plug out and take a look. She's already got a lot of lube worked in and around her asshole."
+    "You push the plug back up against [the_person.possessive_title]'s pucker. It gives way easily and slides right in."
+    $ the_person.change_arousal(10)
+    the_person "Mmm, that feels good [the_person.mc_title], but you don't have to tease me!"
+    "You decide to oblige her. You leave the plug in as you quickly undress yourself. Your cock aches in anticipation, ready for another plunge into [the_person.possessive_title]'s backdoor."
+    "With her plug still in, you slide your cock up and down a few times between her cheeks. She pushes herself back against you, grinding her hips against yours."
+    "Her soft, pliant cheeks feel great pushed up against your hips. You reach down and slowly pull out her plug and set it on the counter."
+    "With her hip in one hand and your dick in the other, you line yourself up and slowly push into [the_person.possessive_title]'s tender behind."
+    $ the_person.break_taboo("anal_sex")
+    "You lean forward and whisper into her ear."
+    mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
+    "Her body shudders from your dirty talk. She wiggles her ass back up against you."
+    the_person "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
+    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_starbuck_anal_fetish_intro_01
+    $ add_anal_fetish(the_person)
+    "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
+    "[the_person.title] takes a few minutes to recover. She eventually stands up and turns to you."
+    $ the_person.draw_person(position = "stand4")
+    the_person "Hey so, what you said earlier about, you know, being the man to help me with all these urges I've been dealing with lately... were you being serious?"
+    mc.name "Of course. We've already been through so much together, you know I'd be glad to help you out!"
+    "She thinks for a moment."
+    the_person "Ok, stay right here! I'm going to go get something..."
+    $ the_person.draw_person(position = "walking_away")
+    "You watch [the_person.possessive_title]'s shapely bottom as she walks away."
+    "You are definitely looking forward to fucking that ass as much as possible."
+    "She is gone for several minutes, but [the_person.title] soon comes back."
+    $ the_person.draw_person(position = "stand2")
+    "She hands you small card that has a username and password on it, and a logo for some company at the top that advertises being the best in teledildonics."
+    mc.name "Thanks? I'm not sure what this is..."
+    the_person "Well, that would be the sign in info for you to control, remotely from your phone, the vibrating plug I have in my ass right now..."
+    "Wow! This should be interesting!"
+    "[the_person.title] helps you download the app and sign in. When you finish signing in you can see all kinds of information about the plug."
+    "Apparently it has some kind of heat sensor, so it can tell whether it is inserted or not and how long its been in."
+    "Theres an icon for making the plug vibrate, and it can even tell when it is moving in and out rapidly so you can see when she is masturbating with it!"
+    "You tap the little vibrate icon. [the_person.title] jumps."
+    the_person "Mmm! That felt good! I guess we got it working!"
+    $ the_person.change_arousal(7)
+    "This should allow for some... unique experiences!"
+    the_person "Well, I'd better get home. Feel free to uh, check in on me whenever you want [the_person.mc_title]!"
+    "You say goodbye and head out so she can finish locking up the sex shop."
+
+    $ the_person.apply_planned_outfit()
+    $ clear_scene()
+    return True
 
 label anal_fetish_sarah_intro_label():
     return False

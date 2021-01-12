@@ -60,30 +60,53 @@ init -1 python:
 
     def start_anal_fetish_quest(the_person):
         return False #For now disable this
-        if person is lily:
-            add_SB_lily_anal_dp_fetish_event()
-            return True
-        elif person is mom:
-            mom_weekly_pay = exists_in_mandatory_morning_crisis_list("mom_weekly_pay_label")
-            if mom_weekly_pay: # replace default mom weekly pay with new event
-                # renpy.say("", "Replacing default mom weekly pay event")
-                mc.business.mandatory_morning_crises_list.remove(mom_weekly_pay)
-                add_mom_anal_fetish_event()
-                return True
-        elif person is starbuck:
-            if starbuck.shop_investment_rate == 6.0:
-                add_sb_starbuck_anal_intro_event()
-                return True
-        elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality:
-            add_stephanie_anal_fetish_action()
-            return True
-        elif person.is_employee():
+        if the_person is lily:
             if is_fetish_after_hours_available():
                 fetish_after_hours_lock()
-                add_sb_fetish_anal_crisis(person)
+                mc.business.mandatory_morning_crises_list.append(anal_fetish_lily_intro)
+                return True
+            return False
+        elif the_person is mom and False:
+            return True
+        elif the_person is aunt and False:
+            pass
+        elif the_person is cousin and False:
+            pass
+        elif the_person is starbuck:
+            if starbuck.shop_investment_rate == 6.0:
+                if is_fetish_after_hours_available():
+                    fetish_after_hours_lock()
+                    add_sb_starbuck_anal_intro_event()
+                    return True
+        elif the_person is stephanie and False:
+            return True
+        elif the_person is emily and False:
+            pass
+        elif the_person is christina and False:
+            pass
+        elif the_person is sarah and False:
+            pass
+        elif the_person is salon_manager and False:
+            pass
+        elif the_person is erica and False:
+            pass
+        elif "candace" in globals() and the_person is candace and False:
+            candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
+            return True
+        elif the_person is ashley and False:
+            pass
+        elif the_person is alexia and False:
+            pass
+        elif the_person.is_employee():
+            if is_fetish_after_hours_available():
+                fetish_after_hours_lock()
+                add_employee_anal_fetish_intro(the_person)
+            return True
+        elif the_person.is_family():
+            the_person.add_unique_on_room_enter_event(anal_fetish_family_intro)
             return True
         else:
-            add_sb_fetish_anal_crisis_non_employee(person)
+            the_person.add_unique_on_talk_event(anal_fetish_generic_intro)
             return True
         return False
 

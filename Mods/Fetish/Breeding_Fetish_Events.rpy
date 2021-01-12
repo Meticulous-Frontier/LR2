@@ -103,7 +103,6 @@ init -1 python:
     # breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
     breeding_fetish_non_employee_intro = Action("Non Employee breeding fetish intro", breeding_fetish_non_employee_intro_requirement, "breeding_fetish_non_employee_intro_label")
     breeding_fetish_family_intro = Action("Family Member breeding fetish intro", breeding_fetish_family_intro_requirement, "breeding_fetish_family_intro_label")
-    breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
     breeding_fetish_mom_intro = Action("Mom breeding fetish intro", breeding_fetish_mom_intro_requirement, "breeding_fetish_mom_intro_label")
     breeding_fetish_lily_intro = Action("Lily breeding fetish intro", breeding_fetish_lily_intro_requirement, "breeding_fetish_lily_intro_label")
     breeding_fetish_rebecca_intro = Action("Rebecca breeding fetish intro", breeding_fetish_rebecca_intro_requirement, "breeding_fetish_rebecca_intro_label")
