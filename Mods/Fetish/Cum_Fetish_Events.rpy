@@ -35,15 +35,15 @@ init 1 python:
 
         return cum_score
 
-    def add_cum_slut_collar_to_base_outfit(person):
-        person.base_outfit.remove_all_collars()
-
-        cs_collar = cum_slut_collar.get_copy()
-        cs_collar.colour = [.1,.1,.1,.9]
-        cs_collar.pattern = "Pattern_1"
-        cs_collar.colour_pattern = [.95,.95,.95,.9]
-        person.base_outfit.add_accessory(cs_collar)
-        return
+    # def add_cum_slut_collar_to_base_outfit(person):
+    #     person.base_outfit.remove_all_collars()
+    #
+    #     cs_collar = cum_slut_collar.get_copy()
+    #     cs_collar.colour = [.1,.1,.1,.9]
+    #     cs_collar.pattern = "Pattern_1"
+    #     cs_collar.colour_pattern = [.95,.95,.95,.9]
+    #     person.base_outfit.add_accessory(cs_collar)
+    #     return
 
     SB_cum_outfit = Outfit("A Special Night")
     SB_cum_outfit.add_upper(lace_bra.get_copy(),colour_pink)
@@ -505,22 +505,15 @@ label SB_fetish_lily_cum_label():
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] gets down on her knees in front of you."
     the_person.char "I feel like I'm going crazy... but I can't stop thinking about you. About swallowing your cum, or you cumming all over my face, or my body..."
-    "You see [the_person.possessive_title] reach down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
+    "You see [the_person.possessive_title] reaches down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
     the_person.char "It's like I'm thirsty... but no amount of water I drink makes my thirst go away... Only when I think about drinking your sweet cum do I feel any better..."
     "[the_person.possessive_title] opens her mouth and starts to suck you off. You feel her soft, velvet mouth wrapped around you."
     $ the_person.break_taboo("sucking_cock")
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
-    "You should be careful where you cum. It is likely her fetish may develop based on where you cum!"
     # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
     call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC40
-    $ add_cum_fetish_role_based_on_cum(the_person)
+    $ add_cum_fetish(the_person)
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
-    if the_person.has_role(cum_external_role):
-        "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
-        the_person.char "Mmm... it feels so good! That first splash is always the best..."
-    elif the_person.has_role(cum_internal_role):
-        "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
-        the_person.char "Mmm... it's all inside me now... right where it belongs!"
     $ the_person.draw_person(position = "kissing")
     "[the_person.possessive_title] stands up and hugs you."
     the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
@@ -534,6 +527,7 @@ label SB_fetish_lily_cum_label():
     "[the_person.possessive_title]'s body melts into yours as she hears your words."
     the_person.char "Okay... I'm going to hop out of the shower now."
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
+    "She definitely seems to have developed a fetish for your cum."
 
     python:
         the_person.apply_planned_outfit()
