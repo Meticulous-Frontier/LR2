@@ -201,7 +201,7 @@ label mom_breakfast_action_label_medium():
             the_person.char "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
             $ the_person.call_dialogue("climax_responses_foreplay")
-            $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
+            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "sitting") #TODO check and make sure this works...
             $ the_person.change_stats(obedience = 5, happiness = 5)
             "When she has finished climaxing, you slowly withdraw your finger and sit back down at the table. You take a quick sip of your coffee."
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
@@ -336,7 +336,7 @@ label mom_breakfast_action_label_high():
         "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
         $ the_person.cum_in_ass()
-        $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
+        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
         $ the_person.change_stats(happiness = 5, obedience = 5)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
@@ -365,7 +365,7 @@ label mom_breakfast_action_label_high():
     "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her pussy as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
     $ the_person.cum_in_vagina()
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
+    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
     $ the_person.change_stats(happiness = 5, obedience = 5)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."

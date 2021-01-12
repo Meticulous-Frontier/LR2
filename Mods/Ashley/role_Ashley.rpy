@@ -1193,7 +1193,7 @@ label coffee_time_steph_gets_handsy_label():
             $ the_person_two.change_arousal(30)
             "She stops stroking you as she finishes. She leans forward a bit, closing her eyes as her pussy begins quivering around your finger."
             "You wish your cock was inside her instead of your finger, but in a place like a coffee shop booth, you can't justify risking it."
-            $ the_person_two.have_orgasm(half_arousal = False)
+            $ the_person_two.have_orgasm(half_arousal = False, the_position = "sitting")
             if the_person_two.get_opinion_score("public sex") > 0: #[If Steph likes public sex, she finishes you no matter what.]
                 "[the_person_two.possessive_title] eventually opens her eyes, taking a quick peak around, then begins stroking you again."
                 "Seems she is intent on giving you a similar treatment. You slowly pull your hand out of her clothes."
@@ -1257,7 +1257,7 @@ label coffee_time_steph_gets_handsy_label():
                 the_person_one "Damn... Right here in the booth? That's kinda hot..."
             "You push the palm of your hand rigidly against [the_person_two.possessive_title]'s clit, while your middle finger strokes her gspot. Your attention to her sensitive spots soon haa her gasping."
             "Only a whimper escapes her lips when you feel her pussy begin to quiver around your finger. She stops stroking you as she focuses on the pleasure of orgasming in the palm of your hands."
-            $ the_person_two.have_orgasm(half_arousal = False)
+            $ the_person_two.have_orgasm(half_arousal = False, the_position = "sitting")
             "After several seconds, [the_person_two.title] slowly opens her eyes and glances around as you withdraw your hand."
             if ashley_is_fwb_path():
                 "Wow, that looked hot... [the_person_one.mc_title] will you do something like that to me later?"
