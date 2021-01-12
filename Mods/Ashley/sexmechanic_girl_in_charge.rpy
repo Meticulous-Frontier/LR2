@@ -196,8 +196,8 @@ init 2:
             extra_positions = []
             ### Create list of possible positions###
             # when she enjoys blow jobs, add one to her choices (to prevent always going to blowjob variant)
-            if the_person.has_role(cum_external_role) or the_person.has_role(cum_internal_role):
-                extra_positions.append(SB_cum_fetish_blowjob)
+            if the_person.has_cum_fetish():
+                extra_positions.append(cum_fetish_blowjob)
             elif the_person.sex_skills["Oral"] >= 5 and the_person.get_opinion_score("giving blowjobs") > 1 and the_person.get_opinion_score("being submissive") > 1:
                 extra_positions.append(skull_fuck)
             elif the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1:

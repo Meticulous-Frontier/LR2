@@ -49,10 +49,8 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                       mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
                       if mc.condom:
                            the_girl.char "Just shove it in deep and dump it right in my ass. You still have that condom on, right?"
-                      elif the_girl.has_role(cum_internal_role):
-                          the_girl.char "Just shove it in deep and dump it right in my ass. You know I need your cum inside me, right where it belongs!"
-                      elif the_girl.has_role(cum_external_role):
-                         the_girl.char "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
+                      elif the_girl.has_cum_fetish():
+                           the_girl.char "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
                       elif the_girl.get_opinion_score("anal creampies") > 0:
                            the_girl.char "You should just shove it in as deep as you can and cum inside me."
                       elif the_girl.get_opinion_score("being covered in cum") > 0:

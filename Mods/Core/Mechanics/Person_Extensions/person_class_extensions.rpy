@@ -1967,14 +1967,14 @@ init -1 python:
     def get_fetish_count(self):
         fetish_count = 0
         for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
+            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
     def get_fetishes_description(self):
         description = ""
         for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
+            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
@@ -2006,7 +2006,7 @@ init -1 python:
         return False
 
     def has_cum_fetish(self):  #TODO update this to applicable roles when cum fetish roles have been combined.
-        if cum_external_role in self.special_role or cum_internal_role in self.special_role:
+        if cum_external_role in self.special_role or cum_internal_role in self.special_role or cum_fetish_role in self.special_role:
             return True
         return False
 

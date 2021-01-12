@@ -185,7 +185,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         "[the_girl.possessive_title] slowly pulls herself up, rubbing her drenched pussy, while she smiles at you."
         if the_girl.event_triggers_dict.get("preg_accident", False): # she got pregnant by accident
             the_girl.char "This is how I got pregnant in the first place, too much potent cum in my fertile pussy."
-    elif the_girl.has_role(cum_internal_role):
+    elif the_girl.has_cum_fetish():
         the_girl.char "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
         "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
@@ -196,7 +196,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
         "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
-    elif the_girl.has_role(cum_external_role):
+    elif the_girl.has_cum_fetish():
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
         the_girl.char "Oh its so good when you spray me with your seed... Do it! Cum all over me!"

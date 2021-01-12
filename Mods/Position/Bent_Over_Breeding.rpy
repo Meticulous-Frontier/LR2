@@ -259,7 +259,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."
             the_girl.char "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
-        elif the_girl.has_role(cum_internal_role):
+        elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
             the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."

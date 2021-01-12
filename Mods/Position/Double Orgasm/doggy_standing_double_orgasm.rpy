@@ -65,7 +65,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                  the_girl.char "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
             $ SB_doggy_standing.redraw_scene(the_girl)
-            if the_girl.has_role(cum_external_role):
+            if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly as her orgasm is enhanced by your bodyshot."
                 "She truly is addicted to your cum."

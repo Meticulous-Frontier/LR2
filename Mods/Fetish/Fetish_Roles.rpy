@@ -106,14 +106,14 @@ init 1 python:
     def SB_get_fetish_count(person):
         fetish_count = 0
         for role in person.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
+            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
     def SB_get_fetishes_description(person):
         description = ""
         for role in person.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
+            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
@@ -237,8 +237,8 @@ label SB_fetish_cum_getdosage_label(the_person):
     the_person.char "Oh!? Yes! its my favorite!"
     "[the_person.possessive_title] immediately drops to her knees. She doesn't even seem to care that there could be other people around."
     $ the_person.draw_person(position = "blowjob")
-    # call fuck_person(the_person, private = False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True, position_locked = True) from _call_fuck_person_SBR30
-    call get_fucked(the_person, private= False, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, allow_continue = False) from _call_get_fucked_SBR030
+    # call fuck_person(the_person, private = False, start_position = cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True, position_locked = True) from _call_fuck_person_SBR30
+    call get_fucked(the_person, private= False, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, allow_continue = False) from _call_get_fucked_SBR030
     return
 
 #SBR40

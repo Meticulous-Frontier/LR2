@@ -731,8 +731,8 @@ label cougar_flirt_response(the_person):
     return
 
 label cougar_cum_face(the_person):
-    if the_person.has_role(cum_external_role) or the_person.obedience > 130:
-        if the_person.has_role(cum_external_role) or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
+    if the_person.has_cum_fetish() or the_person.obedience > 130:
+        if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
             $ pronoun = person_body_shame_string(the_person, "little cum slut")
             the_person.char "Ah... do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
@@ -751,8 +751,8 @@ label cougar_cum_face(the_person):
     return
 
 label cougar_cum_mouth(the_person):
-    if the_person.has_role(cum_internal_role) or the_person.obedience > 130:
-        if the_person.has_role(cum_internal_role) or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("drinking cum") > 0:
+    if the_person.has_cum_fetish() or the_person.obedience > 130:
+        if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("drinking cum") > 0:
             the_person.char "It seems I did a good job, you have a wonderful taste [the_person.mc_title]."
         else:
             if the_person.sex_record.get("Cum in Mouth", 0) < 3:

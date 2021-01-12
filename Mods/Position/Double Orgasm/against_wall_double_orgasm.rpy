@@ -17,7 +17,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_condom")
                 "Once your climax has passed you keep [the_girl.title] pinned to the [the_object.name] for a little longer. When her aftershocks wind down, she slowly unwraps her legs."
                 "You step back and pull out of [the_girl.possessive_title]. Your condom is ballooned out, filled with your seed."
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl.char "It would be a shame to waste all of this, right?"
@@ -25,7 +25,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
-                elif the_girl.has_role(cum_external_role):
+                elif the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl.char "It would be a shame to waste all of this, right?"
@@ -43,7 +43,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] reaches for your cock, removes the condom, and ties the end in a knot."
                     the_girl.char "Look at all that cum. Well done."
             else:
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
                     "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                     "Having your cum inside of her heightens her orgasm as her fetish for you cum is fulfilled."
@@ -76,7 +76,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ against_wall.redraw_scene(the_girl)
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
                     "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                     "Having your cum inside of her heightens her orgasm as her fetish for you cum is fulfilled."

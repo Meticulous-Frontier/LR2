@@ -66,11 +66,11 @@ init 2 python:
 
 
         # actions based on fetishes (will always be added regardless of sluttiness)
-        if person.has_role(cum_internal_role) or person.has_role(cum_external_role):
+        if person.has_cum_fetish()):
             gloryhole_list.append("Blowjob")
-        if person.has_role(vaginal_fetish_role):
+        if person.has_breeding_fetish():
             gloryhole_list.append("Vaginal")
-        if person.has_role(anal_fetish_role):
+        if person.has_anal_fetish():
             gloryhole_list.append("Anal")
 
         return get_random_from_list(gloryhole_list)

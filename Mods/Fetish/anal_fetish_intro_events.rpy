@@ -98,6 +98,7 @@ init 2 python: #Other anal fetish related python code
         person.update_sex_skill("Anal", 6)
         person.event_triggers_dict["LastAnalFetish"] = day
         add_fuck_doll_collar_to_base_outfit(person)
+        #TODO add spanking position
         return
 
     def add_employee_anal_fetish_intro(the_person):

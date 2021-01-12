@@ -43,7 +43,7 @@ label double_orgasm_piledriver_anal(the_girl, the_location, the_object):
                 "You pull out at the last moment and grab your cock. You kneel and stroke yourself off, blowing your load over [the_girl.title]'s face."
             "[the_girl.title] reaches down and starts rubbing circles around her clit as you start to blow your load. She is cumming at the same time."
             the_girl "Ohhhh yes! Shower me with your hot cum!"
-            if the_girl.has_role(cum_external_role):
+            if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum splashes onto her skin. Goosebumps erupt all over her body as her brain registers your cum on her."
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heighterns her orgasm."
                 "She truly is addicted to your cum."

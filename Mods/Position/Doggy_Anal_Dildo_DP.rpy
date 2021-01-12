@@ -218,7 +218,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
                 else:
                     the_girl.char "That's it, cum deep!"
                 "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly. You condom is full of your potent seed."
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] quickly reaches back and grabs your cock. She hastily pulls your condom off, careful not to spill a drop."
                     the_girl.char "I'm not letting a drop of this delicious cum go to waste!"
                     "She brings the condom to her mouth and drains it all into her mouth in one quick motion. You can see her pupils dilate as she feeds her cum fetish."

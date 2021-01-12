@@ -263,7 +263,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()
-                if the_girl_2.has_role(cum_internal_role):
+                if the_girl_2.has_cum_fetish():
                     "[the_girl_2.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     "She revels in having her cum fetish fulfilled."
                 "You slowly pull back. Your cum is dripping out of her cunt and down the inside of her legs."
@@ -276,7 +276,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                 "You pull out of [the_girl_2.title] at the last moment. She wiggles her ass for you as you cover her with your cum."
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
-            if the_girl_2.has_role(cum_external_role):
+            if the_girl_2.has_cum_fetish():
                 "[the_girl_2.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl_2.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."

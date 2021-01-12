@@ -187,13 +187,13 @@ label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_loc
     if the_girl_2.get_opinion_score("cum facials") > the_girl_2.get_opinion_score("drinking cum"):
         "[the_girl_2.possessive_title] pops off your cock for a second."
         the_girl_2.char "I want you to just blow all over my face..."
-        if the_girl_1.has_role(cum_external_role) or the_girl_1.has_role(cum_internal_role):
+        if the_girl_1.has_cum_fetish() or the_girl_1.has_cum_fetish():
             "You hear a muffled voice speak up."
             the_girl_1.char "Hey! [the_girl_1.mc_title], make sure I get some too!"
     else:
         "[the_girl_2.possessive_title] pops off your cock for a second."
         the_girl_2.char "You should just cum in my mouth! I'll swallow it all for you..."
-        if the_girl_1.has_role(cum_external_role) or the_girl_1.has_role(cum_internal_role):
+        if the_girl_1.has_cum_fetish() or the_girl_1.has_cum_fetish():
             "You hear a muffled voice speak up."
             the_girl_1.char "Hey! That's no fair! [the_girl_1.mc_title], make sure I get some too!"
     return
@@ -234,7 +234,7 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
                 "Your cock bursting deep inside her triggers another orgasm for [the_girl_1.title]. She is moaning non stop."
                 $ the_girl_1.change_happiness(5)
             $ the_girl_1.cum_in_vagina()
-            if the_girl_2.has_role(cum_external_role) or the_girl_2.has_role(cum_internal_role):
+            if the_girl_2.has_cum_fetish() or the_girl_2.has_cum_fetish():
                 the_girl_2.char "Hey! No fair! I want some of that!"
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
                 "[the_girl_2.title] immediately moves her head down to [the_girl_1.title]'s pussy and starts to lick up the cum leaking out."
@@ -255,14 +255,14 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
             "Your orgasm erupts and you begin spraying cum across her face."
             $ the_girl_2.cum_on_face()
             $ scene_manager.draw_scene()
-            if the_girl_2.has_role(cum_external_role):
+            if the_girl_2.has_cum_fetish():
                 "You can see [the_girl_2.title]'s pupils dilate as you fulfil her cum fetish."
                 "[the_girl_2.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                 "She truly is addicted to your cum."
             "Some of your cum runs down off [the_girl_2.title]'s face and onto [the_girl_1.title]'s belly."
             $ the_girl_1.cum_on_stomach()
             $ scene_manager.draw_scene()
-            if the_girl_1.has_role(cum_external_role):
+            if the_girl_1.has_cum_fetish():
                 "[the_girl_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
             "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
 
@@ -277,7 +277,7 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
             mc.name "That's it [the_girl_2.title]. I want you to swallow it all!"
             "[the_girl_2.title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke out off eagerly."
             "Your cock explodes in orgasm into her greedy mouth."
-            if the_girl_2.has_role(cum_internal_role):
+            if the_girl_2.has_cum_fetish():
                 "Her pupils dilate as her cum addicted brain registers the presence of your cum in her mouth."
                 "[the_girl_2.possessive_title] is moaning uncontrollably around your twitching cock."
             $ the_girl_2.cum_in_mouth()
@@ -292,14 +292,14 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
             "Your orgasm erupts and you begin spraying cum across her face."
             $ the_girl_2.cum_on_face()
             $ scene_manager.draw_scene()
-            if the_girl_2.has_role(cum_external_role):
+            if the_girl_2.has_cum_fetish():
                 "You can see [the_girl_2.title]'s pupils dilate as you fulfil her cum fetish."
                 "[the_girl_2.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                 "She truly is addicted to your cum."
             "Some of your cum runs down off [the_girl_2.title]'s face and onto [the_girl_1.title]'s belly."
             $ the_girl_1.cum_on_stomach()
             $ scene_manager.draw_scene()
-            if the_girl_1.has_role(cum_external_role):
+            if the_girl_1.has_cum_fetish():
                 "[the_girl_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
             "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
 
@@ -399,14 +399,14 @@ label outro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locatio
     "She instinctively reaches out and starts to stroke you."
     $ the_girl_2.cum_on_face()
     $ scene_manager.draw_scene()
-    if the_girl_2.has_role(cum_external_role):
+    if the_girl_2.has_cum_fetish():
         "You can see [the_girl_2.title]'s pupils dilate as you fulfil her cum fetish."
         "[the_girl_2.title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
         "She truly is addicted to your cum."
     "Some of your cum runs down off [the_girl_2.title]'s face and onto [the_girl_1.title]'s belly."
     $ the_girl_1.cum_on_stomach()
     $ scene_manager.draw_scene()
-    if the_girl_1.has_role(cum_external_role):
+    if the_girl_1.has_cum_fetish():
         "[the_girl_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
     "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
     return

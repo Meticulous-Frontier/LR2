@@ -168,7 +168,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ mc.change_arousal(5)
 
                     "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and knead your balls."
-                    if the_girl.has_role(cum_external_role):
+                    if the_girl.has_cum_fetish():
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl.char "Mmm, I can't wait to feel your hot cum all over my face..."
                         "She strokes you off faster and holds your cock right against her face."
@@ -178,7 +178,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
                         "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
-                    elif the_girl.has_role(cum_internal_role):
+                    elif the_girl.has_cum_fetish():
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl.char "Mmm, I can't wait to feel your cum sliding down my throat [the_girl.mc_title]."
                         "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
@@ -344,7 +344,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                     #$ SB_sixty_nine.redraw_scene(the_girl)
                     "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
                     $ the_girl.call_dialogue("cum_mouth")
-                elif the_girl.has_role(cum_internal_role):
+                elif the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
                     "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
                     "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
@@ -360,7 +360,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
                 the_girl.char "That's it, [the_girl.mc_title], cum all over me!"
                 $ the_girl.cum_on_face()
-                if the_girl.has_role(cum_external_role):
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
                 #$ SB_sixty_nine.redraw_scene(the_girl)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
@@ -369,14 +369,14 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
             "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
             the_girl.char "That's it, [the_girl.mc_title], cum all over me!"
             $ the_girl.cum_on_face()
-            if the_girl.has_role(cum_external_role):
+            if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
             #$ SB_sixty_nine.redraw_scene(the_girl)
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
             $ the_girl.call_dialogue("cum_face")
         "You give [the_girl.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
     elif the_girl.get_opinion_score("drinking cum") > 0:
-        if the_girl.has_role(cum_internal_role):
+        if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
             "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
@@ -509,7 +509,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
         "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
         the_girl.char "That's it, [the_girl.mc_title], cum all over me!"
         $ the_girl.cum_on_face()
-        if the_girl.has_role(cum_external_role):
+        if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
         "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
         $ the_girl.call_dialogue("cum_face")
@@ -518,7 +518,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
     elif the_goal == "oral creampie":
         "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
         mc.name "Fuck, here I come!"
-        if the_girl.has_role(cum_internal_role):
+        if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
             "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."

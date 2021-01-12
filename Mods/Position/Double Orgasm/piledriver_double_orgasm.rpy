@@ -17,7 +17,7 @@ label double_orgasm_piledriver(the_girl, the_location, the_object):
                 "When you finish, you leave yourself deep inside her for a few moments while she has a few aftershocks."
                 "You pull off of [the_girl.possessive_title]."
                 "Your condom is ballooned with your seed, hanging off your cock to one side."
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl.char "It would be a shame to waste all of this, right?"
@@ -25,7 +25,7 @@ label double_orgasm_piledriver(the_girl, the_location, the_object):
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
-                elif the_girl.has_role(cum_external_role):
+                elif the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl.char "It would be a shame to waste all of this, right?"
@@ -46,7 +46,7 @@ label double_orgasm_piledriver(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ missionary.redraw_scene(the_girl)
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
                     the_girl "Oh fuck oh yes!!!"
                     "Her body convulses as she begins to cum at the same time. She wraps her legs around you and clings to you as orgasm hits her as you cum inside of her."
@@ -63,7 +63,7 @@ label double_orgasm_piledriver(the_girl, the_location, the_object):
                 "You pull out at the last moment and grab your cock. You stroke yourself off, blowing your load over [the_girl.title]'s face."
             "[the_girl.title] reaches down and starts rubbing circles around her clit as you start to blow your load. She is cumming at the same time."
             the_girl "Ohhhh yes! Shower me with your hot cum!"
-            if the_girl.has_role(cum_external_role):
+            if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum splashes onto her skin. Goosebumps erupt all over her body as her brain registers your cum on her."
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heighterns her orgasm."
                 "She truly is addicted to your cum."

@@ -225,7 +225,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
-                         if the_girl.has_role(cum_internal_role):
+                         if the_girl.has_cum_fetish():
                              "[the_girl.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
                              the_girl.char "You better! Don't even thinking about robbing my poor pussy of your incredible cum. It belongs inside me!"
                              "You give her another rough thrust, pushing yourself deep inside her."
@@ -257,7 +257,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                              the_girl.char "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
                              "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
                      "I wanna cover your ass":
-                          if the_girl.has_role(cum_external_role):
+                          if the_girl.has_cum_fetish():
                              "[the_girl.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
                              the_girl.char "You better! cover every single square inch of my ass. I want to feel it when I stand up and your cum runs down my legs"
                              "You fuck her roughly, each thrust making a loud slap."

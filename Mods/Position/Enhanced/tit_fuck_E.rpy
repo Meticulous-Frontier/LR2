@@ -35,7 +35,7 @@ label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object):
         mc.name "Your tits feel so good. You should play with them while I thrust."
         "She takes her hands and runs them along the sides of her breasts. Her abundance of tit flesh feels amazing wrapped around you."
         "[the_girl.title] starts to pinch and pull at her nipples."
-        if the_girl.has_role(cum_external_role):
+        if the_girl.has_cum_fetish():
             the_person.char "Mmm, your cock is so hot, I can't wait to feel your cum bursting out, all over me."
             "She pinches her nipples hard and pulls on them, causing her to cry out."
             $ the_girl.change_arousal(10)

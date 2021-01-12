@@ -234,7 +234,7 @@ label mom_breakfast_action_label_high():
         "Have a Quickie":
             mc.name "That sounds pretty nice actually, what did you have in mind?"
 
-        "Feed Her" if the_person.has_role(cum_internal_role) or the_person.has_role(cum_external_role):
+        "Feed Her" if the_person.has_cum_fetish():
             #fetish blowjob path
             the_person.char "Oh! I know! You just keep eating your breakfast, mommy will just help herself!"
             $ scene_manager.update_actor(mom, position = "blowjob")
@@ -246,8 +246,8 @@ label mom_breakfast_action_label_high():
             $ the_person.break_taboo("sucking_cock")
             "She opens her mouth and slides your penis in. She dances circles all around it while she suckles the tip. You look down and notice that she is touching herself."
             $ the_person.change_arousal(20)
-            # call fuck_person(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
-            call get_fucked(the_person, start_position = SB_cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_workday_breakfast_01
+            # call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
+            call get_fucked(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_workday_breakfast_01
             "Finished with her breakfast, [the_person.title] gets up from the table and excuses herself."
             $ scene_manager.update_actor(mom, position = "walking_away")
             the_person.char "Have a good day at work, I'm gonna go get ready for the day!"

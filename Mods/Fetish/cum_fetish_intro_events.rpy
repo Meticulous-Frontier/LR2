@@ -94,8 +94,37 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "I know its... time to leave but..."
     "As you step closer to you, she suddenly rushes at you and wraps her arms around you."
     $ the_person.draw_person(position = "kissing")
-    the_person "I'm sorry! I'm not ready to go home yet! I've been trying to get your attention but I just couldn't do it with everyone around..."
-    "She starts to kiss your neck"
+    the_person "I'm sorry! I'm not ready to go home yet! I wanted to get your attention but I just couldn't do it with everyone around..."
+    "She starts to kiss your neck. Her hand reaches down and starts to stroke your cock through your clothes."
+    the_person "I know this is really forward, but can I ask you for a favor?"
+    mc.name "I'd say you are in a good position to do that."
+    the_person "I just wanted to know if I could suck you off. I'm not sure why, but lately everytime I think about your cock, my mouth starts to water and it sounds so good..."
+    "Wow, sounds like [the_person.title] is really hungry for your dick. You wonder if she might be developing a fetish from your cum proclivity serums."
+    "Do you want to try and train her into a cumslut?"
+    if the_person in unique_character_list:
+        "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
+    menu:
+        "Train her to be a cumslut" if mc.energy > 40:
+            pass
+        "Too tired" if mc.energy <= 40:
+            pass
+            #TODO re add the event for this person for the next day.
+            return
+        "Refuse":
+            "You decide to leave her alone for now. You might revisit this decision at a later date."
+            $ fetish_after_hours_unlock()
+            $ clear_scene()
+            return
+    mc.name "I'll let you do that, but only if you do as I say when I finish."
+    the_person "Oh? That sounds fun..."
+    $ the_person.draw_person(position = "blowjob")
+    "[the_person.possesive_title] drops to her knees and unzips your pants, then pulls your cock out."
+    the_person "Mmm, it looks so tasty."
+    "She opens her mouth and slowly licks some of your precum from the tip. You watch as she works her tongue around her mouth, savoring the taste."
+    $ mc.arousal = 15
+    call fuck_person(the_person, start_position = cum_fetish_blowjob, skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_employee_intro_01
+
+
     return False
 
 label cum_fetish_family_intro_label():
@@ -127,7 +156,7 @@ label cum_fetish_mom_intro_label():
     the_person.char "[the_person.mc_title]... I want you to cum wherever you want, okay? Just do it in me or on me somewhere..."
     "She opens her mouth and goes back to work. Her skilled mouth is quickly bringing you to an orgasm!"
     menu:
-        "Cum in her mouth" if not the_person.has_role(cum_internal_role):
+        "Cum in her mouth":
             "You rest your hand on her head, guiding her as she sucks you off."
             "With a little encouragement, you pull [the_person.possessive_title]'s head down a little further with each stroke."
             mc.name "That's it [the_person.title]. I'm going to cum in your mouth and I want you to swallow every drop."
@@ -141,7 +170,7 @@ label cum_fetish_mom_intro_label():
             $ add_cum_fetish(the_person)
             "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
 
-        "Cum on her face" if not the_person.has_role(cum_external_role):
+        "Cum on her face":
             "You rest your hand on her head, slowly gathering her hair up."
             mc.name "That's it [the_person.title]. I'm going to cum all over that pretty little face of yours."
             "[the_person.possessive_title] moans. She is ready for her prize."
