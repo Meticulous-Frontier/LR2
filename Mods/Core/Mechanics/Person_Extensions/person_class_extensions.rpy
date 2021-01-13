@@ -1971,14 +1971,14 @@ init -1 python:
     def get_fetish_count(self):
         fetish_count = 0
         for role in self.special_role:
-            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role]:
+            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]:
                 fetish_count += 1
         return fetish_count
 
     def get_fetishes_description(self):
         description = ""
         for role in self.special_role:
-            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role]:
+            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]:
                 if __builtin__.len(description) > 0:
                     description += ", "
                 description += role.role_name
