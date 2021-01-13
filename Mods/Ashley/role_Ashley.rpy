@@ -818,7 +818,7 @@ label ashley_post_handjob_convo_label(the_person):
             the_person "I don't... I'm not sure how to talk to Steph about this though..."
             mc.name "Don't worry, I'll talk to her."
     "You drink your coffee with [the_person.title]. You are happy you were able to come up with a solution."
-    the_person "This place is nice... maybe I should bring steph here some time..."
+    the_person "This place is nice... maybe I should bring Steph here some time..."
     "Eventually you finish up. You decide to head back to the office."
     mc.name "I'm going to head back, feel free to to take the rest of the day off if you need to."
     the_person "Ahh, thank you..."
