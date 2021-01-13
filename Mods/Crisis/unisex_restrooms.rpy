@@ -66,7 +66,7 @@ init 2 python:
 
 
         # actions based on fetishes (will always be added regardless of sluttiness)
-        if person.has_cum_fetish()):
+        if person.has_cum_fetish():
             gloryhole_list.append("Blowjob")
         if person.has_breeding_fetish():
             gloryhole_list.append("Vaginal")

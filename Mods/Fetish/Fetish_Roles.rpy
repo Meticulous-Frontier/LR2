@@ -95,6 +95,7 @@ init -1 python:
         menu_tooltip = "Give her cum, right here, right now.")
     cum_internal_role = Role(role_name = "Internal Cum Fetish", actions = [SB_fetish_cum_getdosage])
     cum_external_role = Role(role_name = "External Cum Fetish", actions = [SB_fetish_cum_getdosage])
+    cum_fetish_role = Role(role_name = "Cum Fetish", actions = [SB_fetish_cum_getdosage])
 
     # Initialize Oral Fetish role
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])

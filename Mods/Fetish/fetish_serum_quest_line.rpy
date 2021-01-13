@@ -126,7 +126,7 @@ label fetish_serum_quest_intro_followup_label():
     return
 
 label fetish_serum_discuss_label(the_person):
-    if fetish_basic_ther.mastery_level < 5.0:
+    if get_fetish_basic_serum().mastery_level < 5.0:
         the_person "Unforunately, I feel like we still don't know enough about the nanobots to consider messing with their programming."
         mc.name "I understand. I'll make it a priority to observe their results more closely."
         "To unlock new nanobots, you need to raise the mastery level of Sexual Proclivity Nanobots to atleast 5.0"
@@ -207,23 +207,23 @@ label fetish_serum_discuss_label(the_person):
 
 label fetish_serum_unlock_choice_menu(the_person):
     menu:
-        "Exhibitionist Program" if fetish_exhibition_ther.tier > 5:
+        "Exhibitionist Program" if get_fetish_exhibition_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have sexual activity in front of others."
             "In addition, it would make them more willing to show their body, even out in public."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
             $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition)
-        "Anal Program" if fetish_anal_ther.tier > 5:
+        "Anal Program" if get_fetish_anal_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have anal sexual activity and be submissive to their partner."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
             $ mc.business.mandatory_crises_list.append(fetish_serum_anal)
-        "Semen Program" if fetish_cum_ther.tier > 5:
+        "Semen Program" if get_fetish_cum_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person enjoy semen exposure."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
             $ mc.business.mandatory_crises_list.append(fetish_serum_cum)
-        "Reproduction Program" if fetish_breeding_ther > 5:
+        "Reproduction Program" if get_fetish_breeding_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to engage in reproduction and acts associated with it."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."

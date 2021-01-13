@@ -59,11 +59,10 @@ init -1 python:
 
 
     def start_anal_fetish_quest(the_person):
-        return False #For now disable this
         if the_person is lily:
             if is_fetish_after_hours_available():
                 fetish_after_hours_lock()
-                mc.business.mandatory_morning_crises_list.append(anal_fetish_lily_intro)
+                mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
                 return True
             return False
         elif the_person is mom and False:
@@ -91,8 +90,7 @@ init -1 python:
         elif the_person is erica and False:
             pass
         elif "candace" in globals() and the_person is candace and False:
-            candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
-            return True
+            pass
         elif the_person is ashley and False:
             pass
         elif the_person is alexia and False:
@@ -167,21 +165,25 @@ init -1 python:
         return
 
     def start_cum_fetish_quest(the_person):
-        return False #For now disable this
         if the_person is lily:
-            add_sb_fetish_lily_cum_event()
+            mc.business.mandatory_crises_list.append(cum_fetish_lily_intro)
             return True
         elif the_person is mom:
-            add_sb_fetish_mom_cum_event()
+            mc.business.mandatory_crises_list.append(cum_fetish_mom_intro)
             return True
-        elif the_person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality:
-            add_sb_fetish_stephanie_cum_event()
-            return True
+        elif the_person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality and False:
+            pass
         elif the_person.is_employee():
-            add_sb_fetish_cum_crisis(person)
+            if is_fetish_after_hours_available():
+                fetish_after_hours_lock()
+                cum_fetish_employee_intro = Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = the_person)
+                mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)
+                return True
+        elif the_person.is_family():
+            the_person.add_unique_on_room_enter_event(cum_fetish_family_intro)
             return True
         else:
-            add_sb_fetish_cum_crisis_non_employee(person)
+            the_person.add_unique_on_talk_event(cum_fetish_generic_intro)
             return True
         return False
 
@@ -278,8 +280,8 @@ init -1 python:
         if fetish_random_roll_1 < 10 + (tier * 5):
             person.increase_sex_skill("Anal", 2 + tier)
 
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.obedience - 90)) * 3:
-            the_person.change_obedience(1, add_to_log)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
+            person.change_obedience(1, add_to_log)
         return
 
     def fetish_breeding_function_on_turn(person, add_to_log):
@@ -287,8 +289,8 @@ init -1 python:
         tier = get_suggest_tier(person)
         if fetish_random_roll_1 < 10 + (tier * 5):
             person.increase_sex_skill("Vaginal", 2 + tier)
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.happiness - 100)) * 3:
-            the_person.change_happiness(1, add_to_log)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
+            person.change_happiness(1, add_to_log)
 
         return
 
@@ -299,15 +301,15 @@ init -1 python:
             person.increase_sex_skill("Oral", 2 + tier)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                the_person.change_slut_temp(1, add_to_log)
+                person.change_slut_temp(1, add_to_log)
         return
 
     def fetish_exhibition_on_turn(person, add_to_log):
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 the_person.change_slut_temp(1, add_to_log)
-        if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.obedience - 90)) * 3:
-            the_person.change_obedience(1, add_to_log)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
+            person.change_obedience(1, add_to_log)
         return
 
     def fetish_basic_function_on_turn(person, add_to_log):
@@ -325,12 +327,24 @@ init -1 python:
             mc.business.event_triggers_dict["fetish_serum_count"] = 1
         return
 
+    def get_fetish_basic_serum():
+        found = find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
+        if found:
+            return found
+        return None
+
     def fetish_unlock_anal_serum():
         found = find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
+
+    def get_fetish_anal_serum():
+        found = find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
+        if found:
+            return found
+        return None
 
     def fetish_unlock_exhibition_serum():
         found = find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
@@ -339,6 +353,12 @@ init -1 python:
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
+    def get_fetish_exhibition_serum():
+        found = find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
+        if found:
+            return found
+        return None
+
     def fetish_unlock_cum_serum():
         found = find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
         if found:
@@ -346,12 +366,24 @@ init -1 python:
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
+    def get_fetish_cum_serum():
+        found = find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
+        if found:
+            return found
+        return None
+
     def fetish_unlock_breeding_serum():
         found = find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
+
+    def get_fetish_breeding_serum():
+        found = find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
+        if found:
+            return found
+        return None
 
 
     def add_fetish_serum_traits():

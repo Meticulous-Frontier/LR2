@@ -15,7 +15,9 @@ init 1 python:
                 return True
         return False
 
-    def anal_fetish_generic_intro_requirement():
+    def anal_fetish_generic_intro_requirement(the_person):
+        if the_person.location != the_person.home:
+            return True
         return False
 
     def anal_fetish_mom_intro_requirement():
@@ -102,7 +104,7 @@ init 2 python: #Other anal fetish related python code
         return
 
     def add_employee_anal_fetish_intro(the_person):
-        anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person)
+        anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = the_person)
         mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
         return
 
@@ -174,6 +176,7 @@ label anal_fetish_employee_intro_label(the_person):
     else:
         mc.name "Let's get this out of the way first."
         $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.draw_person(position = "standing_doggy")
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal(15)
     the_person "Mmm... like the view?"
@@ -182,7 +185,7 @@ label anal_fetish_employee_intro_label(the_person):
     $ the_person.change_arousal(15)
     "You slide your fingers down betwee her cheeks and find her cunt just starting to leak a bit of moisture."
     mc.name "Wow, you really like this kind of attention don't you."
-    "[the_perosn.possessive_title] can only moan as you slide two fingers inside her cunt. With your other hand you give her another spank."
+    "[the_person.possessive_title] can only moan as you slide two fingers inside her cunt. With your other hand you give her another spank."
     $ the_person.change_arousal(10)
     mc.name "There, that should be good."
     "You remove yor fingers briefly, then bring them up slightly. She sighs as you wiggle them around her puckered hole."
