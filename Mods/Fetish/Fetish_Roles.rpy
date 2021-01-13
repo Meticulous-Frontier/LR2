@@ -167,59 +167,6 @@ label SB_fetish_vaginal_visit_label(the_person):
     $ add_sb_fetish_vaginal_event(the_person)
     return
 
-#SBR10
-label SB_fetish_vaginal_mom_kitchen_label(the_person):
-    $ the_person = mom
-    $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
-
-    mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
-    "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
-    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
-    $ the_person.draw_person(position = "standing_doggy")
-    if the_person.outfit.vagina_available():
-        "You steal a few glances over at [the_person.possessive_title]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."
-    else:
-        "You steal a glance over at [the_person.possessive_title]'s ass as she is bent over. It looks great in her [the_clothing.name]."
-    "Getting a naughty idea, you quietly move behind [the_person.possessive_title]."
-    if the_person.outfit.vagina_available():
-        "You slowly reach down and start to slowly caress her cunt."
-    else:
-        "You slowly reach down and start to slowly rub her pussy through her [the_clothing.name]."
-    the_person.char "Hey! What are you doing? Stop that!"
-    "You continue rubbing her."
-    mc.name "Stop? But doesn't that feel good, [the_person.title]?"
-    the_person.char "Of course it does... But your sister, she could walk in anytime..."
-    if the_person.outfit.vagina_available():
-        "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
-    else:
-        "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you right here..."
-    $ the_person.change_arousal(10)
-    "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
-    the_person.char "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
-    if the_person.outfit.vagina_available():           #If its available no need to strip.
-        "You quickly pull your cock out and line it up with her wet slit."
-    else:                                              #Otherwise, strip her down.
-        "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
-
-        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
-
-        "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
-
-    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True) from _call_sex_description_SBR10
-
-    $ the_report = _return
-    if the_report.get("girl orgasms", 0) > 0:
-        "[the_person.possessive_title] is positively glowing. She knows that even while preparing dinner, you may come and fuck her at any time."
-    else:
-        "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
-
-    $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ the_person.apply_planned_outfit()
-    "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
-
-    $ the_clothing = None
-    return
-
 #Anal Fetish Events#
 label SB_fetish_anal_staylate_label(the_person):
     mc.name "[the_person.title], I need you to stay after work today."
@@ -245,58 +192,6 @@ label SB_fetish_cum_getdosage_label(the_person):
     call get_fucked(the_person, private= False, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, allow_continue = False) from _call_get_fucked_SBR030
     return
 
-#SBR40
-label SB_fetish_anal_mom_kitchen_label(the_person):
-    $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
-
-    mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
-    "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
-    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
-    $ the_person.draw_person(position = "standing_doggy")
-    if the_person.outfit.vagina_available():
-        "You steal a few glances over at [the_person.possessive_title]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."
-    else:
-        "You steal a glance over at [the_person.possessive_title]'s ass as she is bent over. It looks great in her [the_clothing.name]."
-    "Getting a naughty idea, you quietly move behind [the_person.possessive_title]."
-    "You reach down and grope her ass aggressively."
-    the_person.char "Hey! What are you doing? Stop that!"
-    "You continue groping her. You give her ass a solid swat."
-    mc.name "Stop? But doesn't that feel good, [the_person.title]?"
-    the_person.char "Of course it does... But your sister, she could walk in anytime..."
-    if the_person.outfit.vagina_available():
-        mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck it right here..."
-    else:
-        mc.name "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you in the ass right here..."
-    $ the_person.change_arousal(10)
-    "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
-    the_person.char "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
-    if the_person.outfit.vagina_available():           #If its available no need to strip.
-        "You quickly pull your cock out and begin to rub it between her cheeks."
-    else:                                              #Otherwise, strip her down.
-        "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
-
-        $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
-
-        "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
-    "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."
-    mc.name "Wait... you keep lube in the...?"
-    the_person.char "Shut up just fuck me before your sister notices!"
-    "You rub some lube on your cock and on [the_person.title]'s ass hole. You grab her by the hips and then roughly pull her back until your cock is buried inside her rump."
-
-    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_table(), skip_intro = True) from _call_sex_description_SBR40
-
-    $ the_report = _return
-    if the_report.get("girl orgasms", 0) > 0:
-        "[the_person.possessive_title] is positively glowing. She knows that even while preparing dinner, you may come and fuck her at any time."
-    else:
-        "[the_person.possessive_title] remains silent. She knows that even while preparing dinner, you may come use her for your pleasure at any time."
-
-    $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ the_person.apply_planned_outfit()
-    "As [the_person.possessive_title] continues dinner preparation, you take a quick look around. It doesn't look like Lily noticed anything happened between you and [the_person.possessive_title]."
-
-    $ the_clothing = None
-    return
 
 #SBR50
 label SB_lily_anal_in_room_label(the_person):
