@@ -572,7 +572,7 @@ label taboo_break_SB_anal_standing(the_girl, the_location, the_object):
         "You spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
         the_girl.char "Oh god... Fuck!"
     "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
-    "When stop when you've bottomed out, to give your cock time to properly stretch her out."
+    "You stop when you've bottomed out, to give your cock time to properly stretch her out."
     the_girl.char "I think... I'm ready for you to move some more..."
     "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
     return
