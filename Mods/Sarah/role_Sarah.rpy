@@ -2232,7 +2232,7 @@ label Sarah_ask_for_baby_label():
 label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
     $ the_person = sarah
     $ scene_manager = Scene()
-    $ the_person.apply_outfit(SB_vaginal_nude_outfit)
+    $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.change_energy(200)
 
     $ (threesome_wakeup, threesome_partner) = get_sarah_spend_night_threesome_possibility()
@@ -2312,7 +2312,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
 
     #sexy morning wakeup starts here
     if threesome_wakeup:
-        $ threesome_partner.apply_outfit(SB_vaginal_nude_outfit)
+        $ threesome_partner.apply_outfit(special_fetish_nude_outfit)
         "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "Something stirs you though. You hear a hushed whisper. But that wasn't to you? Then a little giggle."

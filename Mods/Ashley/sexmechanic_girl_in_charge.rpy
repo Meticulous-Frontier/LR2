@@ -139,16 +139,10 @@ init 2:
             dom_sex_goal_weighted_list = []
 
             if SB_get_fetish_count(the_person) > 0: #She has fetishes, so use those to set a goal.
-                if the_person.has_vaginal_fetish():
-                    dom_sex_goal_weighted_list.append(["vaginal creampie", 100])
                 if the_person.has_anal_fetish():
                     dom_sex_goal_weighted_list.append(["anal creampie", 100])
-                if the_person.has_oral_fetish():
-                    dom_sex_goal_weighted_list.append(["oral creampie", 100])
-                if the_person.has_internal_cum_fetish():
-                    dom_sex_goal_weighted_list.append(["vaginal creampie", 50])
+                if the_person.has_cum_fetish():
                     dom_sex_goal_weighted_list.append(["oral creampie", 50])
-                if the_person.has_external_cum_fetish():
                     dom_sex_goal_weighted_list.append(["body shot", 50])
                     dom_sex_goal_weighted_list.append(["facial", 50])
                 if the_person.has_breeding_fetish():

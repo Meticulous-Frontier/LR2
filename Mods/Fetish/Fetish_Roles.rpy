@@ -39,14 +39,7 @@ init -1 python:
         else:
             return "You are too tired."
 
-    def SB_fetish_anal_staylate_requirement(person):
-        if mc.is_at_work():
-            if person.sex_skills["Anal"] >= 6:
-                if not SB_FETISH_EVENT_ACTIVE():
-                    return True
-                else:
-                    return "Someone else is coming over tonight"
-        return False
+
 
     def SB_fetish_starbuck_anal_swing_demo_requirement(person):
         if person is starbuck:
@@ -80,15 +73,10 @@ init -1 python:
     vaginal_fetish_role = Role(role_name ="Vaginal Fetish", actions =[SB_fetish_vaginal_visit, SB_fetish_vaginal_mom_kitchen])
 
     # Initialize anal fetsh role
-    SB_fetish_anal_staylate = Action("See me after work", SB_fetish_anal_staylate_requirement, "SB_fetish_anal_staylate_label",
-        menu_tooltip = "Ask her to stay after work is over.")
-    SB_fetish_anal_mom_kitchen = Action("Kitchen Sex (Anal)", SB_fetish_anal_mom_kitchen_requirement, "SB_fetish_anal_mom_kitchen_label",
-        menu_tooltip = "Bend her over the kitchen counter.")
     SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
         menu_tooltip = "Double Penetration on the bed.")
     SB_fetish_starbuck_anal_swing_demo = Action("Have Sex Swing Demo", SB_fetish_starbuck_anal_swing_demo_requirement, "SB_starbuck_anal_swing_demo",
         menu_tooltip = "Anal Sex in the Swing")
-    anal_fetish_role = Role(role_name ="Anal Fetish", actions =[SB_fetish_anal_staylate, SB_fetish_anal_mom_kitchen, SB_lily_anal_in_room, SB_fetish_starbuck_anal_swing_demo])
 
     # Initialize Cum Fetish role
     SB_fetish_cum_getdosage = Action("Give her cum dosage", SB_fetish_cum_getdosage_requirement, "SB_fetish_cum_getdosage_label",
@@ -138,48 +126,8 @@ init 1 python:
 
 #Vaginal Fetish Events#
 label SB_fetish_vaginal_visit_label(the_person):
-    if the_person is mom:
-        mc.name "Hey [the_person.title], it's been kind of a rough day, would you be willing to spend the night in my room tonight?"
-        "[the_person.possessive_title] smiles at you before replying."
-        the_person.char "Oh [the_person.mc_title], I love it that we are so close that you feel comfortable asking me that. That souds fine."
-        "You coordinate with [the_person.possessive_title] on what time you'll be home tonight."
-        the_person.char "I'll see you tonight then!"
-    elif the_person is lily:
-        mc.name "Hey [the_person.title]. What are you up to tonight?"
-        "[the_person.possessive_title] frowns at you before replying."
-        the_person.char "Well, I was supposed to have a date tonight and I was hoping to get lucky, but he just called and cancelled on me!"
-        mc.name "Well, if you want to, we could always hang out in my room tonight."
-        "[the_person.possessive_title] smiles at you and nods."
-        the_person.char "Actually, that sounds fun!"
-        "You coordinate with [the_person.possessive_title] on what time you'll be home tonight."
-        the_person.char "I'll see you tonight then!"
-    else:
-        mc.name "Hey, [the_person.title], have any plans for tonight?"
-        "[the_person.possessive_title] smiles at you before replying."
-        the_person.char "Nothing that can't be rearranged. Have anything in mind?"
-        mc.name "Why don't you come over to my place later? I'm sure we could find something to keep ourselves busy..."
-        the_person.char "Sounds great, [the_person.mc_title]!"
-
-        mc.name "Don't forget to bring a toothbrush, [the_person.title]..."
-        "[the_person.possessive_title] smiles, clearly enjoying your obvious innuendo."
-        the_person.char "I'll see you tonight then!"
-
-    $ add_sb_fetish_vaginal_event(the_person)
     return
 
-#Anal Fetish Events#
-label SB_fetish_anal_staylate_label(the_person):
-    mc.name "[the_person.title], I need you to stay after work today."
-    the_person.char "Oh, of course sir. I'm not in trouble am I?"
-    "You give [the_person.possessive_title] a reassuring smile."
-    mc.name "No, of course not, you are a wonderful asset to the company..."
-    "You lower your voice and whisper in her ear so others don't overhear."
-    mc.name "...but I might have to spank your ass a bit anyway."
-    "You look [the_person.possessive_title] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
-    the_person.char "Oh! Thank you sir! I'll look forward to it!"
-    "You say goodbye to [the_person.possessive_title]."
-    $ add_sb_fetish_anal_staylate_event(the_person)
-    return
 
 #SBR30
 label SB_fetish_cum_getdosage_label(the_person):

@@ -121,6 +121,21 @@ init 2 python:
 
     special_fetish_nude_outfit = Outfit("Nude")
 
+    special_fetish_black_outfit = Outfit("A Special Night")
+    special_fetish_black_outfit.add_upper(lace_bra.get_copy(),colour_black)
+    special_fetish_black_outfit.add_feet(garter_with_fishnets.get_copy(), colour_black)
+    special_fetish_black_outfit.add_feet(high_heels.get_copy(), colour_black)
+
+    #colour_sky_blue
+    special_fetish_blue_outfit = Outfit("A Special Night")
+    special_fetish_blue_outfit.add_lower(thong.get_copy(), colour_sky_blue)
+    special_fetish_blue_outfit.add_upper(thin_bra.get_copy(),colour_sky_blue)
+    special_fetish_blue_outfit.add_lower(mini_skirt.get_copy(), colour_black)
+    special_fetish_blue_outfit.add_upper(tube_top.get_copy(), colour_sky_blue)
+    special_fetish_blue_outfit.add_feet(fishnets.get_copy(), colour_black)
+    special_fetish_blue_outfit.add_feet(slips.get_copy(), colour_black)
+    special_fetish_blue_outfit.add_accessory(lipstick.get_copy(), colour_red)
+
 init 3 python:
     fetish_serum_quest_intro = Action("Nanobot Discovery", fetish_serum_quest_intro_requirement, "fetish_serum_quest_intro_label")
     fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label")
