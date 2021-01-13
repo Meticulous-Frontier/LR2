@@ -71,12 +71,11 @@ init -1 python:
             pass
         elif the_person is cousin and False:
             pass
-        elif the_person is starbuck:
-            if starbuck.shop_investment_rate == 6.0:
-                if is_fetish_after_hours_available():
-                    fetish_after_hours_lock()
-                    add_sb_starbuck_anal_intro_event()
-                    return True
+        elif the_person is starbuck and starbuck.shop_investment_rate == 6.0:
+            if is_fetish_after_hours_available():
+                fetish_after_hours_lock()
+                add_sb_starbuck_anal_intro_event()
+                return True
         elif the_person is stephanie and False:
             return True
         elif the_person is emily and False:
