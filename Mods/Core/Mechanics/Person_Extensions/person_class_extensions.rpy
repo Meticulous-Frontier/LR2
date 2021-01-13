@@ -140,6 +140,9 @@ init -1 python:
     Person.alt_schedule = property(get_alt_schedule, set_alt_schedule, del_alt_schedule, "Alternative schedule property.")
 
     def set_alt_schedule(self, location, days = None, times = None):
+        if not "Schedule" in globals():
+            return
+
         if days is None:
             days = [0,1,2,3,4,5,6] #Full week if not specified
         if times is None:
@@ -825,9 +828,10 @@ init -1 python:
         if specified_time is None:
             specified_time = time_of_day #Now
 
-        alt_destination = self.alt_schedule[specified_day][specified_time]
-        if alt_destination: # if we have an alternative schedule, return that location
-            return alt_destination
+        if "Schedule" in globals():
+            alt_destination = self.alt_schedule[specified_day][specified_time]
+            if alt_destination: # if we have an alternative schedule, return that location
+                return alt_destination
 
         return self.schedule[specified_day][specified_time] #Returns the Room this person should be in during the specified time chunk.
 

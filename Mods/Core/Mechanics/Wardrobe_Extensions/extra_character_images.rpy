@@ -1,6 +1,10 @@
 init -10 python:
     config.search_prefixes = [ "", "images/", "Mods/Core/Images/" ]
 
+init -5 python:
+    global supported_positions
+    supported_positions = ["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","kneeling1","standing_doggy","cowgirl"]
+
 init 2 python:
     import threading
 

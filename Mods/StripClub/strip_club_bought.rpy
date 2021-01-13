@@ -45,7 +45,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     the_person.char "Right, I was able to contact them all, they will be here as soon as they can."
     mc.name "Good, come, let's go inside."
     the_person.char "You have keys for this place? You must have been a very good customer for that cheap fuck to give you some keys."
-    $ strip_club.background_image = Image(get_file_handle("Club_Background.jpg")) # Set up the original background
+    $ strip_club.background_image = Image(get_file_handle("Club_Background.png")) # Set up the original background
     $ mc.location.show_background()
     "You just smile and take her inside. About 30 minutes later, they're all there, eager to get their job back."
     $ strip_club_call_in_all_strippers()
