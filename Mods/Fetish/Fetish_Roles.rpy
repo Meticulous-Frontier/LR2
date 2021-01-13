@@ -97,11 +97,14 @@ init -1 python:
     cum_external_role = Role(role_name = "External Cum Fetish", actions = [SB_fetish_cum_getdosage])
     cum_fetish_role = Role(role_name = "Cum Fetish", actions = [SB_fetish_cum_getdosage])
 
+
     # Initialize Oral Fetish role
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
     #TODO: Add some actions when 'afflicted'
 
     breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
+
+    exhibition_fetish_role = Role(role_name = "Exhibitionist", actions = [])
 
 init 1 python:
     def SB_get_fetish_count(person):

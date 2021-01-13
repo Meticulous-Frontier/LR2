@@ -2019,6 +2019,11 @@ init -1 python:
             return True
         return False
 
+    def has_exhibition_fetish(self):
+        if exhibition_fetish_role in self.special_role:
+            return True
+        return False
+
     Person.get_fetish_count = get_fetish_count
     Person.get_fetishes_description = get_fetishes_description
     Person.has_vaginal_fetish = has_vaginal_fetish
@@ -2028,6 +2033,7 @@ init -1 python:
     Person.has_external_cum_fetish = has_external_cum_fetish
     Person.has_cum_fetish = has_cum_fetish
     Person.has_breeding_fetish = has_breeding_fetish
+    Person.has_exhibition_fetish = has_exhibition_fetish
 
     def has_started_anal_fetish(self):
         if self.event_triggers_dict.get("anal_fetish_start", False):
