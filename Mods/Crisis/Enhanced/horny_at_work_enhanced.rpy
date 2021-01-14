@@ -6,7 +6,7 @@ init 5 python:
         for person in helpful_people:
             person.change_obedience(3)
             person.change_slut_temp(1)
-            if person.has_internal_cum_fetish() and licker is None:
+            if person.has_cum_fetish() and licker is None:
                 licker = person
             if person.get_opinion_score("being submissive") > 0 and person.get_opinion_score("drinking cum") > 0 and licker is None:
                 licker = person #The list was randomized, so even if you have multiple people who meet this criteria this should still end up random.
