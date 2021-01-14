@@ -29,6 +29,7 @@ init 1 python:
         return False
 
     def breeding_fetish_family_sleep_crisis_requirement():
+        return False #Disable for now
         if mc_at_home() and time_of_day == 4:
             if get_family_breeder():
                 return True
