@@ -590,7 +590,7 @@ label caged_BJ_label(the_person):
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")
     if the_person.get_opinion_score("public sex") >= 0:
         $ the_person.add_situational_slut("being_used_in_the_cage", (the_person.get_opinion_score("public sex")*5 +5), "Everyone can see the slut I am...")
-    if the_person.has_role(oral_fetish_role) or the_person.get_opinion_score("giving blowjobs") > 0:
+    if the_person.has_cum_fetish() or the_person.get_opinion_score("giving blowjobs") > 0:
         $ the_person.draw_person(position = "cowgirl", emotion = "happy")
         the_person.char "Oh! I like where this is going!"
     else:

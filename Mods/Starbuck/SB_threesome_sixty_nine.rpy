@@ -44,14 +44,14 @@ label intro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
     "[the_girl_1.title] smiles and agrees."
     if the_girl_1.has_breeding_fetish():
         the_girl_1.char "Mmm I can't wait to feel you sliding into me..."
-    elif the_girl_1.has_role(oral_fetish_role):
+    elif the_girl_1.has_cum_fetish():
         the_girl_1.char "Mmm I can't wait to taste that sweet pussy..."
     elif the_girl_1.has_role(anal_fetish_role):
         the_girl_1.char "Mmm that sounds good... maybe you could stick a finger in my ass once in a while too..."
     else:
         the_girl_1.char "Sounds good! I can't wait, I bet this is going to be amazing..."
     "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."
-    if the_girl_2.has_role(oral_fetish_role):
+    if the_girl_2.has_cum_fetish():
         the_girl_2.char "This should be good, I've heard [the_girl_1.name] has a pretty good tongue..."
     elif the_girl_2.has_breeding_fetish():
         the_girl_2.char "This should be a good warmup... but don't forget, [the_girl_2.mc_title], I need you to fuck me sometime too..."

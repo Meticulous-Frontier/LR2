@@ -15,7 +15,7 @@ init 5 python:
 label intro_blowjob_enhanced(the_girl, the_location, the_object):
     "You unzip your pants and pull your underwear down far enough to let your hard cock out."
     mc.name "How about you take care of this for me?"
-    if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("giving blowjobs") > 1:
+    if the_girl.has_cum_fetish() or the_girl.get_opinion_score("giving blowjobs") > 1:
         "Without hesitation, [the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans forward and slides her lips over the tip of your dick."
     else:
         "[the_girl.possessive_title] grabs your cock with one hand."
@@ -96,7 +96,7 @@ label transition_default_blowjob_enhanced(the_girl, the_location, the_object):
 
     $ blowjob.current_modifier = "blowjob"
     $ blowjob.redraw_scene(the_girl)
-    if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("giving blowjobs") > 1:
+    if the_girl.has_cum_fetish() or the_girl.get_opinion_score("giving blowjobs") > 1:
         "Without hesitation, [the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans forward and slides her lips over the tip of your dick."
     else:
         if the_girl.effective_sluttiness() > 35 or the_girl.get_opinion_score("giving blowjobs") > 0:
@@ -176,7 +176,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
     menu:
         "Ask for deepthroat":
             mc.name "Why don't you take it nice and deep?"
-            if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("giving blowjobs") > 1:
+            if the_girl.has_cum_fetish() or the_girl.get_opinion_score("giving blowjobs") > 1:
                 "Without hesitation, [the_girl.possessive_title] leans forward and slides your dick down her throat."
             else:
                 "She gives a nod and slowly slides you cock half way down, until she starts gagging and pulls back."
@@ -184,7 +184,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
 
         "Guide her":
             "You place a hand on the back of her head and slowly pull her towards you, sliding your cock down her throat."
-            if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("being submissive") > 0:
+            if the_girl.has_cum_fetish() or the_girl.get_opinion_score("being submissive") > 0:
                 "She doesn't resist and lets you push her all the way down, while looking lovingly into your eyes."
             elif the_girl.get_opinion_score("taking control") > 0:
                 if the_girl.sex_skills["Oral"] >= 3:
@@ -201,7 +201,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
 
         "Push her down":
             "You place a hand on the back of her head and you push your cock down her throat."
-            if the_girl.has_role(oral_fetish_role) or the_girl.get_opinion_score("being submissive") > 0:
+            if the_girl.has_cum_fetish() or the_girl.get_opinion_score("being submissive") > 0:
                 "She doesn't resist and lets you push her all the way down, while looking lovingly into your eyes."
             elif the_girl.get_opinion_score("taking control") > 0:
                 if the_girl.sex_skills["Oral"] >= 4:
@@ -342,7 +342,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                else:
                    $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive"), love = the_girl.get_opinion_score("drinking cum"), happiness = the_girl.get_opinion_score("drinking cum"))
     else:
-        if the_girl.has_role(oral_fetish_role):
+        if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] goes as deep as she can on your dick, trying to get as much of it in her mouth as possible."
             "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
             "You grunt and twitch as you start to empty your balls right into her throat."
@@ -372,7 +372,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
             $ blowjob.redraw_scene(the_girl)
 
 
-        if not (the_girl.has_role(oral_fetish_role) or the_girl.has_cum_fetish()):
+        if not (the_girl.has_cum_fetish() or the_girl.has_cum_fetish()):
             if the_girl.get_opinion_score("being covered in cum") > 0 and the_girl.outfit.tits_available():
                 "[the_girl.possessive_title] tilts her head forward and let your cum dribble out of her mouth onto her bare tits."
                 $ the_girl.call_dialogue("cum_mouth")
@@ -395,8 +395,8 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
 
 
 label blowjob_enhanced_kneel_face_cum (the_girl):
-    if the_girl.has_role(oral_fetish_role) or the_girl.has_cum_fetish():
-        if the_girl.has_role(oral_fetish_role):
+    if the_girl.has_cum_fetish() or the_girl.has_cum_fetish():
+        if the_girl.has_cum_fetish():
             "You go to step back but [the_girl.possessive_title]'s grabs your butt-cheeks with her hands, holding you in place and pushing her face forward."
             "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
             "You grunt and twitch as you start to empty your balls right into her throat."

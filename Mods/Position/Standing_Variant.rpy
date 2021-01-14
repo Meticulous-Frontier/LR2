@@ -187,7 +187,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                      "Make her suck it":
                          "You bring your fingers, glistening with her moisture, up to her face."
                          mc.name "Suck my fingers clean like a good girl."
-                         if the_girl.has_role(oral_fetish_role):
+                         if the_girl.has_cum_fetish():
                              "[the_girl.possessive_title] opens her mouth and sucks your fingers into her mouth. She sucks your fingers hungrily, deep into her mouth. Your fingertips are tickling the back of her throat."
                              "Her head bobs up and down as she suckles her juices off your fingers."
                              "You pull your fingers out with a pop. She looks back at you, her pouty lips almost enticing you to let her suck on your finger a bit longer."
@@ -202,7 +202,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                      "Lick it clean":
                          "A tantalizing musk enters your nose, coming from your fingers. Without even thinking, you start to lick her juices off your fingers."
                          "You moan in appreciation of how good she tastes, and she peeks back at you."
-                         if the_girl.has_role(oral_fetish_role):
+                         if the_girl.has_cum_fetish():
                              the_girl.char "Oh [the_girl.mc_title], if you want to taste me, just ask! I love it when you lick my pussy..."
                          elif the_girl.get_opinion_score("getting head") > 0:
                              the_girl.char "You know, [the_girl.mc_title], if you ever want more, you could always go straight to the source..."

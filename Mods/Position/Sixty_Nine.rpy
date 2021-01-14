@@ -33,7 +33,7 @@ init python:
 label intro_SB_sixty_nine(the_girl, the_location, the_object):
     "You give her ass a good hard smack and then look at [the_girl.possessive_title]."
     mc.name "Hey, wanna sixty nine?"
-    if the_girl.has_role(oral_fetish_role):
+    if the_girl.has_cum_fetish():
         "[the_girl.possessive_title] smiles wide and quickly responds."
         the_girl.char "That sounds amazing! Sixty nine has to be the absolute best position... I can't wait to taste you!"
     if the_girl.effective_sluttiness() > 45:
@@ -336,15 +336,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("cum facials") > 0: #She loves facials
         if the_girl.get_opinion_score("cum facials") == the_girl.get_opinion_score("drinking cum"):   #She likes them equally, so do one randomly
             if renpy.random.randint(0,100) < 50: #In her mouth
-                if the_girl.has_role(oral_fetish_role):
-                    "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
-                    "You grunt and twitch as you start to empty your balls right into her stomach."
-                    "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
-                    $ the_girl.cum_in_mouth()
-                    #$ SB_sixty_nine.redraw_scene(the_girl)
-                    "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
-                    $ the_girl.call_dialogue("cum_mouth")
-                elif the_girl.has_cum_fetish():
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
                     "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
                     "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."

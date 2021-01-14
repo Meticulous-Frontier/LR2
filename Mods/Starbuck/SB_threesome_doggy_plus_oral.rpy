@@ -43,14 +43,14 @@ label intro_SB_threesome_doggy_plus_oral(the_person_1, the_person_2, the_locatio
     "[the_person_1.possessive_title] smiles and agrees."
     if the_person_1.has_breeding_fetish():
         the_person_1.char "This should be a good warmup... but don't forget, [the_person_1.mc_title], I need you to fuck me sometime too..."
-    elif the_person_1.has_role(oral_fetish_role):
+    elif the_person_1.has_cum_fetish():
         the_person_1.char "This should be good, I've heard [the_person_2.title] has a pretty good tongue..."
     elif the_person_1.has_role(anal_fetish_role):
         the_person_1.char "Mmm that sounds good... maybe she could stick a finger in my ass once in a while too..."
     else:
         the_person_1.char "Sounds good! I can't wait, I bet this is going to be amazing..."
     "[the_person_1.possessive_title] starts to lay down. [the_person_2.possessive_title] turns to you."
-    if the_person_2.has_role(oral_fetish_role):
+    if the_person_2.has_cum_fetish():
         the_person_2.char "Mmm I can't wait to taste that sweet pussy..."
     elif the_person_2.has_breeding_fetish():
         the_person_2.char "Mmm I can't wait to feel your raw cock sliding into me..."
