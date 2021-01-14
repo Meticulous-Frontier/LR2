@@ -1,21 +1,4 @@
 init -1 python:
-    def SB_fetish_vaginal_visit_requirement(person):
-        if person.sex_skills["Vaginal"] >= 6:
-            if not SB_FETISH_EVENT_ACTIVE():
-                return True
-            else:
-                return "Someone else is coming over tonight"
-        return
-
-    def SB_fetish_vaginal_mom_kitchen_requirement(person):
-        if person is mom:
-            if mc.location == kitchen:
-                if mc.energy > 30:
-                    return True
-                else:
-                    return "You're too tired for sex"
-            return "You aren't in the kitchen"
-        return
 
     def SB_fetish_anal_mom_kitchen_requirement(person):
         if person is mom:
@@ -52,14 +35,6 @@ init -1 python:
             return "You're too tired"
 
 
-
-    # Initialize vaginal fetish role
-    SB_fetish_vaginal_visit = Action("Sleepover Tonight (Vaginal)", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
-        menu_tooltip = "Ask her over for some fun tonight.")
-    SB_fetish_vaginal_mom_kitchen = Action("Kitchen Sex (Vaginal)", SB_fetish_vaginal_mom_kitchen_requirement, "SB_fetish_vaginal_mom_kitchen_label",
-        menu_tooltip = "Bend her over the kitchen counter.")
-    vaginal_fetish_role = Role(role_name ="Vaginal Fetish", actions =[SB_fetish_vaginal_visit, SB_fetish_vaginal_mom_kitchen])
-
     # Initialize anal fetsh role
     SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
         menu_tooltip = "Double Penetration on the bed.")
@@ -77,7 +52,7 @@ init -1 python:
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
     #TODO: Add some actions when 'afflicted'
 
-    
+
 
     exhibition_fetish_role = Role(role_name = "Exhibitionist", actions = [])
 
@@ -111,9 +86,6 @@ init 1 python:
 
 
 
-#Vaginal Fetish Events#
-label SB_fetish_vaginal_visit_label(the_person):
-    return
 
 
 #SBR30

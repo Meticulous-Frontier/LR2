@@ -1984,10 +1984,10 @@ init -1 python:
                 description += role.role_name
         return description
 
-    def has_vaginal_fetish(self):
-        if vaginal_fetish_role in self.special_role:
-            return True
-        return False
+    # def has_vaginal_fetish(self):
+    #     if vaginal_fetish_role in self.special_role:
+    #         return True
+    #     return False
 
     def has_anal_fetish(self):
         if anal_fetish_role in self.special_role:
@@ -2026,7 +2026,7 @@ init -1 python:
 
     Person.get_fetish_count = get_fetish_count
     Person.get_fetishes_description = get_fetishes_description
-    Person.has_vaginal_fetish = has_vaginal_fetish
+    # Person.has_vaginal_fetish = has_vaginal_fetish
     Person.has_anal_fetish = has_anal_fetish
     Person.has_oral_fetish = has_oral_fetish
     Person.has_internal_cum_fetish = has_internal_cum_fetish

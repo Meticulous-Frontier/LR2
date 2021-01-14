@@ -142,8 +142,8 @@ label intro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
     "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
     "Face down, ass up, exactly what you were looking for. You move forward behind [the_girl_2.title] and run your hands along her ass a few times."
     "You put your cock between her cheeks, enjoying the feeling of her soft, pliant flesh. She wiggles her hips back at you for a second before turning her head to look at you."
-    if the_girl_2.has_role(vaginal_fetish_role):
-        the_girl_2.char "Go ahead and fuck me! I can't wait to feel you deep inside me again..."
+    if the_girl_2.has_breeding_fetish():
+        the_girl_2.char "Go ahead and fuck me! I can't wait to feel you cumming deep inside me again..."
     else:
         the_girl_2.char "I think I'm ready for you... go ahead and push it in!"
     "You don't need any encouragement! "
@@ -206,7 +206,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         the_girl_2.char "I'm sorry [the_girl_2.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. [the_girl_2.title] goes back to licking [the_girl_1.title]."
-    elif the_girl_2.has_role(vaginal_fetish_role):          #vaginal fetish
+    elif the_girl_2.has_breeding_fetish():          #vaginal fetish
         "After a particularly hard thrust, [the_girl_2.possessive_title] moans lewdly. She stops eating out [the_girl_1.title] for a second and looks back at you."
         the_girl_2.char "It's so... fucking... GOOD. Fuck me hard [the_girl_2.mc_title], I want it so bad!"
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand. Each time you pull back you can see her labia clinging to you."
@@ -318,7 +318,7 @@ label orgasm_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_lo
 
 label swap_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
     "You put your cock between [the_girl_2.title]'s cheeks, enjoying the feeling of her soft, pliant flesh. She wiggles her hips back at you for a second before turning her head to look at you."
-    if the_girl_2.has_role(vaginal_fetish_role):
+    if the_girl_2.has_breeding_fetish():
         the_girl_2.char "Go ahead and fuck me! I can't wait to feel you deep inside me again..."
     else:
         the_girl_2.char "I'm ready for you... go ahead and push it in!"

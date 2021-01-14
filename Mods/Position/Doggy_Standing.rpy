@@ -60,7 +60,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
         the_girl.char "I'm sorry [the_girl.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. She seems to be adapting to your fucking."
-    elif the_girl.has_role(vaginal_fetish_role):          #vaginal fetish
+    elif the_girl.has_breeding_fetish():          #breeding fetish
         "After a particularly hard thrust, [the_girl.possessive_title] moans lewdly."
         the_girl.char "That's it, fuck me harder! God I can't imagine going a single day without your cock inside me..."
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand."
@@ -179,9 +179,7 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
         "Gentle Sex":
             "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
             mc.name "[the_girl.title], your pussy is so good. I love how eager you are to fuck me."
-            if the_girl.has_role(vaginal_fetish_role):
-                the_girl.char "I love being your little slut! Fuck me good [the_girl.mc_title]!"
-            elif the_girl.sluttiness > 80:
+            if the_girl.sluttiness > 80:
                 the_girl.char "Of course I'm eager. Your cock fills me just right. Fuck me good [the_girl.mc_title]!"
             else:
                 the_girl.char "Mmm, I can't help it, you make me feel so good."

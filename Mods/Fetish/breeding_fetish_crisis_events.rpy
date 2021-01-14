@@ -12,6 +12,9 @@ init -1 python:
     def get_pregnant_breeder():
         return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.knows_pregnant()])
 
+    def get_family_breeder():
+        return get_random_from_list(x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.is_family())
+
 init 1 python:
     def breeding_fetish_high_fertility_crisis_requirement():
         if mc_at_home() and time_of_day==4:
@@ -25,12 +28,20 @@ init 1 python:
                 return True
         return False
 
+    def breeding_fetish_family_sleep_crisis_requirement():
+        if mc_at_home() and time_of_day == 4:
+            if get_family_breeder():
+                return True
+        return False
+
 
 init 3 python:
     breeding_fetish_high_fertility_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
-        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = high_fertility_weight)
+        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = 5)
     breeding_fetish_happy_breeder_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
-        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = high_fertility_weight)
+        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+    breeding_fetish_family_sleep_crisis = ActionMod("Familial nighttime breeding", breeding_fetish_family_sleep_crisis_requirement, "breeding_fetish_family_sleep_crisis_label",
+        menu_tooltip = "You are visited at night by a thirsty family member.", category = "Fetish", is_crisis = True, crisis_weight = 5)
 
 label breeding_fetish_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_breeder()
@@ -277,6 +288,59 @@ label breeding_fetish_happy_breeder_crisis_label():
     call breeder_cowgirl_wakeup_label(the_person) from _breeder_overnight_cowgirl_wakeup__01
     return "Advance Time"
 
+label breeding_fetish_family_sleep_crisis_label():
+    $ the_person = get_family_breeder()
+    if the_person = None:
+        return
+    if the_person == lily:
+
+        $ mc.change_location(bedroom)
+        $ mc.location.show_background()
+
+        "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
+        the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
+        "You invite her in. You immediately start to get aroused when you see what she is wearing."
+        $ the_person.apply_outfit(special_fetish_blue_outfit)
+        $ the_person.draw_person()
+        the_person "So... I was wondering... is it okay if I sleep in here with you again tonight?"
+        menu:
+            "Not tonight":
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                "She is clearly disappointed."
+                the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
+                "You head for bed, looking forward to a restful night's sleep."
+                $ the_person.change_obedience(-2)
+                $ the_person.change_happiness(-5)
+                return
+            "Strip first":
+                $ the_person.event_triggers_dict["LastVaginalFetish"] = day
+                mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
+                "[the_person.possessive_title] smiles at you."
+                the_person "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
+                "[the_person.possessive_title] winks at you before beginning her routine."
+                call free_strip_scene(the_person) from _free_strip_scene_701
+                mc.name "Damn [the_person.title], you are really getting good at that."
+                "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
+                the_person "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
+                the_person "I've come to really love the way it feels when you spurt inside of me..."
+                "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
+
+
+        "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
+        $ the_person.change_arousal(20)
+        the_person "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
+        "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
+        "[the_person.possessive_title] spreads her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
+        call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), skip_intro = True) from _call_fuck_person_lily_breeding_overnight
+
+        "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
+        "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
+
+        call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV070
+        call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
+        return "Advance Time"
+
+
 label breeder_cowgirl_wakeup_label(the_person):
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
     "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock from behind like a pro."
@@ -289,7 +353,7 @@ label breeder_cowgirl_wakeup_label(the_person):
 
     "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the cowgirl position."
     "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks in your eyes when she feels your hands on her."
-    the_person.char "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
+    the_person "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride"
     # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
@@ -297,13 +361,13 @@ label breeder_cowgirl_wakeup_label(the_person):
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person is mom:
         "[the_person.possessive_title] looks at you and smiles."
-        the_person.char "Oh, anything for you honey. Well, I'd better go get ready for the day!"
+        the_person "Oh, anything for you honey. Well, I'd better go get ready for the day!"
     elif the_person is starbuck:
         "[the_person.possessive_title] giggles for a second then says goodbye."
-        the_person.char "Yeah well, just don't tell my other customers about this, I can't make house calls for everyone!"
+        the_person "Yeah well, just don't tell my other customers about this, I can't make house calls for everyone!"
     else:
         "[the_person.title] looks at you and winks."
-        the_person.char "Anytime [the_person.mc_title]! I'd better go get ready!"
+        the_person "Anytime [the_person.mc_title]! I'd better go get ready!"
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "stand3")
     "You fall back asleep. When you wake up, [the_person.possessive_title] has left."

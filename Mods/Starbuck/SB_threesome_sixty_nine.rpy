@@ -42,7 +42,7 @@ init:
 label intro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_object, the_round, current_girl):
     mc.name "[the_girl_1.title], why don't you lay down. [the_girl_2.title] can get on top of you and you can eat her out while I fuck you."
     "[the_girl_1.title] smiles and agrees."
-    if the_girl_1.has_role(vaginal_fetish_role):
+    if the_girl_1.has_breeding_fetish():
         the_girl_1.char "Mmm I can't wait to feel you sliding into me..."
     elif the_girl_1.has_role(oral_fetish_role):
         the_girl_1.char "Mmm I can't wait to taste that sweet pussy..."
@@ -53,7 +53,7 @@ label intro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
     "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."
     if the_girl_2.has_role(oral_fetish_role):
         the_girl_2.char "This should be good, I've heard [the_girl_1.name] has a pretty good tongue..."
-    elif the_girl_2.has_role(vaginal_fetish_role):
+    elif the_girl_2.has_breeding_fetish():
         the_girl_2.char "This should be a good warmup... but don't forget, [the_girl_2.mc_title], I need you to fuck me sometime too..."
     elif the_girl_2.has_role(anal_fetish_role):
         the_girl_2.char "Sounds good! [the_girl_1.name] could you move your tongue into my little sphincter too, that would drive me wild..."
@@ -112,7 +112,7 @@ label scene_SB_threesome_sixty_nine_1(the_girl_1, the_girl_2, the_location, the_
                 $the_girl_2.change_arousal(mc.sex_skills["Oral"])
             "Suck her nipples\n{color=#ff0000}{size=18}Obstructed by Clothing{/size}{/color} (disabled)" if not the_girl_2.outfit.tits_available():
                 pass
-                
+
         "While you give attention to [the_girl_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
     else:
         "You rest one hand on [the_girl_2.title]'s head, guiding her as she sucks you off. With you other hand you continue to finger fuck [the_girl_1.title]."

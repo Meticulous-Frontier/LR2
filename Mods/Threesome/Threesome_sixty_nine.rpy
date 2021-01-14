@@ -93,8 +93,8 @@ init 2 python:
 
 label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
     "[the_girl_1.title] smiles and agrees."
-    if the_girl_1.has_role(vaginal_fetish_role):
-        the_girl_1.char "Mmm I can't wait to feel you sliding into me..."
+    if the_girl_1.has_breeding_fetish():
+        the_girl_1.char "Mmm I can't wait to feel your raw cock sliding into me..."
     elif the_girl_1.has_role(oral_fetish_role):
         the_girl_1.char "Mmm I can't wait to taste that sweet pussy..."
     elif the_girl_1.has_role(anal_fetish_role):
@@ -104,7 +104,7 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
     "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."
     if the_girl_2.has_role(oral_fetish_role):
         the_girl_2.char "This should be good, I've heard [the_girl_1.name] has a pretty good tongue..."
-    elif the_girl_2.has_role(vaginal_fetish_role):
+    elif the_girl_2.has_breeding_fetish):
         the_girl_2.char "This should be a good warmup... but don't forget, [the_girl_2.mc_title], I need you to fuck me sometime too..."
     elif the_girl_2.has_role(anal_fetish_role):
         the_girl_2.char "Sounds good! [the_girl_1.name] could you move your tongue into my little sphincter too, that would drive me wild..."

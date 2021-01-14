@@ -40,7 +40,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
         "You can clearly see her arousal every time she bounces up and down on top of you, her juices are beginning to run down the inside of her thighs."
     else:
         "You watch in rapture as her tight pussy lips grip your shaft with every bounce."
-    if the_girl.has_role(vaginal_fetish_role):   #Fetish serum, highly skilled and loves sex
+    if the_girl.has_breeding_fetish():   #Fetish serum, highly skilled and loves sex
         the_girl.char "Oh [the_girl.mc_title], I love how full I feel when you fuck me... god I wish we could do this everyday!"
         "[the_girl.possessive_title] gives you a few quick, shallow dips then pull off you almost completely, leaving just your tip inside her."
         "She swirls her hips a couple times then impales herself on your again. [the_girl.possessive_title] works her hips relentlessly on top of you as she pleases herself on your erection."
@@ -95,7 +95,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
                 "She wiggles her hips back and forth, giving you an enticing moving target. You give her irresistible ass another spank."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass") * 5)
                 "[the_girl.possessive_title] moans as you give her a few more swats. A bright red handprint is beginning to form on her cheeks."
-            elif the_girl.has_role(vaginal_fetish_role):
+            elif the_girl.has_breeding_fetish():
                 "You give her irresistible ass another spank. [the_girl.possessive_title] times her thrust with your hand smacking her booty, swallowing your dick whole with her greedy cunt when you spank her."
                 the_girl.char "Mmmm. I've been bad [the_girl.mc_title], I can't get your dick off my mind!"
                 "You spank her again. She bottoms out on top of you in time with your smack again. She greatly enjoys the sensation of getting filled up and spanked at the same time."
