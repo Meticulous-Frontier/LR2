@@ -3,8 +3,8 @@
 
 init -1 python:
     def fetish_mom_kitchen_requirement(the_person):
-        if the_person.get_fetish_count > 0:
-            if person is mom and mc.location == kitchen:
+        if the_person.get_fetish_count() > 0:
+            if the_person is mom and mc.location == kitchen:
                 if mc.energy > 30:
                     return True
                 else:
@@ -12,7 +12,7 @@ init -1 python:
         return False
 
     def fetish_lily_stream_in_room_requirement(the_person):
-        if the_person.get_fetish_count > 0:
+        if the_person.get_fetish_count() > 0:
             if not mc.location is lily_bedroom:
                 return "Must be in Lily's bedroom"
             elif lily_bedroom.get_person_count() > 1:
@@ -122,9 +122,9 @@ label fetish_mom_kitchen_label(the_person):
             "You hear your sister call out from the living room."
             lily "You okay in there mom?"
             the_person "Yes dear! I'm just... you knowing... chopping some vegetables!"
-            "You give her ass another hard spank, as if to punctuate her remark. [the_person.possesive_title] is barely able to stifle her moan."
+            "You give her ass another hard spank, as if to punctuate her remark. [the_person.possessive_title] is barely able to stifle her moan."
             $ the_person.change_arousal(15)
-            "Barely whispering, [the_person.possesive_title] tries to resist, but you can tell this is really turning her on."
+            "Barely whispering, [the_person.possessive_title] tries to resist, but you can tell this is really turning her on."
             the_person "Your sister, she's going to..."
             if the_person.outfit.vagina_available():
                 mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
@@ -157,13 +157,13 @@ label fetish_mom_kitchen_label(the_person):
             the_person "No! I mean... your brother is in here giving me a hand... there's a LOT of meat to tenderize... it might take us a while!"
             "Holy shit she is actually gonna sell that."
             lily "Well... okay, if you're sure."
-            "You take the opportunity now to pick up the pace. You are really giving it to [the_person.possesive_title] now."
+            "You take the opportunity now to pick up the pace. You are really giving it to [the_person.possessive_title] now."
             call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True) from _call_sex_mom_kitchen_loud_sex_01
             $ the_report = _return
             $ the_person.event_triggers_dict["LastExhibitionFetish"] = day
         "Fuck her loudly\n{color=#ff0000}{size=18}Requires Exhibitionist Fetish{/size}{/color} (disabled)" if not the_person.has_exhibition_fetish():
             pass
-    "Clearly, in her current attire, it will be obvious what [the_person.possesive_title] has been up to. You look at the state of dinner. Its almost done."
+    "Clearly, in her current attire, it will be obvious what [the_person.possessive_title] has been up to. You look at the state of dinner. Its almost done."
     mc.name "You go clean yourself up. I'll finish preparing dinner."
     "Ahhh... okay... thank you honey!"
     $ clear_scene()
@@ -190,11 +190,11 @@ label fetish_mom_kitchen_label(the_person):
                 call give_serum(cousin) from _call_give_mom_kitchen_fetish_04
             "Leave [cousin.name]'s food alone":
                 pass
-    "Just as you are finishing up with plating the food, when [the_person.possesive_title] walks back into the kitchen."
+    "Just as you are finishing up with plating the food, when [the_person.possessive_title] walks back into the kitchen."
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person()
     the_person "Thank you [the_person.mc_title]... for finishing dinner and... you know..."
-    "[the_person.possesive_title] gives you a kiss on the cheek."
+    "[the_person.possessive_title] gives you a kiss on the cheek."
     "You bring the food out and have a nice family dinner together."
     call advance_time from _call_advance_time_kitchen_mom_fetish_time_01
     return
@@ -218,7 +218,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
         $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     the_person "Ah! Here it is. I know its hard to wait, but I need to set up the stream first, [the_person.mc_title]."
-    "[the_person.possesive_title] goes over to her laptop and sits down."
+    "[the_person.possessive_title] goes over to her laptop and sits down."
     $ the_person.draw_person(position = "sitting")
     "It takes her a few minutes to set it up. She sets up her camera and makes sure the angle is pointed at her bed."
     the_person "Okay... I got it just about set up. Are you ready?"
@@ -235,7 +235,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     the_person "Aaaahhhhhh yes! Now fuck me good! I'm ready for it!"
     call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True) from _call_lily_fetish_stream_anal_01
     #TODO orgasm dialogue to her streamers
-    "[the_person.possesive_title] slowly gets up and walks over to her laptop."
+    "[the_person.possessive_title] slowly gets up and walks over to her laptop."
     the_person "That's all for now everyone... thanks for watching!"
     "She ends the stream."
     #TODO earnings based on orgasms

@@ -41,25 +41,25 @@ init 2 python:
         return False
 
     def fetish_serum_anal_warning_requirement():
-        if time_of_day == 1 and day%7 == 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
             if get_fetish_anal_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_cum_warning_requirement():
-        if time_of_day == 1 and day%7 == 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
             if get_fetish_cum_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_breeding_warning_requirement():
-        if time_of_day == 1 and day%7 == 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
             if get_fetish_breeding_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_exhibition_warning_requirement():
-        if time_of_day == 1 and day%7 == 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
             if get_fetish_exhibition_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
@@ -74,16 +74,16 @@ init 2 python:
 
 
     def is_anal_fetish_unlocked():
-        return mc.business.event_triggers_dict.get("anal_fetish_warn", False)
+        return mc.business.event_triggers_dict.get("anal_serum_warn", False)
 
     def is_cum_fetish_unlocked():
-        return mc.business.event_triggers_dict.get("cum_fetish_warn", False)
+        return mc.business.event_triggers_dict.get("cum_serum_warn", False)
 
     def is_breeding_fetish_unlocked():
-        return mc.business.event_triggers_dict.get("breeding_fetish_warn", False)
+        return mc.business.event_triggers_dict.get("breeding_serum_warn", False)
 
     def is_exhibition_fetish_unlocked():
-        return mc.business.event_triggers_dict.get("exhibition_fetish_warn", False)
+        return mc.business.event_triggers_dict.get("exhibition_serum_warn", False)
 
     def get_fetish_serum_contact():
         return mc.business.event_triggers_dict.get("fetish_serum_contact", None)
@@ -154,7 +154,7 @@ init 3 python:
 
 label fetish_serum_quest_intro_label():
     $ the_person = mc.business.head_researcher
-    $ mc.business.event_triggers_dict["fetish_serum_contact"] = person.identifier
+    $ mc.business.event_triggers_dict["fetish_serum_contact"] = the_person.identifier
     "As you are getting ready to sit down for some lunch, your head researcher messages you."
     the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can I swing by?"
     mc.name "Sure, I'm just sitting down to some lunch, I'm in the office."
@@ -248,6 +248,8 @@ label fetish_serum_discuss_label(the_person):
                 call fetish_serum_self_code_menu(the_person) from _fetish_discussion_coding_menu_02
             "Reach out to Contact":
                 call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_01
+    else:
+        call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_02
     return
 
 label fetish_serum_contact_dialogue(the_person):
@@ -365,7 +367,7 @@ label fetish_serum_self_code_menu(the_person):
         mc.name "Let's take a look at what we have. Do you have a copy of the code?"
         the_person "I do, let me pull it up."
         $ the_person.draw_person(position = "sitting")
-        "[the_person.possesive_title] sits down at her computer terminal. In a minute or so, she pulls up the program."
+        "[the_person.possessive_title] sits down at her computer terminal. In a minute or so, she pulls up the program."
         "You start to look at it together."
         if (mc.int + mc.focus + mc.research_skill) < 15:
             "Attribute check failed! Requires higher Intelligence, Focus, and Research Skill."
@@ -379,7 +381,7 @@ label fetish_serum_self_code_menu(the_person):
             "You look through the code for several minutes, and you start to catch on to how it works."
             mc.name "There's that reference again. That must be how the program determines when to trigger."
             the_person "Ah! And the reference here must be to skin nerves and endorphin receptors."
-            "The code itself is complicated, but you think it might be possible to modify it into a new program yourself, with the help of [the_person.possesive_title]."
+            "The code itself is complicated, but you think it might be possible to modify it into a new program yourself, with the help of [the_person.possessive_title]."
             mc.name "I think we might actually be able to pull this off."
             if fetish_serum_coding_activity not in mc.business.r_div.actions:
                 $ mc.business.r_div.actions.append(fetish_serum_coding_activity)
@@ -395,6 +397,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_exhibition_serum()
+            # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhbitionist fetish is created
 
         "Anal Program" if get_fetish_anal_serum().tier > 5:
             mc.name "I'd like to create a new program, based on these specifications."
@@ -405,6 +408,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_anal_serum()
+            $ mc.business.mandatory_crises_list.append(fetish_serum_anal_warning)
         "Semen Program" if get_fetish_cum_serum().tier > 5:
             mc.name "I'd like to create a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person enjoy semen exposure."
@@ -414,6 +418,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_cum_serum()
+            $ mc.business.mandatory_crises_list.append(fetish_serum_cum_warning)
         "Reproduction Program" if get_fetish_breeding_serum().tier > 5:
             mc.name "I'd like to create a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to engage in reproduction and acts associated with it."
@@ -423,6 +428,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_cum_serum()
+            $ mc.business.mandatory_crises_list.append(fetish_serum_breeding_warning)
         "No":
             mc.name "Not right now, but I'll keep this option in mind."
             return False
@@ -610,7 +616,7 @@ label fetish_serum_coding_activity_label():
     $ the_person = mc.business.head_researcher
     if fetish_serum_get_coding_progress() + fetish_serum_get_estimated_coding_progress() >= fetish_serum_coding_work_required():
         "You sit down at a computer terminal in the lab. You set your phone to do not disturb."
-        "You are confident that you can finish this program in the nex few hours, so you decide not to let any distractions through."
+        "You are confident that you can finish this program in the next few hours, so you decide not to let any distractions through."
         $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress())
     else:
         "You sit down at a computer terminal in the lab to work on the nanobot program. Things seem to be progressing normally."
@@ -619,7 +625,7 @@ label fetish_serum_coding_activity_label():
             pass #HR gets impatient, asks to fuck
             $ the_person.arousal = 40
             $ the_person.draw_person()
-            "[the_person.possesive_title] walks up behind, looking over your shoulder as your work."
+            "[the_person.possessive_title] walks up behind, looking over your shoulder as your work."
             the_person "Hey, I was just looking at that program earlier..."
             "You feel her hands on your shoulders. She starts to rub your back. It feels nice and is very relaxing."
             if the_person.effective_sluttiness() > SB_doggy_standing.slut_requirement + 5 and mc.energy > 50 and the_person.energy > 50:
@@ -647,7 +653,7 @@ label fetish_serum_coding_activity_label():
                             if the_person.vagina_available():
                                 "You take your cock out and get behind her."
                             else:
-                                "[the_person.possesive_title] bends over. You start to strip off her bottoms."
+                                "[the_person.possessive_title] bends over. You start to strip off her bottoms."
                                 $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
                                 "When you finish, you take your cock out and get behind her."
                             if len(mc.location.people) <= 1:
@@ -656,6 +662,7 @@ label fetish_serum_coding_activity_label():
                             "You run your cock along her slit a couple of times, then line yourself up and push forward."
                             "[the_person.title]'s wet cunt feels so good wrapped around your penis. You start to fuck her."
                             call fuck_person(the_person,private = False, start_position = SB_doggy_standing, skip_intro = True) from _call_fuck_person_serum_coding_event_01
+                            $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
                                 the_person.char "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
                             $ the_person.review_outfit()
@@ -663,11 +670,12 @@ label fetish_serum_coding_activity_label():
                             "Once [the_person.title] gets herself tidied up she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
                         else:
                             mc.name "Let's find somewhere private."
-                            "You grab [the_person.possesive_title] and soon you find an empty storeroom."
+                            "You grab [the_person.possessive_title] and soon you find an empty storeroom."
                             call fuck_person(the_person,private = True) from _call_fuck_person_serum_coding_event_02
+                            $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
                                 the_person.char "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
-                            "You get your clothes back on and head back to the lab, sitting down at the terminal. After a few minutes, [the_person.possesive_title] comes back in."
+                            "You get your clothes back on and head back to the lab, sitting down at the terminal. After a few minutes, [the_person.possessive_title] comes back in."
                             $ the_person.review_outfit()
                             $ the_person.draw_person(position = "sitting")
                             "Once [the_person.title] has gotten herself tidied up and she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
@@ -679,7 +687,7 @@ label fetish_serum_coding_activity_label():
                         $ the_person.change_happiness(-3)
                         $ the_person.change_obedience(5)
                         the_person "Ah, okay."
-                        "You spend a few hours working on the code. You feel like you are making goo progress."
+                        "You spend a few hours working on the code. You feel like you are making good progress."
                         "You write some unit tests. There are a couple bugs, but you are able to work through them."
                         "You save your work. Your progress is coming along nicely."
                         $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress())
@@ -697,14 +705,14 @@ label fetish_serum_coding_activity_label():
             "You work a few hours on the grouping. Your progress has come along faster than you were expecting!"
             $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() + mc.int)
         else:
-            "You spend a few hours working on the code. You feel like you are making goo progress."
+            "You spend a few hours working on the code. You feel like you are making good progress."
             "You write some unit tests. There are a couple bugs, but you are able to work through them."
             "You save your work. Your progress is coming along nicely."
             $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress())
 
     if fetish_serum_get_coding_progress() >= fetish_serum_coding_work_required(): #Serum Finished
         "You run the final set of unit tests. Everything in the program checks out. It's finished!"
-        "You call over to [the_person.possesive_title]"
+        "You call over to [the_person.possessive_title]"
         mc.name "Hey [the_person.title], come here."
         $ the_person.draw_person(position = the_person.idle_pose)
         "[the_person.title] quickly walks over."
@@ -716,9 +724,12 @@ label fetish_serum_coding_activity_label():
         "You have now unlocked [temp_string]."
         "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
         "You can learn more about it at mastery level 3.0."
+        $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = False
+        $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
         $ del temp_string
     else:
         $ temp_percent = fetish_serum_get_coding_progress() / fetish_serum_coding_work_required()
         "You quickly review your work. Progress is coming along, you estimate it is about [temp_percent:.2] percent complete."
         $ del temp_percent
+    call advance_time() from _call_serum_progress_advance_time_01
     return

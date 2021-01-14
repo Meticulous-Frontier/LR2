@@ -591,12 +591,12 @@ label cum_fetish_sarah_intro_label():
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
 
             call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sarah_cum_fetish_intro_01
-
+            $ add_cum_fetish(the_person)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
-            if person.has_mouth_cum():
+            if the_person.has_mouth_cum():
                 "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
                 the_person "Mmm... it feels so good! That first splash is always the best..."
-            elif person.has_face_cum():
+            elif the_person.has_face_cum():
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person "Mmm... that was so... good..."
             $ the_person.event_triggers_dict["LastCumFetish"] = day

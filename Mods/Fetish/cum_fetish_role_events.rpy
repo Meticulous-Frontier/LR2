@@ -8,7 +8,7 @@ init -1 python:
 
 
 init 2 python:
-     cum_fetish_get_dosage = Action("Give her cum dosage",  cum_fetish_get_dosage_requirement, " cum_fetish_get_dosage_label",
+     cum_fetish_get_dosage = Action("Give her cum dosage",  cum_fetish_get_dosage_requirement, "cum_fetish_get_dosage_label",
         menu_tooltip = "Give her cum, right here, right now.")
 
 init 3 python:

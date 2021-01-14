@@ -184,7 +184,7 @@ label aggressive_anal_fetish_non_employee_label():
 label anal_fetish_employee_evening_approach_label():
     $ the_person = get_needy_anal_fetish_employee()
     if the_person is None:
-        $ the_person = get_anal_fetish_employee
+        $ the_person = get_anal_fetish_employee()
         if the_person is None:
             return
     "As you are packing up your stuff to head home for the day, you hear [the_person.possessive_title]'s sweet voice call out to you."

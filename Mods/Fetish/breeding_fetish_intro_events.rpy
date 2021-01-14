@@ -94,7 +94,7 @@ init 3 python:
         person.add_role(breeding_fetish_role)
         person.update_sex_skill("Vaginal", 6)
         person.event_triggers_dict["LastBreedingFetish"] = day
-        add_breed_me_collar_to_base_outfit(person)
+        # add_breed_me_collar_to_base_outfit(person)
         return
 
 #Fetish Intro Labels
