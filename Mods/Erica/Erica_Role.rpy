@@ -1267,7 +1267,7 @@ label erica_money_problems_update_label(the_person):
         the_person.char "It's going ok... Since you helped me out, I'm at least treading water, but it would be nice to find just a little more somewhere."
     else:
         the_person.char "Oh hey. I'm still looking for a part time job... Heard of anything?"
-        mc.name "Not yet, sorry"
+        mc.name "Not yet, sorry."
     if the_person.event_triggers_dict.get("insta_pic_started", False) == False and lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
         "Maybe you should try talking to [lily.title]? You recently started taking insta pics of her. Maybe [the_person.title] could join in for a session once in a while?"
         $ the_person.event_triggers_dict["insta_pic_started"] = True
@@ -1279,7 +1279,7 @@ label erica_money_problems_update_label(the_person):
 
 label erica_money_problems_sarah_talk_label(the_person):
     mc.name "Hey, I have a question for you."
-    the_person.char "Shoot"
+    the_person.char "Okay, shoot..."
     mc.name "My sister has a friend at the local university who is struggling to make ends meet while taking her classes."
     mc.name "She's looking for a part time job. Would you happen to know of anything around here I could hire her to do? It has to be on a fairly flexible schedule, she needs to be able to focus on her education."
     "[the_person.possessive_title] pauses as she considers your inquiry."
@@ -1496,13 +1496,12 @@ label erica_yoga_event_intro_label():
     "You watch as your employees start out doing so light stretching. Everyone seems to be paying attention and trying their best."
     "This really does seem like it could be a good benefit for your employees who are willing to come out a bit early. You turn back to the computer and get to work."
     call erica_yoga_loop_label(the_person, yoga_assistant) from _erica_yoga_loop_call_01
-    $ watched_count = _return
     "As you finish up with your work, you hear [the_person.title] calling out instructions for the cool down. Sounds like the yoga session is wrapping up as well. The girls finish and start rolling up their mats."
     $ scene_manager.add_actor(the_person)
     "You walk up to [the_person.possessive_title]."
     mc.name "Congratulations, that seemed like a very successful first meeting!"
     the_person.char "Thank you!"
-    call erica_getting_watched_reaction_label(the_person, watched_count) from _erica_gets_watched_during_yoga_intro_01
+    call erica_getting_watched_reaction_label(the_person, _return) from _erica_gets_watched_during_yoga_intro_01
     $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
     yoga_assistant.char "Alright, I know everyone is thirsty. Anyone who needs waters, head for the break room."
     "You can hear [yoga_assistant.possessive_title] calling out. The room starts to clear. She walks over to you and [the_person.possessive_title]."
@@ -1566,8 +1565,8 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
         "The outfits that you've seen around the room... a lot of them really draw your attention. The class has been getting sluttier and sluttier each week..."
     $ the_pose = get_random_from_list(erica_yoga_poses)
     menu:
-        "Work on efficiency (disabled)": #We aren't here to get work done! Probably actually make this possible in the future though.
-            pass
+        #"Work on efficiency (disabled)": #We aren't here to get work done! Probably actually make this possible in the future though.
+        #    pass
         "Watch [the_person.title]":
             "You look up at and see [the_person.possessive_title] and [yoga_assistant.title] near the front of the class."
             $ switch_to_class_front(the_person, yoga_assistant, the_pose)
@@ -1593,8 +1592,8 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
         "Some of the girls are starting to work up a good sweat, giving a nice shine to their nubile bodies."
     $ the_pose = get_random_from_list(erica_yoga_poses)
     menu:
-        "Work on research (disabled)": #We aren't here to get work done! Probably actually make this possible in the future though.
-            pass
+        #"Work on research (disabled)": #We aren't here to get work done! Probably actually make this possible in the future though.
+        #    pass
         "Watch [the_person.title]":
             "You look up at and see [the_person.possessive_title] and [yoga_assistant.title] near the front of the class."
             $ switch_to_class_front(the_person, yoga_assistant, the_pose)
@@ -1607,40 +1606,40 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
             $ display_yoga_dialog(the_pose)
             "You watch for a while, but soon turn your attention back to the computer."
 
-    $ scene_manager.clear_scene(reset_actor = False)
-    "You decide to pull up a list of suppliers for some of your chemical components."
-    "As you look at a few of their websites, you discover that one of them is dumping stock of a component they accidentally over produced!"
-    "If you order it right now, you could get a bunch of supplies at a steeply discounted rate."
-    "Before you make the order, you can hear [the_person.title] encouraging the class to keep with it. The yoga session is getting intense!"
-    "Maybe you should watch it..."
-    if nude_class:
-        "When you glance up, sexual tension in the room is really ramping up."
-        "A couple girls are now actively making out, and another pair are doing their poses so close together their bodies are rubbing against each other."
-    elif slutty_class:
-        "The sound of heavy breathing and gasps coming from the class makes it hard to pay attention to the computer terminal."
-    $ the_pose = get_random_from_list(erica_yoga_poses)
-    menu:
-        "Work on supply (disabled)": #We aren't here to get work done! Probably actually make this possible in the future though.
-            pass
-        "Watch [the_person.title]":
-            "You look up at and see [the_person.possessive_title] and [yoga_assistant.title] near the front of the class."
-            $ switch_to_class_front(the_person, yoga_assistant, the_pose)
-            $ display_yoga_dialog(the_pose)
-            $ erica_num_watched += 1
-        "Watch the class":
-            "You can't help it, this might be your last chance for today to watch the girls posing. You look up at the class and watch intently"
-            $ switch_to_back_of_class(back_row, the_pose)
-            $ display_yoga_dialog(the_pose)
+    # SHORTENED LOOP BY ONE SCENE, it gets tedious watching it over and over.
+    # $ scene_manager.clear_scene(reset_actor = False)
+    # "You decide to pull up a list of suppliers for some of your chemical components."
+    # "As you look at a few of their websites, you discover that one of them is dumping stock of a component they accidentally over produced!"
+    # "If you order it right now, you could get a bunch of supplies at a steeply discounted rate."
+    # "Before you make the order, you can hear [the_person.title] encouraging the class to keep with it. The yoga session is getting intense!"
+    # "Maybe you should watch it..."
+    # if nude_class:
+    #     "When you glance up, sexual tension in the room is really ramping up."
+    #     "A couple girls are now actively making out, and another pair are doing their poses so close together their bodies are rubbing against each other."
+    # elif slutty_class:
+    #     "The sound of heavy breathing and gasps coming from the class makes it hard to pay attention to the computer terminal."
+    # $ the_pose = get_random_from_list(erica_yoga_poses)
+    # menu:
+    #     "Work on supply (disabled)": #We aren't here to get work done! Probably actually make this possible in the future though.
+    #         pass
+    #     "Watch [the_person.title]":
+    #         "You look up at and see [the_person.possessive_title] and [yoga_assistant.title] near the front of the class."
+    #         $ switch_to_class_front(the_person, yoga_assistant, the_pose)
+    #         $ display_yoga_dialog(the_pose)
+    #         $ erica_num_watched += 1
+    #     "Watch the class":
+    #         "You can't help it, this might be your last chance for today to watch the girls posing. You look up at the class and watch intently"
+    #         $ switch_to_back_of_class(back_row, the_pose)
+    #         $ display_yoga_dialog(the_pose)
 
-    if mc.arousal <= 10:
-        "The class is wrapping up now, and you feel pretty good about the amount of work you were able to get done."
-    elif mc.arousal <= 30:
-        "The class is wrapping up now. You didn't get as much done as you would have liked, but the views from where you were sitting were worth it!"
-    elif mc.arousal <= 60:
-        "The class is wrapping up now. Your erection is hard to ignore after watching the girls do all kinds of sexy poses."
-    else:
-        "The class is wrapping up now. It appears to be degenerating into an outright orgy. You consider joining the fray."
-
+    # if mc.arousal <= 10:
+    #     "The class is wrapping up now, and you feel pretty good about the amount of work you were able to get done."
+    # elif mc.arousal <= 30:
+    #     "The class is wrapping up now. You didn't get as much done as you would have liked, but the views from where you were sitting were worth it!"
+    # elif mc.arousal <= 60:
+    #     "The class is wrapping up now. Your erection is hard to ignore after watching the girls do all kinds of sexy poses."
+    # else:
+    #     "The class is wrapping up now. It appears to be degenerating into an outright orgy. You consider joining the fray."
 
     python:
         # cleanup loop
@@ -1909,21 +1908,24 @@ label erica_weekly_yoga_label(the_person):
     call advance_time(no_events = True) from _call_advance_time_erica_yoga_weekly_recurring
     return
 
-label erica_getting_watched_reaction_label(the_person, watched_count):  #A short label to describe how Erica feels when you watch her doing yoga.
-    if (watched_count * 20) > the_person.sluttiness and watched_count > 1:  #She is embarrassed how much you watched her. sluttiness gain.
+label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A short label to describe how Erica feels when you watch her doing yoga.
+    if watched_count == 0:
+        return  # we didn't look at her
+
+    if (watched_count * 20) + 10 > the_person.sluttiness:  #She is embarrassed how much you watched her. sluttiness gain.
         if watched_count == 1:
             the_person.char "I couldn't help but notice you sneaking glances at me... during the session."
             "She is blushing slightly."
             mc.name "Sorry, being in the same room as you doing yoga is a little bit distracting."
             the_person.char "It's okay! I actually don't mind. That's totally normal, right?"
             mc.name "Of course."
-            $ the_person.change_stats(slut_core = 1, slut_temp = 1, love = 1)
-        elif watched_count == 2:
-            the_person.char "I couldn't help but notice you looking at me during the session."
-            "She is blushing."
-            mc.name "You're a beautiful woman, [the_person.title]. I'm sorry, I'll try not to stare so much next time."
-            the_person.char "It's okay! I mean, I guess that's pretty normal, considering the circumstances."
-            $ the_person.change_stats(slut_core = 2, slut_temp = 2, happiness = 2)
+            $ the_person.change_stats(slut_core = 1, slut_temp = 1, love = -1)
+        # elif watched_count == 2:
+        #     the_person.char "I couldn't help but notice you looking at me during the session."
+        #     "She is blushing."
+        #     mc.name "You're a beautiful woman, [the_person.title]. I'm sorry, I'll try not to stare so much next time."
+        #     the_person.char "It's okay! I mean, I guess that's pretty normal, considering the circumstances."
+        #     $ the_person.change_stats(slut_core = 2, slut_temp = 2, happiness = 2)
         else:
             the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes every time I posed..."
             "She is blushing heavily and looking down."
@@ -1938,14 +1940,14 @@ label erica_getting_watched_reaction_label(the_person, watched_count):  #A short
             the_person.char "It's kind of nice, having you here to watch. Did you like what you saw?"
             mc.name "Of course. You're very flexible, and a great yoga instructor."
             the_person.char "Aww, thank you."
-            $ the_person.change_stats(love = 1, happiness = 1)
-        elif watched_count == 2:
-            the_person.char "I couldn't help but notice you looking at me during the session."
-            "She is smiling wide."
-            the_person.char "I can't say I blame you. Should I assume from the drool that was coming out of the side of your mouth that you liked what you saw?"
-            mc.name "Definitely. You have a great figure, and being in the same room during yoga, I couldn't help but watch."
-            the_person.char "Aww, you're sweet."
-            $ the_person.change_stats(love = 2, slut_temp = 2, happiness = 2)
+            $ the_person.change_stats(love = 1, slut_temp = 1, happiness = 1, add_to_log = False)
+        # elif watched_count == 2:
+        #     the_person.char "I couldn't help but notice you looking at me during the session."
+        #     "She is smiling wide."
+        #     the_person.char "I can't say I blame you. Should I assume from the drool that was coming out of the side of your mouth that you liked what you saw?"
+        #     mc.name "Definitely. You have a great figure, and being in the same room during yoga, I couldn't help but watch."
+        #     the_person.char "Aww, you're sweet."
+        #     $ the_person.change_stats(love = 2, slut_temp = 2, happiness = 2)
         else:
             the_person.char "I couldn't help but notice you staring at me the entire session. I could feel your eyes every time I posed..."
             "She is giving you a mischievous smile."
@@ -1959,7 +1961,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count):  #A short
                 "She lowers her voice to a soft growl."
                 the_person.char "Maybe later you can undress me with your hands."
                 mc.name "Don't worry, I intend to."
-            $ the_person.change_stats(happiness = 3, slut_temp = 3, love = 3)
+            $ the_person.change_stats(happiness = 3, slut_temp = 3, love = 3, add_to_log = False)
     return
 
 label erica_after_yoga_office_session_label(the_person): #Theoretically this could be anyone, don't use any specific reference to a person.
