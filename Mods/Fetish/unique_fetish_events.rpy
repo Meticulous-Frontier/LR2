@@ -1,4 +1,5 @@
-# Use this file to store actions, crisis, and role related items that are going to be character specific. May require single fetish or multiple
+# Use this file to store actions, crisis, and role related items that are going to be character specific or unique. May require single fetish or multiple
+# Events in this file would be better added to specific roles
 
 init -1 python:
     def fetish_mom_kitchen_requirement(the_person):
@@ -68,7 +69,7 @@ label fetish_mom_kitchen_label(the_person):
                 "You slowly reach down and start to slowly caress her cunt."
             else:
                 "You slowly reach down and start to slowly rub her pussy through her [the_clothing.name]."
-            the_person. "Hey! What are you doing? Stop that!"
+            the_person "Hey! What are you doing? Stop that!"
             "You continue rubbing her."
             mc.name "Stop? But doesn't that feel good, [the_person.title]?"
             the_person "Of course it does... But your sister, she could walk in anytime..."
@@ -145,7 +146,7 @@ label fetish_mom_kitchen_label(the_person):
             "Holy shit she is actually gonna sell that."
             lily "Well... okay, if you're sure."
             "You take the opportunity now to pick up the pace. You are really giving it to [the_person.possesive_title] now."
-            call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_table(), skip_intro = True) from _call_sex_mom_kitchen_breeding_01
+            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True) from _call_sex_mom_kitchen_loud_sex_01
             $ the_report = _return
             $ the_person.event_triggers_dict["LastExhibitionFetish"] = day
         "Fuck her loudly\n{color=#ff0000}{size=18}Requires Exhibitionist Fetish{/size}{/color} (disabled)" if not the_person.has_exhibition_fetish():

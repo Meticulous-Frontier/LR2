@@ -95,10 +95,10 @@ init 2 python:
         return mc.business.event_triggers_dict.get("fetish_serum_coding_active", False)
 
     def fetish_serum_get_coding_progress():
-        return $ mc.business.event_triggers_dict.get("fetish_serum_code_progress", 0)
+        return mc.business.event_triggers_dict.get("fetish_serum_code_progress", 0)
 
     def fetish_serum_get_coding_target():
-        return $ mc.business.event_triggers_dict.get("fetish_serum_coding_target", None)
+        return mc.business.event_triggers_dict.get("fetish_serum_coding_target", None)
 
     def fetish_serum_has_previously_coded():
         return mc.business.event_triggers_dict.get("fetish_serum_prior_coding", False)
@@ -248,7 +248,7 @@ label fetish_serum_discuss_label(the_person):
                 call fetish_serum_self_code_menu(the_person) from _fetish_discussion_coding_menu_02
             "Reach out to Contact":
                 call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_01
-     return
+    return
 
 label fetish_serum_contact_dialogue(the_person):
     if fetish_serum_unlock_count() == 1:
@@ -650,7 +650,7 @@ label fetish_serum_coding_activity_label():
                                 "[the_person.possesive_title] bends over. You start to strip off her bottoms."
                                 $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
                                 "When you finish, you take your cock out and get behind her."
-                            len(mc.location.people) <= 1:
+                            if len(mc.location.people) <= 1:
                                 "Some of the other employees in the room have noticed your actions and are watching to see what is about to happen."
                                 the_person "Okay [the_person.mc_title]. Fuck me good! Don't hold back!"
                             "You run your cock along her slit a couple of times, then line yourself up and push forward."
@@ -672,7 +672,7 @@ label fetish_serum_coding_activity_label():
                             $ the_person.draw_person(position = "sitting")
                             "Once [the_person.title] has gotten herself tidied up and she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
                         "You start back to work on coding, but the distraction of fucking [the_person.title] makes it difficult to focus and make much progress."
-                            $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() / 4)
+                        $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() / 4)
 
                     "Focus on the code" if mc.focus >= 6:
                         mc.name "I think I would like to work on this right now. Maybe another time."

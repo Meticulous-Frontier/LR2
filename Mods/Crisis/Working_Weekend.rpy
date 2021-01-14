@@ -129,7 +129,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             "[person_one.possessive_title] smiles mischievously at you, before nodding."
             person_one.char "I can do that, [person_one.mc_title]... I hope you like the show!"
             $ person_one.change_slut_temp(5)
-            call SB_free_strip_scene(person_one) from _SB_free_strip_scene_3
+            call free_strip_scene(person_one) from _free_strip_scene_3
 
             $ person_two = get_random_employees(1)
             if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1):

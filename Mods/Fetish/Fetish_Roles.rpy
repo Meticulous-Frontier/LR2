@@ -41,14 +41,7 @@ init -1 python:
 
 
 
-    def SB_fetish_starbuck_anal_swing_demo_requirement(person):
-        if person is starbuck:
-            if mc.location == sex_store:
-                return True
-            else:
-                return "Must be at the Sex Shop"
-        else:
-            return False
+
 
 
     def SB_fetish_cum_getdosage_requirement(person):
@@ -58,12 +51,7 @@ init -1 python:
         else:
             return "You're too tired"
 
-    def SB_breeding_fetish_on_day(person):
-        if person.knows_pregnant() or person.is_lactating():
-            person.change_happiness(2, add_to_log = False)
-        elif person.is_highly_fertile(): #Always aroused when fertile.
-            if person.arousal < 50:
-                person.arousal = 50
+
 
     # Initialize vaginal fetish role
     SB_fetish_vaginal_visit = Action("Sleepover Tonight (Vaginal)", SB_fetish_vaginal_visit_requirement, "SB_fetish_vaginal_visit_label",
@@ -75,8 +63,7 @@ init -1 python:
     # Initialize anal fetsh role
     SB_lily_anal_in_room = Action("Use Strap On", SB_lily_anal_in_room_requirement, "SB_lily_anal_in_room_label",
         menu_tooltip = "Double Penetration on the bed.")
-    SB_fetish_starbuck_anal_swing_demo = Action("Have Sex Swing Demo", SB_fetish_starbuck_anal_swing_demo_requirement, "SB_starbuck_anal_swing_demo",
-        menu_tooltip = "Anal Sex in the Swing")
+
 
     # Initialize Cum Fetish role
     SB_fetish_cum_getdosage = Action("Give her cum dosage", SB_fetish_cum_getdosage_requirement, "SB_fetish_cum_getdosage_label",
@@ -90,7 +77,7 @@ init -1 python:
     oral_fetish_role = Role(role_name = "Oral Fetish", actions = [])
     #TODO: Add some actions when 'afflicted'
 
-    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
+    
 
     exhibition_fetish_role = Role(role_name = "Exhibitionist", actions = [])
 

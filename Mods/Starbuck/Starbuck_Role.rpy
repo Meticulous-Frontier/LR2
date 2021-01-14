@@ -18,6 +18,7 @@ init 2 python:
     starbuck_close_up = Action("Help close the store", starbuck_close_up_requirement, "starbuck_close_up_label")
     starbuck_candace_product_demo = Action("Candace helps with product demo", starbuck_candace_product_demo_requirement, "starbuck_candace_product_demo_label")
     starbuck_candace_recurring_event = Action("Candace and Starbuck hanging out", starbuck_candace_recurring_event_requirement, "starbuck_candace_recurring_event_label")
+    starbuck_anal_fetish_swing_demo = Action("Anal Sex Swing Demo", starbuck_anal_fetish_swing_demo_requirement, "starbuck_anal_fetish_swing_demo_label")
 
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
@@ -30,7 +31,9 @@ init 2 python:
         titles_function = starbuck_titles, possessive_titles_function = starbuck_possessive_titles, player_titles_function = starbuck_player_titles)
 
         # init starbuck role
-        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one, starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four, starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up])
+        starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one,
+            starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four,
+            starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up, starbuck_anal_fetish_swing_demo])
 
         #global starbuck_role
         global starbuck
@@ -240,10 +243,21 @@ init -1 python:
                 return True
         return False
 
+    def starbuck_anal_fetish_swing_demo_requirement(person):
+        if person is starbuck and starbuck.has_anal_fetish():
+            if mc.location == sex_store:
+                return True
+            else:
+                return "Must be at the Sex Shop"
+        else:
+            return False
+
     def starbuck_is_business_partner():
         if starbuck.shop_progress_stage >= 1:
             return True
         return False
+
+
 
 #SBS10
 label starbuck_vaginal_skillup_label(the_person):
@@ -2537,6 +2551,15 @@ init 2 python:
 
         return renpy.display_menu(title_tuple, True, "Choice")
 
+    def starbuck_anal_fetish_prepare_demo_audience(the_person):
+        count = 0
+        for girl in [x for x in mc.location.people if not x is the_person]:
+            if girl.sluttiness > 60:
+                count += 1
+            else:
+                girl.change_location(mall)
+        return count
+
 label starbuck_intro():
     $ the_person = starbuck
 
@@ -2668,4 +2691,140 @@ label starbuck_anal_fetish_checkup(alert = False):
     "You wait for a few seconds, then send her another round of vibrations."
     $ the_person.change_arousal(20)
     "You decide that is enough for now and go back to what you were doing."
+    return
+
+
+label starbuck_anal_fetish_swing_demo_label(the_person):
+    $ the_person = starbuck
+    $ the_person.event_triggers_dict["LastAnalFetish"] = day
+    mc.name "Hey, I was just wondering, you wanna go for a swing in the back?"
+    "[the_person.possessive_title] gives you a big smile."
+    the_person.char "That sounds great!"
+    $ in_private = True
+    #TODO determine if there are people here
+    if mc.location.get_person_count() > 1 and starbuck.has_exhibition_fetish(): #If Starbuck is not the only girl
+        the_person.char "I've got an idea! I've got a few customers in here... want to do a demonstration for anyone who wants to attend?"
+        "You consider her proposition carefully."
+        menu:
+            "Do a demo!":
+                mc.name "That would be hot! Let's do it!"
+                the_person.char "Yes! Okay, you head back there, I'll get ready, make an announcement, then meet you back there, okay?"
+                "You head to the back room. You make sure the swing is in a good position for people to be watch you... demonstrate it."
+                "Soon you hear [the_person.title] making her announcement."
+                the_person.char "Attention everyone! In five minutes, myself and a partner will be demonstrating one of the sex swingsets that we have for sale! Feel free to come watch and ask questions!"
+                $ the_person.apply_outfit(special_fetish_nude_outfit)
+                $ the_person.draw_person(position = "stand4")
+                "Soon, [the_person.title] appears in the doorway, completely naked."
+                #TODO: Determine if anyone wants to watch
+                $ count = starbuck_anal_fetish_prepare_demo_audience(the_person)
+                if count == 0:  #No one wants to watch
+                    the_person.char "Well, I made my announcement, but it doesn't look like anyone is interested in watching..."
+                    "You can hear the disappointment in her voice."
+                    mc.name "Hey, their loss. Don't worry, it'll still feel just as good when I slide into that amazing ass of yours..."
+                    "Her nipple stiffen slightly when she hears what you say."
+                    the_person.char "Mmm... I can feel it already... Probably because I still have this thing in!"
+                    $ the_person.draw_person(position = "back_peek")
+                    "[the_person.possessive_title] turns away from you. You see her plug nestled between her cheeks."
+                    "You slide up behind her, your hands squeezing her pliant cheeks. You slowly pull the plug out of her. She whimpers when its fully removed."
+                    mc.name "Alright, let's replace that with something a little... meatier... shall we?"
+                    $ the_person.draw_person(position = "sitting")
+                    "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
+                    "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
+                    the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+                else:   #People watch
+                    the_person.char "Here they come! This is gonna be great!"
+                    "[the_person.possessive_title] looks genuinely excited! She walks over next to swing and nonchalantly takes out her plug and sets it to the side."
+                    $ get_random_person_in_location(mc.location, [the_person]).draw_person(position = "stand4")
+                    "You watch as people begin to walk into the room..."
+                    "You are about to fuck [the_person.title], in the ass, in front of customers..."
+                    "You can't believe this is actually happening!"
+                    $ the_person.draw_person(position = "sitting")
+                    "[the_person.title] makes begin to speak. When you turn to her she is already seated in the swing. You quickly move around behind her."
+                    the_person.char "So, today, my wonderful partner and I are going to demonstrate proper technique on this swing..."
+                    "You zone out for a bit as she begins explaining the basics, how to set it up, etc."
+                    "You can't wait to feel yourself slide into her tight rear end. You start to day dream a bit."
+                    the_person.char "Alright, [the_person.mc_title], go ahead, I think we are ready for the demonstration."
+                    "Hearing her mention you grabs your attention. You slide up behind her, your hands squeezing her pliant cheeks."
+                    "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
+                    "She whimpers back at you."
+                    the_person.char "Alright, lets give em a good show."
+                    $ in_private = False
+
+            "Keep it private":
+                mc.name "I think I'd like to keep it between me and you, if that's okay."
+                "You can tell she is a little disappointed, but she quickly smiles again when she remembers that you are about to fuck her in the ass..."
+                the_person.char "Okay! Lets go!"
+                $ the_person.draw_person(position = "walking_away")
+                "[the_person.possessive_title] walks to the back room. You quickly follow her."
+                "You get to the back room and [the_person.title] turns to you."
+                the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
+                $ the_person.draw_person( position = "stand2")
+                "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
+
+                $ the_person.strip_outfit(position = "stand2")
+
+                "When you finish stripping, she turns her back to you."
+                $ the_person.draw_person(position = "back_peek")
+                mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
+                "She gives her ass a little wiggle."
+                the_person.char "Mmm... I can feel it already... Probably because I still have this thing in!"
+                "[the_person.possessive_title] pulls her cheeks apart. You can see her plug nestled between her cheeks."
+                "You slide up behind her, your hands squeezing her pliant cheeks. You slowly pull the plug out of her. She whimpers when its fully removed."
+                mc.name "Alright, let's replace that with something a little... meatier... shall we?"
+                $ the_person.draw_person(position = "sitting")
+                "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
+                "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
+                the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+    else:
+        the_person.char "Okay! Lets go!"
+        $ the_person.draw_person(position = "walking_away")
+        "[the_person.possessive_title] walks to the back room. You quickly follow her."
+        "You get to the back room and [the_person.title] turns to you."
+        the_person.char "Alright. Before we get started, let me get ready. You should probably get naked too!"
+        $ the_person.draw_person(position = "stand2")
+        "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
+
+        $ the_person.strip_outfit(position = "stand2")
+
+        "When you finish stripping, she turns her back to you."
+        $ the_person.draw_person(position = "back_peek")
+        mc.name "It's going to feel so good when I slide into that amazing ass of yours..."
+        "She gives her ass a little wiggle."
+        the_person.char "Mmm... I can feel it already... Probably because I still have this thing in!"
+        "[the_person.possessive_title] pulls her cheeks apart. You can see her plug nestled between her cheeks."
+        "You slide up behind her, your hands squeezing her pliant cheeks. You slowly pull the plug out of her. She whimpers when its fully removed."
+        mc.name "Alright, let's replace that with something a little... meatier... shall we?"
+        $ the_person.draw_person(position = "sitting")
+        "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
+        "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]"
+        the_person.char "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
+
+    call fuck_person(the_person, private = in_private, start_position = SB_anal_swing, start_object = make_swing(), skip_intro = True) from _call_sex_description_SBA080
+
+    #TODO the rest of this scene.
+    if in_private:
+        the_person.char "Oooh, fuck that was just what I needed."
+        $ the_person.draw_person(position = "stand3")
+        "[the_person.possessive_title] slowly stands up. Her knees are a little wobbly."
+        "She grabs her plug. She reaches back and slowly re-inserts it with a moan."
+        the_person.char "Mmm, that feels nice. Alright, you run a long now! Don't worry about me, I'll get cleaned up and back out front in a quick minute."
+        "You excuse yourself as [the_person.title] heads to the bathroom."
+    else:
+        $ person_one = get_random_person_in_location(mc.location, [the_person])
+        "You look around the room. All eyes are on you and [the_person.title]."
+        $ person_one.draw_person (position = "stand4")
+        "To one side you see [person_one.title], clearly touching herself, after watching you and [the_person.title] fuck."
+        person_one.char "Oh wow... maybe I should... I wonder if..."
+        "She is muttering things under her breath as she touches herself. She closes her eyes and you see her body tense as she orgasms."
+        $ person_one.change_happiness(5)
+        $ the_person.draw_person(position = "sitting")
+        "[the_person.title] has noticed and is smiling wide."
+        the_person.char "So... as you can see... the swing makes a wide variety of sexual maneuvers possible... For anyone who attended, I'd like to offer a discount!"
+        "You hear a few murmurs of approval. [the_person.title] looks up at you and winks."
+        the_person.char "Thanks [the_person.mc_title], that was amazing. Alright, you run a long now! Don't worry about me, I'll get cleaned up and back out front in a quick minute."
+        "You excuse yourself. You wonder if this will help sell the swing any!"
+        $ del person_one
+
+    call advance_time from _call_advance_SB_Anal_call_time_SBA081
+
     return

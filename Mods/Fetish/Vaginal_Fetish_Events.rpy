@@ -117,7 +117,7 @@ label SB_fetish_vaginal_event_label(the_person):
                 "[the_person.possessive_title] smiles at you."
                 the_person.char "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!" # NOTE: Names wont make sense, but everything else will.
                 "[the_person.possessive_title] winks at you before beginning her routine."
-                call SB_free_strip_scene(the_person) from _SB_free_strip_scene_2
+                call free_strip_scene(the_person) from _free_strip_scene_2
                 mc.name "Damn [the_person.title], you are really getting good at that."
                 "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
                 the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
@@ -266,7 +266,7 @@ label SB_fetish_lily_vaginal_label():
     "While she is still a bit conflicted, it appears she is finally coming to terms with her new found sex drive."
     "You sit down at the edge of your bed and watch as she begins the show."
 
-    call SB_free_strip_scene(the_person) from _SB_free_strip_scene_1
+    call free_strip_scene(the_person) from _free_strip_scene_1
 
     "Now completely naked, [the_person.possessive_title] walks over to you and sits on your lap."
     $ the_person.draw_person(position = "sitting")
@@ -492,7 +492,7 @@ label SB_fetish_vaginal_lily_recurring_label():
             "[the_person.possessive_title] smiles at you."
             the_person.char "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
             "[the_person.possessive_title] winks at you before beginning her routine."
-            call SB_free_strip_scene(the_person) from _SB_free_strip_scene_70
+            call free_strip_scene(the_person) from _free_strip_scene_70
             mc.name "Damn [the_person.title], you are really getting good at that."
             "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
             the_person.char "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."

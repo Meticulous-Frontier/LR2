@@ -8,6 +8,13 @@ init -1 python:
 
         return breeding_score
 
+    def SB_breeding_fetish_on_day(person):
+        if person.knows_pregnant() or person.is_lactating():
+            person.change_happiness(2, add_to_log = False)
+        elif person.is_highly_fertile(): #Always aroused when fertile.
+            if person.arousal < 50:
+                person.arousal = 50
+
 
 #Requirement functions
 
@@ -37,6 +44,8 @@ init -1 python:
 
     breeding_fetish_going_off_BC = Action("She goes off BC", breeding_fetish_going_off_BC_requirement, "breeding_fetish_going_off_BC_label")
     breeding_fetish_bend_her_over = Action("Bend her over", breeding_fetish_bend_her_over_requirement, "breeding_fetish_bend_her_over_label", menu_tooltip = "Bend her over right here and give your breeding stock a creampie")
+
+    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
 
 
 #Other breeding fetish calls

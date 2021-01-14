@@ -629,7 +629,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person.char "Okay, I want you to sit on the counter. I'm gonna get naked for you."
         "She hands you her phone."
         the_person.char "Here we go! Get lots of good pics!"
-        call SB_free_strip_scene(the_person) from _CS_free_strip_scene_CSH021
+        call free_strip_scene(the_person) from _CS_free_strip_scene_CSH021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person.char "Come on, lets fuck!"
         call fuck_person(the_person) from _call_casual_sex_mod_CSH022

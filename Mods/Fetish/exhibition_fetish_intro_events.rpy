@@ -73,59 +73,59 @@ init 2 python: #Other exhibition fetish related python code
     #Create action code here
 
 # Fetish Labels
-label anal_fetish_employee_intro_label(the_person):
+label exhibition_fetish_employee_intro_label(the_person):
     return False
 
-label anal_fetish_family_intro_label(the_person):
+label exhibition_fetish_family_intro_label(the_person):
     return False
 
-label anal_fetish_generic_intro_label(the_person):
+label exhibition_fetish_generic_intro_label(the_person):
     return False
 
-label anal_fetish_mom_intro_label():
+label exhibition_fetish_mom_intro_label():
     return False
 
-label anal_fetish_lily_intro_label():
+label exhibition_fetish_lily_intro_label():
     return False
 
-label anal_fetish_rebecca_intro_label():
+label exhibition_fetish_rebecca_intro_label():
     return False
 
-label anal_fetish_gabrielle_intro_label():
+label exhibition_fetish_gabrielle_intro_label():
     return False
 
-label anal_fetish_stephanie_intro_label():
+label exhibition_fetish_stephanie_intro_label():
     return False
 
-label anal_fetish_alex_intro_label():
+label exhibition_fetish_alex_intro_label():
     return False
 
-label anal_fetish_nora_intro_label():
+label exhibition_fetish_nora_intro_label():
     return False
 
-label anal_fetish_emily_intro_label():
+label exhibition_fetish_emily_intro_label():
     return False
 
-label anal_fetish_christina_intro_label():
+label exhibition_fetish_christina_intro_label():
     return False
 
-label anal_fetish_starbuck_intro_label():
+label exhibition_fetish_starbuck_intro_label():
     return False
 
-label anal_fetish_sarah_intro_label():
+label exhibition_fetish_sarah_intro_label():
     return False
 
-label anal_fetish_ophelia_intro_label():
+label exhibition_fetish_ophelia_intro_label():
     return False
 
-label anal_fetish_candace_intro_label():
+label exhibition_fetish_candace_intro_label():
     return False
 
-label anal_fetish_dawn_intro_label():
+label exhibition_fetish_dawn_intro_label():
     return False
 
-label anal_fetish_erica_intro_label():
+label exhibition_fetish_erica_intro_label():
     return False
 
-label anal_fetish_ashley_intro_label():
+label exhibition_fetish_ashley_intro_label():
     return False

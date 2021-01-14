@@ -114,7 +114,6 @@ init 50 python:
 
         return anal_list
 
-
 ### Function labels
 
 label anal_fetish_employee_intro_label(the_person):
