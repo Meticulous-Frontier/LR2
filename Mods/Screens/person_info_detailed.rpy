@@ -54,11 +54,11 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
                             else:
                                 if persistent.pregnancy_pref == 1:
-                                    text "Fertility: " + str(round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
+                                    text "Fertility: " + str(__builtin__.round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
                                 if persistent.pregnancy_pref == 2:
                                     $ modified_fertility = the_person.calculate_realistic_fertility()
                                     $ named_chance = the_person.pregnancy_chance_string()
-                                    text "Fertility: " + str(round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
+                                    text "Fertility: " + str(__builtin__.round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
                                     text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
 
                         vbox:
