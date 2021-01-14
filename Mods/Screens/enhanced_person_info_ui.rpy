@@ -80,7 +80,7 @@ init 2:
         layer "solo" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
 
         frame:
-            background im.Alpha("gui/topbox.png", .7)
+            background im.Alpha("gui/topbox.png", .9)
             xsize 1100
             ysize 200
             yalign 0.0
