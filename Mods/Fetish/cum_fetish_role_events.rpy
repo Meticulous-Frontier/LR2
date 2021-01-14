@@ -12,7 +12,7 @@ init 2 python:
         menu_tooltip = "Give her cum, right here, right now.")
 
 init 3 python:
-    cum_fetish_role = Role(role_name = "Cum Fetish", actions = [SB_fetish_cum_getdosage])
+    cum_fetish_role = Role(role_name = "Cum Fetish", actions = [ cum_fetish_get_dosage])
 
 
 label cum_fetish_get_dosage_label(the_person):
