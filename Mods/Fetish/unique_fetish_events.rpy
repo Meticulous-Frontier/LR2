@@ -3,7 +3,7 @@
 
 init -1 python:
     def fetish_mom_kitchen_requirement(the_person):
-        if the_person.fetish_count() > 0:
+        if the_person.get_fetish_count > 0:
             if person is mom and mc.location == kitchen:
                 if mc.energy > 30:
                     return True
@@ -12,7 +12,7 @@ init -1 python:
         return False
 
     def fetish_lily_stream_in_room_requirement(the_person):
-        if the_person.fetish_count() > 0:
+        if the_person.get_fetish_count > 0:
             if not mc.location is lily_bedroom:
                 return "Must be in Lily's bedroom"
             elif lily_bedroom.get_person_count() > 1:
