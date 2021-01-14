@@ -108,21 +108,6 @@ init -4 python:
             identifier = self.mapped_list.pop(index)
             return next((x for x in self.list_func() if x.identifier == identifier), None)
 
-init -2:
-    default persistent.memory_mode = 0 # default is low memory mode
-    default persistent.use_free_memory = True   # default is clean memory every day
-    default persistent.show_ntr = False     # default turn of NTR
-
-    default debug_event_notification = False    # turn on for event notifications
-
-init 5 python: # add to stack later then other mods
-    config.label_overrides["start"] = "alternative_start"
-
-    add_label_hijack("normal_start", "activate_compatibility_fix")
-    add_label_hijack("after_load", "update_compatibility_fix")
-    add_label_hijack("start", "check_mod_installation")
-
-init 100 python:
     def parse_version_string(version):
         parts = version.split(".")
         return int(parts[0].strip("v")), int(parts[1]), int(parts[2])
@@ -134,8 +119,24 @@ init 100 python:
             loaded_version = "v0.33.3"
         return loaded_version
 
-    add_label_hijack("normal_start", "store_game_version")
+init -2:
+    default persistent.memory_mode = 0 # default is low memory mode
+    default persistent.use_free_memory = True   # default is clean memory every day
+    default persistent.show_ntr = False     # default turn of NTR
+    default debug_event_notification = False    # turn on for event notifications
+
+init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")
+
+init 5 python: # add to stack later then other mods
+    config.label_overrides["start"] = "alternative_start"
+
+    add_label_hijack("normal_start", "activate_compatibility_fix")
+    add_label_hijack("after_load", "update_compatibility_fix")
+    add_label_hijack("start", "check_mod_installation")
+
+init 100 python:
+    add_label_hijack("normal_start", "store_game_version")
 
 init -1 python:
     # override some of the default settings to improve performance
@@ -263,8 +264,12 @@ label check_save_version(stack):
 
     if not "game_version" in globals():
         "Warning" "You are loading a save game from an un-modded game. This is not supported, start a new modded game."
+        $ renpy.full_restart()
+        return
     elif parse_version_string(loaded_version)[1] < parse_version_string(config.version)[1]:
         "Warning" "You are loading an incompatible game version ([loaded_version]). Please start a new game."
+        $ renpy.full_restart()
+        return
     elif parse_version_string(loaded_version)[2] < parse_version_string(config.version)[2]:
         "Warning" "You are loading a game created by a previous build ([loaded_version]), you might run into errors because of this. Before reporting errors, please start a new modded game and see if the problem persists."
     $ execute_hijack_call(stack)
