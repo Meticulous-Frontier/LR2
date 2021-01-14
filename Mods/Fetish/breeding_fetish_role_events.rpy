@@ -1,12 +1,4 @@
 init -1 python:
-    high_fertility_weight = 5
-
-    def SB_get_breeding_score(the_person): #TODO this is probably not necessary anymore
-        breeding_score = 0
-        for breedListEntry in FETISH_BREEDING_OPINION_LIST:
-            breeding_score += the_person.get_opinion_score(breedListEntry)
-
-        return breeding_score
 
     def SB_breeding_fetish_on_day(person):
         if person.knows_pregnant() or person.is_lactating():

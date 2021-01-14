@@ -138,7 +138,7 @@ init 2:
 
             dom_sex_goal_weighted_list = []
 
-            if SB_get_fetish_count(the_person) > 0: #She has fetishes, so use those to set a goal.
+            if the_person.get_fetish_count() > 0: #She has fetishes, so use those to set a goal.
                 if the_person.has_anal_fetish():
                     dom_sex_goal_weighted_list.append(["anal creampie", 100])
                 if the_person.has_cum_fetish():

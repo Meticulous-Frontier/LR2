@@ -1,11 +1,10 @@
 init -3 python:
     FETISH_BASIC_OPINION_LIST = ["giving handjobs", "giving tit fucks", "being fingered", "kissing", "masturbating", "big dicks", "getting head", "lingerie"]
     FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "anal creampies", "being submissive", "showing her ass"]
-    FETISH_ORAL_OPINION_LIST = []
-    FETISH_VAGINAL_OPINION_LIST = []
     FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "taking control", "anal creampies", "creampies"]
     FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex", "being submissive"]
     FETISH_EXHIBITION_OPINION_LIST = ["public sex", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "skimpy outfits", "skimpy uniforms", "sex standing up" ]
+
     #relation fetishes (impact relationship with people) still need to workout how to make this happen
     FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
     # these fetishes could be used for 'slave' / 'dominatrix'
@@ -172,6 +171,9 @@ init -1 python:
             return True
         elif the_person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality and False:
             pass
+        elif the_person is sarah:
+            mc.business.mandatory_crises_list.append(cum_fetish_sarah_intro)
+            return True
         elif the_person.is_employee():
             if is_fetish_after_hours_available():
                 fetish_after_hours_lock()
@@ -182,7 +184,8 @@ init -1 python:
             the_person.add_unique_on_room_enter_event(cum_fetish_family_intro)
             return True
         else:
-            the_person.add_unique_on_talk_event(cum_fetish_generic_intro)
+            cum_fetish_generic_intro = Action("Someone needs cum", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", args = person)
+            mc.business.add_mandatory_crisis(cum_fetish_generic_intro)
             return True
         return False
 

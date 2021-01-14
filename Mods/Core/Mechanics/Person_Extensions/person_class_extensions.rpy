@@ -1990,7 +1990,6 @@ init -1 python:
             return True
         return False
 
-
     def has_cum_fetish(self):  #TODO update this to applicable roles when cum fetish roles have been combined.
         if cum_external_role in self.special_role or cum_internal_role in self.special_role or cum_fetish_role in self.special_role:
             return True

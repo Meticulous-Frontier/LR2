@@ -60,9 +60,6 @@ init 2 python:
     # create mod event to trigger creation
     starbuck_introduction_event_action = ActionMod("Starbuck's Sex Shop", starbuck_introduction_requirement, "starbuck_greetings", initialization = SB_mod_initialization, menu_tooltip = "Starbuck's Sex Shop", category = "Misc", allow_disable = False, options_menu = "SB_mod_options_menu")
 
-    #def SB_starbuck_fetish_available():
-    #    if SB_get_fetish_count(starbuck) < store.max_fetishes_per_person:
-
 
 init -1 python:
     def starbuck_introduction_requirement(the_person):

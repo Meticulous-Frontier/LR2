@@ -28,6 +28,9 @@ init 2 python:
         option_list.append(["Never mind",None])
         return option_list
 
+init 3 python:
+    exhibition_fetish_role = Role(role_name = "Exhibitionist", actions = [])
+
 #Strip scene for exhibitionists
 label free_strip_scene(the_person, must_be_naked = True):
     $ picked_pose = the_person.idle_pose #She starts in her idle pose (which is a string)
