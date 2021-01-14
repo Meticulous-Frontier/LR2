@@ -266,7 +266,7 @@ label ophelia_give_chocolate_label():
         "As you walk into the store, the clerk recognizes you and waves."
         "You exchange a few pleasantries as you grab the usual box of dark chocolates that [the_person.title] loves."
     "You take the candy to the counter and purchase it."
-    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title]"
+    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title]."
     menu:
         "Add a serum":
             "You decide to add a serum to the candy."
