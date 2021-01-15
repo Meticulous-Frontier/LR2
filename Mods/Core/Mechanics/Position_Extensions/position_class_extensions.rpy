@@ -53,8 +53,9 @@ init 5 python:
             taboo_break_string = " {image=taboo_break} "
 
         opinion_score = 0
-        for opinion_tag in self.opinion_tags:
-            opinion_score += person.get_opinion_score(opinion_tag)
+        if self.opinion_tags:
+            for opinion_tag in self.opinion_tags:
+                opinion_score += person.get_opinion_score(opinion_tag)
 
         #NOTE: Removed the (tooltip) and (disabled) tags as they aren't needed in the screen which is their only use case at the moment, but consider adding those back in if being used in the renpy.display_menu
         if person.effective_sluttiness(position_taboo) > final_slut_cap:
