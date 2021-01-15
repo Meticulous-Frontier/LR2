@@ -1070,8 +1070,8 @@ label Sarah_get_drinks_label():
         "She is starting to doze off, when suddenly she wakes up and gets up."
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Sorry... I just realized how late it is getting. I'd better get home!"
-    $ the_person.apply_outfit(the_person.planned_outfit)
-    $ scene_manager.draw_person(the_person)
+    $ the_person.apply_outfit(get_sarah_date_outfit_one())
+    $ scene_manager.draw_scene()
     "You watch her intently from your bed. Her body looks amazing, as she begins to hide it behind her clothes that have dried up by now."
     the_person.char "Don't worry, I can see myself out. I had a great time tonight! I'll see you on Monday, okay?"
     mc.name "Goodbye!"
