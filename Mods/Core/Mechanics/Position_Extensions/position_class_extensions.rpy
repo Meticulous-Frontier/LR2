@@ -59,7 +59,7 @@ init 5 python:
 
         #NOTE: Removed the (tooltip) and (disabled) tags as they aren't needed in the screen which is their only use case at the moment, but consider adding those back in if being used in the renpy.display_menu
         if person.effective_sluttiness(position_taboo) > final_slut_cap:
-            if opinion_score < 0 and person.arousal > final_slut_cap:
+            if opinion_score < 1 and person.arousal > final_slut_cap:
                 willingness_string = "{color=#6b6b6b}Boring{/color}" #No sluttiness gain AND half arousal gain
                 tooltip_string = " (tooltip) This position is too boring to interest her when she is this horny. No sluttiness increase and her arousal gain is halved."
             else:
