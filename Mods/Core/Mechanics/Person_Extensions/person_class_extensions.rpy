@@ -851,6 +851,22 @@ init -1 python:
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
 
+    def person_generate_home_extended(org_func):
+        def generate_home_wrapper(person, set_home_time = True):
+            result = org_func(person, set_home_time)
+            if not person in unique_character_list:
+                if person.has_role(prostitute_role):
+                    result.background_image = prostitute_bedroom_background
+                    result.remove_object("floor")
+                    result.add_object(make_love_rug())
+                else:
+                    result.background_image = get_random_from_list([standard_bedroom1_background, standard_bedroom2_background, standard_bedroom3_background, standard_bedroom4_background])
+            return result
+
+        return generate_home_wrapper
+
+    Person.generate_home = person_generate_home_extended(Person.generate_home)
+
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
     def remove_suggest_effect_fixed(self, amount):
