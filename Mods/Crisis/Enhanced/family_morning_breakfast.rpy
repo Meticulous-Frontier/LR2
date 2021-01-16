@@ -13,6 +13,7 @@ label family_morning_breakfast_enhanced_label():
 
         #Make sure we're in our bedroom when the event starts.
         mc.change_location(bedroom)
+        mc.location.show_background()
         # initialize scene manager for multi person scene
         scene_manager = Scene()
 
@@ -37,7 +38,7 @@ label family_morning_breakfast_enhanced_label():
 
     "You get up, get dressed, and head for the kitchen."
     $ mc.change_location(kitchen)
-    $ kitchen.show_background()
+    $ mc.location.show_background()
     $ scene_manager.show_actor(mom, position = "walking_away", display_transform = character_left_flipped)
 
     if mom.effective_sluttiness() > 40:

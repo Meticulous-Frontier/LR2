@@ -799,7 +799,7 @@ label ophelia_revenge_date_label():
     mc.name "Goodnight!"
     $ scene_manager.clear_scene()
     $ mc.change_location(downtown)
-    $ downtown.show_background()
+    $ mc.location.show_background()
     "You walk home. As you are walking, you consider the events of the evening."
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
     "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
