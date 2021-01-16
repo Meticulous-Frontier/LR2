@@ -39,6 +39,7 @@ init -1 python:
     standard_sex_store_backgrounds = room_background_image("Sex_Shop_Background.jpg")
     standard_gym_backgrounds = room_background_image("Gym_Background.jpg")
     standard_clothing_store_backgrounds =  room_background_image("Clothing_Store_Background.jpg")
+    standard_her_hallway_backgrounds = room_background_image("her_hallway_background.jpg")
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
@@ -80,6 +81,8 @@ label updated_room_background(stack):
         sex_store.background_image = standard_sex_store_backgrounds[:]
         gym.background_image = standard_gym_backgrounds[:]
         clothing_store.background_image = standard_clothing_store_backgrounds[:]
+        if "her_hallway" in globals(): # check if room exists
+            her_hallway.background_image = standard_her_hallway_backgrounds[:]
 
         # update rd division when genetics are unlocked
         update_rd_div_with_genetics_unlocked()
