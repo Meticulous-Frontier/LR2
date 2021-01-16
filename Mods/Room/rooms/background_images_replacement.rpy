@@ -99,6 +99,7 @@ label updated_room_background(stack):
         cousin.home.background_image = cousin_bedroom_background
         mom.home.background_image = standard_bedroom1_background
         aunt.home.background_image = standard_bedroom4_background
+        emily.home.background_image = lily_bedroom_background
 
         # update rd division when genetics are unlocked
         update_rd_div_with_genetics_unlocked()
