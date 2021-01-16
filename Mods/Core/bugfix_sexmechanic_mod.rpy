@@ -496,7 +496,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ finished = True
 
         elif round_choice == "Strip":
-            call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing")) from _call_strip_menu_bugfix
+            call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing"), private) from _call_strip_menu_bugfix
             $ stop_stripping = False
 
         elif round_choice == "Leave":
