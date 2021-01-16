@@ -43,6 +43,7 @@ init 2 python:
             work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.generate_home()
+        starbuck.home.background_image = standard_bedroom2_background
         starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
         starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
