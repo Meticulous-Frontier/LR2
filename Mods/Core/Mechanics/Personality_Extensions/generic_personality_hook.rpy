@@ -384,7 +384,7 @@ init -1 python:
                 ["public sex", 2, False],
                 ["showing her tits", 1, False],
             ])
-        person.set_mc_title("Sir")
+        person.set_mc_title("Honey")
         person.add_role(prostitute_role)
         if add_to_game:
             person.generate_home()
