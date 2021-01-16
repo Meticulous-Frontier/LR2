@@ -8,6 +8,11 @@ init 2: # Need to allow for None name roles in this screen as well.
         default research_base = the_person.int*3 + the_person.research_skill*2 + the_person.focus + 10
         default prod_base = the_person.focus*3 + the_person.production_skill*2 + the_person.int + 10
         default supply_base = the_person.focus*3 + the_person.supply_skill*2 + the_person.charisma + 10
+        default dict_work_skills = get_work_skills()
+        default dict_sex_skills = get_sex_skills()
+        default dict_main_skills = get_main_skills()
+        default master_opinion_dict = dict(the_person.opinions, **the_person.sexy_opinions)
+
         vbox:
             spacing 25
             xalign 0.5
@@ -25,6 +30,8 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "[the_person.name] [the_person.last_name]" style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
                         if not mc.business.get_employee_title(the_person) == "None":
                             text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
+                        if get_strip_club_foreclosed_stage() >= 5 and the_person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):
+                            text "Position: " + strip_club_get_job_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
 
                         $ visible_roles = []
                         $ role_string = "Special Roles: "
@@ -47,11 +54,11 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
                             else:
                                 if persistent.pregnancy_pref == 1:
-                                    text "Fertility: " + str(round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
+                                    text "Fertility: " + str(__builtin__.round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
                                 if persistent.pregnancy_pref == 2:
                                     $ modified_fertility = the_person.calculate_realistic_fertility()
                                     $ named_chance = the_person.pregnancy_chance_string()
-                                    text "Fertility: " + str(round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
+                                    text "Fertility: " + str(__builtin__.round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
                                     text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
 
                         vbox:
@@ -105,7 +112,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Characteristics" style "menu_text_style" size 22
-                        $ dict_main_skills = get_main_skills()
                         for skill in dict_main_skills:
                             text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
@@ -118,7 +124,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Work Skills" style "menu_text_style" size 22
-                        $ dict_work_skills = get_work_skills()
                         for skill in dict_work_skills:
                             text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
 
@@ -128,7 +133,6 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 260
                     vbox:
                         text "Sex Skills" style "menu_text_style" size 22
-                        $ dict_sex_skills = get_sex_skills()
                         for skill in dict_sex_skills:
                             text dict_sex_skills[skill][0] + " Skill: " + str(the_person.sex_skills[dict_sex_skills[skill][0]]) style "menu_text_style"
 
@@ -151,7 +155,6 @@ init 2: # Need to allow for None name roles in this screen as well.
             hbox:
                 xsize 1750
                 spacing 30
-                $ master_opinion_dict = dict(the_person.opinions, **the_person.sexy_opinions)
                 frame:
                     background "#1a45a1aa"
                     xsize 325

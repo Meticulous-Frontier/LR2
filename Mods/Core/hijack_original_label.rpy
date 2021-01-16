@@ -7,9 +7,9 @@
 #         # continue on the hijack stack if needed
 #         execute_hijack_call(stack)
 
-init 2 python:
+init -1 python:
     hijack_list = []
-    
+
     # Keep track of the old callback so it can still be called
     original_label_callback = config.label_callback
 
@@ -31,7 +31,7 @@ init 2 python:
         # call first label on the stack
         execute_hijack_call(call_stack)
         return
-    
+
     def execute_hijack_call(stack):
         if (__builtin__.len(stack) == 0):
             return
@@ -41,9 +41,9 @@ init 2 python:
         # call the label
         renpy.call(target_label, stack)
         return
-            
+
     config.label_callback = hijack_label_callback
-    
+
     def add_label_hijack(orginal_label_name, hijack_label_name):
         hijack_list.append([orginal_label_name, hijack_label_name])
         return

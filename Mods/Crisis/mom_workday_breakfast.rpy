@@ -10,7 +10,7 @@ init -1 python:
 
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if time_of_day == 0 and mc_at_home() and mc.business.is_work_day():
+        if mc_at_home() and mc.business.is_work_day():
             return True
         return False
 
@@ -137,8 +137,11 @@ label mom_breakfast_action_label_medium():
             else:
                 menu:
                     "Pull Her Top Up" if the_person.sluttiness > 40:
-                        while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
-                            $ scene_manager.draw_animated_removal(the_person, the_person.outfit.get_upper_top_layer())
+                        if the_person.outfit.can_half_off_to_tits():
+                            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
+                        else: #We need to strip something off completely.
+                            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
+
                         "You reach down and slowly remove her top, exposing her creamy tits."
                         $ the_person.break_taboo("bare_tits")
                         "Your hands return to her chest, her boobs feel hot and soft in your hands."
@@ -156,6 +159,9 @@ label mom_breakfast_action_label_medium():
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
                     "You let one hand slowly descend from her breast down to the mound between her legs."
+                    if the_person.outfit.can_half_off_to_vagina():
+                        "Pushing some clothing out of the way as you go along."
+                        $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                     the_person.char "Oh! Mmmm, okay..."
                     "[the_person.title] lets out a little yelp when you first make contact with her groin."
                     "She arches her back again as you begin to nibble at her ear."
@@ -180,7 +186,7 @@ label mom_breakfast_action_label_medium():
                     mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5, slut_temp = 3)
                     return "Advance Time"
-                "Finger Her" if the_person.sluttiness > 60 and the_person.outfit.vagina_available():
+                "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available():
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
                     "You let one hand slowly descend from her breast down to her exposed cunt."
@@ -195,7 +201,7 @@ label mom_breakfast_action_label_medium():
             the_person.char "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
             $ the_person.call_dialogue("climax_responses_foreplay")
-            $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
+            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "sitting") #TODO check and make sure this works...
             $ the_person.change_stats(obedience = 5, happiness = 5)
             "When she has finished climaxing, you slowly withdraw your finger and sit back down at the table. You take a quick sip of your coffee."
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
@@ -300,11 +306,14 @@ label mom_breakfast_action_label_high():
                 mc.name "Ok... but I'm not going to keep it down just because she is home."
                 the_person.char "Okay dear."
 
-    "[the_person.possessive_title] quickly starts to strip down."
+    if the_person.outfit.can_half_off_to_vagina():
+        "[the_person.possessive_title] quickly moves some clothing out of the way."
+        $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
+    else: #We need to strip something off completely.
+        "[the_person.possessive_title] quickly starts to strip down."
+        $ scene_manager.strip_actor_outfit(mom, exclude_upper = True)
 
-    $ scene_manager.strip_actor_outfit(mom)
-
-    "You take a quick sip of coffee. [the_person.possessive_title] is naked in the kitchen!"
+    "You take a quick sip of coffee. [the_person.possessive_title] is ready to fuck you right here in the kitchen!"
     if the_person.has_role(anal_fetish_role): #The anal role
         "She opens one of the drawers and pulls out a bottle of lube..."
         mc.name "You keep lube in the kitchen?"
@@ -327,7 +336,7 @@ label mom_breakfast_action_label_high():
         "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
         $ the_person.cum_in_ass()
-        $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
+        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
         $ the_person.change_stats(happiness = 5, obedience = 5)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
@@ -356,13 +365,14 @@ label mom_breakfast_action_label_high():
     "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her pussy as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
     $ the_person.cum_in_vagina()
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person) #TODO check and make sure this works...
+    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
     $ the_person.change_stats(happiness = 5, obedience = 5)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
     the_person.char "Oh god... [lily.name] could walk out any second!"
     $ scene_manager.update_actor(mom, position = "walking_away")
     "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
+    $ scene_manager.update_actor(mom, position = "back_peek")
     the_person.char "I love you, have a good day at work!"
     $ scene_manager.clear_scene()
     "You put your cock away and finish your breakfast before heading out for the day."

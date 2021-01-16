@@ -485,10 +485,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_two.title]":
                                 "[the_person_one.title] moves to the side and recovers while you resume activities with [the_person_two.title]."
-                                $ scene_manager.remove_actor(the_person_one, reset_actor = False)
+                                $ scene_manager.hide_actor(the_person_one)
                                 $ report_log["girl orgasms"] = report_log["girl two orgasms"]
                                 call fuck_person(the_person_two, private = private, report_log = report_log) from threesome_to_twosome_transition_1
-                                $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
+                                $ scene_manager.show_actor(the_person_one, display_transform = character_center_flipped)
                                 $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
                             "Done for now":
@@ -507,10 +507,10 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                         menu:
                             "Fuck [the_person_one.title]":
                                 "[the_person_two.title] moves to the side and recovers while you resume activities with [the_person_one.title]."
-                                $ scene_manager.remove_actor(the_person_two, reset_actor = False)
+                                $ scene_manager.hide_actor(the_person_two)
                                 $ report_log["girl orgasms"] = report_log["girl one orgasms"]
                                 call fuck_person(the_person_one, private = private, report_log = report_log) from threesome_to_twosome_transition_2
-                                $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
+                                $ scene_manager.show_actor(the_person_two, display_transform = character_center_flipped)
                                 $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
                                 "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
@@ -646,12 +646,12 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
         $ position_choice.call_orgasm(the_person_one, the_person_two, mc.location, object_choice, round)
 
         if the_person_one.arousal >= the_person_one.max_arousal:
-            $ mc.listener_system.fire_event("girl_climax", the_person = the_person_one)
+            $ mc.listener_system.fire_event("girl_climax", the_person = the_person_one, the_position = position_choice, the_object = object_choice)
             $ the_person_one.change_stats(arousal = -the_person_one.arousal/2, happiness = 5, slut_temp = 5)
             $ report_log["girl one orgasms"] += 1
             $ report_log["total orgasms"] += 1
         if the_person_two.arousal >= the_person_two.max_arousal:
-            $ mc.listener_system.fire_event("girl_climax", the_person = the_person_two)
+            $ mc.listener_system.fire_event("girl_climax", the_person = the_person_two, the_position = position_choice, the_object = object_choice)
             $ the_person_two.change_stats(arousal = -the_person_two.arousal/2, happiness = 5, slut_temp = 5)
             $ report_log["girl two orgasms"] += 1
             $ report_log["total orgasms"] += 1

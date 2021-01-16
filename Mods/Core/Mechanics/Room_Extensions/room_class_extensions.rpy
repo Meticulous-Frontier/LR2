@@ -115,3 +115,14 @@ init -1 python:
             self.actions.remove(act)
 
     Room.remove_action = remove_action
+
+    def remove_object(self, the_object):
+        if isinstance(the_object, basestring):
+            found = find_in_list(lambda x: x.name == the_object, self.objects)
+            if found:
+                self.objects.remove(found)
+
+        if the_object in self.objects:
+            self.objects.remove(the_object)
+
+    Room.remove_object = remove_object

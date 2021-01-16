@@ -321,6 +321,9 @@ init -1 python:
 
 
     def create_party_schedule(person):
+        if not "Schedule" in globals():
+            return
+
         person.set_alt_schedule(None, times = [4])
         if person.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
@@ -381,7 +384,7 @@ init -1 python:
                 ["public sex", 2, False],
                 ["showing her tits", 1, False],
             ])
-        person.set_mc_title("Sir")
+        person.set_mc_title("Honey")
         person.add_role(prostitute_role)
         if add_to_game:
             person.generate_home()
@@ -431,10 +434,10 @@ init -1 python:
         lily.wardrobe = lily.wardrobe.merge_wardrobes(wardrobe_from_xml("Lily_Extended_Wardrobe"), keep_primary_name = True)
 
         # remove strange outfits (they should not be in her wardrobe at all)
-        mom.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "Mom_Apron", mom.wardrobe.outfits))
-        mom.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "lingerie_1", mom.wardrobe.outfits))
-        lily.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "pink_lingerie", lily.wardrobe.outfits))
-        stephanie.wardrobe.outfits.remove(find_in_list(lambda x: x.name == "Nude", stephanie.wardrobe.outfits))
+        mom.wardrobe.remove_outfit("mom_apron")
+        mom.wardrobe.remove_outfit("lingerie_1")
+        lily.wardrobe.remove_outfit("pink_lingerie")
+        stephanie.wardrobe.remove_outfit("Nude")
         return
 
     unique_character_list = []  # global not stored variable (since not defined in label function)

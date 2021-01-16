@@ -1,6 +1,10 @@
 init -10 python:
     config.search_prefixes = [ "", "images/", "Mods/Core/Images/" ]
 
+init -5 python:
+    global supported_positions
+    supported_positions = ["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","kneeling1","standing_doggy","cowgirl"]
+
 init 2 python:
     import threading
 
@@ -52,7 +56,7 @@ init 2 python:
     def facial_accessory_get_image(self, face, emotion, special_modifier = None):
         global mobile_zip_dict
         index_string = face + "_" + emotion
-        if special_modifier is not None:
+        if special_modifier:
             if self.images[index_string + "_" + special_modifier] in mobile_zip_dict[self.position_name].namelist():
                 return ZipContainer(self.position_name, self.images[index_string + "_" + special_modifier])
 
@@ -70,7 +74,7 @@ init 2 python:
     def expression_generate_emotion_displayable(self,position,emotion, special_modifier = None, eye_colour = None, lighting = None):
         if not emotion in self.emotion_set:
             emotion = "default" #Get our default emotion to show if we get an incorrect one.
-        elif special_modifier is not None and special_modifier in self.special_modifiers:
+        elif special_modifier and special_modifier in self.special_modifiers:
             emotion = emotion + "_" + special_modifier
 
         if lighting is None:

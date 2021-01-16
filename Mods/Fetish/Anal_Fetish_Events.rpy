@@ -871,7 +871,8 @@ label SB_lily_anal_dp_fetish_label():
     the_person.char "Definitely! Don't worry, you'll be glad you came when you see where we are going."
     "Lily grabs you by the hand and leads you into the mall. It seems any inhibition she might have previously had being seen with her [the_person.mc_title] has vanished after being corrupted by your serums."
     "You are almost surprised when she leads you into the sex shop. The owner greets you as you walk in."
-    $ sex_store.show_background()
+    $ mc.change_location(sex_store)
+    $ mc.location.show_background()
     if starbuck.sluttiness > 50 or starbuck.love > 30:
         $ starbuck.draw_person(emotion = "happy")
         starbuck.char "Hello! Welcome to... Oh hey [the_person.mc_title]! Good to see you! Oh and you brought a partner! Hi I'm [starbuck.title]!"
@@ -956,7 +957,6 @@ label SB_lily_anal_dp_fetish_label():
 
     #TODO come back and change other events involving lily to account for her anal fetish.
     "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
-    $ mc.change_location(sex_store)
     "After you both clean up, you leave the back room of the sex shop."
     $ starbuck.draw_person(emotion = "happy")
     starbuck.char "Have a good day! Thank you for shopping at Starbuck's sex shop!"

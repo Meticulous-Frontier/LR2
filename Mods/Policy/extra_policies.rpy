@@ -56,7 +56,7 @@ init 1310 python:
         return mc.business.research_tier >= 2
 
     def unlock_genetic_modification():
-        rd_division.background_image = standard_biotech_backgrounds[:]
+        rd_division.background_image = standard_biotech_backgrounds
         rd_division.add_action(biotech_modify_person)
 
     genetic_modification_policy = Policy(

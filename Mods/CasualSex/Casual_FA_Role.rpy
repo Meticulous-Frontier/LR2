@@ -216,7 +216,7 @@ init -1 python:
             else:
                 self.body_images = black_skin
 
-            self.expression_images = Expression(self.name+"\'s Expression Set", self.skin, self.face_style)
+            # self.expression_images = Expression(self.name+"\'s Expression Set", self.skin, self.face_style)
 
             self.serum_effects = [] #A list of all of the serums we are under the effect of.
 

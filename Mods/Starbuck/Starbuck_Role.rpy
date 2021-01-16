@@ -43,6 +43,7 @@ init 2 python:
             work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.generate_home()
+        starbuck.home.background_image = standard_bedroom2_background
         starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
         starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
@@ -1943,7 +1944,7 @@ label starbuck_candace_product_demo_label(the_person):
     mc.name "I tell you what. I'm going to walk with her around the store for a bit to get her acclimated, then we'll see about the toy in the back..."
     starbuck "Okay! I'll be up at the counter. Have fun!"
     "As [starbuck.possessive_title] heads up to the front of the store, you walk quickly and catch up with [the_person.title]. At the moment, she is going thru a selection of crotchless panties."
-    $ scene_manager.remove_actor(starbuck, reset_actor = False)
+    $ scene_manager.hide_actor(starbuck)
     $ scene_manager.update_actor(the_person, position = "stand3")
     the_person "Oh! Boss! Look at these! If I wore these to work with a skirt, you could just bend me over anywhere! You wouldn't even have to like, move my panties over or anything!"
     "A couple are browsing a couple bins away and hear her. The girl starts laughing and the guy gives you a grin and a thumbs up."
@@ -1969,7 +1970,7 @@ label starbuck_candace_product_demo_label(the_person):
     "Oh my. You hadn't considered trying to get both of them in the video some how. That would be a damn good video!"
     mc.name "That's a great idea... I'm not sure! Why don't we go talk to her!"
     the_person "Okay [the_person.mc_title]!"
-    $ scene_manager.add_actor(starbuck, display_transform = character_center)
+    $ scene_manager.show_actor(starbuck, display_transform = character_center)
     "You walk with [the_person.title] up to the front of the store where [starbuck.possessive_title] is at. She looks at you two and hesitantly starts to ask."
     starbuck "Hey, so umm... Did [starbuck.mc_title] talk to you about..."
     the_person "I'll do it. Are you going to be in it too?"
@@ -1981,7 +1982,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "Wow... Okay... Are you sure? The size of this thing is something else!"
     the_person "Damn right! Let's do it!"
     starbuck "Okay. [starbuck.mc_title], want to take her in the back room and maybe start getting her lubed up a bit? I'll see if I can rig something."
-    $ scene_manager.remove_actor(starbuck, reset_actor = False)
+    $ scene_manager.hide_actor(starbuck)
     "You walk with [the_person.title] to the back. She starts to strip down as you grab some lube."
     $ scene_manager.strip_actor_outfit(the_person)
     $ scene_manager.update_actor(the_person, position = "missionary")
@@ -1996,7 +1997,7 @@ label starbuck_candace_product_demo_label(the_person):
     # Template Holder for something like dark brown leather panties to Starbucks outfit? To make it look like she has something on#
     $ starbuck.outfit.add_lower(booty_shorts.get_copy(), [.15, .15, .15, .95])
     $ starbuck.outfit.add_feet(thigh_high_boots.get_copy(), [.15, .15, .15, .95])
-    $ scene_manager.add_actor(starbuck, display_transform = character_center)
+    $ scene_manager.show_actor(starbuck, display_transform = character_center)
     "[the_person.title] is starting to moan when [starbuck.possessive_title] walks into the room. She's rigged the enormous double dick to some leather panties with some straps and velcro."
     starbuck "Glad to hear you are getting warmed up. Took me a bit to rig this. It's not perfect, but I think it will work!"
     the_person "Oh my God! That thing looks, like, amazing!"
@@ -2059,21 +2060,21 @@ label starbuck_candace_product_demo_label(the_person):
     $ the_person.change_arousal(60)
     $ starbuck.change_arousal(15)
     $ mc.change_arousal(10)
-    $ the_person.have_orgasm()
+    $ the_person.have_orgasm(the_position = "cowgirl")
     "[the_person.title]'s body begins to convulse as she begins to orgasm. [starbuck.possessive_title] keeps fucking her with the same methodical pace."
     "Her orgasm should be winding down now... But incredibly, it doesn't. [starbuck.title] speeds up just slightly and soon [the_person.possessive_title] is getting ready to orgasm again."
     the_person "Gah!!! Fuck oh fuck!"
     $ the_person.change_arousal(60)
     $ starbuck.change_arousal(15)
     $ mc.change_arousal(10)
-    $ the_person.have_orgasm()
+    $ the_person.have_orgasm(the_position = "cowgirl")
     "[the_person.title] orgasms again, her body getting weak as she succumbs to the incredible pleasure and pressure the toy is providing her. [starbuck.possessive_title] responds by speeding up again."
     "She still isn't going that fast, but the size of the toy makes the sensations overwhelming. She cries out as another orgasm begins to take her."
     the_person "Ahh! Holy fucking hell!"
     $ the_person.change_arousal(60)
     $ starbuck.change_arousal(15)
     $ mc.change_arousal(10)
-    $ the_person.have_orgasm(half_arousal = False)
+    $ the_person.have_orgasm(the_position = "cowgirl", half_arousal = False)
     "[starbuck.possessive_title] is forced to stop literally mid stroke as [the_person.title] orgasms forcefully, her holes squeezing so hard she momentarily can't push the dildo back in."
     "She grabs her hips and slowly but forcefully push the toy deep and then leaves it there, fully sheathed as [the_person.title] orgasms."
     "Completely spent, [the_person.possessive_title]'s arms give out and she collapses forward. The toy pulls out from her rump making a lewd squelch."
@@ -2119,7 +2120,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You hear a gasp from across the room as you begin to fire your load deep inside of [starbuck.possessive_title]."
     the_person "Oh my god, I can see it pulsating..."
     starbuck "Yes! Fuck yes!"
-    $ starbuck.have_orgasm(half_arousal = False)
+    $ starbuck.have_orgasm(the_position = "back_peek", half_arousal = False)
     "Your control over [starbuck.possessive_title] is complete as she helplessly cums all over you. Your cock is planting your seed deep in her spasming cunt."
     "You keep her pinned there until the last of your aftershocks wash over both of you."
     $ starbuck.cum_in_vagina()
@@ -2263,7 +2264,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         "[the_person_two.title] is starting to breath hard, once in a while a moan escapes. Suddenly, she breaks."
         the_person_two "Oh! Oh fuck I'm cumming!"
         "She leans forward a bit as her body starts to twitch."
-        $ the_person_two.have_orgasm(half_arousal = False)
+        $ the_person_two.have_orgasm(the_position = "sitting", half_arousal = False)
 
         "[the_person_one.title] jumps up."
         $ scene_manager.update_actor(the_person_one, position = "stand2")
@@ -2462,8 +2463,8 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
             "The two girls both begin to moan as they cum together in unison. Geeze, this one seems too close to call?"
             "You give your shaft a couple strokes... two girls orgasming on either side of you is pretty fucking hot!"
             if willing_to_threesome(the_person_one, the_person_two):
-                $ the_person_one.have_orgasm()
-                $ the_person_two.have_orgasm()
+                $ the_person_one.have_orgasm(the_position = "sitting")
+                $ the_person_two.have_orgasm(the_position = "sitting")
                 "As the girl slowly finish their orgasms, they both notice you, stroking yourself. [the_person_two.title] reaches out and grabs your arm, stopping you."
                 the_person_one "Wow... was that a tie?"
                 the_person_two "Yes it was."
@@ -2493,7 +2494,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         elif the_person_one.arousal >= 100 : #Starbuck cums first
             the_person_one "Oh... OH! OH FUCK!"
             "[the_person_one.possessive_title] squeals as her orgasm hits her. Her chest bounces as her body convulses."
-            $ the_person_one.have_orgasm(half_arousal = False)
+            $ the_person_one.have_orgasm(the_position = "sitting", half_arousal = False)
             the_person_two "Yes! Oh my god [the_person_two.mc_title] I need your cock so bad..."
             $ scene_manager.update_actor(the_person_two, position = None)
             "[the_person_two.title] stands up, she quickly pulls out the wildly moving dildo and tosses it aside. She pushes you back onto the table then climbs up on top of you."
@@ -2508,7 +2509,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         else: #Candace loses again
             the_person_two "Oh fuck me! OH I'M CUMMING!"
             "[the_person_two.possessive_title] arches her back and moans as her orgasm hits her. Her body quakes with each wave."
-            $ the_person_two.have_orgasm(half_arousal = False)
+            $ the_person_two.have_orgasm(the_position = "sitting", half_arousal = False)
             the_person_one "Once again the champion!"
             $ scene_manager.update_actor(the_person_one, position = None)
             "[the_person_one.title] stands up. She pull the dildo from her cunt with a squelch and sets it carefull on the table. She pushes you back onto the table."

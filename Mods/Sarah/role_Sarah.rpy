@@ -58,6 +58,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
+        sarah.home.background_image = standard_bedroom1_background
         sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
@@ -409,7 +410,7 @@ init -1 python:
         sarah_friend.set_title(sarah_friend.name)
         sarah_friend.set_mc_title(mc.name)
         sarah_friend.set_possessive_title(get_random_possessive_title(the_person))
-        sarah_friend.set_schedule(purgatory, times = [0, 1, 2, 3, 4])
+        sarah_friend.set_schedule(the_person.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
         sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
         town_relationships.update_relationship(sarah, sarah_friend, "Friend")
         return sarah_friend
@@ -598,7 +599,7 @@ label Sarah_third_wheel_label():
     the_person.char "Yeah... yeah I'm fine I just umm, I need to go use the lady's room."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "She gets up in a hurry and walks quickly away. You look at [sarah_friend.title]"
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     mc.name "Umm... any idea what that is about?"
     sarah_friend.char "No idea... we were just talking about, well you actually."
     "Something about the way she says it makes you uncomfortable."
@@ -621,10 +622,10 @@ label Sarah_third_wheel_label():
     mc.name "[the_person.name] has an amazing body, and a great personality to go with it. If you and your boyfriend don't see that, I don't think anything with me can work out."
     sarah_friend.char "Pfft, whatever. There's a dozen other dicks at the bar. Why don't you go find your date, she's probably sulking in the bathroom again!"
     "You decide not to stoop to her level and to end your conversation there. You grab you and [the_person.title]'s drink and get up, not bothering to say goodbye."
-    $ scene_manager.remove_actor(sarah_friend, reset_actor = False)
+    $ scene_manager.remove_actor(sarah_friend)
     "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
     "You don't see anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
-    $ scene_manager.add_actor(the_person, position = "stand2", emotion = "sad")
+    $ scene_manager.show_actor(the_person, position = "stand2", emotion = "sad")
     "Inside you see [the_person.title] looking at herself in the mirror. She is forlorn and from the look of her makeup has obviously been crying."
     mc.name "Hey, are you okay? I don't mean to invade your privacy, but I was starting to get worried about you."
     "She quickly looks up and is surprised to see you. She briefly pulls herself together."
@@ -725,7 +726,7 @@ label Sarah_get_drinks_label():
             $ the_person.change_love(10)
         "Just as friends":
             mc.name "I wouldn't mind going out for a few drinks, with a friend of course."
-            $ scene_manager.add_actor(the_person, emotion = "sad")
+            $ scene_manager.update_actor(the_person, emotion = "sad")
             "Her face shows visible signs of disappointment."
             the_person.char "Oh, right. Friends! That's us! I don't want to interrupt you, there, buddy. Need a few minutes to finish up?"
             $ the_person.change_happiness(-20)
@@ -814,13 +815,13 @@ label Sarah_get_drinks_label():
         "You grin at her cheesy toast, she smiles wide at you."
     "You clink your glasses together and take a deep sip."
     the_person.char "Alright! I'm going first."
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     call play_darts_301(the_person, focus_mod = 2) from play_darts_301_call_1
     if _return:
-        $ scene_manager.add_actor(the_person, emotion = "sad")
+        $ scene_manager.show_actor(the_person, emotion = "sad")
         "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
     else:
-        $ scene_manager.add_actor(the_person, emotion = "happy")
+        $ scene_manager.show_actor(the_person, emotion = "happy")
         "[the_person.title] gives you a huge smile after winning your game of darts!"
     "You notice the drinks are empty."
     mc.name "That was a good game. Want another round and another game?"
@@ -843,24 +844,24 @@ label Sarah_get_drinks_label():
     the_person.char "Ah, something caught your eye then?"
     "You quickly release her and then walk back to the table."
     the_person.char "Yeah, something like that. I'm not sure what it was, but I'll let you know if I can put my finger on it..."
-    "[the_person.title] is trying to focus on the dart board, but she keeps stealing glances back at you. Your flirting is having the desired effect on her!"
-    "She readies herself for the next round of darts."
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
-    call play_darts_301(the_person, focus_mod = -2) from play_darts_301_call_2
-    if _return:
-        $ scene_manager.add_actor(the_person, emotion = "sad")
-        "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
-    else:
-        $ scene_manager.add_actor(the_person, emotion = "happy")
-        "[the_person.title] gives you a huge smile after winning your game of darts!"
+    # "[the_person.title] is trying to focus on the dart board, but she keeps stealing glances back at you. Your flirting is having the desired effect on her!"
+    # "She readies herself for the next round of darts."
+    # $ scene_manager.hide_actor(the_person)
+    # call play_darts_301(the_person, focus_mod = -2) from play_darts_301_call_2
+    # if _return:
+    #     $ scene_manager.show_actor(the_person, emotion = "sad")
+    #     "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
+    # else:
+    #     $ scene_manager.show_actor(the_person, emotion = "happy")
+    #     "[the_person.title] gives you a huge smile after winning your game of darts!"
     "Drinks are empty again. You look at [the_person.title]. She is definitely tipsy, but you think she should be able to handle one more round."
     mc.name "How about one more game? I'll grab us another round."
     $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
-    the_person.char "Another drink! I'm loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
+    the_person.char "Another drink! I loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
     mc.name "Haha, okay, let me go grab us another round."
     "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
     $ mc.business.change_funds(-20)
-    the_person.char "OKAY, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
+    the_person.char "Okay, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
     mc.name "Oh? What did you have in mind?"
     the_person.char "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
     "You raise an eyebrow involuntarily. For some reason you expected something a little... crazier than that."
@@ -877,15 +878,15 @@ label Sarah_get_drinks_label():
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.possessive_title] walks over to the line and looks at the dart board, then back at you. She is so distracted, she can barely focus on the board."
     "You should be able to win this game handily, unless you decide to throw the game on purpose!"
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     $ sarah.event_triggers_dict["drinks_out_progress"] = 2
     call play_darts_301(the_person, focus_mod = -6) from play_darts_301_call_3
     if _return:
-        $ scene_manager.add_actor(the_person, emotion = "happy")
+        $ scene_manager.show_actor(the_person, emotion = "happy")
         "[the_person.title] can't even pretend to be sad when you win the game."
         the_person.char "You won!"
     else:
-        $ scene_manager.add_actor(the_person, emotion = "happy")
+        $ scene_manager.show_actor(the_person, emotion = "happy")
         "[the_person.title] gives you a huge smile after winning your game of darts!"
         the_person.char "You are such a gentleman. I'm pretty sure you were just letting me win! That totally doesn't count!"
     "She takes the last sip of her drink before setting it down."
@@ -981,7 +982,7 @@ label Sarah_get_drinks_label():
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.title] takes the clothes and the towel. You quickly point her to your room."
     "She disappears behind your bedroom door with the clothes. You mother turns to you."
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     mom.char "She seems nice!"
     mc.name "Yeah! Believe it or not, she is the daughter of one of dad's old friends. We used to play together as kids!"
     if mom.sluttiness < 40:
@@ -1014,7 +1015,7 @@ label Sarah_get_drinks_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
 
-    $ scene_manager.add_actor(the_person, position = "walking_away")
+    $ scene_manager.show_actor(the_person, position = "walking_away")
     "You see that [the_person.title] is just starting to peel off her clothes."
     $ scene_manager.strip_actor_outfit(the_person)
     "She stands there, looking at herself in the mirror for a moment, when she spots you looking at her from the door. Busted!"
@@ -1070,8 +1071,9 @@ label Sarah_get_drinks_label():
         "She is starting to doze off, when suddenly she wakes up and gets up."
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Sorry... I just realized how late it is getting. I'd better get home!"
-    #TODO have her actually put on the outfit provided earlier. Is this worth the effort to write?
-    "You watch her intently from your bed. Her body looks amazing, as she begins to hide it behind the clothes you provided her."
+    $ the_person.apply_outfit(get_sarah_date_outfit_one())
+    $ scene_manager.draw_scene()
+    "You watch her intently from your bed. Her body looks amazing, as she begins to hide it behind her clothes that have dried up by now."
     the_person.char "Don't worry, I can see myself out. I had a great time tonight! I'll see you on Monday, okay?"
     mc.name "Goodbye!"
     $ scene_manager.remove_actor(the_person)
@@ -1396,7 +1398,7 @@ label Sarah_stripclub_story_label():
     mc.name "Ah! Forget about it. I'll put it on the company card. This is a team building exercise, right?"
     the_person.char "Team building... right! I can get behind that!"
     mc.name "Ok, I'll be right back."
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     if get_strip_club_foreclosed_stage() < 5:
         "You get up and head over to the counter where the owner is."
     else:
@@ -1411,7 +1413,7 @@ label Sarah_stripclub_story_label():
         "You arrange two private lap dances: for [the_person.title] you ask for the girl that did the second dance on stage, and you pick a random girl for yours."
     $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
-    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
+    $ scene_manager.show_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
     $ showgirl.apply_outfit(stripclub_wardrobe.pick_random_outfit())
@@ -1572,7 +1574,7 @@ label Sarah_stripclub_story_label():
     "You reach up and grab her hips with your hands. You give one cheek a hard spank while your tongue snakes its way inside of her."
     $ the_person.change_arousal(30)
     the_person.char "Yes! Oh fuck I'm gonna cum!!!"
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person)
+    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "standing_doggy")
     $ the_person.change_happiness(5)
     $ the_person.change_obedience(5)
     $ the_person.change_slut_temp(5)
@@ -1754,7 +1756,9 @@ label Sarah_threesome_request_label():
     mc.name "That's great... so do you have them?"
     the_person.char "Oh hell yeah, one sec..."
     "[the_person.title] fumbles around on her phone for a second. She is pretty drunk, so it takes her a while to find them."
+    $ scene_manager.hide_actor(sarah)
     $ gossip_target.strip_outfit_to_max_sluttiness()
+    $ scene_manager.show_actor(sarah)
     $ scene_manager.add_actor(gossip_target, position = "cowgirl", emotion = "orgasm", display_transform = character_center)
     "She shows you her phone. It shows [gossip_target.title] in the backseat of a Jeep, riding some guy you don't recognize while he is sitting."
     mc.name "Damn! She looks like she is enjoying herself there!"
@@ -2446,7 +2450,7 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
 label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins, false if the_person wins
     $ mc_score = 301
     $ p2_score = 301
-    $ scene_manager.add_actor(the_person, position = "walking_away")
+    $ scene_manager.show_actor(the_person, position = "walking_away")
     "[the_person.title] steps to the line and prepares to throw her first set of darts."
     while (mc_score != 0) and (p2_score != 0):
         "It's [the_person.title]'s turn."
@@ -2494,7 +2498,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
         "[the_person.title] score: [p2_score]"
         if p2_score == 0:
             "[the_person.title] wins the game!"
-            $ scene_manager.remove_actor(the_person, reset_actor = False)
+            $ scene_manager.hide_actor(the_person)
             return False
         elif p2_score < 0:
             "[the_person.title] busts! Her score is reset to 101!"
@@ -2567,12 +2571,12 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
                     $ mc_score -= roll_dart_odds(target = mc_score, focus_score = mc.focus)
         if mc_score == 0: #MC wins!
             "You win the game of darts!"
-            $ scene_manager.remove_actor(the_person, reset_actor = False)
+            $ scene_manager.hide_actor(the_person)
             return True
         elif mc_score < 0:
             "You bust! Your score is reset to 101."
             $ mc_score = 101
-    $ scene_manager.remove_actor(the_person, reset_actor = False)
+    $ scene_manager.hide_actor(the_person)
     return False
 
 label Sarah_weekend_surprise_crisis_label():
@@ -2727,12 +2731,12 @@ label Sarah_weekend_date_grab_drinks_label():
                 "You walk over to the dart boards and get ready to have a game."
                 call play_darts_301(the_person, focus_mod = -intoxication_level) from play_darts_301_call_date_night_1
                 if _return:
-                    $ scene_manager.add_actor(the_person, emotion = "sad")
+                    $ scene_manager.show_actor(the_person, emotion = "sad")
                     "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
                     the_person.char "Damn you're good at that!"
                     $ the_person.change_obedience(5)
                 else:
-                    $ scene_manager.add_actor(the_person, emotion = "happy")
+                    $ scene_manager.show_actor(the_person, emotion = "happy")
                     "[the_person.title] gives you a huge smile after winning your game of darts!"
                     the_person.char "Ha! In your face!"
                     $ the_person.change_happiness(5)
@@ -2810,7 +2814,7 @@ label Sarah_weekend_date_strip_club_label():
             "Get a private dance  -$200":
                 mc.name "Want to get a private dance? I'll get it setup."
                 the_person.char "Ohh, now we're talking! Sounds great!"
-                $ scene_manager.remove_actor(the_person, reset_actor = False)
+                $ scene_manager.hide_actor(the_person)
                 call Sarah_date_strip_club_private_dance_label(the_person) from weekend_date_strip_club_strip_dance_01
                 pass
             "Get outta here":
@@ -2940,7 +2944,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
 
     $ mc.business.change_funds(-200)
     "You go to the back, and find a room with two chairs facing each other. [the_person.title] sits across from you."
-    $ scene_manager.add_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
+    $ scene_manager.show_actor(the_person, position = "sitting", emotion = "happy", display_transform = character_left_flipped)
     the_person.char "Mmm, I'm so nervous..."
     #TODO make a variant on character left that is a close to Sarah so it looks more like an actual lap dance.
     $ showgirl_1.apply_outfit(stripclub_wardrobe.pick_random_outfit())

@@ -63,7 +63,7 @@ label double_orgasm_missionary(the_girl, the_location, the_object):
                 if the_girl.love < 0:
                     the_girl "Where do think you're going, [the_girl.mc_title]?"
                 else:
-                    the_girl.char "[wordchoice][the_girl.mc_title]! [wordchoice2]"
+                    the_girl.char "[wordchoice], [the_girl.mc_title]! [wordchoice2]"
                 the_girl "I'm cumming... you can't pull out now!"
                 "The strength of her legs prevents you from pulling out."
                 $ ran_num = renpy.random.randint(0,1)

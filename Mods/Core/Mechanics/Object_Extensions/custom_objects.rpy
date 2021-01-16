@@ -24,3 +24,6 @@ init -1 python:
     def make_toilet():
         the_toilet = Object("Toilet", ["Sit", "Low"], sluttiness_modifier = 10, obedience_modifier = 5)
         return the_toilet
+
+    def make_love_rug():
+        return Object("Love Rug", ["Kneel", "Lay"], sluttiness_modifier = 5, obedience_modifier = 10)

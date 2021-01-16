@@ -103,10 +103,10 @@ init -1 python:
                 #     return False
         return False
 
-    def ashley_hire_directed_requirement(the_person):
-        if not the_person is stephanie:
+    def ashley_hire_directed_requirement():
+        if not mc.business.head_researcher == stephanie:
             return False
-        if ashley.event_triggers_dict.get("employed_since", 0) > 0:
+        if not mc.business.is_open_for_business():
             return False
         if mc.business.max_employee_count == mc.business.get_employee_count():
             return "At employee limit"
@@ -203,13 +203,13 @@ init -1 python:
         return False
 
     def add_ashley_hire_later_action():
-        ashley_hire_directed = Action("Reconsider hiring her sister.", ashley_hire_directed_requirement, "ashley_hire_directed_label",
+        ashley_hire_directed = Action("Reconsider hiring Stephanie's sister", ashley_hire_directed_requirement, "ashley_hire_directed_label",
             menu_tooltip = "Talk to Stephanie about hiring her sister. She might be disappointed if you decide not to again...")
-        mc.business.head_researcher.add_action(ashley_hire_directed)
+        mc.business.r_div.add_action(ashley_hire_directed)
         return
 
     def remove_ashley_hire_later_action():
-        mc.business.head_researcher.remove_action("ashley_hire_directed_label")
+        mc.business.r_div.remove_action("ashley_hire_directed_label")
         return
 
 #Story labels
@@ -274,10 +274,8 @@ label ashley_intro_label():
         $ add_ashley_hire_later_action
     return
 
-label ashley_hire_directed_label(the_person):
-    if the_person != stephanie:
-        "Not Steph? How did we get here?"
-        return
+label ashley_hire_directed_label():
+    $ the_person = stephanie
     mc.name "I wanted to talk to you again about your sister."
     the_person.char "Oh? Have you decided to reconsider?"
     mc.name "I have. Do you still have her documents that I could look over them again?"
@@ -820,7 +818,7 @@ label ashley_post_handjob_convo_label(the_person):
             the_person "I don't... I'm not sure how to talk to Steph about this though..."
             mc.name "Don't worry, I'll talk to her."
     "You drink your coffee with [the_person.title]. You are happy you were able to come up with a solution."
-    the_person "This place is nice... maybe I should bring steph here some time..."
+    the_person "This place is nice... maybe I should bring Steph here some time..."
     "Eventually you finish up. You decide to head back to the office."
     mc.name "I'm going to head back, feel free to to take the rest of the day off if you need to."
     the_person "Ahh, thank you..."
@@ -1195,7 +1193,7 @@ label coffee_time_steph_gets_handsy_label():
             $ the_person_two.change_arousal(30)
             "She stops stroking you as she finishes. She leans forward a bit, closing her eyes as her pussy begins quivering around your finger."
             "You wish your cock was inside her instead of your finger, but in a place like a coffee shop booth, you can't justify risking it."
-            $ the_person_two.have_orgasm(half_arousal = False)
+            $ the_person_two.have_orgasm(half_arousal = False, the_position = "sitting")
             if the_person_two.get_opinion_score("public sex") > 0: #[If Steph likes public sex, she finishes you no matter what.]
                 "[the_person_two.possessive_title] eventually opens her eyes, taking a quick peak around, then begins stroking you again."
                 "Seems she is intent on giving you a similar treatment. You slowly pull your hand out of her clothes."
@@ -1259,7 +1257,7 @@ label coffee_time_steph_gets_handsy_label():
                 the_person_one "Damn... Right here in the booth? That's kinda hot..."
             "You push the palm of your hand rigidly against [the_person_two.possessive_title]'s clit, while your middle finger strokes her gspot. Your attention to her sensitive spots soon haa her gasping."
             "Only a whimper escapes her lips when you feel her pussy begin to quiver around your finger. She stops stroking you as she focuses on the pleasure of orgasming in the palm of your hands."
-            $ the_person_two.have_orgasm(half_arousal = False)
+            $ the_person_two.have_orgasm(half_arousal = False, the_position = "sitting")
             "After several seconds, [the_person_two.title] slowly opens her eyes and glances around as you withdraw your hand."
             if ashley_is_fwb_path():
                 "Wow, that looked hot... [the_person_one.mc_title] will you do something like that to me later?"

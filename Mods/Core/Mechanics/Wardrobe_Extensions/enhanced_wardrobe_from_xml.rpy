@@ -2,7 +2,7 @@ init 1 python:
     def get_wardrobe_file(xml_filename):
         file_name = xml_filename + ".xml"
         wardrobe_file = None
-        
+
         for file in renpy.list_files():
             if file_name in file:
                 wardrobe_file = renpy.file(file)
@@ -19,7 +19,7 @@ init 1 python:
         result.sort()
         return result
 
-    def wardrobe_from_xml(xml_filename):
+    def wardrobe_from_xml(xml_filename, in_import = False):
         file_name = get_wardrobe_file(xml_filename)
         if file_name is None:
             return Wardrobe("[xml_filename]") #If there is no wardrobe present we return an empty wardrobe with the name of our file.

@@ -71,7 +71,7 @@ label build_custom_rooms(stack):
         # rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_clone_person, biotech_modify_person], False, [12,5], None, False, lighting_conditions = standard_indoor_lighting)
 
         # Main Office Basement - Dungeon | dungeon_room_actions.rpy
-        dungeon = Room("dungeon", "Dungeon", [], standard_dungeon_backgrounds[:], dungeon_objects, [], [dungeon_room_appoint_slave_action], False, [4,3], None, False, lighting_conditions = standard_indoor_lighting)
+        dungeon = Room("dungeon", "Dungeon", [], standard_dungeon_backgrounds, dungeon_objects, [], [dungeon_room_appoint_slave_action], False, [4,3], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(dungeon)
 
         # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
@@ -80,41 +80,41 @@ label build_custom_rooms(stack):
 
         # Hotel Lobby - The Hotel | No actions at this time.
         # room is public, so girls can wander here too
-        downtown_hotel = Room("hotel lobby", "The Hotel", [], standard_hotel_backgrounds[:], downtown_hotel_lobby_objects,[], [], True, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
+        downtown_hotel = Room("hotel lobby", "The Hotel", [], standard_hotel_backgrounds, downtown_hotel_lobby_objects,[], [], True, [5,5], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(downtown_hotel)
 
-        downtown_hotel_room = Room("hotel room", "The Hotel Room", [], standard_hotel_room_backgrounds[:], downtown_hotel_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        downtown_hotel_room = Room("hotel room", "The Hotel Room", [], standard_hotel_room_backgrounds, downtown_hotel_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(downtown_hotel_room)
 
         #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
         purgatory = Room("purgatory", "Purgatory", [], None, purgatory_objects, [], [], False, [-5, -5], None, False, True, lighting_conditions = standard_indoor_lighting)
         purgatory.accessible = False
 
-        fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], standard_fancy_restaurant_backgrounds[:], [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
+        fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], standard_fancy_restaurant_backgrounds, [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(fancy_restaurant)
 
         # Stripclub BDSM Room | No actions at this time.
-        bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds[:], bdsm_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(bdsm_room)
 
-        ceo_office = Room("ceo_office", "CEO Office", [], standard_ceo_office_backgrounds[:], ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        ceo_office = Room("ceo_office", "CEO Office", [], standard_ceo_office_backgrounds, ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(ceo_office)
 
         # room is public so girls are not always visible in the main map
-        gym_shower = Room("gym shower", "Gym Shower", [], standard_gym_shower_backgrounds[:], gym_shower_objects, [], [], True, [], None, False, lighting_conditions = standard_indoor_lighting)
+        gym_shower = Room("gym shower", "Gym Shower", [], standard_gym_shower_backgrounds, gym_shower_objects, [], [], True, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(gym_shower)
 
-        home_shower = Room("home shower", "Home Shower", [], standard_home_shower_backgrounds[:], gym_shower_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        home_shower = Room("home shower", "Home Shower", [], standard_home_shower_backgrounds, gym_shower_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(home_shower)
 
-        mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds[:], [make_floor(), make_wall(), make_chair(), make_window(), make_counter()], [], [], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
+        mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds, [make_floor(), make_wall(), make_chair(), make_window(), make_counter()], [], [], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(mall_salon)
 
         # added police station (and jail) at request of Starbuck
-        police_station = Room("police_station", "Police Station", [], standard_police_station_backgrounds[:], ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        police_station = Room("police_station", "Police Station", [], standard_police_station_backgrounds, ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(police_station)
 
-        police_jail = Room("police_jail", "Police Jail", [], standard_police_jail_backgrounds[:], police_jail_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        police_jail = Room("police_jail", "Police Jail", [], standard_police_jail_backgrounds, police_jail_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(police_jail)
 
         # initialize dungeon room creation action

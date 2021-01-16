@@ -111,7 +111,7 @@ init 3303 python:
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")
     promote_to_mistress_action = Action("Promote to Mistress", allow_promote_to_mistress_requirement, "promote_to_mistress_label", menu_tooltip = "Promote [the_person.title] as strip club mistress.")
     mistress_role_remove_action = Action("Remove as Mistress", has_mistress_role_requirement, "mistress_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club mistress.")
-    mistress_hunt_for_me_action = Action("Hunt for me", mistress_hunt_for_me_requirement, "mistress_hunt_for_me_label", menu_tooltip = "Ask her to find you a girl for a threesome.")
+    mistress_hunt_for_me_action = Action("Hunt for me", mistress_hunt_for_me_requirement, "mistress_hunt_for_me_label", menu_tooltip = "Ask [the_person.title] to find you a girl for a threesome.")
 
     manager_role = Role("Manager", [manager_role_remove_action, promote_to_mistress_action], hidden = False)
     mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action], hidden = False)

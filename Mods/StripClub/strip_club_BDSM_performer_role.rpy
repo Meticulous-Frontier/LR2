@@ -162,7 +162,7 @@ init -1 python:
             scene_manager.update_actor(person, emotion = "orgasm")
             renpy.say(person.char, "Oh my god, I'm cumming....Ahhh....YES!....please " + person.mc_title + ", increase the speed!")
             scene_manager.update_actor(person, emotion = "happy")
-            person.have_orgasm(position = "sitting")
+            person.have_orgasm(the_position = "sitting")
             person.change_slut_temp(5)
         return
 
@@ -355,7 +355,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
             "She finally reaches her coveted orgasm, the chair is now wet with her flowing juices."
             $ the_person.change_stats(obedience = 10, slut_temp = 5, slut_core = 2, happiness = 10, love = 2)
             $ scene_manager.update_actor(the_person, emotion = "happy")
-            $ the_person.have_orgasm()
+            $ the_person.have_orgasm(the_position = "sitting")
             the_person.char "Thank you [the_person.mc_title], make me cum like this and I'll be your devoted slave!"
             "You release her from the chair and let her dress."
             $ the_person.apply_planned_outfit()

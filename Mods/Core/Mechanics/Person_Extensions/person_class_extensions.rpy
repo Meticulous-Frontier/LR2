@@ -89,7 +89,7 @@ init -1 python:
         self.char = None
         self.body_images = None
         self.face_style = None
-        self.expression_images = None
+        #self.expression_images = None
         self.hair_colour = None
         self.hair_style = None
         self.pubes_style = None
@@ -140,6 +140,9 @@ init -1 python:
     Person.alt_schedule = property(get_alt_schedule, set_alt_schedule, del_alt_schedule, "Alternative schedule property.")
 
     def set_alt_schedule(self, location, days = None, times = None):
+        if not "Schedule" in globals():
+            return
+
         if days is None:
             days = [0,1,2,3,4,5,6] #Full week if not specified
         if times is None:
@@ -285,7 +288,7 @@ init -1 python:
             self.body_images = tan_skin
         elif self.skin == "black":
             self.body_images = black_skin
-        self.expression_images = Expression("default", self.skin, self.face_style)
+        #self.expression_images = Expression("default", self.skin, self.face_style)
         return
     Person.match_skin = match_skin
 
@@ -702,6 +705,13 @@ init -1 python:
 
     Person.strip_outfit = strip_outfit
 
+    def strip_outfit_strip_list(self, strip_list, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, half_off_instead = False):
+        for item in strip_list:
+            self.draw_animated_removal(item, position = position, emotion = emotion, lighting = lighting, display_transform = display_transform, half_off_instead = half_off_instead)
+            renpy.pause(delay)
+
+    Person.strip_outfit_strip_list = strip_outfit_strip_list
+
     def choose_strip_clothing_item(self):
         clothing = None
         # If she has a preference (even a least-bad preference) she'll strip that down first.
@@ -818,9 +828,10 @@ init -1 python:
         if specified_time is None:
             specified_time = time_of_day #Now
 
-        alt_destination = self.alt_schedule[specified_day][specified_time]
-        if alt_destination: # if we have an alternative schedule, return that location
-            return alt_destination
+        if "Schedule" in globals():
+            alt_destination = self.alt_schedule[specified_day][specified_time]
+            if alt_destination: # if we have an alternative schedule, return that location
+                return alt_destination
 
         return self.schedule[specified_day][specified_time] #Returns the Room this person should be in during the specified time chunk.
 
@@ -839,6 +850,22 @@ init -1 python:
 
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
+
+    def person_generate_home_extended(org_func):
+        def generate_home_wrapper(person, set_home_time = True):
+            result = org_func(person, set_home_time)
+            if not person in unique_character_list:
+                if person.has_role(prostitute_role):
+                    result.background_image = prostitute_bedroom_background
+                    result.remove_object("floor")
+                    result.add_object(make_love_rug())
+                else:
+                    result.background_image = get_random_from_list([standard_bedroom1_background, standard_bedroom2_background, standard_bedroom3_background, standard_bedroom4_background])
+            return result
+
+        return generate_home_wrapper
+
+    Person.generate_home = person_generate_home_extended(Person.generate_home)
 
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
@@ -1239,7 +1266,7 @@ init -1 python:
             if scene_manager is None and show_person_info:
                 renpy.show_screen("person_info_ui",self)
             else:   # when we are called from the scene manager we have to draw the other characters
-                scene_manager.draw_scene_without(self)
+                scene_manager.draw_scene(exclude_list = [self])
 
             bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
 
@@ -1684,6 +1711,11 @@ init -1 python:
 
     Person.get_lower_top_layer = person_get_lower_top_layer
 
+    def person_get_feet_top_layer(self):
+        return self.outfit.get_feet_top_layer()
+
+    Person.get_feet_top_layer = person_get_feet_top_layer
+
     def person_restore_all_clothing(self):
         return self.outfit.restore_all_clothing()
 
@@ -2056,8 +2088,8 @@ init -1 python:
 
     Person.attempt_opinion_training = attempt_opinion_training
 
-    def have_orgasm(self, position = None, the_object = None, half_arousal = True, report_log = None):
-        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = position, the_object = the_object)
+    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True):
+        mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
         self.change_slut_temp(5)
         self.change_happiness(5)
@@ -2065,8 +2097,8 @@ init -1 python:
             self.change_arousal(-self.arousal/2)
         else:
             self.change_arousal(-self.arousal)
-        if report_log != None:
-            report_log["girl orgasms"] += 1
+        if "report_log" in globals():
+            report_log["girl orgasms"] = report_log.get("girl orgasms", 0) + 1
 
         return
 

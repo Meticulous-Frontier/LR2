@@ -10,7 +10,7 @@ init 3302 python:
 
     def strip_club_bought_by_someone_else():
         strip_club_owner = get_random_male_name()
-        strip_club.background_image = Image(get_file_handle("Club_Background.jpg")) # Set up the original background
+        strip_club.background_image = Image(get_file_handle("Club_Background.png")) # Set up the original background
         strip_club.name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.formalName = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button

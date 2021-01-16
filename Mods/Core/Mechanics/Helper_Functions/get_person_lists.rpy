@@ -24,11 +24,11 @@ init -1 python:
             not_met_yet_list.append(candace)
         if christina.mc_title == 'Stranger': #She'll call MC differently when met.
             not_met_yet_list.append(christina)
-        if dawn.event_triggers_dict.get("met", 0) == 0:
+        if "dawn" in globals() and dawn.event_triggers_dict.get("met", 0) == 0:
             not_met_yet_list.append(dawn)
         if emily.mc_title == 'Stranger': #She'll call MC differently when met.
             not_met_yet_list.append(emily)
-        if erica.event_triggers_dict.get("erica_progress", 0) == 0:
+        if "erica" in globals() and erica.event_triggers_dict.get("erica_progress", 0) == 0:
             not_met_yet_list.append(erica)
         if cousin.get_destination(specified_time = 1) == cousin.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(cousin)
@@ -40,7 +40,7 @@ init -1 python:
             not_met_yet_list.append(aunt)
         if "sarah" in globals() and sarah.get_destination(specified_time = 1) == sarah.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(sarah)
-        if starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
+        if "starbuck" in globals() and starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
             not_met_yet_list.append(starbuck)
         return not_met_yet_list
 

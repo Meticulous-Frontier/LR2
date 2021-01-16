@@ -133,6 +133,7 @@ label town_walk_crisis_action_label:
                     the_person.char "Well, that seems to be a good idea, Mr. [mc.last_name]. Come on, get inside."
                 "You quickly climb inside through the window."
                 call fuck_person(the_person) from _call_fuck_person_P13S2
+                $ the_person.call_dialogue("sex_review", the_report = _return)
             else:
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 "[the_person.possessive_title] quickly turns around upon hearing your voice. You see that she is not glad to see you."

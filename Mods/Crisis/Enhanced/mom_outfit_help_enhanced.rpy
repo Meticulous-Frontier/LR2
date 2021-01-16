@@ -64,7 +64,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
 
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-                while strip_choice is not None and not caught:
+                while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
                     "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                     if renpy.random.randint(0,100) < 10: #you got caught
@@ -82,13 +82,13 @@ label mom_outfit_help_crisis_label_enhanced():
                         $ caught = True
                     else:
                         menu:
-                            "Keep watching.":
+                            "Keep watching":
                                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
-                            "Stop peeking.":
+                            "Stop peeking":
                                 "You pull your eyes away from the mirror and do your best not to peek."
                                 $ clear_scene()
-                $ strip_choice = None
+                                $ strip_choice = None
 
                 if not caught:
                     "[the_person.possessive_title] finishes stripping down and starts to get dressed in her new outfit. After a few moments she's all put together again."
@@ -163,7 +163,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
                 $ caught = False
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-                while strip_choice is not None and not caught:
+                while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
                     "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                     if renpy.random.randint(0,100) < 10: #you got caught
@@ -187,7 +187,7 @@ label mom_outfit_help_crisis_label_enhanced():
                             "Stop peeking":
                                 "You pull your eyes away from the mirror and do your best not to peek."
                                 $ clear_scene()
-                $ strip_choice = None
+                                $ strip_choice = None
 
                 if not caught:
                     "[the_person.possessive_title] finishes stripping down and starts to get dressed in her new outfit. After a few moments she's all put together again."
@@ -261,7 +261,7 @@ label mom_outfit_help_crisis_label_enhanced():
                             "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
                             $ caught = False
                             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-                            while strip_choice is not None and not caught:
+                            while strip_choice and not caught:
                                 $ the_person.draw_animated_removal(strip_choice)
                                 "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
                                 if renpy.random.randint(0,100) < 10: #you got caught
@@ -285,7 +285,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                         "Stop peeking":
                                             "You pull your eyes away from the mirror and do your best not to peek."
                                             $ clear_scene()
-                            $ strip_choice = None
+                                            $ strip_choice = None
 
                             if not caught:
                                 "[the_person.possessive_title] finishes stripping down and starts to get dressed in her new outfit. After a few moments she's all put together again."

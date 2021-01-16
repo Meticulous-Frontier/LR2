@@ -144,135 +144,135 @@ init python: # This space is reserved for definitions used to simplify the code
         return
 
     def cheat_redraw_face(person): # Redraws the face with the matching skin colour
-        if person.face_style == "Face_1": # Variations of Face Style 1
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_1")
+        # if person.face_style == "Face_1": # Variations of Face Style 1
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_1")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_1")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_1")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_1")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_1")
 
-        elif person.face_style == "Face_2": # Variations of Face Style 2
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_2")
+        # elif person.face_style == "Face_2": # Variations of Face Style 2
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_2")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_2")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_2")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_2")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_2")
 
-        elif person.face_style == "Face_3": # Variations of Face Style 3
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_3")
+        # elif person.face_style == "Face_3": # Variations of Face Style 3
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_3")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_3")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_3")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_3")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_3")
 
-        elif person.face_style == "Face_4": # Variations of Face Style 4
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_4")
+        # elif person.face_style == "Face_4": # Variations of Face Style 4
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_4")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_4")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_4")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_4")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_4")
 
-        elif person.face_style == "Face_5": # Variations of Face Style 5
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_5")
+        # elif person.face_style == "Face_5": # Variations of Face Style 5
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_5")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_5")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_5")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_5")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_5")
 
-        elif person.face_style == "Face_6": # Variations of Face Style 6
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_6")
+        # elif person.face_style == "Face_6": # Variations of Face Style 6
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_6")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_6")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_6")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_6")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_6")
 
-        elif person.face_style == "Face_7": # Variations of Face Style 7
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_7")
+        # elif person.face_style == "Face_7": # Variations of Face Style 7
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_7")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_7")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_7")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_7")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_7")
 
-        elif person.face_style == "Face_8": # Variations of Face Style 8
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_8")
+        # elif person.face_style == "Face_8": # Variations of Face Style 8
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_8")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_8")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_8")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_8")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_8")
 
-        elif person.face_style == "Face_9": # Variations of Face Style 9
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_9")
+        # elif person.face_style == "Face_9": # Variations of Face Style 9
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_9")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_9")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_9")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_9")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_9")
 
-        elif person.face_style == "Face_11": # Variations of Face Style 11
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_11")
+        # elif person.face_style == "Face_11": # Variations of Face Style 11
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_11")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_11")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_11")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_11")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_11")
 
-        elif person.face_style == "Face_12": # Variations of Face Style 12
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_12")
+        # elif person.face_style == "Face_12": # Variations of Face Style 12
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_12")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_12")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_12")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_12")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_12")
 
-        elif person.face_style == "Face_13": # Variations of Face Style 13
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_13")
+        # elif person.face_style == "Face_13": # Variations of Face Style 13
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_13")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_13")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_13")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_13")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_13")
 
-        elif person.face_style == "Face_14": # Variations of Face Style 14
-            if person.skin == "white":
-                 person.expression_images = Expression("default","white","Face_14")
+        # elif person.face_style == "Face_14": # Variations of Face Style 14
+        #     if person.skin == "white":
+        #          person.expression_images = Expression("default","white","Face_14")
 
-            elif person.skin == "tan":
-                 person.expression_images = Expression("default","tan","Face_14")
+        #     elif person.skin == "tan":
+        #          person.expression_images = Expression("default","tan","Face_14")
 
-            elif person.skin == "black":
-                 person.expression_images = Expression("default","black","Face_14")
+        #     elif person.skin == "black":
+        #          person.expression_images = Expression("default","black","Face_14")
         person.draw_person() # Always redraw the face_style
 
     def cheat_redraw_breasts(): # Redraws the breasts / tits
