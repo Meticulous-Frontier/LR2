@@ -360,6 +360,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
                     $ round_choice = "Change"
 
+            # no initial object choice
+            if first_round and position_choice and not object_choice:
+                $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
+
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
                 $ round_choice = "Girl Leave"
