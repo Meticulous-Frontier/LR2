@@ -112,9 +112,10 @@ init 50 python:
         the_person.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
         the_person.situational_obedience = {}
         the_person.arousal = 0
+        the_person.energy = the_person.max_energy
         the_person.max_opinion_score("bareback sex")
-        the_person.core_sluttiness = 60
-        the_person.sluttiness = 60
+        the_person.core_sluttiness = 70
+        the_person.sluttiness = 70
         the_person.obedience = 0
         the_person.happiness = 100
         the_person.love = 0
@@ -367,6 +368,8 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
 
 label breeding_fetish_mom_intro_label(): # Needs testing
     $ the_person = mom
+    $ the_person.on_birth_control = False
+    $ the_person.event_triggers_dict["Mom_forced_off_bc"] = False   #Atleast set it up so that she doesn't want to get on BC without MC asking.
     # We'll start this exactly like the crisis with mom waking you up, but with definitely more urgency in her.
     # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
     # We do that by getting her lowest level pieces of bottom clothing and removing it, then working our way up until we can use her vagina.
@@ -555,11 +558,11 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     return
 
 label breeding_fetish_rebecca_intro_label():
-
+    "Rebecca doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_gabrielle_intro_label():
-
+    "Gabrielle doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_stephanie_intro_label():  #Needs Testing
@@ -807,11 +810,11 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
     return #Needs testing
 
 label breeding_fetish_emily_intro_label():
-
+    "Emily doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_christina_intro_label():
-
+    "Christina doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_starbuck_intro_label():  #Needs TEsting
@@ -951,11 +954,11 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     return #Needs testing
 
 label breeding_fetish_ophelia_intro_label():
-
+    "Ophelia doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_erica_intro_label():
-
+    "Erica doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_candace_intro_label(the_person): #This is going to be two intros, depending on if candace is still a bimbo or not NEeds Testing
@@ -1096,7 +1099,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
     return #Needs testing #Needs testing
 
 label breeding_fetish_ashley_intro_label():
-    pass
+    "Ashley doesn't have a breeding fetish written yet"
     return
 
 label unit_test_breeding_fetish_intro():
@@ -1129,7 +1132,7 @@ label unit_test_breeding_fetish_intro():
 
     $ debug_set_stats_for_breeding_fetish_mins(lily)
     "Method: breeding_fetish_lily_intro_label"
-    call breeding_fetish_lily_intro_label() from _unit_test_breeding_fetish_intro_05
+    call breeding_fetish_lily_intro_label(lily) from _unit_test_breeding_fetish_intro_05
     $ mc.energy = mc.max_energy
 
     $ debug_set_stats_for_breeding_fetish_mins(aunt)
@@ -1185,7 +1188,7 @@ label unit_test_breeding_fetish_intro():
     $ create_debug_candace()
     $ debug_set_stats_for_breeding_fetish_mins(candace)
     "Method: breeding_fetish_candace_intro_label"
-    call breeding_fetish_candace_intro_label() from _unit_test_breeding_fetish_intro_16
+    call breeding_fetish_candace_intro_label(candace) from _unit_test_breeding_fetish_intro_16
     $ mc.energy = mc.max_energy
 
     $ debug_set_stats_for_breeding_fetish_mins(dawn)
