@@ -556,7 +556,8 @@ label anal_fetish_lily_intro_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] grabs your hand and you follow her to the backroom. It has a familiar smell of body fluids and sweat."
     $ the_person.draw_person(position = "stand4")
-    "Come on [the_person.mc_title], I can't wait to feel you fuck me with this thing on..."
+    $ the_person.add_situational_slut("situation",20, "I want to try this thing out!")
+    the_person "Come on [the_person.mc_title], I can't wait to feel you fuck me with this thing on..."
     "[the_person.possessive_title] quickly strips, eager to get started."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "stand4")
@@ -590,6 +591,7 @@ label anal_fetish_lily_intro_label():
         "She looks back at you and smiles"
     the_person "[the_person.mc_title]... That felt amazing. I'm not sure though... are we going to able to keep this from mom? I don't think I can stay quiet enough when I'm getting fucked in both holes like that..."
     "You give her a reassuring smile."
+    $ the_person.clear_situational_slut("situation")
     mc.name "Don't worry [the_person.title], we'll be careful."
     the_person "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
     $ add_anal_fetish(the_person)
