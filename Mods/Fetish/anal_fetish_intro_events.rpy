@@ -125,10 +125,15 @@ init 50 python:
         the_person.love = 0
         return
 
+    def abort_anal_fetish_intro(the_person): #Use this function to exit a anal fetish scene for whatever reason (something fails, MC choice, etc.)
+        the_person.event_triggers_dict["anal_fetish_start"] = False
+        the_person.remove_role(anal_fetish_role)
 ### Function labels
 
 label anal_fetish_employee_intro_label(the_person):
     $ fetish_after_hours_unlock()
+    if the_person.core_sluttiness < 70:
+        $ abort_anal_fetish_intro(the_person)
     "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
     "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
     "She seems to be using her ass to try and get attention."
@@ -143,11 +148,15 @@ label anal_fetish_employee_intro_label(the_person):
         "Attempt to train her anal fetish" if mc.energy > 40:
             pass
         "Too tired" if mc.energy <= 40:
-            pass
-            #TODO re add the event for this person for the next day.
+            "You are just too tired to aproach her today."
+            $ fetish_after_hours_unlock()
+            $ abort_anal_fetish_intro(the_person)
+            $ clear_scene()
+            return
         "Too risky, leave her alone":
             "You decide to leave her alone for now. You might revisit this decision at a later date."
             $ fetish_after_hours_unlock()
+            $ abort_anal_fetish_intro(the_person)
             $ clear_scene()
             return
     mc.name "Hello [the_person.title]."
@@ -251,6 +260,9 @@ label anal_fetish_employee_intro_label(the_person):
     return True
 
 label anal_fetish_family_intro_label(the_person):
+    if the_person.core_sluttiness < 70:
+        $ abort_anal_fetish_intro(the_person)
+        return
     $ the_person.aroual = 30
     $ the_person.draw_person(position = "standing_doggy")
     "As you walk into the room, you notice [the_person.possessive_title]. She is bent over and appears to be reading something on her phone."
@@ -292,10 +304,12 @@ label anal_fetish_family_intro_label(the_person):
         "Attempt to train her anal fetish" if mc.energy > 40:
             pass
         "Too tired" if mc.energy <= 40:
-            pass
-            #TODO re add the event for this person for the next day.
+            $ abort_anal_fetish_intro(the_person)
+            $ clear_scene()
+            return
         "Not right now":
             "You decide to leave her alone for now. You might revisit this decision at a later date."
+            $ abort_anal_fetish_intro(the_person)
             $ clear_scene()
             return
     mc.name "God you are so naughty. You want me to fuck you in your ass right here, don't you?"
@@ -355,6 +369,9 @@ label anal_fetish_family_intro_label(the_person):
 
 label anal_fetish_generic_intro_label(the_person):
     # Concept, spank her while fingering her ass so she can discover her new submissive, anal loving side.
+    if the_person.core_sluttiness < 70:
+        $ abort_anal_fetish_intro(the_person)
+        return
     $ the_person.arousal = 40
     $ the_person.draw_person()
     "You walk up to [the_person.title] to say hello. However, something about her demeanor seems a little off."
@@ -376,6 +393,7 @@ label anal_fetish_generic_intro_label(the_person):
             $ the_person.change_love(-2)
             $ the_person.change_happiness(-5)
             the_person "Ah, okay. I see."
+            $ abort_anal_fetish_intro(the_person)
             return False
 
     "[the_person.title] takes your hand. You take a few minutes to find somewhere private where you won't be interrupted."
@@ -464,10 +482,14 @@ label anal_fetish_generic_intro_label(the_person):
     return True
 
 label anal_fetish_mom_intro_label():
+    "Jennifer's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_lily_intro_label():
     $ the_person = lily # make sure we use lily for the event
+    if the_person.core_sluttiness < 70:
+        $ abort_anal_fetish_intro(the_person)
+        return
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
     $ fetish_after_hours_unlock()
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
@@ -584,28 +606,38 @@ label anal_fetish_lily_intro_label():
     return
 
 label anal_fetish_rebecca_intro_label():
+    "Recebba's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_gabrielle_intro_label():
+    "Gabrielle's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_stephanie_intro_label():
+    "Stephanie's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_alex_intro_label():
+    "Alexia's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_nora_intro_label():
+    "Nora's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_emily_intro_label():
+    "Emily's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_christina_intro_label():
+    "Christina's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_starbuck_intro_label():
     $ the_person = starbuck
+    if the_person.core_sluttiness < 70:
+        $ abort_anal_fetish_intro(the_person)
+        return
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
     $ fetish_after_hours_unlock()
 
@@ -688,21 +720,27 @@ label anal_fetish_starbuck_intro_label():
     return True
 
 label anal_fetish_sarah_intro_label():
+    "Sarah's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_ophelia_intro_label():
+    "Ophelia's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_candace_intro_label():
+    "Candace's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_dawn_intro_label():
+    "Dawn's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_erica_intro_label():
+    "Erica's anal fetish scene has not yet been written."
     return False
 
 label anal_fetish_ashley_intro_label():
+    "Ashley's anal fetish scene has not yet been written."
     return False
 
 label unit_test_anal_fetish_intro():
