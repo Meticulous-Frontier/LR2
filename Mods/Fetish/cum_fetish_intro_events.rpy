@@ -108,6 +108,22 @@ init 50 python:
 
         return cum_list
 
+    def debug_set_stats_for_cum_fetish_mins(the_person):
+        the_person.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
+        the_person.situational_obedience = {}
+        the_person.arousal = 0
+        the_person.energy = the_person.max_energy
+        the_person.max_opinion_score("being covered in cum")
+        the_person.core_sluttiness = 70
+        the_person.sluttiness = 70
+        the_person.obedience = 0
+        the_person.happiness = 100
+        the_person.love = 0
+        return
+
+    def abort_cum_fetish_intro(the_person): #Use this function to exit a anal fetish scene for whatever reason (something fails, MC choice, etc.)
+        the_person.event_triggers_dict["cum_fetish_start"] = False
+        the_person.remove_role(cum_fetish_role)
 
 
 ### Function labels
@@ -150,7 +166,7 @@ label cum_fetish_employee_intro_label(the_person):
     mc.name "I'll let you do that, but only if you do as I say when I finish."
     the_person "Oh? That sounds fun..."
     $ the_person.draw_person(position = "blowjob")
-    "[the_person.possesive_title] drops to her knees and unzips your pants, then pulls your cock out."
+    "[the_person.possessive_title] drops to her knees and unzips your pants, then pulls your cock out."
     the_person "Mmm, it looks so tasty."
     "She opens her mouth and slowly licks some of your precum from the tip. You watch as she works her tongue around her mouth, savoring the taste."
     $ mc.arousal = 15
@@ -174,7 +190,7 @@ label cum_fetish_employee_intro_label(the_person):
     mc.name "Good girl. Keeping going, rub some on your stomach..."
     the_person "Oh my god..."
     $ the_person.cum_on_stomach()
-    "Taking what she can, [the_person.possesive_title] goes further, rubbing your cum onto her belly."
+    "Taking what she can, [the_person.possessive_title] goes further, rubbing your cum onto her belly."
     $ the_person.change_arousal(20)
     "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dialated. She is REALLY getting off on this!"
     mc.name "That's a good cumslut. You know whats coming next, right?"
@@ -183,7 +199,7 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "Oh fuck yes!"
     $ the_person.draw_person(position = "kneeling1")
     $ the_person.change_arousal (25)
-    "[the_person.possesive_title] immediately begins to finger herself rapidly. Once in a while she will wipe a bit of cum off her face, rub it in circles around her slit, then keep going."
+    "[the_person.possessive_title] immediately begins to finger herself rapidly. Once in a while she will wipe a bit of cum off her face, rub it in circles around her slit, then keep going."
     the_person "Oh god! [the_person.mc_title] I'm cumming!"
     $ the_person.have_orgasm()
     "[the_person.title] cries out as she cums. Her body convulses in waves as a strong orgasm overtakes her."
@@ -203,7 +219,7 @@ label cum_fetish_family_intro_label(the_person):
     $ the_person.arousal = 40
     $ towel_outfit = Outfit("Towel")
     $ towel_outfit.add_dress(towel.get_copy())
-    "Noticing the door cracked, you walk up to [the_person.possesive_title]'s bedroom door. As approach, you hear noises coming from inside."
+    "Noticing the door cracked, you walk up to [the_person.possessive_title]'s bedroom door. As approach, you hear noises coming from inside."
     the_person "Oh... mmm... oh fuck yeah... That's it baby..."
     "As you sneak closer, you look in and see [the_person.title], face down ass up on her bed with her fingers between her legs."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
@@ -239,21 +255,21 @@ label cum_fetish_family_intro_label(the_person):
     mc.name "Cum all over your ass? Is that what you want [the_person.title]?"
     $ the_person.draw_person(position = "sitting")
     the_person "Oh fuck! [the_person.mc_title]? What are... how long have you been there?"
-    "[the_person.possesive_title] quickly sits up, she grabs a sheet and tries to cover herself."
+    "[the_person.possessive_title] quickly sits up, she grabs a sheet and tries to cover herself."
     $ the_person.apply_outfit(towel_outfit)
     $ the_person.draw_person(position = "sitting")
     mc.name "Long enough. It's okay [the_person.title]. You don't have to be ashamed of anything."
     the_person "Its... I'm not, I just didn't realize the door was open... wait where are your clothes?"
     "You step closer to the bed."
     mc.name "I got really turned on hearing you talk about what you want. I decided I wanted to give it to you."
-    "[the_person.possesive_title] begins to ramble excuses, but the look on her face as you approach isn't dismay, but more of hope."
+    "[the_person.possessive_title] begins to ramble excuses, but the look on her face as you approach isn't dismay, but more of hope."
     the_person "You don't... I mean... that would be crazy... but you could?"
     mc.name "I want to. Now put that silly sheet down."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] gives in and drops the sheet. You get closer until you are standing right in front of her."
     mc.name "That's it. Now, you're already all warmed up. Why don't you give me a kiss and help me catch up a little."
-    "Still sitting on the edge of the bed, [the_person.possesive_title] looks up at you as you bring your cock up to her face."
+    "Still sitting on the edge of the bed, [the_person.possessive_title] looks up at you as you bring your cock up to her face."
     "You run your hand through her hair a couple times, as she begins to lick around the tip of your dick."
     "She licks up some of your precum."
     the_person "Mmm... that tastes so... good? Its funny... I'd never though of cum as tasting so good before."
@@ -261,18 +277,18 @@ label cum_fetish_family_intro_label(the_person):
     the_person "Yeah, I suppose."
     "She opens her mouth and then takes you in. Her sultry lips feel amazing as they descend your cock, then slowly pull back off."
     $ mc.change_arousal(15) #40
-    "[the_person.possesive_title] gives you a couple slow strokes then pulls off for a breath."
+    "[the_person.possessive_title] gives you a couple slow strokes then pulls off for a breath."
     the_person "Mmm, I can't believe how hot your cock is [the_person.mc_title]..."
     "[the_person.title] opens up and starts to go at it. Her laps smack against each other each time she pulls back."
     $ mc.change_arousal(15) # 55
-    "[the_person.possesive_title] is reaching down with her free hand and has begin to play with herself. Her moans around your erection feel amazing."
+    "[the_person.possessive_title] is reaching down with her free hand and has begin to play with herself. Her moans around your erection feel amazing."
     $ the_person.change_arousal(10) #80
     "She starts getting carried away with sucking you off, so you stop her. Grabbing her by the hair you pull her head back."
     mc.name "Easy. I'd say I'm all warmed up now to. Now get on your hands and knees. I have a fantasy to fulfill now."
     $ the_person.draw_person(position = "doggy")
     "When she gets in to position, you get behind her. With hands on her hips, you push yourself inside her."
     #TODO break vaginal taboo if required
-    "[the_person.possesive_title]'s cunt is soaked and you slide in easily. The warm grip feels great when you bottom out."
+    "[the_person.possessive_title]'s cunt is soaked and you slide in easily. The warm grip feels great when you bottom out."
     the_person "Go ahead [the_person.mc_title]... I'm so wet, give it to me good!"
     "You grab onto [the_person.title] by her hips and settle into a steady rhythm, pumping your cock in and out of her tight pussy."
     $ the_person.call_dialogue("sex_responses_vaginal")
@@ -294,7 +310,7 @@ label cum_fetish_family_intro_label(the_person):
     $ mc.reset_arousal()
     the_person "Oh fuck! It feels so good! Cover me [the_person.mc_title]!"
     "You unload everything you have. The ass in front of you, covered in sperm, is a work of art."
-    "However, you want to push things a little further and make sure you really make [the_person.possesive_title] your cumslut."
+    "However, you want to push things a little further and make sure you really make [the_person.possessive_title] your cumslut."
     mc.name "That was hot. Your ass is covered! I bet you wish you could taste it huh?"
     the_person "Ahhh, yeah that would be nice..."
     mc.name "Here, let me help."
@@ -316,16 +332,16 @@ label cum_fetish_family_intro_label(the_person):
     the_person "[the_person.mc_title]... that was amazing... but we can't tell anyone... okay?"
     mc.name "I know [the_person.title]. It's okay. You can be my secret cumslut."
     $ the_person.draw_person(position = the_person.idle_pose)
-    "[the_person.possesive_title] slowly stands up and turns to you. You can see a tiny bit of your cum dribbling down her lip."
+    "[the_person.possessive_title] slowly stands up and turns to you. You can see a tiny bit of your cum dribbling down her lip."
     mc.name "I need to get going. Take care [the_person.title]"
-    "You say goodbye to [the_person.possesive_title] then leave her room. As you walk away, you can't help but smile."
+    "You say goodbye to [the_person.possessive_title] then leave her room. As you walk away, you can't help but smile."
     "Your serums have turned her into your cumslut."
     python:
         the_person.apply_planned_outfit()
         clear_scene()
     return True
 
-label cum_fetish_generic_intro_label():
+label cum_fetish_generic_intro_label(the_person):
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
     "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
@@ -348,7 +364,7 @@ label cum_fetish_generic_intro_label():
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
             call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC10B
-            $ add_cum_fetish_role_based_on_cum(the_person)
+            $ add_cum_fetish(the_person)
 
             "[the_person.possessive_title] is moaning ecstatically."
             if the_person.has_cum_fetish():
@@ -634,6 +650,112 @@ label cum_fetish_erica_intro_label():
 label cum_fetish_ashley_intro_label():
     return False
 
+label unit_test_cum_fetish_intro():
+
+    "Generic intros"
+    $ debug_set_stats_for_cum_fetish_mins(mom)
+    "Method: cum_fetish_family_intro_label"
+    call cum_fetish_family_intro_label(mom) from _unit_test_cum_fetish_intro_01
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(starbuck)
+    "Method: cum_fetish_generic_intro_label"
+    call cum_fetish_generic_intro_label(starbuck) from _unit_test_cum_fetish_intro_02
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(stephanie)
+    "Method: cum_fetish_employee_intro_label"
+    call  cum_fetish_employee_intro_label(stephanie) from _unit_test_cum_fetish_intro_03
+    $ mc.energy = mc.max_energy
+
+    $ stephanie.remove_role(cum_fetish_role)
+    $ mom.remove_role(cum_fetish_role)
+    $ starbuck.remove_role(cum_fetish_role)
+
+    "Unique intros"
+    $ debug_set_stats_for_cum_fetish_mins(mom)
+    "Method: cum_fetish_mom_intro_label"
+    call cum_fetish_mom_intro_label() from _unit_test_cum_fetish_intro_04
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(lily)
+    "Method: cum_fetish_lily_intro_label"
+    call cum_fetish_lily_intro_label() from _unit_test_cum_fetish_intro_05
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(aunt)
+    "Method: cum_fetish_rebecca_intro_label"
+    call cum_fetish_rebecca_intro_label() from _unit_test_cum_fetish_intro_06
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(cousin)
+    "Method: cum_fetish_gabrielle_intro_label"
+    call cum_fetish_gabrielle_intro_label() from _unit_test_cum_fetish_intro_07
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(stephanie)
+    "Method: cum_fetish_stephanie_intro_label"
+    call cum_fetish_stephanie_intro_label() from _unit_test_cum_fetish_intro_08
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(alexia)
+    "Method: cum_fetish_alex_intro_label"
+    call cum_fetish_alex_intro_label() from _unit_test_cum_fetish_intro_09
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(nora)
+    "Method: cum_fetish_nora_intro_label"
+    call cum_fetish_nora_intro_label() from _unit_test_cum_fetish_intro_10
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(emily)
+    "Method: cum_fetish_emily_intro_label"
+    call cum_fetish_emily_intro_label() from _unit_test_cum_fetish_intro_11
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(christina)
+    "Method: cum_fetish_christina_intro_label"
+    call cum_fetish_christina_intro_label() from _unit_test_cum_fetish_intro_12
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(starbuck)
+    "Method: cum_fetish_starbuck_intro_label"
+    call cum_fetish_starbuck_intro_label() from _unit_test_cum_fetish_intro_13
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(sarah)
+    "Method: cum_fetish_sarah_intro_label"
+    call cum_fetish_sarah_intro_label() from _unit_test_cum_fetish_intro_14
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(salon_manager)
+    "Method: cum_fetish_ophelia_intro_label"
+    call cum_fetish_ophelia_intro_label() from _unit_test_cum_fetish_intro_15
+    $ mc.energy = mc.max_energy
+
+    $ create_debug_candace()
+    $ debug_set_stats_for_cum_fetish_mins(candace)
+    "Method: cum_fetish_candace_intro_label"
+    call cum_fetish_candace_intro_label() from _unit_test_cum_fetish_intro_16
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(dawn)
+    "Method: cum_fetish_dawn_intro_label"
+    call cum_fetish_dawn_intro_label() from _unit_test_cum_fetish_intro_17
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(erica)
+    "Method: cum_fetish_erica_intro_label"
+    call cum_fetish_erica_intro_label() from _unit_test_cum_fetish_intro_18
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_cum_fetish_mins(ashley)
+    "Method: cum_fetish_ashley_intro_label"
+    call cum_fetish_ashley_intro_label() from _unit_test_cum_fetish_intro_19
+    $ mc.energy = mc.max_energy
+
+    return
+
 # label SB_fetish_stephanie_cum_label():
 #     $ the_person = stephanie
 #     $ the_person.event_triggers_dict["LastCumFetish"] = day
@@ -695,7 +817,7 @@ label cum_fetish_ashley_intro_label():
 #                 $ the_person.break_taboo("sucking_cock")
 #                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC060
-#                 $ add_cum_fetish_role_based_on_cum(the_person)
+#                 $ add_cum_fetish(the_person)
 #                 the_person.char "Oh god... It's even better than I dreamed about last night."
 #                 "[the_person.possessive_title] takes a minute to recover before standing up."
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
@@ -728,7 +850,7 @@ label cum_fetish_ashley_intro_label():
 #                 $ the_person.break_taboo("sucking_cock")
 #                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC061
-#                 $ add_cum_fetish_role_based_on_cum(the_person)
+#                 $ add_cum_fetish(the_person)
 #                 the_person.char "Your cum is amazing!"
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
 #                 the_person.char "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
@@ -794,7 +916,7 @@ label cum_fetish_ashley_intro_label():
 #                 $ the_person.break_taboo("sucking_cock")
 #                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC062
-#                 $ add_cum_fetish_role_based_on_cum(the_person)
+#                 $ add_cum_fetish(the_person)
 #                 the_person.char "Your cum is amazing!"
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
 #                 the_person.char "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
@@ -822,7 +944,7 @@ label cum_fetish_ashley_intro_label():
 #         $ the_person.break_taboo("sucking_cock")
 #         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC063
-#         $ add_cum_fetish_role_based_on_cum(the_person)
+#         $ add_cum_fetish(the_person)
 #         the_person.char "Oh god... Every load just feels so good!"
 #         "[the_person.possessive_title] takes a minute to recover before standing up."
 #         $ scene_manager.update_actor(the_person, position = "stand2")
@@ -863,7 +985,7 @@ label cum_fetish_ashley_intro_label():
 #         $ the_person.break_taboo("sucking_cock")
 #         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC064
-#         $ add_cum_fetish_role_based_on_cum(the_person)
+#         $ add_cum_fetish(the_person)
 #         the_person.char "Oh god... I can't get enough of your cock! It tastes so good."
 #         "[the_person.possessive_title] takes a minute to recover before standing up."
 #         $ scene_manager.update_actor(the_person, position = "stand2")
