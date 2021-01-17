@@ -11,22 +11,19 @@ init -1 python:
             mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
 
         if "people_to_process" in globals():
-            found = find_in_list(lambda x: x[0].name == self.name and x[0].last_name == self.last_name and x[0].age == self.age, people_to_process)
+            found = find_in_list(lambda x: x[0].identifier == self.identifier, people_to_process)
             if found: # remove from processing list
                 people_to_process.remove(found)
 
         # cleanup crisis events where person is in argument list
-        for crisis in mc.business.mandatory_crises_list + mc.business.mandatory_morning_crises_list:
-            args = crisis.args
-            if not isinstance(args, list):
-                args = [args]
+        for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]
+            for crisis in crisis_store:
+                args = crisis.args
+                if not isinstance(args, list):
+                    args = [args]
 
-            for arg in args:
-                if arg is self:
-                    if crisis in mc.business.mandatory_crises_list:
-                        mc.business.mandatory_crises_list.remove(crisis)
-                    if crisis in mc.business.mandatory_morning_crises_list:
-                        mc.business.mandatory_morning_crises_list.remove(crisis)
+                if any(x for x in args if x == self):
+                    crisis_store.remove(crisis)
 
         # remove from business teams
         for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
@@ -37,10 +34,6 @@ init -1 python:
         for room in [mc.business.s_div, mc.business.r_div, mc.business.p_div, mc.business.m_div, mc.business.h_div]:
             if self in room.people:
                 room.people.remove(self)
-
-        # remove from strippers
-        if self in stripclub_strippers:
-            stripclub_strippers.remove(self)
 
         # other stripclub teams
         if "stripclub_bdsm_performers" in globals():
