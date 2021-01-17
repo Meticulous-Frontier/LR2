@@ -50,6 +50,8 @@ init -1 python:
         for other_employee in self.get_employee_list():
             town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
 
+        person.apply_outfit()   # make sure the wear the correct outfit (uniform if so needed)
+
     Business.update_employee_status = update_employee_status
 
     def hire_person(self, person, target_division, add_to_location = False):

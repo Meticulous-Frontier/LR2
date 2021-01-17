@@ -39,6 +39,8 @@ init -1 python:
     standard_sex_store_backgrounds = room_background_image("Sex_Shop_Background.jpg")
     standard_gym_backgrounds = room_background_image("Gym_Background.jpg")
     standard_clothing_store_backgrounds =  room_background_image("Clothing_Store_Background.jpg")
+    standard_her_hallway_backgrounds = room_background_image("her_hallway_background.jpg")
+    standard_office_store_backgrounds = room_background_image("Office_Store_Background.jpg")
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
@@ -52,6 +54,14 @@ init -1 python:
     standard_ceo_office_backgrounds = room_background_image("CEO_Office_Background.jpg")
     standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg", darken = False)
     standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
+    # bedroom backgrounds
+    standard_bedroom1_background = room_background_image("Generic_Bedroom1_Background.jpg")
+    standard_bedroom2_background = room_background_image("Generic_Bedroom2_Background.jpg")
+    standard_bedroom3_background = room_background_image("Generic_Bedroom3_Background.jpg")
+    standard_bedroom4_background = room_background_image("Generic_Bedroom4_Background.jpg")
+    prostitute_bedroom_background = room_background_image("Prostitute_Bedroom_Background.jpg")
+    lily_bedroom_background = room_background_image("Lily_Bedroom_Background.jpg")
+    cousin_bedroom_background = room_background_image("Cousin_Bedroom_Background.jpg")
 
     def update_rd_div_with_genetics_unlocked():
         if not genetic_modification_policy.is_owned():
@@ -59,7 +69,7 @@ init -1 python:
 
         found = find_in_list(lambda x: x.name == "R&D division", list_of_places)
         if found:
-            found.background_image = standard_biotech_backgrounds[:]
+            found.background_image = standard_biotech_backgrounds
         return
 
 
@@ -70,16 +80,26 @@ label updated_room_background(stack):
 
     python:
         # as long as the base game has no nice images, we use these to make navigating a little more fun
-        office.background_image = enhanced_office_backgrounds[:]
-        m_division.background_image = enhanced_marketing_backgrounds[:]
-        p_division.background_image = enhanced_production_backgrounds[:]
-        rd_division.background_image = enhanced_research_backgrounds[:]
-        lobby.background_image = enhanced_lobby_backgrounds[:]
+        office.background_image = enhanced_office_backgrounds
+        m_division.background_image = enhanced_marketing_backgrounds
+        p_division.background_image = enhanced_production_backgrounds
+        rd_division.background_image = enhanced_research_backgrounds
+        lobby.background_image = enhanced_lobby_backgrounds
 
         #As long a there is a mall background for these, replace it with our custom background
-        sex_store.background_image = standard_sex_store_backgrounds[:]
-        gym.background_image = standard_gym_backgrounds[:]
-        clothing_store.background_image = standard_clothing_store_backgrounds[:]
+        sex_store.background_image = standard_sex_store_backgrounds
+        gym.background_image = standard_gym_backgrounds
+        clothing_store.background_image = standard_clothing_store_backgrounds
+        office_store.background_image = standard_office_store_backgrounds
+        if "her_hallway" in globals(): # check if room exists
+            her_hallway.background_image = standard_her_hallway_backgrounds
+
+        # bedroom image replacements
+        lily.home.background_image = lily_bedroom_background
+        cousin.home.background_image = cousin_bedroom_background
+        mom.home.background_image = standard_bedroom1_background
+        aunt.home.background_image = standard_bedroom4_background
+        emily.home.background_image = lily_bedroom_background
 
         # update rd division when genetics are unlocked
         update_rd_div_with_genetics_unlocked()

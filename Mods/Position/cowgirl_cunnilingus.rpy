@@ -13,7 +13,7 @@ init:
             orgasm_description = "orgasm_cowgirl_cunnilingus",
             taboo_break_description = "taboo_break_cowgirl_cunnilingus",
             verb = "lick",
-            opinion_tags = ["getting head", "get off"], record_class = "Cunnilingus",
+            opinion_tags = ["getting head", "taking control", "get off"], record_class = "Cunnilingus",
             associated_taboo = "licking_pussy")
 
         list_of_girl_positions.append(cowgirl_cunnilingus)

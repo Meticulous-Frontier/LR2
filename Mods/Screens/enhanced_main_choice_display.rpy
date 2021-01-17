@@ -40,6 +40,15 @@ init 2 python:
         return
 
     def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
+        def find_and_replace_tooltip_property(item, extra_args):
+            groups = re.search("\[[^]]*\]", item.menu_tooltip)
+            if groups and isinstance(extra_args, Person):
+                if ".title" in groups.group(0):
+                    return re.sub("\[[^]]*\]", extra_args.title, item.menu_tooltip)
+                if ".name" in groups.group(0):
+                    return re.sub("\[[^]]*\]", extra_args.name, item.menu_tooltip)
+            return item.menu_tooltip
+
         result = []
         result.append(element_list[0])
 
@@ -87,7 +96,7 @@ init 2 python:
                     mi.display = True
 
                 if item.menu_tooltip:
-                    mi.the_tooltip = item.menu_tooltip
+                    mi.the_tooltip = find_and_replace_tooltip_property(item, mi.extra_args)
 
             if isinstance(item, basestring): #It's just text. Display the text and return the text.
                 mi.title = item

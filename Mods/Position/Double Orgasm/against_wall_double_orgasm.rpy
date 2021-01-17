@@ -63,7 +63,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 if the_girl.love < 0:
                     "Where do think you're going, [the_girl.mc_title]?"
                 else:
-                    the_girl.char "[wordchoice][the_girl.mc_title]! [wordchoice2]"
+                    the_girl.char "[wordchoice], [the_girl.mc_title]! [wordchoice2]"
                 "The strength of her legs prevents you from pulling out."
                 $ ran_num = renpy.random.randint(0,1)
                 if ran_num == 0:

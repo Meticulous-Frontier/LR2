@@ -360,6 +360,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
                     $ round_choice = "Change"
 
+            # no initial object choice
+            if first_round and position_choice and not object_choice:
+                $ object_choice = girl_choose_object_enhanced(the_person, position_choice)
+
             if position_choice is None: #There's no position we can take
                 "[the_person.title] can't think of anything more to do with you."
                 $ round_choice = "Girl Leave"
@@ -496,7 +500,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ finished = True
 
         elif round_choice == "Strip":
-            call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing")) from _call_strip_menu_bugfix
+            call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing"), private) from _call_strip_menu_bugfix
             $ stop_stripping = False
 
         elif round_choice == "Leave":

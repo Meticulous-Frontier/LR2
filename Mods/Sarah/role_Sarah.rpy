@@ -58,6 +58,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
+        sarah.home.background_image = standard_bedroom1_background
         sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
@@ -843,24 +844,24 @@ label Sarah_get_drinks_label():
     the_person.char "Ah, something caught your eye then?"
     "You quickly release her and then walk back to the table."
     the_person.char "Yeah, something like that. I'm not sure what it was, but I'll let you know if I can put my finger on it..."
-    "[the_person.title] is trying to focus on the dart board, but she keeps stealing glances back at you. Your flirting is having the desired effect on her!"
-    "She readies herself for the next round of darts."
-    $ scene_manager.hide_actor(the_person)
-    call play_darts_301(the_person, focus_mod = -2) from play_darts_301_call_2
-    if _return:
-        $ scene_manager.show_actor(the_person, emotion = "sad")
-        "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
-    else:
-        $ scene_manager.show_actor(the_person, emotion = "happy")
-        "[the_person.title] gives you a huge smile after winning your game of darts!"
+    # "[the_person.title] is trying to focus on the dart board, but she keeps stealing glances back at you. Your flirting is having the desired effect on her!"
+    # "She readies herself for the next round of darts."
+    # $ scene_manager.hide_actor(the_person)
+    # call play_darts_301(the_person, focus_mod = -2) from play_darts_301_call_2
+    # if _return:
+    #     $ scene_manager.show_actor(the_person, emotion = "sad")
+    #     "[the_person.title] gives you a pathetically fake pout after you win your game of darts."
+    # else:
+    #     $ scene_manager.show_actor(the_person, emotion = "happy")
+    #     "[the_person.title] gives you a huge smile after winning your game of darts!"
     "Drinks are empty again. You look at [the_person.title]. She is definitely tipsy, but you think she should be able to handle one more round."
     mc.name "How about one more game? I'll grab us another round."
     $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
-    the_person.char "Another drink! I'm loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
+    the_person.char "Another drink! I loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
     mc.name "Haha, okay, let me go grab us another round."
     "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
     $ mc.business.change_funds(-20)
-    the_person.char "OKAY, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
+    the_person.char "Okay, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
     mc.name "Oh? What did you have in mind?"
     the_person.char "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
     "You raise an eyebrow involuntarily. For some reason you expected something a little... crazier than that."
@@ -1070,8 +1071,9 @@ label Sarah_get_drinks_label():
         "She is starting to doze off, when suddenly she wakes up and gets up."
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person.char "Sorry... I just realized how late it is getting. I'd better get home!"
-    #TODO have her actually put on the outfit provided earlier. Is this worth the effort to write?
-    "You watch her intently from your bed. Her body looks amazing, as she begins to hide it behind the clothes you provided her."
+    $ the_person.apply_outfit(get_sarah_date_outfit_one())
+    $ scene_manager.draw_scene()
+    "You watch her intently from your bed. Her body looks amazing, as she begins to hide it behind her clothes that have dried up by now."
     the_person.char "Don't worry, I can see myself out. I had a great time tonight! I'll see you on Monday, okay?"
     mc.name "Goodbye!"
     $ scene_manager.remove_actor(the_person)

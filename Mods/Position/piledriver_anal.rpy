@@ -13,7 +13,7 @@ init:
             orgasm_description = "orgasm_piledriver_anal",
             taboo_break_description = "taboo_break_piledriver_anal",
             verb = "ass fuck",
-            opinion_tags = ["missionary style sex","anal sex"], record_class = "Anal Sex",
+            opinion_tags = ["missionary style sex","anal sex","being submissive"], record_class = "Anal Sex",
             default_animation = blowjob_bob,
             associated_taboo = "anal_sex")
 

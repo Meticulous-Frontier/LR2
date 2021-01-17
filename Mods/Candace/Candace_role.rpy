@@ -687,7 +687,7 @@ label candace_midnight_wakeup_label():
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
     $ mc.change_location(the_person.home)
-    $ the_person.home.show_background()
+    $ mc.location.show_background()
     the_person "Finally! Let's have some fun!"
     mc.name "Wait... We need to talk first."
     the_person "God damnit why does everyone just want to talk? Just like... Let's get naked and then like... Let our bodies do the talking?"

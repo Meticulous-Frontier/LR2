@@ -52,7 +52,9 @@ init 2 python:
 
     def ophelia_ex_bf_plan_pics_requirement(person):
         # prevent conflict with planned dates
-        if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
+        if (mc.business.event_triggers_dict.get("movie_date_scheduled", False) and day%7 == 1) \
+            or (mc.business.event_triggers_dict.get("fuck_date_scheduled", False) and day%7 == 3) \
+            or (mc.business.event_triggers_dict.get("dinner_date_scheduled", False) and day%7 == 4):
             return False
         if person.location == mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
@@ -62,7 +64,9 @@ init 2 python:
 
     def ophelia_make_blowjob_pics_requirement():
         # prevent conflict with planned dates
-        if mc.business.event_triggers_dict.get("date_scheduled", False) and (day%7 == 1 or day%7 == 4):
+        if (mc.business.event_triggers_dict.get("movie_date_scheduled", False) and day%7 == 1) \
+            or (mc.business.event_triggers_dict.get("fuck_date_scheduled", False) and day%7 == 3) \
+            or (mc.business.event_triggers_dict.get("dinner_date_scheduled", False) and day%7 == 4):
             return False
         if not salon_manager.location == mall_salon:
             return False
@@ -266,7 +270,7 @@ label ophelia_give_chocolate_label():
         "As you walk into the store, the clerk recognizes you and waves."
         "You exchange a few pleasantries as you grab the usual box of dark chocolates that [the_person.title] loves."
     "You take the candy to the counter and purchase it."
-    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title]"
+    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title]."
     menu:
         "Add a serum":
             "You decide to add a serum to the candy."
@@ -799,7 +803,7 @@ label ophelia_revenge_date_label():
     mc.name "Goodnight!"
     $ scene_manager.clear_scene()
     $ mc.change_location(downtown)
-    $ downtown.show_background()
+    $ mc.location.show_background()
     "You walk home. As you are walking, you consider the events of the evening."
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
     "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
