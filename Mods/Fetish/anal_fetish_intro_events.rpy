@@ -118,8 +118,8 @@ init 50 python:
         the_person.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
         the_person.situational_obedience = {}
         the_person.max_opinion_score("anal sex")
-        the_person.core_sluttiness = 60
-        the_person.sluttiness = 60
+        the_person.core_sluttiness = 70
+        the_person.sluttiness = 70
         the_person.obedience = 0
         the_person.happiness = 100
         the_person.love = 0
