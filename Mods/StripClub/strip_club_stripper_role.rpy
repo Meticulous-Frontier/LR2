@@ -16,16 +16,9 @@ init 5 python:
         else:
             return True
 
-    # replace requirement on action to prevent CPickle errors
-    def strip_club_hire_stripper(person, role):
-        person.add_role(role)
-
-        work_location = strip_club
-        if person.has_role(bdsm_performer_role):
-            work_location = bdsm_room
-
+    def set_stripper_schedule(person):
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
-        if person.is_employee() or person is nora:
+        if person.is_employee() or person in [nora, emily, christina]:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(work_location, times = [4])
         elif person in [lily, mom, aunt]:
@@ -34,7 +27,17 @@ init 5 python:
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.set_schedule(work_location, times = [3, 4])
+        return
 
+    # replace requirement on action to prevent CPickle errors
+    def strip_club_hire_stripper(person, role):
+        person.add_role(role)
+
+        work_location = strip_club
+        if person.has_role(bdsm_performer_role):
+            work_location = bdsm_room
+
+        set_stripper_schedule(person)
         person.event_triggers_dict["stripclub_hire_day"] = day
         person.stripper_salary = calculate_stripper_salary(person)
 
