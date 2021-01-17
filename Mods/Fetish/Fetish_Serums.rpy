@@ -231,6 +231,10 @@ init -1 python:
 
     def fetish_breeding_function_on_apply(person, add_to_log):
         fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person)
+
+        if persistent.pregnancy_pref == 0:
+            return
+
         if is_breeding_fetish_unlocked():
             if person.get_opinion_score(FETISH_BREEDING_OPINION_LIST[0]) >= 2 and not person.has_started_breeding_fetish() and person.core_sluttiness > 60:
                 if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
@@ -241,9 +245,6 @@ init -1 python:
                     else:
                         #TODO throw some kind of error here to indicate that I haven't created this scenario yet
                         pass
-
-        if persistent.pregnancy_pref == 0:
-            return
 
         if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) >= 50 and person.on_birth_control:
             person.on_birth_control = False

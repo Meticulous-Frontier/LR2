@@ -6,7 +6,7 @@ init -1 python:
                     return True
         return False
 
-    def breeding_fetish_non_employee_intro_requirement(the_person):
+    def breeding_fetish_generic_intro_requirement(the_person):
         if the_person.location != the_person.home:
             return True
         return False
@@ -73,7 +73,7 @@ init -1 python:
 
 init 2 python:
     # breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
-    breeding_fetish_non_employee_intro = Action("Non Employee breeding fetish intro", breeding_fetish_non_employee_intro_requirement, "breeding_fetish_non_employee_intro_label")
+    breeding_fetish_non_employee_intro = Action("Non Employee breeding fetish intro", breeding_fetish_generic_intro_requirement, "breeding_fetish_generic_intro_label")
     breeding_fetish_family_intro = Action("Family Member breeding fetish intro", breeding_fetish_family_intro_requirement, "breeding_fetish_family_intro_label")
     breeding_fetish_mom_intro = Action("Mom breeding fetish intro", breeding_fetish_mom_intro_requirement, "breeding_fetish_mom_intro_label")
     breeding_fetish_lily_intro = Action("Lily breeding fetish intro", breeding_fetish_lily_intro_requirement, "breeding_fetish_lily_intro_label")
@@ -96,6 +96,24 @@ init 3 python:
         person.event_triggers_dict["LastBreedingFetish"] = day
         # add_breed_me_collar_to_base_outfit(person)
         return
+
+init 50 python:
+    def debug_set_stats_for_breeding_fetish_mins(the_person):
+        the_person.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
+        the_person.situational_obedience = {}
+        the_person.arousal = 0
+        the_person.max_opinion_score("bareback sex")
+        the_person.core_sluttiness = 60
+        the_person.sluttiness = 60
+        the_person.obedience = 0
+        the_person.happiness = 100
+        the_person.love = 0
+        the_person.on_birth_control = False
+        return
+
+    def abort_breeding_fetish_intro(the_person): #Use this function to exit a anal fetish scene for whatever reason (something fails, MC choice, etc.)
+        the_person.event_triggers_dict["breeding_fetish_start"] = False
+        the_person.remove_role(breeding_fetish_role)
 
 #Fetish Intro Labels
 label breeding_fetish_employee_intro_label(the_person):
@@ -150,7 +168,7 @@ label breeding_fetish_employee_intro_label(the_person):
     mc.name "...and didn't stop until I dump my cum deep?"
     the_person.char "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _employee_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _employee_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person.char "Oh god! Its so deep! Oh thank you so much [the_person.mc_title]!"
     else:
@@ -228,7 +246,7 @@ label breeding_fetish_family_intro_label(the_person):
         "You finish pulling your cock out and begin to rub it along her slit."
     else:
         "As you finish pulling your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
     $ the_person.change_arousal(10)
     if the_person.love < 0:
         the_person "I can't believe I'm saying this, and with you of all people..."
@@ -237,7 +255,7 @@ label breeding_fetish_family_intro_label(the_person):
         the_person "My brain says this is wrong, but my body keeps saying its so right!"
         the_person "Fuck me [the_person.mc_title], I want you to fill me with your cum!"
     "You run you cock along her slit a couple more times, then start to push it inside. She moans as you bottom out inside of her and start to fuck."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _family_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _family_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     if the_person.knows_pregnant():
@@ -254,7 +272,7 @@ label breeding_fetish_family_intro_label(the_person):
     "[the_person.possessive_title] now has a fetish to get bred by you!"
     return #Needs testing
 
-label breeding_fetish_non_employee_intro_label(the_person): #This function to be used for generic non employee, non unique girls
+label breeding_fetish_generic_intro_label(the_person): #This function to be used for generic non employee, non unique girls
     $ the_person.arousal = 40
     "As you walk into [mc.location.name], you notice [the_person.title]. She notices you also and approaches."
     $ the_person.draw_person()
@@ -317,7 +335,7 @@ label breeding_fetish_non_employee_intro_label(the_person): #This function to be
     $ the_person.change_arousal(10) #60
     the_person "Just shove it in! I'm ready!"
     "You decide to give her what she wants, for now. You grab her hips and then push yourself inside of her sopping wet cunt."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True) from _generic_anyone_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _generic_anyone_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     "When you finish, she lays back, just rubbing her hand along her belly."
@@ -601,7 +619,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 the_person.char "Come on [the_person.mc_title], you know what I need!"
                 "Without any hesitation you slide your cock into her cunt."
                 $ the_person.break_taboo("vaginal_sex")
-                call fuck_person(the_person, start_position = bent_over_breeding, skip_intro = True, position_locked = True) from _call_steph_breeding_fetish_intro_01
+                call fuck_person(the_person, start_position = bent_over_breeding, skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_breeding_fetish_intro_01
                 $ add_breeding_fetish(the_person)
                 the_person.char "Oh god... It's even better than I dreamed about last night."
                 "[the_person.possessive_title] takes a minute to recover before standing up. She's rubbing her belly."
@@ -634,7 +652,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
                 "Without any hesitation you slide your cock into her cunt."
                 $ the_person.break_taboo("vaginal_sex")
-                call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_steph_bimbo_breeding_fetish_01
+                call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_01
                 $ add_breeding_fetish(the_person)
                 the_person.char "That's it! That's just what I was hoping for."
                 $ scene_manager.update_actor(the_person, position = "stand2")
@@ -698,7 +716,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 the_person.char "Stick it in [the_person.mc_title]! I want to earn my special present!"
                 "Without any hesitation you slide your cock into her cunt."
                 $ the_person.break_taboo("vaginal_sex")
-                call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_steph_bimbo_breeding_fetish_03
+                call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_03
                 $ add_breeding_fetish(the_person)
                 the_person.char "That's it! That's just what I was hoping for."
                 $ scene_manager.update_actor(the_person, position = "stand2")
@@ -726,7 +744,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
         # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
-        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = False) from _call_steph_breeding_fetish_cowgirl_01
+        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = False, asked_for_condom = True) from _call_steph_breeding_fetish_cowgirl_01
         $ add_breeding_fetish(the_person)
         the_person.char "Oh god... It's even better than I dreamed about last night."
         "[the_person.possessive_title] takes a minute to recover before standing up. She rubs her belly."
@@ -768,7 +786,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
         "She looks at you expectantly."
         the_person.char "Well? Why are you still wearing clothes? You said you would help!"
         # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
-        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), skip_intro = False, allow_continue = False) from _call_breeding_fetish_steph_intro_02
+        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), skip_intro = False, allow_continue = False, asked_for_condom = True) from _call_breeding_fetish_steph_intro_02
         $ add_breeding_fetish(the_person)
         the_person.char "Oh god... It's even better than I dreamed about last night."
         "[the_person.possessive_title] takes a minute to recover before standing up. She rubs her belly."
@@ -841,7 +859,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     the_person.char "Stick it in [the_person.mc_title]! Fuck me hard and cum as deep as you can!"
     "You grab her hips to stop the wiggling. You line yourself up with her thirsty cunt and push into her. She gasps when you bottom out."
     the_person.char "Oh yes! Give it to me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True) from _starbuck_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person.char "Oh god! Baby making sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
@@ -912,7 +930,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
     "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
     the_person.char "Come fill me up, [the_person.mc_title]!"
-    call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_05
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True, asked_for_condom = True) from _sarah_ask_for_baby_05
     if the_person.has_creampie_cum():
         the_person.char "Oh my god... we actually did it..."
         "She grabs an extra pillow and puts it under her butt so her hips are elevated."
@@ -989,7 +1007,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         the_person.char "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person.char "Yes!!!"
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True) from _bimbo_candace_gets_breeding_fetish_01
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, asked_for_condom = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
         else:
@@ -1054,7 +1072,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person.char "Yes!!!"
 
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True) from _bimbo_candace_gets_breeding_fetish_02
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, asked_for_condom = True) from _bimbo_candace_gets_breeding_fetish_02
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
             if the_person.knows_pregnant():
@@ -1074,5 +1092,111 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
     return #Needs testing #Needs testing
 
 label breeding_fetish_ashley_intro_label():
+    pass
+    return
+
+label unit_test_breeding_fetish_intro():
+
+    "Generic intros"
+    $ debug_set_stats_for_breeding_fetish_mins(mom)
+    "Method: breeding_fetish_family_intro_label"
+    call breeding_fetish_family_intro_label(mom) from _unit_test_breeding_fetish_intro_01
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(starbuck)
+    "Method: breeding_fetish_generic_intro_label"
+    call breeding_fetish_generic_intro_label(starbuck) from _unit_test_breeding_fetish_intro_02
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(stephanie)
+    "Method: breeding_fetish_employee_intro_label"
+    call  breeding_fetish_employee_intro_label(stephanie) from _unit_test_breeding_fetish_intro_03
+    $ mc.energy = mc.max_energy
+
+    $ stephanie.remove_role(breeding_fetish_role)
+    $ mom.remove_role(breeding_fetish_role)
+    $ starbuck.remove_role(breeding_fetish_role)
+
+    "Unique intros"
+    $ debug_set_stats_for_breeding_fetish_mins(mom)
+    "Method: breeding_fetish_mom_intro_label"
+    call breeding_fetish_mom_intro_label() from _unit_test_breeding_fetish_intro_04
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(lily)
+    "Method: breeding_fetish_lily_intro_label"
+    call breeding_fetish_lily_intro_label() from _unit_test_breeding_fetish_intro_05
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(aunt)
+    "Method: breeding_fetish_rebecca_intro_label"
+    call breeding_fetish_rebecca_intro_label() from _unit_test_breeding_fetish_intro_06
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(cousin)
+    "Method: breeding_fetish_gabrielle_intro_label"
+    call breeding_fetish_gabrielle_intro_label() from _unit_test_breeding_fetish_intro_07
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(stephanie)
+    "Method: breeding_fetish_stephanie_intro_label"
+    call breeding_fetish_stephanie_intro_label() from _unit_test_breeding_fetish_intro_08
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(alexia)
+    "Method: breeding_fetish_alex_intro_label"
+    call breeding_fetish_alex_intro_label() from _unit_test_breeding_fetish_intro_09
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(nora)
+    "Method: breeding_fetish_nora_intro_label"
+    call breeding_fetish_nora_intro_label() from _unit_test_breeding_fetish_intro_10
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(emily)
+    "Method: breeding_fetish_emily_intro_label"
+    call breeding_fetish_emily_intro_label() from _unit_test_breeding_fetish_intro_11
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(christina)
+    "Method: breeding_fetish_christina_intro_label"
+    call breeding_fetish_christina_intro_label() from _unit_test_breeding_fetish_intro_12
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(starbuck)
+    "Method: breeding_fetish_starbuck_intro_label"
+    call breeding_fetish_starbuck_intro_label() from _unit_test_breeding_fetish_intro_13
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(sarah)
+    "Method: breeding_fetish_sarah_intro_label"
+    call breeding_fetish_sarah_intro_label() from _unit_test_breeding_fetish_intro_14
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(salon_manager)
+    "Method: breeding_fetish_ophelia_intro_label"
+    call breeding_fetish_ophelia_intro_label() from _unit_test_breeding_fetish_intro_15
+    $ mc.energy = mc.max_energy
+
+    $ create_debug_candace()
+    $ debug_set_stats_for_breeding_fetish_mins(candace)
+    "Method: breeding_fetish_candace_intro_label"
+    call breeding_fetish_candace_intro_label() from _unit_test_breeding_fetish_intro_16
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(dawn)
+    "Method: breeding_fetish_dawn_intro_label"
+    call breeding_fetish_dawn_intro_label() from _unit_test_breeding_fetish_intro_17
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(erica)
+    "Method: breeding_fetish_erica_intro_label"
+    call breeding_fetish_erica_intro_label() from _unit_test_breeding_fetish_intro_18
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_breeding_fetish_mins(ashley)
+    "Method: breeding_fetish_ashley_intro_label"
+    call breeding_fetish_ashley_intro_label() from _unit_test_breeding_fetish_intro_19
+    $ mc.energy = mc.max_energy
 
     return
