@@ -114,6 +114,17 @@ init 50 python:
 
         return anal_list
 
+    def debug_set_stats_for_anal_fetish_mins(the_person):
+        the_person.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
+        the_person.situational_obedience = {}
+        the_person.max_opinion_score("anal sex")
+        the_person.core_sluttiness = 60
+        the_person.sluttiness = 60
+        the_person.obedience = 0
+        the_person.happiness = 100
+        the_person.love = 0
+        return
+
 ### Function labels
 
 label anal_fetish_employee_intro_label(the_person):
@@ -269,7 +280,7 @@ label anal_fetish_family_intro_label(the_person):
         the_person "I know we are related, but I think I know how we could get around that."
     elif the_person.has_taboo("vaginal_sex") and not the_person.has_taboo("anal_sex"): #You've taken her ass before but not her pussy
         the_person "I know we've done it this way before, but I think I've really started to enjoy it this way."
-    elif the_eprson.has_taboo("anal_sex") and the_person.has_taboo("vaginal_sex"): # You haven't fucked at all
+    elif the_person.has_taboo("anal_sex") and the_person.has_taboo("vaginal_sex"): # You haven't fucked at all
         the_person "I umm... I'm not ready to go all the way with you... but I think I have an idea for something that would COULD do..."
     else:
         the_person "What can I say, the video reminded me of you a little bit..."
@@ -693,3 +704,109 @@ label anal_fetish_erica_intro_label():
 
 label anal_fetish_ashley_intro_label():
     return False
+
+label unit_test_anal_fetish_intro():
+
+    "Generic intros"
+    $ debug_set_stats_for_anal_fetish_mins(mom)
+    "Method: anal_fetish_family_intro_label"
+    call anal_fetish_family_intro_label(mom) from _unit_test_anal_fetish_intro_01
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(starbuck)
+    "Method: anal_fetish_generic_intro_label"
+    call anal_fetish_generic_intro_label(starbuck) from _unit_test_anal_fetish_intro_02
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(stephanie)
+    "Method: anal_fetish_employee_intro_label"
+    call  anal_fetish_employee_intro_label(stephanie) from _unit_test_anal_fetish_intro_03
+    $ mc.energy = mc.max_energy
+
+    $ stephanie.remove_role(anal_fetish_role)
+    $ mom.remove_role(anal_fetish_role)
+    $ starbuck.remove_role(anal_fetish_role)
+
+    "Unique intros"
+    $ debug_set_stats_for_anal_fetish_mins(mom)
+    "Method: anal_fetish_mom_intro_label"
+    call anal_fetish_mom_intro_label() from _unit_test_anal_fetish_intro_04
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(lily)
+    "Method: anal_fetish_lily_intro_label"
+    call anal_fetish_lily_intro_label() from _unit_test_anal_fetish_intro_05
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(aunt)
+    "Method: anal_fetish_rebecca_intro_label"
+    call anal_fetish_rebecca_intro_label() from _unit_test_anal_fetish_intro_06
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(cousin)
+    "Method: anal_fetish_gabrielle_intro_label"
+    call anal_fetish_gabrielle_intro_label() from _unit_test_anal_fetish_intro_07
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(stephanie)
+    "Method: anal_fetish_stephanie_intro_label"
+    call anal_fetish_stephanie_intro_label() from _unit_test_anal_fetish_intro_08
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(alexia)
+    "Method: anal_fetish_alex_intro_label"
+    call anal_fetish_alex_intro_label() from _unit_test_anal_fetish_intro_09
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(nora)
+    "Method: anal_fetish_nora_intro_label"
+    call anal_fetish_nora_intro_label() from _unit_test_anal_fetish_intro_10
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(emily)
+    "Method: anal_fetish_emily_intro_label"
+    call anal_fetish_emily_intro_label() from _unit_test_anal_fetish_intro_11
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(christina)
+    "Method: anal_fetish_christina_intro_label"
+    call anal_fetish_christina_intro_label() from _unit_test_anal_fetish_intro_12
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(starbuck)
+    "Method: anal_fetish_starbuck_intro_label"
+    call anal_fetish_starbuck_intro_label() from _unit_test_anal_fetish_intro_13
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(sarah)
+    "Method: anal_fetish_sarah_intro_label"
+    call anal_fetish_sarah_intro_label() from _unit_test_anal_fetish_intro_14
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(salon_manager)
+    "Method: anal_fetish_ophelia_intro_label"
+    call anal_fetish_ophelia_intro_label() from _unit_test_anal_fetish_intro_15
+    $ mc.energy = mc.max_energy
+
+    $ create_debug_candace()
+    $ debug_set_stats_for_anal_fetish_mins(candace)
+    "Method: anal_fetish_candace_intro_label"
+    call anal_fetish_candace_intro_label() from _unit_test_anal_fetish_intro_16
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(dawn)
+    "Method: anal_fetish_dawn_intro_label"
+    call anal_fetish_dawn_intro_label() from _unit_test_anal_fetish_intro_17
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(erica)
+    "Method: anal_fetish_erica_intro_label"
+    call anal_fetish_erica_intro_label() from _unit_test_anal_fetish_intro_18
+    $ mc.energy = mc.max_energy
+
+    $ debug_set_stats_for_anal_fetish_mins(ashley)
+    "Method: anal_fetish_ashley_intro_label"
+    call anal_fetish_ashley_intro_label() from _unit_test_anal_fetish_intro_19
+    $ mc.energy = mc.max_energy
+
+    return
