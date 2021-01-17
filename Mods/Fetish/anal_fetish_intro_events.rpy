@@ -299,6 +299,7 @@ label anal_fetish_family_intro_label(the_person):
     else:
         the_person "What can I say, the video reminded me of you a little bit..."
     "She holds her phone up. On the screen is a woman, bent over with her panties pulled down, getting fucked in the ass."
+    $ the_person.add_situational_slut("situation",20, "I want to recreate the video!")
     "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
     if the_person in get_anal_fetish_unique_dialogue_list():
         "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
@@ -366,6 +367,7 @@ label anal_fetish_family_intro_label(the_person):
     mc.name "A tempting offer to be sure."
     "You part ways with [the_person.title], confident that her new found anal fetish will bring you a lot of pleasure in the future."
     $ add_anal_fetish(the_person)
+    $ the_person.clear_situational_slut("situation")
     $ clear_scene() #TODO does this leave you talking to the girl? If so figure out how to part ways cleanly here.
     return True
 
@@ -517,7 +519,7 @@ label anal_fetish_lily_intro_label():
         starbuck "Hello! Welcome to Starbuck's Sex Shop! It's so great to see a couple come in."
     starbuck "Is there anything I can help you find?"
     $ the_person.draw_person(position = "stand4")
-    "[the_person.possesive_title] takes the lead."
+    "[the_person.possessive_title] takes the lead."
     the_person "Yeah so, I was wondering, do you sell a special type of strap on that came be used to... umm... strap on to a guy so he can fuck your pussy and ass at the same time?"
     "You can barely believe your ears. You knew that the serums you had been giving [the_person.title] were starting to really corrupt her, but you had no idea she was ready for something like this."
     "And for her instapic channel? It's almost too good to be true."

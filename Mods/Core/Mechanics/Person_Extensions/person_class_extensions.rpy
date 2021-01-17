@@ -2172,12 +2172,12 @@ init -1 python:
         return
 
     def roleplay_possessive_title_swap(self, new_title):
-        self.event_triggers_dict["backup_possessive_title"] = self.possesive_title
+        self.event_triggers_dict["backup_possessive_title"] = self.possessive_title
         self.set_possessive_title(new_title)
         return
 
     def roleplay_possessive_title_revert(self):
-        self.possesive_title = self.event_triggers_dict.get("backup_possessive_title", self.name)
+        self.possessive_title = self.event_triggers_dict.get("backup_possessive_title", self.name)
         return
 
     def roleplay_personality_swap(self, personality):

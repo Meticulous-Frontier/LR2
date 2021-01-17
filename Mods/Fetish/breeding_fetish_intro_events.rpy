@@ -202,14 +202,14 @@ label breeding_fetish_employee_intro_label(the_person):
 
 label breeding_fetish_family_intro_label(the_person):
     $ the_person.draw_person(position = "back_peek")
-    "You walk into [the_person.possesive_title]'s bedroom. She is looking at herself in the mirrow, but turns to when she hears you walk in."
+    "You walk into [the_person.possessive_title]'s bedroom. She is looking at herself in the mirror, but turns to when she hears you walk in."
     the_person "Oh hey [the_person.mc_title]. I was just getting ready to head for bed."
     "She takes one last look at herself in the mirror, then turns around."
     $ the_person.draw_person(position = the_person.idle_pose)
     the_person "Do you want to cuddle with me for a little bit?"
     mc.name "Sounds nice."
     $ the_person.draw_person(position = "missionary")
-    "You lay down next to [the_person.possesive_title] as she lays down on her back. You rest your head on her chest and put your arm across her."
+    "You lay down next to [the_person.possessive_title] as she lays down on her back. You rest your head on her chest and put your arm across her."
     "For a while you simply enjoy the heat of each other's bodies. She is the first to break the silence."
     if the_person.knows_pregnant():
         the_person "Do you think its weird, if I told you I love this feeling? Being pregnant, making babies. It's like my body was made to do this, over and over again."
@@ -236,7 +236,7 @@ label breeding_fetish_family_intro_label(the_person):
         "Too risky, leave her alone":
             pass
             return
-    "You decide it's time to train [the_person.possesive_title] to be your own personal breeding stock."
+    "You decide it's time to train [the_person.possessive_title] to be your own personal breeding stock."
     "You push yourself up and on top of [the_person.title]. She puts her arms around you as your body begins to press against hers."
     mc.name "Honestly, I think its pretty normal to have desires like that."
     the_person "Yeah..."
@@ -252,6 +252,7 @@ label breeding_fetish_family_intro_label(the_person):
     mc.name "Shhh, its okay. You can trust me, right? We're both consenting adults, who just happen to be related."
     "She bites her lip. It's clear from the look in her eyes that she wants it badly, but is afraid to take the leap."
     mc.name "Tell you what, let's go a little farther, and if it feels wrong we can stop."
+    $ the_person.add_situational_slut("situation",20, "I can stop if I want to...")
     "She nods her head in agreement."
     if the_person.outfit.vagina_available():
         "You finish pulling your cock out and begin to rub it along her slit."
@@ -281,6 +282,7 @@ label breeding_fetish_family_intro_label(the_person):
     the_person "Yes! Yes sir! I'll be ready, don't worry!"
     "You say goodbye to [the_person.title]."
     "[the_person.possessive_title] now has a fetish to get bred by you!"
+    $ the_person.clear_situational_slut("situation")
     return #Needs testing
 
 label breeding_fetish_generic_intro_label(the_person): #This function to be used for generic non employee, non unique girls
@@ -339,7 +341,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     if the_person.outfit.vagina_available():
         "You pullyour cock out and begin to rub it along her inviting slit."
     else:
-        "As you pull your cock out, [the_person.possesive_title] pulls her bottoms off."
+        "As you pull your cock out, [the_person.possessive_title] pulls her bottoms off."
         $ the_person.strip_outfit(exclude_upper = True)
         "When she finishes you run your cock all along her inviting slit."
 
@@ -602,7 +604,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
         the_person "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things... might as well enjoy my new life!"
         "This is some dangerous territory. If you let her go through with this, you are sure her sister will be pissed! Do you try to talk her down? Or let her do it?"
         menu:
-            "Try to talk her down" if mcisma > 6:
+            "Try to talk her down" if mc.charisma > 6:
                 mc.name "Stop. You don't have to do that?"
                 "She looks at the serum in her hand. Then back at you."
                 the_person "Ummm, I don't know... I'm pretty sure I do."
@@ -674,7 +676,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 "Looks like [the_person.title] has a breeding fetish now! But she is also a bimbo."
                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 
-            "Try to talk her down\n{color=#ff0000}{size=18}Requires High Charisma{/size}{/color} (disabled)" if mcisma <= 6:
+            "Try to talk her down\n{color=#ff0000}{size=18}Requires High Charisma{/size}{/color} (disabled)" if mc.charisma <= 6:
                 pass
 
     elif the_person.love < 70 and not the_person.has_role(girlfriend_role):   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
@@ -815,6 +817,14 @@ label breeding_fetish_emily_intro_label():
 
 label breeding_fetish_christina_intro_label():
     "Christina doesn't have a breeding fetish written yet"
+    return
+
+label breeding_fetish_alex_intro_label():
+    "Alexia doesn't have a breeding fetish written yet"
+    return
+
+label breeding_fetish_nora_intro_label():
+    "Nora doesn't have a breeding fetish written yet"
     return
 
 label breeding_fetish_starbuck_intro_label():  #Needs TEsting
@@ -1100,6 +1110,10 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
 
 label breeding_fetish_ashley_intro_label():
     "Ashley doesn't have a breeding fetish written yet"
+    return
+
+label breeding_fetish_dawn_intro_label():
+    "Dawn doesn't have a breeding fetish written yet"
     return
 
 label unit_test_breeding_fetish_intro():

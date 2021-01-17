@@ -170,7 +170,7 @@ label breeding_fetish_happy_breeder_crisis_label():
     the_person "I kept thinking about the baby growing inside of me and I started getting all worked up..."
     "She stumbles over her words for a second."
     the_person "Oh geeze... I just couldn't stop thinking about how good it feels when you fuck me!"
-    "You are hardly surprised. [the_person.possesive_title]'s breeding fetish makes her a cum starved slut..."
+    "You are hardly surprised. [the_person.possessive_title]'s breeding fetish makes her a cum starved slut..."
     the_person "I just couldn't help it... will you please let me stay here tonight?"
     "[the_person.possessive_title] looks at you with hopeful eyes."
     menu:
@@ -261,7 +261,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                 "The view of [the_person.possessive_title] on her knees before you, happy with your cock in her mouth is extremely arousing. It isn't long until you are fully erect."
 
             mc.name "Okay [the_person.title], I'm ready. Now bend over and get ready for another round."
-            "[the_person.possesive_title] obediently does as you ask and bends over your bed as you stand up and get behind her."
+            "[the_person.possessive_title] obediently does as you ask and bends over your bed as you stand up and get behind her."
             $ the_person.draw_person(position = "standing_doggy")
             the_person "Come and get it, [the_person.mc_title]... its yours for the taking!"
             "You line yourself up with her soaking wet slit and push yourself in."
