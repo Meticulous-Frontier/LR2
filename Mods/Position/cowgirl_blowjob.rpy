@@ -13,7 +13,7 @@
             orgasm_description = "orgasm_cowgirl_blowjob",
             taboo_break_description = "taboo_break_cowgirl_blowjob",
             verb = "mouth fuck",
-            opinion_tags = ["giving blowjobs", "facial", "oral creampie", "get mc off"], record_class = "Blowjobs",
+            opinion_tags = ["giving blowjobs", "facial", "drinking cum", "oral creampie", "get mc off"], record_class = "Blowjobs",
             default_animation = idle_wiggle_animation, modifier_animations = {"blowjob":blowjob_bob},
             associated_taboo = "sucking_cock")
 
