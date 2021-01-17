@@ -16,7 +16,7 @@ init -1 python:
                 people_to_process.remove(found)
 
         # cleanup crisis events where person is in argument list
-        for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]
+        for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]:
             items = []
             for crisis in crisis_store:
                 args = crisis.args
