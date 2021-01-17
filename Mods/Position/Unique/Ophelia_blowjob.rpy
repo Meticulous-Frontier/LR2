@@ -13,7 +13,7 @@
             orgasm_description = "orgasm_Ophelia_blowjob",
             taboo_break_description = "taboo_break_Ophelia_blowjob",
             verb = "mouth fuck",
-            opinion_tags = ["giving blowjobs"], record_class = "Blowjobs",
+            opinion_tags = ["giving blowjobs", "dinking cum"], record_class = "Blowjobs",
             default_animation = idle_wiggle_animation, modifier_animations = {"blowjob":blowjob_bob},
             associated_taboo = "sucking_cock")
 

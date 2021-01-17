@@ -7,13 +7,13 @@ init 5 python:
     def add_movie_date_action(person):
         movie_action = Action("Movie date", evening_date_trigger, "movie_date_label", args=person, requirement_args=1) #it happens on a tuesday.
         mc.business.add_mandatory_crisis(movie_action)
-        mc.business.event_triggers_dict["date_scheduled"] = True
+        mc.business.event_triggers_dict["movie_date_scheduled"] = True
         return
 
     def add_dinner_date_action(person):
         dinner_action = Action("Dinner date", evening_date_trigger, "dinner_date_label", args=person, requirement_args=4) #it happens on a friday, so day%7 == 4
         mc.business.add_mandatory_crisis(dinner_action)
-        mc.business.event_triggers_dict["date_scheduled"] = True
+        mc.business.event_triggers_dict["dinner_date_scheduled"] = True
         return
 
 label movie_date_plan_enhanced_label(the_person):

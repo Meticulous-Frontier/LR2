@@ -76,10 +76,10 @@ label punishment_service_mc_label(the_person, the_infraction):
     "Finally relenting, [the_person.possessive_title] finally opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
     $ the_person.add_situational_obedience("punishment", 40, "I'm being punished, I don't have any right to refuse.")
     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False) from _call_custom_bj_punishment_01
-    $ report = _return
+    $ the_report = _return
     $ the_person.clear_situational_obedience("punishment")
 
-    if report.get("guy orgasms", 0) == 0: #She didn't finish you off. Berate her verbally.
+    if the_report.get("guy orgasms", 0) == 0: #She didn't finish you off. Berate her verbally.
         mc.name "I'm sorry, but that was not an acceptable performance. It seems you can't even get something as basic as sucking my cock done right."
         the_person "I'm... I'm sorry sir... I tried my best..."
         mc.name "I have a new punishment for you. I want you to practice sucking cock for the next week. Then come back to me and try again."
@@ -124,9 +124,9 @@ label employee_cocksucking_practice_report_label(the_person):
     "Finally relenting, [the_person.possessive_title] finally opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
     $ the_person.add_situational_obedience("punishment", 40, "I'm being punished, I don't have any right to refuse.")
     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False) from _call_custom_bj_punishment_02
-    $ report = _return
+    $ the_report = _return
     $ the_person.clear_situational_obedience("punishment")
-    if report.get("guy orgasms", 0) == 0: #She didn't finish you off. Berate her verbally.
+    if the_report.get("guy orgasms", 0) == 0: #She didn't finish you off. Berate her verbally.
         mc.name "God, that was awful. Are you sure you've been practicing?"
         the_person "I'm... I'm sorry sir... I tried my best..."
         mc.name "Fine... next time I'll just have you service me with a different hole."

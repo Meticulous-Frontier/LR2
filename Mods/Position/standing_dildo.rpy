@@ -13,7 +13,7 @@ init:
             orgasm_description = "orgasm_standing_dildo",
             taboo_break_description = "taboo_break_standing_dildo",
             verb = "dildo",
-            opinion_tags = ["being fingered"], record_class = "Insertions",
+            opinion_tags = ["being fingered", "sex standing up"], record_class = "Insertions",
             default_animation = blowjob_bob,
             associated_taboo = "touching_vagina")
         # don't add to list of positions, you need to unlock it ;)
