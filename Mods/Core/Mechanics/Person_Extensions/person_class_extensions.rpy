@@ -16,14 +16,17 @@ init -1 python:
                 people_to_process.remove(found)
 
         # cleanup crisis events where person is in argument list
-        for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]:
+        for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]
+            items = []
             for crisis in crisis_store:
                 args = crisis.args
                 if not isinstance(args, list):
                     args = [args]
 
                 if any(x for x in args if x == self):
-                    crisis_store.remove(crisis)
+                    items.append(crisis)
+            for x in items:
+                crisis_store.remove(crisis)
 
         # remove from business teams
         for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
