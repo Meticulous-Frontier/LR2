@@ -37,6 +37,9 @@ init 1 python:
         return False
 
     def anal_fetish_stephanie_intro_requirement():
+        if mc.business.is_open_for_business() and mc.is_at_work():
+            if renpy.random.randint(0,100) < 20 :
+                return True
         return False
 
     def anal_fetish_alex_intro_requirement():
@@ -94,6 +97,7 @@ init 2 python: #Other anal fetish related python code
     anal_fetish_family_intro = Action("Family Anal Fetish Intro", anal_fetish_family_intro_requirement, "anal_fetish_family_intro_label")
     anal_fetish_mom_intro = Action("Jennifer Anal Fetish Intro", anal_fetish_mom_intro_requirement, "anal_fetish_mom_intro_label")
     anal_fetish_lily_intro = Action("Lily Anal Fetish Intro", anal_fetish_lily_intro_requirement, "anal_fetish_lily_intro_label")
+    anal_fetish_stephanie_intro = Action("Stephanie Anal Fetish Intro", anal_fetish_stephanie_intro_requirement, "anal_fetish_stephanie_intro_label")
     anal_fetish_starbuck_intro = Action("Starbuck Anal Fetish Intro", anal_fetish_starbuck_intro_requirement, "anal_fetish_starbuck_intro_label")
 
     def add_anal_fetish(person):
@@ -113,7 +117,7 @@ init 2 python: #Other anal fetish related python code
 
 init 50 python:
     def get_anal_fetish_unique_dialogue_list():
-        anal_list = [lily, starbuck]
+        anal_list = [lily, starbuck, mom, stephanie]
 
         return anal_list
 
@@ -502,7 +506,10 @@ label anal_fetish_mom_intro_label():
         "Watch a Movie":
             pass
         "Too Tired":
-            pass
+            mc.name "Sorry [the_person.title], I really need some sleep tonight."
+            the_person "That's okay dear. Maybe another night."
+            $ abort_anal_fetish_intro(the_person)
+            return
     mc.name "A movie would be fun. I'll be right out."
     the_person "Great! I've got one picked out on Netflix. Make yourself comfortable on the couch, I'm just going to change into something more comfortable!"
     mc.name "Sure thing [the_person.title]"
@@ -795,8 +802,127 @@ label anal_fetish_gabrielle_intro_label():
     return False
 
 label anal_fetish_stephanie_intro_label():
-    "Stephanie's anal fetish scene has not yet been written."
-    return False
+    $ the_person = stephanie
+    if stephanie.get_fetish_count() == 0:
+        call fetish_stephanie_first_fetish_label(the_person) from _anal_fetish_steph_intro_bimbo_choice_01
+        if the_person.event_triggers_dict.get("is_bimbo", False):
+            call anal_fetish_stephanie_bimbo_label(the_person) from _anal_fetish_steph_bimbo_01
+        else:
+            call anal_fetish_stephanie_normal_label(the_person) from _anal_fetish_steph_normal_01
+    else:
+        if the_person.event_triggers_dict.get("is_bimbo", False):
+            "You get a text message from [the_person.possessive_title]."
+            the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
+            "You text her back."
+            mc.name "Sure, meet me in my office."
+            $ mc.change_location(office)
+            $ ceo_office.show_background()
+            $ scene_manager = Scene()
+            $ scene_manager.add_actor(the_person)
+            the_person "Oh hey! You're here!"
+            mc.name "Of course. Can you lock the door?"
+            the_person "Oh! Right right right..."
+            "[the_person.possessive_title] turns and locks your office door."
+            the_person "So... I saw this crazy video last night, and I thought maybe we could re-create it!"
+            mc.name "Oh yeah? What was it about?"
+            the_person "Basically, this guy with a monster cock bent his secretary over his desk and fucked in the ass!"
+            the_person "I was dreaming about it all night. Can we do it please please please pleeeeeaaaassseee???"
+            "Sounds like [the_person.title] has start to develop an anal fetish from the serums. You suppose you should indulge her with this as well."
+            mc.name "Sounds good. Get over here."
+            the_person "Oh! Yes sir. What are you going to do to me?"
+            call anal_fetish_stephanie_bimbo_label(the_person) from _anal_fetish_steph_bimbo_02
+        else:
+            if mc.location == mc.business.r_div: #Already in research
+                "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+                the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
+            else:
+                "You get a text message from [the_person.possessive_title]."
+                the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
+                "You text her back."
+            mc.name "Sure, meet me in my office."
+            $ mc.change_location(office)
+            $ ceo_office.show_background()
+            $ scene_manager = Scene()
+            $ scene_manager.add_actor(the_person)
+            "You walk with [the_person.possessive_title]. When you get there, she locks the door. You sit down at your desk."
+            mc.name "What can I do for you [the_person.title]."
+            the_person "Well, recently I've started having a new set of... well... anal fantasies. Serum related I'm sure."
+            the_person "I just wanted to make sure that we still have an understanding, right?"
+            mc.name "Certainly. I'll always be here to help you with your needs."
+            call anal_fetish_stephanie_normal_label(the_person) from _anal_fetish_steph_normal_02
+    $ the_person.apply_planned_outfit()
+    $ clear_scene()
+    return True
+
+label anal_fetish_stephanie_bimbo_label(the_person):
+    "She begins to walk around the desk toward you."
+    mc.name "That's right. You were going to bend over my desk for a minute. And if everything goes well, I have a present for you."
+    the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm bent over. I wonder what it could be!"
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person, position = "standing_doggy")
+    "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
+    $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+    "She wiggles her ass back and forth in front of you as you pull your dick out."
+    the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
+    "Without any hesitation you slide your cock into her tight hole."
+    $ the_person.break_taboo("anal_sex")
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_steph_anal_intro_bimbo_01
+    $ add_anal_fetish(the_person)
+    the_person "That's it! That's just what I was hoping for."
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another round. Normally one time is enough but..."
+    mc.name "Don't worry. I have something that can help with that."
+    "You reach inside the bottom drawer of your desk. You pull out a pink glass anal plug and hand it to her. Her eyes are transfixed on the plug."
+    mc.name "This is your present. If you can't find a nice dick to fuck your asshole and you are getting too horny, play with this for a while."
+    the_person "Oh! I thought the present was... but this looks great! Would you do the honors mister?"
+    $ scene_manager.update_actor(the_person, position = "standing_doggy")
+    "She bends over and presents her recently used ass to you. You have no problem pushing it in, with her ass being lubed up from your prior fucking."
+    the_person "Ahh! That's the spot! Could you umm... you know... move it in and out a few times? Make sure its reeeaaaallllyyyyy in there good."
+    "You grab the base and pull it out. You can feel her clenching it as you try to pull on it. When you get it out a few inches, you let it go. Her ass clenches and pulls it back in until its deep again."
+    the_person "Mmmm... that's it. Keep going!"
+    mc.name "I'm sorry, but I have to go."
+    the_person "Nnnnoooooo."
+    $ scene_manager.update_actor(the_person, position = "stand4")
+    "She stands up and turns to you."
+    the_person "Fine! I'll just go back to... whatever it was I was doing. What do I do here again?"
+    mc.name "It doesn't matter, you can take the rest of the day off."
+    the_person "Oh? That eager to get rid of me? Guess I'll just go find someone else to play with for a while. Your loss mister!"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosy ass cheeks."
+    "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
+    if the_person == mc.business.head_researcher:
+        "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
+    $ scene_manager.clear_scene()
+    return
+
+label anal_fetish_stephanie_normal_label(the_person):
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person, position = "stand4")
+    if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+        pass
+    else:
+        "She starts to strip down."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+    "She looks at you expectantly."
+    the_person "Well? Why are you still wearing clothes? You said you would help!"
+    # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
+    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_desk(), allow_continue = False) from _anal_fetish_steph_normal_intro_01
+    $ add_anal_fetish(the_person)
+    the_person "Oh god... It's even better than I dreamed about last night."
+    "[the_person.possessive_title] takes a minute to recover before standing up."
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    the_person "Okay. I hope you realize the serums also greatly increase libido."
+    mc.name "Don't worry. I have something that can help with that."
+    "You reach inside the bottom drawer of your desk. You pull out a pink glass anal plug and hand it to her. Her eyes are transfixed on the plug."
+    mc.name "If the urges get crazy strong, and I'm not available to satisfy you, use this."
+    the_person "Oh! Okay! I think I'll try it out now..."
+    "You see her reach behind herself and easily slide it in, her body still lubed up from your prior fucking."
+    the_person "Ah! Mmm I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosy ass cheeks."
+    "Looks like [the_person.title] has an anal fetish now!"
+    $ scene_manager.clear_scene()
+    return
 
 label anal_fetish_alex_intro_label():
     "Alexia's anal fetish scene has not yet been written."

@@ -107,7 +107,7 @@ init 2 python:
         return __builtin__.int((mc.int + mc.focus + mc.research_skill) / 2)
 
     def fetish_serum_coding_work_required():
-        return (100 + (fetish_serum_unlock_count() * 25))
+        return (100)
 
     def fetish_serum_update_coding_progress(progress):
         mc.business.event_triggers_dict["fetish_serum_code_progress"] =  __builtin__.int((fetish_serum_get_coding_progress() + progress))
@@ -728,8 +728,8 @@ label fetish_serum_coding_activity_label():
         $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
         $ del temp_string
     else:
-        $ temp_percent = fetish_serum_get_coding_progress() / fetish_serum_coding_work_required()
-        "You quickly review your work. Progress is coming along, you estimate it is about [temp_percent:.2] percent complete."
+        $ temp_percent = __builtin__.str(fetish_serum_get_coding_progress())
+        "You quickly review your work. Progress is coming along, you estimate it is about [temp_percent] percent complete."
         $ del temp_percent
     call advance_time() from _call_serum_progress_advance_time_01
     return
