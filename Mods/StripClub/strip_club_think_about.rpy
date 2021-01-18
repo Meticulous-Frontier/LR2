@@ -15,7 +15,7 @@ init 3302 python:
         strip_club.formalName = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button
         for person in stripclub_strippers: # rehire strippers
-            set_stripper_schedule(person)
+            set_stripper_schedule(person, strip_club)
         set_strip_club_foreclosed_stage(-1) # end story line
         starbuck.remove_on_talk_event("talk_again_buying_club_starbuck_label")
         return
