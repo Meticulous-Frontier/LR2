@@ -1,0 +1,268 @@
+init python:
+    anal_on_lap = Position(name = "Sit on Lap", slut_requirement = 75, slut_cap = 105, requires_hard = True, requires_large_tits = False,
+        position_tag = "sitting", requires_location = "Sit", requires_clothing = "Vagina", skill_tag = "Anal",
+        girl_arousal = 18, girl_energy = 10,
+        guy_arousal = 20, guy_energy = 8,
+        connections = [],
+        intro = "intro_anal_on_lap",
+        scenes = ["scene_anal_on_lap_1","scene_anal_on_lap_2"],
+        outro = "outro_anal_on_lap",
+        transition_default = "transition_default_anal_on_lap",
+        strip_description = "strip_anal_on_lap",  strip_ask_description = "strip_ask_anal_on_lap",
+        taboo_break_description = "taboo_break_anal_on_lap",
+        orgasm_description = "orgasm_anal_on_lap",
+        verb = "ass fuck",
+        opinion_tags = ["anal sex"], record_class = "Anal Sex",
+        associated_taboo = "anal_sex")
+
+    list_of_positions.append(anal_on_lap)
+
+#init 1:
+    #python:
+        #anal_on_lap.link_positions_two_way(doggy, "transition_anal_on_lap_doggy", "transition_doggy_anal_on_lap")
+
+label intro_anal_on_lap(the_girl, the_location, the_object):
+    "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
+    $ the_girl.draw_person(position = "back_peek")
+    "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
+    mc.name "I want you to sit on my lap, but I'm going to put it here..."
+    "You push your lubed up fingers against her asshole, slowly working them inside her."
+    if the_girl.has_anal_fetish():
+        the_girl.char "Ohhhh that's a great idea [the_girl.mc_title]!"
+    elif the_girl.get_opinion_score("anal sex") > 0 :
+        the_girl.char "Ahh, that feels really nice. You know I like it like that..."
+    elif the_girl.effective_sluttiness() > 110:
+        the_girl.char "Mmm, sounds kinky! Let'd do it!"
+    elif the_girl.effective_sluttiness() > 80:
+        the_girl.char "Ok, just be careful [the_girl.mc_title]..."
+    else:
+        the_girl.char "I don't know, I guess I can do that."
+
+    "You work your fingers in and out of her ass a few times, getting it good a lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
+    $ the_girl.draw_person(position = "sitting")
+    "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
+    "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
+    if the_girl.get_opinion_score("anal sex") > 0 :
+        the_girl.char "Oh my god, I can't wait to ride this thing. Mmmm I feel so full."
+        $ the_girl.discover_opinion("anal sex")
+    else:
+        the_girl "Wow! Okay... I think I'm ready... let's do this!"
+    return
+
+label scene_anal_on_lap_1(the_girl, the_location, the_object):
+    #She rides you hard
+    "[the_girl.possessive_title] reaches bag and holds on to your thighs, steadying herself as she starts to bounce her ass on your lap."
+    if the_girl.body_is_thin():
+        "[the_girl.possessive_title]'s gloriously fit ass bounces up and down on your cock."
+        "It feels amazing to plunder her tight little body."
+    elif the_girl.body_is_average():
+        "[the_girl.possessive_title]'s delicious ass bounces up and down on your cock. Her ass quakes slightly with each bounce."
+        "It feels amazing to plunder her incredible body."
+    elif the_girl.body_is_thick():
+        "[the_girl.possessive_title]'s thick ass bounces up and down on your cock. Her ass quakes with each bounce, mesmerizing you with the motions."
+        "It feels amazing to plunder her generous body."
+    elif the_girl.body_is_pregnant():
+        "[the_girl.possessive_title]'s wide ass bounces up and down on your cock. Her ass quakes slightly with each bounce."
+        "Pregnancy has made her body ripe with curves that are enticingly pleasuring you now."
+    else:
+        "[the_girl.possessive_title]'s ass bounces up and down on your cock."
+        "It feels amazing to plunder her booty."
+    $ the_girl.call_dialogue("sex_responses_anal")
+
+    if the_girl.has_anal_fetish():           #Anal fetish
+        the_girl "Yes! Oh fuck its so good!"
+        "[the_girl.possessive_title] is impaling her back door on your erection over and over with wild abandon."
+        "Her back is arched as she revels in the sensations of fulfilling her anal fetish."
+    if the_girl.get_opinion_score("taking control") > 0:
+        the_girl "I bet I can make you cum..."
+        "You can feel it as she begins to tighten her muscles around your cock rhythmically. You stop and just let yourself enjoy her efforts for a bit."
+
+    "[the_girl.title] bounces on top of you until her breathing gets ragged. Eventually, she has to stop and catch her breath."
+    the_girl "God [the_girl.mc_title]... making me ruin my own ass..."
+    "[the_girl.title] is no longer bouncing, but slowly gyrating her hips in circles around yours. The stirring motion feels great."
+    "You enjoy stirring her bowels until she catches her breath."
+
+    return
+
+
+label scene_anal_on_lap_2(the_girl, the_location, the_object):
+    #Use your arms to bounce her
+    mc.name "Here, let me take over for a minute."
+    "You reach down and grab [the_girl.possessive_title]'s hips. You lift her up slightly, then let her down, slowly setting the pace you want."
+    "Soon, you are bouncing her up and down, impaling her forbidden hole. You speed up, intent on fucking her raw."
+    if the_girl.sex_skills["Anal"] > 2 : #She begs you to fuck her good.
+        the_girl "Yes! Fuck me good [the_girl.mc_title]!"
+        "Empowered by her encouragement, you speed up, pounding her hole with wild abandon. The sound of her ass clapping against you crescendos, filling you with primaly lust."
+        menu:
+            "Talk dirty":
+                mc.name "Take it bitch! I'm gonna destroy your tight little asshole."
+                if the_girl.get_opinion_score("being submissive") > 0:
+                    $ the_girl.discover_opinion("being submissive")
+                    "[the_girl.title] just moans, leaning back against you. You sieze the opportunity."
+                    "Pulling her back against you, you reach under her legs and force them up and open, so she is spread wide."
+                    "She whimpers helplessly as you fuck her backdoor mercilessly."
+                    $ the_girl.change_arousal(10)
+                elif the_girl.effective_sluttiness() > 110:
+                    the_girl.char "Mmm, do it! Fuck me hard and make me cum!"
+                elif the_girl.effective_sluttiness() > 80:
+                    the_girl.char "Fuck [the_girl.mc_title], its so intense I might need you to slow down..."
+                else:
+                    the_girl.char "Oh god I can't take it!"
+
+            "Finger her too":
+                "You reach forward and wrap your arms around her. With one arm you lift her entire body and down, with the other you reach between her legs and shove two fingers into her cunt."
+                if the_girl.get_opinion_score("being fingered") or the_girl.get_opinion_score("being submissive") > 0:
+                    $ the_girl.discover_opinion("being fingered")
+                    "You use your fingers inside of her as extra leverage to push her up and down. She gasps at the intense sensations."
+                    the_girl.char "Fucking hell! That's so intense... oh yes [the_girl.mc_title]!"
+                    $ the_girl.change_arousal(10)
+                else:
+                    "[the_girl.title] moans as your fingers push inside of her."
+                    if the_girl.arousal > 70:
+                        "Her cunt is soaked. You time your strokes with each thrust as you fuck her ass and finger her at the same time."
+                        the_girl "Fucking hell... I'm so close!"
+                        $ the_girl.change_arousal(10)
+                    else:
+                        "You stroke her cunt with two fingers as you fuck her ass. She really enjoys the attention."
+                        $ the_girl.change_arousal(5)
+        "You keep up the pace for a while, but eventually your arms start to wear out."
+
+    else:   #She begs you to slow down
+        the_girl "Too much [the_girl.mc_title]! I'm sorry... I can't take it!"
+        "You pull her hips back toward you slowly. Her inexperienced ass yields to your cock and she sighs as you bottom out."
+        "You decide to give her a little break in the intensity of your fucking. Leaving yourself deep inside her, you knead her ass cheeks with both hands."
+        "Going nice and slow, you get her more and more used to her anal intruder."
+    return
+
+
+label outro_anal_on_lap(the_girl, the_location, the_object):
+    "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, bouncing her as hard as you can manage."
+    $ the_girl.call_dialogue("sex_responses_anal")
+    mc.name "Ah, I'm going to cum!"
+    if the_girl.get_opinion_score("anal creampies") > 0 or mc.condom:
+            the_girl.char "Yes! Shove it in deep [the_girl.mc_title]!"
+    elif mc.condom:
+        the_girl.char "That's it baby, cum for me! Show me how much you love my ass!"
+    elif the_girl.sluttiness < 80:
+        the_girl.char "Oh my god I can't believe I'm letting you do this..."
+    else:
+        the_girl.char "That's it baby, cum for me! Show me how much you love my ass!"
+    menu:
+        "Cum inside of her":
+            "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
+            "You grab her hips and force her down all the way, burying your cock deep inside her bowel as you start to spurt."
+            if mc.condom:
+                "Your cock erupts and begins filling the condom. She sighs when she feels the heat from it."
+                "She waits until your orgasm has passed completely, then pulls off. Her asshole gapes slightly."
+                the_girl.char "Wow... that was intense..."
+                return
+            if the_girl.get_opinion_score("anal creampies") > 0:
+                the_girl.char  "Yes! Fill your slut's ass with your cum! It's so hot!"
+            if the_girl.has_anal_fetish():
+                the_girl "Fuck... its so good! Oh yes!"
+                "[the_girl.possessive_title] squeals as you dump your load in her ass. Her anal fetish causes her to orgasm as you cum inside her."
+                $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
+            $ the_girl.cum_in_ass()
+            $ anal_on_lap.redraw_scene(the_girl)
+            if the_girl.get_opinion_score("anal creampies") > 0:
+                the_girl.char "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
+            elif the_girl.sluttiness > 110:
+                the_girl.char "Oh god it's so good. It makes me so happy to be pumped full like this."
+            else:
+                the_girl.char "Oh fuck, I can't believe I let you cum in my ass..."
+
+            "She waits until your orgasm has passed completely, then pulls off. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel."
+
+        "Cum on her ass":
+            mc.name "Pull off, I want to cum on your ass!"
+            if mc.condom:
+                "[the_girl.possessive_title] pulls off you at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
+            else:
+                "[the_girl.possessive_title] pulls off you at the last moment. You start stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+            if the_girl.get_opinion_score("being covered in cum") > 0:
+                 the_girl.char "Yes! Paint me with your sticky cum!"
+            if the_girl.has_cum_fetish():
+                the_girl "Fuck... its so good! Oh yes!"
+                "[the_girl.possessive_title] squeals as you paint her ass with your cum. Her cum fetish causes her to orgasm as you cum all over her."
+                $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
+            $ the_girl.cum_on_ass()
+            $ anal_on_lap.redraw_scene(the_girl)
+            if the_girl.has_cum_fetish():
+                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+                "She truly is addicted to your cum."
+            elif the_girl.sluttiness > 120:
+                the_girl.char "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
+                "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
+            else:
+                the_girl.char "Oh! Its so warm..."
+            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+    return
+
+
+label transition_default_anal_on_lap(the_girl, the_location, the_object):
+    "You sit down on the [the_object.name]. She follows and starts to sit on your lap."
+    "When she's ready, she grabs your cock and points it at her rear, then slowly lowers herself down on it. She lets out a gasp under her breath."
+    return
+
+label strip_anal_on_lap(the_girl, the_clothing, the_location, the_object):
+    #"[the_girl.possessive_title] leans forward a little further and pops off your cock."
+    $ the_girl.call_dialogue("sex_strip")
+    $ the_girl.draw_animated_removal(the_clothing, position = anal_on_lap.position_tag)
+    "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
+    "She groans happily when you push back inside of her."
+    return
+
+label strip_ask_anal_on_lap(the_girl, the_clothing, the_location, the_object):
+    the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
+    "[the_girl.char] pants as she sits on your lap."
+    menu:
+        "Let her strip":
+            mc.name "Take it off for me."
+            $ the_girl.draw_animated_removal(the_clothing, position = anal_on_lap.position_tag)
+            "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
+            "She groans happily when you resume fucking her tight rear."
+
+        "Leave it on":
+            mc.name "No, I like how you look with it on."
+            if the_girl.sluttiness < 80:
+                the_girl.char "Do you think I look sexy in it?"
+                "You speed up, fucking her faster in response to her question."
+            elif the_girl.sluttiness < 100:
+                the_girl.char "Does it make me look like a good little slut? All I want to be is your good little slut sir."
+                "She pushes her hips back into you and moans happily."
+            else:
+                the_girl.char "Does it make me look like the cum hungry slut that I am? Or is it your cock in my ass that makes me look that way?"
+                "She grinds her hips back into you and moans ecstatically."
+    return
+
+
+label orgasm_anal_on_lap(the_girl, the_location, the_object):
+    "[the_girl.possessive_title]'s having trouble staying on top of you, so you grab her hips and fuck her hard."
+    if the_girl.get_opinion_score("masturbating") > 0:
+        "She reaches down with one hand and pushes two fingers into her pussy."
+    $ the_girl.call_dialogue("climax_responses_anal")
+    "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly."
+    "After a couple of seconds [the_girl.possessive_title] sighs as she regains her senses."
+    if the_girl.get_opinion_score("anal sex") < 0:
+        the_girl.char "I can't believe I just came like that... oh god you want to keep going, don't you?"
+    else:
+        the_girl.char "Let's keep going, it still feels so good!"
+    "Still holding her, you give her a few thrusts, testing if she is ready to continue."
+    return
+
+label taboo_break_anal_on_lap(the_girl, the_location, the_object):
+    "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
+    $ the_girl.draw_person(position = "back_peek")
+    "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
+    mc.name "I want you to sit on my lap, but I'm going to put it here..."
+    $ the_girl.call_dialogue(anal_on_lap.associated_taboo+"_taboo_break")
+    "You push your lubed up fingers against her asshole, slowly working them inside her."
+
+    the_girl.char "Ok, just be careful [the_girl.mc_title]..."
+
+    "You work your fingers in and out of her ass a few times, getting it good a lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
+    $ the_girl.draw_person(position = "sitting")
+    "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
+    "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
+    the_girl "Wow! Okay... I think I'm ready... let's do this!"
+    return

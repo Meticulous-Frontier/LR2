@@ -81,13 +81,7 @@ init 3303 python:
         if person in stripclub_waitresses:
             stripclub_waitresses.remove(person)
 
-        # change to correct schedule
-        if person.is_employee() or person in [lily, mom, aunt, nora]:
-            person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule(strip_club, times = [4])
-        else:
-            person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule(strip_club, times = [3, 4])
+        set_stripper_schedule(person, strip_club)
 
         manager_role_status_acquisition(person)
 
@@ -99,13 +93,7 @@ init 3303 python:
     def promote_strip_club_manager_to_mistress(person):
         person.remove_role(manager_role)
         person.add_role(mistress_role)
-        # change default work location
-        if person.is_employee() or person in [lily, mom, aunt, nora]:
-            person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule(bdsm_room, times = [4])
-        else:
-            person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule(bdsm_room, times = [3, 4])
+        set_stripper_schedule(person, bdsm_room)
         return
 
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")

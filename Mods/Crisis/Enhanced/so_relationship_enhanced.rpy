@@ -74,13 +74,13 @@ label so_relationship_improve_label_enhanced():
             the_person.char "Hey [the_person.mc_title], I have some exciting news!"
             the_person.char "My boyfriend proposed, me and [the_person.SO_name] are getting married! I'm so excited, I just had to tell you!"
             menu:
-                "Congratulate her.":
+                "Congratulate her":
                     "You text back."
                     mc.name "Congratulations! I'm sure you're the happiest girl in the world."
                     $ the_person.change_love(1)
                     the_person.char "I am! I've got other people to tell now, talk to you later!"
 
-                "Warn her against it.":
+                "Warn her against it":
                     "You text back."
                     mc.name "I don't know if that's such a good idea. Do you even know him that well?"
                     "Her response is near instant."
