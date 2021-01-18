@@ -33,10 +33,14 @@ init 2 python:
         return result
 
     def clear_menu_items_list(menu_items):
+        start_time = time.time()
         for count in __builtin__.range(__builtin__.len(menu_items)):
             for item in [x for x in menu_items[count][1:] if x.display_key]:
                 if item.display_image:
                     renpy.stop_predict(item.display_image)
+
+        if config.debug:
+            print("Clear menu items: " + str(time.time() - start_time))
         return
 
     def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
@@ -178,8 +182,8 @@ init 2:
                                                 hovered [Function(show_menu_person, item)]
                                                 unhovered [Function(clear_scene)]
                                             action [
-                                                Function(renpy.invoke_in_thread, clear_menu_items_list, menu_items),
-                                                Return(item.return_value)
+                                                Return(item.return_value),
+                                                Function(clear_menu_items_list, menu_items)
                                             ]
                                             tooltip item.the_tooltip
                                             sensitive item.is_sensitive

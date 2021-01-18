@@ -17,16 +17,17 @@ init -1 python:
 
         # cleanup crisis events where person is in argument list
         for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]:
-            items = []
+            remove_list = []
             for crisis in crisis_store:
                 args = crisis.args
                 if not isinstance(args, list):
                     args = [args]
 
                 if any(x for x in args if x == self):
-                    items.append(crisis)
-            for x in items:
-                if x in crisis_store:
+                    remove_list.append(crisis)
+
+            for crisis in remove_list:
+                if crisis in crisis_store:
                     crisis_store.remove(crisis)
 
         # remove from business teams
