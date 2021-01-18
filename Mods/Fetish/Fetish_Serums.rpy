@@ -64,7 +64,8 @@ init -1 python:
                 mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
                 return True
             return False
-        elif the_person is mom and False:
+        elif the_person is mom:
+            mc.business.mandatory_crises_list.append(anal_fetish_mom_intro)
             return True
         elif the_person is aunt and False:
             pass
