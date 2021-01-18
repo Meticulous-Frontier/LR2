@@ -569,247 +569,111 @@ label breeding_fetish_gabrielle_intro_label():
 
 label breeding_fetish_stephanie_intro_label():  #Needs Testing
     $ the_person = stephanie
-    $ the_person.event_triggers_dict["LastBreedingFetish"] = day
-    if mc.location == mc.business.r_div: #Already in research
-        "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
-        the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
-    else:
-        "You get a text message from [the_person.possessive_title]."
-        the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
-        "You text her back."
-    mc.name "Sure, meet me in my office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
-    $ scene_manager = Scene()
-    $ scene_manager.add_actor(the_person)
-    "[the_person.title] meets you there. You sit down and notice she closes the office door... and then locks it."
-    mc.name "Have a seat. Is there something I can do for you?"
-    "She sits down and immediately starts to talk to you."
-    $ scene_manager.update_actor(the_person, position = "sitting")
-    if the_person.love < 40 and the_person.obedience < 140:
-        the_person "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
-        the_person "I went along with things for a while because... well I don't know why. I guess I was just really into the science of things."
-        "She shifts uncomfortably in her seat."
-        $ scene_manager.update_actor(the_person, display_transform = character_right)
-        the_person "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
-        the_person "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
-        the_person "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
-        the_person "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
-        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
-        the_person "For god's sake, all I can think about is you cumming inside me over and over! Until my belly swells and my tits leak milk!"
-        the_person "I'm sorry, but I can't do it anymore. You and I both know there isn't any real way to counter these effects. So, if I'm going to be get bred like a slut... I might as well enjoy it, right?"
-        mc.name "I suppose so."
-        $ scene_manager.update_actor(the_person, position = "stand4")
-        "[the_person.possessive_title] pulls a serum out of her pocket."
-        the_person "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things... might as well enjoy my new life!"
-        "This is some dangerous territory. If you let her go through with this, you are sure her sister will be pissed! Do you try to talk her down? Or let her do it?"
-        menu:
-            "Try to talk her down" if mc.charisma > 6:
-                mc.name "Stop. You don't have to do that?"
-                "She looks at the serum in her hand. Then back at you."
-                the_person "Ummm, I don't know... I'm pretty sure I do."
-                mc.name "Don't you want to know more... about the long term effects? Of the serums I mean?"
-                the_person "You hardly need me to test something like that."
-                mc.name "Who better to do it though? [the_person.title], you've been with me since the beginning. I'll help meet your needs. I know the cravings will be intense, but I promise I'll help!"
-                "Her resolve is failing. She looks down at the serum again."
-                mc.name "The science behind these chemicals is incredible. You KNOW you want to keep studying it together. With me!"
-                the_person "[the_person.mc_title]... I want to. I really do. But I'm so scared right now."
-                "You get up and walk around the desk."
-                mc.name "It's okay. Sometimes science is a risky business. We can do this. Together. Let me have the serum."
-                "She hesitates another moment. Then hands you the serum."
-                the_person "Oh god... you better be right about this!"
-                $ scene_manager.update_actor(the_person, position = "kissing")
-                "She throws her arms around you, holding you close."
-                the_person "The serums really are incredible. I do want to study them more. But first... I need you to breed me! I can't think about anything else right now!"
-                $ scene_manager.update_actor(the_person, position = "standing_doggy")
-                "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
-                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-                "She wiggles her ass back and forth in front of you as you pull your dick out of your pants."
-                the_person "Come on [the_person.mc_title], you know what I need!"
-                "Without any hesitation you slide your cock into her cunt."
-                $ the_person.break_taboo("vaginal_sex")
-                call fuck_person(the_person, start_position = bent_over_breeding, skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_breeding_fetish_intro_01
-                $ add_breeding_fetish(the_person)
-                the_person "Oh god... It's even better than I dreamed about last night."
-                "[the_person.possessive_title] takes a minute to recover before standing up. She's rubbing her belly."
-                $ scene_manager.update_actor(the_person, position = "stand2")
-                the_person "Okay... I'm in. I hope you realize the serums also greatly increase libido."
-                mc.name "Don't worry. If the urges ever get too strong, just come find me, anywhere I am I'll bend you over, even here in the lab."
-                the_person "Ah... that sounds... acceptable. Okay, let's give this a shot I guess."
-                $ scene_manager.update_actor(the_person, position = "walking_away")
-                "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, your cum running down the inside of her legs."
-                "Looks like [the_person.title] has a breeding fetish now!"
-            "Let her take it":
-                mc.name "I'm sorry, [the_person.title]. I didn't want it to be this way."
-                "She looks at you. Her resolve stumbles, but only for a moment."
-                the_person "Don't worry, I'll be a REAL ideal employee for you soon."
-                "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
-                "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
-                "She looks around a bit, seeming a bit confused about where she is."
-                the_person "That's... we were talking about something... right?"
-                "She looks at you. Her pupils are dilated and her breathing is calm."
-                mc.name "We were just about done... with the talking anyway."
-                the_person "That's right! We were going to do something else after though... right? I remember hoping that."
-                "You being to walk towards her."
-                mc.name "That's right. You were going to bend over my desk for a minute. And if everything goes well, I have a present for you."
-                the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm bent over. I wonder what it could be!"
-                $ scene_manager.update_actor(the_person, position = "standing_doggy")
-                "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
-                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-                "She wiggles her ass back and forth in front of you as you pull your dick out."
-                the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
-                "Without any hesitation you slide your cock into her cunt."
-                $ the_person.break_taboo("vaginal_sex")
-                call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_01
-                $ add_breeding_fetish(the_person)
-                the_person "That's it! That's just what I was hoping for."
-                $ scene_manager.update_actor(the_person, position = "stand2")
-                the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another round. Normally one time is enough but..."
-                mc.name "I'm sorry, you'll have to be patient if you want another round."
-                the_person "Ah... I see."
-                the_person "Fine! I'll just go back to... whatever it was I was doing. What do I do here again?"
-                mc.name "It doesn't matter, you can take the rest of the day off."
-                the_person "Oh? That eager to get rid of me? Guess I'll just go find someone else to play with for a while. Your loss mister!"
-                $ scene_manager.update_actor(the_person, position = "walking_away")
-                "You say goodbye, and [the_person.possessive_title] turns and walks out of your office. Your seed is dribbling down her leg."
-                "Looks like [the_person.title] has a breeding fetish now! But she is also a bimbo."
-                "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
-
-            "Try to talk her down\n{color=#ff0000}{size=18}Requires High Charisma{/size}{/color} (disabled)" if mc.charisma <= 6:
-                pass
-
-    elif the_person.love < 70 and not the_person.has_role(girlfriend_role):   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
-        the_person "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
-        the_person "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
-        "She shifts uncomfortably in her seat."
-        $ scene_manager.update_actor(the_person, display_transform = character_right)
-        the_person "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
-        the_person "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
-        the_person "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
-        the_person "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
-        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
-        the_person "For god's sake, all I can think about is you cumming inside me over and over! Until my belly swells and my tits leak milk!"
-        the_person "I'm going to be honest here. I trust you, I'm sure you are just doing this for research or business purposes. But I'm at a tipping point here. I need you to answer this question honestly."
-        mc.name "Okay, go ahead."
-        the_person "Are you going to... you know... take responsibility for this? The urges are SO intense! You're the only guy here, I need your word that you'll help me take of these urges!"
-        "From a pocket, she pulls out a serum that it looks like she has concocted."
-        the_person "If you can't, I guess I understand. But I don't think I can take it, knowing the serums gave me these urges... I need something to forget, and just move on with my life."
-        the_person "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things... Maybe it's time for me to start a new life. I'm sure you could use me over in marketing or something, right?"
-        "This is some dangerous territory. It sounds like she is looking to you to tell her what to do."
-        "Become a bimbo, for real? Or, if you want her to stay the sexy, intelligent research lead, you'll have to help her with her newfound fetish?"
-        "If you have her take the serum, her sister will probably get very upset!"
-        menu:
-            "Help her":
-                pass
-            "Take the Serum":
-                mc.name "I'm sorry, [the_person.title]. I didn't want it to be this way. I don't think I have the time to commit to something like that."
-                $ scene_manager.update_actor(the_person, emotion = "sad")
-                "She looks at you. You think you see a tear coming down from her eye."
-                the_person "It's okay. The science is amazing. And I'm sure I'll enjoy life as a mother."
-                "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
-                "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
-                "She looks around a bit, seeming a bit confused about where she is."
-                the_person "That's... we were talking about something... right?"
-                "She looks at you. Her pupils are dilated and her breathing is calm."
-                mc.name "We were just about done... with the talking anyway."
-                the_person "That's right! We were going to do something else after though... right? I remember hoping that."
-                "You being to walk towards her."
-                mc.name "That's right. You were going to bend over my desk for a minute. And if everything goes well, I have a present for you."
-                the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm bent over. I wonder what it could be!"
-                $ scene_manager.update_actor(the_person, position = "standing_doggy")
-                "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
-                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-                "She wiggles her ass back and forth in front of you as you pull your dick out."
-                the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
-                "Without any hesitation you slide your cock into her cunt."
-                $ the_person.break_taboo("vaginal_sex")
-                call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_03
-                $ add_breeding_fetish(the_person)
-                the_person "That's it! That's just what I was hoping for."
-                $ scene_manager.update_actor(the_person, position = "stand2")
-                the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another round. Normally one time is enough but..."
-                mc.name "I'm sorry, you'll have to be patient if you want another round."
-                the_person "Ah... I see."
-                the_person "Fine! I'll just go back to... whatever it was I was doing. What do I do here again?"
-                mc.name "It doesn't matter, you can take the rest of the day off."
-                the_person "Oh? That eager to get rid of me? Guess I'll just go find someone else to play with for a while. Your loss mister!"
-                $ scene_manager.update_actor(the_person, position = "walking_away")
-                "You say goodbye, and [the_person.possessive_title] turns and walks out of your office. Your seed is dribbling down her leg."
-                "Looks like [the_person.title] has a breeding fetish now! But she is also a bimbo."
-                "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
-                $ clear_scene()
-                return
-        "She gives a deep sigh of relief."
-        the_person "You have NO idea how glad I am to hear that."
-        "[the_person.possessive_title] stands up."
-        $ scene_manager.update_actor(the_person, position = "stand4")
-        if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
-            pass
+    if stephanie.get_fetish_count() == 0:
+        call fetish_stephanie_first_fetish_label(the_person) from __steph_intro_bimbo_choice_01
+        if the_person.event_triggers_dict.get("is_bimbo", False):
+            call breeding_fetish_stephanie_bimbo_label(the_person) from _breeding_fetish_steph_bimbo_01
         else:
-            "She starts to strip down."
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-        "She looks at you expectantly."
-        the_person "Well? Why are you still wearing clothes? You said you would help!"
-        # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
-        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = False, asked_for_condom = True) from _call_steph_breeding_fetish_cowgirl_01
-        $ add_breeding_fetish(the_person)
-        the_person "Oh god... It's even better than I dreamed about last night."
-        "[the_person.possessive_title] takes a minute to recover before standing up. She rubs her belly."
-        $ scene_manager.update_actor(the_person, position = "stand2")
-        the_person "Okay. I hope you realize the serums also greatly increase libido."
-        mc.name "Don't worry. If the urges ever get too strong, just come find me, anywhere I am I'll bend you over, even here in the lab."
-        the_person "Ah... that sounds... acceptable. Okay, let's give this a shot I guess."
-        $ scene_manager.update_actor(the_person, position = "walking_away")
-        "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, your cum running down the inside of her legs."
-        "Looks like [the_person.title] has a breeding fetish now!"
+            call breeding_fetish_stephanie_normal_label(the_person) from _breeding_fetish_steph_normal_01
     else:
-        the_person "Before I get started, I just want to make sure you understand. I support you completely. I'm not mad or anything, just a little concerned."
-        the_person "I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
-        the_person "I went along with things for a while because I trust you. Maybe even love you. You've always impressed me with the way you do things."
-        the_person "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
-        the_person "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
-        the_person "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
-        the_person "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
-        "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
-        the_person "For god's sake, all I can think about is you cumming inside me over and over! Knocking me up and collaring me and called me your breeding stock!"
-        the_person "I trust you. It took me a while to realize what is going on, but I understand it now."
-        the_person "This is the next step in our relationship. The urges are SO intense! You're the only guy here, I need you to help me take of these urges!"
-        the_person "I'm sure that relying on you for this can only bring us closer together."
-        if the_person.relationship != "Single":
-            $ SO_title = SO_relationship_to_title(the_person.relationship)
-            mc.name "Wait, don't you have a [SO_title]?"
-            the_person "So? He isn't here at work with me all day is he? He can fuck me when I get home, but I need you to do it while I'm here!"
-        "Sounds like she thinks the whole reason you gave her the serums is because... you want to take things to the next level? For now, it is probably better if you just go along with it."
-        mc.name "You're right. I probably should have been more honest about it, but I thought this would help bring us closer together."
-        "She gives a deep sigh of relief."
-        the_person "You have NO idea how glad I am to hear that."
-        "[the_person.possessive_title] stands up."
-        $ scene_manager.update_actor(the_person, position = "stand4")
-        if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
-            pass
+        if the_person.event_triggers_dict.get("is_bimbo", False):
+            "You get a text message from [the_person.possessive_title]."
+            the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
+            "You text her back."
+            mc.name "Sure, meet me in my office."
+            $ mc.change_location(office)
+            $ ceo_office.show_background()
+            $ scene_manager = Scene()
+            $ scene_manager.add_actor(the_person)
+            the_person "Oh hey! You're here!"
+            mc.name "Of course. Can you lock the door?"
+            the_person "Oh! Right right right..."
+            "[the_person.possessive_title] turns and locks your office door."
+            the_person "So... I saw this crazy video last night, and I thought maybe we could re-create it!"
+            mc.name "Oh yeah? What was it about?"
+            the_person "Basically, this guy with a monster cock bent his secretary over his desk and fucked her over and over until she was knocked up and full of cum!"
+            the_person "I was dreaming about it all night. Can we do it please please please pleeeeeaaaassseee???"
+            "Sounds like [the_person.title] has start to develop a breeding fetish from the serums. You suppose you should indulge her with this as well."
+            mc.name "Sounds good. Get over here."
+            the_person "Oh! Yes sir. What are you going to do to me?"
+            call breeding_fetish_stephanie_bimbo_label(the_person) from _breeding_fetish_steph_bimbo_02
         else:
-            "She starts to strip down."
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-        "She looks at you expectantly."
-        the_person "Well? Why are you still wearing clothes? You said you would help!"
-        # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), skip_intro = False, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA094
-        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), skip_intro = False, allow_continue = False, asked_for_condom = True) from _call_breeding_fetish_steph_intro_02
-        $ add_breeding_fetish(the_person)
-        the_person "Oh god... It's even better than I dreamed about last night."
-        "[the_person.possessive_title] takes a minute to recover before standing up. She rubs her belly."
-        $ scene_manager.update_actor(the_person, position = "stand2")
-        the_person "Okay. I hope you realize the serums also greatly increase libido."
-        mc.name "Don't worry. If the urges ever get too strong, just come find me, anywhere I am I'll bend you over, even here in the lab."
-        the_person "Ah... that sounds... acceptable. Okay, let's give this a shot I guess."
-        $ scene_manager.update_actor(the_person, position = "walking_away")
-        "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, your cum running down the inside of her legs."
-        "Looks like [the_person.title] has a breeding fetish now!"
+            if mc.location == mc.business.r_div: #Already in research
+                "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+                the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
+            else:
+                "You get a text message from [the_person.possessive_title]."
+                the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
+                "You text her back."
+            mc.name "Sure, meet me in my office."
+            $ mc.change_location(office)
+            $ ceo_office.show_background()
+            $ scene_manager = Scene()
+            $ scene_manager.add_actor(the_person)
+            "You walk with [the_person.possessive_title]. When you get there, she locks the door. You sit down at your desk."
+            mc.name "What can I do for you [the_person.title]."
+            the_person "Well, recently I've started having a new set of... well... breeding fantasies. Serum related I'm sure."
+            the_person "I just wanted to make sure that we still have an understanding, right?"
+            mc.name "Certainly. I'll always be here to help you with your needs."
+            call breeding_fetish_stephanie_normal_label(the_person) from _breeding_fetish_steph_normal_02
+
     $ scene_manager.clear_scene()
     $ the_person.apply_planned_outfit()
     $ clear_scene()
     return #Needs testing
+
+label breeding_fetish_stephanie_bimbo_label(the_person):
+    "You begin to walk towards her."
+    mc.name "That's right. You were going to bend over my desk for a minute. And if everything goes well, I have a present for you."
+    the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm bent over. I wonder what it could be!"
+    $ scene_manager.update_actor(the_person, position = "standing_doggy")
+    "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
+    $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+    "She wiggles her ass back and forth in front of you as you pull your dick out."
+    the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
+    "Without any hesitation you slide your cock into her cunt."
+    $ the_person.break_taboo("vaginal_sex")
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_01
+    $ add_breeding_fetish(the_person)
+    the_person "Oh god its so warm. Its like I can feel the little sperm wriggling inside of me..."
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another round. Normally one time is enough but..."
+    mc.name "I'm sorry, you'll have to be patient if you want another round."
+    the_person "Ah... I see."
+    the_person "Fine! I'll just go back to... whatever it was I was doing. What do I do here again?"
+    mc.name "It doesn't matter, you can take the rest of the day off."
+    the_person "Oh? That eager to get rid of me? Guess I'll just go find someone else to play with for a while. Your loss mister!"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office. Your seed is dribbling down her leg."
+    "Looks like [the_person.title] has a breeding fetish now! But she is also a bimbo."
+    if the_person == mc.business.head_researcher:
+        "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
+    return
+
+label breeding_fetish_stephanie_normal_label(the_person):
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person, position = "stand4")
+    "[the_person.possessive_title] stands up."
+    if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+        pass
+    else:
+        "She starts to strip down."
+        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+    "She looks at you expectantly."
+    the_person "Well? Why are you still wearing clothes? You said you would help!"
+    # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = False) from _call_steph_breeding_fetish_cowgirl_01
+    $ add_breeding_fetish(the_person)
+    the_person "Oh god... It's even better than I dreamed about last night."
+    "[the_person.possessive_title] takes a minute to recover before standing up. She rubs her belly."
+    $ scene_manager.update_actor(the_person, position = "stand2")
+    the_person "Okay. I hope you realize the serums also greatly increase libido."
+    mc.name "Don't worry. If the urges ever get too strong, just come find me, anywhere I am I'll bend you over, even here in the lab."
+    the_person "Ah... that sounds... acceptable. Okay, let's give this a shot I guess."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, your cum running down the inside of her legs."
+    "Looks like [the_person.title] has a breeding fetish now!"
+    return
 
 label breeding_fetish_emily_intro_label():
     "Emily doesn't have a breeding fetish written yet"

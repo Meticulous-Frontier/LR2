@@ -76,7 +76,8 @@ init -1 python:
                 fetish_after_hours_lock()
                 add_sb_starbuck_anal_intro_event()
                 return True
-        elif the_person is stephanie and False:
+        elif the_person is stephanie:
+            mc.business.mandatory_crises_list.append(anal_fetish_stephanie_intro)
             return True
         elif the_person is emily and False:
             pass
