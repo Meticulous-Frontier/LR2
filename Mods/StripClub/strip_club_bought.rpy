@@ -24,7 +24,7 @@ init 5 python:
             stripper.set_mc_title("Boss")
             stripper.set_possessive_title("The stripper")
 
-            set_stripper_schedule(stripper)
+            set_stripper_schedule(stripper, strip_club)
             stripper.change_stats(happiness = 10, obedience = 5, love = 5)
             stripper.add_role(stripper_role)
         return

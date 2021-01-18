@@ -81,7 +81,7 @@ init 3303 python:
         if person in stripclub_waitresses:
             stripclub_waitresses.remove(person)
 
-        set_stripper_schedule(person)
+        set_stripper_schedule(person, strip_club)
 
         manager_role_status_acquisition(person)
 
@@ -93,7 +93,7 @@ init 3303 python:
     def promote_strip_club_manager_to_mistress(person):
         person.remove_role(manager_role)
         person.add_role(mistress_role)
-        set_stripper_schedule(person)
+        set_stripper_schedule(person, bdsm_room)
         return
 
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")

@@ -16,7 +16,7 @@ init 5 python:
         else:
             return True
 
-    def set_stripper_schedule(person):
+    def set_stripper_schedule(person, work_location):
         # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
         if person.is_employee() or person in [nora, emily, christina]:
             person.event_triggers_dict["strip_club_shifts"] = 1
@@ -37,7 +37,7 @@ init 5 python:
         if person.has_role(bdsm_performer_role):
             work_location = bdsm_room
 
-        set_stripper_schedule(person)
+        set_stripper_schedule(person, work_location)
         person.event_triggers_dict["stripclub_hire_day"] = day
         person.stripper_salary = calculate_stripper_salary(person)
 
