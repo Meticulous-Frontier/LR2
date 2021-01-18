@@ -3,9 +3,13 @@
 
 init -1 python:
     def create_tooltip_dictionary():
+        start_time = time.time()
         result = {}
         for place in list_of_places:
-            result[place.name] = get_location_tooltip(place)
+            result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
+
+        if config.debug:
+            print("Map Buildup Time: " + str(time.time() - start_time))
         return result
 
     def get_location_tooltip(location):
@@ -55,8 +59,8 @@ init 2:
 
                             action [Function(mc.change_location, place), Return(place)]
                             sensitive place.accessable #TODO: replace once we want limited travel again with: place in mc.location.connections
-                            hovered tt.Action(tt_dict[place.name])
-                        text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
+                            hovered tt.Action(tt_dict[place.name][0])
+                        text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if tt_dict[place.name][1] else "") anchor [0.5,0.5] style "map_text_style"
                 else:
                     frame:
                         background None
@@ -69,8 +73,8 @@ init 2:
                             focus_mask "gui/LR2_Hex_Button_Alt_idle.png"
                             action [Function(mc.change_location, place), Return(place)]
                             sensitive True
-                            hovered tt.Action(tt_dict[place.name])
-                        text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if get_location_on_enter_events(place) else "") anchor [0.5,0.5] style "map_text_style"
+                            hovered tt.Action(tt_dict[place.name][0])
+                        text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if tt_dict[place.name][1] else "") anchor [0.5,0.5] style "map_text_style"
 
 
             ##TODO: add a sub map to housing_map_manager() so we can go to people's homes
