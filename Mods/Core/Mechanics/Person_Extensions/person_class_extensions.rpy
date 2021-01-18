@@ -26,7 +26,8 @@ init -1 python:
                 if any(x for x in args if x == self):
                     items.append(crisis)
             for x in items:
-                crisis_store.remove(crisis)
+                if x in crisis_store:
+                    crisis_store.remove(crisis)
 
         # remove from business teams
         for team in [mc.business.research_team, mc.business.market_team, mc.business.supply_team, mc.business.production_team, mc.business.hr_team]:
