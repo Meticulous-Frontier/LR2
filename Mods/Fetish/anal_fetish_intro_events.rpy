@@ -486,8 +486,57 @@ label anal_fetish_generic_intro_label(the_person):
     return True
 
 label anal_fetish_mom_intro_label():
-    "Jennifer's anal fetish scene has not yet been written."
-    return False
+    $ the_person = mom
+    "Playing around on your phone for a bit before bed, you hear a knock on your door."
+    mc.name "It's open."
+    $ the_person.draw_person()
+    "[the_person.possessive_title] opens the door."
+    the_person "Hey... I'm watching a movie tonight, would you join me?"
+    "You consider her offer. You are pretty tired, but movie night with [the_person.title] could definitely be fun. Recently they've been getting very interesting."
+    the_person "I umm... really want you to. I have something special in mind..."
+    "You raise an eyebrow. You've been pushing your limits with [the_person.title] lately, this could be interesting indeed."
+    menu:
+        "Watch a Movie":
+            pass
+        "Too Tired":
+            pass
+    mc.name "A movie would be fun. I'll be right out."
+    the_person "Great! I've got one picked out on Netflix. Make yourself comfortable on the couch, I'm just going to change into something more comfortable!"
+    mc.name "Sure thing [the_person.title]"
+    $ clear_scene()
+    "You grab a soda from the kitchen then head to the living room and sit down on the couch. You take a look at the movie that [the_person.possessive_title] has picked out."
+    "Murmur of the Heart? Hmm, sounds like a dumb chick flick... you back out for a second to read the description. Hmm...."
+    "...an open-minded teenage boy finds himself torn between a rebellious urge to discover love, and the ever-present, almost dominating affection of his beloved mother..."
+    "Oh geeze. She is definitely planning an interesting night! You quickly click back into the movie and pause it when you hear her bedroom door open."
+    "You try to act non-chalant as you hear [the_person.title] walk into the living room. You purposefully avoid looking at her until you hear her clear her throat."
+    the_person "Ah, want to get a little more comfortable with me tonight?"
+    $ the_person.apply_outfit(special_fetish_black_outfit)
+    $ the_person.draw_person()
+    "When you look up, you are stunned at the outfit that [the_person.possessive_title] is wearing."
+    mc.name "[the_person.title]... wow! But... but what about..."
+    the_person "Lily is out for the night, spending it at a friend's house. We have the house to ourselves for the night..."
+    "[the_person.title] slowly walks over to you. Her hips and body are mesmerizing."
+    the_person "Here... let me help..."
+    $ the_person.position = "blowjob"
+    "[the_person.possessive_title] gets down on her knees in front of you. She undoes your pants, grasps the waistband and beings to pull them off you. You arch your back a bit to make it easier."
+    "Naked from the waist down, [the_person.title] looks up at you."
+    the_person "Can you get your shirt?"
+    mc.name "Ahhh... Oh! Right..."
+    "You start to lift your shirt up over your head. As you do, you feel [the_person.possessive_title] lean forward and run her tongue up and down your cock."
+    "Her mouth opens and her soft lips slowly descend your erection as you finish pulling your shirt off. When you look, she has her eyes closed, just enjoying servicing her son's erection."
+    $ mc.change_arousal(20)
+    "You run you hands through her hair. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
+    the_person "Mmm, sorry, I needed a taste. Ready to start the moving?"
+    mc.name "Ugghhh, yeah..."
+    $ the_person.draw_person("standing_doggy")
+    "[the_person.possessive_title] stands up, turns and bends over, grabbing the remote off the ottoman."
+    "She takes her time pointing the remote at the tv and hitting play. Her hips appear to be swaying when the movie intro screen starts."
+    the_person "I ummm... heard good things about this movie... if it's too boring though, we can always turn it off."
+    $ the_person.draw_person(position = "sitting")
+    "Instead of sitting next to you, [the_person.title] sits on your lap. Your cock nestles nicely between her ass cheeks as she leans back against you."
+    "As the movie begins, you simply enjoy the heat and softness of her skin against yours. "
+
+    return
 
 label anal_fetish_lily_intro_label():
     $ the_person = lily # make sure we use lily for the event
