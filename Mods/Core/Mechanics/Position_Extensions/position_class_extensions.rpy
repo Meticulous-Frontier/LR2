@@ -76,7 +76,7 @@ init 5 python:
             tooltip_string = " (tooltip) This position is so far beyond what she considers appropriate that she would never dream of it."
 
         if person.has_taboo(position_taboo):
-            tooltip_string +=" (tooltip) \nSuccessfully selecting this position will break a taboo, making it easier to convince " + person.title + " to do it and similar acts in the future."
+            tooltip_string +=" (tooltip) \nSuccessfully selecting this position will break a taboo, making it easier to convince " + (person.title if person.title else "her") + " to do it and similar acts in the future."
 
         if not self.check_clothing(person):
             disable = True
@@ -244,4 +244,3 @@ init 5 python:
         if report_log != None:
             report_log["guy orgasms"] = report_log["guy orgasms"] + 1
         return
-
