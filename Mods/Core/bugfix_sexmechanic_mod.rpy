@@ -625,6 +625,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                 call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
                 if _return == 0:
                     $ ask_for_condom = False # we don't have vag/anal sex so if player tries again, she will ask for condom again
+                    $ willing = 0
                 else:
                     $ use_condom = mc.condom
             else:
