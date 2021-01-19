@@ -348,6 +348,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 mc.name "No worries, [the_person.title]. Here, let me untangle this for you."
 
             "You manage to untangle [the_person.possessive_title]'s hair."
+            $ the_person.draw_person(position = "stand3", emotion = "happy")
             the_person.char "Thanks, [the_person.mc_title], you're a lifesaver. Don't worry, I can finish the rest of this myself."
             $ the_person.change_stats(love = 2, happiness = 5)
 
