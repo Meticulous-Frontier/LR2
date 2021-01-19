@@ -157,15 +157,19 @@ init 5 python:
         return
 
     def advance_time_run_turn(people):
+        start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
         if "quest_director" in globals():
             quest_director.run_turn()
+        if config.debug:
+            print("Run Turn: " + str(time.time() - start_time))
         return
 
     def advance_time_run_day(people):
+        start_time = time.time()
         for (person, place) in people:
             person.run_day()
 
@@ -173,15 +177,20 @@ init 5 python:
         mc.business.run_day()
         if "quest_director" in globals():
             quest_director.run_day()
+        if config.debug:
+            print("Run Day: " + str(time.time() - start_time))
         return
 
     def advance_time_run_move(people):
+        start_time = time.time()
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
                 person.change_location(mc.location)
 
         mc.business.run_move()
+        if config.debug:
+            print("Run Move: " + str(time.time() - start_time))
         return
 
     def advance_time_assign_limited_time_events(people):
