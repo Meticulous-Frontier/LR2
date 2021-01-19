@@ -269,8 +269,8 @@ label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
-        if debug_event_notification:
-            $ renpy.notify("Random crisis: " + crisis.name)
+        if config.debug:
+            $ print("Random crisis: " + crisis.name)
 
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
@@ -293,8 +293,8 @@ label advance_time_mandatory_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
             $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if debug_event_notification:
-            $ renpy.notify("Mandatory crisis: " + active_crisis_list[crisis_count].name)
+        if config.debug:
+            $ print("Mandatory crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -358,8 +358,8 @@ label advance_time_mandatory_morning_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
             $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if debug_event_notification:
-            $ renpy.notify("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
+        if config.debug:
+            $ print("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -377,8 +377,8 @@ label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
-        if debug_event_notification:
-            $ renpy.notify("Random morning crisis: " + crisis.name)
+        if config.debug:
+            $ print("Random morning crisis: " + crisis.name)
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ crisis.call_action()

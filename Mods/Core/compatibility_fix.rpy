@@ -123,7 +123,6 @@ init -2:
     default persistent.memory_mode = 0 # default is low memory mode
     default persistent.use_free_memory = True   # default is clean memory every day
     default persistent.show_ntr = False     # default turn of NTR
-    default debug_event_notification = False    # turn on for event notifications
 
 init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")
