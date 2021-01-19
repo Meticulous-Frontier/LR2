@@ -5,7 +5,7 @@ init -1 python:
     def create_tooltip_dictionary():
         start_time = time.time()
         result = {}
-        for place in list_of_places:
+        for place in [x for x in list_of_places if x.hide_in_known_house_map]:
             result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
 
         if config.debug:
