@@ -33,9 +33,14 @@ init 10 python:
             return True
         elif wakeup_duty_action.enabled is False:
             return False
+        elif day%7 == 5:    # not on saturday mornings
+            return False
         else:
             return  "Alarm duty already set."
+
     def wakeup_duty_crisis_requirement():
+        if day%7 == 5:    # not on saturday mornings
+            return False
         return True
 
     def slave_assign_new_collar(person, collar):
