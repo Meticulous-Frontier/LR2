@@ -55,8 +55,8 @@ init 0 python:
                 self.conservative_outfits = False
 
             #renpy.say("", "Person: " + person.name + "  " + person.last_name)
-            # renpy.say("",  person.name + "  " + person.last_name + ": " + (self.exclude_skirts and "no skirts, " or "") + (self.exclude_pants and "no pants, " or "") + (self.lingerie and "lingerie, " or "") 
-            #       + (self.skimpy_outfits and "skimpy outfits, " or "") + (self.conservative_outfits and "conservative outfits, " or "") 
+            # renpy.say("",  person.name + "  " + person.last_name + ": " + (self.exclude_skirts and "no skirts, " or "") + (self.exclude_pants and "no pants, " or "") + (self.lingerie and "lingerie, " or "")
+            #       + (self.skimpy_outfits and "skimpy outfits, " or "") + (self.conservative_outfits and "conservative outfits, " or "")
             #       + (self.prefer_boots and "boots, " or "") + (self.no_boots and "no boots, " or "") + (self.prefer_high_heels and "high heels, " or "") + (self.no_high_heels and "no heels, " or ""))
 
         def evaluate_outfit(self, outfit, sluttiness_limit, sluttiness_min = 0):
@@ -85,7 +85,7 @@ init 0 python:
                 return False
             if (self.prefer_boots and not any(outfit.has_clothing(item) for item in self.boots_list)) or (self.no_boots and any(outfit.has_clothing(item) for item in self.boots_list)):
                 return False
-            
+
             # checks differ when overwear or full outfit
             if is_overwear:
                 if self.conservative_outfits and (slut_score > (15 + self.slut_modifier) or (outfit.tits_available() or outfit.vagina_available() or not outfit.bra_covered() or not outfit.panties_covered())):
@@ -97,6 +97,50 @@ init 0 python:
                     return False
                 if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + self.slut_modifier):
                     return False
+
+            #renpy.say("", "Add: " + outfit.name)
+            return True
+
+        def evaluate_outfit_get_return(self, outfit, sluttiness_limit, sluttiness_min = 0): #A copy of the previous method but returns what is wrong with an outfit instead of False
+            is_overwear = outfit.is_suitable_overwear_set()
+            slut_score = is_overwear and outfit.get_overwear_slut_score() or outfit.get_full_outfit_slut_score()
+
+            if slut_score > sluttiness_limit:
+                return "is too slutty"
+            if slut_score < sluttiness_min:
+                return "is too conservative"
+            if __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
+                return "leaves me completely naked"
+            if self.no_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) > (is_overwear and 3 or 5):
+                return "has too many layers"
+            if self.prefer_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 4):
+                return "is missing some parts"
+            if self.exclude_skirts and any(outfit.has_clothing(item) for item in skirts_list):
+                return "has a skirt"
+            if self.exclude_dresses and any(outfit.has_clothing(item) for item in real_dress_list):
+                return "is a dress"
+            if self.exclude_pants and any(outfit.has_clothing(item) for item in pants_list):
+                return "has pants"
+            if (self.show_tits and any(outfit.has_clothing(item) for item in self.hide_tits_list)) or (self.no_show_tits and not any(outfit.has_clothing(item) for item in self.hide_tits_list)):
+                return "doesn't show my assets"
+            if (self.show_ass and any(outfit.has_clothing(item) for item in self.hide_ass_list)) or (self.no_show_ass and not any(outfit.has_clothing(item) for item in self.hide_ass_list)):
+                return "doesn't show my assets"
+            if (self.prefer_high_heels and not any(outfit.has_clothing(item) for item in self.high_heels_list)) or (self.no_high_heels and any(outfit.has_clothing(item) for item in self.high_heels_list)):
+                return "doesn't have heels"
+            if (self.prefer_boots and not any(outfit.has_clothing(item) for item in self.boots_list)) or (self.no_boots and any(outfit.has_clothing(item) for item in self.boots_list)):
+                return "doesn't have boots"
+
+            # checks differ when overwear or full outfit
+            if is_overwear:
+                if self.conservative_outfits and (slut_score > (15 + self.slut_modifier) or (outfit.tits_available() or outfit.vagina_available() or not outfit.bra_covered() or not outfit.panties_covered())):
+                    return "isn't conservative"
+                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (10 + self.slut_modifier) and (not outfit.tits_available() or not outfit.vagina_available()):
+                    return "is too conservative"
+            else:
+                if self.conservative_outfits and (slut_score > (10 + self.slut_modifier) or (not outfit.wearing_panties() or not outfit.bra_covered() or not outfit.panties_covered())):
+                    return "isn't conservative"
+                if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + self.slut_modifier):
+                    return "is too conservative"
 
             #renpy.say("", "Add: " + outfit.name)
             return True
@@ -129,7 +173,7 @@ init 0 python:
             if exclude_skirts and exclude_pants and exclude_skirts:
                 if pants_score > skirts_score and pants_score > dress_score:
                     exclude_pants = False
-                elif skirts_score > pants_score and pants_score > dress_score: 
+                elif skirts_score > pants_score and pants_score > dress_score:
                     exclude_skirts = False
                 elif dress_score > skirts_score and dress_score > pants_score:
                     exclude_dresses = False
