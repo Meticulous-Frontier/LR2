@@ -801,17 +801,16 @@ init -1 python:
         if self.sluttiness < 60 and self.outfit and self.outfit.full_access():
             self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
-        removal_list = [] #So we can iterate through without removing and damaging the list.
-        for an_action in [x for x in self.on_room_enter_event_list + self.on_talk_event_list if isinstance(x, Limited_Time_Action)]:
-            an_action.turns_valid -= 1
-            if an_action.turns_valid <= 0:
-                removal_list.append(an_action)
+        for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
+            removal_list = []
+            for an_action in [x for x in lta_store if isinstance(x, Limited_Time_Action)]:
+                an_action.turns_valid -= 1
+                if an_action.turns_valid <= 0:
+                    removal_list.append(an_action)
 
-        for action_to_remove in removal_list:
-            if action_to_remove in self.on_room_enter_event_list:
-                self.on_room_enter_event_list.remove(action_to_remove)
-            if action_to_remove in self.on_talk_event_list:
-                self.on_talk_event_list.remove(action_to_remove)
+            for action_to_remove in removal_list:
+                if action_to_remove in lta_store:
+                    lta_store.remove(action_to_remove)
 
         for a_role in self.special_role:
             a_role.run_move(self)
