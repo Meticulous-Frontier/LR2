@@ -194,14 +194,17 @@ init 5 python:
         return
 
     def advance_time_assign_limited_time_events(people):
-        for (person, place) in people:
-            if renpy.random.randint(0,100) < 10 and (person.mc_title != "Stranger" or person.title): #Only assign one to 10% of people, to cut down on the number of people we're checking.
+        start_time = time.time()
+        for (person, place) in [x for x in people if x[0].title or x[0].mc_title != "Stranger"]:
+            if renpy.random.randint(0,100) < 10: #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
                     if crisis[2] == "on_talk" and not crisis[0] in [x.the_action for x in person.on_talk_event_list if isinstance(x, Limited_Time_Action)]:
                         person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter" and not crisis[0] in [x.the_action for x in person.on_room_enter_event_list if isinstance(x, Limited_Time_Action)]:
                         person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+        if config.debug:
+            print("LTE assignments: " + str(time.time() - start_time))
         return
 
 label advance_time_move_to_next_day(no_events = True):
