@@ -137,6 +137,14 @@ init -1 python:
 
     Wardrobe.remove_outfit = wardrobe_remove_outfit
 
+    def wardrobe_get_outfit_with_name(self, the_name):
+        found = next((x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name.replace("_", " ").title()), None)
+        if found:
+            return found.get_copy()
+        return None
+
+    Wardrobe.get_outfit_with_name = wardrobe_get_outfit_with_name
+
 
     def calculate_minimum_sluttiness(person, target_sluttiness):
         minimum_sluttiness = target_sluttiness - person.sluttiness # raise minimum sluttiness by the amount over normal sluttiness
