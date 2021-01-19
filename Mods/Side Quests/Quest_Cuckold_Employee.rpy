@@ -340,6 +340,8 @@ label quest_cuckold_employee_decision_label():
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
     $ the_report = _return
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5)
@@ -432,6 +434,8 @@ label quest_cuckold_employee_rethink_decision_label():
     the_person.char "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
     $ the_report = _return
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
         $ the_person.change_stats(happiness = 10, obedience = 10, love = 5, slut_temp = 5)

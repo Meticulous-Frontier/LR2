@@ -175,11 +175,11 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             $ scene_manager.update_actor(the_mom, position = "kissing", emotion = "happy", special_modifier = "kissing")
             "[the_mom.possessive_title] closes the gap and kisses you passionately, almost over-eagerly."
             "She presses her body against you and holds the back of your neck. After a long moment she pulls back, panting softly."
-            $ scene_manager.update_actor(special_modifier = None)
+            $ scene_manager.update_actor(the_mom, special_modifier = None)
             $ the_mom.change_slut_temp(1)
             $ the_mom.break_taboo("kissing")
             the_mom.char "Thank you for staying for dinner [the_mom.mc_title]. I hope I see you again soon..."
-            $ scene_manager.update_actor(position = "stand3")
+            $ scene_manager.update_actor(the_mom, position = "stand3")
             "She steps back, trailing a hand along your chest."
             mc.name "I hope so too. Goodnight [the_mom.title]."
             "She watches you from the front door as you leave the house."

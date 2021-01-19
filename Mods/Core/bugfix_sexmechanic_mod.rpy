@@ -508,7 +508,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # In 13% of the cases she takes control regardless of obedience, but only when she came only once
             # higher chance when she likes taking control lower when she doesn't
-            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and ((renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience) or renpy.random.randint(0, 6) == 3):
+            if not position_locked and the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and ((renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience) or renpy.random.randint(0, 6) == 3):
                 $ the_person.change_obedience(-3)
                 $ girl_in_charge = True
                 $ finished = False
@@ -517,7 +517,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
                 $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
-            elif the_person.energy >= 30 and (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
+            elif not position_locked and the_person.energy >= 30 and (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
                 # They're close to their orgasm and beg you to help them finish.
                 $ the_person.call_dialogue("sex_beg_finish")
                 menu:

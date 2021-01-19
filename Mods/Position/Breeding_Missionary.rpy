@@ -65,7 +65,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
         "[the_girl.title]'s pussy is still getting wet. You take it slow, giving her time to warm up."
 
     menu:
-        "Play with her tits.":
+        "Play with her tits":
             if not the_girl.tits_available():
                 "You decide you want some quality time with her tits."
                 mc.name "Lean forward, I need to get this off you."
@@ -92,7 +92,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
                 $ the_girl.change_arousal(the_girl.get_opinion_score("cheating on men") * 3)
                 the_girl.char "Oh god... yes... yes you are!"
 
-        "Talk dirty to her.":
+        "Talk dirty to her":
             mc.name "You feel amazing [the_girl.title]. I'm going to fuck you like this every day and fill you with my seed over and over."
             mc.name "I'm going to knock you up, but I'm not going to stop. I'm going to fuck you over and over, and fill you up over and over, even as your belly gets big."
             the_girl.char "Oh god, I want that so bad! I want to feel your cum inside me again and again..."
@@ -195,13 +195,13 @@ label strip_ask_breeding_missionary(the_girl, the_clothing, the_location, the_ob
     the_girl.char "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.title] pants as you fuck her."
     menu:
-        "Let her strip.":
+        "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = breeding_missionary.position_tag)
             "You move back kneel for a moment while [the_girl.title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
             "She sighs happily when you get on top of her and slide your cock back inside."
 
-        "Leave it on.":
+        "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
                 the_girl.char "Do you think I look sexy in it?"
