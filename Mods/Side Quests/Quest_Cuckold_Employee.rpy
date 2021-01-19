@@ -703,7 +703,7 @@ label quest_cuckold_employee_knocked_up_label():
     mc.name "Oh my god, that's amazing! Congratulations!"
     the_person.char "I know! I can't wait to tell my husband... Its so weird though, knowing in my head that it isn't even his?"
     menu:
-        "Leave your [so_title] for me." if the_person.love + 10 > leave_SO_love_calculation(the_person):   #Hide yo wife
+        "Leave your [so_title] for me" if the_person.love + 10 > leave_SO_love_calculation(the_person):   #Hide yo wife
             mc.name "[the_person.title], think it's time you left him so we can be together. It isn't right hiding this from him.."
             "[the_person.title] seems nervous, you can tell she is dealing with some guilt after cheating on her husband."
             the_person.char "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
@@ -711,7 +711,7 @@ label quest_cuckold_employee_knocked_up_label():
             $ the_person.add_role(girlfriend_role)
             the_person.char "I can't believe it, I'm really doing this. You're my one and only bull now."
 
-        "You're doing the right thing.":      #Be the good guy
+        "You're doing the right thing":      #Be the good guy
             mc.name "I'm really happy for you. Don't worry, your secret is safe with me. For all purposes, the baby IS his."
             the_person.char "Yeah... I know... Its just hard, you know?"
             "She gets a sultry tone to her voice."
