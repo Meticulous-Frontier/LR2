@@ -10,7 +10,7 @@ init 2 python:
 
         mannequin.apply_outfit(outfit)
 
-        final_image = Flatten(mannequin.build_person_displayable(position, emotion,special_modifier, [0.98,0.98,0.98], None, no_frame = True, hide_list = hide_list))
+        final_image = mannequin.build_person_displayable(position, emotion,special_modifier, [0.98,0.98,0.98], None, no_frame = True, hide_list = hide_list)
 
         renpy.show(mannequin.name + mannequin.last_name,at_list=[character_right, scale_person(mannequin.height)],layer="solo",what=final_image,tag=mannequin.name + mannequin.last_name)
         renpy.restart_interaction()

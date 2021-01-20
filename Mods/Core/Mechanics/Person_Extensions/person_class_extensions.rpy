@@ -1134,10 +1134,8 @@ init -1 python:
         if emotion is None:
             emotion = self.get_emotion()
 
-        if not can_use_animation():
-            the_animation = None
-        elif the_animation is None:
-            the_animation = self.idle_animation
+        background_fill = None
+        the_animation = None
 
         if display_transform is None:
             display_transform = character_right
@@ -1157,23 +1155,14 @@ init -1 python:
         if display_zorder is None:
             display_zorder = 0
 
-        self.draw_number[draw_layer] += 1
         self.hide_person()
         if wipe_scene:
             clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        character_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+        character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
-
-        if the_animation:
-            global global_draw_number
-            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
-
-            global prepared_animation_arguments
-            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder] #Effectively these are being stored and passed to draw_person_animation once take_animation_screenshot returns the surface
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render, position, emotion, special_modifier, lighting, background_fill, animation_draw_number, draw_layer) #This thread prepares the render. When it is finished it is caught by the interact_callback function take_animation_screenshot
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1191,6 +1180,9 @@ init -1 python:
             renpy.say("WARNING", self.name + " is not wearing any outfit to remove an item from, aborting draw animated removal.")
             return
 
+        background_fill = None
+        the_animation = None
+
         if position is None:
             position = self.idle_pose
 
@@ -1199,15 +1191,6 @@ init -1 python:
 
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
-
-        if not can_use_animation():
-            the_animation = None
-        elif the_animation is None:
-            the_animation = self.idle_animation
-
-        global draw_layers
-        if draw_layer not in draw_layers:
-            add_draw_layer(draw_layer)
 
         if display_transform is None: # make sure we don't need to pass the position with each draw
             display_transform = character_right
@@ -1221,71 +1204,64 @@ init -1 python:
         else:
             extra_at_arguments = []
 
-        self.draw_number[draw_layer] += 1
+        if not isinstance(the_clothing, list):  # convert clothing to list, if not already
+            the_clothing = [the_clothing]
 
         if display_zorder is None:
             display_zorder = 0
 
+        if wipe_scene:
+            clear_scene()
 
-        if the_animation:
-            # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
-            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the starting image without the frame
-            if isinstance(the_clothing, list):  #Handle the half-off state for whether it should be removed or not.
-                for cloth in the_clothing:
-                    if half_off_instead:
-                        self.outfit.half_off_clothing(cloth) #Half-off the clothing
-                    else:
-                        self.outfit.remove_clothing(cloth) #Remove the clothing
+        if scene_manager is None and show_person_info:
+            renpy.show_screen("person_info_ui",self)
+        else:   # when we are called from the scene manager we have to draw the other characters
+            scene_manager.draw_scene(exclude_list = [self])
+
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+        for cloth in the_clothing:
+            if half_off_instead:
+                self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
-                if half_off_instead:
-                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
-                else:
-                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
+                self.outfit.remove_clothing(cloth) #Remove the clothing
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
 
-            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the top image without the frame
-
-            x_size, y_size = position_size_dict.get(position)
-            bottom_render = bottom_displayable.render(x_size, y_size, 0, 0)
-            top_render = top_displayable.render(x_size, y_size, 0, 0)
-
-            global global_draw_number
-            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
-
-            global prepared_animation_arguments
-            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder]
-
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, animation_draw_number, draw_layer)
-
-        else:
-            if wipe_scene:
-                clear_scene()
-
-            if scene_manager is None and show_person_info:
-                renpy.show_screen("person_info_ui",self)
-            else:   # when we are called from the scene manager we have to draw the other characters
-                scene_manager.draw_scene(exclude_list = [self])
-
-            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-            if isinstance(the_clothing, list): #Handle the half-off state for whether it should be removed or not.
-                for cloth in the_clothing:
-                    if half_off_instead:
-                        self.outfit.half_off_clothing(cloth) #Half-off the clothing
-                    else:
-                        self.outfit.remove_clothing(cloth) #Remove the clothing
-            else:
-                if half_off_instead:
-                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
-                else:
-                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
-            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-            self.hide_person()
-            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
-            renpy.show(self.identifier + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = self.identifier + "_extra") #Blend from old to new.
+        self.hide_person()
+        renpy.show(self.identifier + "_old", at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier + "_old")
+        renpy.show(self.identifier, at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = self.identifier) #Blend from old to new.
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
+
+    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
+        if position is None:
+            position = self.idle_pose
+        if emotion is None:
+            emotion = self.get_emotion()
+
+        forced_special_modifier = self.outfit.get_forced_modifier()
+        if forced_special_modifier is not None:
+            special_modifier = forced_special_modifier
+
+        displayable_list = []
+        displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
+        displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
+        displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Add in her pubes
+
+        displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
+        displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
+
+        composite_list = [position_size_dict.get(position)]
+        for display in displayable_list:
+            if isinstance(display, __builtin__.tuple):
+                composite_list.extend(display)
+            else:
+                composite_list.append((0,0))
+                composite_list.append(display)
+
+        return Composite(*composite_list)
+
+    Person.build_person_displayable = build_person_displayable_enhanced
 
     ####### Begin cum extension functions ######
 

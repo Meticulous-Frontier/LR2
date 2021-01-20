@@ -1,4 +1,5 @@
 init -10 python:
+    import threading
     config.search_prefixes = [ "", "images/", "Mods/Core/Images/" ]
 
 init -5 python:
@@ -6,7 +7,7 @@ init -5 python:
     supported_positions = ["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","kneeling1","standing_doggy","cowgirl"]
 
 init 2 python:
-    import threading
+    from lru import LRUCacheDict
 
     secret_mask = Facial_Accessory("Secret Mask", 2, False, False, "Secret_Mask", False, False, 0, display_name = "masks", opacity_adjustment = .5)
     earings_list.append(secret_mask)
@@ -35,13 +36,13 @@ init 2 python:
     for position in supported_positions:
         zipLocks[position] = threading.Lock()
 
-    zipCache = {}
-    for position in supported_positions:
-        zipCache[position] = LRUCacheDict(max_size=200, expiration=180)
-
     mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
     zipLocks["character_images"] = threading.Lock()
-    zipCache["character_images"] = LRUCacheDict(max_size=200, expiration=180)
+
+    zipCache = LRUCacheDict(max_size = 500, expiration = 600, thread_clear = True, concurrent = True)
+
+    def can_use_animation():
+        return False    # NO ANIMATIONS IN MOD
 
     def clothing_get_image(self, body_type, breast_size = "AA" ): #Generates a proper Image object from the file path strings we have stored previously. Prevents object bloat by storing large objects repeatedly for everyone.
         global mobile_zip_dict
@@ -113,13 +114,10 @@ init 2 python:
             while tries < 3:
                 try:
                     zipLocks[self.position].acquire()
-                    if self.filename in zipCache[self.position]:
-                         data = zipCache[self.position][self.filename]
-                    else:
-                        data = mobile_zip_dict[self.position].read(self.filename)
-                        zipCache[self.position][self.filename] = data
+                    if not self.filename in zipCache:
+                        zipCache[self.filename] = mobile_zip_dict[self.position].read(self.filename)
 
-                    sio = io.BytesIO(data)
+                    sio = io.BytesIO(zipCache[self.filename])
                     return renpy.display.pgrender.load_image(sio, self.filename)
                 except:
                     tries += 1
