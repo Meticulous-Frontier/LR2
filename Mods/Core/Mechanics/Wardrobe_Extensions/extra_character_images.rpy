@@ -35,8 +35,13 @@ init 2 python:
     for position in supported_positions:
         zipLocks[position] = threading.Lock()
 
+    zipCache = {}
+    for position in supported_positions:
+        zipCache[position] = LRUCacheDict(max_size=1000, expiration=180)
+
     mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
     zipLocks["character_images"] = threading.Lock()
+    zipCache["character_images"] = LRUCacheDict(max_size=1000, expiration=180)
 
     def clothing_get_image(self, body_type, breast_size = "AA" ): #Generates a proper Image object from the file path strings we have stored previously. Prevents object bloat by storing large objects repeatedly for everyone.
         global mobile_zip_dict
@@ -104,15 +109,18 @@ init 2 python:
             self.filename = filename
 
         def load(self):
-            global mobile_zip_dict
             tries = 0
             while tries < 3:
                 try:
                     zipLocks[self.position].acquire()
-                    data = mobile_zip_dict[self.position].read(self.filename)
+                    if self.filename in zipCache[self.position]:
+                         data = zipCache[self.position][self.filename]
+                    else:
+                        data = mobile_zip_dict[self.position].read(self.filename)
+                        zipCache[self.position][self.filename] = data
+
                     sio = io.BytesIO(data)
                     return renpy.display.pgrender.load_image(sio, self.filename)
-
                 except:
                     tries += 1
                     if tries >= 3:
