@@ -37,11 +37,11 @@ init 2 python:
 
     zipCache = {}
     for position in supported_positions:
-        zipCache[position] = LRUCacheDict(max_size=1000, expiration=180)
+        zipCache[position] = LRUCacheDict(max_size=200, expiration=180)
 
     mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
     zipLocks["character_images"] = threading.Lock()
-    zipCache["character_images"] = LRUCacheDict(max_size=1000, expiration=180)
+    zipCache["character_images"] = LRUCacheDict(max_size=200, expiration=180)
 
     def clothing_get_image(self, body_type, breast_size = "AA" ): #Generates a proper Image object from the file path strings we have stored previously. Prevents object bloat by storing large objects repeatedly for everyone.
         global mobile_zip_dict
