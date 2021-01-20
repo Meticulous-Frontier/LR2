@@ -438,6 +438,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 mc.name "You were doing fine, I'm just not in the mood. You should get back to work."
                                 $ person_two.change_happiness(-5)
                             $ person_two.review_outfit(dialogue = False)
+                            $ scene_manager.update_actor(person_two, position= "walking_away")
                             "[person_two.possessive_title] takes a moment to get herself tidied up, then steps out of your office."
 
                         "Decline her offer":
