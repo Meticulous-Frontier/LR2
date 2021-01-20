@@ -36,6 +36,7 @@ label lady_of_the_night_label_enhanced():
             $ the_person.draw_person()
 
             the_person.char "It's been fun, if you ever see me around maybe we can do this again."
+            $ the_person.draw_person(position = "walking_away")
             "She gives you a peck on the cheek, then turns and struts off into the night."
 
         "Pay her\n{color=#ff0000}{size=18}Requires: $200{/size}{/color} (disabled)" if mc.business.funds < 200:
