@@ -1263,6 +1263,13 @@ init -1 python:
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
+    def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all posible known tags for the character.
+        # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
+        renpy.hide(self.identifier, draw_layer)
+        renpy.hide(self.identifier + "_old", draw_layer)
+
+    Person.hide_person = hide_person_enhanced
+
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
