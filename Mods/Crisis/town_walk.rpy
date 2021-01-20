@@ -50,7 +50,10 @@ label town_walk_crisis_action_label:
 
         "Keep watching":
             "You decide not to risk being seen and stay away from her sight"
-    the_person.char "I should get dressed for lunch. Don't have much time..."
+    if time_of_day == 2:
+        the_person.char "I should get dressed for lunch. Don't have much time..."
+    else:
+        the_person.char "I should get dressed for dinner. Don't have much time..."
 
     if (the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
         "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.",
