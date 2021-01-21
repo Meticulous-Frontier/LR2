@@ -61,7 +61,7 @@ init -1 python:
     standard_bedroom4_background = room_background_image("Generic_Bedroom4_Background.jpg")
     prostitute_bedroom_background = room_background_image("Prostitute_Bedroom_Background.jpg")
     lily_bedroom_background = room_background_image("Lily_Bedroom_Background.jpg")
-    cousin_bedroom_background = room_background_image("Cousin_Bedroom_Background.jpg")
+    cousin_bedroom_background = room_background_image("Cousin_Bedroom_Background.jpg", darken = False)
 
     def update_rd_div_with_genetics_unlocked():
         if not genetic_modification_policy.is_owned():
@@ -71,7 +71,6 @@ init -1 python:
         if found:
             found.background_image = standard_biotech_backgrounds
         return
-
 
 label updated_room_background(stack):
     # Load extra GUI images
@@ -93,6 +92,24 @@ label updated_room_background(stack):
         office_store.background_image = standard_office_store_backgrounds
         if "her_hallway" in globals(): # check if room exists
             her_hallway.background_image = standard_her_hallway_backgrounds
+
+        # bedrooms are linked in the person extensions, one time assignment of on of the bedrooms to a person
+        prostitute_bedroom = Room("Prostitute Bedroom", "Prostitute Bedroom", [], prostitute_bedroom_background,[make_bed(), make_wall(), make_window(), make_love_rug()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        if not prostitute_bedroom in list_of_places:
+            list_of_places.append(prostitute_bedroom)
+
+        generic_bedroom_1 = Room("Generic Bedroom 1", "Bedroom", [], standard_bedroom1_background,[make_bed(), make_wall(), make_window(), make_floor()],[],[],False, [-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        if not generic_bedroom_1 in list_of_places:
+            list_of_places.append(generic_bedroom_1)
+        generic_bedroom_2 = Room("Generic Bedroom 2", "Bedroom", [], standard_bedroom2_background,[make_bed(), make_wall(), make_window(), make_floor()],[],[],False, [-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        if not generic_bedroom_2 in list_of_places:
+            list_of_places.append(generic_bedroom_2)
+        generic_bedroom_3 = Room("Generic Bedroom 3", "Bedroom", [], standard_bedroom3_background,[make_bed(), make_wall(), make_window(), make_floor()],[],[],False, [-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        if not generic_bedroom_3 in list_of_places:
+            list_of_places.append(generic_bedroom_3)
+        generic_bedroom_4 = Room("Generic Bedroom 4", "Bedroom", [], standard_bedroom4_background,[make_bed(), make_wall(), make_window(), make_floor()],[],[],False, [-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        if not generic_bedroom_4 in list_of_places:
+            list_of_places.append(generic_bedroom_4)
 
         # bedroom image replacements
         lily.home.background_image = lily_bedroom_background
