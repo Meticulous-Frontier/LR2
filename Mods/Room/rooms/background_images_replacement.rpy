@@ -41,6 +41,7 @@ init -1 python:
     standard_clothing_store_backgrounds =  room_background_image("Clothing_Store_Background.jpg")
     standard_her_hallway_backgrounds = room_background_image("her_hallway_background.jpg")
     standard_office_store_backgrounds = room_background_image("Office_Store_Background.jpg")
+    standard_laundry_room_backgrounds = room_background_image("Laundry_Room_Background.jpg")
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
@@ -92,6 +93,9 @@ label updated_room_background(stack):
         office_store.background_image = standard_office_store_backgrounds
         if "her_hallway" in globals(): # check if room exists
             her_hallway.background_image = standard_her_hallway_backgrounds
+        laundry_room = Room("Laundry Room", "Laundry Room", [], standard_laundry_room_backgrounds,[make_bed(), make_wall(), make_floor()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        if not laundry_room in list_of_places:
+            list_of_places.append(laundry_room)
 
         # bedrooms are linked in the person extensions, one time assignment of on of the bedrooms to a person
         prostitute_bedroom = Room("Prostitute Bedroom", "Prostitute Bedroom", [], prostitute_bedroom_background,[make_bed(), make_wall(), make_window(), make_love_rug()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
