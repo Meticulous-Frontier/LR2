@@ -43,7 +43,6 @@ init 2 python:
             work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.generate_home()
-        starbuck.home.background_image = standard_bedroom2_background
         starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
         starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
@@ -1400,6 +1399,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     $ the_roll = renpy.random.randint(0,100) #Roll for the possible event#
     if the_roll < 10 or mc.energy < 30: #No event, just cuddle up and go to bed.
         mc.name "Thanks. Its been a long day and I'm exhausted."
+        $ the_person.change_to_bedroom()
         "You strip off your work clothes, down to your boxers. You head to [the_person.title]'s bedroom and hop in her bed."
         the_person.char "I'll be in in a minute!"
         "You see [the_person.title] step into the bathroom. In a few minutes she emerges, ready for bed."
@@ -1425,6 +1425,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.apply_outfit(Outfit("Nude"))
         $ the_person.draw_person(position = "back_peek")
         "She backs away from you and walks into her bedroom. You turn and watch her, seeing she is completely naked."
+        $ the_person.change_to_bedroom()
         "You quickly follow her."
         $ the_person.draw_person(position = "stand4")
         "[the_person.title] stops when she gets to the bed and turns to you."
@@ -1468,8 +1469,9 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "She breaks the kiss for a second."
         the_person.char "Oh [the_person.mc_title], I missed you too."
         "[the_person.possessive_title] clings to you and begins to kiss your neck eagerly. You carefully carry her towards her bedroom."
-        "When you get to her bed, you roughly throw her down on it."
+        $ the_person.change_to_bedroom()
         $ the_person.draw_person(position = "missionary")
+        "When you get to her bed, you roughly throw her down on it."
         if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
             "You stop for a second and admire [the_person.title], her body on display in front of you. You guess she walks around the house like this?"
         else:

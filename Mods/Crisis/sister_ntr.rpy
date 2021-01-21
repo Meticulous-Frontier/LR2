@@ -55,7 +55,8 @@ label sister_ntr_crisis_action_label:
     else:
         $ ran_num = 1
 
-    $ bedroom.show_background()
+    $ mc.change_location(lily_bedroom)
+    $ mc.location.show_background()
     $ man_name = get_random_male_name()
 
     if ran_num == 1: ## a scene with one man
@@ -943,6 +944,7 @@ label sister_ntr_crisis_action_label:
     $ del man_name
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
+    $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ clear_scene()
     return

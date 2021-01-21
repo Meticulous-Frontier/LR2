@@ -382,7 +382,7 @@ label quest_production_line_help_move_label():
         the_person.char "That one goes in the bedroom."
         mc.name "Sure thing."
     else:
-        the_person.char "That one goes in my bedroom daddy."
+        the_person.char "That one goes in my bedroom, daddy."
         mc.name "Sure thing baby girl."
         $ the_person.change_arousal(10)
         "You can definitely feel some sexual tension building with the way she is talking to you."
@@ -390,6 +390,7 @@ label quest_production_line_help_move_label():
     the_person.char "Oh my god, I can't believe it. We did it!"
     mc.name "Thankfully you don't have too much stuff."
     the_person.char "Yeah... this is it! My first place... all to myself!"
+    $ lily_bedroom.show_background()
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of her bed. One of the few places in her apartment to sit, for now."
     if the_person.sluttiness < 20:

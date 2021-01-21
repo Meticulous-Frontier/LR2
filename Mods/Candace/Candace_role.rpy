@@ -758,11 +758,12 @@ label candace_love_path_intro_label():
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
     the_person "Oh. My. God. A slumber party! Let's do it!"
-    $ the_person.draw_person(position = "stand4")
+    $ the_person.draw_person(position = "walking_away")
     "She starts to lead you into her bedroom."
     mc.name "[the_person.title] I just need to get some sleep..."
     the_person "Don't worry, you'll wake up and be all like, I've never slept better!'"
     "She modulates her voice lower when she imitates you. Oh god what are you getting yourself in to..."
+    $ the_person.change_to_bedroom()
     "In her bedroom, you lay down on her bed, pulling blankets up over yourself. Her bed smells flowery."
     the_person "Okay, let me just get into some jammies..."
     $ the_person.draw_person(position = "walking_away")
@@ -833,7 +834,8 @@ label candace_love_path_intro_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] turns and leaves the room. As she turns, you notice her nightgown has cum stains on the ass too... When did that happen? Did she make you cum while you were completely asleep too?"
     "You slowly get up, your feet a little unsteady. You work your way out of the bedroom."
-    "Next to the kitchen, there is a small table with two chairs. You walk over and sit down at one."
+    $ kitchen.show_background()
+    "In the kitchen, there is a small table with two chairs. You walk over and sit down at one."
     $ the_person.draw_person(position = "back_peek")
     the_person "It's almost ready. Sorry I, like, only know how to make scrambled eggs..."
     mc.name "It's quite alright. Listen... I just want to make sure you know this... You didn't have to make me cum so much last night either..."

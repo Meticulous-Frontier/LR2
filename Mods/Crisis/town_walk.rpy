@@ -23,6 +23,7 @@ init 2 python:
 label town_walk_crisis_action_label:
     ## You spy on a neighbor during your town walk activities
     $ the_person = get_town_walk_person()
+    $ old_location = mc.location
     if the_person is None: # this could be no one
         return
 
@@ -36,7 +37,7 @@ label town_walk_crisis_action_label:
         "Ignore it.":
             return
 
-    $ bedroom.show_background()
+    $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "walking_away")
     "You see [the_person.possessive_title] is standing in front of a mirror, studying herself."
     "There is a glass of water right near the window. This is a good opportunity to test a serum for free."
@@ -148,6 +149,8 @@ label town_walk_crisis_action_label:
 
     python:
         the_person.apply_planned_outfit()
+        mc.change_location(old_location)
         mc.location.show_background()
         clear_scene()
+        del old_location
     return

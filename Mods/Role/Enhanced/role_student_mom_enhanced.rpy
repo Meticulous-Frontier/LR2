@@ -140,7 +140,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     mc.name "The dinner was fantastic. I'm lucky to have such a generous, beautiful host."
     "[the_mom.title] seems to blush, although it might just be wine taking effect."
 
-    $ renpy.show(name = "apartment lobby", what = apartment_background, layer = "master")
+    $ her_hallway.show_background()
     $ scene_manager.show_actor(the_student, position = "stand4")
     "[the_mom.title] and [the_student.title] walk you to the door to say goodbye."
     the_student.char "Bye [the_student.mc_title], I hope you'll be by again soon!"

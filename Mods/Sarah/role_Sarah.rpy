@@ -58,7 +58,6 @@ init 2 python:
             ])
 
         sarah.generate_home()
-        sarah.home.background_image = standard_bedroom1_background
         sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
