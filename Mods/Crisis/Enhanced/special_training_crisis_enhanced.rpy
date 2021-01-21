@@ -162,23 +162,26 @@ label return_from_seminar_action_label(the_person):
                 if the_person.get_opinion_score("drinking cum") > the_person.get_opinion_score("being covered in cum"):
                     "She withdraws her mouth from your cock, resting it by the tip as she looks into your eyes with her mouth wide open."
                     $ the_person.cum_in_mouth()
+                    $ the_person.draw_person(position="blowjob")
                     the_person.char "Yes, [the_person.mc_title]! Shoot your load right into my mouth. I love the taste of you."
                 else:
                     "She pulls your cock out of her mouth then looks intently at your eyes."
                     $ the_person.cum_on_face()
+                    $ the_person.draw_person(position="blowjob")
                     the_person.char "Yes, [the_person.mc_title]. Shoot it right onto me! Give me one... big... facial."
             else:
                 if the_person.get_opinion_score("giving tit fucks") > the_person.get_opinion_score("being covered in cum"):
                     "She pulls your cock out of her mouth then looks up into your eyes as she presents her chest to you."
                     $ the_person.cum_on_tits()
+                    $ the_person.draw_person(position="blowjob")
                     the_person.char "Like my tits, [the_person.mc_title]? They'll look much better covered in your cum..."
                 else:
                     "She pulls your cock out of her mouth then looks up into your eyes as she leans away from you."
-                    $ the_person.cum_on_stomach()
                     the_person.char "Oh, [the_person.mc_title]. I just applied new makeup. Please, don't ruin it."
+                    $ the_person.cum_on_stomach()
+                    $ the_person.draw_person(position="blowjob")
+                    "[the_person.title] keeps sitting on her knees while receiving your load on her body."
 
-            $ the_person.draw_person(position="blowjob")
-            "[the_person.title] keeps sitting on her knees while receiving you load."
             the_person.char "Aaaah, it feels great!"
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "[the_person.title] kisses the tip of your cock before standing up, smiling."
