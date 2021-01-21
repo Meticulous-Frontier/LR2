@@ -9,6 +9,10 @@ init -5 python:
 init 2 python:
     from lru import LRUCacheDict
 
+    # add zip dictionary for MOD character images
+    mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
+
+    # clothing objects for MOD character images
     secret_mask = Facial_Accessory("Secret Mask", 2, False, False, "Secret_Mask", False, False, 0, display_name = "masks", opacity_adjustment = .5)
     earings_list.append(secret_mask)
 
@@ -31,15 +35,6 @@ init 2 python:
     #################################################################
     # override image get functions to allow for mod image retrieval #
     #################################################################
-
-    zipLocks = {}
-    for position in supported_positions:
-        zipLocks[position] = threading.Lock()
-
-    mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
-    zipLocks["character_images"] = threading.Lock()
-
-    zipCache = LRUCacheDict(max_size = 500, expiration = 600, thread_clear = True, concurrent = True)
 
     def can_use_animation():
         return False    # NO ANIMATIONS IN MOD
@@ -103,6 +98,22 @@ init 2 python:
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
 
+    ############################################################
+    # MOD Implementation of ZIP file loading and image caching #
+    ############################################################
+
+    # special class for managing thread locks and cache objects for zipfile loading
+    class ZipManager():
+        def __init__(self):
+            self.Locks = {}
+            self.Cache = {}
+
+            for x in supported_positions + ["character_images"]:
+                self.Locks[x] = threading.RLock()
+                self.Cache[x] = LRUCacheDict(max_size = 500)    # 500 most used character images per position (20Mb)
+
+    zip_manager = ZipManager()
+
     class ZipContainer(renpy.display.im.ImageBase): #TODO: Move this to a more obvious file. Probably something to do along with a bunch of other refactoring.
         def __init__(self, position, filename, mtime=0, **properties):
             super(ZipContainer, self).__init__(position, filename, mtime, **properties)
@@ -113,11 +124,11 @@ init 2 python:
             tries = 0
             while tries < 3:
                 try:
-                    zipLocks[self.position].acquire()
-                    if not self.filename in zipCache:
-                        zipCache[self.filename] = mobile_zip_dict[self.position].read(self.filename)
+                    if not self.filename in zip_manager.Cache[self.position]:
+                        with zip_manager.Locks[position]:
+                            zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
 
-                    sio = io.BytesIO(zipCache[self.filename])
+                    sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
                     return renpy.display.pgrender.load_image(sio, self.filename)
                 except:
                     tries += 1
@@ -125,8 +136,6 @@ init 2 python:
                         renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
                         return renpy.display.pgrender.surface((2, 2), True)
 
-                    mobile_zip_dict[self.position].close()
-                    mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r") #May have to convert to a renpy_file first, but I dthink Zipfile will have alreayd done that
-
-                finally:
-                    zipLocks[self.position].release()
+                    with zip_manager.Locks[position]:
+                        mobile_zip_dict[self.position].close()
+                        mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r") #May have to convert to a renpy_file first, but I dthink Zipfile will have alreayd done that
