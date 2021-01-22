@@ -179,6 +179,31 @@ init -1 python:
     def get_person_by_identifier(identifier):
         return next((x for x in all_people_in_the_game() if x.identifier == identifier), None)
 
+    def get_person_bedroom(self):
+        if not hasattr(self, "_bedroom"):
+            if self.has_role(prostitute_role):
+                self._bedroom = prostitute_bedroom
+            else:
+                self._bedroom = get_random_from_list([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
+        return self._bedroom
+    Person.bedroom = property(get_person_bedroom, None, None, "Her bedroom")
+
+    # use dedicated locations, since each location has different objects
+    def change_to_person_bedroom(self):
+        mc.change_location(self.bedroom)
+        mc.location.show_background()
+        return
+
+    Person.change_to_bedroom = change_to_person_bedroom
+
+    # use dedicated locations, since each location has different objects
+    def change_to_person_hallway(self):
+        mc.change_location(her_hallway) # use generic hallway
+        mc.location.show_background()
+        return
+
+    Person.change_to_hallway = change_to_person_hallway
+
     def get_person_next_day_outfit(self):
         if not hasattr(self, "_next_day_outfit"):
             self._next_day_outfit = None
@@ -848,21 +873,15 @@ init -1 python:
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
 
-    def person_generate_home_extended(org_func):
-        def generate_home_wrapper(person, set_home_time = True):
-            result = org_func(person, set_home_time)
-            if not person in unique_character_list:
-                if person.has_role(prostitute_role):
-                    result.background_image = prostitute_bedroom_background
-                    result.remove_object("floor")
-                    result.add_object(make_love_rug())
-                else:
-                    result.background_image = get_random_from_list([standard_bedroom1_background, standard_bedroom2_background, standard_bedroom3_background, standard_bedroom4_background])
-            return result
+    # NO FUNCTIONALITY YET, BEDROOMS HAS BEEN MOVED TO PERSON CLASS EXTENSIONS
+    # def person_generate_home_extended(org_func):
+    #     def generate_home_wrapper(person, set_home_time = True):
+    #         result = org_func(person, set_home_time)
+    #         return result
 
-        return generate_home_wrapper
+    #     return generate_home_wrapper
 
-    Person.generate_home = person_generate_home_extended(Person.generate_home)
+    # Person.generate_home = person_generate_home_extended(Person.generate_home)
 
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
