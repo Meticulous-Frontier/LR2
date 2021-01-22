@@ -225,9 +225,9 @@ label fetish_serum_quest_intro_followup_label():
 
 label fetish_serum_discuss_label(the_person):
     if get_fetish_basic_serum().mastery_level < 5.0:
-        the_person "Unforunately, I feel like we still don't know enough about the nanobots to consider messing with their programming."
+        the_person "Unfortunately, I feel like we still don't know enough about the nanobots to consider messing with their programming."
         mc.name "I understand. I'll make it a priority to observe their results more closely."
-        "To unlock new nanobots, you need to raise the mastery level of Sexual Proclivity Nanobots to atleast 5.0"
+        "To unlock new nanobots, you need to raise the mastery level of Sexual Proclivity Nanobots to at least 5.0"
     elif fetish_serum_coding_in_progress():
         the_person "Do you want to work on it some right now? I have the time."
     elif the_person.identifier != get_fetish_serum_contact():
@@ -397,7 +397,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_exhibition_serum()
-            # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhbitionist fetish is created
+            # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhibitionist fetish is created
 
         "Anal Program" if get_fetish_anal_serum().tier > 5:
             mc.name "I'd like to create a new program, based on these specifications."
@@ -453,7 +453,7 @@ label fetish_serum_exhibition_label():
     "You have unlocked Social Sexual Proclivity Nanobots."
     "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
     "You can learn more about it at mastery level 3.0."
-    # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhbitionist fetish is created
+    # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhibitionist fetish is created
     return
 
 label fetish_serum_anal_label():
@@ -630,7 +630,7 @@ label fetish_serum_coding_activity_label():
             "You feel her hands on your shoulders. She starts to rub your back. It feels nice and is very relaxing."
             if the_person.effective_sluttiness() > SB_doggy_standing.slut_requirement + 5 and mc.energy > 50 and the_person.energy > 50:
                 "Her hands slowly move down your chest, her fingertips feel soft as she moves them in little circles down your body."
-                "When she reachs your crotch, she leans a little further forward and kisses your neck."
+                "When she reaches your crotch, she leans a little further forward and kisses your neck."
                 $ mc.change_arousal(10)
                 the_person "Working on this program, thinking about what it does gets me so worked up sometimes..."
                 if the_person.has_exhibition_fetish():

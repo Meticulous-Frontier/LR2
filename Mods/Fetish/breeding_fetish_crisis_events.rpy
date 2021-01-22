@@ -209,7 +209,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                     $ the_person.change_energy(50)
                 else:
                     "Her milk comes out in small amounts as you suckle, her breathing catches with each pull."
-                    the_person "Ahhhh... oh [the_persom.mc_title] that feels so good..."
+                    the_person "Ahhhh... oh [the_person.mc_title] that feels so good..."
                     $ the_person.change_arousal(30)
                     "You manage to squeeze a bit of her cream out. It's a delicious treat that restores some of your energy."
                     $ mc.change_energy(40)

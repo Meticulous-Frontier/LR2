@@ -5,9 +5,9 @@ init 2 python:
     def sb_free_strip_build_strip_menu(person, must_be_naked):
         option_list = []
         option_list.append("Choose Strip Action")
-        for item in the_person.outfit.get_unanchored():
+        for item in person.outfit.get_unanchored():
             if not item.is_extension:
-                test_outfit = the_person.outfit.get_copy()
+                test_outfit = person.outfit.get_copy()
                 test_outfit.remove_clothing(item)
 
                 display_string = "Strip " + item.name
