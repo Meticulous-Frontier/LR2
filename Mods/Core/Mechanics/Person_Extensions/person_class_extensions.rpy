@@ -751,14 +751,12 @@ init -1 python:
     def run_move_enhanced(self,location):
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
-        if time_of_day == 0: #It's a new day, get a new outfit out to wear!
+        if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function
             if self.next_day_outfit:
                 self.planned_outfit = self.next_day_outfit
                 self.next_day_outfit = None
             else:
                 self.planned_outfit = self.decide_on_outfit()
-
-            self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
             self.work_outfit = None
 
@@ -766,24 +764,10 @@ init -1 python:
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
             destination = None
 
-        if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
-            if destination == self.work: #We're going to work.
-                if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
-                    self.wear_uniform()
-                    self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
-                    # only changes sluttiness in low sluttiness range after that she won't care anymore
-                    if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
-                        self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
-
-            elif not location is destination: # only change outfit if we change location
-                self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
-
-            location.move_person(self, destination) #Always go where you're scheduled to be.
+        # changing outfits is handled by move_person wrapper function
+        if destination:
+            location.move_person(self, destination)
         else:
-            #She finds somewhere to burn some time
-            if not location is destination: # only change outfit if we change location
-                self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
-
             location.move_person(self, get_random_from_list([x for x in list_of_places if x.public]))
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
@@ -839,7 +823,6 @@ init -1 python:
 
         for a_role in self.special_role:
             a_role.run_move(self)
-
 
     Person.run_move = run_move_enhanced
 
@@ -1237,7 +1220,7 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+        bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
@@ -1246,8 +1229,8 @@ init -1 python:
         top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
 
         self.hide_person()
-        renpy.show(self.identifier + "_old", at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier + "_old")
-        renpy.show(self.identifier, at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = self.identifier) #Blend from old to new.
+        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier )
+        renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced

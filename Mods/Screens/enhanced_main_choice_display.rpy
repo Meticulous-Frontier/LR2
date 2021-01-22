@@ -22,6 +22,11 @@ init 2 python:
             renpy.start_predict(self.display_image)
             return
 
+        def clear(self):
+            if self.display_image:
+                renpy.stop_predict(self.display_image)
+            return
+
     def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
         result = []
         for count in __builtin__.range(__builtin__.len(elements_list)):
@@ -36,8 +41,7 @@ init 2 python:
         start_time = time.time()
         for count in __builtin__.range(__builtin__.len(menu_items)):
             for item in [x for x in menu_items[count][1:] if x.display_key]:
-                if item.display_image:
-                    renpy.stop_predict(item.display_image)
+                item.clear()
 
         if config.debug:
             print("Clear menu items: " + str(time.time() - start_time))

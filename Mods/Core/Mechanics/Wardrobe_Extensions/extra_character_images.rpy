@@ -112,6 +112,9 @@ init 2 python:
                 self.Locks[x] = threading.RLock()
                 self.Cache[x] = LRUCacheDict(max_size = 500)    # 500 most used character images per position (20Mb)
 
+        def size(self):
+            return sum([x.size() for x in self.Cache.values()])
+
     zip_manager = ZipManager()
 
     class ZipContainer(renpy.display.im.ImageBase): #TODO: Move this to a more obvious file. Probably something to do along with a bunch of other refactoring.
