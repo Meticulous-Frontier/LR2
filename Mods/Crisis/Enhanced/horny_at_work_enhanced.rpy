@@ -602,7 +602,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ del desk
 
                         else:
-                            $ scene_manager.update_actor(emotion = "angry")
+                            $ scene_manager.update_actor(the_person, emotion = "angry")
                             the_person.char "What? Oh my god, I would never let you do that!"
                             $ the_person.change_stats(love = -5, happiness = -10, obedience = -3)
                             "She stammers for something more to say before settling on storming out of the room instead."
