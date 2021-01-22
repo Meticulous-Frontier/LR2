@@ -57,6 +57,9 @@ init 2 python:
         for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
             person.salary = person.calculate_base_salary() * multiplier
 
+    def cheat_restore_screen():
+        if "the_person" in globals():
+            the_person.draw_person()
 
 init python:
     if "keybind1" not in config.overlay_screens:
@@ -64,8 +67,14 @@ init python:
     config.console = True # Enables the console, can be set to False.
 
 screen keybind1():
-    key "x" action ToggleScreen("cheat_menu")
-    key "X" action ToggleScreen("cheat_menu")
+    key "x" action [
+        ToggleScreen("cheat_menu"),
+        Function(cheat_restore_screen)
+    ]
+    key "X" action [
+        ToggleScreen("cheat_menu"),
+        Function(cheat_restore_screen)
+    ]
 
 
 screen cheat_menu():
@@ -589,7 +598,10 @@ screen cheat_menu():
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
-                                        action [SetScreenVariable("editing_target", person)]
+                                        action [
+                                            SetScreenVariable("editing_target", person),
+                                            Function(cheat_appearance)
+                                        ]
 
         if editing_target and not isinstance(editing_target, Business) and not isinstance(editing_target, MainCharacter):
             frame:
