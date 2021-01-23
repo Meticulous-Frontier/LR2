@@ -324,7 +324,7 @@ label advance_time_people_run_day_label():
     $ advance_time_run_day(people_to_process)
     # we need to clear memory at least once a week (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
     # we clear the memory every day when not using high memory mode regardless of setting.
-    if persistent.use_free_memory or persistent.memory_mode < 2 or day%7 == 6:
+    if persistent.use_free_memory:
         $ renpy.free_memory()
     # $ gc.collect()    don't force garbage collector, let internals handle this
     #$ renpy.profile_memory(.5, 1024)

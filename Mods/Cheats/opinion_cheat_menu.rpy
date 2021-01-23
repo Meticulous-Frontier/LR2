@@ -57,7 +57,7 @@ screen opinion_edit_menu():
     else:
         default target = None
 
-    if target is not None:
+    if target:
         grid __builtin__.len(categories) 1:
             xfill 0.5
             for n in categories:

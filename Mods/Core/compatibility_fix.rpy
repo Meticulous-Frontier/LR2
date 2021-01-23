@@ -120,7 +120,7 @@ init -4 python:
         return loaded_version
 
 init -2:
-    default persistent.memory_mode = 0 # default is low memory mode
+    default persistent.memory_mode = 1 # default is medium memory mode
     default persistent.use_free_memory = True   # default is clean memory every day
     default persistent.show_ntr = False     # default turn of NTR
 
