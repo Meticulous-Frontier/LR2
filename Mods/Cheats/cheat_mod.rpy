@@ -60,6 +60,8 @@ init 2 python:
     def cheat_restore_screen():
         if "the_person" in globals():
             the_person.draw_person()
+        else:
+            clear_scene()
 
 init python:
     if "keybind1" not in config.overlay_screens:
