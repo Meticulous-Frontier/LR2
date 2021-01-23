@@ -78,7 +78,7 @@ class LRUCacheDict(object):
         if self.concurrent:
             self._rlock = threading.RLock()
         if thread_clear:
-            t = self.EmptyCacheThread(self)
+            t = self.EmptyCacheThread(self, peek_duration = thread_clear_min_check)
             t.start()
 
     class EmptyCacheThread(threading.Thread):
@@ -177,17 +177,16 @@ class LRUCacheDict(object):
 
     @_lock_decorator
     def cleanup(self):
-        if self.expiration is None:
-            return None
         t = int(time.time())
         #Delete expired
         next_expire = None
-        for k in self.__expire_times:
-            if self.__expire_times[k] < t:
-                self.__delitem__(k)
-            else:
-                next_expire = self.__expire_times[k]
-                break
+        if self.expiration != 0:    # setting to 0 will not invalidate based on time
+            for k in self.__expire_times:
+                if self.__expire_times[k] < t:
+                    self.__delitem__(k)
+                else:
+                    next_expire = self.__expire_times[k]
+                    break
 
         #If we have more than self.max_size items, delete the oldest
         while (len(self.__values) > self.max_size):
