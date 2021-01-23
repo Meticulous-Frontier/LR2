@@ -970,6 +970,7 @@ label erica_post_race_corruption_label(the_person):
     return
 
 label erica_post_race_fwb_label(the_person):
+    $ the_person.change_to_hallway()
     "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.add_situational_slut("Lost Bet",25,"Be ready for anything!")
@@ -977,6 +978,7 @@ label erica_post_race_fwb_label(the_person):
     "You growl into her neck as you grind your hips into hers."
     mc.name "That's right, you're my sexy bitch for the day."
     "You back up from the wall, but hold her tight, keeping her feet from reaching the floor. You turn and take her into her bedroom."
+    $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "missionary")
     "You throw her down on her bed."
     if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
@@ -1028,6 +1030,7 @@ label erica_post_race_fwb_label(the_person):
     return
 
 label erica_post_race_love_label(the_person):
+    $ the_person.change_to_hallway()
     "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.add_situational_slut("Lost Bet",25,"Be ready for anything!")
@@ -1035,6 +1038,7 @@ label erica_post_race_love_label(the_person):
     "You whisper into her ear as you grind your hips into hers."
     mc.name "That's right, you're mine for the day!"
     "You back up from the wall, but hold her tight, keeping her feet from reaching the floor. You turn and take her into her bedroom."
+    $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "missionary")
     "You throw her down on her bed."
     if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
@@ -1200,6 +1204,7 @@ label erica_house_call_label(the_person):
     the_person.char "Oh! Yes I was hoping that's why you were here..."
     "[the_person.possessive_title] wraps her legs around you and you begin to grind your hips together. Heat is quickly building between the two of you."
     "You carry her to her bedroom. The whole way there she is kissing and nipping at your neck and earlobe."
+    $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "missionary")
     "You throw her down on her bed."
     if the_person.outfit.vagina_available() and the_person.outfit.tits_available():

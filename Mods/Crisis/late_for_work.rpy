@@ -46,7 +46,7 @@ label late_for_work_action_label:
                 mc.name "Well, ok, now quickly run along [the_person.title]."
                 $ the_person.change_stats(obedience = -2, happiness = 2)
 
-        $ the_person.draw_person(position = 'walking_away')
+        $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] quietly rushes to her desk."
     elif the_person.relationship != "Single":
         $ the_person.cum_on_tits()
@@ -126,7 +126,7 @@ label late_for_work_action_label:
                 the_person.char "Anything for you, [the_person.mc_title]!"
                 $ the_person.change_stats(obedience = 2, slut_temp = 2)
 
-        $ the_person.draw_person(position = 'walking_away')
+        $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] rushes to the ladies room to cleanup."
         $ upper_clothing = None
     elif the_person.sluttiness < 80 or the_person.has_role(girlfriend_role):
@@ -221,6 +221,9 @@ label late_for_work_action_label:
                 the_person.char "It will be my pleasure, [the_person.mc_title]!"
                 $ the_person.change_stats(obedience = 2, slut_temp = 2)
 
+        $ the_person.draw_person(position = "walking_away")
+        "[the_person.possessive_title] rushes away."
+
     else:
         $ the_person.cum_on_face()
         $ the_person.cum_on_tits()
@@ -287,7 +290,7 @@ label late_for_work_action_label:
                     the_person.char "Alright [the_person.mc_title], right away."
                 $ the_person.apply_outfit()
 
-        $ the_person.draw_person(position = 'walking_away')
+        $ the_person.draw_person(position = "walking_away")
         "The client wires the money to your company account, but must have forgot to actually place an order."
         $ mc.business.change_funds(250)
 

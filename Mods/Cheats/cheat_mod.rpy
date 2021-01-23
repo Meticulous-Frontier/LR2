@@ -36,6 +36,7 @@ init 2 python:
         cs = renpy.current_screen()
         cs.scope["personality_options"] = False
         cs.scope["face_options"] = False
+        cs.scope["eye_options"] = False
         cs.scope["skin_options"] = False
         cs.scope["body_options"] = False
         cs.scope["breast_options"] = False
@@ -56,6 +57,11 @@ init 2 python:
         for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
             person.salary = person.calculate_base_salary() * multiplier
 
+    def cheat_restore_screen():
+        if "the_person" in globals():
+            the_person.draw_person()
+        else:
+            clear_scene()
 
 init python:
     if "keybind1" not in config.overlay_screens:
@@ -63,8 +69,14 @@ init python:
     config.console = True # Enables the console, can be set to False.
 
 screen keybind1():
-    key "x" action ToggleScreen("cheat_menu")
-    key "X" action ToggleScreen("cheat_menu")
+    key "x" action [
+        ToggleScreen("cheat_menu"),
+        Function(cheat_restore_screen)
+    ]
+    key "X" action [
+        ToggleScreen("cheat_menu"),
+        Function(cheat_restore_screen)
+    ]
 
 
 screen cheat_menu():
@@ -85,6 +97,7 @@ screen cheat_menu():
 
     default personality_options = False
     default face_options = False
+    default eye_options = False
     default skin_options = False
     default body_options = False
     default breast_options = False
@@ -177,6 +190,7 @@ screen cheat_menu():
                 for x in list_of_extra_personalities: available_personalities[x.personality_type_prefix] = x
 
     default available_faces = sorted(list_of_faces, key = lambda x: int(x.split("_")[1]))
+    default available_eyes = sorted(list_of_eyes,  key = lambda x: x[0])
     default available_body_types = list_of_body_types
     default available_breast_sizes = [x[0] for x in list_of_tits]
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
@@ -586,7 +600,10 @@ screen cheat_menu():
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
-                                        action [SetScreenVariable("editing_target", person)]
+                                        action [
+                                            SetScreenVariable("editing_target", person),
+                                            Function(cheat_appearance)
+                                        ]
 
         if editing_target and not isinstance(editing_target, Business) and not isinstance(editing_target, MainCharacter):
             frame:
@@ -631,6 +648,15 @@ screen cheat_menu():
                                 background "#4f7ad6"
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("breast_options")]
+
+                        textbutton "Eye Colour":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if eye_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("eye_options")]
 
                         textbutton "Hair Style":
                             style "textbutton_no_padding_highlight"
@@ -701,114 +727,124 @@ screen cheat_menu():
 
                     vbox:
                         xsize 250
-                        if personality_options:
+                        if personality_options and hasattr(editing_target, "personality"):
                             for x in sorted(available_personalities, key = lambda x: str(x).lower()):
-                                if hasattr(editing_target, "personality"):
-                                    textbutton str(x).title():
-                                        xfill True
-                                        style "textbutton_no_padding_highlight"
-                                        text_style "cheat_text_style"
+                                textbutton str(x).title():
+                                    xfill True
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "cheat_text_style"
 
-                                        if editing_target.personality.personality_type_prefix == x:
-                                            background "#4f7ad6"
-                                            hover_background "#4f7ad6"
+                                    if editing_target.personality.personality_type_prefix == x:
+                                        background "#4f7ad6"
+                                        hover_background "#4f7ad6"
 
-                                        action [
-                                            Function(setattr, editing_target, "personality", available_personalities[x])
-                                        ]
+                                    action [
+                                        Function(setattr, editing_target, "personality", available_personalities[x])
+                                    ]
 
-                        if face_options:
+                        if face_options and hasattr(editing_target, "face_style"):
                             for x in available_faces:
-                                if hasattr(editing_target, "face_style"):
-                                    textbutton str(x).replace("_", " "):
+                                textbutton str(x).replace("_", " "):
+                                    xfill True
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "cheat_text_style"
+
+                                    if editing_target.face_style == x:
+                                        background "#4f7ad6"
+                                        hover_background "#4f7ad6"
+
+                                    action [
+                                        Function(setattr, editing_target, "face_style", x),
+                                        Function(cheat_appearance)
+                                    ]
+
+                        if eye_options and hasattr(editing_target, "eyes"):
+                            for x in available_eyes:
+                                textbutton str(x[0]).title():
+                                    xfill True
+                                    style "textbutton_no_padding_highlight"
+                                    text_style "cheat_text_style"
+
+                                    if editing_target.eyes[0] == x[0]:
+                                        background "#4f7ad6"
+                                        hover_background "#4f7ad6"
+
+                                    action [
+                                        Function(setattr, editing_target, "eyes", x),
+                                        Function(cheat_appearance)
+                                    ]
+
+                        if skin_options and hasattr(editing_target, available_skin[x][0] and available_skin[x][1]):
+                            vbox:
+                                for x in available_skin:
+                                    textbutton x:
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
 
-                                        if editing_target.face_style == x:
+                                        if editing_target.skin == available_skin[x][2]:
                                             background "#4f7ad6"
                                             hover_background "#4f7ad6"
 
                                         action [
-                                            Function(setattr, editing_target, "face_style", x),
+                                            Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
+                                            Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
                                             Function(cheat_appearance)
                                         ]
 
-                        if skin_options:
-                            vbox:
-                                for x in available_skin:
-                                    if hasattr(editing_target, available_skin[x][0] and available_skin[x][1]):
-                                        textbutton x:
-                                            xfill True
-                                            style "textbutton_no_padding_highlight"
-                                            text_style "cheat_text_style"
-
-                                            if editing_target.skin == available_skin[x][2]:
-                                                background "#4f7ad6"
-                                                hover_background "#4f7ad6"
-
-                                            action [
-                                                Function(setattr, editing_target, available_skin[x][0], available_skin[x][2]),
-                                                Function(setattr, editing_target, available_skin[x][1], available_skin[x][3]),
-                                                Function(cheat_appearance)
-                                            ]
-
-
-                        if body_options:
+                        if body_options and hasattr(editing_target, "body_type"):
                             vbox:
                                 for x in available_body_types:
-                                    if hasattr(editing_target, "body_type"):
-                                        textbutton str(x).replace("_", " ").title():
-                                            xfill True
-                                            style "textbutton_no_padding_highlight"
-                                            text_style "cheat_text_style"
+                                    textbutton str(x).replace("_", " ").title():
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
 
-                                            if editing_target.body_type == x:
-                                                background "#4f7ad6"
-                                                hover_background "#4f7ad6"
+                                        if editing_target.body_type == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
 
-                                            action [
-                                                Function(setattr, editing_target, "body_type", x),
-                                                Function(cheat_appearance)
-                                            ]
+                                        action [
+                                            Function(setattr, editing_target, "body_type", x),
+                                            Function(cheat_appearance)
+                                        ]
 
-                        if breast_options:
+                        if breast_options and hasattr(editing_target, "tits"):
                             vbox:
                                 for x in available_breast_sizes:
-                                    if hasattr(editing_target, "tits"):
-                                        textbutton str(x):
-                                            xfill True
-                                            style "textbutton_no_padding_highlight"
-                                            text_style "cheat_text_style"
+                                    textbutton str(x):
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
 
-                                            if editing_target.tits == x:
-                                                background "#4f7ad6"
-                                                hover_background "#4f7ad6"
+                                        if editing_target.tits == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
 
-                                            action [
-                                                Function(setattr, editing_target, "tits", x),
-                                                Function(cheat_appearance)
-                                            ]
+                                        action [
+                                            Function(setattr, editing_target, "tits", x),
+                                            Function(cheat_appearance)
+                                        ]
 
-                        if hair_style_options:
+                        if hair_style_options and hasattr(editing_target, "hair_style" and "hair_colour"):
                             vbox:
                                 for x in available_hair_styles:
-                                    if hasattr(editing_target, "hair_style"):
-                                        textbutton str(x.name):
-                                            xfill True
-                                            style "textbutton_no_padding_highlight"
-                                            text_style "cheat_text_style"
+                                    textbutton str(x.name):
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
 
-                                            if editing_target.hair_style == x:
-                                                background "#4f7ad6"
-                                                hover_background "#4f7ad6"
+                                        if editing_target.hair_style == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
 
-                                            action [
-                                                SetField(editing_target,"hair_style", x),
-                                                Function(cheat_redraw_hair)
-                                            ]
+                                        action [
+                                            SetField(editing_target,"hair_style", x),
+                                            SetField(editing_target, "hair_style.colour", editing_target.hair_colour[1]),
+                                            Function(cheat_appearance)
+                                        ]
 
-                        if hair_colour_options:
+                        if hair_colour_options and hasattr(editing_target, "hair_style" and "hair_colour"):
                             viewport:
                                 mousewheel True
                                 scrollbars "vertical"
@@ -816,41 +852,40 @@ screen cheat_menu():
 
                                 vbox:
                                     for x in available_hair_colours:
-                                        if hasattr(editing_target, "hair_colour"):
-                                            textbutton str(x[0]).title():
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "cheat_text_style"
-
-                                                if editing_target.hair_colour[0] == x[0]:
-                                                    background "#4f7ad6"
-                                                    hover_background "#4f7ad6"
-
-                                                action [
-                                                    SetField(editing_target,"hair_colour", x),
-                                                    Function(cheat_redraw_hair)
-                                                ]
-
-                        if pubes_options:
-                            vbox:
-                                for x in available_pubes_styles:
-                                    if hasattr(editing_target, "pubes_style"):
-                                        textbutton str(x.name):
+                                        textbutton str(x[0]).title():
                                             xfill True
                                             style "textbutton_no_padding_highlight"
                                             text_style "cheat_text_style"
 
-                                            if editing_target.pubes_style == x:
+                                            if editing_target.hair_colour[0] == x[0]:
                                                 background "#4f7ad6"
                                                 hover_background "#4f7ad6"
 
                                             action [
-                                                SetField(editing_target, "pubes_style.colour", editing_target.pubes_colour),
-                                                SetField(editing_target, "pubes_style", x),
+                                                SetField(editing_target, "hair_colour", x),
+                                                SetField(editing_target, "hair_style.colour", x[1]),
                                                 Function(cheat_appearance)
                                             ]
 
-                        if pubes_color_options:
+                        if pubes_options and hasattr(editing_target, "pubes_style"):
+                            vbox:
+                                for x in available_pubes_styles:
+                                    textbutton str(x.name):
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.pubes_style == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [
+                                            SetField(editing_target, "pubes_style.colour", editing_target.pubes_colour),
+                                            SetField(editing_target, "pubes_style", x),
+                                            Function(cheat_appearance)
+                                        ]
+
+                        if pubes_color_options and hasattr(editing_target, "pubes_colour"):
                             viewport:
                                 mousewheel True
                                 scrollbars "vertical"
@@ -859,21 +894,20 @@ screen cheat_menu():
                                     for x in list_of_hairs:
                                         $ color = x[1]
                                         $ color[3] = 1
-                                        if hasattr(editing_target, "pubes_colour"):
-                                            textbutton str(x[0]).title():
-                                                xfill True
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "cheat_text_style"
+                                        textbutton str(x[0]).title():
+                                            xfill True
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "cheat_text_style"
 
-                                                if editing_target.pubes_colour == color:
-                                                    background "#4f7ad6"
-                                                    hover_background "#4f7ad6"
+                                            if editing_target.pubes_colour == color:
+                                                background "#4f7ad6"
+                                                hover_background "#4f7ad6"
 
-                                                action [
-                                                    SetField(editing_target, "pubes_colour", color),
-                                                    SetField(editing_target, "pubes_style.colour", color),
-                                                    Function(cheat_appearance)
-                                                ]
+                                            action [
+                                                SetField(editing_target, "pubes_colour", color),
+                                                SetField(editing_target, "pubes_style.colour", color),
+                                                Function(cheat_appearance)
+                                            ]
 
                         if font_color_options and hasattr(editing_target, "name"):
                             viewport:

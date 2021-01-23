@@ -346,6 +346,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "[the_person.possessive_title] walk away to talk to the bartender. You make your way over to the lady's room."
         $ the_person.draw_person(position = "stand4")
         "Soon, [the_person.title] comes over, holding a sign that says 'Bathroom closed for renovations: Please use men's room"
+        $ mc.change_location(work_bathroom)
+        $ mc.location.show_background()
         "You both take a quick look around, and when the coast is clear, you both walk into the bathroom and lock the door behind you."
         "You waste no time, you quickly wrap your arms around [the_person.title] and start making out with her."
         $ the_person.draw_person(position = "kissing")
@@ -415,6 +417,9 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         mc.name "Yeah I mean... if it makes your hubby happy for you to give me blowjobs... I GUESS I can help out..."
         "She laughs and punches you in the arm."
         the_person.char "Alright, I'm going to clean up. I'll see you."
+        $ clear_scene()
+        $ mc.change_location(downtown_bar)
+        $ mc.location.show_background()
         "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
@@ -424,6 +429,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         mc.name "Hey, you wanna sneak off for a bit?"
         "[the_person.possessive_title] flashes you her beautiful smile."
         the_person.char "You bet! You know what to do!"
+        $ mc.change_location(work_bathroom)
+        $ mc.location.show_background()
         "You head to the lady's room. [the_person.title] soon follows behind you. She locks the door as she closes it."
         $ the_person.draw_person (position = "kissing")
         "You waste no time. She throws her arms around you and you begin to make out."
@@ -472,6 +479,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         the_person.char "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
+        $ mc.change_location(downtown_bar)
+        $ mc.location.show_background()
         "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
         $ the_person.apply_planned_outfit()
         call advance_time from _call_advance_casual_hotwife_bathroom_blowjob
@@ -535,6 +544,9 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ mc.arousal += 10
         "The song ends, and [the_person.title] looks at you."
         the_person.char "Ok... you know what to do... I'll meet you in the Lady's room in just a minute..."
+        $ clear_scene()
+        $ mc.change_location(work_bathroom)
+        $ mc.location.show_background()
         "You head to women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "against_wall")
         "You grab her and pick her up. Her legs wrap around you."
@@ -624,6 +636,9 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ mc.arousal += 10
         "The song ends, and [the_person.title] looks at you."
         the_person.char "Ok! I didn't think that song was ever going to end. I'll meet you in the Lady's room in just a minute."
+        $ clear_scene()
+        $ mc.change_location(work_bathroom)
+        $ mc.location.show_background()
         "You head to women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "stand4")
         the_person.char "Okay, I want you to sit on the counter. I'm gonna get naked for you."
@@ -642,6 +657,8 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person.char "You'd better get going. I'm going to send these to my husband..."
         $ the_person.apply_planned_outfit()
 
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_casual_hotwife_dancing
     return
@@ -664,17 +681,19 @@ label casual_hotwife_sex_invite_label(the_person):
 #CSH40
 label casual_hotwife_her_place_label(the_person):
     "You head over to [the_person.title]'s place. You can't believe you're gonna fuck her in front of her husband!"
-    $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "You ring the doorbell. Soon [the_person.title] answers the door."
 
+    $ the_person.change_to_hallway()
     $ the_person.apply_outfit(get_hotwife_lingerie_set_white(), update_taboo = True)
     $ the_person.draw_person(position = "stand4")
     the_person.char "You made it! I wasn't sure you would actually come!"
     mc.name "Of course!"
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
     "You check her out. She definitely looks ready for some action! She takes your hand and slowly walks you back to the bedroom."
     the_person.char "[the_person.SO_name] and I were just getting started... you came at the perfect time..."
     "[the_person.SO_name]? Why does that sound so familiar?"
+    $ the_person.change_to_bedroom()
     "As you walk into the bedroom, you see [the_person.SO_name], the bartender sitting in a chair, completely naked."
     "Holy shit! Its the bartender! He had a front row ticket every time you fucked [the_person.title] at the bar! No wonder he went along with all of it!"
     "He nods to you, but you are shocked at the revelation."
@@ -718,6 +737,8 @@ label casual_hotwife_her_place_label(the_person):
 
 #CSH50
 label casual_hotwife_home_sex_label(the_person):
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
     mc.name "So, want to have some fun tonight?"
     the_person.char "Sounds great! Just give me a minute to get ready..."
     $ the_person.draw_person(position = "walking_away")
@@ -725,6 +746,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ the_person.apply_outfit(get_hotwife_lingerie_set_pink(), update_taboo = True)
     $ the_person.draw_person(position = "stand4")
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
+    $ the_person.change_to_bedroom()
     "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
     the_person.char "Mmm, I can't wait. Let's go!"
     call fuck_person(the_person) from _call_casual_sex_mod_CSH050
@@ -750,9 +772,9 @@ label casual_hotwife_home_sex_label(the_person):
         the_person.char "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
 
-    "You make your way back home after a sexy evening with [the_person.possessive_title]."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
+    "You make your way back home after a sexy evening with [the_person.possessive_title]."
 
     call advance_time from _call_advance_casual_hotwife_home_sex
     return

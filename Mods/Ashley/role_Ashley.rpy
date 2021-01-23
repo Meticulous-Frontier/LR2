@@ -973,17 +973,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
         "Oh! You didn't realize that [the_person_one.title] felt that way."
     "The sisters discuss it for a bit. You kind of zone out for a little bit as the conversation changes to clothing. The girls are discussing some different brands..."
     "Suddenly the girls stop talking. You look up and notice they are both looking out the window. A woman is walking by the coffee shop window out in the street."
-    "TODO: Starbuck hasn't figured out how to code this yet. A third woman appears, walking by the window."
-    the_person_two.char "Wow, what an outfit!"
-    "[the_person_two.title] gushes. [Dialogue specific if she likes the color or not][second dialogue if she likes the type of outfit]"
-    "[the_person_one.title] makes a similar comment."
-    the_person_two.char "What do you think? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think we would look good in a [outfit description]?"
-    menu:
-        "Yes":
-            pass
-        "No":
-            pass
-    "[the_person_one.possessive_title] listens to your response intently. You can tell she is interested in your opinion."
+    call coffee_time_woman_walks_by_label() from _coffee_time_intro_outfit_01
     the_person_two.char "Well, I'd better get going. I've got some errands to run!"
     "You stand up and both girls also get up."
     mc.name "Thank you for the pleasant morning. You two have a good day."
@@ -1311,8 +1301,66 @@ label coffee_time_steph_gets_handsy_label():
             "You pick up a napkin and bring it under the table. You hold it in place as [the_person_two.title] wipes her hand off on it. You grab another napkin and use it to clean yourself off as best as you can, hoping no one will notice."
     return
 
+label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the person one in this label.
+    $ preferences = WardrobePreference(the_person_one)
+    $ builder = WardrobeBuilder(the_person_one)
+    $ bystander = get_random_from_list(known_people_in_the_game(excluded_people = [ashley, stephanie, mc]))
+
+    "Enjoying your coffee, you zone out for a minute while the two sisters are chatting, when suddenly the talking stops. You look up and see them both looking out the restaurant window."
+    "Outside is a woman who has stopped and is checking her phone for something. The girls are checking her out."
+
+    $ scene_manager.add_actor(bystander, display_transform = character_left_flipped)
+    "She takes a moment to look at something on her phone."
+    "Then she walks away."
+    $ scene_manager.add_actor(bystander, display_transform = character_left_flipped, position = "walking_away")
+    "The girls watch as she walks away."
+    $ scene_manager.remove_actor(bystander)
+    the_person_one "Wow, did you see that?"
+    $ temp_string = bystander.outfit.build_outfit_name()
+    the_person_two "The [temp_string]?"
+    if preferences.evaluate_outfit(bystander.outfit, the_person_one.sluttiness + 10) == True:
+        the_person_one "Yeah. I really liked it! I could totally see myself wearing something like that."
+    else:
+        $ temp_string = "I know that the oufit " + preferences.evaluate_outfit_get_return(bystander.outfit, the_person_one.sluttiness + 10) + ", but what if I did something similar?"
+        the_person_one "[temp_string]"
+    "[the_person_two.title] considers it for a moment."
+    if builder.approves_outfit_color(bystander.outfit):
+        the_person_two "I suppose so. I mean the color was nice."
+    else:
+        the_person_two "I don't know, I don't usually see you wear that colour."
+        $ temp_string = "I could do something like that but in " + the_person_one.favorite_colour() + "."
+        the_person_one "[temp_string]"
+        the_person_two "That would be interesting."
+    "[the_person_one.possessive_title] sips her coffee and thinks about it for a bit."
+    the_person_two "What do you think [the_person_two.mc_title]? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think she would look good in that?"
+    if the_person_two.is_girlfriend():
+        "[the_person_one.possessive_title] listens to your response intently. You can tell she is interested in your opinion."
+    else:
+        "[the_person_one.possessive_title] glances at you. She tries not to show it, but you can tell she is interested in your opinion."
+    menu:
+        "Yes":
+            the_person_one "I think I'm gonna go over to the mall this afternoon and try some stuff on. I could use a new outfit!"
+            "Hmm, maybe you should swing by the mall later and help [the_person_one.title] go clothes shopping?"
+        "No":
+            the_person_one "Ahh..."
+            "[the_person_one.possessive_title] sinks down in her seat a bit. You can tell she is a little embrassed."
+
+    python:
+        del bystander
+        del builder
+        del preferences
+        del temp_string
+    return
+
+
+
+
+
 init 2 python: #Coffee time requirements function. #TODO should I pull out coffee times stuff to its own file? this file might get too big.
     def coffee_time_innocent_chat_requirement():
+        return True
+
+    def coffee_time_woman_walks_by_requirement():
         return True
 
     def coffee_time_sexy_chat_requirement():
@@ -1333,16 +1381,18 @@ init 3 python:
     coffee_time_innocent_chat = Action("Sister Talk", coffee_time_innocent_chat_requirement, "coffee_time_innocent_chat_label")
     coffee_time_sexy_chat = Action("Sister Sexy Talk", coffee_time_sexy_chat_requirement, "coffee_time_sexy_chat_label")
     coffee_time_steph_gets_handsy = Action("Stephanie gets handsy", coffee_time_steph_gets_handsy_requirement, "coffee_time_steph_gets_handsy_label")
+    coffee_time_woman_walks_by_label = Action("Woman walks by", coffee_time_woman_walks_by_requirement, "coffee_time_woman_walks_by_label")
 
     ashley_coffee_time_action_list.append(coffee_time_innocent_chat)
     ashley_coffee_time_action_list.append(coffee_time_sexy_chat)
+    ashley_coffee_time_action_list.append(coffee_time_woman_walks_by_label)
     steph_coffee_time_action_list.append(coffee_time_innocent_chat)
     steph_coffee_time_action_list.append(coffee_time_sexy_chat)
     steph_coffee_time_action_list.append(coffee_time_steph_gets_handsy)
 
     def ashley_coffee_time_get_random_action():
         possible_action_list = []
-        for ashley_scene in steph_coffee_time_action_list:
+        for ashley_scene in ashley_coffee_time_action_list:
             if ashley_scene.is_action_enabled(): #Get the first element of the weighted tuple, the action.
                 possible_action_list.append(ashley_scene) #Build a list of valid crises from ones that pass their requirement.
         return get_random_from_list(possible_action_list)

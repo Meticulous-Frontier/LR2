@@ -157,15 +157,19 @@ init 5 python:
         return
 
     def advance_time_run_turn(people):
+        start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
             person.run_turn()
         mc.business.run_turn()
         mc.run_turn()
         if "quest_director" in globals():
             quest_director.run_turn()
+        if debug_log_enabled:
+            add_to_log("Run Turn: " + str(time.time() - start_time))
         return
 
     def advance_time_run_day(people):
+        start_time = time.time()
         for (person, place) in people:
             person.run_day()
 
@@ -173,20 +177,26 @@ init 5 python:
         mc.business.run_day()
         if "quest_director" in globals():
             quest_director.run_day()
+        if debug_log_enabled:
+            add_to_log("Run Day: " + str(time.time() - start_time))
         return
 
     def advance_time_run_move(people):
+        start_time = time.time()
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
             if person.follow_mc: # move follower to mc location
                 person.change_location(mc.location)
 
         mc.business.run_move()
+        if debug_log_enabled:
+            add_to_log("Run Move: " + str(time.time() - start_time))
         return
 
     def advance_time_assign_limited_time_events(people):
-        for (person, place) in people:
-            if renpy.random.randint(0,100) < 10 and (person.mc_title != "Stranger" or person.title): #Only assign one to 10% of people, to cut down on the number of people we're checking.
+        start_time = time.time()
+        for (person, place) in [x for x in people if x[0].title or x[0].mc_title != "Stranger"]:
+            if renpy.random.randint(0,100) < 10: #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
                     if crisis[2] == "on_talk" and not crisis[0] in [x.the_action for x in person.on_talk_event_list if isinstance(x, Limited_Time_Action)]:
@@ -260,8 +270,8 @@ label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
-        if debug_event_notification:
-            $ renpy.notify("Random crisis: " + crisis.name)
+        if debug_log_enabled:
+            $ add_to_log("Random crisis: " + crisis.name)
 
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
@@ -284,8 +294,8 @@ label advance_time_mandatory_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
             $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if debug_event_notification:
-            $ renpy.notify("Mandatory crisis: " + active_crisis_list[crisis_count].name)
+        if debug_log_enabled:
+            $ add_to_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -312,9 +322,9 @@ label advance_time_people_run_day_label():
     $ advance_time_run_day(people_to_process)
     # we need to clear memory at least once a week (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
     # we clear the memory every day when not using high memory mode regardless of setting.
-    if persistent.use_free_memory or persistent.memory_mode < 2 or day%7 == 6:
+    if persistent.use_free_memory:
         $ renpy.free_memory()
-    $ gc.collect()
+    # $ gc.collect()    don't force garbage collector, let internals handle this
     #$ renpy.profile_memory(.5, 1024)
     $ renpy.block_rollback()
 
@@ -349,8 +359,8 @@ label advance_time_mandatory_morning_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
             $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if debug_event_notification:
-            $ renpy.notify("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
+        if debug_log_enabled:
+            $ add_to_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -368,8 +378,8 @@ label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
-        if debug_event_notification:
-            $ renpy.notify("Random morning crisis: " + crisis.name)
+        if debug_log_enabled:
+            $ add_to_log("Random morning crisis: " + crisis.name)
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ crisis.call_action()

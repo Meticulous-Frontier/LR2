@@ -47,7 +47,7 @@ init 2 python:
 
     def calculate_outfit_slut_score(wardrobe, outfit):
         if outfit in wardrobe.outfits:
-            return outfit.get_full_outfit_slut_score() 
+            return outfit.get_full_outfit_slut_score()
         elif outfit in wardrobe.overwear_sets:
             return outfit.get_overwear_slut_score()
         return outfit.get_underwear_slut_score()
@@ -57,8 +57,33 @@ init 2 python:
     def selected_xml_clothing(outfit):
         renpy.show_screen("outfit_creator", outfit.get_copy())
 
+    def get_default_import_wardrobes(slut_limit):
+        import_wardrobes = {}
+        if slut_limit is None: # If slut_limit is None then add any and all options
+
+            import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+            import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
+
+        import_wardrobes["Marketing Division"] = [[mc.business.m_uniform]]
+        import_wardrobes["Research Division"] = [[mc.business.r_uniform]]
+        import_wardrobes["Production Division"] = [[mc.business.p_uniform]]
+        import_wardrobes["Supply Division"] = [[mc.business.s_uniform]]
+        import_wardrobes["HR Division"] = [[mc.business.h_uniform]]
+        import_wardrobes["All Division"] = [[mc.business.all_uniform]]
+        return import_wardrobes
+
+    def get_strip_club_import_wardrobes():
+        import_wardrobes = {}
+        import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+        import_wardrobes["Strippers"] = [[stripclub_wardrobe]]
+        import_wardrobes["Waitresses"] = [[waitress_wardrobe]]
+        import_wardrobes["Manager"] = [[manager_wardrobe]]
+        import_wardrobes["Mistress"] = [[mistress_wardrobe]]
+        import_wardrobes["BDSM performers"] = [[BDSM_performer_wardrobe]]
+        return import_wardrobes
+
 init 2:
-    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, underwear_limit = None): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
+    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, underwear_limit = None, use_strip_club_wardrobe = False): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
 
         default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list"]} #NOTE: Key is display name, [0] is XML's category type, [1] is outfit type, [2] is function to retrive [0]
         default import_mode = {"Import": [], "Assign": []}
@@ -69,19 +94,7 @@ init 2:
         default targeted_outfit = None
         #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
 
-        default import_wardrobes = {} # Holds the wardrobes you want to be able to import into or select #NOTE: Make sure it is a list inside of a list [[]]
-        python:
-            if slut_limit is None: # If slut_limit is None then add any and all options
-
-                import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
-                import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
-
-            import_wardrobes["Marketing Division"] = [[mc.business.m_uniform]]
-            import_wardrobes["Research Division"] = [[mc.business.r_uniform]]
-            import_wardrobes["Production Division"] = [[mc.business.p_uniform]]
-            import_wardrobes["Supply Division"] = [[mc.business.s_uniform]]
-            import_wardrobes["HR Division"] = [[mc.business.h_uniform]]
-            import_wardrobes["All Division"] = [[mc.business.all_uniform]]
+        default import_wardrobes = get_default_import_wardrobes(slut_limit) if not use_strip_club_wardrobe else get_strip_club_import_wardrobes() # Holds the wardrobes you want to be able to import into or select #NOTE: Make sure it is a list inside of a list [[]]
 
         python:
             if xml_filename:

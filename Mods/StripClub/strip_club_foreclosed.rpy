@@ -38,7 +38,7 @@ init 2 python:
             return False
         if mc.business.funds > 60000:
             if time_of_day > 2:
-                if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True and cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
+                if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
                     return True
         return False
 

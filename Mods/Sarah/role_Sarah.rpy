@@ -58,7 +58,6 @@ init 2 python:
             ])
 
         sarah.generate_home()
-        sarah.home.background_image = standard_bedroom1_background
         sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
@@ -386,8 +385,11 @@ init -1 python:
         outfit.add_accessory(lipstick.get_copy(), [.745, .117, .235, .8])
         return outfit
 
-    def create_sarah_friend():
-        sarah_friend = make_person(name = "Helen", last_name = "Brown", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = "alt blond", hair_style = braided_bun, skin="white", relationship = "Fiancée", kids = 0, tits = "DDD", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+    def create_naomi():     # initializes her and returns person
+        if "naomi" in globals():
+            return
+
+        naomi = make_person(name = "Naomi", last_name = "Walters", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = "alt blond", hair_style = braided_bun, skin="white", relationship = "Fiancée", kids = 0, tits = "DD", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
                 ["skirts", 1, False],
                 ["other girls", 1, False],
                 ["boots", 1, False],
@@ -405,15 +407,16 @@ init -1 python:
                 ["not wearing underwear", 2, False],
                 ["anal sex", -2, False]
             ])
-        sarah_friend.generate_home()
-        downtown_bar.add_person(sarah_friend)
-        sarah_friend.set_title(sarah_friend.name)
-        sarah_friend.set_mc_title(mc.name)
-        sarah_friend.set_possessive_title(get_random_possessive_title(the_person))
-        sarah_friend.set_schedule(the_person.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
-        sarah.event_triggers_dict["bar_friend"] = sarah_friend.identifier
-        town_relationships.update_relationship(sarah, sarah_friend, "Friend")
-        return sarah_friend
+        naomi.generate_home()
+        downtown_bar.add_person(naomi)
+        naomi.set_title(naomi.name)
+        naomi.set_mc_title(mc.name)
+        naomi.set_possessive_title(get_random_possessive_title(the_person))
+        naomi.set_schedule(naomi.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
+        sarah.event_triggers_dict["bar_friend"] = naomi.identifier
+        town_relationships.update_relationship(sarah, naomi, "Best Friend")
+        unique_character_list.append(naomi) # add her to the unique character list for later story line
+        return naomi
 
 
 label Sarah_intro_label():
@@ -578,19 +581,19 @@ label Sarah_third_wheel_label():
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
 
-    $ sarah_friend = create_sarah_friend()
+    $ naomi = create_naomi()
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
     $ scene_manager.update_actor(the_person, position = "sitting")
-    $ scene_manager.add_actor(sarah_friend, position = "sitting", display_transform = character_left_flipped)
-    the_person.char "Hey [sarah_friend.title]! Good to see you."
-    sarah_friend.char "Hey girl! Is he with you?"
+    $ scene_manager.add_actor(naomi, position = "sitting", display_transform = character_left_flipped)
+    the_person.char "Hey [naomi.title]! Good to see you."
+    naomi.char "Hey girl! Is he with you?"
     "She nods towards you."
-    the_person.char "Yup! This is my bo... I mean, an old friend of mine. [mc.name] this is [sarah_friend.title]!"
-    "You make acquaintance and sit down. [sarah_friend.title] also introduces you to her boyfriend."
-    "You chat for a bit, but notice that [sarah_friend.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leary."
+    the_person.char "Yup! This is my bo... I mean, an old friend of mine. [mc.name] this is [naomi.title]!"
+    "You make acquaintance and sit down. [naomi.title] also introduces you to her boyfriend."
+    "You chat for a bit, but notice that [naomi.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leary."
     mc.name "Hey, how about I get us a couple drinks, [the_person.title]?"
     the_person.char "Oh! That sounds great! Can you get me an appletini?"
-    "As you start to get up, [sarah_friend.title]'s boyfriend also excuses himself to the restroom, leaving the girls alone."
+    "As you start to get up, [naomi.title]'s boyfriend also excuses himself to the restroom, leaving the girls alone."
     "It takes a few minutes to get the attention of the bartender. You order the drink for [the_person.title] and get yourself a nice bourbon, straight."
     $ mc.business.change_funds(-20)
     $ scene_manager.update_actor(the_person, position = "sitting", emotion = "sad")
@@ -598,31 +601,31 @@ label Sarah_third_wheel_label():
     mc.name "Hey! Here's your drink... are you okay?"
     the_person.char "Yeah... yeah I'm fine I just umm, I need to go use the lady's room."
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "She gets up in a hurry and walks quickly away. You look at [sarah_friend.title]"
+    "She gets up in a hurry and walks quickly away. You look at [naomi.title]"
     $ scene_manager.hide_actor(the_person)
     mc.name "Umm... any idea what that is about?"
-    sarah_friend.char "No idea... we were just talking about, well you actually."
+    naomi.char "No idea... we were just talking about, well you actually."
     "Something about the way she says it makes you uncomfortable."
-    sarah_friend.char "[the_person.name] says you are a great guy, a good friend of hers."
+    naomi.char "[the_person.name] says you are a great guy, a good friend of hers."
     mc.name "Yeah, something like that I guess..."
-    sarah_friend.char "What do you say we get out of here? Like back to my place?"
+    naomi.char "What do you say we get out of here? Like back to my place?"
     mc.name "That sounds pretty good actually. [the_person.name] will be excited to hear that I think."
-    sarah_friend.char "Ha! No no, I mean, just you. [the_person.name] is a good friend but..."
+    naomi.char "Ha! No no, I mean, just you. [the_person.name] is a good friend but..."
     mc.name "But?"
     if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
-        sarah_friend.char "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
+        naomi.char "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
         "You feel yourself getting angry at her crude remarks."
     elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2:
-        sarah_friend.char "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
+        naomi.char "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
         "You feel yourself getting angry at her crude remarks."
     else:
-        sarah_friend.char "Like, one day she's got nothing, next thing I know, her tits are fucking huge!?! She's such a bimbo."
+        naomi.char "Like, one day she's got nothing, next thing I know, her tits are fucking huge!?! She's such a bimbo."
         "You feel yourself getting angry at her crude remarks."
     "You are able to restrain yourself, but only just barely."
     mc.name "[the_person.name] has an amazing body, and a great personality to go with it. If you and your boyfriend don't see that, I don't think anything with me can work out."
-    sarah_friend.char "Pfft, whatever. There's a dozen other dicks at the bar. Why don't you go find your date, she's probably sulking in the bathroom again!"
+    naomi.char "Pfft, whatever. There's a dozen other dicks at the bar. Why don't you go find your date, she's probably sulking in the bathroom again!"
     "You decide not to stoop to her level and to end your conversation there. You grab you and [the_person.title]'s drink and get up, not bothering to say goodbye."
-    $ scene_manager.remove_actor(sarah_friend)
+    $ scene_manager.remove_actor(naomi)
     "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
     "You don't see anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
     $ scene_manager.show_actor(the_person, position = "stand2", emotion = "sad")
@@ -631,7 +634,7 @@ label Sarah_third_wheel_label():
     "She quickly looks up and is surprised to see you. She briefly pulls herself together."
     the_person.char "Is that you, [the_person.mc_title]? You're still here? I thought you would be gone by now..."
     mc.name "What are you talking about?"
-    the_person.char "Well, [sarah_friend.title] said... she was asking me about you, asked if we were involved, and when I said no said she was going to make a pass at you tonight..."
+    the_person.char "Well, [naomi.title] said... she was asking me about you, asked if we were involved, and when I said no said she was going to make a pass at you tonight..."
     the_person.char "I just assumed, when I left the table that, I mean, why didn't you go with her?"
     "She assumed when her friend made a pass at you that you would bail on her! You quickly reassure her."
     mc.name "[the_person.title], I came here to support you, and to spend time with my long lost friend having some fun and a few drinks."
@@ -681,7 +684,6 @@ label Sarah_third_wheel_label():
     $ time_of_day = 3
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
-    $ del sarah_friend
     $ add_sarah_get_drinks_action()
     return
 

@@ -179,6 +179,31 @@ init -1 python:
     def get_person_by_identifier(identifier):
         return next((x for x in all_people_in_the_game() if x.identifier == identifier), None)
 
+    def get_person_bedroom(self):
+        if not hasattr(self, "_bedroom"):
+            if self.has_role(prostitute_role):
+                self._bedroom = prostitute_bedroom
+            else:
+                self._bedroom = get_random_from_list([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
+        return self._bedroom
+    Person.bedroom = property(get_person_bedroom, None, None, "Her bedroom")
+
+    # use dedicated locations, since each location has different objects
+    def change_to_person_bedroom(self):
+        mc.change_location(self.bedroom)
+        mc.location.show_background()
+        return
+
+    Person.change_to_bedroom = change_to_person_bedroom
+
+    # use dedicated locations, since each location has different objects
+    def change_to_person_hallway(self):
+        mc.change_location(her_hallway) # use generic hallway
+        mc.location.show_background()
+        return
+
+    Person.change_to_hallway = change_to_person_hallway
+
     def get_person_next_day_outfit(self):
         if not hasattr(self, "_next_day_outfit"):
             self._next_day_outfit = None
@@ -726,14 +751,12 @@ init -1 python:
     def run_move_enhanced(self,location):
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
-        if time_of_day == 0: #It's a new day, get a new outfit out to wear!
+        if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function
             if self.next_day_outfit:
                 self.planned_outfit = self.next_day_outfit
                 self.next_day_outfit = None
             else:
                 self.planned_outfit = self.decide_on_outfit()
-
-            self.apply_outfit(self.planned_outfit)
             self.planned_uniform = None
             self.work_outfit = None
 
@@ -741,38 +764,24 @@ init -1 python:
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
             destination = None
 
-        if destination is not None: #We have somewhere scheduled to be for this time chunk. Let's move over there.
-            if destination == self.work: #We're going to work.
-                if self.should_wear_uniform(): #Get a uniform if we should be wearing one.
-                    self.wear_uniform()
-                    self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
-                    # only changes sluttiness in low sluttiness range after that she won't care anymore
-                    if self.sluttiness < 40 and self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.75: #A skimpy outfit/uniform is defined as the top 25% of a girls natural sluttiness.
-                        self.change_slut_temp(self.get_opinion_score("skimpy uniforms"), add_to_log = False)
-
-            elif not location is destination: # only change outfit if we change location
-                self.apply_planned_outfit() #We're at home, so we can get back into our casual outfit.
-
-            location.move_person(self, destination) #Always go where you're scheduled to be.
+        # changing outfits is handled by move_person wrapper function
+        if destination:
+            location.move_person(self, destination)
         else:
-            #She finds somewhere to burn some time
-            if not location is destination: # only change outfit if we change location
-                self.apply_planned_outfit() #Get changed back into our proper outfit if we aren't in it already.
-
             location.move_person(self, get_random_from_list([x for x in list_of_places if x.public]))
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
-        if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
+        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
             self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
-        if self.sluttiness < 40 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
+        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
             # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
             if self.happiness > 80 and self.happiness < 120:
                 self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
 
-        # lingerie only impacts to sluttiness level 40
-        if self.sluttiness < 40 and self.outfit and (self.outfit.get_bra() or self.outfit.get_panties()):
+        # lingerie only impacts to sluttiness level 30
+        if self.sluttiness < 30 and self.outfit and (self.outfit.get_bra() or self.outfit.get_panties()):
             lingerie_bonus = 0
             if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
                 lingerie_bonus += self.get_opinion_score("lingerie")
@@ -781,8 +790,8 @@ init -1 python:
             lingerie_bonus = __builtin__.int(lingerie_bonus/2.0)
             self.change_slut_temp(lingerie_bonus, add_to_log = False)
 
-        # not wearing underwear only impacts sluttiness to level 60
-        if self.sluttiness < 60 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        # not wearing underwear only impacts sluttiness to level 40
+        if self.sluttiness < 40 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
             if not self.outfit.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
@@ -791,31 +800,29 @@ init -1 python:
             underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
             self.change_slut_temp(underwear_bonus, add_to_log = False)
 
-        # showing the goods only impacts sluttiness to level 80
-        if self.sluttiness < 80 and self.outfit and self.outfit.tits_visible():
+        # showing the goods only impacts sluttiness to level 50
+        if self.sluttiness < 50 and self.outfit and self.outfit.tits_visible():
             self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
-        if self.sluttiness < 80 and self.outfit and self.outfit.vagina_visible():
+        if self.sluttiness < 50 and self.outfit and self.outfit.vagina_visible():
             self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
 
-        # showing everything only impacts sluttiness to level 80
-        if self.sluttiness < 80 and self.outfit and self.outfit.full_access():
+        # showing everything only impacts sluttiness to level 60
+        if self.sluttiness < 60 and self.outfit and self.outfit.full_access():
             self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
-        removal_list = [] #So we can iterate through without removing and damaging the list.
-        for an_action in [x for x in self.on_room_enter_event_list + self.on_talk_event_list if isinstance(x, Limited_Time_Action)]:
-            an_action.turns_valid -= 1
-            if an_action.turns_valid <= 0:
-                removal_list.append(an_action)
+        for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
+            removal_list = []
+            for an_action in [x for x in lta_store if isinstance(x, Limited_Time_Action)]:
+                an_action.turns_valid -= 1
+                if an_action.turns_valid <= 0:
+                    removal_list.append(an_action)
 
-        for action_to_remove in removal_list:
-            if action_to_remove in self.on_room_enter_event_list:
-                self.on_room_enter_event_list.remove(action_to_remove)
-            if action_to_remove in self.on_talk_event_list:
-                self.on_talk_event_list.remove(action_to_remove)
+            for action_to_remove in removal_list:
+                if action_to_remove in lta_store:
+                    lta_store.remove(action_to_remove)
 
         for a_role in self.special_role:
             a_role.run_move(self)
-
 
     Person.run_move = run_move_enhanced
 
@@ -849,21 +856,15 @@ init -1 python:
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
 
-    def person_generate_home_extended(org_func):
-        def generate_home_wrapper(person, set_home_time = True):
-            result = org_func(person, set_home_time)
-            if not person in unique_character_list:
-                if person.has_role(prostitute_role):
-                    result.background_image = prostitute_bedroom_background
-                    result.remove_object("floor")
-                    result.add_object(make_love_rug())
-                else:
-                    result.background_image = get_random_from_list([standard_bedroom1_background, standard_bedroom2_background, standard_bedroom3_background, standard_bedroom4_background])
-            return result
+    # NO FUNCTIONALITY YET, BEDROOMS HAS BEEN MOVED TO PERSON CLASS EXTENSIONS
+    # def person_generate_home_extended(org_func):
+    #     def generate_home_wrapper(person, set_home_time = True):
+    #         result = org_func(person, set_home_time)
+    #         return result
 
-        return generate_home_wrapper
+    #     return generate_home_wrapper
 
-    Person.generate_home = person_generate_home_extended(Person.generate_home)
+    # Person.generate_home = person_generate_home_extended(Person.generate_home)
 
     # BUGFIX: Remove suggest effect
     # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
@@ -1135,10 +1136,8 @@ init -1 python:
         if emotion is None:
             emotion = self.get_emotion()
 
-        if not can_use_animation():
-            the_animation = None
-        elif the_animation is None:
-            the_animation = self.idle_animation
+        background_fill = None
+        the_animation = None
 
         if display_transform is None:
             display_transform = character_right
@@ -1158,23 +1157,14 @@ init -1 python:
         if display_zorder is None:
             display_zorder = 0
 
-        self.draw_number[draw_layer] += 1
         self.hide_person()
         if wipe_scene:
             clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        character_image = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
+        character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
-
-        if the_animation:
-            global global_draw_number
-            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
-
-            global prepared_animation_arguments
-            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder] #Effectively these are being stored and passed to draw_person_animation once take_animation_screenshot returns the surface
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render, position, emotion, special_modifier, lighting, background_fill, animation_draw_number, draw_layer) #This thread prepares the render. When it is finished it is caught by the interact_callback function take_animation_screenshot
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1192,6 +1182,9 @@ init -1 python:
             renpy.say("WARNING", self.name + " is not wearing any outfit to remove an item from, aborting draw animated removal.")
             return
 
+        background_fill = None
+        the_animation = None
+
         if position is None:
             position = self.idle_pose
 
@@ -1200,15 +1193,6 @@ init -1 python:
 
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
-
-        if not can_use_animation():
-            the_animation = None
-        elif the_animation is None:
-            the_animation = self.idle_animation
-
-        global draw_layers
-        if draw_layer not in draw_layers:
-            add_draw_layer(draw_layer)
 
         if display_transform is None: # make sure we don't need to pass the position with each draw
             display_transform = character_right
@@ -1222,71 +1206,71 @@ init -1 python:
         else:
             extra_at_arguments = []
 
-        self.draw_number[draw_layer] += 1
+        if not isinstance(the_clothing, list):  # convert clothing to list, if not already
+            the_clothing = [the_clothing]
 
         if display_zorder is None:
             display_zorder = 0
 
+        if wipe_scene:
+            clear_scene()
 
-        if the_animation:
-            # Normally we would display a quick flat version, but we can assume we are already looking at the girl pre-clothing removal.
-            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the starting image without the frame
-            if isinstance(the_clothing, list):  #Handle the half-off state for whether it should be removed or not.
-                for cloth in the_clothing:
-                    if half_off_instead:
-                        self.outfit.half_off_clothing(cloth) #Half-off the clothing
-                    else:
-                        self.outfit.remove_clothing(cloth) #Remove the clothing
+        if scene_manager is None and show_person_info:
+            renpy.show_screen("person_info_ui",self)
+        else:   # when we are called from the scene manager we have to draw the other characters
+            scene_manager.draw_scene(exclude_list = [self])
+
+        bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)) # needs to be flattened for fade to work correctly
+        for cloth in the_clothing:
+            if half_off_instead:
+                self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
-                if half_off_instead:
-                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
-                else:
-                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
+                self.outfit.remove_clothing(cloth) #Remove the clothing
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
 
-            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, no_frame = True)) #Get the top image without the frame
-
-            x_size, y_size = position_size_dict.get(position)
-            bottom_render = bottom_displayable.render(x_size, y_size, 0, 0)
-            top_render = top_displayable.render(x_size, y_size, 0, 0)
-
-            global global_draw_number
-            animation_draw_number = self.draw_number[draw_layer] + global_draw_number[draw_layer]
-
-            global prepared_animation_arguments
-            prepared_animation_arguments[draw_layer][self.character_number] = [the_animation, position, emotion, special_modifier, lighting, background_fill, animation_effect_strength, show_person_info, animation_draw_number, draw_layer, display_transform, extra_at_arguments, display_zorder]
-
-            renpy.invoke_in_thread(self.prepare_animation_screenshot_render_multi, position, bottom_render, top_render, animation_draw_number, draw_layer)
-
-        else:
-            if wipe_scene:
-                clear_scene()
-
-            if scene_manager is None and show_person_info:
-                renpy.show_screen("person_info_ui",self)
-            else:   # when we are called from the scene manager we have to draw the other characters
-                scene_manager.draw_scene(exclude_list = [self])
-
-            bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-            if isinstance(the_clothing, list): #Handle the half-off state for whether it should be removed or not.
-                for cloth in the_clothing:
-                    if half_off_instead:
-                        self.outfit.half_off_clothing(cloth) #Half-off the clothing
-                    else:
-                        self.outfit.remove_clothing(cloth) #Remove the clothing
-            else:
-                if half_off_instead:
-                    self.outfit.half_off_clothing(the_clothing) #Half-off the clothing
-                else:
-                    self.outfit.remove_clothing(the_clothing) #Remove the clothing
-            top_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill))
-
-            self.hide_person()
-            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
-            renpy.show(self.identifier + "_extra", at_list=at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder, tag = self.identifier + "_extra") #Blend from old to new.
+        self.hide_person()
+        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier )
+        renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
+
+    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
+        if position is None:
+            position = self.idle_pose
+        if emotion is None:
+            emotion = self.get_emotion()
+
+        forced_special_modifier = self.outfit.get_forced_modifier()
+        if forced_special_modifier is not None:
+            special_modifier = forced_special_modifier
+
+        displayable_list = []
+        displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
+        displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
+        displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Add in her pubes
+
+        displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
+        displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
+
+        composite_list = [position_size_dict.get(position)]
+        for display in displayable_list:
+            if isinstance(display, __builtin__.tuple):
+                composite_list.extend(display)
+            else:
+                composite_list.append((0,0))
+                composite_list.append(display)
+
+        return Composite(*composite_list)
+
+    Person.build_person_displayable = build_person_displayable_enhanced
+
+    def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all posible known tags for the character.
+        # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
+        renpy.hide(self.identifier, draw_layer)
+        renpy.hide(self.identifier + "_old", draw_layer)
+
+    Person.hide_person = hide_person_enhanced
 
     ####### Begin cum extension functions ######
 

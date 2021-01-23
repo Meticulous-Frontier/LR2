@@ -183,12 +183,12 @@ init 2:
                                                                 xsize 40
                                                                 yoffset 8
                                                                 textbutton "<<":
-                                                                    action [Function(mc.business.change_line_autosell,count,-10)]
+                                                                    action [Function(mc.business.change_line_autosell,count, (-10 if mc.business.serum_production_array[count][3] != 10 else -11))]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
                                                                 textbutton "<":
-                                                                    action [Function(mc.business.change_line_autosell,count, -1)]
+                                                                    action [Function(mc.business.change_line_autosell,count, (-1 if mc.business.serum_production_array[count][3] > 1 else -2))]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
@@ -214,12 +214,12 @@ init 2:
                                                                 xsize 40
                                                                 yoffset 8
                                                                 textbutton ">":
-                                                                    action [Function(mc.business.change_line_autosell,count, 1)]
+                                                                    action [Function(mc.business.change_line_autosell,count, (2 if mc.business.serum_production_array[count][3] <= 0 else 1))]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
                                                                 textbutton ">>":
-                                                                    action [Function(mc.business.change_line_autosell,count,10)]
+                                                                    action [Function(mc.business.change_line_autosell,count, (11 if mc.business.serum_production_array[count][3] <= 0 else 10))]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip

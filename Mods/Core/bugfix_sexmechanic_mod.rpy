@@ -508,7 +508,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             # In 13% of the cases she takes control regardless of obedience, but only when she came only once
             # higher chance when she likes taking control lower when she doesn't
-            if the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and ((renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience) or renpy.random.randint(0, 6) == 3):
+            if not position_locked and the_person.energy >= 30 and report_log.get("girl orgasms", 0) < 2 and ((renpy.random.randint(0, __builtin__.int(the_person.arousal)) + 50 + the_person.get_opinion_score("taking control") * 25 > the_person.obedience) or renpy.random.randint(0, 6) == 3):
                 $ the_person.change_obedience(-3)
                 $ girl_in_charge = True
                 $ finished = False
@@ -517,7 +517,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
                 $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
-            elif the_person.energy >= 30 and (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
+            elif not position_locked and the_person.energy >= 30 and (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
                 # They're close to their orgasm and beg you to help them finish.
                 $ the_person.call_dialogue("sex_beg_finish")
                 menu:
@@ -622,9 +622,10 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             # if still has taboo, always ask
             if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
                 # she is not slutty enough and we have the condom dialog
-                call condom_ask_enhanced(the_person) from _call_condom_ask_bugfix
+                call condom_ask_enhanced(the_person, the_position.skill_tag) from _call_condom_ask_bugfix
                 if _return == 0:
                     $ ask_for_condom = False # we don't have vag/anal sex so if player tries again, she will ask for condom again
+                    $ willing = 0
                 else:
                     $ use_condom = mc.condom
             else:
@@ -639,7 +640,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
 
     return willing
 
-label condom_ask_enhanced(the_person):
+label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
     $ condom_threshold = the_person.get_no_condom_threshold()
 
     if the_person.has_role(cum_internal_role) or the_person.has_role(breeding_fetish_role):
@@ -648,12 +649,13 @@ label condom_ask_enhanced(the_person):
             "Put on a condom":
                 "You pull a condom out of your wallet and tear open the package."
                 "[the_person.title] takes a hold of the condom in your hand."
-                if the_person.knows_pregnant():
-                    the_person "I'm already pregnant. It's a bit late for that, isn't it?"
-                elif the_person.on_birth_control:
-                    the_person "I'm on the pill so we really don't need one of those." # even if she is or not - she'll say it
-                else:
-                    the_person "You don't really need that thing, do you?"
+                if skill_tag == "Vaginal":
+                    if the_person.knows_pregnant():
+                        the_person "I'm already pregnant. It's a bit late for that, isn't it?"
+                    elif the_person.on_birth_control:
+                        the_person "I'm on the pill so we really don't need one of those." # even if she is or not - she'll say it
+                    else:
+                        the_person "You don't really need that thing, do you?"
                 the_person "I want your cum inside me and this is going to stop that."
                 menu:
                     "Insist on condom":
@@ -661,11 +663,14 @@ label condom_ask_enhanced(the_person):
                         if the_person.is_dominant():
                             the_person "OK. Let me put this another way."
                             "[the_person.title] grabs the condom and throws it off to the side."
-                            the_person "Either we fuck and you come inside me or we don't fuck at all."
+                            if skill_tag == "Vaginal":
+                                the_person "Either we fuck and come inside me or we don't fuck at all."
+                            else:
+                                the_person "Either you fuck my ass raw or we don't fuck at all."
                             menu:
                                 "Fuck her raw":
                                     mc.name "Fine."
-                                    call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_1
+                                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_1
                                 "Don't":
                                     mc.name "If it's that important to you let's just do something else."
                                     return 0
@@ -673,7 +678,7 @@ label condom_ask_enhanced(the_person):
                             the_person "OK."
                             call put_on_condom_routine(the_person) from _call_put_on_condom_routine_8
                     "Fuck her raw":
-                        call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_2
+                        call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_2
                         return 1
             "Don't":
                 return 1
@@ -684,8 +689,9 @@ label condom_ask_enhanced(the_person):
             the_person "That means 'safety first' - always."
             the_person "We're going to have to use one of these."
             "She gets out a condom."
-            if the_person.knows_pregnant():
-                the_person "Me being pregnant doesn't change that."
+            if skill_tag == "Vaginal":
+                if the_person.knows_pregnant():
+                    the_person "Me being pregnant doesn't change that."
             the_person "But don't you worry."
             the_person "You're going to feel EVERY thing we do."
             menu:
@@ -700,10 +706,13 @@ label condom_ask_enhanced(the_person):
         elif the_person.sex_record.get("Vaginal Creampies", 0) < 5 and the_person.sex_record.get("Anal Creampies", 0) < 5:
             the_person "Normally we would have to use one of these."
             "She gets out a condom."
-            if the_person.knows_pregnant():
-                the_person "Would you like to fuck this pregnant whore without one?"
+            if skill_tag == "Vaginal":
+                if the_person.knows_pregnant():
+                    the_person "Would you like to fuck this pregnant whore without one?"
+                else:
+                    the_person "But maybe not. What do you think?"
             else:
-                the_person "But maybe not. What do you think?"
+                the_person "I know, I can't get pregnant, when you fuck my ass, should we use one?"
             menu:
                 "Condom":
                     mc.name "Let's cover this bad boy up."
@@ -717,10 +726,13 @@ label condom_ask_enhanced(the_person):
 
         else:
             the_person "I know you like to do me bare."
-            if the_person.knows_pregnant():
-                the_person "Would you like to shower my baby with your cum?"
+            if skill_tag == "Vaginal":
+                if the_person.knows_pregnant():
+                    the_person "Would you like to shower my baby with your cum?"
+                else:
+                    the_person "So maybe no condom today?"
             else:
-                the_person "So maybe no condom today?"
+                the_person "So, do you want to fuck my little asshole without one?"
             menu:
                 "Agree no condom":
                     call prostitute_agree_no_condom_taboo_break_response(the_person) from _call_prostitute_agree_no_condom_taboo_break_response_2
@@ -735,7 +747,7 @@ label condom_ask_enhanced(the_person):
     elif the_person.effective_sluttiness() < condom_threshold:
         # they demand you put on a condom.
         #TODO: Make this dialogue personality based
-        if the_person.knows_pregnant():
+        if the_person.knows_pregnant() and skill_tag == "Vaginal":
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person "You can't get me {i}more{/i} pregnant, but I really don't like bare sex."
             else:
@@ -759,7 +771,7 @@ label condom_ask_enhanced(the_person):
 
     elif the_person.effective_sluttiness() < condom_threshold + 20:
         # They suggest you put on a condom.
-        if the_person.knows_pregnant():
+        if the_person.knows_pregnant() and skill_tag == "Vaginal":
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person "You can't get me {i}more{/i} pregnant, but I don't like bare sex. I think that you should put on a condom."
             else:
@@ -781,7 +793,7 @@ label condom_ask_enhanced(the_person):
 
             "Fuck her raw":
                 mc.name "No way. I want to feel you wrapped around me."
-                call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_3
+                call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_3
 
     else:
         if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0:
@@ -797,11 +809,14 @@ label condom_ask_enhanced(the_person):
                             if the_person.is_dominant():
                                 the_person "OK. Let me put this another way."
                                 "[the_person.title] grabs the condom and throws it off to the side."
-                                the_person "Either you fuck me raw or we don't fuck at all."
+                                if skill_tag == "Vaginal":
+                                    the_person "Either you fuck me raw or we don't fuck at all."
+                                else:
+                                    the_person "Either you fuck my ass raw or we don't fuck at all."
                                 menu:
                                     "Fuck her raw":
                                         mc.name "Fine."
-                                        call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_4
+                                        call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_4
 
                                     "Don't":
                                         mc.name "If it's that important to you let's just do something else."
@@ -816,12 +831,20 @@ label condom_ask_enhanced(the_person):
                             the_person "Thanks, [the_person.mc_title]."
 
                 elif the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
-                    if the_person.knows_pregnant():
-                        the_person "Remember that I'm pregnant, do we really need one of those now?"
-                    elif the_person.on_birth_control:
-                        the_person "I'm on the pill, do we really need one of those?"
+                    if skill_tag == "Vaginal":
+                        if the_person.knows_pregnant():
+                            the_person "Remember that I'm pregnant, do we really need one of those now?"
+                        elif the_person.on_birth_control:
+                            the_person "I'm on the pill, do we really need one of those?"
+                        elif the_person.get_opinion_score("bareback sex") > 0:
+                            the_person "Really? I don't like using a condom."
+                        else:
+                            the_person "Really? I do love feeling your cum inside me."
                     else:
-                        the_person "Really? I don't like using a condom."
+                        if the_person.get_opinion_score("bareback sex") > 0:
+                            the_person "Really? I do love it when you fuck my ass bare."
+                        else:
+                            the_person "Really? I do love feeling your cum inside me."
                     menu:
                         "Insist on condom":
                             mc.name "I think a condom is a good idea."
@@ -835,7 +858,7 @@ label condom_ask_enhanced(the_person):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
 
             "Fuck her raw":
-                call fuck_without_condom_taboo_break_response(the_person) from _call_fuck_without_condom_taboo_break_response_5
+                call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
@@ -857,8 +880,8 @@ label prostitute_agree_no_condom_taboo_break_response(the_person):
             the_person "I'm not using any contraception at the moment."
     return
 
-label fuck_without_condom_taboo_break_response(the_person):
-    if the_person.has_taboo("condomless_sex"):
+label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal"):
+    if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal":
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
         if the_person.get_opinion_score("bareback sex") > 0:
@@ -866,10 +889,11 @@ label fuck_without_condom_taboo_break_response(the_person):
         else:
             the_person "I'm not a big fan of bare sex, but if you like it that way."
 
-        if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
-            the_person "Just make sure to pull out when you cum, okay?"
-        if not the_person.on_birth_control:
-            the_person "I'm not using any contraception at the moment."
+        if skill_tag == "Vaginal":
+            if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
+                the_person "Just make sure to pull out when you cum, okay?"
+            if not the_person.on_birth_control:
+                the_person "I'm not using any contraception at the moment."
     return
 
 label put_on_condom_routine(the_person):

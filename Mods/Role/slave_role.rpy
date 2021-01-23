@@ -33,9 +33,14 @@ init 10 python:
             return True
         elif wakeup_duty_action.enabled is False:
             return False
+        elif day%7 == 5:    # not on saturday mornings
+            return False
         else:
             return  "Alarm duty already set."
+
     def wakeup_duty_crisis_requirement():
+        if day%7 == 5:    # not on saturday mornings
+            return False
         return True
 
     def slave_assign_new_collar(person, collar):
@@ -85,10 +90,10 @@ init 10 python:
     calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
     slave_trim_pubes_action = ActionMod("Trim pubes", slave_trim_pubes_requirement, "slave_trim_pubes_label", menu_tooltip = "Order her to do a little personal landscaping. Tell her to wax it off, grow it out, or shape it into anything in between.", category = "Slave Role")
 
-    collar_slave_action = ActionMod("Place collar on [the_person.title].", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
-    uncollar_slave_action = ActionMod("Remove collar from [the_person.title].", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
+    collar_slave_action = ActionMod("Place collar on [the_person.title]", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
+    uncollar_slave_action = ActionMod("Remove collar from [the_person.title]", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
 
-    wakeup_duty_action = ActionMod("Wake me up in the morning.", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
+    wakeup_duty_action = ActionMod("Wake me up in the morning", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")
 
     slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, wakeup_duty_action], \

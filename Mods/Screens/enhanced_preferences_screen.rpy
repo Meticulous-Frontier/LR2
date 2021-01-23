@@ -1,21 +1,17 @@
 init 2: # Add some additional
+    style pref_label_text:
+        yalign 1.0
+        size 28
+
     screen preferences():
 
         tag menu
-        if renpy.mobile:
-            $ cols = 2
-        else:
-            $ cols = 4
-
         use game_menu(_("Preferences"), scroll="viewport"):
 
             vbox:
 
                 hbox:
-                    box_wrap True
-
                     if renpy.variant("pc"):
-
                         vbox:
                             style_prefix "radio"
                             label _("Display")
@@ -36,25 +32,14 @@ init 2: # Add some additional
                         textbutton _("After Choices") action Preference("after choices", "toggle")
                         textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
+                hbox:
+
                     vbox:
                         style_prefix "radio"
                         label "Pregnancy Settings"
                         textbutton "Disabled" action SetField(persistent, "pregnancy_pref", 0)
                         textbutton "Predictable" action SetField(persistent, "pregnancy_pref", 1)
                         textbutton "Realistic" action SetField(persistent, "pregnancy_pref", 2)
-
-                    if not renpy.mobile: #Animations are always disabled on mobile.
-                        vbox:
-                            style_prefix "radio"
-                            label "Animation"
-                            textbutton "Enable" action SetField(persistent, "vren_animation", True)
-                            textbutton "Disable" action SetField(persistent, "vren_animation", False)
-
-                        # vbox:
-                        #     style_prefix "radio"
-                        #     label "Animation Scaling"
-                        #     textbutton "1.0" action SetField(persistent, "vren_mac_scale", 1.0)
-                        #     textbutton "2.0" action SetField(persistent, "vren_mac_scale", 2.0)
 
                     vbox:
                         style_prefix "check"
@@ -71,47 +56,47 @@ init 2: # Add some additional
                         #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                         #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 
-                    if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.
-                        vbox:
-                            style_prefix "radio"
-                            label "Memory Mode"
-                            textbutton "High":
-                                sensitive True
-                                tooltip "Allows the game to use a lot more memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
-                                action [
-                                    SetField(persistent, "memory_mode", 2),
-                                    Function(renpy.full_restart)
-                                ]
-                            textbutton "Medium":
-                                sensitive True
-                                tooltip "Allows the game to use a normal amount if memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
-                                action [
-                                    SetField(persistent, "memory_mode", 1),
-                                    Function(renpy.full_restart)
-                                ]
-                            textbutton "Low":
-                                sensitive True
-                                tooltip "The game uses a lot less memory for caching images, recommended on low memory devices. Requires Restart to take effect."
-                                action [
-                                    SetField(persistent, "memory_mode", 0),
-                                    Function(renpy.full_restart)
-                                ]
-                        if persistent.memory_mode > 1:
-                            vbox:
-                                style_prefix "radio"
-                                label "Clean Memory"
-                                textbutton "Once Game Week":
-                                    sensitive True
-                                    tooltip "Weekly call the renpy.free_memory() function, to prevent memory errors."
-                                    action [
-                                        SetField(persistent, "use_free_memory", False)
-                                    ]
-                                textbutton "Each Game Day":
-                                    sensitive True
-                                    tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
-                                    action [
-                                        SetField(persistent, "use_free_memory", True)
-                                    ]
+                    # if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.
+                    #     vbox:
+                    #         style_prefix "radio"
+                    #         label "Memory Mode"
+                    #         textbutton "High":
+                    #             sensitive True
+                    #             tooltip "Allows the game to use a lot more memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
+                    #             action [
+                    #                 SetField(persistent, "memory_mode", 2),
+                    #                 Function(renpy.full_restart)
+                    #             ]
+                    #         textbutton "Medium":
+                    #             sensitive True
+                    #             tooltip "Allows the game to use a normal amount if memory for caching images, allowing for smoother menu's and transitions. Requires Restart to take effect."
+                    #             action [
+                    #                 SetField(persistent, "memory_mode", 1),
+                    #                 Function(renpy.full_restart)
+                    #             ]
+                    #         textbutton "Low":
+                    #             sensitive True
+                    #             tooltip "The game uses a lot less memory for caching images, recommended on low memory devices. Requires Restart to take effect."
+                    #             action [
+                    #                 SetField(persistent, "memory_mode", 0),
+                    #                 Function(renpy.full_restart)
+                    #             ]
+                    #     if persistent.memory_mode > 1:
+                    #         vbox:
+                    #             style_prefix "radio"
+                    #             label "Clean Memory"
+                    #             textbutton "Once Game Week":
+                    #                 sensitive True
+                    #                 tooltip "Weekly call the renpy.free_memory() function, to prevent memory errors."
+                    #                 action [
+                    #                     SetField(persistent, "use_free_memory", False)
+                    #                 ]
+                    #             textbutton "Each Game Day":
+                    #                 sensitive True
+                    #                 tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
+                    #                 action [
+                    #                     SetField(persistent, "use_free_memory", True)
+                    #                 ]
 
 
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be
@@ -121,7 +106,6 @@ init 2: # Add some additional
 
                 hbox:
                     style_prefix "slider"
-                    box_wrap True
 
                     vbox:
 

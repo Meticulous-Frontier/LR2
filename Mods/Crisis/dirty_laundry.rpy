@@ -17,7 +17,7 @@ init 2 python:
         return False
 
     dirty_laundry_action = ActionMod("Dirty Laundry", dirty_laundry_requirement, "dirty_laundry_action_label",
-        menu_tooltip = "Start your laundry before bed.", category = "Home", is_crisis = True, crisis_weight = dirty_laundry_weight)
+        menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True, crisis_weight = dirty_laundry_weight)
 
 init 3 python:
     #Create Sleeping Outfits
@@ -50,10 +50,14 @@ label dirty_laundry_action_label:
     if the_person is None:
         return
 
+    $ old_location = mc.location
     $ set_night_outfit(the_person)
 
     "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"
-    "You look at the clock. It is already pretty late. You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
+    "You look at the clock. It is already pretty late."
+    $ mc.change_location(laundry_room)
+    $ mc.location.show_background()
+    "You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
 
     $ ran_num = renpy.random.randint(0, 3)
     if ran_num < 3:
@@ -62,7 +66,9 @@ label dirty_laundry_action_label:
         call dirty_laundry_stuck_in_dryer(the_person) from call_dirty_laundry_stuck_in_dryer
 
     $ clear_scene()
+    $ mc.change_location(old_location)
     $ the_person.apply_planned_outfit()
+    $ del old_location
     return
 
 
@@ -157,6 +163,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         mc.name "I'll get this for you."
                         the_person.char "Thanks, just give me a second."
                         "You slowly escort her to her room with her clean laundry, her cum filled panties sitting on the top of the pile. You set the clothes down and say goodnight."
+                        $ clear_scene()
                         "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
                     else:
                         the_person.char "Oh, that's okay [the_person.mc_title]. I'm just gonna grab my laundry and go back to my room for some private time..."
@@ -209,6 +216,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     "When you come back to your senses, you look and see [the_person.title]. She is licking a little bit of cum that got on her hand."
                     the_person.char "Mmm... that was hot! I can't wait to wear these tomorrow."
                     $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.draw_person(position = "walking_away")
                     "She grabs her other laundry and you say goodnight before she leaves you alone in the laundry room, recovering."
                     $ clear_scene()
                     "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
@@ -300,11 +308,13 @@ label dirty_laundry_wash_your_clothes(the_person):
                             $ the_person.change_happiness(5)
                             mc.name "Damn, that was hot."
                             the_person.char "Ahh, thanks for the help. I really needed that..."
+                            $ the_person.draw_person(position = "walking_away")
                             "[the_person.title] slowly gets up. She grabs her laundry and says goodnight."
                             $ clear_scene()
                             "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                             "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
                         "Say Goodnight":
+                            $ the_person.draw_person(position = "walking_away")
                             "You say goodnight to [the_person.title]. She slowly walks out of the laundry room. You note that she forgot to take her laundry with her."
                             $ clear_scene()
                             "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
@@ -348,6 +358,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 mc.name "No worries, [the_person.title]. Here, let me untangle this for you."
 
             "You manage to untangle [the_person.possessive_title]'s hair."
+            $ the_person.draw_person(position = "stand3", emotion = "happy")
             the_person.char "Thanks, [the_person.mc_title], you're a lifesaver. Don't worry, I can finish the rest of this myself."
             $ the_person.change_stats(love = 2, happiness = 5)
 
@@ -445,5 +456,6 @@ label dirty_laundry_stuck_in_dryer(the_person):
             mc.name "You hair came loose about a minute in, you could have stopped at any point."
             the_person.char "Oh... well, next time just get me out, and we can do this properly. Now move..."
 
+    $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] quickly grabs her laundry and scoots out of the laundry room."
     return

@@ -48,8 +48,7 @@ init -2 python:
                 actor.position = position
             if not emotion is None:
                 actor.emotion = emotion
-            if not special_modifier is None:
-                actor.special_modifier = special_modifier
+            actor.special_modifier = special_modifier   # always set special modifier
             if not lighting is None:
                 actor.lighting = lighting
             if not display_transform is None:
@@ -138,8 +137,7 @@ init -2 python:
                     actor.position = position
                 if not emotion is None:
                     actor.emotion = emotion
-                if not special_modifier is None:
-                    actor.special_modifier = special_modifier
+                actor.special_modifier = special_modifier   # always set special modifier
                 if not lighting is None:
                     actor.lighting = lighting
             self.draw_scene()

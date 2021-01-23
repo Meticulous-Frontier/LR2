@@ -63,7 +63,9 @@ init 2: # Need to allow for None name roles in this screen as well.
 
                         vbox:
                             xsize 350
-                            if the_person.event_triggers_dict.get("birth_control_status", None) is None:
+                            if the_person.knows_pregnant():
+                                text "Birth Control: No" style "menu_text_style"
+                            elif the_person.event_triggers_dict.get("birth_control_status", None) is None:
                                 text "Birth Control: Unknown" style "menu_text_style"
                             else:
                                 hbox:

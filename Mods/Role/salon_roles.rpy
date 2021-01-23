@@ -768,6 +768,7 @@ label ophelia_revenge_date_label():
     the_person.char "Oh god... I haven't... in a while..."
     "Sounds like she wants you! You pick her up and she gives a little yelp. Her nails are digging into your back."
     $ scene_manager.update_actor(the_person, position = "against_wall")
+    $ the_person.change_to_hallway()
     "You start to walk down the hallway, but you've barely even entered it when you decide the bedroom is way too far away."
     "She moans loudly when you push her up against the hall wall. Her legs are spread now and she is grinding her crotch against yours."
     $ the_person.change_arousal(15)

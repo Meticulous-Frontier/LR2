@@ -544,7 +544,7 @@ label horny_at_work_crisis_enhanced_label():
                                 "You grab [the_person.possessive_title] by her hips and lay her down in front of you, spreading her legs around you."
 
                             $ scene_manager.update_actor(the_person, display_transform = character_right, position = "missionary")
-                            if others and the_person.effective_sluttiness() < (80 - 10*the_person.get_opinion_score("public sex")):
+                            if mc.location.get_person_count() > 1 and the_person.effective_sluttiness() < (80 - 10*the_person.get_opinion_score("public sex")):
                                 the_person.char "Ah! Wait, what will the other girls think?"
                                 mc.name "I'm sure they'll let us know."
                             elif the_person.relationship != "Single" and affair_role not in the_person.special_role:
@@ -602,7 +602,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ del desk
 
                         else:
-                            $ scene_manager.update_actor(emotion = "angry")
+                            $ scene_manager.update_actor(the_person, emotion = "angry")
                             the_person.char "What? Oh my god, I would never let you do that!"
                             $ the_person.change_stats(love = -5, happiness = -10, obedience = -3)
                             "She stammers for something more to say before settling on storming out of the room instead."
