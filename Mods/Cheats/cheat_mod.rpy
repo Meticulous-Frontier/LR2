@@ -57,6 +57,20 @@ init 2 python:
         for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
             person.salary = person.calculate_base_salary() * multiplier
 
+    def cheat_person_font_color(person, color):
+        if hasattr(person.char, "color"):
+            person.char.color = color
+        if hasattr(person.char, "what_color"):
+            person.char.what_color = color
+        if hasattr(person.char, "what_args"):
+            person.char.what_args["color"] = color
+        if hasattr(person.char, "who_args"):
+            person.char.who_args["color"] = color
+
+        person.set_title(remove_display_tags(person.title))
+        person.set_possessive_title(remove_display_tags(person.possessive_title))
+        person.set_mc_title(remove_display_tags(person.mc_title))
+
     def cheat_restore_screen():
         if "the_person" in globals():
             the_person.draw_person()
@@ -774,7 +788,7 @@ screen cheat_menu():
                                         Function(cheat_appearance)
                                     ]
 
-                        if skin_options and hasattr(editing_target, available_skin[x][0] and available_skin[x][1]):
+                        if skin_options and hasattr(editing_target, "skin"):
                             vbox:
                                 for x in available_skin:
                                     textbutton x:
