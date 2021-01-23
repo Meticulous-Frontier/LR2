@@ -8,8 +8,8 @@ init -1 python:
         for place in [x for x in list_of_places if x.hide_in_known_house_map and x.visible]:
             result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
 
-        if config.debug:
-            print("Map Buildup Time: " + str(time.time() - start_time))
+        if debug_log_enabled:
+            add_to_log("Map Buildup Time: " + str(time.time() - start_time))
         return result
 
     def get_location_tooltip(location):

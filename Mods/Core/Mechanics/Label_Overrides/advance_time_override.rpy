@@ -164,8 +164,8 @@ init 5 python:
         mc.run_turn()
         if "quest_director" in globals():
             quest_director.run_turn()
-        if config.debug:
-            print("Run Turn: " + str(time.time() - start_time))
+        if debug_log_enabled:
+            add_to_log("Run Turn: " + str(time.time() - start_time))
         return
 
     def advance_time_run_day(people):
@@ -177,8 +177,8 @@ init 5 python:
         mc.business.run_day()
         if "quest_director" in globals():
             quest_director.run_day()
-        if config.debug:
-            print("Run Day: " + str(time.time() - start_time))
+        if debug_log_enabled:
+            add_to_log("Run Day: " + str(time.time() - start_time))
         return
 
     def advance_time_run_move(people):
@@ -189,8 +189,8 @@ init 5 python:
                 person.change_location(mc.location)
 
         mc.business.run_move()
-        if config.debug:
-            print("Run Move: " + str(time.time() - start_time))
+        if debug_log_enabled:
+            add_to_log("Run Move: " + str(time.time() - start_time))
         return
 
     def advance_time_assign_limited_time_events(people):
@@ -203,8 +203,6 @@ init 5 python:
                         person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter" and not crisis[0] in [x.the_action for x in person.on_room_enter_event_list if isinstance(x, Limited_Time_Action)]:
                         person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
-        if config.debug:
-            print("LTE assignments: " + str(time.time() - start_time))
         return
 
 label advance_time_move_to_next_day(no_events = True):
@@ -272,8 +270,8 @@ label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
-        if config.debug:
-            $ print("Random crisis: " + crisis.name)
+        if debug_log_enabled:
+            $ add_to_log("Random crisis: " + crisis.name)
 
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
@@ -296,8 +294,8 @@ label advance_time_mandatory_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
             $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if config.debug:
-            $ print("Mandatory crisis: " + active_crisis_list[crisis_count].name)
+        if debug_log_enabled:
+            $ add_to_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -361,8 +359,8 @@ label advance_time_mandatory_morning_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
             $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if config.debug:
-            $ print("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
+        if debug_log_enabled:
+            $ add_to_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -380,8 +378,8 @@ label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
-        if config.debug:
-            $ print("Random morning crisis: " + crisis.name)
+        if debug_log_enabled:
+            $ add_to_log("Random morning crisis: " + crisis.name)
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ crisis.call_action()

@@ -42,9 +42,6 @@ init 2 python:
         for count in __builtin__.range(__builtin__.len(menu_items)):
             for item in [x for x in menu_items[count][1:] if x.display_key]:
                 item.clear()
-
-        if config.debug:
-            print("Clear menu items: " + str(time.time() - start_time))
         return
 
     def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
