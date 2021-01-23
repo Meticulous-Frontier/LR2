@@ -110,7 +110,7 @@ init 2 python:
 
             for x in supported_positions + ["character_images"]:
                 self.Locks[x] = threading.RLock()
-                self.Cache[x] = LRUCacheDict(max_size = 500)    # 500 most used character images per position (20Mb)
+                self.Cache[x] = LRUCacheDict(max_size = 500, expiration = 0)    # 500 most used character images per position (20Mb)
 
         def size(self):
             return sum([x.size() for x in self.Cache.values()])
