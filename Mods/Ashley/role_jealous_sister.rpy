@@ -35,9 +35,7 @@ init 2 python:
         return
 
     def is_jealous_sister(person):
-        if jealous_sister_role in person.special_role:
-            return True
-        return False
+        return person.has_role(jealous_sister_role)
 
     def girlfriend_wakeup_jealous_sister_requirement(the_person):
         if the_person == stephanie and is_jealous_sister(ashley):

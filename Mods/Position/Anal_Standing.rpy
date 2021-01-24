@@ -27,7 +27,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
     "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]"
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "That's it, [the_girl.title], I'm going to fuck your ass today."
-    if the_girl.has_role(anal_fetish_role):
+    if the_girl.has_anal_fetish():
         the_girl.char "Oh thank god, I've been day dreaming about this all day long."
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl.char "I can't wait! It's so intense when you fuck me back there..."
@@ -38,7 +38,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
     else:
         the_girl.char "I don't know, are you sure that thing is gonna fit in me back there?"
 
-    if the_girl.has_role(anal_fetish_role):
+    if the_girl.has_anal_fetish():
         if the_girl is mom:
             "You work your cock up and down [the_girl.possessive_title]'s slit a few times, her wetness lubricating it."
             "You lean forward and whisper into her ear."

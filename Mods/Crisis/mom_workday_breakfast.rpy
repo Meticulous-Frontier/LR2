@@ -314,7 +314,7 @@ label mom_breakfast_action_label_high():
         $ scene_manager.strip_actor_outfit(mom, exclude_upper = True)
 
     "You take a quick sip of coffee. [the_person.possessive_title] is ready to fuck you right here in the kitchen!"
-    if the_person.has_role(anal_fetish_role): #The anal role
+    if the_person.has_anal_fetish():
         "She opens one of the drawers and pulls out a bottle of lube..."
         mc.name "You keep lube in the kitchen?"
         the_person.char "Hush, you never know when you might have need of something like that, especially with all the urges I've been having lately..."

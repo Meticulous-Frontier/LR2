@@ -1,4 +1,4 @@
-init -1 python:
+init 2 python:
     #requirement functions here
     def cum_fetish_morning_shower_requirement():
         if mc_at_home() and time_of_day==0:
@@ -16,36 +16,15 @@ init -1 python:
             return not get_fetish_cum_dosage_non_employee() is None
         return False
 
-init 2 python:
     def get_fetish_shower_cum_girl():
-        meets_fetish_list = []
-        if mom.has_cum_fetish():
-            if mom.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
-                meets_fetish_list.append(mom)
-        if lily.has_cum_fetish():
-            if lily.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
-                meets_fetish_list.append(lily)
-        return get_random_from_list(meets_fetish_list)
+        return get_random_from_list([x for x in [mom, lily] ix x.has_cum_fetish() and x..event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     def get_fetish_cum_dosage_employee():
-        meets_fetish_list = []
-        for person in mc.business.get_employee_list():
-            if person.has_cum_fetish():
-                if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
-                    meets_fetish_list.append(person)
-
-        return get_random_from_list(meets_fetish_list)
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.has_cum_fetish() and x.person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     def get_fetish_cum_dosage_non_employee():
-        meets_fetish_list = []
-        for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, mc]):
-            if person.has_cum_fetish():
-                if person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day:
-                    meets_fetish_list.append(person)
+        return get_random_from_list([x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily]) if x.has_cum_fetish() and x.person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
-        return get_random_from_list(meets_fetish_list)
-
-init 3 python:
     cum_fetish_morning_shower_crisis = ActionMod("Morning shower with company", cum_fetish_morning_shower_requirement, "cum_fetish_morning_shower_label",
         menu_tooltip = "You are take a shower when a family member joins you.", category = "Fetish", is_crisis = True, crisis_weight = 5)
     cum_fetish_employee_dosage_request_crisis = ActionMod("Employee asks for cum", cum_fetish_non_employee_dosage_request_requirement, "cum_fetish_non_employee_dosage_request_label",

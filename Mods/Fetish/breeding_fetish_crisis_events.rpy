@@ -1,10 +1,6 @@
-init -1 python:
+init 2 python:
     def get_breeding_fetish_list():
-        breeder_list = []
-        for person in known_people_in_the_game([mc]):
-            if breeding_fetish_role in person.special_role:
-                breeder_list.append(person)
-        return breeder_list
+        return [x for x in known_people_in_the_game() if x.has_breeding_fetish()]
 
     def get_highly_fertile_breeder():
         return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.is_highly_fertile()])
@@ -15,7 +11,6 @@ init -1 python:
     def get_family_breeder():
         return get_random_from_list(x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.is_family())
 
-init 1 python:
     def breeding_fetish_high_fertility_crisis_requirement():
         if mc_at_home() and time_of_day==4:
             if get_highly_fertile_breeder():
@@ -35,8 +30,6 @@ init 1 python:
                 return True
         return False
 
-
-init 3 python:
     breeding_fetish_high_fertility_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
         menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = 5)
     breeding_fetish_happy_breeder_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
