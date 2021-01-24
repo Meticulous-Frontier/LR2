@@ -70,7 +70,6 @@ init 2 python:
         sarah.event_triggers_dict["try_for_baby"] = 0         # 0 = not trying, 1 = trying for baby, 2 = knocked up
         sarah.event_triggers_dict["fertile_start_day"] = -1    #-1 means not fertile, otherwise is the day that she tells MC she is fertile. Using math we can determine if she is fertile in the future.
         sarah.event_triggers_dict["fertile_start_creampie_count"] = -1  #Set this to the total number of creampies she has had at the beginning of her fertile period.
-        sarah.event_triggers_dict["favorite_drink"] = "appletini"
         sarah.event_triggers_dict["special_tit_fuck"] = False
         sarah.event_triggers_dict["foreplay_position_filter"] = sarah_foreplay_position_filter
         sarah.event_triggers_dict["oral_position_filter"] = sarah_oral_position_filter
@@ -2682,12 +2681,11 @@ label Sarah_weekend_date_grab_drinks_label():
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    $ favorite_drink = the_person.event_triggers_dict.get("favorite_drink" "appletini")
     $ intoxication_level = 0 #Start at 0, options may open up depending on how drunk you get her.
     "After a short walk, you arrive at the bar that you and [the_person.title] have been to a few times recently."
     the_person.char "Oh! I think I see a booth over there."
     mc.name "Perfect, go grab it while I get the first round."
-    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the [favorite_drink]."
+    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the appletini."
     $ mc.business.change_funds(-20)
     "If you wanted to, now would be a good time to slip a serum into her drink..."
     menu:
@@ -2719,7 +2717,7 @@ label Sarah_weekend_date_grab_drinks_label():
                     "After a short time, she returns with the drinks and sits down."
                     $ scene_manager.update_actor(the_person, position = "sitting")
                 else:
-                    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the [favorite_drink]."
+                    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the appletini."
                     $ mc.business.change_funds(-20)
                     "You come back to the booth with the drinks."
                     the_person.char "Yum! Thank you!"
