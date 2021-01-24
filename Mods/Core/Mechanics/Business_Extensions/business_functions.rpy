@@ -6,7 +6,7 @@ init -1 python:
             if amount >= 0:
                 mc.log_event(self.name + " received: " + "$" + str(__builtin__.abs(amount)), "float_text_green")
             else:
-                mc.log_event(self.name + " payed: " + "$" + str(__builtin__.abs(amount)), "float_text_green")
+                mc.log_event(self.name + " paid: " + "$" + str(__builtin__.abs(amount)), "float_text_green")
 
         return
 
