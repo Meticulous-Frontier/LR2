@@ -1375,16 +1375,12 @@ init -1 python:
     Person.is_dominant = is_dominant
 
     def is_girlfriend(self):
-        if girlfriend_role in self.special_role:
-            return True
-        return False
+        return self.has_role(girlfriend_role)
 
     Person.is_girlfriend = is_girlfriend
 
     def is_affair(self):
-        if affair_role in self.special_role:
-            return True
-        return False
+        return self.has_role(affair_role)
 
     Person.is_affair = is_affair
 
@@ -1938,24 +1934,16 @@ init -1 python:
 ##################################################
 
     def body_is_thin(self):
-        if self.body_type == "thin_body":
-            return True
-        return False
+        return self.body_type == "thin_body"
 
     def body_is_average(self):
-        if self.body_type == "standard_body":
-            return True
-        return False
+        return self.body_type == "standard_body"
 
     def body_is_thick(self):
-        if self.body_type == "curvy_body":
-            return True
-        return False
+        return self.body_type == "curvy_body"
 
     def body_is_pregnant(self):
-        if self.body_type == "standard_preg_body":
-            return True
-        return False
+        return self.body_type == "standard_preg_body"
 
     Person.body_is_thin = body_is_thin
     Person.body_is_average = body_is_average
@@ -1967,41 +1955,22 @@ init -1 python:
 ##################################################
 
     def get_fetish_count(self):
-        fetish_count = 0
-        for role in self.special_role:
-            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]:
-                fetish_count += 1
-        return fetish_count
+        return __builtin__.len([x for x in self.special_role if x in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]])
 
     def get_fetishes_description(self):
-        description = ""
-        for role in self.special_role:
-            if role in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]:
-                if __builtin__.len(description) > 0:
-                    description += ", "
-                description += role.role_name
-        return description
-
+        return ", ".join([x for x in self.special_role if x in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]])
 
     def has_anal_fetish(self):
-        if anal_fetish_role in self.special_role:
-            return True
-        return False
+        return self.has_role(anal_fetish_role)
 
-    def has_cum_fetish(self):  #TODO update this to applicable roles when cum fetish roles have been combined.
-        if cum_fetish_role in self.special_role:
-            return True
-        return False
+    def has_cum_fetish(self):
+        return self.has_role(cum_fetish_role)
 
     def has_breeding_fetish(self):
-        if breeding_fetish_role in self.special_role:
-            return True
-        return False
+        return self.has_role(breeding_fetish_role)
 
     def has_exhibition_fetish(self):
-        if exhibition_fetish_role in self.special_role:
-            return True
-        return False
+        return self.has_role(exhibition_fetish_role)
 
     Person.get_fetish_count = get_fetish_count
     Person.get_fetishes_description = get_fetishes_description
@@ -2012,24 +1981,16 @@ init -1 python:
     Person.has_exhibition_fetish = has_exhibition_fetish
 
     def has_started_anal_fetish(self):
-        if self.event_triggers_dict.get("anal_fetish_start", False):
-            return True
-        return False
+        return self.event_triggers_dict.get("anal_fetish_start", False)
 
     def has_started_breeding_fetish(self):
-        if self.event_triggers_dict.get("breeding_fetish_start", False):
-            return True
-        return False
+        return self.event_triggers_dict.get("breeding_fetish_start", False)
 
     def has_started_cum_fetish(self):
-        if self.event_triggers_dict.get("cum_fetish_start", False):
-            return True
-        return False
+        return self.event_triggers_dict.get("cum_fetish_start", False)
 
     def has_started_exhibition_fetish(self):
-        if self.event_triggers_dict.get("exhibition_fetish_start", False):
-            return True
-        return False
+        return self.event_triggers_dict.get("exhibition_fetish_start", False)
 
     Person.has_started_anal_fetish = has_started_anal_fetish
     Person.has_started_breeding_fetish = has_started_breeding_fetish
@@ -2039,25 +2000,20 @@ init -1 python:
     #Additional functions
 
     def is_submissive(self):
-        if self.get_opinion_score("being submissive") > 0:
-            return True
-        elif self.get_opinion_score("being submissive") > -2 and self.obedience > 150:
-            return True
-        return False
+        return self.get_opinion_score("being submissive") > 0 \
+            or (self.get_opinion_score("being submissive") > -2 and self.obedience > 150)
 
     Person.is_submissive = is_submissive
 
     def is_jealous(self):
-        if self.is_girlfriend() or self.is_affair():
-            if self == sarah and sarah_threesomes_unlocked():
-                self.event_triggers_dict["is_jealous"] = False
-                return False
-            if self.event_triggers_dict.get("is_jealous", True) == True:
-                if self.love > 90 and self.obedience > 200:
-                    self.event_triggers_dict["is_jealous"] = False
-                    return False
-                return True
-        return False
+        if not (self.is_girlfriend() or self.is_affair()):
+            return False
+
+        if self == sarah and sarah_threesomes_unlocked():
+            return False
+        if self.love > 90 and self.obedience > 200:
+            return False
+        return True
 
     Person.is_jealous = is_jealous
 
@@ -2074,7 +2030,6 @@ init -1 python:
     def attempt_skill_training(self, the_skill, modifier = 0):
         if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_opinion_score(the_opinion)
-
         return
 
     Person.attempt_opinion_training = attempt_opinion_training
@@ -2114,11 +2069,7 @@ init -1 python:
     Person.favorite_colour = favorite_colour
 
     def is_single(self):
-        if self.relationship == "Single":
-            if self.is_girlfriend():
-                return False
-            return True
-        return False
+        return self.relationship == "Single" and not self.is_girlfriend()
 
     Person.is_single = is_single
 
