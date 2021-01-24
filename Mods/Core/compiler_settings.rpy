@@ -45,6 +45,7 @@ init -2 python:
 
         build.archive("scripts")
         build.classify("game/**.rpyc", "scripts") # put compiled game files into scripts.rpa
+        build.classify("game/Mods/**.py", "scripts")   # put python modules into scripts.rpa
 
         build.archive("fonts")
         build.classify("game/**.ttf", "fonts")
