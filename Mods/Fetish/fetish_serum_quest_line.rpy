@@ -1,7 +1,7 @@
 init 2 python:
     def fetish_serum_quest_intro_requirement():
-        if day > 14 and time_of_day == 2:
-            if mc.is_at_work() and mc.business.head_researcher:
+        if day > 21 and time_of_day == 2:
+            if mc.is_at_work() and mc.business.is_open_for_business() and mc.business.head_researcher:
                 return True
         return False
 
@@ -12,7 +12,7 @@ init 2 python:
         return False
 
     def fetish_serum_discuss_requirement(the_person):
-        if mc.is_at_work() and fetish_serum_unlock_count() > 0:
+        if mc.is_at_work() and mc.business.is_open_for_business() and fetish_serum_unlock_count() > 0:
             return True
         return False
 
@@ -41,25 +41,25 @@ init 2 python:
         return False
 
     def fetish_serum_anal_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_anal_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_cum_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_cum_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_breeding_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_breeding_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_exhibition_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work():
+        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_exhibition_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
