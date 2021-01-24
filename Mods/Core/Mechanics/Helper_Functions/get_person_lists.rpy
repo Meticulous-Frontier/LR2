@@ -1,5 +1,24 @@
 init -1 python:
+    from lru import lru_cache_function
+    from lru import LRUCacheDict
+
+    ####################################################################
+    # caching function used inside the all_people_in_the_game function #
+    # using @lru_cache_function will throw cPickle error               #
+    ####################################################################
+
+    all_people_cache = LRUCacheDict(max_size = 5, expiration = 3)
+    def get_all_people_cache_item(func_name, *args, **kwargs):
+        key = repr( (args, kwargs) ) + "#" + func_name  # parameterized key
+        try:
+            return all_people_cache[key]
+        except KeyError:
+            return None
+
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
+        all_people = get_all_people_cache_item("all_people_in_the_game", excluded_people, excluded_locations)
+        if all_people:
+            return all_people
         all_people = []
         for location in all_locations_in_the_game(excluded_locations):
             all_people.extend([x for x in location.people if x not in excluded_people])
@@ -14,6 +33,7 @@ init -1 python:
     def get_random_person_in_location(location, excluded_people = []):
         return get_random_from_list([x for x in location.people if x not in excluded_people])
 
+    @lru_cache_function(max_size=1, expiration=4)
     def unique_characters_not_known(): # TODO The check should be standardized, but some people are vanilla, some are different modders or different 'style'.
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
@@ -44,23 +64,26 @@ init -1 python:
             not_met_yet_list.append(starbuck)
         return not_met_yet_list
 
+    @lru_cache_function(max_size=3, expiration=2)
     def known_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         known_people = []
         excluded_people.extend(unique_characters_not_known())
         for location in all_locations_in_the_game(excluded_locations):
-            known_people.extend([x for x in location.people if not x in excluded_people and not (x.mc_title == "Stranger" or not x.title)])
+            known_people_at_location(location, excluded_people)
         return known_people
 
     def known_people_at_location(location, excluded_people = []):
         excluded_people.extend(unique_characters_not_known())
         return [x for x in location.people if not x in excluded_people and not (x.mc_title == "Stranger" or not x.title)]
 
+    @lru_cache_function(max_size=3, expiration=2)
     def unknown_people_in_the_game(excluded_people = [], excluded_locations = []):
         unknown_people = []
         for location in all_locations_in_the_game(excluded_locations):
             unknown_people.extend(unknown_people_at_location(location, excluded_people))
         return unknown_people
 
+    @lru_cache_function(max_size=3, expiration=2)
     def unknown_people_at_location(location, excluded_people = []):
         return [x for x in location.people if not x in excluded_people and (x.mc_title == "Stranger" or not x.title)]
 
