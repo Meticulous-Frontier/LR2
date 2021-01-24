@@ -1161,7 +1161,7 @@ label coffee_time_steph_gets_handsy_label():
                 "Not tonight":
                     mc.name "I can't tonight, maybe another night..."
     else:
-        "You and [the_person_two.title] pet each other for a few minutes, but stroking each other thru you clothes can only take things so far."
+        "You and [the_person_two.title] pet each other for a few minutes, but stroking each other through you clothes can only take things so far."
         if the_person_two.get_opinion_score("public sex") > 0:
             "She decides to push things further. You feel her hand clumsily reach into your pants, eventually pulling your cock out. The soft skin of her hand feels great."
             "Not to be outdone, you bring your up Stephanie's body, then slowly slide it under her clothes. When you get to her slit, you push you middle finger inside of her, while pushing your palm against her clit."
