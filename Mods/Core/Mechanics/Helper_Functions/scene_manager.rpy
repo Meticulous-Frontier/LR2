@@ -26,7 +26,11 @@ init -2 python:
             self.draw_scene()
 
         def add_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None, visible = True):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            if not isinstance(person, Person):
+                print("Actor requires a Person object.")
+                return
+
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if actor:   # we have an existing actor object, so use that
                 self.show_actor(actor.person, position, emotion, special_modifier, lighting, display_transform, z_order)
             else:       # add person as actor
@@ -41,9 +45,11 @@ init -2 python:
             clear_scene()
 
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
-            if actor is None:
+            actor = find_in_list(lambda x: x.person == person, self.actors)
+            if not actor:
+                add_actor(person, position, emotion, special_modifier, lighting, display_transform, z_order)
                 return
+
             if not position is None:
                 actor.position = position
             if not emotion is None:
@@ -58,25 +64,25 @@ init -2 python:
             self.draw_scene()
 
         def strip_actor_outfit_to_max_sluttiness(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, temp_sluttiness_boost = 0):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor is None:
                 #mc.log_event("Strip " + actor.person.title, "gray_float_text")
                 return actor.person.strip_outfit_to_max_sluttiness(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, narrator_messages = narrator_messages, display_transform = actor.display_transform, lighting = actor.lighting, temp_sluttiness_boost = temp_sluttiness_boost, position = actor.position, emotion = actor.emotion, scene_manager = self)
             return False
 
         def strip_actor_outfit(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor is None:
                 actor.person.strip_outfit(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, display_transform = actor.display_transform, lighting = actor.lighting, position = actor.position, emotion = actor.emotion, delay = delay, scene_manager = self, wipe_scene = False)
 
         def strip_actor_strip_list(self, person, strip_list, lighting = None, half_off_instead = False):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor is None:
                 for item in strip_list:
                     actor.person.draw_animated_removal(item, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = half_off_instead)
 
         def draw_animated_removal(self, person, the_clothing, lighting = None, half_off_instead = False): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor is None:
                 #mc.log_event("Remove clothing " + actor.person.title, "gray_float_text")
                 actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = half_off_instead)
@@ -92,7 +98,7 @@ init -2 python:
 
         # removes specific actor from scene
         def remove_actor(self, person, reset_actor = True):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor is None:
                 if reset_actor:
                     # reset actor clothing
@@ -101,13 +107,13 @@ init -2 python:
                 self.draw_scene()
 
         def hide_actor(self, person):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if actor:
                 actor.visible = False
                 self.draw_scene()
 
         def show_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
-            actor = find_in_list(lambda x: x.person is person, self.actors)
+            actor = find_in_list(lambda x: x.person == person, self.actors)
             if actor:
                 actor.visible = True
                 self.update_actor(actor.person, position, emotion, special_modifier, lighting, display_transform, z_order)

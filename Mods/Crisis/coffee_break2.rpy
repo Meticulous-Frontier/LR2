@@ -4,11 +4,9 @@ init -1 python:
 
 init 2 python:
     def coffee_break2_requirement():
-        if not mc.business.is_weekend():
-            if mc.is_at_work():
-                if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 20)) >= 3:
-                        return True
+        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
+            if not mc.business.is_weekend() and mc.is_at_work():
+                return __builtin__.len([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 20]) >= 3
         return False
 
     coffee_break2_action = ActionMod("Coffee Break 2", coffee_break2_requirement, "coffee_break2_action_label",
@@ -136,7 +134,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         $ scene_manager.update_actor(loser, position = "back_peek")
                         "You put your hands on her hips, her pussy still wet from the excitement a few minutes earlier."
                         mc.name "I only got to cum on your face, but after this display I definitely need more."
-                        
+
                     loser.char "Hey now, it's not like that, you know you can claim me anytime you want, we were just looking for some free... FUCK"
                     "You grab her hips and ram yourself forward into [loser.possessive_title]'s sopping wet pussy."
                     if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():

@@ -12,9 +12,7 @@ init -1 python:
 
 init 2 python:
     def dirty_laundry_requirement():
-        if mc_asleep():
-            return True
-        return False
+        return mc_asleep()
 
     dirty_laundry_action = ActionMod("Dirty Laundry", dirty_laundry_requirement, "dirty_laundry_action_label",
         menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True, crisis_weight = dirty_laundry_weight)

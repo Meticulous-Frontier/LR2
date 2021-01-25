@@ -1243,7 +1243,7 @@ label erica_money_problems_label(the_person):
     the_person.char "Well, he thinks I shouldn't be wasting my time on sports... He thinks I should dedicate myself to my studies full time."
     the_person.char "I told him I loved track though, and I refused to drop out of it... So he said he wasn't going to support me financially anymore."
     mc.name "Ah. I'm sorry to hear that."
-    "She looks down at the ground. It's tough being a university student. You were lucky that you could live at home while going thru it."
+    "She looks down at the ground. It's tough being a university student. You were lucky that you could live at home while going through it."
     the_person.char "Hey... I hate to ask but... You wouldn't happen to have something part time open... Would you?"
     "You consider her question for a bit. Unfortunately, all of your openings are for full time positions, and you can't think of anything you could have her do."
     mc.name "I'm sorry, I don't have anything at this time."

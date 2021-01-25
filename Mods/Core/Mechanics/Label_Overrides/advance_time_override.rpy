@@ -146,13 +146,14 @@ init 5 python:
 
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
-        for place in list_of_places:
+        for place in [x for x in list_of_places if x.people]:
             people.extend([[x, place] for x in place.people])
         return people
 
     def update_party_schedules(people):
-        for (person, place) in people:
-            if not person in unique_character_list: # exclude unique characters as to not to interfere with story lines
+        # exclude unique characters as to not to interfere with story lines
+        for (person, place) in [x for x in people if not x[0] in unique_character_list]:
+            if not person in unique_character_list:
                 create_party_schedule(person)
         return
 
@@ -165,7 +166,7 @@ init 5 python:
         if "quest_director" in globals():
             quest_director.run_turn()
         if debug_log_enabled:
-            add_to_log("Run Turn: " + str(time.time() - start_time))
+            add_to_log("Run Turn: " + str(__builtin__.round(time.time() - start_time, 8)))
         return
 
     def advance_time_run_day(people):
@@ -178,7 +179,7 @@ init 5 python:
         if "quest_director" in globals():
             quest_director.run_day()
         if debug_log_enabled:
-            add_to_log("Run Day: " + str(time.time() - start_time))
+            add_to_log("Run Day: " + str(__builtin__.round(time.time() - start_time, 8)))
         return
 
     def advance_time_run_move(people):
@@ -190,7 +191,7 @@ init 5 python:
 
         mc.business.run_move()
         if debug_log_enabled:
-            add_to_log("Run Move: " + str(time.time() - start_time))
+            add_to_log("Run Move: " + str(__builtin__.round(time.time() - start_time, 8)))
         return
 
     def advance_time_assign_limited_time_events(people):
@@ -268,10 +269,11 @@ label advance_time_bankrupt_check_label():
 
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
+    $ start_time = time.time()
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
         if debug_log_enabled:
-            $ add_to_log("Random crisis: " + crisis.name)
+            $ add_to_log("Random crisis: " + crisis.name + " (" + str(__builtin__.round(time.time() - start_time, 8)) + ")")
 
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
@@ -376,10 +378,11 @@ label advance_time_mandatory_morning_crisis_label():
 
 label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
+    $ start_time = time.time()
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
         if debug_log_enabled:
-            $ add_to_log("Random morning crisis: " + crisis.name)
+            $ add_to_log("Random morning crisis: " + crisis.name + " (" + str(__builtin__.round(time.time() - start_time, 8)) + ")")
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ crisis.call_action()

@@ -3,10 +3,8 @@
 
 init 2 python:
     def SB_fetish_vaginal_family_threesome_requirement():
-        if mc_asleep() and day % 7 is not 4: # not on Friday nights (we have the kitchen mom event here)
-            if mc.energy > 50:  #Must have the energy to handle a long sexy night
-                if willing_to_threesome(lily, mom):
-                    return True
+        if mc_asleep() and mc.energy > 50:
+            return willing_to_threesome(lily, mom)
         return False
 
     SB_fetish_vaginal_family_threesome = Action("Family Threesome",SB_fetish_vaginal_family_threesome_requirement,"SB_fetish_vaginal_family_threesome_label")
