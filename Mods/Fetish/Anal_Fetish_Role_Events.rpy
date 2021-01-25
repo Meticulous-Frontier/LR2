@@ -12,16 +12,6 @@ init 1 python:
             return True
         return False
 
-    def add_fuck_doll_collar_to_base_outfit(person):
-        person.base_outfit.remove_all_collars()
-
-        fd_collar = fuck_doll_collar.get_copy()
-        fd_collar.colour = [.41,.16,.38,.9]
-        fd_collar.pattern = "Pattern_1"
-        fd_collar.colour_pattern = [.95,.95,.95,.9]
-        person.base_outfit.add_accessory(fd_collar)
-        return
-
     def add_fetish_anal_staylate_event(person):
         fetish_anal_staylate_event = Action("Employee stays late", fetish_anal_staylate_event_requirement, "fetish_anal_staylate_event_label", args = person)
         mc.business.add_mandatory_crisis(fetish_anal_staylate_event)
