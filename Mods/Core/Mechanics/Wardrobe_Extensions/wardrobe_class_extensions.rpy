@@ -129,7 +129,7 @@ init -1 python:
     def wardrobe_remove_outfit(self, outfit):
         for store in [self.outfits, self.underwear_sets, self.overwear_sets]:
             if isinstance(outfit, basestring):
-                found = find_in_list(lambda x: x.name == outfit.replace("_", " ").title(), store)
+                found = find_in_list(lambda x: x.name == outfit, store)
                 if found:
                     store.remove(found)
             elif outfit in store:
@@ -138,12 +138,12 @@ init -1 python:
     Wardrobe.remove_outfit = wardrobe_remove_outfit
 
     def wardrobe_has_outfit_with_name(self, the_name):
-        return any(x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name.replace("_", " ").title())
+        return any(x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name)
 
     Wardrobe.has_outfit_with_name = wardrobe_has_outfit_with_name
 
     def wardrobe_get_outfit_with_name(self, the_name):
-        found = next((x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name.replace("_", " ").title()), None)
+        found = next((x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name), None)
         if found:
             return found.get_copy()
         return None
