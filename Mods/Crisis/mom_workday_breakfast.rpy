@@ -10,7 +10,7 @@ init -1 python:
 
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if mc_at_home() and mc.business.is_work_day():
+        if mc.is_home() and mc.business.is_work_day():
             return True
         return False
 

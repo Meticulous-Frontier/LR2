@@ -20,11 +20,7 @@ init 2 python:
         return False
 
     def select_girl_masturbating():
-        masturbating_people = []
-        for person in [x for x in mc.business.get_employee_list() if x.is_available()]:
-            if person.effective_sluttiness() < 40 - (5 * person.get_opinion_score("masturbating")):
-                masturbating_people.append(person)
-        return get_random_from_list(masturbating_people)
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.is_available() and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
@@ -108,7 +104,7 @@ label SB_caught_masturbating_crisis_label():
                 $ success_chance = 5 * (mc.focus + 1)
                 if renpy.random.randint(0,100) < success_chance: #If player does not get caught
                     "[the_person.possessive_title] is breathing heavily. It is clear from how vigorously she is touching herself that she is going to orgasm soon." #TODO finish this
-                    if the_person.effective_sluttiness() < 20:   #She's not interested in MC yet...
+                    if the_person.effective_sluttiness() < 30:   #She's not interested in MC yet...
                         $ fantasy_guy = get_random_male_name()
                         "[the_person.possessive_title] seems really into it. Her back is arched as her hand works its magic on her groin."
                         $ the_person.change_arousal(10)
@@ -199,7 +195,7 @@ label SB_caught_masturbating_crisis_label():
                 else: #Player gets caught
                     "Straining to get a better a view, for a brief moment you lose your focus. You accidentally drop a pen you were holding onto and it clatters loudly across the floor."
                     "[the_person.possessive_title] immediately stops and looks back at the source of the noise. She immediately locks eyes with you and the realization that she just got caught masturbating at work sinks in."
-                    if the_person.effective_sluttiness() < 20: #She is not slutty. 50/50 she runs out of the room apologizing or gets pissed
+                    if the_person.effective_sluttiness() < 30: #She is not slutty. 50/50 she runs out of the room apologizing or gets pissed
                         $ the_person.draw_person()
                         "[the_person.possessive_title] quickly stands up."
                         if renpy.random.randint(0,100) < 50 : #She's pissed
