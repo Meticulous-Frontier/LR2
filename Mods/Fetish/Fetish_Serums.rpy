@@ -205,13 +205,51 @@ init -1 python:
         return fetish_odds + int(opinion_modifier)
 
     def fetish_basic_function_on_apply(person, add_to_log):
-        fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
+        person.event_triggers_dict["nano_bots_f"] = False
         return
 
+    def fetish_basic_function_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_f", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BASIC_OPINION_LIST, person):
+            return
+
+        person.event_triggers_dict["nano_bots_f"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+            person.increase_sex_skill("Foreplay", 2 + tier)
+        fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log)
+        return
+
+
     def fetish_anal_function_on_apply(person, add_to_log):
-        fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
+        person.event_triggers_dict["nano_bots_a"] = False
+        return
+
+    def fetish_anal_function_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_a", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person):
+            return
+
+        person.event_triggers_dict["nano_bots_a"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+            person.increase_sex_skill("Anal", 2 + tier)
+        fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
+            person.change_obedience(1, add_to_log)
+
         if is_anal_fetish_unlocked():
-            if person.get_opinion_score(FETISH_ANAL_OPINION_LIST[0]) >= 2 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 5 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_anal_fetish_quest(person):
                         person.event_triggers_dict["anal_fetish_start"] = True
@@ -222,13 +260,38 @@ init -1 python:
         return
 
     def fetish_breeding_function_on_apply(person, add_to_log):
-        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
+        person.event_triggers_dict["nano_bots_b"] = False
+        return
 
-        if persistent.pregnancy_pref == 0:
+    def fetish_breeding_function_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_b", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
             return
 
+        person.event_triggers_dict["nano_bots_b"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5):
+            person.increase_sex_skill("Vaginal", 2 + tier)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
+            person.change_happiness(1, add_to_log)
+
+        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
+
+        if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
+            return
+
+        # going off birth-control
+        if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) >= 50 and person.on_birth_control:
+            person.on_birth_control = False
+            person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
+
         if is_breeding_fetish_unlocked():
-            if person.get_opinion_score(FETISH_BREEDING_OPINION_LIST[0]) >= 2 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 5 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_breeding_fetish_quest(person):
                         person.event_triggers_dict["breeding_fetish_start"] = True
@@ -237,16 +300,33 @@ init -1 python:
                     else:
                         #TODO throw some kind of error here to indicate that I haven't created this scenario yet
                         pass
-
-        if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) >= 50 and person.on_birth_control:
-            person.on_birth_control = False
-            person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
         return
 
     def fetish_cum_function_on_apply(person, add_to_log):
-        fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
+        person.event_triggers_dict["nano_bots_c"] = False
+        return
+
+    def fetish_cum_function_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_c", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
+            return
+
+        person.event_triggers_dict["nano_bots_c"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+            person.increase_sex_skill("Oral", 2 + tier)
+        if person.sluttiness < person.suggestibility:
+            if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
+                person.change_slut_temp(1, add_to_log)
+
+        fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log)
         if is_cum_fetish_unlocked():
-            if person.get_opinion_score(FETISH_CUM_OPINION_LIST[0]) >= 2 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 5 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_cum_fetish_quest(person):
                         person.event_triggers_dict["cum_fetish_start"] = True
@@ -256,9 +336,31 @@ init -1 python:
                         pass
         return
 
+
     def fetish_exhibition_function_on_apply(person, add_to_log):
-        fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
-        if person.get_opinion_score(FETISH_EXHIBITION_OPINION_LIST[0]) >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
+        person.event_triggers_dict["nano_bots_e"] = False
+        return
+
+    def fetish_exhibition_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_e", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
+            return
+
+        person.event_triggers_dict["nano_bots_e"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if person.sluttiness < person.suggestibility:
+            if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
+                person.change_slut_temp(1, add_to_log)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
+            person.change_obedience(1, add_to_log)
+        fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log)
+
+        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
                 if start_exhibition_fetish_quest(person):
                     person.event_triggers_dict["exhibition_fetish_start"] = True
@@ -266,53 +368,6 @@ init -1 python:
                 else:
                     #TODO throw some kind of error here to indicate that I haven't created this scenario yet
                     pass
-        return
-
-    def fetish_anal_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Anal", 2 + tier)
-
-        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
-            person.change_obedience(1, add_to_log)
-        return
-
-    def fetish_breeding_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Vaginal", 2 + tier)
-        if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
-            person.change_happiness(1, add_to_log)
-
-        return
-
-    def fetish_cum_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Oral", 2 + tier)
-        if person.sluttiness < person.suggestibility:
-            if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log)
-        return
-
-    def fetish_exhibition_on_turn(person, add_to_log):
-        if person.sluttiness < person.suggestibility:
-            if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log)
-        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
-            person.change_obedience(1, add_to_log)
-        return
-
-    def fetish_basic_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Foreplay", 2 + tier)
         return
 
     def fetish_unlock_basic_serum():
