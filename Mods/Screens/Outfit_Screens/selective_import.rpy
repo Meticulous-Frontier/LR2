@@ -18,7 +18,7 @@ init 2 python:
 
     def import_remove_outfit_from_wardrobes(list_of_wardrobes, the_outfit):
         for wardrobe in list_of_wardrobes:
-            if wardrobe.has_outfit_with_name(the_outfit.name):
+            if import_wardrobes_has_outfit_with_name(list_of_wardrobes, the_outfit.name):
                 wardrobe.remove_outfit(the_outfit)
 
     def import_wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
