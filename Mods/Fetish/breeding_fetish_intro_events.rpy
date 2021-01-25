@@ -90,21 +90,11 @@ init 2 python:
     breeding_fetish_ashley_intro = Action("Ashley breeding fetish intro", breeding_fetish_ashley_intro_requirement, "breeding_fetish_ashley_intro_label")
 
 init 3 python:
-    def add_breed_me_collar_to_base_outfit(person):
-        person.base_outfit.remove_all_collars()
-
-        bm_collar = breed_collar.get_copy()
-        bm_collar.colour = [1,.41,.71,.9]
-        bm_collar.pattern = "Pattern_1"
-        bm_collar.colour_pattern = [.1,.1,.1,.9]
-        person.base_outfit.add_accessory(bm_collar)
-        return
-
     def add_breeding_fetish(person):
         person.add_role(breeding_fetish_role)
         person.update_sex_skill("Vaginal", 6)
         person.event_triggers_dict["LastBreedingFetish"] = day
-        add_breed_me_collar_to_base_outfit(person)
+        slave_assign_new_collar(person, breed_collar)
         return
 
 init 50 python:
@@ -339,7 +329,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     mc.name "That's what you want, isn't it? For me to pin you down and breed you, over and over, like the little slut you are."
     the_person "Oh [the_person.mc_title], I really do!"
     if the_person.outfit.vagina_available():
-        "You pullyour cock out and begin to rub it along her inviting slit."
+        "You pull your cock out and begin to rub it along her inviting slit."
     else:
         "As you pull your cock out, [the_person.possessive_title] pulls her bottoms off."
         $ the_person.strip_outfit(exclude_upper = True)
@@ -375,7 +365,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     # We'll start this exactly like the crisis with mom waking you up, but with definitely more urgency in her.
     # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
     # We do that by getting her lowest level pieces of bottom clothing and removing it, then working our way up until we can use her vagina.
-    # This makes sure skirts are kept on (because this is suppose to be a quicky).
+    # This makes sure skirts are kept on (because this is suppose to be a quickly).
     $ bottom_list = the_person.outfit.get_lower_ordered()
     $ removed_something = False
     $ the_index = 0
