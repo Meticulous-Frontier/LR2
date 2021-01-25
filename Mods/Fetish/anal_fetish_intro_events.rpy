@@ -77,16 +77,6 @@ init 1 python:
     def anal_fetish_ashley_intro_requirement():
         return False
 
-    def add_fuck_doll_collar_to_base_outfit(person):
-        person.base_outfit.remove_all_collars()
-
-        fd_collar = fuck_doll_collar.get_copy()
-        fd_collar.colour = [.41,.16,.38,.9]
-        fd_collar.pattern = "Pattern_1"
-        fd_collar.colour_pattern = [.95,.95,.95,.9]
-        person.base_outfit.add_accessory(fd_collar)
-        return
-
     #This is a list of positions that show off a person's ass. Can grab one randomly for when a girl wants to show off ass specifically
     def get_random_ass_position():
         return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
@@ -106,8 +96,8 @@ init 2 python: #Other anal fetish related python code
         person.add_role(anal_fetish_role)
         person.update_sex_skill("Anal", 6)
         person.event_triggers_dict["LastAnalFetish"] = day
-        add_fuck_doll_collar_to_base_outfit(person)
-        #TODO add spanking position
+        slave_assign_new_collar(person, fuck_doll_collar)
+        person.unlock_spanking()
         return
 
     def add_employee_anal_fetish_intro(the_person):
@@ -157,7 +147,7 @@ label anal_fetish_employee_intro_label(the_person):
         "Attempt to train her anal fetish" if mc.energy > 40:
             pass
         "Too tired" if mc.energy <= 40:
-            "You are just too tired to aproach her today."
+            "You are just too tired to approach her today."
             $ fetish_after_hours_unlock()
             $ abort_anal_fetish_intro(the_person)
             $ clear_scene()
@@ -183,7 +173,7 @@ label anal_fetish_employee_intro_label(the_person):
     ###Draw the girl###
     mc.name "Come in. Please have a seat."
     $ the_person.draw_person(position = "sitting")
-    "As she sits down, she starts to fidgit a bit."
+    "As she sits down, she starts to fidget a bit."
     mc.name "First off, I want you to know that you aren't in trouble. That isn't why I asked you here."
     the_person "Okay..."
     mc.name "I've noticed you've been acting a bit different lately whenever I am around. Bending over, wiggling your hips at me."
@@ -195,7 +185,7 @@ label anal_fetish_employee_intro_label(the_person):
     "[the_person.title] laughs a little."
     the_person "Oh! I umm... I suppose I would be up for something like that."
     "You stand up and start to walk around the desk toward [the_person.possessive_title]."
-    mc.name "You aren't fooling anyone [the_person.title]. Your body langage is practically begging for it."
+    mc.name "You aren't fooling anyone [the_person.title]. Your body language is practically begging for it."
     mc.name "Now get up and bend over the desk so I can get a good look."
     the_person "Oh my god..."
     $ the_person.draw_person(position = "standing_doggy")
@@ -211,7 +201,7 @@ label anal_fetish_employee_intro_label(the_person):
     mc.name "I love it."
     "[the_person.title] moans as you firmly knead her ass for a bit."
     $ the_person.change_arousal(15)
-    "You slide your fingers down betwee her cheeks and find her cunt just starting to leak a bit of moisture."
+    "You slide your fingers down between her cheeks and find her cunt just starting to leak a bit of moisture."
     mc.name "Wow, you really like this kind of attention don't you."
     "[the_person.possessive_title] can only moan as you slide two fingers inside her cunt. With your other hand you give her another spank."
     $ the_person.change_arousal(10)
@@ -272,7 +262,7 @@ label anal_fetish_family_intro_label(the_person):
     if the_person.core_sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
-    $ the_person.aroual = 30
+    $ the_person.arousal = 30
     $ the_person.draw_person(position = "standing_doggy")
     "As you walk into the room, you notice [the_person.possessive_title]. She is bent over and appears to be reading something on her phone."
     mc.name "Hey [the_person.title]"
@@ -324,7 +314,7 @@ label anal_fetish_family_intro_label(the_person):
             return
     mc.name "God you are so naughty. You want me to fuck you in your ass right here, don't you?"
     the_person "Of course not. It doesn't have to be right here."
-    mc.name "You'd like that though, wouldn't you? My cute litte [the_person.title], getting her ass taken anytime I feel like it. Anytime, anywhere."
+    mc.name "You'd like that though, wouldn't you? My cute little [the_person.title], getting her ass taken anytime I feel like it. Anytime, anywhere."
     $ the_person.change_arousal(15) #55
     the_person "You make it sound bad..."
     mc.name "It sounds to me like you are being awfully naughty. I think you need a good spanking."
