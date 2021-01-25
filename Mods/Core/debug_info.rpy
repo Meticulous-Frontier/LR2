@@ -42,7 +42,6 @@ init 2 python:
         renpy.hide_screen("DebugInfo", layer = "top")
 
     def add_to_log(message):
-        print(message)
         debug_log["T" + str(time.time())] = message
 
     def get_debug_log():
