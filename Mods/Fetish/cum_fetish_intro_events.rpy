@@ -76,16 +76,6 @@ init 1 python:
     def cum_fetish_ashley_intro_requirement():
         return False
 
-    def add_cum_slut_collar_to_base_outfit(person):
-        person.base_outfit.remove_all_collars()
-
-        cs_collar = cum_slut_collar.get_copy()
-        cs_collar.colour = [.1,.1,.1,.9]
-        cs_collar.pattern = "Pattern_1"
-        cs_collar.colour_pattern = [.95,.95,.95,.9]
-        person.base_outfit.add_accessory(cs_collar)
-        return
-
 init 2 python:
     def add_cum_fetish(person):
         person.max_opinion_score("drinking cum")
@@ -93,7 +83,7 @@ init 2 python:
         person.add_role(cum_fetish_role)
         person.update_sex_skill("Oral", 6)
         person.event_triggers_dict["LastCumFetish"] = day
-        add_cum_slut_collar_to_base_outfit(person)
+        slave_assign_new_collar(person, cum_slut_collar)
         return
 
     cum_fetish_family_intro = Action("Family Cum Fetish Intro", cum_fetish_family_intro_requirement, "cum_fetish_family_intro_label")
