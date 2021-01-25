@@ -4,10 +4,9 @@ init -1 python:
 
 init 3 python:
     def sister_phone_crisis_requirement():
-        if not mc_at_home() and time_of_day > 0 and time_of_day < 3: #She always sends you texts while you're not at home for the middle part of the day
+        if time_of_day > 0 and time_of_day < 3 and not mc.is_home(): #She always sends you texts while you're not at home for the middle part of the day
             if not lily in mc.location.people: #Obviously don't do it if she's right there with you.
-                if lily.love >= 30:
-                    return True
+                return lily.love >= 30
         return False
 
     sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label",

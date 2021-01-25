@@ -9,12 +9,7 @@ init 2 python:
         return False
 
     def girlfriend_service_get_person():
-        list_of_possible_people = []
-        for person in [x for x in mc.business.get_employee_list() if x.is_available()]:
-            if person.has_role(girlfriend_role):
-                list_of_possible_people.append(person)
-
-        return get_random_from_list(list_of_possible_people)
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.is_available() and x.has_role(girlfriend_role)])
 
     girlfriend_service = ActionMod("Girlfriend Service", girlfriend_service_requirement, "girlfriend_service_label",
         menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business",

@@ -115,11 +115,7 @@ init 2 python:
 
 init -1 python:
     def Sarah_intro_requirement():
-        if day > 2: #Early for testing
-            if mc_at_home():
-                if time_of_day < 4:
-                    return True
-        return False
+        return day > 2 and time_of_day < 4 and mc.is_home()
 
     def Sarah_hire_requirement(day_trigger):
         if day > day_trigger and HR_director_creation_policy.is_owned():

@@ -1956,7 +1956,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "I think I understand why you brought her out."
     mc.name "I tell you what. I'm going to walk with her around the store for a bit to get her acclimated, then we'll see about the toy in the back..."
     starbuck "Okay! I'll be up at the counter. Have fun!"
-    "As [starbuck.possessive_title] heads up to the front of the store, you walk quickly and catch up with [the_person.title]. At the moment, she is going thru a selection of crotchless panties."
+    "As [starbuck.possessive_title] heads up to the front of the store, you walk quickly and catch up with [the_person.title]. At the moment, she is going through a selection of crotchless panties."
     $ scene_manager.hide_actor(starbuck)
     $ scene_manager.update_actor(the_person, position = "stand3")
     the_person "Oh! Boss! Look at these! If I wore these to work with a skirt, you could just bend me over anywhere! You wouldn't even have to like, move my panties over or anything!"

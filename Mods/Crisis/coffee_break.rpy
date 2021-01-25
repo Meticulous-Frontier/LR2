@@ -4,11 +4,9 @@ init -1 python:
 
 init 2 python:
     def coffee_break_requirement():
-        if not mc.business.is_weekend():
-            if mc.is_at_work():
-                if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 20)) >= 3:
-                        return True
+        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
+            if not mc.business.is_weekend() and mc.is_at_work():
+                return __builtin__.len([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 20]) >= 3
         return False
 
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",

@@ -4,10 +4,9 @@ init -1 python:
 
 init 2 python:
     def late_for_work_requirement():
-        if mc.business.get_employee_count() > 2:
-            if time_of_day <= 1: #is morning when employees arrive.
-                if mc.business.is_work_day() and mc.is_at_work():
-                    return True
+        if time_of_day <= 1 and mc.business.get_employee_count() > 2:
+            if mc.business.is_work_day() and mc.is_at_work():
+                return True
         return False
 
     late_for_work_action = ActionMod("Late for Work", late_for_work_requirement, "late_for_work_action_label",

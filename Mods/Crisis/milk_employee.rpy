@@ -15,22 +15,12 @@ init -1 python:
 
 init 2 python:
     def milk_employee_requirement():
-        if mc.business.get_employee_count() > 0:
-            if mc.business.is_open_for_business():
-                if mc.is_at_work():
-                    if select_girl_lactating == None:
-                        return False
-                    else:
-                        return True
+        if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() > 0:
+            return not select_girl_lactating() is None
         return False
 
     def select_girl_lactating():
-        lactating_people = []
-        for person in [x for x in mc.business.get_employee_list() if x.is_available() and x.lactation_sources > 0]:
-            lactating_people.append(person)
-        if len(lactating_people) == 0:
-            return None
-        return get_random_from_list(lactating_people)
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.is_available() and x.lactation_sources > 0])
 
     milk_employee_crisis = ActionMod("Employee Needs Milked",milk_employee_requirement,"milk_employee_crisis_label",
         menu_tooltip = "An employee is struggling to milk herself.", category = "Business", is_crisis = True, crisis_weight = milk_employee_crisis_weight)

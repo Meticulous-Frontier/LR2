@@ -13,10 +13,8 @@ init -1 python:
 
 init 2 python:
     def SB_working_weekend_requirement():
-        if mc.business.get_employee_count() > 0:
-            if mc.business.is_weekend():
-                if mc.is_at_work():
-                    return True
+        if mc.business.is_weekend() and mc.is_at_work():
+            return mc.business.get_employee_count() > 2
         return False
 
     def person_opinion_to_string(person, topic):
@@ -186,7 +184,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "Eventually, [person_two.possessive_title] gets up."
                 $ scene_manager.update_actor(person_two, position = "stand3", display_transform = character_center)
                 person_two.char "Mmm... wow... I guess I should stop by on the weekend more often..."
-                $ scene_manager.update_actor(person_one, position = "missionary", display_transform = character_right)                
+                $ scene_manager.update_actor(person_one, position = "missionary", display_transform = character_right)
                 $ person_two.apply_planned_outfit()
                 $ scene_manager.update_actor(person_two, position = "walking_away")
                 "[person_two.possessive_title] puts on her clothes and heads for the door."
