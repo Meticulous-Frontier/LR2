@@ -1347,7 +1347,7 @@ init 2:
                                                                 hover_background "#4f7ad6"
 
                                                             action [
-                                                                Show("import_outfit_manager", None, target_wardrobe, n)
+                                                                Show("import_outfit_manager", None, target_wardrobe, n, False, None, None, False, outfit_type)
                                                             ]
                                                             alternate [ #Right clicking selects the path that outfits should be exported to
                                                             SetVariable("selected_xml", n)
