@@ -47,7 +47,7 @@ init -2 python:
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
             actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor:
-                add_actor(person, position, emotion, special_modifier, lighting, display_transform, z_order)
+                self.add_actor(person, position, emotion, special_modifier, lighting, display_transform, z_order)
                 return
 
             if not position is None:
