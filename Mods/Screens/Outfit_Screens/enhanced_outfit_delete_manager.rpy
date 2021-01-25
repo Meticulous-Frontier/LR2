@@ -34,7 +34,7 @@ init 3:
                         mousewheel True
                         vbox:
                             for outfit in sorted(target_wardrobe.get_outfit_list(), key = lambda outfit: outfit.slut_requirement):
-                                textbutton "Delete " + outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
                                     style "textbutton_no_padding_highlight"
                                     text_style "serum_text_style"
 
@@ -69,7 +69,7 @@ init 3:
                             mousewheel True
                             vbox:
                                 for outfit in sorted(target_wardrobe.get_overwear_sets_list(), key = lambda outfit: outfit.slut_requirement):
-                                    textbutton "Delete " + outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
 
@@ -103,7 +103,7 @@ init 3:
                             mousewheel True
                             vbox:
                                 for outfit in sorted(target_wardrobe.get_underwear_sets_list(), key = lambda outfit: outfit.slut_requirement):
-                                    textbutton "Delete " + outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
 

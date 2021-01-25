@@ -142,7 +142,7 @@ init 2:
                                                 vbox:
                                                     id str(outfit)
                                                     xfill True
-                                                    textbutton outfit.name + "\n" + get_heart_image_list_cloth(effective_slut_score, 1):
+                                                    textbutton outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(effective_slut_score, 1):
                                                         xfill True
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "serum_text_style"
