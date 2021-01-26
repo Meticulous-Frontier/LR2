@@ -107,7 +107,10 @@ init 2 python:
         return __builtin__.int((mc.int + mc.focus + mc.research_skill) / 2)
 
     def fetish_serum_coding_work_required():
-        return (100)
+        target = fetish_serum_get_coding_target()
+        if target:
+            return target.research_needed // 4    # coding is harder based on research needed
+        return 0
 
     def fetish_serum_update_coding_progress(progress):
         mc.business.event_triggers_dict["fetish_serum_code_progress"] =  __builtin__.int((fetish_serum_get_coding_progress() + progress))
@@ -157,7 +160,8 @@ label fetish_serum_quest_intro_label():
     $ mc.business.event_triggers_dict["fetish_serum_contact"] = the_person.identifier
     "As you are getting ready to sit down for some lunch, your head researcher messages you."
     the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can I swing by?"
-    mc.name "Sure, I'm just sitting down to some lunch, I'm in the office."
+    $ ceo_office.show_background()
+    mc.name "Sure, I'm just sitting down for some lunch, I'm in the office."
     $ the_person.draw_person()
     "A few minutes later, [the_person.title] is standing at your door."
     the_person "Hey [the_person.mc_title]. Mind if I sit down?"
@@ -220,7 +224,7 @@ label fetish_serum_quest_intro_followup_label():
     mc.name "Sounds great. We should make sure we observe the effects of these bots as well, to make sure they are effective."
     the_person "Okay! This is exciting stuff!"
     "You have unlocked Sexual Proclivity Nanobots. These can be added to any serum design, and do not take up a trait slot. However, they do increase the production cost."
-    "New versions of the nanobots can be unlocked after observing the results of this version. To advance, raise their mastery level to atleast 5.0"
+    "New versions of the nanobots can be unlocked after observing the results of this version. To advance, raise their mastery level to at least 5.0"
     return
 
 label fetish_serum_discuss_label(the_person):
@@ -259,15 +263,15 @@ label fetish_serum_contact_dialogue(the_person):
         the_person "I actually reached out to my previous contact, about the possibility of writing a new program for us."
         the_person "He has agreed to do it for us, but he is a little strapped for cash right now and has asked for a small payment."
         mc.name "How much?"
-        the_person "He is asking for $500. He could have it done by the start of business on Monday."
+        the_person "He is asking for $1000. He could have it done by the start of business on Monday."
         mc.name "Hmm..."
-        if mc.business.funds < 500:
+        if mc.business.funds < 1000:
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
         call fetish_serum_unlock_choice_menu(the_person) from _fetish_serum_menu_call_01
         if _return:
-            $ mc.business.funds += (-500)
+            $ mc.business.change_funds(-1000)
         the_person "Anything else I can do for you today?"
     elif fetish_serum_unlock_count() == 2:
         mc.name "I want to discuss commissioning a new program for the nanobots."
@@ -275,15 +279,15 @@ label fetish_serum_contact_dialogue(the_person):
         the_person "Apparently, some nanobots were discovered where they shouldn't have been, and they are cracking down on access to the source code."
         the_person "He told me he could write us a new program, but he needs to secure some new equipment to do it safely."
         mc.name "How much for the new equipment?"
-        the_person "He said $1500 should cover it, including his usual $500 fee."
+        the_person "He said $5000 should cover it, including his usual $1000 fee."
         mc.name "Hmm..."
-        if mc.business.funds < 1500:
+        if mc.business.funds < 6000:
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
         call fetish_serum_unlock_choice_menu(the_person) from _fetish_serum_menu_call_02
         if _return:
-            $ mc.business.funds += (-1500)
+            $ mc.business.change_funds(-6000)
         the_person "Anything else I can do for you today?"
     elif fetish_serum_unlock_count() == 3:
         mc.name "I want to discuss commissioning a new program for the nanobots."
@@ -291,15 +295,15 @@ label fetish_serum_contact_dialogue(the_person):
         the_person "I figured you might. However, my contact is starting to get spooked."
         the_person "His employer has instituted new measures for source code control. He's scared of getting caught and has significantly increased his commission price."
         mc.name "How much is he asking for?"
-        the_person "He won't do it for less than $5000."
+        the_person "He won't do it for less than $10000."
         mc.name "Hmm..."
-        if mc.business.funds < 5000:
+        if mc.business.funds < 10000:
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
         call fetish_serum_unlock_choice_menu(the_person) from _fetish_serum_menu_call_03
         if _return:
-            $ mc.business.funds += (-5000)
+            $ mc.business.change_funds(-10000)
         the_person "Anything else I can do for you today?"
     elif fetish_serum_unlock_count() == 4:
         mc.name "I want to discuss commissioning a new program for the nanobots."
@@ -308,15 +312,15 @@ label fetish_serum_contact_dialogue(the_person):
         the_person "His employer has instituted a whitelist for people to get access to the new source code, and my contact isn't on the list."
         the_person "He says he could probably get access, but he needs a significant bribe for the security head."
         mc.name "How much is he asking for?"
-        the_person "He won't do it for less than $15000."
+        the_person "He won't do it for less than $25000."
         mc.name "Hmm..."
-        if mc.business.funds < 15000:
+        if mc.business.funds < 25000:
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
         call fetish_serum_unlock_choice_menu(the_person) from _fetish_serum_menu_call_04
         if _return:
-            $ mc.business.funds += (-15000)
+            $ mc.business.change_funds(-25000)
         the_person "Anything else I can do for you today?"
     else:
         mc.name "I want to discuss commissioning a new program for the nanobots."
@@ -605,7 +609,8 @@ label fetish_serum_exhibition_warning_label():
     the_person "So, I've been running some experiments with those Public Sexual Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
-    the_person "TODO: This conversation"
+    the_person "Normal rats usually are night active and retreat during the daytime in a protected shelter."
+    the_person "But they no longer seemed to care, foraging and running around all day long and copulating wherever they find a mate."
     mc.name "That is very interesting."
     the_person "It wouldn't surprise me if repeated doses could lead someone to develop a exhibitionist fixation or fetish."
     mc.name "I understand. Thank you for the update."
@@ -620,8 +625,8 @@ label fetish_serum_coding_activity_label():
         $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress())
     else:
         "You sit down at a computer terminal in the lab to work on the nanobot program. Things seem to be progressing normally."
-        $ rand_int = renpy.random.randint(0,6)
-        if rand_int == 1:
+        $ ran_num = renpy.random.randint(0,6)
+        if ran_num == 1:
             pass #HR gets impatient, asks to fuck
             $ the_person.arousal = 40
             $ the_person.draw_person()
@@ -694,12 +699,12 @@ label fetish_serum_coding_activity_label():
                     "Focus on the code\n{color=#ff0000}{size=18}Requires Focus: 6+{/size}{/color} (disabled)" if mc.focus <6:
                         pass
 
-        elif rand_int == 2:
+        elif ran_num == 2:
             "However, you hit a snag. This particular program requires specific nerve group activation and you are having trouble identifying them."
             "It takes a few hours of work, but you finally overcome this limitation."
             "You manage to accomplish some work on the program, but not as much as you would normally like to."
             $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() / 2)
-        elif rand_int == 3:
+        elif ran_num == 3:
             "As you are looking through the variable names, however, you notice a pattern."
             "If you group together this particular group of nerve related variables, you could save a lot of time with this code."
             "You work a few hours on the grouping. Your progress has come along faster than you were expecting!"
