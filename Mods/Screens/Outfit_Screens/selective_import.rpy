@@ -61,7 +61,7 @@ init 2 python:
         import_wardrobes = {}
         if slut_limit is None: # If slut_limit is None then add any and all options
 
-            import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+            import_wardrobes["Player Wardrobe"] = [[mc.designed_wardrobe]]
             import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
 
         import_wardrobes["Marketing Division"] = [[mc.business.m_uniform]]
@@ -74,7 +74,7 @@ init 2 python:
 
     def get_strip_club_import_wardrobes():
         import_wardrobes = {}
-        import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+        import_wardrobes["Player Wardrobe"] = [[mc.designed_wardrobe]]
         import_wardrobes["Strippers"] = [[stripclub_wardrobe]]
         import_wardrobes["Waitresses"] = [[waitress_wardrobe]]
         import_wardrobes["Manager"] = [[manager_wardrobe]]
@@ -180,7 +180,7 @@ init 2:
                                                                 sensitive outfit not in exported
 
 
-                                                        textbutton ("Direct Import Selection:" if slut_limit is None else "Assign to Division: " + get_wardrobe_name_for_outfit_with_name(import_wardrobes, outfit.name)): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
+                                                        textbutton ("Direct Import Selection:" if slut_limit is None else "Assigned to: " + get_wardrobe_name_for_outfit_with_name(import_wardrobes, outfit.name)): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
 
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
@@ -217,7 +217,10 @@ init 2:
                                                                             else:
 
                                                                                 if slut_limit is not None:
-                                                                                    if import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
+                                                                                    if wardrobes == "Player Wardrobe":  # don't allow remove from player wardrobe
+                                                                                        background "#aa4433"
+                                                                                        sensitive False
+                                                                                    elif import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
                                                                                         background "#3ffc45"
                                                                                     #If the outfit is imported / assigned already then attempt to remove it.
                                                                                     action [
