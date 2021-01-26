@@ -20,7 +20,7 @@ init 2 python:
         return False
 
     def select_girl_masturbating():
-        return get_random_from_list([x for x in mc.business.get_employee_list() if x.is_available() and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)

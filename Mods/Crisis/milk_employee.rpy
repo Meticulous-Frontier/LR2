@@ -20,7 +20,7 @@ init 2 python:
         return False
 
     def select_girl_lactating():
-        return get_random_from_list([x for x in mc.business.get_employee_list() if x.is_available() and x.lactation_sources > 0])
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.lactation_sources > 0])
 
     milk_employee_crisis = ActionMod("Employee Needs Milked",milk_employee_requirement,"milk_employee_crisis_label",
         menu_tooltip = "An employee is struggling to milk herself.", category = "Business", is_crisis = True, crisis_weight = milk_employee_crisis_weight)

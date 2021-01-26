@@ -3,7 +3,7 @@ init 5 python:
 
     def get_random_mother_from_company_with_children():
         valid_people_list = []
-        for person in [x for x in mc.business.get_employee_list() if x.is_available() and not quest_director.is_person_blocked(x)]:
+        for person in [x for x in mc.business.get_employee_list() if not quest_director.is_person_blocked(x)]:
             if person.kids != 0 and person.age >= 34 and person.kids > town_relationships.get_existing_child_count(person): #They have undiscovered kids we can add in.
                 valid_people_list.append(person)
 
