@@ -106,10 +106,13 @@ init 2 python:
     def fetish_serum_get_estimated_coding_progress():
         return __builtin__.int((mc.int + mc.focus + mc.research_skill) / 2)
 
+    def fetish_serum_coding_percent_done():
+        return (fetish_serum_get_coding_progress() * 100)/fetish_serum_coding_work_required()
+
     def fetish_serum_coding_work_required():
         target = fetish_serum_get_coding_target()
         if target:
-            return target.research_needed // 4    # coding is harder based on research needed
+            return target.research_needed // 10    # coding is harder based on research needed
         return 0
 
     def fetish_serum_update_coding_progress(progress):
@@ -216,7 +219,7 @@ label fetish_serum_quest_intro_followup_label():
     $ the_person.draw_person()
     the_person "Guess what! I got the first set of those nano bots. He did me a favor and spent all weekend coding the program for our first batch!"
     "You look at her desk. There is a small container filled with what appears to be a silver liquid."
-    the_person "All we have to do is added a little bit to a serum, set the program, and it should be good to go!"
+    the_person "All we have to do is add a little bit to a serum, set the program, and it should be good to go!"
     the_person "However, he did give me a warning. He said this tech is still technically top secret, so we absolutely CANNOT advertise what's in it or how they work."
     mc.name "Can we still sell the completed serum?"
     the_person "Yes, but we aren't allowed to tell anyone that they are in it. Kinda shady, but I understand where he is coming from."
@@ -708,7 +711,7 @@ label fetish_serum_coding_activity_label():
             "As you are looking through the variable names, however, you notice a pattern."
             "If you group together this particular group of nerve related variables, you could save a lot of time with this code."
             "You work a few hours on the grouping. Your progress has come along faster than you were expecting!"
-            $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() + mc.int)
+            $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() + mc.int + mc.focus)
         else:
             "You spend a few hours working on the code. You feel like you are making good progress."
             "You write some unit tests. There are a couple bugs, but you are able to work through them."
@@ -717,7 +720,7 @@ label fetish_serum_coding_activity_label():
 
     if fetish_serum_get_coding_progress() >= fetish_serum_coding_work_required(): #Serum Finished
         "You run the final set of unit tests. Everything in the program checks out. It's finished!"
-        "You call over to [the_person.possessive_title]"
+        "You call over to [the_person.possessive_title]."
         mc.name "Hey [the_person.title], come here."
         $ the_person.draw_person(position = the_person.idle_pose)
         "[the_person.title] quickly walks over."
@@ -733,7 +736,7 @@ label fetish_serum_coding_activity_label():
         $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
         $ del temp_string
     else:
-        $ temp_percent = __builtin__.str(fetish_serum_get_coding_progress())
+        $ temp_percent = __builtin__.str(fetish_serum_coding_percent_done())
         "You quickly review your work. Progress is coming along, you estimate it is about [temp_percent] percent complete."
         $ del temp_percent
     call advance_time() from _call_serum_progress_advance_time_01
