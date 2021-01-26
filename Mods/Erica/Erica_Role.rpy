@@ -2232,7 +2232,7 @@ init 2 python:
 
     def erica_get_yoga_class_list():
         yoga_list = []
-        for person in [x for x in mc.business.get_employee_list() if x.is_available() and x.get_opinion_score("yoga") > 0]:
+        for person in [x for x in mc.business.get_employee_list() if x.get_opinion_score("yoga") > 0]:
             if not person is mc.business.hr_director:
                 yoga_list.append(person)
         return yoga_list

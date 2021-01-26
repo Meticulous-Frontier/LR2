@@ -69,7 +69,7 @@ init -1 python:
         known_people = []
         excluded_people.extend(unique_characters_not_known())
         for location in all_locations_in_the_game(excluded_locations):
-            known_people.extend([x for x in location.people if not x in excluded_people and not (x.mc_title == "Stranger" or not x.title)])
+            known_people.extend([x for x in location.people if x.is_available() and not x in excluded_people and not (x.mc_title == "Stranger" or not x.title)])
         return known_people
 
     def known_people_at_location(location, excluded_people = []):

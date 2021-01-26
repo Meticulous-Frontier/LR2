@@ -361,7 +361,7 @@ init 2:
             wardrobe_tree.write(file_name,encoding="UTF-8")
 
 init 2:
-    screen outfit_creator(starting_outfit, target_wardrobe = mc.designed_wardrobe, outfit_type = "full", slut_limit = None): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
+    screen outfit_creator(starting_outfit, outfit_type = "full", slut_limit = None, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
         #add "Paper_Background.png"
         modal True
@@ -1347,7 +1347,7 @@ init 2:
                                                                 hover_background "#4f7ad6"
 
                                                             action [
-                                                                Show("import_outfit_manager", None, target_wardrobe, n)
+                                                                Show("import_outfit_manager", None, target_wardrobe, n, False, None, None, False, outfit_type)
                                                             ]
                                                             alternate [ #Right clicking selects the path that outfits should be exported to
                                                             SetVariable("selected_xml", n)
