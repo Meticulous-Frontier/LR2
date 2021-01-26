@@ -221,8 +221,8 @@ init -1 python:
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
-            person.increase_sex_skill("Foreplay", 2 + tier)
-        fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log)
+            person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
+        fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True)
         return
 
 
@@ -243,8 +243,8 @@ init -1 python:
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
-            person.increase_sex_skill("Anal", 2 + tier)
-        fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log)
+            person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
+        fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log)
 
@@ -276,11 +276,11 @@ init -1 python:
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Vaginal", 2 + tier)
+            person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
             person.change_happiness(1, add_to_log)
 
-        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log)
+        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log = True)
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
             return
@@ -319,12 +319,12 @@ init -1 python:
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
-            person.increase_sex_skill("Oral", 2 + tier)
+            person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 person.change_slut_temp(1, add_to_log)
 
-        fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log)
+        fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True)
         if is_cum_fetish_unlocked():
             if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 5 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
@@ -358,7 +358,7 @@ init -1 python:
                 person.change_slut_temp(1, add_to_log)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log)
-        fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log)
+        fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True)
 
         if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
@@ -448,12 +448,12 @@ init -1 python:
                 research_added = FETISH_RESEARCH_ADDED,
                 slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 50,
+                base_side_effect_chance = 10,
                 on_apply = fetish_basic_function_on_apply,
                 on_turn = fetish_basic_function_on_turn,
                 tier = 99,
                 start_researched = True,
-                research_needed = 400,
+                research_needed = 1000,
                 exclude_tags = ["Nanobots"]
             )
 
@@ -465,12 +465,12 @@ init -1 python:
                 research_added = FETISH_RESEARCH_ADDED,
                 slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 60,
+                base_side_effect_chance = 0,
                 on_apply = fetish_exhibition_function_on_apply,
                 on_turn = fetish_exhibition_on_turn,
                 tier = 99,
                 start_researched =  True,
-                research_needed = 600,
+                research_needed = 1200,
                 exclude_tags = ["Nanobots"]
             )
 
@@ -482,12 +482,12 @@ init -1 python:
                 research_added = FETISH_RESEARCH_ADDED,
                 slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 80,
+                base_side_effect_chance = 10,
                 on_apply = fetish_anal_function_on_apply,
                 on_turn = fetish_anal_function_on_turn,
                 tier = 99,
                 start_researched =  True,
-                research_needed = 1000,
+                research_needed = 2000,
                 exclude_tags = ["Nanobots"]
             )
 
@@ -499,12 +499,12 @@ init -1 python:
                 research_added = FETISH_RESEARCH_ADDED,
                 slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 80,
+                base_side_effect_chance = 10,
                 on_apply = fetish_cum_function_on_apply,
                 on_turn = fetish_cum_function_on_turn,
                 tier = 99,
                 start_researched =  True,
-                research_needed = 1000,
+                research_needed = 2000,
                 exclude_tags = ["Nanobots"]
             )
 
@@ -516,12 +516,12 @@ init -1 python:
                 research_added = FETISH_RESEARCH_ADDED,
                 slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 80,
+                base_side_effect_chance = 10,
                 on_apply = fetish_breeding_function_on_apply,
                 on_turn = fetish_breeding_function_on_turn,
                 tier = 99,
                 start_researched =  True,
-                research_needed = 1000,
+                research_needed = 2000,
                 exclude_tags = ["Nanobots"]
             )
         return
