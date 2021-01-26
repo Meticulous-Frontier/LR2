@@ -58,10 +58,10 @@ label hire_mother_work_crisis_label():
         "[the_person.title] hands over a printed out resume waits nervously for you to look it over."
 
     menu:
-        "Look at the resume for [the_person.name]'s mother.":
+        "Look at the resume for [the_person.name]'s mother":
             pass
 
-        "Tell her you aren't hiring.":
+        "Tell her you aren't hiring":
             "You hand the resume back."
             mc.name "I'm sorry, but I'm not looking to hire anyone right now."
             if the_person.effective_sluttiness() > 50 and not promised_sex:
@@ -69,11 +69,11 @@ label hire_mother_work_crisis_label():
                 the_person.char "She means the world to me, and I would do anything for her. Anything at all."
                 "She puts her arms behind her back and puffs out her chest in a clear attempt to show off her tits."
                 menu:
-                    "Look at the resume for [the_person.name]'s mother.":
+                    "Look at the resume for [the_person.name]'s mother":
                         "Convinced, you start to read through the resume."
                         $ promised_sex = True
 
-                    "Tell her you aren't hiring.":
+                    "Tell her you aren't hiring":
                         if the_person.love < 10:
                             mc.name "If I want to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
                             $ the_person.change_obedience(3)
