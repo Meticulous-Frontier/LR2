@@ -1,5 +1,5 @@
 init 2:
-    screen girl_outfit_select_manager(target_wardrobe, show_sets = True, slut_limit = the_person.sluttiness): ##Brings up a list of outfits currently in a girls wardrobe.
+    screen girl_outfit_select_manager(target_wardrobe, show_sets = False, slut_limit = the_person.sluttiness): ##Brings up a list of outfits currently in a girls wardrobe.
         #add "Paper_Background.png"
         modal True
         zorder 99 #Allow it to be hidden below outfit_creator

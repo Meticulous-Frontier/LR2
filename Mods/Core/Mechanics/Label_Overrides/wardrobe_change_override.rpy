@@ -55,7 +55,7 @@ label wardrobe_change_label_enhanced(the_person):
     elif strip_choice == "wear":
         mc.name "[the_person.title], I want you to get changed for me."
         $ clear_scene()
-        call screen girl_outfit_select_manager(the_person.wardrobe, show_sets = True, slut_limit = the_person.effective_sluttiness() + 20)
+        call screen girl_outfit_select_manager(the_person.wardrobe, slut_limit = the_person.effective_sluttiness() + 20)
         if _return != "None":
             $ the_person.set_outfit(_return)
             if the_person.update_outfit_taboos():
