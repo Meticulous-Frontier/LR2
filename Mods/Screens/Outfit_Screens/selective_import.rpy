@@ -158,7 +158,7 @@ init 2:
                                                                 action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
                                                             else:
                                                                 action [
-                                                                    Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
+                                                                    Show("outfit_creator", None, outfit.get_copy(), outfit_categories[category][1], slut_limit, target_wardrobe), # Bring the outfit into the outfit_creator for editing when left clicked
                                                                     Hide(renpy.current_screen().screen_name)
                                                                     ]
 

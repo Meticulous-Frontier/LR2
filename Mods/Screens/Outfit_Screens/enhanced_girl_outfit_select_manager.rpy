@@ -40,7 +40,7 @@ init 2:
 
                                     action [Hide("mannequin"), Return(outfit)]
                                     hovered [Function(draw_mannequin, the_person, outfit)]
-                                    alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                    alternate Show("outfit_creator", None, outfit.get_copy(), "full", slut_limit, the_person.wardrobe)
 
             if show_sets:
                 frame:
@@ -71,7 +71,7 @@ init 2:
 
                                         action [Hide("mannequin"), Return(outfit)]
                                         hovered [Function(draw_mannequin, the_person, outfit)]
-                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        alternate Show("outfit_creator", None, outfit.get_copy(), "over", slut_limit, the_person.wardrobe)
 
 
                 frame:
@@ -102,7 +102,7 @@ init 2:
 
                                         action [Hide("mannequin"), Return(outfit)]
                                         hovered [Function(draw_mannequin, the_person, outfit)]
-                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        alternate Show("outfit_creator", None, outfit.get_copy(), "under", slut_limit, the_person.wardrobe)
 
         frame:
             background None

@@ -46,7 +46,7 @@ init 3:
 
                                     if the_person is not None:
                                         hovered Function(draw_mannequin, the_person, outfit)
-                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        alternate Show("outfit_creator", None, outfit.get_copy(), "full", slut_limit, the_person.wardrobe)
                                     else:
                                         hovered Show("mannequin", None, outfit)
 
@@ -80,7 +80,7 @@ init 3:
                                         action [Function(target_wardrobe.remove_outfit,outfit)]
                                         if the_person is not None:
                                             hovered Function(draw_mannequin, the_person, outfit)
-                                            alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                            alternate Show("outfit_creator", None, outfit.get_copy(), "over", slut_limit, the_person.wardrobe)
                                         else:
                                             hovered Show("mannequin", None, outfit)
 
@@ -114,7 +114,7 @@ init 3:
                                         action [Function(target_wardrobe.remove_outfit,outfit)]
                                         if the_person is not None:
                                             hovered Function(draw_mannequin, the_person, outfit)
-                                            alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                            alternate Show("outfit_creator", None, outfit.get_copy(), "under", slut_limit, the_person.wardrobe)
                                         else:
                                             hovered Show("mannequin", None, outfit)
 
