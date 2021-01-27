@@ -134,6 +134,9 @@ init 5 python: # add to stack later then other mods
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
 
+    if take_animation_screenshot in config.interact_callbacks:
+        config.interact_callbacks.remove(take_animation_screenshot)
+
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
