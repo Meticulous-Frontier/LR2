@@ -80,7 +80,7 @@ init:
         threesome_double_blowjob.mc_position = [threesome_double_blowjob_focus_oral,threesome_double_blowjob_makeout]
         list_of_threesomes.append(threesome_double_blowjob)
 
-label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
     "As the girls get on their knees, you run your hands through their hair."
     mc.name "I want you two to focus on me for a bit."
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
@@ -94,7 +94,7 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
     return
 
-label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_location, the_object):
     #Girl 1 services you
     #TODO scene modifier for blowing
     "[the_girl_1.title] opens up and begins to blow you. Her tongue works circle around your head as she gives you shallow strokes."
@@ -107,7 +107,7 @@ label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_lo
     "They slowly stroke your cock together, mouths on opposite sides of your aching hard on."
     return
 
-label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_2.title] opens up and takes a turn focusing on your hard on. She takes the base in her hand and gives you long, deep strokes."
     $ scene_manager.update_actor(the_girl_1, position = "kissing")
     "[the_girl_1.title] takes a moment and stands up, wrapping her hands around you. She begins kissing your neck and along your jawline."
@@ -117,15 +117,15 @@ label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_lo
     "She continues descending, kissing down your belly until she is back on her knees. When [the_girl_2.title] comes off she takes you in your hand and gives you a few strokes."
     return
 
-label outro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
     #Since the girls are pretty much in control, they determine where you cum.
     "Soon, the mouths of the beautiful girls on their knees in front of you drive you past the point of no return. Your orgasm is swiftly approaching."
     mc.name "Oh god, I'm gonna cum!"
     if the_girl_1.get_opinion_score("drinking cum") > 1:
-        call threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_1
+        call threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object) from _call_threesome_double_blowjob_girls_cum_drink_1
         return
     elif the_girl_2.get_opinion_score("drinking cum") > 0:
-        call threesome_double_blowjob_girls_cum_drink(the_girl_2, the_girl_1, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_2
+        call threesome_double_blowjob_girls_cum_drink(the_girl_2, the_girl_1, the_location, the_object) from _call_threesome_double_blowjob_girls_cum_drink_2
         return
     "You take your cock and begin to stroke it. Both girls look up at you as you get ready to finish."
     "Your orgasm hits and you being spraying down their beautiful faces with their seed."
@@ -138,13 +138,13 @@ label outro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     "When you finish, both of the girl's faces are covered in your sticky cum."
     return
 
-label strip_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
     "This scene in progress"
 
-label strip_ask_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_ask_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
     "This scene in progress"
 
-label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel the pace of the double blowjob pick up a bit as both girls begin moaning at each other."
         "When you look down, you can see that each girl has a hand along the other's crotch... have they been doing that the whole time?"
@@ -170,7 +170,7 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
         return
     return
 
-label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
     "You decide to change things up a bit. You run your hands through their hair, pulling them toward your cock."
     mc.name "I want you two to focus on me for a bit."
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
@@ -188,7 +188,7 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
 #Makeout. In this scene 1, the girls makeout while on their knees in front of you, touching and caressing each other.
 #In scene 2, girls make out around MC's cock
 
-label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     "As the girls get on their knees, you run your hands through their hair."
     mc.name "Why don't you two makeout for a bit. I want to watch."
     "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
@@ -197,7 +197,7 @@ label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
     "The girls are heating up as they start to make out with each other."
     return
 
-label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_2.outfit.vagina_available():
         "As they are making out, you notice [the_girl_1.possessive_title] has her hand between [the_girl_2.title]'s legs, petting her pussy."
     else:
@@ -221,7 +221,7 @@ label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_locat
     "The girls make out for a while, enjoying the taste of each other's lips."
     return
 
-label scene_threesome_double_blowjob_makeout_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_double_blowjob_makeout_2(the_girl_1, the_girl_2, the_location, the_object):
     "You decide to give the girls something additional to kiss as they make out with each other."
     "You move forward and move your hips right next to their faces, your cock resting on [the_girl_1.title]'s cheek."
     if mc.recently_orgasmed:
@@ -236,14 +236,14 @@ label scene_threesome_double_blowjob_makeout_2(the_girl_1, the_girl_2, the_locat
     "When you pull back, you step back. The girls pout for a second when your cock is no longer in reach but quickly resume touching and kissing each other."
     return
 
-label outro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     "Watching the girls, on their knees in front of you, kiss and please each other has you hot and bothered. You find yourself stroking yourself past the point of no return."
     mc.name "Oh god, I'm gonna cum!"
     if the_girl_1.get_opinion_score("drinking cum") > 1:
-        call threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_3
+        call threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object) from _call_threesome_double_blowjob_girls_cum_drink_3
         return
     elif the_girl_2.get_opinion_score("drinking cum") > 0:
-        call threesome_double_blowjob_girls_cum_drink(the_girl_2, the_girl_1, the_location, the_object, the_round) from _call_threesome_double_blowjob_girls_cum_drink_4
+        call threesome_double_blowjob_girls_cum_drink(the_girl_2, the_girl_1, the_location, the_object) from _call_threesome_double_blowjob_girls_cum_drink_4
         return
     "You take your cock and begin to stroke it. Both girls look up at you as you get ready to finish."
     "Your orgasm hits and you being spraying down their beautiful faces with their seed."
@@ -256,13 +256,13 @@ label outro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
     "When you finish, both of the girl's faces are covered in your sticky cum."
     return
 
-label strip_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     "This scene in progress"
 
-label strip_ask_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_ask_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     "This scene in progress"
 
-label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "You can feel the pace and urgency of the girls moaning increase as the kiss each other."
             "When you look down, you can see that each girl has a hand along the other's crotch."
@@ -287,7 +287,7 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
             return
         return
 
-label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     mc.name "Why don't you two makeout for a bit. I want to watch."
     "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
     the_girl_1.char "Mmmm, I love your tits, [the_girl_2.name]!"
@@ -295,7 +295,7 @@ label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location
     "The girls are heating up as they start to make out with each other."
     return
 
-label threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.possessive_title] immediately grabs your cock, opens up and takes your tip in her mouth."
     "[the_girl_2.title] moves down and strokes the side of your cock as you begin to ejaculate into [the_girl_1.title]'s eager mouth."
     $ the_girl_1.cum_in_mouth()

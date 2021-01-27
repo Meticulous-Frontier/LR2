@@ -179,7 +179,6 @@ label SB_working_weekend_crisis_label_high(person_one):
                 person_two.char "Okay, how do you want to do this?"
                 call start_threesome(person_one, person_two) from _call_start_threesome_SB_working_weekend_crisis
                 $ the_report = _return
-                #call SB_threesome_description(person_one, person_two, SB_threesome_sixty_nine, make_desk(), 0, private = True, girl_in_charge = False) from _SB_EVENT_THREESOME_WEEKEND_SB10
                 "Wow, you just had sex with [person_one.title] and [person_two.title]! You can't believe how lucky you are."
                 "Eventually, [person_two.possessive_title] gets up."
                 $ scene_manager.update_actor(person_two, position = "stand3", display_transform = character_center)

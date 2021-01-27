@@ -96,36 +96,36 @@ init -1 python:
             self.swap_description = swap_description
             self.requirement = requirement
 
-        def call_intro(self, person_one, person_two, the_location, the_object, round):
+        def call_intro(self, person_one, person_two, the_location, the_object):
             if girl_swap_pos:
-                renpy.call(self.intro,person_two, person_one, the_location, the_object, round)
+                renpy.call(self.intro,person_two, person_one, the_location, the_object)
             else:
-                renpy.call(self.intro,person_one, person_two, the_location, the_object, round)
+                renpy.call(self.intro,person_one, person_two, the_location, the_object)
 
-        def call_scene(self, person_one, person_two, the_location, the_object, round):
+        def call_scene(self, person_one, person_two, the_location, the_object):
             random_scene = renpy.random.randint(0,__builtin__.len(self.scenes)-1)
             if girl_swap_pos:
-                renpy.call(self.scenes[random_scene],person_two, person_one, the_location, the_object, round)
+                renpy.call(self.scenes[random_scene],person_two, person_one, the_location, the_object)
             else:
-                renpy.call(self.scenes[random_scene],person_one, person_two, the_location, the_object, round)
+                renpy.call(self.scenes[random_scene],person_one, person_two, the_location, the_object)
 
-        def call_orgasm(self, person_one, person_two, the_location, the_object, round):
+        def call_orgasm(self, person_one, person_two, the_location, the_object):
             if girl_swap_pos:
-                renpy.call(self.orgasm_description,person_two, person_one, the_location, the_object, round)
+                renpy.call(self.orgasm_description,person_two, person_one, the_location, the_object)
             else:
-                renpy.call(self.orgasm_description,person_one, person_two, the_location, the_object, round)
+                renpy.call(self.orgasm_description,person_one, person_two, the_location, the_object)
 
-        def call_outro(self, person_one, person_two, the_location, the_object, round):
+        def call_outro(self, person_one, person_two, the_location, the_object):
             if girl_swap_pos:
-                renpy.call(self.outro,person_two, person_one, the_location, the_object, round)
+                renpy.call(self.outro,person_two, person_one, the_location, the_object)
             else:
-                renpy.call(self.outro,person_one, person_two, the_location, the_object, round)
+                renpy.call(self.outro,person_one, person_two, the_location, the_object)
 
-        def call_transition(self, person_one, person_two, the_location, the_object, round):
+        def call_transition(self, person_one, person_two, the_location, the_object):
             if girl_swap_pos:
-                renpy.call(self.swap_description,person_two, person_one, the_location, the_object, round)
+                renpy.call(self.swap_description,person_two, person_one, the_location, the_object)
             else:
-                renpy.call(self.swap_description,person_one, person_two, the_location, the_object, round)
+                renpy.call(self.swap_description,person_one, person_two, the_location, the_object)
 
         def check_girl_one_energy(self, person_one):
             if girl_swap_pos:
@@ -378,7 +378,7 @@ init 5 python:
                 return options
         return None
 
-label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, round = 0, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False, swapped = False):
+label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, skip_intro = False, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False, swapped = False):
     # When called
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -417,7 +417,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     #     $ report_log["girl two orgasms"] = int_swap
 
     $ position_choice.update_scene(the_person_one, the_person_two)
-    if round == 0:
+    if not skip_intro:
         "As the girls get into position, you consider how to begin your threesome."
 
     # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
@@ -433,8 +433,8 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         if active_mc_position is None:
             "Something broke..."
             $ round_choice = "Leave"
-        elif round == 0:
-            $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice, round)
+        elif not skip_intro:
+            $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice)
             $ round_choice = None
         else:
             $ round_choice = None
@@ -449,7 +449,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
-            if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
+            if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignore all of that
                 "You decide to change it up."
                 call pick_threesome(the_person_one, the_person_two) from threesome_mid_position_set
                 $ position_choice = _return
@@ -472,7 +472,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     "Something broke..."
                     $ finished = True
                 else:
-                    $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice, round)
+                    $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice)
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
@@ -551,9 +551,9 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
         #Need to catch position changes here.
         else:
             $ active_mc_position = get_mc_active_position(position_choice, round_choice)
-            $ active_mc_position.call_transition(the_person_one, the_person_two, mc.location, object_choice, round)
+            $ active_mc_position.call_transition(the_person_one, the_person_two, mc.location, object_choice)
 
-        $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the begining of the loop we can set a mandatory choice for the first one.
+        $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
 
 
     # Teardown the sex modifiers
@@ -601,11 +601,11 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
 
-label threesome_round(the_person_one, the_person_two, position_choice, round = 0, object_choice = None, private = True, report_log = None):
+label threesome_round(the_person_one, the_person_two, position_choice, object_choice = None, private = True, report_log = None):
     #Draw event before calling this scene
 
     #Normal round events
-    $ position_choice.call_scene(the_person_one, the_person_two, mc.location, object_choice, round)
+    $ position_choice.call_scene(the_person_one, the_person_two, mc.location, object_choice)
     # TODO listener event, to log events for challenge
     if report_log is not None:
         $ report_log["total rounds"] += 1
@@ -656,7 +656,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
     #If girl(s) orgasms, call orgasm scene
     if the_person_one.arousal >= the_person_one.max_arousal or the_person_two.arousal >= the_person_two.max_arousal:
-        $ position_choice.call_orgasm(the_person_one, the_person_two, mc.location, object_choice, round)
+        $ position_choice.call_orgasm(the_person_one, the_person_two, mc.location, object_choice)
 
         if the_person_one.arousal >= the_person_one.max_arousal:
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person_one, the_position = position_choice, the_object = object_choice)
@@ -671,7 +671,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
 
     #If MC orgasms, call outro
     if mc.arousal >= mc.max_arousal:
-        $ position_choice.call_outro(the_person_one, the_person_two, mc.location, object_choice, round)
+        $ position_choice.call_outro(the_person_one, the_person_two, mc.location, object_choice)
         $ the_person_one.change_obedience(3)
         $ the_person_two.change_obedience(3)
         $ mc.reset_arousal()
@@ -733,7 +733,7 @@ label join_threesome(the_person_one, the_person_two, initial_position, private =
 
     call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1
     $ position_choice = _return
-    call start_threesome(the_person_one, the_person_two, start_position = position_choice, private = private, report_log = report_log) from _join_threesome_in_progress_1
+    call start_threesome(the_person_one, the_person_two, start_position = position_choice, skip_intro = True, private = private, report_log = report_log) from _join_threesome_in_progress_1
 
     return _return
 
