@@ -566,7 +566,7 @@ label fetish_serum_cum_warning_label():
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
     the_person "In my experimental group, I offered two different nutrition sources, a normal one and another modified to copy the taste, consistency, and chemical properties of semen."
     the_person "Obviously, the control group preferred the former, while the second group preferred the latter. However, we had one interesting development."
-    the_person "I had one rat from the experimental group who actually managed to escape the cage. She found her way to the place I was storing the semen equivalant..."
+    the_person "I had one rat from the experimental group who actually managed to escape the cage. She found her way to the place I was storing the semen equivalent..."
     the_person "I found her the next day in the vat, drowned."
     mc.name "So she fell in it?"
     the_person "Well, no. Upon further testing, rats in the control group would swim out without being harmed. The experimental group would actually let themselves sink into the vat..."
