@@ -86,13 +86,13 @@ init:
         list_of_threesomes.append(Threesome_double_down)
 
 
-label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You lay down on your back as the girls get into position."
     "You briefly see [the_girl_1.title] sigh as she sinks down onto your cock, before [the_girl_2.possessive_title] swings a leg over your head."
     "With both girls on top of you, you waste no time diving into [the_girl_2.title]'s pussy."
     return
 
-label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object):
     #Scene: Make things rough. Spank her ass while she and the other girl play with each other.
     "You run your tongue up and down [the_girl_2.title]'s slit, lapping up her juices, before plunging your tongue inside of her."
     "[the_girl_1.title]'s ass is making lewd smacking noises as she rides you roughly."
@@ -127,7 +127,7 @@ label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_lo
             "You give it to her hard for a while, but eventually run out of steam and have to slow down."
     return
 
-label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object):
     "You put both hands on [the_girl_2.title]'s ass cheeks, pulling them apart to give you better access."
     "[the_girl_1.possessive_title] stops bouncing for a moment, and instead grinds her hips against you for a bit, changing the angle of penetration."
     "You can hear lips smacking coming from above you as the girls begin to makeout while they ride you."
@@ -158,7 +158,7 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
             $ the_girl_2.change_arousal(5 + 5 * the_girl_2.get_opinion_score("being fingered"))
     return
 
-label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You feel yourself go past the point of no return, but there is nothing you can do. With [the_girl_2.title]'s pussy in your face, you can't really even get out a warning."
     "You give [the_girl_2.possessive_title]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]"
     $ the_girl_1.cum_in_vagina()
@@ -177,17 +177,17 @@ label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
 
     return
 
-label strip_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     pass
     "This scene in progress"
     return
 
-label strip_ask_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_ask_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     pass
     "This scene in progress"
     return
 
-label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel the moaning and gasps from the girls on top of you coming to a crescendo."
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
@@ -212,7 +212,7 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
 
     return
 
-label swap_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label swap_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title] slowly sinks down onto your cock, enjoying the sensations as you penetrate her pussy."
     "[the_girl_2.title] wiggles her hips back and forth, so your grab her ass cheeks with your hands and spread them apart."
     "You dive into her pussy with vigor, determined to get her off with your tongue."

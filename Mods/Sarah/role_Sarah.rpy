@@ -2337,7 +2337,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         mc.name "Mmm, definitely."
         "You waste no time and dive right into [the_person.possessive_title]'s delicious cunt."
         # TODO change this scene if the girls both like anal? Need to figure out how to handle starting in a specific threesome action
-        call start_threesome(threesome_partner, the_person, start_position = Threesome_double_down, round = 1, private = True, position_locked = False, affair_ask_after = False, hide_leave = False) from sarah_overnight_threesome_wakeup
+        call start_threesome(threesome_partner, the_person, start_position = Threesome_double_down, skip_intro = True, private = True, position_locked = False, affair_ask_after = False, hide_leave = False) from sarah_overnight_threesome_wakeup
         $ the_report = _return
         $ scene_manager.update_actor(the_person, position = "missionary", display_transform = character_center_flipped)
         $ scene_manager.update_actor(threesome_partner, position = "missionary", display_transform = character_right)

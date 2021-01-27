@@ -430,7 +430,7 @@ label mom_breakfast_action_mom_and_lily_label():
                 lily.char "Hi [lily.mc_title], why don't you join us."
                 mc.name "Wait a second [the_person.title], let me take care of that for you."
                 "You quickly undress and..."
-                call start_threesome(the_person, lily, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, round = 1) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_1
+                call start_threesome(the_person, lily, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, skip_intro = True) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_1
                 "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
                 $ mc.location.show_background()
@@ -454,7 +454,7 @@ label mom_breakfast_action_mom_and_lily_label():
                 the_person.char "Hello [the_person.mc_title], why don't you join us."
                 mc.name "Wait a second [lily.title], let me take care of that for you."
                 "You quickly undress and..."
-                call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, start_object = make_floor(), position_locked = True, round = 1) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_2
+                call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, start_object = make_floor(), position_locked = True, skip_intro = True) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_2
                 "Once you're finished you pickup your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
                 $ mc.location.show_background()
