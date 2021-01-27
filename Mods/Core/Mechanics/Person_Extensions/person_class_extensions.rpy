@@ -116,6 +116,13 @@ init -1 python:
 
     Person.location = location
 
+    def person_get_idle_animation(self):
+        return None
+
+    def person_set_idle_animation(self, value):
+        return
+
+    Person.idle_animation = property(person_get_idle_animation, person_set_idle_animation, None, "Removes idle animation property.")
 
     def person_change_location(self, destination):
         self.location.move_person(self, destination)
