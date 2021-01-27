@@ -215,6 +215,16 @@ label threesome_test():
     $ scene_manager.clear_scene()
     return "Test Complete"
 
+label threesome_join_test():
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(mom, position = "standing_doggy")
+    $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
+    lily "Let me take off some clothes."
+    $ scene_manager.strip_actor_outfit(lily)
+    call join_threesome(mom, lily, "standing_doggy", private = True) from _call_threesome_join_test
+    $ scene_manager.clear_scene()
+    return "Test Complete"
+
 label threesome_alignment():
     $ position_choice = threesome_double_blowjob
     $ position_choice.update_scene(mom, lily)
@@ -278,7 +288,7 @@ init 5 python:
                         option_list.append([options.description,options.name])
 
             if not position_locked:
-                option_list.append(["Pause and change position.\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
+                option_list.append(["Pause and change position\n-5 {image=gui/extra_images/arousal_token.png}","Change"])
                 #### For now, no implementation of connections
                 # for position in position_choice.connections:
                 #     if object_choice.has_trait(position.requires_location):
@@ -351,12 +361,15 @@ init 5 python:
         update_threesome_action_description(position_choice, girl_swap_pos)
         return (position_choice, girl_swap_pos)
 
+    def valid_threesome_position(position):
+        return any([x for x in list_of_threesomes if position in [x.position_one_tag, x.position_two_tag]])
+
     def get_mc_round_choice(position_choice, person_one, person_two):
         option_list = []
         for options in position_choice.mc_position:
             if options.requirement(person_one, person_two):
                 option_list.append([options.description,options.name])
-        option_list.append(["Change your mind and leave.", "Leave"])
+        option_list.append(["Change your mind and leave", "Leave"])
         return renpy.display_menu(option_list,True,"Choice")
 
     def get_mc_active_position(position_choice, round_choice):
@@ -671,7 +684,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, round = 0
     return
 
 label pick_threesome(the_person_one, the_person_two, girl_one_position = None, object_choice = None):  #We can pass in a position for girl one if the second girl "walks in" on the sex event
-    if girl_one_position == None:
+    if not (girl_one_position and valid_threesome_position(girl_one_position)):
         call screen enhanced_main_choice_display(build_menu_items([build_threesome_person_one_position_choice_menu(the_person_one, the_person_two)]))
         $ girl_one_choice = _return
     else:
