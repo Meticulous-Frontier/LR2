@@ -38,7 +38,7 @@ init -1 python:
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
-        if "ashley" in globals() and ashley.event_triggers_dict.get("intro_complete", False) == False:
+        if "ashley" in globals() and day <= ashley.event_triggers_dict.get("employed_since", 0):
             not_met_yet_list.append(ashley)
         if "candace" in globals() and candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
             not_met_yet_list.append(candace)
@@ -58,7 +58,7 @@ init -1 python:
             not_met_yet_list.append(salon_manager)
         if aunt.get_destination(specified_time = 2) == aunt_bedroom: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(aunt)
-        if "sarah" in globals() and sarah.get_destination(specified_time = 1) == sarah.home: # She'll be scheduled otherwise when met.
+        if "sarah" in globals() and sarah.event_triggers_dict.get("first_meeting", False) == False: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(sarah)
         if "starbuck" in globals() and starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
             not_met_yet_list.append(starbuck)
