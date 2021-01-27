@@ -91,7 +91,7 @@ init 2 python:
     Threesome_sixty_nine.mc_position = [Threesome_sixty_nine_fuck_girl_one,Threesome_sixty_nine_oral_girl_two, Threesome_sixty_nine_watch_girls]
     list_of_threesomes.append(Threesome_sixty_nine)
 
-label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title] smiles and agrees."
     if the_girl_1.has_role(vaginal_fetish_role):
         the_girl_1.char "Mmm I can't wait to feel you sliding into me..."
@@ -119,7 +119,7 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
     "You push yourself into [the_girl_1.title]'s steamy cunt and start to fuck her while [the_girl_2.title] rides on her face."
     return
 
-label intro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     mc.name "I want you to warm me up before I fuck [the_girl_1.title]."
     if the_girl_2.has_role(oral_fetish_role):
         the_girl_2.char "Oh my god, a mouth on my pussy and my lips on your cock... this is going to be incredible!"
@@ -129,7 +129,7 @@ label intro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
     "She moans as she begins to grind her pussy against the other girls face."
     return
 
-label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object):
     "You run your hands along [the_girl_1.title]'s hips as you fuck her. You can see her hands groping [the_girl_2.title]'s ass cheeks as she pleasures her with her tongue."
     if the_girl_2.has_large_tits() :
         if the_girl_2.outfit.tits_available():
@@ -176,7 +176,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
 
     return
 
-label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
     "You rest one hand on [the_girl_2.title]'s head, guiding her as she sucks you off. With you other hand you continue to finger fuck [the_girl_1.title]."
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
         "You can see that [the_girl_2.title] is really moving her hips back and forth roughly on [the_girl_1.title]'s face. She gets off on having a dick in her mouth!"
@@ -199,7 +199,7 @@ label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_loc
     return
 
 
-label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object):
 
     "[the_girl_1.title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
     "You lean forward and grab the back of [the_girl_2.title]'s head, bring her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
@@ -215,7 +215,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_loc
 
     return
 
-label scene_threesome_sixty_nine_oral_girl_two_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_sixty_nine_oral_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_2.title]'s mouth pops off you for a second. She starts to run her tongue up and down the length of your shaft."
     "The view is incredible. [the_girl_2.possessive_title] is servicing you while she rides [the_girl_1.title]'s face."
     "You can't believe how lucky you are."
@@ -224,7 +224,7 @@ label scene_threesome_sixty_nine_oral_girl_two_2(the_girl_1, the_girl_2, the_loc
     "[the_girl_2.title] opens her mouth wide and takes your cock back into her mouth again, wrapping her velvet tongue and lips around your erection."
     return
 
-label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "Between [the_girl_1.title]'s steamy pussy and [the_girl_2.title]'s heaving tits in front of you, you find yourself going past the point of no return."
     mc.name "Oh fuck I'm gonna cum!"
     menu:
@@ -268,7 +268,7 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
 
     return
 
-label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_2.possessive_title]'s talented mouth suddenly pushes you past the point of no return. Her tongue slithers and swirly relentlessly around your cock."
     mc.name "Oh fuck I'm gonna cum!"
     menu:
@@ -306,20 +306,20 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
     return
 
 
-label strip_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
     "This is the Strip Scene!"
     return
 
-label strip_ask_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_ask_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
     "This is the ask to strip Scene!"
     return
 
-label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel [the_girl_1.title] trembling beneath you. [the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
-        $ the_girl_2.call_dialogue("climax_responses_vaginal")
+        $ the_girl_2.call_dialogue("climax_responses_oral")
         "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
         "They both orgasm. [the_girl_1.title]'s cunt pulses around your cock as she cums, while [the_girl_2.title] moans and closes her eyes."
         "As they start to wind down, you continue fucking [the_girl_1.title]'s now considerably slicker pussy."
@@ -339,7 +339,7 @@ label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_loca
     return
 
 
-label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel [the_girl_1.title] trembling as you finger her. [the_girl_2.title] moans around your cock as [the_girl_1.title] licks her in just the right spot."
         $ the_girl_2.call_dialogue("climax_responses_oral")
@@ -358,7 +358,7 @@ label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_loca
         "She grinds her pussy against the other girl's face as she orgasms."
     return
 
-label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
 
     "Stepping back for a moment, you decide you want to fuck [the_girl_1.possessive_title]."
     mc.name "Mmm, here it comes [the_girl_1.title]..."
@@ -367,14 +367,14 @@ label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locati
 
     return
 
-label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "Stepping back for a moment, you begin to run your hands through [the_girl_2.title]'s hair, then slowly pull her mouth down towards your cock."
     mc.name "Lick me clean, [the_girl_2.title]."
     "[the_girl_2.title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
     "You reach down with one hand and hold [the_girl_2.title]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.title]'s pussy."
     return
 
-label intro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You watch as [the_girl_1.title] and [the_girl_2.title] get into position."
     if mc.recently_orgasmed:
         "You put your hand on your soften cock and start to stroke it."
@@ -383,13 +383,13 @@ label intro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locatio
     "The sound of muffled moans and slick licking motions fill the air."
     return
 
-label scene_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round): #TODO this function
+label scene_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title] and [the_girl_2.title] seem to be really enjoying themselves."
     "When one girl moans, the vibrations stimulate the other and she often lets out a moan herself."
     "You slowly stroke yourself as you watch. The smell in the air carries a distinctly feminine musk."
     return
 
-label outro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You watch, completely enthralled by the girls as they pleasure each other."
     "Suddenly, you realize you stroked yourself to far and you are already past the point of no return."
     mc.name "Oh fuck I'm gonna cum!"
@@ -411,17 +411,17 @@ label outro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locatio
     "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
     return
 
-label strip_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
     "This is the Strip Scene!"
     return
 
-label strip_ask_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_ask_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
     "This is the Strip Scene!"
     return
 
-label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "Both girls are moaning wildly into each other's crotches"
             "You can see [the_girl_1.possessive_title] legs shaking as an orgasm hits her."
@@ -438,7 +438,7 @@ label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locati
             "She grinds her pussy against the other girl's face as she orgasms."
         return
 
-label swap_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label swap_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You step back for a second and just watch [the_girl_1.title] and [the_girl_2.title] as they eat each other out."
     if mc.recently_orgasmed:
         "You put your hand on your soften cock and start to stroke it."

@@ -14,10 +14,10 @@ init 3 python:
     def select_position(person):
         positions = ["bj"]
         if person.outfit.vagina_available():
-            positions.append ("missionary")
-            positions.append ("wall")
+            positions.append("missionary")
+            positions.append("wall")
             if person.get_opinion_score("anal sex") > 0 or person.sluttiness > 70:
-                positions.append ("anal")
+                positions.append("anal")
         return get_random_from_list(positions)
 
     def sister_ntr_select_finish(person):
@@ -83,9 +83,9 @@ label sister_ntr_crisis_action_label:
             "You get back to your room and don't even hear from door closing. You fall asleep just as you head touches the pillow."
         else:
             $ the_person.strip_outfit_to_max_sluttiness()
-            $ position = select_position(the_person)
+            $ target_position = select_position(the_person)
             $ the_person.change_arousal (75)
-            if position == "missionary":
+            if target_position == "missionary":
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "You take a look inside the room and you see [the_person.possessive_title] lying on the table with wide spread legs. And some young man is between them with his pants down."
                 the_person.char "Oh, [man_name]! You are so good! Keep going!"
@@ -185,7 +185,7 @@ label sister_ntr_crisis_action_label:
                         "Screams go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-            elif position == "wall":
+            elif target_position == "wall":
                 $ the_person.draw_person(position = "against_wall", emotion = "happy")
                 "You take a look inside the room and you see [the_person.possessive_title] pushed against the wall. And some young man is doing her with his pants down."
                 the_person.char "Oh, [man_name]! You are so good! Keep going!"
@@ -285,7 +285,7 @@ label sister_ntr_crisis_action_label:
                         "Screams go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-            elif position == "anal":
+            elif target_position == "anal":
                 $ the_person.draw_person(position = "standing_doggy")
                 "You take a look inside the room and you see [the_person.possessive_title] bend over the chair. And some young man thrusts his dick into [the_person.possessive_title] little ass."
                 the_person.char "Oh, [man_name]! You are so good! I like it in my ass."
@@ -384,7 +384,7 @@ label sister_ntr_crisis_action_label:
                         "Screams go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-            elif position == "bj":
+            elif target_position == "bj":
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You take a look inside the room and you see [the_person.possessive_title] on her knees. And some young man thrusts his dick into [the_person.possessive_title] mouth."
                 man_name "You mouth feels great, [the_person.name]. Keep going."
@@ -460,13 +460,13 @@ label sister_ntr_crisis_action_label:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
     if ran_num == 2: ## a scene with two men
         $ the_person.strip_outfit_to_max_sluttiness()
-        $ position = select_position(the_person)
+        $ target_position = select_position(the_person)
         $ man_name2 = get_random_male_name()
         while man_name == man_name2: ## Just to make sure that names don't match or it will look stupid
             $ man_name2 = get_random_male_name()
         $ the_person.change_arousal (75)
 
-        if position == "missionary":
+        if target_position == "missionary":
             $ the_person.draw_person(position = "missionary", emotion = "happy")
             "You take a look inside the room and you see [the_person.possessive_title] lying on the table with wide spread legs. And some young man is between them with his pants down."
             "There is another man, sitting on the bed. Stroking his cock. It seems that he is waiting for his turn."
@@ -594,7 +594,7 @@ label sister_ntr_crisis_action_label:
                     "Screams go on long into the night..."
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-        elif position == "wall":
+        elif target_position == "wall":
             $ the_person.draw_person(position = "standing_doggy")
             "You take a look inside the room and you see [the_person.possessive_title] bent over the bed. And some young man is doing her with his pants down."
             "There is another man, sitting on the bed in front of [the_person.possessive_title]. She is playing with his dick."
@@ -723,7 +723,7 @@ label sister_ntr_crisis_action_label:
                     "Screams go on long into the night..."
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-        elif position == "anal":
+        elif target_position == "anal":
             $ the_person.draw_person(position = "doggy")
             "You take a look inside the room and you see [the_person.possessive_title] squeezed between two men. One is fucking her pussy while the other is working on her ass."
             the_person.char "Oh, [man_name]! You are so good! I like it in my ass."
@@ -845,7 +845,7 @@ label sister_ntr_crisis_action_label:
                     "You don't catch a lot of sleep tonight..."
                 else:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-        elif position == "bj":
+        elif target_position == "bj":
             $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
             "You take a look inside the room and you see [the_person.possessive_title] on her knees. She sits in front of two men and sucks their dicks."
             man_name "You mouth feels great, [the_person.name]. Keep going. A blowjob from a coed is a college classic, isn't it, [man_name2]?"
@@ -940,7 +940,7 @@ label sister_ntr_crisis_action_label:
                     "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
         $ del man_name2
     $ finish = None
-    $ position = None
+    $ target_position = None
     $ del man_name
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()

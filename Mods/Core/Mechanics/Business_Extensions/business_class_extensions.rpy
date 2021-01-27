@@ -141,3 +141,8 @@ init -1 python:
             self.mandatory_morning_crises_list.append(crisis_event)
 
     Business.add_mandatory_morning_crisis = business_add_mandatory_morning_crisis
+
+    def business_get_employee_list(self):
+        return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available()]
+
+    Business.get_employee_list = business_get_employee_list

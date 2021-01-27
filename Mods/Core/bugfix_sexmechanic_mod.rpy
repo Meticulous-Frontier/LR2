@@ -926,7 +926,7 @@ label put_on_condom_routine(the_person):
     return
 
 
-label watcher_check_enhanced(the_person, the_position, the_object, the_report): # Check to see if anyone is around to comment on the characters having sex.
+label watcher_check_enhanced(the_person, the_position, the_object, report_log): # Check to see if anyone is around to comment on the characters having sex.
     $ watcher = cheating_check_get_watcher(the_person)
     if watcher:
         # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
@@ -946,7 +946,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, the_report): 
                         $ scene_manager.add_actor(watcher, display_transform = character_center_flipped)
                         watcher "Let me take off some clothes."
                         $ scene_manager.strip_actor_outfit(watcher)
-                        call join_threesome(the_person, watcher, the_position.position_tag) from _call_join_threesome_watcher_check_enhanced
+                        call join_threesome(the_person, watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
                         $ report_log = _return
                         python:
                             scene_manager.clear_scene()

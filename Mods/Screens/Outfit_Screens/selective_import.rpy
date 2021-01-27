@@ -18,7 +18,7 @@ init 2 python:
 
     def import_remove_outfit_from_wardrobes(list_of_wardrobes, the_outfit):
         for wardrobe in list_of_wardrobes:
-            if wardrobe.has_outfit_with_name(the_outfit.name):
+            if import_wardrobes_has_outfit_with_name(list_of_wardrobes, the_outfit.name):
                 wardrobe.remove_outfit(the_outfit)
 
     def import_wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
@@ -61,7 +61,7 @@ init 2 python:
         import_wardrobes = {}
         if slut_limit is None: # If slut_limit is None then add any and all options
 
-            import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+            import_wardrobes["Player Wardrobe"] = [[mc.designed_wardrobe]]
             import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
 
         import_wardrobes["Marketing Division"] = [[mc.business.m_uniform]]
@@ -74,7 +74,7 @@ init 2 python:
 
     def get_strip_club_import_wardrobes():
         import_wardrobes = {}
-        import_wardrobes["Your Wardrobe"] = [[mc.designed_wardrobe]]
+        import_wardrobes["Player Wardrobe"] = [[mc.designed_wardrobe]]
         import_wardrobes["Strippers"] = [[stripclub_wardrobe]]
         import_wardrobes["Waitresses"] = [[waitress_wardrobe]]
         import_wardrobes["Manager"] = [[manager_wardrobe]]
@@ -83,7 +83,7 @@ init 2 python:
         return import_wardrobes
 
 init 2:
-    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, underwear_limit = None, use_strip_club_wardrobe = False): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
+    screen import_outfit_manager(target_wardrobe, xml_filename = None, show_export = True, slut_limit = None, underwear_limit = None, use_strip_club_wardrobe = False, outfit_type = None): ##Brings up a list of the players current saved outfits, returns the selected outfit or None.
 
         default outfit_categories = {"Full": ["FullSets", "full", "get_outfit_list"], "Overwear": ["OverwearSets", "over", "get_overwear_sets_list"], "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list"]} #NOTE: Key is display name, [0] is XML's category type, [1] is outfit type, [2] is function to retrive [0]
         default import_mode = {"Import": [], "Assign": []}
@@ -127,102 +127,106 @@ init 2:
                     frame:
                         text category style "serum_text_style" xalign 0.5
                         xfill True
-                    viewport:
-                        ysize 880
-                        if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 7:
-                            scrollbars "vertical"
-                        mousewheel True
-                        vbox:
-                            if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
-                                frame:
-                                    vbox:
-                                        for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
-                                            $ effective_slut_score = calculate_outfit_slut_score(wardrobe, outfit)
-                                            frame:
-                                                vbox:
-                                                    id str(outfit)
-                                                    xfill True
-                                                    textbutton outfit.name + "\n" + get_heart_image_list_cloth(effective_slut_score, 1):
+                    if not outfit_type or outfit_categories[category][1] == outfit_type:
+                        viewport:
+                            ysize 880
+                            if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 7:
+                                scrollbars "vertical"
+                            mousewheel True
+                            vbox:
+                                if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
+                                    frame:
+                                        vbox:
+                                            for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
+                                                $ effective_slut_score = calculate_outfit_slut_score(wardrobe, outfit)
+                                                frame:
+                                                    vbox:
+                                                        id str(outfit)
                                                         xfill True
-                                                        style "textbutton_no_padding_highlight"
-                                                        text_style "serum_text_style"
+                                                        textbutton outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(effective_slut_score, 1):
+                                                            xfill True
+                                                            style "textbutton_no_padding_highlight"
+                                                            text_style "serum_text_style"
 
-                                                        if underwear_limit == 0 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets) :
-                                                            background "#222222"
-                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
-                                                            background "#222222"
-                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
-                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and effective_slut_score > underwear_limit:
-                                                            background "#222222"
-                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
-                                                        else:
-                                                            action [
-                                                                Show("outfit_creator", None, outfit.get_copy(), target_wardrobe, outfit_type = outfit_categories[category][1]), # Bring the outfit into the outfit_creator for editing when left clicked
-                                                                Hide(renpy.current_screen().screen_name)
-                                                                ]
+                                                            if underwear_limit == 0 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets) :
+                                                                background "#222222"
+                                                            elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                            elif underwear_limit and outfit in wardrobe.underwear_sets and effective_slut_score > underwear_limit:
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                            else:
+                                                                action [
+                                                                    Show("outfit_creator", None, outfit.get_copy(), outfit_categories[category][1], slut_limit, target_wardrobe), # Bring the outfit into the outfit_creator for editing when left clicked
+                                                                    Hide(renpy.current_screen().screen_name)
+                                                                    ]
 
-                                                        hovered Show("mannequin", None, outfit)
+                                                            hovered Show("mannequin", None, outfit)
 
-                                                    if show_export: # If export mode is on show the export button that saves the outfits into Exported_Wardrobe.xml NOTE: Consider specifying specific XML file later (to quickly make wardrobe sets for sharing)
-                                                        default exported = []
+                                                        if show_export: # If export mode is on show the export button that saves the outfits into Exported_Wardrobe.xml NOTE: Consider specifying specific XML file later (to quickly make wardrobe sets for sharing)
+                                                            default exported = []
 
-                                                        textbutton "Export to .xml File":
+                                                            textbutton "Export to .xml File":
+                                                                style "textbutton_no_padding_highlight"
+                                                                text_style "serum_text_style"
+                                                                xfill True
+
+                                                                action [
+                                                                    Function(exported.append, outfit), Function(log_outfit, outfit, outfit_class = outfit_categories[category][0], wardrobe_name = "Exported_Wardrobe"),
+                                                                    Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")
+                                                                    ]
+
+                                                                sensitive outfit not in exported
+
+
+                                                        textbutton ("Direct Import Selection:" if slut_limit is None else "Assigned to: " + get_wardrobe_name_for_outfit_with_name(import_wardrobes, outfit.name)): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
+
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True
 
-                                                            action [
-                                                                Function(exported.append, outfit), Function(log_outfit, outfit, outfit_class = outfit_categories[category][0], wardrobe_name = "Exported_Wardrobe"),
-                                                                Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")
-                                                                ]
+                                                            if underwear_limit == 0 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
+                                                            elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                            elif underwear_limit and outfit in wardrobe.underwear_sets and effective_slut_score > underwear_limit:
+                                                                background "#222222"
+                                                                action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
+                                                            else:
+                                                                action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
 
-                                                            sensitive outfit not in exported
+                                                        if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
+                                                            frame:
+                                                                vbox:
+                                                                    for wardrobes in sorted(import_wardrobes):
+                                                                        textbutton str(wardrobes):
+                                                                            style "textbutton_no_padding_highlight"
+                                                                            text_style "serum_text_style"
+                                                                            xfill True
 
-
-                                                    textbutton ("Direct Import Selection:" if slut_limit is None else "Assign to Division: " + get_wardrobe_name_for_outfit_with_name(import_wardrobes, outfit.name)): # Put the outfit directly into wardrobe(s), see the import_wardrobes dictionary to add more alternatives.
-
-                                                        style "textbutton_no_padding_highlight"
-                                                        text_style "serum_text_style"
-                                                        xfill True
-
-                                                        if underwear_limit == 0 and (outfit in wardrobe.outfits or outfit in wardrobe.underwear_sets):
-                                                            background "#222222"
-                                                            action Function(renpy.notify, "Full and underwear uniforms require [reduced_coverage_uniform_policy.name]")
-                                                        elif slut_limit and (outfit in wardrobe.outfits or outfit in wardrobe.overwear_sets) and effective_slut_score > slut_limit:
-                                                            background "#222222"
-                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(slut_limit) + "].\nPurchase new uniform policies to increase limit.")
-                                                        elif underwear_limit and outfit in wardrobe.underwear_sets and effective_slut_score > underwear_limit:
-                                                            background "#222222"
-                                                            action Function(renpy.notify, "Can not assign due to policy enforced sluttiness limit [" + str(underwear_limit) + "].\nPurchase new uniform policies to increase limit.")
-                                                        else:
-                                                            action ToggleScreenVariable("targeted_outfit", renpy.get_widget(renpy.current_screen(), str(outfit)), None)
-
-                                                    if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
-                                                        frame:
-                                                            vbox:
-                                                                for wardrobes in sorted(import_wardrobes):
-                                                                    textbutton str(wardrobes):
-                                                                        style "textbutton_no_padding_highlight"
-                                                                        text_style "serum_text_style"
-                                                                        xfill True
-
-                                                                        if not import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
-                                                                            action [
-                                                                                If(slut_limit != None, Function(mc.business.listener_system.fire_event, "add_uniform", the_outfit = outfit, the_type = outfit_categories[category][1])), # Make sure it registers progress towards work_goals. #NOTE: Needs testing as I have been unable to setup proper test
-                                                                                Function(import_add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
-                                                                                Function(renpy.notify, ("Outfit imported to " + wardrobes if slut_limit is None else "Outfit assigned to " + wardrobes)),
-
-                                                                                ]
-                                                                        else:
-
-                                                                            if slut_limit is not None:
-                                                                                if import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
-                                                                                    background "#3ffc45"
-                                                                                #If the outfit is imported / assigned already then attempt to remove it.
+                                                                            if not import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
                                                                                 action [
-                                                                                    Function(import_remove_outfit_from_wardrobes, import_wardrobes[wardrobes][0], outfit),
-                                                                                    Function(renpy.notify, "Outfit removed from " + wardrobes)
+                                                                                    If(slut_limit != None, Function(mc.business.listener_system.fire_event, "add_uniform", the_outfit = outfit, the_type = outfit_categories[category][1])), # Make sure it registers progress towards work_goals. #NOTE: Needs testing as I have been unable to setup proper test
+                                                                                    Function(import_add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                                    Function(renpy.notify, ("Outfit imported to " + wardrobes if slut_limit is None else "Outfit assigned to " + wardrobes)),
+
                                                                                     ]
+                                                                            else:
+
+                                                                                if slut_limit is not None:
+                                                                                    if wardrobes == "Player Wardrobe":  # don't allow remove from player wardrobe
+                                                                                        background "#aa4433"
+                                                                                        sensitive False
+                                                                                    elif import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
+                                                                                        background "#3ffc45"
+                                                                                    #If the outfit is imported / assigned already then attempt to remove it.
+                                                                                    action [
+                                                                                        Function(import_remove_outfit_from_wardrobes, import_wardrobes[wardrobes][0], outfit),
+                                                                                        Function(renpy.notify, "Outfit removed from " + wardrobes)
+                                                                                        ]
 
         frame:
             background None

@@ -11,9 +11,9 @@ init 2 python:
 
     def get_town_walk_person():
         if mc.business.is_weekend():
-            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin]) if x.is_available()]
+            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin])]
         else:
-            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin] + mc.business.get_employee_list()) if x.is_available()]
+            candidates = [x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, aunt, cousin])]
         return get_random_from_list(candidates)
 
     town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",
@@ -31,9 +31,9 @@ label town_walk_crisis_action_label:
 
     "While walking around town, you see that the window in [the_person.possessive_title]'s house is open..."
     menu:
-        "Get closer and peek inside?":
+        "Get closer":
             pass
-        "Ignore it.":
+        "Ignore it":
             return
 
     $ the_person.change_to_bedroom()

@@ -20,7 +20,7 @@ init 2 python:
         return False
 
     def select_girl_masturbating():
-        return get_random_from_list([x for x in mc.business.get_employee_list() if x.is_available() and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
@@ -59,7 +59,7 @@ label SB_caught_masturbating_crisis_label():
                 the_person.char "Hi [the_person_two.mc_title], why don't you join us."
                 mc.name "Wait a second [the_person.title], let me take care of that for you."
                 "You quickly undress and..."
-                call start_threesome(the_person, the_person_two, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, round = 1) from _call_start_threesome_SB_caught_masturbating_crisis_label
+                call start_threesome(the_person, the_person_two, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, skip_intro = True) from _call_start_threesome_SB_caught_masturbating_crisis_label
 
                 if the_person.energy > 20 and the_person_two.energy > 20:
                     "Once you're finished you quickly get dressed and say goodbye to the girls, who seem determined to continue for a while."

@@ -123,7 +123,6 @@ label SB_fetish_vaginal_family_threesome_label():
         "[mom.title] hesitates for a second, but then relents."
         mom.char "That sounds like fun... Okay! I'll do it!"
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(mom, temp_sluttiness_boost = 50)
-        #call SB_threesome_description(mom, the_person, SB_threesome_sixty_nine, make_bed(), 0, private = True, girl_in_charge = False) from _call_SB_threesome_description_SB_fetish_vaginal_family_threesome
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
         "Wow, you just had sex with [the_person.possessive_title] and [mom.possessive_title]! You can't believe how lucky you are."

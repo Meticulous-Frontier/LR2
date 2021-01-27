@@ -86,7 +86,7 @@ init:
         list_of_threesomes.append(Threesome_standing_embrace)
 
 
-label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "You stand back for a moment as the girls grab each other and start to make out. Their hands begin to roam all over each other's bodies."
     "You give yourself a couple strokes as you watch."
     the_girl_1.char "Mmm, come on [the_girl_1.mc_title]."
@@ -95,7 +95,7 @@ label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     "With one smooth stroke you push yourself inside of her, she moans as you begin to fuck her."
     return
 
-label scene_threesome_standing_embrace_fuck_girl_two_1(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_standing_embrace_fuck_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
     "Your hips are slapping up against [the_girl_2.title]'s rear as you fuck her."
     "Around her you can see [the_girl_1.possessive_title] kissing her neck as she closes her eyes and enjoys the sensations."
     the_girl_2.char "Mmm, your bodies feel so good."
@@ -104,7 +104,7 @@ label scene_threesome_standing_embrace_fuck_girl_two_1(the_girl_1, the_girl_2, t
     "[the_girl_2.possessive_title] is arching her back hard as the sensations overwhelm her. She reaches back with one hand and runs it through your hair, and does the same with [the_girl_1.title] with her other hand."
     return
 
-label scene_threesome_standing_embrace_fuck_girl_two_2(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label scene_threesome_standing_embrace_fuck_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
     "You grab [the_girl_2.possessive_title]'s leg and lift it up a bit, allowing for deeper penetration."
     "The change of angle feels great and you enjoy the steamy wet grip of her cunt."
     "[the_girl_1.possessive_title] and [the_girl_2.title] both have their hands between each others legs. You can feel [the_girl_1.title]'s hand moving circles around the hole you are fucking."
@@ -113,7 +113,7 @@ label scene_threesome_standing_embrace_fuck_girl_two_2(the_girl_1, the_girl_2, t
     "[the_girl_2.title] just moans at all the intense sensations she is feeling."
     return
 
-label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_2.possessive_title]'s sweet cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl_2.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
@@ -152,17 +152,17 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
             the_girl_1.char "Damn that was hot... is it my turn next?"
     return
 
-label strip_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
     "This is the Strip Scene!"
     return
 
-label strip_ask_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label strip_ask_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
     "This is the ask Strip Scene!"
     return
 
-label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
+label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "Both girls are moaning aggressively into each other's mouths as they make out. [the_girl_2.title] has her fingers vigorously working [the_girl_1.possessive_title]'s slit."
         $ the_girl_2.call_dialogue("climax_responses_vaginal")

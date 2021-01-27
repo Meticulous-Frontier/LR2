@@ -6,6 +6,6 @@ label set_uniform_description_enhanced():
 
     # TODO: Enable vanilla functionality of having seperate underwear slut limit and prevent underwear assignment without reduced_coverage_uniform_policy.is_owned()
     # I personally don't think it is nescessary due to the being limited to 25 sluttiness
-    call screen import_outfit_manager(mc.designed_wardrobe, slut_limit = slut_limit, underwear_limit = underwear_limit, show_export = False)
+    call screen import_outfit_manager(mc.designed_wardrobe, None, False, slut_limit, underwear_limit)
 
     return

@@ -16,5 +16,5 @@ label activate_strip_club_set_uniforms_label(stack):
     return
 
 label strip_club_set_uniforms_label():
-    call screen import_outfit_manager(mc.designed_wardrobe, slut_limit = 999, underwear_limit = 999, show_export = False, use_strip_club_wardrobe = True)
+    call screen import_outfit_manager(mc.designed_wardrobe, None, False, 999, 999, True)
     return

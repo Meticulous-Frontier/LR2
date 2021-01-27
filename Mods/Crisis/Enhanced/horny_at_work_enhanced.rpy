@@ -408,7 +408,8 @@ label horny_at_work_crisis_enhanced_label():
                 if mc.location.get_person_count() > 1:
                     $ willingness_value += the_person.get_opinion_score("public sex") * 10
 
-                $ scene_manager.add_group(mc.location.people, position = "sitting")
+                $ scene_manager.add_group([x for x in mc.location.people if x != the_person], position = "sitting")
+                $ scene_manager.add_actor(the_person, display_transform = character_right, position = "stand3")
                 menu:
                     "Make her strip while you jerk off": #The basic version if you've picked this path always enabled due to earlier checks, so we don't bother with a failure state
                         mc.name "Well, I'd like you to give me some entertainment while I take care of this. Strip down and give me a little dance."
@@ -420,7 +421,7 @@ label horny_at_work_crisis_enhanced_label():
                             "[the_person.title] looks around the empty room, then back to you and shrugs."
 
                         the_person.char "Fine."
-                        $ scene_manager.update_actor(the_person, display_transform = character_right, position = "stand3")
+                        $ scene_manager.update_actor(the_person, position = "stand2")
 
                         if mc.location.get_person_count() > 1:
                             "You slide your chair back and turn it to face her. You unzip your pants, grabbing your already-hard cock to stroke it."
@@ -508,7 +509,7 @@ label horny_at_work_crisis_enhanced_label():
 
                                 mc.name "Come on, I don't have all day. I need to get back to work."
                                 "She hesitates, but after a second of thought she sighs and gets onto her hands and knees, crawling under your desk and nestling herself between your legs."
-                            $ scene_manager.update_actor(the_person, display_transform = character_right, position = "blowjob")
+                            $ scene_manager.update_actor(the_person, position = "blowjob")
                             "You unzip your pants and pull them down, letting your hard cock fall out onto [the_person.possessive_title]'s face."
                             "She places her hands on your thighs and slides your cock into her mouth, licking the tip to get it wet before slipping it further back."
                             $ clear_scene()
@@ -543,7 +544,7 @@ label horny_at_work_crisis_enhanced_label():
                                 $ desk = make_floor() # fallback to floor
                                 "You grab [the_person.possessive_title] by her hips and lay her down in front of you, spreading her legs around you."
 
-                            $ scene_manager.update_actor(the_person, display_transform = character_right, position = "missionary")
+                            $ scene_manager.update_actor(the_person, position = "missionary")
                             if mc.location.get_person_count() > 1 and the_person.effective_sluttiness() < (80 - 10*the_person.get_opinion_score("public sex")):
                                 the_person.char "Ah! Wait, what will the other girls think?"
                                 mc.name "I'm sure they'll let us know."

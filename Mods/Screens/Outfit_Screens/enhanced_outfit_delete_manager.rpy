@@ -34,7 +34,7 @@ init 3:
                         mousewheel True
                         vbox:
                             for outfit in sorted(target_wardrobe.get_outfit_list(), key = lambda outfit: outfit.slut_requirement):
-                                textbutton "Delete " + outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
                                     style "textbutton_no_padding_highlight"
                                     text_style "serum_text_style"
 
@@ -46,7 +46,7 @@ init 3:
 
                                     if the_person is not None:
                                         hovered Function(draw_mannequin, the_person, outfit)
-                                        alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                        alternate Show("outfit_creator", None, outfit.get_copy(), "full", slut_limit, the_person.wardrobe)
                                     else:
                                         hovered Show("mannequin", None, outfit)
 
@@ -69,7 +69,7 @@ init 3:
                             mousewheel True
                             vbox:
                                 for outfit in sorted(target_wardrobe.get_overwear_sets_list(), key = lambda outfit: outfit.slut_requirement):
-                                    textbutton "Delete " + outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
 
@@ -80,7 +80,7 @@ init 3:
                                         action [Function(target_wardrobe.remove_outfit,outfit)]
                                         if the_person is not None:
                                             hovered Function(draw_mannequin, the_person, outfit)
-                                            alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                            alternate Show("outfit_creator", None, outfit.get_copy(), "over", slut_limit, the_person.wardrobe)
                                         else:
                                             hovered Show("mannequin", None, outfit)
 
@@ -103,7 +103,7 @@ init 3:
                             mousewheel True
                             vbox:
                                 for outfit in sorted(target_wardrobe.get_underwear_sets_list(), key = lambda outfit: outfit.slut_requirement):
-                                    textbutton "Delete " + outfit.name + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
+                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1) +"":
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
 
@@ -114,7 +114,7 @@ init 3:
                                         action [Function(target_wardrobe.remove_outfit,outfit)]
                                         if the_person is not None:
                                             hovered Function(draw_mannequin, the_person, outfit)
-                                            alternate Show("outfit_creator", None, outfit.get_copy(), the_person.wardrobe)
+                                            alternate Show("outfit_creator", None, outfit.get_copy(), "under", slut_limit, the_person.wardrobe)
                                         else:
                                             hovered Show("mannequin", None, outfit)
 
