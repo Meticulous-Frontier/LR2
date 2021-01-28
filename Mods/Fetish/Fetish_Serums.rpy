@@ -54,7 +54,6 @@ init -1 python:
     def fetish_serum_unlock_count():
         return mc.business.event_triggers_dict.get("fetish_serum_count", 0)
 
-
     def start_anal_fetish_quest(person):
         if person is lily:
             if is_fetish_after_hours_available():
@@ -159,8 +158,8 @@ init -1 python:
             return True
         else:
             person.add_unique_on_talk_event(breeding_fetish_non_employee_intro)
-
-        return
+            return True
+        return False
 
     def start_cum_fetish_quest(person):
         if person is lily:
