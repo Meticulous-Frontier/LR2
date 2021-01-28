@@ -248,7 +248,7 @@ init -1 python:
             person.change_obedience(1, add_to_log)
 
         if is_anal_fetish_unlocked():
-            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 5 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_anal_fetish_quest(person):
                         person.event_triggers_dict["anal_fetish_start"] = True
@@ -279,7 +279,7 @@ init -1 python:
         if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
             person.change_happiness(1, add_to_log)
 
-        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, get_suggest_tier(person) - 1, person, add_to_log = True)
+        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True)
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
             return
@@ -290,7 +290,7 @@ init -1 python:
             person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
         if is_breeding_fetish_unlocked():
-            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 5 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_breeding_fetish_quest(person):
                         person.event_triggers_dict["breeding_fetish_start"] = True
@@ -325,7 +325,7 @@ init -1 python:
 
         fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True)
         if is_cum_fetish_unlocked():
-            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 5 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_cum_fetish_quest(person):
                         person.event_triggers_dict["cum_fetish_start"] = True
@@ -436,8 +436,8 @@ init -1 python:
 
 
     def add_fetish_serum_traits():
-        FETISH_RESEARCH_ADDED = 100     #Research Difficulty
-        FETISH_PRODUCTION_COST = 200    #Production Difficulty
+        FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
+        FETISH_PRODUCTION_COST = 50    #Production Difficulty
 
         fetish_basic_ther = SerumTraitMod(name = "Sexual Proclivity Nanobots",
                 desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
