@@ -153,7 +153,7 @@ init 10 python:
 
     def update_outfit_name(outfit):
         default_names = ["New Outfit", "New Overwear Set", "New Underwear Set"]
-        if outfit.name in default_names:
+        if outfit.name in default_names or outfit.name == "":
             outfit.build_outfit_name()
         return
 

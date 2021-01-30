@@ -38,6 +38,34 @@ init 5 python:
         "midnight black": [.15, .15, .15, .95]
     }
 
+    def rgb_to_hsl(r, g, b):    # r/g/b values in decimal 0-1
+        mx = max(r, g, b)
+        mn = min(r, g, b)
+        dx = mx - mn
+
+        h = 0
+        s = 0
+        l = (mx + mn) / 2.0
+
+        if dx != 0:
+            if l < .5:
+                s = dx / (mx + mn)
+            else:
+                s = dx / (2.0 - mx - mn)
+
+            if r == mx:
+                h = (g-b) / dx
+            elif (g == mx):
+                h = 2.0 + (b - r) / dx
+            elif (b == mx):
+                h = 4.0 + (r - g) / dx
+
+        h *= 60
+        if h < 0:
+            h += 360
+
+        return h, s * 100, l * 100
+
     def enhance_existing_wardrobe(person, max_outfits):
         outfit_builder = WardrobeBuilder(person)
 
