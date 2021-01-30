@@ -731,17 +731,6 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("font_color_options")]
 
-                        frame:
-                            background None
-                            ysize 24
-
-                        textbutton "Hair Salon":
-                            style "textbutton_no_padding_highlight"
-                            text_style "cheat_text_style"
-                            xfill True
-                            action ToggleScreen("hair_creator", None, editing_target, editing_target.hair_style.get_copy(), editing_target.pubes_style.get_copy()) # If the screen doesn't exist it provides an ignorable error. While it removes its standalone functionality, maintaining code twice is a hazzle.
-
-
                     vbox:
                         xsize 250
                         if personality_options and hasattr(editing_target, "personality"):
