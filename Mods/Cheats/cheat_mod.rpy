@@ -67,9 +67,12 @@ init 2 python:
         if hasattr(person.char, "who_args"):
             person.char.who_args["color"] = color
 
-        person.set_title(remove_display_tags(person.title))
-        person.set_possessive_title(remove_display_tags(person.possessive_title))
-        person.set_mc_title(remove_display_tags(person.mc_title))
+        if person.title:
+            person.set_title(remove_display_tags(person.title))
+        if person.possessive_title:
+            person.set_possessive_title(remove_display_tags(person.possessive_title))
+        if person.mc_title:
+            person.set_mc_title(remove_display_tags(person.mc_title))
 
     def cheat_restore_screen():
         if "the_person" in globals():
