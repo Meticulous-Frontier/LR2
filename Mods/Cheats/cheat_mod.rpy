@@ -28,8 +28,8 @@ init 2 python:
     def cheat_appearance():
         cs = renpy.current_screen()
         editing_target = cs.scope["editing_target"]
-        #editing_target.expression_images = Expression("default", editing_target.skin, editing_target.face_style)
-        editing_target.draw_person()
+        if isinstance(editing_target, Person):
+            editing_target.draw_person()
         return
 
     def cheat_collapse_menus():
@@ -54,7 +54,7 @@ init 2 python:
         cs.scope["divisions"][division][1] = not cs.scope["divisions"][division][1]
 
     def cheat_set_company_salaries(multiplier = 1):
-        for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team:
+        for person in mc.business.market_team + mc.business.production_team + mc.business.research_team + mc.business.supply_team + mc.business.hr_team + stripclub_strippers + stripclub_waitresses + stripclub_bdsm_performers:
             person.salary = person.calculate_base_salary() * multiplier
 
     def cheat_person_font_color(person, color):
@@ -95,6 +95,24 @@ screen keybind1():
         Function(cheat_restore_screen)
     ]
 
+init 5 python:
+    def get_cheat_menu_divisions():
+        divisions = {
+                "Research" : [ mc.business.research_team, False, 0],
+                "Production" : [ mc.business.production_team, False, 1],
+                "Supply" : [ mc.business.supply_team, False, 2],
+                "Marketing" : [ mc.business.market_team, False, 3],
+                "HR" : [ mc.business.hr_team, False, 4]
+            }
+
+        if get_strip_club_foreclosed_stage() >= 5:
+            divisions["Strippers"] = [stripclub_strippers, False, 5]
+            if "stripclub_waitresses" in globals() and strip_club_get_manager():
+                divisions["Waitresses"] = [stripclub_waitresses, False, 6]
+            if "stripclub_bdsm_performers" in globals() and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                divisions["BDSM Performers"] = [stripclub_bdsm_performers, False, 7]
+
+        return OrderedDict(sorted(divisions.items(), key=lambda t: t[1][2]))
 
 screen cheat_menu():
 
@@ -124,24 +142,19 @@ screen cheat_menu():
     default pubes_color_options = False
     default font_color_options = False
 
-    default divisions = {
-        "Research" : [ mc.business.research_team, False],
-        "Production" : [ mc.business.production_team, False],
-        "Supply" : [ mc.business.supply_team, False ],
-        "Marketing" : [ mc.business.market_team, False ],
-        "HR" : [ mc.business.hr_team, False ]
-    }
-
+    default divisions = get_cheat_menu_divisions()
 
     # Input management variables
     default name_select = False #Determines if the name button is currently taking an input or not
 
     if "the_person" in globals():
-        default editable_characters = [mc, the_person, mc.business] # Add unique characters to this list if you want to customize them often
         default editing_target = the_person # default open the_person cheat menu
+        default last_editing_target = the_person.identifier # store identifier for company division highlighting
+        default editable_characters = [mc, mc.business, the_person] # Add unique characters to this list if you want to customize them often
     else:
         default editable_characters = [mc, mc.business] # Add unique characters to this list if you want to customize them often
         default editing_target = mc.business
+        default last_editing_target = None
 
     # Lists for common skill attributes.
     # The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed], [3 = sort order]
@@ -351,7 +364,8 @@ screen cheat_menu():
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
                                                     action [
-                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
+                                                        Function(cheat_appearance)
                                                     ]
 
                                                 if isinstance(vars(editing_target)[main_stats[x][1]], int):
@@ -361,11 +375,13 @@ screen cheat_menu():
                                                         text_style "cheat_text_style"
 
                                                         action [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
+                                                            Function(cheat_appearance)
                                                         ]
 
                                                         alternate [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
+                                                            Function(cheat_appearance)
                                                         ]
                                                 else:
                                                     textbutton x + ": " + str(__builtin__.round(vars(editing_target)[main_stats[x][1]], 3)):
@@ -374,11 +390,13 @@ screen cheat_menu():
                                                         text_style "cheat_text_style"
 
                                                         action [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
+                                                            Function(cheat_appearance)
                                                         ]
 
                                                         alternate [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2])
+                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
+                                                            Function(cheat_appearance)
                                                         ]
 
                                                 textbutton " + ":
@@ -386,7 +404,8 @@ screen cheat_menu():
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
                                                     action [
-                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2])
+                                                        Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
+                                                        Function(cheat_appearance)
                                                     ]
 
                     vbox:
@@ -617,8 +636,13 @@ screen cheat_menu():
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
+                                        if person.identifier == last_editing_target:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
                                         action [
+                                            SetScreenVariable("last_editing_target", person.identifier),
                                             SetScreenVariable("editing_target", person),
+                                            SetScreenVariable("editable_characters", [mc, mc.business, person]),
                                             Function(cheat_appearance)
                                         ]
 
