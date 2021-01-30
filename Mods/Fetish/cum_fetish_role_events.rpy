@@ -6,14 +6,12 @@ init -1 python:
         else:
             return "You're too tired"
 
-
 init 2 python:
      cum_fetish_get_dosage = Action("Give her cum dosage",  cum_fetish_get_dosage_requirement, "cum_fetish_get_dosage_label",
         menu_tooltip = "Give her cum, right here, right now.")
 
 init 3 python:
     cum_fetish_role = Role(role_name = "Cum Fetish", actions = [ cum_fetish_get_dosage])
-
 
 label cum_fetish_get_dosage_label(the_person):
     mc.name "[the_person.title] get on your knees. Its time for your dosage of cum."
@@ -37,5 +35,5 @@ label cum_fetish_post_sex_cleanup_label(the_person_one, the_person_two):
         $ scene_manager.update_actor(the_person_two, display_transform = character_right_flipped, position = "kneeling1")
     else:
         $ scene_manager.update_actor(the_person_two, display_transform = character_right_flipped, position = "walking_away")
-    
+
     return

@@ -1,10 +1,7 @@
 init 1 python:
     def fetish_anal_staylate_requirement(person):
         if mc.is_at_work() and mc.business.is_open_for_business() and person.is_employee():
-            if is_fetish_after_hours_available():
-                return True
-            else:
-                return False
+            return True
         return False
 
     def fetish_anal_staylate_event_requirement():
@@ -13,7 +10,7 @@ init 1 python:
         return False
 
     def add_fetish_anal_staylate_event(person):
-        fetish_anal_staylate_event = Action("Employee stays late", fetish_anal_staylate_event_requirement, "fetish_anal_staylate_event_label", args = person)
+        fetish_anal_staylate_event = Fetish_Action("Employee stays late", fetish_anal_staylate_event_requirement, "fetish_anal_staylate_event_label", args = person, priority = 10, fetish_type = "anal")
         mc.business.add_mandatory_crisis(fetish_anal_staylate_event)
         return
 
@@ -27,8 +24,6 @@ init 2 python:
 
     anal_fetish_role = Role(role_name ="Anal Fetish", actions =[fetish_anal_staylate])
 
-
-
 label fetish_anal_staylate_label(the_person):
     mc.name "[the_person.title], I need you to stay after work today."
     the_person.char "Oh, of course sir. I'm not in trouble am I?"
@@ -39,13 +34,11 @@ label fetish_anal_staylate_label(the_person):
     "You look [the_person.possessive_title] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
     the_person.char "Oh! Thank you sir! I'll look forward to it!"
     "You say goodbye to [the_person.possessive_title]."
-    $ fetish_after_hours_lock()
     $ add_fetish_anal_staylate_event(the_person)
     return
 
 #SBA2
 label fetish_anal_staylate_event_label(the_person):
-    $ fetish_after_hours_unlock()
     if not mc.is_at_work():
         "Your phone rings. It's [the_person.possessive_title]. You answer it."
         the_person.char "Hey, are you at work? I can't find you."

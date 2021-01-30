@@ -72,22 +72,22 @@ init -1 python:
 
 
 init 2 python:
-    # breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
-    breeding_fetish_non_employee_intro = Action("Non Employee breeding fetish intro", breeding_fetish_generic_intro_requirement, "breeding_fetish_generic_intro_label")
-    breeding_fetish_family_intro = Action("Family Member breeding fetish intro", breeding_fetish_family_intro_requirement, "breeding_fetish_family_intro_label")
-    breeding_fetish_mom_intro = Action("Mom breeding fetish intro", breeding_fetish_mom_intro_requirement, "breeding_fetish_mom_intro_label")
-    breeding_fetish_lily_intro = Action("Lily breeding fetish intro", breeding_fetish_lily_intro_requirement, "breeding_fetish_lily_intro_label")
-    breeding_fetish_rebecca_intro = Action("Rebecca breeding fetish intro", breeding_fetish_rebecca_intro_requirement, "breeding_fetish_rebecca_intro_label")
-    breeding_fetish_gabrielle_intro = Action("Gabrielle breeding fetish intro", breeding_fetish_gabrielle_intro_requirement, "breeding_fetish_gabrielle_intro_label")
-    breeding_fetish_stephanie_intro = Action("Stephanie breeding fetish intro", breeding_fetish_stephanie_intro_requirement, "breeding_fetish_stephanie_intro_label")
-    breeding_fetish_emily_intro = Action("Emily breeding fetish intro", breeding_fetish_emily_intro_requirement, "breeding_fetish_emily_intro_label")
-    breeding_fetish_christina_intro = Action("Christina breeding fetish intro", breeding_fetish_christina_intro_requirement, "breeding_fetish_christina_intro_label")
-    breeding_fetish_starbuck_intro = Action("Starbuck breeding fetish intro", breeding_fetish_starbuck_intro_requirement, "breeding_fetish_starbuck_intro_label")
-    breeding_fetish_sarah_intro = Action("Sarah breeding fetish intro", breeding_fetish_sarah_intro_requirement, "breeding_fetish_sarah_intro_label")
-    breeding_fetish_ophelia_intro = Action("Ophelia breeding fetish intro", breeding_fetish_ophelia_intro_requirement, "breeding_fetish_ophelia_intro_label")
-    breeding_fetish_erica_intro = Action("Erica breeding fetish intro", breeding_fetish_erica_intro_requirement, "breeding_fetish_erica_intro_label")
-    breeding_fetish_candace_intro = Action("Candace breeding fetish intro", breeding_fetish_candace_intro_requirement, "breeding_fetish_candace_intro_label")
-    breeding_fetish_ashley_intro = Action("Ashley breeding fetish intro", breeding_fetish_ashley_intro_requirement, "breeding_fetish_ashley_intro_label")
+    # breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
+    breeding_fetish_non_employee_intro = Fetish_Action("Non Employee breeding fetish intro", breeding_fetish_generic_intro_requirement, "breeding_fetish_generic_intro_label", fetish_type = "breeding")
+    breeding_fetish_family_intro = Fetish_Action("Family Member breeding fetish intro", breeding_fetish_family_intro_requirement, "breeding_fetish_family_intro_label", fetish_type = "breeding")
+    breeding_fetish_mom_intro = Fetish_Action("Mom breeding fetish intro", breeding_fetish_mom_intro_requirement, "breeding_fetish_mom_intro_label", fetish_type = "breeding")
+    breeding_fetish_lily_intro = Fetish_Action("Lily breeding fetish intro", breeding_fetish_lily_intro_requirement, "breeding_fetish_lily_intro_label", fetish_type = "breeding")
+    breeding_fetish_rebecca_intro = Fetish_Action("Rebecca breeding fetish intro", breeding_fetish_rebecca_intro_requirement, "breeding_fetish_rebecca_intro_label", fetish_type = "breeding")
+    breeding_fetish_gabrielle_intro = Fetish_Action("Gabrielle breeding fetish intro", breeding_fetish_gabrielle_intro_requirement, "breeding_fetish_gabrielle_intro_label", fetish_type = "breeding")
+    breeding_fetish_stephanie_intro = Fetish_Action("Stephanie breeding fetish intro", breeding_fetish_stephanie_intro_requirement, "breeding_fetish_stephanie_intro_label", fetish_type = "breeding")
+    breeding_fetish_emily_intro = Fetish_Action("Emily breeding fetish intro", breeding_fetish_emily_intro_requirement, "breeding_fetish_emily_intro_label", fetish_type = "breeding")
+    breeding_fetish_christina_intro = Fetish_Action("Christina breeding fetish intro", breeding_fetish_christina_intro_requirement, "breeding_fetish_christina_intro_label", fetish_type = "breeding")
+    breeding_fetish_starbuck_intro = Fetish_Action("Starbuck breeding fetish intro", breeding_fetish_starbuck_intro_requirement, "breeding_fetish_starbuck_intro_label", fetish_type = "breeding")
+    breeding_fetish_sarah_intro = Fetish_Action("Sarah breeding fetish intro", breeding_fetish_sarah_intro_requirement, "breeding_fetish_sarah_intro_label", fetish_type = "breeding")
+    breeding_fetish_ophelia_intro = Fetish_Action("Ophelia breeding fetish intro", breeding_fetish_ophelia_intro_requirement, "breeding_fetish_ophelia_intro_label", fetish_type = "breeding")
+    breeding_fetish_erica_intro = Fetish_Action("Erica breeding fetish intro", breeding_fetish_erica_intro_requirement, "breeding_fetish_erica_intro_label", fetish_type = "breeding")
+    breeding_fetish_candace_intro = Fetish_Action("Candace breeding fetish intro", breeding_fetish_candace_intro_requirement, "breeding_fetish_candace_intro_label", fetish_type = "breeding")
+    breeding_fetish_ashley_intro = Fetish_Action("Ashley breeding fetish intro", breeding_fetish_ashley_intro_requirement, "breeding_fetish_ashley_intro_label", fetish_type = "breeding")
 
 init 3 python:
     def add_breeding_fetish(person):
@@ -118,7 +118,6 @@ init 50 python:
 
 #Fetish Intro Labels
 label breeding_fetish_employee_intro_label(the_person):
-    $ fetish_after_hours_unlock()
     "You are finishing up the last of your work today and closing up. All your employees should be gone for the day."
     "However, you are surprised when you are interrupted by someone."
     $ the_person.draw_person()

@@ -328,7 +328,6 @@ label fetish_mom_kitchen_label(the_person):
                 call give_serum(aunt)from _call_give_mom_kitchen_fetish_03
             "Leave [aunt.name]'s food alone":
                 pass
-    if hall.has_person(cousin) or lily_bedroom.has_person(cousin):
         menu:
             "Add serum to [cousin.name]'s food":
                 call give_serum(cousin) from _call_give_mom_kitchen_fetish_04
@@ -341,6 +340,7 @@ label fetish_mom_kitchen_label(the_person):
     "[the_person.possessive_title] gives you a kiss on the cheek."
     "You bring the food out and have a nice family dinner together."
     call advance_time from _call_advance_time_kitchen_mom_fetish_time_01
+    $ del the_clothing
     return
 
 label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is currently disabled. As Lily progresses, give her a scene where you can act out her fetishes on video stream

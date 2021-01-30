@@ -82,13 +82,13 @@ init 1 python:
         return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
 
 init 2 python: #Other anal fetish related python code
-    # anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label") #Create this per person
-    anal_fetish_generic_intro = Action("Generic Anal Fetish Intro", anal_fetish_generic_intro_requirement, "anal_fetish_generic_intro_label")
-    anal_fetish_family_intro = Action("Family Anal Fetish Intro", anal_fetish_family_intro_requirement, "anal_fetish_family_intro_label")
-    anal_fetish_mom_intro = Action("Jennifer Anal Fetish Intro", anal_fetish_mom_intro_requirement, "anal_fetish_mom_intro_label")
-    anal_fetish_lily_intro = Action("Lily Anal Fetish Intro", anal_fetish_lily_intro_requirement, "anal_fetish_lily_intro_label")
-    anal_fetish_stephanie_intro = Action("Stephanie Anal Fetish Intro", anal_fetish_stephanie_intro_requirement, "anal_fetish_stephanie_intro_label")
-    anal_fetish_starbuck_intro = Action("Starbuck Anal Fetish Intro", anal_fetish_starbuck_intro_requirement, "anal_fetish_starbuck_intro_label")
+    # anal_fetish_employee_intro = Fetish_Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", fetish_type = "anal") #Create this per person
+    anal_fetish_generic_intro = Fetish_Action("Generic Anal Fetish Intro", anal_fetish_generic_intro_requirement, "anal_fetish_generic_intro_label", fetish_type = "anal")
+    anal_fetish_family_intro = Fetish_Action("Family Anal Fetish Intro", anal_fetish_family_intro_requirement, "anal_fetish_family_intro_label", fetish_type = "anal")
+    anal_fetish_mom_intro = Fetish_Action("Jennifer Anal Fetish Intro", anal_fetish_mom_intro_requirement, "anal_fetish_mom_intro_label", fetish_type = "anal")
+    anal_fetish_lily_intro = Fetish_Action("Lily Anal Fetish Intro", anal_fetish_lily_intro_requirement, "anal_fetish_lily_intro_label", fetish_type = "anal")
+    anal_fetish_stephanie_intro = Fetish_Action("Stephanie Anal Fetish Intro", anal_fetish_stephanie_intro_requirement, "anal_fetish_stephanie_intro_label", fetish_type = "anal")
+    anal_fetish_starbuck_intro = Fetish_Action("Starbuck Anal Fetish Intro", anal_fetish_starbuck_intro_requirement, "anal_fetish_starbuck_intro_label", fetish_type = "anal")
 
     def add_anal_fetish(person):
         person.max_opinion_score("anal sex")
@@ -98,11 +98,6 @@ init 2 python: #Other anal fetish related python code
         person.event_triggers_dict["LastAnalFetish"] = day
         slave_assign_new_collar(person, fuck_doll_collar)
         person.unlock_spanking()
-        return
-
-    def add_employee_anal_fetish_intro(the_person):
-        anal_fetish_employee_intro = Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = the_person)
-        mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
         return
 
 init 50 python:
@@ -130,9 +125,9 @@ init 50 python:
 ### Function labels
 
 label anal_fetish_employee_intro_label(the_person):
-    $ fetish_after_hours_unlock()
     if the_person.core_sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
+        return
     "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
     "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
     "She seems to be using her ass to try and get attention."
@@ -148,13 +143,11 @@ label anal_fetish_employee_intro_label(the_person):
             pass
         "Too tired" if mc.energy <= 40:
             "You are just too tired to approach her today."
-            $ fetish_after_hours_unlock()
             $ abort_anal_fetish_intro(the_person)
             $ clear_scene()
             return
         "Too risky, leave her alone":
             "You decide to leave her alone for now. You might revisit this decision at a later date."
-            $ fetish_after_hours_unlock()
             $ abort_anal_fetish_intro(the_person)
             $ clear_scene()
             return
@@ -667,7 +660,6 @@ label anal_fetish_lily_intro_label():
         $ abort_anal_fetish_intro(the_person)
         return
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ fetish_after_hours_unlock()
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title]."
     the_person "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
@@ -935,8 +927,8 @@ label anal_fetish_starbuck_intro_label():
     if the_person.core_sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
+
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
-    $ fetish_after_hours_unlock()
 
     "You get a text message from [the_person.title]."
     the_person "Hey partner! I was just closing up the shop, butt craving something a little more real than this... want to swing by?"

@@ -86,11 +86,11 @@ init 2 python:
         slave_assign_new_collar(person, cum_slut_collar)
         return
 
-    cum_fetish_family_intro = Action("Family Cum Fetish Intro", cum_fetish_family_intro_requirement, "cum_fetish_family_intro_label")
-    cum_fetish_generic_intro = Action("Generic Cum Fetish Intro", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label")
-    cum_fetish_mom_intro = Action("Jennifer Cum Fetish Intro", cum_fetish_mom_intro_requirement, "cum_fetish_mom_intro_label")
-    cum_fetish_lily_intro = Action("Lily Cum Fetish Intro", cum_fetish_lily_intro_requirement, "cum_fetish_lily_intro_label")
-    cum_fetish_sarah_intro = Action("Sarah Cum Fetish Intro", cum_fetish_sarah_intro_requirement, "cum_fetish_sarah_intro_label")
+    cum_fetish_family_intro = Fetish_Action("Family Cum Fetish Intro", cum_fetish_family_intro_requirement, "cum_fetish_family_intro_label", fetish_type = "cum")
+    cum_fetish_generic_intro = Fetish_Action("Generic Cum Fetish Intro", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", fetish_type = "cum")
+    cum_fetish_mom_intro = Fetish_Action("Jennifer Cum Fetish Intro", cum_fetish_mom_intro_requirement, "cum_fetish_mom_intro_label", fetish_type = "cum")
+    cum_fetish_lily_intro = Fetish_Action("Lily Cum Fetish Intro", cum_fetish_lily_intro_requirement, "cum_fetish_lily_intro_label", fetish_type = "cum")
+    cum_fetish_sarah_intro = Fetish_Action("Sarah Cum Fetish Intro", cum_fetish_sarah_intro_requirement, "cum_fetish_sarah_intro_label", fetish_type = "cum")
 
 init 50 python:
     def get_cum_fetish_unique_dialogue_list():
@@ -121,7 +121,6 @@ init 50 python:
 label cum_fetish_employee_intro_label(the_person):
     $ the_person.arousal = 40
     $ the_person.event_triggers_dict["LastCumFetish"] = day
-    $ fetish_after_hours_unlock()
     "It's the end of the day, and you and your employees are packing up to head out. However, one of your employees is acting a little suspicious and milling around."
     "The rest of the girls in her department pack up and head out, while she clearly is wasting time. You decide to ask her if she's okay."
     $ the_person.draw_person()
@@ -147,10 +146,10 @@ label cum_fetish_employee_intro_label(the_person):
         "Too tired" if mc.energy <= 40:
             pass
             #TODO re add the event for this person for the next day.
+            $ clear_scene()
             return
         "Refuse":
             "You decide to leave her alone for now. You might revisit this decision at a later date."
-            $ fetish_after_hours_unlock()
             $ clear_scene()
             return
     mc.name "I'll let you do that, but only if you do as I say when I finish."
@@ -238,7 +237,6 @@ label cum_fetish_family_intro_label(the_person):
             return
         "Lave her alone":
             "You decide to leave her alone for now. You might revisit this decision at a later date."
-            $ fetish_after_hours_unlock()
             $ clear_scene()
             return False
     "This is it. It's time to be bold. You quietly step into the room. You quietly slip out of your clothes before she notices you."

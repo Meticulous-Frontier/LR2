@@ -40,27 +40,17 @@ init -2 python:
 
 
 init -1 python:
-    def is_fetish_after_hours_available():
-        return mc.business.event_triggers_dict.get("fetish_after_hours_available", False)
-
-    def fetish_after_hours_lock():
-        mc.business.event_triggers_dict["fetish_after_hours_available"] = False
-        return
-
-    def fetish_after_hours_unlock():
-        mc.business.event_triggers_dict["fetish_after_hours_available"] = True
-        return
 
     def fetish_serum_unlock_count():
         return mc.business.event_triggers_dict.get("fetish_serum_count", 0)
 
     def start_anal_fetish_quest(person):
-        if person is lily:
-            if is_fetish_after_hours_available():
-                fetish_after_hours_lock()
-                mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
-                return True
+        if has_started_anal_fetish(person):
             return False
+
+        if person is lily:
+            mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
+            return True
         elif person is mom:
             mc.business.mandatory_crises_list.append(anal_fetish_mom_intro)
             return True
@@ -68,11 +58,9 @@ init -1 python:
             pass
         elif person is cousin and False:
             pass
-        elif person is starbuck and starbuck.shop_investment_rate == 6.0:
-            if is_fetish_after_hours_available():
-                fetish_after_hours_lock()
-                add_sb_starbuck_anal_intro_event()
-                return True
+        elif person is starbuck and starbuck.shop_investment_rate >= 6.0:
+            mc.business.mandatory_crises_list.append(anal_fetish_starbuck_intro)
+            return True
         elif person is stephanie:
             mc.business.mandatory_crises_list.append(anal_fetish_stephanie_intro)
             return True
@@ -93,9 +81,8 @@ init -1 python:
         elif person is alexia and False:
             pass
         elif person.is_employee():
-            if is_fetish_after_hours_available():
-                fetish_after_hours_lock()
-                add_employee_anal_fetish_intro(person)
+            anal_fetish_employee_intro = Fetish_Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "anal")
+            mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
             return True
         elif person.is_family():
             person.add_unique_on_room_enter_event(anal_fetish_family_intro)
@@ -109,6 +96,9 @@ init -1 python:
         #Determine who it is, then add the appropriate quest.
         if persistent.pregnancy_pref == 0:
             return False
+        if has_started_breeding_fetish(person):
+            return False
+
         if person is mom:
             if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
                 mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
@@ -148,11 +138,9 @@ init -1 python:
         elif person is alexia and False:
             pass
         elif person.is_employee():
-            if is_fetish_after_hours_available():
-                fetish_after_hours_lock()
-                breeding_fetish_employee_intro = Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person)
-                mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
-                return True
+            breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "breeding")
+            mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
+            return True
         elif person.is_family():
             person.add_unique_on_room_enter_event(breeding_fetish_family_intro)
             return True
@@ -162,6 +150,9 @@ init -1 python:
         return False
 
     def start_cum_fetish_quest(person):
+        if has_started_cum_fetish(person):
+            return False
+
         if person is lily:
             mc.business.mandatory_crises_list.append(cum_fetish_lily_intro)
             return True
@@ -174,21 +165,22 @@ init -1 python:
             mc.business.mandatory_crises_list.append(cum_fetish_sarah_intro)
             return True
         elif person.is_employee():
-            if is_fetish_after_hours_available():
-                fetish_after_hours_lock()
-                cum_fetish_employee_intro = Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = person)
-                mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)
-                return True
+            cum_fetish_employee_intro = Fetish_Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "cum")
+            mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)
+            return True
         elif person.is_family():
             person.add_unique_on_room_enter_event(cum_fetish_family_intro)
             return True
         else:
-            cum_fetish_generic_intro = Action("Someone needs cum", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", args = person)
+            cum_fetish_generic_intro = Fetish_Action("Someone needs cum", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", args = person, priority = 10, fetish_type = "cum")
             mc.business.add_mandatory_crisis(cum_fetish_generic_intro)
             return True
         return False
 
     def start_exhibition_fetish_quest(person):
+        if has_started_breeding_fetish(person):
+            return False
+
         return False #None of them are written yet
 
     def fetish_serum_increase_opinion(opinion_list, max_new_score, person, add_to_log = False): #WE purposefully increase a score EVERY time this function is used instead of RNG
