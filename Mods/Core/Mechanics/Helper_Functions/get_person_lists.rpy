@@ -15,14 +15,21 @@ init -1 python:
         except KeyError:
             return None
 
+    def set_all_people_cache_item(func_name, value, *args, **kwargs):
+        key = repr( (args, kwargs) ) + "#" + func_name  # parameterized key
+        all_people_cache[key] = value
+        return value
+
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         all_people = get_all_people_cache_item("all_people_in_the_game", excluded_people, excluded_locations)
         if all_people:
             return all_people
+
         all_people = []
         for location in all_locations_in_the_game(excluded_locations):
             all_people.extend([x for x in location.people if x not in excluded_people])
-        return all_people
+
+        return set_all_people_cache_item("all_people_in_the_game", all_people, excluded_people, excluded_locations)
 
     def all_locations_in_the_game(excluded_locations = []):
         return [x for x in list_of_places if x not in excluded_locations]
@@ -90,7 +97,7 @@ init -1 python:
         return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
 
     def people_in_role(role):
-        return [x for x in all_people_in_the_game([mc]) if x.has_role(role)]
+        return [x for x in all_people_in_the_game() if x.has_role(role)]
 
     # returns a single employee when number of employees == 1
     # returns a tuple of employees when number of employees > 1
