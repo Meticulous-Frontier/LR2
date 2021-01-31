@@ -4,7 +4,7 @@ init 5 python:
 label against_wall_double_orgasm(the_girl, the_location, the_object):
     "[the_girl.title]'s tight cunt draws you closer to your orgasm with each thrust. Her breathing is getting ragged as she nears her orgasm also."
     the_girl "[the_girl.mc_title], your cock is so good! Pin me to the wall and make me cum all over it!"
-    "You speed up with her words of encouragment, passin the point of no return. You push her up against the [the_object.name] and lay into her."
+    "You speed up with her words of encouragement, passing the point of no return. You push her up against the [the_object.name] and lay into her."
     $ the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Fuck, I'm going to cum!"
     $ the_girl.call_dialogue("cum_pullout")
@@ -99,6 +99,9 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                         the_girl "I'm sorry... I don't know what came over me... I just couldn't let you pull out!"
                     else:
                         the_girl.char "I hope you enjoy paying child support, [the_girl.mc_title]."
+
+                $ del wordchoice
+                $ del wordchoice2
             else:
                 $ the_girl.cum_on_stomach()
                 $ against_wall.redraw_scene(the_girl)

@@ -1,7 +1,7 @@
 init 5 python:
-    bent_over_breeding.double_orgasm = "double_orgasm_bent_over_breeding"
+    bent_over_breeding.double_orgasm = "bent_over_breeding_double_orgasm"
 
-label double_orgasm_bent_over_breeding(the_girl, the_location, the_object):
+label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
     "[the_girl.title]'s back is arched and she is moaning non stop. Her ass quakes with every rapid thrust."
     the_girl "Oh god its so good! Oh [the_girl.mc_title] I'm gonna cum!"
     "Hearing her call out your name is pushing you over the edge. You are about to cum too."
@@ -10,7 +10,7 @@ label double_orgasm_bent_over_breeding(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s drenched cunt is just too good. You decide to cum inside it."
     if mc.condom:
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans when she feels you filling the condom deep inside of her."
-        "Her cunt quivers as she joins you in orgasm. Her body gose rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
+        "Her cunt quivers as she joins you in orgasm. Her body goes rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
         the_girl.char "Oh god, I can feel you twitching... but something is missing?"
         "You wait until both of your orgasms have passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
         "She looks at your condom and frowns."
