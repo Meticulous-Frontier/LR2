@@ -147,6 +147,7 @@ init 5 python:
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in [x for x in list_of_places if x.people]:
+            place.validate_people()
             people.extend([[x, place] for x in place.people])
         return people
 
