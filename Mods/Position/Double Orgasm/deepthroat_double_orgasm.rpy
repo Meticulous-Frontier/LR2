@@ -48,7 +48,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
             if the_girl.sluttiness > 80:
                 "When [the_girl.title]'s orgasm subsides, she closes her mouth and swallows loudly, smiling at you."
             else:
-                if the_girl.outfit.tits_available():
+                if the_girl.outfit.tits_visible():
                     $ the_girl.cum_on_tits()
                     $ deepthroat.redraw_scene(the_girl)
                     if the_girl.has_large_tits():
