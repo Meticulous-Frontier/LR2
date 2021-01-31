@@ -255,6 +255,8 @@ label anal_fetish_family_intro_label(the_person):
     if the_person.core_sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
     $ the_person.arousal = 30
     $ the_person.draw_person(position = "standing_doggy")
     "As you walk into the room, you notice [the_person.possessive_title]. She is bent over and appears to be reading something on her phone."
@@ -476,6 +478,8 @@ label anal_fetish_generic_intro_label(the_person):
     return True
 
 label anal_fetish_mom_intro_label():
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person = mom
     "Playing around on your phone for a bit before bed, you hear a knock on your door."
     mc.name "It's open."

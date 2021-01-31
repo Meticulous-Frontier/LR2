@@ -205,6 +205,8 @@ label cum_fetish_employee_intro_label(the_person):
     return True
 
 label cum_fetish_family_intro_label(the_person):
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ the_person.arousal = 40
     $ towel_outfit = Outfit("Towel")
     $ towel_outfit.add_dress(towel.get_copy())
@@ -330,10 +332,13 @@ label cum_fetish_family_intro_label(the_person):
     return True
 
 label cum_fetish_generic_intro_label(the_person):
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
     "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
     the_person.char "I'm here... Should I just knock on the door?"
+    $ hall.show_background()
     "You drag yourself out of bed and stumble out to the front hall. You move to a window and peek out at your front door."
     $ the_person.draw_person(emotion = "happy")
     "You see [the_person.title] standing outside. You open the door before she goes to knock."
@@ -355,10 +360,10 @@ label cum_fetish_generic_intro_label(the_person):
             $ add_cum_fetish(the_person)
 
             "[the_person.possessive_title] is moaning ecstatically."
-            if the_person.has_cum_fetish():
+            if the_person.has_face_cum():
                 "Glancing down, you see [the_person.possessive_title] running her hands along her face, rubbing your cum into her skin."
                 the_person.char "Mmm... it feels so good! That first splash is always the best..."
-            elif the_person.has_cum_fetish():
+            else:
                 "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person.char "Mmm... your taste is so unique, I love it!"
             $ the_person.event_triggers_dict["LastCumFetish"] = day

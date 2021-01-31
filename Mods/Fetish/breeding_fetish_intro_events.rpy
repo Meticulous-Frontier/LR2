@@ -63,7 +63,7 @@ init -1 python:
         return False
 
     def breeding_fetish_candace_intro_requirement(the_person):
-        if candace.location == candace.work:
+        if candace.location == candace.work and mc.is_at_work():
             return True
         return False
 
@@ -190,6 +190,8 @@ label breeding_fetish_employee_intro_label(the_person):
     return #Needs testing
 
 label breeding_fetish_family_intro_label(the_person):
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
     $ the_person.draw_person(position = "back_peek")
     "You walk into [the_person.possessive_title]'s bedroom. She is looking at herself in the mirror, but turns to when she hears you walk in."
     the_person "Oh hey [the_person.mc_title]. I was just getting ready to head for bed."
@@ -360,18 +362,11 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
 label breeding_fetish_mom_intro_label(): # Needs testing
     $ the_person = mom
     $ the_person.on_birth_control = False
-    $ the_person.event_triggers_dict["Mom_forced_off_bc"] = False   #Atleast set it up so that she doesn't want to get on BC without MC asking.
+    $ the_person.event_triggers_dict["Mom_forced_off_bc"] = False
+    # At least set it up so that she doesn't want to get on BC without MC asking.
     # We'll start this exactly like the crisis with mom waking you up, but with definitely more urgency in her.
-    # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
-    # We do that by getting her lowest level pieces of bottom clothing and removing it, then working our way up until we can use her vagina.
     # This makes sure skirts are kept on (because this is suppose to be a quickly).
-    $ bottom_list = the_person.outfit.get_lower_ordered()
-    $ removed_something = False
-    $ the_index = 0
-    while not the_person.outfit.vagina_available() and the_index < __builtin__.len(bottom_list):
-        $ the_person.outfit.remove_clothing(bottom_list[the_index])
-        $ removed_something = True
-        $ the_index += 1
+    $ removed_something = the_person.outfit.strip_to_vagina()
 
     "You're woken up by your bed shifting under you and a sudden weight around your waist."
     "You feel a tug on your clothing, and you are slowly opening your eyes when you feel your morning wood spring free."
@@ -416,6 +411,8 @@ label breeding_fetish_mom_intro_label(): # Needs testing
 label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room entry event
     $ the_person = lily
     "Note: This scene was written assuming that eventually you fuck [the_person.title] on a live stream, but so far Vren has not written this step."
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
     "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
     $ the_person.draw_person()
     the_person "Oh hey [the_person.mc_title]! I was wondering if you were going to be around tonight. Want to stream with me tonight?"
@@ -427,8 +424,9 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
         "Hell yeah! (disabled) " if mc.energy <= 60:
             pass
         "Not tonight":
-            pass
-            #TODO add this event back into lily's list, and politely decline.
+            $ abort_breeding_fetish_intro(the_person)
+            return
+
     the_person "Great! I'll get it setup..."
     "You notice she hesitates a bit. She bites her lower lip before continuing."
     the_person "So umm, I've been getting some requests recently..."
@@ -687,7 +685,8 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     "You consider it. You don't have much else going on right now, so you decide to agree."
     mc.name "Sure, I'll be over shortly."
     "You make your way over to the sex shop."
-    #TODO change background
+    $ mc.change_location(sex_store)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     "When you get to the store, you look around. It seems like the store is already pretty clean."
     mc.name "Good evening [the_person.title]. Still need help? Things look pretty good around here to me..."
@@ -733,14 +732,15 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     if the_person.has_creampie_cum():
         the_person "Oh god! Baby making sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
+        if the_person.knows_pregnant():
+            the_person "I don't care if I am already pregnant... Please do that again! My body was made to take your cum like that!"
+        else:
+            the_person "I hope that did it, but you'd better cum inside me again and again anyway!"
     else:
-        #TODO what to put here?
-        pass
+        the_person "Please, [the_person.mc_title], next time, fill my little pussy with all that cum."
+        mc.name "If you like it that much, I will give you everything I got, next time."
+        "She smiles, with a definite sparkle in her eyes."
     $ add_breeding_fetish(the_person)
-    if the_person.knows_pregnant():
-        the_person "I don't care if I am already pregnant... Please do that again! My body was made to take your cum like that!"
-    else:
-        the_person "I hope that did it, but you'd better cum inside me again and again anyway!"
     $ the_person.draw_person()
     "[the_person.possessive_title] slowly stands up and turns to you."
     the_person "Wow... I'm glad I finished closing up before you got here..."
@@ -833,7 +833,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         mc.name "Hello [the_person.title]. Something I can help you with?"
         the_person "Yeah boss! I'm having trouble concentrating on my work this morning. Could you help me?"
         mc.name "Possibly, what seems to be distracting you?"
-        the_person "Last night, I was like, totally watching porn, but I couldn't get off to the usual stuff. I was starting to get frustrated, until I finially found something that worked!"
+        the_person "Last night, I was like, totally watching porn, but I couldn't get off to the usual stuff. I was starting to get frustrated, until I finally found something that worked!"
         the_person "I found this video where like, the first half of it is this hottie getting railed and the guy cums in her, and then the second half she's like 8 months pregnant!"
         the_person "You could totally tell it was her too because like, she had the same tattoo and everything!"
         the_person "I went back and watched the first half again and came so hard, thinking about how that was how she got knocked up!"
