@@ -1,7 +1,7 @@
 init 5 python:
-    piledriver.double_orgasm = "double_orgasm_piledriver"
+    piledriver.double_orgasm = "piledriver_double_orgasm"
 
-label double_orgasm_piledriver(the_girl, the_location, the_object):
+label piledriver_double_orgasm(the_girl, the_location, the_object):
     "[the_girl.title] is moaning with every thrust into her cunt. Her breathing is getting ragged and more desperate."
     the_girl "It's so good... I'm gonna cum!"
     "Pinning [the_girl.title] down to the [the_object.name] as you fuck her is really turning you on. You feel yourself approaching the point of no return."

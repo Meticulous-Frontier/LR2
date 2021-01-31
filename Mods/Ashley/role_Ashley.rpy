@@ -1295,7 +1295,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
     $ the_person = ashley
     $ preferences = WardrobePreference(the_person)
     $ builder = WardrobeBuilder(the_person)
-    $ bystander = get_random_from_list(known_people_in_the_game(excluded_people = [ashley, stephanie, mc]))
+    $ bystander = get_random_from_list(known_people_in_the_game(excluded_people = [ashley, stephanie]))
 
     if not bystander:
         return  # exit loop if we have no bystander

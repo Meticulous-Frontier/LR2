@@ -948,14 +948,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         $ scene_manager.strip_actor_outfit(watcher)
                         call join_threesome(the_person, watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
                         $ report_log = _return
-                        python:
-                            scene_manager.clear_scene()
-                            if report_log.get("girl two orgasms", 0) > 0:
-                                watcher.arousal = 0 # If she came she's satisfied.
-                            else:
-                                watcher.change_arousal(-watcher.arousal/2) #Otherwise they are half as aroused as you leave them.
-                            finished = True
-                            del watcher
+                        $ finished = True
                         return
                     "Not this time":
                         the_person "Aww, okay. Maybe next time..."

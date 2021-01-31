@@ -643,7 +643,7 @@ init 1000 python:
         unit_test_count = 0
         while unit_test_count < count:
             mc.change_location(bedroom)
-            the_person = get_random_from_list(known_people_in_the_game([mc]))
+            the_person = get_random_from_list(known_people_in_the_game())
             the_person.love = renpy.random.randint(-50,50)
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy
@@ -655,7 +655,7 @@ init 1000 python:
         unit_test_count = 0
         while unit_test_count < count:
             mc.change_location(bedroom)
-            the_person = get_random_from_list(known_people_in_the_game([mc]))
+            the_person = get_random_from_list(known_people_in_the_game())
             the_person.love = -50
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy

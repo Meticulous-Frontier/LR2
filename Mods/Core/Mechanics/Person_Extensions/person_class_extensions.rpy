@@ -1772,7 +1772,7 @@ init -1 python:
     Person.is_lactating = is_lactating
 
     def is_giving_birth(self):
-        return "preg_old_schedule" in self.event_triggers_dict or "pre_preg_body" in self.event_triggers_dict
+        return "preg_old_schedule" in self.event_triggers_dict
 
     Person.is_giving_birth = is_giving_birth
 
