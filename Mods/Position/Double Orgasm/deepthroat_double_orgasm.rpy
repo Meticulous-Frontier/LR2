@@ -43,6 +43,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 "She pulls back a little, leaving just the tip of your cock in her mouth, squeezing her thighs, while savoring a mouth full of sperm."
 
             $ the_girl.cum_in_mouth()
+            $ deepthroat.current_modifier = None
             $ deepthroat.redraw_scene(the_girl)
             if the_girl.sluttiness > 80:
                 "When [the_girl.title]'s orgasm subsides, she closes her mouth and swallows loudly, smiling at you."
