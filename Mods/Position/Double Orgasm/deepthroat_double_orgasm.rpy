@@ -63,15 +63,13 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
         "Cum down her throat":
             "You put your hands on the back of [the_girl.title]'s head and pull her back down onto your shaft, hard."
             mc.name "Cum for me you dirty little slut!"
-            mc.name "Fuck, here I come!"
-            "You use your hand on the back of [the_girl.title]'s head to pull her close, pushing your cock as deep down her throat as you can manage."
             if the_girl.sex_skills["Oral"] > 3:
                 "[the_girl.possessive_title] keeps her mouth wide open for you, moaning hard as she is close to her orgasm."
             else:
                 "[the_girl.possessive_title] gags on your cock as you push her down onto it."
                 "Her body tightens up and you make sure to take advantage of her moaning, contracting throat by fucking it hard."
 
-            "You grunt and twitch as you start to empty your balls right into her stomach."
+            "You grunt and twitch as you start to empty your balls down her esophagus."
             if the_girl.get_opinion_score("being submissive") > 0:
                 if the_girl.sluttiness > the_girl.core_sluttiness and the_girl.core_sluttiness < blowjob.slut_cap:
                     $ the_girl.change_slut_core(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
@@ -89,7 +87,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ deepthroat.current_modifier = None
                 $ the_girl.cum_in_mouth()
                 $ deepthroat.redraw_scene(the_girl)
-                "You fuck her tight throat until she finishes twitching."
+                "You keep on sliding your dick down her tight throat, preventing her from breathing, until she finishes twitching."
                 "When she's finished cumming you let [the_girl.title] pull back off your shaft. She gasps loudly for air."
                 the_girl.char "That was... oh my god [the_girl.mc_title], I want you to do that again!"
 
