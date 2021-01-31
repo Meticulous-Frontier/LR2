@@ -134,7 +134,7 @@ label candace_goes_clothes_shopping_label(the_person):
 
 label invite_to_clothes_shopping_label():
     "You decide to invite someone out for some clothes shopping."
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes shopping", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(), "Clothes shopping", ["Back"])]))
     $ the_person = _return
     if the_person != "Back":
         "You send a message to [the_person.name] about going clothes shopping."

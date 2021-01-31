@@ -103,7 +103,7 @@ init 1310 python:
 
 # label body_customizer_action_label():
 #     while True:
-#         $ people_list = get_sorted_people_list(known_people_in_the_game([mc]), "Modify Person", ["Back"])
+#         $ people_list = get_sorted_people_list(known_people_in_the_game(), "Modify Person", ["Back"])
 
 #         call screen enhanced_main_choice_display(build_menu_items([people_list]))
 #         $ person_choice = _return

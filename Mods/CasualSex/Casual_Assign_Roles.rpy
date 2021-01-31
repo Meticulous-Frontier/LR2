@@ -136,7 +136,7 @@ init 2 python:
         return
 
     def change_college_athlete_personality_enabled(enabled):
-        for person in all_people_in_the_game([mc] + unique_character_list):
+        for person in all_people_in_the_game(unique_character_list):
             if person.original_personality == athlete_personality:
                 if enabled:
                     assign_casual_athlete_role(person)
@@ -145,7 +145,7 @@ init 2 python:
         return
 
     def change_hot_wife_personality_enabled(enabled):
-        for person in all_people_in_the_game([mc] + unique_character_list):
+        for person in all_people_in_the_game(unique_character_list):
             if person.original_personality == hotwife_personality:
                 if enabled:
                     assign_casual_hotwife_role(person)

@@ -12,7 +12,7 @@ init 3 python:
 
     def get_casual_sex_booty_call_person():
         possible_people = []
-        for person in known_people_in_the_game([mc]):
+        for person in known_people_in_the_game():
             # check if person has a casual sex role and we have her phone number
             if person.has_role([casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict.get("booty_call", False):
                 possible_people.append(person)
