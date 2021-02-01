@@ -108,9 +108,6 @@ init -1 python:
         self.serum_effects = None
         self.idle_animation = None
         self.personal_region_modifiers = None
-        self.on_room_enter_event_list = None
-        self.on_talk_event_list = None
-        self.event_triggers_dict = None
         self.situational_sluttiness = None
         self.situational_obedience = None
         # now let the Garbage Collector do the rest (we are no longer referenced in any objects).
