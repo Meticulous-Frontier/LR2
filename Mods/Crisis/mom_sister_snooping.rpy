@@ -107,7 +107,7 @@ label mom_sister_snooping_action_label():
         $ lily.apply_outfit(Outfit("Nude"), update_taboo = True)
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
-        $ Threesome_sixty_nine.update_scene(mom, lily)
+        $ Threesome_sixty_nine.update_scene(lily, mom)
         "When you peak around the corner, you see [mom.title] on top of [lily.title]. They are eating each other out."
         mom.char "Mmmm, that's it dear, lick right there!"
         $ mom.change_arousal(12)
