@@ -154,8 +154,7 @@ init 5 python:
     def update_party_schedules(people):
         # exclude unique characters as to not to interfere with story lines
         for (person, place) in [x for x in people if not x[0] in unique_character_list]:
-            if not person in unique_character_list:
-                create_party_schedule(person)
+            create_party_schedule(person)
         return
 
     def advance_time_run_turn(people):
