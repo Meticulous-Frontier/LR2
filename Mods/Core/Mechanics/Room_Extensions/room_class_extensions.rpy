@@ -40,9 +40,8 @@ init -1 python:
     #################################
 
     def validate_people(self):
-        for person in self.people[:]:
-            if person.event_triggers_dict is None or person.schedule is None:
-                person.remove_person_from_game()
+        for person in [x for x in self.people if x.event_triggers_dict is None or x.schedule is None]:
+            person.remove_person_from_game()
 
     Room.validate_people = validate_people
 
