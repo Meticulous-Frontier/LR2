@@ -7,7 +7,7 @@ init -1 python:
     # using @lru_cache_function will throw cPickle error               #
     ####################################################################
 
-    all_people_cache = LRUCacheDict(max_size = 5, expiration = 3)
+    all_people_cache = LRUCacheDict(max_size = 5, expiration = 2)
     def get_all_people_cache_item(func_name, *args, **kwargs):
         key = repr( (args, kwargs) ) + "#" + func_name  # parameterized key
         try:
