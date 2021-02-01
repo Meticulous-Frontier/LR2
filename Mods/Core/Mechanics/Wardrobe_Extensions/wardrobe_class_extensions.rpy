@@ -178,8 +178,6 @@ init -1 python:
 
         for acc in outfit_over.accessories:
             assembled_outfit.accessories.append(acc.get_copy())
-
-        assembled_outfit.update_slut_requirement()
         return assembled_outfit
 
     def get_random_appropriate_outfit_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):

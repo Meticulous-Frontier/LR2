@@ -1444,8 +1444,6 @@ init -1 python:
 
     def review_outfit_enhanced(self, dialogue = True):
         self.outfit.remove_all_cum()
-        self.outfit.update_slut_requirement()
-
         if self.should_wear_uniform():
             self.wear_uniform() # Reset uniform
         elif self.outfit.slut_requirement > self.sluttiness:
