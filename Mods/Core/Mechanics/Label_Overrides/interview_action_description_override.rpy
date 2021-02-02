@@ -12,6 +12,7 @@ init 2 python:
         return count
 
     def interview_build_candidates_list(count):
+        start_time = time.time()
         candidates = []
         for x in __builtin__.range(0, count): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
             candidates.append(make_person())
@@ -39,6 +40,8 @@ init 2 python:
                     become_pregnant(a_candidate, mc_father = False, progress_days = renpy.random.randint(5,80))
                     #renpy.say("Pregnant", "Candidate: " + a_candidate.name + " " + a_candidate.last_name + " is pregnant.")
 
+        if debug_log_enabled:
+            add_to_log("Candidates (" + str(count) + "): " + str(__builtin__.round(time.time() - start_time, 8)))
         return candidates
 
 
