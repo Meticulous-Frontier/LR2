@@ -699,6 +699,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
                 the_person.char "Mmm... god I'm glad you know how to use that cock."
             $ the_person.clear_situational_slut("horny")
+            $ the_person.draw_person()
             "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
         else:
             the_person.char "[the_person.mc_title], I really need to get off. Can you get naked please?"
@@ -726,6 +727,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
 
             $ the_report = _return
             $ the_person.clear_situational_slut("horny")
+            $ the_person.draw_person(position = "sitting")
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.title] sits down on the bench, you can see her trembling, caused by aftershocks from her orgasm."
                 the_person.char "Mmm... god I'm glad you know how to make a girl cum so hard."
@@ -1116,6 +1118,7 @@ label erica_post_race_love_label(the_person):
     the_person.char "That was amazing... but I need to study, I've got a test on Monday. I love spending time with you, but you ARE a bit distracting..."
     mc.name "I understand. Tell you what, I'll head out, but before I go I'll order some lunch to get delivered, that way you can study without having to worry about making food."
     $ the_person.change_love(5)
+    $ the_person.draw_person(position = "kissing")
     the_person.char "Aww, you don't have to do that. You are such a sweetheart."
     $ the_person.review_outfit()
     $ the_person.draw_person()
@@ -1124,6 +1127,8 @@ label erica_post_race_love_label(the_person):
     $ title_choice = get_random_from_list(["BBQ Rainbow Beef salad", "Fresh Salmon with Thai noodle salad", "Spicy Chicken and Avocado wrap"])
     mc.name "Alright, I got you a [title_choice], it should be here soon. Good luck with your studying!"
     the_person.char "Goodbye [the_person.mc_title]. I'll see you soon! And you know where I live now. Feel free to swing by once in a while..."
+    $ clear_scene()
+    $ downtown.show_background()
     "You let yourself out and start to walk away. Wow, what an amazing day! You've managed to convince [the_person.title] to go out with you."
     "You can't wait to explore her tight little body more... but one thing at a time now."
     $ the_person.clear_situational_slut("Lost Bet")
@@ -1224,6 +1229,7 @@ label erica_house_call_label(the_person):
     if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is in an orgasm fueled daze, enjoying the effects it has on her."
     the_person.char "Thanks for stopping by... I think I'm just gonna lay down for a bit..."
+    $ the_person.draw_person(position = "missionary")
     "Once you finish getting dressed you say goodbye and let yourself out. You head home and fall into bed, too tired to do anything else."
 
     $ mc.change_location(bedroom) # go home

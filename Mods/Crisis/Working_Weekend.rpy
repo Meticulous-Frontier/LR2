@@ -150,6 +150,8 @@ label SB_working_weekend_crisis_label_high(person_one):
                             "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a bit, clearly disappointed she didn't orgasm."
                             $ person_one.change_slut_temp(5)
                             $ person_one.change_happiness(-5)
+                        $ person_one.apply_outfit()
+                        $ person_one.draw_person()
                         "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
                     "Thank her for the show":
                         mc.name "Thanks for that very pleasant distraction, [person_one.title], but I need to get back to work now."
@@ -276,6 +278,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
 
             $ person_one.clear_situational_slut("seduction_approach")
             $ person_one.clear_situational_obedience("seduction_approach")
+            $ person_one.draw_person()
             "Eventually, [person_one.possessive_title] gets up. She says goodbye after giving you a quick kiss"
         "Just Talk":
             "You decide to take the opportunity to learn a little more about [person_one.possessive_title]."

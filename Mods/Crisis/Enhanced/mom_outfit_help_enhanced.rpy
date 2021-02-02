@@ -361,6 +361,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "When you finish up, you put your dick away."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
 
+    $ the_person.draw_person()
     "You leave [the_person.possessive_title] in her room as she starts to pack her clothes away."
 
     python:

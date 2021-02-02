@@ -48,6 +48,8 @@ label mom_fuck_during_housework_label(the_person):
                 $ the_person.unlock_spanking()
                 the_person.char "Oh god honey, it's amazing knowing I have such a good son, who keeps his naughty mother in line!"
                 "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
+
+            $ the_person.draw_person(position = "back_peek")
             "It takes [the_person.possessive_title] a few moments, but she gets back to work, making dinner for the family."
         #TODO fuck her branch
         "Let her work":
