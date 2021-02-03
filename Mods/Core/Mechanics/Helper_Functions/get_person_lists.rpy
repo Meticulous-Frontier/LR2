@@ -2,34 +2,11 @@ init -1 python:
     from lru import lru_cache_function
     from lru import LRUCacheDict
 
-    ####################################################################
-    # caching function used inside the all_people_in_the_game function #
-    # using @lru_cache_function will throw cPickle error               #
-    ####################################################################
-
-    all_people_cache = LRUCacheDict(max_size = 5, expiration = 2)
-    def get_all_people_cache_item(func_name, *args, **kwargs):
-        key = repr( (args, kwargs) ) + "#" + func_name  # parameterized key
-        try:
-            return all_people_cache[key]
-        except KeyError:
-            return None
-
-    def set_all_people_cache_item(func_name, value, *args, **kwargs):
-        key = repr( (args, kwargs) ) + "#" + func_name  # parameterized key
-        all_people_cache[key] = value
-        return value
-
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        all_people = get_all_people_cache_item("all_people_in_the_game", excluded_people, excluded_locations)
-        if all_people:
-            return all_people
-
         all_people = []
         for location in all_locations_in_the_game(excluded_locations):
             all_people.extend([x for x in location.people if x not in excluded_people])
-
-        return set_all_people_cache_item("all_people_in_the_game", all_people, excluded_people, excluded_locations)
+        return all_people
 
     def all_locations_in_the_game(excluded_locations = []):
         return [x for x in list_of_places if x not in excluded_locations]
