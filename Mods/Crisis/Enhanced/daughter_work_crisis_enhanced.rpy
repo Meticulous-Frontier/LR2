@@ -106,6 +106,7 @@ label daughter_work_crisis_label_enhanced():
 
     call hire_select_process([the_daughter, 1]) from _call_hire_select_process_daughter_work_crisis_enhanced #Hire her or reject her. Padded with an extra item in the array or we crash due to trying to pre-calculate forward/backwards buttons
 
+    $ the_person.draw_person()
     if _return == the_daughter: #You've chosen to hire her.
         if promised_sex:
             mc.name "Alright, I'll admit this looks promising, but I need some convincing."

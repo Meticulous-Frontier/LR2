@@ -1408,6 +1408,7 @@ label HR_director_headhunt_interview_label(the_person):
 
     call hire_select_process([prospect, 1]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
 
+    $ scene_manager.draw_scene()
     if _return == prospect: #MC chooses to hire her
         mc.name "Alright [the_person.title], this looks promising. Good work finding her."
         $ the_person.change_happiness(5)
