@@ -543,7 +543,7 @@ label fetish_serum_anal_warning_label():
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
     the_person "A small subset of the group of rats actually stopped eating, and instead would sit on their food, attempting to absorb it... rectally."
-    the_person "I also had trouble keeping them hydrated. I had to develop a hydrating enema... and once they experienced it once, I was unable to get them to drink water normally."
+    the_person "I also had trouble keeping them hydrated. I had to develop a hydrating enema... and once they experienced that, I was unable to get them to drink water normally."
     mc.name "Those are interesting results."
     the_person "So far, we haven't had any similar situations in our human trials, but be careful, okay?"
     the_person "It wouldn't surprise me if repeated doses could lead someone to develop an anal fixation or fetish."
