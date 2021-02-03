@@ -42,14 +42,14 @@ init 2 python:
 
     def get_so_relationship_improve_person():
         potential_people = []
-        for person in [x for x in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Married" and not x.has_role([girlfriend_role, affair_role])]:
+        for person in [x for x in known_people_in_the_game(excluded_people = unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Married" and not x.has_role([girlfriend_role, affair_role])]:
             if person.relationship in relationship_stats and person.love <= relationship_stats[person.relationship] + (person.get_opinion_score("cheating on men") * 5):
                 potential_people.append(person)
         return get_random_from_list(potential_people)
 
     def get_so_relationship_worsen_person():
         potential_people = []
-        for person in [x for x in known_people_in_the_game(excluded_people = [mc] + unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single" and not x.has_role([casual_hotwife_role])]:
+        for person in [x for x in known_people_in_the_game(excluded_people = unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single" and not x.has_role([casual_hotwife_role])]:
             if person.relationship in relationship_stats and person.love > relationship_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
                 potential_people.append(person)
         return get_random_from_list(potential_people)

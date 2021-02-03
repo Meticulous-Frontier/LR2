@@ -402,7 +402,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "Wow... that was hot!"
 
         if the_person.has_mouth_cum():
-            "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
+            "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
         elif the_person.has_face_cum():
@@ -471,14 +471,16 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH012
 
         if the_person.has_mouth_cum():
-            "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
+            "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your traces of cum on it."
         elif the_person.has_face_cum():
             "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
             the_person.char "Hey! Don't forget to take pictures!"
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
+        $ the_person.draw_person (position = "stand2")
         the_person.char "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
+        $ clear_scene()
         $ mc.change_location(downtown_bar)
         $ mc.location.show_background()
         "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
@@ -584,7 +586,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
             if the_person.has_mouth_cum():
-                "[the_person.possessive_title] looks up at you. She couldn't quiet swallow all your cum, some of it is slowly dripping down the sides of her mouth."
+                "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
                 "You grab her phone and snap a couple pictures of her face with your traces of cum on it."
             elif the_person.has_face_cum():
                 "[the_person.possessive_title] looks up at you. Her face is plastered with your sticky seed."
@@ -610,6 +612,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         $ the_person.event_triggers_dict["booty_call"] = True # unlock casual encounters
         "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
 
+        $ clear_scene()
         $ the_person.apply_planned_outfit()
 
     else:   #We've done this before
@@ -656,6 +659,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "She takes her phone from you and starts going through the pictures you took."
         the_person.char "You'd better get going. I'm going to send these to my husband..."
         $ the_person.apply_planned_outfit()
+        $ clear_scene()
 
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
@@ -1117,6 +1121,7 @@ label hotwife_hookup_accept(the_person):
     $ mc.location.show_background()
 
     "A few minutes later, you walk into the bar. You start walking back toward the women's restroom. The bartender nods to you as you pass the bar."
+    $ work_bathroom.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.arousal = 20
     "You discover [the_person.possessive_title] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."

@@ -2,23 +2,7 @@ init -1 python:
     from lru import lru_cache_function
     from lru import LRUCacheDict
 
-    ####################################################################
-    # caching function used inside the all_people_in_the_game function #
-    # using @lru_cache_function will throw cPickle error               #
-    ####################################################################
-
-    all_people_cache = LRUCacheDict(max_size = 5, expiration = 3)
-    def get_all_people_cache_item(func_name, *args, **kwargs):
-        key = repr( (args, kwargs) ) + "#" + func_name  # parameterized key
-        try:
-            return all_people_cache[key]
-        except KeyError:
-            return None
-
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        all_people = get_all_people_cache_item("all_people_in_the_game", excluded_people, excluded_locations)
-        if all_people:
-            return all_people
         all_people = []
         for location in all_locations_in_the_game(excluded_locations):
             all_people.extend([x for x in location.people if x not in excluded_people])
@@ -38,7 +22,7 @@ init -1 python:
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
-        if "ashley" in globals() and ashley.event_triggers_dict.get("intro_complete", False) == False:
+        if "ashley" in globals() and day <= ashley.event_triggers_dict.get("employed_since", 0):
             not_met_yet_list.append(ashley)
         if "candace" in globals() and candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
             not_met_yet_list.append(candace)
@@ -58,7 +42,7 @@ init -1 python:
             not_met_yet_list.append(salon_manager)
         if aunt.get_destination(specified_time = 2) == aunt_bedroom: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(aunt)
-        if "sarah" in globals() and sarah.get_destination(specified_time = 1) == sarah.home: # She'll be scheduled otherwise when met.
+        if "sarah" in globals() and sarah.event_triggers_dict.get("first_meeting", False) == False: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(sarah)
         if "starbuck" in globals() and starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
             not_met_yet_list.append(starbuck)
@@ -90,7 +74,7 @@ init -1 python:
         return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
 
     def people_in_role(role):
-        return [x for x in all_people_in_the_game([mc]) if x.has_role(role)]
+        return [x for x in all_people_in_the_game() if x.has_role(role)]
 
     # returns a single employee when number of employees == 1
     # returns a tuple of employees when number of employees > 1

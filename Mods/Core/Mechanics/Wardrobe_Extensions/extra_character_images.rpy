@@ -141,4 +141,4 @@ init 2 python:
 
                     with zip_manager.Locks[position]:
                         mobile_zip_dict[self.position].close()
-                        mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r") #May have to convert to a renpy_file first, but I dthink Zipfile will have alreayd done that
+                        mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")

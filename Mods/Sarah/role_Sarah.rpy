@@ -39,7 +39,7 @@ init 2 python:
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
-            eyes = "dark blue", personality = Sarah_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = sarah_wardrobe, \
+            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
             stat_array = [4,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit,
             force_random = True, forced_opinions = [
@@ -1046,6 +1046,7 @@ label Sarah_get_drinks_label():
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_sarah_grabbing_drinks_1
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person.char "Oh my god... ever since you came back into my life, I'd been hoping... maybe this was all happening for a reason."
+        $ scene_manager.draw_scene()
         "You lay down on your side next to her. She scoots next to you and lays her head on your arm."
         the_person.char "Can we... can I just be close to you for a while? I'm not ready for this day to end!"
         $ the_person.change_happiness(5)
@@ -1055,6 +1056,7 @@ label Sarah_get_drinks_label():
         "She is starting to doze off, when suddenly she wakes up and gets up."
     else:
         the_person.char "Mmm, that was nice. It's been a while since I was able to do that."
+        $ scene_manager.draw_scene()
         "She rolls on her side and looks at you."
         the_person.char "So... friends with benefits then? I think that is an arrangement that I could live with."
         mc.name "Great! Yeah if you get the urge, I'm up for a hookup now and then."

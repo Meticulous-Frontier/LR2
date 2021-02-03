@@ -221,26 +221,18 @@ init 5 python:
     Position.double_orgasm = property(get_double_orgasm, set_double_orgasm, del_double_orgasm, "Double orgasm label")
 
     def call_orgasm_enhanced(self, the_person, the_location, the_object):
-        if self.double_orgasm and mc.arousal >= mc.max_arousal:  #Rely on girl orgasm tocall default orgasm if appropriate
-            # renpy.say("","Test 4")
+        if self.double_orgasm and mc.arousal >= mc.max_arousal:
             renpy.call(self.double_orgasm, the_person, the_location, the_object)
-            # report_log["guy orgasms"] += 1  #TODO we need to find a way to add guy orgasm to the report log! #Trist any idea how to do this safely?
         else:
-            self.call_default_orgasm(the_person, the_location, the_object)
-            # renpy.say("","Test 3")
+            renpy.call(self.orgasm_description, the_person, the_location, the_object)
         return
 
-    def call_default_orgasm(self, the_person, the_location, the_object):
-        renpy.call(self.orgasm_description, the_person, the_location, the_object)
-
     Position.call_orgasm = call_orgasm_enhanced
-    Position.call_default_orgasm = call_default_orgasm
 
-    def post_double_orgasm(the_person):
-        # renpy.say("","Test 2")
+    def post_double_orgasm(person):
         mc.reset_arousal()
         mc.recently_orgasmed = True
-        the_person.change_obedience(5)
-        if report_log != None:
-            report_log["guy orgasms"] = report_log["guy orgasms"] + 1
+        person.change_obedience(5)
+        if "report_log" in globals():
+            report_log["guy orgasms"] = report_log.get("guy orgasms", 0) + 1
         return

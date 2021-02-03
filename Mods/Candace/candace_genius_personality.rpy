@@ -508,6 +508,7 @@ label genius_flirt_response_high(the_person):
                 "You take [the_person.possessive_title]'s hand and lead her away. She follows you happily."
                 "After searching for a couple of minutes you find a quiet space with just the two of you."
                 the_person.char "Well... What did you want me all alone for?"
+                $ the_person.draw_person(position = "kissing")
                 "She steps close to you and puts her arms around your waist. She brings her face close to yours."
 
                 if the_person.has_taboo("kissing"):
@@ -516,6 +517,7 @@ label genius_flirt_response_high(the_person):
                 else:
                     pass
 
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_47
                 $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -533,6 +535,7 @@ label genius_flirt_response_high(the_person):
             "She looks around."
             the_person.char "[the_person.mc_title], it's just us here."
             mc.name "So you're saying my chances are good?"
+            $ the_person.draw_person(position = "kissing")
             "She takes a step closer to you and puts her arms around your waist, bringing her face close to yours."
             the_person.char "They could certainly be worse. Let's just... see where things go."
 
@@ -547,7 +550,6 @@ label genius_flirt_response_high(the_person):
             the_person.char "Maybe we can... fool around a little? Does that sound fun?"
             $ the_person.draw_person()
 
-        "She steps closer and puts her hands around your waist, bringing her face close to yours."
         menu:
             "Kiss her":
                 if the_person.has_taboo("kissing"):
@@ -556,6 +558,7 @@ label genius_flirt_response_high(the_person):
                 else:
                     pass
 
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_genius_48
                 $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -564,6 +567,7 @@ label genius_flirt_response_high(the_person):
             "Just flirt":
                 mc.name "I wish we could, but I'll need to take a rain check."
                 "[the_person.title] pouts and steps back, disappointed."
+                $ the_person.draw_person()
                 mc.name "Don't worry, we'll get there soon enough. I just want to wait for the right time."
                 #TODO: There should be boyfriend/family specific variants here like "Right, what was I even thinking? I don't know what came over me."
                 the_person.char "Right. Sure."
@@ -624,12 +628,14 @@ label genius_flirt_response_girlfriend(the_person):
     else:
         # You're alone, so she's open to fooling around.
         the_person.char "Oh, you! Come here, I want to kiss you!"
+        $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."
         the_person.char "This is so nice..."
         menu:
             "Kiss her":
                 "You place a gentle hand on her chin and raise her lips back to yours."
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "This time when you kiss her it's slow and sensual. You hear her sigh happily, and she presses her body against yours."
                 call fuck_person(the_person, start_position = kissing, skip_intro = True) from _call_fuck_genius_73
                 $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -640,6 +646,7 @@ label genius_flirt_response_girlfriend(the_person):
                 the_person.char "Mmm... Can we just stay like this for a moment?"
                 mc.name "Of course."
                 "You hold [the_person.possessive_title] for a few minutes in silence."
+                $ the_person.draw_person()
                 "She finally breaks the hug steps back."
                 the_person.char "Maybe next time we can... do some more kissing? I think I'd like that."
                 mc.name "I'd like that too."

@@ -209,7 +209,6 @@ init -1 python:
         if __builtin__.len(outfitname) == 0:
             return "Naked"
 
-        self.update_slut_requirement()
         self.name = get_name_classification(self.slut_requirement) + " " + outfitname
 
         return self.name

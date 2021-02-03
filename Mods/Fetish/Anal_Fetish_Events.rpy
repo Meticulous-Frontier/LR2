@@ -375,7 +375,7 @@ init 2 python:
 
     def get_anal_fetish_non_employee():
         meets_fetish_list = []
-        for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, starbuck, stephanie, mc]):
+        for person in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, starbuck, stephanie]):
             if person.has_role(anal_fetish_role):
                 if person.event_triggers_dict.get("LastAnalFetish", 0) + 10 < day:
                     meets_fetish_list.append(person)

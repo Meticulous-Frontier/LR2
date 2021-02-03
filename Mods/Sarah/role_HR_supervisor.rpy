@@ -1007,9 +1007,9 @@ label HR_director_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
         the_person.char "Thank you sir! I am willing to do this next week again if you decide to."
         $ set_HR_director_unlock("blowjob", True)
-        "She cleans herself up and makes herself presentable again."
-
         $ the_person.apply_planned_outfit()
+        $ scene_manager.update_actor(the_person, position = "stand3")
+        "She cleans herself up and makes herself presentable again."
         return
 
     if get_HR_director_unlock("titfuck") == False:
@@ -1035,8 +1035,9 @@ label HR_director_sexy_meeting_start_label(the_person):
             "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
             the_person.char "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
             "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
-            "Eventually she cleans herself up and makes herself presentable again."
             $ the_person.apply_planned_outfit()
+            $ scene_manager.update_actor(the_person, position = "stand3")
+            "Eventually she cleans herself up and makes herself presentable again."
             return
 
     if Sarah_unlock_special_tit_fuck_requirement() and the_person == sarah:
@@ -1070,8 +1071,9 @@ label HR_director_sexy_meeting_start_label(the_person):
             "[the_person.possessive_title] lays on your desk, recovering."
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person.char "Ah, yes, I suspected it would be, sir!"
-            "Eventually she cleans herself up and makes herself presentable again."
             $ the_person.apply_planned_outfit()
+            $ scene_manager.update_actor(the_person, position = "stand3")
+            "Eventually she cleans herself up and makes herself presentable again."
             return
 
     if get_HR_director_unlock("bent over desk") == False:
@@ -1107,8 +1109,9 @@ label HR_director_sexy_meeting_start_label(the_person):
                 else:
                     "[the_person.possessive_title] slowly recovers from using her body for your pleasure."
                     the_person.char "Mmm, happy to be of service, sir. We can do that again next time... if you want!"
-                "Eventually she cleans herself up and makes herself presentable again."
                 $ the_person.apply_planned_outfit()
+                $ scene_manager.update_actor(the_person, position = "stand3")
+                "Eventually she cleans herself up and makes herself presentable again."
                 return
 
 
@@ -1195,6 +1198,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ the_person.apply_planned_outfit()
                 "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
     else:
+        $ the_person.apply_planned_outfit()
         "She quickly starts to get dressed to continue your meeting."
 
 
@@ -1404,6 +1408,7 @@ label HR_director_headhunt_interview_label(the_person):
 
     call hire_select_process([prospect, 1]) from _call_hire_prospect_process_1  #Copying how Vren calls this... hopefully this is right...
 
+    $ scene_manager.draw_scene()
     if _return == prospect: #MC chooses to hire her
         mc.name "Alright [the_person.title], this looks promising. Good work finding her."
         $ the_person.change_happiness(5)

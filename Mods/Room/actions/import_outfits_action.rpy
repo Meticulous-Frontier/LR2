@@ -49,7 +49,7 @@ label import_wardrobe_label():
     return
 
 label give_wardrobe_label():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game([mc]), "Clothes for", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(), "Clothes for", ["Back"])]))
     $ person_choice = _return
 
     if not person_choice == "Back":

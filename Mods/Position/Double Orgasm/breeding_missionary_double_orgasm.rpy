@@ -1,7 +1,7 @@
 init 5 python:
-    breeding_missionary.double_orgasm = "double_orgasm_breeding_missionary"
+    breeding_missionary.double_orgasm = "breeding_missionary_double_orgasm"
 
-label double_orgasm_breeding_missionary(the_girl, the_location, the_object):
+label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
     "[the_girl.title] is scratching her fingernails down your back. She is moaning with every thrust."
     the_girl "It's so good... I'm gonna cum!"
     "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her pussy it's not long before you're pushed past the point of no return."

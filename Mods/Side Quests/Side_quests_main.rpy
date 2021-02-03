@@ -126,7 +126,7 @@ init python: #For now default init. May change later if we know better.
                 self.unavailable_person_identifiers.append(person.identifier)
 
         def unavailable_people(self):
-            return [x for x in known_people_in_the_game([mc]) if x.identifier in self.unavailable_person_identifiers]
+            return [x for x in known_people_in_the_game() if x.identifier in self.unavailable_person_identifiers]
 
         def is_person_blocked(self, person):
             return person.identifier in self.unavailable_person_identifiers

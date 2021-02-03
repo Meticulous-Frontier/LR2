@@ -42,5 +42,7 @@ init -1 python:
             return "chubby " + pronoun
         elif person.body_type == "standard_body":
             return "curvy " + pronoun
+        elif person.body_type == "standard_preg_body":
+            return "pregnant " + pronoun
         else:
             return "skinny " + pronoun

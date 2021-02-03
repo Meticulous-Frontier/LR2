@@ -1,8 +1,8 @@
 init 2:
     screen main_ui(): #The UI that shows most of the important information to the screen.
         python:
-            known = len(known_people_in_the_game([mc]))
-            total = len(all_people_in_the_game([mc]))
+            known = len(known_people_in_the_game())
+            total = len(all_people_in_the_game())
 
         frame:
             background "Info_Frame_1.png"

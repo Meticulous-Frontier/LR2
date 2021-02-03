@@ -13,7 +13,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             if mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans when she feels you filling the condom deep inside of her."
                 $ the_girl.call_dialogue("cum_condom")
-                "Her cunt quivers as she joins you in orgasm. Her body gose rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
+                "Her cunt quivers as she joins you in orgasm. Her body goes rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
                 "You wait until her orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
                 if (the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50) or the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("drinking cum")

@@ -10,6 +10,18 @@ init -1:
             store.mc.business.serum_production_array[array_to_change][3] = __builtin__.int(new_amount)
             renpy.restart_interaction()
 
+        def color_indicator(variable, max_value = 100): # Gives color indication to a value range split into 5.
+            if variable >= max_value / 1.25: # 80%
+                return "{color=#24ed27}" + str(variable) +"{/color}"
+            if variable >= max_value / 1.67: # 60%
+                return "{color=#8edb21}" + str(variable) +"{/color}"
+            if variable >= max_value / 2.5: # 40%
+                return "{color=#ffec6e}" + str(variable) +"{/color}"
+            if variable >= max_value / 5: # 20%
+                return "{color=#ed9d4c}" + str(variable) +"{/color}"
+            else: # less than 20%
+                return "{color=#ff6347}" + str(variable) +"{/color}"
+
 init 2:
     screen serum_production_select_ui:
         add "Science_Menu_Background.png"
