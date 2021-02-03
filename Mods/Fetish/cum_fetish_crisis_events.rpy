@@ -20,10 +20,10 @@ init 2 python:
         return get_random_from_list([x for x in [mom, lily] if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     def get_fetish_cum_dosage_employee():
-        return get_random_from_list([x for x in mc.business.get_employee_list() if x.has_cum_fetish() and x.person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     def get_fetish_cum_dosage_non_employee():
-        return get_random_from_list([x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily]) if x.has_cum_fetish() and x.person.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
+        return get_random_from_list([x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily]) if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     cum_fetish_morning_shower_crisis = ActionMod("Morning shower with company", cum_fetish_morning_shower_requirement, "cum_fetish_morning_shower_label",
         menu_tooltip = "You are take a shower when a family member joins you.", category = "Fetish", is_crisis = True, crisis_weight = 5)
