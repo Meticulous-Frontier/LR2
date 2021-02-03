@@ -128,7 +128,7 @@ init 2 python:
             while tries < 3:
                 try:
                     if not self.filename in zip_manager.Cache[self.position]:
-                        with zip_manager.Locks[position]:
+                        with zip_manager.Locks[self.position]:
                             zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
 
                     sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
@@ -139,6 +139,6 @@ init 2 python:
                         renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
                         return renpy.display.pgrender.surface((2, 2), True)
 
-                    with zip_manager.Locks[position]:
+                    with zip_manager.Locks[self.position]:
                         mobile_zip_dict[self.position].close()
                         mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")
