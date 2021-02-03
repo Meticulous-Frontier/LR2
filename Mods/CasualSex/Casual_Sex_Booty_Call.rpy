@@ -14,7 +14,7 @@ init 3 python:
         possible_people = []
         for person in known_people_in_the_game():
             # check if person has a casual sex role and we have her phone number
-            if person.has_role([casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict.get("booty_call", False):
+            if person.has_role([casual_hotwife_role, casual_FA_role]) and person.event_triggers_dict.get("booty_call", False) and day > person.event_triggers_dict.get("last_booty_call", 0) + 10:
                 possible_people.append(person)
 
         return get_random_from_list(possible_people)
@@ -33,6 +33,7 @@ label casual_sex_booty_call_label:
     menu:
         "Definitely":
             the_person.char "Great!"
+            $ the_person.event_triggers_dict["last_booty_call"] = day
             $ the_person.strip_outfit(delay = 0)
             $ the_person.call_dialogue("hookup_accept")
             if the_person.arousal > 100 and the_person.core_sluttiness < 100:

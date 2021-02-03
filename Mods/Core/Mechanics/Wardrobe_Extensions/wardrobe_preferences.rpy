@@ -48,7 +48,7 @@ init 0 python:
             self.no_high_heels = person.get_opinion_score("high heels") < 0
             self.no_clothes = person.get_opinion_score("not wearing anything") > 0
             self.prefer_clothes = person.get_opinion_score("not wearing anything") < 0
-            self.slut_modifier = person.get_opinion_score("conservative outfits")
+            self.slut_modifier = person.get_opinion_score("conservative outfits") * 2
 
             # skimpy preference overrides conservative outfit choice
             if (self.skimpy_outfits or self.skimpy_uniforms):
@@ -148,7 +148,7 @@ init 0 python:
         def evaluate_underwear(self, underwear, sluttiness_limit, sluttiness_min = 0):
             slut_score = underwear.get_underwear_slut_score()
 
-            if not (underwear.get_underwear_slut_score() <= sluttiness_limit and underwear.get_underwear_slut_score() >= sluttiness_min):
+            if not (slut_score <= sluttiness_limit and slut_score >= sluttiness_min):
                 return False
             if (not self.no_underwear and __builtin__.len(underwear.upper_body + underwear.lower_body + underwear.feet) < 1) or (self.no_underwear and __builtin__.len(underwear.upper_body + underwear.lower_body + underwear.feet)) > 1:
                 return False

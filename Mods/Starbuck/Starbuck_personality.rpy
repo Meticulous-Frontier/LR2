@@ -410,14 +410,14 @@ label starbuck_flirt_response_high(the_person):
                 the_person.char "Mmm, okay! Let's go!"
                 "[the_person.possessive_title] takes your hand and leads you between a few shelves to a door for employees only."
                 "You step through and she follows you, locking the door behind her."
+                $ the_person.draw_person(position = "kissing")
                 "She steps close to you and puts her arms around your waist. She brings her face close to yours."
 
                 if the_person.has_taboo("kissing"):
                     $ the_person.call_dialogue("kissing_taboo_break")
                     $ the_person.break_taboo("kissing")
-                else:
-                    pass
 
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _starbuck_flirt_response_high_1
                 $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -435,6 +435,7 @@ label starbuck_flirt_response_high(the_person):
             "She looks around for a moment, the turns her head back to you."
             the_person.char "[the_person.mc_title], I... I mean, it's just us here."
             mc.name "So you're saying my chances are good?"
+            $ the_person.draw_person(position = "kissing")
             "She takes a step closer to you and puts her arms around your waist, bringing her face close to yours."
             the_person.char "They could certainly be worse. Let's just... see where things go."
 
@@ -449,7 +450,6 @@ label starbuck_flirt_response_high(the_person):
             mc.name "Don't worry, I'll make sure every girl here is jealous of how you're getting it."
             the_person.char "Oh? Those better not be empty words!"
 
-        "She steps closer and puts her hands around your waist, bringing her face close to yours."
         menu:
             "Kiss her.":
                 if the_person.has_taboo("kissing"):
@@ -458,6 +458,7 @@ label starbuck_flirt_response_high(the_person):
                 else:
                     pass
 
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
                 call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _starbuck_flirt_response_high_2
                 $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -465,6 +466,7 @@ label starbuck_flirt_response_high(the_person):
 
             "Just flirt.":
                 mc.name "I wish we could, but I'll need to take a rain check."
+                $ the_person.draw_person()
                 "[the_person.title] pouts and steps back, disappointed."
                 mc.name "Don't worry, we'll get there soon enough. I just want to wait for the right time."
                 the_person.char "Right. Sure."

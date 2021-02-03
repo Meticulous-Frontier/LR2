@@ -1046,6 +1046,7 @@ label Sarah_get_drinks_label():
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_sarah_grabbing_drinks_1
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person.char "Oh my god... ever since you came back into my life, I'd been hoping... maybe this was all happening for a reason."
+        $ scene_manager.draw_scene()
         "You lay down on your side next to her. She scoots next to you and lays her head on your arm."
         the_person.char "Can we... can I just be close to you for a while? I'm not ready for this day to end!"
         $ the_person.change_happiness(5)
@@ -1055,6 +1056,7 @@ label Sarah_get_drinks_label():
         "She is starting to doze off, when suddenly she wakes up and gets up."
     else:
         the_person.char "Mmm, that was nice. It's been a while since I was able to do that."
+        $ scene_manager.draw_scene()
         "She rolls on her side and looks at you."
         the_person.char "So... friends with benefits then? I think that is an arrangement that I could live with."
         mc.name "Great! Yeah if you get the urge, I'm up for a hookup now and then."

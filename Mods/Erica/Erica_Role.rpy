@@ -699,6 +699,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
                 the_person.char "Mmm... god I'm glad you know how to use that cock."
             $ the_person.clear_situational_slut("horny")
+            $ the_person.draw_person()
             "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
         else:
             the_person.char "[the_person.mc_title], I really need to get off. Can you get naked please?"
@@ -726,6 +727,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
 
             $ the_report = _return
             $ the_person.clear_situational_slut("horny")
+            $ the_person.draw_person(position = "sitting")
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.title] sits down on the bench, you can see her trembling, caused by aftershocks from her orgasm."
                 the_person.char "Mmm... god I'm glad you know how to make a girl cum so hard."
@@ -1116,6 +1118,7 @@ label erica_post_race_love_label(the_person):
     the_person.char "That was amazing... but I need to study, I've got a test on Monday. I love spending time with you, but you ARE a bit distracting..."
     mc.name "I understand. Tell you what, I'll head out, but before I go I'll order some lunch to get delivered, that way you can study without having to worry about making food."
     $ the_person.change_love(5)
+    $ the_person.draw_person(position = "kissing")
     the_person.char "Aww, you don't have to do that. You are such a sweetheart."
     $ the_person.review_outfit()
     $ the_person.draw_person()
@@ -1124,6 +1127,8 @@ label erica_post_race_love_label(the_person):
     $ title_choice = get_random_from_list(["BBQ Rainbow Beef salad", "Fresh Salmon with Thai noodle salad", "Spicy Chicken and Avocado wrap"])
     mc.name "Alright, I got you a [title_choice], it should be here soon. Good luck with your studying!"
     the_person.char "Goodbye [the_person.mc_title]. I'll see you soon! And you know where I live now. Feel free to swing by once in a while..."
+    $ clear_scene()
+    $ downtown.show_background()
     "You let yourself out and start to walk away. Wow, what an amazing day! You've managed to convince [the_person.title] to go out with you."
     "You can't wait to explore her tight little body more... but one thing at a time now."
     $ the_person.clear_situational_slut("Lost Bet")
@@ -1224,6 +1229,7 @@ label erica_house_call_label(the_person):
     if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] is in an orgasm fueled daze, enjoying the effects it has on her."
     the_person.char "Thanks for stopping by... I think I'm just gonna lay down for a bit..."
+    $ the_person.draw_person(position = "missionary")
     "Once you finish getting dressed you say goodbye and let yourself out. You head home and fall into bed, too tired to do anything else."
 
     $ mc.change_location(bedroom) # go home
@@ -1673,59 +1679,59 @@ label erica_weekly_yoga_label(the_person):
     "Next to her you see [yoga_assistant.title]. They have become good friends and are chatting idly as you walk up."
 
     the_person.char "Oh hey [the_person.mc_title]!"
-    if not erica_get_is_yoga_nude():
-        if erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
-            the_person.char "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
-            the_person.char "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
-            the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au naturel."
-            yoga_assistant.char "Because the office is currently closed, this technically falls outside of the employee uniform requirements..."
-            yoga_assistant.char "But we decided that it would probably be better to run it by you before me make it official. It IS your office building, after all!"
-            "Holy fuck, they want to do yoga in the nude. You rack your brain, trying to think of a logical reason to say no. Only one thing comes to mind."
-            mc.name "Umm... I think I'm okay with that... except... Everyone still needs to wear shoes."
-            the_person.char "Shoes?"
-            mc.name "If there is a nail or something that happens to be on the floor, I don't want to be held liable in case someone gets injured."
-            yoga_assistant.char "Oh! That makes total sense."
-            the_person.char "This is great! I'll make an announcement."
-            "[the_person.possessive_title] raises her voice extra loud so everyone in the room can hear it."
-            the_person.char "Hey everyone! Good news! We just got the okay, from now on, in celebration of the female body, this will be a nude yoga class!"
-            "You hear several cheers go up from the group."
-            "You notice that [yoga_assistant.possessive_title] has already started to strip down..."
-            $ scene_manager.strip_actor_outfit(yoga_assistant)
-            the_person.char "We only ask, please leave your shoes on! This is a safety issue, in case a piece of glass or other object is left on the floor!"
-            "When she finishes the announcement, [the_person.title] starts to strip down also."
-            $ scene_manager.strip_actor_outfit(the_person)
-            "You look around and watch as the all the girls are also stripping. It is a surreal moment."
-            # "You walk over to the computer terminal in a daze. You sit down, and let the girls get started in their official, company sponsored, all nude yoga class."
-            $ scene_manager.clear_scene(reset_actor = False)
-            $ the_person.event_triggers_dict["nude_yoga"] = True
-            $ erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
+    if not erica_get_is_yoga_nude() and erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
+        the_person.char "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
+        the_person.char "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
+        the_person.char "It has been requested by multiple people here that the yoga session change the dress code to au naturel."
+        yoga_assistant.char "Because the office is currently closed, this technically falls outside of the employee uniform requirements..."
+        yoga_assistant.char "But we decided that it would probably be better to run it by you before me make it official. It IS your office building, after all!"
+        "Holy fuck, they want to do yoga in the nude. You rack your brain, trying to think of a logical reason to say no. Only one thing comes to mind."
+        mc.name "Umm... I think I'm okay with that... except... Everyone still needs to wear shoes."
+        the_person.char "Shoes?"
+        mc.name "If there is a nail or something that happens to be on the floor, I don't want to be held liable in case someone gets injured."
+        yoga_assistant.char "Oh! That makes total sense."
+        the_person.char "This is great! I'll make an announcement."
+        "[the_person.possessive_title] raises her voice extra loud so everyone in the room can hear it."
+        the_person.char "Hey everyone! Good news! We just got the okay, from now on, in celebration of the female body, this will be a nude yoga class!"
+        "You hear several cheers go up from the group."
+        "You notice that [yoga_assistant.possessive_title] has already started to strip down..."
+        $ scene_manager.strip_actor_outfit(yoga_assistant)
+        the_person.char "We only ask, please leave your shoes on! This is a safety issue, in case a piece of glass or other object is left on the floor!"
+        "When she finishes the announcement, [the_person.title] starts to strip down also."
+        $ scene_manager.strip_actor_outfit(the_person)
+        "You look around and watch as the all the girls are also stripping. It is a surreal moment."
+        # "You walk over to the computer terminal in a daze. You sit down, and let the girls get started in their official, company sponsored, all nude yoga class."
+        $ the_person.event_triggers_dict["nude_yoga"] = True
+        $ erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
 
-    the_person.char "Glad you could make it! We are just getting ready to get started."
-    yoga_assistant.char "Hello [yoga_assistant.mc_title]! I was just getting ready to fill up the water jug for the attendants."
-    "You consider offering to fill it for her. It would give you a chance to distribute a dose of serum to all the girls gathered."
-    menu:
-        "Fill it for her\n{color=#00FF00}{size=18}Give class serum{/size}{/color}":
-            call screen serum_inventory_select_ui(mc.inventory)
-            if not _return == "None":
-                $ the_serum = _return
-                if mc.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
-                    "You decide to add several doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
-                    $ dose_yoga_class_with_serum([the_person, yoga_assistant] + yoga_list, the_serum)
+    else:
+        the_person.char "Glad you could make it! We are just getting ready to get started."
+        yoga_assistant.char "Hello [yoga_assistant.mc_title]! I was just getting ready to fill up the water jug for the attendants."
+        "You consider offering to fill it for her. It would give you a chance to distribute a dose of serum to all the girls gathered."
+        menu:
+            "Fill it for her\n{color=#00FF00}{size=18}Give class serum{/size}{/color}":
+                call screen serum_inventory_select_ui(mc.inventory)
+                if not _return == "None":
+                    $ the_serum = _return
+                    if mc.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
+                        "You decide to add several doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
+                        $ dose_yoga_class_with_serum([the_person, yoga_assistant] + yoga_list, the_serum)
+                    else:
+                        "You have insufficient doses, to make the serum in the water jug effective."
+                        "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
+                    $ the_serum = None
                 else:
-                    "You have insufficient doses, to make the serum in the water jug effective."
                     "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
-                $ the_serum = None
-            else:
-                "You quickly return with the water jug with absolutely no serum in it and place it on the counter."
-        "Chat with [the_person.title]":
-            mc.name "Don't let me keep you."
-            yoga_assistant.char "Right..."
-            "[yoga_assistant.title] grabs the jug and leaves the room."
-            $ scene_manager.hide_actor(yoga_assistant)
-            "You turn to [the_person.title]"
-            mc.name "Thank you again for doing this. I really feel like this is a huge benefit for the company."
-            the_person.char "Of course! Glad to do it. I get the feeling, from talking to the girls here, that you are a great boss to work for too!"
-            mc.name "Alright, I'll let you get to it. I'm going to try and get some work done, let me know if you need anything."
+            "Chat with [the_person.title]":
+                mc.name "Don't let me keep you."
+                yoga_assistant.char "Right..."
+                "[yoga_assistant.title] grabs the jug and leaves the room."
+                $ scene_manager.hide_actor(yoga_assistant)
+                "You turn to [the_person.title]"
+                mc.name "Thank you again for doing this. I really feel like this is a huge benefit for the company."
+                the_person.char "Of course! Glad to do it. I get the feeling, from talking to the girls here, that you are a great boss to work for too!"
+                mc.name "Alright, I'll let you get to it. I'm going to try and get some work done, let me know if you need anything."
+
     "Yeah head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [the_person.possessive_title] starting things up."
     the_person.char "Good morning everyone! Thanks for coming out. We are going to start things out slowly this morning with some stretching!"
     "You watch as your employees start out doing so light stretching. Everyone seems to be paying attention and trying their best."

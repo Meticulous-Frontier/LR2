@@ -158,7 +158,7 @@ init -1 python:
         if minimum_sluttiness > 40: # prevent minimum sluttiness from going too high (late game, high sluttiness)
             minimum_sluttiness = 40
         if target_sluttiness > 100 and minimum_sluttiness < 20: # when very slutty, don't bother with non-sexy clothes.
-            minimum_sluttiness = 20
+            minimum_sluttiness = 20 + minimum_sluttiness
         return minimum_sluttiness
 
     def build_assembled_outfit(outfit_under, outfit_over):
@@ -178,8 +178,6 @@ init -1 python:
 
         for acc in outfit_over.accessories:
             assembled_outfit.accessories.append(acc.get_copy())
-
-        assembled_outfit.update_slut_requirement()
         return assembled_outfit
 
     def get_random_appropriate_outfit_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):

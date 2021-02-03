@@ -102,6 +102,7 @@ label mom_sister_snooping_action_label():
         "As you peak around her door, your cock starts to get hard at what you see."
         $ mom.arousal = 55
         $ lily.arousal = 40
+        $ girl_swap_pos = False
         $ mom.apply_outfit(Outfit("Nude"), update_taboo = True)
         $ lily.apply_outfit(Outfit("Nude"), update_taboo = True)
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
@@ -110,7 +111,7 @@ label mom_sister_snooping_action_label():
         "When you peak around the corner, you see [mom.title] on top of [lily.title]. They are eating each other out."
         mom.char "Mmmm, that's it dear, lick right there!"
         $ mom.change_arousal(12)
-        "You accidentally let out a little gasp. It must have been audible, becuase [mom.possessive_title] looks up at notices you at the door."
+        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up at notices you at the door."
         mom.char "Oh! [mom.mc_title]! Come in here honey."
         "You slowly walk in to your sister's room."
         mom.char "Ohh... Your sister is doing such a good job, I can hardly concentrate. Would you help me take care of her?"

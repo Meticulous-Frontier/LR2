@@ -160,14 +160,14 @@ init 5 python:
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in [x for x in list_of_places if x.people]:
+            place.validate_people()
             people.extend([[x, place] for x in place.people])
         return people
 
     def update_party_schedules(people):
         # exclude unique characters as to not to interfere with story lines
         for (person, place) in [x for x in people if not x[0] in unique_character_list]:
-            if not person in unique_character_list:
-                create_party_schedule(person)
+            create_party_schedule(person)
         return
 
     def advance_time_run_turn(people):

@@ -40,9 +40,13 @@ init -1 python:
             if self in room.people:
                 room.people.remove(self)
 
+        # remove from strippers
+        if self in stripclub_strippers:
+            stripclub_strippers.remove(self)
+
         # other stripclub teams
         if "stripclub_bdsm_performers" in globals():
-            for team in [stripclub_strippers, stripclub_bdsm_performers, stripclub_waitresses]:
+            for team in [stripclub_bdsm_performers, stripclub_waitresses]:
                 if self in team:
                     team.remove(self)
 
@@ -53,27 +57,35 @@ init -1 python:
         self.planned_outfit = None
         self.planned_uniform = None
 
-        for outfit in self.wardrobe.outfits + self.wardrobe.underwear_sets + self.wardrobe.overwear_sets:
-            outfit.upper_body.clear()
-            outfit.lower_body.clear()
-            outfit.feet.clear()
-            outfit.accessories.clear()
+        if self.wardrobe:
+            for outfit in self.wardrobe.outfits + self.wardrobe.underwear_sets + self.wardrobe.overwear_sets:
+                outfit.upper_body.clear()
+                outfit.lower_body.clear()
+                outfit.feet.clear()
+                outfit.accessories.clear()
+            self.wardrobe.outfits.clear()
+            self.wardrobe.underwear_sets.clear()
+            self.wardrobe.overwear_sets.clear()
+            self.wardrobe = None
 
-        self.wardrobe.outfits.clear()
-        self.wardrobe.underwear_sets.clear()
-        self.wardrobe.overwear_sets.clear()
-        self.wardrobe = None
-
-        self.special_role.clear()
-        self.on_room_enter_event_list.clear()
-        self.on_talk_event_list.clear()
-        self.event_triggers_dict.clear()
-        self.suggest_bag.clear()
-        self.broken_taboos.clear()
-        self.sex_record.clear()
-        self.opinions.clear()
-        self.sexy_opinions.clear()
-        self.broken_taboos.clear()
+        if self.special_role:
+            self.special_role.clear()
+        if self.on_room_enter_event_list:
+            self.on_room_enter_event_list.clear()
+        if self.on_talk_event_list:
+            self.on_talk_event_list.clear()
+        if self.event_triggers_dict:
+            self.event_triggers_dict.clear()
+        if self.suggest_bag:
+            self.suggest_bag.clear()
+        if self.broken_taboos:
+            self.broken_taboos.clear()
+        if self.sex_record:
+            self.sex_record.clear()
+        if self.opinions:
+            self.opinions.clear()
+        if self.sexy_opinions:
+            self.sexy_opinions.clear()
 
         # clear all references held by person object.
         del self.schedule
@@ -96,9 +108,6 @@ init -1 python:
         self.serum_effects = None
         self.idle_animation = None
         self.personal_region_modifiers = None
-        self.on_room_enter_event_list = None
-        self.on_talk_event_list = None
-        self.event_triggers_dict = None
         self.situational_sluttiness = None
         self.situational_obedience = None
         # now let the Garbage Collector do the rest (we are no longer referenced in any objects).
@@ -1431,8 +1440,6 @@ init -1 python:
 
     def review_outfit_enhanced(self, dialogue = True):
         self.outfit.remove_all_cum()
-        self.outfit.update_slut_requirement()
-
         if self.should_wear_uniform():
             self.wear_uniform() # Reset uniform
         elif self.outfit.slut_requirement > self.sluttiness:

@@ -1121,6 +1121,7 @@ label hotwife_hookup_accept(the_person):
     $ mc.location.show_background()
 
     "A few minutes later, you walk into the bar. You start walking back toward the women's restroom. The bartender nods to you as you pass the bar."
+    $ work_bathroom.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.arousal = 20
     "You discover [the_person.possessive_title] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."

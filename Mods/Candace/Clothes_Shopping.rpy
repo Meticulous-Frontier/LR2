@@ -378,8 +378,10 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
                                         $ the_person.change_stats(love = 5, happiness = 10)
+                                    $ the_person.draw_person(position = "back_peek")
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person.char "I'll be out in a minute..."
+                                    $ clear_scene()
                                     "She closes the door slowly."
                                 "Too risky":
                                     mc.name "I'm not sure I could keep it down... better play it safe."
@@ -403,6 +405,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     the_person.char "That's enough, get out of here! I'm gonna change back now."
                                     "You sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person.char "I'll be out in a minute..."
+                                    $ clear_scene()
                                     "She closes the door slowly."
                         else:  #She wants to get a little crazy
                             "She reaches down and begins to stroke you through your pants."
@@ -424,9 +427,11 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
                                         $ the_person.change_stats(love = 5, happiness = 10)
+                                    $ the_person.draw_person(position = "back_peek")
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     #TODO chance if there is anyone else at the clothing store to get noticed.
                                     the_person.char "I'll be out in a minute..."
+                                    $ clear_scene()
                                     "She closes the door slowly."
                                 "Too risky":
                                     mc.name "I'm not sure I could keep it down... better play it safe."
@@ -450,6 +455,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     the_person.char "That's enough, get out of here! I'm gonna change back now."
                                     "You sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person.char "I'll be out in a minute..."
+                                    $ clear_scene()
                                     "She closes the door slowly."
                                 "Too risky\n{color=#ff0000}{size=18}Too aroused to say no{/size}{/color} (disabled)" if mc.arousal > 50:
                                     pass
@@ -460,8 +466,8 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person.char "Yeah I was afraid of that. Thank you for your honesty!"
                     $ the_person.change_stats(slut_temp = 2, obedience = 2)
+                    $ clear_scene()
                     "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
-            $ clear_scene()
             $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
             $ the_person.draw_person()
