@@ -82,12 +82,12 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
             else:
                 "You pull your cock out of [the_girl.possessive_title]. She immediately turns around on gets on her knees in front of you."
-            $ the_girl.draw_person(position = "blowjob")
+            $ the_girl.draw_person(position = "kneeling1")
             if the_girl.get_opinion_score("being covered in cum") > 0 or the_girl.get_opinion_score("cum facials") > 0:
                 "[the_girl.possessive_title] reaches up with one handing, stroking you to finish. She reaches down with her other hand and begins to aggressively touch herself."
                 "Your orgasm hits hard. Your first jet sprays across her face. Her face is orgasmic bliss as she finishes at the same time."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 if the_girl.has_cum_fetish():
                     "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
                     "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
@@ -98,20 +98,20 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
                 "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
                 the_girl.char "Oh god... it feels so good on my skin..."
             elif the_girl.sluttiness > 60:
                 "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
                 "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
             else:
                 "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
                 "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
             "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")

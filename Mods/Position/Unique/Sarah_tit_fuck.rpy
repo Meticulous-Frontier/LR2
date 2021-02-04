@@ -127,6 +127,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
         "Cum on her face":
             "You close your eyes and focus on the sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock."
             "As your orgasm builds to its peak, you step back, sliding your cock out from her cleavage and take it up in your own hand."
+            $ the_girl.draw_person(position = "kneeling1")
             if the_girl.effective_sluttiness() > 40 or the_girl.get_opinion_score("cum facials") > 0:
                 "[the_girl.title] understands immediately what is about to happen and tilts her head up, giving you a clear target."
                 "You stroke yourself to completion and blast your load over her face, throwing thick ropes of cum on her lips, nose, and eyes."
@@ -134,7 +135,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
                 the_girl.char "What's wrong? I...!"
                 "You grunt and climax, blasting thick ropes of cum over [the_girl.title]'s surprised face. She jerks back, then waits until you're finished."
             $ the_girl.cum_on_face()
-            $ sarah_tit_fuck.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
 
     the_girl.char "Ah... Wow..."
     return
