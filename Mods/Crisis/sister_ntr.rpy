@@ -108,7 +108,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
-                    $ the_person.cum_on_face()
+                    $ cum_on_face_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     the_person.char "Yes! That's it! Cover my face!"
                     "After [man_name] finishes, she looks him in the eyes."
@@ -128,7 +128,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                     if the_person.on_birth_control:
                         the_person.char "Don't worry, I'm on the pill."
-                    $ the_person.cum_in_vagina()
+                    $ cum_in_vagina_ntr(the_person)
                     $ the_person.draw_person(position = "missionary", emotion = "happy")
                     "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                     the_person.char "Yes, [man_name]! I want it in me!"
@@ -155,7 +155,7 @@ label sister_ntr_crisis_action_label:
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
                     the_person.char "Mmmmmm... Mmmm.. Uh."
-                    $ the_person.cum_in_mouth()
+                    $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
                     man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -208,7 +208,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
-                    $ the_person.cum_on_face()
+                    $ cum_on_face_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     the_person.char "Yes! That's it! Cover my face!"
                     "After [man_name] finishes, she looks him in the eyes."
@@ -228,7 +228,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Yes! Do it, [man_name]! I want you to fill me."
                     if the_person.on_birth_control:
                         the_person.char "Don't worry, I'm on the pill."
-                    $ the_person.cum_in_vagina()
+                    $ cum_in_vagina_ntr(the_person)
                     $ the_person.draw_person(position = "against_wall", emotion = "happy")
                     "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                     the_person.char "Yes, [man_name]! I want it in me!"
@@ -255,7 +255,7 @@ label sister_ntr_crisis_action_label:
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
                     the_person.char "Mmmmmm... Mmmm.. Uh."
-                    $ the_person.cum_in_mouth()
+                    $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
                     man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -307,7 +307,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
-                    $ the_person.cum_on_face()
+                    $ cum_on_face_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     the_person.char "Yes! That's it! Cover my face!"
                     "After [man_name] finishes, she looks him in the eyes."
@@ -327,7 +327,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Wait, [man_name]. Please cum in my pussy. I want you to fill me."
                     if the_person.on_birth_control:
                         the_person.char "Don't worry, I'm on the pill."
-                    $ the_person.cum_in_vagina()
+                    $ cum_in_vagina_ntr(the_person)
                     $ the_person.draw_person(position = "standing_doggy")
                     "The man take his cock from [the_person.possessive_title] ass and sticks it into her vagina."
                     "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
@@ -355,7 +355,7 @@ label sister_ntr_crisis_action_label:
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
                     the_person.char "Mmmmmm... Mmmm.. Uh."
-                    $ the_person.cum_in_mouth()
+                    $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
                     man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -407,7 +407,7 @@ label sister_ntr_crisis_action_label:
                     the_person.char "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
                     man_name "And how can I deny that?"
                     "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
-                    $ the_person.cum_on_face()
+                    $ cum_on_face_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     the_person.char "Yes! That's it! Cover my face!"
                     "After [man_name] finishes, she looks him in the eyes."
@@ -428,7 +428,7 @@ label sister_ntr_crisis_action_label:
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
                     the_person.char "Mmmmmm... Mmmm.. Uh."
-                    $ the_person.cum_in_mouth()
+                    $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
                     man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -494,10 +494,10 @@ label sister_ntr_crisis_action_label:
                 man_name "And how can I deny that?"
                 man_name2 "Yeah, such stuff really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title] face with hot semen."
-                $ the_person.cum_on_face()
+                $ cum_on_face_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 the_person.char "Yes! That's it! Cover my face!"
-                $ the_person.cum_on_tits()
+                $ cum_on_tits_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "Their load is so huge that it starts do drip on [the_person.possessive_title] breast."
                 "After both men finishes, she looks up to them."
@@ -519,7 +519,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yes! Do it, [man_name]! I want you to fill me"
                 if the_person.on_birth_control:
                     the_person.char "Don't worry, I'm on the pill."
-                $ the_person.cum_in_vagina()
+                $ cum_in_vagina_ntr(the_person)
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                 the_person.char "Yes, [man_name]! I want it in me!"
@@ -552,7 +552,7 @@ label sister_ntr_crisis_action_label:
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
                 the_person.char "Mmmmmm... Mmmm.. Uh."
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
                 man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -561,7 +561,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
                 man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
@@ -622,10 +622,10 @@ label sister_ntr_crisis_action_label:
                 man_name "And how can I deny that?"
                 man_name2 "Yeah, such stuff really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title] face with hot semen."
-                $ the_person.cum_on_face()
+                $ cum_on_face_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 the_person.char "Yes! That's it! Cover my face!"
-                $ the_person.cum_on_tits()
+                $ cum_on_tits_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "Their load is so huge that it starts do drip on [the_person.possessive_title] breast."
                 "After both men finishes, she looks up to them."
@@ -647,7 +647,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yes! Do it, [man_name]! I want you to fill me up."
                 if the_person.on_birth_control:
                     the_person.char "Don't worry, I'm on the pill."
-                $ the_person.cum_in_vagina()
+                $ cum_in_vagina_ntr(the_person)
                 $ the_person.draw_person(position = "standing_doggy")
                 "After a few hard thrusts, [man_name] starts spilling his semen into [the_person.possessive_title]."
                 the_person.char "Yes, [man_name]! I want it in me!"
@@ -658,7 +658,7 @@ label sister_ntr_crisis_action_label:
                 "The man comes up to her and enters [the_person.possessive_title] cum filled pussy. Since he is pretty aroused, it doesn't take him long to cum."
                 man_name2 "Take it all in, [the_person.name]!"
                 the_person.char "Yes! Fill me more!"
-                $ the_person.cum_in_vagina()
+                $ cum_in_vagina_ntr(the_person)
                 $ the_person.draw_person(position = "standing_doggy")
                 "After both men shot their loads into [the_person.possessive_title], you see sperm flowing out of her vagina and down on her legs."
                 the_person.char "Hope you like the view. Now I go wash myself and then we have to get back to studying. I don't want a bad grade on that test.."
@@ -682,7 +682,7 @@ label sister_ntr_crisis_action_label:
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
                 the_person.char "Mmmmmm... Mmmm.. Uh."
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
                 man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -691,7 +691,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
                 man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body convulse as he shoots his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
@@ -751,10 +751,10 @@ label sister_ntr_crisis_action_label:
                 man_name "How could I deny that?"
                 man_name2 "Yeah, that really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title]'s face with hot semen."
-                $ the_person.cum_on_face()
+                $ cum_on_face_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 the_person.char "Yes! That's it! Cover my face!"
-                $ the_person.cum_on_tits()
+                $ cum_on_tits_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "Their loads are so huge that it slowly drips down on [the_person.possessive_title]'s breasts."
                 "After both men finish, she looks up to them."
@@ -776,7 +776,7 @@ label sister_ntr_crisis_action_label:
                 the_person.char "Yes! Do it, guys! I want you to fill me up."
                 if the_person.on_birth_control:
                     the_person.char "Don't worry, I'm on the pill."
-                $ the_person.cum_in_vagina()
+                $ cum_in_vagina_ntr(the_person)
                 $ the_person.draw_person(position = "doggy")
                 "After a few hard thrusts, both men start spilling his semen into [the_person.possessive_title] holes."
                 the_person.char "Yes! I want it in me! Fill me with cum!"
@@ -804,7 +804,7 @@ label sister_ntr_crisis_action_label:
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
                 the_person.char "Mmmmmm... Mmmm.. ahh."
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
                 man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -813,7 +813,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
                 man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body shiver as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
@@ -870,10 +870,10 @@ label sister_ntr_crisis_action_label:
                 man_name "And how can I deny that?"
                 man_name2 "Yeah, such stuff really turns me on!"
                 "They stroke their dicks for few moments and start to cover [the_person.possessive_title] face with hot semen."
-                $ the_person.cum_on_face()
+                $ cum_on_face_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 the_person.char "Yes! That's it! Cover my face!"
-                $ the_person.cum_on_tits()
+                $ cum_on_tits_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
                 "Their load is so huge that it starts do drip on [the_person.possessive_title] breasts."
                 "After both men finishes, she looks up to them."
@@ -897,7 +897,7 @@ label sister_ntr_crisis_action_label:
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
                 the_person.char "Mmmmmm... Mmmm.. Uh."
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
                 man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
@@ -906,7 +906,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
                 man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
-                $ the_person.cum_in_mouth()
+                $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
