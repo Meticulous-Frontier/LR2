@@ -417,12 +417,12 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
         if (the_girl.get_opinion_score("drinking cum")) > (the_girl.get_opinion_score("cum facials")):
             "[the_girl.possessive_title] looks slightly disappointed."
         $ blowjob.current_modifier = None
-        $ blowjob.redraw_scene(the_girl)
+        $ the_girl.draw_person(position = "kneeling1")
         if the_girl.has_role(cum_external_role):
             "[the_girl.title] takes a hold of your cock with one hand and starts to pump it."
             "She sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
-            $ blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She shivers herself as your cum splashes over her."
             $ the_girl.change_arousal(10)
 
@@ -435,22 +435,22 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
                 "Pull her back":
                     "You grab your cock with one hand and her head with the other. You hold her head in place as you use your other hand to pump your cum over [the_girl.possessive_title]'s face."
                     $ the_girl.cum_on_face()
-                    $ blowjob.redraw_scene(the_girl)
+                    $ the_girl.draw_person(position = "kneeling1")
                     $ the_girl.change_stats(love = the_girl.get_opinion_score("cum facials"), happiness = the_girl.get_opinion_score("cum facials"))
         elif (the_girl.effective_sluttiness() > 80 or the_girl.get_opinion_score("cum facials") > 0):
             "[the_girl.title] sticks out her tongue for you, holds still and looks you in the eye, eager to take your hot load."
             $ the_girl.cum_on_face()
-            $ blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished as she maintains eye contact."
         elif the_girl.effective_sluttiness() > 60:
             "[the_girl.title] closes her eyes and waits patiently for you to cum."
             $ the_girl.cum_on_face()
-            $ blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
         else:
             "[the_girl.title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
             $ the_girl.cum_on_face()
-            $ blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         if the_girl.has_face_cum():
             "You take a deep breath to steady yourself once you've finished cumming. [the_girl.title] looks up at you from her knees, face covered in your semen."
