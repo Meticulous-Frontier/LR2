@@ -2087,7 +2087,7 @@ init -1 python:
     def have_orgasm(self, the_position = None, the_object = None, half_arousal = True):
         mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
-        self.change_slut_temp(5)
+        self.change_slut_temp(3)
         self.change_happiness(5)
         if half_arousal:
             self.change_arousal(-self.arousal/2)

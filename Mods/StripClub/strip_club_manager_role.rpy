@@ -10,8 +10,8 @@ init 3303 python:
     def manager_role_status_acquisition(person):
         if person.has_role(slave_role):
             slave_release_slave(person)
-            # restore stat loss from removing slave
-            person.change_stats(happiness = 20, love = 20, obedience = 50, add_to_log = False)
+            # restore partial stat loss from removing slave
+            person.change_stats(happiness = 10, love = 10, obedience = 20, add_to_log = False)
 
         person.update_opinion_with_score("taking control", 2, add_to_log = False)
         if not person in unique_character_list and not person.personality is alpha_personality:
@@ -68,7 +68,7 @@ init 3303 python:
     def promote_strip_club_stripper_to_manager(person):
         if person.love <= 0:
             person.love = 5
-        person.change_stats(happiness = 15, obedience = 10, love = 5)
+        person.change_stats(happiness = 10, obedience = 5, love = 5)
         person.remove_role(stripper_role)
         person.remove_role(bdsm_performer_role)
         person.remove_role(waitress_role)

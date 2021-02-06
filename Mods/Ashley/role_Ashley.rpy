@@ -737,7 +737,7 @@ label ashley_post_handjob_convo_label(the_person):
         "Reassure her":
             mc.name "Don't worry, [the_person.title]. I know we both need a chance to think about things, and I always find that coffee helps me think."
             the_person.char "Yeah... I suppose a coffee would be good for that..."
-            $ the_person.change_stats(obedience = 10)
+            $ the_person.change_stats(obedience = 5)
         "Tell her it was hot" if the_person.sluttiness >= 20:
             mc.name "Don't worry, [the_person.title]. I had a great time at the concert... and what happened in my office was fucking hot..."
             "[the_person.possessive_title] looks up at you, a bit surprised by your comment."

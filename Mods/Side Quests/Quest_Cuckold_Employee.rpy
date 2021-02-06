@@ -344,7 +344,7 @@ label quest_cuckold_employee_decision_label():
     $ the_person.break_taboo("vaginal_sex")
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
-        $ the_person.change_stats(happiness = 10, obedience = 10, love = 5)
+        $ the_person.change_stats(happiness = 5, obedience = 5, love = 2)
         the_person.char "There's so much, god I have such a good bull."
         mc.name "Do you think that did it?"
         the_person.char "I hope so!... but you never know."
@@ -438,7 +438,7 @@ label quest_cuckold_employee_rethink_decision_label():
     $ the_person.break_taboo("vaginal_sex")
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, I can feel it inside me! We really did it."
-        $ the_person.change_stats(happiness = 10, obedience = 10, love = 5, slut_temp = 5)
+        $ the_person.change_stats(happiness = 5, obedience = 5, love = 2, slut_temp = 3)
         the_person.char "There's so much, god I have such a good bull."
         mc.name "Do you think that did it?"
         the_person.char "I hope so!... but you never know."
@@ -528,8 +528,8 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person.char "Oh god, every risky load feels even better than the last..."
-        $ the_person.change_love(10, max_modified_to = 80)
-        $ the_person.change_stats(happiness = 10, obedience = 10)
+        $ the_person.change_love(3, max_modified_to = 80)
+        $ the_person.change_stats(happiness = 3, obedience = 3)
         "You gently rub her stomach."
         mc.name "Your hungry cunt feels like its sucking the cum out of me. It's amazing, honestly."
         mc.name "A little part of me is hoping it doesn't take right away and we have to keep trying for a while."
@@ -638,8 +638,8 @@ label quest_cuckold_employee_gloryhole_label():
     "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut_temp(5, add_to_log = False)
-    $ the_person.change_happiness(5, add_to_log = False)
+    $ the_person.change_slut_temp(3, add_to_log = False)
+    $ the_person.change_happiness(3, add_to_log = False)
     if not the_person.is_pregnant():
         $ become_pregnant(the_person)
     $ quest_cuckold_employee().set_quest_flag(35)
@@ -738,7 +738,7 @@ label quest_cuckold_employee_knocked_up_label():
         the_person.char "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
-    $ the_person.change_stats(obedience = 20, slut_temp = 20, slut_core = 20)  #She is now your slutty breeding stock.
+    $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)  #She is now your slutty breeding stock.
     #TODO consider giving her a collar?
     $ quest_cuckold_employee().set_quest_flag(101)
     $ the_person.personality = get_breeding_stock_personality(the_person)

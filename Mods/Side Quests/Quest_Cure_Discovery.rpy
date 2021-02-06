@@ -321,25 +321,25 @@ label quest_cure_discovery_patent_kept_label():
                 if skull_fuck in the_report.get("positions_used", []):  #You really roughed her up
                     "[the_person.possessive_title] mascara is running from tears caused by being gagged when you roughly fucked her throat."
                     mc.name "I know that this story had a happy ending, with the patent going to the Red Cross, but remember, this is my business. Don't do things behind my back again."
-                    $ the_person.change_stats(obedience = 50, love = -10, slut_temp = 20, slut_core = 10)
+                    $ the_person.change_stats(obedience = 10, love = -10, slut_temp = 5, slut_core = 2)
                     "Her voice is trembling as she responds."
                     the_person.char "Yes... yes sir..."
                 elif deepthroat in the_report.get("positions_used", []):  #She took it deep.
                     "[the_person.possessive_title] is recovering from taking your cock deep down her throat."
                     mc.name "I know this story had a happy ending, with the patent going to the Red Cross, but please don't do things behind my back like that again."
-                    $ the_person.change_stats(obedience = 20, slut_temp = 10, slut_core = 5)
+                    $ the_person.change_stats(obedience = 5, slut_temp = 5, slut_core = 3)
                     the_person.char "Yes sir, it won't happen again!"
                 else: #Just a BJ
                     "[the_person.possessive_title] licks her lips, she seems to have enjoyed getting on her knees for you."
                     mc.name "Thank you for doing the right thing, but please let me know before you take actions like that again."
-                    $ the_person.change_stats(love = 20, slut_temp = 5, slut_core = 5)
+                    $ the_person.change_stats(love = 5, slut_temp = 3, slut_core = 2)
                     the_person.char "Yes sir."
                 mc.name "That'll be all for now."
                 $ the_person.draw_person(position = "walking_away")
                 "Well, you may have missed a financial opportunity, but at least you got a blowjob out of it!"
             else:
                 mc.name "I'm sure you will. Please try to let me know before you take actions like that in the future though."
-                $ the_person.change_stats(obedience = 20, love = 20, happiness = 20) #Net gain to stats because MC still took a good path in the end.
+                $ the_person.change_stats(obedience = 5, love = 5, happiness = 10) #Net gain to stats because MC still took a good path in the end.
                 the_person.char "Of course sir."
                 "You say goodbye and hang up the phone."
                 "Well, you may have missed out on a financial opportunity, but it sounds like you've gained some consideration from [the_person.title] in the process."

@@ -1870,16 +1870,16 @@ label erica_weekly_yoga_label(the_person):
             menu:
                 "Private time with [the_person.title]":
                     "You're right [the_person.title]. Do you have a minute? I need to discuss something with you in my office."
-                    $ the_person.change_stats(happiness = 10, love = 5)
-                    $ yoga_assistant.change_stats(happiness = -10, love = -5)
+                    $ the_person.change_stats(happiness = 5, love = 3)
+                    $ yoga_assistant.change_stats(happiness = -5, love = -3)
                     the_person.char "Oh! Yeah I definitely have some time."
                     "[yoga_assistant.possessive_title] clearly looks a little rejected."
                     yoga_assistant.char "I guess I'll get to work..."
                     call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_02
                 "Private time with [yoga_assistant.title]":
                     "You're right [yoga_assistant.title]. I have a problem with some times sheets. I printed them in my office, can you follow me?."
-                    $ the_person.change_stats(happiness = -10, love = -5)
-                    $ yoga_assistant.change_stats(happiness = 10, love = 5)
+                    $ the_person.change_stats(happiness = -5, love = -3)
+                    $ yoga_assistant.change_stats(happiness = 5, love = 3)
                     yoga_assistant.char "Oh! Yeah I remember now! Let's go."
                     "[the_person.possessive_title] clearly looks a little rejected."
                     the_person.char "I guess I'll get to the university..."
@@ -1891,8 +1891,8 @@ label erica_weekly_yoga_label(the_person):
             "Awkwardly, you decide it would be best to get to work."
             mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
             "They are both watching the orgy unfolding. You say your goodbyes and soon your are starting your workday."
-        $ the_person.change_stats(slut_temp = 5, slut_core = 5)
-        $ yoga_assistant.change_stats(slut_temp = 5, slut_core = 5)
+        $ the_person.change_stats(slut_temp = 2, slut_core = 2)
+        $ yoga_assistant.change_stats(slut_temp = 2, slut_core = 2)
     else:
         the_person.char "Yeah, that was great!"
         yoga_assistant.char "Hey [the_person.name], did you want to get together this weekend?"
@@ -1943,7 +1943,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A s
             mc.name "I'm sorry. You're a sexy woman, and having you in the same room doing yoga is very distracting."
             "She smiles at you, but you can tell she is a little uncomfortable."
             the_person.char "It's okay I guess... considering the circumstances."
-            $ the_person.change_stats(slut_core = 3, slut_temp = 3, love = -3)
+            $ the_person.change_stats(slut_core = 2, slut_temp = 2, love = -3)
     else:
         if watched_count == 1:
             the_person.char "I couldn't help but notice you sneaking glances at me during the session."
@@ -2012,7 +2012,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             if the_person.love < 0:
                 the_person.char "You? What about what I want? I didn't come in here so you could have all the fun."
                 mc.name "Shut up slut. You came in here because you love cock and you know it. If you want to have some fun, then use your pussy. Either way, service me."
-                $ the_person.change_stats(obedience = 5, love = -3, slut_temp = 5)
+                $ the_person.change_stats(obedience = 5, love = -3, slut_temp = 3)
                 "She looks upset, but you can tell her obedience and her sluttiness are overcoming her reservations."
                 the_person.char "Fine, since  you asked so nicely."
                 "She spits her last sentence out sarcastically. But it doesn't matter, she starts walking over to you."

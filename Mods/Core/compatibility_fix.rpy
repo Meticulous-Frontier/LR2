@@ -224,6 +224,16 @@ init -1 python:
             renpy.quit()
         return
 
+    # functions for save game compatibility (remove in future versions)
+    def ovulation_function_on_turn(the_person, add_to_log):
+        return
+    def submission_function_on_apply(the_person, add_to_log):
+        return
+    def submission_function_on_remove(the_person, add_to_log):
+        return
+    def submission_function_on_turn(the_person, add_to_log):
+        return
+
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
 

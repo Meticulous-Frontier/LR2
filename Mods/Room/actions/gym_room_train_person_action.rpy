@@ -109,7 +109,7 @@ label train_in_gym(the_person):
 
     if body_changed or the_person.sluttiness > 50:
         $ the_person.draw_person()
-        $ the_person.change_stats(happiness = 10, love = 5, arousal = renpy.random.randint(15, 35), slut_temp = 5)
+        $ the_person.change_stats(happiness = 10, love = 5, arousal = renpy.random.randint(15, 35), slut_temp = 3)
         if the_person.sluttiness > 20:
             the_person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:

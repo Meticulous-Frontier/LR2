@@ -642,7 +642,7 @@ label Sarah_third_wheel_label():
     the_person.char "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
     mc.name "You're crazy, it's not everyday a long lost childhood friend literally knocks on your front door."
     the_person.char "You've always been amazing to me. I should have known better."
-    $ the_person.change_stats(happiness = 20, obedience = 10, love = 10)
+    $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
     "She takes a long sip of her drink. You begin to chat and catch up a bit."
     $ scene_manager.update_actor(the_person, position = "sitting")
     $ mc.business.change_funds(-100)
@@ -1062,9 +1062,7 @@ label Sarah_get_drinks_label():
         mc.name "Great! Yeah if you get the urge, I'm up for a hookup now and then."
         the_person.char "Okay. You'd better satisfy me though!"
         "You give her a wink and a nod."
-        $ the_person.change_happiness(5)
-        $ the_person.change_slut_temp(5)
-        $ the_person.change_slut_core(5)
+        $ the_person.change_stats(happiness = 5, slut_temp = 3, slut_core = 1)
         the_person.char "Alright... I'm just gonna lay here for a moment. It's been a long day, I need to take a few minutes before I get up."
         "She rolls over, facing away from and relaxes for a bit, enjoying coming down from the high of fucking."
         "She is starting to doze off, when suddenly she wakes up and gets up."
@@ -1198,7 +1196,7 @@ label Sarah_epic_tits_label():
         the_person = sarah
         the_person.tits = "F"
         the_person.event_triggers_dict["epic_tits_progress"] = 3
-        the_person.change_stats(slut_temp = 10, slut_core = 10)
+        the_person.change_stats(slut_temp = 5, slut_core = 5)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
     return
 
@@ -1207,7 +1205,7 @@ label Sarah_new_tits_label():
         the_person = sarah
         the_person.tits = "D"
         the_person.event_triggers_dict["epic_tits_progress"] = 2
-        the_person.change_stats(slut_temp = 5, slut_core = 5)
+        the_person.change_stats(slut_temp = 3, slut_core = 3)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
@@ -1574,9 +1572,7 @@ label Sarah_stripclub_story_label():
     $ the_person.change_arousal(30)
     the_person.char "Yes! Oh fuck I'm gonna cum!!!"
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "standing_doggy")
-    $ the_person.change_happiness(5)
-    $ the_person.change_obedience(5)
-    $ the_person.change_slut_temp(5)
+    $ the_person.change_stats(happiness = 5, obedience = 5, slut_temp = 3)
     "You grip her hips roughly to hold her still as you bring her to a climax. Her knees start to buckle but you hold her ass firmly in place."
     "She gives a low, steady moan when she finally finishes climaxing."
     $ the_person.change_arousal(-(the_person.arousal / 3))

@@ -377,7 +377,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     #TODO chance if there is anyone else at the clothing store to get noticed.
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
-                                        $ the_person.change_stats(love = 5, happiness = 10)
+                                        $ the_person.change_stats(love = 3, happiness = 5)
                                     $ the_person.draw_person(position = "back_peek")
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person.char "I'll be out in a minute..."
@@ -426,7 +426,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     $ the_report = _return
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person.char "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."
-                                        $ the_person.change_stats(love = 5, happiness = 10)
+                                        $ the_person.change_stats(love = 3, happiness = 5)
                                     $ the_person.draw_person(position = "back_peek")
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     #TODO chance if there is anyone else at the clothing store to get noticed.

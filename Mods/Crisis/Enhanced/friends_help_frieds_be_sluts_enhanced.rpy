@@ -108,7 +108,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ person_one.discover_opinion(person_one.get_random_opinion(include_known = True, include_sexy = True, include_normal = False, only_positive = True))
                     $ person_one.discover_opinion(person_one.get_random_opinion(include_known = True, include_sexy = True, include_normal = False, only_positive = True))
                     $ person_one.change_love(1)
-                    $ person_two.change_slut_temp(3+person_two.get_opinion_score("public sex"))
+                    $ person_two.change_slut_temp(1 + person_two.get_opinion_score("public sex"))
                     $ person_two.change_love(1)
                     "After a few minutes the video ends and you've discovered a few things about [person_one.title]'s sexual preferences."
                     $ scene_manager.update_actor(person_one, position = "stand3")
@@ -317,7 +317,7 @@ label friends_help_friends_be_sluts_enhanced_label():
 
                                     $ person_one.change_happiness(5)
                                     $ person_one.change_love(1 + person_one.get_opinion_score("showing her tits"))
-                                    $ person_two.change_slut_temp(2 + person_two.get_opinion_score("showing her tits"))
+                                    $ person_two.change_slut_temp(1 + person_two.get_opinion_score("showing her tits"))
 
                                     $ scene_manager.update_actor(person_two, emotion = "sad")
                                     person_two.char "So I got naked just to lose, huh?"
@@ -333,7 +333,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                         mc.name "I've got to give it to [person_two.title]. I like them big."
                                     $ scene_manager.update_actor(person_two, emotion = "happy")
                                     person_two.char "Well, at least I didn't get naked just to lose."
-                                    $ person_two.change_slut_temp(4 + person_one.get_opinion_score("showing her tits"))
+                                    $ person_two.change_slut_temp(1 + person_one.get_opinion_score("showing her tits"))
                                     $ person_two.change_love(1 + person_one.get_opinion_score("showing her tits"))
                                     $ scene_manager.update_actor(person_one, emotion = "happy")
                                     person_one.char "You've got some award winning tits on you, you should be proud of them!"

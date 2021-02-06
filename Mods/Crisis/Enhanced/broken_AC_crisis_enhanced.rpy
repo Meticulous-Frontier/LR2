@@ -16,8 +16,8 @@ init 5 python:
 
     def broken_AC_crisis_update_sluttiness():
         for person in mc.business.p_div.people:
-            person.change_slut_temp(10, add_to_log = False)
-        mc.log_event("All Production Staff: +10 Sluttiness","float_text_pink")
+            person.change_slut_temp(5, add_to_log = False)
+        mc.log_event("All Production Staff: +5 Sluttiness","float_text_pink")
         return
 
     def broken_ac_crisis_strip_other_girls(person, girl):
