@@ -2,8 +2,8 @@ init:
     python:
         spanking = Position(name = "Spanking", slut_requirement = 30, slut_cap = 70, requires_hard = False, requires_large_tits = False,
             position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "None", skill_tag = "Foreplay",
-            girl_arousal = 0, girl_energy = 1,  #We use person specific variables to determine arousal
-            guy_arousal = 0, guy_energy = 1,
+            girl_arousal = 0, girl_energy = 5,  #We use person specific variables to determine arousal
+            guy_arousal = 0, guy_energy = 5,
             connections = [],
             intro = "intro_spanking",
             scenes = ["scene_spanking_1", "scene_spanking_2"],

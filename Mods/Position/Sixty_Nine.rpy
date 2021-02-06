@@ -5,8 +5,8 @@
 init python:
     SB_sixty_nine = Position(name = "Sixty-Nine", slut_requirement = 45, slut_cap = 65, requires_hard = False, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Oral",
-        girl_arousal = 15, girl_energy = 10,
-        guy_arousal = 15, guy_energy = 10,
+        girl_arousal = 15, girl_energy = 13,
+        guy_arousal = 16, guy_energy = 15,
         connections = [],
         intro = "intro_SB_sixty_nine",
         scenes = ["scene_SB_sixty_nine_1","scene_SB_sixty_nine_2"],
@@ -17,7 +17,7 @@ init python:
         taboo_break_description = "taboo_break_SB_sixty_nine",
         verb = "sixty-nine",
         verbing = "sixty-nining",
-        opinion_tags = ["giving blowjobs", "getting head", "drinking cum", "oral creampie", "get mc off", "get off"], record_class = "Cunnilingus",
+        opinion_tags = ["giving blowjobs", "getting head", "oral creampie", "get mc off", "get off"], record_class = "Cunnilingus",
         associated_taboo = "sucking_cock")
 
         # only one associated taboo is allowed in code ["sucking_cock", "licking_pussy", "touching_penis", "touching_vagina"]

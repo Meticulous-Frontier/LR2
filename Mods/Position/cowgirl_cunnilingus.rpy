@@ -3,7 +3,7 @@ init:
         cowgirl_cunnilingus = Position(name = "Cowgirl Cunnilingus", slut_requirement = 40, slut_cap = 80, requires_hard = False, requires_large_tits = False,
             position_tag = "kneeling1", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Oral",
             girl_arousal = 15, girl_energy = 3,
-            guy_arousal = 3, guy_energy = 10,
+            guy_arousal = 3, guy_energy = 15,
             connections = [],
             intro = "intro_cowgirl_cunnilingus",
             scenes = ["scene_cowgirl_cunnilingus_1","scene_cowgirl_cunnilingus_2"],

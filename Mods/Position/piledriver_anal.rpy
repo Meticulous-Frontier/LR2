@@ -1,9 +1,9 @@
 init:
     python:
-        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 75, slut_cap = 95, requires_hard = True, requires_large_tits = False,
+        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 80, slut_cap = 110, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
-            girl_arousal = 18, girl_energy = 9,
-            guy_arousal = 24, guy_energy = 14,
+            girl_arousal = 18, girl_energy = 12,
+            guy_arousal = 24, guy_energy = 20,
             connections = [],
             intro = "intro_piledriver_anal",
             scenes = ["scene_piledriver_anal_1","scene_piledriver_anal_2"],

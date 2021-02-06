@@ -1,8 +1,8 @@
 init python:
     anal_on_lap = Position(name = "Sit on Lap", slut_requirement = 75, slut_cap = 105, requires_hard = True, requires_large_tits = False,
         position_tag = "sitting", requires_location = "Sit", requires_clothing = "Vagina", skill_tag = "Anal",
-        girl_arousal = 18, girl_energy = 10,
-        guy_arousal = 20, guy_energy = 8,
+        girl_arousal = 22, girl_energy = 20,
+        guy_arousal = 16, guy_energy = 14,
         connections = [],
         intro = "intro_anal_on_lap",
         scenes = ["scene_anal_on_lap_1","scene_anal_on_lap_2"],
