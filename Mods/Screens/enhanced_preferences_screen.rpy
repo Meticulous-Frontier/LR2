@@ -56,6 +56,22 @@ init 2: # Add some additional
                         #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                         #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 
+                    vbox:
+                        style_prefix "radio"
+                        label "Embedded NTR"
+                        textbutton "Enabled":
+                            sensitive True
+                            tooltip "Enables NTR like scenarios in events, that are not NTR events by default."
+                            action [
+                                SetField(persistent, "show_ntr", True)
+                            ]
+                        textbutton "Disabled":
+                            sensitive True
+                            tooltip "Disables NTR like scenarios in events, that are not NTR events by default."
+                            action [
+                                SetField(persistent, "show_ntr", False)
+                            ]
+
                     # if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.
                     #     vbox:
                     #         style_prefix "radio"

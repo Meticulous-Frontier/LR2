@@ -63,7 +63,7 @@ label milk_employee_crisis_label():
         "She grabs one of the plastic containers from the table, then grabs one of her boobs in her hand and starts to squeeze until her milky cream starts to drip from it in to the container."
         the_person.char "I'm trying to build up my supply some. It's nice working somewhere I can take a few minutes a couple times a day to do something like this."
         mc.name "Of course. This isn't medieval times, if you need to pump or whatever you can do it when and where you need."
-        $ the_person.change_stats(obedience = 3, slut_temp = 3, slut_core = 3)
+        $ the_person.change_stats(obedience = 3, slut_temp = 1, slut_core = 1)
         "You watch intently as she continues to milk herself. She seems to like the attention."
     elif the_person.sluttiness_tier() == 2:
         the_person.char "Hey [the_person.mc_title]. My tits are so sore from these stupid pumps. I wish there was an easier way to do this."
@@ -86,7 +86,7 @@ label milk_employee_crisis_label():
             "[the_person.title] gives a moan as she lets down. Now with each squeeze, her nipples emit a short but steady squirt."
             the_person.char "Mmm, that feels so good..."
             $ the_person.change_arousal(10)
-        $ the_person.change_stats(happiness = 5, slut_temp = 3, slut_core = 3)
+        $ the_person.change_stats(happiness = 5, slut_temp = 1, slut_core = 1)
         "Eventually the bottles fill up and the milk being expressed with each grope is decreasing."
         the_person.char "Mmm... thanks... you can stop now. If you want to..."
         menu:
@@ -138,7 +138,7 @@ label milk_employee_crisis_label():
             $ mc.arousal += 10
         "You enjoy drinking deep from [the_person.possessive_title]'s breast. When her supply is depleted, you sit back up, feeling energized from your fresh serving of milk."
         $ mc.change_energy(50)
-        $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+        $ the_person.change_stats(obedience = 5, slut_temp = 1, slut_core = 1)
         the_person.char "Thank you so much, you have no idea how much I needed that..."
         "[the_person.title] notices your erection."
         the_person.char "So... want me to return the favor? Looks like you could use a little release too."

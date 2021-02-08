@@ -80,7 +80,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         mc.name "Goodbye!"
     else:
         mc.name "Goodbye, [the_person.title]!"
-    $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
+    $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
     $ strip_club_fire_stripper(the_person)
     $ the_person.change_location(the_person.home)
 
@@ -176,7 +176,7 @@ label strip_club_evaluate_stripper(the_person):
             $ mc.business.change_funds(-500)
             $ the_person.set_possessive_title("Your stripper")
             "After a few seconds, when she stops, you give her the promised signing bonus."
-            $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
+            $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
             $ the_person.change_location(the_person.home) # Avoid to process the person again
         "Yes\n{color=#ff0000}{size=18}Insufficient funds{/size}{/color} (disabled)" if mc.business.funds <= 500:
             pass
@@ -188,7 +188,7 @@ label strip_club_evaluate_stripper(the_person):
             $ the_person.draw_person(emotion = "sad", position = "walking_away")
             if the_person == cousin:
                 "Humiliated like never before, [the_person.title] quickly dresses back up and walks out of the club."
-                $ the_person.change_stats(happiness = -10, obedience = 5, love = -10)
+                $ the_person.change_stats(happiness = -10, obedience = 3, love = -5)
             else:
                 "Unable to argue with you, [the_person.title] quickly dresses back up and leaves the club, still in tears."
             $ strip_club_fire_stripper(the_person)

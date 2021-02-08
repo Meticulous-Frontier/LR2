@@ -699,15 +699,13 @@ label Sarah_being_watched(the_person, the_watcher, the_position):
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person.char "Fuck, maybe we should go somewhere a little quieter..."
-        $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_stats(arousal = -1, slut_temp = -1)
         "[the_person.title] seems uncomfortable with [the_watcher.title] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person.char "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.title]!"
-        $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_stats(arousal = 1, slut_temp = 1)
         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
 
     return

@@ -3,8 +3,8 @@
 init python:
     SB_anal_standing = Position(name = "Standing Anal", slut_requirement = 70, slut_cap = 95, requires_hard = True, requires_large_tits = False,
         position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "Vagina", skill_tag = "Anal",
-        girl_arousal = 18, girl_energy = 11,
-        guy_arousal = 20, guy_energy = 11,
+        girl_arousal = 20, girl_energy = 16,
+        guy_arousal = 18, guy_energy = 16,
         connections = [],
         intro = "intro_SB_anal_standing",
         scenes = ["scene_SB_anal_standing_1","scene_SB_anal_standing_2"],

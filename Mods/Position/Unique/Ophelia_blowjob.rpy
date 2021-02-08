@@ -1,9 +1,9 @@
 ﻿init:
     python:
-        Ophelia_blowjob = Position(name = "Special Blowjob", slut_requirement = 30, slut_cap = 90, requires_hard = True, requires_large_tits = False,
+        Ophelia_blowjob = Position(name = "Special Blowjob", slut_requirement = 30, slut_cap = 60, requires_hard = True, requires_large_tits = False,
             position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "None", skill_tag = "Oral",
-            girl_arousal = 4, girl_energy = 8,
-            guy_arousal = 20, guy_energy = 3,
+            girl_arousal = 3, girl_energy = 13,
+            guy_arousal = 18, guy_energy = 5,
             connections = [],
             intro = "intro_Ophelia_blowjob",
             scenes = ["scene_Ophelia_blowjob_1","scene_Ophelia_blowjob_2"],
@@ -13,7 +13,7 @@
             orgasm_description = "orgasm_Ophelia_blowjob",
             taboo_break_description = "taboo_break_Ophelia_blowjob",
             verb = "mouth fuck",
-            opinion_tags = ["giving blowjobs", "dinking cum"], record_class = "Blowjobs",
+            opinion_tags = ["giving blowjobs"], record_class = "Blowjobs",
             default_animation = idle_wiggle_animation, modifier_animations = {"blowjob":blowjob_bob},
             associated_taboo = "sucking_cock")
 

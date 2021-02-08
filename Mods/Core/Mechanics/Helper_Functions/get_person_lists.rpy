@@ -48,7 +48,7 @@ init -1 python:
             not_met_yet_list.append(starbuck)
         return not_met_yet_list
 
-    @lru_cache_function(max_size=3, expiration=2)
+    @lru_cache_function(max_size=10, expiration=2)
     def known_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         known_people = []
         excluded_people.extend(unique_characters_not_known())

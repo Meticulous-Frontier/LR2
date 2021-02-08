@@ -3,10 +3,10 @@
 
 init:
     python:
-        sarah_tit_fuck = Position(name = "Special Tit Fuck", slut_requirement = 30, slut_cap = 75, requires_hard = True, requires_large_tits = True,
+        sarah_tit_fuck = Position(name = "Special Tit Fuck", slut_requirement = 30, slut_cap = 55, requires_hard = True, requires_large_tits = True,
             position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "Tits", skill_tag = "Foreplay",
-            girl_arousal = 10, girl_energy = 12,
-            guy_arousal = 16, guy_energy = 3,
+            girl_arousal = 7, girl_energy = 20,
+            guy_arousal = 15, guy_energy = 5,
             connections = [],
             intro = "intro_sarah_tit_fuck",
             scenes = ["scene_sarah_tit_fuck_1","scene_sarah_tit_fuck_2", "scene_sarah_tit_fuck_3"],

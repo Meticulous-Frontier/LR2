@@ -1,8 +1,8 @@
 init python:
     SB_doggy_anal_dildo_dp = Position(name = "Doggy Anal DP", slut_requirement = 80, slut_cap = 120, requires_hard = True, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
-        girl_arousal = 25, girl_energy = 6,
-        guy_arousal = 18, guy_energy = 10,
+        girl_arousal = 26, girl_energy = 14,
+        guy_arousal = 22, guy_energy = 20,
         connections = [],
         intro = "intro_SB_doggy_anal_dildo_dp",
         scenes = ["scene_SB_doggy_anal_dildo_dp_1","scene_SB_doggy_anal_dildo_dp_2"],

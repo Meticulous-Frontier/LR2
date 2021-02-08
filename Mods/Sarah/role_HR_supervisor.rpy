@@ -614,14 +614,14 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
             person_choice.char "Wow, not sure why you called me in here, but I hope its for the same thing you have her in here for..."
         else:
             person_choice.char "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
-        $ person_choice.change_slut_temp(10) # give her a temp slut boost to maybe have a threesome later...
+        $ person_choice.change_slut_temp(5) # give her a temp slut boost to maybe have a threesome later...
     elif the_person.outfit.vagina_visible():
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
-        $ person_choice.change_slut_temp(5)
+        $ person_choice.change_slut_temp(3)
         person_choice.char "Uh...right, what can I do for you, [person_choice.mc_title]"
     elif the_person.outfit.tits_visible():
         "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
-        $ person_choice.change_slut_temp(3)
+        $ person_choice.change_slut_temp(1)
         person_choice.char "Oh...what can I do for you, [person_choice.mc_title]"
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
@@ -816,7 +816,7 @@ label HR_director_review_discoveries_label(the_person):
                     $ set_HR_director_tag("business_HR_skimpy_uniform", True)
                     if the_person is sarah:
                         the_person.char "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
-                        $ the_person.change_slut_temp(5)
+                        $ the_person.change_slut_temp(3)
         if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
             if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
                 the_person.char "I see here that changes within the company have produced several vacancies."

@@ -1,8 +1,8 @@
 init python:
     SB_reverse_cowgirl = Position(name = "Reverse Cowgirl", slut_requirement = 60, slut_cap = 80, requires_hard = True, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 18, girl_energy = 10,
-        guy_arousal = 14, guy_energy = 6,
+        girl_arousal = 18, girl_energy = 14,
+        guy_arousal = 14, guy_energy = 10,
         connections = [],
         intro = "intro_SB_reverse_cowgirl",
         scenes = ["scene_SB_reverse_cowgirl_1","scene_SB_reverse_cowgirl_2"],

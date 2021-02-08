@@ -218,7 +218,7 @@ label girl_shower_enter_enhanced(the_person):
             if the_person.effective_sluttiness("touching_body") <= 40:
                 the_person.char "I think I'm just about done, so you can take care of this..."
                 "She wiggles her butt and strokes your tip against her cheeks."
-                $ the_person.change_slut_temp(3 + the_person.get_opinion_score("showing her ass"))
+                $ the_person.change_slut_temp(1 + the_person.get_opinion_score("showing her ass"))
                 "She steps out of the shower and grabs a towel."
                 $ apply_towel_outfit(the_person)
                 $ the_person.draw_person()

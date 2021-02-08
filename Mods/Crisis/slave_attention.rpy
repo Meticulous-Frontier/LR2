@@ -155,7 +155,7 @@ label slave_attention_crisis_action_label:
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."
                             the_person.char "As you wish, [the_person.mc_title]."
-                            $ the_person.change_stats(happiness = 3, obedience = 3)
+                            $ the_person.change_stats(happiness = -3, obedience = 3)
 
                 "Release her":
                     mc.name "No, my decision is final, you are hereby released from your slave duties."
@@ -172,7 +172,7 @@ label slave_attention_crisis_action_label:
             mc.name "Well you thought wrong, get up and get out of here."
             $ the_person.draw_person(position = "walking_away")
             "She quickly jumps to her feet and rushes out of your dungeon."
-            $ the_person.change_stats(happiness = -3, obedience = 3)
+            $ the_person.change_stats(happiness = -3, obedience = 1)
             the_person.char "Yes Master, please forgive me..."
 
     $ the_person.apply_planned_outfit()

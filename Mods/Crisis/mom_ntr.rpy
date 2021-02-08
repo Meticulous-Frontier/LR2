@@ -17,8 +17,8 @@ init 2 python:
             the_cumshot.layer = 0
             person.outfit.add_accessory(the_cumshot)
 
-        person.change_slut_temp(5*person.get_opinion_score("creampies"))
-        person.change_happiness(5*person.get_opinion_score("creampies"))
+        person.change_slut_temp(2*person.get_opinion_score("creampies"))
+        person.change_happiness(3*person.get_opinion_score("creampies"))
         person.discover_opinion("creampies")
 
         # Pregnancy Check #
@@ -45,8 +45,8 @@ init 2 python:
             the_cumshot.layer = 0
             person.outfit.add_accessory(the_cumshot)
 
-        person.change_slut_temp(5*person.get_opinion_score("drinking cum"))
-        person.change_happiness(5*person.get_opinion_score("drinking cum"))
+        person.change_slut_temp(2*person.get_opinion_score("drinking cum"))
+        person.change_happiness(3*person.get_opinion_score("drinking cum"))
         person.discover_opinion("drinking cum")
 
     def cum_in_ass_ntr(person): #not used in mod? maybe it should be!
@@ -55,8 +55,8 @@ init 2 python:
             the_cumshot = creampie_cum.get_copy()
             the_cumshot.layer = 0
             person.outfit.add_accessory(the_cumshot)
-        person.change_slut_temp(5*person.get_opinion_score("anal creampies"))
-        person.change_happiness(5*person.get_opinion_score("anal creampies"))
+        person.change_slut_temp(2*person.get_opinion_score("anal creampies"))
+        person.change_happiness(3*person.get_opinion_score("anal creampies"))
         person.discover_opinion("anal creampies")
 
     def cum_on_face_ntr(person):
@@ -65,12 +65,12 @@ init 2 python:
             the_cumshot.layer = 0
             person.outfit.add_accessory(the_cumshot)
 
-        person.change_slut_temp(5*person.get_opinion_score("cum facials"))
-        person.change_happiness(5*person.get_opinion_score("cum facials"))
+        person.change_slut_temp(2*person.get_opinion_score("cum facials"))
+        person.change_happiness(3*person.get_opinion_score("cum facials"))
         person.discover_opinion("cum facials")
 
-        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
-        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.change_slut_temp(2*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(3*person.get_opinion_score("being covered in cum"))
         person.discover_opinion("being covered in cum")
 
     def cum_on_tits_ntr(person):
@@ -83,8 +83,8 @@ init 2 python:
             the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
             person.outfit.add_accessory(the_cumshot)
 
-        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
-        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.change_slut_temp(2*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(3*person.get_opinion_score("being covered in cum"))
         person.discover_opinion("being covered in cum")
 
     def cum_on_stomach_ntr(person):
@@ -97,8 +97,8 @@ init 2 python:
             the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
             person.outfit.add_accessory(the_cumshot)
 
-        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
-        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.change_slut_temp(2*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(3*person.get_opinion_score("being covered in cum"))
         person.discover_opinion("being covered in cum")
 
     def cum_on_ass_ntr(person):
@@ -111,8 +111,8 @@ init 2 python:
             the_cumshot.layer = top_layer+1 #The cumshot lives on a layer it hit, above the one it hit. Accessories are drawn first in the hirearchy, so they have to be on a level higehr than what they hit.
             person.outfit.add_accessory(the_cumshot)
 
-        person.change_slut_temp(5*person.get_opinion_score("being covered in cum"))
-        person.change_happiness(5*person.get_opinion_score("being covered in cum"))
+        person.change_slut_temp(2*person.get_opinion_score("being covered in cum"))
+        person.change_happiness(3*person.get_opinion_score("being covered in cum"))
         person.discover_opinion("being covered in cum")
 
     def mom_ntr_mod_requirement():

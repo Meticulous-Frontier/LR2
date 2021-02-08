@@ -431,21 +431,21 @@ label dirty_laundry_stuck_in_dryer(the_person):
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 1:
                 "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."
-                $ the_person.change_stats(happiness = 10, obedience = 5)
+                $ the_person.change_stats(happiness = 5, obedience = 3)
                 $ the_person.draw_person(position = "stand4", emotion = "orgasm")
                 the_person.char "Oh my god, I came so much... I didn't think that would be possible in this position."
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person.char "It's still not cool that you took advantage of me like that, even if it was really good."
             elif the_report.get("girl orgasms", 0) > 0:
                 "After you are done, you help [the_person.title] out of the dryer."
-                $ the_person.change_stats(happiness = 5, obedience = 3)
+                $ the_person.change_stats(happiness = 3, obedience = 1)
                 $ the_person.draw_person(position = "stand4", emotion = "orgasm")
                 the_person.char "Oh wow, that really felt good, thank you [the_person.mc_title]."
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person.char "It's still not cool that you took advantage of me like that, though."
             else:
                 "Feeling satisfied, you pull [the_person.title] out of the dryer."
-                $ the_person.change_stats(happiness = -5, obedience = -1)
+                $ the_person.change_stats(happiness = -5, obedience = -3)
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 the_person.char "You take advantage of me like that and don't even get me off? Not cool, [the_person.mc_title], not cool."
 

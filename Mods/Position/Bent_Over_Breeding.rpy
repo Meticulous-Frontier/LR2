@@ -1,8 +1,8 @@
 init python:
     bent_over_breeding = Position(name = "Breeding Doggy", slut_requirement = 60, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 20, girl_energy = 10,
-        guy_arousal = 20, guy_energy = 10,
+        girl_arousal = 18, girl_energy = 14,
+        guy_arousal = 20, guy_energy = 16,
         connections = [],
         intro = "intro_bent_over_breeding",
         scenes = ["scene_bent_over_breeding_1","scene_bent_over_breeding_2", "scene_bent_over_breeding_3"],

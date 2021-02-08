@@ -396,7 +396,7 @@ label quest_production_line_help_move_label():
     if the_person.sluttiness < 20:
         the_person.char "This has been a ton of work, but you have no idea how much I appreciate this."
         mc.name "Of course. Always glad to help out."
-        $ the_person.change_stats(happiness = 10, love = 20, obedience = 20)
+        $ the_person.change_stats(happiness = 10, love = 5, obedience = 5)
         the_person.char "I really owe you one. I think I can take over from here though."
         mc.name "You sure? I'd be glad to help you unpack some stuff."
         "She shakes her head."
@@ -443,7 +443,7 @@ label quest_production_line_help_move_label():
             the_person.char "You do?"
             mc.name "There are multiple ways of telling someone you love them. Some are more intimate than others. If it feels right, and both people consent, what's the harm?"
             the_person.char "Yeah! Exactly! Not many people think the way that we do though."
-            $ the_person.change_stats(happiness = 20, love = 40, obedience = 40)
+            $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
             $ the_person.draw_person()
             "She stands up."
             the_person.char "That feels good... to get off my chest. You know? But still... I had sex with my dad, multiple times! And I liked it."
@@ -478,7 +478,7 @@ label quest_production_line_help_move_label():
             the_person.char "I'm sorry, that's kind of... private!"
             mc.name "That's okay. I understand."
             the_person.char "Thank... Sometime, maybe we can talk about it... but not right now!"
-            $ the_person.change_stats(happiness = 10, love = 30, obedience = 40)
+            $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
             $ the_person.draw_person()
             "You stand up and get yourself together."
             "She walks you to her door."

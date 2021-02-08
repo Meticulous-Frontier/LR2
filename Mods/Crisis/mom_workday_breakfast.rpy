@@ -110,7 +110,7 @@ label mom_breakfast_action_label_medium():
             $ scene_manager.update_actor(the_person, position = "stand4")
             the_person.char "You have a good day at work, I'm going to go umm, get changed!"
             $ the_person.draw_person(position = "walking_away")
-            $ the_person.change_stats(slut_temp = 10, obedience = 5)
+            $ the_person.change_stats(slut_temp = 3, obedience = 5)
             if the_person.sluttiness > 50:
                 $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
@@ -177,14 +177,14 @@ label mom_breakfast_action_label_medium():
                             "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                             mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
-                            $ the_person.change_stats(obedience = 10, slut_temp = 3)
+                            $ the_person.change_stats(obedience = 5, slut_temp = 1)
                             return "Advance Time"
                     pass
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                     mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
-                    $ the_person.change_stats(obedience = 5, slut_temp = 3)
+                    $ the_person.change_stats(obedience = 5, slut_temp = 1)
                     return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available():
                     "You whisper in her ear."
@@ -202,7 +202,7 @@ label mom_breakfast_action_label_medium():
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
             $ the_person.call_dialogue("climax_responses_foreplay")
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "sitting") #TODO check and make sure this works...
-            $ the_person.change_stats(obedience = 5, happiness = 5)
+            $ the_person.change_stats(obedience = 3, happiness = 3)
             "When she has finished climaxing, you slowly withdraw your finger and sit back down at the table. You take a quick sip of your coffee."
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
             $ the_person.apply_planned_outfit()
@@ -216,7 +216,7 @@ label mom_breakfast_action_label_medium():
             the_person.char "Of course dear, I was just getting ready to go get ready for work..."
             $ scene_manager.update_actor(mom, position = "stand2")
             "As [the_person.possessive_title] starts to get up, she looks at you. You make sure she notices as you lick some of her juices off your fingers."
-            $ the_person.change_stats(slut_core = 2, slut_temp = 5)
+            $ the_person.change_stats(slut_core = 1, slut_temp = 3)
             the_person.char "Oh my..."
             $ scene_manager.update_actor(mom, position = "walking_away")
             "[the_person.title] turns and leaves the kitchen in a hurry. You quickly finish breakfast and head out as well."
@@ -256,7 +256,7 @@ label mom_breakfast_action_label_high():
         "Long Day Ahead":
             mc.name "I'm sorry [the_person.title], but I have a long day scheduled today. I think I had better save my energy!"
             $ scene_manager.update_actor(mom, position = "sitting", emotion="sad")
-            $ the_person.change_stats(happiness = -5, obedience = 5)
+            $ the_person.change_stats(happiness = -3, obedience = 2)
             the_person.char "That's okay, I understand. Well don't forget, dinner will be the usual time tonight. Maybe we can do something after that?"
             "You give her a non-committal shrug. The tension at the table is a little much, so you quickly finish your breakfast and head out."
             return None
@@ -292,11 +292,11 @@ label mom_breakfast_action_label_high():
                 $ the_report = _return
                 if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0: #Happy family
                     "The three of you remain together for a while, enjoying your orgasms."
-                    $ the_person.change_stats(obedience = 5, happiness = 15)
+                    $ the_person.change_stats(obedience = 3, happiness = 5)
                     the_person.char "You two... I get overwhelmed by all the love I feel for you two when we do things like this. I love you both so much!"
                 elif the_report["girl one orgasms"] > 0:
                     "[the_person.possessive_title] recovers for a bit from her orgasm."
-                    $ the_person.change_stats(obedience = 5, happiness = 5)
+                    $ the_person.change_stats(obedience = 2, happiness = 3)
                     the_person.char "Thank you, [the_person.mc_title], for insisting on bringing your sister out. You were right, that felt so good."
                     lily.char "What? Mooooom! You were gonna fuck around without me?"
                 "You get up and excuse yourself. Time to start the day!"
@@ -337,7 +337,7 @@ label mom_breakfast_action_label_high():
 
         $ the_person.cum_in_ass()
         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
-        $ the_person.change_stats(happiness = 5, obedience = 5)
+        $ the_person.change_stats(happiness = 5, obedience = 3)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
         the_person.char "Oh god... [lily.name] could walk out any second!"
@@ -366,7 +366,7 @@ label mom_breakfast_action_label_high():
 
     $ the_person.cum_in_vagina()
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
-    $ the_person.change_stats(happiness = 5, obedience = 5)
+    $ the_person.change_stats(happiness = 5, obedience = 3)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
     the_person.char "Oh god... [lily.name] could walk out any second!"

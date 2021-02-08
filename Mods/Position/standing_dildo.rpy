@@ -2,8 +2,8 @@ init:
     python:
         standing_dildo = Position(name = "Dildo Fuck", slut_requirement = 40, slut_cap = 70, requires_hard = False, requires_large_tits = False,
             position_tag = "against_wall", requires_location = "Stand", requires_clothing = "Vagina", skill_tag = "Foreplay",
-            girl_arousal = 20, girl_energy = 5,
-            guy_arousal = 5, guy_energy = 16,
+            girl_arousal = 15, girl_energy = 7,
+            guy_arousal = 5, guy_energy = 20,
             connections = [],
             intro = "intro_standing_dildo",
             scenes = ["scene_standing_dildo_1","scene_standing_dildo_2"],

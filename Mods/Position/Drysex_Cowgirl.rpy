@@ -5,7 +5,7 @@ init:
         drysex_cowgirl = Position(name = "Dry Cowgirl", slut_requirement = 20, slut_cap = 80, requires_hard = False, requires_large_tits = False,
             position_tag = "cowgirl", requires_location = "Lay", requires_clothing = "None", skill_tag = "Foreplay",
             girl_arousal = 12, girl_energy = 9,
-            guy_arousal = 10, guy_energy = 6,
+            guy_arousal = 10, guy_energy = 11,
             connections = [],
             intro = "intro_drysex_cowgirl",
             scenes = ["scene_drysex_cowgirl_1","scene_drysex_cowgirl_2"],
@@ -15,7 +15,7 @@ init:
             orgasm_description = "orgasm_drysex_cowgirl",
             taboo_break_description = "taboo_break_drysex_cowgirl",
             verb = "be ridden by", verbing = "being ridden by",
-            opinion_tags = ["vaginal sex", "taking control", "get mc off", "get off", "waste cum"],
+            opinion_tags = ["taking control", "get mc off", "get off", "waste cum"],
             default_animation = blowjob_bob,
             associated_taboo = "touching_body")
 
