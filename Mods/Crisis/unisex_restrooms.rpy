@@ -145,20 +145,20 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     "As you step in the door, you pause for a second when you see [the_person_one.title] and [the_person_two.title] there at the sinks, freshening up."
     "You recently made all the bathrooms in the office unisex, and you aren't quite used to having women in the restroom when you walk in yet."
     "However, the girls seem completely unfazed when you walk through the door."
-    the_person_one.char "Oh hey [the_person_one.mc_title]. So anyway..."
+    the_person_one "Oh hey [the_person_one.mc_title]. So anyway..."
     "It seems like they are having a pretty active conversation. Trying not to be awkward, you head into one of the stalls and close the door. They keep talking."
     $ scene_manager.clear_scene()
     $ overhear_topic = the_person_one.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(the_person_one, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person_one.char "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+    the_person_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
     if the_person_one.discover_opinion(overhear_topic):
         "Oh! You didn't realize that [the_person_one.title] felt that way."
     "The girls keep talking. They keep bouncing back and forth between multiple topics."
     $ overhear_topic = the_person_two.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(the_person_two, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person_two.char "...But I [text_one] [text_two], so I'm not sure what to do."
+    the_person_two "...But I [text_one] [text_two], so I'm not sure what to do."
     if the_person_two.discover_opinion(overhear_topic):
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall, or so it seems..."
     "The girls are still talking but you hear the bathroom door open. Their voices fade away as they exit."
@@ -199,14 +199,14 @@ label unisex_restroom_sexy_overhear_label():
         $ overhear_topic = the_person_one.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(the_person_one, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        the_person_one.char "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        the_person_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
         if the_person_one.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [the_person_one.title] felt that way."
         "The girls keep talking. They keep bouncing back and forth between multiple sexual topics."
         $ overhear_topic = the_person_two.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(the_person_two, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        the_person_two.char "...But I [text_one] [text_two], so I'm not sure what to do."
+        the_person_two "...But I [text_one] [text_two], so I'm not sure what to do."
         if the_person_two.discover_opinion(overhear_topic):
             "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall."
     else:
@@ -263,16 +263,16 @@ label unisex_restroom_fantasy_overhear_label():
         "You try, but the identity of the girls eludes you for now."
     "She continues to talk about her dream."
     if discover_identity:
-        the_person_one.char "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
-        the_person_one.char "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
-        the_person_two.char "Damn that's hot..."
-        the_person_one.char "I know right? I felt my skirt lifting up and my panties getting pulled down. I couldn't move, I just let him do it!"
+        the_person_one "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
+        the_person_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
+        the_person_two "Damn that's hot..."
+        the_person_one "I know right? I felt my skirt lifting up and my panties getting pulled down. I couldn't move, I just let him do it!"
         "Wow! Maybe you should pay her a visit later, and act out this fantasy of hers."
-        the_person_one.char "When he started fucking me I looked around saw the other girls pointing at me, trying not to watch. It was so hot!"
-        the_person_two.char "God, you gotta calm down, now you're getting me worked up!"
-        the_person_one.char "I know! But right as I was getting to finish, my alarm went off! I was so pissed. I tried to relieve myself this morning, but I just couldn't get off."
-        the_person_two.char "Oh jesus you must be dying right now."
-        the_person_one.char "UGH I am. I can't wait to get off work..."
+        the_person_one "When he started fucking me I looked around saw the other girls pointing at me, trying not to watch. It was so hot!"
+        the_person_two "God, you gotta calm down, now you're getting me worked up!"
+        the_person_one "I know! But right as I was getting to finish, my alarm went off! I was so pissed. I tried to relieve myself this morning, but I just couldn't get off."
+        the_person_two "Oh jesus you must be dying right now."
+        the_person_one "UGH I am. I can't wait to get off work..."
     else:
         anon_char_one "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
         anon_char_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
@@ -312,13 +312,13 @@ label unisex_restroom_fantasy_actout_label(the_person):
             $ scene_manager.clear_scene()
             return
     "Remembering her words you heard earlier, you walk up behind [the_person.title] and your hands firmly on her hips."
-    the_person.char "Huh? Oh, [the_person.mc_title]? What are..."
+    the_person "Huh? Oh, [the_person.mc_title]? What are..."
     mc.name "Shhh, just hold still."
-    the_person.char "Why? I don't under... oh my god..."
-    "With one hand on her back and one firmly on her hip, you slowly bend [the_person.possessive_title] over her desk."
+    the_person "Why? I don't under... oh my god..."
+    "With one hand on her back and one firmly on her hip, you slowly bend [the_person.possessive_title!l] over her desk."
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
     $ the_person.change_slut_temp(5)
-    the_person.char "Oh god oh god, its happening..."
+    the_person "Oh god oh god, its happening..."
     $ the_person.change_arousal(30)
     if the_person.outfit.vagina_available():
         "You take your hand off her back and run it down along her ass crack to her cunt. You can feel it is moist and ready for you already!"
@@ -334,12 +334,12 @@ label unisex_restroom_fantasy_actout_label(the_person):
     call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, private = False, position_locked = True) from _call_fantasy_actout_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
-        the_person.char "Oh god, it was even better than I thought... oh my god."
+        the_person "Oh god, it was even better than I thought... oh my god."
         $ the_person.increase_opinion_score("public sex")
         $ the_person.change_happiness(10)
         $ the_person.change_slut_core(3)
     else:
-        the_person.char "Fuck... I need to finish so bad! Why can't I just get off today?"
+        the_person "Fuck... I need to finish so bad! Why can't I just get off today?"
         $ the_person.change_happiness(-10)
         $ the_person.change_love(-5)
 
@@ -609,7 +609,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "You quickly exit your stall and go into the one next to yours."
             $ scene_manager.add_actor(the_person, position = "kissing")
             "[the_person.title] is waiting for you as you step inside. You lock the stall and she immediately wraps her arms around you."
-            the_person.char "Mmm, the glory hole is hot, but I am craving a more personal touch..."
+            the_person "Mmm, the glory hole is hot, but I am craving a more personal touch..."
             if not the_person.outfit.vagina_available():
                 "You grab her ass for a bit, then start to peel off her clothes."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = True, exclude_upper = True)

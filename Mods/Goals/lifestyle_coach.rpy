@@ -45,25 +45,25 @@ label lifestyle_coach_intro_label(the_person):
     "As you walk around, you spot a kiosk that catches your attention."
     "Lifestyle Coaches: We help you set and achievement long term and short term goals!"
     "You walk around the kiosk a bit, there are all kinds of testimonials and adverts up for the service."
-    the_person.char "Hello there! I'm [the_person.title]."
+    the_person "Hello there! I'm [the_person.title]."
     $ scene_manager.add_actor(the_person)
     mc.name "I'm [mc.name]."
-    the_person.char "Nice to meet you! I'm a lifestyle coach, here to help people achieve their dreams!"
+    the_person "Nice to meet you! I'm a lifestyle coach, here to help people achieve their dreams!"
     "The sales pitch is a little... optimistic? But to be honest, she is pretty good looking, so you decide to let her continue."
-    the_person.char "I've personally helped all kinds of people achieve all kinds of things, from giving up drugs, to losing a few pounds!"
-    the_person.char "Our first consultation is free. Would you be interested?"
+    the_person "I've personally helped all kinds of people achieve all kinds of things, from giving up drugs, to losing a few pounds!"
+    the_person "Our first consultation is free. Would you be interested?"
     "What the hell. It couldn't hurt anything, right?"
     mc.name "I suppose."
     "You sit down with [the_person.title]. She asks you some generic questions about your personal and work life."
     "You explain that you are a small business owner, working with pharmaceuticals, leaving out some of the details."
     "You share some of your basic short term, and a few long term goals, both for your business and for yourself, personally."
-    the_person.char "I see. Those sound like interesting goals! Might I offer a few alternatives also?"
+    the_person "I see. Those sound like interesting goals! Might I offer a few alternatives also?"
     mc.name "Sure."
     #TODO call the screen for the goal system.
     $ hide_ui()
     call screen lifestyle_goal_sheet()
     $ show_ui()
-    the_person.char "I hope that was helpful! Come back again and see me if you want to adjust your goals again in the future!"
+    the_person "I hope that was helpful! Come back again and see me if you want to adjust your goals again in the future!"
     mc.name "I think it was. I'll be sure to check back with you again if I need to. Thanks!"
     $ dawn.event_triggers_dict["met"] = 1
     $ scene_manager.clear_scene()
@@ -73,7 +73,7 @@ label lifestyle_coach_review_goals_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
     mc.name "I was wondering, do you have time to talk about goals again?"
-    the_person.char "Certainly! Tell me about how things are going and what you would like to change."
+    the_person "Certainly! Tell me about how things are going and what you would like to change."
     $ hide_ui()
     call screen lifestyle_goal_sheet()
     $ show_ui()

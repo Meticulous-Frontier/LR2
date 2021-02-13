@@ -84,7 +84,7 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
             "Make her lick her juices off":
                 if the_girl.event_triggers_dict.get("has_sucked_dildo", False):
                     "You pull the dildo out. She immediately starts to protest."
-                    the_girl.char "Hey! What are you doing! I'm getting so close..."
+                    the_girl "Hey! What are you doing! I'm getting so close..."
                     "Her words stop when you shove your fingers from your free hand into her cunt. You raise the dildo up to her face."
                 mc.name "Look at how wet you are! I want you to taste it."
                 if the_girl.get_opinion_score("being submissive") >= 0:
@@ -95,18 +95,18 @@ label scene_standing_dildo_2(the_girl, the_location, the_object):
                     "Suddenly, you pull the dildo out of her mouth. You bring it back down to her cunt and push it back inside her."
                     $ the_girl.event_triggers_dict["has_sucked_dildo"] = True
                 else:
-                    the_girl.char "Fuck that. Why don't you do it?"
+                    the_girl "Fuck that. Why don't you do it?"
                     "She doesn't seem particularly interested in tasting herself, so you back off."
                     "You bring the dildo back down to her cunt and push it inside her."
             "Finish her off":
                 "You can tell she is getting close, so you double down on your efforts to get [the_girl.title] off."
                 "With one hand you piston the dildo in and out of her, and with the other you flick your thumb over her clit."
-                the_girl.char "Oh god, that feels so good..."
+                the_girl "Oh god, that feels so good..."
                 $the_girl.change_arousal(10)
     else:
 
         "She places one of her own hands over yours, encouraging you to speed up."
-        the_girl.char "Just like that... Ah..."
+        the_girl "Just like that... Ah..."
 
     return
 
@@ -114,10 +114,10 @@ label outro_standing_dildo(the_girl, the_location, the_object):
     "The view of [the_girl.title]'s hot, tight pussy squeezing your dildo is enough to push you that little bit further, past the point of no return."
     "You grasp her tightly with your free hand as you cum, shoving your dildo deep into her cunt and making her gasp in surprise."
     "When you've recovered you slide it out."
-    the_girl.char "Did you just... Cum?"
+    the_girl "Did you just... Cum?"
     mc.name "Yeah."
     "She gives a slight smile."
-    the_girl.char "Wow, I didn't realize you were enjoying this as much as I was."
+    the_girl "Wow, I didn't realize you were enjoying this as much as I was."
 
     return
 
@@ -132,13 +132,13 @@ label transition_default_standing_dildo(the_girl, the_location, the_object):
     return
 
 label strip_standing_dildo(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "That thing feels amazing, oh my god..."
+    the_girl "That thing feels amazing, oh my god..."
     $ the_girl.draw_animated_removal(the_clothing, position = standing_dildo.position_tag)
     "She strips off her [the_clothing.name] while you fuck her with the dildo, moaning the whole time."
     return
 
 label strip_ask_standing_dildo(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "Everything feels so tight, I need to get this off! Do you mind?"
+    the_girl "Everything feels so tight, I need to get this off! Do you mind?"
     "[the_girl.possessive_title] grabs onto her [the_clothing.name], waiting for you to tell her what to do."
     menu:
         "Let her strip":
@@ -149,16 +149,16 @@ label strip_ask_standing_dildo(the_girl, the_clothing, the_location, the_object)
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do you think I look sexy in it?"
+                the_girl "Do you think I look sexy in it?"
             else:
-                the_girl.char "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
+                the_girl "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
     $ standing_dildo.redraw_scene(the_girl)
     return
 
 label orgasm_standing_dildo(the_girl, the_location, the_object):
-    the_girl.char "Oh god... Right there! Right there! Ahhhhh!"
+    the_girl "Oh god... Right there! Right there! Ahhhhh!"
     "Her whole body tenses up and she grabs you by the hair. A shiver runs through her body as she climaxes."
     $ the_girl.call_dialogue("climax_responses_foreplay")
     "She quivers with pleasure for a few seconds before her whole body relaxes."
-    the_girl.char "Ah... Keep going... I bet that thing will make me cum again."
+    the_girl "Ah... Keep going... I bet that thing will make me cum again."
     return

@@ -40,14 +40,14 @@ label mall_introduction_action_label:
 
     if known_person is None or stranger is None:
         return
-    
+
     python:
         scene_manager = Scene()
 
         scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", display_transform = character_center_flipped)
         scene_manager.add_actor(stranger, position = "stand3")
 
-    known_person.char "Oh, hello [known_person.mc_title], how nice to see you here."
+    known_person "Oh, hello [known_person.mc_title], how nice to see you here."
     mc.name "Hello [known_person.title], nice to see you too."
 
     # set titles for unknown person
@@ -57,7 +57,7 @@ label mall_introduction_action_label:
         stranger.set_title(title_choice)
         stranger.set_possessive_title(get_random_possessive_title(stranger))
 
-    known_person.char "Let me introduce my friend [formatted_title]."
+    known_person "Let me introduce my friend [formatted_title]."
     "[formatted_title] holds her hand out to shake yours."
 
     # sets your title for unknown person
@@ -66,46 +66,46 @@ label mall_introduction_action_label:
         stranger.set_mc_title(title_choice)
 
     if known_person.is_employee():
-        known_person.char "And this is my boss, [title_choice]."
+        known_person "And this is my boss, [title_choice]."
     elif known_person is lily:
-        known_person.char "And this is my brother, [title_choice]."
+        known_person "And this is my brother, [title_choice]."
     elif known_person is mom:
-        known_person.char "And this is my son, [title_choice]."
+        known_person "And this is my son, [title_choice]."
     elif known_person is aunt:
-        known_person.char "And this is my nephew, [title_choice]."
+        known_person "And this is my nephew, [title_choice]."
     elif known_person is cousin:
-        known_person.char "And this is my cousin, [title_choice]."
+        known_person "And this is my cousin, [title_choice]."
     else:
-        known_person.char "And this is my friend, [title_choice]."
+        known_person "And this is my friend, [title_choice]."
 
     mc.name "It's a pleasure to meet you, [stranger.title]."
     $ scene_manager.update_actor(stranger, emotion = "happy")
     $ stranger.change_love(5)
-    stranger.char "The pleasure is all mine, [stranger.mc_title]."
+    stranger "The pleasure is all mine, [stranger.mc_title]."
 
     # bonus stats when the person knows you more intimately
     if known_person.sluttiness > 20 or known_person.love > 20:
         if known_person.is_employee():
             if known_person.sluttiness > 40:
-                known_person.char "You should get to know him more intimately [stranger.name], you should apply for a position in the company."
+                known_person "You should get to know him more intimately [stranger.name], you should apply for a position in the company."
             else:
-                known_person.char "I promise you [stranger.name], he is a great boss: you should go out with him sometime."
+                known_person "I promise you [stranger.name], he is a great boss: you should go out with him sometime."
         else:
             if known_person.sluttiness > 40:
-                known_person.char "He can show you a really good time [stranger.name], if you know what i mean."
+                known_person "He can show you a really good time [stranger.name], if you know what i mean."
             else:
-                known_person.char "I have to tell you [stranger.name], he is a great person to hang out with."
+                known_person "I have to tell you [stranger.name], he is a great person to hang out with."
 
         $ stranger.change_love(5)
         $ stranger.change_happiness(10)
 
         if stranger.sluttiness > 5:
-            stranger.char "He is very cute [known_person.name], I might just do that."
+            stranger "He is very cute [known_person.name], I might just do that."
         else:
-            stranger.char "I trust your judgement [known_person.name], perhaps we could go out sometime."
+            stranger "I trust your judgement [known_person.name], perhaps we could go out sometime."
 
     mc.name "It was great meeting you both here. I'll see you around [stranger.title]."
-    
+
     $ scene_manager.update_actor(stranger, position = "back_peek")
     $ scene_manager.update_actor(known_person, position = "walking_away")
 
@@ -116,6 +116,3 @@ label mall_introduction_action_label:
         del stranger
         del known_person
     return
-
-
-    

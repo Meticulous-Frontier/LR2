@@ -226,7 +226,7 @@ init -1 python:
 
         if not limited_to_top:
             for full_outfit in self.outfits:
-                if full_outfit.slut_requirement <= slut_limit:
+                if full_outfit.get_full_outfit_slut_score() <= slut_limit:
                     valid_full_outfits.append(full_outfit)
 
         if not limited_to_top:

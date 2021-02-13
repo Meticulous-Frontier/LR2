@@ -114,7 +114,9 @@ label girlfriend_sleepover_label():
         $ mc.location.show_background()
         "When you finish, you go to your room. You make sure everything is nice and tidy."
         "Eventually, you get a text message."
+        $ mc.having_text_conversation = the_person
         the_person "Hey, I'm here, let me in?"
+        $ mc.having_text_conversation = None
         $ the_person.draw_person()
         "You go to the front door. Your girlfriend is waiting for you."
         the_person "Hey!"
@@ -193,11 +195,11 @@ label girlfriend_sleepover_label():
             else:
                 $ the_person.change_love(-1)
                 $ the_person.change_slut_temp(-1)
-                the_person.char "Well I guess we're done then... Maybe next time you can get me off as well."
+                the_person "Well I guess we're done then... Maybe next time you can get me off as well."
             $ done = True
 
         else:
-            "After a short rest you've recovered some of your energy and [the_person.possessive_title]'s eager to get back to work."
+            "After a short rest you've recovered some of your energy and [the_person.possessive_title!l]'s eager to get back to work."
             $ mc.change_energy(energy_gain_amount)
             $ the_person.change_energy(energy_gain_amount) #She gains some back too
             if energy_gain_amount >= 10:
@@ -242,7 +244,7 @@ label girlfriend_sleepover_label():
                     else:
                         $ the_person.change_love(-1)
                         $ the_person.change_slut_temp(-1)
-                        the_person.char "Well... Maybe next time you can get me off as well?"
+                        the_person "Well... Maybe next time you can get me off as well?"
                     $ done = True
     $ the_person.draw_person(position = "back_peek")
     "[the_person.possessive_title] turns her back to you. You cuddle up with her, wrapping your arm around her."
@@ -260,7 +262,7 @@ label girlfriend_sleepover_label():
     if wakeup_action:
         $ wakeup_action.call_action(the_person)
     else:
-        "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
+        "You wakeup, but [the_person.possessive_title!l] isn't there. She must have gotten up early and left."
         $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
@@ -270,13 +272,13 @@ label girlfriend_sleepover_label():
 
 label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.draw_person(position = "walking_away")
-    "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
+    "You slowly wake up, with your arms around [the_person.possessive_title!l], spooning with her."
     "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
     if the_person.has_large_tits():
         "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
     else:
         "Your hand cups one of her breasts. It's so perky and warm, it feels good in your hand."
-    the_person.char "Mmmmmmmm......"
+    the_person "Mmmmmmmm......"
     "[the_person.title] moans but doesn't stir. Maybe you could surprise her with a little good morning dicking."
     menu:
         "Try to slide yourself in":
@@ -286,7 +288,7 @@ label girlfriend_wakeup_spooning_label(the_person):
             "You get up and head for bathroom to take a leak."
             "When you come back, [the_person.title] is awake."
             $ the_person.draw_person(position = "missionary")
-            the_person.char "Good morning! I slept great."
+            the_person "Good morning! I slept great."
             $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "stand3")
@@ -297,7 +299,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     "You spit into your hand and rub it on your dick a few times, getting it lubed up."
     "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
     "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."
-    the_person.char "Oh [the_person.mc_title]. Mmmmmm"
+    the_person "Oh [the_person.mc_title]. Mmmmmm"
     "She's still asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
     "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
     $ the_person.change_arousal(20)
@@ -306,20 +308,20 @@ label girlfriend_wakeup_spooning_label(the_person):
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     $ the_person.change_arousal(20)
     $ mc.change_arousal(15)
-    the_person.char "Mmm that feels so... wait... [the_person.mc_title]?"
+    the_person "Mmm that feels so... wait... [the_person.mc_title]?"
     $ the_person.draw_person( position = "back_peek", emotion = "happy")
     "[the_person.possessive_title] wakes up and looks back at you smiling."
-    the_person.char "Oh my god that feels so good... Baby you know how to give a wakeup call, holy fuck!"
+    the_person "Oh my god that feels so good... Baby you know how to give a wakeup call, holy fuck!"
     "Encouraged by her words, you reach your hand down and lift her leg, giving you a better angle for deeper penetration."
     "You pick up the pace and begin to fuck her earnestly."
     $ the_person.change_arousal(30) #70
     $ mc.change_arousal(25) #55
-    the_person.char "Oh yes that feels so good, fuck me good!"
+    the_person "Oh yes that feels so good, fuck me good!"
     "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
     "Her ass is making smacking noises now, every time your hips drive your cock deep inside of her."
     $ the_person.change_arousal(40) #110
     $ mc.change_arousal(35) #90
-    the_person.char "Oh fuck, yes! YES!"
+    the_person "Oh fuck, yes! YES!"
     "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
     $ the_person.have_orgasm(the_position = "back_peek")
     $ mc.change_arousal(20) #110
@@ -332,14 +334,14 @@ label girlfriend_wakeup_spooning_label(the_person):
             "You grab her hip and shove your cock deep and hold it there, cumming deep inside her. She moans and gasps with every spurt."
             $ the_person.call_dialogue("cum_vagina")
             "Satisfied, you slowly pull out of her."
-            the_person.char "That's certainly one way to start the day... holy hell."
+            the_person "That's certainly one way to start the day... holy hell."
         "Pull out":
             $ the_person.cum_on_ass()
             "You pull out at the last second. Large, thick roaps of cum rocket out of your cock, coating her ass."
             $ the_person.draw_person( position = "back_peek")
             the_person "Oh my god... its so warm!"
             "When you finish you lay back, admiring your painting skills."
-            the_person.char "That's certainly one way to start the day..."
+            the_person "That's certainly one way to start the day..."
     $ the_person.reset_arousal()
     $ mc.arousal = 0
     "You lay in bed together for a little longer, but soon it is time to start the day."
@@ -347,7 +349,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person(position = "stand4")
     "You both get ready for the day."
-    the_person.char "Alright, I need to get some things done today. Thanks for the sleepover!"
+    the_person "Alright, I need to get some things done today. Thanks for the sleepover!"
     $ clear_scene()
     return
 
@@ -422,7 +424,7 @@ label girlfriend_underwear_shopping_label(the_person):
                     "She gives you a quick kiss."
                     the_person "Thank you for being so patient!"
                     $ the_person.draw_person (position = "stand2")
-                "You spend a few minutes with [the_person.possessive_title] as she looks through the different clothes racks. Eventually she picks something."
+                "You spend a few minutes with [the_person.possessive_title!l] as she looks through the different clothes racks. Eventually she picks something."
                 "She takes your hand and you follow her to the dressing room."
                 the_person "I'll be right back!"
                 $ clear_scene()
@@ -440,7 +442,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(lingerie_outfit, outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title!l]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
                         $ the_person.call_dialogue("lingerie_shopping_tame_response")
@@ -450,7 +452,7 @@ label girlfriend_underwear_shopping_label(the_person):
                         $ the_person.call_dialogue("lingerie_shopping_excited_response")
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
                     $ the_person.draw_person()
-                    the_person.char "What do you think?"
+                    the_person "What do you think?"
                     "You check her out for a bit. Should you change it? Or start over?"
                 else:
                     mc.name "Sorry, I can't figure out a way to make it work. Why don't you get dressed really quick..."
@@ -474,7 +476,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(Outfit("New Outfit"), outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    "You pick out an outfit and take them to [the_person.possessive_title!l]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
@@ -485,7 +487,7 @@ label girlfriend_underwear_shopping_label(the_person):
                         $ the_person.call_dialogue("lingerie_shopping_excited_response")
 
                     $ the_person.draw_person()
-                    the_person.char "What do you think?"
+                    the_person "What do you think?"
                     "You check her out for a bit. Should you change it? Or start over?"
                 else:
                     mc.name "Sorry, I can't figure out a way to make it work. Why don't you get dressed really quick..."

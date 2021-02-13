@@ -26,23 +26,23 @@ label clone_recall_label(the_person):
 
     $ the_person.change_location(dungeon)
 
-    the_person.char "Okay, [the_person.mc_title]. I'll head there next."
+    the_person "Okay, [the_person.mc_title]. I'll head there next."
     return
 
 label clone_rent_apartment_label(the_person):
     $ the_person.draw_person()
     mc.name "Listen, [the_person.name], you are very dear to me and I have decided that you are mature enough to live on your own."
     mc.name "So I am willing to rent you a place where you can live by yourself."
-    the_person.char "Please [the_person.mc_title], I love being with you, do I really have to go?"
+    the_person "Please [the_person.mc_title], I love being with you, do I really have to go?"
     menu:
         "Let her stay":
             mc.name "Do you really want to live here, in my dungeon?"
-            the_person.char "Yes, [the_person.mc_title], please let me stay..."
+            the_person "Yes, [the_person.mc_title], please let me stay..."
             mc.name "Ok, if that is what you want."
             return
         "Rent the apartment":
             mc.name "I think its better for your development if you have your own place. Trust me."
-            the_person.char "Ok [the_person.mc_title], if you think that is best, I will honor your wish."
+            the_person "Ok [the_person.mc_title], if you think that is best, I will honor your wish."
 
             python:
                 the_person.home = None

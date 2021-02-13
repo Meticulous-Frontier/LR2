@@ -10,6 +10,7 @@ init -3 python:
     # these fetishes could be used for 'slave' / 'dominatrix'
     FETISH_BDSM_OPTION_LIST = ["being submissive", "taking control"]
 
+    FETISH_SERUM_TRIGGER_VALUE = 20
 
 init -2 python:
     def get_suggest_tier(person):   #Returns a value of 0-3 depending on the person's suggestibility.
@@ -185,10 +186,20 @@ init -1 python:
 
     def fetish_serum_increase_opinion(opinion_list, max_new_score, person, add_to_log = False): #WE purposefully increase a score EVERY time this function is used instead of RNG
         avail_opinions = [x for x in opinion_list if person.get_opinion_score(x) < max_new_score]
+        if person.is_dominant() and "being submissive" in avail_opinions:   # prevent dominant person from becoming submissive
+            avail_opinions.remove("being submissive")
         if avail_opinions:
             person.increase_opinion_score(get_random_from_list(avail_opinions), max_value = max_new_score, add_to_log = add_to_log)
             return True #Return true if we increased an opinion
         return False
+
+    def fetish_serum_calculate_completion(person, serum_tag):
+        counter = person.event_triggers_dict.get(serum_tag, 0)
+        return __builtin__.round((counter / float(FETISH_SERUM_TRIGGER_VALUE)) * 100, 1)
+
+    def fetish_serum_increase_counter(person, serum_tag):
+        person.event_triggers_dict[serum_tag] = person.event_triggers_dict.get(serum_tag, 0) + get_suggest_tier(person) + 1
+        return
 
     def fetish_serum_roll_fetish_chance(opinion_list, person):
         fetish_odds = (get_suggest_tier(person) * 20) #Up to 60 points based on suggestibility
@@ -199,45 +210,64 @@ init -1 python:
         person.event_triggers_dict["nano_bots_f"] = False
         return
 
+    def fetish_basic_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_f", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_fc")) + "%", "float_text_blue")
+        return
+
     def fetish_basic_function_on_turn(person, add_to_log):
         if person.event_triggers_dict.get("nano_bots_f", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
+        fetish_serum_increase_counter(person, "nano_bots_fc")
+
         # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
-        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BASIC_OPINION_LIST, person):
+        if person.event_triggers_dict.get("nano_bots_fc", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
+        person.event_triggers_dict["nano_bots_fc"] = 0 # reset counter
         person.event_triggers_dict["nano_bots_f"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
-        fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True)
-        return
 
+        if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.")
+        return
 
     def fetish_anal_function_on_apply(person, add_to_log):
         person.event_triggers_dict["nano_bots_a"] = False
+        return
+
+    def fetish_anal_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_a", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " anal proclivity Bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ac")) + "%", "float_text_blue")
         return
 
     def fetish_anal_function_on_turn(person, add_to_log):
         if person.event_triggers_dict.get("nano_bots_a", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
+        fetish_serum_increase_counter(person, "nano_bots_ac")
+
         # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
-        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person):
+        if person.event_triggers_dict.get("nano_bots_ac", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
+        person.event_triggers_dict["nano_bots_ac"] = 0 # reset counter
         person.event_triggers_dict["nano_bots_a"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
-        fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
-            person.change_obedience(1, add_to_log)
+            person.change_obedience(1, add_to_log = True)
+
+        if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " anal proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
 
         if is_anal_fetish_unlocked():
             if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
@@ -254,14 +284,22 @@ init -1 python:
         person.event_triggers_dict["nano_bots_b"] = False
         return
 
+    def fetish_breeding_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_b", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " reproduction proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_bc")) + "%", "float_text_blue")
+        return
+
     def fetish_breeding_function_on_turn(person, add_to_log):
         if person.event_triggers_dict.get("nano_bots_b", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
+        fetish_serum_increase_counter(person, "nano_bots_bc")
+
         # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
-        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
+        if person.event_triggers_dict.get("nano_bots_bc", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
+        person.event_triggers_dict["nano_bots_bc"] = 0 # reset counter
         person.event_triggers_dict["nano_bots_b"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
@@ -269,9 +307,10 @@ init -1 python:
         if fetish_random_roll_1 < 10 + (tier * 5):
             person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
-            person.change_happiness(1, add_to_log)
+            person.change_happiness(1, add_to_log = True)
 
-        fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True)
+        if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " reproduction proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
             return
@@ -297,14 +336,22 @@ init -1 python:
         person.event_triggers_dict["nano_bots_c"] = False
         return
 
+    def fetish_cum_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_c", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " semen proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_cc")) + "%", "float_text_blue")
+        return
+
     def fetish_cum_function_on_turn(person, add_to_log):
         if person.event_triggers_dict.get("nano_bots_c", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
+        fetish_serum_increase_counter(person, "nano_bots_cc")
+
         # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
-        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
+        if person.event_triggers_dict.get("nano_bots_cc", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
+        person.event_triggers_dict["nano_bots_cc"] = 0 # reset counter
         person.event_triggers_dict["nano_bots_c"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
@@ -315,7 +362,9 @@ init -1 python:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 person.change_slut_temp(1, add_to_log)
 
-        fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True)
+        if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " semen proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
+
         if is_cum_fetish_unlocked():
             if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
@@ -332,24 +381,34 @@ init -1 python:
         person.event_triggers_dict["nano_bots_e"] = False
         return
 
+    def fetish_exhibition_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_e", False) == False:   # no trigger, report progress
+            mc.log_event(person.title + " social sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ec")) + "%", "float_text_blue")
+        return
+
     def fetish_exhibition_on_turn(person, add_to_log):
         if person.event_triggers_dict.get("nano_bots_e", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
+        fetish_serum_increase_counter(person, "nano_bots_ec")
+
         # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
-        if renpy.random.randint(0,100) < fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
+        if person.event_triggers_dict.get("nano_bots_ec", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
+        person.event_triggers_dict["nano_bots_ec"] = 0 # reset counter
         person.event_triggers_dict["nano_bots_e"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
         fetish_random_roll_1 = renpy.random.randint(0,100)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log)
+                person.change_slut_temp(1, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
-            person.change_obedience(1, add_to_log)
-        fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True)
+            person.change_obedience(1, add_to_log = True)
+
+        if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " social sexual proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
 
         if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
@@ -362,70 +421,54 @@ init -1 python:
         return
 
     def fetish_unlock_basic_serum():
-        found = find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
+        found = get_fetish_basic_serum()
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] = 1
         return
 
     def get_fetish_basic_serum():
-        found = find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
-        if found:
-            return found
-        return None
+        return find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_anal_serum():
-        found = find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
+        found = get_fetish_anal_serum()
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
     def get_fetish_anal_serum():
-        found = find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
-        if found:
-            return found
-        return None
+        return find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_exhibition_serum():
-        found = find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
+        found = get_fetish_exhibition_serum()
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
     def get_fetish_exhibition_serum():
-        found = find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
-        if found:
-            return found
-        return None
+        return find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_cum_serum():
-        found = find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
+        found = get_fetish_cum_serum()
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
     def get_fetish_cum_serum():
-        found = find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
-        if found:
-            return found
-        return None
+        return find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_breeding_serum():
-        found = find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
+        found = get_fetish_breeding_serum()
         if found:
             found.tier = 1
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
     def get_fetish_breeding_serum():
-        found = find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
-        if found:
-            return found
-        return None
-
+        return find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
 
     def add_fetish_serum_traits():
         FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
@@ -441,6 +484,7 @@ init -1 python:
                 production_added = FETISH_PRODUCTION_COST,
                 base_side_effect_chance = 10,
                 on_apply = fetish_basic_function_on_apply,
+                on_remove = fetish_basic_function_on_remove,
                 on_turn = fetish_basic_function_on_turn,
                 tier = 99,
                 start_researched = True,
@@ -458,6 +502,7 @@ init -1 python:
                 production_added = FETISH_PRODUCTION_COST,
                 base_side_effect_chance = 0,
                 on_apply = fetish_exhibition_function_on_apply,
+                on_remove = fetish_exhibition_function_on_remove,
                 on_turn = fetish_exhibition_on_turn,
                 tier = 99,
                 start_researched =  True,
@@ -475,6 +520,7 @@ init -1 python:
                 production_added = FETISH_PRODUCTION_COST,
                 base_side_effect_chance = 10,
                 on_apply = fetish_anal_function_on_apply,
+                on_remove = fetish_anal_function_on_remove,
                 on_turn = fetish_anal_function_on_turn,
                 tier = 99,
                 start_researched =  True,
@@ -492,6 +538,7 @@ init -1 python:
                 production_added = FETISH_PRODUCTION_COST,
                 base_side_effect_chance = 10,
                 on_apply = fetish_cum_function_on_apply,
+                on_remove = fetish_cum_function_on_remove,
                 on_turn = fetish_cum_function_on_turn,
                 tier = 99,
                 start_researched =  True,
@@ -509,6 +556,7 @@ init -1 python:
                 production_added = FETISH_PRODUCTION_COST,
                 base_side_effect_chance = 10,
                 on_apply = fetish_breeding_function_on_apply,
+                on_remove = fetish_breeding_function_on_remove,
                 on_turn = fetish_breeding_function_on_turn,
                 tier = 99,
                 start_researched =  True,
@@ -519,7 +567,7 @@ init -1 python:
 
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_fetish_serum_trait(stack):
-python:
-    add_fetish_serum_traits()
-    execute_hijack_call(stack)
+    python:
+        add_fetish_serum_traits()
+        execute_hijack_call(stack)
 return

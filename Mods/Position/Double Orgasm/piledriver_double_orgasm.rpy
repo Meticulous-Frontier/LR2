@@ -20,7 +20,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                 if the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl.char "It would be a shame to waste all of this, right?"
+                    the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
@@ -28,20 +28,20 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                 elif the_girl.has_cum_fetish():
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl.char "It would be a shame to waste all of this, right?"
+                    the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
                     "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
-                    the_girl.char "Mmmmm. So good."
+                    the_girl "Mmmmm. So good."
                     $ the_girl.cum_on_face()
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.effective_sluttiness() > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reachesup for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl.char "It would be a shame to waste all of this, right?"
+                    the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                 else:
                     "[the_girl.possessive_title] reaches up for your cock, removes the condom, and ties the end in a knot for you."
-                    the_girl.char "Look at all that cum. Well done."
+                    the_girl "Look at all that cum. Well done."
             else:
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
@@ -68,7 +68,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heighterns her orgasm."
                 "She truly is addicted to your cum."
             else:
-                the_girl.char "Ah... Good job... Ah..."
+                the_girl "Ah... Good job... Ah..."
                 "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s body covered in your semen."
     $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

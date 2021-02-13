@@ -26,16 +26,16 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
     "You grab your strap-on from your bag, then turn to [the_girl.title]"
     mc.name "[the_girl.title], I want you to lie down for me. I'm going to fuck your pussy and your ass."
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
-    the_girl.char "I'm not sure the angle is gonna work for..."
+    the_girl "I'm not sure the angle is gonna work for..."
     "She let's out a startled yelp as you grab her ankles and bring them up over her head."
     if the_girl.get_opinion_score("being submissive") > 0:
-        the_girl.char "Oh god, you're gonna dominate me with that thing aren't you?"
+        the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."
         $ the_girl.change_arousal(10)
     elif the_girl.sluttiness > 100:
-        the_girl.char "Oh! That'll work! My holes are for you to use [the_girl.mc_title]!"
+        the_girl "Oh! That'll work! My holes are for you to use [the_girl.mc_title]!"
     else:
-        the_girl.char "Oh god! I don't know... are you sure about this?"
+        the_girl "Oh god! I don't know... are you sure about this?"
         mc.name "Don't worry, I'll go slow."
     "[the_girl.possessive_title] reaches down and grabs the dildo. You position yourself at the entrance to her slit and she guides the dildo to her rear entrance."
     if the_girl.arousal > 60:
@@ -44,10 +44,10 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
         "You slide in nice and slow, giving her plenty of time to adjust to being filled in both holes."
 
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl.char "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
-        the_girl.char "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
+        the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
     return
 
 label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This should only be filler, since piledriver can only be transitioned to for now
@@ -57,17 +57,17 @@ label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This shoul
     $ the_girl.call_dialogue(piledriver_DP.associated_taboo+"_taboo_break")
     "You grab onto [the_girl.title]'s ankles and lift them up, bringing her knees up to your shoulders."
     if the_girl.effective_sluttiness(piledriver_DP.associated_taboo) > piledriver_DP.slut_cap:
-        the_girl.char "Ooh, I like it!"
+        the_girl "Ooh, I like it!"
         "With one hand she reaches down between her legs positioning your cock, while her other hand lines up the dildo for her sphincter."
         "She rubs your tip against her clit a few times before moving it down and slightly pushing the dildo inside her ass."
     else:
-        the_girl.char "Ah! What are you doing?"
+        the_girl "Ah! What are you doing?"
         mc.name "Trust me, this will feel great."
         "You reach down between your legs and hold onto your cock, lining it up with [the_girl.possessive_title]'s pussy."
         "At the same time you place the dildo against her sphincter, slightly opening it up."
 
     "You hold onto [the_girl.title]'s legs and push forward. After a moment of resistance you slide smoothly into both her holes."
-    the_girl.char "Ohhhh....."
+    the_girl "Ohhhh....."
     "You hold yourself deep inside of her for a few seconds, then pull back and begin slowly thrust in and out."
     return
 
@@ -75,13 +75,13 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
     #CHOICE CONCEPT: Talk dirty to her // Fuck her in silence
     "You hold onto [the_girl.title]'s ankles and lean into her. Her cunt feels even tighter than usual, thanks to the girth of the strap-on in her ass."
     if the_girl.sex_skills["Vaginal"] < 3 or the_girl.sex_skills["Anal"] < 3: #She struggles with the position
-        the_girl.char "Ah! Oh fuck me, I don't know if I can handle this!"
+        the_girl "Ah! Oh fuck me, I don't know if I can handle this!"
 
     else:
         $ the_girl.call_dialogue("sex_responses_vaginal")
         "[the_girl.title] holds her legs out wide for you, spreading herself so you can fuck her hard and fast against the [the_object.name]."
     "[the_girl.title] moans loudly. You do your best to drive your cock all the way to it's base, fitting every last inch into [the_girl.title]'s cunt."
-    the_girl.char "So full... holy hell."
+    the_girl "So full... holy hell."
     "You hold yourself in deep. Her holes are completely stuffed. She reaches up and grabs her ankles, helping to hold them apart."
     menu:
         "Talk dirty to her":
@@ -89,22 +89,22 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
             if the_girl.get_opinion_score("threesomes") >= 0:
                 "She looks up at you and bites her lip."
                 if the_girl.obedience > 170:  #Basically a slave
-                    the_girl.char "If that's what you want. Get a whole room full of guys and gangbang me! I'll do anything you want me to!"
+                    the_girl "If that's what you want. Get a whole room full of guys and gangbang me! I'll do anything you want me to!"
                 elif the_girl.love > 80: #she loves you
-                    the_girl.char "I just can't refuse you. If you wanted to do it with another guy, or girl, I'll do it. But just for you!"
+                    the_girl "I just can't refuse you. If you wanted to do it with another guy, or girl, I'll do it. But just for you!"
                 else:
-                    the_girl.char "Mmm, that sounds great. I'm not sure I can take any more, but I wouldn't mind trying!"
+                    the_girl "Mmm, that sounds great. I'm not sure I can take any more, but I wouldn't mind trying!"
                 $ the_girl.change_arousal(5)
             else:
                 "She gives a small frown."
-                the_girl.char "I would rather we keep things personal... just between me and you."
+                the_girl "I would rather we keep things personal... just between me and you."
 
         "Pinch her nipples" if the_girl.outfit.tits_available():
             "While she holds her own ankles, you decide to take advantage and play with her tits."
             "You grab both her nipples and pinch and twist them."
-            the_girl.char "Gah! God you know just how to mix pleasure with pain, don't you?"
+            the_girl "Gah! God you know just how to mix pleasure with pain, don't you?"
             "You respond with another pinch."
-            the_girl.char "Oh! Fuck that hurts so good..."
+            the_girl "Oh! Fuck that hurts so good..."
             $ the_girl.change_arousal(5)
 
         "Kiss her neck":
@@ -112,9 +112,9 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
             if the_girl.get_opinion_score("kissing") > 0:
                 $ the_girl.discover_opinion("kissing")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("kissing") * 3)
-                the_girl.char "[the_girl.mc_title]... Oh [the_girl.mc_title] fuck that feels amazing..."
+                the_girl "[the_girl.mc_title]... Oh [the_girl.mc_title] fuck that feels amazing..."
                 "You bare your teeth and scrape them against her skin gently. She gasps and her body jumps at the sensation."
-                the_girl.char "Fuuuuuuck that's nice..."
+                the_girl "Fuuuuuuck that's nice..."
             else:
                 "She squirms beneath you as you kiss and suckle lightly on the side of her neck."
 
@@ -123,13 +123,13 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
 label scene_piledriver_DP_2(the_girl, the_location, the_object):
     "You pound [the_girl.possessive_title]'s holes hard. She moans and her toes curl from the overwhelming sensations."
     "She lifts her head up from the [the_object.name] and looks you in the eyes."
-    the_girl.char "Don't hold back... Give it to me good!"
+    the_girl "Don't hold back... Give it to me good!"
     "She reaches down and starts to run circles with her fingertips around her clit."
     menu:
         "Pound her hard":
             "You pull yourself out almost completely, until just the tip of your cock and the strap-on are left inside her."
             "She almost has time to protest, but then you slam them both deep with one forceful thrust."
-            the_girl.char "AH! Oh fuck me!"
+            the_girl "AH! Oh fuck me!"
             "You give her slow but forceful thrusts."
             if the_girl.outfit.tits_available():
                 "[the_girl.possessive_title]'s tits jiggle enticingly with every thrust. Shock waves erupting from her crotch arc through her entire body."
@@ -140,7 +140,7 @@ label scene_piledriver_DP_2(the_girl, the_location, the_object):
         "Pound her fast":
             "You decide to give her all you've got. Holding her ankles open wide, you move your hips now as fast as you can."
             "[the_girl.possessive_title] wraps her arms around you, just trying to hold on. Her fingernails start to scratch at your back."
-            the_girl.char "I'm so full. [the_girl.mc_title]... [the_girl.mc_title]! It's so good!"
+            the_girl "I'm so full. [the_girl.mc_title]... [the_girl.mc_title]! It's so good!"
             "She clings to you as you fuck her. Her eyes start to roll up in the back of her head from the intense sensations."
     return
 
@@ -152,7 +152,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
     menu:
         "Cum inside of her":
             if the_girl.sluttiness > 120 or mc.condom:
-                the_girl.char "Come on, dump it right inside of me!"
+                the_girl "Come on, dump it right inside of me!"
                 if mc.condom:
                     "You had no intention of stopping, but hearing her ask for it makes you cum even harder."
                     "You push yourself as deep as you can manage and pump your load out into her cunt, hopefully contained by your condom."
@@ -161,46 +161,46 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                     if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                         $ the_girl.discover_opinion("drinking cum")
                         "When you let [the_girl.possessive_title] down she reaches for your cock. With delicate fingers she slides the condom off of you."
-                        the_girl.char "It would be a shame to waste all of this, right?"
+                        the_girl "It would be a shame to waste all of this, right?"
                         "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                         $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                     else:
                         "When you let [the_girl.possessive_title] down she reaches for your cock, removes the condom, and ties the end in a knot."
-                        the_girl.char "Look at all that cum. Well done."
+                        the_girl "Look at all that cum. Well done."
 
                 else:
                     "You had no intention of stopping either way, but hearing her ask for it makes you cum even harder. You gasp and push yourself as deep as you can, draining your balls into [the_girl.title]'s cunt."
                     $ the_girl.cum_in_vagina()
                     $ piledriver_DP.redraw_scene(the_girl)
                     if the_girl.get_opinion_score("creampies") > 0:
-                        the_girl.char  "Yes! Fill me with your cum!"
+                        the_girl  "Yes! Fill me with your cum!"
                     if the_girl.has_cum_fetish():
                         "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                        the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                        the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                         "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
                     if the_girl.get_opinion_score("bareback sex") > 0:
-                        the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
+                        the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                         "[the_girl.possessive_title]'s voice starts to trail off."
                     elif the_girl.sluttiness > 110:
-                        the_girl.char "Oh god it's so deep."
+                        the_girl "Oh god it's so deep."
                     elif the_girl.knows_pregnant():
-                        the_girl.char "Oh yes, fill me up with your hot semen!"
+                        the_girl "Oh yes, fill me up with your hot semen!"
                     elif the_girl.on_birth_control:
-                        the_girl.char "Oh fuck...  Good thing I'm on the pill..."
+                        the_girl "Oh fuck...  Good thing I'm on the pill..."
                     else:
-                        the_girl.char "Oh fuck... god I could get pregnant... what was I thinking?"
+                        the_girl "Oh fuck... god I could get pregnant... what was I thinking?"
                     "You take a moment to catch your breath, then sit back and pull your cock out of [the_girl.title]. Her ass gapes slightly where the strap-on was previously buried."
                     "You keep her on her back for a few more seconds, enjoying the way the position keeps your semen inside of her."
 
             else:
-                the_girl.char "Wait, make sure to pull out!"
+                the_girl "Wait, make sure to pull out!"
                 "It's a little late for that now. You gasp and push yourself as deep as you can, draining your balls into [the_girl.possessive_title]'s cunt."
                 $ the_girl.cum_in_vagina()
                 $ piledriver_DP.redraw_scene(the_girl)
                 if the_girl.knows_pregnant():
-                    the_girl.char "Oh fuck... thats a lot, next time spray it all over me."
+                    the_girl "Oh fuck... thats a lot, next time spray it all over me."
                 elif not the_girl.on_birth_control:
-                    the_girl.char "Oh fuck... what if I get pregnant [the_girl.mc_title]?"
+                    the_girl "Oh fuck... what if I get pregnant [the_girl.mc_title]?"
                 "You take a moment to catch your breath, then sit back and pull your cock out of [the_girl.title]. Her ass gapes slightly where the strap-on was previously buried."
                 "You keep her on her back for a few more seconds, enjoying the way the position keeps your semen inside of her."
 
@@ -226,13 +226,13 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     "You grab her ankles and bring them up over her head."
     if the_girl.get_opinion_score("being submissive") > 0:
-        the_girl.char "Oh god, you're gonna dominate me with that thing aren't you?"
+        the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."
         $ the_girl.change_arousal(10)
     elif the_girl.sluttiness > 100:
-        the_girl.char "Oh god here we go. My holes are for you to use [the_girl.mc_title]!"
+        the_girl "Oh god here we go. My holes are for you to use [the_girl.mc_title]!"
     else:
-        the_girl.char "Oh god! I don't know... are you sure about this?"
+        the_girl "Oh god! I don't know... are you sure about this?"
         mc.name "Don't worry, I'll go slow."
     "[the_girl.possessive_title] reaches down and grabs the dildo. You position yourself at the entrance to her slit and she guides the dildo to her rear entrance."
     if the_girl.arousal > 60:
@@ -241,10 +241,10 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
         "You slide in nice and slow, giving her plenty of time to adjust to being filled in both holes."
 
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl.char "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
-        the_girl.char "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
+        the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
     return
 
 label transition_default_piledriver_DP(the_girl, the_location, the_object):
@@ -254,35 +254,35 @@ label transition_default_piledriver_DP(the_girl, the_location, the_object):
     return
 
 label strip_piledriver_DP(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "Wait, wait a second."
+    the_girl "Wait, wait a second."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = piledriver_DP.position_tag)
     "You let your cock pop out of [the_girl.title]'s pussy and watch as she struggles out of her [the_clothing.name] and throws it to the side."
-    the_girl.char "Okay, keep going!"
+    the_girl "Okay, keep going!"
     "You throw her legs over your shoulders and slide yourself as deep into her cunt as you can get it. She guides the strap-on into her puckered hole simultaneously."
     return
 
 label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "[the_girl.mc_title], I'd like to ah... take off my... my [the_clothing.name], would you mind?"
+    the_girl "[the_girl.mc_title], I'd like to ah... take off my... my [the_clothing.name], would you mind?"
     "[the_girl.title] pants as you fuck her hard."
     menu:
         "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = piledriver_DP.position_tag)
             "You let your cock pop out of [the_girl.possessive_title]'s pussy and watch as she struggles out of her [the_clothing.name] and throws it to the side."
-            the_girl.char "Okay, keep going now sir!"
+            the_girl "Okay, keep going now sir!"
             "You throw her legs over your shoulders and slide yourself as deep into her cunt as you can get it. She guides the strap-on into her puckered hole simultaneously."
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do you think I look sexy in it?"
+                the_girl "Do you think I look sexy in it?"
                 "You speed up, fucking her faster in response to her question."
             elif the_girl.sluttiness < 100:
-                the_girl.char "Does it make me look like a good little slut? All I want to be is your good little slut sir."
+                the_girl "Does it make me look like a good little slut? All I want to be is your good little slut sir."
                 "She pushes her hips back into you and moans happily."
             else:
-                the_girl.char "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
+                the_girl "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
                 "She grinds her hips back into you and moans ecstatically."
     return
 
@@ -291,5 +291,5 @@ label orgasm_piledriver_DP(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "You keep fucking [the_girl.possessive_title] through her climax, enjoying her sopping wet cunt while she twitches and moans underneath you."
     "A few seconds later she relaxes and all the tension drains from her body."
-    the_girl.char "God that is so intense. Keep going, I bet you can make me cum again!"
+    the_girl "God that is so intense. Keep going, I bet you can make me cum again!"
     return

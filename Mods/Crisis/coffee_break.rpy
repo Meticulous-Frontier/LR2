@@ -35,17 +35,17 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         scene_manager.add_actor(person_three, emotion="default")
 
     if person_one.sluttiness > 70 and person_three.sluttiness > 70:
-        person_one.char "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
-        person_two.char "I would mind a giving that meat stick some affection myself."
-        person_three.char "That would be perfect, when you two are done, I can tame and ride that monster."
+        person_one "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
+        person_two "I would mind a giving that meat stick some affection myself."
+        person_three "That would be perfect, when you two are done, I can tame and ride that monster."
     elif person_one.sluttiness > 40 and person_three.sluttiness > 40:
-        person_one.char "Don't you think [person_one.mc_title] has a nice bulge in his pants."
-        person_two.char "I bet that he is hung like a horse."
-        person_three.char "I've always wanted to take some horse riding lessons."
+        person_one "Don't you think [person_one.mc_title] has a nice bulge in his pants."
+        person_two "I bet that he is hung like a horse."
+        person_three "I've always wanted to take some horse riding lessons."
     else:
-        person_one.char "Don't you think [person_one.mc_title] is really good looking."
-        person_two.char "I like how his butt flexes in his pants."
-        person_three.char "To be honest, I much more prefer the other side."
+        person_one "Don't you think [person_one.mc_title] is really good looking."
+        person_two "I like how his butt flexes in his pants."
+        person_three "To be honest, I much more prefer the other side."
 
     python:
         scene_manager.update_actor(person_one, emotion="happy")
@@ -54,7 +54,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
     "The girls start laughing at [person_three.title]'s last remark."
 
-    person_one.char "That was very funny [person_three.name], but I have to get back to work."
+    person_one "That was very funny [person_three.name], but I have to get back to work."
 
     $ scene_manager.update_actor(person_one, position = "walking_away")
 
@@ -63,8 +63,8 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
     $ scene_manager.remove_actor(person_one)
 
     if person_two.sluttiness > 40 and person_three.sluttiness > 40:
-        person_two.char "Oh, she's such a stickler for rules."
-        person_three.char "Why don't we go break some rules together in the supply closet?"
+        person_two "Oh, she's such a stickler for rules."
+        person_three "Why don't we go break some rules together in the supply closet?"
 
         if person_two.sluttiness > 60 and person_three.sluttiness > 60:
             $ scene_manager.update_actor(person_two, position = "walking_away")
@@ -87,7 +87,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     mc.name "Hello girls... mind if I join your little party?"
                     $ scene_manager.update_actor(person_two, position = "stand3")
                     $ scene_manager.update_actor(person_three, position = "stand4")
-                    person_three.char "Oh my, hello [person_three.mc_title], we didn't see you there."
+                    person_three "Oh my, hello [person_three.mc_title], we didn't see you there."
                     "You tell the girls to take off their clothes."
 
                     python:
@@ -96,7 +96,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
 
-                    person_two.char "Wow...this was...really good actually... You can join us anytime you want boss..."
+                    person_two "Wow...this was...really good actually... You can join us anytime you want boss..."
                     $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
                     $ scene_manager.update_actor(person_three, position = "walking_away", display_transform = character_right)
                     "They pickup their clothes and leave you feeling very proud of yourself."
@@ -115,7 +115,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
         else:
-            person_two.char "Another time, [person_three.name], let's get back to work."
+            person_two "Another time, [person_three.name], let's get back to work."
 
             $ scene_manager.update_actor(person_two, position = "walking_away")
             $ scene_manager.update_actor(person_three, position = "walking_away")
@@ -124,7 +124,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
             "[person_two.title] grabs [person_three.title] by her arm and they walk down the corridor."
     else:
-        person_two.char "Yeah, we better get going too."
+        person_two "Yeah, we better get going too."
         $ scene_manager.update_actor(person_two, position = "walking_away")
         $ scene_manager.update_actor(person_three, position = "walking_away")
 

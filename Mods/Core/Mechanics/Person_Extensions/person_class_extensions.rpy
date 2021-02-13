@@ -117,11 +117,8 @@ init -1 python:
 
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
-        for location in list_of_places:
-            if self in location.people:
-                return location
-
-        return self.home # fallback location for person is home
+        location = next((x for x in list_of_places if self in x.people), None)
+        return (location if location else self.home) # fallback location for person is home
 
     Person.location = location
 
@@ -866,6 +863,11 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
+            # dominant person slowly bleeds obedience on run_day
+            if person.is_dominant():
+                if person.obedience > 100 - (person.get_opinion_score("taking control") * 5):
+                    person.change_obedience(-1, add_to_log = False)
+
 
         return run_day_wrapper
 
@@ -1236,7 +1238,7 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
@@ -1277,11 +1279,11 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        return Composite(*composite_list)
+        return Flatten(Composite(*composite_list))
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
-    def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all posible known tags for the character.
+    def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all possible known tags for the character.
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
@@ -1385,7 +1387,7 @@ init -1 python:
     def is_dominant(self):
         if self.get_opinion_score("taking control") > 0:
             return True
-        if self.personality is alpha_personality:
+        if self.personality == alpha_personality:
             return True
         return False
     Person.is_dominant = is_dominant
@@ -1438,7 +1440,7 @@ init -1 python:
 
     Person.wear_work_outfit = wear_work_outfit
 
-    def review_outfit_enhanced(self, dialogue = True):
+    def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         self.outfit.remove_all_cum()
         if self.should_wear_uniform():
             self.wear_uniform() # Reset uniform

@@ -86,6 +86,9 @@ label updated_room_background(stack):
         rd_division.background_image = enhanced_research_backgrounds
         lobby.background_image = enhanced_lobby_backgrounds
 
+        mom_office_lobby.background_image = enhanced_lobby_backgrounds
+        mom_offices.background_image = enhanced_marketing_backgrounds
+
         #As long a there is a mall background for these, replace it with our custom background
         sex_store.background_image = standard_sex_store_backgrounds
         gym.background_image = standard_gym_backgrounds

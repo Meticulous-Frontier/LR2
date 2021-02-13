@@ -6,10 +6,10 @@ label lady_of_the_night_label_enhanced():
     $ the_person = create_hooker(add_to_game = False)
 
     "You're lost in thought when a female voice calls out to you."
-    the_person.char "Excuse me, [the_person.mc_title]."
+    the_person "Excuse me, [the_person.mc_title]."
     $ the_person.draw_person()
     mc.name "Yes?"
-    the_person.char "You're looking a little lonely all by yourself. Are you looking for a friend to keep you warm?"
+    the_person "You're looking a little lonely all by yourself. Are you looking for a friend to keep you warm?"
     "Her tone suggests that her \"friendship\" won't come free."
     menu:
         "Pay her\n{color=#ff0000}{size=18}Costs: $200{/size}{/color}" if mc.business.funds >= 200:
@@ -18,7 +18,7 @@ label lady_of_the_night_label_enhanced():
             mc.name "That sounds nice. It's nice to meet you..."
             $ the_person.set_title(get_random_title(the_person))
             $ the_person.set_possessive_title(get_random_possessive_title(the_person))
-            the_person.char "You can call me [the_person.title]. For two hundred dollars I'll be your best friend for the next hour."
+            the_person "You can call me [the_person.title]. For two hundred dollars I'll be your best friend for the next hour."
             $ mc.business.change_funds(-200)
             $ the_person.change_obedience(1)
             "The streets are quiet this time of night. You pull your wallet out and hand over the cash."
@@ -30,12 +30,12 @@ label lady_of_the_night_label_enhanced():
 
             if the_report.get("girl orgasms",0) > 0:
                 "It takes [the_person.title] a few moments to catch her breath."
-                the_person.char "Maybe I should be paying you... Whew!"
+                the_person "Maybe I should be paying you... Whew!"
 
             $ the_person.review_outfit()
             $ the_person.draw_person()
 
-            the_person.char "It's been fun, if you ever see me around maybe we can do this again."
+            the_person "It's been fun, if you ever see me around maybe we can do this again."
             $ the_person.draw_person(position = "walking_away")
             "She gives you a peck on the cheek, then turns and struts off into the night."
 
@@ -45,7 +45,7 @@ label lady_of_the_night_label_enhanced():
         "Say no":
             mc.name "Thanks for the offer, but no thanks."
             "She shrugs."
-            the_person.char "Suit yourself."
+            the_person "Suit yourself."
             $ the_person.remove_person_from_game()
 
     $ clear_scene()

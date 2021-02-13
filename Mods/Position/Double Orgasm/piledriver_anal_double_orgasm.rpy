@@ -27,9 +27,9 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("anal creampies") > 0:
                     # If she's into both...
                     $ the_girl.discover_opinion("anal creampies")
-                    the_girl.char "Oh fuck... I'm so full of cum. I don't want to move..."
+                    the_girl "Oh fuck... I'm so full of cum. I don't want to move..."
                 else:
-                    the_girl.char "Wow, that was intense. I hope you didn't stretch me out too badly."
+                    the_girl "Wow, that was intense. I hope you didn't stretch me out too badly."
                 "Her puckered hole is raw and gaping. You watch as her asshole slowly starts to close, sealing your load inside of it."
                 "She slowly lowers her legs until she is laying flat on the [the_object.name]."
 
@@ -48,7 +48,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heighterns her orgasm."
                 "She truly is addicted to your cum."
             else:
-                the_girl.char "Ah... Good job... Ah..."
+                the_girl "Ah... Good job... Ah..."
                 "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s body covered in your semen."
     $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

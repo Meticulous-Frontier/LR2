@@ -97,19 +97,19 @@ label club_foreclosed_event_label():
 
 label cousin_talk_about_strip_club_label(the_person):
     $ the_person.draw_person(emotion = "sad")
-    the_person.char "Oh, [mc.name]... Just the last person I wanted to see right now!"
+    the_person "Oh, [mc.name]... Just the last person I wanted to see right now!"
     mc.name "Hello, [the_person.title]... What's with the long face?"
-    the_person.char "I think I just lost my job, the Club has been foreclosed and nobody knows if and when it would be open again..."
+    the_person "I think I just lost my job, the Club has been foreclosed and nobody knows if and when it would be open again..."
     mc.name "Any idea about what happened?"
-    the_person.char "For sure I don't know, but I heard some rumours about a lot of unpaid taxes..."
+    the_person "For sure I don't know, but I heard some rumours about a lot of unpaid taxes..."
     mc.name "The business was in that much trouble?"
     $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
-    the_person.char "Actually the business was running very well, but looks like [name_string], the boss there, just disappeared a few days ago with all the Club's money..."
-    the_person.char "That fucking asshole didn't even pay me nor the other girls for our last week."
+    the_person "Actually the business was running very well, but looks like [name_string], the boss there, just disappeared a few days ago with all the Club's money..."
+    the_person "That fucking asshole didn't even pay me nor the other girls for our last week."
     "She looks at you and suddenly shifts her demeanor."
     $ the_person.draw_person(emotion = "happy", position = "stand2")
-    the_person.char "Oh, speaking about money, can you lend me 300 bucks?"
-    the_person.char "I could do a special performance just for you, you know..."
+    the_person "Oh, speaking about money, can you lend me 300 bucks?"
+    the_person "I could do a special performance just for you, you know..."
     menu:
         "Accept":
             mc.name "Ok, follow me..."
@@ -125,12 +125,12 @@ label cousin_talk_about_strip_club_label(the_person):
             "Hit and sunk by your behavior, [the_person.title] leaves you alone."
         "Mock":
             mc.name "Can you explain WHY I need to spend $300 on you stripping when there's plenty of other girls around willing to do far more for less money?"
-            the_person.char "So you are a pervert, and stingy too ? Ok [mc.name], just for you I'll do it for $200..."
+            the_person "So you are a pervert, and stingy too ? Ok [mc.name], just for you I'll do it for $200..."
             $ the_person.change_stats(happiness = -3, obedience = 1, love = -1)
             menu:
                 "Accept":
                     mc.name "Perhaps I should say no..."
-                    the_person.char "Come on, take me to a nice hotel and I'll show you a good time."
+                    the_person "Come on, take me to a nice hotel and I'll show you a good time."
                     mc.name "Alright, lets go."
                     "You and [the_person.title] walks to the nearest hotel."
                     $ amount = 200
@@ -159,7 +159,7 @@ label club_foreclosed_strip_label(the_person):
     "[the_person.possessive_title] quickly disappears into the bathroom to change her clothes."
     $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
     $ the_person.draw_person(emotion = "default", position = "stand4")
-    the_person.char "You're in luck I really need the money, otherwise I would never do this for you."
+    the_person "You're in luck I really need the money, otherwise I would never do this for you."
     menu:
         "Give up":
             "On second though, you decide to stop her."
@@ -170,8 +170,8 @@ label club_foreclosed_strip_label(the_person):
             $ mc.business.change_funds(-100)
             "When you give her another $100, you can see the puzzled look on her face, she can't believe what's happening..."
             $ the_person.draw_person(emotion = "happy", position = "stand4")
-            the_person.char "Really? I never got cash this easily!"
-            the_person.char "Ok, you're a pervert, but I admit you're a generous pervert!"
+            the_person "Really? I never got cash this easily!"
+            the_person "Ok, you're a pervert, but I admit you're a generous pervert!"
             $ the_person.change_stats(happiness = 5, obedience = -1, love = 2)
             $ clear_scene()
             "It looks like [the_person.title] is her usual obnoxious self again... a moment later she's back in the bathroom changing her clothes."
@@ -179,7 +179,7 @@ label club_foreclosed_strip_label(the_person):
             $ the_person.draw_person(emotion = "happy", position = "stand4")
             "When she's back, she moves right up to you."
             $ the_person.draw_person(emotion = "happy", position = "kissing")
-            the_person.char "I still don't like you, but I think you deserve at least a kiss!"
+            the_person "I still don't like you, but I think you deserve at least a kiss!"
             "She leans forward and gives you a soft kiss on your lips."
             if the_person.has_taboo("kiss"):
                 $ the_person.break_taboo("kiss")
@@ -196,10 +196,10 @@ label club_foreclosed_strip_label(the_person):
             "[the_person.title] turns on some sexy music on her phone and looks at you unsure about how far she should let the show go."
             if the_person.effective_sluttiness() < 30:
                 "[the_person.title] stop moving and start to look at the floor."
-                the_person.char "Do you really want me to strip for you ?"
+                the_person "Do you really want me to strip for you ?"
                 $ the_person.draw_person(emotion = "sad", position = "stand4")
-                the_person.char "I need the money and I would do it for anybody else, but you're my cousin, we're related..."
-                the_person.char "I'm sorry [the_person.title], I can't do it..."
+                the_person "I need the money and I would do it for anybody else, but you're my cousin, we're related..."
+                the_person "I'm sorry [the_person.title], I can't do it..."
                 mc.name "What if I give you $100 more than what we agreed?"
                 $ the_person.draw_person(emotion = "default", position = "stand4")
                 $ mc.business.change_funds(-100)
@@ -215,7 +215,7 @@ label club_foreclosed_strip_label(the_person):
                 else: #She's not wearing a bra and doesn't want you to see her tits.
                     "[the_person.title] seems nervous and plays with her shirt."
                     mc.name "What's wrong?"
-                    the_person.char "I don't have a bra on... I can't take this off."
+                    the_person "I don't have a bra on... I can't take this off."
                     mc.name "Come on, you know the deal."
                     $ the_person.change_stats(happiness = -5, obedience = 2)
 
@@ -225,29 +225,29 @@ label club_foreclosed_strip_label(the_person):
                         $ the_person.draw_animated_removal(the_item)
                         "[the_person.possessive_title] now takes off the [the_item.display_name]."
                 else: #She's not wearing panties and doesn't want you to see her pussy.
-                    the_person.char "I'm not wearing any panties right now. That means I can't take this off."
+                    the_person "I'm not wearing any panties right now. That means I can't take this off."
                     mc.name "Come on, that's not what the deal is."
-                    the_person.char "Sad you don't get to see my tight, wet pussy [the_person.mc_title]?"
+                    the_person "Sad you don't get to see my tight, wet pussy [the_person.mc_title]?"
                     "She laughs and shakes her head."
-                    the_person.char "Deal with it. Go cry to mommy if it matters that much to you."
+                    the_person "Deal with it. Go cry to mommy if it matters that much to you."
 
                 $ the_person.draw_person(position = "back_peek")
 
                 if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
-                    "Once [the_person.possessive_title] has stripped down to her underwear, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title!l] has stripped down to her underwear, she turns around to let you look at her ass."
                 else:
-                    "Once [the_person.possessive_title] has stripped down as far as she's willing, she turns around to let you look at her ass."
-                the_person.char "Are you happy now ? I bet you're about to cream your fucking pants looking at this."
+                    "Once [the_person.possessive_title!l] has stripped down as far as she's willing, she turns around to let you look at her ass."
+                the_person "Are you happy now ? I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."
-                the_person.char "Finally... Pervert!"
+                the_person "Finally... Pervert!"
                 $ clear_scene()
                 "A moment later she's back in the bathroom changing her clothes again."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                the_person.char "Thank you for the money, see you!"
+                the_person "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
             elif the_person.effective_sluttiness("bare_tits") <= 40: # She'll show tits and panties.
@@ -257,9 +257,9 @@ label club_foreclosed_strip_label(the_person):
                     if the_person.outfit.tits_visible():
                         "[the_person.possessive_title] takes off her [the_item.display_name] slowly, teasing you as she frees her tits."
                         if the_person.has_taboo("bare_tits"):
-                            the_person.char "God, I can't believe you're going to see my tits. You're a fucking dick of a cousin, you know that?"
+                            the_person "God, I can't believe you're going to see my tits. You're a fucking dick of a cousin, you know that?"
                             mc.name "Whatever. Pull those girls out so I can have a look."
-                            the_person.char "I don't know why my Mom likes you... Fine."
+                            the_person "I don't know why my Mom likes you... Fine."
                             $ the_person.break_taboo("bare_tits")
                     else:
                         "[the_person.possessive_title] takes off her [the_item.display_name]."
@@ -269,27 +269,27 @@ label club_foreclosed_strip_label(the_person):
                         $ the_person.draw_animated_removal(the_item)
                         "[the_person.possessive_title] takes off her [the_item.display_name]."
                 else:
-                    the_person.char "I'm not wearing any panties right now. That means I can't take this off."
+                    the_person "I'm not wearing any panties right now. That means I can't take this off."
                     mc.name "Come on, that's not what the deal is."
-                    the_person.char "Sad you don't get to see my tight, wet pussy [the_person.mc_title]?"
+                    the_person "Sad you don't get to see my tight, wet pussy [the_person.mc_title]?"
                     "She laughs and shakes her head."
-                    the_person.char "Deal with it. Go cry to mommy if it matters that much to you."
+                    the_person "Deal with it. Go cry to mommy if it matters that much to you."
                 $ the_person.draw_person(position = "back_peek")
                 if the_person.outfit.wearing_panties():
-                    "Once [the_person.possessive_title] has stripped down to her panties, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title!l] has stripped down to her panties, she turns around to let you look at her ass."
                 else:
-                    "Once [the_person.possessive_title] has stripped down, she turns around to let you look at her ass."
-                the_person.char "Are you happy now? I bet you're about to cream your fucking pants looking at this."
+                    "Once [the_person.possessive_title!l] has stripped down, she turns around to let you look at her ass."
+                the_person "Are you happy now? I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."
-                the_person.char "Finally... Pervert!"
+                the_person "Finally... Pervert!"
                 $ clear_scene()
                 "A moment later she's back in the bathroom changing again her clothes."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                the_person.char "Thank you for the money, see you!"
+                the_person "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
             else: #She'll get completely naked.
@@ -299,9 +299,9 @@ label club_foreclosed_strip_label(the_person):
                     if the_person.outfit.tits_visible():
                         "[the_person.possessive_title] takes off her [the_item.display_name] slowly, teasing you as she frees her tits."
                         if the_person.has_taboo("bare_tits"):
-                            the_person.char "God, I can't believe you're going to see my tits. You're a fucking dick of a cousin, you know that?"
+                            the_person "God, I can't believe you're going to see my tits. You're a fucking dick of a cousin, you know that?"
                             mc.name "Whatever. Pull those girls out so I can have a look."
-                            the_person.char "I don't know why my Mom likes you... Fine."
+                            the_person "I don't know why my Mom likes you... Fine."
                             $ the_person.break_taboo("bare_tits")
                     else:
                         "[the_person.possessive_title] takes off her [the_item.display_name]."
@@ -313,25 +313,25 @@ label club_foreclosed_strip_label(the_person):
                         if the_person.has_taboo("bare_pussy"):
                             "[the_person.title] pauses and takes a deep breath."
                             mc.name "What's the hold up?"
-                            the_person.char "Nothing! I though you would have chickened out by now, but whatever."
+                            the_person "Nothing! I though you would have chickened out by now, but whatever."
                             $ the_person.break_taboo("bare_pussy")
                     else:
                         "[the_person.possessive_title] takes off her [the_item.display_name]."
-                the_person.char "There, are you satisfied?"
+                the_person "There, are you satisfied?"
                 $ the_person.draw_person(position = "back_peek")
                 "She spins on the spot, letting you get a look at her ass."
-                the_person.char "I know you like my ass, I bet you're about to cream your fucking pants looking at this."
+                the_person "I know you like my ass, I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "You're right, I like your ass!"
                 $ the_person.draw_person(position = "stand4")
-                the_person.char "Pervert!"
+                the_person "Pervert!"
                 $ clear_scene()
                 "A moment later she's back in the bathroom changing again her clothes."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
                 $ the_person.change_slut_temp(10)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
-                the_person.char "Thank you for the money, see you!"
+                the_person "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
                 "Happily [the_person.title] leaves the room and closes the door behind her."
 

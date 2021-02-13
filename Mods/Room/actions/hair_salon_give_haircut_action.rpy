@@ -29,24 +29,24 @@ label salon_response(person_choice): # How does the_person respond to a company 
 
     if the_person.personality.personality_type_prefix == "bimbo":
         $ the_person.draw_person(emotion = "happy")
-        the_person.char "Oh, [the_person.mc_title], like, I love doing my hair."
+        the_person "Oh, [the_person.mc_title], like, I love doing my hair."
 
     elif the_person.love > 30:
         $ the_person.draw_person(emotion = "happy")
-        the_person.char "Thanks for the attention, [the_person.mc_title]."
+        the_person "Thanks for the attention, [the_person.mc_title]."
 
     elif the_person.obedience < 80 or the_person.happiness < 100:
         $ the_person.draw_person(emotion = "sad")
-        the_person.char "I'm not in the mood for a haircut right now."
+        the_person "I'm not in the mood for a haircut right now."
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-2)
         $ clear_scene()
         return
 
     elif the_person.happiness > 120 or the_person.obedience > 120:
-        the_person.char "Yes, [the_person.mc_title]. I am on my way."
+        the_person "Yes, [the_person.mc_title]. I am on my way."
     else:
-        the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
+        the_person "Sounds good, I'll be right there [the_person.mc_title]."
 
     python:
         hair_style_check = the_person.hair_style.get_copy()
@@ -67,21 +67,21 @@ label salon_checkout():
     if (hair_style_check != the_person.hair_style and hair_style_check.colour != the_person.hair_style.colour) or (pubes_style_check != the_person.pubes_style and pubes_style_check.colour != the_person.pubes_style.colour): # Both was changed
         $ salon_manager.draw_person(emotion = "happy")
         $ the_person.change_happiness(+10)
-        salon_manager.char "That will be $[salon_style_cost] for the haircut and $[salon_dye_cost] for the dye. Who's paying?"
+        salon_manager "That will be $[salon_style_cost] for the haircut and $[salon_dye_cost] for the dye. Who's paying?"
         mc.name "That will be me..."
         $ mc.business.change_funds(- salon_total_cost)
         "You complete the transaction and $[salon_total_cost] has been deducted from the company's credit card."
     elif hair_style_check != the_person.hair_style or pubes_style_check != the_person.pubes_style: # Only the hair_style was changed.
         $ salon_manager.draw_person(emotion = "happy")
         $ the_person.change_happiness(+5)
-        salon_manager.char "That will be $[salon_style_cost] for the haircut. Who's paying?"
+        salon_manager "That will be $[salon_style_cost] for the haircut. Who's paying?"
         mc.name "That will be me..."
         $ mc.business.change_funds(- salon_style_cost)
         "You complete the transaction and $[salon_style_cost] has been deducted from the company's credit card."
     elif hair_style_check.colour != the_person.hair_style.colour or pubes_style_check.colour != the_person.pubes_style.colour:
         $ salon_manager.draw_person(emotion = "happy")
         $ the_person.change_happiness(+5)
-        salon_manager.char "That will be $[salon_dye_cost] for the dye. Who's paying?"
+        salon_manager "That will be $[salon_dye_cost] for the dye. Who's paying?"
         mc.name "That will be me..."
         $ mc.business.change_funds(- salon_dye_cost)
         "You complete the transaction and $[salon_dye_cost] has been deducted from the company's credit card."
@@ -89,7 +89,7 @@ label salon_checkout():
         $ the_person.change_happiness(-5)
         $ the_person.draw_person(emotion = "angry")
         if the_person.happiness < 100:
-            the_person.char "What a waste of my time, [the_person.mc_title]!"
+            the_person "What a waste of my time, [the_person.mc_title]!"
         else:
-            the_person.char "Did you call me over here for nothing, [the_person.mc_title]!?"
+            the_person "Did you call me over here for nothing, [the_person.mc_title]!?"
     return

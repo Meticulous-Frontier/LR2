@@ -23,7 +23,7 @@ label family_morning_breakfast_enhanced_label():
     if mom.love > lily.love:
         $ scene_manager.add_actor(mom)
         "[mom.possessive_title] cracks open the door and leans in."
-        mom.char "I'm making some breakfast for you and [lily.name]. Come on down if you'd like some."
+        mom "I'm making some breakfast for you and [lily.name]. Come on down if you'd like some."
         mc.name "Thanks [mom.title], I'll be down in a minute."
         $ scene_manager.update_actor(mom, emotion = "happy")
         "She flashes you a smile and closes the door."
@@ -31,7 +31,7 @@ label family_morning_breakfast_enhanced_label():
     else:
         $ scene_manager.add_actor(lily)
         "[lily.possessive_title] cracks your door open and leans in. She seems just as tired as you are."
-        lily.char "Hey, I think Mom's making a family breakfast for us."
+        lily "Hey, I think Mom's making a family breakfast for us."
         mc.name "Thanks for letting me know [lily.title], I'll be down in a minute."
         "She nods and closes your door as she leaves."
         $ scene_manager.hide_actor(lily)
@@ -53,8 +53,8 @@ label family_morning_breakfast_enhanced_label():
 
     $ scene_manager.update_actor(mom, position = "back_peek")
 
-    mom.char "Good morning [mom.mc_title]. I'm almost ready to serve, hopefully your [lily.name] will be here soon."
-    lily.char "I'm coming!"
+    mom "Good morning [mom.mc_title]. I'm almost ready to serve, hopefully your [lily.name] will be here soon."
+    lily "I'm coming!"
 
     $ scene_manager.show_actor(lily)
 
@@ -71,25 +71,25 @@ label family_morning_breakfast_enhanced_label():
 
     if mom.effective_sluttiness() > 40 and lily.effective_sluttiness() > 40:
         #You have breakfast with both of them stripped down like it's no big thing.
-        lily.char "Hope I'm not too late."
+        lily "Hope I'm not too late."
         $ scene_manager.update_actor(mom, position = "walking_away")
         "Your mother takes the pan off the stove and begins to slide the contents off onto three plates."
-        mom.char "No, just on time."
+        mom "No, just on time."
         $ scene_manager.update_actor(mom, position = "stand3")
         "She turns around and hands one plate to you and one plate to [lily.title]."
         if mom.lactation_sources > 0 and mom.tits_available():
-            mom.char "Want a little milk for your coffee, honey?"
+            mom "Want a little milk for your coffee, honey?"
             "[mom.title] gives you a quick wink."
             mc.name "Sure mom."
             "[mom.possessive_title] bends over slight over your coffee. She takes one of her breasts in her hand and starts to squeeze."
             "It takes a second, but soon a stream of her milk is pouring out into you coffee."
-            mom.char "Just say when!"
+            mom "Just say when!"
             "You let her continue for a few more moments, until you can see the cream start to circulate around your hot coffee."
             $ mom.change_stats(slut_temp = 2, happiness = 5)
             mc.name "That's good!"
-        lily.char "Thanks Mom, you're the best!"
+        lily "Thanks Mom, you're the best!"
         $ scene_manager.update_actor(mom, position = "sitting")
-        mom.char "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
+        mom "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
         $ lily.change_stats(love = 3, slut_temp = 2)
@@ -97,12 +97,12 @@ label family_morning_breakfast_enhanced_label():
         if mc.business.event_triggers_dict.get("family_threesome", False) == True:
             "While no one else seems to be bothered by all the skin in the room, it is starting to take a toll on you."
             "You try to focus on something work related, but instead all you can focus on are [mom.possessive_title]'s heaving tits, across the table from you."
-            mom.char "Honey? Are you feeling okay? You seem a little zoned out..."
+            mom "Honey? Are you feeling okay? You seem a little zoned out..."
             "Next to you, [lily.title] notices your erection and speaks up."
-            lily.char "I'm sure he's fine mom, but us walking around like this has him all worked up. He's hard as a rock!"
+            lily "I'm sure he's fine mom, but us walking around like this has him all worked up. He's hard as a rock!"
             "[lily.possessive_title] reaches down and starts to stroke you."
-            mom.char "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, lets take care of him before the day gets going."
-            lily.char "Good idea mom!"
+            mom "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, lets take care of him before the day gets going."
+            lily "Good idea mom!"
             menu:
                 "Accept their help":
                     mc.name "Oh wow, that would be great!"
@@ -121,40 +121,40 @@ label family_morning_breakfast_enhanced_label():
                     mc.name "Mmm, thanks for breakfast mom!"
                     if the_report["guy orgasms"] > 0:
                         "[lily.title] laughs and jokes back."
-                        lily.char "Thanks for breakfast, bro!"
+                        lily "Thanks for breakfast, bro!"
                 "Refuse":
                     mc.name "That's okay, I have a ton of stuff to get done today. Maybe tonight after dinner?"
-                    mom.char "Okay, if that's what you want [mom.mc_title]."
+                    mom "Okay, if that's what you want [mom.mc_title]."
                     $ scene_manager.update_actor(mom, position="walking_away", display_transform = character_left_flipped)
                     "[mom.possessive_title] gets up and starts to do the dishes."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     elif mom.effective_sluttiness() > 40 and not lily.effective_sluttiness() > 40:
         #Lily thinks her mom is embarrassing and weird but Mom pulls rank.
-        lily.char "Oh my god Mom, what are you wearing?"
+        lily "Oh my god Mom, what are you wearing?"
         $ scene_manager.update_actor(mom, position = "back_peek")
-        mom.char "What? It's the weekend and it's just the three of us. I didn't think anyone would mind if I was a little more casual."
+        mom "What? It's the weekend and it's just the three of us. I didn't think anyone would mind if I was a little more casual."
         $ scene_manager.update_actor(lily, position = "sitting")
 
         if mom.outfit.vagina_visible():
-            lily.char "Mom, I don't think you know what casual means. Could you at least put on some panties or something?"
+            lily "Mom, I don't think you know what casual means. Could you at least put on some panties or something?"
         elif mom.outfit.tits_visible():
-            lily.char "Mom, I don't think you know what casual means. I mean, couldn't you at least put on a bra?"
+            lily "Mom, I don't think you know what casual means. I mean, couldn't you at least put on a bra?"
         else:
-            lily.char "Mom, you're prancing around the kitchen in your underwear. In front of your son and daughter. That's weird."
+            lily "Mom, you're prancing around the kitchen in your underwear. In front of your son and daughter. That's weird."
             "[lily.title] looks at you."
-            lily.char "Right [lily.mc_title], that's weird?"
+            lily "Right [lily.mc_title], that's weird?"
 
         if mom.obedience > 115:
             $ scene_manager.update_actor(mom, position = "stand3")
-            mom.char "What do you think [mom.mc_title], do you think it's \"weird\" for your mother to want to be comfortable in her own house?"
+            mom "What do you think [mom.mc_title], do you think it's \"weird\" for your mother to want to be comfortable in her own house?"
             menu:
                 "Side with Mom":
                     mc.name "I think Mom's right [lily.title]. It's nothing we haven't seen before, she's just trying to relax on her days off."
                     $ mom.change_obedience(-3)
                     $ lily.change_obedience(3)
                     "[lily.title] looks at the two of you like you're crazy then sighs dramatically."
-                    lily.char "Fine, but this is really weird, okay?"
+                    lily "Fine, but this is really weird, okay?"
                     $ scene_manager.update_actor(mom, position = "sitting")
                     "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventually gets use to her mothers outfit and joins in on your conversation."
                     $ lily.change_slut_temp(3)
@@ -165,13 +165,13 @@ label family_morning_breakfast_enhanced_label():
                     mc.name "I actually think [lily.title] is right, this is a little weird. Could you go put something on, for our sakes?"
                     $ lily.change_stats(obedience = -2, slut_temp = 2)
                     $ mom.change_stats(obedience = 5, slut_temp = 3)
-                    mom.char "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
+                    mom "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
                     $ scene_manager.hide_actor(mom)
                     $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_left_flipped)
                     "Your mother leaves to get dressed. [lily.possessive_title] ends up serving out breakfast for all three of you."
                     $ scene_manager.update_actor(lily, position = "sitting")
                     $ mom.apply_outfit(mom.planned_outfit)
-                    lily.char "She's been so weird lately. I don't know what's going on with her..."
+                    lily "She's been so weird lately. I don't know what's going on with her..."
                     $ scene_manager.show_actor(mom, position = "sitting", display_transform = character_right)
                     $ lily.change_happiness(5)
                     $ mom.change_happiness(5)
@@ -179,12 +179,12 @@ label family_morning_breakfast_enhanced_label():
 
         else:
             #She likes what she likes
-            mom.char "Well luckily I'm your mother and it doesn't matter what you think. I'm going to wear what makes me comfortable."
+            mom "Well luckily I'm your mother and it doesn't matter what you think. I'm going to wear what makes me comfortable."
             "She takes the pan off the stove and slides the scrambled eggs out equally onto three plates."
             $ scene_manager.update_actor(mom, position = "stand3")
-            mom.char "Now, would you like some breakfast or not?"
+            mom "Now, would you like some breakfast or not?"
             "[lily.title] sighs dramatically."
-            lily.char "Fine, but this is really weird, okay?"
+            lily "Fine, but this is really weird, okay?"
             $ lily.change_slut_temp(3)
             $ mom.change_happiness(5)
             $ scene_manager.update_actor(mom, position = "sitting")
@@ -196,17 +196,17 @@ label family_morning_breakfast_enhanced_label():
         # Mom thinks lily is way too underdressed and sends her back to get dressed.
         "Your mother turns around and gasps."
         $ scene_manager.update_actor(mom, position = "stand3", emotion="angry")
-        mom.char "[lily.name]! What are you wearing?"
-        lily.char "What do you mean? I just got up, I haven't had time to pick out an outfit yet."
-        mom.char "You shouldn't be running around the house naked. Go put some clothes on young lady."
+        mom "[lily.name]! What are you wearing?"
+        lily "What do you mean? I just got up, I haven't had time to pick out an outfit yet."
+        mom "You shouldn't be running around the house naked. Go put some clothes on young lady."
         $ scene_manager.update_actor(lily, emotion = "angry")
         "[lily.possessive_title] scoffs and rolls her eyes."
-        lily.char "Come on Mom, you're being ridiculous. This is my house too, I should be able to wear whatever I want!"
+        lily "Come on Mom, you're being ridiculous. This is my house too, I should be able to wear whatever I want!"
         "[mom.possessive_title] and [lily.name] lock eyes, engaged in a subtle battle of wills."
         if lily.obedience > mom.obedience:
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = None)
             "[mom.possessive_title] sighs loudly and turns back to the stove."
-            mom.char "Fine! You're so stubborn [lily.name], I don't know how I survive around here!"
+            mom "Fine! You're so stubborn [lily.name], I don't know how I survive around here!"
             $ lily.change_stats(obedience = -2, happiness = 5, slut_temp = 3)
             $ mom.change_obedience(10)
             $ scene_manager.update_actor(lily, emotion = "happy")
@@ -215,12 +215,12 @@ label family_morning_breakfast_enhanced_label():
         else:
             "[lily.title] finally sighs loudly and looks away. She pushes her chair back and stands up in defeat."
             $ scene_manager.update_actor(lily, position = "stand4")
-            lily.char "Fine! I'll go put on some stupid clothes so my stupid mother doesn't keep worrying."
+            lily "Fine! I'll go put on some stupid clothes so my stupid mother doesn't keep worrying."
             $ scene_manager.update_actor(lily, position = "walking_away")
             "[lily.title] sulks out of the kitchen."
             $ scene_manager.hide_actor(lily)
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = "sad")
-            mom.char "I don't know how I manage to survive with you two around!"
+            mom "I don't know how I manage to survive with you two around!"
             $ lily.apply_outfit(lily.planned_outfit)
             $ lily.change_stats(obedience = 5, happiness = -5)
             $ mom.change_obedience(-2)
@@ -232,13 +232,13 @@ label family_morning_breakfast_enhanced_label():
 
     else:
         # Neither of them are particularly slutty, so it's just a normal breakfast.
-        lily.char "So what's the occasion Mom?"
+        lily "So what's the occasion Mom?"
         $ scene_manager.update_actor(mom, position = "stand3")
         "[mom.possessive_title] takes the pan off the stove and scoops the scrambled eggs out equally onto three waiting plates."
-        mom.char "Nothing special, I just thought we could have a nice quiet weekend breakfast together."
+        mom "Nothing special, I just thought we could have a nice quiet weekend breakfast together."
         "She slides one plate in front of you and one plate in front of [lily.possessive_title], then turns around to get her own before sitting down to join you."
         $ scene_manager.update_actor(mom, position = "sitting")
-        mom.char "Go ahead, eat up!"
+        mom "Go ahead, eat up!"
         $ lily.change_love(3)
         $ mom.change_stats(love = 3, happiness = 5)
         "You enjoy a relaxing breakfast bonding with [mom.possessive_title] and [lily.name]. [mom.possessive_title] seems particularly happy she gets to spend time with you."

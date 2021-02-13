@@ -17,6 +17,9 @@ init 2 python:
             self.person_preview_args = person_preview_args
 
         def load(self):
+            if not self.display_func:
+                return
+
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
             # always predict person displayable (the clear_function will remove them from the prediction cache)
             renpy.start_predict(self.display_image)
@@ -27,12 +30,12 @@ init 2 python:
                 renpy.stop_predict(self.display_image)
             return
 
-    def build_menu_items(elements_list, draw_hearts_for_people = True, person_preview_args = None):
+    def build_menu_items(elements_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
         result = []
         for count in __builtin__.range(__builtin__.len(elements_list)):
             if __builtin__.len(elements_list[count]) > 1:
                 if not isinstance(elements_list[count][1], MenuItem):
-                    result.append(build_menu_item_list(elements_list[count], draw_hearts_for_people, person_preview_args))
+                    result.append(build_menu_item_list(elements_list[count], draw_person_previews, draw_hearts_for_people, person_preview_args))
                 else:
                     result.append(elements_list[count])
         return result
@@ -44,7 +47,7 @@ init 2 python:
                 item.clear()
         return
 
-    def build_menu_item_list(element_list, draw_hearts_for_people = True, person_preview_args = None):
+    def build_menu_item_list(element_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
         def find_and_replace_tooltip_property(item, extra_args):
             groups = re.search("\[[^]]*\]", item.menu_tooltip)
             if groups and isinstance(extra_args, Person):
@@ -84,7 +87,8 @@ init 2 python:
                 mi.person_preview_args = person_preview_args
                 mi.display_key = item.name + item.last_name
                 mi.display_scale = scale_person(item.height)
-                mi.display_func = item.build_person_displayable
+                if draw_person_previews:
+                    mi.display_func = item.build_person_displayable
                 # if not renpy.mobile: # don't load person on mobile
                 #    renpy.invoke_in_thread(mi.load)
 
@@ -126,12 +130,13 @@ init 2 python:
         return result
 
     def show_menu_person(item):
+        if not item.display_func:
+            return
+
         if not item.display_image:
             item.load()
-            # item.display_image = Flatten(item.display_func(lighting = mc.location.get_lighting_conditions(), **item.person_preview_args))
 
         clear_scene()
-        # renpy.show_screen("person_info_ui", item.return_value)
         renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
         return
 

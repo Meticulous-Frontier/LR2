@@ -20,7 +20,7 @@
 
 label intro_Ophelia_blowjob(the_girl, the_location, the_object):
     "You unzip your pants and pull your underwear down far enough to let your hard cock out."
-    the_girl.char "Mmm, it looks so hard! Let me take care of that for you..."
+    the_girl "Mmm, it looks so hard! Let me take care of that for you..."
     "[the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans foward and slides her lips over the tip of your dick."
     $ Ophelia_blowjob.current_modifier = "blowjob"
     $ Ophelia_blowjob.redraw_scene(the_girl)
@@ -63,10 +63,10 @@ label scene_Ophelia_blowjob_1(the_girl, the_location, the_object):
         "Talk dirty to her.":
             mc.name "That feels great [the_girl.title]. You look good on your knees, sucking my cock."
             "She slides your cock out of her mouth to speak."
-            the_girl.char "Mmm, and you feel so good in my mouth. You're so big I can barely manage."
+            the_girl "Mmm, and you feel so good in my mouth. You're so big I can barely manage."
             $ the_girl.discover_opinion("giving blowjobs")
             "She rubs her cheek against your wet shaft."
-            the_girl.char "Don't forget to warn me when you cum. I like it all over my face, remember?."
+            the_girl "Don't forget to warn me when you cum. I like it all over my face, remember?."
             "She slips you back into her mouth and resumes blowing you."
 
         "Stay quiet.": #TODO change this
@@ -95,7 +95,7 @@ label scene_Ophelia_blowjob_2(the_girl, the_location, the_object):
     $ Ophelia_blowjob.redraw_scene(the_girl)
 
     "[the_girl.title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
-    the_girl.char "Feels good, doesn't it?"
+    the_girl "Feels good, doesn't it?"
     mc.name "Yeah, it does. You are an amazing cocksucker."
     "[the_girl.possessive_title] smiles and keeps working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
     $ Ophelia_blowjob.current_modifier = "blowjob"
@@ -112,7 +112,7 @@ label outro_Ophelia_blowjob(the_girl, the_location, the_object):
     "The warm mouth of [the_girl.title] drives you to your orgasm. One last pass down her velvet throat is enough to push you past the point of no return."
     mc.name "Fuck, here I come!"
     "She pulls back, your cock slipping out of [the_girl.possessive_title]'s mouth with a satisfyingly wet pop. She strokes you with her hand while she points you at her face."
-    the_girl.char "Do it! Cum all over me!!!"
+    the_girl "Do it! Cum all over me!!!"
     $ Ophelia_blowjob.current_modifier = None
     $ Ophelia_blowjob.redraw_scene(the_girl)
     "[the_girl.title] sticks out her tongue for you and holds still, eager to take your hot load."
@@ -129,7 +129,7 @@ label transition_default_Ophelia_blowjob(the_girl, the_location, the_object):
     $ Ophelia_blowjob.current_modifier = "blowjob"
     $ Ophelia_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] gets onto her knees in front of you and takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides the tip into her mouth."
-    the_girl.char "Mmm, its time for me to take care of you."
+    the_girl "Mmm, its time for me to take care of you."
     return
 
 label strip_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object):
@@ -149,7 +149,7 @@ label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object
     $ Ophelia_blowjob.redraw_scene(the_girl)
 
     "[the_girl.title] pops off your cock and looks up at you from her knees."
-    the_girl.char "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
     menu:
         "Let her strip":
             mc.name "Take it off for me."
@@ -162,11 +162,11 @@ label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 60:
-                the_girl.char "Yeah? Do I look sexy in it?"
+                the_girl "Yeah? Do I look sexy in it?"
                 $ Ophelia_blowjob.current_modifier = "blowjob"
                 "She licks the length of your shaft, then slides your tip into her mouth and starts to blow you again."
             else:
-                the_girl.char "Does it make me look like a good little slut? Or is your cock in my mouth enough for that?"
+                the_girl "Does it make me look like a good little slut? Or is your cock in my mouth enough for that?"
                 $ Ophelia_blowjob.current_modifier = "blowjob"
                 $ Ophelia_blowjob.redraw_scene(the_girl)
                 "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
@@ -204,7 +204,7 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
                 $ Ophelia_blowjob.current_modifier = None
                 $ Ophelia_blowjob.redraw_scene(the_girl)
                 "When she's stopped twitching and moaning you let [the_girl.title] slide back. She pants loudly, then licks along the length of your cock."
-                the_girl.char "That was... incredible... I want more!"
+                the_girl "That was... incredible... I want more!"
             else:
                 "[the_girl.possessive_title] closes her eyes as her orgasm peaks. She holds almost perfectly still, your dick still sitting in her mouth, until she's finished."
                 $ Ophelia_blowjob.current_modifier = None
@@ -212,7 +212,7 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
                 "She pulls off and takes a long, deep breath."
                 $ the_girl.change_obedience(1)
                 $ the_girl.change_happiness(2)
-                the_girl.char "Damn, that was crazy! I couldn't breath!"
+                the_girl "Damn, that was crazy! I couldn't breath!"
 
         "Be gentle as she cums":
             $ Ophelia_blowjob.current_modifier = None

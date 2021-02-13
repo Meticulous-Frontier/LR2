@@ -9,15 +9,15 @@ label outro_standing_finger_enhanced(the_girl, the_location, the_object):
     "[the_girl.title] can tell you are getting close. She grinds her butt back into your crotch."
     "Feeling her butt on your crotch and [the_girl.title]'s hot, tight pussy squeezing your fingers is enough to push you that little bit further, past the point of no return."
     "You grasp her tightly with your free hand as you cum, shoving your fingers deep into her cunt and making her gasp in surprise."
-    the_girl.char "Did you just... Cum?"
+    the_girl "Did you just... Cum?"
     mc.name "Yeah."
     if report_log.get("girl orgasms", 0) > 0:
-        the_girl.char "That's only fair I suppose."
+        the_girl "That's only fair I suppose."
     else:
-        the_girl.char "Aww, I thought I was going to get there first. Oh well."
+        the_girl "Aww, I thought I was going to get there first. Oh well."
 
     if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("anal creampies") > 0 or the_girl.get_opinion_score("drinking cum") > 0 or the_girl.get_opinion_score("cum facials") > 0 or the_girl.get_opinion_score("being covered in cum") > 0:
-        the_girl.char "Maybe next time we'll find somewhere else for you to do that."
+        the_girl "Maybe next time we'll find somewhere else for you to do that."
         if the_girl.get_opinion_score("drinking cum") > 0:
             "[the_girl.title] winks at you as she licks her lips."
         elif the_girl.get_opinion_score("cum facials") > 0:
@@ -31,7 +31,7 @@ label outro_standing_finger_enhanced(the_girl, the_location, the_object):
             "[the_girl.title] winks at you and pouts slightly."
 
     if the_girl.get_opinion_score("being fingered") < 0:
-        the_girl.char "Now, you've cum, can we do something else?"
+        the_girl "Now, you've cum, can we do something else?"
         "[the_girl.title] gently pulls your hand up from her pussy."
         if the_girl.sluttiness >= 60:
             "She brings your hand up to her mouth. She slides your fingers, fresh from her cunt, into her mouth."
@@ -39,9 +39,9 @@ label outro_standing_finger_enhanced(the_girl, the_location, the_object):
         else:
             "She moans and works her hips back against you, grinding her ass against you."
     elif the_girl.get_opinion_score("being fingered") > 0 or report_log.get("girl orgasms", 0) > 0:
-        the_girl.char "Now, what is it that you were doing?"
+        the_girl "Now, what is it that you were doing?"
         "[the_girl.title] gently holds your arm in place with your hand at her pussy."
-        the_girl.char "You are so good at this."
+        the_girl "You are so good at this."
     else:
-        the_girl.char "Don't forget what you were doing."
+        the_girl "Don't forget what you were doing."
     return

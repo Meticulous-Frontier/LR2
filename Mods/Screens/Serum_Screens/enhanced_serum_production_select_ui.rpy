@@ -200,7 +200,7 @@ init 2:
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
                                                                 textbutton "<":
-                                                                    action [Function(mc.business.change_line_autosell,count, (-1 if mc.business.serum_production_array[count][3] > 1 else -2))]
+                                                                    action [Function(mc.business.change_line_autosell,count, -1)]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip
@@ -215,18 +215,21 @@ init 2:
                                                                 if array_to_change == count:
                                                                     input default str(mc.business.serum_production_array[count][3]) length 7 allow "0123456789" changed serum_production_autosell style "serum_text_style"
                                                                 else:
-                                                                    if mc.business.serum_production_array[count][3] >= 0:
+                                                                    if mc.business.serum_production_array[count][3] > 0:
                                                                         text str(mc.business.serum_production_array[count][3]) style "serum_text_style" yalign 0.5
 
-                                                                if mc.business.serum_production_array[count][3] < 0 and array_to_change != count:
-                                                                    text "None" style "serum_text_style" yalign 0.5
+                                                                    if mc.business.serum_production_array[count][3] < 0:
+                                                                        text "None" style "serum_text_style" yalign 0.5
+
+                                                                    if mc.business.serum_production_array[count][3] == 0:
+                                                                        text "All" style "serum_text_style" yalign 0.5
 
                                                             hbox:
                                                                 xalign 1
                                                                 xsize 40
                                                                 yoffset 8
                                                                 textbutton ">":
-                                                                    action [Function(mc.business.change_line_autosell,count, (2 if mc.business.serum_production_array[count][3] <= 0 else 1))]
+                                                                    action [Function(mc.business.change_line_autosell, count, 1)]
                                                                     style "textbutton_no_padding_highlight"
                                                                     text_style "serum_text_style"
                                                                     tooltip production_line_autosell_tooltip

@@ -319,28 +319,28 @@ label candace_meet_at_office_store_label(the_person):
     "Hmm... isn't that the bimbo that [salon_manager.title]'s ex is dating?"
     mc.name "Hey there... [the_person.title], right?"
     "She looks at you. She seems to recognize you."
-    the_person.char "Ah! You must be the new guy. I'm here to pick up the umm... supplies... that we talked about on the phone."
+    the_person "Ah! You must be the new guy. I'm here to pick up the umm... supplies... that we talked about on the phone."
     "Or probably not."
     mc.name "Sorry, you must have me confused with someone else. We met the other night, at a restaurant."
     "She squints at you for several seconds."
-    the_person.char "Wait... you're the host? Right? I had a great time that night, at your restaurant!"
+    the_person "Wait... you're the host? Right? I had a great time that night, at your restaurant!"
     mc.name "Actually, I was there as a customer. Just like you."
-    the_person.char "Oh! I see. Sorry! I don't know what my problem is lately, I feel like I'm just so easily confused by things. I used to have a great memory!"
+    the_person "Oh! I see. Sorry! I don't know what my problem is lately, I feel like I'm just so easily confused by things. I used to have a great memory!"
     "Sure you did..."
     mc.name "I understand. Anyway, are you meeting someone here?"
-    the_person.char "Oh yes! I buy a lot of office supplies for my boyfriend's business here. I have an arrangement where they give me, well, a pretty good discount..."
+    the_person "Oh yes! I buy a lot of office supplies for my boyfriend's business here. I have an arrangement where they give me, well, a pretty good discount..."
     mc.name "Oh! That must be nice. I run a business myself, and a discount in supplies would be a wonderful thing to have."
-    the_person.char "Oh yeah! It's easy! Do you want to know my secret?"
+    the_person "Oh yeah! It's easy! Do you want to know my secret?"
     mc.name "Certainly."
     "She comes close to you and whispers in your ear."
-    the_person.char "When I pick up the supplies, I go to the backroom with the guy and suck his dick!"
+    the_person "When I pick up the supplies, I go to the backroom with the guy and suck his dick!"
     "You probably should have known that was coming."
     mc.name "Interesting. And your boyfriend... he is okay with this?"
-    the_person.char "Oh yes! He says as long as they don't fuck me it's fine."
+    the_person "Oh yes! He says as long as they don't fuck me it's fine."
     "Hmm, so he isn't a cuck. He is just fine with using his bimbo girlfriend to further his business..."
     "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
-    the_person.char "Oh! How exciting!"
-    the_person.char "Nice to meet you again mister. I've got some work to do!"
+    the_person "Oh! How exciting!"
+    the_person "Nice to meet you again mister. I've got some work to do!"
     $ the_person.draw_person(position = "walking_away")
     "You watch as [the_person.title] walks to the back room to pick up her supplies."
     "There is something that just doesn't seem right here. You aren't sure what it is exactly, but you feel like you should really get to know [the_person.title] better."
@@ -367,7 +367,7 @@ label candace_get_to_know_label(the_person):
                 call candace_talk_about_uniforms(the_person) from _candace_chit_chat_choice_uniform1
         "You consider trying to push more on the subject, when you are interrupted."
         "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
-        the_person.char "Yay! See you around [the_person.mc_title]!"
+        the_person "Yay! See you around [the_person.mc_title]!"
         $ the_person.draw_person(position = "walking_away")
         "You watch as [the_person.title] walks back to the storeroom."
         if candace_get_ready_to_quit():
@@ -385,30 +385,30 @@ label candace_get_to_know_label(the_person):
             "So far, she still seems pretty resolute on not quitting. Just keep chipping away, and you'll be able to convince her eventually!"
     else:
         mc.name "How are you doing today, [the_person.title]?"
-        the_person.char "Oh... I'm doing okay I guess."
+        the_person "Oh... I'm doing okay I guess."
         mc.name "You guess?"
-        the_person.char "Yeah... I guess, I just don't understand my boyfriend sometimes."
+        the_person "Yeah... I guess, I just don't understand my boyfriend sometimes."
         mc.name "Guys can be confusing sometimes."
-        the_person.char "I know! Its like, he's okay with me blowing the supply guys here for discounts on his work supplies."
-        the_person.char "Then last night, I ordered a pizza and invited him over, and when he got there I was blowing the pizza guy to save some money on the tip..."
+        the_person "I know! Its like, he's okay with me blowing the supply guys here for discounts on his work supplies."
+        the_person "Then last night, I ordered a pizza and invited him over, and when he got there I was blowing the pizza guy to save some money on the tip..."
         "Does she ever stop sucking cock?"
-        the_person.char "When he walked in, he got all pissed off! Like, why is it okay to do it to save money on one thing, but not something else?"
+        the_person "When he walked in, he got all pissed off! Like, why is it okay to do it to save money on one thing, but not something else?"
         mc.name "That does seem inconsistent."
         "She sighs."
-        the_person.char "I know! The worst part is, he spanked me, which he knows I love, but then didn't do anything else!"
-        the_person.char "I have needs! You can't just spank a girl and then not fuck her rough! It's just not right."
+        the_person "I know! The worst part is, he spanked me, which he knows I love, but then didn't do anything else!"
+        the_person "I have needs! You can't just spank a girl and then not fuck her rough! It's just not right."
         mc.name "Exactly what I was thinking."
-        the_person.char "I don't know what it is, I just feel like, something isn't right, you know? Like, I'm just in the wrong place."
+        the_person "I don't know what it is, I just feel like, something isn't right, you know? Like, I'm just in the wrong place."
         "Hmmm... very interesting."
         mc.name "You know... you don't have to work where you are now."
-        the_person.char "Yeah... I guess... but then my boyfriend would dump me!"
+        the_person "Yeah... I guess... but then my boyfriend would dump me!"
         mc.name "I'm sure he would understand..."
-        the_person.char "No no no, he already told me as much. He said, \'don't you think about quitting, or I'll dump you! and no one wants to date a dumb bimbo like you but me!\'"
+        the_person "No no no, he already told me as much. He said, \'don't you think about quitting, or I'll dump you! and no one wants to date a dumb bimbo like you but me!\'"
         "Jesus, this guy sounds like a major narcissist. The more you learn about him, the more happy you are that [salon_manager.title] got away from him, even if involuntarily."
-        the_person.char "And if he dumps me, whose going to fuck me every night? No, I think I'd better just stay where I'm at for now."
+        the_person "And if he dumps me, whose going to fuck me every night? No, I think I'd better just stay where I'm at for now."
         $ the_person.event_triggers_dict["learned_about_unhappy"] = 1
         "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
-        the_person.char "Oh! Finally! Some action! See you around [the_person.mc_title]."
+        the_person "Oh! Finally! Some action! See you around [the_person.mc_title]."
         $ the_person.draw_person(position = "walking_away")
         "You watch as [the_person.title] rushes to the back of the store. There is absolutely something not right with what is going on."
         "She may not be the brightest, but [the_person.title] doesn't deserve to be treated this way. You think about it for a while, but make up your mind."
@@ -422,57 +422,57 @@ label candace_get_to_know_label(the_person):
 label candace_talk_about_bf_control(the_person):
     if candace_get_learned_about_bf_control():
         mc.name "How are things going with the boyfriend? Any better?"
-        the_person.char "No! God no. Last night, I made him dinner. I was in the kitchen, wearing only an apron, hoping he would do something while I was cooking..."
-        the_person.char "When I was almost done, I looked over, and he was asleep on the couch!"
+        the_person "No! God no. Last night, I made him dinner. I was in the kitchen, wearing only an apron, hoping he would do something while I was cooking..."
+        the_person "When I was almost done, I looked over, and he was asleep on the couch!"
         mc.name "Did you wake him up?"
-        the_person.char "I umm... he doesn't let me wake him up... says his rest is very important..."
+        the_person "I umm... he doesn't let me wake him up... says his rest is very important..."
         mc.name "Aren't your needs important too?"
-        the_person.char "Yeah... I guess? I don't know! I just don't like it when he gets mad at me."
+        the_person "Yeah... I guess? I don't know! I just don't like it when he gets mad at me."
         menu:
             "I would help meet your needs" if candace_get_mc_is_sexually_skilled():
                 $ candace_increase_doubt()
                 mc.name "You know, at my job, I always reward my employees, with a multitude of different types of rewards, or bonuses."
                 mc.name "You work so hard, you deserve to have someone who meets your needs."
-                the_person.char "Ha, it's hard to imagine having a man who could actually meet my needs."
+                the_person "Ha, it's hard to imagine having a man who could actually meet my needs."
                 mc.name "Who says it has to be just one man? You have wonderfully free spirit, you should be free to share that spirit with anyone you want."
                 if candace_get_ready_to_quit():
-                    the_person.char "You know... I think you are right. But its scary, you know? To leave what you know for something new."
+                    the_person "You know... I think you are right. But its scary, you know? To leave what you know for something new."
                 else:
-                    the_person.char "You might be right... but I don't think I'm ready. Its scary, you know? To leave what you know."
+                    the_person "You might be right... but I don't think I'm ready. Its scary, you know? To leave what you know."
             "I would help meet your needs\n{color=#ff0000}{size=18}Requires: high sex skills{/size}{/color} (disabled)" if not candace_get_mc_is_sexually_skilled():
                 pass
             "Sorry to hear that":
                 mc.name "I'm sorry to hear about your problems."
-                the_person.char "That's okay. I'm sure its just me, he was probably just tired after a long day at work... right?"
+                the_person "That's okay. I'm sure its just me, he was probably just tired after a long day at work... right?"
 
     else:
         mc.name "So, how are things going with your boyfriend?"
-        the_person.char "Oh, as good as it can be, I guess."
+        the_person "Oh, as good as it can be, I guess."
         mc.name "I'm not sure. Is there something in particular that is bothering you?"
-        the_person.char "Well, I don't mean to complain, but, it just feels like everyday there are more and more rules!"
+        the_person "Well, I don't mean to complain, but, it just feels like everyday there are more and more rules!"
         mc.name "He gives you... rules?"
-        the_person.char "I mean, at first it was okay, and kinda made sense. No fucking other guys, stop spending all your pay-check at the strip club."
-        the_person.char "But it feels like everyday he's adding some kind of new rule! I can hardly keep track of them all!"
-        the_person.char "No going to the bar without him. No talking with the other men at his business. Leave my location setting shared with him on my phone."
+        the_person "I mean, at first it was okay, and kinda made sense. No fucking other guys, stop spending all your pay-check at the strip club."
+        the_person "But it feels like everyday he's adding some kind of new rule! I can hardly keep track of them all!"
+        the_person "No going to the bar without him. No talking with the other men at his business. Leave my location setting shared with him on my phone."
         "It really does seem to be what you feared it might be. Her boyfriend is an overbearing psychopath."
         mc.name "[the_person.title]... that doesn't sounds like a healthy relationship."
-        the_person.char "That's what I thought at first, but then he told me I'm not allowed to watch daytime talk shows anymore... I don't remember why I thought it was weird to be honest."
+        the_person "That's what I thought at first, but then he told me I'm not allowed to watch daytime talk shows anymore... I don't remember why I thought it was weird to be honest."
         $ candace.event_triggers_dict["learned_about_bf_control"] = 1
         $ candace_increase_doubt()
         "Yeah, you definitely need to help her get out of this."
         mc.name "You know, I've had a few girlfriends throughout the years. Part of the relationship is being open with each other, and trusting each other."
-        the_person.char "Oh, don't worry! I trust him completely!"
+        the_person "Oh, don't worry! I trust him completely!"
         mc.name "But do you feel that he trusts you too?"
-        the_person.char "Of course! I just feel bad. No one ever taught me relationships are supposed to have all these rules! Thankfully he is really patient with me though."
+        the_person "Of course! I just feel bad. No one ever taught me relationships are supposed to have all these rules! Thankfully he is really patient with me though."
         "Hmm... you aren't sure that this approach is going to convince her."
         mc.name "So how long have you two been together?"
         if day < 180:
-            the_person.char "Oh, we've been together now for a little over six months! Pretty crazy to think about!"
+            the_person "Oh, we've been together now for a little over six months! Pretty crazy to think about!"
         elif day < 365:
-            the_person.char "Oh we've been together for just over a year now! Pretty crazy to think about!"
+            the_person "Oh we've been together for just over a year now! Pretty crazy to think about!"
         else:
             $ rel_length = str((day / 365) + 1)
-            the_person.char "Oh, we've been together for a little over [rel_length] now! Pretty crazy to think about!"
+            the_person "Oh, we've been together for a little over [rel_length] now! Pretty crazy to think about!"
             $ del rel_length
         "Wait a minute... you do the math in your head. You were there when [the_person.title]'s boyfriend broke up with with [salon_manager.title]. That means he had been cheating on her!"
         "Not just a narcissist, but a cheater as well. Yet another reason you really need to get her out of this situation."
@@ -481,26 +481,26 @@ label candace_talk_about_bf_control(the_person):
 label candace_talk_about_previous_work(the_person):
     if candace_get_learned_about_previous_work():
         mc.name "Hey, remember what you told me about your previous job?"
-        the_person.char "Yeah! I really liked that place. I wish I still worked there."
+        the_person "Yeah! I really liked that place. I wish I still worked there."
         mc.name "I did some research on that place. Guess what? It did research and production on small run pharmaceuticals, just like the business I run now!"
-        the_person.char "Small run... what now?"
+        the_person "Small run... what now?"
         mc.name "Drugs, basically. Like pills."
-        the_person.char "Oh! Yeah I remember that! Checking boxes, taking notes, talking to people."
+        the_person "Oh! Yeah I remember that! Checking boxes, taking notes, talking to people."
         $ candace_increase_doubt()
         mc.name "Yeah, my business does the same thing? You know, if you quit, I would totally hire you to work for me."
         if candace_get_ready_to_quit():
-            the_person.char "That sounds amazing. Are you sure? I mean, I feel like there's something wrong with me sometimes. Are you sure you would take me?"
+            the_person "That sounds amazing. Are you sure? I mean, I feel like there's something wrong with me sometimes. Are you sure you would take me?"
         else:
-            the_person.char "That sounds too good to be true... so it must be! My boyfriend keeps telling me he's the only one who would put up with me. Are you sure you would take me?"
+            the_person "That sounds too good to be true... so it must be! My boyfriend keeps telling me he's the only one who would put up with me. Are you sure you would take me?"
         mc.name "You would be great, I would love have someone like you on board."
     else:
         mc.name "I've heard you mention your previous job a couple of times. What did you do before?"
-        the_person.char "Oh... well, to be honest, I don't actually remember much about it. It was at a place over on the east side of town, near the old car factory."
-        the_person.char "I remember taking these vials of stuff... liquids I think! Mixing things together, shaking them up, taking a bunch of notes."
+        the_person "Oh... well, to be honest, I don't actually remember much about it. It was at a place over on the east side of town, near the old car factory."
+        the_person "I remember taking these vials of stuff... liquids I think! Mixing things together, shaking them up, taking a bunch of notes."
         mc.name "You were a researcher?"
-        the_person.char "Yeah, a scientist or something like that! I don't remember how I did it, to be honest. Now it sounds so dull, but I remember really enjoying it at the time."
+        the_person "Yeah, a scientist or something like that! I don't remember how I did it, to be honest. Now it sounds so dull, but I remember really enjoying it at the time."
         mc.name "Do you know the name of the place? It sounds like somewhere I'd like to visit sometime."
-        the_person.char "Oh... no actually I don't, but I remember the company logo! It was a neat science beaker with 4 hearts all around it."
+        the_person "Oh... no actually I don't, but I remember the company logo! It was a neat science beaker with 4 hearts all around it."
         "Hmm. On the east side of town? You should look it up and see if you can find out more about it."
         $ candace.event_triggers_dict["learned_about_previous_work"] = 1
         #TODO new mandatory event where you look up the old business
@@ -509,75 +509,75 @@ label candace_talk_about_previous_work(the_person):
 label candace_talk_about_uniforms(the_person):
     if candace_get_learned_about_uniform():
         mc.name "Any luck talking to your boyfriend about relaxing your dress code some?"
-        the_person.char "No... no I haven't..."
+        the_person "No... no I haven't..."
         mc.name "Haven't talked to him?"
-        the_person.char "No, I've tried to talk to him, but he shut it down and just said it was non negotiable."
+        the_person "No, I've tried to talk to him, but he shut it down and just said it was non negotiable."
         if candace_get_employees_have_lax_uniforms():
             mc.name "You know, the girls at my company have a much more... relaxed... dress code."
-            the_person.char "Oh? Those girls sure are lucky!"
+            the_person "Oh? Those girls sure are lucky!"
             mc.name "Yup! I have multiple uniforms available to choose from, from conservative business suites, to topless with a set of yoga pants."
-            the_person.char "You... you let girls go topless? That sounds... SO COMFY!!!"
+            the_person "You... you let girls go topless? That sounds... SO COMFY!!!"
             $ candace_increase_doubt()
             mc.name "It is! You would like it there. You know if you quit, I would hire you to work there, right?"
             if candace_get_ready_to_quit():
-                the_person.char "I bet I would like it there! Maybe its about time to make a change in my life."
+                the_person "I bet I would like it there! Maybe its about time to make a change in my life."
             else:
-                the_person.char "I think you might be right, but I don't think I'm ready. Its scary, you know? To leave what you know."
+                the_person "I think you might be right, but I don't think I'm ready. Its scary, you know? To leave what you know."
             mc.name "You would fit in wonderfully at my company."
     else:
         mc.name "I can't help but notice, every time I see you here, you have the same outfit on."
-        the_person.char "Oh god, don't get me started. I fucking hate pants!"
+        the_person "Oh god, don't get me started. I fucking hate pants!"
         #TODO learn she hates pants
         mc.name "Ah, then why do you wear them?"
-        the_person.char "I just got off work. My boyfriend made uniforms for everyone at work to wear pants."
-        the_person.char "I used to wear skirts. It was great! Such easy access... and if you don't wear panties its so easy to just, sit on someone's lap or whatever."
+        the_person "I just got off work. My boyfriend made uniforms for everyone at work to wear pants."
+        the_person "I used to wear skirts. It was great! Such easy access... and if you don't wear panties its so easy to just, sit on someone's lap or whatever."
         mc.name "That does sound handy. Why did your boyfriend change the dress code?"
-        the_person.char "Ah, it was my fault really. One time I was wearing this short skirt and no panties, and I was bending over to get something out from under my desk I had dropped..."
-        the_person.char "Suddenly I felt someone's hands on my ass, feeling me up. I thought it was my boyfriend! I asked him for a quickie and soon he was fucking me."
-        the_person.char "Imagine my surprise when my boyfriend comes around the corner! I looked back and realized it wasn't him!"
+        the_person "Ah, it was my fault really. One time I was wearing this short skirt and no panties, and I was bending over to get something out from under my desk I had dropped..."
+        the_person "Suddenly I felt someone's hands on my ass, feeling me up. I thought it was my boyfriend! I asked him for a quickie and soon he was fucking me."
+        the_person "Imagine my surprise when my boyfriend comes around the corner! I looked back and realized it wasn't him!"
         mc.name "He didn't care for that?"
-        the_person.char "No, he fired the guy right then and there. Then he told me I'm not allowed to wear skirts to work anymore!"
+        the_person "No, he fired the guy right then and there. Then he told me I'm not allowed to wear skirts to work anymore!"
         $ candace.event_triggers_dict["learned_about_uniform"] = 1
         mc.name "That sounds awfully restrictive. Don't you think you should be able to wear what you want to work?"
-        the_person.char "Oh, I mean, it would be nice, but I kind of understand. It keeps accidents like getting fucked by random guys from happening!"
+        the_person "Oh, I mean, it would be nice, but I kind of understand. It keeps accidents like getting fucked by random guys from happening!"
         "She says the last bit of that sentence with as much resolve as she can muster, but you can tell from the tone her voice, she wishes it would happen once in a while anyway..."
         mc.name "You should talk to your boyfriend about it. Maybe he would let you wear a skirt if you promise to make it a certain length? Or to wear panties?"
-        the_person.char "Hmm... that's not a bad idea! I'll have to try that sometime!"
+        the_person "Hmm... that's not a bad idea! I'll have to try that sometime!"
         $ candace_increase_doubt()
     return
 
 label candace_talk_about_pay(the_person):
     if candace_get_learned_about_pay():
         mc.name "You know, the girls who work for me, make about as much money as you do per week in a day working for me."
-        the_person.char "Aww, you pay so well! You must really take care of your employees."
+        the_person "Aww, you pay so well! You must really take care of your employees."
         mc.name "I'm always on the lookout for talented employees. I think you would make a good employee. You interested? I promise you'll make a lot more than you are now!"
         $ candace_increase_doubt()
         if candace_get_ready_to_quit():
-            the_person.char "You know, I can't believe I'm saying this, but I've been seriously considering it!"
+            the_person "You know, I can't believe I'm saying this, but I've been seriously considering it!"
         else:
-            the_person.char "Oh, I'm okay, I don't need the money. But I suppose it would be nice to have."
+            the_person "Oh, I'm okay, I don't need the money. But I suppose it would be nice to have."
     else:
         mc.name "So, as a business owner, with several employees of my own, I have a question for you."
-        the_person.char "Sure! Go ahead."
+        the_person "Sure! Go ahead."
         mc.name "How much does your job pay, to have talent like yours?"
-        the_person.char "Oh! I work on commission! I keep half of the money I save the company on office supplies!"
+        the_person "Oh! I work on commission! I keep half of the money I save the company on office supplies!"
         mc.name "Ah... but what about your base rate?"
-        the_person.char "Base rate?"
+        the_person "Base rate?"
         mc.name "Yeah, like, how much do you get paid per hour, or per day? Or do you have a salary?"
-        the_person.char "Oh, no, its commission only! My boyfriend says working on commission will help keep me motivated to work hard!"
+        the_person "Oh, no, its commission only! My boyfriend says working on commission will help keep me motivated to work hard!"
         mc.name "I see... and how much commission do you usually make?"
-        the_person.char "Oh, well, I average about $20, but sometimes when I let the stock boy play with my ass I can make as much as $25!"
+        the_person "Oh, well, I average about $20, but sometimes when I let the stock boy play with my ass I can make as much as $25!"
         mc.name "Per day?"
-        the_person.char "Oh no, not that much. Per week!"
+        the_person "Oh no, not that much. Per week!"
         mc.name "I see... and how much do you work?"
-        the_person.char "Oh, I'm out there pretty much 9am to 5pm on weekdays..."
+        the_person "Oh, I'm out there pretty much 9am to 5pm on weekdays..."
         "That is criminally low pay. Yet another reason you really need to get her out of this situation."
         mc.name "You know, I'm pretty sure literally ANY job would pay you more."
-        the_person.char "Yeah, but you know the economy these days. It would be hard for someone like me to find work!"
+        the_person "Yeah, but you know the economy these days. It would be hard for someone like me to find work!"
         mc.name "Yeah, but you should probably really talk to your boyfriend about paying you more. It might be illegal how little you are making."
-        the_person.char "Ah, I suppose, but I'm okay with it. My boyfriend puts the money back into the business anyway!"
+        the_person "Ah, I suppose, but I'm okay with it. My boyfriend puts the money back into the business anyway!"
         mc.name "But how do you afford, say, rent?"
-        the_person.char "Oh! That's easy! I have another little agreement with my landlord. Instead of rent..."
+        the_person "Oh! That's easy! I have another little agreement with my landlord. Instead of rent..."
         mc.name "That's okay. I think I get the picture."
         $ candace.event_triggers_dict["learned_about_pay"] = 1
     return
@@ -587,41 +587,41 @@ label candace_convince_to_quit_label(the_person):
     $ scene_manager.add_actor(the_person)
     "Alright. This is it. It's now or never."
     mc.name "[the_person.title]... can I talk to you about something? Something important?"
-    the_person.char "Oh, of course! What is it?"
+    the_person "Oh, of course! What is it?"
     mc.name "This isn't easy to say, but, I want you to quit your job and come work for me."
-    the_person.char "Ha, I know, I know, you keep saying that, but..."
+    the_person "Ha, I know, I know, you keep saying that, but..."
     mc.name "I'll pay you $40 a day. Effective immediately."
-    the_person.char "Oh! That's more than I make in a week! But I don't know..."
+    the_person "Oh! That's more than I make in a week! But I don't know..."
     mc.name "I know you used to work at a pharmaceuticals company. You told me you used to love that place! You could work at one again!"
-    the_person.char "[the_person.mc_title], I really do have fond memories... from what I can remember... but I don't think I can do that kind of work again..."
+    the_person "[the_person.mc_title], I really do have fond memories... from what I can remember... but I don't think I can do that kind of work again..."
     mc.name "You don't have to do research. My company is constantly sourcing chemicals and reagents for different products. It wouldn't be any different than what you are doing now, helping keep supplies up!"
-    the_person.char "I just don't know. God, is it getting hot in here?"
+    the_person "I just don't know. God, is it getting hot in here?"
     mc.name "Probably. Are you overheating? Wouldn't it be nicer if you could go back to wearing skirts again?"
-    the_person.char "It really would be, to feel the breeze between my legs again."
+    the_person "It really would be, to feel the breeze between my legs again."
     mc.name "Just do it. Just say yes, it will be worth it, I promise."
     $ scene_manager.update_actor(the_person, emotion = "sad")
-    the_person.char "I want to... I really do..."
+    the_person "I want to... I really do..."
     mc.name "Then why don't you?"
-    the_person.char "I'm... I'm so scared! [the_person.SO_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
-    the_person.char "He says its illegal! That I'll go to jail for being a prostitute!"
+    the_person "I'm... I'm so scared! [the_person.SO_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
+    the_person "He says its illegal! That I'll go to jail for being a prostitute!"
     mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
     "She thinks about it for a bit."
     "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
     "She looks over at the clerk. She seems to make up her mind."
-    the_person.char "Actually... I'm really sorry. I can't take the delivery tonight."
+    the_person "Actually... I'm really sorry. I can't take the delivery tonight."
     "?????""Oh? Okay Ms. [the_person.name]. Have a good night!"
-    the_person.char "I think I will."
+    the_person "I think I will."
     $ scene_manager.update_actor(the_person, emotion = "happy")
-    the_person.char "Alright mister. I'm going to trust you. What do we do?"
+    the_person "Alright mister. I'm going to trust you. What do we do?"
     mc.name "Let's go to my friend's. She'll help us get set up."
-    the_person.char "Lead the way!"
+    the_person "Lead the way!"
     "Thankfully, the office supply store is right next to the mall, so it is a quick walk over to the salon."
     $ mc.change_location(mall_salon)
     $ mc.location.show_background()
     "As you walk into the salon, you notice that [salon_manager.title] is working with a customer."
     mc.name "Okay, she's over there, but she's with a customer right now. While we wait for her, why don't we do the paperwork for your new employment?"
-    the_person.char "Okay... let's do it!"
+    the_person "Okay... let's do it!"
     "There is a small table to the side of the room. You sit down and start to go through it with [the_person.title]."
     $ scene_manager.update_actor(the_person, position = "sitting")
 
@@ -632,17 +632,17 @@ label candace_convince_to_quit_label(the_person):
     #TODO make sure her home is set to Stephanie's house somehow.
     "As you finish up, you notice [salon_manager.possessive_title] is walking over to the table."
     $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
-    salon_manager.char "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
-    the_person.char "Hi! You can call me [the_person.name]."
-    salon_manager.char "You know, I used to date [the_person.SO_name] too!"
-    the_person.char "Right... used to... kind of weird to think about, this is all happening so fast!"
-    salon_manager.char "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
-    the_person.char "Okay! I love selfies."
+    salon_manager "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
+    the_person "Hi! You can call me [the_person.name]."
+    salon_manager "You know, I used to date [the_person.SO_name] too!"
+    the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
+    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
+    the_person "Okay! I love selfies."
     "[the_person.title] and [salon_manager.possessive_title] lean together and take a picture."
-    salon_manager.char "There we go! That will be a great picture to send with your break up text..."
+    salon_manager "There we go! That will be a great picture to send with your break up text..."
     "Oh boy. Things are about to get juicy."
-    salon_manager.char "Let me see your phone now. Okay here we go."
-    salon_manager.char "Guess who I met today, [the_person.SO_name]! Turns out we having something in common!.."
+    salon_manager "Let me see your phone now. Okay here we go."
+    salon_manager "Guess who I met today, [the_person.SO_name]! Turns out we having something in common!.."
     "You spend the next hour or so getting [the_person.title] all set up. [salon_manager.title] really does think of everything."
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
@@ -651,7 +651,7 @@ label candace_convince_to_quit_label(the_person):
     "After a while, you notice they seem to be done, and now they are just trading stories and gossip. They actually seem to be getting along okay."
     "You stand up and stretch."
     mc.name "Well... I don't know about you two, but I'm pretty worn out. Take care. And [the_person.title], I'll see you at the office!"
-    the_person.char "Sure thing boss! Oh! Should I call you boss now? Oh that sounds nice!"
+    the_person "Sure thing boss! Oh! Should I call you boss now? Oh that sounds nice!"
     menu:
         "Boss\n{color=#00ff00}{size=18}+20 Obedience{/size}{/color}":
             $ the_person.set_mc_title("Boss")
@@ -659,12 +659,12 @@ label candace_convince_to_quit_label(the_person):
         "[mc.name]\n{color=#00FF00}{size=18}+20 Happiness{/size}{/color}":
             $ the_person.set_mc_title(mc.name)
             $ the_person.change_happiness(20)
-    the_person.char "Whatever you say [the_person.mc_title]!"
+    the_person "Whatever you say [the_person.mc_title]!"
     "Well, you now have your very own office bimbo. While before you were just looking to get her out of a bad situation, you are now considering some of the possibilities open to you..."
     $ the_person.set_possessive_title("Your Office Bimbo")
     mc.name "Alright, well have a good night."
-    salon_manager.char "Goodnight!"
-    the_person.char "Bye!"
+    salon_manager "Goodnight!"
+    the_person "Bye!"
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
     $ rebuild_wardrobe(candace)
@@ -678,9 +678,9 @@ label candace_overhear_supply_order_label(the_person):
     "You can't help but overhear the conversation. As you look closer, you realize she is doing a video call."
     $ scene_manager = Scene()  #Clean Scene
     $ scene_manager.add_actor(the_person, position = "sitting")
-    the_person.char "Yes sir that's right. We need more of this stuff! Looks like its called up... cal... calcium... phos... oh balls"
+    the_person "Yes sir that's right. We need more of this stuff! Looks like its called up... cal... calcium... phos... oh balls"
     "????" "I'm not sure I understand what you need. Do you have a label you can show me?"
-    the_person.char "Oh! Certainly... I'd be glad to show you anything you want... let me see here."
+    the_person "Oh! Certainly... I'd be glad to show you anything you want... let me see here."
     "She goes through a draw in her desk and pulls out an empty vial. She tries holding it up to the camera."
     if the_person.outfit.tits_available():
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
@@ -689,38 +689,38 @@ label candace_overhear_supply_order_label(the_person):
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
     else:
         "????" "I can't make out the label, there's too many colors in the background..."
-        the_person.char "Oh! I know how to fix that."
+        the_person "Oh! I know how to fix that."
         "You are hardly surprised when you see [the_person.title] start to take her top off."
         $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
-        the_person.char "How about now?"
+        the_person "How about now?"
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
         "????" "Now it's having a hard time focusing... can you move the camera closer?"
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
-    the_person.char "Are you getting a good look sir? Of the label, of course!"
+    the_person "Are you getting a good look sir? Of the label, of course!"
     "????" "Yeah, I see it now. Calcium phosphide. You've been most helpful! I can get you a discount on those if you'd like, as thanks for your big... help"
     "[the_person.title] chuckles. You notice her nipples are getting a little stiffer... she seems to really be enjoying this..."
-    the_person.char "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
+    the_person "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
     "She trades numbers with the supplier. Wait did she just turn down a discount? You watch as she says goodbye, making sure to lick her lips and wink before ending the call."
     "You decide to talk to her about it. You don't want to stifle her... creativity... but if she's getting discounts just for doing what she would already be doing, there's nothing wrong with that, right?"
     "You walk up to her desk. She smiles at you when she sees you approach."
-    the_person.char "Hello [the_person.mc_title]! Anything I can do for you today?"
+    the_person "Hello [the_person.mc_title]! Anything I can do for you today?"
     "You get ready to speak... but you notice her posture subtly change as she finishes that sentence. Did she just push her chest out a bit? You shake it off."
     mc.name "Yes, sorry I couldn't help but overheard your conversation with that supplier."
-    the_person.char "Yes... sorry I just couldn't help but have a little fun with the guy..."
+    the_person "Yes... sorry I just couldn't help but have a little fun with the guy..."
     mc.name "That's perfectly fine, I didn't mind that at all."
-    the_person.char "Oh? That's good!"
+    the_person "Oh? That's good!"
     mc.name "Yeah, I'm just curious. Why did you turn down the discount? If they are offering to discount the product..."
-    the_person.char "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
-    the_person.char "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like they owe me!"
+    the_person "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
+    the_person "I've gotten dick pics from three different suppliers in the last few days... its been great! I want them to feel like they owe me!"
     mc.name "I'm sure that if you accepted their offer of a discount, they would still send you dick pics."
     "She thinks about what you said for a bit."
-    the_person.char "I don't know... are you sure?"
+    the_person "I don't know... are you sure?"
     mc.name "I'll tell you what, try it on your next call and see what happens. If it doesn't go the way you want, you don't have to accept it anymore."
-    the_person.char "Oh! That's a good idea! I mean yeah I miss out on one... but I suppose its worth it to try!"
+    the_person "Oh! That's a good idea! I mean yeah I miss out on one... but I suppose its worth it to try!"
     "You are glad you get her to agree. You decide to let her get back to work."
     mc.name "Let me know how it goes."
-    the_person.char "Yes sir!"
+    the_person "Yes sir!"
     $ scene_manager.clear_scene()
     $ mc.business.add_mandatory_crisis(candace_supply_order_discount)
     return
@@ -730,17 +730,17 @@ label candace_supply_order_discount_label():
     $ scene_manager = Scene()  #Clean Scene
     $ scene_manager.add_actor(the_person)
     "As you arrive at work, [the_person.title] is wandering around, apparently looking for you."
-    the_person.char "Ah! [the_person.mc_title]! I need to talk to you!"
+    the_person "Ah! [the_person.mc_title]! I need to talk to you!"
     mc.name "Yes?"
-    the_person.char "I tried what you said, and it worked! Our supplier for... for... fuck what was the chemical name..."
+    the_person "I tried what you said, and it worked! Our supplier for... for... fuck what was the chemical name..."
     "She stops talking for a second as she thinks."
-    the_person.char "Ahh fuck it who cares. Whatever it was, they gave me a 10\% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
+    the_person "Ahh fuck it who cares. Whatever it was, they gave me a 10\% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
     "That was... a lot of details."
-    the_person.char "So... I kept going, and got almost all of our suppliers to give me some kind of discount! And it hasn't affected my umm... success rate... with sexting afterwards at all!"
+    the_person "So... I kept going, and got almost all of our suppliers to give me some kind of discount! And it hasn't affected my umm... success rate... with sexting afterwards at all!"
     "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
     "Fuck it, you decide to just let her get whatever discounts she happens to get and take the extra money without pushing your luck."
     mc.name "That's great. Thank you for your hard work."
-    the_person.char "Yes sir!"
+    the_person "Yes sir!"
     $ candace.event_triggers_dict["supply_discount_active"] = True
     $ scene_manager.clear_scene()
     "You now receive a 10\% discount on all supply orders."
@@ -902,7 +902,7 @@ label candace_love_path_intro_label():
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
     call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_01
-    "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
+    "You look at the clock on [the_person.possessive_title!l]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
     the_person "Oh. My. God. A slumber party! Let's do it!"
@@ -926,7 +926,7 @@ label candace_love_path_intro_label():
     "She is wearing a sheer pink nightgown, and absolutely nothing else. Normally a sight like that would be enough to get your blood boiling, but right now you are just too tired."
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
     $ the_person.draw_person(position = "walking_away")
-    "Still naked, you cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
+    "Still naked, you cock is now up against [the_person.possessive_title!l]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
     "She grabs your hand and brings it around her front, placing it on her chest. She sighs, then turns her head."
     the_person "Goodnight boss. Thanks for spending the night... I've... Like... always wanted to try sleeping like this..."
     mc.name "Goodnight..."
@@ -944,7 +944,7 @@ label candace_love_path_intro_label():
     $ the_person.cum_on_stomach()
     "When you finish, [the_person.title] starts to lick her fingers. She seems happy as she lays back in bed next to you. Sleep rapidly overtakes you."
     "You sleep for a while longer. You aren't surprised though when you feel warm, wet sensations enveloping your cock again."
-    "The delicious suction and the sound of [the_person.possessive_title]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
+    "The delicious suction and the sound of [the_person.possessive_title!l]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
     $ the_person.draw_person(position = "blowjob")
     "You crack your eyes open and see Candi, working diligently to get you off with her mouth. You aren't sure how long she has been doing this, but it's definitely working."
     "You reach down and run your hand through her hair, helping keep it out of her way. She looks up at you an makes eye contact... And then maintains is as she starts to give you long, slow strokes with her mouth."
@@ -1015,7 +1015,7 @@ label candace_love_path_intro_label():
     "God, her ass is great. Even after cumming over and over last night, you feel blood flowing to your dick as you watch her bent over."
     "Still completely naked, you know there is no way you can hide it from her. Maybe you should take charge, and give her a good fuck before you both head in to work."
 
-    "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up?"
+    "You get up from the table and start to walk over to [the_person.possessive_title!l]. She doesn't seem to react... Surely she heard you get up?"
     "Then you notice. She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
     "You grip her hips with your hands, and then push your fully erect cock against her ass."
     the_person "Oh, thank God, I was, like, REALLY hoping to get one more before work..."
@@ -1039,7 +1039,7 @@ label candace_love_path_intro_label():
     the_person "Oh! The dryer is done! I guess it's about time to head into the office..."
     "[the_person.title] disappears for a moment then comes back, holding your clothes."
     $ the_person.draw_person(position = "stand4")
-    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title] also getting ready for the day."
+    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title!l] also getting ready for the day."
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
     mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [mc.business.head_researcher.title]."
@@ -1110,10 +1110,12 @@ label candace_begin_cure_research_label(the_person):
 label candace_anti_bimbo_serum_label():
     $ the_person = mc.business.head_researcher
     "You get a text from [the_person.title]."
+    $ mc.having_text_conversation = the_person
     the_person "Hey! Meet me in your office ASAP!"
+    $ mc.having_text_conversation = None
     $ the_person.draw_person(position = "sitting")
     $ ceo_office.show_background()
-    "You quickly head to your office and find [the_person.possessive_title] sitting behind your desk with her feet up."
+    "You quickly head to your office and find [the_person.possessive_title!l] sitting behind your desk with her feet up."
     the_person "Guess what? I'm a fucking genius."
     mc.name "Oh? Do you have something to report from your research with Candi?"
     the_person "Something like that. You see, at first, I was racking my brain, trying to come up with some crazy chemical compound that could go back and undo a complex drug with multiple binding points and effects."
@@ -1419,7 +1421,7 @@ label candace_meet_doctor_candace_label():
             "You consider for a moment getting a nice couch for your office... "
             "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
             mc.name "Rest up, I'm going to get back to work."
-            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]"
+            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title!l]"
         "Reject (disabled)":
             pass
     $ clear_scene()

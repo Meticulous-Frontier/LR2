@@ -72,17 +72,17 @@ label production_failure_action_label:
                 $ the_person.change_slut_temp(3)
                 "[the_person.name] appears to have been particularly effected."
                 "[the_person.name] looks around desperately trying to figure out the source of her sudden arousal. When she sees you she immediately loses control."
-                the_person.char "Please [the_person.mc_title], I need you.... please help me... "
+                the_person "Please [the_person.mc_title], I need you.... please help me... "
                 $ the_person.break_taboo("touching_penis")
                 "[the_person.possessive_title] shoves her hand down your pants and begs for your cock."
 
                 call fuck_person(the_person, private = False, skip_intro = True) from _call_fuck_person_production_failure_action_label
 
-                the_person.char "*Panting* Oh god, [the_person.mc_title]. Thank you... thank you so much."
+                the_person "*Panting* Oh god, [the_person.mc_title]. Thank you... thank you so much."
 
                 $ production_failure_clear_situational_sluttiness(the_person)
 
-                "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                "You leave [the_person.possessive_title!l] to get cleaned up and get back to work."
             elif ran_num > 30: # 15% chance
                 $ production_failure_change_obedience(the_person, 3)
                 "The girls seem slightly more respectful."

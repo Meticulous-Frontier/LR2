@@ -34,20 +34,20 @@ label stephanie_sleepover_herplace_sex_start(the_person): #Right before sexy tim
     return
 
 label stephanie_sleepover_impressed_response(the_person):  #If you've made her cum a lot
-    the_person.char "Oh my god, I've lost count of how many times you've made me cum tonight..."
+    the_person "Oh my god, I've lost count of how many times you've made me cum tonight..."
     "[the_person.title] lies down in bed and catches her breath."
-    the_person.char "I think I can keep going... but you might need to be gentle!"
+    the_person "I think I can keep going... but you might need to be gentle!"
     return
 
 
 label stephanie_sleepover_good_response(the_person):  #If you've made her cum
     the_person "Ahhh, you always make me feel so good..."
     "[the_person.title] lies down in bed and catches her breath."
-    the_person.char "I'm ready to go again if you are!"
+    the_person "I'm ready to go again if you are!"
     return
 
 label stephanie_sleepover_bored_response(the_person):  #If she hasn't cum yet
-    the_person.char "Glad we got that out of your system. Take a minute, then get ready to fuck me for real!"
+    the_person "Glad we got that out of your system. Take a minute, then get ready to fuck me for real!"
     "You take some time to catch your breath, drink some water, and wait for your refractory period to pass."
     "You hold [the_person.title] in bed while she caresses you and touches herself, keeping herself ready for you."
     return

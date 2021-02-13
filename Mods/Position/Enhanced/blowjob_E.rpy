@@ -19,7 +19,7 @@ label intro_blowjob_enhanced(the_girl, the_location, the_object):
         "Without hesitation, [the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans forward and slides her lips over the tip of your dick."
     else:
         "[the_girl.possessive_title] grabs your cock with one hand."
-        the_girl.char "Sure thing but what do you want?"
+        the_girl "Sure thing but what do you want?"
         mc.name "How about a blowjob?"
         if the_girl.effective_sluttiness() > 35 or the_girl.get_opinion_score("giving blowjobs") > 0:
             "[the_girl.possessive_title] looks down at your shaft, thinks about it for a moment, then drops to her knees in front of you. She leans forward and slides her lips over the tip of your dick."
@@ -90,7 +90,7 @@ label outro_skull_fuck_enhanced(the_girl, the_location, the_object):
 
 label transition_default_blowjob_enhanced(the_girl, the_location, the_object):
     if mc.condom:
-        the_girl.char "I don't think we need this anymore."
+        the_girl "I don't think we need this anymore."
         "[the_girl.possessive_title] pulls the condom off your dick."
         $ mc.condom = False
 
@@ -112,18 +112,18 @@ label transition_blowjob_deepthroat_enhanced(the_girl, the_location, the_object)
     $ blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] slides off your dick with a wet pop and takes a few breaths."
     if the_girl.body_type == "curvy_body" and the_girl.get_opinion_score("giving blowjobs") > 0 and the_girl.sex_skills["Oral"] > 3 and renpy.random.randint(0,2) == 0:
-        the_girl.char "Well you know what they say."
+        the_girl "Well you know what they say."
         mc.name "What?"
-        the_girl.char "Big girls give better head."
+        the_girl "Big girls give better head."
         "With that she opens her mouth wide and slides you back down her throat. She doesn't stop until her nose taps your stomach and she has your entire cock in her mouth. [the_girl.possessive_title] look up at you and winks as she starts to very slightly bob her head."
     else:
         if the_girl.effective_sluttiness() > 60 or the_girl.sex_skills["Oral"] > 3 :
             if the_girl.get_opinion_score("giving blowjobs") < 0:
-                the_girl.char "Okay [the_girl.mc_title], I'll see what I can do."
+                the_girl "Okay [the_girl.mc_title], I'll see what I can do."
             else:
-                the_girl.char "Okay [the_girl.mc_title], I'll see what I can do, but I'm not very good at it."
+                the_girl "Okay [the_girl.mc_title], I'll see what I can do, but I'm not very good at it."
         else:
-            the_girl.char "I'll... I'll do my best."
+            the_girl "I'll... I'll do my best."
 
         if the_girl.sex_skills["Oral"] < 3:
             "She kisses the tip of your cock, then slides it into her mouth. Gets your length half way down, then gags softly on it and pauses."
@@ -147,11 +147,11 @@ label transition_blowjob_to_deepthroat_taboo_break_label(the_girl, the_location,
     the_girl "Oh, you want me to deepthroat this monster..."
     if the_girl.effective_sluttiness() > 60 or the_girl.sex_skills["Oral"] > 3 :
         if the_girl.get_opinion_score("giving blowjobs") < 0:
-            the_girl.char "Okay [the_girl.mc_title], I'll see what I can do."
+            the_girl "Okay [the_girl.mc_title], I'll see what I can do."
         else:
-            the_girl.char "Okay [the_girl.mc_title], I'll see what I can do, but I'm not very good at it."
+            the_girl "Okay [the_girl.mc_title], I'll see what I can do, but I'm not very good at it."
     else:
-        the_girl.char "I'll... I'll give it a try..."
+        the_girl "I'll... I'll give it a try..."
 
     if the_girl.sex_skills["Oral"] < 3:
         "She kisses the tip of your cock, then slides it into her mouth. Gets your length half way down, then gags softly on it and pauses."
@@ -180,7 +180,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
                 "Without hesitation, [the_girl.possessive_title] leans forward and slides your dick down her throat."
             else:
                 "She gives a nod and slowly slides you cock half way down, until she starts gagging and pulls back."
-                the_girl.char "Erm, I still need to get used to your size."
+                the_girl "Erm, I still need to get used to your size."
 
         "Guide her":
             "You place a hand on the back of her head and slowly pull her towards you, sliding your cock down her throat."
@@ -208,14 +208,14 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
                     "She is resisting your push, slowly sliding your cock all the way down, squeezing your balls just a little too hard."
                 else:
                     "She resists your push, spitting out your cock."
-                    the_girl.char "Hey, I'm not your fleshlight! Let me do this on my own."
+                    the_girl "Hey, I'm not your fleshlight! Let me do this on my own."
                     $ the_girl.change_stats(arousal = -10, happiness = -2)
             else:
                 if the_girl.sex_skills["Oral"] >= 4:
                     "She doesn't resist and lets you push her down, while looking into your eyes."
                 else:
                     "She resists your push, coming back up."
-                    the_girl.char "Don't be so rough, let us enjoy this."
+                    the_girl "Don't be so rough, let us enjoy this."
                     $ the_girl.change_stats(arousal = -5, happiness = -1)
 
     "After taking a few seconds to get used to your size she starts to move back and forth, with each thrust forward, burying your cock nice and deep in her throat."
@@ -232,7 +232,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
         $ skull_fuck.redraw_scene(the_girl)
         "When the last moments of your climax have passed you pull back, cock trailing spit and cum as you leave her mouth."
         if the_girl.get_opinion_score("drinking cum") > 0:
-            the_girl.char "I thought you were going to drown me with your cum for a moment... Mmmm."
+            the_girl "I thought you were going to drown me with your cum for a moment... Mmmm."
             $ the_girl.change_slut_temp(1)
             $ the_girl.change_happiness(1)
             "She shivers with pleasure at the thought."
@@ -273,9 +273,9 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
                 $ the_girl.cum_in_mouth()
                 $ skull_fuck.redraw_scene(the_girl)
                 "Finally you're spent and you finally let [the_girl.title] pull off of your cock."
-                the_girl.char "Guahh... Guahh... Ah.... Ah...."
+                the_girl "Guahh... Guahh... Ah.... Ah...."
                 mc.name "Fuck that felt good."
-                the_girl.char "There was so much... Ah... I thought I was going to drown in it..."
+                the_girl "There was so much... Ah... I thought I was going to drown in it..."
                 "Still gasping for air, she wipes your sperm away from her nose and chin, then swallows loudly to get rid of the rest of it."
                 $ the_girl.call_dialogue("cum_mouth")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("drinking cum") + the_girl.get_opinion_score("being submissive"))

@@ -32,10 +32,12 @@ label alternate_nora_intro_label():
     $ the_person = mc.business.head_researcher
     $ scene_manager = Scene()
     "As you are working, you get a text message from your head researcher."
+    $ mc.having_text_conversation = the_person
     if the_person == stephanie:
         the_person "[the_person.mc_title]! Get down to the lab! You won't believe who is down here."
     else:
         the_person "Hey, I have someone down here in the lab looking for you specifically. Can you please come down?"
+    $ mc.having_text_conversation = None
     "You quickly make your way down to the lab."
     $ mc.change_location(rd_division)
     $ mc.location.show_background()

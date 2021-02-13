@@ -26,10 +26,10 @@ label slave_attention_crisis_action_label:
 
     if the_person.sex_record.get("Last Sex Day", 0) > day + 21: # she is very upset
         $ the_person.draw_person(emotion = "angry")
-        the_person.char "[the_person.mc_title]! You have been neglecting your slave, don't you want me to be your slave anymore?"
+        the_person "[the_person.mc_title]! You have been neglecting your slave, don't you want me to be your slave anymore?"
     else:
         $ the_person.draw_person(emotion = "sad")
-        the_person.char "[the_person.mc_title], you haven't used me for a long time, did I displease you in any way?"
+        the_person "[the_person.mc_title], you haven't used me for a long time, did I displease you in any way?"
 
     if not mc.location is dungeon:
         mc.name "Follow me, we need a more appropriate surrounding for this conversation."
@@ -45,7 +45,7 @@ label slave_attention_crisis_action_label:
         "Comfort her":
             mc.name "I've indeed been very busy, I think you deserve some attention."
             $ the_person.draw_person(position = "kneeling1", emotion = "happy")
-            the_person.char "Thank you [the_person.mc_title], do whatever you please, my body and mind are yours."
+            the_person "Thank you [the_person.mc_title], do whatever you please, my body and mind are yours."
             if not (the_person.vagina_visible() and the_person.tits_visible()):
                 mc.name "Take off your clothes."
                 "[the_person.possessive_title] stands up and starts to strip down."
@@ -56,7 +56,7 @@ label slave_attention_crisis_action_label:
 
             menu slave_attention_comfort_menu:
                 "Whip her" if mc.energy >= 20:
-                    "You take a leather flogger from the wall and start to give [the_person.possessive_title] a good whipping."
+                    "You take a leather flogger from the wall and start to give [the_person.possessive_title!l] a good whipping."
 
                     python:
                         for count in __builtin__.range(1, 11):
@@ -68,7 +68,7 @@ label slave_attention_crisis_action_label:
                     $ mc.change_energy(-20)
 
                     if the_person.arousal >= 100:
-                        the_person.char "Oh my god, I'm cumming....Aaargh....YES....please [the_person.mc_title], continue abusing my body..."
+                        the_person "Oh my god, I'm cumming....Aaargh....YES....please [the_person.mc_title], continue abusing my body..."
                         $ the_person.arousal //= 2
 
                     "Looking at her welted body, you decide what to do next."
@@ -82,9 +82,9 @@ label slave_attention_crisis_action_label:
                     call fuck_person(the_person, start_position = against_wall, start_object = make_pillory(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_2
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
-                        the_person.char "Thank you [the_person.mc_title], for giving your slave so much pleasure."
+                        the_person "Thank you [the_person.mc_title], for giving your slave so much pleasure."
                     else:
-                        the_person.char "Please [the_person.mc_title], keep fucking me, I need you inside me so bad."
+                        the_person "Please [the_person.mc_title], keep fucking me, I need you inside me so bad."
 
                     jump slave_attention_comfort_menu
 
@@ -97,9 +97,9 @@ label slave_attention_crisis_action_label:
                     call fuck_person(the_person, start_position = standing_dildo, start_object = make_pillory(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_3
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
-                        the_person.char "Oh Master, you can put that thing inside me whenever you want, It made me cum so hard."
+                        the_person "Oh Master, you can put that thing inside me whenever you want, It made me cum so hard."
                     else:
-                        the_person.char "Please [the_person.mc_title], stick that thing back into me, I need to cum so badly."
+                        the_person "Please [the_person.mc_title], stick that thing back into me, I need to cum so badly."
 
                     jump slave_attention_comfort_menu
                 "Dildo her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
@@ -108,12 +108,12 @@ label slave_attention_crisis_action_label:
                     mc.name "That's enough for now, you can get dressed."
                     $ the_person.apply_planned_outfit()
                     $ the_person.draw_person(position = "stand3")
-                    the_person.char "Thank you Master, for granting your slave this much pleasure."
+                    the_person "Thank you Master, for granting your slave this much pleasure."
                     "You just nod, as she quickly scurries out of the room."
 
         "Release her":
             mc.name "Well, [the_person.title], I don't think this is working out, although I'm not unsatisfied with your performance, this is not working out."
-            the_person.char "Please Master, give me another chance...you can punish me hard if you need to."
+            the_person "Please Master, give me another chance...you can punish me hard if you need to."
             if not the_person.vagina_visible():
                 "Pleading she turns around stripping her bottom bare, waiting for your decision."
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
@@ -143,7 +143,7 @@ label slave_attention_crisis_action_label:
                             $ the_person.apply_planned_outfit()
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."
-                            the_person.char "As you wish, [the_person.mc_title]."
+                            the_person "As you wish, [the_person.mc_title]."
                             $ the_person.change_stats(happiness = 5, obedience = 5)
 
                         "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
@@ -154,7 +154,7 @@ label slave_attention_crisis_action_label:
                             $ the_person.apply_planned_outfit()
                             $ the_person.draw_person(position = "stand3")
                             "She quickly puts on her clothes and bows her head."
-                            the_person.char "As you wish, [the_person.mc_title]."
+                            the_person "As you wish, [the_person.mc_title]."
                             $ the_person.change_stats(happiness = -3, obedience = 3)
 
                 "Release her":
@@ -162,18 +162,18 @@ label slave_attention_crisis_action_label:
                     $ the_person.apply_planned_outfit()
                     $ the_person.draw_person(position = "stand3")
                     "She quickly puts on her clothes and bows her head."
-                    the_person.char "As you wish..."
+                    the_person "As you wish..."
                     $ slave_release_slave(the_person)
                     "[the_person.title] is no longer your slave and you will need to retrain her if you want to enslave her again."
 
         "Ignore her":
             mc.name "So you think you can make any demands from me now?"
-            the_person.char "Oh no, [the_person.mc_title], I would never do that...I was just hoping you would use your slave."
+            the_person "Oh no, [the_person.mc_title], I would never do that...I was just hoping you would use your slave."
             mc.name "Well you thought wrong, get up and get out of here."
             $ the_person.draw_person(position = "walking_away")
             "She quickly jumps to her feet and rushes out of your dungeon."
             $ the_person.change_stats(happiness = -3, obedience = 1)
-            the_person.char "Yes Master, please forgive me..."
+            the_person "Yes Master, please forgive me..."
 
     $ the_person.apply_planned_outfit()
     $ clear_scene()

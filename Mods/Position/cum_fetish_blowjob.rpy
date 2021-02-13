@@ -24,10 +24,10 @@
 label intro_cum_fetish_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     if mc.condom:
-        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
-    the_girl.char "How about I take care of this for you?"
+    the_girl "How about I take care of this for you?"
     "[the_girl.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
     $ cum_fetish_blowjob.current_modifier = "blowjob"
     $ cum_fetish_blowjob.redraw_scene(the_girl)
@@ -42,8 +42,8 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
         "Talk dirty to her":
             mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
             "[the_girl.possessive_title] strokes you a few more times with her skilled mouth. She twirls her tongue around the tip a few times before taking a second to respond."
-            the_girl.char "Mmm, its been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
-            the_girl.char "...or maybe I'll pull off and stroke you while you cover my face in your hot cum..."
+            the_girl "Mmm, its been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
+            the_girl "...or maybe I'll pull off and stroke you while you cover my face in your hot cum..."
             "She slips you back into her mouth and resumes blowing you."
         "Stay quiet":
             "You rest your hand on her head, guiding her as she sucks you off."
@@ -72,15 +72,15 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
     $ cum_fetish_blowjob.redraw_scene(the_girl)
 
     "[the_girl.possessive_title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
-    the_girl.char "Mmm, I can't wait until your cock throbs and your sweet, sticky cum is shooting out..."
+    the_girl "Mmm, I can't wait until your cock throbs and your sweet, sticky cum is shooting out..."
     mc.name "Of course you can't wait. You are my perfect little cum slut."
     "When [the_girl.possessive_title] opens her mouth and resumes blowing you, you put your hand on the back of her head, intent to push yourself down her throat."
     if the_girl.get_opinion_score("being submissive") > 0:
         "[the_girl.possessive_title] looks up at you. You can see her pupils dilate as you slowly pull her head towards you, until your cock is buried in her throat."
         "[the_girl.possessive_title]'s knees quiver while her throat spasms around your shaft. You hold her deep while her body twitches with pleasure."
         "You let go of her head and she slowly comes up for air."
-        the_girl.char "Oh god you taste so good. You can fuck my throat if you want to, just promise me you'll warn me before you cum..."
-        the_girl.char "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
+        the_girl "Oh god you taste so good. You can fuck my throat if you want to, just promise me you'll warn me before you cum..."
+        the_girl "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
         $ the_girl.discover_opinion("cum facials")
         "Turned on by her filthy words, you grab the back of her head with both hands and force your dick right back down her throat."
         "You fuck her face roughly. Her throat makes vulgar suction noises with each thrust, and you can see her throat bulging slightly."
@@ -100,8 +100,8 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         "In response she bottoms out on your dick. She rocks her head left and right, grinding her face into your crotch to take as much of your length as possible."
         "She tenses and and relaxes her throat rhythmically, gently massaging your shaft with it."
         "You moan at the intense sensations.You let go of her head and she slowly comes up for air."
-        the_girl.char "Oh god you taste so good. Just promise me you'll warn me before you cum..."
-        the_girl.char "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
+        the_girl "Oh god you taste so good. Just promise me you'll warn me before you cum..."
+        the_girl "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
         $ the_girl.discover_opinion("cum facials")
         "You cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
     return
@@ -134,14 +134,14 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     $ cum_fetish_blowjob.current_modifier = None
     $ cum_fetish_blowjob.redraw_scene(the_girl)
-    the_girl.char "Yes.. its so hot... It feels so good on my skin..."
+    the_girl "Yes.. its so hot... It feels so good on my skin..."
     return
 
 label transition_default_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ cum_fetish_blowjob.current_modifier = "blowjob"
     $ cum_fetish_blowjob.redraw_scene(the_girl)
     if mc.condom:
-        the_girl.char "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
     "[the_girl.possessive_title] gets onto her knees in front of you and takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides the tip into her mouth."
@@ -165,7 +165,7 @@ label strip_ask_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_obj
     $ cum_fetish_blowjob.redraw_scene(the_girl)
 
     "[the_girl.possessive_title] pops off your cock and looks up at you from her knees."
-    the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
         "Let her strip":
             mc.name "Take it off for me."
@@ -177,7 +177,7 @@ label strip_ask_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_obj
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
-            the_girl.char "Is it sexy? Does it make you just want to blow your load, looking at me wearing this?"
+            the_girl "Is it sexy? Does it make you just want to blow your load, looking at me wearing this?"
             $ cum_fetish_blowjob.current_modifier = "blowjob"
             $ cum_fetish_blowjob.redraw_scene(the_girl)
             "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
@@ -210,7 +210,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
         $ cum_fetish_blowjob.current_modifier = None
         $ cum_fetish_blowjob.redraw_scene(the_girl)
         "When she's stopped twitching and moaning you let [the_girl.possessive_title] slide back. She pants loudly, then licks along the length of your cock."
-        the_girl.char "That was... incredible... Okay, I came... now its your turn!"
+        the_girl "That was... incredible... Okay, I came... now its your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
     else:
         "[the_girl.possessive_title] closes her eyes as her orgasm peaks. She holds almost perfectly still, your dick still sitting in her mouth, until she's finished."
@@ -219,7 +219,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
         "She pulls off and takes a long, deep breath."
         $ the_girl.change_obedience(1)
         $ the_girl.change_happiness(2)
-        the_girl.char "Wow, that was amazing... Okay, I came... now its your turn!"
+        the_girl "Wow, that was amazing... Okay, I came... now its your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
 
     return

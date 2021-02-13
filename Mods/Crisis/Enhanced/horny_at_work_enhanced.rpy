@@ -112,7 +112,7 @@ label horny_at_work_crisis_enhanced_label():
                 else: #It's more than one person
                     "It doesn't take long for someone to notice what you're doing. When [main_unhappy_person.title] glances at you she does a double take before gasping and yelling out."
                 $ scene_manager.update_actor(main_unhappy_person, emotion = "angry")
-                main_unhappy_person.char "Oh my god, what are you doing? [main_unhappy_person.mc_title], are you insane?!"
+                main_unhappy_person "Oh my god, what are you doing? [main_unhappy_person.mc_title], are you insane?!"
                 if mc.location.get_person_count() > 1:
                     "The rest of the office girls look up from their work, surprised by the sudden interruption."
                 "You lock eyes with her as you stroke your cock."
@@ -170,7 +170,7 @@ label horny_at_work_crisis_enhanced_label():
                 $ clear_scene()
                 $ helpful_person.draw_person(emotion = "happy", position = "stand3")
                 "[helpful_person.title] gets up from her desk and comes over, eyes transfixed on your swollen cock."
-                helpful_person.char "Would you like to use me to take care of that?"
+                helpful_person "Would you like to use me to take care of that?"
                 $ clear_scene()
                 $ scene_manager.add_group(helpful_people, position = "stand3", emotion = "happy")
                 if len(helpful_people) > 1: #More than one person, so describe them!
@@ -211,7 +211,7 @@ label horny_at_work_crisis_enhanced_label():
                     if licker is not None:
                         $ scene_manager.update_actor(licker, display_transform = character_right, position = "doggy")
                         "Before you even finish the sentence [licker.title] is on her hands and knees, lowering her face to the floor."
-                        licker.char "Right away!"
+                        licker "Right away!"
                         $ licker.change_obedience(2)
                         "She licks your still-warm cum directly off of the floor, drinking it down eagerly."
                         $ scene_manager.update_actor(licker, position = "stand3")
@@ -326,7 +326,7 @@ label horny_at_work_crisis_enhanced_label():
                 "You relax when you reach the bathroom, but a moment after you enter [your_follower.title] opens the door and comes inside too."
                 $ your_follower.draw_person()
                 mc.name "[your_follower.title], I..."
-                your_follower.char "It's okay. I saw you sneaking away and thought I'd join you. In case you wanted some company..."
+                your_follower "It's okay. I saw you sneaking away and thought I'd join you. In case you wanted some company..."
 
                 menu:
                     "Let her join you":
@@ -350,7 +350,7 @@ label horny_at_work_crisis_enhanced_label():
                         $ your_follower.change_happiness(-5)
                         $ your_follower.change_obedience(2)
                         $ your_follower.draw_person(emotion = "sad")
-                        your_follower.char "I... Oh, I'm sorry [your_follower.mc_title], I don't know what I was thinking..."
+                        your_follower "I... Oh, I'm sorry [your_follower.mc_title], I don't know what I was thinking..."
                         $ your_follower.draw_person(position = "walking_away")
                         "She blushes and turns around, leaving quickly."
                         $ clear_scene()
@@ -359,7 +359,7 @@ label horny_at_work_crisis_enhanced_label():
 
                     "Punish her for inappropriate behaviour" if office_punishment.is_active():
                         mc.name "[the_person.title], this isn't appropriate. I'm going to have to write you up."
-                        your_follower.char "I... Oh, I'm sorry [your_follower.mc_title], I don't know what I was thinking..."
+                        your_follower "I... Oh, I'm sorry [your_follower.mc_title], I don't know what I was thinking..."
                         $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
                         $ your_follower.draw_person(position = "walking_away")
                         "She blushes and turns around, leaving quickly."
@@ -379,29 +379,29 @@ label horny_at_work_crisis_enhanced_label():
 
         "Ask [the_person.title] to come over (tooltip)She got you turned on, she should be the one to get you off." if the_person is not None:
             mc.name "[the_person.title], I need you to come over here for a moment."
-            the_person.char "Hmm? What do you need?"
+            the_person "Hmm? What do you need?"
             $ the_person.draw_person()
             "She comes over and stands next to your desk. You wheel your chair back and rub your crotch, emphasizing the obvious bulge."
             mc.name "I think we need to have a talk about the way you act when you're in the office. As you can see, it's a little distracting for the male staff: Me."
             if the_person.effective_sluttiness() < (30 - the_person.get_opinion_score("public sex")*10):
                 $ the_person.discover_opinion("public sex")
                 "She looks away and gasps."
-                the_person.char "Oh my god, [the_person.mc_title]! I can't believe you're doing this right here!"
+                the_person "Oh my god, [the_person.mc_title]! I can't believe you're doing this right here!"
                 $ the_person.change_love(-5)
                 $ the_person.change_happiness(-10)
                 $ the_person.change_obedience(-3)
                 $ the_person.draw_person(position = "walking_away")
                 "Before you can say anything more she turns around and hurries out of the room."
-                the_person.char "I really need to go..."
+                the_person "I really need to go..."
                 "You sigh and give up on your hopes of a quick release."
                 $ clear_scene()
 
 
             else:
                 if the_person.obedience > 120:
-                    the_person.char "Oh, I'm so sorry. What can I do to help?"
+                    the_person "Oh, I'm so sorry. What can I do to help?"
                 else:
-                    the_person.char "Oh... What do you want me to do about it?"
+                    the_person "Oh... What do you want me to do about it?"
 
                 #TODO: Make sure all of this is context aware in some way for other people in the room.
                 $ willingness_value = the_person.sluttiness + (the_person.obedience - 100) + the_person.get_opinion_score("being submissive") * 10
@@ -415,12 +415,12 @@ label horny_at_work_crisis_enhanced_label():
                         mc.name "Well, I'd like you to give me some entertainment while I take care of this. Strip down and give me a little dance."
                         if mc.location.get_person_count() > 1:
                             "[the_person.title] looks around the room, then back to you and whispers."
-                            the_person.char "What about the other people?"
+                            the_person "What about the other people?"
                             mc.name "I'm sure they won't mind, and if they do they can take it up with me. Come on, I need to get back to work."
                         else:
                             "[the_person.title] looks around the empty room, then back to you and shrugs."
 
-                        the_person.char "Fine."
+                        the_person "Fine."
                         $ scene_manager.update_actor(the_person, position = "stand2")
 
                         if mc.location.get_person_count() > 1:
@@ -428,16 +428,16 @@ label horny_at_work_crisis_enhanced_label():
                             $ lead_other = get_random_from_list([x for x in mc.location.people if x not in [the_person]])
                             "[lead_other.title] glances over and notices you jerking off at your desk in front of [the_person.title]."
                             if lead_other.effective_sluttiness() < 20:
-                                lead_other.char "Oh my god, [lead_other.mc_title], what are you doing?"
-                                the_person.char "It's okay [lead_other.title], this is my fault. I've gotten [the_person.mc_title] too horny to work."
-                                the_person.char "So I'm going to help him cum."
+                                lead_other "Oh my god, [lead_other.mc_title], what are you doing?"
+                                the_person "It's okay [lead_other.title], this is my fault. I've gotten [the_person.mc_title] too horny to work."
+                                the_person "So I'm going to help him cum."
 
                             else:
-                                lead_other.char "[the_person.title], what are you doing?"
-                                the_person.char "I've gotten [the_person.mc_title] too excited, so I'm going to help him jerk off."
+                                lead_other "[the_person.title], what are you doing?"
+                                the_person "I've gotten [the_person.mc_title] too excited, so I'm going to help him jerk off."
                             $ del lead_other
 
-                            the_person.char "Don't mind us, I'll try and make this quick."
+                            the_person "Don't mind us, I'll try and make this quick."
                         else:
                             "You smile and turn your chair to face her. You unzip your pants and grab onto your hard cock, stroking it slowly."
 
@@ -448,7 +448,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
                         $ the_item = None
 
-                        "When [the_person.possessive_title] is finished stripping down she puts her hands on her hips and watches you jerk off."
+                        "When [the_person.possessive_title!l] is finished stripping down she puts her hands on her hips and watches you jerk off."
 
                         $ the_person.discover_opinion("not wearing anything")
                         $ the_person.change_slut_temp(the_person.get_opinion_score("not wearing anything")+1)
@@ -456,33 +456,33 @@ label horny_at_work_crisis_enhanced_label():
 
                         if the_person.get_opinion_score("not wearing anything") > 0:
                             "She doesn't seem to care about being naked in front of you; if anything she seems to be enjoying the experience."
-                            the_person.char "Do you have a good view?"
+                            the_person "Do you have a good view?"
                             $  the_person.draw_person(position = "back_peek")
                             "She gives you a quick spin."
                             $ the_person.draw_person()
                         elif the_person.get_opinion_score("showing her tits") > 0:
                             if the_person.has_large_tits():
                                 "She puts an arm under her tits and lifts them up for you, leaning forward a little to emphasize their size."
-                                the_person.char "Do you like my tits? I know a lot of men do, they like to have a big pair of juicy titties in their face."
+                                the_person "Do you like my tits? I know a lot of men do, they like to have a big pair of juicy titties in their face."
 
                             else:
                                 "She rubs her small tits, thumbing the nipples until they grow hard."
-                                the_person.char "Do you like my tits? I know some women have bigger ones, but I think these are still pretty cute."
-                                the_person.char "They're just the right size to suck on, don't you think?"
+                                the_person "Do you like my tits? I know some women have bigger ones, but I think these are still pretty cute."
+                                the_person "They're just the right size to suck on, don't you think?"
 
                         elif the_person.get_opinion_score("showing her ass") > 0:
                             "[the_person.title] turns around unprompted and plants her hands on a desk opposite you."
                             $ the_person.draw_person(position = "standing_doggy")
-                            the_person.char "Do you like my ass, [the_person.mc_title]? Do you want to give it a nice hard smack and make it jiggle?"
+                            the_person "Do you like my ass, [the_person.mc_title]? Do you want to give it a nice hard smack and make it jiggle?"
                             "She works her hips up and down, making her ass cheeks bounce and clap together."
 
                         else:
-                            the_person.char "Come on, I want you to cum so we can get back to work."
+                            the_person "Come on, I want you to cum so we can get back to work."
 
                         "You stroke yourself faster, enjoying [the_person.title]'s body on display right in front of you. Finally you feel your orgasm approaching."
                         "You lean back in your chair and grunt as you climax, blowing a hot load of cum in an arc onto the floor in front of you."
                         $ the_person.draw_person()
-                        the_person.char "Wow..."
+                        the_person "Wow..."
                         "It takes a few moments of deep breathing to recover from the experience."
                         mc.name "Thank you [the_person.title], that's taken care of the problem nicely."
                         "She gives you a quick smile."
@@ -497,20 +497,20 @@ label horny_at_work_crisis_enhanced_label():
                         $ willingness_value += the_person.get_opinion_score("giving blowjobs") * 10
                         if willingness_value >= blowjob.slut_requirement:
                             if (the_person.get_opinion_score("public sex") > 0 and mc.location.get_person_count() > 1) or the_person.get_opinion_score("giving blowjobs") > 0:
-                                the_person.char "Okay, if that's what you need."
+                                the_person "Okay, if that's what you need."
                                 "She gets onto her hands and knees, crawling under your desk and nestling herself between your legs."
                             else:
                                 if mc.location.get_person_count() > 1:
-                                    the_person.char "But... What if someone notices?"
+                                    the_person "But... What if someone notices?"
                                     mc.name "I'm sure they will be impressed by what a good job you're doing sucking my cock."
 
                                 else:
-                                    the_person.char "Really? I..."
+                                    the_person "Really? I..."
 
                                 mc.name "Come on, I don't have all day. I need to get back to work."
                                 "She hesitates, but after a second of thought she sighs and gets onto her hands and knees, crawling under your desk and nestling herself between your legs."
                             $ scene_manager.update_actor(the_person, position = "blowjob")
-                            "You unzip your pants and pull them down, letting your hard cock fall out onto [the_person.possessive_title]'s face."
+                            "You unzip your pants and pull them down, letting your hard cock fall out onto [the_person.possessive_title!l]'s face."
                             "She places her hands on your thighs and slides your cock into her mouth, licking the tip to get it wet before slipping it further back."
                             $ clear_scene()
                             $ the_person.change_arousal(50)
@@ -524,7 +524,7 @@ label horny_at_work_crisis_enhanced_label():
                                 "Fully spent, you let [the_person.title] out from under your desk and get back to work, mind now crystal clear."
                         else:
                             $ scene_manager.update_actor(the_person, emotion = "angry")
-                            the_person.char "What? Oh my god, I couldn't do that!"
+                            the_person "What? Oh my god, I couldn't do that!"
                             $ the_person.change_love(-5)
                             $ the_person.change_happiness(-10)
                             $ the_person.change_obedience(-3)
@@ -539,21 +539,21 @@ label horny_at_work_crisis_enhanced_label():
                         if willingness_value >= missionary.slut_requirement:
                             $ desk = mc.location.get_object_with_name("desk") #May be None if there's no desk where you are.
                             if desk is not None:
-                                "You grab [the_person.possessive_title] by her hips and lift her up, putting her down on your desk and positioning yourself between her legs."
+                                "You grab [the_person.possessive_title!l] by her hips and lift her up, putting her down on your desk and positioning yourself between her legs."
                             else:
                                 $ desk = make_floor() # fallback to floor
-                                "You grab [the_person.possessive_title] by her hips and lay her down in front of you, spreading her legs around you."
+                                "You grab [the_person.possessive_title!l] by her hips and lay her down in front of you, spreading her legs around you."
 
                             $ scene_manager.update_actor(the_person, position = "missionary")
                             if mc.location.get_person_count() > 1 and the_person.effective_sluttiness() < (80 - 10*the_person.get_opinion_score("public sex")):
-                                the_person.char "Ah! Wait, what will the other girls think?"
+                                the_person "Ah! Wait, what will the other girls think?"
                                 mc.name "I'm sure they'll let us know."
                             elif the_person.relationship != "Single" and affair_role not in the_person.special_role:
                                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                                the_person.char "Wait, I have a [so_title]! I shouldn't let you do this!"
+                                the_person "Wait, I have a [so_title]! I shouldn't let you do this!"
                                 "Despite her protest she doesn't try to stand back up or get you out from between her thighs."
                             else:
-                                the_person.char "Ah!"
+                                the_person "Ah!"
 
                             if the_person.outfit.can_half_off_to_vagina():
                                 $ horny_at_work_strip_down(the_person)
@@ -604,7 +604,7 @@ label horny_at_work_crisis_enhanced_label():
 
                         else:
                             $ scene_manager.update_actor(the_person, emotion = "angry")
-                            the_person.char "What? Oh my god, I would never let you do that!"
+                            the_person "What? Oh my god, I would never let you do that!"
                             $ the_person.change_stats(love = -5, happiness = -10, obedience = -3)
                             "She stammers for something more to say before settling on storming out of the room instead."
                             $ clear_scene()

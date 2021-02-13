@@ -141,34 +141,36 @@ label quest_cure_discovery_intro_label():
     if the_person == None:
         return #Bad end
     if mc.location != rd_division:
-        "You get a text on your phone. It's from [the_person.possessive_title]."
-        the_person.char "Hey, I need to see you in the lab ASAP!"
+        "You get a text on your phone. It's from [the_person.possessive_title!l]."
+        $ mc.having_text_conversation = the_person
+        the_person "Hey, I need to see you in the lab ASAP!"
+        $ mc.having_text_conversation = None
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
         $ mc.location.show_background()
 
     $ the_person.draw_person()
-    the_person.char "Hey! I need to talk to you about something."
+    the_person "Hey! I need to talk to you about something."
     mc.name "What is it?"
-    the_person.char "I was doing some research for a new serum trait. I was testing the effects on some rats in the lab, when I noticed something incredible."
-    the_person.char "I had some rats that have [the_disease]. After giving them the serum, they showed no signs of the disease in less than 12 hours!"
+    the_person "I was doing some research for a new serum trait. I was testing the effects on some rats in the lab, when I noticed something incredible."
+    the_person "I had some rats that have [the_disease]. After giving them the serum, they showed no signs of the disease in less than 12 hours!"
     mc.name "That's... interesting?"
-    the_person.char "I thought so too, so I ran a bunch more tests. In 99.8 percent of tests I ran, the disease appears to be completely cured!"
+    the_person "I thought so too, so I ran a bunch more tests. In 99.8 percent of tests I ran, the disease appears to be completely cured!"
     mc.name "Is that something that could be adapted to humans?"
-    the_person.char "This would be the first step in researching a cure! I already filed a patent for the business on the formula."
+    the_person "This would be the first step in researching a cure! I already filed a patent for the business on the formula."
     mc.name "That's great... but could we realistically manufacture that here?"
     "She considers your question for a moment."
-    the_person.char "Realistically... not really. Not in the numbers that would be needed to have it available to large numbers of people."
+    the_person "Realistically... not really. Not in the numbers that would be needed to have it available to large numbers of people."
     mc.name "Hmm, that's a shame."
-    the_person.char "Maybe you could... I don't know... sell the patent? To a larger pharmaceutical company? One that could make it in the quantity needed to meet worldwide demand?"
+    the_person "Maybe you could... I don't know... sell the patent? To a larger pharmaceutical company? One that could make it in the quantity needed to meet worldwide demand?"
     mc.name "That's an interesting idea..."
     menu:
         "Keep the secret for your company":
             mc.name "It might take us some time, but I think we could ramp up production here to meet demand."
             $ the_person.draw_person(emotion = "angry")
-            the_person.char "But sir! That would take... months? Or more?"
+            the_person "But sir! That would take... months? Or more?"
             mc.name "So?"
-            the_person.char "Think of all the people out there, suffering right now. Surely it would be better for us to just sell the rights?"
+            the_person "Think of all the people out there, suffering right now. Surely it would be better for us to just sell the rights?"
             mc.name "No, I don't think so."
             $ the_person.change_stats(obedience = -10, love = -10, happiness = -20)
             "She really doesn't like your answer. Hopefully you haven't burned any bridges with your answer?"
@@ -180,15 +182,15 @@ label quest_cure_discovery_intro_label():
         "Try and sell the patent":
             mc.name "Some cash infusion to the company would be great. That's a great idea, [the_person.title]."
     $ the_target = quest_cure_get_market_contact()
-    the_person.char "Personally, I think you should talk to [the_target.name]. You know, over in marketing?"
+    the_person "Personally, I think you should talk to [the_target.name]. You know, over in marketing?"
     mc.name "Oh?"
     if the_target == alexia:
-        the_person.char "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
+        the_person "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
         mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
     else:
-        the_person.char "Yeah, I think she actually has experience doing something similar at a previous job. I bet she could help out!"
+        the_person "Yeah, I think she actually has experience doing something similar at a previous job. I bet she could help out!"
         mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
-    the_person.char "If I were you, I'd get on it, quick! Modern day drug research is extremely fast paced. No telling when another lab might replicate our findings..."
+    the_person "If I were you, I'd get on it, quick! Modern day drug research is extremely fast paced. No telling when another lab might replicate our findings..."
     mc.name "Thank you, [the_person.title], for your research and for bringing this to my attention."
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
 
@@ -205,20 +207,20 @@ label quest_cure_discovery_market_patent_label(the_person):
     $ the_person.draw_person()
     $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     mc.name "Hello [the_person.title], do you have a moment?"
-    the_person.char "Of course. What can I do for you sir?"
+    the_person "Of course. What can I do for you sir?"
     if the_person == alexia:
         mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
-        the_person.char "Oh? I think I could handle something like that. What is the patent for?"
+        the_person "Oh? I think I could handle something like that. What is the patent for?"
         mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
     else:
         mc.name "Well, I heard that you might have some prior experience working with drug patent rights..."
-        the_person.char "Yes sir! At my last job, I worked for a pharmaceutical investment company, buying and selling patent rights to all kinds of different drugs."
+        the_person "Yes sir! At my last job, I worked for a pharmaceutical investment company, buying and selling patent rights to all kinds of different drugs."
         mc.name "Wow, well, that is actually very useful. You see, our research department made a discovery related to a possible treatment for [the_disease]."
-    the_person.char "Oh wow! There's currently some preventative drugs for that, but no known cure."
+    the_person "Oh wow! There's currently some preventative drugs for that, but no known cure."
     mc.name "I know. I wish we had the production and testing capabilities here to take it to market, but unfortunately, we just don't."
-    the_person.char "Aahhh, I see. So you want me to test the waters and see what I can get for the patent rights to the discovery?"
+    the_person "Aahhh, I see. So you want me to test the waters and see what I can get for the patent rights to the discovery?"
     mc.name "That's exactly right."
-    the_person.char "Okay! I can do that. Give me a couple of days and I'll see what I can find!"
+    the_person "Okay! I can do that. Give me a couple of days and I'll see what I can find!"
     mc.name "Thank you, [the_person.title]."
     $ quest_cure_set_market_contact(the_person)
     $ quest_cure_discovery().quest_event_dict["market_day"] = day
@@ -235,28 +237,30 @@ label quest_cure_discovery_patent_sold_label():
         return
     #TODO test to make sure market contact still works for us.
     "You get a text message from [the_person.title]."
-    the_person.char "Hey there! I just got some good news on that patent you have for [the_disease]."
+    $ mc.having_text_conversation = the_person
+    the_person "Hey there! I just got some good news on that patent you have for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
     if quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 0:
-        the_person.char "Well, [the_disease] has very few cases annually, so the prospects of a lucrative deal for the patent rights were pretty slim."
-        the_person.char "After negotiating, I was able to sell them for $1500. I hope that is okay."
+        the_person "Well, [the_disease] has very few cases annually, so the prospects of a lucrative deal for the patent rights were pretty slim."
+        the_person "After negotiating, I was able to sell them for $1500. I hope that is okay."
         $ mc.business.funds += 1500
         mc.name "I understand. That is still very helpful. Thank you [the_person.title]."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 1:
-        the_person.char "Well, [the_disease] really only propagates in poor, tropical areas, due to the way it spreads."
-        the_person.char "While the good this drug can do is great, the profit potential is pretty low. I was only able to sell it for $3500. I hope that is okay."
+        the_person "Well, [the_disease] really only propagates in poor, tropical areas, due to the way it spreads."
+        the_person "While the good this drug can do is great, the profit potential is pretty low. I was only able to sell it for $3500. I hope that is okay."
         $ mc.business.funds += 3500
         mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 2:
-        the_person.char "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
-        the_person.char "After negotiating, I was able to sell the patent for $15000. I hope that is okay."
+        the_person "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
+        the_person "After negotiating, I was able to sell the patent for $15000. I hope that is okay."
         $ mc.business.funds += 15000
         mc.name "That is still a considerable sum. Thank you [the_person.title]."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) >= 3:
-        the_person.char "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
-        the_person.char "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
+        the_person "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
+        the_person "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
         $ mc.business.funds += 50000
         mc.name "That is still a significant sum. Thank you [the_person.title]."
+    $ mc.having_text_conversation = None
     "The patent is sold! And you made a little extra money for the business."
     $ del the_disease
     $ quest_cure_discovery().set_quest_flag(101)
@@ -282,35 +286,35 @@ label quest_cure_discovery_patent_kept_label():
     else:
         "Suddenly, you realize what must have happened. [the_person.title], not happy with your intention to keep the patent, must have secretly donated the rights to it."
     "You call her up."
-    the_person.char "Hello?"
+    the_person "Hello?"
     mc.name "Hey. So, I'm guessing you're the one I have to thank for the email I got this morning from the Red Cross?"
     "There is silence on the other end. You think you hear an expletive whispered."
-    the_person.char "I'm not going to lie... yes, that was me. You have to understand! This could help a lot of people!"
+    the_person "I'm not going to lie... yes, that was me. You have to understand! This could help a lot of people!"
     "She sounds very sincere. It's hard to be mad, and maybe this is something that really COULD help a lot of people."
-    the_person.char "Please don't fire me, I love working here, but I just couldn't sit by while something that could help people..."
+    the_person "Please don't fire me, I love working here, but I just couldn't sit by while something that could help people..."
     menu:
         "Fire her":
             mc.name "Clean out your desk. I can't have someone undermining me as my head researcher. You're fired."
             "Stunned silence on the other end of the call. Finally she speaks up."
-            the_person.char "I understand. I'll be out before the end of the day."
+            the_person "I understand. I'll be out before the end of the day."
             $ mc.business.remove_employee(the_person)
         "It's okay":
             mc.name "It's okay, [the_person.title]. I'm sorry I didn't make that move right from the start. You did the right thing."
             "She sounds relieved."
-            the_person.char "Oh [the_person.mc_title], I knew you were a reasonable man! I'll make it up to you, I promise!"
+            the_person "Oh [the_person.mc_title], I knew you were a reasonable man! I'll make it up to you, I promise!"
             if the_person.effective_sluttiness() > 50: #MC can push for make up sex.
                 mc.name "I think I know how you can make it up to me. Come to my office."
-                the_person.char "Yes sir!"
+                the_person "Yes sir!"
                 $ ceo_office.show_background()
                 $ the_person.draw_person()
-                "You hear a knock. You look up and see [the_person.possessive_title]"
-                the_person.char "You wanted to see me?"
+                "You hear a knock. You look up and see [the_person.possessive_title!l]"
+                the_person "You wanted to see me?"
                 mc.name "Yes. Come in, and lock the door behind you."
-                the_person.char "Oh my..."
+                the_person "Oh my..."
                 "[the_person.title] does as you ask. Her voice takes on a sultry tone."
-                the_person.char "So, did you have something in mind? How I can make all this up to you?"
+                the_person "So, did you have something in mind? How I can make all this up to you?"
                 mc.name "I do, come around here and get on your knees."
-                the_person.char "Oh god, yes [the_person.mc_title]."
+                the_person "Oh god, yes [the_person.mc_title]."
                 $ the_person.draw_person(position = "blowjob")
                 "You pull your dick out of your pants and put it right on her face."
                 mc.name "You know what to do."
@@ -323,24 +327,24 @@ label quest_cure_discovery_patent_kept_label():
                     mc.name "I know that this story had a happy ending, with the patent going to the Red Cross, but remember, this is my business. Don't do things behind my back again."
                     $ the_person.change_stats(obedience = 10, love = -10, slut_temp = 5, slut_core = 2)
                     "Her voice is trembling as she responds."
-                    the_person.char "Yes... yes sir..."
+                    the_person "Yes... yes sir..."
                 elif deepthroat in the_report.get("positions_used", []):  #She took it deep.
                     "[the_person.possessive_title] is recovering from taking your cock deep down her throat."
                     mc.name "I know this story had a happy ending, with the patent going to the Red Cross, but please don't do things behind my back like that again."
                     $ the_person.change_stats(obedience = 5, slut_temp = 5, slut_core = 3)
-                    the_person.char "Yes sir, it won't happen again!"
+                    the_person "Yes sir, it won't happen again!"
                 else: #Just a BJ
                     "[the_person.possessive_title] licks her lips, she seems to have enjoyed getting on her knees for you."
                     mc.name "Thank you for doing the right thing, but please let me know before you take actions like that again."
                     $ the_person.change_stats(love = 5, slut_temp = 3, slut_core = 2)
-                    the_person.char "Yes sir."
+                    the_person "Yes sir."
                 mc.name "That'll be all for now."
                 $ the_person.draw_person(position = "walking_away")
                 "Well, you may have missed a financial opportunity, but at least you got a blowjob out of it!"
             else:
                 mc.name "I'm sure you will. Please try to let me know before you take actions like that in the future though."
                 $ the_person.change_stats(obedience = 5, love = 5, happiness = 10) #Net gain to stats because MC still took a good path in the end.
-                the_person.char "Of course sir."
+                the_person "Of course sir."
                 "You say goodbye and hang up the phone."
                 "Well, you may have missed out on a financial opportunity, but it sounds like you've gained some consideration from [the_person.title] in the process."
     $ del the_disease

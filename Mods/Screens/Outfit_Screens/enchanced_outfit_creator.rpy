@@ -93,6 +93,14 @@ init 10 python:
             return "Overwear"
         return 0
 
+    def get_category(item):
+        cs = renpy.current_screen()
+
+        for cat in cs.scope["valid_categories"]:
+            for cloth in cs.scope["categories_mapping"][cat][0]:
+                if item.name == cloth.name:
+                    return cat
+        return cs.scope["valid_categories"][0]
 
     def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
 
@@ -270,45 +278,6 @@ init -1 python:
             return False
     Outfit.in_outfit = in_outfit
 
-
-
-    def get_category(item): # Should re-write this function if possible.
-        cs = renpy.current_screen()
-        fluids_list = cs.scope["fluids_list"]
-        cloth_master_list = [
-        panties_list + neckwear_list + bracelet_list + rings_list +
-        earings_list + shoes_list + bra_list + pants_list + skirts_list +
-        shirts_list + dress_list +  socks_list + fluids_list
-        ]
-        for cloth in cloth_master_list:
-            if item in panties_list:
-                return "Panties"
-            if item in bra_list:
-                return "Bras"
-            if item in pants_list:
-                return "Pants"
-            if item in skirts_list:
-                return "Skirts"
-            if item in dress_list:
-                return "Dresses"
-            if item in shirts_list:
-                return "Shirts"
-            if item in socks_list:
-                return "Socks"
-            if item in shoes_list:
-                return "Shoes"
-            if item in earings_list:
-                return "Facial"
-            if item in rings_list:
-                return "Rings"
-            if item in bracelet_list:
-                return "Bracelets"
-            if item in neckwear_list:
-                return "Neckwear"
-            if item in fluids_list:
-                return "Not Paint"
-            else:
-                return "Item not in Category"
 init 2:
     python:
         def custom_log_outfit(the_outfit, outfit_class = "FullSets", wardrobe_name = "Exported_Wardrobe"): #NOTE: This is just a version of the default log_outfit that does not append .xml to the file name
@@ -407,9 +376,9 @@ init 2:
             $ valid_layers = [0,1,2,3]
             $ outfit_class_selected = "FullSets"
 
-        $ valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
+        default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
 
-        $ categories_mapping = {
+        default categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
             "Bras": [bra_list, Outfit.can_add_upper, Outfit.add_upper],
             "Pants": [[x for x in pants_list if not x in [cop_pants]] , Outfit.can_add_lower, Outfit.add_lower],

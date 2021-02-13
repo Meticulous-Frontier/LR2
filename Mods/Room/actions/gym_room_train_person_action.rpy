@@ -40,25 +40,25 @@ label select_person_for_gym():
 label select_person_for_gym_response(the_person):
     if the_person.happiness < 100 or the_person.obedience < 80:
         $ the_person.draw_person(emotion = "sad")
-        the_person.char "I'm not in the mood for gym session, right now."
+        the_person "I'm not in the mood for gym session, right now."
         $ the_person.change_obedience(-2)
         $ clear_scene()
         return
 
     if the_person.personality == bimbo_personality:
-        the_person.char "Cumming right away, [the_person.mc_title]!"
+        the_person "Cumming right away, [the_person.mc_title]!"
     elif the_person.obedience > 140:
-        the_person.char "Yes, Sir. I am on my way."
+        the_person "Yes, Sir. I am on my way."
     elif the_person.sluttiness > 30:
-        the_person.char "Yes, [the_person.mc_title]. I am on my way."
+        the_person "Yes, [the_person.mc_title]. I am on my way."
     elif the_person.sluttiness > the_person.obedience:
-        the_person.char "Yes, [the_person.mc_title], are you going to train me personally?"
+        the_person "Yes, [the_person.mc_title], are you going to train me personally?"
     elif the_person.happiness < 120 and the_person.love > 20:
         $ the_person.draw_person(emotion = "happy")
-        the_person.char "Thanks for the attention, [the_person.mc_title]."
+        the_person "Thanks for the attention, [the_person.mc_title]."
         $ the_person.change_happiness(+10)
     else:
-        the_person.char "Sounds good, I'll be right there [the_person.mc_title]."
+        the_person "Sounds good, I'll be right there [the_person.mc_title]."
         $ the_person.change_happiness(+10)
     # End of responses
     call train_in_gym(the_person) from _call_train_in_gym_person_for_gym
@@ -76,22 +76,22 @@ label train_in_gym(the_person):
         the_person.draw_person(emotion = "happy")
 
     if ran_num < 1:
-        "You decide to take a yoga class with [the_person.possessive_title]."
-        the_person.char "This stretching is good my flexibility."
+        "You decide to take a yoga class with [the_person.possessive_title!l]."
+        the_person "This stretching is good my flexibility."
         if the_person.sluttiness > 20:
             $ the_person.draw_person(emotion="happy")
             "There is a subtle undertone in that remark that makes you smile."
         $ the_person.change_max_energy(5)
         "She seems to be building up her endurance."
     elif ran_num < 2.5:
-        "You and [the_person.possessive_title] spend a few hours working out."
+        "You and [the_person.possessive_title!l] spend a few hours working out."
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
     else:
-        "You put [the_person.possessive_title] through a vigorous training session."
+        "You put [the_person.possessive_title!l] through a vigorous training session."
         if the_person.sluttiness > 20:
             $ the_person.draw_person(emotion = "angry")
-            the_person.char "It seems you have plans with my body, [the_person.mc_title]."
+            the_person "It seems you have plans with my body, [the_person.mc_title]."
             "If she only knew what dirty things you have her doing in your mind."
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
@@ -102,7 +102,7 @@ label train_in_gym(the_person):
         $ body_changed = the_person.change_weight(-ran_num, 100)
         $ new_weight = get_person_weight_string(the_person)
 
-        "After the session [the_person.possessive_title] weighs [new_weight]."
+        "After the session [the_person.possessive_title!l] weighs [new_weight]."
 
     else:
         "Since she is pregnant, there is no visible change to her body or weight."
@@ -111,14 +111,14 @@ label train_in_gym(the_person):
         $ the_person.draw_person()
         $ the_person.change_stats(happiness = 10, love = 5, arousal = renpy.random.randint(15, 35), slut_temp = 3)
         if the_person.sluttiness > 20:
-            the_person.char "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
+            the_person "Wow, these gym sessions make me feel just great, somehow I get turned on too... would you mind?"
             menu:
                 "Have Sex":
                     mc.name "Lets go to the shower room."
-                    the_person.char "Lead the way, [the_person.mc_title]."
+                    the_person "Lead the way, [the_person.mc_title]."
                     $ gym_shower.show_background()
 
-                    "As soon as you get into the showers, [the_person.possessive_title] moves closer and starts kissing you."
+                    "As soon as you get into the showers, [the_person.possessive_title!l] moves closer and starts kissing you."
                     # intro breaks kissing taboo for the_person
                     $ the_person.break_taboo("kissing")
                     $ old_outfit = the_person.outfit.get_copy() # make a copy we can restore
@@ -135,8 +135,8 @@ label train_in_gym(the_person):
                     mc.name "Sorry [the_person.title], another time."
                     $ the_person.change_happiness(-5)
         else:
-            the_person.char "Amazing, these gym session are really paying off."
-    the_person.char "Thank you, [the_person.mc_title]."
+            the_person "Amazing, these gym session are really paying off."
+    the_person "Thank you, [the_person.mc_title]."
     mc.name "Bye [the_person.title], see you next time."
 
     $ the_person.draw_person(position="walking_away")

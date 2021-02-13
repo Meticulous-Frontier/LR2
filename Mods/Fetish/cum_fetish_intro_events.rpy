@@ -179,7 +179,7 @@ label cum_fetish_employee_intro_label(the_person):
     mc.name "Good girl. Keeping going, rub some on your stomach..."
     the_person "Oh my god..."
     $ the_person.cum_on_stomach()
-    "Taking what she can, [the_person.possessive_title] goes further, rubbing your cum onto her belly."
+    "Taking what she can, [the_person.possessive_title!l] goes further, rubbing your cum onto her belly."
     $ the_person.change_arousal(20)
     "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dialated. She is REALLY getting off on this!"
     mc.name "That's a good cumslut. You know whats coming next, right?"
@@ -210,7 +210,7 @@ label cum_fetish_family_intro_label(the_person):
     $ the_person.arousal = 40
     $ towel_outfit = Outfit("Towel")
     $ towel_outfit.add_dress(towel.get_copy())
-    "Noticing the door cracked, you walk up to [the_person.possessive_title]'s bedroom door. As approach, you hear noises coming from inside."
+    "Noticing the door cracked, you walk up to [the_person.possessive_title!l]'s bedroom door. As approach, you hear noises coming from inside."
     the_person "Oh... mmm... oh fuck yeah... That's it baby..."
     "As you sneak closer, you look in and see [the_person.title], face down ass up on her bed with her fingers between her legs."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
@@ -259,7 +259,7 @@ label cum_fetish_family_intro_label(the_person):
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] gives in and drops the sheet. You get closer until you are standing right in front of her."
     mc.name "That's it. Now, you're already all warmed up. Why don't you give me a kiss and help me catch up a little."
-    "Still sitting on the edge of the bed, [the_person.possessive_title] looks up at you as you bring your cock up to her face."
+    "Still sitting on the edge of the bed, [the_person.possessive_title!l] looks up at you as you bring your cock up to her face."
     "You run your hand through her hair a couple times, as she begins to lick around the tip of your dick."
     "She licks up some of your precum."
     the_person "Mmm... that tastes so... good? Its funny... I'd never though of cum as tasting so good before."
@@ -285,7 +285,7 @@ label cum_fetish_family_intro_label(the_person):
     "The sounds of slapping echo all around the room as you give it to her. Soon, her moans begin to increase in intensity and pace."
     $ the_person.change_arousal(30) #110
     the_person "Oh god [the_person.mc_title] I'm cumming... I'm cumming!"
-    "You keep up your pace while [the_person.possessive_title] cums. You think you can feel her pussy twitch around your cock."
+    "You keep up your pace while [the_person.possessive_title!l] cums. You think you can feel her pussy twitch around your cock."
     $ the_person.have_orgasm(half_arousal = True) #55
     $ mc.change_arousal(25) # 80
     "You don't let up at all. You keep pounding [the_person.title] as you are getting close to your own orgasm now."
@@ -300,7 +300,7 @@ label cum_fetish_family_intro_label(the_person):
     $ mc.reset_arousal()
     the_person "Oh fuck! It feels so good! Cover me [the_person.mc_title]!"
     "You unload everything you have. The ass in front of you, covered in sperm, is a work of art."
-    "However, you want to push things a little further and make sure you really make [the_person.possessive_title] your cumslut."
+    "However, you want to push things a little further and make sure you really make [the_person.possessive_title!l] your cumslut."
     mc.name "That was hot. Your ass is covered! I bet you wish you could taste it huh?"
     the_person "Ahhh, yeah that would be nice..."
     mc.name "Here, let me help."
@@ -324,7 +324,7 @@ label cum_fetish_family_intro_label(the_person):
     $ the_person.draw_person(position = the_person.idle_pose)
     "[the_person.possessive_title] slowly stands up and turns to you. You can see a tiny bit of your cum dribbling down her lip."
     mc.name "I need to get going. Take care [the_person.title]"
-    "You say goodbye to [the_person.possessive_title] then leave her room. As you walk away, you can't help but smile."
+    "You say goodbye to [the_person.possessive_title!l] then leave her room. As you walk away, you can't help but smile."
     "Your serums have turned her into your cumslut."
     python:
         the_person.apply_planned_outfit()
@@ -337,14 +337,16 @@ label cum_fetish_generic_intro_label(the_person):
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
     "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
-    the_person.char "I'm here... Should I just knock on the door?"
+    $ mc.having_text_conversation = the_person
+    the_person "I'm here... Should I just knock on the door?"
+    $ mc.having_text_conversation = None
     $ hall.show_background()
     "You drag yourself out of bed and stumble out to the front hall. You move to a window and peek out at your front door."
     $ the_person.draw_person(emotion = "happy")
     "You see [the_person.title] standing outside. You open the door before she goes to knock."
     mc.name "[the_person.title], what are you doing here? It's the middle of the night."
     "[the_person.possessive_title] takes a step towards you, running a hand down your chest. You guide her outside so she won't wake up your mother or sister."
-    the_person.char "Oh [the_person.mc_title], I just keep on thinking about your nice cock and its sweet nectar, you need to help me!"
+    the_person "Oh [the_person.mc_title], I just keep on thinking about your nice cock and its sweet nectar, you need to help me!"
     "Even before you have time to respond, she drops to her knees and pulls out your flaccid member."
     $ the_person.draw_person(position = "blowjob")
     menu:
@@ -353,7 +355,7 @@ label cum_fetish_generic_intro_label(the_person):
             $ mc.change_arousal(20)
             "She quickly takes you in her mouth, slowly making your cock hard as rock."
             $ the_person.break_taboo("sucking_cock")
-            the_person.char "Mmh, I love it when I can feel it grow in my mouth."
+            the_person "Mmh, I love it when I can feel it grow in my mouth."
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
             call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC10B
@@ -361,27 +363,27 @@ label cum_fetish_generic_intro_label(the_person):
 
             "[the_person.possessive_title] is moaning ecstatically."
             if the_person.has_face_cum():
-                "Glancing down, you see [the_person.possessive_title] running her hands along her face, rubbing your cum into her skin."
-                the_person.char "Mmm... it feels so good! That first splash is always the best..."
+                "Glancing down, you see [the_person.possessive_title!l] running her hands along her face, rubbing your cum into her skin."
+                the_person "Mmm... it feels so good! That first splash is always the best..."
             else:
-                "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
-                the_person.char "Mmm... your taste is so unique, I love it!"
+                "Glancing down, you see [the_person.possessive_title!l] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+                the_person "Mmm... your taste is so unique, I love it!"
             $ the_person.event_triggers_dict["LastCumFetish"] = day
             "[the_person.possessive_title] stands up."
             $ the_person.draw_person(emotion = "happy")
-            the_person.char "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
+            the_person "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately..."
             "[the_person.possessive_title] blushes and pauses..."
             mc.name "Did you get what you were hoping for?"
-            the_person.char "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
+            the_person "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
             $ the_person.apply_planned_outfit()
-            the_person.char "Thanks again, [the_person.mc_title]. We should do this again... and soon."
+            the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away", emotion = "happy")
-            "You wave goodbye to [the_person.possessive_title] and quickly put away your cock. You turn around and go to bed."
+            "You wave goodbye to [the_person.possessive_title!l] and quickly put away your cock. You turn around and go to bed."
         "Not tonight":
             mc.name "I'm sorry, [the_person.title], but I can't right now."
             $ the_person.draw_person(emotion = "angry")
-            the_person.char "Really?! I'm so stupid, thinking you would help me out."
+            the_person "Really?! I'm so stupid, thinking you would help me out."
             $ the_person.draw_person(position = "walking_away", emotion = "angry")
             "You watch her walk away while you put away your dick. You turn around and go to bed."
     $ the_person.apply_planned_outfit()
@@ -400,12 +402,12 @@ label cum_fetish_mom_intro_label():
     "[the_person.possessive_title]'s skilled tongue teases and strokes you. The pleasure is so intense you slowly start to awaken from your naughty dream."
     "However, as you awaken, the pleasure you are experiencing continues."
     $ the_person.draw_person(position = "blowjob")
-    "You look down and discover that [the_person.possessive_title] is between your legs. She has pulled your underwear down and is sucking you off."
+    "You look down and discover that [the_person.possessive_title!l] is between your legs. She has pulled your underwear down and is sucking you off."
     $ the_person.break_taboo("sucking_cock")
     mc.name "[the_person.title]? What are you..."
     "[the_person.possessive_title] interrupts you."
     the_person "Shhh, just lay back. I need your cum right now. I couldn't sleep, I was craving you so bad."
-    "You lay back, [the_person.possessive_title] continues to suck you off."
+    "You lay back, [the_person.possessive_title!l] continues to suck you off."
     "Your mind is racing. You've been giving her your serums for a while now. Maybe she has developed a fetish for your cum?"
     "[the_person.possessive_title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
     "She moans slightly as she strokes you with her soft, velvet lips. She pulls off for a second and looks at you."
@@ -414,7 +416,7 @@ label cum_fetish_mom_intro_label():
     menu:
         "Cum in her mouth":
             "You rest your hand on her head, guiding her as she sucks you off."
-            "With a little encouragement, you pull [the_person.possessive_title]'s head down a little further with each stroke."
+            "With a little encouragement, you pull [the_person.possessive_title!l]'s head down a little further with each stroke."
             mc.name "That's it [the_person.title]. I'm going to cum in your mouth and I want you to swallow every drop."
             "[the_person.possessive_title] moans. She is ready for her prize."
             mc.name "Fuck, here I come!"
@@ -424,7 +426,7 @@ label cum_fetish_mom_intro_label():
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob")
             $ add_cum_fetish(the_person)
-            "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
+            "You look down and see [the_person.possessive_title!l]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
 
         "Cum on her face":
             "You rest your hand on her head, slowly gathering her hair up."
@@ -437,17 +439,17 @@ label cum_fetish_mom_intro_label():
             "You erupt in orgasm and shoot your load across her glowing face. Her pupils dilate as her cum addicted brain registers the presence of your cum on her skin."
             "[the_person.possessive_title] moans uncontrollably with every spurt"
             $ add_cum_fetish(the_person)
-            "Slowly recovering, you look at [the_person.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
+            "Slowly recovering, you look at [the_person.possessive_title!l]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
 
     the_person "Oh... I needed that so bad... you have no idea."
     $ the_person.reset_arousal()
     "[the_person.possessive_title] slowly crawls up the bed and lays down next to you. You put your arm around her."
     "Completely satisfied, she quickly falls asleep."
-    "Wow! [the_person.possessive_title] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
+    "Wow! [the_person.possessive_title!l] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
     "You have a feeling that this is only the beginning of things between you and her."
     "You slowly fall asleep, enjoying the warmth of her body."
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_mom_cum_fetish_01
-    "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title]'s mouth feels amazing."
+    "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title!l]'s mouth feels amazing."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person( position = "blowjob")
     "She senses that you are beginning to awake."
@@ -484,7 +486,7 @@ label cum_fetish_lily_intro_label():
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
-    "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
+    "You are surprised when the shower door opens. You see [the_person.possessive_title!l] getting in the shower with you."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person()
     the_person "Good morning [the_person.mc_title]. Mind if I join you?"
@@ -507,7 +509,7 @@ label cum_fetish_lily_intro_label():
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] gets down on her knees in front of you."
     the_person "I feel like I'm going crazy... but I can't stop thinking about you. About swallowing your cum, or you cumming all over my face, or my body..."
-    "You see [the_person.possessive_title] reaches down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
+    "You see [the_person.possessive_title!l] reaches down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
     the_person "It's like I'm thirsty... but no amount of water I drink makes my thirst go away... Only when I think about drinking your sweet cum do I feel any better..."
     "[the_person.possessive_title] opens her mouth and starts to suck you off. You feel her soft, velvet mouth wrapped around you."
     $ the_person.break_taboo("sucking_cock")
@@ -582,9 +584,9 @@ label cum_fetish_sarah_intro_label():
             "You aren't surprised, it's been a while since you started giving her the serum for increased cum enjoyment."
             the_person "I feel like I'm going crazy..."
             if the_person.outfit.tits_available():
-                "You check out [the_person.possessive_title]. Her delicious looking tits are on full display."
+                "You check out [the_person.possessive_title!l]. Her delicious looking tits are on full display."
             else:
-                "You check out [the_person.possessive_title]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."
+                "You check out [the_person.possessive_title!l]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."
                 mc.name "Hey, before you get under the desk, why don't you get your tits out? It'd be great to have something to look at..."
                 "[the_person.possessive_title] smiles wide"
                 the_person "Of course! Let me get this off for you..."
@@ -603,10 +605,10 @@ label cum_fetish_sarah_intro_label():
             $ add_cum_fetish(the_person)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
             if the_person.has_mouth_cum():
-                "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
+                "Glancing down, you see [the_person.possessive_title!l] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
                 the_person "Mmm... it feels so good! That first splash is always the best..."
             elif the_person.has_face_cum():
-                "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+                "Glancing down, you see [the_person.possessive_title!l] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person "Mmm... that was so... good..."
             $ the_person.event_triggers_dict["LastCumFetish"] = day
             "[the_person.possessive_title] stands up."
@@ -619,7 +621,7 @@ label cum_fetish_sarah_intro_label():
             "She's been under the influence of your serums for a while now. She has definitely developed a cum fetish."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
             the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
-            "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
+            "You wave goodbye to [the_person.possessive_title!l] and finish eating your lunch."
         "Refuse":
             the_person "I'm sorry to hear that..." #TODO finish this
 
@@ -753,11 +755,11 @@ label unit_test_cum_fetish_intro():
 #     $ the_person = stephanie
 #     $ the_person.event_triggers_dict["LastCumFetish"] = day
 #     if mc.location == mc.business.r_div: #Already in research
-#         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
-#         the_person.char "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
+#         "Suddenly, [the_person.possessive_title!l] looks up from her work and and speaks up."
+#         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
 #     else:
-#         "You get a text message from [the_person.possessive_title]."
-#         the_person.char "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
+#         "You get a text message from [the_person.possessive_title!l]."
+#         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
 #         "You text her back."
 #     mc.name "Sure, meet me in my office."
 #     $ mc.change_location(office)
@@ -769,92 +771,92 @@ label unit_test_cum_fetish_intro():
 #     "She sits down and immediately starts to talk to you."
 #     $ scene_manager.update_actor(the_person, position = "sitting")
 #     if the_person.love < 40 and the_person.obedience < 140:
-#         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
-#         the_person.char "I went along with things for a while because... well I don't know why. I guess I was just really into the science of things."
+#         the_person "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
+#         the_person "I went along with things for a while because... well I don't know why. I guess I was just really into the science of things."
 #         "She shifts uncomfortably in her seat."
 #         $ scene_manager.update_actor(the_person, display_transform = character_right_flipped)
-#         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
-#         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
-#         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
-#         the_person.char "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
+#         the_person "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
+#         the_person "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
+#         the_person "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
+#         the_person "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
 #         "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
-#         the_person.char "For god's sake, last night I had a dream that I was getting gangbanged and twelve guys came on, or in me, at the same time!"
-#         the_person.char "I'm sorry, but I can't do it anymore. You and I both know there isn't any real way to counter these effects. So, if I'm going to be a cum slut... I might as well enjoy it, right?"
+#         the_person "For god's sake, last night I had a dream that I was getting gangbanged and twelve guys came on, or in me, at the same time!"
+#         the_person "I'm sorry, but I can't do it anymore. You and I both know there isn't any real way to counter these effects. So, if I'm going to be a cum slut... I might as well enjoy it, right?"
 #         mc.name "I suppose so."
 #         $ scene_manager.update_actor(the_person, position = "stand4")
 #         "[the_person.possessive_title] pulls a serum out of her pocket."
-#         the_person.char "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things..."
+#         the_person "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things..."
 #         "This is some dangerous territory. If you let her go through with this, you are sure her sister will be pissed! Do you try to talk her down? Or let her do it?"
 #         menu:
 #             "Try to talk her down" if mc.charisma > 6:
 #                 mc.name "Stop. You don't have to do that?"
 #                 "She looks at the serum in her hand. Then back at you."
-#                 the_person.char "Ummm, I don't know... I'm pretty sure I do."
+#                 the_person "Ummm, I don't know... I'm pretty sure I do."
 #                 mc.name "Don't you want to know more... about the long term effects? Of the serums I mean?"
-#                 the_person.char "You hardly need me to test something like that."
+#                 the_person "You hardly need me to test something like that."
 #                 mc.name "Who better to do it though? [the_person.title], you've been with me since the beginning. I'll help meet your needs. I know the cravings will be intense, but I promise I'll help!"
 #                 "Her resolve is failing. She looks down at the serum again."
 #                 mc.name "The science behind these chemicals is incredible. You KNOW you want to keep studying it together. With me!"
-#                 the_person.char "[the_person.mc_title]... I want to. I really do. But I'm so scared right now."
+#                 the_person "[the_person.mc_title]... I want to. I really do. But I'm so scared right now."
 #                 "You get up and walk around the desk."
 #                 mc.name "It's okay. Sometimes science is a risky business. We can do this. Together. Let me have the serum."
 #                 "She hesitates another moment. Then hands you the serum."
-#                 the_person.char "Oh god... you better be right about this!"
+#                 the_person "Oh god... you better be right about this!"
 #                 $ scene_manager.update_actor(the_person, position = "kissing")
 #                 "She throws her arms around you, holding you close."
-#                 the_person.char "The serums really are incredible. I do want to study them more. But first... I need your cum so bad! I can't think about anything else right now!"
+#                 the_person "The serums really are incredible. I do want to study them more. But first... I need your cum so bad! I can't think about anything else right now!"
 #                 $ scene_manager.update_actor(the_person, position = "blowjob")
 #                 "[the_person.possessive_title] gets on her knees and starts to pull down your trousers. It isn't long until she has your dick out and is stroking it eagerly."
-#                 the_person.char "Come on [the_person.mc_title], you know what I need!"
+#                 the_person "Come on [the_person.mc_title], you know what I need!"
 #                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
 #                 $ the_person.break_taboo("sucking_cock")
 #                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC060
 #                 $ add_cum_fetish(the_person)
-#                 the_person.char "Oh god... It's even better than I dreamed about last night."
+#                 the_person "Oh god... It's even better than I dreamed about last night."
 #                 "[the_person.possessive_title] takes a minute to recover before standing up."
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
-#                 the_person.char "Okay. We can do this. Together! I hope you realize the serums also greatly increase libido."
+#                 the_person "Okay. We can do this. Together! I hope you realize the serums also greatly increase libido."
 #                 mc.name "Don't worry."
-#                 the_person.char "Well, I'll get back to work for now then. But I might swing by your office again later... you know... if I get hungry!"
+#                 the_person "Well, I'll get back to work for now then. But I might swing by your office again later... you know... if I get hungry!"
 #                 $ scene_manager.update_actor(the_person, position = "walking_away")
-#                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
+#                 "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
 #                 "Looks like [the_person.title] has a cum fetish now!"
 #             "Let her take it":
 #                 mc.name "I'm sorry, [the_person.title]. I didn't want it to be this way."
 #                 "She looks at you. Her resolve stumbles, but only for a moment."
-#                 the_person.char "Don't worry, I'll be the bimbo cum slut you've always wanted!"
+#                 the_person "Don't worry, I'll be the bimbo cum slut you've always wanted!"
 #                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
 #                 $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
 #                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
 #                 "She looks around a bit, seeming a bit confused about where she is."
-#                 the_person.char "That's... we were talking about something... right?"
+#                 the_person "That's... we were talking about something... right?"
 #                 "She looks at you. Her pupils are dilated and her breathing is calm."
 #                 mc.name "We were just about done... with the talking anyway."
-#                 the_person.char "That's right! We were going to do something else after though... right? I remember hoping that."
+#                 the_person "That's right! We were going to do something else after though... right? I remember hoping that."
 #                 "She begins to walk around the desk toward you."
 #                 mc.name "That's right. You were going to get on your knees. And if everything goes well, I have a present for you."
-#                 the_person.char "Oh! A present! I do love presents! Especially the ones I tend to get when I'm on my knees. I wonder what it could be!"
+#                 the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm on my knees. I wonder what it could be!"
 #                 $ scene_manager.update_actor(the_person, position = "blowjob")
 #                 "[the_person.possessive_title] gets on her knees and skillfully removes your pants and underwear."
 #                 "She gives your hard-on a few eager strokes.."
-#                 the_person.char "Mmm [the_person.mc_title]! You look so yummy!"
+#                 the_person "Mmm [the_person.mc_title]! You look so yummy!"
 #                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
 #                 $ the_person.break_taboo("sucking_cock")
 #                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC061
 #                 $ add_cum_fetish(the_person)
-#                 the_person.char "Your cum is amazing!"
+#                 the_person "Your cum is amazing!"
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
-#                 the_person.char "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
+#                 the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
 #                 mc.name "I'm sorry, but I have to get going."
-#                 the_person.char "Awww! Okay. I hope you're around later though. I have a feeling I'm going to get hungry."
+#                 the_person "Awww! Okay. I hope you're around later though. I have a feeling I'm going to get hungry."
 #                 $ scene_manager.update_actor(the_person, position = "stand4")
-#                 the_person.char "I'll just go back to... whatever it was I was doing. What do I do here again?"
+#                 the_person "I'll just go back to... whatever it was I was doing. What do I do here again?"
 #                 mc.name "It doesn't matter, you can take the rest of the day off."
-#                 the_person.char "Oh? Guess I'll just go find someone else to play with for a while. Your loss mister!"
+#                 the_person "Oh? Guess I'll just go find someone else to play with for a while. Your loss mister!"
 #                 $ scene_manager.update_actor(the_person, position = "walking_away")
-#                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
+#                 "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
 #                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
 #                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 #
@@ -862,22 +864,22 @@ label unit_test_cum_fetish_intro():
 #                 pass
 #
 #     elif the_person.love < 70 and not the_person.has_role(girlfriend_role):   #She kinda trusts / loves you, but isn't fully committed and needs some convincing.
-#         the_person.char "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
-#         the_person.char "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
+#         the_person "Look... I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
+#         the_person "I went along with things for a while because I trust you. You've always impressed me with the way you do things."
 #         "She shifts uncomfortably in her seat."
 #         $ scene_manager.update_actor(the_person, display_transform = character_right_flipped)
-#         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
-#         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
-#         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
-#         the_person.char "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
+#         the_person "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
+#         the_person "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
+#         the_person "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
+#         the_person "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
 #         "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
-#         the_person.char "For god's sake, last night I went to the bar and sucked off three different guys! In one night! That isn't normal!"
-#         the_person.char "I'm going to be honest here. I trust you, I'm sure you are just doing this for research or business purposes. But I'm at a tipping point here. I need you to answer this question honestly."
+#         the_person "For god's sake, last night I went to the bar and sucked off three different guys! In one night! That isn't normal!"
+#         the_person "I'm going to be honest here. I trust you, I'm sure you are just doing this for research or business purposes. But I'm at a tipping point here. I need you to answer this question honestly."
 #         mc.name "Okay, go ahead."
-#         the_person.char "Are you going to... you know... take responsibility for this? The urges are SO intense! You're the only guy here, I need your word that you'll help me take of these urges!"
+#         the_person "Are you going to... you know... take responsibility for this? The urges are SO intense! You're the only guy here, I need your word that you'll help me take of these urges!"
 #         "From a pocket, she pulls out a serum that it looks like she has concocted."
-#         the_person.char "If you can't, I understand. But I don't think I can take it, knowing the serums gave me these urges... I need something to forget the research, and just move on with my life."
-#         the_person.char "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things... Maybe it's time for me to start a new life. I'm sure you could use me over in marketing or something, right?"
+#         the_person "If you can't, I understand. But I don't think I can take it, knowing the serums gave me these urges... I need something to forget the research, and just move on with my life."
+#         the_person "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things... Maybe it's time for me to start a new life. I'm sure you could use me over in marketing or something, right?"
 #         "This is some dangerous territory. It sounds like she is looking to you to tell her what to do."
 #         "Become a bimbo, for real? Or, if you want her to stay the sexy, intelligent research lead, you'll have to help her with her newfound libido?"
 #         "If you have her take the serum, her sister will probably get very upset!"
@@ -888,49 +890,49 @@ label unit_test_cum_fetish_intro():
 #                 mc.name "I'm sorry, [the_person.title]. I didn't want it to be this way. I don't think I have the time to commit to something like that."
 #                 $ scene_manager.update_actor(the_person, emotion = "sad")
 #                 "She looks at you. You think you see a tear coming down from her eye."
-#                 the_person.char "It's okay. The science is amazing. And I'm sure I'll enjoy life as... a bimbo butt slut."
+#                 the_person "It's okay. The science is amazing. And I'm sure I'll enjoy life as... a bimbo butt slut."
 #                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
 #                 $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
 #                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
 #                 "She looks around a bit, seeming a bit confused about where she is."
-#                 the_person.char "That's... we were talking about something... right?"
+#                 the_person "That's... we were talking about something... right?"
 #                 "She looks at you. Her pupils are dilated and her breathing is calm."
 #                 mc.name "We were just about done... with the talking anyway."
-#                 the_person.char "That's right! We were going to do something else after though... right? I remember hoping that."
+#                 the_person "That's right! We were going to do something else after though... right? I remember hoping that."
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
 #                 "She begins to walk around the desk toward you."
 #                 mc.name "That's right. You were going to get on your knees. And if everything goes well, I have a present for you."
-#                 the_person.char "Oh! A present! I do love presents! Especially the ones I tend to get when I'm on my knees. I wonder what it could be!"
+#                 the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm on my knees. I wonder what it could be!"
 #                 $ scene_manager.update_actor(the_person, position = "blowjob")
 #                 "[the_person.possessive_title] gets on her knees and skillfully removes your pants and underwear."
 #                 "She gives your hard-on a few eager strokes.."
-#                 the_person.char "Mmm [the_person.mc_title]! You look so yummy!"
+#                 the_person "Mmm [the_person.mc_title]! You look so yummy!"
 #                 "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
 #                 $ the_person.break_taboo("sucking_cock")
 #                 "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC062
 #                 $ add_cum_fetish(the_person)
-#                 the_person.char "Your cum is amazing!"
+#                 the_person "Your cum is amazing!"
 #                 $ scene_manager.update_actor(the_person, position = "stand2")
-#                 the_person.char "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
+#                 the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another load. Is there any more in those lonely looking balls for me?"
 #                 mc.name "I'm sorry, but I have to get going."
-#                 the_person.char "Awww! Okay. I hope you're around later though. I have a feeling I'm going to get hungry."
+#                 the_person "Awww! Okay. I hope you're around later though. I have a feeling I'm going to get hungry."
 #                 $ scene_manager.update_actor(the_person, position = "stand4")
-#                 the_person.char "I'll just go back to... whatever it was I was doing. What do I do here again?"
+#                 the_person "I'll just go back to... whatever it was I was doing. What do I do here again?"
 #                 mc.name "It doesn't matter, you can take the rest of the day off."
-#                 the_person.char "Oh? Guess I'll just go find someone else to play with for a while. Your loss mister!"
+#                 the_person "Oh? Guess I'll just go find someone else to play with for a while. Your loss mister!"
 #                 $ scene_manager.update_actor(the_person, position = "walking_away")
-#                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
+#                 "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
 #                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
 #                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 #                 $ the_person.apply_planned_outfit()
 #                 $ clear_scene()
 #                 return
 #         "She gives a deep sigh of relief."
-#         the_person.char "You have NO idea how glad I am to hear that."
+#         the_person "You have NO idea how glad I am to hear that."
 #         $ scene_manager.update_actor(the_person, position = "blowjob")
 #         "She comes around the desk then gets on her knees next to your chair. She looks up at you expectantly."
-#         the_person.char "Well? Why isn't your cock out? You said you would help!"
+#         the_person "Well? Why isn't your cock out? You said you would help!"
 #         mc.name "Oh. Right!"
 #         "You quickly pull down your zipper. She reaches in your trousers and pulls out your erection."
 #         "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
@@ -938,40 +940,40 @@ label unit_test_cum_fetish_intro():
 #         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC063
 #         $ add_cum_fetish(the_person)
-#         the_person.char "Oh god... Every load just feels so good!"
+#         the_person "Oh god... Every load just feels so good!"
 #         "[the_person.possessive_title] takes a minute to recover before standing up."
 #         $ scene_manager.update_actor(the_person, position = "stand2")
-#         the_person.char "Okay. We can do this. Together! I hope you realize the serums also greatly increase libido."
+#         the_person "Okay. We can do this. Together! I hope you realize the serums also greatly increase libido."
 #         mc.name "Don't worry. I'm definitely aware."
-#         the_person.char "Well, I'll get back to work for now then. But I might swing by your office again later... you know... if I get hungry!"
+#         the_person "Well, I'll get back to work for now then. But I might swing by your office again later... you know... if I get hungry!"
 #         $ scene_manager.update_actor(the_person, position = "walking_away")
-#         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
+#         "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
 #         "Looks like [the_person.title] has a cum fetish now!"
 #     else:
-#         the_person.char "Before I get started, I just want to make sure you understand. I support you completely. I'm not mad or anything, just a little concerned."
-#         the_person.char "I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
-#         the_person.char "I went along with things for a while because I trust you. Maybe even love you. You've always impressed me with the way you do things."
-#         the_person.char "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
-#         the_person.char "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
-#         the_person.char "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
-#         the_person.char "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
+#         the_person "Before I get started, I just want to make sure you understand. I support you completely. I'm not mad or anything, just a little concerned."
+#         the_person "I've been doing this for a while now. I know the real purpose of the serums you have me researching, and the effects they have on people..."
+#         the_person "I went along with things for a while because I trust you. Maybe even love you. You've always impressed me with the way you do things."
+#         the_person "Some of the things we've developed here are incredible. They can give people happiness, and expand their skills."
+#         the_person "The serums you've been giving out... I thought maybe you were just trying to make all the girls' lives here better."
+#         the_person "But... lately, I've found myself slipping further and further into these fantasies. It's making it hard to concentrate on my work!"
+#         the_person "I think you and I both know that this is a direct result of one of the serums we've been investigating lately... to give girls specific cravings. Fetishes even!"
 #         "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
-#         the_person.char "For god's sake, all I can think about is your cock blowing load after load all over me, in me, anywhere you want!"
-#         the_person.char "I trust you. It took me a while to realize what is going on, but I understand it now."
-#         the_person.char "This is the next step in our relationship. The urges are SO intense! You're the only guy here, I need you to help me take care of these urges!"
-#         the_person.char "I'm sure that relying on you for this can only bring us closer together."
+#         the_person "For god's sake, all I can think about is your cock blowing load after load all over me, in me, anywhere you want!"
+#         the_person "I trust you. It took me a while to realize what is going on, but I understand it now."
+#         the_person "This is the next step in our relationship. The urges are SO intense! You're the only guy here, I need you to help me take care of these urges!"
+#         the_person "I'm sure that relying on you for this can only bring us closer together."
 #         if the_person.relationship != "Single":
 #             $ SO_title = SO_relationship_to_title(the_person.relationship)
 #             mc.name "Wait, don't you have a [SO_title]?"
-#             the_person.char "So? He isn't here at work with me all day is he? He can cum for me when I get home, but I need you to do it while I'm here!"
+#             the_person "So? He isn't here at work with me all day is he? He can cum for me when I get home, but I need you to do it while I'm here!"
 #         "Sounds like she thinks the whole reason you gave her the serums is because... you want to take things to the next level? For now, it is probably better if you just go along with it."
 #         mc.name "You're right. I probably should have been more honest about it, but I thought this would help bring us closer together."
 #         "She gives a deep sigh of relief."
-#         the_person.char "You have NO idea how glad I am to hear that."
+#         the_person "You have NO idea how glad I am to hear that."
 #         "[the_person.possessive_title] walks around your desk then gets on her knees."
 #         $ scene_manager.update_actor(the_person, position = "blowjob")
 #
-#         the_person.char "Well? Why isn't your cock out? You said you would help!"
+#         the_person "Well? Why isn't your cock out? You said you would help!"
 #         mc.name "Oh. Right!"
 #         "You quickly pull down your zipper. She reaches in your trousers and pulls out your erection."
 #         "She enthusiastically opens her mouth and sucks your hard cock into her mouth. She is desperate for your seed!"
@@ -979,13 +981,13 @@ label unit_test_cum_fetish_intro():
 #         "You should consider carefully where you cum, it might change where she prefers to take cum from now on."
 #         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBC064
 #         $ add_cum_fetish(the_person)
-#         the_person.char "Oh god... I can't get enough of your cock! It tastes so good."
+#         the_person "Oh god... I can't get enough of your cock! It tastes so good."
 #         "[the_person.possessive_title] takes a minute to recover before standing up."
 #         $ scene_manager.update_actor(the_person, position = "stand2")
-#         the_person.char "Okay. I can already feel the urge to get another load from you, but I know you are a busy guy."
-#         the_person.char "I'll be back later, okay? I have a feeling I'm going to be hungry for more!"
+#         the_person "Okay. I can already feel the urge to get another load from you, but I know you are a busy guy."
+#         the_person "I'll be back later, okay? I have a feeling I'm going to be hungry for more!"
 #         $ scene_manager.update_actor(the_person, position = "walking_away")
-#         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
+#         "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
 #         "Looks like [the_person.title] has a cum fetish now!"
 #
 #     $ scene_manager.clear_scene()

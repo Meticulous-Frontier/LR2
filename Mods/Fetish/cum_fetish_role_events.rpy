@@ -16,7 +16,7 @@ init 3 python:
 label cum_fetish_get_dosage_label(the_person):
     mc.name "[the_person.title] get on your knees. Its time for your dosage of cum."
     "[the_person.possessive_title] smiles wide."
-    the_person.char "Oh!? Yes! its my favorite!"
+    the_person "Oh!? Yes! its my favorite!"
     "[the_person.possessive_title] immediately drops to her knees. She doesn't even seem to care that there could be other people around."
     $ the_person.draw_person(position = "blowjob")
     # call fuck_person(the_person, private = False, start_position = cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = True, position_locked = True) from _call_fuck_person_SBR30

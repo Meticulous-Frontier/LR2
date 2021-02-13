@@ -180,7 +180,7 @@ label quest_arousal_serum_receive_drug_label():
     $ mc.location.show_background()
     $ mom.draw_person()
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
-    mom.char "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
+    mom "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
     "She hands you a small manila envelope."
     mc.name "Thanks [mom.title]."
     $ mom.draw_person(position = "walking_away")
@@ -205,11 +205,11 @@ label quest_arousal_serum_receive_drug_label():
 label quest_arousal_serum_arrange_test_label(the_person):
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]. I was wondering if you would be up for a little overtime tonight."
-    the_person.char "Oh? Probably. I could use the extra cash. What do you need me to work on?"
+    the_person "Oh? Probably. I could use the extra cash. What do you need me to work on?"
     mc.name "I got my hands on a couple of pills that I want to test the effectiveness of."
-    the_person.char "Okay. What do they propose to do?"
+    the_person "Okay. What do they propose to do?"
     mc.name "They function as some sort of blood flow stimulant. Working similar to Viagra, but for females, to increase arousal and libido."
-    the_person.char "Huh. Sounds interesting. Okay, I can do that. See you tonight?"
+    the_person "Huh. Sounds interesting. Okay, I can do that. See you tonight?"
     mc.name "See you then."
     #We add the event here because if it happens to already be evening then the event won't proc if we wait for quest tracker to add it.
     $ mc.business.add_mandatory_crisis(quest_arousal_serum_test)
@@ -228,18 +228,18 @@ label quest_arousal_serum_test_label():
     $ mc.business.r_div.show_background()
     $ the_person.draw_person(position = "stand2")
     mc.name "Hello, are you ready for the test?"
-    the_person.char "Yes sir. I've got a camera set up, ready to observe the results. Am I right in assuming I'll be the one taking the drug?"
+    the_person "Yes sir. I've got a camera set up, ready to observe the results. Am I right in assuming I'll be the one taking the drug?"
     mc.name "That is correct."
     if the_person.obedience < 120:
-        the_person.char "Okay... since this is on overtime, I'll be getting paid accordingly, right?"
+        the_person "Okay... since this is on overtime, I'll be getting paid accordingly, right?"
         mc.name "OF course, I'll add an extra $100 to your paycheck."
         $ mc.business.change_funds(-100)
     else:
-        the_person.char "Okay, I suppose I'm willing to try it. What's the worst that could happen, right?"
+        the_person "Okay, I suppose I'm willing to try it. What's the worst that could happen, right?"
     "You give her the pills. She takes one and puts the other in a sealed container."
-    the_person.char "How long is it supposed to take for these to take effect?"
+    the_person "How long is it supposed to take for these to take effect?"
     mc.name "Well, to be honest, the packaging is a little ambiguous."
-    the_person.char "... Of course..."
+    the_person "... Of course..."
     "You spend some time with [the_person.title]. Not long after taking the pill, you start to notice some abnormal behavior."
     $ the_person.change_arousal(35)
     "Her cheeks are starting to get flushed."
@@ -248,13 +248,13 @@ label quest_arousal_serum_test_label():
     else:
         "You also notice her nipples are hard and starting to show through her top. She is showing classic physical signs of arousal."
     mc.name "How are you doing, do you feel anything?"
-    the_person.char "Yeah... actually... I'm feeling really warm."
-    the_person.char "But not in a bad way. It's really nice. Actually it feels good..."
+    the_person "Yeah... actually... I'm feeling really warm."
+    the_person "But not in a bad way. It's really nice. Actually it feels good..."
     $ the_person.change_arousal(20)
     $ the_person.draw_person(position = "stand4")
     "It seems like her breathing is starting to get kind of shallow and more rapid."
     mc.name "Are you starting to feel aroused?"
-    the_person.char "Mmm... yeah... I think I'm starting to get wet!"
+    the_person "Mmm... yeah... I think I'm starting to get wet!"
     mc.name "Why don't you get up on the desk here and let me examine you?"
     if the_person.vagina_visible():
         $ the_person.draw_person(position = "missionary")
@@ -262,58 +262,58 @@ label quest_arousal_serum_test_label():
     else:
         "[the_person.title] hops up on the table."
         $ the_person.draw_person(position = "missionary")
-        the_person.char "Ohh, I'm getting so warm. I need to get this off..."
+        the_person "Ohh, I'm getting so warm. I need to get this off..."
         $ the_person.strip_outfit(position = "missionary")
         "She lays back and spreads her legs."
     $ the_person.change_arousal(20)
     "The lips of her vagina are puffy and swollen. Some of her lubrication has started to run down the sides of her legs."
-    the_person.char "Oh my god... this is really intense. What is in this stuff?"
+    the_person "Oh my god... this is really intense. What is in this stuff?"
     "She starts to try to touch herself but you quickly stop her."
     mc.name "We need to observe the full effect of this."
-    the_person.char "Oh god... oh my..."
+    the_person "Oh god... oh my..."
     $ the_person.change_arousal(20) #This should put her at 95 arousal
     "After another minute, [the_person.title] is panting. She is starting to beg for release."
-    the_person.char "Oh my god, please [the_person.mc_title]. PLEASE! Just put something in me. Anything!"
+    the_person "Oh my god, please [the_person.mc_title]. PLEASE! Just put something in me. Anything!"
     "After another minute, it appears that the drug has brought her to the edge of climax, but can't quite put her over the top."
-    the_person.char "Just a finger... please? I promise I'll do anything you want, just a finger..."
+    the_person "Just a finger... please? I promise I'll do anything you want, just a finger..."
     "You decide that you have seen enough."
     mc.name "Good girl. Okay, let's relieve some of this for you."
     "You easily slide two fingers into her sopping wet cunt."
     $ the_person.change_arousal(20)
-    the_person.char "Oh! Yes! Yes yes yes Yes YES YES YES!!!"
+    the_person "Oh! Yes! Yes yes yes Yes YES YES YES!!!"
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
     $ the_person.change_slut_temp(5)
     $ the_person.change_happiness(5)
     "Seconds later her body convulses as she orgasms. She moans a bunch of incomprehensible noises."
     $ the_person.change_arousal(-the_person.arousal/3, add_to_log = False)
-    the_person.char "Oh my god... that felt so good."
+    the_person "Oh my god... that felt so good."
     if the_person.sluttiness > 60:
         $ the_person.draw_person(position = "doggy")
         "[the_person.title] turns over onto her hands and knees. She starts to wiggle her ass at you."
-        the_person.char "The drug hasn't fully wore off yet though. I could really use a nice, hard cock inside me right now."
+        the_person "The drug hasn't fully wore off yet though. I could really use a nice, hard cock inside me right now."
         "You decide to do that. Watching her get off like that has got you hard and ready to go."
         call fuck_person(the_person, start_position = doggy, private= True, affair_ask_after = False) from _arousal_serum_fuck_test_1
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             $ the_person.draw_person(position = "missionary")
             "Completely spent, [the_person.title] sprawls out on the table."
-            the_person.char "Fuck. I'd say that stuff works. I haven't had sex like that in... I don't know I've ever had sex that good before..."
+            the_person "Fuck. I'd say that stuff works. I haven't had sex like that in... I don't know I've ever had sex that good before..."
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
         mc.name "Are you okay?"
-        the_person.char "Amazing. I'll start working on the other pill... see if I can reverse engineer the effects."
-        the_person.char "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
+        the_person "Amazing. I'll start working on the other pill... see if I can reverse engineer the effects."
+        the_person "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
         mc.name "Maybe some kind of slower release time frame? Something that would take effect over the course of the day, instead of inside an hour."
-        the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
+        the_person "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum().set_quest_flag(42)
     else:
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
-        the_person.char "Thanks... wow that stuff really works, doesn't it?"
+        the_person "Thanks... wow that stuff really works, doesn't it?"
         mc.name "Are you okay?"
-        the_person.char "Yeah. I feel great. Definitely still feeling the effects of it, but I think I can manage now."
-        the_person.char "Are you sure you want to me to reverse engineer this? I had fun, but this could be dangerous if it were used in the wrong situation."
+        the_person "Yeah. I feel great. Definitely still feeling the effects of it, but I think I can manage now."
+        the_person "Are you sure you want to me to reverse engineer this? I had fun, but this could be dangerous if it were used in the wrong situation."
         menu:
             "Reverse Engineer":
                 mc.name "It's not for us to decide how it should be used. See if you can reverse engineer it."
@@ -323,10 +323,10 @@ label quest_arousal_serum_test_label():
                 $ quest_arousal_serum().set_quest_flag(49)
                 $ quest_arousal_serum().quest_completed()
 
-        the_person.char "I'll start working on the other pill... see if I can reverse engineer the effects."
-        the_person.char "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
+        the_person "I'll start working on the other pill... see if I can reverse engineer the effects."
+        the_person "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
         mc.name "Maybe some kind of slower release time frame? Something that would take effect over the course of the day, instead of inside an hour."
-        the_person.char "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
+        the_person "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum().set_quest_flag(41)
 
@@ -334,7 +334,7 @@ label quest_arousal_serum_test_label():
     $ quest_arousal_serum().quest_event_dict["ready_day"] = day + 3
     $ quest_arousal_serum().quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish
 
-    "You and [the_person.possessive_title] leave the lab and close up for the day."
+    "You and [the_person.possessive_title!l] leave the lab and close up for the day."
     return
 
 label quest_arousal_serum_researched_label():
@@ -344,41 +344,43 @@ label quest_arousal_serum_researched_label():
         return
 
     "After you have closed up, you get a text from your head researcher."
-    the_person.char "Meet me down in the lab, I have good news."
+    $ mc.having_text_conversation = the_person
+    the_person "Meet me down in the lab, I have good news."
+    $ mc.having_text_conversation = None
     $ mc.business.r_div.show_background()
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]. What have you got?"
-    the_person.char "I've just finished up synthesizing our first batch of the arousal serum. I followed your idea, to make something that takes effect over time."
-    the_person.char "The results have been mixed, but overall I think successful. When combined with one of our serums, the drug slowly builds arousal over the course of the day."
-    the_person.char "However, most tests show that the person is able to calm down to ignore the full effect, due to the extended time it takes to act."
-    the_person.char "Once we mixed it with our serums, however, we immediately noticed a pattern. The greater the person's suggestibility, the greater the arousal we were able to achieve."
+    the_person "I've just finished up synthesizing our first batch of the arousal serum. I followed your idea, to make something that takes effect over time."
+    the_person "The results have been mixed, but overall I think successful. When combined with one of our serums, the drug slowly builds arousal over the course of the day."
+    the_person "However, most tests show that the person is able to calm down to ignore the full effect, due to the extended time it takes to act."
+    the_person "Once we mixed it with our serums, however, we immediately noticed a pattern. The greater the person's suggestibility, the greater the arousal we were able to achieve."
     mc.name "Those sound like great results."
-    the_person.char "Just let me know, and we can start to integrate it into our serums effective immediately."
+    the_person "Just let me know, and we can start to integrate it into our serums effective immediately."
     if the_person.sluttiness > 60:
-        the_person.char "One question though... The second pill you let me have. I was able to analyze it without dissolving it."
+        the_person "One question though... The second pill you let me have. I was able to analyze it without dissolving it."
         mc.name "So you still have it?"
-        the_person.char "Yep! We had a lot of fun last time... want me to take it?"
+        the_person "Yep! We had a lot of fun last time... want me to take it?"
         mc.name "Absolutely."
-        the_person.char "You got it boss!"
+        the_person "You got it boss!"
         "She quickly pulls the pill out and takes it."
-        the_person.char "Alright, I'm going to start cleaning up my workstation for the night, since it'll take a few minutes to take effect..."
+        the_person "Alright, I'm going to start cleaning up my workstation for the night, since it'll take a few minutes to take effect..."
         "[the_person.possessive_title] turns and starts to clean up her desk."
         $ the_person.draw_person(position = "walking_away")
         $ the_person.change_arousal(20)
         "She chats with you a bit as she does so. After a while though, it is beginning to get difficult for her to form complete sentences."
         $ the_person.change_arousal(20)
-        the_person.char "Oh god, when this stuff hits you, it happens so fast..."
+        the_person "Oh god, when this stuff hits you, it happens so fast..."
         $ the_person.change_arousal(20)
         $ the_person.draw_person(position = "standing_doggy")
         "She bends over her desk. You step behind her and grab her hips with your hands."
         mc.name "Are you okay?"
         "She lets out a moan."
-        the_person.char "Now that your hands are on my hips I am... oh god..."
+        the_person "Now that your hands are on my hips I am... oh god..."
         $ the_person.change_arousal(20)
-        the_person.char "I need... oh god."
+        the_person "I need... oh god."
         $ the_person.strip_outfit(position = "standing_doggy")
         $ the_person.draw_person(position = "standing_doggy")
-        the_person.char "Oh fuck I need you! Fuck me [the_person.mc_title]! I need your cock inside me so bad!"
+        the_person "Oh fuck I need you! Fuck me [the_person.mc_title]! I need your cock inside me so bad!"
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_floor(), private= True, affair_ask_after = False) from _arousal_serum_fuck_test_2
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:

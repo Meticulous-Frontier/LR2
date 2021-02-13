@@ -342,21 +342,21 @@ label casual_FA_get_a_drink_label(the_person):
     if the_person.event_triggers_dict.get("FA_progress", 0) == 0:
         "You decide see if she'll let you buy her a drink."
         mc.name "Hey, can I get you a drink? I'd love to chat and get to know you better."
-        the_person.char "Oh! Sure, I'd love a drink..."
+        the_person "Oh! Sure, I'd love a drink..."
         "You get ready to ask her what she drinks when she continues."
-        the_person.char "But you should now, I don't actually live around here, I actually live in Pittsburgh."
+        the_person "But you should now, I don't actually live around here, I actually live in Pittsburgh."
         mc.name "Oh wow, steel city! Hey, tell me what you'd like, I wouldn't mind hearing what you are doing in town!"
-        the_person.char "Okay! I like a Gin Sour, thanks a bunch!"
+        the_person "Okay! I like a Gin Sour, thanks a bunch!"
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 1:
         "Last time you talked to her, she let you buy her a drink and it you had a good time chatting, so you figure you should give it another shot."
         mc.name "Hey, can I get you a drink? I'd love to chat and get to know you better."
-        the_person.char "Ah! Sure! That would be great, [the_person.mc_title]! I have to admit, Gin Sour is like my favorite drink, and they make them so good here..."
+        the_person "Ah! Sure! That would be great, [the_person.mc_title]! I have to admit, Gin Sour is like my favorite drink, and they make them so good here..."
         mc.name "You got it. I'll be right back with one."
     else:
         "By this point, you are pretty sure she'll accept an offer to buy her a drink."
         mc.name "Hey, [the_person.title]. I didn't realize you were in town! Can I get you a Gin Sour!"
         "[the_person.title] smiles and nods."
-        the_person.char "That sounds refreshing, [the_person.mc_title]!"
+        the_person "That sounds refreshing, [the_person.mc_title]!"
         mc.name "You got it. I'll be right back with one."
     "You head over to the bar and put in your order. It isn't long until you are holding a Gin Sour and a beer."  #TODO pay for her drink
     "You consider for a moment. You could probably slip a serum in her drink without anyone noticing. Do you want to?"
@@ -373,39 +373,39 @@ label casual_FA_get_a_drink_label(the_person):
     "You sit down at the table and start talking with her."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 0:
         mc.name "So, what brings a girl from Pittsburgh here?"
-        the_person.char "Ah, well, I'm in town for work, I guess you could say."
+        the_person "Ah, well, I'm in town for work, I guess you could say."
         mc.name "Wow, you work here? That's an awful long way to go for work, isn't it?"
         "[the_person.title] hesitates for a bit."
-        the_person.char "Yeah I suppose it would seem like it, but it honestly isn't that bad."
+        the_person "Yeah I suppose it would seem like it, but it honestly isn't that bad."
         mc.name "So what do you do that brings you here?"
-        the_person.char "Well, I'm actually a flight attendant... you know, like in the airlines?"
+        the_person "Well, I'm actually a flight attendant... you know, like in the airlines?"
         mc.name "Wow, that sounds like quite the job!"
-        the_person.char "Yeah, I mean, the pay isn't that great, but the travel benefits are amazing. Last month I took a trip to San Juan and paid nothing for the airfare."
+        the_person "Yeah, I mean, the pay isn't that great, but the travel benefits are amazing. Last month I took a trip to San Juan and paid nothing for the airfare."
         $ the_person.event_triggers_dict["FA_progress"] = 1
         "You make some small chat with [the_person.title] for a little longer, but soon she stands up."
         $ the_person.draw_person(position = "stand2")
-        the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
+        the_person "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves. You wonder if you will see her again."
         call advance_time from _call_advance_casual_FA_drink01
         return
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 1:
         mc.name "So, I'm going to be honest... I'm surprised to see you here again! Do you find yourself in town very often?"
-        the_person.char "Yeah well, I guess I didn't really bring it up last time, but, I'm actually based here. So every time I start a trip, I usually come to town the night before and spend the night."
+        the_person "Yeah well, I guess I didn't really bring it up last time, but, I'm actually based here. So every time I start a trip, I usually come to town the night before and spend the night."
         mc.name "Oh wow... from Pittsburgh? That's an awfully long drive..."
-        the_person.char "Oh! I don't drive it. With my flight benefits I can fly space available, so if there is an open seat, I'll grab it to get to work!"
+        the_person "Oh! I don't drive it. With my flight benefits I can fly space available, so if there is an open seat, I'll grab it to get to work!"
         mc.name "What if everything is full?"
-        the_person.char "Honestly? I usually just call in sick. We can get it as an excused absence, but we don't get paid, so I usually just burn sick time."
+        the_person "Honestly? I usually just call in sick. We can get it as an excused absence, but we don't get paid, so I usually just burn sick time."
         mc.name "That's a pretty interesting setup. Do you stay with friends or family in town here?"
-        the_person.char "Well, I used to have a crash pad... A crash pad is like, a bunch of flight attendants go in together and rent out an apartment close to the apartment and share the costs of it."
+        the_person "Well, I used to have a crash pad... A crash pad is like, a bunch of flight attendants go in together and rent out an apartment close to the apartment and share the costs of it."
         mc.name "Used to?"
         "You notice [the_person.title] gives a slight smile before continuing."
-        the_person.char "Yeah, well, I got kicked out."
+        the_person "Yeah, well, I got kicked out."
         mc.name "What for?"
-        the_person.char "Well, it was an all female crash pad, but uhh, I got caught bringing a boy back... We were really quiet but apparently we woke up one of the other flight attendants."
-        the_person.char "Anyway, I haven't been able to find another crash pad yet, so for now I'm staying at the hotel attached to this bar. Its expensive, but at least I have a place to sleep when I'm in town."
+        the_person "Well, it was an all female crash pad, but uhh, I got caught bringing a boy back... We were really quiet but apparently we woke up one of the other flight attendants."
+        the_person "Anyway, I haven't been able to find another crash pad yet, so for now I'm staying at the hotel attached to this bar. Its expensive, but at least I have a place to sleep when I'm in town."
         "You nod, understanding. Sounds like a tough predicament to be in."
-        the_person.char "Anyway, I don't really talk about it anymore right now. How about you? What do you do?"
+        the_person "Anyway, I don't really talk about it anymore right now. How about you? What do you do?"
         "You chat with [the_person.title] for a while, talking about what you do for a living. You enjoy flirting and chatting with her."
         $ the_person.draw_person(position = "stand4")
         "After a while, [the_person.title] gets up."
@@ -413,36 +413,36 @@ label casual_FA_get_a_drink_label(the_person):
             if the_person.sluttiness > 25:
                 $ the_person.event_triggers_dict["FA_one_night_avail"] = 1
                 "You see her give you the once over."
-                the_person.char "You know... you're pretty cute. Maybe next time you see me here we should take our drinks to go. My room is right upstairs..."
+                the_person "You know... you're pretty cute. Maybe next time you see me here we should take our drinks to go. My room is right upstairs..."
                 mc.name "Want to? I could get us both another drink and we could be on our way."
                 "She thinks about it for several seconds before responding."
-                the_person.char "I'm sorry... I have to get up really early. The 5:30 am flight isn't gonna work itself! But next time, ask me about it and we'll do it! Okay?"
+                the_person "I'm sorry... I have to get up really early. The 5:30 am flight isn't gonna work itself! But next time, ask me about it and we'll do it! Okay?"
                 return
-        the_person.char "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
+        the_person "Thanks for the drink, [the_person.mc_title], but I'd better get to bed. I have an early flight to operate in the morning, and I HATE working tired."
         "You say goodbye and watch her as she leaves."
         call advance_time from _call_advance_casual_FA_drink02
         return
 
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 2:
         "You can see [the_person.title] blush a bit as you approach her."
-        the_person.char "Hey [the_person.mc_title]. Want to chat? I think I need a drink."
+        the_person "Hey [the_person.mc_title]. Want to chat? I think I need a drink."
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 3:
-        the_person.char "Hey [the_person.mc_title]. Don't worry, I got your address. I really appreciate the offer for a place to stay!"
+        the_person "Hey [the_person.mc_title]. Don't worry, I got your address. I really appreciate the offer for a place to stay!"
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 4:
-        the_person.char "Hey [the_person.mc_title]! Want to grab a drink with me? I don't have any plans for tonight, if you wanted to do something later..."
+        the_person "Hey [the_person.mc_title]! Want to grab a drink with me? I don't have any plans for tonight, if you wanted to do something later..."
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 5:
-        the_person.char "Hello again [the_person.mc_title]! I can't wait until later..."
+        the_person "Hello again [the_person.mc_title]! I can't wait until later..."
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 6:
-        the_person.char "Hey [the_person.mc_title]! Just the man I was hoping to see today!"
+        the_person "Hey [the_person.mc_title]! Just the man I was hoping to see today!"
     elif the_person.event_triggers_dict.get("FA_progress", 0) == 7:
-        the_person.char "Hey [the_person.mc_title]! Can't wait to see you at your place later. I'm wearing something special for you..."
+        the_person "Hey [the_person.mc_title]! Can't wait to see you at your place later. I'm wearing something special for you..."
 
     return
 
 #CSFA10
 label casual_FA_get_out_of_here_label(the_person):
     mc.name "So, wanna grab a couple of drinks and head upstairs?"
-    the_person.char "Yeah... I think I'd like that. This place is too crowded anyway. You know what I drink right?"
+    the_person "Yeah... I think I'd like that. This place is too crowded anyway. You know what I drink right?"
     mc.name "Gin Sour, coming right up!"
     "You head over to the bar and put in your order. It isn't long until you are holding a Gin Sour and a beer."  #TODO pay for her drink
     "Do you want to slip a serum in her drink?"
@@ -454,14 +454,14 @@ label casual_FA_get_out_of_here_label(the_person):
             "You decide just to give her the drink."
     "You spot [the_person.title] by the door and join her. You follow her to the elevator, and soon find yourself in front of her hotel room door."
     #TODO change rooms to hotel#
-    the_person.char "Ok, this will be way quieter than downstairs."
+    the_person "Ok, this will be way quieter than downstairs."
     "[the_person.title] opens her hotel room door and you quickly follow her inside. At first, you weren't sure what she had planned for the evening, but she quickly signalled her intentions."
     $ the_person.draw_person(position = "kissing")
     "She puts one hand on your shoulder and starts leaning into you. At first you lightly brush your lips together, but soon she returns your kiss hungrily."
     "You are savoring the taste of chapstick when she suddenly turns away from you."
     $ the_person.draw_person(position = "back_peek")
     "She grabs the ice bucket and hands it to you."
-    the_person.char "Be a sweetheart and fill this up for me real quick, would you?"
+    the_person "Be a sweetheart and fill this up for me real quick, would you?"
     "You go and quickly fill the ice bucket. You don't run into anyone in the hall, which makes it easier since your cock is rock hard thinking about getting back to the room."
     "When you walk in, you notice the bathroom door is closed and an empty gin sour glass sitting on the table. You set the ice bucket down at the desk and have a seat on the edge of the bed."
     "You wait for a few minutes, and are soon rewarded for your patience when [the_person.title] emerges from the restroom."
@@ -555,43 +555,43 @@ label FA_introduction(the_person):
     "She turns around and looks you up and down."
     #TODO: Have this differ based on personality
     $ the_person.set_title("???")
-    the_person.char "Sorry, I don't live around here, so I'm not sure I can help you..."
+    the_person "Sorry, I don't live around here, so I'm not sure I can help you..."
     mc.name "I know this sounds crazy, but I saw you and just wanted to say hi and get your name."
     "She laughs and crosses her arms."
     $ title_choice = get_random_title(the_person)
     $ formatted_title = the_person.create_formatted_title(title_choice)
-    the_person.char "Yeah? Well I like the confidence, I'll say that. My name's [formatted_title]."
+    the_person "Yeah? Well I like the confidence, I'll say that. My name's [formatted_title]."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
-    the_person.char "And what about you, random stranger? What's your name?"
+    the_person "And what about you, random stranger? What's your name?"
     return
 #
 label FA_greetings(the_person):
     if the_person.event_triggers_dict.get("FA_progress", 0) == 0:
-        the_person.char "Hello again... it was [the_person.mc_title], right? Is there something I can help you with?"
+        the_person "Hello again... it was [the_person.mc_title], right? Is there something I can help you with?"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 1:
-        the_person.char "Hello, [the_person.mc_title], I was just about to get a drink. How are you?"
+        the_person "Hello, [the_person.mc_title], I was just about to get a drink. How are you?"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 2:
         "You can see [the_person.title] blush a bit as you approach her."
-        the_person.char "Hey [the_person.mc_title]. Want to chat? I think I need a drink."
+        the_person "Hey [the_person.mc_title]. Want to chat? I think I need a drink."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 3:
-        the_person.char "Hey [the_person.mc_title]. Don't worry, I got your address. I really appreciate the offer for a place to stay!"
+        the_person "Hey [the_person.mc_title]. Don't worry, I got your address. I really appreciate the offer for a place to stay!"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 4:
-        the_person.char "Hey [the_person.mc_title]! Want to grab a drink with me? I don't have any plans for tonight, if you wanted to do something later..."
+        the_person "Hey [the_person.mc_title]! Want to grab a drink with me? I don't have any plans for tonight, if you wanted to do something later..."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 5:
-        the_person.char "Hello again, [the_person.mc_title]! I can't wait until later..."
+        the_person "Hello again, [the_person.mc_title]! I can't wait until later..."
     if the_person.event_triggers_dict.get("FA_progress", 0) == 6:
-        the_person.char "Hey [the_person.mc_title]! Just the man I was hoping to see today!"
+        the_person "Hey [the_person.mc_title]! Just the man I was hoping to see today!"
     if the_person.event_triggers_dict.get("FA_progress", 0) == 7:
-        the_person.char "Hey [the_person.mc_title]! Can't wait to see you at your place later. I'm wearing something special for you..."
+        the_person "Hey [the_person.mc_title]! Can't wait to see you at your place later. I'm wearing something special for you..."
     else:
-        the_person.char "Hey [the_person.mc_title]."
+        the_person "Hey [the_person.mc_title]."
 
     return
 
 
 label FA_hookup_rejection(the_person):
-    the_person.char "Your loss! Just thinking about you makes me want to spread my legs, and you could have had some of this..."
+    the_person "Your loss! Just thinking about you makes me want to spread my legs, and you could have had some of this..."
     return
 
 label FA_hookup_accept(the_person):
@@ -602,333 +602,333 @@ label FA_hookup_accept(the_person):
 # label FA_sex_responses(the_person):
 #     if the_person.arousal < 25:
 #         if the_person.sluttiness > 50:
-#             the_person.char "Oh fuck, I never get tired of this feeling!"
+#             the_person "Oh fuck, I never get tired of this feeling!"
 #         else:
-#             the_person.char "Oh... Oh fuck me that feels nice..."
+#             the_person "Oh... Oh fuck me that feels nice..."
 #
 #     elif the_person.arousal < 50:
 #         if the_person.sluttiness > 50:
-#             the_person.char "Mmm, keep going [the_person.mc_title]. Just keep going, that feels perfect."
+#             the_person "Mmm, keep going [the_person.mc_title]. Just keep going, that feels perfect."
 #         else:
-#             the_person.char "That... That feels so fucking good!"
+#             the_person "That... That feels so fucking good!"
 #
 #     elif the_person.arousal < 75:
 #         if the_person.sluttiness > 50:
-#             the_person.char "That's right, use me like your dirty little slut!"
+#             the_person "That's right, use me like your dirty little slut!"
 #         else:
-#             the_person.char "Does it feel as good for you as it does for me? Mmm, it feels so good!"
+#             the_person "Does it feel as good for you as it does for me? Mmm, it feels so good!"
 #     else:
 #         if the_person.sluttiness > 50:
 #             if the_person.relationship == "Single":
-#                 the_person.char "Fuck! I'm... You're going to make me cum! I want you to make me cum!"
+#                 the_person "Fuck! I'm... You're going to make me cum! I want you to make me cum!"
 #             else:
 #                 $ so_title = SO_relationship_to_title(the_person.relationship)
-#                 the_person.char "I might have a [so_title], but he doesn't drive me crazy like you do [the_person.mc_title]!"
-#                 the_person.char "Make me cum my brains out! Screw my [so_title], he's not half the man you are!"
+#                 the_person "I might have a [so_title], but he doesn't drive me crazy like you do [the_person.mc_title]!"
+#                 the_person "Make me cum my brains out! Screw my [so_title], he's not half the man you are!"
 #         else:
-#             the_person.char "Don't stop! You're going to make me cum, don't you dare stop!"
+#             the_person "Don't stop! You're going to make me cum, don't you dare stop!"
 #
 #     return
 #
 # label FA_climax_responses(the_person):
 #     if the_person.sluttiness > 70:
-#         the_person.char "Ah! More! I'm going to... Ah! Cum! Fuck!"
+#         the_person "Ah! More! I'm going to... Ah! Cum! Fuck!"
 #         "She closes her eyes and squeals with pleasure."
 #     else:
-#         the_person.char "Oh god, I'm going to... Oh fuck me! Ah!"
+#         the_person "Oh god, I'm going to... Oh fuck me! Ah!"
 #     return
 #
 # label FA_clothing_accept(the_person):
 #     if the_person.obedience > 130:
-#         the_person.char "You think it will look good on me? I guess that's all I need to hear then."
+#         the_person "You think it will look good on me? I guess that's all I need to hear then."
 #     else:
-#         the_person.char "Hey, thanks. That's a good look, I like it."
+#         the_person "Hey, thanks. That's a good look, I like it."
 #     return
 #
 label FA_clothing_reject(the_person):
     if the_person.obedience > 130:
-        the_person.char "I don't... I'm sorry, but I really don't think I could get away with wearing something like this. I appreciate the thought though."
+        the_person "I don't... I'm sorry, but I really don't think I could get away with wearing something like this. I appreciate the thought though."
     else:
         if the_person.sluttiness > 60:
-            the_person.char "Jesus, you didn't leave much to the imagination, did you? I don't think I can wear this."
+            the_person "Jesus, you didn't leave much to the imagination, did you? I don't think I can wear this."
         else:
-            the_person.char "Sorry, my bags are already pretty full, you should probably just keep this."
+            the_person "Sorry, my bags are already pretty full, you should probably just keep this."
     return
 #
 label FA_clothing_review(the_person):
     if the_person.obedience > 130:
-        the_person.char "Oh man, I'm a mess. I'll be back in a moment, I'm just going to get cleaned up for you."
+        the_person "Oh man, I'm a mess. I'll be back in a moment, I'm just going to get cleaned up for you."
     else:
         if the_person.sluttiness > 50:
-            the_person.char "Oh wow, could you imagine if I got on a plane like this? I'd give the poor old captain a heart attack!"
+            the_person "Oh wow, could you imagine if I got on a plane like this? I'd give the poor old captain a heart attack!"
         else:
-            the_person.char "Damn, everything's out of place after that. Wait here a moment, I'm just going to find a mirror and try and look presentable."
+            the_person "Damn, everything's out of place after that. Wait here a moment, I'm just going to find a mirror and try and look presentable."
     return
 #
 # label FA_strip_reject(the_person, the_clothing, strip_type = "Full"):
 #     if the_person.obedience > 130:
-#         the_person.char "Could we leave that where it is for now, please?"
+#         the_person "Could we leave that where it is for now, please?"
 #     elif the_person.obedience < 70:
-#         the_person.char "No, no, no, I'll decide what comes off and when, okay?"
+#         the_person "No, no, no, I'll decide what comes off and when, okay?"
 #     else:
-#         the_person.char "Not yet... get me a little warmed up first, okay?"
+#         the_person "Not yet... get me a little warmed up first, okay?"
 #     return
 #
 # label FA_sex_accept(the_person):
 #     if the_person.sluttiness > 70:
 #         if the_person.obedience < 70:
-#             the_person.char "Let's do it. Once you've had your fill I have a few ideas we could try out."
+#             the_person "Let's do it. Once you've had your fill I have a few ideas we could try out."
 #         else:
-#             the_person.char "I was hoping you would suggest that, just thinking about it gets me excited."
+#             the_person "I was hoping you would suggest that, just thinking about it gets me excited."
 #     else:
-#         the_person.char "You want to give it a try? Okay, let's try it."
+#         the_person "You want to give it a try? Okay, let's try it."
 #     return
 #
 # label FA_sex_obedience_accept(the_person):
 #     if the_person.sluttiness > 70:
-#         the_person.char "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
+#         the_person "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
 #     else:
 #         if the_person.obedience > 130:
-#             the_person.char "If that's what you want to do then I'll what you tell me to do."
+#             the_person "If that's what you want to do then I'll what you tell me to do."
 #         else:
-#             the_person.char "I shouldn't... but if you want to try it out I'm game. Try everything once, right?"
+#             the_person "I shouldn't... but if you want to try it out I'm game. Try everything once, right?"
 #     return
 #
 # label FA_sex_gentle_reject(the_person):
 #     if the_person.sluttiness > 50:
-#         the_person.char "Not yet [the_person.mc_title], get me warmed up first."
+#         the_person "Not yet [the_person.mc_title], get me warmed up first."
 #     else:
-#         the_person.char "Wait, I just... I don't think I'm ready for this. I want to fool around, but let's keep it casual."
+#         the_person "Wait, I just... I don't think I'm ready for this. I want to fool around, but let's keep it casual."
 #     return
 #
 # label FA_sex_angry_reject(the_person):
 #     if not the_person.relationship == "Single":
 #         $ so_title = SO_relationship_to_title(the_person.relationship)
-#         the_person.char "What? I have a [so_title], so you can forget about doing anything like that. Ever."
+#         the_person "What? I have a [so_title], so you can forget about doing anything like that. Ever."
 #         "She glares at you, then walks away."
 #     elif the_person.sluttiness < 20:
-#         the_person.char "I'm sorry, what!? No, you've massively misread the situation, get the fuck away from me!"
+#         the_person "I'm sorry, what!? No, you've massively misread the situation, get the fuck away from me!"
 #         "[the_person.title] glares at you and steps back."
 #     else:
-#         the_person.char "What? That's fucking disgusting, I can't believe you'd even suggest that to me!"
+#         the_person "What? That's fucking disgusting, I can't believe you'd even suggest that to me!"
 #         "[the_person.title] glares at you and steps back."
 #     return
 
 label FA_seduction_response(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            the_person.char "We may not be a mile high right now, but we could always practice for if you ever catch a flight I'm woking."
+            the_person "We may not be a mile high right now, but we could always practice for if you ever catch a flight I'm woking."
         else:
-            the_person.char "Right now? Okay, lead the way I guess."
+            the_person "Right now? Okay, lead the way I guess."
     else:
         if the_person.sluttiness > 60:
-            the_person.char "Thank god, I've been thinking about your cock since my Boston overnight 2 days ago."
+            the_person "Thank god, I've been thinking about your cock since my Boston overnight 2 days ago."
             "[the_person.title] takes your hand and leads you off to find some place out of the way."
         elif the_person.sluttiness > 10:
-            the_person.char "I know that look you're giving me, I think I know what you want."
+            the_person "I know that look you're giving me, I think I know what you want."
         else:
-            the_person.char "[mc.name], I know what you mean... Okay, I can spare a few minutes."
+            the_person "[mc.name], I know what you mean... Okay, I can spare a few minutes."
     return
 #
 # label FA_seduction_accept_crowded(the_person):
 #     if the_person.relationship == "Single":
 #         if the_person.sluttiness < 20:
-#             the_person.char "Alright, let's slip away for a few minutes and you can convince me a little more."
+#             the_person "Alright, let's slip away for a few minutes and you can convince me a little more."
 #         elif the_person.sluttiness < 50:
-#             the_person.char "Come on, I know someplace nearby where we can get a few minutes privacy."
+#             the_person "Come on, I know someplace nearby where we can get a few minutes privacy."
 #         else:
-#             the_person.char "Oh my god. I hope you aren't planning on making me wait [the_person.mc_title], because I don't know if I can!"
+#             the_person "Oh my god. I hope you aren't planning on making me wait [the_person.mc_title], because I don't know if I can!"
 #     else:
 #         $ so_title = SO_relationship_to_title(the_person.relationship)
 #         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 50:
-#             the_person.char "Fuck, let's get this party started!"
-#             the_person.char "I hope you don't mind that I've got a [so_title], because I sure as hell don't right now!"
+#             the_person "Fuck, let's get this party started!"
+#             the_person "I hope you don't mind that I've got a [so_title], because I sure as hell don't right now!"
 #         else:
-#             the_person.char "God damn it, you're bad for me [the_person.mc_title]... Come on, we need to go somewhere quiet so my [so_title] doesn't find out about this."
+#             the_person "God damn it, you're bad for me [the_person.mc_title]... Come on, we need to go somewhere quiet so my [so_title] doesn't find out about this."
 #     return
 #
 # label FA_seduction_accept_alone(the_person):
 #     if the_person.relationship == "Single":
 #         if the_person.sluttiness < 20:
-#             the_person.char "Well, I think you deserve a chance to impress me."
+#             the_person "Well, I think you deserve a chance to impress me."
 #         elif the_person.sluttiness < 50:
-#             the_person.char "Mmm, well let's get this party started and see where it goes."
+#             the_person "Mmm, well let's get this party started and see where it goes."
 #         else:
-#             the_person.char "Fuck, I'm glad you're as horny as I am right now. Come on, I can't wait any more!"
+#             the_person "Fuck, I'm glad you're as horny as I am right now. Come on, I can't wait any more!"
 #     else:
 #         $ so_title = SO_relationship_to_title(the_person.relationship)
 #         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 50:
-#             the_person.char "Fuck, you know how to turn me on in ways my [so_title] never can. Come here!"
+#             the_person "Fuck, you know how to turn me on in ways my [so_title] never can. Come here!"
 #         else:
-#             the_person.char "You're such bad news [the_person.mc_title]... I have a [so_title], but all I can ever think of is you!"
+#             the_person "You're such bad news [the_person.mc_title]... I have a [so_title], but all I can ever think of is you!"
 #     return
 #
 label FA_seduction_refuse(the_person):
     if the_person.sluttiness < 20:
-        the_person.char "Sorry [the_person.mc_title], I have to get up early to catch a flight, and I need my rest."
+        the_person "Sorry [the_person.mc_title], I have to get up early to catch a flight, and I need my rest."
         "[the_person.title] shrugs unapologetically."
 
     elif the_person.sluttiness < 50:
-        the_person.char "I'll admit it, you're tempting me, but I'm not in the mood to fool around right now. Maybe some other time though, I think we could have a lot of fun together."
+        the_person "I'll admit it, you're tempting me, but I'm not in the mood to fool around right now. Maybe some other time though, I think we could have a lot of fun together."
 
     else:
-        the_person.char "Shit, that sounds like a lot of fun [the_person.mc_title], but I'm not feeling it right now. Hang onto that thought and we can fool around some other time."
+        the_person "Shit, that sounds like a lot of fun [the_person.mc_title], but I'm not feeling it right now. Hang onto that thought and we can fool around some other time."
     return
 #
 # label FA_flirt_response(the_person):
 #     if the_person.obedience > 130:
 #         if the_person.sluttiness > 50:
-#             the_person.char "You know that all you have to do is ask and it's all yours."
+#             the_person "You know that all you have to do is ask and it's all yours."
 #         else:
-#             the_person.char "Thank you [the_person.mc_title], I'm glad you're enjoying the view."
+#             the_person "Thank you [the_person.mc_title], I'm glad you're enjoying the view."
 #
 #     elif not the_person.relationship == "Single":
 #         $so_title = SO_relationship_to_title(the_person.relationship)
 #         if the_person.sluttiness + (the_person.get_opinion_score("cheating on men")*5) > 50:
-#             the_person.char "Then why don't you do something about it? Come on, we don't have to tell my [so_title] anything at all, right?"
+#             the_person "Then why don't you do something about it? Come on, we don't have to tell my [so_title] anything at all, right?"
 #             "[the_person.title] winks and spins around, giving you a full look at her body."
 #         else:
-#             the_person.char "You're playing with fire [the_person.mc_title]. I've got a [so_title], and I don't think he'd appreciate you flirting with me."
+#             the_person "You're playing with fire [the_person.mc_title]. I've got a [so_title], and I don't think he'd appreciate you flirting with me."
 #             mc.name "What about you, do you appreciate it?"
 #             "She gives a coy smiles and shrugs."
-#             the_person.char "Maybe I do."
+#             the_person "Maybe I do."
 #
 #     else:
 #         if the_person.sluttiness > 50:
-#             the_person.char "Then why don't you do something about it? Come on, all you have to do is ask."
+#             the_person "Then why don't you do something about it? Come on, all you have to do is ask."
 #             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
 #         else:
-#             the_person.char "Well thank you, play your cards right and maybe you'll get to see a little bit more."
-#             the_person.char "You'll have to really impress me though, I have high standards."
+#             the_person "Well thank you, play your cards right and maybe you'll get to see a little bit more."
+#             the_person "You'll have to really impress me though, I have high standards."
 #     return
 #
 # label FA_cum_face(the_person):
 #     if the_person.obedience > 130:
 #         if the_person.sluttiness > 60:
-#             the_person.char "What do you think? Is this a good look [the_person.mc_title]?"
+#             the_person "What do you think? Is this a good look [the_person.mc_title]?"
 #             "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
 #         else:
-#             the_person.char "I hope you had a good time [the_person.mc_title]. It certainly seems like you did."
+#             the_person "I hope you had a good time [the_person.mc_title]. It certainly seems like you did."
 #             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
 #     else:
 #         if the_person.sluttiness > 80:
-#             the_person.char "Mmm that's such a good feeling. Do you think I look cute like this?."
+#             the_person "Mmm that's such a good feeling. Do you think I look cute like this?."
 #             "[the_person.title] runs her tongue along her lips, then smiles and laughs."
 #         else:
-#             the_person.char "Whew, glad you got that over with. Take a good look while it lasts."
+#             the_person "Whew, glad you got that over with. Take a good look while it lasts."
 #     return
 #
 # label FA_cum_mouth(the_person):
 #     if the_person.obedience > 130:
 #         if the_person.sluttiness > 60:
-#             the_person.char "Mmm, thank you [the_person.mc_title]."
+#             the_person "Mmm, thank you [the_person.mc_title]."
 #         else:
 #             "[the_person.title]'s face grimaces as she tastes your cum in her mouth."
-#             the_person.char "Ugh. There, all taken care of [the_person.mc_title]."
+#             the_person "Ugh. There, all taken care of [the_person.mc_title]."
 #     else:
 #         if the_person.sluttiness > 80:
-#             the_person.char "Mmm, you taste great [the_person.mc_title]. Was it nice to watch me take your load in my mouth?"
+#             the_person "Mmm, you taste great [the_person.mc_title]. Was it nice to watch me take your load in my mouth?"
 #         else:
-#             the_person.char "Ugh, that's such a... unique taste."
+#             the_person "Ugh, that's such a... unique taste."
 #     return
 #
 label FA_suprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Cockpits!", "Holy shit!", "Fucking shit!", "God fucking dammit!", "Son of a bitch!", "Mother fucker!", "Whoah!"])
-    the_person.char "[rando]"
+    the_person "[rando]"
     return
 
 label FA_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person.char "I've got a ton of things I need to get to, could we talk some other time [the_person.mc_title]?"
+        the_person "I've got a ton of things I need to get to, could we talk some other time [the_person.mc_title]?"
     else:
-        the_person.char "Hey, I'd love to chat but I have a million things to get done before my report time tomorrow."
+        the_person "Hey, I'd love to chat but I have a million things to get done before my report time tomorrow."
     return
 #
 # label FA_sex_strip(the_person):
 #     if the_person.sluttiness < 20:
 #         if the_person.arousal < 50:
-#             the_person.char "One sec, I want to take something off."
+#             the_person "One sec, I want to take something off."
 #         else:
-#             the_person.char "Ah, I'm wearing way too much right now. One sec!"
+#             the_person "Ah, I'm wearing way too much right now. One sec!"
 #
 #     elif the_person.sluttiness < 60:
 #         if the_person.arousal < 50:
-#             the_person.char "Why do I bother wearing all this?"
+#             the_person "Why do I bother wearing all this?"
 #         else:
-#             the_person.char "Wait, I want to get a little more naked for you."
+#             the_person "Wait, I want to get a little more naked for you."
 #
 #     else:
 #         if the_person.arousal < 50:
-#             the_person.char "Give me a second, I'm going to strip something off just. For. You."
+#             the_person "Give me a second, I'm going to strip something off just. For. You."
 #         else:
-#             the_person.char "Ugh let me get this off. I want to feel your pressed against every inch!"
+#             the_person "Ugh let me get this off. I want to feel your pressed against every inch!"
 #     return
 #
 # label FA_sex_watch(the_person, the_sex_person, the_position):
 #     if the_person.sluttiness < the_position.slut_requirement - 20:
 #         $ the_person.draw_person(emotion = "angry")
-#         the_person.char "Ugh, jesus you two. Get a room or something, nobody wants to see this."
+#         the_person "Ugh, jesus you two. Get a room or something, nobody wants to see this."
 #         $ the_person.change_obedience(-2)
 #         $ the_person.change_happiness(-1)
 #         "[the_person.title] looks away while you and [the_sex_person.name] [the_position.verb]."
 #
 #     elif the_person.sluttiness < the_position.slut_requirement - 10:
 #         $ the_person.draw_person()
-#         the_person.char "Could you two at least keep it down? This is fucking ridiculous."
+#         the_person "Could you two at least keep it down? This is fucking ridiculous."
 #         $ the_person.change_happiness(-1)
 #         "[the_person.title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
 #
 #     elif the_person.sluttiness < the_position.slut_requirement:
 #         $ the_person.draw_person()
-#         the_person.char "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
+#         the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
 #         $ change_report = the_person.change_slut_temp(1)
 #         "[the_person.title] watches for a moment, then turns away while you and [the_sex_person.name] keep [the_position.verb]."
 #
 #     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
 #         $ the_person.draw_person()
-#         the_person.char "Oh wow that's hot. You don't mind if I watch, do you?"
+#         the_person "Oh wow that's hot. You don't mind if I watch, do you?"
 #         $ change_report = the_person.change_slut_temp(2)
 #         "[the_person.title] watches you and [the_sex_person.name] [the_position.verb]."
 #
 #     else:
 #         $ the_person.draw_person(emotion = "happy")
-#         the_person.char "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
+#         the_person "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
 #         "[the_person.title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
 #     return
 #
 # label FA_being_watched(the_person, the_watcher, the_position):
 #     if the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
 #         #They agree you should give it to her harder
-#         the_person.char "Come on [the_person.mc_title], be rough with me. I can handle it!"
+#         the_person "Come on [the_person.mc_title], be rough with me. I can handle it!"
 #         $ the_person.change_arousal(1)
 #         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
 #
 #     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's super slutty and doesn't care what people think.
-#         the_person.char "I bet she just wishes she was the one being [the_position.verb]ed you."
+#         the_person "I bet she just wishes she was the one being [the_position.verb]ed you."
 #
 #     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #She's super slutty and encourages the watcher to be slutty.
-#         the_person.char "Oh god, you need to get a little of this yourself, [the_watcher.title]!"
+#         the_person "Oh god, you need to get a little of this yourself, [the_watcher.title]!"
 #         $ the_person.change_arousal(1)
 #         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
 #
 #     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
 #         #She's into it and encouraged by the slut watching her.
-#         the_person.char "[the_watcher.title], I'm giving him all I can right now. Any more and he's going to break me!"
+#         the_person "[the_watcher.title], I'm giving him all I can right now. Any more and he's going to break me!"
 #         $ the_person.change_arousal(1)
 #         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
 #
 #     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's into it but shamed by the prude watching her.
-#         the_person.char "Fuck, maybe we should go somewhere a little quieter..."
+#         the_person "Fuck, maybe we should go somewhere a little quieter..."
 #         $ the_person.change_arousal(-1)
 #         $ the_person.change_slut_temp(-1)
 #         "[the_person.title] seems uncomfortable with [the_watcher.title] nearby."
 #
 #     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #They're both into it but not fanatical about it.
-#         the_person.char "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.title]!"
+#         the_person "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.title]!"
 #         $ the_person.change_arousal(1)
 #         $ the_person.change_slut_temp(1)
 #         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
@@ -941,83 +941,83 @@ label FA_talk_busy(the_person):
 #
 #     elif the_person.happiness > 130:
 #         if the_person.sluttiness > 40:
-#             the_person.char "Hey [the_person.mc_title], down here for business or pleasure?"
+#             the_person "Hey [the_person.mc_title], down here for business or pleasure?"
 #             "The smile she gives you tells you which one she's hoping for."
 #         else:
 #             "[the_person.title] looks up from her work and smiles at you when you enter the room."
-#             the_person.char "Hey [the_person.mc_title], it's nice to have you stop by. Let me know if you need anything!"
+#             the_person "Hey [the_person.mc_title], it's nice to have you stop by. Let me know if you need anything!"
 #
 #     else:
 #         if the_person.sluttiness > 60:
 #             "[the_person.title] walks over to you when you come into the room."
-#             the_person.char "Just the person I was hoping would stop by. I'm here if you need anything."
+#             the_person "Just the person I was hoping would stop by. I'm here if you need anything."
 #             "She winks and slides a hand down your chest, stomach, and finally your crotch."
-#             the_person.char "Anything at all."
+#             the_person "Anything at all."
 #         else:
-#             the_person.char "Hey [the_person.mc_title]. Need anything?"
+#             the_person "Hey [the_person.mc_title]. Need anything?"
 #     return
 #
 # label FA_date_seduction(the_person):
 #     if the_person.relationship == "Single":
 #         if the_person.sluttiness > the_person.love:
 #             if the_person.sluttiness > 40:
-#                 the_person.char "I've had a blast [the_person.mc_title], but there are a few more things I'd like to do with you. Want to come back to my place and find out what they are?"
+#                 the_person "I've had a blast [the_person.mc_title], but there are a few more things I'd like to do with you. Want to come back to my place and find out what they are?"
 #             else:
-#                 the_person.char "You've been a blast [the_person.mc_title]. Want to come back to my place, have a few drinks, and see where things lead?"
+#                 the_person "You've been a blast [the_person.mc_title]. Want to come back to my place, have a few drinks, and see where things lead?"
 #         else:
 #             if the_person.love > 40:
-#                 the_person.char "Tonight's been amazing [the_person.mc_title], I just don't want to say goodbye. Do you want to come back to my place and have a few drinks?"
+#                 the_person "Tonight's been amazing [the_person.mc_title], I just don't want to say goodbye. Do you want to come back to my place and have a few drinks?"
 #             else:
-#                 the_person.char "This might be crazy, but I had a great time tonight and you make me a little crazy. Do you want to come back to my place and see where things go?"
+#                 the_person "This might be crazy, but I had a great time tonight and you make me a little crazy. Do you want to come back to my place and see where things go?"
 #     else:
 #         $ so_title = SO_relationship_to_title(the_person.relationship)
 #         if the_person.sluttiness > the_person.love:
 #             if the_person.sluttiness > 40:
-#                 the_person.char "I've had a blast [the_person.mc_title], but I'm not done with you yet. Want to come back to my place?"
-#                 the_person.char "My [so_title] won't be home until morning, so we would have plenty of time."
+#                 the_person "I've had a blast [the_person.mc_title], but I'm not done with you yet. Want to come back to my place?"
+#                 the_person "My [so_title] won't be home until morning, so we would have plenty of time."
 #             else:
-#                 the_person.char "This might be crazy, but do you want to come back to have another drink with me?"
-#                 the_person.char "My [so_title] is stuck at work and I don't want to be left all alone."
+#                 the_person "This might be crazy, but do you want to come back to have another drink with me?"
+#                 the_person "My [so_title] is stuck at work and I don't want to be left all alone."
 #         else:
 #             if the_person.love > 40:
-#                 the_person.char "You're making me feel crazy [the_person.mc_title]. Do you want to come have a drink at my place?"
-#                 the_person.char "My [so_title] won't be home until morning, and we have a big bed you could help me warm up."
+#                 the_person "You're making me feel crazy [the_person.mc_title]. Do you want to come have a drink at my place?"
+#                 the_person "My [so_title] won't be home until morning, and we have a big bed you could help me warm up."
 #             else:
-#                 the_person.char "This is crazy, but would you want to have one last drink at my place? My [so_title] won't be home until morning..."
+#                 the_person "This is crazy, but would you want to have one last drink at my place? My [so_title] won't be home until morning..."
 #     return
 #
 # label FA_sex_end_early(the_person):
 #     if the_person.sluttiness > 50:
 #         if the_person.love > 40:
 #             if the_person.arousal > 60:
-#                 the_person.char "You're really done? Fuck [the_person.mc_title], I'm still so horny..."
+#                 the_person "You're really done? Fuck [the_person.mc_title], I'm still so horny..."
 #             else:
-#                 the_person.char "That's all you wanted? I was prepared to do so much more to you..."
+#                 the_person "That's all you wanted? I was prepared to do so much more to you..."
 #         else:
 #             if the_person.arousal > 60:
-#                 the_person.char "Fuck, I'm so horny... you're sure you're finished?"
+#                 the_person "Fuck, I'm so horny... you're sure you're finished?"
 #             else:
-#                 the_person.char "That was a little bit of fun, I suppose."
+#                 the_person "That was a little bit of fun, I suppose."
 #
 #     else:
 #         if the_person.love > 40:
 #             if the_person.arousal > 60:
-#                 the_person.char "[the_person.mc_title], you got me so turned on..."
+#                 the_person "[the_person.mc_title], you got me so turned on..."
 #             else:
-#                 the_person.char "I hope you had a good time."
+#                 the_person "I hope you had a good time."
 #         else:
 #             if the_person.arousal > 60:
-#                 the_person.char "Oh god, that was intense..."
+#                 the_person "Oh god, that was intense..."
 #             else:
-#                 the_person.char "Done? Good, nice and quick."
+#                 the_person "Done? Good, nice and quick."
 #     return
 #
 #
 # label FA_sex_take_control (the_person):
 #     if the_person.arousal > 60:
-#         the_person.char "Oh hell no, you can't just get me wet and then walk away!"
+#         the_person "Oh hell no, you can't just get me wet and then walk away!"
 #     else:
-#         the_person.char "Are you getting bored already? Get back here, we aren't done yet!"
+#         the_person "Are you getting bored already? Get back here, we aren't done yet!"
 #     return
 #
 # label FA_sex_beg_finish(the_person):
@@ -1027,12 +1027,12 @@ label FA_talk_busy(the_person):
 # ## Role Specific Section ##
 # label FA_improved_serum_unlock(the_person):
 #     mc.name "[the_person.title], now that you've had some time in the lab there's something I wanted to talk to you about."
-#     the_person.char "Okay, how can I help?"
+#     the_person "Okay, how can I help?"
 #     mc.name "All of our research and development up until this point has been based on the limited notes I have from my university days. I'm sure there's more we could learn, and I want you to look into it for me."
 #     "[the_person.title] smiles mischievously."
-#     the_person.char "Well, I've got an idea in mind. It's risky, but I think it could really push our research to a new level."
+#     the_person "Well, I've got an idea in mind. It's risky, but I think it could really push our research to a new level."
 #     mc.name "Go on, I'm interested."
-#     the_person.char "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
-#     the_person.char "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."
+#     the_person "Our testing procedures focus on human safety, which I'll admit is important, but it doesn't leave us with much information about the subjective effects of our creations."
+#     the_person "What I want to do is take a dose of our serum myself, then have you record me while you run me through some questions."
 #     return
 #
