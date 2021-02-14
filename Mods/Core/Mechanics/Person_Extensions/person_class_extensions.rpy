@@ -477,7 +477,7 @@ init -1 python:
 
     Person.get_known_opinion_list = get_known_opinion_list
 
-    def generate_daughter_enhanced(self): #Generates a random person who shares a number of similarities to the mother
+    def generate_daughter_enhanced(self, force_live_at_home = False): #Generates a random person who shares a number of similarities to the mother
         age = renpy.random.randint(18, self.age-16)
 
         if renpy.random.randint(0,100) < 60:
@@ -520,7 +520,7 @@ init -1 python:
         else:
             height = None
 
-        if renpy.random.randint(0,100) < 85 - age: #It is less likely she lives at home the older she is.
+        if force_live_at_home or renpy.random.randint(0,100) < 85 - age: #It is less likely she lives at home the older she is.
             start_home  = self.home
         else:
             start_home  = None
