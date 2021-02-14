@@ -436,7 +436,7 @@ label fetish_serum_self_code_menu(the_person):
             "Everything is now setup. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
-            $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_cum_serum()
+            $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_breeding_serum()
             $ mc.business.mandatory_crises_list.append(fetish_serum_breeding_warning)
         "No":
             mc.name "Not right now, but I'll keep this option in mind."
