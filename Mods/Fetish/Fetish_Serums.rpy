@@ -234,7 +234,7 @@ init -1 python:
             person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.")
+            mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
         return
 
     def fetish_anal_function_on_apply(person, add_to_log):
@@ -267,7 +267,7 @@ init -1 python:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " anal proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
+            mc.log_event(person.title + " anal proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_anal_fetish_unlocked():
             if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
@@ -310,7 +310,7 @@ init -1 python:
             person.change_happiness(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " reproduction proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
+            mc.log_event(person.title + " reproduction proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
             return
@@ -363,7 +363,7 @@ init -1 python:
                 person.change_slut_temp(1, add_to_log)
 
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " semen proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
+            mc.log_event(person.title + " semen proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_cum_fetish_unlocked():
             if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
@@ -408,7 +408,7 @@ init -1 python:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " social sexual proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.")
+            mc.log_event(person.title + " social sexual proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
