@@ -122,6 +122,8 @@ init 10 python:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
                 cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
                 cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
+        else:
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
 
         renpy.restart_interaction()
 
