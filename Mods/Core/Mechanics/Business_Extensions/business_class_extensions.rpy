@@ -54,6 +54,49 @@ init -1 python:
 
     Business.update_employee_status = update_employee_status
 
+    def get_business_stripper_wardrobe(self):
+        if not hasattr(self, "_stripper_wardrobe"):
+            self._stripper_wardrobe = stripclub_wardrobe
+        return self._stripper_wardrobe
+
+    Business.stripper_wardrobe = property(get_business_stripper_wardrobe, None, None, "Instance of stripper wardrobe")
+
+    def get_business_waitress_wardrobe(self):
+        if not hasattr(self, "_waitress_wardrobe"):
+            self._waitress_wardrobe = waitress_wardrobe
+        return self._waitress_wardrobe
+
+    Business.waitress_wardrobe = property(get_business_waitress_wardrobe, None, None, "Instance of waitress wardrobe")
+
+    def get_business_bdsm_wardrobe(self):
+        if not hasattr(self, "_bdsm_wardrobe"):
+            self._bdsm_wardrobe = BDSM_performer_wardrobe
+        return self._bdsm_wardrobe
+
+    Business.bdsm_wardrobe = property(get_business_bdsm_wardrobe, None, None, "Instance of bdsm wardrobe")
+
+    def get_business_manager_wardrobe(self):
+        if not hasattr(self, "_manager_wardrobe"):
+            self._manager_wardrobe = manager_wardrobe
+        return self._manager_wardrobe
+
+    Business.manager_wardrobe = property(get_business_manager_wardrobe, None, None, "Instance of manager wardrobe")
+
+    def get_business_mistress_wardrobe(self):
+        if not hasattr(self, "_mistress_wardrobe"):
+            self._mistress_wardrobe = mistress_wardrobe
+        return self._mistress_wardrobe
+
+    Business.mistress_wardrobe = property(get_business_mistress_wardrobe, None, None, "Instance of mistress wardrobe")
+
+    def get_business_stripclub_wardrobe(self):
+        if not hasattr(self, "_stripclub_wardrobe"):
+            self._stripclub_wardrobe = stripclub_wardrobe.merge_wardrobes(waitress_wardrobe).merge_wardrobes(BDSM_performer_wardrobe).merge_wardrobes(manager_wardrobe).merge_wardrobes(mistress_wardrobe)
+        return self._stripclub_wardrobe
+
+    Business.stripclub_wardrobe = property(get_business_stripclub_wardrobe, None, None, "Instance of total stripclub wardrobe")
+
+
     def hire_person(self, person, target_division, add_to_location = False):
         div_func = {
             "Research" : [ self.research_team, self.r_div],

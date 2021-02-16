@@ -1422,20 +1422,22 @@ init -1 python:
     Person.should_wear_work_outfit = should_wear_work_outfit
 
     def wear_work_outfit(self):
-        if self.work_outfit is None:
-            if self.has_role(stripper_role):
-                self.work_outfit = stripclub_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
-            if self.has_role(waitress_role):
-                self.work_outfit = waitress_wardrobe.decide_on_outfit2(self)
-            if self.has_role(bdsm_performer_role):
-                self.work_outfit = BDSM_performer_wardrobe.decide_on_outfit2(self)
-            if self.has_role(mistress_role):
-                self.work_outfit = mistress_wardrobe.decide_on_outfit2(self)
-            if self.has_role(manager_role):
-                self.work_outfit = manager_wardrobe.decide_on_outfit2(self)
+        if not self.work_outfit:
+            return
 
-        if self.work_outfit is not None: #If our planned uniform is STILL None it means we are unable to construct a valid uniform. Only assign it as our outfit if we have managed to construct a uniform.
-            self.apply_outfit(self.work_outfit) #We apply clothing taboos to uniforms because the character is assumed to have seen them in them.
+        if self.has_role(stripper_role):
+            self.work_outfit = mc.business.stripper_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
+        elif self.has_role(waitress_role):
+            self.work_outfit = mc.business.waitress_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(bdsm_performer_role):
+            self.work_outfit = mc.business.bdsm_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(mistress_role):
+            self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(manager_role):
+            self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
+
+        if self.work_outfit:
+            self.apply_outfit(self.work_outfit)
         return
 
     Person.wear_work_outfit = wear_work_outfit
