@@ -26,8 +26,8 @@ init 2 python:
                 mc.business.mandatory_crises_list.append(aunt_drunk_cuddle_add_crisis_action)
 
 init 5 python:
-    add_label_hijack("normal_start", "aunt_drunk_cuddle_mod_init")
-    add_label_hijack("after_load", "aunt_drunk_cuddle_mod_init")
+    add_label_hijack("normal_start", "aunt_drunk_cuddle_mod_label")
+    add_label_hijack("after_load", "aunt_drunk_cuddle_mod_label")
 
 label aunt_drunk_cuddle_mod_label(stack):
 
