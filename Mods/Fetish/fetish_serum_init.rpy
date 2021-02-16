@@ -13,6 +13,7 @@ label activate_fetish_serum_mod_core(stack):
     python:
         fetish_serum_mod_initialization()
         head_researcher.add_action(fetish_serum_discuss)
+        head_researcher.add_action(fetish_serum_discuss_progress)
         mother_role.add_action(fetish_mom_kitchen)
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

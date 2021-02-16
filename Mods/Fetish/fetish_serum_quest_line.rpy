@@ -16,6 +16,11 @@ init 2 python:
             return True
         return False
 
+    def fetish_serum_discuss_progress_requirement(the_person):
+        if mc.is_at_work() and mc.business.is_open_for_business() and fetish_serum_unlock_count() > 0:
+            return True
+        return False
+
     def fetish_serum_exhibition_requirement():
         if time_of_day == 1 and day%7 == 0:
             if mc.is_at_work() and mc.business.head_researcher:
@@ -145,8 +150,10 @@ init 2 python:
 init 3 python:
     fetish_serum_quest_intro = Action("Nanobot Discovery", fetish_serum_quest_intro_requirement, "fetish_serum_quest_intro_label")
     fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label")
-    fetish_serum_discuss = Action("Discuss Nanobot Programming", fetish_serum_discuss_requirement, "fetish_serum_discuss_label",
+    fetish_serum_discuss = Action("Discuss Creating Nanobot Programs", fetish_serum_discuss_requirement, "fetish_serum_discuss_label",
         menu_tooltip = "Discuss creation of new Nanobot programs.", priority = 5)
+    fetish_serum_discuss_progress = Action("Discuss Nanobot Progress", fetish_serum_discuss_progress_requirement, "fetish_serum_discuss_progress_label",
+        menu_tooltip = "Discuss program progress and how to unlock new features.", priority = 5)
     fetish_serum_exhibition = Action("Exhibition Program", fetish_serum_exhibition_requirement, "fetish_serum_exhibition_label")
     fetish_serum_anal = Action("Anal Program", fetish_serum_anal_requirement, "fetish_serum_anal_label")
     fetish_serum_cum = Action("Cum Program", fetish_serum_cum_requirement, "fetish_serum_cum_label")
@@ -758,4 +765,42 @@ label fetish_serum_coding_activity_label():
         "You quickly review your work. Progress is coming along, you estimate it is about [temp_percent] percent complete."
         $ del temp_percent
     call advance_time() from _call_serum_progress_advance_time_01
+    return
+
+label fetish_serum_discuss_progress_label(the_person):
+    if get_fetish_basic_serum().mastery_level < 5.0:
+        the_person "We need to work on researching the basic nanobot effects. Design some serums, use them, and observe the effects!"
+        "To continue progressing with nanobots, you need to raise the mastery level of Sexual Proclivity Nanobots to at least 5.0"
+        return
+    elif fetish_serum_unlock_count() == 1:
+        the_person "We've learned a lot about how the nanobots work. I think we should try making a new program for them!"
+        return
+    elif fetish_serum_unlock_count() < 5:
+        the_person "There are still some possibilities for new nanobot programs. You should consider trying to make new programs."
+    else:
+        the_person "I think we have exhaused all the possibilities for new nanobot programs, for now atleast."
+    "Here is the current status of our specialize nanobot programs."
+    if get_fetish_exhibition_serum().tier < 4:
+        # if not is_exhibition_fetish_unlocked(): #TODO once we make an exhibitionist fetish, uncomment this
+        #     the_person "I think there are more possibilities with the Social Sexual Proclivity Nanobots. You should observe the effects of them on test subjects more!"
+        # else:
+        the_person "I think we are at the limit of how far we can take the program on Social Sexual Proclivity Nanobots."
+    if get_fetish_anal_serum().tier < 4:
+        if not is_anal_fetish_unlocked():
+            the_person "I think there are more possibilities with the Anal Proclivity Nanobots. You should observe the effects of them on test subjects more!"
+            "To unlock their potential, raise the mastery of Anal Proclivity Nanobots to atleast 3.0"
+        else:
+            the_person "I think we are at the limit of how far we can take the program on Anal Proclivity Nanobots."
+    if get_fetish_cum_serum().tier < 4:
+        if not is_cum_fetish_unlocked():
+            the_person "I think there are more possibilities with the Semen Proclivity Nanobots. You should observe the effects of them on test subjects more!"
+            "To unlock their potential, raise the mastery of Semen Proclivity Nanobots to atleast 3.0"
+        else:
+            the_person "I think we are at the limit of how far we can take the program on Semen Proclivity Nanobots."
+    if get_fetish_cum_serum().tier < 4:
+        if not is_cum_fetish_unlocked():
+            the_person "I think there are more possibilities with the Reproduction Proclivity Nanobots. You should observe the effects of them on test subjects more!"
+            "To unlock their potential, raise the mastery of Reproduction Proclivity Nanobots to atleast 3.0"
+        else:
+            the_person "I think we are at the limit of how far we can take the program on Reproduction Proclivity Nanobots."
     return
