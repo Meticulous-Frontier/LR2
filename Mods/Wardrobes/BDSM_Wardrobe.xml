@@ -14,7 +14,7 @@
             <Accessories>
                 <Item alpha="0.0" blue="0.0" green="0.0" name="Blush" red="0.8" />
                 <Item alpha="0.3" blue="0.0" green="0.0" name="Lipstick" red="0.8" />
-                <Item alpha="0.9" blue="1" green="1" name="Secret_Mask" red="1" />
+                <Item alpha="0.9" blue="0.1" green="0.1" name="Secret_Mask" red="0.1" />
                 <Item alpha="1.0" blue="1" green="1" name="Spiked_Choker" red="1" />
             </Accessories>
         </Outfit>
