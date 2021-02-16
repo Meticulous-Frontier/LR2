@@ -105,17 +105,23 @@ init 10 python:
     def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
 
         cs = renpy.current_screen()
+        item_outfit = cs.scope["item_outfit"]
+        for cc in [x for x in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories]:
+            if cc in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
+                cloth.colour = cc.colour
+                cs.scope["selected_colour"] = "colour"
+                cs.scope["current_r"] = cc.colour[0]
+                cs.scope["current_g"] = cc.colour[1]
+                cs.scope["current_b"] = cc.colour[2]
+                cs.scope["current_a"] = cc.colour[3]
+                if not isinstance(cc, Facial_Accessory):
+                    cloth.colour_pattern = cc.colour_pattern
 
 
-        if cs.scope["selected_clothing"] is not None:
+        if cs.scope["selected_clothing"]:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
                 cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
                 cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
-
-        else:
-            if cs.scope["selected_clothing"] is not None and cs.scope["demo_outfit"].in_outfit(cs.scope["selected_clothing"].name):
-                cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
 
         renpy.restart_interaction()
 
@@ -267,16 +273,6 @@ init 10 python:
 
         cs.scope["min_slut_generation"] = new_value
         renpy.restart_interaction()
-
-init -1 python:
-
-    def in_outfit(self, cloth_name): # Checks if the clothing item exists in the outfit by name to account for instances where copies are used.
-        for cloth in self.upper_body + self.lower_body + self.feet + self.accessories:
-            if cloth.name == cloth_name:
-                return True
-        else:
-            return False
-    Outfit.in_outfit = in_outfit
 
 init 2:
     python:
