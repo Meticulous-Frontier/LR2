@@ -53,7 +53,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
 
 label scene_anal_on_lap_1(the_girl, the_location, the_object):
     #She rides you hard
-    "[the_girl.possessive_title] reaches bag and holds on to your thighs, steadying herself as she starts to bounce her ass on your lap."
+    "[the_girl.possessive_title] reaches back and holds on to your thighs, steadying herself as she starts to bounce her ass on your lap."
     if the_girl.body_is_thin():
         "[the_girl.possessive_title]'s gloriously fit ass bounces up and down on your cock."
         "It feels amazing to plunder her tight little body."
