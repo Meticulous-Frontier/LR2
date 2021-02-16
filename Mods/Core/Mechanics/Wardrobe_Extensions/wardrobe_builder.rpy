@@ -18,6 +18,23 @@ init 5 python:
         ( "the colour red", "s > 5 and l < 95 and (h <= 35 or h >= 330)"),
     ])
 
+    color_clothing_map = {
+        "Jean_Hotpants": ["the colour black", "the colour blue", "the colour brown", "the colour white"],
+        "Daisy_Dukes" : ["the colour black", "the colour blue", "the colour brown", "the colour white"],
+        "Jeans" : ["the colour black", "the colour blue", "the colour brown", "the colour white"],
+        "Suit_Pants" : ["the colour black", "the colour blue", "the colour brown", "the colour white", "the colour red", "the colour yellow", "the colour green"],
+        "Pencil_Skirt": ["the colour black", "the colour blue", "the colour brown", "the colour white", "the colour red", "the colour yellow", "the colour green"],
+        "Short_Socks" : ["the colour black", "the colour white", "the colour red"],
+        "Long_Socks" : ["the colour black", "the colour white", "the colour red"],
+        "High_Socks" : ["the colour black", "the colour white", "the colour red", "the colour pink", "the colour yellow"],
+        "Shoes" : ["the colour black", "the colour white", "the colour brown", "the colour red"],
+        "Sneakers" : ["the colour black", "the colour white", "the colour red"],
+        "Gold_Earings": ["the colour yellow"],
+        "Copper_Bracelet": ["the colour yellow"],
+        "Diamond_Ring": ["the colour yellow"],
+        "Copper_Ring_Set": ["the colour yellow"],
+    }
+
     # generate a more useable default color palette
     if __builtin__.len(persistent.colour_palette) == 10:
         persistent.colour_palette = [
@@ -241,9 +258,16 @@ init 5 python:
                     return True
             return False
 
-        earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
-        neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll"]]
+        @staticmethod
+        def get_item_color(item, color):
+            if item.proper_name in color_clothing_map:
+                color_set = WardrobeBuilder.color_prefs[get_random_from_list(color_clothing_map[item.proper_name])]
+                color_name = get_random_from_list(color_set.keys())
+                return color_set[color_name]
+            return color
 
+        earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
+        neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
 
         def __init__(self, person):
             if person and isinstance(person, Person):
@@ -357,24 +381,24 @@ init 5 python:
             # find upper body item
             item = self.get_item_from_list("upper_body", self.build_filter_list(upper_item_list, points, min_points), points, ["not wearing anything"])
             if item:
-                outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
+                outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper)))
 
             # we added a overlay item, so find a real upper item this time
             if item and item.layer == 3:
                 item = self.get_item_from_list("upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
                 if item:
-                    outfit.add_upper(*make_upper_item_transparent(item, points, color_lower))
+                    outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower)))
 
             # find lowerbody item
             if item is None or (not item.has_extension or item.has_extension.layer == 1):
                 item = self.get_item_from_list("lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
                 if item:
-                    outfit.add_lower(*make_lower_item_transparent(item, points, [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]]))
+                    outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])))
 
             # find feet item
             item = self.get_item_from_list("feet", self.build_filter_list(shoes_list, points, min_points))
             if item:
-                outfit.add_feet(item.get_copy(), [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]])
+                outfit.add_feet(item, self.get_item_color(item, [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]]))
 
             self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
@@ -448,7 +472,7 @@ init 5 python:
             if renpy.random.randint(0, chance) == 0:
                 item = get_random_from_list(filtered_list)
                 if item:
-                    outfit.add_accessory(item.get_copy(), item_color)
+                    outfit.add_accessory(item.get_copy(), self.get_item_color(item, item_color))
             return
 
         def get_main_color_scheme(self, match_percent = 60):
