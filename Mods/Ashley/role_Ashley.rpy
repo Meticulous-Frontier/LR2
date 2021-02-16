@@ -15,7 +15,6 @@ init 2 python:
         ashley_role = Role(role_name ="Ashley", actions =[ashley_ask_date_classic_concert, ashley_ask_about_porn], hidden = True)
 
         #global ashley_role
-        #TODO make most variables identical to Stephanie
         global ashley
         ashley = make_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="brown", hair_style = ponytail, skin="white" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ashley_wardrobe, \
@@ -843,7 +842,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         "You feel a little bit bad about trying to keep your relationship with [ashley.possessive_title] a secret, but you're sure if you play your cards right it'll be worth it long term."
         if the_person.is_girlfriend():
             the_person "I have to admit... I'm a little bit relieved to hear that. I thought I was losing my boyfriend! And to my sister!.. we haven't always gotten along, but I was really hoping it hadn't come to that."
-            "I'm sorry for what happened. It won't happen again."
+            mc.name "I'm sorry for what happened. It won't happen again."
         else:
             the_person "I... I don't understand... Why aren't you interested in Ashley?"
             mc.name "It isn't that I'm not interested, as much as that I'm currently interested in someone else..."
@@ -875,9 +874,9 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         if the_person.love > 50:
             the_person "Wow... Okay... I did not see that coming."
         if the_person.has_taboo("vaginal_sex"):
-            "We're all adults here. She knows that if she finds someone else there's no commitment. And she knows it's the same for me, if I were to happen to start dating someone."
+            mc.name "We're all adults here. She knows that if she finds someone else there's no commitment. And she knows it's the same for me, if I were to happen to start dating someone."
         else:
-            "It's nothing different than what has been going on between us. Don't worry, I know you have needs too."
+            mc.name "It's nothing different than what has been going on between us. Don't worry, I know you have needs too."
         the_person "That's understandable. I mean, I get it, what is going on, it just surprises me."
         the_person "It might be a little weird... you know? Getting physical with a guy who is doing the same with my sister... but you're right. We're all adults here, getting what we want from each other, consensually."
         $ the_person.draw_person(position = "stand2")
@@ -1328,9 +1327,9 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
     "[the_person.possessive_title] sips her coffee and thinks about it for a bit."
     stephanie "What do you think [stephanie.mc_title]? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think she would look good in that?"
     if stephanie.is_girlfriend():
-        "[the_person.possessive_title] listens to your response intently. You can tell she is interested in your opinion."
-    else:
         "[the_person.possessive_title] glances at you. She tries not to show it, but you can tell she is interested in your opinion."
+    else:
+        "[the_person.possessive_title] listens to your response intently. You can tell she is interested in your opinion."
     menu:
         "Yes":
             the_person "I think I'm gonna go over to the mall this afternoon and try some stuff on. I could use a new outfit!"
@@ -1347,7 +1346,43 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
     return
 
 
+label ashley_test_outfit_scene():
+    $ scene_manager = Scene()
+    $ the_person = ashley
+    $ preferences = WardrobePreference(the_person)
+    $ builder = WardrobeBuilder(the_person)
+    $ bystander = get_random_from_list(known_people_in_the_game(excluded_people = [ashley, stephanie]))
 
+    if not bystander:
+        return  # exit loop if we have no bystander
+
+    "Enjoying your coffee, you zone out for a minute while the two sisters are chatting, when suddenly the talking stops. You look up and see them both looking out the restaurant window."
+    "Outside is a woman who has stopped and is checking her phone for something. The girls are checking her out."
+
+    $ scene_manager.add_actor(bystander, display_transform = character_left_flipped, position = "stand3")
+    "She takes a moment to look at something on her phone."
+    "Then she walks away."
+    $ scene_manager.add_actor(bystander, display_transform = character_left_flipped, position = "walking_away")
+    "The girls watch as she walks away."
+    $ scene_manager.remove_actor(bystander)
+    the_person "Wow, did you see that?"
+    $ new_outfit = builder.change_color_theme(bystander.outfit, "the colour green")
+    if new_outfit:
+        "success"
+    else:
+        "Failure"
+    call screen outfit_creator(new_outfit)
+    $ ashley.apply_outfit(new_outfit)
+    $ stephanie.apply_outfit(new_outfit)
+    $ scene_manager.add_actor(stephanie)
+    "[ashley.name] models her new outfits for you."
+
+    python:
+        del bystander
+        del builder
+        del preferences
+    $ scene_manager.clear_scene()
+    return
 
 
 init 2 python: #Coffee time requirements function. #TODO should I pull out coffee times stuff to its own file? this file might get too big.

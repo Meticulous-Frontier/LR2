@@ -31,7 +31,7 @@ init 5 python:
     #Use this to define a set of neutral colors, useful for colors that match most anything else.
     neutral_colors = {
         "khaki": [.765, .69, .569, .95],
-        "swiss coffee": [.859, .331, .321, .95],
+        "swiss coffee": [.859, .331, .321, .95], #wut? this is salmon colored lol
         "fog grey": [.656, .652, .617, .95],
         "cotton white": [.992, .953, .918, .95],
         "dark grey": [.400, .400, .400, .95],
@@ -559,3 +559,24 @@ init 5 python:
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
+
+        def change_color_theme(self, outfit, the_colour):
+            coloured_outfit = outfit.get_copy()
+            color_list = []
+            neutral_list = []
+            for col in self.color_prefs[the_colour]:
+                color_list.append(self.color_prefs[the_colour][col])
+            for col in neutral_colors:
+                neutral_list.append(neutral_colors[col])
+            main_colour = get_random_from_list(color_list)
+            neutral_colour = get_random_from_list(neutral_list)
+            if coloured_outfit.is_dress():
+                for item in coloured_outfit.upper_body:
+                    if item in real_dress_list:
+                        item.colour = main_colour
+                    elif item in shoes_list or item in real_pants_list:
+                        item_colour = neutral_colour
+            # testing
+            for item in coloured_outfit.upper_body:
+                item.colour = main_colour
+            return coloured_outfit

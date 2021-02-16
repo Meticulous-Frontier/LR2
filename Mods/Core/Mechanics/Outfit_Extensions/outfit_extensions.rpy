@@ -275,3 +275,26 @@ init 6 python:
         return new_score
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
+
+    #Categorizing outfits based on type
+
+    def is_dress(self):
+        if any(self.has_clothing(item) for item in real_dress_list):
+            return True
+        return False
+
+    Outfit.is_dress = is_dress
+
+    def has_skirt(self):
+        if any(self.has_clothing(item) for item in skirts_list):
+            return True
+        return False
+
+    Outfit.has_skirt = has_skirt
+
+    def has_pants(self):
+        if any(self.has_clothing(item) for item in pants_list):
+            return True
+        return False
+
+    Outfit.has_pants = has_pants
