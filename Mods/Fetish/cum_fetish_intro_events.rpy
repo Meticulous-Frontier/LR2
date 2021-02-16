@@ -31,7 +31,10 @@ init 1 python:
             return True
         return False
 
-    def cum_fetish_rebecca_intro_requirement():
+    def cum_fetish_rebecca_intro_requirement(the_person):
+        if time_of_day == 3:
+            if the_person in aunt_apartment.people and mc.energy >= 100:
+                return True
         return False
 
     def cum_fetish_gabrielle_intro_requirement():
@@ -90,6 +93,7 @@ init 2 python:
     cum_fetish_generic_intro = Fetish_Action("Generic Cum Fetish Intro", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", fetish_type = "cum")
     cum_fetish_mom_intro = Fetish_Action("Jennifer Cum Fetish Intro", cum_fetish_mom_intro_requirement, "cum_fetish_mom_intro_label", fetish_type = "cum")
     cum_fetish_lily_intro = Fetish_Action("Lily Cum Fetish Intro", cum_fetish_lily_intro_requirement, "cum_fetish_lily_intro_label", fetish_type = "cum")
+    cum_fetish_rebecca_intro = Fetish_Action("Rebecca Cum Fetish Intro", cum_fetish_rebecca_intro_requirement, "cum_fetish_rebecca_intro_label", fetish_type = "cum")
     cum_fetish_sarah_intro = Fetish_Action("Sarah Cum Fetish Intro", cum_fetish_sarah_intro_requirement, "cum_fetish_sarah_intro_label", fetish_type = "cum")
 
 init 50 python:
@@ -539,8 +543,105 @@ label cum_fetish_lily_intro_label():
         clear_scene()
     return
 
-label cum_fetish_rebecca_intro_label():
-    return False
+label cum_fetish_rebecca_intro_label(the_person):
+
+    $ scene_manager = Scene()  #Clean Scene
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    $ the_person.arousal = 40
+    if mc.energy < 100:
+        $ mc.energy = 100
+
+    "As you walk into [the_person.possessive_title]'s apartment, you see her sitting on the couch, watching some TV."
+    the_person "Oh hey [the_person.mc_title]! Good to see you!"
+    "She pats the couch next to her."
+    the_person "I was just watching a show, but its kind of dumb. Why don't you join me for a bit?"
+    mc.name "That sounds good [the_person.title]. Want me to grab some wine first?"
+    the_person "Nah, I'm not really in the mood for a drink tonight. Thanks though!"
+    "Definitely unusual for [the_person.possessive_title]. She is usually ready for a glass anytime. You walk over to her and sit down."
+    "When you sit down, she scoots over close to you. You raise your arm up and put it around her as she lays her head on your shoulder."
+    "You feel her hand on your leg, rubbing your thigh. It slowly starts to creep higher until she is eventually rubbing your crotch."
+    the_person "You know... Gabrielle won't be home for hours... she's always out so late these days."
+    the_person "Want to have some fun on the couch? I'm not in the mood for wine, but I would love to have a drink of something else..."
+    "Your pants are getting tight. Sounds like your sexy aunt wants to taste your cum!"
+    "You've been dosing her with your cum proclivity serums lately, so it is not surprise she might be developing a bit of a fetish."
+    "You decide its time to train her to be a proper cum slut."
+    mc.name "You love cum, don't you?"
+    the_person "I love YOUR cum..."
+    mc.name "That's fair. If you want a drink, that's fine. If you do a good job, maybe we could even have a round two and I'll cover your ass in it too."
+    $ the_person.change_arousal(15)
+    the_person "Oh fuck... that sounds amazing..."
+    "[the_person.title] starts pulling on your zipper, eager to get your cock out. As soon as its out, she starts to go down on you."
+    $ scene_manager.update_actor(the_person, position = "blowjob")
+    if the_person.event_triggers_dict.get("has_blowjob_lesson", False):
+        "The blowjob lessons she has received from [salon_manager.title] have really paid off. In no time she has your cock down her throat and is swallowing you like a pro."
+    else:
+        "With enthusiasm, [the_person.title] takes your cock in her mouth and goes to work."
+    $ the_person.add_situational_slut("Thirsty", 20, "Needs your cum.")
+    call fuck_person(the_person, start_position = cum_fetish_blowjob, skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_aunt_intro_01
+    $ the_person.clear_situational_slut("Thirsty")
+    $ scene_manager.update_actor(the_person, position = "kneeling1")
+    $ add_cum_fetish(the_person)
+    "[the_person.possessive_title] is moaning ecstatically."
+    if the_person.has_face_cum():
+        "Glancing down, you see [the_person.possessive_title!l] running her hands along her face, rubbing your cum into her skin."
+        the_person "Mmm... it feels so good! That first splash is always the best..."
+    else:
+        "Glancing down, you see [the_person.possessive_title!l] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+        the_person "Mmm... you taste so good, I just can't get enough!"
+    mc.name "God that was amazing. From now on, you're my little cumslut. Be ready to take a load anytime, and anywhere I tell you to."
+    the_person "Yes... I'll be your cumslut!"
+    mc.name "Good. Now get up and bend over the couch. I want to fuck another one of your holes tonight."
+    $ the_person.change_arousal(10)
+    the_person "Yes [the_person.mc_title]! My holes are for you to use!"
+    $ scene_manager.update_actor(the_person, position = "standing_doggy")
+    if the_person.vagina_available():
+        "As she bends over, her holes are on display for you. You run your hand along her slit a few times, the moisture immediately soaking your fingers."
+    else:
+        $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+        "She wiggles her hips as you pull her clothes off. When you finish, her holes are on wonderful display for you."
+    "The eagerness of [the_person.possessive_title] and her body on display soon has your cock hardening again. You give her ass a couple smacks with it and she moans."
+    $ the_person.change_arousal(20)
+    if the_person.has_anal_fetish():
+        the_person "You can stick it in my ass if you want..."
+        mc.name "I know. We've already established that your ass is always mine for taking when I want it. But tonight I'm gonna take your pussy."
+    elif the_person.has_breeding_fetish():
+        the_person "You can cum inside me if you want..."
+        mc.name "I know. We've already established that I can seed your fertile cunt anytime I want to, but tonight I'm going to cover you with it instead."
+    "You rub the tip of your cock against [the_person.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
+    "You continue to rub your dick against her pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
+    "When you are ready, you push yourself inside of her. You bottom out easily in one smooth stroke."
+    "The heat and moisture of [the_person.title]'s cunt wrapped around your cock is exquisite. You take a moment and just enjoy being inside of her."
+    "Soon though, you get the urge to really give it to her. You grab her hips with both hands and start to fuck her vigorously."
+    "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
+    $ scene_manager.update_actor(the_person, position = "back_peek")
+    "You push her down, face first into the couch. You use your body weight to pin her prone to the couch. She turns her head and looks back at you as you keep fucking her."
+    the_person "Give it to me! Oh fuck [the_person.mc_title] cum! I want you to cum all over me!"
+    "[the_person.title] is trying to push her ass back against you with each thrust but lying prone, she has no leverage. You continue to relentlessly fuck her."
+    the_person "Its so good... I'm gonna cum... I'm cumming!!!"
+    $ the_person.have_orgasm()
+    "[the_person.possessive_title]'s pussy spasming around you and her cries drive you over the edge. You pull out at the last second."
+    $ the_person.cum_on_ass()
+    $ scene_manager.update_actor(the_person, position = "back_peek")
+    "Your cum erupts in long ropes, covering her ass and lower back. One particularly intense pulse erupts, going up her back and actually hitting the couch cushion next to her."
+    "She hears it hit the cushion and in her orgasm induced bliss she turns and starts licking your cum off the couch. When she finishes, she sighs."
+    the_person "Not a drop goes to waste... that cum belongs to ME!"
+    "You slowly get up. [the_person.possessive_title] is a sticky mess, and she is loving it. She slowly stands as well, being careful not to get any more on the furniture."
+    $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
+    the_person "[the_person.mc_title]... I don't know why, I just can't stop craving your cum. You'll give me more soon... right?"
+    mc.name "Of course, [the_person.title]. I'll always be here for you."
+    "[the_person.possessive_title]'s body melts into yours as she hears your words."
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    "You hold her for a while. She starts to giggle."
+    the_person "I can feel your cum running down between my cheeks... its nice."
+    $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
+    mc.name "I need to get going. Take care [the_person.title]."
+    $ scene_manager.clear_scene()
+    "You say goodbye to [the_person.possessive_title!] then leave her apartment. As you walk away, you can't help but smile."
+    "Your serums have turned her into your cumslut."
+    python:
+        the_person.apply_planned_outfit()
+        clear_scene()
+    return True
 
 label cum_fetish_gabrielle_intro_label():
     return False
@@ -680,7 +781,7 @@ label unit_test_cum_fetish_intro():
 
     $ debug_set_stats_for_cum_fetish_mins(aunt)
     "Method: cum_fetish_rebecca_intro_label"
-    call cum_fetish_rebecca_intro_label() from _unit_test_cum_fetish_intro_06
+    call cum_fetish_rebecca_intro_label(aunt) from _unit_test_cum_fetish_intro_06
     $ mc.energy = mc.max_energy
 
     $ debug_set_stats_for_cum_fetish_mins(cousin)

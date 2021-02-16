@@ -160,6 +160,9 @@ init -1 python:
         elif person is mom:
             mc.business.mandatory_crises_list.append(cum_fetish_mom_intro)
             return True
+        elif person is aunt:
+            person.add_unique_on_room_enter_event(cum_fetish_rebecca_intro)
+            return True
         elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality and False:
             pass
         elif person is sarah:
