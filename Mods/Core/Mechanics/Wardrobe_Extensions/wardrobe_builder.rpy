@@ -23,16 +23,25 @@ init 5 python:
         "Daisy_Dukes" : ["the colour black", "the colour blue", "the colour brown", "the colour white"],
         "Jeans" : ["the colour black", "the colour blue", "the colour brown", "the colour white"],
         "Suit_Pants" : ["the colour black", "the colour blue", "the colour brown", "the colour white", "the colour red", "the colour yellow", "the colour green"],
+        "Capris" : ["the colour black", "the colour blue", "the colour brown", "the colour white"],
         "Pencil_Skirt": ["the colour black", "the colour blue", "the colour brown", "the colour white", "the colour red", "the colour yellow", "the colour green"],
         "Short_Socks" : ["the colour black", "the colour white", "the colour red"],
         "Long_Socks" : ["the colour black", "the colour white", "the colour red"],
         "High_Socks" : ["the colour black", "the colour white", "the colour red", "the colour pink", "the colour yellow"],
-        "Shoes" : ["the colour black", "the colour white", "the colour brown", "the colour red"],
+        "Slips": ["the colour black", "the colour white", "the colour brown"],
+        "Shoes" : ["the colour black", "the colour white", "the colour brown"],
         "Sneakers" : ["the colour black", "the colour white", "the colour red"],
+        "Sandal_Heels": ["the colour black", "the colour white", "the colour red", "the colour brown"],
+        "Heels": ["the colour black", "the colour white", "the colour red", "the colour brown"],
+        "High_Heels": ["the colour black", "the colour white", "the colour red", "the colour brown"],
+        "Boot_Heels": ["the colour black", "the colour white", "the colour red", "the colour brown"],
+        "High_Boots": ["the colour black", "the colour white", "the colour red", "the colour brown"],
         "Gold_Earings": ["the colour yellow"],
         "Copper_Bracelet": ["the colour yellow"],
         "Diamond_Ring": ["the colour yellow"],
         "Copper_Ring_Set": ["the colour yellow"],
+        "Spiked_Bracelet": ["the colour white"],
+        "Spiked_Choker": ["the colour white"],
     }
 
     # generate a more useable default color palette
@@ -431,12 +440,32 @@ init 5 python:
             return False
 
         @staticmethod
-        def get_item_color(item, color):
+        def get_item_color(item, color, exclude_list = [], multiplier = 1.0):
             if item.proper_name in color_clothing_map:
-                color_set = WardrobeBuilder.color_prefs[get_random_from_list(color_clothing_map[item.proper_name])]
-                color_name = get_random_from_list(color_set.keys())
-                return color_set[color_name]
-            return color
+                # exclude hate list
+                available_list = list(set(color_clothing_map[item.proper_name]) - set(exclude_list))
+                if not available_list:
+                    # no color left revert to original list
+                    available_list = color_clothing_map[item.proper_name]
+
+                # color not match list
+                if not WardrobeBuilder.get_color_name(color) in available_list:
+                    color_set = WardrobeBuilder.color_prefs[get_random_from_list(available_list)]
+                    color_name = get_random_from_list(color_set.keys())
+                    return [color_set[color_name][0] * multiplier, color_set[color_name][1] * multiplier, color_set[color_name][2] * multiplier, color_set[color_name][3]]
+            return [color[0] * multiplier, color[1] * multiplier, color[2] * multiplier, color[3]]
+
+        @staticmethod
+        def get_color_name(colour):
+            return WardrobeBuilder.get_color_name_rgb(colour[0], colour[1], colour[2])
+
+        @staticmethod
+        def get_color_name_rgb(r, g, b):
+            h, s, l = rgb_to_hsl(r, g, b)
+            for pref in color_pref_eval_map:
+                if eval(color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "l" : l} ):
+                    return pref
+            return None
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
         neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
@@ -463,7 +492,7 @@ init 5 python:
         def validate_colors(self):
             for cp in sorted(self.color_prefs):
                 for col in sorted(self.color_prefs[cp]):
-                    name = self.get_color_name(self.color_prefs[cp][col])
+                    name = WardrobeBuilder.get_color_name(self.color_prefs[cp][col])
                     # print(cp + " - " + col + " -> " + (name if name else "Unknown"))
             return
 
@@ -547,30 +576,29 @@ init 5 python:
             outfit = Outfit("Overwear")
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme()
-
             upper_item_list = real_dress_list + real_shirt_list
 
             # find upper body item
             item = self.get_item_from_list("upper_body", self.build_filter_list(upper_item_list, points, min_points), points, ["not wearing anything"])
             if item:
-                outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper)))
+                outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper, self.get_color_hate_list())))
 
             # we added a overlay item, so find a real upper item this time
             if item and item.layer == 3:
                 item = self.get_item_from_list("upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
                 if item:
-                    outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower)))
+                    outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list())))
 
             # find lowerbody item
             if item is None or (not item.has_extension or item.has_extension.layer == 1):
                 item = self.get_item_from_list("lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
                 if item:
-                    outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, [color_lower[0] * .9, color_lower[1] * .9, color_lower[2] * .9, color_lower[3]])))
+                    outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list(), 0.9)))
 
             # find feet item
             item = self.get_item_from_list("feet", self.build_filter_list(shoes_list, points, min_points))
             if item:
-                outfit.add_feet(item, self.get_item_color(item, [color_feet[0] * .8, color_feet[1] * .8, color_feet[2] * .8, color_feet[3]]))
+                outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
 
             self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
@@ -714,21 +742,12 @@ init 5 python:
 
             return [x for x in item_list if x[1] > 0]
 
-        def get_color_name(self, colour):
-            return self.get_color_name_rgb(colour[0], colour[1], colour[2])
-
-        def get_color_name_rgb(self, r, g, b):
-            h, s, l = rgb_to_hsl(r, g, b)
-            for pref in color_pref_eval_map:
-                if eval(color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "l" : l} ):
-                    return pref
-            return None
 
         def get_color(self, base_color = None):
             def get_excluded(base_color):
                 if base_color:
                     # prevents clashing colours
-                    color_name = self.get_color_name(base_color)
+                    color_name = WardrobeBuilder.get_color_name(base_color)
                     if color_name == "the colour red":
                         return ["the colour pink", "the colour purple", "the colour brown"]
                     if color_name == "the colour pink":
@@ -788,10 +807,10 @@ init 5 python:
             #First, get a theme color
             if the_colour == None:
                 if main_colour:
-                    the_colour = self.get_color_name(main_colour)
+                    the_colour = WardrobeBuilder.get_color_name(main_colour)
                 elif renpy.random.randint(0,100) < 50:  #50% chance we go straight to a favorite color.
                     main_colour = self.get_color()
-                    the_colour = self.get_color_name(main_colour)
+                    the_colour = WardrobeBuilder.get_color_name(main_colour)
                 else:
                     the_colour = self.person.favorite_colour()
 
