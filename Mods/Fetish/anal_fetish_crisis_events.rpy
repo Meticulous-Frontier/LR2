@@ -158,6 +158,8 @@ label aggressive_anal_fetish_non_employee_label():
 
 label anal_fetish_employee_evening_approach_label():
     $ the_person = get_needy_anal_fetish_employee()
+    $ builder = WardrobeBuilder(the_person)
+
     if the_person is None:
         $ the_person = get_anal_fetish_employee()
         if the_person is None:
@@ -172,7 +174,7 @@ label anal_fetish_employee_evening_approach_label():
         the_person "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
         $ the_person.draw_person(position = "walking_away")
         "You finish up what you were doing and say goodbye to your employees. Your curiosity about what [the_person.possessive_title!l] needs is answered when she comes back into the room."
-        $ the_person.apply_outfit(special_fetish_outfit)
+        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         "[the_person.possessive_title] has changed into her pink lingerie. You notice as she walks up that she isn't wearing any panties..."
         "She walks up and stands next to you by your desk. Then she turns around."
@@ -180,7 +182,7 @@ label anal_fetish_employee_evening_approach_label():
         "Between her pillowy cheeks is her pink jewelled butt plug."
         the_person "What do you say, [the_person.mc_title]? Want to replace my plug with something else?"
     else:
-        $ the_person.apply_outfit(special_fetish_outfit)
+        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         the_person "Hey, [the_person.mc_title]. I was wondering if you would be here on the weekend! Want to have some fun before you head home?"
         "[the_person.possessive_title] is dressed to impress. You wonder if she has in that butt plug she showed you last time you stayed late at the office wit her..."

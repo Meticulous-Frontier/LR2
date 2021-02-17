@@ -1359,22 +1359,19 @@ label ashley_test_outfit_scene():
     "Enjoying your coffee, you zone out for a minute while the two sisters are chatting, when suddenly the talking stops. You look up and see them both looking out the restaurant window."
     "Outside is a woman who has stopped and is checking her phone for something. The girls are checking her out."
 
-    $ scene_manager.add_actor(bystander, display_transform = character_left_flipped, position = "stand3")
+    $ scene_manager.add_actor(bystander, display_transform = character_right_flipped, position = "stand3")
     "She takes a moment to look at something on her phone."
     "Then she walks away."
-    $ scene_manager.add_actor(bystander, display_transform = character_left_flipped, position = "walking_away")
+    $ scene_manager.add_actor(bystander, display_transform = character_right_flipped, position = "walking_away")
     "The girls watch as she walks away."
     $ scene_manager.remove_actor(bystander)
     the_person "Wow, did you see that?"
-    $ new_outfit = builder.change_color_theme(bystander.outfit, "the colour green")
-    if new_outfit:
-        "success"
-    else:
-        "Failure"
-    call screen outfit_creator(new_outfit)
+
+    $ new_outfit = builder.personalize_outfit(bystander.outfit, the_colour = "the colour green", coloured_underwear = True, max_alterations = 1)
+
     $ ashley.apply_outfit(new_outfit)
     $ stephanie.apply_outfit(new_outfit)
-    $ scene_manager.add_actor(stephanie)
+    $ scene_manager.add_actor(ashley)
     "[ashley.name] models her new outfits for you."
 
     python:

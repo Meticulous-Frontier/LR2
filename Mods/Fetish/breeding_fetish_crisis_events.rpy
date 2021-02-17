@@ -133,6 +133,7 @@ label breeding_fetish_high_fertility_crisis_label():
 label breeding_fetish_happy_breeder_crisis_label():
     $ the_person = get_pregnant_breeder()
     $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+    $ builder = WardrobeBuilder(the_person)
     if the_person == None:
         return
     if the_person.energy < 80:
@@ -142,7 +143,8 @@ label breeding_fetish_happy_breeder_crisis_label():
     if the_person == mom or the_person == lily:
         "You hear a knock on your door."
         "You stand up and open your door. It's [the_person.title], dressed very nicely..."
-        $ the_person.apply_outfit(special_fetish_outfit)
+
+        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         "Its [the_person.possessive_title!l]. She steps into your room, closes your door, and locks it..."
         mc.name "Something you need tonight [the_person.title]?"
@@ -154,7 +156,7 @@ label breeding_fetish_happy_breeder_crisis_label():
         $ mc.change_location(hall)
         $ mc.location.show_background()
         "You head to your front door and see [the_person.possessive_title!l] standing there... outside... in a very provocative outfit."
-        $ the_person.apply_outfit(special_fetish_outfit)
+        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         ###Draw the girl###
         "You quickly open the door and invite her inside."
@@ -292,6 +294,7 @@ label breeding_fetish_family_sleep_crisis_label():
     $ the_person = get_family_breeder()
     if the_person = None:
         return
+    $ builder = WardrobeBuilder(the_person)
     if the_person == lily:
 
         $ mc.change_location(bedroom)
@@ -300,7 +303,7 @@ label breeding_fetish_family_sleep_crisis_label():
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title!l] from the other side of the door."
         the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
         "You invite her in. You immediately start to get aroused when you see what she is wearing."
-        $ the_person.apply_outfit(special_fetish_blue_outfit)
+        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_blue_outfit))
         $ the_person.draw_person()
         the_person "So... I was wondering... is it okay if I sleep in here with you again tonight?"
         menu:

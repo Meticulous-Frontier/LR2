@@ -56,6 +56,7 @@ label aunt_drunk_cuddle_label():
         scene_manager.add_actor(the_person, position = "sitting")
         scene_manager.add_actor(mom, position = "sitting", emotion = "happy", display_transform = character_center_flipped)
 
+
     "Before you go to bed, you come out into the kitchen to get a drink of water. [mom.possessive_title] and [the_person.title] are sitting there, drinking some wine."
     "It is pretty clear from their conversation that they have both had a lot to drink. They are cracking dirty jokes to each other."
     the_person "...So then I said, its okay my partner is no good, I've got a good hand!"
@@ -101,6 +102,9 @@ label aunt_drunk_cuddle_label():
     $ mc.change_location(bedroom)
     $ bedroom.show_background()
     $ set_night_outfit(the_person)
+    $ builder = WardrobeBuilder(the_person)
+    $ the_person.apply_outfit(builder.personalize_outfit(the_person.outfit))
+
 
     "After a minute, [the_person.possessive_title] knocks on your door, then slowly enters."
     $ scene_manager.add_actor(the_person)

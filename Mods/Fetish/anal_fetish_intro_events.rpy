@@ -481,6 +481,7 @@ label anal_fetish_mom_intro_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ the_person = mom
+    $ builder = WardrobeBuilder(the_person)
     "Playing around on your phone for a bit before bed, you hear a knock on your door."
     mc.name "It's open."
     $ the_person.draw_person()
@@ -508,9 +509,10 @@ label anal_fetish_mom_intro_label():
     "Oh geeze. She is definitely planning an interesting night! You quickly click back into the movie and pause it when you hear her bedroom door open."
     "You try to act non-chalant as you hear [the_person.title] walk into the living room. You purposefully avoid looking at her until you hear her clear her throat."
     the_person "Ah, want to get a little more comfortable with me tonight?"
-    $ the_person.apply_outfit(special_fetish_black_outfit)
+    $ mom_special_outfit = (builder.personalize_outfit(special_fetish_black_outfit, the_colour = the_person.favorite_colour()))
+    $ the_person.apply_outfit(mom_special_outfit)
     $ the_person.draw_person()
-    "When you look up, you are stunned at the outfit that [the_person.possessive_title!l] is wearing."
+    "When you look up, you are stunned at the outfit that [the_person.possessive_title!] is wearing."
     mc.name "[the_person.title]... wow! But... but what about..."
     the_person "Lily is out for the night, spending it at a friend's house. We have the house to ourselves for the night..."
     "[the_person.title] slowly walks over to you. Her hips and body are mesmerizing."
