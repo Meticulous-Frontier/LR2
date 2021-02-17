@@ -150,13 +150,13 @@ label family_morning_breakfast_enhanced_label():
             mom "What do you think [mom.mc_title], do you think it's \"weird\" for your mother to want to be comfortable in her own house?"
             menu:
                 "Side with Mom":
-                    mc.name "I think Mom's right [lily.title]. It's nothing we haven't seen before, she's just trying to relax on her days off."
+                    mc.name "I think Mom's right, [lily.title]. It's nothing we haven't seen before, she's just trying to relax on her days off."
                     $ mom.change_obedience(-3)
                     $ lily.change_obedience(3)
-                    "[lily.title] looks at the two of you like you're crazy then sighs dramatically."
+                    "[lily.title] looks at the two of you like you're crazy, then sighs dramatically."
                     lily "Fine, but this is really weird, okay?"
                     $ scene_manager.update_actor(mom, position = "sitting")
-                    "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventually gets use to her mothers outfit and joins in on your conversation."
+                    "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."
                     $ lily.change_slut_temp(3)
                     $ mom.change_happiness(5)
 
