@@ -810,7 +810,7 @@ init 5 python:
             #Next, determine what kind of outfit this is.
 
             if personal_outfit.is_dress(): #If it is a dress, let the dress be the focal point of the outfit.
-                renpy.say ("", "Suitable dress set")
+                # renpy.say ("", "Suitable dress set")
                 for item in personal_outfit.upper_body:
                     if item in bra_list and coloured_underwear:
                         item.colour = underwear_colour
@@ -847,7 +847,7 @@ init 5 python:
                                     alterations += 1
 
             elif personal_outfit.has_pants(): #This outfit has lower body pants covering.
-                renpy.say ("", "Suitable pants set")
+                # renpy.say ("", "Suitable pants set")
                 #Fist determine if we want to switch to a skirt. #TODO figure out how to do this
                 #Next, figure out what kind of top we have. Regular, bra, or topless.
                 if personal_outfit.tits_visible():   #Tits are on display, but she may have a top still. Colour her top (if there) and pants
@@ -906,7 +906,7 @@ init 5 python:
                         alterations += 1
 
             elif personal_outfit.has_skirt(): #This outfit has a skirt.
-                renpy.say ("", "Suitable skirt set")
+                # renpy.say ("", "Suitable skirt set")
                 #Similar logic to pants. First determine if we should switch to pants
                 #Next, determine what kind of top is being worn.
                 if personal_outfit.tits_visible():   #Tits are on display, but she may have a top still. Colour her top (if there) and skirt
@@ -974,7 +974,7 @@ init 5 python:
             #Next type of outfite: housewear. Girl comfy clothes general in game are some top with just panties or no panties. EG mom's apron, pajamas, etc.
             #With this outfit, tits will be covered. Make top the focal point.
             elif personal_outfit.has_shirt():
-                renpy.say ("", "Suitable comfy set")
+                # renpy.say ("", "Suitable comfy set")
                 for item in personal_outfit.upper_body:
                     if item in bra_list and coloured_underwear:
                         item.colour = underwear_colour
@@ -1007,7 +1007,7 @@ init 5 python:
             #If bottom layer only, check sluttiness raiting and access and for pantyhose vs socks and determine if we treat as just underwear or as lingerie
             elif personal_outfit.is_suitable_underwear_set() and not (personal_outfit.has_hose() and personal_outfit.get_underwear_slut_score() > 15):
                 #Make underwear main color, neutralize everything else.
-                renpy.say ("", "Suitable underwear set")
+                # renpy.say ("", "Suitable underwear set")
                 for item in personal_outfit.upper_body:
                     if item in bra_list:
                         item.colour = main_colour
@@ -1024,7 +1024,7 @@ init 5 python:
                 for item in personal_outfit.accessories:
                     neutralize_item_colour(item)
             else: #This is for exciting, lingerie style outfits. Lingerie is generally completely color matching, maybe with only one or two neutral pieces.
-                renpy.say ("", "Suitable lingerie set")
+                # renpy.say ("", "Suitable lingerie set")
                 for item in personal_outfit.upper_body:
                     item.colour = main_colour
                 for item in personal_outfit.lower_body:
