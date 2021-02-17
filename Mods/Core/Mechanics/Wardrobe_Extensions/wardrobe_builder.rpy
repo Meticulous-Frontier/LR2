@@ -203,6 +203,8 @@ init 5 python:
                 the_item.pattern = the_item.supported_patterns[key_value]
                 color_key = the_item.proper_name + "_Pattern"
                 the_item.colour_pattern = neutral_palette[get_random_from_list(neutral_color_map[color_key])]
+            elif isinstance(the_item, Facial_Accessory):    #facial accessories don't have patterns
+                pass
             elif the_item.pattern:
                 color_key = the_item.proper_name + "_Pattern"
                 if color_key in neutral_color_map.keys():
