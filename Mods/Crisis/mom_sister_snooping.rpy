@@ -165,6 +165,6 @@ label mom_sister_snooping_action_label():
         "[mom.title] gives a laugh."
         mom "I guess it couldn't hurt to try..."
         $ mom.change_slut_temp(3)
-        "They keep talking, but you decide to keep headed to bathroom. You wouldn't want to get caught snooping around, anyway!"
+        "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     $ scene_manager.clear_scene()
     return
