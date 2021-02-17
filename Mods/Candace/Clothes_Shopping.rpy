@@ -22,8 +22,8 @@ init 2 python:
         builder = WardrobeBuilder(person)
         outfit_slut_points = __builtin__.min(__builtin__.int(person.effective_sluttiness() / 8), 12)
         for i in range(3):
-            outfits.append(builder.build_outfit(None, outfit_slut_points))
-        outfits.append(builder.build_outfit("UnderwearSets", outfit_slut_points))
+            outfits.append(builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points)))
+        outfits.append(builder.personalize_outfit(builder.build_outfit("UnderwearSets", outfit_slut_points)))
         return outfits
 
     def build_lingerie_selection(person):
