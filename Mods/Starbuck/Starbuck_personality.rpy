@@ -482,6 +482,7 @@ init python:
     def starbuck_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append("The sex shop owner")
         if starbuck.shop_progress_stage > 1:
             valid_possessive_titles.append("Your business partner")
         if person.sluttiness > 60 and starbuck.shop_progress_stage > 1:
