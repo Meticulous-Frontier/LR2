@@ -183,7 +183,7 @@ label cat_fight_crisis_enhanced_label():
                         loser "You'll pay for that, slut!"
                     elif ran_num == 2:
                         "[winner.title] and [loser.title] collide, screaming profanities at each other."
-                        "You aren't sure exactly what happens, but when they separate [winner.title] is holding a piece of fabric that use to be [loser.title]'s [the_clothing.name]."
+                        "You aren't sure exactly what happens, but when they separate [winner.title] is holding a piece of fabric that used to be [loser.title]'s [the_clothing.name]."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser "Is that all you've got?"
                     else: #ran_num == 3
