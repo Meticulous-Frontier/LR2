@@ -861,7 +861,7 @@ label FA_talk_busy(the_person):
 #         if the_person.arousal < 50:
 #             the_person "Give me a second, I'm going to strip something off just. For. You."
 #         else:
-#             the_person "Ugh let me get this off. I want to feel your pressed against every inch!"
+#             the_person "Ugh, let me get this off. I want to feel you pressed against every inch of me!"
 #     return
 #
 # label FA_sex_watch(the_person, the_sex_person, the_position):
