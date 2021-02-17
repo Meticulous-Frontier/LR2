@@ -290,7 +290,7 @@ label cougar_sex_responses_foreplay(the_person):
         if the_person.sluttiness > 50:
             the_person "Oh gods above that feels amazing!"
         else:
-            the_person "Oh lord... I could get use to you touching me like this!"
+            the_person "Oh lord... I could get used to you touching me like this!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
@@ -416,7 +416,7 @@ label cougar_flirt_response_low(the_person):
                 # Her pussy is on display.
                 the_person "I would not call it much of an uniform, if you know what it mean."
                 the_person "I understand it's the company uniform, but a woman my age would like a little more coverage."
-                mc.name "It will take some getting use to, but I think it would be a shame to cover up your wonderful figure."
+                mc.name "It will take some getting used to, but I think it would be a shame to cover up your wonderful figure."
                 "[the_person.possessive_title] doesn't seem so sure, but she smiles and nods anyways."
 
             elif the_person.outfit.tits_visible():
@@ -427,13 +427,13 @@ label cougar_flirt_response_low(the_person):
                 else:
                     the_person "Thank you, but I do hope you'll consider a more respectable uniform in the future."
                     the_person "It still doesn't feel natural showing my goods off like a young girl."
-                mc.name "I understand it's a little uncomfortable, but I'm sure you'll get use to it."
+                mc.name "I understand it's a little uncomfortable, but I'm sure you'll get used to it."
                 the_person "Perhaps, in time, but for now, I really don't enjoy it at all."
 
             elif the_person.outfit.underwear_visible():
                 # Her underwear is visible.
                 the_person "Thank you. But this is not appropriate for my age, it should be more descent and respectable, like me."
-                mc.name "I know it can take some getting use to, but you look fantastic in it. You definitely have the body to pull this off."
+                mc.name "I know it can take some getting used to, but you look fantastic in it. You definitely have the body to pull this off."
                 "[the_person.possessive_title] doesn't seem so sure, but she smiles and nods anyways."
 
             else:

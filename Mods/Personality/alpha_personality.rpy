@@ -297,7 +297,7 @@ label alpha_sex_responses_foreplay(the_person):
         if the_person.sluttiness > 50:
             the_person "Oh gods, that feels amazing!"
         else:
-            the_person "Oh lord... I could get use to you touching me like this!"
+            the_person "Oh lord... I could get used to you touching me like this!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":

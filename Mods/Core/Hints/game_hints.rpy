@@ -45,7 +45,7 @@ init -1 python:
     game_hints.append(Hint("Advance Research", "You have researched all traits for your current research level, talk to your head researcher about advancing your research to the next level.", "mc.business.research_tier < 3 and researched_all_at_level()", "not researched_all_at_level()"))
 
     # Hint for Dungeon
-    game_hints.append(Hint("Build Dungeon", "When you work in you company during the weekend, you might have a good idea.", "not mc.has_dungeon() and day > 24 and mc.business.funds > 20000", "not bool(exists_in_mandatory_crisis_list('dungeon_intro_label'))"))
+    game_hints.append(Hint("Build Dungeon", "When you work in your company during the weekend, you might have a good idea.", "not mc.has_dungeon() and day > 24 and mc.business.funds > 20000", "not bool(exists_in_mandatory_crisis_list('dungeon_intro_label'))"))
 
     # Hint for Active Quest (description is retrieved by object function)
     game_hints.append(Hint("Active Quest", None, "not quest_director.active_quest is None", "quest_director.active_quest is None", description_func_string = "quest_director.active_quest_name"))

@@ -73,7 +73,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     $ the_girl.discover_opinion("giving blowjobs")
                     "[the_girl.possessive_title] looks down at your cock and hesitates."
                     the_girl "I'm sorry I don't... that I'm not as good at sucking you as you are at kissing me..."
-                    mc.name "Give it time, you'll get use to it."
+                    mc.name "Give it time, you'll get used to it."
                 else:
                     "[the_girl.possessive_title] slips you back into her soft mouth. She tries to take you a little deeper, but gags a bit and has to pull back off."
                     the_girl "I'm sorry that I'm not at good at sucking you as you are at kissing me..."

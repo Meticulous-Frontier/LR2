@@ -452,9 +452,9 @@ label transition_default_anal_penetration_dialog(the_girl, the_location, the_obj
                     "Using her pussy juice as lube you lay into her tight ass, wasting no time in fucking her hard."
                 else:
                     the_girl "Oh fuck! FUCK!"
-                    "She yells out in surprise and pain. You bottom out and hold still, giving her a second to get use to your size."
+                    "She yells out in surprise and pain. You bottom out and hold still, giving her a second to get used to your size."
                     the_girl "Fuck... I hate that part..."
-                    mc.name "It's just like ripping off a bandage. You'll get use to it."
+                    mc.name "It's just like ripping off a bandage. You'll get used to it."
                     "You wait a moment, then start to move again. Using her pussy juices as lube you've soon got a good rhythm going."
 
             "Take it slow":

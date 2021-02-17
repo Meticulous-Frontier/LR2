@@ -769,7 +769,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] takes a few minutes to recover from her orgasm. Eventually she gets up."
-                "Getting [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
+                "Giving [the_person.title] an orgasm makes you feel more confident in your foreplay skills."
             else:
                 "After you finish, [the_person.possessive_title!l] takes a second, then gets up."
             $ the_person.clear_situational_slut("Excited")
@@ -1119,7 +1119,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You grab the camera, and start looking at the footage. The first thing you do is copy it on a thumb drive, for you to enjoy at a later date."
     "You head out to start work on the advertisement video."
     $ perk_system.add_stat_perk(Stat_Perk(description = "Increase oral skill after helping Starbuck demonstrate edible panties. + 1 Oral Skill", oral_bonus = 1, bonus_is_temp =False), "Starbuck Oral Bonus")
-    "Getting [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
+    "Giving [the_person.title] an orgasm with your tongue gives you more confidence in your oral skills."
     $ mc.location.show_background()
     $ clear_scene()
     $ strip_choice = None
@@ -1257,7 +1257,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "[the_person.possessive_title] slowly stands up. Her feet are a bit wobbly."
     "[the_person.possessive_title] rubs her ass a bit where you spanked her earlier."
-    the_person "I remember when... my husband use to use me like that... bending me over, spanking me like the naughty girl that a I am."
+    the_person "I remember when... my husband used to use me like that... bending me over, spanking me like the naughty girl that a I am."
     the_person "We should do this again. It felt so good when your cock started pushing into my ass..."
     if not perk_system.has_item_perk("Male Strapon"):
         "She looks at the strapon, then looks back at you."
