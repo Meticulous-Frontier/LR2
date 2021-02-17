@@ -787,9 +787,11 @@ init 5 python:
             if the_colour == None:
                 if main_colour:
                     the_colour = self.get_color_name(main_colour)
-                else:
+                elif renpy.random.randint(0,100) < 50:  #50% chance we go straight to a favorite color.
                     main_colour = self.get_color()
                     the_colour = self.get_color_name(main_colour)
+                else:
+                    the_colour = self.person.favorite_colour()
 
             color_list = []
             for col in self.color_prefs[the_colour]:

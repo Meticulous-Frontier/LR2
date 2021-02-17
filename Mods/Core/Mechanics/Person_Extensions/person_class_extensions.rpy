@@ -1480,7 +1480,9 @@ init -1 python:
             # add black slips
             self.outfit.add_feet(slips.get_copy(), colour_black)
         elif workout_wardrobe:
-            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+            builder = WardrobeBuilder(self)
+            self.apply_outfit(builder.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            #self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
