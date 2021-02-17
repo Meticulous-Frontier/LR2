@@ -1257,7 +1257,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "[the_person.possessive_title] slowly stands up. Her feet are a bit wobbly."
     "[the_person.possessive_title] rubs her ass a bit where you spanked her earlier."
-    the_person "I remember when... my husband use to use me like that... bending me over, spanking me like the naughty girl that a I am."
+    the_person "I remember when... my husband used to use me like that... bending me over, spanking me like the naughty girl that a I am."
     the_person "We should do this again. It felt so good when your cock started pushing into my ass..."
     if not perk_system.has_item_perk("Male Strapon"):
         "She looks at the strapon, then looks back at you."
