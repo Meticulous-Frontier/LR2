@@ -1455,8 +1455,9 @@ init -1 python:
 
     def apply_gym_outfit(self):
         if workout_wardrobe:
-            # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
-            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+            builder = WardrobeBuilder(self)
+            self.apply_outfit(builder.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            # self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
