@@ -751,7 +751,7 @@ label HR_director_review_discoveries_label(the_person):
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                     the_person "Sounds good [the_person.mc_title]!"
                 else:
-                    the_person "We already have the equipment setup form the previously researched serum. We should be able to modify it to take advantage of this advancement."
+                    the_person "We already have the equipment setup from the previously researched serum. We should be able to modify it to take advantage of this advancement."
                     "[the_person.title] checks her notes on the synthesis process."
                     the_person "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."
