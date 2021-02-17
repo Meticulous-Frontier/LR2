@@ -66,7 +66,7 @@ label reserved_dual_penetration_taboo_break(the_person):
             the_person "I'm not sure about this [the_person.mc_title]... I'm not even sure if you can fit inside me there!"
             mc.name "I can stretch you out, don't worry about that."
             the_person "Oh lord, what happened to me..."
-            the_person "I use to think I was a respectable lady, now I'm about to get fucked in the ass..."
+            the_person "I used to think I was a respectable lady, now I'm about to get fucked in the ass..."
         mc.name "Relax, you'll be fine and this isn't the end of the world. Who knows, you might even enjoy yourself."
         the_person "I doubt it. Come on then, there's no point stalling any longer."
     return
