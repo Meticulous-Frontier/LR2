@@ -102,8 +102,7 @@ init 10 python:
                     return cat
         return cs.scope["valid_categories"][0]
 
-    def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
-
+    def update_colour_sliders(cloth):
         cs = renpy.current_screen()
         item_outfit = cs.scope["item_outfit"]
         for cc in [x for x in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories]:
@@ -117,7 +116,9 @@ init 10 python:
                 if not isinstance(cc, Facial_Accessory):
                     cloth.colour_pattern = cc.colour_pattern
 
+    def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
 
+        cs = renpy.current_screen()
         if cs.scope["selected_clothing"]:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
                 cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
@@ -185,11 +186,12 @@ init 10 python:
         cs.scope["demo_outfit"] = cs.scope["item_outfit"].get_copy()
 
         # select cloth item from category we have selected
-        for cloth in cs.scope["item_outfit"].upper_body + cs.scope["item_outfit"].lower_body + cs.scope["item_outfit"].feet + cs.scope["item_outfit"].accessories:
+        for cloth in cs.scope["item_outfit"].upper_body + cs.scope["item_outfit"].lower_body + cs.scope["item_outfit"].feet:
             if not cloth.is_extension:
                 if cloth in cs.scope["categories_mapping"][category][0]:
                     cs.scope["selected_clothing"] = cloth
                     cs.scope["selected_from_outfit"] = cloth
+                    update_colour_sliders(cloth)
                     break
 
         preview_outfit()
@@ -489,8 +491,8 @@ init 2:
                                                     ]
 
                                                     hovered [
-                                                        Function(preview_apply, cloth.get_copy()), # Add the hovered outfit to the demo outfit
-                                                        Function(update_outfit_color, cloth.get_copy()),
+                                                        Function(preview_apply, cloth), # Add the hovered outfit to the demo outfit
+                                                        Function(update_outfit_color, cloth),
                                                         Function(preview_outfit)
                                                     ]
 
@@ -526,14 +528,14 @@ init 2:
                                             sensitive outfit_valid_check()
 
                                             action [
-                                                Function(update_outfit_color, selected_clothing), #Make sure color is updated
+                                                #Function(update_outfit_color, selected_clothing), #Make sure color is updated
                                                 Function(replace_cloth, selected_clothing),
                                                 Function(preview_outfit) # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
                                             ]
 
                                             hovered [
                                                 Function(preview_apply, selected_clothing),
-                                                Function(update_outfit_color, selected_clothing),
+                                                #Function(update_outfit_color, selected_clothing),
                                                 Function(preview_outfit)
                                             ]
 
