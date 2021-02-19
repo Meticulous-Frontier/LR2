@@ -64,6 +64,11 @@ init 15 python:
         the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
         return the_counter
 
+    def make_reception():
+        the_desk = Object("reception desk",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
+        return the_desk
+
+
 
 label build_custom_rooms(stack):
     python:
@@ -119,6 +124,7 @@ label build_custom_rooms(stack):
 
         # initialize dungeon room creation action
         add_dungeon_intro_action()
+        fix_lobby_objects()
 
         execute_hijack_call(stack)
     return
@@ -131,6 +137,15 @@ init 10 python:
             unique = list(set(room.objects))
             if len(unique) != len(room.objects):    # mismatch update
                 room.objects = unique
+        return
+
+    def fix_lobby_objects():
+        for room in list_of_places:
+            if room == lobby or room == mom_office_lobby:
+                found = find_in_list(lambda x: x.name == "desk", room.objects)
+                if found:
+                    room.objects.remove(found)
+                    room.objects.append(make_reception())
         return
 
     def update_room_visibility():
@@ -151,6 +166,7 @@ label update_custom_rooms(stack):
     python:
         update_room_visibility()
         fix_duplicate_objects_in_rooms()
+        fix_lobby_objects()
 
         execute_hijack_call(stack)
     return
