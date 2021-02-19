@@ -427,6 +427,7 @@ init -1 python:
         found = get_fetish_basic_serum()
         if found:
             found.tier = 1
+            found.researched = True
             mc.business.event_triggers_dict["fetish_serum_count"] = 1
         return
 
@@ -437,6 +438,7 @@ init -1 python:
         found = get_fetish_anal_serum()
         if found:
             found.tier = 1
+            found.researched = True
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
@@ -447,6 +449,7 @@ init -1 python:
         found = get_fetish_exhibition_serum()
         if found:
             found.tier = 1
+            found.researched = True
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
@@ -457,6 +460,7 @@ init -1 python:
         found = get_fetish_cum_serum()
         if found:
             found.tier = 1
+            found.researched = True
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
@@ -467,6 +471,7 @@ init -1 python:
         found = get_fetish_breeding_serum()
         if found:
             found.tier = 1
+            found.researched = True
             mc.business.event_triggers_dict["fetish_serum_count"] += 1
         return
 
@@ -490,7 +495,7 @@ init -1 python:
                 on_remove = fetish_basic_function_on_remove,
                 on_turn = fetish_basic_function_on_turn,
                 tier = 99,
-                start_researched = True,
+                start_researched = False,
                 research_needed = 1000,
                 exclude_tags = ["Nanobots"]
             )
@@ -508,7 +513,7 @@ init -1 python:
                 on_remove = fetish_exhibition_function_on_remove,
                 on_turn = fetish_exhibition_on_turn,
                 tier = 99,
-                start_researched =  True,
+                start_researched =  False,
                 research_needed = 1200,
                 exclude_tags = ["Nanobots"]
             )
@@ -526,7 +531,7 @@ init -1 python:
                 on_remove = fetish_anal_function_on_remove,
                 on_turn = fetish_anal_function_on_turn,
                 tier = 99,
-                start_researched =  True,
+                start_researched =  False,
                 research_needed = 2000,
                 exclude_tags = ["Nanobots"]
             )
@@ -544,7 +549,7 @@ init -1 python:
                 on_remove = fetish_cum_function_on_remove,
                 on_turn = fetish_cum_function_on_turn,
                 tier = 99,
-                start_researched =  True,
+                start_researched =  False,
                 research_needed = 2000,
                 exclude_tags = ["Nanobots"]
             )
@@ -562,7 +567,7 @@ init -1 python:
                 on_remove = fetish_breeding_function_on_remove,
                 on_turn = fetish_breeding_function_on_turn,
                 tier = 99,
-                start_researched =  True,
+                start_researched =  False,
                 research_needed = 2000,
                 exclude_tags = ["Nanobots"]
             )
