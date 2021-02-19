@@ -17,14 +17,6 @@ init 2:
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
 
-        python:
-            exclude_tag_list = []
-            for trait in list_of_traits:
-                if trait.exclude_tags:
-                    for e_tag in trait.exclude_tags:
-                        if not e_tag in exclude_tag_list:
-                            exclude_tag_list.append(e_tag)
-
         default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
         default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
 
