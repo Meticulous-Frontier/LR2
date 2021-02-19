@@ -3,21 +3,21 @@ init -1 python:
     from lru import LRUCacheDict
 
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        all_people = []
+        all_people = set()
         for location in all_locations_in_the_game(excluded_locations):
-            all_people.extend([x for x in location.people if x not in excluded_people])
-        return all_people
+            all_people.update([x for x in location.people if x.is_available() and not x in excluded_people])
+        return list(all_people)
 
     def all_locations_in_the_game(excluded_locations = []):
-        return [x for x in list_of_places if x not in excluded_locations]
+        return [x for x in list_of_places if not x in excluded_locations]
 
     def get_random_person_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         return get_random_from_list(all_people_in_the_game(excluded_people))
 
     def get_random_person_in_location(location, excluded_people = []):
-        return get_random_from_list([x for x in location.people if x not in excluded_people])
+        return get_random_from_list([x for x in location.people if not x in excluded_people])
 
-    @lru_cache_function(max_size=1, expiration=4)
+    @lru_cache_function(max_size=1, expiration=5)
     def unique_characters_not_known(): # TODO The check should be standardized, but some people are vanilla, some are different modders or different 'style'.
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
@@ -48,27 +48,29 @@ init -1 python:
             not_met_yet_list.append(starbuck)
         return not_met_yet_list
 
-    @lru_cache_function(max_size=10, expiration=2)
+    @lru_cache_function(max_size=10, expiration=3)
     def known_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        known_people = []
-        excluded_people.extend(unique_characters_not_known())
+        known_people = set()
+        excluded = set(excluded_people)
+        excluded.update(unique_characters_not_known())
         for location in all_locations_in_the_game(excluded_locations):
-            known_people.extend([x for x in location.people if x.is_available() and not x in excluded_people and not (x.mc_title == "Stranger" or not x.title)])
-        return known_people
+            known_people.update(known_people_at_location(location, excluded))
+        return list(known_people)
 
     def known_people_at_location(location, excluded_people = []):
-        excluded_people.extend(unique_characters_not_known())
-        return [x for x in location.people if not x in excluded_people and not (x.mc_title == "Stranger" or not x.title)]
+        excluded = set(excluded_people)
+        excluded.update(unique_characters_not_known())
+        return [x for x in location.people if x.is_available() and not x in excluded and x.title]
 
-    @lru_cache_function(max_size=3, expiration=2)
+    @lru_cache_function(max_size=3, expiration=3)
     def unknown_people_in_the_game(excluded_people = [], excluded_locations = []):
-        unknown_people = []
+        unknown_people = set(unique_characters_not_known())
         for location in all_locations_in_the_game(excluded_locations):
-            unknown_people.extend([x for x in location.people if not x in excluded_people and (x.mc_title == "Stranger" or not x.title)])
-        return unknown_people
+            unknown_people.update(unknown_people_at_location(location, excluded_people))
+        return list(unknown_people)
 
     def unknown_people_at_location(location, excluded_people = []):
-        return [x for x in location.people if not x in excluded_people and (x.mc_title == "Stranger" or not x.title)]
+        return [x for x in location.people if x.is_available and not x in excluded_people and not x.title]
 
     def people_in_mc_home():
         return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
