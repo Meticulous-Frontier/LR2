@@ -16,6 +16,8 @@ label friends_help_friends_be_sluts_enhanced_label():
         $ person_one = the_relationship.person_b
         $ person_two = the_relationship.person_a
 
+    $ mc.change_location(lobby)
+    $ mc.location.show_background()
     $ scene_manager = Scene()
 
     if person_one.effective_sluttiness() < 30: #If our slutty person isn't very slutty in the first place.

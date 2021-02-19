@@ -17,6 +17,8 @@ label coffee_break_action_label:
     if person_one is None:
         return
 
+    $ mc.change_location(lobby)
+    $ mc.location.show_background()
     "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break_chit_chat_label(person_one, person_two, person_three) from _call_coffee_break_chit_chat_label_1
     python:     # Release variables

@@ -17,6 +17,8 @@ label coffee_break2_action_label:
     if person_one is None:
         return
 
+    $ mc.change_location(lobby)
+    $ mc.location.show_background()
     "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break2_food_delivery_label(person_one, person_two, person_three) from _call_coffee_break2_food_delivery_label_1
 

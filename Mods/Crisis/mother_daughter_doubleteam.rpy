@@ -34,6 +34,9 @@ label mother_daughter_doubleteam_action_label():
         if not the_mother or not the_daughter:
             renpy.return_statement()
 
+        mc.change_location(lobby)
+        mc.location.show_background()
+
         scene_manager = Scene() # make sure we have a clean scene manager
     "As you are walking around the office, you hear some arguing coming from the break room."
     "When you look inside, you see [the_mother.possessive_title] having a discussion with her daughter."
