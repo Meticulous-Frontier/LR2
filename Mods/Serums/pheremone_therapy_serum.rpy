@@ -28,6 +28,7 @@ init -1 python:
                 tier = 2,
                 start_researched =  False,
                 research_needed = 800,
+                start_enabled = False
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )

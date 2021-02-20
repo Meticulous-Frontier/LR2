@@ -26,7 +26,8 @@ init -1 python:
             on_remove = lysergide_n2o_trait_on_remove,
             requires = [basic_med_app, suggestion_drugs_trait],
             tier = 2,
-            research_needed = 500)
+            research_needed = 500,
+            start_enabled = False)
 
 
 # any label that starts with serum_mod is added to the serum mod list
