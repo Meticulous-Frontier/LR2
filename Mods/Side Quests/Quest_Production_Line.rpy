@@ -183,27 +183,27 @@ label quest_production_line_intro_label(the_person):
     "At her desk, you notice [the_person.title] struggling a bit with some of her serum."
     $ the_person.draw_person()
     mc.name "Hello there, [the_person.title]. Are you doing okay over here?"
-    the_person.char "Hello [the_person.mc_title]. Yeah I guess, just struggling a bit with the small quantities of chemicals I am mixing up today."
-    the_person.char "You know, I was talking to my daddy last night about the work I'm doing here. He is a chemist at a big petrol company, and I was explaining to him the work I am doing."
+    the_person "Hello [the_person.mc_title]. Yeah I guess, just struggling a bit with the small quantities of chemicals I am mixing up today."
+    the_person "You know, I was talking to my daddy last night about the work I'm doing here. He is a chemist at a big petrol company, and I was explaining to him the work I am doing."
     mc.name "Oh yeah?"
-    the_person.char "Yeah, he said he was surprised at a couple of our methods. He tried to explain some of it to me but to be honest I didn't really understand it."
+    the_person "Yeah, he said he was surprised at a couple of our methods. He tried to explain some of it to me but to be honest I didn't really understand it."
     mc.name "Hmm, that sounds like it would be useful to have someone like that as a consultant."
-    the_person.char "Yeah, his work keeps him pretty busy. Hey, you know what? Why don't I call him? Maybe he would be willing to meet with you for coffee or something?"
+    the_person "Yeah, his work keeps him pretty busy. Hey, you know what? Why don't I call him? Maybe he would be willing to meet with you for coffee or something?"
     mc.name "That would be good. Any increase in efficiency is huge in maintaining profitability."
-    the_person.char "Ok! One second..."
+    the_person "Ok! One second..."
     $ the_person.draw_person(position = "back_peek")
     "[the_person.possessive_title] turns away from you and calls her dad."
-    the_person.char "Hey daddy! Yeah... yeah I know... Hey actually..."
+    the_person "Hey daddy! Yeah... yeah I know... Hey actually..."
     "She chats with her dad for a minute."
-    the_person.char "Oh wow! So tomorrow in the afternoon you could meet with him? Yeah I'll let him know!"
+    the_person "Oh wow! So tomorrow in the afternoon you could meet with him? Yeah I'll let him know!"
     $ the_person.draw_person( position = "stand4")
-    the_person.char "Okay, he said he actually has time tomorrow afternoon! He can meet with you and grab some coffee, maybe talk about some of the workflows and processes around here."
+    the_person "Okay, he said he actually has time tomorrow afternoon! He can meet with you and grab some coffee, maybe talk about some of the workflows and processes around here."
     mc.name "That sounds perfect."
-    the_person.char "Yeah... He's really smart! I'm not sure if any of his ideas will be useful or not, but if anyone can help, I'm sure it would be him!"
-    the_person.char "He said to share his contact info and to meet him over at the coffee shop. His name is [dad_name]."
-    "You get his contact info and put it in your phone, as well as add a reminder in your phone to go meet him."
+    the_person "Yeah... He's really smart! I'm not sure if any of his ideas will be useful or not, but if anyone can help, I'm sure it would be him!"
+    the_person "He said to share his contact info and to meet him over at the coffee shop. His name is [dad_name]."
+    "You get his contact info and put it in your phone."
     mc.name "Thank you."
-    the_person.char "No problem!"
+    the_person "No problem!"
     $ del dad_name
     $ quest_production_line().set_quest_flag(11)
     $ quest_production_line().quest_event_dict["initial_meeting_day"] = (day + 1)
@@ -212,11 +212,18 @@ label quest_production_line_intro_label(the_person):
     return
 
 label quest_production_line_coffee_reminder_label():
-    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
-    "An alarm on your phone is going off. You check it."
-    "Meet [dad_name] at coffee shop at the mall."
-    "If you are going to go meet with the chemist, do it after lunch. He should be at the mall."
-    $ del dad_name
+    $ the_person = quest_production_line_get_target()
+    "You receive a text message on your phone."
+    $ mc.having_text_conversation = the_person
+    the_person "Hey [the_person.mc_title], don't forget to meet my dad in the mall."
+    if mc.location == mall:
+        mc.name "Thanks, I'm already at the mall."
+    else:
+        mc.name "Thanks, I'm going over there right now."
+        $ mc.change_location(mall)
+        $ mc.location.show_background()
+    $ mc.having_text_conversation = None
+    "If you are going to go meet with the chemist, go to the business meeting."
     $ quest_production_line().set_quest_flag(21)
     $ mc.business.add_mandatory_crisis(quest_production_line_coffee_miss)
     return
@@ -302,20 +309,20 @@ label quest_production_line_after_raise_consult_label():
     $ batch_size_increase(increase_amount = 1)
     "A few minutes later, your phone is ringing again. Now it is [the_person.title]"
     mc.name "Hello?"
-    the_person.char "Hey! Have a sec?"
+    the_person "Hey! Have a sec?"
     mc.name "Of course."
-    the_person.char "I was just wondering... what are you doing tomorrow evening?"
+    the_person "I was just wondering... what are you doing tomorrow evening?"
     mc.name "Nothing as of now. Have something in mind?"
-    the_person.char "Well... as a matter of fact I do! I umm, could use some help, especially from a strong man such as you."
+    the_person "Well... as a matter of fact I do! I umm, could use some help, especially from a strong man such as you."
     mc.name "I'm listening."
-    the_person.char "I'm... moving! Into my own apartment! I have a ton of heavy stuff and I really need help! Daddy is too busy with work to help me..."
+    the_person "I'm... moving! Into my own apartment! I have a ton of heavy stuff and I really need help! Daddy is too busy with work to help me..."
     menu:
         "Help her":
             mc.name "That's okay, your other daddy can come give you a hand."
-            the_person.char "Ohh... my... other daddy? Will you come help me... daddy?"
+            the_person "Ohh... my... other daddy? Will you come help me... daddy?"
             mc.name "Anything for you baby girl."
             $ the_person.change_arousal(10)
-            the_person.char "Ohhh... wow... okay! Sounds good. I'll be expecting you tomorrow night then!"
+            the_person "Ohhh... wow... okay! Sounds good. I'll be expecting you tomorrow night then!"
             $ quest_production_line().quest_event_dict["moving_day"] = (day + 1)
             "You hang up the phone."
             "So... you're gonna be with [the_person.title] tomorrow, in her apartment."
@@ -325,7 +332,7 @@ label quest_production_line_after_raise_consult_label():
             $ mc.business.add_mandatory_crisis(quest_production_line_help_move)
         "Too busy":
             mc.name "I'm sorry, I won't be able to help then."
-            the_person.char "Damn... okay, I'm sure I'll be able to find someone."
+            the_person "Damn... okay, I'm sure I'll be able to find someone."
             "You hang up the phone."
             "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening help her move?"
             $ quest_production_line().set_quest_flag(69)
@@ -340,21 +347,21 @@ label quest_production_line_help_move_label():
     $ mc.location.show_background()
     $ the_person.draw_person()
     "When you show up, she greets you at the door."
-    the_person.char "Oh my god, thank you so much for coming!"
+    the_person "Oh my god, thank you so much for coming!"
     mc.name "It's my pleasure baby girl."
     $ the_person.change_arousal(10)
-    the_person.char "That's... I'm glad to hear that... d... d..."
+    the_person "That's... I'm glad to hear that... d... d..."
     if the_person.sluttiness < 20:
-        the_person.char "Sorry, I just, its so weird for someone else to call me that. Could you just stick with [the_person.title]?"
+        the_person "Sorry, I just, its so weird for someone else to call me that. Could you just stick with [the_person.title]?"
         mc.name "Certainly, if that is what you prefer."
     else:
         mc.name "Its okay, you can say it."
         "When she realizes that you are okay with it, she finally says it."
-        the_person.char "Daddy, I'm so glad you are here!"
+        the_person "Daddy, I'm so glad you are here!"
         $ the_person.draw_person(position = "kissing")
         "She wraps her arms around you and gives you a lingering hug."
         "Eventually, she lets go."
-    the_person.char "Okay... let's get to work!"
+    the_person "Okay... let's get to work!"
     $ clear_scene()
     "You spend about an hour helping [the_person.title] loading her things into a small rental trailer."
     "When you are done, you ride with her over to her new apartment."
@@ -375,46 +382,46 @@ label quest_production_line_help_move_label():
             pass
     "You take the water bottle out to [the_person.title]."
     $ the_person.draw_person(emotion = "happy")
-    the_person.char "Mmm, thanks!"
+    the_person "Mmm, thanks!"
     "She chugs the whole thing down."
     "You get back to work. At her direction you are stacking up boxes in appropriate areas of her one bedroom apartment."
     if the_person.sluttiness < 20:
-        the_person.char "That one goes in the bedroom."
+        the_person "That one goes in the bedroom."
         mc.name "Sure thing."
     else:
-        the_person.char "That one goes in my bedroom, daddy."
+        the_person "That one goes in my bedroom, daddy."
         mc.name "Sure thing baby girl."
         $ the_person.change_arousal(10)
         "You can definitely feel some sexual tension building with the way she is talking to you."
     "A couple hours later, the trailer is empty. Basic furniture is set up around [the_person.title]'s apartment, and there are large stacks of boxes in each room."
-    the_person.char "Oh my god, I can't believe it. We did it!"
+    the_person "Oh my god, I can't believe it. We did it!"
     mc.name "Thankfully you don't have too much stuff."
-    the_person.char "Yeah... this is it! My first place... all to myself!"
+    the_person "Yeah... this is it! My first place... all to myself!"
     $ lily_bedroom.show_background()
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of her bed. One of the few places in her apartment to sit, for now."
     if the_person.sluttiness < 20:
-        the_person.char "This has been a ton of work, but you have no idea how much I appreciate this."
+        the_person "This has been a ton of work, but you have no idea how much I appreciate this."
         mc.name "Of course. Always glad to help out."
-        $ the_person.change_stats(happiness = 10, love = 20, obedience = 20)
-        the_person.char "I really owe you one. I think I can take over from here though."
+        $ the_person.change_stats(happiness = 10, love = 5, obedience = 5)
+        the_person "I really owe you one. I think I can take over from here though."
         mc.name "You sure? I'd be glad to help you unpack some stuff."
         "She shakes her head."
-        the_person.char "Your enthusiasm is appreciated, but unnecessary."
+        the_person "Your enthusiasm is appreciated, but unnecessary."
         $ the_person.draw_person()
         "You stand up and get yourself together."
         "She walks you to her door."
-        the_person.char "Thank you again, for everything!"
+        the_person "Thank you again, for everything!"
         mc.name "You're welcome [the_person.title]. I'll see you at work?"
-        the_person.char "Yes Sir!"
+        the_person "Yes Sir!"
         $ quest_production_line().set_quest_flag(101)
         $ the_person.add_unique_on_room_enter_event(quest_production_line_daddy_title)
     else:
-        the_person.char "So... I was wondering something."
+        the_person "So... I was wondering something."
         mc.name "What might that be?"
-        the_person.char "Is... is it okay if I call you... daddy? From now on?"
+        the_person "Is... is it okay if I call you... daddy? From now on?"
         mc.name "I don't see why not. I've been called worse!"
-        the_person.char "Yeah! You remind me a lot of him, you know? And being away from him now... It's nice having you around."
+        the_person "Yeah! You remind me a lot of him, you know? And being away from him now... It's nice having you around."
         mc.name "As long as you don't mind if I reciprocate, Baby Girl."
         $ the_person.change_arousal(10)
         $ the_person.set_mc_title("Daddy")
@@ -423,51 +430,51 @@ label quest_production_line_help_move_label():
         "You notice she catches her breath when you say that. It is almost like she is getting excited."
         mc.name "You and your father... you umm, have a very special relationship... don't you?"
         if the_person.effective_sluttiness() > 40:  #She reveals her incest
-            the_person.char "That's... I mean... kind of private!"
+            the_person "That's... I mean... kind of private!"
             mc.name "It's ok, [the_person.title]. You can tell me."
             "You can see her defenses breaking down."
-            the_person.char "Oh god [the_person.mc_title], its like you see right through me..."
-            the_person.char "Its not what you think! Mom left us when I was really young. When I was growing, my dad threw himself into his work, and all his spare time he spent raising me."
-            the_person.char "He didn't have any time to himself. He didn't have time to date or meet anyone. He spent all his time with me. I love him so much."
-            the_person.char "And then it happened. I was older, and I was over at a friend's house. I'd told him I was going to spend the night there, but I decided to come home instead."
-            the_person.char "When I got home... he didn't hear me come in the door. He was in the living room on the computer, watching pornography. I know I should have looked away... but I just couldn't!"
-            the_person.char "When he realized I was home and watching... he tried to tell me to go to my room, but I just couldn't! It's not his fault mom ditched us! Every man has needs..."
-            the_person.char "I just wanted to take care of him... so... I did! And I don't regret it one bit!"
+            the_person "Oh god [the_person.mc_title], its like you see right through me..."
+            the_person "Its not what you think! Mom left us when I was really young. When I was growing, my dad threw himself into his work, and all his spare time he spent raising me."
+            the_person "He didn't have any time to himself. He didn't have time to date or meet anyone. He spent all his time with me. I love him so much."
+            the_person "And then it happened. I was older, and I was over at a friend's house. I'd told him I was going to spend the night there, but I decided to come home instead."
+            the_person "When I got home... he didn't hear me come in the door. He was in the living room on the computer, watching pornography. I know I should have looked away... but I just couldn't!"
+            the_person "When he realized I was home and watching... he tried to tell me to go to my room, but I just couldn't! It's not his fault mom ditched us! Every man has needs..."
+            the_person "I just wanted to take care of him... so... I did! And I don't regret it one bit!"
             mc.name "Just the one time?"
-            the_person.char "No... it's... we've been intimate... on multiple occasions."
-            the_person.char "But now, I've moved out and he has already started spending more time on social activities. He has even been on a couple of dates!"
-            the_person.char "I'm so proud to have him as my dad. But I always knew it wouldn't last forever, we both did."
-            the_person.char "So we both decided, we should stop doing sexual things with each other."
+            the_person "No... it's... we've been intimate... on multiple occasions."
+            the_person "But now, I've moved out and he has already started spending more time on social activities. He has even been on a couple of dates!"
+            the_person "I'm so proud to have him as my dad. But I always knew it wouldn't last forever, we both did."
+            the_person "So we both decided, we should stop doing sexual things with each other."
             "You take a moment to consider this revelation."
             mc.name "That's okay. I totally understand."
-            the_person.char "You do?"
+            the_person "You do?"
             mc.name "There are multiple ways of telling someone you love them. Some are more intimate than others. If it feels right, and both people consent, what's the harm?"
-            the_person.char "Yeah! Exactly! Not many people think the way that we do though."
-            $ the_person.change_stats(happiness = 20, love = 40, obedience = 40)
+            the_person "Yeah! Exactly! Not many people think the way that we do though."
+            $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
             $ the_person.draw_person()
             "She stands up."
-            the_person.char "That feels good... to get off my chest. You know? But still... I had sex with my dad, multiple times! And I liked it."
+            the_person "That feels good... to get off my chest. You know? But still... I had sex with my dad, multiple times! And I liked it."
             mc.name "So?"
-            the_person.char "Well... you're kind of my daddy now. Isn't that naughty?"
+            the_person "Well... you're kind of my daddy now. Isn't that naughty?"
             mc.name "I suppose..."
             $ the_person.draw_person(position = "kissing")
             "She wraps her arms around you. She whispers in your ear."
-            the_person.char "Do you think you could... spank me? For a bit? Please [the_person.mc_title]?"
+            the_person "Do you think you could... spank me? For a bit? Please [the_person.mc_title]?"
             mc.name "Oh [the_person.title]... you HAVE been bad..."
             "Your hand drops to her ass. You give it a squeeze."
             $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
             $ the_person.personality = get_daddy_girl_personality(the_person)
             call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_01
             $ the_person.increase_opinion_score("being submissive")
-            the_person.char "Oh god... that was wonderful [the_person.mc_title]."
+            the_person "Oh god... that was wonderful [the_person.mc_title]."
             $ the_person.draw_person()
             "You stand up and get yourself together."
             $ the_person.outfit.add_upper(bath_robe.get_copy(), [1, .73, .85, .9], "Pattern_1", [.95, .95, .95, .9])
             $ the_person.draw_person()
             "She quickly puts on a robe and walks you to her door."
-            the_person.char "Thank you again, for everything!"
+            the_person "Thank you again, for everything!"
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
-            the_person.char "Yes Sir!"
+            the_person "Yes Sir!"
             $ clear_scene()
             "As you turn from her door, you process all the events of the last few days."
             "One of your employees, recently had an amicable breakup... with her dad? And now she calls you Daddy... And she likes to get spanked."
@@ -475,16 +482,16 @@ label quest_production_line_help_move_label():
             "While it is unlikely this relationship is going to last, you decide to make sure you have as much fun with it as you can while it lasts."
             $ quest_production_line().set_quest_flag(103)
         else:
-            the_person.char "I'm sorry, that's kind of... private!"
+            the_person "I'm sorry, that's kind of... private!"
             mc.name "That's okay. I understand."
-            the_person.char "Thank... Sometime, maybe we can talk about it... but not right now!"
-            $ the_person.change_stats(happiness = 10, love = 30, obedience = 40)
+            the_person "Thank... Sometime, maybe we can talk about it... but not right now!"
+            $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
             $ the_person.draw_person()
             "You stand up and get yourself together."
             "She walks you to her door."
-            the_person.char "Thank you again, for everything!"
+            the_person "Thank you again, for everything!"
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
-            the_person.char "Yes Sir!"
+            the_person "Yes Sir!"
             $ quest_production_line().set_quest_flag(102)
             $ the_person.add_unique_on_room_enter_event(quest_production_line_daddy_title)
     $ quest_production_line().quest_completed()
@@ -492,15 +499,15 @@ label quest_production_line_help_move_label():
 
 label quest_production_line_daddy_title_label(the_person): #This label is activated if the MC does not gain "daddy" status in the quest but still finished with a good end.
     $ the_person.draw_person()
-    the_person.char "Hey there [the_person.mc_title]... It's good to see you."
-    the_person.char "Do you have a minute?"
+    the_person "Hey there [the_person.mc_title]... It's good to see you."
+    the_person "Do you have a minute?"
     mc.name "Of course."
-    the_person.char "So... I was wondering something."
+    the_person "So... I was wondering something."
     mc.name "What might that be?"
-    the_person.char "Since I've moved into my own place, it has been great, but, I haven't seen my daddy in weeks now. I miss him a lot."
-    the_person.char "Is... is it okay if I call you... daddy? From now on?"
+    the_person "Since I've moved into my own place, it has been great, but, I haven't seen my daddy in weeks now. I miss him a lot."
+    the_person "Is... is it okay if I call you... daddy? From now on?"
     mc.name "I don't see why not. I've been called worse!"
-    the_person.char "Yeah! You remind me a lot of him, you know? And being away from him now... It's nice having you around."
+    the_person "Yeah! You remind me a lot of him, you know? And being away from him now... It's nice having you around."
     mc.name "As long as you don't mind if I reciprocate, Baby Girl."
     $ the_person.change_arousal(10)
     $ the_person.set_mc_title("Daddy")
@@ -509,14 +516,14 @@ label quest_production_line_daddy_title_label(the_person): #This label is activa
     "You notice she catches her breath when you say that. It is almost like she is getting excited."
     $ the_person.draw_person(position = "kissing")
     "She wraps her arms around you. She whispers in your ear."
-    the_person.char "Do you think you could... spank me? For a bit? Please [the_person.mc_title]?"
+    the_person "Do you think you could... spank me? For a bit? Please [the_person.mc_title]?"
     mc.name "Oh [the_person.title]... you HAVE been bad..."
     "Your hand drops to her ass. You give it a squeeze."
     $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
     $ the_person.personality = get_daddy_girl_personality(the_person)
     call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_02
     $ the_person.increase_opinion_score("being submissive")
-    the_person.char "Oh god... that was wonderful [the_person.mc_title]."
+    the_person "Oh god... that was wonderful [the_person.mc_title]."
     $ the_person.unlock_spanking()
     $ the_person.draw_person()
     return
@@ -543,61 +550,61 @@ label princess_greetings(the_person):
     if the_person.sluttiness > 40:
         if renpy.random.randint(0,2) == 1: # only bring up spanking once in a while
             if the_person.event_triggers_dict.get("spank_level", 0) < 2: #Flawless
-                the_person.char "Hi [the_person.mc_title]! I've been so good lately!"
+                the_person "Hi [the_person.mc_title]! I've been so good lately!"
                 "She lowers her voice a little."
-                the_person.char "But maybe a little too good... Are you sure I don't need a spanking?"
+                the_person "But maybe a little too good... Are you sure I don't need a spanking?"
             elif the_person.event_triggers_dict.get("spank_level", 0) < 6: #Flawless
-                the_person.char "Hi [the_person.mc_title]! I'm trying to be good!'"
+                the_person "Hi [the_person.mc_title]! I'm trying to be good!'"
                 "She lowers her voice a little."
-                the_person.char "I'm still a little sore, but if you need to spank me, I understand!"
+                the_person "I'm still a little sore, but if you need to spank me, I understand!"
             else:
-                the_person.char "Hi [the_person.mc_title]! I'm being good I promise!"
-                the_person.char "I'm still sore, I swear I don't need a spanking!"
+                the_person "Hi [the_person.mc_title]! I'm being good I promise!"
+                the_person "I'm still sore, I swear I don't need a spanking!"
             mc.name "Hello [the_person.title]. I'll be the judge of when you need spanking."
         else:
-            the_person.char "Hi [the_person.mc_title]!"
+            the_person "Hi [the_person.mc_title]!"
     elif the_person.love < 0:
-        the_person.char "Ugh, what do you want?"
+        the_person "Ugh, what do you want?"
     elif the_person.happiness < 90:
-        the_person.char "Hey..."
+        the_person "Hey..."
     else:
         if the_person.sluttiness > 60:
             if the_person.obedience > 130:
-                the_person.char "Hello [the_person.mc_title], it's good to see you."
+                the_person "Hello [the_person.mc_title], it's good to see you."
             else:
-                the_person.char "Hey there handsome, feeling good?"
+                the_person "Hey there handsome, feeling good?"
         else:
             if the_person.obedience > 130:
-                the_person.char "Hello [the_person.mc_title]."
+                the_person "Hello [the_person.mc_title]."
             else:
-                the_person.char "Hey there!"
+                the_person "Hey there!"
     return
 
 label princess_clothing_accept(the_person):
     if the_person.obedience > 130:
-        the_person.char "You want me to wear this [the_person.mc_title]? Anything for you!"
+        the_person "You want me to wear this [the_person.mc_title]? Anything for you!"
     else:
-        the_person.char "Oh [the_person.mc_title]! Are you sure I can wear this out of the house?"
+        the_person "Oh [the_person.mc_title]! Are you sure I can wear this out of the house?"
     return
 
 label princess_clothing_reject(the_person):
-    the_person.char "I want to wear this for you [the_person.mc_title], but I'm not sure I can!"
+    the_person "I want to wear this for you [the_person.mc_title], but I'm not sure I can!"
     return
 
 label princess_sex_accept(the_person):
     if the_person.sluttiness > 70:
-        the_person.char "Oh [the_person.mc_title]! I'll do ANYTHING for you."
+        the_person "Oh [the_person.mc_title]! I'll do ANYTHING for you."
     else:
-        the_person.char "Okay [the_person.mc_title], we can give that a try."
+        the_person "Okay [the_person.mc_title], we can give that a try."
     return
 
 label princess_sex_obedience_accept(the_person):
-    the_person.char "I'll do it, but only because it's for you [the_person.mc_title]."
+    the_person "I'll do it, but only because it's for you [the_person.mc_title]."
 
     return
 
 label princess_cum_face(the_person):
-    the_person.char "Oh [the_person.mc_title], I look cute covered in your cum?"
+    the_person "Oh [the_person.mc_title], I look cute covered in your cum?"
     if the_person.sluttiness > 60:
         "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
     else:
@@ -607,16 +614,16 @@ label princess_cum_face(the_person):
 label princess_cum_vagina(the_person):
     if mc.condom:
         if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
-            the_person.char "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise not to use a condom next time?"
+            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise not to use a condom next time?"
         else:
-            the_person.char "[the_person.mc_title]... I can feel how warm your cum is through the condom. It feels nice."
+            the_person "[the_person.mc_title]... I can feel how warm your cum is through the condom. It feels nice."
 
     else: #TODO this probably hchanges with pregnancy stuff. change it later.
-        the_person.char "Your cum is so nice and warm [the_person.mc_title]!"
-        the_person.char "You can fill me up anytime you want."
+        the_person "Your cum is so nice and warm [the_person.mc_title]!"
+        the_person "You can fill me up anytime you want."
     return
 
 label princess_suprised_exclaim(the_person):
     $rando = renpy.random.choice(["Daddy!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit Daddy!", "Fucking shit!"])
-    the_person.char "[rando]"
+    the_person "[rando]"
     return

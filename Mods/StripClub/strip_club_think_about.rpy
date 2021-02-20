@@ -80,20 +80,20 @@ label strip_club_offer_expire_label(): # Event trigger with timer
 
 label starbuck_talk_about_strip_club_label(the_person): # On_enter event
     $ the_person.draw_person(emotion = "happy")
-    the_person.char "[the_person.mc_title], nice to see you! You have no idea what just happened five minutes ago!"
-    the_person.char "I got a phone call from the bank. Looks like some strip club has been foreclosed for some unpaid taxes, and they asked me if I was interested in buying it!"
-    the_person.char "They called ME because I had some kind of 'business affinity' they said!"
+    the_person "[the_person.mc_title], nice to see you! You have no idea what just happened five minutes ago!"
+    the_person "I got a phone call from the bank. Looks like some strip club has been foreclosed for some unpaid taxes, and they asked me if I was interested in buying it!"
+    the_person "They called ME because I had some kind of 'business affinity' they said!"
     mc.name "Funny! Yeah, those pencil pushers may know about money, but they know nothing about business."
-    the_person.char "Anyway, they know my financial situation, so if I wanted to buy it, I just have to take out another mortgage on my house."
+    the_person "Anyway, they know my financial situation, so if I wanted to buy it, I just have to take out another mortgage on my house."
     mc.name "Right, the business here isn't bad and it could turn out to be a good investment, but you should consider it carefully."
     $ the_person.draw_person(emotion = "sad")
-    the_person.char "[the_person.mc_title], you know I opened this shop because it was my husband's and my dream, to help people be more adventurous and have fun in the bedroom..."
-    the_person.char "When he died I decided to chase our dream, but a strip club is something completely different."
-    the_person.char "Look here [the_person.mc_title], they sent me all the required documents by email..."
+    the_person "[the_person.mc_title], you know I opened this shop because it was my husband's and my dream, to help people be more adventurous and have fun in the bedroom..."
+    the_person "When he died I decided to chase our dream, but a strip club is something completely different."
+    the_person "Look here [the_person.mc_title], they sent me all the required documents by email..."
     $ the_person.draw_person(emotion = "happy")
-    the_person.char "YOU should be the one buying it! You're young and full of energy, and the place surroundings could be very 'stimulating'!"
+    the_person "YOU should be the one buying it! You're young and full of energy, and the place surroundings could be very 'stimulating'!"
     mc.name "Actually [the_person.title], my company already gives me enough troubles and requires all my attention, I don't think..."
-    the_person.char "Yeah, yeah, I get you. Anyway, I'll forward you the email with the papers I got from the bank. Promise me that you'll think about it, okay?"
+    the_person "Yeah, yeah, I get you. Anyway, I'll forward you the email with the papers I got from the bank. Promise me that you'll think about it, okay?"
     mc.name "I suppose it isn't worth arguing with you. I'll have my accountant take a look at them."
     "After a few second your phone notifies you that you got an email from [the_person.title]."
     $ set_strip_club_foreclosed_stage(2)
@@ -125,14 +125,14 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
     $ mc.business.event_triggers_dict["strip_club_decision_day"] = day
     $ the_person.draw_person(emotion = "happy", position = "stand4")
     mc.name "Hi [the_person.title]! I think I'm going to buy the strip club as you suggested, can you call your contact at the bank?"
-    the_person.char "Really [the_person.mc_title]? Wow, I'm so exited and happy for you! Sure, let's call him immediately."
+    the_person "Really [the_person.mc_title]? Wow, I'm so exited and happy for you! Sure, let's call him immediately."
     "[the_person.title] takes out her phone, a minute later she is talking with a bank employee and after a few minutes the call ends."
-    the_person.char "Everything's set up [the_person.mc_title]! They await your money transfer, after that they'll prepare all the documents for your signature."
+    the_person "Everything's set up [the_person.mc_title]! They await your money transfer, after that they'll prepare all the documents for your signature."
     menu:
         "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.funds > 50000:
             "You make a call and set up the money transfer from your company's account."
             $ mc.business.change_funds(-50000)
-            the_person.char "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
+            the_person "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
             call starbuck_celebration_strip_event(the_person) from _call_starbuck_celebration_strip_event_1
             call starbuck_name_the_new_club_label(the_person) from _call_starbuck_name_the_new_club_label_1
         "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
@@ -140,10 +140,10 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
         "Change your mind":
             mc.name "Actually $50,000 is a lot of money, perhaps it's better to a few days so I can think it over..."
             $ the_person.draw_person(position = "stand4")
-            the_person.char "I totally understand, [the_person.mc_title]... I think you should take your time."
+            the_person "I totally understand, [the_person.mc_title]... I think you should take your time."
             #TODO Add offer end
             $ ran_num = strip_club_buy_days_left()
-            the_person.char "The bank said you have [ran_num] days left to decide, come see me again in a few days, if you've change your mind."
+            the_person "The bank said you have [ran_num] days left to decide, come see me again in a few days, if you've change your mind."
             $ set_strip_club_foreclosed_stage(3) # stay at stage 3 with updated last action day
             $ add_talk_again_buying_club_starbuck_action()
             $ add_strip_club_offer_expire_action()
@@ -153,21 +153,21 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
 
 label talk_again_buying_club_starbuck_label(the_person):
     $ the_person.draw_person(emotion = "happy", position = "stand3")
-    the_person.char "Hey [the_person.mc_title], did you change your mind about buying the strip club?"
+    the_person "Hey [the_person.mc_title], did you change your mind about buying the strip club?"
     mc.name "Hi [the_person.title], I've had some time to think about it."
     menu:
         "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.funds > 50000:
             "You make a call and set up the money transfer from your company's account."
             $ set_strip_club_foreclosed_stage(4)
             $ mc.business.change_funds(-50000)
-            the_person.char "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
+            the_person "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
             call starbuck_celebration_strip_event(the_person) from _call_starbuck_celebration_strip_event_2
             call starbuck_name_the_new_club_label(the_person) from _call_starbuck_name_the_new_club_label_2
         "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
             pass
         "Need more time":
             mc.name "But I'm still not sure, I'm going to think about it a little while longer."
-            the_person.char "Come see me again in a few days when you have made your decision."
+            the_person "Come see me again in a few days when you have made your decision."
             $ set_strip_club_foreclosed_stage(3) # stay at stage 3 with updated last action day
             $ add_talk_again_buying_club_starbuck_action()
 
@@ -177,12 +177,12 @@ label talk_again_buying_club_starbuck_label(the_person):
 label starbuck_celebration_strip_event(the_person):
     "[the_person.title] comes closer to you..."
     $ the_person.draw_person(emotion = "happy", position = "stand2")
-    the_person.char "Maybe I can show you my skills as 'exotic dancer' too... What do you think?"
+    the_person "Maybe I can show you my skills as 'exotic dancer' too... What do you think?"
     menu:
         "Accept":
             mc.name "You know I can't say no to such an offer."
             $ the_person.draw_person(emotion = "happy", position = "back_peek")
-            the_person.char "Okay, [the_person.mc_title], follow me to the backroom..."
+            the_person "Okay, [the_person.mc_title], follow me to the backroom..."
             $ the_person.draw_person(position = "walking_away")
             $ count = mc.location.get_person_count() - 1
             "[the_person.title] starts to move towards the backroom..."
@@ -190,16 +190,16 @@ label starbuck_celebration_strip_event(the_person):
                 "Follow her\n{size=22}No interruptions{/size}":
                     "You follow [the_person.title] into the backroom, she sets up her phone to play some sexy music in the background."
                     $ the_person.draw_person(emotion = "happy", position = "back_peek")
-                    the_person.char "Are you ready to fill my panties with cash?"
+                    the_person "Are you ready to fill my panties with cash?"
                     "You pull out some cash and wave it at her with a smile."
                 "Stop her\n{size=22}[count] people watching{/size}":
                     mc.name "Generally, strippers perform onstage for a crowd... Don't tell me you're shy?"
                     $ the_person.draw_person(emotion = "happy", position = "back_peek")
                     "[the_person.possessive_title] gets what you mean and accepts your challenge."
                     if count > 0:
-                        the_person.char "Okay, I don't care if my customers see me strip, let them enjoy the show."
+                        the_person "Okay, I don't care if my customers see me strip, let them enjoy the show."
                     else:
-                        the_person.char "Okay, I don't care if someone enters the shop in the next few minutes, let them enjoy the show."
+                        the_person "Okay, I don't care if someone enters the shop in the next few minutes, let them enjoy the show."
                     $ the_person.change_arousal(4 * (the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
                     $ the_person.change_love(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive"))
                     $ the_person.change_slut_temp(2 *(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
@@ -223,7 +223,7 @@ label starbuck_celebration_strip_event(the_person):
                 if the_person.outfit.tits_visible():
                     "[the_person.title] takes off her [the_item.display_name] slowly, teasing you as she frees her tits."
                     if the_person.has_taboo("bare_tits"):
-                        the_person.char "God, it's the first time I'm doing this, but you know what? I like it."
+                        the_person "God, it's the first time I'm doing this, but you know what? I like it."
                         $ the_person.break_taboo("bare_tits")
                 else:
                     "[the_person.title] takes off her [the_item.display_name]."
@@ -242,7 +242,7 @@ label starbuck_celebration_strip_event(the_person):
                 if the_person.outfit.vagina_visible():
                     "[the_person.possessive_title] peels off her [the_item.display_name], slowly revealing her cute pussy."
                     if the_person.has_taboo("bare_pussy"):
-                        the_person.char "Am I really doing this? Am I, Yes, I am!"
+                        the_person "Am I really doing this? Am I, Yes, I am!"
                         "[the_person.title] takes a deep breath and continue to remove her clothes."
                         $ the_person.break_taboo("bare_pussy")
                 else:
@@ -268,7 +268,7 @@ label starbuck_name_the_new_club_label(the_person):
     $ strip_club_owner = mc.name
     $ remove_mandatory_crisis_list_action("strip_club_offer_expire_label") # remove expiry event
 
-    the_person.char "Just a second, [the_person.mc_title]. What will you call your new strip club?"
+    the_person "Just a second, [the_person.mc_title]. What will you call your new strip club?"
 
     $ name_string = str(renpy.input("New Strip Club Name: ", strip_club_owner + "'s Gentlemen's Club"))
     $ strip_club.name = name_string
@@ -277,9 +277,9 @@ label starbuck_name_the_new_club_label(the_person):
     "The strip club name now is [name_string]. You pick up your phone and call [cousin.title]."
 
     mc.name "Hey [cousin.title], meet me tomorrow evening at the old Strip Club."
-    cousin.char "What? Why?"
+    cousin "What? Why?"
     mc.name "No questions now, just do it."
-    cousin.char "Fine, I'll be there."
+    cousin "Fine, I'll be there."
 
     $ add_cousin_meet_at_strip_club()
     $ set_strip_club_foreclosed_stage(4)

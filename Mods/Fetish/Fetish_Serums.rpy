@@ -1,3 +1,17 @@
+init -3 python:
+    FETISH_BASIC_OPINION_LIST = ["giving handjobs", "giving tit fucks", "being fingered", "kissing", "masturbating", "big dicks", "getting head", "lingerie"]
+    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "anal creampies", "being submissive", "showing her ass"]
+    FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "taking control", "anal creampies", "creampies"]
+    FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex", "being submissive"]
+    FETISH_EXHIBITION_OPINION_LIST = ["public sex", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "skimpy outfits", "skimpy uniforms", "sex standing up" ]
+
+    #relation fetishes (impact relationship with people) still need to workout how to make this happen
+    FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
+    # these fetishes could be used for 'slave' / 'dominatrix'
+    FETISH_BDSM_OPTION_LIST = ["being submissive", "taking control"]
+
+    FETISH_SERUM_TRIGGER_VALUE = 20
+
 init -2 python:
     def get_suggest_tier(person):   #Returns a value of 0-3 depending on the person's suggestibility.
         if person.suggestibility < 15:
@@ -25,270 +39,543 @@ init -2 python:
         else:
             return 5
 
+
 init -1 python:
-    def increase_fetish_sexy_opinion(person, fetish_list, max_score):
-        random_fetish_key = get_random_from_list(fetish_list)
-        person.increase_opinion_score(random_fetish_key, max_score)
+
+    def fetish_serum_unlock_count():
+        return mc.business.event_triggers_dict.get("fetish_serum_count", 0)
+
+    def start_anal_fetish_quest(person):
+        if has_started_anal_fetish(person):
+            return False
+
+        if person is lily:
+            mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
+            return True
+        elif person is mom:
+            mc.business.mandatory_crises_list.append(anal_fetish_mom_intro)
+            return True
+        elif person is aunt and False:
+            pass
+        elif person is cousin and False:
+            pass
+        elif person is starbuck and starbuck.shop_investment_rate >= 6.0:
+            mc.business.mandatory_crises_list.append(anal_fetish_starbuck_intro)
+            return True
+        elif person is stephanie:
+            mc.business.mandatory_crises_list.append(anal_fetish_stephanie_intro)
+            return True
+        elif person is emily and False:
+            pass
+        elif person is christina and False:
+            pass
+        elif person is sarah and False:
+            pass
+        elif person is salon_manager and False:
+            pass
+        elif person is erica and False:
+            pass
+        elif "candace" in globals() and person is candace and False:
+            pass
+        elif person is ashley and False:
+            pass
+        elif person is alexia and False:
+            pass
+        elif person.is_employee():
+            anal_fetish_employee_intro = Fetish_Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "anal")
+            mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
+            return True
+        elif person.is_family():
+            person.add_unique_on_room_enter_event(anal_fetish_family_intro)
+            return True
+        else:
+            person.add_unique_on_talk_event(anal_fetish_generic_intro)
+            return True
+        return False
+
+    def start_breeding_fetish_quest(person):
+        #Determine who it is, then add the appropriate quest.
+        if persistent.pregnancy_pref == 0:
+            return False
+        if has_started_breeding_fetish(person):
+            return False
+
+        if person is mom:
+            if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
+                return True
+        elif person is lily:
+            lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
+            return True
+        elif person is aunt and False:
+            pass
+        elif person is cousin and False:
+            pass
+        elif person is stephanie:
+            if breeding_fetish_stephanie_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_stephanie_intro)
+                return True
+        elif person is emily and False:
+            pass
+        elif person is christina and False:
+            pass
+        elif person is starbuck:
+            if breeding_fetish_starbuck_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_starbuck_intro)
+                return True
+        elif person is sarah:
+            if breeding_fetish_sarah_intro not in mc.business.mandatory_morning_crises_list:
+                mc.business.mandatory_morning_crises_list.append(breeding_fetish_sarah_intro)
+                return True
+        elif person is salon_manager and False:
+            pass
+        elif person is erica and False:
+            pass
+        elif "candace" in globals() and person is candace:
+            candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
+            return True
+        elif person is ashley and False:
+            pass
+        elif person is alexia and False:
+            pass
+        elif person.is_employee():
+            breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "breeding")
+            mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
+            return True
+        elif person.is_family():
+            person.add_unique_on_room_enter_event(breeding_fetish_family_intro)
+            return True
+        else:
+            person.add_unique_on_talk_event(breeding_fetish_non_employee_intro)
+            return True
+        return False
+
+    def start_cum_fetish_quest(person):
+        if has_started_cum_fetish(person):
+            return False
+
+        if person is lily:
+            mc.business.mandatory_crises_list.append(cum_fetish_lily_intro)
+            return True
+        elif person is mom:
+            mc.business.mandatory_crises_list.append(cum_fetish_mom_intro)
+            return True
+        elif person is aunt:
+            person.add_unique_on_room_enter_event(cum_fetish_rebecca_intro)
+            return True
+        elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality and False:
+            pass
+        elif person is sarah:
+            mc.business.mandatory_crises_list.append(cum_fetish_sarah_intro)
+            return True
+        elif person.is_employee():
+            cum_fetish_employee_intro = Fetish_Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "cum")
+            mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)
+            return True
+        elif person.is_family():
+            person.add_unique_on_room_enter_event(cum_fetish_family_intro)
+            return True
+        else:
+            cum_fetish_generic_intro = Fetish_Action("Someone needs cum", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", args = person, priority = 10, fetish_type = "cum")
+            mc.business.add_mandatory_crisis(cum_fetish_generic_intro)
+            return True
+        return False
+
+    def start_exhibition_fetish_quest(person):
+        if has_started_breeding_fetish(person):
+            return False
+
+        return False #None of them are written yet
+
+    def fetish_serum_increase_opinion(opinion_list, max_new_score, person, add_to_log = False): #WE purposefully increase a score EVERY time this function is used instead of RNG
+        avail_opinions = [x for x in opinion_list if person.get_opinion_score(x) < max_new_score]
+        if person.is_dominant() and "being submissive" in avail_opinions:   # prevent dominant person from becoming submissive
+            avail_opinions.remove("being submissive")
+        if avail_opinions:
+            person.increase_opinion_score(get_random_from_list(avail_opinions), max_value = max_new_score, add_to_log = add_to_log)
+            return True #Return true if we increased an opinion
+        return False
+
+    def fetish_serum_calculate_completion(person, serum_tag):
+        counter = person.event_triggers_dict.get(serum_tag, 0)
+        return __builtin__.round((counter / float(FETISH_SERUM_TRIGGER_VALUE)) * 100, 1)
+
+    def fetish_serum_increase_counter(person, serum_tag):
+        person.event_triggers_dict[serum_tag] = person.event_triggers_dict.get(serum_tag, 0) + get_suggest_tier(person) + 1
         return
 
-    def fetish_basic_function_on_turn(person, add_to_log): #Developes basic sexual desires based on suggestibility. At low tiers, turns hates to neutral.
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        fetish_random_roll_2 = renpy.random.randint(0,100)
+    def fetish_serum_roll_fetish_chance(opinion_list, person):
+        fetish_odds = (get_suggest_tier(person) * 20) #Up to 60 points based on suggestibility
+        opinion_modifier = sum([(person.get_opinion_score(x) * 20) for x in opinion_list]) / __builtin__.len(opinion_list)
+        return fetish_odds + int(opinion_modifier)
 
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Foreplay", 2 + tier)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_BASIC_OPINION_LIST, tier - 1)
+    def fetish_basic_function_on_apply(person, add_to_log):
+        person.event_triggers_dict["nano_bots_f"] = False
         return
 
-    def fetish_exhibition_on_turn(person, add_to_log):
-        fetish_random_roll_2 = renpy.random.randint(0,100)
-
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_EXHIBITION_OPINION_LIST, tier - 1)
+    def fetish_basic_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_f", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_fc")) + "%", "float_text_blue")
         return
 
-    def fetish_oral_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        fetish_random_roll_2 = renpy.random.randint(0,100)
+    def fetish_basic_function_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_f", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Oral", 2 + tier)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_ORAL_OPINION_LIST, tier - 1)
-        return
+        fetish_serum_increase_counter(person, "nano_bots_fc")
 
-    def fetish_vaginal_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        fetish_random_roll_2 = renpy.random.randint(0,100)
-
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Vaginal", 2 + tier)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_VAGINAL_OPINION_LIST, tier - 1)
-
-        if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if person.event_triggers_dict.get("nano_bots_fc", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
-        if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("vaginal sex") >= 2:
-            if person.sluttiness >= 80 and not person.has_role(vaginal_fetish_role):
-                if SB_get_fetish_count(person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Trigger vaginal fetish " + person.name)
-                    if person is mom:
-                        add_sb_fetish_mom_vaginal_event()
-                    elif person is lily:
-                        add_sb_fetish_lily_vaginal_event()
-                    else:
-                        add_sb_fetish_vaginal_crisis(person)
+        person.event_triggers_dict["nano_bots_fc"] = 0 # reset counter
+        person.event_triggers_dict["nano_bots_f"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+            person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
+
+        if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+        return
+
+    def fetish_anal_function_on_apply(person, add_to_log):
+        person.event_triggers_dict["nano_bots_a"] = False
+        return
+
+    def fetish_anal_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_a", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " anal proclivity Bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ac")) + "%", "float_text_blue")
         return
 
     def fetish_anal_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        fetish_random_roll_2 = renpy.random.randint(0,100)
+        if person.event_triggers_dict.get("nano_bots_a", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Anal", 2 + tier)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_ANAL_OPINION_LIST, tier - 1)
+        fetish_serum_increase_counter(person, "nano_bots_ac")
 
-        if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if person.event_triggers_dict.get("nano_bots_ac", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
-        if tier >= 3 and person.sex_skills["Anal"] >= 5 and person.get_opinion_score("anal sex") >= 2:
-            if person.sluttiness >= 90 and not person.has_role(anal_fetish_role):
-                if SB_get_fetish_count(person) < store.max_fetishes_per_person:
-                    # renpy.say("", "Trigger anal fetish " + person.name)
-                    if person is lily:
-                        add_SB_lily_anal_dp_fetish_event()
-                    elif person is mom:
-                        mom_weekly_pay = exists_in_mandatory_morning_crisis_list("mom_weekly_pay_label")
-                        if mom_weekly_pay: # replace default mom weekly pay with new event
-                            # renpy.say("", "Replacing default mom weekly pay event")
-                            mc.business.mandatory_morning_crises_list.remove(mom_weekly_pay)
-                            add_mom_anal_fetish_event()
-                    elif person is starbuck:
-                        if starbuck.shop_investment_rate == 6.0:
-                            add_sb_starbuck_anal_intro_event()
-                    elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality:
-                        add_stephanie_anal_fetish_action()
-                    elif person.is_employee():
-                        add_sb_fetish_anal_crisis(person)
+        person.event_triggers_dict["nano_bots_ac"] = 0 # reset counter
+        person.event_triggers_dict["nano_bots_a"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+            person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
+            person.change_obedience(1, add_to_log = True)
+
+        if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " anal proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+
+        if is_anal_fetish_unlocked():
+            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
+                if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
+                    if start_anal_fetish_quest(person):
+                        person.event_triggers_dict["anal_fetish_start"] = True
+                        #TODO some kind of test here to indicate to the player that their anal quest has started
                     else:
-                        add_sb_fetish_anal_crisis_non_employee(person)
+                        #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+                        pass
         return
 
-    def fetish_cum_function_on_turn(person, add_to_log):
-        fetish_random_roll_2 = renpy.random.randint(0,100)
+    def fetish_breeding_function_on_apply(person, add_to_log):
+        person.event_triggers_dict["nano_bots_b"] = False
+        return
 
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_CUM_OPINION_LIST,  tier - 1)
-
-        if SB_FETISH_EVENT_ACTIVE(): # quick exit fetish event is active, so skip check
-            return
-
-        if tier >= 3 and person.sex_skills["Oral"] >= 4:
-            if person.sluttiness >= 90 and SB_get_cum_score(person) >= 8:
-                # only allow one cum fetish either internal or external
-                if not (person.has_role(cum_external_role) or person.has_role(cum_internal_role)):
-                    if SB_get_fetish_count(person) < store.max_fetishes_per_person:
-                        # renpy.say("", "Trigger cum fetish " + person.name)
-                        if person is lily:
-                            add_sb_fetish_lily_cum_event()
-                        elif person is mom:
-                            add_sb_fetish_mom_cum_event()
-                        elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality:
-                            add_sb_fetish_stephanie_cum_event()
-                        elif person.is_employee():
-                            add_sb_fetish_cum_crisis(person)
-                        else:
-                            add_sb_fetish_cum_crisis_non_employee(person)
+    def fetish_breeding_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_b", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " reproduction proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_bc")) + "%", "float_text_blue")
         return
 
     def fetish_breeding_function_on_turn(person, add_to_log):
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        fetish_random_roll_2 = renpy.random.randint(0,100)
+        if person.event_triggers_dict.get("nano_bots_b", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
-        tier = get_suggest_tier(person)
-        if fetish_random_roll_1 < 10 + (tier * 5):
-            person.increase_sex_skill("Vaginal", 2 + tier)
-        if fetish_random_roll_2 < 25 + (tier * 5):
-            increase_fetish_sexy_opinion(person, FETISH_BREEDING_OPINION_LIST, tier - 1)
+        fetish_serum_increase_counter(person, "nano_bots_bc")
 
-        if persistent.pregnancy_pref == 0:
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if person.event_triggers_dict.get("nano_bots_bc", 0) < FETISH_SERUM_TRIGGER_VALUE:
             return
 
-        if SB_get_breeding_score(person) >= 5 and person.on_birth_control:
+        person.event_triggers_dict["nano_bots_bc"] = 0 # reset counter
+        person.event_triggers_dict["nano_bots_b"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5):
+            person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
+            person.change_happiness(1, add_to_log = True)
+
+        if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " reproduction proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+
+        if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
+            return
+
+        # going off birth-control
+        if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) >= 50 and person.on_birth_control:
             person.on_birth_control = False
             person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
-        if persistent.pregnancy_pref > 0:
-            if tier >= 3 and person.sex_skills["Vaginal"] >= 5 and person.get_opinion_score("bareback sex") >= 2:
-                if not (person.has_role(breeding_fetish_role)):
-                    if person.sluttiness >= 80 and SB_get_breeding_score(person) >= 8:
-                        if SB_get_fetish_count(person) < store.max_fetishes_per_person:
-                            start_breeding_fetish_quest(person) #Breeding quest manages who can get teh quest and conditions around it
+        if is_breeding_fetish_unlocked():
+            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
+                if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
+                    if start_breeding_fetish_quest(person):
+                        person.event_triggers_dict["breeding_fetish_start"] = True
+                        person.on_birth_control = False
+                        #TODO some kind of test here to indicate to the player that their breeding quest has started
+                    else:
+                        #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+                        pass
         return
 
+    def fetish_cum_function_on_apply(person, add_to_log):
+        person.event_triggers_dict["nano_bots_c"] = False
+        return
+
+    def fetish_cum_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_c", False) == False: # no trigger, report progress
+            mc.log_event(person.title + " semen proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_cc")) + "%", "float_text_blue")
+        return
+
+    def fetish_cum_function_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_c", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        fetish_serum_increase_counter(person, "nano_bots_cc")
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if person.event_triggers_dict.get("nano_bots_cc", 0) < FETISH_SERUM_TRIGGER_VALUE:
+            return
+
+        person.event_triggers_dict["nano_bots_cc"] = 0 # reset counter
+        person.event_triggers_dict["nano_bots_c"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+            person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
+        if person.sluttiness < person.suggestibility:
+            if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
+                person.change_slut_temp(1, add_to_log)
+
+        if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " semen proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+
+        if is_cum_fetish_unlocked():
+            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
+                if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
+                    if start_cum_fetish_quest(person):
+                        person.event_triggers_dict["cum_fetish_start"] = True
+                        #TODO some kind of test here to indicate to the player that their cum quest has started
+                    else:
+                        #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+                        pass
+        return
+
+
+    def fetish_exhibition_function_on_apply(person, add_to_log):
+        person.event_triggers_dict["nano_bots_e"] = False
+        return
+
+    def fetish_exhibition_function_on_remove(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_e", False) == False:   # no trigger, report progress
+            mc.log_event(person.title + " social sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ec")) + "%", "float_text_blue")
+        return
+
+    def fetish_exhibition_on_turn(person, add_to_log):
+        if person.event_triggers_dict.get("nano_bots_e", False):
+            return # this fetish already triggered (prevents stacking multiple basic fetish serums)
+
+        fetish_serum_increase_counter(person, "nano_bots_ec")
+
+        # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
+        if person.event_triggers_dict.get("nano_bots_ec", 0) < FETISH_SERUM_TRIGGER_VALUE:
+            return
+
+        person.event_triggers_dict["nano_bots_ec"] = 0 # reset counter
+        person.event_triggers_dict["nano_bots_e"] = True # block any effect for this dose
+
+        tier = get_suggest_tier(person)
+        fetish_random_roll_1 = renpy.random.randint(0,100)
+        if person.sluttiness < person.suggestibility:
+            if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
+                person.change_slut_temp(1, add_to_log = True)
+        if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
+            person.change_obedience(1, add_to_log = True)
+
+        if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True):
+            mc.log_event(person.title + " social sexual proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+
+        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
+            if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
+                if start_exhibition_fetish_quest(person):
+                    person.event_triggers_dict["exhibition_fetish_start"] = True
+                    #TODO some kind of test here to indicate to the player that their exhibitionism quest has started
+                else:
+                    #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+                    pass
+        return
+
+    def fetish_unlock_basic_serum():
+        found = get_fetish_basic_serum()
+        if found:
+            found.tier = 1
+            found.researched = True
+            mc.business.event_triggers_dict["fetish_serum_count"] = 1
+        return
+
+    def get_fetish_basic_serum():
+        return find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
+
+    def fetish_unlock_anal_serum():
+        found = get_fetish_anal_serum()
+        if found:
+            found.tier = 1
+            found.researched = True
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def get_fetish_anal_serum():
+        return find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
+
+    def fetish_unlock_exhibition_serum():
+        found = get_fetish_exhibition_serum()
+        if found:
+            found.tier = 1
+            found.researched = True
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def get_fetish_exhibition_serum():
+        return find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
+
+    def fetish_unlock_cum_serum():
+        found = get_fetish_cum_serum()
+        if found:
+            found.tier = 1
+            found.researched = True
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def get_fetish_cum_serum():
+        return find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
+
+    def fetish_unlock_breeding_serum():
+        found = get_fetish_breeding_serum()
+        if found:
+            found.tier = 1
+            found.researched = True
+            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        return
+
+    def get_fetish_breeding_serum():
+        return find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
+
     def add_fetish_serum_traits():
-        FETISH_RESEARCH_PERCENT = 1     #1 = 100%
-        FETISH_PRODUCTION_COST = 20     #Default 100
-        FETISH_RESEARCH_BASE_TIER = 1        #Default = 1
-        FETISH_RESEARCH_MID_TIER = 2          #Default = 2
-        FETISH_RESEARCH_FINAL_TIER = 3      #Default = 3
+        FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
+        FETISH_PRODUCTION_COST = 50    #Production Difficulty
 
-        fetish_basic_ther = SerumTraitMod(name = "Initial Fetish Therapy",
-                desc = "Over time, increases general positivity towards basic sexual acts. Increases effectiveness with greater suggestibility.",
-                positive_slug = "Slowly increases sexual opinions, Slowly increases Foreplay skill, +$20 Value",
-                negative_slug = "+100 Serum Research, +20 Production Cost",
-                value_added = 20,
-                research_added = 100 * FETISH_RESEARCH_PERCENT,
+        fetish_basic_ther = SerumTraitMod(name = "Sexual Proclivity Nanobots",
+                desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
+                positive_slug = "Increases sexual opinions, slowly increases Foreplay skill",
+                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+                value_added = 0,
+                research_added = FETISH_RESEARCH_ADDED,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 25,
+                base_side_effect_chance = 10,
+                on_apply = fetish_basic_function_on_apply,
+                on_remove = fetish_basic_function_on_remove,
                 on_turn = fetish_basic_function_on_turn,
-                tier = FETISH_RESEARCH_BASE_TIER,
-                start_researched =  False,
-                research_needed = 400 * FETISH_RESEARCH_PERCENT,
+                tier = 99,
+                start_researched = False,
+                research_needed = 1000,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_exhibition_ther = SerumTraitMod(name = "Exhibitionism Fetish Therapy",
-                desc = "Over time, increases the need to behave in an extravagant way in order to attract attention. Increases effectiveness with greater suggestibility",
-                positive_slug = "Slowly increases exhibitionistic behavior, +$20 Value",
-                negative_slug = "+100 Serum Research, +20 Production Cost",
-                value_added = 20,
-                research_added = 100 * FETISH_RESEARCH_PERCENT,
+        fetish_exhibition_ther = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
+                desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
+                positive_slug = "Increases exhibitionistic behavior, slow increases sluttiness",
+                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+                value_added = 0,
+                research_added = FETISH_RESEARCH_ADDED,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 25,
+                base_side_effect_chance = 0,
+                on_apply = fetish_exhibition_function_on_apply,
+                on_remove = fetish_exhibition_function_on_remove,
                 on_turn = fetish_exhibition_on_turn,
-                requires = [fetish_basic_ther],
-                tier = FETISH_RESEARCH_BASE_TIER,
+                tier = 99,
                 start_researched =  False,
-                research_needed = 400 * FETISH_RESEARCH_PERCENT,
+                research_needed = 1200,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_oral_ther = SerumTraitMod(name = "Oral Fetish Therapy",
-                desc = "Over time, increases general positivity towards Oral Sex. Increases effectiveness with greater suggestibility",
-                positive_slug = "Slowly increases oral sexual opinions, Slowly increases Oral skill, +$20 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 20,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
+        fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
+                desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
+                positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
+                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+                value_added = 0,
+                research_added = FETISH_RESEARCH_ADDED,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 50,
-                on_turn = fetish_oral_function_on_turn,
-                requires = [fetish_basic_ther],
-                tier = FETISH_RESEARCH_MID_TIER,
-                start_researched =  False,
-                research_needed = 500 * FETISH_RESEARCH_PERCENT,
-            )
-
-        fetish_vaginal_ther = SerumTraitMod(name = "Vaginal Fetish Therapy",
-                desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Vaginal sexual opinions, Slowly increases Vaginal skill, +$20 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 20,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 50,
-                on_turn = fetish_vaginal_function_on_turn,
-                requires = [fetish_basic_ther],
-                tier = FETISH_RESEARCH_MID_TIER,
-                start_researched =  False,
-                research_needed = 500 * FETISH_RESEARCH_PERCENT,
-            )
-
-        fetish_anal_ther = SerumTraitMod(name = "Anal Fetish Therapy",
-                desc = "Over time, increases general positivity towards Anal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Anal sexual opinions, Slowly increases Anal skill, +$25 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 25,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 75,
+                base_side_effect_chance = 10,
+                on_apply = fetish_anal_function_on_apply,
+                on_remove = fetish_anal_function_on_remove,
                 on_turn = fetish_anal_function_on_turn,
-                requires = [fetish_vaginal_ther],
-                tier = FETISH_RESEARCH_FINAL_TIER,
+                tier = 99,
                 start_researched =  False,
-                research_needed = 800 * FETISH_RESEARCH_PERCENT,
+                research_needed = 2000,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_cum_ther = SerumTraitMod(name = "Cum Fetish Therapy",
-                desc = "Over time, increases general positivity towards Cum. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Cum sexual opinions, +$25 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 25,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
+        fetish_cum_ther = SerumTraitMod(name = "Semen Proclivity Nanobots",
+                desc = "Targeted endorphin emitters increase pleasure received when in contact with semen based on suggestibility.",
+                positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
+                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+                value_added = 0,
+                research_added = FETISH_RESEARCH_ADDED,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 75,
+                base_side_effect_chance = 10,
+                on_apply = fetish_cum_function_on_apply,
+                on_remove = fetish_cum_function_on_remove,
                 on_turn = fetish_cum_function_on_turn,
-                requires = [fetish_oral_ther],
-                tier = FETISH_RESEARCH_FINAL_TIER,
+                tier = 99,
                 start_researched =  False,
-                research_needed = 800 * FETISH_RESEARCH_PERCENT,
+                research_needed = 2000,
+                exclude_tags = ["Nanobots"]
             )
 
-        fetish_breeding_ther = SerumTraitMod(name = "Breeding Fetish Therapy",
-                desc = "Over time, increases general positivity towards Vaginal Sex. Increases effectiveness with greater suggestibility. Warning: At high suggestibility it may induce a fetish.",
-                positive_slug = "Slowly increases Vaginal sexual opinions, Slowly increases Vaginal skill, +$20 Value",
-                negative_slug = "+200 Serum Research, +20 Production Cost",
-                value_added = 25,
-                research_added = 200 * FETISH_RESEARCH_PERCENT,
+        fetish_breeding_ther = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
+                desc = "Targeted endorphin emitters increase reproduction drive and associated opinions based on suggestibility.",
+                positive_slug = "Increases reproduction sexual opinions, slowly increases Vaginal skill",
+                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+                value_added = 0,
+                research_added = FETISH_RESEARCH_ADDED,
+                slots_added = 1,
                 production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 75,
+                base_side_effect_chance = 10,
+                on_apply = fetish_breeding_function_on_apply,
+                on_remove = fetish_breeding_function_on_remove,
                 on_turn = fetish_breeding_function_on_turn,
-                requires = [fetish_vaginal_ther],
-                tier = FETISH_RESEARCH_FINAL_TIER,
+                tier = 99,
                 start_researched =  False,
-                research_needed = 800 * FETISH_RESEARCH_PERCENT,
+                research_needed = 2000,
+                exclude_tags = ["Nanobots"]
             )
+        return
 
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_fetish_serum_trait(stack):
     python:
         add_fetish_serum_traits()
         execute_hijack_call(stack)
-    return
+return

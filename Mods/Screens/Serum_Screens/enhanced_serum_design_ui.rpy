@@ -17,14 +17,8 @@ init 2:
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
 
-        python:
-            exclude_tag_list = []
-            for trait in list_of_traits:
-                if trait.exclude_tags:
-                    for e_tag in trait.exclude_tags:
-                        if not e_tag in exclude_tag_list:
-                            exclude_tag_list.append(e_tag)
-
+        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+        default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
 
         add "Science_Menu_Background.png"
         default trait_tooltip = primitive_serum_prod
@@ -60,7 +54,7 @@ init 2:
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                for trait in sorted(list_of_traits, key = lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait not in starting_serum.traits and trait.researched and "Production" in trait.exclude_tags:
                                         $ trait_tags = get_exclude_tags(trait)
                                         $ trait_allowed = get_trait_allowed(starting_serum, trait)
@@ -108,7 +102,7 @@ init 2:
                                             xsize 530
                                             text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
+                                        for trait in sorted_traits:
                                             if trait.tier == dt and trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
                                                 $ trait_tags = get_exclude_tags(trait)
                                                 $ trait_allowed = get_trait_allowed(starting_serum, trait)

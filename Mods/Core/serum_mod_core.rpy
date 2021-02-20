@@ -38,9 +38,9 @@ init -1 python:
 
         def __init__(self, name, desc, positive_slug = "", negative_slug = "", value_added = 0, research_added = 0, slots_added = 0, production_added = 0,
             duration_added = 0, base_side_effect_chance = 0, on_apply = None, on_remove = None, on_turn = None, on_day = None,
-            requires= None, tier = 0, start_researched=False,research_needed=50,exclude_tags=None, is_side_effect = False):
+            requires= None, tier = 0, start_researched=False,research_needed=50,exclude_tags=None, is_side_effect = False, start_enabled = True):
 
-            self.enabled = False
+            self.enabled = not start_enabled
 
             SerumTrait.__init__(self, name,desc, positive_slug, negative_slug, value_added, research_added, slots_added, production_added,
                 duration_added, base_side_effect_chance, on_apply, on_remove, on_turn, on_day, requires, tier, start_researched, research_needed,

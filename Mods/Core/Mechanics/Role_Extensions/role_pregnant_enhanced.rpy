@@ -156,72 +156,72 @@ label silent_pregnant_transform(the_person): #Changes the person to their pregna
 label silent_pregnant_transform_announce(start_day, the_person):
     $ the_person.draw_person()
     "[the_person.possessive_title] notices you and comes over to talk."
-    the_person.char "Hey [the_person.mc_title]. So, it's probably pretty obvious at this point..."
+    the_person "Hey [the_person.mc_title]. So, it's probably pretty obvious at this point..."
     "She turns and runs a hand over her belly, accentuating the new and prominent curves that have formed there."
-    the_person.char "...but, I'm pregnant!"
+    the_person "...but, I'm pregnant!"
     mc.name "Congratulations! You look fantastic. You really are glowing."
     $ the_person.change_happiness(10)
     if the_person.is_employee():
-        the_person.char "Thank you! So obviously, when the baby comes, I'll need some time off work..."
+        the_person "Thank you! So obviously, when the baby comes, I'll need some time off work..."
         mc.name "Just let me know when the time comes, if you can. We'll make due without you while you are giving birth."
-    the_person.char "Thank you!"
+    the_person "Thank you!"
     return
 
 label silent_pregnant_finish_announce(the_person): #TODO: have more variants for girlfriend_role, affair_role, etc.
     # The girl tells you she'll need a few days to have the kid and recover, and she'll be back in a few days.
-    "You get a call from [the_person.possessive_title]. You answer it."
+    "You get a call from [the_person.possessive_title!l]. You answer it."
     mc.name "Hey [the_person.title], what's up?"
 
     if the_person.is_employee():
-        the_person.char "Hi [the_person.mc_title]. I wanted to let you to know that I won't be at work for a few days."
+        the_person "Hi [the_person.mc_title]. I wanted to let you to know that I won't be at work for a few days."
     else:
-        the_person.char "Hi [the_person.mc_title], I have some exciting news."
+        the_person "Hi [the_person.mc_title], I have some exciting news."
 
-    the_person.char "I saw my doctor yesterday and he tells me I'm going to pop any day now."
+    the_person "I saw my doctor yesterday and he tells me I'm going to pop any day now."
 
     if day - the_person.event_triggers_dict.get("preg_start_date", day) <= 90: #It's unusually short
-        the_person.char "It's earlier than I expected, but he tells me everything looks like it's perfectly normal."
+        the_person "It's earlier than I expected, but he tells me everything looks like it's perfectly normal."
 
     mc.name "That's amazing news. Do you need me to do anything?"
-    the_person.char "No, I just wanted to let you know. Thanks for everything!"
+    the_person "No, I just wanted to let you know. Thanks for everything!"
     mc.name "Okay, I'll talk to you soon then."
-    the_person.char "I'll let you know as soon as things are finished. Bye!"
+    the_person "I'll let you know as soon as things are finished. Bye!"
     $ silent_pregnant_finish_announce_person(the_person)
     return
 
 label silent_pregnant_finish(the_person):
     $ pregnant_finish_person(the_person)
 
-    "You get a call from [the_person.possessive_title] early in the morning. You answer it."
+    "You get a call from [the_person.possessive_title!l] early in the morning. You answer it."
 
     if the_person in [aunt, mom]:
-        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
+        the_person "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
         mc.name "That's amazing, where is she now?"
-        the_person.char "I'll be leaving her with my mother, your grand-mother for now."
+        the_person "I'll be leaving her with my mother, your grand-mother for now."
 
     elif the_person in [lily, cousin]:
-        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
+        the_person "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
         mc.name "That's amazing, where is she now?"
-        the_person.char "I'll be leaving her with our grandma for now, so I can get back to a normal life."
+        the_person "I'll be leaving her with our grandma for now, so I can get back to a normal life."
 
     elif employee_role in the_person.special_role:
-        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl! I'll be coming back to work today." #Obviously they're all girls for extra fun in 18 years.
+        the_person "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl! I'll be coming back to work today." #Obviously they're all girls for extra fun in 18 years.
         mc.name "That's amazing, but are you sure you don't need more rest?"
         if the_person.relationship != "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
-            the_person.char "I'll be fine, I'll be leaving her with my [so_title], so I can come back to work sooner."
+            the_person "I'll be fine, I'll be leaving her with my [so_title], so I can come back to work sooner."
         else:
-            the_person.char "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
+            the_person "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
 
     else:
-        the_person.char "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
+        the_person "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
         mc.name "That's amazing, how are you doing?"
         if the_person.relationship != "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
-            the_person.char "I'll be fine, I'll be leaving her with my [so_title]."
+            the_person "I'll be fine, I'll be leaving her with my [so_title]."
         else:
-            the_person.char "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
+            the_person "I'll be fine. I'm leaving her with my mother for a little while so I can get back to a normal life."
 
-    the_person.char "I just wanted to let you know. I'll talk to you soon."
+    the_person "I just wanted to let you know. I'll talk to you soon."
     "You say goodbye and [the_person.title] hangs up."
     return

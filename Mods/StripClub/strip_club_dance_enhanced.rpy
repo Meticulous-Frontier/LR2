@@ -115,7 +115,7 @@ label stripclub_dance_enhanced_label():
 
     $ the_person.draw_person()
     "She stands up and waves to her audience."
-    the_person.char "Thank you everyone, you've been wonderful!"
+    the_person "Thank you everyone, you've been wonderful!"
     $ the_person.draw_person(position = "walking_away")
     "[title] blows a kiss and struts off stage."
 

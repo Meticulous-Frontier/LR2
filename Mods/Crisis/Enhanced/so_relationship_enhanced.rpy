@@ -71,24 +71,31 @@ label so_relationship_improve_label_enhanced():
         $ the_person.change_happiness(20)
         if the_person.love > 30: #You're a good friend.
             "You get a text from [the_person.title]."
-            the_person.char "Hey [the_person.mc_title], I have some exciting news!"
-            the_person.char "My boyfriend proposed, me and [the_person.SO_name] are getting married! I'm so excited, I just had to tell you!"
+            $ mc.having_text_conversation = the_person
+            the_person "Hey [the_person.mc_title], I have some exciting news!"
+            the_person "My boyfriend proposed, me and [the_person.SO_name] are getting married! I'm so excited, I just had to tell you!"
+            $ mc.having_text_conversation = None
             menu:
                 "Congratulate her":
                     "You text back."
+                    $ mc.having_text_conversation = the_person
                     mc.name "Congratulations! I'm sure you're the happiest girl in the world."
                     $ the_person.change_love(1)
-                    the_person.char "I am! I've got other people to tell now, talk to you later!"
-
+                    the_person "I am! I've got other people to tell now, talk to you later!"
+                    $ mc.having_text_conversation = None
                 "Warn her against it":
                     "You text back."
+                    $ mc.having_text_conversation = the_person
                     mc.name "I don't know if that's such a good idea. Do you even know him that well?"
+                    $ mc.having_text_conversation = None
                     "Her response is near instant."
-                    the_person.char "What? What do you even mean by that?"
+                    $ mc.having_text_conversation = the_person
+                    the_person "What? What do you even mean by that?"
                     mc.name "I mean, what if he isn't who you think he is? Maybe he isn't the one for you."
                     $ the_person.change_happiness(-10)
-                    the_person.char "I wasn't telling you because I wanted your opinion. If you can't be happy for me, you can at least be quiet."
+                    the_person "I wasn't telling you because I wanted your opinion. If you can't be happy for me, you can at least be quiet."
                     $ the_person.change_love(-5)
+                    $ mc.having_text_conversation = None
                     "She seems pissed, so you take her advice and leave her alone."
         else: #You see it on social media
             "You get a notification on your phone."
@@ -113,12 +120,12 @@ label so_relationship_worsen_label_enhanced():
     $ so_title = SO_relationship_to_title(the_person.relationship)
     if the_person.has_role(affair_role):
         "You get a call from [the_person.title]. When you pick up she sounds tired, but happy."
-        the_person.char "Hey [the_person.mc_title], I've got some news. Me and my [so_title], [the_person.SO_name], had a fight. We aren't together any more."
-        the_person.char "We don't have to hide what's going on between us any more."
+        the_person "Hey [the_person.mc_title], I've got some news. Me and my [so_title], [the_person.SO_name], had a fight. We aren't together any more."
+        the_person "We don't have to hide what's going on between us any more."
         $ the_person.add_role(girlfriend_role)
         mc.name "That's good news! I'm sure you'll want some rest, so we can talk more later. I love you."
         $ the_person.change_love(5)
-        the_person.char "I love you too. Bye."
+        the_person "I love you too. Bye."
 
     else:
         $ the_person.change_happiness(-20)
@@ -133,14 +140,14 @@ label so_relationship_worsen_label_enhanced():
 label so_relationship_quarrel_label(the_person):
     $ so_title = SO_relationship_to_title(the_person.relationship)
     if the_person.has_role(affair_role):
-        the_person.char "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
-        the_person.char "We don't have to hide what's going on between us any more."
+        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
+        the_person "We don't have to hide what's going on between us any more."
         $ the_person.add_role(girlfriend_role)
         mc.name "That's good news! So we don't have to sneak around anymore."
         $ the_person.change_love(5)
     else:
         $ the_person.change_happiness(-20)
-        the_person.char "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
+        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
         mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
 
     $ the_person.relationship = "Single"

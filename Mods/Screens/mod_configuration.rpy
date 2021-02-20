@@ -85,7 +85,7 @@ init 2:
                 #         background "#000080"
                 #         xsize 380
                 #         text "Generic People Role" style "serum_text_style"
-                
+
                 #     viewport:
                 #         xsize 380
                 #         ysize 780

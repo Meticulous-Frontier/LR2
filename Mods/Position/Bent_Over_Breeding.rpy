@@ -1,8 +1,8 @@
 init python:
     bent_over_breeding = Position(name = "Breeding Doggy", slut_requirement = 60, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 20, girl_energy = 10,
-        guy_arousal = 20, guy_energy = 10,
+        girl_arousal = 18, girl_energy = 14,
+        guy_arousal = 20, guy_energy = 16,
         connections = [],
         intro = "intro_bent_over_breeding",
         scenes = ["scene_bent_over_breeding_1","scene_bent_over_breeding_2", "scene_bent_over_breeding_3"],
@@ -21,16 +21,16 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
     if mc.condom:
         "She notices you are wearing a condom."
-        the_girl.char "Hey, get that dumb rubber off! If you're gonna breed me you need to go in bare!"
+        the_girl "Hey, get that dumb rubber off! If you're gonna breed me you need to go in bare!"
         "You quickly pull the condom off and throw it to the side."
         $ mc.condom = False
     mc.name "Good girl, [the_girl.title], I'm going to fuck you hard and fill you up with my seed."
     if the_girl.get_opinion_score("doggy style sex") > 2 :
-        the_girl.char "Oh thank god, I've been day dreaming about you bending me over all day long."
+        the_girl "Oh thank god, I've been day dreaming about you bending me over all day long."
     elif the_girl.get_opinion_score("sex standing up") > 2 :
-        the_girl.char "Oh thank god, I've been day dreaming about this all day long."
+        the_girl "Oh thank god, I've been day dreaming about this all day long."
     else:
-        the_girl.char "Oh thank god, I've been day dreaming about getting filled up all day long."
+        the_girl "Oh thank god, I've been day dreaming about getting filled up all day long."
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
@@ -39,7 +39,7 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt."
     "When you're ready you push forward. Her pussy feels amazing wrapped around your erection."
     if the_girl.get_opinion_score("doggy style sex") > 0 :
-        the_girl.char "Oh my god..."
+        the_girl "Oh my god..."
         $ the_girl.discover_opinion("doggy style sex")
     if the_girl.get_opinion_score("sex standing up") > 0 :
         "Her legs shake a bit as she gets used to the depth of your penetration."
@@ -52,19 +52,19 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
-        the_girl.char "I'm sorry [the_girl.mc_title], that's a little too rough. Can you go a little slower?"
+        the_girl "I'm sorry [the_girl.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. She seems to be adapting to your fucking."
     elif the_girl.has_role(breeding_fetish_role):          #breeding fetish
         "After a particularly hard thrust, [the_girl.possessive_title] moans lewdly."
-        the_girl.char "That's it, fuck me harder! Fill me up so full you seed is spilling out, then fill me up again!"
+        the_girl "That's it, fuck me harder! Fill me up so full you seed is spilling out, then fill me up again!"
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand."
         "[the_girl.possessive_title] rocks her hips side to side each time you slam into her. Each time you pull back you can see her labia clinging to you."
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
         "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
-        the_girl.char "Oh god, you fuck me so good, I can barely keep up!"
+        the_girl "Oh god, you fuck me so good, I can barely keep up!"
         "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     menu:
@@ -80,26 +80,26 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
                 mc.name "Do you let any guy with a hard cock fuck you and spank you like this? Or just me?"
                 "[the_girl.possessive_title] responds quietly."
                 if the_girl.get_opinion_score("being submissive") > 0 and not the_girl.can_be_spanked():
-                    the_girl.char "Just you! I love it when you get rough with me, and spank me when I've been naughty!"
+                    the_girl "Just you! I love it when you get rough with me, and spank me when I've been naughty!"
                     "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
                     $ the_girl.unlock_spanking()
                 else:
-                    the_girl.char "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
+                    the_girl "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
                 if the_girl is mom:
-                    the_girl.char "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
+                    the_girl "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
                 "You give her pussy a few rough thrusts before bottoming out again."
                 mc.name "That's right bitch, you're my little fuckhole. I'll bend you over and fuck you anytime I please."
                 $ the_girl.discover_opinion("being submissive")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 5)
             else:
-                the_girl.char "Mmm, it feels good but kinda hurts... could you hit a little more softly?"
+                the_girl "Mmm, it feels good but kinda hurts... could you hit a little more softly?"
                 "You give her plaint ass another swat, this time not quite as hard."
                 "Her ass quivers slightly as you spank her. Her pussy clenches around you each time you spank her."
             if mc.arousal > 70:
                 "[the_girl.possessive_title]'s tight pussy feels so good. You are getting close to cumming."
                 mc.name "You feel amazing. You're gonna make me cum soon."
                 "[the_girl.title] throws her ass back against you hard, forcing you deep."
-                the_girl.char "You better put it in deep! I need your seed planted as deep as it will go!"
+                the_girl "You better put it in deep! I need your seed planted as deep as it will go!"
                 "You grab her hips and take control back, resuming fucking her."
                 mc.name "Don't worry bitch, you'll get it when its time."
             "You put your hands on her hips and continue fucking her."
@@ -108,7 +108,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
             "You lean forward a bit and reach down with one hand and begin to move it in circles around her clit."
             if the_girl.get_opinion_score("being fingered"):
                 "[the_girl.possessive_title] moans loudly in response."
-                the_girl.char "Oh [the_girl.mc_title], I love when you touch me there."
+                the_girl "Oh [the_girl.mc_title], I love when you touch me there."
                 "You slide your fingers around her slit a few times."
                 "You give your hips a few long, slow strokes as your circle her clit with your fingers."
                 $ the_girl.discover_opinion("being fingered")
@@ -130,7 +130,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
                 if the_girl.arousal > 80:
                     "You can feel her juices dripping down from her slit in response to your touch."
             if the_girl.arousal > 90:
-                the_girl.char "Oh fuck! Don't stop! Don't you dare stop!"
+                the_girl "Oh fuck! Don't stop! Don't you dare stop!"
                 "Her moans clearly indicate an impending orgasm. As best as you can, you fuck her while you roughly rub her clit."
             else:
                 "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her."
@@ -145,35 +145,35 @@ label scene_bent_over_breeding_2(the_girl, the_location, the_object):
         "You run your hands along her hips. You grab her hips and smack her ass roughly as you fuck her saturated slit."
 
     if the_girl.arousal > 80:
-        the_girl.char "Ohhh, [the_girl.mc_title]... You are gonna make me cum so hard..."
+        the_girl "Ohhh, [the_girl.mc_title]... You are gonna make me cum so hard..."
         "You can feel a slight quiver in [the_girl.possessive_title]'s body as you fuck her. She's probably going to cum soon!"
     else:
         "[the_girl.possessive_title] groans in response to one particularly deep thrust."
-        the_girl.char "It's so big... it feels so good buried inside me. I can't wait to feel it pulse and twitch when you cum!"
+        the_girl "It's so big... it feels so good buried inside me. I can't wait to feel it pulse and twitch when you cum!"
     "You push yourself in as deep as you can go. [the_girl.possessive_title] moans as you fill her completely."
     menu:
         "Gentle Sex":
             "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
             mc.name "[the_girl.title], your pussy is so good. I love how eager you are to be my cum dumpster."
             if the_girl.has_role(breeding_fetish_role):
-                the_girl.char "I love being your mare! Fuck me good [the_girl.mc_title]!"
+                the_girl "I love being your mare! Fuck me good [the_girl.mc_title]!"
             elif the_girl.sluttiness > 80:
-                the_girl.char "Of course I'm eager. Your cock fills me just right. Fuck me good [the_girl.mc_title]!"
+                the_girl "Of course I'm eager. Your cock fills me just right. Fuck me good [the_girl.mc_title]!"
             else:
-                the_girl.char "Mmm, I can't help it, you make me feel so good."
+                the_girl "Mmm, I can't help it, you make me feel so good."
         "Rough Sex":
             "You take one hand and start to need the back of her scalp. You grab a fistful of hair and pull."
             "[the_girl.possessive_title] arches her back in response."
             mc.name "That's a good slut. Take it nice and deep."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
                 "[the_girl.possessive_title] moans enthusiastically."
-                the_girl.char "[the_girl.mc_title]! I love it deep. Fuck me good!"
+                the_girl "[the_girl.mc_title]! I love it deep. Fuck me good!"
                 "[the_girl.possessive_title] begs you for more."
                 "You give her what she wants. You grab her hips and start thrusting into her hard and fast."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 3)
             else:
                 "[the_girl.possessive_title] moans."
-                the_girl.char "You are so deep... It feels good having you so deep inside me."
+                the_girl "You are so deep... It feels good having you so deep inside me."
                 "You stir the depths of her pussy with your erection by moving your hips side to side."
 
     return
@@ -198,11 +198,11 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
     menu:
         "Finger her ass":
             "You decide to give her ass a little extra attention. You work up some saliva in your mouth then pause fucking her for a second."
-            the_person.char "Hey... why did you stop?"
+            the_person "Hey... why did you stop?"
             "Instead of answering, you let the saliva drop from your mouth onto her crack. She feels it and realizes what you are about to do when you start to work it into her crack with your finger."
             if the_girl.get_opinion_score("anal sex") > 0:
                 "[the_girl.possessive_title] bucks her hips slightly as you start to push your finger into her tight back passage. Her back arches in pleasure."
-                the_girl.char "Mmm! [the_girl.mc_title] that feels so good."
+                the_girl "Mmm! [the_girl.mc_title] that feels so good."
                 $ the_girl.discover_opinion("anal sex")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") + mc.sex_skills["Anal"])
                 "You slowly give her a long, deliberate stroke, pushing your cock and finger into her at the same time."
@@ -212,7 +212,7 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
                 "Soon though, you feel the urge to really give it to her, so you pull your finger out so you can grab both her hips and fuck her rough."
 
             elif the_girl.get_opinion_score("anal sex") < 0:
-                the_girl.char "WHOA! Hey I'm not really into that..."
+                the_girl "WHOA! Hey I'm not really into that..."
                 "She starts to pull away from you."
                 "It seems that [the_girl.possessive_title] doesn't like having her ass played with."
                 $ the_girl.discover_opinion("anal sex")
@@ -220,9 +220,9 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
                 "You quickly mumble an apology. Instead of fingering her, you grab her hips with both hands and start to pound her."
             else:
                 "[the_girl.possessive_title] tenses slightly as you start to push your finger into her back passage, but otherwise doesn't resist."
-                the_girl.char "Go slow... I don't let just anyone touch me like this..."
+                the_girl "Go slow... I don't let just anyone touch me like this..."
                 "She forces herself to relax. You can feel her rectum physically unclench and begin to slowly move your finger in and out of her."
-                the_girl.char "That feels good [the_girl.mc_title]... just be careful with me back there!"
+                the_girl "That feels good [the_girl.mc_title]... just be careful with me back there!"
                 "As you finger her ass, her hips remain stationary. She wills herself to relax, and manages to enjoy the stimulation."
                 $ the_girl.change_arousal(mc.sex_skills["Anal"])
                 "Soon though, you feel the urge in your hips to start fucking her again, so you pull your finger out so you can grab both her hips."
@@ -231,7 +231,7 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
             "You grab a handful, her ass flesh feels tight and full in your hand. She moans and you give her a couple vigorous thrusts."
             mc.name "Your ass is amazing. Maybe I'll fuck you back there next..."
             "She moans and pushes back against you as you fuck."
-            the_girl.char "You can fuck me anywhere, just promise you'll cum in my pussy!"
+            the_girl "You can fuck me anywhere, just promise you'll cum in my pussy!"
     return
 
 
@@ -243,37 +243,37 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s drenched cunt is just too good. You decide to cum inside it."
     if mc.condom:
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
-        the_girl.char "Oh god, I can feel you twitching... but something is missing?"
+        the_girl "Oh god, I can feel you twitching... but something is missing?"
         "You wait until your orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
         "She looks at your condom and frowns."
-        the_girl.char "You were... seriously? You had a condom on? Why would you do that?"
+        the_girl "You were... seriously? You had a condom on? Why would you do that?"
         "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
     else:
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
         if the_girl.get_opinion_score("creampies") > 0:
-            the_girl.char  "Yes! Fill me with your cum!"
+            the_girl  "Yes! Fill me with your cum!"
         $ the_girl.cum_in_vagina()
         $ bent_over_breeding.redraw_scene(the_girl)
         if the_girl.has_breeding_fetish():
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."
-            the_girl.char "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
+            the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
-        elif the_girl.has_role(cum_internal_role):
+        elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.get_opinion_score("bareback sex") > 0:
-            the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
+            the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."
         elif the_girl.sluttiness > 110:
-            the_girl.char "Oh god it's so deep."
+            the_girl "Oh god it's so deep."
         elif the_girl.knows_pregnant():
-            the_girl.char "Its nice, already being pregnant, I can take a load like that anytime..."
+            the_girl "Its nice, already being pregnant, I can take a load like that anytime..."
         elif the_girl.on_birth_control:
-            the_girl.char "Oh fuck...  Good thing I'm on the pill..."
+            the_girl "Oh fuck...  Good thing I'm on the pill..."
         else:
-            the_girl.char "Oh fuck... I could get pregnant you know.."
+            the_girl "Oh fuck... I could get pregnant you know.."
 
         "You wait until your orgasm has passed completely, then pull out and stand back."
         "You cum leaks out of her dripping wet pussy."
@@ -290,16 +290,16 @@ label transition_default_bent_over_breeding(the_girl, the_location, the_object):
         $ mc.condom = False
     mc.name "Get ready, I'm going to breed you, bent over this [the_object.name], right now."
     if the_girl.knows_pregnant():
-        the_girl.char "That sounds hot, but I'm already pregnant?"
+        the_girl "That sounds hot, but I'm already pregnant?"
         mc.name "I know, but that doesn't mean we can't practice. A good mare is always full of cum."
-        the_girl.char "Oh god, okay! I'm ready for it!"
+        the_girl "Oh god, okay! I'm ready for it!"
     else:
-        the_girl.char "Oh god, okay! I'm ready for it!"
+        the_girl "Oh god, okay! I'm ready for it!"
     if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
         "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-        the_girl.char "Oh god.... Ah...."
+        the_girl "Oh god.... Ah...."
         "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
         $ the_girl.break_taboo("vaginal_sex")
     else:
@@ -315,7 +315,7 @@ label strip_bent_over_breeding(the_girl, the_clothing, the_location, the_object)
     return
 
 label strip_ask_bent_over_breeding(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
         "Let her strip":
@@ -327,13 +327,13 @@ label strip_ask_bent_over_breeding(the_girl, the_clothing, the_location, the_obj
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do you think I look sexy in it?"
+                the_girl "Do you think I look sexy in it?"
                 "You speed up, fucking her faster in response to her question."
             elif the_girl.sluttiness < 100:
-                the_girl.char "Does it make me look like a good little slut? All I want to be is your good little slut sir."
+                the_girl "Does it make me look like a good little slut? All I want to be is your good little slut sir."
                 "She pushes her hips back into you and moans happily."
             else:
-                the_girl.char "Does it make me look like the cum hungry slut that I am? Or is it your cock inside me that makes me look that way?"
+                the_girl "Does it make me look like the cum hungry slut that I am? Or is it your cock inside me that makes me look that way?"
                 "She grinds her hips back into you and moans ecstatically."
     return
 
@@ -344,8 +344,8 @@ label orgasm_bent_over_breeding(the_girl, the_location, the_object):
     "You bury your cock deep in [the_girl.possessive_title]'s cunt while she cums. Her pussy spasms around you."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("doggy style sex") > 0:
-        the_girl.char "Oh god, you've got me bent over and it feels so good I'm just cumming all over you..."
-    the_girl.char "Don't stop... it still feels so good!"
+        the_girl "Oh god, you've got me bent over and it feels so good I'm just cumming all over you..."
+    the_girl "Don't stop... it still feels so good!"
     return
 
 label taboo_break_bent_over_breeding(the_girl, the_location, the_object):

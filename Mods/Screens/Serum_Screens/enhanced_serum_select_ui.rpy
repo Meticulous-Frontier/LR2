@@ -31,6 +31,9 @@ init 2:
     screen serum_select_ui: #How you select serum and trait research
         add "Science_Menu_Background.png"
 
+        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+        default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
+
         vbox:
             xalign 0.08
             yalign 0.4
@@ -79,20 +82,8 @@ init 2:
                                             xsize 365
                                             text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                            if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) != 0: # list all traits with tag
-                                                $ trait_title = get_trait_display_title(trait)
-                                                textbutton "[trait_title]":
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style_traits"
-                                                    action [Hide("trait_tooltip"),Return(trait)]
-
-                                                    hovered Show("trait_tooltip",None,trait)
-                                                    unhovered Hide("trait_tooltip")
-                                                    xsize 365
-
-                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                            if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) == 0: # list all traits without tag
+                                        for trait in sorted_traits:
+                                            if trait.tier == dt and not trait.researched and trait.has_required():
                                                 $ trait_title = get_trait_display_title(trait)
                                                 textbutton "[trait_title]":
                                                     style "textbutton_style"
@@ -123,24 +114,8 @@ init 2:
                                             xsize 395
                                             text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                            if trait.tier == dt and trait.researched and len(trait.exclude_tags) != 0: # list all traits with tag
-                                                $ trait_title = get_trait_display_title(trait)
-                                                $ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                                $ trait_mastery_text = get_trait_mastery_text(trait)
-
-                                                textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                                    text_xalign 0.5
-                                                    text_text_align 0.5
-
-                                                    action [Hide("trait_tooltip"),Return(trait)] style "textbutton_style"
-                                                    text_style "serum_text_style_traits"
-                                                    hovered Show("trait_tooltip",None,trait)
-                                                    unhovered Hide("trait_tooltip")
-                                                    xsize 395
-
-                                        for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                            if trait.tier == dt and trait.researched and len(trait.exclude_tags) == 0: # list all traits without tag
+                                        for trait in sorted_traits:
+                                            if trait.tier == dt and trait.researched:
                                                 $ trait_title = get_trait_display_title(trait)
                                                 $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                                 $ trait_mastery_text = get_trait_mastery_text(trait)

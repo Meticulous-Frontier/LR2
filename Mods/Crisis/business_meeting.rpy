@@ -28,9 +28,9 @@ label business_meeting_action_label:
     $ day_part = time_of_day_string()
 
     if (mc.location ==  the_place):
-        "You're hard at work in the [day_part], when [the_person.possessive_title] asks you over to discuss some plans."
+        "You're hard at work in the [day_part], when [the_person.possessive_title!l] asks you over to discuss some plans."
     else:
-        "You're hard at work in the [day_part], when [the_person.possessive_title] calls you on your phone to discuss some plans."
+        "You're hard at work in the [day_part], when [the_person.possessive_title!l] calls you on your phone to discuss some plans."
 
     "You meet up in an empty office of the [the_place.name] department."
 
@@ -77,8 +77,8 @@ label business_meeting_action_label:
     return
 
 label business_meeting_introduction(the_person):
-    the_person.char "Hello [the_person.mc_title], thank you for meeting me on such short notice."
-    the_person.char "I have been thinking about some ways to improve the streamlining of the company."
+    the_person "Hello [the_person.mc_title], thank you for meeting me on such short notice."
+    the_person "I have been thinking about some ways to improve the streamlining of the company."
     return
 
 label business_meeting_flirtation(the_person):
@@ -93,9 +93,9 @@ label business_meeting_arrousal(the_person):
     if the_person.effective_sluttiness() > 30:
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
         $ mc.change_arousal(20)
-        the_person.char "Oh my [the_person.mc_title], it seems my proposal got you all exited."
+        the_person "Oh my [the_person.mc_title], it seems my proposal got you all exited."
     else:
-        the_person.char "She keeps stroking your legs while she talks, making sure you are focussed on her."
+        the_person "She keeps stroking your legs while she talks, making sure you are focussed on her."
     return
 
 label business_meeting_seduction(the_person):
@@ -113,22 +113,22 @@ label business_meeting_seduction(the_person):
                     "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                     $ the_person.break_taboo("underwear_nudity")
 
-            the_person.char "This should help you focus, [the_person.mc_title]."
+            the_person "This should help you focus, [the_person.mc_title]."
             $ strip_choice = None
             $ mc.change_arousal(20)
 
         if the_person.effective_sluttiness() > 60:
             "After spending a few more minutes talking she suddenly perks up."
-            the_person.char "I'm sorry [the_person.mc_title], it seems i've dropped something..."
+            the_person "I'm sorry [the_person.mc_title], it seems i've dropped something..."
 
             $ mc.change_arousal(10)
             $ the_person.draw_person(position = "blowjob")
 
             if the_person.has_taboo("touching_penis"):
-                the_person.char "Oh my god, that is a big one!"
+                the_person "Oh my god, that is a big one!"
                 mc.name "You can touch it for real, if you want."
                 "She wraps her hand around your shaft and rubs it gently."
-                the_person.char "Sure thing [the_person.mc_title], it feels nice and warm."
+                the_person "Sure thing [the_person.mc_title], it feels nice and warm."
                 $ the_person.break_taboo("touching_penis")
             else:
                 "[the_person.possessive_title] slides under the table grabbing your now exposed cock looking up at you with a smile."
@@ -140,7 +140,7 @@ label business_meeting_seduction(the_person):
                         "You move your hand to her face, pushing back a hair, slowly moving your hand behind her head pulling her closer to your throbbing cock."
                         "She looks at you with confusion when the tip of your cock moves over her cheek and lips."
                         mc.name "Why don't you give it a lick, you might like the taste."
-                        the_person.char "What? I don't know... it looks quite tasty though."
+                        the_person "What? I don't know... it looks quite tasty though."
                         "She kisses the tip slowly at first, but soon after she starts moving her tongue along the base of the head."
                         mc.name "Now try sliding into your mouth and sucking on it, like eating a popsicle."
                         "[the_person.possessive_title] only nods slightly and starts to move your member into her mouth."
@@ -155,19 +155,19 @@ label business_meeting_seduction(the_person):
                     "[the_person.possessive_title] stands up with a disappointed look on her face."
                     $ the_person.change_happiness(-5)
         else:
-            "You can't help but admire [the_person.possessive_title] boldness, while she keeps on talking."
+            "You can't help but admire [the_person.possessive_title!l] boldness, while she keeps on talking."
     else:
         "After while [the_person.title] stops rubbing your exposed member."
-        the_person.char "I will leave you now, it seems you have some other business to take care off."
+        the_person "I will leave you now, it seems you have some other business to take care off."
     return False
 
 label business_meeting_end(the_person, done):
     if the_person.effective_sluttiness() < 20:
-        the_person.char "Thank you for listening to my ideas, [the_person.mc_title]."
+        the_person "Thank you for listening to my ideas, [the_person.mc_title]."
     elif done:
-        the_person.char "Thank you, [the_person.mc_title], I hope you 'come' to see things my way."
+        the_person "Thank you, [the_person.mc_title], I hope you 'come' to see things my way."
     else:
-        the_person.char "Thank you, [the_person.mc_title], I hope you liked my contribution."
+        the_person "Thank you, [the_person.mc_title], I hope you liked my contribution."
 
     if not done:
         "You thank [the_person.title] for her time and that you will look into the matter."

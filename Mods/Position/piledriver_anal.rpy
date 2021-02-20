@@ -1,9 +1,9 @@
 init:
     python:
-        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 75, slut_cap = 95, requires_hard = True, requires_large_tits = False,
+        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 80, slut_cap = 110, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
-            girl_arousal = 18, girl_energy = 9,
-            guy_arousal = 24, guy_energy = 14,
+            girl_arousal = 18, girl_energy = 12,
+            guy_arousal = 24, guy_energy = 20,
             connections = [],
             intro = "intro_piledriver_anal",
             scenes = ["scene_piledriver_anal_1","scene_piledriver_anal_2"],
@@ -36,22 +36,22 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
     "Your run your cock along her slit a few times, getting it lubricated. She understands what you mean after a few seconds."
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
         if the_girl.effective_sluttiness() > 100:
-            the_girl.char "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
+            the_girl "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
         else:
-            the_girl.char "Oh god, you're gonna fuck my ass aren't you?"
+            the_girl "Oh god, you're gonna fuck my ass aren't you?"
     else: #She's inexperienced and doesn't quite know what to do.
         if the_girl.effective_sluttiness() > 100:
-            the_girl.char "Oh fuck, you want to put it in my ass don't you?"
+            the_girl "Oh fuck, you want to put it in my ass don't you?"
         else:
             "[the_girl.possessive_title] looks worried."
-            the_girl.char "You... you want to put it in my ass don't you?"
+            the_girl "You... you want to put it in my ass don't you?"
 
     "When you cock is good a lubed up, you pull back slightly, then line it up with her pretty little asshole."
     mc.name "Ready?"
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
-        the_girl.char "Yes!"
+        the_girl "Yes!"
     else:
-        the_girl.char "No, but I don't know if I ever will be."
+        the_girl "No, but I don't know if I ever will be."
     "You hold onto her ankles and push yourself in. She gasps as the tip of your cock slips into her ass."
     "[the_girl.title] grunts and gasps as you slowly fit your whole dick inside of her. When you bottom out you hold still, giving her time to adjust to your size."
     "After a long moment it seems like she's ready and you start to move, slowly at first then picking up speed."
@@ -69,10 +69,10 @@ label taboo_break_piledriver_anal(the_girl, the_location, the_object):
     "You grab onto [the_girl.title]'s ankles and lift them up, bringing her knees up to your shoulders."
     "You rub your cock along her slit, getting yourself good and wet."
     if the_girl.effective_sluttiness(piledriver_anal.associated_taboo) > piledriver_anal.slut_cap:
-        the_girl.char "Ooh... I can't believe I'm saying this, but I want it!"
+        the_girl "Ooh... I can't believe I'm saying this, but I want it!"
         "She reaches down between her legs and holds onto your cock, lining it up with her ass for you."
     else:
-        the_girl.char "Ah! What are you doing?"
+        the_girl "Ah! What are you doing?"
         mc.name "Trust me, this will feel great."
         "You reach down between your legs and hold onto your cock, lining it up with her tight puckered hole."
     "You hold onto her ankles and push yourself in. She gasps as the tip of your cock slips into her ass."
@@ -143,7 +143,7 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
         "Cum inside of her":
             "You push yourself balls deep into [the_girl.title]'s ass and dump your load."
             #This is where the "cum in me" section would go instead
-            #the_girl.char "Ah! Ah!"
+            #the_girl "Ah! Ah!"
             "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
             if mc.condom:
                 "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
@@ -155,9 +155,9 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("anal creampies") > 0:
                     # If she's into both...
                     $ the_girl.discover_opinion("anal creampies")
-                    the_girl.char "Oh fuck... I'm so full of cum. I don't want to move..."
+                    the_girl "Oh fuck... I'm so full of cum. I don't want to move..."
                 else:
-                    the_girl.char "Wow, that was intense. I hope you didn't stretch me out too badly."
+                    the_girl "Wow, that was intense. I hope you didn't stretch me out too badly."
                 "Her puckered hole is raw and gaping. You watch as her asshole slowly starts to close, sealing your load inside of it."
                 "She slowly lowers her legs until she is laying flat on the [the_object.name]."
 
@@ -196,7 +196,7 @@ label transition_default_piledriver_anal(the_girl, the_location, the_object):
     "You push [the_girl.title] onto her back onto the [the_object.name]. You grab her ankles and push them up by her head."
     the_girl "Whoa! Oh god be gentle with me..."
     mc.name "Ready?"
-    the_girl.char "I... I think so."
+    the_girl "I... I think so."
     "You hold onto her hips and push forward, spreading her ass with your large cock. She gasps and closes her eyes, until finally you've buried your shaft in her."
     "After giving her a second to acclimatize you start to thrust in and out, slowly at first but picking up speed."
     return
@@ -211,7 +211,7 @@ label strip_piledriver_anal(the_girl, the_clothing, the_location, the_object):
     return
 
 label strip_ask_piledriver_anal(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "[the_girl.mc_title], what do you think of me taking off my [the_clothing.name]?"
+    the_girl "[the_girl.mc_title], what do you think of me taking off my [the_clothing.name]?"
     "[the_girl.title] pants as you fuck her ass."
     menu:
         "Let her strip":
@@ -223,13 +223,13 @@ label strip_ask_piledriver_anal(the_girl, the_clothing, the_location, the_object
         "Leave it on":
             mc.name "No, I want you to keep it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do I look sexy in it? Does it turn you on?"
+                the_girl "Do I look sexy in it? Does it turn you on?"
                 "You speed up, fucking her faster in response to her question."
             elif the_girl.sluttiness < 100:
-                the_girl.char "Does it make me look like a good little slut? All I want to be is your good little slut [the_girl.mc_title]."
+                the_girl "Does it make me look like a good little slut? All I want to be is your good little slut [the_girl.mc_title]."
                 "You speed up, fucking her faster in response to her question."
             else:
-                the_girl.char "Does it look good on me, when you're fucking my ass? When you're stirring up my insides with your big cock?"
+                the_girl "Does it look good on me, when you're fucking my ass? When you're stirring up my insides with your big cock?"
                 "You speed up, fucking her faster in response to her question."
     return
 
@@ -239,6 +239,6 @@ label orgasm_piledriver_anal(the_girl, the_location, the_object):
     "Her ass squeezes down on your dick, so tight it's almost difficult to move."
     "She throws her head back and tenses up, her whole body quivering as she cums."
     "You fuck her ass through her climax, making her moan and pant with each thrust. After a few seconds it passes and she relaxes."
-    the_girl.char "Oh god, keep fucking me [the_girl.mc_title]!"
+    the_girl "Oh god, keep fucking me [the_girl.mc_title]!"
     mc.name "Like you could stop me if you didn't want me to."
     return

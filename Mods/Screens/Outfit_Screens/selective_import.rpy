@@ -36,7 +36,7 @@ init 2 python:
         count = 0
         found_in = []
         for wardrobes in sorted(import_wardrobes):
-            if import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], the_name):
+            if import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes], the_name):
                 found_in.append(wardrobes.split(" ")[0])
                 count+=1
         if count > 0:
@@ -61,25 +61,26 @@ init 2 python:
         import_wardrobes = {}
         if slut_limit is None: # If slut_limit is None then add any and all options
 
-            import_wardrobes["Player Wardrobe"] = [[mc.designed_wardrobe]]
-            import_wardrobes["Slaves"] = [[x.wardrobe for x in people_in_role(slave_role)]]
+            import_wardrobes["Player Wardrobe"] = [mc.designed_wardrobe]
+            import_wardrobes["Slaves"] = [x.wardrobe for x in people_in_role(slave_role)]
 
-        import_wardrobes["Marketing Division"] = [[mc.business.m_uniform]]
-        import_wardrobes["Research Division"] = [[mc.business.r_uniform]]
-        import_wardrobes["Production Division"] = [[mc.business.p_uniform]]
-        import_wardrobes["Supply Division"] = [[mc.business.s_uniform]]
-        import_wardrobes["HR Division"] = [[mc.business.h_uniform]]
-        import_wardrobes["All Division"] = [[mc.business.all_uniform]]
+        import_wardrobes["Marketing Division"] = [mc.business.m_uniform]
+        import_wardrobes["Research Division"] = [mc.business.r_uniform]
+        import_wardrobes["Production Division"] = [mc.business.p_uniform]
+        import_wardrobes["Supply Division"] = [mc.business.s_uniform]
+        import_wardrobes["HR Division"] = [mc.business.h_uniform]
+        import_wardrobes["All Division"] = [mc.business.all_uniform]
         return import_wardrobes
 
     def get_strip_club_import_wardrobes():
         import_wardrobes = {}
-        import_wardrobes["Player Wardrobe"] = [[mc.designed_wardrobe]]
-        import_wardrobes["Strippers"] = [[stripclub_wardrobe]]
-        import_wardrobes["Waitresses"] = [[waitress_wardrobe]]
-        import_wardrobes["Manager"] = [[manager_wardrobe]]
-        import_wardrobes["Mistress"] = [[mistress_wardrobe]]
-        import_wardrobes["BDSM performers"] = [[BDSM_performer_wardrobe]]
+        import_wardrobes["Player Wardrobe"] = [mc.designed_wardrobe]
+        import_wardrobes["All Strip Club Outfits"] = [mc.business.stripclub_wardrobe]
+        import_wardrobes["Strippers"] = [mc.business.stripper_wardrobe]
+        import_wardrobes["Waitresses"] = [mc.business.waitress_wardrobe]
+        import_wardrobes["Manager"] = [mc.business.manager_wardrobe]
+        import_wardrobes["Mistress"] = [mc.business.mistress_wardrobe]
+        import_wardrobes["BDSM performers"] = [mc.business.bdsm_wardrobe]
         return import_wardrobes
 
 init 2:
@@ -102,7 +103,7 @@ init 2:
             else:
                 temp_wardrobe = Wardrobe("Temporary Wardrobe")
                 for category in import_wardrobes:
-                    for wardrobes in import_wardrobes[category][0]:
+                    for wardrobes in import_wardrobes[category]:
                         for outfit in wardrobes.outfits + mc.designed_wardrobe.outfits:
                             if outfit not in temp_wardrobe.outfits:
                                 temp_wardrobe.outfits.append(outfit)
@@ -207,24 +208,24 @@ init 2:
                                                                             text_style "serum_text_style"
                                                                             xfill True
 
-                                                                            if not import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
+                                                                            if not import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes], outfit.name):
                                                                                 action [
                                                                                     If(slut_limit != None, Function(mc.business.listener_system.fire_event, "add_uniform", the_outfit = outfit, the_type = outfit_categories[category][1])), # Make sure it registers progress towards work_goals. #NOTE: Needs testing as I have been unable to setup proper test
-                                                                                    Function(import_add_outfit_to_wardrobes, import_wardrobes[wardrobes][0], outfit, outfit_type = outfit_categories[category][1]),
+                                                                                    Function(import_add_outfit_to_wardrobes, import_wardrobes[wardrobes], outfit, outfit_type = outfit_categories[category][1]),
                                                                                     Function(renpy.notify, ("Outfit imported to " + wardrobes if slut_limit is None else "Outfit assigned to " + wardrobes)),
 
                                                                                     ]
                                                                             else:
 
                                                                                 if slut_limit is not None:
-                                                                                    if wardrobes == "Player Wardrobe":  # don't allow remove from player wardrobe
+                                                                                    if wardrobes == "Player Wardrobe" or wardrobes == "All Strip Club Outfits":  # don't allow remove from player / dressing room wardrobes
                                                                                         background "#aa4433"
                                                                                         sensitive False
-                                                                                    elif import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes][0], outfit.name):
+                                                                                    elif import_wardrobes_has_outfit_with_name(import_wardrobes[wardrobes], outfit.name):
                                                                                         background "#3ffc45"
                                                                                     #If the outfit is imported / assigned already then attempt to remove it.
                                                                                     action [
-                                                                                        Function(import_remove_outfit_from_wardrobes, import_wardrobes[wardrobes][0], outfit),
+                                                                                        Function(import_remove_outfit_from_wardrobes, import_wardrobes[wardrobes], outfit),
                                                                                         Function(renpy.notify, "Outfit removed from " + wardrobes)
                                                                                         ]
 

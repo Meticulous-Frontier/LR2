@@ -16,8 +16,8 @@ init 5 python:
 
     def broken_AC_crisis_update_sluttiness():
         for person in mc.business.p_div.people:
-            person.change_slut_temp(10, add_to_log = False)
-        mc.log_event("All Production Staff: +10 Sluttiness","float_text_pink")
+            person.change_slut_temp(5, add_to_log = False)
+        mc.log_event("All Production Staff: +5 Sluttiness","float_text_pink")
         return
 
     def broken_ac_crisis_strip_other_girls(person, girl):
@@ -78,20 +78,20 @@ label broken_AC_crisis_label_enhanced:
 
                 $ scene_manager.update_actor(the_person, emotion = "happy")
                 if the_person.effective_sluttiness() < 20:
-                    the_person.char "He's got a point girls. Come on, we're all adults here."
+                    the_person "He's got a point girls. Come on, we're all adults here."
                 elif the_person.effective_sluttiness() < 60:
-                    the_person.char "He's got a point girls. I'm sure we've all shown a little bit of skin before anyways, right?"
+                    the_person "He's got a point girls. I'm sure we've all shown a little bit of skin before anyways, right?"
                 else:
-                    the_person.char "Let's do it girls! I can't be the only one who loves an excuse to flash her tits, right?"
+                    the_person "Let's do it girls! I can't be the only one who loves an excuse to flash her tits, right?"
 
             else: #There's just one person here, have them strip down.
                 $ scene_manager.update_actor(the_person, emotion = "sad")
                 mc.name "[the_person.title], I know it's uncomfortable in here right now, but we're going to have to make due."
                 mc.name "If you feel like it would help to take something off, I'm lifting the dress code until the air condition is fixed."
                 if the_person.effective_sluttiness() < 20:
-                    the_person.char "Taking some of this off would be a lot more comfortable..."
+                    the_person "Taking some of this off would be a lot more comfortable..."
                 else:
-                    the_person.char "I might as well. You don't mind seeing a little skin, do you?"
+                    the_person "I might as well. You don't mind seeing a little skin, do you?"
 
             $ removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(the_person, temp_sluttiness_boost = 20)
 
@@ -99,7 +99,7 @@ label broken_AC_crisis_label_enhanced:
                 call broken_AC_crisis_break_taboo(the_person) from _call_broken_AC_crisis_break_taboo_the_person
             else:
                 "[the_person.possessive_title] fiddles with some of her clothing, then shrugs."
-                the_person.char "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
+                the_person "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
 
             if __builtin__.len(mc.business.p_div.people) > 1:
                 if removed_something:
@@ -109,7 +109,7 @@ label broken_AC_crisis_label_enhanced:
                     call screen enhanced_main_choice_display(build_menu_items([broken_AC_crisis_get_watch_list_menu(the_person)]))
                     $ girl_choice = _return
 
-                    "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."
+                    "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title!l]."
 
                     $ scene_manager.draw_scene()
                     $ scene_manager.add_actor(girl_choice, display_transform = character_center_flipped)
@@ -117,7 +117,7 @@ label broken_AC_crisis_label_enhanced:
                     $ removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(girl_choice, temp_sluttiness_boost = 20)
                     if removed_something:
                         call broken_AC_crisis_break_taboo(girl_choice) from _call_broken_AC_crisis_break_taboo_other_girl
-                        $ slut_report = girl_choice.change_slut_temp(10)
+                        $ girl_choice.change_slut_temp(10)
                         if girl_choice.effective_sluttiness() < 40:
                             $ scene_manager.update_actor(girl_choice, emotion = "sad")
                             "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you and blushes slightly and avoids making eye contact."
@@ -127,7 +127,7 @@ label broken_AC_crisis_label_enhanced:
                             "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you and gives a quick wink before turning back to [the_person.title]."
                     else:
                         "[girl_choice.title] fiddles with some of her clothing, then shrugs meekly."
-                        girl_choice.char "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
+                        girl_choice "I'm not sure I'm comfortable taking any of this off... I'm sure I'll be fine in the heat for a little bit."
 
                     if __builtin__.len(mc.business.p_div.people) > 2:
                         "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
@@ -186,8 +186,8 @@ label broken_AC_crisis_break_taboo(the_girl):
         "[the_girl.possessive_title] finishes stripping and looks at back at you."
         if (the_girl.outfit.wearing_panties() and not the_girl.outfit.panties_covered()) or (the_girl.outfit.wearing_bra() and not the_girl.outfit.bra_covered()):
             if the_girl.has_taboo("underwear_nudity"):
-                "She seems nervous at first, but quickly gets use to being in her underwear in front of you."
+                "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                 $ the_girl.break_taboo("underwear_nudity")
 
-    the_girl.char "Ahh, that's a lot better."
+    the_girl "Ahh, that's a lot better."
     return

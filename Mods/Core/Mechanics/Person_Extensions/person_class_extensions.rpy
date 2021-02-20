@@ -117,11 +117,8 @@ init -1 python:
 
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
-        for location in list_of_places:
-            if self in location.people:
-                return location
-
-        return self.home # fallback location for person is home
+        location = next((x for x in list_of_places if self in x.people), None)
+        return (location if location else self.home) # fallback location for person is home
 
     Person.location = location
 
@@ -480,7 +477,7 @@ init -1 python:
 
     Person.get_known_opinion_list = get_known_opinion_list
 
-    def generate_daughter_enhanced(self): #Generates a random person who shares a number of similarities to the mother
+    def generate_daughter_enhanced(self, force_live_at_home = False): #Generates a random person who shares a number of similarities to the mother
         age = renpy.random.randint(18, self.age-16)
 
         if renpy.random.randint(0,100) < 60:
@@ -523,7 +520,7 @@ init -1 python:
         else:
             height = None
 
-        if renpy.random.randint(0,100) < 85 - age: #It is less likely she lives at home the older she is.
+        if force_live_at_home or renpy.random.randint(0,100) < 85 - age: #It is less likely she lives at home the older she is.
             start_home  = self.home
         else:
             start_home  = None
@@ -866,6 +863,11 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
+            # dominant person slowly bleeds obedience on run_day
+            if person.is_dominant():
+                if person.obedience > 100 - (person.get_opinion_score("taking control") * 5):
+                    person.change_obedience(-1, add_to_log = False)
+
 
         return run_day_wrapper
 
@@ -1236,7 +1238,7 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = Flatten(self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
@@ -1277,11 +1279,11 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        return Composite(*composite_list)
+        return Flatten(Composite(*composite_list))
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
-    def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all posible known tags for the character.
+    def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all possible known tags for the character.
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
@@ -1385,22 +1387,18 @@ init -1 python:
     def is_dominant(self):
         if self.get_opinion_score("taking control") > 0:
             return True
-        if self.personality is alpha_personality:
+        if self.personality == alpha_personality:
             return True
         return False
     Person.is_dominant = is_dominant
 
     def is_girlfriend(self):
-        if girlfriend_role in self.special_role:
-            return True
-        return False
+        return self.has_role(girlfriend_role)
 
     Person.is_girlfriend = is_girlfriend
 
     def is_affair(self):
-        if affair_role in self.special_role:
-            return True
-        return False
+        return self.has_role(affair_role)
 
     Person.is_affair = is_affair
 
@@ -1424,25 +1422,27 @@ init -1 python:
     Person.should_wear_work_outfit = should_wear_work_outfit
 
     def wear_work_outfit(self):
-        if self.work_outfit is None:
-            if self.has_role(stripper_role):
-                self.work_outfit = stripclub_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
-            if self.has_role(waitress_role):
-                self.work_outfit = waitress_wardrobe.decide_on_outfit2(self)
-            if self.has_role(bdsm_performer_role):
-                self.work_outfit = BDSM_performer_wardrobe.decide_on_outfit2(self)
-            if self.has_role(mistress_role):
-                self.work_outfit = mistress_wardrobe.decide_on_outfit2(self)
-            if self.has_role(manager_role):
-                self.work_outfit = manager_wardrobe.decide_on_outfit2(self)
+        if not self.work_outfit:
+            return
 
-        if self.work_outfit is not None: #If our planned uniform is STILL None it means we are unable to construct a valid uniform. Only assign it as our outfit if we have managed to construct a uniform.
-            self.apply_outfit(self.work_outfit) #We apply clothing taboos to uniforms because the character is assumed to have seen them in them.
+        if self.has_role(stripper_role):
+            self.work_outfit = mc.business.stripper_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
+        elif self.has_role(waitress_role):
+            self.work_outfit = mc.business.waitress_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(bdsm_performer_role):
+            self.work_outfit = mc.business.bdsm_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(mistress_role):
+            self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(manager_role):
+            self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
+
+        if self.work_outfit:
+            self.apply_outfit(self.work_outfit)
         return
 
     Person.wear_work_outfit = wear_work_outfit
 
-    def review_outfit_enhanced(self, dialogue = True):
+    def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         self.outfit.remove_all_cum()
         if self.should_wear_uniform():
             self.wear_uniform() # Reset uniform
@@ -1455,8 +1455,9 @@ init -1 python:
 
     def apply_gym_outfit(self):
         if workout_wardrobe:
-            # get personal copy of outfit, so we don't change the gym wardrobe (in any events)
-            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+            builder = WardrobeBuilder(self)
+            self.apply_outfit(builder.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            # self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
@@ -1480,7 +1481,9 @@ init -1 python:
             # add black slips
             self.outfit.add_feet(slips.get_copy(), colour_black)
         elif workout_wardrobe:
-            self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+            builder = WardrobeBuilder(self)
+            self.apply_outfit(builder.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            #self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
@@ -1952,24 +1955,16 @@ init -1 python:
 ##################################################
 
     def body_is_thin(self):
-        if self.body_type == "thin_body":
-            return True
-        return False
+        return self.body_type == "thin_body"
 
     def body_is_average(self):
-        if self.body_type == "standard_body":
-            return True
-        return False
+        return self.body_type == "standard_body"
 
     def body_is_thick(self):
-        if self.body_type == "curvy_body":
-            return True
-        return False
+        return self.body_type == "curvy_body"
 
     def body_is_pregnant(self):
-        if self.body_type == "standard_preg_body":
-            return True
-        return False
+        return self.body_type == "standard_preg_body"
 
     Person.body_is_thin = body_is_thin
     Person.body_is_average = body_is_average
@@ -1981,88 +1976,65 @@ init -1 python:
 ##################################################
 
     def get_fetish_count(self):
-        fetish_count = 0
-        for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
-                fetish_count += 1
-        return fetish_count
+        return __builtin__.len([x for x in self.special_role if x in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]])
 
     def get_fetishes_description(self):
-        description = ""
-        for role in self.special_role:
-            if role in [vaginal_fetish_role, anal_fetish_role, cum_internal_role, cum_external_role, oral_fetish_role, breeding_fetish_role]:
-                if __builtin__.len(description) > 0:
-                    description += ", "
-                description += role.role_name
-        return description
-
-    def has_vaginal_fetish(self):
-        if vaginal_fetish_role in self.special_role:
-            return True
-        return False
+        return ", ".join([x for x in self.special_role if x in [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]])
 
     def has_anal_fetish(self):
-        if anal_fetish_role in self.special_role:
-            return True
-        return False
+        return self.has_role(anal_fetish_role)
 
-    def has_oral_fetish(self):
-        if oral_fetish_role in self.special_role:
-            return True
-        return False
-
-    def has_internal_cum_fetish(self):
-        if cum_internal_role in self.special_role:
-            return True
-        return False
-
-    def has_external_cum_fetish(self):
-        if cum_external_role in self.special_role:
-            return True
-        return False
-
-    def has_cum_fetish(self):  #TODO update this to applicable roles when cum fetish roles have been combined.
-        if cum_external_role in self.special_role or cum_internal_role in self.special_role:
-            return True
-        return False
+    def has_cum_fetish(self):
+        return self.has_role(cum_fetish_role)
 
     def has_breeding_fetish(self):
-        if breeding_fetish_role in self.special_role:
-            return True
-        return False
+        return self.has_role(breeding_fetish_role)
+
+    def has_exhibition_fetish(self):
+        return self.has_role(exhibition_fetish_role)
 
     Person.get_fetish_count = get_fetish_count
     Person.get_fetishes_description = get_fetishes_description
-    Person.has_vaginal_fetish = has_vaginal_fetish
+
     Person.has_anal_fetish = has_anal_fetish
-    Person.has_oral_fetish = has_oral_fetish
-    Person.has_internal_cum_fetish = has_internal_cum_fetish
-    Person.has_external_cum_fetish = has_external_cum_fetish
     Person.has_cum_fetish = has_cum_fetish
     Person.has_breeding_fetish = has_breeding_fetish
+    Person.has_exhibition_fetish = has_exhibition_fetish
+
+    def has_started_anal_fetish(self):
+        return self.event_triggers_dict.get("anal_fetish_start", False)
+
+    def has_started_breeding_fetish(self):
+        return self.event_triggers_dict.get("breeding_fetish_start", False)
+
+    def has_started_cum_fetish(self):
+        return self.event_triggers_dict.get("cum_fetish_start", False)
+
+    def has_started_exhibition_fetish(self):
+        return self.event_triggers_dict.get("exhibition_fetish_start", False)
+
+    Person.has_started_anal_fetish = has_started_anal_fetish
+    Person.has_started_breeding_fetish = has_started_breeding_fetish
+    Person.has_started_cum_fetish = has_started_cum_fetish
+    Person.has_started_exhibition_fetish = has_started_exhibition_fetish
 
     #Additional functions
 
     def is_submissive(self):
-        if self.get_opinion_score("being submissive") > 0:
-            return True
-        elif self.get_opinion_score("being submissive") > -2 and self.obedience > 150:
-            return True
-        return False
+        return self.get_opinion_score("being submissive") > 0 \
+            or (self.get_opinion_score("being submissive") > -2 and self.obedience > 150)
 
     Person.is_submissive = is_submissive
 
     def is_jealous(self):
-        if self.is_girlfriend() or self.is_affair():
-            if self == sarah and sarah_threesomes_unlocked():
-                self.event_triggers_dict["is_jealous"] = False
-                return False
-            if self.event_triggers_dict.get("is_jealous", True) == True:
-                if self.love > 90 and self.obedience > 200:
-                    self.event_triggers_dict["is_jealous"] = False
-                    return False
-                return True
-        return False
+        if not (self.is_girlfriend() or self.is_affair()):
+            return False
+
+        if self == sarah and sarah_threesomes_unlocked():
+            return False
+        if self.love > 90 and self.obedience > 200:
+            return False
+        return True
 
     Person.is_jealous = is_jealous
 
@@ -2079,7 +2051,6 @@ init -1 python:
     def attempt_skill_training(self, the_skill, modifier = 0):
         if self.suggestibility + modifier > renpy.random.randint(0, 100):
             self.increase_opinion_score(the_opinion)
-
         return
 
     Person.attempt_opinion_training = attempt_opinion_training
@@ -2087,7 +2058,7 @@ init -1 python:
     def have_orgasm(self, the_position = None, the_object = None, half_arousal = True):
         mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
-        self.change_slut_temp(5)
+        self.change_slut_temp(3)
         self.change_happiness(5)
         if half_arousal:
             self.change_arousal(-self.arousal/2)
@@ -2119,11 +2090,7 @@ init -1 python:
     Person.favorite_colour = favorite_colour
 
     def is_single(self):
-        if self.relationship == "Single":
-            if self.is_girlfriend():
-                return False
-            return True
-        return False
+        return self.relationship == "Single" and not self.is_girlfriend()
 
     Person.is_single = is_single
 
@@ -2159,12 +2126,12 @@ init -1 python:
         return
 
     def roleplay_possessive_title_swap(self, new_title):
-        self.event_triggers_dict["backup_possessive_title"] = self.possesive_title
+        self.event_triggers_dict["backup_possessive_title"] = self.possessive_title
         self.set_possessive_title(new_title)
         return
 
     def roleplay_possessive_title_revert(self):
-        self.possesive_title = self.event_triggers_dict.get("backup_possessive_title", self.name)
+        self.possessive_title = self.event_triggers_dict.get("backup_possessive_title", self.name)
         return
 
     def roleplay_personality_swap(self, personality):

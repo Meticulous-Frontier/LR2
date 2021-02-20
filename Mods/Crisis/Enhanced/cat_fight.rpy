@@ -27,26 +27,26 @@ label cat_fight_crisis_enhanced_label():
             renpy.return_statement() #Just in case something goes wrong getting a relationship we'll exit gracefully.
         scene_manager = Scene()
 
-    person_one.char "Excuse me, [person_one.mc_title]?"
+    person_one "Excuse me, [person_one.mc_title]?"
     $ scene_manager.add_actor(person_one, emotion = "angry")
     $ scene_manager.add_actor(person_two, emotion = "angry", display_transform = character_center_flipped)
     "You feel a tap on your back while you're working. [person_one.title] and [person_two.title] are glaring at each other while they wait to get your attention."
-    person_one.char "I was just in the break room and saw [person_two.name] digging around in the fridge looking for other people's lunches."
+    person_one "I was just in the break room and saw [person_two.name] digging around in the fridge looking for other people's lunches."
     $ scene_manager.update_actor(person_two, position = "stand4")
-    person_two.char "That's a lie and you know it! I was looking for my own lunch and you're just trying to get me in trouble!"
+    person_two "That's a lie and you know it! I was looking for my own lunch and you're just trying to get me in trouble!"
     "[person_two.title] looks at you and pleads."
-    person_two.char "You have to believe me, [person_one.name] is making all of this up! That's just the kind of thing she would do, too."
+    person_two "You have to believe me, [person_one.name] is making all of this up! That's just the kind of thing she would do, too."
     $ scene_manager.update_actor(person_one, position = "stand4")
     if person_two.sluttiness > 50:
-        person_one.char "Jesus, why don't you just suck his cock and get it over with. That's how you normally convince people, right?"
+        person_one "Jesus, why don't you just suck his cock and get it over with. That's how you normally convince people, right?"
     else:
-        person_one.char "Oh boo hoo, you got caught and now you're going to get in trouble. Jesus, is this what you're always like?"
+        person_one "Oh boo hoo, you got caught and now you're going to get in trouble. Jesus, is this what you're always like?"
     $ scene_manager.update_actor(person_two, position = "stand3")
     "[person_two.title] spins to glare at [person_one.title]."
     if person_one.sluttiness > 50:
-        person_two.char "At least I'm not slave to some guys dick like you are. You're such a worthless slut."
+        person_two "At least I'm not slave to some guys dick like you are. You're such a worthless slut."
     else:
-        person_two.char "Oh fuck you. You're just a stuck up bitch, you know that?"
+        person_two "Oh fuck you. You're just a stuck up bitch, you know that?"
 
     $ scene_manager.update_actor(person_one, position = "stand2")
     menu:
@@ -64,15 +64,15 @@ label cat_fight_crisis_enhanced_label():
             #Obedience boost to both, happiness drop to both. At high sluttiness have them "kiss and make up"
             mc.name "Enough! I can't be the arbitrator for every single conflict we have in this office. You two are going to have to figure this out between yourselves."
             $ scene_manager.update_actor(person_one, emotion="sad")
-            person_one.char "But sir..."
+            person_one "But sir..."
             if person_one.sluttiness > 50 and person_two.sluttiness > 50:
                 mc.name "I said enough. Clearly you need help sorting this out."
                 "You stand up and take [person_one.title]'s hand in your right hand, then take [person_two.title]'s hand in your left."
                 mc.name "The two of you are part of a larger team. I need you to work together."
                 "You bring the girls hands together and wrap yours around both of theirs."
-                person_one.char "Sorry sir, you're right."
+                person_one "Sorry sir, you're right."
                 $ scene_manager.update_actor(person_two, emotion="sad")
-                person_two.char "You're right, I'm sorry sir. And I'm sorry [person_one.name]."
+                person_two "You're right, I'm sorry sir. And I'm sorry [person_one.name]."
                 "You bring your hands back, leaving [person_one.title] and [person_two.title] holding hands. They look away from each other sheepishly."
                 mc.name "Good to hear. Now kiss and make up, then you can get back to work."
                 "The girls glance at you, then at each other. After a moment of hesitation [person_two.title] leans forward and kisses [person_one.title] on the lips."
@@ -82,24 +82,24 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_one, position = "stand3")
                 $ scene_manager.update_actor(person_two, position = "stand2")
                 "[person_one.title] breaks the kiss and steps back, blushing and panting softly."
-                $ person_one.change_stats(obedience = 5, slut_temp = 10)
+                $ person_one.change_stats(obedience = 5, slut_temp = 3)
                 person_one.name "I should... I should get back to work. Sorry for causing any trouble."
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, emotion = "happy")
                 "[person_two.title] watches [person_one.title] leave, eyes lingering on her ass as she walks away."
                 $ scene_manager.remove_actor(person_one)
                 mc.name "Go on, you should get back to work too."
-                $ person_two.change_stats(obedience = 5, slut_temp = 10)
+                $ person_two.change_stats(obedience = 5, slut_temp = 3)
                 $ scene_manager.update_actor(person_two, position = "back_peek")
                 "You give [person_two.title] a light slap on the butt to pull her attention back to you. She nods quickly and heads the other way."
             else:
                 mc.name "I said enough. Now do you need my help talking this out?"
                 $ person_one.change_stats(happiness = -5, obedience = 5)
                 $ scene_manager.update_actor(person_one, emotion="sad")
-                person_one.char "No sir, I think we will be alright."
+                person_one "No sir, I think we will be alright."
                 $ person_two.change_stats(happiness = -5, obedience = 5)
                 $ scene_manager.update_actor(person_two, emotion="sad")
-                person_two.char "Understood sir, there won't be any more problems."
+                person_two "Understood sir, there won't be any more problems."
                 mc.name "Good to hear. Now get back to work."
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, position = "walking_away")
@@ -115,14 +115,14 @@ label cat_fight_crisis_enhanced_label():
                 $ winner = person_two
                 $ loser = person_one
 
-            winner.char "Hear that? We're going to have to sort this out, right here. Right now."
+            winner "Hear that? We're going to have to sort this out, right here. Right now."
             "[winner.title] takes a step towards [loser.title], invading her personal space."
             $ scene_manager.update_actor(loser, position = "stand5")
-            loser.char "What, is that supposed to scare me? Back up."
+            loser "What, is that supposed to scare me? Back up."
             "[loser.title] plants a hand on [winner.title]'s chest and shoves her backwards. [winner.title] stumbles a step and bumps into a desk behind her."
             $ scene_manager.update_actor(loser, position = "stand4")
             $ scene_manager.update_actor(winner, position = "stand5")
-            winner.char "Oh that's fucking IT! COME HERE BITCH!"
+            winner "Oh that's fucking IT! COME HERE BITCH!"
             "[winner.title] throws herself at [loser.title]. Before you can say anything else they're grabbing at each others hair, yelling and screaming as they bounce around the office."
             $ scene_manager.update_actor(winner, position = "stand3")
             #Random piece of clothing is lost from a random member of the fight, after which time they run off to get things organised again.
@@ -134,37 +134,37 @@ label cat_fight_crisis_enhanced_label():
                 if the_clothing:
                     "While they fight [winner.title] gets a hold of [loser.title]'s [the_clothing.name]. She tugs on it hard while she swings [loser.title] around and there's a loud rip."
                     $ scene_manager.draw_animated_removal(loser, the_clothing)
-                    loser.char "Ugh, look what you've done! Give that back!"
+                    loser "Ugh, look what you've done! Give that back!"
                     "[winner.title] throws the torn garment to [loser.title] and smiles in victory."
                     $ scene_manager.update_actor(winner, emotion = "happy")
-                    winner.char "I hope that teaches you a lesson."
+                    winner "I hope that teaches you a lesson."
                     $ scene_manager.update_actor(loser, emotion = "sad")
-                    $ loser.change_stats(obedience = -5, happiness = -5, slut_temp = 5)
-                    loser.char "Fuck you. Bitch."
+                    $ loser.change_stats(obedience = -5, happiness = -5, slut_temp = 3)
+                    loser "Fuck you. Bitch."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] grabs her [the_clothing.name] and hurries off to find somewhere private."
                     $ scene_manager.remove_actor(loser)
                     $ winner.change_stats(obedience = -5, happiness = 5)
                     "[winner.title] looks at you, out of breath but obviously a little smug."
-                    winner.char "Sorry sir, I won't let her get out of line like that again."
+                    winner "Sorry sir, I won't let her get out of line like that again."
                     $ scene_manager.update_actor(winner, position = "walking_away")
                     "She smooths her hair back and gets back to work. You decide to do the same."
                 else:
                     "After a minute of fighting [winner.title] gets her hands on [loser.title]'s hair and yanks on it hard. [loser.title] yells and struggles, but it's clear she's lost."
                     $ scene_manager.update_actor(loser, emotion = "sad")
-                    loser.char "Fine! Fine, you win!"
+                    loser "Fine! Fine, you win!"
                     $ scene_manager.update_actor(winner, emotion = "happy")
                     "[winner.title] pushes [loser.title] away from her and smiles in victory."
-                    winner.char "I hope that teaches you a lesson."
-                    $ loser.change_stats(obedience = -5, happiness = -5, slut_temp = 5)
-                    loser.char "Fuck you. Bitch."
+                    winner "I hope that teaches you a lesson."
+                    $ loser.change_stats(obedience = -5, happiness = -5, slut_temp = 3)
+                    loser "Fuck you. Bitch."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] storms off to find somewhere private to nurse her wounds."
                     $ scene_manager.remove_actor(loser)
                     $ winner.change_stats(obedience = -5, happiness = 5)
                     $ scene_manager.update_actor(winner, position = "stand2")
                     "[winner.title] looks at you, out of breath but obviously a little smug."
-                    winner.char "Sorry sir, I won't let her get out of line like that again."
+                    winner "Sorry sir, I won't let her get out of line like that again."
                     $ scene_manager.update_actor(winner, position = "walking_away")
                     "She smooths her hair back and gets back to work. You decide to do the same."
 
@@ -175,34 +175,34 @@ label cat_fight_crisis_enhanced_label():
                     if ran_num == 0:
                         "[winner.title] grabs [loser.title] by the [the_clothing.name] and yanks her around. There's a loud rip and the piece of clothing comes free."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
-                        loser.char "You bitch!"
+                        loser "You bitch!"
                     elif ran_num == 1:
                         "[loser.title] circles around [winner.title], then runs forward yelling and screaming. [winner.title] pushes her to the side, then grabs her by the [the_clothing.name] and tries to pull her to the ground."
                         "The girls struggle until [loser.title]'s [the_clothing.name] comes free and they separate. [winner.title] drops it to the ground."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
-                        loser.char "You'll pay for that, slut!"
+                        loser "You'll pay for that, slut!"
                     elif ran_num == 2:
                         "[winner.title] and [loser.title] collide, screaming profanities at each other."
-                        "You aren't sure exactly what happens, but when they separate [winner.title] is holding a piece of fabric that use to be [loser.title]'s [the_clothing.name]."
+                        "You aren't sure exactly what happens, but when they separate [winner.title] is holding a piece of fabric that used to be [loser.title]'s [the_clothing.name]."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
-                        loser.char "Is that all you've got?"
+                        loser "Is that all you've got?"
                     else: #ran_num == 3
                         "[loser.title] gets an arm around [winner.title]'s waist and pushes her against a desk. The two grapple for a moment, then [winner.title] grabs [loser.title] by the [the_clothing.name] and pulls until the piece of clothing rips off."
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
-                        loser.char "Fuck, you're going to pay for that!"
+                        loser "Fuck, you're going to pay for that!"
 
                     $ ran_num = renpy.random.randint(0,2)
                     $ other_clothing = winner.choose_strip_clothing_item()
 
                     if ran_num == 0: #Doesn't actually return the favour, because she's the loser she only retaliates %66 of the time.
                         "[winner.title] laughs and crouches low."
-                        winner.char "Come on! Come and get it, you cock sucking whore!"
+                        winner "Come on! Come and get it, you cock sucking whore!"
                     elif ran_num == 1:
-                        winner.char "Do you think I'm afraid of you? Come on!"
+                        winner "Do you think I'm afraid of you? Come on!"
                         if other_clothing:
                             "[winner.title] rushes forward and grabs at [loser.title]. [loser.title] manages to get the upper hand, grabbing onto [winner.title]'s [other_clothing.name] and whipping her around. With a sharp rip it comes free."
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
-                            winner.char "Shit, get over here you skank!"
+                            winner "Shit, get over here you skank!"
 
                     elif ran_num == 2:
                         if other_clothing:
@@ -217,38 +217,38 @@ label cat_fight_crisis_enhanced_label():
                 $ the_clothing = None
                 $ scene_manager.update_actor(loser, emotion = "sad")
                 "[loser.title] looks down at herself. She seems to realize for the first time how little she's wearing now."
-                loser.char "Look what you've done! Oh god, I need to... I need to go!"
+                loser "Look what you've done! Oh god, I need to... I need to go!"
                 if loser.sluttiness > 80 and winner.sluttiness > 80:
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] turns to hurry away, but [winner.title] swoops in and grabs her from behind."
                     $ scene_manager.update_actor(loser, position = "against_wall")
-                    loser.char "Hey!"
-                    winner.char "You're not going anywhere, not yet!"
+                    loser "Hey!"
+                    winner "You're not going anywhere, not yet!"
                     $ scene_manager.update_actor(winner, position = "stand3", emotion = "happy")
                     "[winner.title] reaches a hand down between [loser.title]'s legs, running her finger over her coworkers pussy."
                     $ loser.change_arousal(5) #The girls arousal gain is the base gain + 10% per the characters skill in that category.
-                    loser.char "Hey... that's not fair! I... ah..."
+                    loser "Hey... that's not fair! I... ah..."
                     $ scene_manager.update_actor(loser, position = "missionary")
                     "[loser.title] stops fighting almost immediately, leaning against [winner.title] and breathing heavily. You've got a front row seat as [winner.title] starts to finger [loser.title]."
                     $ loser.change_arousal(15)
-                    loser.char "Oh god... [winner.title], just... Ah!"
+                    loser "Oh god... [winner.title], just... Ah!"
                     "[winner.title] isn't going easy on [loser.title]. She shivers and bucks against [winner.title]."
                     $ loser.change_arousal(25)
                     "[winner.title] speeds up, pumping her fingers in and out of [loser.title]'s exposed cunt. She moans loudly and rolls her hips against [winner.title]'s."
                     $ loser.change_arousal(25)
-                    winner.char "You thought you could get away easy, huh? Well now I'm going to make you cum right here, you dirty little slut!"
+                    winner "You thought you could get away easy, huh? Well now I'm going to make you cum right here, you dirty little slut!"
                     $ loser.change_arousal(25)
                     "[loser.title] looks right into your eyes. She doesn't look embarrassed - in fact it looks like she's turned on by you watching her get finger banged right in the middle of the office."
-                    loser.char "I'm going to... I'm going to... AH!"
+                    loser "I'm going to... I'm going to... AH!"
                     $ loser.change_arousal(25)
                     $ scene_manager.update_actor(loser, emotion = "orgasm")
-                    winner.char "That's it, cum for me slut!"
+                    winner "That's it, cum for me slut!"
                     "[loser.title] screams loudly and shivers wildly. She only stays on her feet because [winner.title] is holding her in place."
-                    $ loser.change_stats(slut_core = 10, slut_temp = 25, happiness = 10, obedience = -5)
+                    $ loser.change_stats(slut_core = 3, slut_temp = 5, happiness = 5, obedience = -5)
                     $ scene_manager.update_actor(loser, position = "sitting", emotion = "default")
                     "[winner.title] holds [loser.title] up a little longer, then lets her go. [loser.title] stumbles forward on wobbly legs until she finds a chair to collapse into. She pants loudly."
-                    $ winner.change_stats(slut_core = 5, slut_temp = 15, obedience = -5)
-                    winner.char "There we go, that should have sorted her out. I'm sorry about that [winner.mc_title]."
+                    $ winner.change_stats(slut_core = 2, slut_temp = 2, obedience = -5)
+                    winner "There we go, that should have sorted her out. I'm sorry about that [winner.mc_title]."
                     mc.name "You did what you had to, I understand."
                     $ scene_manager.update_actor(winner, position = "walking_away")
                     "[winner.title] smiles proudly picks up her clothes and walks off."
@@ -256,16 +256,16 @@ label cat_fight_crisis_enhanced_label():
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "It takes a few more minutes before [loser.title] is any state to go anywhere. When she's able to she gathers her things and head off to get cleaned up."
                 else:
-                    $ loser.change_stats(slut_core = 5, slut_temp = 10, happiness = -10, obedience = -10)
+                    $ loser.change_stats(slut_core = 2, slut_temp = 5, happiness = -10, obedience = -10)
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] gathers up what clothes she can from the ground, then hurries away to find somewhere private."
                     $ scene_manager.remove_actor(loser)
                     $ scene_manager.update_actor(winner, emotion = "happy")
                     "[winner.title] watches [loser.title] leave, panting heavily."
                     $ winner.change_stats(happiness = 10, obedience = -10)
-                    winner.char "Hah... I knew I had that..."
+                    winner "Hah... I knew I had that..."
                     "[winner.title] takes a look down at herself."
-                    winner.char "I should probably go get cleaned up too. Sorry about all of this [winner.mc_title]."
+                    winner "I should probably go get cleaned up too. Sorry about all of this [winner.mc_title]."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[winner.title] leaves and you get back to work."
             $ del winner
@@ -288,7 +288,7 @@ label cat_fight_crisis_enhanced_label():
         "Have a team building exercise" if willing_to_threesome(person_one, person_two) and mc.energy > 30:
             mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
             $ scene_manager.update_actor(person_one, emotion="sad")
-            person_one.char "But sir..."
+            person_one "But sir..."
             mc.name "Don't but sir me! It's time for you two to do a team building exercise. On your knees, both of you."
             "They both look at each other, bewildered, but they do what you ask."
             $ scene_manager.update_actor(person_one, position = "blowjob")
@@ -301,8 +301,8 @@ label cat_fight_crisis_enhanced_label():
             if the_report["guy orgasms"] > 0:
                 "You watch as [person_one.title] and [person_two.title] begin to kiss and lick your cum off of each other's faces"
                 "This turned out to be a success!"
-                $ person_one.change_stats(obedience = 5, slut_temp = 10, happiness = 5)
-                $ person_two.change_stats(obedience = 5, slut_temp = 10, happiness = 5)
+                $ person_one.change_stats(obedience = 5, slut_temp = 3, happiness = 5)
+                $ person_two.change_stats(obedience = 5, slut_temp = 3, happiness = 5)
                 mc.name "See what you can do if you just work together? Go on now, get back to work."
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, position = "walking_away")
@@ -312,10 +312,10 @@ label cat_fight_crisis_enhanced_label():
                 mc.name "If you two can't work together on something as simple as sucking dick, how can you cooperate doing anything else?"
                 $ person_one.change_stats(happiness = -5, obedience = 5)
                 $ scene_manager.update_actor(person_one, emotion="sad")
-                person_one.char "I'm sorry [person_one.mc_title]. It won't happen again!"
+                person_one "I'm sorry [person_one.mc_title]. It won't happen again!"
                 $ person_two.change_stats(happiness = -5, obedience = 5)
                 $ scene_manager.update_actor(person_two, emotion="sad")
-                person_two.char "Understood [person_two.mc_title], there won't be any more problems."
+                person_two "Understood [person_two.mc_title], there won't be any more problems."
                 mc.name "Good to hear. Now get back to work."
                 $ scene_manager.update_actor(person_one, position = "walking_away", display_transform = character_right)
                 $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
@@ -333,10 +333,10 @@ label cat_fight_crisis_enhanced_label():
 label cat_fight_pick_winner_enhanced(scene_manager, winner, loser):
     $ loser.change_stats(happiness = -5, obedience = -5)
     mc.name "Enough! [loser.title], I don't want to hear anything about this from you again. Consider this a formal warning."
-    loser.char "Wait, but I..."
+    loser "Wait, but I..."
     mc.name "That's the end of it, now I want both of you to get back to work. Thank you for bringing this to my attention [winner.title]."
     $ winner.change_stats(happiness = 5, obedience = 5)
-    winner.char "My pleasure [winner.mc_title], just trying to keep things orderly around here."
+    winner "My pleasure [winner.mc_title], just trying to keep things orderly around here."
     $ scene_manager.update_actor(winner, position="walking_away")
     "[winner.title] shoots a smug look at [loser.title] then turns around and walks away."
     $ scene_manager.remove_actor(winner)

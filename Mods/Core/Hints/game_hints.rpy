@@ -8,8 +8,8 @@ init -1 python:
 
     # Hints for Sarah
     game_hints.append(Hint("Meet Sarah", "You should stay home for a day and see who knocks on your door.", "day > 2", "HR_director_creation_requirement() or sarah.is_employee() or sarah.event_triggers_dict.get('rejected', False) == True"))
-    game_hints.append(Hint("Join Sarah and Friends", "While working on saturday, Sarah might ask you to join her for drinks with friends.", "bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label')) and sarah.core_sluttiness > 15", "not bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label'))"))
-    game_hints.append(Hint("Date with Sarah", "While working on saturday, Sarah might ask you on a date.", "bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label')) and sarah.core_sluttiness > 30", "not bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label'))"))
+    game_hints.append(Hint("Join Sarah and Friends", "While working on Saturday, Sarah might ask you to join her for drinks with friends.", "bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label')) and sarah.core_sluttiness > 15", "not bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label'))"))
+    game_hints.append(Hint("Date with Sarah", "While working on Saturday, Sarah might ask you on a date.", "bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label')) and sarah.core_sluttiness > 30", "not bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label'))"))
 
     # Hints for HR Director Role
     game_hints.append(Hint("HR Director", "Purchase the business policy for the HR Director at your main office.", "HR_director_creation_requirement() and not HR_director_creation_policy.is_owned()", "HR_director_creation_policy.is_owned()"))
@@ -45,7 +45,7 @@ init -1 python:
     game_hints.append(Hint("Advance Research", "You have researched all traits for your current research level, talk to your head researcher about advancing your research to the next level.", "mc.business.research_tier < 3 and researched_all_at_level()", "not researched_all_at_level()"))
 
     # Hint for Dungeon
-    game_hints.append(Hint("Build Dungeon", "When you work in you company during the weekend, you might have a good idea.", "not mc.has_dungeon() and day > 24 and mc.business.funds > 20000", "not bool(exists_in_mandatory_crisis_list('dungeon_intro_label'))"))
+    game_hints.append(Hint("Build Dungeon", "When you work in your company during the weekend, you might have a good idea.", "not mc.has_dungeon() and day > 24 and mc.business.funds > 20000", "not bool(exists_in_mandatory_crisis_list('dungeon_intro_label'))"))
 
     # Hint for Active Quest (description is retrieved by object function)
     game_hints.append(Hint("Active Quest", None, "not quest_director.active_quest is None", "quest_director.active_quest is None", description_func_string = "quest_director.active_quest_name"))

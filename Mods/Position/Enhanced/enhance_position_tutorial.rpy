@@ -33,7 +33,7 @@ label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new
                 $ mc.condom = False
                 #TODO add a check against focus where she realizes what you are doing
                 "You begin to pound her with renewed vigor, enjoying the steamy sensation of her raw pussy."
-                the_girl.char "Oh god it feels so good. I can feel you so deep!"
+                the_girl "Oh god it feels so good. I can feel you so deep!"
                 "You smirk and shove yourself in deep. It feels like her cunt is swallowing you whole. You enjoy the sensation for a few moments then resume fucking."
                 return
             "Leave condom on":
@@ -51,36 +51,36 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
         "Cum inside of her":
             if stealth_orgasm:  #You sly dog
                 "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
-                the_girl.char "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
+                the_girl "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
                 "After you finish, you leave your cock deep inside her. A few drops of your cum start to drip out of her."
                 "[the_girl.title] reaches between her legs and feels it, realizing you just finished inside of her."
                 if the_girl.has_role(prostitute_role):
                     if the_girl.on_birth_control:
-                        the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! I know I'm just a working girl, but you can't treat me like this."
+                        the_girl "What the FUCK? You took the condom off? And then came inside me!?! I know I'm just a working girl, but you can't treat me like this."
                     else:
-                        the_girl.char "What? You took the condom off? And then came inside me!?! Fuck, I could get pregnant, not all working girls take birth control, you asshole!"
+                        the_girl "What? You took the condom off? And then came inside me!?! Fuck, I could get pregnant, not all working girls take birth control, you asshole!"
                     $ the_girl.change_happiness(-5)
                     $ the_girl.change_obedience(3)
                     $ the_girl.change_love(-5)          #She loses trust
                 elif the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
-                    the_girl.char "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
+                    the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
                     if the_girl.on_birth_control:
-                        the_girl.char "Oh god that's so hot. I love feeling cum deep inside me."
+                        the_girl "Oh god that's so hot. I love feeling cum deep inside me."
                     else:
-                        the_girl.char "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
+                        the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
                     $ the_girl.change_happiness(2)
                     $ the_girl.change_obedience(3)
                 elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
-                    the_girl.char "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
+                    the_girl "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
                     $ the_girl.change_obedience(3)
                 else:                                                   #She gets pissed
                     if the_girl.on_birth_control:
-                        the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! You asshole!"
+                        the_girl "What the FUCK? You took the condom off? And then came inside me!?! You asshole!"
                     else:
-                        the_girl.char "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
+                        the_girl "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
                     $ the_girl.change_happiness(-5)
                     $ the_girl.change_obedience(3)
                     $ the_girl.change_love(-5)          #She loses trust
@@ -93,12 +93,12 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
-                    the_girl.char "It would be a shame to waste all of this, right?"
+                    the_girl "It would be a shame to waste all of this, right?"
                     "She winks and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                 else:
                     "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot."
-                    the_girl.char "Look at all that cum. Well done."
+                    the_girl "Look at all that cum. Well done."
                 "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
             else:
                 $ stealth_orgasm = False
@@ -107,9 +107,9 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
                 if the_girl.on_birth_control or the_girl.knows_pregnant():
-                    the_girl.char "Oh wow, there's so much of it..."
+                    the_girl "Oh wow, there's so much of it..."
                 else:
-                    the_girl.char "Oh fuck, what if I get pregnant? Ah..."
+                    the_girl "Oh fuck, what if I get pregnant? Ah..."
 
                 "You wait until your orgasm has passed completely, then pull out and sit back. Your cum starts to drip out of [the_girl.title]'s slit almost immediately."
 
@@ -123,10 +123,10 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
             $ the_girl.cum_on_ass()
             $ doggy.redraw_scene(the_girl)
             if the_girl.sluttiness > 120:
-                the_girl.char "What a waste, you should have put that inside of me."
+                the_girl "What a waste, you should have put that inside of me."
                 "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
             else:
-                the_girl.char "Oh wow, there's so much of it..."
+                the_girl "Oh wow, there's so much of it..."
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.title] covered in your semen."
     $ stealth_orgasm = False
     return
@@ -139,12 +139,12 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object):
     "You shift your cock downwards and rub the tip of it along the slit of her vagina."
 
     if the_girl.effective_sluttiness() < the_girl.get_no_condom_threshold():
-        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        the_girl "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
     elif not mc.condom:
         if the_girl.on_birth_control:
-            the_girl.char "Wait, please put on a condom, I feel safer that way."
+            the_girl "Wait, please put on a condom, I feel safer that way."
         else:
-            the_girl.char "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
+            the_girl "Wait, wait... I can't risk getting pregnant, I need you to put on a condom."
         menu:
             "Put on a condom":
                 "You pull your dick back and quickly put on a condom. Then you line up your dick with her dripping wet pussy."
@@ -152,7 +152,7 @@ label transition_stealth_doggy_anal_doggy(the_girl, the_location, the_object):
             "Ram it home!":
                 mc.name "Don't worry, I'll pull out."
                 $ the_girl.change_happiness(-5)
-        the_girl.char "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
+        the_girl "Mmm, fuck me [the_girl.mc_title]. Use all of my holes for your pleasure!"
 
     "You pull on her hips and thrust yourself inside her tight, wet pussy."
     return
@@ -161,25 +161,25 @@ label transition_doggy_to_anal_doggy_taboo_break_label(the_girl, the_location, t
     "You pull out of [the_girl.title]'s pussy and lean back to admire her ass."
     "You grab it and give it a squeeze, then a hard slap."
     if the_girl.effective_sluttiness(doggy_anal.associated_taboo) > doggy_anal.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
-        the_girl.char "Mmmm."
+        the_girl "Mmmm."
         $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
         "[the_girl.possessive_title] points her butt in your direction. She lowers her shoulders and works her hips for you."
     else:
         mc.name "Nice. Now shake it for me."
-        the_girl.char "Like... this?"
+        the_girl "Like... this?"
         $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
         "[the_girl.title] works her hips and jiggles her ass for you."
         mc.name "Getting there, a little faster now."
         $ the_girl.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
         "She speeds up."
-    the_girl.char "Is that what you wanted?"
+    the_girl "Is that what you wanted?"
     "You slap your cock down on her ass and grab her tight cheeks, spreading them apart to get a look at her asshole."
     mc.name "It's a start. I think it's time we stretched you open."
     $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
     if the_girl.sex_skills["Anal"] > 2:
         "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
-        the_girl.char "Oh god... Mfphhhh!"
+        the_girl "Oh god... Mfphhhh!"
 
     else:
         "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
@@ -188,9 +188,9 @@ label transition_doggy_to_anal_doggy_taboo_break_label(the_girl, the_location, t
             "Your cock is still wet from [the_girl.title]'s pussy. You push steadily as you slide the tip into [the_girl.title]'s ass."
         else:
             "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
-        the_girl.char "Oh god... Fuck!"
+        the_girl "Oh god... Fuck!"
     "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
     "You stop when you've bottomed out, to give your cock time to properly stretch her out."
-    the_girl.char "I think... I'm ready for you to move some more..."
+    the_girl "I think... I'm ready for you to move some more..."
     "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
     return

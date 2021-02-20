@@ -20,24 +20,24 @@ label meet_person_enhanced_label():
             mc.name "Excuse me! You dropped your wallet!"
             $ the_person.draw_person()
             "She pauses and turns around."
-            the_person.char "What? Oh! Oh my god!"
+            the_person "What? Oh! Oh my god!"
             "You hold out her wallet for her and she takes it back."
-            the_person.char "Thank you so much, I really need to..."
+            the_person "Thank you so much, I really need to..."
             "She glances over her shoulder, and the two of you watch as her bus pulls away. She sighs."
-            the_person.char "Well never mind, I guess I have some time. Thank you."
+            the_person "Well never mind, I guess I have some time. Thank you."
             mc.name "No problem, I'd do it for anyone."
 
             "She holds out her hand to shake yours."
             $ title_choice = get_random_title(the_person)
             $ the_person.set_title(title_choice)
             $ the_person.set_possessive_title(get_random_possessive_title(the_person))
-            the_person.char "Thank you so much. I'm [the_person.title]."
+            the_person "Thank you so much. I'm [the_person.title]."
             call person_introduction(the_person, girl_introduction = False) from _call_person_introduction_1_override
             "You shake her hand. You and [the_person.title] chat while she waits for the next bus to come by."
             $ the_person.change_happiness(10)
             $ the_person.change_love(8)
             "When it does she gives you a quick hug."
-            the_person.char "Thank you again, you've saved my whole day. Maybe we'll see each other again."
+            the_person "Thank you again, you've saved my whole day. Maybe we'll see each other again."
             mc.name "I'd like that."
             "She smiles and steps onto the bus, waving briefly from one of the windows."
 

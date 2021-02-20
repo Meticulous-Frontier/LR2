@@ -18,6 +18,10 @@ screen keybindT():
 
 screen serum_cheat_menu:
     add "Science_Menu_Background.png"
+
+    default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+    default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
+
     vbox:
         xalign 0.04
         yalign 0.3
@@ -47,19 +51,8 @@ screen serum_cheat_menu:
                                         xsize 365
                                         text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) != 0: # list all traits with tag
-                                            $ trait_title = get_trait_display_title(trait)
-                                            textbutton "[trait_title]":
-                                                style "textbutton_style"
-                                                text_style "serum_text_style_traits"
-                                                action [Hide("trait_tooltip"), SetField(trait, "researched", True)]
-                                                hovered Show("trait_tooltip",None,trait)
-                                                unhovered Hide("trait_tooltip")
-                                                xsize 365
-
-                                    for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                        if trait.tier == dt and not trait.researched and trait.has_required() and len(trait.exclude_tags) == 0: # list all traits without tag
+                                    for trait in sorted_traits:
+                                        if trait.tier == dt and not trait.researched and trait.has_required():
                                             $ trait_title = get_trait_display_title(trait)
                                             textbutton "[trait_title]":
                                                 style "textbutton_style"
@@ -72,7 +65,7 @@ screen serum_cheat_menu:
                     frame:
                         background "#000080"
                         xsize 410
-                        text "Master Existing Traits:\n{color=#ff0000}{size=14}Click the Trait to add 10 Mastery levels{/size}{/color}" style "serum_cheat_text_style"
+                        text "Master Existing Traits:\n{color=#ff0000}{size=14}Click the Trait to add mastery levels{/size}{/color}" style "serum_cheat_text_style"
 
                     viewport:
                         xsize 410
@@ -89,8 +82,8 @@ screen serum_cheat_menu:
                                         xsize 395
                                         text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
 
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                    if trait.tier == dt and trait.researched and len(trait.exclude_tags) != 0: # list all traits with tag
+                                for trait in sorted_traits:
+                                    if trait.tier == dt and trait.researched:
                                         $ trait_title = get_trait_display_title(trait)
                                         $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         $ trait_mastery_text = get_trait_mastery_text(trait)
@@ -98,22 +91,15 @@ screen serum_cheat_menu:
                                         textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
                                             text_xalign 0.5
                                             text_text_align 0.5
-                                            action [Hide("trait_tooltip"), SetField(trait, "mastery_level", trait.mastery_level+10)] style "textbutton_style"
-                                            text_style "serum_text_style_traits"
-                                            hovered Show("trait_tooltip",None,trait)
-                                            unhovered Hide("trait_tooltip")
-                                            xsize 395
-
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name):
-                                    if trait.tier == dt and trait.researched and len(trait.exclude_tags) == 0: # list all traits without tag
-                                        $ trait_title = get_trait_display_title(trait)
-                                        $ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                        $ trait_mastery_text = get_trait_mastery_text(trait)
-
-                                        textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                            text_xalign 0.5
-                                            text_text_align 0.5
-                                            action [Hide("trait_tooltip"), SetField(trait, "mastery_level", trait.mastery_level+10)] style "textbutton_style"
+                                            action [
+                                                Hide("trait_tooltip"),
+                                                SetField(trait, "mastery_level", trait.mastery_level + 1)
+                                            ]
+                                            alternate [
+                                                Hide("trait_tooltip"),
+                                                SetField(trait, "mastery_level", (trait.mastery_level - 1) if trait.mastery_level > 2 else 1.0),
+                                            ]
+                                            style "textbutton_style"
                                             text_style "serum_text_style_traits"
                                             hovered Show("trait_tooltip",None,trait)
                                             unhovered Hide("trait_tooltip")

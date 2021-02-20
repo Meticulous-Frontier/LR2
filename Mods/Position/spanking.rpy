@@ -2,8 +2,8 @@ init:
     python:
         spanking = Position(name = "Spanking", slut_requirement = 30, slut_cap = 70, requires_hard = False, requires_large_tits = False,
             position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "None", skill_tag = "Foreplay",
-            girl_arousal = 0, girl_energy = 1,  #We use person specific variables to determine arousal
-            guy_arousal = 0, guy_energy = 1,
+            girl_arousal = 0, girl_energy = 5,  #We use person specific variables to determine arousal
+            guy_arousal = 0, guy_energy = 5,
             connections = [],
             intro = "intro_spanking",
             scenes = ["scene_spanking_1", "scene_spanking_2"],
@@ -75,9 +75,9 @@ label intro_spanking(the_girl, the_location, the_object):
 
 label taboo_break_spanking(the_girl, the_location, the_object):
     mc.name "Someone has been a bad girl. It's time for you punishment, [the_girl.title]."
-    the_girl.char "What... what are you gonna do to me?"
+    the_girl "What... what are you gonna do to me?"
     mc.name "You need a spanking. It's only natural for a bad girl like you to get a spanking once in a while."
-    the_girl.char "Oh god... I... Okay [the_girl.mc_title]..."
+    the_girl "Oh god... I... Okay [the_girl.mc_title]..."
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
     if the_girl.outfit.vagina_available():
         "You don't waste any time and put your hands on her ass, groping her cheeks."
@@ -100,22 +100,22 @@ label scene_spanking_1(the_girl, the_location, the_object):
     "*SMACK* *SMACK* SMACK*"
     "You don't let up, giving her a solid spanking."
     if spank_factor > 5: #She loves it.
-         the_girl.char "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
+         the_girl "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
          "She is really getting into this. With each spank she wiggles her ass, giving you an enticing target."
          $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
          $ the_girl.change_slut_temp(spank_factor - 5)
     elif spank_factor > 0:
-         the_girl.char "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
+         the_girl "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
          "She keeps her ass still, taking your blows. Her ass makes an enticing target."
          $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
          $ the_girl.change_obedience(spank_factor)
     elif spank_factor > -5:
-        the_girl.char "Ouch! I'm sorry [the_girl.mc_title]! That really hurts..."
+        the_girl "Ouch! I'm sorry [the_girl.mc_title]! That really hurts..."
         "With each spank, she flinches a bit."
         $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
         $ the_girl.change_obedience(-(spank_factor-3))
     else:
-        the_girl.char "Fuck! That hurts! Why are you doing this? Please stop!"
+        the_girl "Fuck! That hurts! Why are you doing this? Please stop!"
         "She is trembling. With each spank she flinches and quakes."
         $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
         $ the_girl.change_obedience(-spank_factor)
@@ -137,16 +137,16 @@ label scene_spanking_2(the_girl, the_location, the_object):
         "Rub her ass":
             "Instead of smacking her ass again, you start rubbing, it's [ass_desc]"
             if spank_factor > 5:
-                the_girl.char "Oh, that feels very nice, [the_girl.mc_title]."
+                the_girl "Oh, that feels very nice, [the_girl.mc_title]."
                 "She starts to move her ass, moving along with your rubbing motions."
             elif spank_factor > 0:
-                the_girl.char "Oh... I didn't expect that [the_girl.mc_title]! Oh god..."
+                the_girl "Oh... I didn't expect that [the_girl.mc_title]! Oh god..."
                 "She keeps her ass motionless in order to minimize the discomfort."
             elif spank_factor > -5:
-                the_girl.char "Ouch! I'm sorry [the_girl.mc_title]! I'm a little tender, could your rub a little softer..."
+                the_girl "Ouch! I'm sorry [the_girl.mc_title]! I'm a little tender, could your rub a little softer..."
                 "You soften your touch and softly rub her apple red buttocks."
             else:
-                the_girl.char "Jesus! That hurts! Please stop, even a feathers touch would be to painful!"
+                the_girl "Jesus! That hurts! Please stop, even a feathers touch would be to painful!"
                 "She is trembling. With each touch of a finger her legs start shaking."
 
             $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
@@ -155,7 +155,7 @@ label scene_spanking_2(the_girl, the_location, the_object):
             "You slide your fingers in and out of her pussy, stroking the inside of that soft tunnel."
             "Each movement draws moans of pleasure from [the_girl.possessive_title], who presses herself against you."
             "She places one of her own hands over yours, encouraging you to speed up."
-            the_girl.char "Just like that... Ah..."
+            the_girl "Just like that... Ah..."
             $ the_girl.change_arousal((the_girl.get_opinion_score("being fingered") + 1) * 5)
 
         "Finger Her pussy\n{color=#ff0000}{size=18}Must like being fingered{/size}{/color} (disabled)" if the_girl.get_opinion_score("being fingered") <= 0:
@@ -163,9 +163,9 @@ label scene_spanking_2(the_girl, the_location, the_object):
 
         "Finger her ass" if the_girl.get_opinion_score("anal sex") > 0:
             "You slide your finger through her wet slit and move it up to her sphincter slightly lubricating it."
-            the_girl.char "Oh god I love it when you do this..."
+            the_girl "Oh god I love it when you do this..."
             "[the_girl.possessive_title] is pushing her ass against your finger, her breathing heavy, enticing you to keep going. You push your finger deep into her bowel."
-            the_girl.char "Oh!!! [the_girl.mc_title] YES!"
+            the_girl "Oh!!! [the_girl.mc_title] YES!"
             "You continue for a while. [the_girl.title] clearly enjoys the anal penetration. Eventually you pull your finger out and continue the punishment."
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 10)
 
@@ -197,13 +197,13 @@ label transition_default_spanking(the_girl, the_location, the_object):
     return
 
 label strip_spanking(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "Oh my god... I'm so hot... I need to get this off!"
+    the_girl "Oh my god... I'm so hot... I need to get this off!"
     $ the_girl.draw_animated_removal(the_clothing, position = spanking.position_tag)
     "She strips off her [the_clothing.name] while you're spanking her, moaning the whole time."
     return
 
 label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "Everything feels so tight, I want to take it all off... Please can I?"
+    the_girl "Everything feels so tight, I want to take it all off... Please can I?"
     "[the_girl.possessive_title] grabs onto her [the_clothing.name], waiting for you to tell her what to do."
     menu:
         "Let her strip":
@@ -214,18 +214,18 @@ label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do you think I look sexy in it?"
+                the_girl "Do you think I look sexy in it?"
             else:
-                the_girl.char "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
+                the_girl "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
     $ spanking.redraw_scene(the_girl)
     return
 
 label orgasm_spanking(the_girl, the_location, the_object):
-    the_girl.char "Oh god, oh god, oh.. OH... OHHHH"
+    the_girl "Oh god, oh god, oh.. OH... OHHHH"
     "Her whole body tenses up. You give her a few more spanks as she cums, just from the sensations of being spanked."
     $ the_girl.call_dialogue("climax_responses_foreplay")
     "She quivers with pleasure for a few seconds before her whole body relaxes."
-    the_girl.char "Ah... I'm sorry."
+    the_girl "Ah... I'm sorry."
     mc.name "There you go, being bad again!"
     "You give her another hard spank."
     return
@@ -233,17 +233,17 @@ label orgasm_spanking(the_girl, the_location, the_object):
 label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
     "You are done spanking her. You run your fingers along her slit a bit, getting a feel for how ready she is."
     mc.name "That's enough spanking [the_girl.title]. Now I'll make it feel all better.."
-    the_girl.char "Oh yes, [the_girl.mc_title], make me feel good."
+    the_girl "Oh yes, [the_girl.mc_title], make me feel good."
     "You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
     "You continue your back and forth motion, rubbing your cock along her already wet pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
-        the_girl.char "Oh....Please..."
+        the_girl "Oh....Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
     if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
         "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-        the_girl.char "Oh god.... Ah...."
+        the_girl "Oh god.... Ah...."
         "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
         $ the_girl.break_taboo("vaginal_sex")
     else:

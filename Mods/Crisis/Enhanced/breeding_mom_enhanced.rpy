@@ -14,21 +14,21 @@ label breeding_mom_enhanced_label(the_person):
     if the_person.has_breeding_fetish():
         if the_person.knows_pregnant():
             "She is idly rubbing her belly. Your seed has already taken root there and a baby is growing."
-            the_person.char "I was just thinking about... you know... the night where you knocked me up..."
-            the_person.char "Do you want to re-enact it? It would be nice..."
+            the_person "I was just thinking about... you know... the night where you knocked me up..."
+            the_person "Do you want to re-enact it? It would be nice..."
         elif the_person.is_highly_fertile():
-            the_person.char "Why don't you come here? I was just getting ready to come find you..."
+            the_person "Why don't you come here? I was just getting ready to come find you..."
             "She lowers her voice a bit."
-            the_person.char "I'm pretty sure I'm fertile right now... and you know how bad I've been wanting you to knock me up!"
+            the_person "I'm pretty sure I'm fertile right now... and you know how bad I've been wanting you to knock me up!"
         return
     else:
-        the_person.char "[the_person.mc_title], close the door, please. I have something I need to ask you."
-        "You close the door to [the_person.possessive_title]'s bedroom and walk over to her bed."
+        the_person "[the_person.mc_title], close the door, please. I have something I need to ask you."
+        "You close the door to [the_person.possessive_title!l]'s bedroom and walk over to her bed."
         "She pats the bed beside her and you sit down."
-        the_person.char "I've been thinking a lot about this. You're all grown up and [lily.title] isn't far behind."
-        the_person.char "Soon you'll both be leaving home, but I don't think I'm done being a mother yet."
+        the_person "I've been thinking a lot about this. You're all grown up and [lily.title] isn't far behind."
+        the_person "Soon you'll both be leaving home, but I don't think I'm done being a mother yet."
         "She takes your hands in hers and looks passionately into your eyes."
-        the_person.char "I want you to give me a child. I want you to breed me."
+        the_person "I want you to give me a child. I want you to breed me."
 
     if the_person.has_large_tits():
         "Her face is flush and her breathing rapid. Her large breasts heave up and down."
@@ -40,20 +40,20 @@ label breeding_mom_enhanced_label(the_person):
             "You nod, and the mere the confirmation makes her shiver. She lies down on the bed and holds out her hands for you."
             $ the_person.draw_person(position = "missionary")
             "You strip down and climb on top of her. The tip of your hard cock runs along the entrance of her cunt and finds it dripping wet."
-            the_person.char "Go in raw [the_person.mc_title], enjoy my pussy and give me your cum!"
+            the_person "Go in raw [the_person.mc_title], enjoy my pussy and give me your cum!"
             $ the_person.break_taboo("vaginal_sex")
             $ the_person.break_taboo("condomless_sex")
             "She wraps her arms around your torso and pulls you tight against her. She gives you a breathy moan when you slide your cock home."
-            the_person.char "Ah... Fuck me and give me your baby! I'll take such good care of it, just like I did for you and [lily.title]!"
+            the_person "Ah... Fuck me and give me your baby! I'll take such good care of it, just like I did for you and [lily.title]!"
             call fuck_person(the_person, start_position = breeding_missionary, start_object = mc.location.get_object_with_name("bed"), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_fuck_person_breeding_mom_enhanced_label
             $ the_report = _return #TODO: The creampie check should now be possible with the report system instead of checking her total record.
             if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
                 mc.name "Do you think that did it?"
 
                 if the_person.is_highly_fertile():
-                    the_person.char "I don't know. It's the right time of the month."
+                    the_person "I don't know. It's the right time of the month."
                 else:
-                    the_person.char "Chances are not very high, but I'm still hopeful."
+                    the_person "Chances are not very high, but I'm still hopeful."
 
                 $ the_person.change_stats(slut_temp = 2, love = 2)
 
@@ -64,22 +64,22 @@ label breeding_mom_enhanced_label(the_person):
 
             else:
                 $ the_person.change_happiness(-20)
-                the_person.char "I'm sorry... I'm sorry I'm not good enough to make you cum. I'm not good enough to earn your child..."
+                the_person "I'm sorry... I'm sorry I'm not good enough to make you cum. I'm not good enough to earn your child..."
                 "She sounds as if she is almost on the verge of tears."
                 "You wrap your arms around her and hold her close."
                 mc.name "Shh... You were fantastic. It's me, I'm just not feeling it today. Maybe we can try some other day."
-                the_person.char "I don't know, this might have all been a mistake. Let's just... be quiet for a while, okay?"
+                the_person "I don't know, this might have all been a mistake. Let's just... be quiet for a while, okay?"
                 $ the_person.draw_person(position = "sitting")
-                "You hold [the_person.possessive_title] until she's feeling better, then sit up in bed with her."
+                "You hold [the_person.possessive_title!l] until she's feeling better, then sit up in bed with her."
 
         "Say no":
             $ the_person.draw_person(position = "sitting", emotion = "sad")
             "You shake your head. [the_person.title] looks immediately crestfallen."
-            the_person.char "But why..."
+            the_person "But why..."
             mc.name "[the_person.title], I love you but I can't give you what you want."
             "She nods and turns her head."
             $ the_person.change_stats(slut_temp = -2, love = -2)
-            the_person.char "Of course... I was just being silly. I should know better."
+            the_person "Of course... I was just being silly. I should know better."
 
     $ clear_scene()
     return

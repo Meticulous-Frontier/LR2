@@ -484,7 +484,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ position_choice = None
                     $ active_mc_position = None
                 elif active_mc_position.guy_energy > mc.energy:
-                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
+                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title!l]."
                     $ position_choice = None
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):
@@ -660,12 +660,12 @@ label threesome_round(the_person_one, the_person_two, position_choice, object_ch
 
         if the_person_one.arousal >= the_person_one.max_arousal:
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person_one, the_position = position_choice, the_object = object_choice)
-            $ the_person_one.change_stats(arousal = -the_person_one.arousal/2, happiness = 5, slut_temp = 5)
+            $ the_person_one.change_stats(arousal = -the_person_one.arousal/2, happiness = 5, slut_temp = 3)
             $ report_log["girl one orgasms"] += 1
             $ report_log["total orgasms"] += 1
         if the_person_two.arousal >= the_person_two.max_arousal:
             $ mc.listener_system.fire_event("girl_climax", the_person = the_person_two, the_position = position_choice, the_object = object_choice)
-            $ the_person_two.change_stats(arousal = -the_person_two.arousal/2, happiness = 5, slut_temp = 5)
+            $ the_person_two.change_stats(arousal = -the_person_two.arousal/2, happiness = 5, slut_temp = 3)
             $ report_log["girl two orgasms"] += 1
             $ report_log["total orgasms"] += 1
 

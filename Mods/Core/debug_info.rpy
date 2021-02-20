@@ -39,7 +39,7 @@ init 2 python:
     def hide_debug_log():
         global debug_log_enabled
         debug_log_enabled = False
-        renpy.hide_screen("DebugInfo", layer = "top")
+        renpy.hide_screen("DebugInfo")
 
     def add_to_log(message):
         debug_log["T" + str(time.time())] = message
@@ -66,4 +66,3 @@ init 2 python:
         elif isinstance(obj, (str, bytes, bytearray)):
             size += len(obj)
         return size
-

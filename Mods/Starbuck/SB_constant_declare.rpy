@@ -1,16 +1,5 @@
 init -3 python:
-    FETISH_BASIC_OPINION_LIST = ["giving handjobs", "giving tit fucks", "being fingered", "kissing", "masturbating", "big dicks"]
-    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "sex standing up", "anal creampies" ]
-    FETISH_ORAL_OPINION_LIST = ["giving blowjobs", "getting head", "drinking cum"]
-    FETISH_VAGINAL_OPINION_LIST = ["missionary style sex", "creampies", "sex standing up", "vaginal sex", "doggy style sex"]
-    FETISH_CUM_OPINION_LIST = ["drinking cum", "creampies", "anal creampies", "cum facials", "being covered in cum", "bareback sex"]
-    #suggestion add exhibitionist fetish and move some of the basic fetishes to this one
-    FETISH_EXHIBITION_OPINION_LIST = ["not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "public sex", "lingerie", "skimpy outfits", "skimpy uniforms" ]
-    #relation fetishes (impact relationship with people) still need to workout how to make this happen
-    FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
-    # these fetishes could be used for 'slave' / 'dominatrix'
-    FETISH_BDSM_OPTION_LIST = ["being submissive", "taking control"]
-    FETISH_BREEDING_OPINION_LIST = ["being submissive", "vaginal sex", "creampies", "bareback sex", "missionary style sex"]
+
 
     SB_MOD_MC_AROUSAL_MULT = 1.0     #Default arousal multiplier for the MC
     SB_MOD_MC_AROUSAL_1ST_MULT = 0.9     #Arousal multiplier after the first upgrade

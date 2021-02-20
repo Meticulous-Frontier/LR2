@@ -96,33 +96,33 @@ label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_lo
     #Scene: Make things rough. Spank her ass while she and the other girl play with each other.
     "You run your tongue up and down [the_girl_2.title]'s slit, lapping up her juices, before plunging your tongue inside of her."
     "[the_girl_1.title]'s ass is making lewd smacking noises as she rides you roughly."
-    the_girl_2.char "Mmm, that's it [the_girl_2.mc_title]."
+    the_girl_2 "Mmm, that's it [the_girl_2.mc_title]."
     "[the_girl_2.title] is pushing her pussy back against your face, smothering you with her pussy."
     "The girls are getting rough with you, so you decide it's time to get a little rough back!"
     menu:
         "Spank [the_girl_2.title]":
             "You reach your hand up to [the_girl_2.title]'s ass and grope it for a moment, then give it a hard spank."
             "*SMACK*"
-            the_girl_2.char "Oh! Am I being bad [the_girl_2.mc_title]?"
+            the_girl_2 "Oh! Am I being bad [the_girl_2.mc_title]?"
             "*SMACK*"
             if the_girl_2.get_opinion_score("being submissive") > 0:
-                the_girl_2.char "OW! Oh [the_girl_2.mc_title] I'm sorry I've been a bad girl, I..."
+                the_girl_2 "OW! Oh [the_girl_2.mc_title] I'm sorry I've been a bad girl, I..."
                 "*SMACK*"
                 "She moans loudly when you spank her."
-                the_girl_2.char "I'm sorry, I'll be quiet, I just..."
+                the_girl_2 "I'm sorry, I'll be quiet, I just..."
                 "*SMACK*"
-                the_girl_2.char "Oh fuck..."
+                the_girl_2 "Oh fuck..."
                 $ the_girl_2.change_arousal(5 * the_girl_2.get_opinion_score("being submissive"))
             else:
-                the_girl_2.char "Ow! Not so hard, I don't mind playing around a bit, but don't hurt me..."
+                the_girl_2 "Ow! Not so hard, I don't mind playing around a bit, but don't hurt me..."
                 "This time you give her another spank, but a little lighter. More of a swat really."
-                the_girl_2.char "Mmmm, that's better..."
+                the_girl_2 "Mmmm, that's better..."
                 $ the_girl_2.change_arousal(5)
 
         "Grab [the_girl_1.title]'s hips":
             "Even though you've got the other girl's pussy in your face, you reach down and grab [the_girl_1.possessive_title]'s hips."
             "With the extra leverage, you start to thrust up into her hard and fast."
-            the_girl_1.char "Oh! Fuck me good [the_girl_1.mc_title]!"
+            the_girl_1 "Oh! Fuck me good [the_girl_1.mc_title]!"
             $ the_girl_1.change_arousal(5)
             "You give it to her hard for a while, but eventually run out of steam and have to slow down."
     return
@@ -136,14 +136,14 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
         "Finger her pussy":
             "You push two fingers into [the_girl_2.title]'s sopping wet pussy. From this angle, its easy to angle your fingers down and find her G-spot."
             "The girls continue to make out as they ride you. You notice [the_girl_1.title] reach back and spank [the_girl_2.possessive_title]'s ass."
-            the_girl_2.char "Mmmm..."
+            the_girl_2 "Mmmm..."
             "[the_girl_2.title] begins to twist and pull at [the_girl_1.possessive_title]'s nipples. You can feel her pussy clamp down on you as she stimulates her breasts."
 
         "Finger her ass":
             "You lick your index finger quickly, getting it lubed up, then press it against [the_girl_2.title]'s ass. You slowly push it inside of her."
             if the_girl_2.get_opinion_score("anal sex") < 0:
                 "She immediately stops making out with [the_girl_2.title] and pulls away from you."
-                the_girl_2.char "Hey! No butt stuff, you know I hate that!"
+                the_girl_2 "Hey! No butt stuff, you know I hate that!"
                 "Damn, guess you won't be exploring her rectum today!"
             else:
                 "You hear [the_girl_2.title] moan into the other girl's mouth as they continue to make out. Encouraged by her reaction, you push a little harder until your finger is deep inside her rectum."
@@ -151,7 +151,7 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
                 $ the_girl_2.change_arousal(5 + 5 * the_girl_2.get_opinion_score("anal sex"))
         "Finger both holes" if the_girl_2.get_opinion_score("being fingered") > 0:
             "You put your ring finger and pinky together and your index finger out. You put your index finger up to her sphincter and the other two fingers to her cunt and start to push them in."
-            the_girl_2.char "Oh! Wow that feels amazing..."
+            the_girl_2 "Oh! Wow that feels amazing..."
             "[the_girl_2.possessive_title] push her ass back as you push your fingers deep into her holes. Once you bottom out, you start to move them in and out."
             "[the_girl_2.title] moans loudly as she resumes making out with [the_girl_1.title]. She seems to be really responding to this!"
             "You fuck her with your fingers, eliciting all kinds of gasps and moans from her as you do, until you decide to go back to oral."
@@ -163,16 +163,16 @@ label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
     "You give [the_girl_2.possessive_title]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]"
     $ the_girl_1.cum_in_vagina()
     $ scene_manager.draw_scene()
-    the_girl_1.char "Oh god! He's cumming inside me! I can feel it!"
+    the_girl_1 "Oh god! He's cumming inside me! I can feel it!"
     "She drops her hips down, taking you as deep as she can. She rotates her hips instead of thrusting, milking your cum as best she can."
-    if the_girl_2.has_role(cum_external_role) or the_girl_2.has_role(cum_internal_role):
-        the_girl_2.char "Hey! No fair! I want some of that!"
+    if the_girl_2.has_cum_fetish() or the_girl_2.has_cum_fetish():
+        the_girl_2 "Hey! No fair! I want some of that!"
         "You feel [the_girl_1.title] slowly pull off of you, your cock cold and aching to be back inside of her."
         "[the_girl_2.title] leans forward and takes your cock in her mouth, sucking the remains of your cum of your shaft."
         $ the_girl_2.cum_in_mouth()
         $ scene_manager.draw_scene()
         "You feel a few more licks along your pelvic area, which you assume is her cleaning up any remaining drops of cum."
-        the_girl_2.char "Mmmm, I'm not letting a drop go to waste..."
+        the_girl_2 "Mmmm, I'm not letting a drop go to waste..."
     "You give a sigh, deeply contented with having dumped your load inside of [the_girl_1.title]."
 
     return
@@ -191,7 +191,7 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel the moaning and gasps from the girls on top of you coming to a crescendo."
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
-        the_girl_2.char "Oh god I'm cumming too!"
+        the_girl_2 "Oh god I'm cumming too!"
         "[the_girl_2.title] is grinding your face when she cums, her juices running down the sides of her legs."
         "[the_girl_2.possessive_title] slams her body down on top of you as she begins to cum at the same time. Her pussy is convulsing all around you."
         "You just lay back and enjoy yourself as the two girls moan and writhe on top of you."

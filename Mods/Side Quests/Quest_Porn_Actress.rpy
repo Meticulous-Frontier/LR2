@@ -136,25 +136,25 @@ label quest_porn_actress_intro_label():
 
     "You get up to stretch your legs for a bit and to check on the different departments, making sure everything is running smoothly."
     "As you pass by the break room, you overhear something."
-    the_person_one.char "Oh my... is that really [the_person.name]? It looks just like her... That's what the other girls are saying!"
-    the_person_two.char "Wow, I think it is! If not its her twin sister!"
+    the_person_one "Oh my... is that really [the_person.name]? It looks just like her... That's what the other girls are saying!"
+    the_person_two "Wow, I think it is! If not its her twin sister!"
     "You walk into the break room."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person_one)
     $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
     "You see [the_person_one.possessive_title] and [the_person_two.title] looking at a phone. The sound of erotic moaning is coming from the phone."
     "[the_person_one.title] notices you walk in."
-    the_person_one.char "Oh hey [the_person_one.mc_title]. Have you seen this?"
-    the_person_two.char "Yeah, it looks just like [the_person.name]!"
+    the_person_one "Oh hey [the_person_one.mc_title]. Have you seen this?"
+    the_person_two "Yeah, it looks just like [the_person.name]!"
     "[the_person_one.title] turns the phone to you. It is a porn video of a woman who looks exactly like [the_person.title]. She is taking a cock like a champ doggy style."
     "... And sounds suspiciously like [the_person.title]..."
     "... Wow, that has to be her!"
     mc.name "Looks like her? That... I'm almost positive that it IS her!"
-    the_person_two.char "I know! That's what a lot of the other girls around the office are saying!"
+    the_person_two "I know! That's what a lot of the other girls around the office are saying!"
     mc.name "Hmm... maybe I should ask her."
-    the_person_one.char "Oh, I mean... wouldn't that be kind of violating her privacy? Like, she probably didn't realize we would all be passing this video around..."
+    the_person_one "Oh, I mean... wouldn't that be kind of violating her privacy? Like, she probably didn't realize we would all be passing this video around..."
     mc.name "You're right. If she wants to do porn videos in her spare time, she can certainly do so. I'll approach the subject carefully with her."
-    the_person_two.char "Yeah but... I wonder if she even knows this video is on the internet? It's pretty amateur... maybe it was supposed to be private?"
+    the_person_two "Yeah but... I wonder if she even knows this video is on the internet? It's pretty amateur... maybe it was supposed to be private?"
     "This is a sticky situation. Should you respect her privacy? Or inspect the video?"
     menu:
         "Respect her privacy":
@@ -162,8 +162,8 @@ label quest_porn_actress_intro_label():
             #TODO this
         "Investigate the video":
             mc.name "Would you mind forwarding me the video? I'd like to look into it a bit more."
-            the_person_one.char "Look into it? Hah, that's funny! It's a good video, don't worry I'll send you the link, [the_person_one.mc_title]."
-            the_person_two.char "Hey, while you're at it, could you forward it to me too? I umm, might want to investigate it later too..."
+            the_person_one "Look into it? Hah, that's funny! It's a good video, don't worry I'll send you the link, [the_person_one.mc_title]."
+            the_person_two "Hey, while you're at it, could you forward it to me too? I umm, might want to investigate it later too..."
             "The girls laugh. In a few moments you have a link to the video in your messages."
 
 

@@ -5,7 +5,7 @@ init:
         drysex_cowgirl = Position(name = "Dry Cowgirl", slut_requirement = 20, slut_cap = 80, requires_hard = False, requires_large_tits = False,
             position_tag = "cowgirl", requires_location = "Lay", requires_clothing = "None", skill_tag = "Foreplay",
             girl_arousal = 12, girl_energy = 9,
-            guy_arousal = 10, guy_energy = 6,
+            guy_arousal = 10, guy_energy = 11,
             connections = [],
             intro = "intro_drysex_cowgirl",
             scenes = ["scene_drysex_cowgirl_1","scene_drysex_cowgirl_2"],
@@ -15,7 +15,7 @@ init:
             orgasm_description = "orgasm_drysex_cowgirl",
             taboo_break_description = "taboo_break_drysex_cowgirl",
             verb = "be ridden by", verbing = "being ridden by",
-            opinion_tags = ["vaginal sex", "taking control", "get mc off", "get off", "waste cum"],
+            opinion_tags = ["taking control", "get mc off", "get off", "waste cum"],
             default_animation = blowjob_bob,
             associated_taboo = "touching_body")
 
@@ -28,30 +28,30 @@ init:
 #        ##Here is where you would put connections if they existed.
 
 label intro_drysex_cowgirl(the_girl, the_location, the_object):
-    the_girl.char "Lie down for me, I want to feel you against me."
+    the_girl "Lie down for me, I want to feel you against me."
     "You lie down on the [the_object.name]. [the_girl.title] swings a leg over your body and straddles you."
     if the_girl.outfit.vagina_available():
         "She leans back and grinds herself against you. She rubs her pussy along your cock, your pants the only thing separating the two."
     else:
         "She leans back and grinds herself against you. It feels good, even with your clothes on."
-    the_girl.char "Ah..."
+    the_girl "Ah..."
     if mc.recently_orgasmed:
         "[the_person.possessive_title]'s body rubbing against yours feels great. You feel yourself getting hard in response."
         $ mc.recently_orgasmed = False
-    the_girl.char "Your body feels so good..."
+    the_girl "Your body feels so good..."
     "She closes her eyes and moans, rubbing her crotch against yours."
     return
 
 label taboo_break_drysex_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] leads you to the [the_object.name]."
-    the_girl.char "Lie down for me [the_girl.mc_title]..."
+    the_girl "Lie down for me [the_girl.mc_title]..."
     "You nod and follow her instructions. She steps over you and kneels down, straddling your hips."
     if the_girl.effective_sluttiness(drysex_cowgirl.associated_taboo) > drysex_cowgirl.slut_cap:
         "She reaches between her legs and grabs your cock, bringing it towards her and running the tip against her clit."
         "You feel her thighs tremble with pleasure."
     else:
         "She reaches between her legs and grabs your cock, rubbing it against her stomach and stroking it gently."
-    the_girl.char "To feel your body against mine... I've been wanting this."
+    the_girl "To feel your body against mine... I've been wanting this."
     "She closes her eyes and moans, rubbing her crotch against yours."
     return
 
@@ -69,13 +69,13 @@ label scene_drysex_cowgirl_1(the_girl, the_location, the_object):
                 $ mc.change_arousal(4)
             else:
                 "She senses what you are doing and intentionally slows down."
-                the_girl.char "Easy there [the_girl.mc_title]. I'm in charge right now, you just let me set the pace."
+                the_girl "Easy there [the_girl.mc_title]. I'm in charge right now, you just let me set the pace."
                 "You stop urging her to go faster, but keep your hands on her hips. The slow pace is torture but feels good."
         "Grab her neck":
             "You reach up with your hand and go around the side of her neck. You try to start moving your hips a little faster against her."
             if the_girl.get_sex_goal() == "hate fuck":
                 "At first, she tries to resist you, so you begin to squeeze her neck."
-                the_girl.char "Hey now, I'm in..."
+                the_girl "Hey now, I'm in..."
                 "You tighten your hand, silencing her words. You growl back at her."
                 mc.name "You're boring me to death here bitch. Let's pick up the pace a little."
                 "She stares daggers at you, but does what you say and speeds up to meet your pace."
@@ -93,7 +93,7 @@ label scene_drysex_cowgirl_1(the_girl, the_location, the_object):
                 else:
                     "[the_girl.title] starts to protest, but is soon silenced as you squeeze her neck. She stops dry humping you and reaches up, trying to pull your hand away."
                     "You release her neck and she begins to gasp."
-                    the_girl.char "Fuck, take it easy, okay? No need to do that!"
+                    the_girl "Fuck, take it easy, okay? No need to do that!"
                     $ the_girl.change_love(-1)
                 "Her body so close to yours is torture. It feels good, but your pants are insufferably tight..."
 
@@ -107,7 +107,7 @@ label scene_drysex_cowgirl_2(the_girl, the_location, the_object):
         if the_girl.get_opinion_score("being fingered") < 0:
             "She moans as you touch her, but doesn't really seem to pick up the pace."
         else:
-            the_girl.char "Oh! Mmm..."
+            the_girl "Oh! Mmm..."
             "She moans as your fingers circle her clit. Her body responds, bucking her hips harder against you."
             "The pressure of her body against yours feels good."
             $ the_girl.change_arousal(7)
@@ -118,18 +118,18 @@ label scene_drysex_cowgirl_2(the_girl, the_location, the_object):
             "You reach up with both hands and begin to fondle them."
             if the_girl.get_sex_goal() == "waste cum" or the_girl.get_sex_goal() == "hate fuck":
                 "You grab her tits roughly. She moans as you play with them."
-                the_person.char "You like my tits [the_girl.mc_title]? I bet you're going to cum in your pants just touching them."
+                the_person "You like my tits [the_girl.mc_title]? I bet you're going to cum in your pants just touching them."
                 "You pinch her nipples roughly in response. She gasps in a mix a pleasure and pain."
                 $ the_girl.change_arousal(5)
             else:
                 "Her skin is hot and soft to the touch. They jiggle pleasantly in your hands as she grinds you."
-                the_person.char "Mmm, they're really sensitive..."
+                the_person "Mmm, they're really sensitive..."
                 "She sighs happily as you play with her tits."
                 $ the_girl.change_arousal(3)
         else:
             "[the_girl.possessive_title] continues to ride you. Her tits jiggle enticingly, even through her clothing."
             "You reach up with both hands and begin to fondle them."
-            the_girl.char "Mmm, your hands feel great."
+            the_girl "Mmm, your hands feel great."
 
     return
 
@@ -142,7 +142,7 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     "She acts surprised, but quickly speeds up, dry humping you at a rapid pace."
     mc.name "Oh.... Fuck!"
     "You dump your load in your pants. It makes a mess but it feels great."
-    the_girl.char "Wow... that was... interesting?"
+    the_girl "Wow... that was... interesting?"
     return
 
 label transition_default_drysex_cowgirl(the_girl, the_location, the_object):
@@ -160,7 +160,7 @@ label strip_drysex_cowgirl(the_girl, the_clothing, the_location, the_object):
     return
 
 label strip_ask_drysex_cowgirl(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "[the_girl.mc_title], I'd like to take off my [the_clothing.name]. Would you mind?"
+    the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name]. Would you mind?"
     menu:
         "Let her strip":
             mc.name "Take it off for me."
@@ -170,16 +170,16 @@ label strip_ask_drysex_cowgirl(the_girl, the_clothing, the_location, the_object)
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 70:
-                the_girl.char "Yeah? Do I look sexy in it?"
+                the_girl "Yeah? Do I look sexy in it?"
                 "She sighs happily while she rides you."
             else:
-                the_girl.char "Yeah? Do I look like a good little slut in it? Because that's what I feel like right now!"
+                the_girl "Yeah? Do I look like a good little slut in it? Because that's what I feel like right now!"
                 "She sighs happily while she rides your cock hard and fast."
     return
 
 label orgasm_drysex_cowgirl(the_girl, the_location, the_object):
     "[the_girl.title] works her hips faster and her breathing grows heavier."
-    the_girl.char "Oh god!"
+    the_girl "Oh god!"
     "With one last gasp she collapses down against you. Her thighs quiver as she climaxes."
     "After a second [the_girl.title] regains control of herself."
     "She leans back and starts to grind against you again, but much slower now."
@@ -192,9 +192,9 @@ label GIC_outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = No
     if the_goal == "hate fuck" or the_goal == "waste cum":
         "With each stroke of her hips [the_girl.title] brings you closer and closer to cumming. You're finally driven past the point of no return."
         mc.name "Fuck, I'm going to cum!"
-        the_person.char "Wow, already?"
+        the_person "Wow, already?"
         "It feels too good. You feel yourself begin to dump your load in your pants."
-        the_person.char "Hah! What a waste of cum."
+        the_person "Hah! What a waste of cum."
         "It makes a mess, but you finish cumming."
     else:
         $ drysex_cowgirl.call_default_outro(the_girl, the_location, the_object)

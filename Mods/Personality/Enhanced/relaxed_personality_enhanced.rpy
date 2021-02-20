@@ -36,20 +36,20 @@ label relaxed_sleepover_herplace_sex_start(the_person): #Right before sexy times
     return
 
 label relaxed_sleepover_impressed_response(the_person):  #If you've made her cum a lot
-    the_person.char "Oh my god, you're making me cum my brains out... this is amazing..."
+    the_person "Oh my god, you're making me cum my brains out... this is amazing..."
     "[the_person.title] lies down in bed and catches her breath."
-    the_person.char "I think I can keep going... I'm gonna be sore in the morning though!"
+    the_person "I think I can keep going... I'm gonna be sore in the morning though!"
     return
 
 
 label relaxed_sleepover_good_response(the_person):  #If you've made her cum
     the_person "Ahhh, that was nice..."
     "[the_person.title] lies down in bed and catches her breath."
-    the_person.char "I'm ready to go again if you are!"
+    the_person "I'm ready to go again if you are!"
     return
 
 label relaxed_sleepover_bored_response(the_person):  #If she hasn't cum yet
-    the_person.char "Whew, good job. Get some water and let's go for another!"
+    the_person "Whew, good job. Get some water and let's go for another!"
     "You take some time to catch your breath, drink some water, and wait for your refractory period to pass."
     "You hold [the_person.title] in bed while she caresses you and touches herself, keeping herself ready for you."
     return

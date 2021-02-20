@@ -138,17 +138,11 @@ init 2:
 
             dom_sex_goal_weighted_list = []
 
-            if SB_get_fetish_count(the_person) > 0: #She has fetishes, so use those to set a goal.
-                if the_person.has_vaginal_fetish():
-                    dom_sex_goal_weighted_list.append(["vaginal creampie", 100])
+            if the_person.get_fetish_count() > 0: #She has fetishes, so use those to set a goal.
                 if the_person.has_anal_fetish():
                     dom_sex_goal_weighted_list.append(["anal creampie", 100])
-                if the_person.has_oral_fetish():
-                    dom_sex_goal_weighted_list.append(["oral creampie", 100])
-                if the_person.has_internal_cum_fetish():
-                    dom_sex_goal_weighted_list.append(["vaginal creampie", 50])
+                if the_person.has_cum_fetish():
                     dom_sex_goal_weighted_list.append(["oral creampie", 50])
-                if the_person.has_external_cum_fetish():
                     dom_sex_goal_weighted_list.append(["body shot", 50])
                     dom_sex_goal_weighted_list.append(["facial", 50])
                 if the_person.has_breeding_fetish():
@@ -196,8 +190,8 @@ init 2:
             extra_positions = []
             ### Create list of possible positions###
             # when she enjoys blow jobs, add one to her choices (to prevent always going to blowjob variant)
-            if the_person.has_role(cum_external_role) or the_person.has_role(cum_internal_role):
-                extra_positions.append(SB_cum_fetish_blowjob)
+            if the_person.has_cum_fetish():
+                extra_positions.append(cum_fetish_blowjob)
             elif the_person.sex_skills["Oral"] >= 5 and the_person.get_opinion_score("giving blowjobs") > 1 and the_person.get_opinion_score("being submissive") > 1:
                 extra_positions.append(skull_fuck)
             elif the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1:
@@ -455,7 +449,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ mc.condom = False
             $ using_condom = False
         if current_node.position.requires_hard and mc.recently_orgasmed:
-            "Your post orgasm cock softens, stopping [the_person.possessive_title] for now."
+            "Your post orgasm cock softens, stopping [the_person.possessive_title!l] for now."
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?
             $ finished = True
         else:
@@ -468,7 +462,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
 
         if current_node.position.guy_energy > mc.energy - 5:
-            "You're too exhausted to let [the_person.possessive_title] keep [current_node.position.verbing] you."
+            "You're too exhausted to let [the_person.possessive_title!l] keep [current_node.position.verbing] you."
             $ finished = True
 
         elif current_node.position.girl_energy > the_person.energy - 5:

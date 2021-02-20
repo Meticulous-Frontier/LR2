@@ -84,13 +84,13 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     "As the girls get on their knees, you run your hands through their hair."
     mc.name "I want you two to focus on me for a bit."
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
+        the_girl_1 "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
     else:
-        the_girl_1.char "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
+        the_girl_1 "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
+        the_girl_1 "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
-        the_girl_2.char "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
+        the_girl_2 "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
     return
 
@@ -157,7 +157,7 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
         "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
         "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
         "When she finishes, she briefly comes up for air."
-        the_girl_1.char "Oh fuck that was good. I need a second."
+        the_girl_1 "Oh fuck that was good. I need a second."
         "She sits back and [the_girl_2.title] takes over for her while she recovers."
         return
 
@@ -165,7 +165,7 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
         "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
         "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
         "When she finishes, she briefly comes up for air."
-        the_girl_2.char "Oh fuck that was good. I need a second."
+        the_girl_2 "Oh fuck that was good. I need a second."
         "She sits back and [the_girl_1.title] takes over for her while she recovers."
         return
     return
@@ -174,13 +174,13 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
     "You decide to change things up a bit. You run your hands through their hair, pulling them toward your cock."
     mc.name "I want you two to focus on me for a bit."
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
+        the_girl_1 "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
     else:
-        the_girl_1.char "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
+        the_girl_1 "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        the_girl_1.char "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
+        the_girl_1 "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
-        the_girl_2.char "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
+        the_girl_2 "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
     return
 
@@ -192,8 +192,8 @@ label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
     "As the girls get on their knees, you run your hands through their hair."
     mc.name "Why don't you two makeout for a bit. I want to watch."
     "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
-    the_girl_1.char "Mmmm, I love your tits, [the_girl_2.name]!"
-    the_girl_2.char "Yours are nice too... I kinda want to suck on them..."
+    the_girl_1 "Mmmm, I love your tits, [the_girl_2.name]!"
+    the_girl_2 "Yours are nice too... I kinda want to suck on them..."
     "The girls are heating up as they start to make out with each other."
     return
 
@@ -201,14 +201,14 @@ label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_locat
     if the_girl_2.outfit.vagina_available():
         "As they are making out, you notice [the_girl_1.possessive_title] has her hand between [the_girl_2.title]'s legs, petting her pussy."
     else:
-        the_girl_1.char "Mmm... I want to touch you. Lets get these out of the way!"
+        the_girl_1 "Mmm... I want to touch you. Lets get these out of the way!"
         "She starts to strip her."
         $ scene_manager.strip_actor_outfit(the_girl_2, exclude_upper = True)
         "Once she finishes stripping her lower half [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title]'s pussy."
     if the_girl_1.outfit.vagina_available():
         "As she gets fingered, you notice that [the_girl_2.title] reaches down and begins to return the favor, fondling [the_girl_1.title]."
     else:
-        the_girl_2.char "Mmm, I want to to touch you too! Lets get these off of you..."
+        the_girl_2 "Mmm, I want to to touch you too! Lets get these off of you..."
         "[the_girl_2.title] starts to pull at her clothes."
         $ scene_manager.strip_actor_outfit(the_girl_1, exclude_upper = True)
         "Once her pussy is bare, the girls waste no time and begin to pet each other."
@@ -274,7 +274,7 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
             "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
             "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
             "When she finishes, she briefly comes up for air."
-            the_girl_1.char "Oh fuck that was good. I need a second."
+            the_girl_1 "Oh fuck that was good. I need a second."
             "She sits back and [the_girl_2.title] takes over for her while she recovers."
             return
 
@@ -282,7 +282,7 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
             "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
             "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
             "When she finishes, she briefly comes up for air."
-            the_girl_2.char "Oh fuck that was good. I need a second."
+            the_girl_2 "Oh fuck that was good. I need a second."
             "She sits back and [the_girl_1.title] takes over for her while she recovers."
             return
         return
@@ -290,8 +290,8 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
 label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     mc.name "Why don't you two makeout for a bit. I want to watch."
     "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
-    the_girl_1.char "Mmmm, I love your tits, [the_girl_2.name]!"
-    the_girl_2.char "Yours are nice too... I kinda want to suck on them..."
+    the_girl_1 "Mmmm, I love your tits, [the_girl_2.name]!"
+    the_girl_2 "Yours are nice too... I kinda want to suck on them..."
     "The girls are heating up as they start to make out with each other."
     return
 
@@ -303,7 +303,7 @@ label threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_locat
     "You dump wave after wave of cum into [the_girl_1.title]'s mouth."
     if the_girl_2.get_opinion_score("drinking cum") > 0:
         "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."
-        the_girl_2.char "Hey girl, save some for me!"
+        the_girl_2 "Hey girl, save some for me!"
         "[the_girl_2.title] leans towards her blowjob partner and begins kissing and licking your cum off her face."
         "Soon, they are full on making out, swapping your cum between their mouths."
         $ the_girl_2.cum_in_mouth()

@@ -11,10 +11,10 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
     if mc.condom:
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans when she feels you filling the condom deep inside of her."
         "Her cunt quivers as she joins you in orgasm. Her body goes rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
-        the_girl.char "Oh god, I can feel you twitching... but something is missing?"
+        the_girl "Oh god, I can feel you twitching... but something is missing?"
         "You wait until both of your orgasms have passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
         "She looks at your condom and frowns."
-        the_girl.char "You were... seriously? You had a condom on? Why would you do that?"
+        the_girl "You were... seriously? You had a condom on? Why would you do that?"
         $ the_girl.change_happiness(-5)
         "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
     else:
@@ -22,28 +22,28 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         "You feel her pussy convulsing around your dick as she also starts to orgasm."
 
         if the_girl.get_opinion_score("creampies") > 0:
-            the_girl.char  "Yes! Fill me with your cum!"
+            the_girl  "Yes! Fill me with your cum!"
         $ the_girl.cum_in_vagina()
         $ bent_over_breeding.redraw_scene(the_girl)
         if the_girl.has_breeding_fetish():
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."
-            the_girl.char "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
+            the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
         elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.get_opinion_score("bareback sex") > 0:
-            the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
+            the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."
         elif the_girl.wants_creampie():
-            the_girl.char "Oh god it's so deep."
+            the_girl "Oh god it's so deep."
         elif the_girl.knows_pregnant():
-            the_girl.char "Its nice, already being pregnant, I can take a load like that anytime..."
+            the_girl "Its nice, already being pregnant, I can take a load like that anytime..."
         elif the_girl.on_birth_control:
-            the_girl.char "Oh fuck...  Good thing I'm on the pill..."
+            the_girl "Oh fuck...  Good thing I'm on the pill..."
         else:
-            the_girl.char "Oh fuck... I could get pregnant you know.."
+            the_girl "Oh fuck... I could get pregnant you know.."
 
         "When you finish, you wait for a bit, reveling in the sensations as [the_girl.title]'s slick cunt has aftershocks."
         "You wait until her orgasm has passed completely, then pull out and stand back."

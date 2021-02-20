@@ -13,7 +13,7 @@
             orgasm_description = "orgasm_cowgirl_blowjob",
             taboo_break_description = "taboo_break_cowgirl_blowjob",
             verb = "mouth fuck",
-            opinion_tags = ["giving blowjobs", "facial", "drinking cum", "oral creampie", "get mc off"], record_class = "Blowjobs",
+            opinion_tags = ["giving blowjobs", "facial", "oral creampie", "get mc off"], record_class = "Blowjobs",
             default_animation = idle_wiggle_animation, modifier_animations = {"blowjob":blowjob_bob},
             associated_taboo = "sucking_cock")
 
@@ -24,10 +24,10 @@
 label intro_cowgirl_blowjob(the_girl, the_location, the_object):
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_blowjob.redraw_scene(the_girl)
-    the_girl.char "I want to taste you..."
+    the_girl "I want to taste you..."
     "She kisses you on the neck, then starts slowly working her way down your neck."
     "When she reaches your waist, she slowly undoes your pants, then pulls them down and off, revealing your erection."
-    the_girl.char "Oh [the_girl.mc_title]..."
+    the_girl "Oh [the_girl.mc_title]..."
 
     "[the_girl.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
     $ cowgirl_blowjob.current_modifier = "blowjob"
@@ -38,10 +38,10 @@ label intro_cowgirl_blowjob(the_girl, the_location, the_object):
 label taboo_break_cowgirl_blowjob(the_girl, the_location, the_object):
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_blowjob.redraw_scene(the_girl)
-    the_person.char "I know we've never done this before, but I really want to taste you..."
+    the_person "I know we've never done this before, but I really want to taste you..."
     "She kisses you on the neck, then starts slowly working her way down your neck."
     "When she reaches your waist, she slowly undoes your pants, then pulls them down and off, revealing your erection."
-    the_girl.char "Oh [the_girl.mc_title]..."
+    the_girl "Oh [the_girl.mc_title]..."
 
     "[the_girl.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
     $ cowgirl_blowjob.current_modifier = "blowjob"
@@ -54,7 +54,7 @@ label scene_cowgirl_blowjob_1(the_girl, the_location, the_object):
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] is stroking you with her mouth at an easy pace. She has her eyes closed and is just enjoying the taste."
     "She pauses for a second while she licks the tip."
-    the_person.char "Mmm, its so musky. It tastes good... mmmm"
+    the_person "Mmm, its so musky. It tastes good... mmmm"
     "Her mouth opens and her silky lips descend your cock again. You try to keep yourself from bucking your hips while she controls the pace."
     return
 
@@ -70,7 +70,7 @@ label scene_cowgirl_blowjob_2(the_girl, the_location, the_object):
     $ cowgirl_blowjob.current_modifier = None
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "You open your eyes to see her smiling at you."
-    the_person.char "Does that feel good?"
+    the_person "Does that feel good?"
     mc.name "It feels amazing... keep going."
     $ cowgirl_blowjob.current_modifier = "blowjob"
     $ cowgirl_blowjob.redraw_scene(the_girl)
@@ -145,10 +145,10 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
 label transition_default_cowgirl_blowjob(the_girl, the_location, the_object):
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_blowjob.redraw_scene(the_girl)
-    the_person.char "I want to taste you..."
+    the_person "I want to taste you..."
     "She kisses you on the neck, then starts slowly working her way down your neck."
     "When she reaches your waist, she slowly undoes your pants, then pulls them down and off, revealing your erection."
-    the_girl.char "Oh [the_girl.mc_title]..."
+    the_girl "Oh [the_girl.mc_title]..."
 
     "[the_girl.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
     $ cowgirl_blowjob.current_modifier = "blowjob"
@@ -173,7 +173,7 @@ label strip_ask_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object
     $ cowgirl_blowjob.redraw_scene(the_girl)
 
     "[the_girl.title] pops off your cock and looks up at you."
-    the_girl.char "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
     menu:
         "Let her strip":
             mc.name "Take it off for me."
@@ -186,11 +186,11 @@ label strip_ask_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 60:
-                the_girl.char "Yeah? Do I look sexy in it?"
+                the_girl "Yeah? Do I look sexy in it?"
                 $ cowgirl_blowjob.current_modifier = "blowjob"
                 "She licks the length of your shaft, then slides your tip into her mouth and starts to blow you again."
             else:
-                the_girl.char "Does it make me look like a good little slut? Or is your cock in my mouth enough for that?"
+                the_girl "Does it make me look like a good little slut? Or is your cock in my mouth enough for that?"
                 $ cowgirl_blowjob.current_modifier = "blowjob"
                 $ cowgirl_blowjob.redraw_scene(the_girl)
                 "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
@@ -214,7 +214,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
         mc.name "Fuck, here I come!"
         "[the_girl.possessive_title]'s mouth suddenly pops of your cock and she strokes you with her hand. She points your cock... up at you?"
-        the_girl.char "I'm not letting your spunk touch me!"
+        the_girl "I'm not letting your spunk touch me!"
         "You groan but you don't have time to take over, so you just lay back and let your orgasm overtake you."
         "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
         "When you finish you lay back and [the_girl.title] stops stroking you. She has a naughty smile on her face."
@@ -227,7 +227,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         "[the_girl.possessive_title]'s mouth pulls back with a satisfyingly wet pop. She aims it at her face."
         $ cowgirl_blowjob.current_modifier = None
         $ cowgirl_blowjob.redraw_scene(the_girl)
-        the_girl.char "Do it... I want it all over me!"
+        the_girl "Do it... I want it all over me!"
         "Her encouraging words push you over the edge. She sticks out her tongue to try and catch some as your cock erupts."
         $ the_girl.cum_on_face()
         $ cowgirl_blowjob.redraw_scene(the_girl)

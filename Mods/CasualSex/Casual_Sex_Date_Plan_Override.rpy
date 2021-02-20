@@ -19,17 +19,17 @@ init 5 python:
 label movie_date_plan_enhanced_label(the_person):
     if the_person.has_role(casual_hotwife_role):
         mc.name "So [the_person.title], I was going to see a movie some time this week and wanted to know if you'd like to come with me."
-        the_person.char "You know my husband won't like that, we agreed on keeping this casual, lets go the bathroom instead and show me how much you like me..."
+        the_person "You know my husband won't like that, we agreed on keeping this casual, lets go the bathroom instead and show me how much you like me..."
         return
 
     # elif the_person.has_role(casual_athlete_role):
     #     mc.name "So [the_person.title], I was going to see a movie some time this week and wanted to know if you'd like to come with me."
-    #     the_person.char "I have no time for that social stuff, but I could use another of your workout exercises..."
+    #     the_person "I have no time for that social stuff, but I could use another of your workout exercises..."
     #     return
 
     elif the_person.has_role(casual_FA_role):
         mc.name "So [the_person.title], I was going to see a movie some time this week and wanted to know if you'd like to come with me."
-        the_person.char "Thanks, but no, this isn't a social thing."
+        the_person "Thanks, but no, this isn't a social thing."
         return
 
     # call original label
@@ -42,17 +42,17 @@ label movie_date_plan_enhanced_label(the_person):
 label dinner_date_plan_enhanced_label(the_person):
     if the_person.has_role(casual_hotwife_role):
         mc.name "[the_person.title], I was wondering if you'd like to go out for a dinner date together."
-        the_person.char "You know my husband won't like that, we agreed on keeping this casual, lets go the bathroom instead and show me how much you like me..."
+        the_person "You know my husband won't like that, we agreed on keeping this casual, lets go the bathroom instead and show me how much you like me..."
         return
 
     # elif the_person.has_role(casual_athlete_role):
     #     mc.name "[the_person.title], I was wondering if you'd like to go out for a dinner date together."
-    #     the_person.char "I have no time for that social stuff, but I could use another of your workout exercises..."
+    #     the_person "I have no time for that social stuff, but I could use another of your workout exercises..."
     #     return
 
     elif the_person.has_role(casual_FA_role):
         mc.name "[the_person.title], I was wondering if you'd like to go out for a dinner date together."
-        the_person.char "Thanks, but no, this isn't a social thing."
+        the_person "Thanks, but no, this isn't a social thing."
         return
 
     # call original label

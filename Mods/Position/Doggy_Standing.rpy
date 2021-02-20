@@ -1,8 +1,8 @@
 init python:
     SB_doggy_standing = Position(name = "Standing Doggy", slut_requirement = 60, slut_cap = 80, requires_hard = True, requires_large_tits = False,
         position_tag = "standing_doggy", requires_location = "Low", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 18, girl_energy = 10,
-        guy_arousal = 20, guy_energy = 10,
+        girl_arousal = 18, girl_energy = 14,
+        guy_arousal = 20, guy_energy = 16,
         connections = [],
         intro = "intro_SB_doggy_standing",
         scenes = ["scene_SB_doggy_standing_1","scene_SB_doggy_standing_2", "scene_SB_doggy_standing_3"],
@@ -25,17 +25,17 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "Good girl, [the_girl.title], I'm going to fuck you hard."
     if the_girl.get_opinion_score("doggy style sex") > 2 :
-        the_girl.char "Oh thank god, I've been day dreaming about you bending me over all day long."
+        the_girl "Oh thank god, I've been day dreaming about you bending me over all day long."
     elif the_girl.get_opinion_score("sex standing up") > 2 :
-        the_girl.char "Oh thank god, I've been day dreaming about this all day long."
+        the_girl "Oh thank god, I've been day dreaming about this all day long."
     elif the_girl.get_opinion_score("doggy style sex") > 0 :
-        the_girl.char "I can't wait! It's so good when you bend me over."
+        the_girl "I can't wait! It's so good when you bend me over."
     elif the_girl.effective_sluttiness() > 80:
-        the_girl.char "Oh god I love it when you do this to me..."
+        the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 60:
-        the_girl.char "Mmmm, this is gonna be fun."
+        the_girl "Mmmm, this is gonna be fun."
     else:
-        the_girl.char "Okay [the_girl.mc_title], I'll play along this time."
+        the_girl "Okay [the_girl.mc_title], I'll play along this time."
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
@@ -44,7 +44,7 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt."
     "When you're ready you push forward. Her pussy feels amazing wrapped around your erection."
     if the_girl.get_opinion_score("doggy style sex") > 0 :
-        the_girl.char "Oh my god..."
+        the_girl "Oh my god..."
         $ the_girl.discover_opinion("doggy style sex")
     if the_girl.get_opinion_score("sex standing up") > 0 :
         "Her legs shake a bit as she gets used to the depth of your penetration."
@@ -57,19 +57,19 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("sex_responses_vaginal")
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
-        the_girl.char "I'm sorry [the_girl.mc_title], that's a little too rough. Can you go a little slower?"
+        the_girl "I'm sorry [the_girl.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. She seems to be adapting to your fucking."
-    elif the_girl.has_role(vaginal_fetish_role):          #vaginal fetish
+    elif the_girl.has_breeding_fetish():          #breeding fetish
         "After a particularly hard thrust, [the_girl.possessive_title] moans lewdly."
-        the_girl.char "That's it, fuck me harder! God I can't imagine going a single day without your cock inside me..."
+        the_girl "That's it, fuck me harder! God I can't imagine going a single day without your cock inside me..."
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand."
         "[the_girl.possessive_title] rocks her hips side to side each time you slam into her. Each time you pull back you can see her labia clinging to you."
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
         "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
-        the_girl.char "Oh god, you fuck me so good, I can barely keep up!"
+        the_girl "Oh god, you fuck me so good, I can barely keep up!"
         "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     menu:
@@ -85,19 +85,19 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
                 mc.name "Do you let any guy with a hard cock fuck you and spank you like this? Or just me?"
                 "[the_girl.possessive_title] responds quietly."
                 if the_girl.get_opinion_score("being submissive") > 0 and not the_girl.can_be_spanked():
-                    the_girl.char "Just you! I love it when you get rough with me, and spank me when I've been naughty!"
+                    the_girl "Just you! I love it when you get rough with me, and spank me when I've been naughty!"
                     "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
                     $ the_girl.unlock_spanking()
                 else:
-                    the_girl.char "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
+                    the_girl "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
                 if the_girl is mom:
-                    the_girl.char "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
+                    the_girl "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
                 "You give her pussy a few rough thrusts before bottoming out again."
                 mc.name "That's right bitch, you're my little fuckhole. I'll bend you over and fuck you anytime I please."
                 $ the_girl.discover_opinion("being submissive")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 5)
             else:
-                the_girl.char "Mmm, it feels good but kinda hurts... could you hit a little more softly?"
+                the_girl "Mmm, it feels good but kinda hurts... could you hit a little more softly?"
                 "You give her plaint ass another swat, this time not quite as hard."
                 "Her ass quivers slightly as you spank her. Her pussy clenches around you each time you spank her."
             if mc.arousal > 70:
@@ -105,17 +105,17 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
                 mc.name "You feel amazing. You're gonna make me cum soon."
                 if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("bareback sex") > 0:
                     "[the_girl.possessive_title] looks back at you and smiles."
-                    the_girl.char "Oh [the_girl.mc_title], I can't wait to feel you fill me up. I hope you finish deep!"
+                    the_girl "Oh [the_girl.mc_title], I can't wait to feel you fill me up. I hope you finish deep!"
                     "[the_girl.possessive_title]'s ass quivers a bit, as she imagines you cumming deep inside her."
                     $ the_girl.discover_opinion("creampies")
                     $ the_girl.discover_opinion("bareback sex")
                     $ the_girl.change_arousal(5)
                     if the_girl.get_opinion_score("being covered in cum") > 0:
-                        the_girl.char "You could always pull out too... your cum feels so good when it splashes all over my skin..."
+                        the_girl "You could always pull out too... your cum feels so good when it splashes all over my skin..."
                         $ the_girl.discover_opinion("being covered in cum")
                         $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 3)
                         if the_girl.get_opinion_score("cum facials") > 0:
-                            the_girl.char "Or my face! You haven't cum on my face in a while either..."
+                            the_girl "Or my face! You haven't cum on my face in a while either..."
                             $ the_girl.discover_opinion("cum facials")
                             $ the_girl.change_arousal(the_girl.get_opinion_score("cum facials") * 3)
                             "[the_girl.possessive_title] starts muttering to herself, fantasizing about all the different ways you could cum on, or in her."
@@ -127,7 +127,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
             "You lean forward a bit and reach down with one hand and begin to move it in circles around her clit."
             if the_girl.get_opinion_score("being fingered"):
                 "[the_girl.possessive_title] moans loudly in response."
-                the_girl.char "Oh [the_girl.mc_title], I love when you touch me there."
+                the_girl "Oh [the_girl.mc_title], I love when you touch me there."
                 "You slide your fingers around her slit a few times."
                 "You give your hips a few long, slow strokes as your circle her clit with your fingers."
                 $ the_girl.discover_opinion("being fingered")
@@ -149,7 +149,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
                 if the_girl.arousal > 80:
                     "You can feel her juices dripping down from her slit in response to your touch."
             if the_girl.arousal > 90:
-                the_girl.char "Oh fuck! Don't stop! Don't you dare stop!"
+                the_girl "Oh fuck! Don't stop! Don't you dare stop!"
                 "Her moans clearly indicate an impending orgasm. As best as you can, you fuck her while you roughly rub her clit."
             else:
                 "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her."
@@ -164,45 +164,43 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
         "You run your hands along her hips. You grab her hips and smack her ass roughly as you fuck her saturated slit."
 
     if the_girl.arousal > 130:
-        the_girl.char "Ohhh my god, I already came... and you're still fucking me!"
+        the_girl "Ohhh my god, I already came... and you're still fucking me!"
         "[the_girl.possessive_title]'s legs are shaking. Her orifice clenches and spasms around you."
         "Her pussy convulsing around you feels spectacular."
         $ mc.change_arousal(5)
     elif the_girl.arousal > 80:
-        the_girl.char "Ohhh, [the_girl.mc_title]... You are gonna make me cum so hard..."
+        the_girl "Ohhh, [the_girl.mc_title]... You are gonna make me cum so hard..."
         "You can feel a slight quiver in [the_girl.possessive_title]'s body as you fuck her. She's probably going to cum soon!"
     else:
         "[the_girl.possessive_title] groans in response to one particularly deep thrust."
-        the_girl.char "It's so big... it feels so good buried inside me."
+        the_girl "It's so big... it feels so good buried inside me."
     "You push yourself in as deep as you can go. [the_girl.possessive_title] moans as you fill her completely."
     menu:
         "Gentle Sex":
             "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
             mc.name "[the_girl.title], your pussy is so good. I love how eager you are to fuck me."
-            if the_girl.has_role(vaginal_fetish_role):
-                the_girl.char "I love being your little slut! Fuck me good [the_girl.mc_title]!"
-            elif the_girl.sluttiness > 80:
-                the_girl.char "Of course I'm eager. Your cock fills me just right. Fuck me good [the_girl.mc_title]!"
+            if the_girl.sluttiness > 80:
+                the_girl "Of course I'm eager. Your cock fills me just right. Fuck me good [the_girl.mc_title]!"
             else:
-                the_girl.char "Mmm, I can't help it, you make me feel so good."
+                the_girl "Mmm, I can't help it, you make me feel so good."
         "Rough Sex":
             "You take one hand and start to need the back of her scalp. You grab a fistful of hair and pull."
             "[the_girl.possessive_title] arches her back in response."
             mc.name "That's a good slut. Take it nice and deep."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
                 "[the_girl.possessive_title] moans enthusiastically."
-                the_girl.char "[the_girl.mc_title]! I love it deep. Fuck me good!"
+                the_girl "[the_girl.mc_title]! I love it deep. Fuck me good!"
                 "[the_girl.possessive_title] begs you for more."
                 "You give her what she wants. You grab her hips and start thrusting into her hard and fast."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 3)
             elif the_girl.get_opinion_score("being submissive") < 0 :
                 "[the_girl.possessive_title] looks back at you with a scowl."
-                the_girl.char "Don't get used to it, [the_girl.mc_title]... I'm not sure how I let you talk me into this..."
+                the_girl "Don't get used to it, [the_girl.mc_title]... I'm not sure how I let you talk me into this..."
                 $ the_girl.discover_opinion("being submissive")
                 "You let go of her hair and decide for now to keep your pace nice and slow."
             else:
                 "[the_girl.possessive_title] moans."
-                the_girl.char "You are so deep... It feels good having you so deep inside me."
+                the_girl "You are so deep... It feels good having you so deep inside me."
                 "You stir the depths of her pussy with your erection by moving your hips side to side."
 
     return
@@ -227,11 +225,11 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
     menu:
         "Finger her ass":
             "You decide to give her ass a little extra attention. You work up some saliva in your mouth then pause fucking her for a second."
-            the_person.char "Hey... why did you stop?"
+            the_person "Hey... why did you stop?"
             "Instead of answering, you let the saliva drop from your mouth onto her crack. She feels it and realizes what you are about to do when you start to work it into her crack with your finger."
             if the_girl.get_opinion_score("anal sex") > 0:
                 "[the_girl.possessive_title] bucks her hips slightly as you start to push your finger into her tight back passage. Her back arches in pleasure."
-                the_girl.char "Mmm! [the_girl.mc_title] that feels so good."
+                the_girl "Mmm! [the_girl.mc_title] that feels so good."
                 $ the_girl.discover_opinion("anal sex")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") + mc.sex_skills["Anal"])
                 "You slowly give her a long, deliberate stroke, pushing your cock and finger into her at the same time."
@@ -241,7 +239,7 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
                 "Soon though, you feel the urge to really give it to her, so you pull your finger out so you can grab both her hips and fuck her rough."
 
             elif the_girl.get_opinion_score("anal sex") < 0:
-                the_girl.char "WHOA! Hey I'm not really into that..."
+                the_girl "WHOA! Hey I'm not really into that..."
                 "She starts to pull away from you."
                 "It seems that [the_girl.possessive_title] doesn't like having her ass played with."
                 $ the_girl.discover_opinion("anal sex")
@@ -249,9 +247,9 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
                 "You quickly mumble an apology. Instead of fingering her, you grab her hips with both hands and start to pound her."
             else:
                 "[the_girl.possessive_title] tenses slightly as you start to push your finger into her back passage, but otherwise doesn't resist."
-                the_girl.char "Go slow... I don't let just anyone touch me like this..."
+                the_girl "Go slow... I don't let just anyone touch me like this..."
                 "She forces herself to relax. You can feel her rectum physically unclench and begin to slowly move your finger in and out of her."
-                the_girl.char "That feels good [the_girl.mc_title]... just be careful with me back there!"
+                the_girl "That feels good [the_girl.mc_title]... just be careful with me back there!"
                 "As you finger her ass, her hips remain stationary. She wills herself to relax, and manages to enjoy the stimulation."
                 $ the_girl.change_arousal(mc.sex_skills["Anal"])
                 "Soon though, you feel the urge in your hips to start fucking her again, so you pull your finger out so you can grab both her hips."
@@ -278,7 +276,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
-                    the_girl.char "It would be a shame to waste all of this, right?"
+                    the_girl "It would be a shame to waste all of this, right?"
                     "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
                     $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                 else:
@@ -288,25 +286,25 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
                 if the_girl.get_opinion_score("creampies") > 0:
-                    the_girl.char  "Yes! Fill me with your cum!"
+                    the_girl  "Yes! Fill me with your cum!"
                 if the_girl.arousal > 110:
                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
                     $ the_girl.change_happiness(5)
                 $ the_girl.cum_in_vagina()
                 $ SB_doggy_standing.redraw_scene(the_girl)
-                if the_girl.has_role(cum_internal_role):
+                if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                    the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                    the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
                 if the_girl.get_opinion_score("bareback sex") > 0:
-                    the_girl.char "Oh god... I can feel it so deep. I mean... it could... hopefully..."
+                    the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                     "[the_girl.possessive_title]'s voice starts to trail off."
                 elif the_girl.sluttiness > 110:
-                    the_girl.char "Oh god it's so deep."
+                    the_girl "Oh god it's so deep."
                 elif the_girl.on_birth_control:
-                    the_girl.char "Oh fuck...  Good thing I'm on the pill..."
+                    the_girl "Oh fuck...  Good thing I'm on the pill..."
                 else:
-                    the_girl.char "Oh fuck... I could get pregnant you know.."
+                    the_girl "Oh fuck... I could get pregnant you know.."
 
                 "You wait until your orgasm has passed completely, then pull out and stand back."
 
@@ -322,18 +320,18 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             else:
                 "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
             if the_girl.get_opinion_score("being covered in cum") > 0:
-                 the_girl.char "Yes! Paint me with your sticky cum!"
+                 the_girl "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
             $ SB_doggy_standing.redraw_scene(the_girl)
-            if the_girl.has_role(cum_external_role):
+            if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
                 "She truly is addicted to your cum."
             if the_girl.sluttiness > 120:
-                the_girl.char "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
+                the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
                 "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
             else:
-                the_girl.char "Oh! Its so warm..."
+                the_girl "Oh! Its so warm..."
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
         "Cum on her face":
             mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
@@ -341,13 +339,13 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
             else:
                 "You pull your cock out of [the_girl.possessive_title]. She immediately turns around on gets on her knees in front of you."
-            $ the_girl.draw_person(position = "blowjob")
+            $ the_girl.draw_person(position = "kneeling1")
             if the_girl.get_opinion_score("being covered in cum") > 0 or the_girl.get_opinion_score("cum facials") > 0:
                 "[the_girl.possessive_title] reaches up and strokes you off for your final few seconds."
                 "Your orgasm hits hard. Your first jet sprays across her face."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
-                if the_girl.has_role(cum_external_role):
+                $ the_girl.draw_person(position = "kneeling1")
+                if the_girl.has_cum_fetish():
                     "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
                     "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
                     "She truly is addicted to your cum."
@@ -356,18 +354,18 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             elif the_girl.sluttiness > 80:
                 "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
-                the_girl.char "Oh god... it feels so good on my skin..."
+                the_girl "Oh god... it feels so good on my skin..."
             elif the_girl.sluttiness > 60:
                 "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
             else:
                 "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
                 $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "blowjob")
+                $ the_girl.draw_person(position = "kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
             "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")
@@ -375,7 +373,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
 
 label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
     mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
-    the_girl.char "Oh yes, [the_girl.mc_title], make me your little bitch."
+    the_girl "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 
 label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object):
@@ -397,7 +395,7 @@ label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the
         "[the_girl.title] shivers with anticipation."
     if the_girl.sex_skills["Anal"] > 2:
         "She gasps as your tip starts to spread her open. She tilts her head back and pushes her hips against you, helping the process."
-        the_girl.char "Oh god... Mfphhhh!"
+        the_girl "Oh god... Mfphhhh!"
     else:
         "She gasps as your tip tries to spread open her impossibly tight asshole. She tries to pull away, but you pull on her waist and bring her closer."
         mc.name "Come on, you'll get there."
@@ -405,10 +403,10 @@ label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the
             "Your cock is still wet from [the_girl.title]'s pussy. You push steadily as you slide the tip into [the_girl.title]'s ass."
         else:
             "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
-        the_girl.char "Oh god... Fuck!"
+        the_girl "Oh god... Fuck!"
     "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
     "You stop when you've bottomed out, to give your cock time to properly stretch her out."
-    the_girl.char "I think... I'm ready for you to move some more..."
+    the_girl "I think... I'm ready for you to move some more..."
     "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."
     return
 
@@ -417,13 +415,13 @@ label transition_default_SB_doggy_standing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
     "You continue your back and forth motion, rubbing your cock along her pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
-        the_girl.char "Oh....Please..."
+        the_girl "Oh....Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
     if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
         "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-        the_girl.char "Oh god.... Ah...."
+        the_girl "Oh god.... Ah...."
         "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
         $ the_girl.break_taboo("vaginal_sex")
     else:
@@ -439,7 +437,7 @@ label strip_SB_doggy_standing(the_girl, the_clothing, the_location, the_object):
     return
 
 label strip_ask_SB_doggy_standing(the_girl, the_clothing, the_location, the_object):
-    the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.char] pants as you fuck her from behind."
     menu:
         "Let her strip":
@@ -451,13 +449,13 @@ label strip_ask_SB_doggy_standing(the_girl, the_clothing, the_location, the_obje
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do you think I look sexy in it?"
+                the_girl "Do you think I look sexy in it?"
                 "You speed up, fucking her faster in response to her question."
             elif the_girl.sluttiness < 100:
-                the_girl.char "Does it make me look like a good little slut? All I want to be is your good little slut sir."
+                the_girl "Does it make me look like a good little slut? All I want to be is your good little slut sir."
                 "She pushes her hips back into you and moans happily."
             else:
-                the_girl.char "Does it make me look like the cum hungry slut that I am? Or is it your cock inside me that makes me look that way?"
+                the_girl "Does it make me look like the cum hungry slut that I am? Or is it your cock inside me that makes me look that way?"
                 "She grinds her hips back into you and moans ecstatically."
     return
 
@@ -468,8 +466,8 @@ label orgasm_SB_doggy_standing(the_girl, the_location, the_object):
     "You bury your cock deep in [the_girl.possessive_title]'s cunt while she cums. Her pussy spasms around you."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("doggy style sex") > 0:
-        the_girl.char "Oh god, you've got me bent over and it feels so good I'm just cumming all over you..."
-    the_girl.char "Don't stop... it still feels so good!"
+        the_girl "Oh god, you've got me bent over and it feels so good I'm just cumming all over you..."
+    the_girl "Don't stop... it still feels so good!"
     return
 
 label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
@@ -478,7 +476,7 @@ label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
         mc.name "Stand over here, let me have a good look from behind."
         $ the_girl.draw_person(position = "back_peek", the_animation = ass_bob)
         "She turns around and jiggles her butt playfully for you."
-        the_girl.char "This cute ass? You want to have a closer look?"
+        the_girl "This cute ass? You want to have a closer look?"
         mc.name "I said stand here, come on."
         $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
         "She leans into the [the_object.name] and points her butt in your direction. She lowers her shoulders and works her hips for you."
@@ -490,27 +488,27 @@ label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
         "She nods and turns around."
         $ the_girl.draw_person(position = "walking_away")
         mc.name "Nice. Now shake it for me."
-        the_girl.char "Like... this?"
+        the_girl "Like... this?"
         $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.4)
         "[the_girl.title] works her hips and jiggles her ass for you."
         mc.name "Getting there, a little faster now."
         $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
         "She speeds up."
-    the_girl.char "Is that what you wanted?"
+    the_girl "Is that what you wanted?"
     "You move behind her and slide you cock between her thighs, brushing softly along her already wet snatch."
     mc.name "Not quite, you seem pretty excited, perhaps I should slide it in to see if you can hold up."
     $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her wet hole."
     if the_girl.sex_skills["Vaginal"] > 2:
         "She gasps as your tip starts to spread her lips apart. She lowers her shoulders and pushes her hips against you, helping the process."
-        the_girl.char "Oh god... Mfphhhh!"
+        the_girl "Oh god... Mfphhhh!"
     else:
         "She gasps as your tip slowly spreads her lips apart. She tries to pull away, but you pull on her waist and bring her closer."
         mc.name "Come on, you'll get there."
         "As you give it another try, you are making better progress, sliding the tip of your dick into [the_girl.title]'s wet tight cunt."
-        the_girl.char "Oh god... Fuck!"
+        the_girl "Oh god... Fuck!"
     "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
     "When you cannot go any deeper you give her some time to get used to your girth and length."
-    the_girl.char "I think... I'm ready for you to move some more..."
+    the_girl "I think... I'm ready for you to move some more..."
     "You pull back a little bit and give her a few testing strokes. When she can handle those, you speed up, until you're thrusting your entire length."
     return

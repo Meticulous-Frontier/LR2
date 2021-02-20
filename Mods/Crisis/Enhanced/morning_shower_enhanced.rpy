@@ -28,21 +28,21 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             # She says she'll be "out in a minute", or invites you in. Give her a shower outfit.
             "You knock on the door a couple of times and wait for a response."
             if the_person.effective_sluttiness(["bare_tits","bare_pussy"]) > 30:
-                the_person.char "It's open, come on in!"
+                the_person "It's open, come on in!"
                 $ home_shower.show_background()
                 $ the_person.apply_outfit(Outfit("Nude"))
                 $ the_person.draw_person(position = "back_peek")
-                "You open the door and see [the_person.possessive_title] in the shower."
+                "You open the door and see [the_person.possessive_title!l] in the shower."
                 call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_1
             else:
-                the_person.char "Just a second!"
+                the_person "Just a second!"
                 call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_1
 
         "Peek Inside":
             $ home_shower.show_background()
             $ apply_towel_outfit(the_person)
             $ the_person.draw_person(position = "walking_away")
-            "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower, undressing herself."
+            "You see [the_person.possessive_title!l] is standing in front of a mirror, getting ready for a shower, undressing herself."
 
             $ the_person.strip_outfit(position = "walking_away", exclude_feet = False)
 
@@ -51,10 +51,10 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "[the_person.possessive_title] turns around, with the water now going on her back and firm ass."
             if the_person.has_large_tits():
-                "You can't help but admire [the_person.possessive_title]'s great body and tits."
+                "You can't help but admire [the_person.possessive_title!l]'s great body and tits."
                 "Just as this thought flashes through your mind, she starts rubbing her boobs."
             else:
-                "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
+                "You can't help but admire [the_person.possessive_title!l]'s slim body and perky tits."
                 "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
             $ the_person.change_arousal(renpy.random.randint(10,50))
             if the_person.effective_sluttiness() >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
@@ -64,9 +64,9 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 "Go Inside":
                     if the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) <= 20:
                         $ the_person.draw_person(emotion = "angry")
-                        the_person.char "What the fuck [the_person.mc_title]! Can't you see it's occupied?"
+                        the_person "What the fuck [the_person.mc_title]! Can't you see it's occupied?"
                         mc.name "The door was unlocked, I thought you might have already been finished."
-                        the_person.char "Knock next time, okay? I'll be done in a minute."
+                        the_person "Knock next time, okay? I'll be done in a minute."
                         "She shoos you out of the room, seeming more upset about being interrupted than being seen naked."
                         $ hall.show_background()
                         $ clear_scene()
@@ -74,9 +74,9 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                         call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_4
                     else:
                         "She looks up at you, slightly startled, and turns her body away from you."
-                        the_person.char "Oh, [the_person.mc_title]!"
+                        the_person "Oh, [the_person.mc_title]!"
                         mc.name "I'm just here to have a shower."
-                        the_person.char "I should be finished soon, if you don't mind waiting."
+                        the_person "I should be finished soon, if you don't mind waiting."
                         $ the_person.update_outfit_taboos()
                         call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_2
 
@@ -87,7 +87,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             # Locked, unless the girl is slutty enough that you wouldn't mind (TODO: add a "make changes to the house" option where you can't lock the door so you can barge in on lily.)
             if the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) < 10:
                 "You try and open the door, but find it locked."
-                the_person.char "One second!"
+                the_person "One second!"
                 call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_2
             elif the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) <= 20:
                 $ home_shower.show_background()
@@ -96,9 +96,9 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 #$ the_person.outfit = Outfit("Nude") #changed v0.24.1
                 $ the_person.draw_person(emotion = "angry")
                 "You open the door. [the_person.possessive_title] is standing naked in the shower. She spins around and yells in surprise."
-                the_person.char "[the_person.mc_title]! I'm already in here, what are you doing?"
+                the_person "[the_person.mc_title]! I'm already in here, what are you doing?"
                 mc.name "The door was unlocked, I thought you might have already been finished."
-                the_person.char "Knock next time, okay? I'll be done in a minute."
+                the_person "Knock next time, okay? I'll be done in a minute."
                 "She shoos you out of the room, seeming more upset about being interrupted than being seen naked."
                 $ hall.show_background()
                 $ clear_scene()
@@ -109,11 +109,11 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ home_shower.show_background()
                 $ the_person.apply_outfit(Outfit("Nude"))
                 $ the_person.draw_person(position = "back_peek")
-                "You open the door and see [the_person.possessive_title] in the shower."
+                "You open the door and see [the_person.possessive_title!l] in the shower."
                 "She looks up at you, slightly startled, and turns her body away from you."
-                the_person.char "Oh, [the_person.mc_title]!"
+                the_person "Oh, [the_person.mc_title]!"
                 mc.name "I'm just here to have a shower."
-                the_person.char "I should be finished soon, if you don't mind waiting."
+                the_person "I should be finished soon, if you don't mind waiting."
                 $ the_person.update_outfit_taboos()
                 call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_3
 
@@ -123,7 +123,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
     return
 
 label morning_shower_masturbation():
-    "The warmth of the water and her caresses seem to turn [the_person.possessive_title] on."
+    "The warmth of the water and her caresses seem to turn [the_person.possessive_title!l] on."
     $ the_person.draw_person(position = "missionary")
     "She sits on the shower floor, spreads her legs and begins to masturbate with her hand."
     while the_person.arousal < 100:
@@ -134,11 +134,11 @@ label morning_shower_masturbation():
             "As she gets more and more turned on, her hand is moving faster and faster."
         elif ran_num == 2:
             "She pushes 3 fingers inside, making a deep guttural noise."
-            the_person.char "Ahh, yes. Fuck me hard and deep."
+            the_person "Ahh, yes. Fuck me hard and deep."
         elif ran_num == 3:
             if the_person.get_opinion_score("anal sex") > 0:
                 "She slow pushes a finger in her rectum..."
-                the_person.char "Mmmm, yes, make me your little anal slut."
+                the_person "Mmmm, yes, make me your little anal slut."
             else:
                 "[the_person.possessive_title] moves two fingers along her labia, quietly moaning with pleasure."
         else:
@@ -150,10 +150,10 @@ label morning_shower_masturbation():
                 else:
                     "With one hand she squeezes het perky little breast."
         $ the_person.change_arousal(renpy.random.randint(20,35))
-    the_person.char "Shit, I'm cumming!"
+    the_person "Shit, I'm cumming!"
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
-    "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
-    the_person.char "Wow, that was intense. Need to be quieter or someone might just hear me."
+    "You see [the_person.possessive_title!l]'s body shiver as she reaches orgasm."
+    the_person "Wow, that was intense. Need to be quieter or someone might just hear me."
     $ the_person.draw_person(position = "walking_away")
     "She gets up and returns to washing her body."
     "You see her love juices mixing with the water dripping on the floor."
@@ -164,12 +164,12 @@ label girl_shower_leave_enhanced(the_person):
     "After a short pause the shower stops and you hear movement on the other side of the door."
     $ apply_towel_outfit(the_person)
     $ the_person.draw_person()
-    "The bathroom door opens and [the_person.possessive_title] steps out from the steamy room in a towel."
+    "The bathroom door opens and [the_person.possessive_title!l] steps out from the steamy room in a towel."
     if the_person is mom:
-        the_person.char "There you go [the_person.mc_title], go right ahead."
+        the_person "There you go [the_person.mc_title], go right ahead."
         "She gives you a quick kiss and steps past you."
     else:
-        the_person.char "There, it's all yours. I might have used up all of the hot water."
+        the_person "There, it's all yours. I might have used up all of the hot water."
         "She steps past you and heads to her room."
     return
 
@@ -184,7 +184,7 @@ label girl_shower_enter_enhanced(the_person):
                 "She notices you watching, but doesn't seem to mind the attention."
                 $ the_person.change_slut_temp(1+(the_person.get_opinion_score("showing her tits")+the_person.get_opinion_score("showing her ass")))
             else:
-                the_person.char "It's strange to shower with someone else in the room."
+                the_person "It's strange to shower with someone else in the room."
                 mc.name "Nothing to worry about, we're all family here, right?"
                 "She shrugs and nods, but you notice she's always trying to shield her body from your view."
                 $ the_person.change_slut_temp(1)
@@ -194,7 +194,7 @@ label girl_shower_enter_enhanced(the_person):
 
             $ apply_towel_outfit(the_person)
             $ the_person.draw_person()
-            the_person.char "There you go. Enjoy!"
+            the_person "There you go. Enjoy!"
             $ clear_scene()
             "She steps past you and leaves. You get into the shower and enjoy the relaxing water yourself."
             $ mc.change_energy(20)
@@ -202,34 +202,34 @@ label girl_shower_enter_enhanced(the_person):
         "Join her in the shower" if the_person.obedience >= 120:
             mc.name "How about I just jump in, I can get your back and we'll both save some time."
             if the_person.effective_sluttiness() > 40:
-                the_person.char "Sure, if you're okay with that. I will put you to work though."
+                the_person "Sure, if you're okay with that. I will put you to work though."
                 "She gives you a warm smile and invites you in with her."
             else:
-                the_person.char "I'm not sure..."
+                the_person "I'm not sure..."
                 mc.name "I've got work to get to today, so I'm getting in that shower."
                 "[the_person.possessive_title] nods meekly."
-                the_person.char "Okay."
+                the_person "Okay."
 
             "You strip down and get in the shower with [the_person.title]. The space isn't very big, so she puts her back to you."
             "You're left with her ass inches from your crotch, and when she leans over to pick up the shampoo she grinds up against you."
             $ mc.change_arousal(5)
-            the_person.char "Oops, sorry about that."
-            "Your cock, already swollen, hardens in response, and now even stood up the tip brushes against [the_person.possessive_title]'s ass."
+            the_person "Oops, sorry about that."
+            "Your cock, already swollen, hardens in response, and now even stood up the tip brushes against [the_person.possessive_title!l]'s ass."
             if the_person.effective_sluttiness("touching_body") <= 40:
-                the_person.char "I think I'm just about done, so you can take care of this..."
+                the_person "I think I'm just about done, so you can take care of this..."
                 "She wiggles her butt and strokes your tip against her cheeks."
-                $ the_person.change_slut_temp(3 + the_person.get_opinion_score("showing her ass"))
+                $ the_person.change_slut_temp(1 + the_person.get_opinion_score("showing her ass"))
                 "She steps out of the shower and grabs a towel."
                 $ apply_towel_outfit(the_person)
                 $ the_person.draw_person()
-                the_person.char "See you next time."
+                the_person "See you next time."
                 $ clear_scene()
                 "She leaves the room and you finish your shower alone, feeling refreshed by the water."
                 $ mc.change_location(bedroom)
 
             # elif the_person.effective_sluttiness() <= 60: #TODO: Add a "hot dog" position and make it a starting position for this.
             #     "She wiggles her butt and strokes your tip against her cheeks."
-            #     the_person.char "Do you need some help with this? How about you just... use my butt?"
+            #     the_person "Do you need some help with this? How about you just... use my butt?"
             #     $ the_person.draw_person("walking_away")
             #     "She rubs up against you while you talk, stroking your shaft with her wet, slippery ass."
             #     menu:
@@ -239,9 +239,9 @@ label girl_shower_enter_enhanced(the_person):
 
 
             else:
-                the_person.char "What is this?"
+                the_person "What is this?"
                 "She wiggles her butt and strokes your tip against her cheeks."
-                the_person.char "Well we need to take care of this, don't we..."
+                the_person "Well we need to take care of this, don't we..."
                 "She turns around and faces you. It might be the hot water, but her face is flush."
                 $ the_person.change_slut_temp(2)
                 menu:
@@ -254,11 +254,11 @@ label girl_shower_enter_enhanced(the_person):
                         $ the_person.draw_person()
                         "When you're finished [the_person.title] steps out of the shower and grabs a towel. She dries herself off, then wraps herself in it then turns to you."
                         if the_report.get("girl orgasms",0)>0:
-                            the_person.char "Well that's a good way to start the day. See you later."
+                            the_person "Well that's a good way to start the day. See you later."
                         elif the_report.get("guy orgasms",0)>0:
-                            the_person.char "Well I hope you enjoyed your start to the day. See you later."
+                            the_person "Well I hope you enjoyed your start to the day. See you later."
                         else:
-                            the_person.char "Well maybe we can pick this up some other time. See you later."
+                            the_person "Well maybe we can pick this up some other time. See you later."
 
                         $ clear_scene()
                         "She leaves the room and you finish your shower alone, feeling refreshed by the water."
@@ -268,7 +268,7 @@ label girl_shower_enter_enhanced(the_person):
                         mc.name "Maybe some other time, I've got to hurry up though."
                         "She pouts and nods."
                         $ the_person.change_obedience(1)
-                        the_person.char "Alright, up to you."
+                        the_person "Alright, up to you."
 
             $ mc.change_energy(20)
 

@@ -20,7 +20,7 @@ label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title] lets out a moan. She pinches her nipples while you pound her pillows."
 
         "She grabs your cock with her hand and then pulls her chest back from around you. She takes the tip of your cock and uses it to tease her nipples."
-        the_person.char "Mmm, my nipples are so sensitive."
+        the_person "Mmm, my nipples are so sensitive."
         "[the_girl.title] raps her chest a few times now with your cock, sending ripples out from the point of impact."
 
     return
@@ -35,19 +35,19 @@ label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object):
         mc.name "Your tits feel so good. You should play with them while I thrust."
         "She takes her hands and runs them along the sides of her breasts. Her abundance of tit flesh feels amazing wrapped around you."
         "[the_girl.title] starts to pinch and pull at her nipples."
-        if the_girl.has_role(cum_external_role):
-            the_person.char "Mmm, your cock is so hot, I can't wait to feel your cum bursting out, all over me."
+        if the_girl.has_cum_fetish():
+            the_person "Mmm, your cock is so hot, I can't wait to feel your cum bursting out, all over me."
             "She pinches her nipples hard and pulls on them, causing her to cry out."
             $ the_girl.change_arousal(10)
         else:
-            the_person.char "Your cock is so hot, it feels so right up against my body like this."
+            the_person "Your cock is so hot, it feels so right up against my body like this."
             "She pinches her nipples hard and pulls on them, causing her to cry out."
             $ the_girl.change_arousal(5)
     else:                           #She has smaller tits
         "Her hands leave your ass and she brings her hands to the sides of her chest, squishing her tits together to try and stimulate you better."
         mc.name "Mmm that's it, push them together like that."
         "You keep thrusting. [the_girl.title] gathers some saliva in her mouth and then spits on the head of your cock."
-        the_person.char "Gotta keep things lubricated..."
+        the_person "Gotta keep things lubricated..."
         "She spits again. You can feel her spit coating your cock and it slides a little smoother between her tits now."
     "You let go of her shoulders. She looks up at you, smiles, and then resumes fucking you with her tits."
     return

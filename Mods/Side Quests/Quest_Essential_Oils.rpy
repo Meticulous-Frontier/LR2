@@ -187,18 +187,18 @@ label quest_essential_oils_intro_label(the_person):
     $ the_person.draw_person(position = "sitting")
     "You walk over. The smell is definitely coming from the diffuser."
     mc.name "[the_person.title]... can I ask what you are diffusing into the room?"
-    the_person.char "Oh! Hello [the_person.mc_title]! Yeah I was having some trouble concentrating, so I got out my essential oil diffuser."
-    the_person.char "It's my own personal mix of peppermint, rosemary, and lemon oils! Really helps me focus on the task at hand!"
+    the_person "Oh! Hello [the_person.mc_title]! Yeah I was having some trouble concentrating, so I got out my essential oil diffuser."
+    the_person "It's my own personal mix of peppermint, rosemary, and lemon oils! Really helps me focus on the task at hand!"
     "You take another whiff... the smell is very confusing. And personally you find it a bit distracting."
     mc.name "Well, I don't think it is a good idea to be diffusing that around here. We have a lot of chemicals we store in the building, and for a minute I thought we had a leak or spill."
-    the_person.char "Oh, yes sir! Don't worry, this batch is almost out anyway. This stuff is so expensive, I can't diffuse it often anyway."
+    the_person "Oh, yes sir! Don't worry, this batch is almost out anyway. This stuff is so expensive, I can't diffuse it often anyway."
     "Hmmm.... expensive?"
     mc.name "So, this is something people pay a lot of money for? These, essential oils?"
-    the_person.char "Oh yes! You can use them for all sorts of things. Tummy aches, headaches, concentration, memory. Diffusers are good, but you can also apply them to the skin or even orally."
+    the_person "Oh yes! You can use them for all sorts of things. Tummy aches, headaches, concentration, memory. Diffusers are good, but you can also apply them to the skin or even orally."
     menu:
         "Ask about taking the oils orally":
             mc.name "That's interesting. So you can take them orally? And they help with all that stuff?"
-            the_person.char "Oh yeah! I've been using them for a while and definitely notice a difference."
+            the_person "Oh yeah! I've been using them for a while and definitely notice a difference."
             "You consider this for a moment. It's no secret that [the_person.title] isn't the brightest... but maybe this is something you could use?"
             "You wonder if you could somehow make a serum trait that uses the essential oils to help drive up the price. Surely if you advertised it was made with essential oils you could sell it for more?"
             "You should talk to your head researcher and see what she thinks about it."
@@ -208,7 +208,7 @@ label quest_essential_oils_intro_label(the_person):
             $ mc.business.add_mandatory_crisis(quest_essential_oils_abandon)
         "Tell her to knock it off and leave it at home":
             mc.name "Well don't bring them back. This could have triggered an evacuation."
-            the_person.char "Oh my... yes sir, I'll leave it at home from now on."
+            the_person "Oh my... yes sir, I'll leave it at home from now on."
             $ quest_essential_oils().set_quest_flag(19)
             $ quest_essential_oils().quest_completed()
     "You say goodbye to [the_person.title]."
@@ -218,14 +218,14 @@ label quest_essential_oils_research_start_label(the_person):
     $ the_person.draw_person()
     "You greet your head researcher."
     mc.name "Hello, I have a quick question for you. Have you ever heard of essential oils?"
-    the_person.char "Oh god, don't start with that bullshit..."
+    the_person "Oh god, don't start with that bullshit..."
     mc.name "Right, well, I was talking to another employee, and apparently there are people out there who will pay big money for them."
-    the_person.char "There's a sucker born every minute, or so I've heard."
+    the_person "There's a sucker born every minute, or so I've heard."
     mc.name "So... would it be possible to create a serum trait using essential oils? Not to do anything meaningful, but as a way of driving up the price."
     "[the_person.title] stops and considers what you are saying for a moment."
-    the_person.char "I... think so? I don't know if theres any major negative side effects associated with them. I could look into it the next couple of days and get back to you."
+    the_person "I... think so? I don't know if theres any major negative side effects associated with them. I could look into it the next couple of days and get back to you."
     mc.name "Perfect. Let me know what you find out."
-    the_person.char "Okay. Is there anything else I can do you for you?"
+    the_person "Okay. Is there anything else I can do you for you?"
     $ quest_essential_oils().quest_event_dict["timeout_day"] = day + 7
     $ quest_essential_oils().quest_event_dict["research_day"] = day + 2
     $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_end)
@@ -234,14 +234,14 @@ label quest_essential_oils_research_start_label(the_person):
 
 label quest_essential_oils_research_end_label(the_person):
     $ the_person.draw_person()
-    the_person.char "Hey [the_person.mc_title]. Just the man I was hoping to see. I did some research on those essential oils you were asking about."
+    the_person "Hey [the_person.mc_title]. Just the man I was hoping to see. I did some research on those essential oils you were asking about."
     mc.name "And?"
-    the_person.char "Well, they are mostly related to placebo effect. People think they work, so they imagine they feel better or whatever else after they use them."
-    the_person.char "Most of them also have some sort of negative side effect, but they are all mostly benign. It wouldn't be too hard to make a serum trait like you were asking."
+    the_person "Well, they are mostly related to placebo effect. People think they work, so they imagine they feel better or whatever else after they use them."
+    the_person "Most of them also have some sort of negative side effect, but they are all mostly benign. It wouldn't be too hard to make a serum trait like you were asking."
     mc.name "That's great, that is exactly what I was hoping to hear."
-    the_person.char "Just to give you a heads up though. Some of those oils are hard to extract, and for our company we would need to buy them in pretty bulk sizes..."
+    the_person "Just to give you a heads up though. Some of those oils are hard to extract, and for our company we would need to buy them in pretty bulk sizes..."
     mc.name "Hmm, so I may need to find a supplier."
-    the_person.char "Yup! Sorry, I don't know where you could source this stuff. Here's a list of which ones would be appropriate for us to use."
+    the_person "Yup! Sorry, I don't know where you could source this stuff. Here's a list of which ones would be appropriate for us to use."
     mc.name "Thanks, that's exactly what I needed."
     $ renpy.say("", "You think back. It was " + quest_essential_oils_get_target().title + " that had some in the first place. Maybe you could ask her where she gets hers from?")
     $ quest_essential_oils_get_target().add_unique_on_talk_event(quest_essential_oils_discover_supplier)
@@ -251,47 +251,47 @@ label quest_essential_oils_research_end_label(the_person):
 label quest_essential_oils_discover_supplier_label(the_person):
     $ the_person.draw_person()
     mc.name "Hello, I have a quick question for you."
-    the_person.char "Yeah [the_person.mc_title]?"
+    the_person "Yeah [the_person.mc_title]?"
     mc.name "Those oils you had the other day in here. Where did you get them from?"
-    the_person.char "Oh! Looking to get some too?"
+    the_person "Oh! Looking to get some too?"
     mc.name "Yes, something like that."
-    the_person.char "Well, I get mine from over at the mall. There's a nice lady over there who sells them. One of those, lifestyle coach, naturalist type people."
+    the_person "Well, I get mine from over at the mall. There's a nice lady over there who sells them. One of those, lifestyle coach, naturalist type people."
     mc.name "Do you remember her name?"
     "She thinks about it for a minute."
-    the_person.char "Yes, I'm pretty sure her name is [dawn.name]. She has a small kiosk setup in the mall itself."
+    the_person "Yes, I'm pretty sure her name is [dawn.name]. She has a small kiosk setup in the mall itself."
     mc.name "Thank you."
-    the_person.char "Yup! Anything else I can do for you?"
+    the_person "Yup! Anything else I can do for you?"
     $ dawn.add_unique_on_talk_event(quest_essential_oils_decision)
     $ quest_essential_oils().set_quest_flag(41)
     return
 
 label quest_essential_oils_decision_label(the_person):
     mc.name "I have an employee who told me she got some essential oils from you. Would you happen to be able to procure a bulk order?"
-    the_person.char "Oh? How big are we talking?"
+    the_person "Oh? How big are we talking?"
     mc.name "Well, I am interested in using them in a small run of pharmaceuticals I am developing."
-    the_person.char "Ah, I could set you up with a gallon size for now? A little bit of these things go a long way!"
+    the_person "Ah, I could set you up with a gallon size for now? A little bit of these things go a long way!"
     mc.name "That sounds good. Here is a list of the ones I need."
     "You hand her the list from your researcher."
-    the_person.char "Okay, I'll need $500 to cover the cost. Do you want to do that up front? Or should I invoice it?"
+    the_person "Okay, I'll need $500 to cover the cost. Do you want to do that up front? Or should I invoice it?"
     menu:
         "Pay it up front":
             mc.name "I'll pay it all now. I have the cash on me."
-            the_person.char "Ok, great!"
+            the_person "Ok, great!"
             "[the_person.title] takes your information and money."
             $ mc.business.change_funds(-500)
-            the_person.char "I'll make sure it gets delivered out to your business right away!"
+            the_person "I'll make sure it gets delivered out to your business right away!"
             $ quest_essential_oils().set_quest_flag(101)
             $ quest_essential_oils().quest_completed()
         "Invoice":
             mc.name "I don't have that amount of money on me. Could you please invoice my business?"
-            the_person.char "Sure, I can do that. Accounts to be payable in no less than one week, of course."
+            the_person "Sure, I can do that. Accounts to be payable in no less than one week, of course."
             "[the_person.title] takes your information."
-            the_person.char "I'll make sure it gets delivered out to your business right away!"
+            the_person "I'll make sure it gets delivered out to your business right away!"
             $ quest_essential_oils().set_quest_flag(102)
             $ add_quest_essential_oils_invoice()
         "Too pricey":
             mc.name "Wow... $500? You know what, this was a mistake. I'm sorry to bother you."
-            the_person.char "Okay, your loss!"
+            the_person "Okay, your loss!"
             $ quest_essential_oils().set_quest_flag(49)
             $ quest_essential_oils().quest_completed()
             return
@@ -303,9 +303,9 @@ label quest_essential_oils_decision_label(the_person):
         # we fired the head researcher, so we don't bother checking in with them.
         return
     "You step away from the kiosk. You give your head researcher a call."
-    mc.business.head_researcher.char "Hello?"
+    mc.business.head_researcher "Hello?"
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
-    mc.business.head_researcher.char "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
+    mc.business.head_researcher "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
     return
 

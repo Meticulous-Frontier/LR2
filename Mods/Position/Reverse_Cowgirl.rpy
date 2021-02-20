@@ -1,8 +1,8 @@
 init python:
     SB_reverse_cowgirl = Position(name = "Reverse Cowgirl", slut_requirement = 60, slut_cap = 80, requires_hard = True, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 18, girl_energy = 10,
-        guy_arousal = 14, guy_energy = 6,
+        girl_arousal = 18, girl_energy = 14,
+        guy_arousal = 14, guy_energy = 10,
         connections = [],
         intro = "intro_SB_reverse_cowgirl",
         scenes = ["scene_SB_reverse_cowgirl_1","scene_SB_reverse_cowgirl_2"],
@@ -40,8 +40,8 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
         "You can clearly see her arousal every time she bounces up and down on top of you, her juices are beginning to run down the inside of her thighs."
     else:
         "You watch in rapture as her tight pussy lips grip your shaft with every bounce."
-    if the_girl.has_role(vaginal_fetish_role):   #Fetish serum, highly skilled and loves sex
-        the_girl.char "Oh [the_girl.mc_title], I love how full I feel when you fuck me... god I wish we could do this everyday!"
+    if the_girl.has_breeding_fetish():   #Fetish serum, highly skilled and loves sex
+        the_girl "Oh [the_girl.mc_title], I love how full I feel when you fuck me... god I wish we could do this everyday!"
         "[the_girl.possessive_title] gives you a few quick, shallow dips then pull off you almost completely, leaving just your tip inside her."
         "She swirls her hips a couple times then impales herself on your again. [the_girl.possessive_title] works her hips relentlessly on top of you as she pleases herself on your erection."
         "After constant exposure to the serums you've designed, it is clear by the way she fucks you with wild abandon that you've turned her into your slut."
@@ -50,7 +50,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
         mc.name "Oh my god [the_girl.title], that feels amazing..."
         if the_girl.arousal > 130:
             "[the_girl.possessive_title] looks back at you with passion in her eyes while the contractions of her pussy around you suddenly strengthen. Her eyes start to glaze as she orgasms again."
-            the_girl.char "[the_girl.mc_title]! I'm cumming again! Cum for me... I need you to cum for me now!!!"
+            the_girl "[the_girl.mc_title]! I'm cumming again! Cum for me... I need you to cum for me now!!!"
             "Her pleading and the intense pleasure her cunt is giving you is pushing you to orgasm soon."
             $ mc.change_arousal(50)
             return
@@ -63,7 +63,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title] stops moving her hips for a few seconds, but you can feel her contracting and relaxing the muscles around her pelvis, her cunt milking you without even having to move her hips."
         mc.name "Oh my god [the_girl.title], that feels amazing..."
         if the_girl.arousal > 130:
-            the_girl.char "[the_girl.mc_title]! I'm cumming again! Cum for me... I need you to cum for me now!!!"
+            the_girl "[the_girl.mc_title]! I'm cumming again! Cum for me... I need you to cum for me now!!!"
             "Her pleading and the intense pleasure her cunt is giving you is pushing you to orgasm soon."
             $ mc.change_arousal(50)
             return
@@ -72,7 +72,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
     else:
         "[the_girl.possessive_title] works her hips up and down on you as best as she can."
         "She makes a couple shallow dips, then then sheathes you entirely. She makes a few awkward gyrations with her hips."
-        the_girl.char "Mmm, it feels good. I wish I could fuck you as good as you fuck me."
+        the_girl "Mmm, it feels good. I wish I could fuck you as good as you fuck me."
         mc.name "Don't worry, it feels great, keep going."
         "[the_girl.title] moans as she continues to ride you."
 
@@ -82,26 +82,26 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
     # CHOICE CONCEPT: She bottoms out and grinds on you for a bit. Spank or finger her
     "[the_girl.possessive_title] bounces up and down a few times on your cock, then and you holds you deep inside her."
     "Instead of bouncing up and down, she starts to grind herself back and forth."
-    the_girl.char "Mmmm, [the_girl.mc_title], its so big... I feel so full!"
+    the_girl "Mmmm, [the_girl.mc_title], its so big... I feel so full!"
     "[the_girl.possessive_title]'s shapely ass looks amazing on display in front of you. You grasp one of her pliant cheeks in your hand as she grinds."
     menu:
         "Spank it":
             "You bring your hand off [the_girl.possessive_title]'s ass and give it a firm slap"
-            the_girl.char "Oh!"
+            the_girl "Oh!"
             "You enjoy the way her tight ass jiggles and spank it again."
             if the_girl.get_opinion_score("showing her ass") > 0:
                 $ the_girl.discover_opinion("showing her ass")
-                the_girl.char "You're gonna leave a mark, [the_girl.mc_title]! Then everyone who sees it will know what a slut I am!"
+                the_girl "You're gonna leave a mark, [the_girl.mc_title]! Then everyone who sees it will know what a slut I am!"
                 "She wiggles her hips back and forth, giving you an enticing moving target. You give her irresistible ass another spank."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass") * 5)
                 "[the_girl.possessive_title] moans as you give her a few more swats. A bright red handprint is beginning to form on her cheeks."
-            elif the_girl.has_role(vaginal_fetish_role):
+            elif the_girl.has_breeding_fetish():
                 "You give her irresistible ass another spank. [the_girl.possessive_title] times her thrust with your hand smacking her booty, swallowing your dick whole with her greedy cunt when you spank her."
-                the_girl.char "Mmmm. I've been bad [the_girl.mc_title], I can't get your dick off my mind!"
+                the_girl "Mmmm. I've been bad [the_girl.mc_title], I can't get your dick off my mind!"
                 "You spank her again. She bottoms out on top of you in time with your smack again. She greatly enjoys the sensation of getting filled up and spanked at the same time."
                 $ the_girl.change_arousal(5)
             else:
-                the_girl.char "Do you like that, [the_girl.mc_title]? Ah!"
+                the_girl "Do you like that, [the_girl.mc_title]? Ah!"
                 "[the_girl.possessive_title] is enjoying herself. You give her accommodating ass another squeeze and then spank it again."
                 "You can feel [the_girl.possessive_title]'s pussy quivering as she grinds herself back into you."
                 $ the_girl.change_arousal(5)
@@ -111,24 +111,24 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
             mc.name "Damn [the_girl.title], your ass is amazing!"
             "[the_girl.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
             if the_girl.is_dominant():
-                the_girl.char "Do you like that, [the_girl.mc_title]? Just lay back and let me take care of you..."
+                the_girl "Do you like that, [the_girl.mc_title]? Just lay back and let me take care of you..."
                 "You run your hands along your hips while she grinds back against you. Her cunt feels amazing wrapped around you."
                 if the_girl.arousal > 130:
-                    the_girl.char "Ohh god, I'm gonna cum again! Fuck you should cum too... are you gonna cum soon?"
+                    the_girl "Ohh god, I'm gonna cum again! Fuck you should cum too... are you gonna cum soon?"
                     "[the_girl.possessive_title]'s pussy spasms again in orgasm. The combination of her orgasm and the view of her ass is incredibly arousing."
                     $ mc.change_arousal(10)
                     $ the_girl.change_happiness(2)
                 else:
                     $ the_girl.change_arousal(5)
-                    the_girl.char "Ohh, you make me so wet. I want to make you feel good too... Do you wanna cum soon?"
+                    the_girl "Ohh, you make me so wet. I want to make you feel good too... Do you wanna cum soon?"
                 if the_girl.get_opinion_score("creampies") > 0:
                     "[the_girl.possessive_title] reaches back between her legs and cups your balls."
-                    the_girl.char "Mmm you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
+                    the_girl "Mmm you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
                 else:
                     "[the_girl.possessive_title] grabs your ankles to steady herself."
-                    the_girl.char "You should... I love it when you cum. I want to make you cum!"
+                    the_girl "You should... I love it when you cum. I want to make you cum!"
             else:
-                the_girl.char "I'm glad you like it, [the_girl.mc_title]. I love it when you fuck me, but sometimes it feels good to be on top too..."
+                the_girl "I'm glad you like it, [the_girl.mc_title]. I love it when you fuck me, but sometimes it feels good to be on top too..."
                 if the_girl.get_opinion_score("masturbating") > 0:
                     "[the_girl.possessive_title] reaches down with one hand and begins to rub her clit as she grinds back against you."
                     $ the_girl.discover_opinion("masturbating")
@@ -140,15 +140,15 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
             "[the_girl.possessive_title] stops grinding for a second when she feels your finger at her asshole."
             if the_girl.sex_skills["Anal"] > 1: #She can easily take a finger
                 "You push your finger easily up inside her. Her rectum relaxes and she sighs when you finger is fully engulfed by her back passage."
-                the_girl.char "OH! I love that feeling... keep it right there..."
+                the_girl "OH! I love that feeling... keep it right there..."
             else:
                 "You meet some resistance as you slowly push your finger against her rectum. She gasps as she fights the feeling to resist it."
-                the_girl.char "Oh! I love this feeling, but give me a second, I'm not very good at taking things back there..."
+                the_girl "Oh! I love this feeling, but give me a second, I'm not very good at taking things back there..."
                 "She takes a deep breath, but is able to slowly force herself to relax. You are able to slowly slide your finger inside her."
                 "It takes several seconds, but her rectum finally relaxes enough you are able to fully engulf your finger in her back passage."
-                the_girl.char "Mmm... keep it right there, I'm gonna take it slow."
+                the_girl "Mmm... keep it right there, I'm gonna take it slow."
             "[the_girl.title] begins to slowly grind her hips again. With each movement forward your cock and finger slowly pull out of her, and with each movement back she takes them both deep."
-            the_girl.char "Yes! Oh fuck [the_girl.mc_title], the pressure feels so good!"
+            the_girl "Yes! Oh fuck [the_girl.mc_title], the pressure feels so good!"
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex" * 5))
             if the_girl.arousal > 130:
                 "You can feel [the_girl.title]'s pussy and ass quaking as she aftershocks from her orgasms. She moans ecstatically."
@@ -173,42 +173,42 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         "She moans as she feels your erection twitching inside of her. You dump your load into the condom, hoping it can contain it."
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
         "You gaze at her shapely ass. She reaches back and carefully removes your condom."
-        the_girl.char "Wow that was good. Look at all that cum you made for me..."
+        the_girl "Wow that was good. Look at all that cum you made for me..."
         return
     elif the_girl.knows_pregnant():
-        the_girl.char "That's it, shoot your seed deep inside me! Shower my baby with your cum!"
+        the_girl "That's it, shoot your seed deep inside me! Shower my baby with your cum!"
         "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
         "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy. She slowly moves as you dump your load deep inside her."
         $ the_girl.cum_in_vagina()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
-        the_girl.char "Oh Yes! Cum for me! It feels so good when you shoot your cum into my pussy!"
+        the_girl "Oh Yes! Cum for me! It feels so good when you shoot your cum into my pussy!"
         "[the_girl.possessive_title] slowly pulls herself up, rubbing her drenched pussy, while she smiles at you."
         if the_girl.event_triggers_dict.get("preg_accident", False): # she got pregnant by accident
-            the_girl.char "This is how I got pregnant in the first place, too much potent cum in my fertile pussy."
-    elif the_girl.has_role(cum_internal_role):
-        the_girl.char "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
+            the_girl "This is how I got pregnant in the first place, too much potent cum in my fertile pussy."
+    elif the_girl.has_cum_fetish():
+        the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
         "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
         "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-        the_girl.char "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
+        the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
         "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         $ the_girl.cum_in_vagina()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
         "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
-    elif the_girl.has_role(cum_external_role):
+    elif the_girl.has_cum_fetish():
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
-        the_girl.char "Oh its so good when you spray me with your seed... Do it! Cum all over me!"
+        the_girl "Oh its so good when you spray me with your seed... Do it! Cum all over me!"
         "You don't have time to respond before the first wave of cum erupts from your penis."
         $ the_girl.cum_on_ass()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
         "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
-        the_girl.char "Thank you [the_girl.mc_title]. Oh my good its so good..."
+        the_girl "Thank you [the_girl.mc_title]. Oh my good its so good..."
         "You lay back and take a few moments to enjoy the view. [the_girl.possessive_title] is massaging your cum into her ass cheeks with both hands."
     elif the_girl.get_opinion_score("creampies") > 0:
-        the_girl.char "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
+        the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
         "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
         $ the_girl.cum_in_vagina()
@@ -216,38 +216,38 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
         "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
     elif the_girl.get_opinion_score("bareback sex") > 0:
-        the_girl.char "That's it, shoot your seed in deep! I want to feel you flood my womb!"
+        the_girl "That's it, shoot your seed in deep! I want to feel you flood my womb!"
         "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
         "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy. She holds herself still just as you dump your load deep inside her."
         "You reach your hands forward and grab her hips, and push yourself up slightly, holding her hips in place."
         $ the_girl.cum_in_vagina()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
-        the_girl.char "Yes! Cum deep! I don't want a single drop to go to waste!"
+        the_girl "Yes! Cum deep! I don't want a single drop to go to waste!"
         "When you finish, [the_girl.possessive_title] stays still for a few minutes, keeping you deep inside her."
         "She reaches down between her legs, and then slowly pulls off of you, trying to use her hand to keep any of your seed from spilling out."
     elif the_girl.get_opinion_score("being covered in cum") > 0:
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
-        the_girl.char "Oh my god its so warm. I want to feel you shoot your load all over my ass!"
+        the_girl "Oh my god its so warm. I want to feel you shoot your load all over my ass!"
         "You don't have time to respond before the first wave of cum erupts from your penis."
         $ the_girl.cum_on_ass()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When the last of your cum splashes onto her ass, she stops stroking you."
-        the_girl.char "Thank you [the_girl.mc_title], I love the feeling of your cum on my skin..."
+        the_girl "Thank you [the_girl.mc_title], I love the feeling of your cum on my skin..."
         "You lay back and take a few moments to enjoy the view."
     elif the_girl.get_opinion_score("showing her ass") > 0:
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
-        the_girl.char "I want to feel you shoot your load all over my ass! Its going to feel so hot knowing I've got your load all over my ass..."
+        the_girl "I want to feel you shoot your load all over my ass! Its going to feel so hot knowing I've got your load all over my ass..."
         "You don't have time to respond before the first wave of cum erupts from your penis."
         $ the_girl.cum_on_ass()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When the last of your cum splashes onto her ass, she stops stroking you."
-        the_girl.char "Thank you [the_girl.mc_title]. Do I look good? With your sticky seed painted all over my backside?"
+        the_girl "Thank you [the_girl.mc_title]. Do I look good? With your sticky seed painted all over my backside?"
         "[the_girl.possessive_title] shakes her hips side to side for you, showing off her prize. In a couple places your cum starts drip down from her shapely ass."
         "You lay back and take a few moments to enjoy the view."
     elif the_girl.sex_skills["Vaginal"] >= 5:
-        the_girl.char "Oh god, it feels too good to pull off now... just shoot it up inside me!"
+        the_girl "Oh god, it feels too good to pull off now... just shoot it up inside me!"
         if the_girl.arousal > 130:
             "[the_girl.possessive_title] is riding you with wild abandon, as yet another orgasm wracks her body. Too late to stop, you begin cumming at the same time."
         elif the_girl.arousal > 100:
@@ -255,9 +255,9 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         $ the_girl.cum_in_vagina()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "[the_girl.possessive_title]'s expert cunt draws wave after wave of cum from you. For a second you lose the ability to process anything outside the feeling of her velvet pussy wrapped perfectly around your shaft."
-        the_girl.char "Oh [the_girl.mc_title]... I needed that so bad... Let's do that again soon okay?"
+        the_girl "Oh [the_girl.mc_title]... I needed that so bad... Let's do that again soon okay?"
     elif the_girl.effective_sluttiness("creampie") < 60:
-        the_girl.char "Oh shit, you can't cum inside me!"
+        the_girl "Oh shit, you can't cum inside me!"
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
         "You don't have time to respond before the first wave of cum erupts from your penis."
@@ -267,13 +267,13 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         "You lay back and take a few moments to enjoy the view."
     else:
         "[the_girl.title] starts to pull up and off of you. She hesitates with the tip of your cock just inside of her pussy."
-        the_girl.char "I... I really shouldn't let you..."
+        the_girl "I... I really shouldn't let you..."
         "She bites her lip and moans, unsure of what to do."
         menu:
             "Pull her down and cum inside her":
                 "You reach up and grab [the_girl.possessive_title] by the hips. With one confident pull she plunges back onto your cock, gasping with pleasure."
                 "The feeling of her warm, wet pussy sliding down and engulfing your cock again pushes you over the edge. You pull [the_girl.title] tight against you and unload inside of her."
-                the_girl.char "Ah! Just... Just this once!"
+                the_girl "Ah! Just... Just this once!"
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ the_girl.change_obedience(3)
@@ -284,7 +284,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
                 "She moves your cock between her ass cheeks until you fire your hot semen all over her."
                 $ the_girl.cum_on_ass()
                 $ SB_reverse_cowgirl.redraw_scene(the_girl)
-                the_girl.char "Whew, that was close..."
+                the_girl "Whew, that was close..."
                 "She rolls off and lies next to you on the [the_object.name]."
     return
 
@@ -303,7 +303,7 @@ label strip_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object)
 
 label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] straightens up a bit and peaks back at you."
-    the_girl.char "Sir, I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
         "Let her strip":
             mc.name "Take it off for me."
@@ -314,13 +314,13 @@ label strip_ask_SB_reverse_cowgirl(the_girl, the_clothing, the_location, the_obj
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 80:
-                the_girl.char "Do you think I look sexy in it?"
+                the_girl "Do you think I look sexy in it?"
                 "She bottoms herself out on top of you and starts to grind her hips into yours."
             elif the_girl.sluttiness < 100:
-                the_girl.char "Does it make me look like a good little slut? All I want to be is your good little slut sir."
+                the_girl "Does it make me look like a good little slut? All I want to be is your good little slut sir."
                 "She pushes her hips back into you and moans happily."
             else:
-                the_girl.char "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
+                the_girl "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
                 "She grinds her hips back into you and moans ecstatically."
     return
 
@@ -329,14 +329,14 @@ label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_objec
     "Looking down at [the_girl.possessive_title], you decide it's time to change things up a little bit."
     mc.name "Hey, why don't we change it up a bit, do you wanna be on top for a bit?"
     if the_girl.is_dominant():
-        the_girl.char "Oh! I love being on top. Let's do it!"
+        the_girl "Oh! I love being on top. Let's do it!"
         $ the_girl.change_arousal(5)
     else:
-        the_girl.char "Sure, if that's what you want [the_girl.mc_title]"
+        the_girl "Sure, if that's what you want [the_girl.mc_title]"
     "You pull off of her and let her, then lay down on your back."
     mc.name "Why don't you ride me reverse cowgirl? Let me watch that amazing ass of yours."
     if the_girl.get_opinion_score("showing her ass") > 0:
-        the_girl.char "Mmm, you wanna watch my booty bounce up and down on you? That sounds hot!"
+        the_girl "Mmm, you wanna watch my booty bounce up and down on you? That sounds hot!"
         $ the_girl.change_arousal(5)
         "[the_girl.possessive_title] winks at you, then climbs on top you, giving her ass a bit of a shake as she climbs on."
     else:
@@ -363,12 +363,12 @@ label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("climax_responses_vaginal")
     "[the_girl.possessive_title] stirs her womb with your erection aggressively through her climax"
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
-    the_girl.char "God it feels so good, I wonder if you can last long enough to let me cum again..."
+    the_girl "God it feels so good, I wonder if you can last long enough to let me cum again..."
     return
 
 label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] leads you to the [the_object.name]."
-    the_girl.char "Lie down for me [the_girl.mc_title]..."
+    the_girl "Lie down for me [the_girl.mc_title]..."
     "You nod and follow her instructions. She steps over you and kneels down, giving you a perfect view of her ass."
     if the_girl.effective_sluttiness(SB_reverse_cowgirl.associated_taboo) > SB_reverse_cowgirl.slut_cap:
         "She reaches between her legs and grabs your cock, bringing it towards her and running the tip against her clit."
@@ -395,7 +395,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             "At the last second, she pulls off you and pulls your condom off."
         else:
             "Her hips lift up off you. Your cock is suddenly cold and aching to be back inside of her as you get ready to cum."
-        the_girl.char "I'm not letting you cum in me!"
+        the_girl "I'm not letting you cum in me!"
         "You groan but you don't have time to take over, so you just lay back and let your orgasm overtake you."
         "She reaches down between her legs and strokes your cock, pointing it at you."
         "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
@@ -404,54 +404,54 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
         $ the_girl.change_obedience(-3)
     elif the_goal == "hate fuck":
         if the_person.on_birth_control or mc.condom:
-            the_person.char "Already? I guess the view of my ass was just too much for you to handle."
+            the_person "Already? I guess the view of my ass was just too much for you to handle."
             if mc.condom:
-                the_person.char "Whatever, I'm sure the condom can handle your pathetic load."
+                the_person "Whatever, I'm sure the condom can handle your pathetic load."
                 "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                 "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
             else:
-                the_person.char "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
+                the_person "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
                 "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
                 $ the_girl.cum_in_vagina()
                 $ SB_reverse_cowgirl.redraw_scene(the_girl)
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                 "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
         else:
-            the_person.char "Already? Is my cunt to just too much for you to handle?"
+            the_person "Already? Is my cunt to just too much for you to handle?"
             if the_person.get_opinion_score("creampies") > 0:
-                the_person.char "Whatever. I want to feel you cum insdie me. Not like your swimmers are strong enough to knock me up anyway."
+                the_person "Whatever. I want to feel you cum insdie me. Not like your swimmers are strong enough to knock me up anyway."
                 "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
                 $ the_girl.cum_in_vagina()
                 $ SB_reverse_cowgirl.redraw_scene(the_girl)
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                 "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
             else:
-                the_person.char "Whatever. Hurry up and cum."
+                the_person "Whatever. Hurry up and cum."
                 "She starts to speed up. You moan as you get ready to fire your load up inside her."
                 "At the last second she pulls off, you groan as your start to cum, spraying all over your stomach."
                 "She watches as your cock twitches and finishes."
-                the_person.char "Look at all that wasted cum... Too bad, [the_person.mc_title]!"
+                the_person "Look at all that wasted cum... Too bad, [the_person.mc_title]!"
                 "She rolls off and lies next to you on the [the_object.name]."
     elif the_goal == "vaginal creampie":
-        the_girl.char "Yes! Ah!"
+        the_girl "Yes! Ah!"
         "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
         "Her breath catches in her throat when you pulse out your hot load of cum deep inside of her."
-        #the_girl.char "Oh my god... Give it all to me [the_girl.mc_title]... Fill me up..."
+        #the_girl "Oh my god... Give it all to me [the_girl.mc_title]... Fill me up..."
         if mc.condom:
             "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
             "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
             if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                 $ the_girl.discover_opinion("drinking cum")
                 "[the_girl.possessive_title] reaches below her for your cock. With delicate fingers she slides your condom off, pinching above the bulge to keep your cum from spilling out."
-                the_girl.char "It would be a shame to waste all of this, right?"
+                the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                 $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches for your cock, removes the condom carefully, and ties the end in a knot."
-                the_girl.char "Look at all that cum. Well done."
+                the_girl "Look at all that cum. Well done."
         elif the_girl.has_role(breeding_fetish_role):
-            the_girl.char "That's it! Inside me! I need that seed deep!"
+            the_girl "That's it! Inside me! I need that seed deep!"
             $ the_girl.cum_in_vagina()
             $ SB_reverse_cowgirl.redraw_scene(the_girl)
             "As you finish, you can feel her working her vaginal muscles, milking the cum from you cock as best as a she can."
@@ -465,7 +465,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
         "She rolls off and lies next to you on the [the_object.name]."
     elif the_goal == "body shot":
-        the_person.char "Ohhh, cum all over my ass!"
+        the_person "Ohhh, cum all over my ass!"
         if mc.condom:
             "[the_girl.possessive_title] pulls off you, reaches down and pulls your condom off and begins stroking you."
         else:
@@ -475,7 +475,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "She rolls off and lies next to you on the [the_object.name]."
     elif the_goal == "oral creampie":
-        the_person.char "Wait! I want it in my mouth!"
+        the_person "Wait! I want it in my mouth!"
         if mc.condom:
             "[the_girl.possessive_title] pulls off you, but quickly moves down your body. She pulls off the condom and takes you into her mouth."
         else:

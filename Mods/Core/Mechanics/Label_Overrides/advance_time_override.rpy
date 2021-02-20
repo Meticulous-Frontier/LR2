@@ -108,6 +108,19 @@ init 5 python:
             crisis_tracker_dict[crisis.effect] = 0
         return
 
+    def get_sorted_active_and_filtered_mandatory_crisis_list(crisis_list):
+        has_fetish = False
+        active_crisis_list = []
+        for crisis in [x for x in sorted(crisis_list, key = lambda x: x.priority, reverse = True) if x.is_action_enabled()]:
+            if isinstance(crisis, Fetish_Action):
+                if not has_fetish:
+                    active_crisis_list.append(crisis)
+                    has_fetish = True
+            else:
+                active_crisis_list.append(crisis)
+        return active_crisis_list
+
+
     def find_next_crisis(active_crisis_list):
         update_crisis_tracker(active_crisis_list)
 
@@ -288,7 +301,7 @@ label advance_time_random_crisis_label():
 label advance_time_mandatory_crisis_label():
     # "advance_time_mandatory_crisis_label - timeslot [time_of_day]" #DEBUG
     python:
-        active_crisis_list = [x for x in mc.business.mandatory_crises_list if x.is_action_enabled()]
+        active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_crises_list)
         crisis_count = 0
 
     while crisis_count < len(active_crisis_list):
@@ -353,7 +366,7 @@ label advance_time_mandatory_morning_crisis_label():
     #"advance_time_mandatory_morning_crisis_label" #DEBUG
     #Now we run mandatory morning crises. Nearly identical to normal crises, but these always trigger at the start of the day (ie when you wake up and before you have control of your character.)
     python:
-        active_crisis_list = [x for x in mc.business.mandatory_morning_crises_list if x.is_action_enabled()]
+        active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_morning_crises_list)
         crisis_count = 0
 
     while crisis_count < len(active_crisis_list):

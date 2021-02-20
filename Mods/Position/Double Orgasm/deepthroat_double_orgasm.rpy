@@ -10,22 +10,22 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
         "Cum on her face":
             mc.name "Fuck, here I come!"
             $ deepthroat.current_modifier = None
-            $ deepthroat.redraw_scene(the_girl)
+            $ the_girl.draw_person("kneeling1")
             "You take a step back, pulling your cock out of [the_girl.possessive_title]'s throat with a satisfyingly wet pop, and take aim at her face."
             if the_girl.sluttiness > 80:
                 "[the_girl.title] sticks out her tongue and rubs her pussy while waiting for your hot load."
                 $ the_girl.cum_on_face()
-                $ deepthroat.redraw_scene(the_girl)
+                $ the_girl.draw_person("kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.title]'s face and into her open mouth, all the while rubbing her wet clit."
             elif the_girl.sluttiness > 60:
                 "[the_girl.title] closes her eyes riding out her orgasm."
                 $ the_girl.cum_on_face()
-                $ deepthroat.redraw_scene(the_girl)
+                $ the_girl.draw_person("kneeling1")
                 "You let out a shudder moaning as keep pumping out cum over [the_girl.title]'s face."
             else:
                 "[the_girl.title] closes her eyes, presenting her cheek while she enjoys her orgasm."
                 $ the_girl.cum_on_face()
-                $ deepthroat.redraw_scene(the_girl)
+                $ the_girl.draw_person("kneeling1")
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.title]'s face. She is a little distracted as the warm liquid lands on her cheek, but keeps enjoying her own bliss."
             "You hear her whimper and a final shiver runs through her body."
             "You take a deep breath to steady yourself once you've finished cumming."
@@ -90,7 +90,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ deepthroat.redraw_scene(the_girl)
                 "You keep on sliding your dick down her tight throat, preventing her from breathing, until she finishes twitching."
                 "When she's finished cumming you let [the_girl.title] pull back off your shaft. She gasps loudly for air."
-                the_girl.char "That was... oh my god [the_girl.mc_title], I want you to do that again!"
+                the_girl "That was... oh my god [the_girl.mc_title], I want you to do that again!"
 
             else:
                 "When she's finished cumming you let [the_girl.title] pull back off your shaft. She gasps loudly for air, unable to speak."
@@ -99,7 +99,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ deepthroat.redraw_scene(the_girl)
                 $ the_girl.change_obedience(1)
                 $ the_girl.change_happiness(-2)
-                the_girl.char "Ah... fuck. This was nice, but go a little easier on me next time, okay?"
+                the_girl "Ah... fuck. This was nice, but go a little easier on me next time, okay?"
                 "She clears her throat, then kisses the side of your dick."
             $ the_girl.call_dialogue("cum_mouth")
 

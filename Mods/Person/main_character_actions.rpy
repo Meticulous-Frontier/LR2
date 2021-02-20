@@ -107,7 +107,7 @@ init 5 python:
     mc_rename_person_action = ActionMod("Rename", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of [the_person.title].", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
-    mc_spend_the_night_action = ActionMod("Spend the night with [the_person.possessive_title]", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+    mc_spend_the_night_action = ActionMod("Spend the night with girl", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
     pay_to_strip_action = ActionMod("Pay her to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
