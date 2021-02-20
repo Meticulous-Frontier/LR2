@@ -201,7 +201,7 @@ label quest_production_line_intro_label(the_person):
     mc.name "That sounds perfect."
     the_person "Yeah... He's really smart! I'm not sure if any of his ideas will be useful or not, but if anyone can help, I'm sure it would be him!"
     the_person "He said to share his contact info and to meet him over at the coffee shop. His name is [dad_name]."
-    "You get his contact info and put it in your phone, as well as add a reminder in your phone to go meet him."
+    "You get his contact info and put it in your phone."
     mc.name "Thank you."
     the_person "No problem!"
     $ del dad_name
@@ -212,11 +212,18 @@ label quest_production_line_intro_label(the_person):
     return
 
 label quest_production_line_coffee_reminder_label():
-    $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
-    "An alarm on your phone is going off. You check it."
-    "Meet [dad_name] at coffee shop at the mall."
-    "If you are going to go meet with the chemist, do it after lunch. He should be at the mall."
-    $ del dad_name
+    $ the_person = quest_production_line_get_target()
+    "You receive a text message on your phone."
+    $ mc.having_text_conversation = the_person
+    the_person "Hey [the_person.mc_title], don't forget to meet my dad in the mall."
+    if mc.location == mall:
+        mc.name "Thanks, I'm already at the mall."
+    else:
+        mc.name "Thanks, I'm going over there right now."
+        $ mc.change_location(mall)
+        $ mc.location.show_background()
+    $ mc.having_text_conversation = None
+    "If you are going to go meet with the chemist, go to the business meeting."
     $ quest_production_line().set_quest_flag(21)
     $ mc.business.add_mandatory_crisis(quest_production_line_coffee_miss)
     return
