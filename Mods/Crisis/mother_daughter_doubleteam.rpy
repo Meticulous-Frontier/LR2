@@ -61,7 +61,9 @@ label mother_daughter_doubleteam_action_label():
             mc.name "I have one condition though. Why don't you both go at the same time, that way I can go back and forth and make up my mind easier."
             the_daughter "Yes! Let's do it mom! Loser has to cook dinner tonight!"
             the_mother "Okay, let's do it!"
-            "As the mother and daughter walk over to you and get on their knees, you feel a burst of energy. A competitive blowjob. This should be fun!"
+            mc.name "Let's go to my office for some privacy."
+            $ ceo_office.show_background()
+            "As soon as mother and daughter get to your office, they drop to their knees, giving you a burst of anticipation energy. A competitive blowjob. This should be fun!"
             python:
                 mc.change_energy(50)
                 the_mother.change_energy(50)
@@ -83,7 +85,7 @@ label mother_daughter_doubleteam_action_label():
                     the_mother "Alright, I'll make dinner tonight, but this isn't over girl! We'll revisit this another time!"
             $ scene_manager.update_actor(the_mother, position = "walking_away", display_transform = character_right)
             $ scene_manager.update_actor(the_daughter, position = "walking_away", display_transform = character_center_flipped)
-            "The two girls walk out of the break room, the competition settled.... for now..."
+            "The two girls walk out of your office, the competition settled.... for now..."
         "Too busy":
             mc.name "I'm sorry, I have a lot on my to do list right now. Perhaps another time."
             the_daughter "Oof. Okay, maybe we're both bad if [the_daughter.mc_title] won't even accept a free blowjob from us mom?"
