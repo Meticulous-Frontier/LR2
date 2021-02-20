@@ -9,7 +9,7 @@ init 1 python:
         return False
 
 
-    def cum_fetish_family_intro_requirement():
+    def cum_fetish_family_intro_requirement(the_person):
         if the_person.location == the_person.home:
             if the_person.location.get_person_count() == 1: #She is alone in her bedroom
                 return True
