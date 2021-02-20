@@ -65,7 +65,7 @@ screen serum_cheat_menu:
                     frame:
                         background "#000080"
                         xsize 410
-                        text "Master Existing Traits:\n{color=#ff0000}{size=14}Click the Trait to add 10 Mastery levels{/size}{/color}" style "serum_cheat_text_style"
+                        text "Master Existing Traits:\n{color=#ff0000}{size=14}Click the Trait to add mastery levels{/size}{/color}" style "serum_cheat_text_style"
 
                     viewport:
                         xsize 410
