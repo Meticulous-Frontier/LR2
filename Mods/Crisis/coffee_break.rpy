@@ -30,7 +30,6 @@ label coffee_break_action_label:
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
     python:
-        office.show_background()
         scene_manager = Scene()
         scene_manager.add_actor(person_one, emotion="default", display_transform = character_left_flipped)
         scene_manager.add_actor(person_two, emotion="default", display_transform = character_center_flipped)
