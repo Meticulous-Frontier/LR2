@@ -79,6 +79,7 @@ label aunt_drunk_cuddle_label():
     mc.name "Night."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.possessive_title] turns and walks out of the kitchen. However, a moment louder you hear a loud yelp and the sound of glass breaking. You run into the living room."
+    $ aunt_apartment.show_background()
     $ scene_manager.update_actor(the_person, position = "doggy")
     "[the_person.title] is on the floor on her hands and knees. Her water glass is shattered on the floor next to the couch, and the couch is soaked."
     mc.name "Are you okay?"
@@ -143,7 +144,7 @@ label aunt_drunk_cuddle_label():
         the_person "Ahh... I'm sorry, I didn't realize... anyone still thought I was..."
         mc.name "[the_person.title] I'm sorry I didn't mean to it just happened..."
         the_person "Its okay! A young, virile man like you... I shouldn't be surprised."
-        "You push your hips against her, grind yourseslf against her ass for a moment. She gasps, but quickly puts a stop to it."
+        "You push your hips against her, grind yourself against her ass for a moment. She gasps, but quickly puts a stop to it."
         the_person "I'm sorry, that's enough for tonight..."
         "You roll on your back. It takes a while for your erection to finally subside, but you finally manage it and fall asleep."
         $ the_person.change_slut_core(3)
@@ -154,7 +155,7 @@ label aunt_drunk_cuddle_label():
         the_person "You're such a young... sexy... virile man... its okay..."
         "You groan and start to grind your hips against hers. The curves of her ass feel amazing, your cock straining against your underwear as you grind against her."
         if the_person.sluttiness < 30:  # she finishes you like this.
-            "Despite the clothing in the way, the naughtiness of grinding against your aunt while she grinds against you makes the situtation so hot."
+            "Despite the clothing in the way, the naughtiness of grinding against your aunt while she grinds against you makes the situation so hot."
             "You grind eagerly against her for a few minutes, and soon you feel yourself getting ready to orgasm."
             mc.name "[the_person.title]... I'm..."
             the_person "Shhh... do it honey... I want you to..."
@@ -216,7 +217,7 @@ label aunt_drunk_cuddle_label():
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_aunt_cuddle_01
 
-    "You wakeup, but [the_person.possessive_title!l] isn't there. You slowly get up and walk out of your room and into the kitchen."
+    "You wake up, but [the_person.possessive_title!l] isn't there. You slowly get up and walk out of your room and into the kitchen."
     $ mc.change_location(kitchen)
     $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, position = "sitting")
