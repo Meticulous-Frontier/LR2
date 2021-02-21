@@ -343,12 +343,18 @@ label quest_arousal_serum_researched_label():
         $ quest_arousal_serum().quest_completed()
         return
 
-    "After you have closed up, you get a text from your head researcher."
-    $ mc.having_text_conversation = the_person
-    the_person "Meet me down in the lab, I have good news."
-    $ mc.having_text_conversation = None
-    $ mc.business.r_div.show_background()
-    $ the_person.draw_person()
+    if not mc.location == mc.business.r_div:
+        "After you have closed up, you get a text from your head researcher."
+        $ mc.having_text_conversation = the_person
+        the_person "Meet me down in the lab, I have good news."
+        $ mc.having_text_conversation = None
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
+        $ the_person.draw_person()
+    else:
+        $ the_person.draw_person()
+        the_person "Hey [the_person.mc_title], I have good news."
+
     mc.name "Hello [the_person.title]. What have you got?"
     the_person "I've just finished up synthesizing our first batch of the arousal serum. I followed your idea, to make something that takes effect over time."
     the_person "The results have been mixed, but overall I think successful. When combined with one of our serums, the drug slowly builds arousal over the course of the day."
