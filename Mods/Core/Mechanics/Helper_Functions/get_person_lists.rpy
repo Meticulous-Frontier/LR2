@@ -5,7 +5,7 @@ init -1 python:
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
         all_people = set()
         for location in all_locations_in_the_game(excluded_locations):
-            all_people.update([x for x in location.people if x.is_available() and not x in excluded_people])
+            all_people.update([x for x in location.people if not x in excluded_people])
         return list(all_people)
 
     def all_locations_in_the_game(excluded_locations = []):
