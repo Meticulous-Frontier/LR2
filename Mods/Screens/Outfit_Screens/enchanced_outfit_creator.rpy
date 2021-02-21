@@ -123,6 +123,9 @@ init 10 python:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
                 cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
                 cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
+        elif cloth in cs.scope["demo_outfit"].accessories:
+            cs.scope["selected_from_outfit"] = next((x for x in cs.scope["demo_outfit"].accessories if x == cloth), None)
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
         else:
             cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
 
@@ -132,13 +135,15 @@ init 10 python:
 
         cs = renpy.current_screen()
 
-        if cloth is cs.scope["selected_clothing"] and cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
+        if cloth == cs.scope["selected_clothing"] and cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
             pass
         else:
             cs.scope["demo_outfit"].remove_clothing(cloth)
 
         if cs.scope["selected_clothing"] is not None:
             cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
+        elif cs.scope["selected_from_outfit"] is not None:
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_from_outfit"])
         else:
             preview_outfit()
 
@@ -338,7 +343,7 @@ init 2:
 
         $ renpy.block_rollback()
 
-        $ fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum, creampie_cum]
+        default fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum, creampie_cum]
 
         default category_selected = "Panties"
         default mannequin = "mannequin"
@@ -354,9 +359,7 @@ init 2:
         default color_selection = True
         default import_selection = False
 
-        default quick_category = None # Used to get category of the item
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
-        default colour_cloth = None # A variable to fetch the copy of selected_clothing.get_copy()
         default demo_outfit = starting_outfit.get_copy()
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
