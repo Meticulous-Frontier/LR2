@@ -1,53 +1,28 @@
-init -2 python:
+init 2 python:
     def aunt_drunk_cuddle_requirement(day_trigger):
         if day >= day_trigger and time_of_day == 4:
             return True
         return False
 
-    def aunt_drunk_cuddle_add_crisis_requirement():
-        if aunt.schedule[1][4] == hall: #Check her schedule for when she is spending the night. NOTE: Vren does not set .home to hall, so we can't use that.
-            return True
-        return False
-
-
-
-
-
-init 2 python:
-    def aunt_drunk_cuddle_add_crisis_func():
-        aunt_drunk_cuddle_action = Action("Aunt Drunken Cuddle", aunt_drunk_cuddle_requirement, "aunt_drunk_cuddle_label", requirement_args = day + renpy.random.randint(10,12))
+    def add_aunt_drunk_cuddle_action(day):
+        aunt_drunk_cuddle_action = Action("Aunt Drunken Cuddle", aunt_drunk_cuddle_requirement, "aunt_drunk_cuddle_label", requirement_args = day)
         mc.business.mandatory_crises_list.append(aunt_drunk_cuddle_action)
-
-    aunt_drunk_cuddle_add_crisis_action = Action("Aunt Drunken Cuddle Add Crisis", aunt_drunk_cuddle_add_crisis_requirement, "aunt_drunk_cuddle_add_crisis_label")
-
-    def aunt_drunk_cuddle_mod_init():
-        if not aunt_bedroom.visible:
-            if aunt_drunk_cuddle_add_crisis_action not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(aunt_drunk_cuddle_add_crisis_action)
+        return
 
 init 5 python:
-    add_label_hijack("normal_start", "aunt_drunk_cuddle_mod_label")
-    add_label_hijack("after_load", "aunt_drunk_cuddle_mod_label")
+    add_label_hijack("normal_start", "aunt_drunk_cuddle_inject")
 
-label aunt_drunk_cuddle_mod_label(stack):
-
+label aunt_drunk_cuddle_inject(stack):
     python:
-        aunt_drunk_cuddle_mod_init()
+        # inject action once on new game start
+        # it will wait here until it triggers, after that, it will be removed from the crisis list.
+        # aunt moves in at latest at day 30, so trigger somewhere after that
+        add_aunt_drunk_cuddle_action(32 + renpy.random.randint(6,12))
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
 
-label aunt_drunk_cuddle_add_crisis_label():
-    if aunt.event_triggers_dict.get("dunk_cuddle_added", False):
-        return
-    $ aunt_drunk_cuddle_add_crisis_func()
-    $ aunt.event_triggers_dict["drunk_cuddle_added"] = True
-    return
-
-
 label aunt_drunk_cuddle_label():
-    if aunt_bedroom.visible:
-        return
     python:
         scene_manager = Scene()
         the_person = aunt
@@ -55,7 +30,6 @@ label aunt_drunk_cuddle_label():
         mc.location.show_background()
         scene_manager.add_actor(the_person, position = "sitting")
         scene_manager.add_actor(mom, position = "sitting", emotion = "happy", display_transform = character_center_flipped)
-
 
     "Before you go to bed, you come out into the kitchen to get a drink of water. [mom.possessive_title] and [the_person.title] are sitting there, drinking some wine."
     "It is pretty clear from their conversation that they have both had a lot to drink. They are cracking dirty jokes to each other."
@@ -105,7 +79,6 @@ label aunt_drunk_cuddle_label():
     $ set_night_outfit(the_person)
     $ builder = WardrobeBuilder(the_person)
     $ the_person.apply_outfit(builder.personalize_outfit(the_person.outfit))
-
 
     "After a minute, [the_person.possessive_title] knocks on your door, then slowly enters."
     $ scene_manager.add_actor(the_person)
@@ -257,10 +230,7 @@ label aunt_drunk_cuddle_label():
     $ scene_manager.clear_scene()
     "You can't help but feel like you just made a lot of progress in your relationship with her, if you decide to pursue it."
     $ the_person.change_stats(happiness = 5, obedience = 5)
-
     return
-
-
 
 label unit_test_role_aunt_enhanced():
     python:
