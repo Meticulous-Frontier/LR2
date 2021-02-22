@@ -1,53 +1,28 @@
-init -2 python:
+init 2 python:
     def aunt_drunk_cuddle_requirement(day_trigger):
         if day >= day_trigger and time_of_day == 4:
             return True
         return False
 
-    def aunt_drunk_cuddle_add_crisis_requirement():
-        if aunt.schedule[1][4] == hall: #Check her schedule for when she is spending the night. NOTE: Vren does not set .home to hall, so we can't use that.
-            return True
-        return False
-
-
-
-
-
-init 2 python:
-    def aunt_drunk_cuddle_add_crisis_func():
-        aunt_drunk_cuddle_action = Action("Aunt Drunken Cuddle", aunt_drunk_cuddle_requirement, "aunt_drunk_cuddle_label", requirement_args = day + renpy.random.randint(10,12))
+    def add_aunt_drunk_cuddle_action(day):
+        aunt_drunk_cuddle_action = Action("Aunt Drunken Cuddle", aunt_drunk_cuddle_requirement, "aunt_drunk_cuddle_label", requirement_args = day)
         mc.business.mandatory_crises_list.append(aunt_drunk_cuddle_action)
-
-    aunt_drunk_cuddle_add_crisis_action = Action("Aunt Drunken Cuddle Add Crisis", aunt_drunk_cuddle_add_crisis_requirement, "aunt_drunk_cuddle_add_crisis_label")
-
-    def aunt_drunk_cuddle_mod_init():
-        if not aunt_bedroom.visible:
-            if aunt_drunk_cuddle_add_crisis_action not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(aunt_drunk_cuddle_add_crisis_action)
+        return
 
 init 5 python:
-    add_label_hijack("normal_start", "aunt_drunk_cuddle_mod_label")
-    add_label_hijack("after_load", "aunt_drunk_cuddle_mod_label")
+    add_label_hijack("normal_start", "aunt_drunk_cuddle_inject")
 
-label aunt_drunk_cuddle_mod_label(stack):
-
+label aunt_drunk_cuddle_inject(stack):
     python:
-        aunt_drunk_cuddle_mod_init()
+        # inject action once on new game start
+        # it will wait here until it triggers, after that, it will be removed from the crisis list.
+        # aunt moves in at latest at day 30, so trigger somewhere after that
+        add_aunt_drunk_cuddle_action(32 + renpy.random.randint(6,12))
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
 
-label aunt_drunk_cuddle_add_crisis_label():
-    if aunt.event_triggers_dict.get("dunk_cuddle_added", False):
-        return
-    $ aunt_drunk_cuddle_add_crisis_func()
-    $ aunt.event_triggers_dict["drunk_cuddle_added"] = True
-    return
-
-
 label aunt_drunk_cuddle_label():
-    if aunt_bedroom.visible:
-        return
     python:
         scene_manager = Scene()
         the_person = aunt
@@ -55,7 +30,6 @@ label aunt_drunk_cuddle_label():
         mc.location.show_background()
         scene_manager.add_actor(the_person, position = "sitting")
         scene_manager.add_actor(mom, position = "sitting", emotion = "happy", display_transform = character_center_flipped)
-
 
     "Before you go to bed, you come out into the kitchen to get a drink of water. [mom.possessive_title] and [the_person.title] are sitting there, drinking some wine."
     "It is pretty clear from their conversation that they have both had a lot to drink. They are cracking dirty jokes to each other."
@@ -79,6 +53,7 @@ label aunt_drunk_cuddle_label():
     mc.name "Night."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.possessive_title] turns and walks out of the kitchen. However, a moment louder you hear a loud yelp and the sound of glass breaking. You run into the living room."
+    $ aunt_apartment.show_background()
     $ scene_manager.update_actor(the_person, position = "doggy")
     "[the_person.title] is on the floor on her hands and knees. Her water glass is shattered on the floor next to the couch, and the couch is soaked."
     mc.name "Are you okay?"
@@ -104,7 +79,6 @@ label aunt_drunk_cuddle_label():
     $ set_night_outfit(the_person)
     $ builder = WardrobeBuilder(the_person)
     $ the_person.apply_outfit(builder.personalize_outfit(the_person.outfit))
-
 
     "After a minute, [the_person.possessive_title] knocks on your door, then slowly enters."
     $ scene_manager.add_actor(the_person)
@@ -143,7 +117,7 @@ label aunt_drunk_cuddle_label():
         the_person "Ahh... I'm sorry, I didn't realize... anyone still thought I was..."
         mc.name "[the_person.title] I'm sorry I didn't mean to it just happened..."
         the_person "Its okay! A young, virile man like you... I shouldn't be surprised."
-        "You push your hips against her, grind yourseslf against her ass for a moment. She gasps, but quickly puts a stop to it."
+        "You push your hips against her, grind yourself against her ass for a moment. She gasps, but quickly puts a stop to it."
         the_person "I'm sorry, that's enough for tonight..."
         "You roll on your back. It takes a while for your erection to finally subside, but you finally manage it and fall asleep."
         $ the_person.change_slut_core(3)
@@ -154,7 +128,7 @@ label aunt_drunk_cuddle_label():
         the_person "You're such a young... sexy... virile man... its okay..."
         "You groan and start to grind your hips against hers. The curves of her ass feel amazing, your cock straining against your underwear as you grind against her."
         if the_person.sluttiness < 30:  # she finishes you like this.
-            "Despite the clothing in the way, the naughtiness of grinding against your aunt while she grinds against you makes the situtation so hot."
+            "Despite the clothing in the way, the naughtiness of grinding against your aunt while she grinds against you makes the situation so hot."
             "You grind eagerly against her for a few minutes, and soon you feel yourself getting ready to orgasm."
             mc.name "[the_person.title]... I'm..."
             the_person "Shhh... do it honey... I want you to..."
@@ -216,7 +190,7 @@ label aunt_drunk_cuddle_label():
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_aunt_cuddle_01
 
-    "You wakeup, but [the_person.possessive_title!l] isn't there. You slowly get up and walk out of your room and into the kitchen."
+    "You wake up, but [the_person.possessive_title!l] isn't there. You slowly get up and walk out of your room and into the kitchen."
     $ mc.change_location(kitchen)
     $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -256,10 +230,7 @@ label aunt_drunk_cuddle_label():
     $ scene_manager.clear_scene()
     "You can't help but feel like you just made a lot of progress in your relationship with her, if you decide to pursue it."
     $ the_person.change_stats(happiness = 5, obedience = 5)
-
     return
-
-
 
 label unit_test_role_aunt_enhanced():
     python:
