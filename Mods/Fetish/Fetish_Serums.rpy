@@ -129,8 +129,9 @@ init -1 python:
                 return True
         elif person is salon_manager and False:
             pass
-        elif person is erica and False:
-            pass
+        elif person is erica and erica_get_progress() >= 4:
+            mc.business.mandatory_crises_list.append(breeding_fetish_erica_intro)
+            return True
         elif "candace" in globals() and person is candace:
             candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
             return True
