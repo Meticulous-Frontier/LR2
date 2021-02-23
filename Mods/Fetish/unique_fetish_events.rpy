@@ -91,7 +91,7 @@ label fetish_stephanie_first_fetish_label(the_person):
                 the_person "Don't worry, I'll be a REAL ideal employee for you soon."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
                 $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
-                $ the_person.event_triggers_dict["is_bimbo"] == True
+                $ the_person.event_triggers_dict["is_bimbo"] = True
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person "That's... we were talking about something... right?"
