@@ -4,7 +4,7 @@ init 2 python:
     def ashley_mod_initialization(): #Add actionmod as argument#
         ashley_wardrobe = wardrobe_from_xml("Ashley_Wardrobe")
         ashley_base_outfit = Outfit("ashley's base accessories")
-        the_eye_shadow = heavy_eye_shadow .get_copy()
+        the_eye_shadow = heavy_eye_shadow.get_copy()
         the_eye_shadow.colour = [.18, .54, .34, 0.95]
         the_rings = copper_ring_set.get_copy()   #Change this
         copper_ring_set.colour = [.1,.36,.19,1.0]
@@ -19,7 +19,7 @@ init 2 python:
         ashley = make_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="brown", hair_style = ponytail, skin="white" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ashley_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            title = "Ashley", possessive_title = "Your intern", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True,
+            title = "Ashley", possessive_title = "Your intern", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit,
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
 

@@ -20,10 +20,26 @@ init 2 python: # Declare variables to use
 
     def hair_salon_mod_initialization(self):
         # Place the stylist character so it is in a room in the world.
+        ophelia_base_outfit = Outfit("Ophelia's base accessories")
+        the_eye_shadow = light_eye_shadow.get_copy()
+        the_eye_shadow.colour = [.15, .15, .15, 0.95]
+        the_glasses = modern_glasses.get_copy()
+        the_glasses.colour = [.15,.15,.15,1.0]
+        the_lipstck = lipstick.get_copy()
+        the_lipstck.colour = [.5, .28, .37, 0.95]
+        ophelia_base_outfit.add_accessory(the_eye_shadow)
+        ophelia_base_outfit.add_accessory(the_glasses)
+        ophelia_base_outfit.add_accessory(the_lipstck)
         global salon_manager
-        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(21,30), body_type = "thin_body", skin="black",
-            personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="light blue", sex_array = [1,5,3,1], start_sluttiness = 10,
-            possessive_title = "Your Stylist", relationship = "Single", force_random = True,  forced_opinions = [["dark chocolate", 2, False], ["hiking", 2, False]],forced_sexy_opinions = [
+        salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(26,35), body_type = "thin_body", skin="tan", face_style = "Face_11", hair_colour = "barn red", hair_style = messy_hair,
+            personality = salon_manager_personality, job = "Hair Stylist", starting_wardrobe = salon_wardrobe, eyes="green", sex_array = [1,5,3,1], start_sluttiness = 10,
+            possessive_title = "Your Stylist", relationship = "Single", force_random = True, base_outfit = ophelia_base_outfit,
+                forced_opinions = [
+                ["dark chocolate", 2, False],
+                ["hiking", 2, False],
+                ["the colour red", 2, False],
+                ["the colour yellow", 1, False]],
+                forced_sexy_opinions = [
                 ["cum facials", 2, False], # ITs good for the skin
                 ["giving blowjobs", 2, False],
                 ["skimpy outfits", 1, False], # Fashion forward

@@ -15,12 +15,11 @@ init 2 python:
         # erica_role = Role(role_name ="erica", actions =[erica_ask_date_classic_concert, erica_ask_about_porn], hidden = True)
 
         #global erica_role
-        #TODO make most variables identical to Stephanie
         global erica
-        erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_14",  tits="B", height = 0.92, hair_colour="barn red", hair_style = windswept_hair, skin="white" , \
+        erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_8",  tits="B", height = 0.92, hair_colour="golden blonde", hair_style = ponytail, skin="white" , \
             eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True,
+            title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", 2, False], ["classical", 1, False], ["yoga", 2, False]],
             forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", -2, False]])
 
@@ -47,7 +46,7 @@ init 2 python:
         erica.event_triggers_dict["nude_yoga"] = False
         erica.event_triggers_dict["looking_for_work"] = False
         erica.event_triggers_dict["yoga_assistant"] = None
-        erica.fertility_percent = -5.0  #Erica refuses to get pregnant for MC, getting pregnant would cause her to be kicked from track team. Enabled with breeding fetish.
+        erica.fertility_percent = -100.0  #Erica refuses to get pregnant for MC, getting pregnant would cause her to be kicked from track team. Enabled with breeding fetish.
 
 
 
