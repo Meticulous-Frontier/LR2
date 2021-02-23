@@ -61,7 +61,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_00
         return
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
-        "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
+        "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take you very deep, so she focuses on licking and sucking your tip."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
