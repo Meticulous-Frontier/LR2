@@ -2,6 +2,11 @@
 # Enhancement for pick object (don't show list when only one object can be selected (auto-select it))
 # Added condom ask enhancements (Original by BadRabbit)
 
+init -5:
+    # when False ask for condom is skipped when girl sluttiness is high
+    # when True, the condom ask function will always be called regardless of girl sluttiness
+    default persistent.always_ask_condom = False
+
 init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
@@ -620,7 +625,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         if not ask_for_condom:
             $ ask_for_condom = True
             # if still has taboo, always ask
-            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
+            if persistent.always_ask_condom or the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
                 # she is not slutty enough and we have the condom dialog
                 call condom_ask_enhanced(the_person, the_position.skill_tag) from _call_condom_ask_bugfix
                 if _return == 0:
