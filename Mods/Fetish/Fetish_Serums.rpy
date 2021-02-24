@@ -188,12 +188,12 @@ init -1 python:
 
         return False #None of them are written yet
 
-    def fetish_serum_increase_opinion(opinion_list, max_new_score, person, add_to_log = False): #WE purposefully increase a score EVERY time this function is used instead of RNG
-        avail_opinions = [x for x in opinion_list if person.get_opinion_score(x) < max_new_score]
+    def fetish_serum_increase_opinion(opinion_list, max_value, person): #WE purposefully increase a score EVERY time this function is used instead of RNG
+        avail_opinions = [x for x in opinion_list if person.get_opinion_score(x) < max_value]
         if person.is_dominant() and "being submissive" in avail_opinions:   # prevent dominant person from becoming submissive
             avail_opinions.remove("being submissive")
         if avail_opinions:
-            person.increase_opinion_score(get_random_from_list(avail_opinions), max_value = max_new_score, add_to_log = add_to_log)
+            person.increase_opinion_score(get_random_from_list(avail_opinions), max_value, True)
             return True #Return true if we increased an opinion
         return False
 
@@ -237,7 +237,7 @@ init -1 python:
         if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True):
+        if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person):
             mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
         return
 
@@ -270,7 +270,7 @@ init -1 python:
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True):
+        if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person):
             mc.log_event(person.title + " anal proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_anal_fetish_unlocked():
@@ -313,7 +313,7 @@ init -1 python:
         if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
             person.change_happiness(1, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True):
+        if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person):
             mc.log_event(person.title + " reproduction proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
@@ -366,7 +366,7 @@ init -1 python:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 person.change_slut_temp(1, add_to_log)
 
-        if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True):
+        if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
             mc.log_event(person.title + " semen proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_cum_fetish_unlocked():
@@ -411,7 +411,7 @@ init -1 python:
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True):
+        if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person):
             mc.log_event(person.title + " social sexual proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
