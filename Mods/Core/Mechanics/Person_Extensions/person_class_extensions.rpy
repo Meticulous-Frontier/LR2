@@ -1385,6 +1385,8 @@ init -1 python:
 
     # helper function to determine if person is dominant
     def is_dominant(self):
+        if self.has_role(slave_role):   # slave is no longer dominant regardless of opinions / personality
+            return False
         if self.get_opinion_score("taking control") > 0 and self.get_opinion_score("being submissive") <= 0:
             return True
         if self.personality == alpha_personality:
