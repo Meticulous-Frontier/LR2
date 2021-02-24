@@ -183,7 +183,7 @@ init -1 python:
         return False
 
     def start_exhibition_fetish_quest(person):
-        if has_started_breeding_fetish(person):
+        if has_started_exhibition_fetish(person):
             return False
 
         return False #None of them are written yet
