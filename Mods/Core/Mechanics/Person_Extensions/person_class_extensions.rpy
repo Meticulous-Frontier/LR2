@@ -955,7 +955,7 @@ init -1 python:
     def increase_opinion_score(self, topic, max_value = 2, add_to_log = True):
         score = self.get_opinion_score(topic)
 
-        if score < max_value:
+        if score < 2 and score < max_value:
             self.update_opinion_with_score(topic, score + 1, add_to_log)
         return
 
