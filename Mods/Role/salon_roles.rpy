@@ -725,6 +725,7 @@ label ophelia_revenge_date_label():
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     $ the_person.learn_home()
+    $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "Soon, you are walking through her front door."
     the_person "Well, this is it! The spoils of a modest hair stylist... its about the best I can afford..."
     "Suddenly, she remembers the date."
@@ -738,8 +739,9 @@ label ophelia_revenge_date_label():
     the_person "Relax, huh? Alright, I suppose I could be convinced to go along with that."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.possessive_title] disappears for a bit. You take off your shoes and get comfortable on her couch."
+    $ scene_manager.hide_actor(the_person)
     "She returns with a couple of drinks."
-    $ scene_manager.update_actor(the_person, position = "stand4")
+    $ scene_manager.show_actor(the_person, position = "stand4")
     the_person "Two gin sours!"
     "You take your drink and make a toast."
     mc.name "Safety first! Never drink alone!"
