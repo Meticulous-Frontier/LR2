@@ -1487,13 +1487,13 @@ label ashley_clothes_shopping_label(the_person):
         "You get yourself put back together."
         mc.name "I'm going to slip out."
         the_person "Okay, I'll see you around [the_person.mc_title]"
-        $ the_person.clear_scene()
+        $ clear_scene()
         "You quietly exit the changing room."
     else:
         the_person "Thanks for the opinion. I'm going to go ahead and change back..."
         mc.name "I'm going to slip out."
         the_person "Okay, I'll see you around [the_person.mc_title]"
-        $ the_person.clear_scene()
+        $ clear_scene()
         "You quietly exit the changing room."
 
     return
