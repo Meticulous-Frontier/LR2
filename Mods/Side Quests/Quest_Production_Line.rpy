@@ -604,23 +604,52 @@ label princess_sex_obedience_accept(the_person):
     return
 
 label princess_cum_face(the_person):
-    the_person "Oh [the_person.mc_title], I look cute covered in your cum?"
+    the_person "Oh [the_person.mc_title], do I look cute covered in your cum?"
     if the_person.sluttiness > 60:
         "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
     else:
         "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     return
 
-label princess_cum_vagina(the_person):
-    if mc.condom:
-        if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
-            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise not to use a condom next time?"
-        else:
-            the_person "[the_person.mc_title]... I can feel how warm your cum is through the condom. It feels nice."
+label princess_cum_condom(the_person):
+    if the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+        the_person "God [the_person.mc_title], I can feel it in the condom! If I'm good will you promise not to use one next time?"
+    else:
+        the_person "[the_person.mc_title]... I can feel how warm your cum is through the condom. Thank you so much."
+    return
 
-    else: #TODO this probably hchanges with pregnancy stuff. change it later.
-        the_person "Your cum is so nice and warm [the_person.mc_title]!"
-        the_person "You can fill me up anytime you want."
+label princess_cum_vagina(the_person):
+    if the_person.has_taboo("creampie"):
+        $ the_person.call_dialogue("creampie_taboo_break")
+        $ the_person.break_taboo("creampie")
+        return
+
+    if the_person.wants_creampie():
+        if the_person.event_triggers_dict.get("preg_knows", False):
+            the_person "Mmm [the_person.mc_title], your cum is so nice and warm..."
+            "She sighs happily."
+
+        elif the_person.on_birth_control:
+            the_person "Oh [the_person.mc_title], it's so nice and warm. I can feel it inside me..."
+            "She sighs happily as you cum inside her."
+
+        elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it again without condom next time?"
+
+        else:
+            the_person "Oh [the_person.mc_title], so much hot cum... I love you [the_person.mc_title]."
+
+    else: #She's angry
+        if not the_person.on_birth_control:
+            the_person "Oh [the_person.mc_title], I told you to pull out! What if your little girl got pregnant."
+            the_person "Well maybe it ain't that bad."
+
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "Ugh [the_person.mc_title], I told you to pull out! I'm a mess, I want to look pretty for you..."
+
+        else:
+            the_person "[the_person.mc_title], didn't I ask you to pull out?"
+            the_person "Well maybe it ain't that bad."
     return
 
 label princess_suprised_exclaim(the_person):
