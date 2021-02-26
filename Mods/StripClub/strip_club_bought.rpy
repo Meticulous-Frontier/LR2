@@ -170,11 +170,14 @@ label strip_club_evaluate_stripper(the_person):
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)
+            if ran_num < 5: # make sure we are >= 5%
+                $ ran_num = 5
             the_person "If I agree? Of course, that's [ran_num]%% more than what [name_string] paid me before!"
-            $ the_person.draw_person(emotion = "happy", position = "kissing")
+            $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
             "Without any forewarning she pushes her tongue into your mouth showing you her happiness and gratitude."
             $ mc.business.change_funds(-500)
             $ the_person.set_possessive_title("Your stripper")
+            $ the_person.draw_person(emotion = "happy")
             "After a few seconds, when she stops, you give her the promised signing bonus."
             $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
             $ the_person.change_location(the_person.home) # Avoid to process the person again
