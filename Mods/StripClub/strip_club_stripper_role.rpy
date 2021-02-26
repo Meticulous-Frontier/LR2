@@ -83,7 +83,7 @@ init 5 python:
         if person.has_role(bdsm_performer_role):
             obed_modifier = person.obedience / 20.0
 
-        return __builtin__.round((tit_modifier + age_modifier + slut_modifier + obed_modifier) * shifts, 1)
+        return __builtin__.round((person.charisma + tit_modifier + age_modifier + slut_modifier + obed_modifier) * shifts, 1)
 
     def calculate_stripper_profit(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
