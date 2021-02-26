@@ -786,26 +786,27 @@ label fetish_serum_discuss_progress_label(the_person):
         the_person "There are still some possibilities for new nanobot programs. You should consider trying to make new programs."
     else:
         the_person "I think we have exhausted all the possibilities for new nanobot programs, for now at least."
+
     "Here is the current status of our specialize nanobot programs."
-    if get_fetish_exhibition_serum().tier < 4:
+    if get_fetish_exhibition_serum().tier < 5:
         # if not is_exhibition_fetish_unlocked(): #TODO once we make an exhibitionist fetish, uncomment this
         #     the_person "I think there are more possibilities with the Social Sexual Proclivity Nanobots. You should observe the effects of them on test subjects more!"
         # else:
         the_person "I think we are at the limit of how far we can take the program on Social Sexual Proclivity Nanobots."
-    if get_fetish_anal_serum().tier < 4:
+    if get_fetish_anal_serum().tier < 5:
         if not is_anal_fetish_unlocked():
             the_person "I think there are more possibilities with the Anal Proclivity Nanobots. You should observe the effects of them on test subjects more!"
             "To unlock their potential, raise the mastery of Anal Proclivity Nanobots to at least 3.0"
         else:
             the_person "I think we are at the limit of how far we can take the program on Anal Proclivity Nanobots."
-    if get_fetish_cum_serum().tier < 4:
+    if get_fetish_cum_serum().tier < 5:
         if not is_cum_fetish_unlocked():
             the_person "I think there are more possibilities with the Semen Proclivity Nanobots. You should observe the effects of them on test subjects more!"
             "To unlock their potential, raise the mastery of Semen Proclivity Nanobots to at least 3.0"
         else:
             the_person "I think we are at the limit of how far we can take the program on Semen Proclivity Nanobots."
-    if get_fetish_cum_serum().tier < 4:
-        if not is_cum_fetish_unlocked():
+    if get_fetish_breeding_serum().tier < 5:
+        if not is_breeding_fetish_unlocked():
             the_person "I think there are more possibilities with the Reproduction Proclivity Nanobots. You should observe the effects of them on test subjects more!"
             "To unlock their potential, raise the mastery of Reproduction Proclivity Nanobots to at least 3.0"
         else:
