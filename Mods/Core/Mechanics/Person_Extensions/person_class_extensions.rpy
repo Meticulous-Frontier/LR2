@@ -1147,6 +1147,8 @@ init -1 python:
 
     def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
+        load_time = time.time()
+
         if position is None:
             position = self.idle_pose
 
@@ -1182,6 +1184,8 @@ init -1 python:
 
         character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
+        global last_load_time
+        last_load_time = __builtin__.round(time.time() - load_time, 8)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
