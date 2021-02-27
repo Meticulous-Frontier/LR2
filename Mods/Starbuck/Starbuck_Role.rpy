@@ -868,7 +868,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     "You get the camera recording as [the_person.possessive_title!l] begins her reviews."
     $ the_person.draw_person(position = "stand4")
     the_person "Hello! This is [the_person.name]! Owner of [the_person.name]'s sex shop, and welcome to my review of the Ramboner dildo by..."
-    "You check to make sure she is in frame. She talks for a few minutes about about the quality of the toy."
+    "You check to make sure she is in frame. She talks for a few minutes about the quality of the toy."
     the_person "Okay! Time to try it out!"
     $ the_person.draw_person(position = "missionary")
     "[the_person.possessive_title] lays down on the floor. She begins by stroking herself with the dildo a few times up and down her slit."

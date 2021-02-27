@@ -68,7 +68,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True):
             $ opinion_string = opinion_score_to_string(opinion_state[0])
 
             "The two of you chat pleasantly for half an hour."
-            person "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
+            person "So [person.mc_title], I'm curious what you think about [opinion_learned]. Do you have any opinions on it?"
 
             call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
 

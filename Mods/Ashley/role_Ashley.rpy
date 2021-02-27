@@ -984,7 +984,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     "[stephanie.possessive_title]'s invitation is tempting. [the_person.title] is smiling at you, clearly mirroring her sisters invitation to join again."
     stephanie "Next week you're buying the coffees though!"
     mc.name "That's acceptable. With us all being employees, I'll just put it down as a company expense."
-    "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about about the sisters."
+    "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about the sisters."
     $ hide_wip_screen()
     $ the_person.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     $ ashley_reset_coffee_partner()
