@@ -2111,7 +2111,7 @@ label Sarah_initial_threesome_label():
     the_person "Mmm, that sounds nice. Let's do it!"
     "[sarah.possessive_title] looks back at you."
     sarah "I want you to fuck me... fuck me while I eat out another woman!"
-    mc.name "Glady! But I think everyone here is still wearing way too many clothes..."
+    mc.name "Gladly! But I think everyone here is still wearing way too many clothes..."
     "The girls chuckle and then quickly agree."
     $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)
     $ scene_manager.update_actor(sarah, position = "stand3")
