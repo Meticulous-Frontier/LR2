@@ -1,13 +1,12 @@
 init 2 python:
     import re
 
+    rc_word_finder = re.compile(r"\b[A-Za-z_]\w*\b(?!(\w*\.)?\w*\])")
+
     # replace each word in text with word from replace_dict
     def word_replace(text, replace_dict):
-        rc = re.compile(r"\b[A-Za-z_]\w*\b") # pre-compiled regular expression (find each word in text)
-
         def translate(match):
             word = match.group(0)
-            print(word)
             found = replace_dict.get(word.lower(), word)
 
             # try to preserve casing of words
@@ -17,31 +16,27 @@ init 2 python:
                 return found.title()
             return found
 
-        return rc.sub(translate, text)
+        return rc_word_finder.sub(translate, text)
 
     # removes last letter of each word if letter in last_letters string
     def letter_dropper(text, last_letters = ""):
-        rc = re.compile(r"\b[A-Za-z_]\w*\b") # pre-compiled regular expression (find each word in text)
-
         def translate(match):
             word = match.group(0)
             if word[-1] in last_letters:
                 return word[:-1]
             return word
 
-        return rc.sub(translate, text)
+        return rc_word_finder.sub(translate, text)
 
     # replace letter combination in dictionary with replacement letters
     def letter_replacer(text, letter_replace_dict):
-        rc = re.compile(r"\b[A-Za-z_]\w*\b") # pre-compiled regular expression (find each word in text)
-
         def translate(match):
             word = match.group(0)
             for f, r in letter_replace_dict.iteritems():
                 word = word.replace(f, r)
             return word
 
-        return rc.sub(translate, text)
+        return rc_word_finder.sub(translate, text)
 
     # replace word combinations in dictionary
     def word_group_replacer(text, word_replace_dict):
@@ -51,6 +46,7 @@ init 2 python:
                 if g.islower(): return replacement.lower()
                 if g.istitle(): return replacement.title()
                 if g.isupper(): return replacement.upper()
+                if g[0].isupper(): return replacement[:1].upper() + replacement[1:]
                 return replacement
             return re.sub(word, func, text, flags=re.I)
 
