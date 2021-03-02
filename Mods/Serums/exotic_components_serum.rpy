@@ -2,7 +2,7 @@
 init -1 python:
     def add_exotic_components_serum():
         exotic_components = SerumTraitMod(name = "Exotic Ingredients",
-            desc = "Exotic sounding ingredients from unlikely sources ranging from unheard tree saps to rare flower products give the customers the idea that this serum must be very special indeed, and increase it's sale value accordingly. There make is no change to the effects of the serum.",
+            desc = "Exotic sounding ingredients from unlikely sources ranging from unheard tree saps to rare flower products give the customers the idea that this serum must be very special indeed, and increase its sale value accordingly. There is no change to the effects of the serum.",
             positive_slug = "+$40 Value",
             negative_slug = "+100 Serum Research",
             value_added = 40,
