@@ -407,12 +407,12 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             the_person "Already? I guess the view of my ass was just too much for you to handle."
             if mc.condom:
                 the_person "Whatever, I'm sure the condom can handle your pathetic load."
-                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                 "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
             else:
                 the_person "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
-                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
                 $ the_girl.cum_in_vagina()
                 $ SB_reverse_cowgirl.redraw_scene(the_girl)
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
@@ -421,7 +421,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             the_person "Already? Is my cunt to just too much for you to handle?"
             if the_person.get_opinion_score("creampies") > 0:
                 the_person "Whatever. I want to feel you cum insdie me. Not like your swimmers are strong enough to knock me up anyway."
-                "[the_girl.title] drops herself down, grinding her hips against yours and pushing cock as deep into her as possible."
+                "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
                 $ the_girl.cum_in_vagina()
                 $ SB_reverse_cowgirl.redraw_scene(the_girl)
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
