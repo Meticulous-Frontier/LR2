@@ -26,11 +26,11 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
         $ mc.condom = False
     mc.name "Good girl, [the_girl.title], I'm going to fuck you hard and fill you up with my seed."
     if the_girl.get_opinion_score("doggy style sex") > 2 :
-        the_girl "Oh thank god, I've been day dreaming about you bending me over all day long."
+        the_girl "Oh thank god, I've been daydreaming about you bending me over all day long."
     elif the_girl.get_opinion_score("sex standing up") > 2 :
-        the_girl "Oh thank god, I've been day dreaming about this all day long."
+        the_girl "Oh thank god, I've been daydreaming about this all day long."
     else:
-        the_girl "Oh thank god, I've been day dreaming about getting filled up all day long."
+        the_girl "Oh thank god, I've been daydreaming about getting filled up all day long."
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."

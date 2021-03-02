@@ -872,7 +872,7 @@ label erica_race_crisis_label(the_person):
     "You are breathing hard. It's getting so hard to keep up. She starts to pull away from you."
     "No! It's time to dig deep! You pump your arms and breath."
     "After a few moments, you catch your second wind. You get a burst of energy and run faster."
-    "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, day dreaming about [the_person.possessive_title!l]."
+    "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, daydreaming about [the_person.possessive_title!l]."
     "You pass the marker for the fourth kilometer. This is it, it's now or never!"
     "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
     the_person "[the_person.mc_title]? Oh god..."

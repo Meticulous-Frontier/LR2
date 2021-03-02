@@ -28,7 +28,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "That's it, [the_girl.title], I'm going to fuck your ass today."
     if the_girl.has_anal_fetish():
-        the_girl "Oh thank god, I've been day dreaming about this all day long."
+        the_girl "Oh thank god, I've been daydreaming about this all day long."
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "I can't wait! It's so intense when you fuck me back there..."
     elif the_girl.effective_sluttiness() > 110:
