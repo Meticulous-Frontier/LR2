@@ -8,7 +8,7 @@ init 1300:
         def candace_player_titles(person):
             valid_mc_titles = []
             valid_mc_titles.append(mc.name)
-            valid_mc_titles.append("cutie")
+            valid_mc_titles.append("Cutie")
             valid_mc_titles.append("Boss")
             return valid_mc_titles
         candace_personality = Personality("candace", default_prefix = "bimbo",
