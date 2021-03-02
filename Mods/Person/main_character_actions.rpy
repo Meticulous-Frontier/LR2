@@ -101,7 +101,7 @@ init 5 python:
     mc_stop_follow_action = ActionMod("Stop following me", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have [the_person.title] stop following you.", allow_disable = False, category = "Generic People Actions")
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire the [the_person.title] to work for you in your business.", category = "Generic People Actions")
+    mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire [the_person.title] to work for you in your business.", category = "Generic People Actions")
 
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     mc_rename_person_action = ActionMod("Rename", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of [the_person.title].", category = "Generic People Actions", initialization = init_action_mod_disabled)
