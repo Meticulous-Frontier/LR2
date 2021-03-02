@@ -1179,7 +1179,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] bends over a chair nearby."
     the_person "While really, you could use it on any fatty part of the body, the obvious place to utilize a whip during sex play is on the ass..."
     "You are partially mesmerized by [the_person.possessive_title!l]'s ass when she bends over. In her pink lingerie, you can't wait to fuck her... you are startled when she prompts you."
-    the_person "...[the_person.mc_title]? I said I'm ready now. Show the viewed how to use that thing!"
+    the_person "...[the_person.mc_title]? I said I'm ready now. Show the viewers how to use that thing!"
     "You move behind her, but at an angle so that the camera can still see what is going on."
     "For your first strike, you spank her modestly. You aren't sure how much pain tolerance she has."
     "SMACK"
@@ -1257,7 +1257,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "[the_person.possessive_title] slowly stands up. Her feet are a bit wobbly."
     "[the_person.possessive_title] rubs her ass a bit where you spanked her earlier."
-    the_person "I remember when... my husband used to use me like that... bending me over, spanking me like the naughty girl that a I am."
+    the_person "I remember when... my husband used to use me like that... bending me over, spanking me like the naughty girl that I am."
     the_person "We should do this again. It felt so good when your cock started pushing into my ass..."
     if not perk_system.has_item_perk("Male Strapon"):
         "She looks at the strapon, then looks back at you."
