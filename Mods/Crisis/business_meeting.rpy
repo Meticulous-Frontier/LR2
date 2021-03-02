@@ -69,7 +69,7 @@ label business_meeting_action_label:
     if get_HR_director_tag("business_HR_eff_bonus"):
         $ set_HR_director_tag("business_HR_eff_bonus", get_HR_director_tag("business_HR_eff_bonus") + ran_num)
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
-    "The changes increased your business effectivity by [ran_num]%%."
+    "The changes increased your business efficiency by [ran_num]%%."
 
     $ hr_employee = None
     $ mc.location.show_background()
