@@ -23,6 +23,7 @@ init 5 python:
     renpy.image("infraction_token_small", infraction_token_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
+    dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))
 
     under_construction_image = Image(get_file_handle("under_construction.png"))
@@ -77,6 +78,7 @@ label updated_room_background(stack):
     # Load extra GUI images
     image serum_vial = "[vial_image.filename]"
     image question_mark = "[question_image.filename]"
+    image dna_sequence = "[dna_image.filename]"
 
     python:
         # as long as the base game has no nice images, we use these to make navigating a little more fun

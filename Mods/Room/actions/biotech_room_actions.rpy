@@ -9,7 +9,7 @@ init 3 python:
             return "Dungeon required"
         return True
 
-    biotech_clone_person = Action("Clone a person {image=gui/heart/Time_Advance.png}", biotech_clone_person_requirement, "biotech_clone_person",
+    biotech_clone_person = Action("{image=dna_sequence} Clone a person {image=gui/heart/Time_Advance.png}", biotech_clone_person_requirement, "biotech_clone_person",
         menu_tooltip = "Create a near identical clone of the targeted person")
 
     def biotech_modify_person_requirement():
@@ -22,7 +22,7 @@ init 3 python:
         if mc.business.is_trait_researched("Hypothyroidism") and mc.business.is_trait_researched("Methabolizer"):
             return True
         else:
-            return "Requires: [hypothyroidism_serum_trait.name] and [anorexia_serum_trait.name] researched"
+            return "Requires: Hypothyroidism Trait and Methabolizer Trait researched"
 
     biotech_change_body = Action("Change body: [person.body_type]", biotech_change_body_requirement, "biotech_change_body",
         menu_tooltip = "Modify [person.title]'s body type.")
@@ -32,7 +32,7 @@ init 3 python:
         if mc.business.is_trait_researched("Pigment"):
             return True
         else:
-            return "Requires: [pigment_serum_trait.name] researched"
+            return "Requires: Pigment Trait researched"
 
     biotech_change_skin = Action("Change skin: [person.skin]", biotech_change_skin_requirement, "biotech_change_skin",
         menu_tooltip = "Modify [person.title]'s skin tone.")
@@ -115,7 +115,7 @@ label biotech_gene_modifications():
 
 label biotech_clone_person():
     # only known people who are not unique character or clone herself (genetic degradation too high)
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list([x for x in known_people_in_the_game(unique_character_list) if not clone_role in x.special_role], "Clone Person", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list([x for x in known_people_in_the_game(unique_character_list) if x.can_clone()], "Clone Person", ["Back"])]))
     if _return != "Back":
         call cloning_process(_return) from _call_cloning_process
     return

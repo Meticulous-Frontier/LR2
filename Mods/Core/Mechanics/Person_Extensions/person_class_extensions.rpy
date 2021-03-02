@@ -1976,6 +1976,16 @@ init -1 python:
     Person.body_is_thick = body_is_thick
     Person.body_is_pregnant = body_is_pregnant
 
+    def can_clone(self):
+        if not genetic_manipulation_policy.is_owned():
+            return False
+        if self.has_role(clone_role):
+            return False
+        if self in unique_character_list:
+            return False
+        return True
+    Person.can_clone = can_clone
+
 ##################################################
 #     Fetish related wrappers                    #
 ##################################################
