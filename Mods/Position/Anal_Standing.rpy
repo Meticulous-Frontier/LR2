@@ -274,7 +274,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
             "You pull her hair back hard enough to hurt a little, she arches her back in pleasure as you start to fuck her ass more roughly."
             mc.name "Of course I can, I can do anything I want to you, my little slut."
             "You run your other hand along the side of her neck. She begins to say something but you squeeze her neck and she stops."
-            mc.name "Sshhh, theres no need for words right now."
+            mc.name "Sshhh, there's no need for words right now."
             "You tighten your hold around her neck, constricting her airway. [the_girl.title] shoves her ass back hard against you."
             "You loosen your grip for a second and she moans loudly and takes a couple deep breaths. You cut the third one off and begin to really pound her ass."
             "Her ass cheeks quake from your relentless fucking. [the_girl.possessive_title] begins to squirm against you, fighting for air."

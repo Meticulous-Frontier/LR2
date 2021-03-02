@@ -403,7 +403,7 @@ label Sarah_flirt_response_high(the_person):
             mc.name "Relax, we're just joking around. Unless you want to get naked for me?"
             "She laughs and shakes her head in disbelief. You see a glint of mischief in her eye when she asks you."
             the_person "Why don't you get naked first and we'll see what happens?"
-            mc.name "You'll pull your phone out and start taking blackmail pictures. Theres no way I'm doing that."
+            mc.name "You'll pull your phone out and start taking blackmail pictures. There's no way I'm doing that."
             the_person "Me? Blackmail you? [the_person.mc_title] why I would never!"
             if the_person.has_taboo("touching_penis"):
                 mc.name "Do you what would actually be really helpful? I've gotten all worked up, why don't you just touch me with your hand for a bit."

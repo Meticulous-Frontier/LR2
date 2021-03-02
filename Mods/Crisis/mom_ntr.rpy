@@ -474,7 +474,7 @@ label mom_ntr_mod_action_label:
                                     "The load is big and he keeps going, covering [the_person.possessive_title!l]'s tits."
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                                    "It even drips down onto her stomach. Theres almost none of [the_person.possessive_title!l]'s body that [man_name] doesn't claim."
+                                    "It even drips down onto her stomach. There's almost none of [the_person.possessive_title!l]'s body that [man_name] doesn't claim."
                                     the_person "Now are you happy, [man_name]? See me covered in your love juices?"
                                     man_name "You're great, [the_person.name]. We should do this more often."
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
@@ -492,7 +492,7 @@ label mom_ntr_mod_action_label:
                                     "The load is big and he keeps going, covering [the_person.possessive_title!l]'s tits."
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
                                     $ the_person.draw_person(position = "blowjob", emotion = "sad")
-                                    "It even drips down onto her stomach. Theres almost none of [the_person.possessive_title!l]'s body that [man_name] doesn't claim."
+                                    "It even drips down onto her stomach. There's almost none of [the_person.possessive_title!l]'s body that [man_name] doesn't claim."
                                     "[man_name] shakes the last drops onto [the_person.possessive_title!l], then steps back to admire his handiwork."
                                     man_name "There, that's better. Now do you see what you're good for?"
                             elif finish == "drink":
