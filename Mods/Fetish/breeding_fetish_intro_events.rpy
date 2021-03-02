@@ -714,7 +714,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
         the_person "I know I'm already pregnant but... it was so hot! It made me realize how amazing it is to get bred."
     else:
         the_person "There was something about them though. They were practically glowing! And the way they looked at each other. I... I can't believe this, but it made me so jealous!"
-        the_person "I've never had it quite this bad before... but it gave me this ITCH. I can't explain it, but I've been day dreaming all day about.. you know... being like that."
+        the_person "I've never had it quite this bad before... but it gave me this ITCH. I can't explain it, but I've been daydreaming all day about... you know... being like that."
     if the_person.is_girlfriend():
         the_person "I know our relationship is kind of... unique... with how much older I am. But I don't think I've ever been so sure of something."
     else:
@@ -781,7 +781,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     the_person "Hey, I'm here! Come let me in!"
     $ mc.having_text_conversation = None
     "You head to your front door and open it."
-    "For once, you managed to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
+    "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She walks over and sits on your bed."
     mc.name "So... what did you want to talk about?"

@@ -11,7 +11,7 @@ label scene_missionary_3_enhanced(the_girl, the_location, the_object):
     elif mc.condom:
         the_girl "You feel so good... I can feel you so deep. I love it!"
     elif the_girl.wants_creampie():
-        the_girl "You feels so good inside me bare like this. It's okay if you want to cum inside me... I kind of want it too!"
+        the_girl "You feel so good inside me bare like this. It's okay if you want to cum inside me... I kind of want it too!"
     else:
         the_girl "Your cock feels so good... I can't wait until you pull out and cum all over me!"
     "Encouraged by her words, you speed up, fucking her faster. She runs her hand through your hair and starts to moan at your increased pace."

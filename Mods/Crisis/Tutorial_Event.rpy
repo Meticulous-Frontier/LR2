@@ -20,7 +20,7 @@ label SB_tutorial_event():
 
     $ the_person.draw_person()
     the_person "Oh, hey [the_person.mc_title]!"
-    mc.name "Hello, [the_person.title]. How are you doing today."
+    mc.name "Hello, [the_person.title]. How are you doing today?"
     "[the_person.possessive_title] smiles and bats her eyelashes a few times."
     the_person "Well, to be honest, it is much better now that you are here!"
     menu:

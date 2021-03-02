@@ -546,7 +546,7 @@ label ophelia_revenge_date_plan_label(the_person):
     $ the_person.draw_person(emotion = "happy")
     "You step into the salon. No sooner have your eyes adjusted to the light then you see [the_person.title]"
     the_person "Ah! [the_person.mc_title]! Just the man I was hoping to see today."
-    "A lump forms in your throat. You wander what she is going to rope you into."
+    "A lump forms in your throat. You wonder what she is going to rope you into."
     the_person "What plans do you have for Sunday night?"
     mc.name "Sunday? Oh, not much I guess..."
     the_person "Great! Guess what! I got a reservation at Rafferty's! It's a date, so dress nice! Pick me up at 6 o'clock sharp!"

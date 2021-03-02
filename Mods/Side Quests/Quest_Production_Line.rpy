@@ -233,7 +233,7 @@ label quest_production_line_coffee_label():
     $ the_person = quest_production_line_get_target()
     "You text [the_person.title]'s father, [dad_name]. He tells you the name of the coffee shop. You quickly find it."
     #TODO location = shop
-    #TODO get generic dad sprite to use? Placeholder? Theres no male images in the game...
+    #TODO get generic dad sprite to use? Placeholder? There's no male images in the game...
     mc.name "Hello there, you must be [dad_name]."
     dad_name "Ah, nice to meet you."
     "You chat for a few minutes, exchanging some of the details of your work with each other."

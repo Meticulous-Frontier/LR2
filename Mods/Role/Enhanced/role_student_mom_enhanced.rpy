@@ -55,7 +55,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         "Soon enough she is rubbing her soft foot against your inner thigh. The movement brings her dangerously close to brushing your cock."
         "After a few moments of teasing she draws her leg back and slips her foot back in her shoe."
 
-    the_mom "Now, how about I get desert ready. [the_student.title], please clean the table. Leave my wine, I'll have the rest with desert."
+    the_mom "Now, how about I get dessert ready. [the_student.title], please clean the table. Leave my wine, I'll have the rest with dessert."
     $ scene_manager.update_actor(the_student, position = "stand3")
     the_student "Okay Mom."
     $ scene_manager.update_scene(position = "walking_away")
@@ -122,10 +122,10 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
                 "She runs her hand along the bulge of your crotch, stroking you slowly through the fabric."
                 the_student "He's been such a strong, firm presence in my life since I met him. I'm really learning a lot."
                 $ the_student.change_slut_temp(1)
-                "You and [the_student.possessive_title] fondle each other while you eat desert, doing your best to keep [the_mom.title] from noticing everything."
+                "You and [the_student.possessive_title] fondle each other while you eat dessert, doing your best to keep [the_mom.title] from noticing everything."
 
             else:
-                "You fondle [the_student.possessive_title] as you eat your desert, doing your best to keep [the_mom.title] from noticing."
+                "You fondle [the_student.possessive_title] as you eat your dessert, doing your best to keep [the_mom.title] from noticing."
 
             $ the_student.change_slut_temp(1 + the_student.get_opinion_score("public sex"))
             $ the_student.discover_opinion("public sex")
@@ -133,7 +133,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             the_mom "[the_student.title], could you clean things up for us?"
 
     $ scene_manager.update_actor(the_student, position = "walking_away")
-    "[the_student.possessive_title] collects up the dishes again when you finished desert and carries them to the kitchen."
+    "[the_student.possessive_title] collects up the dishes again when you finished dessert and carries them to the kitchen."
     $ scene_manager.hide_actor(the_student)
     the_mom "It's been wonderful having you over [the_mom.mc_title], but I'm sure you're looking forward to getting home."
     $ scene_manager.update_actor(the_mom, position = "stand3")

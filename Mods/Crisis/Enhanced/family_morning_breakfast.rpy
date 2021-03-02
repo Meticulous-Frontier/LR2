@@ -62,7 +62,7 @@ label family_morning_breakfast_enhanced_label():
         if lily.outfit.vagina_visible():
             "[lily.possessive_title] comes into the room naked. She gives a dramatic yawn before sitting down at the kitchen table."
         elif lily.outfit.tits_visible():
-            "[lily.possessive_title] walks topless into the kitchen. Yawning dramatically before sitting down at the table."
+            "[lily.possessive_title] walks topless into the kitchen, yawning dramatically before sitting down at the table."
         else:
             "[lily.possessive_title] walks into the room only wearing her underwear. She gives a dramatic yawn before sitting down at the kitchen table."
     else:

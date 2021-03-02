@@ -1009,7 +1009,7 @@ label anal_fetish_starbuck_intro_label():
     "Wow! This should be interesting!"
     "[the_person.title] helps you download the app and sign in. When you finish signing in you can see all kinds of information about the plug."
     "Apparently it has some kind of heat sensor, so it can tell whether it is inserted or not and how long its been in."
-    "Theres an icon for making the plug vibrate, and it can even tell when it is moving in and out rapidly so you can see when she is masturbating with it!"
+    "There's an icon for making the plug vibrate, and it can even tell when it is moving in and out rapidly so you can see when she is masturbating with it!"
     "You tap the little vibrate icon. [the_person.title] jumps."
     the_person "Mmm! That felt good! I guess we got it working!"
     $ the_person.change_arousal(7)

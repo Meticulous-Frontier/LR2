@@ -559,7 +559,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     mc.name "Are you pretty happy with all the stuff you are able to keep in stock now? Seems like you've got just about anything you could ever need."
     the_person "Well, I don't know about EVERY thing, but we definitely have a great selection now."
     mc.name "What do you mean?"
-    the_person "Well, goodness, there is so much stuff out there, theres no way we could fit it all in this little store. That's why I'm saving up."
+    the_person "Well, goodness, there is so much stuff out there, there's no way we could fit it all in this little store. That's why I'm saving up."
     the_person "The store next to us recently went ouf of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
     "You consider what she is saying."
     mc.name "What kind of stuff could you carry with the extra space that you aren't carrying now?"
@@ -1049,7 +1049,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person "[the_person.mc_title] that was amazing. I want you to be rough with me now. Don't worry, I can take it, and I want to show off how sturdy the cuffs are for the camera..."
     "You nod in acknowledgement. While the camera is running, you know that the real reason [the_person.possessive_title!l] has you here isn't for the video, but because she wants you to dominate her."
     "She could have chosen any other toy, and she could have chosen any other guy, but she chose you. You snap the second hand cuff in place."
-    the_person "So, these handcuffs are soft enough they don't hurt or dig into the skin, but they are very sturdy. [the_person.mc_title] can do whatever he wants to me now, theres no way I'll be able to break free."
+    the_person "So, these handcuffs are soft enough they don't hurt or dig into the skin, but they are very sturdy. [the_person.mc_title] can do whatever he wants to me now, there's no way I'll be able to break free."
     "You take that as your cue. You grab her shoulders and turn her away from you, then push her down onto the table. Soon, she has her face down and her ass up."
     $ the_person.draw_person(position = "doggy")
     "Her pussy lips are wildly engorged, slick from the juices of her previous orgasm."
@@ -1179,7 +1179,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] bends over a chair nearby."
     the_person "While really, you could use it on any fatty part of the body, the obvious place to utilize a whip during sex play is on the ass..."
     "You are partially mesmerized by [the_person.possessive_title!l]'s ass when she bends over. In her pink lingerie, you can't wait to fuck her... you are startled when she prompts you."
-    the_person "...[the_person.mc_title]? I said I'm ready now. Show the viewed how to use that thing!"
+    the_person "...[the_person.mc_title]? I said I'm ready now. Show the viewers how to use that thing!"
     "You move behind her, but at an angle so that the camera can still see what is going on."
     "For your first strike, you spank her modestly. You aren't sure how much pain tolerance she has."
     "SMACK"
@@ -1250,14 +1250,14 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         mc.name "[the_person.possessive_title]. It has been great being your business partner. I know what you are saying, but don't worry. I'd be doing this with you even if we weren't recording it."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "She smiles at you happily"
-        mc.name "But don't worry. If it helps the business grow, theres no reason not to record it. It doesn't make the sex any less meaningful to me. I mean really, you could ask any guy in here to do this stuff..."
+        mc.name "But don't worry. If it helps the business grow, there's no reason not to record it. It doesn't make the sex any less meaningful to me. I mean really, you could ask any guy in here to do this stuff..."
         the_person "I can't imagine it though... doing this whole venture with anyone else as my partner. Thank you, [the_person.mc_title]."
     else:
         the_person "Thanks [the_person.mc_title]. That was amazing... UGH I can barely get up."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "[the_person.possessive_title] slowly stands up. Her feet are a bit wobbly."
     "[the_person.possessive_title] rubs her ass a bit where you spanked her earlier."
-    the_person "I remember when... my husband used to use me like that... bending me over, spanking me like the naughty girl that a I am."
+    the_person "I remember when... my husband used to use me like that... bending me over, spanking me like the naughty girl that I am."
     the_person "We should do this again. It felt so good when your cock started pushing into my ass..."
     if not perk_system.has_item_perk("Male Strapon"):
         "She looks at the strapon, then looks back at you."
@@ -1375,7 +1375,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
         the_person "[the_person.mc_title], getting this shop up and running... and everything you've done for me. You really don't have any idea how much it all means to me. Thank you so much!"
         $the_person.draw_person(position = "kissing")
         "She wraps her arms around you and hugs you close."
-        the_person "Look... I don't know any other way of saying this, so I'm just gonna say it. I'm falling for you, [the_person.mc_title]. And I know you have a busy job and theres other girls and I'm not saying..."
+        the_person "Look... I don't know any other way of saying this, so I'm just gonna say it. I'm falling for you, [the_person.mc_title]. And I know you have a busy job and there's other girls and I'm not saying..."
         "She stutters for a minute."
         the_person "I understand that you aren't looking to be tied down to one girl, and I just want you to know that I understand that. I just want to know if you, maybe have feelings for me too..."
         menu:
@@ -1440,7 +1440,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "You quickly follow her."
         $ the_person.draw_person(position = "stand4")
         "[the_person.title] stops when she gets to the bed and turns to you."
-        the_person "Lay down... theres something I want to do..."
+        the_person "Lay down... there's something I want to do..."
         $ the_person.draw_person(position = "standing_doggy")
         "You nod. You take off what is left of your clothes and lay down. You watch [the_person.title] rummage through her nightstand. Her ass wiggles back and forth, right in front of you."
         "*SMACK*"

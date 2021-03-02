@@ -2166,7 +2166,7 @@ label Sarah_ask_for_baby_label():
     the_person "Hey, I'm here! Come let me in!"
     $ mc.having_text_conversation = None
     "You head to your front door and open it."
-    "For once, you managed to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
+    "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She walks over and sits on your bed."
     mc.name "So... what did you want to talk about?"
@@ -2316,7 +2316,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
     #sexy morning wakeup starts here
     if threesome_wakeup:
         $ threesome_partner.apply_outfit(special_fetish_nude_outfit)
-        "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
+        "You are slow to wake up. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "Something stirs you though. You hear a hushed whisper. But that wasn't to you? Then a little giggle."
         threesome_partner "Mmmm, he's so big..."
@@ -2374,7 +2374,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ threesome_partner = None
 
     else:
-        "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
+        "You are slow to wake up. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "It's so wet and tight, it feels almost real..."
         the_person "...[the_person.mc_title]... mmm.... I can't take it anymore..."

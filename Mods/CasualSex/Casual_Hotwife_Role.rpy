@@ -305,7 +305,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         mc.name "And how do you feel about it? Do you feel like you're ready for that?"
         if mc.charisma < 6 or the_person.effective_sluttiness() < 50:  #Checks Fail
             the_person "Honestly? I'm still adapting to how things are now."
-            mc.name "That's understandable. Theres no reason to take things too fast."
+            mc.name "That's understandable. There's no reason to take things too fast."
             "[the_person.title] takes another long sip from her beverage."
             the_person "For now... let's just keep things how they are. But hey, you never know, maybe we can take that step soon!"
             "You and [the_person.title] finish your drinks and then you say goodbye."
@@ -411,7 +411,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         $ the_person.draw_person (position = "stand2")
         "[the_person.title] stands up. You hand her back her phone."
-        the_person "Wow... well... I guess theres no going back now? I guess I'll go ahead and send him some of these..."
+        the_person "Wow... well... I guess there's no going back now? I guess I'll go ahead and send him some of these..."
         "The gets close to you."
         the_person "Well, no matter what happens tonight, thanks for your help! If all goes well... maybe we can do this again."
         mc.name "Yeah I mean... if it makes your hubby happy for you to give me blowjobs... I GUESS I can help out..."

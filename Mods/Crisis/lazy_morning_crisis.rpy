@@ -55,7 +55,7 @@ label lazy_morning_crisis_action_label:
         the_person "You look so comfy... I know this is kind of weird but, can I join you?"
         mc.name "You want to join me... in my bed?"
         "She stammers for a second."
-        the_person "I mean, theres nothing wrong with a little cuddling, right? I don't have to I can leave..."
+        the_person "I mean, there's nothing wrong with a little cuddling, right? I don't have to I can leave..."
         "You cut her off mid sentence."
         mc.name "No! No come on in, you just surprised me when you walked in and I just woke up. I'd love to cuddle up for a bit."
         "[the_person.possessive_title] walks over to your bed. You lift up the covers and she slides in bed next to you."

@@ -681,7 +681,7 @@ label fetish_serum_coding_activity_label():
                 menu:
                     "Fuck [the_person.title]":
                         mc.name "I could use a break."
-                        if the_person.has_exhibition_fetish() or len(mc.location.people) <= 1:  #She likes it public or theres no one else here.
+                        if the_person.has_exhibition_fetish() or len(mc.location.people) <= 1:  #She likes it public or there's no one else here.
                             "You stand up and turn to her."
                             mc.name "Bend over the desk. I'm taking you right here."
                             if len(mc.location.people) > 1:

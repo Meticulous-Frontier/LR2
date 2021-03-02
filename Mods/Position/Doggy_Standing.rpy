@@ -25,9 +25,9 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "Good girl, [the_girl.title], I'm going to fuck you hard."
     if the_girl.get_opinion_score("doggy style sex") > 2 :
-        the_girl "Oh thank god, I've been day dreaming about you bending me over all day long."
+        the_girl "Oh thank god, I've been daydreaming about you bending me over all day long."
     elif the_girl.get_opinion_score("sex standing up") > 2 :
-        the_girl "Oh thank god, I've been day dreaming about this all day long."
+        the_girl "Oh thank god, I've been daydreaming about this all day long."
     elif the_girl.get_opinion_score("doggy style sex") > 0 :
         the_girl "I can't wait! It's so good when you bend me over."
     elif the_girl.effective_sluttiness() > 80:
