@@ -1026,7 +1026,7 @@ label erica_post_race_fwb_label(the_person):
     $ perk_system.add_stat_perk(Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40), "Athlete Energy Bonus")
     $ perk_system.add_ability_perk(Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1), "Second Wind")
     "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
-    "You have gained the second wind ability perk. You can now recover half your max energy, once per day!"
+    "You have gained the Second Wind ability perk. You can now recover half your max energy, once per day!"
     $ erica.event_triggers_dict["fwb_path"] = True
     return
 
@@ -1121,7 +1121,7 @@ label erica_post_race_love_label(the_person):
     the_person "Aww, you don't have to do that. You are such a sweetheart."
     $ the_person.review_outfit()
     $ the_person.draw_person()
-    "While [the_person.possessive_title!l] gets cleaned up, you order her a healthy lunch on your phone. You know she is college student, so she probably doesn't have much disposable income."
+    "While [the_person.possessive_title!l] gets cleaned up, you order her a healthy lunch on your phone. You know she is a college student, so she probably doesn't have much disposable income."
     $ mc.business.change_funds(-10)
     $ title_choice = get_random_from_list(["BBQ Rainbow Beef salad", "Fresh Salmon with Thai noodle salad", "Spicy Chicken and Avocado wrap"])
     mc.name "Alright, I got you a [title_choice], it should be here soon. Good luck with your studying!"
@@ -1135,7 +1135,7 @@ label erica_post_race_love_label(the_person):
     $ perk_system.add_stat_perk(Stat_Perk(description = "Training for the big race has helped improve your energy level. +20 max energy, +40 energy cap.", energy_bonus = 20, bonus_is_temp = False, energy_cap = 40), "Athlete Energy Bonus")
     $ perk_system.add_ability_perk(Ability_Perk(description = "You take a few deep breaths and recover a bit of your energy. Use this perk to regain half your max energy, once per day.", toggle = False, usable = True, usable_func = second_wind_func, usable_cd = 1), "Second Wind")
     "You walk away with a spring in your step. You feel like training for and running the race has given you more energy."
-    "You have gained the second wind ability perk. You can now recover half your max energy, once per day!"
+    "You have gained the Second Wind ability perk. You can now recover half your max energy, once per day!"
     #call advance_time from _call_advance_erica_love_decision_01
     return
 
