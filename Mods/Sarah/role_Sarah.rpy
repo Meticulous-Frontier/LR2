@@ -2166,7 +2166,7 @@ label Sarah_ask_for_baby_label():
     the_person "Hey, I'm here! Come let me in!"
     $ mc.having_text_conversation = None
     "You head to your front door and open it."
-    "For once, you managed to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
+    "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She walks over and sits on your bed."
     mc.name "So... what did you want to talk about?"
