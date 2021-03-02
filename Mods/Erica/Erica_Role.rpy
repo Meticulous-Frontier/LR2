@@ -471,8 +471,8 @@ label erica_phase_one_label(the_person):
         mc.name "See? Two friends, helping each other out. I take a turn, then you take a turn..."
         "[the_person.title] grunts... or was that a groan? You lean forward just a bit farther. It is now obvious you are using the opportunity to put your body up against hers as she finishes her squats."
         "At the top of her last squat, she lingers a bit before she racks the weight. You feel an ever so slight wiggle of her hips up against you. She's getting turned on!"
-        "She racks her weights with a groan, and you quickly retreat. Getting an erection here would be a bit embarrassing"
-        the_person "Okay... let finish with the bench press."
+        "She racks her weights with a groan, and you quickly retreat. Getting an erection here would be a bit embarrassing."
+        the_person "Okay... let's finish with the bench press."
         "You head over to the bench and start racking some weights on it. You lay down on the bench while [the_person.title] stands by your head."
         "She looks around a bit to see if anybody is watching you before prompting you to begin."
         the_person "Ready? It's my turn now..."
@@ -493,7 +493,7 @@ label erica_phase_one_label(the_person):
         "As you enter, you see that [the_person.title] is already naked."
         the_person "[the_person.mc_title], I'm so turned on. Can you do what you did a little bit ago again?"
         "She points to a bench sitting along the wall."
-        "She looks nervous. You can tell she is just looking for fool around a bit."
+        "She looks nervous. You can tell she is just looking to fool around a bit."
         menu:
             "Service Her\n{color=#ff0000}{size=18}Increases Love{/size}{/color}":
                 mc.name "I'd love to get a taste..."
@@ -668,7 +668,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
         $ the_report = _return
         $ the_person.draw_person(position = "sitting")
         if the_report.get("girl orgasms", 0) > 0:
-            "[the_person.title] sits down on the bench, you can see her trembling, caused by aftershocks from her orgasm."
+            "[the_person.title] sits down on the bench. You can see her trembling, feeling the aftershocks of her orgasm."
             the_person "Mmm... god I'm glad you know how to use that cock."
         else:
             "[the_person.title] sits down on the bench, catching her breath."
@@ -728,7 +728,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
             $ the_person.clear_situational_slut("horny")
             $ the_person.draw_person(position = "sitting")
             if the_report.get("girl orgasms", 0) > 0:
-                "[the_person.title] sits down on the bench, you can see her trembling, caused by aftershocks from her orgasm."
+                "[the_person.title] sits down on the bench. You can see her trembling, feeling the aftershocks of her orgasm."
                 the_person "Mmm... god I'm glad you know how to make a girl cum so hard."
             else:
                 "[the_person.title] sits down on the bench, catching her breath."
@@ -847,7 +847,7 @@ label erica_race_crisis_label(the_person):
     if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
         $ scene_manager.show_actor(lily)
         $ scene_manager.show_actor(yoga_assistant)
-        "[lily.title] and [yoga_assistant.possessive_title] are standing next to the course, and they begin cheering when they see you."
+        "[lily.title] and [yoga_assistant.possessive_title!l] are standing next to the course, and they begin cheering when they see you."
         yoga_assistant "Go [yoga_assistant.mc_title]!"
         lily "She's just barely ahead, you can do it!"
         $ scene_manager.hide_actor(lily)
@@ -1373,7 +1373,7 @@ label erica_money_problem_sarah_convincing_employee_label():
         the_person "I'm sure you are... more coffee? I just brewed some!"
         $ scene_manager.update_actor(the_person, position = "back_peek")
         the_target "Yeah! That looks nice."
-        "Sounds like she is using some of the serum you produced for HR meetings to help her persuade [the_target.possessive_title] to come to the yoga class."
+        "Sounds like she is using some of the serum you produced for HR meetings to help her persuade [the_target.possessive_title!l] to come to the yoga class."
         $ scene_manager.update_actor(the_person, position = "stand3")
         the_person "Here you go... now, I know, we're all busy, but trust me, the benefits of doing yoga really are worth the time!"
         $ scene_manager.update_actor(the_person, position = "sitting")
@@ -1501,7 +1501,7 @@ label erica_yoga_event_intro_label():
     the_person "Thanks [the_person.mc_title]. I really appreciate your support with this. It's just a yoga class, but having you here definitely helps me feel more confident trying to tackle this!"
     yoga_assistant "Yeah, don't worry [the_person.name], [mc.name] is a great guy to work for! He really knows how to treat his employees!"
     mc.name "Alright, I'll be over there, getting some of the morning paperwork started. Let me know if you need anything."
-    "Yeah head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [yoga_assistant.possessive_title] starting things up."
+    "Yeah head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [yoga_assistant.possessive_title!l] starting things up."
     the_person "Good morning everyone! Thanks for coming out. Since today is our first session, we are going to start out with just some basic poses and breathing techniques! Does anyone have any questions before we get started?"
     "You watch as your employees start out doing so light stretching. Everyone seems to be paying attention and trying their best."
     "This really does seem like it could be a good benefit for your employees who are willing to come out a bit early. You turn back to the computer and get to work."
@@ -1514,13 +1514,13 @@ label erica_yoga_event_intro_label():
     call erica_getting_watched_reaction_label(the_person, _return) from _erica_gets_watched_during_yoga_intro_01
     $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
     yoga_assistant "Alright, I know everyone is thirsty. Anyone who needs waters, head for the break room."
-    "You can hear [yoga_assistant.possessive_title] calling out. The room starts to clear. She walks over to you and [the_person.possessive_title!l]."
+    "You can hear [yoga_assistant.possessive_title!l] calling out. The room starts to clear. She walks over to you and [the_person.possessive_title!l]."
     yoga_assistant "That went great!"
     "[yoga_assistant.title] seems pretty enthusiastic."
     the_person "You think so? I honestly wasn't sure... But it seemed like everyone did well."
     "[the_person.possessive_title] seems a little apprehensive, but you think she probably just need to build some confidence."
     mc.name "Well, is there anything I can do to help for next time?"
-    "[the_person.title] think about it for a bit, but [yoga_assistant.possessive_title] quickly speaks up."
+    "[the_person.title] think about it for a bit, but [yoga_assistant.possessive_title!l] quickly speaks up."
     yoga_assistant "It's actually kind of a pain, having to go all the way to the break room to get water. Maybe we could get one of those 5 gallon water dispensers?"
     "It's not THAT hard to just walk to the break room... But at the same time, if you had a water source that all the girls at the yoga session used, you could dose it with serum and every girl attending would get some..."
     mc.name "Can you get that ordered and just put it on the company account?"
@@ -1693,7 +1693,7 @@ label erica_weekly_yoga_label(the_person):
         "[the_person.possessive_title] raises her voice extra loud so everyone in the room can hear it."
         the_person "Hey everyone! Good news! We just got the okay, from now on, in celebration of the female body, this will be a nude yoga class!"
         "You hear several cheers go up from the group."
-        "You notice that [yoga_assistant.possessive_title] has already started to strip down..."
+        "You notice that [yoga_assistant.possessive_title!l] has already started to strip down..."
         $ scene_manager.strip_actor_outfit(yoga_assistant)
         the_person "We only ask, please leave your shoes on! This is a safety issue, in case a piece of glass or other object is left on the floor!"
         "When she finishes the announcement, [the_person.title] starts to strip down also."
@@ -1769,7 +1769,7 @@ label erica_weekly_yoga_label(the_person):
             call start_threesome(the_person, yoga_assistant, start_position = threesome_double_blowjob, position_locked = True) from _after_yoga_protein_yum_1
             $ the_report = _return
             if the_report["guy orgasms"] > 0:
-                "You enjoy your post orgasm bliss for a few moments while [the_person.possessive_title!l] and [yoga_assistant.possessive_title] swap your cum back and forth for a bit."
+                "You enjoy your post orgasm bliss for a few moments while [the_person.possessive_title!l] and [yoga_assistant.possessive_title!l] swap your cum back and forth for a bit."
                 "When you look back down, they seem to have swallowed most of it, but [yoga_assistant.title] is licking the last few remnants of your cum off of [the_person.possessive_title!l]'s face."
             $ scene_manager.update_actor(the_person, position="stand3", display_transform = character_center_flipped)
             $ scene_manager.update_actor(yoga_assistant, position = "stand4", display_transform = character_right)
@@ -1812,7 +1812,7 @@ label erica_weekly_yoga_label(the_person):
                     "Ask [threesome_partner.title] to join" if erica_get_is_yoga_nude() and willing_to_threesome(remaining_person, threesome_partner):
                         mc.name "Private? Look around... why would we have to go somewhere private?"
                         remaining_person "Ah, okay."
-                        "Off to one side, you see [threesome_partner.possessive_title], apparently taking a break by herself."
+                        "Off to one side, you see [threesome_partner.possessive_title!l], apparently taking a break by herself."
                         mc.name "Let's go over there and have some fun with [threesome_partner.title]."
                         remaining_person "Sounds good! I'll follow your lead!"
                         "You and [remaining_person.title] walk over to [threesome_partner.title]. Her eyes light up when she see you two approaching her."
@@ -1827,7 +1827,7 @@ label erica_weekly_yoga_label(the_person):
                         mc.name "Sorry, but the workday is approaching quickly. I have a lot to get done today."
                         $ remaining_person.change_happiness(-3)
                         remaining_person "Wow... okay I guess..."
-                        "Rejected, [remaining_person.possessive_title] quickly walks off."
+                        "Rejected, [remaining_person.possessive_title!l] quickly walks off."
             else:
                 "[remaining_person.title] gives you a shy smile."
                 remaining_person "Well... I umm... I'm glad you enjoyed the class. I should probably get going as well..."
@@ -1856,7 +1856,7 @@ label erica_weekly_yoga_label(the_person):
                     $ yoga_assistant.change_happiness(-3)
                     yoga_assistant "Wow... okay I guess..."
                     the_person "You loss!"
-                    "Rejected, [remaining_person.possessive_title] quickly walks off."
+                    "Rejected, [remaining_person.possessive_title!l] quickly walks off."
                     yoga_assistant "Guess we'll just have some fun without you..."
                     $ scene_manager.update_actor(the_person, position = "kissing")
                     $ scene_manager.update_actor(yoga_assistant, position = "walking_away", display_transform = character_right)
@@ -2108,20 +2108,20 @@ label erica_lily_instapic_intro_label():
     $ erica.event_triggers_dict["insta_pic_intro_complete"] = True
     $ scene_manager = Scene()  #Clean Scene
 
-    "It's Saturday evening, which means it's time for a sexy photo shoot with [lily.title] and [erica.title]! You head home and knock on [lily.possessive_title]'s door. She swings it open."
+    "It's Saturday evening, which means it's time for a sexy photo shoot with [lily.title] and [erica.title]! You head home and knock on [lily.possessive_title!l]'s door. She swings it open."
     $ scene_manager.add_actor(the_person)
     lily "Hey, any word from your friend?"
     mc.name "Not yet."
     lily "Are you sure she's gonna make it? I teased on my channel that I have a surprise for them tonight. It's gonna be hard to come up with something if she doesn't show up!"
     mc.name "She'll be here."
-    "You chat with [lily.possessive_title] for a bit. Soon you feel a vibration in your pocket as your phone goes off."
+    "You chat with [lily.possessive_title!l] for a bit. Soon you feel a vibration in your pocket as your phone goes off."
     erica "I'm here! Come let me in!"
     $ scene_manager.clear_scene()
     "You go to your front door and open it.[erica.title] gives you a nervous smile as she steps inside."
     $ scene_manager.add_actor(erica)
     erica "Sorry I'm late. I almost didn't come... This whole thing is just a little... Crazier than I would normally do."
     mc.name "Don't worry, [lily.title] is great at this. I was pretty skeptical about it at first too, but she's been pretty successful with this."
-    "You lead her to [lily.possessive_title]'s room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
+    "You lead her to [lily.possessive_title!l]'s room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
     lily "Oh my gosh... [erica.name]? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
     erica "Ah! Yes I remember you now! You were at the study group for the midterm!"
