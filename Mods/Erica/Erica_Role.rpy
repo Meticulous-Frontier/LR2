@@ -309,7 +309,7 @@ label erica_intro_label(the_person):
     mc.name "Thanks! That is really helpful. I'm [mc.name]."
     the_person "[the_person.name]. Nice to meet you."
     $ the_person.set_title(the_person.name)
-    $ the_person.set_possessive_title("your gym girl")
+    $ the_person.set_possessive_title("Your gym girl")
     $ the_person.set_mc_title(mc.name)
     mc.name "Likewise. You come here often?"
     the_person "Yeah! You could say that. I'm actually on the state college track and field team!"
