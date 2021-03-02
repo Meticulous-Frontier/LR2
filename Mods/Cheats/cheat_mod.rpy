@@ -171,8 +171,8 @@ screen cheat_menu():
 
         "Funds": ["funds", "funds", 10000, 7],
         "Supplies": ["supply_count", "supply_count", 10000, 8],
-        "Effectivity": ["team_effectiveness", "team_effectiveness", 10, 9],
-        "Max Effectivity": ["effectiveness_cap", "effectiveness_cap", 10, 10] # Might add If statement to combine these two as they go hand in hand
+        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 9],
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 10] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
         "HR": ["hr_skill", "hr_skill", 1, 0],
