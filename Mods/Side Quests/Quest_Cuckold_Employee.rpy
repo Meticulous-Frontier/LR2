@@ -219,7 +219,7 @@ label quest_cuckold_employee_decision_label():
     mc.name "I'm sorry?"
     the_person "I just... I need to vent to someone about something, but I don't trust the other girls around here not to gossip about it."
     mc.name "Of course, you can talk to me about anything."
-    the_person "Well... my husband and I... we've been trying to have baby lately, but after months of trying, still nothing."
+    the_person "Well... my husband and I... we've been trying to have a baby lately, but after months of trying, still nothing."
     the_person "I did something I probably shouldn't have... I took a semen sample when we had sex a few days ago secretly and had it analyzed."
     the_person "He is basically infertile. I'm absolutely crushed! I love him so much, but I also want to have a baby so bad."
     mc.name "I understand. It might take a while for you to grieve this if you need some time off."
