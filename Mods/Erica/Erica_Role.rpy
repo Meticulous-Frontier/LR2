@@ -993,7 +993,7 @@ label erica_post_race_fwb_label(the_person):
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
-    "When she is full naked, you grab her hips and flip her over."
+    "When she is fully naked, you grab her hips and flip her over."
     $ the_person.draw_person(position = "doggy")
     $ the_person.change_arousal(5)
     "There it is, the ass that inspired your final push in the race. She lowers her face to the bed and wiggles her hips at you."
@@ -1053,7 +1053,7 @@ label erica_post_race_love_label(the_person):
         $ the_person.change_arousal(20)
 
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
-    "When she is full naked, you get on top of her."
+    "When she is fully naked, you get on top of her."
     $ the_person.change_arousal(5)
     the_person "Mmm, you can do anything you want with me, and you go for missionary?"
     mc.name "I thought you were mine for the whole day?"
