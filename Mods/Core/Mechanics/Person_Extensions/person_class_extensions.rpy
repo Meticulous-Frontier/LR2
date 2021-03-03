@@ -780,7 +780,7 @@ init -1 python:
         if destination:
             location.move_person(self, destination)
         else:
-            location.move_person(self, get_random_from_list([x for x in list_of_places if x.public]))
+            location.move_person(self, get_random_from_list([x for x in list_of_places if x.public or x == self.home]))
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
