@@ -5,10 +5,9 @@ init 2 python:
                 return True
         return False
 
-    def fetish_serum_quest_intro_followup_requirement():
-        if time_of_day == 1 and day%7 == 0:
-            if mc.is_at_work() and mc.business.head_researcher:
-                return True
+    def fetish_serum_quest_intro_followup_requirement(the_day):
+        if day > the_day and mc.is_at_work() and mc.business.head_researcher:
+            return True
         return False
 
     def fetish_serum_discuss_requirement(the_person):
@@ -17,52 +16,50 @@ init 2 python:
         return False
 
     # dummy requirement for removed action, is now available through discuss Nanobot program
+    # remove in future version
     def fetish_serum_discuss_progress_requirement(the_person):
         return False
+
     def fetish_serum_exhibition_requirement():
-        if time_of_day == 1 and day%7 == 0:
-            if mc.is_at_work() and mc.business.head_researcher:
-                return True
+        if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
+            return True
         return False
 
     def fetish_serum_anal_requirement():
-        if time_of_day == 1 and day%7 == 0:
-            if mc.is_at_work() and mc.business.head_researcher:
-                return True
+        if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
+            return True
         return False
 
     def fetish_serum_cum_requirement():
-        if time_of_day == 1 and day%7 == 0:
-            if mc.is_at_work() and mc.business.head_researcher:
-                return True
+        if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
+            return True
         return False
 
     def fetish_serum_breeding_requirement():
-        if time_of_day == 1 and day%7 == 0:
-            if mc.is_at_work() and mc.business.head_researcher:
-                return True
+        if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
+            return True
         return False
 
     def fetish_serum_anal_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
+        if day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_anal_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_cum_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
+        if day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_cum_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_breeding_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
+        if day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_breeding_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
 
     def fetish_serum_exhibition_warning_requirement():
-        if time_of_day == 1 and day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
+        if day%7 != 0 and mc.is_at_work() and mc.business.is_open_for_business():
             if get_fetish_exhibition_serum().mastery_level > 3.0 and mc.business.head_researcher:
                 return True
         return False
@@ -122,7 +119,6 @@ init 2 python:
         mc.business.event_triggers_dict["fetish_serum_code_progress"] =  __builtin__.int((fetish_serum_get_coding_progress() + progress))
         return
 
-
     special_fetish_outfit = Outfit("A Special Night")
     special_fetish_outfit.add_upper(lace_bra.get_copy(),colour_pink)
     special_fetish_outfit.add_feet(garter_with_fishnets.get_copy(), colour_pink)
@@ -146,8 +142,6 @@ init 2 python:
     special_fetish_blue_outfit.add_accessory(lipstick.get_copy(), colour_red)
 
 init 3 python:
-    fetish_serum_quest_intro = Action("Nanobot Discovery", fetish_serum_quest_intro_requirement, "fetish_serum_quest_intro_label")
-    fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label")
     fetish_serum_discuss = Action("Discuss Nanobot Program", fetish_serum_discuss_requirement, "fetish_serum_discuss_label",
         menu_tooltip = "Discuss creation / status of the Nanobot program.", priority = 5)
     fetish_serum_exhibition = Action("Exhibition Program", fetish_serum_exhibition_requirement, "fetish_serum_exhibition_label")
@@ -161,13 +155,20 @@ init 3 python:
     fetish_serum_coding_activity = Action("Program Nanobot Program {image=gui/heart/Time_Advance.png}", fetish_serum_coding_activity_requirement, "fetish_serum_coding_activity_label",
         menu_tooltip = "Spend some time coding the new Nanobot Program", priority = 10)
 
+    def add_fetish_serum_quest_intro_followup():
+        fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label", requirement_arg = day + renpy.random.randint(6, 9))
+        mc.business.mandatory_crises_list.append(fetish_serum_quest_intro_followup)
+        return
+
 label fetish_serum_quest_intro_label():
     $ the_person = mc.business.head_researcher
     $ mc.business.event_triggers_dict["fetish_serum_contact"] = the_person.identifier
-    "As you are getting ready to sit down for some lunch, your head researcher messages you."
-    the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can I swing by?"
+    $ mc.having_text_conversation = the_person
+    "As you are going about your daily business, your head researcher messages you."
+    the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we meet up?"
+    mc.name "Sure, meet me in my office."
+    $ mc.having_text_conversation = None
     $ ceo_office.show_background()
-    mc.name "Sure, I'm just sitting down for some lunch, I'm in the office."
     $ the_person.draw_person()
     "A few minutes later, [the_person.title] is standing at your door."
     the_person "Hey [the_person.mc_title]. Mind if I sit down?"
@@ -200,7 +201,8 @@ label fetish_serum_quest_intro_label():
     "You spend some time going over the details with [the_person.title]. Eventually you have a plan in place."
     $ the_person.draw_person(position = the_person.idle_pose)
     the_person "Alright, I'll check back with you next week!"
-    $ mc.business.mandatory_crises_list.append(fetish_serum_quest_intro_followup)
+
+    $ add_fetish_serum_quest_intro_followup()
     $ clear_scene()
     return
 
@@ -220,7 +222,8 @@ label fetish_serum_quest_intro_followup_label():
         the_person "Hey! Meet me down in the lab!"
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "Guess what! I got the first set of those nano bots. He did me a favor and spent all weekend coding the program for our first batch!"
     "You look at her desk. There is a small container filled with what appears to be a silver liquid."
@@ -466,10 +469,11 @@ label fetish_serum_exhibition_label():
     else:
         "You get a text message from [the_person.possessive_title!l]"
         $ mc.having_text_conversation = the_person
-        the_person "Hey! I have details on the new program!"
+        the_person "Hey! I have details on the new social program!"
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will be more willing to show their bodies in public, or commit sexual acts in front of others."
@@ -490,10 +494,11 @@ label fetish_serum_anal_label():
     else:
         "You get a text message from [the_person.possessive_title!l]"
         $ mc.having_text_conversation = the_person
-        the_person "Hey! I have details on the new program!"
+        the_person "Hey! I have details on the new anal program!"
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will be more willing to commit acts of sodomy in submission to their partner."
@@ -514,10 +519,11 @@ label fetish_serum_cum_label():
     else:
         "You get a text message from [the_person.possessive_title!l]"
         $ mc.having_text_conversation = the_person
-        the_person "Hey! I have details on the new program!"
+        the_person "Hey! I have details on the new semen program!"
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will have positive reactions to exposure to semen."
@@ -538,10 +544,11 @@ label fetish_serum_breeding_label():
     else:
         "You get a text message from [the_person.possessive_title!l]"
         $ mc.having_text_conversation = the_person
-        the_person "Hey! I have details on the new program!"
+        the_person "Hey! I have details on the new reproduction program!"
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will have positive reactions to exposure to reproducing and other associated body functions, such as lactation."
@@ -564,7 +571,8 @@ label fetish_serum_anal_warning_label():
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     the_person "So, I've been running some experiments with those Anal Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -588,7 +596,8 @@ label fetish_serum_cum_warning_label():
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -616,7 +625,8 @@ label fetish_serum_breeding_warning_label():
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -640,7 +650,8 @@ label fetish_serum_exhibition_warning_label():
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
         "You hurry down to the lab."
-        $ mc.business.r_div.show_background()
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
     the_person "So, I've been running some experiments with those Public Sexual Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."

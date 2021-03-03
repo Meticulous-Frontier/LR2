@@ -3,9 +3,8 @@ init 5 python:
     add_label_hijack("normal_start", "update_fetish_serum_mod_core")
 
     def fetish_serum_mod_initialization():
+        fetish_serum_quest_intro = Action("Nanobot Discovery", fetish_serum_quest_intro_requirement, "fetish_serum_quest_intro_label")
         mc.business.mandatory_crises_list.append(fetish_serum_quest_intro)
-
-
         return
 
 
