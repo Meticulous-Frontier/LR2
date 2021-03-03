@@ -156,7 +156,7 @@ init 3 python:
         menu_tooltip = "Spend some time coding the new Nanobot Program", priority = 10)
 
     def add_fetish_serum_quest_intro_followup():
-        fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label", requirement_arg = day + renpy.random.randint(6, 9))
+        fetish_serum_quest_intro_followup = Action("Nanobot Discovery Followup", fetish_serum_quest_intro_followup_requirement, "fetish_serum_quest_intro_followup_label", requirement_args = day + 6 - day%7)
         mc.business.mandatory_crises_list.append(fetish_serum_quest_intro_followup)
         return
 
