@@ -493,6 +493,8 @@ label Sarah_intro_label():
             $ sarah.event_triggers_dict["rejected"] = True
             $ sarah.set_schedule(None, times = [1,2,3])   # make her a free roaming character
 
+    # make her a free roaming character
+    $ sarah.set_schedule(None, times = [1, 2, 3])
     $ sarah.event_triggers_dict["first_meeting"] = True
     return
 
@@ -508,6 +510,7 @@ label Sarah_hire_label():
     mc.name "[day_name] morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
+
     $ add_hr_director_initial_hire_action(the_person)
     return
 
