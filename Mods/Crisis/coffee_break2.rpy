@@ -58,7 +58,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     $ scene_manager.update_actor(winner_one, emotion = "happy")
     $ scene_manager.update_actor(loser, emotion = "sad")
     "[loser.possessive_title] draws the short straw."
-    winner_two "Don't forget [loser.name], you have to take of some clothes before you pickup the food."
+    winner_two "Don't forget [loser.name], you have to take off some clothes before you pick up the food."
     if loser.effective_sluttiness() >= 40:
         $ scene_manager.update_actor(loser, emotion = "happy")
         loser "Great, let's give this guy a show!"
