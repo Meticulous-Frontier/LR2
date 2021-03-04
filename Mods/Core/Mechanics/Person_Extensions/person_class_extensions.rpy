@@ -231,6 +231,15 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_is_patreon(self):
+        if not hasattr(self, "_is_patreon"):
+            self._is_patreon = False
+        return self._is_patreon
+
+    def set_person_is_patreon(self, value):
+        self._is_patreon = value
+
+    Person.is_patreon = property(get_person_is_patreon, set_person_is_patreon, None, "Identify person as Patreon reward character.")
 
     # work-outfit for strippers / waitresses and bdsm room performers
 

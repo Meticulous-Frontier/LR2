@@ -418,12 +418,13 @@ init -1 python:
         for person in unique_character_list:
             update_person_opinions(person)
 
-        if "list_of_premade_characters" in globals():
+        if "list_of_unique_characters" in globals():
             # update random characters in game
-            for person in list_of_premade_characters:
+            for person in list_of_unique_characters:
+                person.is_patreon = True
                 update_person_opinions(person)
                 update_random_person(person)
-                rebuild_wardrobe(person)
+                # rebuild_wardrobe(person) # Don't change their wardrobe, it's personalized
                 update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
                 create_party_schedule(person)
         return
