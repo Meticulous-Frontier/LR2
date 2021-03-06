@@ -266,7 +266,7 @@ label cat_fight_crisis_enhanced_label():
                     winner "Hah... I knew I had that..."
                     "[winner.title] takes a look down at herself."
                     winner "I should probably go get cleaned up too. Sorry about all of this [winner.mc_title]."
-                    $ scene_manager.update_actor(loser, position = "walking_away")
+                    $ scene_manager.update_actor(winner, position = "walking_away")
                     "[winner.title] leaves and you get back to work."
             $ del winner
             $ del loser
