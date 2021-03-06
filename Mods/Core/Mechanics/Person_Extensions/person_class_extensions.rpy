@@ -777,9 +777,11 @@ init -1 python:
             if self.next_day_outfit:
                 self.planned_outfit = self.next_day_outfit
                 self.next_day_outfit = None
+            else:
+                self.planned_outfit = None
             self.planned_uniform = None
             self.work_outfit = None
-            self.apply_outfit() # let apply outfit select day outfit (if needed)
+            self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
