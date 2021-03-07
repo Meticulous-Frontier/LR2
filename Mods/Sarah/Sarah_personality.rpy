@@ -321,7 +321,7 @@ label Sarah_flirt_response(the_person):
     return
 
 label Sarah_flirt_response_low(the_person):
-    if get_sarah_epic_tits_progress() >= 2:  #She has gone through bigger tits story
+    if sarah_epic_tits_progress() >= 2:  #She has gone through bigger tits story
         the_person "Oh? You like how I look, now that I'm the total package?"
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] gives you a quick spin, showing off her body at the same time as her outfit."
@@ -361,7 +361,7 @@ label Sarah_flirt_response_mid(the_person):
         "You zone out for a second, checking out [the_person.title]'s shapely hind end."
         $ the_person.draw_person()
         "She turns back and giggles."
-        if get_sarah_epic_tits_progress() >= 2:
+        if sarah_epic_tits_progress() >= 2:
             the_person "Tongue tied?. That's okay, I've been having that effect on a lot of guys lately."
         mc.name "What can I say? Your body is hypnotizing."
     return
@@ -449,7 +449,7 @@ label Sarah_flirt_response_high(the_person):
                 "Just flirt":
                     mc.name "I know, I just like to tease you."
                     the_person "Oh, is that so? Well two can play at that game."
-                    if get_sarah_epic_tits_progress() >= 2:
+                    if sarah_epic_tits_progress() >= 2:
                         $ the_person.draw_person(the_animation = blowjob_bob)
                         "She checks that nobody else is looking, then grabs her tits and jiggles them for you."
                         the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]"

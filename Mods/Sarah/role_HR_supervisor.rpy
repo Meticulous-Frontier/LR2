@@ -670,11 +670,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     $ scene_manager.update_actor(person_choice, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
-    # start threesome attempt when sluttiness is high enough and she doesn't hate threesomes
+
     # when HR Director is Sarah, also wait for threesome unlock event
-    if (person_choice.sluttiness > 80 and the_person.sluttiness > 80
-        and person_choice.get_opinion_score("threesomes") > -2
-        and (not the_person is sarah or sarah.event_triggers_dict.get("threesome_unlock", 0) > 0)):
+    if willing_to_threesome(person_choice, the_person) and (not the_person is sarah or sarah_threesomes_unlocked()):
 
         person_choice "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
         menu:
@@ -1015,7 +1013,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         return
 
     if get_HR_director_unlock("titfuck") == False:
-        if the_person is sarah and get_sarah_epic_tits_progress() > 1:
+        if the_person is sarah and sarah_epic_tits_progress() > 1:
             the_person "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
             the_person "It felt soooo good last time. I've been thinking about it a lot."
             mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."

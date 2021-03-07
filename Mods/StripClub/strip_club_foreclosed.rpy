@@ -34,7 +34,7 @@ init 2 python:
     def strip_club_foreclosed_event_requirement():
         if get_strip_club_foreclosed_stage() != 0:
             return False
-        if get_sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
+        if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
         if mc.business.funds > 60000:
             if time_of_day > 2:
