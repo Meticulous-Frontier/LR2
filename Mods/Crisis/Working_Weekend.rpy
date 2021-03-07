@@ -86,7 +86,7 @@ init 2 python:
 
 label SB_working_weekend_crisis_label():
     $ person_one = get_random_employees(1)
-    if person_one == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't give sarah during epic tits weekend
+    if person_one == sarah and get_sarah_epic_tits_progress() == 1: #Don't give sarah during epic tits weekend
         return
 
     if person_one is None:
@@ -130,7 +130,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             call free_strip_scene(person_one) from _free_strip_scene_3
 
             $ person_two = get_random_employees(1)
-            if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1):
+            if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and get_sarah_epic_tits_progress() == 1):
                 "You're pretty sure she's ready for next step if you are ready."
                 menu:
                     "Fuck her on your desk":

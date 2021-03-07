@@ -1015,7 +1015,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         return
 
     if get_HR_director_unlock("titfuck") == False:
-        if the_person is sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+        if the_person is sarah and get_sarah_epic_tits_progress() > 1:
             the_person "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
             the_person "It felt soooo good last time. I've been thinking about it a lot."
             mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."

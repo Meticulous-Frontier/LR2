@@ -111,6 +111,8 @@ init 2 python:
 
         return target_list
 
+    def get_sarah_epic_tits_progress():
+        return sarah.event_triggers_dict.get("epic_tits_progress", 0)
 
 
 init -1 python:
@@ -144,7 +146,7 @@ init -1 python:
         return False
 
     def Sarah_third_wheel_requirement():
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
+        if get_sarah_epic_tits_progress() == 1: #Don't run this if epic tits is in progress
             return False
         if time_of_day > 2:
             if sarah.sluttiness > 15:
@@ -154,52 +156,43 @@ init -1 python:
         return False
 
     def Sarah_get_drinks_requirement():
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
+        if get_sarah_epic_tits_progress() == 1: #Don't run this if epic tits is in progress
             return False
-        if time_of_day > 2:
-            if sarah.sluttiness > 30:
-                if day%7 == 5:  #Saturday
-                    if mc.is_at_work():
-                        return True
+        if time_of_day > 2 and day%7 == 5:  #Saturday
+            if sarah.sluttiness > 50 and mc.is_at_work():
+                return True
         return False
 
     def Sarah_stripclub_story_requirement():
-        epic_tits_progress = sarah.event_triggers_dict.get("epic_tits_progress", 0)
-        if epic_tits_progress < 2 and not epic_tits_progress == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
+        if get_sarah_epic_tits_progress() < 2 and not get_sarah_epic_tits_progress() == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
             return False
         if strip_club_is_closed(): # Don't run while strip club is closed
             return False
-        if time_of_day > 2:   #Only in the evening when the strippers are at the club
-            if sarah.sluttiness > 50:
-                if day%7 == 5:  #Saturday
-                    if mc.is_at_work():
-                        return True
+        #Only in the evening when the strippers are at the club
+        if time_of_day > 2 and day%7 == 5:  #Saturday
+            if sarah.sluttiness > 50 and mc.is_at_work():
+                return True
         return False
 
     def Sarah_threesome_request_requirement():
-        if time_of_day > 2:
-            if day%7 == 5:  #Saturday
-                if mc.is_at_work():
-                    if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
-                        return True
-        return False        #Return false while I write the events
+        if time_of_day > 2 and day%7 == 5: #Saturday
+            if mc.is_at_work():
+                if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
+                    return True
+        return False
 
     def Sarah_arrange_threesome_requirement(the_person):
         return True
 
     def Sarah_initial_threesome_requirement():
-        if time_of_day > 2:
-            if day%7 == 5:  #Saturday
-                return True
+        if time_of_day > 2 and day%7 == 5:  #Saturday
+            return True
         return False
 
-
     def Sarah_ask_for_baby_requirement():
-        if mc_asleep():
-            if sarah.event_triggers_dict.get("threesome_unlock", False):
-                if sarah.sex_record["Vaginal Creampies"] >= 10:
-                    if sarah.has_role(girlfriend_role):
-                        return True
+        if mc_asleep() and sarah.has_role(girlfriend_role):
+            if sarah.event_triggers_dict.get("threesome_unlock", False) and sarah.sex_record["Vaginal Creampies"] >= 10:
+                return True
         return False
 
     def Sarah_fertile_period_start_requirement():  #When this returns true, start the fertile period
@@ -231,7 +224,7 @@ init -1 python:
         return False
 
     def Sarah_has_bigger_tits():
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1 or sarah.has_large_tits():
+        if get_sarah_epic_tits_progress() > 1 or sarah.has_large_tits():
             return True
         return False #Just in case we used serums later
 
@@ -553,7 +546,7 @@ label Sarah_third_wheel_label():
     mc.name "So, why did you need to come back and grab that?"
     the_person "Well my friend has been dating this guy for a while and keeps complaining, he wants them to open up their relationship some, maybe bring a lucky guy or girl back to their place sometime..."
     the_person "I've been out with them a couple of times now, hoping maybe they would show interest in me, but so far nothing."
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
+    if get_sarah_epic_tits_progress() < 2:
         the_person "Her boyfriend... it's like he just looks right through me. I've seen them leave the bar with a girl before, and its always some dumb looking, busty girl."
         mc.name "Don't be silly, you are so sexy. There is more to look for in a woman than chest size."
         "She laughs at you sarcastically."
@@ -610,10 +603,10 @@ label Sarah_third_wheel_label():
     mc.name "That sounds pretty good actually. [the_person.name] will be excited to hear that I think."
     naomi "Ha! No no, I mean, just you. [the_person.name] is a good friend but..."
     mc.name "But?"
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
+    if get_sarah_epic_tits_progress() < 2:
         naomi "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
         "You feel yourself getting angry at her crude remarks."
-    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2:
+    elif get_sarah_epic_tits_progress() == 2:
         naomi "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
         "You feel yourself getting angry at her crude remarks."
     else:
@@ -955,12 +948,12 @@ label Sarah_get_drinks_label():
     $ scene_manager.add_actor(mom, position = "stand2", display_transform = character_left_flipped)
     mom "Oh! You two look absolutely soaked! Are you okay?"
     mc.name "Thanks [mom.title]! This is [the_person.title]! We got caught out in the rain walking back. Do you think you could grab us a few towels, and maybe have some dry clothes for her to wear for a bit?"
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+    if get_sarah_epic_tits_progress() == 0: #Small tits
         mom "Yes of course! She looks about Lily's size, I'm sure I can find something..."
-    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+    elif get_sarah_epic_tits_progress() == 2: #Big tits
         "[mom.title] looks her over for a moment, checking out her curves."
         mom "Yes! I'm not sure Lily's clothes would work... I bet I have something I could give her, just give me a minute."
-    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+    elif get_sarah_epic_tits_progress() == 3: #Huge tits
         "[mom.possessive_title] eyes travel all over [the_person.title]'s body. Her eyes go wide when she see how big her tits are."
         mom "I'm not sure I have... actually, I think Gabrielle might have left something that would fit her..."
     $ scene_manager.update_actor(mom, position = "walking_away")
@@ -986,19 +979,19 @@ label Sarah_get_drinks_label():
     mom "She seems nice!"
     mc.name "Yeah! Believe it or not, she is the daughter of one of dad's old friends. We used to play together as kids!"
     if mom.sluttiness < 40:
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+        if get_sarah_epic_tits_progress() == 0: #Small tits
             mom "Aww! That's cute! And she is so cute too. You be nice to her, okay?"
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+        elif get_sarah_epic_tits_progress() == 2: #Big tits
             mom "Aww! That's great! She certainly has blossomed into a beautiful young lady. You be nice to her, okay?"
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+        elif get_sarah_epic_tits_progress() == 3: #Huge tits
             mom "Wow! That's great! And she has... I mean... her figure is incredible! You be nice to her, okay?"
         mc.name "Don't worry, [mom.title]."
     elif mom.sluttiness < 70:
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+        if get_sarah_epic_tits_progress() == 0: #Small tits
             mom "That's cute... but... what about me? The woman who brought you into this world needs you attention too..."
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+        elif get_sarah_epic_tits_progress() == 2: #Big tits
             mom "That's nice dear... but don't forget about me, okay? I have need too!"
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+        elif get_sarah_epic_tits_progress() == 3: #Huge tits
             mom "That's nice I guess..."
             mom "But... look I know she is absolutely stacked, but don't forget about me, okay? I have needs too!"
         mc.name "Don't worry, [mom.title]. No one could ever replace you."
@@ -1303,7 +1296,7 @@ label Sarah_stripclub_story_label():
     the_person "[the_person.mc_title]! You crazy workaholic, let's go blow off some steam!"
     "You look up and see [the_person.title] standing in the doorway."
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    if sarah.event_triggers_dict["epic_tits_progress"] != -1:
+    if get_sarah_epic_tits_progress() != -1:
         "You still aren't quite used to her enhanced chest size. You realize you are blatantly checking her out as she stands in the door."
         the_person "Mmm, I've been getting exactly that look from a ton of guys lately... and a few girls to."
         the_person "It's been great! I can't thank you enough for helping this happen. I think I might know a way to repay you a little bit though..."
@@ -1367,7 +1360,7 @@ label Sarah_stripclub_story_label():
         "???" "Come on baby, I bet I can pay you better than what this guy is payin' you to be here with him!"
         the_person "Yeah right! This guy owns his own pharmaceutical business. Move along now."
     "You get ready to add in to the conversation, but the guy gets the point."
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) >= 2: # only when she got the big boobs
+    if get_sarah_epic_tits_progress() >= 2: # only when she got the big boobs
         "???" "Damn, alright. Enjoy those tits mister, they look fantastic."
     else:
         "???" "Damn, alright. Have a nice time mister, she's gorgeous."
@@ -2640,7 +2633,7 @@ label Sarah_weekend_surprise_crisis_label():
                 $ scene_manager.update_actor(the_person, position = "stand4")
                 the_person "Alright, I know you wanted to get other things done, so I'll let you get back to it. But don't work too hard!"
                 "She quickly cleans herself up then leaves, giving you a chance to continue your work, but now with your balls empty."
-            elif sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+            elif get_sarah_epic_tits_progress() > 1:
                 the_person "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                 mc.name "I'm not honestly that tense right now..."
                 if the_person.outfit.tits_available():
