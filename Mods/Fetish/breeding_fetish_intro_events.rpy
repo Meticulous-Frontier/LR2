@@ -98,7 +98,7 @@ init 3 python:
         person.add_role(breeding_fetish_role)
         person.update_sex_skill("Vaginal", 6)
         person.event_triggers_dict["LastBreedingFetish"] = day
-        slave_assign_new_collar(person, breed_collar)
+        fetish_add_collar(person, breed_collar)
         return
 
 init 50 python:

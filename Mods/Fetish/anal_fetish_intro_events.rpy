@@ -96,7 +96,7 @@ init 2 python: #Other anal fetish related python code
         person.add_role(anal_fetish_role)
         person.update_sex_skill("Anal", 6)
         person.event_triggers_dict["LastAnalFetish"] = day
-        slave_assign_new_collar(person, fuck_doll_collar)
+        fetish_add_collar(person, fuck_doll_collar)
         person.unlock_spanking()
         return
 

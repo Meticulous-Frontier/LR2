@@ -156,7 +156,7 @@ init -1 python:
             return False
 
         if person is lily:
-            mc.business.mandatory_crises_list.append(cum_fetish_lily_intro)
+            mc.business.mandatory_morning_crises_list.append(cum_fetish_lily_intro)
             return True
         elif person is mom:
             mc.business.mandatory_crises_list.append(cum_fetish_mom_intro)

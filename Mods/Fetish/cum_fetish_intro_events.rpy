@@ -27,7 +27,7 @@ init 1 python:
         return False
 
     def cum_fetish_lily_intro_requirement():
-        if time_of_day==0 and not day%7 == 5 and mc_at_home():
+        if not day%7 == 5 and mc_at_home():
             return True
         return False
 
@@ -86,7 +86,7 @@ init 2 python:
         person.add_role(cum_fetish_role)
         person.update_sex_skill("Oral", 6)
         person.event_triggers_dict["LastCumFetish"] = day
-        slave_assign_new_collar(person, cum_slut_collar)
+        fetish_add_collar(person, cum_slut_collar)
         return
 
     cum_fetish_family_intro = Fetish_Action("Family Cum Fetish Intro", cum_fetish_family_intro_requirement, "cum_fetish_family_intro_label", fetish_type = "cum")

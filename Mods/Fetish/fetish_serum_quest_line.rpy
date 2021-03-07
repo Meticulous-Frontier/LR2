@@ -119,6 +119,14 @@ init 2 python:
         mc.business.event_triggers_dict["fetish_serum_code_progress"] =  __builtin__.int((fetish_serum_get_coding_progress() + progress))
         return
 
+    def fetish_add_collar(person, collar):
+        new_collar = collar.get_copy()
+        new_collar.colour = [.1,.1,.1,.9]
+        new_collar.pattern = "Pattern_1"
+        new_collar.colour_pattern = [.95,.95,.95,.9]
+        person.base_outfit.add_accessory(new_collar)
+        return
+
     special_fetish_outfit = Outfit("A Special Night")
     special_fetish_outfit.add_upper(lace_bra.get_copy(),colour_pink)
     special_fetish_outfit.add_feet(garter_with_fishnets.get_copy(), colour_pink)
