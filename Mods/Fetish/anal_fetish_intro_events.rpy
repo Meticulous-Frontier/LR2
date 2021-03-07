@@ -186,8 +186,7 @@ label anal_fetish_employee_intro_label(the_person):
         "You give her ass a smack, admiring the way her cheeks wobble."
     else:
         mc.name "Let's get this out of the way first."
-        $ the_person.strip_outfit(exclude_upper = True)
-        $ the_person.draw_person(position = "standing_doggy")
+        $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal(15)
     the_person "Mmm... like the view?"
@@ -317,7 +316,7 @@ label anal_fetish_family_intro_label(the_person):
         "You give her ass a smack, admiring the way her cheeks wobble."
     else:
         mc.name "Let's get this out of the way first."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal(10) #65
     "You give her another spank. Her cheeks are starting to redden a bit, but its obvious from her arousal that she loves it."
@@ -408,7 +407,7 @@ label anal_fetish_generic_intro_label(the_person):
         "You give her ass a smack, admiring the way her cheeks wobble."
     else:
         mc.name "Let's get this out of the way first."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal (15) # 65
     mc.name "You've got an amazing ass [the_person.title]..."
@@ -507,7 +506,7 @@ label anal_fetish_mom_intro_label():
     "Murmur of the Heart? Hmm, sounds like a dumb chick flick... you back out for a second to read the description. Hmm...."
     "...an open-minded teenage boy finds himself torn between a rebellious urge to discover love, and the ever-present, almost dominating affection of his beloved mother..."
     "Oh geeze. She is definitely planning an interesting night! You quickly click back into the movie and pause it when you hear her bedroom door open."
-    "You try to act non-chalant as you hear [the_person.title] walk into the living room. You purposefully avoid looking at her until you hear her clear her throat."
+    "You try to act nonchalant as you hear [the_person.title] walk into the living room. You purposefully avoid looking at her until you hear her clear her throat."
     the_person "Ah, want to get a little more comfortable with me tonight?"
     $ mom_special_outfit = (builder.personalize_outfit(special_fetish_black_outfit, the_colour = the_person.favorite_colour()))
     $ the_person.apply_outfit(mom_special_outfit)

@@ -161,7 +161,7 @@ label breeding_fetish_employee_intro_label(the_person):
         "You reach down and pull your cock out from your pants."
     else:
         "As you start to pull your cock out, [the_person.possessive_title!l] reaches down and starts pulling her clothes off."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
     $ the_person.change_arousal (15)
     mc.name "... and pinned you down..."
     "You grab her hands and force them down at her sides. She has a wild look in her eye as your raw cock nears her cunt."
@@ -337,7 +337,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
         "You pull your cock out and begin to rub it along her inviting slit."
     else:
         "As you pull your cock out, [the_person.possessive_title!l] pulls her bottoms off."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
         "When she finishes you run your cock all along her inviting slit."
 
     $ the_person.change_arousal(10) #60
@@ -732,7 +732,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
         "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you using it smack her ass a couple times."
     else:
         "As you start to pull your cock out, [the_person.possessive_title!l] reaches back and starts to pull off the clothing covering her ass."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "You give her ass a couple smacks with your cock."
     $ the_person.change_arousal(10)
     $ mc.change_arousal(10)
@@ -889,7 +889,7 @@ label breeding_fetish_erica_intro_label():
         "You reach down and pull your cock out from your pants."
     else:
         "As you start to pull your cock out, [the_person.possessive_title!l] reaches down and starts pulling her bottoms off."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
     "You grab her hands and force them down at her sides. She looks at you longingly as your bare cock nears her cunt."
     "You don't say a word, you just push forward, sliding yourself into her fertile young pussy."
     $ the_person.change_arousal (20)
@@ -1008,7 +1008,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you using it smack her ass a couple times."
         else:
             "As you start to pull your cock out, [the_person.possessive_title!l] reaches back and starts to pull off the clothing covering her ass."
-            $ the_person.strip_outfit(exclude_upper = True)
+            $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
         $ mc.change_arousal(10)
@@ -1072,7 +1072,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you use it smack her ass a couple times."
         else:
             "As you start to pull your cock out, [the_person.possessive_title!l] reaches back and starts to pull off the clothing covering her ass."
-            $ the_person.strip_outfit(exclude_upper = True)
+            $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
         $ mc.change_arousal(10)
