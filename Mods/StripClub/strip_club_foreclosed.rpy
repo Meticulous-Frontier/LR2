@@ -32,14 +32,15 @@ init 2 python:
         return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)
 
     def strip_club_foreclosed_event_requirement():
+        if time_of_day >= 3:
+            return False # Don't trigger foreclosed event while strip club is open
         if get_strip_club_foreclosed_stage() != 0:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
         if mc.business.funds > 60000:
-            if time_of_day > 2:
-                if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
-                    return True
+            if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
+                return True
         return False
 
     def cousin_talk_about_strip_club_requirement(person):
