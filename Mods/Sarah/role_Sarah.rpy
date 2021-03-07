@@ -274,11 +274,9 @@ init 2 python:
                 outfit.remove_clothing(outfit.get_bra())
 
     def Sarah_weekend_surprise_crisis_requirement():
-        if time_of_day > 1:
-            if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:   #You've gotten drinks out with Sarah before.
-                if day%7 == 5:  #Saturday
-                    if mc.is_at_work():
-                        return True
+        if time_of_day > 1 and day%7 == 5:  #Saturday
+            if mc.is_at_work() and sarah_get_sex_unlocked():   #You've gotten drinks out with Sarah before.
+                return True
         return False
 
     def Sarah_unlock_special_tit_fuck_requirement():  #Not an action, but make a requirement to make it easy to test anyway.
@@ -2630,7 +2628,7 @@ label Sarah_weekend_surprise_crisis_label():
             "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title!l]"
             "As you exit the building, you consider where you should head for the night."
             menu:
-                "The Bar" if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:    #If you've grabbed drinks before. In requirements, so this SHOULD always be true
+                "The Bar":
                     mc.name "What do you say we head to the bar and have a few drinks? Maybe play some darts?"
                     the_person "Oh! That sounds great!"
                     call Sarah_weekend_date_grab_drinks_label from sarah_weekend_date_crisis_01
@@ -2640,7 +2638,7 @@ label Sarah_weekend_surprise_crisis_label():
                     the_person "Oh! That sounds like a good evening!"
                     call Sarah_weekend_date_strip_club_label from sarah_weekend_date_crisis_02
 
-                "Your Place":   #Added as a default while testing. Probably limit this with sluttiness later #TODO
+                "Your Place" if sarah_get_sex_unlocked():
                     the_person "Oh! A direct approach? Not even going to bother getting me boozed up?"
                     mc.name "Nah. The sex is better when you are sober anyway."
                     the_person "Ha! Okay, lead the way then stud!"
