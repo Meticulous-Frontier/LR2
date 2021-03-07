@@ -1270,7 +1270,7 @@ label Sarah_tits_reveal_label():
         "You quickly agree."
         while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
             $ the_clothing = the_person.outfit.get_upper_top_layer()
-            "[the_person.possessive_title] takes off her [the_clothing.name]"
+            "[the_person.possessive_title] takes off her [the_clothing.name]."
             $ the_person.draw_animated_removal(the_clothing)
         $ the_clothing = None
 
@@ -1385,7 +1385,7 @@ label Sarah_stripclub_story_label():
     "Your eyes are drawn to the stage."
     call watch_strip_show(the_person) from Sarah_strip_show_call_1
     the_person "Wow! That was impressive! I've never been to a place like this before, but I can see why guys like it so much..."
-    "As she finishes her sentence, one of the guys who had been around the stage gets a little too close to your table. You can see him checking out [the_person.title]"
+    "As she finishes her sentence, one of the guys who had been around the stage gets a little too close to your table. You can see him checking out [the_person.title]."
     "???" "Hey there, aren't you a doll! Whaddya say to a private dance in the back? Not sure how much this guy is paying, but I could make it worth your while..."
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person "Not likely! I'm reserved for my boyfriend here."
@@ -1463,7 +1463,7 @@ label Sarah_stripclub_story_label():
         showgirl_2 "You better..."
         "She stands back up and acts as if nothing happened."
     if showgirl is cousin:
-        "You see [showgirl.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "You see [showgirl.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]."
         "She gives you a quick wink."
     showgirl "Alright, lets get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
@@ -1792,7 +1792,7 @@ label Sarah_threesome_request_label():
     $ del gossip_target
     the_person "God, I know. She is so hot, wish I could get my hands on her..."
     "So, at this point, [the_person.possessive_title!l] has brought it up multiple times that she would like to have some action with another girl sometime."
-    "As you think through your business and all the people you have interacted with, you are pretty sure you have some girls who would love to join a threesome with you and [the_person.title]"
+    "As you think through your business and all the people you have interacted with, you are pretty sure you have some girls who would love to join a threesome with you and [the_person.title]."
     mc.name "So, I know we've talked about this before, but, is a threesome still something that you would be interested in doing sometime?"
     the_person "Oh god I would do anything, just to try it once. I know it may not turn out to be as good as I hope, but, I just want to TRY, you know!?!"
     "You don't remember pouring this shot, but you grab the drink in front of you and drain it."
@@ -1904,7 +1904,7 @@ label Sarah_threesome_request_label():
         "As you walk down the hall, you see that [aunt.possessive_title] is sitting with [mom.possessive_title], having coffee."
         "They notice you as you enter."
         aunt "Oh hey! Good to see you [aunt.mc_title]. And who is this?"
-        mc.name "Hey [mom.title], [aunt.title]. This is my girlfriend, [the_person.title]"
+        mc.name "Hey [mom.title], [aunt.title]. This is my girlfriend, [the_person.title]."
         mc.name "[the_person.title], you've met my mom, and THIS is my AUNT, [aunt.title]."
         the_person "Nice to meet you... OH!"
         "It suddenly dawns on her that this is who you are planning to hook up with next week..."
@@ -2065,7 +2065,7 @@ label Sarah_arrange_threesome_label(the_person):
 
 label Sarah_initial_threesome_label():
     if sarah.event_triggers_dict.get("initial_threesome_arranged", False) == False:
-        "You get a text from [sarah.possessive_title]"
+        "You get a text from [sarah.possessive_title]."
         $ mc.having_text_conversation = sarah
         sarah "Hey, are we still on for tonight?"
         mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, It'll be ready next week."
@@ -2116,7 +2116,7 @@ label Sarah_initial_threesome_label():
     sarah "Oh... really?"
     the_person "Yeah. Don't worry. It might be awkward at first, but once we get going, this is going to be a LOT of fun."
     sarah "That's what I keep hoping!"
-    "[the_person.possessive_title] stands up and motions towards [sarah.title]"
+    "[the_person.possessive_title] stands up and motions towards [sarah.title]."
 
     the_person "Come here. This will help..."
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -2185,7 +2185,7 @@ label Sarah_ask_for_baby_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ scene_manager = Scene()
-    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]"
+    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]."
     $ mc.having_text_conversation = the_person
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
@@ -2393,7 +2393,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "[threesome_partner.title] gets up, and remarks before leaving."
         threesome_partner "That was fun! I'm gonna head back to my room. Thanks for sharing [the_person.name]!"
         $ scene_manager.remove_actor(threesome_partner)
-        "She walks out, leaving you alone with [the_person.possessive_title!l]"
+        "She walks out, leaving you alone with [the_person.possessive_title!l]."
         the_person "That's certainly one way to start the day... holy hell."
         "You lay in bed together for a little longer, but soon it is time to start the day."
         $ the_person.apply_planned_outfit()
@@ -2625,7 +2625,7 @@ label Sarah_weekend_surprise_crisis_label():
     menu:
         "Let's Go":
             the_person "Yes! You won't regret this. Let's go!"
-            "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title!l]"
+            "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title!l]."
             "As you exit the building, you consider where you should head for the night."
             menu:
                 "The Bar":
@@ -2896,7 +2896,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
             "You hear the soft sound of lips smacking each other... wait are they kissing?"
             "... yep... they are definitely kissing. Damn this is hot."
         elif the_person.sluttiness < 40:
-            the_person "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]"
+            the_person "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]."
     "Eventually they back away from each other."
     $ scene_manager.update_actor(mom, position = "stand4", display_transform = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2")
@@ -2989,7 +2989,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         showgirl_2 "Wow, you have your slut here, with you, but you want MY tits in your face? You're a sick fuck."
         "She stands back up and winks at you, then acts as if nothing happened."
     if showgirl_1 is cousin:
-        "You see [showgirl_1.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "You see [showgirl_1.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]."
         "She gives you a quick wink."
     showgirl_1 "Alright, lets get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")

@@ -32,7 +32,7 @@ label intro_sarah_tit_fuck(the_girl, the_location, the_object):
     the_girl "Mmm, I love when you touch me like this. They are so sensitive ever since they got bigger."
     "She reaches down and rubs your cock."
     the_girl "Want to put your cock between them again? It feels so good, I think I'm getting addicted to that feeling."
-    mc.name "Mmm, do it [the_girl.title]"
+    mc.name "Mmm, do it [the_girl.title]."
     "[the_girl.possessive_title] gets down on her knees. She starts to open up your pants."
     $ sarah_tit_fuck.redraw_scene(the_girl)
     "She takes her tits up in her hands and lifts them up, pressing them on either size of your shaft."

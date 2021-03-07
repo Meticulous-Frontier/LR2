@@ -116,7 +116,7 @@ label mom_breakfast_action_label_medium():
             return None
         "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
             mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"
-            "You get up from your chair and walk around behind [the_person.possessive_title!l]"
+            "You get up from your chair and walk around behind [the_person.possessive_title!l]."
             the_person "[the_person.mc_title]? What are you... oohhhh."
             "You put your hands on her shoulders and begin to massage them. She sighs as your hands begin to work on her tension."
             menu:
@@ -207,7 +207,7 @@ label mom_breakfast_action_label_medium():
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
             $ the_person.apply_planned_outfit()
             $ scene_manager.draw_scene()
-            "She grabs some cereal and sits at the table with you and [the_person.title]"
+            "She grabs some cereal and sits at the table with you and [the_person.title]."
             $ scene_manager.add_actor(lily, position = "sitting", display_transform = character_left_flipped)
             lily "Good morning! Thanks for the coffee mom!"
             the_person "Good... Good morning dear..."

@@ -96,7 +96,7 @@ label fetish_anal_staylate_event_label(the_person):
             mc.name "You're such a buttslut, [the_person.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]"
+            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA20
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
@@ -130,7 +130,7 @@ label fetish_anal_staylate_event_label(the_person):
             mc.name "You're such a buttslut, [the_person.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]"
+            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA21
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:

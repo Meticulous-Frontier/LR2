@@ -262,7 +262,7 @@ label ophelia_give_chocolate_label():
     $ the_person = salon_manager
     "You walk around the mall and find a candy store."
     if ophelia_get_num_chocolates_received() < 3:  #Only done this a couple of times or not at all
-        "You look around the store for quite some time, looking for the perfect set of dark chocolates for [the_person.title]"
+        "You look around the store for quite some time, looking for the perfect set of dark chocolates for [the_person.title]."
         "After several minutes, you find the right one. Perfect!"
     elif ophelia_get_num_chocolates_received() < 10:  #Getting to be a regular
         "You go to the section with the dark chocolates. You pick out [the_person.title]'s favorite."
@@ -544,7 +544,7 @@ label ophelia_blowjob_pics_review_label(the_person):
 label ophelia_revenge_date_plan_label(the_person):
     $ ex_name = ophelia_get_ex_name()
     $ the_person.draw_person(emotion = "happy")
-    "You step into the salon. No sooner have your eyes adjusted to the light then you see [the_person.title]"
+    "You step into the salon. No sooner have your eyes adjusted to the light then you see [the_person.title]."
     the_person "Ah! [the_person.mc_title]! Just the man I was hoping to see today."
     "A lump forms in your throat. You wonder what she is going to rope you into."
     the_person "What plans do you have for Sunday night?"
@@ -591,7 +591,7 @@ label ophelia_revenge_date_label():
         $ mc.change_location(mall_salon)
         $ mc.location.show_background()
     else:
-        "You hang around at the Salon until it is time for your date with [the_person.title]"
+        "You hang around at the Salon until it is time for your date with [the_person.title]."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person)
     "When you see her, you can't help but give her body your complete attention."
@@ -818,7 +818,7 @@ label ophelia_revenge_date_label():
 
 label ophelia_revenge_aftermath_label(the_person):
     $ the_person.draw_person()
-    "You step up to [the_person.title]"
+    "You step up to [the_person.title]."
     mc.name "Hello"
     the_person "Hey..."
     "There is a bit of an awkward silence."
@@ -1005,7 +1005,7 @@ label ophelia_choose_service_test_label():
     "[salon_manager.title] notices [the_person.title] with you."
     if the_person == candace:
         salon_manager "Oh! Hello again. I suppose you would make a good candidate for this..."
-        "[the_person.possessive_title] is looking around the salon, completely oblivious to your conversation with [salon_manager.title]"
+        "[the_person.possessive_title] is looking around the salon, completely oblivious to your conversation with [salon_manager.title]."
     else:
         salon_manager "Oh! This is perfect! Hi I'm [salon_manager.name]."
         the_person "[the_person.name], nice to meet you."
@@ -1049,7 +1049,7 @@ label ophelia_choose_service_test_label():
     salon_manager "Thanks again, both of you, for doing this. I think I'm going to move forward with adding the service to general customers!"
     salon_manager "From now on, if the girl wants me to, I'd be glad to give them the same treatment."
     mc.name "That sounds great. I'll definitely keep that in mind."
-    "You turn to [the_person.title]"
+    "You turn to [the_person.title]."
     mc.name "You can head back to work. I'm not sure if I'm going to head back right away."
     the_person "Okay! See you later."
     $ scene_manager.remove_actor(the_person)

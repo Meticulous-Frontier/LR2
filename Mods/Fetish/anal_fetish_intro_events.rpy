@@ -260,7 +260,7 @@ label anal_fetish_family_intro_label(the_person):
     $ the_person.arousal = 30
     $ the_person.draw_person(position = "standing_doggy")
     "As you walk into the room, you notice [the_person.possessive_title!l]. She is bent over and appears to be reading something on her phone."
-    mc.name "Hey [the_person.title]"
+    mc.name "Hey [the_person.title]."
     $ the_person.draw_person(position = "back_peek")
     "She quickly looks back at you."
     the_person "Oh hey [the_person.mc_title]."
@@ -500,7 +500,7 @@ label anal_fetish_mom_intro_label():
             return
     mc.name "A movie would be fun. I'll be right out."
     the_person "Great! I've got one picked out on Netflix. Make yourself comfortable on the couch, I'm just going to change into something more comfortable!"
-    mc.name "Sure thing [the_person.title]"
+    mc.name "Sure thing [the_person.title]."
     $ clear_scene()
     $ hall.show_background()
     "You grab a soda from the kitchen then head to the living room and sit down on the couch. You take a look at the movie that [the_person.possessive_title!l] has picked out."

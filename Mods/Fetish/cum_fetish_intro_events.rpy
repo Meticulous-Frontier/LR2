@@ -327,7 +327,7 @@ label cum_fetish_family_intro_label(the_person):
     mc.name "I know [the_person.title]. It's okay. You can be my secret cumslut."
     $ the_person.draw_person(position = the_person.idle_pose)
     "[the_person.possessive_title] slowly stands up and turns to you. You can see a tiny bit of your cum dribbling down her lip."
-    mc.name "I need to get going. Take care [the_person.title]"
+    mc.name "I need to get going. Take care [the_person.title]."
     "You say goodbye to [the_person.possessive_title!l] then leave her room. As you walk away, you can't help but smile."
     "Your serums have turned her into your cumslut."
     python:

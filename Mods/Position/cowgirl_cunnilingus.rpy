@@ -53,7 +53,7 @@ label scene_cowgirl_cunnilingus_1(the_girl, the_location, the_object):
     if the_girl.get_sex_goal() == "hate fuck":
         "[the_girl.title] is pushing herself down against your face, riding you roughly."
         "You can feel her hands run through your hair a bit. Then she grabs your hair and pulls. Pain shoots down your head."
-        the_girl "That's it, lick my cunt [the_girl.mc_title]"
+        the_girl "That's it, lick my cunt [the_girl.mc_title]."
         "You swing your hand around hard and spank her ass. Her hips involuntarily thrust against you when you strike her."
         $ the_girl.call_dialogue("sex_responses_oral")
         $ the_girl.change_arousal(5)

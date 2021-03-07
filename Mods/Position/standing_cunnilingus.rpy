@@ -55,7 +55,7 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
 label scene_standing_cunnilingus_1(the_girl, the_location, the_object):
     if the_girl.get_sex_goal() == "hate fuck":
         "[the_girl.title]'s hands are on the back of your head, pulling you against her as she rides you roughly."
-        the_girl "That's it, lick my cunt [the_girl.mc_title]"
+        the_girl "That's it, lick my cunt [the_girl.mc_title]."
         "You swing your hand around hard and spank her ass. Her hips involuntarily thrust against you when you strike her."
         $ the_girl.call_dialogue("sex_responses_oral")
         $ the_girl.change_arousal(5)

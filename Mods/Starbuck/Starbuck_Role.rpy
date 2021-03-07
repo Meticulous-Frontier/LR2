@@ -998,7 +998,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You walk over and start up the camera. You give her a nod to show her that it's running."
     the_person "Hello! This is [the_person.name], from [the_person.name]'s Sex Shop! Here to review another couple of products."
     the_person "Today, we are going to review a couple of products meant for couples! So today I've asked a friend to be here to help me review them..."
-    "You step into frame next to [the_person.possessive_title!l]"
+    "You step into frame next to [the_person.possessive_title!l]."
     the_person "This is [the_person.mc_title], and we are going to review some edible underwear by Skinworks, and some neat fuzzy handcuffs by PowerTrips Inc..."
     "[the_person.possessive_title] gives some of the details on the products."
     the_person "Ok, I guess we're ready to get started! Are you ready [the_person.mc_title]?"
@@ -2254,7 +2254,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         "[the_person_one.title] shifts in her seat a bit awkwardly."
         $ the_person_one.change_arousal(15)
         $ the_person_two.change_arousal(15)
-        the_person_one "So, how was your day [the_person_one.mc_title]"
+        the_person_one "So, how was your day [the_person_one.mc_title]."
 
         "You take a few moments to talk about how your day is going, before taking a sip of your tea. Wow that is really good. The flavor is light but crisp."
         mc.name "[the_person_two.title] this tea is excellent, where'd you get it from?"
@@ -2731,7 +2731,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
                     mc.name "Alright, let's replace that with something a little... meatier... shall we?"
                     $ the_person.draw_person(position = "sitting")
                     "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
-                    "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]"
+                    "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
                     the_person "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
                 else:   #People watch
                     the_person "Here they come! This is gonna be great!"
@@ -2747,7 +2747,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
                     "You can't wait to feel yourself slide into her tight rear end. You start to day dream a bit."
                     the_person "Alright, [the_person.mc_title], go ahead, I think we are ready for the demonstration."
                     "Hearing her mention you grabs your attention. You slide up behind her, your hands squeezing her pliant cheeks."
-                    "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]"
+                    "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
                     "She whimpers back at you."
                     the_person "Alright, lets give em a good show."
                     $ in_private = False
@@ -2775,7 +2775,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
                 mc.name "Alright, let's replace that with something a little... meatier... shall we?"
                 $ the_person.draw_person(position = "sitting")
                 "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
-                "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]"
+                "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
                 the_person "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
     else:
         the_person "Okay! Lets go!"
@@ -2798,7 +2798,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
         mc.name "Alright, let's replace that with something a little... meatier... shall we?"
         $ the_person.draw_person(position = "sitting")
         "[the_person.title] sits down on the swing. You get behind her and grab the ropes. Her ass already well lubed from her plug, she is ready for you."
-        "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]"
+        "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
         the_person "Oh fuck! Every time I think about the first time you fucked me on this thing I touch myself... fuck me good [the_person.mc_title]!"
 
     call fuck_person(the_person, private = in_private, start_position = SB_anal_swing, start_object = make_swing(), skip_intro = True) from _call_sex_description_SBA080

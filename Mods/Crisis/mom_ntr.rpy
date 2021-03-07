@@ -302,7 +302,7 @@ label mom_ntr_mod_action_label:
                             else:
                                 the_person "Oh... Please, [man_name], stop. You can't rape me like that!"
                                 man_name "Shut your cockhole, [the_person.name]. There's no way you can call this rape. You wanted it all along."
-                                "The sounds of [man_name]'s dick forcing its way in and out of [the_person.possessive_title!l]'s resistant slit and the impacts of his hips on her ass fill the room. Each thrust is punctuated with a cry of pain and anguish from [the_person.possessive_title!l]"
+                                "The sounds of [man_name]'s dick forcing its way in and out of [the_person.possessive_title!l]'s resistant slit and the impacts of his hips on her ass fill the room. Each thrust is punctuated with a cry of pain and anguish from [the_person.possessive_title!l]."
                                 "[man_name] grabs her hair and pulls her upwards."
                                 man_name "You love this, don't you? Admit it, slut! You're squeezing my dick like a teenage virgin!"
                                 the_person "Please, stop, [man_name]. Please, it hurts!"

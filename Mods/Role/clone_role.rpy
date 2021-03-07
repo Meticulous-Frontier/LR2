@@ -22,7 +22,7 @@ init 2 python:
 
 # Labels
 label clone_recall_label(the_person):
-    "You order [the_person.title] back to [dungeon.name]"
+    "You order [the_person.title] back to [dungeon.name]."
 
     $ the_person.change_location(dungeon)
 

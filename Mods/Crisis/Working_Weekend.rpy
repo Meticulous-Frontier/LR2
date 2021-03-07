@@ -203,7 +203,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             $ del person_two
 
         "Just Talk":
-            "While her offer is tempting, you decide to take the opportunity to learn a little more about [person_one.possessive_title]"
+            "While her offer is tempting, you decide to take the opportunity to learn a little more about [person_one.possessive_title]."
             mc.name "Sorry, I can't while I'm in the middle of this, but maybe you could stay and talk to me for a little while."
             "[person_one.possessive_title] is clearly disappointed, so you decide to keep the topic of conversation sexual to keep her interested."
             "What do you ask about?"
@@ -259,7 +259,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
             if not person_one.outfit.tits_available():    #If covered up, have her take her top off
                 person_one "Here... let me take this off. I bet that will help ease some of your stress."
                 $ the_clothing = person_one.outfit.get_upper_top_layer()
-                "[person_one.possessive_title] takes off her [the_clothing.name]"
+                "[person_one.possessive_title] takes off her [the_clothing.name]."
                 $ scene_manager.draw_animated_removal(person_one, the_clothing)
                 $ the_clothing = None
             "Your eyes wander down to [person_one.possessive_title]'s tits."

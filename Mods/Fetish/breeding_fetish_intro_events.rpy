@@ -770,7 +770,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ scene_manager = Scene()
-    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]"
+    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]."
     $ mc.having_text_conversation = the_person
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
@@ -891,10 +891,10 @@ label breeding_fetish_erica_intro_label():
         "As you start to pull your cock out, [the_person.possessive_title!l] reaches down and starts pulling her bottoms off."
         $ the_person.strip_outfit(exclude_upper = True)
     "You grab her hands and force them down at her sides. She looks at you longingly as your bare cock nears her cunt."
-    "You don't say a word, you just push forward, sliding yourself into her fetile young pussy."
+    "You don't say a word, you just push forward, sliding yourself into her fertile young pussy."
     $ the_person.change_arousal (20)
     $ mc.change_arousal(15)
-    the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]"
+    the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]."
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
     call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _erica_gets_breeding_fetish_01
     $ the_person.draw_person(position = "missionary")

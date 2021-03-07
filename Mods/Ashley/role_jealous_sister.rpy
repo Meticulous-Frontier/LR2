@@ -198,7 +198,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     "As you walk to the door, you see [jealous_sister.title] at the table, having a cup of coffee and some toast."
     jealous_sister "Bye [jealous_sister.mc_title], hope you had a good time..."
     "She gives you a wink."
-    mc.name "I definitely did. Take care [jealous_sister.title]"
+    mc.name "I definitely did. Take care [jealous_sister.title]."
     "You walk out the front door. Things in that place are crazy..."
     $ jealous_sister.reset_all_jealousy()
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day

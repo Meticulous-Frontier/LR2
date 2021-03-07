@@ -1421,7 +1421,7 @@ label candace_meet_doctor_candace_label():
             "You consider for a moment getting a nice couch for your office... "
             "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
             mc.name "Rest up, I'm going to get back to work."
-            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title!l]"
+            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title!l]."
         "Reject (disabled)":
             pass
     $ clear_scene()

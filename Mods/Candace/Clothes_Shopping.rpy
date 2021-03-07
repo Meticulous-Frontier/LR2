@@ -112,7 +112,7 @@ label candace_goes_clothes_shopping_label(the_person):
         the_person "God, that was fun! We should do that again sometime!"
         "You are surprised to admit it, but you actually had a lot of fun too."
         mc.name "Yeah I'd be up for doing that again sometime!"
-        "At the checkout line, you pay for the new clothes for [the_person.possessive_title!l]"
+        "At the checkout line, you pay for the new clothes for [the_person.possessive_title!l]."
         $ mc.business.change_funds(-100 * _return)
         the_person "You're sweet. Thanks for the shopping trip!"
     else:
@@ -143,7 +143,7 @@ label invite_to_clothes_shopping_label():
             the_person "Okay! I'll meet you there [the_person.mc_title]!"
         else:
             the_person "Oh! I suppose I could do that. You're buying though! I'll meet you there, [the_person.mc_title]."
-        "You hang out for a few minutes. Soon you see [the_person.title]"
+        "You hang out for a few minutes. Soon you see [the_person.title]."
         $ the_person.draw_person()
         the_person "Hey there! Thanks for offering! Let's see what we can find."
         "She browses through the racks of clothes and eventually finds a couple things she likes."
@@ -154,7 +154,7 @@ label invite_to_clothes_shopping_label():
             "You walk with [the_person.title] up to the checkout line."
             the_person "God, that was fun! We should do that again sometime!"
             mc.name "Yeah I'll let you know if I have the chance."
-            "At the checkout line, you pay for the new clothes for [the_person.possessive_title!l]"
+            "At the checkout line, you pay for the new clothes for [the_person.possessive_title!l]."
             $ mc.business.change_funds(-100 * _return)
             the_person "You're sweet. Thanks for the shopping trip!"
         else: # we didn't find anything

@@ -64,7 +64,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
             mc.name "You're such a buttslut, [the_girl.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
             "[the_girl.possessive_title] begs you not to stick it in her pussy."
             the_girl "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass please!"
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_girl.possessive_title]"
+            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_girl.possessive_title]."
     elif the_girl.arousal > 60:
         "You rub the tip of your penis against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. You rub your lubricated penis against her ass to help prepare her for your initial penetration."
         "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions"
@@ -119,7 +119,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
         mc.name "[the_girl.title]... I need to feel your skin!"
         while the_girl.outfit.get_upper_top_layer():    #If covered up, have her take her top off
             $ the_clothing = the_girl.outfit.get_upper_top_layer()
-            "You take off [the_girl.possessive_title]'s [the_clothing.name]"
+            "You take off [the_girl.possessive_title]'s [the_clothing.name]."
             $ the_girl.draw_animated_removal(the_clothing)
         $ the_clothing = None
 

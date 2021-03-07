@@ -53,7 +53,7 @@ label breeding_fetish_high_fertility_crisis_label():
         mc.name "Something you need tonight [the_person.title]?"
         the_person "Yeah... something like that!"
     else:
-        "You get a text on your phone. It's from [the_person.possessive_title!l]"
+        "You get a text on your phone. It's from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey. I need your help with something. I'm on my way over."
         $ mc.having_text_conversation = None
@@ -245,7 +245,7 @@ label breeding_fetish_happy_breeder_crisis_label():
             if the_person.has_large_tits():
                 mc.name "Why don't you put it between your tits for a while?"
                 "[the_person.possessive_title] smiles up at you."
-                the_person "Anything for you, [the_person.mc_title]"
+                the_person "Anything for you, [the_person.mc_title]."
                 "[the_person.possessive_title] looks up at you while she scoots closer to you, until her body is up against yours. She uses her hand to point your cock straight up while she moves it in position between her amazingly soft tits."
                 "Once in position, she uses her hands to push her tits together, squashing your prick in her heavenly soft tit-flesh."
                 "[the_person.possessive_title] starts to move up and down. Now and then when her tits are at the base of your dick she licks the sensitive tip."

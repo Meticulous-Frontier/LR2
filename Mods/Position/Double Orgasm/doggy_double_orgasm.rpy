@@ -12,7 +12,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
             if stealth_orgasm:  #You sly dog
                 "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
                 the_girl "Oh god, you are cumming so hard, I swear I can feel it splashing inside of me!"
-                "You cum in unison with [the_girl.title]"
+                "You cum in unison with [the_girl.title]."
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
                 "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock. A few drops of your cum start to drip out of her."

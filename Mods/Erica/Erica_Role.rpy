@@ -1727,7 +1727,7 @@ label erica_weekly_yoga_label(the_person):
                 yoga_assistant "Right..."
                 "[yoga_assistant.title] grabs the jug and leaves the room."
                 $ scene_manager.hide_actor(yoga_assistant)
-                "You turn to [the_person.title]"
+                "You turn to [the_person.title]."
                 mc.name "Thank you again for doing this. I really feel like this is a huge benefit for the company."
                 the_person "Of course! Glad to do it. I get the feeling from talking to the girls here that you are a great boss to work for, too!"
                 mc.name "Alright, I'll let you get to it. I'm going to try and get some work done, let me know if you need anything."
@@ -1786,7 +1786,7 @@ label erica_weekly_yoga_label(the_person):
             the_person "Sorry, I really need to get going."
             "As she starts to walk by you, she whispers in your ear."
             the_person "If you need help with that later, swing by the gym..."
-            "She walks off leaving you with [yoga_assistant.title]"
+            "She walks off leaving you with [yoga_assistant.title]."
             $ scene_manager.remove_actor(the_person)
             $ remaining_person = yoga_assistant
             # call erica_after_yoga_office_session_label(yoga_assistant) from _sarah_after_yoga_fun_01
@@ -1796,7 +1796,7 @@ label erica_weekly_yoga_label(the_person):
             yoga_assistant "Sorry, I really need to get going."
             "As she starts to walk by you, she whispers in your ear."
             yoga_assistant "If you need help with that, I'm sure we can find a private place after the workday starts..."
-            "She walks off leaving you with [the_person.title]"
+            "She walks off leaving you with [the_person.title]."
             $ scene_manager.remove_actor(yoga_assistant)
             $ remaining_person = the_person
             # call erica_after_yoga_office_session_label(the_person) from _erica_after_yoga_fun_01

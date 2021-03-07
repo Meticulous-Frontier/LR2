@@ -225,7 +225,7 @@ label fetish_serum_quest_intro_followup_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey! Meet me down in the lab!"
         $ mc.having_text_conversation = None
@@ -475,7 +475,7 @@ label fetish_serum_exhibition_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey! I have details on the new social program!"
         $ mc.having_text_conversation = None
@@ -500,7 +500,7 @@ label fetish_serum_anal_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey! I have details on the new anal program!"
         $ mc.having_text_conversation = None
@@ -525,7 +525,7 @@ label fetish_serum_cum_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey! I have details on the new semen program!"
         $ mc.having_text_conversation = None
@@ -550,7 +550,7 @@ label fetish_serum_breeding_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey! I have details on the new reproduction program!"
         $ mc.having_text_conversation = None
@@ -574,7 +574,7 @@ label fetish_serum_anal_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
@@ -599,7 +599,7 @@ label fetish_serum_cum_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
@@ -628,7 +628,7 @@ label fetish_serum_breeding_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None
@@ -653,7 +653,7 @@ label fetish_serum_exhibition_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]"
+        "You get a text message from [the_person.possessive_title!l]."
         $ mc.having_text_conversation = the_person
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.having_text_conversation = None

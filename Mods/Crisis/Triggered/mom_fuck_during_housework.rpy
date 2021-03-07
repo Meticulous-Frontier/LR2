@@ -34,7 +34,7 @@ label mom_fuck_during_housework_label(the_person):
     menu:
         "Spank her\n{color=#ffff00}{size=18}May increase submissiveness{/size}{/color}": #chance to increase her submissiveness based on if she orgasms and if she is currently suggestible.
             $ ass_desc = spanking_get_ass_description(the_person)
-            "The swaying of [the_person.title]'s ass is hypnotic. It is [ass_desc]."
+            "The swaying of [the_person.title]'s ass is hypnotic. It is [ass_desc]"
             mc.name "I don't mind you dressing like this, [the_person.title], but it is kind of naughty."
             "You step up behind her and start to run your hand along her hips."
             the_person "Ah, well, it definitely makes me feel kind of naughty..."

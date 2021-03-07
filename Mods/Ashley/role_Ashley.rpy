@@ -1010,10 +1010,10 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     "TODO: add serums to coffees here"
     $ mc.business.funds -= 15
     if the_person.is_girlfriend():
-        "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [the_person.title]"
+        "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [the_person.title]."
         $ mc.business.funds -= 5
     elif stephanie.is_girlfriend():
-        "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [stephanie.title]"
+        "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [stephanie.title]."
         $ mc.business.funds -= 5
     "You walk back to the table and give the girls their coffee."
     if the_person.is_girlfriend():
@@ -1025,7 +1025,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
         "You glance over at [stephanie.title]. A hint of jealousy crosses her face, but she quickly hides it."
         $ ashley_set_coffee_partner(the_person)
     elif stephanie.is_girlfriend():
-        stephanie "Ohh! Yum, that looks tasty [stephanie.mc_title]"
+        stephanie "Ohh! Yum, that looks tasty [stephanie.mc_title]."
         "[stephanie.possessive_title] spots your muffin. You slide into the booth next to her."
         $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .125, zoom = 1.25))
         $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.125, zoom = 0.75))
@@ -1482,17 +1482,17 @@ label ashley_clothes_shopping_label(the_person):
             "She looks pissed."
             $ the_person.change_love(-3)
             $ the_person.change_slut_temp(3)
-            $ the_person.jealous_change_score(3) #Add poinst to jealous score so ashley gets more desperate.
+            $ the_person.jealous_change_score(3) #Add points to jealous score so ashley gets more desperate.
         $ the_person.draw_person(position = "stand2")
         "You get yourself put back together."
         mc.name "I'm going to slip out."
-        the_person "Okay, I'll see you around [the_person.mc_title]"
+        the_person "Okay, I'll see you around [the_person.mc_title]."
         $ clear_scene()
         "You quietly exit the changing room."
     else:
         the_person "Thanks for the opinion. I'm going to go ahead and change back..."
         mc.name "I'm going to slip out."
-        the_person "Okay, I'll see you around [the_person.mc_title]"
+        the_person "Okay, I'll see you around [the_person.mc_title]."
         $ clear_scene()
         "You quietly exit the changing room."
 

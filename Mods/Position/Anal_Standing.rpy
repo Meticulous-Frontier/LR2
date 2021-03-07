@@ -24,7 +24,7 @@ init 1 python:
     SB_anal_standing.link_positions(doggy_anal, "transition_SB_anal_standing_doggy_anal")
 
 label intro_SB_anal_standing(the_girl, the_location, the_object):
-    "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]"
+    "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]."
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
     mc.name "That's it, [the_girl.title], I'm going to fuck your ass today."
     if the_girl.has_anal_fetish():
@@ -59,7 +59,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
             mc.name "You're such a buttslut, [the_girl.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
             "[the_girl.possessive_title] tries to push back against you and begins to beg."
             the_girl "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_girl.possessive_title]"
+            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_girl.possessive_title]."
     elif the_girl.arousal > 60:
         "You rub the tip of your penis against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. You rub your lubricated penis against her ass to help prepare her for your initial penetration."
         "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions"

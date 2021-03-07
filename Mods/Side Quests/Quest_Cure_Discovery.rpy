@@ -307,7 +307,7 @@ label quest_cure_discovery_patent_kept_label():
                 the_person "Yes sir!"
                 $ ceo_office.show_background()
                 $ the_person.draw_person()
-                "You hear a knock. You look up and see [the_person.possessive_title!l]"
+                "You hear a knock. You look up and see [the_person.possessive_title!l]."
                 the_person "You wanted to see me?"
                 mc.name "Yes. Come in, and lock the door behind you."
                 the_person "Oh my..."

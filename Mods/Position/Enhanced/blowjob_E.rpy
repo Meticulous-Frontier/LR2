@@ -430,7 +430,7 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
             "[the_girl.title] moves her head to the side so that your cum will miss her."
             menu:
                 "Let her off":
-                    "You cum onto the floor, missing [the_girl.possessive_title]"
+                    "You cum onto the floor, missing [the_girl.possessive_title]."
                     $ the_girl.change_stats(love = -the_girl.get_opinion_score("cum facials"), happiness = -the_girl.get_opinion_score("cum facials"))
                 "Pull her back":
                     "You grab your cock with one hand and her head with the other. You hold her head in place as you use your other hand to pump your cum over [the_girl.possessive_title]'s face."

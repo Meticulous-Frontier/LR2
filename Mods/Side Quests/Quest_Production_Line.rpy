@@ -307,7 +307,7 @@ label quest_production_line_after_raise_consult_label():
     "You hang up the phone."
     "Your serum batch size has increased by 1!"
     $ batch_size_increase(increase_amount = 1)
-    "A few minutes later, your phone is ringing again. Now it is [the_person.title]"
+    "A few minutes later, your phone is ringing again. Now it is [the_person.title]."
     mc.name "Hello?"
     the_person "Hey! Have a sec?"
     mc.name "Of course."

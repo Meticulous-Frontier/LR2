@@ -59,7 +59,7 @@ label late_for_work_action_label:
                 mc.name "Do you know what time we start here [the_person.title]?"
                 the_person "I am really sorry [the_person.mc_title]."
                 if (upper_clothing):
-                    mc.name "I don't care, next time be on time and cleanup your [upper_clothing.display_name]"
+                    mc.name "I don't care, next time be on time and cleanup your [upper_clothing.display_name]."
                 else:
                     mc.name "I don't care, next time be on time and make your tits presentable."
                 $ the_person.change_stats(obedience = 3, happiness = -2)

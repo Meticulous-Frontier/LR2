@@ -142,7 +142,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     the_girl "[the_girl.mc_title]... I think you've forgotten who is on top!"
                     "[the_girl.possessive_title] pushes her pussy back up against your face and begins to grind herself on your face."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
-                    the_girl "Mmm, that's it [the_girl.mc_title]"
+                    the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
                     "You eat her out for several seconds, as best as you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
@@ -241,7 +241,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     the_girl "Hey now, don't forget about me!"
                     "You open your eyes just in time to see her back her pussy down onto your face as she begins to grind herself on you."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
-                    the_girl "Mmm, that's it [the_girl.mc_title]"
+                    the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
                     "You eat her out for several seconds, as best as you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."

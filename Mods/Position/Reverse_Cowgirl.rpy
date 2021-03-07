@@ -195,7 +195,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         $ the_girl.cum_in_vagina()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
-        "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
+        "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]."
     elif the_girl.has_cum_fetish():
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
@@ -214,7 +214,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         $ the_girl.cum_in_vagina()
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
         "When you finish, [the_girl.possessive_title] slowly pulls up off you."
-        "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]"
+        "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]."
     elif the_girl.get_opinion_score("bareback sex") > 0:
         the_girl "That's it, shoot your seed in deep! I want to feel you flood my womb!"
         "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
@@ -332,7 +332,7 @@ label transition_missionary_SB_reverse_cowgirl(the_girl, the_location, the_objec
         the_girl "Oh! I love being on top. Let's do it!"
         $ the_girl.change_arousal(5)
     else:
-        the_girl "Sure, if that's what you want [the_girl.mc_title]"
+        the_girl "Sure, if that's what you want [the_girl.mc_title]."
     "You pull off of her and let her, then lay down on your back."
     mc.name "Why don't you ride me reverse cowgirl? Let me watch that amazing ass of yours."
     if the_girl.get_opinion_score("showing her ass") > 0:

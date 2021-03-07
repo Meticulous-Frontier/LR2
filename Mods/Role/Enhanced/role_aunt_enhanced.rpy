@@ -46,7 +46,7 @@ label aunt_drunk_cuddle_label():
     the_person "Hey [the_person.mc_title], would you get me a glass of water too? I've had a LOT of wine and water helps keep you from getting hungover..."
     mc.name "Sure thing."
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
-    "You pour two glasses of water and hand one to [the_person.possessive_title]"
+    "You pour two glasses of water and hand one to [the_person.possessive_title]."
     the_person "It has been so nice of your family to let me and Gabrielle stay here for a bit. I hope we haven't been too much of a bother?"
     mc.name "Of course not. You are family, and honestly it is nice having you close by."
     the_person "That's sweet of you to say. Well, goodnight!"

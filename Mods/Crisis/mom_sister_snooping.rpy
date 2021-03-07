@@ -91,7 +91,7 @@ label mom_sister_snooping_action_label():
         $ mom.change_arousal(15)
         "[mom.title] reaches over and puts her hands on [lily.possessive_title] now."
         mom "Look at you though, so perky and firm..."
-        "She pinches her nipples, prompting a squeal from [lily.title]"
+        "She pinches her nipples, prompting a squeal from [lily.title]."
         mom "And sensitive too!"
         $ lily.change_arousal(15)
         "You feel yourself getting hard watching [mom.title] and [lily.title] comparing their assets..."
@@ -119,7 +119,7 @@ label mom_sister_snooping_action_label():
         mc.name "Sure. I'd be glad to help."
         $ mom.change_stats(obedience = 3, happiness = 5)
         mom "Oh thank you honey. I really appreciate this."
-        "You quickly get undressed, your cock springing free of its confines, and step toward [lily.title] and [mom.title]"
+        "You quickly get undressed, your cock springing free of its confines, and step toward [lily.title] and [mom.title]."
         call start_threesome(lily, mom, start_position = Threesome_sixty_nine, position_locked = False) from _mom_sister_snooping_threesome_01
         $ scene_manager.update_actor(mom, display_transform = character_center_flipped, position = "missionary")
         $ scene_manager.update_actor(lily, display_transform = character_right, position = "missionary")

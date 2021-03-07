@@ -141,7 +141,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             "You decide they've been contained for too long."
             while not the_girl_2.outfit.get_upper_top_layer():    #If covered up, have her take her top off
                 $ the_clothing = the_girl_2.outfit.get_upper_top_layer()
-                "You take off [the_girl_2.title]'s [the_clothing.name]"
+                "You take off [the_girl_2.title]'s [the_clothing.name]."
                 $ the_girl_2.outfit.remove_clothing(the_clothing)
                 $ scene_manager.draw_scene()
             $ the_clothing = None
@@ -155,7 +155,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             $ top_clothing = None
             while the_girl_2.outfit.get_upper_top_layer():    #If covered up, have her take her top off
                 $ the_clothing = the_girl_2.outfit.get_upper_top_layer()
-                "You take off [the_girl_2.title]'s [the_clothing.name]"
+                "You take off [the_girl_2.title]'s [the_clothing.name]."
                 $ the_girl_2.outfit.remove_clothing(the_clothing)
                 $ scene_manager.draw_scene()
             $ the_clothing = None

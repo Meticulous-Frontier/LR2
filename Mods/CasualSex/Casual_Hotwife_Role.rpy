@@ -367,7 +367,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         if not the_person.outfit.tits_available():    #If covered up, have her take her top off
             the_person "Here I go... don't forget to take pictures!"
             $ the_clothing = the_person.outfit.get_upper_top_layer()
-            "[the_person.possessive_title] takes off her [the_clothing.name]"
+            "[the_person.possessive_title] takes off her [the_clothing.name]."
             $ the_person.draw_animated_removal(the_clothing)
             $ the_clothing = None
         else:
@@ -440,7 +440,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
             while not the_person.outfit.tits_available():
                 $ the_clothing = the_person.outfit.get_upper_top_layer()
-                "[the_person.possessive_title] takes off her [the_clothing.name]"
+                "[the_person.possessive_title] takes off her [the_clothing.name]."
                 $ the_person.draw_animated_removal(the_clothing)
                 $ the_clothing = None
             "With her tits completely exposed, she saunters back over to you then starts to get down on her knees."
@@ -751,7 +751,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ the_person.draw_person(position = "stand4")
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
     $ the_person.change_to_bedroom()
-    "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
+    "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]."
     the_person "Mmm, I can't wait. Let's go!"
     call fuck_person(the_person) from _call_casual_sex_mod_CSH050
     $ the_report = _return
@@ -839,7 +839,7 @@ label hotwife_greetings(the_person):
             $ add_hotwife_ghost_action(the_person)
             return
         if the_person.event_triggers_dict.get("hotwife_progress", 0) >= 2:
-            the_person "Hey there [the_person.mc_title]"
+            the_person "Hey there [the_person.mc_title]."
             the_person "You want to umm, you know, meet me in the back? I'm sure that's why you're here..."
         else:
             the_person "Hey there!"

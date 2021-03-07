@@ -812,7 +812,7 @@ label genius_cum_vagina(the_person):
 
     if the_person.wants_creampie():
         if the_person.event_triggers_dict.get("preg_knows", False):
-            the_person "Mmm, your cum is so nice and warm. I love it when you fill me up [the_person.mc_title]"
+            the_person "Mmm, your cum is so nice and warm. I love it when you fill me up [the_person.mc_title]."
             "She sighs happily."
 
         elif the_person.on_birth_control:

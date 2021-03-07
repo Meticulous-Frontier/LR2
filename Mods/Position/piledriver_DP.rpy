@@ -23,7 +23,7 @@
         # piledriver_DP.link_positions(missionary,"transition_piledriver_DP_missionary")
 
 label intro_piledriver_DP(the_girl, the_location, the_object):
-    "You grab your strap-on from your bag, then turn to [the_girl.title]"
+    "You grab your strap-on from your bag, then turn to [the_girl.title]."
     mc.name "[the_girl.title], I want you to lie down for me. I'm going to fuck your pussy and your ass."
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."

@@ -620,11 +620,11 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif the_person.outfit.vagina_visible():
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
         $ person_choice.change_slut_temp(3)
-        person_choice "Uh...right, what can I do for you, [person_choice.mc_title]"
+        person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
         "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
         $ person_choice.change_slut_temp(1)
-        person_choice "Oh...what can I do for you, [person_choice.mc_title]"
+        person_choice "Oh...what can I do for you, [person_choice.mc_title]."
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
@@ -1306,7 +1306,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
         the_HR_dir "She is resting for now. It would probably be best to leave her to rest, but if you want you can go and see her."
     else:
         the_HR_dir "I believe the attempt was successful. I have no indication that she experienced any side effects."
-        mc.name "Excellent. Good work [the_HR_dir.title]"
+        mc.name "Excellent. Good work [the_HR_dir.title]."
         the_HR_dir "She is resting for now, but before I left she asked to see you. It's up to you if you want to go see her."
     mc.name "Thank you. I'll consider it. That'll be all for now."
     $ scene_manager.remove_actor(the_HR_dir)
