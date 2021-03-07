@@ -229,8 +229,7 @@ init -1 python:
         person.event_triggers_dict["nano_bots_f"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+        if renpy.random.randint(0,100) < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person):
@@ -260,8 +259,7 @@ init -1 python:
         person.event_triggers_dict["nano_bots_a"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+        if renpy.random.randint(0,100) < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
@@ -303,8 +301,7 @@ init -1 python:
         person.event_triggers_dict["nano_bots_b"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5):
+        if renpy.random.randint(0,100) < 10 + (tier * 5):
             person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
             person.change_happiness(1, add_to_log = True)
@@ -355,8 +352,7 @@ init -1 python:
         person.event_triggers_dict["nano_bots_c"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+        if renpy.random.randint(0,100) < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
@@ -400,7 +396,6 @@ init -1 python:
         person.event_triggers_dict["nano_bots_e"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 person.change_slut_temp(1, add_to_log = True)
