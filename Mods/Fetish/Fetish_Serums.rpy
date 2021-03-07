@@ -101,9 +101,8 @@ init -1 python:
             return False
 
         if person is mom:
-            if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
-                return True
+            mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
+            return True
         elif person is lily:
             lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
             return True
@@ -112,21 +111,18 @@ init -1 python:
         elif person is cousin and False:
             pass
         elif person is stephanie:
-            if breeding_fetish_stephanie_intro not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(breeding_fetish_stephanie_intro)
-                return True
+            mc.business.mandatory_crises_list.append(breeding_fetish_stephanie_intro)
+            return True
         elif person is emily and False:
             pass
         elif person is christina and False:
             pass
         elif person is starbuck:
-            if breeding_fetish_starbuck_intro not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(breeding_fetish_starbuck_intro)
-                return True
+            mc.business.mandatory_crises_list.append(breeding_fetish_starbuck_intro)
+            return True
         elif person is sarah:
-            if breeding_fetish_sarah_intro not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(breeding_fetish_sarah_intro)
-                return True
+            mc.business.mandatory_crises_list.append(breeding_fetish_sarah_intro)
+            return True
         elif person is salon_manager and False:
             pass
         elif person is erica and erica_get_progress() >= 4:
