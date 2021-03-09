@@ -412,7 +412,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         $ the_person.draw_person (position = "stand2")
         "[the_person.title] stands up. You hand her back her phone."
         the_person "Wow... well... I guess there's no going back now? I guess I'll go ahead and send him some of these..."
-        "The gets close to you."
+        "She gets closer to you."
         the_person "Well, no matter what happens tonight, thanks for your help! If all goes well... maybe we can do this again."
         mc.name "Yeah I mean... if it makes your hubby happy for you to give me blowjobs... I GUESS I can help out..."
         "She laughs and punches you in the arm."
