@@ -27,19 +27,16 @@ label enhanced_special_training_crisis_label():
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     show screen person_info_ui(the_person)
     "You get a text  from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "[the_person.mc_title], I've just gotten word about a training seminar going on right now a few blocks away. I would love to take a trip over and see if there is anything I could learn."
     the_person "There's a sign up fee of $500. If you can cover that, I'll head over right away."
     if the_person.effective_sluttiness() >= 20:
         the_person "I'll personally repay you for it later..."
-    $ mc.having_text_conversation = None
     menu:
         "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Costs: $500{/size}{/color}" if mc.business.funds >= 500:
             "You type up a response."
-            $ mc.having_text_conversation = the_person
             mc.name "That sounds like a great idea. I'll call and sort out the fee, you start heading over."
             the_person "Understood, thank you sir! What would you like me to focus on?"
-            $ mc.having_text_conversation = None
 
             call screen enhanced_main_choice_display(build_menu_items(build_seminar_improvement_menu(the_person)))
             if _return != "None":
@@ -56,11 +53,10 @@ label enhanced_special_training_crisis_label():
 
         "Tell her to stay at work":
             "You type up a response."
-            $ mc.having_text_conversation = the_person
             mc.name "I'm sorry [the_person.title], but there aren't any extra funds in the budget right now."
             the_person "Noted, maybe some other time then."
-            $ mc.having_text_conversation = None
 
+    $ mc.end_text_convo()
     return
 
 label return_from_seminar_action_label(the_person):

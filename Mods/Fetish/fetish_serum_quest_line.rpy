@@ -171,11 +171,11 @@ init 3 python:
 label fetish_serum_quest_intro_label():
     $ the_person = mc.business.head_researcher
     $ mc.business.event_triggers_dict["fetish_serum_contact"] = the_person.identifier
-    $ mc.having_text_conversation = the_person
     "As you are going about your daily business, your head researcher messages you."
+    $ mc.start_text_convo(the_person)
     the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we meet up?"
     mc.name "Sure, meet me in my office."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ ceo_office.show_background()
     $ the_person.draw_person()
     "A few minutes later, [the_person.title] is standing at your door."
@@ -226,9 +226,9 @@ label fetish_serum_quest_intro_followup_label():
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey! Meet me down in the lab!"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -476,9 +476,9 @@ label fetish_serum_exhibition_label():
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new social program!"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -501,9 +501,9 @@ label fetish_serum_anal_label():
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new anal program!"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -526,9 +526,9 @@ label fetish_serum_cum_label():
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new semen program!"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -551,9 +551,9 @@ label fetish_serum_breeding_label():
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new reproduction program!"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -575,9 +575,9 @@ label fetish_serum_anal_warning_label():
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -600,9 +600,9 @@ label fetish_serum_cum_warning_label():
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -629,9 +629,9 @@ label fetish_serum_breeding_warning_label():
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
@@ -654,9 +654,9 @@ label fetish_serum_exhibition_warning_label():
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()

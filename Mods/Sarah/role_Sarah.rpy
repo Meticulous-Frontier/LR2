@@ -2066,11 +2066,11 @@ label Sarah_arrange_threesome_label(the_person):
 label Sarah_initial_threesome_label():
     if sarah.event_triggers_dict.get("initial_threesome_arranged", False) == False:
         "You get a text from [sarah.possessive_title]."
-        $ mc.having_text_conversation = sarah
+        $ mc.start_text_convo(sarah)
         sarah "Hey, are we still on for tonight?"
         mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, It'll be ready next week."
         sarah "Okay..."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         $ sarah.change_stats(happiness = -10, love = -3)
         $ add_sarah_initial_threesome_action()
         return
@@ -2085,9 +2085,9 @@ label Sarah_initial_threesome_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You make sure your bedroom is nice and tidy. Soon you get a text on your phone."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     sarah "Hey, I'm here."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You head to the front door and invite her in."
     $ scene_manager.add_actor(sarah)
     "You head back to your bedroom and she sits on your bed."
@@ -2186,15 +2186,13 @@ label Sarah_ask_for_baby_label():
     $ mc.location.show_background()
     $ scene_manager = Scene()
     "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
     the_person "Hell yeah! I'll bring some stuff over."
-    $ mc.having_text_conversation = None
     "About 20 minutes later she texts you."
-    $ mc.having_text_conversation = the_person
     the_person "Hey, I'm here! Come let me in!"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You head to your front door and open it."
     "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")

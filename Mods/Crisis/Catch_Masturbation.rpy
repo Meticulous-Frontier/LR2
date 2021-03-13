@@ -187,12 +187,12 @@ label SB_caught_masturbating_crisis_label():
                             "Thanks for the show!"
                             "You finish it with your initials and leave it next to her computer monitor."
                             "Half an hour later while you are back into your work, you get a text message from [the_person.possessive_title!l]."
-                            $ mc.having_text_conversation = the_person
+                            $ mc.start_text_convo(the_person)
                             if the_person.effective_sluttiness() > 60:
                                 the_person "Next time join in!!!"
                             else :
                                 the_person ";)"
-                            $ mc.having_text_conversation = None
+                            $ mc.end_text_convo()
 
                 else: #Player gets caught
                     "Straining to get a better a view, for a brief moment you lose your focus. You accidentally drop a pen you were holding onto and it clatters loudly across the floor."

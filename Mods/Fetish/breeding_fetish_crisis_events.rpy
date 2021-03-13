@@ -54,17 +54,13 @@ label breeding_fetish_high_fertility_crisis_label():
         the_person "Yeah... something like that!"
     else:
         "You get a text on your phone. It's from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey. I need your help with something. I'm on my way over."
-        $ mc.having_text_conversation = None
         "Hmm, she's inviting herself over? You text her back."
-        $ mc.having_text_conversation = the_person
         mc.name "Ok, text me when you get here."
-        $ mc.having_text_conversation = None
         "A few minutes later, she texts you again."
-        $ mc.having_text_conversation = the_person
         the_person "I'm here! Let me in!"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "You go out to your front door and open it."
         $ the_person.draw_person()
         the_person "Hey! Let's go to your room."

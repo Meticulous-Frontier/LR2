@@ -2666,10 +2666,10 @@ label starbuck_anal_fetish_masturbate(alert = False):
     "You see the obvious spike on the chart now as her heart rate subsides. The plug registers that it is now back in place and not being used for masturbation."
     "After a few seconds you get a text message from [the_person.possessive_title!l]."
     #TODO picture of her bent over
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "That felt good! You should come visit me soon though... get yourself some of this!"
-    $ mc.having_text_conversation = None
     "She attached a picture of herself, bent over and showing her ass to you."
+    $ mc.end_text_convo()
     return
 
 label starbuck_anal_fetish_request(alert = False):

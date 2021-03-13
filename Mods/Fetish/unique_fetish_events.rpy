@@ -35,10 +35,10 @@ label fetish_stephanie_first_fetish_label(the_person):
         mc.name "Sure, follow me to my office."
     else:
         "You get a text message from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
         mc.name "Sure, meet me in my office."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
 
     $ mc.change_location(office)
     $ ceo_office.show_background()

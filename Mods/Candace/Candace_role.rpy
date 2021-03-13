@@ -1110,9 +1110,9 @@ label candace_begin_cure_research_label(the_person):
 label candace_anti_bimbo_serum_label():
     $ the_person = mc.business.head_researcher
     "You get a text from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey! Meet me in your office ASAP!"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ the_person.draw_person(position = "sitting")
     $ ceo_office.show_background()
     "You quickly head to your office and find [the_person.possessive_title!l] sitting behind your desk with her feet up."

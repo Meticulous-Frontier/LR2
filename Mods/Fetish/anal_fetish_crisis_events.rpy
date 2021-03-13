@@ -43,10 +43,10 @@ label aggressive_anal_fetish_employee_label():
     if the_person is None:
         return
     "You get a text message from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, I really need your help with something. Can you meet me in your office really quick?"
     mc.name "Sure, I'll meet you there in five."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ mc.change_location(office)
     $ ceo_office.show_background()
     "You step into your office. [the_person.possessive_title] isn't there yet so you sit down at your desk."

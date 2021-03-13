@@ -730,6 +730,40 @@ label cougar_flirt_response(the_person):
             the_person "Oh [the_person.mc_title], do you think I look good?"
     return
 
+label cougar_flirt_response_text(the_person):
+    mc.name "Hey [the_person.title]. Hope you're doing well."
+    mc.name "I was thinking of you and wanted to talk."
+    "There's a brief pause, then she texts back."
+    if the_person.has_role(affair_role):
+        the_person "If you were here we could do more than just talk."
+        the_person "I hope you don't make me wait too long to see you again."
+        mc.name "It won't be long. Promise."
+
+    elif the_person.has_role(girlfriend_role):
+        the_person "It's sweet of you to think of me. I hope we can see each other soon."
+        the_person "I want to spend more time with you in person. Texting isn't the same."
+        mc.name "It won't be long, I promise."
+
+    if the_person.love < 20 and not the_person.relationship == "Single":
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        the_person "Make it quick [the_person.mc_title]. My [so_title] is watching me."
+
+    elif the_person.love < 40:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Are you horny young man? What did you want to talk about?"
+        else:
+            the_person "Oh, that's nice of you to say."
+            the_person "What did you want to talk to me about."
+
+    else:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Mhmm, want to tell me about the dirty things you were thinking about me?"
+            the_person "That would be something fun to talk about."
+        else:
+            the_person "It's sweet of you to be thinking of me."
+            the_person "I'd love to chat, what would you like to talk about?"
+    return
+
 label cougar_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:

@@ -21,7 +21,7 @@ label sister_phone_crisis_action_label:
         $ lowest_stat = lily.love
 
     "While you're going about your day you get a text from [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     if lowest_stat >= 100:
         #Both love and sluttiness are very high, she sends you super slutty selfies and says she can't wait till you come home, fuck her, and make her your girl.
         $ ran_num = renpy.random.randint(1,3) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
@@ -29,9 +29,7 @@ label sister_phone_crisis_action_label:
             if mc.business.is_weekend():
                 $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output =  True))
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
-                $ mc.having_text_conversation = None
                 "Her first message is a selfie of herself lying down on your bed in lingerie."
-                $ mc.having_text_conversation = the_person
                 the_person "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title!l] should."
             else:
                 the_person "It's so hard not to talk about you at school. The other girls are gossiping and I just want to tell them how good it feels when you try and breed me..."
@@ -41,16 +39,12 @@ label sister_phone_crisis_action_label:
             $ the_person.strip_outfit(delay = 0)
             the_person "Hi [the_person.mc_title], I hope I'm not interrupting your busy work day. This is just a quick reminder..."
             $ the_person.draw_person(emotion = "happy")
-            $ mc.having_text_conversation = None
             "You get a selfie from [the_person.possessive_title!l] naked in front of her bedroom mirror."
-            $ mc.having_text_conversation = the_person
             the_person "That [the_person.possessive_title!l] wants to feel you inside her tonight. Don't stay out too late!"
         else:
             $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output = True))
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
-            $ mc.having_text_conversation = None
             "[the_person.possessive_title] sends you a picture of herself sitting on her knees wearing some lingerie."
-            $ mc.having_text_conversation = the_person
             the_person "I can't wait to see you. So I can suck your big dick, like the good little cocksucker that I am."
 
     elif lowest_stat >= 80:
@@ -61,17 +55,14 @@ label sister_phone_crisis_action_label:
                 the_person "I'm here at home and wishing it was you could help me take these pictures..."
                 $ the_person.strip_outfit(delay = 0)
                 $ the_person.draw_person(position = "standing_doggy")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a selfie her bedroom naked and bent over her bed."
             else:
                 the_person "I'm stuck here at school and all I can think about is you. Wish you were here..."
                 $ the_person.strip_outfit(delay = 0)
                 $ the_person.draw_person(position = "standing_doggy")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a selfie of herself in the school bathroom, naked and bending over the sink."
 
         else:
-            $ mc.having_text_conversation = the_person
             if mc.business.is_weekend():
                 the_person "I know it shouldn't, but thinking about you gets me so wet. You've shaped me into a new girl."
             else:
@@ -85,52 +76,42 @@ label sister_phone_crisis_action_label:
                 the_person "I was just about to get in the shower and I thought you might like a peek. Love you [the_person.mc_title]!"
                 $ the_person.strip_outfit_to_underwear(delay = 0)
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a picture of herself stripped down in front of her bedroom mirror."
 
             else:
                 the_person "I thought you might be stressed so I snuck away from school to take this for you."
                 $ the_person.strip_outfit_to_underwear(delay = 0)
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a picture of herself stripped down in the park."
-                $ mc.having_text_conversation = the_person
                 the_person "I've got to get back to class. I hope nobody noticed me gone!"
 
         elif ran_num == 2:
             the_person "I thought you might enjoy this ;)"
             $ the_person.strip_outfit(delay = 0)
             $ the_person.draw_person(emotion = "happy")
-            $ mc.having_text_conversation = None
             "[the_person.possessive_title] sends you a picture of herself stripped naked in front of her bathroom mirror."
         elif ran_num == 3:
             the_person "I've been trying on underwear all day. Would you like a peek?"
 
-            $ mc.having_text_conversation = None
             "[the_person.possessive_title] doesn't wait for a reply and starts sending selfies."
             python:
                 for i in __builtin__.range(3):
                     the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output = True))
                     the_person.draw_person(emotion = "happy")
                     renpy.pause(2)
-            $ mc.having_text_conversation = the_person
             the_person "I hope you think [the_person.possessive_title!l] looks sexy in her underwear ;)"
         else:
             $ the_person.strip_outfit(exclude_lower = True, delay = 0)
             if mc.business.is_weekend():
                 the_person "I'm so glad it's the weekend, I can finally let these girls out..."
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 "She sends you a selfie from the kitchen with her top off."
-                $ mc.having_text_conversation = the_person
                 the_person "I hope your day is going well, love you!"
 
             else:
                 the_person "I think I'd be much more popular here at school if I was allowed to dress like this..."
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 "She sends you a selfie from her school bathroom with her top off."
-                $ mc.having_text_conversation = the_person
                 the_person "Oh well, at least I know you appreciate it. I need to get back to class, see you at dinner!"
 
     elif lowest_stat >= 40:
@@ -143,7 +124,6 @@ label sister_phone_crisis_action_label:
                 $ the_person.outfit.remove_random_upper(top_layer_first = True)
 
             $ the_person.draw_person(emotion = "happy")
-            $ mc.having_text_conversation = None
             if mc.business.is_weekend():
                 "[the_person.possessive_title] sends you a selfie without her shirt on. The background looks like her bedroom."
             else:
@@ -157,12 +137,10 @@ label sister_phone_crisis_action_label:
             if mc.business.is_weekend():
                 the_person "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title!l] is a cool person to hang out with!"
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a selfie from her bedroom without her shirt on."
             else:
                 the_person "I'm busy here at school but I really wish I could be spending time with you instead. Do you think I'm pretty enough to spend time with ;)"
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it's taken in the bathroom of her school."
 
         else:
@@ -171,19 +149,15 @@ label sister_phone_crisis_action_label:
                 $ the_clothing.colour[3] = the_clothing.colour[3] * 0.7 #It's translucent.
                 the_person "It looks like my [the_clothing.name] didn't like being in the wash, it's gone all see-through."
                 $ the_person.draw_person(emotion = "happy")
-                $ mc.having_text_conversation = None
                 if the_clothing.underwear:
                     "You get a selfie from [the_person.possessive_title!l] wearing a slightly transparent bra."
                 else:
                     "You get a selfie from [the_person.possessive_title!l] wearing a slightly transparent top."
-                $ mc.having_text_conversation = the_person
                 the_person "Oh well, I can still wear it when I'm doing chores around the house. Hope your day is going better, love you!"
             else:
                 the_person "I've looked everywhere, but I just can't find my favorite bra!"
                 $ the_person.draw_person(emotion = "default")
-                $ mc.having_text_conversation = None
                 "[the_person.possessive_title] sends you a short video of herself walking around your home. Her bare tits bounce with each step."
-                $ mc.having_text_conversation = the_person
                 the_person "You don't happen to know where it is, do you? I'm wandering around looking for it and it's getting chilly!"
             $ the_clothing = None
 
@@ -211,7 +185,6 @@ label sister_phone_crisis_action_label:
         elif ran_num == 4:
             the_person "I'm always sending selfies to my friends, so I hope you like me sending them to you too!"
             $ the_person.draw_person(emotion = "happy")
-            $ mc.having_text_conversation = None
             if mc.business.is_weekend():
                 "[the_person.possessive_title] sends you a selfie she took in her bedroom."
             else:
@@ -219,7 +192,6 @@ label sister_phone_crisis_action_label:
         else:
             the_person "All your hard work has inspired me [the_person.mc_title], I'm going out for a walk to stay in shape!"
             $ the_person.draw_person(emotion = "happy")
-            $ mc.having_text_conversation = None
             "[the_person.possessive_title] sends you a short video she took of herself outside. She's keeping up a brisk walk and seems slightly out of breath."
             if not the_person.outfit.wearing_bra():
                 if the_person.has_large_tits():
@@ -239,10 +211,9 @@ label sister_phone_crisis_action_label:
 
         else:
             the_person "Hi [the_person.mc_title], I'm just checking in to make sure you're doing okay."
-            $ mc.having_text_conversation = None
             "It's so sweet of her to think of you."
 
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ the_person.apply_planned_outfit()
     $ clear_scene()
     return

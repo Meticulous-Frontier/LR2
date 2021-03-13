@@ -341,9 +341,9 @@ label cum_fetish_generic_intro_label(the_person):
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
     "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "I'm here... Should I just knock on the door?"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ hall.show_background()
     "You drag yourself out of bed and stumble out to the front hall. You move to a window and peek out at your front door."
     $ the_person.draw_person(emotion = "happy")

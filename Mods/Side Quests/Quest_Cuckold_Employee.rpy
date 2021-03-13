@@ -656,14 +656,12 @@ label quest_cuckold_employee_after_window_label():
 
     if the_person.is_pregnant():#Success
         "You get a text message from [the_person.title]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey bull! I was supposed to start my period a couple of days ago, but I haven't. Just thought you might find that interesting ;)"
-        $ mc.having_text_conversation = None
         "Oh boy, a missed period is a good sign! You wonder if your seed is growing inside of her..."
-        $ mc.having_text_conversation = the_person
         the_person "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         mc.name "I'll make time to breed you again cow. Be prepared to receive my potent seed."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         $ quest_cuckold_employee().set_quest_flag(91)
         $ mc.business.add_mandatory_crisis(quest_cuckold_employee_knocked_up)
@@ -671,11 +669,11 @@ label quest_cuckold_employee_after_window_label():
 
     else:
         "You get a text message from [the_person.title]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey... just wanted to let you know I just started my period. I guess it didn't take."
         mc.name "We can try again in a few weeks."
         the_person "Hmm... yeah, maybe..."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "Sounds like she might be having second thoughts..."
         $ quest_cuckold_employee().set_quest_flag(49)
         $ the_person.add_unique_on_talk_event(quest_cuckold_employee_reconsider)
@@ -697,9 +695,9 @@ label quest_cuckold_employee_reconsider_label(the_person):
 label quest_cuckold_employee_knocked_up_label():
     $ the_person = quest_cuckold_employee_get_target()
     "You get a text message from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey! I need to see you in your office, ASAP!"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ mc.change_location(office)
     $ ceo_office.show_background()
     $ the_person.draw_person(position = "stand4")

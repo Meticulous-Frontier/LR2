@@ -214,7 +214,7 @@ label quest_production_line_intro_label(the_person):
 label quest_production_line_coffee_reminder_label():
     $ the_person = quest_production_line_get_target()
     "You receive a text message on your phone."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey [the_person.mc_title], don't forget to meet my dad in the mall."
     if mc.location == mall:
         mc.name "Thanks, I'm already at the mall."
@@ -222,7 +222,7 @@ label quest_production_line_coffee_reminder_label():
         mc.name "Thanks, I'm going over there right now."
         $ mc.change_location(mall)
         $ mc.location.show_background()
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "If you are going to go meet with the chemist, go to the business meeting."
     $ quest_production_line().set_quest_flag(21)
     $ mc.business.add_mandatory_crisis(quest_production_line_coffee_miss)

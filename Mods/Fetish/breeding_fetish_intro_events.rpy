@@ -569,10 +569,10 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
     else:
         if the_person.event_triggers_dict.get("is_bimbo", False):
             "You get a text message from [the_person.possessive_title!l]."
-            $ mc.having_text_conversation = the_person
+            $ mc.start_text_convo(the_person)
             the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
             mc.name "Sure, meet me in my office."
-            $ mc.having_text_conversation = None
+            $ mc.end_text_convo()
             $ mc.change_location(office)
             $ ceo_office.show_background()
             $ scene_manager = Scene()
@@ -596,10 +596,10 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 mc.name "Sure, follow me to my office."
             else:
                 "You get a text message from [the_person.possessive_title!l]."
-                $ mc.having_text_conversation = the_person
+                $ mc.start_text_convo(the_person)
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
                 mc.name "Sure, meet me in my office."
-                $ mc.having_text_conversation = None
+                $ mc.end_text_convo()
 
             $ mc.change_location(office)
             $ ceo_office.show_background()
@@ -689,13 +689,11 @@ label breeding_fetish_nora_intro_label():
 label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     $ the_person = starbuck
     "You get a text message from [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, do you think you could help me close up the shop tonight? I have a few things I need help with."
-    $ mc.having_text_conversation = None
     "You consider it. You don't have much else going on right now, so you decide to agree."
-    $ mc.having_text_conversation = the_person
     mc.name "Sure, I'll be over shortly."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You make your way over to the sex shop."
     $ mc.change_location(sex_store)
     $ mc.location.show_background()
@@ -771,15 +769,13 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ mc.location.show_background()
     $ scene_manager = Scene()
     "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
     the_person "Hell yeah! I'll bring some stuff over."
-    $ mc.having_text_conversation = None
     "About 20 minutes later she texts you."
-    $ mc.having_text_conversation = the_person
     the_person "Hey, I'm here! Come let me in!"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You head to your front door and open it."
     "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -840,15 +836,14 @@ label breeding_fetish_erica_intro_label():
     $ the_person.fertility_percent = 20.0
 
     "You get a text message. It's from [the_person.title]."
-    $ mc.having_text_conversation = the_person
-    $ mc.having_text_conversation = None
+    $ mc.start_text_convo(the_person)
     if the_person.is_girlfriend():
         the_person "Hey! Can you come over? It's supposed to be cold out and it would nice to have you help keep my bed warm... Plus I kinda want to talk to you about something!"
     else:
         the_person "Hey... Can you come over tonight? I have something I need to talk to you about..."
     "You don't really have anything going on, so you text her back."
     mc.name "Sure, I'm on my way over."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
 
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()

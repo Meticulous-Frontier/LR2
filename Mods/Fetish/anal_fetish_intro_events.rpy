@@ -666,9 +666,9 @@ label anal_fetish_lily_intro_label():
         return
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
     "As you are finishing up with work for the day, you get a text on your phone. It is from Lily, [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey [the_person.mc_title]! Can you do me a favor? Meet me at the mall when you get off work. I need your help with something..."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You let her know you'll be there. You quickly finish up with your work and head over to the mall."
     $ mall.show_background()
     "When you get to the mall, you look around for a minute, then spot [the_person.title]. She waves to you then comes running over to you, giving you a big hug."
@@ -801,10 +801,10 @@ label anal_fetish_stephanie_intro_label():
     else:
         if the_person.event_triggers_dict.get("is_bimbo", False):
             "You get a text message from [the_person.possessive_title!l]."
-            $ mc.having_text_conversation = the_person
+            $ mc.start_text_convo(the_person)
             the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
             mc.name "Sure, meet me in my office."
-            $ mc.having_text_conversation = None
+            $ mc.end_text_convo()
             $ mc.change_location(office)
             $ ceo_office.show_background()
             $ scene_manager = Scene()
@@ -828,10 +828,10 @@ label anal_fetish_stephanie_intro_label():
                 mc.name "Sure, follow me to my office."
             else:
                 "You get a text message from [the_person.possessive_title!l]."
-                $ mc.having_text_conversation = the_person
+                $ mc.start_text_convo(the_person)
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
                 mc.name "Sure, meet me in my office."
-                $ mc.having_text_conversation = None
+                $ mc.end_text_convo()
 
             $ mc.change_location(office)
             $ ceo_office.show_background()
@@ -942,9 +942,9 @@ label anal_fetish_starbuck_intro_label():
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
 
     "You get a text message from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey partner! I was just closing up the shop, butt craving something a little more real than this... want to swing by?"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = get_random_ass_position())
     "She attached a picture. It looks like she is bending over her counter. Between her ass cheeks you spy a good sized glass butt plug!"

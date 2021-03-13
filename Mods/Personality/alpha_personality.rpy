@@ -733,6 +733,37 @@ label alpha_flirt_response(the_person):
             the_person "Well, I do look good, don't I [the_person.mc_title]?"
     return
 
+label alpha_flirt_response_text(the_person):
+    mc.name "Hey [the_person.title]. Hope you're doing well."
+    mc.name "I was thinking of you and wanted to talk."
+    "There's a brief pause, then she texts back."
+    if the_person.has_role(affair_role):
+        the_person "Next time, come visit me, so we could do more than just talk."
+        the_person "And don't make me wait too long, I might find someone else to please me."
+        mc.name "I will, I promise."
+
+    elif the_person.has_role(girlfriend_role):
+        the_person "You should think of me. We should see each other soon."
+        the_person "So we can spend more time in person. Texting isn't the same."
+        mc.name "I will, I promise."
+
+    if the_person.love < 20 and not the_person.relationship == "Single":
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        the_person "Make it quick [the_person.mc_title]. My [so_title] is watching me."
+
+    elif the_person.love < 40:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Are you getting exited thinking about me? What did you want to talk about?"
+        else:
+            the_person "What do you want to talk about."
+
+    else:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Mhmm, tell me about the ways you want to please me?"
+        else:
+            the_person "We can chat for a while, what would you like to talk about?"
+    return
+
 label alpha_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
