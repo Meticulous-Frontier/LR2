@@ -134,7 +134,7 @@ label SB_one_on_one_label():
         "Too Busy":
             "You apologize. You are just too busy to offer one on one training right now."
     if done:
-        the_person "Thanks for the help, [the_person.mc_title] I'm sure that will come in handy during work around here!"
+        the_person "Thanks for the help, [the_person.mc_title]. I'm sure that will come in handy during work around here!"
         if not perk_system.has_ability_perk("Those Who Can't, Teach"):
             "Teaching someone else has given you new insights into your own skills. You realize by teaching others, you increase you own mastery in a given skill set."
             $ perk_system.add_ability_perk(Ability_Perk(description = "When you teach someone else a skill, you also gain a skill point in that area.", toggle = False, usable = False), "Those Who Can't, Teach")

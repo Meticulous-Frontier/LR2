@@ -14,7 +14,7 @@ init 1300:
         candace_personality = Personality("candace", default_prefix = "bimbo",
         common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop"],
         common_sexy_likes = ["giving blowjobs", "missionary style sex", "being submissive", "skimpy outfits", "showing her tits", "showing her ass", "not wearing anything", "not wearing underwear", "lingerie", "cum facials"],
-        common_dislikes = ["working", "research work", "work uniforms", "conservative outfits", "Mondays", "Pants"],
+        common_dislikes = ["working", "research work", "work uniforms", "conservative outfits", "Mondays", "pants"],
         common_sexy_dislikes = ["taking control", "masturbating"],
         titles_function = candace_titles, possessive_titles_function = candace_possessive_titles, player_titles_function = candace_player_titles)
 
