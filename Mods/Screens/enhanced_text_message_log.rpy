@@ -99,4 +99,4 @@ init 5:
 
                                 if log_who is not None:
                                     text display_who xsize 75 text_align who_align xalign who_align yalign 0.5 size 18 style "digital_text_2"
-                                text display_what xsize (size_x - 225) text_align what_align xalign what_align yalign 0.5 size 18 style "digital_text_2"
+                                text display_what xsize (size_x - 190) text_align what_align xalign what_align yalign 0.5 size 18 style "digital_text_2"
