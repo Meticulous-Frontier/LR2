@@ -21,7 +21,7 @@ init 2 style digital_text_2 is text:
 
 init 5:
     screen text_message_log(the_person, newest_who = None, newest_what = None):
-        default size_x = 600
+        default size_x = 460
 
         fixed:
             xanchor 0.5
@@ -38,14 +38,14 @@ init 5:
             viewport: #The display for the text, which can be scrolled up and down.
                 yalign 0.5
                 xalign 0.5
-                xoffset 4
-                yoffset 404
+                xoffset 2
+                yoffset 406
                 xanchor 0.5
                 yanchor 1.0
                 mousewheel True
                 scrollbars "vertical"
-                xsize (size_x - 120)
-                ysize 656
+                xsize (size_x - 90)
+                ysize 662
                 yinitial 1.0
                 vbox:
                     box_reverse False
@@ -70,16 +70,16 @@ init 5:
 
                         frame: #TODO: Add support for system messages (ie. in-phone narration)
                             # background None
-                            padding (4,4)
+                            padding (6,6)
                             if log_who == mc.name:
-                                background Frame(text_bubble_blue, 4, 4, 4, 4)
+                                background Frame(text_bubble_blue, 6, 6, 6, 6)
                             elif log_who is None:
-                                background Frame(text_bubble_gray, 4, 4, 4, 4)
+                                background Frame(text_bubble_gray, 6, 6, 6, 6)
                             else:
-                                background Frame(text_bubble_yellow, 4, 4, 4, 4)
+                                background Frame(text_bubble_yellow, 6, 6, 6, 6)
 
                             hbox:
-                                xsize (size_x - 150)
+                                xsize (size_x - 120)
                                 if log_who == mc.name:
                                     box_reverse True
                                     $ display_who = mc.name

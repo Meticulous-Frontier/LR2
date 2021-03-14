@@ -80,6 +80,10 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
 
             call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
 
+            if is_phone:
+                $ mc_opinion_string = opinion_score_to_string(_return).rstrip('s').replace('has', 'have')
+                mc.name "I [mc_opinion_string] [opinion_learned]."
+
             $ prediction_difference = __builtin__.abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
                 person "Really? Wow, we really don't agree about [opinion_learned], that's for sure."
