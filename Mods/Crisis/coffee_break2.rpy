@@ -51,7 +51,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             winner_one = person_one
             winner_two = person_two
 
-    winner_one "Ok, listen up girls, whoever gets the shortest straw will pickup the food from the delivery guy in the lobby."
+    winner_one "Ok, listen up girls, whoever gets the shortest straw will pick up the food from the delivery guy in the lobby."
     $ scene_manager.update_actor(winner_two, emotion = "happy")
     "[winner_two.possessive_title] draws a long straw."
     winner_one "Right, [loser.name], it's between you and me now, pick one."
@@ -86,7 +86,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "You watch as [loser.possessive_title] strips down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, temp_sluttiness_boost = 40)
 
-            "She gives you a wink and turns around to pickup the food."
+            "She gives you a wink and turns around to pick up the food."
             $ scene_manager.update_actor(loser, position = "walking_away")
 
             if loser.effective_sluttiness() >= 90 and loser.outfit.vagina_visible():

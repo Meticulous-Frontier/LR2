@@ -1141,7 +1141,7 @@ label alpha_sucking_cock_taboo_break(the_person):
         the_person "Did you just say something I don't want to hear?"
         mc.name "No you didn't. I want you to put my cock in your mouth and suck on it."
         the_person "I will not do something like that [the_person.mc_title], who do you think I am?"
-        the_person "I'm not some kind of cheap floozy that you pickup on a street corner, I don't \"suck cocks\"."
+        the_person "I'm not some kind of cheap floozy that you pick up on a street corner, I don't \"suck cocks\"."
         mc.name "Yeah you do, and you're going to do it for me."
         the_person "And why should I do that?"
         mc.name "Because deep down, you want to. You can be honest with me and with yourself, aren't you curious what it's going to be like?"

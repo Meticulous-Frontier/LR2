@@ -1202,7 +1202,7 @@ label cougar_sucking_cock_taboo_break(the_person):
         the_person "I'm sorry, I think I misheard you."
         mc.name "No you didn't. I want you to put my cock in your mouth and suck on it."
         the_person "I could never do something like that [the_person.mc_title], what would people think?"
-        the_person "I'm not some kind of cheap hooker that you pickup on the street, I don't \"suck cocks\"."
+        the_person "I'm not some kind of cheap hooker that you pick up on the street, I don't \"suck cocks\"."
         mc.name "Yeah you do, and you're going to do it for me."
         the_person "And why would I do that?"
         mc.name "Because deep down, you want to. You can be honest with me, aren't you a little bit curious what it's going to be like?"

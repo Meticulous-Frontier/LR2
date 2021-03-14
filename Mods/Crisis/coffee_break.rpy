@@ -100,7 +100,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     person_two "Wow...this was...really good actually... You can join us anytime you want boss..."
                     $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
                     $ scene_manager.update_actor(person_three, position = "walking_away", display_transform = character_right)
-                    "They pickup their clothes and leave you feeling very proud of yourself."
+                    "They pick up their clothes and leave you feeling very proud of yourself."
 
                     # cleanup scene
                     $ scene_manager.clear_scene()
