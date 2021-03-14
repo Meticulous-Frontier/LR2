@@ -94,7 +94,7 @@ label scene_sarah_tit_fuck_3(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gives you a few fast strokes with her tits, then stops and tilts her head down."
     "She lets a long line of saliva drip down between her tits. Your cock is lost between them, but you feel the lubrication trickle down onto it."
     "She gives your shaft a few strokes, spreading her spit and lubricating her cleavage. She looks up at you from her knees and smiles."
-    the_girl "Hmm... thats a little bit better."
+    the_girl "Hmm... that's a little bit better."
     "She looks down, then pushes her tits down all the way to your base. The tip of your cock is just poking up between them. A bit of precum leaks out."
     the_girl "Mmm! It looks so yummy..."
     "She strains her neck down a bit and licks the precum from the tip. She moans when she tastes it."

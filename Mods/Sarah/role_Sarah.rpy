@@ -890,7 +890,7 @@ label Sarah_get_drinks_label():
     $ mc.business.change_funds(-20)
     the_person "Okay, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
     mc.name "Oh? What did you have in mind?"
-    the_person "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
+    the_person "I think, whoever loses... hah, that's a funny word... anyway, whoever is the loser, should hafta walk the winner home!"
     "You raise an eyebrow involuntarily. For some reason you expected something a little... crazier than that."
     mc.name "Hah, okay, we can do that. You're up first!"
     "[the_person.possessive_title] turns and looks at the table where she set the darts earlier. She bends over and slowly starts picking them up, one by one."

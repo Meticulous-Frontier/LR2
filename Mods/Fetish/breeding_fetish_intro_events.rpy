@@ -450,7 +450,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She gives a telltale sign. As she says that, she looks away from you and to the side. She is lying to you."
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
-    the_person "Oh me? Want to get knocked up? By my brother? That's... I mean thats CRAZY!... right?"
+    the_person "Oh me? Want to get knocked up? By my brother? That's... I mean that's CRAZY!... right?"
     "She is struggling to give a reasonable explanation. It is pretty clear now that she is just fishing for an excuse to fuck you raw, and to get filled with your potent seed."
     mc.name "Yeah, I mean, wouldn't that be crazy? For a woman to want to get fucked? To have a man dominate her and do what he wants with her, then fill her up with his seed, consequences be damned?"
     $ the_person.change_arousal(10)
