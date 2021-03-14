@@ -1,5 +1,3 @@
-
-
 init 2 python:
     def ashley_mod_initialization(): #Add actionmod as argument#
         ashley_wardrobe = wardrobe_from_xml("Ashley_Wardrobe")
@@ -1077,6 +1075,46 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     python:
         scene_manager.clear_scene()
     return
+
+label ashley_second_concert_intro_label(the_person):
+    #We assume this is at the beginning of a coffee time event. Ashley is the_person and the scene is already set up.
+    #MC has just bought a muffin for stephanie and sat down next to her
+
+    "As you sit down next to [stephanie.title], [the_person.possessive_title] goes back to her phone, clearly distracted by something."
+    mc.name "So... any big plans this weekend?"
+    stephanie "Not for me! I was thinking maybe we could do something later tonight?"
+    "[stephanie.possessive_title] gives you a little wink and puts her hand on your thigh. Suddenly [the_person.title] speaks up."
+    the_person "Yes!!! Oh my god, Steph! I need to borrow your boyfriend tonight!"
+    stephanie "I... errrmm... I guess?"
+    the_person "The Los Angeles Philharmonic had sold out for the show tonight... fucking scalpers... but this morning they release a bunch of extra tickets. I managed to grab two!"
+    stephanie "Ok... but... why do you need to borrow my boyfriend?"
+    the_person "I mean, I know you hate going to classical shows, and I don't know anyone else who would want to go... Please? Its just one night!"
+    "[stephanie.title] mumbles something under her breath. She is clearly not happy with the situation, but relents."
+    stephanie "I guess..."
+    "She leans over and whispers in your ear."
+    stephanie "Don't let her get handsy with you again..."
+    "[stephanie.possessive_title]'s hand moves to your crotch, giving it a couple quick strokes."
+    stephanie "I know she's hot, but your MY boyfriend. Got it?"
+    "Well, sounds like the two sisters have made plans for you tonight. From the excitement on [the_person.title]'s face, you decide to go with it."
+    "You nod at [stephanie.title]."
+    mc.name "Sounds good. When do you want to meet [the_person.title]?"
+    the_person "Meet me there at 6:30. I'll text you the address! There's a great bar around the corner, maybe we can grab a couple drinks after."
+    stephanie "Drinks? I don't know..."
+    the_person "Relax Steph! I'm sure [the_person.mc_title] will be a perfect gentleman."
+    stephanie "It's not him I'm worried about!"
+    "Desperate to diffuse the situation, you take control of the conversation."
+    mc.name "We'll go to the concert, grab a couple drinks afterword, then I'll bring her straight home. I'll have her home by, say, 11? If you're still up we can hang out a bit."
+    stephanie "Why don't you stay the night?"
+    "[stephanie.title] is getting very territorial. You decide for now to indulge her."
+    mc.name "Okay. Sounds like a plan."
+    "You take a sip of your coffee. It seems the sisters are finally ready to move on with their conversation."
+    #TODO link up mandatory event for the date itself.
+    return
+
+label ashley_second_concert_date_label():
+    $ the_person = ashley
+
+
 
 #Coffee time labels
 #Labels in this section are to be randomly called during the coffee time event.
