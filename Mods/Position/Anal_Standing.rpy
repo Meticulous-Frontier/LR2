@@ -339,7 +339,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             elif the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl "Oh god... its inside me... right where it belongs. Thank you so much [the_girl.mc_title]!"
+                the_girl "Oh god... it's inside me... right where it belongs. Thank you so much, [the_girl.mc_title]!"
             elif the_girl.sluttiness > 110:
                 the_girl "Oh god it's so good. It doesn't matter which hole you do it in, I love it when you cum inside me."
             else:

@@ -208,7 +208,7 @@ label candace_climax_responses_oral(the_person):
 
 label candace_climax_responses_vaginal(the_person):
     if the_person.sluttiness > 70:
-        the_person "Oh god I'm going to cum! Ahh, make me cum [the_person.mc_title], it's all I want right now!"
+        the_person "Oh god, I'm going to cum! Ahh, make me cum [the_person.mc_title], it's all I want right now!"
         "She closes her eyes and squeals with pleasure."
     else:
         the_person "Yes, yes, yes! Make me cum! Make me cum hard!"
@@ -925,7 +925,7 @@ label candace_sleepover_impressed_response(the_person):  #If you've made her cum
 
 
 label candace_sleepover_good_response(the_person):  #If you've made her cum
-    the_person "Oh god I love it when you fuck me like that."
+    the_person "Oh god, I love it when you fuck me like that."
     "[the_person.title] lies down in bed and catches her breath."
     the_person "Let's go again! Fuck me like this all night!"
     return

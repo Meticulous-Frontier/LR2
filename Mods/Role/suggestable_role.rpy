@@ -8,7 +8,7 @@ init 2 python: # Define actions and requirements for the actual mod here.
         return person.has_role(suggestable_role)
 
     influence_opinion_action = Action("Influence an opinion", influence_opinion_requirement, "influence_opinion_label",
-        menu_tooltip = "Influence a persons opinion regarding a specific topic")
+        menu_tooltip = "Influence a person's opinion regarding a specific topic")
 
     suggestable_role = Role("Suggestible", [influence_opinion_action])
 
@@ -20,7 +20,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     $ degree = None
     $ discovered = True
     # Pre-check to let the player know base information about the scenario.
-    "Type an opinion e.g 'sculpting garden gnomes' then hit enter to proceed."
+    "Type an opinion, e.g 'sculpting garden gnomes', then hit Enter to proceed."
     $ opinion = str(renpy.input("Opinion:")).lower()
     python: # capitalize if needed
         if opinion == "hr work":
@@ -52,9 +52,9 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
         cur_score = opinion_score_to_string(score)
 
     if score is not 0:
-        "[person.possessive_title] [cur_score] [opinion], depending on how drastic the change and how suggestible the person is you might succeed."
+        "[person.possessive_title] [cur_score] [opinion]; depending on how drastic the change and how suggestible the person is, you might succeed."
     else:
-        "[person.possessive_title], currently has no opinion regarding [opinion], depending on how suggestible the person is you might succeed."
+        "[person.possessive_title] currently has no opinion regarding [opinion]; depending on how suggestible the person is, you might succeed."
 
     if ran_num == 1: # small change
         $ difficulty = renpy.random.randint(0, 20) # Using ranges so people can get lucky, and it can give different outcomes faking simulation of psychology
@@ -70,7 +70,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     if person.suggestibility >= difficulty:
         $ person.add_opinion(opinion, degree, discovered)
         $ new_score = opinion_score_to_string(person.get_opinion_score(opinion))
-        "You succeed at influencing [person.possessive_title]'s' opinion to now [new_score] [opinion]."
+        "You succeed at influencing [person.possessive_title]'s opinion; she now [new_score] [opinion]."
 
 
     else:
