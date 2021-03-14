@@ -230,7 +230,7 @@ label cougar_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change?"
         elif the_person.sluttiness > 20:
-            the_person "What do you mean [the_person.mc_title]? Do you want to spend some time with me?"
+            the_person "What do you mean, [the_person.mc_title]? Do you want to spend some time with me?"
         else:
             the_person "I'm not sure I understand. What do you need [the_person.mc_title]?"
     return
@@ -1142,7 +1142,7 @@ label cougar_touching_body_taboo_break(the_person):
         the_person "I want you to know I take this very seriously, [the_person.mc_title]."
         mc.name "Of course. So do I [the_person.title]."
         the_person "I normally wouldn't even think about letting someone like you touch me."
-        mc.name "What do you mean \"Someone like me\"?"
+        mc.name "What do you mean, \"someone like me\"?"
         the_person "You're young and reckless. I always get the feeling you're bad news for me, but..."
         the_person "But somehow I just can't say no to you."
     else:

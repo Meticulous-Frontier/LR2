@@ -145,9 +145,9 @@ label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
 label alpha_sex_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
-            the_person "Such a nice body you have [the_person.mc_title] and I love sex... Let's give it a try and see how it feels!"
+            the_person "Such a nice body you have, [the_person.mc_title], and I love sex... Let's give it a try and see how it feels!"
         else:
-            the_person "I love sex [the_person.mc_title], and I love it more when it's with you!"
+            the_person "I love sex, [the_person.mc_title], and I love it more when it's with you!"
     else:
         the_person "Okay, lets try this... I hope you know how to treat a real woman during sex!"
     return
@@ -237,7 +237,7 @@ label alpha_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change? I'm the best..."
         elif the_person.sluttiness > 20:
-            the_person "What do you mean [the_person.mc_title]? Do you want to spend some good time with me?"
+            the_person "What do you mean, [the_person.mc_title]? Do you want to spend some good time with me?"
         else:
             the_person "I'm not sure I understand, what do you need from me [the_person.mc_title]?"
     return

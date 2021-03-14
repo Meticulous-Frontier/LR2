@@ -234,7 +234,7 @@ label strip_club_hire_employee_label(the_person):
     elif the_person.is_employee():
         $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         if mc.business.is_open_for_business():
-            the_person "What do you mean, I already have a job, right here, right now."
+            the_person "What do you mean? I already have a job, right here, right now."
             mc.name "Don't worry, it won't interfere with this job, I just thought you might like to make something extra on the side."
         else:
             the_person "I don't understand, I already work for you. Or are you terminating my position?"

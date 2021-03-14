@@ -90,7 +90,7 @@ label starbuck_seduction_response(the_person):
         elif the_person.sluttiness > 10:
             the_person "Oh, do you see something you like?"
         else:
-            the_person "I... what do you mean [the_person.mc_title]?"
+            the_person "I... what do you mean, [the_person.mc_title]?"
     return
 
 label starbuck_seduction_accept_crowded(the_person):
