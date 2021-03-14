@@ -207,19 +207,19 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
 
 label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
     if the_girl.body_is_thin():
-        "Your hips begin to slap up against [the_girl.possessive_title] gloriously fit ass."
+        "Your hips begin to slap up against [the_girl.possessive_title]'s gloriously fit ass."
         "Her cheeks are tight from the exercise and care she puts into her body."
     elif the_girl.body_is_average():
-        "Your hips begin to slap up against [the_girl.possessive_title] delicious ass."
+        "Your hips begin to slap up against [the_girl.possessive_title]'s delicious ass."
         "Her cheeks are round but firm with just a hint of quaking with each impact."
     elif the_girl.body_is_thick():
-        "Your hips begin to slap up against [the_girl.possessive_title] thick ass."
+        "Your hips begin to slap up against [the_girl.possessive_title]'s thick ass."
         "Her cheeks are full and generous, and they quake back and forth enticingly as you pound her."
     elif the_girl.body_is_pregnant():
-        "Your hips begin to slap up against [the_girl.possessive_title] wide ass."
+        "Your hips begin to slap up against [the_girl.possessive_title]'s wide ass."
         "Her cheeks make a pleasing heart shape since her body has been changing with the baby growing in her belly."
     else:
-        "Your hips begin to slap up against [the_girl.possessive_title] ass."
+        "Your hips begin to slap up against [the_girl.possessive_title]'s ass."
         "Her cheeks respond delightfully with each thrust."
     "[the_girl.title] is thrusting back against you, using [the_object.name] as leverage to push herself back. Her ass is mesmerising."
     menu:

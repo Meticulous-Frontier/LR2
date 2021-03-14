@@ -816,7 +816,7 @@ label cougar_cum_pullout(the_person):
                 if the_person.on_birth_control: #She just likes creampies.
                     the_person "Oh [the_person.mc_title], I want you to cum inside me! I want to feel every last drop of your cum!"
                 else: #Yeah, she's not on BC and asking for you to creampie her. She's looking to get pregnant.
-                    the_person "Oh [the_person.mc_title], I want your strong cum inside me! I want you to become pregnant from my beautiful stud!"
+                    the_person "Oh [the_person.mc_title], I want your strong cum inside me! I want to become pregnant by my beautiful stud!"
             elif the_person.on_birth_control: #She's on the pill, so she's probably fine
                 the_person "Cum for me! You can let it out whenever you want!"
             else: #Too distracted to care about getting pregnant or not. Oh well, what could go wrong?
