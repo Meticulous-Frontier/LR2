@@ -230,7 +230,7 @@ label cougar_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change?"
         elif the_person.sluttiness > 20:
-            the_person "What do you mean [the_person.mc_title]? Do you want to spend some time with me?"
+            the_person "What do you mean, [the_person.mc_title]? Do you want to spend some time with me?"
         else:
             the_person "I'm not sure I understand. What do you need [the_person.mc_title]?"
     return
@@ -816,7 +816,7 @@ label cougar_cum_pullout(the_person):
                 if the_person.on_birth_control: #She just likes creampies.
                     the_person "Oh [the_person.mc_title], I want you to cum inside me! I want to feel every last drop of your cum!"
                 else: #Yeah, she's not on BC and asking for you to creampie her. She's looking to get pregnant.
-                    the_person "Oh [the_person.mc_title], I want your strong cum inside me! I want you to become pregnant from my beautiful stud!"
+                    the_person "Oh [the_person.mc_title], I want your strong cum inside me! I want to become pregnant by my beautiful stud!"
             elif the_person.on_birth_control: #She's on the pill, so she's probably fine
                 the_person "Cum for me! You can let it out whenever you want!"
             else: #Too distracted to care about getting pregnant or not. Oh well, what could go wrong?
@@ -1142,7 +1142,7 @@ label cougar_touching_body_taboo_break(the_person):
         the_person "I want you to know I take this very seriously, [the_person.mc_title]."
         mc.name "Of course. So do I [the_person.title]."
         the_person "I normally wouldn't even think about letting someone like you touch me."
-        mc.name "What do you mean \"Someone like me\"?"
+        mc.name "What do you mean, \"someone like me\"?"
         the_person "You're young and reckless. I always get the feeling you're bad news for me, but..."
         the_person "But somehow I just can't say no to you."
     else:
@@ -1202,7 +1202,7 @@ label cougar_sucking_cock_taboo_break(the_person):
         the_person "I'm sorry, I think I misheard you."
         mc.name "No you didn't. I want you to put my cock in your mouth and suck on it."
         the_person "I could never do something like that [the_person.mc_title], what would people think?"
-        the_person "I'm not some kind of cheap hooker that you pickup on the street, I don't \"suck cocks\"."
+        the_person "I'm not some kind of cheap hooker that you pick up on the street, I don't \"suck cocks\"."
         mc.name "Yeah you do, and you're going to do it for me."
         the_person "And why would I do that?"
         mc.name "Because deep down, you want to. You can be honest with me, aren't you a little bit curious what it's going to be like?"

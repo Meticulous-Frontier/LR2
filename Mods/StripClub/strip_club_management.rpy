@@ -60,7 +60,7 @@ init 3304 python:
 
     def add_strip_club_manager_waitresses_suggestion_action():
         if __builtin__.len(stripclub_waitresses) < 2:
-            strip_club_manager_waitresses_suggestion_action = Action("Your strip club manager suggest to hire a couple of waitresses.", strip_club_manager_waitresses_suggestion_requirement, "strip_club_manager_waitresses_suggestion_label")
+            strip_club_manager_waitresses_suggestion_action = Action("Your strip club manager suggests you hire a couple of waitresses.", strip_club_manager_waitresses_suggestion_requirement, "strip_club_manager_waitresses_suggestion_label")
             mc.business.add_mandatory_crisis(strip_club_manager_waitresses_suggestion_action)
 
     def strip_club_manager_hire_more_waitresses_reminder_requirement():
@@ -86,7 +86,7 @@ init 3304 python:
 
     def add_strip_club_manager_bdsm_room_suggestion_action():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-            strip_club_manager_bdsm_room_suggestion_action = Action("Your strip club manager suggest to build a new BDSM room.", strip_club_manager_bdsm_room_suggestion_requirement, "strip_club_manager_bdsm_room_suggestion_label")
+            strip_club_manager_bdsm_room_suggestion_action = Action("Your strip club manager suggests you build a new BDSM room.", strip_club_manager_bdsm_room_suggestion_requirement, "strip_club_manager_bdsm_room_suggestion_label")
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_suggestion_action)
 
     def strip_club_manager_bdsm_room_reminder_requirement():
@@ -130,7 +130,7 @@ init 3304 python:
 
 
 label strip_club_manager_reminder_label():
-    "A few days have passed since you bought the strip club, and after running the numbers, you realize the business could be better..."
+    "A few days have passed since you bought the strip club, and after running the numbers, you realize that business could be better."
     "But you can't spend all your time there micro-managing everything, you need to find someone to do it for you."
     "Someone obedient to you, but also strong enough to manage the other girls, the customers and the suppliers... Perhaps one of the strippers?"
     return
@@ -140,39 +140,39 @@ label strip_club_manager_hire_more_stripper_reminder_label(): # phone call
         return
     "Suddenly your smartphone rings, it's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hello [the_person.mc_title], I called just to remember you we can have five girls here, performing on the stage."
-    the_person "To have them would make setting up the shifts more easy and, of course, it would be more profitable for you."
+    the_person "Hello [the_person.mc_title], I called just to remind you we can have five girls here, performing on the stage."
+    the_person "A full roster would make setting up the shifts easier and, of course, it would be more profitable for you."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
-    the_person "Ok [the_person.mc_title], thank you!"
+    the_person "Okay [the_person.mc_title], thank you!"
     return
 
 label strip_club_manager_hire_more_waitresses_reminder_label(): # phone call
     if __builtin__.len(stripclub_waitresses) >= 2:
         return
-    "Suddenly your smartphone rings, it's your strip club manager."
+    "Your smartphone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hello [the_person.mc_title], I called just to remember you we need two waitresses, we can't have our strippers do that."
+    the_person "Hello [the_person.mc_title], I called just to remind you we need two waitresses, we can't have our strippers do that."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
-    the_person "Ok [the_person.mc_title], thank you!"
+    the_person "Okay [the_person.mc_title], thank you!"
     return
 
 label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
-    "Suddenly your smartphone rings: it's your StripClub manager."
+    "Your smartphone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you..."
+    the_person "Hi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you."
     mc.name "Sure [the_person.title], I'm coming."
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
     $ the_person.draw_person(emotion = "happy", position = "stand3")
-    mc.name "Here I am [the_person.title], how things are going here ?"
-    the_person "That's exactly what I wanna talk to you about: you spent a lot of money to buy this place, don't you wanna make it more profitable ?"
-    mc.name "Of course I do: what do you have in mind ?"
-    the_person "A lot of customers here get a drink at the bar then sit at the border of the stage to watch the girls stripping, right ?"
-    mc.name "Yes, that's how the business here works..."
-    the_person "Exactly! After they got their drink, the customers don't wanna move anymore from the stage, only a few come back to get another drink..."
-    mc.name "I think I got where are you going with this..."
+    mc.name "Here I am [the_person.title], how are things going here?"
+    the_person "That's exactly what I wanna talk to you about: you spent a lot of money to buy this place, don't you wanna make it more profitable?"
+    mc.name "Of course I do: what do you have in mind?"
+    the_person "A lot of customers here get a drink at the bar, then sit by the stage to watch the girls stripping, right?"
+    mc.name "Yes, that's how the business here works."
+    the_person "Exactly! After they get their drink, most customers don't want to leave the stage. Only a few come back to the bar to get another drink."
+    mc.name "I think I get where you're going with this..."
     the_person "Yeah! What if we had a couple of waitresses serving the drinks directly at the customer's seat, and maybe some peanuts or some chips..."
-    the_person "They would be more thirsty, so the drinks sold at the end of the day would be a lot, lot more!"
+    the_person "With the salty snacks keeping them thirsty and the waitresses letting them stay in their seats, we'd sell a lot more drinks by the end of the day."
     mc.name "Thank you [the_person.title], that's really a good idea! I'll look into hiring some waitresses as soon as possible."
     $ the_person.draw_person(emotion = "happy", position = "stand4")
     "[the_person.title] smiles back to you, proud to have proven herself worthy."
@@ -180,21 +180,21 @@ label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
     return
 
 label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
-    "Suddenly your smartphone rings, it's your strip club manager."
+    "Your smartphone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hi [the_person.mc_title]! Can you join me here at the club? I need to talk with you..."
+    the_person "Hi [the_person.mc_title]! Can you join me here at the club? I need to talk with you."
     mc.name "Sure [the_person.title], I'll be right over."
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
     $ the_person.draw_person(emotion = "happy", position = "stand3")
-    mc.name "Ok, here I am [the_person.title], how things are going here?"
+    mc.name "Okay, here I am [the_person.title], how things are going here?"
     the_person "That's exactly what I wanna talk to you about, I have an idea to make the business here more profitable."
     mc.name "You have my attention, what do you have in mind?"
     the_person "This place has a lot of unused space around the back... What if we make another room there for a different kind of shows?"
     mc.name "'Different shows'? You know that this is a strip club, right, and not a brothel?"
-    the_person "No no no [the_person.mc_title], nothing like that! I did some research, and I found that in other cities you can find places that offer BDSM shows."
+    the_person "No no no, [the_person.mc_title], nothing like that! I did some research, and I found that in other cities you can find places that offer BDSM shows."
     the_person "But here, in our city, there's nothing like it... yet!"
-    mc.name "What do you mean with 'BDSM shows'?"
+    mc.name "What do you mean by 'BDSM shows'?"
     the_person "Well, you know there are girls who like to submit themselves completely to their partners during sex, right?"
     "Your mind wanders of for a bit, of course you know, you know very well!"
     the_person "And you know that almost every girl, more or less, likes to show herself off, right?"
@@ -202,12 +202,12 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     the_person "So, in a BDSM show girls submit themselves completely to their partners in a public place like this, showing off their obedience and devotion to their Master."
     mc.name "But you know [the_person.title], we can't have guys on the stage, fucking around with girls... we would get into some serious trouble!"
     the_person "Whoever said anything about men performing on stage?"
-    "She mischievously winks at you, now it's clear what kind of picture is floating in her vicious mind..."
-    mc.name "I got it and I admit it could be a very good idea, but I need to double-check with my lawyer to see if it is feasible."
+    "She winks mischievously at you, now it's clear what kind of picture is floating in her vicious mind..."
+    mc.name "I get the picture. I admit it could be a very good idea, but I need to double-check with my lawyer to see if it is feasible."
     the_person "I made a business prospect for you with costs and revenues, I will send it to your phone."
-    mc.name "Thank you [the_person.title], I'll look at it!"
+    mc.name "Thank you, [the_person.title], I'll look at it."
     $ the_person.draw_person(emotion = "happy", position = "stand4")
-    "After you got the documents, even just with a quick glance you notice that the $10,000 investment could be very, very profitable."
+    "As you glance over the documents, you quickly realize that the $10,000 investment could be very, very profitable."
     $ add_strip_club_manager_bdsm_room_reminder_action()
     $ mc.business.event_triggers_dict["strip_club_bdsm_decision_day"] = 0
     $ strip_club.add_action(strip_club_manager_bdsm_room_build_action)
@@ -224,10 +224,10 @@ label strip_club_manager_bdsm_room_build_label(): # (action button)
     return
 
 label strip_club_manager_bdsm_room_reminder_label(): # phone call
-    "Suddenly your phone rings, it's your strip club manager."
+    "Your phone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
     the_person "Hello [the_person.mc_title], did you check the business prospect I sent you for having a special room for BDSM shows?"
-    the_person "I'm sure it would make the business here a lot more profitable, we will be the only club in the city having that kind of entertainment."
+    the_person "I'm sure it would make the business here a lot more profitable, we would be the only club in the city having that kind of entertainment."
     mc.name "Thank you [the_person.title]... I know, I'll get back to you, I promise!"
     the_person "Ok [the_person.mc_title], thank you!"
     return

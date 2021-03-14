@@ -2183,11 +2183,11 @@ label starbuck_candace_recurring_event_label(the_person):
     #TODO add links to appropriate random actions that could be occurring
 
     if the_person.event_triggers_dict.get("knows_candace_cured", False) == True:
-        "Sorry, this event it a work in progress!"
+        "Sorry, this event is a work in progress!"
         # call starbuck_candace_orgasm_denial_contest_label(the_person, candace) from _candace_and_Starbuck_denial_Scene_01
     elif the_person.event_triggers_dict.get("knows_candace_cured", False) == False and candace_is_bimbo():
         #TODO write an event here for candace and starbuck to do together
-        "Sorry, this event it a work in progress!"
+        "Sorry, this event is a work in progress!"
         pass
     else:
         $ scene_manager = Scene()

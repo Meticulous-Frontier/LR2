@@ -109,7 +109,7 @@ label scene_threesome_standing_embrace_fuck_girl_two_2(the_girl_1, the_girl_2, t
     "The change of angle feels great and you enjoy the steamy wet grip of her cunt."
     "[the_girl_1.possessive_title] and [the_girl_2.title] both have their hands between each others legs. You can feel [the_girl_1.title]'s hand moving circles around the hole you are fucking."
     "Her hand drops a little lower and is now cupping your balls. You push yourself deep into [the_girl_2.title] and grind your hips a bit, enjoying the sensation."
-    the_girl_1 "Mmm, you balls are so full [the_girl_1.mc_title]. I bet you're gonna fill her up, aren't you?"
+    the_girl_1 "Mmm, your balls are so full, [the_girl_1.mc_title]. I bet you're gonna fill her up, aren't you?"
     "[the_girl_2.title] just moans at all the intense sensations she is feeling."
     return
 

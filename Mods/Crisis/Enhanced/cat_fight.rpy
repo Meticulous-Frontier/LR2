@@ -225,7 +225,7 @@ label cat_fight_crisis_enhanced_label():
                     loser "Hey!"
                     winner "You're not going anywhere, not yet!"
                     $ scene_manager.update_actor(winner, position = "stand3", emotion = "happy")
-                    "[winner.title] reaches a hand down between [loser.title]'s legs, running her finger over her coworkers pussy."
+                    "[winner.title] reaches a hand down between [loser.title]'s legs, running her finger over her coworker's pussy."
                     $ loser.change_arousal(5) #The girls arousal gain is the base gain + 10% per the characters skill in that category.
                     loser "Hey... that's not fair! I... ah..."
                     $ scene_manager.update_actor(loser, position = "missionary")
@@ -289,7 +289,7 @@ label cat_fight_crisis_enhanced_label():
             mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
             $ scene_manager.update_actor(person_one, emotion="sad")
             person_one "But sir..."
-            mc.name "Don't but sir me! It's time for you two to do a team building exercise. On your knees, both of you."
+            mc.name "Don't \"but sir\" me! It's time for you two to do a team building exercise. On your knees, both of you."
             "They both look at each other, bewildered, but they do what you ask."
             $ scene_manager.update_actor(person_one, position = "blowjob")
             $ scene_manager.update_actor(person_two, position = "blowjob")

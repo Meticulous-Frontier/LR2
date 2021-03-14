@@ -890,7 +890,7 @@ label Sarah_get_drinks_label():
     $ mc.business.change_funds(-20)
     the_person "Okay, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
     mc.name "Oh? What did you have in mind?"
-    the_person "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
+    the_person "I think, whoever loses... hah, that's a funny word... anyway, whoever is the loser, should hafta walk the winner home!"
     "You raise an eyebrow involuntarily. For some reason you expected something a little... crazier than that."
     mc.name "Hah, okay, we can do that. You're up first!"
     "[the_person.possessive_title] turns and looks at the table where she set the darts earlier. She bends over and slowly starts picking them up, one by one."
@@ -3082,13 +3082,13 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     return
 
 label Sarah_unlock_special_tit_fuck(the_person):
-    the_person "So umm... I have a little confession to make."
+    the_person "So, umm... I have a little confession to make."
     "You raise an eyebrow."
     mc.name "Oh? Go ahead then."
     the_person "Last night... I was playing with one of my special toys... pretending it was you... obviously."
     the_person "It was nice... but I just couldn't get off. I don't know why, it just wasn't feeling right."
     the_person "So I took it out, then put it, you know, between my tits..."
-    "Interesting"
+    "Interesting."
     the_person "I kept imagining you, fucking my tits, cumming all over me."
     $ the_person.change_arousal(20)
     "Her cheeks are starting to get a little flushed."

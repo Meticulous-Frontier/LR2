@@ -890,7 +890,7 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
         if the_person.get_opinion_score("bareback sex") > 0:
-            the_person "Let's agree that nothing beats skin on skin."
+            the_person "I agree, nothing beats skin on skin."
         else:
             the_person "I'm not a big fan of bare sex, but if you like it that way."
 

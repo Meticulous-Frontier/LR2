@@ -380,7 +380,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     the_person "Ohhh... good morning honey! Mommy needs your seed inside her this morning... and I'm not taking no for an answer!"
     "You are a little surprised by her forcefulness. Lately you've been giving her serums that should make her a bit more submissive..."
     the_person "I had such vivid dreams last night... you were fucking me and kept cumming inside me over and over and over!"
-    the_person "My belly started bigger and my tits started to leak milk and I loved it so much..."
+    the_person "My belly started to get bigger and my tits started to leak milk and I loved it so much..."
     "Ahh, you've been giving her serums that increase her drive to reproduce. Looks like they've finally driven her over the urge and given her a breeding fetish!"
     $ the_person.change_arousal (30)
     $ mc.change_arousal(20)
@@ -450,7 +450,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She gives a telltale sign. As she says that, she looks away from you and to the side. She is lying to you."
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
-    the_person "Oh me? Want to get knocked up? By my brother? That's... I mean thats CRAZY!... right?"
+    the_person "Oh me? Want to get knocked up? By my brother? That's... I mean that's CRAZY!... right?"
     "She is struggling to give a reasonable explanation. It is pretty clear now that she is just fishing for an excuse to fuck you raw, and to get filled with your potent seed."
     mc.name "Yeah, I mean, wouldn't that be crazy? For a woman to want to get fucked? To have a man dominate her and do what he wants with her, then fill her up with his seed, consequences be damned?"
     $ the_person.change_arousal(10)
@@ -854,31 +854,31 @@ label breeding_fetish_erica_intro_label():
     the_person "Can I get you anything? Coffee?"
     mc.name "Am I going to need the caffeine?"
     "You answer, making your flirting tone obvious. She gives you a shy smile."
-    the_person "Hopefully! I'm hoping this is a long a productive night..."
+    the_person "Hopefully! I'm hoping this will be a long and productive night..."
     mc.name "Coffee sounds great."
     "You can already smell it, so she must already have a pot brewed."
     $ the_person.draw_person(position = "back_peek")
     "[the_person.possessive_title] turns to the counter and grabs a couple of cups. She pours two, then turns and sits down across from you, setting your cup in front of you."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] looks nervous. Whatever it is she wants to talk about, you can tell it's making her anxious. You take a sip of your coffee."
-    mc.name "So... What's eating you? I mean besides me later..."
+    mc.name "So... What's eating you? I mean, besides me later..."
     "She gives a nervous sigh."
     the_person "Okay... So... I've kind of... Been thinking about something..."
-    "Her purse is sitting on the table next to her. She opens it up and starts to go through it. She pulls out a package of birth control pills, and a package of plan B..."
+    "Her purse is sitting on the table next to her. She opens it up and starts to go through it. She pulls out a package of birth control pills, and a package of plan B."
     the_person "So, I stopped taking birth control lately..."
     the_person "I told myself it was just for the thrill of the risk, but if anything ever actually happened, I had plan B ready, and if that ever didn't work, you know... I was gonna get it taken care of."
     the_person "I love running track and field. But if I ever got pregnant, they'd kick me off the team, you know? So I did what I had to..."
     if the_person.is_girlfriend():
-        "But [the_person.mc_title], I just love you so much! The urge to just let go of all that, and just submit myself to you over and over, taking your seed! It's so so strong!"
+        the_person "But [the_person.mc_title], I just love you so much! The urge to just let go of all that, and just submit myself to you over and over, taking your seed! It's so so strong!"
     else:
-        "But lately, when I'm with you... And even when I'm not, I can't stop fantasizing about you cumming inside me. Over and over, not letting me take my pills and knocking me up!"
+        the_person "But lately, when I'm with you... And even when I'm not, I can't stop fantasizing about you cumming inside me. Over and over, not letting me take my pills and knocking me up!"
     "It's been a while since you started dosing [the_person.possessive_title] with Reproduction Proclivity Nanobots. It seems they have taken hold of her."
     the_person "I knew that when girls get to about my age they could get baby fever... But I never imagined the urge would be so strong! [the_person.mc_title]... I don't care about the track team anymore! Please knock me up! Will you please?"
-    "There is some significant urgency in her voice. [the_person.possessive_title] is willing to give up her sport team, just to have your babies! This is a total no brainier."
+    "There is some significant urgency in her voice. [the_person.possessive_title] is willing to give up her sports team, just to have your babies! This is a total no-brainer."
     "You reach over the table, and pick up her birth control. You stand up, take it to the trash can, and throw it away. She observes your movements closely."
     the_person "You just... Does that mean?"
-    mc.name "Lay down on the table Erica"
-    the_person "Oh! Oh my God..."
+    mc.name "Lie down on the table, Erica."
+    the_person "Oh! Oh my god..."
     $ the_person.draw_person(position = "missionary")
     if the_person.outfit.vagina_available():
         "You reach down and pull your cock out from your pants."
@@ -895,7 +895,7 @@ label breeding_fetish_erica_intro_label():
     $ the_person.draw_person(position = "missionary")
     if the_person.has_creampie_cum():
         $ become_pregnant(the_person)
-        the_person "Oh god! Its amazing. I think you did it. I don't know how I know... I can just feel it."
+        the_person "Oh god! It's amazing. I think you did it. I don't know how I know... I can just feel it."
         "She rubs her belly happily."
         the_person "I mean... I'll take a test in a few days to be sure but..."
     else:
@@ -913,7 +913,7 @@ label breeding_fetish_erica_intro_label():
     $ add_breeding_fetish(the_person)
     "[the_person.possessive_title] is positively glowing. She seems pretty confident that did the trick."
     the_person "I'm sorry to say this, but I have to get up early in the morning."
-    mc.name "Its okay, get some rest."
+    mc.name "It's okay, get some rest."
     $ the_person.draw_person(position = "stand3")
     "[the_person.title] stands up and smiles at you."
     the_person "I'll let you know when I find out for sure... daddy!"
@@ -934,21 +934,21 @@ label breeding_fetish_erica_unsuccessful_followup_label():
         "Thinking you are probably still dreaming, your brain is slow to engage and register what is going on."
     "Your pants slide off, exposing your morning wood. You feel a weight around your hips as someone gets on top of you. You slowly open your eyes."
     $ the_person.draw_person(position = "cowgirl")
-    "Its... [the_person.possessive_title]!?!"
+    "It's... [the_person.possessive_title]!?!"
     mc.name "Wha? [the_person.title]?"
     the_person "Shhh, don't want to wake your family..."
     "She slowly slides herself down onto you, taking your full length inside of her. You can't help but moan at the sudden sensation."
     $ the_person.change_arousal(10)
     $ mc.change_arousal(10)
-    mc.name "What are you doing here."
+    mc.name "What are you doing here?"
     the_person "I've been tracking my cycles and I am soooo fertile right now. I understand you were too tired last night, but I need your cum ASAP."
-    "[the_person.possessive_title] starts to work her hips. You know you should be concerend about how she even got in here, but right now you decide to just lay back and enjoy."
+    "[the_person.possessive_title] starts to work her hips. You know you should be concerned about how she even got in here, but right now you decide to just lie back and enjoy."
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _erica_breeding_fetish_intro_02
     "When you finish, she rolls off you and lays beside you on your bed."
     $ the_person.draw_person(position = "missionary")
     $ add_breeding_fetish(the_person)
     $ become_pregnant(the_person)
-    the_person "Oh god! Its amazing. I think you did it. I don't know how I know... I can just feel it."
+    the_person "Oh god! It's amazing. I think you did it. I don't know how I know... I can just feel it."
     "She rubs her belly happily."
     the_person "I mean... I'll take a test in a few days to be sure but..."
     "She lays beside you for a minute, but then quietly gets up. She puts on some clothes you didn't even realize she had with her."

@@ -402,7 +402,7 @@ label girlfriend_underwear_shopping_label(the_person):
         the_person "I mean, if you want me to. I suppose I could get something new to wear for you once in a while..."
     else:
         the_person "Oh! That sounds fun!"
-        the_person "This will be great! You can tell me what you like and then I'll now what to wear whenever I want to get your engine revving."
+        the_person "This will be great! You can tell me what you like, and then I'll know what to wear whenever I want to get your engine revving."
     "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
     $ mc.change_location(clothing_store)
     $ mc.location.show_background()

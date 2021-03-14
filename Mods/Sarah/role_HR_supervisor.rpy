@@ -1218,7 +1218,7 @@ label HR_director_mind_control_attempt_label(the_person):
     $ scene_manager = Scene()
     $ HR_employee_list = build_HR_mc_list(the_person)
     if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
-        the_person "Actually, things are running really smoothly right now, I'm not sure that would be beneficial?"
+        the_person "Actually, things are running really smoothly right now, I'm not sure that would be beneficial."
         return
 
     the_person "Okay... remember this act has a chance of backfiring, having all kinds of unknown side effects. Are you sure you want to continue?"

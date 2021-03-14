@@ -145,9 +145,9 @@ label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
 label alpha_sex_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
-            the_person "Such a nice body you have [the_person.mc_title] and I love sex... Let's give it a try and see how it feels!"
+            the_person "Such a nice body you have, [the_person.mc_title], and I love sex... Let's give it a try and see how it feels!"
         else:
-            the_person "I love sex [the_person.mc_title], and I love it more when it's with you!"
+            the_person "I love sex, [the_person.mc_title], and I love it more when it's with you!"
     else:
         the_person "Okay, lets try this... I hope you know how to treat a real woman during sex!"
     return
@@ -237,7 +237,7 @@ label alpha_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change? I'm the best..."
         elif the_person.sluttiness > 20:
-            the_person "What do you mean [the_person.mc_title]? Do you want to spend some good time with me?"
+            the_person "What do you mean, [the_person.mc_title]? Do you want to spend some good time with me?"
         else:
             the_person "I'm not sure I understand, what do you need from me [the_person.mc_title]?"
     return
@@ -1075,7 +1075,7 @@ label alpha_touching_body_taboo_break(the_person):
         the_person "Do you want to know something?"
         mc.name "What?"
         the_person "I've had dreams just like this before, you giving my body the pleasure it deserves."
-        mc.name "Well, i'm happy to oblige."
+        mc.name "Well, I'm happy to oblige."
 
     elif the_person.love >= 20:
         the_person "I want you to know I take this very seriously, [the_person.mc_title]."
@@ -1112,7 +1112,7 @@ label alpha_touching_vagina_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 35:
         the_person "Do it [the_person.mc_title]. Touch my pussy."
     elif the_person.love >= 20:
-        the_person "I'm as excited as a little girl. Does a woman like me make you feel that way too [the_person.mc_title]?"
+        the_person "I'm as excited as a little girl. Does a woman like me make you feel that way too, [the_person.mc_title]?"
         mc.name "Just take a deep breath and relax. You trust me, right?"
         the_person "We will see if I can trust you."
     else:
@@ -1141,7 +1141,7 @@ label alpha_sucking_cock_taboo_break(the_person):
         the_person "Did you just say something I don't want to hear?"
         mc.name "No you didn't. I want you to put my cock in your mouth and suck on it."
         the_person "I will not do something like that [the_person.mc_title], who do you think I am?"
-        the_person "I'm not some kind of cheap floozy that you pickup on a street corner, I don't \"suck cocks\"."
+        the_person "I'm not some kind of cheap floozy that you pick up on a street corner, I don't \"suck cocks\"."
         mc.name "Yeah you do, and you're going to do it for me."
         the_person "And why should I do that?"
         mc.name "Because deep down, you want to. You can be honest with me and with yourself, aren't you curious what it's going to be like?"
@@ -1186,7 +1186,7 @@ label alpha_vaginal_sex_taboo_break(the_person):
             the_person "Alright, get over here and show me what you can do."
         else:
             the_person "I'm glad you're doing this properly this time."
-            "It might be the hot new thing to do, but I just don't enjoy anal. I think your cock will feel much better in my vagina."
+            the_person "It might be the hot new thing to do, but I just don't enjoy anal. I think your cock will feel much better in my vagina."
     return
 
 label alpha_anal_sex_taboo_break(the_person):

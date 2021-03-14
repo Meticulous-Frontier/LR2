@@ -1166,7 +1166,7 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
             mc.name "Not exactly..."
             the_person "BECAUSE I WOULD TOTALLY SUCK YOU OFF."
             mc.name "You mean... blow me?"
-            the_person "Thatsh what I said!"
+            the_person "That'sh what I said!"
             "You make a mental note that it's probably better to get her a water next instead of another drink."
         else:
             "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."

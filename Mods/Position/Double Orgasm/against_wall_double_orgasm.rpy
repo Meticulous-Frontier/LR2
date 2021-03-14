@@ -11,7 +11,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
     menu:
         "Cum inside of her":
             if the_girl.wants_creampie():
-                the_girl "Oh god yes cum with me [the_girl.mc_title]!"
+                the_girl "Oh god yes, cum with me [the_girl.mc_title]!"
             if mc.condom:
                 "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She wraps her legs around you as she cums in unison."
                 $ the_girl.call_dialogue("cum_condom")
@@ -46,7 +46,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
                     "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
-                    "Having your cum inside of her heightens her orgasm as her fetish for you cum is fulfilled."
+                    "Having your cum inside of her heightens her orgasm as her fetish for your cum is fulfilled."
                 else:
                     "You push forward as you finally climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage."
                     "She clings to you helplessly as she cums with you in unison."
@@ -58,7 +58,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
         "Cum on her stomach":
             if mc.condom == False and the_girl.wants_creampie() and the_girl.obedience <200 :
                 "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
-                $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh.. OH! Yes "])
+                $ wordchoice = renpy.random.choice(["Oh God", "Oh yes", "Oh.. OH! Yes"])
                 $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
                 if the_girl.love < 0:
                     "Where do think you're going, [the_girl.mc_title]?"

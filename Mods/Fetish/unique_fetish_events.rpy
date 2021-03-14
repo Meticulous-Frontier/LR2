@@ -235,9 +235,9 @@ label fetish_mom_kitchen_label(the_person):
             mc.name "You know you want a pussy full of my cum. Feel it dripping out of your fertile cunt all through dinner time."
             the_person "Yes I know but..."
             if the_person.outfit.vagina_available():
-                "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
+                mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
             else:
-                "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you right here..."
+                mc.name "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you right here..."
             $ the_person.change_arousal(10)
             "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
             the_person "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
@@ -312,7 +312,7 @@ label fetish_mom_kitchen_label(the_person):
             pass
     "Clearly, in her current attire, it will be obvious what [the_person.possessive_title!l] has been up to. You look at the state of dinner. Its almost done."
     mc.name "You go clean yourself up. I'll finish preparing dinner."
-    "Ahhh... okay... thank you honey!"
+    the_person "Ahhh... okay... thank you honey!"
     $ clear_scene()
     "[the_person.title] leaves the room, leaving you a lone with dinner. You start portioning out plates."
     menu: #Copy the normal dinner time serum screen.

@@ -424,11 +424,11 @@ label strip_ask_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_loc
 label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "Both girls are moaning wildly into each other's crotches"
-            "You can see [the_girl_1.possessive_title] legs shaking as an orgasm hits her."
+            "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
             "[the_girl_2.title] is right behind her, her hips pushing back against [the_girl_1.title]'s face as she cums too."
             return
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can see [the_girl_1.possessive_title] legs shaking as an orgasm hits her."
+            "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
             "Her moans are muffled by [the_girl_2.title]'s pussy."
             return
 
