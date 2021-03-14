@@ -451,7 +451,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
 
             mc.name "Haven't you noticed?"
             the_person "What?"
-            mc.name "You hair came loose about a minute in, you could have stopped at any point."
+            mc.name "Your hair came loose about a minute in, you could have stopped at any point."
             the_person "Oh... well, next time just get me out, and we can do this properly. Now move..."
 
     $ the_person.draw_person(position = "walking_away")
