@@ -1477,7 +1477,7 @@ label ashley_clothes_shopping_label(the_person):
         # "Now go out and wait for me..."
         # [Clear ashley]
         $ clear_scene()
-        $ the_peson.apply_outfit(the_person.planned_outfit)
+        $ the_person.apply_outfit(the_person.planned_outfit)
         "She shoos you out of the changing room. In a few minutes, she emerges from the changing room."
         $ the_person.draw_person()
         the_person "Thanks for waiting..."
