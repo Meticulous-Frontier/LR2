@@ -190,7 +190,7 @@ label aunt_drunk_cuddle_label():
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_aunt_cuddle_01
 
-    "You wake up, but [the_person.possessive_title!l] isn't there. You slowly get up and walk out of your room and into the kitchen."
+    "You wake up, but [the_person.possessive_title] isn't there. You slowly get up and walk out of your room and into the kitchen."
     $ mc.change_location(kitchen)
     $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, position = "sitting")

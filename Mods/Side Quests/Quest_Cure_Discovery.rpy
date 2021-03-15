@@ -141,7 +141,7 @@ label quest_cure_discovery_intro_label():
     if the_person == None:
         return #Bad end
     if mc.location != rd_division:
-        "You get a text on your phone. It's from [the_person.possessive_title!l]."
+        "You get a text on your phone. It's from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP!"
         $ mc.end_text_convo()
@@ -307,7 +307,7 @@ label quest_cure_discovery_patent_kept_label():
                 the_person "Yes sir!"
                 $ ceo_office.show_background()
                 $ the_person.draw_person()
-                "You hear a knock. You look up and see [the_person.possessive_title!l]."
+                "You hear a knock. You look up and see [the_person.possessive_title]."
                 the_person "You wanted to see me?"
                 mc.name "Yes. Come in, and lock the door behind you."
                 the_person "Oh my..."

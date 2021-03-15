@@ -70,7 +70,7 @@ label milk_employee_crisis_label():
         mc.name "Easier? Well I would be glad to help."
         the_person "Oh, would you? The plastic and silicone in these things are so irritating... A nice set of manly hands would be amazing..."
         mc.name "Of course, I would be glad to."
-        "You step around behind [the_person.possessive_title!l] while she picks up her milk containers and puts them up against her chest."
+        "You step around behind [the_person.possessive_title] while she picks up her milk containers and puts them up against her chest."
         mc.name "Plus, this will be a bit faster than if you did it by hand, since I can milk both at the same time."
         the_person "Exactly! All in the name of efficiency!"
         "You put your hands on her engorged mammaries. The skin is hot and feels like its pulled tight, her tits are so full of milk."
@@ -109,7 +109,7 @@ label milk_employee_crisis_label():
         $ the_person.change_arousal(10)
         the_person "Mmm, that's it. Don't worry, I'll let down in a second..."
         if the_person.lactation_sources > 2:
-            "Suddenly, the milk begins to flow much more rapidly as [the_person.possessive_title!l] starts to let down. Milk is pouring into your mouth at an alarming rate."
+            "Suddenly, the milk begins to flow much more rapidly as [the_person.possessive_title] starts to let down. Milk is pouring into your mouth at an alarming rate."
             "You quickly swallow gulp after gulp, just keeping up with her production. Her milk is smooth, sweet, and creamy."
             $ the_person.change_arousal(25)
             $ mc.arousal += 15              #Fun for everyone
@@ -136,7 +136,7 @@ label milk_employee_crisis_label():
             "She holds the bottle carefully, collecting the milk from one side, while you consume the milk from the other. You look up and see her eyes are closed as she enjoys her milking."
             $ the_person.change_arousal(15)
             $ mc.arousal += 10
-        "You enjoy drinking deep from [the_person.possessive_title!l]'s breast. When her supply is depleted, you sit back up, feeling energized from your fresh serving of milk."
+        "You enjoy drinking deep from [the_person.possessive_title]'s breast. When her supply is depleted, you sit back up, feeling energized from your fresh serving of milk."
         $ mc.change_energy(50)
         $ the_person.change_stats(obedience = 5, slut_temp = 1, slut_core = 1)
         the_person "Thank you so much, you have no idea how much I needed that..."

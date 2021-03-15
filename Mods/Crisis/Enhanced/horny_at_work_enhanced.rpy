@@ -448,7 +448,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
                         $ the_item = None
 
-                        "When [the_person.possessive_title!l] is finished stripping down she puts her hands on her hips and watches you jerk off."
+                        "When [the_person.possessive_title] is finished stripping down she puts her hands on her hips and watches you jerk off."
 
                         $ the_person.discover_opinion("not wearing anything")
                         $ the_person.change_slut_temp(the_person.get_opinion_score("not wearing anything")+1)
@@ -510,7 +510,7 @@ label horny_at_work_crisis_enhanced_label():
                                 mc.name "Come on, I don't have all day. I need to get back to work."
                                 "She hesitates, but after a second of thought she sighs and gets onto her hands and knees, crawling under your desk and nestling herself between your legs."
                             $ scene_manager.update_actor(the_person, position = "blowjob")
-                            "You unzip your pants and pull them down, letting your hard cock fall out onto [the_person.possessive_title!l]'s face."
+                            "You unzip your pants and pull them down, letting your hard cock fall out onto [the_person.possessive_title]'s face."
                             "She places her hands on your thighs and slides your cock into her mouth, licking the tip to get it wet before slipping it further back."
                             $ clear_scene()
                             $ the_person.change_arousal(50)
@@ -539,10 +539,10 @@ label horny_at_work_crisis_enhanced_label():
                         if willingness_value >= missionary.slut_requirement:
                             $ desk = mc.location.get_object_with_name("desk") #May be None if there's no desk where you are.
                             if desk is not None:
-                                "You grab [the_person.possessive_title!l] by her hips and lift her up, putting her down on your desk and positioning yourself between her legs."
+                                "You grab [the_person.possessive_title] by her hips and lift her up, putting her down on your desk and positioning yourself between her legs."
                             else:
                                 $ desk = make_floor() # fallback to floor
-                                "You grab [the_person.possessive_title!l] by her hips and lay her down in front of you, spreading her legs around you."
+                                "You grab [the_person.possessive_title] by her hips and lay her down in front of you, spreading her legs around you."
 
                             $ scene_manager.update_actor(the_person, position = "missionary")
                             if mc.location.get_person_count() > 1 and the_person.effective_sluttiness() < (80 - 10*the_person.get_opinion_score("public sex")):

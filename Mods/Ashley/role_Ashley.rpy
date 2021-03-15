@@ -263,7 +263,7 @@ label ashley_intro_label():
         $ mc.business.hire_person(ashley, "Production")
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
-        "As you finish up, you notice [the_person.possessive_title!l] is already calling her sister with the news."
+        "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as she leaves the room. You hope you made the right decision!"
@@ -297,7 +297,7 @@ label ashley_hire_directed_label():
         $ mc.business.hire_person(ashley, "Production")
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
-        "As you finish up and start to leave, you notice [the_person.possessive_title!l] is already calling her sister with the news."
+        "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as you leave the room. You hope you made the right decision!"
@@ -469,7 +469,7 @@ label ashley_classical_concert_date_label():
     $ the_person.change_stats(love = 2, happiness = 2)
     #end branch
     "Soon, the lights dim, and the music begins. It begins with a splendid piano melody."
-    "You and [the_person.possessive_title!l] sit together silently, enjoying the music."
+    "You and [the_person.possessive_title] sit together silently, enjoying the music."
     "It goes through emotional highs and lows. At one point, you look over and you think you see a tear on [the_person.title]'s cheek."
     #TODO next path branch. hold hand (love), put arm around (neutral), or put hand on leg(corrupt)
     "You reach down and take her hand. She jumps at the contact, but quickly takes your hand in hers as the music reaches an especially poignant moment."
@@ -557,7 +557,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     "You enter your office an gesture for her to sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
     if the_person.sluttiness > 50:
-        "As she sits down, you notice [the_person.possessive_title!l]'s posture. She is sticking her chest out. She probably thinks you brought her to your office for some... personal time."
+        "As she sits down, you notice [the_person.possessive_title]'s posture. She is sticking her chest out. She probably thinks you brought her to your office for some... personal time."
     mc.name "I wanted to talk to you again, about your sister, [ashley.title]."
     the_person "Oh!... right..."
     if the_person.sluttiness > 50:
@@ -665,7 +665,7 @@ label ashley_ask_about_porn_label(the_person):
     $ scene_manager.update_actor(the_person, position = "stand4")
     "She gets up and walks around your desk. You stand up too."
     the_person "It's okay. I'm going to. You just enjoy."
-    "With nothing else to say, [the_person.possessive_title!l] reaches down and begins to stroke your cock through your pants."
+    "With nothing else to say, [the_person.possessive_title] reaches down and begins to stroke your cock through your pants."
     the_person "Mmmm, I can tell you want it too!"
     "[the_person.title] has some skilled hands... You close your eyes and enjoy her stroking you for a moment."
     $ mc.change_arousal(10)
@@ -748,7 +748,7 @@ label ashley_post_handjob_convo_label(the_person):
             $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
         "Tell her it was hot \n{color=#ff0000}{size=18}Requires 20 Sluttiness{/size}{/color} (disabled)" if the_person.sluttiness < 20:
             pass
-    "You get to the coffee shop. You order a couple coffees and sit down in a booth across from [the_person.possessive_title!l]."
+    "You get to the coffee shop. You order a couple coffees and sit down in a booth across from [the_person.possessive_title]."
     $ renpy.show("restaurant", what = restaraunt_background)
     #TODO if Alexia still works here
     $ the_person.draw_person(position = "sitting")
@@ -870,7 +870,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         "You puts her arms around her and you pull her close. You bring your face to hers and you kiss for a few moments. She slowly steps back."
         $ the_person.draw_person(position = "stand2")
         the_person "Alright... I'm going to get back to work. I'm so glad we got to talk!"
-        "As [the_person.possessive_title!l] leaves the room, you wonder if you are being smart. Keeping your relationship with her sister secret, even it's only physical, might be difficult."
+        "As [the_person.possessive_title] leaves the room, you wonder if you are being smart. Keeping your relationship with her sister secret, even it's only physical, might be difficult."
     elif ashley_is_fwb_path():
         mc.name "I know it seems like things between [ashley.title] and I are moving really fast, but I want you to know it probably isn't what you are thinking."
         the_person "Oh? I mean... You went on a date and then she was giving you a handjob in your office..."
@@ -1252,7 +1252,7 @@ label coffee_time_steph_gets_handsy_label():
                         "Your cum spurts up and hits the bottom of the table before falling back down onto [stephanie.possessive_title]'s hand and your pants. Oh fuck you are making a mess..."
                         $ cum_on_hand = True
                     "Stop":
-                        "While [the_person.possessive_title!l] is looking something up on her phone, you whisper into [stephanie.title]'s ear."
+                        "While [the_person.possessive_title] is looking something up on her phone, you whisper into [stephanie.title]'s ear."
                         mc.name "Sorry, I don't want to make a mess here..."
                         if stephanie.is_girlfriend():
                             "[stephanie.title] leans over and whispers in your ear."

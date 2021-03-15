@@ -225,7 +225,7 @@ label fetish_serum_quest_intro_followup_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! Meet me down in the lab!"
         $ mc.end_text_convo()
@@ -415,7 +415,7 @@ label fetish_serum_self_code_menu(the_person):
             "You look through the code for several minutes, and you start to catch on to how it works."
             mc.name "There's that reference again. That must be how the program determines when to trigger."
             the_person "Ah! And the reference here must be to skin nerves and endorphin receptors."
-            "The code itself is complicated, but you think it might be possible to modify it into a new program yourself, with the help of [the_person.possessive_title!l]."
+            "The code itself is complicated, but you think it might be possible to modify it into a new program yourself, with the help of [the_person.possessive_title]."
             mc.name "I think we might actually be able to pull this off."
             if fetish_serum_coding_activity not in mc.business.r_div.actions:
                 $ mc.business.r_div.actions.append(fetish_serum_coding_activity)
@@ -475,7 +475,7 @@ label fetish_serum_exhibition_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new social program!"
         $ mc.end_text_convo()
@@ -500,7 +500,7 @@ label fetish_serum_anal_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new anal program!"
         $ mc.end_text_convo()
@@ -525,7 +525,7 @@ label fetish_serum_cum_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new semen program!"
         $ mc.end_text_convo()
@@ -550,7 +550,7 @@ label fetish_serum_breeding_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new reproduction program!"
         $ mc.end_text_convo()
@@ -574,7 +574,7 @@ label fetish_serum_anal_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.end_text_convo()
@@ -599,7 +599,7 @@ label fetish_serum_cum_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.end_text_convo()
@@ -628,7 +628,7 @@ label fetish_serum_breeding_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.end_text_convo()
@@ -653,7 +653,7 @@ label fetish_serum_exhibition_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title!l]."
+        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
         $ mc.end_text_convo()
@@ -729,12 +729,12 @@ label fetish_serum_coding_activity_label():
                             "Once [the_person.title] gets herself tidied up she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
                         else:
                             mc.name "Let's find somewhere private."
-                            "You grab [the_person.possessive_title!l] and soon you find an empty storeroom."
+                            "You grab [the_person.possessive_title] and soon you find an empty storeroom."
                             call fuck_person(the_person,private = True) from _call_fuck_person_serum_coding_event_02
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
                                 the_person "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
-                            "You get your clothes back on and head back to the lab, sitting down at the terminal. After a few minutes, [the_person.possessive_title!l] comes back in."
+                            "You get your clothes back on and head back to the lab, sitting down at the terminal. After a few minutes, [the_person.possessive_title] comes back in."
                             $ the_person.review_outfit()
                             $ the_person.draw_person(position = "sitting")
                             "Once [the_person.title] has gotten herself tidied up and she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
@@ -771,7 +771,7 @@ label fetish_serum_coding_activity_label():
 
     if fetish_serum_get_coding_progress() >= fetish_serum_coding_work_required(): #Serum Finished
         "You run the final set of unit tests. Everything in the program checks out. It's finished!"
-        "You call over to [the_person.possessive_title!l]."
+        "You call over to [the_person.possessive_title]."
         mc.name "Hey [the_person.title], come here."
         $ the_person.draw_person(position = the_person.idle_pose)
         "[the_person.title] quickly walks over."

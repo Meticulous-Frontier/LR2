@@ -109,7 +109,7 @@ label broken_AC_crisis_label_enhanced:
                     call screen enhanced_main_choice_display(build_menu_items([broken_AC_crisis_get_watch_list_menu(the_person)]))
                     $ girl_choice = _return
 
-                    "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title!l]."
+                    "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."
 
                     $ scene_manager.draw_scene()
                     $ scene_manager.add_actor(girl_choice, display_transform = character_center_flipped)

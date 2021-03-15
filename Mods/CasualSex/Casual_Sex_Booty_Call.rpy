@@ -28,7 +28,7 @@ label casual_sex_booty_call_label:
     if the_person is None:
         return
 
-    "While you're going about your day you get a text from [the_person.possessive_title!l]."
+    "While you're going about your day you get a text from [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey stud! Up for some fun?"
     menu:

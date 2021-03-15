@@ -24,7 +24,7 @@ init python:
         #anal_on_lap.link_positions_two_way(doggy, "transition_anal_on_lap_doggy", "transition_doggy_anal_on_lap")
 
 label intro_anal_on_lap(the_girl, the_location, the_object):
-    "You sit down on the [the_object.name] and motion [the_person.possessive_title!l] over to you. You turn her around so her ass is facing you."
+    "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
     mc.name "I want you to sit on my lap, but I'm going to put it here..."
@@ -253,7 +253,7 @@ label orgasm_anal_on_lap(the_girl, the_location, the_object):
     return
 
 label taboo_break_anal_on_lap(the_girl, the_location, the_object):
-    "You sit down on the [the_object.name] and motion [the_person.possessive_title!l] over to you. You turn her around so her ass is facing you."
+    "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
     mc.name "I want you to sit on my lap, but I'm going to put it here..."
