@@ -1428,7 +1428,7 @@ label ashley_clothes_shopping_label(the_person):
         "Although she doesn't say a word, [the_person.title] doesn't make any move to cover herself either. Her body is on display as she reaches for her outfit..."
     else:
         "[the_person.title] absentmindedly covers her mound with one hand as she reaches for her outfit."
-    $ the_person.apply_outfit(builder.personalize_outfit(ashley_get_observed_outfit(), coloured_underwear = True, max_alterations = 1, person_sluttiness = the_person.sluttiness))
+    $ the_person.apply_outfit(builder.personalize_outfit(ashley_get_observed_outfit(), coloured_underwear = True, max_alterations = 1))
     $ the_person.draw_person()
     "When she finishes putting on her new outfit, she steps back so you can get a good look."
     the_person "Okay... What do you think?"

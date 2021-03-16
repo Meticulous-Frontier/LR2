@@ -40,12 +40,40 @@ init 1310 python:
     creative_colored_uniform_policy = Policy(
         name = "Relaxed Uniform Color Policy",
         cost = 1000,
-        desc = "Employees are given some leeway with the colors of their outfits. While active, employees where your uniform pieces but can select their own colors.",
+        desc = "Employees are given some leeway with the colors of their outfits. While active, employees where your uniform pieces but can select their own colors. Reduces happiness penalties for girls who hate work uniforms.",
         toggleable = True,
         requirement = creative_colored_uniform_policy_requirement,
         dependant_policies = strict_uniform_policy
     )
     uniform_policies_list.append(creative_colored_uniform_policy)
+
+    def personal_bottoms_uniform_policy_requirement():
+        return creative_colored_uniform_policy.is_owned()
+
+    personal_bottoms_uniform_policy = Policy(
+        name = "Relaxed Uniform Bottoms Policy",
+        cost = 2000,
+        desc = "Employees are given further leeway on uniforms. While active, employees may choose to swap pants for a skirt and vice versa.",
+        toggleable = True,
+        requirement = personal_bottoms_uniform_policy_requirement,
+        dependant_policies = creative_colored_uniform_policy
+    )
+
+    uniform_policies_list.append(personal_bottoms_uniform_policy)
+
+    def creative_skimpy_uniform_policy_requirement():
+        return creative_colored_uniform_policy.is_owned()
+
+    creative_skimpy_uniform_policy = Policy(
+        name = "Uniform Self Expression Policy",
+        cost = 10000,
+        desc = "Employees are given further leeway on uniforms. While active, employees may choose not to wear a piece or two of the uniform as a form of self expression, even if this would normally be too slutty for current uniform rules.",
+        toggleable = True,
+        requirement = personal_bottoms_uniform_policy_requirement,
+        dependant_policies = creative_colored_uniform_policy
+    )
+
+    uniform_policies_list.append(creative_skimpy_uniform_policy)
 
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()

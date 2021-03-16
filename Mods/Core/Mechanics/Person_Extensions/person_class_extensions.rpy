@@ -793,6 +793,12 @@ init -1 python:
         else:
             location.move_person(self, get_random_from_list([x for x in list_of_places if x.public or x == self.home]))
 
+        if self.should_wear_uniform(): #She's wearing a uniform
+            if creative_colored_uniform_policy.is_active():
+                self.change_happiness(max(-1,self.get_opinion_score("work uniforms")),add_to_log = False)
+            else:
+                self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
+
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
             self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
@@ -1531,7 +1537,7 @@ init -1 python:
         if uniform is not None:
             if creative_colored_uniform_policy.is_active():
                 builder = WardrobeBuilder(self)
-                self.planned_uniform = builder.personalize_outfit(uniform.get_copy())
+                self.planned_uniform = builder.personalize_outfit(uniform.get_copy(),  max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
             else:
                 self.planned_uniform = uniform.get_copy()
             if wear_now:
