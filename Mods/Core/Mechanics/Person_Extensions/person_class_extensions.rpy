@@ -1527,6 +1527,18 @@ init -1 python:
 
     Person.apply_planned_outfit = apply_planned_outfit
 
+    def set_uniform_enhanced(self,uniform, wear_now = False):
+        if uniform is not None:
+            if creative_colored_uniform_policy.is_active():
+                builder = WardrobeBuilder(self)
+                self.planned_uniform = builder.personalize_outfit(uniform.get_copy())
+            else:
+                self.planned_uniform = uniform.get_copy()
+            if wear_now:
+                self.wear_uniform()
+
+    Person.set_uniform = set_uniform_enhanced
+
 ######################################
 # Extend give serum for added goal #
 ######################################

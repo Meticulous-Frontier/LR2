@@ -34,6 +34,19 @@ init 1310 python:
     )
     serum_policies_list.append(overload_production_lines_2_policy)
 
+    def creative_colored_uniform_policy_requirement():
+        return strict_uniform_policy.is_owned()
+
+    creative_colored_uniform_policy = Policy(
+        name = "Relaxed Uniform Color Policy",
+        cost = 1000,
+        desc = "Employees are given some leeway with the colors of their outfits. While active, employees where your uniform pieces but can select their own colors.",
+        toggleable = True,
+        requirement = creative_colored_uniform_policy_requirement,
+        dependant_policies = strict_uniform_policy
+    )
+    uniform_policies_list.append(creative_colored_uniform_policy)
+
     def mandatory_vibe_policy_requirement():
         return maximal_arousal_uniform_policy.is_owned()
 
