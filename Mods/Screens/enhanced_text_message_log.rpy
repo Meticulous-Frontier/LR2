@@ -11,13 +11,12 @@ init 5 python:
             display_list.append(display_tuple)
         return display_list
 
-init 2 style digital_text_2 is text:
-    font "Autobusbold-1ynL.ttf"
+init 2 style digital_text_2 is textbutton_style:
     color "#ffffffff"
-    outlines [(1,"#222222ff",0,0)]
+    outlines [(1,"#000000ff",0,0)]
     yanchor 0.5
     yalign 0.5
-
+    size 18
 
 init 5:
     screen text_message_log(the_person, newest_who = None, newest_what = None):
@@ -98,5 +97,5 @@ init 5:
                                     $ what_align = 1.0
 
                                 if log_who is not None:
-                                    text display_who xsize 75 text_align who_align xalign who_align yalign 0.5 size 18 style "digital_text_2"
-                                text display_what xsize (size_x - 190) text_align what_align xalign what_align yalign 0.5 size 18 style "digital_text_2"
+                                    text display_who xsize 75 text_align who_align xalign who_align style "digital_text_2"
+                                text display_what xsize (size_x - 190) text_align what_align xalign what_align style "digital_text_2"
