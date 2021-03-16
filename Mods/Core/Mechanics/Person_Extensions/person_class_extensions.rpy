@@ -1444,9 +1444,6 @@ init -1 python:
     Person.should_wear_work_outfit = should_wear_work_outfit
 
     def wear_work_outfit(self):
-        if not self.work_outfit:
-            return
-
         if self.has_role(stripper_role):
             self.work_outfit = mc.business.stripper_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
         elif self.has_role(waitress_role):
