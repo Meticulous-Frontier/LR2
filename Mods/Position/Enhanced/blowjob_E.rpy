@@ -373,7 +373,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
             $ blowjob.redraw_scene(the_girl)
 
 
-        if not (the_girl.has_cum_fetish() or the_girl.has_cum_fetish()):
+        if not the_girl.has_cum_fetish():
             if the_girl.get_opinion_score("being covered in cum") > 0 and the_girl.outfit.tits_available():
                 "[the_girl.possessive_title] tilts her head forward and let your cum dribble out of her mouth onto her bare tits."
                 $ the_girl.call_dialogue("cum_mouth")
@@ -396,24 +396,22 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
 
 
 label blowjob_enhanced_kneel_face_cum (the_girl):
-    if the_girl.has_cum_fetish() or the_girl.has_cum_fetish():
-        if the_girl.has_cum_fetish():
-            if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
-                "You go to step back but [the_girl.possessive_title]'s grabs your butt-cheeks with her hands, holding you in place and pushing her face forward."
-                "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
-                "You grunt and twitch as you start to empty your balls right into her throat."
-                "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
-                $ the_girl.cum_in_mouth()
-                "When you're completely finished she pulls back slightly so that she can breathe more easily."
-                $ the_girl.call_dialogue("cum_mouth")
-            else:
-                "You go to step back but [the_girl.possessive_title]'s grabs you by the cock with her hand."
-                "[the_girl.possessive_title] lets you pull back until just the tip of your cock is in her mouth and she begins to stroke you."
-                "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-                "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
-                $ the_girl.cum_in_mouth()
-                $ the_girl.change_arousal(10)
-                $ the_girl.call_dialogue("cum_mouth")
+    if the_girl.has_cum_fetish():
+        if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+            "You go to step back but [the_girl.possessive_title]'s grabs your butt-cheeks with her hands, holding you in place and pushing her face forward."
+            "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
+            "You grunt and twitch as you start to empty your balls right into her throat."
+            "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
+            $ the_girl.cum_in_mouth()
+            "When you're completely finished she pulls back slightly so that she can breathe more easily."
+        else:
+            "You go to step back but [the_girl.possessive_title]'s grabs you by the cock with her hand."
+            "[the_girl.possessive_title] lets you pull back until just the tip of your cock is in her mouth and she begins to stroke you."
+            "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
+            $ the_girl.cum_in_mouth()
+            "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
+        $ the_girl.change_arousal(10)
+        $ the_girl.call_dialogue("cum_mouth")
     else:
         "You take a step back, pulling your cock out of [the_girl.possessive_title]'s mouth with a satisfyingly wet pop, and take aim at her face."
         if (the_girl.get_opinion_score("drinking cum")) > (the_girl.get_opinion_score("cum facials")):
