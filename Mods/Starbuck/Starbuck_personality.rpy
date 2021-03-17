@@ -183,7 +183,7 @@ label starbuck_cum_pullout(the_person):
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Fill me up again and again [the_person.mc_title]! I'm already pregnant!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
@@ -220,7 +220,7 @@ label starbuck_cum_vagina(the_person):
         return
 
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Mmm, another load, right where it belongs..."
             "She sighs happily."
 

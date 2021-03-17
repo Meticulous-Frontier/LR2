@@ -809,7 +809,7 @@ label cougar_cum_pullout(the_person):
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Cum for me [the_person.mc_title], I want feel your fertile seed shooting right into me!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
@@ -851,7 +851,7 @@ label cougar_cum_vagina(the_person):
         return
 
     elif the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Oh my... There's so much of it..."
             "She closes her eyes and sighs happily."
             the_person "It's no mystery how you got me pregnant."

@@ -87,7 +87,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 "She slowly opens her eyes and looks at you."
                 $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
                 $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
-                if the_girl.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
+                if the_girl.knows_pregnant():# The personality reactions but should it not be True instead of False?
                     the_girl "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
                 elif the_girl.on_birth_control:
                     the_girl "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."

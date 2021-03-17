@@ -625,7 +625,7 @@ label princess_cum_vagina(the_person):
         return
 
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Mmm [the_person.mc_title], your cum is so nice and warm..."
             "She sighs happily."
 
