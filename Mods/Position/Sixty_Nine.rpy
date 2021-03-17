@@ -169,23 +169,26 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
 
                     "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and knead your balls."
                     if the_girl.has_cum_fetish():
-                        "After a moment she takes her lips off your dick and continues stroking you."
-                        the_girl "Mmm, I can't wait to feel your hot cum all over my face..."
-                        "She strokes you off faster and holds your cock right against her face."
-                        the_girl "When I'm on top of you like this, I can point it wherever I want! Cover my face with it!"
-                        $ the_girl.discover_opinion("cum facials")
-                        $ the_girl.discover_opinion("being covered in cum")
-                        $ the_girl.change_arousal(5)
-                        "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
-                        "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
-                    elif the_girl.has_cum_fetish():
-                        "After a moment she takes her lips off your dick and continues stroking you."
-                        the_girl "Mmm, I can't wait to feel your cum sliding down my throat [the_girl.mc_title]."
-                        "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
-                        the_girl "I want you to flood my mouth with your cum. Ugh, I want it so badly!"
-                        $ the_girl.discover_opinion("drinking cum")
-                        $ the_girl.change_arousal(5)
-                        "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
+                        if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+                            "After a moment she takes her lips off your dick and continues stroking you."
+                            the_girl "Mmm, I can't wait to feel your hot cum all over my face..."
+                            "She strokes you off faster and holds your cock right against her face."
+                            the_girl "When I'm on top of you like this, I can point it wherever I want! Cover my face with it!"
+                            $ the_girl.discover_opinion("cum facials")
+                            $ the_girl.discover_opinion("being covered in cum")
+                            $ the_girl.change_arousal(5)
+                            $ the_girl.cum_on_face()
+                            "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
+                            "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
+                        else:
+                            "After a moment she takes her lips off your dick and continues stroking you."
+                            the_girl "Mmm, I can't wait to feel your cum sliding down my throat [the_girl.mc_title]."
+                            "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
+                            the_girl "I want you to flood my mouth with your cum. Ugh, I want it so badly!"
+                            $ the_girl.discover_opinion("drinking cum")
+                            $ the_girl.change_arousal(5)
+                            $ the_girl.cum_in_mouth()
+                            "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                     elif (the_girl.get_opinion_score("cum facials") > 0 or the_girl.get_opinion_score("being covered in cum") > 0 ) and the_girl.sluttiness > 40:
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl "Mmm, I can't wait to feel your hot cum all over my face..."

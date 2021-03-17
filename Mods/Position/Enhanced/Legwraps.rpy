@@ -15,21 +15,23 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                 "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
                 "Your condom is ballooned with your seed, hanging off your cock to one side."
                 if the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
-                    "[the_girl.possessive_title] moans as she pours your cum into her mouth."
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
-                elif the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("cum facials")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
-                    "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
-                    the_girl "Mmmmm. So good."
-                    $ the_girl.cum_on_face()
+                    if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+                        $ the_girl.discover_opinion("drinking cum")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                        $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                        "[the_girl.possessive_title] moans as she pours your cum into her mouth."
+                        $ the_girl.cum_in_mouth()
+                        "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    else:
+                        $ the_girl.discover_opinion("cum facials")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
+                        $ the_girl.cum_on_face()
+                        "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
+                        the_girl "Mmmmm. So good."
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.effective_sluttiness() > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -126,21 +128,23 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_condom")
                 "Once your climax has passed you step back and pull your cock out from [the_girl.title]. Your condom is ballooned out, filled with your seed."
                 if the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
-                    "[the_girl.possessive_title] moans as she pours your cum into her mouth."
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
-                elif the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("cum facials")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
-                    "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
-                    the_girl "Mmmmm. So good."
-                    $ the_girl.cum_on_face()
+                    if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+                        $ the_girl.discover_opinion("drinking cum")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                        $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                        "[the_girl.possessive_title] moans as she pours your cum into her mouth."
+                        $ the_girl.cum_in_mouth()
+                        "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    else:
+                        $ the_girl.discover_opinion("cum facials")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
+                        "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
+                        the_girl "Mmmmm. So good."
+                        $ the_girl.cum_on_face()
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.effective_sluttiness() > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches for your cock. With delicate fingers she slides the condom off of you."

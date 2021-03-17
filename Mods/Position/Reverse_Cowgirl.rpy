@@ -186,27 +186,28 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         if the_girl.event_triggers_dict.get("preg_accident", False): # she got pregnant by accident
             the_girl "This is how I got pregnant in the first place, too much potent cum in my fertile pussy."
     elif the_girl.has_cum_fetish():
-        the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
-        "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
-        "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
-        "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-        the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
-        "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-        $ the_girl.cum_in_vagina()
-        $ SB_reverse_cowgirl.redraw_scene(the_girl)
-        "When you finish, [the_girl.possessive_title] slowly pulls up off you."
-        "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]."
-    elif the_girl.has_cum_fetish(): #This will never trigger?
-        "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
-        "She reaches down moving your member between her ass cheeks and her hand."
-        the_girl "Oh, it's so good when you spray me with your seed... Do it! Cum all over me!"
-        "You don't have time to respond before the first wave of cum erupts from your penis."
-        $ the_girl.cum_on_ass()
-        $ SB_reverse_cowgirl.redraw_scene(the_girl)
-        "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
-        "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
-        the_girl "Thank you [the_girl.mc_title]. Oh my god, it's so good..."
-        "You lay back and take a few moments to enjoy the view. [the_girl.possessive_title] is massaging your cum into her ass cheeks with both hands."
+        if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+            the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
+            "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
+            "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
+            "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
+            "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
+            $ the_girl.cum_in_vagina()
+            $ SB_reverse_cowgirl.redraw_scene(the_girl)
+            "When you finish, [the_girl.possessive_title] slowly pulls up off you."
+            "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]."
+        else:
+            "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
+            "She reaches down moving your member between her ass cheeks and her hand."
+            the_girl "Oh, it's so good when you spray me with your seed... Do it! Cum all over me!"
+            "You don't have time to respond before the first wave of cum erupts from your penis."
+            $ the_girl.cum_on_ass()
+            $ SB_reverse_cowgirl.redraw_scene(the_girl)
+            "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
+            "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+            the_girl "Thank you [the_girl.mc_title]. Oh my god, it's so good..."
+            "You lay back and take a few moments to enjoy the view. [the_girl.possessive_title] is massaging your cum into her ass cheeks with both hands."
     elif the_girl.get_opinion_score("creampies") > 0:
         the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
