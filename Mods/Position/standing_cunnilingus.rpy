@@ -43,7 +43,7 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
     the_person "Are you serious? I thought you..."
     "You get down on your knees in front of her."
     mc.name "Ha! Just kidding. Mmm I can't wait to taste your pussy..."
-    the_persn "Ahh... you scared me there..."
+    the_person "Ahh... you scared me there..."
     "She runs her fingers through your hair as you get closer, her cunt inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
     "You bring one hand up to her pussy and spread it open to reveal the tender pink inside."
