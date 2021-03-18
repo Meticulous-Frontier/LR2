@@ -171,16 +171,25 @@ init 3 python:
 label fetish_serum_quest_intro_label():
     $ the_person = mc.business.head_researcher
     $ mc.business.event_triggers_dict["fetish_serum_contact"] = the_person.identifier
-    "As you are going about your daily business, your head researcher messages you."
-    $ mc.start_text_convo(the_person)
-    the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we meet up?"
-    mc.name "Sure, meet me in my office."
-    $ mc.end_text_convo()
-    $ ceo_office.show_background()
-    $ the_person.draw_person()
-    "A few minutes later, [the_person.title] is standing at your door."
-    the_person "Hey [the_person.mc_title]. Mind if I sit down?"
-    mc.name "Go ahead."
+
+    if the_person.location == mc.location:
+        $ the_person.draw_person()
+        the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we talk in your office?"
+        mc.name "Sure, let's go."
+        $ ceo_office.show_background()
+        "A few minutes later, you and [the_person.title] enter your office and sit down."
+    else:
+        "As you are going about your daily business, your head researcher messages you."
+        $ mc.start_text_convo(the_person)
+        the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we meet up?"
+        mc.name "Sure, meet me in my office."
+        $ mc.end_text_convo()
+        $ ceo_office.show_background()
+        $ the_person.draw_person()
+        "A few minutes later, [the_person.title] is standing at your door."
+        the_person "Hey [the_person.mc_title]. Mind if I sit down?"
+        mc.name "Go ahead."
+
     $ the_person.draw_person(position = "sitting")
     the_person "Well, I just got off the phone with an old friend. Nerdy guy I kinda had a thing with at the university before I met you."
     the_person "He has been posting a bunch of stuff on Facebook about his work in robotics, and something he posted caught my eye."
