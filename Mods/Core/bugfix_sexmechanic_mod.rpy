@@ -88,13 +88,13 @@ init 5 python:
                 caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
                     a_person.add_unique_on_room_enter_event(caught_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
             elif a_person.has_role(affair_role) and the_position.slut_requirement > (a_person.sluttiness * .8) + (a_person.get_opinion_score("threesomes") * 5): #You can get away with 80% as slutty as she would do +- threesome inclination
                 caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
                     a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
@@ -342,7 +342,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     if mc.location.get_person_count() == 1 and not private:
         $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
 
-    # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
+    # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
     $ report_log["was_public"] = not private
 
@@ -461,7 +461,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
-            # $ renpy.say("", "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
+            # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
                 $ first_round = False

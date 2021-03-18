@@ -309,7 +309,7 @@ init 2 python:
             else:
                 dart_roll = renpy.random.randint(1,20)
 
-        renpy.say("", "The dart hits " + str(dart_roll) + "!")
+        renpy.say(None, "The dart hits " + str(dart_roll) + "!")
         return dart_roll
 
     def get_sarah_spend_night_threesome_possibility():

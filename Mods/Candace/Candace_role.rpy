@@ -167,7 +167,7 @@ init 2 python:
 
     def create_debug_candace(): #Use this function to make a version of Candace for debug purposes.
         if "candace" in globals():
-            renpy.say("", "Candace already exists! Overwriting")
+            renpy.say(None, "Candace already exists! Overwriting")
 
         candace_base_outfit = Outfit("Candace's base accessories")
         the_eyeshadow = light_eye_shadow.get_copy()
@@ -241,7 +241,7 @@ init 2 python:
 
     def create_debug_genius_candace():  #Use this function to make a version of genius Candace for debug purposes.
         if "candace" in globals():
-            renpy.say("", "Candace already exists! Overwriting")
+            renpy.say(None, "Candace already exists! Overwriting")
 
         candace_base_outfit = Outfit("Candace's base accessories")
         the_eyeshadow = light_eye_shadow.get_copy()

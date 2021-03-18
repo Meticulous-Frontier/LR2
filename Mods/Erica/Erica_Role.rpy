@@ -98,12 +98,12 @@ init 2 python:
     }
 
     def display_yoga_dialog(pose):
-        renpy.say("", erica_yoga_pose_descriptions[pose])
+        renpy.say(None, erica_yoga_pose_descriptions[pose])
         if slutty_class:
-            renpy.say("", erica_yoga_sexy_pose_descriptions[pose])
+            renpy.say(None, erica_yoga_sexy_pose_descriptions[pose])
             mc.change_arousal(20)
             if nude_class:
-                renpy.say("", erica_yoga_nude_pose_descriptions[pose])
+                renpy.say(None, erica_yoga_nude_pose_descriptions[pose])
                 mc.change_arousal(10)
         else:
             mc.change_arousal(10)
@@ -2183,7 +2183,7 @@ init 2 python:
 
         scene_manager.clear_scene(reset_actor = False)
         for idx in range(0, 3):
-            # renpy.say("", "Add actor: " + back_row[idx].name)
+            # renpy.say(None, "Add actor: " + back_row[idx].name)
             scene_manager.add_actor(back_row[idx], position = pose, display_transform = transforms[idx])
 
         scene_manager.draw_scene()

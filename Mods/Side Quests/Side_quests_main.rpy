@@ -138,13 +138,13 @@ init python: #For now default init. May change later if we know better.
 
         def debug_text_dump(self):  #Use this command in the console to get a dump of quest tracker status.
             if not self.active_quest:
-                renpy.say("","There is currently no active quest.")
+                renpy.say(None,"There is currently no active quest.")
             else:
-                renpy.say("","The current active quest: " + self.active_quest.quest_name)
+                renpy.say(None,"The current active quest: " + self.active_quest.quest_name)
 
-            renpy.say("","The current list of quests is:")
+            renpy.say(None,"The current list of quests is:")
             for quest in self.quest_list:
-                renpy.say("", quest.quest_name)
+                renpy.say(None, quest.quest_name)
             return
 
         def attempt_force_quest(self, quest_name = None, override_active = False):  #Use this command in the console to attempt to for a new quest. optional param to force a specific quest for debug purpuses.

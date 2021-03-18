@@ -97,14 +97,14 @@ init 5 python:
         found = find_in_list(lambda x: x[0] == daughter_work_crisis, crisis_list)
         if found:
             found[1] = chance
-            #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
+            #renpy.say(None, "Updated daughter at work crisis chance to: " + str(chance) + "%%")
         return
 
     def update_hire_mother_crisis(chance):
         found = find_in_list(lambda x: x[0] == hire_mother_work_crisis, crisis_list)
         if found:
             found[1] = chance
-            #renpy.say("", "Updated mother at work crisis chance to: " + str(chance) + "%%")
+            #renpy.say(None, "Updated mother at work crisis chance to: " + str(chance) + "%%")
         return
 
 

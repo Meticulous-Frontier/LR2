@@ -16,9 +16,9 @@ init 5 python:
         for clothing in person.outfit.get_half_off_to_vagina_list():
             scene_manager.draw_animated_removal(person, clothing, half_off_instead = True)
             if person.outfit.vagina_available():
-                renpy.say("","You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
+                renpy.say(None,"You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
             else:
-                renpy.say("","You pull her " + clothing.display_name + " out of the way.")
+                renpy.say(None,"You pull her " + clothing.display_name + " out of the way.")
         return
 
     def horny_at_work_get_people_sets():
@@ -128,11 +128,11 @@ label horny_at_work_crisis_enhanced_label():
                 if len(unhappy_people) == 0: #She was the only other unhappy person, we're done here
                     pass
                 elif len(unhappy_people) == 1:
-                    $ renpy.say("", unhappy_people[0].title + " joins her as she leaves, giving you the same look of disgust as she gets up from her desk.")
+                    $ renpy.say(None, unhappy_people[0].title + " joins her as she leaves, giving you the same look of disgust as she gets up from her desk.")
                     $ scene_manager.remove_actor(unhappy_people[0])
                 else:
                     #There are two or more people. Let's construct a title string!
-                    $ renpy.say("",format_group_of_people(unhappy_people) + " storm out of the room with her, shaking their heads as they leave.")
+                    $ renpy.say(None,format_group_of_people(unhappy_people) + " storm out of the room with her, shaking their heads as they leave.")
 
                 python:
                     for unhappy_person in unhappy_people: #Note that the main person was removed from the list so these penalties aren't being applied twice.
@@ -147,9 +147,9 @@ label horny_at_work_crisis_enhanced_label():
             if neutral_people:
                 $ scene_manager.add_group(neutral_people, position = "sitting")
                 if len(neutral_people) > 1:
-                    $ renpy.say("", format_group_of_people(neutral_people) + " all see you jerking off at your desk, but none of them seem upset or surprised by it.")
+                    $ renpy.say(None, format_group_of_people(neutral_people) + " all see you jerking off at your desk, but none of them seem upset or surprised by it.")
                 else:
-                    $ renpy.say("", format_group_of_people(neutral_people) + " notices you jerking off, but she doesn't seem upset or surprised by it.")
+                    $ renpy.say(None, format_group_of_people(neutral_people) + " notices you jerking off, but she doesn't seem upset or surprised by it.")
 
                 if masturbating_people:
                     python:
@@ -158,11 +158,11 @@ label horny_at_work_crisis_enhanced_label():
                             scene_manager.strip_actor_strip_list(mast_person, mast_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
 
                         if len(masturbating_people) == 1:
-                            renpy.say("", format_group_of_people(masturbating_people) + " even joins in, quietly sliding her hand down to her crotch and rubbing her pussy.")
+                            renpy.say(None, format_group_of_people(masturbating_people) + " even joins in, quietly sliding her hand down to her crotch and rubbing her pussy.")
                         elif len(masturbating_people) == 2:
-                            renpy.say("", format_group_of_people(masturbating_people) + " even join in, both sliding their hands down to their pussies and rubbing them quietly.")
+                            renpy.say(None, format_group_of_people(masturbating_people) + " even join in, both sliding their hands down to their pussies and rubbing them quietly.")
                         else:
-                            renpy.say("", format_group_of_people(masturbating_people) + " all quietly join in as well, quietly sliding hands down to their pussies and joining the group masturbation session.")
+                            renpy.say(None, format_group_of_people(masturbating_people) + " all quietly join in as well, quietly sliding hands down to their pussies and joining the group masturbation session.")
 
             if helpful_people:
                 $ helpful_person = get_random_from_list(helpful_people)
@@ -176,11 +176,11 @@ label horny_at_work_crisis_enhanced_label():
                 if len(helpful_people) > 1: #More than one person, so describe them!
                     $ others = [x for x in helpful_people if x not in [helpful_person]]
                     if len(others) == 1:
-                        $ renpy.say("", format_group_of_people(others) + " gets up and stands behind [helpful_person.possessive_title], obviously willing to do the same.")
+                        $ renpy.say(None, format_group_of_people(others) + " gets up and stands behind [helpful_person.possessive_title], obviously willing to do the same.")
                     elif len(others) == 2:
-                        $ renpy.say("", format_group_of_people(others) + " both get up and stand behind [helpful_person.possessive_title], obviously willing to do the same.")
+                        $ renpy.say(None, format_group_of_people(others) + " both get up and stand behind [helpful_person.possessive_title], obviously willing to do the same.")
                     else:
-                        $ renpy.say("", format_group_of_people(others) + " all get up and stand behind [helpful_person.possessive_title], obviously willing to do the same.")
+                        $ renpy.say(None, format_group_of_people(others) + " all get up and stand behind [helpful_person.possessive_title], obviously willing to do the same.")
                     $ del others
                 $ del helpful_person
 
@@ -246,7 +246,7 @@ label horny_at_work_crisis_enhanced_label():
                         if len(helpful_people) > 1:
                             "The other girls are still standing next to your desk, and you haven't exhausted yourself quite yet..."
                         else:
-                            $ renpy.say("", helpful_people[0].title + " is still standing next to your desk, and you haven't exhausted yourself quite yet...")
+                            $ renpy.say(None, helpful_people[0].title + " is still standing next to your desk, and you haven't exhausted yourself quite yet...")
 
                         $ exit_option = "Finish up"
                         if "action_mod_list" in globals():
@@ -299,7 +299,7 @@ label horny_at_work_crisis_enhanced_label():
                     if len(masturbating_people) > 1:
                         "Not long after you're finished you hear girls around the office climax, each one punctuated by a little gasp and moan."
                     else:
-                        $ renpy.say("", "Not long after you hear a gasp and a moan as " + masturbating_people[0].title + " brings herself to climax as well.")
+                        $ renpy.say(None, "Not long after you hear a gasp and a moan as " + masturbating_people[0].title + " brings herself to climax as well.")
 
             python:
                 scene_manager.clear_scene()

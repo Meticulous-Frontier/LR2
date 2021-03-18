@@ -314,7 +314,7 @@ init -1 python:
 
 
         def run_day(self):
-            #renpy.say("","DEBUG: run day running correctly")
+            #renpy.say(None,"DEBUG: run day running correctly")
             if day%7 == 3 or renpy.random.randint(0,100) < 50: #If the new day is Friday or random roll is out of town.
                 self.home = purgatory
                 self.set_schedule(purgatory, times = [0, 1, 2, 3, 4])

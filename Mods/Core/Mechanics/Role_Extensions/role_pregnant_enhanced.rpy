@@ -19,7 +19,7 @@ init 2 python:
                         argument_info += str(arg)
 
                 if len(argument_info) > 0:
-                    renpy.say("", "Available: " + crisis.name + "\n" + argument_info)
+                    renpy.say(None, "Available: " + crisis.name + "\n" + argument_info)
 
 
     def silent_pregnant_tits_start_person(person):

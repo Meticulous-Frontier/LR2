@@ -626,7 +626,7 @@ label SB_threesome_description(the_person_one, the_person_two, the_position, the
             position_choice = "Finish"
         else:
             if girl_in_charge:
-                renpy.say("",the_person_one.name +  " is taking the lead. She keeps " + the_position.verb + "ing you.")
+                renpy.say(None,the_person_one.name +  " is taking the lead. She keeps " + the_position.verb + "ing you.")
                 position_choice = the_position
                 #TODO: this is where we perform any changes for the girl.
             else:

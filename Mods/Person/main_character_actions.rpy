@@ -182,9 +182,9 @@ label mc_hire_person_label(person):
 
     python:
         if mc.business.funds < (person.calculate_base_salary() * 10):
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
+            renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
         else:
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
+            renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
 
     menu:
         "Yes":
@@ -250,7 +250,7 @@ label mc_schedule_person_label(*args):
         return
     else:
         $ person.set_schedule(room_choice, times = [time_slot])
-        $ renpy.say("", time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
+        $ renpy.say(None, time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
         return
 
 # Follower Labels
