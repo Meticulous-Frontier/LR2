@@ -103,7 +103,7 @@ label free_strip_scene(the_person, must_be_naked = True):
             mc.name "I want to see you from a different angle."
 
             call screen enhanced_main_choice_display(build_menu_items([sb_free_strip_build_pose_menu(picked_pose)]))
-            if _return:
+            if _return in sb_free_strip_pose_list:
                 $ picked_pose = _return
                 "[the_person.possessive_title] nods and moves for you."
             else:
