@@ -340,6 +340,11 @@ label cum_fetish_generic_intro_label(the_person):
     $ mc.location.show_background()
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
+    $ mc.phone.add_non_convo_message(the_person, "Hey, are you awake?")
+    $ mc.phone.add_non_convo_message(the_person, "I want to see you tonight. Can I come over?")
+    $ mc.phone.add_non_convo_message(the_person, "I really need to fuck! Want to fuck me?")
+    $ mc.phone.add_non_convo_message(the_person, "Oh my god, never mind. I shouldn't have sent that. I'm drunk.")
+    $ mc.phone.add_non_convo_message(the_person, "I'm going to come over so I can apologize.")
     "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
     $ mc.start_text_convo(the_person)
     the_person "I'm here... Should I just knock on the door?"

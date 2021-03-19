@@ -141,9 +141,9 @@ label quest_cure_discovery_intro_label():
     if the_person == None:
         return #Bad end
     if mc.location != rd_division:
-        "You get a text on your phone. It's from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP!"
+        mc.name "On my way!"
         $ mc.end_text_convo()
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
@@ -236,7 +236,6 @@ label quest_cure_discovery_patent_sold_label():
     if the_person == None:
         return
     #TODO test to make sure market contact still works for us.
-    "You get a text message from [the_person.title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey there! I just got some good news on that patent you have for [the_disease]."
     mc.name "Glad to hear it. What is the news?"

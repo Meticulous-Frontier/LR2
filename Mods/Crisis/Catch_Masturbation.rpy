@@ -186,11 +186,11 @@ label SB_caught_masturbating_crisis_label():
                             "On your way back to your work, you swing by [the_person.possessive_title]'s desk. You write her a quick note."
                             "Thanks for the show!"
                             "You finish it with your initials and leave it next to her computer monitor."
-                            "Half an hour later while you are back into your work, you get a text message from [the_person.possessive_title]."
+                            "Half an hour later while you are back at work..."
                             $ mc.start_text_convo(the_person)
                             if the_person.effective_sluttiness() > 60:
                                 the_person "Next time join in!!!"
-                            else :
+                            else:
                                 the_person ";)"
                             $ mc.end_text_convo()
 

@@ -42,7 +42,7 @@ label aggressive_anal_fetish_employee_label():
     $ the_person = get_needy_anal_fetish_employee()
     if the_person is None:
         return
-    "You get a text message from [the_person.title]."
+
     $ mc.start_text_convo(the_person)
     the_person "Hey, I really need your help with something. Can you meet me in your office really quick?"
     mc.name "Sure, I'll meet you there in five."

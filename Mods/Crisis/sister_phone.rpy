@@ -20,7 +20,6 @@ label sister_phone_crisis_action_label:
     if the_person.love < lowest_stat:
         $ lowest_stat = lily.love
 
-    "While you're going about your day you get a text from [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     if lowest_stat >= 100:
         #Both love and sluttiness are very high, she sends you super slutty selfies and says she can't wait till you come home, fuck her, and make her your girl.

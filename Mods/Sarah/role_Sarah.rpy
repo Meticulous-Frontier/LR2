@@ -2065,7 +2065,6 @@ label Sarah_arrange_threesome_label(the_person):
 
 label Sarah_initial_threesome_label():
     if sarah.event_triggers_dict.get("initial_threesome_arranged", False) == False:
-        "You get a text from [sarah.possessive_title]."
         $ mc.start_text_convo(sarah)
         sarah "Hey, are we still on for tonight?"
         mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, It'll be ready next week."
@@ -2084,7 +2083,7 @@ label Sarah_initial_threesome_label():
     "It's Saturday night. You quickly head home, you have an exciting night ahead of you."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
-    "You make sure your bedroom is nice and tidy. Soon you get a text on your phone."
+    "You make sure your bedroom is nice and tidy."
     $ mc.start_text_convo(the_person)
     sarah "Hey, I'm here."
     $ mc.end_text_convo()
@@ -2185,12 +2184,11 @@ label Sarah_ask_for_baby_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ scene_manager = Scene()
-    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
     the_person "Hell yeah! I'll bring some stuff over."
-    "About 20 minutes later she texts you."
+    "About 20 minutes later..."
     the_person "Hey, I'm here! Come let me in!"
     $ mc.end_text_convo()
     "You head to your front door and open it."

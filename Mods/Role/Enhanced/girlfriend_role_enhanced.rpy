@@ -113,7 +113,6 @@ label girlfriend_sleepover_label():
         $ mc.change_location(bedroom)
         $ mc.location.show_background()
         "When you finish, you go to your room. You make sure everything is nice and tidy."
-        "Eventually, you get a text message."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I'm here, let me in?"
         $ mc.end_text_convo()

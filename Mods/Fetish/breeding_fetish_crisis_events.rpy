@@ -53,10 +53,9 @@ label breeding_fetish_high_fertility_crisis_label():
         mc.name "Something you need tonight [the_person.title]?"
         the_person "Yeah... something like that!"
     else:
-        "You get a text on your phone. It's from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey. I need your help with something. I'm on my way over."
-        "Hmm, she's inviting herself over? You text her back."
+        "Hmm, she's inviting herself over?"
         mc.name "Ok, text me when you get here."
         "A few minutes later, she texts you again."
         the_person "I'm here! Let me in!"

@@ -26,7 +26,6 @@ label enhanced_special_training_crisis_label():
 
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     show screen person_info_ui(the_person)
-    "You get a text  from [the_person.title]."
     $ mc.start_text_convo(the_person)
     the_person "[the_person.mc_title], I've just gotten word about a training seminar going on right now a few blocks away. I would love to take a trip over and see if there is anything I could learn."
     the_person "There's a sign up fee of $500. If you can cover that, I'll head over right away."
@@ -34,7 +33,6 @@ label enhanced_special_training_crisis_label():
         the_person "I'll personally repay you for it later..."
     menu:
         "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Costs: $500{/size}{/color}" if mc.business.funds >= 500:
-            "You type up a response."
             mc.name "That sounds like a great idea. I'll call and sort out the fee, you start heading over."
             the_person "Understood, thank you sir! What would you like me to focus on?"
 
@@ -43,7 +41,7 @@ label enhanced_special_training_crisis_label():
                 $ mc.business.change_funds(-500)
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
                 $ mc.log_event(the_person.title + ": +2 " + get_work_skills()[_return][0], "float_text_grey")
-                "[the_person.title] leaves work for a few hours to attend the training seminar. When she returns she has learned several useful techniques." # NOTE: Make this less generic
+                $ renpy.say(mc.name, "Work on your " + get_work_skills()[_return][0] + " skills.")
                 if the_person.effective_sluttiness() >= 20:
                     # follow up on promise made
                     $ add_return_from_seminar_action(the_person)
@@ -52,7 +50,6 @@ label enhanced_special_training_crisis_label():
             pass
 
         "Tell her to stay at work":
-            "You type up a response."
             mc.name "I'm sorry [the_person.title], but there aren't any extra funds in the budget right now."
             the_person "Noted, maybe some other time then."
 

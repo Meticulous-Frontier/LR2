@@ -34,7 +34,6 @@ label fetish_stephanie_first_fetish_label(the_person):
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
         mc.name "Sure, follow me to my office."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
         mc.name "Sure, meet me in my office."

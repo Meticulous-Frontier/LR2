@@ -179,7 +179,7 @@ label fetish_serum_quest_intro_label():
         $ ceo_office.show_background()
         "A few minutes later, you and [the_person.title] enter your office and sit down."
     else:
-        "As you are going about your daily business, your head researcher messages you."
+        "As you are going about your daily business..."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we meet up?"
         mc.name "Sure, meet me in my office."
@@ -234,9 +234,9 @@ label fetish_serum_quest_intro_followup_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! Meet me down in the lab!"
+        mc.name "On my way!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -484,9 +484,9 @@ label fetish_serum_exhibition_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new social program!"
+        mc.name "I'll be in the lab shortly!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -509,9 +509,9 @@ label fetish_serum_anal_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new anal program!"
+        mc.name "On my way!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -534,9 +534,9 @@ label fetish_serum_cum_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new semen program!"
+        mc.name "Be there in a few!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -559,9 +559,9 @@ label fetish_serum_breeding_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. She is excited to see you."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey! I have details on the new reproduction program!"
+        mc.name "Be there soon!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -583,9 +583,9 @@ label fetish_serum_anal_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
+        mc.name "Leaving now!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -608,9 +608,9 @@ label fetish_serum_cum_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
+        mc.name "On my way!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -637,9 +637,9 @@ label fetish_serum_breeding_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
+        mc.name "Be there soon!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
@@ -662,9 +662,9 @@ label fetish_serum_exhibition_warning_label():
     if mc.location == mc.business.r_div:
         "[the_person.title] walks in the door of the lab. When she sees you, she walks right up."
     else:
-        "You get a text message from [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP."
+        mc.name "Coming to the lab now!"
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)

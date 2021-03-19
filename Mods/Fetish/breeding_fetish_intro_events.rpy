@@ -568,10 +568,9 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             call breeding_fetish_stephanie_normal_label(the_person) from _breeding_fetish_steph_normal_01
     else:
         if the_person.event_triggers_dict.get("is_bimbo", False):
-            "You get a text message from [the_person.possessive_title]."
             $ mc.start_text_convo(the_person)
             the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
-            mc.name "Sure, meet me in my office."
+            mc.name "Sure, I'll meet you there."
             $ mc.end_text_convo()
             $ mc.change_location(office)
             $ ceo_office.show_background()
@@ -595,7 +594,6 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
                 mc.name "Sure, follow me to my office."
             else:
-                "You get a text message from [the_person.possessive_title]."
                 $ mc.start_text_convo(the_person)
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
                 mc.name "Sure, meet me in my office."
@@ -688,7 +686,6 @@ label breeding_fetish_nora_intro_label():
 
 label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     $ the_person = starbuck
-    "You get a text message from [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, do you think you could help me close up the shop tonight? I have a few things I need help with."
     "You consider it. You don't have much else going on right now, so you decide to agree."
@@ -768,7 +765,6 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ scene_manager = Scene()
-    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
@@ -835,13 +831,12 @@ label breeding_fetish_erica_intro_label():
     $ the_person = erica
     $ the_person.fertility_percent = 20.0
 
-    "You get a text message. It's from [the_person.title]."
     $ mc.start_text_convo(the_person)
     if the_person.is_girlfriend():
         the_person "Hey! Can you come over? It's supposed to be cold out and it would nice to have you help keep my bed warm... Plus I kinda want to talk to you about something!"
     else:
         the_person "Hey... Can you come over tonight? I have something I need to talk to you about..."
-    "You don't really have anything going on, so you text her back."
+    "You don't really have anything going on..."
     mc.name "Sure, I'm on my way over."
     $ mc.end_text_convo()
 

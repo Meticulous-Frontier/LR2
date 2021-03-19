@@ -655,7 +655,6 @@ label quest_cuckold_employee_after_window_label():
             $ become_pregnant(the_person)
 
     if the_person.is_pregnant():#Success
-        "You get a text message from [the_person.title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey bull! I was supposed to start my period a couple of days ago, but I haven't. Just thought you might find that interesting ;)"
         "Oh boy, a missed period is a good sign! You wonder if your seed is growing inside of her..."
@@ -668,7 +667,6 @@ label quest_cuckold_employee_after_window_label():
         return
 
     else:
-        "You get a text message from [the_person.title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey... just wanted to let you know I just started my period. I guess it didn't take."
         mc.name "We can try again in a few weeks."
@@ -694,9 +692,9 @@ label quest_cuckold_employee_reconsider_label(the_person):
 
 label quest_cuckold_employee_knocked_up_label():
     $ the_person = quest_cuckold_employee_get_target()
-    "You get a text message from [the_person.title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey! I need to see you in your office, ASAP!"
+    mc.name "Ok, I'll be there soon."
     $ mc.end_text_convo()
     $ mc.change_location(office)
     $ ceo_office.show_background()
