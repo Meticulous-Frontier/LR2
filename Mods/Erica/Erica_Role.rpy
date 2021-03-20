@@ -1361,11 +1361,15 @@ label erica_money_problem_sarah_convincing_employee_label():
         the_person = mc.business.hr_director
         the_target = get_yoga_convince_employee_target()
 
-    if the_target == None:
+    if the_target is None:
         #Figure out how to fix this
         return
 
-    "As you go about your work, you walk by the break room. Inside you can hear [the_person.possessive_title] talking to someone else."
+    # change location to lobby, since break room is located here
+    $ mc.change_location(lobby)
+    $ mc.location.show_background()
+
+    "Passing by the break room, you can hear [the_person.possessive_title] talking to someone else inside."
     $ scene_manager.add_actor(the_person, position = "sitting")
     $ scene_manager.add_actor(the_target, position = "sitting", display_transform = character_center_flipped)
     the_person "Yeah, it has lots of health benefits too!"
