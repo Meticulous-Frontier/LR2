@@ -193,11 +193,11 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("anal creampies") > 0 or mc.condom:
             the_girl "Yes! Shove it in deep [the_girl.mc_title]!"
     elif mc.condom:
-        the_girl "That's it baby, cum for me! Show me how much you love my ass!"
+        the_girl "That's it [the_girl.mc_title], cum for me! Show me how much you love my ass!"
     elif the_girl.sluttiness < 80:
         the_girl "Oh my god I can't believe I'm letting you do this..."
     else:
-        the_girl "That's it baby, cum for me! Show me how much you love my ass!"
+        the_girl "That's it [the_girl.mc_title], cum for me! Show me how much you love my ass!"
 
     menu:
         "Cum inside of her":
