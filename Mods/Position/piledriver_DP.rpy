@@ -1,4 +1,4 @@
-﻿init:
+init:
     python:
         piledriver_DP = Position(name = "Piledriver DP", slut_requirement = 95, slut_cap = 130, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
@@ -23,7 +23,7 @@
         # piledriver_DP.link_positions(missionary,"transition_piledriver_DP_missionary")
 
 label intro_piledriver_DP(the_girl, the_location, the_object):
-    "You grab your strap-on from your bag, then turn to [the_girl.title]"
+    "You grab your strap-on from your bag, then turn to [the_girl.title]."
     mc.name "[the_girl.title], I want you to lie down for me. I'm going to fuck your pussy and your ass."
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
@@ -198,7 +198,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 $ the_girl.cum_in_vagina()
                 $ piledriver_DP.redraw_scene(the_girl)
                 if the_girl.knows_pregnant():
-                    the_girl "Oh fuck... thats a lot, next time spray it all over me."
+                    the_girl "Oh fuck... that's a lot, next time spray it all over me."
                 elif not the_girl.on_birth_control:
                     the_girl "Oh fuck... what if I get pregnant [the_girl.mc_title]?"
                 "You take a moment to catch your breath, then sit back and pull your cock out of [the_girl.title]. Her ass gapes slightly where the strap-on was previously buried."

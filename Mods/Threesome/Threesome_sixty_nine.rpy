@@ -141,7 +141,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             "You decide they've been contained for too long."
             while not the_girl_2.outfit.get_upper_top_layer():    #If covered up, have her take her top off
                 $ the_clothing = the_girl_2.outfit.get_upper_top_layer()
-                "You take off [the_girl_2.title]'s [the_clothing.name]"
+                "You take off [the_girl_2.title]'s [the_clothing.name]."
                 $ the_girl_2.outfit.remove_clothing(the_clothing)
                 $ scene_manager.draw_scene()
             $ the_clothing = None
@@ -155,7 +155,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             $ top_clothing = None
             while the_girl_2.outfit.get_upper_top_layer():    #If covered up, have her take her top off
                 $ the_clothing = the_girl_2.outfit.get_upper_top_layer()
-                "You take off [the_girl_2.title]'s [the_clothing.name]"
+                "You take off [the_girl_2.title]'s [the_clothing.name]."
                 $ the_girl_2.outfit.remove_clothing(the_clothing)
                 $ scene_manager.draw_scene()
             $ the_clothing = None
@@ -424,11 +424,11 @@ label strip_ask_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_loc
 label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "Both girls are moaning wildly into each other's crotches"
-            "You can see [the_girl_1.possessive_title] legs shaking as an orgasm hits her."
+            "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
             "[the_girl_2.title] is right behind her, her hips pushing back against [the_girl_1.title]'s face as she cums too."
             return
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can see [the_girl_1.possessive_title] legs shaking as an orgasm hits her."
+            "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
             "Her moans are muffled by [the_girl_2.title]'s pussy."
             return
 

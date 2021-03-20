@@ -143,7 +143,7 @@ init 5 python:
             key_list.extend([x.effect for x in active_excluded_events])
 
         random_crisis = get_random_from_list(key_list)
-        # renpy.say("", "Run Crisis [" + str(__builtin__.len(key_list)) +"]: " + random_crisis)
+        # renpy.say(None, "Run Crisis [" + str(__builtin__.len(key_list)) +"]: " + random_crisis)
         if random_crisis in crisis_tracker_dict.keys():
             crisis_tracker_dict[random_crisis] = average + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
         return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
@@ -234,7 +234,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
     # Then: Add research crisis when serum is finished, requiring additional input from the player and giving the chance to test a serum on the R&D staff.
 
     python:
-        #renpy.say("", "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
+        #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
@@ -242,7 +242,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
     while count < advance_time_max_actions:
         if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
             if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
-                # $ renpy.say("", "Run: " + act.name)
+                # $ renpy.say(None, "Run: " + act.name)
                 $ advance_time_action_list[count].call_action()
                 $ clear_scene()
 
@@ -271,11 +271,11 @@ label advance_time_bankrupt_check_label():
             # "advance_time_bankrupt_check_label" # DEBUG
             mc.business.bankrupt_days += 1
             if mc.business.bankrupt_days == mc.business.max_bankrupt_days:
-                renpy.say("","With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
+                renpy.say(None,"With no funds to pay your creditors you are forced to close your business and auction off all of your materials at a fraction of their value. Your story ends here.")
                 renpy.full_restart()
             else:
                 days_remaining = mc.business.max_bankrupt_days-mc.business.bankrupt_days
-                renpy.say("","Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
+                renpy.say(None,"Warning! Your company is losing money and unable to pay salaries or purchase necessary supplies! You have [days_remaining] days to restore yourself to positive funds or you will be foreclosed upon!")
         else:
             mc.business.bankrupt_days = 0
     return

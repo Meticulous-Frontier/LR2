@@ -97,14 +97,14 @@ init 5 python:
         found = find_in_list(lambda x: x[0] == daughter_work_crisis, crisis_list)
         if found:
             found[1] = chance
-            #renpy.say("", "Updated daughter at work crisis chance to: " + str(chance) + "%%")
+            #renpy.say(None, "Updated daughter at work crisis chance to: " + str(chance) + "%%")
         return
 
     def update_hire_mother_crisis(chance):
         found = find_in_list(lambda x: x[0] == hire_mother_work_crisis, crisis_list)
         if found:
             found[1] = chance
-            #renpy.say("", "Updated mother at work crisis chance to: " + str(chance) + "%%")
+            #renpy.say(None, "Updated mother at work crisis chance to: " + str(chance) + "%%")
         return
 
 
@@ -620,11 +620,11 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif the_person.outfit.vagina_visible():
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
         $ person_choice.change_slut_temp(3)
-        person_choice "Uh...right, what can I do for you, [person_choice.mc_title]"
+        person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
         "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
         $ person_choice.change_slut_temp(1)
-        person_choice "Oh...what can I do for you, [person_choice.mc_title]"
+        person_choice "Oh...what can I do for you, [person_choice.mc_title]."
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
@@ -670,11 +670,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     $ scene_manager.update_actor(person_choice, emotion = "happy")
     "[person_choice.title] thinks for a moment, then smiles at both of you."
-    # start threesome attempt when sluttiness is high enough and she doesn't hate threesomes
+
     # when HR Director is Sarah, also wait for threesome unlock event
-    if (person_choice.sluttiness > 80 and the_person.sluttiness > 80
-        and person_choice.get_opinion_score("threesomes") > -2
-        and (not the_person is sarah or sarah.event_triggers_dict.get("threesome_unlock", 0) > 0)):
+    if willing_to_threesome(person_choice, the_person) and (not the_person is sarah or sarah_threesomes_unlocked()):
 
         person_choice "Thanks for calling me in. Is that all? Or was there maybe someone... I mean someTHING else on the to do list?"
         menu:
@@ -802,7 +800,7 @@ label HR_director_review_discoveries_label(the_person):
             if relaxed_uniform_policy.is_owned():
                 the_person "Hmmm, I see here that we have recently opened up company policy to allow for uniform guidelines."
                 the_person "This is something that could potentially alienate some of our employees. It might be a good idea if we include opinions on work uniforms when meeting one on one with them."
-                "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title!l] is right."
+                "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title] is right."
                 mc.name "That's a good idea. Go ahead and implement that going forward."
                 the_person "Sure thing [the_person.mc_title]!"
                 $ set_HR_director_tag("business_HR_uniform", True)
@@ -972,7 +970,7 @@ label HR_director_meeting_on_demand_label(the_person):
     $ scene_manager = Scene() # make sure we have an empty scene manager for on-demand meetings
     the_person "Okay, I think I have time for that! Let me grab my dossiers from Monday and I'll meet you in your office."
     $ ceo_office.show_background()
-    "You head to your office and [the_person.possessive_title!l] quickly arrives with her papers."
+    "You head to your office and [the_person.possessive_title] quickly arrives with her papers."
     $ the_person.draw_person(position = "sitting")
     the_person "Ok! Let me see who I have on my list here..."
     call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_4
@@ -1015,7 +1013,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         return
 
     if get_HR_director_unlock("titfuck") == False:
-        if the_person is sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+        if the_person is sarah and sarah_epic_tits_progress() > 1:
             the_person "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
             the_person "It felt soooo good last time. I've been thinking about it a lot."
             mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."
@@ -1034,7 +1032,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "With her hands on each side of her chest, she wraps her sizeable boobs around you and begins to bounce them up and down."
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
             $ set_HR_director_unlock("titfuck", True)
-            "After you finish, [the_person.possessive_title!l] runs her hands along her tits, rubbing your cum into her skin."
+            "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
             the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
             "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             $ the_person.apply_planned_outfit()
@@ -1060,7 +1058,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             if the_person.outfit.vagina_available():
                 "She spreads her legs, her pussy on display in front of you."
             else:
-                "You start to strip [the_person.possessive_title!l] down."
+                "You start to strip [the_person.possessive_title] down."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                 "Soon her body is on full display in front of you, on your desk."
             $ mc.change_arousal(20)
@@ -1096,7 +1094,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 if the_person.outfit.vagina_available():
                     "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
                 else:
-                    "You start to strip [the_person.possessive_title!l] down."
+                    "You start to strip [the_person.possessive_title] down."
                     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                     "Soon her ass is on full display in front of you, bent over your desk."
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
@@ -1178,7 +1176,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
             "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
-            "You start to strip [the_person.possessive_title!l] down."
+            "You start to strip [the_person.possessive_title] down."
             $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
             "As soon as her pussy is on full display in front of you, you bent her over your desk, exposing her round ass."
         $ scene_manager.update_actor(the_person, position="standing_doggy")
@@ -1220,7 +1218,7 @@ label HR_director_mind_control_attempt_label(the_person):
     $ scene_manager = Scene()
     $ HR_employee_list = build_HR_mc_list(the_person)
     if __builtin__.len(HR_employee_list) == 0: #No one qualifies!
-        the_person "Actually, things are running really smoothly right now, I'm not sure that would be beneficial?"
+        the_person "Actually, things are running really smoothly right now, I'm not sure that would be beneficial."
         return
 
     the_person "Okay... remember this act has a chance of backfiring, having all kinds of unknown side effects. Are you sure you want to continue?"
@@ -1308,7 +1306,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
         the_HR_dir "She is resting for now. It would probably be best to leave her to rest, but if you want you can go and see her."
     else:
         the_HR_dir "I believe the attempt was successful. I have no indication that she experienced any side effects."
-        mc.name "Excellent. Good work [the_HR_dir.title]"
+        mc.name "Excellent. Good work [the_HR_dir.title]."
         the_HR_dir "She is resting for now, but before I left she asked to see you. It's up to you if you want to go see her."
     mc.name "Thank you. I'll consider it. That'll be all for now."
     $ scene_manager.remove_actor(the_HR_dir)

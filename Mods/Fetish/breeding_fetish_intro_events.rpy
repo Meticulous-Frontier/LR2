@@ -52,7 +52,7 @@ init -1 python:
         return False
 
     def breeding_fetish_sarah_intro_requirement():
-        if not day%7 == 5 and mc_asleep() and sarah.event_triggers_dict.get("threesome_unlock", 0) >= 1:
+        if not day%7 == 5 and mc_asleep() and sarah_threesomes_unlocked():
             return True
         return False
 
@@ -61,6 +61,9 @@ init -1 python:
 
     def breeding_fetish_erica_intro_requirement():
         return False
+
+    def breeding_fetish_erica_unsuccessful_followup_requirement():
+        return True
 
     def breeding_fetish_candace_intro_requirement(the_person):
         if candace.location == candace.work and mc.is_at_work():
@@ -86,6 +89,7 @@ init 2 python:
     breeding_fetish_sarah_intro = Fetish_Action("Sarah breeding fetish intro", breeding_fetish_sarah_intro_requirement, "breeding_fetish_sarah_intro_label", fetish_type = "breeding")
     breeding_fetish_ophelia_intro = Fetish_Action("Ophelia breeding fetish intro", breeding_fetish_ophelia_intro_requirement, "breeding_fetish_ophelia_intro_label", fetish_type = "breeding")
     breeding_fetish_erica_intro = Fetish_Action("Erica breeding fetish intro", breeding_fetish_erica_intro_requirement, "breeding_fetish_erica_intro_label", fetish_type = "breeding")
+    breeding_fetish_erica_unsuccessful_followup = Fetish_Action("Erica surprises you", breeding_fetish_erica_unsuccessful_followup_requirement, "breeding_fetish_erica_unsuccessful_followup_label", fetish_type = "breeding")
     breeding_fetish_candace_intro = Fetish_Action("Candace breeding fetish intro", breeding_fetish_candace_intro_requirement, "breeding_fetish_candace_intro_label", fetish_type = "breeding")
     breeding_fetish_ashley_intro = Fetish_Action("Ashley breeding fetish intro", breeding_fetish_ashley_intro_requirement, "breeding_fetish_ashley_intro_label", fetish_type = "breeding")
 
@@ -94,7 +98,7 @@ init 3 python:
         person.add_role(breeding_fetish_role)
         person.update_sex_skill("Vaginal", 6)
         person.event_triggers_dict["LastBreedingFetish"] = day
-        slave_assign_new_collar(person, breed_collar)
+        fetish_add_collar(person, breed_collar)
         return
 
 init 50 python:
@@ -156,8 +160,8 @@ label breeding_fetish_employee_intro_label(the_person):
     if the_person.outfit.vagina_available():
         "You reach down and pull your cock out from your pants."
     else:
-        "As you start to pull your cock out, [the_person.possessive_title!l] reaches down and starts pulling her clothes off."
-        $ the_person.strip_outfit(exclude_upper = True)
+        "As you start to pull your cock out, [the_person.possessive_title] reaches down and starts pulling her clothes off."
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
     $ the_person.change_arousal (15)
     mc.name "... and pinned you down..."
     "You grab her hands and force them down at her sides. She has a wild look in her eye as your raw cock nears her cunt."
@@ -193,14 +197,14 @@ label breeding_fetish_family_intro_label(the_person):
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     $ the_person.draw_person(position = "back_peek")
-    "You walk into [the_person.possessive_title!l]'s bedroom. She is looking at herself in the mirror, but turns to when she hears you walk in."
+    "You walk into [the_person.possessive_title]'s bedroom. She is looking at herself in the mirror, but turns to when she hears you walk in."
     the_person "Oh hey [the_person.mc_title]. I was just getting ready to head for bed."
     "She takes one last look at herself in the mirror, then turns around."
     $ the_person.draw_person(position = the_person.idle_pose)
     the_person "Do you want to cuddle with me for a little bit?"
     mc.name "Sounds nice."
     $ the_person.draw_person(position = "missionary")
-    "You lay down next to [the_person.possessive_title!l] as she lays down on her back. You rest your head on her chest and put your arm across her."
+    "You lay down next to [the_person.possessive_title] as she lays down on her back. You rest your head on her chest and put your arm across her."
     "For a while you simply enjoy the heat of each other's bodies. She is the first to break the silence."
     if the_person.knows_pregnant():
         the_person "Do you think its weird, if I told you I love this feeling? Being pregnant, making babies. It's like my body was made to do this, over and over again."
@@ -227,7 +231,7 @@ label breeding_fetish_family_intro_label(the_person):
         "Too risky, leave her alone":
             pass
             return
-    "You decide it's time to train [the_person.possessive_title!l] to be your own personal breeding stock."
+    "You decide it's time to train [the_person.possessive_title] to be your own personal breeding stock."
     "You push yourself up and on top of [the_person.title]. She puts her arms around you as your body begins to press against hers."
     mc.name "Honestly, I think its pretty normal to have desires like that."
     the_person "Yeah..."
@@ -248,7 +252,7 @@ label breeding_fetish_family_intro_label(the_person):
     if the_person.outfit.vagina_available():
         "You finish pulling your cock out and begin to rub it along her slit."
     else:
-        "As you finish pulling your cock out, [the_person.possessive_title!l] reaches down and starts pulling her bottoms off."
+        "As you finish pulling your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
         $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
     $ the_person.change_arousal(10)
     if the_person.love < 0:
@@ -332,8 +336,8 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     if the_person.outfit.vagina_available():
         "You pull your cock out and begin to rub it along her inviting slit."
     else:
-        "As you pull your cock out, [the_person.possessive_title!l] pulls her bottoms off."
-        $ the_person.strip_outfit(exclude_upper = True)
+        "As you pull your cock out, [the_person.possessive_title] pulls her bottoms off."
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
         "When she finishes you run your cock all along her inviting slit."
 
     $ the_person.change_arousal(10) #60
@@ -371,12 +375,12 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     "You're woken up by your bed shifting under you and a sudden weight around your waist."
     "You feel a tug on your clothing, and you are slowly opening your eyes when you feel your morning wood spring free."
     $ the_person.draw_person(position = "cowgirl", emotion = "happy")
-    "You open you eyes to see [the_person.possessive_title!l] lining you up with her pussy, before slowly sliding down on top of you."
+    "You open you eyes to see [the_person.possessive_title] lining you up with her pussy, before slowly sliding down on top of you."
     mc.name "Ooohh... good morning [the_person.title]."
     the_person "Ohhh... good morning honey! Mommy needs your seed inside her this morning... and I'm not taking no for an answer!"
     "You are a little surprised by her forcefulness. Lately you've been giving her serums that should make her a bit more submissive..."
     the_person "I had such vivid dreams last night... you were fucking me and kept cumming inside me over and over and over!"
-    the_person "My belly started bigger and my tits started to leak milk and I loved it so much..."
+    the_person "My belly started to get bigger and my tits started to leak milk and I loved it so much..."
     "Ahh, you've been giving her serums that increase her drive to reproduce. Looks like they've finally driven her over the urge and given her a breeding fetish!"
     $ the_person.change_arousal (30)
     $ mc.change_arousal(20)
@@ -413,7 +417,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "Note: This scene was written assuming that eventually you fuck [the_person.title] on a live stream, but so far Vren has not written this step."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
-    "You step into [the_person.possessive_title!l]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
+    "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
     $ the_person.draw_person()
     the_person "Oh hey [the_person.mc_title]! I was wondering if you were going to be around tonight. Want to stream with me tonight?"
     "Your sister's job, over the last few months, has slowly evolved. From taking sexy snaps, to streaming sex live with you live. Having sex with your sister, AND getting paid for it? Its amazing."
@@ -446,7 +450,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She gives a telltale sign. As she says that, she looks away from you and to the side. She is lying to you."
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
-    the_person "Oh me? Want to get knocked up? By my brother? That's... I mean thats CRAZY!... right?"
+    the_person "Oh me? Want to get knocked up? By my brother? That's... I mean that's CRAZY!... right?"
     "She is struggling to give a reasonable explanation. It is pretty clear now that she is just fishing for an excuse to fuck you raw, and to get filled with your potent seed."
     mc.name "Yeah, I mean, wouldn't that be crazy? For a woman to want to get fucked? To have a man dominate her and do what he wants with her, then fill her up with his seed, consequences be damned?"
     $ the_person.change_arousal(10)
@@ -494,7 +498,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She's playing it up for the stream, but you know she is also having fun, fucking her brother."
     $ the_person.change_arousal(20)
     $ mc.change_arousal(20)
-    "You lay back on the bed while [the_person.possessive_title!l] works your cock in and out of her. You make sure to keep her ass in the frame of the camera."
+    "You lay back on the bed while [the_person.possessive_title] works your cock in and out of her. You make sure to keep her ass in the frame of the camera."
     "[the_person.possessive_title] gives you a few quick, shallow dips then pull off you almost completely, leaving just your tip inside her."
     "She swirls her hips a couple times then impales herself on your again. [the_person.title] works her hips relentlessly on top of you as she pleases herself on your erection."
     $ the_person.change_arousal(30)
@@ -516,7 +520,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "[the_person.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
     mc.name "Ah, I'm going to cum!"
     the_person "Oh god me too! Oh fuck bro I'm cumming! Fill me up I need your cum too!"
-    "She slams her hips down. As deep as your cock can go, you start to cum, filling [the_person.possessive_title!l]."
+    "She slams her hips down. As deep as your cock can go, you start to cum, filling [the_person.possessive_title]."
     "Her hole is quivering as she cums at the same time, milking your cock for every last drop of seed."
     $ the_person.cum_in_vagina()
     $ the_person.change_stats(happiness = 5,  slut_temp = 5, slut_core = 5)
@@ -564,11 +568,10 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             call breeding_fetish_stephanie_normal_label(the_person) from _breeding_fetish_steph_normal_01
     else:
         if the_person.event_triggers_dict.get("is_bimbo", False):
-            "You get a text message from [the_person.possessive_title!l]."
-            $ mc.having_text_conversation = the_person
+            $ mc.start_text_convo(the_person)
             the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
-            mc.name "Sure, meet me in my office."
-            $ mc.having_text_conversation = None
+            mc.name "Sure, I'll meet you there."
+            $ mc.end_text_convo()
             $ mc.change_location(office)
             $ ceo_office.show_background()
             $ scene_manager = Scene()
@@ -587,21 +590,20 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             call breeding_fetish_stephanie_bimbo_label(the_person) from _breeding_fetish_steph_bimbo_02
         else:
             if mc.location == mc.business.r_div: #Already in research
-                "Suddenly, [the_person.possessive_title!l] looks up from her work and and speaks up."
+                "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
                 mc.name "Sure, follow me to my office."
             else:
-                "You get a text message from [the_person.possessive_title!l]."
-                $ mc.having_text_conversation = the_person
+                $ mc.start_text_convo(the_person)
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
                 mc.name "Sure, meet me in my office."
-                $ mc.having_text_conversation = None
+                $ mc.end_text_convo()
 
             $ mc.change_location(office)
             $ ceo_office.show_background()
             $ scene_manager = Scene()
             $ scene_manager.add_actor(the_person)
-            "You walk with [the_person.possessive_title!l]. When you get there, she locks the door. You sit down at your desk."
+            "You walk with [the_person.possessive_title]. When you get there, she locks the door. You sit down at your desk."
             mc.name "What can I do for you [the_person.title]."
             the_person "Well, recently I've started having a new set of... well... breeding fantasies. Serum related I'm sure."
             the_person "I just wanted to make sure that we still have an understanding, right?"
@@ -635,7 +637,7 @@ label breeding_fetish_stephanie_bimbo_label(the_person):
     mc.name "It doesn't matter, you can take the rest of the day off."
     the_person "Oh? That eager to get rid of me? Guess I'll just go find someone else to play with for a while. Your loss mister!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office. Your seed is dribbling down her leg."
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office. Your seed is dribbling down her leg."
     "Looks like [the_person.title] has a breeding fetish now! But she is also a bimbo."
     if the_person == mc.business.head_researcher:
         "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
@@ -662,7 +664,7 @@ label breeding_fetish_stephanie_normal_label(the_person):
     mc.name "Don't worry. If the urges ever get too strong, just come find me, anywhere I am I'll bend you over, even here in the lab."
     the_person "Ah... that sounds... acceptable. Okay, let's give this a shot I guess."
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office, your cum running down the inside of her legs."
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, your cum running down the inside of her legs."
     "Looks like [the_person.title] has a breeding fetish now!"
     return
 
@@ -684,14 +686,11 @@ label breeding_fetish_nora_intro_label():
 
 label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     $ the_person = starbuck
-    "You get a text message from [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, do you think you could help me close up the shop tonight? I have a few things I need help with."
-    $ mc.having_text_conversation = None
     "You consider it. You don't have much else going on right now, so you decide to agree."
-    $ mc.having_text_conversation = the_person
     mc.name "Sure, I'll be over shortly."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You make your way over to the sex shop."
     $ mc.change_location(sex_store)
     $ mc.location.show_background()
@@ -710,14 +709,14 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
         the_person "I know I'm already pregnant but... it was so hot! It made me realize how amazing it is to get bred."
     else:
         the_person "There was something about them though. They were practically glowing! And the way they looked at each other. I... I can't believe this, but it made me so jealous!"
-        the_person "I've never had it quite this bad before... but it gave me this ITCH. I can't explain it, but I've been day dreaming all day about.. you know... being like that."
+        the_person "I've never had it quite this bad before... but it gave me this ITCH. I can't explain it, but I've been daydreaming all day about... you know... being like that."
     if the_person.is_girlfriend():
         the_person "I know our relationship is kind of... unique... with how much older I am. But I don't think I've ever been so sure of something."
     else:
         the_person "I know its kind of weird, with how much older I am. But I don't think I've ever been more sure of something."
     the_person "Would you be my bull? Cum inside me... over and over... breed me like its your job!"
     the_person "I want to feel your seed inside me, every second of every day!"
-    "Your cock is already hard, listening to [the_person.possessive_title!l] talk like this. You've been slipping her serums, and it looks like they've finally given her a breeding fetish."
+    "Your cock is already hard, listening to [the_person.possessive_title] talk like this. You've been slipping her serums, and it looks like they've finally given her a breeding fetish."
     "It's time to seal the deal. If you give her what she wants now, she'll be begging you for creampies every chance she gets."
     mc.name "Okay. I'll give you my cum. Now turn around, I want to take you over the counter."
     $ the_person.change_arousal(8)
@@ -727,8 +726,8 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     if the_person.outfit.vagina_available():
         "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you using it smack her ass a couple times."
     else:
-        "As you start to pull your cock out, [the_person.possessive_title!l] reaches back and starts to pull off the clothing covering her ass."
-        $ the_person.strip_outfit(exclude_upper = True)
+        "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."
+        $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "You give her ass a couple smacks with your cock."
     $ the_person.change_arousal(10)
     $ mc.change_arousal(10)
@@ -766,18 +765,15 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ scene_manager = Scene()
-    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]"
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
     the_person "Hell yeah! I'll bring some stuff over."
-    $ mc.having_text_conversation = None
     "About 20 minutes later she texts you."
-    $ mc.having_text_conversation = the_person
     the_person "Hey, I'm here! Come let me in!"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You head to your front door and open it."
-    "For once, you managed to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
+    "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She walks over and sits on your bed."
     mc.name "So... what did you want to talk about?"
@@ -796,7 +792,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
         mc.name "Not... yet?"
         the_person "Well, [the_person.mc_title], it's been like a dream, having you back in my life like this. Things are amazing, being with you."
         the_person "I've been, well, tracking my cycles recently and, well, basically, I'm fertile right now."
-        "You can feel your cock twitch in your pants. You imagine [the_person.possessive_title!l], knocked up, her tits swelling with milk and her belly growing..."
+        "You can feel your cock twitch in your pants. You imagine [the_person.possessive_title], knocked up, her tits swelling with milk and her belly growing..."
         the_person "Every time you finish inside me, I find myself thinking about it, more and more, what it would be like to get pregnant and have a baby with you."
         the_person "Look, you don't have to answer me right now, but, I thought maybe we could try and have a baby. Together?"
         the_person "I know this is crazy... but lately I've just had this almost overwhelming itch! I want you to knock me up and fill me over and over!"
@@ -809,7 +805,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     mc.name "I think we should get naked."
     the_person "Yes sir!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-    "You get naked with [the_person.possessive_title!l]. She rolls on her back and spreads her legs."
+    "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
     the_person "Come fill me up, [the_person.mc_title]!"
     call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True, asked_for_condom = True) from _sarah_ask_for_baby_05
     if the_person.has_creampie_cum():
@@ -820,7 +816,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
         mc.name "I'm sorry, I really want to, I'm just really tired."
         "You can tell she is a little disappointed."
         the_person "That's okay. Maybe in the morning?"
-    "You snuggle up with [the_person.possessive_title!l]. Your serums have turned her into your personal breeding mare."
+    "You snuggle up with [the_person.possessive_title]. Your serums have turned her into your personal breeding mare."
     $ add_breeding_fetish(the_person)
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_5
     call Sarah_spend_the_night() from sarah_ask_for_baby_overnight_15
@@ -832,12 +828,137 @@ label breeding_fetish_ophelia_intro_label():
     return
 
 label breeding_fetish_erica_intro_label():
-    "Erica doesn't have a breeding fetish written yet"
+    $ the_person = erica
+    $ the_person.fertility_percent = 20.0
+
+    $ mc.start_text_convo(the_person)
+    if the_person.is_girlfriend():
+        the_person "Hey! Can you come over? It's supposed to be cold out and it would nice to have you help keep my bed warm... Plus I kinda want to talk to you about something!"
+    else:
+        the_person "Hey... Can you come over tonight? I have something I need to talk to you about..."
+    "You don't really have anything going on..."
+    mc.name "Sure, I'm on my way over."
+    $ mc.end_text_convo()
+
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
+    "You swing by [the_person.possessive_title]'s. You knock on the door and soon she opens it."
+    $ the_person.draw_person()
+    the_person "Hi! Come in..."
+    "You follow her inside. She motions you to her table, so you sit down."
+    the_person "Can I get you anything? Coffee?"
+    mc.name "Am I going to need the caffeine?"
+    "You answer, making your flirting tone obvious. She gives you a shy smile."
+    the_person "Hopefully! I'm hoping this will be a long and productive night..."
+    mc.name "Coffee sounds great."
+    "You can already smell it, so she must already have a pot brewed."
+    $ the_person.draw_person(position = "back_peek")
+    "[the_person.possessive_title] turns to the counter and grabs a couple of cups. She pours two, then turns and sits down across from you, setting your cup in front of you."
+    $ the_person.draw_person(position = "sitting")
+    "[the_person.title] looks nervous. Whatever it is she wants to talk about, you can tell it's making her anxious. You take a sip of your coffee."
+    mc.name "So... What's eating you? I mean, besides me later..."
+    "She gives a nervous sigh."
+    the_person "Okay... So... I've kind of... Been thinking about something..."
+    "Her purse is sitting on the table next to her. She opens it up and starts to go through it. She pulls out a package of birth control pills, and a package of plan B."
+    the_person "So, I stopped taking birth control lately..."
+    the_person "I told myself it was just for the thrill of the risk, but if anything ever actually happened, I had plan B ready, and if that ever didn't work, you know... I was gonna get it taken care of."
+    the_person "I love running track and field. But if I ever got pregnant, they'd kick me off the team, you know? So I did what I had to..."
+    if the_person.is_girlfriend():
+        the_person "But [the_person.mc_title], I just love you so much! The urge to just let go of all that, and just submit myself to you over and over, taking your seed! It's so so strong!"
+    else:
+        the_person "But lately, when I'm with you... And even when I'm not, I can't stop fantasizing about you cumming inside me. Over and over, not letting me take my pills and knocking me up!"
+    "It's been a while since you started dosing [the_person.possessive_title] with Reproduction Proclivity Nanobots. It seems they have taken hold of her."
+    the_person "I knew that when girls get to about my age they could get baby fever... But I never imagined the urge would be so strong! [the_person.mc_title]... I don't care about the track team anymore! Please knock me up! Will you please?"
+    "There is some significant urgency in her voice. [the_person.possessive_title] is willing to give up her sports team, just to have your babies! This is a total no-brainer."
+    "You reach over the table, and pick up her birth control. You stand up, take it to the trash can, and throw it away. She observes your movements closely."
+    the_person "You just... Does that mean?"
+    mc.name "Lie down on the table, Erica."
+    the_person "Oh! Oh my god..."
+    $ the_person.draw_person(position = "missionary")
+    if the_person.outfit.vagina_available():
+        "You reach down and pull your cock out from your pants."
+    else:
+        "As you start to pull your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
+        $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
+    "You grab her hands and force them down at her sides. She looks at you longingly as your bare cock nears her cunt."
+    "You don't say a word, you just push forward, sliding yourself into her fertile young pussy."
+    $ the_person.change_arousal (20)
+    $ mc.change_arousal(15)
+    the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]."
+    "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _erica_gets_breeding_fetish_01
+    $ the_person.draw_person(position = "missionary")
+    if the_person.has_creampie_cum():
+        $ become_pregnant(the_person)
+        the_person "Oh god! It's amazing. I think you did it. I don't know how I know... I can just feel it."
+        "She rubs her belly happily."
+        the_person "I mean... I'll take a test in a few days to be sure but..."
+    else:
+        the_person "That's... you didn't finish?"
+        mc.name "I'm sorry [the_person.title]. Its been a long day, and I'm just too tired."
+        the_person "Seriously? After all our training and everything..."
+        $ the_person.change_love(-5)
+        the_person "I think you should go."
+        mc.name "I'm sorry, we can try again..."
+        the_person "Damn right we'll try again! But tonight I just need to be mad. Now get out!"
+        $ clear_scene()
+        "You quickly vacate [the_person.possessive_title]'s apartment and head home."
+        $ mc.business.mandatory_morning_crises_list.append(breeding_fetish_erica_unsuccessful_followup)
+        return
+    $ add_breeding_fetish(the_person)
+    "[the_person.possessive_title] is positively glowing. She seems pretty confident that did the trick."
+    the_person "I'm sorry to say this, but I have to get up early in the morning."
+    mc.name "It's okay, get some rest."
+    $ the_person.draw_person(position = "stand3")
+    "[the_person.title] stands up and smiles at you."
+    the_person "I'll let you know when I find out for sure... daddy!"
+    "You say goodnight and head home. It seems that you have given [the_person.possessive_title] a breeding fetish! You look forward to many creampies in your future together."
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     return
+
+label breeding_fetish_erica_unsuccessful_followup_label():
+    $ the_person = erica
+    $ erica.arousal = 50
+    $ erica.apply_outfit(special_fetish_nude_outfit)
+    $ mc.change_energy(mc.max_energy)
+    "As you slowly start to wake up, you feel the weight on your bed shift a little bit."
+    if mom.sluttiness > 60:
+        "You assume its probably [mom.title], coming in to give you another pleasant wake up call, but as your brain slowly engages, you realize the weight of the person is different."
+    else:
+        "Thinking you are probably still dreaming, your brain is slow to engage and register what is going on."
+    "Your pants slide off, exposing your morning wood. You feel a weight around your hips as someone gets on top of you. You slowly open your eyes."
+    $ the_person.draw_person(position = "cowgirl")
+    "It's... [the_person.possessive_title]!?!"
+    mc.name "Wha? [the_person.title]?"
+    the_person "Shhh, don't want to wake your family..."
+    "She slowly slides herself down onto you, taking your full length inside of her. You can't help but moan at the sudden sensation."
+    $ the_person.change_arousal(10)
+    $ mc.change_arousal(10)
+    mc.name "What are you doing here?"
+    the_person "I've been tracking my cycles and I am soooo fertile right now. I understand you were too tired last night, but I need your cum ASAP."
+    "[the_person.possessive_title] starts to work her hips. You know you should be concerned about how she even got in here, but right now you decide to just lie back and enjoy."
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _erica_breeding_fetish_intro_02
+    "When you finish, she rolls off you and lays beside you on your bed."
+    $ the_person.draw_person(position = "missionary")
+    $ add_breeding_fetish(the_person)
+    $ become_pregnant(the_person)
+    the_person "Oh god! It's amazing. I think you did it. I don't know how I know... I can just feel it."
+    "She rubs her belly happily."
+    the_person "I mean... I'll take a test in a few days to be sure but..."
+    "She lays beside you for a minute, but then quietly gets up. She puts on some clothes you didn't even realize she had with her."
+    $ the_person.apply_planned_outfit()
+    the_person "I'll let you know when I find out for sure... daddy!"
+    "She seems positively glowing."
+    "Quietly, she leaves your room."
+    "Did that just happen? You feel groggy. Looking down, you see your limp cock, still slick from her juices. Huh, that must have happened."
+    "How did she even get in? You have so many questions, but for now, you just get up and start your regular morning routine."
+    return
+
 
 label breeding_fetish_candace_intro_label(the_person): #This is going to be two intros, depending on if candace is still a bimbo or not NEeds Testing
     $ the_person = candace
-    "As you step into the office, you see [the_person.possessive_title!l] looking over at you. She stands up and waves you over to her desk."
+    "As you step into the office, you see [the_person.possessive_title] looking over at you. She stands up and waves you over to her desk."
     $ the_person.draw_person()
     "You walk over to her."
     if candace_is_bimbo(): #She is a bimbo.
@@ -871,13 +992,13 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             mc.name "Take this, I need you to take a video for me."
             camera_person "Oh wow... you're really going to...? Right here?"
             "You nod and hand her your phone, with it set to video mode."
-        "You turn back to [the_person.possessive_title!l]."
+        "You turn back to [the_person.possessive_title]."
         $ the_person.draw_person(position = "standing_doggy")
         if the_person.outfit.vagina_available():
             "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you using it smack her ass a couple times."
         else:
-            "As you start to pull your cock out, [the_person.possessive_title!l] reaches back and starts to pull off the clothing covering her ass."
-            $ the_person.strip_outfit(exclude_upper = True)
+            "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."
+            $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
         $ mc.change_arousal(10)
@@ -940,8 +1061,8 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         if the_person.outfit.vagina_available():
             "With her pussy already out and ready to be used, you waste no time getting your pants off. When you cock springs free, you use it smack her ass a couple times."
         else:
-            "As you start to pull your cock out, [the_person.possessive_title!l] reaches back and starts to pull off the clothing covering her ass."
-            $ the_person.strip_outfit(exclude_upper = True)
+            "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."
+            $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
         $ mc.change_arousal(10)

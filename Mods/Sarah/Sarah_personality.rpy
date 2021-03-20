@@ -321,7 +321,7 @@ label Sarah_flirt_response(the_person):
     return
 
 label Sarah_flirt_response_low(the_person):
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:  #She has gone through bigger tits story
+    if sarah_epic_tits_progress() >= 2:  #She has gone through bigger tits story
         the_person "Oh? You like how I look, now that I'm the total package?"
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] gives you a quick spin, showing off her body at the same time as her outfit."
@@ -361,7 +361,7 @@ label Sarah_flirt_response_mid(the_person):
         "You zone out for a second, checking out [the_person.title]'s shapely hind end."
         $ the_person.draw_person()
         "She turns back and giggles."
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:
+        if sarah_epic_tits_progress() >= 2:
             the_person "Tongue tied?. That's okay, I've been having that effect on a lot of guys lately."
         mc.name "What can I say? Your body is hypnotizing."
     return
@@ -380,7 +380,7 @@ label Sarah_flirt_response_high(the_person):
 
             menu:
                 "Kiss her.":
-                    "You put an arm around [the_person.possessive_title!l]'s waist and pull her close."
+                    "You put an arm around [the_person.possessive_title]'s waist and pull her close."
 
                     if the_person.has_taboo("kissing"):
                         $ the_person.call_dialogue("kissing_taboo_break")
@@ -403,7 +403,7 @@ label Sarah_flirt_response_high(the_person):
             mc.name "Relax, we're just joking around. Unless you want to get naked for me?"
             "She laughs and shakes her head in disbelief. You see a glint of mischief in her eye when she asks you."
             the_person "Why don't you get naked first and we'll see what happens?"
-            mc.name "You'll pull your phone out and start taking blackmail pictures. Theres no way I'm doing that."
+            mc.name "You'll pull your phone out and start taking blackmail pictures. There's no way I'm doing that."
             the_person "Me? Blackmail you? [the_person.mc_title] why I would never!"
             if the_person.has_taboo("touching_penis"):
                 mc.name "Do you what would actually be really helpful? I've gotten all worked up, why don't you just touch me with your hand for a bit."
@@ -434,7 +434,7 @@ label Sarah_flirt_response_high(the_person):
                     mc.name "Then let's find somewhere private. Come on."
                     "You take her hand and start to lead her away. She follows you eagerly."
                     the_person "Wow, I wasn't expecting you to actually do it! This is gonna be fun!"
-                    "When you find a quiet spot you pull [the_person.possessive_title!l] close to you."
+                    "When you find a quiet spot you pull [the_person.possessive_title] close to you."
                     if the_person.has_taboo("kissing"):
                         $ the_person.call_dialogue("kissing_taboo_break")
                         $ the_person.break_taboo("kissing")
@@ -449,14 +449,14 @@ label Sarah_flirt_response_high(the_person):
                 "Just flirt":
                     mc.name "I know, I just like to tease you."
                     the_person "Oh, is that so? Well two can play at that game."
-                    if sarah.event_triggers_dict.get("epic_tits_progress", 0)>= 2:
+                    if sarah_epic_tits_progress() >= 2:
                         $ the_person.draw_person(the_animation = blowjob_bob)
                         "She checks that nobody else is looking, then grabs her tits and jiggles them for you."
-                        the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]"
+                        the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]!"
                         $ the_person.draw_person()
                     else:
                         "She checks that nobody else is looking, the reaches down and grabs your package. You harden rapidly as she gives it a couple of strokes."
-                        the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]"
+                        the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]!"
                     mc.name "Jesus woman, you win!"
                     the_person "I'm glad you understand."
 
@@ -511,7 +511,7 @@ label Sarah_cum_pullout(the_person):
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Fill me up again and again [the_person.mc_title]! I'm already pregnant!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
@@ -548,7 +548,7 @@ label Sarah_cum_vagina(the_person):
         return
 
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Mmm, another load, right where it belongs..."
             "She sighs happily."
 
@@ -1166,7 +1166,7 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
             mc.name "Not exactly..."
             the_person "BECAUSE I WOULD TOTALLY SUCK YOU OFF."
             mc.name "You mean... blow me?"
-            the_person "Thatsh what I said!"
+            the_person "That'sh what I said!"
             "You make a mental note that it's probably better to get her a water next instead of another drink."
         else:
             "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."

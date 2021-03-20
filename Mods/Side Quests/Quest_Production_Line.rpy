@@ -214,7 +214,7 @@ label quest_production_line_intro_label(the_person):
 label quest_production_line_coffee_reminder_label():
     $ the_person = quest_production_line_get_target()
     "You receive a text message on your phone."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey [the_person.mc_title], don't forget to meet my dad in the mall."
     if mc.location == mall:
         mc.name "Thanks, I'm already at the mall."
@@ -222,7 +222,7 @@ label quest_production_line_coffee_reminder_label():
         mc.name "Thanks, I'm going over there right now."
         $ mc.change_location(mall)
         $ mc.location.show_background()
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "If you are going to go meet with the chemist, go to the business meeting."
     $ quest_production_line().set_quest_flag(21)
     $ mc.business.add_mandatory_crisis(quest_production_line_coffee_miss)
@@ -233,7 +233,7 @@ label quest_production_line_coffee_label():
     $ the_person = quest_production_line_get_target()
     "You text [the_person.title]'s father, [dad_name]. He tells you the name of the coffee shop. You quickly find it."
     #TODO location = shop
-    #TODO get generic dad sprite to use? Placeholder? Theres no male images in the game...
+    #TODO get generic dad sprite to use? Placeholder? There's no male images in the game...
     mc.name "Hello there, you must be [dad_name]."
     dad_name "Ah, nice to meet you."
     "You chat for a few minutes, exchanging some of the details of your work with each other."
@@ -307,7 +307,7 @@ label quest_production_line_after_raise_consult_label():
     "You hang up the phone."
     "Your serum batch size has increased by 1!"
     $ batch_size_increase(increase_amount = 1)
-    "A few minutes later, your phone is ringing again. Now it is [the_person.title]"
+    "A few minutes later, your phone is ringing again. Now it is [the_person.title]."
     mc.name "Hello?"
     the_person "Hey! Have a sec?"
     mc.name "Of course."
@@ -604,23 +604,52 @@ label princess_sex_obedience_accept(the_person):
     return
 
 label princess_cum_face(the_person):
-    the_person "Oh [the_person.mc_title], I look cute covered in your cum?"
+    the_person "Oh [the_person.mc_title], do I look cute covered in your cum?"
     if the_person.sluttiness > 60:
         "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
     else:
         "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     return
 
-label princess_cum_vagina(the_person):
-    if mc.condom:
-        if the_person.sluttiness > 75 or the_person.get_opinion_score("creampies") > 0:
-            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise not to use a condom next time?"
-        else:
-            the_person "[the_person.mc_title]... I can feel how warm your cum is through the condom. It feels nice."
+label princess_cum_condom(the_person):
+    if the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+        the_person "God [the_person.mc_title], I can feel it in the condom! If I'm good will you promise not to use one next time?"
+    else:
+        the_person "[the_person.mc_title]... I can feel how warm your cum is through the condom. Thank you so much."
+    return
 
-    else: #TODO this probably hchanges with pregnancy stuff. change it later.
-        the_person "Your cum is so nice and warm [the_person.mc_title]!"
-        the_person "You can fill me up anytime you want."
+label princess_cum_vagina(the_person):
+    if the_person.has_taboo("creampie"):
+        $ the_person.call_dialogue("creampie_taboo_break")
+        $ the_person.break_taboo("creampie")
+        return
+
+    if the_person.wants_creampie():
+        if the_person.knows_pregnant():
+            the_person "Mmm [the_person.mc_title], your cum is so nice and warm..."
+            "She sighs happily."
+
+        elif the_person.on_birth_control:
+            the_person "Oh [the_person.mc_title], it's so nice and warm. I can feel it inside me..."
+            "She sighs happily as you cum inside her."
+
+        elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it again without condom next time?"
+
+        else:
+            the_person "Oh [the_person.mc_title], so much hot cum... I love you [the_person.mc_title]."
+
+    else: #She's angry
+        if not the_person.on_birth_control:
+            the_person "Oh [the_person.mc_title], I told you to pull out! What if your little girl got pregnant."
+            the_person "Well maybe it ain't that bad."
+
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "Ugh [the_person.mc_title], I told you to pull out! I'm a mess, I want to look pretty for you..."
+
+        else:
+            the_person "[the_person.mc_title], didn't I ask you to pull out?"
+            the_person "Well maybe it ain't that bad."
     return
 
 label princess_suprised_exclaim(the_person):

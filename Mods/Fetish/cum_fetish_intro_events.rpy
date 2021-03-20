@@ -27,7 +27,7 @@ init 1 python:
         return False
 
     def cum_fetish_lily_intro_requirement():
-        if time_of_day==0 and not day%7 == 5 and mc_at_home():
+        if not day%7 == 5 and mc_at_home():
             return True
         return False
 
@@ -86,7 +86,7 @@ init 2 python:
         person.add_role(cum_fetish_role)
         person.update_sex_skill("Oral", 6)
         person.event_triggers_dict["LastCumFetish"] = day
-        slave_assign_new_collar(person, cum_slut_collar)
+        fetish_add_collar(person, cum_slut_collar)
         return
 
     cum_fetish_family_intro = Fetish_Action("Family Cum Fetish Intro", cum_fetish_family_intro_requirement, "cum_fetish_family_intro_label", fetish_type = "cum")
@@ -183,7 +183,7 @@ label cum_fetish_employee_intro_label(the_person):
     mc.name "Good girl. Keeping going, rub some on your stomach..."
     the_person "Oh my god..."
     $ the_person.cum_on_stomach()
-    "Taking what she can, [the_person.possessive_title!l] goes further, rubbing your cum onto her belly."
+    "Taking what she can, [the_person.possessive_title] goes further, rubbing your cum onto her belly."
     $ the_person.change_arousal(20)
     "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dialated. She is REALLY getting off on this!"
     mc.name "That's a good cumslut. You know whats coming next, right?"
@@ -214,7 +214,7 @@ label cum_fetish_family_intro_label(the_person):
     $ the_person.arousal = 40
     $ towel_outfit = Outfit("Towel")
     $ towel_outfit.add_dress(towel.get_copy())
-    "Noticing the door cracked, you walk up to [the_person.possessive_title!l]'s bedroom door. As approach, you hear noises coming from inside."
+    "Noticing the door cracked, you walk up to [the_person.possessive_title]'s bedroom door. As approach, you hear noises coming from inside."
     the_person "Oh... mmm... oh fuck yeah... That's it baby..."
     "As you sneak closer, you look in and see [the_person.title], face down ass up on her bed with her fingers between her legs."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
@@ -263,7 +263,7 @@ label cum_fetish_family_intro_label(the_person):
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] gives in and drops the sheet. You get closer until you are standing right in front of her."
     mc.name "That's it. Now, you're already all warmed up. Why don't you give me a kiss and help me catch up a little."
-    "Still sitting on the edge of the bed, [the_person.possessive_title!l] looks up at you as you bring your cock up to her face."
+    "Still sitting on the edge of the bed, [the_person.possessive_title] looks up at you as you bring your cock up to her face."
     "You run your hand through her hair a couple times, as she begins to lick around the tip of your dick."
     "She licks up some of your precum."
     the_person "Mmm... that tastes so... good? Its funny... I'd never though of cum as tasting so good before."
@@ -289,7 +289,7 @@ label cum_fetish_family_intro_label(the_person):
     "The sounds of slapping echo all around the room as you give it to her. Soon, her moans begin to increase in intensity and pace."
     $ the_person.change_arousal(30) #110
     the_person "Oh god [the_person.mc_title] I'm cumming... I'm cumming!"
-    "You keep up your pace while [the_person.possessive_title!l] cums. You think you can feel her pussy twitch around your cock."
+    "You keep up your pace while [the_person.possessive_title] cums. You think you can feel her pussy twitch around your cock."
     $ the_person.have_orgasm(half_arousal = True) #55
     $ mc.change_arousal(25) # 80
     "You don't let up at all. You keep pounding [the_person.title] as you are getting close to your own orgasm now."
@@ -304,7 +304,7 @@ label cum_fetish_family_intro_label(the_person):
     $ mc.reset_arousal()
     the_person "Oh fuck! It feels so good! Cover me [the_person.mc_title]!"
     "You unload everything you have. The ass in front of you, covered in sperm, is a work of art."
-    "However, you want to push things a little further and make sure you really make [the_person.possessive_title!l] your cumslut."
+    "However, you want to push things a little further and make sure you really make [the_person.possessive_title] your cumslut."
     mc.name "That was hot. Your ass is covered! I bet you wish you could taste it huh?"
     the_person "Ahhh, yeah that would be nice..."
     mc.name "Here, let me help."
@@ -327,8 +327,8 @@ label cum_fetish_family_intro_label(the_person):
     mc.name "I know [the_person.title]. It's okay. You can be my secret cumslut."
     $ the_person.draw_person(position = the_person.idle_pose)
     "[the_person.possessive_title] slowly stands up and turns to you. You can see a tiny bit of your cum dribbling down her lip."
-    mc.name "I need to get going. Take care [the_person.title]"
-    "You say goodbye to [the_person.possessive_title!l] then leave her room. As you walk away, you can't help but smile."
+    mc.name "I need to get going. Take care [the_person.title]."
+    "You say goodbye to [the_person.possessive_title] then leave her room. As you walk away, you can't help but smile."
     "Your serums have turned her into your cumslut."
     python:
         the_person.apply_planned_outfit()
@@ -340,10 +340,15 @@ label cum_fetish_generic_intro_label(the_person):
     $ mc.location.show_background()
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
+    $ mc.phone.add_non_convo_message(the_person, "Hey, are you awake?")
+    $ mc.phone.add_non_convo_message(the_person, "I want to see you tonight. Can I come over?")
+    $ mc.phone.add_non_convo_message(the_person, "I really need to fuck! Want to fuck me?")
+    $ mc.phone.add_non_convo_message(the_person, "Oh my god, never mind. I shouldn't have sent that. I'm drunk.")
+    $ mc.phone.add_non_convo_message(the_person, "I'm going to come over so I can apologize.")
     "[the_person.title] has been texting you. She's sent you several messages, with the last ending:"
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "I'm here... Should I just knock on the door?"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ hall.show_background()
     "You drag yourself out of bed and stumble out to the front hall. You move to a window and peek out at your front door."
     $ the_person.draw_person(emotion = "happy")
@@ -367,10 +372,10 @@ label cum_fetish_generic_intro_label(the_person):
 
             "[the_person.possessive_title] is moaning ecstatically."
             if the_person.has_face_cum():
-                "Glancing down, you see [the_person.possessive_title!l] running her hands along her face, rubbing your cum into her skin."
+                "Glancing down, you see [the_person.possessive_title] running her hands along her face, rubbing your cum into her skin."
                 the_person "Mmm... it feels so good! That first splash is always the best..."
             else:
-                "Glancing down, you see [the_person.possessive_title!l] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+                "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person "Mmm... your taste is so unique, I love it!"
             $ the_person.event_triggers_dict["LastCumFetish"] = day
             "[the_person.possessive_title] stands up."
@@ -383,7 +388,7 @@ label cum_fetish_generic_intro_label(the_person):
             $ the_person.apply_planned_outfit()
             the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away", emotion = "happy")
-            "You wave goodbye to [the_person.possessive_title!l] and quickly put away your cock. You turn around and go to bed."
+            "You wave goodbye to [the_person.possessive_title] and quickly put away your cock. You turn around and go to bed."
         "Not tonight":
             mc.name "I'm sorry, [the_person.title], but I can't right now."
             $ the_person.draw_person(emotion = "angry")
@@ -406,12 +411,12 @@ label cum_fetish_mom_intro_label():
     "[the_person.possessive_title]'s skilled tongue teases and strokes you. The pleasure is so intense you slowly start to awaken from your naughty dream."
     "However, as you awaken, the pleasure you are experiencing continues."
     $ the_person.draw_person(position = "blowjob")
-    "You look down and discover that [the_person.possessive_title!l] is between your legs. She has pulled your underwear down and is sucking you off."
+    "You look down and discover that [the_person.possessive_title] is between your legs. She has pulled your underwear down and is sucking you off."
     $ the_person.break_taboo("sucking_cock")
     mc.name "[the_person.title]? What are you..."
     "[the_person.possessive_title] interrupts you."
     the_person "Shhh, just lay back. I need your cum right now. I couldn't sleep, I was craving you so bad."
-    "You lay back, [the_person.possessive_title!l] continues to suck you off."
+    "You lay back, [the_person.possessive_title] continues to suck you off."
     "Your mind is racing. You've been giving her your serums for a while now. Maybe she has developed a fetish for your cum?"
     "[the_person.possessive_title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
     "She moans slightly as she strokes you with her soft, velvet lips. She pulls off for a second and looks at you."
@@ -420,7 +425,7 @@ label cum_fetish_mom_intro_label():
     menu:
         "Cum in her mouth":
             "You rest your hand on her head, guiding her as she sucks you off."
-            "With a little encouragement, you pull [the_person.possessive_title!l]'s head down a little further with each stroke."
+            "With a little encouragement, you pull [the_person.possessive_title]'s head down a little further with each stroke."
             mc.name "That's it [the_person.title]. I'm going to cum in your mouth and I want you to swallow every drop."
             "[the_person.possessive_title] moans. She is ready for her prize."
             mc.name "Fuck, here I come!"
@@ -430,7 +435,7 @@ label cum_fetish_mom_intro_label():
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob")
             $ add_cum_fetish(the_person)
-            "You look down and see [the_person.possessive_title!l]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
+            "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
 
         "Cum on her face":
             "You rest your hand on her head, slowly gathering her hair up."
@@ -443,17 +448,17 @@ label cum_fetish_mom_intro_label():
             "You erupt in orgasm and shoot your load across her glowing face. Her pupils dilate as her cum addicted brain registers the presence of your cum on her skin."
             "[the_person.possessive_title] moans uncontrollably with every spurt"
             $ add_cum_fetish(the_person)
-            "Slowly recovering, you look at [the_person.possessive_title!l]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
+            "Slowly recovering, you look at [the_person.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
 
     the_person "Oh... I needed that so bad... you have no idea."
     $ the_person.reset_arousal()
     "[the_person.possessive_title] slowly crawls up the bed and lays down next to you. You put your arm around her."
     "Completely satisfied, she quickly falls asleep."
-    "Wow! [the_person.possessive_title!l] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
+    "Wow! [the_person.possessive_title] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
     "You have a feeling that this is only the beginning of things between you and her."
     "You slowly fall asleep, enjoying the warmth of her body."
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_mom_cum_fetish_01
-    "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title!l]'s mouth feels amazing."
+    "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title]'s mouth feels amazing."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person( position = "blowjob")
     "She senses that you are beginning to awake."
@@ -490,7 +495,7 @@ label cum_fetish_lily_intro_label():
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
-    "You are surprised when the shower door opens. You see [the_person.possessive_title!l] getting in the shower with you."
+    "You are surprised when the shower door opens. You see [the_person.possessive_title] getting in the shower with you."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person()
     the_person "Good morning [the_person.mc_title]. Mind if I join you?"
@@ -513,7 +518,7 @@ label cum_fetish_lily_intro_label():
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] gets down on her knees in front of you."
     the_person "I feel like I'm going crazy... but I can't stop thinking about you. About swallowing your cum, or you cumming all over my face, or my body..."
-    "You see [the_person.possessive_title!l] reaches down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
+    "You see [the_person.possessive_title] reaches down with one hand and start to touch herself. She runs her tongue up and down your shaft a few times."
     the_person "It's like I'm thirsty... but no amount of water I drink makes my thirst go away... Only when I think about drinking your sweet cum do I feel any better..."
     "[the_person.possessive_title] opens her mouth and starts to suck you off. You feel her soft, velvet mouth wrapped around you."
     $ the_person.break_taboo("sucking_cock")
@@ -583,10 +588,10 @@ label cum_fetish_rebecca_intro_label(the_person):
     $ add_cum_fetish(the_person)
     "[the_person.possessive_title] is moaning ecstatically."
     if the_person.has_face_cum():
-        "Glancing down, you see [the_person.possessive_title!l] running her hands along her face, rubbing your cum into her skin."
+        "Glancing down, you see [the_person.possessive_title] running her hands along her face, rubbing your cum into her skin."
         the_person "Mmm... it feels so good! That first splash is always the best..."
     else:
-        "Glancing down, you see [the_person.possessive_title!l] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+        "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
         the_person "Mmm... you taste so good, I just can't get enough!"
     mc.name "God that was amazing. From now on, you're my little cumslut. Be ready to take a load anytime, and anywhere I tell you to."
     the_person "Yes... I'll be your cumslut!"
@@ -685,9 +690,9 @@ label cum_fetish_sarah_intro_label():
             "You aren't surprised, it's been a while since you started giving her the serum for increased cum enjoyment."
             the_person "I feel like I'm going crazy..."
             if the_person.outfit.tits_available():
-                "You check out [the_person.possessive_title!l]. Her delicious looking tits are on full display."
+                "You check out [the_person.possessive_title]. Her delicious looking tits are on full display."
             else:
-                "You check out [the_person.possessive_title!l]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."
+                "You check out [the_person.possessive_title]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."
                 mc.name "Hey, before you get under the desk, why don't you get your tits out? It'd be great to have something to look at..."
                 "[the_person.possessive_title] smiles wide"
                 the_person "Of course! Let me get this off for you..."
@@ -706,10 +711,10 @@ label cum_fetish_sarah_intro_label():
             $ add_cum_fetish(the_person)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
             if the_person.has_mouth_cum():
-                "Glancing down, you see [the_person.possessive_title!l] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
+                "Glancing down, you see [the_person.possessive_title] running her hands along her face, then down to her chest. She is rubbing your cum into her skin."
                 the_person "Mmm... it feels so good! That first splash is always the best..."
             elif the_person.has_face_cum():
-                "Glancing down, you see [the_person.possessive_title!l] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
+                "Glancing down, you see [the_person.possessive_title] licking her fingers. There isn't a trace of your cum anywhere, she has swallowed every drop."
                 the_person "Mmm... that was so... good..."
             $ the_person.event_triggers_dict["LastCumFetish"] = day
             "[the_person.possessive_title] stands up."
@@ -722,7 +727,7 @@ label cum_fetish_sarah_intro_label():
             "She's been under the influence of your serums for a while now. She has definitely developed a cum fetish."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
             the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
-            "You wave goodbye to [the_person.possessive_title!l] and finish eating your lunch."
+            "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
         "Refuse":
             the_person "I'm sorry to hear that..." #TODO finish this
 
@@ -856,10 +861,10 @@ label unit_test_cum_fetish_intro():
 #     $ the_person = stephanie
 #     $ the_person.event_triggers_dict["LastCumFetish"] = day
 #     if mc.location == mc.business.r_div: #Already in research
-#         "Suddenly, [the_person.possessive_title!l] looks up from her work and and speaks up."
+#         "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
 #         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
 #     else:
-#         "You get a text message from [the_person.possessive_title!l]."
+#         "You get a text message from [the_person.possessive_title]."
 #         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
 #         "You text her back."
 #     mc.name "Sure, meet me in my office."
@@ -921,7 +926,7 @@ label unit_test_cum_fetish_intro():
 #                 mc.name "Don't worry."
 #                 the_person "Well, I'll get back to work for now then. But I might swing by your office again later... you know... if I get hungry!"
 #                 $ scene_manager.update_actor(the_person, position = "walking_away")
-#                 "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
+#                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
 #                 "Looks like [the_person.title] has a cum fetish now!"
 #             "Let her take it":
 #                 mc.name "I'm sorry, [the_person.title]. I didn't want it to be this way."
@@ -957,7 +962,7 @@ label unit_test_cum_fetish_intro():
 #                 mc.name "It doesn't matter, you can take the rest of the day off."
 #                 the_person "Oh? Guess I'll just go find someone else to play with for a while. Your loss mister!"
 #                 $ scene_manager.update_actor(the_person, position = "walking_away")
-#                 "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
+#                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
 #                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
 #                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 #
@@ -1023,7 +1028,7 @@ label unit_test_cum_fetish_intro():
 #                 mc.name "It doesn't matter, you can take the rest of the day off."
 #                 the_person "Oh? Guess I'll just go find someone else to play with for a while. Your loss mister!"
 #                 $ scene_manager.update_actor(the_person, position = "walking_away")
-#                 "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
+#                 "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
 #                 "Looks like [the_person.title] has a  cum fetish now! But she is also a bimbo."
 #                 "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
 #                 $ the_person.apply_planned_outfit()
@@ -1048,7 +1053,7 @@ label unit_test_cum_fetish_intro():
 #         mc.name "Don't worry. I'm definitely aware."
 #         the_person "Well, I'll get back to work for now then. But I might swing by your office again later... you know... if I get hungry!"
 #         $ scene_manager.update_actor(the_person, position = "walking_away")
-#         "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
+#         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
 #         "Looks like [the_person.title] has a cum fetish now!"
 #     else:
 #         the_person "Before I get started, I just want to make sure you understand. I support you completely. I'm not mad or anything, just a little concerned."
@@ -1088,7 +1093,7 @@ label unit_test_cum_fetish_intro():
 #         the_person "Okay. I can already feel the urge to get another load from you, but I know you are a busy guy."
 #         the_person "I'll be back later, okay? I have a feeling I'm going to be hungry for more!"
 #         $ scene_manager.update_actor(the_person, position = "walking_away")
-#         "You say goodbye, and [the_person.possessive_title!l] turns and walks out of your office."
+#         "You say goodbye, and [the_person.possessive_title] turns and walks out of your office."
 #         "Looks like [the_person.title] has a cum fetish now!"
 #
 #     $ scene_manager.clear_scene()

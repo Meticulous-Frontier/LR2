@@ -113,10 +113,9 @@ label girlfriend_sleepover_label():
         $ mc.change_location(bedroom)
         $ mc.location.show_background()
         "When you finish, you go to your room. You make sure everything is nice and tidy."
-        "Eventually, you get a text message."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey, I'm here, let me in?"
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         $ the_person.draw_person()
         "You go to the front door. Your girlfriend is waiting for you."
         the_person "Hey!"
@@ -199,7 +198,7 @@ label girlfriend_sleepover_label():
             $ done = True
 
         else:
-            "After a short rest you've recovered some of your energy and [the_person.possessive_title!l]'s eager to get back to work."
+            "After a short rest you've recovered some of your energy and [the_person.possessive_title]'s eager to get back to work."
             $ mc.change_energy(energy_gain_amount)
             $ the_person.change_energy(energy_gain_amount) #She gains some back too
             if energy_gain_amount >= 10:
@@ -262,7 +261,7 @@ label girlfriend_sleepover_label():
     if wakeup_action:
         $ wakeup_action.call_action(the_person)
     else:
-        "You wakeup, but [the_person.possessive_title!l] isn't there. She must have gotten up early and left."
+        "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
         $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
@@ -272,7 +271,7 @@ label girlfriend_sleepover_label():
 
 label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.draw_person(position = "walking_away")
-    "You slowly wake up, with your arms around [the_person.possessive_title!l], spooning with her."
+    "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
     "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
     if the_person.has_large_tits():
         "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
@@ -402,7 +401,7 @@ label girlfriend_underwear_shopping_label(the_person):
         the_person "I mean, if you want me to. I suppose I could get something new to wear for you once in a while..."
     else:
         the_person "Oh! That sounds fun!"
-        the_person "This will be great! You can tell me what you like and then I'll now what to wear whenever I want to get your engine revving."
+        the_person "This will be great! You can tell me what you like, and then I'll know what to wear whenever I want to get your engine revving."
     "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
     $ mc.change_location(clothing_store)
     $ mc.location.show_background()
@@ -424,7 +423,7 @@ label girlfriend_underwear_shopping_label(the_person):
                     "She gives you a quick kiss."
                     the_person "Thank you for being so patient!"
                     $ the_person.draw_person (position = "stand2")
-                "You spend a few minutes with [the_person.possessive_title!l] as she looks through the different clothes racks. Eventually she picks something."
+                "You spend a few minutes with [the_person.possessive_title] as she looks through the different clothes racks. Eventually she picks something."
                 "She takes your hand and you follow her to the dressing room."
                 the_person "I'll be right back!"
                 $ clear_scene()
@@ -442,7 +441,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(lingerie_outfit, outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title!l]. You set them on the top of the dressing room door."
+                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
                         $ the_person.call_dialogue("lingerie_shopping_tame_response")
@@ -476,7 +475,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(Outfit("New Outfit"), outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pick out an outfit and take them to [the_person.possessive_title!l]. You set them on the top of the dressing room door."
+                    "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.

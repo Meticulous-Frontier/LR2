@@ -119,7 +119,7 @@ init 2 python:
         candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = True)
 
         global candace
-        candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
+        candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "standard_body", face_style = "Face_12", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
             eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
@@ -167,7 +167,7 @@ init 2 python:
 
     def create_debug_candace(): #Use this function to make a version of Candace for debug purposes.
         if "candace" in globals():
-            renpy.say("", "Candace already exists! Overwriting")
+            renpy.say(None, "Candace already exists! Overwriting")
 
         candace_base_outfit = Outfit("Candace's base accessories")
         the_eyeshadow = light_eye_shadow.get_copy()
@@ -241,7 +241,7 @@ init 2 python:
 
     def create_debug_genius_candace():  #Use this function to make a version of genius Candace for debug purposes.
         if "candace" in globals():
-            renpy.say("", "Candace already exists! Overwriting")
+            renpy.say(None, "Candace already exists! Overwriting")
 
         candace_base_outfit = Outfit("Candace's base accessories")
         the_eyeshadow = light_eye_shadow.get_copy()
@@ -902,7 +902,7 @@ label candace_love_path_intro_label():
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
     call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_01
-    "You look at the clock on [the_person.possessive_title!l]'s microwave. It's almost 2am. You are exhausted."
+    "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
     the_person "Oh. My. God. A slumber party! Let's do it!"
@@ -926,7 +926,7 @@ label candace_love_path_intro_label():
     "She is wearing a sheer pink nightgown, and absolutely nothing else. Normally a sight like that would be enough to get your blood boiling, but right now you are just too tired."
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
     $ the_person.draw_person(position = "walking_away")
-    "Still naked, you cock is now up against [the_person.possessive_title!l]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
+    "Still naked, you cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
     "She grabs your hand and brings it around her front, placing it on her chest. She sighs, then turns her head."
     the_person "Goodnight boss. Thanks for spending the night... I've... Like... always wanted to try sleeping like this..."
     mc.name "Goodnight..."
@@ -944,7 +944,7 @@ label candace_love_path_intro_label():
     $ the_person.cum_on_stomach()
     "When you finish, [the_person.title] starts to lick her fingers. She seems happy as she lays back in bed next to you. Sleep rapidly overtakes you."
     "You sleep for a while longer. You aren't surprised though when you feel warm, wet sensations enveloping your cock again."
-    "The delicious suction and the sound of [the_person.possessive_title!l]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
+    "The delicious suction and the sound of [the_person.possessive_title]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
     $ the_person.draw_person(position = "blowjob")
     "You crack your eyes open and see Candi, working diligently to get you off with her mouth. You aren't sure how long she has been doing this, but it's definitely working."
     "You reach down and run your hand through her hair, helping keep it out of her way. She looks up at you an makes eye contact... And then maintains is as she starts to give you long, slow strokes with her mouth."
@@ -1015,7 +1015,7 @@ label candace_love_path_intro_label():
     "God, her ass is great. Even after cumming over and over last night, you feel blood flowing to your dick as you watch her bent over."
     "Still completely naked, you know there is no way you can hide it from her. Maybe you should take charge, and give her a good fuck before you both head in to work."
 
-    "You get up from the table and start to walk over to [the_person.possessive_title!l]. She doesn't seem to react... Surely she heard you get up?"
+    "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up?"
     "Then you notice. She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
     "You grip her hips with your hands, and then push your fully erect cock against her ass."
     the_person "Oh, thank God, I was, like, REALLY hoping to get one more before work..."
@@ -1039,7 +1039,7 @@ label candace_love_path_intro_label():
     the_person "Oh! The dryer is done! I guess it's about time to head into the office..."
     "[the_person.title] disappears for a moment then comes back, holding your clothes."
     $ the_person.draw_person(position = "stand4")
-    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title!l] also getting ready for the day."
+    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title] also getting ready for the day."
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
     mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [mc.business.head_researcher.title]."
@@ -1109,13 +1109,13 @@ label candace_begin_cure_research_label(the_person):
 
 label candace_anti_bimbo_serum_label():
     $ the_person = mc.business.head_researcher
-    "You get a text from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey! Meet me in your office ASAP!"
-    $ mc.having_text_conversation = None
+    mc.name "On my way!"
+    $ mc.end_text_convo()
     $ the_person.draw_person(position = "sitting")
     $ ceo_office.show_background()
-    "You quickly head to your office and find [the_person.possessive_title!l] sitting behind your desk with her feet up."
+    "You quickly head to your office and find [the_person.possessive_title] sitting behind your desk with her feet up."
     the_person "Guess what? I'm a fucking genius."
     mc.name "Oh? Do you have something to report from your research with Candi?"
     the_person "Something like that. You see, at first, I was racking my brain, trying to come up with some crazy chemical compound that could go back and undo a complex drug with multiple binding points and effects."
@@ -1421,7 +1421,7 @@ label candace_meet_doctor_candace_label():
             "You consider for a moment getting a nice couch for your office... "
             "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
             mc.name "Rest up, I'm going to get back to work."
-            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title!l]"
+            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."
         "Reject (disabled)":
             pass
     $ clear_scene()

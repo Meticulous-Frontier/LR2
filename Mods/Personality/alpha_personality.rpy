@@ -145,9 +145,9 @@ label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
 label alpha_sex_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
-            the_person "Such a nice body you have [the_person.mc_title] and I love sex... Let's give it a try and see how it feels!"
+            the_person "Such a nice body you have, [the_person.mc_title], and I love sex... Let's give it a try and see how it feels!"
         else:
-            the_person "I love sex [the_person.mc_title], and I love it more when it's with you!"
+            the_person "I love sex, [the_person.mc_title], and I love it more when it's with you!"
     else:
         the_person "Okay, lets try this... I hope you know how to treat a real woman during sex!"
     return
@@ -237,7 +237,7 @@ label alpha_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change? I'm the best..."
         elif the_person.sluttiness > 20:
-            the_person "What do you mean [the_person.mc_title]? Do you want to spend some good time with me?"
+            the_person "What do you mean, [the_person.mc_title]? Do you want to spend some good time with me?"
         else:
             the_person "I'm not sure I understand, what do you need from me [the_person.mc_title]?"
     return
@@ -598,7 +598,7 @@ label alpha_flirt_response_girlfriend(the_person):
             menu:
                 "Find someplace quiet":
                     mc.name "Why wait until later? Come on."
-                    "You take [the_person.possessive_title!l]'s hand. She hesitates for a moment, then follows as you lead her away."
+                    "You take [the_person.possessive_title]'s hand. She hesitates for a moment, then follows as you lead her away."
                     "After a few minutes of searching you find a quiet spot. You put your arm around [the_person.title]'s waist and pull her close to you."
                     mc.name "So, what did you want that privacy for again?"
                     the_person "Oh, a few things. Let's start with this."
@@ -609,7 +609,7 @@ label alpha_flirt_response_girlfriend(the_person):
 
                 "Just flirt":
                     mc.name "Aw, you're going to make me wait? That's so cruel."
-                    "You reach around and place a hand on [the_person.possessive_title!l]'s ass, rubbing it gently."
+                    "You reach around and place a hand on [the_person.possessive_title]'s ass, rubbing it gently."
                     "She sighs and bites her lip, then clears her throat and glances around to see if anyone else noticed."
                     the_person "I'm sure we can find a way for you to satisfy me, but let's take it easy while other people are around."
                     "You give her butt one last squeeze, then slide your hand off."
@@ -678,7 +678,7 @@ label alpha_flirt_response_affair(the_person):
 
                 "Just flirt":
                     mc.name "Well that would just be cruel of me..."
-                    "You put your arm around [the_person.possessive_title!l] and rest your hand on her ass."
+                    "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
                     mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and squeezes you cock. You give her butt a final slap and let go of her."
 
@@ -696,7 +696,7 @@ label alpha_flirt_response_affair(the_person):
         menu:
             "Feel her up":
                 mc.name "That sounds like a good idea. Come here."
-                "You wrap your arms around [the_person.possessive_title!l]'s waist, resting your hands on her ass."
+                "You wrap your arms around [the_person.possessive_title]'s waist, resting your hands on her ass."
                 "Then you pull her tight against you, squeezing her tight butt."
                 "She quickly turns around and puts your hand between her thighs."
                 call fuck_person(the_person, private = True, start_position = standing_grope, skip_intro = True) from _call_fuck_person_alpha_flirt_response_affair_2
@@ -731,6 +731,37 @@ label alpha_flirt_response(the_person):
             the_person "I know you cannot take those greedy eyes off me."
         else:
             the_person "Well, I do look good, don't I [the_person.mc_title]?"
+    return
+
+label alpha_flirt_response_text(the_person):
+    mc.name "Hey [the_person.title]. Hope you're doing well."
+    mc.name "I was thinking of you and wanted to talk."
+    "There's a brief pause, then she texts back."
+    if the_person.has_role(affair_role):
+        the_person "Next time, come visit me, so we could do more than just talk."
+        the_person "And don't make me wait too long, I might find someone else to please me."
+        mc.name "I will, I promise."
+
+    elif the_person.has_role(girlfriend_role):
+        the_person "You should think of me. We should see each other soon."
+        the_person "So we can spend more time in person. Texting isn't the same."
+        mc.name "I will, I promise."
+
+    if the_person.love < 20 and not the_person.relationship == "Single":
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        the_person "Make it quick [the_person.mc_title]. My [so_title] is watching me."
+
+    elif the_person.love < 40:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Are you getting exited thinking about me? What did you want to talk about?"
+        else:
+            the_person "What do you want to talk about."
+
+    else:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Mhmm, tell me about the ways you want to please me?"
+        else:
+            the_person "We can chat for a while, what would you like to talk about?"
     return
 
 label alpha_cum_face(the_person):
@@ -915,7 +946,7 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         #She's into it and encouraged by the slut watching her.
         the_person "Oh [the_person.mc_title], I know it's wrong, but what you are doing just feels right."
         $ the_person.change_arousal(1)
-        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title!l] gets."
+        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title] gets."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
@@ -929,7 +960,7 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         the_person "[the_watcher.name], just have a good look, I may let you try him one day."
         $ the_person.change_arousal(1)
         $ the_person.change_slut_temp(1)
-        "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title!l]."
+        "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
 
     return
 
@@ -1044,7 +1075,7 @@ label alpha_touching_body_taboo_break(the_person):
         the_person "Do you want to know something?"
         mc.name "What?"
         the_person "I've had dreams just like this before, you giving my body the pleasure it deserves."
-        mc.name "Well, i'm happy to oblige."
+        mc.name "Well, I'm happy to oblige."
 
     elif the_person.love >= 20:
         the_person "I want you to know I take this very seriously, [the_person.mc_title]."
@@ -1081,7 +1112,7 @@ label alpha_touching_vagina_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 35:
         the_person "Do it [the_person.mc_title]. Touch my pussy."
     elif the_person.love >= 20:
-        the_person "I'm as excited as a little girl. Does a woman like me make you feel that way too [the_person.mc_title]?"
+        the_person "I'm as excited as a little girl. Does a woman like me make you feel that way too, [the_person.mc_title]?"
         mc.name "Just take a deep breath and relax. You trust me, right?"
         the_person "We will see if I can trust you."
     else:
@@ -1110,7 +1141,7 @@ label alpha_sucking_cock_taboo_break(the_person):
         the_person "Did you just say something I don't want to hear?"
         mc.name "No you didn't. I want you to put my cock in your mouth and suck on it."
         the_person "I will not do something like that [the_person.mc_title], who do you think I am?"
-        the_person "I'm not some kind of cheap floozy that you pickup on a street corner, I don't \"suck cocks\"."
+        the_person "I'm not some kind of cheap floozy that you pick up on a street corner, I don't \"suck cocks\"."
         mc.name "Yeah you do, and you're going to do it for me."
         the_person "And why should I do that?"
         mc.name "Because deep down, you want to. You can be honest with me and with yourself, aren't you curious what it's going to be like?"
@@ -1155,7 +1186,7 @@ label alpha_vaginal_sex_taboo_break(the_person):
             the_person "Alright, get over here and show me what you can do."
         else:
             the_person "I'm glad you're doing this properly this time."
-            "It might be the hot new thing to do, but I just don't enjoy anal. I think your cock will feel much better in my vagina."
+            the_person "It might be the hot new thing to do, but I just don't enjoy anal. I think your cock will feel much better in my vagina."
     return
 
 label alpha_anal_sex_taboo_break(the_person):

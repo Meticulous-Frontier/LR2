@@ -39,6 +39,7 @@ init 2 python:
         cs.scope["eye_options"] = False
         cs.scope["skin_options"] = False
         cs.scope["body_options"] = False
+        cs.scope["idle_options"] = False
         cs.scope["breast_options"] = False
         cs.scope["hair_style_options"] = False
         cs.scope["hair_colour_options"] = False
@@ -135,6 +136,7 @@ screen cheat_menu():
     default eye_options = False
     default skin_options = False
     default body_options = False
+    default idle_options = False
     default breast_options = False
     default hair_style_options = False
     default hair_colour_options = False
@@ -171,8 +173,8 @@ screen cheat_menu():
 
         "Funds": ["funds", "funds", 10000, 7],
         "Supplies": ["supply_count", "supply_count", 10000, 8],
-        "Effectivity": ["team_effectiveness", "team_effectiveness", 10, 9],
-        "Max Effectivity": ["effectiveness_cap", "effectiveness_cap", 10, 10] # Might add If statement to combine these two as they go hand in hand
+        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 9],
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 10] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
         "HR": ["hr_skill", "hr_skill", 1, 0],
@@ -226,6 +228,7 @@ screen cheat_menu():
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
     default available_hair_colours = sorted(list_of_hairs, key = lambda x: x[0])
     default available_pubes_styles = sorted(pube_styles, key = lambda x: x.name)
+    default available_idle_poses = ["stand2","stand3","stand4","stand5"]
 
     default list_of_bodies = [white_skin, tan_skin, black_skin] #Assemble the cloth items into a list. Revisit this later if a default list is created
     default available_skin = { #
@@ -681,6 +684,15 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("body_options")]
 
+                        textbutton "Idle Position":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if idle_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("idle_options")]
+
                         textbutton "Breast Size":
                             style "textbutton_no_padding_highlight"
                             text_style "cheat_text_style"
@@ -836,6 +848,23 @@ screen cheat_menu():
 
                                         action [
                                             Function(setattr, editing_target, "body_type", x),
+                                            Function(cheat_appearance)
+                                        ]
+
+                        if idle_options and hasattr(editing_target, "idle_pose"):
+                            vbox:
+                                for x in available_idle_poses:
+                                    textbutton str(x).replace("_", " ").title():
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.idle_pose == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [
+                                            Function(setattr, editing_target, "idle_pose", x),
                                             Function(cheat_appearance)
                                         ]
 

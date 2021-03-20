@@ -184,6 +184,27 @@ init 5 python:
     "Underwear": ["charcoal", "white smoke", "dark grey", "pale pink"]
     }
 
+    swap_bottoms_map = {
+    "Jeans": long_skirt,
+    "Suit_Pants": pencil_skirt,
+    "Capris": skirt,
+    "Leggings": belted_skirt,
+    "Jean_Hotpants": belted_skirt,
+    "Booty_Shorts": mini_skirt,
+    "Daisy_Dukes": micro_skirt,
+
+    "Long_Skirt": jeans,
+    "Pencil_Skirt": suitpants,
+    "Lace_Skirt": capris,
+    "Skirt": capris,
+    "Belted_Skirt": leggings,
+    "Mini_Skirt": booty_shorts,
+    "Micro_Skirt": daisy_dukes
+    }
+
+    coverup_upper_list = [lab_coat, suit_jacket, vest]
+    coverup_lower_list = []
+
     def neutralize_item_colour(the_item, the_colour = None):
         if the_item == None:
             return None
@@ -231,6 +252,16 @@ init 5 python:
             neutralize_item_colour(item)
         for item in the_outfit.accessories:
             neutralize_item_colour(item)
+        return the_outfit
+
+    def swap_outfit_bottoms(the_outfit):
+        for item in the_outfit.lower_body:
+            if (item in real_pants_list or item in skirts_list) and item.proper_name in swap_bottoms_map.keys():
+                swap_item = swap_bottoms_map[item.proper_name].get_copy()
+                neutralize_item_colour(swap_item)
+                the_outfit.lower_body.remove(item)
+                the_outfit.add_lower(swap_item)
+                return the_outfit
         return the_outfit
 
     def rgb_to_hsl(r, g, b):    # r/g/b values in decimal 0-1
@@ -796,7 +827,7 @@ init 5 python:
                 item.colour = main_colour
             return coloured_outfit
 
-        def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, person_sluttiness = 0, main_colour = None):
+        def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
             personal_outfit = outfit.get_copy()
             personal_outfit.remove_all_collars()
             personal_outfit.remove_all_cum()
@@ -830,6 +861,29 @@ init 5 python:
                     #     color_list.append(self.color_prefs[under_colour][col])
                     # underwear_colour = get_random_from_list(color_list)
 
+            #First alteration we look at is bottom swap. Allow it if alterations are allowed or if we specifically allow bottom swaps.
+            if swap_bottoms:
+                if personal_outfit.has_pants() and self.person.get_opinion_score("skirts") > self.person.get_opinion_score("pants"): #Outfit has pants and girl prefers skirts
+                    personal_outfit = swap_outfit_bottoms(personal_outfit)
+                elif personal_outfit.has_skirt() and self.person.get_opinion_score("skirts") < self.person.get_opinion_score("pants"):
+                    personal_outfit = swap_outfit_bottoms(personal_outfit)
+
+            if allow_skimpy and alterations < max_alterations:
+                if personal_outfit.is_dress() or personal_outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
+                    slut_score = personal_outfit.get_full_outfit_slut_score()
+                    if slut_score + 20 < self.person.sluttiness and renpy.random.randint(0,100) < self.person.sluttiness:
+                        for item in personal_outfit.lower_body:
+                            if item in panties_list:
+                                personal_outfit.lower_body.remove(item)
+                                alterations += 1
+                elif personal_outfit.has_pants() or personal_outfit.has_shirt():   #If the outfit has pants, have a chance to drop a layer off the top
+                    slut_score = personal_outfit.get_full_outfit_slut_score()
+                    if slut_score + 20 < self.person.sluttiness and renpy.random.randint(0,100) < self.person.sluttiness and len(personal_outfit.upper_body) > 0:
+                        personal_outfit.remove_random_upper(top_layer_first = True)
+                        alterations += 1
+
+            #TODO determine if underwear is on, and if it is boring. If girl wants she can swap underwear for sexier set
+
             #Next, determine what kind of outfit this is.
 
             if personal_outfit.is_dress(): #If it is a dress, let the dress be the focal point of the outfit.
@@ -859,15 +913,6 @@ init 5 python:
                 for item in personal_outfit.accessories:
                     neutralize_item_colour(item)
 
-                if alterations < max_alterations:   #Here we can make alterations to the outfit if we choose to.
-                    is_overwear = personal_outfit.is_suitable_overwear_set()
-                    slut_score = is_overwear and personal_outfit.get_overwear_slut_score() or personal_outfit.get_full_outfit_slut_score()
-                    if not is_overwear: #See if we are slutty enough to drop the panties
-                        if slut_score + 20 < person_sluttiness and renpy.random.randint(0,100) < 40:
-                            for item in personal_outfit.lower_body:
-                                if item in panties_list:
-                                    personal_outfit.lower_body.remove(item)
-                                    alterations += 1
 
             elif personal_outfit.has_pants(): #This outfit has lower body pants covering.
                 # renpy.say ("", "Suitable pants set")
@@ -922,11 +967,6 @@ init 5 python:
                         neutralize_item_colour(item)
                 for item in personal_outfit.accessories:
                     neutralize_item_colour(item)
-                if alterations < max_alterations:   #Here we can make alterations to the outfit if we choose to.
-                    slut_score = personal_outfit.get_full_outfit_slut_score()
-                    if slut_score + 20 < person_sluttiness and renpy.random.randint(0,100) < 30 and len(personal_outfit.upper_body) > 0: #If slutty, take off the top layer of the top
-                        personal_outfit.remove_random_upper(top_layer_first = True)
-                        alterations += 1
 
             elif personal_outfit.has_skirt(): #This outfit has a skirt.
                 # renpy.say ("", "Suitable skirt set")
@@ -986,13 +1026,6 @@ init 5 python:
                         neutralize_item_colour(item)
                 for item in personal_outfit.accessories:
                     neutralize_item_colour(item)
-                if alterations < max_alterations:   #Here we can make alterations to the outfit if we choose to.
-                    slut_score = personal_outfit.get_full_outfit_slut_score()
-                    if slut_score + 20 < person_sluttiness and renpy.random.randint(0,100) < 40:
-                        for item in personal_outfit.lower_body:
-                            if item in panties_list:
-                                personal_outfit.lower_body.remove(item)
-                                alterations += 1
 
             #Next type of outfite: housewear. Girl comfy clothes general in game are some top with just panties or no panties. EG mom's apron, pajamas, etc.
             #With this outfit, tits will be covered. Make top the focal point.
@@ -1027,7 +1060,7 @@ init 5 python:
             #This outfit does not have lower or upper body covering. Could be just underwear or lingerie.
             #First, check and see if this is just an underwear set. In that case, colour all underwear as main color.
             #To differentiate between underwear and lingerie, check and see if it is classic underwear set via layers.
-            #If bottom layer only, check sluttiness raiting and access and for pantyhose vs socks and determine if we treat as just underwear or as lingerie
+            #If bottom layer only, check sluttiness rating and access and for pantyhose vs socks and determine if we treat as just underwear or as lingerie
             elif personal_outfit.is_suitable_underwear_set() and not (personal_outfit.has_hose() and personal_outfit.get_underwear_slut_score() > 15):
                 #Make underwear main color, neutralize everything else.
                 # renpy.say ("", "Suitable underwear set")

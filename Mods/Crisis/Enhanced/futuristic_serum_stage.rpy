@@ -9,7 +9,7 @@ init 5 python:
                 my_string += person.name + " " + person.last_name + ", "
         else:
             my_string = "There is currently nobody in your company who meets these requirements."
-        renpy.say("", my_string)
+        renpy.say(None, my_string)
         return
 
 

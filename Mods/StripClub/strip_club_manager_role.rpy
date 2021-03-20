@@ -108,14 +108,14 @@ label promote_to_manager_label(the_person):
     $ the_person.event_triggers_dict["stripclub_last_promotion_day"] = day
     mc.name "[the_person.title], I need to talk with you."
     the_person "Sure [the_person.mc_title], something I can help you with?"
-    mc.name "May be, ever since I bought this place I never lost money, but I think the business could be better..."
-    mc.name "Manage the girl's shifts, the suppliers, check if everything here is going to take time, and I'm already pretty busy with other things."
+    mc.name "Maybe. Since I bought this place, I've been turning a profit, but I think business could be better."
+    mc.name "Managing the girls' shifts, dealing with suppliers, and keeping an eye on everything here is going to take time, and I'm already pretty busy with other things."
     mc.name "So I wanna ask you, do you think you can manage this place? Are you the girl I'm looking for?"
     the_person "[mc.name], with the previous owner this place was a real mess, and I've seen the changes and the improvement you made."
-    the_person "The place now is clean, the girls are happy, and I didn't see those shady figures hanging around this place anymore."
+    the_person "The place is clean, the girls are happy, and I don't see those shady figures hanging around here anymore."
     the_person "I get what you're doing here, and I think I see what you are trying to do."
-    mc.name "Ok [the_person.title], I will let you run the place, prove to me that I made the right choice."
-    "She looks you intensely in your eyes, you can see the excitement for being the chosen one, then she simply responds..."
+    mc.name "Okay, [the_person.title], I will let you run the place. Prove to me that I made the right choice."
+    "She looks intensely into your eyes. You see in her own eyes the glimmer of excitement for being chosen."
     the_person "I will."
     $ promote_strip_club_stripper_to_manager(the_person)
     return
@@ -126,7 +126,7 @@ label manager_role_remove_label(the_person):
     mc.name "I checked your management results and I can't say I'm happy, so I have decided to remove you from your management position."
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
-    mc.name "I know, that's why I keep you with me here."
+    mc.name "I know, that's why I'm keeping you with me here."
     $ the_person.change_stats(happiness = -10, obedience = 2)
     $ the_person.remove_role(manager_role)
 
@@ -142,10 +142,10 @@ label promote_to_mistress_label(the_person):
     the_person "Wow, it would be a kinky job that one! Wait, are you planning to get some other man instead of you to do it?"
     $ the_person.draw_person(emotion = "sad")
     the_person "Because I don't know if I can accept someone else instead of you giving me orders, even if it is you asking me that..."
-    the_person "You have been my 'first'... Well, not in the physical way but you know what I mean, and I think you're the only one I can accept..."
-    mc.name "Actually I was planning to have a woman doing the job."
+    the_person "You have been my 'first'... Well, not in the physical way, but you know what I mean, and I think you're the only one I can accept."
+    mc.name "Actually, I was planning to have a woman doing the job."
     $ the_person.draw_person(emotion = "angry")
-    the_person "What? No way! I will never agree to have a woman commanding me, if you do that, I will be forced to resign!"
+    the_person "What? No way! I will never agree to allow another woman to command me. If you do that, I will be forced to resign!"
     mc.name "And what if that commanding woman is you?"
     $ the_person.draw_person(emotion = "happy")
     the_person "Really? Are you asking me to be, after you, the complete boss here?"
@@ -180,7 +180,7 @@ label mistress_hunt_for_me_label(the_person):
     $ the_person_two = mistress_hunt_for_me_prey(the_person)
     if the_person_two is None:
         $ the_person.draw_person(emotion = "sad")
-        the_person "Amazing, she's not interested and I cannot find anyone else... Am I loosing my touch?"
+        the_person "Amazing, she's not interested and I cannot find anyone else... Am I losing my touch?"
         return
     "After a couple of minutes the girls are back."
     $ the_person.draw_person(emotion = "happy", position = "stand4")
@@ -192,16 +192,16 @@ label mistress_hunt_for_me_label(the_person):
     $ mc.change_location(downtown_hotel)
     $ mc.location.show_background()
     $ clear_scene()
-    "A couple of minutes later you are in the hotel and walk up to the reception to get a hotel room for one night."
+    "A couple of minutes later, you are in the hotel. You walk up to the reception to get a hotel room for one night."
     $ mc.business.change_funds(-80)
     $ downtown_hotel_room.show_background()
 
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_two, position = "walking_away")
     $ scene_manager.add_actor(the_person, position = "back_peek")
-    "You open the door of the room and motion the girl's to come in, you notice [the_person.title] already grabbing [the_person_two.title]'s ass."
+    "You open the door of the room and motion the girls to come in. You notice [the_person.title] already grabbing [the_person_two.title]'s ass."
     call start_threesome(the_person, the_person_two, girl_in_charge = the_person, start_object = make_bed(), affair_ask_after = False) from _call_start_threesome_mistress_hunt_for_me_label
-    "Once you all had your fun, you and the girls go back to the Strip Club."
+    "Once you've all had your fun, you and the girls go back to the Strip Club."
     $ scene_manager.clear_scene()
     $ mc.change_location(strip_club)
     $ mc.location.show_background()

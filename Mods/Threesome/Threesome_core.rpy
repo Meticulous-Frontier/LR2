@@ -328,7 +328,7 @@ init 5 python:
                 elif threeway.position_two_tag == girl_one_choice:
                     option_list.append([threeway.girl_one_final_description, threeway.position_one_tag])
         if __builtin__.len(option_list) == 0:
-            renpy.say("", "Something has gone wrong, no available positions")  #Return something default?
+            renpy.say(None, "Something has gone wrong, no available positions")  #Return something default?
         return option_list
 
     def build_threesome_strip_menu(person_one, person_two):
@@ -484,7 +484,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ position_choice = None
                     $ active_mc_position = None
                 elif active_mc_position.guy_energy > mc.energy:
-                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title!l]."
+                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                     $ position_choice = None
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):

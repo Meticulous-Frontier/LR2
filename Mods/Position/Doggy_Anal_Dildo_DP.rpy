@@ -26,7 +26,7 @@ init python:
 
 label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
-    "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]"
+    "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
     if the_girl.effective_sluttiness() > 110:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
@@ -108,7 +108,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                            "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you. The grinding motion stimulates her clit against the vibrator."
                            the_girl "It's so good... I can't think... its so good!"
                            "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
-                           mc.name "Wow, the things you do with this ass. You are amazing [the_girl.title]"
+                           mc.name "Wow, the things you do with this ass. You are amazing [the_girl.title]."
                            "[the_girl.possessive_title] sighs. You can tell the double penetration is very fulfilling for her."
                       else:
                            "[the_girl.possessive_title] looks back at you."
@@ -160,7 +160,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
     else:
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."
         "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
-        "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]"
+        "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
         "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]. The vibrating dildo stimulates her pussy mercilessly."
         if the_girl.has_role(anal_fetish_role):
             "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"

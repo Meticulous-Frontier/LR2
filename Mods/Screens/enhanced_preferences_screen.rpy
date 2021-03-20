@@ -1,7 +1,13 @@
 init 2: # Add some additional
     style pref_label_text:
         yalign 1.0
-        size 28
+        size 26
+
+    style radio_button_text is gui_button_text:
+        size 22
+
+    style check_button_text is gui_button_text:
+        size 22
 
     screen preferences():
 
@@ -31,6 +37,8 @@ init 2: # Add some additional
                         textbutton _("Unseen Text") action Preference("skip", "toggle")
                         textbutton _("After Choices") action Preference("after choices", "toggle")
                         textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+
+                null height (2 * gui.pref_spacing)
 
                 hbox:
 
@@ -70,6 +78,26 @@ init 2: # Add some additional
                             tooltip "Disables NTR like scenarios in events, that are not NTR events by default."
                             action [
                                 SetField(persistent, "show_ntr", False)
+                            ]
+
+                null height (2 * gui.pref_spacing)
+
+                hbox:
+
+                    vbox:
+                        style_prefix "radio"
+                        label "Always Ask Condom"
+                        textbutton "Enabled":
+                            sensitive True
+                            tooltip "The condom dialog will always be triggered during sex scenes."
+                            action [
+                                SetField(persistent, "always_ask_condom", True)
+                            ]
+                        textbutton "Disabled":
+                            sensitive True
+                            tooltip "When a girl is slutty enough, the condom dialog will be skipped."
+                            action [
+                                SetField(persistent, "always_ask_condom", False)
                             ]
 
                     # if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.
@@ -118,7 +146,7 @@ init 2: # Add some additional
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be
                     ## added here, to add additional creator-defined preferences.
 
-                null height (4 * gui.pref_spacing)
+                null height (2 * gui.pref_spacing)
 
                 hbox:
                     style_prefix "slider"

@@ -334,7 +334,7 @@ label quest_arousal_serum_test_label():
     $ quest_arousal_serum().quest_event_dict["ready_day"] = day + 3
     $ quest_arousal_serum().quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish
 
-    "You and [the_person.possessive_title!l] leave the lab and close up for the day."
+    "You and [the_person.possessive_title] leave the lab and close up for the day."
     return
 
 label quest_arousal_serum_researched_label():
@@ -344,10 +344,10 @@ label quest_arousal_serum_researched_label():
         return
 
     if not mc.location == mc.business.r_div:
-        "After you have closed up, you get a text from your head researcher."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Meet me down in the lab, I have good news."
-        $ mc.having_text_conversation = None
+        mc.name "On my way!"
+        $ mc.end_text_convo()
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
         $ the_person.draw_person()

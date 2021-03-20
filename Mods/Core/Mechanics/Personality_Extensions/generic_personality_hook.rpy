@@ -14,6 +14,7 @@ init -1 python:
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
         start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
         title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
+        generate_insta = None, generate_dikdok = None, generate_onlyfans = None,
         force_random = False, forced_opinions = None, forced_sexy_opinions = None):
 
         return_character = None
@@ -65,7 +66,8 @@ init -1 python:
                 hair_colour = hair_colour, hair_style = hair_style, pubes_colour = pubes_colour, pubes_style = pubes_style, skin = skin, eyes = eyes, job = job,
                 personality = personality, custom_font = custom_font, name_color = name_color, dial_color = dial_color, starting_wardrobe = starting_wardrobe, stat_array = stat_array, skill_array = skill_array, sex_array = sex_array,
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
-                title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit)
+                title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit,
+                generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans)
 
         # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
         if return_character.event_triggers_dict.get("employed_since", -1) != -1:
@@ -418,12 +420,13 @@ init -1 python:
         for person in unique_character_list:
             update_person_opinions(person)
 
-        if "list_of_premade_characters" in globals():
+        if "list_of_unique_characters" in globals():
             # update random characters in game
-            for person in list_of_premade_characters:
+            for person in list_of_unique_characters:
+                person.is_patreon = True
                 update_person_opinions(person)
                 update_random_person(person)
-                rebuild_wardrobe(person)
+                # rebuild_wardrobe(person) # Don't change their wardrobe, it's personalized
                 update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
                 create_party_schedule(person)
         return

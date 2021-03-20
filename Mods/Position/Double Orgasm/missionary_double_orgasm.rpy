@@ -19,21 +19,23 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
                 "You roll off of [the_girl.possessive_title] and lie beside her."
                 "Your condom is ballooned with your seed, hanging off your cock to one side."
                 if the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
-                    "[the_girl.possessive_title] moans as she pours your cum into her mouth."
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
-                elif the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("cum facials")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
-                    "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
-                    the_girl "Mmmmm. So good."
-                    $ the_girl.cum_on_face()
+                    if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+                        $ the_girl.discover_opinion("drinking cum")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                        $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                        "[the_girl.possessive_title] moans as she pours your cum into her mouth."
+                        $ the_girl.cum_in_mouth()
+                        "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    else:
+                        $ the_girl.discover_opinion("cum facials")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
+                        "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
+                        the_girl "Mmmmm. So good."
+                        $ the_girl.cum_on_face()
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.effective_sluttiness() > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -86,7 +88,7 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
                 "She slowly opens her eyes and looks up at you."
                 $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
                 $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
-                if the_girl.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
+                if the_girl.knows_pregnant():# The personality reactions but should it not be True instead of False?
                     the_girl "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
                 elif the_girl.on_birth_control:
                     the_girl "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."

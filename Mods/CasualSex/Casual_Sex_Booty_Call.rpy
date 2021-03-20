@@ -28,11 +28,11 @@ label casual_sex_booty_call_label:
     if the_person is None:
         return
 
-    "While you're going about your day you get a text from [the_person.possessive_title!l]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey stud! Up for some fun?"
     menu:
         "Definitely":
+            mc.name "Definitely."
             the_person "Great!"
             $ the_person.event_triggers_dict["last_booty_call"] = day
             $ the_person.strip_outfit(delay = 0)
@@ -41,15 +41,13 @@ label casual_sex_booty_call_label:
                 $ the_person.change_slut_core(2)
 
         "Not Now":
-            $ mc.having_text_conversation = None
+            mc.name "Sorry, I'm busy."
             "After a few minutes, you get a response."
-            $ mc.having_text_conversation = the_person
             $ the_person.call_dialogue("hookup_rejection")
             $ the_person.strip_outfit(delay = 0)
             $ the_person.draw_person(position = the_person.event_triggers_dict.get("reject_position", "missionary"))
-            $ mc.having_text_conversation = None
             "She sends you a pic of herself masturbating."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ clear_scene()

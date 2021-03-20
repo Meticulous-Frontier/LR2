@@ -99,7 +99,7 @@ init 5 python:
             for opinion_tag in self.opinion_tags:
                 opinion_topic = person.get_opinion_topic(opinion_tag)
                 if opinion_topic:
-                    # renpy.say("", person.name + ": " + opinion_tag + " => " + str(person.get_opinion_score(opinion_tag)))
+                    # renpy.say(None, person.name + ": " + opinion_tag + " => " + str(person.get_opinion_score(opinion_tag)))
                     if opinion_topic[1]: # only show info when opinion is known
                         change_amount += person.get_opinion_score(opinion_tag) * 3 #Add a bonus or penalty if she likes or dislikes the position.
 
@@ -144,14 +144,14 @@ init 5 python:
 
         if not new_position is None:
             transition_scene = "transition_" + get_position_name(self) + "_to_" + get_position_name(new_position) + "_taboo_break_label"
-            #renpy.say("", "Custom taboo break function is: " + transition_scene)
+            #renpy.say(None, "Custom taboo break function is: " + transition_scene)
             if renpy.has_label(transition_scene):
-                #renpy.say("", "Calling custom taboo break: " + transition_scene)
+                #renpy.say(None, "Calling custom taboo break: " + transition_scene)
                 renpy.call(transition_scene, person, the_location, the_object)
 
-            #renpy.say("", "Default taboo break function: " + new_position.taboo_break_description)
+            #renpy.say(None, "Default taboo break function: " + new_position.taboo_break_description)
             if renpy.has_label(new_position.taboo_break_description):
-                #renpy.say("", "Calling default taboo break: " + new_position.taboo_break_description)
+                #renpy.say(None, "Calling default taboo break: " + new_position.taboo_break_description)
                 renpy.call(new_position.taboo_break_description, person, the_location, the_object)
 
             transition_scene = new_position.transition_default
@@ -159,20 +159,20 @@ init 5 python:
                 if position_tuple[0] == new_position: ##Does the position match the one we are looking for?
                     transition_scene = position_tuple[1] ##If so, set it's label as the one we are going to change to.
 
-            #renpy.say("", "Default transition scene is: " + transition_scene)
+            #renpy.say(None, "Default transition scene is: " + transition_scene)
             if renpy.has_label(transition_scene):
-                #renpy.say("", "Calling default transition scene: " + transition_scene)
+                #renpy.say(None, "Calling default transition scene: " + transition_scene)
                 renpy.call(transition_scene, person, the_location, the_object)
 
         else: # we are calling from the new position (we don't have an old position to start from)
-            #renpy.say("", "Default taboo break function: " + self.taboo_break_description)
+            #renpy.say(None, "Default taboo break function: " + self.taboo_break_description)
             if renpy.has_label(self.taboo_break_description):
-                #renpy.say("", "Calling default taboo break: " + self.taboo_break_description)
+                #renpy.say(None, "Calling default taboo break: " + self.taboo_break_description)
                 renpy.call(self.taboo_break_description, person, the_location, the_object)
 
             transition_scene = self.transition_default
             if renpy.has_label(transition_scene):
-                #renpy.say("", "Calling default transition: " + transition_scene)
+                #renpy.say(None, "Calling default transition: " + transition_scene)
                 renpy.call(transition_scene, person, the_location, the_object)
         return
 

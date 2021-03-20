@@ -23,7 +23,7 @@ label breeding_mom_enhanced_label(the_person):
         return
     else:
         the_person "[the_person.mc_title], close the door, please. I have something I need to ask you."
-        "You close the door to [the_person.possessive_title!l]'s bedroom and walk over to her bed."
+        "You close the door to [the_person.possessive_title]'s bedroom and walk over to her bed."
         "She pats the bed beside her and you sit down."
         the_person "I've been thinking a lot about this. You're all grown up and [lily.title] isn't far behind."
         the_person "Soon you'll both be leaving home, but I don't think I'm done being a mother yet."
@@ -70,7 +70,7 @@ label breeding_mom_enhanced_label(the_person):
                 mc.name "Shh... You were fantastic. It's me, I'm just not feeling it today. Maybe we can try some other day."
                 the_person "I don't know, this might have all been a mistake. Let's just... be quiet for a while, okay?"
                 $ the_person.draw_person(position = "sitting")
-                "You hold [the_person.possessive_title!l] until she's feeling better, then sit up in bed with her."
+                "You hold [the_person.possessive_title] until she's feeling better, then sit up in bed with her."
 
         "Say no":
             $ the_person.draw_person(position = "sitting", emotion = "sad")

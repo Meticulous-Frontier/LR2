@@ -70,33 +70,24 @@ label so_relationship_improve_label_enhanced():
     elif the_person.relationship == "Girlfriend":
         $ the_person.change_happiness(20)
         if the_person.love > 30: #You're a good friend.
-            "You get a text from [the_person.title]."
-            $ mc.having_text_conversation = the_person
+            $ mc.start_text_convo(the_person)
             the_person "Hey [the_person.mc_title], I have some exciting news!"
             the_person "My boyfriend proposed, me and [the_person.SO_name] are getting married! I'm so excited, I just had to tell you!"
-            $ mc.having_text_conversation = None
             menu:
                 "Congratulate her":
-                    "You text back."
-                    $ mc.having_text_conversation = the_person
                     mc.name "Congratulations! I'm sure you're the happiest girl in the world."
                     $ the_person.change_love(1)
                     the_person "I am! I've got other people to tell now, talk to you later!"
-                    $ mc.having_text_conversation = None
                 "Warn her against it":
-                    "You text back."
-                    $ mc.having_text_conversation = the_person
                     mc.name "I don't know if that's such a good idea. Do you even know him that well?"
-                    $ mc.having_text_conversation = None
                     "Her response is near instant."
-                    $ mc.having_text_conversation = the_person
                     the_person "What? What do you even mean by that?"
                     mc.name "I mean, what if he isn't who you think he is? Maybe he isn't the one for you."
                     $ the_person.change_happiness(-10)
                     the_person "I wasn't telling you because I wanted your opinion. If you can't be happy for me, you can at least be quiet."
                     $ the_person.change_love(-5)
-                    $ mc.having_text_conversation = None
                     "She seems pissed, so you take her advice and leave her alone."
+            $ mc.end_text_convo()
         else: #You see it on social media
             "You get a notification on your phone."
             "It seems [the_person.title] has gotten engaged to her boyfriend, [the_person.SO_name]. You take a moment to add your own well wishes to her social media pages."

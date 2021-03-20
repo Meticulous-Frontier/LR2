@@ -56,7 +56,7 @@ label slave_attention_crisis_action_label:
 
             menu slave_attention_comfort_menu:
                 "Whip her" if mc.energy >= 20:
-                    "You take a leather flogger from the wall and start to give [the_person.possessive_title!l] a good whipping."
+                    "You take a leather flogger from the wall and start to give [the_person.possessive_title] a good whipping."
 
                     python:
                         for count in __builtin__.range(1, 11):
@@ -91,7 +91,7 @@ label slave_attention_crisis_action_label:
                 "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                     pass
                 "Dildo her" if mc.energy >= 40 and perk_system.has_item_perk("Dildo"):
-                    "You pickup one of the bigger dildos from your cabinet."
+                    "You pick up one of the bigger dildos from your cabinet."
 
                     # TODO instead of default FUCK_PERSON make custom dialog that fits better.
                     call fuck_person(the_person, start_position = standing_dildo, start_object = make_pillory(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_3

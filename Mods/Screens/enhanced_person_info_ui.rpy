@@ -191,10 +191,19 @@ init 2:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
                         if person.serum_effects:
                             textbutton "{image=serum_vial} +[person.suggestibility]%":
-                                yoffset 6
+                                yoffset 16
                                 style "transparent_style"
                                 text_style "menu_text_style"
                                 tooltip person_info_ui_get_serum_info_tooltip(person)
+                                action NullAction()
+                                sensitive True
+
+                        if person.can_clone():
+                            textbutton "{image=dna_sequence}":
+                                yoffset 16
+                                style "transparent_style"
+                                text_style "menu_text_style"
+                                tooltip "This person can be cloned."
                                 action NullAction()
                                 sensitive True
 

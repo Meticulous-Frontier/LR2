@@ -141,10 +141,10 @@ label quest_cure_discovery_intro_label():
     if the_person == None:
         return #Bad end
     if mc.location != rd_division:
-        "You get a text on your phone. It's from [the_person.possessive_title!l]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey, I need to see you in the lab ASAP!"
-        $ mc.having_text_conversation = None
+        mc.name "On my way!"
+        $ mc.end_text_convo()
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
         $ mc.location.show_background()
@@ -236,8 +236,7 @@ label quest_cure_discovery_patent_sold_label():
     if the_person == None:
         return
     #TODO test to make sure market contact still works for us.
-    "You get a text message from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey there! I just got some good news on that patent you have for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
     if quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 0:
@@ -260,7 +259,7 @@ label quest_cure_discovery_patent_sold_label():
         the_person "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
         $ mc.business.funds += 50000
         mc.name "That is still a significant sum. Thank you [the_person.title]."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "The patent is sold! And you made a little extra money for the business."
     $ del the_disease
     $ quest_cure_discovery().set_quest_flag(101)
@@ -307,7 +306,7 @@ label quest_cure_discovery_patent_kept_label():
                 the_person "Yes sir!"
                 $ ceo_office.show_background()
                 $ the_person.draw_person()
-                "You hear a knock. You look up and see [the_person.possessive_title!l]"
+                "You hear a knock. You look up and see [the_person.possessive_title]."
                 the_person "You wanted to see me?"
                 mc.name "Yes. Come in, and lock the door behind you."
                 the_person "Oh my..."

@@ -101,9 +101,8 @@ init -1 python:
             return False
 
         if person is mom:
-            if breeding_fetish_mom_intro not in mc.business.mandatory_morning_crises_list:
-                mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
-                return True
+            mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
+            return True
         elif person is lily:
             lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
             return True
@@ -112,25 +111,23 @@ init -1 python:
         elif person is cousin and False:
             pass
         elif person is stephanie:
-            if breeding_fetish_stephanie_intro not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(breeding_fetish_stephanie_intro)
-                return True
+            mc.business.mandatory_crises_list.append(breeding_fetish_stephanie_intro)
+            return True
         elif person is emily and False:
             pass
         elif person is christina and False:
             pass
         elif person is starbuck:
-            if breeding_fetish_starbuck_intro not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(breeding_fetish_starbuck_intro)
-                return True
+            mc.business.mandatory_crises_list.append(breeding_fetish_starbuck_intro)
+            return True
         elif person is sarah:
-            if breeding_fetish_sarah_intro not in mc.business.mandatory_crises_list:
-                mc.business.mandatory_crises_list.append(breeding_fetish_sarah_intro)
-                return True
+            mc.business.mandatory_crises_list.append(breeding_fetish_sarah_intro)
+            return True
         elif person is salon_manager and False:
             pass
-        elif person is erica and False:
-            pass
+        elif person is erica and erica_get_progress() >= 4:
+            mc.business.mandatory_crises_list.append(breeding_fetish_erica_intro)
+            return True
         elif "candace" in globals() and person is candace:
             candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
             return True
@@ -155,7 +152,7 @@ init -1 python:
             return False
 
         if person is lily:
-            mc.business.mandatory_crises_list.append(cum_fetish_lily_intro)
+            mc.business.mandatory_morning_crises_list.append(cum_fetish_lily_intro)
             return True
         elif person is mom:
             mc.business.mandatory_crises_list.append(cum_fetish_mom_intro)
@@ -182,17 +179,17 @@ init -1 python:
         return False
 
     def start_exhibition_fetish_quest(person):
-        if has_started_breeding_fetish(person):
+        if has_started_exhibition_fetish(person):
             return False
 
         return False #None of them are written yet
 
-    def fetish_serum_increase_opinion(opinion_list, max_new_score, person, add_to_log = False): #WE purposefully increase a score EVERY time this function is used instead of RNG
-        avail_opinions = [x for x in opinion_list if person.get_opinion_score(x) < max_new_score]
+    def fetish_serum_increase_opinion(opinion_list, max_value, person): #WE purposefully increase a score EVERY time this function is used instead of RNG
+        avail_opinions = [x for x in opinion_list if person.get_opinion_score(x) < max_value]
         if person.is_dominant() and "being submissive" in avail_opinions:   # prevent dominant person from becoming submissive
             avail_opinions.remove("being submissive")
         if avail_opinions:
-            person.increase_opinion_score(get_random_from_list(avail_opinions), max_value = max_new_score, add_to_log = add_to_log)
+            person.increase_opinion_score(get_random_from_list(avail_opinions), max_value, True)
             return True #Return true if we increased an opinion
         return False
 
@@ -232,11 +229,10 @@ init -1 python:
         person.event_triggers_dict["nano_bots_f"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+        if renpy.random.randint(0,100) < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person, add_to_log = True):
+        if not fetish_serum_increase_opinion(FETISH_BASIC_OPINION_LIST, tier - 1, person):
             mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
         return
 
@@ -263,14 +259,13 @@ init -1 python:
         person.event_triggers_dict["nano_bots_a"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+        if renpy.random.randint(0,100) < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " anal proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+        if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person):
+            mc.log_event(person.title + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_anal_fetish_unlocked():
             if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
@@ -306,14 +301,13 @@ init -1 python:
         person.event_triggers_dict["nano_bots_b"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5):
+        if renpy.random.randint(0,100) < 10 + (tier * 5):
             person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.happiness - 100)) * 3:
             person.change_happiness(1, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " reproduction proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+        if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person):
+            mc.log_event(person.title + " reproduction proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
             return
@@ -358,15 +352,14 @@ init -1 python:
         person.event_triggers_dict["nano_bots_c"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
-        if fetish_random_roll_1 < 10 + (tier * 5): # only chance to increase skill
+        if renpy.random.randint(0,100) < 10 + (tier * 5): # only chance to increase skill
             person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 person.change_slut_temp(1, add_to_log)
 
-        if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " semen proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+        if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
+            mc.log_event(person.title + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_cum_fetish_unlocked():
             if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
@@ -403,15 +396,14 @@ init -1 python:
         person.event_triggers_dict["nano_bots_e"] = True # block any effect for this dose
 
         tier = get_suggest_tier(person)
-        fetish_random_roll_1 = renpy.random.randint(0,100)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
                 person.change_slut_temp(1, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
 
-        if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person, add_to_log = True):
-            mc.log_event(person.title + " social sexual proclivity bots reduced effectivity at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+        if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person):
+            mc.log_event(person.title + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):

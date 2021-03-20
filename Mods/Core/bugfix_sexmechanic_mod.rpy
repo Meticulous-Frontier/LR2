@@ -2,6 +2,11 @@
 # Enhancement for pick object (don't show list when only one object can be selected (auto-select it))
 # Added condom ask enhancements (Original by BadRabbit)
 
+init -5:
+    # when False ask for condom is skipped when girl sluttiness is high
+    # when True, the condom ask function will always be called regardless of girl sluttiness
+    default persistent.always_ask_condom = False
+
 init 5 python:
     config.label_overrides["fuck_person"] = "fuck_person_bugfix"
     config.label_overrides["check_position_willingness"] = "check_position_willingness_bugfix"
@@ -83,13 +88,13 @@ init 5 python:
                 caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
                     a_person.add_unique_on_room_enter_event(caught_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
             elif a_person.has_role(affair_role) and the_position.slut_requirement > (a_person.sluttiness * .8) + (a_person.get_opinion_score("threesomes") * 5): #You can get away with 80% as slutty as she would do +- threesome inclination
                 caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
                 if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
                     a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                    renpy.say("",a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
@@ -337,7 +342,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     if mc.location.get_person_count() == 1 and not private:
         $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
 
-    # $ renpy.say("", "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
+    # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person)
     $ report_log["was_public"] = not private
 
@@ -456,7 +461,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
-            # $ renpy.say("", "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
+            # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
                 $ first_round = False
@@ -464,13 +469,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
                         $ mc.condom = False
                     if position_choice.requires_hard and mc.recently_orgasmed:
-                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title!l] for now."
+                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                         $ position_choice = None
                     elif position_choice.guy_energy > mc.energy:
                         if girl_in_charge:
-                            "You're too exhausted to let [the_person.possessive_title!l] keep [position_choice.verbing] you."
+                            "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
                         else:
-                            "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title!l]."
+                            "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                         $ position_choice = None
                     elif position_choice.girl_energy > the_person.energy:
                         #TODO: Add some differentiated dialgoue depending on the position.
@@ -620,7 +625,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         if not ask_for_condom:
             $ ask_for_condom = True
             # if still has taboo, always ask
-            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
+            if persistent.always_ask_condom or the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
                 # she is not slutty enough and we have the condom dialog
                 call condom_ask_enhanced(the_person, the_position.skill_tag) from _call_condom_ask_bugfix
                 if _return == 0:
@@ -885,7 +890,7 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
         if the_person.get_opinion_score("bareback sex") > 0:
-            the_person "Let's agree that nothing beats skin on skin."
+            the_person "I agree, nothing beats skin on skin."
         else:
             the_person "I'm not a big fan of bare sex, but if you like it that way."
 
@@ -1067,14 +1072,14 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
 label break_strip_outfit_taboos(the_person):
     $ taboo_broken = False
     if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
-        "Once she's done stripping [the_person.possessive_title!l] is practically naked."
+        "Once she's done stripping [the_person.possessive_title] is practically naked."
         if the_person.has_taboo(["bare_pussy", "bare_tits"]):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
             $ the_person.break_taboo("bare_pussy")
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True
     elif the_person.outfit.tits_visible():
-        "Once she's done stripping [the_person.possessive_title!l] has her nice [the_person.tits] tits out on display."
+        "Once she's done stripping [the_person.possessive_title] has her nice [the_person.tits] tits out on display."
         if the_person.has_taboo("bare_tits"):
             if the_person.has_large_tits():
                 "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
@@ -1084,7 +1089,7 @@ label break_strip_outfit_taboos(the_person):
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True
     elif the_person.outfit.vagina_visible():
-        "Once she's done stripping [the_person.possessive_title!l] has her pretty little pussy out on display for everyone."
+        "Once she's done stripping [the_person.possessive_title] has her pretty little pussy out on display for everyone."
         if the_person.has_taboo("bare_pussy"):
             "She tries to hide herself from you with her hand, but quickly realizes how impractical that would be."
             "Soon enough she doesn't seem to mind."

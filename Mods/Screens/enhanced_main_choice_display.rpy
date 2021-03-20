@@ -133,11 +133,14 @@ init 2 python:
         if not item.display_func:
             return
 
+        load_time = time.time()
         if not item.display_image:
             item.load()
 
         clear_scene()
         renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
+        global last_load_time
+        last_load_time = __builtin__.round(time.time() - load_time, 8)
         return
 
 init 2:

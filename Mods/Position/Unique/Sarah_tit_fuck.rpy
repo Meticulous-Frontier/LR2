@@ -32,7 +32,7 @@ label intro_sarah_tit_fuck(the_girl, the_location, the_object):
     the_girl "Mmm, I love when you touch me like this. They are so sensitive ever since they got bigger."
     "She reaches down and rubs your cock."
     the_girl "Want to put your cock between them again? It feels so good, I think I'm getting addicted to that feeling."
-    mc.name "Mmm, do it [the_girl.title]"
+    mc.name "Mmm, do it [the_girl.title]."
     "[the_girl.possessive_title] gets down on her knees. She starts to open up your pants."
     $ sarah_tit_fuck.redraw_scene(the_girl)
     "She takes her tits up in her hands and lifts them up, pressing them on either size of your shaft."
@@ -94,7 +94,7 @@ label scene_sarah_tit_fuck_3(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gives you a few fast strokes with her tits, then stops and tilts her head down."
     "She lets a long line of saliva drip down between her tits. Your cock is lost between them, but you feel the lubrication trickle down onto it."
     "She gives your shaft a few strokes, spreading her spit and lubricating her cleavage. She looks up at you from her knees and smiles."
-    the_girl "Hmm... thats a little bit better."
+    the_girl "Hmm... that's a little bit better."
     "She looks down, then pushes her tits down all the way to your base. The tip of your cock is just poking up between them. A bit of precum leaks out."
     the_girl "Mmm! It looks so yummy..."
     "She strains her neck down a bit and licks the precum from the tip. She moans when she tastes it."

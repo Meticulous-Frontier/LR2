@@ -165,7 +165,7 @@ init -1 python:
         assembled_outfit = outfit_under.get_copy()
         assembled_outfit.name = outfit_under.name + " + " + outfit_over.name
 
-        # renpy.say("", "Assembled outfit: " + assembled_outfit.name)
+        # renpy.say(None, "Assembled outfit: " + assembled_outfit.name)
 
         for upper in outfit_over.upper_body:
             assembled_outfit.upper_body.append(upper.get_copy())
@@ -261,7 +261,7 @@ init -1 python:
         valid_wardrobe = self.build_valid_uniform_wardrobe(person)
         preferences = WardrobePreference(person)
 
-        # renpy.say("", person.name + " " + person.last_name + " [outfits: " + str(__builtin__.len(valid_wardrobe.outfits)) + " - overwear: " + str(__builtin__.len(valid_wardrobe.overwear_sets)) + " - underwear: " + str(__builtin__.len(valid_wardrobe.underwear_sets)))
+        # renpy.say(None, person.name + " " + person.last_name + " [outfits: " + str(__builtin__.len(valid_wardrobe.outfits)) + " - overwear: " + str(__builtin__.len(valid_wardrobe.overwear_sets)) + " - underwear: " + str(__builtin__.len(valid_wardrobe.underwear_sets)))
 
         if __builtin__.len(valid_wardrobe.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
@@ -311,7 +311,7 @@ init -1 python:
                 uniform_under = valid_wardrobe.pick_underwear_with_lowest_sluttiness()
 
             if not uniform_under:
-                # renpy.say("", "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
+                # renpy.say(None, "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
                 uniform_under = get_random_appropriate_underwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
 
         else:
@@ -322,7 +322,7 @@ init -1 python:
                 uniform_under = valid_wardrobe.pick_underwear_with_lowest_sluttiness()
 
             if not uniform_under:
-                # renpy.say("", "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
+                # renpy.say(None, "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
                 uniform_under = get_random_appropriate_underwear_from_wardrobes(self, person, target_sluttiness, preferences)
 
             if uniform_under:
@@ -336,12 +336,12 @@ init -1 python:
                 uniform_over = valid_wardrobe.pick_overwear_with_lowest_sluttiness()
 
             if not uniform_over:
-                # renpy.say("", "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobe.")
+                # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobe.")
                 uniform_over = get_random_appropriate_overwear_from_wardrobes(self, person, target_sluttiness, preferences)
 
         #At this point we have our under and over, if at all possible.
         if not uniform_over or not uniform_under:
-            # renpy.say("", "Failed to find any combined uniform, select generic outfit.")
+            # renpy.say(None, "Failed to find any combined uniform, select generic outfit.")
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
             full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
             if full_outfit:
@@ -414,7 +414,7 @@ init -1 python:
                 outfit_under = self.pick_underwear_with_lowest_sluttiness()
 
             if not outfit_under:
-                # renpy.say("", "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
+                # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
                 outfit_under = get_random_appropriate_underwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
 
         else:
@@ -425,7 +425,7 @@ init -1 python:
                 outfit_under = self.pick_underwear_with_lowest_sluttiness()
 
             if not outfit_under:
-                # renpy.say("", "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
+                # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
                 outfit_under = get_random_appropriate_underwear_from_wardrobes(self, person, target_sluttiness, preferences)
 
             if outfit_under:
@@ -439,7 +439,7 @@ init -1 python:
                 outfit_over = self.pick_overwear_with_lowest_sluttiness()
 
             if not outfit_over:
-                # renpy.say("", "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobes.")
+                # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobes.")
                 outfit_over = get_random_appropriate_overwear_from_wardrobes(self, person, target_sluttiness, preferences)
 
         #At this point we have our under and over, if at all possible.

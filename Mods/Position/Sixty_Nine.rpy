@@ -61,7 +61,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_00
         return
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
-        "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take your very deep, so she focuses on licking and sucking your tip."
+        "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take you very deep, so she focuses on licking and sucking your tip."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
@@ -142,7 +142,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     the_girl "[the_girl.mc_title]... I think you've forgotten who is on top!"
                     "[the_girl.possessive_title] pushes her pussy back up against your face and begins to grind herself on your face."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
-                    the_girl "Mmm, that's it [the_girl.mc_title]"
+                    the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
                     "You eat her out for several seconds, as best as you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
@@ -169,23 +169,26 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
 
                     "[the_girl.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her sucking. Her other hand begins to lightly cup and knead your balls."
                     if the_girl.has_cum_fetish():
-                        "After a moment she takes her lips off your dick and continues stroking you."
-                        the_girl "Mmm, I can't wait to feel your hot cum all over my face..."
-                        "She strokes you off faster and holds your cock right against her face."
-                        the_girl "When I'm on top of you like this, I can point it wherever I want! Cover my face with it!"
-                        $ the_girl.discover_opinion("cum facials")
-                        $ the_girl.discover_opinion("being covered in cum")
-                        $ the_girl.change_arousal(5)
-                        "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
-                        "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
-                    elif the_girl.has_cum_fetish():
-                        "After a moment she takes her lips off your dick and continues stroking you."
-                        the_girl "Mmm, I can't wait to feel your cum sliding down my throat [the_girl.mc_title]."
-                        "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
-                        the_girl "I want you to flood my mouth with your cum. Ugh, I want it so badly!"
-                        $ the_girl.discover_opinion("drinking cum")
-                        $ the_girl.change_arousal(5)
-                        "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
+                        if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+                            "After a moment she takes her lips off your dick and continues stroking you."
+                            the_girl "Mmm, I can't wait to feel your hot cum all over my face..."
+                            "She strokes you off faster and holds your cock right against her face."
+                            the_girl "When I'm on top of you like this, I can point it wherever I want! Cover my face with it!"
+                            $ the_girl.discover_opinion("cum facials")
+                            $ the_girl.discover_opinion("being covered in cum")
+                            $ the_girl.change_arousal(5)
+                            $ the_girl.cum_on_face()
+                            "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
+                            "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
+                        else:
+                            "After a moment she takes her lips off your dick and continues stroking you."
+                            the_girl "Mmm, I can't wait to feel your cum sliding down my throat [the_girl.mc_title]."
+                            "She latches back onto your cock, sucking at the tip eagerly before letting it slip out again."
+                            the_girl "I want you to flood my mouth with your cum. Ugh, I want it so badly!"
+                            $ the_girl.discover_opinion("drinking cum")
+                            $ the_girl.change_arousal(5)
+                            $ the_girl.cum_in_mouth()
+                            "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                     elif (the_girl.get_opinion_score("cum facials") > 0 or the_girl.get_opinion_score("being covered in cum") > 0 ) and the_girl.sluttiness > 40:
                         "After a moment she takes her lips off your dick and continues stroking you."
                         the_girl "Mmm, I can't wait to feel your hot cum all over my face..."
@@ -241,7 +244,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     the_girl "Hey now, don't forget about me!"
                     "You open your eyes just in time to see her back her pussy down onto your face as she begins to grind herself on you."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
-                    the_girl "Mmm, that's it [the_girl.mc_title]"
+                    the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
                     "You eat her out for several seconds, as best as you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."

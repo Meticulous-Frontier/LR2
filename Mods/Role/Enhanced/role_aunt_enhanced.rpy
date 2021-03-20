@@ -46,7 +46,7 @@ label aunt_drunk_cuddle_label():
     the_person "Hey [the_person.mc_title], would you get me a glass of water too? I've had a LOT of wine and water helps keep you from getting hungover..."
     mc.name "Sure thing."
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
-    "You pour two glasses of water and hand one to [the_person.possessive_title]"
+    "You pour two glasses of water and hand one to [the_person.possessive_title]."
     the_person "It has been so nice of your family to let me and Gabrielle stay here for a bit. I hope we haven't been too much of a bother?"
     mc.name "Of course not. You are family, and honestly it is nice having you close by."
     the_person "That's sweet of you to say. Well, goodnight!"
@@ -190,7 +190,7 @@ label aunt_drunk_cuddle_label():
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_aunt_cuddle_01
 
-    "You wake up, but [the_person.possessive_title!l] isn't there. You slowly get up and walk out of your room and into the kitchen."
+    "You wake up, but [the_person.possessive_title] isn't there. You slowly get up and walk out of your room and into the kitchen."
     $ mc.change_location(kitchen)
     $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, position = "sitting")

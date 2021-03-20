@@ -230,7 +230,7 @@ label cougar_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change?"
         elif the_person.sluttiness > 20:
-            the_person "What do you mean [the_person.mc_title]? Do you want to spend some time with me?"
+            the_person "What do you mean, [the_person.mc_title]? Do you want to spend some time with me?"
         else:
             the_person "I'm not sure I understand. What do you need [the_person.mc_title]?"
     return
@@ -592,7 +592,7 @@ label cougar_flirt_response_girlfriend(the_person):
             menu:
                 "Find someplace quiet":
                     mc.name "Why wait until later? Come on."
-                    "You take [the_person.possessive_title!l]'s hand. She hesitates for a moment, then follows as you lead her away."
+                    "You take [the_person.possessive_title]'s hand. She hesitates for a moment, then follows as you lead her away."
                     "After a few minutes of searching you find a quiet spot. You put your arm around [the_person.title]'s waist and pull her close to you."
                     mc.name "So, what did you want that privacy for again?"
                     the_person "Oh, a few things. Let's start with this..."
@@ -603,7 +603,7 @@ label cougar_flirt_response_girlfriend(the_person):
 
                 "Just flirt":
                     mc.name "Aw, you're going to make me wait? That's so cruel."
-                    "You reach around and place a hand on [the_person.possessive_title!l]'s ass, rubbing it gently."
+                    "You reach around and place a hand on [the_person.possessive_title]'s ass, rubbing it gently."
                     "She sighs and bites her lip, then clears her throat and glances around to see if anyone else noticed."
                     the_person "I'll make sure to make it worth the wait, but let's take it easy while other people are around."
                     "You give her butt one last squeeze, then slide your hand off."
@@ -675,7 +675,7 @@ label cougar_flirt_response_affair(the_person):
 
                 "Just flirt":
                     mc.name "Well that would just be cruel of me..."
-                    "You put your arm around [the_person.possessive_title!l] and rest your hand on her ass."
+                    "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
                     mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and sighs happily. You give her butt a final slap and let go of her."
 
@@ -693,7 +693,7 @@ label cougar_flirt_response_affair(the_person):
         menu:
             "Feel her up":
                 mc.name "That sounds like a good idea. Come here."
-                "You wrap your arms around [the_person.possessive_title!l]'s waist, resting your hands on her ass."
+                "You wrap your arms around [the_person.possessive_title]'s waist, resting your hands on her ass."
                 "Then you pull her tight against you, squeezing her tight butt. She sighs happily and starts to kiss your neck."
                 "You massage her ass for a moment, then spin her around and cup a tit with one hand. You move your other hand down to caress her inner thigh."
                 call fuck_person(the_person, start_position = standing_grope, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_person_cougar_flirt_response_affair_2
@@ -728,6 +728,40 @@ label cougar_flirt_response(the_person):
             the_person "Thank you for noticing me."
         else:
             the_person "Oh [the_person.mc_title], do you think I look good?"
+    return
+
+label cougar_flirt_response_text(the_person):
+    mc.name "Hey [the_person.title]. Hope you're doing well."
+    mc.name "I was thinking of you and wanted to talk."
+    "There's a brief pause, then she texts back."
+    if the_person.has_role(affair_role):
+        the_person "If you were here we could do more than just talk."
+        the_person "I hope you don't make me wait too long to see you again."
+        mc.name "It won't be long. Promise."
+
+    elif the_person.has_role(girlfriend_role):
+        the_person "It's sweet of you to think of me. I hope we can see each other soon."
+        the_person "I want to spend more time with you in person. Texting isn't the same."
+        mc.name "It won't be long, I promise."
+
+    if the_person.love < 20 and not the_person.relationship == "Single":
+        $ so_title = SO_relationship_to_title(the_person.relationship)
+        the_person "Make it quick [the_person.mc_title]. My [so_title] is watching me."
+
+    elif the_person.love < 40:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Are you horny young man? What did you want to talk about?"
+        else:
+            the_person "Oh, that's nice of you to say."
+            the_person "What did you want to talk to me about."
+
+    else:
+        if the_person.effective_sluttiness() > the_person.love:
+            the_person "Mhmm, want to tell me about the dirty things you were thinking about me?"
+            the_person "That would be something fun to talk about."
+        else:
+            the_person "It's sweet of you to be thinking of me."
+            the_person "I'd love to chat, what would you like to talk about?"
     return
 
 label cougar_cum_face(the_person):
@@ -775,14 +809,14 @@ label cougar_cum_pullout(the_person):
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Cum for me [the_person.mc_title], I want feel your fertile seed shooting right into me!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
                 if the_person.on_birth_control: #She just likes creampies.
                     the_person "Oh [the_person.mc_title], I want you to cum inside me! I want to feel every last drop of your cum!"
                 else: #Yeah, she's not on BC and asking for you to creampie her. She's looking to get pregnant.
-                    the_person "Oh [the_person.mc_title], I want your strong cum inside me! I want you to become pregnant from my beautiful stud!"
+                    the_person "Oh [the_person.mc_title], I want your strong cum inside me! I want to become pregnant by my beautiful stud!"
             elif the_person.on_birth_control: #She's on the pill, so she's probably fine
                 the_person "Cum for me! You can let it out whenever you want!"
             else: #Too distracted to care about getting pregnant or not. Oh well, what could go wrong?
@@ -817,7 +851,7 @@ label cougar_cum_vagina(the_person):
         return
 
     elif the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Oh my... There's so much of it..."
             "She closes her eyes and sighs happily."
             the_person "It's no mystery how you got me pregnant."
@@ -972,7 +1006,7 @@ label cougar_being_watched(the_person, the_watcher, the_position):
         #She's into it and encouraged by the slut watching her.
         the_person "Oh [the_person.mc_title], I know it's be wrong but being with you right here, just feels so right!"
         $ the_person.change_arousal(1)
-        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title!l] gets."
+        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title] gets."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
@@ -1108,7 +1142,7 @@ label cougar_touching_body_taboo_break(the_person):
         the_person "I want you to know I take this very seriously, [the_person.mc_title]."
         mc.name "Of course. So do I [the_person.title]."
         the_person "I normally wouldn't even think about letting someone like you touch me."
-        mc.name "What do you mean \"Someone like me\"?"
+        mc.name "What do you mean, \"someone like me\"?"
         the_person "You're young and reckless. I always get the feeling you're bad news for me, but..."
         the_person "But somehow I just can't say no to you."
     else:
@@ -1168,7 +1202,7 @@ label cougar_sucking_cock_taboo_break(the_person):
         the_person "I'm sorry, I think I misheard you."
         mc.name "No you didn't. I want you to put my cock in your mouth and suck on it."
         the_person "I could never do something like that [the_person.mc_title], what would people think?"
-        the_person "I'm not some kind of cheap hooker that you pickup on the street, I don't \"suck cocks\"."
+        the_person "I'm not some kind of cheap hooker that you pick up on the street, I don't \"suck cocks\"."
         mc.name "Yeah you do, and you're going to do it for me."
         the_person "And why would I do that?"
         mc.name "Because deep down, you want to. You can be honest with me, aren't you a little bit curious what it's going to be like?"

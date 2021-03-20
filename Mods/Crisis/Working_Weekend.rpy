@@ -86,7 +86,7 @@ init 2 python:
 
 label SB_working_weekend_crisis_label():
     $ person_one = get_random_employees(1)
-    if person_one == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't give sarah during epic tits weekend
+    if person_one == sarah and sarah_epic_tits_progress() == 1: #Don't give sarah during epic tits weekend
         return
 
     if person_one is None:
@@ -130,7 +130,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             call free_strip_scene(person_one) from _free_strip_scene_3
 
             $ person_two = get_random_employees(1)
-            if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1):
+            if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah_epic_tits_progress() == 1):
                 "You're pretty sure she's ready for next step if you are ready."
                 menu:
                     "Fuck her on your desk":
@@ -203,7 +203,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             $ del person_two
 
         "Just Talk":
-            "While her offer is tempting, you decide to take the opportunity to learn a little more about [person_one.possessive_title]"
+            "While her offer is tempting, you decide to take the opportunity to learn a little more about [person_one.possessive_title]."
             mc.name "Sorry, I can't while I'm in the middle of this, but maybe you could stay and talk to me for a little while."
             "[person_one.possessive_title] is clearly disappointed, so you decide to keep the topic of conversation sexual to keep her interested."
             "What do you ask about?"
@@ -259,7 +259,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
             if not person_one.outfit.tits_available():    #If covered up, have her take her top off
                 person_one "Here... let me take this off. I bet that will help ease some of your stress."
                 $ the_clothing = person_one.outfit.get_upper_top_layer()
-                "[person_one.possessive_title] takes off her [the_clothing.name]"
+                "[person_one.possessive_title] takes off her [the_clothing.name]."
                 $ scene_manager.draw_animated_removal(person_one, the_clothing)
                 $ the_clothing = None
             "Your eyes wander down to [person_one.possessive_title]'s tits."

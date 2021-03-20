@@ -2,7 +2,7 @@ init -1 python:
 
     def perk_save_load_null():  #TODO delete this with next release cycle, EG 28.1
         return None
-        
+
     class Perks(renpy.store.object):
         def __init__(self):
             self.stat_perks = {}
@@ -310,7 +310,7 @@ init -1 python:
 
     def second_wind_func():
         mc.change_energy(mc.max_energy / 2)
-        #renpy.say("","You take a deep breath, getting your second wind. You recover some energy!") #TODO this doesn't work. probably just delete
+        #renpy.say(None,"You take a deep breath, getting your second wind. You recover some energy!") #TODO this doesn't work. probably just delete
         return
 
     def time_of_need_func():

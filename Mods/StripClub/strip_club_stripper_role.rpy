@@ -83,7 +83,7 @@ init 5 python:
         if person.has_role(bdsm_performer_role):
             obed_modifier = person.obedience / 20.0
 
-        return __builtin__.round((tit_modifier + age_modifier + slut_modifier + obed_modifier) * shifts, 1)
+        return __builtin__.round((person.charisma + tit_modifier + age_modifier + slut_modifier + obed_modifier) * shifts, 1)
 
     def calculate_stripper_profit(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
@@ -133,7 +133,7 @@ init 5 python:
         mc.main_character_actions.append(strip_club_hire_employee_action)
 
     def allow_promote_to_manager_requirement(person):
-        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager() and not strip_club_get_mistress():
+        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
             # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
                 # return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:
@@ -234,7 +234,7 @@ label strip_club_hire_employee_label(the_person):
     elif the_person.is_employee():
         $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         if mc.business.is_open_for_business():
-            the_person "What do you mean, I already have a job, right here, right now."
+            the_person "What do you mean? I already have a job, right here, right now."
             mc.name "Don't worry, it won't interfere with this job, I just thought you might like to make something extra on the side."
         else:
             the_person "I don't understand, I already work for you. Or are you terminating my position?"

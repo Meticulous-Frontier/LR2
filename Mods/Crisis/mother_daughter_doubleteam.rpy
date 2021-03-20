@@ -44,7 +44,7 @@ label mother_daughter_doubleteam_action_label():
     $ scene_manager.add_actor(the_daughter, display_transform = character_center_flipped)
     the_daughter "I know, I know, dad always said you were good in bed. I'm not disputing that! I'm just saying I'm pretty good at giving blowjobs and I might even be better than you..."
     the_mother "Honey, blowjobs are an art that takes YEARS to master. I understand that you have enthusiasm, but that doesn't make up for practiced technique."
-    the_daughter "What makes you think I don't have practice? Oh! Hey [the_daughter.mc_title]"
+    the_daughter "What makes you think I don't have practice? Oh! Hey [the_daughter.mc_title]."
     "They both look at you as you walk into the break room."
     the_mother "Hey [the_mother.mc_title], maybe you could help us settle something. In your experience, who gives better blowjobs, enthusiastic, younger girls or experienced older women?"
     "Oh boy, you walked into hornet's nest."

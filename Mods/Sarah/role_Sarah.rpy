@@ -111,9 +111,47 @@ init 2 python:
 
         return target_list
 
+    def sarah_foreplay_position_filter(foreplay_positions):
+        if sarah_get_special_titfuck_unlocked():
+            filter_out = [tit_fuck]
+            if foreplay_positions[1] in filter_out:
+                return False
+            else:
+                return True
+        return True
 
+    def sarah_oral_position_filter(oral_positions):
+        return True
 
-init -1 python:
+    def sarah_vaginal_position_filter(vaginal_positions):
+        if sarah_get_sex_unlocked():
+            return True
+        return False
+
+    def sarah_anal_position_filter(anal_positions):
+        if sarah_get_sex_unlocked():
+            return True
+        return False
+
+    def sarah_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
+        if sarah_get_special_titfuck_unlocked() and "Foreplay" not in prohibit_tags:
+            positions.append([sarah_tit_fuck, 1])
+
+        return positions
+
+    def sarah_epic_tits_progress():
+        return sarah.event_triggers_dict.get("epic_tits_progress", 0)
+
+    def sarah_threesomes_unlocked():
+        return sarah.event_triggers_dict.get("threesome_unlock", False)
+
+    def sarah_get_special_titfuck_unlocked():
+        return sarah.event_triggers_dict.get("special_tit_fuck", False)
+
+    def sarah_get_sex_unlocked():
+        return sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2
+
     def Sarah_intro_requirement():
         return day > 2 and time_of_day < 4 and mc.is_home()
 
@@ -144,7 +182,7 @@ init -1 python:
         return False
 
     def Sarah_third_wheel_requirement():
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
+        if sarah_epic_tits_progress() == 1: #Don't run this if epic tits is in progress
             return False
         if time_of_day > 2:
             if sarah.sluttiness > 15:
@@ -154,52 +192,43 @@ init -1 python:
         return False
 
     def Sarah_get_drinks_requirement():
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: #Don't run this if epic tits is in progress
+        if sarah_epic_tits_progress() == 1: #Don't run this if epic tits is in progress
             return False
-        if time_of_day > 2:
-            if sarah.sluttiness > 30:
-                if day%7 == 5:  #Saturday
-                    if mc.is_at_work():
-                        return True
+        if time_of_day > 2 and day%7 == 5:  #Saturday
+            if sarah.sluttiness > 50 and mc.is_at_work():
+                return True
         return False
 
     def Sarah_stripclub_story_requirement():
-        epic_tits_progress = sarah.event_triggers_dict.get("epic_tits_progress", 0)
-        if epic_tits_progress < 2 and not epic_tits_progress == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
+        if sarah_epic_tits_progress() < 2 and not sarah_epic_tits_progress() == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
             return False
         if strip_club_is_closed(): # Don't run while strip club is closed
             return False
-        if time_of_day > 2:   #Only in the evening when the strippers are at the club
-            if sarah.sluttiness > 50:
-                if day%7 == 5:  #Saturday
-                    if mc.is_at_work():
-                        return True
+        #Only in the evening when the strippers are at the club
+        if time_of_day > 2 and day%7 == 5:  #Saturday
+            if sarah.sluttiness > 50 and mc.is_at_work():
+                return True
         return False
 
     def Sarah_threesome_request_requirement():
-        if time_of_day > 2:
-            if day%7 == 5:  #Saturday
-                if mc.is_at_work():
-                    if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
-                        return True
-        return False        #Return false while I write the events
+        if time_of_day > 2 and day%7 == 5: #Saturday
+            if mc.is_at_work():
+                if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
+                    return True
+        return False
 
     def Sarah_arrange_threesome_requirement(the_person):
         return True
 
     def Sarah_initial_threesome_requirement():
-        if time_of_day > 2:
-            if day%7 == 5:  #Saturday
-                return True
+        if time_of_day > 2 and day%7 == 5:  #Saturday
+            return True
         return False
 
-
     def Sarah_ask_for_baby_requirement():
-        if mc_asleep():
-            if sarah.event_triggers_dict.get("threesome_unlock", False):
-                if sarah.sex_record["Vaginal Creampies"] >= 10:
-                    if sarah.has_role(girlfriend_role):
-                        return True
+        if mc_asleep() and sarah.has_role(girlfriend_role):
+            if sarah_threesomes_unlocked() and sarah.sex_record["Vaginal Creampies"] >= 10:
+                return True
         return False
 
     def Sarah_fertile_period_start_requirement():  #When this returns true, start the fertile period
@@ -231,7 +260,7 @@ init -1 python:
         return False
 
     def Sarah_has_bigger_tits():
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1 or sarah.has_large_tits():
+        if sarah_epic_tits_progress() > 1 or sarah.has_large_tits():
             return True
         return False #Just in case we used serums later
 
@@ -245,11 +274,9 @@ init -1 python:
                 outfit.remove_clothing(outfit.get_bra())
 
     def Sarah_weekend_surprise_crisis_requirement():
-        if time_of_day > 1:
-            if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:   #You've gotten drinks out with Sarah before.
-                if day%7 == 5:  #Saturday
-                    if mc.is_at_work():
-                        return True
+        if time_of_day > 1 and day%7 == 5:  #Saturday
+            if mc.is_at_work() and sarah_get_sex_unlocked():   #You've gotten drinks out with Sarah before.
+                return True
         return False
 
     def Sarah_unlock_special_tit_fuck_requirement():  #Not an action, but make a requirement to make it easy to test anyway.
@@ -282,13 +309,13 @@ init -1 python:
             else:
                 dart_roll = renpy.random.randint(1,20)
 
-        renpy.say("", "The dart hits " + str(dart_roll) + "!")
+        renpy.say(None, "The dart hits " + str(dart_roll) + "!")
         return dart_roll
 
     def get_sarah_spend_night_threesome_possibility():
         threesome_wakeup = False
         threesome_partner = None
-        if sarah.event_triggers_dict.get("threesome_unlock", False) and renpy.random.randint(0,100) < 50:
+        if sarah_threesomes_unlocked() and renpy.random.randint(0,100) < 50:
             if renpy.random.randint(0,100) < 10: #Try lily first
                 if willing_to_threesome(the_person, lily):
                     threesome_partner = lily
@@ -493,6 +520,8 @@ label Sarah_intro_label():
             $ sarah.event_triggers_dict["rejected"] = True
             $ sarah.set_schedule(None, times = [1,2,3])   # make her a free roaming character
 
+    # make her a free roaming character
+    $ sarah.set_schedule(None, times = [1, 2, 3])
     $ sarah.event_triggers_dict["first_meeting"] = True
     return
 
@@ -508,6 +537,7 @@ label Sarah_hire_label():
     mc.name "[day_name] morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."
     the_person "Yes! I'm so glad to finally be done selling solar panels. I'll see you in the morning!"
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
+
     $ add_hr_director_initial_hire_action(the_person)
     return
 
@@ -519,7 +549,7 @@ label Sarah_third_wheel_label():
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person, position = "sitting")
-    "You see [the_person.possessive_title!l] sitting at her desk, rummaging through her drawers looking for something."
+    "You see [the_person.possessive_title] sitting at her desk, rummaging through her drawers looking for something."
     "She notices you step in her door and looks surprised."
     the_person "Oh! Hey [the_person.mc_title]. I was just looking for something I left in my desk. What are you doing here? Isn't this place closed down for the weekend?"
     mc.name "Yeah, well, I had a few things I wanted to get done over the weekend. Is it something I can help you find?"
@@ -550,7 +580,7 @@ label Sarah_third_wheel_label():
     mc.name "So, why did you need to come back and grab that?"
     the_person "Well my friend has been dating this guy for a while and keeps complaining, he wants them to open up their relationship some, maybe bring a lucky guy or girl back to their place sometime..."
     the_person "I've been out with them a couple of times now, hoping maybe they would show interest in me, but so far nothing."
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
+    if sarah_epic_tits_progress() < 2:
         the_person "Her boyfriend... it's like he just looks right through me. I've seen them leave the bar with a girl before, and its always some dumb looking, busty girl."
         mc.name "Don't be silly, you are so sexy. There is more to look for in a woman than chest size."
         "She laughs at you sarcastically."
@@ -592,7 +622,7 @@ label Sarah_third_wheel_label():
     "It takes a few minutes to get the attention of the bartender. You order the drink for [the_person.title] and get yourself a nice bourbon, straight."
     $ mc.business.change_funds(-20)
     $ scene_manager.update_actor(the_person, position = "sitting", emotion = "sad")
-    "When you come back to the table, you notice that [the_person.possessive_title!l] is looking down at the table and looks upset about something."
+    "When you come back to the table, you notice that [the_person.possessive_title] is looking down at the table and looks upset about something."
     mc.name "Hey! Here's your drink... are you okay?"
     the_person "Yeah... yeah I'm fine I just umm, I need to go use the lady's room."
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -607,10 +637,10 @@ label Sarah_third_wheel_label():
     mc.name "That sounds pretty good actually. [the_person.name] will be excited to hear that I think."
     naomi "Ha! No no, I mean, just you. [the_person.name] is a good friend but..."
     mc.name "But?"
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) < 2:
+    if sarah_epic_tits_progress() < 2:
         naomi "My boyfriend... he just isn't attracted to her. I mean, have you seen her chest? Like, neither have we!"
         "You feel yourself getting angry at her crude remarks."
-    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2:
+    elif sarah_epic_tits_progress() == 2:
         naomi "My boyfriend can't stop staring at her tits. It's pissing me off! I can't believe she got implants, she is such a whore."
         "You feel yourself getting angry at her crude remarks."
     else:
@@ -741,7 +771,7 @@ label Sarah_get_drinks_label():
     $ mc.location.show_background()
 
 
-    "You enjoy pleasant conversation with [the_person.possessive_title!l] as you walk downtown."
+    "You enjoy pleasant conversation with [the_person.possessive_title] as you walk downtown."
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         "As you walk along, you feel her hand slip into yours. You twiddle your thumb with hers as you walk downtown."
     #TODO the convo
@@ -824,7 +854,7 @@ label Sarah_get_drinks_label():
     mc.name "That was a good game. Want another round and another game?"
     $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
     the_person "Oh! That sounds great! I'll get it setup!"
-    "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title!l] her drink."
+    "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
     $ mc.business.change_funds(-20)
     the_person "Thanksh! I love these things..."
     "You notice her speech is starting to get a little slurred... You bet as you feed her drinks, she may have trouble focusing on the game."
@@ -856,11 +886,11 @@ label Sarah_get_drinks_label():
     $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
     the_person "Another drink! I loooooveeeee going out with you, [the_person.mc_title]! You know how to keep the drinksh flowing!"
     mc.name "Haha, okay, let me go grab us another round."
-    "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title!l] her drink."
+    "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
     $ mc.business.change_funds(-20)
     the_person "Okay, so, I've had a great warm up now, but I think for this next round, we should make it a littler more... intereshting."
     mc.name "Oh? What did you have in mind?"
-    the_person "I think, whoever losses... HA thats a funny word... anyway whoever is the loser, should hafta walk the winner home!"
+    the_person "I think, whoever loses... hah, that's a funny word... anyway, whoever is the loser, should hafta walk the winner home!"
     "You raise an eyebrow involuntarily. For some reason you expected something a little... crazier than that."
     mc.name "Hah, okay, we can do that. You're up first!"
     "[the_person.possessive_title] turns and looks at the table where she set the darts earlier. She bends over and slowly starts picking them up, one by one."
@@ -952,12 +982,12 @@ label Sarah_get_drinks_label():
     $ scene_manager.add_actor(mom, position = "stand2", display_transform = character_left_flipped)
     mom "Oh! You two look absolutely soaked! Are you okay?"
     mc.name "Thanks [mom.title]! This is [the_person.title]! We got caught out in the rain walking back. Do you think you could grab us a few towels, and maybe have some dry clothes for her to wear for a bit?"
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+    if sarah_epic_tits_progress() == 0: #Small tits
         mom "Yes of course! She looks about Lily's size, I'm sure I can find something..."
-    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+    elif sarah_epic_tits_progress() == 2: #Big tits
         "[mom.title] looks her over for a moment, checking out her curves."
         mom "Yes! I'm not sure Lily's clothes would work... I bet I have something I could give her, just give me a minute."
-    elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+    elif sarah_epic_tits_progress() == 3: #Huge tits
         "[mom.possessive_title] eyes travel all over [the_person.title]'s body. Her eyes go wide when she see how big her tits are."
         mom "I'm not sure I have... actually, I think Gabrielle might have left something that would fit her..."
     $ scene_manager.update_actor(mom, position = "walking_away")
@@ -983,19 +1013,19 @@ label Sarah_get_drinks_label():
     mom "She seems nice!"
     mc.name "Yeah! Believe it or not, she is the daughter of one of dad's old friends. We used to play together as kids!"
     if mom.sluttiness < 40:
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+        if sarah_epic_tits_progress() == 0: #Small tits
             mom "Aww! That's cute! And she is so cute too. You be nice to her, okay?"
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+        elif sarah_epic_tits_progress() == 2: #Big tits
             mom "Aww! That's great! She certainly has blossomed into a beautiful young lady. You be nice to her, okay?"
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+        elif sarah_epic_tits_progress() == 3: #Huge tits
             mom "Wow! That's great! And she has... I mean... her figure is incredible! You be nice to her, okay?"
         mc.name "Don't worry, [mom.title]."
     elif mom.sluttiness < 70:
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 0: #Small tits
+        if sarah_epic_tits_progress() == 0: #Small tits
             mom "That's cute... but... what about me? The woman who brought you into this world needs you attention too..."
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 2: #Big tits
+        elif sarah_epic_tits_progress() == 2: #Big tits
             mom "That's nice dear... but don't forget about me, okay? I have need too!"
-        elif sarah.event_triggers_dict.get("epic_tits_progress", 0) == 3: #Huge tits
+        elif sarah_epic_tits_progress() == 3: #Huge tits
             mom "That's nice I guess..."
             mom "But... look I know she is absolutely stacked, but don't forget about me, okay? I have needs too!"
         mc.name "Don't worry, [mom.title]. No one could ever replace you."
@@ -1030,7 +1060,7 @@ label Sarah_get_drinks_label():
     "You quickly pick her up. You carry her over to your bed and then throw her down on it."
     mc.name "Don't worry, I'll get your warmed up in a hurry!"
     $ scene_manager.update_actor(the_person, position = "missionary")
-    "You start to climb on top of [the_person.possessive_title!l]. She opens her legs and the wraps them around you."
+    "You start to climb on top of [the_person.possessive_title]. She opens her legs and the wraps them around you."
     "You are still wearing your wet clothes, but you don't care. You slowly start to grind your hardness into her groin through your pants."
     $ the_person.change_arousal(10)
     the_person "Mmmm, that feels good, but you're cold too! Let's get these off..."
@@ -1052,7 +1082,7 @@ label Sarah_get_drinks_label():
         $ the_person.change_happiness(5)
         $ the_person.change_love(5)
         mc.name "Of course! Your skin feels so good."
-        "You cuddle up with [the_person.possessive_title!l] for a while, just enjoying the afterglow of your lovemaking."
+        "You cuddle up with [the_person.possessive_title] for a while, just enjoying the afterglow of your lovemaking."
         "She is starting to doze off, when suddenly she wakes up and gets up."
     else:
         the_person "Mmm, that was nice. It's been a while since I was able to do that."
@@ -1212,7 +1242,7 @@ label Sarah_new_tits_label():
 label Sarah_tits_reveal_label():
     $ the_person = sarah
     if not mc.location == office:
-        "Your phone rings. Its [the_person.possessive_title!l]. You answer it."
+        "Your phone rings. Its [the_person.possessive_title]. You answer it."
         the_person "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
         "You put your phone in your pocket and head to your office."
         $ mc.change_location(office)
@@ -1240,7 +1270,7 @@ label Sarah_tits_reveal_label():
         "You quickly agree."
         while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
             $ the_clothing = the_person.outfit.get_upper_top_layer()
-            "[the_person.possessive_title] takes off her [the_clothing.name]"
+            "[the_person.possessive_title] takes off her [the_clothing.name]."
             $ the_person.draw_animated_removal(the_clothing)
         $ the_clothing = None
 
@@ -1300,7 +1330,7 @@ label Sarah_stripclub_story_label():
     the_person "[the_person.mc_title]! You crazy workaholic, let's go blow off some steam!"
     "You look up and see [the_person.title] standing in the doorway."
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    if sarah.event_triggers_dict["epic_tits_progress"] != -1:
+    if sarah_epic_tits_progress() != -1:
         "You still aren't quite used to her enhanced chest size. You realize you are blatantly checking her out as she stands in the door."
         the_person "Mmm, I've been getting exactly that look from a ton of guys lately... and a few girls to."
         the_person "It's been great! I can't thank you enough for helping this happen. I think I might know a way to repay you a little bit though..."
@@ -1346,7 +1376,7 @@ label Sarah_stripclub_story_label():
     "You check around quickly... looks like [the_person.title] is one of the few women in the crowd with you."
     the_person "Come on, let's grab a table to the side before we decide what to do first!"
     $ scene_manager.update_actor(the_person, position = "sitting")
-    "You sit down across from [the_person.possessive_title!l] in a booth."
+    "You sit down across from [the_person.possessive_title] in a booth."
     the_person "Alright, lets just watch the girls from here for a little bit. I'm going to buy you a private dance before we go."
     mc.name "That's... very generous of you. You know you don't have to do that, right?"
     the_person "Sure but, it's not like I'm not going to have fun while we're here too. I've heard the girls here are hot!"
@@ -1355,7 +1385,7 @@ label Sarah_stripclub_story_label():
     "Your eyes are drawn to the stage."
     call watch_strip_show(the_person) from Sarah_strip_show_call_1
     the_person "Wow! That was impressive! I've never been to a place like this before, but I can see why guys like it so much..."
-    "As she finishes her sentence, one of the guys who had been around the stage gets a little too close to your table. You can see him checking out [the_person.title]"
+    "As she finishes her sentence, one of the guys who had been around the stage gets a little too close to your table. You can see him checking out [the_person.title]."
     "???" "Hey there, aren't you a doll! Whaddya say to a private dance in the back? Not sure how much this guy is paying, but I could make it worth your while..."
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person "Not likely! I'm reserved for my boyfriend here."
@@ -1364,7 +1394,7 @@ label Sarah_stripclub_story_label():
         "???" "Come on baby, I bet I can pay you better than what this guy is payin' you to be here with him!"
         the_person "Yeah right! This guy owns his own pharmaceutical business. Move along now."
     "You get ready to add in to the conversation, but the guy gets the point."
-    if sarah.event_triggers_dict.get("epic_tits_progress", 0) >= 2: # only when she got the big boobs
+    if sarah_epic_tits_progress() >= 2: # only when she got the big boobs
         "???" "Damn, alright. Enjoy those tits mister, they look fantastic."
     else:
         "???" "Damn, alright. Have a nice time mister, she's gorgeous."
@@ -1433,7 +1463,7 @@ label Sarah_stripclub_story_label():
         showgirl_2 "You better..."
         "She stands back up and acts as if nothing happened."
     if showgirl is cousin:
-        "You see [showgirl.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "You see [showgirl.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]."
         "She gives you a quick wink."
     showgirl "Alright, lets get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
@@ -1544,11 +1574,11 @@ label Sarah_stripclub_story_label():
         "As she pulls off her last piece of clothing, she runs her hands through your hair and brings your face to her naked, heaving chest."
 
     if the_person.event_triggers_dict.get("dating_path", False) == True:
-        "Your hands naturally reach up and begin to fondle [the_person.possessive_title!l]'s breasts."
+        "Your hands naturally reach up and begin to fondle [the_person.possessive_title]'s breasts."
         the_person "Mmmm that's it baby. It feels so good when you touch me there."
         $ the_person.change_arousal(10)
     else:
-        "Your hands begin to move towards [the_person.possessive_title!l]'s breasts, but she slaps your hands away."
+        "Your hands begin to move towards [the_person.possessive_title]'s breasts, but she slaps your hands away."
         the_person "Hey! You know the rules, no touching!"
         "You quickly lower your hands to your sides."
     "[the_person.title] is slowly grinding herself in circles against your lap. The heat of her body against yours is really getting you worked up."
@@ -1593,7 +1623,7 @@ label Sarah_stripclub_story_label():
     # if she is engaged, have her break it off.
     # If not dating path, she recovers, then heads out
     if the_person.has_role(girlfriend_role):  #You are already dating her via other means. She just cuddles up with you.
-        "As you both recover, [the_person.possessive_title!l] starts kissing you along your neck, then whispers in your ear."
+        "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
         the_person "Thank you for the good time tonight. I love you."
         mc.name "I love you too."
 
@@ -1661,7 +1691,7 @@ label Sarah_stripclub_story_label():
                     $ the_person.event_triggers_dict["dating_path"] = False
 
     else:
-        "As you both recover, [the_person.possessive_title!l] just lays back and enjoys the warmth of your skin."
+        "As you both recover, [the_person.possessive_title] just lays back and enjoys the warmth of your skin."
         the_person "Mmmm, that was such a fun night, [the_person.mc_title]. I don't want to get up..."
     $ the_person.event_triggers_dict["stripclub_progress"] = 1
     $ staying_over = False
@@ -1681,13 +1711,13 @@ label Sarah_stripclub_story_label():
     if staying_over:
         $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
         $ scene_manager.update_actor(the_person, position = "walking_away")
-        "Worn out from your date with [the_person.possessive_title!l], you cuddle up with her and quickly fall asleep."
+        "Worn out from your date with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_stripclub
         call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
     else:
         $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
-        "You lay on your bed and watch as [the_person.possessive_title!l] slowly gets her clothes on. She says goodbye then lets herself out."
+        "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
         $ scene_manager.remove_actor(the_person)
 
     $ add_sarah_threesome_request_action()
@@ -1742,7 +1772,7 @@ label Sarah_threesome_request_label():
     "You clink your vials together again and drain them both."
     "As you sit there drinking you both start to gossip about drama around the office."
     "Being in HR, [the_person.title] knows a surprising amount of details of the other girls and their private lives."
-    "You drink, gossip, and laugh with [the_person.possessive_title!l] for a while."
+    "You drink, gossip, and laugh with [the_person.possessive_title] for a while."
     "You aren't sure how many shots you've both done. You look at the bottle. There's only about a third of it left! That feels like a lot, but you're not sure, maybe that's a normal amount."
     "[the_person.title] is talking about a meeting she had recently an employee."
     the_person "So then I said... what exactly am I supposed to do with these pictures of [gossip_target.name] getting fucked in the backseat of Jeep Wrangler?"
@@ -1761,8 +1791,8 @@ label Sarah_threesome_request_label():
     $ scene_manager.remove_actor(gossip_target)
     $ del gossip_target
     the_person "God, I know. She is so hot, wish I could get my hands on her..."
-    "So, at this point, [the_person.possessive_title!l] has brought it up multiple times that she would like to have some action with another girl sometime."
-    "As you think through your business and all the people you have interacted with, you are pretty sure you have some girls who would love to join a threesome with you and [the_person.title]"
+    "So, at this point, [the_person.possessive_title] has brought it up multiple times that she would like to have some action with another girl sometime."
+    "As you think through your business and all the people you have interacted with, you are pretty sure you have some girls who would love to join a threesome with you and [the_person.title]."
     mc.name "So, I know we've talked about this before, but, is a threesome still something that you would be interested in doing sometime?"
     the_person "Oh god I would do anything, just to try it once. I know it may not turn out to be as good as I hope, but, I just want to TRY, you know!?!"
     "You don't remember pouring this shot, but you grab the drink in front of you and drain it."
@@ -1829,7 +1859,7 @@ label Sarah_threesome_request_label():
 
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person "Oh man, all this talk about sex is starting to get me all hot. Or is it just warm in here?"
-    "Without prompting, [the_person.possessive_title!l] stands up and starts stripping down."
+    "Without prompting, [the_person.possessive_title] stands up and starts stripping down."
     $ scene_manager.strip_actor_outfit(the_person)
     the_person "Aaahhhh, that's better."
     "You cock is getting hard, looking at [the_person.title], completely naked in front of you."
@@ -1874,7 +1904,7 @@ label Sarah_threesome_request_label():
         "As you walk down the hall, you see that [aunt.possessive_title] is sitting with [mom.possessive_title], having coffee."
         "They notice you as you enter."
         aunt "Oh hey! Good to see you [aunt.mc_title]. And who is this?"
-        mc.name "Hey [mom.title], [aunt.title]. This is my girlfriend, [the_person.title]"
+        mc.name "Hey [mom.title], [aunt.title]. This is my girlfriend, [the_person.title]."
         mc.name "[the_person.title], you've met my mom, and THIS is my AUNT, [aunt.title]."
         the_person "Nice to meet you... OH!"
         "It suddenly dawns on her that this is who you are planning to hook up with next week..."
@@ -1893,7 +1923,7 @@ label Sarah_threesome_request_label():
         $ scene_manager.add_actor(mom, display_transform = character_left, position = "sitting")
         "As you walk down the hall past the kitchen, you see [mom.possessive_title] sitting at the table, having a cup of coffee. She notices you in the hall."
         mom "Oh, hey [mom.mc_title]."
-        "She notices [the_person.possessive_title!l] walking beside you."
+        "She notices [the_person.possessive_title] walking beside you."
         mom "Oh! Hello again dear! It's great to see you!"
         "You both step into the kitchen for a moment."
         mc.name "Hey [mom.title]. I told my girlfriend, [the_person.title] she could spend the night, is that okay?"
@@ -1919,12 +1949,12 @@ label Sarah_threesome_request_label():
         "[mom.possessive_title] clears her throat, trying to clear some of the sexual tension in the air."
         mc.name "Right. Anyway, we've been doing some drinking, I think we're gonna go try and sleep it off. Goodnight!"
         mom "Make sure you drink a glass of water so you aren't hungover in the morning. Goodnight you two!"
-        "As you and [the_person.possessive_title!l] walk away, you can feel [lily.possessive_title]'s eyes lingering on the two of you."
+        "As you and [the_person.possessive_title] walk away, you can feel [lily.possessive_title]'s eyes lingering on the two of you."
         $ scene_manager.remove_actor(mom)
         $ scene_manager.remove_actor(lily)
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
-    "You get to your room. When you walk in, [the_person.possessive_title!l] starts to strip down."
+    "You get to your room. When you walk in, [the_person.possessive_title] starts to strip down."
     the_person "Hope you don't mind if I sleep naked!"
     mc.name "Umm, that would actually be ideal, if I'm being honest."
     $ scene_manager.strip_actor_outfit(the_person)
@@ -2011,7 +2041,7 @@ label Sarah_arrange_threesome_label(the_person):
             $ mc.business.change_funds(-500)
             "You give her the cash. She counts it twice to make sure its all there."
             the_person "Alright, I'll see you on Saturday. It's been a pleasure doing business with you."
-        "You give her the details. maybe picking [the_person.possessive_title!l] was a bad idea..."
+        "You give her the details. maybe picking [the_person.possessive_title] was a bad idea..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
     elif the_person is aunt:
         "Note, this dialogue is not yet written. I'm waiting until [aunt.name] gets further developed as a character."  #TODO
@@ -2035,12 +2065,11 @@ label Sarah_arrange_threesome_label(the_person):
 
 label Sarah_initial_threesome_label():
     if sarah.event_triggers_dict.get("initial_threesome_arranged", False) == False:
-        "You get a text from [sarah.possessive_title]"
-        $ mc.having_text_conversation = sarah
+        $ mc.start_text_convo(sarah)
         sarah "Hey, are we still on for tonight?"
         mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, It'll be ready next week."
         sarah "Okay..."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         $ sarah.change_stats(happiness = -10, love = -3)
         $ add_sarah_initial_threesome_action()
         return
@@ -2054,10 +2083,10 @@ label Sarah_initial_threesome_label():
     "It's Saturday night. You quickly head home, you have an exciting night ahead of you."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
-    "You make sure your bedroom is nice and tidy. Soon you get a text on your phone."
-    $ mc.having_text_conversation = the_person
+    "You make sure your bedroom is nice and tidy."
+    $ mc.start_text_convo(the_person)
     sarah "Hey, I'm here."
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You head to the front door and invite her in."
     $ scene_manager.add_actor(sarah)
     "You head back to your bedroom and she sits on your bed."
@@ -2075,7 +2104,7 @@ label Sarah_initial_threesome_label():
     # make the second person wear a more sexy outfit (50% sluttiness boost)
     $ the_person.apply_outfit(the_person.decide_on_outfit(sluttiness_modifier = .5))
     $ scene_manager.add_actor(the_person)
-    "Alright, here you are, in your room, with [sarah.title] and [the_person.possessive_title!l]."
+    "Alright, here you are, in your room, with [sarah.title] and [the_person.possessive_title]."
     sarah "Hi..."
     "She's getting shy. The atmosphere in the room is getting awkward. You'd better do something to break the ice!"
     mc.name "Hey, why don't you sit on the bed, [the_person.title]. I'm gonna turn on some music."
@@ -2086,7 +2115,7 @@ label Sarah_initial_threesome_label():
     sarah "Oh... really?"
     the_person "Yeah. Don't worry. It might be awkward at first, but once we get going, this is going to be a LOT of fun."
     sarah "That's what I keep hoping!"
-    "[the_person.possessive_title] stands up and motions towards [sarah.title]"
+    "[the_person.possessive_title] stands up and motions towards [sarah.title]."
 
     the_person "Come here. This will help..."
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -2100,7 +2129,7 @@ label Sarah_initial_threesome_label():
     "You decide its time for you to make your presence known. You step directly behind [sarah.title] and hug her from behind."
     $ scene_manager.update_actor(sarah, position = "back_peek")
     sarah "Oh... oh my god..."
-    "You wrap your left hand around and begin to fondle her tits. With your other hand you reach all the way to [the_person.possessive_title!l]'s back, pulling you all close together."
+    "You wrap your left hand around and begin to fondle her tits. With your other hand you reach all the way to [the_person.possessive_title]'s back, pulling you all close together."
     "With her head to one side, you and [the_person.title] begin kissing both sides of [sarah.possessive_title]'s neck."
     $ sarah.change_arousal(25)
     $ the_person.change_arousal(10)
@@ -2111,7 +2140,7 @@ label Sarah_initial_threesome_label():
     the_person "Mmm, that sounds nice. Let's do it!"
     "[sarah.possessive_title] looks back at you."
     sarah "I want you to fuck me... fuck me while I eat out another woman!"
-    mc.name "Glady! But I think everyone here is still wearing way too many clothes..."
+    mc.name "Gladly! But I think everyone here is still wearing way too many clothes..."
     "The girls chuckle and then quickly agree."
     $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)
     $ scene_manager.update_actor(sarah, position = "stand3")
@@ -2121,7 +2150,7 @@ label Sarah_initial_threesome_label():
     call start_threesome(sarah, the_person, start_position = Threesome_doggy_deluxe, swapped = True) from sarah_initial_threesome_1
     $ scene_manager.update_actor(sarah, position = "missionary", display_transform = character_center)
     $ scene_manager.update_actor(the_person, position = "back_peek", display_transform = character_right)
-    "As the activity winds down, you all lay down next to each other. You have [sarah.possessive_title] on one side and [the_person.possessive_title!l] on the other."
+    "As the activity winds down, you all lay down next to each other. You have [sarah.possessive_title] on one side and [the_person.possessive_title] on the other."
     sarah "Oh my god... that was so good. I never knew it could be so good, to be with another woman like that..."
     $ sarah.event_triggers_dict["threesome_unlock"] = True
     "You hear a murmur of approval from [the_person.title]."
@@ -2155,18 +2184,15 @@ label Sarah_ask_for_baby_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     $ scene_manager = Scene()
-    "As you are getting ready for bed, you get a text on your phone. It's from [the_person.possessive_title!l]"
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
     mc.name "Sure. Want to spend the night?"
     the_person "Hell yeah! I'll bring some stuff over."
-    $ mc.having_text_conversation = None
-    "About 20 minutes later she texts you."
-    $ mc.having_text_conversation = the_person
+    "About 20 minutes later..."
     the_person "Hey, I'm here! Come let me in!"
-    $ mc.having_text_conversation = None
+    $ mc.end_text_convo()
     "You head to your front door and open it."
-    "For once, you managed to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
+    "For once, you manage to get her back to your room while avoiding [mom.possessive_title] and [lily.title]."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She walks over and sits on your bed."
     mc.name "So... what did you want to talk about?"
@@ -2177,7 +2203,7 @@ label Sarah_ask_for_baby_label():
     mc.name "Not... yet?"
     the_person "Well, [the_person.mc_title], it's been like a dream, having you back in my life like this. Things are amazing, being with you."
     the_person "I've been, well, tracking my cycles recently and, well, basically, I'm fertile right now."
-    "You can feel your cock twitch in your pants. You imagine [the_person.possessive_title!l], knocked up, her tits swelling with milk and her belly growing..."
+    "You can feel your cock twitch in your pants. You imagine [the_person.possessive_title], knocked up, her tits swelling with milk and her belly growing..."
     the_person "Every time you finish inside me, I find myself thinking about it, more and more, what it would be like to get pregnant and have a baby with you."
     the_person "Look, you don't have to answer me right now, but, I thought maybe we could try and have a baby. Together?"
     "This is quite a twist! You weren't expecting this so soon, but you have to admit that the thought is exciting..."
@@ -2191,7 +2217,7 @@ label Sarah_ask_for_baby_label():
             mc.name "I think we should get naked now."
             the_person "Yes sir!"
             $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-            "You get naked with [the_person.possessive_title!l]. She rolls on her back and spreads her legs."
+            "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
             the_person "Come fill me up, [the_person.mc_title]!"
             if the_person.get_opinion_score("creampies") < 2:   #From now on, she loves getting creamed, and has relevant dialogue
                 $ the_person.update_opinion_with_score("creampies", 2)
@@ -2210,7 +2236,7 @@ label Sarah_ask_for_baby_label():
                 mc.name "I'm sorry, I really want to, I'm just really tired."
                 "You can tell she is a little disappointed."
                 the_person "That's okay. Maybe in the morning?"
-            "You snuggle up with [the_person.possessive_title!l]. You both quickly fall asleep."
+            "You snuggle up with [the_person.possessive_title]. You both quickly fall asleep."
 
             call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_1
             call Sarah_spend_the_night() from sarah_ask_for_baby_overnight
@@ -2220,7 +2246,7 @@ label Sarah_ask_for_baby_label():
             the_person "Of course! I understand."
             #TODO add ability to revisit this decision later.
             the_person "I guess, umm, just be careful then. Wouldn't want to get knocked while you are still considering it, right?"
-            "You walk up to [the_person.possessive_title!l] as she stands up. You put your hands on her hips and draw her close."
+            "You walk up to [the_person.possessive_title] as she stands up. You put your hands on her hips and draw her close."
             $ scene_manager.update_actor(the_person, position = "kissing")
             "Your tongues meet and you begin to make out. The kissing starts innocent, but quickly grows in urgency."
             the_person "Mmm."
@@ -2242,7 +2268,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
 
     if not threesome_wakeup:
         $ scene_manager.add_actor(the_person, position = "walking_away")
-        "You slowly wake up, with your arms around [the_person.possessive_title!l], spooning with her."
+        "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
         "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
         "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
         the_person "Mmmmmmmm......"
@@ -2316,7 +2342,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
     #sexy morning wakeup starts here
     if threesome_wakeup:
         $ threesome_partner.apply_outfit(special_fetish_nude_outfit)
-        "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
+        "You are slow to wake up. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "Something stirs you though. You hear a hushed whisper. But that wasn't to you? Then a little giggle."
         threesome_partner "Mmmm, he's so big..."
@@ -2339,7 +2365,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "[the_person.title] turns around, facing away from you and lifts one leg over your body, back her pussy up to your face."
         the_person "Do me a favor and kiss me for a bit?"
         mc.name "Mmm, definitely."
-        "You waste no time and dive right into [the_person.possessive_title!l]'s delicious cunt."
+        "You waste no time and dive right into [the_person.possessive_title]'s delicious cunt."
         # TODO change this scene if the girls both like anal? Need to figure out how to handle starting in a specific threesome action
         call start_threesome(threesome_partner, the_person, start_position = Threesome_double_down, skip_intro = True, private = True, position_locked = False, affair_ask_after = False, hide_leave = False) from sarah_overnight_threesome_wakeup
         $ the_report = _return
@@ -2363,7 +2389,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "[threesome_partner.title] gets up, and remarks before leaving."
         threesome_partner "That was fun! I'm gonna head back to my room. Thanks for sharing [the_person.name]!"
         $ scene_manager.remove_actor(threesome_partner)
-        "She walks out, leaving you alone with [the_person.possessive_title!l]"
+        "She walks out, leaving you alone with [the_person.possessive_title]."
         the_person "That's certainly one way to start the day... holy hell."
         "You lay in bed together for a little longer, but soon it is time to start the day."
         $ the_person.apply_planned_outfit()
@@ -2374,14 +2400,14 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ threesome_partner = None
 
     else:
-        "You are slow to wakeup. You had several sexy dreams the night before, and you aren't ready to leave them yet."
+        "You are slow to wake up. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "It's so wet and tight, it feels almost real..."
         the_person "...[the_person.mc_title]... mmm.... I can't take it anymore..."
         $ scene_manager.add_actor(the_person, position = "cowgirl")
         $ the_person.change_arousal(30)
         $ mc.change_arousal(30)
-        "You slowly open your eyes and discover [the_person.possessive_title!l] is on top of you, riding your cock."
+        "You slowly open your eyes and discover [the_person.possessive_title] is on top of you, riding your cock."
         the_person "Oh thank god you're awake. I swear you were poking me all night long! I kept hoping you would just stick it in, but I think you were sleeping."
         the_person "I couldn't take it anymore. I hope you don't mind!"
         "[the_person.title]'s epic tits are bouncing up and down right in front of you as she rides you."
@@ -2595,10 +2621,10 @@ label Sarah_weekend_surprise_crisis_label():
     menu:
         "Let's Go":
             the_person "Yes! You won't regret this. Let's go!"
-            "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title!l]"
+            "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title]."
             "As you exit the building, you consider where you should head for the night."
             menu:
-                "The Bar" if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:    #If you've grabbed drinks before. In requirements, so this SHOULD always be true
+                "The Bar":
                     mc.name "What do you say we head to the bar and have a few drinks? Maybe play some darts?"
                     the_person "Oh! That sounds great!"
                     call Sarah_weekend_date_grab_drinks_label from sarah_weekend_date_crisis_01
@@ -2608,7 +2634,7 @@ label Sarah_weekend_surprise_crisis_label():
                     the_person "Oh! That sounds like a good evening!"
                     call Sarah_weekend_date_strip_club_label from sarah_weekend_date_crisis_02
 
-                "Your Place":   #Added as a default while testing. Probably limit this with sluttiness later #TODO
+                "Your Place" if sarah_get_sex_unlocked():
                     the_person "Oh! A direct approach? Not even going to bother getting me boozed up?"
                     mc.name "Nah. The sex is better when you are sober anyway."
                     the_person "Ha! Okay, lead the way then stud!"
@@ -2637,7 +2663,7 @@ label Sarah_weekend_surprise_crisis_label():
                 $ scene_manager.update_actor(the_person, position = "stand4")
                 the_person "Alright, I know you wanted to get other things done, so I'll let you get back to it. But don't work too hard!"
                 "She quickly cleans herself up then leaves, giving you a chance to continue your work, but now with your balls empty."
-            elif sarah.event_triggers_dict.get("epic_tits_progress", 0) > 1:
+            elif sarah_epic_tits_progress() > 1:
                 the_person "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                 mc.name "I'm not honestly that tense right now..."
                 if the_person.outfit.tits_available():
@@ -2685,7 +2711,7 @@ label Sarah_weekend_date_grab_drinks_label():
     "After a short walk, you arrive at the bar that you and [the_person.title] have been to a few times recently."
     the_person "Oh! I think I see a booth over there."
     mc.name "Perfect, go grab it while I get the first round."
-    "You wander over to the bar and buy drinks for you and [the_person.possessive_title!l]. You make sure to get her favorite, the appletini."
+    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the appletini."
     $ mc.business.change_funds(-20)
     "If you wanted to, now would be a good time to slip a serum into her drink..."
     menu:
@@ -2717,7 +2743,7 @@ label Sarah_weekend_date_grab_drinks_label():
                     "After a short time, she returns with the drinks and sits down."
                     $ scene_manager.update_actor(the_person, position = "sitting")
                 else:
-                    "You wander over to the bar and buy drinks for you and [the_person.possessive_title!l]. You make sure to get her favorite, the appletini."
+                    "You wander over to the bar and buy drinks for you and [the_person.possessive_title]. You make sure to get her favorite, the appletini."
                     $ mc.business.change_funds(-20)
                     "You come back to the booth with the drinks."
                     the_person "Yum! Thank you!"
@@ -2794,11 +2820,11 @@ label Sarah_weekend_date_strip_club_label():
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, emotion = "happy")
-    "After a short walk, you and [the_person.possessive_title!l] enter the front door of the now familiar strip club."
+    "After a short walk, you and [the_person.possessive_title] enter the front door of the now familiar strip club."
     "Your senses are assaulted by everything going on. The loud bass music thumps in your ears. On stage you see a girl shaking her ass for a group of guys."
     "You notice several guys checking out [the_person.title] as you find a secluded booth and sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
-    "You sit down across from [the_person.possessive_title!l]."
+    "You sit down across from [the_person.possessive_title]."
     "The sights, sounds, and smells of a strip club. There's really nothing quite like it."
     "You consider what you would like to do first."
     $ loop_count = 0
@@ -2866,7 +2892,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
             "You hear the soft sound of lips smacking each other... wait are they kissing?"
             "... yep... they are definitely kissing. Damn this is hot."
         elif the_person.sluttiness < 40:
-            the_person "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]"
+            the_person "Awww. Hello [mom.name]. I was just coming over to spend some quality time with [the_person.mc_title]."
     "Eventually they back away from each other."
     $ scene_manager.update_actor(mom, position = "stand4", display_transform = character_left_flipped)
     $ scene_manager.update_actor(the_person, position = "stand2")
@@ -2891,7 +2917,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You cuddle up next to her as you both catch your breath."
     if the_person.has_role(girlfriend_role):  #You are already dating her via other means. She just cuddles up with you.
-        "As you both recover, [the_person.possessive_title!l] starts kissing you along your neck, then whispers in your ear."
+        "As you both recover, [the_person.possessive_title] starts kissing you along your neck, then whispers in your ear."
         the_person "Thank you for the good time tonight. I love you."
         mc.name "I love you too."
         the_person "Do you care if I just stay here tonight? I umm... actually brought my toothbrush..."
@@ -2899,7 +2925,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ the_person.change_love(5)
         $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
         $ scene_manager.update_actor(the_person, position = "walking_away")
-        "Worn out from your romp with [the_person.possessive_title!l], you cuddle up with her and quickly fall asleep."
+        "Worn out from your romp with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
         $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_date
         call Sarah_spend_the_night() from sarah_date_night_happy_ending_gf_path
@@ -2909,14 +2935,14 @@ label Sarah_date_ends_at_your_place_label(the_person):
         the_person "I'm sorry I can't. You know I can't. Thanks for the offer though!"
         $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
-        "You lay on your bed and watch as [the_person.possessive_title!l] slowly gets her clothes on. She says goodbye then lets herself out."
+        "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
     else:
         the_person "I need to get going... I guess. Thanks for the evening though. It was great!"
         mc.name "You don't have to. Just spend the night here."
         the_person "That's tempting, believe me, but I need to get home. Thanks for the offer!"
         $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
-        "You lay on your bed and watch as [the_person.possessive_title!l] slowly gets her clothes on. She says goodbye then lets herself out."
+        "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
         return "Advance Time"
     return
 
@@ -2929,7 +2955,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         "You get up and head over to the counter and talk with the manager."
     "You look through the list of girls available for private dances."
     if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role(stripper_role):
-        "You spot your cousin on the list. You could ask for her to dance for either you or [the_person.possessive_title!l]..."
+        "You spot your cousin on the list. You could ask for her to dance for either you or [the_person.possessive_title]..."
         menu:
             "Dance for [the_person.title]":
                 $ showgirl_1 = cousin
@@ -2959,7 +2985,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         showgirl_2 "Wow, you have your slut here, with you, but you want MY tits in your face? You're a sick fuck."
         "She stands back up and winks at you, then acts as if nothing happened."
     if showgirl_1 is cousin:
-        "You see [showgirl_1.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]"
+        "You see [showgirl_1.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]."
         "She gives you a quick wink."
     showgirl_1 "Alright, lets get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
@@ -3054,13 +3080,13 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     return
 
 label Sarah_unlock_special_tit_fuck(the_person):
-    the_person "So umm... I have a little confession to make."
+    the_person "So, umm... I have a little confession to make."
     "You raise an eyebrow."
     mc.name "Oh? Go ahead then."
     the_person "Last night... I was playing with one of my special toys... pretending it was you... obviously."
     the_person "It was nice... but I just couldn't get off. I don't know why, it just wasn't feeling right."
     the_person "So I took it out, then put it, you know, between my tits..."
-    "Interesting"
+    "Interesting."
     the_person "I kept imagining you, fucking my tits, cumming all over me."
     $ the_person.change_arousal(20)
     "Her cheeks are starting to get a little flushed."
@@ -3108,48 +3134,3 @@ label Sarah_fertile_period_end_label():
     else:
         $ add_sarah_fertile_period_start_action()
     return
-
-init 2 python:
-    def sarah_foreplay_position_filter(foreplay_positions):
-        if sarah_get_special_titfuck_unlocked():
-            filter_out = [tit_fuck]
-            if foreplay_positions[1] in filter_out:
-                return False
-            else:
-                return True
-        return True
-
-    def sarah_oral_position_filter(oral_positions):
-
-        return True
-
-    def sarah_vaginal_position_filter(vaginal_positions):
-        if sarah_get_sex_unlocked():
-            return True
-        return False
-
-    def sarah_anal_position_filter(anal_positions):
-        if sarah_get_sex_unlocked():
-            return True
-        return False
-
-    def sarah_unique_sex_positions(person, prohibit_tags = []):
-        positions = []
-        if sarah_get_special_titfuck_unlocked() and "Foreplay" not in prohibit_tags:
-            positions.append([sarah_tit_fuck, 1])
-
-        return positions
-
-    def sarah_threesomes_unlocked():
-        if sarah.event_triggers_dict.get("threesome_unlock", False) == True:
-            return True
-        return False
-
-init 1 python:
-    def sarah_get_special_titfuck_unlocked():
-        return sarah.event_triggers_dict.get("special_tit_fuck", False)
-
-    def sarah_get_sex_unlocked():
-        if sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2:
-            return True
-        return False

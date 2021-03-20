@@ -305,7 +305,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         mc.name "And how do you feel about it? Do you feel like you're ready for that?"
         if mc.charisma < 6 or the_person.effective_sluttiness() < 50:  #Checks Fail
             the_person "Honestly? I'm still adapting to how things are now."
-            mc.name "That's understandable. Theres no reason to take things too fast."
+            mc.name "That's understandable. There's no reason to take things too fast."
             "[the_person.title] takes another long sip from her beverage."
             the_person "For now... let's just keep things how they are. But hey, you never know, maybe we can take that step soon!"
             "You and [the_person.title] finish your drinks and then you say goodbye."
@@ -367,7 +367,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         if not the_person.outfit.tits_available():    #If covered up, have her take her top off
             the_person "Here I go... don't forget to take pictures!"
             $ the_clothing = the_person.outfit.get_upper_top_layer()
-            "[the_person.possessive_title] takes off her [the_clothing.name]"
+            "[the_person.possessive_title] takes off her [the_clothing.name]."
             $ the_person.draw_animated_removal(the_clothing)
             $ the_clothing = None
         else:
@@ -411,8 +411,8 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "You suddenly remember the phone. You snap a couple pictures of her face with your cum covering it."
         $ the_person.draw_person (position = "stand2")
         "[the_person.title] stands up. You hand her back her phone."
-        the_person "Wow... well... I guess theres no going back now? I guess I'll go ahead and send him some of these..."
-        "The gets close to you."
+        the_person "Wow... well... I guess there's no going back now? I guess I'll go ahead and send him some of these..."
+        "She gets closer to you."
         the_person "Well, no matter what happens tonight, thanks for your help! If all goes well... maybe we can do this again."
         mc.name "Yeah I mean... if it makes your hubby happy for you to give me blowjobs... I GUESS I can help out..."
         "She laughs and punches you in the arm."
@@ -420,7 +420,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         $ clear_scene()
         $ mc.change_location(downtown_bar)
         $ mc.location.show_background()
-        "You sneak your way out of the bathroom while [the_person.possessive_title!l] cleans herself up. You hope everything goes well with her tonight!"
+        "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
         $ the_person.event_triggers_dict["hotwife_blowjob_text_enable"] = 1
         $ the_person.event_triggers_dict["hotwife_progress"] = 2
         $ the_person.event_triggers_dict["hotwife_blowjob_ask_pictures"] = day + 1
@@ -440,7 +440,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
             "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
             while not the_person.outfit.tits_available():
                 $ the_clothing = the_person.outfit.get_upper_top_layer()
-                "[the_person.possessive_title] takes off her [the_clothing.name]"
+                "[the_person.possessive_title] takes off her [the_clothing.name]."
                 $ the_person.draw_animated_removal(the_clothing)
                 $ the_clothing = None
             "With her tits completely exposed, she saunters back over to you then starts to get down on her knees."
@@ -526,7 +526,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "[the_person.possessive_title] smiles."
         the_person "You know, I am. Let's go!"
         "You follow [the_person.title] out on to the dance floor. The bar is playing some pretty upbeat, fun music."
-        "You waste no time and grab [the_person.possessive_title!l]. You sync your movements to the beat and begin to move your bodies to the beat."
+        "You waste no time and grab [the_person.possessive_title]. You sync your movements to the beat and begin to move your bodies to the beat."
         $ the_person.draw_person (position = "back_peek")
         "At some point, [the_person.title] turns away from you. You put your hand on her hips and bring her close to you."
         "You can feel her grinding her ass back against you as you keep moving to the beat. Her ass feels great moving back and forth against your rapidly rising erection."
@@ -566,14 +566,14 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person "Oh! Shit I almost forgot!"
         "[the_person.possessive_title] grabs her purse. She rummages through it for a moment then pulls out her phone."
         the_person "Can't forget this!"
-        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title!l] turns around and leans over the counter."
+        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title] turns around and leans over the counter."
         $ the_person.draw_person (position = "standing_doggy")
         "You snap a couple pictures of her amazing ass while she is bent over."
         the_person "Okay, you better get your pants off, we don't have much time!"
         "You quickly drop your pants, letting your aching hard on spring free. You step behind [the_person.title], letting your cock nestle between her pliant ass cheeks."
         "You snap a few more pictures as you dry hump her ass crack a bit. Then you pull back a bit and get yourself pointed at her juicy slit."
         "You change the camera app to take a video. You figure since this is her first time getting fucked by a man other than her husband it might come in handy..."
-        "With one hand firmly on [the_person.possessive_title!l]'s hip, you steadily push yourself into her. She moans loudly and you capture the whole thing on glorious video."
+        "With one hand firmly on [the_person.possessive_title]'s hip, you steadily push yourself into her. She moans loudly and you capture the whole thing on glorious video."
         $ the_person.break_taboo("vaginal_sex")
         $ the_person.break_taboo("condomless_sex")
         the_person "Oh fuck that feels good. Fuck me good [the_person.mc_title]!"
@@ -620,7 +620,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "[the_person.possessive_title] smiles."
         the_person "You know it! Let's go!"
         "You follow [the_person.title] out on to the dance floor. The bar is playing some pretty upbeat, fun music."
-        "You waste no time and grab [the_person.possessive_title!l]. You sync your movements to the beat and begin to move your bodies to the beat."
+        "You waste no time and grab [the_person.possessive_title]. You sync your movements to the beat and begin to move your bodies to the beat."
         $ the_person.draw_person (position = "back_peek")
         "At some point, [the_person.title] turns away from you. You put your hand on her hips and bring her close to you."
         "You can feel her grinding her ass back against you as you keep moving to the beat. Her ass feels great moving back and forth against your rapidly rising erection."
@@ -651,7 +651,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person "Come on, lets fuck!"
         call fuck_person(the_person) from _call_casual_sex_mod_CSH022
-        "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title!l] is touching herself."
+        "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
         the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
         "You almost think she is going to make herself cum again until she stops."
         $ the_person.draw_person("stand3")
@@ -703,10 +703,10 @@ label casual_hotwife_her_place_label(the_person):
     "He nods to you, but you are shocked at the revelation."
     the_person "Don't worry about him, get over here and fuck me [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")
-    "You watch as [the_person.possessive_title!l] crawls on to the bed, pointing her ass back at you. She wiggles it back and forth, enticingly."
+    "You watch as [the_person.possessive_title] crawls on to the bed, pointing her ass back at you. She wiggles it back and forth, enticingly."
     "You walk up behind her and run your hands over her pliant cheeks. [the_person.SO_name]'s chair is at the end of the bed, so he will have an excellent profile view while you fuck his wife."
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
-    "Your cock now free, you line yourself up with [the_person.possessive_title!l]'s pussy. You put her husband out of your mind as you slowly push into her."
+    "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH040
     $ the_report = _return
@@ -751,7 +751,7 @@ label casual_hotwife_home_sex_label(the_person):
     $ the_person.draw_person(position = "stand4")
     "She opens up the bedroom door and motions for you to follow her. As you step into her bedroom you see [the_person.SO_name] sitting at the edge of the bed again."
     $ the_person.change_to_bedroom()
-    "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]"
+    "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]."
     the_person "Mmm, I can't wait. Let's go!"
     call fuck_person(the_person) from _call_casual_sex_mod_CSH050
     $ the_report = _return
@@ -778,13 +778,13 @@ label casual_hotwife_home_sex_label(the_person):
 
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
-    "You make your way back home after a sexy evening with [the_person.possessive_title!l]."
+    "You make your way back home after a sexy evening with [the_person.possessive_title]."
 
     call advance_time from _call_advance_casual_hotwife_home_sex
     return
 
 label casual_hotwife_ghost_label(the_person):
-    "You get a message on your phone. Looks like it is from [the_person.possessive_title!l]."
+    "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
     the_person "Hey, I'm really sorry to have to do this, but we can't hookup anymore."
     the_person "I'm dedicated to my husband, but I find myself thinking about you constantly."
     the_person "This is beginning to turn into an emotional affair, and I can't do it anymore. I'm sorry."
@@ -839,7 +839,7 @@ label hotwife_greetings(the_person):
             $ add_hotwife_ghost_action(the_person)
             return
         if the_person.event_triggers_dict.get("hotwife_progress", 0) >= 2:
-            the_person "Hey there [the_person.mc_title]"
+            the_person "Hey there [the_person.mc_title]."
             the_person "You want to umm, you know, meet me in the back? I'm sure that's why you're here..."
         else:
             the_person "Hey there!"
@@ -1124,7 +1124,7 @@ label hotwife_hookup_accept(the_person):
     $ work_bathroom.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.arousal = 20
-    "You discover [the_person.possessive_title!l] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
+    "You discover [the_person.possessive_title] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
     "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
     $ the_person.draw_person(position = "kissing")
     "You walk over to her silently. She looks into your eyes as she wraps her arms around your shoulders. You bring your face to hers and begin to make out."
@@ -1209,7 +1209,7 @@ label hotwife_hookup_accept(the_person):
     the_person "Ohhh, [the_person.mc_title]... That is exactly what I was hoping for when I sent you that text earlier. That feels so good..."
     "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
     "You set her phone to video mode, and take a clip of her backside rippling as you thrust in and out of her."
-    "Your hips slap against [the_person.possessive_title!l]'s ass as you fuck her vigorously."
+    "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
     $ the_person.call_dialogue("sex_responses_vaginal")
     if mc.condom == True:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
@@ -1268,7 +1268,7 @@ label hotwife_hookup_accept(the_person):
         "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
         "She forces her sphincter to relax and your finger begins to slip inside her."
         the_person "Ohh, yes. You can move your hips, that feels good..."
-        "You give [the_person.possessive_title!l]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
+        "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
         if the_person.arousal > 120:
             the_person "OH! Its so good... fuck I'm gonna cum again!!!"
@@ -1330,11 +1330,11 @@ label hotwife_hookup_accept(the_person):
         "You briefly consider pulling out."
         menu:
             "Pull Out":
-                "You pull out of [the_person.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+                "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
                 the_person "Oh! Its so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
-                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
+                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
                 "You use her phone and get several close up pictures of her luscious ass with your load covering it."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
                 return
@@ -1354,7 +1354,7 @@ label hotwife_hookup_accept(the_person):
         "You stroke your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
-        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
+        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
         "You use her phone and get several close up pictures of her luscious ass with your load covering it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
     return

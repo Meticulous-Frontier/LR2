@@ -11,28 +11,30 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
     menu:
         "Cum inside of her":
             if the_girl.wants_creampie():
-                the_girl "Oh god yes cum with me [the_girl.mc_title]!"
+                the_girl "Oh god yes, cum with me [the_girl.mc_title]!"
             if mc.condom:
                 "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She wraps her legs around you as she cums in unison."
                 $ the_girl.call_dialogue("cum_condom")
                 "Once your climax has passed you keep [the_girl.title] pinned to the [the_object.name] for a little longer. When her aftershocks wind down, she slowly unwraps her legs."
                 "You step back and pull out of [the_girl.possessive_title]. Your condom is ballooned out, filled with your seed."
                 if the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
-                    "[the_girl.possessive_title] moans as she pours your cum into her mouth."
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
-                elif the_girl.has_cum_fetish():
-                    $ the_girl.discover_opinion("cum facials")
-                    "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
-                    "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
-                    the_girl "Mmmmm. So good."
-                    $ the_girl.cum_on_face()
+                    if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
+                        $ the_girl.discover_opinion("drinking cum")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                        $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                        "[the_girl.possessive_title] moans as she pours your cum into her mouth."
+                        $ the_girl.cum_in_mouth()
+                        "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    else:
+                        $ the_girl.discover_opinion("cum facials")
+                        "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
+                        the_girl "It would be a shame to waste all of this, right?"
+                        $ the_girl.cum_on_face()
+                        "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
+                        "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
+                        the_girl "Mmmmm. So good."
                 elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.effective_sluttiness() > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches for your cock. With delicate fingers she slides the condom off of you."
@@ -46,7 +48,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
                     "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
-                    "Having your cum inside of her heightens her orgasm as her fetish for you cum is fulfilled."
+                    "Having your cum inside of her heightens her orgasm as her fetish for your cum is fulfilled."
                 else:
                     "You push forward as you finally climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage."
                     "She clings to you helplessly as she cums with you in unison."
@@ -58,7 +60,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
         "Cum on her stomach":
             if mc.condom == False and the_girl.wants_creampie() and the_girl.obedience <200 :
                 "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
-                $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh.. OH! Yes "])
+                $ wordchoice = renpy.random.choice(["Oh God", "Oh yes", "Oh.. OH! Yes"])
                 $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
                 if the_girl.love < 0:
                     "Where do think you're going, [the_girl.mc_title]?"
@@ -85,7 +87,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 "She slowly opens her eyes and looks at you."
                 $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
                 $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
-                if the_girl.event_triggers_dict.get("preg_knows", False):# The personality reactions but should it not be True instead of False?
+                if the_girl.knows_pregnant():# The personality reactions but should it not be True instead of False?
                     the_girl "[wordchoice], [the_girl.mc_title]. I'm already pregnant remember?"
                 elif the_girl.on_birth_control:
                     the_girl "[wordchoice], [the_girl.mc_title]. I'm on [wordchoice2]."

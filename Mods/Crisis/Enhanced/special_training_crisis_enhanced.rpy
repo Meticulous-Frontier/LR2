@@ -26,27 +26,22 @@ label enhanced_special_training_crisis_label():
 
     $ the_person = get_random_from_list(mc.business.get_employee_list())
     show screen person_info_ui(the_person)
-    "You get a text  from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "[the_person.mc_title], I've just gotten word about a training seminar going on right now a few blocks away. I would love to take a trip over and see if there is anything I could learn."
     the_person "There's a sign up fee of $500. If you can cover that, I'll head over right away."
     if the_person.effective_sluttiness() >= 20:
         the_person "I'll personally repay you for it later..."
-    $ mc.having_text_conversation = None
     menu:
         "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Costs: $500{/size}{/color}" if mc.business.funds >= 500:
-            "You type up a response."
-            $ mc.having_text_conversation = the_person
             mc.name "That sounds like a great idea. I'll call and sort out the fee, you start heading over."
             the_person "Understood, thank you sir! What would you like me to focus on?"
-            $ mc.having_text_conversation = None
 
             call screen enhanced_main_choice_display(build_menu_items(build_seminar_improvement_menu(the_person)))
             if _return != "None":
                 $ mc.business.change_funds(-500)
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
                 $ mc.log_event(the_person.title + ": +2 " + get_work_skills()[_return][0], "float_text_grey")
-                "[the_person.title] leaves work for a few hours to attend the training seminar. When she returns she has learned several useful techniques." # NOTE: Make this less generic
+                $ renpy.say(mc.name, "Work on your " + get_work_skills()[_return][0] + " skills.")
                 if the_person.effective_sluttiness() >= 20:
                     # follow up on promise made
                     $ add_return_from_seminar_action(the_person)
@@ -55,12 +50,10 @@ label enhanced_special_training_crisis_label():
             pass
 
         "Tell her to stay at work":
-            "You type up a response."
-            $ mc.having_text_conversation = the_person
             mc.name "I'm sorry [the_person.title], but there aren't any extra funds in the budget right now."
             the_person "Noted, maybe some other time then."
-            $ mc.having_text_conversation = None
 
+    $ mc.end_text_convo()
     return
 
 label return_from_seminar_action_label(the_person):
@@ -81,7 +74,7 @@ label return_from_seminar_action_label(the_person):
                 "[the_person.possessive_title] isn't impressed by your reaction to her display. Wanting to sweeten the deal for you, she continues on."
                 the_person "You deserve a bit more I guess... How about I take off my [the_clothing.display_name] for you?"
                 $ the_person.draw_animated_removal (the_clothing)
-                the_person "Do you like the view of [the_person.possessive_title!l] undressing?"
+                the_person "Do you like the view of [the_person.possessive_title] undressing?"
             if the_person.age > 30:
                 "Your dick twitches at the sight of [the_person.title]'s mature body."
             else:
@@ -101,7 +94,7 @@ label return_from_seminar_action_label(the_person):
         "She stops to think for a second, putting on a frown before turning it into a bright, mischievous smile."
         $ the_person.draw_person(emotion="happy")
         the_person "Being naked in front of you made so... horny! You deserve some real gratitude! How about a quick BJ?"
-        "\"There's always time for a quick blowjob\" you think to yourself before swiftly unzipping your pants as [the_person.possessive_title!l] gets onto her knees."
+        "\"There's always time for a quick blowjob\" you think to yourself before swiftly unzipping your pants as [the_person.possessive_title] gets onto her knees."
         $ the_person.draw_person(position="kneeling1")
         the_person "[the_person.mc_title], you have such a nice cock, it'll be perfect inside of my mouth..."
         $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
@@ -127,7 +120,7 @@ label return_from_seminar_action_label(the_person):
             the_person "Yes, [the_person.mc_title]! I want to be covered by your sperm! Unleash it onto me, please!"
             the_person.mc_title "OK, [the_person.title], keep still. Here it goes!"
             $ the_person.cum_on_face()
-            "You start to unleash your load onto [the_person.possessive_title!l]'s face."
+            "You start to unleash your load onto [the_person.possessive_title]'s face."
             $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
             "She opens her mouth and attempts to catch some of the load that is being sprayed onto her face, cherishing each drop that falls inside."
             $ the_person.cum_in_mouth()

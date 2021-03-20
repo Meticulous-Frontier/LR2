@@ -32,14 +32,15 @@ init 2 python:
         return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)
 
     def strip_club_foreclosed_event_requirement():
+        if time_of_day >= 3:
+            return False # Don't trigger foreclosed event while strip club is open
         if get_strip_club_foreclosed_stage() != 0:
             return False
-        if sarah.event_triggers_dict.get("epic_tits_progress", 0) == 1: # don't start while Sarah epic tits event in progress
+        if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
         if mc.business.funds > 60000:
-            if time_of_day > 2:
-                if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
-                    return True
+            if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
+                return True
         return False
 
     def cousin_talk_about_strip_club_requirement(person):
@@ -234,9 +235,9 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.draw_person(position = "back_peek")
 
                 if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
-                    "Once [the_person.possessive_title!l] has stripped down to her underwear, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title] has stripped down to her underwear, she turns around to let you look at her ass."
                 else:
-                    "Once [the_person.possessive_title!l] has stripped down as far as she's willing, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title] has stripped down as far as she's willing, she turns around to let you look at her ass."
                 the_person "Are you happy now ? I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."
@@ -276,9 +277,9 @@ label club_foreclosed_strip_label(the_person):
                     the_person "Deal with it. Go cry to mommy if it matters that much to you."
                 $ the_person.draw_person(position = "back_peek")
                 if the_person.outfit.wearing_panties():
-                    "Once [the_person.possessive_title!l] has stripped down to her panties, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title] has stripped down to her panties, she turns around to let you look at her ass."
                 else:
-                    "Once [the_person.possessive_title!l] has stripped down, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title] has stripped down, she turns around to let you look at her ass."
                 the_person "Are you happy now? I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."

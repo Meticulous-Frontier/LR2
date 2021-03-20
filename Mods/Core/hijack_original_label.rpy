@@ -24,7 +24,7 @@ init -1 python:
         for hijack in hijack_list:
             if original_label == hijack[0].split(':')[0]:  # base game label called
                 if not renpy.has_label(hijack[1]):
-                    renpy.say("", "Unknown label " + hijack[1])
+                    renpy.say(None, "Unknown label " + hijack[1])
                 else:
                     call_stack.append(hijack[1])
 

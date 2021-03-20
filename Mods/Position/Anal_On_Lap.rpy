@@ -24,7 +24,7 @@ init python:
         #anal_on_lap.link_positions_two_way(doggy, "transition_anal_on_lap_doggy", "transition_doggy_anal_on_lap")
 
 label intro_anal_on_lap(the_girl, the_location, the_object):
-    "You sit down on the [the_object.name] and motion [the_person.possessive_title!l] over to you. You turn her around so her ass is facing you."
+    "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
     mc.name "I want you to sit on my lap, but I'm going to put it here..."
@@ -144,11 +144,11 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("anal creampies") > 0 or mc.condom:
             the_girl "Yes! Shove it in deep [the_girl.mc_title]!"
     elif mc.condom:
-        the_girl "That's it baby, cum for me! Show me how much you love my ass!"
+        the_girl "That's it [the_girl.mc_title], cum for me! Show me how much you love my ass!"
     elif the_girl.sluttiness < 80:
         the_girl "Oh my god I can't believe I'm letting you do this..."
     else:
-        the_girl "That's it baby, cum for me! Show me how much you love my ass!"
+        the_girl "That's it [the_girl.mc_title], cum for me! Show me how much you love my ass!"
     menu:
         "Cum inside of her":
             "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
@@ -253,7 +253,7 @@ label orgasm_anal_on_lap(the_girl, the_location, the_object):
     return
 
 label taboo_break_anal_on_lap(the_girl, the_location, the_object):
-    "You sit down on the [the_object.name] and motion [the_person.possessive_title!l] over to you. You turn her around so her ass is facing you."
+    "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
     mc.name "I want you to sit on my lap, but I'm going to put it here..."

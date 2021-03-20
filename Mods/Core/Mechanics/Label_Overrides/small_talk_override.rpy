@@ -42,7 +42,7 @@ init 5 python:
         opinion_list.insert(0, "Smalltalk")
         return opinion_list
 
-label small_talk_person_enhanced(person, apply_energy_cost = True):
+label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = False):
     python:
         if apply_energy_cost:
             mc.change_energy(-15)
@@ -51,11 +51,14 @@ label small_talk_person_enhanced(person, apply_energy_cost = True):
 
     # TODO: Add a chance that she wants to talk about someone she knows.
     if renpy.random.randint(0,100) < 60 + (person.get_opinion_score("small talk") * 20) + (mc.charisma * 5):
-        if person.get_opinion_score("small talk") >= 0:
-            $ person.draw_person(emotion = "happy")
-            "She seems glad to have a chance to take a break and make small talk with you."
+        if is_phone:
+            "There's a short pause, then [person.title] texts you back."
         else:
-            "She seems uncomfortable with making small talk, but after a little work you manage to get her talking."
+            if person.get_opinion_score("small talk") >= 0:
+                $ person.draw_person(emotion = "happy")
+                "She seems glad to have a chance to take a break and make small talk with you."
+            else:
+                "She seems uncomfortable with making small talk, but after a little work you manage to get her talking."
 
         python:
             opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
@@ -67,10 +70,19 @@ label small_talk_person_enhanced(person, apply_energy_cost = True):
             $ opinion_state = person.get_opinion_topic(opinion_learned)
             $ opinion_string = opinion_score_to_string(opinion_state[0])
 
-            "The two of you chat pleasantly for half an hour."
-            person "So [person.mc_title], I'm curious what you think about about [opinion_learned]. Do you have any opinions on it?"
+            if is_phone:
+                person "Oh, this and that."
+                "The two of you text back and forth between each other for half an hour." #TODO: Either play out that conversation or add some message history to fill it in.
+            else:
+                "The two of you chat pleasantly for half an hour."
+
+            person "So [person.mc_title], I'm curious what you think about [opinion_learned]. Do you have any opinions on it?"
 
             call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
+
+            if is_phone:
+                $ mc_opinion_string = opinion_score_to_string(_return).rstrip('s').replace('has', 'have')
+                mc.name "I [mc_opinion_string] [opinion_learned]."
 
             $ prediction_difference = __builtin__.abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
@@ -85,32 +97,60 @@ label small_talk_person_enhanced(person, apply_energy_cost = True):
                 person "Exactly! It's so rare that someone feels exactly the same way about [opinion_learned] as me!"
 
             if opinion_state[1]:
-                "You listen while [person.possessive_title] talks about how she [opinion_string] [opinion_learned]."
+                if is_phone:
+                    "[person.possessive_title] sends you a bunch of texts about how she [opinion_string] [opinion_learned]."
+                else:
+                    "You listen while [person.possessive_title] talks about how she [opinion_string] [opinion_learned]."
             else:
                 $ person.discover_opinion(opinion_learned)
-                "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
+                if is_phone:
+                    "[person.possessive_title] sends you a bunch of texts, and you learn that she [opinion_string] [opinion_learned]."
+                else:
+                    "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
 
             $ person.change_love(2 - prediction_difference, max_modified_to = 35)
 
         else:
-            "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
+            if is_phone:
+                person "Oh, this and that. What about you?"
+                "You and [person.possessive_title] text back and forth for a while. You've had a fun conversation, but you don't think you've learned anything new."
+            else:
+                "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
+
+        if person.love > 10 and person.has_role(instapic_role) and not person.event_triggers_dict.get("insta_known", False):
+            $ person.event_triggers_dict["insta_known"] = True
+            person "Hey, are you on InstaPic? You should follow me on there, so you can see what I'm up to."
+            if is_phone:
+                "She text you her InstaPic profile name. You'll be able to look up her profile now."
+            else:
+                "She gives you her InstaPic profile name. You'll be able to look up her profile now."
 
         $ person.change_happiness(person.get_opinion_score("small talk") + 1)
         if person.get_opinion_score("small talk") >= 0:
             person "It was nice chatting [person.mc_title], we should do it more often!"
         else:
-            person "So uh... I guess that's all I have to say about that..."
-            "[person.possessive_title] trails off awkwardly."
+            if is_phone:
+                person "I've got to go. Talk to you later."
+            else:
+                person "So uh... I guess that's all I have to say about that..."
+                "[person.possessive_title] trails off awkwardly."
     else:
         if person.get_opinion_score("small talk") < 0:
             person "Oh, not much."
             $ person.change_happiness(person.get_opinion_score("small talk"))
-            "You try and keep the conversation going, but making small talk with [person.title] is like talking to a wall."
+            if is_phone:
+                "You try and spark the conversation with a few more messages, but eventually [person.title] just stops responding."
+            else:
+                "You try and keep the conversation going, but making small talk with [person.title] is like talking to a wall."
         else:
             person "Oh, not much honestly. How about you?"
             $ person.change_happiness(person.get_opinion_score("small talk"))
-            "[person.possessive_title] seems happy to chitchat, and you spend a couple of hours just hanging out."
-            "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."
+            if is_phone:
+                "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
+            else:
+                "[person.possessive_title] seems happy to chitchat, and you spend a couple of hours just hanging out."
+                "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."
 
-    $ person.apply_serum_study()
+    if not is_phone:
+        $ person.apply_serum_study()
     return

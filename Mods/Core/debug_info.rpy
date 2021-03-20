@@ -1,5 +1,6 @@
 init 2:
     define debug_log_enabled = False
+    define last_load_time = 0.0
 
     style debug_label_text:
         size 14
@@ -24,6 +25,7 @@ init 2:
                 has vbox
                 label "ZipCache memory: " + str(__builtin__.round(get_size(zip_manager) / 1024, 2)) + " Kb" xminimum 400
                 label "ZipCache items: " + str(zip_manager.size())
+                label "Last character load time: " + str(last_load_time)
                 label ""
                 label get_debug_log()
 

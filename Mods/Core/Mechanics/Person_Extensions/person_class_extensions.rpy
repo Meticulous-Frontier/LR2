@@ -231,6 +231,15 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.next_day_outfit = property(get_person_next_day_outfit, set_person_next_day_outfit, del_person_next_day_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_is_patreon(self):
+        if not hasattr(self, "_is_patreon"):
+            self._is_patreon = False
+        return self._is_patreon
+
+    def set_person_is_patreon(self, value):
+        self._is_patreon = value
+
+    Person.is_patreon = property(get_person_is_patreon, set_person_is_patreon, None, "Identify person as Patreon reward character.")
 
     # work-outfit for strippers / waitresses and bdsm room performers
 
@@ -642,7 +651,7 @@ init -1 python:
         removed_something = False
 
         strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
-        # renpy.say("", strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
+        # renpy.say(None, strip_choice.name + "  (required: " + str(test_outfit.slut_requirement) +  ", sluttiness: " +  str(self.effective_sluttiness() + temp_sluttiness_boost) + ")")
         while strip_choice and self.judge_outfit(test_outfit, temp_sluttiness_boost):
             if delay > 0:
                 self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
@@ -769,9 +778,10 @@ init -1 python:
                 self.planned_outfit = self.next_day_outfit
                 self.next_day_outfit = None
             else:
-                self.planned_outfit = self.decide_on_outfit()
+                self.planned_outfit = None
             self.planned_uniform = None
             self.work_outfit = None
+            self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
         if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
@@ -781,7 +791,13 @@ init -1 python:
         if destination:
             location.move_person(self, destination)
         else:
-            location.move_person(self, get_random_from_list([x for x in list_of_places if x.public]))
+            location.move_person(self, get_random_from_list([x for x in list_of_places if x.public or x == self.home]))
+
+        if self.should_wear_uniform(): #She's wearing a uniform
+            if creative_colored_uniform_policy.is_active():
+                self.change_happiness(max(-1,self.get_opinion_score("work uniforms")),add_to_log = False)
+            else:
+                self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
@@ -955,7 +971,7 @@ init -1 python:
     def increase_opinion_score(self, topic, max_value = 2, add_to_log = True):
         score = self.get_opinion_score(topic)
 
-        if score < max_value:
+        if score < 2 and score < max_value:
             self.update_opinion_with_score(topic, score + 1, add_to_log)
         return
 
@@ -1148,6 +1164,8 @@ init -1 python:
 
     def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
+        load_time = time.time()
+
         if position is None:
             position = self.idle_pose
 
@@ -1183,6 +1201,8 @@ init -1 python:
 
         character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
+        global last_load_time
+        last_load_time = __builtin__.round(time.time() - load_time, 8)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1385,7 +1405,9 @@ init -1 python:
 
     # helper function to determine if person is dominant
     def is_dominant(self):
-        if self.get_opinion_score("taking control") > 0:
+        if self.has_role(slave_role):   # slave is no longer dominant regardless of opinions / personality
+            return False
+        if self.get_opinion_score("taking control") > 0 and self.get_opinion_score("being submissive") <= 0:
             return True
         if self.personality == alpha_personality:
             return True
@@ -1422,7 +1444,8 @@ init -1 python:
     Person.should_wear_work_outfit = should_wear_work_outfit
 
     def wear_work_outfit(self):
-        if not self.work_outfit:
+        if self.work_outfit:    # quick exit if we already go an outfit for the day and puts outfit back on after stripping
+            self.apply_outfit(self.work_outfit)
             return
 
         if self.has_role(stripper_role):
@@ -1510,6 +1533,18 @@ init -1 python:
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
+
+    def set_uniform_enhanced(self,uniform, wear_now = False):
+        if uniform is not None:
+            if creative_colored_uniform_policy.is_active():
+                builder = WardrobeBuilder(self)
+                self.planned_uniform = builder.personalize_outfit(uniform.get_copy(),  max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
+            else:
+                self.planned_uniform = uniform.get_copy()
+            if wear_now:
+                self.wear_uniform()
+
+    Person.set_uniform = set_uniform_enhanced
 
 ######################################
 # Extend give serum for added goal #
@@ -1970,6 +2005,16 @@ init -1 python:
     Person.body_is_average = body_is_average
     Person.body_is_thick = body_is_thick
     Person.body_is_pregnant = body_is_pregnant
+
+    def can_clone(self):
+        if not genetic_manipulation_policy.is_owned():
+            return False
+        if self.has_role(clone_role):
+            return False
+        if self in unique_character_list:
+            return False
+        return True
+    Person.can_clone = can_clone
 
 ##################################################
 #     Fetish related wrappers                    #

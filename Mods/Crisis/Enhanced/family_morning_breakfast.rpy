@@ -62,7 +62,7 @@ label family_morning_breakfast_enhanced_label():
         if lily.outfit.vagina_visible():
             "[lily.possessive_title] comes into the room naked. She gives a dramatic yawn before sitting down at the kitchen table."
         elif lily.outfit.tits_visible():
-            "[lily.possessive_title] walks topless into the kitchen. Yawning dramatically before sitting down at the table."
+            "[lily.possessive_title] walks topless into the kitchen, yawning dramatically before sitting down at the table."
         else:
             "[lily.possessive_title] walks into the room only wearing her underwear. She gives a dramatic yawn before sitting down at the kitchen table."
     else:
@@ -109,7 +109,7 @@ label family_morning_breakfast_enhanced_label():
                     $ scene_manager.update_actor(mom, position = "stand2")
                     $ scene_manager.update_actor(lily, position = "blowjob")
                     "[mom.possessive_title] gets up and starts walking around the table, while [lily.title] gets on her knees and starts pulling off your pants and underwear."
-                    "Your cock springs out of your clothes, nearly smacking [lily.possessive_title] in the face. [mom.title] gets on her knees next to [lily.title]"
+                    "Your cock springs out of your clothes, nearly smacking [lily.possessive_title] in the face. [mom.title] gets on her knees next to [lily.title]."
                     call start_threesome(lily, mom, start_position = threesome_double_blowjob, position_locked = True) from _threesome_for_breakfast_yum_1
                     $ the_report = _return
                     if the_report["guy orgasms"] > 0:

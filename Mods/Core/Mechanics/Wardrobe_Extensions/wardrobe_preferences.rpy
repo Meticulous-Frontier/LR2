@@ -54,8 +54,8 @@ init 0 python:
             if (self.skimpy_outfits or self.skimpy_uniforms):
                 self.conservative_outfits = False
 
-            #renpy.say("", "Person: " + person.name + "  " + person.last_name)
-            # renpy.say("",  person.name + "  " + person.last_name + ": " + (self.exclude_skirts and "no skirts, " or "") + (self.exclude_pants and "no pants, " or "") + (self.lingerie and "lingerie, " or "")
+            #renpy.say(None, "Person: " + person.name + "  " + person.last_name)
+            # renpy.say(None,  person.name + "  " + person.last_name + ": " + (self.exclude_skirts and "no skirts, " or "") + (self.exclude_pants and "no pants, " or "") + (self.lingerie and "lingerie, " or "")
             #       + (self.skimpy_outfits and "skimpy outfits, " or "") + (self.conservative_outfits and "conservative outfits, " or "")
             #       + (self.prefer_boots and "boots, " or "") + (self.no_boots and "no boots, " or "") + (self.prefer_high_heels and "high heels, " or "") + (self.no_high_heels and "no heels, " or ""))
 
@@ -98,7 +98,7 @@ init 0 python:
                 if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + self.slut_modifier):
                     return False
 
-            #renpy.say("", "Add: " + outfit.name)
+            #renpy.say(None, "Add: " + outfit.name)
             return True
 
         def evaluate_outfit_get_return(self, outfit, sluttiness_limit, sluttiness_min = 0): #A copy of the previous method but returns what is wrong with an outfit instead of False
@@ -142,7 +142,7 @@ init 0 python:
                 if (self.skimpy_outfits or self.skimpy_uniforms) and not slut_score > (5 + self.slut_modifier):
                     return "is too conservative"
 
-            #renpy.say("", "Add: " + outfit.name)
+            #renpy.say(None, "Add: " + outfit.name)
             return True
 
         def evaluate_underwear(self, underwear, sluttiness_limit, sluttiness_min = 0):

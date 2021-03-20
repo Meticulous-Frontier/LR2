@@ -2,7 +2,7 @@
 init 5 python:
     def mod_alpha_content_warning(feature = True):
         if not feature:
-            renpy.say("","Warning: This content is considered WIP. It may contain game breaking bugs or be incomplete. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
+            renpy.say(None,"Warning: This content is considered WIP. It may contain game breaking bugs or be incomplete. Please report issues and suggestions on discord, f95zone.to, or on gitgud.io")
         return
 
     def show_wip_screen(feature = True):  #TODO if a label crashes or exits before this gets called, screen will show up indefinitely?

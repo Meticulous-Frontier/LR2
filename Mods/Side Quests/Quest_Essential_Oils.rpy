@@ -223,7 +223,7 @@ label quest_essential_oils_research_start_label(the_person):
     the_person "There's a sucker born every minute, or so I've heard."
     mc.name "So... would it be possible to create a serum trait using essential oils? Not to do anything meaningful, but as a way of driving up the price."
     "[the_person.title] stops and considers what you are saying for a moment."
-    the_person "I... think so? I don't know if theres any major negative side effects associated with them. I could look into it the next couple of days and get back to you."
+    the_person "I... think so? I don't know if there's any major negative side effects associated with them. I could look into it the next couple of days and get back to you."
     mc.name "Perfect. Let me know what you find out."
     the_person "Okay. Is there anything else I can do you for you?"
     $ quest_essential_oils().quest_event_dict["timeout_day"] = day + 7
@@ -243,7 +243,7 @@ label quest_essential_oils_research_end_label(the_person):
     mc.name "Hmm, so I may need to find a supplier."
     the_person "Yup! Sorry, I don't know where you could source this stuff. Here's a list of which ones would be appropriate for us to use."
     mc.name "Thanks, that's exactly what I needed."
-    $ renpy.say("", "You think back. It was " + quest_essential_oils_get_target().title + " that had some in the first place. Maybe you could ask her where she gets hers from?")
+    $ renpy.say(None, "You think back. It was " + quest_essential_oils_get_target().title + " that had some in the first place. Maybe you could ask her where she gets hers from?")
     $ quest_essential_oils_get_target().add_unique_on_talk_event(quest_essential_oils_discover_supplier)
     $ quest_essential_oils().set_quest_flag(31)
     return
@@ -311,7 +311,7 @@ label quest_essential_oils_decision_label(the_person):
 
 label quest_essential_oils_abandon_label():
     "It's been over a week now since you started considering adding essential oil as a serum trait. The more you think about it, the dumber it sounds."
-    "You a run a legitimate pharmaceutical business, theres no room for that bullshit around here."
+    "You a run a legitimate pharmaceutical business, there's no room for that bullshit around here."
     "You decide just to scrap the whole idea."
     $ quest_essential_oils().set_quest_flag(99)
     $ quest_essential_oils().quest_completed()

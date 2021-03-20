@@ -66,7 +66,7 @@ label give_wardrobe_input(person = the_person): # when called from action defaul
 
     if check_import_xml_file(xml_filename):
         $ import_wardrobe(the_person.wardrobe, xml_filename)
-        "Speaker" "You send a shipment of clothes to [the_person.name]"
+        "Speaker" "You send a shipment of clothes to [the_person.name]."
         "Speaker" "Delivery complete."
     else:
         "Speaker" "File not found."

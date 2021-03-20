@@ -28,9 +28,9 @@ label business_meeting_action_label:
     $ day_part = time_of_day_string()
 
     if (mc.location ==  the_place):
-        "You're hard at work in the [day_part], when [the_person.possessive_title!l] asks you over to discuss some plans."
+        "You're hard at work in the [day_part], when [the_person.possessive_title] asks you over to discuss some plans."
     else:
-        "You're hard at work in the [day_part], when [the_person.possessive_title!l] calls you on your phone to discuss some plans."
+        "You're hard at work in the [day_part], when [the_person.possessive_title] calls you on your phone to discuss some plans."
 
     "You meet up in an empty office of the [the_place.name] department."
 
@@ -69,7 +69,7 @@ label business_meeting_action_label:
     if get_HR_director_tag("business_HR_eff_bonus"):
         $ set_HR_director_tag("business_HR_eff_bonus", get_HR_director_tag("business_HR_eff_bonus") + ran_num)
     #$ mc.log_event("Company Efficiency: " + str(mc.business.effectiveness_cap) + "%", "float_text_grey")
-    "The changes increased your business effectivity by [ran_num]%%."
+    "The changes increased your business efficiency by [ran_num]%%."
 
     $ hr_employee = None
     $ mc.location.show_background()
@@ -155,7 +155,7 @@ label business_meeting_seduction(the_person):
                     "[the_person.possessive_title] stands up with a disappointed look on her face."
                     $ the_person.change_happiness(-5)
         else:
-            "You can't help but admire [the_person.possessive_title!l] boldness, while she keeps on talking."
+            "You can't help but admire [the_person.possessive_title] boldness, while she keeps on talking."
     else:
         "After while [the_person.title] stops rubbing your exposed member."
         the_person "I will leave you now, it seems you have some other business to take care off."

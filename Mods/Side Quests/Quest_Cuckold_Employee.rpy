@@ -219,7 +219,7 @@ label quest_cuckold_employee_decision_label():
     mc.name "I'm sorry?"
     the_person "I just... I need to vent to someone about something, but I don't trust the other girls around here not to gossip about it."
     mc.name "Of course, you can talk to me about anything."
-    the_person "Well... my husband and I... we've been trying to have baby lately, but after months of trying, still nothing."
+    the_person "Well... my husband and I... we've been trying to have a baby lately, but after months of trying, still nothing."
     the_person "I did something I probably shouldn't have... I took a semen sample when we had sex a few days ago secretly and had it analyzed."
     the_person "He is basically infertile. I'm absolutely crushed! I love him so much, but I also want to have a baby so bad."
     mc.name "I understand. It might take a while for you to grieve this if you need some time off."
@@ -655,27 +655,23 @@ label quest_cuckold_employee_after_window_label():
             $ become_pregnant(the_person)
 
     if the_person.is_pregnant():#Success
-        "You get a text message from [the_person.title]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey bull! I was supposed to start my period a couple of days ago, but I haven't. Just thought you might find that interesting ;)"
-        $ mc.having_text_conversation = None
         "Oh boy, a missed period is a good sign! You wonder if your seed is growing inside of her..."
-        $ mc.having_text_conversation = the_person
         the_person "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         mc.name "I'll make time to breed you again cow. Be prepared to receive my potent seed."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         $ quest_cuckold_employee().set_quest_flag(91)
         $ mc.business.add_mandatory_crisis(quest_cuckold_employee_knocked_up)
         return
 
     else:
-        "You get a text message from [the_person.title]."
-        $ mc.having_text_conversation = the_person
+        $ mc.start_text_convo(the_person)
         the_person "Hey... just wanted to let you know I just started my period. I guess it didn't take."
         mc.name "We can try again in a few weeks."
         the_person "Hmm... yeah, maybe..."
-        $ mc.having_text_conversation = None
+        $ mc.end_text_convo()
         "Sounds like she might be having second thoughts..."
         $ quest_cuckold_employee().set_quest_flag(49)
         $ the_person.add_unique_on_talk_event(quest_cuckold_employee_reconsider)
@@ -696,15 +692,15 @@ label quest_cuckold_employee_reconsider_label(the_person):
 
 label quest_cuckold_employee_knocked_up_label():
     $ the_person = quest_cuckold_employee_get_target()
-    "You get a text message from [the_person.title]."
-    $ mc.having_text_conversation = the_person
+    $ mc.start_text_convo(the_person)
     the_person "Hey! I need to see you in your office, ASAP!"
-    $ mc.having_text_conversation = None
+    mc.name "Ok, I'll be there soon."
+    $ mc.end_text_convo()
     $ mc.change_location(office)
     $ ceo_office.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.event_triggers_dict["preg_knows"] = True
-    "As you step into your office, you see [the_person.possessive_title!l]."
+    "As you step into your office, you see [the_person.possessive_title]."
     the_person "Well [the_person.mc_title], you did it! Positive pregnancy test!"
     mc.name "Oh my god, that's amazing! Congratulations!"
     the_person "I know! I can't wait to tell my husband... Its so weird though, knowing in my head that it isn't even his?"

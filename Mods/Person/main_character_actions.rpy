@@ -65,6 +65,9 @@ init 2 python:
             return True
         return False
 
+    def mc_remove_person_requirement(person):
+        return person in known_people_in_the_game(unique_character_list)
+
     # Pay Strip Requirements
     def mc_action_pay_to_strip_requirement(person):
         if not person is lily:
@@ -101,7 +104,7 @@ init 5 python:
     mc_stop_follow_action = ActionMod("Stop following me", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have [the_person.title] stop following you.", allow_disable = False, category = "Generic People Actions")
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire the [the_person.title] to work for you in your business.", category = "Generic People Actions")
+    mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire [the_person.title] to work for you in your business.", category = "Generic People Actions")
 
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     mc_rename_person_action = ActionMod("Rename", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of [the_person.title].", category = "Generic People Actions", initialization = init_action_mod_disabled)
@@ -116,7 +119,9 @@ init 5 python:
 
     ask_take_serum = ActionMod("Ask her to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask [the_person.title] to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, ask_take_serum]
+    mc_remove_person_action = ActionMod("Remove from game", mc_remove_person_requirement, "mc_remove_person_label", menu_tooltip = "You are not interested in [the_person.title]. This will remove her from the game.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, ask_take_serum, mc_remove_person_action]
 
 
 label mc_pay_to_strip_label(person):
@@ -177,9 +182,9 @@ label mc_hire_person_label(person):
 
     python:
         if mc.business.funds < (person.calculate_base_salary() * 10):
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
+            renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
         else:
-            renpy.say("", "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
+            renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
 
     menu:
         "Yes":
@@ -245,7 +250,7 @@ label mc_schedule_person_label(*args):
         return
     else:
         $ person.set_schedule(room_choice, times = [time_slot])
-        $ renpy.say("", time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
+        $ renpy.say(None, time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
         return
 
 # Follower Labels
@@ -338,6 +343,15 @@ label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the
                 $ person.change_obedience(-2)
                 person "I'm... I don't think I would be comfortable with that. Is that okay?"
                 mc.name "Of course it is, that's why I'm asking in the first place."
+        "Reconsider":
+            pass
+    return
+
+label mc_remove_person_label(person):
+    menu:
+        "Are you sure?":
+            $ person.remove_person_from_game()
+            jump game_loop
         "Reconsider":
             pass
     return

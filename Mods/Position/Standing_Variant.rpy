@@ -25,7 +25,7 @@ init 1:
         #SB_facing_wall.link_positions(against_wall,"transition_SB_facing_wall_against_wall")
 
 label intro_SB_facing_wall(the_girl, the_location, the_object):
-    "You turn [the_girl.possessive_title] so she faces away from you and push her up against the [the_object.name]"
+    "You turn [the_girl.possessive_title] so she faces away from you and push her up against the [the_object.name]."
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl "Oh my god..."
     "[the_girl.possessive_title] sighs as you bottom out."
@@ -445,7 +445,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("being submissive") > 0:
                     "[the_girl.possessive_title] melts back into you. Her urge to take the lead has been replaced with submission."
                     "You give a rough tug on her hair to show her than you mean it."
-                    the_girl "Oh god... You've got me up against the [the_object.name]"
+                    the_girl "Oh god... You've got me up against the [the_object.name]."
                     "You fuck her hard and fast. [the_girl.possessive_title] gasps and moans, her rounded hips shaking with every thrust."
                     mc.name "That's right, I've got you right where I want you and there's nothing you can do about it."
                     "[the_girl.possessive_title] tries to move her head, but your strong grip on the her hair prevent her from shifting it much."
@@ -587,7 +587,7 @@ label transition_SB_facing_wall_against_wall(the_girl, the_location, the_object)
     return
 
 label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object):
-    "You decide you want to turn her around so you can really give her a good pounding. You pull out and turn her around, facing [the_object.name]"
+    "You decide you want to turn her around so you can really give her a good pounding. You pull out and turn her around, facing [the_object.name]."
     $ SB_facing_wall.redraw_scene(the_girl)
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and being to push inside of her."
     the_girl "Oh my god..."
@@ -610,7 +610,7 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
     return
 
 label transition_default_SB_facing_wall(the_girl, the_location, the_object):
-    "You turn [the_girl.possessive_title] so she is is facing [the_object.name]"
+    "You turn [the_girl.possessive_title] so she is is facing [the_object.name]."
     "Once you're ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 

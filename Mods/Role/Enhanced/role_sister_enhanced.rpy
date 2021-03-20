@@ -4,6 +4,10 @@ init 5 python:
 label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     $ clear_scene()
     $ scene_manager = Scene()
+    if not the_sister:
+        $ the_sister = lily
+    if not the_mom:
+        $ the_mom = mom
 
     "You leave [the_sister.title] in her room and go to find [the_mom.possessive_title]."
     $ first_time = the_mom.event_triggers_dict.get("mom_instathot_pic_count",0) == 0

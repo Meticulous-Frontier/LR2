@@ -505,7 +505,7 @@ label genius_flirt_response_high(the_person):
             "Find someplace quiet":
                 mc.name "Alright, let's find somewhere quiet then."
                 the_person "Oh! I was teasing, but if you're up for it..."
-                "You take [the_person.possessive_title!l]'s hand and lead her away. She follows you happily."
+                "You take [the_person.possessive_title]'s hand and lead her away. She follows you happily."
                 "After searching for a couple of minutes you find a quiet space with just the two of you."
                 the_person "Well... What did you want me all alone for?"
                 $ the_person.draw_person(position = "kissing")
@@ -587,7 +587,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "Find someplace quiet":
                     mc.name "That sounds fun, come on, let's go."
                     "[the_person.title] follows you eagerly as you lead her away."
-                    "After a few minutes of searching you find a quiet spot and put an arm around [the_person.possessive_title!l]."
+                    "After a few minutes of searching you find a quiet spot and put an arm around [the_person.possessive_title]."
                     "She sighs happily as you pull her close and kiss her. She puts her arms around you and hugs you tight, opening her lips for you."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_71
                     $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -645,7 +645,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "You place your hands around her and hold her close. You run one hand down her back and rest it on her ass, massaging it gently."
                 the_person "Mmm... Can we just stay like this for a moment?"
                 mc.name "Of course."
-                "You hold [the_person.possessive_title!l] for a few minutes in silence."
+                "You hold [the_person.possessive_title] for a few minutes in silence."
                 $ the_person.draw_person()
                 "She finally breaks the hug steps back."
                 the_person "Maybe next time we can... do some more kissing? I think I'd like that."
@@ -664,7 +664,7 @@ label genius_flirt_response_affair(the_person):
             menu:
                 "Find someplace quiet":
                     mc.name "I do, follow me."
-                    "You lead [the_person.possessive_title!l] away. After a few minutes of searching you manage to find a quiet spot."
+                    "You lead [the_person.possessive_title] away. After a few minutes of searching you manage to find a quiet spot."
                     the_person "So, where do we start?"
                     "You put your arm around her waist and rest your hand on her ass as you lean in and kiss her."
                     "She presses her body enthusiastically against you and returns your kiss with just as much excitement."
@@ -747,7 +747,7 @@ label genius_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom: #TODO: All of the cum-drunk stuff
         if the_person.wants_creampie() and the_person.get_opinion_score("creampies") > 0 and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
-            if the_person.event_triggers_dict.get("preg_knows", False):
+            if the_person.knows_pregnant():
                 the_person "I'm already pregnant, why are we even bothering with a condom?"
                 the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"
             elif the_person.on_birth_control:
@@ -766,14 +766,14 @@ label genius_cum_pullout(the_person):
                     "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
                     $ mc.condom = False
                 "Leave it on.":
-                    "You ignore [the_person.possessive_title!l]'s cum-drunk offer and keep the condom in place."
+                    "You ignore [the_person.possessive_title]'s cum-drunk offer and keep the condom in place."
 
         else:
             the_person "Oh yeah, cum for me [the_person.mc_title]!"
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Cum wherever you want [the_person.mc_title]!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
@@ -811,8 +811,8 @@ label genius_cum_vagina(the_person):
         return
 
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
-            the_person "Mmm, your cum is so nice and warm. I love it when you fill me up [the_person.mc_title]"
+        if the_person.knows_pregnant():
+            the_person "Mmm, your cum is so nice and warm. I love it when you fill me up [the_person.mc_title]."
             "She sighs happily."
 
         elif the_person.on_birth_control:
@@ -1378,7 +1378,7 @@ label genius_body_cum_taboo_break(the_person):
 
 label genius_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Hmm, I love your cum deep inside me."
             "She sighs happily."
 
@@ -1414,7 +1414,7 @@ label genius_creampie_taboo_break(the_person):
                 the_person "It's just this once, right? It's probably fine..."
 
     else:
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Oh, you came deep inside me."
 
         elif not the_person.on_birth_control:

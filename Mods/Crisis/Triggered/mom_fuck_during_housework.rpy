@@ -28,13 +28,13 @@ label mom_fuck_during_housework_label(the_person):
     #$ the_person.outfit = Outfit("Nude") changed v0.24.1
     $ add_mom_outfit_coloured_apron(the_person)
     $ the_person.draw_person(position = "back_peek")
-    "You find [the_person.possessive_title!l] in the kitchen, completely nude except for her apron. She's been doing this more and more lately."
+    "You find [the_person.possessive_title] in the kitchen, completely nude except for her apron. She's been doing this more and more lately."
     the_person "Hi [the_person.mc_title], I hope you've had a great day. Dinner should be ready soon!"
     "She turns back, wiggling her butt as she works. Her ass is supple. You are tempted to do something with it while she works..."
     menu:
         "Spank her\n{color=#ffff00}{size=18}May increase submissiveness{/size}{/color}": #chance to increase her submissiveness based on if she orgasms and if she is currently suggestible.
             $ ass_desc = spanking_get_ass_description(the_person)
-            "The swaying of [the_person.title]'s ass is hypnotic. It is [ass_desc]."
+            "The swaying of [the_person.title]'s ass is hypnotic. It is [ass_desc]"
             mc.name "I don't mind you dressing like this, [the_person.title], but it is kind of naughty."
             "You step up behind her and start to run your hand along her hips."
             the_person "Ah, well, it definitely makes me feel kind of naughty..."
@@ -50,7 +50,7 @@ label mom_fuck_during_housework_label(the_person):
                 "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
 
             $ the_person.draw_person(position = "back_peek")
-            "It takes [the_person.possessive_title!l] a few moments, but she gets back to work, making dinner for the family."
+            "It takes [the_person.possessive_title] a few moments, but she gets back to work, making dinner for the family."
         #TODO fuck her branch
         "Let her work":
             "You stomach growls. As much as you would like to take advantage of [the_person.title], you decide to let her work on dinner instead."
