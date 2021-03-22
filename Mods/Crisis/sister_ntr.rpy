@@ -39,15 +39,14 @@ init 3 python:
 label sister_ntr_crisis_action_label:
     ## Lily studying with her friends
     $ the_person = lily
-    "While to fall asleep, you're disturbed by some noise down the hallway."
+    "While trying to fall asleep, you're disturbed by some noise down the hallway."
     menu:
         "Investigate?":
             pass
         "Ignore it":
             return
-    "As it seems to not let you sleep, you decide to investigate."
-    "You drag yourself out of bed and enter the hallway. There is a trace of light down the door to [the_person.possessive_title]'s bedroom."
-    "The door itself seems to be not closed."
+    "Unable to fall asleep, you decide to investigate."
+    "You drag yourself out of bed and down the hallway. There is a trace of light under the door to [the_person.possessive_title]'s bedroom and it is slightly cracked."
 
     ## Determine what type of encounter it is
     if the_person.sluttiness >= 60:
@@ -63,9 +62,9 @@ label sister_ntr_crisis_action_label:
         if the_person.sluttiness < 40:
             $ the_person.draw_person(position = "kissing", emotion = "happy")
             "You see [the_person.possessive_title] kissing a young man. On the table there are some college books lying around. Seems they decided to take a break from studying."
-            the_person "Oh, [man_name]. You are so sweet - agreeing to help me with homework. I could not done this myself!"
-            "Now you recognize the man - it is [man_name], [the_person.possessive_title]'s coed."
-            man_name "Not a problem at all!"
+            the_person "Oh, [man_name]. You are so sweet, agreeing to help me with homework. I could not have done this myself!"
+            "Now you recognize the man. It is [man_name], [the_person.possessive_title]'s friend."
+            man_name "No a problem at all!"
             "They go back to kissing. [man_name] moves his hands to [the_person.possessive_title] butt and starts caressing it."
             the_person "Mmmmm... Your hands are so gentle..."
             "You see [man_name] starts to undress [the_person.possessive_title]."
@@ -75,12 +74,12 @@ label sister_ntr_crisis_action_label:
             man_name "Sorry, [the_person.name]. I understand."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "He gets away from [the_person.possessive_title] and starts picking up his books from the table."
-            "Once it is done, he moves to the door."
-            man_name "Thanks for the evening, [the_person.name]. Say, how about we have a lunch at cafe next to college tomorrow?"
-            the_person "Oh, I like that, [man_name]. I'll give you a call after the classes, ok?"
+            "Once done, he moves to the door."
+            man_name "Thanks for the evening, [the_person.name]. Say, how about we have a lunch at the cafe next to college tomorrow?"
+            the_person "Oh, I like that, [man_name]. I'll give you a call after the class, ok?"
             man_name "Great. See you tomorrow then!"
             $ the_person.sluttiness += 2
-            "You get back to your room and don't even hear from door closing. You fall asleep just as you head touches the pillow."
+            "You get back to your room and don't even hear the front door closing. You fall asleep quickly."
         else:
             $ the_person.strip_outfit_to_max_sluttiness()
             $ target_position = select_position(the_person)
@@ -89,10 +88,10 @@ label sister_ntr_crisis_action_label:
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 "You take a look inside the room and you see [the_person.possessive_title] lying on the table with wide spread legs. And some young man is between them with his pants down."
                 the_person "Oh, [man_name]! You are so good! Keep going!"
-                "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
+                "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, they've been fucking for a while now."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    "[man_name] grabs [the_person.possessive_title] legs and thrusts himself to her with some force."
-                    the_person "Yes, [man_name]. Fuck me harder! Be rough with your [the_person.name]!"
+                    "[man_name] grabs [the_person.possessive_title] legs and thrusts himself into her with some force."
+                    the_person "Yes, [man_name]. Fuck me harder! Be rough with me!"
                 $ the_person.change_arousal (26)
                 "After a few more moves, [the_person.possessive_title] seems to have reached an orgasm."
                 $ the_person.draw_person(position = "missionary", emotion = "orgasm")
@@ -105,9 +104,9 @@ label sister_ntr_crisis_action_label:
                     the_person "Hold it, [man_name]! I have a better idea."
                     $ the_person.draw_person(position = "blowjob")
                     "She pushes him backwards. With a wet sound his dick leaves her pussy. [the_person.possessive_title] gets on her knees in front of [man_name] cock."
-                    the_person "Remember the link I sent you, with a girl getting a cum shot? Do this to me, will you?"
-                    man_name "And how can I deny that?"
-                    "He strokes his dick for few moments and starts to cover [the_person.possessive_title] face with hot semen."
+                    the_person "Remember the link I sent you, with a girl getting a cum shot? Do that to me, okay?"
+                    man_name "With pleasure!"
+                    "He strokes his dick for few moments and starts to cover [the_person.possessive_title]'s face with hot semen."
                     $ cum_on_face_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                     the_person "Yes! That's it! Cover my face!"
@@ -121,7 +120,7 @@ label sister_ntr_crisis_action_label:
                         the_person "Do me again, [man_name]. Fuck me harder! Please cum on my face again!"
                         man_name "On your knees, [the_person.name]! I'm cumming again!"
                         the_person "Here, take a photo on my phone. I wanna see it too!"
-                        "Screams go on long into the night..."
+                        "Moans go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "inside":
@@ -142,7 +141,7 @@ label sister_ntr_crisis_action_label:
                         the_person "Take me again, [man_name]. Fuck me hard! I need you to fill me once more!"
                         man_name "On your knees, [the_person.name]! I want you from behind this time!"
                         the_person "Slap my ass harder! I like it rough!"
-                        "Screams go on long into the night..."
+                        "Moans go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "drink":
@@ -157,17 +156,17 @@ label sister_ntr_crisis_action_label:
                     the_person "Mmmmmm... Mmmm.. Uh."
                     $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                    "[man_name] shrugs and starts filling her mouth with his load."
-                    man_name "Take it all, [the_person.name]. Get you protein cocktail of the day!"
+                    "[man_name] moans and starts filling her mouth with his load."
+                    man_name "Take it all, [the_person.name]!"
                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                    "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
-                    the_person "Such a wonderful taste, [man_name]! Now I go for a glass of cola and then we have to finish the tasks. Don't wanna get bad grade on that test."
+                    "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows most of it, but you still see traces around her mouth."
+                    the_person "Such a wonderful taste, [man_name]! Let me get a glass of water and then we have to finish studying. Don't wanna get bad grade on that test."
                     "You go back to you room to finally have some sleep."
                     if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person "Mmmmmm... Brhkhmmm..."
                         man_name "Liked that, [the_person.name]? Now drink my hot stuff!"
-                        "Screams go on long into the night..."
+                        "Moans go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
                 elif finish == "usual":
@@ -182,7 +181,7 @@ label sister_ntr_crisis_action_label:
                         "While trying to sleep, you hear some loud noises from outside the bedroom."
                         the_person "Please, take me once more. I want to feel your hard dick inside again!"
                         man_name "Sure, [the_person.name]. Get your little pussy ready!"
-                        "Screams go on long into the night..."
+                        "Moans go on long into the night..."
                     else:
                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
             elif target_position == "wall":
@@ -192,9 +191,9 @@ label sister_ntr_crisis_action_label:
                 "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
                 if the_person.get_opinion_score("being submissive") > 0:
                     "[man_name] grabs [the_person.possessive_title]'s buttocks and squeezes them with some force."
-                    the_person "Oh, yes, [man_name]. Be rough with your [the_person.name]! I like being owned by a man."
+                    the_person "Oh, yes, [man_name]. Be rough with me! I love being owned by a man."
                 $ the_person.change_arousal (26)
-                "After a few more moves, [the_person.possessive_title] seems to have reached an orgasm."
+                "After a few more thrusts, [the_person.possessive_title] seems to have reached an orgasm."
                 $ the_person.draw_person(position = "against_wall", emotion = "orgasm")
                 the_person "Keep fucking me, [man_name]! I'm... cumming!..."
                 "Her body shrugs and you see happy smile on her face."
@@ -727,11 +726,11 @@ label sister_ntr_crisis_action_label:
             $ the_person.draw_person(position = "doggy")
             "You take a look inside the room and you see [the_person.possessive_title] squeezed between two men. One is fucking her pussy while the other is working on her ass."
             the_person "Oh, [man_name]! You are so good! I like it in my ass."
-            man_name "Never imagined I would fuck our classmate, sweet [the_person.name] [the_person.last_name] in the ass. Nad how you like her pussy, [man_name2]."
+            man_name "Never imagined I would fuck our classmate, sweet [the_person.name] [the_person.last_name] in the ass. How fo you like her pussy, [man_name2]."
             man_name2 "Fresh and tight, just as I like it!"
             "You see some books lying on the table. Seems they were studying and got little bored. Judging by the sweat on their bodies and loud moans, the seem to be relaxing for some time now."
             if the_person.get_opinion_score("being submissive") > 0:
-                "[man_name] slaps [the_person.possessive_title]'s buttocks. You see some red there. He must done so before."
+                "[man_name] slaps [the_person.possessive_title]'s buttocks. It's red from spanking."
                 the_person "Oh, [man_name]. Slap me more! I like that!"
                 man_name2 "Oh, like it rough? Then you gonna like this."
                 "He speeds up in [the_person.possessive_title] pussy"

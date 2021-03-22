@@ -1692,3 +1692,7 @@ init 3 python:
 
     def ashley_get_observed_outfit():
         return ashley.event_triggers_dict.get("observed_outfit", None)
+
+
+    def ashley_non_con_enabled():
+        return ashley.event_triggers_dict.get("non_con", False)
