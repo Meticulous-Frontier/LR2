@@ -1114,9 +1114,6 @@ label hotwife_hookup_rejection(the_person):
     return
 
 label hotwife_hookup_accept(the_person):
-    the_person "Meet me at the bar... you know where to go! ;)"
-    "You put your phone in your pocket and head to the bar."
-
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
 
