@@ -17,14 +17,14 @@ init -1 python:
     def add_lysergide_n2o_serum_trait():
         lysergide_n2o_serum_trait = SerumTraitMod(name = "Lysergide N2O Trait",
             desc = "Increases target subjects suggestibility, using LSD and Nitrous Oxide components to change the higher brain function to become more receptive to suggestions.",
-            positive_slug = "+$25 Value, increases suggestibility while active",
+            positive_slug = "Increases suggestibility while active, +$25 Value",
             negative_slug = "+200 Serum Research",
             value_added = 25,
             research_added = 200,
             base_side_effect_chance = 50,
             on_apply = lysergide_n2o_trait_on_apply,
             on_remove = lysergide_n2o_trait_on_remove,
-            requires = [basic_med_app, suggestion_drugs_trait],
+            requires = [basic_med_app, off_label_drugs],
             tier = 2,
             research_needed = 500,
             start_enabled = False)
