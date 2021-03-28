@@ -9,14 +9,14 @@ init -1 python:
     def add_pigment_alteration_serum():
         pigment_serum_trait = SerumTraitMod(name = "Pigment Trait",
             desc = "Causes instantaneous alterations in the subject's pigment distribution causing noticeable changes in skin color",
-            positive_slug = "-$15 Value, Changes the subject's skin color",
+            positive_slug = "Changes the subject's skin color, +$5 Value",
             negative_slug = "+125 Serum Research",
-            value_added = -15,
+            value_added = 5,
             research_added = 125,
             base_side_effect_chance = 20,
             on_apply = pigment_serum_on_apply,
-            requires = basic_med_app,
-            tier = 1,
+            requires = clinical_testing,
+            tier = 3,
             research_needed = 500)
 
 

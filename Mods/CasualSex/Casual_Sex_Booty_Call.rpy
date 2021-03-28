@@ -33,7 +33,9 @@ label casual_sex_booty_call_label:
     menu:
         "Definitely":
             mc.name "Definitely."
-            the_person "Great!"
+            the_person "Great! You know where to go! ;)"
+            $ mc.end_text_convo()
+
             $ the_person.event_triggers_dict["last_booty_call"] = day
             $ the_person.strip_outfit(delay = 0)
             $ the_person.call_dialogue("hookup_accept")
@@ -47,7 +49,8 @@ label casual_sex_booty_call_label:
             $ the_person.strip_outfit(delay = 0)
             $ the_person.draw_person(position = the_person.event_triggers_dict.get("reject_position", "missionary"))
             "She sends you a pic of herself masturbating."
-    $ mc.end_text_convo()
+            $ mc.end_text_convo()
+
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ clear_scene()

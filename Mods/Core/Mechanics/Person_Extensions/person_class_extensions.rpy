@@ -342,7 +342,7 @@ init -1 python:
 
     def set_hair_style(self, new_clothing):
         cs = renpy.current_screen()
-        self.hair_style = new_clothing
+        self.hair_style = new_clothing.get_copy()
 
         if cs:
             self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]
@@ -353,7 +353,7 @@ init -1 python:
 
     def set_pubic_style(self, new_clothing):
         cs = renpy.current_screen()
-        self.pubes_style = new_clothing
+        self.pubes_style = new_clothing.get_copy()
 
         if cs:
             self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]

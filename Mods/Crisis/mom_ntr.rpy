@@ -177,7 +177,7 @@ label mom_ntr_mod_action_label:
             $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
             "You take a look inside the room and your eyes widen. You see [the_person.possessive_title] sitting in front of an unknown man, sucking his cock."
             "By the look on man's face, you can tell that he is also quite surprised."
-            "As they go on, you seem to recognize him. It's [man_name], one of [the_person.title]'s colleagues. You might have seen him on some corporate events."
+            "As they go on, you seem to recognize him. It's [man_name], one of [the_person.title]'s colleagues. You might have seen him at some corporate events."
             man_name "Wow, [the_person.name]! We just arrived and you already have my dick in your mouth. I didn't expect that, to say the least."
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
             "[the_person.possessive_title] takes his dick out of her mouth and starts stroking it, looking up at [man_name]."

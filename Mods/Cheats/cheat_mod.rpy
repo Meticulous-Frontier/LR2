@@ -898,7 +898,7 @@ screen cheat_menu():
                                             hover_background "#4f7ad6"
 
                                         action [
-                                            SetField(editing_target,"hair_style", x),
+                                            SetField(editing_target,"hair_style", x.get_copy()),
                                             SetField(editing_target, "hair_style.colour", editing_target.hair_colour[1]),
                                             Function(cheat_appearance)
                                         ]

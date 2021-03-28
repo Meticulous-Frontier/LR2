@@ -7,7 +7,7 @@ init 2 python:
                     return not the_person.home in mc.known_home_locations
         return False
 
-    employee_find_out_home_location_action = Action("Have a personal chat", employee_find_out_home_location_requirement, "employee_find_out_home_location_label",
+    employee_find_out_home_location_action = Action("{image=home_marker} Have a personal chat", employee_find_out_home_location_requirement, "employee_find_out_home_location_label",
         menu_tooltip = "Have a chat with an employee and find our more about her, including her home address.")
 
 

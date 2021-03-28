@@ -207,6 +207,15 @@ init 2:
                                 action NullAction()
                                 sensitive True
 
+                        if person.home in mc.known_home_locations:
+                            textbutton "{image=home_marker}":
+                                yoffset 16
+                                style "transparent_style"
+                                text_style "menu_text_style"
+                                tooltip "The home address is known."
+                                action NullAction()
+                                sensitive True
+
                     textbutton "Age: [person.age]":
                         style "transparent_style"
                         text_style "menu_text_style"
