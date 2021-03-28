@@ -434,7 +434,8 @@ init 2 python:
         naomi.set_title(naomi.name)
         naomi.set_mc_title(mc.name)
         naomi.set_possessive_title(get_random_possessive_title(the_person))
-        naomi.set_schedule(naomi.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
+        # uncomment when no longer free-roam character
+        # naomi.set_schedule(naomi.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
         sarah.event_triggers_dict["bar_friend"] = naomi.identifier
         town_relationships.update_relationship(sarah, naomi, "Best Friend")
         unique_character_list.append(naomi) # add her to the unique character list for later story line
