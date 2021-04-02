@@ -511,7 +511,7 @@ init -1 python:
             )
 
         fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
-                desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
+                desc = "Targeted endorphin emitters increase pleasure received from anal stimulation based on suggestibility.",
                 positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
                 negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
                 value_added = 0,

@@ -77,9 +77,11 @@ init 5 python:
 
         picked_object = get_random_from_list(possible_object_list)
 
-        person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, picked_object.name + " " + position.verbing)
-        person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
-        return picked_object
+        if isinstance(picked_object, Object):
+            person.add_situational_slut("sex_object", picked_object.sluttiness_modifier, picked_object.name + " " + position.verbing)
+            person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
+            return picked_object
+        return None
 
     def cheating_check_get_watcher(person):
         other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
