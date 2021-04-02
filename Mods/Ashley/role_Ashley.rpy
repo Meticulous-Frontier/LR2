@@ -1105,14 +1105,67 @@ label ashley_second_concert_intro_label(the_person):
     "Desperate to diffuse the situation, you take control of the conversation."
     mc.name "We'll go to the concert, grab a couple drinks afterword, then I'll bring her straight home. I'll have her home by, say, 11? If you're still up we can hang out a bit."
     stephanie "Why don't you stay the night?"
-    "[stephanie.title] is getting very territorial. You decide for now to indulge her."
-    mc.name "Okay. Sounds like a plan."
+    "[stephanie.title] is getting territorial. You decide for now to indulge her."
+    mc.name "Okay. I'll plan to stay the night."
     "You take a sip of your coffee. It seems the sisters are finally ready to move on with their conversation."
     #TODO link up mandatory event for the date itself.
     return
 
 label ashley_second_concert_date_label():
     $ the_person = ashley
+    "Evening falls and soon it is time to make your way downtown to meet [the_person.title], your girlfriend's sister, for a date to another classical music concert."
+    "Things with the two girls have gotten complicated. Ashley has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
+    "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
+    "When you arrive, you looked around for a minute, but don't see Ashley yet at your agreed on meeting place. You decide to give her a few minutes. You are just about to pull out your phone and text her when you see her approaching."
+    "She is wearing a sexy black dress, and your eyes are immediately drawn to it's curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
+    ashley "Hey! My eyes are up here."
+    mc.name "Yeah but I wasn't looking at your eyes."
+    "When you finally lift your eyes from her body and meet hers, she has a mischievous smile."
+    ashley "Good. God I finally get you all to myself for one evening."
+    mc.name "Are we still going to the concert?"
+    ashley "Of course! I wasn't lying, and I'll be damned if I miss the opportunity to see the Los Angeles Philharmonic. Tickets weren't cheap you know! And my cheapskate boss barely pays me enough to cover the cost of living."
+    "Wow, she is pretty sassy this evening. You tease each other a bit more but make your way into the concert."
+    #[Change background]
+    "As you take your seats, you try and fit in one last remark."
+    mc.name "I would think as an intern, YOU should be the one on your knees under the desk servicing the boss during the workday, not the other way around."
+    "A couple people near you give you a questioning look, but seem relieved when [the_person.title] starts to laugh."
+    $ the_person.draw_person(position = "sitting")
+    ashley "Thanks, I'll try to remember that for my next performance review."
+    "You sit down beside [the_person.possessive_title]. You are a bit surprised when she takes your hand and holds it."
+    "Even though things between you are supposed to be just physical, you have to wonder... Is she catching feelings for you? Normally, a situation with two sisters and one man could only possibly end in disaster."
+    "But with the serums... Maybe you could eventually convince the two girls that they can both get what they want? You decide to plant that seed now, and see how she reacts."
+    mc.name "You know what? I can't wait."
+    ashley "Oh? What for?"
+    mc.name "When we can go do stuff like this more often, the go back to your place after, and me, you, and Stephanie all hop in bed together and screw until the sun comes up."
+    ashley "Ha! Oh wow. You've been watching some good porn lately huh? I don't think Steph is really the sharing type... I'm usually not either..."
+    mc.name "And yet, here you are, with your sister's boyfriend. Maybe you just haven't met someone worth sharing before?"
+    "[the_person.title]is quiet. Right on cue, the lights turn down and the music begins."
+    #[Change lighting to dark]
+    "The music begins, playing through some classical music that you aren't familiar with, but it is quiet enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
+    "After a while, as the music goes through a crescendo, you feel her squeeze your hand, then turn it over, so her palm is against the back of your hand."
+    "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
+    "You are delighted but not surprised to discover she isn't wearing any panties. She lets go of your hand and takes a quick peak around."
+    "With the darkness in the room, no one notices your hand under her dress as you slowly start to push a finger inside her cunt."
+    "[the_person.title]'s body responds rapidly to your touch. After barely a minute her pussy is soaked, and you can see her chest rising and falling faster out of the corner of your eye."
+    "The angle is rough, but you do your best to rub the palm of your hand against her clit as you finger her."
+    "Her hips are beginning to wiggle gently in her seat as she squirms at your touch. You feel like she has to be close to cumming."
+    "What happens next, surprises even you. She grabs your hand and stops you. You can't help but look at her questioningly. She leans over and whispers to you."
+    ashley "Go slow. It'll be more fun if you take your time..."
+    "She takes your hand and brings it back to her cunt, but this time she lifts her hips slightly and sits on it. She slowly grinds herself down on your hand."
+    "She is using your hand to edge herself?"
+    "As the music continues, [the_person.possessive_title] keeps stimulating herself with your hand. Sometimes she goes completely still, letting herself calm down."
+    "Other times she lets you push your fingers back inside her for a minute or two, and other times just grinding against it. However, she never lets herself cum, each time she gets close she stops. Your cock is getting uncomfortably hard."
+    "The music seems to be winding down. Is she going to let herself finish?"
+    mc.name "You umm..."
+    ashley "Of course. But not here. I decided earlier when I cum I want your face between my legs, not your hand..."
+    "You slowly pull your hand away from her crotch. It's been wet with her arousal for so long it's starting to get a little wrinkled. She opens her clutch and starts to pull out a handkerchief, but you have another idea."
+    "You bring it to your mouth and taste it. Her flavor is musky but sweet. You can't wait to taste the source."
+    "[the_person.title] just watches as you clean your fingers."
+    # change lighting
+    "The lights come back on and people start to get up. You can see [ashley.title]'s chest rising and falling rapidly. She is breathing heavy and is really turned on."
+    mc.name "Alright. I can't wait to have a drink. To the bar?"
+    "You give her a wink as you say drink, making it clear that you aren't talking about alcohol."
+    return
 
 
 
