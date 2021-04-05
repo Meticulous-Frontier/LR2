@@ -774,7 +774,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
         if the_person.get_opinion_score("bareback sex") < 0 :
             the_person "There we go, a nice big rubbery cock."
 
-    elif the_person.get_opinion_score("bareback sex") < 0 or the_person.effective_sluttiness("condomless_sex") < condom_threshold + 20 or the_person.has_taboo("condomless_sex")::
+    elif the_person.get_opinion_score("bareback sex") < 0 or the_person.effective_sluttiness("condomless_sex") < condom_threshold + 20 or the_person.has_taboo("condomless_sex"):
         # They suggest you put on a condom.
         if the_person.knows_pregnant() and skill_tag == "Vaginal":
             if the_person.get_opinion_score("bareback sex") < 0:
@@ -830,7 +830,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_7
 
                 "Fuck her raw":
-                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_6
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
