@@ -140,7 +140,7 @@ init 5 python: # add to stack later then other mods
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
-init -1 python:
+init 1 python:
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
     if renpy.variant("pc"):

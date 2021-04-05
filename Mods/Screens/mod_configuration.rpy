@@ -8,7 +8,7 @@ init -1 python:
         return cat_list
 
 init 2:
-    screen mod_configuration_ui: #How you select serum and trait research
+    screen mod_configuration_ui(): #How you select serum and trait research
         $ categories = get_mod_category_list()
 
         add "Science_Menu_Background.png"

@@ -23,7 +23,7 @@ init -1:
                 return "{color=#ff6347}" + str(variable) +"{/color}"
 
 init 2:
-    screen serum_production_select_ui:
+    screen serum_production_select_ui():
         add "Science_Menu_Background.png"
         default line_selected = None
 

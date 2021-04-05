@@ -9,7 +9,7 @@ init 2:
         color "#ffffff"
         outlines [(2,"#222222",0,0)]
 
-    screen DebugInfo:
+    screen DebugInfo():
         style_prefix "debug"
         zorder 100
 
