@@ -714,7 +714,7 @@ label cougar_flirt_response(the_person):
             the_person "Oh stop [the_person.mc_title], it's not nice to make fun of me like that."
             "[the_person.possessive_title] blushes and looks away."
     elif not the_person.relationship == "Single":
-        $so_title = SO_relationship_to_title(the_person.relationship)
+        $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (the_person.get_opinion_score("cheating on men")*5) > 60:
             the_person "Well thank you [the_person.mc_title]. Don't let my [so_title] hear you say that though, he might get jealous."
             "She smiles and winks mischievously."
@@ -762,6 +762,68 @@ label cougar_flirt_response_text(the_person):
         else:
             the_person "It's sweet of you to be thinking of me."
             the_person "I'd love to chat, what would you like to talk about?"
+    return
+
+label cougar_condom_demand(the_person):
+    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+        the_person "Why don't you wrap that bad boy up, so we can get going."
+        if the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            if the_person.on_birth_control:
+                the_person "Although I have an IUD, I don't want to surprise my [so_title] with some unexpected consequences."
+                $ the_person.update_birth_control_knowledge()
+            else:
+                the_person "And I don't want to explain to my [so_title] how I got pregnant."
+        else
+            the_person "I don't want you to feel bad about getting me pregnant, this is just for fun, right?"
+    else:
+        the_person "You have a condom with you, right? If not, I have one."
+        the_person "And then you can slip that monster right in."
+    return
+
+label cougar_condom_ask(the_person):
+    if the_person.on_birth_control:
+        the_person "I have an IUD, so you don't need to put on a condom unless you want to be very safe."
+        $ the_person.update_birth_control_knowledge()
+    elif the_person.get_opinion_score("creampies") > 0:
+        the_person "Maybe you don't need a condom. Then you can keep fucking me as you cum..."
+        $ the_person.discover_opinion("creampies")
+    else:
+        the_person "You could wear a condom, but if you promise to be careful..."
+        the_person "Maybe we don't need one, just this once."
+    return
+
+label cougar_condom_bareback_ask(the_person):
+    if the_person.get_opinion_score("creampies") > 0:
+        if the_person.on_birth_control:
+            the_person "Don't bother with a condom [the_person.mc_title]. I have an IUD, so it's perfectly safe."
+            the_person "You can cum right inside of me, as often as you want."
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "Don't bother with a condom [the_person.mc_title], we don't need it."
+            the_person "I want you to fuck me unprotected and cum inside me, like nature intended."
+        $ the_person.discover_opinion("creampies")
+    else:
+        the_person "You don't need to bother with a condom [the_person.mc_title]."
+        the_person "It feels so much better without one. You agree, right?"
+    return
+
+label cougar_condom_bareback_demand(the_person):
+    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
+        if the_person.on_birth_control:
+            the_person "You don't need that, I have an IUD."
+            the_person "Come on [the_person.mc_title], I want you to cum inside me!"
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "You don't need to do that, I want to feel you and your cum inside me."
+            the_person "I don't care if you get me pregnant [the_person.mc_title], just get over here and fuck me already!"
+    else:
+        if the_person.on_birth_control:
+            the_person "You don't need to do that [the_person.mc_title], I have an IUD."
+            the_person "So hurry up and fuck me!"
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "Don't waste my time with that. I don't care about the risks, I just want you to fuck me!"
     return
 
 label cougar_cum_face(the_person):
