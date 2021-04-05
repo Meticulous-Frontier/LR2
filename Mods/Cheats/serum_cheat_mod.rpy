@@ -16,7 +16,7 @@ screen keybindT():
     key "t" action ToggleScreen("serum_cheat_menu")
     key "T" action ToggleScreen("serum_cheat_menu")
 
-screen serum_cheat_menu:
+screen serum_cheat_menu():
     add "Science_Menu_Background.png"
 
     default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
