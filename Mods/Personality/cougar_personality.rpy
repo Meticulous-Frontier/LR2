@@ -774,7 +774,7 @@ label cougar_condom_demand(the_person):
                 $ the_person.update_birth_control_knowledge()
             else:
                 the_person "And I don't want to explain to my [so_title] how I got pregnant."
-        else
+        else:
             the_person "I don't want you to feel bad about getting me pregnant, this is just for fun, right?"
     else:
         the_person "You have a condom with you, right? If not, I have one."
