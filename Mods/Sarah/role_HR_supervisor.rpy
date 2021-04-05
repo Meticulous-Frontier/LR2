@@ -494,11 +494,12 @@ label HR_director_monday_meeting_label(the_person):
         the_person "So, before we get started today, I was wondering if umm..."
         mc.name "Yes?"
         "Her cheeks a little flushed, she's obviously embarrassed about what she is about to ask."
-        the_person "Well... I've just noticed that, we employ women here, and it must be hard on you to be around so many women all day long..."
+        the_person "Well... I've noticed that, we only employ women here, and it must be hard on you to be around so many women all day long..."
         "You don't really see where she is going with this."
         the_person "It would cause the company a lot of trouble if some sort of sexual harassment suit that would come up."
         mc.name "I suppose."
         the_person "So anyway, I thought maybe, to start the meeting, we could fool around a little."
+        $ mc.change_locked_clarity(20)
         the_person "It would help clear your mind when we talk about the staff as well as give you an outlet for all the tension you have being around women all day..."
         mc.name "That's very generous of you. All in the name of efficiency?"
         the_person "Well, plus it would be fun..."
@@ -612,16 +613,19 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
 
     if the_person.outfit.check_outfit_cum():
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]. She clearly notices your cum still on her."
+        $ mc.change_locked_clarity(20)
         if person_choice.sluttiness > 80:
             person_choice "Wow, not sure why you called me in here, but I hope its for the same thing you have her in here for..."
         else:
             person_choice "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
         $ person_choice.change_slut_temp(5) # give her a temp slut boost to maybe have a threesome later...
     elif the_person.outfit.vagina_visible():
+        $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
         $ person_choice.change_slut_temp(3)
         person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
+        $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
         $ person_choice.change_slut_temp(1)
         person_choice "Oh...what can I do for you, [person_choice.mc_title]."
@@ -681,6 +685,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                 person_choice "Yes sir?"
                 mc.name "Having this meeting has been great, but, I think you could use a little more... hands on training."
                 person_choice "Mmm, that sounds nice, is [the_person.name] going to join us?"
+                $ mc.change_locked_clarity(20)
                 if the_person.outfit.check_outfit_cum():
                     "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
                     $ mc.change_arousal(30)
@@ -999,6 +1004,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] comes around to your side of the desk and gets down on her knees. She pulls down your zipper and pulls your cock out."
         the_person "Mmm, it smells so good. Let's get this taken care of!"
+        $ mc.change_locked_clarity(30)
         "She runs her tongue up and down your length a few times, then parts her lips and begins to suck you off."
         $ mc.change_arousal(40)
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_one
@@ -1026,6 +1032,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ mc.change_arousal(20)
             $ scene_manager.update_actor(the_person, position = "blowjob", emotion = "happy")
             "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."
+            $ mc.change_locked_clarity(30)
             "She gets on her knees and gives you a couple strokes with her hand."
             $ mc.change_arousal(20)
             the_person "Mmmm, I love the feeling of a cock buried between my big tits... this is gonna be great!"
@@ -1062,6 +1069,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                 "Soon her body is on full display in front of you, on your desk."
             $ mc.change_arousal(20)
+            $ mc.change_locked_clarity(50)
             "You have your cock out in a flash. You position it at her slick entrance."
             "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
             the_person "Mmmm, [the_person.mc_title]. Use me boss! I'm here to serve you!"
@@ -1097,6 +1105,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "You start to strip [the_person.possessive_title] down."
                     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
                     "Soon her ass is on full display in front of you, bent over your desk."
+                $ mc.change_locked_clarity(50)
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
                 the_person "Oh God! its going so deep."
                 $ mc.change_arousal(20)
@@ -1130,6 +1139,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] stands up and starts to walk around the desk while you pull out your erection."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "She gets down on her knees in front of you and takes a moment to admire your hardness."
+        $ mc.change_locked_clarity(30)
         $ mc.change_arousal(20)
         "She opens her mouth and runs her tongue along it a few times, and then parts her lips and begins to suck you off."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
@@ -1141,6 +1151,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "With her tits out and ready to be used, she gives you a big smile."
         the_person "Get your cock out, I want to feel it slide between my boobs!"
         $ mc.change_arousal(20)
+        $ mc.change_locked_clarity(30)
         "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "[the_person.possessive_title] smiles at you as she uses her hands to wrap her tits around your cock, and then starts to move them up and down."
@@ -1159,6 +1170,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         mc.name "Oh, I'm the naughty one? I seem to remember this was your idea in the first place..."
         "You pull your cock out and line it up with [the_person.title]'s pussy. You ease yourself inside of her with one slow, smooth push."
         $ mc.change_arousal(20)
+        $ mc.change_locked_clarity(50)
         the_person "I never said I wasn't naughty too... Oh god, [the_person.mc_title], that feels good. Have your way with me!"
         call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_three
 
@@ -1184,6 +1196,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person "Mmm, fuck me good [the_person.mc_title]!"
         $ mc.change_arousal(20)
+        $ mc.change_locked_clarity(50)
         "You eagerly begin to pump your hips and fuck your HR director over your desk."
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 
@@ -1194,6 +1207,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 mc.name "I'm very busy, lets just continue the meeting. Don't bother to clean up."
                 "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
                 the_person "Of course, [the_person.mc_title]. Let's see what is next."
+                $ mc.change_locked_clarity(20)
             "Let her clean herself up":
                 $ the_person.apply_planned_outfit()
                 "[the_person.possessive_title] quickly cleans herself up, ready to continue the meeting."
