@@ -710,7 +710,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     mc.name "If it's that important to you let's just do something else."
                     return 0
 
-        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5 and the_person.sex_record.get("Anal Creampies", 0) < 5:
+        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5:
             the_person "Normally we would have to use one of these."
             "She gets out a condom."
             if skill_tag == "Vaginal":
