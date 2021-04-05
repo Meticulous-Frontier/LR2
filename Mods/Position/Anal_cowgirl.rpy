@@ -160,10 +160,12 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     $ threshold = 120 + (-20 * the_girl.get_opinion_score("anal creampies")) + (-20 * the_girl.get_opinion_score("anal sex"))
+    $ climax_controller = ClimaxController(None)
     if mc.condom:
         the_girl "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
         "Your cock erupts and begins filling the condom. She sighs when she feels the heat from it."
+        $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         the_girl "Ah... I hope the condom didn't break!"
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
         "The condom is full of your potent seed."
