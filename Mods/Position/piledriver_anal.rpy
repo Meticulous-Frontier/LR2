@@ -139,42 +139,45 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
     "You pass the point of no return and speed up, slamming your cock into her with each thrust."
     $ the_girl.call_dialogue("sex_responses_anal")
     mc.name "Fuck, here I cum!"
-    menu:
-        "Cum inside of her":
-            "You push yourself balls deep into [the_girl.title]'s ass and dump your load."
-            #This is where the "cum in me" section would go instead
-            #the_girl "Ah! Ah!"
-            "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
-            if mc.condom:
-                "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
-                "You tie the end in a knot and pull it off, throwing it away while she recovers."
+    $ climax_controller = ClimaxController(["Cum inside of her","anal"], ["Cum on her face", "face"])
+    $ the_choice = climax_controller.show_climax_menu()
+    if the_choice == "Cum inside of her":
+        "You push yourself balls deep into [the_girl.title]'s ass and dump your load."
+        #This is where the "cum in me" section would go instead
+        #the_girl "Ah! Ah!"
+        "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
+        $ climax_controller.do_clarity_release(the_girl)
+        if mc.condom:
+            "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
+            "You tie the end in a knot and pull it off, throwing it away while she recovers."
+        else:
+            "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."
+            $ the_girl.cum_in_ass()
+            $ piledriver_anal.redraw_scene(the_girl)
+            if the_girl.get_opinion_score("anal creampies") > 0:
+                # If she's into both...
+                $ the_girl.discover_opinion("anal creampies")
+                the_girl "Oh fuck... I'm so full of cum. I don't want to move..."
             else:
-                "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."
-                $ the_girl.cum_in_ass()
-                $ piledriver_anal.redraw_scene(the_girl)
-                if the_girl.get_opinion_score("anal creampies") > 0:
-                    # If she's into both...
-                    $ the_girl.discover_opinion("anal creampies")
-                    the_girl "Oh fuck... I'm so full of cum. I don't want to move..."
-                else:
-                    the_girl "Wow, that was intense. I hope you didn't stretch me out too badly."
-                "Her puckered hole is raw and gaping. You watch as her asshole slowly starts to close, sealing your load inside of it."
-                "She slowly lowers her legs until she is laying flat on the [the_object.name]."
+                the_girl "Wow, that was intense. I hope you didn't stretch me out too badly."
+            "Her puckered hole is raw and gaping. You watch as her asshole slowly starts to close, sealing your load inside of it."
+            "She slowly lowers her legs until she is laying flat on the [the_object.name]."
 
 
-        "Cum on her face":
-            if mc.condom:
-                "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title]'s face."
-            else:
-                "You pull your cock out at the last minute, stroking it off with one hand as you point it towards [the_girl.possessive_title]'s face."
-            $ the_girl.cum_on_face()
-            $ piledriver.redraw_scene(the_girl)
-            if the_girl.sluttiness > 80:
-                "[the_girl.title] sticks out her tongue and stares into your eyes as you climax. You spray your load onto her face, splattering some over her tongue and sending some right into her mouth."
-                "She closes her mouth and swallows quickly, then bites her lip and smiles at you."
-            else:
-                "[the_girl.title] closes her eyes and waits for you to climax. You spray your load over her face and dribble a few drops of sperm onto her chest."
-            "You sit back and let [the_girl.possessive_title]'s legs down. You enjoy the sight of her covered in your semen when she looks at you."
+    if the_choice == "Cum on her face":
+        if mc.condom:
+            "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title]'s face."
+        else:
+            "You pull your cock out at the last minute, stroking it off with one hand as you point it towards [the_girl.possessive_title]'s face."
+        $ the_girl.cum_on_face()
+        $ climax_controller.do_clarity_release(the_girl)
+        $ piledriver.redraw_scene(the_girl)
+        if the_girl.sluttiness > 80:
+            "[the_girl.title] sticks out her tongue and stares into your eyes as you climax. You spray your load onto her face, splattering some over her tongue and sending some right into her mouth."
+            "She closes her mouth and swallows quickly, then bites her lip and smiles at you."
+        else:
+            "[the_girl.title] closes her eyes and waits for you to climax. You spray your load over her face and dribble a few drops of sperm onto her chest."
+        "You sit back and let [the_girl.possessive_title]'s legs down. You enjoy the sight of her covered in your semen when she looks at you."
     return
 
 label transition_piledriver_piledriver_anal(the_girl, the_location, the_object):

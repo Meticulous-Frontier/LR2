@@ -155,8 +155,10 @@ label outro_breeding_missionary(the_girl, the_location, the_object):
     mc.name "Here it comes bitch! I'm going to cum now!"
     "[the_girl.possessive_title] wraps her legs around your waist. Even if you wanted to pull out, you couldn't, as she uses her legs to pull you into her."
     "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
+    $ climax_controller = ClimaxController(None)    #Make this a python block?
     $ the_girl.call_dialogue("cum_vagina")
     $ the_girl.cum_in_vagina()
+    $ climax_controller.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     $ breeding_missionary.redraw_scene(the_girl)
     "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
     "She lifts her legs up a bit, tilting her vagina so that your cum will naturally slide deeper inside. She sighs happily."

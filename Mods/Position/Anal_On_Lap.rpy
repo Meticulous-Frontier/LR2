@@ -140,7 +140,9 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
 label outro_anal_on_lap(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight ass draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, bouncing her as hard as you can manage."
     $ the_girl.call_dialogue("sex_responses_anal")
+    $ climax_controller = ClimaxController(["Cum inside of her","anal"], ["Cum on her ass", "body"])
     mc.name "Ah, I'm going to cum!"
+
     if the_girl.get_opinion_score("anal creampies") > 0 or mc.condom:
             the_girl "Yes! Shove it in deep [the_girl.mc_title]!"
     elif mc.condom:
@@ -149,55 +151,58 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         the_girl "Oh my god I can't believe I'm letting you do this..."
     else:
         the_girl "That's it [the_girl.mc_title], cum for me! Show me how much you love my ass!"
-    menu:
-        "Cum inside of her":
-            "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
-            "You grab her hips and force her down all the way, burying your cock deep inside her bowel as you start to spurt."
-            if mc.condom:
-                "Your cock erupts and begins filling the condom. She sighs when she feels the heat from it."
-                "She waits until your orgasm has passed completely, then pulls off. Her asshole gapes slightly."
-                the_girl "Wow... that was intense..."
-                return
-            if the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl  "Yes! Fill your slut's ass with your cum! It's so hot!"
-            if the_girl.has_anal_fetish():
-                the_girl "Fuck... its so good! Oh yes!"
-                "[the_girl.possessive_title] squeals as you dump your load in her ass. Her anal fetish causes her to orgasm as you cum inside her."
-                $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
-            $ the_girl.cum_in_ass()
-            $ anal_on_lap.redraw_scene(the_girl)
-            if the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
-            elif the_girl.sluttiness > 110:
-                the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
-            else:
-                the_girl "Oh fuck, I can't believe I let you cum in my ass..."
+    $ the_choice = climax_controller.show_climax_menu()
+    if the_choice == "Cum inside of her":
+        "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
+        "You grab her hips and force her down all the way, burying your cock deep inside her bowel as you start to spurt."
+        if mc.condom:
+            "Your cock erupts and begins filling the condom. She sighs when she feels the heat from it."
+            "She waits until your orgasm has passed completely, then pulls off. Her asshole gapes slightly."
+            $ climax_controller.do_clarity_release(the_girl)
+            the_girl "Wow... that was intense..."
+            return
+        if the_girl.get_opinion_score("anal creampies") > 0:
+            the_girl  "Yes! Fill your slut's ass with your cum! It's so hot!"
+        if the_girl.has_anal_fetish():
+            the_girl "Fuck... its so good! Oh yes!"
+            "[the_girl.possessive_title] squeals as you dump your load in her ass. Her anal fetish causes her to orgasm as you cum inside her."
+            $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
+        $ the_girl.cum_in_ass()
+        $ climax_controller.do_clarity_release(the_girl)
+        $ anal_on_lap.redraw_scene(the_girl)
+        if the_girl.get_opinion_score("anal creampies") > 0:
+            the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
+        elif the_girl.sluttiness > 110:
+            the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
+        else:
+            the_girl "Oh fuck, I can't believe I let you cum in my ass..."
 
-            "She waits until your orgasm has passed completely, then pulls off. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel."
+        "She waits until your orgasm has passed completely, then pulls off. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel."
 
-        "Cum on her ass":
-            mc.name "Pull off, I want to cum on your ass!"
-            if mc.condom:
-                "[the_girl.possessive_title] pulls off you at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
-            else:
-                "[the_girl.possessive_title] pulls off you at the last moment. You start stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
-            if the_girl.get_opinion_score("being covered in cum") > 0:
-                 the_girl "Yes! Paint me with your sticky cum!"
-            if the_girl.has_cum_fetish():
-                the_girl "Fuck... its so good! Oh yes!"
-                "[the_girl.possessive_title] squeals as you paint her ass with your cum. Her cum fetish causes her to orgasm as you cum all over her."
-                $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
-            $ the_girl.cum_on_ass()
-            $ anal_on_lap.redraw_scene(the_girl)
-            if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
-                "She truly is addicted to your cum."
-            elif the_girl.sluttiness > 120:
-                the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
-                "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
-            else:
-                the_girl "Oh! Its so warm..."
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+    if the_choice == "Cum on her ass":
+        mc.name "Pull off, I want to cum on your ass!"
+        if mc.condom:
+            "[the_girl.possessive_title] pulls off you at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
+        else:
+            "[the_girl.possessive_title] pulls off you at the last moment. You start stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+        if the_girl.get_opinion_score("being covered in cum") > 0:
+             the_girl "Yes! Paint me with your sticky cum!"
+        if the_girl.has_cum_fetish():
+            the_girl "Fuck... its so good! Oh yes!"
+            "[the_girl.possessive_title] squeals as you paint her ass with your cum. Her cum fetish causes her to orgasm as you cum all over her."
+            $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
+        $ the_girl.cum_on_ass()
+        $ climax_controller.do_clarity_release(the_girl)
+        $ anal_on_lap.redraw_scene(the_girl)
+        if the_girl.has_cum_fetish():
+            "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+            "She truly is addicted to your cum."
+        elif the_girl.sluttiness > 120:
+            the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
+            "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
+        else:
+            the_girl "Oh! Its so warm..."
+        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     return
 
 
@@ -271,6 +276,7 @@ label taboo_break_anal_on_lap(the_girl, the_location, the_object):
 
 label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None):
     $ the_goal = the_girl.get_sex_goal()
+    $ climax_controller = ClimaxController(None)
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     if the_goal == "hate fuck" or the_goal == "waste cum":
@@ -290,6 +296,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                 $ the_person.change_stats(obedience = 5, love = -3)
                 "You hold her in place as you cum into her tight ass. She squirms a little bit but she also gasps a bit."
                 $ the_girl.cum_in_ass()
+                $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 $ anal_on_lap.redraw_scene(the_girl)
                 "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto your lap."
                 the_person "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
@@ -305,11 +312,13 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                     "There's a hint of develish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
                     "You finally erupt. She gasps as she feels the heat of it in her body."
                     $ the_girl.cum_in_ass()
+                    $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                     $ anal_on_lap.redraw_scene(the_girl)
                     "As soon as you finish she immediately pops off and stands over you. Her ass gives a little squelch as your cum leaks from it onto your lap."
                 else:
                     the_person "I love to hear you beg, but not a chance."
                     "She pulls of you completely and starts to stroke you with her hand. You groan but are immediately firing off your sperm into the air. It lands on your stomach, making a mess."
+                    $ climax_controller.manual_clarity_release(climax_type = "air", the_person = the_girl)
                     "When you finish, she wipes her hand on your leg."
                     the_person "All that wasted seed... oh well! Better luck next time!"
 
@@ -325,6 +334,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
         "Her words push you over the edge. You cock explodes deep inside her bowel. She moans as she feels her body filling up."
         $ the_girl.change_obedience(3)
         $ the_girl.cum_in_ass()
+        $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         $ anal_on_lap.redraw_scene(the_girl)
         "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slowly slides off of your dick."
     elif the_goal = "body shot":
@@ -335,6 +345,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
         the_girl "Cum for me [the_girl.mc_title], I want you to cum on me!"
         "You tense up and cum, shooting your thick load up and onto [the_girl.possessive_title]'s ass. She keeps grinding against your cock until you are completely spent."
         $ the_girl.cum_on_ass()
+        $ climax_controller.manual_clarity_release(climax_type = "body", the_person = the_girl)
         $ anal_on_lap.redraw_scene(the_girl)
         "She rolls off and lies next to you on the [the_object.name]."
     else:

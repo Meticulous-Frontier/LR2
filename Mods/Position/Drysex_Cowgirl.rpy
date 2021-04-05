@@ -138,9 +138,10 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     "With each stroke of her hips [the_girl.title] brings you closer and closer to cumming. You're finally driven past the point of no return."
     mc.name "Fuck, I'm going to cum!"
 
-    #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     "She acts surprised, but quickly speeds up, dry humping you at a rapid pace."
     mc.name "Oh.... Fuck!"
+    $ climax_controller = ClimaxController(None)
+    $ climax_controller.manual_clarity_release(climax_type = "air", the_person = the_girl)
     "You dump your load in your pants. It makes a mess but it feels great."
     the_girl "Wow... that was... interesting?"
     return
@@ -187,6 +188,7 @@ label orgasm_drysex_cowgirl(the_girl, the_location, the_object):
 
 label GIC_outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     $ the_goal = the_girl.get_sex_goal()
+    $ climax_controller = ClimaxController(None)
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     if the_goal == "hate fuck" or the_goal == "waste cum":
@@ -194,6 +196,7 @@ label GIC_outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = No
         mc.name "Fuck, I'm going to cum!"
         the_person "Wow, already?"
         "It feels too good. You feel yourself begin to dump your load in your pants."
+        $ climax_controller.manual_clarity_release(climax_type = "air", the_person = the_girl)
         the_person "Hah! What a waste of cum."
         "It makes a mess, but you finish cumming."
     else:

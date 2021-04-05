@@ -78,6 +78,8 @@ label outro_cowgirl_cunnilingus(the_girl, the_location, the_object): #With low a
     "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
     "You touch yourself, stroking your hard cock between your legs while you pleasure her."
     "Finally you've gone too far, pushing yourself to climax."
+    $ climax_controller = ClimaxController(None)
+    $ climax_controller.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
     "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto your stomach behind [the_girl.title]."
     the_girl "Oh my god... That's so hot!"
     return
@@ -134,6 +136,8 @@ label GIC_outro_cowgirl_cunnilingus(the_girl, the_location, the_object, the_goal
         "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
         "You touch yourself, stroking your hard cock between your legs while you pleasure her."
         "Finally you've gone too far, pushing yourself to climax."
+        $ climax_controller = ClimaxController(None)
+        $ climax_controller.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
         "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto your stomach behind [the_girl.title]."
         the_person "Wow. Just from licking me? What a pathetic waste of cum."
         "It makes a mess, but you finish cumming."

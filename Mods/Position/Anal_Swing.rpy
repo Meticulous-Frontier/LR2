@@ -198,94 +198,98 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
         the_girl "Oh my god I can't believe I'm letting you do this..."
     else:
         the_girl "That's it [the_girl.mc_title], cum for me! Show me how much you love my ass!"
-
-    menu:
-        "Cum inside of her":
-            "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
-            if mc.condom:
-                "You pull back on the swing straps and drive your cock deep inside of her as you cum. You hope the condom can handle your load."
-                if the_girl.arousal > 110:
-                    "You feel her bowel contracting around your dick as she also starts to orgasm."
-                    $ the_girl.change_happiness(5)
-                "You wait until your orgasm has passed completely, then pull out. Her asshole gapes slightly."
-                the_girl "Wow... that was intense..."
-                return
-            else:
-                "You pull back on the swing straps and drive your cock deep inside of her as you cum. She moans as you body dumps your load deep into her bowel."
-            if the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl  "Yes! Fill your slut's ass with your cum! It's so hot!"
+    $ climax_controller = ClimaxController(["Cum inside of her","anal"], ["Cum on her ass", "body"], ["Cum on her tits", "tits"])
+    $ the_choice = climax_controller.show_climax_menu()
+    if the_choice == "Cum inside of her":
+        "[the_girl.possessive_title]'s ass is just too good. You decide to cum inside it."
+        if mc.condom:
+            "You pull back on the swing straps and drive your cock deep inside of her as you cum. You hope the condom can handle your load."
+            $ climax_controller.do_clarity_release(the_girl)
             if the_girl.arousal > 110:
                 "You feel her bowel contracting around your dick as she also starts to orgasm."
                 $ the_girl.change_happiness(5)
-            $ the_girl.cum_in_ass()
-            $ SB_anal_swing.redraw_scene(the_girl)
-            if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
-                "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            elif the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
-            elif the_girl.sluttiness > 110:
-                the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
-            else:
-                the_girl "Oh fuck, I can't believe I let you cum in my ass..."
+            "You wait until your orgasm has passed completely, then pull out. Her asshole gapes slightly."
+            the_girl "Wow... that was intense..."
+            return
+        else:
+            "You pull back on the swing straps and drive your cock deep inside of her as you cum. She moans as you body dumps your load deep into her bowel."
+        if the_girl.get_opinion_score("anal creampies") > 0:
+            the_girl  "Yes! Fill your slut's ass with your cum! It's so hot!"
+        if the_girl.arousal > 110:
+            "You feel her bowel contracting around your dick as she also starts to orgasm."
+            $ the_girl.change_happiness(5)
+        $ the_girl.cum_in_ass()
+        $ climax_controller.do_clarity_release(the_girl)
+        $ SB_anal_swing.redraw_scene(the_girl)
+        if the_girl.has_cum_fetish():
+            "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
+            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+            "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
+        elif the_girl.get_opinion_score("anal creampies") > 0:
+            the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
+        elif the_girl.sluttiness > 110:
+            the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
+        else:
+            the_girl "Oh fuck, I can't believe I let you cum in my ass..."
 
-            "You wait until your orgasm has passed completely, then pull out. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
+        "You wait until your orgasm has passed completely, then pull out. Her asshole gapes and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
 
-        "Cum on her ass":
-            if mc.condom:
-                "You pull out of [the_girl.possessive_title] at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
-            else:
-                "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
-            if the_girl.get_opinion_score("being covered in cum") > 0:
-                 the_girl "Yes! Paint me with your sticky cum!"
-            $ the_girl.cum_on_ass()
-            $ SB_anal_swing.redraw_scene(the_girl)
+    if the_choice == "Cum on her ass":
+        if mc.condom:
+            "You pull out of [the_girl.possessive_title] at the last moment. You pull the condom off and blow your load all over her heart shaped ass cheeks."
+        else:
+            "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+        if the_girl.get_opinion_score("being covered in cum") > 0:
+             the_girl "Yes! Paint me with your sticky cum!"
+        $ the_girl.cum_on_ass()
+        $ climax_controller.do_clarity_release(the_girl)
+        $ SB_anal_swing.redraw_scene(the_girl)
+        if the_girl.has_cum_fetish():
+            "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
+            "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+            "She truly is addicted to your cum."
+        elif the_girl.sluttiness > 120:
+            the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
+            "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
+        else:
+            the_girl "Oh! Its so warm..."
+        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+    if the_choice == "Cum on her tits":
+        mc.name "Fuck, get ready [the_girl.title], I wanna cum on your tits!"
+        if mc.condom:
+            "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you, pulling your condom off at the same time."
+        else:
+            "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you."
+        if the_girl.get_opinion_score("being covered in cum") > 0:
+            "[the_girl.possessive_title] reaches up and immediately begins stroking you off for you final few seconds."
+            "Your orgasm hits hard. Your first jet sprays across her tits."
+            $ the_girl.cum_on_tits()
+            $ the_girl.draw_person(position = "sitting")
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
-                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+                "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
+                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her body. She moans lewdly."
                 "She truly is addicted to your cum."
-            elif the_girl.sluttiness > 120:
-                the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
-                "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
             else:
-                the_girl "Oh! Its so warm..."
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
-        "Cum on her tits":
-            mc.name "Fuck, get ready [the_girl.title], I wanna cum on your tits!"
-            if mc.condom:
-                "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you, pulling your condom off at the same time."
-            else:
-                "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You spin the swing around quickly so she faces you."
-            if the_girl.get_opinion_score("being covered in cum") > 0:
-                "[the_girl.possessive_title] reaches up and immediately begins stroking you off for you final few seconds."
-                "Your orgasm hits hard. Your first jet sprays across her tits."
-                $ the_girl.cum_on_tits()
-                $ the_girl.draw_person(position = "sitting")
-                if the_girl.has_cum_fetish():
-                    "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
-                    "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her body. She moans lewdly."
-                    "She truly is addicted to your cum."
-                else:
-                    "[the_girl.possessive_title] moans as your dick sprays jet after jet of seed across her body."
-            elif the_girl.sluttiness > 80:
-                "[the_girl.possessive_title] presses her tits together with her hands, eager to take your hot load."
-                $ the_girl.cum_on_tits()
-                $ the_girl.draw_person(position = "sitting")
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She makes sure to wait until you're completely finished."
-                the_girl "Oh god... it feels so good on my skin..."
-            elif the_girl.sluttiness > 60:
-                "[the_girl.possessive_title] looks up at you and waits patiently for you to cum."
-                $ the_girl.cum_on_tits()
-                $ the_girl.draw_person(position = "sitting")
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She waits until she's sure you're finished."
-            else:
-                "[the_girl.possessive_title] closes her eyes and turns away."
-                $ the_girl.cum_on_tits()
-                $ the_girl.draw_person(position = "sitting")
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She flinches as the first splash of warm liquid lands on her body, but doesn't pull away entirely."
-            "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from the swing, her tits covered in your seed."
-            the_girl "Wow, that was really intense..."
+                "[the_girl.possessive_title] moans as your dick sprays jet after jet of seed across her body."
+        elif the_girl.sluttiness > 80:
+            "[the_girl.possessive_title] presses her tits together with her hands, eager to take your hot load."
+            $ the_girl.cum_on_tits()
+            $ the_girl.draw_person(position = "sitting")
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She makes sure to wait until you're completely finished."
+            the_girl "Oh god... it feels so good on my skin..."
+        elif the_girl.sluttiness > 60:
+            "[the_girl.possessive_title] looks up at you and waits patiently for you to cum."
+            $ the_girl.cum_on_tits()
+            $ the_girl.draw_person(position = "sitting")
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She waits until she's sure you're finished."
+        else:
+            "[the_girl.possessive_title] closes her eyes and turns away."
+            $ the_girl.cum_on_tits()
+            $ the_girl.draw_person(position = "sitting")
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She flinches as the first splash of warm liquid lands on her body, but doesn't pull away entirely."
+        $ climax_controller.do_clarity_release(the_girl)
+        "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from the swing, her tits covered in your seed."
+        the_girl "Wow, that was really intense..."
 
 
     return
