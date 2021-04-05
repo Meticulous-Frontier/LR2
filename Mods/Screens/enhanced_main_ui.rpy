@@ -33,7 +33,7 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                textbutton "Clarity: [mc.free_clarity] ([mc.locked_clarity] Locked)": #TODO: Add a clarity token
+                textbutton "Clarity: [mc.free_clarity] ([mc.locked_clarity] {image=padlock})": #TODO: Add a clarity token
                     ysize 28
                     style "transparent_style"
                     text_style "menu_text_style"
