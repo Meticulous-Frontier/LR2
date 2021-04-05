@@ -608,7 +608,7 @@ label Sarah_cum_anal(the_person):
     call relaxed_cum_anal(the_person) from _call_Sarah_cum_anal
     return
 
-label Sarah_suprised_exclaim(the_person):
+label Sarah_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!", "God fucking dammit!", "Son of a bitch!", "Mother fucker!", "Whoah!"])
     the_person "[rando]"
     return

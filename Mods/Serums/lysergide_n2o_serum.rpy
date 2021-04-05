@@ -27,6 +27,7 @@ init -1 python:
             requires = [basic_med_app, off_label_drugs],
             tier = 2,
             research_needed = 500,
+            clarity_cost = 1500,
             start_enabled = False)
 
 

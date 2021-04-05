@@ -9,7 +9,7 @@ label meet_person_enhanced_label():
     #"This is a test to see if the override worked."
     "While you're wandering a woman hurries past you on the sidewalk, jogging for a bus waiting up the street."
     "A few steps ahead of you she stumbles and trips."
-    $ the_person.call_dialogue("suprised_exclaim")
+    $ the_person.call_dialogue("surprised_exclaim")
     "She rushes to get back to her feet, unaware that her wallet has slipped out and is sitting on the sidewalk."
     "You crouch down to pick it up. A discreet check reveals there is a sizeable amount of cash inside."
     menu:

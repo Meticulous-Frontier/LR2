@@ -17,7 +17,8 @@ init -1 python:
             on_apply = pigment_serum_on_apply,
             requires = clinical_testing,
             tier = 3,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 2500)
 
 
 label serum_mod_pigment_serum_trait(stack):

@@ -15,7 +15,9 @@ init -1 python:
             on_turn = osteomalacia_serum_on_turn,
             requires = clinical_testing,
             tier = 3,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 2500
+            )
 
 
 # any label that starts with serum_mod is added to the serum mod list

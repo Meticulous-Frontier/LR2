@@ -312,7 +312,7 @@ label alternative_start:
     $ renpy.block_rollback()
     call screen character_create_screen()
     $ return_arrays = _return #These are the stat, skill, and sex arrays returned from the character creator.
-    call create_test_variables(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2]) from _call_create_test_variables_alt_start ##Moving some of this to an init block (init 1specifically) would let this play better with updates in the future.
+    call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2]) from _call_initialize_game_state_alt_start ##Moving some of this to an init block (init 1specifically) would let this play better with updates in the future.
     $ renpy.block_rollback()
     menu:
         "Play introduction and tutorial":

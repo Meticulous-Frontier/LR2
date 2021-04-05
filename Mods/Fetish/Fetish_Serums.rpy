@@ -489,7 +489,8 @@ init -1 python:
                 tier = 99,
                 start_researched = False,
                 research_needed = 1000,
-                exclude_tags = ["Nanobots"]
+                exclude_tags = ["Nanobots"],
+                clarity_cost = 1000
             )
 
         fetish_exhibition_ther = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
@@ -507,7 +508,8 @@ init -1 python:
                 tier = 99,
                 start_researched =  False,
                 research_needed = 1200,
-                exclude_tags = ["Nanobots"]
+                exclude_tags = ["Nanobots"],
+                clarity_cost = 1000
             )
 
         fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
@@ -525,7 +527,8 @@ init -1 python:
                 tier = 99,
                 start_researched =  False,
                 research_needed = 2000,
-                exclude_tags = ["Nanobots"]
+                exclude_tags = ["Nanobots"],
+                clarity_cost = 1500
             )
 
         fetish_cum_ther = SerumTraitMod(name = "Semen Proclivity Nanobots",
@@ -543,7 +546,8 @@ init -1 python:
                 tier = 99,
                 start_researched =  False,
                 research_needed = 2000,
-                exclude_tags = ["Nanobots"]
+                exclude_tags = ["Nanobots"],
+                clarity_cost = 1500,
             )
 
         fetish_breeding_ther = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
@@ -561,7 +565,8 @@ init -1 python:
                 tier = 99,
                 start_researched =  False,
                 research_needed = 2000,
-                exclude_tags = ["Nanobots"]
+                exclude_tags = ["Nanobots"],
+                clarity_cost = 1500
             )
         return
 

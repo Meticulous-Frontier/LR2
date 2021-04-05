@@ -872,7 +872,7 @@ label genius_cum_anal(the_person):
         the_person "Oh god, ah!"
     return
 
-label genius_suprised_exclaim(the_person):
+label genius_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
     the_person "[rando]"
     return

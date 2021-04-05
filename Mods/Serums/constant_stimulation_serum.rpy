@@ -19,6 +19,7 @@ init -1 python:
                 tier = 1,
                 start_researched =  False,
                 research_needed = 500,
+                clarity_cost = 500
             )
 
 

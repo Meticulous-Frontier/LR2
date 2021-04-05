@@ -588,7 +588,7 @@ label candace_cum_anal(the_person):
         the_person "Oh! Fuck, I hope there's room for all your cum!"
     return
 
-label candace_suprised_exclaim(the_person):
+label candace_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
     the_person "[rando]"
     return

@@ -652,7 +652,7 @@ label princess_cum_vagina(the_person):
             the_person "Well maybe it ain't that bad."
     return
 
-label princess_suprised_exclaim(the_person):
+label princess_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Daddy!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit Daddy!", "Fucking shit!"])
     the_person "[rando]"
     return

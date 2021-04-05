@@ -7,7 +7,7 @@ init 10 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_generic_personality")
     add_label_hijack("after_load", "update_generic_personality")
 
-init -1 python:
+init 0 python:
     # This will be called in game when a person is created original function in script.rpy
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,

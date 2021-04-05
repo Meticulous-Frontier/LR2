@@ -877,7 +877,7 @@ label alpha_sex_strip(the_person):
             the_person "I need to get this off, I want to feel your body against mine!"
     return
 
-label alpha_suprised_exclaim(the_person):
+label alpha_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Oh my!","Oh, that's not good!", "Darn!", "Oh!", "My word!", "How about that!", "Shock and horror!", "I'll be jiggered!"])
     the_person "[rando]"
     return

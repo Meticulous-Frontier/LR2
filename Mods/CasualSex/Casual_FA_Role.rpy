@@ -832,7 +832,7 @@ label FA_seduction_refuse(the_person):
 #             the_person "Ugh, that's such a... unique taste."
 #     return
 #
-label FA_suprised_exclaim(the_person):
+label FA_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Cockpits!", "Holy shit!", "Fucking shit!", "God fucking dammit!", "Son of a bitch!", "Mother fucker!", "Whoah!"])
     the_person "[rando]"
     return

@@ -1206,7 +1206,7 @@
 #             the_person "Bleh, I don't know if I'll ever get used to that."
 #     return
 #
-# #label athlete_suprised_exclaim(the_person):
+# #label athlete_surprised_exclaim(the_person):
 # #    $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
 # #    the_person "[rando]"
 # #    return

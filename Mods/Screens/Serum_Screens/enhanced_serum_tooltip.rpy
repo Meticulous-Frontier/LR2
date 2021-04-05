@@ -6,12 +6,11 @@ init -1:
 
 
 init 2:
-    screen serum_tooltip(the_serum, set_x_align = 0.9, set_y_align = 0.1):
+    screen serum_tooltip(the_serum, given_anchor = (0.0,0.0), given_align = (0.0,0.0)):
         frame:
             background "#888888"
-            xalign set_x_align
-            yalign set_y_align
-            yanchor 0.0
+            anchor given_anchor
+            align given_align
             xsize 500
             ysize 900
             vbox:
@@ -83,7 +82,13 @@ init 2:
                                     xsize 225
                                     text "Duration: [the_serum.duration] Turns" style "serum_text_style_traits"
 
-                                if renpy.get_screen("review_designs_screen"): #Make it so you have to be in the review screen to edit things (still need to protect already created serum somehow)
+                                if not the_serum.unlocked:
+                                    frame:
+                                        background "#000080"
+                                        xsize 225
+                                        text "Clarity Cost: [the_serum.clarity_needed]" style "serum_text_style_traits"
+
+                                elif renpy.get_screen("review_designs_screen"): #Make it so you have to be in the review screen to edit things (still need to protect already created serum somehow)
                                     textbutton "Edit Serum":
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"

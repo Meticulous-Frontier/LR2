@@ -937,7 +937,7 @@ label cougar_sex_strip(the_person):
             the_person "I need to get this off, I want to feel your young body against mine!"
     return
 
-label cougar_suprised_exclaim(the_person):
+label cougar_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Oh my!","Oh, that's not good!", "Darn!", "Oh!", "My word!", "How about that!", "Shock and horror!", "I'll be jiggered!"])
     the_person "[rando]"
     return

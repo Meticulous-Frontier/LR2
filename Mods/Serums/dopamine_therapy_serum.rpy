@@ -17,6 +17,7 @@ init -1 python:
                 tier = 1,
                 start_researched =  False,
                 research_needed = 500,
+                clarity_cost = 500
             )
 
 # any label that starts with serum_mod is added to the serum mod list

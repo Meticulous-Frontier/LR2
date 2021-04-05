@@ -15,7 +15,8 @@ init -1 python:
             on_turn = hypothyroidism_serum_on_turn,
             requires = basic_med_app,
             tier = 2,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 1500)
 
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_hypothyroidism_serum_trait(stack):

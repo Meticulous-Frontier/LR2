@@ -117,7 +117,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                  "[the_girl.possessive_title] continues to twerk her ass up and down on your penis. How does she make it look so easy?"
             "I'm in charge here":
                  "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
-                 $ the_girl.call_dialogue("suprised_exclaim")
+                 $ the_girl.call_dialogue("surprised_exclaim")
                  "You lean forward and whisper into [the_girl.possessive_title]'s ear."
                  mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
                  if the_girl.has_role(anal_fetish_role):
