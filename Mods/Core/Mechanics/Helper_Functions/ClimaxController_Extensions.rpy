@@ -9,4 +9,4 @@ init -1 python:
             mc.convert_locked_clarity(multiplier, with_novelty = mc.masturbation_novelty)
         return
 
-     ClimaxController.manual_clarity_release = manual_clarity_release
+    ClimaxController.manual_clarity_release = manual_clarity_release
