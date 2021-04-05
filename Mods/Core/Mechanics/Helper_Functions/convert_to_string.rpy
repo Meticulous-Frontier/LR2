@@ -1,4 +1,4 @@
-init -1 python:
+init 0 python:
     # Overrides VREN's height function, so we display the height based on the weight property
     # instead of the fixed weight on zoom factor
     # currently between 60 inch (152.4) - 70 inch (177.8) (based on * 50 + 20).
