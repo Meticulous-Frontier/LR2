@@ -342,6 +342,7 @@ label dirty_laundry_wash_your_clothes(the_person):
 label dirty_laundry_stuck_in_dryer(the_person):
     "As you walk into the laundry room, you see [the_person.title] with her head in the dryer."
     $ the_person.draw_person(position = "doggy")
+    $ mc.change_locked_clarity(5)
     "She is muttering to herself about how she could have been so clumsy as to get her hair stuck in there; plainly it is preventing her from getting out."
 
     menu:
@@ -366,6 +367,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
             "You soon reach your tipping point and spray your load right onto her ass."
             $ the_person.cum_on_ass()
             $ the_person.draw_person(position="doggy")
+            $ ClimaxController.manual_clarity_release()
             the_person "Hey [the_person.mc_title], is that you? What's going on back there... don't just stand there, get me out of this thing!"
             mc.name "Hi [the_person.title], don't worry, just wait a sec, I'll get some scissors and get you out."
             "When you return you carefully manage to untangle her from the machine and she looks at you, running a hand across her bum."
@@ -415,6 +417,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 "You move your hands along [the_person.possessive_title]'s ass and slide her [the_item.display_name] to the side."
                 $ the_person.draw_animated_removal(the_item, position = "doggy", half_off_instead = True)
 
+            $ mc.change_locked_clarity(10)
             the_person "[the_person.mc_title]? I don't moving my [the_item.display_name] will get me out of here."
             mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
             the_person "Okay, go ahead, just don't pull too much on my head."
@@ -423,6 +426,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
             if not the_person.outfit.vagina_visible():
                 "You quickly start removing the remaining clothing from [the_person.possessive_title]."
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
+                $ mc.change_locked_clarity(10)
 
             "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
             the_person "What the fuck! You're going to fuck me like {i}this{/i}?"
