@@ -336,8 +336,8 @@ label girlfriend_wakeup_spooning_label(the_person):
             the_person "That's certainly one way to start the day... holy hell."
         "Pull out":
             $ the_person.cum_on_ass()
-            "You pull out at the last second. Large, thick roaps of cum rocket out of your cock, coating her ass."
             $ the_person.draw_person( position = "back_peek")
+            "You pull out at the last second. Large, thick ropes of cum rocket out of your cock, coating her ass."
             the_person "Oh my god... its so warm!"
             "When you finish you lay back, admiring your painting skills."
             the_person "That's certainly one way to start the day..."

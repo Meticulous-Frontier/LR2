@@ -114,8 +114,7 @@ label outro_standing_dildo(the_girl, the_location, the_object):
     "The view of [the_girl.title]'s hot, tight pussy squeezing your dildo is enough to push you that little bit further, past the point of no return."
     "You grasp her tightly with your free hand as you cum, shoving your dildo deep into her cunt and making her gasp in surprise."
     "When you've recovered you slide it out."
-    $ climax_controller = ClimaxController(None)
-    $ climax_controller.manual_clarity_release(climax_type = "air", the_person = the_girl)
+    $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
     the_girl "Did you just... Cum?"
     mc.name "Yeah."
     "She gives a slight smile."

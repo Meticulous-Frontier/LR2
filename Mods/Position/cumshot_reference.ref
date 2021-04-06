@@ -13,9 +13,11 @@ $ the_choice = climax_controller.show_climax_menu()
 if the_choice == "Cum inside of her":
       $ climax_controller.do_clarity_release(the_girl)
 
+
 # Use this code for cumshots that MC has no control over
 
-$ climax_controller = ClimaxController(None)
+For masturbation use:
+$ ClimaxController.manual_clarity_release()
 
-#Then when appropriate
-$ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+Else:
+$ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)

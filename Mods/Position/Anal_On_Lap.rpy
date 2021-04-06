@@ -276,7 +276,6 @@ label taboo_break_anal_on_lap(the_girl, the_location, the_object):
 
 label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None):
     $ the_goal = the_girl.get_sex_goal()
-    $ climax_controller = ClimaxController(None)
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     if the_goal == "hate fuck" or the_goal == "waste cum":
@@ -296,7 +295,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                 $ the_person.change_stats(obedience = 5, love = -3)
                 "You hold her in place as you cum into her tight ass. She squirms a little bit but she also gasps a bit."
                 $ the_girl.cum_in_ass()
-                $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 $ anal_on_lap.redraw_scene(the_girl)
                 "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto your lap."
                 the_person "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
@@ -312,13 +311,13 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                     "There's a hint of develish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
                     "You finally erupt. She gasps as she feels the heat of it in her body."
                     $ the_girl.cum_in_ass()
-                    $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+                    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                     $ anal_on_lap.redraw_scene(the_girl)
                     "As soon as you finish she immediately pops off and stands over you. Her ass gives a little squelch as your cum leaks from it onto your lap."
                 else:
                     the_person "I love to hear you beg, but not a chance."
                     "She pulls of you completely and starts to stroke you with her hand. You groan but are immediately firing off your sperm into the air. It lands on your stomach, making a mess."
-                    $ climax_controller.manual_clarity_release(climax_type = "air", the_person = the_girl)
+                    $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
                     "When you finish, she wipes her hand on your leg."
                     the_person "All that wasted seed... oh well! Better luck next time!"
 
@@ -334,7 +333,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
         "Her words push you over the edge. You cock explodes deep inside her bowel. She moans as she feels her body filling up."
         $ the_girl.change_obedience(3)
         $ the_girl.cum_in_ass()
-        $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         $ anal_on_lap.redraw_scene(the_girl)
         "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slowly slides off of your dick."
     elif the_goal = "body shot":
@@ -345,7 +344,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
         the_girl "Cum for me [the_girl.mc_title], I want you to cum on me!"
         "You tense up and cum, shooting your thick load up and onto [the_girl.possessive_title]'s ass. She keeps grinding against your cock until you are completely spent."
         $ the_girl.cum_on_ass()
-        $ climax_controller.manual_clarity_release(climax_type = "body", the_person = the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
         $ anal_on_lap.redraw_scene(the_girl)
         "She rolls off and lies next to you on the [the_object.name]."
     else:

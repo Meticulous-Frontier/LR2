@@ -160,12 +160,11 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     $ threshold = 120 + (-20 * the_girl.get_opinion_score("anal creampies")) + (-20 * the_girl.get_opinion_score("anal sex"))
-    $ climax_controller = ClimaxController(None)
     if mc.condom:
         the_girl "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
         "Your cock erupts and begins filling the condom. She sighs when she feels the heat from it."
-        $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         the_girl "Ah... I hope the condom didn't break!"
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
         "The condom is full of your potent seed."
@@ -188,7 +187,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
         else:
             the_girl "Oh my god... Give it all to me [the_girl.mc_title]... Fill my ass up!"
         $ the_girl.cum_in_ass()
-        $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         $ SB_anal_cowgirl.redraw_scene(the_girl)
         the_girl "Oh yes... so full..."
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
@@ -202,7 +201,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
         the_girl "Cum for me [the_girl.mc_title], I want you to cum on me!"
         "You tense up and cum, shooting your thick load up and onto [the_girl.possessive_title]'s stomach. She keeps grinding against your cock until you are completely spent."
         $ the_girl.cum_on_stomach()
-        $ climax_controller.manual_clarity_release(climax_type = "body", the_person = the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
         $ SB_anal_cowgirl.redraw_scene(the_girl)
 
     else:
@@ -217,7 +216,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
                 the_girl "Ah! Fuck..."
                 $ the_girl.change_obedience(3)
                 $ the_girl.cum_in_ass()
-                $ climax_controller.manual_clarity_release(climax_type = "anal", the_person = the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
                 "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slides off of your dick and collapses beside you."
 
@@ -225,7 +224,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
                 "You stay silent. [the_girl.possessive_title] waits another second, as if waiting to be convinced, then pulls off of your cock."
                 "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
                 $ the_girl.cum_on_stomach()
-                $ climax_controller.manual_clarity_release(climax_type = "body", the_person = the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
                 the_girl "Whew, that was close..."
                 "She rolls off and lies next to you on the [the_object.name]."

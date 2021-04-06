@@ -1172,7 +1172,7 @@ label hotwife_hookup_accept(the_person):
     "It feels amazing, you can tell if you let her keep going you will cum quickly."
     #TODO write blowjob finish scene#
     mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
-    $ the_person.draw_person( position = "standing_doggy")
+    $ the_person.draw_person(position = "standing_doggy")
     if the_person.effective_sluttiness() > 40: #She asks if you want to use a condom
         the_person "Do you want to put on a condom first?"
         menu:
@@ -1232,6 +1232,7 @@ label hotwife_hookup_accept(the_person):
                     $ the_person.change_slut_temp(1)
                     $ the_person.change_happiness(2)
                     $ the_person.cum_in_vagina()
+                    $ the_person.draw_person( position = "standing_doggy") # redraw with cum
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                     "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
                     "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
@@ -1297,6 +1298,7 @@ label hotwife_hookup_accept(the_person):
                     "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
                     $ the_person.cum_in_ass()
+                    $ the_person.draw_person(position = "standing_doggy") # redraw for cum
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person "Wow... okay... I think I can stand now..."
                     "You slowly let her down. Her legs buckle for a second, but she catches herself."
@@ -1318,6 +1320,7 @@ label hotwife_hookup_accept(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_slut_temp(1)
         $ the_person.cum_in_vagina()
+        $ the_person.draw_person(position = "standing_doggy") # redraw for cum
         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
         "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
@@ -1341,6 +1344,7 @@ label hotwife_hookup_accept(the_person):
                 $ the_person.change_happiness(5)
                 $ the_person.change_slut_temp(1)
                 $ the_person.cum_in_vagina()
+                $ the_person.draw_person(position = "standing_doggy") # redraw for cum
                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                 "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."

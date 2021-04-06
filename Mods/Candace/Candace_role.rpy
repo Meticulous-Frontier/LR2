@@ -942,6 +942,7 @@ label candace_love_path_intro_label():
     mc.name "I'm... I'm!"
     "You try to warn her. She quickly pops off and starts to jack you off. You cum, blowing your load all over her nightgown covered belly."
     $ the_person.cum_on_stomach()
+    $ the_person.draw_person(position = "cowgirl") # paint cum
     "When you finish, [the_person.title] starts to lick her fingers. She seems happy as she lays back in bed next to you. Sleep rapidly overtakes you."
     "You sleep for a while longer. You aren't surprised though when you feel warm, wet sensations enveloping your cock again."
     "The delicious suction and the sound of [the_person.possessive_title]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
@@ -951,7 +952,7 @@ label candace_love_path_intro_label():
     mc.name "God... I thought I was empty last time... Get ready here it cums again!"
     "She takes you out of her mouth and strokes you with her hands. She points you down at her chest as you begin to fire off your load."
     $ the_person.cum_on_tits()
-    $ the_person.cum_on_ass()
+    $ the_person.draw_person(position = "blowjob")
     "She keeps eye contact and doesn't say a word as you drop your load all over her chest. It immediately starts soaking into her nightgown. You can see the stains from earlier still on her belly."
     "You aren't sure what happens after that, because you pass out again. Your last thought as you fall back asleep, is that [the_person.title] must think a slumber party means getting as much cum as possible on her nightgown."
     $ the_person.next_day_outfit = the_person.outfit # stay in current outfit next day

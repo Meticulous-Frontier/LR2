@@ -79,7 +79,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     "[loser.possessive_title] gives you a quick blowjob and you splatter your cum all over her face, she smears it around and into her hair for added effect."
                     $ loser.cum_on_face()
                     $ scene_manager.update_actor(loser, position = "stand3")
-                    $ climax_controller.manual_clarity_release(climax_type = "face", the_person = loser)
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = loser)
                     loser "Thanks, these delivery boys love it when I do this."
                 "Refuse":
                     loser "Aww you're no fun, [loser.mc_title]. If he makes me pay this time it's your fault."
@@ -174,7 +174,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     "Her pussy clenching you drives you over the edge as well. You ram yourself deep and dump your cum inside of her."
                     $ loser.cum_in_vagina()
                     $ scene_manager.update_actor(loser, position = "standing_doggy")
-                    $ climax_controller.manual_clarity_release(climax_type = "pussy", the_person = loser)
+                    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = loser)
                     "You pull out and look at [loser.possessive_title]. She has your old cum on her face and now also running down the inside of her legs as your seed spills out of her."
                     $ mc.listener_system.fire_event("girl_climax", the_person = loser, the_position = "standing_doggy")
                     $ loser.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 3)

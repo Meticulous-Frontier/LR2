@@ -177,15 +177,17 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "Oh? That's... oh god that sounds hot..."
     "She takes her hand and wipes a bit of your cum off her face, then brings them down to her breasts..."
     $ the_person.cum_on_tits()
+    $ the_person.draw_person(position = "kneeling1")
     $ the_person.change_arousal(20)
     mc.name "That's it. Feels good, doesn't it?"
     the_person "Your cum feels so good on my skin... its electric!"
     mc.name "Good girl. Keeping going, rub some on your stomach..."
     the_person "Oh my god..."
     $ the_person.cum_on_stomach()
+    $ the_person.draw_person(position = "kneeling1")
     "Taking what she can, [the_person.possessive_title] goes further, rubbing your cum onto her belly."
     $ the_person.change_arousal(20)
-    "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dialated. She is REALLY getting off on this!"
+    "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dilated. She is REALLY getting off on this!"
     mc.name "That's a good cumslut. You know whats coming next, right?"
     the_person "Oh god, probably me soon!"
     mc.name "Do it. Rub some cum around your cunt and get yourself off for me."

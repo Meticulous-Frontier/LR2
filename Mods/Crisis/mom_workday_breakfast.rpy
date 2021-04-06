@@ -226,7 +226,7 @@ label mom_breakfast_action_label_high():
     "She wrinkles her nose for a second and then looks up at you."
     the_person "What? Oh... sorry! I was just sending some dirty text messages with this guy at work, but he has to go because of his wife or something..."
     "[the_person.title] mutters to herself for a moment. Then she looks over at you."
-    $ scene_manager.update_actor(mom, position = "sitting", emotion="happy")
+    $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
     the_person "Say... you look awfully handsome this morning..."
     "She looks around, and notices the door to sister's room is still closed. She must be sleeping in."
     the_person "I had some really crazy dreams last night, it would be nice if I could release a little tension before work. Are you up for a quickie?"
@@ -237,7 +237,7 @@ label mom_breakfast_action_label_high():
         "Feed Her" if the_person.has_cum_fetish():
             #fetish blowjob path
             the_person "Oh! I know! You just keep eating your breakfast, mommy will just help herself!"
-            $ scene_manager.update_actor(mom, position = "blowjob")
+            $ scene_manager.update_actor(the_person, position = "blowjob")
             $ the_person.break_taboo("touching_penis")
             "[the_person.possessive_title] quickly gets down on her knees and under the table. You feel her expert hands removing your belt and trousers. She sighs when your cock springs free."
             the_person "Mmm, that's what I was dreaming about... I had a dream that I was blowing you, and you started cumming, and you just kept cumming and cumming and it was everywhere..."
@@ -249,32 +249,32 @@ label mom_breakfast_action_label_high():
             # call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_workday_breakfast_01
             call get_fucked(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_workday_breakfast_01
             "Finished with her breakfast, [the_person.title] gets up from the table and excuses herself."
-            $ scene_manager.update_actor(mom, position = "walking_away")
+            $ scene_manager.update_actor(the_person, position = "walking_away")
             the_person "Have a good day at work, I'm gonna go get ready for the day!"
             return "Advance Time"
 
         "Long Day Ahead":
             mc.name "I'm sorry [the_person.title], but I have a long day scheduled today. I think I had better save my energy!"
-            $ scene_manager.update_actor(mom, position = "sitting", emotion="sad")
+            $ scene_manager.update_actor(the_person, position = "sitting", emotion="sad")
             $ the_person.change_stats(happiness = -3, obedience = 2)
             the_person "That's okay, I understand. Well don't forget, dinner will be the usual time tonight. Maybe we can do something after that?"
             "You give her a non-committal shrug. The tension at the table is a little much, so you quickly finish your breakfast and head out."
             return None
 
-    $ scene_manager.update_actor(mom, position = "stand4")
+    $ scene_manager.update_actor(the_person, position = "stand4")
     the_person "Oh! We'd better go quick, your sister could come out at any time..."
 
     if mc.business.event_triggers_dict.get("family_threesome", False) == True:
         mc.name "Why does it matter if [lily.name] comes out?"
         the_person "Well, I mean its not that I mind, but your mommy has needs [the_person.mc_title]..."
         menu:
-            "Insist [lily.title] join you" if willing_to_threesome(mom, lily):
+            "Insist [lily.title] join you" if willing_to_threesome(the_person, lily):
                 mc.name "Don't worry [the_person.title]. I'll make sure you have your needs met."
                 the_person "I suppose that would be okay, just make sure I get to finish!"
                 mc.name "Of course!"
                 "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title]'s door."
 
-                $ scene_manager.strip_actor_outfit(mom)
+                $ scene_manager.strip_actor_outfit(the_person)
                 "After no response, you knock again."
                 lily "What!?! I'm tired!"
                 mc.name "Me and mom are gonna have some fun, you should join us."
@@ -311,7 +311,7 @@ label mom_breakfast_action_label_high():
         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
     else: #We need to strip something off completely.
         "[the_person.possessive_title] quickly starts to strip down."
-        $ scene_manager.strip_actor_outfit(mom, exclude_upper = True)
+        $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
 
     "You take a quick sip of coffee. [the_person.possessive_title] is ready to fuck you right here in the kitchen!"
     if the_person.has_anal_fetish():
@@ -321,7 +321,7 @@ label mom_breakfast_action_label_high():
         "You watch as she applies a generous amount to her hand, then she reaches back and starts applying it to her back end."
         the_person "Remember, this is a quickie! Sit back and enjoy, but don't hold back! I want your cum!"
         "[the_person.possessive_title] unzips your pants and pulls out your firm cock. She sits down on your lap, facing you."
-        $ scene_manager.update_actor(mom, position = "cowgirl")
+        $ scene_manager.update_actor(the_person, position = "cowgirl")
         "With one hand on your cock, she guides you to her tight anal pucker. In one smooth motion, she relaxes herself and lowers her body down on to you, impaling herself on your manhood."
         the_person "OH fuck, that is just what I needed... I was dreaming about this last night... I dreamed that you had me tied up and bent over and you pounded my ass over and over..."
         "She is whispering in your ear. [the_person.title] is truly desperate to have her ass stuffed with your cock."
@@ -336,21 +336,23 @@ label mom_breakfast_action_label_high():
         "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
         $ the_person.cum_in_ass()
+        $ scene_manager.update_actor(the_person) # redraw for cum
+
         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
         $ the_person.change_stats(happiness = 5, obedience = 3)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
         the_person "Oh god... [lily.name] could walk out any second!"
-        $ scene_manager.update_actor(mom, position = "walking_away")
+        $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
         the_person "I love you, have a good day at work!"
-        $ scene_manager.remove_actor(mom)
+        $ scene_manager.remove_actor(the_person)
         "You put your cock away and finish your breakfast before heading out for the day."
         return "Advance Time"
 
     the_person "Remember, this is a quickie! Sit back and enjoy, but don't hold back! I want your cum!"
     "[the_person.possessive_title] unzips your pants and pulls out your firm cock. She sits down on your lap, facing you."
-    $ scene_manager.update_actor(mom, position = "cowgirl")
+    $ scene_manager.update_actor(the_person, position = "cowgirl")
     "With one hand on your cock, she guides you straight to her cunt. In one smooth motion, she relaxes herself and lowers her body down on to you, impaling herself on your manhood."
     the_person "OH fuck, that is just what I needed... I was dreaming about this last night..."
     "She is whispering in your ear. [the_person.title] is really turned on right now."
@@ -365,14 +367,16 @@ label mom_breakfast_action_label_high():
     "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her pussy as orgasmic waves hit her. You sigh happily, dumping the last of your cum insider her."
 
     $ the_person.cum_in_vagina()
+    $ scene_manager.update_actor(the_person) # redraw for cum
+
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
     $ the_person.change_stats(happiness = 5, obedience = 3)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
     the_person "Oh god... [lily.name] could walk out any second!"
-    $ scene_manager.update_actor(mom, position = "walking_away")
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
-    $ scene_manager.update_actor(mom, position = "back_peek")
+    $ scene_manager.update_actor(the_person, position = "back_peek")
     the_person "I love you, have a good day at work!"
     $ scene_manager.clear_scene()
     "You put your cock away and finish your breakfast before heading out for the day."
