@@ -67,6 +67,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
                     "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                    $ mc.change_locked_clarity(2)
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -102,7 +103,7 @@ label mom_outfit_help_crisis_label_enhanced():
         the_person "Just give me one second to get dressed [the_person.mc_title]."
         "[the_person.possessive_title] starts to strip down in front of you."
         $ the_person.strip_outfit(exclude_feet = False)
-
+        $ mc.change_locked_clarity(10)
         "Once she's stripped naked she grabs her new outfit and starts to put it on."
         if the_person.update_outfit_taboos(): #Some taboo was broken.
             the_person "I should probably have told you to look away, but you don't mind, right?"
@@ -166,6 +167,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
                     "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                    $ mc.change_locked_clarity(2)
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -200,8 +202,8 @@ label mom_outfit_help_crisis_label_enhanced():
     else: #She's slutty enough that she doesn't care if you watch or not.
         the_person "It'll just take me a second to get changed."
         "[the_person.possessive_title] starts to strip down in front of you."
-
         $ the_person.strip_outfit(exclude_feet = False)
+        $ mc.change_locked_clarity(10)
         "Once she's stripped naked she grabs another outfit and starts to put it on."
 
     $ the_person.apply_outfit(second_outfit, update_taboo = True)
@@ -264,6 +266,7 @@ label mom_outfit_help_crisis_label_enhanced():
                             while strip_choice and not caught:
                                 $ the_person.draw_animated_removal(strip_choice)
                                 "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                                $ mc.change_locked_clarity(2)
                                 if renpy.random.randint(0,100) < 10: #you got caught
                                     the_person "I'll be done in just a second [the_person.mc_title]..."
                                     "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
@@ -299,6 +302,8 @@ label mom_outfit_help_crisis_label_enhanced():
                     the_person "It'll just take a moment for me to slip into this."
                     "[the_person.possessive_title] starts to strip down in front of you."
                     $ the_person.strip_outfit(exclude_feet = False)
+                    $ mc.change_locked_clarity(10)
+                    "Once she's stripped naked she grabs another outfit and starts to put it on."
 
                 $ the_person.apply_outfit(third_outfit, update_taboo = True)
                 $ the_person.draw_person()
@@ -319,6 +324,7 @@ label mom_outfit_help_crisis_label_enhanced():
             the_person "Oh, I wouldn't say I have something specific..."
             "[the_person.possessive_title] starts to take off her outfit. Saving her clothes for tomorrow you guess?"
             $ the_person.strip_outfit(exclude_lower = True)
+            $ mc.change_locked_clarity(10)
             if the_person.sluttiness < 70: #Mid sluttiness path.
                 "With her tits out, she starts to walk over to you."
                 the_person "I'm sure it was hard for you... to watch your mother undress like that... right in front of you..."
@@ -329,6 +335,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "Slowly, [the_person.possessive_title] slides down to her knees. She pulls your zipper down and takes your cock out."
                 $ the_person.draw_person(position = "blowjob")
                 the_person "You have become such a virile young man..."
+                $ mc.change_locked_clarity(20)
                 if the_person.get_opinion_score("giving blowjobs") > the_person.get_opinion_score("giving tit fucks"):
                     "[the_person.possessive_title]'s lips part and she runs the tip of your cock back and forth across her tongue."
                     if the_person.has_taboo("sucking_cock"):
@@ -356,6 +363,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "[the_person.possessive_title] turns around and bends over as she starts to take off what is left over her outfit. She takes her time..."
                 $ the_person.strip_outfit(position = "standing_doggy")
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
+                $ mc.change_locked_clarity(20)
                 "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]"
                 call fuck_person(the_person, start_position = SB_doggy_standing, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
                 "When you finish up, you put your dick away."
