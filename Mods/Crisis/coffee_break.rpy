@@ -76,6 +76,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
             $ scene_manager.update_actor(person_two, position = "kissing")
             $ scene_manager.update_actor(person_three, position = "kissing")
+            $ mc.change_locked_clarity(20)
 
             "What's your next move?"
             menu:
@@ -84,7 +85,11 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                         mc.location.show_background()
                         scene_manager.clear_scene()
                     return
-                "Join them":
+
+                "Join them\n{color=#ff0000}{size=18}Requires: Both girls open to threesomes{/color}{/size} (disabled)" if not if willing_to_threesome(person_two, person_three):
+                    pass
+
+                "Join them" if willing_to_threesome(person_two, person_three):
                     mc.name "Hello girls... mind if I join your little party?"
                     $ scene_manager.update_actor(person_two, position = "stand3")
                     $ scene_manager.update_actor(person_three, position = "stand4")
