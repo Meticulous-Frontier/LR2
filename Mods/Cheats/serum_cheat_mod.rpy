@@ -58,7 +58,7 @@ screen serum_cheat_menu():
                                                 style "textbutton_style"
                                                 text_style "serum_text_style_traits"
                                                 action [Hide("trait_tooltip"), SetField(trait, "researched", True)]
-                                                hovered Show("trait_tooltip",None,trait)
+                                                hovered Show("trait_tooltip",None,trait, given_align = (0.95,0.05), given_anchor = (1.0,0.0))
                                                 unhovered Hide("trait_tooltip")
                                                 xsize 365
                 vbox:
@@ -101,7 +101,7 @@ screen serum_cheat_menu():
                                             ]
                                             style "textbutton_style"
                                             text_style "serum_text_style_traits"
-                                            hovered Show("trait_tooltip",None,trait)
+                                            hovered Show("trait_tooltip",None,trait, given_align = (0.95,0.05), given_anchor = (1.0,0.0))
                                             unhovered Hide("trait_tooltip")
                                             xsize 395
 
@@ -126,6 +126,6 @@ screen serum_cheat_menu():
                                         text_text_align 0.5
                                         action [Hide("serum_tooltip"), SetField(serum, "researched", True)] style "textbutton_style"
                                         text_style "serum_text_style_traits"
-                                        hovered Show("serum_tooltip",None,serum)
+                                        hovered Show("serum_tooltip",None,serum, given_align = (0.95,0.05), given_anchor = (1.0,0.0))
                                         unhovered Hide("serum_tooltip")
                                         xsize 365

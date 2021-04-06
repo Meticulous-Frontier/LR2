@@ -7,13 +7,14 @@ init -1:
 
 init 2:
     screen serum_tooltip(the_serum, given_anchor = (0.0,0.0), given_align = (0.0,0.0)):
+        zorder 105
         frame:
             background "#888888"
             anchor given_anchor
             align given_align
-            xsize 500
-            ysize 900
             vbox:
+                xsize 500
+                ysize 900
                 xalign 0.5
                 spacing 10
                 button:
