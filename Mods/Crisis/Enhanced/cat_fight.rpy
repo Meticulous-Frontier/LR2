@@ -191,6 +191,7 @@ label cat_fight_crisis_enhanced_label():
                         $ scene_manager.draw_animated_removal(loser, the_clothing)
                         loser "Fuck, you're going to pay for that!"
 
+                    $ mc.change_locked_clarity(10)
                     $ ran_num = renpy.random.randint(0,2)
                     $ other_clothing = winner.choose_strip_clothing_item()
 
@@ -202,6 +203,7 @@ label cat_fight_crisis_enhanced_label():
                         if other_clothing:
                             "[winner.title] rushes forward and grabs at [loser.title]. [loser.title] manages to get the upper hand, grabbing onto [winner.title]'s [other_clothing.name] and whipping her around. With a sharp rip it comes free."
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
+                            $ mc.change_locked_clarity(10)
                             winner "Shit, get over here you skank!"
 
                     elif ran_num == 2:
@@ -209,6 +211,7 @@ label cat_fight_crisis_enhanced_label():
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
                             "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get to the side. She grabs [loser.title]'s [other_clothing.name] and yanks on it hard."
                             "[winner.title] struggles for a moment, then manages to slip free of the garment and steps back. [loser.title] drops it to the ground and they square off again."
+                            $ mc.change_locked_clarity(10)
                         else:
                             "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get out of the way, and they square off again as the fight continues."
 
@@ -230,6 +233,7 @@ label cat_fight_crisis_enhanced_label():
                     loser "Hey... that's not fair! I... ah..."
                     $ scene_manager.update_actor(loser, position = "missionary")
                     "[loser.title] stops fighting almost immediately, leaning against [winner.title] and breathing heavily. You've got a front row seat as [winner.title] starts to finger [loser.title]."
+                    $ mc.change_locked_clarity(20)
                     $ loser.change_arousal(15)
                     loser "Oh god... [winner.title], just... Ah!"
                     "[winner.title] isn't going easy on [loser.title]. She shivers and bucks against [winner.title]."
@@ -239,6 +243,7 @@ label cat_fight_crisis_enhanced_label():
                     winner "You thought you could get away easy, huh? Well now I'm going to make you cum right here, you dirty little slut!"
                     $ loser.change_arousal(25)
                     "[loser.title] looks right into your eyes. She doesn't look embarrassed - in fact it looks like she's turned on by you watching her get finger banged right in the middle of the office."
+                    $ mc.change_locked_clarity(20)
                     loser "I'm going to... I'm going to... AH!"
                     $ loser.change_arousal(25)
                     $ scene_manager.update_actor(loser, emotion = "orgasm")
@@ -247,6 +252,7 @@ label cat_fight_crisis_enhanced_label():
                     $ loser.change_stats(slut_core = 3, slut_temp = 5, happiness = 5, obedience = -5)
                     $ scene_manager.update_actor(loser, position = "sitting", emotion = "default")
                     "[winner.title] holds [loser.title] up a little longer, then lets her go. [loser.title] stumbles forward on wobbly legs until she finds a chair to collapse into. She pants loudly."
+                    $ mc.change_locked_clarity(20)
                     $ winner.change_stats(slut_core = 2, slut_temp = 2, obedience = -5)
                     winner "There we go, that should have sorted her out. I'm sorry about that [winner.mc_title]."
                     mc.name "You did what you had to, I understand."
@@ -294,6 +300,7 @@ label cat_fight_crisis_enhanced_label():
             $ scene_manager.update_actor(person_one, position = "blowjob")
             $ scene_manager.update_actor(person_two, position = "blowjob")
             "You unzip your pants and pull your cock out."
+            $ mc.change_locked_clarity(30)
             mc.name "Alright, I want you two to cooperate, FOR ONCE, and team up on this."
             "Both girls seem relieved. While unorthodox, you are pretty sure their slutty natures will come out and they'll bond while they blow you."
             call start_threesome(person_one, person_two, start_position = threesome_double_blowjob, position_locked = True) from _team_building_threesome_1
