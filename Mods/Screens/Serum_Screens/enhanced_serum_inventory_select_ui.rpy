@@ -31,8 +31,8 @@ init 2:
         if the_person:
             frame:
                 background None
-                anchor [1.0, 1.0]
-                align [0.9,0.9]
+                anchor [0.5, 0.5]
+                align [0.5,0.2]
                 use serum_tolerance_indicator(the_person)
 
         frame:
