@@ -25,7 +25,7 @@ init 2:
                 has vbox
                 label "ZipCache memory: " + str(__builtin__.round(get_size(zip_manager) / 1024, 2)) + " Kb" xminimum 400
                 label "ZipCache items: " + str(zip_manager.size())
-                label "Last character load time: " + str(last_load_time)
+                label "Last character load time: " + str(__builtin__.round(last_load_time, 10))
                 label ""
                 label get_debug_log()
 

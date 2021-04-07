@@ -1202,7 +1202,7 @@ init -1 python:
         character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
         global last_load_time
-        last_load_time = __builtin__.round(time.time() - load_time, 8)
+        last_load_time = time.time() - load_time
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
