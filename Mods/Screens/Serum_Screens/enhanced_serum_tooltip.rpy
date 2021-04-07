@@ -155,3 +155,5 @@ init 2:
                                         background "#930000"
                                         xsize 480
                                         text "[side_effect.negative_slug]" style "serum_text_style_traits"
+
+                transclude #If you hand the serum tooltip a child it's added to the vBox
