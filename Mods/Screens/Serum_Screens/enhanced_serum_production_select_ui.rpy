@@ -101,7 +101,7 @@ init 2:
 
                                                     action [
                                                     ToggleScreenVariable("line_selected", count, None),
-                                                    ToggleScreen("serum_tooltip", None, the_serum, 0.94, 0.072)
+                                                    ToggleScreen("serum_tooltip", None, the_serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                     ]
 
                                                     # hovered [
@@ -292,7 +292,7 @@ init 2:
                                                 SetScreenVariable("line_selected",None)
                                                 ]
                                                 hovered [
-                                                Show("serum_tooltip",None,a_serum,given_align = (0.97,0.12), given_anchor = (1.0,0.0))
+                                                Show("serum_tooltip",None,a_serum,given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                 ]
                                                 style "textbutton_style"
                                                 text_style "serum_text_style"
