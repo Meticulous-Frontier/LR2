@@ -25,6 +25,19 @@ init 2 python:
             renpy.start_predict(self.display_image)
             return
 
+        def preload(self):
+            if not self.display_func:
+                return
+
+            # pre-load clothing items
+            person = self.return_value
+            for clothing in person.outfit.generate_clothing_list(person.body_type, person.tits, person.idle_pose):
+                if hasattr(clothing, "body_dependant"):
+                    file = clothing.generate_raw_image(person.body_type, person.tits, person.idle_pose)
+                    if file:
+                        file.load()
+            return
+
         def clear(self):
             if self.display_image:
                 renpy.stop_predict(self.display_image)
@@ -89,8 +102,8 @@ init 2 python:
                 mi.display_scale = scale_person(item.height)
                 if draw_person_previews:
                     mi.display_func = item.build_person_displayable
-                # if not renpy.mobile: # don't load person on mobile
-                #    renpy.invoke_in_thread(mi.load)
+                if not renpy.mobile: # don't load person on mobile
+                    renpy.invoke_in_thread(mi.preload)
 
             if isinstance(item, Action):
                 mi.title = ""
