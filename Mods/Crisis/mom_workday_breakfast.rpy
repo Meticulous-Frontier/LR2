@@ -448,6 +448,7 @@ label mom_breakfast_action_mom_and_lily_label():
         $ scene_manager.add_actor(the_person, position = "missionary", display_transform = Threesome_doggy_deluxe_girl_one_transform)
         $ scene_manager.add_actor(lily, position = "doggy", display_transform = Threesome_doggy_deluxe_girl_two_transform)
 
+        $ mc.change_locked_clarity(20)
         the_person "Oh yes baby, keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)
         "While licking your mom, your sister is furiously rubbing her pussy."

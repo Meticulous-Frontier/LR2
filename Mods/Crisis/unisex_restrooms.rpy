@@ -318,6 +318,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     "With one hand on her back and one firmly on her hip, you slowly bend [the_person.possessive_title] over her desk."
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
     $ the_person.change_slut_temp(5)
+    $ mc.change_locked_clarity(10)
     the_person "Oh god oh god, its happening..."
     $ the_person.change_arousal(30)
     if the_person.outfit.vagina_available():
@@ -327,6 +328,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
         $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
         "Once bare, you run your hand down along her ass crack to her cunt. You can feel it is moist and ready for you already!"
     $ the_person.break_taboo("bare_pussy")
+    $ mc.change_locked_clarity(20)
     "You pull your cock out now, then put your hands on her hips. You position your cock at her needy slit."
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -439,6 +441,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     else:
         "You are just getting ready to pull back you feel a soft hand grasp your member and start to stroke it."
 
+    $ mc.change_locked_clarity(20)
     "You give an appreciative moan as the soft hand starts to slowly work your cock."
     anon_char "Ohhh... its so big..."
     "The hand is warm and soft as it slides up and down your cock. Suddenly you feel it leave you, and you can her the sound of her spitting."
@@ -448,6 +451,8 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "It feels TOO good. You feel yourself start to pant and your balls tighten."
     anon_char "Oh!"
     "The hand never stops stroking you as you start to blow your load. Thank god whoever it is knows how to finish the job!"
+    $ the_person.cum_on_face(add_to_record = False)
+    $ ClimaxController.manual_clarity_release()
     "After you finishes, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
@@ -470,6 +475,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     else:
         "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what she's doing."
 
+    $ mc.change_locked_clarity(10)
     if the_person.has_taboo("sucking_cock"):
         anon_char "Would you mind, if I gave you a blowjob?"
         mc.name "Not at all, go for it."
@@ -479,6 +485,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
         "Slowly, you feel a warm, wet tongue circling around the tip of your cock, licking the pre-cum from the tip."
 
     anon_char "Mmmmmm"
+    $ mc.change_locked_clarity(20)
     "A moan rumbles around your dick as the girl on the other side of the wall opens her mouth and slides her mouth down your aching hard on."
     "One of your employees is on the other side. The warm, wet suction of her lips and tongue feels great."
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
@@ -488,6 +495,8 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "Her technique is amazing, you feel yourself getting ready to cum already!"
     "With a moan, you feel yourself pushed too far. It feels like your cock explodes as you begin to dump your load into her gullet."
     anon_char "Oh! Ummmfff.... mmmmmmmm..."
+    $ the_person.cum_in_mouth(add_to_record = False)
+    $ ClimaxController.manual_clarity_release("mouth", the_person = the_person)
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
@@ -512,6 +521,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     else:
         "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what's they are doing."
 
+    $ mc.change_locked_clarity(10)
     if the_person.has_taboo(["condomless_sex", "vaginal_sex"]):
         anon_char "I really need to feel your cock, but I didn't bring any condoms, do you mind?"
         mc.name "I don't mind, show me what you can do."
@@ -522,6 +532,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "It feels like she is taking you in her pussy! You let out a moan of appreciation."
 
     anon_char "Mmmm, its so good when it goes in."
+    $ mc.change_locked_clarity(30)
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
     "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
     anon_char "Yes! Mmm that feels good."
@@ -534,6 +545,8 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
     "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
     anon_char "Yes. Yes! Oh fuck yes!"
+    $ the_person.cum_in_vagina(add_to_record = False)
+    $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
     "You pull out. You grab some toilet paper and wipe your cock off."
 
@@ -556,6 +569,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
         anon_char "Oh! So hard! I know somewhere I can put that..."
         "Sounds like your bathroom stall neighbor likes what she sees."
 
+    $ mc.change_locked_clarity(10)
     "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what's they are doing."
     "You here the sound of... was that spitting? Suddenly the hand stroking you is significantly wetter."
     "Similar sounds continue. Whoever it is, she seems to be lubing you up really good with her spit!"
@@ -567,6 +581,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
         $ the_person.break_taboo("condomless_sex", add_to_log = False)
         $ the_person.break_taboo("anal_sex", add_to_log = False)
 
+    $ mc.change_locked_clarity(30)
     "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, smooth, fleshy vice slowly swallowing your cock."
     "Shit! It feels like she is sticking you in her ass! She gets about halfway then stops for a moment."
     anon_char "Oh god it's so thick..."
@@ -581,6 +596,8 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "You feel yourself getting ready to nut. The urge to bury your cum deep in whoever this girl is ass is too strong."
     "Her ass is quivering all around you. Your penetration is making her finish too!"
     anon_char "Yes! Fuck my ass! YES!"
+    $ the_person.cum_in_ass(add_to_record = False)
+    $ ClimaxController.manual_clarity_release("anal", the_person = the_person)
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
     "You pull out. You grab some toilet paper and wipe your cock off."
 
@@ -601,6 +618,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
 
+    $ mc.change_locked_clarity(10)
     "You feel a soft hand begin to stroke you. Her delicate fingers feel great wrapped around your erection."
     "She gives you a few good strokes, but then she stops."
     anon_char "Sir, I want to feel you... would you please come over into my stall?"
@@ -613,6 +631,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             if not the_person.outfit.vagina_available():
                 "You grab her ass for a bit, then start to peel off her clothes."
                 $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = True, exclude_upper = True)
+            $ mc.change_locked_clarity(20)
             "You pin her to the stall wall. She lifts up one leg to give you better access and grabs your cock in her hand."
             $ scene_manager.update_actor(the_person, position = "against_wall")
             $ the_person.break_taboo("condomless_sex")
@@ -635,6 +654,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
                 $ the_person.break_taboo("condomless_sex", add_to_log = False)
                 $ the_person.break_taboo("vaginal_sex", add_to_log = False)
 
+            $ mc.change_locked_clarity(20)
             "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
             "It feels like she is taking you in her pussy! You let out a moan of appreciation."
             anon_char "Mmmm, its so good when it goes in."
@@ -650,13 +670,15 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
             "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
             anon_char "Yes. Yes! Oh fuck yes!"
+
+            $ the_person.cum_in_vagina(add_to_record = False)
+            $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
             "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
             "You pull out. You grab some toilet paper and wipe your cock off."
 
             # the person is happy and a sluttier (don't log as to preserve anonymity)
             $ the_person.change_slut_temp(3, add_to_log = False)
             $ the_person.change_happiness(5, add_to_log = False)
-
 
     $ del anon_char
     return

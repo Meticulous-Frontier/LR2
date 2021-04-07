@@ -84,7 +84,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.strip_actor_outfit(mom, top_layer_first = True, exclude_lower = True, exclude_feet = True, delay = 1)
         "Now [mom.possessive_title] is taking her top off?"
         mom "I don't know, I just feel like they are such a distraction sometimes..."
-        "[mom.title] is holding her own tits, a bit self conciously."
+        "[mom.title] is holding her own tits, a bit self-consciously."
         lily "Don't say that, they are so beautiful..."
         "[lily.title] reaches over and replaces [mom.possessive_title]'s hands. She hefts her tits in her hands and starts to tweak them a bit."
         lily "See? They're so heavy and soft..."

@@ -29,6 +29,7 @@ label girlfriend_service_label():
     if the_person.get_opinion_score("public sex") > 0:
         the_person "There are so many girls here. Just wanted to make sure you aren't getting to tempted."
         "She starts to rub your crotch through your pants."
+        $ mc.change_locked_clarity(10)
         the_person "I was thinking, I could take care of you... right here..."
         if mc.location.get_person_count() > 1 or (mc.location.get_person_count() == 1 and the_person != mc.location.people[0]):
             "You glance around. Some of your employees are already starting to notice what is going on."

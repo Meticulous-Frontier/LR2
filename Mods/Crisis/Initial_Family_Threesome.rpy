@@ -29,6 +29,7 @@ label SB_fetish_vaginal_family_threesome_label():
     $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, guarantee_output = True))
     $ mom.apply_outfit(mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness, guarantee_output = True))
     $ scene_manager.add_actor(the_person)
+    $ mc.change_locked_clarity(10)
     the_person "So... I was wondering... is it okay if I sleep in here with you tonight?"
     menu:
         "Not tonight":
@@ -45,6 +46,7 @@ label SB_fetish_vaginal_family_threesome_label():
             the_person "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
             "[the_person.possessive_title] winks at you before stripping down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_person, temp_sluttiness_boost = 50)
+            $ mc.change_locked_clarity(20)
             mc.name "Damn [the_person.title], you are really getting good at that..."
             $ scene_manager.update_actor(the_person, position="kneeling1", display_transform = character_center_flipped)
             "She begins to crawl up your bed towards you."
@@ -63,6 +65,7 @@ label SB_fetish_vaginal_family_threesome_label():
         mc.name "[mom.title]. Having you here can only make things even better."
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(mom, temp_sluttiness_boost = 50)
         $ scene_manager.update_actor(mom, position = "sitting")
+        $ mc.change_locked_clarity(20)
         "[mom.title] sits on the edge of your bed."
         the_person "So... how are we doing it tonight?"
         "They both look to you."
@@ -104,6 +107,7 @@ label SB_fetish_vaginal_family_threesome_label():
         "[the_person.possessive_title] looks back at you, still a little unsure of herself. You hold up your hands and beckon her."
         $ scene_manager.update_actor(the_person, position = "cowgirl")
         "You draw her into your arms. She melts into you giving you a kiss."
+        $ mc.change_locked_clarity(10)
         "Your lips lock together in a passionate kiss. [the_person.possessive_title]'s body melts into yours in surrender, even as [mom.possessive_title] looks on."
         mom "Oh my... [mom.mc_title]... [the_person.name]..."
         "You move your hands down [the_person.possessive_title]'s waist and around to her butt. You give both cheeks a squeeze."
@@ -114,6 +118,7 @@ label SB_fetish_vaginal_family_threesome_label():
             "You glance over at [mom.possessive_title]. She is watching you and [the_person.possessive_title] intently and has one hand between her legs, stroking the outer lips of her pussy."
         else:
             "You glance over and see that [mom.possessive_title] has her hand down her clothes, playing with herself as she watches."
+        $ mc.change_locked_clarity(10)
         $ mom.change_arousal(10)
         "This is going better than you expected! You get a little braver."
         mc.name "Hey [mom.title]... why don't you join us? There's no reason we can't all have a little family fun together..."
@@ -123,6 +128,7 @@ label SB_fetish_vaginal_family_threesome_label():
         "[mom.title] hesitates for a second, but then relents."
         mom "That sounds like fun... Okay! I'll do it!"
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(mom, temp_sluttiness_boost = 50)
+        $ mc.change_locked_clarity(10)
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
         "Wow, you just had sex with [the_person.possessive_title] and [mom.possessive_title]! You can't believe how lucky you are."

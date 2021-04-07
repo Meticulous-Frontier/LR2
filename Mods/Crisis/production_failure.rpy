@@ -74,6 +74,7 @@ label production_failure_action_label:
                 "[the_person.name] looks around desperately trying to figure out the source of her sudden arousal. When she sees you she immediately loses control."
                 the_person "Please [the_person.mc_title], I need you.... please help me... "
                 $ the_person.break_taboo("touching_penis")
+                $ mc.change_locked_clarity(20)
                 "[the_person.possessive_title] shoves her hand down your pants and begs for your cock."
 
                 call fuck_person(the_person, private = False, skip_intro = True) from _call_fuck_person_production_failure_action_label
