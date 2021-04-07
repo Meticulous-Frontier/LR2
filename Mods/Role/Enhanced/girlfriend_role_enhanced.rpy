@@ -330,6 +330,7 @@ label girlfriend_wakeup_spooning_label(the_person):
         "Cum inside":
             $ the_person.cum_in_vagina()
             $ the_person.draw_person( position = "back_peek")
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
             "You grab her hip and shove your cock deep and hold it there, cumming deep inside her. She moans and gasps with every spurt."
             $ the_person.call_dialogue("cum_vagina")
             "Satisfied, you slowly pull out of her."
@@ -337,6 +338,7 @@ label girlfriend_wakeup_spooning_label(the_person):
         "Pull out":
             $ the_person.cum_on_ass()
             $ the_person.draw_person( position = "back_peek")
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
             "You pull out at the last second. Large, thick ropes of cum rocket out of your cock, coating her ass."
             the_person "Oh my god... its so warm!"
             "When you finish you lay back, admiring your painting skills."

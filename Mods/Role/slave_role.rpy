@@ -248,6 +248,7 @@ label slave_alarm_clock_label(the_person):
                                     "Seeing [the_person.possessive_title] presenting herself for you pushes you past the point of no return."
                                     $ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier = "blowjob")
+                                    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
                                     "You slide forward a little, place the tip of your cock on her bottom lip, and start to fire your load into her mouth."
                                     "[the_person.possessive_title] stays perfectly still while you cum. When you're done you sit back and sigh."
                                     $ the_person.call_dialogue("cum_mouth")
@@ -266,6 +267,7 @@ label slave_alarm_clock_label(the_person):
                                     #TODO: have more clothing aware stuff here
                                     $ the_person.call_dialogue("cum_face")
                                     $ the_person.draw_person()
+                                    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                                     $ the_person.change_stats(obedience = 3, slut_temp = 3)
 
                                     # TODO: She should seem a little shocked, but otherwise okay with how things turned out
@@ -312,6 +314,8 @@ label slave_alarm_clock_label(the_person):
                 "She nods and leans over, stroking your cock faster and faster as she places the tip just inside her mouth."
                 "The soft touch of her lips pushes you over the edge. You gasp and climax, shooting your hot load into [the_person.possessive_title]'s waiting mouth."
                 $ the_person.cum_in_mouth()
+                $ the_person.draw_person(position = "blowjob")
+                $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
                 "[the_person.title] pulls back off your cock slowly. She spits your cum out into her hand and straightens up."
                 $ the_person.call_dialogue("cum_mouth")
 
@@ -351,6 +355,7 @@ label slave_alarm_clock_label(the_person):
         "You arch your back and grunt as you climax, firing a shot of cum into [the_person.possessive_title]'s mouth."
         $ the_person.cum_in_mouth()
         $ the_person.draw_person(position = "blowjob")
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
         "She pulls back until the tip of your cock is just inside her lips and holds there, collecting each new spurt of semen until you're completely spent."
         "When you're done she pulls up and off, keeping her lips tight to avoid spilling any onto you."
         menu:

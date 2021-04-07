@@ -438,7 +438,7 @@ label erica_hookup_accept(the_person):
                     $ the_person.change_happiness(2)
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person( position = "standing_doggy") # draw cum
-                    $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
+                    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
 
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                     "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
@@ -447,7 +447,7 @@ label erica_hookup_accept(the_person):
                     mc.name "I can't pull out, even for a second!"
 
         $ the_person.cum_in_vagina()
-        $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
         "You bottom out and cum, dumping your load into the condom."
         "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
         if the_person.arousal < 100:
@@ -462,7 +462,7 @@ label erica_hookup_accept(the_person):
     else: #You went in raw
         $ the_person.cum_in_vagina()
         $ the_person.draw_person( position = "standing_doggy") # draw cum
-        $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
         "You push yourself in as deep as you can go. [the_person.possessive_title] moans as you fill her completely."
         "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
@@ -513,7 +513,7 @@ label erica_hookup_accept(the_person):
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
                     $ the_person.cum_in_ass()
                     $ the_person.draw_person( position = "standing_doggy") # draw cum
-                    $ ClimaxController.manual_clarity_release("anal", the_person = the_person)
+                    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
 
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person "Wow... okay... I think I can stand now..."
@@ -537,7 +537,7 @@ label erica_hookup_accept(the_person):
         $ the_person.change_slut_temp(1)
         $ the_person.cum_in_vagina()
         $ the_person.draw_person( position = "standing_doggy") # draw cum
-        $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
         return
@@ -551,7 +551,7 @@ label erica_hookup_accept(the_person):
                 the_person "Oh! It's so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
-                $ ClimaxController.manual_clarity_release("body", the_person = the_person)
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
 
                 "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
@@ -563,7 +563,7 @@ label erica_hookup_accept(the_person):
                 $ the_person.change_slut_temp(1)
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy")
-                $ ClimaxController.manual_clarity_release("pussy", the_person = the_person)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return
@@ -573,7 +573,7 @@ label erica_hookup_accept(the_person):
         "You stroke your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
-        $ ClimaxController.manual_clarity_release("body", the_person = the_person)
+        $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
         "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
     return

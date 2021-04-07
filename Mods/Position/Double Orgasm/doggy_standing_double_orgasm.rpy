@@ -13,6 +13,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             if mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans when she feels you filling the condom deep inside of her."
                 $ the_girl.call_dialogue("cum_condom")
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "Her cunt quivers as she joins you in orgasm. Her body goes rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
                 "You wait until her orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
                 if (the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50) or the_girl.has_cum_fetish():
@@ -28,10 +29,11 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
 
                 if the_girl.get_opinion_score("creampies") > 0 or the_girl.wants_creampie():
-                    the_girl  "Yes! Fill me with your cum!"
+                    the_girl "Yes! Fill me with your cum!"
                 "You feel her pussy convulsing around your dick as she also starts to orgasm."
                 $ the_girl.cum_in_vagina()
                 $ SB_doggy_standing.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 if the_girl.has_cum_fetish() or the_girl.has_breeding_fetish():
                     "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
@@ -65,6 +67,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                  the_girl "Yes! Paint me with your sticky cum!"
             $ the_girl.cum_on_ass()
             $ SB_doggy_standing.redraw_scene(the_girl)
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly as her orgasm is enhanced by your bodyshot."
@@ -88,6 +91,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "Your orgasm hits hard. Your first jet sprays across her face. Her face is orgasmic bliss as she finishes at the same time."
                 $ the_girl.cum_on_face()
                 $ the_girl.draw_person(position = "kneeling1")
+                $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                 if the_girl.has_cum_fetish():
                     "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
                     "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
@@ -99,6 +103,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
                 $ the_girl.cum_on_face()
                 $ the_girl.draw_person(position = "kneeling1")
+                $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
                 the_girl "Oh god... it feels so good on my skin..."
             elif the_girl.sluttiness > 60:
@@ -106,12 +111,14 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
                 $ the_girl.cum_on_face()
                 $ the_girl.draw_person(position = "kneeling1")
+                $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
             else:
                 "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
                 "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
                 $ the_girl.cum_on_face()
                 $ the_girl.draw_person(position = "kneeling1")
+                $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
             "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")

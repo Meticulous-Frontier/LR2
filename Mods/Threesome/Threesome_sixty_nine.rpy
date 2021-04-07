@@ -234,6 +234,7 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
                 "Your cock bursting deep inside her triggers another orgasm for [the_girl_1.title]. She is moaning non stop."
                 $ the_girl_1.change_happiness(5)
             $ the_girl_1.cum_in_vagina()
+            $ scene_manager.draw_scene()
             if the_girl_2.has_cum_fetish() or the_girl_2.has_cum_fetish():
                 the_girl_2 "Hey! No fair! I want some of that!"
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."

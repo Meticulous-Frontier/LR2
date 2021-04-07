@@ -155,6 +155,7 @@ label aunt_drunk_cuddle_label():
                 "[the_person.possessive_title]'s soothing encouragement pushes you over the edge. You gasp and moan as you dump your load on her ass."
                 $ the_person.cum_on_ass()
                 $ scene_manager.update_actor(the_person, position = "walking_away")
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                 "Your sticky cum coats her ass, but she doesn't seem to mind."
                 $ the_person.change_slut_core(5)
                 the_person "Oh [the_person.mc_title]... I didn't know anyone... would feel that way about me..."
@@ -176,6 +177,7 @@ label aunt_drunk_cuddle_label():
                 "[the_person.possessive_title]'s encouragement pushes you over the edge. You gasp and moan as you dump your load on her ass."
                 $ the_person.cum_on_ass()
                 $ scene_manager.update_actor(the_person, position = "walking_away")
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                 "Your sticky cum coats her ass. Her body goes rigid as she has an orgasm of her own."
                 $ the_person.have_orgasm()
                 $ the_person.change_slut_core(5)

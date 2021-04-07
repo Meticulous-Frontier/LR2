@@ -25,6 +25,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
             the_girl  "Yes! Fill me with your cum!"
         $ the_girl.cum_in_vagina()
         $ bent_over_breeding.redraw_scene(the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
         if the_girl.has_breeding_fetish():
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."
             the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."

@@ -15,6 +15,7 @@ label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("cum_vagina")
     $ the_girl.cum_in_vagina()
     $ breeding_missionary.redraw_scene(the_girl)
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     if the_girl.has_breeding_fetish():
         "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
         the_girl "Yes! Paint my fertile womb white with your cum!"

@@ -185,6 +185,7 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "Oh my god..."
     $ the_person.cum_on_stomach()
     $ the_person.draw_person(position = "kneeling1")
+    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
     "Taking what she can, [the_person.possessive_title] goes further, rubbing your cum onto her belly."
     $ the_person.change_arousal(20)
     "[the_person.title] is breathing rapidly now. When she looks up at you, her pupils are actually a little dilated. She is REALLY getting off on this!"
@@ -303,6 +304,7 @@ label cum_fetish_family_intro_label(the_person):
     "You stroke yourself as you pump your load all over her ass, coating it in your cum."
     $ the_person.cum_on_ass()
     $ the_person.draw_person(position = "doggy")
+    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
     $ mc.reset_arousal()
     the_person "Oh fuck! It feels so good! Cover me [the_person.mc_title]!"
     "You unload everything you have. The ass in front of you, covered in sperm, is a work of art."
@@ -436,6 +438,7 @@ label cum_fetish_mom_intro_label():
             "[the_person.possessive_title] is moaning uncontrollably around your twitching cock."
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob")
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
             $ add_cum_fetish(the_person)
             "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
 
@@ -447,6 +450,7 @@ label cum_fetish_mom_intro_label():
             "[the_person.possessive_title] moans and looks you in the eyes. She pulls off your cock and strokes you eagerly, waiting for the first splash across her face."
             $ the_person.cum_on_face()
             $ the_person.draw_person(position = "kneeling1")
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
             "You erupt in orgasm and shoot your load across her glowing face. Her pupils dilate as her cum addicted brain registers the presence of your cum on her skin."
             "[the_person.possessive_title] moans uncontrollably with every spurt"
             $ add_cum_fetish(the_person)
@@ -628,6 +632,7 @@ label cum_fetish_rebecca_intro_label(the_person):
     $ the_person.have_orgasm()
     "[the_person.possessive_title]'s pussy spasming around you and her cries drive you over the edge. You pull out at the last second."
     $ the_person.cum_on_ass()
+    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
     $ scene_manager.update_actor(the_person, position = "back_peek")
     "Your cum erupts in long ropes, covering her ass and lower back. One particularly intense pulse erupts, going up her back and actually hitting the couch cushion next to her."
     "She hears it hit the cushion and in her orgasm induced bliss she turns and starts licking your cum off the couch. When she finishes, she sighs."

@@ -11,6 +11,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
         the_girl "Do it! I want you to cum with me!"
     menu:
         "Cum inside of her":
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
             "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She is moaning loudly as she cums together with you at the same time."
             if mc.condom:
                 $ the_girl.call_dialogue("cum_condom")
@@ -48,6 +49,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ missionary.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
                     the_girl "Oh fuck oh yes!!!"
@@ -59,6 +61,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
         "Cum on her face":
             $ the_girl.cum_on_face()
             $ missionary.redraw_scene(the_girl)
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             if mc.condom:
                 "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s face."
             else:

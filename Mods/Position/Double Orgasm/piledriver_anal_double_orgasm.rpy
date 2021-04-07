@@ -24,6 +24,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
                 "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."
                 $ the_girl.cum_in_ass()
                 $ piledriver_anal.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 if the_girl.get_opinion_score("anal creampies") > 0:
                     # If she's into both...
                     $ the_girl.discover_opinion("anal creampies")
@@ -37,6 +38,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
         "Cum on her face":
             $ the_girl.cum_on_face()
             $ missionary.redraw_scene(the_girl)
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             if mc.condom:
                 "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s face."
             else:

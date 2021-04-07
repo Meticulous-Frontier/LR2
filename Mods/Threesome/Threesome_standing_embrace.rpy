@@ -132,6 +132,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
                 the_girl_2 "I love it when you shoot your seed so deep!"
             $ the_girl_2.cum_in_vagina()
             $ scene_manager.draw_scene()
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl_2)
             the_girl_1 "Damn that was hot... is it my turn next?"
 
         "Cum on her ass":
@@ -144,6 +145,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
                  the_girl_2 "Yes! Paint me with your sticky cum!"
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl_2)
             if the_girl_2.get_opinion_score("showing her ass") > 0:
                 "[the_girl_2.possessive_title] bends over and presents her cum covered ass to you."
                 "She gives her hips a few enticing wiggles as your cum starts to drip down the back of her legs."

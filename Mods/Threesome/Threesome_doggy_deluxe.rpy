@@ -248,6 +248,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
                     $ the_girl_2.cum_in_vagina()
                     $ scene_manager.draw_scene()
+                    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl_2)
                     "Around the base of your cock you see the remains of a broken condom. You just dumped your load in [the_girl_2.title]!"
                     mc.name "Hey, sorry, but the condom broke..."
                     #TODO a variety of responses
@@ -263,6 +264,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl_2)
                 if the_girl_2.has_cum_fetish():
                     "[the_girl_2.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     "She revels in having her cum fetish fulfilled."
@@ -276,6 +278,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                 "You pull out of [the_girl_2.title] at the last moment. She wiggles her ass for you as you cover her with your cum."
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl_2)
             if the_girl_2.has_cum_fetish():
                 "[the_girl_2.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
                 "[the_girl_2.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
@@ -384,6 +387,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
                     $ the_girl_2.cum_in_ass()
                     $ scene_manager.draw_scene()
+                    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl_2)
                     "Around the base of your cock you see the remains of a broken condom. You just dumped your load in [the_girl_2.title]'s ass!"
                     mc.name "Hey, sorry, but the condom broke..."
                     #TODO a variety of responses
@@ -396,6 +400,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
             "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans at the sensations but never stops licking [the_girl_1.title]'s cunt."
             $ the_girl_2.cum_in_ass()
             $ scene_manager.draw_scene()
+            $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl_2)
             "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
         "Cum on her ass":
             if mc.condom:
@@ -405,6 +410,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
                 "You pull out of [the_girl_2.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl_2)
             "You sit back and sigh contentedly, enjoying the sight of [the_girl_2.possessive_title]'s ass covered in your semen."
 
     return

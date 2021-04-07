@@ -445,6 +445,7 @@ label ophelia_make_blowjob_pics_label():
     $ the_person.cum_on_face()
     $ the_person.change_arousal(20)
     $ the_person.draw_person(position = "blowjob")
+    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
     "Spurt after spurt covers [the_person.possessive_title]'s face. You don't think you've ever cum so hard or so fast from a blowjob."
     the_person "Mmm, I forgot to tell you... I learned in beauty school that semen is great for your skin! Mmm and its nice and warm too..."
     $ the_person.draw_person()
