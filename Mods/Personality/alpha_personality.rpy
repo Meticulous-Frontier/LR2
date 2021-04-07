@@ -764,6 +764,77 @@ label alpha_flirt_response_text(the_person):
             the_person "We can chat for a while, what would you like to talk about?"
     return
 
+label alpha_condom_demand(the_person):
+    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+        the_person "Put some rubber on that that bad boy up, so we can get going."
+        if the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            if the_person.on_birth_control:
+                the_person "Although I have an IUD, My [so_title] doesn't need any surprises and unwanted consequences."
+                $ the_person.update_birth_control_knowledge()
+            else:
+                the_person "And I don't want to tell my [so_title] that I'm pregnant."
+        else:
+            the_person "I don't want you to knock me up, this is just for fun!"
+    else:
+        the_person "You have a condom with you, if not, I have one for you."
+        the_person "After you put it on, you can slip that monster right in."
+    return
+
+label alpha_condom_ask(the_person):
+    if the_person.on_birth_control:
+        the_person "I have an IUD, so we don't need a condom."
+        $ the_person.update_birth_control_knowledge()
+    elif the_person.get_opinion_score("creampies") > 0:
+        if the_person.wants_creampie():
+            the_person "You don't need a condom, so you can keep fucking me as you cum..."
+        else:
+            the_person "You don't need a condom, so you can cover me with that cum..."
+        $ the_person.discover_opinion("creampies")
+    else:
+        the_person "You could wear a condom, but I prefer if you..."
+        the_person "just do it without and be careful."
+    return
+
+label alpha_condom_bareback_ask(the_person):
+    if the_person.get_opinion_score("creampies") > 0:
+        if the_person.on_birth_control:
+            the_person "Don't bother with a condom [the_person.mc_title]. I have long term protection."
+            if the_person.wants_creampie():
+                the_person "You can cum right inside of me, as often as I need."
+            else:
+                the_person "And I want you to cover me with your cum."
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "Don't bother with a condom [the_person.mc_title], we don't need it."
+            if the_person.wants_creampie():
+                the_person "I want you to fuck me unprotected and cum inside me, like nature intended."
+            else:
+                the_person "I want you to fuck me hard and cover me with that cum."
+        $ the_person.discover_opinion("creampies")
+    else:
+        the_person "You don't need to bother with a condom [the_person.mc_title]."
+        the_person "It feels so much better without one. Come on, get going."
+    return
+
+label alpha_condom_bareback_demand(the_person):
+    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
+        if the_person.on_birth_control:
+            the_person "You don't need that, get that cock over here."
+            the_person "Come on [the_person.mc_title], I want you to cum inside me!"
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "You don't need to do that, I want to feel you and your cum inside me."
+            the_person "I don't care if you get me pregnant [the_person.mc_title], just get over here and fuck me already!"
+    else:
+        if the_person.on_birth_control:
+            the_person "You don't need that [the_person.mc_title], I am protected."
+            the_person "So hurry up and fuck me!"
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "Don't waste my time with that. I don't care about the risks, I just want you to fuck me!"
+    return
+
 label alpha_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
