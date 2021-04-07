@@ -323,6 +323,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
                 "You hold her in place as you cum into her tight ass. She squirms a little bit but she also gasps a bit."
                 $ the_girl.cum_in_ass()
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto you chest."
                 the_person "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
             "Beg her to finish inside":
@@ -338,6 +339,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
                     "You finally erupt. She gasps as she feels the heat of it in her body."
                     $ the_girl.cum_in_ass()
                     $ SB_anal_cowgirl.redraw_scene(the_girl)
+                    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                     "As soon as you finish she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto you chest."
                 else:
                     the_person "I love to hear you beg, but not a chance."
@@ -358,6 +360,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
         $ the_girl.change_obedience(3)
         $ the_girl.cum_in_ass()
         $ SB_anal_cowgirl.redraw_scene(the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         "You give a few half-hearted pumps when you're done, then tap [the_girl.possessive_title] on the ass. She slides off of your dick and collapses beside you."
     elif the_goal = "body shot":
         "[the_person.possessive_title] pulls off."
@@ -368,6 +371,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
         "You tense up and cum, shooting your thick load up and onto [the_girl.possessive_title]'s stomach. She keeps grinding against your cock until you are completely spent."
         $ the_girl.cum_on_stomach()
         $ SB_anal_cowgirl.redraw_scene(the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
         "She rolls off and lies next to you on the [the_object.name]."
     else:
         $ SB_anal_cowgirl.call_default_outro(the_girl, the_location, the_object)
