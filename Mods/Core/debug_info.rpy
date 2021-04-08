@@ -58,13 +58,16 @@ init 2 python:
         # Important mark as seen *before* entering recursion to gracefully handle
         # self-referential objects
         seen.add(id(obj))
-        if isinstance(obj, collections.Mapping):
-            size += sum([get_size(v, seen) for v in obj.values()])
-            size += sum([get_size(k, seen) for k in obj.keys()])
-        elif hasattr(obj, '__dict__'):  # sum all object attributes
-            size += sum([get_size(getattr(obj, name), seen) for name in obj.__dict__.keys()])
-        elif hasattr(obj, '__iter__') and not isinstance(obj, (str, bytes, bytearray)):
-            size += sum([get_size(i, seen) for i in obj])
-        elif isinstance(obj, (str, bytes, bytearray)):
-            size += len(obj)
+        try:
+            if isinstance(obj, collections.Mapping):
+                size += sum([get_size(v, seen) for v in obj.values()])
+                size += sum([get_size(k, seen) for k in obj.keys()])
+            elif hasattr(obj, '__dict__'):  # sum all object attributes
+                size += sum([get_size(getattr(obj, name), seen) for name in obj.__dict__.keys()])
+            elif hasattr(obj, '__iter__') and not isinstance(obj, (str, bytes, bytearray)):
+                size += sum([get_size(i, seen) for i in obj])
+            elif isinstance(obj, (str, bytes, bytearray)):
+                size += len(obj)
+        except:
+            pass
         return size
