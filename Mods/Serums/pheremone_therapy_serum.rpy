@@ -1,11 +1,11 @@
 # Pheremone Therapy Serum by Starbuck
 
 init -1 python:
-    def pheremone_therapy_on_apply(the_person, add_to_log):
+    def pheremone_therapy_on_apply(the_person, the_serum, add_to_log):
         the_person.change_slut_core(15, add_to_log, fire_event = False)
         the_person.change_slut_temp(15, add_to_log)
 
-    def pheremone_therapy_on_remove(the_person, add_to_log):
+    def pheremone_therapy_on_remove(the_person, the_serum, add_to_log):
         the_person.change_slut_core(-15, add_to_log, fire_event = False)
         the_person.change_slut_temp(-15, add_to_log)
 

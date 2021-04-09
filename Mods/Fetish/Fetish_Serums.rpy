@@ -215,7 +215,7 @@ init -1 python:
             mc.log_event(person.title + " sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_fc")) + "%", "float_text_blue")
         return
 
-    def fetish_basic_function_on_turn(person, add_to_log):
+    def fetish_basic_function_on_turn(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_f", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
@@ -236,16 +236,16 @@ init -1 python:
             mc.log_event(person.title + " sexual proclivity bots no longer effective at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
         return
 
-    def fetish_anal_function_on_apply(person, add_to_log):
+    def fetish_anal_function_on_apply(person, the_serum, add_to_log):
         person.event_triggers_dict["nano_bots_a"] = False
         return
 
-    def fetish_anal_function_on_remove(person, add_to_log):
+    def fetish_anal_function_on_remove(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_a", False) == False: # no trigger, report progress
             mc.log_event(person.title + " anal proclivity Bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ac")) + "%", "float_text_blue")
         return
 
-    def fetish_anal_function_on_turn(person, add_to_log):
+    def fetish_anal_function_on_turn(person, the_serum add_to_log):
         if person.event_triggers_dict.get("nano_bots_a", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
@@ -278,16 +278,16 @@ init -1 python:
                         pass
         return
 
-    def fetish_breeding_function_on_apply(person, add_to_log):
+    def fetish_breeding_function_on_apply(person, the_serum, add_to_log):
         person.event_triggers_dict["nano_bots_b"] = False
         return
 
-    def fetish_breeding_function_on_remove(person, add_to_log):
+    def fetish_breeding_function_on_remove(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_b", False) == False: # no trigger, report progress
             mc.log_event(person.title + " reproduction proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_bc")) + "%", "float_text_blue")
         return
 
-    def fetish_breeding_function_on_turn(person, add_to_log):
+    def fetish_breeding_function_on_turn(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_b", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
@@ -329,16 +329,16 @@ init -1 python:
                         pass
         return
 
-    def fetish_cum_function_on_apply(person, add_to_log):
+    def fetish_cum_function_on_apply(person, the_serum, add_to_log):
         person.event_triggers_dict["nano_bots_c"] = False
         return
 
-    def fetish_cum_function_on_remove(person, add_to_log):
+    def fetish_cum_function_on_remove(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_c", False) == False: # no trigger, report progress
             mc.log_event(person.title + " semen proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_cc")) + "%", "float_text_blue")
         return
 
-    def fetish_cum_function_on_turn(person, add_to_log):
+    def fetish_cum_function_on_turn(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_c", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
@@ -373,16 +373,16 @@ init -1 python:
         return
 
 
-    def fetish_exhibition_function_on_apply(person, add_to_log):
+    def fetish_exhibition_function_on_apply(person, the_serum, add_to_log):
         person.event_triggers_dict["nano_bots_e"] = False
         return
 
-    def fetish_exhibition_function_on_remove(person, add_to_log):
+    def fetish_exhibition_function_on_remove(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_e", False) == False:   # no trigger, report progress
             mc.log_event(person.title + " social sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ec")) + "%", "float_text_blue")
         return
 
-    def fetish_exhibition_on_turn(person, add_to_log):
+    def fetish_exhibition_on_turn(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_e", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 

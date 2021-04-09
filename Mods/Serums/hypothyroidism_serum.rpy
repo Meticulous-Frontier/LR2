@@ -1,7 +1,7 @@
 # Hypothyroidism Serum by Tristimdorion
 
 init -1 python:
-    def hypothyroidism_serum_on_turn(person, add_to_log):
+    def hypothyroidism_serum_on_turn(person, the_serum, add_to_log):
         return person.change_weight(amount = 0.5, chance = 50)
 
     def add_hypothyroidism_serum():

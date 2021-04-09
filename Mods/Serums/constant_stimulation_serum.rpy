@@ -1,7 +1,7 @@
 # Pheremone Therapy Serum by Starbuck
 
 init -1 python:
-    def constant_stimulation_on_turn(the_person, add_to_log, fire_event = True):
+    def constant_stimulation_on_turn(the_person, the_serum, add_to_log):
         if get_slut_tier(the_person) < 5:
             suggestion_bonus = (get_suggest_tier(the_person) - get_slut_tier(the_person)) * 10
             if renpy.random.randint(0, 100) < 10 + suggestion_bonus - (the_person.get_opinion_score("taking control") * 5):

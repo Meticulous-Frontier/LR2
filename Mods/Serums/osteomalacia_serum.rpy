@@ -1,7 +1,7 @@
 # Osteomalacia Serum by Tristimdorion
 
 init -1 python:
-    def osteomalacia_serum_on_turn(person, add_to_log):
+    def osteomalacia_serum_on_turn(person, the_serum, add_to_log):
         return person.change_height(amount = -.01693, chance = 20)
 
     def add_osteomalacia_serum():

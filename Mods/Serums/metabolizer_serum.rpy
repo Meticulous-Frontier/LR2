@@ -1,7 +1,7 @@
 # Metabolizer Serum Trait by Tristimdorion
 
 init -1 python:
-    def anorexia_serum_on_turn(person, add_to_log):
+    def anorexia_serum_on_turn(person, the_serum, add_to_log):
         return person.change_weight(amount = -0.5, chance = 50)
 
     def add_anorexia_serum():
