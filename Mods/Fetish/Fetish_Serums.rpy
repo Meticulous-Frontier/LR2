@@ -245,7 +245,7 @@ init -1 python:
             mc.log_event(person.title + " anal proclivity Bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_ac")) + "%", "float_text_blue")
         return
 
-    def fetish_anal_function_on_turn(person, the_serum add_to_log):
+    def fetish_anal_function_on_turn(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_a", False):
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
