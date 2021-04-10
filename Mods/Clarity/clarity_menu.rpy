@@ -2,35 +2,39 @@
 # Screen is in a different file
 
 init -2 python:
-    def pursuade_person_requirement(the_person):
+    def persuade_person_requirement(the_person):
         if mc.free_clarity < 100:
-            return "Requires: 100 Free Clarity"
+            return "Requires: 100+ Free Clarity"
         else:
             return True
 
     def clarity_train_int_requirement(the_person):
         if the_person.int >= mc.int:
-            return "Requires: More Intelligence"
+            return "Requires: Higher MC Intelligence"
+        elif the_person.int >= 7:
+            return "Intelligence maximum reached"
         elif mc.free_clarity < (the_person.int * 100):
-            return "Requires: More Free Clarity"
+            return "Requires: {} Free Clarity".format(the_person.int * 100)
         else:
             return True
 
     def clarity_train_cha_requirement(the_person):
         if the_person.charisma >= mc.charisma:
-            return "Requires: More Charisma"
+            return "Requires: Higher MC Charisma"
+        elif the_person.charisma >= 7:
+            return "Charisma maximum reached"
         elif mc.free_clarity < (the_person.charisma * 100):
-            return "Requires: More Free Clarity"
+            return "Requires: {} Free Clarity".format(the_person.charisma * 100)
         else:
             return True
 
     def clarity_train_focus_requirement(the_person):
         if the_person.focus >= mc.focus:
-            return "Requires: More Focus"
+            return "Requires: Higher MC Focus"
         elif the_person.focus >= 7:
-            return "Focus Maxed"
+            return "Focus maximum reached"
         elif mc.free_clarity < (the_person.focus * 100):
-            return "Requires: More Free Clarity"
+            return "Requires: {} Free Clarity".format(the_person.charisma * 100)
         else:
             return True
 
@@ -43,19 +47,19 @@ init -2 python:
 
 
     def build_clarity_person_actions_menu(the_person):
-        clarity_train_int_action = Action("Train her to be more Intelligent", requirement = clarity_train_int_requirement, effect = "clarity_train_int", args = the_person, requirement_args = the_person,
+        clarity_train_int_action = Action("Train her Intelligence", requirement = clarity_train_int_requirement, effect = "clarity_train_int", args = the_person, requirement_args = the_person,
             menu_tooltip = "Utilize your clarity to increase her intelligence score.", priority = -5)
-        clarity_train_cha_action = Action("Train her to be more Charismatic", requirement = clarity_train_cha_requirement, effect = "clarity_train_cha", args = the_person, requirement_args = the_person,
+        clarity_train_cha_action = Action("Train her Charisma", requirement = clarity_train_cha_requirement, effect = "clarity_train_cha", args = the_person, requirement_args = the_person,
             menu_tooltip = "Utilize your clarity to increase her charisma score.", priority = -5)
-        clarity_train_focus_action = Action("Train her to be more Focused", requirement = clarity_train_focus_requirement, effect = "clarity_train_focus", args = the_person, requirement_args = the_person,
-            menu_tooltip = "Utilize your clarity to increase her Focus score.", priority = -5)
+        clarity_train_focus_action = Action("Train her Focus", requirement = clarity_train_focus_requirement, effect = "clarity_train_focus", args = the_person, requirement_args = the_person,
+            menu_tooltip = "Utilize your clarity to increase her focus score.", priority = -5)
         clarity_serum_dose_action = Action("Persuade her to test a serum", requirement = clarity_serum_dose_requirement, effect = "clarity_serum_dose", args = the_person, requirement_args = the_person,
             menu_tooltip = "Utilize your clarity to convince her to test a serum.", priority = -5)
 
         return ["Persuade", clarity_train_int_action, clarity_train_cha_action, clarity_train_focus_action , clarity_serum_dose_action, ["Never mind", "Return"]]
 
 
-label pursuade_person(the_person):
+label persuade_person(the_person):
     mc.name "[the_person.title], I was hoping you would do something for me."
     the_person "Yes [the_person.mc_title]?"
 

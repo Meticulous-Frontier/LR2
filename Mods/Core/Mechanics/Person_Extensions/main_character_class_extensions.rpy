@@ -23,19 +23,12 @@ init -1 python:
 
     MainCharacter.is_home = is_home
 
-    def change_locked_clarity_enhanced(self, amount, add_to_log = True): #TODO: Decide if we need a max locked clarity thing to gate progress in some way.
-        amount = __builtin__.int(__builtin__.round(amount * get_clarity_mult()))
-        self.locked_clarity += amount
-        log_string = ""
-        if amount > 0:
-            log_string += "You: +" + str(amount) + " Locked Clarity"
-        else:
-            log_string += "You: " + str(amount) + " Locked Clarity"
-        if add_to_log and amount != 0:
-            mc.log_event(log_string, "float_text_blue")
+    def change_locked_clarity_extended(org_func):
+        def change_locked_clarity_wrapper(main_character, amount, add_to_log = True):
+            # run original function (with modified amount)
+            org_func(main_character, amount * get_clarity_multiplier(), add_to_log)
+            return
 
-            effect_strength = (amount/80.0) + 0.4
-            if effect_strength > 1.0:
-                effect_strength = 1.0
-            renpy.show_screen("border_pulse", effect_strength, _transient = True)
-        return
+        return change_locked_clarity_wrapper
+
+    MainCharacter.change_locked_clarity = change_locked_clarity_extended(MainCharacter.change_locked_clarity)

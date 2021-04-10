@@ -1,14 +1,14 @@
 init 1 python:
-    def get_clarity_mult():
-        clarity_mult = 1.0
+    def get_clarity_multiplier():
+        multiplier = 1.0
         if perk_system.has_ability_perk("Intelligent Clarity"):
-            clarity_mult += (mc.int * .05) #5% increase per intelligence point
+            multiplier += (mc.int * .05) #5% increase per intelligence point
         if perk_system.has_ability_perk("Charismatic Clarity"):
-            clarity_mult += (mc.charisma * .05) #5% increase per charisma point
+            multiplier += (mc.charisma * .05) #5% increase per charisma point
         if perk_system.has_ability_perk("Focused Clarity"):
-            clarity_mult += (mc.focus * .05) #5% increase per charisma point
+            multiplier += (mc.focus * .05) #5% increase per charisma point
 
-        return clarity_mult
+        return multiplier
 
     def add_intelligent_clarity_perk():
         if perk_system.has_ability_perk("Intelligent Clarity"):
@@ -17,7 +17,7 @@ init 1 python:
         return
 
     def add_charismatic_clarity_perk():
-        if perk_system.has_ability_perk("Charistmatic Clarity"):
+        if perk_system.has_ability_perk("Charismatic Clarity"):
             return
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your charisma.", toggle = False, usable = False), "Charismatic Clarity")
         return
@@ -27,3 +27,19 @@ init 1 python:
             return
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your focus.", toggle = False, usable = False), "Focused Clarity")
         return
+
+    def build_specific_action_list_extended(org_func):
+        def build_specific_action_list_wrapper(person):
+            # run original function
+            result = org_func(person)
+            # run extension code (append new action to base game menu)
+            persuade_action = Action("Use Persuasion", requirement = persuade_person_requirement, effect = "persuade_person", args = person, requirement_args = person,
+                menu_tooltip = "Leverage your clarity to persuade her to do something.")
+
+            result.append(persuade_action)
+            return result
+
+        return build_specific_action_list_wrapper
+
+    # wrap up the build_specific_action_list function
+    build_specific_action_list = build_specific_action_list_extended(build_specific_action_list)
