@@ -147,7 +147,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser "Hey now, it's not like that, you know you can claim me anytime you want, we were just looking for some free... FUCK"
                     $ mc.change_locked_clarity(20)
                     "You grab her hips and ram yourself forward into [loser.possessive_title]'s sopping wet pussy."
-                    if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():
+                    if winner_one.effective_sluttiness() > 80 and winner_one.outfit.vagina_visible():
                         winner_one "Holy shit he's gonna fuck her right here!"
                         $ scene_manager.update_actor(winner_one, position = "kneeling1")
                         "While watching you, [winner_one.title] begins to touch herself and masturbate."
@@ -159,7 +159,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     "You pound [loser.title] hard. She so wet that you easily slide in and out of her."
                     $ mc.change_locked_clarity(20)
                     "You look down and see the soft wet lips of her labia gripping and pulling at you every time you start to slide out. It feels amazing."
-                    if winner_two.effective_sluttiness() > 90 and winner_two.get_opinion_score("public sex") > 0:
+                    if winner_two.effective_sluttiness() > 80 and winner_two.get_opinion_score("public sex") > 0:
                         winner_two "Fuck yeah! Give it to her good [winner_two.mc_title]!"
                         $ mc.change_locked_clarity(10)
                         "[winner_two.title] is watching intently, cheering you on as you give it to [loser.possessive_title]."

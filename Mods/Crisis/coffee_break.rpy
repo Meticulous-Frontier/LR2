@@ -35,11 +35,11 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         scene_manager.add_actor(person_two, emotion="default", display_transform = character_center_flipped)
         scene_manager.add_actor(person_three, emotion="default")
 
-    if person_one.sluttiness > 70 and person_three.sluttiness > 70:
+    if person_two.sluttiness > 70 and person_three.sluttiness > 70:
         person_one "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
         person_two "I would mind a giving that meat stick some affection myself."
         person_three "That would be perfect, when you two are done, I can tame and ride that monster."
-    elif person_one.sluttiness > 40 and person_three.sluttiness > 40:
+    elif person_two.sluttiness > 40 and person_three.sluttiness > 40:
         person_one "Don't you think [person_one.mc_title] has a nice bulge in his pants."
         person_two "I bet that he is hung like a horse."
         person_three "I've always wanted to take some horse riding lessons."
@@ -81,12 +81,9 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
             "What's your next move?"
             menu:
                 "Walk away":
-                    python:
-                        mc.location.show_background()
-                        scene_manager.clear_scene()
-                    return
+                    pass
 
-                "Join them\n{color=#ff0000}{size=18}Requires: Both girls open to threesomes{/color}{/size} (disabled)" if not if willing_to_threesome(person_two, person_three):
+                "Join them\n{color=#ff0000}{size=18}Requires: Both girls open to threesomes{/size}{/color} (disabled)" if not willing_to_threesome(person_two, person_three):
                     pass
 
                 "Join them" if willing_to_threesome(person_two, person_three):
@@ -120,6 +117,22 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     $ town_relationships.improve_relationship(person_two, person_three)
 
                     "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
+
+                "Punish them for inappropriate behaviour" if office_punishment.is_active():
+                    mc.name "[person_three.title], [person_two.title], this is completely inappropriate, even if you're on your break."
+                    mc.name "I don't have any choice but to record this for disciplinary action later."
+                    $ person_three.add_infraction(Infraction.inappropriate_behaviour_factory())
+                    $ person_two.add_infraction(Infraction.inappropriate_behaviour_factory())
+                    $ scene_manager.update_actor(person_three, emotion = "sad")
+                    person_three "Really? I..."
+                    $ scene_manager.update_actor(person_two, emotion = "sad")
+                    person_two "Don't get us in any more trouble [person_three.title]. Sorry [person_two.mc_title], we'll get back to work right away."
+                    person_three "Ugh, whatever. Come on [person_two.title], let's go."
+                    $ scene_manager.update_actor(person_three, position = "walking_away")
+                    $ scene_manager.update_actor(person_two, position = "walking_away")
+
+                    "They quickly leave the supply closet together."
+
         else:
             person_two "Another time, [person_three.name], let's get back to work."
 
