@@ -337,6 +337,7 @@ label mom_breakfast_action_label_high():
 
         $ the_person.cum_in_ass()
         $ scene_manager.update_actor(the_person) # redraw for cum
+        $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
 
         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
         $ the_person.change_stats(happiness = 5, obedience = 3)
@@ -368,6 +369,7 @@ label mom_breakfast_action_label_high():
 
     $ the_person.cum_in_vagina()
     $ scene_manager.update_actor(the_person) # redraw for cum
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
 
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
     $ the_person.change_stats(happiness = 5, obedience = 3)
@@ -425,6 +427,7 @@ label mom_breakfast_action_mom_and_lily_label():
 
         the_person "Oh yes baby, keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)
+        $ mc.change_locked_clarity(20)
         lily "Mmm, mom, you taste great...oh yes, push some fingers in there...ah, yes, right there..."
         $ lily.change_arousal(20)
 
