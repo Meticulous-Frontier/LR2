@@ -31,6 +31,7 @@ label candace_introduction(the_person):
         the_person "And you liked my tits? Yeah, I get that a lot. I'm [formatted_title], it's nice to meet you!"
     else:
         the_person "And you liked my ass? Yeah, I get that a lot. I'm [formatted_title], it's nice to meet you!"
+    $ mc.change_locked_clarity(5)
     #the_person "Well then, I suppose I shouldn't disappoint you. You can call me [formatted_title]."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
@@ -325,6 +326,7 @@ label candace_flirt_response(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
             the_person "Just make it an official order and it's all yours, boss man."
+            $ mc.change_locked_clarity(5)
         else:
             the_person "Hehe, thank you, you're way too nice to me!"
 
@@ -332,6 +334,7 @@ label candace_flirt_response(the_person):
         $so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (the_person.get_opinion_score("cheating on men")*5) > 50:
             the_person "That's like, super hot to hear you say. We just can't let my [so_title] or he would flip out."
+            $ mc.change_locked_clarity(5)
         else:
             the_person "Oh my god, you're so cute! My [so_title] never says things like that to me."
             "She pouts for a moment before returning to her bubbly self."
@@ -339,6 +342,7 @@ label candace_flirt_response(the_person):
     else:
         if the_person.sluttiness > 50:
             the_person "You should try your luck sometimes. Maybe take me out for a drink, I get wild after I've had a few. Wild-er, I guess."
+            $ mc.change_locked_clarity(5)
         else:
             the_person "Oh you, stop it! You're going to make me blush!"
     return
