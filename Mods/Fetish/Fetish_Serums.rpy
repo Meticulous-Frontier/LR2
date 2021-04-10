@@ -206,11 +206,11 @@ init -1 python:
         opinion_modifier = sum([(person.get_opinion_score(x) * 20) for x in opinion_list]) / __builtin__.len(opinion_list)
         return fetish_odds + int(opinion_modifier)
 
-    def fetish_basic_function_on_apply(person, add_to_log):
+    def fetish_basic_function_on_apply(person, the_serum, add_to_log):
         person.event_triggers_dict["nano_bots_f"] = False
         return
 
-    def fetish_basic_function_on_remove(person, add_to_log):
+    def fetish_basic_function_on_remove(person, the_serum, add_to_log):
         if person.event_triggers_dict.get("nano_bots_f", False) == False: # no trigger, report progress
             mc.log_event(person.title + " sexual proclivity bots: " + str(fetish_serum_calculate_completion(person, "nano_bots_fc")) + "%", "float_text_blue")
         return

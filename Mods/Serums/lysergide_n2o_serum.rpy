@@ -1,13 +1,13 @@
 # Lysergide N2O Serum by Tristimdorion
 
 init -1 python:
-    def lysergide_n2o_trait_on_apply(person, add_to_log):
+    def lysergide_n2o_trait_on_apply(person, the_serum, add_to_log):
         person.add_role(suggestable_role)
         if add_to_log:
             mc.log_event((person.title or person.name) + " is suggestible.", "float_text_blue")
         return
 
-    def lysergide_n2o_trait_on_remove(person, add_to_log):
+    def lysergide_n2o_trait_on_remove(person, the_serum, add_to_log):
         # role is also removed after an influence attempt
         if person.remove_role(suggestable_role):
             if add_to_log:
