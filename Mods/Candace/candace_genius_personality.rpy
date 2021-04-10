@@ -625,6 +625,7 @@ label genius_flirt_response_girlfriend(the_person):
                     mc.name "So, is there anything else you want to kiss? I've got some suggestions..."
                     if the_person.effective_sluttiness("sucking_cock") >= 60 or the_person.get_opinion_score("giving blowjobs") > 0:
                         the_person "Uh huh? I think I know what you're thinking about."
+                        $ mc.change_locked_clarity(10)
                         "She reaches down and cups your crotch, rubbing it gently while looking into your eyes."
                         the_person "I think I could make that happen, if we have some time alone."
                         mc.name "Next time we're alone I'll hold you to that promise."
@@ -635,6 +636,7 @@ label genius_flirt_response_girlfriend(the_person):
                         "She blushes and shakes her head bashfully."
                         the_person "Oh my god, you're so predictable! Well..."
                         "She leans close and whispers into your ear."
+                        $ mc.change_locked_clarity(10)
                         the_person "Maybe if you can get us alone I can take a few requests..."
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
@@ -657,6 +659,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "You place your hands around her and hold her close. You run one hand down her back and rest it on her ass, massaging it gently."
                 the_person "Mmm... Can we just stay like this for a moment?"
                 mc.name "Of course."
+                $ mc.change_locked_clarity(10)
                 "You hold [the_person.possessive_title] for a few minutes in silence."
                 $ the_person.draw_person()
                 "She finally breaks the hug steps back."
@@ -686,6 +689,7 @@ label genius_flirt_response_affair(the_person):
 
                 "Just flirt":
                     mc.name "You're that easy, huh? I drop one complement and you're ready to get on your knees."
+                    $ mc.change_locked_clarity(10)
                     "She laughs quietly and shrugs."
                     the_person "I'm only this easy for you [the_person.mc_title]. You've turned me into such a little slut."
                     mc.name "Well you're going to have to wait a little while until I have the time to give you the attention you deserve."
@@ -696,6 +700,7 @@ label genius_flirt_response_affair(the_person):
             "She glances around nervously. She gives a relieved sigh when it's clear nobody else is close enough to overhear you."
             the_person "Sorry, I just don't want my [so_title] to hear any rumours about us. I don't know what I'd do if he found out."
             mc.name "Relax, I wouldn't do anything that would get you in trouble."
+            $ mc.change_locked_clarity(10)
             "She laughs and shakes her head."
             the_person "Obviously that's not true. Just being together might get me in trouble. It's still worth it though..."
             "[the_person.title] runs her hand along your arm, feeling your muscles through your shirt."
@@ -717,6 +722,7 @@ label genius_flirt_response_affair(the_person):
 
             "Just flirt":
                 mc.name "You're always exciting, but I think I'll be able to hold out for a little while longer."
+                $ mc.change_locked_clarity(10)
                 "You put your arm around her waist and grab her ass, massaging it as you talk."
                 mc.name "But you should know, the next time I get you alone I'm going to pay you back for all this teasing."
                 the_person "Yeah? Well now you've got me excited!"

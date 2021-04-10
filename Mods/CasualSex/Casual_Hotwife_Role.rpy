@@ -1070,12 +1070,12 @@ label hotwife_flirt_response_low(the_person):
     #She's in her own outfit.
     the_person "Thanks! It's really cute, right? My husband helped me pick it out!"
     $ the_person.draw_person(position = "walking_away")
+    $ mc.change_locked_clarity(5)
     "She smiles and gives you a quick spin, showing off her outfit from every angle."
     $ the_person.draw_person()
     return
 
 label hotwife_flirt_response_mid(the_person):
-
     if the_person.effective_sluttiness() < 20 and mc.location.get_person_count() > 1:
         if the_person.outfit.tits_visible():
             the_person "Are you sure you don't mean my tits look good in this outfit?"
@@ -1085,6 +1085,7 @@ label hotwife_flirt_response_mid(the_person):
         else:
             the_person "Aw, thanks! I thought this was a pretty hot look when I was getting dressed this morning."
 
+        $ mc.change_locked_clarity(10)
         the_person "Maybe hubby will let you come shopping with me one day, so you can tell me what else you want to see me in."
         mc.name "I think I would like that."
 
@@ -1093,6 +1094,7 @@ label hotwife_flirt_response_mid(the_person):
         the_person "You want a better look, right? Here, how does it make my ass look?"
         $ the_person.draw_person(position = "back_peek")
         the_person "Good?"
+        $ mc.change_locked_clarity(10)
         mc.name "Fantastic. I wish I could get an even better look at it."
         "[the_person.possessive_title] smiles and turns back to face you."
         $ the_person.draw_person()

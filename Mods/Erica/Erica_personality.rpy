@@ -281,20 +281,21 @@ label erica_flirt_response(the_person):
 label erica_flirt_response_low(the_person):
     #She's in her own outfit.
     "[the_person.possessive_title] blushes and smiles."
+    $ mc.change_locked_clarity(5)
     the_person "Thanks. I didn't think anyone even paid attention to what I wear. I mean it's just gym clothes..."
     mc.name "Yeah, and the way you dress makes it obvious how well you take care of yourself. It's pretty incredible."
     return
 
 label erica_flirt_response_mid(the_person):
-
     if the_person.effective_sluttiness() < 20:
+        $ mc.change_locked_clarity(10)
         the_person "Thanks! I work hard to take of myself. It's kind of weird to hear, but I'm glad it shows."
-
     else:
         the_person "Thanks! One of the benefits of being in shape I guess, you can wear clothing to show off your body."
         the_person "You want a better look, right? Here, how does it make my ass look?"
         $ the_person.draw_person(position = "back_peek")
         the_person "Good?"
+        $ mc.change_locked_clarity(10)
         mc.name "Fantastic. I wish I could get an even better look at it."
         "[the_person.possessive_title] smiles and turns back to face you."
         $ the_person.draw_person()
@@ -750,6 +751,7 @@ label erica_work_enter_greeting(the_person):
     return
 
 label erica_date_seduction(the_person):
+    $ mc.change_locked_clarity(30)
     if the_person.effective_sluttiness() > the_person.love:
         if the_person.effective_sluttiness() > 40:
             the_person "I had a great time [the_person.mc_title], but I can think of a few more things we could do together. Want to come back to my place?"

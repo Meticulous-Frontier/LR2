@@ -730,21 +730,23 @@ label candace_work_enter_greeting(the_person):
 
 label candace_date_seduction(the_person):
     if the_person.sluttiness > the_person.love:
+        $ mc.change_locked_clarity(30)
         if the_person.sluttiness > 40:
             the_person "So [the_person.mc_title], don't you think it's time you came back home with me and we had some real fun?"
             "[the_person.title] bites her lip and puffs out her chest just a little bit."
-
         else:
             the_person "[the_person.mc_title], I swear you're driving me crazy. Do you, like, want to come home with me and just get wild?"
 
     else:
         if the_person.love > 40:
             the_person "[the_person.mc_title], I don't know how you do it but I swear you've been driving me, like, totally crazy all night."
+            $ mc.change_locked_clarity(40)
             "[the_person.title] runs her hand along your arm and giggles."
             the_person "I want you to come back to my place so I can have you all to my self."
             "She looks around and thinks for a second."
             the_person "I guess if I HAVE to stay and share you, I could do that too though!"
         else:
+            $ mc.change_locked_clarity(40)
             the_person "Oh my god [the_person.mc_title], tonight has been so much fun. Do you want to, like, come back home with me and drink some more?"
     return
 

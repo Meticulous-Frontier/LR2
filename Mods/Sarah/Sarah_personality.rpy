@@ -324,11 +324,13 @@ label Sarah_flirt_response_low(the_person):
     if sarah_epic_tits_progress() >= 2:  #She has gone through bigger tits story
         the_person "Oh? You like how I look, now that I'm the total package?"
         $ the_person.draw_person(position = "walking_away")
+        $ mc.change_locked_clarity(5)
         "[the_person.possessive_title] gives you a quick spin, showing off her body at the same time as her outfit."
         $ the_person.draw_person()
     else:
         the_person "Oh? Thank you [the_person.mc_title]! I'm glad to hear you like the way I look."
         the_person "I'm not sure why you feel that way though, I'm not wearing anything special."
+        $ mc.change_locked_clarity(5)
     mc.name "Your body is fantastic, and the outfit is the icing on the cake."
     "She smiles and laughs."
     the_person "Ah, so you are resorting to flattery then? You kind words are noted, [the_person.mc_title]!"
@@ -342,6 +344,7 @@ label Sarah_flirt_response_mid(the_person):
         "She sighs and looks away from you for a moment."
         the_person "I... guess it's still nice to hear though. It's been a while since my boyfriend said I was hot."
         mc.name "Well I'm happy to tell you that you are very, very hot [the_person.title]."
+        $ mc.change_locked_clarity(10)
         "[the_person.possessive_title] smiles and shrugs."
         the_person "Thanks. It means a lot to hear that from my childhood friend."
     elif the_person.effective_sluttiness("underwear_nudity") < 20:
@@ -349,6 +352,7 @@ label Sarah_flirt_response_mid(the_person):
         mc.name "Like what? That you're hot?"
         the_person "I guess I'm just not used to hearing the guy I used to play hide and seek with when I was little call me \"hot\"."
         mc.name "Well I suppose you'd better get used to, since its true and I'm not going to stop reminding you anytime soon."
+        $ mc.change_locked_clarity(10)
         "[the_person.title] rolls her eyes at you, but you also notice the corner of her mouth turn up in a slight smile."
         the_person "Thanks Romeo, though I will admit it is nice to hear."
 
@@ -358,6 +362,7 @@ label Sarah_flirt_response_mid(the_person):
         "[the_person.possessive_title] smiles and runs her hands down her hips. She hesitates for a moment, then turns around and pats her ass."
         $ the_person.draw_person(position = "back_peek")
         the_person "What exactly are your intentions, [the_person.mc_title]? You seem to have a hard time taking your eyes off of me..."
+        $ mc.change_locked_clarity(10)
         "You zone out for a second, checking out [the_person.title]'s shapely hind end."
         $ the_person.draw_person()
         "She turns back and giggles."
@@ -375,6 +380,7 @@ label Sarah_flirt_response_high(the_person):
                 the_person "Oh [the_person.mc_title]. You're always trying to get me naked."
 
             mc.name "You're so beautiful, I always want to see more."
+            $ mc.change_locked_clarity(15)
             "She sighs and smiles."
             the_person "Don't worry, I want to get naked for you."
 
@@ -414,6 +420,8 @@ label Sarah_flirt_response_high(the_person):
             else:
                 the_person "Ok fine, I've got a better idea. What if I put my hand in your pants and umm, you know, like we did the other day..."
                 mc.name "Mmm, I suppose I would be up for that."
+
+            $ mc.change_locked_clarity(15)
             "[the_person.possessive_title] places a hand on your chest and strokes it tenderly."
             "She looks into your eyes as her hand moves lower, running over your abs, down to your waist."
             "Her fingers slide into your pubic hair, then to the side of your cock and between your legs."
@@ -457,6 +465,7 @@ label Sarah_flirt_response_high(the_person):
                     else:
                         "She checks that nobody else is looking, the reaches down and grabs your package. You harden rapidly as she gives it a couple of strokes."
                         the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]!"
+                    $ mc.change_locked_clarity(15)
                     mc.name "Jesus woman, you win!"
                     the_person "I'm glad you understand."
 
@@ -464,6 +473,7 @@ label Sarah_flirt_response_high(the_person):
             "[the_person.possessive_title] gasps softly and glances around, checking to see if anyone else was listening."
             the_person "[the_person.mc_title], stop joking around! If other people overhear they might get the wrong idea!"
             mc.name "It's fine, nobody heard anything. Besides, who cares if other people know I want to see you naked?"
+            $ mc.change_locked_clarity(15)
             "[the_person.possessive_title] gives you a very convincing frown, but she eventually breaks and cracks a smile."
             the_person "I guess, I just wish you would be a little more discrete."
             "She places a gentle hand on your shoulder and kisses you on the cheek."
@@ -733,6 +743,7 @@ label Sarah_work_enter_greeting(the_person):
     return
 
 label Sarah_date_seduction(the_person):
+    $ mc.change_locked_clarity(30)
     if the_person.relationship == "Single":
         if the_person.sluttiness > the_person.love:
             if the_person.sluttiness > 40:
