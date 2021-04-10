@@ -78,10 +78,12 @@ init 0 python:
 
         # apply forced opinions after we 'update opinions', so we don't override them there
         if forced_opinions and isinstance(forced_opinions, list):
+            return_character.reset_opinions()
             for opinion in forced_opinions:
                 return_character.opinions[opinion[0]] = [opinion[1], opinion[2]]
 
         if forced_sexy_opinions and isinstance(forced_sexy_opinions, list):
+            return_character.reset_sexy_opinions()
             for opinion in forced_sexy_opinions:
                 return_character.sexy_opinions[opinion[0]] = [opinion[1], opinion[2]]
 

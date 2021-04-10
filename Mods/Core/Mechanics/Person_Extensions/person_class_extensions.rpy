@@ -1593,6 +1593,16 @@ init -1 python:
         mc.log_event(message, "float_text_blue")
         return
 
+    def reset_opinions(self):
+        self.opinions = {}
+
+    Person.reset_opinions = reset_opinions
+
+    def reset_sexy_opinions(self):
+        self.sexy_opinions = {}
+
+    Person.reset_sexy_opinions = reset_sexy_opinions
+
 #########################################
 # Add hash (unique id) to Person object #
 #########################################
@@ -1908,7 +1918,6 @@ init -1 python:
 
     Person.unlock_spanking = unlock_spanking
     Person.can_be_spanked = can_be_spanked
-
 
 ##########################################
 # Girl in Charge Functions               #
