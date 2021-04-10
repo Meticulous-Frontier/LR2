@@ -113,13 +113,13 @@ init 2 python:
                 self.Cache[x] = LRUCacheDict(max_size = 500, expiration = 0)    # 500 most used character images per position (20Mb)
 
         def preload(self):
-            for cloth in [white_skin, black_skin, tan_skin, all_regions, torso_region, stomach_region, pelvis_region, upper_leg_region, lower_leg_region, foot_region, upper_arm_region, lower_arm_region, hand_region, skirt_region, vagina_region, shaved_pubes, landing_strip_pubes, diamond_pubes, trimmed_pubes, default_pubes]:
+            for cloth in [white_skin, black_skin, tan_skin] + hair_styles + pube_styles:
                 for x in supported_positions:
                     for body in ["standard_body","thin_body","curvy_body"] if cloth.body_dependant else ["standard_body"]:
                         for y in Clothing_Images.breast_sizes:
-                            zimg = cloth.position_sets[x].get_image(body, y)
-                            if zimg:
-                                zimg.load()
+                            file = cloth.position_sets[x].get_image(body, y)
+                            if file:
+                                file.load()
 
         def size(self):
             return sum([x.size() for x in self.Cache.values()])
@@ -151,4 +151,4 @@ init 2 python:
                         mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")
 
     zip_manager = ZipManager()
-    # zip_manager.preload()
+    #zip_manager.preload()      # delays reload time too much

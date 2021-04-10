@@ -22,25 +22,40 @@ init 2 python:
 
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
             # always predict person displayable (the clear_function will remove them from the prediction cache)
-            renpy.start_predict(self.display_image)
+            # renpy.start_predict(self.display_image)
             return
 
         def preload(self):
+            def load_image(file):
+                if file and not "empty_holder.png" in file.filename:
+                    file.load()
+                return
+
+            def actual_body_type(person, cloth):
+                if not cloth.body_dependant:
+                    body_type = "standard_body"
+                return person.body_type
+
+            def actual_tit_size(person, cloth):
+                if cloth.draws_breasts:
+                    return person.tits
+                return "AA"
+
             if not self.display_func:
                 return
 
             # pre-load clothing items
             person = self.return_value
-            for clothing in person.outfit.generate_clothing_list(person.body_type, person.tits, person.idle_pose):
-                if hasattr(clothing, "body_dependant"):
-                    file = clothing.generate_raw_image(person.body_type, person.tits, person.idle_pose)
-                    if file:
-                        file.load()
+            for cloth in person.outfit.generate_clothing_list(person.body_type, person.tits, person.idle_pose):
+                if isinstance(cloth, Facial_Accessory):
+                    load_image(cloth.position_sets[person.idle_pose].get_image(person.face_style, "default"))
+                else:
+                    load_image(cloth.position_sets[person.idle_pose].get_image(actual_body_type(person, cloth), actual_tit_size(person, cloth)))
             return
 
         def clear(self):
-            if self.display_image:
-                renpy.stop_predict(self.display_image)
+            # if self.display_image:
+            #     renpy.stop_predict(self.display_image)
             return
 
     def build_menu_items(elements_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
