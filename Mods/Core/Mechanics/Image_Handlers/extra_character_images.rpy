@@ -7,8 +7,6 @@ init -5 python:
     supported_positions = ["stand2","stand3","stand4","stand5","walking_away","kissing","doggy","missionary","blowjob","against_wall","back_peek","sitting","kneeling1","standing_doggy","cowgirl"]
 
 init 2 python:
-    from lru import LRUCacheDict
-
     # add zip dictionary for MOD character images
     mobile_zip_dict["character_images"] = zipfile.ZipFile(renpy.file(get_file_handle("character_images.zip")), "r") #Cache all of the zip files so we have a single static pointer to them.
 
@@ -97,58 +95,3 @@ init 2 python:
         return AlphaBlend(mask_image, base_image, im.MatrixColor(base_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)), alpha=False)
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
-
-    ############################################################
-    # MOD Implementation of ZIP file loading and image caching #
-    ############################################################
-
-    # special class for managing thread locks and cache objects for zipfile loading
-    class ZipManager():
-        def __init__(self):
-            self.Locks = {}
-            self.Cache = {}
-
-            for x in supported_positions + ["character_images"]:
-                self.Locks[x] = threading.RLock()
-                self.Cache[x] = LRUCacheDict(max_size = 500, expiration = 0)    # 500 most used character images per position (20Mb)
-
-        def preload(self):
-            for cloth in [white_skin, black_skin, tan_skin] + hair_styles + pube_styles:
-                for x in supported_positions:
-                    for body in ["standard_body","thin_body","curvy_body"] if cloth.body_dependant else ["standard_body"]:
-                        for y in Clothing_Images.breast_sizes:
-                            file = cloth.position_sets[x].get_image(body, y)
-                            if file:
-                                file.load()
-
-        def size(self):
-            return sum([x.size() for x in self.Cache.values()])
-
-    class ZipContainer(renpy.display.im.ImageBase): #TODO: Move this to a more obvious file. Probably something to do along with a bunch of other refactoring.
-        def __init__(self, position, filename, mtime=0, **properties):
-            super(ZipContainer, self).__init__(position, filename, mtime, **properties)
-            self.position = position
-            self.filename = filename
-
-        def load(self):
-            tries = 0
-            while tries < 3:
-                try:
-                    if not self.filename in zip_manager.Cache[self.position]:
-                        with zip_manager.Locks[self.position]:
-                            zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
-
-                    sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
-                    return renpy.display.pgrender.load_image(sio, self.filename)
-                except:
-                    tries += 1
-                    if tries >= 3:
-                        renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
-                        return renpy.display.pgrender.surface((2, 2), True)
-
-                    with zip_manager.Locks[self.position]:
-                        mobile_zip_dict[self.position].close()
-                        mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")
-
-    zip_manager = ZipManager()
-    #zip_manager.preload()      # delays reload time too much
