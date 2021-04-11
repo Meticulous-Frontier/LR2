@@ -69,6 +69,7 @@ label breeding_fetish_high_fertility_crisis_label():
     the_person "I've been following my cycles on this app... Today it gave me a notification that I am highly fertile!"
     "She comes closer, wrapping her arms around you."
     the_person "You need to cum inside me tonight... I'm not taking no for an answer!"
+    $ mc.change_locked_clarity(30)
     if the_person.is_dominant():
         "She pushes you back onto your bed. She seems pretty intent on taking what she wants from you."
         "You watch as she starts to strip down."
@@ -76,6 +77,7 @@ label breeding_fetish_high_fertility_crisis_label():
         $ the_person.change_arousal(10)
         "She runs a hand down her belly, to her mound and across her slit. You can see moisture already starting to collect there."
         $ the_person.draw_person(position = "cowgirl")
+        $ mc.change_locked_clarity(30)
         "[the_person.possessive_title] reaches down and pulls your pants off and then climbs up on top of you, your cock at her entrance."
         the_person "Oh god... this is it. I can feel it! Tonight's the night you finally knock me up..."
         "She holds your cock with one hand and slowly starts to sink down onto you. She gasps when your dick parts her labia."
@@ -96,6 +98,7 @@ label breeding_fetish_high_fertility_crisis_label():
         mc.name "One knocked up cum slut, coming right up!"
         "You reach down and start to pull her bottoms off."
         $ the_person.strip_outfit(exclude_upper = True)
+        $ mc.change_locked_clarity(50)
         "When you finish, you pick her up and throw her down on your bed."
         $ the_person.draw_person(position = "missionary")
         "You pull out your cock and slowly crawl up her body. Soon your cock is at her entrance. You whisper in her ear."
@@ -141,6 +144,7 @@ label breeding_fetish_happy_breeder_crisis_label():
 
         $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
+        $ mc.change_locked_clarity(20)
         "Its [the_person.possessive_title]. She steps into your room, closes your door, and locks it..."
         mc.name "Something you need tonight [the_person.title]?"
         the_person "Yeah... something like that!"
@@ -153,6 +157,7 @@ label breeding_fetish_happy_breeder_crisis_label():
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
         $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
+        $ mc.change_locked_clarity(20)
         ###Draw the girl###
         "You quickly open the door and invite her inside."
         "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
@@ -168,6 +173,7 @@ label breeding_fetish_happy_breeder_crisis_label():
     the_person "Oh geeze... I just couldn't stop thinking about how good it feels when you fuck me!"
     "You are hardly surprised. [the_person.possessive_title]'s breeding fetish makes her a cum starved slut..."
     the_person "I just couldn't help it... will you please let me stay here tonight?"
+    $ mc.change_locked_clarity(30)
     "[the_person.possessive_title] looks at you with hopeful eyes."
     menu:
         "Accept":  #This begins the sex scene
@@ -194,6 +200,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                     "After a few moments, her milk really begins to flow. There is now a thin but steady stream of the creamy fluid flowing into your mouth."
                     the_person "Ah! Oh baby that's it! aahhhhh..."
                     $ the_person.change_arousal(30)
+                    $ mc.change_locked_clarity(30)
                     "Her cream is sweet and plentiful. You suckle her for a long while before the flow starts to slow down."
                     the_person "ohhh, [the_person.mc_title] that felt so good. Can you, you know, do the other one too?"
                     mc.name "Mmm, certainly."
@@ -207,6 +214,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                     "Her milk comes out in small amounts as you suckle, her breathing catches with each pull."
                     the_person "Ahhhh... oh [the_person.mc_title] that feels so good..."
                     $ the_person.change_arousal(30)
+                    $ mc.change_locked_clarity(20)
                     "You manage to squeeze a bit of her cream out. It's a delicious treat that restores some of your energy."
                     $ mc.change_energy(40)
                     $ the_person.change_energy(40)
@@ -214,6 +222,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                 "[the_person.possessive_title] moans and runs her hands through your hair."
                 "You turn your head and begin to lick and suck her nipple."
                 $ the_person.change_arousal(20)
+                $ mc.change_locked_clarity(10)
                 the_person "That feels so good [the_person.mc_title]... I can't wait until my milk starts to come in."
                 $ mc.change_energy(30)
                 $ the_person.change_energy(30)
@@ -243,6 +252,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                 the_person "Anything for you, [the_person.mc_title]."
                 "[the_person.possessive_title] looks up at you while she scoots closer to you, until her body is up against yours. She uses her hand to point your cock straight up while she moves it in position between her amazingly soft tits."
                 "Once in position, she uses her hands to push her tits together, squashing your prick in her heavenly soft tit-flesh."
+                $ mc.change_locked_clarity(30)
                 "[the_person.possessive_title] starts to move up and down. Now and then when her tits are at the base of your dick she licks the sensitive tip."
                 "The view of [the_person.possessive_title] on her knees before you, happy with you between her tits is extremely arousing. It isn't long until you are fully erect."
 
@@ -251,6 +261,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                 "[the_person.possessive_title] smiles up at you."
                 the_person "Anything for you, [the_person.mc_title]."
                 "[the_person.possessive_title] looks up at you while she scoots closer to you, then lowers her head down and begins to lick and up down your groin."
+                $ mc.change_locked_clarity(30)
                 "She moves her head to the tip and slowly moves her head up and down your shaft a few times. She pulls off for a second then looks up at you."
                 the_person "Mmm, I can taste the remnants of earlier... I can't wait to feel you inside me again..."
                 "[the_person.possessive_title] resumes blowing you with vigor."
@@ -259,6 +270,7 @@ label breeding_fetish_happy_breeder_crisis_label():
             mc.name "Okay [the_person.title], I'm ready. Now bend over and get ready for another round."
             "[the_person.possessive_title] obediently does as you ask and bends over your bed as you stand up and get behind her."
             $ the_person.draw_person(position = "standing_doggy")
+            $ mc.change_locked_clarity(50)
             the_person "Come and get it, [the_person.mc_title]... its yours for the taking!"
             "You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
@@ -300,6 +312,7 @@ label breeding_fetish_family_sleep_crisis_label():
         "You invite her in. You immediately start to get aroused when you see what she is wearing."
         $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_blue_outfit))
         $ the_person.draw_person()
+        $ mc.change_locked_clarity(30)
         the_person "So... I was wondering... is it okay if I sleep in here with you again tonight?"
         menu:
             "Not tonight":
@@ -317,6 +330,7 @@ label breeding_fetish_family_sleep_crisis_label():
                 the_person "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
                 "[the_person.possessive_title] winks at you before beginning her routine."
                 call free_strip_scene(the_person) from _free_strip_scene_701
+                $ mc.change_locked_clarity(50)
                 mc.name "Damn [the_person.title], you are really getting good at that."
                 "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
                 the_person "Hey... if you want to I could... you know... take care of that tent you are sporting there [the_person.mc_title]."
@@ -343,7 +357,7 @@ label breeder_cowgirl_wakeup_label(the_person):
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
     "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock from behind like a pro."
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. This time, however, there are some very pleasant sensations coming from your crotch."
-
+    $ mc.change_locked_clarity(50)
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "cowgirl")
     $ the_person.change_arousal(35)
