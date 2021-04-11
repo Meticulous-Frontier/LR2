@@ -581,7 +581,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, skip_condom = True) from _call_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
@@ -710,7 +710,7 @@ label casual_hotwife_her_place_label(the_person):
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
-    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH040
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_CSH040
     $ the_report = _return
 
     #Finishing dialogue based on sexual performance

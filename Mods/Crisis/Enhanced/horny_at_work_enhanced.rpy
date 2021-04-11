@@ -606,7 +606,7 @@ label horny_at_work_crisis_enhanced_label():
                                 else:
                                     "You pull back a little and line the tip of your dick up with [the_person.title]'s cunt."
                                     "With one smooth thrust you push yourself inside of her. She arches her head back and moans as you bottom out inside of her."
-                                    call fuck_person(the_person, private = False, start_position = missionary, start_object = desk, asked_for_condom = True, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_5
+                                    call fuck_person(the_person, private = False, start_position = missionary, start_object = desk, skip_condom = True, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_5
                                     $ the_report = _return
                                     $ the_person.review_outfit()
                                     $ scene_manager.update_actor(the_person, position = "stand3")

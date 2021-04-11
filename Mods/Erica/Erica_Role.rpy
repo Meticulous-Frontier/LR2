@@ -567,7 +567,7 @@ label erica_phase_one_label(the_person):
         # if not mc.condom:
         #      $ the_person.break_taboo("condomless_sex")
         # the_person "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-        # call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS010
+        # call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS010
         # $ the_report = _return
         # if the_report.get("girl orgasms", 0) > 0:
         #     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
@@ -708,7 +708,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
             if not mc.condom:
                 $ the_person.break_taboo("condomless_sex")
             the_person "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS011
+            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS011
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "As you slowly let [the_person.title] down from the wall, you can see her trembling, feeling the aftershocks of her orgasm."
@@ -1029,7 +1029,7 @@ label erica_post_race_fwb_label(the_person):
     "You have every intention of doing exactly that."
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS030
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS030
     $ the_report = _return
 
     $ the_person.clear_situational_slut("Lost Bet")
@@ -1097,7 +1097,7 @@ label erica_post_race_love_label(the_person):
     the_person "Mmmm, prove it!"
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
-    call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS031
+    call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS031
     $ the_report = _return
     "When you finish with her, [the_person.possessive_title] lies down on her bed."
     $ the_person.draw_person(position = "missionary")
@@ -2042,7 +2042,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             #TODO relevant you better pull out / cum inside / knock me up / other appropriate dialogue here.
             $ the_person.change_arousal(20)
             "All she can do is cling to you as you start to fuck her."
-            call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_fuck_after_yoga_01
+            call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_fuck_after_yoga_01
             $ the_person.call_dialogue("sex_review", the_report = _return)
 
         "Fuck her against the wall (disabled) " if the_person.sluttiness < 70:
