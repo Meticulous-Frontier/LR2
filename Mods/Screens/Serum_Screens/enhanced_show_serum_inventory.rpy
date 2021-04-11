@@ -26,7 +26,7 @@ init 2:
                                 xsize 390
                                 style "textbutton_style"
                                 text_style "serum_text_style"
-                                action Show("serum_tooltip",None,design[0])
+                                action Show("serum_tooltip",None,design[0], given_align = (0.9,0.09), given_anchor = (1.0,0.0))
                                 sensitive True
                                 hovered Show("serum_tooltip",None,design[0])
 
