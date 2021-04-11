@@ -13,7 +13,7 @@ init 5 python:
 
             for x in supported_positions + ["character_images"]:
                 self.Locks[x] = threading.RLock()
-                self.Cache[x] = LRUCacheDict(max_size = 700, expiration = 0)    # 500 most used character images per position (25Mb)
+                self.Cache[x] = LRUCacheDict(max_size = 300, expiration = 0)    # 300 most used character images per position
 
         def preload(self):  # load main character images into the zip file cache (about 2700 images)
             for cloth in [white_skin, black_skin, tan_skin, breast_region, torso_region, stomach_region, pelvis_region] + hair_styles + pube_styles:
@@ -54,5 +54,5 @@ init 5 python:
                         mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")
 
     zip_manager = ZipManager()
-    if not config.debug:    # delays reload time (disable while debugging)
-        zip_manager.preload()
+    # if not config.debug:    # delays reload time (disable while debugging)
+    #     zip_manager.preload()
