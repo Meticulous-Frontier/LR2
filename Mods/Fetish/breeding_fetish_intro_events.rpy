@@ -172,7 +172,7 @@ label breeding_fetish_employee_intro_label(the_person):
     mc.name "...and didn't stop until I dump my cum deep?"
     the_person "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _employee_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _employee_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person "Oh god! Its so deep! Oh thank you so much [the_person.mc_title]!"
     else:
@@ -262,7 +262,7 @@ label breeding_fetish_family_intro_label(the_person):
         the_person "My brain says this is wrong, but my body keeps saying its so right!"
         the_person "Fuck me [the_person.mc_title], I want you to fill me with your cum!"
     "You run you cock along her slit a couple more times, then start to push it inside. She moans as you bottom out inside of her and start to fuck."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _family_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _family_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     if the_person.knows_pregnant():
@@ -343,7 +343,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     $ the_person.change_arousal(10) #60
     the_person "Just shove it in! I'm ready!"
     "You decide to give her what she wants, for now. You grab her hips and then push yourself inside of her sopping wet cunt."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _generic_anyone_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _generic_anyone_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     "When you finish, she lays back, just rubbing her hand along her belly."
@@ -626,7 +626,7 @@ label breeding_fetish_stephanie_bimbo_label(the_person):
     the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
     "Without any hesitation you slide your cock into her cunt."
     $ the_person.break_taboo("vaginal_sex")
-    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True) from _call_steph_bimbo_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     the_person "Oh god its so warm. Its like I can feel the little sperm wriggling inside of me..."
     $ scene_manager.update_actor(the_person, position = "stand2")
@@ -735,7 +735,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     the_person "Stick it in [the_person.mc_title]! Fuck me hard and cum as deep as you can!"
     "You grab her hips to stop the wiggling. You line yourself up with her thirsty cunt and push into her. She gasps when you bottom out."
     the_person "Oh yes! Give it to me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _starbuck_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person "Oh god! Baby making sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
@@ -807,7 +807,7 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
     "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
     the_person "Come fill me up, [the_person.mc_title]!"
-    call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True, asked_for_condom = True) from _sarah_ask_for_baby_05
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True, skip_condom = True) from _sarah_ask_for_baby_05
     if the_person.has_creampie_cum():
         the_person "Oh my god... we actually did it..."
         "She grabs an extra pillow and puts it under her butt so her hips are elevated."
@@ -886,7 +886,7 @@ label breeding_fetish_erica_intro_label():
     $ mc.change_arousal(15)
     the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]."
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _erica_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _erica_gets_breeding_fetish_01
     $ the_person.draw_person(position = "missionary")
     if the_person.has_creampie_cum():
         $ become_pregnant(the_person)
@@ -1009,7 +1009,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         the_person "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person "Yes!!!"
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, asked_for_condom = True) from _bimbo_candace_gets_breeding_fetish_01
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
         else:
@@ -1074,7 +1074,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person "Yes!!!"
 
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, asked_for_condom = True) from _bimbo_candace_gets_breeding_fetish_02
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_02
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
             if the_person.knows_pregnant():

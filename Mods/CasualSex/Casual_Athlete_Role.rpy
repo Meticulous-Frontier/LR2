@@ -306,7 +306,7 @@
 #         if not mc.condom:
 #              $ the_person.break_taboo("condomless_sex")
 #         the_person "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-#         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS010
+#         call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS010
 #         $ the_report = _return
 #         if the_report.get("girl orgasms", 0) > 0:
 #             "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
@@ -382,7 +382,7 @@
 #                 if not mc.condom:
 #                     $ the_person.break_taboo("condomless_sex")
 #                 the_person "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-#                 call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS011
+#                 call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS011
 #                 $ the_report = _return
 #                 if the_report.get("girl orgasms", 0) > 0:
 #                     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
@@ -525,7 +525,7 @@
 #     "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
 #     the_person "Yes!!! Oh god, please fuck me good!"
 #     "You have every intention of doing exactly that."
-#     call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS030
+#     call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS030
 #     $ the_report = _return
 #
 #     $ the_person.clear_situational_slut("Lost Bet")

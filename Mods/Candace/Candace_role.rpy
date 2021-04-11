@@ -917,7 +917,7 @@ label candace_love_path_intro_label():
     "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
-    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_01
+    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
     "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
@@ -1059,7 +1059,7 @@ label candace_love_path_intro_label():
     mc.name "I know, but someone has to teach you patience."
     the_person "I'm patient! I can totally be patient, I'm the most... Ohhh!!!"
     "You cut her off mid sentence as you thrust yourself all the way into her. You don't give her time to recover, as you start to roughly fuck her."
-    call fuck_person(the_person, start_position = SB_doggy_standing, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_02
+    call fuck_person(the_person, start_position = SB_doggy_standing, private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_02
 
     # You decide to just wait and see what happens. You continue to enjoy the view of Candi's ass as she scrubs your plates clean, then sets them on a drying rack. She turns around and immediately notices your erection.
     # "Oh, thank God, I was, like, REALLY hoping to get one more in before work..."

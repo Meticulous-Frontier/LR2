@@ -324,7 +324,7 @@ init 5 python:
         return positions
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = []):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -334,9 +334,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
-    $ ask_for_condom = asked_for_condom
+    $ ask_for_condom = skip_condom
     $ ask_for_threesome = False
-    $ use_condom = mc.condom if asked_for_condom else False
+    $ use_condom = mc.condom if skip_condom else False
     $ stealth_orgasm = False
     $ stop_stripping = False
 

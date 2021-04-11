@@ -338,7 +338,7 @@ label quest_cuckold_employee_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     $ the_person.strip_outfit()
     the_person "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
-    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_1
+    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_1
     $ the_report = _return
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -432,7 +432,7 @@ label quest_cuckold_employee_rethink_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     $ the_person.strip_outfit()
     the_person "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
-    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_3
+    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_3
     $ the_report = _return
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -524,7 +524,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ the_person.strip_outfit()
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
     the_person "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
-    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, asked_for_condom = True) from _breed_cuckold_attempt_2
+    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_2
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person "Oh god, every risky load feels even better than the last..."
@@ -734,7 +734,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ the_person.draw_person(position = "doggy")
     "Her ass in position, you quickly get her ready."
     $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
-    call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, asked_for_condom = True) from _breed_cuckold_victory_lap_01
+    call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, skip_condom = True) from _breed_cuckold_victory_lap_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."

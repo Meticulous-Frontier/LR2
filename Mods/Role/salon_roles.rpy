@@ -802,7 +802,7 @@ label ophelia_revenge_date_label():
     "You pull her leg up. She is so wet you slide inside of her easily. You feel her salon manicured nails scratching down your back as you fill her up."
     $ the_person.break_taboo("vaginal_sex")
     the_person "Yes! Oh god this is so hot, why didn't I let you do this earlier. Oh god."
-    call fuck_person(the_person, start_position = against_wall, skip_intro = True, asked_for_condom = True, prohibit_tags = ["Foreplay", "Oral", "Anal"]) from _ophelia_first_date_sex_scene_1
+    call fuck_person(the_person, start_position = against_wall, skip_intro = True, skip_condom = True, prohibit_tags = ["Foreplay", "Oral", "Anal"]) from _ophelia_first_date_sex_scene_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person "Oh my god, I came harder than I ever did with [ex_name]. That was unbelievable!"
