@@ -55,6 +55,7 @@ label mom_sister_snooping_action_label():
         $ text_one = person_opinion_to_string(mom, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
         mom "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        $ mc.change_locked_clarity(10)
         if mom.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [mom.title] felt that way."
         "The girls keep talking. They keep bouncing back and forth between multiple sexual topics."
@@ -62,6 +63,7 @@ label mom_sister_snooping_action_label():
         $ text_one = person_opinion_to_string(lily, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
         lily "...But I [text_one] [text_two], so I'm not sure what to do."
+        $ mc.change_locked_clarity(10)
         if lily.discover_opinion(overhear_topic):
             "Wow, you didn't realize they talked about sex in such detail with each other."
         "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
@@ -77,12 +79,14 @@ label mom_sister_snooping_action_label():
         mom "Honey, you just have to work with what you've been given. Let mama help. Show me what you're working with."
         lily "Okay mom..."
         $ scene_manager.strip_actor_outfit(lily, top_layer_first = True, exclude_lower = True, exclude_feet = True, delay = 1)
+        $ mc.change_locked_clarity(30)
         "Oh my... [lily.title] is topless!"
         mom "See? Any man would be love to get their hands on you. You just have to learn to work with what you have."
         mom "I have to actively cover up, to keep from getting too much attention..."
         lily "Why would you do that!?! I'd kill to have your figure..."
         $ scene_manager.strip_actor_outfit(mom, top_layer_first = True, exclude_lower = True, exclude_feet = True, delay = 1)
         "Now [mom.possessive_title] is taking her top off?"
+        $ mc.change_locked_clarity(30)
         mom "I don't know, I just feel like they are such a distraction sometimes..."
         "[mom.title] is holding her own tits, a bit self-consciously."
         lily "Don't say that, they are so beautiful..."
@@ -95,6 +99,7 @@ label mom_sister_snooping_action_label():
         mom "And sensitive too!"
         $ lily.change_arousal(15)
         "You feel yourself getting hard watching [mom.title] and [lily.title] comparing their assets..."
+        $ mc.change_locked_clarity(30)
         $ lily.change_slut_temp(3)
         $ mom.change_slut_temp(3)
         "Eventually you tear your eyes away. You don't want to get caught snooping."
@@ -109,6 +114,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.add_actor(lily, position = "sitting")
         $ Threesome_sixty_nine.update_scene(lily, mom)
         "When you peak around the corner, you see [mom.title] on top of [lily.title]. They are eating each other out."
+        $ mc.change_locked_clarity(50)
         mom "Mmmm, that's it dear, lick right there!"
         $ mom.change_arousal(12)
         "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up at notices you at the door."
@@ -144,6 +150,7 @@ label mom_sister_snooping_action_label():
         "[lily.title] laughs this time."
         lily "I guess it couldn't hurt to try..."
         $ lily.change_slut_temp(3)
+        $ mc.change_locked_clarity(10)
         "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif lily.sluttiness >= 20:
         $ lily.apply_university_outfit()
@@ -165,6 +172,7 @@ label mom_sister_snooping_action_label():
         "[mom.title] gives a laugh."
         mom "I guess it couldn't hurt to try..."
         $ mom.change_slut_temp(3)
+        $ mc.change_locked_clarity(10)
         "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     $ scene_manager.clear_scene()
     return

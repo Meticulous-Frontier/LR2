@@ -45,6 +45,7 @@ label mother_daughter_doubleteam_action_label():
     the_daughter "I know, I know, dad always said you were good in bed. I'm not disputing that! I'm just saying I'm pretty good at giving blowjobs and I might even be better than you..."
     the_mother "Honey, blowjobs are an art that takes YEARS to master. I understand that you have enthusiasm, but that doesn't make up for practiced technique."
     the_daughter "What makes you think I don't have practice? Oh! Hey [the_daughter.mc_title]."
+    $ mc.change_locked_clarity(10)
     "They both look at you as you walk into the break room."
     the_mother "Hey [the_mother.mc_title], maybe you could help us settle something. In your experience, who gives better blowjobs, enthusiastic, younger girls or experienced older women?"
     "Oh boy, you walked into hornet's nest."
@@ -54,11 +55,13 @@ label mother_daughter_doubleteam_action_label():
     mc.name "Why don't you two just find some hapless guy at the bar tonight. You can both blow him and then find out who he thinks is better?"
     the_daughter "That's a good idea! Except... I mean some random guy? He may not be experienced or have a clue."
     the_mother "That IS a good idea [the_daughter.mc_title], except we need someone with a bit more experience... like say... you!"
+    $ mc.change_locked_clarity(20)
     the_daughter "Hey! There we go! [the_daughter.mc_title], you should let us blow you and decide who is better!"
     "Hmmm, you wonder. Maybe you could talk them into doing it at the same time? It would be easier to judge technique if they were both on their knees in front of you..."
     menu:
         "Let's settle this right now":
             mc.name "I have one condition though. Why don't you both go at the same time, that way I can go back and forth and make up my mind easier."
+            $ mc.change_locked_clarity(20)
             the_daughter "Yes! Let's do it mom! Loser has to cook dinner tonight!"
             the_mother "Okay, let's do it!"
             mc.name "Let's go to my office for some privacy."

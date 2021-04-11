@@ -38,6 +38,7 @@ label milk_employee_crisis_label():
     the_person "These stupid pumps... I hate these things..."
     $ the_person.draw_person(position = "sitting")
     "Looking inside, you see [the_person.title] sitting at a table, a couple of breast pumps sitting in front of her."
+    $ mc.change_locked_clarity(10)
     menu:
         "Ask how she is doing":
             pass
@@ -61,6 +62,7 @@ label milk_employee_crisis_label():
         mc.name "Plastic and silicone is certainly no substitute for human interaction."
         the_person "Yeah... I think I'm just going to hand express this time."
         "She grabs one of the plastic containers from the table, then grabs one of her boobs in her hand and starts to squeeze until her milky cream starts to drip from it in to the container."
+        $ mc.change_locked_clarity(10)
         the_person "I'm trying to build up my supply some. It's nice working somewhere I can take a few minutes a couple times a day to do something like this."
         mc.name "Of course. This isn't medieval times, if you need to pump or whatever you can do it when and where you need."
         $ the_person.change_stats(obedience = 3, slut_temp = 1, slut_core = 1)
@@ -74,6 +76,7 @@ label milk_employee_crisis_label():
         mc.name "Plus, this will be a bit faster than if you did it by hand, since I can milk both at the same time."
         the_person "Exactly! All in the name of efficiency!"
         "You put your hands on her engorged mammaries. The skin is hot and feels like its pulled tight, her tits are so full of milk."
+        $ mc.change_locked_clarity(20)
         the_person "Aahhh... I mean... it feels really good too..."
         "You start to squeeze them in rhythm. First one, then the other. It takes several seconds, but soon milk starts to dribble out of the tip."
         # We don't have access to multiple lactation sources yet, but assume at some point we can make cows that can really crank out milk
@@ -81,11 +84,13 @@ label milk_employee_crisis_label():
             "[the_person.title] gives a moan, and the floodgates open as her breasts let down. Milk is now coming out in a steady stream from both tits, and everytime you squeeze it spurts out forcefully."
             the_person "Oh god... that feels so good..."
             $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(30)
             "[the_person.possessive_title] is panting as her tits rapidly fill the milk containers. She is expressing an impressive amount."
         else:
             "[the_person.title] gives a moan as she lets down. Now with each squeeze, her nipples emit a short but steady squirt."
             the_person "Mmm, that feels so good..."
             $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(10)
         $ the_person.change_stats(happiness = 5, slut_temp = 1, slut_core = 1)
         "Eventually the bottles fill up and the milk being expressed with each grope is decreasing."
         the_person "Mmm... thanks... you can stop now. If you want to..."
@@ -107,12 +112,14 @@ label milk_employee_crisis_label():
         "You sit down next to [the_person.title] in an awkward move, she gently lowers you on to her lap. You look up at her full, milk laden tits hungrily."
         "You bring your lips to her nipple and begin to suckle. Tiny drips begin to escape it, giving you a taste of milk."
         $ the_person.change_arousal(10)
+        $ mc.change_locked_clarity(30)
         the_person "Mmm, that's it. Don't worry, I'll let down in a second..."
         if the_person.lactation_sources > 2:
             "Suddenly, the milk begins to flow much more rapidly as [the_person.possessive_title] starts to let down. Milk is pouring into your mouth at an alarming rate."
             "You quickly swallow gulp after gulp, just keeping up with her production. Her milk is smooth, sweet, and creamy."
             $ the_person.change_arousal(25)
             $ mc.arousal += 15              #Fun for everyone
+            $ mc.change_locked_clarity(30)
             the_person "Oh my god, yes that's it."
             "Her hand is running through your hair. It is a very intimate encounter to suckle from her like this."
         else:
@@ -120,6 +127,7 @@ label milk_employee_crisis_label():
             "Her milk is smooth, sweet, and creamy."
             $ the_person.change_arousal(15)
             $ mc.arousal += 10              #Fun for everyone
+            $ mc.change_locked_clarity(10)
             the_person "Mmm, that feels really nice..."
         "She takes one of your hands and puts it on her other breast."
         the_person "Here... squeeze this side too..."
@@ -130,12 +138,14 @@ label milk_employee_crisis_label():
             "One hand continues to run through your hair, while her other hand holds the bottle. You look up and see her eyes are closed as she enjoys her milking."
             $ the_person.change_arousal(25)
             $ mc.arousal += 15
+            $ mc.change_locked_clarity(30)
         else:
             the_person "Oh my god, yes that's it..."
             "Her other breast lets down. With each squeeze it sprays into the bottle, and in between squeezes her milk still slowly dribbles out."
             "She holds the bottle carefully, collecting the milk from one side, while you consume the milk from the other. You look up and see her eyes are closed as she enjoys her milking."
             $ the_person.change_arousal(15)
             $ mc.arousal += 10
+            $ mc.change_locked_clarity(10)
         "You enjoy drinking deep from [the_person.possessive_title]'s breast. When her supply is depleted, you sit back up, feeling energized from your fresh serving of milk."
         $ mc.change_energy(50)
         $ the_person.change_stats(obedience = 5, slut_temp = 1, slut_core = 1)

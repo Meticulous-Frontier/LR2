@@ -120,6 +120,7 @@ label SB_working_weekend_crisis_label_high(person_one):
     "Seeing that you are here all by yourself, [person_one.possessive_title] grabs a chair and sits close to you."
     $ scene_manager.update_actor(person_one, position = "sitting")
     person_one "Wow, your dedication to this place is pretty sexy... would you like to maybe... blow off a little steam?"
+    $ mc.change_locked_clarity(20)
     "[person_one.possessive_title] begins to rub your crotch through your pants. You are almost done with your previous task, maybe you could get her to do something while you finish up..."
     menu:
         "Strip for me":
@@ -128,7 +129,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             person_one "I can do that, [person_one.mc_title]... I hope you like the show!"
             $ person_one.change_slut_temp(2)
             call free_strip_scene(person_one) from _free_strip_scene_3
-
+            $ mc.change_locked_clarity(50)
             $ person_two = get_random_employees(1)
             if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah_epic_tits_progress() == 1):
                 "You're pretty sure she's ready for next step if you are ready."
@@ -136,6 +137,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                     "Fuck her on your desk":
                         "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                         "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
+                        $ mc.change_locked_clarity(30)
                         $ person_one.break_taboo("condomless_sex")
                         $ person_one.break_taboo("vaginal_sex")
                         "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
@@ -165,12 +167,14 @@ label SB_working_weekend_crisis_label_high(person_one):
             else:  #Someone walks in, threesome opportunity#
                 "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 $ scene_manager.update_actor(person_one, position = "kissing")
+                $ mc.change_locked_clarity(30)
                 "[person_one.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
                 $ person_one.break_taboo("touching_penis")
                 person_two "Wow, looks like you guys are getting ready for some fun!"
                 $ scene_manager.add_actor(person_two, position = "stand3", display_transform = character_left, emotion = "happy")
                 "You turn and see [person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
                 person_two "This is so sexy... [person_two.mc_title], can I join? Please!?! You won't regret it!"
+                $ mc.change_locked_clarity(50)
                 "Dumbfounded, you can only nod."
                 person_two "Yes! Oh just give me one second!!!"
                 "She starts to strip down."
@@ -233,7 +237,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                     mc.name "So, do you have any kinks, [person_one.title]? Something that might be more fun for me to know about?"
                     "[person_one.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["kinks"])
-
+            $ mc.change_locked_clarity(20)
             if SB_discover_opinion_count == 0:
                 person_one "I guess you could say I don't care too much about that."
             elif SB_discover_opinion_count < 2:
@@ -248,6 +252,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
     $ scene_manager.update_actor(person_one, position = "sitting")
     person_one "Wow, your dedication to this place is pretty incredible... Don't you ever do something... you know, to blow off steam?"
     "[person_one.possessive_title]'s voice takes a bit of a sultry tone at the end of that statement. Is she flirting with you?"
+    $ mc.change_locked_clarity(10)
     mc.name "Yes, [person_one.title], of course I do... but... it IS rather boring around here. I'd be grateful for a bit of company while I'm working"
     "[person_one.possessive_title] smiles at you. And was that a wink?"
     person_one "Oh! [person_one.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
@@ -263,6 +268,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
                 $ scene_manager.draw_animated_removal(person_one, the_clothing)
                 $ the_clothing = None
             "Your eyes wander down to [person_one.possessive_title]'s tits."
+            $ mc.change_locked_clarity(30)
             if person_one.outfit.tits_available():
                 if person_one.get_opinion_score("showing her tits") > 0:
                     "You can see a blush in [person_one.possessive_title]'s cheeks. She likes to show off her [person_one.tits] tits!"
