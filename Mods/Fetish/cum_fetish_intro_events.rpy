@@ -188,7 +188,6 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "Oh my god..."
     $ the_person.cum_on_stomach()
     $ the_person.draw_person(position = "kneeling1")
-    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
     "Taking what she can, [the_person.possessive_title] goes further, rubbing your cum onto her belly."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(30)
