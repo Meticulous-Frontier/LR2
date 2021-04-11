@@ -91,7 +91,7 @@ label clarity_train_cha(the_person):
     the_person "I suppose we could do that."
     $ the_person.draw_person(position = "sitting")
     "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumors and gossip."
-    $ mc.spend_clarity(the_person.cha * 100)
+    $ mc.spend_clarity(the_person.charisma * 100)
     $ the_person.change_cha(1)
     the_person "Thank you [the_person.mc_title], that was very educational!"
     call advance_time from _call_advance_clarity_cha_01
