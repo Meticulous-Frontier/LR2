@@ -2,12 +2,13 @@ init -1:
     python:
         def serum_rename_func(new_name):
             cs = renpy.current_screen()
-            cs.scope["the_serum"].name = new_name
+            cs.scope["serum_design"].name = new_name
 
 
 init 2:
-    screen serum_tooltip(the_serum, given_anchor = (0.0,0.0), given_align = (0.0,0.0)):
+    screen serum_tooltip(the_serum, given_anchor = (0.0,0.0), given_align = (0.0,0.0), allow_edit = False):
         zorder 105
+
         frame:
             background "#888888"
             anchor given_anchor
@@ -17,26 +18,33 @@ init 2:
                 ysize 900
                 xalign 0.5
                 spacing 10
-                button:
-                    id "serum_rename_id"
-                    selected
 
-                    style "serum_textbutton_style_header"
-                    xalign 0.5
-                    xsize 480
+                if allow_edit:
+                    button:
+                        id "serum_rename_id"
+                        selected
 
-                    action NullAction()
+                        style "serum_textbutton_style_header"
+                        xalign 0.5
+                        xsize 480
 
-                    add Input(
-                    size =  24,
-                    color = "#dddddd",
-                    default = the_serum.name,
-                    changed = serum_rename_func,
-                    length = 25,
-                    button = renpy.get_widget("serum_tooltip", "serum_rename_id")
-                    ) xalign 0.5
+                        action NullAction()
 
-                    unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
+                        add Input(
+                        size =  24,
+                        color = "#dddddd",
+                        default = the_serum.name,
+                        changed = serum_rename_func,
+                        length = 25,
+                        button = renpy.get_widget("serum_tooltip", "serum_rename_id")
+                        ) xalign 0.5
+
+                        unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
+                else:
+                    frame:
+                        background "#000080"
+                        xsize 480
+                        text the_serum.name style "serum_text_style_header"
 
                 frame:
                     background "#777777"
