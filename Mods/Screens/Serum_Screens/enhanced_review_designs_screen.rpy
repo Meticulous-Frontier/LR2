@@ -59,8 +59,8 @@ init 2:
                                             xsize 230
                                             ysize 50
 
-        if serum_design == selected_serum:
-            use serum_tooltip(selected_serum, given_align = (0.9,0.09), given_anchor = (1.0,0.0), allow_edit = True)
+        if selected_serum:
+            use serum_tooltip(selected_serum, given_align = (0.9,0.09), given_anchor = (1.0,0.0))
 
         frame:
             background None
