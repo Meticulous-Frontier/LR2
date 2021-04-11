@@ -32,6 +32,7 @@ label fetish_anal_staylate_label(the_person):
     "You lower your voice and whisper in her ear so others don't overhear."
     mc.name "...but I might have to spank your ass a bit anyway."
     "You look [the_person.possessive_title] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
+    $ mc.change_locked_clarity(20)
     the_person "Oh! Thank you sir! I'll look forward to it!"
     "You say goodbye to [the_person.possessive_title]."
     $ add_fetish_anal_staylate_event(the_person)
@@ -54,6 +55,7 @@ label fetish_anal_staylate_event_label(the_person):
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
     $ the_person.apply_outfit(special_fetish_outfit)
     $ the_person.draw_person()
+    $ mc.change_locked_clarity(30)
     "From the look of her attire, she seems to have guessed the purpose of your meeting correctly."
     the_person "Hey [the_person.mc_title]. You wanted to see me?"
 
@@ -63,6 +65,7 @@ label fetish_anal_staylate_event_label(the_person):
     the_person "Yes Sir!"
     $ the_person.draw_person(position = "standing_doggy")
     $ the_person.change_arousal(10)
+    $ mc.change_locked_clarity(50)
     "You approach [the_person.possessive_title] and begin to inspect her shapely ass. Nestled between her cheeks, you can see the pink jewel of her butt plug."
     "Below her plug, you can see the soft wet lips of her cunt. They are already flushed, showing a slight glisten of moisture. She is getting aroused just from presenting her ass to you."
     "She begins to wiggle her hips slightly in response to your intense gaze."
@@ -79,6 +82,7 @@ label fetish_anal_staylate_event_label(the_person):
             "[the_person.possessive_title]'s accommodating ass ripples in shock waves out from where you hand spanks it."
             "You give her hind quarters a few more spanks, giving her few seconds in between."
             $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(50)
             "[the_person.possessive_title] barely stifles a moan as you spank her again. Her cheeks are beginning to glow a rosy red. Her pussy lips are growing puffy with clear signs of arousal."
             "You decide it is time to move on."
         "Fuck Her Ass":
@@ -88,6 +92,7 @@ label fetish_anal_staylate_event_label(the_person):
             the_person "Oh! Whatever you think is best sir..."
             "You fuck her for a few moments with the jewelled plug. She loves the penetration and begins to push her hips back against you as you work the plug in and out of her."
             $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(50)
             mc.name "Now, I think it is time for something a bit more substantial than the plug..."
             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
@@ -122,6 +127,7 @@ label fetish_anal_staylate_event_label(the_person):
             "With two fingers, you start to pull the jewelled plug from her. When only the tip remains, you push it back in."
             "You fuck her for a few moments with the jewelled plug. She loves the penetration and begins to push her hips back against you as you work the plug in and out of her."
             $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(50)
             mc.name "Now, I think it is time for something a bit more substantial than the plug..."
             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex") * 5)

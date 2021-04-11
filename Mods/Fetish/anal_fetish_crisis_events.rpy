@@ -56,6 +56,7 @@ label aggressive_anal_fetish_employee_label():
     "She interrupts you."
     the_person "Yes, there's something I need very much right now."
     "You stand up and start to walk around your desk. She wraps her arms around you."
+    $ mc.change_locked_clarity(20)
     $ the_person.draw_person(position = "kissing")
     if the_person.obedience < 100:
         the_person "I don't know how long it's been since you've been in my ass, but its been too long!"
@@ -71,6 +72,7 @@ label aggressive_anal_fetish_employee_label():
         "She looks up at you and bats her eye lashes."
         the_person "I... I just really need you in my ass. I don't know how longs its been, but its been too long!"
         the_person "Please? I'll take care of everything, all you have to do is lay back."
+        $ mc.change_locked_clarity(50)
         menu:
             "Let her":
                 "You gave her the serums that resulted in her anal fetish in the first place, so you feel a little obliged to let her work her fetish out."
@@ -114,6 +116,7 @@ label aggressive_anal_fetish_non_employee_label():
     the_person "Well, eh, I'm desperately in need of a rectal massage."
 
     "It seems she is desperate for you to satisfy her anal fetish, what will you do?"
+    $ mc.change_locked_clarity(20)
 
     menu:
         "All right":
@@ -133,6 +136,7 @@ label aggressive_anal_fetish_non_employee_label():
             "You can see she is still wearing her princess butt plug, that seems to have become a part of her daily outfit."
             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
+            $ mc.change_locked_clarity(50)
             the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking my ass right now!"
             "You drop your pant, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
 
@@ -170,6 +174,7 @@ label anal_fetish_employee_evening_approach_label():
         $ the_person.draw_person()
         the_person "Hey, [the_person.mc_title]. Just wondering if... you know... you wanna stick around for a bit after work today?"
         "She flashes you a quick smile. You wonder if she has in that butt plug she showed you last time you stayed late at the office with her..."
+        $ mc.change_locked_clarity(20)
         mc.name "Sure, I can probably stick around for a little bit. Just give me a few minutes."
         the_person "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
         $ the_person.draw_person(position = "walking_away")
@@ -181,6 +186,7 @@ label anal_fetish_employee_evening_approach_label():
         $ the_person.draw_person(position = "back_peek")
         "Between her pillowy cheeks is her pink jewelled butt plug."
         the_person "What do you say, [the_person.mc_title]? Want to replace my plug with something else?"
+        $ mc.change_locked_clarity(50)
     else:
         $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
@@ -190,6 +196,7 @@ label anal_fetish_employee_evening_approach_label():
         $ the_person.draw_person(position = "back_peek")
         "Between her pillowy cheeks is her pink jewelled butt plug."
         the_person "What do you say, [the_person.mc_title]? Want to replace my plug with something else?"
+        $ mc.change_locked_clarity(50)
     menu:
         "Fuck her ass":
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
@@ -204,6 +211,7 @@ label anal_fetish_employee_evening_approach_label():
             mc.name "You're such a buttslut, [the_person.title]. Are you sure you want it back there? Your pussy looks like it could use a proper fucking too..."
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
+            $ mc.change_locked_clarity(50)
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA30
             $ the_person.draw_person(emotion = "happy")
