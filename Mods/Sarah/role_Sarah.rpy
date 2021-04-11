@@ -505,7 +505,7 @@ label Sarah_intro_label():
             the_person "That would be... incredible! I don't know what to say! I can't wait to get started!"
             mc.name "I'll have to get your phone number. I'll need to set up the position before I can officially hire you, and that might take a few days."
             the_person "Oh! Of course, here..."
-            $ mc.register_number(the_person)
+            $ mc.phone.register_number(the_person)
             "You quickly exchange phone numbers with [the_person.title]."
             mc.name "I'll be in touch with you soon I think."
             the_person "This is great, [the_person.mc_title], you won't regret this, I promise!"

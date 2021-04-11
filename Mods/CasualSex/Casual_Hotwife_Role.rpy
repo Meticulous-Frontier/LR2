@@ -610,7 +610,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person "You'd better get going, [the_person.mc_title]. I'm going to send these to my husband..."
 
         $ the_person.event_triggers_dict["booty_call"] = True # unlock casual encounters
-        $ mc.register_number(the_person)
+        $ mc.phone.register_number(the_person)
 
         "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
 
