@@ -36,7 +36,7 @@ init 2 python:
     def show_debug_log():
         global debug_log_enabled
         debug_log_enabled = True
-        renpy.show_screen("DebugInfo", layer = "top")
+        renpy.show_screen("DebugInfo")
 
     def hide_debug_log():
         global debug_log_enabled
