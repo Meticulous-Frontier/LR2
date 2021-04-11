@@ -373,6 +373,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     the_person "Why don't you come back later, after I close up?"
     "She lowers her voice to a whisper."
     the_person "I'll get on my knees and pretend like I'm sucking your dick. You can take some pictures, and then I'll accidentally send them to my ex..."
+    $ mc.change_locked_clarity(10)
     mc.name "Hmm. That sounds like something that could work... but."
     the_person "But?"
     mc.name "What's in it for me?"
@@ -398,6 +399,7 @@ label ophelia_make_blowjob_pics_label():
     the_person "Good. To be honest I uhh, well, I've been kinda going through a dry spell, since my ex dumped me. I've been looking forward to this all day!"
     $ the_person.draw_person(position = "blowjob")
     $ the_person.change_arousal(10)
+    $ mc.change_locked_clarity(20)
     "She gets down on her knees and reaches for your zipper."
     mc.name "So, am I supposed to be taking pictures?"
     the_person "Ah! Right! Here..."
@@ -411,6 +413,7 @@ label ophelia_make_blowjob_pics_label():
     the_person "Alright... where was I..."
     "Back on her knees, she reaches to you and eagerly starts opening your zipper. Her hand goes into your trousers and soon she is pulling your semi-erect cock out."
     the_person "Mmm, I love it when they are like this and you can feel them getting harder in your mouth..."
+    $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(15)
     $ the_person.break_taboo("sucking_cock")
     "Her lips part and you feel a very talented tongue and set of lips, working over the tip of your dick."
@@ -419,14 +422,16 @@ label ophelia_make_blowjob_pics_label():
     "She gives a muffled mmmhmmmmm as her tongue dances along the underside of your now fully erect penis."
     "Phone in hand, you snap several picture of her working over your manhood."
     "For a second she pulls off."
+    $ mc.change_locked_clarity(20)
     the_person "Hey, put it in video mode and take a quick one of this, my ex used to love it when I did this..."
     mc.name "Okay, one second."
     "You find the button and switch over to video mode. You hit the record button, then give her a nod."
     "She looks up at the phone, making perfect eye contact as she sticks her tongue out, and then easily slides your cock down her throat."
-    "While that is impressive enough, her next move is amazing. With your hardness down her throat, she sticks her tongue out and begins to lap at the bottom of your testicles."
+    "While that is impressive enough, her next move is amazing. With your dick down her throat, she sticks her tongue out and begins to lap at the bottom of your testicles."
     mc.name "Fuck! Holy hell..."
     "She can't smile with her mouth full of meat, but you definitely see a hint of mischief in [the_person.possessive_title]'s eyes."
     $ the_person.change_arousal(15)
+    $ mc.change_locked_clarity(50)
     "She keeps it up for several seconds, then slowly pulls off. You stop the recording."
     the_person "Did you get it?"
     mc.name "Yes, I definitely did."
@@ -437,12 +442,14 @@ label ophelia_make_blowjob_pics_label():
     the_person "Ha! I'm sure you would. Want me to do it again?"
     mc.name "Yes. It felt really good when you..."
     "Without waiting for you to finish your sentence, she opens wide, tongue out, and easily throats you. Her tongue is lapping at your heavy sac."
+    $ mc.change_locked_clarity(50)
     "You feel a strange session along your length. Is she... is her throat contracting around you? Is that even possible? Where the hell did she learn to do THIS?"
     mc.name "Oh god I'm gonna cum!"
     "She quickly pulls off and starts rapidly stroking you with her hand."
     the_person "On my face! Give me your cum all over my face!"
     "You don't have the time to respond. Your body involuntarily begins pumping semen out at a frantic pace."
     $ the_person.cum_on_face()
+    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
     $ the_person.change_arousal(20)
     $ the_person.draw_person(position = "blowjob")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
@@ -452,7 +459,7 @@ label ophelia_make_blowjob_pics_label():
     "As [the_person.title] stands up, you put your cock away. You see her slowly rubbing your cum into the skin on her face with two fingers..."
     mc.name "Okay, I admit it. You have the best mouth I have ever experienced."
     the_person "I told you! I guess years of practicing and being born without a gag reflex will do that though."
-    "A hah! There's the secret... to just be born without a gag reflex..."
+    "A hah! There's the secret... no gag reflex..."
     "You feel amazing, but this is a bit awkward. You decide to offer to reciprocate."
     mc.name "So uhh, it just so happens I'm not too bad with my tongue, either."
     the_person "Is that so?"
@@ -475,6 +482,7 @@ label ophelia_make_blowjob_pics_label():
         "She hesitates, but then slowly starts to strip down."
         $ the_person.strip_outfit(exclude_upper = True)
         $ the_person.update_outfit_taboos()
+        $ mc.change_locked_clarity(30)
         call fuck_person(the_person, private = True, start_position = cunnilingus, skip_intro = False, position_locked = True) from _call_fuck_ophelia_1
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
@@ -532,10 +540,11 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person "You know, I'm not sure I'm ready to give up on [ex_name] yet, but, in the mean time I suppose that makes me single so... you know..."
     mc.name "I'm not sure I do?"
     the_person "It would be nice to be able to blow off a little steam once in a while with someone. Someone like you."
+    $ mc.change_locked_clarity(20)
     mc.name "I'm down for anything you want to blow. You were amazing."
-    the_person "Yeah. It might take some convincing but... I have a feeling you might be able to convince me to do that again."
+    the_person "Yeah. It might take some work, but I have a feeling you might be able to convince me to do that again."
     "She gives you a wink."
-    the_person "I'd better get back to work."
+    the_person "I'd better get to work then."
     $ the_person.event_triggers_dict["pics_to_ex_sent"] = 2
     $ the_person.event_triggers_dict["special_bj_unlock"] = 1
     $ the_person.add_unique_on_room_enter_event(ophelia_revenge_date_plan)
@@ -555,7 +564,7 @@ label ophelia_revenge_date_plan_label(the_person):
     mc.name "Wow, that sounds very nice..."
     "She cuts you off."
     the_person "Don't worry about the expenses, it'll be my treat, okay?"
-    "Clearly there is something going on that she isn't tell you. Probably involving her ex boyfriend again?"
+    "Clearly there is something going on that she isn't telling you. Probably involving her ex boyfriend again?"
     mc.name "And... its going to be just me and you there?"
     the_person "Of course! What are you implying by that?"
     "She tries to smile sincerely, but she can't pull it off. You raise an eyebrow at her horrible acting."
@@ -573,6 +582,7 @@ label ophelia_revenge_date_plan_label(the_person):
     the_person "You got it! You're the best, [the_person.mc_title]!"
     $ the_person.draw_person(position = "kissing")
     "She steps up and gives you a quick peck on the cheek."
+    $ mc.change_locked_clarity(5)
     $ the_person.event_triggers_dict["first_date_planned"] = 1
     $ mc.business.add_mandatory_crisis(ophelia_revenge_date)
     $ del ex_name
@@ -596,6 +606,7 @@ label ophelia_revenge_date_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person)
     "When you see her, you can't help but give her body your complete attention."
+    $ mc.change_locked_clarity(15)
     mc.name "Wow, you look amazing."
     the_person "Thanks! I mean... you'd have to be crazy not to want some of this... right?"
     mc.name "I mean, regardless of what happens with your ex tonight, you don't have to go home alone."
@@ -613,6 +624,7 @@ label ophelia_revenge_date_label():
     $ scene_manager.add_actor(candace, display_transform = character_left_flipped)
     candace "Hi! Sorry, I'm meeting someone here, could you please take me to my table?"
     "At first you just stand there dumbfounded. Jesus this woman is stacked."
+    $ mc.change_locked_clarity(10)
     mc.name "I umm, don't work here. I'm waiting for a table also."
     candace "Oh! Silly me!"
     "She is giving you an obvious once over..."
@@ -626,7 +638,7 @@ label ophelia_revenge_date_label():
     candace "Yes! HOW DID YOU KNOW I WAS IN LINE?"
     candace "You can see me? What? Are you peeping on me boss?"
     candace "You're already at the table? What? Look up? Now to the left?... What other left?"
-    "This is almost physically painful for you to listen to."
+    "This is physically painful for you to listen to."
     candace "Oh! I see you now! I'll be right there!"
     "She hangs up her phone."
     candace "Thank you, Maître d\', but I've found my table!"
@@ -690,6 +702,7 @@ label ophelia_revenge_date_label():
     $ scene_manager.update_actor(candace, position = "blowjob", display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5))
     "You watch as [candace.title] gets down on her knees, then lifts the tablecloth up and disappears under it."
     $ scene_manager.hide_actor(candace)
+    $ mc.change_locked_clarity(10)
     "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, inches over towards [ex_name]."
     "You see [ex_name] pick up his phone and dial someone... a moment later [the_person.possessive_title]'s phone is ringing. Oh boy, you can see where this is going..."
     the_person "Hello? Why are you calling me?"
@@ -722,6 +735,7 @@ label ophelia_revenge_date_label():
     mc.name "Only if you want."
     the_person "I think I would like that. I don't know what is going to happen after this, but, for tonight, I think I don't want to be alone."
     "Instead of answering with words, you just take her hand."
+    $ mc.change_locked_clarity(5)
     $ the_person.event_triggers_dict["first_date_finished"] = 1
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
@@ -765,6 +779,7 @@ label ophelia_revenge_date_label():
     "She kisses you back, responding immediately. Her body melts into yours."
     $ the_person.change_arousal(15)
     $ mc.arousal += 10
+    $ mc.change_locked_clarity(20)
     "Your hands drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
     "You bring your other hand down and grab the other cheek. You pull her toward you and begin to grind your hips against her."
     "She is pressing her body against you."
@@ -782,6 +797,7 @@ label ophelia_revenge_date_label():
     $ mc.condom = True
     "When you finish, you notice [the_person.title] seems to be wearing less clothes..."
     the_person "Oh god, I need you so bad. Fuck me [the_person.mc_title]!"
+    $ mc.change_locked_clarity(30)
     $ scene_manager.update_actor(the_person, position = "against_wall")
     "You pull her leg up. She is so wet you slide inside of her easily. You feel her salon manicured nails scratching down your back as you fill her up."
     $ the_person.break_taboo("vaginal_sex")
@@ -915,7 +931,7 @@ label ophelia_talk_about_candace_label(the_person):
     $ the_person.draw_person(emotion = "happy")
     "She takes a deep breath."
     the_person "You want me, to help the woman my ex boyfriend cheated on me with, to dump my ex, block him on social media, and if he comes after her, help blackmail him for breaking labor laws to keep him away from her?"
-    mc.name "Yeah, that's pretty much... wait. Blackmail?"
+    mc.name "Yeah, that's pretty much... wait, blackmail?"
     the_person "Yeah, I mean why else would you bring up the wage thing? Isn't that what you had in mind?"
     mc.name "I was just trying to give examples of how he had been taking advantage of her..."
     the_person "Alright, its obvious to me that you DO need my help. So fuck yeah, I'm in!"
@@ -1022,6 +1038,7 @@ label ophelia_choose_service_test_label():
         mc.name "Don't worry she's a professional."
     "[the_person.title] gets naked."
     $ the_person.strip_outfit(exclude_feet = False)
+    $ mc.change_locked_clarity(20)
     salon_manager "Alright, here's a catalogue with what I can do. Take a look and tell me what you would like!"
     python:
         hair_style_check = the_person.hair_style.get_copy()
