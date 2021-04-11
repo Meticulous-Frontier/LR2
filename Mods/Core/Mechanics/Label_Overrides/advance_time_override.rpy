@@ -46,8 +46,8 @@ init 5 python:
     global morning_crisis_base_chance
 
     # some crisis events have impact on game dynamic and should be allowed to trigger often
-    crisis_base_chance = 20
-    morning_crisis_base_chance = 10
+    crisis_base_chance = 30
+    morning_crisis_base_chance = 15
 
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
