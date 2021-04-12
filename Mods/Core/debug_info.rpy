@@ -23,9 +23,9 @@ init 2:
                 xmaximum 600
                 padding (5,5)
                 has vbox
-                label "ZipCache memory: " + str(__builtin__.round(get_size(zip_manager) / 1024, 2)) + " Kb" xminimum 400
-                label "ZipCache items: " + str(zip_manager.size())
-                label "Last character load time: " + str(__builtin__.round(last_load_time, 10))
+                label "ZipCache memory: {total_size:.2f} MB".format(total_size = get_size(zip_manager) / 1024.0 / 1024.0) xminimum 400
+                label "ZipCache items: {}".format(zip_manager.size())
+                label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()
 
@@ -43,8 +43,8 @@ init 2 python:
         debug_log_enabled = False
         renpy.hide_screen("DebugInfo")
 
-    def add_to_log(message):
-        debug_log["T" + str(time.time())] = message
+    def add_to_debug_log(message, start_time = time.time()):
+        debug_log["T" + str(time.time())] = message.format(total_time = time.time() - start_time)
 
     def get_debug_log():
         return "\n".join(OrderedDict(sorted(debug_log._LRUCacheDict__values.items(), key=lambda t: t[0], reverse = True)).values())

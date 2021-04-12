@@ -17,12 +17,12 @@ init 2 python:
             self.person_preview_args = person_preview_args
 
         def load(self):
-            if not self.display_func:
+            if not self.display_func or self.display_image:
                 return
 
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
             # always predict person displayable (the clear_function will remove them from the prediction cache)
-            # renpy.start_predict(self.display_image)
+            renpy.start_predict(self.display_image)
             return
 
         def preload(self):
@@ -54,8 +54,8 @@ init 2 python:
             return
 
         def clear(self):
-            # if self.display_image:
-            #     renpy.stop_predict(self.display_image)
+            if self.display_image:
+                 renpy.stop_predict(self.display_image)
             return
 
     def build_menu_items(elements_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
@@ -113,7 +113,7 @@ init 2 python:
                     person_preview_args = {}
 
                 mi.person_preview_args = person_preview_args
-                mi.display_key = item.name + item.last_name
+                mi.display_key = item.identifier
                 mi.display_scale = scale_person(item.height)
                 if draw_person_previews:
                     mi.display_func = item.build_person_displayable
@@ -165,10 +165,18 @@ init 2 python:
         if not item.display_image:
             item.load()
 
-        clear_scene()
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
+        if item.display_key:
+            hide_menu_person(item)
+            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
+
         global last_load_time
         last_load_time = __builtin__.round(time.time() - load_time, 8)
+        return
+
+    def hide_menu_person(item):
+        if item.display_key:
+            renpy.hide(item.display_key, layer="solo")
+            #clear_scene()
         return
 
 init 2:
@@ -217,10 +225,11 @@ init 2:
                                             text_align (0.5,0.5)
                                             if not renpy.mobile and item.display_key:
                                                 hovered [Function(show_menu_person, item)]
-                                                unhovered [Function(clear_scene)]
+                                                unhovered [Function(hide_menu_person, item)]
                                             action [
-                                                Return(item.return_value),
-                                                Function(clear_menu_items_list, menu_items)
+                                                Function(hide_menu_person, item),
+                                                Function(clear_menu_items_list, menu_items),
+                                                Return(item.return_value)
                                             ]
                                             tooltip item.the_tooltip
                                             sensitive item.is_sensitive

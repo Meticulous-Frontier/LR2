@@ -9,7 +9,7 @@ init -1 python:
             result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
 
         if debug_log_enabled:
-            add_to_log("Map Buildup Time: " + str(__builtin__.round(time.time() - start_time, 8)))
+            add_to_debug_log("Map Buildup Time: {total_time:.3f}", start_time)
         return result
 
     def get_location_tooltip(location):

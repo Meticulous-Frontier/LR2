@@ -41,7 +41,7 @@ init 2 python:
                     #renpy.say("Pregnant", "Candidate: " + a_candidate.name + " " + a_candidate.last_name + " is pregnant.")
 
         if debug_log_enabled:
-            add_to_log("Candidates (" + str(count) + "): " + str(__builtin__.round(time.time() - start_time, 8)))
+            add_to_debug_log("Candidates (" + str(count) + "): {total_time:.3f}", start_time)
         return candidates
 
 
