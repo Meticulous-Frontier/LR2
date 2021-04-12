@@ -16,7 +16,7 @@ init 5 python:
                 self.Cache[x] = LRUCacheDict(max_size = 300, expiration = 0)    # 300 most used character images per position
 
         def preload(self):  # load main character images into the zip file cache (about 2700 images)
-            for cloth in [white_skin, black_skin, tan_skin, breast_region, torso_region, stomach_region, pelvis_region] + hair_styles + pube_styles:
+            for cloth in [white_skin, black_skin, tan_skin]:
                 for position in supported_positions:
                     for body in ["standard_body","thin_body","curvy_body"] if cloth.body_dependant else ["standard_body"]:
                         for tits in Clothing_Images.breast_sizes if cloth.draws_breasts else ["AA"]:
