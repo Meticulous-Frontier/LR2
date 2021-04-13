@@ -314,6 +314,6 @@ init -1 python:
         return
 
     def time_of_need_func():
-        mc.change_energy(100)
+        mc.change_energy(max(100, (mc.max_energy * .5)))
 
         return
