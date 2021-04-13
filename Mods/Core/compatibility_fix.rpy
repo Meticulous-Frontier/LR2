@@ -221,7 +221,7 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def check_bugfix_installed():
+    def check_bugfix_installed(self = None):
         if not bugfix_installed:
             renpy.say("Warning", "You are running the game without bugfix installed, the mod no longer works without this bugfix due to the many issues in the base game. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}. The game will now exit.")
             renpy.quit()
@@ -278,12 +278,4 @@ label check_save_version(stack):
     elif parse_version_string(loaded_version)[2] < parse_version_string(config.version)[2]:
         "Warning" "You are loading a game created by a previous build ([loaded_version]), you might run into errors because of this. Before reporting errors, please start a new modded game and see if the problem persists."
     $ execute_hijack_call(stack)
-    return
-
-# show preference screen when saving is disabled
-label game_menu:
-    if not okay_to_save:
-        call _game_menu_preferences
-    else:
-        call expression _game_menu_screen
     return
