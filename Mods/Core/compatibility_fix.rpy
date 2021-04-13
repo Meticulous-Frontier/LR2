@@ -221,7 +221,7 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def check_bugfix_installed(self = None):
+    def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
         if not bugfix_installed:
             renpy.say("Warning", "You are running the game without bugfix installed, the mod no longer works without this bugfix due to the many issues in the base game. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}. The game will now exit.")
             renpy.quit()
