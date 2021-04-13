@@ -417,7 +417,7 @@ label quest_arousal_serum_fire_HR_label():
 
 
 init python:
-    def arousal_serum_function_on_turn(the_person, add_to_log):
+    def arousal_serum_function_on_turn(the_person, the_serum, add_to_log):
         if the_person.arousal < the_person.suggestibility:
             the_person.change_arousal(__builtin__.min(15, the_person.suggestibility - the_person.arousal),add_to_log = False)
         return
@@ -442,6 +442,7 @@ init python:
             tier = 2,
             start_researched =  True,
             research_needed = 800,
+            clarity_cost = 1000
     #     exclude_tags = [list_of_other_tags],
     #     is_side_effect = a_bool)
         )

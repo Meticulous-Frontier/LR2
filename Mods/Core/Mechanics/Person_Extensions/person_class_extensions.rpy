@@ -1258,13 +1258,13 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, flatten = True) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
                 self.outfit.remove_clothing(cloth) #Remove the clothing
-        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, flatten = True)
 
         self.hide_person()
         renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier )
@@ -1273,7 +1273,7 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
+    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = [], flatten = False): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
@@ -1299,7 +1299,9 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        return Flatten(Composite(*composite_list))
+        if flatten:
+            return Flatten(Composite(*composite_list))
+        return Composite(*composite_list)
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
@@ -1307,6 +1309,7 @@ init -1 python:
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
+        return
 
     Person.hide_person = hide_person_enhanced
 

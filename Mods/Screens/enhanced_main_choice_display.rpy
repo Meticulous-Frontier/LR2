@@ -16,6 +16,9 @@ init 2 python:
             self.display_image = None
             self.person_preview_args = person_preview_args
 
+        def __del__(self):
+            self.clear()
+
         def load(self):
             if not self.display_func or self.display_image:
                 return
@@ -23,6 +26,25 @@ init 2 python:
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
             # always predict person displayable (the clear_function will remove them from the prediction cache)
             renpy.start_predict(self.display_image)
+            return
+
+        def show_person(self):
+            if not self.display_func:
+                return
+
+            load_time = time.time()
+            if not self.display_image:
+                self.load()
+
+            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer="solo", what= self.display_image, tag=self.display_key)
+
+            global last_load_time
+            last_load_time = time.time() - load_time
+            return
+
+        def hide_person(self):
+            if self.display_key:
+                renpy.hide(self.display_key, layer="solo")
             return
 
         def preload(self):
@@ -67,13 +89,6 @@ init 2 python:
                 else:
                     result.append(elements_list[count])
         return result
-
-    def clear_menu_items_list(menu_items):
-        start_time = time.time()
-        for count in __builtin__.range(__builtin__.len(menu_items)):
-            for item in [x for x in menu_items[count][1:] if x.display_key]:
-                item.clear()
-        return
 
     def build_menu_item_list(element_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
         def find_and_replace_tooltip_property(item, extra_args):
@@ -157,28 +172,6 @@ init 2 python:
                 result.append(mi)
         return result
 
-    def show_menu_person(item):
-        if not item.display_func:
-            return
-
-        load_time = time.time()
-        if not item.display_image:
-            item.load()
-
-        if item.display_key:
-            hide_menu_person(item)
-            renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
-
-        global last_load_time
-        last_load_time = __builtin__.round(time.time() - load_time, 8)
-        return
-
-    def hide_menu_person(item):
-        if item.display_key:
-            renpy.hide(item.display_key, layer="solo")
-            #clear_scene()
-        return
-
 init 2:
     screen enhanced_main_choice_display(menu_items): #Elements_list is a list of lists, with each internal list receiving an individual column
         #The first element in a column should be the title, either text or a displayable. After that it should be a tuple of (displayable/text, return_value).
@@ -224,11 +217,10 @@ init 2:
                                             text_style "textbutton_text_style"
                                             text_align (0.5,0.5)
                                             if not renpy.mobile and item.display_key:
-                                                hovered [Function(show_menu_person, item)]
-                                                unhovered [Function(hide_menu_person, item)]
+                                                hovered [Function(item.show_person)]
+                                                unhovered [Function(item.hide_person)]
                                             action [
-                                                Function(hide_menu_person, item),
-                                                Function(clear_menu_items_list, menu_items),
+                                                Function(item.hide_person),
                                                 Return(item.return_value)
                                             ]
                                             tooltip item.the_tooltip

@@ -3,7 +3,7 @@ init 5 python:
     add_label_hijack("after_load", "update_permanent_bimbo_serum")
 
 init 1 python:
-    def anti_bimbo_serum_function_on_apply(the_person, add_to_log):
+    def anti_bimbo_serum_function_on_apply(the_person, the_serum, add_to_log):
         if the_person.personality == bimbo_personality: #WE only run if we have the bimbo personality
             the_person.int = renpy.random.randint(2,6)  #Restores intelligence to a roughly normal value
             if the_person.original_personality is None:
@@ -24,6 +24,7 @@ init 1 python:
             tier = 99,
             research_needed = 3000,
             exclude_tags = ["Personality"],
+            clarity_cost = 2200
         )
 
     def enhanced_permanent_bimbo_on_apply(the_person, add_to_log):
@@ -59,4 +60,3 @@ label update_permanent_bimbo_serum(stack):
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
-

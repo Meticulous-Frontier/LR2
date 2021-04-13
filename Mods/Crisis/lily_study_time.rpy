@@ -110,13 +110,13 @@ label sister_failed_test_label():
     mc.name "Here, why don't you sit next to me in the bed here while we study. You'll be more comfortable that way."
     the_person "Okay."
     $ the_person.draw_person(position = "sitting")
-    "You pull the covers back. [the_person.title] sits down on the bed next to you, her back agasint the headboard."
+    "You pull the covers back. [the_person.title] sits down on the bed next to you, her back against the headboard."
     if strip_path:
         "Having [the_person.possessive_title] in your bed next to you, wearing so little, gets you excited, but you try to shake the thought and concentrate on studying... for now anyway."
         $ mc.change_locked_clarity(20)
     "You get into the books and take a look at [the_person.possessive_title]'s failed quiz. You recognize most of the material from your own time at the university."
     if mc.int > 5:
-        "The text books themselves are a newer edition, but you remember where most of the informtion is located."
+        "The text books themselves are a newer edition, but you remember where most of the information is located."
         "You quickly mark some places with sticky notes and help [the_person.title] make a quick study guide to avoid this quiz result again."
     elif mc.int >2:
         "The text books are a newer version, and it takes you quite a bit of time to figure out where all the information is located."
@@ -188,7 +188,7 @@ label sister_failed_test_label():
                 "[the_person.possessive_title] pulls the covers down and moves down to your legs. You lift her hips up when she pulls at your shorts, setting your erection free."
                 if the_person.has_taboo("sucking_cock"):
                     "[the_person.title] takes your cock in her hand and gives it a couple strokes, but you can tell she is hesitating to go any further."
-                    the_person "Are you sure... this is okay? I mean... I'm aboout to put my brother's cock in my mouth!"
+                    the_person "Are you sure... this is okay? I mean... I'm about to put my brother's cock in my mouth!"
                     mc.name "Its okay. Its going to feel so good, don't you want to make me feel good?"
                     the_person "Yeah... I mean... you were very helpful tonight..."
                     "She pauses for several seconds. You start to get worried she is going to back out."

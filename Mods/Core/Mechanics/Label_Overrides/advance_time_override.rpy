@@ -238,6 +238,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
+        okay_to_save = False
 
     while count < advance_time_max_actions:
         if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
@@ -250,6 +251,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
 
     python:
         # increase crisis chance (every time slot)
+        okay_to_save = True
         crisis_chance += 1
         mc.location.show_background()
         x = None
@@ -285,6 +287,7 @@ label advance_time_random_crisis_label():
     $ start_time = time.time()
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
+        $ okay_to_save = False
         if debug_log_enabled:
             $ add_to_debug_log("Random crisis: " + crisis.name + " ({total_time:.3f})", start_time)
 
@@ -293,6 +296,8 @@ label advance_time_random_crisis_label():
         $ crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
+
+        $ okay_to_save = True
         $ del crisis
     $ mc.location.show_background()
     show screen business_ui
@@ -303,6 +308,7 @@ label advance_time_mandatory_crisis_label():
     python:
         active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_crises_list)
         crisis_count = 0
+        okay_to_save = False
 
     while crisis_count < len(active_crisis_list):
         # remove from main list before we trigger
@@ -319,6 +325,7 @@ label advance_time_mandatory_crisis_label():
             crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        okay_to_save = True
         mc.location.show_background()
         del active_crisis_list
         crisis = None
@@ -367,6 +374,7 @@ label advance_time_mandatory_morning_crisis_label():
     python:
         active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_morning_crises_list)
         crisis_count = 0
+        okay_to_save = False
 
     while crisis_count < len(active_crisis_list):
         # remove from main list before we trigger
@@ -383,6 +391,7 @@ label advance_time_mandatory_morning_crisis_label():
             crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        okay_to_save = True
         mc.location.show_background()
         del active_crisis_list
         crisis = None
@@ -393,6 +402,7 @@ label advance_time_random_morning_crisis_label():
     $ start_time = time.time()
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
+        $ okay_to_save = False
         if debug_log_enabled:
             $ add_to_debug_log("Random morning crisis: " + crisis.name + " ({total_time:.3f})", start_time)
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
@@ -400,6 +410,7 @@ label advance_time_random_morning_crisis_label():
         $ crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
+        $ okay_to_save = True
         $ del crisis
     $ mc.location.show_background()
     return

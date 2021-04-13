@@ -191,9 +191,9 @@ label horny_at_work_crisis_enhanced_label():
                     call screen enhanced_main_choice_display(build_menu_items([build_helpful_people_menu(helpful_people, exit_option)]))
                 else:
                     call screen main_choice_display([build_helpful_people_menu(helpful_people, exit_option)]) #Shows a list of people w/ predictive imaging when you hover
-                $ the_choice = _return
-                $ scene_manager.draw_scene()
-                if the_choice == exit_option:
+
+                if not isinstance(_return, Person):
+                    $ scene_manager.draw_scene()
                     #Power move, just jerk yourself off as they watch.
                     mc.name "I've got things under control, but I'd like you to stay and watch."
                     "You stroke your cock faster and faster, pulling yourself towards your orgasm."
@@ -228,21 +228,22 @@ label horny_at_work_crisis_enhanced_label():
                     "You pull your pants up and get back to work, basking in your post orgasm clarity."
 
                 else:
-                    $ scene_manager.update_actor(the_choice, position = "stand3")
-                    "You stand up, pants around your ankles, and motion for [the_choice.title] to come over to you."
+                    $ active_person = _return
+                    $ scene_manager.update_actor(active_person, position = "stand3")
+                    "You stand up, pants around your ankles, and motion for [active_person.title] to come over to you."
                     $ clear_scene()
-                    call fuck_person(the_choice, private = False, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_1
+                    call fuck_person(active_person, private = False, skip_intro = True) from _call_fuck_person_horny_at_work_enhanced_1
                     $ the_report = _return
-                    $ the_choice.review_outfit()
-                    $ helpful_people.remove(the_choice)
+                    $ active_person.review_outfit()
+                    $ helpful_people.remove(active_person)
                     $ wants_to_continue = True
                     while mc.energy >= 20 and len(helpful_people) > 0 and wants_to_continue:
                         $ clear_scene
-                        $ scene_manager.update_actor(the_choice, position = "sitting")
+                        $ scene_manager.update_actor(active_person, position = "sitting")
                         if the_report.get("girl orgasms", 0) > 0:
-                            "[the_choice.title] stumbles back to her desk and collapses into her chair, legs still quivering."
+                            "[active_person.title] stumbles back to her desk and collapses into her chair, legs still quivering."
                         else:
-                            "[the_choice.title] goes back to her desk and sits down when you're finished with her. She spreads her legs and starts to touch herself."
+                            "[active_person.title] goes back to her desk and sits down when you're finished with her. She spreads her legs and starts to touch herself."
 
                         if len(helpful_people) > 1:
                             "The other girls are still standing next to your desk, and you haven't exhausted yourself quite yet..."
@@ -255,7 +256,7 @@ label horny_at_work_crisis_enhanced_label():
                         else:
                             call screen main_choice_display([build_helpful_people_menu(helpful_people, exit_option)]) #Shows a list of people w/ predictive imaging when you hover
 
-                        if _return == exit_option:
+                        if not isinstance(_return, Person):
                             if len(helpful_people) > 1:
                                 "You wave the girls back to their desk. They seem disappointed they didn't get a chance to service you."
                             else:
@@ -263,14 +264,15 @@ label horny_at_work_crisis_enhanced_label():
                             $ wants_to_continue = False
 
                         else:
-                            $ the_choice = _return
-                            mc.name "[the_choice.title], you're next."
-                            $ scene_manager.update_actor(the_choice, position = "stand3")
+                            $ active_person = _return
+                            mc.name "[active_person.title], you're next."
+                            $ scene_manager.update_actor(active_person, position = "stand3")
                             "She nods and smiles, stepping forward."
                             $ clear_scene()
-                            call fuck_person(the_choice, private = False, report_log = the_report) from _call_fuck_person_horny_at_work_enhanced_2
-                            $ the_choice.review_outfit()
-                            $ helpful_people.remove(the_choice)
+                            call fuck_person(active_person, private = False, report_log = the_report) from _call_fuck_person_horny_at_work_enhanced_2
+                            $ active_person.review_outfit()
+                            $ helpful_people.remove(active_person)
+                    $ del active_person
 
                     if the_report.get("guy orgasms",0) == 0:
                         "You've worn yourself out, but you still haven't gotten off. You relax in your office chair and stroke yourself off until you cum."
@@ -283,7 +285,6 @@ label horny_at_work_crisis_enhanced_label():
                     elif the_report.get("guy orgasms",0) > 1:
                         "You sit back down in your office chair, feeling completely drained, being satisfied multiple times."
                         "After getting yourself cleaned up you're able to focus perfectly again and you get back to work."
-                $ del the_choice
 
             else: #You get yourself off.
                 "You pull up some porn and, with skill trained over many years."

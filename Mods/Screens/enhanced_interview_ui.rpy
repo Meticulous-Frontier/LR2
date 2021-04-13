@@ -1,4 +1,10 @@
 init 2:
+    python:
+        def show_candidate(person):
+            clear_scene()
+            person.draw_person(show_person_info = False)
+            return
+
     screen interview_ui(the_candidates, count):
         default current_selection = 0
         default the_candidate = the_candidates[current_selection]
@@ -133,37 +139,58 @@ init 2:
                 xsize 1320
                 ysize 100
                 hbox:
-                    yalign 0.5
-                    yanchor 0.5
-                    xalign 0.5
-                    xanchor 0.5
-                    textbutton "Previous Candidate" action [SetScreenVariable("current_selection",current_selection-1),
-                        SetScreenVariable("the_candidate",the_candidates[current_selection-1]),
-                        Function(show_candidate,the_candidates[current_selection-1])] sensitive current_selection > 0 selected False style "textbutton_style" text_style "textbutton_text_style" xanchor 0.5 xalign 0.5 yalign 0.5 yanchor 0.5
+                    align (.5, .5)
+                    textbutton "Previous Candidate":
+                        sensitive current_selection > 0
+                        selected False
+                        style "textbutton_style"
+                        text_style "textbutton_text_style"
+                        action [
+                            SetScreenVariable("current_selection",current_selection-1),
+                            SetScreenVariable("the_candidate",the_candidates[current_selection-1]),
+                            Function(show_candidate,the_candidates[current_selection-1])
+                        ]
 
-                    null width 300
-                    textbutton "Hire Nobody" action Return("None") style "textbutton_style" text_style "textbutton_text_style" xanchor 0.5 xalign 0.5 yalign 0.5 yanchor 0.5
+                    null width 320
+                    textbutton " Hire Nobody  ":
+                        style "textbutton_style"
+                        text_style "textbutton_text_style"
+                        action [
+                            Function(the_candidate.hide_person),
+                            Return("None")
+                        ]
 
-                    textbutton "Hire " action Return(the_candidate) style "textbutton_style" text_style "textbutton_text_style" xanchor 0.5 xalign 0.5 yalign 0.5 yanchor 0.5
-                    null width 300
-                    textbutton "Next Candidate" action [SetScreenVariable("current_selection",current_selection+1),
-                        SetScreenVariable("the_candidate",the_candidates[current_selection+1]),
-                        Function(show_candidate,the_candidates[current_selection+1])] sensitive current_selection < count-1 selected False style "textbutton_style" text_style "textbutton_text_style"  xanchor 0.5 xalign 0.5 yalign 0.5 yanchor 0.5
+                    null width 20
+
+                    textbutton " Hire  ":
+                        style "textbutton_style"
+                        text_style "textbutton_text_style"
+                        action [
+                            Function(the_candidate.hide_person),
+                            Return(the_candidate)
+                        ]
+
+                    null width 320
+                    textbutton "Next Candidate":
+                        sensitive current_selection < count-1
+                        selected False
+                        style "textbutton_style"
+                        text_style "textbutton_text_style"
+                        action [
+                            SetScreenVariable("current_selection",current_selection+1),
+                            SetScreenVariable("the_candidate",the_candidates[current_selection+1]),
+                            Function(show_candidate,the_candidates[current_selection+1])
+                        ]
 
 
         imagebutton:
             auto "/tutorial_images/restart_tutorial_%s.png"
-            xsize 54
-            ysize 54
-            yanchor 1.0
-            xanchor 1.0
-            xalign 1.0
-            yalign 1.0
+            xysize (54, 54)
+            anchor (1.0, 1.0)
+            align (1.0, 1.0)
             action Function(mc.business.reset_tutorial,"hiring_tutorial")
 
-
-        $ hiring_tutorial_length = 5 #The number of  tutorial screens we have.
-        if mc.business.event_triggers_dict["hiring_tutorial"] > 0 and mc.business.event_triggers_dict["hiring_tutorial"] <= hiring_tutorial_length: #We use negative numbers to symbolize the tutorial not being enabled
+        if mc.business.event_triggers_dict["hiring_tutorial"] > 0 and mc.business.event_triggers_dict["hiring_tutorial"] <= 5: #We use negative numbers to symbolize the tutorial not being enabled
             imagebutton:
                 auto
                 sensitive True
