@@ -127,14 +127,18 @@ init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")
 
 init 5 python: # add to stack later then other mods
-    config.label_overrides["start"] = "alternative_start"
-
     add_label_hijack("normal_start", "activate_compatibility_fix")
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
 
     if take_animation_screenshot in config.interact_callbacks:
         config.interact_callbacks.remove(take_animation_screenshot)
+
+    # disable game saving by setting this flag
+    okay_to_save = True
+    config.game_menu[3] = ( "save", u"Save Game", ui.jumps("_save_screen"), 'not renpy.context().main_menu and okay_to_save' )
+
+    hook_label("start", check_bugfix_installed)
 
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
@@ -276,47 +280,10 @@ label check_save_version(stack):
     $ execute_hijack_call(stack)
     return
 
-label alternative_start:
-    scene bg paper_menu_background with fade
-
-    $ check_bugfix_installed()
-
-    "Lab Rats 2 contains adult content. If you are not over 18 or your countries equivalent age you should not view this content."
-    menu:
-        "I am over 18":
-            "Excellent, let's continue then."
-
-        "I am not over 18":
-            $renpy.full_restart()
-
-    "Vren" "[config.version] represents an early iteration of Lab Rats 2. Expect to run into limited content, unexplained features, and unbalanced game mechanics."
-    "Vren" "Would you like to view the FAQ?"
-    menu:
-        "View the FAQ":
-            call faq_loop from _call_faq_loop_alt_start
-        "Get on with the game!":
-            "You can access the FAQ from your bedroom at any time."
-
-    "Vren" "Lab Rats 2 contains content related to impregnation and pregnancy. These settings may be changed in the menu at any time."
-    menu:
-        "No pregnancy content\n{size=16}Girls never become pregnant. Most pregnancy content hidden.{/size}":
-            $ persistent.pregnancy_pref = 0
-
-        "Predictable pregnancy content\n{size=16}Birth control is 100%% effective. Girls always default to taking birth control.{/size}":
-            $ persistent.pregnancy_pref = 1
-
-        "Realistic pregnancy content\n{size=16}Birth control is not 100%% effective. Girls may not be taking birth control.{/size}":
-            $ persistent.pregnancy_pref = 2
-
-    $ renpy.block_rollback()
-    call screen character_create_screen()
-    $ return_arrays = _return #These are the stat, skill, and sex arrays returned from the character creator.
-    call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2]) from _call_initialize_game_state_alt_start ##Moving some of this to an init block (init 1specifically) would let this play better with updates in the future.
-    $ renpy.block_rollback()
-    menu:
-        "Play introduction and tutorial":
-            call tutorial_start from _call_tutorial_start_alt_start
-
-        "Skip introduction and tutorial":
-            $ mc.business.event_triggers_dict["Tutorial_Section"] = False
-    jump normal_start
+# show preference screen when saving is disabled
+label game_menu:
+    if not okay_to_save:
+        call _game_menu_preferences
+    else:
+        call expression _game_menu_screen
+    return
