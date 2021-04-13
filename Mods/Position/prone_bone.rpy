@@ -1,4 +1,5 @@
 #Prone bone position. Girl is pinned down on her front, very submissive position, so we make sure to use lots of references to submissive or dominant girls in dialogue and actions.
+#These actions generally increase obedience and sluttiness in dominant girls,  increase happiness in submissives.
 init:
     python:
         prone_bone = Position(name = "Prone", slut_requirement = 60, slut_cap = 90, requires_hard = True, requires_large_tits = False,
@@ -18,195 +19,76 @@ init:
             associated_taboo = "vaginal_sex")
         list_of_positions.append(prone_bone)
 
-init 1:
-    python:
-        #missionary.link_positions(piledriver,"transition_missionary_piledriver")
+# init 1:
+#     python:
+#         missionary.link_positions(piledriver,"transition_missionary_piledriver")
 
 label intro_prone_bone(the_girl, the_location, the_object):
     "You turn [the_girl.title] so her back is to you, then push her down onto the [the_object.name]."
     mc.name "Just lay down. I'm going to have my way with you now."
     if the_girl.is_submissive():
-
-    if the_girl.is_dominant():
-    "She nods and lies down on the [the_object.name], waiting while you climb on top of her."
-    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
+        the_girl "I'll do whatever you want, you always make me feel so good too..."
+        $ the_girl.change_happiness(1)
+        $ the_girl.change_obedience(1)
+        mc.name "Yeah, 'atta girl.'"
+    elif the_girl.is_dominant():
+        the_girl "Is that so? What do I get out of it?"
+        mc.name "Why should I care? Lay down."
+        "She murmurs but begins to lay down obediently."
+        $ the_girl.change_happiness(-1)
+        $ the_girl.change_obedience(2)
+    else:
+        the_girl "Okay, just don't do anything too crazy, okay?"
+        $ the_girl.change_obedience(1)
+    "She lies down on the [the_object.name], waiting while you climb on top of her. Before you get started, you give her ass a couple smacks with your dick."
+    "[the_girl.possessive_title] looks back at you as you line your cock up with her pussy. She moans as you slide into her."
     return
 
 label taboo_break_prone_bone(the_girl, the_location, the_object):
-    "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. She follows your lead, lying down for you."
-    "You place your hands on her knees and spread her legs, kneeling down between them."
-    "You sit your hard cock on her stomach, teasingly close to her warm pussy. [the_girl.possessive_title] reaches down and gently pets your shaft."
+    "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. You turn her back to you."
+    mc.name "Lay down. I want to be in control for our first time."
     $ the_girl.call_dialogue(prone_bone.associated_taboo+"_taboo_break")
-    if the_girl.effective_sluttiness(prone_bone.associated_taboo) > prone_bone.slut_cap:
-        "She takes your cock and moves it down, sliding the tip into her pussy for you."
-
-    else:
-        "You grab your cock and move it down. [the_girl.title] gasps as your tip flicks over her clit and spreads her pussy lips open."
-    "You lie down on top of her and thrust forward. After a moment of resistance you slide easily into her slippery, warm tunnel."
-    the_girl "Ah..."
-    "You hold yourself deep inside of her for a few seconds, then pull back and begin slowly thrust in and out."
+    the_girl "Okay, just don't do anything too crazy, okay?"
+    $ the_girl.change_obedience(2)
+    "She lies down on the [the_object.name] on her belly. She wiggles her ass at you, waiting while you climb on top of her."
+    "[the_girl.possessive_title] loks back at you as you line your cock up with her pussy. She moans as you slide into her."
     return
 
 label scene_prone_bone_1(the_girl, the_location, the_object):
-    # CHOICE CONCEPT: Kiss her neck // Talk dirty to her
-    # Intro concept. Short difference depending on if she's wet or not.
-    if the_girl.arousal > 50:
-        "[the_girl.title]'s pussy is nice and wet as you pump your hips and fuck her."
+    #Scene 1, focus on visuals of prone (ass, back)
+    "You push down on [the_girl.possessive_title] with your weight as you fuck her. She is pinned to the [the_object.name]."
+    if the_girl.body_is_thin():
+        "Your hips slap up against [the_girl.possessive_title]'s fit ass."
+        "Her cheeks are tight from the exercise and care she puts into her body."
+    elif the_girl.body_is_average():
+        "Your hips begin to slap up against [the_girl.possessive_title]'s delicious ass."
+        "Her cheeks are round but firm with just a hint of quaking with each impact."
+    elif the_girl.body_is_thick():
+        "Your hips begin to slap up against [the_girl.possessive_title]'s thick ass."
+        "Her cheeks are full and generous, and they quake back and forth enticingly as you pound her."
+    elif the_girl.body_is_pregnant():
+        "Your hips begin to slap up against [the_girl.possessive_title]'s wide ass."
+        "Her cheeks make a pleasing heart shape since her body has been changing with the baby growing in her belly."
+        "Her belly is up against the [the_object.name], forcing her ass up at a pleasing angle."
     else:
-        "[the_girl.title]'s pussy is still getting wet. You take it slow, giving her time to warm up."
-
+        "Your hips begin to slap up against [the_girl.possessive_title]'s ass."
+        "Her cheeks respond delightfully with each thrust."
     menu:
-        "Kiss her neck":
-            "You lean down and start to kiss at [the_girl.possessive_title]'s neck. She tilts her head to the side to let you."
-            if mc.sex_skills["Foreplay"] > 2:
-
-                if the_girl.get_opinion_score("kissing") > 0:
-                    $ the_girl.discover_opinion("kissing")
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("kissing"))
-                the_girl "[the_girl.mc_title]... Oh [the_girl.mc_title] that feels so good."
-                "She moans into your ear and pulls you closer to her."
-                "You kiss her neck a few more times, then lean back and look into her eyes. She sighs happily and returns your gaze, locking eyes with you while you fuck her."
-            else:
-                "You do your best to split your focus between kissing [the_girl.title] and pumping your hips, but you find yourself slipping out of the steady rhythm you had established."
-                "[the_girl.possessive_title] sighs happily and whispers in your ear."
-                the_girl "That feels nice, but I want you to keep fucking me."
-                "You kiss her one last time, then divert all of your attention to making love."
-
-        "Talk dirty to her":
-            mc.name "You feel amazing [the_girl.title], I wish I could fuck you like this all day."
-            if the_girl.core_sluttiness > 60 or the_girl.get_opinion_score("being submissive" > 0):
-                the_girl "Then do it. Pin me against the [the_object.name] and fuck me all you want."
-                "She wraps her legs around your waist and pulls you deep inside of her. The tight, warm feeling of her cunt makes your cock twitch."
-                if the_girl.get_opinion_score("creampies") > 0:
-                    the_girl "You can cum anywhere you want. You can pump your load right into me if that's what you want. If that's what would make you happy..."
-                else:
-                    the_girl "You can use me however you want [the_girl.mc_title], I'll be your obedient fuck toy, if that's what you want me to be..."
-                "She moans into your ear and trembles beneath you."
-            else:
-                the_girl "Ah... I'm glad you're having a good time."
-                mc.name "I bet you are too."
-                the_girl "I... oh god, I am."
-                "She blushes and turns away from you, panting for breath while you fuck her."
-
-    # $ the_girl.call_dialogue("sex_responses_vaginal")
-    # "[the_girl.title] digs her fingers into your back as you pump in and out of her tight slit. She moans into your ear, letting you hear her soft gasps and yelps."
-    # if the_girl.arousal > 50:
-    #     "Her pussy is dripping wet now, practically begging you to fuck it more. You kiss her and keep going."
-    # else:
-    #     "Her pussy is starting to get nice and wet as you fuck it. You kiss her and keep going."
+        "Grab her shoulders":
+            "You put your hands on [the_girl.title]'s shoulders. The leverage helps you pound her harder."
+            
+        "Grope her ass":
+            pass
     return
 
 label scene_prone_bone_2(the_girl, the_location, the_object):
-    # CHOICE CONCEPT: Pin her down // Kiss her
-    if the_girl.sex_skills["Vaginal"] < 3 and the_girl.arousal < 50:
-        # INTRO: She's inexperienced and needs some help.
-        "[the_girl.title]'s slit is tight and warm, but you can tell she's still getting wet."
-        the_girl.name "Could you... take it a little slower for me? Sorry, I'm just not very good at this."
-        menu:
-            "Go easy on her":
-                mc.name "Of course."
-                "You slow your thrusts and hold [the_girl.possessive_title] close to you. You can feel her warm breath against your ear and hear her soft moans."
-                mc.name "Is that better?"
-                the_girl "Yeah. Ah..."
-                "Little by little [the_girl.title] gets wetter and you're able to speed up. Her panting in your ear becomes louder and more passionate."
+    #Scene 2, focus on submissiveness of scene (spank, dirty talk, hair pulling)
 
+    if the_girl.is_submissive():
 
-            "Fuck her hard anyways":
-                mc.name "Don't worry, just relax and it'll all come naturally to you."
-                "You speed up and fuck [the_girl.title]s tight little cunt. She lets out a surprised gasp."
-                if the_girl.get_opinion_score("being submissive") > 0:
-                    "[the_girl.possessive_title] grabs at your back and moans right into your ear."
-                    the_girl "Wait... I don't think I can... handle your big cock!"
-                    $ the_girl.discover_opinion("being submissive")
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
-                    "You feel her body tremble beneath you and her pussy get suddenly wetter."
-                    mc.name "It doesn't matter what you think. I'm going to fuck you until I'm done."
-                    if the_girl.get_opinion_score("bareback sex") > 0:
-                        the_girl "Oh my god, you're fucking me raw and going to get me pregnant... I'm such a worthless, dirty slut that you don't even care if you get me pregnant..."
-                        $ the_girl.discover_opinion("bareback sex")
-                    else:
-                        the_girl "Oh my god... I'm just a worthless, dirty slut to you..."
-                    "She shivers again, apparently turned on by the thought."
-                    "You fuck [the_girl.possessive_title] hard and fast for as long as you can manage, but eventually you need to slow down to a more maintainable pace."
+    elif the_girl.is_dominant():
+        the_girl ""
 
-                else:
-                    the_girl "Ow! Ow, please slow down..."
-                    mc.name "You can manage."
-                    $ the_girl.change_arousal(-1+the_girl.get_opinion_score("being submissive"))
-                    $ the_girl.change_obedience(-1+the_girl.get_opinion_score("being submissive"))
-                    "[the_girl.title] pushes against you and forces you to slide out of her pussy."
-                    the_girl "No, really, I need you to go slower or I can't do this"
-                    "You finally nod and she lets you slide back inside of her. This time you move more slowly, and after a few moments you've moved past the incident."
-
-    else:
-        # INTRO: She takes you easily and wraps her arms around you.
-        "[the_girl.title]'s slit is tight and wet as you fuck her. She moans into your ear."
-        the_girl "Take me, [the_girl.mc_title], I'm all yours..."
-        menu:
-            "Fondle her tits":
-                if the_girl.has_large_tits() :
-                    if the_girl.outfit.tits_available():
-                        "You plant a hand on [the_girl.possessive_title]'s nice, soft tits and squeeze it. You use your thumb to rub her already hard nipple."
-                        the_girl "Oh god, go easy on them. They're sensitive!"
-                        "You enjoy the squishy weight of her breasts for a few moments, then shift your focus back to fucking her."
-
-                    else:
-                        $ top_clothing = the_girl.outfit.get_upper_top_layer()
-                        "You plant a hand on [the_girl.possessive_title]'s big tits and fondle them through her [top_clothing.name]."
-                        $ top_clothing = None
-                        the_girl "Mmm, you should just pull that out of the way. I want you to be able to grab them and squeeze them."
-
-                else:
-                    if the_girl.outfit.tits_available():
-                        "You run a hand over [the_girl.possessive_title]'s cute little tits, pausing to pinch one of her nipples."
-                        the_girl "Oh! Easy there, it's sensitive."
-                        "You rub her nipple for a moment and feel it get hard, then move to her other breast and do the same."
-                    else:
-                        $ top_clothing = the_girl.outfit.get_upper_top_layer()
-                        "You try and feel up [the_girl.possessive_title]'s little tits, but her [top_clothing.name] stops you from getting much more than a handful of fabric."
-                        $ top_clothing = None
-                        "You give up and focus on fucking her instead."
-
-            "Pin her down":
-                "You grab [the_girl.title]'s hands and lift them above her head. You push them against the [the_object.name] and pin [the_girl.title] underneath you."
-                if the_girl.get_opinion_score("being submissive") > 0:
-                    the_girl "Oh my god [the_girl.mc_title], what are you going to do to me?"
-                    "She bites her lip and looks up at you."
-                    mc.name "Whatever I want. Keep your legs spread for me."
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
-                    $ the_girl.discover_opinion("being submissive")
-                    "You fuck her hard and fast. [the_girl.possessive_title] gasps and moans, her hips bucking with pleasure."
-                    the_girl "Ah! You've got me held down and there's nothing I can do..."
-                    "She tests your grip on her hands and shivers with pleasure when you force them back down and keep her in place. You can hear her talking softly to herself."
-                    the_girl "I'm just a fuck toy to you right now... Just a soft wet hole for you to fuck with that big cock... Ah!"
-                    if the_girl.get_opinion_score("bareback sex") > 0:
-                        the_girl "You could fuck me until you cum inside. You might get me pregnant and all I can do is sit here and get fucked like a slut... Oh my god..."
-                    elif the_girl.get_opinion_score("creampies") > 0:
-                        the_girl "You could cum right inside me and there's nothing I could do to stop you... You would just fuck me full of your cum!"
-                    "[the_girl.title]'s pussy feels great to fuck, but you can't keep this pace up forever. You let go of her hands and slow down."
-                    "You're both silent for a few seconds, panting for breath."
-                    the_girl "Don't stop..."
-
-                elif the_girl.get_opinion_score("being submissive") < 0:
-                    the_girl "Whoah, easy there..."
-                    mc.name "Keep those legs spread for me."
-                    "She rolls her eyes and spreads her legs. You start to fuck her hard and fast."
-                    the_girl "Let my hands go, I want to be able to feel you. I want to touch you."
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
-                    $ the_girl.discover_opinion("being submissive")
-                    "It's clear [the_girl.title] isn't enjoying being dominated as much as you were expecting. You let her hands go and she pulls you close against her."
-                    the_girl "Much better."
-
-                else:
-                    the_girl "Oh! Hello there..."
-                    mc.name "Spread your legs for me, I want to get nice and deep."
-                    "She does what you want and spreads her legs. You start to fuck her hard and fast."
-                    the_girl "Fuck me... Oh fuck me harder!"
-                    "She pants and moans underneath you. You keep the pace up as long as you can manage, fucking [the_girl.title]'s tight, wet cunt while she's pinned underneath you."
-                    "You keep up the pace as long as you can manage, but eventually you have to slow down and catch your breath."
-                    the_girl "That was... that felt great, it was so intense."
-                    "She licks at your ear, then whispers into it."
-                    the_girl "Don't stop..."
     return
 
 label outro_prone_bone(the_girl, the_location, the_object):
