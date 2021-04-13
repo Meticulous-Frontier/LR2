@@ -3,11 +3,14 @@ init 2 python:
     def camilla_mod_initialization():
         camilla_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
         camilla_base_outfit = Outfit("camilla's base accessories")
-        the_eye_shadow = heavy_eye_shadow.get_copy()
-        the_eye_shadow.colour = [.18, .54, .34, 0.95]
+        the_makeup = blush.get_copy()
+        the_makeup.colour = [.65, .23, .17, 0.75]
+        the_lipstick = lipstick.get_copy()
+        the_lipstick.colour = [.26, .21, .14, 0.33]
         the_rings = copper_ring_set.get_copy()   #Change this
-        copper_ring_set.colour = [.1,.36,.19,1.0]
-        camilla_base_outfit.add_accessory(the_eye_shadow)
+        copper_ring_set.colour = [.95,.95,.78,1.0]
+        camilla_base_outfit.add_accessory(the_makeup)
+        camilla_base_outfit.add_accessory(the_lipstick)
         camilla_base_outfit.add_accessory(the_rings)
 
         # init camilla role
@@ -15,15 +18,15 @@ init 2 python:
 
         #global camilla_role
         global camilla
-        camilla = make_person(name = "Camilla", last_name ="Rojas", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="brown", hair_style = ponytail, skin="tan" , \
+        camilla = make_person(name = "Camilla", last_name ="Rojas", age = 34, body_type = "standard_body", face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            title = "camilla", possessive_title = "Your intern", mc_title = mc.name, relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
+            relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
 
         camilla.generate_home()
-        camilla.set_schedule(stephanie.home, times = [0,1,4])
+        camilla.set_schedule(camilla.home, times = [0,4])
         camilla.set_schedule(downtown_bar, times = [2,3])
         camilla.home.add_person(camilla)
 

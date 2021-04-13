@@ -76,7 +76,7 @@ label scene_prone_bone_1(the_girl, the_location, the_object):
     menu:
         "Grab her shoulders":
             "You put your hands on [the_girl.title]'s shoulders. The leverage helps you pound her harder."
-            
+
         "Grope her ass":
             pass
     return
@@ -85,7 +85,7 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
     #Scene 2, focus on submissiveness of scene (spank, dirty talk, hair pulling)
 
     if the_girl.is_submissive():
-
+        pass
     elif the_girl.is_dominant():
         the_girl ""
 

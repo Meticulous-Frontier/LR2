@@ -1,7 +1,8 @@
 init 2 python:
     erica_workout_wardrobe = wardrobe_from_xml("Erica_W_Wardrobe")
+    workout_wardrobe = wardrobe_from_xml("Workout_Wardrobe")
     def erica_mod_initialization(): #Add actionmod as argument#
-        workout_wardrobe = wardrobe_from_xml("Workout_Wardrobe")
+
         erica_wardrobe = wardrobe_from_xml("Erica_Workout_Wardrobe")
         erica_base_outfit = Outfit("Erica's base accessories")
         the_eye_shadow = heavy_eye_shadow .get_copy()
