@@ -158,15 +158,17 @@ label ellie_never_tasted_cock_label():  #This is Ellie's 40 sluttiness event.
     "She starts to say sorry, but instead you stop her."
     "Do you really want to know what its like to suck dick."
     "She says yes. Give MC a choice. Whip it out and go for it, or offer to eat her out first. Best possible ending is non selfish route."
-        "If you eat her out first, her opinion on getting head is min(orgasms, 2)"
-        "You let her take the lead and practice sucking cock. Patient answers increase her opinoin on sucking cock, impatient decrease."
-        "When you cum, she is putty and will take your cum wherever you say. If positive interactions so far, she likes or loves cum there now (face, swallow, body)"
-        "+1 taking control"
-
-        "If you whip out your cock, you an still be patient or impatient with responses. Impatient decreases giving blowjobs opinion and vice versa."
-        "When you cum, if interaction positive she lets you cum where you want, now likes cum there. (law of primacy)"
-        "If interaction was negative, she tries to swallow your cum but struggles. Now doesn't like swallowing cum, but gains a bit of slut and obedience."
-        "+1 being submissive"
+    menu:
+        "Lick her first":
+            "If you eat her out first, her opinion on getting head is min(orgasms, 2)"
+            "You let her take the lead and practice sucking cock. Patient answers increase her opinoin on sucking cock, impatient decrease."
+            "When you cum, she is putty and will take your cum wherever you say. If positive interactions so far, she likes or loves cum there now (face, swallow, body)"
+            "+1 taking control"
+        "Suck it now":
+            "If you whip out your cock, you an still be patient or impatient with responses. Impatient decreases giving blowjobs opinion and vice versa."
+            "When you cum, if interaction positive she lets you cum where you want, now likes cum there. (law of primacy)"
+            "If interaction was negative, she tries to swallow your cum but struggles. Now doesn't like swallowing cum, but gains a bit of slut and obedience."
+            "+1 being submissive"
 
     "Ellie now has oral positions unlocked."
     "Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
@@ -201,7 +203,7 @@ label ellie_loses_her_virginity_label():
     "Mc can ask if she wants condom. She says she wants her first time natural, but appreciates it if MC asks and likes bareback sex. Otherwise dislikes bareback sex if MC doesn't ask."
     "After pentration, use creampie_cum but use red color to make it look like virginity taken."
     "Sex scene. If Ellie cums twice or more she begs MC to finish inside her. Gain creampie like."
-        "If not, she asks MC to pull out. If MC pulls out she likes cum on her body. If he doesn't, she dislikes creampies."
+    "If not, she asks MC to pull out. If MC pulls out she likes cum on her body. If he doesn't, she dislikes creampies."
     "Taking Ellie's virginity has made her putty in your hands now. She gains large love and obedience bonuses."
     "Ellie can't believe she did that, she always thought growing up she was saving herself for marriage, but can't believe what she has been missing out on."
     "With high love stat, MC has option to ask her to be his girlfriend. She accepts."
@@ -210,7 +212,8 @@ label ellie_loses_her_virginity_label():
     return
 
 label ellie_never_tried_anal_label():   #This is Ellie's 80 sluttiness rating. Must have anal nanobots unlocked.
-
+    pass
+    return
 
 label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered after unlocking Ellie's oral sex options, and procs when she is working on nanobot programming.
     "During a break, you make the rounds to the different departments. When you swing by R&D, you decide to check up on Ellie"
