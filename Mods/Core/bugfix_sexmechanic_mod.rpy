@@ -899,26 +899,26 @@ label put_on_condom_routine(the_person):
 
 
 label watcher_check_enhanced(the_person, the_position, the_object, report_log): # Check to see if anyone is around to comment on the characters having sex.
-    $ watcher = cheating_check_get_watcher(the_person)
-    if watcher:
+    $ the_watcher = cheating_check_get_watcher(the_person)
+    if the_watcher:
         # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
         # threesome has no watcher loop, so all watching stops when threesome has started.
         # TODO: add watchers to threesome core
-        if not ask_for_threesome and willing_to_threesome(the_person, watcher):
-            $ watcher.draw_person()
-            watcher "Oh my good, that looks amazing..."
-            if can_join_threesome(watcher, the_person, the_position.position_tag):
-                watcher "Can I... can I join you? I want some too!"
+        if not ask_for_threesome and willing_to_threesome(the_person, the_watcher):
+            $ the_watcher.draw_person()
+            the_watcher "Oh my good, that looks amazing..."
+            if can_join_threesome(the_watcher, the_person, the_position.position_tag):
+                the_watcher "Can I... can I join you? I want some too!"
                 $ ask_for_threesome = True
                 menu:
                     "Let her join":
-                        watcher "Yes! Thank you [watcher.mc_title]!"
+                        the_watcher "Yes! Thank you [the_watcher.mc_title]!"
                         $ scene_manager = Scene()
                         $ scene_manager.add_actor(the_person, position = the_position.position_tag)
-                        $ scene_manager.add_actor(watcher, display_transform = character_center_flipped)
-                        watcher "Let me take off some clothes."
-                        $ scene_manager.strip_actor_outfit(watcher)
-                        call join_threesome(the_person, watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
+                        $ scene_manager.add_actor(the_watcher, display_transform = character_center_flipped)
+                        the_watcher "Let me take off some clothes."
+                        $ scene_manager.strip_actor_outfit(the_watcher)
+                        call join_threesome(the_person, the_watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
                         $ report_log = _return
                         $ finished = True
                         return
@@ -926,22 +926,22 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         the_person "Aww, okay. Maybe next time..."
                         $ the_person.change_obedience(3)
 
-        $ the_relationship = town_relationships.get_relationship(watcher, the_person)
+        $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
         if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
-            call relationship_sex_watch(watcher, town_relationships.get_relationship_type(watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
+            call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
-            call relationship_being_watched(the_person, watcher, town_relationships.get_relationship_type(the_person, watcher).lower(), the_position) from _call_relationship_being_watched
+            call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
         else:
             # NOTE: the dialogue here often draws the person talking with various emotions or positions, so we redraw the scene after we call them.
-            $ watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
+            $ the_watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
             $ the_position.redraw_scene(the_person)
-            $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
+            $ the_person.call_dialogue("being_watched", the_watcher = the_watcher, the_position = the_position) #Call her response to the person watching her.
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
         $ the_relationship = None
-    $ del watcher
+    $ del the_watcher
     return
 
 label relationship_sex_watch(the_person, the_relation, the_position):
