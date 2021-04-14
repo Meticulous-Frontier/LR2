@@ -11,7 +11,11 @@ init -1 python:
         return time_of_day == 0
 
     def advance_time_random_crisis_requirement():
-        return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
+        if time_of_day == 0:    # slot 0 is for morning crisis events
+            return False
+        if day%7 == 0 and time_of_day == 1: #Monday HR Meeting, no random events
+            return False
+        return renpy.random.randint(0,100) < crisis_chance
 
     # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)
     def advance_time_mandatory_crisis_requirement():
@@ -24,7 +28,11 @@ init -1 python:
         return time_of_day == 0
 
     def advance_time_random_morning_crisis_requirement():
-        return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
+        if time_of_day != 0:
+            return False
+        if day%7 == 5:  # Mom weekly event no random crisis events
+            return False
+        return renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
