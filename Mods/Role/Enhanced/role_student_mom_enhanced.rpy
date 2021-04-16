@@ -50,8 +50,10 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             "Soon [the_student.title] is rubbing your bulge under the table, massaging it through your pants."
 
     if the_mom.effective_sluttiness() > 20:
+        $ mc.change_locked_clarity(10)
         "While you are talking you feel a gentle touch on your leg. You glance under the table and see it is [the_mom.title]'s foot caressing your calf."
         "She turns to you and smiles, keeping up her conversation with her daughter while her foot moves up your leg."
+        $ mc.change_locked_clarity(10)
         "Soon enough she is rubbing her soft foot against your inner thigh. The movement brings her dangerously close to brushing your cock."
         "After a few moments of teasing she draws her leg back and slips her foot back in her shoe."
 
@@ -115,13 +117,16 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         "Touch [the_student.title]" if the_student.effective_sluttiness("touching_body") > 35:
             mc.name "I'm glad to be here. I'm always happy to spend time with you and your daughter."
             "You move a hand to your side, then and onto [the_student.possessive_title]'s thigh, rubbing it gently."
+            $ mc.change_locked_clarity(10)
             "You move your hand higher, up her thigh and to her crotch. You can feel her struggling to keep still in front of her mother."
 
             if the_student.effective_sluttiness() > 50:
                 "In response [the_student.title] moves her hand onto your crotch, the movements hidden by the table."
+                $ mc.change_locked_clarity(20)
                 "She runs her hand along the bulge of your crotch, stroking you slowly through the fabric."
                 the_student "He's been such a strong, firm presence in my life since I met him. I'm really learning a lot."
                 $ the_student.change_slut_temp(1)
+                $ mc.change_locked_clarity(20)
                 "You and [the_student.possessive_title] fondle each other while you eat dessert, doing your best to keep [the_mom.title] from noticing everything."
 
             else:
@@ -155,6 +160,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             the_mom "I just wanted to say thank you again for coming over..."
             $ scene_manager.update_actor(the_mom, position = "kissing", emotion = "happy", special_modifier = "kissing")
             "She takes a half step closer and leans in. You close the rest of the gap and kiss her."
+            $ mc.change_locked_clarity(10)
             "[the_mom.possessive_title] kisses you passionately at the door, rubbing her body against you for a moment."
             "After a long moment she pulls back and breaks the kiss, panting softly."
             $ scene_manager.update_actor(the_mom, special_modifier = None)
@@ -174,6 +180,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             the_mom "With no one to comfort me..."
             $ scene_manager.update_actor(the_mom, position = "kissing", emotion = "happy", special_modifier = "kissing")
             "[the_mom.possessive_title] closes the gap and kisses you passionately, almost over-eagerly."
+            $ mc.change_locked_clarity(10)
             "She presses her body against you and holds the back of your neck. After a long moment she pulls back, panting softly."
             $ scene_manager.update_actor(the_mom, special_modifier = None)
             $ the_mom.change_slut_temp(1)

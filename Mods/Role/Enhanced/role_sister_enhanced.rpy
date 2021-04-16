@@ -10,12 +10,11 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
         $ the_mom = mom
 
     "You leave [the_sister.title] in her room and go to find [the_mom.possessive_title]."
-    $ first_time = the_mom.event_triggers_dict.get("mom_instathot_pic_count",0) == 0
     $ kitchen.show_background()
     $ scene_manager.add_actor(the_mom, position = "back_peek")
     "You find her in the kitchen, standing in front of the open fridge."
     the_mom "Oh, hi [the_mom.mc_title]. I was just about to prepare something to eat, is there anything you need?"
-    if first_time:
+    if the_mom.event_triggers_dict.get("mom_instathot_pic_count",0) == 0:
         mc.name "[the_sister.title] is getting ready to take some pictures for her Insta-pic account."
         mc.name "She wanted to know if you wanted to join in."
         $ scene_manager.update_actor(the_mom, position = "stand2", emotion = "happy")
@@ -34,7 +33,7 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     $ scene_manager.update_actor(the_mom, emotion = "default", display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_sister, display_transform = character_right)
 
-    if first_time:
+    if the_mom.event_triggers_dict.get("mom_instathot_pic_count",0) == 0:
         the_sister "Hey [the_mom.title], come on in."
         the_mom "Thank you for inviting me, I just hope I'm not going to get in your way."
         mc.name "You're going to do great [the_mom.title]."
@@ -87,10 +86,15 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
         the_sister "I got us matching outfits, because I thought it would really show off the family resemblance."
         the_sister "It should make for a really cute shoot! Maybe [the_sister.mc_title] can tell us who wears it best."
 
+    $ scene_manager.draw_scene()
+
+    if insta_outfit_mom.name == insta_outfit_sister.name:
+        $ mc.change_locked_clarity(10)
+        the_sister "I got us matching outfits, because I thought it would really show off the family resemblance."
+        the_sister "It should make for a really cute shoot! Maybe [the_sister.mc_title] can tell us who wears it best."
+
     $ the_mom.apply_outfit(insta_outfit_mom)
     $ the_sister.apply_outfit(insta_outfit_sister)
-
-    $ scene_manager.draw_scene()
 
     "The girls get dressed. [the_mom.title] turns to [the_sister.possessive_title], ready for her inspection."
 
@@ -113,16 +117,18 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     mc.name "That's looking good you two, now look at me and smile."
     "You take a few pictures of them, moving around the bed to get a few different angles."
     menu:
-        "Get a little friendlier" if not first_time:
+        "Get a little friendlier" if not the_mom.event_triggers_dict.get("mom_instathot_pic_count",0) == 0:
             mc.name "Squeeze together you two, I need to get you both in the shot."
             $ scene_manager.update_actor(the_mom, display_transform = character_center_flipped(xoffset = .1), z_order = -10)
             "[the_mom.title] slides closer to [the_sister.title] on the bed."
             the_mom "Like this?"
             mc.name "A little more. Try putting your arms around her."
+            $ mc.change_locked_clarity(20)
             $ scene_manager.update_actor(the_mom, display_transform = character_center_flipped(xoffset = .2))
             "[the_mom.possessive_title] slips behind [the_sister.possessive_title] and pulls her into a hug"
             the_mom "I haven't played with you like this since you were a kid [the_sister.title]!"
             the_sister "Oh my god, you're so embarrassing [the_mom.title]!"
+            $ mc.change_locked_clarity(20)
             the_mom "[the_mom.mc_title], make sure to get some shots of me embarrassing your sister."
             "She leans over [the_sister.title]'s shoulder and kisses her on the side of the cheek."
             $ the_mom.change_happiness(10)
@@ -164,7 +170,7 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
             the_mom "Thank you, it really does help."
 
     if the_mom.judge_outfit(insta_outfit_mom) and not the_mom.wardrobe.has_outfit_with_name(insta_outfit_mom.name):
-        the_mom "Say [the_sister.title], do you need this outfit back?"
+        the_mom "Say [the_sister.name], do you need this outfit back?"
         the_sister "No, you can keep it if you want. It's obviously not my size, and I don't think they'll take returns."
         $ the_mom.wardrobe.add_outfit(insta_outfit_mom)
         $ the_mom.planned_outfit = insta_outfit_mom #She wears it for the rest of the day.
