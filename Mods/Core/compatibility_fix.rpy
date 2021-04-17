@@ -120,6 +120,7 @@ init -4 python:
         return loaded_version
 
 init -2:
+    default persistent.zip_cache_size = 0 # default is small size
     default persistent.memory_mode = 1 # default is medium memory mode
     default persistent.show_ntr = False     # default turn of NTR
 
@@ -160,8 +161,8 @@ init 1 python:
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 32
-    config.rollback_length = 64      # since refactor we can allow a longer rollback history
+    config.predict_statements = 16
+    config.rollback_length = 32      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False

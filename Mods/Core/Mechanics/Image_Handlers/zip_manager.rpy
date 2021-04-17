@@ -10,10 +10,11 @@ init 5 python:
         def __init__(self):
             self.Locks = {}
             self.Cache = {}
+            self.max_items = 300 if persistent.zip_cache_size == 0 else 500
 
             for x in supported_positions + ["character_images"]:
                 self.Locks[x] = threading.RLock()
-                self.Cache[x] = LRUCacheDict(max_size = 300, expiration = 0)    # 300 most used character images per position
+                self.Cache[x] = LRUCacheDict(max_size = self.max_items, expiration = 0)    # 300 most used character images per position
 
         def preload(self):  # load main character images into the zip file cache (about 2700 images)
             for cloth in [white_skin, black_skin, tan_skin]:
@@ -34,6 +35,7 @@ init 5 python:
             self.filename = filename
 
         def load(self):
+            global mobile_zip_dict
             tries = 0
             while tries < 3:
                 try:
@@ -47,7 +49,7 @@ init 5 python:
                     tries += 1
                     if tries >= 3:
                         renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
-                        return renpy.display.pgrender.surface((2, 2), True)
+                        return empty_image
 
                     with zip_manager.Locks[self.position]:
                         mobile_zip_dict[self.position].close()

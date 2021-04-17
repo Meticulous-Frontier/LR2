@@ -48,7 +48,7 @@ init 2 python:
             fileName = self.clothing_name + "_" + self.position_name +  "_" + body_type + "_" + breast_size + ".png"
             if fileName in mobile_zip_dict["character_images"].namelist():
                 return ZipContainer("character_images", fileName)
-        return Image("character_images/empty_holder.png")
+        return empty_image
 
     Clothing_Images.get_image = clothing_get_image
 
@@ -66,7 +66,7 @@ init 2 python:
         if self.images[index_string] in mobile_zip_dict["character_images"].namelist():
             return ZipContainer("character_images", self.images[index_string])
 
-        return Image("character_images/empty_holder.png")
+        return empty_image
 
     Facial_Accessory_Images.get_image = facial_accessory_get_image
 
