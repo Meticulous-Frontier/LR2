@@ -10,7 +10,7 @@ init 1 python:
 
         return multiplier
 
-    def add_intelligent_clarity_perk():
+    def add_intelligence_clarity_perk():
         if perk_system.has_ability_perk("Intelligent Clarity"):
             return
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your intelligence.", toggle = False, usable = False), "Intelligent Clarity")
@@ -22,7 +22,7 @@ init 1 python:
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your charisma.", toggle = False, usable = False), "Charismatic Clarity")
         return
 
-    def add_intelligent_clarity_perk():
+    def add_focus_clarity_perk():
         if perk_system.has_ability_perk("Focused Clarity"):
             return
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your focus.", toggle = False, usable = False), "Focused Clarity")
