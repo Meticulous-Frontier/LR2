@@ -27,10 +27,10 @@ init 1 python:
             clarity_cost = 2200
         )
 
-    def enhanced_permanent_bimbo_on_apply(the_person, add_to_log):
+    def enhanced_permanent_bimbo_on_apply(the_person, the_serum, add_to_log):
         if the_person.personality != bimbo_personality:
             the_person.original_personality = the_person.personality
-        permanent_bimbo_on_apply(the_person, add_to_log)
+        permanent_bimbo_on_apply(the_person, the_serum, add_to_log)
         return
 
     def unlock_anti_bimbo_serum(): # unlock the serum by setting the tier to 3 (instead of 99)
