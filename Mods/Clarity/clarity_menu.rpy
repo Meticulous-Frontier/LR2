@@ -3,8 +3,8 @@
 
 init -2 python:
     def persuade_person_requirement(the_person):
-        if mc.free_clarity < 100:
-            return "Requires: 100+ Free Clarity"
+        if mc.free_clarity < 500:
+            return "Requires: 500+ Free Clarity"
         else:
             return True
 
@@ -13,8 +13,8 @@ init -2 python:
             return "Requires: Higher MC Intelligence"
         elif the_person.int >= 7:
             return "Intelligence maximum reached"
-        elif mc.free_clarity < (the_person.int * 100):
-            return "Requires: {} Free Clarity".format(the_person.int * 100)
+        elif mc.free_clarity < (the_person.int * 500):
+            return "Requires: {} Free Clarity".format(the_person.int * 500)
         else:
             return True
 
@@ -23,8 +23,8 @@ init -2 python:
             return "Requires: Higher MC Charisma"
         elif the_person.charisma >= 7:
             return "Charisma maximum reached"
-        elif mc.free_clarity < (the_person.charisma * 100):
-            return "Requires: {} Free Clarity".format(the_person.charisma * 100)
+        elif mc.free_clarity < (the_person.charisma * 500):
+            return "Requires: {} Free Clarity".format(the_person.charisma * 500)
         else:
             return True
 
@@ -33,16 +33,16 @@ init -2 python:
             return "Requires: Higher MC Focus"
         elif the_person.focus >= 7:
             return "Focus maximum reached"
-        elif mc.free_clarity < (the_person.focus * 100):
-            return "Requires: {} Free Clarity".format(the_person.charisma * 100)
+        elif mc.free_clarity < (the_person.focus * 500):
+            return "Requires: {} Free Clarity".format(the_person.charisma * 500)
         else:
             return True
 
     def clarity_serum_dose_requirement(the_person):
         if len(the_person.serum_effects) >= the_person.serum_tolerance:
             return "Already at Serum Limit"
-        if mc.free_clarity < 100:
-            return "Requires: 100 Free Clarity"
+        if mc.free_clarity < 500:
+            return "Requires: 500 Free Clarity"
         return True
 
 
@@ -77,7 +77,7 @@ label clarity_train_int(the_person):
     the_person "I suppose we could do that."
     $ the_person.draw_person(position = "sitting")
     "You sit down with [the_person.possessive_title]. You spend a few hours chatting about recent advances in science and the scientific method."
-    $ mc.spend_clarity(the_person.int * 100)
+    $ mc.spend_clarity(the_person.int * 500)
     $ the_person.change_int(1)
     the_person "Thank you [the_person.mc_title], that was very educational!"
 
@@ -91,7 +91,7 @@ label clarity_train_cha(the_person):
     the_person "I suppose we could do that."
     $ the_person.draw_person(position = "sitting")
     "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumors and gossip."
-    $ mc.spend_clarity(the_person.charisma * 100)
+    $ mc.spend_clarity(the_person.charisma * 500)
     $ the_person.change_cha(1)
     the_person "Thank you [the_person.mc_title], that was very educational!"
     call advance_time from _call_advance_clarity_cha_01
@@ -102,7 +102,7 @@ label clarity_train_focus(the_person):
     the_person "I didn't realize you did that. Sure I'd love to join you."
     $ the_person.draw_person(position = "sitting")
     "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumors and gossip."
-    $ mc.spend_clarity(the_person.focus * 100)
+    $ mc.spend_clarity(the_person.focus * 500)
     $ the_person.change_focus(1)
     the_person "Thank you [the_person.mc_title]. I feel like I can really focus on the rest of my day now!"
     call advance_time from _call_advance_clarity_focus_01
@@ -119,6 +119,6 @@ label clarity_serum_dose(the_person):
         the_person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
 
     mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
-    $ mc.spend_clarity(100)
+    $ mc.spend_clarity(500)
     call give_serum(the_person) from _call_clarity_serum_dose_01
     return
