@@ -196,6 +196,8 @@ init 1 python:
             if (re.search("gui", fn, re.IGNORECASE)
                 and fn.endswith(".png")):
                 renpy.cache_pin(fn)
+            if "empty_holder.png" in fn:
+                renpy.cache_pin(fn)
         return
 
     # remove full outfits / overwear from default wardrobe that have no shoes or no layer 2 clothing items (nude outfits)
