@@ -22,36 +22,37 @@ init 10 python:
         return heart_string
 
     def replace_cloth(cloth):
-
         cs = renpy.current_screen()
-
         if not cs.scope["valid_check"](cs.scope["item_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
             cs.scope["item_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
             cs.scope["apply_method"](cs.scope["item_outfit"], cs.scope["selected_clothing"])
         else:
             cs.scope["apply_method"](cs.scope["item_outfit"], cs.scope["selected_clothing"])
-
         cs.scope["selected_from_outfit"] = cloth
-
-        renpy.restart_interaction()
+        return
 
     def update_outfit_color(cloth_to_color):
-
         cs = renpy.current_screen()
-
-
         if cs.scope["selected_colour"] == "colour_pattern":
             cloth_to_color.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
         else:
             cloth_to_color.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+        return
 
-        renpy.restart_interaction()
+    def hide_mannequin():
+        cs = renpy.current_screen()
+        # release display resources
+        if isinstance(cs.scope["mannequin"], Person):
+            renpy.hide(cs.scope["mannequin"].identifier)
+        else:
+            renpy.hide("mannequin_dummy")
+        # clear mannequin layer
+        renpy.scene("8")
+        clear_prediction()
+        return
 
     def preview_outfit(outfit = "demo_outfit"):
-
-        clear_scene()
         cs = renpy.current_screen()
-
         hide_list = []
         if cs.scope["hide_underwear"]:
             hide_list.append(1)
@@ -61,14 +62,10 @@ init 10 python:
             hide_list.append(3)
 
         cs.scope["hide_list"] = hide_list
-
         if cs.scope["mannequin"] == "mannequin":
-            renpy.show_screen("mannequin", cs.scope[outfit], "mannequin", hide_list)
+            draw_average_mannequin(cs.scope[outfit], hide_list = hide_list)
         else:
-            if renpy.get_screen("mannequin"):
-                renpy.hide_screen("mannequin")
             draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"], hide_list = hide_list)
-
         renpy.restart_interaction()
 
     def get_slut_score():
@@ -115,9 +112,9 @@ init 10 python:
                 cs.scope["current_a"] = cc.colour[3]
                 if not isinstance(cc, Facial_Accessory):
                     cloth.colour_pattern = cc.colour_pattern
+        return
 
     def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
-
         cs = renpy.current_screen()
         if cs.scope["selected_clothing"]:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
@@ -129,13 +126,10 @@ init 10 python:
             cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
         else:
             cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
-
-        renpy.restart_interaction()
+        return
 
     def preview_restore(cloth):
-
         cs = renpy.current_screen()
-
         if cloth == cs.scope["selected_clothing"] and cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
             pass
         else:
@@ -147,27 +141,24 @@ init 10 python:
             cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_from_outfit"])
         else:
             preview_outfit()
-
-        renpy.restart_interaction()
-
+        return
 
     def outfit_valid_check():
-
         cs = renpy.current_screen()
-
         if cs.scope["selected_clothing"] is not None:
             if cs.scope["valid_check"](cs.scope["item_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
                 return True
             else:
                 return False
+        return False
 
     def set_generated_outfit(category, slut_value, min_slut_value = 0):
         cs = renpy.current_screen()
-
         outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value, min_slut_value)
         cs.scope["item_outfit"] = outfit.get_copy()
         cs.scope["demo_outfit"] = outfit
         switch_outfit_category(category)
+        return
 
     def get_outfit_copy_with_name(outfit):
         new_outfit = outfit.get_copy()
@@ -181,14 +172,11 @@ init 10 python:
         return
 
     def switch_outfit_category(category):
-
         cs = renpy.current_screen()
-
         cs.scope["selected_clothing"] = None
         cs.scope["selected_from_outfit"] = None
         cs.scope["category_selected"] = category
         cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
-
         cs.scope["demo_outfit"] = cs.scope["item_outfit"].get_copy()
 
         # select cloth item from category we have selected
@@ -201,9 +189,9 @@ init 10 python:
                     break
 
         preview_outfit()
-
         # if cs.scope["selected_clothing"] is not None and not cs.scope["starting_outfit"].has_clothing(cs.scope["selected_clothing"]):
         #     cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
+        return
 
     def colour_changed_bar(new_value): # Handles the changes to clothing colors, both normal and with patterns. Covers all channels.
         if not new_value:
@@ -247,8 +235,8 @@ init 10 python:
                 cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
-
         preview_outfit()
+        return
 
     def update_transparency(new_value):
         cs = renpy.current_screen()
@@ -259,6 +247,7 @@ init 10 python:
         else:
             cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
         preview_outfit()
+        return
 
     def update_slut_generation(new_value):
         cs = renpy.current_screen()
@@ -270,6 +259,7 @@ init 10 python:
 
         cs.scope["slut_generation"] = new_value
         renpy.restart_interaction()
+        return
 
     def update_min_slut_generation(new_value):
         cs = renpy.current_screen()
@@ -283,6 +273,7 @@ init 10 python:
 
         cs.scope["min_slut_generation"] = new_value
         renpy.restart_interaction()
+        return
 
 init 2:
     python:
@@ -1123,7 +1114,7 @@ init 2:
                                                 action [
                                                     Function(update_outfit_name, item_outfit),
                                                     Return(item_outfit),
-                                                    Hide("mannequin"),
+                                                    Function(hide_mannequin),
                                                     Hide("outfit_creator")
                                                 ]
 
@@ -1134,7 +1125,7 @@ init 2:
 
                                                 action [
                                                     Return("Not_New"),
-                                                    Hide("mannequin"),
+                                                    Function(hide_mannequin),
                                                     Hide("outfit_creator")
                                                 ]
                                     frame:

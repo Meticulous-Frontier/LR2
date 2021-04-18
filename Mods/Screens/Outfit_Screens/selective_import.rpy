@@ -163,7 +163,7 @@ init 2:
                                                                     Hide(renpy.current_screen().screen_name)
                                                                     ]
 
-                                                            hovered Show("mannequin", None, outfit)
+                                                            hovered Function(draw_average_mannequin, outfit)
 
                                                         if show_export: # If export mode is on show the export button that saves the outfits into Exported_Wardrobe.xml NOTE: Consider specifying specific XML file later (to quickly make wardrobe sets for sharing)
                                                             default exported = []
@@ -242,5 +242,5 @@ init 2:
                     action Hide("import_outfit_manager")
                 else:
                     action Return("No Return")
-                    hovered Hide("mannequin")
+                    hovered Function(hide_mannequin)
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"
