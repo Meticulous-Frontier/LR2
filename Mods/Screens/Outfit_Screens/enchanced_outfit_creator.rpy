@@ -121,7 +121,8 @@ init 10 python:
         cs = renpy.current_screen()
         if cs.scope["selected_clothing"]:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
-                cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
+                if cs.scope["selected_clothing"].layer == cloth.layer:
+                    cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
                 cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
         elif cloth in cs.scope["demo_outfit"].accessories:
             cs.scope["selected_from_outfit"] = next((x for x in cs.scope["demo_outfit"].accessories if x == cloth), None)
