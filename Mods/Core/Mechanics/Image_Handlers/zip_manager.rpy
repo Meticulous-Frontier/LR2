@@ -35,25 +35,16 @@ init 5 python:
             self.filename = filename
 
         def load(self):
-            global mobile_zip_dict
-            tries = 0
-            while tries < 3:
-                try:
-                    if not self.filename in zip_manager.Cache[self.position]:
-                        with zip_manager.Locks[self.position]:
-                            zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
-
-                    sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
-                    return renpy.display.pgrender.load_image(sio, self.filename)
-                except:
-                    tries += 1
-                    if tries >= 3:
-                        renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
-                        return empty_image
-
+            try:
+                if not self.filename in zip_manager.Cache[self.position]:
+                    global mobile_zip_dict
                     with zip_manager.Locks[self.position]:
-                        mobile_zip_dict[self.position].close()
-                        mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")
+                        zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
+
+                sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
+                return renpy.display.pgrender.load_image(sio, self.filename)
+            except:
+                return renpy.display.pgrender.surface((2, 2), True)    # same object als the Renpy image zip returns https://github.com/renpy/renpy/blob/master/renpy/display/im.py
 
     zip_manager = ZipManager()
     # if not config.debug:    # delays reload time (disable while debugging)
