@@ -95,3 +95,27 @@ init 2 python:
         return AlphaBlend(mask_image, base_image, im.MatrixColor(base_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)), alpha=False)
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
+
+    def clothing_generate_stat_slug(self): #Generates a string of text/tokens representing what layer this clothing item is/covers
+        cloth_info = ""
+        if self.layer == 3:
+            cloth_info += "{image=gui/extra_images/overwear_token.png}"
+        if self.layer == 2:
+            cloth_info += "{image=gui/extra_images/clothing_token.png}"
+        if self.layer == 1:
+            cloth_info += "{image=gui/extra_images/underwear_token.png}"
+        if self.layer == 0:
+            cloth_info += "{image=gui/sexy_underwear_token.png}"
+
+        if self.has_extension: #Display a second token if the clothing item is a different part (split coverage into top and bottom?)
+            if self.has_extension.layer == 3:
+                cloth_info += "|{image=gui/extra_images/overwear_token.png}"
+            if self.has_extension.layer == 2:
+                cloth_info += "|{image=gui/extra_images/clothing_token.png}"
+            if self.has_extension.layer == 1:
+                cloth_info += "|{image=gui/extra_images/underwear_token.png}"
+
+        cloth_info += "+" +str(self.slut_value) + "{image=gui/heart/red_heart.png}"
+        return cloth_info
+
+    Clothing.generate_stat_slug = clothing_generate_stat_slug

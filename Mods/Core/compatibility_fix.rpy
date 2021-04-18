@@ -158,6 +158,10 @@ init 1 python:
     else:
         config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
 
+    # heart pasties and cincher (move to level 0)
+    heart_pasties.layer = 0
+    cincher.layer = 0
+
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
