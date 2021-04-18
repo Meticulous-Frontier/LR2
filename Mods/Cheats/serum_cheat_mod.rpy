@@ -88,7 +88,7 @@ screen serum_cheat_menu():
                                         $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                         $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                        textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                        textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
                                             text_xalign 0.5
                                             text_text_align 0.5
                                             action [
