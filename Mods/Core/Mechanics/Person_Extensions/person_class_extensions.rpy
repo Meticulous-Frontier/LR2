@@ -1468,6 +1468,11 @@ init -1 python:
 
     Person.wear_work_outfit = wear_work_outfit
 
+    def person_is_wearing_uniform(self):
+        return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
+
+    Person.is_wearing_uniform = person_is_wearing_uniform
+
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         self.outfit.remove_all_cum()
         if self.should_wear_uniform():
