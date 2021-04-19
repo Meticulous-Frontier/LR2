@@ -53,7 +53,10 @@ init 2:
 
                                 for outfit in catagory_info[6](mc.designed_wardrobe):
                                     textbutton outfit.name + " (Sluttiness " +str(catagory_info[3](outfit)) +")":
-                                        action Return(["select",outfit.get_copy()])
+                                        action [
+                                            Function(hide_mannequin),
+                                            Return(["select",outfit.get_copy()])
+                                        ]
                                         sensitive (catagory_info[3](outfit) <= slut_limit) and main_selectable
                                         hovered [
                                             SetScreenVariable("demo_outfit", outfit.get_copy()),
@@ -159,5 +162,9 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [Function(release_memory), Return("No Return")]
+                action [
+                    Function(hide_mannequin),
+                    Function(release_memory),
+                    Return("No Return")
+                ]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

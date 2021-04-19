@@ -5,6 +5,8 @@ init 2:
         zorder 99 #Allow it to be hidden below outfit_creator
         default preview_outfit = None
         default import_selection = False
+        default mannequin = the_person
+
         hbox:
             xalign 0.1
             yalign 0.1

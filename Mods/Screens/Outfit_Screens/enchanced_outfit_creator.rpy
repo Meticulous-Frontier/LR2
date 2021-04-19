@@ -42,7 +42,7 @@ init 10 python:
     def hide_mannequin():
         cs = renpy.current_screen()
         # release display resources
-        if isinstance(cs.scope["mannequin"], Person):
+        if "mannequin" in cs.scope.keys() and isinstance(cs.scope["mannequin"], Person):
             renpy.hide(cs.scope["mannequin"].identifier)
         else:
             renpy.hide("mannequin_dummy")
