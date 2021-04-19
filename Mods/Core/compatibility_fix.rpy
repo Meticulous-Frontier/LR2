@@ -120,7 +120,9 @@ init -4 python:
         return loaded_version
 
 init -2:
+    default persistent.zip_cache_size = 0 # default is small size
     default persistent.memory_mode = 1 # default is medium memory mode
+    default persistent.clear_memory_mode = 1 # default is daily clear
     default persistent.show_ntr = False     # default turn of NTR
 
 init python: # place first on the hijack stack
@@ -157,11 +159,15 @@ init 1 python:
     else:
         config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
 
+    # heart pasties and cincher (move to level 0)
+    heart_pasties.layer = 0
+    cincher.layer = 0
+
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 32
-    config.rollback_length = 64      # since refactor we can allow a longer rollback history
+    config.predict_statements = 16
+    config.rollback_length = 32      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False
@@ -194,6 +200,8 @@ init 1 python:
         for fn in renpy.list_files():
             if (re.search("gui", fn, re.IGNORECASE)
                 and fn.endswith(".png")):
+                renpy.cache_pin(fn)
+            if "empty_holder.png" in fn:
                 renpy.cache_pin(fn)
         return
 

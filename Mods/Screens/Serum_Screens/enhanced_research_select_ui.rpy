@@ -57,7 +57,7 @@ init 2:
                         if isinstance(mc.business.active_research_design, SerumTrait):
                             $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
                             $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)
-                            text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                            text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
                                 style "serum_text_style"
                                 size 22
                                 xalign 0.0

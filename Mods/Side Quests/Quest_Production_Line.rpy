@@ -342,6 +342,7 @@ label quest_production_line_after_raise_consult_label():
 
 label quest_production_line_help_move_label():
     $ the_person = quest_production_line_get_target()
+    $ the_person.apply_outfit(the_person.planned_outfit)    # make sure she is not in uniform
     "You promised to help [the_person.title] move now. She texts you the address so you head out."
     $ mc.change_location(the_person.home) #TODO instead of showing this, have it show the elevator background? So when we are at her new place later it actually looks different.
     $ mc.location.show_background()

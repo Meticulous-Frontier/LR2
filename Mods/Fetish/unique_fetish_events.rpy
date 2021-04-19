@@ -89,7 +89,7 @@ label fetish_stephanie_first_fetish_label(the_person):
                 "She looks at you. Her resolve stumbles, but only for a moment."
                 the_person "Don't worry, I'll be a REAL ideal employee for you soon."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
+                $ enhanced_permanent_bimbo_on_apply(the_person, None, add_to_log = True)    # TODO: check if second parameter can be NONE
                 $ the_person.event_triggers_dict["is_bimbo"] = True
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
@@ -131,7 +131,7 @@ label fetish_stephanie_first_fetish_label(the_person):
                 "She looks at you. You think you see a tear coming down from her eye."
                 the_person "It's okay. The science is amazing. And I'm sure I'll enjoy life as... a bimbo slut."
                 "She brings the serum to her mouth and drinks it down. She closes her eyes as it begins to take effect."
-                $ enhanced_permanent_bimbo_on_apply(the_person, add_to_log = True)
+                $ enhanced_permanent_bimbo_on_apply(the_person, None, add_to_log = True)        # TODO: check if second parameter can be NONE
                 "It probably only takes a minute, but it feels like an eternity. Finally she opens her eyes."
                 "She looks around a bit, seeming a bit confused about where she is."
                 the_person "That's... we were talking about something... right?"
@@ -162,7 +162,7 @@ label fetish_stephanie_first_fetish_label(the_person):
         if the_person.relationship != "Single":
             $ SO_title = SO_relationship_to_title(the_person.relationship)
             mc.name "Wait, don't you have a [SO_title]?"
-            the_person "So? He isn't here at work with me all day is he? He can fuck mewhen I get home, but I need you to do it while I'm here!"
+            the_person "So? He isn't here at work with me all day is he? He can fuck me when I get home, but I need you to do it while I'm here!"
         "Sounds like she thinks the whole reason you gave her the serums is because... you want to take things to the next level? For now, it is probably better if you just go along with it."
         mc.name "You're right. I probably should have been more honest about it, but I thought this would help bring us closer together."
         "She gives a deep sigh of relief."

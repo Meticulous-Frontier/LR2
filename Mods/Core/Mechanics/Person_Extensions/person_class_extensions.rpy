@@ -1468,6 +1468,11 @@ init -1 python:
 
     Person.wear_work_outfit = wear_work_outfit
 
+    def person_is_wearing_uniform(self):
+        return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
+
+    Person.is_wearing_uniform = person_is_wearing_uniform
+
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         self.outfit.remove_all_cum()
         if self.should_wear_uniform():
@@ -1539,11 +1544,14 @@ init -1 python:
 
     def set_uniform_enhanced(self,uniform, wear_now = False):
         if uniform is not None:
-            if creative_colored_uniform_policy.is_active():
-                builder = WardrobeBuilder(self)
+            builder = WardrobeBuilder(self)
+            if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+                self.planned_uniform = builder.apply_bottom_preference(uniform.get_copy())
+            elif creative_colored_uniform_policy.is_active():
                 self.planned_uniform = builder.personalize_outfit(uniform.get_copy(),  max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
             else:
                 self.planned_uniform = uniform.get_copy()
+
             if wear_now:
                 self.wear_uniform()
 

@@ -30,6 +30,8 @@ init 5 python:
 
     under_construction_image = Image(get_file_handle("under_construction.png"))
 
+    empty_image = Image(get_file_handle("empty_holder.png"))
+
 
 init -1 python:
     # override default render backgrounds

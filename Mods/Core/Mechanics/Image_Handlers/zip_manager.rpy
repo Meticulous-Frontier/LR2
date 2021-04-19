@@ -10,10 +10,11 @@ init 5 python:
         def __init__(self):
             self.Locks = {}
             self.Cache = {}
+            self.max_items = 300 if persistent.zip_cache_size == 0 else 500
 
             for x in supported_positions + ["character_images"]:
                 self.Locks[x] = threading.RLock()
-                self.Cache[x] = LRUCacheDict(max_size = 300, expiration = 0)    # 300 most used character images per position
+                self.Cache[x] = LRUCacheDict(max_size = self.max_items, expiration = 0)    # 300 most used character images per position
 
         def preload(self):  # load main character images into the zip file cache (about 2700 images)
             for cloth in [white_skin, black_skin, tan_skin]:
@@ -34,24 +35,16 @@ init 5 python:
             self.filename = filename
 
         def load(self):
-            tries = 0
-            while tries < 3:
-                try:
-                    if not self.filename in zip_manager.Cache[self.position]:
-                        with zip_manager.Locks[self.position]:
-                            zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
-
-                    sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
-                    return renpy.display.pgrender.load_image(sio, self.filename)
-                except:
-                    tries += 1
-                    if tries >= 3:
-                        renpy.notify("Unsuccessful Load: " + self.position + " -> " + self.filename)
-                        return renpy.display.pgrender.surface((2, 2), True)
-
+            try:
+                if not self.filename in zip_manager.Cache[self.position]:
+                    global mobile_zip_dict
                     with zip_manager.Locks[self.position]:
-                        mobile_zip_dict[self.position].close()
-                        mobile_zip_dict[self.position] = zipfile.ZipFile(renpy.file(get_file_handle(self.position + ".zip")), "r")
+                        zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
+
+                sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
+                return renpy.display.pgrender.load_image(sio, self.filename)
+            except:
+                return renpy.display.pgrender.surface((2, 2), True)    # same object als the Renpy image zip returns https://github.com/renpy/renpy/blob/master/renpy/display/im.py
 
     zip_manager = ZipManager()
     # if not config.debug:    # delays reload time (disable while debugging)

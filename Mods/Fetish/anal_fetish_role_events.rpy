@@ -20,7 +20,7 @@ init 1 python:
 
 init 2 python:
     fetish_anal_staylate = Action("See me after work", fetish_anal_staylate_requirement, "fetish_anal_staylate_label",
-        menu_tooltip = "Ask her to stay after work is over.")
+        menu_tooltip = "Ask her to stay late after work day is over.")
 
     anal_fetish_role = Role(role_name ="Anal Fetish", actions =[fetish_anal_staylate])
 

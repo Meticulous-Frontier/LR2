@@ -2383,7 +2383,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
             the_person "Shove it in deep! I want to feel your seed inside me all day long!"
         $ the_person.cum_in_vagina()
         $ scene_manager.update_actor(the_person) # paint cum
-        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
         #TODO internal fetish specific dialogue
         "You grab her hip and shove your cock deep and hold it there, cumming deep inside her. She moans and gasps with every spurt."
         "Satisfied, you slowly pull out of her."

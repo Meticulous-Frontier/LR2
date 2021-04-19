@@ -93,6 +93,8 @@ init 2:
         zorder 100
         default preview_outfit = None
         default targeted_outfit = None
+        default mannequin = "mannequin"
+
         #default business_wardrobes = [mc.business.m_uniform, mc.business.p_uniform, mc.business.r_uniform, mc.business.s_uniform, mc.business.h_uniform, mc.business.all_uniform]
 
         default import_wardrobes = get_default_import_wardrobes(slut_limit) if not use_strip_club_wardrobe else get_strip_club_import_wardrobes() # Holds the wardrobes you want to be able to import into or select #NOTE: Make sure it is a list inside of a list [[]]
@@ -163,7 +165,7 @@ init 2:
                                                                     Hide(renpy.current_screen().screen_name)
                                                                     ]
 
-                                                            hovered Show("mannequin", None, outfit)
+                                                            hovered Function(draw_average_mannequin, outfit)
 
                                                         if show_export: # If export mode is on show the export button that saves the outfits into Exported_Wardrobe.xml NOTE: Consider specifying specific XML file later (to quickly make wardrobe sets for sharing)
                                                             default exported = []
@@ -242,5 +244,5 @@ init 2:
                     action Hide("import_outfit_manager")
                 else:
                     action Return("No Return")
-                    hovered Hide("mannequin")
+                    hovered Function(hide_mannequin)
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

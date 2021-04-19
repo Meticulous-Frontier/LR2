@@ -1,6 +1,6 @@
 #Mid game quest. Is available mid game, will help with profitability and seduction.
 #Requires tier 2 serums unlocked. Starts with MC witnessing a TV commercial for "Female Viagra"
-#AT first, MC blows it off as rediculous, but after considering, realizes that it could be real, considering what his company has made.
+#AT first, MC blows it off as ridiculous, but after considering, realizes that it could be real, considering what his company has made.
 #NOTE: doses have a "use by" date, which is how we control the length of this quest.
 #Orders 2 doses. First dose it used at the lab with the science leader. If there isn't one, prompt player to make one.
 #MC discovers they actually work. Gives to science leader to reverse engineer, offers extra pay to her to do it on the side.
@@ -414,35 +414,3 @@ label quest_arousal_serum_fire_HR_label():
     $ quest_arousal_serum().set_quest_flag(39)
     $ quest_arousal_serum().quest_completed()
     return
-
-
-init python:
-    def arousal_serum_function_on_turn(the_person, the_serum, add_to_log):
-        if the_person.arousal < the_person.suggestibility:
-            the_person.change_arousal(__builtin__.min(15, the_person.suggestibility - the_person.arousal),add_to_log = False)
-        return
-
-
-
-    arousal_serum_trait = SerumTrait(name = "Female Viagra",
-            desc = "Reverse engineered from the pills you ordered. Increases arousal over time, maxing out based on suggestibility.",
-            positive_slug = "+$20 Value, +15 Arousal over time",
-            negative_slug = "+20 Serum Research",
-            value_added = 20,
-            research_added = 20,
-    #     slots_added = a_number,
-    #     production_added = a_number,
-    #     duration_added = a_number,
-            base_side_effect_chance = 30,
-    #        on_apply = essential_oil_function_on_apply,
-    #        on_remove = essential_oil_function_on_remove,
-            on_turn = arousal_serum_function_on_turn,
-    #     on_day = a_function,
-    #     requires = [list_of_other_traits],
-            tier = 2,
-            start_researched =  True,
-            research_needed = 800,
-            clarity_cost = 1000
-    #     exclude_tags = [list_of_other_tags],
-    #     is_side_effect = a_bool)
-        )

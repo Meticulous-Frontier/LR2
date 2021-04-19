@@ -11,7 +11,11 @@ init -1 python:
         return time_of_day == 0
 
     def advance_time_random_crisis_requirement():
-        return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
+        if time_of_day == 0:    # slot 0 is for morning crisis events
+            return False
+        if day%7 == 0 and time_of_day == 1: #Monday HR Meeting, no random events
+            return False
+        return renpy.random.randint(0,100) < crisis_chance
 
     # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)
     def advance_time_mandatory_crisis_requirement():
@@ -24,7 +28,11 @@ init -1 python:
         return time_of_day == 0
 
     def advance_time_random_morning_crisis_requirement():
-        return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
+        if time_of_day != 0:
+            return False
+        if day%7 == 5:  # Mom weekly event no random crisis events
+            return False
+        return renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
@@ -336,6 +344,8 @@ label advance_time_people_run_turn_label():
     python:
         mandatory_advance_time = False
         advance_time_run_turn(people_to_process)
+        if persistent.clear_memory_mode == 0: # otherwise at run day
+            renpy.free_memory()
     return
 
 label advance_time_people_run_day_label():
@@ -344,7 +354,8 @@ label advance_time_people_run_day_label():
         #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
         advance_time_run_day(people_to_process)
         # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-        renpy.free_memory()
+        if persistent.clear_memory_mode == 1:   #otherwise at end of run turn
+            renpy.free_memory()
         # $ gc.collect()    don't force garbage collector, let internals handle this
         #$ renpy.profile_memory(.5, 1024)
         renpy.block_rollback()
