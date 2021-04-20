@@ -116,7 +116,10 @@ label clarity_serum_dose(the_person):
         the_person "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
     else:
         mc.name "[the_person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
-        the_person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
+        if the_person.personality.personality_type_prefix == "nora":
+            the_person "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
+        else:
+            the_person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
 
     mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
     $ mc.spend_clarity(500)
