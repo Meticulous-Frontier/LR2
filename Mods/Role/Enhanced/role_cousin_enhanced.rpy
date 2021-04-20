@@ -635,7 +635,7 @@ init 5 python:
 label activate_cousin_role_enhancement(stack):
     python:
         cousin_role.add_action(cousin_teach_action)
-        if cousin.event_triggers_dict.get("teach_level", -1) < 1 and the_person.event_triggers_dict.get("teach_level", -1) != -2:
+        if cousin.event_triggers_dict.get("teach_level", -1) < 1 and cousin.event_triggers_dict.get("teach_level", -1) != -2:
             cousin.event_triggers_dict["oral_chance"] = 0
             gabrielle_visit = Action("gabrielle visit",gabrielle_visit_requirement,"gabrielle_visit_label")
             mc.business.mandatory_morning_crises_list.append(gabrielle_visit)
