@@ -24,65 +24,65 @@ label intro_standing_oral(the_girl, the_location, the_object):
     if girl_in_charge:
         "[the_girl.title] pulls you close against her."
         if blowjob in report_log.get("positions_used",[]) or deepthroat in report_log.get("positions_used",[]):
-            the_girl.char "It's your turn. On your knees."
+            the_girl "It's your turn. On your knees."
         else:
-            the_girl.char "I have something I want you to do."
+            the_girl "I have something I want you to do."
             mc.name "Oh? What might that be?"
         if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_opinion_status("getting head")):
-            the_girl.char "You know what I like."
+            the_girl "You know what I like."
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
             "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
-        if the_person.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
+        if the_girl.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
             if the_girl.love < 0:
-                the_girl.char "Well? Get to it!"
+                the_girl "Well? Get to it!"
             else:
-                the_girl.char "Don't be shy. We both know you're good at this."
+                the_girl "Don't be shy. We both know you're good at this."
                 "She shivers slightly in anticipation."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("getting head") + 3)
         "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
-        the_girl.char "Now start licking."
+        the_girl "Now start licking."
         "You do as you are told."
     else:
         "You kneel before [the_girl.title] and gently start to lick her pussy."
         if the_girl.get_opinion_score("taking control")> 0:
             if the_girl.love < 0:
-                the_girl.char "At least you know your proper place."
+                the_girl "At least you know your proper place."
             else:
-                the_girl.char "My, my. What did I do to deserve this?"
+                the_girl "My, my. What did I do to deserve this?"
             $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
         elif the_girl.get_opinion_score("getting head") < 0 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] < 2) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] == 0):
-            the_girl.char "You know you don't have to do that."
+            the_girl "You know you don't have to do that."
             "[the_girl.possessive_title] pushes your head away."
             $ the_girl.change_arousal(-10)
             if the_girl.get_opinion_score("giving blowjobs") > 0:
-                the_girl.char "How about we swap and I do something for you instead?"
+                the_girl "How about we swap and I do something for you instead?"
         elif the_girl.get_opinion_score("getting head") == 2 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] > 7) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] > 5):
-            the_girl.char "I could get used to this."
-            the_girl.char "That feels GOOD."
+            the_girl "I could get used to this."
+            the_girl "That feels GOOD."
         else:
-            the_girl.char "Mmm."
+            the_girl "Mmm."
     return
 
 label taboo_break_standing_oral(the_girl, the_location, the_object):
     if girl_in_charge:
-        the_girl.char "We haven't done this before but I want to do it."
+        the_girl "We haven't done this before but I want to do it."
         "[the_girl.title] pulls you close against her."
-        the_girl.char "I have something I want you to do."
+        the_girl "I have something I want you to do."
         mc.name "Oh? What might that be?"
-        if not the_person.has_taboo("sucking_cock"):
-            the_girl.char "It's your turn on your knees."
+        if not the_girl.has_taboo("sucking_cock"):
+            the_girl "It's your turn on your knees."
         "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
         "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
-        the_girl.char "Now start licking."
+        the_girl "Now start licking."
         "You do as you are told."
     else:
         "You kneel before [the_girl.title]."
-        $ the_person.call_dialogue("licking_pussy_taboo_break")
+        $ the_girl.call_dialogue("licking_pussy_taboo_break")
         "You gently lick her pussy."
         if the_girl.get_opinion_score("getting head") < 0:
-            the_girl.char "You know you don't have to do that."
-    $ the_person.break_taboo("licking_pussy")
+            the_girl "You know you don't have to do that."
+    $ the_girl.break_taboo("licking_pussy")
     return
 
 label scene_standing_oral_1(the_girl, the_location, the_object):
@@ -97,14 +97,14 @@ label scene_standing_oral_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title] rests one hand on your shoulder."
     if the_girl.outfit.tits_available():# TODO: put in not heart pasties? How do I do that?
         if the_girl.get_opinion_score("being submissive") > 0:
-            "[the_person.possessive_title] reaches up and pinches one of her nipples hard, wincing from excitement and pain. She then proceeds to tweak and roll it between her fingers."
+            "[the_girl.possessive_title] reaches up and pinches one of her nipples hard, wincing from excitement and pain. She then proceeds to tweak and roll it between her fingers."
             $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") + 1)
-        if the_person.has_large_tits():
-            "With one hand she softly squeezes her large breast, gently playing wqith her nipple."
+        if the_girl.has_large_tits():
+            "With one hand she softly squeezes her large breast, gently playing with her nipple."
         else:
-            "With one hand she squeezes het perky little breast, gently playing wqith her nipple.."
+            "With one hand she squeezes het perky little breast, gently playing with her nipple."
     else:
-        if the_person.has_large_tits():
+        if the_girl.has_large_tits():
             "With one hand she softly squeezes her large breast."
         else:
             "With one hand she squeezes het perky little breast."
@@ -115,18 +115,18 @@ label scene_standing_oral_2(the_girl, the_location, the_object):
     if the_girl.arousal > 75:
         "Her pussy is dripping wet now, her juices are running down your face and chin."
         "You can tell she is getting close, so you double down on your efforts to get [the_girl.title] off."
-        the_girl.char "Oh god, that feels so good..."
+        the_girl "Oh god, that feels so good..."
         "She closes her eyes and tilts her head back. She grips your head tightly."
         $the_girl.change_arousal(10)
     else:
         if girl_in_charge or the_girl.get_opinion_score("taking control") > 0:
             "[the_girl.possessive_title] grabs your hair and holds your head in place as you continue to lick."
-            the_girl.char "Look me in the eyes."
+            the_girl "Look me in the eyes."
             "You look up at her as you continue. She smiles down at you, clearly enjoying the experience."
-            the_girl.char "Keep going, [the_person.mc_title]."
+            the_girl "Keep going, [the_girl.mc_title]."
             $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
         else:
-            if the_person.love > 0:
+            if the_girl.love > 0:
                 "[the_girl.possessive_title] strokes your head affectionately, as you continue to lick."
             else:
                 "[the_girl.possessive_title] holds your head in place, as you continue to lick."
@@ -142,12 +142,11 @@ label scene_standing_oral_2(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("sex_responses_oral")
                 $ the_girl.change_arousal(mc.sex_skills["Oral"])
                 if (mc.sex_skills["Oral"]) > 4:
-                    the_person.char "Oh yes! Do that!"
+                    the_girl "Oh yes! Do that!"
                 if the_girl.get_opinion_score("taking control") > 0:
                     "[the_girl.possessive_title] grabs your hair and hold your head in place as you continue to lick."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
                 "You continue to play with [the_girl.possessive_title]'s pussy with your mouth until you start to tire."
-
     return
 
 
@@ -159,84 +158,83 @@ label outro_standing_oral(the_girl, the_location, the_object):
     if not girl_in_charge:
         "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto the floor in front of [the_girl.title]."
         if the_girl.get_opinion_score("taking control") > 0:
-            the_girl.char "Well look at that."
-            the_girl.char "You got a secret sub side I should know about?"
-            the_girl.char "Cumming buckets on your knees with your face in my pussy?"
+            the_girl "Well look at that."
+            the_girl "You got a secret sub side I should know about?"
+            the_girl "Cumming buckets on your knees with your face in my pussy?"
         if the_girl.get_opinion_score("getting head") < 0:
-            the_girl.char "That's maybe a good time to stop. Do you think?"
+            the_girl "That's maybe a good time to stop. Do you think?"
     if girl_in_charge:
-        if the_person.love < 0:
-            the_person.char "You gonna cum? Are you?"
+        if the_girl.love < 0:
+            the_girl "You gonna cum? Are you?"
             "[the_girl.possessive_title] pulls your head close into her as she grinds your face into her pussy as you cum."
             "You jerk your cock and blast out a load of cum onto the floor in front of [the_girl.title]."
         else:
             "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto the floor in front of [the_girl.title]."
-        the_girl.char "Well look at that."
+        the_girl "Well look at that."
         "She watches as your cock twitches and finishes."
-        the_girl.char "You got a secret sub side I should know about?"
-        the_girl.char "Cumming buckets with your face ground in my pussy?"
+        the_girl "You got a secret sub side I should know about?"
+        the_girl "Cumming buckets with your face ground in my pussy?"
         if the_girl == cousin:
-            the_girl.char "Doesn't exactly scream Macho Man does it, cuz?"
-            the_girl.char "Maybe screaming is the right word."
+            the_girl "Doesn't exactly scream Macho Man does it, cuz?"
+            the_girl "Maybe screaming is the right word."
         if the_goal == "get off" or the_goal == "hate fuck":
-            the_girl.char "Don't forget why you're there."
+            the_girl "Don't forget why you're there."
         elif the_goal == "waste cum":
-            the_person.char "Look at all that wasted cum... Too bad, [the_person.mc_title]!"
+            the_girl "Look at all that wasted cum... Too bad, [the_girl.mc_title]!"
             "She gives a slight smile."
         elif the_goal == "get mc off":
-            the_girl.char "There we go."
-            the_girl.char "Feeling better now?"
+            the_girl "There we go."
+            the_girl "Feeling better now?"
         else: #wasted opportunity
-            the_girl.char "What a waste. Next time tell me when you're close."
+            the_girl "What a waste. Next time tell me when you're close."
     return
 
 label transition_default_standing_oral(the_girl, the_location, the_object):
     if girl_in_charge:
         "[the_girl.title] pulls you close against her."
         if blowjob in report_log.get("positions_used",[]) or deepthroat in report_log.get("positions_used",[]):
-            the_girl.char "It's your turn. On your knees."
+            the_girl "It's your turn. On your knees."
         else:
-            the_girl.char "I have something I want you to do."
+            the_girl "I have something I want you to do."
             mc.name "Oh? What might that be?"
         if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_opinion_status("getting head")):
-            the_girl.char "You know what I like."
+            the_girl "You know what I like."
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
             "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
-        if the_person.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
+        if the_girl.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
             if the_girl.love < 0:
-                the_girl.char "Well? Get to it!"
+                the_girl "Well? Get to it!"
             else:
-                the_girl.char "Don't be shy. We both know you're good at this."
+                the_girl "Don't be shy. We both know you're good at this."
                 "She shivers slightly in anticipation."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("getting head") + 3)
         "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
-        the_girl.char "Now start licking."
+        the_girl "Now start licking."
         "You do as you are told."
     else:
         "You kneel before [the_girl.title] and gently start to lick her pussy."
         if the_girl.get_opinion_score("taking control")> 0:
             if the_girl.love < 0:
-                the_girl.char "At least you know your proper place."
+                the_girl "At least you know your proper place."
             else:
-                the_girl.char "My, my. What did I do to deserve this?"
+                the_girl "My, my. What did I do to deserve this?"
             $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
         elif the_girl.get_opinion_score("getting head") < 0 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] < 2) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] == 0):
-            the_girl.char "You know you don't have to do that."
+            the_girl "You know you don't have to do that."
             "[the_girl.possessive_title] pushes your head away."
             $ the_girl.change_arousal(-10)
             if the_girl.get_opinion_score("giving blowjobs") > 0:
-                the_girl.char "How about we swap and I do something for you instead?"
+                the_girl "How about we swap and I do something for you instead?"
         elif the_girl.get_opinion_score("getting head") == 2 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] > 7) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] > 5):
-            the_girl.char "I could get used to this."
-            the_girl.char "That feels GOOD."
+            the_girl "I could get used to this."
+            the_girl "That feels GOOD."
         else:
-            the_girl.char "Mmm."
+            the_girl "Mmm."
     return
 
 
 label strip_standing_oral(the_girl, the_clothing, the_location, the_object):
-
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = standing_oral.position_tag)
     "[the_girl.possessive_title] strips off her [the_clothing.name] while you're eating her out, throwing it to the side."
@@ -244,13 +242,12 @@ label strip_standing_oral(the_girl, the_clothing, the_location, the_object):
     return
 
 label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
-
     if girl_in_charge:
         $ the_girl.call_dialogue("sex_strip")
         $ the_girl.draw_animated_removal(the_clothing, position = standing_oral.position_tag)
         "[the_girl.possessive_title] strips off her [the_clothing.name] while you're eating her out, throwing it to the side."
     else:
-        the_girl.char "[the_girl.mc_title], I'm like to take off my [the_clothing.name] if you don't mind."
+        the_girl "[the_girl.mc_title], I'm like to take off my [the_clothing.name] if you don't mind."
         menu:
             "Let her strip":
                 "You look up from between her legs and nod."
@@ -260,13 +257,12 @@ label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
             "Leave it on":
                 "You look up from between her legs and shake your head."
                 mc.name "No, I like how you look with it on."
-                the_girl.char "Yeah? Do I look sexy in it? Mmmm..."
+                the_girl "Yeah? Do I look sexy in it? Mmmm..."
                 if the_girl.sluttiness < 80:
-                    the_girl.char "Do you think I look sexy in it?"
+                    the_girl "Do you think I look sexy in it?"
                 else:
-                    the_girl.char "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
+                    the_girl "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
     $ standing_oral.redraw_scene(the_girl)
-
     return
 
 label orgasm_standing_oral(the_girl, the_location, the_object):
@@ -275,12 +271,12 @@ label orgasm_standing_oral(the_girl, the_location, the_object):
     "Her whole body tenses up and she grabs you by the hair. A shiver runs through her body as she climaxes."
     "The moment passes and she relaxes. For a moment all she can do is look down at you and pant."
     if the_girl.get_opinion_score("getting head") < 0:
-        if the_person.love > 0:
-            the_girl.char "That was great - your turn now."
+        if the_girl.love > 0:
+            the_girl "That was great - your turn now."
         else:
-            the_girl.char "OK. Now let's do something else."
+            the_girl "OK. Now let's do something else."
     if girl_in_charge:
         pass
     else:
-        the_girl.char "Ah... Keep going... I bet you can make me cum again."
+        the_girl "Ah... Keep going... I bet you can make me cum again."
     return
