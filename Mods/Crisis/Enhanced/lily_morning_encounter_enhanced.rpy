@@ -240,7 +240,7 @@ label lily_morning_encounter_enhanced_label():
 
                             else:
                                 the_person "Very funny, I'm serious."
-                                mc.name "So am I, we've certianly done more than let her watch us. I'm sure we can do whatever we want wherever we want."
+                                mc.name "So am I, we've certainly done more than let her watch us. I'm sure we can do whatever we want wherever we want."
                                 the_person "I suppose that is true."
                                 $ the_person.draw_person(position = "stand2")
                                 the_person "So, [the_person.mc_title] what do you want to do to [the_person.possessive_title]?"
@@ -255,7 +255,7 @@ label lily_morning_encounter_enhanced_label():
                                         "You run your hand up her arm to her shoulder and firmly push her down to her knees."
                                         mc.name "I think you need to get a closer look at the problem, maybe see if you can find a solution."
                                         "She pulls down your pants allowing your erection to spring free."
-                                        the_person "Wow, [the_person.mc_title], that is certianly a big problem but I think I can handle it."
+                                        the_person "Wow, [the_person.mc_title], that is certainly a big problem but I think I can handle it."
                                         "She gently takes you in her hand as she leans in and begins to lick your shaft"
                                         if the_watcher:
                                             "Suddenly you hear a gasp from the door behind you."
@@ -352,7 +352,7 @@ label lily_morning_encounter_enhanced_label():
                                         the_person "Oh, [the_person.mc_title] what are you going to do to me?"
                                         mc.name "I think it is time to teach you a lesson. If you are going to keep teasing me there will be consequenses."
                                         if the_person.get_opinion_score("spanking") > 0:
-                                            the_person "I'm not sure this is the detterant you think it is, but I'm not complaining."
+                                            the_person "I'm not sure this is the detergent you think it is, but I'm not complaining."
                                         else:
                                             the_person "For you, I'll take any punishment [the_person.mc_title]."
                                         if the_watcher:
@@ -390,7 +390,7 @@ label lily_morning_encounter_enhanced_label():
 
                         "Let her go":
                             mc.name "Maybe we'll follow up on this later."
-        if took_action == True:
+        if took_action:
             "Very happy with how your morning has gone so far you head back to your room to start getting ready for the day."
             $ mc.change_location(bedroom)
         else:
