@@ -160,6 +160,9 @@ init 5 python:
         return find_next_crisis([x[0] for x in crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def get_limited_time_action_for_person(person):
+        out_of_uniform = next([x for x in limited_time_event_pool if x[0].is_action_enabled(person) and x[0].name == "Uniform Disobedience LTE"], None)
+        if out_of_uniform: # out of uniform takes precedence of other LTE events
+            return out_of_uniform
         return get_random_from_weighted_list([x for x in limited_time_event_pool if x[0].is_action_enabled(person)], return_everything = True)
 
     def get_morning_crisis_from_crisis_list():
