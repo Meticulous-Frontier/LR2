@@ -113,13 +113,13 @@ label lily_morning_encounter_enhanced_label():
                             $ the_person.change_love(3)
                             $ the_person.change_happiness(5)
                             menu:
-                                "Continue with your fingers.":
+                                "Continue with your fingers":
                                     call fuck_person(the_person, private = True, start_object = make_floor(), start_position = standing_finger, skip_intro = False) from _call_fuck_person_amlaundryfinger
 
-                                "Get a taste of her pussy." if not the_person.has_taboo("licking_pussy"):
+                                "Get a taste of her pussy" if not the_person.has_taboo("licking_pussy"):
                                     call fuck_person(the_person, private = True, start_object = make_floor(), start_position = cunnilingus, skip_intro = False) from _call_fuck_person_amlaundrylick
 
-                                "Fuck her.":
+                                "Fuck her":
                                     call fuck_person(the_person, private = True, start_object = make_floor(), start_position = missionary, skip_intro = False) from _call_fuck_person_amlaundryfuck
 
                         "Let her go":
@@ -183,7 +183,7 @@ label lily_morning_encounter_enhanced_label():
                                 else:
                                     the_watcher "...and, [the_person.title], walking around naked again I see."
                                     $ the_group.redraw_person(the_person)
-                                    the_person "Well, [the_person.mc_title] likes it so much I don't want to dissapoint him."
+                                    the_person "Well, [the_person.mc_title] likes it so much I don't want to disappoint him."
                                 $ the_group.redraw_person(the_watcher)
                                 the_watcher "Well I can understand that, now [the_watcher.mc_title] what are you doing dragging [the_person.possessive_title] around?"
                                 mc.name "She got me so excited that I figured she could help me take care of this."
@@ -212,13 +212,13 @@ label lily_morning_encounter_enhanced_label():
                                         $ the_group.redraw_person(the_person)
                                         the_person "Are you sure?"
                                         menu:
-                                            "Yes.":
+                                            "Yes":
                                                 mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_watcher.title]"
                                                 the_person "Ok, you two have fun. I'll see you tonight."
                                                 $ the_person.change_location(lily_bedroom)
                                                 $ the_person = the_watcher
 
-                                            "No.":
+                                            "No":
                                                 mc.name "Actually, I think you could help me take care of [the_watcher.title]."
                                                 $ kitchen_threesome = True
                                 if kitchen_threesome == True:
@@ -229,18 +229,18 @@ label lily_morning_encounter_enhanced_label():
                                 else:
                                     mc.name "Now get over here [the_person.title]."
                                     menu:
-                                        "Force her to her knees." if not the_person.has_taboo("sucking_cock"):
+                                        "Force her to her knees" if not the_person.has_taboo("sucking_cock"):
                                             call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = False, position_locked = True) from _call_fuck_person_kitchenblow
 
-                                        "Lay her on the table.":
+                                        "Lay her on the table":
                                             call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_fuck_person_kitchenfuck
 
-                                        "Bend her over the table." if not the_person.has_taboo("anal_sex"):
+                                        "Bend her over the table" if not the_person.has_taboo("anal_sex"):
                                             call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_fuck_person_kitchenspank4
 
                             else:
                                 the_person "Very funny, I'm serious."
-                                mc.name "So am I, we've certianly done more than let her watch us. I'm sure we can do whatever we want wherever we want."
+                                mc.name "So am I, we've certainly done more than let her watch us. I'm sure we can do whatever we want wherever we want."
                                 the_person "I suppose that is true."
                                 $ the_person.draw_person(position = "stand2")
                                 the_person "So, [the_person.mc_title] what do you want to do to [the_person.possessive_title]?"
@@ -251,11 +251,11 @@ label lily_morning_encounter_enhanced_label():
                                     $ jealous_watcher = False
                                     $ the_group = GroupDisplayManager([the_person], primary_speaker = the_person)
                                 menu:
-                                    "Force her to her knees." if not the_person.has_taboo("sucking_cock"):
+                                    "Force her to her knees" if not the_person.has_taboo("sucking_cock"):
                                         "You run your hand up her arm to her shoulder and firmly push her down to her knees."
                                         mc.name "I think you need to get a closer look at the problem, maybe see if you can find a solution."
                                         "She pulls down your pants allowing your erection to spring free."
-                                        the_person "Wow, [the_person.mc_title], that is certianly a big problem but I think I can handle it."
+                                        the_person "Wow, [the_person.mc_title], that is certainly a big problem but I think I can handle it."
                                         "She gently takes you in her hand as she leans in and begins to lick your shaft"
                                         if the_watcher:
                                             "Suddenly you hear a gasp from the door behind you."
@@ -269,14 +269,14 @@ label lily_morning_encounter_enhanced_label():
                                             else:
                                                 the_watcher "You can hardly blame her, with a body like that I would walk around naked as much as I could."
                                             menu:
-                                                "Invite [the_watcher.title].":
+                                                "Invite [the_watcher.title]":
                                                     mc.name "Your body is nothing to be ashamed of [the_watcher.possessive_title], in fact you could join us if you want."
                                                     the_watcher "That is such a generous offer. I guess I can change my breakfast plans."
                                                     mc.name "Well then, I guess we need to decide who goes first."
                                                     $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_watcher, temp_sluttiness_boost = 50)
                                                     call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from threesome_event_test_call_kitchen2
 
-                                                "Continue with [the_person.title].":
+                                                "Continue with [the_person.title]":
                                                     mc.name "I can't argue with that, do you want to stay and watch?"
                                                     the_watcher "well I was going to make breakfast, but I guess a little show with my meal wouldn't hurt."
                                                     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, position_locked = True) from _call_fuck_person_kitchenblow2
@@ -284,7 +284,7 @@ label lily_morning_encounter_enhanced_label():
                                             mc.name "Don't be shy [the_person.title], I know how much you want this."
                                             call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _call_fuck_person_kitchenblow3
 
-                                    "Lay her on the table.":
+                                    "Lay her on the table":
                                         "Putting your other hand on [the_person.title]'s shoulder you gently guide her to the table and push her back to sit on the top."
                                         the_person "Oh, [the_person.mc_title] what did you have in mind for me?"
                                         mc.name "I think you need a good fucking, it is obvious you are horny all the time, walking around naked and teasing me."
@@ -310,7 +310,7 @@ label lily_morning_encounter_enhanced_label():
                                                     the_watcher "You've been to busy to make time for either of us this week."
                                                     $ jealous_watcher = True
                                                 else:
-                                                    the_watcher "She mentioned the other day that you've been ignoring her, lonliness can lead to desperation."
+                                                    the_watcher "She mentioned the other day that you've been ignoring her, loneliness can lead to desperation."
                                             else:
                                                 the_watcher "Ah, the insatiability of youth. I sort of miss that."
                                                 if the_watcher.sex_record.get("Last Sex Day", 0) > day + 7:
@@ -328,13 +328,13 @@ label lily_morning_encounter_enhanced_label():
                                                     $ the_group.redraw_person(the_person)
                                                     the_person "Are you sure?"
                                                     menu:
-                                                        "Yes.":
+                                                        "Yes":
                                                             mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_watcher.title]"
                                                             the_person "Ok, you two have fun. I'll see you tonight."
                                                             $ the_person.change_location(lily_bedroom)
                                                             $ the_person = the_watcher
 
-                                                        "No.":
+                                                        "No":
                                                             mc.name "Actually, I think you could help me take care of [the_watcher.title]."
                                                             $ kitchen_threesome = True
                                             if kitchen_threesome == True:
@@ -346,13 +346,13 @@ label lily_morning_encounter_enhanced_label():
                                         else:
                                             call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = True) from _call_fuck_person_kitchenfuck3
 
-                                    "Bend her over the table." if not the_person.has_taboo("anal_sex"):
+                                    "Bend her over the table" if not the_person.has_taboo("anal_sex"):
                                         "Already hard from the teasing in the hallway you waste no time forcing [the_person.title] over to the table."
                                         "You push her roughly against it and bend her over getting an even better look at her tight ass."
                                         the_person "Oh, [the_person.mc_title] what are you going to do to me?"
                                         mc.name "I think it is time to teach you a lesson. If you are going to keep teasing me there will be consequenses."
                                         if the_person.get_opinion_score("spanking") > 0:
-                                            the_person "I'm not sure this is the detterant you think it is, but I'm not complaining."
+                                            the_person "I'm not sure this is the detergent you think it is, but I'm not complaining."
                                         else:
                                             the_person "For you, I'll take any punishment [the_person.mc_title]."
                                         if the_watcher:
@@ -364,7 +364,7 @@ label lily_morning_encounter_enhanced_label():
                                             mc.name "Good morning [the_watcher.title], I found this slut walking down the hallway naked and was about to teach her a lesson."
                                             the_watcher "She really has been acting out recently, I guess it is time for someone to disciple her."
                                             menu:
-                                                "Send [the_watcher.title] away.":
+                                                "Send [the_watcher.title] away":
                                                     mc.name "Exactly, and since you don't seem capable I guess I'll take care of it."
                                                     mc.name "You can go."
                                                     the_watcher "Yes, [the_watcher.mc_title]."
@@ -372,13 +372,13 @@ label lily_morning_encounter_enhanced_label():
                                                     $ the_watcher.change_obedience(3)
                                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True) from _call_fuck_person_kitchenspank1
 
-                                                "Make [the_watcher.title] stay.":
+                                                "Make [the_watcher.title] stay":
                                                     mc.name "I know you've been struggling with her disciple, take a seat and I'll show you how it is done."
                                                     the_watcher "Yes, [the_watcher.mc_title]."
                                                     $ the_watcher.change_obedience(5)
                                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_fuck_person_kitchenspank2
 
-                                                "Punish [the_watcher.title] instead." if not the_watcher.has_taboo("anal_sex"):
+                                                "Punish [the_watcher.title] instead" if not the_watcher.has_taboo("anal_sex"):
                                                     mc.name "And you've barely done anything about it."
                                                     mc.name "I think maybe you need to be punished in her place."
                                                     the_watcher "If you think that is best [the_watcher.mc_title]."
@@ -390,7 +390,7 @@ label lily_morning_encounter_enhanced_label():
 
                         "Let her go":
                             mc.name "Maybe we'll follow up on this later."
-        if took_action == True:
+        if took_action:
             "Very happy with how your morning has gone so far you head back to your room to start getting ready for the day."
             $ mc.change_location(bedroom)
         else:
