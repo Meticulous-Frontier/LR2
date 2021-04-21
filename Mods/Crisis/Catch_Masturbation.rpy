@@ -276,8 +276,12 @@ label SB_caught_masturbating_crisis_label():
                     else: #She is very slutty
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():
-                            "[the_person.possessive_title] begins to pull off her clothes."
-                            $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
+                            "[the_person.possessive_title] moves her clothes out of the way."
+                            if the_person.outfit.can_half_off_to_vagina():
+                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
+                            else:
+                                "[the_person.possessive_title] begins to pull off her clothes."
+                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
                         $ mc.change_locked_clarity(20)
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
