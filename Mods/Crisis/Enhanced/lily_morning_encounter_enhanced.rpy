@@ -352,7 +352,7 @@ label lily_morning_encounter_enhanced_label():
                                         the_person "Oh, [the_person.mc_title] what are you going to do to me?"
                                         mc.name "I think it is time to teach you a lesson. If you are going to keep teasing me there will be consequenses."
                                         if the_person.get_opinion_score("spanking") > 0:
-                                            the_person "I'm not sure this is the detergent you think it is, but I'm not complaining."
+                                            the_person "I'm not sure this is the deterrent you think it is, but I'm not complaining."
                                         else:
                                             the_person "For you, I'll take any punishment [the_person.mc_title]."
                                         if the_watcher:
