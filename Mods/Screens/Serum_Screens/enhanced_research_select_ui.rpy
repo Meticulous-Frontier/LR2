@@ -26,7 +26,7 @@ init -1 python:
             if trait.exclude_tags:
                 trait_tags = "\nExcludes Other: "
                 for a_tag in trait.exclude_tags:
-                    trait_tags += "[" + a_tag + "]"
+                    trait_tags += "[[" + a_tag + "]"
 
             if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
                 research_needed_string = "Research Impossible"

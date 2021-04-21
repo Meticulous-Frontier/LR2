@@ -3177,8 +3177,12 @@ label Sarah_unlock_special_tit_fuck(the_person):
     if the_person.outfit.tits_available():
         "With her tits already out and ready to be used, she just gives you a big smile."
     else:
-        "[the_person.possessive_title] begins to take off her top."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+        if the_person.outfit.can_half_off_to_tits():
+            "[the_person.possessive_title] moves her top out of the way."
+            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
+        else:
+            "[the_person.possessive_title] begins to take off her top."
+            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
         "With her tits out and ready to be used, she gives you a big smile."
     $ mc.change_locked_clarity(50)
     "She gets up and starts walking around the desk. By the time she gets to you, you already have your rock hard dick out."

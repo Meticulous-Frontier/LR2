@@ -39,12 +39,13 @@ init -2 python:
             return True
 
     def clarity_serum_dose_requirement(the_person):
+        if mc.inventory.get_any_serum_count() <= 0:
+            return "Requires: Serum in inventory"
         if len(the_person.serum_effects) >= the_person.serum_tolerance:
             return "Already at Serum Limit"
         if mc.free_clarity < 500:
             return "Requires: 500 Free Clarity"
         return True
-
 
     def build_clarity_person_actions_menu(the_person):
         clarity_train_int_action = Action("Train her Intelligence", requirement = clarity_train_int_requirement, effect = "clarity_train_int", args = the_person, requirement_args = the_person,
@@ -53,8 +54,8 @@ init -2 python:
             menu_tooltip = "Utilize your clarity to increase her charisma score.", priority = -5)
         clarity_train_focus_action = Action("Train her Focus", requirement = clarity_train_focus_requirement, effect = "clarity_train_focus", args = the_person, requirement_args = the_person,
             menu_tooltip = "Utilize your clarity to increase her focus score.", priority = -5)
-        clarity_serum_dose_action = Action("Persuade her to test a serum", requirement = clarity_serum_dose_requirement, effect = "clarity_serum_dose", args = the_person, requirement_args = the_person,
-            menu_tooltip = "Utilize your clarity to convince her to test a serum.", priority = -5)
+        clarity_serum_dose_action = Action("Give her a serum", requirement = clarity_serum_dose_requirement, effect = "clarity_serum_dose", args = the_person, requirement_args = the_person,
+            menu_tooltip = "Utilize your clarity to give her a serum.", priority = -5)
 
         return ["Persuade", clarity_train_int_action, clarity_train_cha_action, clarity_train_focus_action , clarity_serum_dose_action, ["Never mind", "Return"]]
 
@@ -109,19 +110,6 @@ label clarity_train_focus(the_person):
     return "Advance Time"
 
 label clarity_serum_dose(the_person):
-    mc.name "Hey, could you do me a huge favor?"
-    the_person "Maybe... what is it?"
-    if the_person.is_employee():
-        mc.name "[the_person.title], there's a serum design that is in need of a test subject. Would you be interested in helping out with a quick field study?"
-        the_person "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
-    else:
-        mc.name "[the_person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
-        if the_person.personality.personality_type_prefix == "nora":
-            the_person "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
-        else:
-            the_person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
-
-    mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
     $ mc.spend_clarity(500)
-    call give_serum(the_person) from _call_clarity_serum_dose_01
+    call serum_give_label_enhanced(the_person) from _call_clarity_serum_dose_01
     return

@@ -100,6 +100,11 @@ init 2 python:
                     action_mod_list.append(action_mod)
                     action_mod.initialize()
 
+        # cleanup removed actions
+        for action_mod in action_mod_list:
+            if action_mod not in ActionMod._instances:
+                action_mod_list.remove(action_mod)
+
         # the crisis_list is not stored in save game
         for action_mod in action_mod_list:
             if action_mod.is_crisis:

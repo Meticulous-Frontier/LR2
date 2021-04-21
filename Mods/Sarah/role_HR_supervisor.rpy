@@ -1026,8 +1026,12 @@ label HR_director_sexy_meeting_start_label(the_person):
             if the_person.outfit.tits_available():
                 "With her tits already out and ready to be used, she just gives you a big smile."
             else:
-                "[the_person.possessive_title] begins to take off her top."
-                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+                if the_person.outfit.can_half_off_to_tits():
+                    "[the_person.possessive_title] moves her top out of the way."
+                    $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
+                else:
+                    "[the_person.possessive_title] begins to take off her top."
+                    $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
                 "With her tits out and ready to be used, she gives you a big smile."
             $ mc.change_arousal(20)
             $ scene_manager.update_actor(the_person, position = "blowjob", emotion = "happy")
@@ -1065,9 +1069,13 @@ label HR_director_sexy_meeting_start_label(the_person):
             if the_person.outfit.vagina_available():
                 "She spreads her legs, her pussy on display in front of you."
             else:
-                "You start to strip [the_person.possessive_title] down."
-                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
-                "Soon her body is on full display in front of you, on your desk."
+                if the_person.outfit.can_half_off_to_vagina():
+                    "You move [the_person.possessive_title] clothes out of the way."
+                    $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
+                else:
+                    "You start to strip [the_person.possessive_title] down."
+                    $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
+                "Soon her pussy is on full display in front of you, on your desk."
             $ mc.change_arousal(20)
             $ mc.change_locked_clarity(50)
             "You have your cock out in a flash. You position it at her slick entrance."
@@ -1102,8 +1110,12 @@ label HR_director_sexy_meeting_start_label(the_person):
                 if the_person.outfit.vagina_available():
                     "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
                 else:
-                    "You start to strip [the_person.possessive_title] down."
-                    $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+                    if the_person.outfit.can_half_off_to_vagina():
+                        "You move [the_person.possessive_title] clothes out of the way."
+                        $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
+                    else:
+                        "You start to strip [the_person.possessive_title] down."
+                        $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
                     "Soon her ass is on full display in front of you, bent over your desk."
                 $ mc.change_locked_clarity(50)
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
@@ -1146,8 +1158,12 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     elif position_choice == "titfuck":
         if not the_person.outfit.tits_available():
-            "[the_person.possessive_title] begins to take off her top. "
-            $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+            if the_person.outfit.can_half_off_to_tits():
+                "[the_person.possessive_title] moves her top out of the way."
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
+            else:
+                "[the_person.possessive_title] begins to take off her top."
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
             "With her tits out and ready to be used, she gives you a big smile."
         the_person "Get your cock out, I want to feel it slide between my boobs!"
         $ mc.change_arousal(20)
@@ -1162,8 +1178,12 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     elif position_choice == "missionary on desk":
         if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
-            "[the_person.possessive_title] begins to take off her clothes. "
-            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
+            if the_person.outfit.can_half_off_to_vagina():
+                "[the_person.possessive_title] moves her clothes out of the way."
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
+            else:
+                "[the_person.possessive_title] begins to take off her clothes. "
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "When she finishes getting naked, she gives you a big smile."
         the_person "Oh my, fucking me on your desk? You are so naughty, [the_person.mc_title]!"
         $ scene_manager.update_actor(the_person, position = "missionary")
@@ -1188,8 +1208,12 @@ label HR_director_sexy_meeting_start_label(the_person):
         if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
             "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
-            "You start to strip [the_person.possessive_title] down."
-            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True, exclude_lower = False)
+            if the_person.outfit.can_half_off_to_vagina():
+                "You move [the_person.possessive_title] clothes out of the way."
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
+            else:
+                "You start to strip [the_person.possessive_title] down."
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "As soon as her pussy is on full display in front of you, you bent her over your desk, exposing her round ass."
         $ scene_manager.update_actor(the_person, position="standing_doggy")
 

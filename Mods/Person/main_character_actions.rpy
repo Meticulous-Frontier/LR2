@@ -77,6 +77,7 @@ init 2 python:
                 return True
         return False
 
+    # Obsolete remove next version
     def mc_ask_take_serum_requirement(person):
         return True #Consider only allow asking non employees to take serum.
 
@@ -117,11 +118,9 @@ init 5 python:
 
     mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like [the_person.title] wearing glasses, offer to pay for LASIK surgery.", category = "Generic People Actions")
 
-    ask_take_serum = ActionMod("Ask her to test serum", mc_ask_take_serum_requirement, "mc_ask_take_serum_label", menu_tooltip = "Ask [the_person.title] to voluntarily test a serum.", category = "Generic People Actions", initialization = init_action_mod_disabled)
-
     mc_remove_person_action = ActionMod("Remove from game", mc_remove_person_requirement, "mc_remove_person_label", menu_tooltip = "You are not interested in [the_person.title]. This will remove her from the game.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, ask_take_serum, mc_remove_person_action]
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, mc_remove_person_action]
 
 
 label mc_pay_to_strip_label(person):
@@ -306,45 +305,6 @@ label mc_action_lasik_surgery_label(the_person):
         mc.business.change_funds(-5000)
         the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
     $ the_person.draw_person()
-    return
-
-# Ask take serum Labels
-label mc_ask_take_serum_label(person):  #TODO possibly temporary addition to the mod. Copies the old mechanics for asking a girl to take a serum.
-    $ ask_serum_chance = 10*mc.charisma + 5*person.int
-    if ask_serum_chance < 0:
-        $ ask_serum_chance = 0
-    elif ask_serum_chance > 100:
-        $ ask_serum_chance = 100
-    $ ran_num = renpy.random.randint(0,100)
-
-    "You consider asking [person.title] to voluntarily take one of your serums as a test."
-    menu:
-        "Ask her to take it.\n{color=#ff0000}{size=18}Success Chance: [ask_serum_chance]%%{/size}{/color}":
-            if mc.business.get_employee_title(person) == "None":
-                mc.name "[person.title], I've got a project going on at work that could really use a test subject. Would you be interested in helping me out?"
-
-            else:
-                mc.name "[person.title], there's a serum design that is in need of a test subject. Would you be interested in helping out with a quick field study?"
-
-            if ran_num < ask_serum_chance:
-                #Success
-                if mc.business.get_employee_title(person) == "None":
-                    if person.personality.personality_type_prefix == "nora":
-                        person "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
-                    else:
-                        person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"
-                else:
-                    person "I'll admit I'm curious what it would do to me. Okay, as long as it's already passed the safety test requirements, of course."
-                mc.name "It's completely safe, we just need to test what the results from it will be. Thank you."
-                call give_serum(person) from _call_give_serum_modded_addition_2
-
-            else:
-                #Denies
-                $ person.change_obedience(-2)
-                person "I'm... I don't think I would be comfortable with that. Is that okay?"
-                mc.name "Of course it is, that's why I'm asking in the first place."
-        "Reconsider":
-            pass
     return
 
 label mc_remove_person_label(person):
