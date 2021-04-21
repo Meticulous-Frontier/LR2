@@ -56,6 +56,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             else:
                 "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
                 "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
+            $ mc.change_locked_clarity(10)
             $ the_person.change_arousal(renpy.random.randint(10,50))
             if the_person.effective_sluttiness() >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
                 call morning_shower_masturbation() from _call_morning_shower_masturbation_enhanced
@@ -95,6 +96,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ the_person.apply_outfit(Outfit("Nude"))
                 #$ the_person.outfit = Outfit("Nude") #changed v0.24.1
                 $ the_person.draw_person(emotion = "angry")
+                $ mc.change_locked_clarity(10)
                 "You open the door. [the_person.possessive_title] is standing naked in the shower. She spins around and yells in surprise."
                 the_person "[the_person.mc_title]! I'm already in here, what are you doing?"
                 mc.name "The door was unlocked, I thought you might have already been finished."
@@ -150,6 +152,7 @@ label morning_shower_masturbation():
                 else:
                     "With one hand she squeezes het perky little breast."
         $ the_person.change_arousal(renpy.random.randint(20,35))
+        $ mc.change_locked_clarity(10)
     the_person "Shit, I'm cumming!"
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
     "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
@@ -165,6 +168,7 @@ label girl_shower_leave_enhanced(the_person):
     $ apply_towel_outfit(the_person)
     $ the_person.draw_person()
     "The bathroom door opens and [the_person.possessive_title] steps out from the steamy room in a towel."
+    $ mc.change_locked_clarity(5)
     if the_person is mom:
         the_person "There you go [the_person.mc_title], go right ahead."
         "She gives you a quick kiss and steps past you."
@@ -190,6 +194,7 @@ label girl_shower_enter_enhanced(the_person):
                 $ the_person.change_slut_temp(1)
                 $ the_person.change_obedience(1)
             $ the_person.update_outfit_taboos()
+            $ mc.change_locked_clarity(10)
             "Soon enough she's finished. She steps out and grabs a towel, but leaves the shower running for you."
 
             $ apply_towel_outfit(the_person)
@@ -212,12 +217,14 @@ label girl_shower_enter_enhanced(the_person):
 
             "You strip down and get in the shower with [the_person.title]. The space isn't very big, so she puts her back to you."
             "You're left with her ass inches from your crotch, and when she leans over to pick up the shampoo she grinds up against you."
+            $ mc.change_locked_clarity(20)
             $ mc.change_arousal(5)
             the_person "Oops, sorry about that."
             "Your cock, already swollen, hardens in response, and now even stood up the tip brushes against [the_person.possessive_title]'s ass."
             if the_person.effective_sluttiness("touching_body") <= 40:
                 the_person "I think I'm just about done, so you can take care of this..."
                 "She wiggles her butt and strokes your tip against her cheeks."
+                $ mc.change_locked_clarity(10)
                 $ the_person.change_slut_temp(1 + the_person.get_opinion_score("showing her ass"))
                 "She steps out of the shower and grabs a towel."
                 $ apply_towel_outfit(the_person)
@@ -241,6 +248,7 @@ label girl_shower_enter_enhanced(the_person):
             else:
                 the_person "What is this?"
                 "She wiggles her butt and strokes your tip against her cheeks."
+                $ mc.change_locked_clarity(10)
                 the_person "Well we need to take care of this, don't we..."
                 "She turns around and faces you. It might be the hot water, but her face is flush."
                 $ the_person.change_slut_temp(2)

@@ -44,10 +44,13 @@ label family_morning_breakfast_enhanced_label():
     if mom.effective_sluttiness() > 40:
         if mom.outfit.vagina_visible():
             "[mom.possessive_title] is in front of the stove naked, humming as she scrambles a pan full of eggs."
+            $ mc.change_locked_clarity(20)
         elif mom.outfit.tits_visible():
             "[mom.possessive_title] is standing in front of the stove topless, humming as she scrambles a pan full of eggs."
+            $ mc.change_locked_clarity(10)
         else:
             "[mom.possessive_title] is just in her underwear in front of the stove, humming as she scrambles a pan full of eggs."
+            $ mc.change_locked_clarity(5)
     else:
         "[mom.possessive_title] is at the stove and humming to herself as she scrambles a pan full of eggs."
 
@@ -61,10 +64,13 @@ label family_morning_breakfast_enhanced_label():
     if lily.effective_sluttiness() > 40:
         if lily.outfit.vagina_visible():
             "[lily.possessive_title] comes into the room naked. She gives a dramatic yawn before sitting down at the kitchen table."
+            $ mc.change_locked_clarity(20)
         elif lily.outfit.tits_visible():
             "[lily.possessive_title] walks topless into the kitchen, yawning dramatically before sitting down at the table."
+            $ mc.change_locked_clarity(10)
         else:
             "[lily.possessive_title] walks into the room only wearing her underwear. She gives a dramatic yawn before sitting down at the kitchen table."
+            $ mc.change_locked_clarity(5)
     else:
         "[lily.possessive_title] comes into the room and gives a dramatic yawn before sitting down at the kitchen table."
     $ scene_manager.update_actor(lily, position = "sitting")
@@ -92,6 +98,7 @@ label family_morning_breakfast_enhanced_label():
         mom "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
+        $ mc.change_locked_clarity(10)
         $ lily.change_stats(love = 3, slut_temp = 2)
         $ mom.change_stats(love = 3, slut_temp = 2, happiness = 5)
         if mc.business.event_triggers_dict.get("family_threesome", False) == True:
@@ -148,6 +155,7 @@ label family_morning_breakfast_enhanced_label():
         if mom.obedience > 115:
             $ scene_manager.update_actor(mom, position = "stand3")
             mom "What do you think [mom.mc_title], do you think it's \"weird\" for your mother to want to be comfortable in her own house?"
+            $ mc.change_locked_clarity(5)
             menu:
                 "Side with Mom":
                     mc.name "I think Mom's right, [lily.title]. It's nothing we haven't seen before, she's just trying to relax on her days off."

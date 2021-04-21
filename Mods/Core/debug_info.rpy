@@ -9,7 +9,7 @@ init 2:
         color "#ffffff"
         outlines [(2,"#222222",0,0)]
 
-    screen DebugInfo:
+    screen DebugInfo():
         style_prefix "debug"
         zorder 100
 
@@ -23,9 +23,9 @@ init 2:
                 xmaximum 600
                 padding (5,5)
                 has vbox
-                label "ZipCache memory: " + str(__builtin__.round(get_size(zip_manager) / 1024, 2)) + " Kb" xminimum 400
-                label "ZipCache items: " + str(zip_manager.size())
-                label "Last character load time: " + str(last_load_time)
+                label "ZipCache memory: {total_size:.2f} MB".format(total_size = get_size(zip_manager) / 1024.0 / 1024.0) xminimum 400
+                label "ZipCache items: {}".format(zip_manager.size())
+                label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()
 
@@ -36,15 +36,15 @@ init 2 python:
     def show_debug_log():
         global debug_log_enabled
         debug_log_enabled = True
-        renpy.show_screen("DebugInfo", layer = "top")
+        renpy.show_screen("DebugInfo")
 
     def hide_debug_log():
         global debug_log_enabled
         debug_log_enabled = False
         renpy.hide_screen("DebugInfo")
 
-    def add_to_log(message):
-        debug_log["T" + str(time.time())] = message
+    def add_to_debug_log(message, start_time = time.time()):
+        debug_log["T" + str(time.time())] = message.format(total_time = time.time() - start_time)
 
     def get_debug_log():
         return "\n".join(OrderedDict(sorted(debug_log._LRUCacheDict__values.items(), key=lambda t: t[0], reverse = True)).values())
@@ -58,13 +58,16 @@ init 2 python:
         # Important mark as seen *before* entering recursion to gracefully handle
         # self-referential objects
         seen.add(id(obj))
-        if isinstance(obj, collections.Mapping):
-            size += sum([get_size(v, seen) for v in obj.values()])
-            size += sum([get_size(k, seen) for k in obj.keys()])
-        elif hasattr(obj, '__dict__'):  # sum all object attributes
-            size += sum([get_size(getattr(obj, name), seen) for name in obj.__dict__.keys()])
-        elif hasattr(obj, '__iter__') and not isinstance(obj, (str, bytes, bytearray)):
-            size += sum([get_size(i, seen) for i in obj])
-        elif isinstance(obj, (str, bytes, bytearray)):
-            size += len(obj)
+        try:
+            if isinstance(obj, collections.Mapping):
+                size += sum([get_size(v, seen) for v in obj.values()])
+                size += sum([get_size(k, seen) for k in obj.keys()])
+            elif hasattr(obj, '__dict__'):  # sum all object attributes
+                size += sum([get_size(getattr(obj, name), seen) for name in obj.__dict__.keys()])
+            elif hasattr(obj, '__iter__') and not isinstance(obj, (str, bytes, bytearray)):
+                size += sum([get_size(i, seen) for i in obj])
+            elif isinstance(obj, (str, bytes, bytearray)):
+                size += len(obj)
+        except:
+            pass
         return size

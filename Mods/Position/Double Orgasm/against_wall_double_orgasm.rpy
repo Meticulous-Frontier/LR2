@@ -15,6 +15,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
             if mc.condom:
                 "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She wraps her legs around you as she cums in unison."
                 $ the_girl.call_dialogue("cum_condom")
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "Once your climax has passed you keep [the_girl.title] pinned to the [the_object.name] for a little longer. When her aftershocks wind down, she slowly unwraps her legs."
                 "You step back and pull out of [the_girl.possessive_title]. Your condom is ballooned out, filled with your seed."
                 if the_girl.has_cum_fetish():
@@ -26,12 +27,14 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                         $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
                         "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                         $ the_girl.cum_in_mouth()
+                        $ against_wall.redraw_scene(the_girl)
                         "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
                     else:
                         $ the_girl.discover_opinion("cum facials")
                         "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                         the_girl "It would be a shame to waste all of this, right?"
                         $ the_girl.cum_on_face()
+                        $ against_wall.redraw_scene(the_girl)
                         "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
                         "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
                         the_girl "Mmmmm. So good."
@@ -54,6 +57,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                     "She clings to you helplessly as she cums with you in unison."
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ against_wall.redraw_scene(the_girl)
                 "You wait until your orgasm has passed, then step back and sigh happily. [the_girl.title] stays leaning against the [the_object.name] for a few seconds as your semen drips down her leg."
 
@@ -77,6 +81,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                     "She humps against you a few times to make sure that you cum deep inside her. She cries out as she orgasms, her slick cunt rippling all around you."
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ against_wall.redraw_scene(the_girl)
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
@@ -106,6 +111,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 $ del wordchoice2
             else:
                 $ the_girl.cum_on_stomach()
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                 $ against_wall.redraw_scene(the_girl)
                 if mc.condom:
                     "You pull out of [the_girl.possessive_title] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."

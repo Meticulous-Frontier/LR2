@@ -44,6 +44,7 @@ label cum_fetish_morning_shower_label():
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person()
+    $ mc.change_locked_clarity(30)
     the_person "Good morning [the_person.mc_title]. Mind if I join you?"
     mc.name "Of course! Come on in."
     the_person "Thanks! I saw you get in the shower this morning... I was feeling thirsty, so I decided to hop in."
@@ -51,6 +52,7 @@ label cum_fetish_morning_shower_label():
     the_person "I had so many crazy dreams last night, all about you... cumming really hard!"
     the_person "It was amazing! You just kept cumming and cumming... all over me, and I was swallowing as much as a could and I was covered in it..."
     $ the_person.draw_person(position = "blowjob")
+    $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] gets down on her knees."
     the_person "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
     "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
@@ -92,6 +94,7 @@ label cum_fetish_employee_dosage_request_label():
         "[the_person.possessive_title] walks into your office."
         the_person "Oh [the_person.mc_title]! Thank goodness you are here, you are just the man I wanted to see."
         the_person "You know how much I need your cum... so I was wondering... want to take a five minute break? I promise I won't be a bother!"
+    $ mc.change_locked_clarity(20)
     menu:
         "Suck me off":
             $ the_person.event_triggers_dict["LastCumFetish"] = day
@@ -137,6 +140,7 @@ label cum_fetish_non_employee_dosage_request_label():
         "All right":
             $ the_person.event_triggers_dict["LastCumFetish"] = day
             mc.name "All right, meet me at my place in 10 minutes."
+            $ mc.change_locked_clarity(30)
             $ mc.change_location(hall)
             $ mc.location.show_background()
             "You just got home, when your doorbell rings."

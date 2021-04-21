@@ -82,6 +82,7 @@ label outro_standing_cunnilingus(the_girl, the_location, the_object): #With low 
     "You touch yourself, stroking your hard cock between your legs while you pleasure her."
     "Finally you've gone too far, pushing yourself to climax."
     "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto the floor."
+    $ ClimaxController.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
     the_girl "Wow, I didn't realize you loved eating pussy so much!"
     return
 
@@ -138,6 +139,7 @@ label GIC_outro_standing_cunnilingus(the_girl, the_location, the_object, the_goa
         "You touch yourself, stroking your hard cock between your legs while you pleasure her."
         "Finally you've gone too far, pushing yourself to climax."
         "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto the floor below [the_girl.title]."
+        $ ClimaxController.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
         the_person "Wow. Just from licking me? What a pathetic waste of cum."
         "It makes a mess, but you finish cumming."
     else:

@@ -9,6 +9,8 @@ init 3:
         zorder 99 #Allow it to be hidden below outfit_creator
         default preview_outfit = None
         default import_selection = False
+        default mannequin = the_person
+
         hbox:
             xalign 0.1
             yalign 0.1
@@ -48,7 +50,7 @@ init 3:
                                         hovered Function(draw_mannequin, the_person, outfit)
                                         alternate Show("outfit_creator", None, outfit.get_copy(), "full", slut_limit, the_person.wardrobe)
                                     else:
-                                        hovered Show("mannequin", None, outfit)
+                                        hovered Function(draw_average_mannequin, outfit)
 
             if show_sets:
                 frame:
@@ -82,7 +84,7 @@ init 3:
                                             hovered Function(draw_mannequin, the_person, outfit)
                                             alternate Show("outfit_creator", None, outfit.get_copy(), "over", slut_limit, the_person.wardrobe)
                                         else:
-                                            hovered Show("mannequin", None, outfit)
+                                            hovered Function(draw_average_mannequin, outfit)
 
 
                 frame:
@@ -116,7 +118,7 @@ init 3:
                                             hovered Function(draw_mannequin, the_person, outfit)
                                             alternate Show("outfit_creator", None, outfit.get_copy(), "under", slut_limit, the_person.wardrobe)
                                         else:
-                                            hovered Show("mannequin", None, outfit)
+                                            hovered Function(draw_average_mannequin, outfit)
 
         frame:
             background None
@@ -127,5 +129,5 @@ init 3:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [Return("No Return"), Hide("mannequin")]
+                action [Return("No Return"), Function(hide_mannequin)]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

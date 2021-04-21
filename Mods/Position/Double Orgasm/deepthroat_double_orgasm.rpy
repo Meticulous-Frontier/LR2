@@ -12,6 +12,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
             $ deepthroat.current_modifier = None
             $ the_girl.draw_person("kneeling1")
             "You take a step back, pulling your cock out of [the_girl.possessive_title]'s throat with a satisfyingly wet pop, and take aim at her face."
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             if the_girl.sluttiness > 80:
                 "[the_girl.title] sticks out her tongue and rubs her pussy while waiting for your hot load."
                 $ the_girl.cum_on_face()
@@ -45,6 +46,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_in_mouth()
             $ deepthroat.current_modifier = None
             $ deepthroat.redraw_scene(the_girl)
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             if the_girl.sluttiness > 80:
                 "When [the_girl.title]'s orgasm subsides, she closes her mouth and swallows loudly, smiling at you."
             else:
@@ -88,6 +90,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ deepthroat.current_modifier = None
                 $ the_girl.cum_in_mouth()
                 $ deepthroat.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
                 "You keep on sliding your dick down her tight throat, preventing her from breathing, until she finishes twitching."
                 "When she's finished cumming you let [the_girl.title] pull back off your shaft. She gasps loudly for air."
                 the_girl "That was... oh my god [the_girl.mc_title], I want you to do that again!"
@@ -97,6 +100,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ deepthroat.current_modifier = None
                 $ the_girl.cum_in_mouth()
                 $ deepthroat.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
                 $ the_girl.change_obedience(1)
                 $ the_girl.change_happiness(-2)
                 the_girl "Ah... fuck. This was nice, but go a little easier on me next time, okay?"

@@ -55,6 +55,7 @@ label daughter_work_crisis_label_enhanced():
                 the_person "Wait, please [the_person.mc_title], at least take a look. Maybe I could... convince you to consider her?"
                 the_person "She means the world to me, and I would do anything to give her a better chance. Anything at all."
                 "She puts her arms behind her back and puffs out her chest in a clear attempt to show off her tits."
+                $ mc.change_locked_clarity(5)
                 menu:
                     "Look at the resume for [the_person.name]'s daughter":
                         "Convinced, you start to read through the resume."

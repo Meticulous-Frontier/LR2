@@ -113,6 +113,7 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
             $ the_girl.cum_on_face()
             $ cowgirl_blowjob.redraw_scene(the_girl)
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
+        $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
         "You take a deep breath and lay back, enjoying your post orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
         $ the_girl.call_dialogue("cum_face")
     else:
@@ -128,6 +129,7 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
             "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off and looks up to show you a mouth full of sperm."
 
         $ the_girl.cum_in_mouth()
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         $ cowgirl_blowjob.redraw_scene(the_girl)
         if the_girl.effective_sluttiness() > 80:
             "Once you've had a good long look at your work [the_girl.title] closes her mouth and swallows loudly."
@@ -216,6 +218,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         "[the_girl.possessive_title]'s mouth suddenly pops of your cock and she strokes you with her hand. She points your cock... up at you?"
         the_girl "I'm not letting your spunk touch me!"
         "You groan but you don't have time to take over, so you just lay back and let your orgasm overtake you."
+        $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
         "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
         "When you finish you lay back and [the_girl.title] stops stroking you. She has a naughty smile on her face."
         $ the_girl.change_happiness(2)
@@ -230,6 +233,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         the_girl "Do it... I want it all over me!"
         "Her encouraging words push you over the edge. She sticks out her tongue to try and catch some as your cock erupts."
         $ the_girl.cum_on_face()
+        $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
         $ cowgirl_blowjob.redraw_scene(the_girl)
         "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
 
@@ -246,6 +250,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
             "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off and looks up to show you a mouth full of sperm."
 
         $ the_girl.cum_in_mouth()
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         $ cowgirl_blowjob.redraw_scene(the_girl)
         if the_girl.effective_sluttiness() > 80:
             "Once you've had a good long look at your work [the_girl.title] closes her mouth and swallows loudly."

@@ -266,7 +266,10 @@ init 2:
                                 xsize 270
                                 text "Duration: [starting_serum.duration] Turns" style "serum_text_style"
 
-                            null #Placeholder to keep the grid aligned
+                            frame:
+                                background "#000080"
+                                xsize 270
+                                text "Unlock Cost: [starting_serum.clarity_needed] Clarity" style "serum_text_style"
 
                     frame:
                         background "#000080"

@@ -1,7 +1,7 @@
 # Osteomalacia Serum by Tristimdorion
 
 init -1 python:
-    def osteomalacia_serum_on_turn(person, add_to_log):
+    def osteomalacia_serum_on_turn(person, the_serum, add_to_log):
         return person.change_height(amount = -.01693, chance = 20)
 
     def add_osteomalacia_serum():
@@ -15,7 +15,9 @@ init -1 python:
             on_turn = osteomalacia_serum_on_turn,
             requires = clinical_testing,
             tier = 3,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 2500
+            )
 
 
 # any label that starts with serum_mod is added to the serum mod list

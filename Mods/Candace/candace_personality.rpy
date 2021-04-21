@@ -31,6 +31,7 @@ label candace_introduction(the_person):
         the_person "And you liked my tits? Yeah, I get that a lot. I'm [formatted_title], it's nice to meet you!"
     else:
         the_person "And you liked my ass? Yeah, I get that a lot. I'm [formatted_title], it's nice to meet you!"
+    $ mc.change_locked_clarity(5)
     #the_person "Well then, I suppose I shouldn't disappoint you. You can call me [formatted_title]."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
@@ -325,6 +326,7 @@ label candace_flirt_response(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
             the_person "Just make it an official order and it's all yours, boss man."
+            $ mc.change_locked_clarity(5)
         else:
             the_person "Hehe, thank you, you're way too nice to me!"
 
@@ -332,6 +334,7 @@ label candace_flirt_response(the_person):
         $so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (the_person.get_opinion_score("cheating on men")*5) > 50:
             the_person "That's like, super hot to hear you say. We just can't let my [so_title] or he would flip out."
+            $ mc.change_locked_clarity(5)
         else:
             the_person "Oh my god, you're so cute! My [so_title] never says things like that to me."
             "She pouts for a moment before returning to her bubbly self."
@@ -339,6 +342,7 @@ label candace_flirt_response(the_person):
     else:
         if the_person.sluttiness > 50:
             the_person "You should try your luck sometimes. Maybe take me out for a drink, I get wild after I've had a few. Wild-er, I guess."
+            $ mc.change_locked_clarity(5)
         else:
             the_person "Oh you, stop it! You're going to make me blush!"
     return
@@ -350,6 +354,7 @@ label candace_flirt_response_low(the_person):
             the_person "Hehe, thanks! I love these outfits you make us wear, they're, like, so cute!"
             the_person "Maybe you should pick out other things for me to wear. I bet you have some good ideas!"
             mc.name "For you I certainly do. Maybe I'll talk to you later about it."
+            $ mc.change_locked_clarity(5)
             "She smiles happily."
             the_person "Alright!"
 
@@ -360,6 +365,7 @@ label candace_flirt_response_low(the_person):
                 the_person "Thanks! I keep worrying I'm going to get in trouble, but then I remember I'm allowed to be dressed like this!"
                 mc.name "Not just allowed: required."
                 the_person "Yeah! This is such a crazy place to work!"
+                $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] bounces happily, unintentionally jiggling her tits."
 
             elif the_person.outfit.tits_visible():
@@ -372,11 +378,13 @@ label candace_flirt_response_low(the_person):
                     the_person "Hehe, thanks! I really like how I it shows off my boobs!"
                     "[the_person.possessive_title] looks down at her own chests and pouts."
                     the_person "I wish they were bigger though. Oh well!"
+                    $ mc.change_locked_clarity(5)
 
             elif the_person.outfit.underwear_visible():
                 # Her underwear is visible.
                 the_person "Hehe, thank you! I know it's a little slutty, but I like how little these outfits you make us wear cover!"
                 mc.name "I certainly do too."
+                $ mc.change_locked_clarity(5)
                 "She laughs and sticks her tongue out."
                 the_person "You're silly, you know that? But like, in a fun way."
             else:
@@ -385,6 +393,7 @@ label candace_flirt_response_low(the_person):
                 mc.name "More than okay, it's required."
                 the_person "Oh yeah, right! I'm sorry, there are so many rules here, I'm always forgetting them!"
                 mc.name "Well don't worry, you're doing a great job so far."
+                $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] smiles and bounces happily."
                 the_person "Yay!"
 
@@ -395,6 +404,7 @@ label candace_flirt_response_low(the_person):
         "[the_person.possessive_title] spins around and leans forward a little, wiggling her butt at you."
         mc.name "Oh yeah, I think it looks really good."
         $ the_person.draw_person()
+        $ mc.change_locked_clarity(5)
         the_person "Yay!"
     return
 
@@ -404,12 +414,14 @@ label candace_flirt_response_mid(the_person):
             if the_person.outfit.tits_visible():
                 the_person "Hehe, thanks! Do you like my boobs?"
                 "She puts her hands behind her back and thrusts her chest out at you, waiting for your response."
+                $ mc.change_locked_clarity(10)
                 mc.name "They look fantastic."
                 "[the_person.possessive_title] smiles and giggles."
                 the_person "Yay! I like having my boobs out at work. It feels naughty, but I'm, like, allowed to do it!"
             else:
                 the_person "Hehe, thanks! I think you're, like, pretty hot too!"
                 the_person "Oh my god! We should go partying together! That would be, like, so much fun!"
+                $ mc.change_locked_clarity(10)
                 mc.name "That does sound like fun. Maybe we will."
                 "She nods and smiles happily."
         else:
@@ -418,6 +430,7 @@ label candace_flirt_response_mid(the_person):
             the_person "Oh, we should totally go partying together! That would be, like, so much fun!"
             mc.name "That does sound like fun. Maybe we will."
             "She nods and smiles happily."
+            $ mc.change_locked_clarity(10)
             the_person "I can even wear something nice for you, instead of this silly uniform you make..."
             "She stops suddenly and covers her mouth with her hand."
             the_person "Oops. I'm sorry, I didn't mean that. I just kind of talk without thinking sometimes." #TODO: On with the spanking! And then, the oral sex!
@@ -430,6 +443,7 @@ label candace_flirt_response_mid(the_person):
             the_person "Hehe, thanks! I uh..."
             "[the_person.possessive_title] bites her lip and leans closer to you to whisper in your ear."
             the_person "I think you're, like, pretty hot too."
+            $ mc.change_locked_clarity(10)
             "She pulls back and smiles playfully."
 
         else:
@@ -438,6 +452,7 @@ label candace_flirt_response_mid(the_person):
             $ the_person.draw_person(position = "back_peek")
             the_person "Maybe something that shows off my butt a little more... Doesn't that sound fun?"
             "[the_person.possessive_title] wiggles her hips, shaking her butt for your enjoyment."
+            $ mc.change_locked_clarity(10)
             mc.name "That does sound like fun. Maybe we should go out one day."
             $ the_person.draw_person()
             "She turns back to you and smiles."
@@ -472,6 +487,7 @@ label candace_flirt_response_high(the_person):
         if mc.location.get_person_count() == 1:
             the_person "Oh my god, [the_person.mc_title]! you're so naughty!"
             "She giggles playfully and looks you up and down."
+            $ mc.change_locked_clarity(15)
             the_person "But maybe... We could fool around, if you really want to. I think you're pretty cute."
 
         else:  #She's into turning you on.
@@ -481,6 +497,7 @@ label candace_flirt_response_high(the_person):
 
             else:
                 "She giggles and wiggles her hips for you."
+            $ mc.change_locked_clarity(15)
             the_person "Do you want to have some fun?"
 
         menu:
@@ -588,7 +605,7 @@ label candace_cum_anal(the_person):
         the_person "Oh! Fuck, I hope there's room for all your cum!"
     return
 
-label candace_suprised_exclaim(the_person):
+label candace_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
     the_person "[rando]"
     return
@@ -717,21 +734,23 @@ label candace_work_enter_greeting(the_person):
 
 label candace_date_seduction(the_person):
     if the_person.sluttiness > the_person.love:
+        $ mc.change_locked_clarity(30)
         if the_person.sluttiness > 40:
             the_person "So [the_person.mc_title], don't you think it's time you came back home with me and we had some real fun?"
             "[the_person.title] bites her lip and puffs out her chest just a little bit."
-
         else:
             the_person "[the_person.mc_title], I swear you're driving me crazy. Do you, like, want to come home with me and just get wild?"
 
     else:
         if the_person.love > 40:
             the_person "[the_person.mc_title], I don't know how you do it but I swear you've been driving me, like, totally crazy all night."
+            $ mc.change_locked_clarity(40)
             "[the_person.title] runs her hand along your arm and giggles."
             the_person "I want you to come back to my place so I can have you all to my self."
             "She looks around and thinks for a second."
             the_person "I guess if I HAVE to stay and share you, I could do that too though!"
         else:
+            $ mc.change_locked_clarity(40)
             the_person "Oh my god [the_person.mc_title], tonight has been so much fun. Do you want to, like, come back home with me and drink some more?"
     return
 

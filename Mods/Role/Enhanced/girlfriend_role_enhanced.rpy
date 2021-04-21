@@ -96,6 +96,7 @@ label girlfriend_myplace_yourplace_label(the_person):
             $ the_person.call_dialogue("sleepover_herplace_response")
             $ mc.business.event_triggers_dict["your_place"] = False
     the_person "Anything else you need right now?"
+    $ mc.change_locked_clarity(15)
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.add_mandatory_crisis(girlfriend_sleepover)
@@ -127,6 +128,7 @@ label girlfriend_sleepover_label():
         "[the_person.possessive_title] walks into your bathroom. You sit down on the bed and wait a couple minutes. Soon, you hear to door open."
         $ the_person.change_to_lingerie()
         $ the_person.draw_person()
+        $ mc.change_locked_clarity(30)
         "[the_person.title] has changed into something much more comfortable..."
         mc.name "Damn, you look amazing..."
         $ the_person.call_dialogue("sleepover_yourplace_sex_start")
@@ -161,6 +163,7 @@ label girlfriend_sleepover_label():
         $ the_person.change_to_lingerie()
         $ the_person.draw_person()
         "[the_person.possessive_title] has changed into some sexy clothes."
+        $ mc.change_locked_clarity(30)
         the_person "Hey... bring the glasses in here!"
         "She disappears into her bedroom. You quickly grab the glasses and follow her in. She is sitting on the edge of her bed."
         $ the_person.draw_person(position = "sitting")
@@ -206,6 +209,7 @@ label girlfriend_sleepover_label():
             menu:
                 "Fuck her again":
                     "With your cock hard again, you pull [the_person.title] towards you."
+                    $ mc.change_locked_clarity(30)
                     if renpy.random.randint(0,100) < 12 and not fuck_time_interrupted:
                         python:
                             fuck_time_interrupted = True    #Limit ourselves to one interruption per sleepover
@@ -222,6 +226,7 @@ label girlfriend_sleepover_label():
                             $ girl_came += the_report.get("girl orgasms", 0)
                     elif renpy.random.randint(0,100) < ((the_person.get_opinion_score("taking control") + 1) * 15): #Baseline 15% chance, max 45% if she loves it
                         the_person "Mmm, lay back. I want to be on top this time..."
+                        $ mc.change_locked_clarity(30)
                         "You pushes you on your back, you decide to take it easy for now and let her have her way with you."
                         call get_fucked(the_person, private = True)  from _call_get_fucked_sleepover_gf_03
                         $ the_report = _return
@@ -273,6 +278,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.draw_person(position = "walking_away")
     "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
     "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
+    $ mc.change_locked_clarity(50)
     if the_person.has_large_tits():
         "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
     else:
@@ -302,11 +308,13 @@ label girlfriend_wakeup_spooning_label(the_person):
     "She's still asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
     "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
     $ the_person.change_arousal(20)
+    $ mc.change_locked_clarity(30)
     "With her legs closed and on her side like this, her pussy feels really tight. You can feel her gripping you every time you start to pull it out."
     $ mc.change_arousal(15)
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     $ the_person.change_arousal(20)
     $ mc.change_arousal(15)
+    $ mc.change_locked_clarity(30)
     the_person "Mmm that feels so... wait... [the_person.mc_title]?"
     $ the_person.draw_person( position = "back_peek", emotion = "happy")
     "[the_person.possessive_title] wakes up and looks back at you smiling."
@@ -315,12 +323,14 @@ label girlfriend_wakeup_spooning_label(the_person):
     "You pick up the pace and begin to fuck her earnestly."
     $ the_person.change_arousal(30) #70
     $ mc.change_arousal(25) #55
+    $ mc.change_locked_clarity(30)
     the_person "Oh yes that feels so good, fuck me good!"
     "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
     "Her ass is making smacking noises now, every time your hips drive your cock deep inside of her."
     $ the_person.change_arousal(40) #110
     $ mc.change_arousal(35) #90
     the_person "Oh fuck, yes! YES!"
+    $ mc.change_locked_clarity(30)
     "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
     $ the_person.have_orgasm(the_position = "back_peek")
     $ mc.change_arousal(20) #110
@@ -330,14 +340,16 @@ label girlfriend_wakeup_spooning_label(the_person):
         "Cum inside":
             $ the_person.cum_in_vagina()
             $ the_person.draw_person( position = "back_peek")
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
             "You grab her hip and shove your cock deep and hold it there, cumming deep inside her. She moans and gasps with every spurt."
             $ the_person.call_dialogue("cum_vagina")
             "Satisfied, you slowly pull out of her."
             the_person "That's certainly one way to start the day... holy hell."
         "Pull out":
             $ the_person.cum_on_ass()
-            "You pull out at the last second. Large, thick roaps of cum rocket out of your cock, coating her ass."
             $ the_person.draw_person( position = "back_peek")
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
+            "You pull out at the last second. Large, thick ropes of cum rocket out of your cock, coating her ass."
             the_person "Oh my god... its so warm!"
             "When you finish you lay back, admiring your painting skills."
             the_person "That's certainly one way to start the day..."
@@ -376,6 +388,7 @@ label girlfriend_roleplay_step_sister_label(the_person):
         the_person "Oh thank god its you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
         mc.name "You got your hair stuck in the sink, again!?! How does this keep happening [the_person.title]?"
         "Her hips start to wiggle a bit as you approach her."
+        $ mc.change_locked_clarity(30)
         the_person "I don't know! You've got to help me [the_person.mc_title]!"
         "She is laying it on pretty thick, but if it wasn't for her ass sticking up in the air, you might find this comical. Instead you are starting to get aroused."
         if the_person.vagina_available():
@@ -384,6 +397,7 @@ label girlfriend_roleplay_step_sister_label(the_person):
             "You walk over to [the_person.title]. You pull away at the clothing between you and her ass."
             $ the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
         $ the_person.change_arousal(15)
+        $ mc.change_locked_clarity(30)
         the_person "Oh my gooooooddd... [the_person.mc_title], what are you doing back there?"
         "You dip a finger into her cunt."
         mc.name "Just checking the plumbing, [the_person.title]. Nothing to worry about..."
@@ -499,6 +513,7 @@ label girlfriend_underwear_shopping_label(the_person):
 
             "Buy this" if lingerie_outfit != None:
                 $ done = True
+                $ mc.change_locked_clarity(30)
             "Give up" if lingerie_outfit == None:
                 $ done = True
     if lingerie_outfit == None:
@@ -567,6 +582,7 @@ label girlfriend_underwear_shopping_label(the_person):
     "You chat with your girlfriend for a bit, but soon it is time to go."
     $ the_person.draw_person(position = "kissing")
     "[the_person.possessive_title] embraces you and gives you a quick kiss before you part ways."
+    $ mc.change_locked_clarity(10)
     $ clear_scene()
     $ del lingerie_outfit
     call advance_time from _call_advance_girlfriend_lingerie_shopping_01

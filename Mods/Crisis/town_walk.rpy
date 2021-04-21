@@ -65,6 +65,7 @@ label town_walk_crisis_action_label:
 
         # only show this part of the dialog if she removed clothing
         if the_person.outfit.vagina_available():
+            $ mc.change_locked_clarity(30)
             "You see that [the_person.possessive_title] also studies her pussy."
             if the_person.pubes_style is shaved_pubes:
                 the_person "Nicely shaven and clean, ready to go."
@@ -76,6 +77,7 @@ label town_walk_crisis_action_label:
             $ arousal_plus = renpy.random.randint (20,50)
             $ the_person.change_arousal (arousal_plus)
         elif the_person.outfit.tits_available():
+            $ mc.change_locked_clarity(20)
             "You see that [the_person.possessive_title] is looking at her breasts."
             if the_person.age <=30:
                 the_person "Darn girl, these puppies look delightful :)"
@@ -85,6 +87,7 @@ label town_walk_crisis_action_label:
             $ arousal_plus = renpy.random.randint (10,40)
             $ the_person.change_arousal (arousal_plus)
         else:
+            $ mc.change_locked_clarity(10)
             "[the_person.possessive_title] only took off her top clothes, you just wonder why..."
 
     if the_person.outfit.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35):
@@ -95,6 +98,8 @@ label town_walk_crisis_action_label:
             "You notice that she is fingering herself with one hand, while the other is caressing her clit."
         else:
             "You notice that with one hand [the_person.possessive_title] squeezes her tits, while shoving the other between her legs."
+
+        $ mc.change_locked_clarity(10)
         while the_person.arousal < 100:
             $ ran_num = renpy.random.randint(0,3)
             if ran_num == 0:
@@ -117,6 +122,7 @@ label town_walk_crisis_action_label:
         $ the_person.call_dialogue("climax_responses_foreplay")
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
         $ mc.change_arousal(25)
+        $ mc.change_locked_clarity(20)
         #"You see [the_person.possessive_title]'s body shiver as she reaches orgasm." NOTE: Things like this gets mentioned in the climax_responses
         the_person "Wow, that was intense. Need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."
         $ the_person.reset_arousal()

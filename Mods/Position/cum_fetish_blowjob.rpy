@@ -130,6 +130,7 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] moans uncontrollably with every spurt"
     $ the_girl.discover_opinion("cum facials")
     $ the_girl.cum_on_face()
+    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
     $ cum_fetish_blowjob.redraw_scene(the_girl)
     "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     $ cum_fetish_blowjob.current_modifier = None

@@ -142,6 +142,7 @@ label breeding_fetish_employee_intro_label(the_person):
         the_person "Obviously I'm already pregnant, but umm, I've really been craving your cock inside me, twitching and pulsing your loads deep, over and over..."
     else:
         the_person "I don't know how to say this but, I've been craving you, and your cock, twitching and pulsing load after load deep inside me! Knocking me up!"
+    $ mc.change_locked_clarity(20)
     "The serums must really be effecting her, for her to be this forward with you. You decide to take advantage of the situation... and of her."
     "You get close to her. She wraps her arms around you as you get close."
     $ the_person.draw_person(position = "kissing")
@@ -163,16 +164,18 @@ label breeding_fetish_employee_intro_label(the_person):
         "As you start to pull your cock out, [the_person.possessive_title] reaches down and starts pulling her clothes off."
         $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
     $ the_person.change_arousal (15)
+    $ mc.change_locked_clarity(50)
     mc.name "... and pinned you down..."
     "You grab her hands and force them down at her sides. She has a wild look in her eye as your raw cock nears her cunt."
     mc.name "...and fucked your brains out..."
     "As you finish those words, your push yourself inside of her. She moans as it goes in."
     $ the_person.change_arousal (20)
     $ mc.change_arousal(15)
+    $ mc.change_locked_clarity(50)
     mc.name "...and didn't stop until I dump my cum deep?"
     the_person "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _employee_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _employee_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person "Oh god! Its so deep! Oh thank you so much [the_person.mc_title]!"
     else:
@@ -204,6 +207,7 @@ label breeding_fetish_family_intro_label(the_person):
     the_person "Do you want to cuddle with me for a little bit?"
     mc.name "Sounds nice."
     $ the_person.draw_person(position = "missionary")
+    $ mc.change_locked_clarity(15)
     "You lay down next to [the_person.possessive_title] as she lays down on her back. You rest your head on her chest and put your arm across her."
     "For a while you simply enjoy the heat of each other's bodies. She is the first to break the silence."
     if the_person.knows_pregnant():
@@ -238,6 +242,7 @@ label breeding_fetish_family_intro_label(the_person):
     "You start to kiss her along her neck and then whisper in her ear."
     mc.name "To have a man pin you down, fuck you senseless, then dump his risky load deep inside you, over and over."
     $ the_person.change_arousal(20)
+    $ mc.change_locked_clarity(20)
     the_person "Ah, that does sound nice..."
     mc.name "It sounds more than nice though, doesn't it? It's what you NEED. A bull, who fucks you and knocks you up, over and over. Like some kind of livestock."
     the_person "Ahhh, yeah! Oh god..."
@@ -254,6 +259,7 @@ label breeding_fetish_family_intro_label(the_person):
     else:
         "As you finish pulling your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
         $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
+    $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(10)
     if the_person.love < 0:
         the_person "I can't believe I'm saying this, and with you of all people..."
@@ -262,7 +268,7 @@ label breeding_fetish_family_intro_label(the_person):
         the_person "My brain says this is wrong, but my body keeps saying its so right!"
         the_person "Fuck me [the_person.mc_title], I want you to fill me with your cum!"
     "You run you cock along her slit a couple more times, then start to push it inside. She moans as you bottom out inside of her and start to fuck."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _family_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _family_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     if the_person.knows_pregnant():
@@ -291,6 +297,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     mc.name "Probably not."
     "She leans forward and talks quietly in your ear."
     the_person "My place is right around the corner... want a tour of my bedroom?"
+    $ mc.change_locked_clarity(20)
     "Wow, she is being very forward. It's not surprising though. Recently, you've dosed her with your reproduction proclivity serums."
     "It's possible she might be on the verge of developing a fetish. If you go back to her place, you can push her over the edge into having a breeding fetish!"
     if the_person in unique_character_list:
@@ -320,6 +327,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     the_person "Oh god, I'm not sure I can make it to the bedroom."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.change_arousal(10) #50
+    $ mc.change_locked_clarity(30)
     "You pick her up and carry her to her bedroom. She is grinding against you the whole way."
     "Knowing the reason she is so aroused, you start to talk dirty with her."
     mc.name "Are you on birth control, [the_person.title]?"
@@ -341,9 +349,10 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
         "When she finishes you run your cock all along her inviting slit."
 
     $ the_person.change_arousal(10) #60
+    $ mc.change_locked_clarity(50)
     the_person "Just shove it in! I'm ready!"
     "You decide to give her what she wants, for now. You grab her hips and then push yourself inside of her sopping wet cunt."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _generic_anyone_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _generic_anyone_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     "When you finish, she lays back, just rubbing her hand along her belly."
@@ -375,6 +384,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     "You're woken up by your bed shifting under you and a sudden weight around your waist."
     "You feel a tug on your clothing, and you are slowly opening your eyes when you feel your morning wood spring free."
     $ the_person.draw_person(position = "cowgirl", emotion = "happy")
+    $ mc.change_locked_clarity(50)
     "You open you eyes to see [the_person.possessive_title] lining you up with her pussy, before slowly sliding down on top of you."
     mc.name "Ooohh... good morning [the_person.title]."
     the_person "Ohhh... good morning honey! Mommy needs your seed inside her this morning... and I'm not taking no for an answer!"
@@ -384,6 +394,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     "Ahh, you've been giving her serums that increase her drive to reproduce. Looks like they've finally driven her over the urge and given her a breeding fetish!"
     $ the_person.change_arousal (30)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(50)
     "She starts to rock her hips back and forth. You reach up and start to fondle her tits as they sway back and forth."
     mc.name "Mmmm, I can't wait to drink milk from your tits again, [the_person.title]."
     if the_person.knows_pregnant(): #She already knows she's pregnant
@@ -409,7 +420,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     "[the_person.title] lays down beside you for a while. Soon though, it is time to get up and ready for the day."
     the_person "Have a good day. Don't forget, try to be home for dinner tonight! You need to keep your energy up!"
     "You can hardly believe it. Your own mother now has a fetish to get bred by you!"
-
+    $ mc.change_locked_clarity(10)
     return #Needs testing
 
 label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room entry event
@@ -451,6 +462,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
     the_person "Oh me? Want to get knocked up? By my brother? That's... I mean that's CRAZY!... right?"
+    $ mc.change_locked_clarity(20)
     "She is struggling to give a reasonable explanation. It is pretty clear now that she is just fishing for an excuse to fuck you raw, and to get filled with your potent seed."
     mc.name "Yeah, I mean, wouldn't that be crazy? For a woman to want to get fucked? To have a man dominate her and do what he wants with her, then fill her up with his seed, consequences be damned?"
     $ the_person.change_arousal(10)
@@ -459,6 +471,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She sighs. She resigns herself and opens up."
     the_person "I can't explain it... The way things between us have progressed... But I just can't stop thinking about it!"
     the_person "My body wants it so bad, for you to pin me down and fuck me anywhere you want and cumming inside me over and over..."
+    $ mc.change_locked_clarity(50)
     "She pauses for a second..."
     if the_person.knows_pregnant():
         the_person "I know this is crazy... I'm already pregnant!.. but I don't want to stop now! I want to you to breed me over and over, like your personal breeding slave!"
@@ -480,6 +493,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "[the_person.title] gets naked, and you quickly follow suit."
     mc.name "How do you think we should do this?"
     the_person "I was thinking... you could just lay back and hold the camera. I'll ride you reverse cowgirl, then when you finish you'll be to uhhh, you know, see it."
+    $ mc.change_locked_clarity(20)
     mc.name "Mmm... that sounds amazing... for the viewers too!"
     "She punches your arm half heartily and laughs."
     "You walk over to her bed and lay down on it. After a minute she brings you the camera."
@@ -491,6 +505,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "You can hear a few replies go through on the computer, but from where you are you can't see them. [the_person.title] also hears them."
     the_person "I'm sorry, tonight I won't be able to take requests during. Just sit back and enjoy the show!"
     $ the_person.draw_person(position = "doggy")
+    $ mc.change_locked_clarity(50)
     "With that, she turns her back to you and swings one leg over your body, her ass now pointed back at you."
     "She reaches down and gives your bare cock a few strokes, then points it up at her cunt."
     "Her pussy is moist and she easily starts to slide down on it, your bare cock enveloped by her steamy flesh."
@@ -498,6 +513,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She's playing it up for the stream, but you know she is also having fun, fucking her brother."
     $ the_person.change_arousal(20)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(20)
     "You lay back on the bed while [the_person.possessive_title] works your cock in and out of her. You make sure to keep her ass in the frame of the camera."
     "[the_person.possessive_title] gives you a few quick, shallow dips then pull off you almost completely, leaving just your tip inside her."
     "She swirls her hips a couple times then impales herself on your again. [the_person.title] works her hips relentlessly on top of you as she pleases herself on your erection."
@@ -510,12 +526,14 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "You play along for the stream, and while no one online actually believes it, you legitimately fuck your sister."
     $ the_person.change_arousal(30)
     $ mc.change_arousal(30)
+    $ mc.change_locked_clarity(20)
     "[the_person.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
     the_person "Do you like that, bro? Ah! That is so good..."
     "[the_person.possessive_title] reaches back between her legs and cups your balls."
     the_person "Mmm you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
     $ the_person.change_arousal(30)
     $ mc.change_arousal(30)
+    $ mc.change_locked_clarity(20)
     "Her dirty talking it having it's desired effect, and the taboo of doing this while anyone in the world can watch is just too much."
     "[the_person.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
     mc.name "Ah, I'm going to cum!"
@@ -523,6 +541,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "She slams her hips down. As deep as your cock can go, you start to cum, filling [the_person.possessive_title]."
     "Her hole is quivering as she cums at the same time, milking your cock for every last drop of seed."
     $ the_person.cum_in_vagina()
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
     $ the_person.change_stats(happiness = 5,  slut_temp = 5, slut_core = 5)
     $ the_person.draw_person(position = "doggy")
     "Eventually the twitching stops, for both of you. You did it. You dumped your seed into your sister's unprotected, fertile snatch."
@@ -571,6 +590,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             $ mc.start_text_convo(the_person)
             the_person "Heyyyyyyy [the_person.mc_title]! I need your cock! Meet in your office?"
             mc.name "Sure, I'll meet you there."
+            $ mc.change_locked_clarity(20)
             $ mc.end_text_convo()
             $ mc.change_location(office)
             $ ceo_office.show_background()
@@ -620,13 +640,14 @@ label breeding_fetish_stephanie_bimbo_label(the_person):
     mc.name "That's right. You were going to bend over my desk for a minute. And if everything goes well, I have a present for you."
     the_person "Oh! A present! I do love presents! Especially the ones I tend to get when I'm bent over. I wonder what it could be!"
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
+    $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
     "She wiggles her ass back and forth in front of you as you pull your dick out."
     the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
     "Without any hesitation you slide your cock into her cunt."
     $ the_person.break_taboo("vaginal_sex")
-    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_steph_bimbo_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True) from _call_steph_bimbo_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     the_person "Oh god its so warm. Its like I can feel the little sperm wriggling inside of me..."
     $ scene_manager.update_actor(the_person, position = "stand2")
@@ -715,6 +736,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     else:
         the_person "I know its kind of weird, with how much older I am. But I don't think I've ever been more sure of something."
     the_person "Would you be my bull? Cum inside me... over and over... breed me like its your job!"
+    $ mc.change_locked_clarity(30)
     the_person "I want to feel your seed inside me, every second of every day!"
     "Your cock is already hard, listening to [the_person.possessive_title] talk like this. You've been slipping her serums, and it looks like they've finally given her a breeding fetish."
     "It's time to seal the deal. If you give her what she wants now, she'll be begging you for creampies every chance she gets."
@@ -731,11 +753,12 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
         "You give her ass a couple smacks with your cock."
     $ the_person.change_arousal(10)
     $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(50)
     "She wiggles her hips back and forth a bit, teasing you."
     the_person "Stick it in [the_person.mc_title]! Fuck me hard and cum as deep as you can!"
     "You grab her hips to stop the wiggling. You line yourself up with her thirsty cunt and push into her. She gasps when you bottom out."
     the_person "Oh yes! Give it to me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _starbuck_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person "Oh god! Baby making sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
@@ -799,15 +822,17 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
         "This is quite a twist! You weren't expecting this so soon, but it seems the pregnancy serums you've been giving her are really working."
         mc.name "Honestly, I didn't realize this was something you were thinking about. But I would love to make a baby with you!"
     $ the_person.change_stats(happiness = 15, obedience = 10)
+    $ mc.change_locked_clarity(50)
     the_person "Oh! Wow, I honestly... I thought you we're gonna say no! This is... I can't believe it."
     "She looks up at you, and you can see the changes in her facial expression. She goes from surprised, to happy, to sultry."
     the_person "So umm, what are you doing right now?"
     mc.name "I think we should get naked."
     the_person "Yes sir!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+    $ mc.change_locked_clarity(50)
     "You get naked with [the_person.possessive_title]. She rolls on her back and spreads her legs."
     the_person "Come fill me up, [the_person.mc_title]!"
-    call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True, asked_for_condom = True) from _sarah_ask_for_baby_05
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True, skip_condom = True) from _sarah_ask_for_baby_05
     if the_person.has_creampie_cum():
         the_person "Oh my god... we actually did it..."
         "She grabs an extra pillow and puts it under her butt so her hips are elevated."
@@ -884,9 +909,10 @@ label breeding_fetish_erica_intro_label():
     "You don't say a word, you just push forward, sliding yourself into her fertile young pussy."
     $ the_person.change_arousal (20)
     $ mc.change_arousal(15)
+    $ mc.change_locked_clarity(50)
     the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]."
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, asked_for_condom = True) from _erica_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _erica_gets_breeding_fetish_01
     $ the_person.draw_person(position = "missionary")
     if the_person.has_creampie_cum():
         $ become_pregnant(the_person)
@@ -935,6 +961,7 @@ label breeding_fetish_erica_unsuccessful_followup_label():
     "She slowly slides herself down onto you, taking your full length inside of her. You can't help but moan at the sudden sensation."
     $ the_person.change_arousal(10)
     $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(50)
     mc.name "What are you doing here?"
     the_person "I've been tracking my cycles and I am soooo fertile right now. I understand you were too tired last night, but I need your cum ASAP."
     "[the_person.possessive_title] starts to work her hips. You know you should be concerned about how she even got in here, but right now you decide to just lie back and enjoy."
@@ -974,7 +1001,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             the_person "I know that like, I'm already knocked up, OBVIOUSLY. But like, maybe we could make a video like that too?"
             the_person "You could just like, keep fucking babies into me non stop and every time you cum inside me, its like, this could be the time!"
             mc.name "You want me to keep getting you pregnant?"
-            the_person "Like, over and over! That sound so hot!"
+            the_person "Like, over and over! That sounds so hot!"
         else:
             the_person "I was thinking like, maybe we could do that! Take a video of you cumming inside me and knocking me up!"
             mc.name "You want me to get you pregnant?"
@@ -1002,14 +1029,16 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
         $ mc.change_arousal(10)
+        $ mc.change_locked_clarity(50)
         mc.name "Are you ready to get bred, bitch?"
         "[the_person.title] keeps trying to back herself up onto you, but you move your dick around, frustrating her."
         the_person "Just, like, put it in me already!"
         mc.name "I want to hear you beg."
         the_person "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
+        $ mc.change_locked_clarity(50)
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person "Yes!!!"
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, asked_for_condom = True) from _bimbo_candace_gets_breeding_fetish_01
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
         else:
@@ -1056,6 +1085,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         mc.name "Are you saying you want to be my personal breeding mare?"
         the_person "The comparison to livestock is crude... but fitting. Yes, [the_person.mc_title], I want you to breed me over and over as much and as often as possible!"
         $ the_person.draw_person(position = "standing_doggy")
+        $ mc.change_locked_clarity(50)
         "[the_person.title] stands up and bends over her desk."
         the_person "You should start right now. It's okay, I'll count it as my 5 minute break."
         if the_person.outfit.vagina_available():
@@ -1066,6 +1096,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
         $ mc.change_arousal(10)
+        $ mc.change_locked_clarity(50)
         mc.name "Are you ready to get bred, bitch?"
         "[the_person.title] keeps trying to back herself up onto you, but you move your dick around, frustrating her."
         the_person "[the_person.mc_title], its not appropriate to tease a lady like this."
@@ -1074,7 +1105,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
         the_person "Yes!!!"
 
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, asked_for_condom = True) from _bimbo_candace_gets_breeding_fetish_02
+        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_02
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
             if the_person.knows_pregnant():

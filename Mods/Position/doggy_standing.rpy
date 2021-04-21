@@ -266,109 +266,114 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
     $ the_girl.call_dialogue("cum_pullout")
-    menu:
-        "Cum inside of her":
-            "[the_girl.possessive_title]'s drenched cunt is just too good. You decide to cum inside it."
-            if mc.condom:
-                "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
-                $ the_girl.call_dialogue("cum_condom")
-                "You wait until your orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
-                if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
-                    $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
-                else:
-                    "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
-                "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
+    $ climax_controller = ClimaxController(["Cum inside of her","pussy"], ["Cum on her ass", "body"], ["Cum on her face", "face"])
+    $ the_choice = climax_controller.show_climax_menu()
+    if the_choice == "Cum inside of her":
+        "[the_girl.possessive_title]'s drenched cunt is just too good. You decide to cum inside it."
+        if mc.condom:
+            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
+            $ the_girl.call_dialogue("cum_condom")
+            $ climax_controller.do_clarity_release(the_girl)
+            "You wait until your orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
+            if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                $ the_girl.discover_opinion("drinking cum")
+                "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
+                the_girl "It would be a shame to waste all of this, right?"
+                "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
+                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
             else:
-                "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
+                "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
+            "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
+        else:
+            "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
-                if the_girl.get_opinion_score("creampies") > 0:
-                    the_girl  "Yes! Fill me with your cum!"
-                if the_girl.arousal > 110:
-                    "You feel her pussy convulsing around your dick as she also starts to orgasm."
-                    $ the_girl.change_happiness(5)
-                $ the_girl.cum_in_vagina()
-                $ SB_doggy_standing.redraw_scene(the_girl)
-                if the_girl.has_cum_fetish():
-                    "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                    the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
-                    "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-                if the_girl.get_opinion_score("bareback sex") > 0:
-                    the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
-                    "[the_girl.possessive_title]'s voice starts to trail off."
-                elif the_girl.sluttiness > 110:
-                    the_girl "Oh god it's so deep."
-                elif the_girl.on_birth_control:
-                    the_girl "Oh fuck...  Good thing I'm on the pill..."
-                else:
-                    the_girl "Oh fuck... I could get pregnant you know.."
-
-                "You wait until your orgasm has passed completely, then pull out and stand back."
-
-                if the_girl.get_opinion_score("bareback sex") > 0:
-                    "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
-                else:
-                    "You cum leaks out of her dripping wet pussy."
-
-        "Cum on her ass":
-            if mc.condom:
-                "You pull out of [the_girl.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
-                "She holds still for you as you cover her with your sperm."
-            else:
-                "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
-            if the_girl.get_opinion_score("being covered in cum") > 0:
-                 the_girl "Yes! Paint me with your sticky cum!"
-            $ the_girl.cum_on_ass()
+            if the_girl.get_opinion_score("creampies") > 0:
+                the_girl  "Yes! Fill me with your cum!"
+            if the_girl.arousal > 110:
+                "You feel her pussy convulsing around your dick as she also starts to orgasm."
+                $ the_girl.change_happiness(5)
+            $ the_girl.cum_in_vagina()
+            $ climax_controller.do_clarity_release(the_girl)
             $ SB_doggy_standing.redraw_scene(the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
-                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
-                "She truly is addicted to your cum."
-            if the_girl.sluttiness > 120:
-                the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
-                "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
+            if the_girl.get_opinion_score("bareback sex") > 0:
+                the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
+                "[the_girl.possessive_title]'s voice starts to trail off."
+            elif the_girl.sluttiness > 110:
+                the_girl "Oh god it's so deep."
+            elif the_girl.on_birth_control:
+                the_girl "Oh fuck...  Good thing I'm on the pill..."
             else:
-                the_girl "Oh! Its so warm..."
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
-        "Cum on her face":
-            mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
-            if mc.condom:
-                "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
+                the_girl "Oh fuck... I could get pregnant you know.."
+
+            "You wait until your orgasm has passed completely, then pull out and stand back."
+
+            if the_girl.get_opinion_score("bareback sex") > 0:
+                "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
             else:
-                "You pull your cock out of [the_girl.possessive_title]. She immediately turns around on gets on her knees in front of you."
+                "You cum leaks out of her dripping wet pussy."
+
+    if the_choice == "Cum on her ass":
+        if mc.condom:
+            "You pull out of [the_girl.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+            "She holds still for you as you cover her with your sperm."
+        else:
+            "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+        if the_girl.get_opinion_score("being covered in cum") > 0:
+             the_girl "Yes! Paint me with your sticky cum!"
+        $ the_girl.cum_on_ass()
+        $ climax_controller.do_clarity_release(the_girl)
+        $ SB_doggy_standing.redraw_scene(the_girl)
+        if the_girl.has_cum_fetish():
+            "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
+            "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+            "She truly is addicted to your cum."
+        if the_girl.sluttiness > 120:
+            the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
+            "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
+        else:
+            the_girl "Oh! Its so warm..."
+        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+    if the_choice == "Cum on her face":
+        mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
+        if mc.condom:
+            "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
+        else:
+            "You pull your cock out of [the_girl.possessive_title]. She immediately turns around on gets on her knees in front of you."
+        $ the_girl.draw_person(position = "kneeling1")
+        if the_girl.get_opinion_score("being covered in cum") > 0 or the_girl.get_opinion_score("cum facials") > 0:
+            "[the_girl.possessive_title] reaches up and strokes you off for your final few seconds."
+            "Your orgasm hits hard. Your first jet sprays across her face."
+            $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            if the_girl.get_opinion_score("being covered in cum") > 0 or the_girl.get_opinion_score("cum facials") > 0:
-                "[the_girl.possessive_title] reaches up and strokes you off for your final few seconds."
-                "Your orgasm hits hard. Your first jet sprays across her face."
-                $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "kneeling1")
-                if the_girl.has_cum_fetish():
-                    "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
-                    "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
-                    "She truly is addicted to your cum."
-                else:
-                    "[the_girl.possessive_title] moans as your dick sprays jet after jet of seed across her face."
-            elif the_girl.sluttiness > 80:
-                "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
-                $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "kneeling1")
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
-                the_girl "Oh god... it feels so good on my skin..."
-            elif the_girl.sluttiness > 60:
-                "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
-                $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "kneeling1")
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
+            if the_girl.has_cum_fetish():
+                "You can see [the_girl.possessive_title]'s pupils dilate as you fulfil her cum fetish."
+                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her face. She moans lewdly."
+                "She truly is addicted to your cum."
             else:
-                "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
-                $ the_girl.cum_on_face()
-                $ the_girl.draw_person(position = "kneeling1")
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
-            "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
-            $ the_girl.call_dialogue("cum_face")
+                "[the_girl.possessive_title] moans as your dick sprays jet after jet of seed across her face."
+        elif the_girl.sluttiness > 80:
+            "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
+            $ the_girl.cum_on_face()
+            $ the_girl.draw_person(position = "kneeling1")
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
+            the_girl "Oh god... it feels so good on my skin..."
+        elif the_girl.sluttiness > 60:
+            "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
+            $ the_girl.cum_on_face()
+            $ the_girl.draw_person(position = "kneeling1")
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
+        else:
+            "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
+            $ the_girl.cum_on_face()
+            $ the_girl.draw_person(position = "kneeling1")
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
+        $ climax_controller.do_clarity_release(the_girl)
+        "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
+        $ the_girl.call_dialogue("cum_face")
     return
 
 label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):

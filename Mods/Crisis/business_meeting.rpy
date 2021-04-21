@@ -84,6 +84,7 @@ label business_meeting_introduction(the_person):
 label business_meeting_flirtation(the_person):
     if the_person.effective_sluttiness() > 15:
         $ remove_person_shoes(the_person)
+        $ mc.change_locked_clarity(10)
         "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
     else:
         "You mind wanders off while she is talking..."
@@ -93,6 +94,7 @@ label business_meeting_arrousal(the_person):
     if the_person.effective_sluttiness() > 30:
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
         $ mc.change_arousal(20)
+        $ mc.change_locked_clarity(20)
         the_person "Oh my [the_person.mc_title], it seems my proposal got you all exited."
     else:
         the_person "She keeps stroking your legs while she talks, making sure you are focussed on her."
@@ -106,9 +108,11 @@ label business_meeting_seduction(the_person):
             $ the_person.draw_animated_removal(strip_choice, position="sitting", emotion="default")
             if the_person.outfit.tits_visible():
                 if the_person.has_taboo("bare_tits"):
+                    $ mc.change_locked_clarity(10)
                     "She hesitates for a second, it seems she forgot she didn't put on a bra today, but after a second she continues without hesitation."
                     $ the_person.break_taboo("bare_tits")
             elif not the_person.outfit.bra_covered():
+                $ mc.change_locked_clarity(5)
                 if the_person.has_taboo("underwear_nudity"):
                     "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                     $ the_person.break_taboo("underwear_nudity")
@@ -124,6 +128,7 @@ label business_meeting_seduction(the_person):
             $ mc.change_arousal(10)
             $ the_person.draw_person(position = "blowjob")
 
+            $ mc.change_locked_clarity(20)
             if the_person.has_taboo("touching_penis"):
                 the_person "Oh my god, that is a big one!"
                 mc.name "You can touch it for real, if you want."
@@ -141,8 +146,10 @@ label business_meeting_seduction(the_person):
                         "She looks at you with confusion when the tip of your cock moves over her cheek and lips."
                         mc.name "Why don't you give it a lick, you might like the taste."
                         the_person "What? I don't know... it looks quite tasty though."
+                        $ mc.change_locked_clarity(20)
                         "She kisses the tip slowly at first, but soon after she starts moving her tongue along the base of the head."
                         mc.name "Now try sliding into your mouth and sucking on it, like eating a popsicle."
+                        $ mc.change_locked_clarity(30)
                         "[the_person.possessive_title] only nods slightly and starts to move your member into her mouth."
                         $ the_person.break_taboo("sucking_cock")
 

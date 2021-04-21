@@ -37,6 +37,7 @@ label breeding_fetish_going_off_BC_label(the_person):
     the_person "Oh hey [the_person.mc_title]. Glad you are here, I wanted to tell you something."
     "She leans forward and whispers into your ear."
     the_person "Just thought you'd like to know... I decided to go off my birth control..."
+    $ mc.change_locked_clarity(20)
     "She leans back. You should be careful if you decide to fuck her, she might be fertile!"
     the_person "Is there something I can do for you?"
     return
@@ -86,6 +87,7 @@ label breeding_fetish_bend_her_over_label(the_person):
         mc.name "Of course"
         the_person "Oh god, this is gonna be hot... okay!"
     $ the_person.draw_person(position = "standing_doggy")
+    $ mc.change_locked_clarity(50)
     "[the_person.title] turns around. You quickly get her ready to fuck."
     $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
     the_person "Oh my god... okay... where do you want me?"

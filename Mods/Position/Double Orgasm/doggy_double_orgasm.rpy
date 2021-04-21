@@ -15,6 +15,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 "You cum in unison with [the_girl.title]."
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock. A few drops of your cum start to drip out of her."
                 "[the_girl.title] reaches between her legs and feels it, realizing you just finished inside of her."
                 if the_girl.has_role(prostitute_role):
@@ -73,6 +74,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "You slowly pull out of [the_girl.possessive_title]. Your cum is dripping down her leg as you sit back."
                 if the_girl.on_birth_control or the_girl.knows_pregnant():
                     the_girl "Oh wow, there's so much of it..."
@@ -91,6 +93,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
             the_girl "Oh god I'm cumming!"
             $ the_girl.cum_on_ass()
             $ doggy.redraw_scene(the_girl)
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.title] covered in your semen."
             if the_girl.sluttiness > 120:
                 the_girl "What a waste, you should have put that inside of me."

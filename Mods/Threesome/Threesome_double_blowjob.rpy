@@ -300,6 +300,7 @@ label threesome_double_blowjob_girls_cum_drink(the_girl_1, the_girl_2, the_locat
     "[the_girl_2.title] moves down and strokes the side of your cock as you begin to ejaculate into [the_girl_1.title]'s eager mouth."
     $ the_girl_1.cum_in_mouth()
     $ scene_manager.draw_scene()
+    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl_1)
     "You dump wave after wave of cum into [the_girl_1.title]'s mouth."
     if the_girl_2.get_opinion_score("drinking cum") > 0:
         "As you finish, you slowly pull back. Some of your cum slowly dribbles out of her mouth."

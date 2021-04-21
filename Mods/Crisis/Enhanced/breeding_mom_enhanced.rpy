@@ -45,7 +45,7 @@ label breeding_mom_enhanced_label(the_person):
             $ the_person.break_taboo("condomless_sex")
             "She wraps her arms around your torso and pulls you tight against her. She gives you a breathy moan when you slide your cock home."
             the_person "Ah... Fuck me and give me your baby! I'll take such good care of it, just like I did for you and [lily.title]!"
-            call fuck_person(the_person, start_position = breeding_missionary, start_object = mc.location.get_object_with_name("bed"), skip_intro = True, position_locked = True, asked_for_condom = True) from _call_fuck_person_breeding_mom_enhanced_label
+            call fuck_person(the_person, start_position = breeding_missionary, start_object = mc.location.get_object_with_name("bed"), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_breeding_mom_enhanced_label
             $ the_report = _return #TODO: The creampie check should now be possible with the report system instead of checking her total record.
             if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
                 mc.name "Do you think that did it?"

@@ -100,6 +100,23 @@ init 2: # Add some additional
                                 SetField(persistent, "always_ask_condom", False)
                             ]
 
+                    vbox:
+                        style_prefix "radio"
+                        label "Clean Memory"
+                        textbutton "Every Time Slot":
+                            sensitive True
+                            tooltip "Every time slot call the renpy.free_memory() function, to prevent memory errors."
+                            action [
+                                SetField(persistent, "clear_memory_mode", 0)
+                            ]
+                        textbutton "Each Game Day":
+                            sensitive True
+                            tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
+                            action [
+                                SetField(persistent, "clear_memory_mode", 1)
+                            ]
+
+
                     # if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.
                     #     vbox:
                     #         style_prefix "radio"

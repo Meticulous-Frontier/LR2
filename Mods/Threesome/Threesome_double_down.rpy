@@ -163,6 +163,7 @@ label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
     "You give [the_girl_2.possessive_title]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
     $ the_girl_1.cum_in_vagina()
     $ scene_manager.draw_scene()
+    $ ClimaxController.manual_clarity_release(climax_type = "vagina", the_person = the_girl_1)
     the_girl_1 "Oh god! He's cumming inside me! I can feel it!"
     "She drops her hips down, taking you as deep as she can. She rotates her hips instead of thrusting, milking your cum as best she can."
     if the_girl_2.has_cum_fetish() or the_girl_2.has_cum_fetish():

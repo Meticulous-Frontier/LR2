@@ -61,4 +61,5 @@ init 2 python:
     build.include_old_themes = False
     config.window_icon = get_file_handle("mod_icon.png")
     # disable debugging for release
+    config.console = True
     config.debug = False

@@ -50,9 +50,8 @@ init 1 python:
         if isinstance(requirement_return, basestring):
             # Any string returned means the action is not enabled
             return False
-        else:
-            # If it's not a string it must be a bool
-            return requirement_return
+        # If it's not a string it must be a bool
+        return requirement_return
 
     def is_disabled_slug_shown(self, extra_args = None): # Returns true if this action is not enabled but should show something when it is disabled.
         if not self.enabled:
@@ -61,8 +60,7 @@ init 1 python:
         requirement_return = self.check_requirement(extra_args)
         if isinstance(requirement_return, basestring):
             return True
-        else:
-            return False
+        return False
 
     # Monkeywrench the action method overrides in the Action class
     Action.is_action_enabled = is_action_enabled

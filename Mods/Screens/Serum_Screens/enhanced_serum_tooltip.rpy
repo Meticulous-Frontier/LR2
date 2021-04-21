@@ -2,41 +2,49 @@ init -1:
     python:
         def serum_rename_func(new_name):
             cs = renpy.current_screen()
-            cs.scope["the_serum"].name = new_name
+            cs.scope["serum_design"].name = new_name
 
 
 init 2:
-    screen serum_tooltip(the_serum, set_x_align = 0.9, set_y_align = 0.1):
+    screen serum_tooltip(the_serum, given_anchor = (0.0,0.0), given_align = (0.0,0.0), allow_edit = False):
+        zorder 105
+
         frame:
             background "#888888"
-            xalign set_x_align
-            yalign set_y_align
-            yanchor 0.0
-            xsize 500
-            ysize 900
+            anchor given_anchor
+            align given_align
             vbox:
+                xsize 500
+                ysize 900
                 xalign 0.5
                 spacing 10
-                button:
-                    id "serum_rename_id"
-                    selected
 
-                    style "serum_textbutton_style_header"
-                    xalign 0.5
-                    xsize 480
+                if allow_edit:
+                    button:
+                        id "serum_rename_id"
+                        selected
 
-                    action NullAction()
+                        style "serum_textbutton_style_header"
+                        xalign 0.5
+                        xsize 480
 
-                    add Input(
-                    size =  24,
-                    color = "#dddddd",
-                    default = the_serum.name,
-                    changed = serum_rename_func,
-                    length = 25,
-                    button = renpy.get_widget("serum_tooltip", "serum_rename_id")
-                    ) xalign 0.5
+                        action NullAction()
 
-                    unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
+                        add Input(
+                        size =  24,
+                        color = "#dddddd",
+                        default = the_serum.name,
+                        changed = serum_rename_func,
+                        length = 25,
+                        button = renpy.get_widget("serum_tooltip", "serum_rename_id")
+                        ) xalign 0.5
+
+                        unhovered Function(renpy.restart_interaction) #TODO: Tweak this so it is less annoying  and fix any associated errors
+                else:
+                    frame:
+                        background "#000080"
+                        xsize 480
+                        text the_serum.name style "serum_text_style_header"
 
                 frame:
                     background "#777777"
@@ -83,7 +91,13 @@ init 2:
                                     xsize 225
                                     text "Duration: [the_serum.duration] Turns" style "serum_text_style_traits"
 
-                                if renpy.get_screen("review_designs_screen"): #Make it so you have to be in the review screen to edit things (still need to protect already created serum somehow)
+                                if not the_serum.unlocked:
+                                    frame:
+                                        background "#000080"
+                                        xsize 225
+                                        text "Clarity Cost: [the_serum.clarity_needed]" style "serum_text_style_traits"
+
+                                elif renpy.get_screen("review_designs_screen"): #Make it so you have to be in the review screen to edit things (still need to protect already created serum somehow)
                                     textbutton "Edit Serum":
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
@@ -149,3 +163,5 @@ init 2:
                                         background "#930000"
                                         xsize 480
                                         text "[side_effect.negative_slug]" style "serum_text_style_traits"
+
+                transclude #If you hand the serum tooltip a child it's added to the vBox

@@ -105,8 +105,12 @@ init 2 python:
             if nude_class:
                 renpy.say(None, erica_yoga_nude_pose_descriptions[pose])
                 mc.change_arousal(10)
+                mc.change_locked_clarity(30)
+            else:
+                mc.change_locked_clarity(20)
         else:
             mc.change_arousal(10)
+            mc.change_locked_clarity(10)
         return
 
 
@@ -446,6 +450,7 @@ label erica_phase_one_label(the_person):
         mc.name "Sure, I can do that."
         "[the_person.title] reaches up and grabs the pull-up bar. You put your hands on her hips and lightly push down, giving her some extra weight for her pull-ups."
         "As she begins to pull herself up, her hips, waist, and ass are in perfect position, right in front of your face. You check her out while she struggles through her reps."
+        $ mc.change_locked_clarity(10)
         "[the_person.title]'s tight, thin body is undeniably sexy and athletic. Your hands on her hips gives you a naughty idea."
         mc.name "I stay busy with my business. I know that feeling, not having time for a relationship, but looking for some casual hookups."
         "[the_person.title] drops down off of the pull-up bar. You let your hands linger on her hips a little longer than necessary."
@@ -461,6 +466,7 @@ label erica_phase_one_label(the_person):
         "As you get in position, you feel [the_person.title] get in position behind you to spot you. You can feel her a little closer than she needs to be though."
         "With a grunt, you begin your reps. The weight is tough, but you get through your reps without help. When you finish you slowly stand up and turn to her."
         $ the_person.draw_person( position = "stand4")
+        $ mc.change_locked_clarity(20)
         if the_person.outfit.tits_available():
             "[the_person.title] has a little more color in her cheeks than she did a minute ago. You also notice her nipples are a little more prominent."
         else:
@@ -472,6 +478,7 @@ label erica_phase_one_label(the_person):
         mc.name "See? Two friends, helping each other out. I take a turn, then you take a turn..."
         "[the_person.title] grunts... or was that a groan? You lean forward just a bit farther. It is now obvious you are using the opportunity to put your body up against hers as she finishes her squats."
         "At the top of her last squat, she lingers a bit before she racks the weight. You feel an ever so slight wiggle of her hips up against you. She's getting turned on!"
+        $ mc.change_locked_clarity(10)
         "She racks her weights with a groan, and you quickly retreat. Getting an erection here would be a bit embarrassing."
         the_person "Okay... let's finish with the bench press."
         "You head over to the bench and start racking some weights on it. You lay down on the bench while [the_person.title] stands by your head."
@@ -482,6 +489,7 @@ label erica_phase_one_label(the_person):
         "You lift your head up for a second, making contact with her crotch with your face. She stifles a groan as you finish up your set."
         $ the_person.change_max_energy(5)
         $ the_person.change_arousal(20)
+        $ mc.change_locked_clarity(10)
         "[the_person.title] backs off and you quickly get up. She puts a hand on your shoulder and whispers in your ear."
         the_person "Do you want to fool around a little?"
         "You nod your head."
@@ -491,6 +499,7 @@ label erica_phase_one_label(the_person):
         "After three minutes, you follow after [the_person.title]. When you find the family use room, you let yourself in."
         $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
         $ the_person.draw_person( position = "stand2")
+        $ mc.change_locked_clarity(20)
         "As you enter, you see that [the_person.title] is already naked."
         the_person "[the_person.mc_title], I'm so turned on. Can you do what you did a little bit ago again?"
         "She points to a bench sitting along the wall."
@@ -558,7 +567,7 @@ label erica_phase_one_label(the_person):
         # if not mc.condom:
         #      $ the_person.break_taboo("condomless_sex")
         # the_person "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-        # call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS010
+        # call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS010
         # $ the_report = _return
         # if the_report.get("girl orgasms", 0) > 0:
         #     "As you slowly let [the_person.title] down from the wall, you can see her trembling, caused by aftershocks from her orgasm."
@@ -600,8 +609,10 @@ label erica_phase_one_label(the_person):
         $ the_person.draw_person( position = "stand4")
         "It is obvious from the beginning of your workout with [the_person.possessive_title] that she intends to get frisky with you when you're done."
         "While doing squats, she gets right behind you, pressing her body against yours as she spots you."
+        $ mc.change_locked_clarity(10)
         "You try to be as covert as possible, but a couple of the other guys in the gym shoot you knowing looks as you go about your workout."
         "During the bench press, [the_person.title] stands right above you, her crotch tantalizingly close to your face."
+        $ mc.change_locked_clarity(10)
         # $ the_person.change_max_energy(5)
         #TODO change dialogue based on path
         the_person "Wow, what a workout! So... are you gonna go hit the showers now?"
@@ -635,6 +646,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
     $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
     $ the_person.draw_person( position = "stand2")
     "As you enter, you see that [the_person.title] is already naked."
+    $ mc.change_locked_clarity(20)
     if erica_on_love_path():
         mc.name "Oh god, I'll never get tired of seeing your fit body naked."
         if mc.max_energy > 200:
@@ -656,12 +668,14 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 "You lean in and kiss [the_person.possessive_title] hungrily. Her hips are grinding against yours."
                 $ the_person.change_arousal(10)
                 $ mc.change_arousal(10)
+                $ mc.change_locked_clarity(10)
                 $ the_person.add_situational_slut("horny", 10, "She submits to you")
                 the_person "Mmm, I'm ready... do whatever you want, [the_person.mc_title]..."
                 call fuck_person(the_person, private = True) from _erica_gets_fucked_by_her_man_in_lockerroom_01
             "Let her take the lead":
                 mc.name "I'd like to see how you handle this thing."
                 "You give your dick a stroke. She chuckles and leans forward."
+                $ mc.change_locked_clarity(20)
                 the_person "Don't worry, I know just what to do."
                 $ the_person.add_situational_slut("horny", 20, "She takes the lead")
                 "She is excited to take the lead."
@@ -684,6 +698,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
             the_person "[the_person.mc_title], give me that cock! It's been too long since you fucked me good!"
             "You walk over to her and quickly strip. You grab [the_person.title] by that ass and pick her up. You carry her to the wall and pin her up against it."
             $ the_person.draw_person( position = "against_wall")
+            $ mc.change_locked_clarity(20)
             "[the_person.possessive_title] is grinding her hips up against yours. The sweat from your workouts mingles together as you prepare yourself to enter her."
 
             $ the_person.add_situational_slut("horny", 20, "She is desperate to be fucked")
@@ -693,7 +708,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
             if not mc.condom:
                 $ the_person.break_taboo("condomless_sex")
             the_person "Oh fuck, that's good. Give it to me good, [the_person.mc_title]!"
-            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS011
+            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS011
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "As you slowly let [the_person.title] down from the wall, you can see her trembling, feeling the aftershocks of her orgasm."
@@ -710,6 +725,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 "Take Charge":
                     "You decide not to let her take charge. You stop and grab her wrists."
                     mc.name "I don't think so. I'm the man here. Lie down, I'll lick your pussy for a bit first."
+                    $ mc.change_locked_clarity(20)
                     "She starts to protest, but quickly stops when she realizes you are going to eat her out."
                     $ the_person.change_happiness(-3)
                     $ the_person.change_obedience(5)
@@ -720,6 +736,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     "You decide to let her take charge. She gently pushes you back onto the bench."
                     $ the_person.change_happiness(3)
                     $ the_person.change_obedience(-5)
+                    $ mc.change_locked_clarity(20)
                     the_person "Don't worry, I know just what to do."
                     $ the_person.add_situational_slut("horny", 20, "She takes the lead")
                     "She is excited to take the lead."
@@ -869,6 +886,7 @@ label erica_race_crisis_label(the_person):
     "You breathe in, you breathe out. You take pace after pace, determined to race with the best of your abilities."
     "As you approach the third kilometer marker, you can see yourself catching up to a familiar form."
     $ scene_manager.show_actor(the_person, position = "walking_away")
+    $ mc.change_locked_clarity(10)
     "God she is hot, her ass swaying back and forth with each step she takes. You imagine all the things you want to do with those delightfully tight cheeks."
     "You are breathing hard. It's getting so hard to keep up. She starts to pull away from you."
     "No! It's time to dig deep! You pump your arms and breathe."
@@ -885,6 +903,7 @@ label erica_race_crisis_label(the_person):
     "You are catching your breath, and turn to see her cross the finish line just a few seconds behind you."
     $ scene_manager.show_actor(the_person, position = "standing_doggy")
     "[the_person.title] is breathing hard. She walks up to a table nearby and bends over with her hands on it, trying desperately to catch her breath."
+    $ mc.change_locked_clarity(10)
     "You walk up behind her and put your hands on her back. You are careful not to be too obvious, but you make some contact with her backside with your hips."
     mc.name "Hey there, [the_person.title]! Nice race! I'm so glad you invited me out here to support such a charitable cause..."
     $ scene_manager.update_actor(the_person, position = "stand4")
@@ -944,16 +963,16 @@ label erica_race_crisis_label(the_person):
     "You both take a few minutes to recover, and soon you are ready to go."
     the_person "Alright, you won the race. I guess it's time to head back to my place?"
     $ scene_manager.clear_scene(reset_actor = False)
+    $ the_person.learn_home()
     "You call for an Uber and she gives you her address. Soon you are walking into [the_person.title]'s apartment."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     "Your mind is racing. She is going to be completely at your mercy. It's now or never, time to make a decision on which direction you want to take things."
-    $ the_person.learn_home()
     "You walk in the door. What do you want to do? WARNING: This decision is permanent."
     menu:
-        "Take her ass \n{color=#ff0000}{size=18}Corruption path \n Not yet written{/size}{/color} (disabled)":
-            "This path is not yet written"
-            pass
+        # "Take her ass \n{color=#ff0000}{size=18}Corruption path \n Not yet written{/size}{/color} (disabled)":
+        #     "This path is not yet written"
+        #     pass
         "Fuck her rough \n{color=#ff0000}{size=18}FWB path{/size}{/color}":
             "You decide not to push her for anything serious. She is busy with her athletics, and she's mentioned she doesn't really have time for anything anyway."
             "Your mind is made up. There's nothing wrong with having a friend with benefits!"
@@ -976,6 +995,7 @@ label erica_post_race_fwb_label(the_person):
     "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.add_situational_slut("Lost Bet",25,"Be ready for anything!")
+    $ mc.change_locked_clarity(20)
     the_person "Fuck! Mmm, are we gonna start right here? I remember the terms, do what you want to with me..."
     "You growl into her neck as you grind your hips into hers."
     mc.name "That's right, you're my sexy bitch for the day."
@@ -997,17 +1017,19 @@ label erica_post_race_fwb_label(the_person):
     "When she is fully naked, you grab her hips and flip her over."
     $ the_person.draw_person(position = "doggy")
     $ the_person.change_arousal(5)
+    $ mc.change_locked_clarity(10)
     "There it is, the ass that inspired your final push in the race. She lowers her face to the bed and wiggles her hips at you."
     "In a moment you are naked. You hop up on the bed and get behind her. You grab her hips and roughly pull her back toward you."
     "You rub her slit up and down with your furious erection, coating it with her juices. You give her ass a rough spank, eliciting a yelp."
     $ the_person.change_arousal(10)
     the_person "Oh fuck, please just put it in. I feel like I'm on fire!"
     "You consider for a second putting on a condom first. Nope, not a fucking chance. In one smooth motion you push yourself into her sopping, needy cunt."
+    $ mc.change_locked_clarity(20)
     the_person "Yes! Oh god, please fuck me good!"
     "You have every intention of doing exactly that."
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS030
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS030
     $ the_report = _return
 
     $ the_person.clear_situational_slut("Lost Bet")
@@ -1036,6 +1058,7 @@ label erica_post_race_love_label(the_person):
     "As soon as you walk in the door, you grab [the_person.title]. You pick her up and push her against the wall."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.add_situational_slut("Lost Bet",25,"Be ready for anything!")
+    $ mc.change_locked_clarity(20)
     the_person "Fuck! Mmm, are we gonna start right here? I remember the terms, do what you want to with me..."
     "You whisper into her ear as you grind your hips into hers."
     mc.name "That's right, you're mine for the day!"
@@ -1056,6 +1079,7 @@ label erica_post_race_love_label(the_person):
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
     "When she is fully naked, you get on top of her."
     $ the_person.change_arousal(5)
+    $ mc.change_locked_clarity(20)
     the_person "Mmm, you can do anything you want with me, and you go for missionary?"
     mc.name "I thought you were mine for the whole day?"
     the_person "Fair enough."
@@ -1065,6 +1089,7 @@ label erica_post_race_love_label(the_person):
     the_person "Getting sentimental on me? Look... we can talk about stuff later... right now I just need you inside me."
     "She reaches down and takes hold of your cock. She points it at her entrance. Her legs wrap around you as she tries to pull you into her."
     mc.name "So needy, are you? Don't worry, I think we can both get what we want."
+    $ mc.change_locked_clarity(30)
     "You relax your arms and legs, letting her pull you in. Your cock sinks into her steaming cunt raw."
     the_person "Oh! Yes, that feels so good..."
     "You moan in appreciation. Her eyes are staring into yours as you bottom out inside of her."
@@ -1072,7 +1097,7 @@ label erica_post_race_love_label(the_person):
     the_person "Mmmm, prove it!"
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
-    call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_casual_sex_mod_CS031
+    call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_casual_sex_mod_CS031
     $ the_report = _return
     "When you finish with her, [the_person.possessive_title] lies down on her bed."
     $ the_person.draw_person(position = "missionary")
@@ -1097,6 +1122,7 @@ label erica_post_race_love_label(the_person):
     $ erica.event_triggers_dict["love_path"] = True
     "You roll over back on top of her and start to kiss her neck."
     $ the_person.change_arousal(10)
+    $ mc.change_locked_clarity(20)
     the_person "Mmm, you're so fit too... I hope you're thinking what I'm thinking..."
     mc.name "It is definitely time for round two."
     "You feel yourself get a second wind as you start to play with [the_person.possessive_title]. You can see her do the same."
@@ -1105,6 +1131,7 @@ label erica_post_race_love_label(the_person):
     the_person "Oh god you get me so hot... hang on."
     "She pushes you off her for a second. She turns over and gets on her hands and knees, pointing her ass at you."
     $ the_person.draw_person(position = "doggy")
+    $ mc.change_locked_clarity(30)
     the_person "I want it like this... please! Please take me!"
     $ the_person.change_arousal(15)
     $ the_person.discover_opinion("doggy style sex")
@@ -1206,6 +1233,7 @@ label erica_house_call_label(the_person):
     mc.name "Don't worry, I'm not here for business. I'm here for pleasure!"
     $ the_person.draw_person( position = "against_wall")
     "You reach around with both hands and grab her ass. You roughly pick her up, holding her tightly against you."
+    $ mc.change_locked_clarity(20)
     the_person "Oh! Yes, I was hoping that's why you were here..."
     "[the_person.possessive_title] wraps her legs around you and you begin to grind your hips together. Heat is quickly building between the two of you."
     "You carry her to her bedroom. The whole way there she is kissing and nipping at your neck and earlobe."
@@ -1215,6 +1243,7 @@ label erica_house_call_label(the_person):
     if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
         "You stop for a second and admire [the_person.title], her body on display in front of you."
         $ the_person.change_arousal(20)
+        $ mc.change_locked_clarity(20)
         "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
     else:
         "Your mind red with lust, you begin to rip [the_person.title]'s clothes off."
@@ -1222,6 +1251,7 @@ label erica_house_call_label(the_person):
         $ the_person.strip_outfit(position = "missionary")
         $ the_person.change_arousal(20)
 
+        $ mc.change_locked_clarity(20)
         "[the_person.possessive_title] moans as you strip her down, enjoying your rough treatment of her."
     call fuck_person(the_person) from _call_casual_sex_mod_CSA040
     $ the_report = _return
@@ -1442,6 +1472,7 @@ label erica_money_problems_yoga_start_label(the_person):
     "[the_person.title] looks at you, stunned."
     the_person "Wow... It's like you thought of everything!"
     $ the_person.draw_person(position = "kissing")
+    $ mc.change_locked_clarity(10)
     "Erica gives you a big hug. When she steps back, she ponders a moment."
     the_person "How about Tuesday mornings? I could go straight from there to class."
     mc.name "I'll make it happen. For compensation, I'll start you at $100 per session. Are you good to start next week?"
@@ -1689,6 +1720,7 @@ label erica_weekly_yoga_label(the_person):
         the_person "It has been requested by multiple people here that our yoga sessions adopt an au naturel dress code."
         yoga_assistant "Because the office is currently closed, this technically falls outside of the employee uniform requirements..."
         yoga_assistant "But we decided that it would probably be better to run it by you before me make it official. It IS your office building, after all!"
+        $ mc.change_locked_clarity(20)
         "Holy fuck, they want to do yoga in the nude. You rack your brain, trying to think of a logical reason to say no. Only one thing comes to mind."
         mc.name "Umm... I think I'm okay with that... except... Everyone still needs to wear shoes."
         the_person "Shoes?"
@@ -1700,9 +1732,11 @@ label erica_weekly_yoga_label(the_person):
         "You hear several cheers go up from the group."
         "You notice that [yoga_assistant.possessive_title] has already started to strip down..."
         $ scene_manager.strip_actor_outfit(yoga_assistant)
+        $ mc.change_locked_clarity(20)
         the_person "We only ask, please leave your shoes on! This is a safety issue, in case a piece of glass or other object is left on the floor!"
         "When she finishes the announcement, [the_person.title] starts to strip down also."
         $ scene_manager.strip_actor_outfit(the_person)
+        $ mc.change_locked_clarity(20)
         "You look around and watch as the all the girls are also stripping. It is a surreal moment."
         # "You walk over to the computer terminal in a daze. You sit down, and let the girls get started in their official, company sponsored, all nude yoga class."
         $ the_person.event_triggers_dict["nude_yoga"] = True
@@ -1790,6 +1824,7 @@ label erica_weekly_yoga_label(the_person):
             the_person "Sorry, I really need to get going."
             "As she starts to walk by you, she whispers in your ear."
             the_person "If you need help with that later, swing by the gym..."
+            $ mc.change_locked_clarity(10)
             "She walks off leaving you with [yoga_assistant.title]."
             $ scene_manager.remove_actor(the_person)
             $ remaining_person = yoga_assistant
@@ -1800,6 +1835,7 @@ label erica_weekly_yoga_label(the_person):
             yoga_assistant "Sorry, I really need to get going."
             "As she starts to walk by you, she whispers in your ear."
             yoga_assistant "If you need help with that, I'm sure we can find a private place after the workday starts..."
+            $ mc.change_locked_clarity(10)
             "She walks off leaving you with [the_person.title]."
             $ scene_manager.remove_actor(yoga_assistant)
             $ remaining_person = the_person
@@ -1970,6 +2006,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A s
                 the_person "I love the atmosphere in here, with everyone naked. But I love it even more that your eyes were glued to me the entire time."
                 mc.name "I can't help it, your figure is absolutely stunning."
                 the_person "Thank you... do you think we have time to help you take care of... this?"
+                $ mc.change_locked_clarity(20)
                 "She puts her hand on your erection and gives it a few strokes."
             else:
                 the_person "I could feel you undressing me with your eyes every time I posed."
@@ -1984,6 +2021,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
     $ ceo_office.show_background()
     "You quickly grab her and pin her to the wall."
     $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_right)
+    $ mc.change_locked_clarity(20)
     "She wraps her arms around you and you start to make out, your mouths meeting and exploring each other."
     "[the_person.title] moans when she feels your erection pressing against her."
     $ the_person.change_arousal(20)
@@ -1998,12 +2036,13 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 "You quickly strip away every piece of cloth between you and [the_person.possessive_title]'s cunt."
                 "You pull your cock out and put it in between her legs, getting it into position."
             $ scene_manager.update_actor(the_person, position = "against_wall")
+            $ mc.change_locked_clarity(30)
             "She lifts one leg to give you better access. Your grab her ass with both hands, lifting her up slightly."
             "She looks you right in the eyes as you slowly lower her, your cock sliding inside her. She gasps as you bottom out inside of her."
             #TODO relevant you better pull out / cum inside / knock me up / other appropriate dialogue here.
             $ the_person.change_arousal(20)
             "All she can do is cling to you as you start to fuck her."
-            call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, asked_for_condom = True) from _call_fuck_after_yoga_01
+            call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_fuck_after_yoga_01
             $ the_person.call_dialogue("sex_review", the_report = _return)
 
         "Fuck her against the wall (disabled) " if the_person.sluttiness < 70:
@@ -2017,6 +2056,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 the_person "You? What about what I want? I didn't come in here so you could have all the fun."
                 mc.name "Shut up, slut. You came in here because you love cock and you know it. If you want to have some fun, then use your pussy. Either way, service me."
                 $ the_person.change_stats(obedience = 5, love = -3, slut_temp = 3)
+                $ mc.change_locked_clarity(20)
                 "She looks upset, but you can tell her obedience and her sluttiness are overcoming her reservations."
                 the_person "Fine, since  you asked so nicely."
                 "She spits her last sentence out sarcastically. But it doesn't matter, she starts walking over to you."
@@ -2026,6 +2066,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 the_person "Yes [the_person.mc_title]... with my mouth? or?"
                 mc.name "You can use your imagination."
                 "She smiles as she starts to walk over to you."
+                $ mc.change_locked_clarity(20)
                 the_person "Okay! I think I can think of a good way to do this..."
                 call get_fucked(the_person) from _after_yoga_get_serviced
         "Make her service you (disabled) " if the_person.obedience < 130:

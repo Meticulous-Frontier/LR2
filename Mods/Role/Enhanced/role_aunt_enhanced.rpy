@@ -99,6 +99,7 @@ label aunt_drunk_cuddle_label():
     the_person "Whatever you need to feel comfortable!"
     "You take your shirt off, then undo your belt and slide your pants down. You can't help but notice [the_person.possessive_title] watching you, her eyes glancing down at your crotch..."
     $ the_person.change_slut_temp(5)
+    $ mc.change_locked_clarity(10)
     "You slide into bed next to her. You have to admit, the heat of her body is kind of nice. [the_person.title] rolls over on her side, her back facing you."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     mc.name "Goodnight."
@@ -109,6 +110,7 @@ label aunt_drunk_cuddle_label():
     the_person "Ahhh, sorry... that's silly..."
     "Before she can say anymore, you decide to do it anyway. You slide over behind her, putting your arm over her and pushing your body up against hers."
     the_person "Ahhh... that's nice. I haven't had a man hold me like this in so long..."
+    $ mc.change_locked_clarity(10)
     "You lay there, holding [the_person.possessive_title] close for a while. However, soon the close proximity with her makes your loins start to stir."
     "You try to will it down, but its no use."
     "Soon, you have a full fledged erection, pressing against [the_person.title]. There's no way she doesn't feel it."
@@ -126,35 +128,41 @@ label aunt_drunk_cuddle_label():
         the_person "Ahh... I'm sorry, I didn't realize... anyone still thought I was... sexy..."
         "You start to apologize, but to your surprise, you feel her ass push back and start to grind against you."
         the_person "You're such a young... sexy... virile man... its okay..."
+        $ mc.change_locked_clarity(15)
         "You groan and start to grind your hips against hers. The curves of her ass feel amazing, your cock straining against your underwear as you grind against her."
         if the_person.sluttiness < 30:  # she finishes you like this.
             "Despite the clothing in the way, the naughtiness of grinding against your aunt while she grinds against you makes the situation so hot."
             "You grind eagerly against her for a few minutes, and soon you feel yourself getting ready to orgasm."
+            $ mc.change_locked_clarity(20)
             mc.name "[the_person.title]... I'm..."
             the_person "Shhh... do it honey... I want you to..."
             "[the_person.possessive_title]'s soothing encouragement pushes you over the edge. You gasp and moan as you dump your load in your underwear against her."
             the_person "Ahhh... that's it baby..."
             "When you finish, you are exhausted. You consider getting up and cleaning up, but it feels to good to be up against [the_person.title]'s body still..."
             $ the_person.change_slut_core(5)
+            $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = stephanie)
             the_person "Goodnight..."
             mc.name "Goodnight..."
         else:
             "Its incredibly sexy to be up against [the_person.possessive_title], but soon the sensation of rubbing against your underwear is more frustrating than pleasurable."
             "[the_person.title] seems to be feeling the same way."
-            the_person "Could you... you know... just... taking it out? It feels good, but I'm getting a wedgie like this..."
+            the_person "Could you... you know... just... take it out? It feels good, but I'm getting a wedgie like this..."
             "You can't believe your ears. You quickly pull your cock out. As you are doing so, you feel [the_person.title] wiggling under the covers..."
             $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
             "When you push up against her again, you realize she was taking her panties off! Your cock is now push up against [the_person.possessive_title]'s naked ass."
+            $ mc.change_locked_clarity(20)
             the_person "Oh god... you feel so hard..."
             "She pushes back against you and begins to grind against you again. It feels amazing to push yourself between her soft ass cheeks."
             if the_person.sluttiness < 40:
                 "You eagerly grind your crotch against her ass for a few minutes. The heat of her body feels amazing, and every little gasp and moan she makes turns you on."
                 "Soon, you feel yourself getting ready to cum."
+                $ mc.change_locked_clarity(20)
                 mc.name "[the_person.title]... I'm..."
                 the_person "Shhh... do it honey... I want you too..."
                 "[the_person.possessive_title]'s soothing encouragement pushes you over the edge. You gasp and moan as you dump your load on her ass."
                 $ the_person.cum_on_ass()
                 $ scene_manager.update_actor(the_person, position = "walking_away")
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                 "Your sticky cum coats her ass, but she doesn't seem to mind."
                 $ the_person.change_slut_core(5)
                 the_person "Oh [the_person.mc_title]... I didn't know anyone... would feel that way about me..."
@@ -165,17 +173,20 @@ label aunt_drunk_cuddle_label():
                 "You eagerly grind your crotch against her ass. She lets out a quiet gasp."
                 the_person "Oh god... [the_person.mc_title]... you make me feel so sexy..."
                 "She takes your hand and guides it to her chest. You start to grope her soft tits as you grind up against her."
+                $ mc.change_locked_clarity(30)
                 the_person "Do you mind if I... if I... get myself off too?"
                 mc.name "Of course not! Do you want me...?"
                 the_person "No! No its okay, your hand is great right where its at..."
                 "You feel her shift a bit as she props one leg up a little bit. You can't see under the covers, but she gasps as she begins to touch herself."
                 "You resume grind your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
+                $ mc.change_locked_clarity(30)
                 "After a few minutes, you feel yourself getting ready to cum."
                 mc.name "[the_person.title]... I'm..."
                 the_person "Oh god [the_person.mc_title]... me too! Cum for me!"
                 "[the_person.possessive_title]'s encouragement pushes you over the edge. You gasp and moan as you dump your load on her ass."
                 $ the_person.cum_on_ass()
                 $ scene_manager.update_actor(the_person, position = "walking_away")
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                 "Your sticky cum coats her ass. Her body goes rigid as she has an orgasm of her own."
                 $ the_person.have_orgasm()
                 $ the_person.change_slut_core(5)
@@ -200,6 +211,7 @@ label aunt_drunk_cuddle_label():
     the_person "Ahh, good morning [the_person.mc_title]..."
     mc.name "Good morning."
     "You notice as you walk past them to the coffee pot, your aunt is sneaking looks your way. Her cheeks a little rosey and blushed."
+    $ mc.change_locked_clarity(5)
     "You pour yourself a cup and lean against the counter. The two sisters are chatting about plans for a bit, when suddenly [mom.possessive_title] stands up."
     mom "Well, I need to head out. Good luck with the apartment [aunt.name]!"
     the_person "Thank you! I'm sure we'll be out of here soon."

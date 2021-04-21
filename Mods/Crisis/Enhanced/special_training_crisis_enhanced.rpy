@@ -40,7 +40,7 @@ label enhanced_special_training_crisis_label():
             if _return != "None":
                 $ mc.business.change_funds(-500)
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
-                $ mc.log_event(the_person.title + ": +2 " + get_work_skills()[_return][0], "float_text_grey")
+                $ mc.log_event((the_person.title or the_person.name) + ": +2 " + get_work_skills()[_return][0], "float_text_grey")
                 $ renpy.say(mc.name, "Work on your " + get_work_skills()[_return][0] + " skills.")
                 if the_person.effective_sluttiness() >= 20:
                     # follow up on promise made
@@ -64,8 +64,9 @@ label return_from_seminar_action_label(the_person):
         the_person "There you are, [the_person.mc_title]! I'm back from the seminar and ready to show you the gratitude I promised."
         $ the_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
         if the_clothing is not None:
-            $ the_person.draw_animated_removal (the_clothing)
+            $ the_person.draw_animated_removal(the_clothing)
             "Before you have time to reply, [the_person.title] begins stripping off her [the_clothing.display_name] right in front of you."
+            $ mc.change_locked_clarity(10)
             the_person "I thought it wouldn't hurt to show you a bit of skin, hope you don't mind?"
             mc.name "Not at all, I always appreciate a pleasant sight, [the_person.title]."
         if the_person.effective_sluttiness() >= 50:
@@ -75,6 +76,7 @@ label return_from_seminar_action_label(the_person):
                 the_person "You deserve a bit more I guess... How about I take off my [the_clothing.display_name] for you?"
                 $ the_person.draw_animated_removal (the_clothing)
                 the_person "Do you like the view of [the_person.possessive_title] undressing?"
+            $ mc.change_locked_clarity(10)
             if the_person.age > 30:
                 "Your dick twitches at the sight of [the_person.title]'s mature body."
             else:
@@ -86,6 +88,7 @@ label return_from_seminar_action_label(the_person):
                     #$ the_clothing = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
                     $ the_person.draw_animated_removal(the_clothing)
                 the_person "You like when I'm a bit naked, huh?"
+                $ mc.change_locked_clarity(10)
                 "You feel like you could explode just from the view of [the_person.title]'s naked body as she stands there, teasing you."
         $ the_clothing = None
 
@@ -98,6 +101,7 @@ label return_from_seminar_action_label(the_person):
         $ the_person.draw_person(position="kneeling1")
         the_person "[the_person.mc_title], you have such a nice cock, it'll be perfect inside of my mouth..."
         $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
+        $ mc.change_locked_clarity(10)
         "[the_person.title] opens her mouth and begins to vigorously suck on your dick with the full intent of giving you at least $500's worth of suction." #Nice. SUUUCTIIIIOOON
         mc.name "I truly appreciate having such a grateful employee, just keep on going [the_person.title]."
         $ the_person.draw_person(position="blowjob")
@@ -125,6 +129,7 @@ label return_from_seminar_action_label(the_person):
             "She opens her mouth and attempts to catch some of the load that is being sprayed onto her face, cherishing each drop that falls inside."
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
             "Soon [the_person.title]'s mouth is filled to the brim with your sperm from the torrent you're unleashing upon her, but you just cannot stop."
             $ the_person.cum_on_tits()
             $ the_person.draw_person(position="kneeling1")
@@ -162,23 +167,27 @@ label return_from_seminar_action_label(the_person):
                     "She withdraws her mouth from your cock, resting it by the tip as she looks into your eyes with her mouth wide open."
                     $ the_person.cum_in_mouth()
                     $ the_person.draw_person(position="blowjob")
+                    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
                     the_person "Yes, [the_person.mc_title]! Shoot your load right into my mouth. I love the taste of you."
                 else:
                     "She pulls your cock out of her mouth then looks intently at your eyes."
                     $ the_person.cum_on_face()
                     $ the_person.draw_person(position="blowjob")
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
                     the_person "Yes, [the_person.mc_title]. Shoot it right onto me! Give me one... big... facial."
             else:
                 if the_person.get_opinion_score("giving tit fucks") > the_person.get_opinion_score("being covered in cum"):
                     "She pulls your cock out of her mouth then looks up into your eyes as she presents her chest to you."
                     $ the_person.cum_on_tits()
                     $ the_person.draw_person(position="blowjob")
+                    $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
                     the_person "Like my tits, [the_person.mc_title]? They'll look much better covered in your cum..."
                 else:
                     "She pulls your cock out of her mouth then looks up into your eyes as she leans away from you."
                     the_person "Oh, [the_person.mc_title]. I just applied new makeup. Please, don't ruin it."
                     $ the_person.cum_on_stomach()
                     $ the_person.draw_person(position="blowjob")
+                    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                     "[the_person.title] keeps sitting on her knees while receiving your load on her body."
 
             the_person "Aaaah, it feels great!"

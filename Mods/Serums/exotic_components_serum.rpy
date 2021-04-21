@@ -10,7 +10,8 @@ init -1 python:
             base_side_effect_chance = 1,
             requires = [basic_med_app, improved_serum_prod],
             tier = 1,
-            research_needed = 300)
+            research_needed = 300,
+            clarity_cost = 300)
 
 
 # any label that starts with serum_mod is added to the serum mod list
@@ -20,10 +21,3 @@ label serum_mod_exotic_components_serum_trait(stack):
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
-
-
-
-
-
-
-

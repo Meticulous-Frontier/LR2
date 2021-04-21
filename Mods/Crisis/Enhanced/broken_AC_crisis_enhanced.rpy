@@ -162,12 +162,14 @@ label broken_AC_crisis_label_enhanced:
 
 label broken_AC_crisis_break_taboo(the_girl):
     if the_girl.outfit.full_access():
+        $ mc.change_locked_clarity(40)
         "Once she's done stripping [the_girl.possessive_title] is practically naked."
         if the_girl.has_taboo(["bare_pussy","bare_tits"]):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
             $ the_girl.break_taboo("bare_pussy")
             $ the_girl.break_taboo("bare_tits")
     elif the_girl.outfit.tits_visible():
+        $ mc.change_locked_clarity(20)
         "Once she's done stripping [the_girl.possessive_title] has her nice [the_girl.tits] tits out on display."
         if the_girl.has_taboo("bare_tits"):
             if the_girl.has_large_tits():
@@ -177,12 +179,14 @@ label broken_AC_crisis_break_taboo(the_girl):
             "Soon enough she doesn't even mind having them out."
             $ the_girl.break_taboo("bare_tits")
     elif the_girl.outfit.vagina_visible():
+        $ mc.change_locked_clarity(30)
         "Once she's done stripping [the_girl.possessive_title] has her pretty little pussy out on display for everyone."
         if the_girl.has_taboo("bare_pussy"):
             "She tries to hide herself from you with her hand, but quickly realizes how impractical that would be."
             "Soon enough she doesn't seem to mind."
             $ the_girl.break_taboo("bare_pussy")
     else:
+        $ mc.change_locked_clarity(10)
         "[the_girl.possessive_title] finishes stripping and looks at back at you."
         if (the_girl.outfit.wearing_panties() and not the_girl.outfit.panties_covered()) or (the_girl.outfit.wearing_bra() and not the_girl.outfit.bra_covered()):
             if the_girl.has_taboo("underwear_nudity"):

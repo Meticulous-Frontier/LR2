@@ -204,6 +204,19 @@ init -1 python:
 
             mc.change_arousal(his_arousal_change)
 
+        def get_mc_pleasure_source(self, person_one, person_two):
+            if self.guy_source == 0:
+                return None #Masturbating
+            if girl_swap_pos:
+                if self.guy_source == 1:
+                    return person_two
+                else:
+                    return person_one
+            if self.guy_source == 1:
+                return person_one
+            return person_two
+
+
 
 label threesome_test():
     $ scene_manager = Scene()
@@ -654,6 +667,9 @@ label threesome_round(the_person_one, the_person_two, position_choice, object_ch
     $ the_person_one.change_energy(-position_choice.girl_one_energy)
     $ the_person_two.change_energy(-position_choice.girl_two_energy)
 
+    #Add clarity
+    $ mc.change_locked_clarity(position_choice.guy_arousal * 10)
+
     #If girl(s) orgasms, call orgasm scene
     if the_person_one.arousal >= the_person_one.max_arousal or the_person_two.arousal >= the_person_two.max_arousal:
         $ position_choice.call_orgasm(the_person_one, the_person_two, mc.location, object_choice)
@@ -678,6 +694,10 @@ label threesome_round(the_person_one, the_person_two, position_choice, object_ch
         $ mc.recently_orgasmed = True
         $ report_log["guy orgasms"] += 1
         $ report_log["total orgasms"] += 1
+        if position_choice.get_mc_pleasure_source(the_person_one, the_person_two):   #returns none if MC is pleasuring himself
+            $ ClimaxController.manual_clarity_release(climax_type = "threesome", the_person = (position_choice.get_mc_pleasure_source(the_person_one, the_person_two)))
+        else:
+            $ ClimaxController.manual_clarity_release()
 
     #TODO set public sex responses
 

@@ -334,6 +334,7 @@ label candace_meet_at_office_store_label(the_person):
     mc.name "Certainly."
     "She comes close to you and whispers in your ear."
     the_person "When I pick up the supplies, I go to the backroom with the guy and suck his dick!"
+    $ mc.change_locked_clarity(10)
     "You probably should have known that was coming."
     mc.name "Interesting. And your boyfriend... he is okay with this?"
     the_person "Oh yes! He says as long as they don't fuck me it's fine."
@@ -391,11 +392,13 @@ label candace_get_to_know_label(the_person):
         mc.name "Guys can be confusing sometimes."
         the_person "I know! Its like, he's okay with me blowing the supply guys here for discounts on his work supplies."
         the_person "Then last night, I ordered a pizza and invited him over, and when he got there I was blowing the pizza guy to save some money on the tip..."
+        $ mc.change_locked_clarity(10)
         "Does she ever stop sucking cock?"
         the_person "When he walked in, he got all pissed off! Like, why is it okay to do it to save money on one thing, but not something else?"
         mc.name "That does seem inconsistent."
         "She sighs."
         the_person "I know! The worst part is, he spanked me, which he knows I love, but then didn't do anything else!"
+        $ mc.change_locked_clarity(10)
         the_person "I have needs! You can't just spank a girl and then not fuck her rough! It's just not right."
         mc.name "Exactly what I was thinking."
         the_person "I don't know what it is, I just feel like, something isn't right, you know? Like, I'm just in the wrong place."
@@ -406,6 +409,7 @@ label candace_get_to_know_label(the_person):
         the_person "No no no, he already told me as much. He said, \'don't you think about quitting, or I'll dump you! and no one wants to date a dumb bimbo like you but me!\'"
         "Jesus, this guy sounds like a major narcissist. The more you learn about him, the more happy you are that [salon_manager.title] got away from him, even if involuntarily."
         the_person "And if he dumps me, whose going to fuck me every night? No, I think I'd better just stay where I'm at for now."
+        $ mc.change_locked_clarity(10)
         $ the_person.event_triggers_dict["learned_about_unhappy"] = 1
         "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
         the_person "Oh! Finally! Some action! See you around [the_person.mc_title]."
@@ -435,6 +439,7 @@ label candace_talk_about_bf_control(the_person):
                 mc.name "You work so hard, you deserve to have someone who meets your needs."
                 the_person "Ha, it's hard to imagine having a man who could actually meet my needs."
                 mc.name "Who says it has to be just one man? You have wonderfully free spirit, you should be free to share that spirit with anyone you want."
+                $ mc.change_locked_clarity(5)
                 if candace_get_ready_to_quit():
                     the_person "You know... I think you are right. But its scary, you know? To leave what you know for something new."
                 else:
@@ -517,6 +522,7 @@ label candace_talk_about_uniforms(the_person):
             the_person "Oh? Those girls sure are lucky!"
             mc.name "Yup! I have multiple uniforms available to choose from, from conservative business suites, to topless with a set of yoga pants."
             the_person "You... you let girls go topless? That sounds... SO COMFY!!!"
+            $ mc.change_locked_clarity(10)
             $ candace_increase_doubt()
             mc.name "It is! You would like it there. You know if you quit, I would hire you to work there, right?"
             if candace_get_ready_to_quit():
@@ -530,7 +536,8 @@ label candace_talk_about_uniforms(the_person):
         #TODO learn she hates pants
         mc.name "Ah, then why do you wear them?"
         the_person "I just got off work. My boyfriend made uniforms for everyone at work to wear pants."
-        the_person "I used to wear skirts. It was great! Such easy access... and if you don't wear panties its so easy to just, sit on someone's lap or whatever."
+        the_person "I used to wear skirts. It was great! Such easy access... and if you don't wear panties its so easy to just, sit on someone's lap or face or whatever."
+        $ mc.change_locked_clarity(20)
         mc.name "That does sound handy. Why did your boyfriend change the dress code?"
         the_person "Ah, it was my fault really. One time I was wearing this short skirt and no panties, and I was bending over to get something out from under my desk I had dropped..."
         the_person "Suddenly I felt someone's hands on my ass, feeling me up. I thought it was my boyfriend! I asked him for a quickie and soon he was fucking me."
@@ -629,7 +636,6 @@ label candace_convince_to_quit_label(the_person):
     $ town_relationships.update_relationship(salon_manager, the_person, "Friend")
 
     "You complete the necessary paperwork and hire [the_person.title], assigning her to the supply department."
-    #TODO make sure her home is set to Stephanie's house somehow.
     "As you finish up, you notice [salon_manager.possessive_title] is walking over to the table."
     $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
     salon_manager "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
@@ -685,6 +691,7 @@ label candace_overhear_supply_order_label(the_person):
     if the_person.outfit.tits_available():
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
+        $ mc.change_locked_clarity(20)
         "????" "Now its having a hard time focusing... can you move the camera closer?"
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
     else:
@@ -693,9 +700,11 @@ label candace_overhear_supply_order_label(the_person):
         "You are hardly surprised when you see [the_person.title] start to take her top off."
         $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
         the_person "How about now?"
+        $ mc.change_locked_clarity(10)
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
         "????" "Now it's having a hard time focusing... can you move the camera closer?"
+        $ mc.change_locked_clarity(20)
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
     the_person "Are you getting a good look sir? Of the label, of course!"
     "????" "Yeah, I see it now. Calcium phosphide. You've been most helpful! I can get you a discount on those if you'd like, as thanks for your big... help"
@@ -735,6 +744,7 @@ label candace_supply_order_discount_label():
     the_person "I tried what you said, and it worked! Our supplier for... for... fuck what was the chemical name..."
     "She stops talking for a second as she thinks."
     the_person "Ahh fuck it who cares. Whatever it was, they gave me a 10\% discount, and he even sent me a video later last night of him jacking off on a picture of my tits I sent him!"
+    $ mc.change_locked_clarity(5)
     "That was... a lot of details."
     the_person "So... I kept going, and got almost all of our suppliers to give me some kind of discount! And it hasn't affected my umm... success rate... with sexting afterwards at all!"
     "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
@@ -764,6 +774,7 @@ label candace_midnight_wakeup_label():
     "Oh shit! What is [the_person.name] doing at the police department?"
     mc.name "Oh! Is she okay?"
     police_chief "She's fine. She got swept up last night in a prostitution sting. Apparently she was going around a strip club last night offering services..."
+    $ mc.change_locked_clarity(10)
     police_chief "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
     police_chief "We were just gonna send her off, but I didn't feel good about her walking home alone this time of night so I asked if she could call anyone and she gave me your name and number."
     "That... Sounds exactly like something [the_person.name] would do."
@@ -829,6 +840,7 @@ label candace_midnight_wakeup_label():
     $ downtown.show_background()
     "As you walk towards her house, you sigh when she tries to lead you into a back alley."
     the_person "Its been a frustrating night... I just thought, like, maybe we could..."
+    $ mc.change_locked_clarity(10)
     mc.name "Let's get back to your place first, okay?"
     the_person "Aww, okay."
     "It's pretty clear you that if you don't do anything, [the_person.name] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
@@ -839,6 +851,7 @@ label candace_midnight_wakeup_label():
     the_person "Finally! Let's have some fun!"
     mc.name "Wait... We need to talk first."
     the_person "God damnit why does everyone just want to talk? Just like... Let's get naked and then like... Let our bodies do the talking?"
+    $ mc.change_locked_clarity(15)
     mc.name "This is important."
     "It's time to make a decision. What are you going to do?"
     menu:
@@ -878,15 +891,17 @@ label candace_love_path_intro_label():
     "You feel relieved. You could have gone through court to file to be her conservator, but it sounds like it won't come to that. You hold her close for a while. Soon, you feel a little movement."
     "[the_person.title]'s hand makes it way from your back to your front, as she begins stroking your crotch."
     the_person "Is it... Is it time now?"
+    $ mc.change_locked_clarity(20)
     "She truly is insatiable."
     if mc.energy < 50:
-        "You are exhausted from a long day, but you dig deep, knowing there's no way you would leave her without giving [the_person.title] a decent dicking."
+        "You are exhausted from a long day, but you dig deep, knowing there's no way you could leave her without giving [the_person.title] a decent dicking."
         $ mc.change_energy(50)
     "[the_person.title] gives a little yelp as you pick her up."
     mc.name "Yes, it's time now."
     $ the_person.draw_person(position = "against_wall", emotion = "happy")
     the_person "Yay! I've been waiting for this all night!"
     "[the_person.title] wraps her legs around you, grinding against you, as you carry her over to her kitchen counter."
+    $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(15)
     if not the_person.vagina_available():
         "You pull off everything between you and her cunt."
@@ -896,12 +911,13 @@ label candace_love_path_intro_label():
             $ the_person.strip_outfit(position = "missionary", exclude_upper = True)
     "[the_person.title] reaches down and starts to play with herself as you start to get undressed. She starts to moan as you pull your cock out."
     $ the_person.change_arousal(15)
+    $ mc.change_locked_clarity(30)
     the_person "Just put it in me, I'm ready for it... Whoa!"
     $ the_person.draw_person(position = "missionary")
     "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
-    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_01
+    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
     "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
@@ -924,6 +940,7 @@ label candace_love_path_intro_label():
         del the_outfit
     $ the_person.draw_person(position = "stand4")
     "She is wearing a sheer pink nightgown, and absolutely nothing else. Normally a sight like that would be enough to get your blood boiling, but right now you are just too tired."
+    $ mc.change_locked_clarity(5)
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
     $ the_person.draw_person(position = "walking_away")
     "Still naked, you cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
@@ -932,26 +949,34 @@ label candace_love_path_intro_label():
     mc.name "Goodnight..."
     the_person "Hopefully in the morning my nightgown will be covered in cum..."
     "You know you should probably be alarmed by that statement... But you are too tired to care at this point."
+    $ mc.change_locked_clarity(5)
     mc.name "Yeah... Me too..."
     "You drift off to sleep."
     "You are exhausted, but begin to dream sexy dreams about [the_person.title], the bomb shell bimbo you are cuddled up with. At one point, you are dreaming that she has climbed on top of you and is riding your cock aggressively."
     "However, the feelings are so intense, you aren't sure... Could this be real?"
     $ the_person.draw_person(position = "cowgirl")
     the_person "That's it boss... It's okay I'm like, just letting you work that boner off..."
+    $ mc.change_locked_clarity(50)
     "You reach up and grab her tits. This definitely feels real. And you are really close to finishing."
     mc.name "I'm... I'm!"
     "You try to warn her. She quickly pops off and starts to jack you off. You cum, blowing your load all over her nightgown covered belly."
     $ the_person.cum_on_stomach()
+    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
+    $ the_person.draw_person(position = "cowgirl") # paint cum
     "When you finish, [the_person.title] starts to lick her fingers. She seems happy as she lays back in bed next to you. Sleep rapidly overtakes you."
+    $ mc.change_locked_clarity(20)
     "You sleep for a while longer. You aren't surprised though when you feel warm, wet sensations enveloping your cock again."
     "The delicious suction and the sound of [the_person.possessive_title]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
     $ the_person.draw_person(position = "blowjob")
     "You crack your eyes open and see Candi, working diligently to get you off with her mouth. You aren't sure how long she has been doing this, but it's definitely working."
+    $ mc.change_locked_clarity(50)
     "You reach down and run your hand through her hair, helping keep it out of her way. She looks up at you an makes eye contact... And then maintains is as she starts to give you long, slow strokes with her mouth."
     mc.name "God... I thought I was empty last time... Get ready here it cums again!"
+    $ mc.change_locked_clarity(50)
     "She takes you out of her mouth and strokes you with her hands. She points you down at her chest as you begin to fire off your load."
     $ the_person.cum_on_tits()
-    $ the_person.cum_on_ass()
+    $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
+    $ the_person.draw_person(position = "blowjob")
     "She keeps eye contact and doesn't say a word as you drop your load all over her chest. It immediately starts soaking into her nightgown. You can see the stains from earlier still on her belly."
     "You aren't sure what happens after that, because you pass out again. Your last thought as you fall back asleep, is that [the_person.title] must think a slumber party means getting as much cum as possible on her nightgown."
     $ the_person.next_day_outfit = the_person.outfit # stay in current outfit next day
@@ -960,6 +985,7 @@ label candace_love_path_intro_label():
     "The battery is dead. Is that coffee you smell? [the_person.title] must hear you stirring, she soon appears in the door to her bedroom."
     $ the_person.draw_person(position = "stand4")
     "She is still wearing the same nightgown. Evidence of your long, sex filled night apparent."
+    $ mc.change_locked_clarity(20)
     the_person "Good morning sleepyhead!"
     mc.name "Hey... Is that coffee?"
     the_person "Yup! I have some eggs and toast ready too!"
@@ -981,6 +1007,7 @@ label candace_love_path_intro_label():
     the_person "Oh! I gotta get back to the kitchen!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] turns and leaves the room. As she turns, you notice her nightgown has cum stains on the ass too... When did that happen? Did she make you cum while you were completely asleep too?"
+    $ mc.change_locked_clarity(30)
     "You slowly get up, your feet a little unsteady. You work your way out of the bedroom."
     $ kitchen.show_background()
     "In the kitchen, there is a small table with two chairs. You walk over and sit down at one."
@@ -997,8 +1024,9 @@ label candace_love_path_intro_label():
     the_person "I'm sorry! I just... I could feel it, you know, get hard? And I couldn't help myself!"
     mc.name "It's okay, really. I could have said no, and it... Well it's pretty amazing, to wake up to a woman like you pleasuring me."
     the_person "Yay! That's why you should stay over again!"
+    $ mc.change_locked_clarity(50)
     "You take a bite of the eggs. It's actually pretty good. The coffee is hot and helps wake you up."
-    mc.name "Listen... Today we are going to go talk with [mc.business.head_researcher.title]. I promised we'll definitely do this again sometime, but for now, I want you to work with her, okay? I want to find out if we can reverse the effects of the lab experiment."
+    mc.name "Listen... Today we are going to go talk with [mc.business.head_researcher.title]. I promise we'll definitely do this again sometime, but for now, I want you to work with her, okay? I want to find out if we can reverse the effects of the lab experiment."
     "She picks at her breakfast."
     the_person "There are times... You know? Like where I feel like I almost... Remember. Like, I remember being so excited. Like I was on the verge of something! But there was a deadline... Our funding was gonna get cut..."
     $ the_person.draw_person(position = "sitting", emotion = "angry")
@@ -1013,10 +1041,12 @@ label candace_love_path_intro_label():
     "She takes them over to the her sink and begins to wash them. As you watch, she bends over, scrubbing them clean..."
     $ the_person.draw_person(position = "standing_doggy")
     "God, her ass is great. Even after cumming over and over last night, you feel blood flowing to your dick as you watch her bent over."
+    $ mc.change_locked_clarity(30)
     "Still completely naked, you know there is no way you can hide it from her. Maybe you should take charge, and give her a good fuck before you both head in to work."
 
     "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up?"
     "Then you notice. She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
+    $ mc.change_locked_clarity(50)
     "You grip her hips with your hands, and then push your fully erect cock against her ass."
     the_person "Oh, thank God, I was, like, REALLY hoping to get one more before work..."
     # pull up nightgown
@@ -1024,11 +1054,12 @@ label candace_love_path_intro_label():
 
     "You slowly lift up her nightgown, exposing her rear. You position the head of your cock against her entrance and then start to rub it up and down her slit. When you pull back for a second, your tip is slick with her arousal."
     $ the_person.change_arousal(15)
+    $ mc.change_locked_clarity(30)
     the_person "Stop teasing... I'm ready. I'm always ready!"
     mc.name "I know, but someone has to teach you patience."
     the_person "I'm patient! I can totally be patient, I'm the most... Ohhh!!!"
     "You cut her off mid sentence as you thrust yourself all the way into her. You don't give her time to recover, as you start to roughly fuck her."
-    call fuck_person(the_person, start_position = SB_doggy_standing, private = True, skip_intro = True, asked_for_condom = True) from _call_candace_love_fuck_02
+    call fuck_person(the_person, start_position = SB_doggy_standing, private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_02
 
     # You decide to just wait and see what happens. You continue to enjoy the view of Candi's ass as she scrubs your plates clean, then sets them on a drying rack. She turns around and immediately notices your erection.
     # "Oh, thank God, I was, like, REALLY hoping to get one more in before work..."
@@ -1088,6 +1119,7 @@ label candace_begin_cure_research_label(the_person):
     "You can tell that she is struggling to remember."
     mc.name "You got arrested, remember?"
     candace "Right! And I told the nice police officer I was hiding drugs 'somewhere special' and so he had to do a strip search and..."
+    $ mc.change_locked_clarity(10)
     mc.name "[candace.name], we said we would talk with [the_person.name] about helping you control some of your... urges... Among other things."
     candace "If you say so boss!"
     mc.name "Okay. Well, in order to keep things from impacting the business too much, [the_person.name] would like you to stay with her for a while. It will make it easier for her to run tests on you as necessary."
@@ -1133,6 +1165,7 @@ label candace_anti_bimbo_serum_label():
     if the_person.sluttiness > 60:
         the_person "Okay... In the mean time, [candace.name] can feel free to keep staying with me. We've, umm, had a lot of fun, living together the last few weeks!"
         "You remember the night you spent with her. You are certain they've been having lots of fun together."
+        $ mc.change_locked_clarity(5)
         mc.name "Sounds good, I appreciate it."
         $ town_relationships.update_relationship(the_person, candace, "Best Friend")
     else:
@@ -1221,6 +1254,7 @@ label candace_cure_bimbo_label():
     candace "What? I don't remember you doing anything like that."
     mc.name "We've been intimate. A lot actually."
     candace "Yes. And I'd like for that to continue. You weren't taking advantage, you were giving me exactly what I wanted."
+    $ mc.change_locked_clarity(10)
     "She says that now... but a lot has happened to her. You still feel a bit uneasy about how much you fucked her while she was in her previous mental state."
     mc.name "I see. What about your work? Would you like to move over to the research department? We are doing amazing things here."
     candace "No, no. Not right now anyway. I need some time away from all that. I think for now I'd like to continue where I am now. It is actually quite enjoyable."
@@ -1230,8 +1264,9 @@ label candace_cure_bimbo_label():
     candace "Why wouldn't I want to? [candace.mc_title], a woman's body is an incredible tool to wield as they choose. If I want to be the best I can be, why would I deny myself the use of that tool?"
     "[candace.title] gives you a wink."
     candace "Plus, it's really really fun to be a tease."
+    $ mc.change_locked_clarity(10)
     "Oh god, what have you done? You realize any man who tries to negotiate unfavorable contract terms with this woman is absolutely fucked."
-    "It is clear that even though she has her intelligence back, [candace.title] still has her previous opinions on her sexuality."
+    "It is clear that even though she has her intelligence back, [candace.title] still has her previous opinions and her sexuality."
     "You look over and see [the_person.title] scribbling down notes at an incredible pace."
     the_person "Wow... This is just absolutely amazing. Candi... Err... [candace.title]... Tonight after work, I suppose I'll help you pack up so you can move back to your place then?"
     candace "Yes I would like that. You've been very nice, letting me stay with you, but I think I would like my personal space back."
@@ -1247,7 +1282,6 @@ label candace_cure_bimbo_label():
     "The girls turn and leave you in your office. The progress made with [candace.title] has been incredible, for sure."
     $ scene_manager.clear_scene()
     "It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
-    #TODO link up the one week event
     $ candace.event_triggers_dict["sex_record_snapshot"] = candace.sex_record.copy() #This should take a snapshot of our sex record with candace so we can compare it later
     $ candace.set_schedule(the_location = candace.home, times = [0,4])
     $ mc.business.add_mandatory_crisis(candace_meet_doctor_candace)
@@ -1317,13 +1351,15 @@ label candace_meet_doctor_candace_label():
     $ the_person.outfit.remove_random_lower()
     $ the_person.draw_person(position = "stand2")
     mc.name "That's... You don't have to do that..."
+    $ mc.change_locked_clarity(20)
     the_person "I know. But I want to. Sir, I threw myself at you so many times, you never took advantage of me. Your restraint in everything has been incredible."
-    the_person "No man could have resisted being exposed to the amount of sex appeal I was displaying without succumbing."
+    the_person "No straight man could have resisted being exposed to the amount of sex appeal I was displaying without succumbing."
     "She continues to disrobe. You are mesmerized by the beautiful woman in front of you."
     $ the_person.outfit.remove_random_upper()
     $ the_person.outfit.remove_random_lower()
     $ the_person.draw_person(position = "stand2")
     the_person "Besides, even if my brains were scrambled, I still wanted it. And I enjoyed it. A LOT. But I know some part of you still doesn't believe me."
+    $ mc.change_locked_clarity(50)
     the_person "So now, I'm going to show you. Actions speak louder than words."
     "She motions to you."
     the_person "Would you please get naked for me? I want to show you how much I loved it, and how much I STILL love your cock."
@@ -1335,10 +1371,12 @@ label candace_meet_doctor_candace_label():
     the_person "Don't worry, we won't get interrupted during this..."
     mc.name "Have you been monitoring my office traffic?"
     the_person "No. But I did put up your out to lunch sign and locked the door on my way in without you noticing..."
+    $ mc.change_locked_clarity(30)
     $ the_person.draw_person(position = "cowgirl")
     "[the_person.title] gets up on top of you. Her eyes are making direct contact with yours as she takes your cock in one hand and starts to run you up and down her slit."
     "Her natural lubrication soon has you wet and ready for penetration."
     "She leans forward and closes her eyes. Your lips make contact and you begin to kiss. At the same time, she lifts her hips slightly, lines you up with her cunt, and slowly sinks down onto you."
+    $ mc.change_locked_clarity(50)
     "Her tongue dances with yours as the first fledgling thrusts are made of her hips onto yours. Her kisses punctuated with moans."
     the_person "Mmm... You feel so good. I swear, every time we fuck is better than the last..."
     $ the_person.change_arousal(30)
@@ -1363,67 +1401,72 @@ label candace_meet_doctor_candace_label():
         "Well, it seems that [the_person.title] still has feelings for you and wants to continue being your girlfriend."
     else:
         "Well, in quite the reversal of roles, Candace has asked you out officially. Do you want to accept?"
-    menu:
-        "Accept":
-            if not the_person.is_girlfriend():
-                $ the_person.add_role(girlfriend_role)
-            mc.name "So, what is your degree in, anyway?"
-            the_person "I received my doctorate for molecular biology and genetics... Though I'm not sure why that is relevant."
-            mc.name "Oh, I just wanted to know for when I have to introduce you to people as 'my girlfriend Dr. [the_person.last_name]."
-            $ the_person.change_happiness(15)
-            $ the_person.change_love(5)
-            the_person "Ahh! I suppose that would be okay... The first part anyway."
-            "She leans back a bit and gets kinda dreamy eyed."
-            the_person "You know, I truly had no idea if you were going to accept or not."
-            mc.name "Yeah. I was on the fence myself, but then you rode me cowgirl while I was in my office chair."
-            mc.name "I realized if we were dating I could call you in here anytime during the work day and do it again..."
-            the_person "Errmmm... You know I would do that even if we weren't dating, right?"
-            "You give her a wink. You decide to get busy one more time before you move on for the day..."
-            mc.name "Yeah but now I don't have to use the company punishment manual to do this either."
-            "She gives a little yelp as you suddenly scoot your chair from your desk. You stand up, picking her up as you go, then turn her over and bend her over you desk."
-            $ the_person.draw_person(position = "standing_doggy")
-            mc.name "You've been one naughty doctor."
-            the_person "Oh lord I like where this is going."
-            mc.name "Getting yourself arrested? The cops thought you were a prostitute!"
-            "With your harsh, but playful words you bring your hand down and smack her ass. It wobbles enticingly."
-            $ the_person.change_arousal(10)
-            the_person "Oh! I'm sorry boss!"
-            mc.name "Going out and looking for some stranger to meet your needs... When I was here all along!"
-            "You give her ass another spank."
-            $ the_person.change_arousal(15)
-            the_person "Ahh! I'm sorry, I won't do it again!"
-            "A red handprint starts to appear on her rear, where you spanked her. You lighten you touch a bit and gently rub her ass, soothing it."
-            mc.name "I know. Because you don't need to anymore. When you get those cravings, and it's just too much to bear, come and find me. I'll meet your needs, anytime, anywhere."
-            the_person "Oh... That's amazing..."
-            "She starts to wiggle her hips and giggle a little."
-            the_person "Excuse me, boss? I think I'm feeling those 'needs' again!"
-            "Her playful tone makes it obvious she is playing dumb a little, whereas just a few weeks ago, she would have said something similar to that, but being completely serious."
-            "You let your fingers run their way down the inside of her cheeks, dipping them gently in her pussy. She's still soaking wet from when you fucked earlier."
-            $ the_person.change_arousal(10)
-            "[the_person.title] turns her head back to look at you. Are those puppy dog eyes?"
-            the_person "Please, I need you again sir. Please!"
-            "God damn no wonder she is so good at negotiating supply contracts, she knows just how to ask."
-            "You cock is rock hard and ready to seal the deal. It's time to fuck [the_person.title] properly now that you have everything out in the open."
-            "Your grab her hips and move in close. She reaches between her legs and holds the tip of your erection, guiding you inside of her."
-            "You easily bottom out inside of her in one smooth stroke. She groans at the sensations of being filled again."
-            the_person "Okay... I'm done being cute. You can rough me up now!"
-            "You reach up and grab her hair."
-            mc.name "I think I'll do that."
-            "Pulling her head back, you start to thrust yourself inside of her at a rapid pace. It's time to give it to her good!"
-            call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True) from _fuck_doctor_candace_again_02
-            "When you finish with her, [the_person.title] is sprawled out across your desk. Your light colored cum on her dark skin is a beautiful contrast."
-            "You get yourself cleaned up a bit and looking presentable while she is still recovering."
-            the_person "Oh fuck [the_person.mc_title]... Your dick is amazing..."
-            "Her breathing is finally starting to slow down a bit."
-            the_person "Are we, umm... We doing my place or yours tonight?"
-            mc.name "Honestly, I'm not sure if I'll be able to tonight, but I'll let you know."
-            the_person "Mmm... Okay... You go ahead... I think I would just like to bask a little..."
-            "You consider for a moment getting a nice couch for your office... "
-            "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
-            mc.name "Rest up, I'm going to get back to work."
-            "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."
-        "Reject (disabled)":
-            pass
+        menu:
+            "Accept":
+                if not the_person.is_girlfriend():
+                    $ the_person.add_role(girlfriend_role)
+                mc.name "So, what is your degree in, anyway?"
+                the_person "I received my doctorate for molecular biology and genetics... Though I'm not sure why that is relevant."
+                mc.name "Oh, I just wanted to know for when I have to introduce you to people as 'my girlfriend Dr. [the_person.last_name]."
+                $ the_person.change_happiness(15)
+                $ the_person.change_love(5)
+                the_person "Ahh! I suppose that would be okay... The first part anyway."
+                "She leans back a bit and gets kinda dreamy eyed."
+                the_person "You know, I truly had no idea if you were going to accept or not."
+                mc.name "Yeah. I was on the fence myself, but then you rode me cowgirl while I was in my office chair."
+                mc.name "I realized if we were dating I could call you in here anytime during the work day and do it again..."
+                the_person "... You know I would do that even if we weren't dating, right?"
+                "You give her a wink. You decide to get busy one more time before you move on for the day..."
+                mc.name "Yeah but now I don't have to use the company punishment manual to do this either."
+                $ mc.change_locked_clarity(20)
+                "She gives a little yelp as you suddenly scoot your chair from your desk. You stand up, picking her up as you go, then turn her over and bend her over you desk."
+                $ the_person.draw_person(position = "standing_doggy")
+                mc.name "You've been one naughty doctor."
+                the_person "Oh lord I like where this is going."
+                mc.name "Getting yourself arrested? The cops thought you were a prostitute!"
+                "With your harsh, but playful words you bring your hand down and smack her ass. It wobbles enticingly."
+                $ the_person.change_arousal(10)
+                $ mc.change_locked_clarity(20)
+                the_person "Oh! I'm sorry boss!"
+                mc.name "Going out and looking for some stranger to meet your needs... When I was here all along!"
+                "You give her ass another spank."
+                $ the_person.change_arousal(15)
+                $ mc.change_locked_clarity(20)
+                the_person "Ahh! I'm sorry, I won't do it again!"
+                "A red handprint starts to appear on her rear, where you spanked her. You lighten you touch a bit and gently rub her ass, soothing it."
+                mc.name "I know. Because you don't need to anymore. When you get those cravings, and it's just too much to bear, come and find me. I'll meet your needs, anytime, anywhere."
+                the_person "Oh... That's amazing..."
+                "She starts to wiggle her hips and giggle a little."
+                the_person "Excuse me, boss? I think I'm feeling those 'needs' again!"
+                $ mc.change_locked_clarity(50)
+                "Her playful tone makes it obvious she is playing dumb a little, whereas just a few weeks ago, she would have said something similar to that, but being completely serious."
+                "You let your fingers run their way down the inside of her cheeks, dipping them gently in her pussy. She's still soaking wet from when you fucked earlier."
+                $ the_person.change_arousal(10)
+                "[the_person.title] turns her head back to look at you. Are those puppy dog eyes?"
+                the_person "Please, I need you again sir. Please!"
+                "God damn no wonder she is so good at negotiating supply contracts, she knows just how to ask."
+                "You cock is rock hard and ready to seal the deal. It's time to fuck [the_person.title] properly now that you have everything out in the open."
+                $ mc.change_locked_clarity(50)
+                "Your grab her hips and move in close. She reaches between her legs and holds the tip of your erection, guiding you inside of her."
+                "You easily bottom out inside of her in one smooth stroke. She groans at the sensations of being filled again."
+                the_person "Okay... I'm done being cute. You can rough me up now!"
+                "You reach up and grab her hair."
+                mc.name "I think I'll do that."
+                "Pulling her head back, you start to thrust yourself inside of her at a rapid pace. It's time to give it to her good!"
+                call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True) from _fuck_doctor_candace_again_02
+                "When you finish with her, [the_person.title] is sprawled out across your desk. Your light colored cum on her dark skin is a beautiful contrast."
+                "You get yourself cleaned up a bit and looking presentable while she is still recovering."
+                the_person "Oh fuck [the_person.mc_title]... Your dick is amazing..."
+                "Her breathing is finally starting to slow down a bit."
+                the_person "Are we, umm... We doing my place or yours tonight?"
+                mc.name "Honestly, I'm not sure if I'll be able to tonight, but I'll let you know."
+                the_person "Mmm... Okay... You go ahead... I think I would just like to bask a little..."
+                "You consider for a moment getting a nice couch for your office... "
+                "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
+                mc.name "Rest up, I'm going to get back to work."
+                "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."
+            "Reject (disabled)":
+                pass
     $ clear_scene()
     return
 

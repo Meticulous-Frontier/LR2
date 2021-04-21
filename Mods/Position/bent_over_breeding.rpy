@@ -244,6 +244,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
     if mc.condom:
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
         the_girl "Oh god, I can feel you twitching... but something is missing?"
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
         "You wait until your orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
         "She looks at your condom and frowns."
         the_girl "You were... seriously? You had a condom on? Why would you do that?"
@@ -254,6 +255,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
         if the_girl.get_opinion_score("creampies") > 0:
             the_girl  "Yes! Fill me with your cum!"
         $ the_girl.cum_in_vagina()
+        $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
         $ bent_over_breeding.redraw_scene(the_girl)
         if the_girl.has_breeding_fetish():
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."

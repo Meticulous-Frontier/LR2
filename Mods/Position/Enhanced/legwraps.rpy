@@ -8,6 +8,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("cum_pullout")
     menu:
         "Cum inside of her":
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
             "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws lightly at your back as you pump your seed into her."
 
             if mc.condom:
@@ -44,6 +45,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             else:
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ missionary.redraw_scene(the_girl)
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
@@ -72,6 +74,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                     "She humps against you a few times to make sure that you cum deep inside her."
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ missionary.redraw_scene(the_girl)
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
@@ -97,6 +100,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             else:
                 $ the_girl.cum_on_stomach()
                 $ missionary.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                 if pregnant_role in the_girl.special_role and the_girl.event_triggers_dict.get("preg_transform_day",day) < day:
                     if mc.condom:
                         "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s pregnancy bump."
@@ -123,6 +127,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("cum_pullout")
     menu:
         "Cum inside of her":
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
             if mc.condom:
                 "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She pants quietly as you pulse your hot cum into the condom you're wearing."
                 $ the_girl.call_dialogue("cum_condom")
@@ -187,6 +192,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
                 $ against_wall.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
                     "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
@@ -212,6 +218,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
             else:
                 $ the_girl.cum_on_stomach()
                 $ against_wall.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                 if mc.condom:
                     "You pull out of [the_girl.possessive_title] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
                 else:

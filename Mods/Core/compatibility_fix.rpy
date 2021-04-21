@@ -120,16 +120,15 @@ init -4 python:
         return loaded_version
 
 init -2:
+    default persistent.zip_cache_size = 0 # default is small size
     default persistent.memory_mode = 1 # default is medium memory mode
-    default persistent.use_free_memory = True   # default is clean memory every day
+    default persistent.clear_memory_mode = 1 # default is daily clear
     default persistent.show_ntr = False     # default turn of NTR
 
 init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")
 
 init 5 python: # add to stack later then other mods
-    config.label_overrides["start"] = "alternative_start"
-
     add_label_hijack("normal_start", "activate_compatibility_fix")
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
@@ -137,10 +136,16 @@ init 5 python: # add to stack later then other mods
     if take_animation_screenshot in config.interact_callbacks:
         config.interact_callbacks.remove(take_animation_screenshot)
 
+    # disable game saving by setting this flag
+    okay_to_save = True
+    config.game_menu[3] = ( "save", u"Save Game", ui.jumps("_save_screen"), 'not renpy.context().main_menu and okay_to_save' )
+
+    hook_label("start", check_bugfix_installed)
+
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
-init -1 python:
+init 1 python:
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
     if renpy.variant("pc"):
@@ -154,11 +159,15 @@ init -1 python:
     else:
         config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
 
+    # heart pasties and cincher (move to level 0)
+    heart_pasties.layer = 0
+    cincher.layer = 0
+
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 32
-    config.rollback_length = 64      # since refactor we can allow a longer rollback history
+    config.predict_statements = 16
+    config.rollback_length = 32      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False
@@ -192,6 +201,8 @@ init -1 python:
             if (re.search("gui", fn, re.IGNORECASE)
                 and fn.endswith(".png")):
                 renpy.cache_pin(fn)
+            if "empty_holder.png" in fn:
+                renpy.cache_pin(fn)
         return
 
     # remove full outfits / overwear from default wardrobe that have no shoes or no layer 2 clothing items (nude outfits)
@@ -218,7 +229,7 @@ init -1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def check_bugfix_installed():
+    def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
         if not bugfix_installed:
             renpy.say("Warning", "You are running the game without bugfix installed, the mod no longer works without this bugfix due to the many issues in the base game. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}. The game will now exit.")
             renpy.quit()
@@ -276,48 +287,3 @@ label check_save_version(stack):
         "Warning" "You are loading a game created by a previous build ([loaded_version]), you might run into errors because of this. Before reporting errors, please start a new modded game and see if the problem persists."
     $ execute_hijack_call(stack)
     return
-
-label alternative_start:
-    scene bg paper_menu_background with fade
-
-    $ check_bugfix_installed()
-
-    "Lab Rats 2 contains adult content. If you are not over 18 or your countries equivalent age you should not view this content."
-    menu:
-        "I am over 18":
-            "Excellent, let's continue then."
-
-        "I am not over 18":
-            $renpy.full_restart()
-
-    "Vren" "[config.version] represents an early iteration of Lab Rats 2. Expect to run into limited content, unexplained features, and unbalanced game mechanics."
-    "Vren" "Would you like to view the FAQ?"
-    menu:
-        "View the FAQ":
-            call faq_loop from _call_faq_loop_alt_start
-        "Get on with the game!":
-            "You can access the FAQ from your bedroom at any time."
-
-    "Vren" "Lab Rats 2 contains content related to impregnation and pregnancy. These settings may be changed in the menu at any time."
-    menu:
-        "No pregnancy content\n{size=16}Girls never become pregnant. Most pregnancy content hidden.{/size}":
-            $ persistent.pregnancy_pref = 0
-
-        "Predictable pregnancy content\n{size=16}Birth control is 100%% effective. Girls always default to taking birth control.{/size}":
-            $ persistent.pregnancy_pref = 1
-
-        "Realistic pregnancy content\n{size=16}Birth control is not 100%% effective. Girls may not be taking birth control.{/size}":
-            $ persistent.pregnancy_pref = 2
-
-    $ renpy.block_rollback()
-    call screen character_create_screen()
-    $ return_arrays = _return #These are the stat, skill, and sex arrays returned from the character creator.
-    call create_test_variables(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2]) from _call_create_test_variables_alt_start ##Moving some of this to an init block (init 1specifically) would let this play better with updates in the future.
-    $ renpy.block_rollback()
-    menu:
-        "Play introduction and tutorial":
-            call tutorial_start from _call_tutorial_start_alt_start
-
-        "Skip introduction and tutorial":
-            $ mc.business.event_triggers_dict["Tutorial_Section"] = False
-    jump normal_start

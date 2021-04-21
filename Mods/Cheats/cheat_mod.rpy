@@ -170,11 +170,12 @@ screen cheat_menu():
         "Height": ["height", "height", .005, 4],
         "Energy": ["energy", "energy", 10.0, 5],
         "Max Energy": ["max_energy", "max_energy", 10.0, 6],
+        "Free Clarity": ["free_clarity", "free_clarity", 1000.0, 7],
 
-        "Funds": ["funds", "funds", 10000, 7],
-        "Supplies": ["supply_count", "supply_count", 10000, 8],
-        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 9],
-        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 10] # Might add If statement to combine these two as they go hand in hand
+        "Funds": ["funds", "funds", 10000, 8],
+        "Supplies": ["supply_count", "supply_count", 10000, 9],
+        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 10],
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 11] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
         "HR": ["hr_skill", "hr_skill", 1, 0],

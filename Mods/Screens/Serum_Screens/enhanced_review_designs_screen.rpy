@@ -1,6 +1,8 @@
 init 2:
     screen review_designs_screen():
         add "Science_Menu_Background.png"
+        default selected_serum = None
+
         vbox:
             xalign 0.2
             xanchor 0.5
@@ -13,7 +15,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 650
-                        text "Serum Designs" style "serum_text_style_header" 
+                        text "Serum Designs" style "serum_text_style_header"
 
                     frame:
                         background "#777777"
@@ -21,49 +23,44 @@ init 2:
 
                         viewport:
                             scrollbars "vertical"
-                            xsize 650
+                            xsize 636
                             mousewheel True
                             hbox:
                                 xalign 0.5
                                 vbox:
                                     xalign 0.5
                                     for serum_design in mc.business.serum_designs:
+                                        $ serum_name = serum_design.name
                                         if serum_design.researched:
-                                            textbutton "[serum_design.name] - {color=#98fb98}Researched{/color}":
-                                                action [
-                                                ToggleScreen("serum_tooltip", None, serum_design)
-                                                ]
-                                                hovered [
-                                                Show("serum_tooltip", None, serum_design)
-                                                ]
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-                                                xsize 400
-                                                ysize 50
+                                            $ serum_name += " - {color=#98fb98}Researched{/color}"
                                         else:
-                                            textbutton "[serum_design.name]: " + str(serum_design.current_research) + "/" + str(serum_design.research_needed) + "{color=#cd5c5c} Required{/color}":
-                                                action [
-                                                ToggleScreen("serum_tooltip", None, serum_design)
-                                                ]
-                                                hovered [
-                                                Show("serum_tooltip", None, serum_design)
-                                                ]
-                                                style "textbutton_style"
-                                                text_style "serum_text_style"
-                                                xsize 400
-                                                ysize 50
+                                            $ serum_name += " - " + str(serum_design.current_research) + "/" + str(serum_design.research_needed) + "{color=#cd5c5c} Required{/color}"
+
+                                        textbutton serum_name:
+                                            style "textbutton_style"
+                                            text_style "serum_text_style"
+                                            xsize 400
+                                            ysize 50
+                                            if serum_design == selected_serum:
+                                                action SetScreenVariable("selected_serum", None)
+                                            else:
+                                                action SetScreenVariable("selected_serum",serum_design)
 
                                 vbox:
                                     xalign 0.5
                                     for serum_design in mc.business.serum_designs:
                                         textbutton "Scrap Design":
                                             action [
-                                            Function(mc.business.remove_serum_design, serum_design)
+                                                Function(mc.business.remove_serum_design, serum_design),
+                                                SetScreenVariable("selected_serum", None)
                                             ]
                                             style "textbutton_style"
                                             text_style "serum_text_style"
-                                            xsize 250
+                                            xsize 230
                                             ysize 50
+
+        if selected_serum:
+            use serum_tooltip(selected_serum, given_align = (0.9,0.09), given_anchor = (1.0,0.0))
 
         frame:
             background None

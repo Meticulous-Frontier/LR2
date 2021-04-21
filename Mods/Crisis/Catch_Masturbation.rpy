@@ -47,6 +47,7 @@ label SB_caught_masturbating_crisis_label():
         $ scene_manager.add_actor(the_person_two, position = "cowgirl", display_transform = character_69_on_top)
 
         "Looking inside, you see [the_person.title] and [the_person_two.title] eating each other out."
+        $ mc.change_locked_clarity(30)
 
         the_person "Oh yes [the_person_two.title], keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)
@@ -90,8 +91,10 @@ label SB_caught_masturbating_crisis_label():
         $ the_person.change_arousal(50)
         $ the_person.discover_opinion("masturbating")
         if the_person.outfit.vagina_visible(): #If she is naked below
+            $ mc.change_locked_clarity(20)
             "With her pussy on full display, you can see she is masturbating vigorously. Her pink lips glisten with moisture."
         else:
+            $ mc.change_locked_clarity(10)
             "While it is kind of hard to see, it appears that [the_person.possessive_title] has one hand in her [the_clothing.name] and is masturbating."
 
         menu:
@@ -116,6 +119,7 @@ label SB_caught_masturbating_crisis_label():
                         "You aren't sure what she is fantasizing about, but she is getting really into it..."
                         "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."
                         $ the_person.change_arousal(10)
+                        $ mc.change_locked_clarity(20)
                         "[the_person.possessive_title] whimpers as she cums. Her legs spasm and she gasps for air."
                         $ the_person.change_stats(happiness = 3, slut_temp = 2)
                         "You decide to make a quick exit before she has a chance to recover. As quietly as you can, you close the door behind you and head back to your previous work."
@@ -123,6 +127,7 @@ label SB_caught_masturbating_crisis_label():
                         if mc.sex_skills["Oral"] > 4 or the_person.get_opinion_score("getting head") > 0 :    #Reward oral skill, OR if girl loves "getting head" ?
                             the_person "Oh God, [the_person.mc_title], that's it. Eat my pussy!"      #Get a chance to eat her
                             $ the_person.change_arousal(10)
+                            $ mc.change_locked_clarity(20)
                             "It seems that [the_person.possessive_title] is fantasizing about you eating her out!"
                             "You decide that this is an opportunity too good to pass up."
                             mc.name "I'd be happy to [the_person.title]."
@@ -137,16 +142,19 @@ label SB_caught_masturbating_crisis_label():
                                     $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), position = "missionary", half_off_instead = True)
                                 else:
                                     $ generalised_strip_description(the_person, the_person.outfit.get_full_strip_list(), position = "missionary")
+                                $ mc.change_locked_clarity(20)
                                 "With her pussy finally exposed you waste no time diving right in."
                             $ the_person.break_taboo("bare_pussy")
                             $ the_person.break_taboo("licking_pussy")
                             "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
                             $ the_person.change_arousal(10)
+                            $ mc.change_locked_clarity(5)
                             the_person "Oh [the_person.mc_title], you have no idea how bad I need this."
                             "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
                             "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
                             $ the_person.change_arousal(10)
                             the_person "I am so close... I'm sorry [the_person.mc_title], I'm not going to last much longer."
+                            $ mc.change_locked_clarity(5)
                             $ the_person.draw_person(emotion="orgasm", position ="missionary")
                             "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit."
                             $ the_person.change_arousal(10)
@@ -155,6 +163,7 @@ label SB_caught_masturbating_crisis_label():
                             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
                             $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 2, love = 3)
                             $ the_person.reset_arousal()
+                            $ mc.change_locked_clarity(25)
                             #show screen float_up_screen(["+5 Happiness","+5 Obedience","+2 Core Sluttiness" ],["float_text_yellow","float_text_grey","float_text_pink"])
                             "[the_person.possessive_title] runs her hands through your hair one last time. You get up and give her a kiss, letting her taste herself on your tongue."
                             "You excuse yourself and then head to the bathroom and get cleaned up before returning to your work."
@@ -175,6 +184,7 @@ label SB_caught_masturbating_crisis_label():
                                 the_person "Yes [the_person.mc_title]... you make me feel so good... I just wanna make you feel good too baby."
                                 "Sounds like she is really into you. Maybe you should pay her a visit later..."
                             $ the_person.change_arousal(10)
+                            $ mc.change_locked_clarity(20)
                             "[the_person.possessive_title]'s hand continues to work furiously on her pussy. You can tell from her proficiency that she probably does this often."
                             "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."
                             $ the_person.change_arousal(10)
@@ -182,6 +192,7 @@ label SB_caught_masturbating_crisis_label():
                             $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
                             $ the_person.change_stats(happiness = 5, slut_temp = 2)
                             $ the_person.reset_arousal()
+                            $ mc.change_locked_clarity(20)
                             "You back out of the room before she has a chance to recover. You can't believe your good luck, catching an employee masturbating... while thinking of you of all people!"
                             "On your way back to your work, you swing by [the_person.possessive_title]'s desk. You write her a quick note."
                             "Thanks for the show!"
@@ -235,8 +246,10 @@ label SB_caught_masturbating_crisis_label():
                         $ the_person.change_arousal(20)
                         if the_person.outfit.vagina_visible():
                             "Her delicious pussy on full display, [the_person.possessive_title] increases her pace while closely watching you."
+                            $ mc.change_locked_clarity(20)
                             $ the_person.break_taboo("bare_pussy")
                         else:
+                            $ mc.change_locked_clarity(10)
                             "[the_person.possessive_title] has her hand in her [the_clothing.name]. Her movements get faster while closely watching you."
                         the_person "Oh my god. [the_person.mc_title], I can't believe this is happening..."
                         if the_person.get_opinion_score("public sex") > 0:
@@ -252,6 +265,7 @@ label SB_caught_masturbating_crisis_label():
                         $ the_person.change_arousal(20)
                         the_person "Oh fuck... I'm gonna cum!"
                         $ the_person.draw_person(emotion="orgasm", position ="missionary")
+                        $ mc.change_locked_clarity(20)
                         "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
                         "Catching her breath, [the_person.possessive_title] looks up at you but doesn't say a word. It is clear that masturbating in front of her boss has left a lasting impression."
                         $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
@@ -262,8 +276,13 @@ label SB_caught_masturbating_crisis_label():
                     else: #She is very slutty
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():
-                            "[the_person.possessive_title] begins to pull off her clothes."
-                            $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
+                            "[the_person.possessive_title] moves her clothes out of the way."
+                            if the_person.outfit.can_half_off_to_vagina():
+                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
+                            else:
+                                "[the_person.possessive_title] begins to pull off her clothes."
+                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
+                        $ mc.change_locked_clarity(20)
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
                         menu:
@@ -292,6 +311,7 @@ label SB_caught_masturbating_crisis_label():
                                 the_person "Ok [the_person.mc_title], but if you change your mind..."
                                 "[the_person.possessive_title] continues rubbing her exposed pussy. Once in a while she peeks back at you to see if you are still watching."
                                 $ the_person.change_arousal(20)
+                                $ mc.change_locked_clarity(10)
 
                                 if the_person.get_opinion_score("public sex") > 0:
                                     "[the_person.possessive_title]'s cheeks are flush with arousal. She peeks back and stares straight into your eyes as she continues to touch herself."
@@ -305,6 +325,7 @@ label SB_caught_masturbating_crisis_label():
                                     "Her breathing gets ragged as she nears the finish line."
                                 $ the_person.change_arousal(20)
                                 the_person "Oh fuck... I'm gonna cum!"
+                                $ mc.change_locked_clarity(20)
                                 "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
                                 "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
                                 $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")

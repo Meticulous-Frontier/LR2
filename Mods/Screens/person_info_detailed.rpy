@@ -73,6 +73,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     vbox:
                                         text ("Yes" if the_person.on_birth_control else "No") style "menu_text_style"
                                         text "Known " + str(day - the_person.event_triggers_dict.get("birth_control_known_day", 0)) + " days ago" size 12 style "menu_text_style"
+                            use serum_tolerance_indicator(the_person)
 
             hbox:
                 xsize 1750

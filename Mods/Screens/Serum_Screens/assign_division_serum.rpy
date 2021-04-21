@@ -159,7 +159,7 @@ init 2:
                                                         background "#222222"
                                                         hover_background "#333333"
                                                     hovered [
-                                                        Show("serum_tooltip", None, serum[0], 0.97, 0.12)
+                                                        Show("serum_tooltip", None, serum[0],given_align = (0.97,0.12), given_anchor = (1.0,0.0))
                                                     ]
                                                     unhovered [
                                                         Hide("serum_tooltip")

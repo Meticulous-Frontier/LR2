@@ -58,8 +58,8 @@ init 2:
                                             text_style "serum_text_style"
                                             xsize 560
 
-                                            action ToggleScreen("serum_tooltip", None, serum)
-                                            hovered Show("serum_tooltip", None, serum)
+                                            action ToggleScreen("serum_tooltip", None, serum, given_align = (0.9,0.08), given_anchor = (1.0,0.0))
+                                            hovered Show("serum_tooltip", None, serum, given_align = (0.9,0.08), given_anchor = (1.0,0.0))
                                         hbox:
                                             frame:
                                                 background "#000080"

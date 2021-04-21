@@ -6,7 +6,7 @@ init:
             guy_arousal = 3, guy_energy = 15,
             connections = [],
             intro = "intro_cowgirl_cunnilingus",
-            scenes = ["scene_cowgirl_cunnilingus_1","scene_cowgirl_cunnilingus_2"],
+            scenes = ["scene_cowgirl_cunnilingus_1","scene_cowgirl_cunnilingus_2", "scene_cowgirl_cunnilingus_3"],
             outro = "outro_cowgirl_cunnilingus",
             transition_default = "transition_default_cowgirl_cunnilingus",
             strip_description = "strip_cowgirl_cunnilingus", strip_ask_description = "strip_ask_cowgirl_cunnilingus",
@@ -27,7 +27,7 @@ init:
 label intro_cowgirl_cunnilingus(the_girl, the_location, the_object):
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_cunnilingus.redraw_scene(the_girl) #Draw her sitting down.
-    the_person "I want you to kiss me for a little bit..."
+    the_girl "I want you to kiss me for a little bit..."
     "She slowly climbs up your body until her cunt is inches from your face."
     "You lean forward and run your tongue along her slit. She moans softly as soon as you make contact."
     the_girl "Oh [the_girl.mc_title]..."
@@ -37,9 +37,9 @@ label taboo_break_cowgirl_cunnilingus(the_girl, the_location, the_object):  #bec
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_cunnilingus.redraw_scene(the_girl)
     mc.name "What are you doing?"
-    the_person "I know we've never done this but... I want you to kiss me."
+    the_girl "I know we've never done this but... I want you to kiss me."
     mc.name "That hardly seems like a big deal..."
-    the_person "Not on my lips..."
+    the_girl "Not on my lips..."
     "She slowly climbs up your body until her cunt is inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
     "You bring one hand up to her pussy and spread it open to reveal the tender pink inside."
@@ -74,10 +74,40 @@ label scene_cowgirl_cunnilingus_2(the_girl, the_location, the_object):
     "She runs her fingers through your hair and sighs, reclining on the [the_object.name]."
     return
 
+label scene_cowgirl_cunnilingus_3(the_girl, the_location, the_object):
+    the_girl "Just keep licking...licking...licking..."
+    if the_girl.arousal > 70:
+        "[the_girl.possessive_title]'s juices are flowing freely from her slit. You lap them up before circling your tongue around her clit a few times."
+    elif the_girl.arousal > 50:
+        "[the_girl.possessive_title]'s pussy is wet. You lick it carefully."
+    else:
+        "[the_girl.possessive_title]'s pussy is still getting wet. You lick it slowly, giving her time to warm up."
+
+    if the_girl.get_sex_goal() == "hate fuck" or the_goal == "waste cum":
+        "[the_girl.title] shifts her legs slightly, making sure that your arms are pinned down by her shins."
+        if mc.arousal >= 10:
+            "She looks behind her and sees your erect cock."
+            the_girl "This isn't for your benefit, [the_girl.mc_title]."
+            "She reaches behind her and starts to manhandle your balls, pulling and flicking them. Your erection soon subsides."
+            $ mc.arousal = 0
+            the_girl "That's better. Now focus!"
+            "She gently slaps one of your cheeks."
+    else:
+        if mc.recently_orgasmed:
+            "[the_girl.title] looks back at your softened cock. She reaches back and gives it a couple strokes."
+            the_girl "Mmm, sex is more fun when you're turned on..."
+            $ mc.arousal += 5
+        else:
+            "[the_girl.title] looks back at your cock. She reaches back and gives it a couple strokes."
+            the_girl "Mmm, I love how hard it is for me!"
+
+    return
+
 label outro_cowgirl_cunnilingus(the_girl, the_location, the_object): #With low arousal gain this is unlikely to come up much
     "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
     "You touch yourself, stroking your hard cock between your legs while you pleasure her."
     "Finally you've gone too far, pushing yourself to climax."
+    $ ClimaxController.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
     "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto your stomach behind [the_girl.title]."
     the_girl "Oh my god... That's so hot!"
     return
@@ -86,7 +116,7 @@ label outro_cowgirl_cunnilingus(the_girl, the_location, the_object): #With low a
 label transition_default_cowgirl_cunnilingus(the_girl, the_location, the_object):
     "[the_girl.title] motions to the [the_object.name]. When you sit down she pushes you onto your back."
     $ cowgirl_cunnilingus.redraw_scene(the_girl) #Draw her sitting down.
-    the_person "I want you to kiss me for a little bit..."
+    the_girl "I want you to kiss me for a little bit..."
     "She slowly climbs up your body until her cunt is inches from your face."
     "You lean forward and run your tongue along her slit. She moans softly as soon as you make contact."
     the_girl "Oh [the_girl.mc_title]!"
@@ -115,7 +145,6 @@ label strip_ask_cowgirl_cunnilingus(the_girl, the_clothing, the_location, the_ob
     return
 
 label orgasm_cowgirl_cunnilingus(the_girl, the_location, the_object):
-
     "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of you."
     "You speed up your efforts, doing your best to drive her towards her orgasm. She moans and begins to writhe under your skilled tongue."
     if the_girl.get_sex_goal() == "get off":
@@ -134,8 +163,10 @@ label GIC_outro_cowgirl_cunnilingus(the_girl, the_location, the_object, the_goal
         "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
         "You touch yourself, stroking your hard cock between your legs while you pleasure her."
         "Finally you've gone too far, pushing yourself to climax."
+        $ ClimaxController.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
         "You pull your head back and grunt, jerking your cock and blasting out a load of cum onto your stomach behind [the_girl.title]."
-        the_person "Wow. Just from licking me? What a pathetic waste of cum."
+        the_girl "Wow. Just from licking me? What a pathetic waste of cum."
         "It makes a mess, but you finish cumming."
     else:
         $ cowgirl_cunnilingus.call_default_outro(the_girl, the_location, the_object)
+    return

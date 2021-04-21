@@ -41,7 +41,7 @@ init 2 python:
                     #renpy.say("Pregnant", "Candidate: " + a_candidate.name + " " + a_candidate.last_name + " is pregnant.")
 
         if debug_log_enabled:
-            add_to_log("Candidates (" + str(count) + "): " + str(__builtin__.round(time.time() - start_time, 8)))
+            add_to_debug_log("Candidates (" + str(count) + "): {total_time:.3f}", start_time)
         return candidates
 
 
@@ -80,6 +80,7 @@ label interview_action_description_enhanced:
 
                 candidates.clear() #Prevent it from using up extra memory
                 person = None
+                renpy.free_memory() # extra memory cleanup after interview screen
 
             call advance_time from _call_advance_time_interview_action_enhanced
         "Never mind":

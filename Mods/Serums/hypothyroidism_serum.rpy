@@ -1,7 +1,7 @@
 # Hypothyroidism Serum by Tristimdorion
 
 init -1 python:
-    def hypothyroidism_serum_on_turn(person, add_to_log):
+    def hypothyroidism_serum_on_turn(person, the_serum, add_to_log):
         return person.change_weight(amount = 0.5, chance = 50)
 
     def add_hypothyroidism_serum():
@@ -15,7 +15,8 @@ init -1 python:
             on_turn = hypothyroidism_serum_on_turn,
             requires = basic_med_app,
             tier = 2,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 1500)
 
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_hypothyroidism_serum_trait(stack):

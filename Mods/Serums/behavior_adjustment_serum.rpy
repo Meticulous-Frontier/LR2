@@ -14,7 +14,7 @@ init -1 python:
             return 4
         return 5
 
-    def behavior_adjustment_on_turn(the_person, add_to_log, fire_event = True):
+    def behavior_adjustment_on_turn(the_person, the_serum, add_to_log):
         if get_obedience_tier(the_person) < 5:
             suggestion_bonus = (get_suggest_tier(the_person) - get_obedience_tier(the_person)) * 10
             if renpy.random.randint(0, 100) < 20 + suggestion_bonus - (the_person.get_opinion_score("taking control") * 5):
@@ -32,6 +32,7 @@ init -1 python:
                 tier = 1,
                 start_researched =  False,
                 research_needed = 500,
+                clarity_cost = 500
             )
 
 # any label that starts with serum_mod is added to the serum mod list

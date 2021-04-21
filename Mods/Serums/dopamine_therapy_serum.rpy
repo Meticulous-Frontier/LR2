@@ -1,7 +1,7 @@
 # Dopamine Therapy Serum by Starbuck
 
 init -1 python:
-    def dopamine_therapy_on_turn(the_person, add_to_log, fire_event = True):
+    def dopamine_therapy_on_turn(the_person, the_serum, add_to_log):
         if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.happiness - 100)) * 5:
             the_person.change_happiness(1, add_to_log)
 
@@ -17,6 +17,7 @@ init -1 python:
                 tier = 1,
                 start_researched =  False,
                 research_needed = 500,
+                clarity_cost = 500
             )
 
 # any label that starts with serum_mod is added to the serum mod list

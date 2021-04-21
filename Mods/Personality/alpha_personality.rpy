@@ -411,6 +411,7 @@ label alpha_seduction_refuse(the_person):
 
 label alpha_flirt_response_low(the_person):
     if the_person.outfit == the_person.planned_uniform:
+        $ mc.change_locked_clarity(5)
         if the_person.judge_outfit(the_person.outfit):
             # She's in uniform and likes how it looks.
             the_person "Thank you [the_person.mc_title]. I think these are nice uniforms as well."
@@ -455,6 +456,7 @@ label alpha_flirt_response_low(the_person):
         "[the_person.possessive_title] seems caught off guard by the compliment."
         the_person "Oh, thank you! I'm not wearing anything special, it's just one of my normal outfits."
         mc.name "Well, you make it look good."
+        $ mc.change_locked_clarity(5)
         "She smiles and laughs proud of herself."
         the_person "Men will be always men."
     return
@@ -464,6 +466,7 @@ label alpha_flirt_response_mid(the_person):
         if the_person.judge_outfit(the_person.outfit):
             if the_person.outfit.tits_visible():
                 the_person "What it shows off most are my breasts. I'm not complaining though, between you and me, I kind of like it."
+                $ mc.change_locked_clarity(10)
                 "She winks and shakes her shoulders, jiggling her tits for you."
             else:
                 the_person "With my body and your fashion taste, how could I look bad? This uniforms is very flattering."
@@ -472,6 +475,7 @@ label alpha_flirt_response_mid(the_person):
                     $ the_person.draw_person(position = "back_peek")
                     the_person "It makes my butt look pretty good too. I don't think that was an accident."
                     "She gives her ass a little shake."
+                    $ mc.change_locked_clarity(10)
                     mc.name "It would be a crime not to try and show your nice buttocks off."
                     $ the_person.draw_person()
                 "She smiles wickedly."
@@ -490,6 +494,7 @@ label alpha_flirt_response_mid(the_person):
 
             the_person "The workplace isn't my best choice to show so much skin, someone else would have much bigger problem than me."
             mc.name "It may take some time to adjust, but with enough time you'll feel perfectly comfortable in it."
+            $ mc.change_locked_clarity(10)
             "She smiles and nods."
             the_person "I already feel perfectly comfortable in it, I just don't know if everybody else here would feel the same way!"
     else:
@@ -497,6 +502,7 @@ label alpha_flirt_response_mid(the_person):
             "[the_person.possessive_title] smiles, then glances around."
             the_person "Keep your voice down [the_person.mc_title], there are other people around."
             mc.name "I'm sure they're all thinking the same thing."
+            $ mc.change_locked_clarity(10)
             "She rolls her eyes and laughs softly."
             the_person "Maybe they are, but it's still embarrassing."
             the_person "You'll have better luck if you save your flattery for when we're alone."
@@ -512,6 +518,7 @@ label alpha_flirt_response_mid(the_person):
                 the_person "My panties were always leaving unpleasant lines, so I had to stop wearing them."
             else:
                 the_person "Well?"
+            $ mc.change_locked_clarity(5)
             mc.name "You look just as fantastic from the back as you do from the front."
             $ the_person.draw_person()
             "She turns back and smiles, proud of herself."
@@ -521,6 +528,7 @@ label alpha_flirt_response_high(the_person):
     if mc.location.get_person_count() > 1 and the_person.effective_sluttiness() < (25 - (5*the_person.get_opinion_score("public_sex"))): # There are other people here, if she's not slutty she asks if you want to find somewhere quiet
         the_person "[the_person.mc_title], there are people around."
         "She bites her lip and leans close to you, whispering in your ear."
+        $ mc.change_locked_clarity(15)
         the_person "But if we were alone, I might show you a little more, if you behave."
         menu:
             "Find someplace quiet":
@@ -550,6 +558,7 @@ label alpha_flirt_response_high(the_person):
             "[the_person.title] blushes and responds."
             the_person "I don't know what you mean [the_person.mc_title]."
             mc.name "It's just the two of us, you don't need to hide your feelings... I feel the same way."
+            $ mc.change_locked_clarity(15)
             "She nods and takes a deep breath..."
             the_person "Okay, you might be right. What are your intentions now?"
 
@@ -562,6 +571,7 @@ label alpha_flirt_response_high(the_person):
             else: #No big tits, so she can't bounce them
                 "[the_person.possessive_title] bites her lip sensually and looks you up and down, as if she's mentally undressing you."
 
+            $ mc.change_locked_clarity(15)
             the_person "Well, have you made up your mind, [the_person.mc_title]?"
 
         menu:
@@ -609,6 +619,7 @@ label alpha_flirt_response_girlfriend(the_person):
 
                 "Just flirt":
                     mc.name "Aw, you're going to make me wait? That's so cruel."
+                    $ mc.change_locked_clarity(10)
                     "You reach around and place a hand on [the_person.possessive_title]'s ass, rubbing it gently."
                     "She sighs and bites her lip, then clears her throat and glances around to see if anyone else noticed."
                     the_person "I'm sure we can find a way for you to satisfy me, but let's take it easy while other people are around."
@@ -632,6 +643,7 @@ label alpha_flirt_response_girlfriend(the_person):
                     if the_person.effective_sluttiness("sucking_cock") >= 60 or the_person.get_opinion_score("giving blowjobs") > 0:
                         "She bites her lip and runs her eyes up and down your body."
                         the_person "Mmmm, stop it [the_person.mc_title]. You're going to get me all wet in public."
+                        $ mc.change_locked_clarity(10)
                         "You reach around and place your hand on her ass, rubbing it gently."
                         mc.name "Well we don't want that. I'll keep my thoughts to myself then."
                         "You give her butt one last squeeze, then slide your hand away."
@@ -655,6 +667,7 @@ label alpha_flirt_response_girlfriend(the_person):
                 "You reach around [the_person.title] and place a hand on her ass, rubbing it gently. She sighs and leans her body against you."
                 the_person "Mmm, that's nice, when we have some more time together you can show me what else you can do."
                 mc.name "That sounds like fun. I'm looking forward to it."
+                $ mc.change_locked_clarity(10)
                 "You give her butt a light slap, then move your hand away."
     return
 
@@ -678,6 +691,7 @@ label alpha_flirt_response_affair(the_person):
 
                 "Just flirt":
                     mc.name "Well that would just be cruel of me..."
+                    $ mc.change_locked_clarity(10)
                     "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
                     mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and squeezes you cock. You give her butt a final slap and let go of her."
@@ -705,6 +719,7 @@ label alpha_flirt_response_affair(the_person):
 
             "Just flirt":
                 mc.name "I want to, but I'm going to have to wait until we have more time together for that."
+                $ mc.change_locked_clarity(10)
                 "Her hand moves lower, until she reaches you crotch, giving your cock as squeeze, sending a brief shiver up your spine."
                 the_person "I understand. When we have the chance you can take your time and give me some pleasure."
     return
@@ -762,6 +777,77 @@ label alpha_flirt_response_text(the_person):
             the_person "Mhmm, tell me about the ways you want to please me?"
         else:
             the_person "We can chat for a while, what would you like to talk about?"
+    return
+
+label alpha_condom_demand(the_person):
+    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+        the_person "Put some rubber on that that bad boy up, so we can get going."
+        if the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            if the_person.on_birth_control:
+                the_person "Although I have an IUD, My [so_title] doesn't need any surprises and unwanted consequences."
+                $ the_person.update_birth_control_knowledge()
+            else:
+                the_person "And I don't want to tell my [so_title] that I'm pregnant."
+        else:
+            the_person "I don't want you to knock me up, this is just for fun!"
+    else:
+        the_person "You have a condom with you, if not, I have one for you."
+        the_person "After you put it on, you can slip that monster right in."
+    return
+
+label alpha_condom_ask(the_person):
+    if the_person.on_birth_control:
+        the_person "I have an IUD, so we don't need a condom."
+        $ the_person.update_birth_control_knowledge()
+    elif the_person.get_opinion_score("creampies") > 0:
+        if the_person.wants_creampie():
+            the_person "You don't need a condom, so you can keep fucking me as you cum..."
+        else:
+            the_person "You don't need a condom, so you can cover me with that cum..."
+        $ the_person.discover_opinion("creampies")
+    else:
+        the_person "You could wear a condom, but I prefer if you..."
+        the_person "just do it without and be careful."
+    return
+
+label alpha_condom_bareback_ask(the_person):
+    if the_person.get_opinion_score("creampies") > 0:
+        if the_person.on_birth_control:
+            the_person "Don't bother with a condom [the_person.mc_title]. I have long term protection."
+            if the_person.wants_creampie():
+                the_person "You can cum right inside of me, as often as I need."
+            else:
+                the_person "And I want you to cover me with your cum."
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "Don't bother with a condom [the_person.mc_title], we don't need it."
+            if the_person.wants_creampie():
+                the_person "I want you to fuck me unprotected and cum inside me, like nature intended."
+            else:
+                the_person "I want you to fuck me hard and cover me with that cum."
+        $ the_person.discover_opinion("creampies")
+    else:
+        the_person "You don't need to bother with a condom [the_person.mc_title]."
+        the_person "It feels so much better without one. Come on, get going."
+    return
+
+label alpha_condom_bareback_demand(the_person):
+    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
+        if the_person.on_birth_control:
+            the_person "You don't need that, get that cock over here."
+            the_person "Come on [the_person.mc_title], I want you to cum inside me!"
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "You don't need to do that, I want to feel you and your cum inside me."
+            the_person "I don't care if you get me pregnant [the_person.mc_title], just get over here and fuck me already!"
+    else:
+        if the_person.on_birth_control:
+            the_person "You don't need that [the_person.mc_title], I am protected."
+            the_person "So hurry up and fuck me!"
+            $ the_person.update_birth_control_knowledge()
+        else:
+            the_person "Don't waste my time with that. I don't care about the risks, I just want you to fuck me!"
     return
 
 label alpha_cum_face(the_person):
@@ -877,7 +963,7 @@ label alpha_sex_strip(the_person):
             the_person "I need to get this off, I want to feel your body against mine!"
     return
 
-label alpha_suprised_exclaim(the_person):
+label alpha_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Oh my!","Oh, that's not good!", "Darn!", "Oh!", "My word!", "How about that!", "Shock and horror!", "I'll be jiggered!"])
     the_person "[rando]"
     return
@@ -988,6 +1074,7 @@ label alpha_work_enter_greeting(the_person):
     return
 
 label alpha_date_seduction(the_person):
+    $ mc.change_locked_clarity(30)
     if the_person.relationship == "Single":
         if the_person.sluttiness > the_person.love:
             if the_person.sluttiness > 40:

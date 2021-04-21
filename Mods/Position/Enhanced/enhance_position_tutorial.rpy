@@ -54,6 +54,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 the_girl "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
                 $ the_girl.cum_in_vagina()
                 $ doggy.redraw_scene(the_girl)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "After you finish, you leave your cock deep inside her. A few drops of your cum start to drip out of her."
                 "[the_girl.title] reaches between her legs and feels it, realizing you just finished inside of her."
                 if the_girl.has_role(prostitute_role):
@@ -105,6 +106,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ doggy.redraw_scene(the_girl)
                 if the_girl.on_birth_control or the_girl.knows_pregnant():
                     the_girl "Oh wow, there's so much of it..."
@@ -122,6 +124,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 "You pull out of [the_girl.title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
             $ the_girl.cum_on_ass()
             $ doggy.redraw_scene(the_girl)
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
             if the_girl.sluttiness > 120:
                 the_girl "What a waste, you should have put that inside of me."
                 "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."

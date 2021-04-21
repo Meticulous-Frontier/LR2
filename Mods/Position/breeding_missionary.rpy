@@ -68,17 +68,18 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
         "Play with her tits":
             if not the_girl.tits_available():
                 "You decide you want some quality time with her tits."
-                mc.name "Lean forward, I need to get this off you."
+                mc.name "Let's get these off you."
                 if the_girl.obedience > 120:
                     the_person "Yes sir."
                 else:
                     the_person "Mmm, you wanna play with my tits? Okay."
-                "She leans forward and you quickly strip her top off."
-                $ the_person.strip_outfit(top_layer_first = True, exclude_lower = True, position = breeding_missionary.position_tag)
+                if the_person.outfit.can_half_off_to_tits():
+                    $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True, position = breeding_missionary.position_tag)
+                else:
+                    $ generalised_strip_description(the_person, the_person.outfit.get_tit_strip_list(), position = breeding_missionary.position_tag)
             "You lean down and start to kiss at [the_girl.possessive_title]'s tits. She arches her back, presenting them to your lips."
-            if the_girl.get_opinion_score("kissing") > 0:
-                $ the_girl.discover_opinion("kissing")
-                $ the_girl.change_arousal(the_girl.get_opinion_score("kissing"))
+            $ the_girl.discover_opinion("kissing")
+            $ the_girl.change_arousal(the_girl.get_opinion_score("kissing"))
             the_girl "[the_girl.mc_title]... Oh [the_girl.mc_title], that feels so good."
             "She moans and runs her hands through your hair as you suckle her tits."
             mc.name "Mmm, I can't wait until I knock you up and your milk comes in. I'm going to suck them dry every chance I get!"
@@ -157,6 +158,7 @@ label outro_breeding_missionary(the_girl, the_location, the_object):
     "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
     $ the_girl.call_dialogue("cum_vagina")
     $ the_girl.cum_in_vagina()
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     $ breeding_missionary.redraw_scene(the_girl)
     "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
     "She lifts her legs up a bit, tilting her vagina so that your cum will naturally slide deeper inside. She sighs happily."

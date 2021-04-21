@@ -102,6 +102,7 @@ label late_for_work_action_label:
                     $ the_person.break_taboo("touching_penis")
                 else:
                     "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                $ mc.change_locked_clarity(10)
 
                 if the_person.has_taboo(["sucking_cock"]):
                     mc.name "Ok, now get to work, I have a busy day today."
@@ -112,7 +113,6 @@ label late_for_work_action_label:
                     if the_person.get_opinion_score("giving blowjobs") > 0:
                         the_person "Mmm, can't believe I get to suck my two favorite cocks in the same morning..."
                     "Her mouth opens and envelopes your cock. She begins to suck you off eagerly."
-
                 call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_late_for_work_BJ_1
                 $ the_report = _return
                 if the_report.get("girl orgasms",0) > 0:
@@ -169,6 +169,7 @@ label late_for_work_action_label:
                     $ the_person.break_taboo("touching_penis")
                 else:
                     "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                $ mc.change_locked_clarity(10)
 
                 if the_person.has_taboo(["sucking_cock"]):
                     mc.name "Ok, now get to work, I have a busy day today."
@@ -269,6 +270,7 @@ label late_for_work_action_label:
                     $ the_person.break_taboo("touching_penis")
                 else:
                     "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                $ mc.change_locked_clarity(10)
 
                 if the_person.has_taboo(["sucking_cock"]):
                     mc.name "Ok, now get to work, I have a busy day today."

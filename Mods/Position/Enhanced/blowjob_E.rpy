@@ -228,6 +228,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
         $ skull_fuck.current_modifier = None
         $ skull_fuck.redraw_scene(the_girl)
         "[the_girl.title] struggles to drink it all down, but doesn't try and pull off."
+        $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
         $ the_girl.cum_in_mouth()
         $ skull_fuck.redraw_scene(the_girl)
         "When the last moments of your climax have passed you pull back, cock trailing spit and cum as you leave her mouth."
@@ -245,12 +246,14 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
         if the_girl.sex_skills["Oral"] > 3:
             "She tightens and relaxes her throat, as if to draw out every last drop of semen from you."
         "She gently licks your balls with her tongue."
+        $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
         $ the_girl.cum_in_mouth()
         $ deepthroat.redraw_scene(the_girl)
         "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
         $ the_girl.call_dialogue("cum_mouth")
     elif the_girl.effective_sluttiness() > 60 or the_girl.get_opinion_score("giving blowjobs") > -1 or the_girl.sex_skills["Oral"] > 1:
         "[the_girl.possessive_title] closes her eyes and holds still as you climax. You feel her throat spasm a few times as she struggles to keep your cock in place."
+        $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
         $ the_girl.cum_in_mouth()
         $ deepthroat.redraw_scene(the_girl)
         "When you're finished she pulls off quickly, gasping for air. It takes a few seconds for her to regain her composure."
@@ -260,6 +263,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
         menu:
             "Let her pull back":
                 "With no other choice, you stroke yourself off onto her face as she coughs and gasps for breath."
+                $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                 $ the_girl.cum_on_face()
                 $ deepthroat.redraw_scene(the_girl)
                 $ the_girl.call_dialogue("cum_face")
@@ -270,6 +274,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
                 "For a brief second she manages to keep up with the torrent of cum, then it overwhelms her."
                 "She spasms and gags. A mix of her spit and your semen bubble around the base of your cock, collecting in drops that roll down her chin and onto her tits."
                 "She gags and coughs again, this time blowing little cum bubbles out of her nose as her body struggles to find somewhere to put more and more of your sperm."
+                $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
                 $ the_girl.cum_in_mouth()
                 $ skull_fuck.redraw_scene(the_girl)
                 "Finally you're spent and you finally let [the_girl.title] pull off of your cock."
@@ -292,6 +297,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                 if the_girl.has_cum_fetish():
                     "[the_girl.title] takes a hold of your cock with one hand and starts to pump it."
                     "She sticks out her tongue for you and holds still, eager to take your hot load."
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                     $ the_girl.cum_on_face()
                     $ blowjob.redraw_scene(the_girl)
                     "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She shivers herself as your cum splashes over her."
@@ -300,28 +306,32 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                     "[the_girl.title] moves her head so that your cum will miss her face."
                     if the_girl.get_opinion_score("being covered in cum") > 0):
                         "[the_girl.possessive_title] moves your cock to point at her chest."
+                        $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
+                        $ the_girl.cum_on_tits()
+                        $ blowjob.redraw_scene(the_girl)
+                        $ the_girl.change_stats(love = the_girl.get_opinion_score("being covered in cum"), happiness = the_girl.get_opinion_score("being covered in cum"))
                         if the_girl.outfit.tits_available():
                             "You let out a shuddering moan as you cum, pumping your sperm over [the_girl.possessive_title]'s bare tits. She shivers herself as your cum splashes over her."
                         else:
                             "You let out a shuddering moan as you cum, pumping your sperm over [the_girl.possessive_title]'s chest. She smiles as your cum splashes over her."
-                        $ the_girl.cum_on_tits()
-                        $ blowjob.redraw_scene(the_girl)
-                        $ the_girl.change_stats(love = the_girl.get_opinion_score("being covered in cum"), happiness = the_girl.get_opinion_score("being covered in cum"))
                     else:
                         "You cum onto the floor, missing [the_girl.possessive_title] completely."
                         $ the_girl.change_stats(love = -the_girl.get_opinion_score("cum facials"), happiness = -the_girl.get_opinion_score("cum facials"))
                 elif (the_girl.effective_sluttiness() > 80 or the_girl.get_opinion_score("cum facials") > 0):
                     "[the_girl.title] sticks out her tongue for you, holds still and looks you in the eye, eager to take your hot load."
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                     $ the_girl.cum_on_face()
                     $ blowjob.redraw_scene(the_girl)
                     "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished as she maintains eye contact."
                 elif the_girl.effective_sluttiness() > 60:
                     "[the_girl.title] closes her eyes and waits patiently for you to cum."
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                     $ the_girl.cum_on_face()
                     $ blowjob.redraw_scene(the_girl)
                     "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
                 else:
                     "[the_girl.title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                     $ the_girl.cum_on_face()
                     $ blowjob.redraw_scene(the_girl)
                     "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
@@ -333,14 +343,15 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                         "She closes her eyes and starts to gently massage your cum all over her face."
 
            "Hold her in place":
-               "You grab her head with both your hands and thrust roughly into her mouth as you cum."
-               $ the_girl.cum_in_mouth()
-               $ blowjob.redraw_scene(the_girl)
-               $ the_girl.call_dialogue("cum_mouth")
-               if the_girl.get_opinion_score("being submissive") > 0:
-                   $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
-               else:
-                   $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive"), love = the_girl.get_opinion_score("drinking cum"), happiness = the_girl.get_opinion_score("drinking cum"))
+                "You grab her head with both your hands and thrust roughly into her mouth as you cum."
+                $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
+                $ the_girl.cum_in_mouth()
+                $ blowjob.redraw_scene(the_girl)
+                $ the_girl.call_dialogue("cum_mouth")
+                if the_girl.get_opinion_score("being submissive") > 0:
+                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
+                else:
+                    $ the_girl.change_stats(arousal = the_girl.get_opinion_score("being submissive"), love = the_girl.get_opinion_score("drinking cum"), happiness = the_girl.get_opinion_score("drinking cum"))
     else:
         if the_girl.has_cum_fetish():
             if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
@@ -348,6 +359,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                 "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
                 "You grunt and twitch as you start to empty your balls right into her throat."
                 "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
+                $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
                 $ the_girl.cum_in_mouth()
                 $ blowjob.redraw_scene(the_girl)
                 "When you're completely finished she pulls back slightly so that she can breathe more easily."
@@ -356,21 +368,24 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                 "She keeps blowing you until you tense up and start to pump your load out into her mouth."
                 "[the_girl.possessive_title] pulls her head back until just the tip of your cock is in her mouth and she begins to stroke you."
                 "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
-                "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
+                $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
                 $ the_girl.cum_in_mouth()
                 $ blowjob.redraw_scene(the_girl)
                 $ the_girl.change_arousal(10)
                 $ the_girl.call_dialogue("cum_mouth")
+                "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
         elif the_girl.effective_sluttiness() > 70 or the_girl.get_opinion_score("giving blowjobs") > 0:
             "[the_girl.possessive_title] doesn't even flinch as you shoot your hot cum across the back of her throat."
-            "She keeps bobbing her head up and down until you've let out every last drop, then slides back carefully. She looks up at you and opens her mouth to shows it full of sperm."
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             $ the_girl.cum_in_mouth()
             $ blowjob.redraw_scene(the_girl)
+            "She keeps bobbing her head up and down until you've let out every last drop, then slides back carefully. She looks up at you and opens her mouth to shows it full of sperm."
         else:
             "[the_girl.possessive_title] stops when you shoot your first blast of hot cum across the back of her throat."
-            "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off, looks up at you and opens her mouth to shows it full of sperm."
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             $ the_girl.cum_in_mouth()
             $ blowjob.redraw_scene(the_girl)
+            "She pulls back, leaving just the tip of your cock in her mouth as you fill it up with semen. Once you've finished she slides off, looks up at you and opens her mouth to shows it full of sperm."
 
 
         if not the_girl.has_cum_fetish():
@@ -395,20 +410,24 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
     return
 
 
-label blowjob_enhanced_kneel_face_cum (the_girl):
+label blowjob_enhanced_kneel_face_cum(the_girl):
     if the_girl.has_cum_fetish():
         if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
             "You go to step back but [the_girl.possessive_title]'s grabs your butt-cheeks with her hands, holding you in place and pushing her face forward."
             "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
             "You grunt and twitch as you start to empty your balls right into her throat."
             "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
+            $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
             $ the_girl.cum_in_mouth()
+            $ blowjob.redraw_scene(the_girl)
             "When you're completely finished she pulls back slightly so that she can breathe more easily."
         else:
             "You go to step back but [the_girl.possessive_title]'s grabs you by the cock with her hand."
             "[the_girl.possessive_title] lets you pull back until just the tip of your cock is in her mouth and she begins to stroke you."
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             $ the_girl.cum_in_mouth()
+            $ blowjob.redraw_scene(the_girl)
             "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
         $ the_girl.change_arousal(10)
         $ the_girl.call_dialogue("cum_mouth")
@@ -421,6 +440,7 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
         if the_girl.has_cum_fetish():
             "[the_girl.title] takes a hold of your cock with one hand and starts to pump it."
             "She sticks out her tongue for you and holds still, eager to take your hot load."
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She shivers herself as your cum splashes over her."
@@ -430,25 +450,30 @@ label blowjob_enhanced_kneel_face_cum (the_girl):
             "[the_girl.title] moves her head to the side so that your cum will miss her."
             menu:
                 "Let her off":
+                    $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
                     "You cum onto the floor, missing [the_girl.possessive_title]."
                     $ the_girl.change_stats(love = -the_girl.get_opinion_score("cum facials"), happiness = -the_girl.get_opinion_score("cum facials"))
                 "Pull her back":
-                    "You grab your cock with one hand and her head with the other. You hold her head in place as you use your other hand to pump your cum over [the_girl.possessive_title]'s face."
+                    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                     $ the_girl.cum_on_face()
                     $ the_girl.draw_person(position = "kneeling1")
                     $ the_girl.change_stats(love = the_girl.get_opinion_score("cum facials"), happiness = the_girl.get_opinion_score("cum facials"))
+                    "You grab your cock with one hand and her head with the other. You hold her head in place as you use your other hand to pump your cum over [the_girl.possessive_title]'s face."
         elif (the_girl.effective_sluttiness() > 80 or the_girl.get_opinion_score("cum facials") > 0):
             "[the_girl.title] sticks out her tongue for you, holds still and looks you in the eye, eager to take your hot load."
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished as she maintains eye contact."
         elif the_girl.effective_sluttiness() > 60:
             "[the_girl.title] closes her eyes and waits patiently for you to cum."
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
         else:
             "[the_girl.title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."

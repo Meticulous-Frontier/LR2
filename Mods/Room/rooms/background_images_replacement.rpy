@@ -26,8 +26,11 @@ init 5 python:
     dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))
     home_image = Image(get_file_handle("home_marker.png"))
+    padlock_image = Image(get_file_handle("padlock.png"))
 
     under_construction_image = Image(get_file_handle("under_construction.png"))
+
+    empty_image = Image(get_file_handle("empty_holder.png"))
 
 
 init -1 python:
@@ -81,6 +84,7 @@ label updated_room_background(stack):
     image question_mark = "[question_image.filename]"
     image dna_sequence = "[dna_image.filename]"
     image home_marker = "[home_image.filename]"
+    image padlock = "[padlock_image.filename]"
 
     python:
         # as long as the base game has no nice images, we use these to make navigating a little more fun

@@ -23,7 +23,7 @@ init -1:
                 return "{color=#ff6347}" + str(variable) +"{/color}"
 
 init 2:
-    screen serum_production_select_ui:
+    screen serum_production_select_ui():
         add "Science_Menu_Background.png"
         default line_selected = None
 
@@ -101,11 +101,11 @@ init 2:
 
                                                     action [
                                                     ToggleScreenVariable("line_selected", count, None),
-                                                    ToggleScreen("serum_tooltip", None, the_serum, 0.94, 0.072)
+                                                    ToggleScreen("serum_tooltip", None, the_serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                     ]
 
                                                     # hovered [
-                                                    # Show("serum_tooltip", None, the_serum, 0.94, 0.072)
+                                                    # Show("serum_tooltip", None, the_serum,given_align = (0.97,0.12), given_anchor = (1.0,0.0))
                                                     # ]
 
                                             else:
@@ -292,7 +292,7 @@ init 2:
                                                 SetScreenVariable("line_selected",None)
                                                 ]
                                                 hovered [
-                                                Show("serum_tooltip",None,a_serum,0.94,0.072)
+                                                Show("serum_tooltip",None,a_serum,given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                 ]
                                                 style "textbutton_style"
                                                 text_style "serum_text_style"

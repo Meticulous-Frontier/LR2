@@ -1202,7 +1202,7 @@ init -1 python:
         character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
         global last_load_time
-        last_load_time = __builtin__.round(time.time() - load_time, 8)
+        last_load_time = time.time() - load_time
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1258,13 +1258,13 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, flatten = True) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
                 self.outfit.remove_clothing(cloth) #Remove the clothing
-        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, flatten = True)
 
         self.hide_person()
         renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier )
@@ -1273,7 +1273,7 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
+    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = [], flatten = False): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
@@ -1299,7 +1299,9 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        return Flatten(Composite(*composite_list))
+        if flatten:
+            return Flatten(Composite(*composite_list))
+        return Composite(*composite_list)
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
@@ -1307,6 +1309,7 @@ init -1 python:
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
+        return
 
     Person.hide_person = hide_person_enhanced
 
@@ -1465,6 +1468,11 @@ init -1 python:
 
     Person.wear_work_outfit = wear_work_outfit
 
+    def person_is_wearing_uniform(self):
+        return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
+
+    Person.is_wearing_uniform = person_is_wearing_uniform
+
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         self.outfit.remove_all_cum()
         if self.should_wear_uniform():
@@ -1536,11 +1544,14 @@ init -1 python:
 
     def set_uniform_enhanced(self,uniform, wear_now = False):
         if uniform is not None:
-            if creative_colored_uniform_policy.is_active():
-                builder = WardrobeBuilder(self)
+            builder = WardrobeBuilder(self)
+            if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+                self.planned_uniform = builder.apply_bottom_preference(uniform.get_copy())
+            elif creative_colored_uniform_policy.is_active():
                 self.planned_uniform = builder.personalize_outfit(uniform.get_copy(),  max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
             else:
                 self.planned_uniform = uniform.get_copy()
+
             if wear_now:
                 self.wear_uniform()
 
@@ -1592,6 +1603,16 @@ init -1 python:
         message += " Willpower"
         mc.log_event(message, "float_text_blue")
         return
+
+    def reset_opinions(self):
+        self.opinions = {}
+
+    Person.reset_opinions = reset_opinions
+
+    def reset_sexy_opinions(self):
+        self.sexy_opinions = {}
+
+    Person.reset_sexy_opinions = reset_sexy_opinions
 
 #########################################
 # Add hash (unique id) to Person object #
@@ -1908,7 +1929,6 @@ init -1 python:
 
     Person.unlock_spanking = unlock_spanking
     Person.can_be_spanked = can_be_spanked
-
 
 ##########################################
 # Girl in Charge Functions               #

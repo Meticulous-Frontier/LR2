@@ -33,6 +33,14 @@ init 2:
                     action NullAction()
                     sensitive True
 
+                textbutton "Clarity: [mc.free_clarity] ([mc.locked_clarity] {image=padlock})": #TODO: Add a clarity token
+                    ysize 28
+                    style "transparent_style"
+                    text_style "menu_text_style"
+                    tooltip "Clarity is generated any time you are aroused, but must be released by climaxing before it can be spent. It can be used to unlock new serum traits for research or to create new serum designs."
+                    action NullAction()
+                    sensitive True
+
                 textbutton "World: [known]/[total]":
                     style "transparent_style"
                     text_style "menu_text_style"

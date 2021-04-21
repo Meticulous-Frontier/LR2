@@ -76,6 +76,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ scene_manager.update_actor(person_two, position = "stand5", emotion = "angry")
                     person_two "[person_one.title]! I'm sorry [person_two.mc_title], I know this isn't what we should be doing here."
                     mc.name "Why would I care? You're taking a break and relaxing the way you want to."
+                    $ mc.change_locked_clarity(5)
                     $ scene_manager.update_actor(person_two, position = "stand2", emotion = "default")
                     "The moans from the phone grow louder. You notice [person_one.possessive_title] has turned her attention back to the screen."
                     mc.name "[person_one.title] seems to have the right idea."
@@ -88,6 +89,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     mc.name "Once you're done your break I expect to see you both back at work."
                     $ person_two.change_slut_temp(3)
                     $ person_two.change_obedience(2)
+                    $ mc.change_locked_clarity(5)
                     "You leave the room, and a few seconds later you can hear them resume watching porn together."
 
 
@@ -112,11 +114,13 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ person_one.change_love(1)
                     $ person_two.change_slut_temp(1 + person_two.get_opinion_score("public sex"))
                     $ person_two.change_love(1)
+                    $ mc.change_locked_clarity(10)
                     "After a few minutes the video ends and you've discovered a few things about [person_one.title]'s sexual preferences."
                     $ scene_manager.update_actor(person_one, position = "stand3")
                     person_two "You're right [person_one.title], that was hot. Can you send that to me for later?"
                     $ scene_manager.update_actor(person_one, emotion = "happy")
                     person_one "Sure thing. We should be getting to work before [person_one.mc_title] gets too distracted though."
+                    $ mc.change_locked_clarity(5)
                     "Her eyes drift conspicuously down your body to the noticeable bulge in your pants."
                     $ scene_manager.update_actor(person_two, emotion = "sad")
                     person_two "Uh, right. Talk to you later [person_two.mc_title]."
@@ -145,6 +149,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ scene_manager.update_actor(person_one, emotion = "happy")
                     person_one "Oh come on, so are you. Wouldn't you like to be at home right now with a vibe pressed up against your clit?"
                     $ scene_manager.update_actor(person_two, emotion = "happy")
+                    $ mc.change_locked_clarity(10)
                     "[person_two.title] laughs and shrugs, then suddenly tenses up and starts to blush when she notices you at the door."
                     $ scene_manager.update_actor(person_two, emotion = "sad")
                     person_two "Uh, hello [person_two.mc_title]. I was just... Uhh..."
@@ -152,6 +157,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     person_one "Hey [person_one.mc_title], don't mind her, she's just horny and thinking about her vibrator at home."
                     $ scene_manager.update_actor(person_two, emotion = "angry")
                     person_two "Shut up, [person_two.mc_title] doesn't want to hear about this."
+                    $ mc.change_locked_clarity(10)
                     person_one "Sure he does, men love to hear about slutty, horny women. Right [person_one.mc_title]?"
                     person_two "I'm so sorry [person_two.mc_title], she doesn't know what she's saying."
                     mc.name "I think she does, because I agree, especially when they're as beautiful as you two."
@@ -163,6 +169,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ scene_manager.update_actor(person_two, position = "walking_away")
                     "They head for the door. [person_one.title] pauses and waits for [person_two.title] to pass her."
                     $ scene_manager.update_actor(person_one, position = "back_peek")
+                    $ mc.change_locked_clarity(10)
                     "She looks at you and winks, then gives her friend a hard slap on the ass."
                     person_one "After you!"
                     $ scene_manager.remove_actor(person_two)
@@ -180,12 +187,14 @@ label friends_help_friends_be_sluts_enhanced_label():
                         # The slutty girl wants smaller, perkier tits.
                         person_two "Look at them though, they're the perfect shape. Mine just don't have the same perk yours do."
                         person_one "But they're so nice and big, I'd kill to have them like that. I bet they're nice and soft, too."
+                        $ mc.change_locked_clarity(10)
                         person_two "Want to give them a feel? I... Oh, hey [person_one.mc_title]."
 
                     else:
                         # The slutty girl wants larger tits.
                         person_two "Look at those puppies, they're the perfect size. I'd kill for a pair of tits like yours."
                         person_one "They're big, but yours look perkier. I know lots of guys who are into that."
+                        $ mc.change_locked_clarity(10)
                         person_two "I still just want to grab yours by the handful and... Oh, hey [person_one.mc_title]."
                     "[person_one.possessive_title] notices you at the door."
                     $ scene_manager.update_actor(person_two, emotion = "sad")
@@ -194,6 +203,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     mc.name "Settle what?"
                     person_one "[person_two.title] won't admit she's got the better tits of the two of us. Talk some sense into her for me."
                     $ scene_manager.update_actor(person_two, emotion = "default")
+                    $ mc.change_locked_clarity(10)
                     person_two "Oh god, what are you getting us into."
                     menu:
                         "[person_one.title] has nicer tits": #She's already slutty, but gets a love boost
@@ -240,6 +250,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 if person_two.outfit.tits_visible():
                                     $ person_one.break_taboo("bare_tits")
                                     person_one "There, what do you think now [person_one.mc_title]?"
+                            $ mc.change_locked_clarity(10)
 
                             if not person_two.outfit.tits_visible():
                                 $ scene_manager.update_actor(person_two, emotion = "angry")
@@ -309,6 +320,8 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 $ person_two.break_taboo("bare_tits")
                                 $ scene_manager.update_actor(person_one, position = "stand2", emotion = "default")
                                 person_two "Hey, go easy on them! Well then [person_two.mc_title], who's your pick? Me or [person_one.title]?"
+
+                            $ mc.change_locked_clarity(10)
                             menu:
                                 "[person_one.title] has nicer tits": #She's already slutty, but gets a love boost
                                     "You take a moment to consider both of their naked racks, then nod towards [person_one.title]."
@@ -383,6 +396,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                         else:
                             person_two "[person_one.title] really liked sucking your cock and wants to do it again, but was too scared to ask."
                         $ scene_manager.update_actor(person_two, emotion = "default")
+                        $ mc.change_locked_clarity(20)
                         if person_two.get_opinion_score("giving blowjobs") < 0:
                             $ person_two.discover_opinion("giving blowjobs")
                             person_two "I actually don't like giving blowjobs, but [person_one.title] says it's an important skill for a woman to have."
@@ -396,6 +410,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                         "[person_one.title] closes the door, then stands behind [person_two.title]."
                         mc.name "So, what can I help you two with?"
                         person_two "I was talking to [person_one.title] and we started talking about your cock..."
+                        $ mc.change_locked_clarity(20)
                         if person_two.sex_record.get("Blowjobs", 0) > 0:
                             person_two "It brought back some good memories, so I was hoping you'd let me suck you off."
                         else:

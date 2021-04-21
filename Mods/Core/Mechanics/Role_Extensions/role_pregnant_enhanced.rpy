@@ -1,5 +1,3 @@
-
-
 init 2 python:
     def validate_pregnancy_crisis_events():
         for crisis in (mc.business.mandatory_crises_list + mc.business.mandatory_morning_crises_list):
@@ -27,10 +25,11 @@ init 2 python:
         person.tits = get_larger_tits(person.tits) #Her tits start to swell.
         person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
 
-        target_label = "pregnant_tits_announce" if person.is_mc_father() else "silent_pregnant_tits_announce"
+        if not person.title is None:    # don't announce pregnancy for unknown girls
+            target_label = "pregnant_tits_announce" if person.is_mc_father() else "silent_pregnant_tits_announce"
 
-        pregnant_tits_announce_action = Action("Announce Pregnant Tits", pregnant_tits_announcement_requirement, target_label, args = day)
-        person.on_talk_event_list.append(Limited_Time_Action(pregnant_tits_announce_action, 15))
+            pregnant_tits_announce_action = Action("Announce Pregnant Tits", pregnant_tits_announcement_requirement, target_label, args = day)
+            person.on_talk_event_list.append(Limited_Time_Action(pregnant_tits_announce_action, 15))
         return
 
     def silent_pregnant_transform_person(person):
@@ -44,10 +43,11 @@ init 2 python:
         person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
         person.lactation_sources += 1
 
-        target_label = "pregnant_transform_announce" if person.is_mc_father() else "silent_pregnant_transform_announce"
+        if not person.title is None:    # don't announce pregnancy for unknown girls
+            target_label = "pregnant_transform_announce" if person.is_mc_father() else "silent_pregnant_transform_announce"
 
-        preg_transform_announce_action = Action("Pregnancy Transform Announcement", preg_transform_announce_requirement, target_label, args = day)
-        person.on_room_enter_event_list.append(Limited_Time_Action(preg_transform_announce_action, 15))
+            preg_transform_announce_action = Action("Pregnancy Transform Announcement", preg_transform_announce_requirement, target_label, args = day)
+            person.on_room_enter_event_list.append(Limited_Time_Action(preg_transform_announce_action, 15))
 
         target_label = "pregnant_finish_announce" if person.is_mc_father() else "silent_pregnant_finish_announce"
 
@@ -154,6 +154,9 @@ label silent_pregnant_transform(the_person): #Changes the person to their pregna
     return
 
 label silent_pregnant_transform_announce(start_day, the_person):
+    if person.title is None:
+        return  # unknown girls should not inform you about their pregnancy
+
     $ the_person.draw_person()
     "[the_person.possessive_title] notices you and comes over to talk."
     the_person "Hey [the_person.mc_title]. So, it's probably pretty obvious at this point..."
@@ -168,6 +171,11 @@ label silent_pregnant_transform_announce(start_day, the_person):
     return
 
 label silent_pregnant_finish_announce(the_person): #TODO: have more variants for girlfriend_role, affair_role, etc.
+    $ silent_pregnant_finish_announce_person(the_person)
+
+    if person.title is None:
+        return  # unknown girls should not announce delivery
+
     # The girl tells you she'll need a few days to have the kid and recover, and she'll be back in a few days.
     "You get a call from [the_person.possessive_title]. You answer it."
     mc.name "Hey [the_person.title], what's up?"
@@ -186,11 +194,13 @@ label silent_pregnant_finish_announce(the_person): #TODO: have more variants for
     the_person "No, I just wanted to let you know. Thanks for everything!"
     mc.name "Okay, I'll talk to you soon then."
     the_person "I'll let you know as soon as things are finished. Bye!"
-    $ silent_pregnant_finish_announce_person(the_person)
     return
 
 label silent_pregnant_finish(the_person):
     $ pregnant_finish_person(the_person)
+
+    if person.title is None:
+        return  # unknown girls should not about the delivery
 
     "You get a call from [the_person.possessive_title] early in the morning. You answer it."
 

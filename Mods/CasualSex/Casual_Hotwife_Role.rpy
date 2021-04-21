@@ -581,7 +581,7 @@ label casual_hotwife_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, skip_condom = True) from _call_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
@@ -610,6 +610,8 @@ label casual_hotwife_dancing_sex_label(the_person):
         the_person "You'd better get going, [the_person.mc_title]. I'm going to send these to my husband..."
 
         $ the_person.event_triggers_dict["booty_call"] = True # unlock casual encounters
+        $ mc.phone.register_number(the_person)
+
         "You now have [the_person.title]'s phone number. She may call you from time to time to hookup!"
 
         $ clear_scene()
@@ -708,7 +710,7 @@ label casual_hotwife_her_place_label(the_person):
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
-    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, asked_for_condom = True) from _call_sex_description_CSH040
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_CSH040
     $ the_report = _return
 
     #Finishing dialogue based on sexual performance
@@ -1070,12 +1072,12 @@ label hotwife_flirt_response_low(the_person):
     #She's in her own outfit.
     the_person "Thanks! It's really cute, right? My husband helped me pick it out!"
     $ the_person.draw_person(position = "walking_away")
+    $ mc.change_locked_clarity(5)
     "She smiles and gives you a quick spin, showing off her outfit from every angle."
     $ the_person.draw_person()
     return
 
 label hotwife_flirt_response_mid(the_person):
-
     if the_person.effective_sluttiness() < 20 and mc.location.get_person_count() > 1:
         if the_person.outfit.tits_visible():
             the_person "Are you sure you don't mean my tits look good in this outfit?"
@@ -1085,6 +1087,7 @@ label hotwife_flirt_response_mid(the_person):
         else:
             the_person "Aw, thanks! I thought this was a pretty hot look when I was getting dressed this morning."
 
+        $ mc.change_locked_clarity(10)
         the_person "Maybe hubby will let you come shopping with me one day, so you can tell me what else you want to see me in."
         mc.name "I think I would like that."
 
@@ -1093,6 +1096,7 @@ label hotwife_flirt_response_mid(the_person):
         the_person "You want a better look, right? Here, how does it make my ass look?"
         $ the_person.draw_person(position = "back_peek")
         the_person "Good?"
+        $ mc.change_locked_clarity(10)
         mc.name "Fantastic. I wish I could get an even better look at it."
         "[the_person.possessive_title] smiles and turns back to face you."
         $ the_person.draw_person()
@@ -1172,7 +1176,7 @@ label hotwife_hookup_accept(the_person):
     "It feels amazing, you can tell if you let her keep going you will cum quickly."
     #TODO write blowjob finish scene#
     mc.name "That feels great, but I don't want to finish in your mouth. Why don't you stand up and turn around..."
-    $ the_person.draw_person( position = "standing_doggy")
+    $ the_person.draw_person(position = "standing_doggy")
     if the_person.effective_sluttiness() > 40: #She asks if you want to use a condom
         the_person "Do you want to put on a condom first?"
         menu:
@@ -1232,6 +1236,7 @@ label hotwife_hookup_accept(the_person):
                     $ the_person.change_slut_temp(1)
                     $ the_person.change_happiness(2)
                     $ the_person.cum_in_vagina()
+                    $ the_person.draw_person( position = "standing_doggy") # redraw with cum
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                     "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
                     "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
@@ -1297,6 +1302,7 @@ label hotwife_hookup_accept(the_person):
                     "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
                     $ the_person.cum_in_ass()
+                    $ the_person.draw_person(position = "standing_doggy") # redraw for cum
                     "You stand there for a minute, holding her hips in the air, you dick buried in her bowel as it softens. Eventually she speaks up."
                     the_person "Wow... okay... I think I can stand now..."
                     "You slowly let her down. Her legs buckle for a second, but she catches herself."
@@ -1318,6 +1324,7 @@ label hotwife_hookup_accept(the_person):
         $ the_person.change_happiness(5)
         $ the_person.change_slut_temp(1)
         $ the_person.cum_in_vagina()
+        $ the_person.draw_person(position = "standing_doggy") # redraw for cum
         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
         "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
@@ -1341,6 +1348,7 @@ label hotwife_hookup_accept(the_person):
                 $ the_person.change_happiness(5)
                 $ the_person.change_slut_temp(1)
                 $ the_person.cum_in_vagina()
+                $ the_person.draw_person(position = "standing_doggy") # redraw for cum
                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
                 "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
@@ -1396,7 +1404,7 @@ label hotwife_cum_mouth(the_person):
             the_person "Bleh, I don't know if I'll ever get used to that."
     return
 
-#label hotwife_suprised_exclaim(the_person):
+#label hotwife_surprised_exclaim(the_person):
 #    $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
 #    the_person "[rando]"
 #    return

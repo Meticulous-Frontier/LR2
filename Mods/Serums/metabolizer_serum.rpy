@@ -1,7 +1,7 @@
 # Metabolizer Serum Trait by Tristimdorion
 
 init -1 python:
-    def anorexia_serum_on_turn(person, add_to_log):
+    def anorexia_serum_on_turn(person, the_serum, add_to_log):
         return person.change_weight(amount = -0.5, chance = 50)
 
     def add_anorexia_serum():
@@ -15,7 +15,8 @@ init -1 python:
             on_turn = anorexia_serum_on_turn,
             requires = basic_med_app,
             tier = 2,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 2000)
 
 
 # any label that starts with serum_mod is added to the serum mod list

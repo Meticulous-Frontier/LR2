@@ -408,6 +408,7 @@ label genius_flirt_response_low(the_person):
             mc.name "I did."
             the_person "Amazing! I think you have a good eye for fashion."
             mc.name "It's easy when I have such good models for it all."
+            $ mc.change_locked_clarity(5)
             "[the_person.possessive_title] smiles and laughs self-consciously."
         else:
             #She's in uniform, but she thinks it's a little too slutty.
@@ -416,6 +417,7 @@ label genius_flirt_response_low(the_person):
                 the_person "Thanks, but I really wish this uniform covered, well, anything."
                 the_person "I know it's company policy, but it's a little... breezy."
                 mc.name "It would be a shame to cover up such a beautiful body though."
+                $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] blushes and looks away."
 
             elif the_person.outfit.tits_visible():
@@ -427,23 +429,27 @@ label genius_flirt_response_low(the_person):
                     the_person "Thanks, but I really wish my uniform included an actual top."
                     the_person "When the AC is running my nipples could probably cut glass!"
                 mc.name "It might be a little uncomfortable, but you look incredible in it."
+                $ mc.change_locked_clarity(5)
                 the_person "I better, I certainly wouldn't be wearing this if it wasn't required!"
 
             elif the_person.outfit.underwear_visible():
                 # Her underwear is visible.
                 the_person "Thanks, I just wish this uniform kept me a little more covered. It feels like I'm barely wearing anything."
                 mc.name "I know it's a little unconventional, but you look fantastic in it. It's a perfect fit for you."
+                $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] smiles and blushes."
                 the_person "That's good. I guess it's company policy for a reason."
             else:
                 # It's just generally slutty.
                 the_person "Thanks. It's not the kind of thing I would normally wear, but I guess it's company policy for a reason."
                 mc.name "Well you wear it like a natural. I can't think of anyone it would look better on."
+                $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] smiles and blushes."
 
     else:
         #She's in her own outfit.
         the_person "Thank you, I thought it looked cute too."
+        $ mc.change_locked_clarity(5)
         "[the_person.possessive_title] turns to give you a side on look of her and smiles at you."
     return
 
@@ -459,6 +465,7 @@ label genius_flirt_response_mid(the_person):
                 the_person "Not that I mind..."
                 "She gives you a full spin, letting you look at her from every angle."
                 $ the_person.draw_person()
+            $ mc.change_locked_clarity(10)
             mc.name "I might have picked it out, but you're the one making it look so good."
             "[the_person.possessive_title] smiles, blushing a little from the compliment."
             the_person "Maybe sometime we could go shopping again and I could help you pick something new out for the uniforms..."
@@ -475,6 +482,7 @@ label genius_flirt_response_mid(the_person):
                 the_person "No offence, but this uniform feels a little inappropriate."
             mc.name "I understand, but it's important for the business."
             the_person "You and I both know that's bullshit, but I'll go along with it for now."
+            $ mc.change_locked_clarity(10)
             "[the_person.possessive_title] gives you an uncomfortable smile."
 
     else:
@@ -483,6 +491,7 @@ label genius_flirt_response_mid(the_person):
             the_person "[the_person.mc_title], you're so bad! What if someone heard you?"
             mc.name "They'd probably agree. You're a sexy looking lady."
             "[the_person.possessive_title] blushes."
+            $ mc.change_locked_clarity(10)
             the_person "Well I'm glad you like it. And I'm glad you like me."
 
         else:
@@ -492,6 +501,7 @@ label genius_flirt_response_mid(the_person):
             $ the_person.draw_person(position = "back_peek")
             the_person "Do you think my ass looks good in it?"
             "She wiggles her hips for you, just a little."
+            $ mc.change_locked_clarity(10)
             mc.name "I think it looks great, I wish I could see some more of it."
             $ the_person.draw_person()
             the_person "I'm sure you do. Maybe if you take me to dinner first."
@@ -536,6 +546,7 @@ label genius_flirt_response_high(the_person):
             the_person "[the_person.mc_title], it's just us here."
             mc.name "So you're saying my chances are good?"
             $ the_person.draw_person(position = "kissing")
+            $ mc.change_locked_clarity(15)
             "She takes a step closer to you and puts her arms around your waist, bringing her face close to yours."
             the_person "They could certainly be worse. Let's just... see where things go."
 
@@ -547,6 +558,7 @@ label genius_flirt_response_high(the_person):
                 the_person "Interested in getting a closer look at these girls?"
             else:
                 "[the_person.possessive_title] smiles mischievously and wiggles her hips."
+            $ mc.change_locked_clarity(15)
             the_person "Maybe we can... fool around a little? Does that sound fun?"
             $ the_person.draw_person()
 
@@ -613,6 +625,7 @@ label genius_flirt_response_girlfriend(the_person):
                     mc.name "So, is there anything else you want to kiss? I've got some suggestions..."
                     if the_person.effective_sluttiness("sucking_cock") >= 60 or the_person.get_opinion_score("giving blowjobs") > 0:
                         the_person "Uh huh? I think I know what you're thinking about."
+                        $ mc.change_locked_clarity(10)
                         "She reaches down and cups your crotch, rubbing it gently while looking into your eyes."
                         the_person "I think I could make that happen, if we have some time alone."
                         mc.name "Next time we're alone I'll hold you to that promise."
@@ -623,6 +636,7 @@ label genius_flirt_response_girlfriend(the_person):
                         "She blushes and shakes her head bashfully."
                         the_person "Oh my god, you're so predictable! Well..."
                         "She leans close and whispers into your ear."
+                        $ mc.change_locked_clarity(10)
                         the_person "Maybe if you can get us alone I can take a few requests..."
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
@@ -645,6 +659,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "You place your hands around her and hold her close. You run one hand down her back and rest it on her ass, massaging it gently."
                 the_person "Mmm... Can we just stay like this for a moment?"
                 mc.name "Of course."
+                $ mc.change_locked_clarity(10)
                 "You hold [the_person.possessive_title] for a few minutes in silence."
                 $ the_person.draw_person()
                 "She finally breaks the hug steps back."
@@ -674,6 +689,7 @@ label genius_flirt_response_affair(the_person):
 
                 "Just flirt":
                     mc.name "You're that easy, huh? I drop one complement and you're ready to get on your knees."
+                    $ mc.change_locked_clarity(10)
                     "She laughs quietly and shrugs."
                     the_person "I'm only this easy for you [the_person.mc_title]. You've turned me into such a little slut."
                     mc.name "Well you're going to have to wait a little while until I have the time to give you the attention you deserve."
@@ -684,6 +700,7 @@ label genius_flirt_response_affair(the_person):
             "She glances around nervously. She gives a relieved sigh when it's clear nobody else is close enough to overhear you."
             the_person "Sorry, I just don't want my [so_title] to hear any rumours about us. I don't know what I'd do if he found out."
             mc.name "Relax, I wouldn't do anything that would get you in trouble."
+            $ mc.change_locked_clarity(10)
             "She laughs and shakes her head."
             the_person "Obviously that's not true. Just being together might get me in trouble. It's still worth it though..."
             "[the_person.title] runs her hand along your arm, feeling your muscles through your shirt."
@@ -705,6 +722,7 @@ label genius_flirt_response_affair(the_person):
 
             "Just flirt":
                 mc.name "You're always exciting, but I think I'll be able to hold out for a little while longer."
+                $ mc.change_locked_clarity(10)
                 "You put your arm around her waist and grab her ass, massaging it as you talk."
                 mc.name "But you should know, the next time I get you alone I'm going to pay you back for all this teasing."
                 the_person "Yeah? Well now you've got me excited!"
@@ -872,7 +890,7 @@ label genius_cum_anal(the_person):
         the_person "Oh god, ah!"
     return
 
-label genius_suprised_exclaim(the_person):
+label genius_surprised_exclaim(the_person):
     $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
     the_person "[rando]"
     return

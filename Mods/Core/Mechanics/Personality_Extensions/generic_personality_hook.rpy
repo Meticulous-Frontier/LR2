@@ -7,7 +7,7 @@ init 10 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_generic_personality")
     add_label_hijack("after_load", "update_generic_personality")
 
-init -1 python:
+init 0 python:
     # This will be called in game when a person is created original function in script.rpy
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
@@ -78,10 +78,12 @@ init -1 python:
 
         # apply forced opinions after we 'update opinions', so we don't override them there
         if forced_opinions and isinstance(forced_opinions, list):
+            return_character.reset_opinions()
             for opinion in forced_opinions:
                 return_character.opinions[opinion[0]] = [opinion[1], opinion[2]]
 
         if forced_sexy_opinions and isinstance(forced_sexy_opinions, list):
+            return_character.reset_sexy_opinions()
             for opinion in forced_sexy_opinions:
                 return_character.sexy_opinions[opinion[0]] = [opinion[1], opinion[2]]
 
@@ -111,23 +113,20 @@ init -1 python:
         ensure_opinion_on_sexual_preference(person, "Anal", ["anal sex", "anal creampies", "doggy style sex"])
 
         # fix opinion contradictions (one cannot exclude other)
-        fix_opinion_contradiction(person, "drinking cum", "giving blowjobs")
-        fix_opinion_contradiction(person, "creampies", "bareback sex")
-        fix_opinion_contradiction(person, "anal creampies", "bareback sex")
-        fix_opinion_contradiction(person, "skimpy outfits", "showing her tits")
-        fix_opinion_contradiction(person, "skimpy outfits", "showing her ass")
-        fix_opinion_contradiction(person, "skimpy outfits", "high heels")
-        fix_opinion_contradiction(person, "masturbating", "being fingered")
+        fix_opinion_contradiction(person, "drinking cum", ["giving blowjobs"])
+        fix_opinion_contradiction(person, "bareback sex", ["creampies", "anal creampies"])
+        fix_opinion_contradiction(person, "skimpy outfits", ["showing her tits", "showing her ass", "high heels"])
+        fix_opinion_contradiction(person, "masturbating", ["being fingered"])
 
         # fix opinion exclusion (one excludes other)
-        fix_opinion_exclusion(person, "lingerie", "not wearing underwear")
-        fix_opinion_exclusion(person, "skimpy outfits", "not wearing anything")
-        fix_opinion_exclusion(person, "being submissive", "taking control")
-        fix_opinion_exclusion(person, "the colour red", "the colour pink") # red and pink clash
-        fix_opinion_exclusion(person, "the colour red", "the colour purple") # red and purple clash
-        fix_opinion_exclusion(person, "the colour pink", "the colour purple") # pink and purple clash
-        fix_opinion_exclusion(person, "the colour blue", "the colour purple") # pink and purple clash
-        fix_opinion_exclusion(person, "the colour orange", "the colour yellow") # orange and yellow clash
+        fix_opinion_exclusion(person, "lingerie", ["not wearing underwear", "not wearing anything"])
+        fix_opinion_exclusion(person, "skimpy outfits", ["not wearing anything", "conservative outfits"])
+        fix_opinion_exclusion(person, "being submissive", ["taking control"])
+        fix_opinion_exclusion(person, "the colour red", ["the colour pink", "the colour purple"]) # red and pink/purple clash
+        fix_opinion_exclusion(person, "the colour pink", ["the colour purple", "the colour red"]) # pink and purple/red clash
+        fix_opinion_exclusion(person, "the colour purple", ["the colour pink", "the colour red", "the colour blue"]) # purple and pink/red/blue clash
+        fix_opinion_exclusion(person, "the colour blue", ["the colour purple"]) # pink and purple clash
+        fix_opinion_exclusion(person, "the colour orange", ["the colour yellow"]) # orange and yellow clash
 
         # set work opinions (based on stats / skills)
         set_work_opinion(person, "research work", person.int, person.research_skill)
@@ -152,19 +151,21 @@ init -1 python:
         return
 
     # when she doesn't like base_topic, she should not like / love related topic (invert likeness of related topic)
-    def fix_opinion_contradiction(person, base_topic, related_topic):
-        # first skew related to positive base
-        if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) < 0:
-            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
-        if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) > 0:
-            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+    def fix_opinion_contradiction(person, base_topic, related_topics):
+        for related_topic in related_topics:
+            # first skew related to positive base
+            if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) < 0:
+                person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+            if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) > 0:
+                person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         return
 
-    def fix_opinion_exclusion(person, base_topic, related_topic):
-        if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) > 0:
-            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
-        if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) < 0:
-            person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+    def fix_opinion_exclusion(person, base_topic, related_topics):
+        for related_topic in related_topics:
+            if person.get_opinion_score(base_topic) > 0 and person.get_opinion_score(related_topic) > 0:
+                person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
+            if person.get_opinion_score(base_topic) < 0 and person.get_opinion_score(related_topic) < 0:
+                person.update_opinion_with_score(related_topic, -person.get_opinion_score(related_topic), add_to_log = False)
         return
 
     def ensure_opinion_on_subject(person, opinions):
@@ -491,6 +492,11 @@ init -1 python:
             for action in main_character_actions_list:
                 if action not in mc.main_character_actions:
                     mc.main_character_actions.append(action)
+
+            # cleanup (remove next version)
+            found = next((x for x in mc.main_character_actions if x.effect == "mc_ask_take_serum_label"), None)
+            if found:
+                mc.main_character_actions.remove(found)
         return
 
     def update_stephanie_opinions():

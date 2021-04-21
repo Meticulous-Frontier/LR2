@@ -22,3 +22,13 @@ init -1 python:
         return self.location in [hall, bedroom, kitchen, lily_bedroom, mom_bedroom, dungeon]
 
     MainCharacter.is_home = is_home
+
+    def change_locked_clarity_extended(org_func):
+        def change_locked_clarity_wrapper(main_character, amount, add_to_log = True):
+            # run original function (with modified amount)
+            org_func(main_character, amount * get_clarity_multiplier(), add_to_log)
+            return
+
+        return change_locked_clarity_wrapper
+
+    MainCharacter.change_locked_clarity = change_locked_clarity_extended(MainCharacter.change_locked_clarity)

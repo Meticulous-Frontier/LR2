@@ -375,9 +375,11 @@ label starbuck_being_watched(the_person, the_watcher, the_position):
 
 
 label starbuck_flirt_response_low(the_person):
-
     the_person "Thank you! I thought it looked cute too. Hopefully it helps me sell more product!"
-    "[the_person.possessive_title] turns to give you a side on look of her and smiles at you."
+    $ the_person.draw_person(position = "walking_away")
+    $ mc.change_locked_clarity(5)
+    "[the_person.possessive_title] turns to give you a good look of her and smiles at you."
+    $ the_person.draw_person()
     return
 
 label starbuck_flirt_response_mid(the_person):
@@ -385,6 +387,7 @@ label starbuck_flirt_response_mid(the_person):
         "[the_person.possessive_title] smiles, then glances around nervously."
         the_person "[the_person.mc_title], you're so bad! Hopefully none of my customers heard that..."
         mc.name "They'd probably agree. You're a sexy lady."
+        $ mc.change_locked_clarity(10)
         "[the_person.possessive_title] blushes."
         the_person "Well I'm glad you like it. And I'm glad you like me."
 
@@ -394,6 +397,7 @@ label starbuck_flirt_response_mid(the_person):
         mc.name "Of course I do."
         $ the_person.draw_person(position = "back_peek")
         the_person "Do you think my ass looks good in it?"
+        $ mc.change_locked_clarity(10)
         "She wiggles her hips for you, just a little."
         mc.name "I think it looks great, I wish I could see some more of it."
         $ the_person.draw_person()
@@ -425,6 +429,7 @@ label starbuck_flirt_response_high(the_person):
 
             "Just flirt.":
                 mc.name "I'm a patient man, I can wait until you close up tonight."
+                $ mc.change_locked_clarity(15)
                 "[the_person.possessive_title] blushes and places her hand on your shoulder, massaging your muscles."
                 the_person "You sure? Don't be a tease, okay? I want to see you later!"
 
@@ -436,6 +441,7 @@ label starbuck_flirt_response_high(the_person):
             the_person "[the_person.mc_title], I... I mean, it's just us here."
             mc.name "So you're saying my chances are good?"
             $ the_person.draw_person(position = "kissing")
+            $ mc.change_locked_clarity(15)
             "She takes a step closer to you and puts her arms around your waist, bringing her face close to yours."
             the_person "They could certainly be worse. Let's just... see where things go."
 
@@ -451,7 +457,7 @@ label starbuck_flirt_response_high(the_person):
             the_person "Oh? Those better not be empty words!"
 
         menu:
-            "Kiss her.":
+            "Kiss her":
                 if the_person.has_taboo("kissing"):
                     $ the_person.call_dialogue("kissing_taboo_break")
                     $ the_person.break_taboo("kissing")
@@ -464,7 +470,7 @@ label starbuck_flirt_response_high(the_person):
                 $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
-            "Just flirt.":
+            "Just flirt":
                 mc.name "I wish we could, but I'll need to take a rain check."
                 $ the_person.draw_person()
                 "[the_person.title] pouts and steps back, disappointed."

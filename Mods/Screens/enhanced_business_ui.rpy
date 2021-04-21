@@ -11,7 +11,7 @@ init 2:
                 yanchor 1.0
                 yalign 1.0
                 spacing 5
-                text "[mc.business.name]" style "menu_text_style" size 18 xalign 0.2
+                text "[mc.business.name]" style "menu_text_style" size 22 xalign 0.2
                 textbutton "Employee Count: " + str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count):
                     style "transparent_style"
                     text_style "menu_text_style"
@@ -66,7 +66,7 @@ init 2:
                         sensitive True
 
                 else:
-                    textbutton "Current Research: None!":
+                    textbutton ("Current Research: None!" if not theoretical_research.is_active() else "Current Research: Theoretical Research"):
                         style "transparent_style"
                         text_style "menu_text_style"
                         text_color "#DD0000"

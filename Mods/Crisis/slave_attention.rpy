@@ -51,6 +51,7 @@ label slave_attention_crisis_action_label:
                 "[the_person.possessive_title] stands up and starts to strip down."
                 $ the_person.strip_outfit(position = "stand3", emotion = "happy")
 
+            $ mc.change_locked_clarity(20)
             "You decide to put her up against the pillory and..."
             $ the_person.draw_person(position = "against_wall", emotion = "happy")
 
@@ -99,7 +100,7 @@ label slave_attention_crisis_action_label:
                     if the_report.get("girl orgasms", 0) > 0:
                         the_person "Oh Master, you can put that thing inside me whenever you want, It made me cum so hard."
                     else:
-                        the_person "Please [the_person.mc_title], stick that thing back into me, I need to cum so badly."
+                        the_person "Please [the_person.mc_title], stick that thing into me, I need to cum so badly."
 
                     jump slave_attention_comfort_menu
                 "Dildo her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
@@ -120,6 +121,7 @@ label slave_attention_crisis_action_label:
             else:
                 "She quickly turns around, presenting you her naked bottom, waiting for your decision."
                 $ the_person.draw_person(position = "doggy")
+            $ mc.change_locked_clarity(10)
 
             menu:
                 "Punish her (keep)":

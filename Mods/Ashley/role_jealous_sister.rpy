@@ -169,6 +169,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     "Of course."
     $ the_person.draw_person(position = "back_peek")
     "[the_person.title] hops out of bed and heads to the shower. She stops at the door, then turns back and blows you a kiss."
+    $ mc.change_locked_clarity(20)
     $ clear_scene()
     "[the_person.possessive_title] disappears behind the door as she closes it behind her. You can hear the shower turn on and you start to drift off to sleep again."
     "..."
@@ -178,6 +179,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     "Her lower half is naked, and she straddles your hips with her cunt pressed against your rapidly hardening cock."
     "You start to say something, but ashley puts a finger on your lips."
     jealous_sister "Shhhh, if we're quiet, she'll never even know."
+    $ mc.change_locked_clarity(30)
     "She leans forward and replaces her finger with her lips. She kisses you hungrily, making her need for you known."
     "Without breaking the kiss, she reaches down between you and grabs your dick, pointing it up. A quick movement of her hips, and your manhood slips inside of her."
     call get_fucked(jealous_sister, the_goal = "get off", start_position = cowgirl, skip_intro = True) from _jealous_sister_special_wakeup_01
@@ -199,6 +201,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     jealous_sister "Bye [jealous_sister.mc_title], hope you had a good time..."
     "She gives you a wink."
     mc.name "I definitely did. Take care [jealous_sister.title]."
+    $ mc.change_locked_clarity(10)
     "You walk out the front door. Things in that place are crazy..."
     $ jealous_sister.reset_all_jealousy()
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day

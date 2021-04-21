@@ -14,7 +14,7 @@
 #     $ scene_manager = Scene()  #Clean Scene
 #     $ scene_manager.add_actor(the_person, position = "stand4", emotion = "happy", display_transform = character_center_flipped)
 #     the_person "Lots of fun dialogue"
-# 
+#
 #     #You go downtown
 #     $ mc.change_location(downtown)
 #     $ mc.location.show_background()
@@ -26,7 +26,7 @@
 #         "More dialogue branches but now I'm sad"
 #     if the_person.sluttiness > 40:
 #         if the_person.get_opinion_score("taking control"<= 0:
-#             call fuck_person(the_person, start_position = blowjob, skip_intro = False, position_locked = False, private = True, asked_for_condom = True) from _crisis_template_01
+#             call fuck_person(the_person, start_position = blowjob, skip_intro = False, position_locked = False, private = True, skip_condom = True) from _crisis_template_01
 #         else:
 #             call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _crisis_template_02
 #     "Yay her stats get updated."

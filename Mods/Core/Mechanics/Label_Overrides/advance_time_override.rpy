@@ -11,7 +11,11 @@ init -1 python:
         return time_of_day == 0
 
     def advance_time_random_crisis_requirement():
-        return time_of_day != 0 and renpy.random.randint(0,100) < crisis_chance
+        if time_of_day == 0:    # slot 0 is for morning crisis events
+            return False
+        if day%7 == 0 and time_of_day == 1: #Monday HR Meeting, no random events
+            return False
+        return renpy.random.randint(0,100) < crisis_chance
 
     # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)
     def advance_time_mandatory_crisis_requirement():
@@ -24,7 +28,11 @@ init -1 python:
         return time_of_day == 0
 
     def advance_time_random_morning_crisis_requirement():
-        return time_of_day == 0 and renpy.random.randint(0,100) < morning_crisis_chance
+        if time_of_day != 0:
+            return False
+        if day%7 == 5:  # Mom weekly event no random crisis events
+            return False
+        return renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_people_run_day_requirement():
         return time_of_day == 4
@@ -46,8 +54,8 @@ init 5 python:
     global morning_crisis_base_chance
 
     # some crisis events have impact on game dynamic and should be allowed to trigger often
-    crisis_base_chance = 20
-    morning_crisis_base_chance = 10
+    crisis_base_chance = 30
+    morning_crisis_base_chance = 15
 
     crisis_chance = crisis_base_chance
     morning_crisis_chance = morning_crisis_base_chance
@@ -179,7 +187,7 @@ init 5 python:
         if "quest_director" in globals():
             quest_director.run_turn()
         if debug_log_enabled:
-            add_to_log("Run Turn: " + str(__builtin__.round(time.time() - start_time, 8)))
+            add_to_debug_log("Run Turn: {total_time:.3f}", start_time)
         return
 
     def advance_time_run_day(people):
@@ -192,7 +200,7 @@ init 5 python:
         if "quest_director" in globals():
             quest_director.run_day()
         if debug_log_enabled:
-            add_to_log("Run Day: " + str(__builtin__.round(time.time() - start_time, 8)))
+            add_to_debug_log("Run Day: {total_time:.3f}", start_time)
         return
 
     def advance_time_run_move(people):
@@ -204,7 +212,7 @@ init 5 python:
 
         mc.business.run_move()
         if debug_log_enabled:
-            add_to_log("Run Move: " + str(__builtin__.round(time.time() - start_time, 8)))
+            add_to_debug_log("Run Move: {total_time:.3f}", start_time)
         return
 
     def advance_time_assign_limited_time_events(people):
@@ -238,6 +246,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
+        okay_to_save = False
 
     while count < advance_time_max_actions:
         if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
@@ -250,6 +259,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
 
     python:
         # increase crisis chance (every time slot)
+        okay_to_save = True
         crisis_chance += 1
         mc.location.show_background()
         x = None
@@ -285,14 +295,17 @@ label advance_time_random_crisis_label():
     $ start_time = time.time()
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
+        $ okay_to_save = False
         if debug_log_enabled:
-            $ add_to_log("Random crisis: " + crisis.name + " (" + str(__builtin__.round(time.time() - start_time, 8)) + ")")
+            $ add_to_debug_log("Random crisis: " + crisis.name + " ({total_time:.3f})", start_time)
 
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
         $ crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
+
+        $ okay_to_save = True
         $ del crisis
     $ mc.location.show_background()
     show screen business_ui
@@ -303,6 +316,7 @@ label advance_time_mandatory_crisis_label():
     python:
         active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_crises_list)
         crisis_count = 0
+        okay_to_save = False
 
     while crisis_count < len(active_crisis_list):
         # remove from main list before we trigger
@@ -310,7 +324,7 @@ label advance_time_mandatory_crisis_label():
             $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
         if debug_log_enabled:
-            $ add_to_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
+            $ add_to_debug_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -319,6 +333,7 @@ label advance_time_mandatory_crisis_label():
             crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        okay_to_save = True
         mc.location.show_background()
         del active_crisis_list
         crisis = None
@@ -329,23 +344,25 @@ label advance_time_people_run_turn_label():
     python:
         mandatory_advance_time = False
         advance_time_run_turn(people_to_process)
+        if persistent.clear_memory_mode == 0: # otherwise at run day
+            renpy.free_memory()
     return
 
 label advance_time_people_run_day_label():
-    # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
-    #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
-    $ advance_time_run_day(people_to_process)
-    # we need to clear memory at least once a week (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-    # we clear the memory every day when not using high memory mode regardless of setting.
-    if persistent.use_free_memory:
-        $ renpy.free_memory()
-    # $ gc.collect()    don't force garbage collector, let internals handle this
-    #$ renpy.profile_memory(.5, 1024)
-    $ renpy.block_rollback()
+    python:
+        # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
+        #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
+        advance_time_run_day(people_to_process)
+        # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
+        if persistent.clear_memory_mode == 1:   #otherwise at end of run turn
+            renpy.free_memory()
+        # $ gc.collect()    don't force garbage collector, let internals handle this
+        #$ renpy.profile_memory(.5, 1024)
+        renpy.block_rollback()
 
-    # update party schedules once a week (sunday night)
-    if day%7 == 6:
-        $ update_party_schedules(people_to_process)
+        # update party schedules once a week (sunday night)
+        if day%7 == 6:
+            update_party_schedules(people_to_process)
     return
 
 label advance_time_end_of_day_label():
@@ -368,6 +385,7 @@ label advance_time_mandatory_morning_crisis_label():
     python:
         active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_morning_crises_list)
         crisis_count = 0
+        okay_to_save = False
 
     while crisis_count < len(active_crisis_list):
         # remove from main list before we trigger
@@ -375,7 +393,7 @@ label advance_time_mandatory_morning_crisis_label():
             $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
         if debug_log_enabled:
-            $ add_to_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
+            $ add_to_debug_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
         $ active_crisis_list[crisis_count].call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
@@ -384,6 +402,7 @@ label advance_time_mandatory_morning_crisis_label():
             crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
+        okay_to_save = True
         mc.location.show_background()
         del active_crisis_list
         crisis = None
@@ -394,13 +413,15 @@ label advance_time_random_morning_crisis_label():
     $ start_time = time.time()
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
+        $ okay_to_save = False
         if debug_log_enabled:
-            $ add_to_log("Random morning crisis: " + crisis.name + " (" + str(__builtin__.round(time.time() - start_time, 8)) + ")")
+            $ add_to_debug_log("Random morning crisis: " + crisis.name + " ({total_time:.3f})", start_time)
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
         $ crisis.call_action()
         if _return == "Advance Time":
             $ mandatory_advance_time = True
+        $ okay_to_save = True
         $ del crisis
     $ mc.location.show_background()
     return
@@ -416,7 +437,8 @@ label advance_time_next_label():
     return
 
 label advance_time_people_run_move_label():
-    # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
-    $ advance_time_run_move(people_to_process)
-    $ advance_time_assign_limited_time_events(people_to_process)
+    python:
+        # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
+        advance_time_run_move(people_to_process)
+        advance_time_assign_limited_time_events(people_to_process)
     return

@@ -1,6 +1,6 @@
 
 init -1 python:
-    def pigment_serum_on_apply(person, add_to_log):
+    def pigment_serum_on_apply(person, the_serum, add_to_log):
         skin_styles = [x[0] for x in list_of_skins]
         skin_styles.remove(person.skin)
         new_skin = get_random_from_list(skin_styles)
@@ -17,7 +17,8 @@ init -1 python:
             on_apply = pigment_serum_on_apply,
             requires = clinical_testing,
             tier = 3,
-            research_needed = 500)
+            research_needed = 500,
+            clarity_cost = 2500)
 
 
 label serum_mod_pigment_serum_trait(stack):

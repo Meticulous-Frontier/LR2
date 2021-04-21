@@ -324,7 +324,7 @@ init 5 python:
         return positions
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, asked_for_condom = False, prohibit_tags = []):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = []):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -334,9 +334,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
-    $ ask_for_condom = asked_for_condom
+    $ ask_for_condom = skip_condom
     $ ask_for_threesome = False
-    $ use_condom = mc.condom if asked_for_condom else False
+    $ use_condom = mc.condom if skip_condom else False
     $ stealth_orgasm = False
     $ stop_stripping = False
 
@@ -710,7 +710,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     mc.name "If it's that important to you let's just do something else."
                     return 0
 
-        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5 and the_person.sex_record.get("Anal Creampies", 0) < 5:
+        elif the_person.sex_record.get("Vaginal Creampies", 0) < 5:
             the_person "Normally we would have to use one of these."
             "She gets out a condom."
             if skill_tag == "Vaginal":
@@ -759,10 +759,8 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                 the_person "You can't get me {i}more{/i} pregnant, but I really don't like bare sex."
             else:
                 the_person "Although i'm pregnant, I would like you to wear a condom anyway."
-        elif the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
-            the_person "I hate to say it, but you really should wear a condom."
         else:
-            the_person "Do you have a condom? You're going to have to put one on."
+            $ the_person.call_dialogue("condom_demand")
 
         menu:
             "Put on a condom":
@@ -776,96 +774,63 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
         if the_person.get_opinion_score("bareback sex") < 0 :
             the_person "There we go, a nice big rubbery cock."
 
-    elif the_person.effective_sluttiness() < condom_threshold + 20:
+    elif the_person.get_opinion_score("bareback sex") < 0 or the_person.effective_sluttiness("condomless_sex") < condom_threshold + 20 or the_person.has_taboo("condomless_sex"):
         # They suggest you put on a condom.
         if the_person.knows_pregnant() and skill_tag == "Vaginal":
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person "You can't get me {i}more{/i} pregnant, but I don't like bare sex. I think that you should put on a condom."
             else:
                 the_person "There's not much point in a condom now that i'm pregnant."
-        elif the_person.get_opinion_score("creampies") > 0 and the_person.get_opinion_score("bareback sex") > 0: # likes everything a condom stops
-            $ the_person.discover_opinion("creampies")
-            $ the_person.discover_opinion("bareback sex")
-            the_person "We should use a condom, though I don't really see why."
-        elif the_person.get_opinion_score("creampies") < 0 and the_person.get_opinion_score("bareback sex") > 0: #no to pie yes to ride
-            the_person "We should use a condom, I don't want you to come inside me."
-        elif the_person.get_opinion_score("bareback sex") < 0:
-            the_person "We should use a condom, I think that that would be the best idea."
         else:
-            the_person "Do you think you should put a condom on? Maybe it's a good idea."
+             $ the_person.call_dialogue("condom_ask")
+
         menu:
-            "Agree to put on a condom":
-                mc.name "I think you're right."
+            "Put on a condom":
+                mc.name "I think you're right. One second."
                 call put_on_condom_routine(the_person) from _call_put_on_condom_routine_5
 
             "Fuck her raw":
                 mc.name "No way. I want to feel you wrapped around me."
                 call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_3
 
-    else:
-        if the_person.get_opinion_score("bareback sex") < 0 or the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0:
-            the_person "I think that we should use a condom."
-        menu:
-            "Put on a condom":
-                if the_person.is_dominant() and the_person.get_opinion_score("bareback sex") > 0: # likes it bare and is not a pushover
-                    "[the_person.title] takes a hold of your hand."
-                    the_person "You don't really need that, do you?"
+    else: #Slutty enough that she doesn't even care about a condom.
+        if the_person.is_dominant() and (the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0): # likes it bare and is not a pushover
+            menu:
+                "Put on a condom":
+                    mc.name "One sec, let me just get a condom on..."
+                    $ the_person.call_dialogue("condom_bareback_demand") #TODO: Write this. Girl demands you fuck her bareback, or she'll force you to do soemthing else. High Obedience will let you ignore her and wear one anyways.
                     menu:
-                        "Insist on condom":
-                            mc.name "I think a condom is a good idea."
-                            if the_person.is_dominant():
-                                the_person "OK. Let me put this another way."
-                                "[the_person.title] grabs the condom and throws it off to the side."
-                                if skill_tag == "Vaginal":
-                                    the_person "Either you fuck me raw or we don't fuck at all."
-                                else:
-                                    the_person "Either you fuck my ass raw or we don't fuck at all."
-                                menu:
-                                    "Fuck her raw":
-                                        mc.name "Fine."
-                                        call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_4
+                        "Fuck her raw":
+                            mc.name "Alright, as long as you know what you're getting into..."
+                            call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_4
 
-                                    "Don't":
-                                        mc.name "If it's that important to you let's just do something else."
-                                        return 0
-                            else:
-                                the_person "Fine, lets make this quick!"
+                        "Refuse and do something else":
+                            "[the_person.possessive_title] seems like she's made up her cock-hungry mind, and you doubt you would be able to change it."
+                            mc.name "We can't risk it [the_person.title]. We'll have to do something else."
+                            return 0
 
-                                call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
+                        "Put on a condom anyways\n{color=#ff0000}{size=18}Requires: 140 Obedience{/size}{/color} (disabled)" if the_person.obedience < 140:
+                            pass
 
-                        "Relent":
-                            mc.name "I suppose not."
-                            the_person "Thanks, [the_person.mc_title]."
+                        "Put on a condom anyways" if the_person.obedience >= 140:
+                            mc.name "I can't risk it [the_person.title], no matter how desperate you are for raw cock."
+                            "You pull out a condom from your wallet, tear open the package, and start to unroll it down your dick."
+                            mc.name "So you have a choice. You can have my cock inside you like this, or you can have no cock at all."
+                            "She whimpers like a sad puppy, but you know there's only once choice she would ever make."
+                            call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
 
-                elif the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
-                    if skill_tag == "Vaginal":
-                        if the_person.knows_pregnant():
-                            the_person "Remember that I'm pregnant, do we really need one of those now?"
-                        elif the_person.on_birth_control:
-                            the_person "I'm on the pill, do we really need one of those?"
-                        elif the_person.get_opinion_score("bareback sex") > 0:
-                            the_person "Really? I don't like using a condom."
-                        else:
-                            the_person "Really? I do love feeling your cum inside me."
-                    else:
-                        if the_person.get_opinion_score("bareback sex") > 0:
-                            the_person "Really? I do love it when you fuck my ass bare."
-                        else:
-                            the_person "Really? I do love feeling your cum inside me."
-                    menu:
-                        "Insist on condom":
-                            mc.name "I think a condom is a good idea."
-                            call put_on_condom_routine(the_person) from _call_put_on_condom_routine_7
+                "Fuck her raw":
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
 
-                        "Relent":
-                            mc.name "I suppose not."
-                            the_person "Thanks, [the_person.mc_title]."
+        else:
+            $ the_person.call_dialogue("condom_bareback_ask")
+            menu:
+                "Put on condom":
+                    mc.name "I think a condom is a good idea."
+                    call put_on_condom_routine(the_person) from _call_put_on_condom_routine_7
 
-                else:
-                    call put_on_condom_routine(the_person) from _call_put_on_condom_routine_6
-
-            "Fuck her raw":
-                call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
+                "Fuck her raw":
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_6
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
@@ -891,7 +856,7 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
     if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal":
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
-        if the_person.get_opinion_score("bareback sex") > 0:
+        if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
             the_person "I agree, nothing beats skin on skin."
         else:
             the_person "I'm not a big fan of bare sex, but if you like it that way."
@@ -934,26 +899,26 @@ label put_on_condom_routine(the_person):
 
 
 label watcher_check_enhanced(the_person, the_position, the_object, report_log): # Check to see if anyone is around to comment on the characters having sex.
-    $ watcher = cheating_check_get_watcher(the_person)
-    if watcher:
+    $ the_watcher = cheating_check_get_watcher(the_person)
+    if the_watcher:
         # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
         # threesome has no watcher loop, so all watching stops when threesome has started.
         # TODO: add watchers to threesome core
-        if not ask_for_threesome and willing_to_threesome(the_person, watcher):
-            $ watcher.draw_person()
-            watcher "Oh my good, that looks amazing..."
-            if can_join_threesome(watcher, the_person, the_position.position_tag):
-                watcher "Can I... can I join you? I want some too!"
+        if not ask_for_threesome and willing_to_threesome(the_person, the_watcher):
+            $ the_watcher.draw_person()
+            the_watcher "Oh my good, that looks amazing..."
+            if can_join_threesome(the_watcher, the_person, the_position.position_tag):
+                the_watcher "Can I... can I join you? I want some too!"
                 $ ask_for_threesome = True
                 menu:
                     "Let her join":
-                        watcher "Yes! Thank you [watcher.mc_title]!"
+                        the_watcher "Yes! Thank you [the_watcher.mc_title]!"
                         $ scene_manager = Scene()
                         $ scene_manager.add_actor(the_person, position = the_position.position_tag)
-                        $ scene_manager.add_actor(watcher, display_transform = character_center_flipped)
-                        watcher "Let me take off some clothes."
-                        $ scene_manager.strip_actor_outfit(watcher)
-                        call join_threesome(the_person, watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
+                        $ scene_manager.add_actor(the_watcher, display_transform = character_center_flipped)
+                        the_watcher "Let me take off some clothes."
+                        $ scene_manager.strip_actor_outfit(the_watcher)
+                        call join_threesome(the_person, the_watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
                         $ report_log = _return
                         $ finished = True
                         return
@@ -961,22 +926,22 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         the_person "Aww, okay. Maybe next time..."
                         $ the_person.change_obedience(3)
 
-        $ the_relationship = town_relationships.get_relationship(watcher, the_person)
+        $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
         if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
-            call relationship_sex_watch(watcher, town_relationships.get_relationship_type(watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
+            call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
-            call relationship_being_watched(the_person, watcher, town_relationships.get_relationship_type(the_person, watcher).lower(), the_position) from _call_relationship_being_watched
+            call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
         else:
             # NOTE: the dialogue here often draws the person talking with various emotions or positions, so we redraw the scene after we call them.
-            $ watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
+            $ the_watcher.call_dialogue("sex_watch", the_sex_person = the_person, the_position = the_position) #Get the watcher's reaction to the people having sex. This might include dialogue calls from other personalities as well!
             $ the_position.redraw_scene(the_person)
-            $ the_person.call_dialogue("being_watched", the_watcher = watcher, the_position = the_position) #Call her response to the person watching her.
+            $ the_person.call_dialogue("being_watched", the_watcher = the_watcher, the_position = the_position) #Call her response to the person watching her.
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
         $ the_relationship = None
-    $ del watcher
+    $ del the_watcher
     return
 
 label relationship_sex_watch(the_person, the_relation, the_position):

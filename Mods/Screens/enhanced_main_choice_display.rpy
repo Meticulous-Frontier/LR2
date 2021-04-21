@@ -16,8 +16,11 @@ init 2 python:
             self.display_image = None
             self.person_preview_args = person_preview_args
 
+        def __del__(self):
+            self.clear()
+
         def load(self):
-            if not self.display_func:
+            if not self.display_func or self.display_image:
                 return
 
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
@@ -25,9 +28,56 @@ init 2 python:
             renpy.start_predict(self.display_image)
             return
 
+        def show_person(self):
+            if not self.display_func:
+                return
+
+            load_time = time.time()
+            if not self.display_image:
+                self.load()
+
+            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer="solo", what= self.display_image, tag=self.display_key)
+
+            global last_load_time
+            last_load_time = time.time() - load_time
+            return
+
+        def hide_person(self):
+            if self.display_key:
+                renpy.hide(self.display_key, layer="solo")
+            return
+
+        def preload(self):
+            def load_image(file):
+                if file and not "empty_holder.png" in file.filename:
+                    file.load()
+                return
+
+            def actual_body_type(person, cloth):
+                if not cloth.body_dependant:
+                    body_type = "standard_body"
+                return person.body_type
+
+            def actual_tit_size(person, cloth):
+                if cloth.draws_breasts:
+                    return person.tits
+                return "AA"
+
+            if not self.display_func:
+                return
+
+            # pre-load clothing items
+            person = self.return_value
+            for cloth in person.outfit.generate_clothing_list(person.body_type, person.tits, person.idle_pose):
+                if isinstance(cloth, Facial_Accessory):
+                    load_image(cloth.position_sets[person.idle_pose].get_image(person.face_style, "default"))
+                else:
+                    load_image(cloth.position_sets[person.idle_pose].get_image(actual_body_type(person, cloth), actual_tit_size(person, cloth)))
+            return
+
         def clear(self):
             if self.display_image:
-                renpy.stop_predict(self.display_image)
+                 renpy.stop_predict(self.display_image)
             return
 
     def build_menu_items(elements_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
@@ -39,13 +89,6 @@ init 2 python:
                 else:
                     result.append(elements_list[count])
         return result
-
-    def clear_menu_items_list(menu_items):
-        start_time = time.time()
-        for count in __builtin__.range(__builtin__.len(menu_items)):
-            for item in [x for x in menu_items[count][1:] if x.display_key]:
-                item.clear()
-        return
 
     def build_menu_item_list(element_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
         def find_and_replace_tooltip_property(item, extra_args):
@@ -85,12 +128,12 @@ init 2 python:
                     person_preview_args = {}
 
                 mi.person_preview_args = person_preview_args
-                mi.display_key = item.name + item.last_name
+                mi.display_key = item.identifier
                 mi.display_scale = scale_person(item.height)
                 if draw_person_previews:
                     mi.display_func = item.build_person_displayable
-                # if not renpy.mobile: # don't load person on mobile
-                #    renpy.invoke_in_thread(mi.load)
+                if not renpy.mobile: # don't load person on mobile
+                    renpy.invoke_in_thread(mi.preload)
 
             if isinstance(item, Action):
                 mi.title = ""
@@ -128,20 +171,6 @@ init 2 python:
                     mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", item.title)
                 result.append(mi)
         return result
-
-    def show_menu_person(item):
-        if not item.display_func:
-            return
-
-        load_time = time.time()
-        if not item.display_image:
-            item.load()
-
-        clear_scene()
-        renpy.show(item.display_key, at_list=[character_right, item.display_scale], layer="solo", what= item.display_image, tag=item.display_key)
-        global last_load_time
-        last_load_time = __builtin__.round(time.time() - load_time, 8)
-        return
 
 init 2:
     screen enhanced_main_choice_display(menu_items): #Elements_list is a list of lists, with each internal list receiving an individual column
@@ -188,11 +217,11 @@ init 2:
                                             text_style "textbutton_text_style"
                                             text_align (0.5,0.5)
                                             if not renpy.mobile and item.display_key:
-                                                hovered [Function(show_menu_person, item)]
-                                                unhovered [Function(clear_scene)]
+                                                hovered [Function(item.show_person)]
+                                                unhovered [Function(item.hide_person)]
                                             action [
-                                                Return(item.return_value),
-                                                Function(clear_menu_items_list, menu_items)
+                                                Function(item.hide_person),
+                                                Return(item.return_value)
                                             ]
                                             tooltip item.the_tooltip
                                             sensitive item.is_sensitive

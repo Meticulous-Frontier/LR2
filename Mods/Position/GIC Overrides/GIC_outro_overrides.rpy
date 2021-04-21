@@ -1,5 +1,4 @@
 label GIC_outro_cowgirl(the_girl, the_location, the_object):
-
     $ the_goal = the_girl.get_sex_goal()
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
@@ -14,11 +13,13 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             if mc.condom:
                 "She keeps riding you. With one final stroke you start to cum into the condom."
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
             else:
                 "You stay silent. [the_girl.possessive_title] waits another second, as if waiting for a response, then pulls off of your cock."
                 "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
                 $ the_girl.cum_on_stomach()
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
             $ cowgirl.redraw_scene(the_girl)
             "She rolls off and lies next to you on the [the_object.name]."
         elif the_goal == "waste cum":
@@ -30,6 +31,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                 "At the last second she pulls off, you groan as your start to cum, spraying all over your stomach."
             the_person "Ha! Not a chance."
             "She watches as your cock twitches and finishes."
+            $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
             the_person "Look at all that wasted cum... Too bad, [the_person.mc_title]!"
             "She rolls off and lies next to you on the [the_object.name]."
         elif the_goal == "hate fuck":
@@ -38,12 +40,14 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                 if mc.condom:
                     the_person "Whatever, I'm sure the condom can handle your pathetic load."
                     "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
+                    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                     "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                     "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
                 else:
                     the_person "I don't feel like getting off. Go ahead and cum inside me [the_person.mc_title], I'm on birth control anyway."
                     "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
                     $ the_girl.cum_in_vagina()
+                    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                     $ cowgirl.redraw_scene(the_girl)
                     "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                     "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
@@ -53,6 +57,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     the_person "Whatever. I want to feel you cum insdie me. Not like your swimmers are strong enough to knock me up anyway."
                     "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
                     $ the_girl.cum_in_vagina()
+                    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                     $ cowgirl.redraw_scene(the_girl)
                     "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                     "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
@@ -61,6 +66,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     "She starts to speed up. You moan as you get ready to fire your load up inside her."
                     "At the last second she pulls off, you groan as your start to cum, spraying all over your stomach."
                     "She watches as your cock twitches and finishes."
+                    $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
                     the_person "Look at all that wasted cum... Too bad, [the_person.mc_title]!"
                     "She rolls off and lies next to you on the [the_object.name]."
         elif the_goal == "vaginal creampie":
@@ -70,6 +76,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             #the_girl "Oh my god... Give it all to me [the_girl.mc_title]... Fill me up..."
             if mc.condom:
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
                 if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
@@ -83,6 +90,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             else:
                 $ the_girl.call_dialogue("cum_vagina")
                 $ the_girl.cum_in_vagina()
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ cowgirl.redraw_scene(the_girl)
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                 "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
@@ -96,6 +104,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             the_person "That's it. I want it on my face!"
             "[the_girl.title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             $ the_person.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
             "[the_girl.title] looks up at you, face covered in your semen."
@@ -108,6 +117,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] pulls off you, reaches down and begins to stroke you."
             "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
             $ the_girl.cum_on_stomach()
+            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
             $ cowgirl.redraw_scene(the_girl)
             "She rolls off and lies next to you on the [the_object.name]."
         elif the_goal == "oral creampie":
@@ -119,6 +129,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             $ the_person.draw_person(position = "kneeling1")
             "She moans as your cum begins to spill into her mouth"
             $ the_girl.cum_in_mouth()
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             $ the_person.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm into [the_girl.possessive_title]'s eager mouth. She makes sure to wait until you're completely finished."
             "[the_girl.title] closes her mouth and swallows loudly."
