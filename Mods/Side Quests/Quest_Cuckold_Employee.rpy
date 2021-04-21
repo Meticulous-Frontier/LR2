@@ -334,11 +334,19 @@ label quest_cuckold_employee_decision_label():
     "You wrap your arms around [the_person.title]. She embraces you, and you start to kiss. You hands go down to her ass."
     $ the_person.change_arousal(5)
     the_person "Okay, so... the best way to do this that I've read anyway, is good old fashioned missionary."
-    mc.name "Get naked and lay down on my desk. I always wanted my own personal breeding stock."
+    mc.name "Get ready and lay down on my desk. I always wanted my own personal breeding stock."
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
-    $ the_person.strip_outfit()
+    "[the_person.possessive_title] gets on your desk and lays on her back."
+    $ the_person.draw_person(position = "missionary")
+    if the_person.outfit.vagina_available():
+        "She spreads her legs, her pussy on display in front of you."
+    else:
+        if the_person.outfit.can_half_off_to_vagina():
+            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
+        else:
+            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
     the_person "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
-    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_1
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_desk(), private= True, position_locked = True, skip_intro = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_1
     $ the_report = _return
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -361,6 +369,8 @@ label quest_cuckold_employee_decision_label():
         the_person "Thank you [the_person.mc_title]. I can't believe this is really happening!"
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
+        $ clear_scene()
+        $ mc.location.show_background()
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee().quest_event_dict["creampie_count"] = quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) + 1
         $ quest_cuckold_employee().set_quest_flag(22)
@@ -428,11 +438,19 @@ label quest_cuckold_employee_rethink_decision_label():
     "You move a little closer to her."
     mc.name "Do you want your bull to breed you?"
     the_person "My bull? Oh god... Yes! I want to get bred like some kind of wild animal!"
-    mc.name "Get naked and lay down on my desk. I always wanted my own personal breeding stock."
+    mc.name "Get ready and lay down on my desk. I always wanted my own personal breeding stock."
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
-    $ the_person.strip_outfit()
+    "[the_person.possessive_title] gets on your desk and lays on her back."
+    $ the_person.draw_person(position = "missionary")
+    if the_person.outfit.vagina_available():
+        "She spreads her legs, her pussy on display in front of you."
+    else:
+        if the_person.outfit.can_half_off_to_vagina():
+            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
+        else:
+            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
     the_person "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
-    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_3
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_desk(), private= True, position_locked = True, skip_intro = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_3
     $ the_report = _return
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -455,6 +473,8 @@ label quest_cuckold_employee_rethink_decision_label():
         the_person "Thank you [the_person.mc_title]. I can't believe this is really happening!"
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
+        $ clear_scene()
+        $ mc.location.show_background()
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee().quest_event_dict["creampie_count"] = quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) + 1
         $ quest_cuckold_employee().set_quest_flag(22)
@@ -518,13 +538,20 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ ceo_office.show_background()
     "After you walk in, you close the door and lock it."
     the_person "I've been looking forward to this. I know that we're doing this for practical reasons, but that doesn't mean it doesn't feel really good..."
-    mc.name "Get naked, cow. I'm just here to breed you."
+    mc.name "Get ready, cow. I'm just here to breed you."
     the_person "Oh god, its so hot when you talk to me like that."
-    "You and [the_person.title] get naked."
-    $ the_person.strip_outfit()
+    "[the_person.possessive_title] gets on your desk and lays on her back."
+    $ the_person.draw_person(position = "missionary")
+    if the_person.outfit.vagina_available():
+        "She spreads her legs, her pussy on display in front of you."
+    else:
+        if the_person.outfit.can_half_off_to_vagina():
+            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
+        else:
+            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
     the_person "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
-    call fuck_person(the_person, start_position = breeding_missionary, private= True, position_locked = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_2
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_desk(), private= True, position_locked = True, skip_intro = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_2
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person "Oh god, every risky load feels even better than the last..."
