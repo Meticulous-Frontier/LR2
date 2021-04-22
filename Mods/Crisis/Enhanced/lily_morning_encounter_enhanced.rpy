@@ -101,8 +101,6 @@ label lily_morning_encounter_enhanced_label():
                 if mc.business.event_triggers_dict.get("family_threesome", False) == True:
                     menu:
                         "Follow her":
-                            $ the_person.change_location(laundry_room)
-                            $ the_person.apply_outfit(Outfit("Nude"))
                             $ mc.change_location(laundry_room)
                             $ mc.location.show_background()
                             $ took_action = True
@@ -357,7 +355,7 @@ label lily_morning_encounter_enhanced_label():
                                             the_person "For you, I'll take any punishment [the_person.mc_title]."
                                         if the_watcher:
                                             $ the_watcher.change_location(kitchen)
-                                            "Just before you drive yourself home in [the_person.title]'s ass you hear a gasp from behind you."
+                                            "Just before you bring your hand down on [the_person.title]'s ass you hear a gasp from behind you."
                                             $ the_group.add_person(the_watcher)
                                             $ the_group.draw_person(the_watcher, position = "stand4", emotion = "angry")
                                             the_watcher "[the_watcher.mc_title], [the_person.title] what is going on?"
