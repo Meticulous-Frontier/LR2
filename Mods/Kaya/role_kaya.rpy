@@ -7,6 +7,8 @@
 # Kaya and her mother have native american heritage
 # Use mod code to have her deny lunch dates due to being at work, require different date time.
 
+style kaya_lang:
+    outlines [ (absolute(2), "#080", absolute(0), absolute(0)) ]
 
 init 2 python:
     def kaya_mod_initialization():
@@ -68,7 +70,7 @@ init -2 python:
         return False
 
     def kaya_ask_out_requirement(the_person):
-        if the_person.location == the_person.downtown and the_person.love > 20:
+        if the_person.location == the_person.downtown and the_person.love > 20 and time_of_day == 3:
             #TODO False if we already have a date scheduled for tonight. Maybe make this only non date nights?
             return True
         return False
@@ -126,24 +128,60 @@ init -2 python:
 
 label kaya_setup_intro_event_label():
     $ the_person = kaya
-    $ kaya.set_schedule(downtown, times = [2,3])    #TODO make this the coffee shop
+    $ kaya.set_schedule(downtown, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
     $ kaya.set_schedule(university, days = [0, 1, 2, 3, 4], times = [1])
     $ kaya.add_unique_on_talk_event(kaya_intro)
     return
 
 label kaya_intro_label(the_person):
-    "You go to the coffeeshop one afternoon for a pick me up. There's a new girl working there you haven't seen before."
-    "She's hot. You flirt with her."
-    "Find out her name is Kaya, she's native, a student at the local university."
-    "She's cute, you should keep an eye out for her."
+    "Even though it is later in the day, you decide to swing by the coffeeshop for a pick me up."
+    $ renpy.show("restaurant", what = restaraunt_background)
+    $ the_person.draw_person()
+    "When you step inside, there's a new girl working there you haven't seen before."
+    "You listen as the person ahead of you orders."
+    "?????" "Yes I'd like a tall macchiotto with whipped cream."
+    the_person "Is that all?"
+    "When she talks, there is a slight accent. It's small, and you have trouble placing it."
+    "You quickly check behind you. No one in line behind you yet... maybe you can chat with her for a bit?"
+    "The person in front of you moves to wait for their drink."
+    the_person "Hi, what can I get you?"
+    "That accent... where is it from? It's starting to other you..."
+    the_person "{kaya_lang}Osiyu? {/kaya_lang}(?????)... Do you want to order?"
+    "Ah! You zoned out for a second. What was that word?"
+    mc.name "Yes, sorry. I was trying to place your accent, but I can't. I'll just take a large coffee, leave room for cream."
+    the_person "Okay. Is that all?"
+    mc.name "Yeah..."
+    "You pay for your coffee, but stand still."
+    mc.name "You know, I've been coming here for a while but haven't seen you before. You just get hired?"
+    the_person "Yeah, I'm going to school part time at the university, and I picked up this job to help pay tuition."
+    mc.name "Ah, good for you. Well, best of luck with your studies. If you are smart as you are beautiful, I'm sure you will do well."
+    the_person "Ah, thank you..."
+    mc.name "I'm [mc.name]."
+    the_person "[the_person.name]."
+    mc.name "It's a pleasure to meet you."
+    "Right then another employee puts your coffee on the counter and calls your name."
+    the_person "Right... sorry, there's someone behing you..."
+    "You hear a throat clear behind you. You grab your coffee and move out of the way."
+    "Well, the new barista is cute! Maybe you should try to get to know her more..."
     $ the_person.add_unique_on_talk_event(kaya_ask_out)
     return
 
-label kaya_ask_out_label(): #Requires 20 love, substitute for first date.
-    "You flirt more with Kaya. She flirst back."
-    "We should hang out sometime. She agrees, but cautions work keeps her very busy."
-    "Agree to meet her after she gets off work."
+label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first date.
+    "You step into the coffee shop. You wonder if [the_person.title] is working. It is almost closing time."
+    $ renpy.show("restaurant", what = restaraunt_background)
+    $ the_person.draw_person()
+    "Sure enough, as you step inside, there she is. You've been getting to know her more lately, and you feel ready to ask her out."
+    "When you step up to the counter, she smiles at you."
+    $ the_person.draw_person( emotion = "happy")
+    the_person "Good evening [the_persom.mc_title]. What can I get you?"
+    mc.name "I'll take a small coffee with room for cream... and I'd was hoping to ask you something."
+    the_person "Okay, I can do that... and what is the question?"
+    mc.name "I was ahhh, wondering if you were doing anything after you got off work today?"
+    the_person "No, I don't have any plans. You umm... have any particular reason for asking?"
+    mc.name "I know a good bar around the corner... I thought maybe we could get a drink?"
+
     $ mc.business.add_mandatory_crisis(kaya_get_drinks)
+    $ kaya.event_triggers_dict["bar_date"] = True
     return
 
 label kaya_get_drinks_label():
@@ -161,6 +199,8 @@ label kaya_get_drinks_label():
     "MC has unlocked grabbing drinks with Kaya. He can ask her to grab drinks when she is working at the coffee shop any evening."
     if mc.business.hr_director:
         $ mc.business.hr_director.add_unique_on_talk_event(kaya_HR_start_internship_program)
+    else:
+        $ mc.business.add_mandatory_crisis(kaya_add_HR_program_event)
     return
 
 label kaya_add_HR_program_event_label():
