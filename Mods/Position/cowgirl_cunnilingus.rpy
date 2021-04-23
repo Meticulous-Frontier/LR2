@@ -75,6 +75,8 @@ label scene_cowgirl_cunnilingus_2(the_girl, the_location, the_object):
     return
 
 label scene_cowgirl_cunnilingus_3(the_girl, the_location, the_object):
+    $ the_goal = the_girl.get_sex_goal()
+
     the_girl "Just keep licking...licking...licking..."
     if the_girl.arousal > 70:
         "[the_girl.possessive_title]'s juices are flowing freely from her slit. You lap them up before circling your tongue around her clit a few times."
@@ -83,7 +85,7 @@ label scene_cowgirl_cunnilingus_3(the_girl, the_location, the_object):
     else:
         "[the_girl.possessive_title]'s pussy is still getting wet. You lick it slowly, giving her time to warm up."
 
-    if the_girl.get_sex_goal() == "hate fuck" or the_goal == "waste cum":
+    if the_goal == "hate fuck" or the_goal == "waste cum":
         "[the_girl.title] shifts her legs slightly, making sure that your arms are pinned down by her shins."
         if mc.arousal >= 10:
             "She looks behind her and sees your erect cock."

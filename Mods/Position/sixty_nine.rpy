@@ -496,7 +496,7 @@ label get_hard_SB_sixty_nine(the_girl, the_location, the_object):
     return
 
 label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = None):
-    $ the_goal = the_girl.SB_sixty_nine()
+    $ the_goal = the_girl.get_sex_goal()
 
     if the_goal == "waste cum" or the_goal == "hate fuck":
         "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
