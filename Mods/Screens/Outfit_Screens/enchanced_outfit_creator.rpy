@@ -48,7 +48,6 @@ init 10 python:
             renpy.hide("mannequin_dummy")
         # clear mannequin layer
         renpy.scene("8")
-        clear_prediction()
         return
 
     def preview_outfit(outfit = "demo_outfit"):

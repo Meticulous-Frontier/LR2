@@ -8,7 +8,7 @@ init 2 python:
     def auto_onlyfans_account_person_requirement(person):
         if person.has_role(onlyfans_role):
             return False
-        elif person.effective_sluttiness() < 50 + 10 * (person.get_opinion_score("showing her tits") + person.get_opinion_score("showing her ass") + person.get_opinion_score("public sex")):
+        elif person.effective_sluttiness() < 50 - (5 * (person.get_opinion_score("showing her tits") + person.get_opinion_score("showing her ass") + person.get_opinion_score("public sex"))):
             return False
         return True
 

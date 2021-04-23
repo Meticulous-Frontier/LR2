@@ -25,12 +25,20 @@ init 2:
                 has vbox
                 label "ZipCache memory: {total_size:.2f} MB".format(total_size = get_size(zip_manager) / 1024.0 / 1024.0) xminimum 400
                 label "ZipCache items: {}".format(zip_manager.size())
+                label "Texture Memory: {total_size:.2f} MB ({num_of_items})".format(total_size = renpy.exports.get_texture_size()[0] / 1024.0 / 1024.0, num_of_items = renpy.exports.get_texture_size()[1])
+                label "Image Cache: {size:.1f} / {max_size:.1f} MB".format(size = 4.0 * renpy.display.im.cache.get_total_size() / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0)
                 label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()
 
 
 init 2 python:
+    def validate_texture_memory():
+        # keep texture memory below 1 Gb, even tough the max size is 2 Gb
+        if renpy.exports.get_texture_size()[0] > 1024.0 * 1024.0 * 1024.0:
+            renpy.display.im.cache.clear()  # cleanup texture cache
+        return
+
     debug_log = LRUCacheDict(10, expiration = 0)
 
     def show_debug_log():
