@@ -259,7 +259,7 @@ label lily_morning_encounter_enhanced_label():
                                             "Suddenly you hear a gasp from the door behind you."
                                             $ the_watcher.change_location(kitchen)
                                             $ the_group.add_person(the_watcher)
-                                            $ the_group.draw_person(the_watcher, position = "stand4", emotion = angry)
+                                            $ the_group.draw_person(the_watcher, position = "stand4", emotion = "angry")
                                             the_watcher "[the_watcher.mc_title], [the_person.title] what do you think you are doing?"
                                             mc.name "Oh, hey [the_watcher.title] I was just teaching [the_person.title] a lesson for walking around the house naked."
                                             if the_watcher.sluttiness < 80:
