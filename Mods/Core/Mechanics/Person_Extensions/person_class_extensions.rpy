@@ -1546,7 +1546,7 @@ init -1 python:
         if uniform is not None:
             builder = WardrobeBuilder(self)
             if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-                self.planned_uniform = builder.apply_bottom_preference(uniform.get_copy())
+                (self.planned_uniform, swapped) = builder.apply_bottom_preference(uniform.get_copy())
             elif creative_colored_uniform_policy.is_active():
                 self.planned_uniform = builder.personalize_outfit(uniform.get_copy(),  max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
             else:
@@ -1785,6 +1785,57 @@ init -1 python:
         return self.wardrobe.decide_on_outfit2(self, sluttiness_modifier)
 
     Person.decide_on_outfit = person_decide_on_outfit
+
+    def person_get_full_strip_list(self, strip_feet = True, strip_accessories = False):
+        return self.outfit.get_full_strip_list(strip_feet, strip_accessories)
+
+    Person.get_full_strip_list = person_get_full_strip_list
+
+    def person_get_underwear_strip_list(self, visible_enough = True, avoid_nudity = False):
+        return self.outfit.get_underwear_strip_list(visible_enough, avoid_nudity)
+
+    Person.get_underwear_strip_list = person_get_underwear_strip_list
+
+    def person_can_half_off_to_tits(self, visible_enough = True):
+        return self.outfit.can_half_off_to_tits(visible_enough)
+
+    Person.can_half_off_to_tits = person_can_half_off_to_tits
+
+    def person_get_half_off_to_tits_list(self, visible_enough = True):
+        return self.outfit.get_half_off_to_tits_list(visible_enough)
+
+    Person.get_half_off_to_tits_list = person_get_half_off_to_tits_list
+
+    def person_get_tit_strip_list(self, visible_enough = True):
+        return self.outfit.get_tit_strip_list(visible_enough)
+
+    Person.get_tit_strip_list = person_get_tit_strip_list
+
+    def person_strip_to_tits(self, visible_enough = True):
+        return self.outfit.strip_to_tits(visible_enough)
+
+    Person.strip_to_tits = person_strip_to_tits
+
+    def person_can_half_off_to_vagina(self, visible_enough = True):
+        return self.outfit.can_half_off_to_vagina(visible_enough)
+
+    Person.can_half_off_to_vagina = person_can_half_off_to_vagina
+
+    def person_get_half_off_to_vagina_list(self, visible_enough = True):
+        return self.outfit.get_half_off_to_vagina_list(visible_enough)
+
+    Person.get_half_off_to_vagina_list = person_get_half_off_to_vagina_list
+
+    def person_get_vagina_strip_list(self, visible_enough = True):
+        return self.outfit.get_vagina_strip_list(visible_enough)
+
+    Person.get_vagina_strip_list = person_get_vagina_strip_list
+
+    def person_strip_to_vagina(self, visible_enough = False):
+        return self.outfit.strip_to_vagina(visible_enough)
+
+    Person.strip_to_vagina = person_strip_to_vagina
+
 ##########################################
 # Unique crisis addition functions       #
 ##########################################

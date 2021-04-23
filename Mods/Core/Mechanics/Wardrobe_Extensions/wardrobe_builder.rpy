@@ -833,11 +833,14 @@ init 5 python:
             return coloured_outfit
 
         def apply_bottom_preference(self, outfit):
+            swapped = False
             if outfit.has_pants() and self.person.get_opinion_score("skirts") > self.person.get_opinion_score("pants"): #Outfit has pants and girl prefers skirts
                 outfit = swap_outfit_bottoms(outfit)
+                swapped = True
             elif outfit.has_skirt() and self.person.get_opinion_score("skirts") < self.person.get_opinion_score("pants"):
                 outfit = swap_outfit_bottoms(outfit)
-            return outfit
+                swapped = True
+            return outfit, swapped
 
         def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
             personal_outfit = outfit.get_copy()
@@ -875,19 +878,20 @@ init 5 python:
 
             #First alteration we look at is bottom swap. Allow it if alterations are allowed or if we specifically allow bottom swaps.
             if swap_bottoms:
-                personal_outfit = self.apply_bottom_preference(personal_outfit)
+                (personal_outfit, swapped) = self.apply_bottom_preference(personal_outfit)
+                if swapped:
+                    alterations += 1
 
             if allow_skimpy:
-                if personal_outfit.is_dress() or personal_outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
-                    slut_score = personal_outfit.get_full_outfit_slut_score()
-                    if slut_score + 20 < self.person.sluttiness and renpy.random.randint(0,100) < self.person.sluttiness:
-                        for item in personal_outfit.lower_body:
-                            if item in panties_list:
-                                personal_outfit.lower_body.remove(item)
-                                alterations += 1
-                elif personal_outfit.has_pants() or personal_outfit.has_shirt():   #If the outfit has pants, have a chance to drop a layer off the top
-                    slut_score = personal_outfit.get_full_outfit_slut_score()
-                    if slut_score + 20 < self.person.sluttiness and renpy.random.randint(0,100) < self.person.sluttiness and len(personal_outfit.upper_body) > 0:
+                if alterations < max_alterations and personal_outfit.is_dress() or personal_outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
+                    if personal_outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
+                        item = personal_outfit.get_panties()
+                        if item:
+                            personal_outfit.lower_body.remove(item)
+                            alterations += 1
+
+                if alterations < max_alterations and personal_outfit.has_pants() or personal_outfit.has_shirt():   #If the outfit has pants, have a chance to drop a layer off the top
+                    if personal_outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
                         personal_outfit.remove_random_upper(top_layer_first = True)
                         alterations += 1
 
