@@ -1,4 +1,4 @@
-init 1 python:
+init 3 python:
     def get_clarity_multiplier():
         multiplier = 1.0
         if perk_system.has_ability_perk("Intelligent Clarity"):
@@ -28,15 +28,18 @@ init 1 python:
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your focus.", toggle = False, usable = False), "Focused Clarity")
         return
 
+    persuade_action = ActionMod("Use Persuasion", requirement = persuade_person_requirement, effect = "persuade_person",
+        menu_tooltip = "Leverage your clarity to persuade her to do something.", category = "Generic People Actions")
+
     def build_specific_action_list_extended(org_func):
         def build_specific_action_list_wrapper(person):
             # run original function
             result = org_func(person)
             # run extension code (append new action to base game menu)
-            persuade_action = Action("Use Persuasion", requirement = persuade_person_requirement, effect = "persuade_person", args = person, requirement_args = person,
-                menu_tooltip = "Leverage your clarity to persuade her to do something.")
-
-            result.append(persuade_action)
+            if persuade_action.enabled:
+                persuade_action.args = [person]
+                persuade_action.requirement_args = [person]
+                result.append(persuade_action)
             return result
 
         return build_specific_action_list_wrapper

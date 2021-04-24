@@ -1,6 +1,6 @@
 # Alter wardrobe functions original by Kaden
 
-init 2 python:
+init 4 python:
     def modify_wardrobe_requirement(person):
         if person.obedience < 130:
             return "Requires: 130 Obedience"
@@ -8,15 +8,18 @@ init 2 python:
             return "Requires: 30 Sluttiness or 30 Love"
         return True
 
+    modify_wardrobe_action = ActionMod("Modify entire wardrobe", requirement = modify_wardrobe_requirement, effect = "modify_wardrobe_label",
+        menu_tooltip = "Ask girl to change her wardrobe.", priority = -5, category = "Generic People Actions")
+
     def build_specific_action_list_alter_outfit_extended(org_func):
         def build_specific_action_list_wrapper(person):
             # run original function
             result = org_func(person)
             # run extension code (append new action to base game menu)
-            modify_wardrobe_action = Action("Modify entire wardrobe", requirement = modify_wardrobe_requirement, effect = "modify_wardrobe_label", args = person, requirement_args = person,
-                menu_tooltip = "Ask " + person.title + " to modify their wardrobe.", priority = -5)
-
-            result.append(modify_wardrobe_action)
+            if modify_wardrobe_action.enabled:
+                modify_wardrobe_action.args = [person]
+                modify_wardrobe_action.requirement_args = [person]
+                result.append(modify_wardrobe_action)
             return result
 
         return build_specific_action_list_wrapper
