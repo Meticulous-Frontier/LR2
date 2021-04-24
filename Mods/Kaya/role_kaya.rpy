@@ -33,7 +33,7 @@ init 2 python:
             eyes = "brown", personality = kaya_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = kaya_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 88, start_love = 0, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = kaya_base_outfit,
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
+            forced_opinions = [["billiards", 2, False], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
 
         kaya.generate_home()
@@ -179,9 +179,113 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "I was ahhh, wondering if you were doing anything after you got off work today?"
     the_person "No, I don't have any plans. You umm... have any particular reason for asking?"
     mc.name "I know a good bar around the corner... I thought maybe we could get a drink?"
-
+    the_person "Oh! I... you seem pretty nice... yeah I guess I could do that!"
+    mc.name "Great! Tell you what, I'll take my coffee out to the patio... whenever you get off, I'll walk you over there?"
+    the_person "Okay... don't worry I get off soon!"
+    $ clear_scene()
+    $ mc.location.show_background()
+    "You step outside and sit down, sipping your coffee."
+    "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
+    "Pretty soon you hear [the_person.possesive_title] clear her throat nearby. You look up from your phone."
+    $ the_person.draw_person()
+    mc.name "Ah, you're right, that was quick!"
+    the_person "Yes... hey... I need to be honest about something..."
+    mc.name "Oh? Did you change your mind? It's quite alright..."
+    the_person "No, I'd still like to go and hang out, but I won't be able to have any drinks."
+    mc.name "Ah, you don't drink?"
+    the_person "No, its not that, I'm just... with school and some other stuff going on... money is just really tight right now..."
+    mc.name "Oh! Why don't you let me pick up the tab tonight?"
+    the_person "I couldn't let you..."
+    mc.name "Just pretend like I left a 20 in your tip jar, and you wanted to treat yourself."
+    the_person "I suppose... just a couple, okay?"
+    mc.name "Great! Let's go."
+    "You stand up, making sure to throw your coffee cup away and leave the table clean. You start to walk with [the_person.title] a couple blocks to the bar."
+    the_person "So... sorry if I'm like... misreading this... but... is this like... a date?"
+    "She seems to in tune with your intentions."
+    mc.name "Well [the_person.title], I'm certainly interested in getting to know you better! And I have to say I like what little I know about you so far..."
+    mc.name "I can hardly think a better way of learning more about you than a date!"
+    $ the_person.change_love(2)
+    the_person "Ahhh... I'm glad to know I wasn't mistaken."
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+    "Soon, you arrive at the bar. You point her to a high top you spot that looks open."
+    mc.name "Hey, if you want to go grab that table, what is your drink of choice?"
+    the_person "Oh, umm, let me walk up with you instead, I want to see if they have any specials."
+    mc.name "Okay. With company as pretty as you we'll probably get served faster anyway!"
+    $ the_person.change_happiness(3)
+    "She smiles and accepts your compliment. You walk up to the bar with her. Soon the bartender comes over."
+    "?????" "Hey there. Never see you around here before, what can I get you?"
+    the_person "Hi! Are you running any specials tonight?"
+    "?????" "Well, we got domestic beers for $2, some imports for $3, and rail drinks for $4."
+    the_person "Ah, can I get a rum and coke please?"
+    "You wonder if she's just trying to be considerate? You would hardly expected a girl like her to order that as a first choice..."
+    "You must have given her a funny look."
+    the_person "What? You seem like a nice guy, I just want to be a cheap date!"
+    "Ah, so she must be very budget concious. You suppose there are certainly worse personality traits to have!"
+    "You order yourself an old fashioned, something to sip on while you chat."
+    "Once you have your drinks, you look around. The table you were looking at is full... looks like everything is full..."
+    the_person "Ah! Look! An open pool table! Let's play!"
+    $ the_person.discover_opinion("billiards")
+    "[the_person.possesive_title] gets really excited. She must really enjoy billiards?"
+    "She takes a sip of her drink, then sets it down on the side of the pool table. You do the same."
+    mc.name "So tell me, cheap date, what happens to be your actual favorite cocktail?"
+    the_person "Why so interested? Trying to get me drunk?"
+    mc.name "Honestly, I feel like a person's favorite drink says a lot about them."
+    the_person "Is that so?"
+    mc.name "Absolutely. I know I'm dealing with immature college girls when I get when the answer is some rediculous drink like 'sex on the beach'."
+    the_person "Ha! Yeah I suppose."
+    "[the_person.title] pulls some quarters out of her paurse and puts them in the table. She pays the cost of a game and you hear the billiard balls fall into the gully."
+    mc.name "But you... you seem much too practical for something like that. You seem like the type that would enjoy finer spirits."
+    "[the_person.possesive_title] is pulling the balls from the gully and setting them on the table. She looks at you and smirks."
+    the_person "Ah, is that so?"
+    mc.name "Indeed. And the fact that you don't deny it tells me I'm right."
+    the_person "You sure seem pretty confident in yourself there, mister! Tell you what. Let's play a round, and if you win, I'll tell you favorite drink. Okay?"
+    mc.name "Ah, whose confident now? Placing a wager on a billiards game!"
+    "She chuckles and rolls her eyes mockingly."
+    the_person "Disclosing my favorite drink hardly seems like a major wager. Maybe I intend to lose, so you can learn my secret? You're the one buying the drinks, remember?"
+    the_person "Tell you what, if I win, I'll even allow you a guess, and I'll tell you if you're right or not."
+    mc.name "That seems more than fair. If I can't get it right, I think I can get close."
+    "She picks up her drink and takes a long sip. Then grabs her pole."
+    the_person "Here, rack these up, will you?"
+    call play_billiards(the_person) from _kaya_first_billiards_01
+    if _return: #You won
+        the_person "Wow, I'm impressed! Do you play much?"
+        mc.name "Not particularly. But It's a game of angles, and math has always been a strong subject for me."
+        the_person "I see."
+        mc.name "Now, about our wager?"
+    else:
+        mc.name "Wow, you are very good at pool! That was very impressive."
+        the_person "Thank you. I love to play. It is a good exercise for your dexterity and your brain."
+        mc.name "I agree. Now, abotu the wager..."
+        the_person "Yes, this should be interesting. Go ahead, think about it and guess my favorite drink."
+        "It is clear to you so far that [the_person.possesive_title] is intelligent and practical. However, even though she is strapped for money right now, you get the feeling things haven't always been this way for her."
+        "Rum is too simple a spirit for her to favor. She probably favors gin or whiskey."
+        "Something about her dark skin has you guessing it might be a darker spirit too, so you decide to guess a classic whiskey cocktail."
+        the_person "Yes yes. Well, my favorite drink, if you are that eager to know, is a Manhattan with an orange twist..."
+        menu:
+            "Whiskey sour":
+                pass
+            "Highball":
+                pass
+            "John COllins":
+                pass
+        the_person "Wow. I admit, I was thinking that you were pretty full of shit, but that's actually really close! Close enough for me anyway!"
+        mc.name "Oh?"
+        the_person "My favorite cocktail is definitely a Manhattan with an orange twist..."
+    mc.name "Ah, a bold drink indeed. I was definitely thinking something whiskey inspired, but I would not have guess that."
+    the_person "Yeah. Sometimes I'll have one, but to make a good one it requires good whiskey. The ones you get with more affordable varieties just aren't as good."
+    mc.name "Yes, a quality of many heavy whiskey drinks I think. Well, we seem to be ready for another round?"
+    the_person "I umm... I'm kind of out of quarters..."
+    mc.name "Here, let me go get us a couple more drinks and some quarters. I'm not quite ready to say goodbye for the evening yet."
+    $ the_person.change_love(2)
+    the_person "I suppose I could stay out for a bit longer."
     $ mc.business.add_mandatory_crisis(kaya_get_drinks)
     $ kaya.event_triggers_dict["bar_date"] = True
+    $ clear_scene()
+    "You walk back up to the bartender. You order yourself another old fashioned and a top shelf manhattan with an orange twist for [the_person.title]."
+    "When he brings you the drinks, you ask for change for a dollar to play another round of pool. When he goes to make change for you, you look down at the drinks..."
+    "You could probably slip a serum into her drink if you do it quickly..."
+    call give_serum(the_person) from _call_give_kaya_serum_bar_01
     return
 
 label kaya_get_drinks_label():
@@ -317,3 +421,19 @@ label kaya_jennifer_confrontation_label():  #Requires sexual actions taken with 
     "MC steps in, stops things from getting crazy. Kaya is family, should treat her as such."
     "Ends with reconciliation. Threesome with Kaya and Jennifer."
     return
+
+
+
+label play_billiards(the_person, skill_offset = 0): #MC can play billiards.
+    $ the_person.draw_person()
+    "[the_person.title] grabs a pool stick and starts to chalk the end while you rack the billiard balls."
+    "Once you've got them nice and tight, you nod to her."
+    mc.name "Go ahead, you can break."
+    menu:
+        "Play the game":
+            pass
+        "Simulate the game":
+
+
+def calc_pool_ball_sink_chance(skill = 0, difficulty = 0):
+    return if renpy.random.randint(0,100) < min((50 + (skill * 5) ) - (difficulty * 10), 90)
