@@ -122,7 +122,6 @@ init -4 python:
 init -2:
     default persistent.zip_cache_size = 0 # default is small size
     default persistent.memory_mode = 1 # default is medium memory mode
-    default persistent.clear_memory_mode = 1 # default is daily clear
     default persistent.show_ntr = False     # default turn of NTR
 
 init python: # place first on the hijack stack
