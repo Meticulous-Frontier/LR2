@@ -24,9 +24,9 @@ init 2:
                 padding (5,5)
                 has vbox
                 label "ZipCache memory: {total_size:.2f} MB".format(total_size = get_size(zip_manager) / 1024.0 / 1024.0) xminimum 400
-                label "ZipCache items: {}".format(zip_manager.size())
+                label "ZipCache items: {count} ({utilization:.1f}%)".format(count = zip_manager.size(), utilization = zip_manager.utilization())
                 label "Texture Memory: {total_size:.2f} MB ({num_of_items})".format(total_size = renpy.exports.get_texture_size()[0] / 1024.0 / 1024.0, num_of_items = renpy.exports.get_texture_size()[1])
-                label "Image Cache: {size:.1f} / {max_size:.1f} MB".format(size = 4.0 * renpy.display.im.cache.get_total_size() / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0)
+                label "Image Cache: {size:.1f} / {max_size:.1f} MB ({utilization:.1f}%)".format(size = 4.0 * renpy.display.im.cache.get_total_size() / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0, utilization = renpy.display.im.cache.get_total_size() * 100.0 / renpy.display.im.cache.cache_limit)
                 label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()

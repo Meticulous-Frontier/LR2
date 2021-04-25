@@ -28,6 +28,15 @@ init 5 python:
         def size(self):
             return sum([x.size() for x in self.Cache.values()])
 
+        def utilization(self):
+            # result = {}
+            # for k, v in self.Cache.iteritems():
+            #     result[k] = []
+            #     result[k].append(v.size())
+            #     result[k].append(v.size() * 100.0 / float(self.max_items))
+            # return result
+            return (self.size() * 100.0 / (self.max_items * float(len(self.Cache))))
+
     class ZipContainer(renpy.display.im.ImageBase): #TODO: Move this to a more obvious file. Probably something to do along with a bunch of other refactoring.
         def __init__(self, position, filename, mtime=0, **properties):
             super(ZipContainer, self).__init__(position, filename, mtime, **properties)
