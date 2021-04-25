@@ -34,12 +34,23 @@ init 2:
 
 init 2 python:
     def validate_texture_memory():
-        # keep texture memory below 1 Gb, even tough the max size is 2 Gb
-        if renpy.exports.get_texture_size()[0] > 1024.0 * 1024.0 * 1024.0:
-            renpy.display.im.cache.clear()  # cleanup texture cache
+        while not hasattr(renpy.display.draw, "get_texture_size"):
+            time.sleep(2)
+
+        print("Activate texture memory watcher")
+        while True:
+            # keep texture memory below 1 Gb, even tough the max size is 2 Gb
+            if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4.0 * 3):
+                renpy.display.im.cache.clear()  # cleanup texture cache
+            time.sleep(.5)
         return
 
     debug_log = LRUCacheDict(10, expiration = 0)
+
+    # The preload thread.
+    texture_monitor_thread = threading.Thread(target=validate_texture_memory, name="texture_monitor")
+    texture_monitor_thread.setDaemon(True)
+    texture_monitor_thread.start()
 
     def show_debug_log():
         global debug_log_enabled
