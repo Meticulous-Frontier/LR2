@@ -152,10 +152,8 @@ init 1 python:
         # disables renpy.free_memory() daily cleanup, thus requires enough memory to perform operations
         if persistent.memory_mode == 0:
             config.image_cache_size_mb = 384
-        elif persistent.memory_mode == 1:
-            config.image_cache_size_mb = 768
         else:
-            config.image_cache_size_mb = 1536
+            config.image_cache_size_mb = 512
     else:
         config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
 
