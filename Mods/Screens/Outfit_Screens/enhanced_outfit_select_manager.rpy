@@ -1,9 +1,4 @@
 init 2:
-    python:
-        def release_memory():
-            renpy.free_memory()
-            return
-
     screen outfit_select_manager(slut_limit = 999, show_outfits = True, show_overwear = True, show_underwear = True, main_selectable = True, show_make_new = True, show_export = True, show_modify = True, show_duplicate = True, show_delete = True):
         #If sluttiness_limit is passed, you cannot exit the creator until the proposed outfit has a sluttiness below it (or you create nothing).
         add "Paper_Background.png"
@@ -164,7 +159,7 @@ init 2:
                 focus_mask "gui/button/choice_idle_background.png"
                 action [
                     Function(hide_mannequin),
-                    Function(release_memory),
+                    Function(renpy.free_memory),
                     Return("No Return")
                 ]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"
