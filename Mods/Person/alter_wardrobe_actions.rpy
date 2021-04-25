@@ -354,7 +354,7 @@ init 4 python:
                     outfit.remove_clothing(clothing)
                     outfit.add_upper(new_clothing)
                     alterations += 1
-        return
+        return alterations
 
     def sexier_socks(person):
         alterations = 0
