@@ -501,7 +501,7 @@ label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
         "She speeds up."
     the_girl "Is that what you wanted?"
     "You move behind her and slide you cock between her thighs, brushing softly along her already wet snatch."
-    mc.name "Not quite, you seem pretty excited, perhaps I should slide it in to see if you can hold up."
+    mc.name "Not quite, you seem pretty excited, perhaps I should slide it in to see if you can take it."
     $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her wet hole."
     if the_girl.sex_skills["Vaginal"] > 2:
