@@ -239,6 +239,10 @@ init 4 python:
                     new_clothing = None
 
                 if new_clothing:
+                    if clothing == pinafore:    # when pinafore also remove shirt
+                        top = next((x for x in outfit.get_upper_ordered() if x.layer == 2), None)
+                        if top:
+                            outfit.remove_clothing(top)
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_upper(new_clothing)
