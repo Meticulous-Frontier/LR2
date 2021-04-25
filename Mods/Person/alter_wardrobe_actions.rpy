@@ -190,7 +190,7 @@ init 4 python:
                     outfit.remove_clothing(clothing)
                     outfit.add_lower(new_clothing)
                     alterations += 1
-        return
+        return alterations
 
     def shorter_skirts(person):
         alterations = 0
