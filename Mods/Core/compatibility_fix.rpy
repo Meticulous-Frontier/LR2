@@ -195,8 +195,7 @@ init 1 python:
     def update_pinned_cache():
         # cache all GUI images in memory
         for fn in renpy.list_files():
-            if (re.search("gui", fn, re.IGNORECASE)
-                and fn.endswith(".png")):
+            if re.search("[\\/][gG]ui[\\/][a-zA-Z_\\/]*.png", fn, re.IGNORECASE):
                 renpy.cache_pin(fn)
             if "empty_holder.png" in fn:
                 renpy.cache_pin(fn)
