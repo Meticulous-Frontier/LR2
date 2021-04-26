@@ -121,7 +121,6 @@ init -4 python:
 
 init -2:
     default persistent.zip_cache_size = 0 # default is small size
-    default persistent.memory_mode = 1 # default is medium memory mode
     default persistent.show_ntr = False     # default turn of NTR
 
 init python: # place first on the hijack stack
@@ -147,14 +146,7 @@ init 100 python:
 init 1 python:
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
-    if renpy.variant("pc"):
-        # disables renpy.free_memory() daily cleanup, thus requires enough memory to perform operations
-        if persistent.memory_mode == 0:
-            config.image_cache_size_mb = 384
-        else:
-            config.image_cache_size_mb = 512
-    else:
-        config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
+    config.image_cache_size_mb = 384 # fixed at 384 Mb * 4 bytes per pixel result in 1536 Mb Texture Memory
 
     # heart pasties and cincher (move to level 0)
     heart_pasties.layer = 0
