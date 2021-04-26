@@ -132,13 +132,13 @@ label scene_standing_oral_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] holds your head in place, as you continue to lick."
 
         menu:
-            "Lick firmly and steadily.":
+            "Lick firmly and steadily":
                 "You lick at [the_girl.possessive_title]'s pussy."
                 $ the_girl.call_dialogue("sex_responses_oral")
                 $ the_girl.change_arousal(3)
                 "You continue to lick until your tongue starts to tire."
 
-            "Do what you think best.":
+            "Do what you think best":
                 $ the_girl.call_dialogue("sex_responses_oral")
                 $ the_girl.change_arousal(mc.sex_skills["Oral"])
                 if (mc.sex_skills["Oral"]) > 4:
