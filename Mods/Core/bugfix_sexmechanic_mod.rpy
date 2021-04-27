@@ -645,6 +645,11 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             "You quickly put on another condom and continue to fuck her."
             $ mc.condom = True
 
+        # make sure we move skirts out of the way when rendering
+        python:
+            for the_clothing in [x for x in the_person.outfit.get_lower_ordered() if not (x.underwear or x.half_off)]:
+                the_person.outfit.half_off_clothing(the_clothing)
+
     return willing
 
 label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
