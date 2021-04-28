@@ -345,7 +345,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
                     "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
                     $ the_girl.cum_in_mouth()
-                    "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
+                    "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock while getting her addiction satisfied."
                 else:
                     "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
                     "She moans as you fill up her mouth with your sperm."
@@ -360,7 +360,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 $ the_girl.cum_on_face()
                 $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
                 if the_girl.has_cum_fetish():
-                    "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
+                    "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addiction has been craving."
                 #$ SB_sixty_nine.redraw_scene(the_girl)
                 "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
                 $ the_girl.call_dialogue("cum_face")

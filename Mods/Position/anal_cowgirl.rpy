@@ -158,8 +158,6 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
     "With each stroke of her hips [the_girl.possessive_title]'s impossibly tight ass brings you closer and closer to cumming. You're finally driven past the point of no return."
     mc.name "Fuck, I'm going to cum!"
 
-    #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
-    $ threshold = 120 + (-20 * the_girl.get_opinion_score("anal creampies")) + (-20 * the_girl.get_opinion_score("anal sex"))
     if mc.condom:
         the_girl "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
@@ -177,7 +175,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
         else:
             "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
             the_girl "Wow, is all that cum for me? I guess my ass must be pretty good!"
-    elif the_girl.sluttiness > threshold:
+    elif the_girl.sluttiness > 70 and the_girl.get_opinion_score("anal creampies") > 0 and the_girl.get_opinion_score("anal sex") > 0:
         #She drops down on you as you cum.
         the_girl "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
@@ -189,11 +187,14 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
         $ the_girl.cum_in_ass()
         $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
         $ SB_anal_cowgirl.redraw_scene(the_girl)
-        the_girl "Oh yes... so full..."
+        if the_girl.has_cum_fetish():
+            the_girl "Yes, I can feel it, give me more, I need more..."
+        else:
+            the_girl "Oh yes... so full..."
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
         "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
         "She rolls off and lies next to you on the [the_object.name]."
-    elif the_girl.sluttiness < 70:
+    elif the_girl.sluttiness < 30 or the_girl.get_opinion_score("anal creampies") < 0:
         #She always pull off and you cum on her stomach.
         the_girl "Oh shit, don't cum in my ass!"
         "[the_girl.possessive_title] jerks up, pulls off your cock, and lowers herself back down."
@@ -213,7 +214,10 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
             "Pull her down and cum inside her":
                 "You reach up and grab [the_girl.possessive_title] by the hips. With one confident pull she plunges back onto your cock, gasping with pleasure."
                 "The feeling of her tight, warm ass sliding down and engulfing your cock again pushes you over the edge. You pull [the_girl.possessive_title] tight against you and unload inside of her."
-                the_girl "Ah! Fuck..."
+                if the_girl.has_cum_fetish():
+                    the_girl "Yes, I can feel it, give me more, I need more..."
+                else:
+                    the_girl "Ah! Fuck... so full..."
                 $ the_girl.change_obedience(3)
                 $ the_girl.cum_in_ass()
                 $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
