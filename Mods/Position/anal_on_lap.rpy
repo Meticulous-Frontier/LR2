@@ -171,6 +171,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         $ climax_controller.do_clarity_release(the_girl)
         $ anal_on_lap.redraw_scene(the_girl)
         if the_girl.get_opinion_score("anal creampies") > 0:
+            $ the_girl.discover_opinion("anal creampies")
             the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
         elif the_girl.sluttiness > 110:
             the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
