@@ -183,7 +183,7 @@ screen cheat_menu():
         "Researching": ["research_skill", "research_skill", 1, 2, (0, 20)],
         "Production": ["production_skill", "production_skill", 1, 3, (0, 20)],
         "Supplying": ["supply_skill", "supply_skill", 1, 4, (0, 20)],
-        "Salary": ["salary", "salary", 1, 6, (0, 20)],
+        "Salary": ["salary", "salary", 1, 6, (0, 200)],
 
         "Max Employees": ["max_employee_count", "max_employee_count", 5, 5, (5, 80)],
         "Production Lines": ["production_lines", "production_lines", 1, 6, (1, 10)],
