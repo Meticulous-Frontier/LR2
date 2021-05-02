@@ -37,7 +37,7 @@ init 2 python:
 
     def get_heart_image_list(the_person): ##Returns a formatted string that will add coloured hearts in line with text, perfect for menu choices, ect.
         heart_string = ""
-        platinum_count = the_person.core_sluttiness // 100
+        platinum_count = __builtin__.int(the_person.core_sluttiness // 100)
         heart_start = 0
         heart_end = 100
         for x in range(0, platinum_count):
