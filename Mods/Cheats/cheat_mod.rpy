@@ -486,7 +486,7 @@ screen cheat_menu():
                                     for (x, y) in sorted(sex_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(sex_stats[x][0])):
                                             $ limit = sex_stats[x][4]
-                                            $ cur_value = vars(editing_target)[sex_stats[x][1]]
+                                            $ cur_value = vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]]
                                             hbox:
                                                 textbutton " - ":
                                                     xsize 36
@@ -539,7 +539,7 @@ screen cheat_menu():
                                     for (x, y) in sorted(relation_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(relation_stats[x][0])):
                                             $ limit = relation_stats[x][4]
-                                            $ cur_value = vars(editing_target)[relation_stats[x][1]]
+                                            $ cur_value = vars(editing_target)[relation_stats[x][0]]
                                             hbox:
                                                 textbutton " - ":
                                                     xsize 36
