@@ -53,9 +53,9 @@ label give_panties_label(the_person):
 
     # store outfit and panties
     $ test_outfit = the_person.outfit.get_copy()
-    $ the_item = the_person.get_panties()
+    $ the_item = test_outfit.get_panties()
     if the_item.is_extension: #two piece item
-        $ the_item = the_person.outfit.get_bra()
+        $ the_item = next((x for x in test_outfit.get_upper_ordered() if x.has_extension == the_item), None)
     $ removed_something = False
 
     if not the_person.can_remove_panties():
