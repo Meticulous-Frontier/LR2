@@ -2305,6 +2305,8 @@ label Sarah_ask_for_baby_label():
     return
 
 label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_spend_the_night
+
     python:
         the_person = sarah
         the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
@@ -2313,8 +2315,6 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         the_person.change_energy(200)
         (threesome_wakeup, threesome_partner) = get_sarah_spend_night_threesome_possibility()
         scene_manager = Scene()
-
-    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_spend_the_night
 
     if not threesome_wakeup:
         $ scene_manager.add_actor(the_person, position = "walking_away")
