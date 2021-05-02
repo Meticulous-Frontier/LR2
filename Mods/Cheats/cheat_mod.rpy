@@ -191,7 +191,7 @@ screen cheat_menu():
         "Research Tier": ["research_tier", "research_tier", 1, 8, (0, 4)]
         }
     default relation_stats = {
-        "Love": ["love", "love", 10, 0, (0, 300)],
+        "Love": ["love", "love", 10, 0, (-100, 100)],
         "Suggestibility": ["suggestibility", "suggestibility", 10, 1, (0, 100)],
         "Obedience": ["obedience", "obedience", 10, 2, (0, 300)],
         "Happiness": ["happiness", "happiness", 10, 3, (0, 300)],
