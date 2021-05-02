@@ -145,12 +145,18 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
         "You push yourself balls deep into [the_girl.title]'s ass and dump your load."
         #This is where the "cum in me" section would go instead
         #the_girl "Ah! Ah!"
-        "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
         $ climax_controller.do_clarity_release(the_girl)
         if mc.condom:
+            "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
+
             "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
             "You tie the end in a knot and pull it off, throwing it away while she recovers."
         else:
+            if the_girl.has_cum_fetish():
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Her eyes go blank and she gets a blissful expression on her face."
+                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! Fill this slutty ass up!"
+                "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
+
             "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."
             $ the_girl.cum_in_ass()
             $ piledriver_anal.redraw_scene(the_girl)
@@ -172,7 +178,10 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
         $ the_girl.cum_on_face()
         $ climax_controller.do_clarity_release(the_girl)
         $ piledriver.redraw_scene(the_girl)
-        if the_girl.sluttiness > 80:
+        if the_girl.has_cum_fetish():
+            "[the_girl.title] sticks out her tongue and stares into your eyes as you climax. You spray your load onto her face, splattering some over her tongue and sending some right into her mouth."
+            "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
+        elif the_girl.sluttiness > 80:
             "[the_girl.title] sticks out her tongue and stares into your eyes as you climax. You spray your load onto her face, splattering some over her tongue and sending some right into her mouth."
             "She closes her mouth and swallows quickly, then bites her lip and smiles at you."
         else:

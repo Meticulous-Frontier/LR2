@@ -50,21 +50,6 @@ init 2: # Add some additional
                         textbutton "Realistic" action SetField(persistent, "pregnancy_pref", 2)
 
                     vbox:
-                        style_prefix "check"
-                        label "Text Style"
-                        textbutton "{i}Italic{/i}" action [ToggleField(style.get("textbutton_text_style"), "italic", True, False), Function(style.rebuild)]
-                        textbutton "{b}Bold{/b}" action [ToggleField(style.get("textbutton_text_style"), "bold", True, False), Function(style.rebuild)]
-                        label "Text Size"
-                        hbox: # Wanted to use a bar for this but ran into a paradox.
-                            textbutton "18" action [SetField(style.get("textbutton_text_style"), "size", 18), Function(style.rebuild)]
-                            textbutton "20" action [SetField(style.get("textbutton_text_style"), "size", 20), Function(style.rebuild)]
-                            textbutton "22" action [SetField(style.get("textbutton_text_style"), "size", 22), Function(style.rebuild)]
-                            textbutton "24" action [SetField(style.get("textbutton_text_style"), "size", 24), Function(style.rebuild)]
-                            textbutton "26" action [SetField(style.get("textbutton_text_style"), "size", 26), Function(style.rebuild)]
-                        #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
-                        #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
-
-                    vbox:
                         style_prefix "radio"
                         label "Embedded NTR"
                         textbutton "Enabled":
@@ -79,10 +64,6 @@ init 2: # Add some additional
                             action [
                                 SetField(persistent, "show_ntr", False)
                             ]
-
-                null height (2 * gui.pref_spacing)
-
-                hbox:
 
                     vbox:
                         style_prefix "radio"
@@ -100,21 +81,41 @@ init 2: # Add some additional
                                 SetField(persistent, "always_ask_condom", False)
                             ]
 
+                null height (2 * gui.pref_spacing)
+
+                hbox:
+
                     vbox:
-                        style_prefix "radio"
-                        label "Clean Memory"
-                        textbutton "Every Time Slot":
-                            sensitive True
-                            tooltip "Every time slot call the renpy.free_memory() function, to prevent memory errors."
-                            action [
-                                SetField(persistent, "clear_memory_mode", 0)
-                            ]
-                        textbutton "Each Game Day":
-                            sensitive True
-                            tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
-                            action [
-                                SetField(persistent, "clear_memory_mode", 1)
-                            ]
+                        style_prefix "check"
+                        label "Text Style"
+                        textbutton "{i}Italic{/i}" action [ToggleField(style.get("textbutton_text_style"), "italic", True, False), Function(style.rebuild)]
+                        textbutton "{b}Bold{/b}" action [ToggleField(style.get("textbutton_text_style"), "bold", True, False), Function(style.rebuild)]
+                        label "Text Size"
+                        hbox: # Wanted to use a bar for this but ran into a paradox.
+                            textbutton "18" action [SetField(style.get("textbutton_text_style"), "size", 18), Function(style.rebuild)]
+                            textbutton "20" action [SetField(style.get("textbutton_text_style"), "size", 20), Function(style.rebuild)]
+                            textbutton "22" action [SetField(style.get("textbutton_text_style"), "size", 22), Function(style.rebuild)]
+                            textbutton "24" action [SetField(style.get("textbutton_text_style"), "size", 24), Function(style.rebuild)]
+                            textbutton "26" action [SetField(style.get("textbutton_text_style"), "size", 26), Function(style.rebuild)]
+                        #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
+                        #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
+
+
+                    # vbox:
+                    #     style_prefix "radio"
+                    #     label "Clean Memory"
+                    #     textbutton "Every Time Slot":
+                    #         sensitive True
+                    #         tooltip "Every time slot call the renpy.free_memory() function, to prevent memory errors."
+                    #         action [
+                    #             SetField(persistent, "clear_memory_mode", 0)
+                    #         ]
+                    #     textbutton "Each Game Day":
+                    #         sensitive True
+                    #         tooltip "Daily call the renpy.free_memory() function, to prevent memory errors."
+                    #         action [
+                    #             SetField(persistent, "clear_memory_mode", 1)
+                    #         ]
 
 
                     # if not renpy.mobile: #High Memory mode is always disabled on mobile and free_memory is called daily.

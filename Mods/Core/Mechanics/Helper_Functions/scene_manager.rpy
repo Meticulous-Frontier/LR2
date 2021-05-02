@@ -41,6 +41,7 @@ init -2 python:
         def clear_scene(self, reset_actor = True):
             people_in_scene = [actor.person for actor in self.actors]
             for person in people_in_scene:
+                person.hide_person()
                 self.remove_actor(person, reset_actor = reset_actor)
             clear_scene()
 
@@ -103,6 +104,7 @@ init -2 python:
                 if reset_actor:
                     # reset actor clothing
                     actor.person.apply_planned_outfit()
+                actor.person.hide_person()
                 self.actors.remove(actor)
                 self.draw_scene()
 
@@ -110,6 +112,7 @@ init -2 python:
             actor = find_in_list(lambda x: x.person == person, self.actors)
             if actor:
                 actor.visible = False
+                actor.person.hide_person()
                 self.draw_scene()
 
         def show_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):

@@ -403,6 +403,8 @@ init 0 python:
                 ["showing her ass", 2, True],
                 ["taking control", 2, True],
             ])
+        update_person_opinions(person) # add random opinions
+        update_random_person(person)
         person.set_mc_title("Honey")
         person.generate_home()
         person.home.add_person(person)

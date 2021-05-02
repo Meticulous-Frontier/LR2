@@ -10,7 +10,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
     menu:
         "Cum inside of her":
             "You push yourself balls deep into [the_girl.title]'s ass and dump your load. Her moans grow desperate as she cums with you in unison."
-            if the_girl.get_opinion_score("anal creampies") >= 0:
+            if the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl "Oh god yes fill me up! Fill up my poor little ass with your cum!"
             else:
                 the_girl "Oh god I can't believe it, I'm cumming!"

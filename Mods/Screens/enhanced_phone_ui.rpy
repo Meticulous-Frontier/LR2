@@ -7,6 +7,7 @@ init 2:
         default ui_xsize = 360
         default fade_time = 5
         modal False
+
         frame:
             background "#1a45a188"
             xsize ui_xsize + 20

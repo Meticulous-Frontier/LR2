@@ -13,6 +13,9 @@ init 2:
         style_prefix "debug"
         zorder 100
 
+        $ texture_size, texture_count = renpy.exports.get_texture_size()
+        $ cache_size = renpy.display.im.cache.get_total_size()
+
         drag:
             drag_name "DebugInfo"
             xalign .9
@@ -24,14 +27,35 @@ init 2:
                 padding (5,5)
                 has vbox
                 label "ZipCache memory: {total_size:.2f} MB".format(total_size = get_size(zip_manager) / 1024.0 / 1024.0) xminimum 400
-                label "ZipCache items: {}".format(zip_manager.size())
+                label "ZipCache items: {count} ({utilization:.1f}%)".format(count = zip_manager.size(), utilization = zip_manager.utilization())
+                label "Texture Memory: {total_size:.2f} MB ({num_of_items})".format(total_size = texture_size / 1024.0 / 1024.0, num_of_items = texture_count)
+                label "Image Cache: {size:.1f} / {max_size:.1f} MB ({utilization:.1f}%)".format(size = 4.0 * cache_size / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0, utilization = cache_size * 100.0 / renpy.display.im.cache.cache_limit)
                 label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()
 
 
 init 2 python:
-    debug_log = LRUCacheDict(10, expiration = 0)
+    def validate_texture_memory():
+        while not hasattr(renpy.display.draw, "get_texture_size"):
+            time.sleep(2)
+
+        print("Activate texture memory watcher")
+        while True:
+            # keep texture memory below 1 Gb, even tough the max size is 2 Gb
+            if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * 4):
+                renpy.display.im.cache.clear()  # cleanup texture cache
+            time.sleep(.25)
+        return
+
+    debug_log = LRUCacheDict(8, expiration = 0)
+
+    # The preload thread.
+    texture_monitor_thread = threading.Thread(target=validate_texture_memory, name="texture_monitor")
+    texture_monitor_thread.setDaemon(True)
+    texture_monitor_thread.start()
+
+    renpy.config.per_frame_screens.append("DebugInfo")
 
     def show_debug_log():
         global debug_log_enabled

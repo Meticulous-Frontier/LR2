@@ -386,7 +386,7 @@ label mom_breakfast_action_label_high():
 
 label mom_commando_day_selfie_label():
     $ the_person = mom
-    "You get a notification on your phone from [the_person.title]."
+    $ mc.start_text_convo(the_person)
     if persistent.show_ntr:
         $ the_person.strip_outfit(delay = 0, exclude_upper = True)
         $ the_person.cum_on_ass()
@@ -395,6 +395,7 @@ label mom_commando_day_selfie_label():
         $ the_person.draw_person(position = SB_get_random_ass_position())
         "She sends you a selfie of her ass covered in cum. You quickly text her back."
         mc.name "Nice! You should leave it right there and walk around the office like that!"
+        the_person "You bad boy ;)"
     else:
         $ removed_something = the_person.strip_outfit_to_max_sluttiness(delay = 0, temp_sluttiness_boost = 20)
         the_person "Hey [the_person.mc_title], you were right. Going commando really paid off."
@@ -411,6 +412,7 @@ label mom_commando_day_selfie_label():
             "A moment later."
             the_person "You know me too well! See you at home tonight!"
 
+    $ mc.end_text_convo()
     "You smile and resume your day."
     $ clear_scene()
     $ the_person.apply_planned_outfit()

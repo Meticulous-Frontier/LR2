@@ -162,48 +162,48 @@ screen cheat_menu():
     # The arrays are utilized in this order: key = "DisplayName", [0 = hasattr check], [1 = variable / key], [2 = amount to changed], [3 = sort order]
     # NOTE: Fields are duplicated incase things change later, less likely that the buttons will need to be re formated
     default main_stats = {
-        "Charisma": ["charisma", "charisma", 1, 0],
-        "Focus": ["focus", "focus", 1 , 1],
-        "Intelligence": ["int", "int", 1, 2],
+        "Charisma": ["charisma", "charisma", 1, 0, (0, 20)],
+        "Focus": ["focus", "focus", 1 , 1, (0, 20)],
+        "Intelligence": ["int", "int", 1, 2, (0, 20)],
 
-        "Age": ["age", "age", 1, 3],
-        "Height": ["height", "height", .005, 4],
-        "Energy": ["energy", "energy", 10.0, 5],
-        "Max Energy": ["max_energy", "max_energy", 10.0, 6],
-        "Free Clarity": ["free_clarity", "free_clarity", 1000.0, 7],
+        "Age": ["age", "age", 1, 3, (18, 55)],
+        "Height": ["height", "height", .005, 4, (.8, 1)],
+        "Energy": ["energy", "energy", 10.0, 5, (60,  400)],
+        "Max Energy": ["max_energy", "max_energy", 10.0, 6, (60,  400)],
+        "Free Clarity": ["free_clarity", "free_clarity", 1000.0, 7, (0, 100000)],
 
-        "Funds": ["funds", "funds", 10000, 8],
-        "Supplies": ["supply_count", "supply_count", 10000, 9],
-        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 10],
-        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 11] # Might add If statement to combine these two as they go hand in hand
+        "Funds": ["funds", "funds", 10000, 8, (0, 100000000)],
+        "Supplies": ["supply_count", "supply_count", 10000, 9, (0, 100000)],
+        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 10, (50, 300)],
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 11, (50, 300)] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
-        "HR": ["hr_skill", "hr_skill", 1, 0],
-        "Marketing": ["market_skill", "market_skill", 1, 1],
-        "Researching": ["research_skill", "research_skill", 1, 2],
-        "Production": ["production_skill", "production_skill", 1, 3],
-        "Supplying": ["supply_skill", "supply_skill", 1, 4],
-        "Salary": ["salary", "salary", 1, 6],
+        "HR": ["hr_skill", "hr_skill", 1, 0, (0, 20)],
+        "Marketing": ["market_skill", "market_skill", 1, 1, (0, 20)],
+        "Researching": ["research_skill", "research_skill", 1, 2, (0, 20)],
+        "Production": ["production_skill", "production_skill", 1, 3, (0, 20)],
+        "Supplying": ["supply_skill", "supply_skill", 1, 4, (0, 20)],
+        "Salary": ["salary", "salary", 1, 6, (0, 20)],
 
-        "Max Employees": ["max_employee_count", "max_employee_count", 5, 5],
-        "Production Lines": ["production_lines", "production_lines", 1, 6],
-        "Serum Batch Size": ["batch_size", "batch_size", 5, 7],
-        "Research Tier": ["research_tier", "research_tier", 1, 8]
+        "Max Employees": ["max_employee_count", "max_employee_count", 5, 5, (5, 80)],
+        "Production Lines": ["production_lines", "production_lines", 1, 6, (1, 10)],
+        "Serum Batch Size": ["batch_size", "batch_size", 1, 7, (1, 20)],
+        "Research Tier": ["research_tier", "research_tier", 1, 8, (0, 4)]
         }
     default relation_stats = {
-        "Love": ["love", "love", 10, 0],
-        "Suggestibility": ["suggestibility", "suggestibility", 10, 1],
-        "Obedience": ["obedience", "obedience", 10, 2],
-        "Happiness": ["happiness", "happiness", 10, 3],
-        "Arousal": ["arousal", "arousal", 10, 4],
-        "Sluttiness": ["sluttiness", "sluttiness", 10, 5],
-        "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10, 6]
+        "Love": ["love", "love", 10, 0, (0, 300)],
+        "Suggestibility": ["suggestibility", "suggestibility", 10, 1, (0, 100)],
+        "Obedience": ["obedience", "obedience", 10, 2, (0, 300)],
+        "Happiness": ["happiness", "happiness", 10, 3, (0, 300)],
+        "Arousal": ["arousal", "arousal", 10, 4, (0, 100)],
+        "Sluttiness": ["sluttiness", "sluttiness", 10, 5, (0, 300)],
+        "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10, 6, (0, 300)]
         }
     default sex_stats = { # Sex Skills are stored in a dict
-        "Foreplay": ["sex_skills", "Foreplay", 1, 0],
-        "Oral": ["sex_skills", "Oral", 1, 1],
-        "Vaginal": ["sex_skills", "Vaginal", 1, 2],
-        "Anal": ["sex_skills", "Anal", 1, 3]
+        "Foreplay": ["sex_skills", "Foreplay", 1, 0, (0, 20)],
+        "Oral": ["sex_skills", "Oral", 1, 1, (0, 20)],
+        "Vaginal": ["sex_skills", "Vaginal", 1, 2, (0, 20)],
+        "Anal": ["sex_skills", "Anal", 1, 3, (0, 20)]
         }
 
     # Consider making it update the respective lists custom titles when it becomes possible
@@ -362,11 +362,14 @@ screen cheat_menu():
                                 vbox:
                                     for (x, i) in sorted(main_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(main_stats[x][0])):
+                                            $ limit = main_stats[x][4]
+                                            $ cur_value = vars(editing_target)[main_stats[x][1]]
                                             hbox:
                                                 textbutton " - ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value > limit[0]
                                                     action [
                                                         Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
                                                         Function(cheat_appearance)
@@ -378,35 +381,40 @@ screen cheat_menu():
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "cheat_text_style"
 
-                                                        action [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
-                                                            Function(cheat_appearance)
-                                                        ]
+                                                        if cur_value < limit[1]:
+                                                            action [
+                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
+                                                                Function(cheat_appearance)
+                                                            ]
 
-                                                        alternate [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
-                                                            Function(cheat_appearance)
-                                                        ]
+                                                        if cur_value > limit[0]:
+                                                            alternate [
+                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
+                                                                Function(cheat_appearance)
+                                                            ]
                                                 else:
                                                     textbutton x + ": " + str(__builtin__.round(vars(editing_target)[main_stats[x][1]], 3)):
                                                         xsize 198
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "cheat_text_style"
 
-                                                        action [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
-                                                            Function(cheat_appearance)
-                                                        ]
+                                                        if cur_value < limit[1]:
+                                                            action [
+                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
+                                                                Function(cheat_appearance)
+                                                            ]
 
-                                                        alternate [
-                                                            Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
-                                                            Function(cheat_appearance)
-                                                        ]
+                                                        if cur_value > limit[0]:
+                                                            alternate [
+                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
+                                                                Function(cheat_appearance)
+                                                            ]
 
                                                 textbutton " + ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value < limit[1]
                                                     action [
                                                         Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
                                                         Function(cheat_appearance)
@@ -427,11 +435,14 @@ screen cheat_menu():
                                 vbox:
                                     for (x, y) in sorted(work_skills.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(work_skills[x][0])):
+                                            $ limit = work_skills[x][4]
+                                            $ cur_value = vars(editing_target)[work_skills[x][1]]
                                             hbox:
                                                 textbutton " - ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value > limit[0]
                                                     action [
                                                         Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
                                                     ]
@@ -441,18 +452,21 @@ screen cheat_menu():
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
 
-                                                    action [
-                                                        Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
-                                                    ]
+                                                    if cur_value < limit[1]:
+                                                        action [
+                                                            Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
+                                                        ]
 
-                                                    alternate [
-                                                        Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
-                                                    ]
+                                                    if cur_value > limit[0]:
+                                                        alternate [
+                                                            Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
+                                                        ]
 
                                                 textbutton " + ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value < limit[1]
                                                     action [
                                                         Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
                                                     ]
@@ -471,11 +485,14 @@ screen cheat_menu():
                                 vbox:
                                     for (x, y) in sorted(sex_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(sex_stats[x][0])):
+                                            $ limit = sex_stats[x][4]
+                                            $ cur_value = vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]]
                                             hbox:
                                                 textbutton " - ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value > limit[0]
                                                     action [
                                                         SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
                                                     ]
@@ -485,18 +502,21 @@ screen cheat_menu():
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
 
-                                                    action [
-                                                        SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
-                                                    ]
+                                                    if cur_value < limit[1]:
+                                                        action [
+                                                            SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
+                                                        ]
 
-                                                    alternate [
-                                                        SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
-                                                    ]
+                                                    if cur_value > limit[0]:
+                                                        alternate [
+                                                            SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
+                                                        ]
 
                                                 textbutton " + ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value < limit[1]
                                                     action [
                                                         SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
                                                     ]
@@ -518,11 +538,14 @@ screen cheat_menu():
                                 vbox:
                                     for (x, y) in sorted(relation_stats.items(), key=lambda x:x[1][3]):
                                         if hasattr(editing_target, str(relation_stats[x][0])):
+                                            $ limit = relation_stats[x][4]
+                                            $ cur_value = vars(editing_target)[relation_stats[x][0]]
                                             hbox:
                                                 textbutton " - ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value > limit[0]
                                                     action [
                                                         Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
                                                     ]
@@ -532,18 +555,21 @@ screen cheat_menu():
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
 
-                                                    action [
-                                                        Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
-                                                    ]
+                                                    if cur_value < limit[1]:
+                                                        action [
+                                                            Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
+                                                        ]
 
-                                                    alternate [
-                                                        Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
-                                                    ]
+                                                    if cur_value > limit[0]:
+                                                        alternate [
+                                                            Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
+                                                        ]
 
                                                 textbutton " + ":
                                                     xsize 36
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
+                                                    sensitive cur_value < limit[1]
                                                     action [
                                                         Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
                                                     ]
