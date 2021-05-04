@@ -201,6 +201,7 @@ init 5 python:
     def advance_time_run_day(people):
         start_time = time.time()
         for (person, place) in people:
+            person.follow_mc = False
             person.run_day()
 
         mc.run_day()
