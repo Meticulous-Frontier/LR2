@@ -196,8 +196,8 @@ screen cheat_menu():
         "Obedience": ["obedience", "obedience", 10, 2, (0, 300)],
         "Happiness": ["happiness", "happiness", 10, 3, (0, 300)],
         "Arousal": ["arousal", "arousal", 10, 4, (0, 100)],
-        "Sluttiness": ["sluttiness", "sluttiness", 10, 5, (0, 300)],
-        "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 10, 6, (0, 300)]
+        "Sluttiness": ["sluttiness", "sluttiness", 5, 5, (0, 300)],
+        "Core Sluttiness": ["core_sluttiness", "core_sluttiness", 5, 6, (0, 300)]
         }
     default sex_stats = { # Sex Skills are stored in a dict
         "Foreplay": ["sex_skills", "Foreplay", 1, 0, (0, 20)],
