@@ -607,6 +607,9 @@ init -1 python:
 
         if start_home is None:
             the_mother.generate_home()
+        else:
+            the_mother.set_schedule(the_location = start_home, times = [0,4])
+
         the_mother.home.add_person(the_mother)
 
         for sister in town_relationships.get_existing_sisters(self): #First find all of the sisters this person has
