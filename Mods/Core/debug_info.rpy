@@ -61,12 +61,12 @@ init 2 python:
         print("Activate texture memory watcher")
         while True:
             # keep texture memory below 1 Gb, even tough the max size is 2 Gb
-            if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * 4):
-                renpy.display.im.cache.clear()  # cleanup texture cache
+            if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * 3.5):
+                renpy.free_memory() # use main free memory function
 
             if debug_log_enabled:
                 system_info.update()
-            time.sleep(.25)
+            time.sleep(.33)
         return
 
     debug_log = LRUCacheDict(8, expiration = 0)
