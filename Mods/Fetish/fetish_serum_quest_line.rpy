@@ -21,28 +21,28 @@ init 2 python:
         return False
 
     def fetish_serum_exhibition_requirement(min_day):
-        if min_day <= day:
+        if day <= min_day:
             return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
 
     def fetish_serum_anal_requirement(min_day):
-        if min_day <= day:
+        if day <= min_day:
             return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
 
     def fetish_serum_cum_requirement(min_day):
-        if min_day <= day:
+        if day <= min_day:
             return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
 
     def fetish_serum_breeding_requirement(min_day):
-        if min_day <= day:
+        if day <= min_day:
             return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
