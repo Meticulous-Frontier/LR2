@@ -13,9 +13,6 @@ init 2:
         style_prefix "debug"
         zorder 100
 
-        $ texture_size, texture_count = renpy.exports.get_texture_size()
-        $ cache_size = renpy.display.im.cache.get_total_size()
-
         drag:
             drag_name "DebugInfo"
             xalign .9
@@ -26,16 +23,37 @@ init 2:
                 xmaximum 600
                 padding (5,5)
                 has vbox
-                label "ZipCache memory: {total_size:.2f} MB".format(total_size = get_size(zip_manager) / 1024.0 / 1024.0) xminimum 400
-                label "ZipCache items: {count} ({utilization:.1f}%)".format(count = zip_manager.size(), utilization = zip_manager.utilization())
-                label "Texture Memory: {total_size:.2f} MB ({num_of_items})".format(total_size = texture_size / 1024.0 / 1024.0, num_of_items = texture_count)
-                label "Image Cache: {size:.1f} / {max_size:.1f} MB ({utilization:.1f}%)".format(size = 4.0 * cache_size / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0, utilization = cache_size * 100.0 / renpy.display.im.cache.cache_limit)
+                label "ZipCache memory: {total_size:.2f} MB".format(total_size = system_info.total_zip_size / 1024.0 / 1024.0) xminimum 400
+                label "ZipCache items: {count} ({utilization:.1f}%)".format(count = system_info.total_zip_items, utilization = system_info.zip_utilization)
+                label "Texture Memory: {total_size:.2f} MB ({num_of_items})".format(total_size = system_info.texture_size / 1024.0 / 1024.0, num_of_items = system_info.texture_count)
+                label "Image Cache: {size:.1f} / {max_size:.1f} MB ({utilization:.1f}%)".format(size = 4.0 * system_info.cache_size / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0, utilization = system_info.cache_size * 100.0 / renpy.display.im.cache.cache_limit)
                 label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()
 
 
 init 2 python:
+
+    class SystemInfo():
+        def __init__(self):
+            self.total_zip_size = 0
+            self.total_zip_items = 0
+            self.zip_utilization = 0
+            self.texture_size = 0
+            self.texture_count = 0
+            self.cache_size = 0
+
+        def update(self):
+            self.total_zip_size = get_size(zip_manager)
+            self.total_zip_items = zip_manager.size()
+            self.zip_utilization = zip_manager.utilization()
+            self.texture_size, self.texture_count = renpy.exports.get_texture_size()
+            self.cache_size = renpy.display.im.cache.get_total_size()
+
+
+    system_info = SystemInfo()
+
+
     def validate_texture_memory():
         while not hasattr(renpy.display.draw, "get_texture_size"):
             time.sleep(2)
@@ -45,6 +63,9 @@ init 2 python:
             # keep texture memory below 1 Gb, even tough the max size is 2 Gb
             if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * 4):
                 renpy.display.im.cache.clear()  # cleanup texture cache
+
+            if debug_log_enabled:
+                system_info.update()
             time.sleep(.25)
         return
 
@@ -72,6 +93,9 @@ init 2 python:
 
     def get_debug_log():
         return "\n".join(OrderedDict(sorted(debug_log._LRUCacheDict__values.items(), key=lambda t: t[0], reverse = True)).values())
+
+    def get_persons_size():
+        return sum([get_size(x) for x in all_people_in_the_game()])
 
     def get_size(obj, seen = None):
         size = sys.getsizeof(obj)
