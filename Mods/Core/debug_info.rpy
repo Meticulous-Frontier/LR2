@@ -1,6 +1,5 @@
 init 2:
     define debug_log_enabled = False
-    define last_load_time = 0.0
 
     style debug_label_text:
         size 14
@@ -27,7 +26,6 @@ init 2:
                 label "ZipCache items: {count} ({utilization:.1f}%)".format(count = system_info.total_zip_items, utilization = system_info.zip_utilization)
                 label "Texture Memory: {total_size:.2f} MB ({num_of_items})".format(total_size = system_info.texture_size / 1024.0 / 1024.0, num_of_items = system_info.texture_count)
                 label "Image Cache: {size:.1f} / {max_size:.1f} MB ({utilization:.1f}%)".format(size = 4.0 * system_info.cache_size / 1024.0 / 1024.0, max_size = 4.0 * renpy.display.im.cache.cache_limit / 1024.0 / 1024.0, utilization = system_info.cache_size * 100.0 / renpy.display.im.cache.cache_limit)
-                label "Last character load time: {:.3f}".format(last_load_time)
                 label ""
                 label get_debug_log()
 

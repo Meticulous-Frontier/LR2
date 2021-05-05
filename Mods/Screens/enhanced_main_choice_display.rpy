@@ -14,22 +14,37 @@ init 2 python:
             self.display_scale = display_scale
             self.display_func = display_func
             self.person_preview_args = person_preview_args
+            self.display_image = None
+
+        def __del__(self):
+            self.display_image = None
+            return
+
+        def load_image(self):
+            if not self.display_func:
+                return
+            if self.display_image:
+                return
+
+            self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
+            return
 
         def show_person(self):
             if not self.display_func:
                 return
+            if not self.display_image:
+                self.load_image()
 
-            load_time = time.time()
+            # check if we are not running out of memory
+            validate_texture_memory()
 
-            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer="solo", what= self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args), tag=self.display_key)
-
-            global last_load_time
-            last_load_time = time.time() - load_time
+            if self.display_image:
+                renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer = "solo", what= self.display_image, tag = self.display_key)
             return
 
         def hide_person(self):
             if self.display_key:
-                renpy.hide(self.display_key, layer="solo")
+                renpy.hide(self.display_key, layer = "solo")
             return
 
         def preload(self):
