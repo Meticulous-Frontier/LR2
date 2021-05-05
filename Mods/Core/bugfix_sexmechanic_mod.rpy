@@ -835,7 +835,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
 
         else:
-            if skill_tak == "Anal":
+            if skill_tag == "Anal":
                 the_person "Well...ah...could you fuck my little ass raw?"
             else:
                 $ the_person.call_dialogue("condom_bareback_ask")
