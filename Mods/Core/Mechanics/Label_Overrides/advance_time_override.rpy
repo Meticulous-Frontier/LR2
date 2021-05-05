@@ -181,14 +181,8 @@ init 5 python:
     def advance_time_run_turn(people):
         start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
+            person.validate_stats()
             person.run_turn()
-            # limit person stat values (anything over these values has no in-game effect)
-            if person.sluttiness > 300:
-                person.sluttiness = 300
-            if person.core_sluttiness > 300:
-                person.core_sluttiness = 300
-            if person.obedience > 300:
-                person.obedience = 300
 
         mc.business.run_turn()
         mc.run_turn()
