@@ -1291,34 +1291,35 @@ init -1 python:
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
     def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = [], flatten = False): #Encapsulates what is done when drawing a person and produces a single displayable.
-        if position is None:
-            position = self.idle_pose
-        if emotion is None:
-            emotion = self.get_emotion()
+        with render_lock:
+            if position is None:
+                position = self.idle_pose
+            if emotion is None:
+                emotion = self.get_emotion()
 
-        forced_special_modifier = self.outfit.get_forced_modifier()
-        if forced_special_modifier is not None:
-            special_modifier = forced_special_modifier
+            forced_special_modifier = self.outfit.get_forced_modifier()
+            if forced_special_modifier is not None:
+                special_modifier = forced_special_modifier
 
-        displayable_list = []
-        displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
-        displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
-        displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Add in her pubes
+            displayable_list = []
+            displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
+            displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
+            displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Add in her pubes
 
-        displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
-        displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
+            displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
+            displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
 
-        composite_list = [position_size_dict.get(position)]
-        for display in displayable_list:
-            if isinstance(display, __builtin__.tuple):
-                composite_list.extend(display)
-            else:
-                composite_list.append((0,0))
-                composite_list.append(display)
+            composite_list = [position_size_dict.get(position)]
+            for display in displayable_list:
+                if isinstance(display, __builtin__.tuple):
+                    composite_list.extend(display)
+                else:
+                    composite_list.append((0,0))
+                    composite_list.append(display)
 
-        if flatten:
-            return Flatten(Composite(*composite_list))
-        return Composite(*composite_list)
+            if flatten:
+                return Flatten(Composite(*composite_list))
+            return Composite(*composite_list)
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
