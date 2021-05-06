@@ -645,9 +645,11 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             "You quickly put on another condom and continue to fuck her."
             $ mc.condom = True
 
+    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck"):
         # make sure we move skirts out of the way when rendering
         python:
             for the_clothing in [x for x in the_person.outfit.get_lower_ordered() if not (x.underwear or x.half_off)]:
+                renpy.say(None, "You move her " + the_clothing.display_name + " out of the way.")
                 the_person.outfit.half_off_clothing(the_clothing)
 
     return willing
