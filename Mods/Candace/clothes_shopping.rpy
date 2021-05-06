@@ -94,11 +94,12 @@ label candace_goes_clothes_shopping_label(the_person):
     if the_person.should_wear_uniform():
         the_person "Yay! I can't wait! Just let me get changed, real quick."
         $ the_person.apply_planned_outfit()
+        $ the_person.draw_person()
         "After a minute she comes back, ready to go."
     else:
         the_person "Yay! I can't wait!"
-    $ the_person.draw_person()
 
+    $ the_person.change_location(clothing_store)
     $ mc.change_location(clothing_store)
     $ mc.location.show_background()
 
@@ -136,7 +137,11 @@ label invite_to_clothes_shopping_label():
     "You decide to invite someone out for some clothes shopping."
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(), "Clothes shopping", ["Back"])]))
     $ the_person = _return
-    if the_person != "Back":
+    if isinstance(the_person, Person):
+        # change her location to the clothing store and make sure she wears her 'personal outfit'
+        $ the_person.change_location(mc.location)
+        $ the_person.apply_outfit()
+
         "You send a message to [the_person.name] about going clothes shopping."
         "After some time you get a response..."
         if the_person.obedience > 100:
