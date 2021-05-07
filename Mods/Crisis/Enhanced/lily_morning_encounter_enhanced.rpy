@@ -177,7 +177,7 @@ label lily_morning_encounter_enhanced_label():
                                 if the_watcher.sluttiness < 80:
                                     the_watcher "...and, [the_person.title], what do you think you are doing walking around naked?"
                                     $ the_group.redraw_person(the_person)
-                                    the_person "Sorry, [the_watcher.title] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
+                                    the_person "Sorry, [the_watcher.name] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
                                 else:
                                     the_watcher "...and, [the_person.title], walking around naked again I see."
                                     $ the_group.redraw_person(the_person)
@@ -259,7 +259,7 @@ label lily_morning_encounter_enhanced_label():
                                             "Suddenly you hear a gasp from the door behind you."
                                             $ the_watcher.change_location(kitchen)
                                             $ the_group.add_person(the_watcher)
-                                            $ the_group.draw_person(the_watcher, position = "stand4", emotion = angry)
+                                            $ the_group.draw_person(the_watcher, position = "stand4", emotion = "angry")
                                             the_watcher "[the_watcher.mc_title], [the_person.title] what do you think you are doing?"
                                             mc.name "Oh, hey [the_watcher.title] I was just teaching [the_person.title] a lesson for walking around the house naked."
                                             if the_watcher.sluttiness < 80:

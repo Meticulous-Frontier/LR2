@@ -115,6 +115,20 @@ init -1 python:
 
     Person.remove_person_from_game = remove_person_from_game
 
+    def validate_stats(self):
+        # limit person stat values (anything over these values has no in-game effect)
+        if self.sluttiness > 300:
+            self.sluttiness = 300
+        if self.core_sluttiness > 300:
+            self.core_sluttiness = 300
+        if self.obedience > 300:
+            self.obedience = 300
+        if self.love > 100:
+            self.love = 100
+        return
+
+    Person.validate_stats = validate_stats
+
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         location = next((x for x in list_of_places if self in x.people), None)
@@ -607,6 +621,9 @@ init -1 python:
 
         if start_home is None:
             the_mother.generate_home()
+        else:
+            the_mother.set_schedule(the_location = start_home, times = [0,4])
+
         the_mother.home.add_person(the_mother)
 
         for sister in town_relationships.get_existing_sisters(self): #First find all of the sisters this person has
@@ -1164,8 +1181,8 @@ init -1 python:
 
     def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
-        load_time = time.time()
 
+        validate_texture_memory()
         if position is None:
             position = self.idle_pose
 
@@ -1201,8 +1218,6 @@ init -1 python:
 
         character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
         renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
-        global last_load_time
-        last_load_time = time.time() - load_time
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1472,6 +1487,20 @@ init -1 python:
         return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
 
     Person.is_wearing_uniform = person_is_wearing_uniform
+
+    def should_wear_uniform_enhanced(self):
+        if not mc.business.is_open_for_business():  # quick exit
+            return False
+
+        #Check to see if we are: 1) Employed by the PC. 2) At work right now. 3) there is a uniform set for our department.
+        employment_title = mc.business.get_employee_title(self)
+        if employment_title != "None" and self.location == self.work: # is she really at work?
+            if mc.business.get_uniform_wardrobe(employment_title).get_count() > 0 or self.event_triggers_dict.get("forced_uniform", False): #Check to see if there's anything stored in the uniform section.
+                return True
+
+        return False #If we fail to meet any of the above conditions we should return false.
+
+    Person.should_wear_uniform = should_wear_uniform_enhanced
 
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         self.outfit.remove_all_cum()

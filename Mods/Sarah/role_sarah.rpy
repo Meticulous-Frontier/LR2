@@ -1751,11 +1751,9 @@ label Sarah_stripclub_story_label():
         mc.name "You don't have to. Just spend the night here."
         the_person "That's tempting, believe me, but I need to get home. Thanks for the offer!"
     if staying_over:
-        $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your date with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
         $ mc.change_locked_clarity(50)
-        call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_stripclub
         call Sarah_spend_the_night() from sarah_stripclub_spend_the_night_sequence
     else:
         $ the_person.apply_planned_outfit()
@@ -2016,9 +2014,6 @@ label Sarah_threesome_request_label():
     $ scene_manager.clear_scene()
     $ del person_choice
 
-    $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
-
-    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_threesome_request
     call Sarah_spend_the_night() from sarah_threesome_request_spend_the_night_sequence
 
     return
@@ -2133,7 +2128,7 @@ label Sarah_initial_threesome_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You make sure your bedroom is nice and tidy."
-    $ mc.start_text_convo(the_person)
+    $ mc.start_text_convo(sarah)
     sarah "Hey, I'm here."
     $ mc.end_text_convo()
     "You head to the front door and invite her in."
@@ -2146,8 +2141,9 @@ label Sarah_initial_threesome_label():
         "Okay, let me go get [the_person.title], I'll be right back."
         "You walk into her room. She follows you back to your room."
     else:
-        "Soon, you get another text on your phone."
+        $ mc.start_text_convo(the_person)
         the_person "I'm here now. Come let me in?"
+        $ mc.end_text_convo()
         mc.name "She's here, give me one second."
         "You go to the front door and let in [the_person.title]. She follows you quietly to your room."
     # make the second person wear a more sexy outfit (50% sluttiness boost)
@@ -2226,7 +2222,6 @@ label Sarah_initial_threesome_label():
     $ scene_manager.clear_scene()
     $ sarah.next_day_outfit = sarah.planned_outfit # she stays the night so she will have to wear the same outfit again
 
-    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_threesome_1
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
     $ add_sarah_ask_for_baby_action()
     return
@@ -2292,8 +2287,6 @@ label Sarah_ask_for_baby_label():
                 the_person "That's okay. Maybe in the morning?"
             "You snuggle up with [the_person.possessive_title]. You both quickly fall asleep."
 
-            call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_1
-            call Sarah_spend_the_night() from sarah_ask_for_baby_overnight
         "Think about it":
             mc.name "This is a really big decision. Give me some time to think about it, okay?"
             "You can tell she is a little disappointed, but she understands your answer."
@@ -2307,18 +2300,22 @@ label Sarah_ask_for_baby_label():
             call fuck_person(the_person, start_position = kissing, skip_intro = True, girl_in_charge = False) from _sarah_ask_for_baby_reject_01
             $ scene_manager.update_actor(the_person, position = "missionary")
             "When you finish, you lay down next to [the_person.title] in your bed. You both quickly fall asleep together."
-            call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_2
-            call Sarah_spend_the_night() from sarah_ask_for_baby_overnight_reject
+
+    call Sarah_spend_the_night() from sarah_ask_for_baby_overnight
 
     return
 
 label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
-    $ the_person = sarah
-    $ scene_manager = Scene()
-    $ the_person.apply_outfit(special_fetish_nude_outfit)
-    $ the_person.change_energy(200)
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_spend_the_night
 
-    $ (threesome_wakeup, threesome_partner) = get_sarah_spend_night_threesome_possibility()
+    python:
+        the_person = sarah
+        the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
+
+        the_person.apply_outfit(special_fetish_nude_outfit)
+        the_person.change_energy(200)
+        (threesome_wakeup, threesome_partner) = get_sarah_spend_night_threesome_possibility()
+        scene_manager = Scene()
 
     if not threesome_wakeup:
         $ scene_manager.add_actor(the_person, position = "walking_away")
@@ -2994,8 +2991,6 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ scene_manager.strip_actor_outfit(the_person, exclude_feet = False)
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "Worn out from your romp with [the_person.possessive_title], you cuddle up with her and quickly fall asleep."
-        $ the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
-        call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_overnight_after_date
         call Sarah_spend_the_night() from sarah_date_night_happy_ending_gf_path
     elif the_person.has_role(affair_role):
         the_person "It feels so good to be next to you, but I need to get home."
@@ -3004,6 +2999,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
         "You lay on your bed and watch as [the_person.possessive_title] slowly gets her clothes on. She says goodbye then lets herself out."
+        return "Advance Time"
     else:
         the_person "I need to get going... I guess. Thanks for the evening though. It was great!"
         mc.name "You don't have to. Just spend the night here."

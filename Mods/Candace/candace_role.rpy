@@ -1296,7 +1296,7 @@ label candace_meet_doctor_candace_label():
     "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
     "Yet, every time she opens her mouth and speaks, she is completely different."
     "A few days ago you walked by the break room while able trivia show was on, and [the_person.title] was spitting answers out before the host even finished with the question."
-    "When she looks you in the eye and speaks, her words carry weight. You don't blow off her suggestions as if they are non sense anymore."
+    "When she looks you in the eye and speaks, her words carry weight. You don't blow off her suggestions as if they are nonsense anymore."
     if candace_get_sex_record_difference_tier() == 0:
         "The changes have made you wary, especially of having sex with her. She still seems willing, but it just feels wrong."
         "You can't bring yourself to lay your hands on her. And in a business like yours that could be a problem in the long term. You decide to address it."
@@ -1332,7 +1332,7 @@ label candace_meet_doctor_candace_label():
     the_person "To find someone that would take the time that you did, to recognize that I was in an abusive relationship, to do what it took to get me out, to get me a job, to help me make friends."
     the_person "When that same person COULD have taken a different route... Taken advantage, taken control."
     mc.name "I... I could never have done something like that..."
-    the_person "I know. For you to have the morales to do that."
+    the_person "I know. For you to have the morals to do that."
     the_person "But beyond that, to be in this industry, to be in a position to actually help, and to make the pushes necessary to formulate the cure, and to give it to me."
     "[the_person.title] looks you right in the eye and delivers her judgement."
     the_person "It could have only been you. You saved me. And for that, I owe you everything."

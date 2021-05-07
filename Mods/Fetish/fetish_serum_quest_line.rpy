@@ -20,22 +20,30 @@ init 2 python:
     def fetish_serum_discuss_progress_requirement(the_person):
         return False
 
-    def fetish_serum_exhibition_requirement():
+    def fetish_serum_exhibition_requirement(min_day):
+        if day <= min_day:
+            return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
 
-    def fetish_serum_anal_requirement():
+    def fetish_serum_anal_requirement(min_day):
+        if day <= min_day:
+            return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
 
-    def fetish_serum_cum_requirement():
+    def fetish_serum_cum_requirement(min_day):
+        if day <= min_day:
+            return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
 
-    def fetish_serum_breeding_requirement():
+    def fetish_serum_breeding_requirement(min_day):
+        if day <= min_day:
+            return False
         if day%7 == 0 and mc.is_at_work() and mc.business.head_researcher:
             return True
         return False
@@ -375,21 +383,25 @@ label fetish_serum_unlock_choice_menu(the_person):
             "You give [the_person.title] specifications that would make a person more willing to have sexual activity in front of others."
             "In addition, it would make them more willing to show their body, even out in public."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
+            $ fetish_serum_exhibition.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition)
         "Anal Program" if get_fetish_anal_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have anal sexual activity and be submissive to their partner."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
+            $ fetish_serum_anal.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_anal)
         "Semen Program" if get_fetish_cum_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person enjoy semen exposure."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
+            $ fetish_serum_cum.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_cum)
         "Reproduction Program" if get_fetish_breeding_serum().tier > 5:
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to engage in reproduction and acts associated with it."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
+            $ fetish_serum_breeding.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_breeding)
         "No":
             mc.name "Not right now, but I'll keep this option in mind."

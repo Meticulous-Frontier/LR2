@@ -8,9 +8,6 @@ init 2:
         default fade_time = 5
         modal False
 
-        python: # monitor texture memory
-            validate_texture_memory()
-
         frame:
             background "#1a45a188"
             xsize ui_xsize + 20

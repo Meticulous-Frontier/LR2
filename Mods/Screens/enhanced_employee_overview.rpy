@@ -58,7 +58,7 @@ init 2:
             ["Sluttiness", "sluttiness"],
             ["Suggest", "suggestibility"],
             ["Charisma", "charisma"],
-            ["Intelligence", "int"],
+            ["Intellect", "int"],
             ["Focus", "focus"],
             ["Research", "research_skill"],
             ["Production", "production_skill"],
@@ -106,7 +106,7 @@ init 2:
             xanchor 0.5
             yalign 0.05
             yanchor 0.0
-            spacing 20
+            spacing 5
             xsize 1860
             frame:
                 background "#1a45a1aa"
@@ -147,7 +147,9 @@ init 2:
 
                 yanchor 0.0
                 background "#1a45a1aa"
-                grid grid_count 1 ysize 30 xfill True:
+                ysize 60
+
+                grid grid_count 1 ysize 60 xfill True:
                     if person_select:
                         frame:
                             background None
@@ -156,8 +158,8 @@ init 2:
                         frame:
                             background None
                             textbutton attributes[0]:
-                                style "textbutton_no_padding_highlight"
-                                text_style "textbutton_text_style"
+                                style "textbutton_style"
+                                text_style "menu_text_style"
                                 xfill True
                                 if sort_employees_by == attributes[1]:
                                     action [
@@ -170,10 +172,10 @@ init 2:
                                     ]
                                 if sort_employees_by == attributes[1]:
                                     background "#4f7ad6"
-                                margin [0, 0]
+                                margin (5, 0)
 
             frame:
-                ypos -20
+                ypos -5
                 yanchor 0.0
                 background "#1a45a1aa"
                 xfill True
@@ -181,16 +183,16 @@ init 2:
                     if __builtin__.len(display_list) > 5:
                         scrollbars "vertical"
                     mousewheel True
-                    ysize 580
-                    grid grid_count __builtin__.len(display_list) spacing -10 xfill True:
+                    ysize 620
+                    grid grid_count __builtin__.len(display_list) xfill True:
                         for person in sorted(display_list, key = lambda person: getattr(person, renpy.current_screen().scope["sort_employees_by"]), reverse = renpy.current_screen().scope["reverse_sort"]):
                             if person_select:
                                 textbutton "Select" style "textbutton_style" text_style "menu_text_style" action Return(person) xsize 100
                             frame:
                                 background None
-                                xsize 120
+                                xsize 148
                                 ysize 80
-                                textbutton person.name + " " + person.last_name style "textbutton_style" text_style "menu_text_style" action Show("person_info_detailed", the_person = person) xfill True xalign 0.0 yfill True margin [0, 0]
+                                textbutton person.name + "\n" + person.last_name style "textbutton_style" text_style "menu_text_style_left" action Show("person_info_detailed", the_person = person) xfill True xalign 0.0 yfill True margin (2, 0)
                             for attributes in sort_attributes[1:]:
                                 frame:
                                     background None
@@ -201,7 +203,7 @@ init 2:
             $ stats_list = people_list_potential_stat(display_list)
             frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
                 background "#1a45a1aa"
-                yoffset -20
+                yoffset -10
                 hbox:
                     xfill True
                     xalign 0.5

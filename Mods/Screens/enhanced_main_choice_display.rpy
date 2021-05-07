@@ -13,38 +13,38 @@ init 2 python:
             self.display_key = display_key
             self.display_scale = display_scale
             self.display_func = display_func
-            self.display_image = None
             self.person_preview_args = person_preview_args
+            self.display_image = None
 
         def __del__(self):
-            self.clear()
+            self.display_image = None
+            return
 
-        def load(self):
-            if not self.display_func or self.display_image:
+        def load_image(self):
+            if not self.display_func:
+                return
+            if self.display_image:
                 return
 
             self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
-            # always predict person displayable (the clear_function will remove them from the prediction cache)
-            renpy.start_predict(self.display_image)
             return
 
         def show_person(self):
             if not self.display_func:
                 return
-
-            load_time = time.time()
             if not self.display_image:
-                self.load()
+                self.load_image()
 
-            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer="solo", what= self.display_image, tag=self.display_key)
+            # check if we are not running out of memory
+            validate_texture_memory()
 
-            global last_load_time
-            last_load_time = time.time() - load_time
+            if self.display_image:
+                renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer = "solo", what= self.display_image, tag = self.display_key)
             return
 
         def hide_person(self):
             if self.display_key:
-                renpy.hide(self.display_key, layer="solo")
+                renpy.hide(self.display_key, layer = "solo")
             return
 
         def preload(self):
@@ -73,11 +73,6 @@ init 2 python:
                     load_image(cloth.position_sets[person.idle_pose].get_image(person.face_style, "default"))
                 else:
                     load_image(cloth.position_sets[person.idle_pose].get_image(actual_body_type(person, cloth), actual_tit_size(person, cloth)))
-            return
-
-        def clear(self):
-            if self.display_image:
-                 renpy.stop_predict(self.display_image)
             return
 
     def build_menu_items(elements_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):

@@ -597,9 +597,9 @@ label casual_hotwife_dancing_sex_label(the_person):
             elif the_person.has_ass_cum():
                 "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
-            else:       #We assume we finished inside her#
-                "[the_person.possessive_title]'s pussy is dripping cum from your creampie."
-                "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
+            else:       #We assume we finished inside her but could be pussy or ass so make the text more generic#
+                "[the_person.possessive_title]'s is dripping cum from your creampie."
+                "You grab her phone and snap a couple pictures of her cum dripping body."
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh my god... that was amazing. That felt so good."
         $ the_person.draw_person("stand3")
@@ -1476,36 +1476,36 @@ label hotwife_cum_mouth(the_person):
 #         #They agree you should give it to her harder
 #         the_person "I can handle it [the_person.mc_title], you can be rough with me."
 #         $ the_person.change_arousal(1)
-#         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
+#         "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's super slutty and doesn't care what people think.
-#         the_person "Don't listen to [the_watcher.title], I'm having a great time. Look, she can't stop peeking over."
+#         the_person "Don't listen to [the_watcher.name], I'm having a great time. Look, she can't stop peeking over."
 #
 #     elif the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #She's super slutty and encourages the watcher to be slutty.
 #         $ the_person.change_arousal(1)
-#         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
+#         "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
 #         #She's into it and encouraged by the slut watching her.
 #         the_person "Oh god, having you watch us like this..."
 #         $ the_person.change_arousal(1)
-#         "[the_person.title] seems turned on by [the_watcher.title] watching you and her [the_position.verb]."
+#         "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's into it but shamed by the prude watching her.
 #         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
 #         $ the_person.change_arousal(-1)
 #         $ the_person.change_slut_temp(-1)
-#         "[the_person.title] seems uncomfortable with [the_watcher.title] nearby."
+#         "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
 #
 #     else: #the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #They're both into it but not fanatical about it.
 #         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
 #         $ the_person.change_arousal(1)
 #         $ the_person.change_slut_temp(1)
-#         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
+#         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 #
 #     return
 

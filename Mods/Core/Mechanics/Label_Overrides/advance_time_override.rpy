@@ -181,7 +181,9 @@ init 5 python:
     def advance_time_run_turn(people):
         start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
+            person.validate_stats()
             person.run_turn()
+
         mc.business.run_turn()
         mc.run_turn()
         if "quest_director" in globals():
@@ -193,6 +195,7 @@ init 5 python:
     def advance_time_run_day(people):
         start_time = time.time()
         for (person, place) in people:
+            person.follow_mc = False
             person.run_day()
 
         mc.run_day()
@@ -344,8 +347,6 @@ label advance_time_people_run_turn_label():
     python:
         mandatory_advance_time = False
         advance_time_run_turn(people_to_process)
-        if persistent.clear_memory_mode == 0: # otherwise at run day
-            renpy.free_memory()
     return
 
 label advance_time_people_run_day_label():
@@ -354,8 +355,7 @@ label advance_time_people_run_day_label():
         #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
         advance_time_run_day(people_to_process)
         # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-        if persistent.clear_memory_mode == 1:   #otherwise at end of run turn
-            renpy.free_memory()
+        renpy.free_memory()
         # $ gc.collect()    don't force garbage collector, let internals handle this
         #$ renpy.profile_memory(.5, 1024)
         renpy.block_rollback()

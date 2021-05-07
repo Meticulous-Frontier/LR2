@@ -53,9 +53,9 @@ label give_panties_label(the_person):
 
     # store outfit and panties
     $ test_outfit = the_person.outfit.get_copy()
-    $ the_item = the_person.get_panties()
+    $ the_item = test_outfit.get_panties()
     if the_item.is_extension: #two piece item
-        $ the_item = the_person.outfit.get_bra()
+        $ the_item = next((x for x in test_outfit.get_upper_ordered() if x.has_extension == the_item), None)
     $ removed_something = False
 
     if not the_person.can_remove_panties():
@@ -63,12 +63,12 @@ label give_panties_label(the_person):
         if mc.location.get_person_count() > 1:
             "[the_person.possessive_title] takes a quick look around and starts stripping down."
         else:
-            "[the_person.possessive_title] starts stripping down, giving you her panties."
+            "[the_person.possessive_title] starts stripping down, giving you her [the_item.display_name]."
         $ the_person.strip_outfit(exclude_upper = True)
         the_person "Here you are, anything else I can do for you?"
         $ removed_something = True
     else:
-        "[the_person.possessive_title] takes a quick look around and pulls off her panties, placing them in your hand."
+        "[the_person.possessive_title] takes a quick look around and pulls off her [the_item.display_name], placing them in your hand."
 
     python:
         # remove panties from outfit

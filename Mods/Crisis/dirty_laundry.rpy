@@ -440,7 +440,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.draw_animated_removal(the_item, position = "doggy", half_off_instead = True)
 
             $ mc.change_locked_clarity(10)
-            the_person "[the_person.mc_title]? I don't moving my [the_item.display_name] will get me out of here."
+            the_person "[the_person.mc_title]? I don't think moving my [the_item.display_name] will get me out of here."
             mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
             the_person "Okay, go ahead, just don't pull too much on my head."
 

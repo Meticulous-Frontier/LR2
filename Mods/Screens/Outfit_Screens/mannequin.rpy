@@ -17,6 +17,9 @@ init 2 python:
 
     def draw_average_mannequin(outfit, hide_list = []):
         renpy.scene("8")
+
+        validate_texture_memory()
+
         displayable_list = []
         displayable_list.append(mannequin_average)
         displayable_list.extend(outfit.generate_draw_list(None, "stand3", hide_layers = hide_list))

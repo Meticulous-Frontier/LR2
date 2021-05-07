@@ -311,7 +311,7 @@ label mc_remove_person_label(person):
     menu:
         "Are you sure?":
             $ person.remove_person_from_game()
-            jump game_loop
+            $ jump_game_loop()
         "Reconsider":
             pass
     return

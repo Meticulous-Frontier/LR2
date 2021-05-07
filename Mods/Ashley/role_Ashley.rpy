@@ -722,7 +722,8 @@ label ashley_ask_about_porn_label(the_person):
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.add_unique_on_talk_event(ashley_post_handjob_convo)
-    jump game_loop # she runs after her sister so end talk with Ashley
+    $ jump_game_loop() # she runs after her sister so end talk with Ashley
+    return
 
 label ashley_post_handjob_convo_label(the_person):
     $ mod_alpha_content_warning(ashley_sisterly_jealousy_feature)

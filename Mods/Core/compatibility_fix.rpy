@@ -2,7 +2,7 @@
     # Fix compatibility of save games.
 
 init -4 python:
-    # IMPORTED FROM BUGFIX
+    # IMPORTED FROM BUGFIX - PREVENT CRASH WHEN BUGFIX NOT INSTALLED.
     # Custom implementation for mapped list, that reference the list_item.identifier instead of the actual object
     # list_func is the function retrieving the original list (we don't want to reference the original list)
     class MappedList():
@@ -121,8 +121,6 @@ init -4 python:
 
 init -2:
     default persistent.zip_cache_size = 0 # default is small size
-    default persistent.memory_mode = 1 # default is medium memory mode
-    default persistent.clear_memory_mode = 1 # default is daily clear
     default persistent.show_ntr = False     # default turn of NTR
 
 init python: # place first on the hijack stack
@@ -148,16 +146,7 @@ init 100 python:
 init 1 python:
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
-    if renpy.variant("pc"):
-        # disables renpy.free_memory() daily cleanup, thus requires enough memory to perform operations
-        if persistent.memory_mode == 0:
-            config.image_cache_size_mb = 384
-        elif persistent.memory_mode == 1:
-            config.image_cache_size_mb = 768
-        else:
-            config.image_cache_size_mb = 1536
-    else:
-        config.image_cache_size_mb = 384 # low memory devices like phones (uses renpy.free_memory() for daily memory clean)
+    config.image_cache_size_mb = 384 # fixed at 384 Mb * 4 bytes per pixel result in 1536 Mb Texture Memory
 
     # heart pasties and cincher (move to level 0)
     heart_pasties.layer = 0
@@ -198,8 +187,7 @@ init 1 python:
     def update_pinned_cache():
         # cache all GUI images in memory
         for fn in renpy.list_files():
-            if (re.search("gui", fn, re.IGNORECASE)
-                and fn.endswith(".png")):
+            if re.search("[\\/][gG]ui[\\/][a-zA-Z_\\/]*.png", fn, re.IGNORECASE):
                 renpy.cache_pin(fn)
             if "empty_holder.png" in fn:
                 renpy.cache_pin(fn)
@@ -227,6 +215,11 @@ init 1 python:
         handle = get_file_handle("mod_icon.png")
         if not handle.startswith("Mods"):
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
+        return
+
+    def validate_person_stats():
+        for person in all_people_in_the_game():
+            person.validate_stats()
         return
 
     def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
@@ -261,6 +254,8 @@ label update_compatibility_fix(stack):
     $ cleanup_default_wardrobe()
 
     $ restore_employees_to_schedules()
+
+    $ validate_person_stats()
 
     $ execute_hijack_call(stack)
     return
