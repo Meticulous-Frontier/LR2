@@ -597,9 +597,9 @@ label casual_hotwife_dancing_sex_label(the_person):
             elif the_person.has_ass_cum():
                 "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
-            else:       #We assume we finished inside her#
-                "[the_person.possessive_title]'s pussy is dripping cum from your creampie."
-                "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
+            else:       #We assume we finished inside her but could be pussy or ass so make the text more generic#
+                "[the_person.possessive_title]'s is dripping cum from your creampie."
+                "You grab her phone and snap a couple pictures of her cum dripping body."
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh my god... that was amazing. That felt so good."
         $ the_person.draw_person("stand3")
