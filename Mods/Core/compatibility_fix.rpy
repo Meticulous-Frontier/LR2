@@ -2,7 +2,7 @@
     # Fix compatibility of save games.
 
 init -4 python:
-    # IMPORTED FROM BUGFIX
+    # IMPORTED FROM BUGFIX - PREVENT CRASH WHEN BUGFIX NOT INSTALLED.
     # Custom implementation for mapped list, that reference the list_item.identifier instead of the actual object
     # list_func is the function retrieving the original list (we don't want to reference the original list)
     class MappedList():
