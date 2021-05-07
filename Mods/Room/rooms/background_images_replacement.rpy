@@ -127,9 +127,9 @@ label updated_room_background(stack):
             list_of_places.append(generic_bedroom_4)
 
         # bedroom image replacements
-        lily.home.background_image = lily_bedroom_background
+        #lily.home.background_image = lily_bedroom_background
         cousin.home.background_image = cousin_bedroom_background
-        mom.home.background_image = standard_bedroom1_background
+        #mom.home.background_image = standard_bedroom1_background
         aunt.home.background_image = standard_bedroom4_background
         emily.home.background_image = lily_bedroom_background
 
