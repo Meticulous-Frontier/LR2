@@ -14,7 +14,7 @@
 # Guest rooms/servants quarters?
 init 0 python:
     home_improvement_crisis_weight = 5
-    mc_bedroom_renovation_cost = 5000 # Currently used for all bedrooms, this could be varied.
+    mc_bedroom_renovation_cost = 3000 # Currently used for all bedrooms, this could be varied.
     home_improvement_base_duration = 0 # (+0-3 days, always takes at least one full day), dungeon takes longer.
 
     def mc_bedroom_renovate_requirement():
@@ -88,20 +88,11 @@ init 2 python:
     add_mc_bedroom_renovate_action = ActionMod("Home Improvement", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_option_label",
         menu_tooltip = "Enables a series of renovations for your home into more impressive state (with some bonuses), including home dungeon.", category = "Home", is_crisis = True, crisis_weight = home_improvement_crisis_weight )
 
-    def mc_bedroom_renovate_action_requirement():
-        if (mc.business.funds > mc_bedroom_renovation_cost and bedroom.background_image != standard_bedroom3_background):
-            return True
-        elif (mc.business.funds < mc_bedroom_renovation_cost and bedroom.background_image != standard_bedroom3_background):
-            return "Requires: $" + str(mc_bedroom_renovation_cost)
-        else:
-            return False
-
     def add_mc_bedroom_renovate_action():
         bedroom.add_action(Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (+5 Obedience and Sluttiness for some encounters within). Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10))
         return
 
     def add_home_improvement_actions():
-        dungeon_build_action = Action("Build dungeon", dungeon_build_action_requirement, "dungeon_build_label", menu_tooltip = "Clear the cellar and build a Sex Dungeon, complete with \"Guest Accommodations\". Cost $10000.", priority = 10)
         lily_bedroom_renovate_action = Action("Renovate room", lily_bedroom_renovate_requirement, "lily_bedroom_renovate_label", menu_tooltip = "Renovates Lily's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
         mom_bedroom_renovate_action = Action("Renovate room", mom_bedroom_renovate_requirement, "mom_bedroom_renovate_label", menu_tooltip = "Renovates Mom's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
         home_shower_renovate_action = Action("Renovate shower", home_shower_renovate_requirement, "home_shower_renovate_label", menu_tooltip = "Renovates the shower in your house and increases your daily energy. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
@@ -111,13 +102,8 @@ init 2 python:
         bedroom.add_action(home_shower_renovate_action)
         #hall.actions.append(room_renovation_action) # Eventually improve the front hall as well.
         # Kitchen? When we get a good graphic for a VERY nice kitchen?
-        if not is_dungeon_unlocked():
-            hall.add_action(dungeon_build_action)
-            mc.business.event_triggers_dict["dungeon_unlocked"] = True
+        add_build_dungeon_action()
         return
-
-    def renovate_room_requirement():
-        return True
 
     def home_renovation_completion_requirement(completion_day):
         if day > completion_day and mc.business.is_open_for_business():

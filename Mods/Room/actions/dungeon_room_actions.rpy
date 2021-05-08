@@ -40,15 +40,17 @@ init 10 python:
 
         return positions
 
+    def add_build_dungeon_action():
+        if not is_dungeon_unlocked():
+            dungeon_build_action = Action("Build dungeon", dungeon_build_action_requirement, "dungeon_build_label", menu_tooltip = "Clear the cellar and build a Sex Dungeon, complete with \"Guest Accommodations\". Cost $10000.", priority = 10)
+            bedroom.add_action(dungeon_build_action)
+            mc.business.event_triggers_dict["dungeon_unlocked"] = True
+        return
+
 label dungeon_intro_label():
     "By yourself on the weekend at work, you are taking a moment to relax. Suddenly you are struck by a brilliant idea..."
     "You realize you could build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires."
-    "(Return home, front-hall/livingroom, to start the Build Dungeon.)"
-    python:
-        if not is_dungeon_unlocked():
-            dungeon_build_action = Action("Build dungeon", dungeon_build_action_requirement, "dungeon_build_label", menu_tooltip = "Clear the cellar and build a Sex Dungeon, complete with \"Guest Accomodations\". Cost $10000")
-            hall.actions.append(dungeon_build_action)
-            mc.business.event_triggers_dict["dungeon_unlocked"] = True
+    $ add_build_dungeon_action()
     return
 
 label dungeon_build_label():
@@ -73,20 +75,19 @@ label dungeon_completed_label():
     return
 
 label dungeon_room_appoint_slave_label():
-    while True:
-        call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])]))
-        $ person_choice = _return
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])]))
+    $ person_choice = _return
 
-        if person_choice == "Back":
-            return # Where to go if you hit "Back"
-        elif person_choice.personality is alpha_personality:
-            "This girl has an Alpha personality and will never submit into becoming your slave. You could turn her into a bimbo, that would remove her Alpha personality."
-        else:
-            call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
-            $ del person_choice
+    if person_choice == "Back":
+        return # Where to go if you hit "Back"
+    elif person_choice.personality is alpha_personality:
+        "This girl has an Alpha personality and will never submit into becoming your slave. You could turn her into a bimbo, that would remove her Alpha personality."
+    else:
+        call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
+        $ del person_choice
+    jump dungeon_room_appoint_slave_label
 
 label dungeon_room_appoint_slave_label_2(the_person):
-
     if not the_person.has_role(slave_role): # What happens when you try to appoint them
         if the_person.obedience >= 130 and the_person.get_opinion_score("being submissive") > 0:
             "[the_person.possessive_title] seems to be into the idea of serving you."
