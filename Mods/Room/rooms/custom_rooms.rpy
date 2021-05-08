@@ -116,7 +116,7 @@ label build_custom_rooms(stack):
         gym_shower = Room("gym shower", "Gym Shower", [], standard_gym_shower_backgrounds, gym_shower_objects, [], [], True, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(gym_shower)
 
-        home_shower = Room("home shower", "Home Shower", [], standard_home_shower_backgrounds, gym_shower_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        home_shower = Room("home shower", "Home Shower", [], standard_old_home_shower_backgrounds, gym_shower_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(home_shower)
 
         mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds, [make_floor(), make_wall(), make_chair(), make_window(), make_counter()], [], [], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
@@ -132,7 +132,7 @@ label build_custom_rooms(stack):
         # initialize dungeon room creation action
         add_dungeon_intro_action()
         fix_lobby_objects()
-        
+
         add_custom_objects()
         fix_duplicate_objects_in_rooms()
 
@@ -171,7 +171,7 @@ init 10 python:
                 renpy.say("Warning", "Duplicate room " + room.name + ", game is corrupt, your are advised to start a new game.")
 
         return
-    
+
     def add_custom_objects():
         #add additional objects to existing rooms
         strip_club.add_object( make_pole() )
