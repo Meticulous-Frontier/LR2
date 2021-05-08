@@ -905,10 +905,7 @@ label candace_love_path_intro_label():
     $ the_person.change_arousal(15)
     if not the_person.vagina_available():
         "You pull off everything between you and her cunt."
-        if the_person.outfit.can_half_off_to_vagina():
-            $ the_person.strip_outfit_strip_list(the_person.outfit.get_half_off_to_vagina_list(), position = "missionary", half_off_instead = True)
-        else:
-            $ the_person.strip_outfit(position = "missionary", exclude_upper = True)
+        $ the_person.strip_to_vagina(prefer_half_off = True, position = "missionary")
     "[the_person.title] reaches down and starts to play with herself as you start to get undressed. She starts to moan as you pull your cock out."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(30)

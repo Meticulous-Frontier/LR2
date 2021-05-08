@@ -76,7 +76,7 @@ label sister_failed_test_label():
                 the_person "Okay..."
                 $ the_person.draw_person(position = "stand3")
                 "[the_person.title] stands up and starts to take some clothing off..."
-                $ the_person.strip_outfit_to_underwear(position = "stand3")
+                $ the_person.strip_to_underwear(position = "stand3")
                 $ mc.change_locked_clarity(20)
                 "When she finishes, she stands there for a moment, letting you check her out."
                 $ the_person.change_slut_temp(5)
