@@ -86,15 +86,10 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
         the_sister "I got us matching outfits, because I thought it would really show off the family resemblance."
         the_sister "It should make for a really cute shoot! Maybe [the_sister.mc_title] can tell us who wears it best."
 
-    $ scene_manager.draw_scene()
-
-    if insta_outfit_mom.name == insta_outfit_sister.name:
-        $ mc.change_locked_clarity(10)
-        the_sister "I got us matching outfits, because I thought it would really show off the family resemblance."
-        the_sister "It should make for a really cute shoot! Maybe [the_sister.mc_title] can tell us who wears it best."
-
+    $ mc.change_locked_clarity(10)
     $ the_mom.apply_outfit(insta_outfit_mom)
     $ the_sister.apply_outfit(insta_outfit_sister)
+    $ scene_manager.draw_scene()
 
     "The girls get dressed. [the_mom.title] turns to [the_sister.possessive_title], ready for her inspection."
 

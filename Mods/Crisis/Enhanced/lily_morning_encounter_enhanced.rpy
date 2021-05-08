@@ -177,7 +177,7 @@ label lily_morning_encounter_enhanced_label():
                                 if the_watcher.sluttiness < 80:
                                     the_watcher "...and, [the_person.title], what do you think you are doing walking around naked?"
                                     $ the_group.redraw_person(the_person)
-                                    the_person "Sorry, [the_watcher.title] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
+                                    the_person "Sorry, [the_watcher.name] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
                                 else:
                                     the_watcher "...and, [the_person.title], walking around naked again I see."
                                     $ the_group.redraw_person(the_person)

@@ -2128,7 +2128,7 @@ label Sarah_initial_threesome_label():
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "You make sure your bedroom is nice and tidy."
-    $ mc.start_text_convo(the_person)
+    $ mc.start_text_convo(sarah)
     sarah "Hey, I'm here."
     $ mc.end_text_convo()
     "You head to the front door and invite her in."
@@ -2141,8 +2141,9 @@ label Sarah_initial_threesome_label():
         "Okay, let me go get [the_person.title], I'll be right back."
         "You walk into her room. She follows you back to your room."
     else:
-        "Soon, you get another text on your phone."
+        $ mc.start_text_convo(the_person)
         the_person "I'm here now. Come let me in?"
+        $ mc.end_text_convo()
         mc.name "She's here, give me one second."
         "You go to the front door and let in [the_person.title]. She follows you quietly to your room."
     # make the second person wear a more sexy outfit (50% sluttiness boost)

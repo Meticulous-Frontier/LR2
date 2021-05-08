@@ -645,9 +645,11 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             "You quickly put on another condom and continue to fuck her."
             $ mc.condom = True
 
+    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck"):
         # make sure we move skirts out of the way when rendering
         python:
             for the_clothing in [x for x in the_person.outfit.get_lower_ordered() if not (x.underwear or x.half_off)]:
+                renpy.say(None, "You move her " + the_clothing.display_name + " out of the way.")
                 the_person.outfit.half_off_clothing(the_clothing)
 
     return willing
@@ -764,6 +766,8 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                 the_person "You can't get me {i}more{/i} pregnant, but I really don't like bare sex."
             else:
                 the_person "Although i'm pregnant, I would like you to wear a condom anyway."
+        elif skill_tag == "Anal":
+            the_person "Although it's the backdoor, I still need you to wear a condom."
         else:
             $ the_person.call_dialogue("condom_demand")
 
@@ -786,6 +790,8 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                 the_person "You can't get me {i}more{/i} pregnant, but I don't like bare sex. I think that you should put on a condom."
             else:
                 the_person "There's not much point in a condom now that i'm pregnant."
+        elif skill_tag == "Anal":
+            the_person "Could you put on a condom? I don't want to have a mess when you start pumping my ass."
         else:
              $ the_person.call_dialogue("condom_ask")
 
@@ -803,7 +809,10 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
             menu:
                 "Put on a condom":
                     mc.name "One sec, let me just get a condom on..."
-                    $ the_person.call_dialogue("condom_bareback_demand") #TODO: Write this. Girl demands you fuck her bareback, or she'll force you to do soemthing else. High Obedience will let you ignore her and wear one anyways.
+                    if skill_tag == "Anal":
+                        the_person "No way, I want you to fuck my slutty ass raw!"
+                    else:
+                        $ the_person.call_dialogue("condom_bareback_demand") #TODO: Write this. Girl demands you fuck her bareback, or she'll force you to do soemthing else. High Obedience will let you ignore her and wear one anyways.
                     menu:
                         "Fuck her raw":
                             mc.name "Alright, as long as you know what you're getting into..."
@@ -828,7 +837,10 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
 
         else:
-            $ the_person.call_dialogue("condom_bareback_ask")
+            if skill_tag == "Anal":
+                the_person "Well...ah...could you fuck my little ass raw?"
+            else:
+                $ the_person.call_dialogue("condom_bareback_ask")
             menu:
                 "Put on condom":
                     mc.name "I think a condom is a good idea."

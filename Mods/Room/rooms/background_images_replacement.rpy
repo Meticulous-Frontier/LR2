@@ -55,6 +55,7 @@ init -1 python:
     standard_fancy_restaurant_backgrounds = room_background_image("Fancy_Restaurant_Background.jpg")
     standard_gym_shower_backgrounds = room_background_image("Gym_Shower_Background.jpg")
     standard_salon_backgrounds = room_background_image("Salon_Background.jpg")
+    standard_old_home_shower_backgrounds = room_background_image("Home_Shower_Background_Old.jpg")
     standard_home_shower_backgrounds = room_background_image("Home_Shower_Background.jpg")
     standard_bdsm_room_backgrounds = room_background_image("BDSM_Room_Background.jpg")
     standard_ceo_office_backgrounds = room_background_image("CEO_Office_Background.jpg")
@@ -127,9 +128,9 @@ label updated_room_background(stack):
             list_of_places.append(generic_bedroom_4)
 
         # bedroom image replacements
-        lily.home.background_image = lily_bedroom_background
+        #lily.home.background_image = lily_bedroom_background
         cousin.home.background_image = cousin_bedroom_background
-        mom.home.background_image = standard_bedroom1_background
+        #mom.home.background_image = standard_bedroom1_background
         aunt.home.background_image = standard_bedroom4_background
         emily.home.background_image = lily_bedroom_background
 

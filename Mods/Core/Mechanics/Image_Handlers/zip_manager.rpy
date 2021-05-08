@@ -45,13 +45,13 @@ init 5 python:
 
         def load(self):
             try:
-                if not self.filename in zip_manager.Cache[self.position]:
-                    global mobile_zip_dict
-                    with zip_manager.Locks[self.position]:
+                with zip_manager.Locks[self.position]:
+                    if not self.filename in zip_manager.Cache[self.position]:
+                        global mobile_zip_dict
                         zip_manager.Cache[self.position][self.filename] = mobile_zip_dict[self.position].read(self.filename)
 
-                sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
-                return renpy.display.pgrender.load_image(sio, self.filename)
+                    sio = io.BytesIO(zip_manager.Cache[self.position][self.filename])
+                    return renpy.display.pgrender.load_image(sio, self.filename)
             except:
                 return renpy.display.pgrender.surface((2, 2), True)    # same object als the Renpy image zip returns https://github.com/renpy/renpy/blob/master/renpy/display/im.py
 

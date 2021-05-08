@@ -142,7 +142,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_coffee_tier_2_requirement(the_person):
@@ -155,7 +155,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_gym_membership_tier_1_requirement(the_person):
@@ -163,7 +163,7 @@ init 5 python:
             if not mc.is_at_work():
                 return "Only in the office"
             if not mc.business.is_open_for_business():
-                return "Only during work hours"
+                return "Only during business hours"
             return True
         return False
 
@@ -172,7 +172,7 @@ init 5 python:
             if not mc.is_at_work():
                 return "Only in the office"
             if not mc.business.is_open_for_business():
-                return "Only during work hours"
+                return "Only during business hours"
             return True
         return False
 
@@ -184,7 +184,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_mind_control_attempt_requirement(the_person):
@@ -195,7 +195,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_change_relative_recruitment_requirement(the_person):
@@ -204,7 +204,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_meeting_on_demand_requirement(the_person):
@@ -215,7 +215,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_headhunt_initiate_requirement(the_person):
@@ -228,7 +228,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_headhunt_interview_requirement():

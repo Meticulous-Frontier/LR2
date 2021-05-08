@@ -2,7 +2,7 @@
     # Fix compatibility of save games.
 
 init -4 python:
-    # IMPORTED FROM BUGFIX
+    # IMPORTED FROM BUGFIX - PREVENT CRASH WHEN BUGFIX NOT INSTALLED.
     # Custom implementation for mapped list, that reference the list_item.identifier instead of the actual object
     # list_func is the function retrieving the original list (we don't want to reference the original list)
     class MappedList():
@@ -217,6 +217,11 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
+    def validate_person_stats():
+        for person in all_people_in_the_game():
+            person.validate_stats()
+        return
+
     def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
         if not bugfix_installed:
             renpy.say("Warning", "You are running the game without bugfix installed, the mod no longer works without this bugfix due to the many issues in the base game. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}. The game will now exit.")
@@ -249,6 +254,8 @@ label update_compatibility_fix(stack):
     $ cleanup_default_wardrobe()
 
     $ restore_employees_to_schedules()
+
+    $ validate_person_stats()
 
     $ execute_hijack_call(stack)
     return

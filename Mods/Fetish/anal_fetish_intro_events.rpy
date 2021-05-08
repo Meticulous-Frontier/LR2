@@ -537,7 +537,7 @@ label anal_fetish_mom_intro_label():
     "[the_person.title] slowly walks over to you. Her hips and body are mesmerizing."
     the_person "Here... let me help..."
     $ the_person.draw_person (position = "blowjob")
-    "[the_person.possessive_title] gets down on her knees in front of you. She undoes your pants, grasps the waistband and beings to pull them off you. You arch your back a bit to make it easier."
+    "[the_person.possessive_title] gets down on her knees in front of you. She undoes your pants, grasps the waistband and begins to pull them off you. You arch your back a bit to make it easier."
     "Naked from the waist down, [the_person.title] looks up at you."
     the_person "Can you get your shirt?"
     mc.name "Ahhh... Oh! Right..."
@@ -558,7 +558,7 @@ label anal_fetish_mom_intro_label():
     "You can't really even see the movie, but to be honest, you don't care. Soon though, the constant pressure of her ass against your groin has you aching for more."
     "You put your hands on [the_person.possessive_title]'s hips. She sighs as you start move her hips up and down against you."
     "[the_person.title] starts moving her hips now on her own, your cock still hot dogging between her cheeks. You reach down and start to slide your fingers along her slit."
-    the_person "Oooohhhh, [the_person.mc_title] my son..."
+    the_person "Oooohhhh, [the_person.mc_title], my beautiful son..."
     $ the_person.change_arousal(15) #15
     $ mc.change_arousal(10) #30
     $ mc.change_locked_clarity(50)
@@ -579,12 +579,12 @@ label anal_fetish_mom_intro_label():
     elif the_person.has_taboo("anal_sex") and the_person.has_taboo("vaginal_sex"): # You haven't fucked at all
         the_person "I umm... I'm not ready to go all the way with you... but I think I have an idea for something that would COULD do..."
     else:
-        the_person "You I would do anything for you, but tonight I was thinking we could do things a little different."
+        the_person "You know I would do anything for you, but tonight I was thinking we could do things a little different."
     $ the_person.draw_person(position = "standing_doggy")
     $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] stands up for a second, leans forward and pulls the lid off the ottoman. She pulls out a bottle of lubricant and hands it to you."
     the_person "Would you do the honors dear? I need my ass to be good and ready for you..."
-    "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. She seems ready to awaken a new love of anal sex."
+    "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. She seems ready to awaken the love for anal sex."
     mc.name "Of course [the_person.title]."
     "You quickly squirt some lubricant onto your fingers and begin rubbing them around [the_person.title]'s backdoor."
     the_person "Mmmm, a little more, and make sure you get some inside too..."
