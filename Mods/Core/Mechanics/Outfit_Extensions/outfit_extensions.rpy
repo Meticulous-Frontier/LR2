@@ -39,11 +39,6 @@ init -1 python:
     # Extension Methods For Outfit Class #
     ######################################
 
-    def get_upper_ordered(self): #Returns a list of pieces from bottom to top, on the upper body. Other functions do similar things, but to lower and feet.
-        return sorted([x for x in self.upper_body if x.layer > 0], key=lambda clothing: clothing.layer)
-
-    Outfit.get_upper_ordered = get_upper_ordered
-
     def feet_available(self):
         reachable = True
         for cloth in self.feet:
