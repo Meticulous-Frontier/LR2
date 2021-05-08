@@ -27,3 +27,36 @@ init -1 python:
 
     def make_love_rug():
         return Object("Love Rug", ["Kneel", "Lay"], sluttiness_modifier = 5, obedience_modifier = 10)
+
+
+    # For parks and gym
+    def make_bench():
+        the_bench = Object("Bench", ["Lay", "Sit", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = -5)
+        return the_bench
+
+    # For R&D:
+    def make_examtable():
+        the_examtable = Object("Exam Table", ["Lay", "Sit", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 20)
+        return the_examtable
+
+    # For strip_club:
+    # strip club stage is make_stage()
+    def make_pole():
+        the_pole = Object("Stripper Pole", ["Lean", "Low"], sluttiness_modifier = 10, obedience_modifier = -5)
+        return the_pole
+
+    # For renovated MC Bedroom:
+    def make_impressive_bed():
+        the_bed = Object("Impressive Bed", ["Lay", "Low", "Kneel"], sluttiness_modifier = 15, obedience_modifier = 15)
+        return the_bed
+
+    # Bring out the comfy chair! Nobody expects the Spanish Inquisition!
+    def make_comfy_chair():
+        the_chair = Object("Comfy Chair",["Sit","Low"], sluttiness_modifier = 5, obedience_modifier = 5)
+        return the_chair
+
+    # Classic porn audition couch
+    def make_black_leather_couch():
+        the_couch = Object("Black Leather Couch",["Sit","Lay","Low"], sluttiness_modifier = 15, obedience_modifier = 5)
+        return the_couch
+

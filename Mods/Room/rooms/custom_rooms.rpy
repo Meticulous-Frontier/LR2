@@ -5,9 +5,10 @@ init 3 python:
 
 init 15 python:
     dungeon_objects = [
+        make_bed(),
+        make_couch(),
         make_bdsmbed(),
         make_pillory(),
-        make_woodhorse(),
         make_floor(),
     ]
     downtown_bar_objects = [
@@ -35,14 +36,19 @@ init 15 python:
         make_woodhorse(),
         make_cage(),
         make_chair(),
-        make_floor()
+        make_floor(),
+        make_bed(),
+        make_couch(),
+        make_pole(),
+        make_stage()
     ]
     ceo_office_objects = [
-        make_chair(),
+        make_comfy_chair(),
         make_desk(),
         make_wall(),
         make_window(),
         make_floor(),
+        make_black_leather_couch(),
     ]
     police_jail_objects = [
         Object("cell bars", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 10),
@@ -53,11 +59,12 @@ init 15 python:
     gym_shower_objects = [
         make_floor(),
         make_wall(),
-        Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5)
+        Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5),
+        make_bench(),
     ]
 
     def make_swing():
-        the_swing = Object("sex swing",["Sit","Low", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
+        the_swing = Object("sex swing",["Sit","Low","Lay", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
         return the_swing
 
     def make_counter():
@@ -98,8 +105,8 @@ label build_custom_rooms(stack):
         fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], standard_fancy_restaurant_backgrounds, [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(fancy_restaurant)
 
-        # Stripclub BDSM Room | No actions at this time.
-        bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        # Stripclub BDSM Room | No actions at this time. HACK: Add dungeon action
+        bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [dungeon_room_appoint_slave_action], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(bdsm_room)
 
         ceo_office = Room("ceo_office", "CEO Office", [], standard_ceo_office_backgrounds, ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
@@ -125,6 +132,9 @@ label build_custom_rooms(stack):
         # initialize dungeon room creation action
         add_dungeon_intro_action()
         fix_lobby_objects()
+        
+        add_custom_objects()
+        fix_duplicate_objects_in_rooms()
 
         execute_hijack_call(stack)
     return
@@ -161,10 +171,24 @@ init 10 python:
                 renpy.say("Warning", "Duplicate room " + room.name + ", game is corrupt, your are advised to start a new game.")
 
         return
+    
+    def add_custom_objects():
+        #add additional objects to existing rooms
+        strip_club.add_object( make_pole() )
+        downtown.add_object( make_bench() )
+        gym.add_object( make_bench() )
+        gym_shower.add_object( make_bench() )
+        university.add_object( make_bench() )
+        # Maybe make this something that the MC pays for. R&D Upgrade
+        rd_division.add_object( make_examtable() )
 
+        return
+
+# Dead code? Doesn't seem to trigger.
 label update_custom_rooms(stack):
     python:
         update_room_visibility()
+        add_custom_objects()
         fix_duplicate_objects_in_rooms()
         fix_lobby_objects()
 
