@@ -59,7 +59,7 @@ init 2:
                         action [Function(mc.change_location, place), Return(place)]
                         sensitive place.accessable #TODO: replace once we want limited travel again with: place in mc.location.connections
                         hovered tt.Action(tt_dict[place.name][0])
-                    text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if tt_dict[place.name][1] else "") anchor [0.5,0.5] style "map_text_style"
+                    text (place.formal_name + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if tt_dict[place.name][1] else "") anchor [0.5,0.5] style "map_text_style"
             else:
                 frame:
                     background None
@@ -73,7 +73,7 @@ init 2:
                         action [Function(mc.change_location, place), Return(place)]
                         sensitive True
                         hovered tt.Action(tt_dict[place.name][0])
-                    text (place.formalName + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if tt_dict[place.name][1] else "") anchor [0.5,0.5] style "map_text_style"
+                    text (place.formal_name + "\n(" + str(__builtin__.len(place.people)) + ")").replace(" ", "\n", 2) + ("\n{color=#FFFF00}Event!{/color}" if tt_dict[place.name][1] else "") anchor [0.5,0.5] style "map_text_style"
 
 
             ##TODO: add a sub map to housing_map_manager() so we can go to people's homes

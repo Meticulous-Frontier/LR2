@@ -14,9 +14,9 @@ init 5 python:
     def test_strip_club():
         mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
         mc.business.event_triggers_dict["foreclosed_day"] = day
-        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formalName
+        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formal_name
         strip_club.name = "Starlight Club"
-        strip_club.formalName = "Starlight Club"
+        strip_club.formal_name = "Starlight Club"
         set_strip_club_foreclosed_stage(5)
         add_strip_club_hire_employee_action_to_mc_actions()
         for stripper in stripclub_strippers:

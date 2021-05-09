@@ -144,7 +144,7 @@ init -1 python:
             strip_club_income = business.calculate_strip_club_income()
             if strip_club_income != 0:
                 mc.business.funds += strip_club_income
-                mc.business.add_normal_message("The [strip_club.formalName] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
+                mc.business.add_normal_message("The [strip_club.formal_name] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
 
         return run_day_wrapper
 

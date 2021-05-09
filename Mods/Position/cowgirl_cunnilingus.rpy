@@ -138,13 +138,13 @@ label strip_ask_cowgirl_cunnilingus(the_girl, the_clothing, the_location, the_ob
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = cowgirl_cunnilingus.position_tag)
             "She strips out of her [the_clothing.name] and throws it to the side while you move back in and lick at her cunt."
-
+            return True
 
         "Leave it on":
             "You look up from between her legs and shake your head."
             mc.name "No, I like how you look with it on."
             the_girl "Yeah? Do I look sexy in it? Mmmm..."
-    return
+            return False
 
 label orgasm_cowgirl_cunnilingus(the_girl, the_location, the_object):
     "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of you."

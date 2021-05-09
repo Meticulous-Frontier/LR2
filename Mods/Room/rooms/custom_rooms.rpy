@@ -1,4 +1,4 @@
-# name, formalName, connections, background_image, objects, people, actions, public, map_pos, tutorial_label = None, visible = True)
+# name, formal_name, connections, background_image, objects, people, actions, public, map_pos, tutorial_label = None, visible = True)
 init 3 python:
     add_label_hijack("normal_start", "build_custom_rooms")
 
@@ -106,7 +106,7 @@ label build_custom_rooms(stack):
         list_of_places.append(fancy_restaurant)
 
         # Stripclub BDSM Room | No actions at this time. HACK: Add dungeon action
-        bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [dungeon_room_appoint_slave_action], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        bdsm_room = Room("bdsm_room", "[strip_club.formal_name] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [dungeon_room_appoint_slave_action], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(bdsm_room)
 
         ceo_office = Room("ceo_office", "CEO Office", [], standard_ceo_office_backgrounds, ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)

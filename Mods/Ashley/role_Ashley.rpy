@@ -590,7 +590,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     "After a few solemn moments, you decide to move on with your day."
     mc.name "That's enough for now I suppose. Let me know if you think of anything."
     the_person "Yes sir... and the same for you."
-    "You both walk back to the [mc.location.formalName]."
+    "You both walk back to the [mc.location.formal_name]."
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["porn_discussed"] = True
@@ -717,7 +717,7 @@ label ashley_ask_about_porn_label(the_person):
     "[the_person.possessive_title] quickly leaves the room."
     "Welp, you just got a handjob from [the_person.title]... and then her sister promptly walked in and witnessed the whole thing."
     "You'll have to consider how to approach both girls carefully before you talk to them next."
-    "You walk back to the [mc.location.formalName]."
+    "You walk back to the [mc.location.formal_name]."
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
     $ mc.location.show_background()
     $ scene_manager.clear_scene()

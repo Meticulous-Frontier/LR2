@@ -514,6 +514,7 @@ label strip_ask_SB_anal_standing(the_girl, the_clothing, the_location, the_objec
             $ the_girl.draw_animated_removal(the_clothing, position = SB_anal_standing.position_tag)
             "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
             "She groans happily when you push back inside of her."
+            return True
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -526,7 +527,7 @@ label strip_ask_SB_anal_standing(the_girl, the_clothing, the_location, the_objec
             else:
                 the_girl "Does it make me look like the cum hungry slut that I am? Or is it your cock in my ass that makes me look that way?"
                 "She grinds her hips back into you and moans ecstatically."
-    return
+            return False
 
 
 label orgasm_SB_anal_standing(the_girl, the_location, the_object):

@@ -146,6 +146,7 @@ label strip_ask_standing_dildo(the_girl, the_clothing, the_location, the_object)
             mc.name "Take it off. Strip for me."
             $ the_girl.draw_animated_removal(the_clothing, position = standing_dildo.position_tag)
             "[the_girl.possessive_title] takes off her [the_clothing.name] and drops it to the side while you pump the dildo in and out of her cunt."
+            return True
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -153,8 +154,7 @@ label strip_ask_standing_dildo(the_girl, the_clothing, the_location, the_object)
                 the_girl "Do you think I look sexy in it?"
             else:
                 the_girl "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
-    $ standing_dildo.redraw_scene(the_girl)
-    return
+            return False
 
 label orgasm_standing_dildo(the_girl, the_location, the_object):
     the_girl "Oh god... Right there! Right there! Ahhhhh!"

@@ -202,6 +202,7 @@ label strip_ask_breeding_missionary(the_girl, the_clothing, the_location, the_ob
             $ the_girl.draw_animated_removal(the_clothing, position = breeding_missionary.position_tag)
             "You move back and kneel for a moment while [the_girl.title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
             "She sighs happily when you get on top of her and slide your cock back inside."
+            return True
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -214,7 +215,7 @@ label strip_ask_breeding_missionary(the_girl, the_clothing, the_location, the_ob
             else:
                 the_girl "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
                 "She grinds her hips against you and moans ecstatically."
-    return
+            return False
 
 label orgasm_breeding_missionary(the_girl, the_location, the_object):
     "[the_girl.title] turns her head and pants loudly. Suddenly she bucks her hips up against yours and gasps."

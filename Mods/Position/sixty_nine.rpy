@@ -453,9 +453,6 @@ label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
     return
 
 label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
-    #$ SB_sixty_nine.current_modifier = None
-    $ SB_sixty_nine.redraw_scene(the_girl)
-
     "[the_girl.possessive_title] pops off your cock."
     the_girl "Sir, I'd like to take off my [the_clothing.name], would you mind?"
     menu:
@@ -463,13 +460,13 @@ label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = SB_sixty_nine.position_tag)
             "[the_girl.possessive_title] wiggles out of her [the_clothing.name]. She throws it to the side, then slides your cock all the way to the back of her mouth."
-            $ SB_sixty_nine.redraw_scene(the_girl)
+            return True
 
         "Leave it on":
             mc.name "No, don't interrupt this for that."
             the_girl "Okay... I just wanted to feel you up against me a little more..."
             "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
-    return
+            return False
 
 label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
     "Licking and probing all around [the_girl.possessive_title]'s clit, you can feel her start to quiver."

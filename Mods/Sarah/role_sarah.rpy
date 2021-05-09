@@ -1386,7 +1386,7 @@ label Sarah_stripclub_story_label():
     else:
         "[the_person.possessive_title] leads the way as you leave the lab and head downtown."
         "You pass the bar you usually go to. You wonder what this crazy girl has in mind for tonight."
-    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.formalName]."
+    "Soon you walk up to a building and [the_person.title] comes to a stop. The sign out from says [strip_club.formal_name]."
     "Wow, a strip club? This could be interesting. You decide to tease her."
 
     # if MC has not yet discovered this place, make it visible on the map

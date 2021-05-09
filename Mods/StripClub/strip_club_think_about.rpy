@@ -12,7 +12,7 @@ init 3302 python:
         strip_club_owner = get_random_male_name()
         strip_club.background_image = Image(get_file_handle("Club_Background.png")) # Set up the original background
         strip_club.name = strip_club_owner + "'s Gentlemen's Club"
-        strip_club.formalName = strip_club_owner + "'s Gentlemen's Club"
+        strip_club.formal_name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button
         for person in stripclub_strippers: # rehire strippers
             set_stripper_schedule(person, strip_club)
@@ -272,7 +272,7 @@ label starbuck_name_the_new_club_label(the_person):
 
     $ name_string = str(renpy.input("New Strip Club Name: ", strip_club_owner + "'s Gentlemen's Club"))
     $ strip_club.name = name_string
-    $ strip_club.formalName = name_string
+    $ strip_club.formal_name = name_string
 
     "The strip club name now is [name_string]. You pick up your phone and call [cousin.title]."
 

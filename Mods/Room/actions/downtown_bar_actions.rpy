@@ -8,10 +8,10 @@ init -1 python:
 label downtown_bar_drink_label():
     $ new_person = make_person(force_random = True)
 
-    "[downtown_bar.formalName] is Under Construction - Placeholder Action (Probably will be removed)" # A way to generate new people.
+    "[downtown_bar.formal_name] is Under Construction - Placeholder Action (Probably will be removed)" # A way to generate new people.
 
     if not mc.location.people: # No one is in the bar so we create a person.
-        "The [downtown_bar.formalName] is a desolate place to be..."
+        "The [downtown_bar.formal_name] is a desolate place to be..."
 
         $ new_person.draw_person()
         "Having seated yourself by the counter with no bartender in sight you hear the entry door open up as a woman walks in."
