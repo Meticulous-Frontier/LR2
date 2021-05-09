@@ -1118,7 +1118,7 @@ label erica_post_race_love_label(the_person):
     the_person "But after getting to know you, I feel the same. I'm going to keep doing what I'm doing, but I want to spend my free time getting to know you better."
     mc.name "So... can I introduce you as my girlfriend?"
     the_person "Yeah... I'm not sure if this is going to work out, but I want to give it a try!"
-    $ the_person.special_role.append(girlfriend_role)
+    $ the_person.add_role(girlfriend_role)
     $ erica.event_triggers_dict["love_path"] = True
     "You roll over back on top of her and start to kiss her neck."
     $ the_person.change_arousal(10)

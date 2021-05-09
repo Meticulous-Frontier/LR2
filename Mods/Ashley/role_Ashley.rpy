@@ -796,7 +796,7 @@ label ashley_post_handjob_convo_label(the_person):
             mc.name "Don't worry, I'll talk to [stephanie.title]."
             $ the_person.event_triggers_dict["story_path"] = "normal"
             $ the_person.change_stats(love = 5, happiness = 5, obedience = 5)
-            $ the_person.special_role.append(girlfriend_role)
+            $ the_person.add_role(girlfriend_role)
         "Let's keep us secret \n{color=#ff0000}{size=18}Corruption path{/size}{/color}" if (ashley_steph_relationship_status() == "stephanie" or ashley.sluttiness > 30):
             mc.name "I think I know what to do, where we can all be happy."
             the_person "Oh?"
@@ -865,7 +865,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
             "Realizing that your plan to keep things secret with [ashley.title] isn't going to work unless you take things further with [the_person.title], you agree."
             mc.name "Here, let me do this, officially. [the_person.title], will you be my girlfriend?"
             the_person "Yes! Oh yay! I thought for sure you were gonna get with Ashley... I was so jealous... When I saw..."
-            $ the_person.special_role.append(girlfriend_role)
+            $ the_person.add_role(girlfriend_role)
             mc.name "I'm sorry, it won't happen again."
         the_person "... I guess I should warn you about this. This isn't the first time this has happened..."
         mc.name "Oh?"
