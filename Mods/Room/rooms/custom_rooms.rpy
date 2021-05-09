@@ -51,7 +51,7 @@ init 15 python:
         make_black_leather_couch(),
     ]
     police_jail_objects = [
-        Object("cell bars", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 10),
+        Object("cell bars", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
         make_wall(),
         make_bed(),
         make_floor(),
@@ -59,21 +59,18 @@ init 15 python:
     gym_shower_objects = [
         make_floor(),
         make_wall(),
-        Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5),
+        Object("shower door", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
         make_bench(),
     ]
 
     def make_swing():
-        the_swing = Object("sex swing",["Sit","Low","Lay", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
-        return the_swing
+        return Object("sex swing",["Sit","Low","Lay", "Swing"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_counter():
-        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_counter
+        return Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_reception():
-        the_desk = Object("reception desk",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_desk
+        return Object("reception desk",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
 
 

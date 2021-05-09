@@ -6,44 +6,44 @@
 init -1 python:
 
     def make_bdsmbed():
-        return Object("Bed Cuffs", ["Lay", "Low", "Kneel"], sluttiness_modifier = 10, obedience_modifier = 20) # Normal bed is +10.
+        return Object("Bed Cuffs", ["Lay", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 0) # Normal bed is +10.
 
     def make_pillory():
-        return Object("Pillory", ["Stand", "Lean", "Kneel", "Low"], sluttiness_modifier = 15, obedience_modifier = 25)
+        return Object("Pillory", ["Stand", "Lean", "Kneel", "Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_woodhorse():
-        return Object("Wood Horse", ["Sit", "Lean", "Lay"], sluttiness_modifier = 20, obedience_modifier = 30)
+        return Object("Wood Horse", ["Sit", "Lean", "Lay"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_cage():
-        return Object("Cage", ["Lay", "Low", "Kneel"], sluttiness_modifier = 10, obedience_modifier = 20)
+        return Object("Cage", ["Lay", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_toilet():
-        return Object("Toilet", ["Sit", "Low"], sluttiness_modifier = 10, obedience_modifier = 5)
+        return Object("Toilet", ["Sit", "Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_love_rug():
-        return Object("Love Rug", ["Kneel", "Lay"], sluttiness_modifier = 5, obedience_modifier = 10)
+        return Object("Love Rug", ["Kneel", "Lay"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # For parks and gym
     def make_bench():
-        return Object("Bench", ["Lay", "Sit", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = -5)
+        return Object("Bench", ["Lay", "Sit", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # For R&D:
     def make_examtable():
-        return Object("Exam Table", ["Lay", "Sit", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 20)
+        return Object("Exam Table", ["Lay", "Sit", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # For strip_club:
     # strip club stage is make_stage()
     def make_pole():
-        return Object("Stripper Pole", ["Lean", "Low"], sluttiness_modifier = 10, obedience_modifier = -5)
+        return Object("Stripper Pole", ["Lean", "Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # For renovated MC Bedroom:
     def make_impressive_bed():
-        return Object("Impressive Bed", ["Lay", "Low", "Kneel"], sluttiness_modifier = 15, obedience_modifier = 15)
+        return Object("Impressive Bed", ["Lay", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # Bring out the comfy chair! Nobody expects the Spanish Inquisition!
     def make_comfy_chair():
-        return Object("Comfy Chair",["Sit","Low"], sluttiness_modifier = 5, obedience_modifier = 5)
+        return Object("Comfy Chair",["Sit","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # Classic porn audition couch
     def make_black_leather_couch():
-        return Object("Black Leather Couch",["Sit","Lay","Low"], sluttiness_modifier = 15, obedience_modifier = 5)
+        return Object("Black Leather Couch",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
