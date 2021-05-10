@@ -88,22 +88,31 @@ init 2 python:
     add_mc_bedroom_renovate_action = ActionMod("Home Improvement", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_option_label",
         menu_tooltip = "Enables a series of renovations for your home into more impressive state (with some bonuses), including home dungeon.", category = "Home", is_crisis = True, crisis_weight = home_improvement_crisis_weight )
 
-    def add_mc_bedroom_renovate_action():
-        bedroom.add_action(Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (+5 Obedience and Sluttiness for some encounters within). Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10))
-        return
+    # extend the default build phone menu function with renovations
+    def build_phone_menu_extended(org_func):
+        def phone_menu_wrapper():
+            # run original function
+            phone_menu = org_func()
+            # run extension code
+            if mc.business.event_triggers_dict.get("home_improvement_unlocked", False):
+                if mc.business.event_triggers_dict.get("home_improvement_bedroom_renovated", False):
+                    lily_bedroom_renovate_action = Action("Renovate Lily's bedroom", lily_bedroom_renovate_requirement, "lily_bedroom_renovate_label", menu_tooltip = "Renovates Lily's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
+                    mom_bedroom_renovate_action = Action("Renovate Mom's bedroom", mom_bedroom_renovate_requirement, "mom_bedroom_renovate_label", menu_tooltip = "Renovates Mom's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
+                    home_shower_renovate_action = Action("Renovate bathroom", home_shower_renovate_requirement, "home_shower_renovate_label", menu_tooltip = "Renovates the shower in your house and increases your daily energy. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
+                    dungeon_build_action = Action("Build a dungeon", dungeon_build_action_requirement, "dungeon_build_label", menu_tooltip = "Clear the cellar and build a Sex Dungeon, complete with \"Guest Accommodations\". Cost $10000.", priority = 10)
 
-    def add_home_improvement_actions():
-        lily_bedroom_renovate_action = Action("Renovate room", lily_bedroom_renovate_requirement, "lily_bedroom_renovate_label", menu_tooltip = "Renovates Lily's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
-        mom_bedroom_renovate_action = Action("Renovate room", mom_bedroom_renovate_requirement, "mom_bedroom_renovate_label", menu_tooltip = "Renovates Mom's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
-        home_shower_renovate_action = Action("Renovate shower", home_shower_renovate_requirement, "home_shower_renovate_label", menu_tooltip = "Renovates the shower in your house and increases your daily energy. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
+                    phone_menu[2].insert(1, dungeon_build_action)
+                    phone_menu[2].insert(1, home_shower_renovate_action)
+                    phone_menu[2].insert(1, mom_bedroom_renovate_action)
+                    phone_menu[2].insert(1, lily_bedroom_renovate_action)
+                else:
+                    bedroom_renovate_action = Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (unlocks other home improvements). Cost $" + str(mc_bedroom_renovation_cost) + ".")
+                    phone_menu[2].insert(1, bedroom_renovate_action)
+            return phone_menu
 
-        mom_bedroom.add_action(mom_bedroom_renovate_action)
-        lily_bedroom.add_action(lily_bedroom_renovate_action)
-        bedroom.add_action(home_shower_renovate_action)
-        #hall.actions.append(room_renovation_action) # Eventually improve the front hall as well.
-        # Kitchen? When we get a good graphic for a VERY nice kitchen?
-        add_build_dungeon_action()
-        return
+        return phone_menu_wrapper
+
+    build_phone_menu = build_phone_menu_extended(build_phone_menu)
 
     def home_renovation_completion_requirement(completion_day):
         if day > completion_day and mc.business.is_open_for_business():
@@ -127,7 +136,7 @@ init 2 python:
         mc.business.add_mandatory_crisis(home_shower_renovate_completed_action)
 
     def add_dungeon_build_completed_action():
-        dungeon_completed_action = Action("Dungeon Completed", home_renovation_completion_requirement, "dungeon_build_completed_label", requirement_args = day + 6 + renpy.random.randint(0,3))
+        dungeon_completed_action = Action("Dungeon Completed", home_renovation_completion_requirement, "dungeon_completed_label", requirement_args = day + 6 + renpy.random.randint(0,3))
         mc.business.add_mandatory_crisis(dungeon_completed_action)
 
     def upgrade_bedroom(room, background):
@@ -141,8 +150,8 @@ init 2 python:
 
 label mc_bedroom_renovate_option_label():
     "It occurs to you that your bedroom still looks like that of a poor college student rather than someone who owns a business. Perhaps you should consider spending some time and money renovating?"
-    "After a bit of online shopping you figure about $[mc_bedroom_renovation_cost] ought to cover it."
-    $ add_mc_bedroom_renovate_action()
+    "After a bit of online shopping you figure about $[mc_bedroom_renovation_cost] ought to cover it. Perhaps you should give someone a call on your phone."
+    $ mc.business.event_triggers_dict["home_improvement_unlocked"] = True
     return
 
 label mc_bedroom_renovate_label():
@@ -173,8 +182,8 @@ label home_improvement_unlocked_label():
     mom "Wow [mom.mc_title], you did a great job on renovating your bedroom. You know if you feel like it, keep going! The house sure could use some upgrades. Just give us a heads up on what you want to do."
     mc.name "Okay, will think about it. And see when we have budget free."
     mom "No pressure, I know money's tight. But wow, if you could, that would be fantastic! Love you!"
-    $ add_home_improvement_actions()
     $ mc.end_text_convo()
+    $ mc.business.event_triggers_dict["home_improvement_bedroom_renovated"] = True
     return
 
 label lily_bedroom_renovate_label():
@@ -241,4 +250,25 @@ label home_shower_renovate_completed_label():
         home_shower.background_image = standard_home_shower_backgrounds
         mc.change_max_energy(10)
         mc.business.event_triggers_dict["home_improvement_in_progress"] = False
+    return
+
+label dungeon_build_label():
+    "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires, telling your [mom.possessive_title] that it will be a \"Home Workshop\" of a sorts."
+    "You pick up the phone and make a call."
+    mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
+    "You go over the details with the constructor and agree on a price of $10,000 for converting your existing cellar into a dungeon, fully soundproofed of course."
+    $ mc.business.change_funds(-10000)
+    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = True
+    $ add_dungeon_build_completed_action()
+    return
+
+label dungeon_completed_label():
+    $ man_name = get_random_male_name()
+    "Going about your day, you get a call from your contractor."
+    man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
+    mc.name "Thank you [man_name], much appreciated."
+    "The dungeon at your house is now ready for use."
+    $ mc.business.event_triggers_dict["dungeon_owned"] = True
+    $ dungeon.visible = True
+    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = False
     return

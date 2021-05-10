@@ -127,7 +127,6 @@ label build_custom_rooms(stack):
         list_of_places.append(police_jail)
 
         # initialize dungeon room creation action
-        add_dungeon_intro_action()
         fix_lobby_objects()
 
         add_custom_objects()
