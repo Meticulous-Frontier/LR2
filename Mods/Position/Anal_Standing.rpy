@@ -441,7 +441,7 @@ label transition_standing_anal_to_standing_doggy_taboo_break_label(the_girl, the
     return
 
 label transition_SB_anal_standing_doggy_anal(the_girl, the_location, the_object):
-    mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
+    mc.name "Get down on your knees [the_girl.title], I'm going to fuck you like the little bitch you are."
     the_girl "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 

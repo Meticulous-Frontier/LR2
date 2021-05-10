@@ -377,7 +377,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
     return
 
 label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
-    mc.name "Get down on your knees [the_girl.title], i'm going to fuck you like the little bitch you are."
+    mc.name "Get down on your knees [the_girl.title], I'm going to fuck you like the little bitch you are."
     the_girl "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 

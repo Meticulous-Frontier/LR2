@@ -192,7 +192,7 @@ label strip_club_hire_employee_label(the_person):
         mc.name "I think you are going to like this offer."
     elif the_person is aunt:
         $ the_person.event_triggers_dict["strip_club_shifts"] = 1
-        the_person "Hello [the_person.mc_title], i'm so tired of sitting around at home all day, I wouldn't mind a little diversion."
+        the_person "Hello [the_person.mc_title], I'm so tired of sitting around at home all day, I wouldn't mind a little diversion."
         mc.name "Well, it's not exactly a daytime job, but the hours and pay are very good."
     elif the_person is cousin:
         the_person "After you fired me from the strip club I didn't find anything interesting... Do you have something in mind?"
