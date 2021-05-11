@@ -100,7 +100,7 @@ label SB_caught_masturbating_crisis_label():
         menu:
             "Watch her masturbate":
                 "You shift your weight slightly to get comfortable. The sight of [the_person.possessive_title] brazenly masturbating while at work has you mesmerized."
-                the_person "yes... fuck yes"
+                the_person "Yes... fuck yes.."
                 $ the_person.change_arousal(10)
                 "[the_person.possessive_title] continues to moan to herself, lost in whatever fantasy she is masturbating to."
                 #Get Caught?

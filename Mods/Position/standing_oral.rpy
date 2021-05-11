@@ -102,12 +102,12 @@ label scene_standing_oral_1(the_girl, the_location, the_object):
         if the_girl.has_large_tits():
             "With one hand she softly squeezes her large breast, gently playing with her nipple."
         else:
-            "With one hand she squeezes het perky little breast, gently playing with her nipple."
+            "With one hand she squeezes her perky little breast, gently playing with her nipple."
     else:
         if the_girl.has_large_tits():
             "With one hand she softly squeezes her large breast."
         else:
-            "With one hand she squeezes het perky little breast."
+            "With one hand she squeezes her perky little breast."
     return
 
 

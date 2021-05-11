@@ -821,7 +821,7 @@ label ashley_post_handjob_convo_label(the_person):
             mc.name "[stephanie.title] and I go back a ways, but I just think of her as a friend."
             mc.name "I'm not going to lie, I really enjoy the way things are developing between us... but I have to be honest. I'm not looking to get tied down right now."
             the_person "Ahh... I see..."
-            mc.name "I understand though, that everyone has needs. If you want need some help relieving sexual tension, I'd be glad to help you out whenever you need it."
+            mc.name "I understand though, that everyone has needs. If you want some help relieving sexual tension, I'd be glad to help you out whenever you need it."
             "[the_person.title] looks confused for a moment."
             the_person "You mean... you want to be friends... with benefits?"
             mc.name "Exactly."
