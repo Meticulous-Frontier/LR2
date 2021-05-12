@@ -1009,7 +1009,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(stephanie, position = "sitting")
     "You swing by the coffee shop. Right on time, you see [the_person.title] and [stephanie.title] in a booth. You walk over to the table."
-    mc.name "Good morning! Whose up for coffee?"
+    mc.name "Good morning! Who's up for coffee?"
     stephanie "Good morning [stephanie.mc_title]! That would be great! Can I get an Americano with two creams?"
     the_person "Good morning. I like mine black..."
     if stephanie.sluttiness > 20:

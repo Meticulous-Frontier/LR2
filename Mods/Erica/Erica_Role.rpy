@@ -1728,7 +1728,7 @@ label erica_weekly_yoga_label(the_person):
         yoga_assistant "Oh! That makes total sense."
         the_person "This is great! I'll make an announcement."
         "[the_person.possessive_title] raises her voice extra loud so everyone in the room can hear it."
-        the_person "Hey everyone! Good news! We just got the okay, from now on, in celebration of the female body, this will be a nude yoga class!"
+        the_person "Hey everyone! Good news! We just got the okay, from now on - in celebration of the female body - this will be a nude yoga class!"
         "You hear several cheers go up from the group."
         "You notice that [yoga_assistant.possessive_title] has already started to strip down..."
         $ scene_manager.strip_actor_outfit(yoga_assistant)

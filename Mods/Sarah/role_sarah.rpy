@@ -1986,7 +1986,7 @@ label Sarah_threesome_request_label():
         $ scene_manager.add_actor(lily, display_transform = character_center, position = "sitting")
         "As you walk down the hall and past the living room, you see [mom.possessive_title] and [lily.possessive_title] sitting at the couch, watching a movie."
         "They notice you walking by."
-        lily "Hey Bro, we're watching a movie if you wanna join us... Wow! Whose the girl?"
+        lily "Hey Bro, we're watching a movie if you wanna join us... Wow! Who's the girl?"
         mc.name "Hey [lily.title], this is my girlfriend [the_person.title]."
         lily "Wow, you didn't tell me you had a girlfriend!"
         "[lily.title] is checking out [the_person.title]. You look at her and see she is doing the same."

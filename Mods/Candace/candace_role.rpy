@@ -408,7 +408,7 @@ label candace_get_to_know_label(the_person):
         mc.name "I'm sure he would understand..."
         the_person "No no no, he already told me as much. He said, \'don't you think about quitting, or I'll dump you! and no one wants to date a dumb bimbo like you but me!\'"
         "Jesus, this guy sounds like a major narcissist. The more you learn about him, the more happy you are that [salon_manager.title] got away from him, even if involuntarily."
-        the_person "And if he dumps me, whose going to fuck me every night? No, I think I'd better just stay where I'm at for now."
+        the_person "And if he dumps me, who's going to fuck me every night? No, I think I'd better just stay where I'm at for now."
         $ mc.change_locked_clarity(10)
         $ the_person.event_triggers_dict["learned_about_unhappy"] = 1
         "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
