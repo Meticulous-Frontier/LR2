@@ -432,7 +432,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     $ the_person.change_arousal(10)
                                     "You both quickly get naked. She looks like she really enjoys getting naked for you."
                                     the_person "Just stick it in! I'm ready, no need to warm me up..."
-                                    call fuck_person(the_person, private = True, prohibit_tags = ["Foreplay", "Oral"]) from _clothes_shopping_sex_in_a_changing_room_12#Nothing too serious
+                                    call fuck_person(the_person, private = True, prohibit_tags = ["Foreplay", "Oral"], skip_intro = True, skip_condom = True) from _clothes_shopping_sex_in_a_changing_room_12#Nothing too serious
                                     $ the_report = _return
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."

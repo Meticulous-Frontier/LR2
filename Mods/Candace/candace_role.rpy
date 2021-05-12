@@ -1450,7 +1450,7 @@ label candace_meet_doctor_candace_label():
                 "You reach up and grab her hair."
                 mc.name "I think I'll do that."
                 "Pulling her head back, you start to thrust yourself inside of her at a rapid pace. It's time to give it to her good!"
-                call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True) from _fuck_doctor_candace_again_02
+                call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True, skip_condom = True) from _fuck_doctor_candace_again_02
                 "When you finish with her, [the_person.title] is sprawled out across your desk. Your light colored cum on her dark skin is a beautiful contrast."
                 "You get yourself cleaned up a bit and looking presentable while she is still recovering."
                 the_person "Oh fuck [the_person.mc_title]... Your dick is amazing..."

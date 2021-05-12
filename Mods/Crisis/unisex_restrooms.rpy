@@ -333,7 +333,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     "Without saying a word, you push yourself into her slick fuckhole. It feels amazing."
-    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, private = False, position_locked = True) from _call_fantasy_actout_1
+    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, skip_condom = True, private = False, position_locked = True) from _call_fantasy_actout_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person "Oh god, it was even better than I thought... oh my god."
@@ -648,7 +648,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             $ the_person.break_taboo("condomless_sex")
             $ the_person.break_taboo("vaginal_sex")
             "She lines it up with her slit as you slowly slide into her. She stifles a moan when you finally bottom out."
-            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_gloryhole_joinme_1
+            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True) from _call_sex_gloryhole_joinme_1
             $ scene_manager.update_actor(the_person, position = "against_wall")
             "When you finish, you stand there with her, her leg still in the air for a moment."
             $ scene_manager.update_actor(the_person, position = "stand4")

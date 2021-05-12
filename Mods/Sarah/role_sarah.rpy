@@ -1091,8 +1091,10 @@ label Sarah_get_drinks_label():
     "You let go of yourself, and move your hips into position just above hers. Her hand stops stroking you and guides your cock to her pussy as it gets close."
     "You can feel the moist heat coming from between [the_person.title]'s legs as you get close. You feel the head begin to poke against her slit."
     "Her legs wrap tighter behind you, begging you to push into her. You happily give in, parting her labia and sinking slowly into her cunt."
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     the_person "OH god... that's so good!"
-    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True) from _call_sex_description_sarah_grabbing_drinks_1
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_sarah_grabbing_drinks_1
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person "Oh my god... ever since you came back into my life, I'd been hoping... maybe this was all happening for a reason."
         $ scene_manager.draw_scene()
@@ -2276,7 +2278,7 @@ label Sarah_ask_for_baby_label():
             $ the_person.event_triggers_dict["fertile_start_day"] = day  #Her 5 day fertility period starts today.
             call Sarah_fertile_period_start_label() from sarah_initial_fertile_period_start_01
             #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
-            call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
+            call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, skip_condom = True, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
             if the_person.has_creampie_cum():
                 the_person "Oh my god... we actually did it..."
                 "She grabs an extra pillow and puts it under her butt so her hips are elevated."
@@ -2973,11 +2975,13 @@ label Sarah_date_ends_at_your_place_label(the_person):
     "[the_person.possessive_title] looks at you."
     the_person "Well, I think we both know where this is going!"
     $ scene_manager.strip_actor_outfit(the_person, exclude_feet = True)
+    $ skip_condom = False
     if Sarah_is_fertile():
         the_person "Let's go! Ovulation is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
+        $ skip_condom = True
     else:
         the_person "What are you staring at? Let's go! I've been looking forward to this all night!"
-    call fuck_person(the_person, skip_intro = False, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
+    call fuck_person(the_person, skip_intro = False, skip_condom = skip_condom, girl_in_charge = False) from _call_sex_description_date_happy_ending_1
     "When you finish with her, [the_person.title] collapses in the bed."
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You cuddle up next to her as you both catch your breath."

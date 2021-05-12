@@ -231,7 +231,7 @@ label anal_fetish_employee_intro_label(the_person):
     "When you're ready you push forward. Her back passage slowly accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
     $ the_person.break_taboo("anal_sex")
     ###Anal Scene, standing variant###
-    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_anal_fetish_intro_employee_01
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_employee_01
     #$ the_person.SB_fetish = "anal sex"
     $ the_person.max_opinion_score("anal sex")
     $ the_person.max_opinion_score("anal creampies")
@@ -350,9 +350,10 @@ label anal_fetish_family_intro_label(the_person):
     $ the_person.change_arousal(15) #85
     $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
+    $ the_person.break_taboo("anal_sex")
     the_person "Oh god... why does it... feel so good!!!"
     "[the_person.possessive_title]'s ass feels amazing as you start to fuck it. It's time to show her just how good you can make her feel this way."
-    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True) from _call_fuck_person_anal_fetish_intro_family_01
+    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_family_01
     $ the_person.max_opinion_score("anal sex")
     $ the_person.max_opinion_score("anal creampies")
     "[the_person.possessive_title] slowly stands up."
@@ -469,10 +470,11 @@ label anal_fetish_generic_intro_label(the_person):
     $ mc.change_locked_clarity(50)
     mc.name "See? You just needed something in your ass so you could cum."
     the_person "I... I think you might be right... I..."
+    $ the_person.break_taboo("anal_sex")
     "She stops mid sentence as you give her a quick thrust."
     mc.name "Its okay to admit you are a buttslut. Now, lets just make sure you needs are sated before we part ways."
     "[the_person.possessive_title] is unable to reply as you begin to fuck her ass. It's time to show her just how good you can make her feel that way."
-    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True) from _call_fuck_person_anal_fetish_intro_generic_01
+    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_generic_01
     #$ the_person.SB_fetish = "anal sex"
     $ the_person.max_opinion_score("anal sex")
     $ the_person.max_opinion_score("anal creampies")
@@ -674,8 +676,9 @@ label anal_fetish_mom_intro_label():
     $ mc.change_locked_clarity(50)
     "You grab the lotion leftover from the night before. You quickly apply another glob to [the_person.title]'s back side. You apply some more to your cock until it is good and slick."
     "You get yourself lined up with your mom's back passage. You slowly begin your anal penetration."
+    $ the_person.break_taboo("anal_sex")
     the_person "That's it [the_person.mc_title]! Fuck me good!"
-    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _mom_anal_fetish_intro_03
+    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True, skip_condom = True) from _mom_anal_fetish_intro_03
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         "[the_person.possessive_title] lays there on the bed, speechless from your anal plundering."
@@ -783,7 +786,7 @@ label anal_fetish_lily_intro_label():
     the_person "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
     "Going tantalizingly slow, you pull yourself mostly out, then back into her buttery smooth back door."
     the_person "Okay... Go slow... but I'm ready!"
-    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _lily_anal_fetish_intro_01
+    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True, skip_condom = True) from _lily_anal_fetish_intro_01
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 1:
         "[the_person.possessive_title] is a sweaty, heaving mess. You know she had multiple orgasms from the intense sensations of the double penetration."
@@ -890,7 +893,7 @@ label anal_fetish_stephanie_bimbo_label(the_person):
     the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
     "Without any hesitation you slide your cock into her tight hole."
     $ the_person.break_taboo("anal_sex")
-    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, position_locked = True) from _call_steph_anal_intro_bimbo_01
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, position_locked = True) from _call_steph_anal_intro_bimbo_01
     $ add_anal_fetish(the_person)
     the_person "That's it! That's just what I was hoping for."
     $ scene_manager.update_actor(the_person, position = "stand2")
@@ -1026,7 +1029,7 @@ label anal_fetish_starbuck_intro_label():
     mc.name "Hey [the_person.title]. I'm about to fuck your ass now, just the way you like."
     "Her body shudders from your dirty talk. She wiggles her ass back up against you."
     the_person "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
-    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True) from _call_sex_starbuck_anal_fetish_intro_01
+    call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_starbuck_anal_fetish_intro_01
     $ add_anal_fetish(the_person)
     "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
     "[the_person.title] takes a few minutes to recover. She eventually stands up and turns to you."
