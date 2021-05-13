@@ -929,7 +929,7 @@ init 2:
                             frame:
                                 background "#888888"
                                 xfill True
-                                textbutton "Current Items":
+                                textbutton "Current (" + get_slut_value_classification(get_slut_score()) + ")":
                                     style "textbutton_no_padding"
                                     text_style "serum_text_style"
                                     xfill True
