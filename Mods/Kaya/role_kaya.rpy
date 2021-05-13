@@ -433,7 +433,12 @@ label play_billiards(the_person, skill_offset = 0): #MC can play billiards.
         "Play the game":
             pass
         "Simulate the game":
+            pass
 
+    return
 
-def calc_pool_ball_sink_chance(skill = 0, difficulty = 0):
-    return if renpy.random.randint(0,100) < min((50 + (skill * 5) ) - (difficulty * 10), 90)
+init 2 python:
+    def calc_pool_ball_sink_chance(skill = 0, difficulty = 0):
+        if renpy.random.randint(0,100) < min((50 + (skill * 5) ) - (difficulty * 10), 90):
+            return True
+        return False
