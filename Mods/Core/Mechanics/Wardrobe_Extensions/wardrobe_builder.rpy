@@ -637,7 +637,7 @@ init 5 python:
             self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
             self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
 
-            outfit.build_outfit_name()
+            outfit.update_name()
 
             return outfit
 
@@ -689,7 +689,7 @@ init 5 python:
                 # add makeup to outfit (overrides makeup in base_outfit)
                 add_make_up_to_outfit(self.person, outfit)
 
-            outfit.build_outfit_name()
+            outfit.update_name()
 
             return outfit
 

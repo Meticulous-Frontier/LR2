@@ -58,7 +58,7 @@ init -1 python:
         self.planned_uniform = None
 
         if self.wardrobe:
-            for outfit in self.wardrobe.outfits + self.wardrobe.underwear_sets + self.wardrobe.overwear_sets:
+            for outfit in self.wardrobe.all_outfits:
                 outfit.upper_body.clear()
                 outfit.lower_body.clear()
                 outfit.feet.clear()

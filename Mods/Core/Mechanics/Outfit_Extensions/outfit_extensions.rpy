@@ -172,21 +172,34 @@ init -1 python:
 
     def build_outfit_name_custom(self):
         def get_name_classification(slut_requirement):
-            if slut_requirement <= 20:
+            if slut_requirement <= 5:
                 return "Conservative"
-            if slut_requirement <= 40:
+            if slut_requirement <= 15:
+                return "Modest"
+            if slut_requirement <= 25:
                 return "Casual"
-            if slut_requirement <= 60:
-                return "Relaxed"
-            if slut_requirement <= 80:
+            if slut_requirement <= 35:
+                return "Trendy"
+            if slut_requirement <= 45:
+                return "Stylish"
+            if slut_requirement <= 55:
+                return "Enticing"
+            if slut_requirement <= 65:
+                return "Provocative"
+            if slut_requirement <= 75:
+                return "Sensual"
+            if slut_requirement <= 85:
                 return "Sexy"
+            if slut_requirement <= 95:
+                return "Sultry"
             return "Slutty"
 
         def get_clothing_items(outfit_part):
-            items = filter(lambda x: x.layer == 2, outfit_part)
-            if not items:
-                items = filter(lambda x: x.layer == 1, outfit_part)
-            return items
+            for layer in range(2, 0, -1):
+                items = filter(lambda x: x.layer == layer, outfit_part)
+                if items:
+                    return items
+            return None
 
         outfitname = ""
 
@@ -201,19 +214,26 @@ init -1 python:
             if lower:
                 outfitname += lower[0].name
 
-        if __builtin__.len(outfitname) == 0:
-            feet = get_clothing_items(self.feet)
-            if feet:
-                outfitname = feet[0].name
+        feet = get_clothing_items(self.feet)
+        if feet:
+            if __builtin__.len(outfitname) != 0:
+                outfitname += " with "
+            outfitname += feet[0].name
 
         if __builtin__.len(outfitname) == 0:
             return "Naked"
 
-        self.name = get_name_classification(self.slut_requirement) + " " + outfitname
+        self.name = get_name_classification(self.get_full_outfit_slut_score()) + " " + outfitname
 
         return self.name
 
     Outfit.build_outfit_name = build_outfit_name_custom
+
+    def update_name(self):
+        self.name = self.build_outfit_name()
+        return
+
+    Outfit.update_name = update_name
 
 # initialize this part after wardrobe builder is initialized
 init 6 python:
