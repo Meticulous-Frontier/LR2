@@ -652,6 +652,7 @@ label candace_convince_to_quit_label(the_person):
     "You spend the next hour or so getting [the_person.title] all set up. [salon_manager.title] really does think of everything."
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
+    $ the_person.remove_role(affair_role)   # people can get her to this role before she quits
     $ the_person.change_happiness(30)
     "She's got new passwords on everything from bank accounts, to social media. A locksmith is already en route to change her locks, and she's blocked her ex from her phone completely."
     "After a while, you notice they seem to be done, and now they are just trading stories and gossip. They actually seem to be getting along okay."
