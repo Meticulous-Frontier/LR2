@@ -105,7 +105,7 @@ label bimbo_cum_mouth_enhanced(the_person):
 label introvert_cum_face_enhanced(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 60 or the_person.get_opinion_score("cum facials") > 0:
-            "[the_person.title] licks her lips and moving her tongue up to catch a few drops of semen that spilled out of her nose."
+            "[the_person.title] licks her lips and moves her tongue up to catch a few drops of semen that spilled out of her nose."
         else:
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     else:

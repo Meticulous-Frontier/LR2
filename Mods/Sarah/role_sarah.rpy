@@ -2062,7 +2062,7 @@ label Sarah_arrange_threesome_label(the_person):
         the_person "Seriously?"
         mc.name "Yeah seriously. Don't worry you'll like it."
         mc.name "There's this girl I've been seeing lately. She is pretty bi-curious, and has never had a threesome before."
-        the_person "Oh jesus I can tell where this is going already."
+        the_person "Oh Jesus, I can tell where this is going already."
         mc.name "Anyway, she's been asking, so I promised her I'd try to arrange something for Saturday. I need you to come over to my place Saturday night."
         if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role([stripper_role, waitress_role, bdsm_performer_role]):
             the_person "That's ridiculous. I'm gonna make a ton of money in tips on a Saturday night. You're gonna have to convince me..."

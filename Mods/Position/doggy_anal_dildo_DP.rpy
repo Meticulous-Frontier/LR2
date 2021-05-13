@@ -305,7 +305,7 @@ label transition_doggy_anal_SB_doggy_anal_dildo_dp(the_girl, the_location, the_o
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
     else:
-        the_girl "Oh jesus! I don't know..."
+        the_girl "Oh Jesus! I don't know..."
         mc.name "Hush. Don't worry, it'll fit."
     "[the_girl.possessive_title] waits patiently on all fours as you secure the strap on. She arches her back and presents her ass."
     if the_girl.arousal > 60:
@@ -331,7 +331,7 @@ label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
     else:
-        the_girl "Oh jesus! I don't know..."
+        the_girl "Oh Jesus! I don't know..."
         mc.name "Hush. Don't worry, it'll fit."
     "[the_girl.possessive_title] waits patiently on all fours as you secure the strap on. She arches her back and presents her ass."
     if the_girl.arousal > 60:

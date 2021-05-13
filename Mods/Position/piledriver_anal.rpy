@@ -46,7 +46,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
             "[the_girl.possessive_title] looks worried."
             the_girl "You... you want to put it in my ass don't you?"
 
-    "When you cock is good a lubed up, you pull back slightly, then line it up with her pretty little asshole."
+    "When your cock is all lubed up, you pull back slightly, then line it up with her pretty little asshole."
     mc.name "Ready?"
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
         the_girl "Yes!"

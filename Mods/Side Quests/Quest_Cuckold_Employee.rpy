@@ -763,7 +763,7 @@ label quest_cuckold_employee_knocked_up_label():
     call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, skip_condom = True) from _breed_cuckold_victory_lap_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
-        the_person "Sweet jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
+        the_person "Sweet Jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
     $ the_person.change_stats(obedience = 2, slut_temp = 2, slut_core = 2)  #She is now your slutty breeding stock.
