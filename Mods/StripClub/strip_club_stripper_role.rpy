@@ -99,7 +99,7 @@ init 5 python:
     def is_strip_club_stripper_requirement(person):
         if get_strip_club_foreclosed_stage() >= 5:
             if not mc.location in [strip_club, bdsm_room]:
-                return "Only in [strip_club.formalName]"
+                return "Only in [strip_club.formal_name]"
             if person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
                 return True
         return False
@@ -120,7 +120,7 @@ init 5 python:
     def strip_club_review_requirement(person):
         if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
             if not mc.location in [strip_club, bdsm_room]:
-                return "Only in [strip_club.formalName]"
+                return "Only in [strip_club.formal_name]"
             if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
                 return "Too recently promoted"
             if day - person.event_triggers_dict.get("day_last_performance_review", -7) < 7:
@@ -129,7 +129,7 @@ init 5 python:
         return False
 
     def add_strip_club_hire_employee_action_to_mc_actions():
-        strip_club_hire_employee_action = Action("Employ at [strip_club.formalName]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
+        strip_club_hire_employee_action = Action("Employ at [strip_club.formal_name]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
         mc.main_character_actions.append(strip_club_hire_employee_action)
 
     def allow_promote_to_manager_requirement(person):
@@ -139,7 +139,7 @@ init 5 python:
             if person.int < 4 or person.charisma < 5:
                 return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
-                return "Only in [strip_club.formalName]"
+                return "Only in [strip_club.formal_name]"
             # if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7: # Maybe I hired her just because I want to have her as manager (immediately)
                 # return "Too recently hired"
             return True
@@ -192,7 +192,7 @@ label strip_club_hire_employee_label(the_person):
         mc.name "I think you are going to like this offer."
     elif the_person is aunt:
         $ the_person.event_triggers_dict["strip_club_shifts"] = 1
-        the_person "Hello [the_person.mc_title], i'm so tired of sitting around at home all day, I wouldn't mind a little diversion."
+        the_person "Hello [the_person.mc_title], I'm so tired of sitting around at home all day, I wouldn't mind a little diversion."
         mc.name "Well, it's not exactly a daytime job, but the hours and pay are very good."
     elif the_person is cousin:
         the_person "After you fired me from the strip club I didn't find anything interesting... Do you have something in mind?"
@@ -254,7 +254,7 @@ label strip_club_hire_employee_label(the_person):
     if mc.location is strip_club:
         mc.name "I own this strip club and I could see you working here..."
     else:
-        mc.name "I own the [strip_club.formalName] downtown, and I need some workers for the place..."
+        mc.name "I own the [strip_club.formal_name] downtown, and I need some workers for the place..."
 
     the_person "Oh my God, really? You're proposing a job in your strip club? I don't know..."
 
@@ -334,7 +334,7 @@ label strip_club_hire_employee_label(the_person):
             $ the_person.event_triggers_dict["stripper_ask_hire"] = day
             return
 
-    "You ask her to sign the standard contract and [the_person.title] now works for you in the [strip_club.formalName]."
+    "You ask her to sign the standard contract and [the_person.title] now works for you in the [strip_club.formal_name]."
 
     $ strip_club_hire_stripper(the_person, _return)
 

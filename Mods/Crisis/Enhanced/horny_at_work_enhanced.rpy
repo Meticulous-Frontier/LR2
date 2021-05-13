@@ -287,7 +287,7 @@ label horny_at_work_crisis_enhanced_label():
                         "After getting yourself cleaned up you're able to focus perfectly again and you get back to work."
 
             else: #You get yourself off.
-                "You pull up some porn and, with skill trained over many years."
+                "You pull up some porn and, with a skill trained over many years, you start jerking off."
                 if masturbating_people:
                     "Some of the girls get comfortable and start enjoying themselves while watching you."
                     python:

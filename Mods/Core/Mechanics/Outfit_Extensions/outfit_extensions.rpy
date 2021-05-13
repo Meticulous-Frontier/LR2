@@ -152,41 +152,63 @@ init -1 python:
 
     Outfit.remove_all_collars = remove_all_collars
 
+    def get_body_parts_slut_score(self, extra_modifier = False):
+        new_score = 0
+        if self.tits_available():
+            new_score += 15
+        elif self.tits_visible():
+            new_score += 30
+        if extra_modifier and (not self.wearing_bra() or not self.bra_covered()):
+            new_score += 15
+
+        if self.vagina_available():
+            new_score += 15
+        elif self.vagina_visible():
+            new_score += 30
+        if extra_modifier and (not self.wearing_panties() or not self.panties_covered()):
+            new_score += 15
+        return new_score
+
+    Outfit.get_body_parts_slut_score = get_body_parts_slut_score
+
+    def get_underwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an underwear set. We assume a modest overwear set is used (ie. one that covers visibility).
+        new_score = 0
+        new_score += self.get_body_parts_slut_score()
+        new_score += self.get_total_slut_modifiers()
+        return new_score
+
+    Outfit.get_underwear_slut_score = get_underwear_slut_score_enhanced
+
     def get_overwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an overwear set. That means we assume a modest underwear set is used (ie. one that denies access).
         new_score = 0
-        if self.tits_visible():
-            new_score += 20
-        elif self.tits_available():
-            new_score += 10
-
-        if self.vagina_visible():
-            new_score += 40
-        elif self.vagina_available():
-            new_score += 20
-
+        new_score += self.get_body_parts_slut_score(extra_modifier = True)
         new_score += self.get_total_slut_modifiers()
-
-        return new_score if new_score > 0 else 0
+        return new_score
 
     Outfit.get_overwear_slut_score = get_overwear_slut_score_enhanced
 
-    def build_outfit_name_custom(self):
-        def get_name_classification(slut_requirement):
-            if slut_requirement <= 20:
-                return "Conservative"
-            if slut_requirement <= 40:
-                return "Casual"
-            if slut_requirement <= 60:
-                return "Relaxed"
-            if slut_requirement <= 80:
-                return "Sexy"
-            return "Slutty"
+    def get_full_outfit_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's a full outfit. Full penalties and such apply.
+        new_score = 0
+        new_score += self.get_body_parts_slut_score(extra_modifier = True)
+        new_score += self.get_total_slut_modifiers()
+        return new_score
 
+    Outfit.get_full_outfit_slut_score = get_full_outfit_slut_score_enhanced
+
+    def get_slut_value_classification(slut_requirement):
+        classifications = ["Conservative", "Timid", "Modest", "Casual", "Trendy", "Stylish", "Enticing", "Provocative", "Sensual", "Sexy", "Seductive", "Sultry", "Slutty"]
+        ci = (slut_requirement + 5) // 7
+        if ci >= __builtin__.len(classifications):
+            return classifications[-1]
+        return classifications[ci]
+
+    def build_outfit_name_custom(self):
         def get_clothing_items(outfit_part):
-            items = filter(lambda x: x.layer == 2, outfit_part)
-            if not items:
-                items = filter(lambda x: x.layer == 1, outfit_part)
-            return items
+            for layer in range(2, 0, -1):
+                items = filter(lambda x: x.layer == layer, outfit_part)
+                if items:
+                    return items
+            return None
 
         outfitname = ""
 
@@ -194,26 +216,33 @@ init -1 python:
         if upper:
             outfitname += upper[0].name
 
-        if not upper or not upper[0].has_extension:
+        if not upper or (not upper[0].has_extension or upper[0].has_extension.layer <= 1):
             lower = get_clothing_items(self.lower_body)
             if upper and lower:
                 outfitname += " and "
             if lower:
                 outfitname += lower[0].name
 
-        if __builtin__.len(outfitname) == 0:
-            feet = get_clothing_items(self.feet)
-            if feet:
-                outfitname = feet[0].name
+        feet = get_clothing_items(self.feet)
+        if feet:
+            if __builtin__.len(outfitname) != 0:
+                outfitname += " with "
+            outfitname += feet[0].name
 
         if __builtin__.len(outfitname) == 0:
             return "Naked"
 
-        self.name = get_name_classification(self.slut_requirement) + " " + outfitname
+        self.name = get_slut_value_classification(self.get_full_outfit_slut_score()) + " " + outfitname
 
         return self.name
 
     Outfit.build_outfit_name = build_outfit_name_custom
+
+    def update_name(self):
+        self.name = self.build_outfit_name()
+        return
+
+    Outfit.update_name = update_name
 
 # initialize this part after wardrobe builder is initialized
 init 6 python:
@@ -241,8 +270,8 @@ init 6 python:
             new_score += cloth.slut_value
             if WardrobeBuilder.clothing_in_preferences("skimpy outfits", cloth):
                 new_score += 1
-            if WardrobeBuilder.clothing_in_preferences("conservative outfits", cloth):
-                new_score -= 3
+            # if WardrobeBuilder.clothing_in_preferences("conservative outfits", cloth):
+            #     new_score -= 3
             if WardrobeBuilder.clothing_in_preferences("showing her tits", cloth):
                 new_score += 2
             if WardrobeBuilder.clothing_in_preferences("showing her ass", cloth):
@@ -252,17 +281,17 @@ init 6 python:
             if WardrobeBuilder.clothing_in_preferences("high heels", cloth):
                 new_score += 1
             if cloth in [pumps, high_heels, leggings]:
-                new_score += 5 # small extra modifier
+                new_score += 3 # small extra modifier
             if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
-                new_score += 10 # extremely slutty clothing (applies extra modifier)
+                new_score += 5 # extremely slutty clothing (applies extra modifier)
             if cloth in [pinafore]:
                 if not any(x for x in self.upper_body if x.layer == 1 or x.layer == 2):
-                    new_score += 10 # tits not covered in pinafore
+                    new_score += 5 # tits not covered in pinafore
             if cloth in [lacy_one_piece_underwear, lingerie_one_piece, leotard]:
                 if not any(x for x in self.upper_body if x.layer == 2):
-                    new_score += 10 # upper part not covered
+                    new_score += 5 # upper part not covered
                 if not any(x for x in self.lower_body if x.layer == 2):
-                    new_score += 20 # lower part not covered
+                    new_score += 10 # lower part not covered
 
         # take transparency of clothing into account for sluttiness score
         for cloth in self.upper_body + self.lower_body:

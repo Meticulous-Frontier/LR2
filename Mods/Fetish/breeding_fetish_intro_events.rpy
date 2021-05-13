@@ -172,6 +172,8 @@ label breeding_fetish_employee_intro_label(the_person):
     $ the_person.change_arousal (20)
     $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     mc.name "...and didn't stop until I dump my cum deep?"
     the_person "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
@@ -267,6 +269,8 @@ label breeding_fetish_family_intro_label(the_person):
     else:
         the_person "My brain says this is wrong, but my body keeps saying its so right!"
         the_person "Fuck me [the_person.mc_title], I want you to fill me with your cum!"
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     "You run you cock along her slit a couple more times, then start to push it inside. She moans as you bottom out inside of her and start to fuck."
     call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _family_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
@@ -351,6 +355,8 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     $ the_person.change_arousal(10) #60
     $ mc.change_locked_clarity(50)
     the_person "Just shove it in! I'm ready!"
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     "You decide to give her what she wants, for now. You grab her hips and then push yourself inside of her sopping wet cunt."
     call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _generic_anyone_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
@@ -386,6 +392,8 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     $ the_person.draw_person(position = "cowgirl", emotion = "happy")
     $ mc.change_locked_clarity(50)
     "You open you eyes to see [the_person.possessive_title] lining you up with her pussy, before slowly sliding down on top of you."
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     mc.name "Ooohh... good morning [the_person.title]."
     the_person "Ohhh... good morning honey! Mommy needs your seed inside her this morning... and I'm not taking no for an answer!"
     "You are a little surprised by her forcefulness. Lately you've been giving her serums that should make her a bit more submissive..."
@@ -645,8 +653,9 @@ label breeding_fetish_stephanie_bimbo_label(the_person):
     $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
     "She wiggles her ass back and forth in front of you as you pull your dick out."
     the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
-    "Without any hesitation you slide your cock into her cunt."
+    $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
+    "Without any hesitation you slide your cock into her cunt."
     call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True) from _call_steph_bimbo_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     the_person "Oh god its so warm. Its like I can feel the little sperm wriggling inside of me..."
@@ -757,6 +766,8 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     "She wiggles her hips back and forth a bit, teasing you."
     the_person "Stick it in [the_person.mc_title]! Fuck me hard and cum as deep as you can!"
     "You grab her hips to stop the wiggling. You line yourself up with her thirsty cunt and push into her. She gasps when you bottom out."
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     the_person "Oh yes! Give it to me good!"
     call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
@@ -910,6 +921,8 @@ label breeding_fetish_erica_intro_label():
     $ the_person.change_arousal (20)
     $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]."
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
     call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _erica_gets_breeding_fetish_01
@@ -959,6 +972,8 @@ label breeding_fetish_erica_unsuccessful_followup_label():
     mc.name "Wha? [the_person.title]?"
     the_person "Shhh, don't want to wake your family..."
     "She slowly slides herself down onto you, taking your full length inside of her. You can't help but moan at the sudden sensation."
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     $ the_person.change_arousal(10)
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
@@ -1037,6 +1052,8 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         the_person "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
         $ mc.change_locked_clarity(50)
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
+        $ the_person.break_taboo("condomless_sex")
+        $ the_person.break_taboo("vaginal_sex")
         the_person "Yes!!!"
         call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
@@ -1103,6 +1120,8 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         mc.name "I want to hear you beg."
         the_person "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."
+        $ the_person.break_taboo("condomless_sex")
+        $ the_person.break_taboo("vaginal_sex")
         the_person "Yes!!!"
 
         call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_02

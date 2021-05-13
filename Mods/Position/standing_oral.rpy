@@ -102,12 +102,12 @@ label scene_standing_oral_1(the_girl, the_location, the_object):
         if the_girl.has_large_tits():
             "With one hand she softly squeezes her large breast, gently playing with her nipple."
         else:
-            "With one hand she squeezes het perky little breast, gently playing with her nipple."
+            "With one hand she squeezes her perky little breast, gently playing with her nipple."
     else:
         if the_girl.has_large_tits():
             "With one hand she softly squeezes her large breast."
         else:
-            "With one hand she squeezes het perky little breast."
+            "With one hand she squeezes her perky little breast."
     return
 
 
@@ -248,6 +248,7 @@ label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
         $ the_girl.call_dialogue("sex_strip")
         $ the_girl.draw_animated_removal(the_clothing, position = standing_oral.position_tag)
         "[the_girl.possessive_title] strips off her [the_clothing.name] while you're eating her out, throwing it to the side."
+        return True
     else:
         the_girl "[the_girl.mc_title], I'm like to take off my [the_clothing.name] if you don't mind."
         menu:
@@ -256,6 +257,7 @@ label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
                 mc.name "Take it off for me."
                 $ the_girl.draw_animated_removal(the_clothing, position = cunnilingus.position_tag)
                 "She strips out of her [the_clothing.name] and throws it to the side while you move back in and lick at her cunt."
+                return True
             "Leave it on":
                 "You look up from between her legs and shake your head."
                 mc.name "No, I like how you look with it on."
@@ -264,8 +266,7 @@ label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
                     the_girl "Do you think I look sexy in it?"
                 else:
                     the_girl "Don't you think I would look better wearing your cum? That would be so fitting for your dirty little slut, wouldn't it?"
-    $ standing_oral.redraw_scene(the_girl)
-    return
+                return False
 
 label orgasm_standing_oral(the_girl, the_location, the_object):
     "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of you."

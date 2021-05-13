@@ -218,7 +218,7 @@ label mc_hire_person_label(person):
 
     # Schedule Person Labels
 
-label mc_schedule_menu_label(person): # TODO: Find a way to handle "None" instances of schedule to display formalName on Action.
+label mc_schedule_menu_label(person): # TODO: Find a way to handle "None" instances of schedule to display formal_name on Action.
     python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
         schedule_options = []
         for act in schedule_actions_list:
@@ -249,7 +249,7 @@ label mc_schedule_person_label(*args):
         return
     else:
         $ person.set_schedule(room_choice, times = [time_slot])
-        $ renpy.say(None, time_names[time_slot] + " Schedule Set: [room_choice.formalName]")
+        $ renpy.say(None, time_names[time_slot] + " Schedule Set: [room_choice.formal_name]")
         return
 
 # Follower Labels
@@ -268,7 +268,7 @@ label mc_stop_follow_label(person):
         if the_person.get_destination() is the_person.home:
             schedule_destination = "my room"
         elif the_person.get_destination():
-            schedule_destination = "the " + the_person.get_destination().formalName
+            schedule_destination = "the " + the_person.get_destination().formal_name
         else:
             schedule_destination = "somewhere else"
 

@@ -14,15 +14,15 @@
 #
 #
 # label store_inventory_system(stack):
-# 
+#
 #     python:
 #         for room in list_of_places: # Setup inventories for Rooms here. Deal with people's when given items since this doesnt cover random created people.
 #             if not hasattr(room, "inventory"):
 #                 room.inventory = SerumInventory([]) # Items that can be obtained / stored in the room.
-#                 room.inventory.name = room.formalName + "'s Inventory"
+#                 room.inventory.name = room.formal_name + "'s Inventory"
 #
 #                 room.active_inventory = SerumInventory([]) # Items in the room that will have an effect on the location
-#                 room.active_inventory.name = room.formalName + "'s Active Effects"
+#                 room.active_inventory.name = room.formal_name + "'s Active Effects"
 #
 #         if not hasattr(mc.inventory, "name"):
 #             mc.inventory.name = "Your Inventory"

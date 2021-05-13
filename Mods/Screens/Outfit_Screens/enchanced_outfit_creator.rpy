@@ -161,13 +161,13 @@ init 10 python:
 
     def get_outfit_copy_with_name(outfit):
         new_outfit = outfit.get_copy()
-        new_outfit.build_outfit_name()
+        new_outfit.update_name()
         return new_outfit
 
     def update_outfit_name(outfit):
         default_names = ["New Outfit", "New Overwear Set", "New Underwear Set"]
         if outfit.name in default_names or outfit.name == "":
-            outfit.build_outfit_name()
+            outfit.update_name()
         return
 
     def switch_outfit_category(category):
@@ -929,7 +929,7 @@ init 2:
                             frame:
                                 background "#888888"
                                 xfill True
-                                textbutton "Current Items":
+                                textbutton "Current (" + get_slut_value_classification(get_slut_score()) + ")":
                                     style "textbutton_no_padding"
                                     text_style "serum_text_style"
                                     xfill True

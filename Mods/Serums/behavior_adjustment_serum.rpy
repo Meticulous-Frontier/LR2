@@ -1,22 +1,22 @@
-# Pheremone Therapy Serum by Starbuck
+# Behavior Adjustment Serum by Starbuck
 
 init -1 python:
     def get_obedience_tier(person):
-        if person.obedience < 80:
+        if person.obedience < 100:
             return 0
-        elif person.obedience < 100:
-            return 1
         elif person.obedience < 120:
-            return 2
+            return 1
         elif person.obedience < 140:
-            return 3
+            return 2
         elif person.obedience < 160:
+            return 3
+        elif person.obedience < 180:
             return 4
         return 5
 
     def behavior_adjustment_on_turn(the_person, the_serum, add_to_log):
         if get_obedience_tier(the_person) < 5:
-            suggestion_bonus = (get_suggest_tier(the_person) - get_obedience_tier(the_person)) * 10
+            suggestion_bonus = (1 + get_suggest_tier(the_person) - get_obedience_tier(the_person)) * 10
             if renpy.random.randint(0, 100) < 20 + suggestion_bonus - (the_person.get_opinion_score("taking control") * 5):
                 the_person.change_stats(obedience = 1, add_to_log = add_to_log)
 

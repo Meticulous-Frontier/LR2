@@ -765,7 +765,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person "You can't get me {i}more{/i} pregnant, but I really don't like bare sex."
             else:
-                the_person "Although i'm pregnant, I would like you to wear a condom anyway."
+                the_person "Although I'm pregnant, I would like you to wear a condom anyway."
         elif skill_tag == "Anal":
             the_person "Although it's the backdoor, I still need you to wear a condom."
         else:
@@ -789,7 +789,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
             if the_person.get_opinion_score("bareback sex") < 0:
                 the_person "You can't get me {i}more{/i} pregnant, but I don't like bare sex. I think that you should put on a condom."
             else:
-                the_person "There's not much point in a condom now that i'm pregnant."
+                the_person "There's not much point in a condom now that I'm pregnant."
         elif skill_tag == "Anal":
             the_person "Could you put on a condom? I don't want to have a mess when you start pumping my ass."
         else:

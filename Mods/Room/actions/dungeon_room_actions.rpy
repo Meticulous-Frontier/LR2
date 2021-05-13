@@ -10,28 +10,6 @@ init 10 python:
 
     dungeon_room_appoint_slave_action = Action("Appoint a slave", dungeon_room_appoint_slave_requirement, "dungeon_room_appoint_slave_label", menu_tooltip = "Assigns the person a role as a slave. Use the \"Follow Me\" Action on a person to bring them to the Dungeon.")
 
-    def dungeon_intro_action_requirement():
-        if is_dungeon_unlocked():
-            return False # Shortcut. Dungeon has already been unlocked by Home Improvement module.
-        if day > 24 and time_of_day > 1 and time_of_day < 4:
-            if mc.business.funds > 20000 and not mc.business.is_open_for_business(): #Only trigger when alone in the office
-                if mc.is_at_work():
-                    return True
-        return False
-
-    def dungeon_completed_action_requirement(completion_day):
-        if day > completion_day and mc.is_at_work() and mc.business.is_open_for_business():
-            return True
-        return False
-
-    def add_dungeon_intro_action():
-        dungeon_intro_action = Action("Dungeon Intro", dungeon_intro_action_requirement, "dungeon_intro_label")
-        mc.business.add_mandatory_crisis(dungeon_intro_action)
-        return
-
-    def add_dungeon_completed_action():
-        dungeon_completed_action = Action("Dungeon Completed", dungeon_completed_action_requirement, "dungeon_completed_label", requirement_args = day + 7)
-        mc.business.add_mandatory_crisis(dungeon_completed_action)
 
     def slave_unique_sex_positions(person, prohibit_tags = []):
         positions = []
@@ -39,40 +17,6 @@ init 10 python:
             positions.append([spanking, 1])
 
         return positions
-
-    def add_build_dungeon_action():
-        if not is_dungeon_unlocked():
-            dungeon_build_action = Action("Build dungeon", dungeon_build_action_requirement, "dungeon_build_label", menu_tooltip = "Clear the cellar and build a Sex Dungeon, complete with \"Guest Accommodations\". Cost $10000.", priority = 10)
-            bedroom.add_action(dungeon_build_action)
-            mc.business.event_triggers_dict["dungeon_unlocked"] = True
-        return
-
-label dungeon_intro_label():
-    "By yourself on the weekend at work, you are taking a moment to relax. Suddenly you are struck by a brilliant idea..."
-    "You realize you could build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires."
-    $ add_build_dungeon_action()
-    return
-
-label dungeon_build_label():
-    "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires, telling your [mom.possessive_title] that it will be a \"Home Workshop\" of a sorts."
-    "You pick up the phone and make a call."
-    mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
-    "You go over the details with the constructor and agree on a price of $10,000 for converting your existing cellar into a dungeon, fully soundproofed of course."
-    $ mc.business.change_funds(-10000)
-    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = True
-    $ add_dungeon_completed_action()
-    return
-
-label dungeon_completed_label():
-    $ man_name = get_random_male_name()
-    "Going about your day, you get a call from your contractor."
-    man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
-    mc.name "Thank you [man_name], much appreciated."
-    "The dungeon at your house is now ready for use."
-    $ mc.business.event_triggers_dict["dungeon_owned"] = True
-    $ dungeon.visible = True
-    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = False
-    return
 
 label dungeon_room_appoint_slave_label():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])]))

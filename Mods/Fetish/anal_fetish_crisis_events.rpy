@@ -138,9 +138,10 @@ label aggressive_anal_fetish_non_employee_label():
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
             $ mc.change_locked_clarity(50)
             the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking my ass right now!"
+            $ the_person.break_taboo("anal_sex")
             "You drop your pant, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
 
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SB_fetish_anal_recurring_non_employee
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_SB_fetish_anal_recurring_non_employee
 
             the_person "That was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."
@@ -212,8 +213,9 @@ label anal_fetish_employee_evening_approach_label():
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             $ mc.change_locked_clarity(50)
+            $ the_person.break_taboo("anal_sex")
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True) from _call_fuck_person_SBA30
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_SBA30
             $ the_person.draw_person(emotion = "happy")
             the_person "It was so good. I've been thinking about that all day."
             "[the_person.possessive_title] gets her butt plug and slowly pushes it back into her ass."

@@ -654,7 +654,7 @@ label Sarah_sex_watch(the_person, the_sex_person, the_position):
     $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
-        the_person "Ugh, jesus you two. Get a room or something, nobody wants to see this."
+        the_person "Ugh, for crying out loud, you two. Get a room or something, nobody wants to see this."
         $ the_person.change_obedience(-2)
         $ the_person.change_happiness(-1)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."

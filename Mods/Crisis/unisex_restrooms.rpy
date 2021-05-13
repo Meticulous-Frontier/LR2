@@ -264,25 +264,25 @@ label unisex_restroom_fantasy_overhear_label():
     "She continues to talk about her dream."
     if discover_identity:
         the_person_one "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
-        the_person_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
+        the_person_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh, just hold still'."
         the_person_two "Damn that's hot..."
         the_person_one "I know right? I felt my skirt lifting up and my panties getting pulled down. I couldn't move, I just let him do it!"
         "Wow! Maybe you should pay her a visit later, and act out this fantasy of hers."
         the_person_one "When he started fucking me I looked around saw the other girls pointing at me, trying not to watch. It was so hot!"
         the_person_two "God, you gotta calm down, now you're getting me worked up!"
         the_person_one "I know! But right as I was getting to finish, my alarm went off! I was so pissed. I tried to relieve myself this morning, but I just couldn't get off."
-        the_person_two "Oh jesus you must be dying right now."
+        the_person_two "Oh Jesus, you must be dying right now."
         the_person_one "UGH I am. I can't wait to get off work..."
     else:
         anon_char_one "I was just at my desk, getting work done, when suddenly my hands were cuffed my desk!"
-        anon_char_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh just hold still'."
+        anon_char_one "At first, I got really scared, but then I felt [the_person_one.mc_title]'s strong hands on my hips and he whispers in my ear, 'shh, just hold still'."
         anon_char_two "Damn that's hot..."
         anon_char_one "I know right? I felt my skirt lifting up and my panties getting pulled down. I couldn't move, I just let him do it!"
         "Oh god, who is it? You wish you knew who it was so you could act this fantasy out later..."
         anon_char_one "When he started fucking me I looked around saw the other girls pointing at me, trying not to watch. It was so hot!"
         anon_char_two "God, you gotta calm down, now you're getting me worked up!"
         anon_char_one "I know! But right as I was getting to finish, my alarm went off! I was so pissed. I tried to relieve myself this morning, but I just couldn't get off."
-        anon_char_two "Oh jesus you must be dying right now."
+        anon_char_two "Oh Jesus, you must be dying right now."
         anon_char_one "UGH I am. I can't wait to get off work..."
     "The girls finish up and leave the restroom, leaving you alone inside."
     if discover_identity:
@@ -333,7 +333,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     "Without saying a word, you push yourself into her slick fuckhole. It feels amazing."
-    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, private = False, position_locked = True) from _call_fantasy_actout_1
+    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, skip_condom = True, private = False, position_locked = True) from _call_fantasy_actout_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person "Oh god, it was even better than I thought... oh my god."
@@ -648,7 +648,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             $ the_person.break_taboo("condomless_sex")
             $ the_person.break_taboo("vaginal_sex")
             "She lines it up with her slit as you slowly slide into her. She stifles a moan when you finally bottom out."
-            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_gloryhole_joinme_1
+            call fuck_person(the_person, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True) from _call_sex_gloryhole_joinme_1
             $ scene_manager.update_actor(the_person, position = "against_wall")
             "When you finish, you stand there with her, her leg still in the air for a moment."
             $ scene_manager.update_actor(the_person, position = "stand4")

@@ -1,4 +1,4 @@
-# name, formalName, connections, background_image, objects, people, actions, public, map_pos, tutorial_label = None, visible = True)
+# name, formal_name, connections, background_image, objects, people, actions, public, map_pos, tutorial_label = None, visible = True)
 init 3 python:
     add_label_hijack("normal_start", "build_custom_rooms")
 
@@ -51,7 +51,7 @@ init 15 python:
         make_black_leather_couch(),
     ]
     police_jail_objects = [
-        Object("cell bars", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 10),
+        Object("cell bars", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
         make_wall(),
         make_bed(),
         make_floor(),
@@ -59,21 +59,18 @@ init 15 python:
     gym_shower_objects = [
         make_floor(),
         make_wall(),
-        Object("shower door", ["Lean"], sluttiness_modifier = 5, obedience_modifier = 5),
+        Object("shower door", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
         make_bench(),
     ]
 
     def make_swing():
-        the_swing = Object("sex swing",["Sit","Low","Lay", "Swing"], sluttiness_modifier = 10, obedience_modifier = 10)
-        return the_swing
+        return Object("sex swing",["Sit","Low","Lay", "Swing"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_counter():
-        the_counter = Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_counter
+        return Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     def make_reception():
-        the_desk = Object("reception desk",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-        return the_desk
+        return Object("reception desk",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
 
 
@@ -106,7 +103,7 @@ label build_custom_rooms(stack):
         list_of_places.append(fancy_restaurant)
 
         # Stripclub BDSM Room | No actions at this time. HACK: Add dungeon action
-        bdsm_room = Room("bdsm_room", "[strip_club.formalName] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [dungeon_room_appoint_slave_action], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        bdsm_room = Room("bdsm_room", "[strip_club.formal_name] - BDSM room", [], standard_bdsm_room_backgrounds, bdsm_room_objects,[], [dungeon_room_appoint_slave_action], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(bdsm_room)
 
         ceo_office = Room("ceo_office", "CEO Office", [], standard_ceo_office_backgrounds, ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
@@ -130,7 +127,6 @@ label build_custom_rooms(stack):
         list_of_places.append(police_jail)
 
         # initialize dungeon room creation action
-        add_dungeon_intro_action()
         fix_lobby_objects()
 
         add_custom_objects()

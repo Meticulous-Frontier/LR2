@@ -590,7 +590,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     "After a few solemn moments, you decide to move on with your day."
     mc.name "That's enough for now I suppose. Let me know if you think of anything."
     the_person "Yes sir... and the same for you."
-    "You both walk back to the [mc.location.formalName]."
+    "You both walk back to the [mc.location.formal_name]."
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["porn_discussed"] = True
@@ -717,7 +717,7 @@ label ashley_ask_about_porn_label(the_person):
     "[the_person.possessive_title] quickly leaves the room."
     "Welp, you just got a handjob from [the_person.title]... and then her sister promptly walked in and witnessed the whole thing."
     "You'll have to consider how to approach both girls carefully before you talk to them next."
-    "You walk back to the [mc.location.formalName]."
+    "You walk back to the [mc.location.formal_name]."
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
@@ -796,7 +796,7 @@ label ashley_post_handjob_convo_label(the_person):
             mc.name "Don't worry, I'll talk to [stephanie.title]."
             $ the_person.event_triggers_dict["story_path"] = "normal"
             $ the_person.change_stats(love = 5, happiness = 5, obedience = 5)
-            $ the_person.special_role.append(girlfriend_role)
+            $ the_person.add_role(girlfriend_role)
         "Let's keep us secret \n{color=#ff0000}{size=18}Corruption path{/size}{/color}" if (ashley_steph_relationship_status() == "stephanie" or ashley.sluttiness > 30):
             mc.name "I think I know what to do, where we can all be happy."
             the_person "Oh?"
@@ -821,7 +821,7 @@ label ashley_post_handjob_convo_label(the_person):
             mc.name "[stephanie.title] and I go back a ways, but I just think of her as a friend."
             mc.name "I'm not going to lie, I really enjoy the way things are developing between us... but I have to be honest. I'm not looking to get tied down right now."
             the_person "Ahh... I see..."
-            mc.name "I understand though, that everyone has needs. If you want need some help relieving sexual tension, I'd be glad to help you out whenever you need it."
+            mc.name "I understand though, that everyone has needs. If you want some help relieving sexual tension, I'd be glad to help you out whenever you need it."
             "[the_person.title] looks confused for a moment."
             the_person "You mean... you want to be friends... with benefits?"
             mc.name "Exactly."
@@ -865,7 +865,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
             "Realizing that your plan to keep things secret with [ashley.title] isn't going to work unless you take things further with [the_person.title], you agree."
             mc.name "Here, let me do this, officially. [the_person.title], will you be my girlfriend?"
             the_person "Yes! Oh yay! I thought for sure you were gonna get with Ashley... I was so jealous... When I saw..."
-            $ the_person.special_role.append(girlfriend_role)
+            $ the_person.add_role(girlfriend_role)
             mc.name "I'm sorry, it won't happen again."
         the_person "... I guess I should warn you about this. This isn't the first time this has happened..."
         mc.name "Oh?"
@@ -1009,7 +1009,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(stephanie, position = "sitting")
     "You swing by the coffee shop. Right on time, you see [the_person.title] and [stephanie.title] in a booth. You walk over to the table."
-    mc.name "Good morning! Whose up for coffee?"
+    mc.name "Good morning! Who's up for coffee?"
     stephanie "Good morning [stephanie.mc_title]! That would be great! Can I get an Americano with two creams?"
     the_person "Good morning. I like mine black..."
     if stephanie.sluttiness > 20:

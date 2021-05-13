@@ -24,7 +24,7 @@ init 2 python:
     def import_wardrobes_has_outfit_with_name(list_of_wardrobes, the_name): # Check if every Wardrobe in the list has the outfit already
         count = 0
         for wardrobe in list_of_wardrobes:
-            for checked_outfit in wardrobe.outfits + wardrobe.underwear_sets + wardrobe.overwear_sets:
+            for checked_outfit in wardrobe.all_outfits:
                 if checked_outfit.name == the_name:
                     count += 1
         if count == __builtin__.len(list_of_wardrobes):

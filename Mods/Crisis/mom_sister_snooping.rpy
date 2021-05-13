@@ -139,7 +139,7 @@ label mom_sister_snooping_action_label():
         $ lily.apply_university_outfit()
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
-        "You peak in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
+        "You peek in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
         mom "I know, I know there's a uniform at the university, but that doesn't mean you can't express yourself a little!"
         lily "What do you mean?"
         mom "A beautiful young woman like you, maybe you could fold the top of your skirt? Show those beautiful legs of yours!"

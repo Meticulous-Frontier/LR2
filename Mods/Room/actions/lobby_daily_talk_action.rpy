@@ -34,7 +34,7 @@ init 3 python:
 
 label daily_talk_employees:
 
-    "You tell all of your employees to meet you in the [lobby.formalName] for a daily chat."
+    "You tell all of your employees to meet you in the [lobby.formal_name] for a daily chat."
     $ daily_talk_update_employee_stats()
 
     call advance_time from daily_talk_employees_1

@@ -78,7 +78,7 @@ label employee_find_out_home_location_label(the_person):
     "You just learned her home address and can visit her anytime you want."
     $ the_person.learn_home()
 
-    mc.name "Well, well, that is indeed a great place to live. Thank you for the talk, i'm sorry to cut this short, but I do have to get back to work."
+    mc.name "Well, well, that is indeed a great place to live. Thank you for the talk, I'm sorry to cut this short, but I do have to get back to work."
     the_person "Any time [the_person.mc_title], I really enjoyed our little parley."
 
     $ clear_scene()

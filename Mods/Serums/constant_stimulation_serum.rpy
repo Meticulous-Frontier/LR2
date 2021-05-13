@@ -1,9 +1,22 @@
-# Pheremone Therapy Serum by Starbuck
+# Constant Stimulation Serum by Starbuck
 
 init -1 python:
+    def get_slut_tier(person):   #returns the heart value of the person
+        if person.core_sluttiness < 25:
+            return 0
+        elif person.core_sluttiness < 50:
+            return 1
+        elif person.core_sluttiness < 75:
+            return 2
+        elif person.core_sluttiness < 100:
+            return 3
+        elif person.core_sluttiness < 125:
+            return 4
+        return 5
+
     def constant_stimulation_on_turn(the_person, the_serum, add_to_log):
         if get_slut_tier(the_person) < 5:
-            suggestion_bonus = (get_suggest_tier(the_person) - get_slut_tier(the_person)) * 10
+            suggestion_bonus = (1 + get_suggest_tier(the_person) - get_slut_tier(the_person)) * 10
             if renpy.random.randint(0, 100) < 10 + suggestion_bonus - (the_person.get_opinion_score("taking control") * 5):
                 the_person.change_stats(slut_temp = 1, slut_core = renpy.random.randint(0, 1), add_to_log = add_to_log)
 

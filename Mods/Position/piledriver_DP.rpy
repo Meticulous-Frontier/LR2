@@ -277,6 +277,7 @@ label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
             "You let your cock pop out of [the_girl.possessive_title]'s pussy and watch as she struggles out of her [the_clothing.name] and throws it to the side."
             the_girl "Okay, keep going now sir!"
             "You throw her legs over your shoulders and slide yourself as deep into her cunt as you can get it. She guides the strap-on into her puckered hole simultaneously."
+            return True
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -289,7 +290,7 @@ label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
             else:
                 the_girl "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
                 "She grinds her hips back into you and moans ecstatically."
-    return
+            return False
 
 label orgasm_piledriver_DP(the_girl, the_location, the_object):
     "[the_girl.title] takes a sharp breath in and you feel her legs try and clench together. Her toes curl as you bring her to the brink."
