@@ -55,6 +55,7 @@ init 1 python:
         person.kids = 0
         person.relationship = "Single"
         person.SO_name = None
+        person.remove_role(affair_role)   # make sure we don't have a affair
         person.update_opinion_with_score("incest", 2, add_to_log = False) # this method updates or adds the opinion
         person.update_opinion_with_score("being submissive", 2, add_to_log = False) # this method updates or adds the opinion
 

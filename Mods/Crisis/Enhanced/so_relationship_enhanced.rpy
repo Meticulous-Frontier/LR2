@@ -125,6 +125,7 @@ label so_relationship_worsen_label_enhanced():
 
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
+    $ the_person.remove_role(affair_role)   # make sure we don't have a affair
     return
 
 # triggered randomly for a person (fight with her SO)
@@ -143,4 +144,5 @@ label so_relationship_quarrel_label(the_person):
 
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
+    $ the_person.remove_role(affair_role)   # make sure we don't have a affair
     return
