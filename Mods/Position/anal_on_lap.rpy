@@ -229,6 +229,7 @@ label strip_ask_anal_on_lap(the_girl, the_clothing, the_location, the_object):
             $ the_girl.draw_animated_removal(the_clothing, position = anal_on_lap.position_tag)
             "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
             "She groans happily when you resume fucking her tight rear."
+            return True
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -241,8 +242,7 @@ label strip_ask_anal_on_lap(the_girl, the_clothing, the_location, the_object):
             else:
                 the_girl "Does it make me look like the cum hungry slut that I am? Or is it your cock in my ass that makes me look that way?"
                 "She grinds her hips back into you and moans ecstatically."
-    return
-
+            return False
 
 label orgasm_anal_on_lap(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s having trouble staying on top of you, so you grab her hips and fuck her hard."

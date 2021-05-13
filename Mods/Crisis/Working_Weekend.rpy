@@ -141,7 +141,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                         $ person_one.break_taboo("condomless_sex")
                         $ person_one.break_taboo("vaginal_sex")
                         "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
-                        call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True) from _call_sex_description_SB15
+                        call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
                             "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a while, recovering from her orgasm."

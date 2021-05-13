@@ -23,6 +23,12 @@ init -1 python:
 
     MainCharacter.is_home = is_home
 
+    def is_home_improvement_in_progress():
+        return mc.business.event_triggers_dict.get("home_improvement_in_progress", False) == True
+    
+    def is_dungeon_unlocked():
+        return mc.business.event_triggers_dict.get("dungeon_unlocked", False) == True
+
     def change_locked_clarity_extended(org_func):
         def change_locked_clarity_wrapper(main_character, amount, add_to_log = True):
             # run original function (with modified amount)

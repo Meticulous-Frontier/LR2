@@ -150,7 +150,7 @@ label morning_shower_masturbation():
                 if the_person.has_large_tits():
                     "With one hand she softly squeezes her large breast."
                 else:
-                    "With one hand she squeezes het perky little breast."
+                    "With one hand she squeezes her perky little breast."
         $ the_person.change_arousal(renpy.random.randint(20,35))
         $ mc.change_locked_clarity(10)
     the_person "Shit, I'm cumming!"

@@ -175,7 +175,7 @@ label mom_breakfast_action_label_medium():
                         "Finish Massage":
                             "You decide for now just to tease her. You pet her through her clothes for a minute longer then stop, kissing her on her neck."
                             "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
-                            mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
+                            mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
                             $ the_person.change_stats(obedience = 5, slut_temp = 1)
                             return "Advance Time"
@@ -183,7 +183,7 @@ label mom_breakfast_action_label_medium():
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
-                    mc.name "Don't want to go to far, [lily.name] could walk out at any moment..."
+                    mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5, slut_temp = 1)
                     return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available():

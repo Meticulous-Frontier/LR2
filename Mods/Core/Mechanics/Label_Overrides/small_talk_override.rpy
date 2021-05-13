@@ -76,13 +76,13 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
             else:
                 "The two of you chat pleasantly for half an hour."
 
-            person "So [person.mc_title], I'm curious what you think about [opinion_learned]. Do you have any opinions on it?"
+            person "So [person.mc_title], I'm curious what you think about [talk_opinion_text]. Do you have any opinions on it?"
 
             call screen enhanced_main_choice_display(build_menu_items([build_opinion_smalltalk_list(talk_opinion_text, opinion_state)]))
 
             if is_phone:
                 $ mc_opinion_string = opinion_score_to_string(_return).rstrip('s').replace('has', 'have')
-                mc.name "I [mc_opinion_string] [opinion_learned]."
+                mc.name "I [mc_opinion_string] [talk_opinion_text]."
 
             $ prediction_difference = __builtin__.abs(_return - opinion_state[0])
             if prediction_difference == 4: #as wrong as possible
@@ -123,6 +123,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
             if is_phone:
                 "She text you her InstaPic profile name. You'll be able to look up her profile now."
             else:
+                $ mc.phone.register_number(person)
                 "She gives you her InstaPic profile name. You'll be able to look up her profile now."
 
         $ person.change_happiness(person.get_opinion_score("small talk") + 1)

@@ -78,14 +78,14 @@ label sister_phone_crisis_action_label:
         if ran_num == 1:
             if mc.business.is_weekend():
                 the_person "I was just about to get in the shower and I thought you might like a peek. Love you [the_person.mc_title]!"
-                $ the_person.strip_outfit_to_underwear(delay = 0)
+                $ the_person.strip_to_underwear(delay = 0)
                 $ the_person.draw_person(emotion = "happy")
                 $ mc.change_locked_clarity(10)
                 "[the_person.possessive_title] sends you a picture of herself stripped down in front of her bedroom mirror."
 
             else:
                 the_person "I thought you might be stressed so I snuck away from school to take this for you."
-                $ the_person.strip_outfit_to_underwear(delay = 0)
+                $ the_person.strip_to_underwear(delay = 0)
                 $ the_person.draw_person(emotion = "happy")
                 $ mc.change_locked_clarity(10)
                 "[the_person.possessive_title] sends you a picture of herself stripped down in the park."

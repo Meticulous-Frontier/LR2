@@ -165,11 +165,12 @@ label strip_ask_sarah_tit_fuck(the_girl, the_clothing, the_location, the_object)
             "[the_girl.title] leans back, letting your cock slide out of her cleavage, and pulls off her [the_clothing.name]."
             the_girl "Ah, so much better. Now, where were we..."
             "She leans back and engulfs your hard cock in her breasts again."
+            return True
 
         "Leave it on":
             mc.name "I think you look cute in it, leave it on."
             "She nods and keeps working her tits up and down."
-    return
+            return False
 
 label orgasm_sarah_tit_fuck(the_girl, the_location, the_object):
     "[the_girl.title] speeds up her tit fuck, servicing your cock as fast as she can manage."

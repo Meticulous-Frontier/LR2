@@ -148,6 +148,7 @@ label strip_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object):
 label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object):
     $ Ophelia_blowjob.current_modifier = None
     $ Ophelia_blowjob.redraw_scene(the_girl)
+    $ return_value = True
 
     "[the_girl.title] pops off your cock and looks up at you from her knees."
     the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
@@ -156,9 +157,6 @@ label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = Ophelia_blowjob.position_tag)
             "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back onto her knees and slides your cock all the way to the back of her mouth."
-            $ Ophelia_blowjob.current_modifier = "blowjob"
-            $ Ophelia_blowjob.redraw_scene(the_girl)
-
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -168,10 +166,12 @@ label strip_ask_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object
                 "She licks the length of your shaft, then slides your tip into her mouth and starts to blow you again."
             else:
                 the_girl "Does it make me look like a good little slut? Or is your cock in my mouth enough for that?"
-                $ Ophelia_blowjob.current_modifier = "blowjob"
-                $ Ophelia_blowjob.redraw_scene(the_girl)
                 "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
-    return
+            $ return_value = False
+
+    $ Ophelia_blowjob.current_modifier = "blowjob"
+    $ Ophelia_blowjob.redraw_scene(the_girl)
+    return return_value
 
 label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
     $ Ophelia_blowjob.current_modifier = "blowjob"

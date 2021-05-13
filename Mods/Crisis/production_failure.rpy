@@ -15,7 +15,7 @@ init 2 python:
             team_member.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
             team_member.change_stats(slut_temp = 3, slut_core = 3, arousal = 50, add_to_log = False)
 
-        mc.log_event("All " + person.work.formalName + " staff: +3 sluttiness","float_text_pink")
+        mc.log_event("All " + person.work.formal_name + " staff: +3 sluttiness","float_text_pink")
         return
 
     def production_failure_clear_situational_sluttiness(person):
@@ -29,14 +29,14 @@ init 2 python:
         for team_member in person.work.people:
             team_member.change_obedience(amount, add_to_log = False)
 
-        mc.log_event("All " + person.work.formalName + " staff: " + str(amount) + " obedience","float_text_pink")
+        mc.log_event("All " + person.work.formal_name + " staff: " + str(amount) + " obedience","float_text_pink")
         return
 
     def production_failure_fix_the_problem(person):
         for team_member in person.work.people:
             team_member.change_stats(happiness = -2, love = 2, add_to_log = False)
 
-        mc.log_event("All " + person.work.formalName + " staff: +2 love, -2 happiness","float_text_pink")
+        mc.log_event("All " + person.work.formal_name + " staff: +2 love, -2 happiness","float_text_pink")
         return
 
     production_failure_action = ActionMod("Production Failure", production_failure_requirement, "production_failure_action_label",
@@ -48,7 +48,7 @@ label production_failure_action_label:
     if the_person is None or the_person.work is None:
         return
 
-    "While monitoring the equipment you notice a problem in the [the_person.work.formalName], it seems a gas mixture is building up."
+    "While monitoring the equipment you notice a problem in the [the_person.work.formal_name], it seems a gas mixture is building up."
     "Without halting work and alerting everyone to the problem there is no way to fix it. You also can't be sure what the effects of this will be on your employees."
     menu:
         "Halt work and fix the problem":
@@ -58,7 +58,7 @@ label production_failure_action_label:
 
         "Call in an overnight repair man":
             "You call the repair man and tell him to come in that night, and warn him not to alert anyone and to wear a gas mask."
-            "You decide to monitor the situation first hand and move to the [the_person.work.formalName]."
+            "You decide to monitor the situation first hand and move to the [the_person.work.formal_name]."
             $ mc.change_location(the_person.work)
             $ mc.location.show_background()
 

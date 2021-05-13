@@ -133,7 +133,7 @@ init 1310 python:
     # body_customizer_policy = Policy(
     #     name = "Genetic Manipulation Permit",
     #     cost = 15000,
-    #     desc = "Allows the modification of DNA on human subjects with the intent of cosmetic changes in the [rd_division.formalName]",
+    #     desc = "Allows the modification of DNA on human subjects with the intent of cosmetic changes in the [rd_division.formal_name]",
     #     requirement = body_customizer_policy_requirement,
     #     on_buy_function = rd_division.add_action,
     #     extra_arguments = {"act": body_customizer_action},

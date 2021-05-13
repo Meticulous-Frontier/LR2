@@ -142,7 +142,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_coffee_tier_2_requirement(the_person):
@@ -155,7 +155,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_gym_membership_tier_1_requirement(the_person):
@@ -163,7 +163,7 @@ init 5 python:
             if not mc.is_at_work():
                 return "Only in the office"
             if not mc.business.is_open_for_business():
-                return "Only during work hours"
+                return "Only during business hours"
             return True
         return False
 
@@ -172,7 +172,7 @@ init 5 python:
             if not mc.is_at_work():
                 return "Only in the office"
             if not mc.business.is_open_for_business():
-                return "Only during work hours"
+                return "Only during business hours"
             return True
         return False
 
@@ -184,7 +184,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_mind_control_attempt_requirement(the_person):
@@ -195,7 +195,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_change_relative_recruitment_requirement(the_person):
@@ -204,7 +204,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_meeting_on_demand_requirement(the_person):
@@ -215,7 +215,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_headhunt_initiate_requirement(the_person):
@@ -228,7 +228,7 @@ init 5 python:
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
-            return "Only during work hours"
+            return "Only during business hours"
         return True
 
     def HR_director_headhunt_interview_requirement():
@@ -1078,11 +1078,13 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "Soon her pussy is on full display in front of you, on your desk."
             $ mc.change_arousal(20)
             $ mc.change_locked_clarity(50)
+            $ the_person.break_taboo("condomless_sex")
+            $ the_person.break_taboo("vaginal_sex")
             "You have your cock out in a flash. You position it at her slick entrance."
             "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
             the_person "Mmmm, [the_person.mc_title]. Use me boss! I'm here to serve you!"
             "You start to piston your cock in and out of her."
-            call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_three
+            call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_three
             $ set_HR_director_unlock("missionary on desk", True)
             "[the_person.possessive_title] lays on your desk, recovering."
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
@@ -1118,11 +1120,13 @@ label HR_director_sexy_meeting_start_label(the_person):
                         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
                     "Soon her ass is on full display in front of you, bent over your desk."
                 $ mc.change_locked_clarity(50)
+                $ the_person.break_taboo("condomless_sex")
+                $ the_person.break_taboo("vaginal_sex")
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
                 the_person "Oh God! its going so deep."
                 $ mc.change_arousal(20)
                 "You give her ass a solid spank, then begin to fuck her roughly."
-                call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four
+                call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four
                 $ the_report = _return
                 if the_report.get("girl_orgasms",0)>0:
                     "[the_person.possessive_title] is still bent over your desk, recovering from her orgasm."
@@ -1191,8 +1195,10 @@ label HR_director_sexy_meeting_start_label(the_person):
         "You pull your cock out and line it up with [the_person.title]'s pussy. You ease yourself inside of her with one slow, smooth push."
         $ mc.change_arousal(20)
         $ mc.change_locked_clarity(50)
+        $ the_person.break_taboo("condomless_sex")
+        $ the_person.break_taboo("vaginal_sex")
         the_person "I never said I wasn't naughty too... Oh god, [the_person.mc_title], that feels good. Have your way with me!"
-        call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_three
+        call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_three
 
     elif position_choice == "bent over desk":
         mc.name "Get over here, I'm going to bend you over my desk again."
@@ -1221,8 +1227,10 @@ label HR_director_sexy_meeting_start_label(the_person):
         the_person "Mmm, fuck me good [the_person.mc_title]!"
         $ mc.change_arousal(20)
         $ mc.change_locked_clarity(50)
+        $ the_person.break_taboo("condomless_sex")
+        $ the_person.break_taboo("vaginal_sex")
         "You eagerly begin to pump your hips and fuck your HR director over your desk."
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 
 
     if ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture

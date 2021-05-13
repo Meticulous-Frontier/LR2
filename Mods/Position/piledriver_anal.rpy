@@ -46,7 +46,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
             "[the_girl.possessive_title] looks worried."
             the_girl "You... you want to put it in my ass don't you?"
 
-    "When you cock is good a lubed up, you pull back slightly, then line it up with her pretty little asshole."
+    "When your cock is all lubed up, you pull back slightly, then line it up with her pretty little asshole."
     mc.name "Ready?"
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
         the_girl "Yes!"
@@ -231,6 +231,7 @@ label strip_ask_piledriver_anal(the_girl, the_clothing, the_location, the_object
             $ the_girl.draw_animated_removal(the_clothing, position = piledriver_anal.position_tag)
             "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
             "Once she's done, you resume reaming her puckered hole."
+            return True
 
         "Leave it on":
             mc.name "No, I want you to keep it on."
@@ -243,7 +244,7 @@ label strip_ask_piledriver_anal(the_girl, the_clothing, the_location, the_object
             else:
                 the_girl "Does it look good on me, when you're fucking my ass? When you're stirring up my insides with your big cock?"
                 "You speed up, fucking her faster in response to her question."
-    return
+            return False
 
 label orgasm_piledriver_anal(the_girl, the_location, the_object):
     "[the_girl.title]'s grunts and pants turn to moans of pleasure."

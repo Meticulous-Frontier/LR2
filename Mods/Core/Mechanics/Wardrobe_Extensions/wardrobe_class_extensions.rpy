@@ -1,4 +1,9 @@
 init -1 python:
+    def get_all_outfits(self):
+        return self.outfits + self.underwear_sets + self.overwear_sets
+
+    Wardrobe.all_outfits = property(get_all_outfits, None, None, "Returns all outfits in wardrobe")
+
     # Get an overwear outfit that is considered appropriate based on sluttiness and preferences.
     def get_random_appropriate_overwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None):
         if preferences is None:
@@ -138,12 +143,12 @@ init -1 python:
     Wardrobe.remove_outfit = wardrobe_remove_outfit
 
     def wardrobe_has_outfit_with_name(self, the_name):
-        return any(x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name)
+        return any(x for x in self.all_outfits if x.name == the_name)
 
     Wardrobe.has_outfit_with_name = wardrobe_has_outfit_with_name
 
     def wardrobe_get_outfit_with_name(self, the_name):
-        found = next((x for x in self.outfits + self.underwear_sets + self.overwear_sets if x.name == the_name), None)
+        found = next((x for x in self.all_outfits if x.name == the_name), None)
         if found:
             return found.get_copy()
         return None

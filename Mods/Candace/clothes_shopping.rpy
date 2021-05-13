@@ -201,6 +201,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             the_person "Aww, thank you! Okay!"
             $ count += 1
             $ the_person.wardrobe.add_outfit(outfits[0])
+            $ the_person.change_novelty(3)
             call clothes_shopping_ask_to_add_to_uniform(the_person, outfits[0], preferences) from _clothes_shopping_uniform_addition_1
         "Try something else":
             mc.name "I'm not sure that is the best look for you. Maybe try something else?"
@@ -223,6 +224,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             the_person "Great!"
             $ count += 1
             $ the_person.wardrobe.add_outfit(outfits[1])
+            $ the_person.change_novelty(3)
             call clothes_shopping_ask_to_add_to_uniform(the_person, outfits[1], preferences) from _clothes_shopping_uniform_addition_2
         "Try something else":
             mc.name "I'm not sure that outfit works. What else do you have?"
@@ -243,6 +245,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             the_person "Aww. Okay!"
             $ count += 1
             $ the_person.wardrobe.add_outfit(outfits[2])
+            $ the_person.change_novelty(3)
             call clothes_shopping_ask_to_add_to_uniform(the_person, outfits[2], preferences) from _clothes_shopping_uniform_addition_3
         "Try something else":
             mc.name "Honestly I think you would be better off with something else. It just isn't flattering."
@@ -282,6 +285,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         mc.name "What can I say, I have good taste!"
                         the_person "Alright!"
                         $ count += 1
+                        $ the_person.change_novelty(3)
                         $ the_person.wardrobe.add_outfit(created_outfit)
                     "Try something else":
                         mc.name "I'm sorry, I think maybe I'm not the one who should be doing this."
@@ -330,6 +334,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                     the_person "Aww, thank you! Okay that's enough peaking..."
                     $ the_person.change_stats(slut_temp = 2, happiness = 2)
                     $ count += 1
+                    $ the_person.change_novelty(3)
                     $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
@@ -427,7 +432,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     $ the_person.change_arousal(10)
                                     "You both quickly get naked. She looks like she really enjoys getting naked for you."
                                     the_person "Just stick it in! I'm ready, no need to warm me up..."
-                                    call fuck_person(the_person, private = True, prohibit_tags = ["Foreplay", "Oral"]) from _clothes_shopping_sex_in_a_changing_room_12#Nothing too serious
+                                    call fuck_person(the_person, private = True, prohibit_tags = ["Foreplay", "Oral"], skip_intro = True, skip_condom = True) from _clothes_shopping_sex_in_a_changing_room_12#Nothing too serious
                                     $ the_report = _return
                                     if the_report.get("girl orgasms", 0) > 0:
                                         the_person "Oh my god, I can't believe how good that was. I hope no one heard me cumming..."

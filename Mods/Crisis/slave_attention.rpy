@@ -80,7 +80,7 @@ label slave_attention_crisis_action_label:
                     "You quickly undress and start fucking her right there."
 
                     # TODO instead of default FUCK_PERSON make custom dialog that fits better.
-                    call fuck_person(the_person, start_position = against_wall, start_object = make_pillory(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_2
+                    call fuck_person(the_person, start_position = against_wall, start_object = make_pillory(), skip_intro = True, skip_condom = True, position_locked = True) from _call_slave_attention_crisis_2
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
                         the_person "Thank you [the_person.mc_title], for giving your slave so much pleasure."
@@ -140,7 +140,7 @@ label slave_attention_crisis_action_label:
                         "Fuck her" if mc.energy >= 40:
                             mc.name "And now for the main course."
                             "Without any mercy you decide to fuck her ass hard."
-                            call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_1
+                            call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, skip_condom = True, position_locked = True) from _call_slave_attention_crisis_1
                             mc.name "That's enough, now get dressed and get out of here, I will call you when I have need for you."
                             $ the_person.apply_planned_outfit()
                             $ the_person.draw_person(position = "stand3")

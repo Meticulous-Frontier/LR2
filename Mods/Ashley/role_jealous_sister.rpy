@@ -12,7 +12,7 @@ init 2 python:
             for act in person.jealous_witness_publix_sex_list():
                 if jealous_act_get_score(act) > the_score:
                     the_score = jealous_act_get_score(act)
-            jealous_string = "You were fooling around in front of everybody at " + person.location.formalName + " !"
+            jealous_string = "You were fooling around in front of everybody at " + person.location.formal_name + " !"
             person.add_jealous_event(jealous_string, the_score)
             person.event_triggers_dict["jealous_public_act"] = []
         return

@@ -173,6 +173,7 @@ label strip_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object):
 label strip_ask_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object):
     $ cowgirl_blowjob.current_modifier = None
     $ cowgirl_blowjob.redraw_scene(the_girl)
+    $ return_value = True
 
     "[the_girl.title] pops off your cock and looks up at you."
     the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
@@ -181,9 +182,6 @@ label strip_ask_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = cowgirl_blowjob.position_tag)
             "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back on top of you and slides your cock all the way to the back of her mouth."
-            $ cowgirl_blowjob.current_modifier = "blowjob"
-            $ cowgirl_blowjob.redraw_scene(the_girl)
-
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
@@ -196,7 +194,11 @@ label strip_ask_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object
                 $ cowgirl_blowjob.current_modifier = "blowjob"
                 $ cowgirl_blowjob.redraw_scene(the_girl)
                 "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
-    return
+            $ return_value = False
+
+    $ cowgirl_blowjob.current_modifier = "blowjob"
+    $ cowgirl_blowjob.redraw_scene(the_girl)
+    return return_value
 
 label orgasm_cowgirl_blowjob(the_girl, the_location, the_object):
     $ cowgirl_blowjob.current_modifier = "blowjob"

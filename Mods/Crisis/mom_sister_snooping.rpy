@@ -26,6 +26,8 @@ label mom_sister_snooping_action_label():
     "You wake up. You're a little groggy, but you manage to get out of bed."
     "You grab yourself some clothes and quietly leave your room. You aren't sure if you are the first one awake or not."
     "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peak."
+    # show lily her bedroom
+    $ lily_bedroom.show_background()
     $ scene_manager = Scene()
     if mom.sluttiness < 20 and lily.sluttiness < 20:
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped)
@@ -45,7 +47,7 @@ label mom_sister_snooping_action_label():
         mom "...But I [text_one] [text_two], so I'm not sure what to do."
         if mom.discover_opinion(overhear_topic):
             "Wow, you didn't realize they talked about basically everything."
-        "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
+        "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif mom.sluttiness < 50 and lily.sluttiness < 50 and mom.sluttiness >=20 and lily.sluttiness >= 20: #Both mid range sluttiness
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
@@ -66,7 +68,7 @@ label mom_sister_snooping_action_label():
         $ mc.change_locked_clarity(10)
         if lily.discover_opinion(overhear_topic):
             "Wow, you didn't realize they talked about sex in such detail with each other."
-        "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
+        "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif mom.sluttiness >= 50 and lily.sluttiness >= 50 and not mc.business.event_triggers_dict.get("family_threesome", False) == True: #Both high slut but no threesome yet
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
@@ -137,7 +139,7 @@ label mom_sister_snooping_action_label():
         $ lily.apply_university_outfit()
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
-        "You peak in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
+        "You peek in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
         mom "I know, I know there's a uniform at the university, but that doesn't mean you can't express yourself a little!"
         lily "What do you mean?"
         mom "A beautiful young woman like you, maybe you could fold the top of your skirt? Show those beautiful legs of yours!"
@@ -151,7 +153,7 @@ label mom_sister_snooping_action_label():
         lily "I guess it couldn't hurt to try..."
         $ lily.change_slut_temp(3)
         $ mc.change_locked_clarity(10)
-        "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
+        "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif lily.sluttiness >= 20:
         $ lily.apply_university_outfit()
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
@@ -173,6 +175,6 @@ label mom_sister_snooping_action_label():
         mom "I guess it couldn't hurt to try..."
         $ mom.change_slut_temp(3)
         $ mc.change_locked_clarity(10)
-        "They keep talking, but you decide to keep headed to the bathroom. You wouldn't want to get caught snooping around, anyway!"
+        "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     $ scene_manager.clear_scene()
     return

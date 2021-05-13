@@ -22,22 +22,7 @@ init -2 python:
             return 2
         elif person.suggestibility < 75:
             return 3
-        else:
-            return 4 #Edge case, has suggestibility not yet in game
-
-    def get_slut_tier(person):   #returns the heart value of the person
-        if person.core_sluttiness < 20:
-            return 0
-        elif person.core_sluttiness < 40:
-            return 1
-        elif person.core_sluttiness < 60:
-            return 2
-        elif person.core_sluttiness < 80:
-            return 3
-        elif person.core_sluttiness < 100:
-            return 4
-        else:
-            return 5
+        return 4 #Edge case, has suggestibility not yet in game
 
 
 init -1 python:

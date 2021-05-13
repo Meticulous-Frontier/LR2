@@ -408,7 +408,7 @@ label candace_get_to_know_label(the_person):
         mc.name "I'm sure he would understand..."
         the_person "No no no, he already told me as much. He said, \'don't you think about quitting, or I'll dump you! and no one wants to date a dumb bimbo like you but me!\'"
         "Jesus, this guy sounds like a major narcissist. The more you learn about him, the more happy you are that [salon_manager.title] got away from him, even if involuntarily."
-        the_person "And if he dumps me, whose going to fuck me every night? No, I think I'd better just stay where I'm at for now."
+        the_person "And if he dumps me, who's going to fuck me every night? No, I think I'd better just stay where I'm at for now."
         $ mc.change_locked_clarity(10)
         $ the_person.event_triggers_dict["learned_about_unhappy"] = 1
         "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
@@ -652,6 +652,7 @@ label candace_convince_to_quit_label(the_person):
     "You spend the next hour or so getting [the_person.title] all set up. [salon_manager.title] really does think of everything."
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
+    $ the_person.remove_role(affair_role)   # people can get her to this role before she quits
     $ the_person.change_happiness(30)
     "She's got new passwords on everything from bank accounts, to social media. A locksmith is already en route to change her locks, and she's blocked her ex from her phone completely."
     "After a while, you notice they seem to be done, and now they are just trading stories and gossip. They actually seem to be getting along okay."
@@ -905,10 +906,7 @@ label candace_love_path_intro_label():
     $ the_person.change_arousal(15)
     if not the_person.vagina_available():
         "You pull off everything between you and her cunt."
-        if the_person.outfit.can_half_off_to_vagina():
-            $ the_person.strip_outfit_strip_list(the_person.outfit.get_half_off_to_vagina_list(), position = "missionary", half_off_instead = True)
-        else:
-            $ the_person.strip_outfit(position = "missionary", exclude_upper = True)
+        $ the_person.strip_to_vagina(prefer_half_off = True, position = "missionary")
     "[the_person.title] reaches down and starts to play with herself as you start to get undressed. She starts to moan as you pull your cock out."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(30)
@@ -1453,7 +1451,7 @@ label candace_meet_doctor_candace_label():
                 "You reach up and grab her hair."
                 mc.name "I think I'll do that."
                 "Pulling her head back, you start to thrust yourself inside of her at a rapid pace. It's time to give it to her good!"
-                call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True) from _fuck_doctor_candace_again_02
+                call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True, skip_condom = True) from _fuck_doctor_candace_again_02
                 "When you finish with her, [the_person.title] is sprawled out across your desk. Your light colored cum on her dark skin is a beautiful contrast."
                 "You get yourself cleaned up a bit and looking presentable while she is still recovering."
                 the_person "Oh fuck [the_person.mc_title]... Your dick is amazing..."

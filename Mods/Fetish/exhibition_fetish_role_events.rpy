@@ -114,7 +114,7 @@ label free_strip_scene(the_person, must_be_naked = True):
             mc.name "Wow [the_person.title], that was amazing."
             call break_strip_outfit_taboos(the_person) from _call_break_strip_outfit_taboos_free_strip_scene
             if _return:
-                the_person "Oh my, I didn't think I could go that far, i'm glad you enjoyed it."
+                the_person "Oh my, I didn't think I could go that far, I'm glad you enjoyed it."
             else:
                 the_person "Oh, are we done already? It feels like something is just getting started!"
         else:

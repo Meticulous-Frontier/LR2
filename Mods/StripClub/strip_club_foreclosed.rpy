@@ -82,10 +82,10 @@ label club_foreclosed_event_label():
     python:
         mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
         mc.business.event_triggers_dict["foreclosed_day"] = day
-        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formalName
+        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formal_name
         strip_club_owner = "Foreclosed"
         strip_club.name = "Foreclosed"
-        strip_club.formalName = "Foreclosed"
+        strip_club.formal_name = "Foreclosed"
         strip_club.remove_action(strip_club_show_action)
         strip_club.background_image = Image(get_file_handle("Club_Outside_Background.jpg")) # Till the club doesn't open back again this should be the background
         strip_club_foreclosed_change_stripper_schedules()

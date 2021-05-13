@@ -9,7 +9,7 @@ init 4 python:
         return True
 
     modify_wardrobe_action = ActionMod("Modify entire wardrobe", requirement = modify_wardrobe_requirement, effect = "modify_wardrobe_label",
-        menu_tooltip = "Ask girl to change her wardrobe.", priority = -5, category = "Generic People Actions")
+        menu_tooltip = "Ask girl to change her wardrobe.", priority = -5, category = "Wardrobe", initialization = init_action_mod_disabled)
 
     def build_specific_action_list_alter_outfit_extended(org_func):
         def build_specific_action_list_wrapper(person):
@@ -70,12 +70,16 @@ init 4 python:
                 if old_bra in [lacy_one_piece_underwear]:
                     new_bra = lace_bra.get_copy()
                     new_panties = lace_panties.get_copy()
-                if old_bra in [bodysuit_underwear]:
+                elif old_bra in [bodysuit_underwear]:
                     new_bra = kitty_babydoll.get_copy()
                     new_panties = kitty_panties.get_copy()
-                if old_bra in [lingerie_one_piece]:
+                elif old_bra in [lingerie_one_piece]:
                     new_bra = teddy.get_copy()
                     new_panties = tiny_g_string.get_copy()
+                else:
+                    new_bra = strappy_bra.get_copy()
+                    new_panties = strappy_panties.get_copy()
+
                 outfit.remove_clothing(old_bra)
 
                 if new_bra:
@@ -84,6 +88,7 @@ init 4 python:
                 if new_panties:
                     new_panties.colour = old_bra.colour
                     outfit.add_lower(new_panties)
+                outfit.update_name()
                 alterations += 1
         return alterations
 
@@ -112,6 +117,8 @@ init 4 python:
                 if new_clothing:
                     new_clothing.colour = clothing.colour
                     outfit.add_lower(new_clothing)
+                    outfit.update_name()
+
                 alterations += 1
         return alterations
 
@@ -164,7 +171,7 @@ init 4 python:
                 if new_bottom:
                     new_bottom.colour = clothing.colour
                     outfit.add_lower(new_bottom)
-
+                outfit.update_name()
                 alterations += 1
         return alterations
 
@@ -189,6 +196,7 @@ init 4 python:
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_lower(new_clothing)
+                    outfit.update_name()
                     alterations += 1
         return alterations
 
@@ -214,6 +222,7 @@ init 4 python:
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_lower(new_clothing)
+                    outfit.update_name()
                     alterations += 1
         return alterations
 
@@ -246,6 +255,7 @@ init 4 python:
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_upper(new_clothing)
+                    outfit.update_name()
                     alterations += 1
         return alterations
 
@@ -285,6 +295,7 @@ init 4 python:
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_upper(new_clothing)
+                    outfit.update_name()
                     alterations += 1
         return alterations
 
@@ -327,6 +338,8 @@ init 4 python:
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_lower(new_clothing)
+                    if outfit in person.wardrobe.underwear_sets:
+                        outfit.update_name()
                     alterations += 1
         return alterations
 
@@ -357,6 +370,8 @@ init 4 python:
                     new_clothing.colour = clothing.colour
                     outfit.remove_clothing(clothing)
                     outfit.add_upper(new_clothing)
+                    if outfit in person.wardrobe.underwear_sets:
+                        outfit.update_name()
                     alterations += 1
         return alterations
 

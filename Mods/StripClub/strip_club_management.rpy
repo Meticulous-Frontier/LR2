@@ -101,12 +101,14 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_reminder_action)
 
     def strip_club_manager_bdsm_room_build_requirement():
-        if mc.business.funds >= 10000:
-            if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-                if strip_club_get_manager():
-                    if not mc.business.is_open_for_business():
-                        return "Only during work hours"
-                    return True
+        if mc.business.funds < 10000:
+            return False
+        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+            return False
+        if not mc.business.is_open_for_business():
+            return "Only during business hours"
+        if strip_club_get_manager():
+            return True
         return False
 
     strip_club_manager_bdsm_room_build_action = Action("Build a BDSM room\n{color=#ff0000}{size=18}Costs: $10,000{/size}{/color}", strip_club_manager_bdsm_room_build_requirement, "strip_club_manager_bdsm_room_build_label")
@@ -215,7 +217,7 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
 
 label strip_club_manager_bdsm_room_build_label(): # (action button)
     "You pick up the phone and call your usual contractor."
-    mc.name "Hello, this is [mc.name] [mc.last_name] from [strip_club.formalName], I need some construction work done here at my club."
+    mc.name "Hello, this is [mc.name] [mc.last_name] from [strip_club.formal_name], I need some construction work done here at my club."
     "You go over the details and agree on a price of $10,000 for converting some unused space into a fully equipped and soundproofed BDSM room."
     $ mc.business.change_funds(-10000)
     $ add_strip_club_manager_bdsm_room_built_event()

@@ -58,7 +58,7 @@ init -1 python:
         self.planned_uniform = None
 
         if self.wardrobe:
-            for outfit in self.wardrobe.outfits + self.wardrobe.underwear_sets + self.wardrobe.overwear_sets:
+            for outfit in self.wardrobe.all_outfits:
                 outfit.upper_body.clear()
                 outfit.lower_body.clear()
                 outfit.feet.clear()
@@ -554,6 +554,9 @@ init -1 python:
 
         if start_home is None:
             the_daughter.generate_home()
+        else:
+            the_daughter.set_schedule(the_location = start_home, times = [0,4])
+
         the_daughter.home.add_person(the_daughter)
 
         for sister in town_relationships.get_existing_children(self): #First find all of the other kids this person has
@@ -691,7 +694,7 @@ init -1 python:
     # Monkey wrench Person class to have automatic strip function
     Person.strip_outfit_to_max_sluttiness = strip_outfit_to_max_sluttiness
 
-    def strip_outfit_to_underwear(self, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, scene_manager = None, wipe_scene = False):
+    def strip_outfit_strip_list(self, strip_list, position = None, emotion = None, display_transform = None, lighting = None, scene_manager = None, wipe_scene = False, half_off_instead = False, delay = 1):
         if position is None:
             self.position = self.idle_pose
 
@@ -704,25 +707,53 @@ init -1 python:
         if display_transform is None:
             display_transform = character_right
 
-        strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
-        while not strip_choice is None and strip_choice.layer > 1:
+        for item in strip_list:
             if delay > 0:
-                self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
+                self.draw_animated_removal(item, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, half_off_instead = half_off_instead, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
                 renpy.pause(delay)
             else:
-                self.outfit.remove_clothing(strip_choice)
-            strip_choice = self.outfit.remove_random_upper(True, do_not_remove = True)
+                self.outfit.remove_clothing(item)
+        return
 
-        strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
-        while not strip_choice is None and strip_choice.layer > 1:
-            if delay > 0:
-                self.draw_animated_removal(strip_choice, display_transform = display_transform, position = position, emotion = emotion, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene) #Draw the strip choice being removed from our current outfit
-                renpy.pause(delay)
-            else:
-                self.outfit.remove_clothing(strip_choice)
-            strip_choice = self.outfit.remove_random_lower(True, do_not_remove = True)
+    Person.strip_outfit_strip_list = strip_outfit_strip_list
 
-    Person.strip_outfit_to_underwear = strip_outfit_to_underwear
+    def strip_to_underwear(self, visible_enough = True, avoid_nudity = False, position = None, emotion = None, display_transform = None, lighting = None, scene_manager = None, wipe_scene = False, delay = 1):
+        strip_list = self.outfit.get_underwear_strip_list(visible_enough = visible_enough, avoid_nudity = avoid_nudity)
+        self.strip_outfit_strip_list(strip_list, position = position, emotion = emotion, display_transform = display_transform, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene, delay = delay)
+        return
+
+    Person.strip_to_underwear = strip_to_underwear
+
+    def strip_to_tits(self, visible_enough = True, prefer_half_off = False, position = None, emotion = None, display_transform = None, lighting = None, scene_manager = None, wipe_scene = False, delay = 1):
+        half_off_instead = False
+        if prefer_half_off and self.outfit.can_half_off_to_tits(visible_enough = visible_enough):
+            strip_list = self.outfit.get_half_off_to_tits_list(visible_enough = visible_enough)
+            half_off_instead = True
+        else:
+            strip_list = self.outfit.get_tit_strip_list(visible_enough = visible_enough)
+        self.strip_outfit_strip_list(strip_list, position = position, emotion = emotion, display_transform = display_transform, lighting = lighting, half_off_instead = half_off_instead, scene_manager = scene_manager, wipe_scene = wipe_scene, delay = delay)
+        return
+
+    Person.strip_to_tits = strip_to_tits
+
+    def strip_to_vagina(self, visible_enough = False, prefer_half_off = False, position = None, emotion = None, display_transform = None, lighting = None, scene_manager = None, wipe_scene = False, delay = 1):
+        half_off_instead = False
+        if prefer_half_off and self.outfit.can_half_off_to_vagina():
+            strip_list = self.outfit.get_half_off_to_vagina_list(visible_enough = visible_enough)
+            half_off_instead = True
+        else:
+            strip_list = self.outfit.get_vagina_strip_list(visible_enough = visible_enough)
+        self.strip_outfit_strip_list(strip_list, position = position, emotion = emotion, display_transform = display_transform, lighting = lighting, half_off_instead = half_off_instead, scene_manager = scene_manager, wipe_scene = wipe_scene, delay = delay)
+        return
+
+    Person.strip_to_vagina = strip_to_vagina
+
+    def strip_full_outfit(self, strip_feet = False, strip_accessories = False, position = None, emotion = None, display_transform = None, lighting = None, scene_manager = None, wipe_scene = False, delay = 1):
+        strip_list = self.outfit.get_full_strip_list(strip_feet = strip_feet, strip_accessories = strip_accessories)
+        self.strip_outfit_strip_list(strip_list, position = position, emotion = emotion, display_transform = display_transform, lighting = lighting, scene_manager = scene_manager, wipe_scene = wipe_scene, delay = delay)
+        return
+
+    Person.strip_full_outfit = strip_full_outfit
 
     def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, scene_manager = None, wipe_scene = False):
         def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
@@ -766,13 +797,6 @@ init -1 python:
                 strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
 
     Person.strip_outfit = strip_outfit
-
-    def strip_outfit_strip_list(self, strip_list, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, half_off_instead = False):
-        for item in strip_list:
-            self.draw_animated_removal(item, position = position, emotion = emotion, lighting = lighting, display_transform = display_transform, half_off_instead = half_off_instead)
-            renpy.pause(delay)
-
-    Person.strip_outfit_strip_list = strip_outfit_strip_list
 
     def choose_strip_clothing_item(self):
         clothing = None
@@ -1535,7 +1559,7 @@ init -1 python:
         # strip to underwear or else pick workout outfit
         if self.effective_sluttiness("underwear_nudity") >= 60:
             # use her current planned underwear
-            self.strip_outfit_to_underwear(delay = 0)
+            self.strip_to_underwear(delay = 0)
             # take off shoes and socks
             self.strip_outfit(delay = 0, exclude_upper = True, exclude_lower = True, exclude_feet = False)
             # add black slips
@@ -1840,11 +1864,6 @@ init -1 python:
 
     Person.get_tit_strip_list = person_get_tit_strip_list
 
-    def person_strip_to_tits(self, visible_enough = True):
-        return self.outfit.strip_to_tits(visible_enough)
-
-    Person.strip_to_tits = person_strip_to_tits
-
     def person_can_half_off_to_vagina(self, visible_enough = True):
         return self.outfit.can_half_off_to_vagina(visible_enough)
 
@@ -1859,11 +1878,6 @@ init -1 python:
         return self.outfit.get_vagina_strip_list(visible_enough)
 
     Person.get_vagina_strip_list = person_get_vagina_strip_list
-
-    def person_strip_to_vagina(self, visible_enough = False):
-        return self.outfit.strip_to_vagina(visible_enough)
-
-    Person.strip_to_vagina = person_strip_to_vagina
 
 ##########################################
 # Unique crisis addition functions       #

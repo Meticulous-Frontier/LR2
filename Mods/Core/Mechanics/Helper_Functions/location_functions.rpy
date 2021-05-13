@@ -7,7 +7,7 @@ init -1 python:
     def format_rooms(list_of_rooms, flavor = ""): # This can be kept as it formats rooms in a list for menu display.
         tuple_list = []
         for room in list_of_rooms:
-            tuple_string = flavor + room.formalName
+            tuple_string = flavor + room.formal_name
             tuple_list.append([tuple_string, room])
         return tuple_list
 

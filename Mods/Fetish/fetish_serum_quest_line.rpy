@@ -740,8 +740,10 @@ label fetish_serum_coding_activity_label():
                                 "Some of the other employees in the room have noticed your actions and are watching to see what is about to happen."
                                 the_person "Okay [the_person.mc_title]. Fuck me good! Don't hold back!"
                             "You run your cock along her slit a couple of times, then line yourself up and push forward."
+                            $ the_person.break_taboo("condomless_sex")
+                            $ the_person.break_taboo("vaginal_sex")
                             "[the_person.title]'s wet cunt feels so good wrapped around your penis. You start to fuck her."
-                            call fuck_person(the_person,private = False, start_position = SB_doggy_standing, skip_intro = True) from _call_fuck_person_serum_coding_event_01
+                            call fuck_person(the_person,private = False, start_position = SB_doggy_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_serum_coding_event_01
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
                                 the_person "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
