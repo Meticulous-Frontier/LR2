@@ -56,9 +56,9 @@ init 3 python:
     def get_lust_tier():
         if mc.locked_clarity < 200:
             return 0
-        elif mc.free_clarity / mc.locked_clarity < 0.5:
+        elif mc.free_clarity / mc.locked_clarity < 0.5 or mc.locked_clarity > 2000:
             return 4
-        elif mc.free_clarity / mc.locked_clarity < 1.0:
+        elif mc.free_clarity / mc.locked_clarity < 1.0 or mc.locked_clarity > 1000:
             return 3
         elif mc.free_clarity / mc.locked_clarity < 1.5:
             return 2
