@@ -152,6 +152,9 @@ init 1 python:
     heart_pasties.layer = 0
     cincher.layer = 0
 
+    # pencil skirt pussy usable to False
+    pencil_skirt.anchor_below = True
+
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
