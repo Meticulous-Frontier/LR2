@@ -170,7 +170,7 @@ screen cheat_menu():
         "Height": ["height", "height", .005, 4, (.8, 1)],
         "Energy": ["energy", "energy", 10.0, 5, (60,  400)],
         "Max Energy": ["max_energy", "max_energy", 10.0, 6, (60,  400)],
-        "Free Clarity": ["free_clarity", "free_clarity", 500.0, 7, (0, 100000)],
+        "Clarity": ["free_clarity", "free_clarity", 500.0, 7, (0, 100000)],
         "Lust": ["locked_clarity", "locked_clarity", 500.0, 8, (0, 100000)],
 
         "Funds": ["funds", "funds", 10000, 9, (0, 100000000)],
