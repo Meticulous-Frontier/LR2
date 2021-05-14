@@ -32,6 +32,8 @@ init -1 python:
     def change_locked_clarity_extended(self, amount, add_to_log = True):
         amount = amount * get_clarity_multiplier()
         amount = __builtin__.int(__builtin__.round(amount))
+        if perk_system.has_ability_perk("Lustful Priorities"):
+            amount += 5
         self.locked_clarity += amount
         log_string = ""
         if amount > 0:

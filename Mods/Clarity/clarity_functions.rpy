@@ -28,6 +28,12 @@ init 3 python:
         perk_system.add_ability_perk(Ability_Perk(description = "You gain increase clarity based on your focus.", toggle = False, usable = False), "Focused Clarity")
         return
 
+    def add_lust_gain_perk():
+        if perk_system.has_ability_perk("Lustful Priorities"):
+            return
+        perk_system.add_ability_perk(Ability_Perk(description = "Everytime you normally gain lust, you gain 5 extra.", toggle = False, usable = False), "Lustful Priorities")
+        return
+
     persuade_action = ActionMod("Use Persuasion", requirement = persuade_person_requirement, effect = "persuade_person",
         menu_tooltip = "Leverage your clarity to persuade her to do something.", category = "Generic People Actions")
 
@@ -46,3 +52,15 @@ init 3 python:
 
     # wrap up the build_specific_action_list function
     build_specific_action_list = build_specific_action_list_extended(build_specific_action_list)
+
+    def get_lust_tier():
+        if mc.locked_clarity < 200:
+            return 0
+        elif mc.free_clarity / mc.locked_clarity < 0.5:
+            return 4
+        elif mc.free_clarity / mc.locked_clarity < 1.0:
+            return 3
+        elif mc.free_clarity / mc.locked_clarity < 1.5:
+            return 2
+        else:
+            return 1
