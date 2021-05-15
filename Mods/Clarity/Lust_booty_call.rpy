@@ -44,6 +44,8 @@ init 3 python:
 
 
 label lust_booty_call_intro_label():
+    $ mc.change_location(bedroom)   # make sure we are in the bedroom
+    $ mc.location.show_background()
     "You lay down in your bed and try to go to sleep."
     "You toss and turn for a while. This is impossible! You feel like you have so much energy."
     "What you wouldn't give for a bedwarmer to play with right about now..."
@@ -81,19 +83,18 @@ label lust_booty_call_intro_label():
     "You don't waste anytime. You pick her up and throw her on your bed."
     $ the_person.draw_person(position = "missionary")
     the_person "Ah!"
-    "She gives a little yelp as you jump on top of her. You start to make out, pushing yourelf up against her."
+    "She gives a little yelp as you jump on top of her. You start to make out, pushing yourself up against her."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
     "Pretty soon, clothes start coming off."
     $ the_person.strip_outfit(position = "missionary")
     the_person "Wow, you are really into it tonight! How do you want to start?"
-    call fuck_person(the_person, private = True) from _lust_booty_call_fuck_01
+    call fuck_person(the_person, start_object = make_bed(), skip_intro = True, private = True) from _lust_booty_call_fuck_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) == 0:
         "Frustrated, you finish up but still haven't cum."
         the_person "Sorry... I guess I'm just not feeling it tonight."
         $ the_person.change_happiness(-3)
-
     elif the_report.get("girl orgasms", 0) == 0:
         "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
         the_person "Wow, I come all the way over here, and you can't even reciprocate?"
@@ -106,11 +107,19 @@ label lust_booty_call_intro_label():
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
-    the_person "Okay"
+    the_person "Okay, lets chat a little while we wait."
     "As you order a Lyft, she gets herself presentable."
-    $ the_person.review_outfit()
+    $ the_person.apply_outfit()
+    $ the_person.draw_person(position = "sitting")
     "You make small talk for a bit, but soon her ride is here, so you walk her to the door."
+    $ hall.show_background()
+    $ the_person.draw_person()
+    mc.name "Thanks [the_person.title], you where amazing."
+    the_person "Anytime [the_person.mc_title], goodnight."
+    $ the_person.draw_person(position = "walking_away")
+    "She turns around, and hurries to her ride."
     $ clear_scene()
+    $ mc.location.show_background()
     "After she leaves, you lay down on your bed."
     "The options that your business and the serums have opened up for sexual encounters is increasing what seems like daily."
     "You change the background of your phone to a picture you took during a recent sexual encounter."
