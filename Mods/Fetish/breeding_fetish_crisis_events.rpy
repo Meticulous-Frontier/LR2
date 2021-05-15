@@ -410,7 +410,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     the_person "Knock me up! Breed me! Make me your personal cumdump and bend me over anytime you want and finish deep..."
     "With one hand you grab your cock and line it up with her cunt. [the_person.possessive_title] is so wet you slide in easily."
     the_person "Yes! Oh [the_person.mc_title], fuck me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True, private = True) from _call_steph_bimbo_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True, private = True) from _call_breeding_fetish_employee_high_fertility
     if the_person.has_creampie_cum():
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.possessive_title] is still bent over your desk, but has her hands between her legs, trying to hold your cum in."
@@ -436,7 +436,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         "You can tell she is really disappointed."
         "You leave your office and resume your workday."
     $ clear_scene()
-
+    return
 
 label breeder_cowgirl_wakeup_label(the_person):
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
