@@ -1,4 +1,4 @@
-init 1 python:
+init 3 python:
     def lust_booty_call_intro_requirement():
         if mc_asleep() and mc.energy > 80:
             if len(lust_get_booty_call_list()) >= 3 and get_lust_tier() > 2:
@@ -14,7 +14,6 @@ init 1 python:
                 return "Not enough Lust"
         return False
 
-init 2 python:
     def lust_get_booty_call_list():
         booty_call_list = []
         for person in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin]):
@@ -22,7 +21,23 @@ init 2 python:
                 booty_call_list.append(person)
         return booty_call_list
 
-init 3 python:
+    # extend the default build phone menu function with renovations
+    def build_phone_menu_booty_call_extended(org_func):
+        def phone_menu_wrapper():
+            # run original function
+            phone_menu = org_func()
+            # run extension code
+            if mc.business.event_triggers_dict.get("booty_call_unlocked", False):
+                lust_booty_call_action = Action("Make booty call {image=gui/heart/Time_Advance.png}", lust_booty_call_requirement, "lust_booty_call_label", menu_tooltip = "Call someone for a one time late night sexual encounter.", priority = 10)
+                phone_menu[2].insert(1, lust_booty_call_action)
+
+            return phone_menu
+
+        return phone_menu_wrapper
+
+    build_phone_menu = build_phone_menu_booty_call_extended(build_phone_menu)
+
+
     lust_booty_call = ActionMod("Booty Call {image=gui/heart/Time_Advance.png}",  lust_booty_call_intro_requirement, "lust_booty_call_intro_label",
         menu_tooltip = "Make a booty call to get laid", category="Home")
     lust_booty_call_intro = Action("Lust triggered booty call", lust_booty_call_intro_requirement, "lust_booty_call_intro_label")
@@ -122,12 +137,16 @@ label lust_booty_call_label():
     $ mc.start_text_convo(the_person)
     mc.name "Hey, I'm bored. You DTF tonight?"
     the_person "Actually yeah. Your place?"
-    mc.name "Hell yeah"
+    mc.name "Hell yeah!"
     if the_person.is_girlfriend():
         mc.name "Can't wait to see you babe."
     else:
         "You make sure she has your address."
     if mc_at_home():
+        if mc.location != bedroom:
+            "You quickly go to your bedroom"
+            $ mc.change_location(bedroom)
+            $ mc.location.show_background()
         "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
         "Soon, you phone is going off."
         the_person "I'm here."
@@ -144,13 +163,13 @@ label lust_booty_call_label():
     "You don't waste anytime. You pick her up and throw her on your bed."
     $ the_person.draw_person(position = "missionary")
     the_person "Ah!"
-    "She gives a little yelp as you jump on top of her. You start to make out, pushing yourelf up against her."
+    "She gives a little yelp as you jump on top of her. You start to make out, pushing yourself up against her."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
     "Pretty soon, clothes start coming off."
     $ the_person.strip_outfit(position = "missionary")
     the_person "Wow, you are really into it tonight! How do you want to start?"
-    call fuck_person(the_person, private = True) from _lust_booty_call_fuck_02
+    call fuck_person(the_person, start_object = make_bed(), skip_intro = True, private = True) from _lust_booty_call_fuck_02
     $ the_report = _return
     if the_report.get("guy orgasms", 0) == 0:
         "Frustrated, you finish up but still haven't cum."
@@ -169,11 +188,19 @@ label lust_booty_call_label():
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
-    the_person "Okay"
+    the_person "Okay, lets chat a little while we wait."
     "As you order a Lyft, she gets herself presentable."
-    $ the_person.review_outfit()
+    $ the_person.apply_outfit()
+    $ the_person.draw_person(position = "sitting")
     "You make small talk for a bit, but soon her ride is here, so you walk her to the door."
+    $ hall.show_background()
+    $ the_person.draw_person()
+    mc.name "Thanks [the_person.title], you where amazing."
+    the_person "Anytime [the_person.mc_title], goodnight."
+    $ the_person.draw_person(position = "walking_away")
+    "She turns around, and hurries to her ride."
     $ clear_scene()
+    $ mc.location.show_background()
     "After she leaves, you lay down on your bed. It's nice having girls to come over anytime you ask like this. You quickly fall asleep."
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_booty_call_aftermath_01
     return
