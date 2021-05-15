@@ -30,7 +30,7 @@ init 3 python:
 
 label lust_booty_call_intro_label():
     "You lay down in your bed and try to go to sleep."
-    "You toss an turn for a while. This is impossible! You feel like you have so much energy."
+    "You toss and turn for a while. This is impossible! You feel like you have so much energy."
     "What you wouldn't give for a bedwarmer to play with right about now..."
     "You grab your phone. You start to open the web browser to look up some porn, but you stop yourself."
     "Instead, you open up your contacts."
