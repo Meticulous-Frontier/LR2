@@ -600,7 +600,7 @@ label modify_wardrobe_label(the_person):
                 "Yes":
                     mc.name "That would be even better. Go ahead and remove them from your wardrobe entirely."
                     the_person "Yes, [the_person.mc_title]."
-                    $ alterations += no_bras(the_person)
+                    $ alterations += sexier_bras(the_person)
                 "No":
                     mc.name "No, I like you wearing them, I just want them to be skimpy and sexy."
                     the_person "I'll take a look and see what I can do for you."
@@ -624,7 +624,7 @@ label modify_wardrobe_label(the_person):
                 "Yes":
                     mc.name "That would be even better. Go ahead and remove them from your wardrobe entirely."
                     the_person "Yes, [the_person.mc_title]."
-                    $ alterations += no_panties(the_person)
+                    $ alterations += sexier_panties(the_person)
                 "No":
                     mc.name "No, I like you wearing them, I just want them to be skimpy and sexy."
                     the_person "I'll take a look and see what I can do for you."
