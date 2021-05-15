@@ -370,6 +370,34 @@ label breeding_fetish_family_sleep_crisis_label():
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV070
         call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
         return "Advance Time"
+    elif the_person == mom:
+        $ mc.change_location(bedroom)
+        $ mc.location.show_background()
+        "You are just drifting off to sleep when you hear your bedroom door squeak open. You look up to see [the_person.possessive_title] walking in."
+        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_black_outfit))
+        $ the_person.draw_person()
+        mc.name "[the_person.title]?"
+        the_person "Hi honey... I was feeling lonely over in my room, I thought maybe you might like some company tonight..."
+        $ the_person.draw_person(position = "sitting")
+        "[the_person.possessive_title] sits on the edge of your bed. The way she is dressed, you're sure she has more in mind."
+        menu:
+            "Not tonight" if get_lust_tier() < 3 or mc.energy < 80:
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                "She is clearly disappointed."
+                the_person "I understand [the_person.mc_title]... see you in the morning I guess?"
+                "You roll over while she leaves the room and quickly fall asleep."
+                $ the_person.change_obedience(-2)
+                $ the_person.change_happiness(-5)
+                return
+            "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2 and mc.energy > 80:
+                pass
+            "Let Her":
+                $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+                "You scoot over, giving her room to get under the covers with you."
+
+                "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
+
+
 
 label breeding_fetish_employee_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_employee_breeder()
