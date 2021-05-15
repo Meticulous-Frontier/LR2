@@ -624,7 +624,7 @@ label erica_phase_one_label(the_person):
                 mc.name "Yeah, I'm pretty sweaty. I'd better get cleaned up!"
                 $ the_person.draw_person( emotion = "happy")
                 "She gets close to you and whispers in your ear."
-                the_person "You now where to go... meet me in 5."
+                the_person "You know where to go... meet me in 5."
                 $ the_person.draw_person( position = "walking_away")
                 "You watch [the_person.title]'s amazing ass as she walks away. You swear there's a bit of a swagger there."
                 "You give her a few minutes, then follow after her."
