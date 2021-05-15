@@ -920,8 +920,8 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
     $ hide_wip_screen()
-    $ stephanie.set_alt_schedule(downtown, days = [6], times = [0])
-    $ ashley.set_alt_schedule(downtown, days = [6], times = [0])
+    $ stephanie.set_alt_schedule(coffee_shop, days = [6], times = [0])
+    $ ashley.set_alt_schedule(coffee_shop, days = [6], times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
     call advance_time from _call_advance_ashley_arrangement_01
     return
