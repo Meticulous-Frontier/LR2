@@ -763,6 +763,11 @@ label candace_midnight_wakeup_label():
         if not "police_chief" in globals(): # save compatibility
             add_police_chief_character()
 
+        if police_chief.title is None:  # haven't met, set title
+            police_chief.set_possessive_title("the police chief")
+            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_title("Officer " + police_chief.last_name)
+
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
     mc.name "Hello?"
