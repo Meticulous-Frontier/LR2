@@ -331,7 +331,7 @@ label breeding_fetish_family_sleep_crisis_label():
         $ mc.change_locked_clarity(30)
         the_person "So... I was wondering... is it okay if I sleep in here with you again tonight?"
         menu:
-            "Not tonight":
+            "Not tonight" if get_lust_tier() < 3:
                 mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
                 "She is clearly disappointed."
                 the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
@@ -339,6 +339,8 @@ label breeding_fetish_family_sleep_crisis_label():
                 $ the_person.change_obedience(-2)
                 $ the_person.change_happiness(-5)
                 return
+            "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2:
+                pass
             "Strip first":
                 $ the_person.event_triggers_dict["LastBreedingFetish"] = day
                 mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
@@ -353,7 +355,6 @@ label breeding_fetish_family_sleep_crisis_label():
                 the_person "I've come to really love the way it feels when you spurt inside of me..."
                 "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
 
-
         "You kiss [the_person.possessive_title] along her neck and ear. She shivers at the sensation and then whispers in your ear."
         $ the_person.change_arousal(20)
         the_person "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
@@ -361,7 +362,7 @@ label breeding_fetish_family_sleep_crisis_label():
         "[the_person.possessive_title] spreads her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
         $ the_person.break_taboo("condomless_sex")
         $ the_person.break_taboo("vaginal_sex")
-        call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_lily_breeding_overnight
+        call fuck_person(the_person, start_position = breeding_missionary, private = True, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_lily_breeding_overnight
 
         "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
         "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
@@ -410,7 +411,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     the_person "Knock me up! Breed me! Make me your personal cumdump and bend me over anytime you want and finish deep..."
     "With one hand you grab your cock and line it up with her cunt. [the_person.possessive_title] is so wet you slide in easily."
     the_person "Yes! Oh [the_person.mc_title], fuck me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True, private = True) from _call_steph_bimbo_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True, private = True) from _call_emp_fertile_bimbo_breeding_fetish_01
     if the_person.has_creampie_cum():
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.possessive_title] is still bent over your desk, but has her hands between her legs, trying to hold your cum in."
