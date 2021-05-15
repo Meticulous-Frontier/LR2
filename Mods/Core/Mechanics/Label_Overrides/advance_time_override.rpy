@@ -188,6 +188,8 @@ init 5 python:
         mc.run_turn()
         if "quest_director" in globals():
             quest_director.run_turn()
+        if "perk_system" in globals():
+            perk_system.update()  #TEST to see if this is a good time for this.
         if debug_log_enabled:
             add_to_debug_log("Run Turn: {total_time:.3f}", start_time)
         return
@@ -373,8 +375,7 @@ label advance_time_end_of_day_label():
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
-        if "perk_system" in globals():
-            perk_system.update()  #TEST to see if this is a good time for this.
+
         mc.business.funds_yesterday = mc.business.funds
     return
 

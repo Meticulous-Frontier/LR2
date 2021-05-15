@@ -108,6 +108,10 @@ init 2 python:
                 else:
                     bedroom_renovate_action = Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (unlocks other home improvements). Cost $" + str(mc_bedroom_renovation_cost) + ".")
                     phone_menu[2].insert(1, bedroom_renovate_action)
+            if mc.business.event_triggers_dict.get("booty_call_unlocked", False):
+                lust_booty_call_action = Action("Make booty call {image=gui/heart/Time_Advance.png}", lust_booty_call_requirement, "lust_booty_call_label", menu_tooltip = "Call someone for a one time late night sexual encounter.", priority = 10)
+                phone_menu[2].insert(1, lust_booty_call_action)
+
             return phone_menu
 
         return phone_menu_wrapper

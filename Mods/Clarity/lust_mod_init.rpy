@@ -21,4 +21,5 @@ label update_lust_mod_core(stack):
 label lust_mod_init():
     $ mc.business.event_triggers_dict["lust_mod_init"] = True
     $ mc.business.add_mandatory_crisis(lust_blowjob_intro)
+    $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
     return

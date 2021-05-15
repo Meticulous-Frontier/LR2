@@ -10,6 +10,17 @@ init 3 python:
 
         return multiplier
 
+    def lust_drip_perk_update_func():
+        mc.change_locked_clarity(__builtin__.round(max(5, (min(200, mc.free_clarity * .03)))), add_to_log = False)
+        mc.spend_clarity(__builtin__.round(max(5, (min(200, mc.free_clarity * .03)))), add_to_log = False)
+        return
+
+    def add_lust_drip_perk():
+        if perk_system.has_ability_perk("Lust Drip"):
+            return
+        perk_system.add_ability_perk(Ability_Perk(description = "Clarity slowly converts into lust.", toggle = True, togglable = True, usable = False, update_func = lust_drip_perk_update_func), "Lust Drip")
+        return
+
     def add_intelligence_clarity_perk():
         if perk_system.has_ability_perk("Intelligent Clarity"):
             return
@@ -31,7 +42,7 @@ init 3 python:
     def add_lust_gain_perk():
         if perk_system.has_ability_perk("Lustful Priorities"):
             return
-        perk_system.add_ability_perk(Ability_Perk(description = "Everytime you normally gain lust, you gain 5 extra.", toggle = False, usable = False), "Lustful Priorities")
+        perk_system.add_ability_perk(Ability_Perk(description = "Everytime you normally gain lust, you gain 5 extra.", toggle = True,togglable = True, usable = False), "Lustful Priorities")
         return
 
     persuade_action = ActionMod("Use Persuasion", requirement = persuade_person_requirement, effect = "persuade_person",

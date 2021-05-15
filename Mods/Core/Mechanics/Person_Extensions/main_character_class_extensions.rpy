@@ -32,7 +32,7 @@ init -1 python:
     def change_locked_clarity_extended(self, amount, add_to_log = True):
         amount = amount * get_clarity_multiplier()
         amount = __builtin__.int(__builtin__.round(amount))
-        if perk_system.has_ability_perk("Lustful Priorities"):
+        if perk_system.get_ability_flag("Lustful Priorities"):
             amount += 5
         self.locked_clarity += amount
         log_string = ""
@@ -48,7 +48,7 @@ init -1 python:
                 effect_strength = 1.0
             renpy.show_screen("border_pulse", effect_strength, _transient = True)
         return
-        org_func(main_character, amount * get_clarity_multiplier(), add_to_log)
+        #org_func(main_character, amount * get_clarity_multiplier(), add_to_log)
 
 
     MainCharacter.change_locked_clarity = change_locked_clarity_extended

@@ -1,0 +1,195 @@
+init 1 python:
+    def lust_booty_call_intro_requirement():
+        if mc_asleep() and mc.energy > 80:
+            if len(lust_get_booty_call_list()) >= 3 and get_lust_tier() > 2:
+                #TODO disable if we have  sleepover planned
+                return True
+        return False
+
+    def lust_booty_call_requirement():
+        if time_of_day == 4 and mc.energy > 80:
+            if get_lust_tier() > 2:
+                return True
+            else:
+                return "Not enough Lust"
+        return False
+
+init 2 python:
+    def lust_get_booty_call_list():
+        booty_call_list = []
+        for person in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin]):
+            if (person.is_girlfriend() or person.sluttiness > 70) and person.energy > 80:
+                booty_call_list.append(person)
+        return booty_call_list
+
+init 3 python:
+    lust_booty_call = ActionMod("Booty Call {image=gui/heart/Time_Advance.png}",  lust_booty_call_intro_requirement, "lust_booty_call_intro_label",
+        menu_tooltip = "Make a booty call to get laid", category="Home")
+    lust_booty_call_intro = Action("Lust triggered booty call", lust_booty_call_intro_requirement, "lust_booty_call_intro_label")
+
+
+label lust_booty_call_intro_label():
+    "You lay down in your bed and try to go to sleep."
+    "You toss an turn for a while. This is impossible! You feel like you have so much energy."
+    "What you wouldn't give for a bedwarmer to play with right about now..."
+    "You grab your phone. You start to open the web browser to look up some porn, but you stop yourself."
+    "Instead, you open up your contacts."
+    "You wonder... surely you could convince someone to come over?"
+    $ booty_list = lust_get_booty_call_list()
+    call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + booty_list], draw_hearts_for_people = True))
+    if _return == "Leave" or _return == None:
+        "After looking at your phone contacts, you change your mind. Maybe another opportunity will present itself later."
+        $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
+        return
+    $ the_person = _return
+    "You decide to text [the_person.possessive_title]"
+    show screen person_info_ui(the_person)
+    $ mc.start_text_convo(the_person)
+    mc.name "Hey, you up?"
+    the_person "Actually yeah. WYD?"
+    mc.name "Thinking about you. Wanna come over?"
+    if the_person.is_girlfriend():
+        "You snap a quick dick pick and attach it."
+        the_person "Mmmmmm. I'm always hot for you babe. I'll be right there."
+    else:
+        the_person "Maybe. You got something in mind?"
+        "You snap a quick dick pick and attach it."
+        the_person "Damn, why didn't you say you were DTF. I'll be right over."
+        "You make sure she has your address."
+    "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
+    "Soon, you phone is going off."
+    the_person "I'm here."
+    $ mc.end_text_convo()
+    "You quickly let her in and sneak back to your room."
+    $ the_person.draw_person()
+    mc.name "Let's get down to business."
+    "You don't waste anytime. You pick her up and throw her on your bed."
+    $ the_person.draw_person(position = "missionary")
+    the_person "Ah!"
+    "She gives a little yelp as you jump on top of her. You start to make out, pushing yourelf up against her."
+    $ the_person.change_arousal(15)
+    $ mc.change_arousal(15)
+    "Pretty soon, clothes start coming off."
+    $ the_person.strip_outfit(position = "missionary")
+    the_person "Wow, you are really into it tonight! How do you want to start?"
+    call fuck_person(the_person, private = True) from _lust_booty_call_fuck_01
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) == 0:
+        "Frustrated, you finish up but still haven't cum."
+        the_person "Sorry... I guess I'm just not feeling it tonight."
+        $ the_person.change_happiness(-3)
+
+    elif the_report.get("girl orgasms", 0) == 0:
+        "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
+        the_person "Wow, I come all the way over here, and you can't even reciprocate?"
+        $ the_person.change_happiness(-3)
+        $ the_person.change_obedience(-3)
+    else:
+        "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
+        $ the_person.change_happiness(3)
+        $ the_person.change_obedience(3)
+    mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
+    $ the_person.draw_person(position = "sitting")
+    "[the_person.title] sits on the edge of your bed."
+    the_person "Okay"
+    "As you order a Lyft, she gets herself presentable."
+    $ the_person.review_outfit()
+    "You make small talk for a bit, but soon her ride is here, so you walk her to the door."
+    $ clear_scene()
+    "After she leaves, you lay down on your bed."
+    "The options that your business and the serums have opened up for sexual encounters is increasing what seems like daily."
+    "You change the background of your phone to a picture you took during a recent sexual encounter."
+    "You decide to embrace your new life of constant sexual encounters."
+    $ add_lust_drip_perk()
+    "You have gained a new perk! Your Clarity now slowly converts to Lust while active, maximum 200 per time slot."
+    $ mc.business.event_triggers_dict["booty_call_unlocked"] = True
+    "You also have learned the art of the booty call. You can now select this option on your phone at night if your lust is high enough!"
+    return
+
+label lust_booty_call_label():
+    if mc_at_home():
+        "As you get yourself ready for bed, you can tell you have way too much sexual tension to fall asleep, so you decide to make a booty call."
+    else:
+        "Before you head home for the day, you can feel all the sexual tension you've built up throughout the day, so you decide to make a booty call."
+    $ booty_list = lust_get_booty_call_list()
+    call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + booty_list + ["No one"]], draw_hearts_for_people = True))
+    if _return == "No one" or _return == None:
+        "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
+        return
+    $ the_person = _return
+    "You decide to text [the_person.possessive_title]"
+    show screen person_info_ui(the_person)
+    $ mc.start_text_convo(the_person)
+    mc.name "Hey, I'm bored. You DTF tonight?"
+    the_person "Actually yeah. Your place?"
+    mc.name "Hell yeah"
+    if the_person.is_girlfriend():
+        mc.name "Can't wait to see you babe."
+    else:
+        "You make sure she has your address."
+    if mc_at_home():
+        "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
+        "Soon, you phone is going off."
+        the_person "I'm here."
+        $ mc.end_text_convo()
+        "You quickly let her in and sneak back to your room."
+    else:
+        $ mc.end_text_convo()
+        "You head home. Thankfully, the timing works out that you get home the same time [the_person.title] gets there."
+        $ mc.change_location(bedroom) #Make sure we're in our bedroom.
+        $ mc.location.show_background()
+        "You sneak into your room with her."
+    $ the_person.draw_person()
+    mc.name "Let's get down to business."
+    "You don't waste anytime. You pick her up and throw her on your bed."
+    $ the_person.draw_person(position = "missionary")
+    the_person "Ah!"
+    "She gives a little yelp as you jump on top of her. You start to make out, pushing yourelf up against her."
+    $ the_person.change_arousal(15)
+    $ mc.change_arousal(15)
+    "Pretty soon, clothes start coming off."
+    $ the_person.strip_outfit(position = "missionary")
+    the_person "Wow, you are really into it tonight! How do you want to start?"
+    call fuck_person(the_person, private = True) from _lust_booty_call_fuck_02
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) == 0:
+        "Frustrated, you finish up but still haven't cum."
+        the_person "Sorry... I guess I'm just not feeling it tonight."
+        $ the_person.change_happiness(-3)
+
+    elif the_report.get("girl orgasms", 0) == 0:
+        "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
+        the_person "Wow, I come all the way over here, and you can't even reciprocate?"
+        $ the_person.change_happiness(-3)
+        $ the_person.change_obedience(-3)
+    else:
+        "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
+        $ the_person.change_happiness(3)
+        $ the_person.change_obedience(3)
+    mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
+    $ the_person.draw_person(position = "sitting")
+    "[the_person.title] sits on the edge of your bed."
+    the_person "Okay"
+    "As you order a Lyft, she gets herself presentable."
+    $ the_person.review_outfit()
+    "You make small talk for a bit, but soon her ride is here, so you walk her to the door."
+    $ clear_scene()
+    "After she leaves, you lay down on your bed. It's nice having girls to come over anytime you ask like this. You quickly fall asleep."
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_booty_call_aftermath_01
+    return
+
+
+label lust_booty_call_unit_test():
+    $ mc.free_clarity = 0
+    $ mc.change_locked_clarity(1000)
+    if not lust_booty_call_intro_requirement():
+        "Intro requirements not met! This test may fail."
+    call lust_booty_call_intro_label() from _lust_booty_unit_test_1
+    $ mc.energy = mc.max_energy
+    $ mc.change_locked_clarity(mc.free_clarity * 3)
+    $ time_of_day = 4
+    if not lust_booty_call_requirement():
+        "Booty Call requirements not met! This test may fail."
+    call lust_booty_call_label() from _lust_booty_unit_test_2
+    "Unit test successful completion."
+    return
