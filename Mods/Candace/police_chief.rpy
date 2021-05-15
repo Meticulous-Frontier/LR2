@@ -59,6 +59,10 @@ init 5 python:
         police_chief.generate_home()
         police_chief.set_schedule(police_chief.home, times = [0,4])
         police_chief.set_schedule(police_station, times = [1,2,3])  # for now no free-roam (workaholic)
+        police_chief.set_schedule(mall, days=[0,2,4], times=[1]) # patrol mall
+        police_chief.set_schedule(downtown, days=[1,3], times=[2]) # patrol downtown
+        police_chief.set_schedule(downtown_bar, days=[5,6], times=[3]) # patrol bar
+        police_chief.set_schedule(strip_club, days=[5,6], times=[4]) # patrol strip club (Does she have a kinky side?)
         police_chief.home.add_person(police_chief)
         return
 
