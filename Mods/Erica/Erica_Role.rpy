@@ -237,6 +237,36 @@ init -2 python:
             return True
         return False
 
+    def erica_lily_instapic_setup_requirement(person):
+        if person.location == lily_bedroom:
+            return True
+        return False
+
+    def erica_lily_instapic_proposal_requirement(person):
+        if person.location == gym:
+            return True
+        return False
+
+    def erica_lily_instapic_intro_requirement():
+        if time_of_day == 4 and day%7 == 5:
+            return True
+        return False
+
+    def erica_lily_post_photoshoot_requirement(person):
+        if time_of_day > 0 and day%7 < 5:
+            return True
+        return False
+
+    def erica_post_photoshoot_requirement(person):
+        if person.location == gym:
+            return True
+        return False
+
+    def erica_lily_weekly_photoshoot_requirement(person):
+        if person.location == lily.location and time_of_day == 4 and day%7 == 5:
+            return True
+        return False
+
     def erica_ghost_requirement():
         if renpy.random.randint(0,100) < 20:
             return True
@@ -273,9 +303,12 @@ init -1 python:
     erica_money_problems_yoga_start = Action("Talk to Erica about yoga", erica_money_problems_yoga_start_requirement, "erica_money_problems_yoga_start_label")
     erica_yoga_event_intro = Action("First yoga class", erica_yoga_event_intro_requirement, "erica_yoga_event_intro_label")
     erica_weekly_yoga = Action("Weekly yoga class", erica_weekly_yoga_requirement, "erica_weekly_yoga_label")
-
-
-
+    erica_lily_instapic_setup = Action("Talk to Lily about Erica", erica_lily_instapic_setup_requirement, "erica_lily_instapic_setup_label")
+    erica_lily_instapic_proposal = Action("Propose Instapic session to Erica", erica_lily_instapic_proposal_requirement, "erica_lily_instapic_proposal_label")
+    erica_lily_instapic_intro = Action("Instapic session with Lily and Erica", erica_lily_instapic_intro_requirement, "erica_lily_instapic_intro_label")
+    erica_lily_post_photoshoot = Action("Ask Lily about Instapic results", erica_lily_post_photoshoot_requirement, "erica_lily_post_photoshoot_label")
+    erica_post_photoshoot = Action("Convince Erica to continue Insta", erica_post_photoshoot_requirement, "erica_post_photoshoot_label")
+    erica_lily_weekly_photoshoot = Action("Weekly instapic session with Lily", erica_lily_weekly_photoshoot_requirement, "erica_lily_weekly_photoshoot_label")
 
     erica_role = Role(role_name ="College Athlete", actions =[erica_get_to_know , erica_phase_one, erica_phase_two, erica_protein_shake, erica_house_call, erica_money_problems_update], hidden = True)
 
@@ -1296,6 +1329,7 @@ label erica_money_problems_label(the_person):
     elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
         "Maybe you could talk to [lily.title] into letting [the_person.title] join her for some of her Insta-pic sessions once in a while?"
         $ erica.event_triggers_dict["insta_pic_started"] = True
+        $ lily.add_unique_on_talk_event(erica_lily_instapic_setup)
     $ erica.event_triggers_dict["looking_for_work"] = True
 
     return
@@ -1312,6 +1346,7 @@ label erica_money_problems_update_label(the_person):
     if the_person.event_triggers_dict.get("insta_pic_started", False) == False and lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
         "Maybe you should try talking to [lily.title]? You recently started taking Insta-pics of her. Maybe [the_person.title] could join in for a session once in a while?"
         $ the_person.event_triggers_dict["insta_pic_started"] = True
+        $ lily.add_unique_on_talk_event(erica_lily_instapic_setup)
     if the_person.event_triggers_dict.get("yoga_quest_started", False) == False and mc.business.hr_director:
         "Maybe you could check with [mc.business.hr_director.title] and see if she has any ideas?"
         $ erica.event_triggers_dict["yoga_quest_started"] = True
@@ -2117,11 +2152,14 @@ label erica_lily_instapic_setup_label(the_person):#This should be an event assig
     mc.name "Hey, she's a good person, just trying to make ends meet. Do we have a deal?"
     the_person "Yeah, we have a deal. You think this will really help my channel?"
     mc.name "Speaking as a guy... Yes... Having two hot college girls dressing up for pics will be perfect!"
-    the_person "Okay. Did you need anything else?"
+    the_person "Good point! Okay, Did you need anything else?"
+    $ erica.add_unique_on_room_enter_event(erica_lily_instapic_proposal)
 
     return
 
 label erica_lily_instapic_proposal_label(the_person): #This should be assigned to Erica
+    $ the_person.draw_person()
+    "You spot [the_person.possessive_title]. She appears to be in between workout equipment."
     mc.name "I have an idea for something you could do to bring in a little extra money."
     the_person "Oh? What is it?"
     mc.name "My sister, who you may actually know her from your classes, runs an Insta-pic channel where she makes some extra money modeling clothes."
@@ -2148,6 +2186,7 @@ label erica_lily_instapic_proposal_label(the_person): #This should be assigned t
     mc.name "Okay. I'll text you my address. I'll give [lily.name] your contact info also. She might need your clothes sizes."
     the_person "Alright. I'll see you on Saturday!"
     "You let [the_person.possessive_title] get back to her workout. You text [lily.title] about [the_person.title]'s info. You can't wait to snap some sexy pics of the duo!"
+    $ mc.business.add_mandatory_crisis(erica_lily_instapic_intro)
     return
 
 label erica_lily_instapic_intro_label():
@@ -2155,7 +2194,7 @@ label erica_lily_instapic_intro_label():
     $ scene_manager = Scene()  #Clean Scene
 
     "It's Saturday evening, which means it's time for a sexy photo shoot with [lily.title] and [erica.title]! You head home and knock on [lily.possessive_title]'s door. She swings it open."
-    $ scene_manager.add_actor(the_person)
+    $ scene_manager.add_actor(lily)
     lily "Hey, any word from your friend?"
     mc.name "Not yet."
     lily "Are you sure she's gonna make it? I teased on my channel that I have a surprise for them tonight. It's gonna be hard to come up with something if she doesn't show up!"
@@ -2181,6 +2220,7 @@ label erica_lily_instapic_intro_label():
     "[erica.possessive_title] looks at you, surprise on her face."
     erica "[erica.mc_title]... Is that true?"
     mc.name "Well... yeah... I mean, about where the fee is coming from. I just want everyone here to be successful. This is gonna be great for both of you, and there's no strings attached to the money."
+    $ erica.change_love(3)
     "[erica.title] smirks at you."
     erica "I see. Well, I'm here now! We should get started."
     lily "Right! Let me show you what I got for us for tonight!"
@@ -2188,21 +2228,132 @@ label erica_lily_instapic_intro_label():
     "After a bit, [lily.title] moves to get things started."
     lily "Alright, let's go with these!"
     # todo start stripping
+    $ scene_manager.strip_actor_outfit(lily)
     "[lily.title] starts to take her clothes off, surprising [erica.title]."
     erica "Whoa, like, right here? In front of him?"
     "[erica.possessive_title] seems a little unsure."
     lily "It's okay, he doesn't mind!"
     "She starts to protest again, but [lily.title] continues to strip down. Soon she decides to just follow her and starts to strip also."
+    $ scene_manager.strip_actor_outfit(erica)
     if erica.has_taboo(["bare_pussy", "bare_tits"]):
-        "[If taboo] Erica uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
+        "[erica.title] uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
         $ erica.break_taboo("bare_pussy")
         $ erica.break_taboo("bare_tits")
 
     "When they finish, [lily.title] hands her the outfit. They both quickly get dressed. The outfits look great."
+    $ insta_outfit = insta_wardrobe.pick_random_outfit()
+    $ builder = WardrobeBuilder(erica)
+    $ lily.apply_outfit(insta_outfit, update_taboo = True)
+    $ erica.apply_outfit(builder.personalize_outfit(insta_outfit.get_copy(), coloured_underwear = True, max_alterations = 2), update_taboo = True)
+    $ scene_manager.update_actor(lily)
+    $ scene_manager.update_actor(erica)
+    $ mc.change_locked_clarity(25)
     erica "It's... A little skimpy, don't you think?"
     lily "That's the point! A little showy, but leave the guys thirsty and they'll come back again and again!"
+    "[erica.possessive_title] looks at you. At first, you see uncertainty in her eyes, but then your eyes meet. You can almost see her confidance return when she observes your reaction."
+    erica "What do you think, [erica.mc_title]? Will this bring in lots of views?"
+    $ scene_manager.update_actor(erica, position = "back_peek")
+    "[erica.title] turns and gives you a good look at her back side. There's a large lump in your throat as you try to reply."
+    mc.name "I mean... I can only speak for myself, and I would check it out..."
+    $ erica.change_happiness(3)
+    $ erica.change_love(2)
+    $ erica.change_slut_temp(2)
+    lily "Oh god, look at him! His brain cells can barely respond! You gonna be able to take these pictures [lily.mc_title]?"
+    $ scene_manager.update_actor(erica, position = "stand3")
+    mc.name "Yeah, of course, I got this."
+    erica "Ok... how do we start?"
+    lily "It's easy! Just follow my lead."
+    "[lily.possessive_title] hops up on her bed and gets down on her knees in a seductive pose."
+    $ scene_manager.update_actor(lily, position = "kneeling1", emotion = "happy")
+    "She pats the bed next to her, and soon [erica.title] is awkwardly climbing up next to her."
+    $ scene_manager.update_actor(erica, position = "kneeling1", emotion = "happy")
+    $ mc.change_locked_clarity(25)
+    lily "That's it. Just relax! You're so tense."
+    erica "Sorry... I've just never done anything like this before."
+    lily "I know, just look over at the dumb goofy face my brother is giving us right now."
+    "[erica.possessive_title] looks over at you, and her smile goes from obviously forced to much more genuine."
+    lily "Heyyyyy, that's it! Just pretend like we're not even taking pictures... you're just posing for [lily.mc_title]!"
+    "[lily.title] turns to you and you start taking pictures. It isn't long until [erica.title] gets the hang of it."
+    $ scene_manager.update_actor(lily, position = "back_peek", emotion = "happy")
+    $ scene_manager.update_actor(erica, position = "stand4", emotion = "happy")
+    $ mc.change_locked_clarity(25)
+    "You fit in a couple different poses, but all throughout [erica.possessive_title] watches your reactions closely."
+    $ scene_manager.update_actor(lily, position = "missionary", emotion = "happy")
+    $ scene_manager.update_actor(erica, position = "missionary", emotion = "happy")
+    "For the final set of pics you capture them laying in bed next to each. It is undeniably sexy."
+    mc.name "Alright, I think we've got all the shots we need."
+    $ scene_manager.update_actor(erica, position = "stand2", emotion = "happy")
+    "[erica.title] stands up."
+    erica "That was actually really fun... Do you think the pictures will make any money?"
+    mc.name "Definitely."
+    "[lily.title] gives [erica.title] money as payment for the session."
+    lily "Now, the question is, are you up for doing this again?"
+    erica "I'm not sure... I had fun tonight, but I need to think about it."
+    "[erica.possessive_title] quickly changes back into her regular clothes. You do your best not to make it obvious you are watching..."
+    $ scene_manager.strip_actor_outfit(erica)
+    "She looks over and gives you a little smirk."
+    $ mc.change_locked_clarity(15)
+    $ erica.apply_planned_outfit()
+    $ scene_manager.update_actor(erica, position = "stand2", emotion = "happy")
+    erica "Alright, well I have to get up early tomorrow for track practie, so I'd better get going."
+    lily "See you soon!"
+    $ scene_manager.remove_actor(lily)
+    "You walk with [erica.possessive_title] to the front door. When you get there, she turns to you and gives you a big hug."
+    $ scene_manager.update_actor(erica, position = "kissing")
+    "She gives you a quick kiss, then turns and leaves."
+    $ scene_manager.remove_actor(erica)
+    "You turn and walk about to your room. Damn... what a hot photo session!"
+    "You should wait a couple days, then talk to [lily.title] and see how the pics did..."
+    $ lily.add_unique_on_talk_event(erica_lily_post_photoshoot)
     return
 
+label erica_lily_post_photoshoot_label(the_person):
+    the_person "[the_person.mc_title]! You won't believe it."
+    mc.name "Yeah?"
+    the_person "My follower count went up alost FORTY PERCENT from the pics we did with [erica.name] the other night!"
+    mc.name "Wow, that's great!"
+    the_person "I know! I'm already getting all kinds of requests from people. You HAVE to convince her to do it again, okay?"
+    the_person "Do you think we could make this a regular thing? Every Saturday night?"
+    mc.name "I mean, that is kind of up to her, but I'll do what I can..."
+    the_person "Don't take no for an answer! I know you can do it bro! Tell her I double her fee!"
+    "Sounds like you should probably talk to [erica.possessive_title] about doing more insta pics..."
+    $ erica.add_unique_on_room_enter_event(erica_post_photoshoot)
+    return
+
+label erica_post_photoshoot_label(the_person):
+    $ the_person.draw_person(position = "walking_away")
+    "[erica.possessive_title] is pushing herself hard on the treadmill as you walk up to her."
+    mc.name "Hey, I've got good news."
+    the_person "Oh hey [the_person.mc_title]! What's the good news?"
+    mc.name "Its my sister. She said the photos were a huge success and she wants to know if you can take more photos."
+    the_person "Oh! Were they really? I wasn't sure that whole thing was going to work out."
+    mc.name "Apparently they turned out great. She wants to know if you want to meet up every Saturday night from here on out, and offered to double your fee."
+    the_person "Holy shit... one second..."
+    "[the_person.title] turns off the treadmill and hops off so she can talk to you better."
+    $ the_person.draw_person(position = "stand2")
+    the_person "That's $200 per session? That would be amazing!"
+    mc.name "So I'll tell her you'll be there?"
+    the_person "Are you going to be the one taking all the pictures?"
+    mc.name "I'll do my best, but I won't necessarily be able to do it every week. Dont worry, [lily.title] has a pretty good tripod she invested in lately..."
+    the_person "Okay. I'll do it! But just so you know, it would really mean a lot to me if you were the one there taking pictures. I don't know why, but having you there made it a lot easier."
+    mc.name "If I'm not busy, I'll be there."
+    the_person "Wow! Okay. This is going to be a huge change for me."
+    $ the_person.change_happiness(5)
+    $ the_person.change_love(5)
+    the_person "[the_person.mc_title]... I really appreciate this. I owe you so many favors at this point."
+    mc.name "Non sense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
+    "[the_person.title] gives you a playful punch on the shoulder."
+    the_person "Was there anything else you needed?"
+    $ the_person.set_alt_schedule(lily_bedroom, days = [5], times = [4])
+    $ lily.set_alt_schedule(lily_bedroom, days = [5], times = [4])  #This should already be set, but just in case, make sure she is there.
+    $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
+    $ erica.event_triggers_dict["insta_pic_intro_complete"] = True
+    return
+
+label erica_lily_weekly_photoshoot_label(the_person):
+    "This is the place where we have the weekly photoshoot. This is not yet implemented."
+    $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
+    return
 label erica_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
     the_person "Hey, I'm really sorry to have to do this, but I think I'm catching feelings."
