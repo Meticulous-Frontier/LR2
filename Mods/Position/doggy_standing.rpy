@@ -299,7 +299,10 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            if the_girl.get_opinion_score("bareback sex") > 0:
+
+            if the_girl.knows_pregnant():
+                the_girl "I just love it when you fill me up, I can take a load like that anytime..."
+            elif the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                 "[the_girl.possessive_title]'s voice starts to trail off."
             elif the_girl.sluttiness > 110:
