@@ -186,8 +186,13 @@ init 5 python:
 
         mc.business.run_turn()
         mc.run_turn()
+        if "police_chief" in globals(): # make sure changes to her uniform during work hours
+            if time_of_day > 0 and time_of_day < 4:
+                police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_turn()
+        if "perk_system" in globals():
+            perk_system.update()  #TEST to see if this is a good time for this.
         if debug_log_enabled:
             add_to_debug_log("Run Turn: {total_time:.3f}", start_time)
         return
@@ -200,6 +205,8 @@ init 5 python:
 
         mc.run_day()
         mc.business.run_day()
+        if "police_chief" in globals(): # make sure she always wears her uniform
+            police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_day()
         if debug_log_enabled:
@@ -373,8 +380,7 @@ label advance_time_end_of_day_label():
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
-        if "perk_system" in globals():
-            perk_system.update()  #TEST to see if this is a good time for this.
+
         mc.business.funds_yesterday = mc.business.funds
     return
 

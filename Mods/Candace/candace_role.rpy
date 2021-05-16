@@ -162,7 +162,6 @@ init 2 python:
         candace.add_role(candace_role)
 
         candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
-
         return
 
     def create_debug_candace(): #Use this function to make a version of Candace for debug purposes.
@@ -761,7 +760,13 @@ label candace_supply_order_discount_label():
 label candace_midnight_wakeup_label():
     python:
         the_person = candace
-        police_chief = get_police_chief()
+        if not "police_chief" in globals(): # save compatibility
+            add_police_chief_character()
+
+        if police_chief.title is None:  # haven't met, set title
+            police_chief.set_possessive_title("the police chief")
+            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_title("Officer " + police_chief.last_name)
 
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
@@ -1593,22 +1598,3 @@ init 3 python:
         if old_dict["Handjobs"] < candace.sex_record["Handjobs"] or old_dict["Blowjobs"] < candace.sex_record["Cunnilingus"] or old_dict["Cunnilingus"] < candace.sex_record["Blowjobs"]or old_dict["Fingered"] < candace.sex_record["Fingered"]:
             return 1
         return 0
-
-
-    def get_police_chief():
-        police_chief = make_person(force_random = True)
-        police_chief.set_possessive_title("the police chief")
-        police_chief.set_mc_title("Mr." + mc.last_name)
-        police_chief.set_title("Officer " + police_chief.last_name)
-        police_chief.outfit = get_police_uniform_outfit()
-        return police_chief
-
-    def get_police_uniform_outfit():
-        outfit = Outfit("Police Uniform")
-        outfit.add_upper(lace_bra.get_copy(), [.15, .15, .15, .95])
-        outfit.add_upper(dress_shirt.get_copy(), [.0, .0, .4, 1.0])
-        outfit.add_lower(lace_panties.get_copy(), [.15, .15, .15, .95])
-        outfit.add_lower(suitpants.get_copy(), [.15, .15, .15, 1.0])
-        outfit.add_feet(tall_boots.get_copy(), [.0, .0, .0, .95])
-        outfit.add_feet(short_socks.get_copy(), [.95, .95, .95, .95])
-        return outfit

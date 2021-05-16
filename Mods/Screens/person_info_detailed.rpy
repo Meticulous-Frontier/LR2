@@ -118,7 +118,9 @@ init 2: # Need to allow for None name roles in this screen as well.
                         for skill in dict_main_skills:
                             text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
-                        if the_person not in unique_character_list:
+                        if the_person.personality.default_prefix:
+                            text "Personality: " + the_person.personality.default_prefix.capitalize() style "menu_text_style"
+                        else:
                             text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
 
                 frame:

@@ -89,7 +89,7 @@ init 2 python:
         menu_tooltip = "Enables a series of renovations for your home into more impressive state (with some bonuses), including home dungeon.", category = "Home", is_crisis = True, crisis_weight = home_improvement_crisis_weight )
 
     # extend the default build phone menu function with renovations
-    def build_phone_menu_extended(org_func):
+    def build_phone_menu_home_improvement_extended(org_func):
         def phone_menu_wrapper():
             # run original function
             phone_menu = org_func()
@@ -108,11 +108,12 @@ init 2 python:
                 else:
                     bedroom_renovate_action = Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (unlocks other home improvements). Cost $" + str(mc_bedroom_renovation_cost) + ".")
                     phone_menu[2].insert(1, bedroom_renovate_action)
+
             return phone_menu
 
         return phone_menu_wrapper
 
-    build_phone_menu = build_phone_menu_extended(build_phone_menu)
+    build_phone_menu = build_phone_menu_home_improvement_extended(build_phone_menu)
 
     def home_renovation_completion_requirement(completion_day):
         if day > completion_day and mc.business.is_open_for_business():

@@ -103,7 +103,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
             if mc.arousal > 70:
                 "[the_girl.possessive_title]'s tight pussy feels so good. You are getting close to cumming."
                 mc.name "You feel amazing. You're gonna make me cum soon."
-                if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("bareback sex") > 0:
+                if the_girl.wants_creampie():
                     "[the_girl.possessive_title] looks back at you and smiles."
                     the_girl "Oh [the_girl.mc_title], I can't wait to feel you fill me up. I hope you finish deep!"
                     "[the_girl.possessive_title]'s ass quivers a bit, as she imagines you cumming deep inside her."
@@ -287,7 +287,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
         else:
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
-            if the_girl.get_opinion_score("creampies") > 0:
+            if the_girl.wants_creampie():
                 the_girl  "Yes! Fill me with your cum!"
             if the_girl.arousal > 110:
                 "You feel her pussy convulsing around your dick as she also starts to orgasm."
@@ -299,7 +299,10 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            if the_girl.get_opinion_score("bareback sex") > 0:
+
+            if the_girl.knows_pregnant():
+                the_girl "I just love it when you fill me up, I can take a load like that anytime..."
+            elif the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                 "[the_girl.possessive_title]'s voice starts to trail off."
             elif the_girl.sluttiness > 110:

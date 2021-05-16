@@ -21,7 +21,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
         "You feel her pussy convulsing around your dick as she also starts to orgasm."
 
-        if the_girl.get_opinion_score("creampies") > 0:
+        if the_girl.wants_creampie():
             the_girl  "Yes! Fill me with your cum!"
         $ the_girl.cum_in_vagina()
         $ bent_over_breeding.redraw_scene(the_girl)

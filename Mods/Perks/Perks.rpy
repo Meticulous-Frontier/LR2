@@ -29,6 +29,9 @@ init -1 python:
 
             for perk_name in expired_perks(self.ability_perks):
                 remove_perk(self.ability_perks, perk_name)
+
+            for perk_name in self.ability_perks:
+                self.ability_perks[perk_name].update()
             return
 
         def save_load(self):
@@ -271,7 +274,7 @@ init -1 python:
                 self.owner = mc
 
     class Ability_Perk(renpy.store.object):
-        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0, save_load = None):
+        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0, update_func = None, save_load = None):
             self.owner = owner
             self.description = description
             self.usable = usable            #Is this a usable ability
@@ -284,6 +287,7 @@ init -1 python:
             self.start_day = day
             self.usable_day = 0
             self.save_load = save_load
+            self.update_func = update_func
 
             if self.owner is None:
                 self.owner = mc
@@ -306,6 +310,12 @@ init -1 python:
         def toggle_perk(self):
             if self.togglable:
                 self.toggle = not self.toggle
+            return
+
+        def update(self):
+            if hasattr(self, "update_func"):
+                if self.update_func != None and self.toggle:
+                    self.update_func()
             return
 
     def second_wind_func():
