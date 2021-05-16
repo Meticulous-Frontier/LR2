@@ -2066,7 +2066,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "Okay. [starbuck.mc_title], want to take her in the back room and maybe start getting her lubed up a bit? I'll see if I can rig something."
     $ scene_manager.hide_actor(starbuck)
     "You walk with [the_person.title] to the back. She starts to strip down as you grab some lube."
-    $ scene_manager.strip_actor_outfit(the_person)
+    $ scene_manager.strip_full_outfit(person = the_person)
     $ scene_manager.update_actor(the_person, position = "missionary")
     "When she finishes, she hops up on the counter, spreading her legs for you."
     the_person "Alright boss, lube me up! Don't be gentle with it either!"
@@ -2178,7 +2178,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "That's true... okay, how do you want to... HEY!"
     $ scene_manager.update_actor(starbuck, position = "back_peek")
     "You grab [starbuck.title] and spin her around. You push her against the wall and quickly strip off her augmented panties."
-    $ scene_manager.strip_actor_outfit(starbuck)
+    $ scene_manager.strip_full_outfit(person = starbuck)
     "Your cock is out in an instant, and soon you are behind her."
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     $ mc.change_locked_clarity(30)
@@ -2362,13 +2362,13 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
 
         the_person_one "Yes! Ohhh, fuck. I win! Gotta get this thing off..."
         "[the_person_one.title] quickly strips her bottoms off."
-        $ scene_manager.strip_actor_outfit(the_person_one, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_person_one)
         "Once naked, she pulls a toy out from her cunt. It is vibrating and twisting in her hand."
 
         the_person_one "Ahh, so... This is the new product... Its a programmable phallus. I made a sample program that starts slow, but slowly gets faster and the vibrations get stronger over time."
         $ scene_manager.update_actor(the_person_two, position = "stand4")
         "You notice that [the_person_two.possessive_title] has recovered and is standing up now also. She it's starting to take her clothes off."
-        $ scene_manager.strip_actor_outfit(the_person_two, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_person_two)
         "You watch as she takes the same toy out of her snatch."
         the_person_two "Oh god that was great. Can I keep this one? How much do I owe you?"
 
@@ -2488,18 +2488,18 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 "Just watch":
                     pass
                 "Strip [the_person_one.title]'s top" if not the_person_one.tits_available():
-                    "You step behind [the_person_one.possessive_title]. You reach down and grop her tits through her top."
+                    "You step behind [the_person_one.possessive_title]. You reach down and grope her tits through her top."
                     mc.name "It's time to get these girls out in the open now..."
                     the_person_one "Whatever you say, partner..."
                     "You reach down and peel off her clothing. She doesn't resist at all."
-                    $ scene_manager.strip_actor_outfit(the_person_one)
+                    $ scene_manager.strip_full_outfit(person = the_person_one)
                     "[the_person_one.title] gives a little shiver, now that she's naked, but she doesn't say a word."
                     $ the_person_one.change_arousal(the_person_one.get_opinion_score("showing her tits") + 5)
                 "Strip [the_person_two.title]'s top" if not the_person_two.tits_available():
-                    "You step behind [the_person_two.possessive_title]. You reach down and grop her tits through her top."
+                    "You step behind [the_person_two.possessive_title]. You reach down and grope her tits through her top."
                     mc.name "It's time to get these girls out in the open now..."
                     "You reach down and peel off her clothing. She doesn't resist at all."
-                    $ scene_manager.strip_actor_outfit(the_person_two)
+                    $ scene_manager.strip_full_outfit(person = the_person_two)
                     "[the_person_two.title] gives a little shiver, now that she's naked."
                     the_person_two "Mmm... is it cold in here?"
                     $ the_person_two.change_arousal(the_person_two.get_opinion_score("showing her tits") + 5)

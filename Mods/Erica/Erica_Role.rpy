@@ -1776,11 +1776,11 @@ label erica_weekly_yoga_label(the_person):
         the_person "Hey everyone! Good news! We just got the okay, from now on - in celebration of the female body - this will be a nude yoga class!"
         "You hear several cheers go up from the group."
         "You notice that [yoga_assistant.possessive_title] has already started to strip down..."
-        $ scene_manager.strip_actor_outfit(yoga_assistant)
+        $ scene_manager.strip_full_outfit(person = yoga_assistant)
         $ mc.change_locked_clarity(20)
         the_person "We only ask, please leave your shoes on! This is a safety issue, in case a piece of glass or other object is left on the floor!"
         "When she finishes the announcement, [the_person.title] starts to strip down also."
-        $ scene_manager.strip_actor_outfit(the_person)
+        $ scene_manager.strip_full_outfit(person = the_person)
         $ mc.change_locked_clarity(20)
         "You look around and watch as the all the girls are also stripping. It is a surreal moment."
         # "You walk over to the computer terminal in a daze. You sit down, and let the girls get started in their official, company sponsored, all nude yoga class."
@@ -2077,8 +2077,8 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             if the_person.vagina_available():
                 "You quickly pull your cock out and put it in between her legs, getting it into position."
             else:
-                $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
-                "You quickly strip away every piece of cloth between you and [the_person.possessive_title]'s cunt."
+                "You quickly move away every piece of cloth between you and [the_person.possessive_title]'s cunt."
+                $ scene_manager.strip_to_vagina(person = the_person, prefer_half_off = True)
                 "You pull your cock out and put it in between her legs, getting it into position."
             $ scene_manager.update_actor(the_person, position = "against_wall")
             $ mc.change_locked_clarity(30)
@@ -2238,13 +2238,13 @@ label erica_lily_instapic_intro_label():
     "After a bit, [lily.title] moves to get things started."
     lily "Alright, let's go with these!"
     # todo start stripping
-    $ scene_manager.strip_actor_outfit(lily)
+    $ scene_manager.strip_full_outfit(person = lily)
     "[lily.title] starts to take her clothes off, surprising [erica.title]."
     erica "Whoa, like, right here? In front of him?"
     "[erica.possessive_title] seems a little unsure."
     lily "It's okay, he doesn't mind!"
     "She starts to protest again, but [lily.title] continues to strip down. Soon she decides to just follow her and starts to strip also."
-    $ scene_manager.strip_actor_outfit(erica)
+    $ scene_manager.strip_full_outfit(person = erica)
     if erica.has_taboo(["bare_pussy", "bare_tits"]):
         "[erica.title] uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
         $ erica.break_taboo("bare_pussy")
@@ -2296,7 +2296,7 @@ label erica_lily_instapic_intro_label():
     lily "Now, the question is, are you up for doing this again?"
     erica "I'm not sure... I had fun tonight, but I need to think about it."
     "[erica.possessive_title] quickly changes back into her regular clothes. You do your best not to make it obvious you are watching..."
-    $ scene_manager.strip_actor_outfit(erica)
+    $ scene_manager.strip_full_outfit(person = erica)
     "She looks over and gives you a little smirk."
     $ mc.change_locked_clarity(15)
     $ erica.apply_planned_outfit()

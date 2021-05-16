@@ -325,7 +325,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
         "You take your hand off her back and run it down along her ass crack to her cunt. You can feel it is moist and ready for you already!"
     else:
         "You take your hand off her back and start to pull off all the clothing between you and her cunt."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_person, prefer_half_off = True)
         "Once bare, you run your hand down along her ass crack to her cunt. You can feel it is moist and ready for you already!"
     $ the_person.break_taboo("bare_pussy")
     $ mc.change_locked_clarity(20)
@@ -640,8 +640,8 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "[the_person.title] is waiting for you as you step inside. You lock the stall and she immediately wraps her arms around you."
             the_person "Mmm, the glory hole is hot, but I am craving a more personal touch..."
             if not the_person.outfit.vagina_available():
-                "You grab her ass for a bit, then start to peel off her clothes."
-                $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False, exclude_feet = True, exclude_upper = True)
+                "You grab her ass for a bit, then start to peel off some clothes."
+                $ scene_manager.strip_to_vagina(person = the_person, prefer_half_off = True)
             $ mc.change_locked_clarity(20)
             "You pin her to the stall wall. She lifts up one leg to give you better access and grabs your cock in her hand."
             $ scene_manager.update_actor(the_person, position = "against_wall")

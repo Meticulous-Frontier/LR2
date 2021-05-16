@@ -886,7 +886,7 @@ label anal_fetish_stephanie_bimbo_label(the_person):
     $ scene_manager.add_actor(the_person, position = "standing_doggy")
     $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] turns around and bends over. Your hands immediately get to work."
-    $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+    $ scene_manager.strip_to_vagina(person = the_person)
     "She wiggles her ass back and forth in front of you as you pull your dick out."
     the_person "Stick it in [the_person.mc_title]! I want to earn my special present!"
     "Without any hesitation you slide your cock into her tight hole."
@@ -924,11 +924,9 @@ label anal_fetish_stephanie_bimbo_label(the_person):
 label anal_fetish_stephanie_normal_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person, position = "stand4")
-    if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
-        pass
-    else:
+    if not the_person.outfit.vagina_available():
         "She starts to strip down."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = False)
+        $ scene_manager.strip_to_vagina(person = the_person)
     "She looks at you expectantly."
     the_person "Well? Why are you still wearing clothes? You said you would help!"
     # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093

@@ -71,10 +71,89 @@ init -2 python:
                 return actor.person.strip_outfit_to_max_sluttiness(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, narrator_messages = narrator_messages, display_transform = actor.display_transform, lighting = actor.lighting, temp_sluttiness_boost = temp_sluttiness_boost, position = actor.position, emotion = actor.emotion, scene_manager = self)
             return False
 
-        def strip_actor_outfit(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1):
-            actor = find_in_list(lambda x: x.person == person, self.actors)
-            if not actor is None:
-                actor.person.strip_outfit(top_layer_first = top_layer_first, exclude_upper = exclude_upper, exclude_lower = exclude_lower, exclude_feet = exclude_feet, display_transform = actor.display_transform, lighting = actor.lighting, position = actor.position, emotion = actor.emotion, delay = delay, scene_manager = self, wipe_scene = False)
+        def strip_full_outfit(self, person = None, strip_feet = False, strip_accessories = False, lighting = None, delay = 1):
+            strip_matrix = []
+            if person is None:
+                actors = [x for x in self.actors if x.visible]
+            else:
+                actors = [find_in_list(lambda x: x.person == person, self.actors)]
+
+            for actor in actors:
+                strip_list = actor.person.outfit.get_full_strip_list(strip_feet = strip_feet, strip_accessories = strip_accessories)
+                strip_matrix.append([actor, strip_list, False])
+
+            self.strip_actor_strip_matrix(strip_matrix, lighting = lighting, delay = delay)
+            return
+
+        def strip_to_underwear(self, person = None, visible_enough = True, avoid_nudity = False, lighting = None, delay = 1):
+            strip_matrix = []
+            if person is None:
+                actors = [x for x in self.actors if x.visible]
+            else:
+                actors = [find_in_list(lambda x: x.person == person, self.actors)]
+
+            for actor in actors:
+                strip_list = actor.person.outfit.get_underwear_strip_list(visible_enough = visible_enough, avoid_nudity = avoid_nudity)
+                strip_matrix.append([actor, strip_list, False])
+
+            self.strip_actor_strip_matrix(strip_matrix, lighting = lighting, delay = delay)
+            return
+
+        def strip_to_tits(self, person = None, visible_enough = True, prefer_half_off = False, lighting = None, delay = 1):
+            strip_matrix = []
+            if person is None:
+                actors = [x for x in self.actors if x.visible]
+            else:
+                actors = [find_in_list(lambda x: x.person == person, self.actors)]
+
+            for actor in actors:
+                half_off_instead = False
+                if prefer_half_off and actor.person.outfit.can_half_off_to_tits(visible_enough = visible_enough):
+                    strip_list = actor.person.outfit.get_half_off_to_tits_list(visible_enough = visible_enough)
+                    half_off_instead = True
+                else:
+                    strip_list = actor.person.outfit.get_tit_strip_list(visible_enough = visible_enough)
+
+                strip_matrix.append([actor, strip_list, half_off_instead])
+
+            self.strip_actor_strip_matrix(strip_matrix, lighting = lighting, delay = delay)
+            return
+
+        def strip_to_vagina(self, person = None, visible_enough = False, prefer_half_off = False, lighting = None, delay = 1):
+            strip_matrix = []
+            if person is None:
+                actors = [x for x in self.actors if x.visible]
+            else:
+                actors = [find_in_list(lambda x: x.person == person, self.actors)]
+
+            for actor in actors:
+                half_off_instead = False
+                if prefer_half_off and actor.person.outfit.can_half_off_to_vagina():
+                    strip_list = actor.person.outfit.get_half_off_to_vagina_list(visible_enough = visible_enough)
+                    half_off_instead = True
+                else:
+                    strip_list = actor.person.outfit.get_vagina_strip_list(visible_enough = visible_enough)
+
+                strip_matrix.append([actor, strip_list, half_off_instead])
+
+            self.strip_actor_strip_matrix(strip_matrix, lighting = lighting, delay = delay)
+            return
+
+        def strip_actor_strip_matrix(self, strip_matrix, lighting = None, delay = 1):
+            keep_stripping = True
+            while keep_stripping:
+                keep_stripping = False
+                for am in strip_matrix:
+                    actor = am[0]
+                    if am[1]:
+                        the_clothing = am[1].pop(0)
+                        if delay > 0:
+                            actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = am[2]) #Draw the strip choice being removed from our current outfit
+                        else:
+                            self.outfit.remove_clothing(the_clothing)
+                        keep_stripping = True
+                        renpy.pause(delay)
+            return
 
         def strip_actor_strip_list(self, person, strip_list, lighting = None, half_off_instead = False):
             actor = find_in_list(lambda x: x.person == person, self.actors)

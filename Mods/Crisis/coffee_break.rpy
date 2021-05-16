@@ -93,9 +93,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
                     person_three "Oh my, hello [person_three.mc_title], we didn't see you there."
                     "You tell the girls to take off their clothes."
 
-                    python:
-                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_two, temp_sluttiness_boost = 50)
-                        scene_manager.strip_actor_outfit_to_max_sluttiness(person_three, temp_sluttiness_boost = 50)
+                    $ scene_manager.strip_full_outfit()
 
                     call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
 
