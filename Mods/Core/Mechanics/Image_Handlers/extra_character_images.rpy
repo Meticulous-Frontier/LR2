@@ -14,12 +14,12 @@ init 2 python:
     secret_mask = Facial_Accessory("Secret Mask", 2, False, False, "Secret_Mask", False, False, 0, display_name = "masks", opacity_adjustment = .5)
     earings_list.append(secret_mask)
 
-    cop_blouse = Clothing("Cop Blouse", 2, True, True, "Cop_Blouse", True, False, 0, supported_patterns = {"Friezes":"Pattern_1"}, tucked = True, whiteness_adjustment = 0.2, display_name = "uniform",
+    cop_blouse = Clothing("Cop Blouse", 2, True, True, "Cop_Blouse", True, False, 0, supported_patterns = {"Friezes":"Pattern_1"}, tucked = True, whiteness_adjustment = 0.2, display_name = "shirt",
         can_be_half_off = True, half_off_regions = [breast_region], half_off_ignore_regions = [upper_arm_region, lower_arm_region], half_off_gives_access = True, half_off_reveals = True,
         constrain_regions = [torso_region, upper_arm_region, lower_arm_region, stomach_region])
     shirts_list.append(cop_blouse) # excluded from outfit creator / wardrobe builder
 
-    cop_pants = Clothing("Cop Pants", 2, True, True, "Cop_Pants", False, False, 0, whiteness_adjustment = 0.2, supported_patterns = {"Belt":"Pattern_1"}, display_name = "uniform",
+    cop_pants = Clothing("Cop Pants", 2, True, True, "Cop_Pants", False, False, 0, whiteness_adjustment = 0.2, supported_patterns = {"Belt":"Pattern_1"}, display_name = "pants",
         can_be_half_off = True, half_off_regions = [pelvis_region], half_off_ignore_regions = [upper_leg_region], half_off_gives_access = True, half_off_reveals = True,
         constrain_regions = [upper_leg_region, lower_leg_region, pelvis_region])
     pants_list.append(cop_pants) # excluded from outfit creator / wardrobe builder

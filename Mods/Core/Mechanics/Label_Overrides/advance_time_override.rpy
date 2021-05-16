@@ -186,6 +186,9 @@ init 5 python:
 
         mc.business.run_turn()
         mc.run_turn()
+        if "police_chief" in globals(): # make sure changes to her uniform during work hours
+            if time_of_day > 0 and time_of_day < 4:
+                police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_turn()
         if "perk_system" in globals():
@@ -202,6 +205,8 @@ init 5 python:
 
         mc.run_day()
         mc.business.run_day()
+        if "police_chief" in globals(): # make sure she always wears her uniform
+            police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_day()
         if debug_log_enabled:

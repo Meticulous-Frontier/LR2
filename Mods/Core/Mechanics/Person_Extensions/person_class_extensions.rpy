@@ -1539,8 +1539,7 @@ init -1 python:
 
     def apply_gym_outfit(self):
         if workout_wardrobe:
-            builder = WardrobeBuilder(self)
-            self.apply_outfit(builder.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            self.apply_outfit(self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
             # self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
@@ -1565,8 +1564,7 @@ init -1 python:
             # add black slips
             self.outfit.add_feet(slips.get_copy(), colour_black)
         elif workout_wardrobe:
-            builder = WardrobeBuilder(self)
-            self.apply_outfit(builder.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            self.apply_outfit(self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
             #self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
@@ -1595,20 +1593,33 @@ init -1 python:
 
     Person.apply_planned_outfit = apply_planned_outfit
 
-    def set_uniform_enhanced(self,uniform, wear_now = False):
-        if uniform is not None:
-            builder = WardrobeBuilder(self)
-            if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-                (self.planned_uniform, swapped) = builder.apply_bottom_preference(uniform.get_copy())
-            elif creative_colored_uniform_policy.is_active():
-                self.planned_uniform = builder.personalize_outfit(uniform.get_copy(),  max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
-            else:
-                self.planned_uniform = uniform.get_copy()
+    def set_uniform_enhanced(self, uniform, wear_now = False):
+        if uniform is None:
+            return
 
-            if wear_now:
-                self.wear_uniform()
+        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(uniform.get_copy())
+        elif creative_colored_uniform_policy.is_active():
+            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
+        else:
+            self.planned_uniform = uniform.get_copy()
+
+        if wear_now:
+            self.wear_uniform()
+        return
 
     Person.set_uniform = set_uniform_enhanced
+
+    def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, the_colour = the_colour, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
+
+    Person.personalize_outfit = personalize_outfit
+
+    def approves_outfit_color(self, outfit):
+        return WardrobeBuilder(self).approves_outfit_color(outfit)
+
+    Person.approves_outfit_color = approves_outfit_color
+
 
 ######################################
 # Extend give serum for added goal #
