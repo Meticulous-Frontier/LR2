@@ -1,8 +1,8 @@
 
 init 2 python:
     def TEMPLATE_mod_initialization():
-        #STart with her wardrobe and base outfit
-        TEMPLATE_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
+        #Start with her wardrobe and base outfit
+        TEMPLATE_wardrobe = wardrobe_from_xml("TEMPLATE_Wardrobe")  #Requires creation of a new wardrobe file. Alternatively, you can use one of the default ones, IE "Sarah_Wardrobe"
         TEMPLATE_base_outfit = Outfit("TEMPLATE's base accessories")
         the_glasses = modern_glasses.get_copy()
         the_glasses.colour = [.15, .15, .15, 1.0]
@@ -28,17 +28,19 @@ init 2 python:
 
         TEMPLATE.generate_home()
         TEMPLATE.set_schedule(TEMPLATE.home, times = [0,1,2,3,4])   #Hide TEMPLATE at home until we are ready to use her
-        TEMPLATE.home.add_person(TEMPLATE)
+                                                                    #Any unused times, girl will wander public areas during those time slots.
+        TEMPLATE.home.add_person(TEMPLATE)                          #Need to add her to the world or MC will not encounter her.
 
-        TEMPLATE.event_triggers_dict["intro_complete"] = False    # Use this section to init her event_triggers_dict
+        TEMPLATE.event_triggers_dict["intro_complete"] = False      #Use this section to init her event_triggers_dict. Useful for character story flags or variables.
 
-        # add appoint
-        #office.add_action(HR_director_appointment_action)
+        #*******
+        #We need some method to begin her story. Examples are mandatory crisis events that we can load here. If girl is wandering town, you can add it to her personality introduction.
 
-        # TEMPLATE_intro = Action("TEMPLATE_intro",TEMPLATE_intro_requirement,"TEMPLATE_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
+        # Below is an example of how you could make a mandatory event that would start the TEMPLATE character's story. The label and the requirement functions are not included in this template.
+        # TEMPLATE_intro = Action("TEMPLATE_intro",TEMPLATE_intro_requirement,"TEMPLATE_intro_label")
         # mc.business.add_mandatory_crisis(TEMPLATE_intro) #Add the event here so that it pops when the requirements are met.
 
-        # set relationships
+        # set town relationships 
         # town_relationships.update_relationship(TEMPLATE, kaya, "Daughter", "Mother")
         # town_relationships.update_relationship(nora, TEMPLATE, "Friend")
         # town_relationships.update_relationship(lily, TEMPLATE, "Rival")
