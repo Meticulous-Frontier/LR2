@@ -793,7 +793,7 @@ label ophelia_revenge_date_label():
     the_person "Oh god... can you... can you wrap it? I'm sorry I need you to wrap it up!"
     mc.name "Yeah, yeah."
     "You set her down for a second. You grab a condom from your wallet and start to put it on."
-    $ scene_manager.strip_actor_outfit(the_person)
+    $ scene_manager.strip_full_outfit(person = the_person)
     $ mc.condom = True
     "When you finish, you notice [the_person.title] seems to be wearing less clothes..."
     the_person "Oh god, I need you so bad. Fuck me [the_person.mc_title]!"

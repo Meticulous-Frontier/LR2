@@ -698,7 +698,7 @@ label candace_overhear_supply_order_label(the_person):
         "????" "I can't make out the label, there's too many colors in the background..."
         the_person "Oh! I know how to fix that."
         "You are hardly surprised when you see [the_person.title] start to take her top off."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_lower = True)
+        $ scene_manager.strip_to_tits(person = the_person)
         the_person "How about now?"
         $ mc.change_locked_clarity(10)
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."

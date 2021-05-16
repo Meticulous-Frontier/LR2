@@ -178,7 +178,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "Dumbfounded, you can only nod."
                 person_two "Yes! Oh just give me one second!!!"
                 "She starts to strip down."
-                $ scene_manager.strip_actor_outfit(person_two)
+                $ scene_manager.strip_full_outfit(person = person_two)
                 $ person_two.break_taboo("bare_tits")
                 $ person_two.break_taboo("bare_pussy")
                 "Now naked, she walks over to you and [person_one.possessive_title]."

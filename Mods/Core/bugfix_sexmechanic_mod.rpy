@@ -934,7 +934,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         $ scene_manager.add_actor(the_person, position = the_position.position_tag)
                         $ scene_manager.add_actor(the_watcher, display_transform = character_center_flipped)
                         the_watcher "Let me take off some clothes."
-                        $ scene_manager.strip_actor_outfit(the_watcher)
+                        $ scene_manager.strip_full_outfit(person = the_watcher)
                         call join_threesome(the_person, the_watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
                         $ report_log = _return
                         $ finished = True

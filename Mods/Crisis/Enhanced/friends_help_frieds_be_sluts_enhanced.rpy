@@ -242,10 +242,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 person_one "Well, here are mine. Come on [person_two.title], whip 'em out!"
                             else:
                                 person_one "Of course."
-                                if person_one.outfit.can_half_off_to_tits():
-                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_half_off_to_tits_list(), half_off_instead = True)
-                                else: #We need to strip something off completely.
-                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_tit_strip_list(), half_off_instead = False)
+                                $ scene_manager.strip_to_tits(person = person_one, prefer_half_off = True)
 
                                 if person_two.outfit.tits_visible():
                                     $ person_one.break_taboo("bare_tits")
