@@ -3,16 +3,16 @@ init 2 python:
         return [x for x in known_people_in_the_game() if x.has_breeding_fetish()]
 
     def get_highly_fertile_breeder():
-        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.is_highly_fertile()])
+        return get_random_from_list([x for x in get_breeding_fetish_list() and x.is_highly_fertile() and not x.is_employee()])
 
     def get_highly_fertile_employee_breeder():
-        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.is_highly_fertile() and x.is_employee()])
+        return get_random_from_list([x for x in get_breeding_fetish_list() and x.is_highly_fertile() and x.is_employee()])
 
     def get_pregnant_breeder():
-        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(breeding_fetish_role) and x.knows_pregnant()])
+        return get_random_from_list([x for x in get_breeding_fetish_list() and x.knows_pregnant()])
 
     def get_family_breeder():
-        return get_random_from_list(x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.is_family())
+        return get_random_from_list(x for x in get_breeding_fetish_list() and x.is_family())
 
     def breeding_fetish_high_fertility_crisis_requirement():
         if mc_at_home() and time_of_day==4:
@@ -27,15 +27,16 @@ init 2 python:
         return False
 
     def breeding_fetish_family_sleep_crisis_requirement():
-        return False #Disable for now
+        return False #Disable for now, when enabled add not x.is_family() to get_highly_fertile_breeder()
         if mc_at_home() and time_of_day == 4:
             if get_family_breeder():
                 return True
         return False
 
     def breeding_fetish_employee_high_fertility_crisis_requirement():
-        if mc.is_at_work() and mc.business.is_open_for_business() and get_highly_fertile_employee_breeder():
-            return True
+        if mc.is_at_work() and mc.business.is_open_for_business():
+            if get_highly_fertile_employee_breeder():
+                return True
         return False
 
     breeding_fetish_high_fertility_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
@@ -145,7 +146,6 @@ label breeding_fetish_high_fertility_crisis_label():
 label breeding_fetish_happy_breeder_crisis_label():
     $ the_person = get_pregnant_breeder()
     $ the_person.event_triggers_dict["LastBreedingFetish"] = day
-    $ builder = WardrobeBuilder(the_person)
     if the_person == None:
         return
     if the_person.energy < 80:
@@ -156,7 +156,7 @@ label breeding_fetish_happy_breeder_crisis_label():
         "You hear a knock on your door."
         "You stand up and open your door. It's [the_person.title], dressed very nicely..."
 
-        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
+        $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         $ mc.change_locked_clarity(20)
         "Its [the_person.possessive_title]. She steps into your room, closes your door, and locks it..."
@@ -169,7 +169,7 @@ label breeding_fetish_happy_breeder_crisis_label():
         $ mc.change_location(hall)
         $ mc.location.show_background()
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
-        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_outfit))
+        $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         $ mc.change_locked_clarity(20)
         ###Draw the girl###
@@ -317,7 +317,6 @@ label breeding_fetish_family_sleep_crisis_label():
     $ the_person = get_family_breeder()
     if the_person = None:
         return
-    $ builder = WardrobeBuilder(the_person)
     if the_person == lily:
 
         $ mc.change_location(bedroom)
@@ -326,7 +325,7 @@ label breeding_fetish_family_sleep_crisis_label():
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
         the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
         "You invite her in. You immediately start to get aroused when you see what she is wearing."
-        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_blue_outfit))
+        $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_blue_outfit))
         $ the_person.draw_person()
         $ mc.change_locked_clarity(30)
         the_person "So... I was wondering... is it okay if I sleep in here with you again tonight?"
@@ -374,7 +373,7 @@ label breeding_fetish_family_sleep_crisis_label():
         $ mc.change_location(bedroom)
         $ mc.location.show_background()
         "You are just drifting off to sleep when you hear your bedroom door squeak open. You look up to see [the_person.possessive_title] walking in."
-        $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_black_outfit))
+        $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit))
         $ the_person.draw_person()
         mc.name "[the_person.title]?"
         the_person "Hi honey... I was feeling lonely over in my room, I thought maybe you might like some company tonight..."
@@ -403,8 +402,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_employee_breeder()
     if the_person == None:
         return
-    $ builder = WardrobeBuilder(the_person)
-    $ the_person.apply_outfit(builder.personalize_outfit(special_fetish_black_outfit))
+    $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit))
     if the_person.arousal <= 20:
         $ the_person.change_arousal(30)
     "As you are working, you get a text on your phone."

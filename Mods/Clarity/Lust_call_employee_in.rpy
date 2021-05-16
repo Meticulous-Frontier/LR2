@@ -1,4 +1,4 @@
-init 1 python:
+init 2 python:
     def lust_blowjob_intro_requirement():
         if mc.business.is_open_for_business(): #Only trigger if people are in the office.
             if mc.is_at_work(): #Check to see if the main character is at work
@@ -8,16 +8,11 @@ init 1 python:
 
     def lust_blowjob_office_requirement():
         if mc.business.is_open_for_business(): #Only trigger if people are in the office.
-            if mc.is_at_work(): #Check to see if the main character is at work
-                if get_lust_tier() > 2:
-                    return True
-                else:
-                    return "Not enough Lust"
+            if get_lust_tier() > 2:
+                return True
+            return "Not enough Lust"
         else:
-            return "Business isn't open"
-
-
-init 2 python:
+            return "Only during business hours"
 
     def get_willing_lust_blowjob_girl_list():
         willing_blowjob_list = []
@@ -49,8 +44,7 @@ label lust_blowjob_intro_label():
     "As you are looking around though, you start to rethink this decision."
     "You own this business. You employee all these women. With the progress you've made with the serums, surely you could convince someone to help you out?"
     "You pull up your employee list on your computer... who should you call down?"
-    $ emp_list = get_willing_lust_blowjob_girl_list()
-    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + emp_list], draw_hearts_for_people = False))
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + get_willing_lust_blowjob_girl_list()], draw_hearts_for_people = False))
     $ the_person = _return
     if the_person == None:
         return
@@ -63,7 +57,7 @@ label lust_blowjob_intro_label():
     the_person "Oh... okay..."
     "She does as you instruct before walking over to your desk and sitting down across from you."
     $ the_person.draw_person(position = "sitting")
-    mc.name "Okay, I'm going to get straight to the point. I can't focus on work becuase of all the distractions around here. I need you to get me off so I can get back to work."
+    mc.name "Okay, I'm going to get straight to the point. I can't focus on work because of all the distractions around here. I need you to get me off so I can get back to work."
     the_person "Oh! Wow I didn't realize... god you scared me calling me in here like this!"
     if the_person.has_taboo("sucking_cock"):
         "[the_person.title] gets a shy smile on her face."
@@ -107,7 +101,7 @@ label lust_blowjob_intro_label():
     "Lust has always been a taboo thing, to be shoved down and repressed, until you have the rare opportunity to utilize it."
     "But now... why bother repressing it? You make a mental note to stop repressing it. Now whenever you would normally gain lust, you gain extra."
     $ add_lust_gain_perk()
-    "You have gained a new perk! Everytime you normally gain lust, you gain 5 extra."
+    "You have gained a new perk! Every time you normally gain lust, you gain 5 extra."
     $ office.add_action(lust_blowjob_office)
     #TODO link up the room event here.
     return
@@ -116,8 +110,7 @@ label lust_blowjob_office_label():
     "You head into your office and sit down at your computer."
     $ ceo_office.show_background()
     "All the skin and sexy outfits you've been exposed to at work has got you hard as a rock and you need some relief. You decide to call an employee in for a blowjob."
-    $ emp_list = lust_blowjob_build_employee_list()
-    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + emp_list], draw_hearts_for_people = True))
+    call screen enhanced_main_choice_display(build_menu_items([["Call in"] + lust_blowjob_build_employee_list()], draw_hearts_for_people = True))
     if _return == "Leave" or _return == None:
         "After looking at your employee list, you change your mind. Maybe another opportunity will present itself later."
         return
@@ -131,7 +124,7 @@ label lust_blowjob_office_label():
     the_person "Oh... okay..."
     "She does as you instruct before walking over to your desk and sitting down across from you."
     $ the_person.draw_person(position = "sitting")
-    mc.name "Okay, I'm going to get straight to the point. I can't focus on work becuase of all the distractions around here."
+    mc.name "Okay, I'm going to get straight to the point. I can't focus on work because of all the distractions around here."
     mc.name "I need you to give me a blowjob."
     $ slut_base = the_person.effective_sluttiness("sucking_cock")
     $ final_slut_requirement, final_slut_cap  = blowjob.calculate_position_requirements(the_person, False)
@@ -189,8 +182,7 @@ label lust_blowjob_office_label():
             $ the_person.draw_person(position = "walking_away")
             "[the_person.possessive_title] turns and walks out of your office."
 
-
-    elif  slut_base > final_slut_requirement:   #She accepts
+    elif slut_base > final_slut_requirement:   #She accepts
         the_person "Oh! Wow I didn't realize... god you scared me calling me in here like this!"
         if the_person.has_taboo("sucking_cock"):
             "[the_person.title] gets a shy smile on her face."
@@ -237,7 +229,7 @@ label lust_blowjob_office_label():
         the_person "Of course..."
         mc.name "Then just think of this as an extra task that I am assigning. You can say no, if you choose, but it would really be helping me out if you would do it."
         if the_person.has_taboo("sucking_cock"):
-            the_person "I suppose, but we... we just haven't done anyhting like this before!"
+            the_person "I suppose, but we... we just haven't done anything like this before!"
             mc.name "I know, but it would really help me out. And it would help the company, if I can finally concentrate on my work."
             "[the_person.title] takes several seconds to consider what you are saying."
             the_person "I suppose... I could try it."

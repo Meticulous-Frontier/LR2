@@ -154,8 +154,8 @@ init -2 python:
     def erica_phase_two_requirement(person):
         if person.event_triggers_dict.get("erica_progress", 0) < 2:
             return False
-            if person.event_triggers_dict.get("erica_progress", 0) > 3:
-                return False
+        if person.event_triggers_dict.get("erica_progress", 0) > 3:
+            return False
         if time_of_day < 4:
             if mc.max_energy >= 140:
                 if person.effective_sluttiness() < 60:
@@ -2241,23 +2241,19 @@ label erica_lily_instapic_intro_label():
         $ erica.break_taboo("bare_tits")
 
     "When they finish, [lily.title] hands her the outfit. They both quickly get dressed. The outfits look great."
-    $ insta_outfit = insta_wardrobe.pick_random_outfit()
-    $ builder = WardrobeBuilder(erica)
-    $ lily.apply_outfit(insta_outfit, update_taboo = True)
-    $ erica.apply_outfit(builder.personalize_outfit(insta_outfit.get_copy(), coloured_underwear = True, max_alterations = 2), update_taboo = True)
+    $ lily.apply_outfit(insta_wardrobe.pick_random_outfit(), update_taboo = True)
+    $ erica.apply_outfit(erica.personalize_outfit(insta_wardrobe.pick_random_outfit(), coloured_underwear = True, max_alterations = 2), update_taboo = True)
     $ scene_manager.update_actor(lily)
     $ scene_manager.update_actor(erica)
     $ mc.change_locked_clarity(25)
     erica "It's... A little skimpy, don't you think?"
     lily "That's the point! A little showy, but leave the guys thirsty and they'll come back again and again!"
-    "[erica.possessive_title] looks at you. At first, you see uncertainty in her eyes, but then your eyes meet. You can almost see her confidance return when she observes your reaction."
+    "[erica.possessive_title] looks at you. At first, you see uncertainty in her eyes, but then your eyes meet. You can almost see her confidence return when she observes your reaction."
     erica "What do you think, [erica.mc_title]? Will this bring in lots of views?"
     $ scene_manager.update_actor(erica, position = "back_peek")
     "[erica.title] turns and gives you a good look at her back side. There's a large lump in your throat as you try to reply."
     mc.name "I mean... I can only speak for myself, and I would check it out..."
-    $ erica.change_happiness(3)
-    $ erica.change_love(2)
-    $ erica.change_slut_temp(2)
+    $ erica.change_stats(happiness = 3, love = 2, slut_temp = 2)
     lily "Oh god, look at him! His brain cells can barely respond! You gonna be able to take these pictures [lily.mc_title]?"
     $ scene_manager.update_actor(erica, position = "stand3")
     mc.name "Yeah, of course, I got this."
@@ -2295,7 +2291,7 @@ label erica_lily_instapic_intro_label():
     $ mc.change_locked_clarity(15)
     $ erica.apply_planned_outfit()
     $ scene_manager.update_actor(erica, position = "stand2", emotion = "happy")
-    erica "Alright, well I have to get up early tomorrow for track practie, so I'd better get going."
+    erica "Alright, well I have to get up early tomorrow for track practice, so I'd better get going."
     lily "See you soon!"
     $ scene_manager.remove_actor(lily)
     "You walk with [erica.possessive_title] to the front door. When you get there, she turns to you and gives you a big hug."
@@ -2334,12 +2330,11 @@ label erica_post_photoshoot_label(the_person):
     the_person "That's $200 per session? That would be amazing!"
     mc.name "So I'll tell her you'll be there?"
     the_person "Are you going to be the one taking all the pictures?"
-    mc.name "I'll do my best, but I won't necessarily be able to do it every week. Dont worry, [lily.title] has a pretty good tripod she invested in lately..."
+    mc.name "I'll do my best, but I won't necessarily be able to do it every week. Don't worry, [lily.title] has a pretty good tripod she invested in lately..."
     the_person "Okay. I'll do it! But just so you know, it would really mean a lot to me if you were the one there taking pictures. I don't know why, but having you there made it a lot easier."
     mc.name "If I'm not busy, I'll be there."
     the_person "Wow! Okay. This is going to be a huge change for me."
-    $ the_person.change_happiness(5)
-    $ the_person.change_love(5)
+    $ the_person.change_stats(happiness = 3, love = 3)
     the_person "[the_person.mc_title]... I really appreciate this. I owe you so many favors at this point."
     mc.name "Non sense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
     "[the_person.title] gives you a playful punch on the shoulder."
@@ -2354,6 +2349,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     "This is the place where we have the weekly photoshoot. This is not yet implemented."
     $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
     return
+
 label erica_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
     the_person "Hey, I'm really sorry to have to do this, but I think I'm catching feelings."
@@ -2363,7 +2359,6 @@ label erica_ghost_label(the_person):
     $ the_person.remove_person_from_game()
     $ casual_sex_create_athlete() #Create a new athlete so MC can try again if they choose.
     return
-
 
 
 init 2 python:

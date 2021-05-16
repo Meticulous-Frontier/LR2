@@ -1428,7 +1428,6 @@ label coffee_time_steph_gets_handsy_label():
 label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the person one in this label.
     $ the_person = ashley
     $ preferences = WardrobePreference(the_person)
-    $ builder = WardrobeBuilder(the_person)
     $ bystander = get_random_from_list(known_people_in_the_game(excluded_people = [ashley, stephanie]))
 
     if not bystander:
@@ -1452,12 +1451,11 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
         $ temp_string = "I know that the outfit " + preferences.evaluate_outfit_get_return(bystander.outfit, the_person.sluttiness + 10) + ", but what if I did something similar?"
         the_person "[temp_string]"
     "[stephanie.title] considers it for a moment."
-    if builder.approves_outfit_color(bystander.outfit):
+    if the_person.approves_outfit_color(bystander.outfit):
         stephanie "I suppose so. I mean the color was nice."
     else:
         stephanie "I don't know, I don't usually see you wear that colour."
-        $ temp_string = "I could do something like that but in " + the_person.favorite_colour() + "."
-        the_person "[temp_string]"
+        $ renpy.say(the_person, "I could do something like that but in " + the_person.favorite_colour() + ".")
         stephanie "That would be interesting."
     "[the_person.possessive_title] sips her coffee and thinks about it for a bit."
     stephanie "What do you think [stephanie.mc_title]? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think she would look good in that?"
@@ -1478,13 +1476,10 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
 
     python:
         del bystander
-        del builder
         del preferences
-        del temp_string
     return
 
 label ashley_clothes_shopping_label(the_person):
-    $ builder = WardrobeBuilder(the_person)
     "You decide to swing by the clothing store, where [the_person.title] said she would be at. After a few awkward minutes poking around the women's clothing, you spot her."
     $ the_person.draw_person()
     "She seems preoccupied and doesn't notice you until you walk up."
@@ -1517,7 +1512,7 @@ label ashley_clothes_shopping_label(the_person):
         "Although she doesn't say a word, [the_person.title] doesn't make any move to cover herself either. Her body is on display as she reaches for her outfit..."
     else:
         "[the_person.title] absentmindedly covers her mound with one hand as she reaches for her outfit."
-    $ the_person.apply_outfit(builder.personalize_outfit(ashley_get_observed_outfit(), coloured_underwear = True, max_alterations = 1))
+    $ the_person.apply_outfit(the_person.personalize_outfit(ashley_get_observed_outfit(), coloured_underwear = True, max_alterations = 1))
     $ the_person.draw_person()
     "When she finishes putting on her new outfit, she steps back so you can get a good look."
     the_person "Okay... What do you think?"
@@ -1631,7 +1626,6 @@ label ashley_test_outfit_scene():
     $ scene_manager = Scene()
     $ the_person = ashley
     $ preferences = WardrobePreference(the_person)
-    $ builder = WardrobeBuilder(the_person)
     $ bystander = get_random_from_list(known_people_in_the_game(excluded_people = [ashley, stephanie]))
 
     if not bystander:
@@ -1648,7 +1642,7 @@ label ashley_test_outfit_scene():
     $ scene_manager.remove_actor(bystander)
     the_person "Wow, did you see that?"
 
-    $ new_outfit = builder.personalize_outfit(bystander.outfit, the_colour = "the colour green", coloured_underwear = True, max_alterations = 1)
+    $ new_outfit = the_person.personalize_outfit(bystander.outfit, the_colour = "the colour green", coloured_underwear = True, max_alterations = 1)
 
     $ ashley.apply_outfit(new_outfit)
     $ stephanie.apply_outfit(new_outfit)
@@ -1657,7 +1651,6 @@ label ashley_test_outfit_scene():
 
     python:
         del bystander
-        del builder
         del preferences
     $ scene_manager.clear_scene()
     return
