@@ -5,7 +5,7 @@ init 2 python:
         erica_wardrobe = wardrobe_from_xml("Erica_Workout_Wardrobe")
         erica_base_outfit = Outfit("Erica's base accessories")
         the_eye_shadow = heavy_eye_shadow .get_copy()
-        the_eye_shadow.colour = [.18, .54, .34, 0.95]
+        the_eye_shadow.colour = [.20, .20, .37, 0.50]
         the_rings = copper_ring_set.get_copy()   #Change this
         copper_ring_set.colour = [.1,.36,.19,1.0]
         erica_base_outfit.add_accessory(the_eye_shadow)
@@ -16,12 +16,12 @@ init 2 python:
 
         #global erica_role
         global erica
-        erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_8",  tits="B", height = 0.92, hair_colour="golden blonde", hair_style = ponytail, skin="white" , \
+        erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_8",  tits="B", height = 0.92, hair_colour="chestnut brown", hair_style = short_hair, skin="white" , \
             eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", 2, False], ["classical", 1, False], ["yoga", 2, False], ["sports", 2, False]],
-            forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", -2, False]])
+            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["pants", 1, False], ["the colour blue", 2, False], ["yoga", 2, False], ["sports", 2, False]],
+            forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", 1, False]])
 
 
         erica.max_energy = 120
@@ -96,6 +96,15 @@ init 2 python:
         "missionary" : "You notice a couple girls' hands stray between their legs, their arousal on obvious display.",
         "standing_doggy" : "You wonder how many asses you could fill with cum before your cock refused to get hard again. You bet several."
     }
+
+    #Pose list. [0] is lily's pose, [1] is ericas, [2] is playful text, [3] is sexy text.
+    erica_insta_pose_pairs = [
+        ["back_peek", "standing_doggy", "The girls wiggle their asses a bit as you snap their pictures.", "[lily.title] is twerking her hips while [erica.possessive_title] gives herself a couple playful spanks."],
+        ["missionary","missionary", "The girl cross their inside legs across each other, getting close for the camera.", "The girls both put one hand between their legs, another on their chests, pretending they are masturbating."],
+        ["doggy","stand4", "[erica.title] puts a hand on [lily.possessive_title]'s lower back.", "[erica.title] gives some playful spank on [lily.possessive_title]'s ass."],
+        ["kneeling1","kneeling1", "The girls run their hands along their sides sensually for the camera.", "The girls put a hand between their legs, pretending to masturbate for the camera."],
+        ["blowjob","back_peek", "[lily.title] licks her lips while [erica.possessive_title] leans forward a bit, angling her ass toward the camera.","[lily.title] gets on her knees next to [erica.possessive_title], licking her lips and pretending to kiss her ass."]
+    ]
 
     def display_yoga_dialog(pose):
         renpy.say(None, erica_yoga_pose_descriptions[pose])
@@ -2351,9 +2360,153 @@ label erica_post_photoshoot_label(the_person):
     return
 
 label erica_lily_weekly_photoshoot_label(the_person):
-    "This is the place where we have the weekly photoshoot. This is not yet implemented."
+    $ scene_manager = Scene()
+    $ lily_insta_outfit = insta_wardrobe.pick_random_outfit()
+    $ builder = WardrobeBuilder(erica)
+    $ mc.change_location(lily_bedroom)
+    $ mc.location.show_background()
+    "You walk down the hall toward [lily.possessive_title]'s room. As you approach her door, you can hear laughter and giggling from the other side."
+    "Sounds like [erica.title] is already here! You knock on the door."
+    lily "Come in!"
+    $ scene_manager.add_actor(lily, display_transform = character_center_flipped, position = "back_peek")
+    $ scene_manager.add_actor(erica, position = "back_peek")
+    "As you open the door, the two girls and standing in front of [lily.title]'s closet, looking back at you."
+    lily "Oh hey [lily.mc_title]. Good timing! We were just picking out what to wear for tonights photos!"
+    erica "[lily.name] thinks we should match, but I was thinking about just wearing something else. What do you think?"
+    "It's clear the your opinion is important to her. You think about it for a moment."
+    menu:
+        "You should match":
+            $ erica_insta_outfit = lily_insta_outfit.get_copy()
+        "You should wear something similar, but not matching":
+            $ erica_insta_outfit = builder.personalize_outfit(lily_insta_outfit.get_copy())
+        "You should wear your own thing":
+            $ erica_insta_outfit = builder.personalize_outfit(insta_wardrobe.pick_random_outfit())
+    erica "Thanks! I'm still pretty new at this, so its nice to have your opinion on it."
+    $ erica.change_happiness(1)
+    $ erica.change_obedience(1)
+    lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"
+    erica "Yeah, me too. Do you have any flavored seltzers?"
+    "You think for a second. You could offer to go get them their drinks, and that would give you an opportunity to give them a serum..."
+    "If you do, you will probably will the chance to watch them changing..."
+    menu:
+        "Grab the drinks":
+            mc.name "Yeah we have seltzer. Let me go grab drinks for everyone while you two get changed."
+            erica "Thanks! Lots of ice with mine please!"
+            lily "Me too. You're gonna like the outfits we got for this week bro!"
+            $ scene_manager.clear_scene()
+            "You step out of [lily.possessive_title]'s room and head to the kitchen."
+            $ mc.change_location(kitchen)
+            $ mc.location.show_background()
+            "First, you make a glass with lots of ice for [erica.title]..."
+            menu:
+                "Add serum to [erica.title]'s drink" if mc.inventory.get_any_serum_count() > 0:
+                    call give_serum(erica) from _call_give_serum_erica_insta_20
+                    if _return:
+                        "You add a dose to her drink, then top it off with seltzer."
+                    else:
+                        "You think about adding a dose of serum to her drink, but decide against it."
+
+                "Add serum to [erica.title]'s drink\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+                    pass
+
+                "Leave her drink alone":
+                    "You top it off with seltzer."
+            "Next, you grab another glass for [lily.title] and a soda."
+            menu:
+                "Add serum to [lily.title]'s drink" if mc.inventory.get_any_serum_count() > 0:
+                    call give_serum(lily) from _call_give_serum_lily_insta_20
+                    if _return:
+                        "You add a dose to her drink, then top it off with soda."
+                    else:
+                        "You think about adding a dose of serum to her drink, but decide against it."
+
+                "Add serum to [lily.title]'s drink\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+                    pass
+
+                "Leave her drink alone":
+                    "You top it off with soda."
+            "You pick up both drinks and walk back down the hall to [lily.title]'s room. You open the door and step inside."
+            $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
+            $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)
+            $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
+            $ scene_manager.add_actor(erica)
+            $ mc.change_locked_clarity(25)
+            "When you step into the room, you see the girls are both dressed and ready for their photoshoot."
+        "Watch them strip":
+            lily "Yeah, we have seltzer I think. Let me go grab drinks."
+            $ scene_manager.remove_actor(lily)
+            "[lily.possessive_title] leaves the room, leaving you for a minute with [erica.title]."
+            #TODO small talk?
+            "You make a little bit of awkward small talk until she gets back."
+            $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
+            lily "Alright, let's get ready!"
+            "The girls start to strip down."
+            $ scene_manager.strip_actor_outfit(lily, exclude_feet = False)
+            $ scene_manager.strip_actor_outfit(erica, exclude_feet = False)
+            $ mc.change_locked_clarity(40)
+            "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
+            $ erica.change_slut_temp(2)
+            $ erica.change_happiness(2)
+            $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
+            $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)
+            $ scene_manager.update_actor(lily)
+            $ scene_manager.update_actor(erica)
+            $ mc.change_locked_clarity(20)
+            "Once they get dressed, the girls are ready for their photoshoot."
+    $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+    $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
+    $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
+    "You snap the first round of pictures."
+    if (erica.sluttiness > 20 and lily.sluttiness > 20):
+        "The girls seem relaxed. The pictures are coming out natural and they look great together."
+        $ mc.change_locked_clarity(10)
+        mc.name "Alright lets do another set, these are great."
+        $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+        $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
+        $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
+        "You snap the second round of pictures"
+        if (erica.sluttiness > 40 and lily.sluttiness > 40):
+            mc.name "That looks great. Remember, be playful!"
+            "[current_pos[2]]"
+            $ mc.change_locked_clarity(30)
+            mc.name "Nice, these are great. How about one more set?"
+            "The girls agree and get into a new position."
+            $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+            $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
+            $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
+            if (erica.sluttiness > 60 and lily.sluttiness > 60):
+                mc.name "Remember, these are for the thirsty insta boys. Work it for the camera!"
+                "[current_pos[3]]"
+                $ mc.change_locked_clarity(50)
+            else:
+                "You snap the final set of pictures. This should be good!"
+        else:
+            "You snap a second set of pictures. This should be good!"
+    else:
+        "As you snap the first set of pictures, it is clear that girls are faking the smiles and the pictures are looking unnatural."
+        mc.name "I'm not sure this is going to do it. Maybe we should try a different pose?"
+        $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+        $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
+        $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
+        "The girls get into a second pose, but the pictures still feel a little mechanical."
+        "They look okay, but you wonder if they could do even better if you could loosen them up a bit more."
+    $ scene_manager.update_actor(lily, position = lily.idle_pose)
+    $ scene_manager.update_actor(erica, position = erica.idle_pose)
+    #TODO special requests. IE topless, kissing, etc.
+    "With the pictures done, you give the camera back to [lily.possessive_title]"
+    lily "Thanks [lily.mc_title]! You're the best!"
+    erica "Yeah, thanks [erica.mc_title]. [lily.name] is it still okay if I spend the night?"
+    lily "Of course! I could really use your help studying for my exam coming up."
+    "You wish you could come up with a good excuse to stick around, but can't think of anything, so you say goodnight."
+    $ scene_manager.clear_scene()
+
     $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
+    $ del lily_insta_outfit
+    $ del erica_insta_outfit
+    $ del current_pos
+    call advance_time(no_events = False) from _call_advance_time_erica_insta_night_01
     return
+
 label erica_ghost_label(the_person):
     "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
     the_person "Hey, I'm really sorry to have to do this, but I think I'm catching feelings."
