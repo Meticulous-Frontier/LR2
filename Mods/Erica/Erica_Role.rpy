@@ -2488,6 +2488,8 @@ label erica_lily_weekly_photoshoot_label(the_person):
     $ scene_manager.update_actor(lily, position = lily.idle_pose)
     $ scene_manager.update_actor(erica, position = erica.idle_pose)
     #TODO special requests. IE topless, kissing, etc.
+    #TODO add outfits to wardrobes if they like them.
+    #TODO add new outfits?
     "With the pictures done, you give the camera back to [lily.possessive_title]"
     lily "Thanks [lily.mc_title]! You're the best!"
     erica "Yeah, thanks [erica.mc_title]. [lily.name] is it still okay if I spend the night?"
