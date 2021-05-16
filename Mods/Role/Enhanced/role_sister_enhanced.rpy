@@ -76,8 +76,8 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     else: #No problems here, strip away!
         "[the_sister.title] starts to strip down, and [the_mom.possessive_title] hurries to keep up."
 
-    $ scene_manager.strip_actor_outfit(the_sister, exclude_feet = False)
-    $ scene_manager.strip_actor_outfit(the_mom, exclude_feet = False)
+    # strip both actors simultaneously
+    $ scene_manager.strip_full_outfit(strip_feet = True)
 
     $ insta_outfit_mom = insta_wardrobe.pick_random_outfit()
     $ insta_outfit_sister = insta_wardrobe.pick_random_outfit()

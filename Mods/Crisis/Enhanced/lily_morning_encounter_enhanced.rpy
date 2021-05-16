@@ -221,7 +221,7 @@ label lily_morning_encounter_enhanced_label():
                                                 $ kitchen_threesome = True
                                 if kitchen_threesome == True:
                                     mc.name "Well then, I guess we need to decide who goes first."
-                                    $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_watcher, temp_sluttiness_boost = 50)
+                                    $ scene_manager.strip_full_outfit(person = the_watcher)
                                     call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from threesome_event_test_call_kitchen1
 
                                 else:
@@ -271,7 +271,7 @@ label lily_morning_encounter_enhanced_label():
                                                     mc.name "Your body is nothing to be ashamed of [the_watcher.possessive_title], in fact you could join us if you want."
                                                     the_watcher "That is such a generous offer. I guess I can change my breakfast plans."
                                                     mc.name "Well then, I guess we need to decide who goes first."
-                                                    $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_watcher, temp_sluttiness_boost = 50)
+                                                    $ scene_manager.strip_full_outfit(person = the_watcher)
                                                     call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from threesome_event_test_call_kitchen2
 
                                                 "Continue with [the_person.title]":
@@ -337,7 +337,7 @@ label lily_morning_encounter_enhanced_label():
                                                             $ kitchen_threesome = True
                                             if kitchen_threesome == True:
                                                 mc.name "Well then, I guess we need to decide who goes first."
-                                                $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_watcher, temp_sluttiness_boost = 50)
+                                                $ scene_manager.strip_full_outfit(person = the_watcher)
                                                 call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from threesome_event_test_call_kitchen3
                                             else:
                                                 call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_fuck_person_kitchenfuck2
@@ -381,7 +381,7 @@ label lily_morning_encounter_enhanced_label():
                                                     mc.name "I think maybe you need to be punished in her place."
                                                     the_watcher "If you think that is best [the_watcher.mc_title]."
                                                     $ the_watcher.change_obedience(10)
-                                                    $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_watcher, temp_sluttiness_boost = 50)
+                                                    $ scene_manager.strip_full_outfit(person = the_watcher)
                                                     call fuck_person(the_watcher, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_fuck_person_kitchenspank3
                                         else:
                                             call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True) from _call_fuck_person_kitchenspank

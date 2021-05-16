@@ -137,10 +137,7 @@ label mom_breakfast_action_label_medium():
             else:
                 menu:
                     "Pull Her Top Up" if the_person.sluttiness > 40:
-                        if the_person.outfit.can_half_off_to_tits():
-                            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
-                        else: #We need to strip something off completely.
-                            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
+                        $ scene_manager.strip_to_tits(person = the_person, prefer_half_off = True)
 
                         "You reach down and slowly remove her top, exposing her creamy tits."
                         $ the_person.break_taboo("bare_tits")
@@ -274,7 +271,7 @@ label mom_breakfast_action_label_high():
                 mc.name "Of course!"
                 "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title]'s door."
 
-                $ scene_manager.strip_actor_outfit(the_person)
+                $ scene_manager.strip_full_outfit(person = the_person)
                 "After no response, you knock again."
                 lily "What!?! I'm tired!"
                 mc.name "Me and mom are gonna have some fun, you should join us."
@@ -285,7 +282,7 @@ label mom_breakfast_action_label_high():
                     "Already basically ready to go, [lily.title] looks to you for direction."
                 else:
                     "Seeing [the_person.possessive_title] already naked, [lily.title] strips down also."
-                    $ scene_manager.strip_actor_outfit(lily)
+                    $ scene_manager.strip_full_outfit(person = lily)
                 mc.name "Mom is feeling needy this morning sis, why don't we take care of her?"
                 lily "Sounds great!"
                 call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, swapped = True) from _fuck_mom_for_breakfast_1
@@ -311,7 +308,7 @@ label mom_breakfast_action_label_high():
         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
     else: #We need to strip something off completely.
         "[the_person.possessive_title] quickly starts to strip down."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_person)
 
     "You take a quick sip of coffee. [the_person.possessive_title] is ready to fuck you right here in the kitchen!"
     if the_person.has_anal_fetish():

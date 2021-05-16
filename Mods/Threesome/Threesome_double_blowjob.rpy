@@ -202,15 +202,13 @@ label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_locat
         "As they are making out, you notice [the_girl_1.possessive_title] has her hand between [the_girl_2.title]'s legs, petting her pussy."
     else:
         the_girl_1 "Mmm... I want to touch you. Lets get these out of the way!"
-        "She starts to strip her."
-        $ scene_manager.strip_actor_outfit(the_girl_2, exclude_upper = True)
-        "Once she finishes stripping her lower half [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title]'s pussy."
+        $ scene_manager.strip_to_vagina(person = the_girl_2, prefer_half_off = True)
+        "Now [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title]'s pussy."
     if the_girl_1.outfit.vagina_available():
         "As she gets fingered, you notice that [the_girl_2.title] reaches down and begins to return the favor, fondling [the_girl_1.title]."
     else:
         the_girl_2 "Mmm, I want to to touch you too! Lets get these off of you..."
-        "[the_girl_2.title] starts to pull at her clothes."
-        $ scene_manager.strip_actor_outfit(the_girl_1, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_girl_1, prefer_half_off = True)
         "Once her pussy is bare, the girls waste no time and begin to pet each other."
     "[the_girl_1.title] and [the_girl_2.title] begin moaning into each others mouths as they make out, while simultaneously fingering each other."
     "You start to stroke yourself, watching the impressive show in front of, but you soon feel another hand on yours."
