@@ -1522,7 +1522,7 @@ label ashley_clothes_shopping_label(the_person):
     menu:
         "Keep it":
             mc.name "I like it. You should get it."
-            the_person "I think so to. Thanks!"
+            the_person "I think so too. Thanks!"
             $ the_person.wardrobe.add_outfit(the_person.outfit)
         "Not for you":
             mc.name "Sorry, its an interesting outfit, but I don't think its right for you."
