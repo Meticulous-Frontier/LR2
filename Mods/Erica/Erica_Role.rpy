@@ -2345,7 +2345,7 @@ label erica_post_photoshoot_label(the_person):
     the_person "Wow! Okay. This is going to be a huge change for me."
     $ the_person.change_stats(happiness = 3, love = 3)
     the_person "[the_person.mc_title]... I really appreciate this. I owe you so many favors at this point."
-    mc.name "Non sense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
+    mc.name "Nonsense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
     "[the_person.title] gives you a playful punch on the shoulder."
     the_person "Was there anything else you needed?"
     $ the_person.set_alt_schedule(lily_bedroom, days = [5], times = [4])
@@ -2382,7 +2382,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"
     erica "Yeah, me too. Do you have any flavored seltzers?"
     "You think for a second. You could offer to go get them their drinks, and that would give you an opportunity to give them a serum..."
-    "If you do, you will probably will the chance to watch them changing..."
+    "If you do, you will probably miss the chance to watch them change..."
     menu:
         "Grab the drinks":
             mc.name "Yeah we have seltzer. Let me go grab drinks for everyone while you two get changed."
@@ -2436,8 +2436,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
             lily "Alright, let's get ready!"
             "The girls start to strip down."
-            $ scene_manager.strip_actor_outfit(lily, exclude_feet = False)
-            $ scene_manager.strip_actor_outfit(erica, exclude_feet = False)
+            $ scene_manager.strip_full_outfit() # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
             $ erica.change_slut_temp(2)

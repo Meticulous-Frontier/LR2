@@ -32,7 +32,7 @@ label crisis_TEMPLATE_label():
     if lily.sluttiness > 80:    #Sluttiness checks are good for guaging corruption progress with girls.
         lily "Ugh, its so hot in here."
         "[lily.possessive_title] strips for no apparent reason."
-        $ scene_manager.strip_actor_outfit(lily)
+        $ scene_manager.strip_full_outfit(person = lily)
         $ mc.change_locked_clarity(20)  #Add clarity when encountering sexual situations.
     "You eat your breakfast then get ready for the day."
 
