@@ -656,7 +656,7 @@ label fetish_serum_breeding_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
-    the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
+    the_person "So, I've been running some experiments with those Reproduction Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
     the_person "Obviously, we expected the rats in the experimental group to produce more offspring, but the numbers were actually staggering."
