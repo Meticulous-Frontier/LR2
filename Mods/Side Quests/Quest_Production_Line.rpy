@@ -138,7 +138,7 @@ init 1 python:
 
     def quest_production_line_raise_miss_requirement():
         if day >= quest_production_line().quest_event_dict.get("initial_meeting_day", 0) + 10: #10 days to giver her a raise. Maybe change this?
-            if time_of_day == 1:
+            if time_of_day == 1 and quest_production_line().quest_event_dict.get("moving_day", 0) < day + 5: #when raise given moving day is set, else 9999
                 return True
         return False
 
