@@ -1,6 +1,10 @@
-init -10 python:
+init -100 python:
     import threading
-    config.search_prefixes = [ "", "images/", "Mods/Core/Images/" ]
+    config.search_prefixes = [ "Mods/Core/Images/", "", "images/" ]
+
+init 2 python:
+    gui.main_menu_background = "LR2_Title.png"
+    gui.game_menu_background = "LR2_Title.png"
 
 init -5 python:
     global supported_positions
