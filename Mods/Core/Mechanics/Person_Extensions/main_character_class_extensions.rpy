@@ -35,20 +35,13 @@ init -1 python:
         if perk_system.get_ability_flag("Lustful Priorities"):
             amount += 5
         self.locked_clarity += amount
-        log_string = ""
-        if amount > 0:
-            log_string += "You: +" + str(amount) + " Lust"
-        else:
-            log_string += "You: " + str(amount) + " Lust"
         if add_to_log and amount != 0:
-            mc.log_event(log_string, "float_text_blue")
+            mc.log_event("You: " + ("+" if amount > 0 else "") + str(amount) + " Lust", "float_text_blue")
 
             effect_strength = (amount/80.0) + 0.4
             if effect_strength > 1.0:
                 effect_strength = 1.0
             renpy.show_screen("border_pulse", effect_strength, _transient = True)
         return
-        #org_func(main_character, amount * get_clarity_multiplier(), add_to_log)
-
 
     MainCharacter.change_locked_clarity = change_locked_clarity_extended
