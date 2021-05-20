@@ -102,6 +102,13 @@ init 2: # Add some additional
                         #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                         #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 
+                    vbox:
+                        style_prefix "check"
+                        label "In Game Notifications"
+                        textbutton "Serum Related" action [ToggleField(persistent, "serum_messages", True, False)]
+                        textbutton "Clarity Related" action [ToggleField(persistent, "clarity_messages", True, False)]
+                        textbutton "Stat Changes" action [ToggleField(persistent, "stat_change_messages", True, False)]
+                        textbutton "Skill Changes" action [ToggleField(persistent, "skill_change_messages", True, False)]
 
                     # vbox:
                     #     style_prefix "radio"
