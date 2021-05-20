@@ -514,6 +514,7 @@ label girlfriend_underwear_shopping_label(the_person):
             "Buy this" if lingerie_outfit != None:
                 $ done = True
                 $ mc.change_locked_clarity(30)
+                $ the_person.change_novelty(5)
             "Give up" if lingerie_outfit == None:
                 $ done = True
     if lingerie_outfit == None:
