@@ -1455,7 +1455,8 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
         stephanie "I suppose so. I mean the color was nice."
     else:
         stephanie "I don't know, I don't usually see you wear that colour."
-        $ renpy.say(the_person, "I could do something like that but in " + the_person.favorite_colour() + ".")
+        $ favorite_colour = the_person.favorite_colour()
+        the_person "I could do something like that but in [favorite_colour]."
         stephanie "That would be interesting."
     "[the_person.possessive_title] sips her coffee and thinks about it for a bit."
     stephanie "What do you think [stephanie.mc_title]? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think she would look good in that?"
