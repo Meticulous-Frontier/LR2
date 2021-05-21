@@ -64,7 +64,7 @@ init 2 python:
     Person.change_energy = generic_messages_extended(Person.change_energy, persistent.stat_change_messages, True)
     Person.change_max_energy = generic_messages_extended(Person.change_max_energy, persistent.stat_change_messages, True)
 
-    MainCharacter.change_energy = generic_messages_extended(MainCharacter.change_max_energy, persistent.stat_change_messages, True)
+    MainCharacter.change_energy = generic_messages_extended(MainCharacter.change_energy, persistent.stat_change_messages, True)
     MainCharacter.change_max_energy = generic_messages_extended(MainCharacter.change_max_energy, persistent.stat_change_messages, True)
 
     # skill changes
