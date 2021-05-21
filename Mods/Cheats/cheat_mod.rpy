@@ -39,6 +39,7 @@ init 2 python:
         cs.scope["eye_options"] = False
         cs.scope["skin_options"] = False
         cs.scope["body_options"] = False
+        cs.scope["tan_options"] = False
         cs.scope["idle_options"] = False
         cs.scope["breast_options"] = False
         cs.scope["hair_style_options"] = False
@@ -136,6 +137,7 @@ screen cheat_menu():
     default eye_options = False
     default skin_options = False
     default body_options = False
+    default tan_options = False
     default idle_options = False
     default breast_options = False
     default hair_style_options = False
@@ -712,6 +714,15 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("body_options")]
 
+                        textbutton "Body Tan":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if tan_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("tan_options")]
+
                         textbutton "Idle Position":
                             style "textbutton_no_padding_highlight"
                             text_style "cheat_text_style"
@@ -876,6 +887,23 @@ screen cheat_menu():
 
                                         action [
                                             Function(setattr, editing_target, "body_type", x),
+                                            Function(cheat_appearance)
+                                        ]
+
+                        if tan_options and hasattr(editing_target, "tan_style"):
+                            vbox:
+                                for x in tan_list:
+                                    textbutton str(x.name):
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.tan_style == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [
+                                            Function(setattr, editing_target, "tan_style", x),
                                             Function(cheat_appearance)
                                         ]
 

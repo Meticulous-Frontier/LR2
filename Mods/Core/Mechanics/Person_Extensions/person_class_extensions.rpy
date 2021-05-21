@@ -334,6 +334,16 @@ init -1 python:
 
     Person.stripper_salary = property(get_person_stripper_salary, set_person_stripper_salary, del_person_stripper_salary, "The salary when person is stripping.")
 
+    def get_person_tan_style(self):
+        if not hasattr(self, "_tan_style"):
+            self._tan_style = None
+        return self._tan_style
+
+    def set_person_tan_style(self, value):
+        self._tan_style = value
+
+    Person.tan_style = property(get_person_tan_style, set_person_tan_style, None, "The tan style to render for a person.")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -350,7 +360,6 @@ init -1 python:
         #self.expression_images = Expression("default", self.skin, self.face_style)
         return
     Person.match_skin = match_skin
-
 
     ## SET HAIRSTYLE VIA Clothing ITEM, maintain color etc.
 
@@ -1325,7 +1334,11 @@ init -1 python:
         displayable_list = []
         displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
         displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
-        displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) #Add in her pubes
+        if self.tan_style and self.tan_style.proper_name != "no_tan":
+            displayable_list.append(self.tan_style.generate_item_displayable(self.body_type,self.tits, position, lighting = lighting)) # Add the tan
+            if self.tan_style.has_extension:
+                displayable_list.append(self.tan_style.has_extension.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting)) # Add the tan
+        displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting)) #Add in her pubes
 
         displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
         displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
