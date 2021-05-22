@@ -461,7 +461,6 @@ label HR_director_first_monday_label(the_person):
     $ add_hr_director_monday_meeting_action(the_person)
     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
     $ set_HR_director_tag('business_HR_tier', 1)
-    $ del HR_employee_list
 
     if the_person is sarah:
         $ add_sarah_third_wheel_action()
@@ -566,7 +565,6 @@ label HR_director_monday_meeting_label(the_person):
     $ the_person.draw_person(position = "stand2")
     the_person "Sounds great! I'll see you then!"
 
-    $ del HR_employee_list
     $ add_hr_director_monday_meeting_action(the_person)
     $ the_person.apply_planned_outfit()
     return
@@ -716,7 +714,6 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ the_person.draw_person(position = "sitting")
 
     python:
-        del HR_employee_list
         del person_choice
         del opinion_chat
     return True
@@ -1282,7 +1279,6 @@ label HR_director_mind_control_attempt_label(the_person):
     call screen enhanced_main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     $ person_choice = _return
 
-    $ del HR_employee_list
     the_person "Okay. I'll go get her."
     $ clear_scene()
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
