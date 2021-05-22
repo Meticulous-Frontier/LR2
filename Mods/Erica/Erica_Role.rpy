@@ -2357,7 +2357,6 @@ label erica_post_photoshoot_label(the_person):
 label erica_lily_weekly_photoshoot_label(the_person):
     $ scene_manager = Scene()
     $ lily_insta_outfit = insta_wardrobe.pick_random_outfit()
-    $ builder = WardrobeBuilder(erica)
     $ mc.change_location(lily_bedroom)
     $ mc.location.show_background()
     "You walk down the hall toward [lily.possessive_title]'s room. As you approach her door, you can hear laughter and giggling from the other side."
@@ -2373,9 +2372,9 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "You should match":
             $ erica_insta_outfit = lily_insta_outfit.get_copy()
         "You should wear something similar, but not matching":
-            $ erica_insta_outfit = builder.personalize_outfit(lily_insta_outfit.get_copy())
+            $ erica_insta_outfit = erica.personalize_outfit(lily_insta_outfit.get_copy())
         "You should wear your own thing":
-            $ erica_insta_outfit = builder.personalize_outfit(insta_wardrobe.pick_random_outfit())
+            $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit())
     erica "Thanks! I'm still pretty new at this, so its nice to have your opinion on it."
     $ erica.change_happiness(1)
     $ erica.change_obedience(1)
