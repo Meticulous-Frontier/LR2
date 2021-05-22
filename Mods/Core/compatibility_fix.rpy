@@ -174,6 +174,11 @@ init 1 python:
     # config.use_cpickle = False
     # config.debug_image_cache = True
 
+    # disable sound settings
+    config.has_sound = False
+    config.has_music = False
+    config.has_voice = False
+
     def restore_employees_to_schedules():
         for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
             if employee.location:

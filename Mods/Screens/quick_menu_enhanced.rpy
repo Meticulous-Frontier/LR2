@@ -20,24 +20,29 @@ init 5:
         zorder 100
 
         # Add an in-game quick menu.
-        hbox:
-            style_prefix "quick"
-
+        frame:
+            background "#000000aa"
             xalign 0.5
-            yalign 1.0
+            xanchor 0.5
+            padding (20, 20)
+            hbox:
+                style_prefix "quick"
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            if okay_to_save:
-                textbutton _("Save") action ShowMenu('save')
-                textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
-            textbutton _("Cheat") action ToggleScreen("cheat_menu")
-            textbutton _("Research") action ToggleScreen("serum_cheat_menu")
-            textbutton _("Opinions") action ToggleScreen("opinion_edit_menu")
+                xalign 0.5
+                yalign 1.0
+
+                textbutton _("Back") action Rollback()
+                textbutton _("History") action ShowMenu('history')
+                textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+                textbutton _("Auto") action Preference("auto-forward", "toggle")
+                if okay_to_save:
+                    textbutton _("Save") action ShowMenu('save')
+                    textbutton _("Q.Save") action QuickSave()
+                textbutton _("Q.Load") action QuickLoad()
+                textbutton _("Prefs") action ShowMenu('preferences')
+                textbutton _("Cheat") action ToggleScreen("cheat_menu")
+                textbutton _("Research") action ToggleScreen("serum_cheat_menu")
+                textbutton _("Opinions") action ToggleScreen("opinion_edit_menu")
 
     screen quick_menu():
         variant "touch"
