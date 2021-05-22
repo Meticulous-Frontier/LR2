@@ -903,7 +903,7 @@ screen cheat_menu():
                                             hover_background "#4f7ad6"
 
                                         action [
-                                            Function(setattr, editing_target, "tan_style", x),
+                                            Function(setattr, editing_target, "tan_style", x if x != no_tan else None),
                                             Function(cheat_appearance)
                                         ]
 

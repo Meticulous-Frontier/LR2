@@ -10,7 +10,7 @@ init 10 python: # add to stack later then other mods
 init 0 python:
     # This will be called in game when a person is created original function in script.rpy
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
-        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
+        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, tan_style = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
         start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
         title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
@@ -68,6 +68,14 @@ init 0 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit,
                 generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans)
+
+        if tan_style is None:
+            if renpy.random.randint(0, 1) == 1: # 50% chance on random tan (could be no_tan)
+                return_character.tan_style = get_random_from_list(tan_list)
+            if return_character.tan_style == no_tan:
+                return_character.tan_style = None
+        else:
+            return_character.tan_style = tan_style
 
         # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
         if return_character.event_triggers_dict.get("employed_since", -1) != -1:
