@@ -449,7 +449,7 @@ label HR_director_first_monday_label(the_person):
         the_person "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
         menu:
             "Let's start next week":
-                $ del HR_employee_list
+                pass
             "Let's start today":
                 mc.name "If you think meeting with some of these girls would be helpful, I think we should start immediately."
                 the_person "OK! Let me see who I have on my list here..."
@@ -461,10 +461,10 @@ label HR_director_first_monday_label(the_person):
     $ add_hr_director_monday_meeting_action(the_person)
     # HR tiers based on progression. 1 = hired someone. 2 = training videos. 3 = company sponsored sexual training.
     $ set_HR_director_tag('business_HR_tier', 1)
+    $ del HR_employee_list
 
     if the_person is sarah:
         $ add_sarah_third_wheel_action()
-
     return
 
 label HR_director_monday_meeting_label(the_person):
@@ -547,7 +547,7 @@ label HR_director_monday_meeting_label(the_person):
                     $ set_HR_director_tag("business_HR_meeting_last_day", day)
                 $ scene_manager.update_actor(the_person, position = "sitting")
             "Let's not this week":
-                $ del HR_employee_list
+                pass
 
     the_person "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
@@ -566,6 +566,7 @@ label HR_director_monday_meeting_label(the_person):
     $ the_person.draw_person(position = "stand2")
     the_person "Sounds great! I'll see you then!"
 
+    $ del HR_employee_list
     $ add_hr_director_monday_meeting_action(the_person)
     $ the_person.apply_planned_outfit()
     return
