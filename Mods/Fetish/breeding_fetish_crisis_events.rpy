@@ -3,16 +3,16 @@ init 2 python:
         return [x for x in known_people_in_the_game() if x.has_breeding_fetish()]
 
     def get_highly_fertile_breeder():
-        return get_random_from_list([x for x in get_breeding_fetish_list() and x.is_highly_fertile() and not x.is_employee()])
+        return get_random_from_list([x for x in get_breeding_fetish_list() if x.is_highly_fertile() and not x.is_employee()])
 
     def get_highly_fertile_employee_breeder():
-        return get_random_from_list([x for x in get_breeding_fetish_list() and x.is_highly_fertile() and x.is_employee()])
+        return get_random_from_list([x for x in get_breeding_fetish_list() if x.is_highly_fertile() and x.is_employee()])
 
     def get_pregnant_breeder():
-        return get_random_from_list([x for x in get_breeding_fetish_list() and x.knows_pregnant()])
+        return get_random_from_list([x for x in get_breeding_fetish_list() if x.knows_pregnant()])
 
     def get_family_breeder():
-        return get_random_from_list(x for x in get_breeding_fetish_list() and x.is_family())
+        return get_random_from_list([x for x in get_breeding_fetish_list() if x.is_family()])
 
     def breeding_fetish_high_fertility_crisis_requirement():
         if mc_at_home() and time_of_day==4:
