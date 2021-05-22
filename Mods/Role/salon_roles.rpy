@@ -370,7 +370,10 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     "She looks you over from head to toe before continuing."
     the_person "How would you like to help me do something to make him jealous?"
     mc.name "I'm listening."
-    the_person "Why don't you come back later, after I close up?"
+    if day%7 == 5 or day%7 == 6:
+        the_person "Why don't you come back Monday evening, after I close up?"
+    else:
+        the_person "Why don't you come back later, after I close up?"
     "She lowers her voice to a whisper."
     the_person "I'll get on my knees and pretend like I'm sucking your dick. You can take some pictures, and then I'll accidentally send them to my ex..."
     $ mc.change_locked_clarity(10)
