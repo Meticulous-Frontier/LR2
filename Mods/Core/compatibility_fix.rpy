@@ -179,6 +179,10 @@ init 1 python:
     config.has_music = False
     config.has_voice = False
 
+    # extend main_loop_cleanup list from bugfix
+    if "common_variable_list" in globals():
+        common_variable_list.append("scene_manager");
+
     def restore_employees_to_schedules():
         for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
             if employee.location:
