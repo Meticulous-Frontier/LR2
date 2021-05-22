@@ -25,7 +25,8 @@ init 4 python:
         return build_specific_action_list_wrapper
 
     # wrap up the build_specific_action_list function
-    build_specific_action_list = build_specific_action_list_alter_outfit_extended(build_specific_action_list)
+    if "build_specific_action_list" in globals():
+        build_specific_action_list = build_specific_action_list_alter_outfit_extended(build_specific_action_list)
 
     def bra_removal(person): # replace extensions with something
         alterations = 0

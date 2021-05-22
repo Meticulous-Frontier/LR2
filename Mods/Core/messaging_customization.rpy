@@ -15,6 +15,8 @@ init 2 python:
     # generic extension function for suppressing messages
     def generic_messages_extended(org_func, message_flag, default_value):
         func_args = inspect.getargspec(org_func)
+        if not "add_to_log" in func_args[0]:    # fix when argument not found
+            return org_func
         idx = func_args[0].index("add_to_log")
 
         def generic_messages_wrapper(*args, **kwargs):
