@@ -52,7 +52,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
         "[the_girl.possessive_title] reflexively starts to pull away after you spank her. You grab her hips to keep her from pulling off completely."
         the_girl "Sorry, I just... I don't do this very often... please just be gentle with me!"
-        "You pull her hips back toward you slowly. Her inexperienced ass yields to your penis and she sighs as you bottom out"
+        "You pull her hips back toward you slowly. Her inexperienced ass yields to your penis and she sighs as you bottom out."
         "Pushing deep, the vibrating function on the dildo is in direct contact with her clit. She squirms and moans, being stuffed completely full."
         "You decide to give her a little break in the intensity of your fucking. Leaving yourself deep inside her, you knead her ass cheeks with both hands."
         the_girl "Mmmm, that feels good [the_girl.mc_title]. Can I touch myself while you do that?"

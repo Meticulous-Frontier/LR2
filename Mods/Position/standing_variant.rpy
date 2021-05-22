@@ -159,7 +159,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  "After you finish dirty talking, you grab her hips and resume your fucking."
     else:   #She is experienced. Give her a chance to please you
         "[the_girl.possessive_title] reaches back with one hand and grabs your hip, urging you to fuck her harder."
-        "She is keeping pace with you, pushing back and meeting your thrusts exquisitely. Your hips make a loud slap against her ass with every thrust, and your balls swing forward and slap her pussy when you bottom out"
+        "She is keeping pace with you, pushing back and meeting your thrusts exquisitely. Your hips make a loud slap against her ass with every thrust, and your balls swing forward and slap her pussy when you bottom out."
         the_girl "Oh god, [the_girl.mc_title], you fuck me so good..."
         "[the_girl.possessive_title]'s tight cunt feels so good, you can't help but slam into it over and over again. Maybe you should touch her a bit or talk dirty in her ear..."
         menu:
