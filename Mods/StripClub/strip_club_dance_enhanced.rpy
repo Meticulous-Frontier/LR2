@@ -48,7 +48,9 @@ label stripclub_dance_enhanced_label():
     #-> When she ends her dance, if you've paid enough she may ask if you want to come back for a private lap dance.
     #-> Lap dance scene may just turn into sex.
 
-    "You take a seat near the edge of the stage and wait for the next performer."
+    "You decide to stay a while and enjoy a show. You stop by the bar to satisfy the drink minimum, then find a seat near the edge of the stage."
+    $ mc.business.change_funds(-20)
+    "You nurse your beer while you wait for the next performer."
 
     $ the_person = get_next_stripper()
     $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
@@ -98,19 +100,24 @@ label stripclub_dance_enhanced_label():
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_1
     if the_person.has_large_tits():
         if the_person.outfit.tits_available():
+            $ mc.change_locked_clarity(10)
             "As the music builds, [title]'s dance becomes more energetic. Her big tits bounce and jiggle in rhythm with her movements."
         else:
+            $ mc.change_locked_clarity(5)
             "As the music builds, [title]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape."
     else:
         "As the music builds, [title]'s dance becomes more energetic. She runs her hands over her tight body, accentuating her curves."
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_2
     $ the_person.draw_person(position = get_random_from_list(cousin_strip_pose_list), the_animation = blowjob_bob, animation_effect_strength = 0.7)
+    $ mc.change_locked_clarity(5)
     "Her music hits its crescendo and her dancing does the same. [title] holds onto the pole in the middle of the stage and spins herself around it."
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_3
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.8)
     if the_person.outfit.vagina_visible():
+        $ mc.change_locked_clarity(10)
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy to the crowd."
     else:
+        $ mc.change_locked_clarity(5)
         "As the song comes to an end, the dancer lowers herself to all fours. She spreads her legs and works her hips, jiggling her ass for the crowd's amusement."
 
     $ the_person.draw_person()
