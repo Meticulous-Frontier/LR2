@@ -43,14 +43,13 @@ init -1 python:
     Business.change_production = change_production_enhanced
 
     def supply_purchase_enhanced(self,focus,cha,skill):
-        max_supply = __builtin__.round(((3*focus) + (cha) + (2*skill) + 10) * (self.team_effectiveness))/100
-        max_supply = __builtin__.int(max_supply)
+        max_supply = __builtin__.int(((3*focus) + cha + (2*skill) + 15) * (self.team_effectiveness / 100))
         if max_supply + self.supply_count > self.supply_goal:
             max_supply = self.supply_goal - self.supply_count
             if max_supply <= 0:
                 return 0
 
-        self.funds -= __builtin__.round(max_supply * candace_calculate_discount())
+        self.funds -= __builtin__.round(max_supply * candace_calculate_discount(), 1)
         self.supply_count += max_supply
         self.supplies_purchased += max_supply #Used for end of day reporting
         return max_supply
