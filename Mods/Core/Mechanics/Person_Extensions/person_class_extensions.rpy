@@ -38,7 +38,7 @@ init -1 python:
         # remove from business rooms
         for room in [mc.business.s_div, mc.business.r_div, mc.business.p_div, mc.business.m_div, mc.business.h_div]:
             if self in room.people:
-                room.people.remove(self)
+                room.remove_person(self)
 
         # remove from strippers
         if self in stripclub_strippers:
