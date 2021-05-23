@@ -53,7 +53,7 @@ label mom_breakfast_action_label():
         mc.name "Everything okay?"
         if the_person.sluttiness < 20:  #Low Sluttiness path
             call mom_breakfast_action_label_low() from _call_mom_breakfast_action_label_low
-        elif the_person.sluttiness < 70 or the_person.has_taboo("condomless_sex"): #mid sluttiness path or no sex yet
+        elif the_person.sluttiness < 70 or the_person.has_taboo("vaginal_sex"): #mid sluttiness path or no sex yet
             call mom_breakfast_action_label_medium() from _call_mom_breakfast_action_label_medium
         else:
             call mom_breakfast_action_label_high() from _call_mom_breakfast_action_label_high
