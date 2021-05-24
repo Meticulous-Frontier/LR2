@@ -2285,7 +2285,7 @@ label erica_lily_instapic_intro_label():
     "You fit in a couple different poses, but all throughout [erica.possessive_title] watches your reactions closely."
     $ scene_manager.update_actor(lily, position = "missionary", emotion = "happy")
     $ scene_manager.update_actor(erica, position = "missionary", emotion = "happy")
-    "For the final set of pics you capture them laying in bed next to each. It is undeniably sexy."
+    "For the final set of pics you capture them laying in bed next to each other. It is undeniably sexy."
     mc.name "Alright, I think we've got all the shots we need."
     $ scene_manager.update_actor(erica, position = "stand2", emotion = "happy")
     "[erica.title] stands up."
