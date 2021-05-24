@@ -223,7 +223,7 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_headhunter_progress", 0) != 0:
             return "Running a search"
-        if mc.business.max_employee_count == mc.business.get_employee_count():
+        if mc.business.max_employee_count >= mc.business.get_employee_count():
             return "At maximum employee count"
         if not mc.is_at_work():
             return "Only in the office"
@@ -1422,7 +1422,7 @@ label HR_director_headhunt_interview_label(the_person):
     if mc.location != office:
         "You are hard at work when you get a message from your HR supervisor."
         the_person "Hey, I got a hit on criteria you had for a prospective employee. Want me to send you the info?"
-        if mc.business.max_employee_count == mc.business.get_employee_count():  #We accidentally filled all available slots
+        if mc.business.max_employee_count >= mc.business.get_employee_count():  #We accidentally filled all available slots
             mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
             "A few minutes later, she responds to you."
             the_person "Ah... OK, well try to let me know next time, okay?"
