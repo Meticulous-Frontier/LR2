@@ -62,7 +62,7 @@ init 5 python:
 
     # some crisis events should always trigger (not tracked in crisis tracker and always available when is_action_enabled())
     excluded_crisis_tracker_events = [] # Check for the events existance since they can be found outside of the core files
-    excluded_crisis_tracker_events_gc = ["work_relationship_change_crisis", "sister_phone_crisis_action", "mom_selfie_crisis", "late_for_work_action", "cousin_tease_crisis"]
+    excluded_crisis_tracker_events_gc = ["work_relationship_change_crisis", "sister_phone_crisis_action", "mom_selfie_crisis", "late_for_work_action"]
     for crisis in excluded_crisis_tracker_events_gc:
         if crisis in globals():
             excluded_crisis_tracker_events.append(globals()[crisis])
