@@ -70,7 +70,7 @@ label camilla_get_a_drink_label(the_person):
                 the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.name]."
                 "Sounds like the bartender knows [the_person.title] pretty well. She must be in here often!"
                 "The place is busy, so its easy to slip some serum into her drink."
-                call give_serum(the_person) from _call_give_serum_CSH000
+                call give_serum(the_person) from _call_give_serum_camilla_01
             else:                                 #Fail
 
                 the_person "That's okay! I prefer to go dutch anyway."
@@ -279,8 +279,8 @@ label camilla_bathroom_blowjob_label(the_person):
         $ the_person.change_arousal(20)
         $ mc.change_arousal(20)
         "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
-        # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH010
-        call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH010
+        # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH010
+        call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH010
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
@@ -344,8 +344,8 @@ label camilla_bathroom_blowjob_label(the_person):
             mc.name "Oh fuck!"
             "You make sure to snap more pictures of her. She's getting good at this!"
             "You decide to just enjoy her skilled mouth going down on you."
-            # call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH011
-            call get_fucked(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH011
+            # call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH011
+            call get_fucked(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH011
         else:
             the_person "Mmmm, I can't wait any longer... I have to taste it!"
             $ the_person.break_taboo("sucking_cock")
@@ -353,8 +353,8 @@ label camilla_bathroom_blowjob_label(the_person):
             "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
-            # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_CSH012
-            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_CSH012
+            # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH012
+            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH012
 
         if the_person.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
@@ -467,7 +467,7 @@ label camilla_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, skip_condom = True) from _call_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, skip_condom = True) from _call_camilla_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
@@ -535,10 +535,10 @@ label camilla_dancing_sex_label(the_person):
         the_person "Okay, I want you to sit on the counter. I'm gonna get naked for you."
         "She hands you her phone."
         the_person "Here we go! Get lots of good pics!"
-        call free_strip_scene(the_person) from _CS_free_strip_scene_CSH021
+        call free_strip_scene(the_person) from _CS_free_strip_scene_camilla_021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person "Come on, lets fuck!"
-        call fuck_person(the_person) from _call_casual_sex_mod_CSH022
+        call fuck_person(the_person) from _call_casual_sex_mod_camilla_022
         "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
         the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
         "You almost think she is going to make herself cum again until she stops."
@@ -596,7 +596,7 @@ label camilla_her_place_label(the_person):
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
     "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
-    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_CSH040
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_camilla_sex_description_CSH040
     $ the_report = _return
 
     #Finishing dialogue based on sexual performance
@@ -641,7 +641,7 @@ label camilla_home_sex_label(the_person):
     $ the_person.change_to_bedroom()
     "You nod at him, and he gives a brief nod back. You turn your attention back to [the_person.title]."
     the_person "Mmm, I can't wait. Let's go!"
-    call fuck_person(the_person) from _call_casual_sex_mod_CSH050
+    call fuck_person(the_person) from _call_casual_sex_mod_camilla_505
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 1:
         the_person "Oh my god... I came so many times..."
