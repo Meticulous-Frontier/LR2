@@ -1006,10 +1006,16 @@ label HR_director_sexy_meeting_start_label(the_person):
         "She runs her tongue up and down your length a few times, then parts her lips and begins to suck you off."
         $ mc.change_arousal(40)
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_one
-        mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
-        $ scene_manager.update_actor(the_person, emotion = "happy")
-        "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
-        the_person "Thank you sir! I am willing to do this next week again if you decide to."
+        $ the_report = _return
+        if the_report.get("guy orgasms", 0) > 0:
+            mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
+            $ scene_manager.update_actor(the_person, emotion = "happy")
+            "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
+            the_person "Thank you sir! I am willing to do this next week again if you decide to."
+        else:
+            mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
+            $ scene_manager.update_actor(the_person, emotion = "sad")
+            the_person "Of course sir, I am willing to do this anytime you want me to."
         $ set_HR_director_unlock("blowjob", True)
         $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
@@ -1040,10 +1046,16 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person "Mmmm, I love the feeling of a cock buried between my big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizeable boobs around you and begins to bounce them up and down."
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
+            $ the_report = _return
+            if the_report.get("guy orgasms", 0) > 0:
+                "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
+                the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
+                "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
+            else:
+                mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
+                $ scene_manager.update_actor(the_person, emotion = "sad")
+                the_person "Of course sir, I am willing to do this anytime you want me to."
             $ set_HR_director_unlock("titfuck", True)
-            "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
-            the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
-            "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             $ the_person.apply_planned_outfit()
             $ scene_manager.update_actor(the_person, position = "stand3")
             "Eventually she cleans herself up and makes herself presentable again."
@@ -1083,7 +1095,6 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person "Mmmm, [the_person.mc_title]. Use me boss! I'm here to serve you!"
             "You start to piston your cock in and out of her."
             call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_three
-            $ set_HR_director_unlock("missionary on desk", True)
             "[the_person.possessive_title] lays on your desk, recovering."
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person "Ah, yes, I suspected it would be, sir!"
