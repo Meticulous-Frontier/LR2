@@ -43,7 +43,7 @@ init -1 python:
     Business.change_production = change_production_enhanced
 
     def supply_purchase_enhanced(self,focus,cha,skill):
-        max_supply = __builtin__.int(((3*focus) + cha + (2*skill) + 15) * (self.team_effectiveness / 100))
+        max_supply = __builtin__.int(((5*focus) + (3*cha) + (3*skill) + 20) * (self.team_effectiveness / 100))
         if max_supply + self.supply_count > self.supply_goal:
             max_supply = self.supply_goal - self.supply_count
             if max_supply <= 0:
