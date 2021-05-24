@@ -33,6 +33,11 @@ label intro_standing_oral(the_girl, the_location, the_object):
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
             "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
+
+        if not the_girl.vagina_visible():
+            $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+            "She quickly moves her clothes out of the way."
+
         if the_girl.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
             if the_girl.love < 0:
                 the_girl "Well? Get to it!"
@@ -44,6 +49,10 @@ label intro_standing_oral(the_girl, the_location, the_object):
         the_girl "Now start licking."
         "You do as you are told."
     else:
+        if not the_girl.vagina_visible():
+            $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+            "You quickly move her clothes out of the way."
+
         "You kneel before [the_girl.title] and gently start to lick her pussy."
         if the_girl.get_opinion_score("taking control")> 0:
             if the_girl.love < 0:
@@ -73,11 +82,17 @@ label taboo_break_standing_oral(the_girl, the_location, the_object):
         if not the_girl.has_taboo("sucking_cock"):
             the_girl "It's your turn on your knees."
         "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
+        if not the_girl.vagina_visible():
+            $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+            "She quickly moves her clothes out of the way."
         "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
         the_girl "Now start licking."
         "You do as you are told."
     else:
         "You kneel before [the_girl.title]."
+        if not the_girl.vagina_visible():
+            $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+            "You quickly move her clothes out of the way."
         $ the_girl.call_dialogue("licking_pussy_taboo_break")
         "You gently lick her pussy."
         if the_girl.get_opinion_score("getting head") < 0:
