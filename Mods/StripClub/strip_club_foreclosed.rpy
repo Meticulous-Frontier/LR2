@@ -91,6 +91,7 @@ label club_foreclosed_event_label():
         strip_club_foreclosed_change_stripper_schedules()
         add_cousin_talk_about_strip_club_action()
         remove_mandatory_crisis_list_action("club_foreclosed_event_label")
+        update_party_schedules(build_people_to_process())
 
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
     "Perhaps you should talk to your cousin Gabrielle about it, when your aunt cannot overhear your conversation."
