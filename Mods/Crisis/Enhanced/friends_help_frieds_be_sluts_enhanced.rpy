@@ -387,7 +387,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                         mc.name "So, what can I help you two with?"
                         $ scene_manager.update_actor(person_two, emotion = "sad")
                         person_two "I... I mean, we... Uh..."
-                        person_one "She's very nervous, let me her out help out."
+                        person_one "She's very nervous, let me help her out."
                         if person_two.sex_record.get("Blowjobs", 0) == 0:
                             person_one "[person_two.title] has always wanted to suck your cock, but was too scared to ask."
                         else:
