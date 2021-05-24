@@ -495,6 +495,16 @@ init 0 python:
             person = create_stripper()
             person.set_schedule(strip_club, times = [3,4])
             stripclub_strippers.append(person)
+
+        # make sure one of the strippers an alpha-personality (simplifies stripclub story-line)
+        alpha_stripper = get_random_from_list([x for x in stripclub_strippers if x.age >= 25 and not x.personality == alpha_personality])
+        if alpha_stripper:
+            alpha_stripper.original_personality = alpha_stripper.personality
+            alpha_stripper.personality = alpha_personality
+            alpha_stripper.charisma = 5
+            alpha_stripper.int = 6
+            alpha_stripper.update_opinion_with_score(2, "taking control", False)
+            alpha_stripper.update_opinion_with_score(-1, "being submissive", False)
         return
 
     def update_main_character_actions():
