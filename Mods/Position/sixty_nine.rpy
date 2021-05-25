@@ -42,6 +42,9 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object):
     else:
         "[the_girl.possessive_title] hesitates for a moment before responding."
         the_girl "I guess we could do that. But I'm on top!"
+    if not the_girl.vagina_visible():
+        $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+        "She quickly moves some clothes out of the way."
     "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over you, presenting her pussy to your face. You waste no time and start to flick your tongue around her slit."
     if the_girl.get_opinion_score("getting head") > 2 :
         the_girl "Oh! Yes that feels so good already! Oh [the_girl.mc_title] your tongue feels amazing."
