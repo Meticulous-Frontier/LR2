@@ -254,16 +254,6 @@ init 6 python:
 
     Outfit.wearing_bra = wearing_bra_enhanced
 
-    def tits_available_enhanced(self):  # tits are usable when specific cloth items are worn
-        reachable = True
-        for cloth in self.upper_body:
-            if cloth.anchor_below and not cloth in [suit_jacket, vest, cincher, heart_pasties]:
-                reachable = False
-        return reachable
-
-    Outfit.tits_available = tits_available_enhanced
-
-
     def get_total_slut_modifiers_enhanced(self):
         new_score = 0
         for cloth in self.accessories + self.upper_body + self.lower_body + self.feet:
