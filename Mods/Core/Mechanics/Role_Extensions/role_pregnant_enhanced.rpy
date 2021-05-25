@@ -139,7 +139,7 @@ init 3 python:
             if person.is_mc_father():
                 person.sex_record["Children with MC"] = person.sex_record.get("Children with MC", 0) + 1
             # run original function
-            org_func(person)
+            return org_func(person)
         return pregnant_finish_person_wrapper
 
     # wrap up the pregnant finish person function
