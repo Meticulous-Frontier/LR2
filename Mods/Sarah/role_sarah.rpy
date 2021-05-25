@@ -280,7 +280,7 @@ init 2 python:
         return False
 
     def Sarah_unlock_special_tit_fuck_requirement():  #Not an action, but make a requirement to make it easy to test anyway.
-        if sarah.get_sex_record_tit_fucks() > 5:
+        if sarah.sex_record.get("Tit Fucks", 0) > 5:
             if not sarah_get_special_titfuck_unlocked():
                 return True
         False

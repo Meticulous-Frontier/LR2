@@ -190,19 +190,12 @@ init -1 python:
 
     Business.get_employee_list = business_get_employee_list
 
-    def business_get_mc_offspring_count(self):
-        kid_count = 0
-        for person in self.business_get_employee_list():
-            kid_count += person.count_kids_with_mc()
-        return kid_count
+    def business_mc_offspring_count(self):
+        return sum(x.number_of_children_with_mc() for x in self.get_employee_list())
 
-    Business.business_get_mc_offspring_count = business_get_mc_offspring_count
+    Business.mc_offspring_count = business_mc_offspring_count
 
-    def business_get_employees_with_kids_with_mc(self):
-        emp_list = []
-        for person in self.business_get_employee_list():
-            if person.has_kids_with_mc():
-                emp_list.append(person)
-        return emp_list
+    def business_employees_with_children_with_mc(self):
+        return [x for x in self.get_employee_list() if x.has_child_with_mc()]
 
-    Business.business_get_employees_with_kids_with_mc = business_get_employees_with_kids_with_mc
+    Business.employees_with_children_with_mc = business_employees_with_children_with_mc
