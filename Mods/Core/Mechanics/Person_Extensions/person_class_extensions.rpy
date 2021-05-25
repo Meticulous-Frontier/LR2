@@ -1986,6 +1986,16 @@ init -1 python:
         return self.event_triggers_dict.get("preg_mc_father", True)
     Person.is_mc_father = is_mc_father
 
+    def count_kids_with_mc(self):
+        return the_person.event_triggers_dict.get("kids_with_mc", 0)
+
+    Person.count_kids_with_mc = count_kids_with_mc
+
+    def has_kids_with_mc(self):
+        if the_person.event_triggers_dict.get("kids_with_mc", 0) > 0:
+            return True
+        return False
+
     def is_highly_fertile(self):
         if self.is_pregnant():
             return False
