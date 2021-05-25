@@ -21,13 +21,25 @@ init 3 python:
                 booty_call_list.append(person)
         return booty_call_list
 
+    def lust_booty_call_init(action_mod):
+        lust_booty_call_enabled(action_mod.enabled)
+        return
+
+    def lust_booty_call_enabled(enabled):
+        if enabled:
+            if not mc.business.event_triggers_dict.get("lust_booty_call_unlocked", False):
+                mc.business.add_mandatory_crisis(lust_booty_call_intro_action)
+        else:
+            mc.business.remove_mandatory_crisis("lust_booty_call_intro_label")
+        return
+
     # extend the default build phone menu function with renovations
     def build_phone_menu_booty_call_extended(org_func):
         def phone_menu_wrapper():
             # run original function
             phone_menu = org_func()
             # run extension code
-            if mc.business.event_triggers_dict.get("booty_call_unlocked", False):
+            if mc.business.event_triggers_dict.get("lust_booty_call_unlocked", False):
                 lust_booty_call_action = Action("Make booty call {image=gui/heart/Time_Advance.png}", lust_booty_call_requirement, "lust_booty_call_label", menu_tooltip = "Call someone for a one time late night sexual encounter.", priority = 10)
                 phone_menu[2].insert(1, lust_booty_call_action)
 
@@ -38,11 +50,9 @@ init 3 python:
     if "build_phone_menu" in globals():
         build_phone_menu = build_phone_menu_booty_call_extended(build_phone_menu)
 
-
-    lust_booty_call = ActionMod("Booty Call {image=gui/heart/Time_Advance.png}",  lust_booty_call_intro_requirement, "lust_booty_call_intro_label",
-        menu_tooltip = "Make a booty call to get laid", category="Home")
-    lust_booty_call_intro = Action("Lust triggered booty call", lust_booty_call_intro_requirement, "lust_booty_call_intro_label")
-
+    lust_booty_call_intro_action = ActionMod("Lust Booty Call", lust_booty_call_intro_requirement, "lust_booty_call_intro_label",
+        initialization = lust_booty_call_init, on_enabled_changed = lust_booty_call_enabled,
+        menu_tooltip = "You make a booty call to get laid.", category="Misc")
 
 label lust_booty_call_intro_label():
     $ mc.change_location(bedroom)   # make sure we are in the bedroom
@@ -53,8 +63,7 @@ label lust_booty_call_intro_label():
     "You grab your phone. You start to open the web browser to look up some porn, but you stop yourself."
     "Instead, you open up your contacts."
     "You wonder... surely you could convince someone to come over?"
-    $ booty_list = lust_get_booty_call_list()
-    call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + booty_list], draw_hearts_for_people = True))
+    call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + lust_get_booty_call_list()], draw_hearts_for_people = True))
     if _return == "Leave" or _return == None:
         "After looking at your phone contacts, you change your mind. Maybe another opportunity will present itself later."
         $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
@@ -127,7 +136,7 @@ label lust_booty_call_intro_label():
     "You decide to embrace your new life of constant sexual encounters."
     $ add_lust_drip_perk()
     "You have gained a new perk! Your Clarity now slowly converts to Lust while active, maximum 200 per time slot."
-    $ mc.business.event_triggers_dict["booty_call_unlocked"] = True
+    $ mc.business.event_triggers_dict["lust_booty_call_unlocked"] = True
     "You also have learned the art of the booty call. You can now select this option on your phone at night if your lust is high enough!"
     return
 
@@ -136,8 +145,7 @@ label lust_booty_call_label():
         "As you get yourself ready for bed, you can tell you have way too much sexual tension to fall asleep, so you decide to make a booty call."
     else:
         "Before you head home for the day, you can feel all the sexual tension you've built up throughout the day, so you decide to make a booty call."
-    $ booty_list = lust_get_booty_call_list()
-    call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + booty_list + ["No one"]], draw_hearts_for_people = True))
+    call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + lust_get_booty_call_list() + ["No one"]], draw_hearts_for_people = True))
     if _return == "No one" or _return == None:
         "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
         return

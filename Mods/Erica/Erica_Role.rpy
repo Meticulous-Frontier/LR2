@@ -282,7 +282,7 @@ init -2 python:
         return False
 
     def add_erica_ghost_action(person): #Hopefully delete this soon
-        remove_mandatory_crisis_list_action("erica_ghost_label")
+        mc.business.remove_mandatory_crisis("erica_ghost_label")
         erica_ghost = Action("Casual Athlete Ghosts you", erica_ghost_requirement, "erica_ghost_label", args = person)
         mc.business.add_mandatory_crisis(erica_ghost)
         return

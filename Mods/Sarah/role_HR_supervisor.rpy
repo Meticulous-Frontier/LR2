@@ -256,28 +256,22 @@ init 5 python:
                     return True
         return False
 
-    def remove_mandatory_crisis_list_action(crisis_name):
-        found = find_in_list(lambda x: x.effect == crisis_name, mc.business.mandatory_crises_list)
-        if found:
-            mc.business.mandatory_crises_list.remove(found)
-        return
-
     def cleanup_HR_director_meetings():
-        remove_mandatory_crisis_list_action("Sarah_intro_label")
-        remove_mandatory_crisis_list_action("Sarah_hire_label")
-        remove_mandatory_crisis_list_action("Sarah_get_drinks_label")
-        remove_mandatory_crisis_list_action("Sarah_stripclub_story_label")
-        remove_mandatory_crisis_list_action("Sarah_epic_tits_label")
-        remove_mandatory_crisis_list_action("Sarah_new_tits_label")
-        remove_mandatory_crisis_list_action("Sarah_third_wheel_label")
-        remove_mandatory_crisis_list_action("Sarah_catch_stealing_label")
-        remove_mandatory_crisis_list_action("Sarah_weekend_surprise_crisis_label")
-        remove_mandatory_crisis_list_action("Sarah_threesome_request_label")
-        remove_mandatory_crisis_list_action("Sarah_initial_threesome_label")
-        remove_mandatory_crisis_list_action("HR_director_initial_hire_label")
-        remove_mandatory_crisis_list_action("HR_director_first_monday_label")
-        remove_mandatory_crisis_list_action("HR_director_monday_meeting_label")
-        remove_mandatory_crisis_list_action("HR_director_headhunt_interview_label")
+        mc.business.remove_mandatory_crisis("Sarah_intro_label")
+        mc.business.remove_mandatory_crisis("Sarah_hire_label")
+        mc.business.remove_mandatory_crisis("Sarah_get_drinks_label")
+        mc.business.remove_mandatory_crisis("Sarah_stripclub_story_label")
+        mc.business.remove_mandatory_crisis("Sarah_epic_tits_label")
+        mc.business.remove_mandatory_crisis("Sarah_new_tits_label")
+        mc.business.remove_mandatory_crisis("Sarah_third_wheel_label")
+        mc.business.remove_mandatory_crisis("Sarah_catch_stealing_label")
+        mc.business.remove_mandatory_crisis("Sarah_weekend_surprise_crisis_label")
+        mc.business.remove_mandatory_crisis("Sarah_threesome_request_label")
+        mc.business.remove_mandatory_crisis("Sarah_initial_threesome_label")
+        mc.business.remove_mandatory_crisis("HR_director_initial_hire_label")
+        mc.business.remove_mandatory_crisis("HR_director_first_monday_label")
+        mc.business.remove_mandatory_crisis("HR_director_monday_meeting_label")
+        mc.business.remove_mandatory_crisis("HR_director_headhunt_interview_label")
         return
 
     def add_sarah_catch_stealing_action():

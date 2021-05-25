@@ -1,4 +1,4 @@
-init 2 python:
+init 4 python:
     def lust_blowjob_intro_requirement():
         if mc.business.is_open_for_business(): #Only trigger if people are in the office.
             if mc.is_at_work(): #Check to see if the main character is at work
@@ -28,11 +28,38 @@ init 2 python:
     def lust_blowjob_build_employee_list():
         return mc.business.get_employee_list()
 
-init 3 python:
-    lust_blowjob_office = ActionMod("Office Blowjob {image=gui/heart/Time_Advance.png}", lust_blowjob_office_requirement, "lust_blowjob_office_label",
-        menu_tooltip = "Order an employee to give you a blowjob", category="Business")
-    lust_blowjob_intro = Action("Lust triggered meeting", lust_blowjob_intro_requirement, "lust_blowjob_intro_label")
+    def lust_blowjob_office_init(action_mod):
+        lust_blowjob_office_enabled(action_mod.enabled)
+        return
 
+    def lust_blowjob_office_enabled(enabled):
+        if enabled:
+            if not mc.business.event_triggers_dict.get("lust_office_blowjob_unlocked", False):
+                mc.business.add_mandatory_crisis(lust_blowjob_office_intro_action)
+        else:
+            mc.business.remove_mandatory_crisis("lust_blowjob_intro_label")
+        return
+
+    # extend the default build phone menu function with renovations
+    def build_phone_menu_office_blowjob_extended(org_func):
+        def phone_menu_wrapper():
+            # run original function
+            phone_menu = org_func()
+            # run extension code
+            if mc.business.event_triggers_dict.get("lust_office_blowjob_unlocked", False):
+                lust_blowjob_call_action = Action("Office Blowjob {image=gui/heart/Time_Advance.png}", lust_blowjob_office_requirement, "lust_blowjob_office_label", menu_tooltip = "Order an employee to give you a blowjob in your office.", priority = 10)
+                phone_menu[2].insert(1, lust_blowjob_call_action)
+
+            return phone_menu
+
+        return phone_menu_wrapper
+
+    if "build_phone_menu" in globals():
+        build_phone_menu = build_phone_menu_office_blowjob_extended(build_phone_menu)
+
+    lust_blowjob_office_intro_action = ActionMod("Office Blowjob", lust_blowjob_intro_requirement, "lust_blowjob_intro_label",
+        initialization = lust_blowjob_office_init, on_enabled_changed = lust_blowjob_office_enabled,
+        menu_tooltip = "Order an employee to give you a blowjob", category="Business")
 
 label lust_blowjob_intro_label():
     $ the_person = None
@@ -96,26 +123,25 @@ label lust_blowjob_intro_label():
     $ the_person.review_outfit()
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] turns and walks out of your office. That went great!"
-    "You can now order an employee to give you a blowjob from the privacy of your office."
+    "You can now order an employee to give you a blowjob in the privacy of your office using your phone."
+    $ mc.business.event_triggers_dict["lust_office_blowjob_unlocked"] = True
     "Realizing you have employees willing to suck your cock anytime you ask, you think about the mental gymnastics you've always put yourself through."
     "Lust has always been a taboo thing, to be shoved down and repressed, until you have the rare opportunity to utilize it."
     "But now... why bother repressing it? You make a mental note to stop repressing it. Now whenever you would normally gain lust, you gain extra."
     $ add_lust_gain_perk()
     "You have gained a new perk! Every time you normally gain lust, you gain 5 extra."
-    $ office.add_action(lust_blowjob_office)
-    #TODO link up the room event here.
     return
 
 label lust_blowjob_office_label():
-    "You head into your office and sit down at your computer."
-    $ ceo_office.show_background()
-    "All the skin and sexy outfits you've been exposed to at work has got you hard as a rock and you need some relief. You decide to call an employee in for a blowjob."
+    "All the skin and sexy outfits you've been exposed to at work has got you hard as a rock and you need some relief."
+    "You decide to call an employee in for a blowjob and pull up your employee list on your phone."
     call screen enhanced_main_choice_display(build_menu_items([["Call in"] + lust_blowjob_build_employee_list()], draw_hearts_for_people = True))
     if _return == "Leave" or _return == None:
         "After looking at your employee list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
     "You call [the_person.possessive_title] and tell her to come to your office ASAP."
+    $ ceo_office.show_background()
     "Soon, there's a knock on your door."
     mc.name "Come in."
     $ the_person.draw_person()
@@ -258,7 +284,7 @@ label lust_blowjob_office_label():
         $ the_person.draw_person(position = "stand3")
         "[the_person.title] stands up."
         mc.name "See? That was exactly what I needed. Thank you [the_person.title]."
-        $ the_person.change_stats(obedience = 5, happiness = -5, slut_temp = 5, slut_core = 3)
+        $ the_person.change_stats(obedience = 5, happiness = -5, slut_temp = 5, slut_core = 1)
         the_person "I suppose that was okay... let's not make a habit of this... okay?"
         mc.name "Don't worry, I won't."
         $ the_person.review_outfit()
@@ -270,10 +296,7 @@ label lust_blowjob_office_label():
         "Her face grows red in anger."
         the_person "You're a sick man. I'm not some floozy for you to get your rocks off with!"
         $ the_person.draw_person(position = "walking_away")
-        $ the_person.change_happiness(-5)
-        $ the_person.change_obedience(-1)
-        $ the_person.change_love(-2)
-        $ the_person.change_slut_temp(3)
+        $ the_person.change_stats(happiness = -5, obedience = -1, love = -2, slut_temp = 1)
         "[the_person.possessive_title] quickly stands up and storms out of your office. Maybe you should be more careful who you pick for this?"
     call advance_time from _call_advance_time_lusty_blowjob_01
     return

@@ -66,13 +66,12 @@ init 3 python:
         build_specific_action_list = build_specific_action_list_extended(build_specific_action_list)
 
     def get_lust_tier():
-        if mc.locked_clarity < 200:
-            return 0
-        elif mc.free_clarity / mc.locked_clarity < 0.5 or mc.locked_clarity > 2000:
+        if mc.locked_clarity > 1500:
             return 4
-        elif mc.free_clarity / mc.locked_clarity < 1.0 or mc.locked_clarity > 1000:
+        if mc.locked_clarity > 700:
             return 3
-        elif mc.free_clarity / mc.locked_clarity < 1.5:
+        if mc.locked_clarity > 300:
             return 2
-        else:
+        if mc.locked_clarity > 100:
             return 1
+        return 0

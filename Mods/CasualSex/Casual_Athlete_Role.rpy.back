@@ -80,7 +80,7 @@ init -2 python:
         return False
 
     def add_casual_athlete_ghost_action(person):
-        remove_mandatory_crisis_list_action("casual_athlete_ghost_label")
+        mc.business.remove_mandatory_crisis("casual_athlete_ghost_label")
         casual_athlete_ghost = Action("Casual Athlete Ghosts you", casual_athlete_ghost_requirement, "casual_athlete_ghost_label", args = person)
         mc.business.add_mandatory_crisis(casual_athlete_ghost)
         return

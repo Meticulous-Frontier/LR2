@@ -185,6 +185,29 @@ init -1 python:
 
     Business.add_mandatory_morning_crisis = business_add_mandatory_morning_crisis
 
+    def business_remove_mandatory_crisis(self, crisis_event):
+        if isinstance(crisis_event, basestring):
+            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_crises_list)
+            if found:
+                self.mandatory_crises_list.remove(found)
+                return True
+            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_morning_crises_list)
+            if found:
+                self.mandatory_morning_crises_list.remove(found)
+                return True
+        elif isinstance(crisis_event, Action):
+            found = find_in_list(lambda x: x == crisis_event, self.mandatory_crises_list)
+            if found:
+                self.mandatory_crises_list.remove(found)
+                return True
+            found = find_in_list(lambda x: x == crisis_event, self.mandatory_morning_crises_list)
+            if found:
+                self.mandatory_morning_crises_list.remove(found)
+                return True
+        return False
+
+    Business.remove_mandatory_crisis = business_remove_mandatory_crisis
+
     def business_get_employee_list(self):
         return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available()]
 
