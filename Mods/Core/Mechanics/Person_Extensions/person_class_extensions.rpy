@@ -648,6 +648,15 @@ init -1 python:
 
     Person.generate_mother = generate_mother_enhanced
 
+    def person_is_willing(self, the_position, ignore_taboo = False):
+        final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+        if self.effective_sluttiness(the_position.associated_taboo) >= final_slut_requirement \
+            or self.effective_sluttiness(the_position.associated_taboo) + (self.obedience-100) >= final_slut_requirement:
+                return True
+        return False
+
+    Person.is_willing = person_is_willing
+
     ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
     # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
     # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
