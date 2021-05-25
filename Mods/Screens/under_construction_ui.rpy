@@ -8,4 +8,4 @@ screen under_construction_ui():
     zorder 60
     frame:
         background under_construction_image
-        pos (1320, 920)
+        pos (1040, 800)
