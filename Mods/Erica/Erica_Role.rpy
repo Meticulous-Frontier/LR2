@@ -2286,7 +2286,7 @@ label erica_lily_instapic_intro_label():
     "You fit in a couple different poses, but all throughout [erica.possessive_title] watches your reactions closely."
     $ scene_manager.update_actor(lily, position = "missionary", emotion = "happy")
     $ scene_manager.update_actor(erica, position = "missionary", emotion = "happy")
-    "For the final set of pics you capture them laying in bed next to each. It is undeniably sexy."
+    "For the final set of pics you capture them laying in bed next to each other. It is undeniably sexy."
     mc.name "Alright, I think we've got all the shots we need."
     $ scene_manager.update_actor(erica, position = "stand2", emotion = "happy")
     "[erica.title] stands up."
@@ -2346,7 +2346,7 @@ label erica_post_photoshoot_label(the_person):
     the_person "Wow! Okay. This is going to be a huge change for me."
     $ the_person.change_stats(happiness = 3, love = 3)
     the_person "[the_person.mc_title]... I really appreciate this. I owe you so many favors at this point."
-    mc.name "Non sense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
+    mc.name "Nonsense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
     "[the_person.title] gives you a playful punch on the shoulder."
     the_person "Was there anything else you needed?"
     $ the_person.set_alt_schedule(lily_bedroom, days = [5], times = [4])
@@ -2358,7 +2358,6 @@ label erica_post_photoshoot_label(the_person):
 label erica_lily_weekly_photoshoot_label(the_person):
     $ scene_manager = Scene()
     $ lily_insta_outfit = insta_wardrobe.pick_random_outfit()
-    $ builder = WardrobeBuilder(erica)
     $ mc.change_location(lily_bedroom)
     $ mc.location.show_background()
     "You walk down the hall toward [lily.possessive_title]'s room. As you approach her door, you can hear laughter and giggling from the other side."
@@ -2374,16 +2373,16 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "You should match":
             $ erica_insta_outfit = lily_insta_outfit.get_copy()
         "You should wear something similar, but not matching":
-            $ erica_insta_outfit = builder.personalize_outfit(lily_insta_outfit.get_copy())
+            $ erica_insta_outfit = erica.personalize_outfit(lily_insta_outfit.get_copy())
         "You should wear your own thing":
-            $ erica_insta_outfit = builder.personalize_outfit(insta_wardrobe.pick_random_outfit())
+            $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit())
     erica "Thanks! I'm still pretty new at this, so its nice to have your opinion on it."
     $ erica.change_happiness(1)
     $ erica.change_obedience(1)
     lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"
     erica "Yeah, me too. Do you have any flavored seltzers?"
     "You think for a second. You could offer to go get them their drinks, and that would give you an opportunity to give them a serum..."
-    "If you do, you will probably will the chance to watch them changing..."
+    "If you do, you will probably miss the chance to watch them change..."
     menu:
         "Grab the drinks":
             mc.name "Yeah we have seltzer. Let me go grab drinks for everyone while you two get changed."
@@ -2437,8 +2436,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
             lily "Alright, let's get ready!"
             "The girls start to strip down."
-            $ scene_manager.strip_actor_outfit(lily, exclude_feet = False)
-            $ scene_manager.strip_actor_outfit(erica, exclude_feet = False)
+            $ scene_manager.strip_full_outfit() # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
             $ erica.change_slut_temp(2)

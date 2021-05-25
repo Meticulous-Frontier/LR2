@@ -189,3 +189,20 @@ init -1 python:
         return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available()]
 
     Business.get_employee_list = business_get_employee_list
+
+    def business_get_mc_offspring_count(self):
+        kid_count = 0
+        for person in self.business_get_employee_list():
+            kid_count += person.count_kids_with_mc()
+        return kid_count
+
+    Business.business_get_mc_offspring_count = business_get_mc_offspring_count
+
+    def business_get_employees_with_kids_with_mc(self):
+        emp_list = []
+        for person in self.business_get_employee_list():
+            if person.has_kids_with_mc():
+                emp_list.append(person)
+        return emp_list
+
+    Business.business_get_employees_with_kids_with_mc = business_get_employees_with_kids_with_mc

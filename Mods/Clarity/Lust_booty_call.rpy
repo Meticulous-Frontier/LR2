@@ -35,7 +35,8 @@ init 3 python:
 
         return phone_menu_wrapper
 
-    build_phone_menu = build_phone_menu_booty_call_extended(build_phone_menu)
+    if "build_phone_menu" in globals():
+        build_phone_menu = build_phone_menu_booty_call_extended(build_phone_menu)
 
 
     lust_booty_call = ActionMod("Booty Call {image=gui/heart/Time_Advance.png}",  lust_booty_call_intro_requirement, "lust_booty_call_intro_label",

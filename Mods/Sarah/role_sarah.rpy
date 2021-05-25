@@ -226,7 +226,7 @@ init 2 python:
         return False
 
     def Sarah_ask_for_baby_requirement():
-        if mc_asleep() and sarah.has_role(girlfriend_role):
+        if mc_asleep() and sarah.has_role(girlfriend_role) and not sarah.is_pregnant():
             if sarah_threesomes_unlocked() and sarah.sex_record["Vaginal Creampies"] >= 10:
                 return True
         return False
@@ -2224,7 +2224,10 @@ label Sarah_initial_threesome_label():
     $ sarah.next_day_outfit = sarah.planned_outfit # she stays the night so she will have to wear the same outfit again
 
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
-    $ add_sarah_ask_for_baby_action()
+
+    python: # only add this if she is not already pregnant
+        if not sarah.is_pregnant():
+            add_sarah_ask_for_baby_action()
     return
 
 label Sarah_ask_for_baby_label():

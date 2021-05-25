@@ -656,7 +656,7 @@ label fetish_serum_breeding_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
-    the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
+    the_person "So, I've been running some experiments with those Reproduction Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
     the_person "Obviously, we expected the rats in the experimental group to produce more offspring, but the numbers were actually staggering."
@@ -721,10 +721,10 @@ label fetish_serum_coding_activity_label():
                 menu:
                     "Fuck [the_person.title]":
                         mc.name "I could use a break."
-                        if the_person.has_exhibition_fetish() or len(mc.location.people) <= 1:  #She likes it public or there's no one else here.
+                        if the_person.has_exhibition_fetish() or mc.location.get_person_count() <= 1:  #She likes it public or there's no one else here.
                             "You stand up and turn to her."
                             mc.name "Bend over the desk. I'm taking you right here."
-                            if len(mc.location.people) > 1:
+                            if mc.location.get_person_count() > 1:
                                 the_person "Oh god, right here in front of everyone? This is so hot..."
                             else:
                                 the_person "Oh god, right here in the lab? This is so hot..."
@@ -736,7 +736,7 @@ label fetish_serum_coding_activity_label():
                                 "[the_person.possessive_title] bends over. You start to strip off her bottoms."
                                 $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
                                 "When you finish, you take your cock out and get behind her."
-                            if len(mc.location.people) <= 1:
+                            if mc.location.get_person_count() <= 1:
                                 "Some of the other employees in the room have noticed your actions and are watching to see what is about to happen."
                                 the_person "Okay [the_person.mc_title]. Fuck me good! Don't hold back!"
                             "You run your cock along her slit a couple of times, then line yourself up and push forward."

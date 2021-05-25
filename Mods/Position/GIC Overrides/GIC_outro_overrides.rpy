@@ -53,8 +53,8 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
             else:
                 the_person "Already? Is my cunt to just too much for you to handle?"
-                if the_person.get_opinion_score("creampies") > 0:
-                    the_person "Whatever. I want to feel you cum insdie me. Not like your swimmers are strong enough to knock me up anyway."
+                if the_person.wants_creampie():
+                    the_person "Whatever. I want to feel you cum inside me. Not like your swimmers are strong enough to knock me up anyway."
                     "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
                     $ the_girl.cum_in_vagina()
                     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)

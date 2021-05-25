@@ -370,7 +370,10 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     "She looks you over from head to toe before continuing."
     the_person "How would you like to help me do something to make him jealous?"
     mc.name "I'm listening."
-    the_person "Why don't you come back later, after I close up?"
+    if day%7 == 5 or day%7 == 6:
+        the_person "Why don't you come back Monday evening, after I close up?"
+    else:
+        the_person "Why don't you come back later, after I close up?"
     "She lowers her voice to a whisper."
     the_person "I'll get on my knees and pretend like I'm sucking your dick. You can take some pictures, and then I'll accidentally send them to my ex..."
     $ mc.change_locked_clarity(10)
@@ -445,13 +448,14 @@ label ophelia_make_blowjob_pics_label():
     $ mc.change_locked_clarity(50)
     "You feel a strange session along your length. Is she... is her throat contracting around you? Is that even possible? Where the hell did she learn to do THIS?"
     mc.name "Oh god I'm gonna cum!"
+    $ the_person.draw_person(position = "kneeling1")
     "She quickly pulls off and starts rapidly stroking you with her hand."
     the_person "On my face! Give me your cum all over my face!"
     "You don't have the time to respond. Your body involuntarily begins pumping semen out at a frantic pace."
     $ the_person.cum_on_face()
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
     $ the_person.change_arousal(20)
-    $ the_person.draw_person(position = "blowjob")
+    $ the_person.draw_person(position = "kneeling1")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
     "Spurt after spurt covers [the_person.possessive_title]'s face. You don't think you've ever cum so hard or so fast from a blowjob."
     the_person "Mmm, I forgot to tell you... I learned in beauty school that semen is great for your skin! Mmm and its nice and warm too..."

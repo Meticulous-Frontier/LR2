@@ -52,7 +52,13 @@ init 2:
 
                 # Reserve space for the navigation section.
                 frame:
-                    style "game_menu_navigation_frame"
+                    frame:
+                        background "#000000aa"
+                        xalign 0.5
+                        xanchor 0.5
+                        ysize 760
+
+                        style "game_menu_navigation_frame"
 
                 frame:
                     style "game_menu_content_frame"

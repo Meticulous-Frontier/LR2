@@ -131,14 +131,14 @@ label so_relationship_worsen_label_enhanced():
 label so_relationship_quarrel_label(the_person):
     $ so_title = SO_relationship_to_title(the_person.relationship)
     if the_person.has_role(affair_role):
-        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
+        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
         the_person "We don't have to hide what's going on between us any more."
         $ the_person.add_role(girlfriend_role)
         mc.name "That's good news! So we don't have to sneak around anymore."
         $ the_person.change_love(5)
     else:
         $ the_person.change_happiness(-20)
-        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to spit up."
+        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
         mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
 
     $ the_person.relationship = "Single"

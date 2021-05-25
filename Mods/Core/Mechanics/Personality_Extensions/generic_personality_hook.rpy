@@ -10,7 +10,7 @@ init 10 python: # add to stack later then other mods
 init 0 python:
     # This will be called in game when a person is created original function in script.rpy
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
-        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
+        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, tan_style = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
         start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
         title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
@@ -68,6 +68,14 @@ init 0 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit,
                 generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans)
+
+        if tan_style is None:
+            if renpy.random.randint(0, 1) == 1: # 50% chance on random tan (could be no_tan)
+                return_character.tan_style = get_random_from_list(tan_list)
+            if return_character.tan_style == no_tan:
+                return_character.tan_style = None
+        else:
+            return_character.tan_style = tan_style
 
         # when not using bugfix, remove the employed_since key from event trigger dictionary (this should only be used for employees)
         if return_character.event_triggers_dict.get("employed_since", -1) != -1:
@@ -330,6 +338,8 @@ init 0 python:
         person.set_alt_schedule(None, times = [4])
         if person.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
+        if person.pregnancy_is_visible():
+            return  # no party for girls who already show the baby bump
 
         count = 0
         party_destinations = get_party_destinations()
@@ -352,7 +362,7 @@ init 0 python:
 
     def create_bimbo():
         # add one bimbo to the game (on start of game)
-        person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan",
+        person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
             hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True)
         person.generate_home()
         person.home.add_person(person)
@@ -481,8 +491,6 @@ init 0 python:
 
     def update_stripclub_strippers():
         for person in stripclub_strippers:
-            person.location.people.remove(person)
-            list_of_places.remove(person.home)
             person.remove_person_from_game()
         stripclub_strippers.clear()
 
@@ -490,6 +498,16 @@ init 0 python:
             person = create_stripper()
             person.set_schedule(strip_club, times = [3,4])
             stripclub_strippers.append(person)
+
+        # make sure one of the strippers an alpha-personality (simplifies stripclub story-line)
+        alpha_stripper = get_random_from_list([x for x in stripclub_strippers if x.age >= 25 and not x.personality == alpha_personality])
+        if alpha_stripper:
+            alpha_stripper.original_personality = alpha_stripper.personality
+            alpha_stripper.personality = alpha_personality
+            alpha_stripper.charisma = 5
+            alpha_stripper.int = 6
+            alpha_stripper.update_opinion_with_score(2, "taking control", False)
+            alpha_stripper.update_opinion_with_score(-1, "being submissive", False)
         return
 
     def update_main_character_actions():

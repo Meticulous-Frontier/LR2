@@ -202,6 +202,9 @@ label silent_pregnant_finish(the_person):
     if the_person.title is None:
         return  # unknown girls should not about the delivery
 
+    if the_person.is_mc_father():
+        $ the_person.event_triggers_dict["kids_with_mc"] = the_person.event_triggers_dict.get("kids_with_mc", 0) + 1
+
     "You get a call from [the_person.possessive_title] early in the morning. You answer it."
 
     if the_person in [aunt, mom]:

@@ -113,7 +113,8 @@ init 2 python:
 
         return phone_menu_wrapper
 
-    build_phone_menu = build_phone_menu_home_improvement_extended(build_phone_menu)
+    if "build_phone_menu" in globals():
+        build_phone_menu = build_phone_menu_home_improvement_extended(build_phone_menu)
 
     def home_renovation_completion_requirement(completion_day):
         if day > completion_day and mc.business.is_open_for_business():

@@ -1109,12 +1109,12 @@ label ashley_second_concert_intro_label(the_person):
     "Well, sounds like the two sisters have made plans for you tonight. From the excitement on [the_person.title]'s face, you decide to go with it."
     "You nod at [stephanie.title]."
     mc.name "Sounds good. When do you want to meet [the_person.title]?"
-    the_person "Meet me there at 6:30. I'll text you the address! There's a great bar around the corner, maybe we can grab a couple drinks after."
-    stephanie "Drinks? I don't know..."
+    the_person "Meet me there at 6:30. I'll text you the address!"
+    stephanie "I don't know..."
     the_person "Relax Steph! I'm sure [the_person.mc_title] will be a perfect gentleman."
     stephanie "It's not him I'm worried about!"
     "Desperate to diffuse the situation, you take control of the conversation."
-    mc.name "We'll go to the concert, grab a couple drinks afterword, then I'll bring her straight home. I'll have her home by, say, 11? If you're still up we can hang out a bit."
+    mc.name "We'll go to the concert, then I'll bring her straight home. I'll have her home by, say, 10? If you're still up we can hang out a bit."
     stephanie "Why don't you stay the night?"
     "[stephanie.title] is getting territorial. You decide for now to indulge her."
     mc.name "Okay. I'll plan to stay the night."
@@ -1178,8 +1178,11 @@ label ashley_second_concert_date_label():
     "[the_person.title] just watches as you clean your fingers."
     # change lighting
     "The lights come back on and people start to get up. You can see [ashley.title]'s chest rising and falling rapidly. She is breathing heavy and is really turned on."
-    mc.name "Alright. I can't wait to have a drink. To the bar?"
-    "You give her a wink as you say drink, making it clear that you aren't talking about alcohol."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    mc.name "Well, I promised to get you home straight away."
+    "You give her a wink as you say it. She chuckles and winks back."
+    # TODO change background to downtown night
+    
     return
 
 
@@ -1455,7 +1458,8 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
         stephanie "I suppose so. I mean the color was nice."
     else:
         stephanie "I don't know, I don't usually see you wear that colour."
-        $ renpy.say(the_person, "I could do something like that but in " + the_person.favorite_colour() + ".")
+        $ favorite_colour = the_person.favorite_colour()
+        the_person "I could do something like that but in [favorite_colour]."
         stephanie "That would be interesting."
     "[the_person.possessive_title] sips her coffee and thinks about it for a bit."
     stephanie "What do you think [stephanie.mc_title]? Sometimes it's easy to fall into the trap of just wearing what is comfortable. Do you think she would look good in that?"
@@ -1522,7 +1526,7 @@ label ashley_clothes_shopping_label(the_person):
     menu:
         "Keep it":
             mc.name "I like it. You should get it."
-            the_person "I think so to. Thanks!"
+            the_person "I think so too. Thanks!"
             $ the_person.wardrobe.add_outfit(the_person.outfit)
         "Not for you":
             mc.name "Sorry, its an interesting outfit, but I don't think its right for you."
