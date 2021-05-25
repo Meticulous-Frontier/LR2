@@ -1109,12 +1109,12 @@ label ashley_second_concert_intro_label(the_person):
     "Well, sounds like the two sisters have made plans for you tonight. From the excitement on [the_person.title]'s face, you decide to go with it."
     "You nod at [stephanie.title]."
     mc.name "Sounds good. When do you want to meet [the_person.title]?"
-    the_person "Meet me there at 6:30. I'll text you the address! There's a great bar around the corner, maybe we can grab a couple drinks after."
-    stephanie "Drinks? I don't know..."
+    the_person "Meet me there at 6:30. I'll text you the address!"
+    stephanie "I don't know..."
     the_person "Relax Steph! I'm sure [the_person.mc_title] will be a perfect gentleman."
     stephanie "It's not him I'm worried about!"
     "Desperate to diffuse the situation, you take control of the conversation."
-    mc.name "We'll go to the concert, grab a couple drinks afterword, then I'll bring her straight home. I'll have her home by, say, 11? If you're still up we can hang out a bit."
+    mc.name "We'll go to the concert, then I'll bring her straight home. I'll have her home by, say, 10? If you're still up we can hang out a bit."
     stephanie "Why don't you stay the night?"
     "[stephanie.title] is getting territorial. You decide for now to indulge her."
     mc.name "Okay. I'll plan to stay the night."
@@ -1178,8 +1178,11 @@ label ashley_second_concert_date_label():
     "[the_person.title] just watches as you clean your fingers."
     # change lighting
     "The lights come back on and people start to get up. You can see [ashley.title]'s chest rising and falling rapidly. She is breathing heavy and is really turned on."
-    mc.name "Alright. I can't wait to have a drink. To the bar?"
-    "You give her a wink as you say drink, making it clear that you aren't talking about alcohol."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    mc.name "Well, I promised to get you home straight away."
+    "You give her a wink as you say it. She chuckles and winks back."
+    # TODO change background to downtown night
+    
     return
 
 
