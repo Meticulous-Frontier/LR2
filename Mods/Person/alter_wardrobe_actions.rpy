@@ -16,7 +16,9 @@ init 4 python:
             # run original function
             result = org_func(person)
             # run extension code (append new action to base game menu)
-            if modify_wardrobe_action.enabled:
+            found = next((x for x in action_mod_list if x.effect == "modify_wardrobe_label"), None)
+            if found.enabled:   # use enabled from action mod settings
+                # use not stored action to append to action menu
                 modify_wardrobe_action.args = [person]
                 modify_wardrobe_action.requirement_args = [person]
                 result.append(modify_wardrobe_action)
