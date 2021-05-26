@@ -119,14 +119,14 @@ label family_morning_breakfast_enhanced_label():
                     "Your cock springs out of your clothes, nearly smacking [lily.possessive_title] in the face. [mom.title] gets on her knees next to [lily.title]."
                     call start_threesome(lily, mom, start_position = threesome_double_blowjob, position_locked = True) from _threesome_for_breakfast_yum_1
                     $ the_report = _return
-                    if the_report["guy orgasms"] > 0:
+                    if the_report.get("guy orgasms", 0) > 0:
                         "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
                     else:
                         "Finished for now, you decide to put your cock away while [mom.possessive_title] and [lily.possessive_title] get up."
                     $ scene_manager.update_actor(mom, position="stand3", display_transform = character_center_flipped)
                     $ scene_manager.update_actor(lily, position = "stand4", display_transform = character_right)
                     mc.name "Mmm, thanks for breakfast mom!"
-                    if the_report["guy orgasms"] > 0:
+                    if the_report.get("guy orgasms", 0) > 0:
                         "[lily.title] laughs and jokes back."
                         lily "Thanks for breakfast, bro!"
                 "Refuse":

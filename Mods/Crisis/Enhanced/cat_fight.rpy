@@ -305,7 +305,7 @@ label cat_fight_crisis_enhanced_label():
             "Both girls seem relieved. While unorthodox, you are pretty sure their slutty natures will come out and they'll bond while they blow you."
             call start_threesome(person_one, person_two, start_position = threesome_double_blowjob, position_locked = True) from _team_building_threesome_1
             $ the_report = _return
-            if the_report["guy orgasms"] > 0:
+            if the_report.get("guy orgasms", 0) > 0:
                 "You watch as [person_one.title] and [person_two.title] begin to kiss and lick your cum off of each other's faces"
                 "This turned out to be a success!"
                 $ person_one.change_stats(obedience = 5, slut_temp = 3, happiness = 5)

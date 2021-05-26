@@ -2435,7 +2435,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ scene_manager.update_actor(the_person, position = "missionary", display_transform = character_center_flipped)
         $ scene_manager.update_actor(threesome_partner, position = "missionary", display_transform = character_right)
         "All finished, the girls flop onto their backs, one on each side of you."
-        if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0:  #They both finished.
+        if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0:  #They both finished.
             the_person "Oh wow, that was so hot..."
             if the_person.get_opinion_score("incest") < 1:
                 $ the_person.increase_opinion_score("incest")

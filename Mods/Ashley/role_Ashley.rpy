@@ -844,7 +844,6 @@ label ashley_post_handjob_convo_label(the_person):
     the_person "Ahh, thank you..."
     $ mc.location.show_background()
     $ stephanie.add_unique_on_talk_event(ashley_stephanie_arrange_relationship)
-    $ hide_wip_screen()
     call advance_time from _call_advance_ashley_post_hj_01
     return
 
@@ -925,7 +924,6 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
-    $ hide_wip_screen()
     $ stephanie.set_alt_schedule(coffee_shop, days = [6], times = [0])
     $ ashley.set_alt_schedule(coffee_shop, days = [6], times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
@@ -997,7 +995,6 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     stephanie "Next week you're buying the coffees though!"
     mc.name "That's acceptable. With us all being employees, I'll just put it down as a company expense."
     "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about the sisters."
-    $ hide_wip_screen()
     $ the_person.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     $ ashley_reset_coffee_partner()
     call advance_time from _call_advance_ashley_coffee_advance_01
@@ -1082,7 +1079,6 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     mc.name "Thank you for the company. I think it's about time for me to go."
     stephanie "Hey, you know where to find us next week!"
     the_person "Bye [the_person.mc_title]..."
-    $ hide_wip_screen()
     $ the_person.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     call advance_time from _call_advance_ashley_coffee_advance_02
 
@@ -1135,8 +1131,8 @@ label ashley_second_concert_date_label():
     $ date_outcome = None
     $ cum_clue = False
     $ caught_ashley_cheating = False
-    $ night_outfit = the_person.wardrobe.get_outfit_with_name("Ashley Night Out Outfit").get_copy()
-    $ the_person.apply_outfit(night_outfit)
+    $ the_person.planned_outfit = the_person.wardrobe.get_outfit_with_name("Ashley Night Out Outfit").get_copy()
+    $ the_person.apply_outfit(the_person.planned_outfit)
     "Evening falls and soon it is time to make your way downtown to meet [the_person.title], your girlfriend's sister, for a date to another classical music concert."
     "Things with the two girls have gotten complicated. Ashley has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
     "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
@@ -1197,7 +1193,7 @@ label ashley_second_concert_date_label():
     "[the_person.title] just watches as you clean your fingers."
     # change lighting
     "The lights come back on and people start to get up. You can see [ashley.title]'s chest rising and falling rapidly. She is breathing heavy and is really turned on."
-    $ the_person.draw_person(position = the_person.idle_pose)
+    $ the_person.draw_person()
     mc.name "Well, I promised to get you home straight away."
     "You give her a wink as you say it. She chuckles and winks back."
     $ mc.change_location(downtown)
@@ -1215,13 +1211,13 @@ label ashley_second_concert_date_label():
     $ the_report = _return
     #TODO make sure MC arousal stays the same?
     if the_report.get("girl orgasms", 0) == 0:
-        $ the_person.draw_person(position = the_person.idle_pose)
+        $ the_person.draw_person()
         "[the_person.title] puts her leg down. She is incredulous."
-        the_person "Seriously? [stephanie.name] really has you wrapper around her finger, doesn't she? I don't know why I bother with you..."
+        the_person "Seriously? [stephanie.name] really has you wrapped around her finger, doesn't she? I don't know why I bother with you..."
         $ the_person.change_stats(happiness = -10, obedience = -5)
         "She seems pretty pissed you couldn't even get her off."
     elif the_report.get("girl orgasms", 0) == 1:
-        $ the_person.draw_person(position = the_person.idle_pose)
+        $ the_person.draw_person()
 
         "[the_person.title] puts her leg down. She gives you a little smile."
         the_person "Mmm... not bad... but honestly, I was expecting more."
@@ -1237,7 +1233,7 @@ label ashley_second_concert_date_label():
                 $ date_outcome = "handjob"
                 call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _ashley_handjob_second_date_01
                 $ the_report = _return
-                if the_report["guy orgasms"] == 0:
+                if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
                         if the_person.outfit.is_dress():
                             "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
@@ -1280,7 +1276,7 @@ label ashley_second_concert_date_label():
                 "She smirks for a second, but quickly opens her mouth as you pull her head down. Her velvet lips wrap around you and start to eagerly suck you off."
                 call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _ashley_second_date_blowjob_01
                 $ the_report = _return
-                if the_report["guy orgasms"] == 0:
+                if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
                         if the_person.outfit.is_dress():
                             "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
@@ -1293,7 +1289,7 @@ label ashley_second_concert_date_label():
         "When you finish, [the_person.possessive_title]'s legs wobble, then start to give out. She catches herself up against the wall but has trouble standing up."
         $ the_person.change_stats(happiness = 10, obedience = 5, love = 5, slut_temp = 20)
         the_person "Fuck that was good... where the hell have you been all my life?"
-        "She tries to stand up for a second, but quickly leans agains the wall again."
+        "She tries to stand up for a second, but quickly leans against the wall again."
         the_person "My legs... they don't work... I'm going to have to pay you back for this another time. Don't worry I swear I'm good for it."
         menu:
             "Take her against the wall" if the_person.is_willing(SB_facing_wall):
@@ -1318,7 +1314,7 @@ label ashley_second_concert_date_label():
                 "You slide in easily after her multiple orgasms."
                 call fuck_person(the_person, start_position = SB_facing_wall, skip_intro = True, position_locked = True, private = True, skip_condom = True) from _call_sex_description_ashley_second_date_fuck_01
                 $ the_report = _return
-                if the_report["guy orgasms"] == 0:
+                if the_report.get("guy orgasms", 0) == 0:
                     "You decide to pull out before you finish. You want to give your load to [stephanie.possessive_title] later..."
                 elif the_person.has_creampie_cum():
                     "When you look down, you can see some cum running down the inside of [the_person.possessive_title]'s legs, but it doesn't seem like any got on her clothes."
@@ -1338,7 +1334,7 @@ label ashley_second_concert_date_label():
             "Help her recover":
                 mc.name "I understand. Here, let me help you."
                 "You grab her arm and help her stand. It takes her several minutes, but finally gets her legs back."
-                $ the_person.draw_person(position = the_person.idle_pose)
+                $ the_person.draw_person()
     if date_outcome:
         if cum_clue:
             the_person "Oh fuck... its all over my dress!"
@@ -1348,8 +1344,8 @@ label ashley_second_concert_date_label():
             "There's no way [stephanie.possessive_title] doesn't notice. But you have to get her home..."
         else:
             the_person "Damn that was hot... let me just cleanup real quick..."
-            $ the_person.apply_outfit(night_outfit)
-            $ the_person.draw_person(position = the_person.idle_pose)
+            $ the_person.apply_outfit(the_person.planned_outfit)
+            $ the_person.draw_person()
             "[the_person.possessive_title] gets some wipes from her clutch and straightens her clothes out."
     "You take a couple wipes for yourself, cleaning your face and hands of her juices."
     the_person "Alright, ready to escort me home like a gentleman?"
@@ -1364,7 +1360,7 @@ label ashley_second_concert_date_label():
         "[the_person.title] quickly starts walking toward the hall. [stephanie.title] raises an eyebrow."
         the_person "Hey sis, sorry I gotta pee really bad!"
         $ scene_manager.update_actor(ashley, position = "walking_away")
-        "As she walks by [stephanie.possessive_title]"
+        "As she walks by [stephanie.possessive_title]..."
         stephanie "Hey, you got something on your dress..."
         $ stephanie.change_happiness(-5)
         $ stephanie.change_love(-5)
@@ -1381,6 +1377,7 @@ label ashley_second_concert_date_label():
     "She gives you a hug and whispers in your ear."
     stephanie "I'm so glad to finally have you for myself. Let's go to my room!"
     $ scene_manager.clear_scene()
+
     $ stephanie.draw_person(position = "walking_away")
     "You follow [stephanie.possessive_title] to her bedroom. She closes the door, then pushes you back onto her bed."
     "She strips down in front of you."
@@ -1455,7 +1452,7 @@ label ashley_second_concert_date_label():
         $ caught_ashley_cheating = True
 
     if caught_ashley_cheating:
-        "Sorry, the repurcussions for Stephanie catching you cheating with Ashley have not yet been written."
+        "Sorry, the repercussions for Stephanie catching you cheating with Ashley have not yet been written."
         #TODO make a mandatory event to trigger in a day or two where you and stephanie make up.
     else:
         stephanie "Mmm, you taste so good... but that's not the only thing I want from you tonight..."
@@ -1465,7 +1462,7 @@ label ashley_second_concert_date_label():
         if stephanie.has_cum_fetish() or stephanie.has_breeding_fetish() or stephanie.wants_creampie():
             "She reaches down and takes your cock in her hand and lines it up with her raw cunt."
             stephanie "I want to feel you cum inside me tonight. I'm going give you the ride of your life and then finish you off deep..."
-            "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfation when she bottoms out."
+            "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfaction when she bottoms out."
             call get_fucked(stephanie, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _ashley_second_date_creampie_steph_01
         elif stephanie.is_willing(cowgirl):
             "She reaches over to her nightstand and pulls out a pack of condoms. She grabs one and quickly rolls it onto you with her hand."
@@ -1474,7 +1471,7 @@ label ashley_second_concert_date_label():
                 "Fine with you. This isn't the first time tonight you had a condom on."
             $ mc.condom = True
             "She reaches down and takes your cock in her hand and lines it up with her cunt."
-            "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfation when she bottoms out."
+            "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfaction when she bottoms out."
             call get_fucked(stephanie, the_goal = "get mc off", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _ashley_second_date_fuck_steph_01
         else:
             call get_fucked(stephanie, the_goal = "get mc off", start_position = drysex_cowgirl, private = True, skip_intro = True, allow_continue = False) from _ashley_second_date_drysex_steph_01
@@ -1485,27 +1482,24 @@ label ashley_second_concert_date_label():
 
         $ stephanie.next_day_outfit = stephanie.outfit # stay in current outfit next day
         call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_ashley_date_2_01
-        python:
-            possible_action_list = []
-            for wakeup_scene in girlfriend_morning_action_list:
-                if wakeup_scene.is_action_enabled(stephanie): #Make sure requirement functions take the person as an arg
-                    possible_action_list.append(wakeup_scene) #Build a list of valid crises from ones that pass their requirement.
-        $ wakeup_action = get_random_from_list(possible_action_list)
-        if wakeup_action:
-            $ wakeup_action.call_action(stephanie)
+
+        $ picked_event = get_random_girlfriend_morning_action(stephanie)
+        if picked_event:
+            $ picked_event.call_action(stephanie)
         else:
-            "You wakeup, but [stephanie.possessive_title] isn't there. She must have gotten up early and left."
+            "You wake up, but [stephanie.possessive_title] isn't there. She must have gotten up early and left."
             $ stephanie.planned_outfit = stephanie.decide_on_outfit() # choose a new outfit for the day
             $ stephanie.apply_planned_outfit()
-    $ mc.business.event_triggers_dict["girlfriend_person"] = None
-    $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
-    $ del cum_clue
-    $ del caught_ashley_cheating
-    $ del date_outcome
+
+    python:
+        mc.business.event_triggers_dict["girlfriend_person"] = None
+        mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
+        del cum_clue
+        del caught_ashley_cheating
+        del date_outcome
     return
 
 label ashley_steph_second_date_confrontation_label():
-    pass
     "This scene not yet written."
     return
 
@@ -1844,7 +1838,7 @@ label ashley_clothes_shopping_label(the_person):
     the_person "Okay... What do you think?"
     $ the_person.draw_person(position = "back_peek")
     "She gives a quick twirl, letting you check her out from all angles. You make sure to take in all of the details."
-    $ the_person.draw_person(position = the_person.idle_pose)
+    $ the_person.draw_person()
     menu:
         "Keep it":
             mc.name "I like it. You should get it."
