@@ -109,7 +109,7 @@ init 2 python:
         if self.layer == 1:
             cloth_info += "{image=gui/extra_images/underwear_token.png}"
         if self.layer == 0:
-            cloth_info += "{image=gui/sexy_underwear_token.png}"
+            cloth_info += "{image=gui/extra_images/sexy_underwear_token.png}"
 
         if self.has_extension: #Display a second token if the clothing item is a different part (split coverage into top and bottom?)
             if self.has_extension.layer == 3:
@@ -118,6 +118,8 @@ init 2 python:
                 cloth_info += "|{image=gui/extra_images/clothing_token.png}"
             if self.has_extension.layer == 1:
                 cloth_info += "|{image=gui/extra_images/underwear_token.png}"
+            if self.layer == 0:
+                cloth_info += "{image=gui/extra_images/sexy_underwear_token.png}"
 
         cloth_info += "+" +str(self.slut_value) + "{image=gui/heart/red_heart.png}"
         return cloth_info
