@@ -648,8 +648,37 @@ init -1 python:
 
     Person.generate_mother = generate_mother_enhanced
 
-    def person_is_willing(self, the_position, ignore_taboo = False):
+    def person_is_willing(self, the_position, private = True, ignore_taboo = False):
         final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+
+        # add modifiers
+        if self.has_family_taboo():
+            final_slut_requirement -= 20
+
+        if self.has_role(prostitute_role):
+            final_slut_requirement += 20
+        elif self.relationship == "Girlfriend":
+            final_slut_requirement += (self.get_opinion_score("cheating on men") * 5 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 10)
+        elif self.relationship == "Fiancée":
+            final_slut_requirement += (self.get_opinion_score("cheating on men") * 8 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 15)
+        elif self.relationship == "Married":
+            final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
+
+        if not private:
+            final_slut_requirement += (-10 + self.get_opinion_score("public sex") * 5) if self.effective_sluttiness() < 50 else self.get_opinion_score("public sex") * 5
+
+        if self.love < 0:
+            final_slut_requirement -= self.love
+        elif private:
+            if self.has_role([girlfriend_role, affair_role]):
+                final_slut_requirement += self.love
+            elif self.is_family():
+                final_slut_requirement += __builtin__.round(self.love / 4.0)
+            else:
+                final_slut_requirement += __builtin__.round(self.love / 2.0)
+
+        final_slut_requirement += __builtin__.round((self.happiness - 100)/4.0)
+
         if self.effective_sluttiness(the_position.associated_taboo) >= final_slut_requirement \
             or self.effective_sluttiness(the_position.associated_taboo) + (self.obedience-100) >= final_slut_requirement:
                 return True
