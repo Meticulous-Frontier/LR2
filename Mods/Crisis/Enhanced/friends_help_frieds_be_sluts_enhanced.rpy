@@ -242,10 +242,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 person_one "Well, here are mine. Come on [person_two.title], whip 'em out!"
                             else:
                                 person_one "Of course."
-                                if person_one.outfit.can_half_off_to_tits():
-                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_half_off_to_tits_list(), half_off_instead = True)
-                                else: #We need to strip something off completely.
-                                    $ scene_manager.strip_actor_strip_list(person_one, person_one.outfit.get_tit_strip_list(), half_off_instead = False)
+                                $ scene_manager.strip_to_tits(person = person_one, prefer_half_off = True)
 
                                 if person_two.outfit.tits_visible():
                                     $ person_one.break_taboo("bare_tits")
@@ -390,7 +387,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                         mc.name "So, what can I help you two with?"
                         $ scene_manager.update_actor(person_two, emotion = "sad")
                         person_two "I... I mean, we... Uh..."
-                        person_one "She's very nervous, let me her out help out."
+                        person_one "She's very nervous, let me help her out."
                         if person_two.sex_record.get("Blowjobs", 0) == 0:
                             person_one "[person_two.title] has always wanted to suck your cock, but was too scared to ask."
                         else:

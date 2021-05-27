@@ -629,7 +629,7 @@ label cum_fetish_rebecca_intro_label(the_person):
     if the_person.vagina_available():
         "As she bends over, her holes are on display for you. You run your hand along her slit a few times, the moisture immediately soaking your fingers."
     else:
-        $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_person)
         "She wiggles her hips as you pull her clothes off. When you finish, her holes are on wonderful display for you."
     "The eagerness of [the_person.possessive_title] and her body on display soon has your cock hardening again. You give her ass a couple smacks with it and she moans."
     $ the_person.change_arousal(20)

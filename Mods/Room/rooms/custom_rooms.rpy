@@ -62,6 +62,14 @@ init 15 python:
         Object("shower door", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
         make_bench(),
     ]
+    coffee_shop_objects = [
+        make_floor(),
+        make_wall(),
+        make_window(),
+        Object("counter",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0),
+        Object("Booth", ["Sit", "Lay", "Low"], sluttiness_modifier = 0, obedience_modifier = 0),
+        make_bench()
+    ]
 
     def make_swing():
         return Object("sex swing",["Sit","Low","Lay", "Swing"], sluttiness_modifier = 0, obedience_modifier = 0)
@@ -125,6 +133,10 @@ label build_custom_rooms(stack):
 
         police_jail = Room("police_jail", "Police Jail", [], standard_police_jail_backgrounds, police_jail_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(police_jail)
+
+        #Coffee shop
+        coffee_shop = Room("coffee_shop", "Cofee Shop", [], restaraunt_background, coffee_shop_objects, [], [], True, [7,3], None, True, lighting_conditions = standard_indoor_lighting)
+        list_of_places.append(coffee_shop)
 
         # initialize dungeon room creation action
         fix_lobby_objects()

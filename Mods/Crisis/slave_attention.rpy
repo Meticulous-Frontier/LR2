@@ -76,7 +76,7 @@ label slave_attention_crisis_action_label:
                     jump slave_attention_comfort_menu
                 "Whip her\n{color=#ff0000}{size=18}Requires at least 20 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 20:
                     pass
-                "Fuck her" if mc.energy >= 40:
+                "Fuck her" if not the_person.has_taboo("vaginal_sex") and mc.energy >= 40:
                     "You quickly undress and start fucking her right there."
 
                     # TODO instead of default FUCK_PERSON make custom dialog that fits better.
@@ -89,7 +89,7 @@ label slave_attention_crisis_action_label:
 
                     jump slave_attention_comfort_menu
 
-                "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
+                "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 and had sex before{image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                     pass
                 "Dildo her" if mc.energy >= 40 and perk_system.has_item_perk("Dildo"):
                     "You pick up one of the bigger dildos from your cabinet."
@@ -137,7 +137,7 @@ label slave_attention_crisis_action_label:
                         mc.change_arousal(20)
 
                     menu:
-                        "Fuck her" if mc.energy >= 40:
+                        "Fuck her" if not the_person.has_taboo("vaginal_sex") and mc.energy >= 40:
                             mc.name "And now for the main course."
                             "Without any mercy you decide to fuck her ass hard."
                             call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, skip_condom = True, position_locked = True) from _call_slave_attention_crisis_1
@@ -148,7 +148,7 @@ label slave_attention_crisis_action_label:
                             the_person "As you wish, [the_person.mc_title]."
                             $ the_person.change_stats(happiness = 5, obedience = 5)
 
-                        "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
+                        "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 and had sex before{image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
                             pass
 
                         "Send her away":

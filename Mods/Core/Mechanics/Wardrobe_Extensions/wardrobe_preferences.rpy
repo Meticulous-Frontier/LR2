@@ -1,4 +1,4 @@
-init 0 python:
+init 1 python:
     # insert new opinions in list
 
     class WardrobePreference():

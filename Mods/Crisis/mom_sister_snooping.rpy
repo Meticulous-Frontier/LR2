@@ -80,13 +80,13 @@ label mom_sister_snooping_action_label():
         "Damn. What are they doing in there? Comparing assets?"
         mom "Honey, you just have to work with what you've been given. Let mama help. Show me what you're working with."
         lily "Okay mom..."
-        $ scene_manager.strip_actor_outfit(lily, top_layer_first = True, exclude_lower = True, exclude_feet = True, delay = 1)
+        $ scene_manager.strip_to_tits(person = lily)
         $ mc.change_locked_clarity(30)
         "Oh my... [lily.title] is topless!"
         mom "See? Any man would be love to get their hands on you. You just have to learn to work with what you have."
         mom "I have to actively cover up, to keep from getting too much attention..."
         lily "Why would you do that!?! I'd kill to have your figure..."
-        $ scene_manager.strip_actor_outfit(mom, top_layer_first = True, exclude_lower = True, exclude_feet = True, delay = 1)
+        $ scene_manager.strip_to_tits(person = mom)
         "Now [mom.possessive_title] is taking her top off?"
         $ mc.change_locked_clarity(30)
         mom "I don't know, I just feel like they are such a distraction sometimes..."

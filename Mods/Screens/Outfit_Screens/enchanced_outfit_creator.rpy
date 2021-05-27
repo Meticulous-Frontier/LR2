@@ -159,6 +159,14 @@ init 10 python:
         switch_outfit_category(category)
         return
 
+    def personalize_generated_outfit():
+        cs = renpy.current_screen()
+        outfit = cs.scope["outfit_builder"].personalize_outfit(cs.scope["item_outfit"], max_alterations = 2, swap_bottoms = True)
+        cs.scope["item_outfit"] = outfit.get_copy()
+        cs.scope["demo_outfit"] = outfit
+        preview_outfit()
+        return
+
     def get_outfit_copy_with_name(outfit):
         new_outfit = outfit.get_copy()
         new_outfit.update_name()
@@ -330,7 +338,6 @@ init 2:
 
         #add "Paper_Background.png"
         modal True
-        zorder 100
 
         $ renpy.block_rollback()
 
@@ -1170,9 +1177,20 @@ init 2:
                                                 xfill True
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
+                                                tooltip "Generate random outfit based on clothing sluttiness values and selected girl."
                                                 action [
                                                     Function(set_generated_outfit, category_selected, slut_generation, min_slut_generation)
                                                 ]
+
+                                            if mannequin != "mannequin":
+                                                textbutton "Personalize Outfit":
+                                                    xfill True
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    tooltip "Personalize outfit for selected girl."
+                                                    action [
+                                                        Function(personalize_generated_outfit)
+                                                    ]
 
                                             hbox:
                                                 button:

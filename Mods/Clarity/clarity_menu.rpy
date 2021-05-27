@@ -4,7 +4,7 @@
 init -2 python:
     def persuade_person_requirement(the_person):
         if mc.free_clarity < 500:
-            return "Requires: 500+ Free Clarity"
+            return "Requires: 500+ Clarity"
         else:
             return True
 
@@ -14,7 +14,7 @@ init -2 python:
         elif the_person.int >= 7:
             return "Intelligence maximum reached"
         elif mc.free_clarity < (the_person.int * 500):
-            return "Requires: {} Free Clarity".format(the_person.int * 500)
+            return "Requires: {} Clarity".format(the_person.int * 500)
         else:
             return True
 
@@ -24,7 +24,7 @@ init -2 python:
         elif the_person.charisma >= 7:
             return "Charisma maximum reached"
         elif mc.free_clarity < (the_person.charisma * 500):
-            return "Requires: {} Free Clarity".format(the_person.charisma * 500)
+            return "Requires: {} Clarity".format(the_person.charisma * 500)
         else:
             return True
 
@@ -34,9 +34,20 @@ init -2 python:
         elif the_person.focus >= 7:
             return "Focus maximum reached"
         elif mc.free_clarity < (the_person.focus * 500):
-            return "Requires: {} Free Clarity".format(the_person.charisma * 500)
+            return "Requires: {} Clarity".format(the_person.charisma * 500)
         else:
             return True
+
+    def clarity_train_obedience_requirement(the_person):
+        if (the_person.obedience - 100) / 5 >= mc.charisma:
+            return "Requires: Higher MC Charisma"
+        elif the_person.obedience > 150:
+            return "Obedience maximum reached"
+        elif mc.free_clarity < max(500, ((the_person.obedience - 100) * 100)):
+            return "Requires: {} Clarity".format(max(500, ((the_person.obedience - 100) * 100)))
+        else:
+            return True
+
 
     def clarity_serum_dose_requirement(the_person):
         if mc.inventory.get_any_serum_count() <= 0:
@@ -44,7 +55,7 @@ init -2 python:
         if len(the_person.serum_effects) >= the_person.serum_tolerance:
             return "Already at Serum Limit"
         if mc.free_clarity < 500:
-            return "Requires: 500 Free Clarity"
+            return "Requires: 500 Clarity"
         return True
 
     def build_clarity_person_actions_menu(the_person):
@@ -54,10 +65,12 @@ init -2 python:
             menu_tooltip = "Utilize your clarity to increase her charisma score.", priority = -5)
         clarity_train_focus_action = Action("Train her Focus", requirement = clarity_train_focus_requirement, effect = "clarity_train_focus", args = the_person, requirement_args = the_person,
             menu_tooltip = "Utilize your clarity to increase her focus score.", priority = -5)
+        clarity_train_obedience_action = Action("Train her Obedience", requirement = clarity_train_obedience_requirement, effect = "clarity_train_obedience", args = the_person, requirement_args = the_person,
+            menu_tooltip = "Utilize your clarity to increase her obedience.", priority = -5)
         clarity_serum_dose_action = Action("Give her a serum", requirement = clarity_serum_dose_requirement, effect = "clarity_serum_dose", args = the_person, requirement_args = the_person,
             menu_tooltip = "Utilize your clarity to give her a serum.", priority = -5)
 
-        return ["Persuade", clarity_train_int_action, clarity_train_cha_action, clarity_train_focus_action , clarity_serum_dose_action, ["Never mind", "Return"]]
+        return ["Persuade", clarity_train_int_action, clarity_train_cha_action, clarity_train_focus_action , clarity_train_obedience_action, clarity_serum_dose_action, ["Never mind", "Return"]]
 
 
 label persuade_person(the_person):
@@ -107,6 +120,25 @@ label clarity_train_focus(the_person):
     $ the_person.change_focus(1)
     the_person "Thank you [the_person.mc_title]. I feel like I can really focus on the rest of my day now!"
     call advance_time from _call_advance_clarity_focus_01
+    return "Advance Time"
+
+label clarity_train_obedience(the_person):
+    if the_person.is_employee():
+        mc.name "Hey, have a minute?"
+        the_person "Sure."
+        mc.name "I wanted to go over some work tasks. I want to make sure we are on the same page, organizationally."
+        the_person "Okay."
+        "You spend some time with [the_person.possessive_title], making sure they are performing their job the way you expect."
+        the_person "I understand. Okay, I'm going to get back to work now."
+    else:
+        mc.name "Hey, have a minute?"
+        the_person "Sure."
+        "You spend some time with [the_person.possessive_title]."
+        "You are careful not to say anything too overt, but use subtle language to encourage her to be more obedient and trust you more."
+        the_person "Sorry [the_person.mc_title]. This is nice, but I need to get going."
+    $ the_person.change_obedience(10)
+    $ mc.spend_clarity(max(500, ((the_person.obedience - 100) * 100)))
+    call advance_time from _call_advance_clarity_obedience_01
     return "Advance Time"
 
 label clarity_serum_dose(the_person):

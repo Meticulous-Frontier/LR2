@@ -108,7 +108,7 @@ init -2 python:
         return False
 
     def add_hotwife_ghost_action(person):
-        remove_mandatory_crisis_list_action("casual_hotwife_ghost_label")
+        mc.business.remove_mandatory_crisis("casual_hotwife_ghost_label")
         casual_hotwife_ghost = Action("Casual hotwife Ghosts you", casual_hotwife_ghost_requirement, "casual_hotwife_ghost_label", args = person)
         mc.business.add_mandatory_crisis(casual_hotwife_ghost)
         return

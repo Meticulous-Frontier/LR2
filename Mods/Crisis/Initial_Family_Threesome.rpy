@@ -45,7 +45,7 @@ label SB_fetish_vaginal_family_threesome_label():
             "[the_person.possessive_title] smiles at you."
             the_person "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
             "[the_person.possessive_title] winks at you before stripping down."
-            $ scene_manager.strip_actor_outfit_to_max_sluttiness(the_person, temp_sluttiness_boost = 50)
+            $ scene_manager.strip_full_outfit(person = the_person)
             $ mc.change_locked_clarity(20)
             mc.name "Damn [the_person.title], you are really getting good at that..."
             $ scene_manager.update_actor(the_person, position="kneeling1", display_transform = character_center_flipped)
@@ -63,7 +63,7 @@ label SB_fetish_vaginal_family_threesome_label():
         the_person "Mom! Going to join us again tonight?"
         mom "If that's okay with you two... I don't want to be a bother."
         mc.name "[mom.title]. Having you here can only make things even better."
-        $ scene_manager.strip_actor_outfit_to_max_sluttiness(mom, temp_sluttiness_boost = 50)
+        $ scene_manager.strip_full_outfit(person = mom)
         $ scene_manager.update_actor(mom, position = "sitting")
         $ mc.change_locked_clarity(20)
         "[mom.title] sits on the edge of your bed."
@@ -74,7 +74,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ scene_manager.update_actor(the_person, position = "back_peek", display_transform = character_center_flipped)
         $ scene_manager.update_actor(mom, position = "missionary", display_transform = character_right)
         $ the_report = _return
-        if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0:  #Happy family
+        if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0 and the_report.get("guy orgasms", 0) > 0:  #Happy family
             "[the_person.possessive_title] falls into your bed on one side of you on her side, while [mom.title] lays on her back next to you."
             mom "Oh my god... you two... that was amazing!"
             $ mom.change_happiness(10)
@@ -127,7 +127,7 @@ label SB_fetish_vaginal_family_threesome_label():
         mc.name "Come here. I'll please you with my mouth while [the_person.title] rides my cock."
         "[mom.title] hesitates for a second, but then relents."
         mom "That sounds like fun... Okay! I'll do it!"
-        $ scene_manager.strip_actor_outfit_to_max_sluttiness(mom, temp_sluttiness_boost = 50)
+        $ scene_manager.strip_full_outfit(person = mom)
         $ mc.change_locked_clarity(10)
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True

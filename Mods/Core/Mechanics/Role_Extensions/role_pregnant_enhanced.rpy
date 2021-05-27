@@ -132,6 +132,20 @@ init 2 python:
         person.add_role(pregnant_role)
         return
 
+init 3 python:
+    def pregnant_finish_person_extended(org_func):
+        def pregnant_finish_person_wrapper(person):
+            # run extension code
+            if person.is_mc_father():
+                person.sex_record["Children with MC"] = person.sex_record.get("Children with MC", 0) + 1
+            # run original function
+            return org_func(person)
+        return pregnant_finish_person_wrapper
+
+    # wrap up the pregnant finish person function
+    pregnant_finish_person = pregnant_finish_person_extended(pregnant_finish_person)
+
+
 label silent_pregnant_announce(the_person):
     #In silent pregnancy, she just knows she's pregnant, but doesn't necessarily announce it.
     $ the_person.event_triggers_dict["preg_knows"] = True #Set here and in the larger tits, represents the person knowing they're pregnant so they don't ask for condoms ect.

@@ -253,7 +253,7 @@ label girl_shower_enter_enhanced(the_person):
                 "She turns around and faces you. It might be the hot water, but her face is flush."
                 $ the_person.change_slut_temp(2)
                 menu:
-                    "Fuck her":
+                    "Fuck her" if not the_person.has_taboo("vaginal_sex"): # only show sex option if you had sex before
                         $ mc.change_location(home_shower)
                         call fuck_person(the_person, skip_intro = True) from _call_fuck_person_shower_enhanced_1
                         $ the_report = _return

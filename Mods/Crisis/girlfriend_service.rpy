@@ -1,6 +1,6 @@
 ## Girlfriend Service crisis. If dating an employee, she approaches you and offers to hookup.
 init -1 python:
-    girlfriend_service_weight = 5   # Increase weight because it only occurs in one timeslot.
+    girlfriend_service_weight = 5
 
 init 2 python:
     def girlfriend_service_requirement():
@@ -21,7 +21,13 @@ label girlfriend_service_label():
     if the_person is None:
         return
 
-    "Dev" "This event is a work in progress."
+    python:
+        # actually visit the MC
+        old_location = None
+        if not the_person.location == mc.location:
+            old_location = the_person.location
+            the_person.change_location(mc.location)
+
     "As you are getting your work done, your girlfriend, [the_person.title], comes up to you."
     $ the_person.draw_person()
     the_person "Hey [the_person.mc_title]. Have a sec?"
@@ -31,7 +37,7 @@ label girlfriend_service_label():
         "She starts to rub your crotch through your pants."
         $ mc.change_locked_clarity(10)
         the_person "I was thinking, I could take care of you... right here..."
-        if mc.location.get_person_count() > 1 or (mc.location.get_person_count() == 1 and the_person != mc.location.people[0]):
+        if mc.location.get_person_count() > 1:
             "You glance around. Some of your employees are already starting to notice what is going on."
         else:
             "You glance around. You are the only two people around..."
@@ -91,7 +97,7 @@ label girlfriend_service_label():
                 call get_fucked(the_person, private = True) from _girlfriend_service_initiate_03
                 $ the_person.change_stats (happiness = 5, slut_temp = 3)
             "Service me here" if mc.energy >= 50:
-                if not mc.location.people or (mc.location.get_person_count() == 1 and the_person == mc.location.people[0]):
+                if mc.location.get_person_count() <= 1:
                     "Looking around, [the_person.title] realizes you two are the only two people around."
                     the_person "Okay, let's do it right here!"
                     "[the_person.possessive_title] moves toward you."
@@ -121,5 +127,8 @@ label girlfriend_service_label():
 
     $ clear_scene()
     $ the_person.apply_planned_outfit()
+    if old_location:
+        $ the_person.change_location(old_location)
+        $ old_location = None
     $ mc.location.show_background()
     return

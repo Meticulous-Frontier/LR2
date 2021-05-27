@@ -16,7 +16,9 @@ init 4 python:
             # run original function
             result = org_func(person)
             # run extension code (append new action to base game menu)
-            if modify_wardrobe_action.enabled:
+            found = next((x for x in action_mod_list if x.effect == "modify_wardrobe_label"), None)
+            if found.enabled:   # use enabled from action mod settings
+                # use not stored action to append to action menu
                 modify_wardrobe_action.args = [person]
                 modify_wardrobe_action.requirement_args = [person]
                 result.append(modify_wardrobe_action)
@@ -25,7 +27,8 @@ init 4 python:
         return build_specific_action_list_wrapper
 
     # wrap up the build_specific_action_list function
-    build_specific_action_list = build_specific_action_list_alter_outfit_extended(build_specific_action_list)
+    if "build_specific_action_list" in globals():
+        build_specific_action_list = build_specific_action_list_alter_outfit_extended(build_specific_action_list)
 
     def bra_removal(person): # replace extensions with something
         alterations = 0
@@ -600,7 +603,7 @@ label modify_wardrobe_label(the_person):
                 "Yes":
                     mc.name "That would be even better. Go ahead and remove them from your wardrobe entirely."
                     the_person "Yes, [the_person.mc_title]."
-                    $ alterations += no_bras(the_person)
+                    $ alterations += sexier_bras(the_person)
                 "No":
                     mc.name "No, I like you wearing them, I just want them to be skimpy and sexy."
                     the_person "I'll take a look and see what I can do for you."
@@ -624,7 +627,7 @@ label modify_wardrobe_label(the_person):
                 "Yes":
                     mc.name "That would be even better. Go ahead and remove them from your wardrobe entirely."
                     the_person "Yes, [the_person.mc_title]."
-                    $ alterations += no_panties(the_person)
+                    $ alterations += sexier_panties(the_person)
                 "No":
                     mc.name "No, I like you wearing them, I just want them to be skimpy and sexy."
                     the_person "I'll take a look and see what I can do for you."

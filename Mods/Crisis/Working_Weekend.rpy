@@ -134,12 +134,11 @@ label SB_working_weekend_crisis_label_high(person_one):
             if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah_epic_tits_progress() == 1):
                 "You're pretty sure she's ready for next step if you are ready."
                 menu:
-                    "Fuck her on your desk":
+                    "Fuck her on your desk" if not person_one.has_taboo("vaginal_sex"): # only show sex option if you had sex before:
                         "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                         "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                         $ mc.change_locked_clarity(30)
                         $ person_one.break_taboo("condomless_sex")
-                        $ person_one.break_taboo("vaginal_sex")
                         "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
                         call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15
                         $ the_report = _return
@@ -178,7 +177,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "Dumbfounded, you can only nod."
                 person_two "Yes! Oh just give me one second!!!"
                 "She starts to strip down."
-                $ scene_manager.strip_actor_outfit(person_two)
+                $ scene_manager.strip_full_outfit(person = person_two)
                 $ person_two.break_taboo("bare_tits")
                 $ person_two.break_taboo("bare_pussy")
                 "Now naked, she walks over to you and [person_one.possessive_title]."

@@ -75,11 +75,11 @@ init 1 python:
         return True
 
     def quest_cure_discovery_cleanup():
-        remove_mandatory_crisis_list_action("quest_cure_discovery_intro_label")
-        remove_mandatory_crisis_list_action("quest_cure_discovery_market_patent_label")
-        remove_mandatory_crisis_list_action("quest_cure_discovery_patent_sold_label")
-        remove_mandatory_crisis_list_action("quest_cure_discovery_patent_kept_label")
-        remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
+        mc.business.remove_mandatory_crisis("quest_cure_discovery_intro_label")
+        mc.business.remove_mandatory_crisis("quest_cure_discovery_market_patent_label")
+        mc.business.remove_mandatory_crisis("quest_cure_discovery_patent_sold_label")
+        mc.business.remove_mandatory_crisis("quest_cure_discovery_patent_kept_label")
+        mc.business.remove_mandatory_crisis("quest_cure_discovery_market_missed_label")
         person = quest_cure_get_market_contact()
         if person:
             person.remove_on_talk_event(quest_cure_discovery_market_patent)
@@ -226,7 +226,7 @@ label quest_cure_discovery_market_patent_label(the_person):
     $ quest_cure_discovery().quest_event_dict["market_day"] = day
     $ del the_disease
     $ quest_cure_discovery().set_quest_flag(31)
-    $ remove_mandatory_crisis_list_action("quest_cure_discovery_market_missed_label")
+    $ mc.business.remove_mandatory_crisis("quest_cure_discovery_market_missed_label")
     $ mc.business.add_mandatory_crisis(quest_cure_discovery_patent_sold)
     return
 

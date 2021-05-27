@@ -53,7 +53,7 @@ label mom_breakfast_action_label():
         mc.name "Everything okay?"
         if the_person.sluttiness < 20:  #Low Sluttiness path
             call mom_breakfast_action_label_low() from _call_mom_breakfast_action_label_low
-        elif the_person.sluttiness < 70: #mid sluttiness path
+        elif the_person.sluttiness < 70 or the_person.has_taboo("vaginal_sex"): #mid sluttiness path or no sex yet
             call mom_breakfast_action_label_medium() from _call_mom_breakfast_action_label_medium
         else:
             call mom_breakfast_action_label_high() from _call_mom_breakfast_action_label_high
@@ -120,10 +120,9 @@ label mom_breakfast_action_label_medium():
             the_person "[the_person.mc_title]? What are you... oohhhh."
             "You put your hands on her shoulders and begin to massage them. She sighs as your hands begin to work on her tension."
             menu:
-                "Grope her breasts" if the_person.sluttiness > 30:
+                "Grope her breasts" if the_person.sluttiness > 30 and not the_person.has_taboo("touching_body"):
                     "You work on her shoulders for a couple of minutes, then slowly run your hands down to her considerable chest."
                     the_person "Oh [the_person.mc_title]... I'm not sure..."
-                    $ the_person.break_taboo("touching_body")
                     "You interrupt her and whisper in her ear."
                     mc.name "Sshhh, just relax. Close your eyes and relax."
                     $ the_person.change_arousal(15)
@@ -137,10 +136,7 @@ label mom_breakfast_action_label_medium():
             else:
                 menu:
                     "Pull Her Top Up" if the_person.sluttiness > 40:
-                        if the_person.outfit.can_half_off_to_tits():
-                            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
-                        else: #We need to strip something off completely.
-                            $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
+                        $ scene_manager.strip_to_tits(person = the_person, prefer_half_off = True)
 
                         "You reach down and slowly remove her top, exposing her creamy tits."
                         $ the_person.break_taboo("bare_tits")
@@ -155,7 +151,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.change_arousal(20) #35
             the_person "Oh, that feels so good, but we should probably stop before your sister comes out..."
             menu:
-                "Pet Her Pussy" if the_person.sluttiness > 50 and not the_person.outfit.vagina_available():
+                "Pet Her Pussy" if the_person.sluttiness > 30 and not the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
                     "You let one hand slowly descend from her breast down to the mound between her legs."
@@ -167,9 +163,8 @@ label mom_breakfast_action_label_medium():
                     "She arches her back again as you begin to nibble at her ear."
                     $ the_person.change_arousal(30) #65
                     menu:
-                        "Finger Her" if the_person.sluttiness > 60:
+                        "Finger Her" if the_person.sluttiness > 50:
                             "You bring your hand up a bit, then slowly down again, this time beneath her clothing."
-                            $ the_person.break_taboo("touching_vagina")
                             "This time, she doesn't put up a fight, she is too close to cumming."
                             "Your fingers are now sliding across the flesh of her moistened cunt."
                         "Finish Massage":
@@ -179,14 +174,13 @@ label mom_breakfast_action_label_medium():
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
                             $ the_person.change_stats(obedience = 5, slut_temp = 1)
                             return "Advance Time"
-                    pass
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                     mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5, slut_temp = 1)
                     return "Advance Time"
-                "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available():
+                "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
                     "You let one hand slowly descend from her breast down to her exposed cunt."
@@ -231,7 +225,7 @@ label mom_breakfast_action_label_high():
     "She looks around, and notices the door to sister's room is still closed. She must be sleeping in."
     the_person "I had some really crazy dreams last night, it would be nice if I could release a little tension before work. Are you up for a quickie?"
     menu:
-        "Have a Quickie":
+        "Have a Quickie" if not the_person.has_taboo("condomless_sex"):
             mc.name "That sounds pretty nice actually, what did you have in mind?"
 
         "Feed Her" if the_person.has_cum_fetish():
@@ -274,7 +268,7 @@ label mom_breakfast_action_label_high():
                 mc.name "Of course!"
                 "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title]'s door."
 
-                $ scene_manager.strip_actor_outfit(the_person)
+                $ scene_manager.strip_full_outfit(person = the_person)
                 "After no response, you knock again."
                 lily "What!?! I'm tired!"
                 mc.name "Me and mom are gonna have some fun, you should join us."
@@ -285,16 +279,16 @@ label mom_breakfast_action_label_high():
                     "Already basically ready to go, [lily.title] looks to you for direction."
                 else:
                     "Seeing [the_person.possessive_title] already naked, [lily.title] strips down also."
-                    $ scene_manager.strip_actor_outfit(lily)
+                    $ scene_manager.strip_full_outfit(person = lily)
                 mc.name "Mom is feeling needy this morning sis, why don't we take care of her?"
                 lily "Sounds great!"
                 call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, swapped = True) from _fuck_mom_for_breakfast_1
                 $ the_report = _return
-                if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0: #Happy family
+                if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0 and the_report.get("guy orgasms", 0) > 0: #Happy family
                     "The three of you remain together for a while, enjoying your orgasms."
                     $ the_person.change_stats(obedience = 3, happiness = 5)
                     the_person "You two... I get overwhelmed by all the love I feel for you two when we do things like this. I love you both so much!"
-                elif the_report["girl one orgasms"] > 0:
+                elif the_report.get("girl one orgasms", 0) > 0:
                     "[the_person.possessive_title] recovers for a bit from her orgasm."
                     $ the_person.change_stats(obedience = 2, happiness = 3)
                     the_person "Thank you, [the_person.mc_title], for insisting on bringing your sister out. You were right, that felt so good."
@@ -311,7 +305,7 @@ label mom_breakfast_action_label_high():
         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
     else: #We need to strip something off completely.
         "[the_person.possessive_title] quickly starts to strip down."
-        $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+        $ scene_manager.strip_to_vagina(person = the_person)
 
     "You take a quick sip of coffee. [the_person.possessive_title] is ready to fuck you right here in the kitchen!"
     if the_person.has_anal_fetish():

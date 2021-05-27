@@ -75,7 +75,7 @@ init 10 python:
         return
 
     def slave_add_wakeup_duty_action(person):
-        remove_mandatory_crisis_list_action("slave_alarm_clock_label")
+        mc.business.remove_mandatory_crisis("slave_alarm_clock_label")
         wakeup_duty_crisis.args = [person]
         mc.business.add_mandatory_morning_crisis(wakeup_duty_crisis)
         return
@@ -474,7 +474,7 @@ label increase_slave_submission_label(the_person):
         "You smile and pat her on the head."
         $ the_person.max_opinion_score("being submissive")
         if not the_person.outfit.full_access():
-            mc.name "Now standup and take of your clothes."
+            mc.name "Now stand up and take of your clothes."
             $ the_person.strip_outfit(position = "stand3", emotion = "happy")
             $ the_person.change_stats(obedience = 2, arousal = 10)
         mc.name "I think you deserve a reward, get on your hands and knees, like a good little pet."

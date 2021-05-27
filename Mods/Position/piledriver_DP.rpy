@@ -152,7 +152,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
     $ climax_controller = ClimaxController(["Cum inside of her","pussy"], ["Cum on her face", "face"])
     $ the_choice = climax_controller.show_climax_menu()
     if the_choice == "Cum inside of her":
-        if the_girl.sluttiness > 120 or mc.condom:
+        if the_girl.wants_creampie() or mc.condom:
             the_girl "Come on, dump it right inside of me!"
             if mc.condom:
                 "You had no intention of stopping, but hearing her ask for it makes you cum even harder."
@@ -175,19 +175,20 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 $ the_girl.cum_in_vagina()
                 $ climax_controller.do_clarity_release(the_girl)
                 $ piledriver_DP.redraw_scene(the_girl)
-                if the_girl.get_opinion_score("creampies") > 0:
-                    the_girl  "Yes! Fill me with your cum!"
+                if the_girl.wants_creampie():
+                    the_girl "Yes! Fill me with your cum!"
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-                if the_girl.get_opinion_score("bareback sex") > 0:
+
+                if the_girl.knows_pregnant():
+                    the_girl "Oh yes, fill me up with your hot semen!"
+                elif the_girl.get_opinion_score("bareback sex") > 0:
                     the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                     "[the_girl.possessive_title]'s voice starts to trail off."
                 elif the_girl.sluttiness > 110:
                     the_girl "Oh god it's so deep."
-                elif the_girl.knows_pregnant():
-                    the_girl "Oh yes, fill me up with your hot semen!"
                 elif the_girl.on_birth_control:
                     the_girl "Oh fuck...  Good thing I'm on the pill..."
                 else:

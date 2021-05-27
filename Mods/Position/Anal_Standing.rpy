@@ -80,7 +80,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
         "After a particularly hard thrust, [the_girl.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
         the_girl "I'm sorry [the_girl.mc_title], it hurts. Can you go a little slower?"
-        "You pull her hips back toward you slowly. Her inexperienced ass yields to your penis and she sighs as you bottom out"
+        "You pull her hips back toward you slowly. Her inexperienced ass yields to your penis and she sighs as you bottom out."
         "You pull yourself out a bit, then spit on her asshole and work it around a bit to provide a bit of extra lubrication."
         "Next time you push yourself in it goes in a bit easier, but you can tell she is having a hard time taking you in her back passage."
     elif the_girl.has_role(anal_fetish_role):           #Anal fetish

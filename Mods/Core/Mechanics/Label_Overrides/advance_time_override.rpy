@@ -62,7 +62,7 @@ init 5 python:
 
     # some crisis events should always trigger (not tracked in crisis tracker and always available when is_action_enabled())
     excluded_crisis_tracker_events = [] # Check for the events existance since they can be found outside of the core files
-    excluded_crisis_tracker_events_gc = ["work_relationship_change_crisis", "sister_phone_crisis_action", "mom_selfie_crisis", "late_for_work_action", "cousin_tease_crisis"]
+    excluded_crisis_tracker_events_gc = ["work_relationship_change_crisis", "sister_phone_crisis_action", "mom_selfie_crisis", "late_for_work_action"]
     for crisis in excluded_crisis_tracker_events_gc:
         if crisis in globals():
             excluded_crisis_tracker_events.append(globals()[crisis])
@@ -178,6 +178,11 @@ init 5 python:
             create_party_schedule(person)
         return
 
+    def clear_follow_mc_flag(people):
+        for (person, place) in people:
+            person.follow_mc = False
+        return
+
     def advance_time_run_turn(people):
         start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
@@ -186,8 +191,13 @@ init 5 python:
 
         mc.business.run_turn()
         mc.run_turn()
+        if "police_chief" in globals(): # make sure changes to her uniform during work hours
+            if time_of_day > 0 and time_of_day < 4:
+                police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_turn()
+        if "perk_system" in globals():
+            perk_system.update()  #TEST to see if this is a good time for this.
         if debug_log_enabled:
             add_to_debug_log("Run Turn: {total_time:.3f}", start_time)
         return
@@ -195,11 +205,12 @@ init 5 python:
     def advance_time_run_day(people):
         start_time = time.time()
         for (person, place) in people:
-            person.follow_mc = False
             person.run_day()
 
         mc.run_day()
         mc.business.run_day()
+        if "police_chief" in globals(): # make sure she always wears her uniform
+            police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_day()
         if debug_log_enabled:
@@ -210,8 +221,6 @@ init 5 python:
         start_time = time.time()
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
-            if person.follow_mc: # move follower to mc location
-                person.change_location(mc.location)
 
         mc.business.run_move()
         if debug_log_enabled:
@@ -249,6 +258,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
+        clear_follow_mc_flag(people_to_process)
         okay_to_save = False
 
     while count < advance_time_max_actions:
@@ -373,8 +383,7 @@ label advance_time_end_of_day_label():
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2
-        if "perk_system" in globals():
-            perk_system.update()  #TEST to see if this is a good time for this.
+
         mc.business.funds_yesterday = mc.business.funds
     return
 

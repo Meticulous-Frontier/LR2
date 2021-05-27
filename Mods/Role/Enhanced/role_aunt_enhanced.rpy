@@ -77,8 +77,7 @@ label aunt_drunk_cuddle_label():
     $ mc.change_location(bedroom)
     $ bedroom.show_background()
     $ set_night_outfit(the_person)
-    $ builder = WardrobeBuilder(the_person)
-    $ the_person.apply_outfit(builder.personalize_outfit(the_person.outfit))
+    $ the_person.apply_outfit(the_person.personalize_outfit(the_person.outfit))
 
     "After a minute, [the_person.possessive_title] knocks on your door, then slowly enters."
     $ scene_manager.add_actor(the_person)
@@ -148,7 +147,7 @@ label aunt_drunk_cuddle_label():
             "[the_person.title] seems to be feeling the same way."
             the_person "Could you... you know... just... take it out? It feels good, but I'm getting a wedgie like this..."
             "You can't believe your ears. You quickly pull your cock out. As you are doing so, you feel [the_person.title] wiggling under the covers..."
-            $ scene_manager.strip_actor_outfit(the_person, exclude_upper = True)
+            $ scene_manager.strip_to_vagina(person = the_person)
             "When you push up against her again, you realize she was taking her panties off! Your cock is now push up against [the_person.possessive_title]'s naked ass."
             $ mc.change_locked_clarity(20)
             the_person "Oh god... you feel so hard..."

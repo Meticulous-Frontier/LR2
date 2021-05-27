@@ -65,7 +65,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                     $ the_girl.change_happiness(-5)
                     $ the_girl.change_obedience(3)
                     $ the_girl.change_love(-5)          #She loses trust
-                elif the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
+                elif the_girl.wants_creampie():         #She likes creampies...
                     the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
                     if the_girl.on_birth_control:
@@ -108,10 +108,6 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ the_girl.cum_in_vagina()
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 $ doggy.redraw_scene(the_girl)
-                if the_girl.on_birth_control or the_girl.knows_pregnant():
-                    the_girl "Oh wow, there's so much of it..."
-                else:
-                    the_girl "Oh fuck, what if I get pregnant? Ah..."
 
                 "You wait until your orgasm has passed completely, then pull out and sit back. Your cum starts to drip out of [the_girl.title]'s slit almost immediately."
 

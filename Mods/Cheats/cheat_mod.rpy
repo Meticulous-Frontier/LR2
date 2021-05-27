@@ -39,6 +39,7 @@ init 2 python:
         cs.scope["eye_options"] = False
         cs.scope["skin_options"] = False
         cs.scope["body_options"] = False
+        cs.scope["tan_options"] = False
         cs.scope["idle_options"] = False
         cs.scope["breast_options"] = False
         cs.scope["hair_style_options"] = False
@@ -136,6 +137,7 @@ screen cheat_menu():
     default eye_options = False
     default skin_options = False
     default body_options = False
+    default tan_options = False
     default idle_options = False
     default breast_options = False
     default hair_style_options = False
@@ -170,12 +172,13 @@ screen cheat_menu():
         "Height": ["height", "height", .005, 4, (.8, 1)],
         "Energy": ["energy", "energy", 10.0, 5, (60,  400)],
         "Max Energy": ["max_energy", "max_energy", 10.0, 6, (60,  400)],
-        "Free Clarity": ["free_clarity", "free_clarity", 1000.0, 7, (0, 100000)],
+        "Clarity": ["free_clarity", "free_clarity", 500.0, 7, (0, 100000)],
+        "Lust": ["locked_clarity", "locked_clarity", 500.0, 8, (0, 100000)],
 
-        "Funds": ["funds", "funds", 10000, 8, (0, 100000000)],
-        "Supplies": ["supply_count", "supply_count", 10000, 9, (0, 100000)],
-        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 10, (50, 300)],
-        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 11, (50, 300)] # Might add If statement to combine these two as they go hand in hand
+        "Funds": ["funds", "funds", 10000, 9, (0, 100000000)],
+        "Supplies": ["supply_count", "supply_count", 10000, 10, (0, 100000)],
+        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 11, (50, 300)],
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 12, (50, 300)] # Might add If statement to combine these two as they go hand in hand
         }
     default work_skills = {
         "HR": ["hr_skill", "hr_skill", 1, 0, (0, 20)],
@@ -711,6 +714,15 @@ screen cheat_menu():
                                 hover_background "#4f7ad6"
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("body_options")]
 
+                        textbutton "Body Tan":
+                            style "textbutton_no_padding_highlight"
+                            text_style "cheat_text_style"
+                            xfill True
+                            if tan_options:
+                                background "#4f7ad6"
+                                hover_background "#4f7ad6"
+                            action [Function(cheat_collapse_menus), ToggleScreenVariable("tan_options")]
+
                         textbutton "Idle Position":
                             style "textbutton_no_padding_highlight"
                             text_style "cheat_text_style"
@@ -875,6 +887,23 @@ screen cheat_menu():
 
                                         action [
                                             Function(setattr, editing_target, "body_type", x),
+                                            Function(cheat_appearance)
+                                        ]
+
+                        if tan_options and hasattr(editing_target, "tan_style"):
+                            vbox:
+                                for x in tan_list:
+                                    textbutton str(x.name):
+                                        xfill True
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "cheat_text_style"
+
+                                        if editing_target.tan_style == x:
+                                            background "#4f7ad6"
+                                            hover_background "#4f7ad6"
+
+                                        action [
+                                            Function(setattr, editing_target, "tan_style", x if x != no_tan else None),
                                             Function(cheat_appearance)
                                         ]
 

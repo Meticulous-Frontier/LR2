@@ -9,7 +9,7 @@ init 1 python:
         return __builtin__.round(((3*person.charisma) + (person.focus) + (2*person.market_skill) + 5) * (mc.business.team_effectiveness))/100 #Total number of doses of serum that can be sold by this person.
 
     def supply_potential_stat(person):
-        return __builtin__.round(((3*person.focus) + (person.charisma) + (2*person.supply_skill) + 10) * (mc.business.team_effectiveness))/100
+        return __builtin__.round(((5*person.focus) + (3*person.charisma) + (3*person.supply_skill) + 20) * (mc.business.team_effectiveness))/100
 
     def research_potential_stat(person):
         result = __builtin__.round(((3*person.int) + (person.focus) + (2*person.research_skill) + 10) * (mc.business.team_effectiveness))/100

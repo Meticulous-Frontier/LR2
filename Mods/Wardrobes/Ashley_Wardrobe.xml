@@ -60,6 +60,19 @@
             </Feet>
             <Accessories />
         </Outfit>
+        <Outfit name="Ashley Night Out Outfit">
+            <UpperBody>
+                <Item alpha="0.95" blue="0.15" green="0.15" name="Evening_Dress" red="0.15" />
+                <Item alpha="0.95" blue="0.19" green="0.36" name="Lace_Bra" red="0.1" />
+            </UpperBody>
+            <LowerBody />
+            <Feet>
+                <Item alpha="0.95" blue="0.19" green="0.36" name="Sandal_Heels" red="0.1" />
+            </Feet>
+            <Accessories>
+                <Item alpha="0.95" blue="0.78" green="0.95" name="Necklace_Set" red="0.95" />
+            </Accessories>
+        </Outfit>
         <Outfit name="Ashley Sexy Girls Outfit">
             <UpperBody>
                 <Item alpha="0.95" blue="0.34" green="0.54" name="Lace_Bra" red="0.18" />

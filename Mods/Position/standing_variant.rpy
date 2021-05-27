@@ -112,7 +112,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  "She seems to be into it. Maybe you should tell her how you want to finish."
                  menu:
                      "I wanna creampie you":
-                         if the_girl.get_opinion_score("creampies") > 0:
+                         if the_girl.wants_creampie():
                               "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
                               the_girl "I'm already so full... I can't wait to feel you blow inside me"
                               "She seems to be into creampies!"
@@ -159,7 +159,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  "After you finish dirty talking, you grab her hips and resume your fucking."
     else:   #She is experienced. Give her a chance to please you
         "[the_girl.possessive_title] reaches back with one hand and grabs your hip, urging you to fuck her harder."
-        "She is keeping pace with you, pushing back and meeting your thrusts exquisitely. Your hips make a loud slap against her ass with every thrust, and your balls swing forward and slap her pussy when you bottom out"
+        "She is keeping pace with you, pushing back and meeting your thrusts exquisitely. Your hips make a loud slap against her ass with every thrust, and your balls swing forward and slap her pussy when you bottom out."
         the_girl "Oh god, [the_girl.mc_title], you fuck me so good..."
         "[the_girl.possessive_title]'s tight cunt feels so good, you can't help but slam into it over and over again. Maybe you should touch her a bit or talk dirty in her ear..."
         menu:
@@ -233,7 +233,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                              $ the_girl.change_arousal(the_girl.get_opinion_score(15))
                              "[the_girl.possessive_title] moans. She is truly addicted to your cum."
                              the_girl "Do it! Give me your cum! I want it so bad."
-                         elif the_girl.get_opinion_score("creampies") > 0:
+                         elif the_girl.wants_creampie():
                               "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
                               the_girl "I'm already so full... I can't wait to feel you blow inside me"
                               "She seems to be into creampies!"
@@ -451,7 +451,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] tries to move her head, but your strong grip on the her hair prevent her from shifting it much."
                     if the_girl.get_opinion_score("bareback sex") > 0:
                         the_girl "You could fuck me until you cum inside and there's nothing I could do. You could knock me up while I'm up against the [the_object.name] like I'm some kind of slut..."
-                    elif the_girl.get_opinion_score("creampies") > 0:
+                    elif the_girl.wants_creampie():
                         the_girl "You could cum right inside me and there's nothing I could do to stop you... Just blow your load inside of me like I'm just a little slut..."
                     else:
                         the_girl "Oh god you are just using me like a cock sleeve and there is nothing I can do. Like I'm just a little slut..."
@@ -506,7 +506,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             $ SB_facing_wall.redraw_scene(the_girl)
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
-            if the_girl.get_opinion_score("creampies") > 0:
+            if the_girl.wants_creampie():
                 the_girl "Yes! Fill me up with your cum!"
             if the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl "I love it when you shoot your seed so deep!"

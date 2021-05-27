@@ -62,13 +62,13 @@ init 1 python:
         return quest_director.get_quest("Arousal Serum")
 
     def quest_arousal_serum_cleanup():
-        remove_mandatory_crisis_list_action("quest_arousal_serum_pills_label")
-        remove_mandatory_crisis_list_action("quest_arousal_serum_fire_HR_label")
-        remove_mandatory_crisis_list_action("quest_arousal_serum_intro_label")
-        remove_mandatory_crisis_list_action("quest_arousal_serum_receive_drug_label")
-        remove_mandatory_crisis_list_action("quest_arousal_serum_researched_label")
-        remove_mandatory_crisis_list_action("quest_arousal_serum_test_label")
-        remove_mandatory_crisis_list_action("quest_arousal_serum_pills_expire_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_pills_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_fire_HR_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_intro_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_receive_drug_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_researched_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_test_label")
+        mc.business.remove_mandatory_crisis("quest_arousal_serum_pills_expire_label")
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_arousal_serum_arrange_test)
         quest_arousal_serum().quest_event_dict.clear()
@@ -215,7 +215,7 @@ label quest_arousal_serum_arrange_test_label(the_person):
     $ mc.business.add_mandatory_crisis(quest_arousal_serum_test)
     $ quest_arousal_serum().set_quest_flag(31)
     $ mc.business.add_mandatory_crisis(quest_arousal_serum_fire_HR)
-    $ remove_mandatory_crisis_list_action("quest_arousal_serum_pills_label")
+    $ mc.business.remove_mandatory_crisis("quest_arousal_serum_pills_label")
     return
 
 label quest_arousal_serum_test_label():

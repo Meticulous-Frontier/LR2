@@ -252,7 +252,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
     else:
         "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
-        if the_girl.get_opinion_score("creampies") > 0:
+        if the_girl.wants_creampie():
             the_girl  "Yes! Fill me with your cum!"
         $ the_girl.cum_in_vagina()
         $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
@@ -265,13 +265,13 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
             the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-        if the_girl.get_opinion_score("bareback sex") > 0:
+        if the_girl.knows_pregnant():
+            the_girl "Its nice, already being pregnant, I can take a load like that anytime..."
+        elif the_girl.wants_creampie() or the_girl.get_opinion_score("bareback sex") > 0:
             the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."
         elif the_girl.sluttiness > 110:
             the_girl "Oh god it's so deep."
-        elif the_girl.knows_pregnant():
-            the_girl "Its nice, already being pregnant, I can take a load like that anytime..."
         elif the_girl.on_birth_control:
             the_girl "Oh fuck...  Good thing I'm on the pill..."
         else:

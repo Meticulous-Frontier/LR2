@@ -195,7 +195,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
     if mc.location.get_person_count() > 1: # There's other people around
         $ the_person.add_situational_slut("being_chaired", 8, "Everyone can see the slut I am...")
     "She starts to strip down for you."
-    $ scene_manager.strip_actor_outfit(the_person)
+    $ scene_manager.strip_full_outfit(person = the_person)
     the_person "Are you planning something naughty for me, [the_person.mc_title]?"
     menu:
         "Reward her (tooltip)Let her orgasm":
@@ -428,7 +428,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
         $ the_person.add_situational_slut("being_chaired", 8, "Everyone can see the slut I am...")
     the_person "Okay Mistress, whatever [the_person.mc_title] wants."
     "She starts to strip down while she looks at you."
-    $ scene_manager.strip_actor_outfit(the_person)
+    $ scene_manager.strip_full_outfit(person = the_person)
     the_person "Are you guys planning something naughty for me?"
     menu:
         "Reward her (tooltip)Let her orgasm":

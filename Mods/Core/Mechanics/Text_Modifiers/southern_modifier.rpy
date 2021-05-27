@@ -63,10 +63,12 @@ init 5 python:
         "I think": "I reckon",
         "take it easy": "hold your horses",
         " is not ": " ain't ",
+        " is all ": " 'sall ",
         "isn't": "ain't",
         " am not ": " ain't ",
         " are not ": " ain't ",
         "aren't": "ain't",
+        "you all": "y'all",
         "let me": " lemme",
         "very good": "real good",
         "yes sir": "yes", # replace with yes (word replacer will make it yessir)

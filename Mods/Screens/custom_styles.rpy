@@ -66,6 +66,13 @@ init -2 style custom_outfit_style: ##The text style used for text inside of the 
     bold False
     italic False
 
+style textbutton_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
+    padding [5,5]
+    margin [5,5]
+    background "#00008099"
+    insensitive_background "#22222299"
+    hover_background "#aaaaaa99"
+
 init 2 style textbutton_text_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
     size 20
     italic False

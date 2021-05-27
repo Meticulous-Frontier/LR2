@@ -222,8 +222,7 @@ label threesome_test():
     $ scene_manager = Scene()
     $ scene_manager.add_actor(mom)
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
-    $ scene_manager.strip_actor_outfit(mom)
-    $ scene_manager.strip_actor_outfit(lily)
+    $ scene_manager.strip_full_outfit()
     call start_threesome(mom, lily) from threesome_test_call_1
     $ scene_manager.clear_scene()
     return "Test Complete"
@@ -233,7 +232,7 @@ label threesome_join_test():
     $ scene_manager.add_actor(mom, position = "standing_doggy")
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
     lily "Let me take off some clothes."
-    $ scene_manager.strip_actor_outfit(lily)
+    $ scene_manager.strip_full_outfit()
     call join_threesome(mom, lily, "standing_doggy", private = True) from _call_threesome_join_test
     $ scene_manager.clear_scene()
     return "Test Complete"
@@ -725,12 +724,12 @@ label threesome_strip_menu(the_person_one, the_person_two):
     if strip_choice == "strip_one":
         mc.name "[the_person_one.title], I want you to give me full access."
         the_person_one "Of course!"
-        $ scene_manager.strip_actor_outfit(the_person_one)
+        $ scene_manager.strip_full_outfit(person = the_person_one)
         $ scene_manager.draw_scene()
     elif strip_choice == "strip_two":
         mc.name "[the_person_two.title], I want you to give me full access."
         the_person_two "Sounds good!"
-        $ scene_manager.strip_actor_outfit(the_person_two)
+        $ scene_manager.strip_full_outfit(person = the_person_two)
         $ scene_manager.draw_scene()
     else:
         return
@@ -750,7 +749,7 @@ label threesome_strip_menu(the_person_one, the_person_two):
 
 label join_threesome(the_person_one, the_person_two, initial_position, private = True, report_log = None):  #We can use this function to add a second girl to an existing sex scene.
                                                                          #Works by selecting a position then calling threesome with the first position pre-set
-
+    $ girl_swap_pos = False # reset swapped
     call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1
     $ position_choice = _return
     call start_threesome(the_person_one, the_person_two, start_position = position_choice, skip_intro = True, private = private, report_log = report_log) from _join_threesome_in_progress_1

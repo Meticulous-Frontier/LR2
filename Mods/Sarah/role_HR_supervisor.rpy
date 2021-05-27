@@ -223,7 +223,7 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_headhunter_progress", 0) != 0:
             return "Running a search"
-        if mc.business.max_employee_count == mc.business.get_employee_count():
+        if mc.business.max_employee_count >= mc.business.get_employee_count():
             return "At maximum employee count"
         if not mc.is_at_work():
             return "Only in the office"
@@ -256,28 +256,22 @@ init 5 python:
                     return True
         return False
 
-    def remove_mandatory_crisis_list_action(crisis_name):
-        found = find_in_list(lambda x: x.effect == crisis_name, mc.business.mandatory_crises_list)
-        if found:
-            mc.business.mandatory_crises_list.remove(found)
-        return
-
     def cleanup_HR_director_meetings():
-        remove_mandatory_crisis_list_action("Sarah_intro_label")
-        remove_mandatory_crisis_list_action("Sarah_hire_label")
-        remove_mandatory_crisis_list_action("Sarah_get_drinks_label")
-        remove_mandatory_crisis_list_action("Sarah_stripclub_story_label")
-        remove_mandatory_crisis_list_action("Sarah_epic_tits_label")
-        remove_mandatory_crisis_list_action("Sarah_new_tits_label")
-        remove_mandatory_crisis_list_action("Sarah_third_wheel_label")
-        remove_mandatory_crisis_list_action("Sarah_catch_stealing_label")
-        remove_mandatory_crisis_list_action("Sarah_weekend_surprise_crisis_label")
-        remove_mandatory_crisis_list_action("Sarah_threesome_request_label")
-        remove_mandatory_crisis_list_action("Sarah_initial_threesome_label")
-        remove_mandatory_crisis_list_action("HR_director_initial_hire_label")
-        remove_mandatory_crisis_list_action("HR_director_first_monday_label")
-        remove_mandatory_crisis_list_action("HR_director_monday_meeting_label")
-        remove_mandatory_crisis_list_action("HR_director_headhunt_interview_label")
+        mc.business.remove_mandatory_crisis("Sarah_intro_label")
+        mc.business.remove_mandatory_crisis("Sarah_hire_label")
+        mc.business.remove_mandatory_crisis("Sarah_get_drinks_label")
+        mc.business.remove_mandatory_crisis("Sarah_stripclub_story_label")
+        mc.business.remove_mandatory_crisis("Sarah_epic_tits_label")
+        mc.business.remove_mandatory_crisis("Sarah_new_tits_label")
+        mc.business.remove_mandatory_crisis("Sarah_third_wheel_label")
+        mc.business.remove_mandatory_crisis("Sarah_catch_stealing_label")
+        mc.business.remove_mandatory_crisis("Sarah_weekend_surprise_crisis_label")
+        mc.business.remove_mandatory_crisis("Sarah_threesome_request_label")
+        mc.business.remove_mandatory_crisis("Sarah_initial_threesome_label")
+        mc.business.remove_mandatory_crisis("HR_director_initial_hire_label")
+        mc.business.remove_mandatory_crisis("HR_director_first_monday_label")
+        mc.business.remove_mandatory_crisis("HR_director_monday_meeting_label")
+        mc.business.remove_mandatory_crisis("HR_director_headhunt_interview_label")
         return
 
     def add_sarah_catch_stealing_action():
@@ -449,7 +443,7 @@ label HR_director_first_monday_label(the_person):
         the_person "That sounds great! Alright, I actually have a set of possibilities arranged for a meeting today if you would like. Do you want to go over my list of girls?"
         menu:
             "Let's start next week":
-                $ del HR_employee_list
+                pass
             "Let's start today":
                 mc.name "If you think meeting with some of these girls would be helpful, I think we should start immediately."
                 the_person "OK! Let me see who I have on my list here..."
@@ -464,7 +458,6 @@ label HR_director_first_monday_label(the_person):
 
     if the_person is sarah:
         $ add_sarah_third_wheel_action()
-
     return
 
 label HR_director_monday_meeting_label(the_person):
@@ -547,7 +540,7 @@ label HR_director_monday_meeting_label(the_person):
                     $ set_HR_director_tag("business_HR_meeting_last_day", day)
                 $ scene_manager.update_actor(the_person, position = "sitting")
             "Let's not this week":
-                $ del HR_employee_list
+                pass
 
     the_person "Hmm, let's see, what's next..."
     call HR_director_manage_gym_membership(the_person) from HR_Gym_manage_1
@@ -715,7 +708,6 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ the_person.draw_person(position = "sitting")
 
     python:
-        del HR_employee_list
         del person_choice
         del opinion_chat
     return True
@@ -1008,10 +1000,16 @@ label HR_director_sexy_meeting_start_label(the_person):
         "She runs her tongue up and down your length a few times, then parts her lips and begins to suck you off."
         $ mc.change_arousal(40)
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_one
-        mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
-        $ scene_manager.update_actor(the_person, emotion = "happy")
-        "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
-        the_person "Thank you sir! I am willing to do this next week again if you decide to."
+        $ the_report = _return
+        if the_report.get("guy orgasms", 0) > 0:
+            mc.name "Mmm, this is a great way to start Monday. This was a great idea [the_person.title]."
+            $ scene_manager.update_actor(the_person, emotion = "happy")
+            "[the_person.possessive_title] stops licking the cum off her lips for a second and smiles."
+            the_person "Thank you sir! I am willing to do this next week again if you decide to."
+        else:
+            mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
+            $ scene_manager.update_actor(the_person, emotion = "sad")
+            the_person "Of course sir, I am willing to do this anytime you want me to."
         $ set_HR_director_unlock("blowjob", True)
         $ the_person.apply_planned_outfit()
         $ scene_manager.update_actor(the_person, position = "stand3")
@@ -1042,10 +1040,16 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person "Mmmm, I love the feeling of a cock buried between my big tits... this is gonna be great!"
             "With her hands on each side of her chest, she wraps her sizeable boobs around you and begins to bounce them up and down."
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
+            $ the_report = _return
+            if the_report.get("guy orgasms", 0) > 0:
+                "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
+                the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
+                "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
+            else:
+                mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
+                $ scene_manager.update_actor(the_person, emotion = "sad")
+                the_person "Of course sir, I am willing to do this anytime you want me to."
             $ set_HR_director_unlock("titfuck", True)
-            "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
-            the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
-            "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             $ the_person.apply_planned_outfit()
             $ scene_manager.update_actor(the_person, position = "stand3")
             "Eventually she cleans herself up and makes herself presentable again."
@@ -1085,7 +1089,6 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person "Mmmm, [the_person.mc_title]. Use me boss! I'm here to serve you!"
             "You start to piston your cock in and out of her."
             call fuck_person(the_person, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_three
-            $ set_HR_director_unlock("missionary on desk", True)
             "[the_person.possessive_title] lays on your desk, recovering."
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person "Ah, yes, I suspected it would be, sir!"
@@ -1281,7 +1284,6 @@ label HR_director_mind_control_attempt_label(the_person):
     call screen enhanced_main_choice_display(build_menu_items([["Call in"] + HR_employee_list], draw_hearts_for_people = False))
     $ person_choice = _return
 
-    $ del HR_employee_list
     the_person "Okay. I'll go get her."
     $ clear_scene()
     call HR_mind_control_attempt(person_choice, the_person) from HR_mind_control_attempt_call_1
@@ -1425,7 +1427,7 @@ label HR_director_headhunt_interview_label(the_person):
     if mc.location != office:
         "You are hard at work when you get a message from your HR supervisor."
         the_person "Hey, I got a hit on criteria you had for a prospective employee. Want me to send you the info?"
-        if mc.business.max_employee_count == mc.business.get_employee_count():  #We accidentally filled all available slots
+        if mc.business.max_employee_count >= mc.business.get_employee_count():  #We accidentally filled all available slots
             mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
             "A few minutes later, she responds to you."
             the_person "Ah... OK, well try to let me know next time, okay?"

@@ -26,7 +26,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                     $ the_girl.change_happiness(-5)
                     $ the_girl.change_obedience(3)
                     $ the_girl.change_love(-5)          #She loses trust
-                elif the_girl.get_opinion_score("creampies") > 0:         #She likes creampies...
+                elif the_girl.wants_creampie():         #She likes creampies...
                     the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                     $ the_girl.discover_opinion("creampies")
                     if the_girl.on_birth_control:
@@ -35,7 +35,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                         the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
                     $ the_girl.change_happiness(2)
                     $ the_girl.change_obedience(3)
-                elif the_girl.wants_creampie():                          #She is slutty enough she doesn't mind the cream filling
+                elif the_girl.get_opinion_score("bareback sex") > 0:  #She is slutty enough she doesn't mind the cream filling
                     the_girl "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
                     $ the_girl.change_obedience(3)
                 else:                                                   #She gets pissed
@@ -76,12 +76,6 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 $ doggy.redraw_scene(the_girl)
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "You slowly pull out of [the_girl.possessive_title]. Your cum is dripping down her leg as you sit back."
-                if the_girl.on_birth_control or the_girl.knows_pregnant():
-                    the_girl "Oh wow, there's so much of it..."
-                elif the_girl.wants_creampie():
-                    the_girl "Oh fuck, that was so good, I don't even care if I get pregnant..."
-                else:
-                    the_girl "Oh fuck... that was so good... but I could get pregnant! Oh god what have I done..."
 
         "Cum on her ass":
             $ stealth_orgasm = False

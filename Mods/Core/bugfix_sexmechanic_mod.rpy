@@ -232,7 +232,7 @@ init 5 python:
             object_option_list = []
             for loc_object in mc.location.objects:
                 if loc_object.has_trait(position.requires_location):
-                    object_option_list.append([loc_object.get_formatted_name(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
+                    object_option_list.append([loc_object.get_formatted_name().capitalize(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
 
             # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
             if __builtin__.len(object_option_list) == 0:
@@ -507,7 +507,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ finished = True
 
         elif round_choice == "Strip":
-            call strip_menu(the_person, (position_choice.verbing if isinstance(position_choice, Position) else "wooing"), private) from _call_strip_menu_bugfix
+            call strip_menu(the_person, position_choice, private) from _call_strip_menu_bugfix
             $ stop_stripping = False
 
         elif round_choice == "Leave":
@@ -873,10 +873,15 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
     if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal":
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
-        if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0:
+        # TODO: make this a personality based response.
+        if the_person.get_opinion_score("bareback sex") > 0:
             the_person "I agree, nothing beats skin on skin."
+        elif skill_tag == "Vaginal" and the_person.get_opinion_score("creampies") > 0:
+            the_person "I love it when you fill me up with your spunk."
+        elif skill_tag == "Anal" and the_person.get_opinion_score("anal creampies") > 0:
+            the_person "Just pump my ass full with that hot spunk of yours."
         else:
-            the_person "I'm not a big fan of bare sex, but if you like it that way."
+            the_person "I'm not a big fan of bare sex, but if you like it that way, show me what you got."
 
         if skill_tag == "Vaginal":
             if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
@@ -934,7 +939,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         $ scene_manager.add_actor(the_person, position = the_position.position_tag)
                         $ scene_manager.add_actor(the_watcher, display_transform = character_center_flipped)
                         the_watcher "Let me take off some clothes."
-                        $ scene_manager.strip_actor_outfit(the_watcher)
+                        $ scene_manager.strip_full_outfit(person = the_watcher)
                         call join_threesome(the_person, the_watcher, the_position.position_tag, private = mc.location.get_person_count() <= 2, report_log = report_log) from _call_join_threesome_watcher_check_enhanced
                         $ report_log = _return
                         $ finished = True

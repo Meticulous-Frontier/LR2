@@ -136,28 +136,16 @@ init -1 python:
     #Functions to get specific people from a location
 
     def has_cum_slut(self):
-        for person in self.people:
-            if person.has_cum_fetish():
-                return get_random_from_list([x for x in self.people if x.has_cum_fetish()])
-        return False
+        return get_random_from_list([x for x in self.people if x.has_cum_fetish()])
 
     def has_anal_slut(self):
-        for person in self.people:
-            if person.has_anal_fetish():
-                return get_random_from_list([x for x in self.people if x.has_anal_fetish()])
-        return False
+        return get_random_from_list([x for x in self.people if x.has_anal_fetish()])
 
     def has_breeder(self):
-        for person in self.people:
-            if person.has_breeding_fetish():
-                return get_random_from_list([x for x in self.people if x.has_breeding_fetish()])
-        return False
+        return get_random_from_list([x for x in self.people if x.has_breeding_fetish()])
 
     def has_exhibitionist(self):
-        for person in self.people:
-            if person.has_exhibition_fetish():
-                return get_random_from_list([x for x in self.people if x.has_exhibition_fetish()])
-        return False
+        return get_random_from_list([x for x in self.people if x.has_exhibition_fetish()])
 
     Room.has_cum_slut = has_cum_slut
     Room.has_anal_slut = has_anal_slut

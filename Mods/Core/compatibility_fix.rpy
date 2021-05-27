@@ -152,6 +152,9 @@ init 1 python:
     heart_pasties.layer = 0
     cincher.layer = 0
 
+    # pencil skirt pussy usable to False
+    pencil_skirt.anchor_below = True
+
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
@@ -170,6 +173,16 @@ init 1 python:
     # for DEBUG only (uncomment when you get a cPickle error)
     # config.use_cpickle = False
     # config.debug_image_cache = True
+
+    # disable sound settings
+    config.has_sound = False
+    config.has_music = False
+    config.has_voice = False
+
+    # extend main_loop_cleanup list from bugfix
+    if "common_variable_list" in globals():
+        common_variable_list.append("scene_manager");
+        common_variable_list.append('HR_employee_list');
 
     def restore_employees_to_schedules():
         for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:

@@ -93,7 +93,7 @@ init 1 python:
             if person.salary > quest.quest_event_dict.get("starting_pay", 0): #She has received a raise!
                 quest.set_quest_flag(41)
                 mc.business.add_mandatory_crisis(quest_production_line_after_raise_consult)
-                remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
+                mc.business.remove_mandatory_crisis("quest_production_line_raise_miss_label")
             if quest_production_line_raise_miss not in mc.business.mandatory_crises_list:
                 mc.business.add_mandatory_crisis(quest_production_line_raise_miss)
         return
@@ -103,13 +103,13 @@ init 1 python:
 
     def quest_production_line_cleanup():
         mall.remove_action(quest_production_line_coffee)
-        remove_mandatory_crisis_list_action("quest_production_line_intro_label")
-        remove_mandatory_crisis_list_action("quest_production_line_coffee_reminder_label")
-        remove_mandatory_crisis_list_action("quest_production_line_coffee_label")
-        remove_mandatory_crisis_list_action("quest_production_line_coffee_miss_label")
-        remove_mandatory_crisis_list_action("quest_production_line_raise_miss_label")
-        remove_mandatory_crisis_list_action("quest_production_line_after_raise_consult_label")
-        remove_mandatory_crisis_list_action("quest_production_line_help_move_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_intro_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_coffee_reminder_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_coffee_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_coffee_miss_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_raise_miss_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_after_raise_consult_label")
+        mc.business.remove_mandatory_crisis("quest_production_line_help_move_label")
         # cleanup dictionary (quest is done)
         quest_production_line().quest_event_dict.clear()
         return
@@ -138,7 +138,7 @@ init 1 python:
 
     def quest_production_line_raise_miss_requirement():
         if day >= quest_production_line().quest_event_dict.get("initial_meeting_day", 0) + 10: #10 days to giver her a raise. Maybe change this?
-            if time_of_day == 1:
+            if time_of_day == 1 and quest_production_line().quest_event_dict.get("moving_day", 0) < day + 5: #when raise given moving day is set, else 9999
                 return True
         return False
 
@@ -259,7 +259,7 @@ label quest_production_line_coffee_label():
     "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by raise."
     $ quest_production_line().set_quest_flag(31)
     $ mall.remove_action(quest_production_line_coffee)
-    $ remove_mandatory_crisis_list_action("quest_production_line_coffee_miss_label")
+    $ mc.business.remove_mandatory_crisis("quest_production_line_coffee_miss_label")
     $ mc.business.add_mandatory_crisis(quest_production_line_raise_miss)
     return
 

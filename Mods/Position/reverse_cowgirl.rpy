@@ -121,7 +121,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
                 else:
                     $ the_girl.change_arousal(5)
                     the_girl "Ohh, you make me so wet. I want to make you feel good too... Do you wanna cum soon?"
-                if the_girl.get_opinion_score("creampies") > 0:
+                if the_girl.wants_creampie():
                     "[the_girl.possessive_title] reaches back between her legs and cups your balls."
                     the_girl "Mmm, you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
                 else:
@@ -212,7 +212,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
             the_girl "Thank you [the_girl.mc_title]. Oh my god, it's so good..."
             "You lay back and take a few moments to enjoy the view. [the_girl.possessive_title] is massaging your cum into her ass cheeks with both hands."
-    elif the_girl.get_opinion_score("creampies") > 0:
+    elif the_girl.wants_creampie():
         the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
         "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
