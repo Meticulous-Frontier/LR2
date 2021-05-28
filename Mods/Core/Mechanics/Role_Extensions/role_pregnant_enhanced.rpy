@@ -142,8 +142,9 @@ init 3 python:
             return org_func(person)
         return pregnant_finish_person_wrapper
 
-    # wrap up the pregnant finish person function
-    pregnant_finish_person = pregnant_finish_person_extended(pregnant_finish_person)
+    if "pregnant_finish_person" in dir():   # check if bugfix is installed
+        # wrap up the pregnant finish person function
+        pregnant_finish_person = pregnant_finish_person_extended(pregnant_finish_person)
 
 
 label silent_pregnant_announce(the_person):
