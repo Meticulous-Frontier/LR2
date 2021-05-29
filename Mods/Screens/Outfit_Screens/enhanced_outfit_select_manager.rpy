@@ -34,7 +34,7 @@ init 2:
                             mousewheel True
                             vbox:
                                 spacing -10
-                                text catagory_info[1] + "s" style "menu_text_style" size 30 #Add an s to make it plural so we can reuse the field in the new button. Yep, I'm that clever-lazy.
+                                text catagory_info[1] + "s" style "menu_text_title_style" size 30 #Add an s to make it plural so we can reuse the field in the new button. Yep, I'm that clever-lazy.
                                 null height 10
                                 if show_make_new:
                                     textbutton "Create New " + catagory_info[1]:

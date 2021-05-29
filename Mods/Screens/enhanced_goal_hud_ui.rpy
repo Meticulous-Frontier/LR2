@@ -6,7 +6,7 @@ init 2:
             xsize 260
             ysize 250
             vbox:
-                textbutton "Goal Information" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style" xsize 245 text_align 0.5 tooltip "Complete goals to earn experience, and spend experience to improve your stats and skills."
+                textbutton "Goal Information" action Show("mc_character_sheet") style "textbutton_style" text_style "menu_text_title_style" text_size 14 xsize 245 text_align 0.5 tooltip "Complete goals to earn experience, and spend experience to improve your stats and skills."
                 for goal in [x for x in [mc.stat_goal,mc.work_goal,mc.sex_goal] if x]:
                     frame:
                         ysize 60

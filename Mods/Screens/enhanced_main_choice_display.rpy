@@ -185,7 +185,7 @@ init 2:
                         ysize 700
                         $ title_element = menu_items[count][0]
                         if isinstance(title_element, basestring):
-                            text title_element xalign 0.5 ypos 45 anchor (0.5,0.5) size 22 style "menu_text_style" xsize 240
+                            text title_element xalign 0.5 ypos 45 anchor (0.5,0.5) size 22 style "menu_text_title_style" xsize 240
                         else:
                             add title_element xalign 0.5 ypos 45 anchor (0.5,0.5)
 
