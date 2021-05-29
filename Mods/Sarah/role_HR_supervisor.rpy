@@ -1445,7 +1445,7 @@ label HR_director_headhunt_interview_label(the_person):
         $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office."
         the_person "Hey, I got a hit on criteria you had for a prospective employee. I think you are going to like this."
-        if mc.business.max_employee_count == mc.business.get_employee_count():  #We accidentally filled all available slots
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:  #We accidentally filled all available slots
             mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
             the_person "You... ahh, okay. Try to remember to let me know next okay?"
             "You promise to do so."
