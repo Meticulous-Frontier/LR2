@@ -16,7 +16,9 @@ init 4 python:
             # run original function
             result = org_func(person)
             # run extension code (append new action to base game menu)
-            if modify_wardrobe_action.enabled:
+            found = next((x for x in action_mod_list if x.effect == "modify_wardrobe_label"), None)
+            if isinstance(found, ActionMod) and found.enabled:   # use enabled from action mod settings
+                # use not stored action to append to action menu
                 modify_wardrobe_action.args = [person]
                 modify_wardrobe_action.requirement_args = [person]
                 result.append(modify_wardrobe_action)
@@ -25,7 +27,7 @@ init 4 python:
         return build_specific_action_list_wrapper
 
     # wrap up the build_specific_action_list function
-    if "build_specific_action_list" in globals():
+    if "build_specific_action_list" in dir():
         build_specific_action_list = build_specific_action_list_alter_outfit_extended(build_specific_action_list)
 
     def bra_removal(person): # replace extensions with something

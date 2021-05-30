@@ -13,8 +13,8 @@ init -1 python:
     def advance_time_random_crisis_requirement():
         if time_of_day == 0:    # slot 0 is for morning crisis events
             return False
-        if day%7 == 0 and time_of_day == 1: #Monday HR Meeting, no random events
-            return False
+        if mandatory_event:
+            return False        # already had a mandatory event, so no random event
         return renpy.random.randint(0,100) < crisis_chance
 
     # only trigger mandatory crisis events in timeslot 4 when in bedroom (actually end of day after pressing sleep button, required for dialog consistency)
@@ -30,8 +30,8 @@ init -1 python:
     def advance_time_random_morning_crisis_requirement():
         if time_of_day != 0:
             return False
-        if day%7 == 5:  # Mom weekly event no random crisis events
-            return False
+        if mandatory_event:
+            return False        # already had a mandatory event, so no random event
         return renpy.random.randint(0,100) < morning_crisis_chance
 
     def advance_time_people_run_day_requirement():
@@ -260,6 +260,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         people_to_process = build_people_to_process()
         clear_follow_mc_flag(people_to_process)
         okay_to_save = False
+        mandatory_event = False
 
     while count < advance_time_max_actions:
         if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
@@ -344,6 +345,7 @@ label advance_time_mandatory_crisis_label():
         python:
             clear_scene()
             crisis_count += 1
+            mandatory_event = True
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         okay_to_save = True
@@ -409,6 +411,7 @@ label advance_time_mandatory_morning_crisis_label():
         python:
             clear_scene()
             crisis_count += 1
+            mandatory_event = True
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         okay_to_save = True

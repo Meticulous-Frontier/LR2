@@ -3,11 +3,11 @@ init 5 python:
     add_label_hijack("after_load", "updated_room_background")
 
     # scaled images
-    taboo_break_image = im.Scale(Image(get_file_handle("taboo_lock_alt.png")), 16, 16)
+    taboo_break_image = im.Scale(Image(get_file_handle("taboo_lock_alt.png")), 16, 22)
     renpy.image("taboo_break", taboo_break_image)
-    thumbs_up_image = im.Scale(Image(get_file_handle("thumbs_up_small.png")), 18, 18)
+    thumbs_up_image = im.Scale(Image(get_file_handle("thumbs_up_small.png")), 16, 22)
     renpy.image("thumbs_up", thumbs_up_image)
-    thumbs_down_image = im.Scale(Image(get_file_handle("thumbs_down_small.png")), 18, 18)
+    thumbs_down_image = im.Scale(Image(get_file_handle("thumbs_down_small.png")), 16, 22)
     renpy.image("thumbs_down", thumbs_down_image)
 
     energy_token_small_image = im.Scale(Image(get_file_handle("energy_token.png")), 18, 18)

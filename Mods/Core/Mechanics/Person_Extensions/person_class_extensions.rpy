@@ -648,6 +648,44 @@ init -1 python:
 
     Person.generate_mother = generate_mother_enhanced
 
+    def person_is_willing(self, the_position, private = True, ignore_taboo = False):
+        final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+
+        # add modifiers
+        if self.has_family_taboo():
+            final_slut_requirement -= 20
+
+        if self.has_role(prostitute_role):
+            final_slut_requirement += 20
+        elif self.relationship == "Girlfriend":
+            final_slut_requirement += (self.get_opinion_score("cheating on men") * 5 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 10)
+        elif self.relationship == "Fiancée":
+            final_slut_requirement += (self.get_opinion_score("cheating on men") * 8 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 15)
+        elif self.relationship == "Married":
+            final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
+
+        if not private:
+            final_slut_requirement += (-10 + self.get_opinion_score("public sex") * 5) if self.effective_sluttiness() < 50 else self.get_opinion_score("public sex") * 5
+
+        if self.love < 0:
+            final_slut_requirement -= self.love
+        elif private:
+            if self.has_role([girlfriend_role, affair_role]):
+                final_slut_requirement += self.love
+            elif self.is_family():
+                final_slut_requirement += __builtin__.round(self.love / 4.0)
+            else:
+                final_slut_requirement += __builtin__.round(self.love / 2.0)
+
+        final_slut_requirement += __builtin__.round((self.happiness - 100)/4.0)
+
+        if self.effective_sluttiness(the_position.associated_taboo) >= final_slut_requirement \
+            or self.effective_sluttiness(the_position.associated_taboo) + (self.obedience-100) >= final_slut_requirement:
+                return True
+        return False
+
+    Person.is_willing = person_is_willing
+
     ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
     # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
     # narrator_messages: narrator voice after each item of clothing stripped, use '[person.<title>]' for titles and '[strip_choice.name]' for clothing item.
@@ -1986,15 +2024,13 @@ init -1 python:
         return self.event_triggers_dict.get("preg_mc_father", True)
     Person.is_mc_father = is_mc_father
 
-    def count_kids_with_mc(self):
-        return the_person.event_triggers_dict.get("kids_with_mc", 0)
+    def number_of_children_with_mc(self):
+        return self.sex_record.get("Children with MC", 0)
+    Person.number_of_children_with_mc = number_of_children_with_mc
 
-    Person.count_kids_with_mc = count_kids_with_mc
-
-    def has_kids_with_mc(self):
-        if the_person.event_triggers_dict.get("kids_with_mc", 0) > 0:
-            return True
-        return False
+    def has_child_with_mc(self):
+        return self.sex_record.get("Children with MC", 0) > 0
+    Person.has_child_with_mc = has_child_with_mc
 
     def is_highly_fertile(self):
         if self.is_pregnant():
@@ -2076,62 +2112,6 @@ init -1 python:
     Person.set_sex_goal = set_sex_goal
     Person.get_sex_goal = get_sex_goal
     Person.reset_sex_goal = reset_sex_goal
-
-###########################################
-# Sex record wrappers                     #
-###########################################
-    def get_sex_record_handjobs(self):
-        return self.sex_record.get("Handjobs", 0)
-
-    def get_sex_record_blowjobs(self):
-        return self.sex_record.get("Blowjobs", 0)
-
-    def get_sex_record_cunnilingus(self):
-        return self.sex_record.get("Cunnilingus", 0)
-
-    def get_sex_record_tit_fucks(self):
-        return self.sex_record.get("Tit Fucks", 0)
-
-    def get_sex_record_vaginal_sex(self):
-        return self.sex_record.get("Vaginal Sex", 0)
-
-    def get_sex_record_anal_sex(self):
-        return self.sex_record.get("Anal Sex", 0)
-
-    def get_sex_record_facials(self):
-        return self.sex_record.get("Cum Facials", 0)
-
-    def get_sex_record_swallows(self):
-        return self.sex_record.get("Cum in Mouth", 0)
-
-    def get_sex_record_bodyshots(self):
-        return self.sex_record.get("Cum Covered", 0)
-
-    def get_sex_record_creampies(self):
-        return self.sex_record.get("Vaginal Creampies", 0)
-
-    def get_sex_record_anal_creampies(self):
-        return self.sex_record.get("Anal Creampies", 0)
-
-    def get_sex_record_fingered(self):
-        return self.sex_record.get("Fingered", 0)
-
-    def get_sex_record_kissing(self):
-        return self.sex_record.get("Kissing", 0)
-
-    Person.get_sex_record_handjobs = get_sex_record_handjobs
-    Person.get_sex_record_blowjobs = get_sex_record_blowjobs
-    Person.get_sex_record_cunnilingus = get_sex_record_cunnilingus
-    Person.get_sex_record_tit_fucks = get_sex_record_tit_fucks
-    Person.get_sex_record_vaginal_sex = get_sex_record_vaginal_sex
-    Person.get_sex_record_anal_sex = get_sex_record_anal_sex
-    Person.get_sex_record_facials = get_sex_record_facials
-    Person.get_sex_record_swallows = get_sex_record_swallows
-    Person.get_sex_record_bodyshots = get_sex_record_bodyshots
-    Person.get_sex_record_creampies = get_sex_record_creampies
-    Person.get_sex_record_anal_creampies = get_sex_record_anal_creampies
-    Person.get_sex_record_fingered = get_sex_record_fingered
-    Person.get_sex_record_kissing = get_sex_record_kissing
 
 ##################################################
 #    Body descriptor python wrappers             #

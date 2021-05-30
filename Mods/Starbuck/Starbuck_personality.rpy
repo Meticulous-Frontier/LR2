@@ -240,7 +240,7 @@ label starbuck_cum_vagina(the_person):
                 the_person "Your cum is so nice and warm..."
                 the_person "If you get me pregnant I guess I'll have to tell my [so_title] it's his."
             else:
-                if the_person.get_sex_record_creampies() > 10:
+                if the_person.sex_record.get("Vaginal Creampies", 0) > 10:
                     the_person "You keep cumming inside me over and over... it's only a matter of time until I get pregnant!"
                 else:
                     the_person "Mmm, it's so warm... I wonder if it's going to get me pregnant."

@@ -284,11 +284,11 @@ label mom_breakfast_action_label_high():
                 lily "Sounds great!"
                 call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, swapped = True) from _fuck_mom_for_breakfast_1
                 $ the_report = _return
-                if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0: #Happy family
+                if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0 and the_report.get("guy orgasms", 0) > 0: #Happy family
                     "The three of you remain together for a while, enjoying your orgasms."
                     $ the_person.change_stats(obedience = 3, happiness = 5)
                     the_person "You two... I get overwhelmed by all the love I feel for you two when we do things like this. I love you both so much!"
-                elif the_report["girl one orgasms"] > 0:
+                elif the_report.get("girl one orgasms", 0) > 0:
                     "[the_person.possessive_title] recovers for a bit from her orgasm."
                     $ the_person.change_stats(obedience = 2, happiness = 3)
                     the_person "Thank you, [the_person.mc_title], for insisting on bringing your sister out. You were right, that felt so good."

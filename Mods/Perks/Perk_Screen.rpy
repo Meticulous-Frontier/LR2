@@ -11,7 +11,7 @@ screen mc_perk_sheet():
             vbox:
                 xsize 770
                 text mc.name + " " + mc.last_name style "menu_text_style" size 40 xanchor 0.9 xalign 0.5
-                text "Perk Sheet" style "menu_text_style" size 30 xanchor 0.9 xalign 0.5
+                text "Perk Sheet" style "menu_text_title_style" size 30 xanchor 0.9 xalign 0.5
         null height 60
         hbox:
             xanchor 0.5
@@ -25,7 +25,7 @@ screen mc_perk_sheet():
                 vbox:
 
                     xsize 500
-                    text "Stat Perks" style "menu_text_style" size 32 xalign 0.5
+                    text "Stat Perks" style "menu_text_title_style" size 32 xalign 0.5
                     for stat_perk in perk_system.get_stat_perk_list():
                         hbox:
                             xalign 0.5
@@ -46,7 +46,7 @@ screen mc_perk_sheet():
                 xanchor 0.5
                 vbox:
                     xsize 500
-                    text "Item Perks" style "menu_text_style" size 32 xalign 0.5
+                    text "Item Perks" style "menu_text_title_style" size 32 xalign 0.5
                     for item_perk in perk_system.get_item_perk_list():
                         hbox:
                             xalign 0.5
@@ -69,7 +69,7 @@ screen mc_perk_sheet():
                 xanchor 0.5
                 vbox:
                     xsize 500
-                    text "Ability Perks" style "menu_text_style" size 32 xalign 0.5
+                    text "Ability Perks" style "menu_text_title_style" size 32 xalign 0.5
                     for ability_perk in perk_system.get_ability_perk_list():
                         hbox:
                             xalign 0.5

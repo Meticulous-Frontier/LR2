@@ -79,7 +79,7 @@ init 1 python:
         return True
 
     def quest_essential_oils_cleanup():
-        remove_mandatory_crisis_list_action("quest_essential_oils_abandon_label")
+        mc.business.remove_mandatory_crisis("quest_essential_oils_abandon_label")
         person = quest_essential_oils_get_target()
         if person:
             person.remove_on_room_enter_event(quest_essential_oils_intro)

@@ -223,8 +223,8 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_headhunter_progress", 0) != 0:
             return "Running a search"
-        if mc.business.max_employee_count >= mc.business.get_employee_count():
-            return "At maximum employee count"
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:
+            return "At employee limit"
         if not mc.is_at_work():
             return "Only in the office"
         if not mc.business.is_open_for_business():
@@ -256,28 +256,22 @@ init 5 python:
                     return True
         return False
 
-    def remove_mandatory_crisis_list_action(crisis_name):
-        found = find_in_list(lambda x: x.effect == crisis_name, mc.business.mandatory_crises_list)
-        if found:
-            mc.business.mandatory_crises_list.remove(found)
-        return
-
     def cleanup_HR_director_meetings():
-        remove_mandatory_crisis_list_action("Sarah_intro_label")
-        remove_mandatory_crisis_list_action("Sarah_hire_label")
-        remove_mandatory_crisis_list_action("Sarah_get_drinks_label")
-        remove_mandatory_crisis_list_action("Sarah_stripclub_story_label")
-        remove_mandatory_crisis_list_action("Sarah_epic_tits_label")
-        remove_mandatory_crisis_list_action("Sarah_new_tits_label")
-        remove_mandatory_crisis_list_action("Sarah_third_wheel_label")
-        remove_mandatory_crisis_list_action("Sarah_catch_stealing_label")
-        remove_mandatory_crisis_list_action("Sarah_weekend_surprise_crisis_label")
-        remove_mandatory_crisis_list_action("Sarah_threesome_request_label")
-        remove_mandatory_crisis_list_action("Sarah_initial_threesome_label")
-        remove_mandatory_crisis_list_action("HR_director_initial_hire_label")
-        remove_mandatory_crisis_list_action("HR_director_first_monday_label")
-        remove_mandatory_crisis_list_action("HR_director_monday_meeting_label")
-        remove_mandatory_crisis_list_action("HR_director_headhunt_interview_label")
+        mc.business.remove_mandatory_crisis("Sarah_intro_label")
+        mc.business.remove_mandatory_crisis("Sarah_hire_label")
+        mc.business.remove_mandatory_crisis("Sarah_get_drinks_label")
+        mc.business.remove_mandatory_crisis("Sarah_stripclub_story_label")
+        mc.business.remove_mandatory_crisis("Sarah_epic_tits_label")
+        mc.business.remove_mandatory_crisis("Sarah_new_tits_label")
+        mc.business.remove_mandatory_crisis("Sarah_third_wheel_label")
+        mc.business.remove_mandatory_crisis("Sarah_catch_stealing_label")
+        mc.business.remove_mandatory_crisis("Sarah_weekend_surprise_crisis_label")
+        mc.business.remove_mandatory_crisis("Sarah_threesome_request_label")
+        mc.business.remove_mandatory_crisis("Sarah_initial_threesome_label")
+        mc.business.remove_mandatory_crisis("HR_director_initial_hire_label")
+        mc.business.remove_mandatory_crisis("HR_director_first_monday_label")
+        mc.business.remove_mandatory_crisis("HR_director_monday_meeting_label")
+        mc.business.remove_mandatory_crisis("HR_director_headhunt_interview_label")
         return
 
     def add_sarah_catch_stealing_action():
@@ -1433,7 +1427,7 @@ label HR_director_headhunt_interview_label(the_person):
     if mc.location != office:
         "You are hard at work when you get a message from your HR supervisor."
         the_person "Hey, I got a hit on criteria you had for a prospective employee. Want me to send you the info?"
-        if mc.business.max_employee_count >= mc.business.get_employee_count():  #We accidentally filled all available slots
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:  #We accidentally filled all available slots
             mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
             "A few minutes later, she responds to you."
             the_person "Ah... OK, well try to let me know next time, okay?"
@@ -1451,7 +1445,7 @@ label HR_director_headhunt_interview_label(the_person):
         $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office."
         the_person "Hey, I got a hit on criteria you had for a prospective employee. I think you are going to like this."
-        if mc.business.max_employee_count == mc.business.get_employee_count():  #We accidentally filled all available slots
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:  #We accidentally filled all available slots
             mc.name "Actually, I accidentally filled that position already. Sorry, I must have forgotten to tell you."
             the_person "You... ahh, okay. Try to remember to let me know next okay?"
             "You promise to do so."

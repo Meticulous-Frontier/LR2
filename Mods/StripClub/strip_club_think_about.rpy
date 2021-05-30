@@ -266,7 +266,7 @@ label starbuck_celebration_strip_event(the_person):
 
 label starbuck_name_the_new_club_label(the_person):
     $ strip_club_owner = mc.name
-    $ remove_mandatory_crisis_list_action("strip_club_offer_expire_label") # remove expiry event
+    $ mc.business.remove_mandatory_crisis("strip_club_offer_expire_label") # remove expiry event
 
     the_person "Just a second, [the_person.mc_title]. What will you call your new strip club?"
 

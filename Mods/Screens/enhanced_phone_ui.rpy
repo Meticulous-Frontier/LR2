@@ -9,7 +9,7 @@ init 2:
         modal False
 
         frame:
-            background "#1a45a188"
+            background "#0a142688"
             xsize ui_xsize + 20
             ysize 440
             xanchor 1.0

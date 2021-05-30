@@ -185,24 +185,40 @@ init -1 python:
 
     Business.add_mandatory_morning_crisis = business_add_mandatory_morning_crisis
 
+    def business_remove_mandatory_crisis(self, crisis_event):
+        if isinstance(crisis_event, basestring):
+            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_crises_list)
+            if found:
+                self.mandatory_crises_list.remove(found)
+                return True
+            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_morning_crises_list)
+            if found:
+                self.mandatory_morning_crises_list.remove(found)
+                return True
+        elif isinstance(crisis_event, Action):
+            found = find_in_list(lambda x: x == crisis_event, self.mandatory_crises_list)
+            if found:
+                self.mandatory_crises_list.remove(found)
+                return True
+            found = find_in_list(lambda x: x == crisis_event, self.mandatory_morning_crises_list)
+            if found:
+                self.mandatory_morning_crises_list.remove(found)
+                return True
+        return False
+
+    Business.remove_mandatory_crisis = business_remove_mandatory_crisis
+
     def business_get_employee_list(self):
         return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available()]
 
     Business.get_employee_list = business_get_employee_list
 
-    def business_get_mc_offspring_count(self):
-        kid_count = 0
-        for person in self.business_get_employee_list():
-            kid_count += person.count_kids_with_mc()
-        return kid_count
+    def business_mc_offspring_count(self):
+        return sum(x.number_of_children_with_mc() for x in self.get_employee_list())
 
-    Business.business_get_mc_offspring_count = business_get_mc_offspring_count
+    Business.mc_offspring_count = business_mc_offspring_count
 
-    def business_get_employees_with_kids_with_mc(self):
-        emp_list = []
-        for person in self.business_get_employee_list():
-            if person.has_kids_with_mc():
-                emp_list.append(person)
-        return emp_list
+    def business_employees_with_children_with_mc(self):
+        return [x for x in self.get_employee_list() if x.has_child_with_mc()]
 
-    Business.business_get_employees_with_kids_with_mc = business_get_employees_with_kids_with_mc
+    Business.employees_with_children_with_mc = business_employees_with_children_with_mc

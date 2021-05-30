@@ -75,6 +75,13 @@ init 5 python:
             return False
         return True
 
+    def get_random_girlfriend_morning_action(person):
+        possible_action_list = []
+        for wakeup_scene in girlfriend_morning_action_list:
+            if wakeup_scene.is_action_enabled(person):
+                possible_action_list.append(wakeup_scene)
+        return get_random_from_list(possible_action_list)
+
 label activate_girlfriend_role_enhancement(stack):
     python:
         girlfriend_role.add_action(girlfriend_sleepover_action)
@@ -257,14 +264,10 @@ label girlfriend_sleepover_label():
 
     $ the_person.next_day_outfit = the_person.outfit # stay in current outfit next day
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sleepover_01
-    python:
-        possible_action_list = []
-        for wakeup_scene in girlfriend_morning_action_list:
-            if wakeup_scene.is_action_enabled(the_person): #Make sure requirement functions take the person as an arg
-                possible_action_list.append(wakeup_scene) #Build a list of valid crises from ones that pass their requirement.
-    $ wakeup_action = get_random_from_list(possible_action_list)
-    if wakeup_action:
-        $ wakeup_action.call_action(the_person)
+
+    $ picked_event = get_random_girlfriend_morning_action(the_person)
+    if picked_event:
+        $ picked_event.call_action(the_person)
     else:
         "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
         $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day

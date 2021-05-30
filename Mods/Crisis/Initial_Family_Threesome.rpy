@@ -74,7 +74,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ scene_manager.update_actor(the_person, position = "back_peek", display_transform = character_center_flipped)
         $ scene_manager.update_actor(mom, position = "missionary", display_transform = character_right)
         $ the_report = _return
-        if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0 and the_report["guy orgasms"] > 0:  #Happy family
+        if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0 and the_report.get("guy orgasms", 0) > 0:  #Happy family
             "[the_person.possessive_title] falls into your bed on one side of you on her side, while [mom.title] lays on her back next to you."
             mom "Oh my god... you two... that was amazing!"
             $ mom.change_happiness(10)

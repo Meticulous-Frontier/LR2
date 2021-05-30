@@ -280,7 +280,7 @@ init 2 python:
         return False
 
     def Sarah_unlock_special_tit_fuck_requirement():  #Not an action, but make a requirement to make it easy to test anyway.
-        if sarah.get_sex_record_tit_fucks() > 5:
+        if sarah.sex_record.get("Tit Fucks", 0) > 5:
             if not sarah_get_special_titfuck_unlocked():
                 return True
         False
@@ -1452,7 +1452,7 @@ label Sarah_stripclub_story_label():
     the_person "Mmm, I think I've seen enough. So, want to go back to the private room for a lap dance? Any girls in particular stand out to you?"
     "You think about it for a second. Then decide to change it up a little."
     mc.name "I've got a better idea. Why don't we both get a private dance?"
-    "[the_person.title] raises an eyebrow"
+    "[the_person.title] raises an eyebrow."
     the_person "You mean... I figured that they only did private dances for guys..."
     mc.name "Nah, if you give me a minute, I bet I can get it setup."
     the_person "But I don't have the money for two..."
@@ -1515,7 +1515,7 @@ label Sarah_stripclub_story_label():
     if showgirl_2 is cousin:
         "[showgirl_2.title] lowers her lips to your ear again."
         showgirl_2 "Don't you wanna grab your cousin's tits, pervert?"
-    "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
+    "You see [the_person.title] look over at you. You can see her mouth the word 'please'."
     mc.name "That sounds fair."
     "You grab $100 and put it in the tip jar."
     $ mc.business.change_funds(-100)
@@ -2221,7 +2221,6 @@ label Sarah_initial_threesome_label():
     sarah "Oh god, I don't think I could get up, even if I wanted to. Which I don't."
     "Worn out, you cuddle up with her and quickly fall asleep as well."
     $ scene_manager.clear_scene()
-    $ sarah.next_day_outfit = sarah.planned_outfit # she stays the night so she will have to wear the same outfit again
 
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
 
@@ -2310,12 +2309,13 @@ label Sarah_ask_for_baby_label():
     return
 
 label Sarah_spend_the_night():      #She spends the night with you. Have a random chance of a threesome with mom or lily
+    python: # she stays the night so she will have to wear the same outfit again the next day
+        the_person = sarah
+        the_person.next_day_outfit = the_person.planned_outfit
+
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_spend_the_night
 
-    python:
-        the_person = sarah
-        the_person.next_day_outfit = the_person.planned_outfit # she stays the night so she will have to wear the same outfit again
-
+    python: # init morning
         the_person.apply_outfit(special_fetish_nude_outfit)
         the_person.change_energy(200)
         (threesome_wakeup, threesome_partner) = get_sarah_spend_night_threesome_possibility()
@@ -2435,7 +2435,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ scene_manager.update_actor(the_person, position = "missionary", display_transform = character_center_flipped)
         $ scene_manager.update_actor(threesome_partner, position = "missionary", display_transform = character_right)
         "All finished, the girls flop onto their backs, one on each side of you."
-        if the_report["girl one orgasms"] > 0 and the_report["girl two orgasms"] > 0:  #They both finished.
+        if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0:  #They both finished.
             the_person "Oh wow, that was so hot..."
             if the_person.get_opinion_score("incest") < 1:
                 $ the_person.increase_opinion_score("incest")
@@ -3050,7 +3050,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ scene_manager.add_actor(showgirl_2)
     showgirl_2 "Alright! We got a couple in here tonight, this should be fun!"
     if showgirl_2 is cousin:
-        "Suddenly, [showgirl_2.title] realizes its you she is getting ready to dance for."
+        "Suddenly, [showgirl_2.title] realizes she is getting ready to dance for you."
         "[showgirl_2.possessive_title] lowers her face to your ear and whispers in it."
         showgirl_2 "Wow, you have your slut here, with you, but you want MY tits in your face? You're a sick fuck."
         $ mc.change_locked_clarity(30)

@@ -84,11 +84,11 @@ init 1 python:
         return False
 
     def quest_cuckold_employee_cleanup():
-        remove_mandatory_crisis_list_action("quest_cuckold_employee_intro_label")
-        remove_mandatory_crisis_list_action("quest_cuckold_employee_decision_label")
-        remove_mandatory_crisis_list_action("quest_cuckold_employee_rethink_decision_label")
-        remove_mandatory_crisis_list_action("quest_cuckold_employee_after_window_label")
-        remove_mandatory_crisis_list_action("quest_cuckold_employee_gloryhole_label")
+        mc.business.remove_mandatory_crisis("quest_cuckold_employee_intro_label")
+        mc.business.remove_mandatory_crisis("quest_cuckold_employee_decision_label")
+        mc.business.remove_mandatory_crisis("quest_cuckold_employee_rethink_decision_label")
+        mc.business.remove_mandatory_crisis("quest_cuckold_employee_after_window_label")
+        mc.business.remove_mandatory_crisis("quest_cuckold_employee_gloryhole_label")
         if quest_cuckold_employee_get_target():
             quest_cuckold_employee_get_target().remove_on_talk_event(quest_cuckold_employee_breeding_session)
         #Leave knocked up and reconsider events in the stack to run after quest finishes.

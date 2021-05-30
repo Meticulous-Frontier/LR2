@@ -283,7 +283,7 @@ init -2 python:
         return False
 
     def add_erica_ghost_action(person): #Hopefully delete this soon
-        remove_mandatory_crisis_list_action("erica_ghost_label")
+        mc.business.remove_mandatory_crisis("erica_ghost_label")
         erica_ghost = Action("Casual Athlete Ghosts you", erica_ghost_requirement, "erica_ghost_label", args = person)
         mc.business.add_mandatory_crisis(erica_ghost)
         return
@@ -1852,7 +1852,7 @@ label erica_weekly_yoga_label(the_person):
             "You take out your cock and let them get to work."
             call start_threesome(the_person, yoga_assistant, start_position = threesome_double_blowjob, position_locked = True) from _after_yoga_protein_yum_1
             $ the_report = _return
-            if the_report["guy orgasms"] > 0:
+            if the_report.get("guy orgasms", 0) > 0:
                 "You enjoy your post-orgasm bliss for a few moments while [the_person.possessive_title] and [yoga_assistant.possessive_title] swap your cum back and forth for a bit."
                 "When you look back down, they seem to have swallowed most of it, but [yoga_assistant.title] is licking the last few remnants of your cum off of [the_person.possessive_title]'s face."
             $ scene_manager.update_actor(the_person, position="stand3", display_transform = character_center_flipped)

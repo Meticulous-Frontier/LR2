@@ -200,7 +200,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                                 "Once you're satisfied you withdraw your fingers."
                             else:
                                 "[the_girl.possessive_title] drops her hand in resignation."
-                                "She coughs, splutters and retches with your fingers down her throat, clenching an unclenching her rectum with each gag."
+                                "She coughs, splutters and retches with your fingers down her throat, clenching and unclenching her rectum with each gag."
                                 $ the_girl.change_stats(arousal = -2, happiness = -3, love = -1)
                                 "Once you're satisfied you withdraw your fingers."
                 else:#girl is submissive
