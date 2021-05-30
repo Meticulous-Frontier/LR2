@@ -17,13 +17,13 @@ init 2:
                 hbox:
                     spacing 5
                     frame:
-                        background "#007000"
+                        background "#43B197"
                         xsize 250
                         xfill True
                         text the_trait.positive_slug style "serum_text_style_traits"
 
                     frame:
-                        background "#930000"
+                        background "#B14365"
                         xsize 250
                         xfill True
                         text the_trait.build_negative_slug() style "serum_text_style_traits"

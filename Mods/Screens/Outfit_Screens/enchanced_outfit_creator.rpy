@@ -1008,13 +1008,13 @@ init 2:
 
                                                 # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
                                                 # frame:
-                                                #     background "#007000"
+                                                #     background "#43B197"
                                                 #     xsize 250
                                                 #     padding [1,1]
                                                 #     if (selected_from_outfit):
                                                 #         text "From outfit: " + selected_from_outfit.name style "serum_text_style_traits"
                                                 # frame:
-                                                #     background "#007000"
+                                                #     background "#43B197"
                                                 #     xsize 250
                                                 #     padding [1,1]
                                                 #     if (selected_clothing):
@@ -1249,14 +1249,14 @@ init 2:
                                                         if __builtin__.len(love_list) > 0:
                                                             for pref in love_list:
                                                                 frame:
-                                                                    background "#007000"
+                                                                    background "#43B197"
                                                                     xsize 220
                                                                     padding [1,1]
                                                                     text pref style "serum_text_style_traits"
                                                         if __builtin__.len(hate_list) > 0:
                                                             for pref in hate_list:
                                                                 frame:
-                                                                    background "#930000"
+                                                                    background "#B14365"
                                                                     xsize 220
                                                                     padding [1,1]
                                                                     text pref style "serum_text_style_traits"

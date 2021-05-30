@@ -128,12 +128,12 @@ init 2:
                                 hbox:
                                     spacing 5
                                     frame:
-                                        background "#007000"
+                                        background "#43B197"
                                         xsize 225
                                         text "[trait.positive_slug]" style "serum_text_style_traits"
 
                                     frame:
-                                        background "#930000"
+                                        background "#B14365"
                                         xsize 225
                                         text "[trait.negative_slug]" style "serum_text_style_traits"
 
@@ -160,7 +160,7 @@ init 2:
                                         text side_effect.name style "serum_text_style_traits"
 
                                     frame:
-                                        background "#930000"
+                                        background "#B14365"
                                         xsize 480
                                         text "[side_effect.negative_slug]" style "serum_text_style_traits"
 

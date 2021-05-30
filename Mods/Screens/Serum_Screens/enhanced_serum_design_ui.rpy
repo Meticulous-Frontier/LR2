@@ -182,12 +182,12 @@ init 2:
                                         spacing 5
                                         vbox:
                                             frame:
-                                                background "#007000"
+                                                background "#43B197"
                                                 xsize 255
                                                 text "[trait_tooltip.positive_slug]" style "serum_text_style"
                                         vbox:
                                             frame:
-                                                background "#930000"
+                                                background "#B14365"
                                                 xsize 255
                                                 text "[trait_tooltip.negative_slug]" style "serum_text_style"
                                     hbox:
@@ -209,7 +209,7 @@ init 2:
 
                     frame:
                         if effective_traits > starting_serum.slots:
-                            background "#930000"
+                            background "#B14365"
                         else:
                             background "#000080"
                         xsize 550
@@ -292,13 +292,13 @@ init 2:
 
                                 hbox:
                                     frame:
-                                        background "#007000"
+                                        background "#43B197"
                                         xsize 270
                                         margin [5, 0, 5, 0]
                                         text "[trait.positive_slug]" style "serum_text_style"
                                     frame:
                                         xsize 270
-                                        background "#930000"
+                                        background "#B14365"
                                         text "[trait.negative_slug]" style "serum_text_style"
 
         frame:
