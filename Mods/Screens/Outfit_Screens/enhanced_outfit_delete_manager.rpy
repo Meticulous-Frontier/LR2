@@ -16,7 +16,7 @@ init 3:
             yalign 0.1
             spacing 20
             frame:
-                background "#888888"
+                background "#0a142688"
                 xsize 450
                 ysize 750
 
@@ -25,7 +25,7 @@ init 3:
                     frame:
                         background "#000080"
                         xfill True
-                        text "Full Outfit Deletion" style "serum_text_style"
+                        text "Full Outfit Deletion" style "menu_text_title_style" xalign 0.5
 
                     viewport:
 
@@ -54,14 +54,14 @@ init 3:
 
             if show_sets:
                 frame:
-                    background "#888888"
+                    background "#0a142688"
                     xsize 450
                     ysize 750
                     vbox:
                         frame:
                             background "#000080"
                             xfill True
-                            text "Overwear Deletion" style "serum_text_style"
+                            text "Overwear Deletion" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             if __builtin__.len(target_wardrobe.get_overwear_sets_list()) > 11:
@@ -88,14 +88,14 @@ init 3:
 
 
                 frame:
-                    background "#888888"
+                    background "#0a142688"
                     xsize 450
                     ysize 750
                     vbox:
                         frame:
                             background "#000080"
                             xfill True
-                            text "Underwear Deletion" style "serum_text_style"
+                            text "Underwear Deletion" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             if __builtin__.len(target_wardrobe.get_underwear_sets_list()) > 11:

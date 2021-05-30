@@ -34,7 +34,7 @@ init 2:
             xsize 1180
             spacing 10
             frame:
-                background "#888888"
+                background "#0a142688"
                 ysize 850
 
                 vbox:
@@ -42,9 +42,9 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 530
-                        text "Pick Production Type" style "serum_text_style_header"
+                        text "Pick Production Type" style "menu_text_title_style" xalign .5
                     frame:
-                        background "#666666"
+                        background "#0a142688"
                         xalign 0.5
                         xsize 530
                         ysize 175
@@ -80,10 +80,10 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 530
-                        text "Add Serum Traits" style "serum_text_style_header"
+                        text "Add Serum Traits" style "menu_text_title_style" xalign .5
 
                     frame:
-                        background "#666666"
+                        background "#0a142688"
                         xalign 0.5
                         xsize 530
                         ysize 574
@@ -100,7 +100,7 @@ init 2:
                                         frame:
                                             background "#000000"
                                             xsize 530
-                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
+                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
 
                                         for trait in sorted_traits:
                                             if trait.tier == dt and trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
@@ -126,16 +126,16 @@ init 2:
                                                     #Hide("trait_tooltip")
                                                     #]
             frame:
-                background "#888888"
+                background "#0a142688"
                 ysize 850
                 vbox:
                     frame:
                         background "#000080"
                         xsize 530
-                        text "Remove a trait" style "serum_text_style_header"
+                        text "Remove a trait" style "menu_text_title_style" xalign .5
 
                     frame:
-                        background "#666666"
+                        background "#0a142688"
                         xalign 0.5
                         xsize 530
                         ysize 450
@@ -166,10 +166,10 @@ init 2:
                         frame:
                             background "#000080"
                             xsize 530
-                            text "Trait Information: [trait_tooltip.name]" style "serum_text_style_header"
+                            text "[trait_tooltip.name]" style "menu_text_title_style" xalign .5
 
                         frame:
-                            background "#666666"
+                            background "#0a142688"
                             xsize 530
                             xalign 0.5
                             viewport:
@@ -197,7 +197,7 @@ init 2:
                                             text "[trait_tooltip.desc]" style "serum_text_style"
 
             frame:
-                background "#888888"
+                background "#0a142688"
                 ysize 850
                 vbox:
                     xsize 550
@@ -205,7 +205,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 550
-                        text "Current Serum Statistics:" style "serum_text_style_header"
+                        text "Current Serum Statistics:" style "menu_text_title_style" xalign .5
 
                     frame:
                         if effective_traits > starting_serum.slots:
@@ -274,7 +274,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 550
-                        text "Serum Effects:" style "serum_text_style_header"
+                        text "Serum Effects:" style "menu_text_title_style" xalign .5
 
                     viewport:
                         xsize 550
@@ -302,7 +302,7 @@ init 2:
                                         text "[trait.negative_slug]" style "serum_text_style"
 
         frame:
-            background "#888888"
+            background "#0a142688"
             xsize 250
             xanchor 0.5
             xalign 0.5

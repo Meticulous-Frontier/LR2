@@ -8,17 +8,17 @@ init 2:
             xanchor 0.5
             yalign 0.5
             frame:
-                background "#888888"
+                background "#0a142688"
                 xalign 0.5
                 ysize 900
                 vbox:
                     frame:
                         background "#000080"
                         xsize 650
-                        text "Serum Designs" style "serum_text_style_header"
+                        text "Serum Designs" style "menu_text_title_style" xalign 0.5
 
                     frame:
-                        background "#777777"
+                        background "#0a142688"
                         xalign 0.5
 
                         viewport:
@@ -60,7 +60,7 @@ init 2:
                                             ysize 50
 
         if selected_serum:
-            use serum_tooltip(selected_serum, given_align = (0.9,0.09), given_anchor = (1.0,0.0))
+            use serum_tooltip(selected_serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
 
         frame:
             background None

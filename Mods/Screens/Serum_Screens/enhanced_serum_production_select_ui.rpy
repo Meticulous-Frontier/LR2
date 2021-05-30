@@ -53,7 +53,7 @@ init 2:
                         background "#000080"
                         xfill True
 
-                        text "Production Lines" style "serum_text_style_header"
+                        text "Production Lines" style "menu_text_title_style" xalign 0.5
 
                     frame:
                         background "#000080"
@@ -105,7 +105,7 @@ init 2:
                                                     ]
 
                                                     # hovered [
-                                                    # Show("serum_tooltip", None, the_serum,given_align = (0.97,0.12), given_anchor = (1.0,0.0))
+                                                    # Show("serum_tooltip", None, the_serum,given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                     # ]
 
                                             else:
@@ -267,7 +267,7 @@ init 2:
                     vbox:
                         textbutton "Choose Production for Line [line_selected]":
                             style "serum_textbutton_style_header"
-                            text_style "serum_text_style_header"
+                            text_style "menu_text_title_style"
                             xsize 375
                             action SetScreenVariable("line_selected",None)
 

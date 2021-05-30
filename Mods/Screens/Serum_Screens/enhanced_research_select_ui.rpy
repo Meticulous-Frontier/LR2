@@ -47,7 +47,7 @@ init 2:
             xalign 0.08
             yalign 0.4
             frame:
-                background "#888888"
+                background "#0a142688"
                 xsize 1200
                 ymaximum 55
                 frame:
@@ -57,23 +57,23 @@ init 2:
                         if isinstance(mc.business.active_research_design, SerumTrait):
                             $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
                             $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)
-                            text "Current Research: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
+                            text "Current: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
                                 style "serum_text_style"
                                 size 22
                                 xalign 0.0
                         else:
                             $ change_amount = str(__builtin__.round((mc.business.active_research_design.current_research/mc.business.active_research_design.research_needed) * 100, 1))
-                            text "Current Research: [mc.business.active_research_design.name] {size=14} Completion: [change_amount]%":
+                            text "Current: [mc.business.active_research_design.name] {size=14} Completion: [change_amount]%":
                                 style "serum_text_style"
                                 size 22
                                 xalign 0.0
                     else:
-                        text "Current Research: None!":
+                        text "Current: None!":
                             style "serum_text_style"
                             size 22
                             xalign 0.0
 
-                    text "Available Clarity: [mc.free_clarity]":
+                    text "{size=14}Available Clarity:{/size} [mc.free_clarity]":
                         style "serum_text_style"
                         size 22
                         xalign 1.0
@@ -81,7 +81,7 @@ init 2:
             null height 20
 
             frame:
-                background "#888888"
+                background "#0a142688"
                 xsize 1200
                 ysize 900
                 hbox:
@@ -90,7 +90,7 @@ init 2:
                         frame:
                             background "#000080"
                             xsize 380
-                            text "Research New Traits" style "serum_text_style"
+                            text "Research New Traits" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             xsize 380
@@ -104,7 +104,7 @@ init 2:
                                         frame:
                                             background "#000000"
                                             xsize 365
-                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
+                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
 
                                         for trait in sorted_traits:
                                             if trait.tier == dt and not trait.researched and trait.has_required():
@@ -114,10 +114,16 @@ init 2:
                                                     text_style "serum_text_style_traits"
                                                     action SetScreenVariable("selected_research", trait)
                                                     if selected_research == trait:
-                                                        background "#59853f"
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#593f85"
+                                                        else:
+                                                            background "#59853f"
                                                         hover_background "#a9d59f"
                                                     else:
-                                                        background "#000080"
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#008000"
+                                                        else:
+                                                            background "#000080"
                                                         hover_background "#1a45a1"
                                                     xsize 365
 
@@ -125,7 +131,7 @@ init 2:
                         frame:
                             background "#000080"
                             xsize 410
-                            text "Master Existing Traits:" style "serum_text_style"
+                            text "Master Existing Traits:" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             xsize 410
@@ -139,7 +145,7 @@ init 2:
                                         frame:
                                             background "#000000"
                                             xsize 395
-                                            text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
+                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
 
                                         for trait in sorted_traits:
                                             if trait.tier == dt and trait.researched:
@@ -155,10 +161,16 @@ init 2:
                                                     style "textbutton_style"
                                                     text_style "serum_text_style_traits"
                                                     if selected_research == trait:
-                                                        background "#59853f"
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#593f85"
+                                                        else:
+                                                            background "#59853f"
                                                         hover_background "#a9d59f"
                                                     else:
-                                                        background "#000080"
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#008000"
+                                                        else:
+                                                            background "#000080"
                                                         hover_background "#1a45a1"
                                                     xsize 395
 
@@ -166,7 +178,7 @@ init 2:
                         frame:
                             background "#000080"
                             xsize 380
-                            text "Research New Designs:" style "serum_text_style"
+                            text "Research New Designs:" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             xsize 380
@@ -186,10 +198,16 @@ init 2:
                                             style "textbutton_style"
                                             text_style "serum_text_style_traits"
                                             if selected_research == trait:
-                                                background "#59853f"
+                                                if mc.business.active_research_design == trait:
+                                                    background "#593f85"
+                                                else:
+                                                    background "#59853f"
                                                 hover_background "#a9d59f"
                                             else:
-                                                background "#000080"
+                                                if mc.business.active_research_design == trait:
+                                                    background "#008000"
+                                                else:
+                                                    background "#000080"
                                                 hover_background "#1a45a1"
                                             xsize 365
 
@@ -199,7 +217,7 @@ init 2:
             frame: #Frame that displays the info on the currently selected screen.
                 xsize 540
                 ysize 974
-                background "#888888"
+                background "#0a142688"
                 xalign 0.95
                 yoffset -12
                 yalign 0.5

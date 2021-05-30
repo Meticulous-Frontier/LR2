@@ -8,7 +8,7 @@ init 2:
             spacing 40
             for an_inventory in [the_inventory] + extra_inventories:
                 frame:
-                    background "#888888"
+                    background "#0a142688"
                     xsize 400
                     vbox:
                         xalign 0.02
@@ -17,18 +17,18 @@ init 2:
                             background "#000080"
                             xsize 390
                             if __builtin__.len(inventory_names) > 0 and count < __builtin__.len(inventory_names):
-                                text inventory_names[count] style "serum_text_style_header"
+                                text inventory_names[count] style "menu_text_title_style" xalign 0.5
                             else:
-                                text "Serums in Inventory" style "serum_text_style_header"
+                                text "Serums in Inventory" style "menu_text_title_style" xalign 0.5
 
                         for design in an_inventory.serums_held:
                             textbutton design[0].name + ": " + str(design[1]) + " Doses":
                                 xsize 390
                                 style "textbutton_style"
                                 text_style "serum_text_style"
-                                action Show("serum_tooltip",None,design[0], given_align = (0.9,0.09), given_anchor = (1.0,0.0))
+                                action Show("serum_tooltip",None,design[0], given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                 sensitive True
-                                hovered Show("serum_tooltip",None,design[0], given_align = (0.9,0.09), given_anchor = (1.0,0.0))
+                                hovered Show("serum_tooltip",None,design[0], given_align = (0.97,0.07), given_anchor = (1.0,0.0))
 
                     $ count += 1
 

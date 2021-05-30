@@ -10,7 +10,7 @@ init 2:
         zorder 105
 
         frame:
-            background "#888888"
+            background "#0a142688"
             anchor given_anchor
             align given_align
             vbox:
@@ -44,10 +44,10 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 480
-                        text the_serum.name style "serum_text_style_header"
+                        text the_serum.name style "menu_text_title_style" xalign 0.5
 
                 frame:
-                    background "#777777"
+                    background "#0a142688"
                     xalign 0.5
                     xsize 480
                     ysize 150
@@ -105,7 +105,7 @@ init 2:
                                         action Show("serum_design_ui", None, the_serum, the_serum.traits)
 
                 frame:
-                    background "#777777"
+                    background "#0a142688"
                     xalign 0.5
                     xsize 480
                     if the_serum.side_effects:
@@ -139,12 +139,12 @@ init 2:
 
                 if the_serum.side_effects:
                     frame:
-                        background "#000080"
+                        background "#0a142688"
                         xsize 480
-                        text "Side Effects:" style "serum_text_style"
+                        text "Side Effects" style "menu_text_title_style" xalign 0.5
 
                     frame:
-                        background "#777777"
+                        background "#0a142688"
                         xalign 0.5
                         xsize 480
                         viewport:
