@@ -46,10 +46,19 @@ init 10 python:
     def slave_assign_new_collar(person, collar):
         person.outfit.remove_all_collars()
 
-        new_collar = collar.get_copy()
-        new_collar.colour = [.1,.1,.1,.9]
-        new_collar.pattern = "Pattern_1"
-        new_collar.colour_pattern = [.95,.95,.95,.9]
+        if collar == "Simple Collar":
+            new_collar = breed_collar.get_copy()
+            new_collar.colour = [.1,.1,.1,.8]
+        else:
+            new_collar = collar.get_copy()
+            new_collar.colour = [.1,.1,.1,.8]
+
+            if new_collar.supported_patterns.has_key("Two Tone"):
+                new_collar.pattern = new_collar.supported_patterns["Two Tone"]
+                new_collar.colour_pattern = [.95,.95,.95,.9]
+            elif new_collar == spiked_choker:
+                new_collar.colour = [1,1,1,.8]
+
         person.base_outfit.add_accessory(new_collar)
 
         person.slave_collar = True
@@ -119,7 +128,7 @@ label slave_collar_person_label(the_person):
         $ slave_remove_collar(the_person)
         "You remove the collar from your [the_person.possessive_title]'s neck"
     else:
-        call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Back", "Back"]]]))
+        call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Simple Collar", "Simple Collar"], ["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Spiked Choker", spiked_choker], ["Wide Lace Choker", wide_choker], ["Back", "Back"]]]))
         $ collar_choice = _return
 
         if collar_choice == "Back":
@@ -128,7 +137,7 @@ label slave_collar_person_label(the_person):
         $ slave_assign_new_collar(the_person, collar_choice)
         $ del collar_choice
 
-        "You put one of the collars you created around your [the_person.possessive_title]'s neck."
+        "You put one of the collars you bought around your [the_person.possessive_title]'s neck."
 
     return
 
