@@ -21,7 +21,7 @@ init 2 python:
 
     def candace_convince_to_quit_requirement(person):
         if candace_get_can_convince_to_quit() and ophelia_get_will_help_candace():
-            if mc.business.max_employee_count == mc.business.get_employee_count():
+            if mc.business.get_employee_count() >= mc.business.max_employee_count:
                 return "At employee limit"
             if not candace_get_has_quit_job():
                 return True

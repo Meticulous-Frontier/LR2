@@ -901,7 +901,7 @@ label FA_talk_busy(the_person):
 #         #They agree you should give it to her harder
 #         the_person "Come on [the_person.mc_title], be rough with me. I can handle it!"
 #         $ the_person.change_arousal(1)
-#         "[the_person.title] seems turned on by [the_wacher.name] watching you and her [the_position.verb]."
+#         "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 #
 #     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's super slutty and doesn't care what people think.
@@ -909,15 +909,15 @@ label FA_talk_busy(the_person):
 #
 #     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #She's super slutty and encourages the watcher to be slutty.
-#         the_person "Oh god, you need to get a little of this yourself, [the_wacher.name]!"
+#         the_person "Oh god, you need to get a little of this yourself, [the_watcher.name]!"
 #         $ the_person.change_arousal(1)
-#         "[the_person.title] seems turned on by [the_wacher.name] watching you and her [the_position.verb]."
+#         "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 #
 #     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
 #         #She's into it and encouraged by the slut watching her.
-#         the_person "[the_wacher.name], I'm giving him all I can right now. Any more and he's going to break me!"
+#         the_person "[the_watcher.name], I'm giving him all I can right now. Any more and he's going to break me!"
 #         $ the_person.change_arousal(1)
-#         "[the_person.title] seems turned on by [the_wacher.name] watching you and her [the_position.verb]."
+#         "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 #
 #     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
 #         #She's into it but shamed by the prude watching her.

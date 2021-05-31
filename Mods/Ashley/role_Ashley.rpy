@@ -108,7 +108,7 @@ init -1 python:
             return False
         if not mc.business.is_open_for_business():
             return False
-        if mc.business.max_employee_count == mc.business.get_employee_count():
+        if mc.business.get_employee_count() >= mc.business.max_employee_count:
             return "At employee limit"
         if not mc.is_at_work():
             return "Talk to her at work"

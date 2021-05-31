@@ -1,7 +1,7 @@
 init 2:
     screen trait_tooltip(the_trait, given_align = (0.0,0.0), given_anchor = (0.0,0.0)):
         frame:
-            background "#666666"
+            background "#0a142688"
 
             align given_align
             anchor given_anchor
@@ -12,18 +12,18 @@ init 2:
                 frame:
                     background "#000080"
                     xsize 505
-                    text the_trait.name style "serum_text_style"
+                    text the_trait.name style "menu_text_title_style" xalign 0.5
 
                 hbox:
                     spacing 5
                     frame:
-                        background "#007000"
+                        background "#43B197"
                         xsize 250
                         xfill True
                         text the_trait.positive_slug style "serum_text_style_traits"
 
                     frame:
-                        background "#930000"
+                        background "#B14365"
                         xsize 250
                         xfill True
                         text the_trait.build_negative_slug() style "serum_text_style_traits"
@@ -38,5 +38,5 @@ init 2:
             anchor given_anchor
             for trait in the_traits:
                 frame:
-                    background "#888888"
+                    background "#0a142688"
                     use trait_tooltip(trait)

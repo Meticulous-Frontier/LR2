@@ -1016,7 +1016,7 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         #They agree you should give it to her harder
         the_person "Come on [the_person.mc_title], do me a little harder."
         $ the_person.change_arousal(1)
-        "[the_person.possessive_title] seems turned on by [the_watcher.name]watching you and her [the_position.verb]."
+        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.

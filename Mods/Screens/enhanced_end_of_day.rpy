@@ -9,7 +9,7 @@ init 2:
             spacing 200
             ysize 100
 
-            text mc.business.name style "textbutton_text_style" size 40 color "#cccccc"
+            text mc.business.name style "menu_text_title_style" size 40 xalign 0.5
 
         frame:
             background "#1a45a1aa"

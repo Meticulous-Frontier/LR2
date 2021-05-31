@@ -56,7 +56,7 @@ init 2:
                 background "#1a45a1aa"
                 xsize 1860
                 ysize 60
-                text "Assign Daily Serum Dose" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_style"
+                text "Assign Daily Serum Dose" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_title_style"
 
             hbox:
                 vbox:
@@ -74,7 +74,7 @@ init 2:
                                     xsize 500
                                     ysize 50
                                     background "#000080"
-                                    text "Division" style "serum_text_style_header"
+                                    text "Division" style "menu_text_title_style" xalign 0.5
 
                                 viewport:
                                     xsize 500
@@ -116,7 +116,7 @@ init 2:
                                         xsize 500
                                         ysize 50
                                         background "#000080"
-                                        text "Assign Serum" style "serum_text_style_header"
+                                        text "Assign Serum" style "menu_text_title_style" xalign 0.5
 
                                     viewport:
                                         scrollbars "vertical"
@@ -159,7 +159,7 @@ init 2:
                                                         background "#222222"
                                                         hover_background "#333333"
                                                     hovered [
-                                                        Show("serum_tooltip", None, serum[0],given_align = (0.97,0.12), given_anchor = (1.0,0.0))
+                                                        Show("serum_tooltip", None, serum[0],given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                     ]
                                                     unhovered [
                                                         Hide("serum_tooltip")
