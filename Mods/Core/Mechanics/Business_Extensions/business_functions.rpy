@@ -66,3 +66,85 @@ init -1 python:
         return False
 
     Business.is_trait_researched = is_trait_researched
+
+    def get_IT_projects(self):
+        if not hasattr(self, "_IT_projects"):
+            self._IT_projects = []
+        return self._IT_projects
+
+    def set_IT_projects(self, value):
+        self._IT_projects = value
+
+    def del_IT_projects(self):
+        del self._IT_projects
+
+    Business.IT_projects = property(get_IT_projects, set_IT_projects, del_IT_projects, "Owned IT Project List")
+
+    def get_active_IT_projects(self):
+        if not hasattr(self, "_active_IT_projects"):
+            self._active_IT_projects = []
+        return self._active_IT_projects
+
+    def set_active_IT_projects(self, value):
+        self._active_IT_projects = value
+
+    def del_active_IT_projects(self):
+        del self._active_IT_projects
+
+    Business.active_IT_projects = property(get_active_IT_projects, set_active_IT_projects, del_active_IT_projects, "Active IT Project List")
+
+    Business.IT_project_in_progress = None
+
+    Business.IT_partial_projects = {}
+
+    def set_active_IT_project(project):
+        if mc.business.IT_project_in_progress != None:
+            if mc.business.IT_project_in_progress[0] == project.identifier:
+                return
+        if mc.business.IT_project_in_progress and mc.business.IT_project_in_progress[1] < mc.business.IT_project_in_progress[0].project_cost and mc.business.IT_project_in_progress[1] > 0:
+            mc.business.IT_partial_projects[mc.business.IT_project_in_progress[0].identifier] = mc.business.IT_project_in_progress[1]    #Stores the current progress of this project.
+        if mc.business.IT_partial_projects.has_key(project.identifier):
+            mc.business.IT_project_in_progress = [project,  mc.business.IT_partial_projects.get(project.identifier, 0)]
+            mc.business.IT_partial_projects.pop(project.identifier, None)
+        else:
+            mc.business.IT_project_in_progress = [project, 0]  #SEcond variable 0 is for project progress. Default to 0 when starting a new project.
+        return
+
+    def get_IT_project_by_identifier(identifier):
+        return next((x for x in (business_IT_project_list + nanobot_IT_project_list) if x.identifier == identifier), None)
+
+    Business.get_IT_project_by_identifier = get_IT_project_by_identifier
+
+    def IT_increase_project_progress(self, amount = 0, add_to_log = False):
+        if not self.IT_project_in_progress:
+            return
+        self.IT_project_in_progress[1] += amount
+        if add_to_log:
+            mc.log_event( "+" + str(amount) + " IT Project Progress", "float_text_green")
+        return
+
+    Business.IT_increase_project_progress = IT_increase_project_progress
+
+    def IT_unlock_project(self, project = None):
+        if project:
+            if project not in self.IT_projects:
+                self.IT_projects.append(project)
+                mc.log_event( project.name + " IT Project Complete!", "float_text_green")
+        else:
+            if self.get_IT_project_by_identifier(self.IT_project_in_progress[0]) not in self.IT_projects:
+                self.IT_projects.append(self.get_IT_project_by_identifier(self.IT_project_in_progress[0]))
+                temp_name = self.get_IT_project_by_identifier(self.IT_project_in_progress[0]).name
+                mc.log_event( temp_name + " IT Project Complete!", "float_text_green")
+        return
+
+    Business.IT_unlock_project = IT_unlock_project
+
+label test_IT_screen:
+    # hide screen main_ui
+    # hide screen phone_hud_ui
+    # hide screen business_ui
+    call screen it_project_screen
+    # show screen phone_hud_ui
+    # show screen business_ui
+    # show screen main_ui
+    return

@@ -41,8 +41,8 @@ init 1 python:
 
     business_IT_project_list.append(hr_task_manager_project)
 
-    supply_inventory_project = IT_Project(name = "Just in Time Inventory",
-        desc = "Just in time inventory practices help increase efficiency. Increased supply procurement when the company is low on supplies.",
+    supply_inventory_project = IT_Project(name = "JiT Inventory",
+        desc = "Just in Time inventory practices help increase efficiency. Increased supply procurement when the company is low on supplies.",
         cost = 0,
         requirement = None,
         toggleable = False,
