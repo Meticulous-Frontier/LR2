@@ -80,6 +80,7 @@ init -1 python:
 
     Business.IT_projects = property(get_IT_projects, set_IT_projects, del_IT_projects, "Owned IT Project List")
 
+
     def get_active_IT_projects(self):
         if not hasattr(self, "_active_IT_projects"):
             self._active_IT_projects = []
@@ -110,6 +111,17 @@ init -1 python:
             mc.business.IT_project_in_progress = [project, 0]  #SEcond variable 0 is for project progress. Default to 0 when starting a new project.
         return
 
+    def IT_toggle_project(project):
+        if project in mc.business.active_IT_projects:
+            mc.business.active_IT_projects.remove(project)
+            if project.on_remove_function:
+                project.on_remove_function()
+        else:
+            mc.business.active_IT_projects.append(project)
+            if project.on_apply_function:
+                project.on_apply_function()
+        return
+
     def get_IT_project_by_identifier(identifier):
         return next((x for x in (business_IT_project_list + nanobot_IT_project_list) if x.identifier == identifier), None)
 
@@ -121,23 +133,32 @@ init -1 python:
         self.IT_project_in_progress[1] += amount
         if add_to_log:
             mc.log_event( "+" + str(amount) + " IT Project Progress", "float_text_green")
+        if self.IT_project_in_progress[1] >= self.IT_project_in_progress[0].project_cost:
+            self.IT_unlock_project(self.IT_project_in_progress[0])
+            self.IT_project_in_progress = None
         return
 
     Business.IT_increase_project_progress = IT_increase_project_progress
 
-    def IT_unlock_project(self, project = None):
+    def IT_unlock_project(self, project = None, add_to_log = True):
         if project:
             if project not in self.IT_projects:
                 self.IT_projects.append(project)
-                mc.log_event( project.name + " IT Project Complete!", "float_text_green")
+                if add_to_log:
+                    mc.log_event( project.name + " IT Project Complete!", "float_text_green")
         else:
             if self.get_IT_project_by_identifier(self.IT_project_in_progress[0]) not in self.IT_projects:
                 self.IT_projects.append(self.get_IT_project_by_identifier(self.IT_project_in_progress[0]))
                 temp_name = self.get_IT_project_by_identifier(self.IT_project_in_progress[0]).name
-                mc.log_event( temp_name + " IT Project Complete!", "float_text_green")
+                if add_to_log:
+                    mc.log_event( temp_name + " IT Project Complete!", "float_text_green")
         return
 
     Business.IT_unlock_project = IT_unlock_project
+
+
+
+
 
 label test_IT_screen:
     # hide screen main_ui

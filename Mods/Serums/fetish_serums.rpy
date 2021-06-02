@@ -4,7 +4,8 @@ init -3 python:
     FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "taking control", "anal creampies", "creampies"]
     FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex", "being submissive"]
     FETISH_EXHIBITION_OPINION_LIST = ["public sex", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "skimpy outfits", "skimpy uniforms", "sex standing up" ]
-
+    FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
+    FETISH_PRODUCTION_COST = 50    #Production Difficulty
     #relation fetishes (impact relationship with people) still need to workout how to make this happen
     FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
     # these fetishes could be used for 'slave' / 'dominatrix'
@@ -456,8 +457,7 @@ init -1 python:
         return find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
 
     def add_fetish_serum_traits():
-        FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
-        FETISH_PRODUCTION_COST = 50    #Production Difficulty
+
 
         fetish_basic_ther = SerumTraitMod(name = "Sexual Proclivity Nanobots",
                 desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
