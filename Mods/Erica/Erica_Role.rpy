@@ -2460,7 +2460,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "You snap the second round of pictures"
         if (erica.sluttiness > 40 and lily.sluttiness > 40):
             mc.name "That looks great. Remember, be playful!"
-            "[current_pos[2]]"
+            "[current_pos[2]!i]"
             $ mc.change_locked_clarity(30)
             mc.name "Nice, these are great. How about one more set?"
             "The girls agree and get into a new position."
@@ -2469,7 +2469,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
             if (erica.sluttiness > 60 and lily.sluttiness > 60):
                 mc.name "Remember, these are for the thirsty insta boys. Work it for the camera!"
-                "[current_pos[3]]"
+                "[current_pos[3]!i]"
                 $ mc.change_locked_clarity(50)
             else:
                 "You snap the final set of pictures. This should be good!"
