@@ -884,9 +884,9 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
             the_person "I'm not a big fan of bare sex, but if you like it that way, show me what you got."
 
         if skill_tag == "Vaginal":
-            if the_person.get_opinion_score("creampies") < 0 or the_person.get_opinion_score("anal creampies") < 0 or not the_person.on_birth_control:
-                the_person "Just make sure to pull out when you cum, okay?"
-            if not the_person.on_birth_control:
+            if not the_person.wants_creampie():
+                the_person "Just pull out when you cum, okay?"
+            if not the_person.on_birth_control and not the_person.knows_pregnant():
                 the_person "I'm not using any contraception at the moment."
     return
 
