@@ -37,8 +37,7 @@ init 2 python:
             eyes = "light blue", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 0, start_obedience = 5, start_happiness = 103, start_love = -3, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = ellie_base_outfit,
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
-            forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
+            forced_opinions = [["production work", 2, True], ["work uniforms", 1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False]])
 
         ellie.generate_home()
         ellie.set_schedule(ellie.home, times = [0,1,2,3,4])
@@ -48,25 +47,72 @@ init 2 python:
 
         ellie.event_triggers_dict["intro_complete"] = False    # True after first talk
 
-        # add appoint
-        #office.add_action(HR_director_appointment_action)
 
-        # ellie_intro = Action("ellie_intro",ellie_intro_requirement,"ellie_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        # mc.business.add_mandatory_crisis(ellie_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_crisis(ellie_start_intro_note) #Add the event here so that it pops when the requirements are met.
 
         # set relationships
-        # town_relationships.update_relationship(ellie, stephanie, "Sister")
-        # town_relationships.update_relationship(nora, ellie, "Friend")
-        # town_relationships.update_relationship(lily, ellie, "Rival")
+        # Ellie is relatively new in town and has no mutual relationship with MC
 
         ellie.add_role(ellie_role)
         return
 
+init -2 python: #Requirement Functions
+
+    def ellie_start_intro_note_requirement():
+        if fetish_serum_unlock_count() >= 2 and get_fetish_basic_serum().mastery_level > 3.0 and mc.business.head_researcher:
+            if time_of_day == 2 and day%7 == 2 and mc.is_at_work():
+                return True
+        return False
+    def ellie_meet_ellie_intro_requirement():
+        return False
+    def ellie_head_researcher_halfway_intro_requirement():
+        return False
+    def ellie_unnecessary_payment_requirement():
+        return False
+    def ellie_end_blackmail_requirement():
+        return False
+    def ellie_work_welcome_requirement():
+        return False
+    def ellie_never_been_kissed_requirement():
+        return False
+    def ellie_kiss_followup_requirement():
+        return False
+    def ellie_text_message_apology_requirement():
+        return False
+    def ellie_never_given_handjob_requirement():
+        return False
+    def ellie_never_tasted_cock_requirement():
+        return False
+    def ellie_never_been_fucked_requirement():
+        return False
+    def ellie_loses_her_virginity_requirement():
+        return False
+    def ellie_never_tried_anal_requirement():
+        return False
+    def ellie_turned_on_while_working_requirement():
+        return False
+
 
 label ellie_start_intro_note_label():
-    "You get a mysterious email."
-    "?????" "Hey, I know what your company is doing, and I'll go public with it if you don't meet my demands. Meet me tomorrow night in the alley between 3rd and 5th street, and come alone."
-    "Well that's not good."
+    $ the_person = mc.business.head_researcher
+    "You get an email notification on your phone. Normally you would brish something like this off as spam, but the subject line has your name in it."
+    "You open it up and are surprised what you are reading. It is short and to the point."
+    "?????" "I know what your company is doing with the nanobots, and I'll go public with it if you don't meet my demands. Meet me tomorrow night in the alley between 3rd and 5th street, and come alone."
+    "Well that's not good. That sounds very not good. You find yourself panicking for a moment."
+    "You take a deep breath. You should get with [the_person.possessive_title]. You quickly page her to meet you in your office."
+    $ ceo_office.show_background()
+    "You sit at your desk and anxiously wait for her to meet you."
+    $ the_person.draw_person()
+    the_person "Hey, you wanted to see me?"
+    mc.name "Close the door and come sit down."
+    $ the_person.draw_person(position = "sitting")
+    "She slides quietly into the chair."
+    the_person "Boy, you sure are somber... something on your mind?"
+    mc.name "You could say that..."
+    "You pull up the email and show it to her."
+    "She is just as surprised as you."
+    the_person "Wow... fuck... okay."
+    mc.name "So... "
     return
 
 label ellie_meet_ellie_intro_label():
@@ -84,7 +130,7 @@ label ellie_head_researcher_halfway_intro_label():
     "Her contact framed Ellie for the missing nanobots, Ellie got fired, and due to a noncompete contract can't find work anywhere."
     "Says she was pretty fresh there, young, hired straight out of college, from somewhere else."
     "You come up with a plan with the head researcher to offer her a job. Officially in a different department."
-    "But on the side will completel IT projects for you, including working on the nanobot programs."
+    "But on the side will complete IT projects for you, including working on the nanobot programs."
     return
 
 label ellie_unnecessary_payment_label():    #Use this scene each week if MC can't find out info on Ellie for some reason (head researcher fired, etc)
