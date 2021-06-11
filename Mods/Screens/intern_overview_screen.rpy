@@ -1,47 +1,27 @@
+# This is basically a copy of the employee overview screen, but showing only interns. Screen should unlock only after interns are unlocked.
 init 1 python:
-    def human_resource_potential_stat(person):
-        return (3*person.charisma) + (person.int) + (2 * person.hr_skill) + 5
-
-    def production_potential_stat(person):
-        return __builtin__.round(((3*person.focus) + (person.int) + (2*person.production_skill) + 10) * (mc.business.team_effectiveness))/100
-
-    def marketing_potential_stat(person):
-        return __builtin__.round(((3*person.charisma) + (person.focus) + (2*person.market_skill) + 5) * (mc.business.team_effectiveness))/100 #Total number of doses of serum that can be sold by this person.
-
-    def supply_potential_stat(person):
-        return __builtin__.round(((5*person.focus) + (3*person.charisma) + (3*person.supply_skill) + 20) * (mc.business.team_effectiveness))/100
-
-    def research_potential_stat(person):
-        result = __builtin__.round(((3*person.int) + (person.focus) + (2*person.research_skill) + 10) * (mc.business.team_effectiveness))/100
-        if mc.business.head_researcher:
-            bonus_percent = (mc.business.head_researcher.int - 2) * 0.05
-            result *= (1.0 + bonus_percent) #Every point above int 2 gives a 5% bonus.
-        else:
-            result *= 0.9 #No head researcher is treated like int 0.
-        return result
-
-    def people_list_potential_stat(people):
+    def intern_list_potential_stat(people):
         r_stat = 0
         p_stat = 0
         s_stat = 0
         m_stat = 0
         h_stat = 0
         for person in people:
-            if person in mc.business.research_team:
+            if person in mc.business.college_interns_research:
                 r_stat += research_potential_stat(person)
-            if person in mc.business.production_team:
+            if person in mc.business.college_interns_production:
                 p_stat += production_potential_stat(person)
-            if person in mc.business.supply_team:
+            if person in mc.business.college_interns_supply:
                 s_stat += supply_potential_stat(person)
-            if person in mc.business.market_team:
+            if person in mc.business.college_interns_market:
                 m_stat += marketing_potential_stat(person)
-            if person in mc.business.hr_team:
+            if person in mc.business.college_interns_HR:
                 h_stat += human_resource_potential_stat(person)
 
         return [["Research", r_stat], ["Production", p_stat], ["Supply", s_stat], ["Marketing", m_stat], ["HR", h_stat]]
 
 init 2:
-    screen employee_overview(white_list = None, black_list = None, person_select = False): #If select is True it returns the person's name who you click on. If it is false it is a normal overview menu that lets you bring up their detailed info.
+    screen intern_overview_screen(white_list = None, black_list = None, person_select = False): #If select is True it returns the person's name who you click on. If it is false it is a normal overview menu that lets you bring up their detailed info.
         modal True
         zorder 100
         add "Paper_Background.png"
@@ -51,7 +31,7 @@ init 2:
         default reverse_sort = False
         default sort_attributes = [
             ["Name", "name"],
-            ["Salary", "salary"],
+            #["Salary", "salary"],  #TODO replace this line with days remaining as intern?
             ["Happiness", "happiness"],
             ["Obedience", "obedience"],
             ["Love", "love"],
@@ -81,22 +61,22 @@ init 2:
 
         python:
             if division_select == "none":
-                showing_team = mc.business.research_team + mc.business.production_team + mc.business.supply_team + mc.business.market_team + mc.business.hr_team
+                showing_team = mc.business.college_interns_research + mc.business.college_interns_production + mc.business.college_interns_supply + mc.business.college_interns_market + mc.business.college_interns_HR
                 division_name = "Everyone"
             elif division_select == "r":
-                showing_team = mc.business.research_team #ie. take a shallow copy, so we can modify the team without everything exploding.
+                showing_team = mc.business.college_interns_research #ie. take a shallow copy, so we can modify the team without everything exploding.
                 division_name = "Research"
             elif division_select == "p":
-                showing_team = mc.business.production_team
+                showing_team = mc.business.college_interns_production
                 division_name = "Production"
             elif division_select == "s":
-                showing_team = mc.business.supply_team
+                showing_team = mc.business.college_interns_supply
                 division_name = "Supply Procurement"
             elif division_select == "m":
-                showing_team = mc.business.market_team
+                showing_team = mc.business.college_interns_market
                 division_name = "Marketing"
             elif division_select == "h":
-                showing_team = mc.business.hr_team
+                showing_team = mc.business.college_interns_HR
                 division_name = "Human Resources"
 
             display_list = [person for person in showing_team if (not white_list or person in white_list) and (not black_list or person not in black_list)] #Create our actual display list using people who are either on the white list or not on the black list
@@ -113,9 +93,9 @@ init 2:
                 xsize 1860
                 ysize 60
                 if person_select:
-                    text "Staff Selection" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_title_style"
+                    text "Intern Selection" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_title_style"
                 else:
-                    text "Staff Review" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_title_style"
+                    text "Intern Review" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_title_style"
             frame:
                 background "#1a45a1aa"
 
@@ -140,7 +120,7 @@ init 2:
                                 ysize 48
                                 text button_map[0] xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
 
-            $ grid_count = 15
+            $ grid_count = 14
             if person_select:
                 $ grid_count += 1
             frame:
@@ -200,7 +180,7 @@ init 2:
                                     margin (2,0)
                                     text (str(getattr(person, attributes[1])) if attributes[1] != "salary" else "$ " + '{:0.2f}'.format(getattr(person, attributes[1]))) style "menu_text_style" xfill True xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
 
-            $ stats_list = people_list_potential_stat(display_list)
+            $ stats_list = intern_list_potential_stat(display_list)
             frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
                 background "#1a45a1aa"
                 yoffset -10
@@ -227,18 +207,17 @@ init 2:
                     idle im.Scale("gui/button/choice_idle_background.png", 400, 80)
                     hover im.Scale("gui/button/choice_hover_background.png", 400, 80)
                     focus_mask im.Scale("gui/button/choice_idle_background.png", 400, 80)
-                    action Hide("employee_overview")
+                    action Hide("intern_overview_screen")
                 textbutton "Return" align [0.5,0.5] style "return_button_style"
-        if mc.business.college_interns_unlocked:
-            frame:
-                background None
-                anchor [0.5,0.5]
-                align [0.8,0.94]
-                xysize [400,80]
-                imagebutton:
-                    align [0.5,0.5]
-                    idle im.Scale("gui/button/choice_idle_background.png", 400, 80)
-                    hover im.Scale("gui/button/choice_hover_background.png", 400, 80)
-                    focus_mask im.Scale("gui/button/choice_idle_background.png", 400, 80)
-                    action [Hide("employee_overview"), Show("intern_overview_screen")]
-                textbutton "Interns" align [0.5,0.5] style "return_button_style"
+        frame:
+            background None
+            anchor [0.5,0.5]
+            align [0.8,0.94]
+            xysize [400,80]
+            imagebutton:
+                align [0.5,0.5]
+                idle im.Scale("gui/button/choice_idle_background.png", 400, 80)
+                hover im.Scale("gui/button/choice_hover_background.png", 400, 80)
+                focus_mask im.Scale("gui/button/choice_idle_background.png", 400, 80)
+                action [Hide("intern_overview_screen"), Show("employee_overview")]
+            textbutton "Staff" align [0.5,0.5] style "return_button_style"

@@ -92,6 +92,8 @@ init -2 python: #Requirement Functions
     def ellie_turned_on_while_working_requirement():
         return False
 
+init -1 python:
+    ellie_start_intro_note = Action("Blackmail Note", ellie_start_intro_note_requirement, "ellie_start_intro_note_label")
 
 label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher

@@ -222,3 +222,65 @@ init -1 python:
         return [x for x in self.get_employee_list() if x.has_child_with_mc()]
 
     Business.employees_with_children_with_mc = business_employees_with_children_with_mc
+
+    #College intern realted functions
+
+    Business.college_interns_research = []
+    Business.college_interns_production = []
+    Business.college_interns_market = []    #Adding code support for other divisions even though there is currently no plan to use them.
+    Business.college_interns_supply = []
+    Business.college_interns_HR = []
+    Business.college_interns_unlocked = False
+    Business.max_interns_by_division = 2    #Can be changed in later game code.
+    Business.cost_to_hire_intern = 5000
+
+    def hire_college_intern(self, person, target_division, add_to_location = False):
+        div_func = {
+            "Research" : [ self.college_interns_research, self.r_div],
+            "Production" : [ self.college_interns_production, self.p_div],
+            "Supply" : [ self.college_interns_supply, self.s_div ],
+            "Marketing" : [ self.college_interns_market, self.m_div ],
+            "HR" : [ self.college_interns_HR, self.h_div ]
+        }
+        if not person in div_func[target_division][0]:
+            div_func[target_division][0].append(person)
+        person.add_role(college_intern_role)
+        person.job = "Student Intern"
+        person.set_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
+        if add_to_location:
+            university.add_person(person)
+        if person.event_triggers_dict.get("intern_since", -1) == -1:
+            person.event_triggers_dict["intern_since"] = day
+            self.listener_system.fire_event("new_intern", the_person = person)
+
+        for other_employee in (self.college_interns_research + self.college_interns_production + self.college_interns_HR + self.college_interns_supply + self.college_interns_market):
+            town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+
+    Business.hire_college_intern = hire_college_intern
+
+    def remove_college_intern(self, person):
+        if person in self.college_interns_research:
+            self.college_interns_research.remove(person)
+        elif person in self.college_interns_production:
+            self.college_interns_production.remove(person)
+        elif person in self.college_interns_supply:
+            self.college_interns_supply.remove(person)
+        elif person in self.college_interns_market:
+            self.college_interns_market.remove(person)
+        elif person in self.college_interns_HR:
+            self.college_interns_HR.remove(person)
+        else:
+            pass    #Some kind of error here?
+        person.remove_role(college_intern_role)
+        return
+
+    Business.remove_college_intern = remove_college_intern
+
+    def get_intern_depts_with_openings():
+        dept_list = []
+        if len(self.college_interns_research) < self.max_interns_by_division:
+            dept_list.append("Research")
+        if len(self.college_interns_production) < self.max_interns_by_division:
+            dept_list.append("Production")
+        #TODO find conditions for allowing interns to other departments.
+        return dept_list

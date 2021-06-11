@@ -65,12 +65,12 @@ init -2 python:
         return False
 
     def kaya_intro_requirement(the_person):
-        if the_person.location == the_person.downtown:
+        if the_person.location == coffeeshop:
             return True
         return False
 
     def kaya_ask_out_requirement(the_person):
-        if the_person.location == the_person.downtown and the_person.love > 20 and time_of_day == 3:
+        if the_person.location == the_person.coffeeshop and the_person.love > 20 and time_of_day == 3:
             #TODO False if we already have a date scheduled for tonight. Maybe make this only non date nights?
             return True
         return False
@@ -128,7 +128,7 @@ init -2 python:
 
 label kaya_setup_intro_event_label():
     $ the_person = kaya
-    $ kaya.set_schedule(downtown, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
+    $ kaya.set_schedule(coffeeshop, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
     $ kaya.set_schedule(university, days = [0, 1, 2, 3, 4], times = [1])
     $ kaya.add_unique_on_talk_event(kaya_intro)
     return
