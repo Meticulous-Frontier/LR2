@@ -15,7 +15,7 @@ label activate_TEMPLATE_mod_core(stack):
 label update_TEMPLATE_mod_core(stack):
     python:
         # This function runs when loading an existing save game. If you want to make your person appear in existing savegames, use this function to check if she exists and then run the init for her if she doesn't.
-        if "TEMPLATE" in globals():
+        if "TEMPLATE" not in globals():
             TEMPLATE_mod_initialization()
         execute_hijack_call(stack)
     return
