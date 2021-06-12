@@ -219,7 +219,6 @@ init 2:
                 ysize 974
                 background "#0a142688"
                 xalign 0.95
-                yoffset -12
                 yalign 0.5
                 $ button_name = ""
                 $ button_actions = []

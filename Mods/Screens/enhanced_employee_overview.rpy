@@ -203,7 +203,6 @@ init 2:
             $ stats_list = people_list_potential_stat(display_list)
             frame: # Create a frame that displays production / research / supply / hr per turn when filtering by departments
                 background "#1a45a1aa"
-                yoffset -10
                 hbox:
                     xfill True
                     xalign 0.5

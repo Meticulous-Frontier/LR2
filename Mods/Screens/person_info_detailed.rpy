@@ -85,7 +85,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 260
                     vbox:
-                        text "Status and Info" style "menu_text_style" size 22
+                        text "Status and Info" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -114,39 +114,60 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 260
                     vbox:
-                        text "Characteristics" style "menu_text_style" size 22
-                        for skill in dict_main_skills:
-                            text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
-                        text "Love: [the_person.love]" style "menu_text_style"
-                        if the_person.personality.default_prefix:
-                            text "Personality: " + the_person.personality.default_prefix.capitalize() style "menu_text_style"
-                        else:
-                            text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
+                        text "Characteristics" style "serum_text_style_header"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    for skill in dict_main_skills:
+                                        text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
+                                    text "Love: [the_person.love]" style "menu_text_style"
+                                    if the_person.personality.default_prefix:
+                                        text "Personality: " + the_person.personality.default_prefix.capitalize() style "menu_text_style"
+                                    else:
+                                        text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 325
                     ysize 260
                     vbox:
-                        text "Work Skills" style "menu_text_style" size 22
-                        for skill in dict_work_skills:
-                            text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
+                        text "Work Skills" style "serum_text_style_header"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    for skill in dict_work_skills:
+                                        text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 325
                     ysize 260
                     vbox:
-                        text "Sex Skills" style "menu_text_style" size 22
-                        for skill in dict_sex_skills:
-                            text dict_sex_skills[skill][0] + " Skill: " + str(the_person.sex_skills[dict_sex_skills[skill][0]]) style "menu_text_style"
+                        text "Sex Skills" style "serum_text_style_header"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    for skill in dict_sex_skills:
+                                        text dict_sex_skills[skill][0] + " Skill: " + str(the_person.sex_skills[dict_sex_skills[skill][0]]) style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 325
                     ysize 260
                     vbox:
-                        text "Sex Record" style "menu_text_style" size 22
+                        text "Sex Record" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -165,7 +186,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 400
                     vbox:
-                        text "Loves" style "menu_text_style" size 22
+                        text "Loves" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -185,7 +206,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 400
                     vbox:
-                        text "Likes" style "menu_text_style" size 22
+                        text "Likes" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -205,7 +226,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 400
                     vbox:
-                        text "Dislikes" style "menu_text_style" size 22
+                        text "Dislikes" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -225,7 +246,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 400
                     vbox:
-                        text "Hates" style "menu_text_style" size 22
+                        text "Hates" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -245,7 +266,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     xsize 325
                     ysize 400
                     vbox:
-                        text "Other Relations" style "menu_text_style" size 22
+                        text "Other Relations" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True
@@ -264,13 +285,21 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 165
+                    ysize 185
                     vbox:
-                        text "HR Job: [hr_base]" style "menu_text_style"
-                        text "Marketing Job: [market_base]" style "menu_text_style"
-                        text "Research Job: [research_base]" style "menu_text_style"
-                        text "Production Job: [prod_base]" style "menu_text_style"
-                        text "Supply Job: [supply_base]" style "menu_text_style"
+                        text "Job Statistics" style "serum_text_style_header"
+                        viewport:
+                            scrollbars "vertical"
+                            mousewheel True
+                            frame:
+                                xsize 300
+                                background None
+                                vbox:
+                                    text "HR Job: [hr_base]" style "menu_text_style"
+                                    text "Marketing Job: [market_base]" style "menu_text_style"
+                                    text "Research Job: [research_base]" style "menu_text_style"
+                                    text "Production Job: [prod_base]" style "menu_text_style"
+                                    text "Supply Job: [supply_base]" style "menu_text_style"
                 frame:
                     background None
                     anchor [0.5,1]
@@ -287,10 +316,10 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 165
+                    ysize 185
                     xoffset 195
                     vbox:
-                        text "Currently Affected By:" style "menu_text_style" size 22
+                        text "Currently Affected By" style "serum_text_style_header"
                         viewport:
                             scrollbars "vertical"
                             mousewheel True

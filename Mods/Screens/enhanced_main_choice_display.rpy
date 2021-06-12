@@ -68,14 +68,14 @@ init 2 python:
 
             # pre-load clothing items
             person = self.return_value
-            for cloth in person.outfit.generate_clothing_list(person.body_type, person.tits, person.idle_pose):
+            for cloth in person.outfit.generate_clothing_list():
                 if isinstance(cloth, Facial_Accessory):
                     load_image(cloth.position_sets[person.idle_pose].get_image(person.face_style, "default"))
                 else:
                     load_image(cloth.position_sets[person.idle_pose].get_image(actual_body_type(person, cloth), actual_tit_size(person, cloth)))
             return
 
-    def build_menu_items(elements_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
+    def build_menu_items(elements_list, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None):
         result = []
         for count in __builtin__.range(__builtin__.len(elements_list)):
             if __builtin__.len(elements_list[count]) > 1:
@@ -85,7 +85,7 @@ init 2 python:
                     result.append(elements_list[count])
         return result
 
-    def build_menu_item_list(element_list, draw_person_previews = True, draw_hearts_for_people = True, person_preview_args = None):
+    def build_menu_item_list(element_list, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None):
         def find_and_replace_tooltip_property(item, extra_args):
             groups = re.search("\[[^]]*\]", item.menu_tooltip)
             if groups and isinstance(extra_args, Person):

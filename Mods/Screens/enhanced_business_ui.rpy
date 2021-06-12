@@ -11,7 +11,7 @@ init 2:
                 yanchor 1.0
                 yalign 1.0
                 spacing 5
-                text "[mc.business.name]" style "menu_text_title_style" xalign 0.03
+                text "[mc.business.name]" style "menu_text_title_style" xalign 0.03 yoffset -10
                 textbutton "Employee Count: " + str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count):
                     style "transparent_style"
                     text_style "menu_text_style"
@@ -84,7 +84,7 @@ init 2:
                         if count > 0:
                             hbox:
                                 xpos 85
-                                ypos 55
+                                ypos 45
                                 textbutton "{image=question_mark}":
                                     background None
                                     text_style "textbutton_text_style"
@@ -96,4 +96,4 @@ init 2:
                                         Hide("game_hints_tooltip")
                                     ]
                                     sensitive True
-                                text "[count]" style "serum_text_style_header"
+                                text "[count]" style "serum_text_style_header" yoffset 10
