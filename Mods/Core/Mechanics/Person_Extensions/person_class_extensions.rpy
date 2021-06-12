@@ -1250,7 +1250,7 @@ init -1 python:
     # attach to person object
     Person.change_willpower = change_willpower
 
-    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0,
+    def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "auto", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
 
         validate_texture_memory()
@@ -1260,8 +1260,8 @@ init -1 python:
         if emotion is None:
             emotion = self.get_emotion()
 
-        background_fill = None
-        the_animation = None
+        if not can_use_animation():
+            the_animation = None
 
         if display_transform is None:
             display_transform = character_right
@@ -1269,7 +1269,13 @@ init -1 python:
         if lighting is None:
             lighting = mc.location.get_lighting_conditions()
 
+        if display_zorder is None:
+            display_zorder = 0
+
         at_arguments = [display_transform, scale_person(self.height)]
+        if the_animation is not None:
+            at_arguments.append(basic_bounce(the_animation))
+
         if extra_at_arguments:
             if isinstance(extra_at_arguments, list):
                 at_arguments.extend(extra_at_arguments)
@@ -1278,24 +1284,25 @@ init -1 python:
         else:
             extra_at_arguments = []
 
-        if display_zorder is None:
-            display_zorder = 0
-
         self.hide_person()
         if wipe_scene:
             clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        character_image = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill)
-        renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what=character_image, tag = self.identifier)
+        if the_animation is None:
+            weight_mask = Solid("#000000") #Black mask = no influence.
+        else:
+            weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
+
+        renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what= ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
     # add location to store original personality
     Person.original_personality = None
 
-    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, show_person_info = True, special_modifier = None, lighting = None, background_fill = "#0026a5", the_animation = None, animation_effect_strength = 1.0, half_off_instead = False,
+    def draw_animated_removal_enhanced(self, the_clothing, position = None, emotion = None, show_person_info = True, special_modifier = None, lighting = None, background_fill = "auto", the_animation = None, animation_effect_strength = 1.0, half_off_instead = False,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True, scene_manager = None): #A special version of draw_person, removes the_clothing and animates it floating away. Otherwise draws as normal.
 
         if the_clothing is None:  #we need something to take off
@@ -1305,9 +1312,6 @@ init -1 python:
         if self.outfit is None:
             renpy.say("WARNING", self.name + " is not wearing any outfit to remove an item from, aborting draw animated removal.")
             return
-
-        background_fill = None
-        the_animation = None
 
         if position is None:
             position = self.idle_pose
@@ -1321,7 +1325,14 @@ init -1 python:
         if display_transform is None: # make sure we don't need to pass the position with each draw
             display_transform = character_right
 
+        if not can_use_animation():
+            the_animation = None
+        elif the_animation is None:
+            the_animation = self.idle_animation
+
         at_arguments = [display_transform, scale_person(self.height)]
+        if the_animation is not None:
+            at_arguments.append(basic_bounce(the_animation))
         if extra_at_arguments:
             if isinstance(extra_at_arguments, list):
                 at_arguments.extend(extra_at_arguments)
@@ -1344,22 +1355,27 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, flatten = True) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
                 self.outfit.remove_clothing(cloth) #Remove the clothing
-        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, background_fill, flatten = True)
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting)
+
+        if the_animation is None:
+            weight_mask = Solid("#000000") #Black mask = no influence.
+        else:
+            weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
 
         self.hide_person()
-        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier )
-        renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
+        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(top_displayable, weight_mask), zorder = display_zorder, tag = self.identifier )
+        renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = ShaderPerson(bottom_displayable, weight_mask), zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, background_fill = "#0026a5", no_frame = False, hide_list = [], flatten = False): #Encapsulates what is done when drawing a person and produces a single displayable.
+    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
@@ -1381,7 +1397,9 @@ init -1 python:
         displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
         displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
 
-        composite_list = [position_size_dict.get(position)]
+        x_size, y_size = position_size_dict.get(position)
+        composite_list = [(x_size,y_size)]
+
         for display in displayable_list:
             if isinstance(display, __builtin__.tuple):
                 composite_list.extend(display)
@@ -1389,9 +1407,23 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        if flatten:
-            return Flatten(Composite(*composite_list))
-        return Composite(*composite_list)
+        character_composite = Composite(*composite_list)
+
+        if persistent.vren_display_pref == "Float" or persistent.vren_display_pref == "Frame":
+            character_raw_body = im.Composite((x_size, y_size),
+                (0,0), self.body_images.generate_raw_image(self.body_type,self.tits,position),
+                #(0,0), self.expression_images.generate_raw_image(position, emotion, special_modifier = special_modifier),
+                self.hair_style.crop_offset_dict.get(position,(0,0)), self.hair_style.generate_raw_image("standard_body", self.tits, position))
+
+            blurred_image = im.Blur(character_raw_body, 6)
+            aura_colour = self.get_display_colour_code()
+            recoloured_blur = im.MatrixColor(blurred_image, im.matrix.colorize(aura_colour, aura_colour))
+
+            final_composite = Composite((x_size, y_size), (0,0), recoloured_blur, (0,0), character_composite)
+        else:
+            final_composite = character_composite
+
+        return Flatten(final_composite) # Create a composite image using all of the displayables
 
     Person.build_person_displayable = build_person_displayable_enhanced
 

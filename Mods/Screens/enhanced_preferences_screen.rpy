@@ -184,6 +184,25 @@ init 2: # Add some additional
 
                     hbox:
                         spacing 20
+
+                        if not renpy.mobile: #Animations are always disabled on mobile.
+                            vbox:
+                                style_prefix "radio"
+                                label "Animation"
+                                textbutton "Enable" action SetField(persistent, "vren_animation", True)
+                                textbutton "Disable" action SetField(persistent, "vren_animation", False)
+
+                        vbox:
+                            style_prefix "radio"
+                            label "Character Background"
+                            textbutton "Aura" action SetField(persistent, "vren_display_pref", "Float")
+                            textbutton "None" action SetField(persistent, "vren_display_pref", "None")
+
+
+                    null height (2 * gui.pref_spacing)
+
+                    hbox:
+                        spacing 20
                         style_prefix "slider"
 
                         vbox:

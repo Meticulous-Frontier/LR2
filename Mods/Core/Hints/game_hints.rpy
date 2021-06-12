@@ -54,7 +54,7 @@ init -1 python:
     game_hints.append(Hint("Talk with cousin", "You've bought the strip club, meet up with your cousin to get your strip club up and running.", "get_strip_club_foreclosed_stage() == 4", "get_strip_club_foreclosed_stage() == 5"))
 
     # DEBUG HINTS (for fitting an positioning)
-    # game_hints.append(Hint("Always Visible Hint", "This hint is always visible in the hint list.", "True", "False"))
+    game_hints.append(Hint("Always Visible Hint", "This hint is always visible in the hint list.", "True", "False"))
     # hints with long text
     # game_hints.append(Hint("Nora's Research", "Don't try to research the Nora serum, just create a serum with the Nora trait and give it a person, then interact with them until you have increased your mastery level sufficiently.", "True", "False"))
     # game_hints.append(Hint("Hire Alexia", "You should head downtown and get to know her a little better so you can hire her as employee in your company.", "True", "False"))

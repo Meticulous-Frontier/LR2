@@ -84,7 +84,7 @@ init 2 style textbutton_text_style: ##The generic style used for text button bac
 
 init 2 style transparent_style:
     background None
-    padding [5, -3]
+    padding [5, 0]
 
 init 2 style menu_text_style:
     size 18
