@@ -37,8 +37,8 @@ init -1 python:
             return "No internship openings"
         return False
 
-init 1 python:
-    hire_new_college_intern = Action()
+# init 1 python:
+#     hire_new_college_intern = Action()
 
 
 label unlock_college_interns():
