@@ -336,7 +336,7 @@ init 2:
 init 2:
     screen outfit_creator(starting_outfit, outfit_type = "full", slut_limit = None, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
 
-        #add "Paper_Background.png"
+        add "Paper_Background.png"
         modal True
 
         $ renpy.block_rollback()
@@ -423,12 +423,13 @@ init 2:
             yanchor 0.5
             spacing 15
             frame:
-                background "#aaaaaa"
+                background "#0a142688"
                 padding (20,20)
                 xysize (880, 1015)
                 hbox:
                     spacing 15
                     frame:
+                        background "#0a142688"
                         xsize 200
 
                         viewport:
@@ -456,7 +457,7 @@ init 2:
                             frame:
                                 xsize 605
                                 yminimum 440
-                                background "#888888"
+                                background "#0a142688"
                                 padding 0,0
 
                                 vbox:
@@ -511,18 +512,18 @@ init 2:
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
                             xysize (605, 520)
-                            background "#888888"
+                            background "#0a142688"
                             if selected_clothing is not None:
                                 vbox:
                                     spacing 5
                                     frame:
-                                        background "#aaaaaa"
+                                        background "#0a142688"
                                         xfill True
                                         textbutton "Add " + selected_clothing.name + " to outfit\n" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
-                                            background "#1a45a1"
-                                            hover_background "#3a65c1"
+                                            hover_background "#143869"
+                                            background "#14386988"
                                             xalign 0.5
                                             xfill True
 
@@ -541,7 +542,7 @@ init 2:
                                             ]
 
                                     frame:
-                                        background "#888888"
+                                        background "#0a142688"
                                         yfill True
                                         xfill True
                                         viewport:
@@ -556,7 +557,7 @@ init 2:
                                                         spacing 5
                                                         hbox:
                                                             frame:
-                                                                background "#aaaaaa"
+                                                                background "#0a142688"
                                                                 xfill True
                                                                 textbutton "Cloth Pattern Selection":
                                                                     style "textbutton_no_padding_highlight"
@@ -568,7 +569,7 @@ init 2:
                                                             spacing 5
                                                             if cloth_pattern_selection:
                                                                 frame:
-                                                                    background "#aaaaaa"
+                                                                    background "#0a142688"
                                                                     ysize 50
                                                                     viewport:
                                                                         mousewheel "horizontal"
@@ -585,11 +586,11 @@ init 2:
                                                                                     xfill True
 
                                                                                     if selected_clothing.pattern == selected_clothing.supported_patterns[pattern]:
-                                                                                        background "#4f7ad6"
-                                                                                        hover_background "#4f7ad6"
+                                                                                        hover_background "#143869"
+                                                                                        background "#14386988"
                                                                                     else:
-                                                                                        background "#1a45a1"
-                                                                                        hover_background "#3a65c1"
+                                                                                        hover_background "#143869"
+                                                                                        background "#171717"
 
                                                                                     sensitive True
                                                                                     action SetField(selected_clothing,"pattern",selected_clothing.supported_patterns[pattern])
@@ -599,7 +600,7 @@ init 2:
                                                             spacing 5 #We will manually handle spacing so we can have our colour predictor frames
                                                             frame:
                                                                 ysize 50
-                                                                background "#aaaaaa"
+                                                                background "#0a142688"
                                                                 hbox:
                                                                     spacing 5
                                                                     textbutton "Primary Colour":
@@ -607,11 +608,11 @@ init 2:
                                                                         text_style "serum_text_style"
 
                                                                         if selected_colour == "colour":
-                                                                            background "#4f7ad6"
-                                                                            hover_background "#4f7ad6"
+                                                                            hover_background "#143869"
+                                                                            background "#14386988"
                                                                         else:
-                                                                            background "#1a45a1"
-                                                                            hover_background "#3a65c1"
+                                                                            hover_background "#143869"
+                                                                            background "#171717"
                                                                         sensitive True
                                                                         if selected_colour == "colour_pattern":
                                                                             action [
@@ -640,11 +641,11 @@ init 2:
                                                                             text_style "serum_text_style"
 
                                                                             if selected_colour == "colour_pattern":
-                                                                                background "#4f7ad6"
-                                                                                hover_background "#4f7ad6"
+                                                                                hover_background "#143869"
+                                                                                background "#14386988"
                                                                             else:
-                                                                                background "#1a45a1"
-                                                                                hover_background "#3a65c1"
+                                                                                hover_background "#143869"
+                                                                                background "#171717"
                                                                             sensitive True
                                                                             if selected_colour == "colour":
                                                                                 action [
@@ -670,7 +671,7 @@ init 2:
                                                     hbox:
                                                         spacing 5
                                                         frame:
-                                                            background "#aaaaaa"
+                                                            background "#0a142688"
                                                             textbutton "Color Selection":
                                                                 style "textbutton_no_padding_highlight"
                                                                 text_style "serum_text_style"
@@ -686,7 +687,7 @@ init 2:
                                                                     xfill True
                                                                     frame:
 
-                                                                        background "#aaaaaa"
+                                                                        background "#0a142688"
                                                                         hbox:
                                                                             button:
                                                                                 background "#dd1f1f"
@@ -710,7 +711,7 @@ init 2:
 
                                                                     frame:
 
-                                                                        background "#aaaaaa"
+                                                                        background "#0a142688"
                                                                         hbox:
                                                                             button:
                                                                                 background "#3ffc45"
@@ -733,7 +734,7 @@ init 2:
                                                                                 unhovered [SetScreenVariable("current_g",__builtin__.round(current_g,2))]
                                                                     frame:
 
-                                                                        background "#aaaaaa"
+                                                                        background "#0a142688"
                                                                         hbox:
                                                                             button:
                                                                                 background "#3f87fc"
@@ -757,7 +758,7 @@ init 2:
                                                                                 unhovered [SetScreenVariable("current_b",__builtin__.round(current_b,2))]
 
                                                                 # frame:
-                                                                #     background "#aaaaaa"
+                                                                #     background "#0a142688"
                                                                 #     hbox:
                                                                 #         button:
                                                                 #             background "#111111"
@@ -787,16 +788,18 @@ init 2:
                                                                         $ trans_name = str(int(float(trans)*100)) + "%"
                                                                         button:
                                                                             if current_a == float(trans):
-                                                                                background "#4f7ad6"
+                                                                                hover_background "#143869"
+                                                                                background "#14386988"
                                                                             else:
-                                                                                background "#1a45a1"
+                                                                                hover_background "#143869"
+                                                                                background "#171717"
                                                                             text trans_name style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                                                             xysize (60, 40)
                                                                             action [Function(update_transparency, float(trans))]
                                                                     frame:
                                                                         padding [0,0]
                                                                         xysize (60, 40)
-                                                                        background "#000"
+                                                                        background "#143869"
                                                                         text str(int(float(current_a)*100)) + "%" style "serum_text_style" yalign 0.5 size 16
 
                                                     if color_selection:
@@ -807,7 +810,7 @@ init 2:
 
                                                                 for count, a_colour in __builtin__.enumerate(colour_list):
                                                                     frame:
-                                                                        background "#aaaaaa"
+                                                                        background "#0a142688"
                                                                         padding [3, 3]
                                                                         button:
                                                                             background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
@@ -830,7 +833,7 @@ init 2:
                                                 #     spacing 5
                                                 #     hbox:
                                                 #         frame:
-                                                #             background "#aaaaaa"
+                                                #             background "#0a142688"
                                                 #             xfill True
                                                 #             textbutton "Transparency":
                                                 #                 style "textbutton_no_padding_highlight"
@@ -842,7 +845,7 @@ init 2:
                                                 #     hbox:
                                                 #         if transparency_selection:
                                                 #             frame:
-                                                #                 background "#aaaaaa"
+                                                #                 background "#0a142688"
                                                 #                 ysize 50
                                                 #                 viewport:
                                                 #                     xfill True
@@ -918,14 +921,14 @@ init 2:
                 spacing 15
                 frame:
                     xysize (540, 500)
-                    background "#aaaaaa"
+                    background "#0a142688"
                     vbox:
                         spacing 5
                         grid 2 1:
                             xfill True
                             spacing 5
                             frame:
-                                background "#888888"
+                                background "#0a142688"
                                 xfill True
                                 textbutton "View Outfit Stats":
                                     style "textbutton_no_padding_highlight"
@@ -934,7 +937,7 @@ init 2:
 
                                     action ToggleScreenVariable("outfit_stats")
                             frame:
-                                background "#888888"
+                                background "#0a142688"
                                 xfill True
                                 textbutton "Current (" + get_slut_value_classification(get_slut_score()) + ")":
                                     style "textbutton_no_padding"
@@ -949,7 +952,7 @@ init 2:
                                 xalign 0.5
                                 if outfit_stats:
                                     frame:
-                                        background "#888888"
+                                        background "#0a142688"
                                         ysize 354
                                         viewport:
                                             draggable True
@@ -958,71 +961,71 @@ init 2:
                                             xsize 250
                                             vbox:
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Sluttiness (" + get_outfit_type_name() + "): " + str(get_slut_score()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Tits Visible: " + str(demo_outfit.tits_visible()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Tits Usable: " + str(demo_outfit.tits_available()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Bra Covered: " + str(demo_outfit.bra_covered()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "serum_text_style_traits"
                                                 frame:
-                                                    background "#000080"
+                                                    background "#143869"
                                                     xsize 250
                                                     padding [1,1]
                                                     text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
 
                                                 # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
                                                 # frame:
-                                                #     background "#007000"
+                                                #     background "#43B197"
                                                 #     xsize 250
                                                 #     padding [1,1]
                                                 #     if (selected_from_outfit):
                                                 #         text "From outfit: " + selected_from_outfit.name style "serum_text_style_traits"
                                                 # frame:
-                                                #     background "#007000"
+                                                #     background "#43B197"
                                                 #     xsize 250
                                                 #     padding [1,1]
                                                 #     if (selected_clothing):
                                                 #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
 
                                 frame:
-                                    background "#888888"
+                                    background "#0a142688"
                                     xsize 262
                                     vbox:
                                         frame:
-                                            background "#000080"
+                                            background "#143869"
                                             padding [1,1]
                                             xsize 250
                                             text "Visible Layers:" style "serum_text_style_traits"
@@ -1032,24 +1035,27 @@ init 2:
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xsize 78
-                                                background ("#444444" if hide_underwear else "#000088")
+                                                hover_background "#143869"
+                                                background ("#171717" if hide_underwear else "#14386988")
                                                 action [ToggleScreenVariable("hide_underwear", False, True), Function(preview_outfit)]
                                             textbutton "Clothing":
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xsize 86
-                                                background ("#444444" if hide_base else "#000088")
+                                                hover_background "#143869"
+                                                background ("#171717" if hide_base else "#14386988")
                                                 action [ToggleScreenVariable("hide_base", False, True), Function(preview_outfit)]
                                             textbutton "Over":
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xsize 78
-                                                background ("#444444" if hide_overwear else "#000088")
+                                                hover_background "#143869"
+                                                background ("#171717" if hide_overwear else "#14386988")
                                                 action [ToggleScreenVariable("hide_overwear", False, True), Function(preview_outfit)]
 
                             vbox:
                                 frame:
-                                    background "#888888"
+                                    background "#0a142688"
 
                                     xfill True
                                     viewport:
@@ -1090,7 +1096,7 @@ init 2:
                                                         text cloth.name xalign 0.5 yalign 0.5 xfill True yfill True style "custom_outfit_style"
 
                 frame:
-                    background "#aaaaaa"
+                    background "#0a142688"
 
                     xysize (540, 500)
                     #padding (20,20)
@@ -1102,7 +1108,7 @@ init 2:
                                 vbox:
                                     spacing 5
                                     frame:
-                                        background "#888888"
+                                        background "#0a142688"
                                         xsize 250
                                         vbox:
                                             xalign 0.5
@@ -1135,7 +1141,7 @@ init 2:
                                                     Hide("outfit_creator")
                                                 ]
                                     frame:
-                                        background "#888888"
+                                        background "#0a142688"
                                         xsize 250
                                         vbox:
                                             xalign 0.5
@@ -1170,7 +1176,7 @@ init 2:
                                                         ]
 
                                     frame:
-                                        background "#888888"
+                                        background "#0a142688"
                                         xsize 254
                                         vbox:
                                             textbutton "Generate [outfit_class_selected]":
@@ -1224,7 +1230,7 @@ init 2:
                                     $ hate_list = outfit_builder.get_hate_list()
                                     if outfit_builder and len(love_list + hate_list) > 0:
                                         frame:
-                                            background "#888888"
+                                            background "#0a142688"
                                             xsize 250
                                             vbox:
                                                 spacing 0
@@ -1243,14 +1249,14 @@ init 2:
                                                         if __builtin__.len(love_list) > 0:
                                                             for pref in love_list:
                                                                 frame:
-                                                                    background "#007000"
+                                                                    background "#43B197"
                                                                     xsize 220
                                                                     padding [1,1]
                                                                     text pref style "serum_text_style_traits"
                                                         if __builtin__.len(hate_list) > 0:
                                                             for pref in hate_list:
                                                                 frame:
-                                                                    background "#930000"
+                                                                    background "#B14365"
                                                                     xsize 220
                                                                     padding [1,1]
                                                                     text pref style "serum_text_style_traits"
@@ -1258,7 +1264,7 @@ init 2:
                                 vbox:
 
                                     frame:
-                                        background "#888888"
+                                        background "#0a142688"
                                         xfill True
                                         vbox:
                                             textbutton "Import Design":
@@ -1309,7 +1315,7 @@ init 2:
 
                                     if import_selection:
                                         frame:
-                                            background "#888888"
+                                            background "#0a142688"
                                             xfill True
                                             viewport:
                                                 scrollbars "vertical"
@@ -1336,7 +1342,7 @@ init 2:
 
                                     if mannequin_selection:
                                         frame:
-                                            background "#888888"
+                                            background "#0a142688"
                                             xfill True
                                             viewport:
                                                 scrollbars "vertical"
@@ -1373,7 +1379,7 @@ init 2:
 
                                     if mannequin_poser:
                                         frame:
-                                            background "#888888"
+                                            background "#0a142688"
                                             xfill True
                                             viewport:
                                                 scrollbars "vertical"

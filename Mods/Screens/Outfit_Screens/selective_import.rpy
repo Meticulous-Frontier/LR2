@@ -128,7 +128,8 @@ init 2:
                 vbox:
                     xsize 480
                     frame:
-                        text category style "serum_text_style" xalign 0.5
+                        background "#0a142688"
+                        text category style "menu_text_title_style" xalign 0.5
                         xfill True
                     if not outfit_type or outfit_categories[category][1] == outfit_type:
                         viewport:
@@ -139,10 +140,12 @@ init 2:
                             vbox:
                                 if __builtin__.len(getattr(wardrobe, outfit_categories[category][2])()) > 0: #Don't show a frame if it is empty
                                     frame:
+                                        background None
                                         vbox:
                                             for outfit in sorted(getattr(wardrobe, outfit_categories[category][2])(), key = lambda outfit: (outfit.slut_requirement, outfit.name)):  # Not sure if there's any good reason to sort XML lists since the default way it works is to place the newest outfit at the bottom which is predictable.
                                                 $ effective_slut_score = calculate_outfit_slut_score(wardrobe, outfit)
                                                 frame:
+                                                    background "#0a142688"
                                                     vbox:
                                                         id str(outfit)
                                                         xfill True
@@ -203,6 +206,7 @@ init 2:
 
                                                         if targeted_outfit == renpy.get_widget(renpy.current_screen(), str(outfit)):
                                                             frame:
+                                                                background "#0a142688"
                                                                 vbox:
                                                                     for wardrobes in sorted(import_wardrobes):
                                                                         textbutton str(wardrobes):

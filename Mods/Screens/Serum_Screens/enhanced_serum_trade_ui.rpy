@@ -22,7 +22,7 @@ init 2:
         add "Science_Menu_Background.png"
 
         frame:
-            background "#888888"
+            background "#0a142688"
             xalign 0.2
             xanchor 0.5
             yalign 0.5
@@ -34,10 +34,10 @@ init 2:
                 frame:
                     background "#000080"
                     xsize 590
-                    text "Trade Serums Between Inventories." style "serum_text_style_header"
+                    text "Trade Serums Between Inventories" style "menu_text_title_style" xalign 0.5
 
                 frame:
-                    background "#777777"
+                    background "#0a142688"
                     xalign 0.5
 
                     viewport:
@@ -58,8 +58,8 @@ init 2:
                                             text_style "serum_text_style"
                                             xsize 560
 
-                                            action ToggleScreen("serum_tooltip", None, serum, given_align = (0.9,0.08), given_anchor = (1.0,0.0))
-                                            hovered Show("serum_tooltip", None, serum, given_align = (0.9,0.08), given_anchor = (1.0,0.0))
+                                            action ToggleScreen("serum_tooltip", None, serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
+                                            hovered Show("serum_tooltip", None, serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                         hbox:
                                             frame:
                                                 background "#000080"

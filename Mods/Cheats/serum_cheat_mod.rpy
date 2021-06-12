@@ -26,7 +26,7 @@ screen serum_cheat_menu():
         xalign 0.04
         yalign 0.3
         frame:
-            background "#666666"
+            background "#0a142688"
             xsize 1200
             ysize 1000
             hbox:
@@ -49,7 +49,7 @@ screen serum_cheat_menu():
                                     frame:
                                         background "#000000"
                                         xsize 365
-                                        text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
+                                        text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
 
                                     for trait in sorted_traits:
                                         if trait.tier == dt and not trait.researched and trait.has_required():
@@ -58,7 +58,7 @@ screen serum_cheat_menu():
                                                 style "textbutton_style"
                                                 text_style "serum_text_style_traits"
                                                 action [Hide("trait_tooltip"), SetField(trait, "researched", True)]
-                                                hovered Show("trait_tooltip",None,trait, given_align = (0.95,0.05), given_anchor = (1.0,0.0))
+                                                hovered Show("trait_tooltip",None,trait, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                 unhovered Hide("trait_tooltip")
                                                 xsize 365
                 vbox:
@@ -80,7 +80,7 @@ screen serum_cheat_menu():
                                     frame:
                                         background "#000000"
                                         xsize 395
-                                        text "Tier " + str(dt) style "serum_text_style" size 16 xalign 0.5
+                                        text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
 
                                 for trait in sorted_traits:
                                     if trait.tier == dt and trait.researched:
@@ -101,7 +101,7 @@ screen serum_cheat_menu():
                                             ]
                                             style "textbutton_style"
                                             text_style "serum_text_style_traits"
-                                            hovered Show("trait_tooltip",None,trait, given_align = (0.95,0.05), given_anchor = (1.0,0.0))
+                                            hovered Show("trait_tooltip",None,trait, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                             unhovered Hide("trait_tooltip")
                                             xsize 395
 
@@ -126,6 +126,6 @@ screen serum_cheat_menu():
                                         text_text_align 0.5
                                         action [Hide("serum_tooltip"), SetField(serum, "researched", True)] style "textbutton_style"
                                         text_style "serum_text_style_traits"
-                                        hovered Show("serum_tooltip",None,serum, given_align = (0.95,0.05), given_anchor = (1.0,0.0))
+                                        hovered Show("serum_tooltip",None,serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                         unhovered Hide("serum_tooltip")
                                         xsize 365

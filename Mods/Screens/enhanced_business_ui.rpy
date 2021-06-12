@@ -11,7 +11,7 @@ init 2:
                 yanchor 1.0
                 yalign 1.0
                 spacing 5
-                text "[mc.business.name]" style "menu_text_title_style" size 22 xalign 0.03
+                text "[mc.business.name]" style "menu_text_title_style" xalign 0.03
                 textbutton "Employee Count: " + str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count):
                     style "transparent_style"
                     text_style "menu_text_style"

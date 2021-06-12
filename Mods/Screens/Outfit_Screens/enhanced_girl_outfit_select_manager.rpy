@@ -12,7 +12,7 @@ init 2:
             yalign 0.1
             spacing 20
             frame:
-                background "#888888"
+                background "#0a142688"
                 xsize 450
                 ysize 750
 
@@ -21,7 +21,7 @@ init 2:
                     frame:
                         background "#000080"
                         xfill True
-                        text "Full Outfit Selection" style "serum_text_style"
+                        text "Full Outfit Selection" style "menu_text_title_style" xalign 0.5
 
                     viewport:
 
@@ -46,14 +46,14 @@ init 2:
 
             if show_sets:
                 frame:
-                    background "#888888"
+                    background "#0a142688"
                     xsize 450
                     ysize 750
                     vbox:
                         frame:
                             background "#000080"
                             xfill True
-                            text "Overwear Selection" style "serum_text_style"
+                            text "Overwear Selection" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             if __builtin__.len(target_wardrobe.get_overwear_sets_list()) > 11:
@@ -77,14 +77,14 @@ init 2:
 
 
                 frame:
-                    background "#888888"
+                    background "#0a142688"
                     xsize 450
                     ysize 750
                     vbox:
                         frame:
                             background "#000080"
                             xfill True
-                            text "Underwear Selection" style "serum_text_style"
+                            text "Underwear Selection" style "menu_text_title_style" xalign 0.5
 
                         viewport:
                             if __builtin__.len(target_wardrobe.get_underwear_sets_list()) > 11:

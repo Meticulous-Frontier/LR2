@@ -22,6 +22,9 @@ init 5 python:
     infraction_token_small_image = im.Scale(Image(get_file_handle("infraction_token.png")), 18, 18)
     renpy.image("infraction_token_small", infraction_token_small_image)
 
+    red_heart_token_small_image = im.Scale(Image("gui/heart/red_heart.png"), 14, 12)
+    renpy.image("red_heart_token_small", red_heart_token_small_image)
+
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))

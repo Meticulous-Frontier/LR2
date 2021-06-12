@@ -14,7 +14,7 @@ init -2 style serum_background_style: # General text style used in the serum scr
 
 init -2 style serum_textbutton_style_positive: # Used for positive trait / serum slugs
     margin [2,2]
-    background "#007000"
+    background "#43B197"
     insensitive_background "#171717"
     hover_background "#143869"
 
@@ -26,7 +26,7 @@ init -2 style textbutton_no_padding: # Textbutton without padding
 
 init -2 style serum_textbutton_style_negative: # Used for negative trait / serum slugs
     margin [2,2]
-    background "#930000"
+    background "#B14365"
     insensitive_background "#171717"
     hover_background "#143869"
 

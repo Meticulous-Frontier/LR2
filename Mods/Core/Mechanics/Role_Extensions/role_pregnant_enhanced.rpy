@@ -85,6 +85,7 @@ init 2 python:
         # historic start date of pregnancy
         start_day = day - progress_days
 
+        person.event_triggers_dict["immaculate_conception"] = person.has_taboo("vaginal_sex")
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
         person.event_triggers_dict["preg_start_date"] = start_day
         person.event_triggers_dict["preg_tits_date"] = start_day + 14 + renpy.random.randint(0,5)

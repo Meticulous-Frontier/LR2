@@ -26,7 +26,7 @@ init 2:
                         yanchor 0.5
 
                         action [Hide("serum_tooltip"),Return(serum[0])]
-                        hovered Show("serum_tooltip",None,serum[0], given_align = (0.9,0.1), given_anchor = (1.0,0.0))
+                        hovered Show("serum_tooltip",None,serum[0], given_align = (0.97,0.07), given_anchor = (1.0,0.0))
 
         if the_person:
             frame:

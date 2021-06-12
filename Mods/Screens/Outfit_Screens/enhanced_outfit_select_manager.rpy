@@ -24,7 +24,7 @@ init 2:
             for catagory_info in outfit_info_array:
                 if catagory_info[0]:
                     frame:
-                        background "#888888"
+                        background "#1a45a1aa"
                         xsize 450
                         ysize 850
                         viewport:
@@ -34,8 +34,8 @@ init 2:
                             mousewheel True
                             vbox:
                                 spacing -10
-                                text catagory_info[1] + "s" style "menu_text_title_style" size 30 #Add an s to make it plural so we can reuse the field in the new button. Yep, I'm that clever-lazy.
-                                null height 10
+                                text catagory_info[1] + "s" style "menu_text_title_style" size 30 xalign 0.5 #Add an s to make it plural so we can reuse the field in the new button. Yep, I'm that clever-lazy.
+                                null height 20
                                 if show_make_new:
                                     textbutton "Create New " + catagory_info[1]:
                                         action Return(catagory_info[2])
@@ -44,10 +44,10 @@ init 2:
                                         text_style "outfit_description_style"
                                         xsize 450
 
-                                    null height 35
+                                    null height 20
 
                                 for outfit in catagory_info[6](mc.designed_wardrobe):
-                                    textbutton outfit.name + " (Sluttiness " +str(catagory_info[3](outfit)) +")":
+                                    textbutton outfit.name + " (" +str(catagory_info[3](outfit)) + " {image=red_heart_token_small})":
                                         action [
                                             Function(hide_mannequin),
                                             Return(["select",outfit.get_copy()])

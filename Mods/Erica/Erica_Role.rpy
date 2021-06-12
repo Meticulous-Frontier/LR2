@@ -99,13 +99,23 @@ init 2 python:
     }
 
     #Pose list. [0] is lily's pose, [1] is ericas, [2] is playful text, [3] is sexy text.
-    erica_insta_pose_pairs = [
-        ["back_peek", "standing_doggy", "The girls wiggle their asses a bit as you snap their pictures.", "[lily.title] is twerking her hips while [erica.possessive_title] gives herself a couple playful spanks."],
-        ["missionary","missionary", "The girl cross their inside legs across each other, getting close for the camera.", "The girls both put one hand between their legs, another on their chests, pretending they are masturbating."],
-        ["doggy","stand4", "[erica.title] puts a hand on [lily.possessive_title]'s lower back.", "[erica.title] gives some playful spank on [lily.possessive_title]'s ass."],
-        ["kneeling1","kneeling1", "The girls run their hands along their sides sensually for the camera.", "The girls put a hand between their legs, pretending to masturbate for the camera."],
-        ["blowjob","back_peek", "[lily.title] licks her lips while [erica.possessive_title] leans forward a bit, angling her ass toward the camera.","[lily.title] gets on her knees next to [erica.possessive_title], licking her lips and pretending to kiss her ass."]
-    ]
+    # erica_insta_pose_pairs = [
+    #     ["back_peek", "standing_doggy", "The girls wiggle their asses a bit as you snap their pictures.", lily.title + " is twerking her hips while " + erica.possessive_title + " gives herself a couple playful spanks."],
+    #     ["missionary","missionary", "The girl cross their inside legs across each other, getting close for the camera.", "The girls both put one hand between their legs, another on their chests, pretending they are masturbating."],
+    #     ["doggy","stand4", erica.title + " puts a hand on "+ lily.possessive_title + "'s lower back.", erica.title + " gives a playful spank on " + lily.possessive_title + "'s ass."],
+    #     ["kneeling1","kneeling1", "The girls run their hands along their sides sensually for the camera.", "The girls put a hand between their legs, pretending to masturbate for the camera."],
+    #     ["blowjob","back_peek", lily.title + " licks her lips while " + erica.possessive_title + " leans forward a bit, angling her ass toward the camera.",lily.title + " gets on her knees next to " + erica.possessive_title + ", licking her lips and pretending to kiss her ass."]
+    # ]
+
+    def erica_make_insta_pose_pairs():
+        insta_pose_list = [
+            ["back_peek", "standing_doggy", "The girls wiggle their asses a bit as you snap their pictures.", lily.title + " is twerking her hips while " + erica.possessive_title + " gives herself a couple playful spanks."],
+            ["missionary","missionary", "The girl cross their inside legs across each other, getting close for the camera.", "The girls both put one hand between their legs, another on their chests, pretending they are masturbating."],
+            ["doggy","stand4", erica.title + " puts a hand on "+ lily.possessive_title + "'s lower back.", erica.title + " gives a playful spank on " + lily.possessive_title + "'s ass."],
+            ["kneeling1","kneeling1", "The girls run their hands along their sides sensually for the camera.", "The girls put a hand between their legs, pretending to masturbate for the camera."],
+            ["blowjob","back_peek", lily.title + " licks her lips while " + erica.possessive_title + " leans forward a bit, angling her ass toward the camera.",lily.title + " gets on her knees next to " + erica.possessive_title + ", licking her lips and pretending to kiss her ass."]
+        ]
+        return insta_pose_list
 
     def display_yoga_dialog(pose):
         renpy.say(None, erica_yoga_pose_descriptions[pose])
@@ -2447,7 +2457,9 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.update_actor(erica)
             $ mc.change_locked_clarity(20)
             "Once they get dressed, the girls are ready for their photoshoot."
-    $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+    $ erica_insta_pose_pairs = erica_make_insta_pose_pairs()
+    $ current_pos = get_random_from_list(erica_insta_pose_pairs_2)
+    $ erica_insta_pose_pairs.remove(current_pos)
     $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
     $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
     "You snap the first round of pictures."
@@ -2455,22 +2467,24 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "The girls seem relaxed. The pictures are coming out natural and they look great together."
         $ mc.change_locked_clarity(10)
         mc.name "Alright lets do another set, these are great."
-        $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+        $ current_pos = get_random_from_list(erica_insta_pose_pairs_2)
+        $ erica_insta_pose_pairs.remove(current_pos)
         $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
         $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
         "You snap the second round of pictures"
         if (erica.sluttiness > 40 and lily.sluttiness > 40):
             mc.name "That looks great. Remember, be playful!"
-            "[current_pos[2]]"
+            "[current_pos[2]!i]"
             $ mc.change_locked_clarity(30)
             mc.name "Nice, these are great. How about one more set?"
             "The girls agree and get into a new position."
-            $ current_pos = get_random_from_list(erica_insta_pose_pairs)
+            $ current_pos = get_random_from_list(erica_insta_pose_pairs_2)
+            $ erica_insta_pose_pairs.remove(current_pos)
             $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
             $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
             if (erica.sluttiness > 60 and lily.sluttiness > 60):
                 mc.name "Remember, these are for the thirsty insta boys. Work it for the camera!"
-                "[current_pos[3]]"
+                "[current_pos[3]!i]"
                 $ mc.change_locked_clarity(50)
             else:
                 "You snap the final set of pictures. This should be good!"
@@ -2500,6 +2514,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     $ del lily_insta_outfit
     $ del erica_insta_outfit
     $ del current_pos
+    $ del erica_insta_pose_pairs
     call advance_time(no_events = False) from _call_advance_time_erica_insta_night_01
     return
 
