@@ -125,4 +125,4 @@ init 2:
 
 
         if tt.value:
-            text tt.value style "textbutton_text_style" size 18
+            text tt.value style "textbutton_text_style" size 18 xalign 0.02 yalign 0.02

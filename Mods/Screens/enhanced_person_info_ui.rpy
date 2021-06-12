@@ -89,7 +89,7 @@ init 2:
             hbox:
                 xanchor 0.5
                 xalign 0.5
-                yalign 0.3
+                yalign 0.1
                 spacing 100
                 vbox:
                     if person.title:
@@ -110,7 +110,7 @@ init 2:
                                 text "       - " + role.role_name style "menu_text_style" size 14
 
                 vbox:
-                    yoffset 5
+                    yoffset 10
                     if person.arousal > 0:
                         textbutton "Arousal: [person.arousal]/[person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
                             style "transparent_style"
@@ -126,7 +126,7 @@ init 2:
                             action NullAction()
                             sensitive True
 
-                    textbutton "Energy: [person.energy]/[person.max_energy] {image=gui/extra_images/energy_token.png}":
+                    textbutton "Energy: [person.energy]/[person.max_energy] {image=energy_token_small}":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
@@ -146,22 +146,6 @@ init 2:
                     #     tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
                     #     action NullAction()
                     #     sensitive True
-
-                    hbox:
-                        textbutton "Sluttiness: " + get_heart_image_list(person):
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
-                            action NullAction()
-                            sensitive True
-
-                        if any(x[0] > 0 or x[0] < 0 for x in person.situational_sluttiness.itervalues()):
-                            textbutton "{image=question_mark_small}":
-                                yoffset 6
-                                style "transparent_style"
-                                tooltip person_info_ui_get_formatted_tooltip(person)
-                                action NullAction()
-                                sensitive True
 
                     textbutton "Love: [person.love]":
                         style "transparent_style"
@@ -183,6 +167,22 @@ init 2:
                                 yoffset 6
                                 style "transparent_style"
                                 tooltip person_info_ui_get_formatted_obedience_tooltip(person)
+                                action NullAction()
+                                sensitive True
+
+                    hbox:
+                        textbutton "Sluttiness: " + get_heart_image_list(person):
+                            style "transparent_style"
+                            text_style "menu_text_style"
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            action NullAction()
+                            sensitive True
+
+                        if any(x[0] > 0 or x[0] < 0 for x in person.situational_sluttiness.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                yoffset 6
+                                style "transparent_style"
+                                tooltip person_info_ui_get_formatted_tooltip(person)
                                 action NullAction()
                                 sensitive True
 

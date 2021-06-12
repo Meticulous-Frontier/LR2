@@ -101,11 +101,11 @@ init 2: # Add some additional
                         vbox:
                             style_prefix "radio"
                             label "Text Size"
-                            textbutton "18" action [SetField(style.get("textbutton_text_style"), "size", 18), Function(style.rebuild)]
-                            textbutton "20" action [SetField(style.get("textbutton_text_style"), "size", 20), Function(style.rebuild)]
-                            textbutton "22" action [SetField(style.get("textbutton_text_style"), "size", 22), Function(style.rebuild)]
-                            textbutton "24" action [SetField(style.get("textbutton_text_style"), "size", 24), Function(style.rebuild)]
-                            textbutton "26" action [SetField(style.get("textbutton_text_style"), "size", 26), Function(style.rebuild)]
+                            textbutton "18" action [SetField(persistent, "display_text_size", 18), Function(set_text_size, 18)]
+                            textbutton "20" action [SetField(persistent, "display_text_size", 20), Function(set_text_size, 20)]
+                            textbutton "22" action [SetField(persistent, "display_text_size", 22), Function(set_text_size, 22)]
+                            textbutton "24" action [SetField(persistent, "display_text_size", 24), Function(set_text_size, 24)]
+                            textbutton "26" action [SetField(persistent, "display_text_size", 26), Function(set_text_size, 26)]
                             #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                             #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 

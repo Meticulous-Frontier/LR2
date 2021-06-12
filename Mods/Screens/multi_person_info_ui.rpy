@@ -67,7 +67,7 @@ screen multi_person_info_ui(actors):
                             action NullAction()
                             sensitive True
 
-                    textbutton "Energy: [actor.person.energy]/[actor.person.max_energy] {image=gui/extra_images/energy_token.png}":
+                    textbutton "Energy: [actor.person.energy]/[actor.person.max_energy] {image=energy_token_small}":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
@@ -82,21 +82,6 @@ screen multi_person_info_ui(actors):
                         sensitive True
 
                     hbox:
-                        textbutton "Sluttiness: " + get_heart_image_list(actor.person):
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
-                            action NullAction()
-                            sensitive True
-
-                        if any(x[0] > 0 or x[0] < 0 for x in actor.person.situational_sluttiness.itervalues()):
-                            textbutton "{image=question_mark_small}":
-                                style "transparent_style"
-                                tooltip person_info_ui_get_formatted_tooltip(actor.person)
-                                action NullAction()
-                                sensitive True
-
-                    hbox:
                         textbutton "Obedience: [actor.person.obedience] - " + get_obedience_plaintext(actor.person.obedience):
                             style "transparent_style"
                             text_style "menu_text_style"
@@ -108,5 +93,20 @@ screen multi_person_info_ui(actors):
                             textbutton "{image=question_mark_small}":
                                 style "transparent_style"
                                 tooltip person_info_ui_get_formatted_obedience_tooltip(actor.person)
+                                action NullAction()
+                                sensitive True
+
+                    hbox:
+                        textbutton "Sluttiness: " + get_heart_image_list(actor.person):
+                            style "transparent_style"
+                            text_style "menu_text_style"
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            action NullAction()
+                            sensitive True
+
+                        if any(x[0] > 0 or x[0] < 0 for x in actor.person.situational_sluttiness.itervalues()):
+                            textbutton "{image=question_mark_small}":
+                                style "transparent_style"
+                                tooltip person_info_ui_get_formatted_tooltip(actor.person)
                                 action NullAction()
                                 sensitive True
