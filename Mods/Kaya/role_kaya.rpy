@@ -42,6 +42,7 @@ init 2 python:
 
         kaya.event_triggers_dict["intro_complete"] = False    # True after first talk
         kaya.event_triggers_dict["can_get_drinks"] = False
+        kaya.event_triggers_dict["can_get_barista_quickie"] = False
         kaya.event_triggers_dict["has_moved"] = False
         kaya.event_triggers_dict["has_started_internship"] = False
 
@@ -49,7 +50,7 @@ init 2 python:
         #office.add_action(HR_director_appointment_action)
 
         # kaya_intro = Action("kaya_intro",kaya_intro_requirement,"kaya_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        # mc.business.add_mandatory_crisis(kaya_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_crisis(kaya_intro) #Add the event here so that it pops when the requirements are met.
 
         # set relationships
         # town_relationships.update_relationship(kaya, stephanie, "Sister")
@@ -67,12 +68,12 @@ init -2 python:
         return False
 
     def kaya_intro_requirement(the_person):
-        if the_person.location == coffeeshop:
+        if the_person.location == coffee_shop:
             return True
         return False
 
     def kaya_ask_out_requirement(the_person):
-        if the_person.location == the_person.coffeeshop and the_person.love > 20 and time_of_day == 3:
+        if the_person.location == coffee_shop and the_person.love > 20 and time_of_day == 3:
             #TODO False if we already have a date scheduled for tonight. Maybe make this only non date nights?
             return True
         return False
@@ -127,10 +128,13 @@ init -2 python:
             return True
         return False
 
+init 3 python:
+    kaya_intro = Action("Meet Kaya",kaya_intro_requirement,"kaya_intro_label")
+    kaya_ask_out = Action("Ask to get drinks",kaya_ask_out_requirement,"kaya_ask_out_label")
 
 label kaya_setup_intro_event_label():
     $ the_person = kaya
-    $ kaya.set_schedule(coffeeshop, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
+    $ kaya.set_schedule(coffee_shop, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
     $ kaya.set_schedule(university, days = [0, 1, 2, 3, 4], times = [1])
     $ kaya.add_unique_on_talk_event(kaya_intro)
     return
@@ -361,7 +365,10 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "That's okay. I'm sorry I didn't mean to make you uncomfortable."
     the_person "It didn't at all. We umm... we just need to get to know each other better. Okay?"
     mc.name "Sounds great. I'll see you around?"
-    
+    the_person "Bye!"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possesive_title] turns and starts to walk up the starts to the apartment building."
+    "Wow, what a busy night! You feel like you have a connection with [the_person.title]. She definitely seems eager too..."
     return
 
 label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
@@ -532,6 +539,9 @@ init 3 python:      #Use this section to make wrappers for determing where we ar
 
     def kaya_can_get_drinks():
         return kaya.event_triggers_dict.get("can_get_drinks", False)
+
+    def kaya_can_get_work_quickie():
+        return kaya.event_triggers_dict.get("can_get_barista_quickie", False)
 
     def kaya_has_started_internship():
         return kaya.event_triggers_dict.get("has_moved", False)
