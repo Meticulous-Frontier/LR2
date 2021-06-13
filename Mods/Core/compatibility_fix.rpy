@@ -155,7 +155,7 @@ init 1 python:
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 16
+    config.predict_statements = 32
     config.rollback_length = 32      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False
