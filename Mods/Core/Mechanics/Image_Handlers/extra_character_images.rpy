@@ -96,7 +96,7 @@ init 2 python:
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
 
-    def expression_generate_raw_image():
+    def expression_generate_raw_image(self, position, emotion, special_modifier = None):
         if not emotion in self.emotion_set:
             emotion = "default" #Get our default emotion to show if we get an incorrect one.
         elif special_modifier and special_modifier in self.special_modifiers:
