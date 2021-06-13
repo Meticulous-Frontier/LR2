@@ -84,7 +84,7 @@ init 2:
                         if count > 0:
                             hbox:
                                 xpos 85
-                                ypos 45
+                                ypos 35
                                 textbutton "{image=question_mark}":
                                     background None
                                     text_style "textbutton_text_style"

@@ -91,7 +91,6 @@ init 2 style textbutton_style: ##The generic style used for text button backgrou
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
-    yalign 0.5
 
 init 2 style textbutton_text_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
     size (persistent.display_text_size + 2)
@@ -100,8 +99,7 @@ init 2 style textbutton_text_style: ##The generic style used for text button bac
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
     text_align 0.5
-    yanchor 0.5
-    yalign 0.5
+    yoffset 4
 
 init 2 style transparent_style:
     background None
@@ -117,6 +115,7 @@ init 2 style menu_text_style:
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
     text_align 0.5
+    yoffset 2
 
 init 2 style menu_text_style_left:
     size (persistent.display_text_size - 2)
