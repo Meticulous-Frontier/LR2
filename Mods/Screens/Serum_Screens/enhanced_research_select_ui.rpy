@@ -211,7 +211,7 @@ init 2:
                                                 hover_background "#1a45a1"
                                             xsize 365
 
-                textbutton "Return" action [Return("None")] style "textbutton_style" text_style "serum_text_style" yalign 0.995 xanchor 0.5 xalign 0.5 xsize 360
+                textbutton "Return" action [Return("None")] style "textbutton_style" text_style "textbutton_text_style" text_align (0.5, 0.5) yalign 0.995 xanchor 0.5 xalign 0.5 xsize 360
 
         if selected_research is not None:
             frame: #Frame that displays the info on the currently selected screen.
@@ -268,9 +268,7 @@ init 2:
                         pass #Serum designs that are unlocked and researched shouldn't get here anyways.
 
                 textbutton button_name:
-                    text_xalign 0.5
-                    text_text_align 0.5
-                    #text_size 14
+                    text_align (0.5, 0.5)
                     text_style "textbutton_text_style"
                     style "textbutton_style"
                     action button_actions
