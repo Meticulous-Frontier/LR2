@@ -85,7 +85,7 @@ init 2 python:
                     result.append(elements_list[count])
         return result
 
-    def build_menu_item_list(element_list, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None, no_title = False):
+    def build_menu_item_list(element_list, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None):
         def find_and_replace_tooltip_property(item, extra_args):
             groups = re.search("\[[^]]*\]", item.menu_tooltip)
             if groups and isinstance(extra_args, Person):
@@ -96,30 +96,18 @@ init 2 python:
             return item.menu_tooltip
 
         result = []
-        if no_title:
-            column_elements = element_list[0:]
-        else:
-            result.append(element_list[0])
-            column_elements = element_list[1:]
+        result.append(element_list[0])
+
+        column_elements = element_list[1:]
         for item in column_elements:
             mi = MenuItem()
 
             if isinstance(item, list): #It's a title/return value pair. Show the title, return the value.
                 if isinstance(item[0], Action): #It's an action with extra arguments.
-                    #renpy.say("", "DEBUG TEXT2")
                     mi.extra_args = item[1]
                     item = item[0] #Rename item so that this is caught by the action section below.
 
-                elif isinstance(item[0], list):   # Its a list of tuples, with [0] being actions and [1] being the arguments
-                    #renpy.say("", "DEBUG TEXT")
-                    #mi_ref = len(result)
-                    for entry in item:
-                        #renpy.say("", "DEBUG TEXT4")
-                        result.append(build_menu_item(entry, draw_hearts_for_people = draw_hearts_for_people,  draw_person_previews = draw_person_previews,  person_preview_args =  person_preview_args))
-                    #renpy.say("", "DEBUG TEXT5")
-                    continue
                 else: #It's (probably) a title/return string pair. Show the title, return the value
-                    #renpy.say("", "DEBUG TEXT3")
                     mi.title = item[0]
                     mi.return_value = item[1]
 
@@ -178,85 +166,6 @@ init 2 python:
                     mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", item.title)
                 result.append(mi)
         return result
-
-
-    def build_menu_item(menu_item, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None):
-        def find_and_replace_tooltip_property(item, extra_args):
-            groups = re.search("\[[^]]*\]", item.menu_tooltip)
-            if groups and isinstance(extra_args, Person):
-                if ".title" in groups.group(0):
-                    return re.sub("\[[^]]*\]", extra_args.title, item.menu_tooltip)
-                if ".name" in groups.group(0):
-                    return re.sub("\[[^]]*\]", extra_args.name, item.menu_tooltip)
-            return item.menu_tooltip
-        mi = MenuItem()
-
-        if isinstance(menu_item, list): #It's a title/return value pair. Show the title, return the value.
-            if isinstance(menu_item[0], Action): #It's an action with extra arguments.
-                #renpy.say("", "DEBUG TEXT2")
-                mi.extra_args =menu_item[1]
-                menu_item =menu_item[0] #Rename item so that this is caught by the action section below.
-
-            else: #It's (probably) a title/return string pair. Show the title, return the value
-                #renpy.say("", "DEBUG TEXT3")
-                mi.title =menu_item[0]
-                mi.return_value =menu_item[1]
-
-        if isinstance(menu_item,Person): #It's a person. Format it for a person list.
-            mi.title = format_titles(menu_item)
-            mi.return_value = menu_item
-
-            if menu_item.infractions:
-                mi.title += " {image=infraction_token_small}"
-            if draw_hearts_for_people:
-                mi.title += "\n" + get_heart_image_list(menu_item)
-            if person_preview_args is None:
-                person_preview_args = {}
-
-            mi.person_preview_args = person_preview_args
-            mi.display_key = menu_item.identifier
-            mi.display_scale = scale_person(menu_item.height)
-            if draw_person_previews:
-                mi.display_func = menu_item.build_person_displayable
-            if not renpy.mobile: # don't load person on mobile
-                renpy.invoke_in_thread(mi.preload)
-
-        if isinstance(menu_item, Action):
-            mi.title = ""
-            mi.return_value = menu_item
-            mi.display = False #Default display state for an action is to hide it unless it is enabled or has a disabled slug
-            if menu_item.is_action_enabled(mi.extra_args):
-                mi.title = menu_item.name
-                mi.display = True
-
-            elif menu_item.is_disabled_slug_shown(mi.extra_args):
-                mi.title = menu_item.get_disabled_slug_name(mi.extra_args)
-                mi.display = True
-
-            if menu_item.menu_tooltip:
-                mi.the_tooltip = find_and_replace_tooltip_property(menu_item, mi.extra_args)
-
-        if isinstance(menu_item, basestring): #It's just text. Display the text and return the text.
-            mi.title = menu_item
-            mi.return_value = menu_item
-
-        if " (tooltip)" in mi.title:
-            mi.the_tooltip = mi.title.split(" (tooltip)",1)[1]
-            mi.title = mi.title.replace(" (tooltip)" + mi.the_tooltip,"")
-
-        if " (disabled)" in mi.title:
-            mi.title = mi.title.replace(" (disabled)", "")
-            parts = mi.title.split("\n")
-            if __builtin__.len(parts) > 1: # color and size disable reason
-                parts[-1] = "{color=#ff0000}{size=16}" + parts[-1] + "{/color}{/size}"
-                mi.title = "\n".join(parts)
-            mi.is_sensitive = False
-
-        if mi.display:
-            if isinstance(menu_item,Person) and isinstance(menu_item.title, basestring) and isinstance(mi.the_tooltip, basestring):
-                mi.the_tooltip = mi.the_tooltip.replace("[the_person.title]", menu_item.title)
-        return mi
-
 
 init 2:
     screen enhanced_main_choice_display(menu_items): #Elements_list is a list of lists, with each internal list receiving an individual column
