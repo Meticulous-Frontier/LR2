@@ -2457,7 +2457,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ mc.change_locked_clarity(20)
             "Once they get dressed, the girls are ready for their photoshoot."
     $ erica_insta_pose_pairs = erica_make_insta_pose_pairs()
-    $ current_pos = get_random_from_list(erica_insta_pose_pairs_2)
+    $ current_pos = get_random_from_list(erica_insta_pose_pairs)
     $ erica_insta_pose_pairs.remove(current_pos)
     $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
     $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
@@ -2466,7 +2466,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "The girls seem relaxed. The pictures are coming out natural and they look great together."
         $ mc.change_locked_clarity(10)
         mc.name "Alright lets do another set, these are great."
-        $ current_pos = get_random_from_list(erica_insta_pose_pairs_2)
+        $ current_pos = get_random_from_list(erica_insta_pose_pairs)
         $ erica_insta_pose_pairs.remove(current_pos)
         $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
         $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
@@ -2477,7 +2477,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ mc.change_locked_clarity(30)
             mc.name "Nice, these are great. How about one more set?"
             "The girls agree and get into a new position."
-            $ current_pos = get_random_from_list(erica_insta_pose_pairs_2)
+            $ current_pos = get_random_from_list(erica_insta_pose_pairs)
             $ erica_insta_pose_pairs.remove(current_pos)
             $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
             $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
