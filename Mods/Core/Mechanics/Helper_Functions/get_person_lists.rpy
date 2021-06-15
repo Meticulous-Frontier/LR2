@@ -72,8 +72,8 @@ init -1 python:
     def unknown_people_at_location(location, excluded_people = []):
         return [x for x in location.people if x.is_available and not x in excluded_people and not x.title]
 
-    def people_in_mc_home():
-        return hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people
+    def people_in_mc_home(excluded_people = []):
+        return [x for x in hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people if x.is_available and not x in excluded_people]
 
     def people_in_role(role):
         return [x for x in all_people_in_the_game() if x.has_role(role)]
