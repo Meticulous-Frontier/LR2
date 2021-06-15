@@ -1,15 +1,15 @@
-init 5 python:
-    config.label_overrides["breeding_mom_label"] = "breeding_mom_enhanced_label"
-
-
 # override existing mom breeding limited time action that uses the breeding position
 # instead of the default missionary.
 
-label breeding_mom_enhanced_label(the_person):
+init 5 python:
+    config.label_overrides["breeding_mom_intro_label"] = "breeding_mom_intro_label_enhanced"
+
+label breeding_mom_intro_label_enhanced(the_person):
     $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, guarantee_output = True))
     $ the_person.strip_outfit(exclude_upper = True, delay = 0)
     $ the_person.draw_person(position = "sitting")
     $ the_person.update_outfit_taboos()
+    $ mc.change_locked_clarity(10)
     "You walk into [the_person.title]'s room and find her sitting on the edge of her bed, dressed sexy without any panties."
     if the_person.has_breeding_fetish():
         if the_person.knows_pregnant():
@@ -34,6 +34,7 @@ label breeding_mom_enhanced_label(the_person):
         "Her face is flush and her breathing rapid. Her large breasts heave up and down."
     else:
         "Her face is flush and her breathing rapid."
+    $ mc.change_locked_clarity(50)
 
     menu:
         "Try to breed her":
@@ -41,6 +42,7 @@ label breeding_mom_enhanced_label(the_person):
             $ the_person.draw_person(position = "missionary")
             "You strip down and climb on top of her. The tip of your hard cock runs along the entrance of her cunt and finds it dripping wet."
             the_person "Go in raw [the_person.mc_title], enjoy my pussy and give me your cum!"
+            $ mc.change_locked_clarity(20)
             $ the_person.break_taboo("vaginal_sex")
             $ the_person.break_taboo("condomless_sex")
             "She wraps her arms around your torso and pulls you tight against her. She gives you a breathy moan when you slide your cock home."
@@ -48,6 +50,8 @@ label breeding_mom_enhanced_label(the_person):
             call fuck_person(the_person, start_position = breeding_missionary, start_object = mc.location.get_object_with_name("bed"), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_breeding_mom_enhanced_label
             $ the_report = _return #TODO: The creampie check should now be possible with the report system instead of checking her total record.
             if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
+                "You roll off of [the_person.possessive_title] and onto the bed beside her, feeling thoroughly spent."
+                "She brings her knees up against her chest and tilts her hips up, holding all of your cum deep inside of her."
                 mc.name "Do you think that did it?"
 
                 if the_person.is_highly_fertile():
@@ -63,6 +67,7 @@ label breeding_mom_enhanced_label(the_person):
                 #TODO: Add an action where you can try and breed her some more.
 
             else:
+                "You roll off of [the_person.possessive_title] and onto the bed beside her."
                 $ the_person.change_happiness(-20)
                 the_person "I'm sorry... I'm sorry I'm not good enough to make you cum. I'm not good enough to earn your child..."
                 "She sounds as if she is almost on the verge of tears."
@@ -75,6 +80,7 @@ label breeding_mom_enhanced_label(the_person):
         "Say no":
             $ the_person.draw_person(position = "sitting", emotion = "sad")
             "You shake your head. [the_person.title] looks immediately crestfallen."
+            $ the_person.change_happiness(-20)
             the_person "But why..."
             mc.name "[the_person.title], I love you but I can't give you what you want."
             "She nods and turns her head."
