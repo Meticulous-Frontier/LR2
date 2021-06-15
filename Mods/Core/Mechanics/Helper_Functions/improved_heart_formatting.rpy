@@ -40,6 +40,8 @@ init 2 python:
         platinum_count = __builtin__.int(the_person.core_sluttiness // 100)
         if platinum_count > 4:  # prevent div by zero errors
             platinum_count = 4
+        if platinum_count < 0: # prevent failure with negative numbers
+            platinum_count = 0
         heart_start = 0
         heart_end = 100
         for x in range(0, platinum_count):
