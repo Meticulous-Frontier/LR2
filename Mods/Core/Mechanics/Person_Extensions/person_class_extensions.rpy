@@ -1438,9 +1438,9 @@ init -1 python:
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
-        def cum_on_face_wrapper(person):
+        def cum_on_face_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
 
@@ -1450,9 +1450,9 @@ init -1 python:
     Person.cum_on_face = cum_on_face_extended(Person.cum_on_face)
 
     def cum_on_tits_extended(org_func):
-        def cum_on_tits_wrapper(person):
+        def cum_on_tits_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
 
@@ -1462,9 +1462,9 @@ init -1 python:
     Person.cum_on_tits = cum_on_tits_extended(Person.cum_on_tits)
 
     def cum_on_stomach_extended(org_func):
-        def cum_on_stomach_wrapper(person):
+        def cum_on_stomach_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
 
@@ -1474,9 +1474,9 @@ init -1 python:
     Person.cum_on_stomach = cum_on_stomach_extended(Person.cum_on_stomach)
 
     def cum_on_ass_extended(org_func):
-        def cum_on_ass_wrapper(person):
+        def cum_on_ass_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
 
