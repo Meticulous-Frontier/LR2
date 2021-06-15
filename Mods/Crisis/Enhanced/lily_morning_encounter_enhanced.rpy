@@ -14,7 +14,9 @@ label lily_morning_encounter_enhanced_label():
     $ the_person.draw_person()
     if the_person.outfit.wearing_panties():
         "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing nothing but her underwear."
+        $ mc.change_locked_clarity(5)
     else:
+        $ mc.change_locked_clarity(10)
         "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, completely naked."
 
     if the_person.effective_sluttiness("underwear_nudity") < 10:
@@ -37,6 +39,7 @@ label lily_morning_encounter_enhanced_label():
             "She starts to walk alongside you and doesn't seem to mind being in her underwear."
         else:
             "She starts to walk alongside you and doesn't seem to mind being naked."
+        $ mc.change_locked_clarity(5)
         $ the_person.update_outfit_taboos()
         the_person "I'm just up to get some laundry. I put some in last night."
         "You let [the_person.title] get a step ahead of you so you can look at her ass."
@@ -45,8 +48,7 @@ label lily_morning_encounter_enhanced_label():
             "Compliment her":
                 #Bonus love and happiness
                 mc.name "Well, I'm glad I ran into you. Seeing you is a pretty good way to start my day."
-                $ the_person.change_love(2)
-                $ the_person.change_happiness(5)
+                $ the_person.change_stats(love = 2, happiness = 5)
                 the_person "You're just saying that because you get to see me naked, you perv."
                 $ the_person.draw_person(position = "back_peek")
                 "She peeks back at you and winks."
@@ -61,9 +63,9 @@ label lily_morning_encounter_enhanced_label():
                 mc.name "I'll stop gawking when you stop shaking that ass."
                 $ the_person.draw_person(position = "back_peek")
                 the_person "You wish this ass was for you."
+                $ mc.change_locked_clarity(5)
                 "She spanks herself lightly and winks at you."
-                $ the_person.change_slut_temp(4)
-                $ the_person.change_obedience(2)
+                $ the_person.change_stats(slut_temp = 4, obedience = 2)
 
         $ the_person.draw_person(position = "walking_away")
         "You reach the door to the kitchen and split up. You wait a second and enjoy the view as your [the_person.possessive_title] walks away."
@@ -77,8 +79,11 @@ label lily_morning_encounter_enhanced_label():
         the_person "I was just going to get some laundry out of the machine."
         if the_person.outfit.wearing_panties():
             "[the_person.possessive_title] thumbs her underwear playfully."
+            $ mc.change_locked_clarity(5)
         else:
             "[the_person.possessive_title] absentmindedly runs her hands over her hips."
+            $ mc.change_locked_clarity(10)
+
         $ the_person.update_outfit_taboos()
         the_person "I know you like it when I walk around naked but Mom doesn't. At least when I'm doing laundry I have an excuse."
         "You join her as she starts to walk down the hall."
@@ -95,8 +100,8 @@ label lily_morning_encounter_enhanced_label():
                     "You spank her butt and she moans again. You work your hand down between her legs from behind and run a finger along her slit."
                     the_person "Fuck, please don't get me too wet. I don't want to have to explain that to Mom if she finds us."
                     "You flick your finger over [the_person.possessive_title]'s clit, then slide your hand back and kneed her ass some more."
-                $ the_person.change_slut_temp(5)
-                $ the_person.change_love(2)
+                    $ mc.change_locked_clarity(20)
+                $ the_person.change_stats(slut_temp =5, love = 2)
                 "When you reach the kitchen [the_person.title] reluctantly pulls away from you."
                 if mc.business.event_triggers_dict.get("family_threesome", False) == True:
                     menu:
@@ -145,8 +150,9 @@ label lily_morning_encounter_enhanced_label():
                     mc.name "Don't pretend like you don't like it. You're just as horny as I am."
                     the_person "Hey, I'm just doing this for you, okay?"
                     mc.name "Sure thing sis. Keep going."
-                $ the_person.change_slut_temp(3)
-                $ the_person.change_obedience(3)
+
+                $ mc.change_locked_clarity(20)
+                $ the_person.change_stats(slut_temp =3, obedience = 3)
                 "The two of you walk slowly towards the kitchen as [the_person.possessive_title] fondles your dick."
                 "When you reach the door to the kitchen she reluctantly pulls her hand out of your pants."
                 if mc.business.event_triggers_dict.get("family_threesome", False) == True:
@@ -166,7 +172,7 @@ label lily_morning_encounter_enhanced_label():
                             if renpy.random.randint(0,2) == 1: #someone is there
                                 $ kitchen_threesome = False
                                 $ jealous_person = False
-                                $ the_watcher = mom #allow this to be others?
+                                $ the_watcher = get_random_from_list(people_in_mc_home(excluded_people = [the_person]))
                                 $ jealous_watcher = False
                                 $ the_group = GroupDisplayManager([the_person], primary_speaker = the_person)
                                 the_person "I'm serious, what if sh..."
@@ -245,7 +251,7 @@ label lily_morning_encounter_enhanced_label():
                                 if renpy.random.randint(0,3) == 1: #someone will walk in
                                     $ kitchen_threesome = False
                                     $ jealous_person = False
-                                    $ the_watcher = mom #allow this to be others?
+                                    $ the_watcher = get_random_from_list(people_in_mc_home(excluded_people = [the_person]))
                                     $ jealous_watcher = False
                                     $ the_group = GroupDisplayManager([the_person], primary_speaker = the_person)
                                 menu:
@@ -407,7 +413,8 @@ label lily_morning_encounter_enhanced_label():
                                             call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True) from _call_lily_morning_encounter_kitchenspank
 
                         "Let her go":
-                            mc.name "Maybe we'll follow up on this later."
+                            pass
+
         if took_action:
             "Very happy with how your morning has gone so far you head back to your room to start getting ready for the day."
             $ mc.change_location(bedroom)
