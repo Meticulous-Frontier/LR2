@@ -207,7 +207,7 @@ label Sarah_sex_obedience_accept(the_person):
             the_person "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
     else:
         if the_person.obedience > 130:
-            the_person "If that's what you want to do then I'll what you tell me to do."
+            the_person "If that's what you want to do then I will do what you tell me to do."
         else:
             the_person "I shouldn't... but if you want to try it out I'm game. Try everything once, right?"
     return
