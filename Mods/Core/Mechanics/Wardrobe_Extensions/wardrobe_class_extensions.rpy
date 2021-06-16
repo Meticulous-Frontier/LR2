@@ -66,7 +66,7 @@ init -1 python:
 
     Wardrobe.get_random_appropriate_outfit = get_random_appropriate_outfit_enhanced
 
-    def get_random_appropriate_underwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None): #Get an underwear outfit that is considered appropriate (based on underwear sluttiness, not full outfit sluttiness)
+    def get_random_appropriate_underwear_enhanced(self, sluttiness_limit, sluttiness_min = 0, guarantee_output = False, preferences = None, depth = 0): #Get an underwear outfit that is considered appropriate (based on underwear sluttiness, not full outfit sluttiness)
         if preferences is None:
             preferences = WardrobePreference()
 
@@ -87,11 +87,10 @@ init -1 python:
             return get_random_from_list(valid_underwear).get_copy()
         else:
             if guarantee_output: # If an output is guaranteed we always return an Outfit object (even if it is empty). Otherwise we return None to indicate failure to find something.
-                if sluttiness_limit < 120: #Sets an effective recursion limit.
-                    return self.get_random_appropriate_underwear(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences)
+                if depth < 8: #Sets an effective recursion limit.
+                    return self.get_random_appropriate_underwear(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences, depth + 1)
                 else:
                     return Outfit("Nothing")
-
             else:
                 return None
 
