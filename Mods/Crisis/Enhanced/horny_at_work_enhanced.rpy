@@ -318,6 +318,7 @@ label horny_at_work_crisis_enhanced_label():
 
         "Sneak away to the bathroom and jerk off (tooltip)A few minutes in private should fix this right up." if mc.location.people: #If there are people around here's an option to jerk off. There might
             $ clear_scene()
+            $ scene_manager = Scene()
             "You're going to need to get this taken care of if you want to get any work done."
             "You get up from your desk and head for the washrooms, attempting to hide your erection from your staff as you go."
 
@@ -404,6 +405,9 @@ label horny_at_work_crisis_enhanced_label():
                 $ mc.business.change_team_effectiveness(-10)
 
             else:
+                $ clear_scene()
+                $ scene_manager = Scene()
+
                 if the_person.obedience > 120:
                     the_person "Oh, I'm so sorry. What can I do to help?"
                 else:
