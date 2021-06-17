@@ -263,7 +263,7 @@ label starbuck_vaginal_skillup_label(the_person):
     "[the_person.possessive_title] leads you over to an area of the store where she sells a number of cock rings."
     the_person "Personally, I recommend this one."
     "[the_person.possessive_title] picks one off the shelf, it looks like it has a number of features, like vibration and heat."
-    "It looks like a good buy, but unfortunately it has a built in battery that cannot be recharge. Once it's done, its done!"
+    "It looks like a good buy, but unfortunately it has a built in battery that cannot be recharged. Once it's done, its done!"
     menu:
         "Purchase ($500)":
             $ mc.business.change_funds(-500)
