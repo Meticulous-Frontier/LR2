@@ -188,7 +188,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 scene_manager = Scene()
                 if renpy.random.randint(0, 1) == 0: # 50% we have a second person (if someone is in the house)
                     the_watcher = get_random_from_list(people_in_mc_home(excluded_people = [the_person]))
-                if the_watcher.effective_sluttiness() < 40:
+                if the_watcher and the_watcher.effective_sluttiness() < 40:
                     the_watcher = None
 
             "Not satisfied by a little groping you grab [the_person.title] by the wrist and pull her along with you towards the kitchen."
