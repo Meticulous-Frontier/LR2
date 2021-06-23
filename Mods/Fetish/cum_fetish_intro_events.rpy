@@ -671,7 +671,7 @@ label cum_fetish_rebecca_intro_label(the_person):
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     mc.name "I need to get going. Take care [the_person.title]."
     $ scene_manager.clear_scene()
-    "You say goodbye to [the_person.possessive_title!] then leave her apartment. As you walk away, you can't help but smile."
+    "You say goodbye to [the_person.possessive_title] then leave her apartment. As you walk away, you can't help but smile."
     "Your serums have turned her into your cumslut."
     python:
         the_person.apply_planned_outfit()
