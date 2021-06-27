@@ -2298,16 +2298,16 @@ label starbuck_candace_recurring_event_label(the_person):
         candace "Take care [candace.mc_title]."
         "You head out from the store, giving the two girls time to catch up on things."
         $ the_person.event_triggers_dict["knows_candace_cured"] = True
+        $ scene_manager.clear_scene()
 
-    python:
-        the_person.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
-        scene_manager.clear_scene()
+    $ the_person.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
     return
 
 label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_two):
-    $ scene_manager = Scene()
-    $ the_person_one.arousal = 0
-    $ the_person_two.arousal = 0
+    python:
+        scene_manager = Scene()
+        the_person_one.arousal = 0
+        the_person_two.arousal = 0
 
     "You listen closely and hear... The girls are just chatting?"
     if the_person_one.event_triggers_dict.get("orgasm_denial_discovered", False) == False:

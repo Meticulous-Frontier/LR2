@@ -1006,7 +1006,7 @@ label Sarah_get_drinks_label():
         mom "I'm not sure I have... actually, I think Gabrielle might have left something that would fit her..."
     $ scene_manager.update_actor(mom, position = "walking_away")
     "[mom.title] leaves to go find something. [the_person.title] is shivering cold."
-    mc.name "I'm sorry, you look so cold. Why don't you come her for a minute..."
+    mc.name "I'm sorry, you look so cold. Why don't you come here for a minute..."
     "You step toward her. You put your hands around her back and draw her close to you. She wraps her arms around your neck."
     $ scene_manager.update_actor(the_person, position = "kissing")
     "Her body feels cold, but it feels great running your hands along her body. After a minute, she stops shivering."

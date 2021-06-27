@@ -638,5 +638,6 @@ label horny_at_work_crisis_enhanced_label():
                             "Her rejection has killed your erection. You return to work frustrated and distracted."
                             $ mc.business.change_team_effectiveness(-10)
 
+                $ scene_manager.clear_scene()
     $ clear_scene()
     return

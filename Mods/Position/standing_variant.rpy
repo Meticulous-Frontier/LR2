@@ -355,7 +355,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                     "When you begin to stimulating her backdoor, [the_girl.possessive_title] immediately begins to protest."
                     the_girl "Hey! That hole's not for that... Keep your hands away from there, [the_girl.mc_title]!"        ####TODO FINISH THIS
                     $ the_girl.discover_opinion("anal sex")
-                    "Seems like she isn't keep on having her ass played with."
+                    "Seems like she isn't keen on having her ass played with."
                     "You let her leg down and resume your fucking."
                 else:
                     "[the_girl.possessive_title] looks back at you, her eyes wide."
