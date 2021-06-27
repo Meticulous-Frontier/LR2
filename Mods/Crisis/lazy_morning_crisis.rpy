@@ -43,7 +43,7 @@ label lazy_morning_crisis_action_label:
         the_person "I'm sorry [the_person.mc_title], I forgot its the weekend!"
 
     "She looks at you for a minute as she decides what to do."
-    if the_person.sluttiness < 20: #Not slutty, she excuses herself.
+    if the_person.sluttiness < 30: #Not slutty, she excuses herself.
         "She is looking at you pretty intently. You realize you have a crazy morning wood. Your cock is making the blanket tent and she is having trouble taking her eyes off of it."
         mc.name "What do you want?!?"
         the_person "I'm sorry, I wasn't staring... I mean... Ah!"
@@ -52,7 +52,7 @@ label lazy_morning_crisis_action_label:
         $ the_person.change_slut_temp(3)
         $ mc.change_locked_clarity(10)
 
-    elif the_person.sluttiness < 50: #She asks to join you and you wind up with mutual masturbation
+    elif the_person.sluttiness < 60: #She asks to join you and you wind up with mutual masturbation
         the_person "You look so comfy... I know this is kind of weird but, can I join you?"
         mc.name "You want to join me... in my bed?"
         "She stammers for a second."
@@ -127,7 +127,7 @@ label lazy_morning_crisis_action_label:
 
 
 
-    elif the_person.sluttiness < 75: #She asks to join you and you 69
+    elif the_person.sluttiness < 80: #She asks to join you and you 69
         the_person "That looks so comfortable... can I join you for a while?"
         mc.name "Sure. Always happy to cuddle up with you [the_person.title]!"
         $ the_person.draw_person(position = "kissing")
