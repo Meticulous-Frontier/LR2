@@ -2673,7 +2673,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
     $ scene_manager.hide_actor(the_person)
     return False
 
-label Sarah_weekend_surprise_crisis_label():
+label Sarah_weekend_surprise_crisis_label():    #This code is old. It should be able to be delated in a future update
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
     $ the_person.apply_outfit(the_person.planned_outfit)
