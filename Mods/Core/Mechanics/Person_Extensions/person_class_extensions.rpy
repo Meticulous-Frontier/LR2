@@ -106,7 +106,6 @@ init -1 python:
         self.skin = None
         self.eyes = None
         self.serum_effects = None
-        self.idle_animation = None
         self.personal_region_modifiers = None
         self.situational_sluttiness = None
         self.situational_obedience = None
@@ -135,14 +134,6 @@ init -1 python:
         return (location if location else self.home) # fallback location for person is home
 
     Person.location = location
-
-    def person_get_idle_animation(self):
-        return None
-
-    def person_set_idle_animation(self, value):
-        return
-
-    Person.idle_animation = property(person_get_idle_animation, person_set_idle_animation, None, "Removes idle animation property.")
 
     def person_change_location(self, destination):
         self.location.move_person(self, destination)
@@ -1262,6 +1253,8 @@ init -1 python:
 
         if not can_use_animation():
             the_animation = None
+        elif the_animation is None:
+            the_animation = self.idle_animation
 
         if display_transform is None:
             display_transform = character_right
@@ -1273,7 +1266,7 @@ init -1 python:
             display_zorder = 0
 
         at_arguments = [display_transform, scale_person(self.height)]
-        if the_animation is not None:
+        if not the_animation is None:
             at_arguments.append(basic_bounce(the_animation))
 
         if extra_at_arguments:
@@ -1281,8 +1274,6 @@ init -1 python:
                 at_arguments.extend(extra_at_arguments)
             else:
                 at_arguments.append(extra_at_arguments)
-        else:
-            extra_at_arguments = []
 
         self.hide_person()
         if wipe_scene:
@@ -1295,7 +1286,7 @@ init -1 python:
         else:
             weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
 
-        renpy.show(self.identifier, at_list=at_arguments, layer=draw_layer, what= ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
+        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1331,15 +1322,13 @@ init -1 python:
             the_animation = self.idle_animation
 
         at_arguments = [display_transform, scale_person(self.height)]
-        if the_animation is not None:
+        if not the_animation is None:
             at_arguments.append(basic_bounce(the_animation))
         if extra_at_arguments:
             if isinstance(extra_at_arguments, list):
                 at_arguments.extend(extra_at_arguments)
             else:
                 at_arguments.append(extra_at_arguments)
-        else:
-            extra_at_arguments = []
 
         if not isinstance(the_clothing, list):  # convert clothing to list, if not already
             the_clothing = [the_clothing]
@@ -1369,7 +1358,7 @@ init -1 python:
             weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
 
         self.hide_person()
-        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(top_displayable, weight_mask), zorder = display_zorder, tag = self.identifier )
+        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(top_displayable, weight_mask), zorder = display_zorder, tag = self.identifier)
         renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = ShaderPerson(bottom_displayable, weight_mask), zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
         return
 
@@ -1438,9 +1427,9 @@ init -1 python:
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
-        def cum_on_face_wrapper(person):
+        def cum_on_face_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
 
@@ -1450,9 +1439,9 @@ init -1 python:
     Person.cum_on_face = cum_on_face_extended(Person.cum_on_face)
 
     def cum_on_tits_extended(org_func):
-        def cum_on_tits_wrapper(person):
+        def cum_on_tits_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
 
@@ -1462,9 +1451,9 @@ init -1 python:
     Person.cum_on_tits = cum_on_tits_extended(Person.cum_on_tits)
 
     def cum_on_stomach_extended(org_func):
-        def cum_on_stomach_wrapper(person):
+        def cum_on_stomach_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
 
@@ -1474,9 +1463,9 @@ init -1 python:
     Person.cum_on_stomach = cum_on_stomach_extended(Person.cum_on_stomach)
 
     def cum_on_ass_extended(org_func):
-        def cum_on_ass_wrapper(person):
+        def cum_on_ass_wrapper(person, add_to_record = True):
             # run original function
-            org_func(person)
+            org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
 

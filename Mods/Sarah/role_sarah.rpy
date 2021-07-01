@@ -35,7 +35,7 @@ init 2 python:
         sarah_base_outfit.add_accessory(the_eyeshadow)
 
         # init Sarah role
-        # sarah_role = Role(role_name ="Childhood Friend", actions =[])
+        sarah_role = Role(role_name ="Childhood Friend", actions =[], role_dates = [sarah_bar_date_ask_action], hidden = True)
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
@@ -79,6 +79,7 @@ init 2 python:
 
         # add appoint
         office.add_action(HR_director_appointment_action)
+        sarah.add_role(sarah_role)
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.add_mandatory_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
@@ -274,6 +275,7 @@ init 2 python:
                 outfit.remove_clothing(outfit.get_bra())
 
     def Sarah_weekend_surprise_crisis_requirement():
+        return False    #Disable event for now
         if time_of_day > 1 and day%7 == 5:  #Saturday
             if mc.is_at_work() and sarah_get_sex_unlocked():   #You've gotten drinks out with Sarah before.
                 return True
@@ -1006,7 +1008,7 @@ label Sarah_get_drinks_label():
         mom "I'm not sure I have... actually, I think Gabrielle might have left something that would fit her..."
     $ scene_manager.update_actor(mom, position = "walking_away")
     "[mom.title] leaves to go find something. [the_person.title] is shivering cold."
-    mc.name "I'm sorry, you look so cold. Why don't you come her for a minute..."
+    mc.name "I'm sorry, you look so cold. Why don't you come here for a minute..."
     "You step toward her. You put your hands around her back and draw her close to you. She wraps her arms around your neck."
     $ scene_manager.update_actor(the_person, position = "kissing")
     "Her body feels cold, but it feels great running your hands along her body. After a minute, she stops shivering."
@@ -1131,7 +1133,7 @@ label Sarah_get_drinks_label():
     "[the_person.possessive_title] lets herself out of your room and leaves. Wow, what an evening!"
 
     $ add_sarah_stripclub_story_action()
-    $ add_sarah_weekend_surprise_action()
+    # $ add_sarah_weekend_surprise_action()
     $ scene_manager.clear_scene()
     return
 
@@ -2671,7 +2673,7 @@ label play_darts_301(the_person, focus_mod = 0): #Label returns true if mc wins,
     $ scene_manager.hide_actor(the_person)
     return False
 
-label Sarah_weekend_surprise_crisis_label():
+label Sarah_weekend_surprise_crisis_label():    #This code is old. It should be able to be delated in a future update
     $ the_person = sarah
     $ the_person.planned_outfit = get_sarah_date_outfit_two()
     $ the_person.apply_outfit(the_person.planned_outfit)

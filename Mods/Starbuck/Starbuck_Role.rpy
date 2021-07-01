@@ -41,7 +41,7 @@ init 2 python:
         starbuck_lipstick = lipstick.get_copy()
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
-        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.92,  body_images = white_skin, expression_images = Expression("Starbuck\'s Expression Set", "white", "Face_4"), hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
+        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.92,  body_images = white_skin, expression_images = None, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
@@ -263,7 +263,7 @@ label starbuck_vaginal_skillup_label(the_person):
     "[the_person.possessive_title] leads you over to an area of the store where she sells a number of cock rings."
     the_person "Personally, I recommend this one."
     "[the_person.possessive_title] picks one off the shelf, it looks like it has a number of features, like vibration and heat."
-    "It looks like a good buy, but unfortunately it has a built in battery that cannot be recharge. Once it's done, its done!"
+    "It looks like a good buy, but unfortunately it has a built in battery that cannot be recharged. Once it's done, its done!"
     menu:
         "Purchase ($500)":
             $ mc.business.change_funds(-500)
@@ -2298,16 +2298,16 @@ label starbuck_candace_recurring_event_label(the_person):
         candace "Take care [candace.mc_title]."
         "You head out from the store, giving the two girls time to catch up on things."
         $ the_person.event_triggers_dict["knows_candace_cured"] = True
+        $ scene_manager.clear_scene()
 
-    python:
-        the_person.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
-        scene_manager.clear_scene()
+    $ the_person.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
     return
 
 label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_two):
-    $ scene_manager = Scene()
-    $ the_person_one.arousal = 0
-    $ the_person_two.arousal = 0
+    python:
+        scene_manager = Scene()
+        the_person_one.arousal = 0
+        the_person_two.arousal = 0
 
     "You listen closely and hear... The girls are just chatting?"
     if the_person_one.event_triggers_dict.get("orgasm_denial_discovered", False) == False:

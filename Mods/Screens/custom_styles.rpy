@@ -1,6 +1,11 @@
 init -5:
     define persistent.display_text_size = 20
 
+    style nvl_dialogue:
+        line_spacing 4
+    style say_dialogue:
+        line_spacing 4
+
     python:
         def set_text_size(new_size):
             setattr(style.get("serum_text_style"), "size", new_size)
@@ -14,14 +19,14 @@ init -5:
             setattr(style.get("menu_text_style_left"), "size", new_size - 2)
             style.rebuild()
 
+
+
 init -2 style serum_text_style: # General text style used in the serum screens.
     text_align 0.5
     size persistent.display_text_size
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
     xalign 0.5
-    yanchor 0.5
-    yalign 0.5
 
 init -2 style serum_background_style: # General text style used in the serum screens.
     padding [5,5]
@@ -69,6 +74,8 @@ init -2 style serum_text_style_traits: # Unaligned text style for traits in the 
     outlines [(2,"#222222",0,0)]
     text_align 0.5
     xalign 0.5
+    line_spacing 2
+    yoffset 2
 
 init -2 style textbutton_no_padding_highlight: # Textbutton without padding
     margin [2,2]
@@ -91,7 +98,6 @@ init 2 style textbutton_style: ##The generic style used for text button backgrou
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
-    yalign 0.5
 
 init 2 style textbutton_text_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
     size (persistent.display_text_size + 2)
@@ -100,8 +106,8 @@ init 2 style textbutton_text_style: ##The generic style used for text button bac
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
     text_align 0.5
-    yanchor 0.5
-    yalign 0.5
+    line_spacing 4
+    yoffset 4
 
 init 2 style transparent_style:
     background None
@@ -117,6 +123,8 @@ init 2 style menu_text_style:
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
     text_align 0.5
+    line_spacing 2
+    yoffset 2
 
 init 2 style menu_text_style_left:
     size (persistent.display_text_size - 2)
@@ -124,7 +132,9 @@ init 2 style menu_text_style_left:
     bold False
     color "#dddddd"
     outlines [(2,"#222222",0,0)]
+    line_spacing 2
     text_align 0.0
+    yoffset 2
 
 init 2 style menu_text_title_style is menu_text_style:
     font "Mods/Core/Fonts/ethnocentric rg.ttf"

@@ -132,7 +132,10 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         $ scene_manager.update_actor(loser, position = "back_peek")
                         $ mc.change_locked_clarity(20)
                         "You put your hands on her hips, her ass still slick with the delivery guy's cum."
-                        mc.name "I only got to cum on your face, it doesn't seem right the delivery guy got more than me."
+                        if loser.has_face_cum():
+                            mc.name "I only got to cum on your face, it doesn't seem right the delivery guy got more than me."
+                        else:
+                            mc.name "It doesn't seem right the delivery guy got something I didn't."
                     else:
                         "You enter the room and see [winner_one.title] and [winner_two.title] waiting for the food, you motion them to be quiet."
                         "You slowly walk up behind [loser.title] and quietly start to take your dick out of your pants."
@@ -142,7 +145,10 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         $ scene_manager.update_actor(loser, position = "back_peek")
                         $ mc.change_locked_clarity(20)
                         "You put your hands on her hips, her pussy still wet from the excitement a few minutes earlier."
-                        mc.name "I only got to cum on your face, but after this display I definitely need more."
+                        if loser.has_face_cum():
+                            mc.name "I only got to cum on your face, but after this display I definitely need more."
+                        else:
+                            mc.name "After that show, I definitely deserve something too."
 
                     loser "Hey now, it's not like that, you know you can claim me anytime you want, we were just looking for some free... FUCK"
                     $ mc.change_locked_clarity(20)
@@ -175,7 +181,11 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ loser.cum_in_vagina()
                     $ scene_manager.update_actor(loser, position = "standing_doggy")
                     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = loser)
-                    "You pull out and look at [loser.possessive_title]. She has your old cum on her face and now also running down the inside of her legs as your seed spills out of her."
+                    if loser.has_face_cum():
+                        "You pull out and look at [loser.possessive_title]. She has your old cum on her face and now also running down the inside of her legs as your seed spills out of her."
+                    else:
+                        "You pull out and look at [loser.possessive_title]. Your cum is running down the inside of her legs as your seed spills out of her."
+
                     $ mc.listener_system.fire_event("girl_climax", the_person = loser, the_position = "standing_doggy")
                     $ loser.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 3)
                     if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():

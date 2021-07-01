@@ -7,14 +7,14 @@ init 100:
         gui.name_ypos = 0
         gui.name_xpos = 0.25
         gui.text_xpos = 0.25
-        gui.text_ypos = 100
+        gui.text_ypos = 110
 
 
     style namebox:
         xpos gui.name_xpos
         xanchor gui.name_xalign
         xsize gui.namebox_width
-        ypos gui.name_ypos - 10
+        ypos gui.name_ypos
         ysize gui.namebox_height
 
         background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)

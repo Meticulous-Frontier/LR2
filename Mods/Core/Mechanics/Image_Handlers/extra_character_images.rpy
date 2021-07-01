@@ -38,9 +38,6 @@ init 2 python:
     # override image get functions to allow for mod image retrieval #
     #################################################################
 
-    def can_use_animation():
-        return False    # NO ANIMATIONS IN MOD
-
     def clothing_get_image(self, body_type, breast_size = "AA" ): #Generates a proper Image object from the file path strings we have stored previously. Prevents object bloat by storing large objects repeatedly for everyone.
         global mobile_zip_dict
 
@@ -96,7 +93,7 @@ init 2 python:
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
 
-    def expression_generate_raw_image():
+    def expression_generate_raw_image(self, position, emotion, special_modifier = None):
         if not emotion in self.emotion_set:
             emotion = "default" #Get our default emotion to show if we get an incorrect one.
         elif special_modifier and special_modifier in self.special_modifiers:

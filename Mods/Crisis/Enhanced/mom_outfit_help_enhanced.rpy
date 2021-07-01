@@ -147,7 +147,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
 
     #Strip choices for the second peek section
-    if the_person.effective_sluttiness() + the_person.love < 35 or caught: #She really doesn't want you to see anything
+    if the_person.effective_sluttiness(["underwear_nudity","bare_pussy","bare_tits"]) + the_person.love < 35 or caught: #She really doesn't want you to see anything
         the_person "Okay, I just need to get changed again."
         $ clear_scene()
         "[the_person.possessive_title] shoos you out of the room while she changes into her new outfit."
@@ -314,7 +314,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
     the_person "Thank you so much for the help [the_person.mc_title]. I don't know why but I've been feeling much more unsure about the way I dress lately."
     mc.name "Any time, I'm just glad to help."
-    if the_person.sluttiness > 50:
+    if the_person.effective_sluttiness(["touching_penis", "sucking_cock"]) > 50:
         the_person "Is there any I could show you how thankful I am? You are such a helpful son..."
         if mc.energy < 50:
             mc.name "I'm sure you could think of something, but honestly I'm exhausted. I think I'll just head for bed."
@@ -325,7 +325,7 @@ label mom_outfit_help_crisis_label_enhanced():
             "[the_person.possessive_title] starts to take off her outfit. Saving her clothes for tomorrow you guess?"
             $ the_person.strip_outfit(exclude_lower = True)
             $ mc.change_locked_clarity(10)
-            if the_person.sluttiness < 70: #Mid sluttiness path.
+            if the_person.has_taboo("condomless_sex") or the_person.effective_sluttiness(["touching_penis", "sucking_cock"]) < 70: #Mid sluttiness path.
                 "With her tits out, she starts to walk over to you."
                 the_person "I'm sure it was hard for you... to watch your mother undress like that... right in front of you..."
                 $ the_person.draw_person(position = "kissing")

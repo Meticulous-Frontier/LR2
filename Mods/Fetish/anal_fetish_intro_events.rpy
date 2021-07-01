@@ -531,7 +531,7 @@ label anal_fetish_mom_intro_label():
     $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit, the_colour = the_person.favorite_colour()))
     $ the_person.draw_person()
     $ mc.change_locked_clarity(50)
-    "When you look up, you are stunned at the outfit that [the_person.possessive_title!] is wearing."
+    "When you look up, you are stunned at the outfit that [the_person.possessive_title] is wearing."
     mc.name "[the_person.title]... wow! But... but what about..."
     the_person "Lily is out for the night, spending it at a friend's house. We have the house to ourselves for the night..."
     "[the_person.title] slowly walks over to you. Her hips and body are mesmerizing."

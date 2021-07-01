@@ -31,10 +31,16 @@ label lady_of_the_night_label_enhanced():
             if the_report.get("girl orgasms",0) > 0:
                 "It takes [the_person.title] a few moments to catch her breath."
                 the_person "Maybe I should be paying you... Whew!"
+            elif the_report.get("girl orgasms", 0) > 0:
+                "It takes [the_person.title] a few moments to catch her breath."
+                the_person "Am I not hot enough for you, darling?"
+            else:
+                the_person "Not bad darling, I hope you had a good time."
 
-            $ the_person.review_outfit()
+            $ the_person.review_outfit(dialogue = False)
             $ the_person.draw_person()
 
+            "She quickly gets her clothes back in order."
             the_person "It's been fun, if you ever see me around maybe we can do this again."
             $ the_person.draw_person(position = "walking_away")
             "She gives you a peck on the cheek, then turns and struts off into the night."

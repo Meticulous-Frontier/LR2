@@ -70,7 +70,7 @@ init 2 python:
             person = self.return_value
             for cloth in person.outfit.generate_clothing_list():
                 if isinstance(cloth, Facial_Accessory):
-                    load_image(cloth.position_sets[person.idle_pose].get_image(person.face_style, "default"))
+                    load_image(cloth.position_sets[person.idle_pose].get_image(person.face_style, person.get_emotion()))
                 else:
                     load_image(cloth.position_sets[person.idle_pose].get_image(actual_body_type(person, cloth), actual_tit_size(person, cloth)))
             return
