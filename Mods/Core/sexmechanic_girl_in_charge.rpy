@@ -498,7 +498,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
             else:
                 $ finished = True    #Sex goal has been accomplished
-                the_person "Mmm, that was exactly what I was hoping for!"
+                $ the_person.call_dialogue("GIC_finish_response", the_goal = the_goal)
         elif len(sex_path) > 0:
             if not sex_path[0].position.check_clothing(the_person): #We don't meet the clothing requirements for the next position, so we strip some
                 $ the_clothing = the_person.choose_strip_clothing_item()

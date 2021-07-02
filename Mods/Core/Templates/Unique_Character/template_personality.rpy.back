@@ -1829,3 +1829,31 @@ label TEMPLATE_lingerie_shopping_wow_response(the_person):
     "She is quiet, but you can hear here rustling around inside as she starts getting changed."
     the_person "It's okay... This is just to wear in private with you anyway... right?"
     return
+
+label TEMPLATE_GIC_finish_response(the_person, the_goal):
+    if the_goal == None:
+        the_person "Mmm, that was exactly what I was hoping for!"
+    elif the_goal == "get mc off":
+        the_person "Did that feel good? I just want to make you feel good..."
+    elif the_goal == "anal creampie":
+        the_person "Wow... I can feel it deep inside me..."
+    elif the_goal == "get off":
+        the_person "Oh god I really needed to get off."
+    elif the_goal == "waste cum":
+        the_person "Keep that cum where it belongs... far away from me!"
+    elif the_goal == "hate fuck":
+        the_person "God I needed to get off. Did you finish? Ah nevermind I don't care anyway."
+    elif the_goal == "vaginal creampie":
+        if the_person.has_breeding_fetish():
+            the_person "MMmmm, I can feel your cum so deep..."
+        else:
+            the_person "I can't help it, it feels so good when you finish inside me..."
+    elif the_goal == "facial":
+        the_person "How do it look? It feels good on my face."
+    elif the_goal == "body shot":
+        the_person "Mmm your cum is so hot. I love the way it feels on my skin."
+    elif the_goal == "oral creampie":
+        the_person "You tasted great..."
+    else:
+        the_person "Mmm, that was exactly what I was hoping for!"
+    return
