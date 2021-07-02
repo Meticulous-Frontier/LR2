@@ -484,7 +484,15 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
                         if not girl_in_charge:
                             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
-                        $ position_choice = None
+                        if position_choice.skill_tag == "Vaginal" and mc.energy > 50 and mc.location.has_object_with_trait(prone_bone.requires_location): # or position_choice.skill_tag == "Anal")
+                            call prone_decision_label(the_girl = the_person, the_location = mc.location, the_object = object_choice, the_position = position_choice) from _prone_sex_takeover_01
+                            if _return:
+                                $ the_object = _return
+                                $ position_choice = prone_bone
+                            else:
+                                $ position_choice = None
+                        else:
+                            $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
                         if not stop_stripping:
                             call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
