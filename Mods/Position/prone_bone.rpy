@@ -32,9 +32,7 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
             "You decide for now to let her take a break."
             return False
     mc.name "That's too bad. I'm not done with you yet though."
-    if not the_object.has_trait(position_choice.requires_location):
-        $ object_choice = girl_choose_object_enhanced(the_girl, prone_bone)
-    else:
+    if not the_object.has_trait(prone_bone.requires_location):
         call pick_object(the_girl, prone_bone) from _call_pick_object_in_prone_01
         $ the_object = _return
     if the_position.position_tag == "missionary":
@@ -44,6 +42,7 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
     else:
         "You push [the_girl.title] down onto the [the_object.name] on her stomach."
     #TODO check her willingness here, if she is not usually willing take a happiness hit. Can probably copy paste code from sex system
+    $ prone_bone.redraw_scene(the_girl)
     if the_girl.is_submissive():
         "[the_girl.possessive_title] gives a moan as you line yourself and push back into her. She is completely helpless but submits to you obediently."
         $ the_person.change_happiness(5)
