@@ -44,6 +44,8 @@ init -1 python:
 
     def supply_purchase_enhanced(self,focus,cha,skill):
         max_supply = __builtin__.int(((5*focus) + (3*cha) + (3*skill) + 20) * (self.team_effectiveness / 100.0))
+        if (self.supply_count / self.supply_goal) < 20 and self.supply_count < 250 and mc.business.IT_project_is_active(supply_inventory_project):
+            max_supply *= 1.25
         if max_supply + self.supply_count > self.supply_goal:
             max_supply = self.supply_goal - self.supply_count
             if max_supply <= 0:
@@ -155,6 +157,13 @@ init -1 python:
         return
 
     Business.IT_unlock_project = IT_unlock_project
+
+    def IT_project_is_active(self, project):
+        if project in mc.business.active_IT_projects:
+            return True
+        return False
+
+    Business.IT_project_is_active = IT_project_is_active
 
 
 

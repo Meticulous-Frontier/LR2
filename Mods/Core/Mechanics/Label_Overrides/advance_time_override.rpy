@@ -190,6 +190,8 @@ init 5 python:
             person.run_turn()
 
         mc.business.run_turn()
+        for project in mc.business.active_IT_projects:
+            project.on_turn()
         mc.run_turn()
         if "police_chief" in globals(): # make sure changes to her uniform during work hours
             if time_of_day > 0 and time_of_day < 4:
@@ -209,6 +211,8 @@ init 5 python:
 
         mc.run_day()
         mc.business.run_day()
+        for project in mc.business.active_IT_projects:
+            project.on_day()
         if "police_chief" in globals(): # make sure she always wears her uniform
             police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
@@ -223,6 +227,8 @@ init 5 python:
             person.run_move(place)
 
         mc.business.run_move()
+        for project in mc.business.active_IT_projects:
+            project.on_move()
         if debug_log_enabled:
             add_to_debug_log("Run Move: {total_time:.3f}", start_time)
         return

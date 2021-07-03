@@ -1554,14 +1554,17 @@ init 3 python:
         return False
 
     def candace_calculate_discount():
+        disc_mult = 1.0
         if "candace" in globals():
             if candace.is_employee():
                 if candace_is_giving_supply_discount():
                     if candace_is_bimbo():
-                        return 0.90
+                        disc_mult = 0.90
                     else:
-                        return 0.80
-        return 1.0
+                        disc_mult = 0.80
+        if mc.business.IT_project_is_active(supply_storage_project):
+            disc_mult -= 0.05
+        return disc_mult
 
 
     def candace_is_bimbo():

@@ -52,6 +52,7 @@ init 2 python:
 
         # set relationships
         # Ellie is relatively new in town and has no mutual relationship with MC
+        ellie.text_modifiers.append(southern_belle)
 
         ellie.add_role(ellie_role)
         return

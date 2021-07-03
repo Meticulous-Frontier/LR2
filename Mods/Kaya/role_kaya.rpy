@@ -50,7 +50,7 @@ init 2 python:
         #office.add_action(HR_director_appointment_action)
 
         # kaya_intro = Action("kaya_intro",kaya_intro_requirement,"kaya_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        mc.business.add_mandatory_crisis(kaya_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_crisis(kaya_setup_intro_event) #Add the event here so that it pops when the requirements are met.
 
         # set relationships
         # town_relationships.update_relationship(kaya, stephanie, "Sister")
@@ -129,6 +129,7 @@ init -2 python:
         return False
 
 init 3 python:
+    kaya_setup_intro_event = Action("Kaya Setup", kaya_setup_intro_event_requirement, "kaya_setup_intro_event_label")
     kaya_intro = Action("Meet Kaya",kaya_intro_requirement,"kaya_intro_label")
     kaya_ask_out = Action("Ask to get drinks",kaya_ask_out_requirement,"kaya_ask_out_label")
 
