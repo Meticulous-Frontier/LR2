@@ -1176,14 +1176,14 @@ label ashley_second_concert_date_label():
     "The angle is rough, but you do your best to rub the palm of your hand against her clit as you finger her."
     "Her hips are beginning to wiggle gently in her seat as she squirms at your touch. You feel like she has to be close to cumming."
     $ the_person.change_arousal(arousal_gain)
-    "What happens next, surprises even you. She grabs your hand and stops you. You can't help but look at her questioningly. She leans over and whispers to you."
+    "What happens next surprises even you. She grabs your hand and stops you. You can't help but look at her questioningly. She leans over and whispers to you."
     ashley "Go slow. It'll be more fun if you take your time..."
     "She takes your hand and brings it back to her cunt, but this time she lifts her hips slightly and sits on it. She slowly grinds herself down on your hand."
     $ mc.change_locked_clarity(20)
     $ the_person.change_arousal(arousal_gain)
     "She is using your hand to edge herself?"
     "As the music continues, [the_person.possessive_title] keeps stimulating herself with your hand. Sometimes she goes completely still, letting herself calm down."
-    "Other times she lets you push your fingers back inside her for a minute or two, and other times just grinding against it. However, she never lets herself cum, each time she gets close she stops. Your cock is getting uncomfortably hard."
+    "Other times she lets you push your fingers back inside her for a minute or two, and other times just grinding against it. However, she never lets herself cum; each time she gets close, she stops. Your cock is getting uncomfortably hard."
     "The music seems to be winding down. Is she going to let herself finish?"
     mc.name "You umm..."
     ashley "Of course. But not here. I decided earlier when I cum I want your face between my legs, not your hand..."
