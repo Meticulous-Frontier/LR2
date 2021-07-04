@@ -207,7 +207,7 @@ label Sarah_sex_obedience_accept(the_person):
             the_person "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
     else:
         if the_person.obedience > 130:
-            the_person "If that's what you want to do then I'll what you tell me to do."
+            the_person "If that's what you want to do then I will do what you tell me to do."
         else:
             the_person "I shouldn't... but if you want to try it out I'm game. Try everything once, right?"
     return
@@ -955,52 +955,55 @@ label Sarah_anal_sex_taboo_break(the_person):
         return
 
 label Sarah_condomless_sex_taboo_break(the_person):
-        if the_person.get_opinion_score("bareback sex") > 0:
-            the_person "You want to do me bare? That's so hot to hear you say something like that."
-            if the_person.on_birth_control:
-                the_person "I'm on the pill, so it should be fine. Let's go!"
-            elif the_person.get_opinion_score("creampies") > 0:
-                the_person "You should probably know, before we start, that I'm not on birth control."
-                if the_person.is_highly_fertile():
-                    the_person "Also... I'm pretty much at peak fertility right now. I'd almost definitely get pregnant."
-                mc.name "Do you want me to pull out?"
-                "She bites her lip and shakes her head."
-                the_person "No, not particularly."
-            elif the_person.get_opinion_score("creampies") < 0:
-                the_person "You'll need to pull out though. The last thing in the world I want is to get knocked up."
-            else:
-                the_person "I'm not on the pill though. You'll need to pull out so you don't knock me up, got it?"
+    if the_person.knows_pregnant():
+        the_person "I don't mind, it's not like I could get more pregnant."
 
-        elif the_person.love > 60:
-            the_person "I want to feel close to you too [the_person.mc_title]."
-            if the_person.on_birth_control:
-                the_person "I'm on birth control, so you don't need to worry about getting me pregnant."
-            elif the_person.get_opinion_score("creampies") > 0:
-                the_person "If we're doing this, I don't want you to pull out when you finish either."
-                mc.name "Are you on the pill?"
-                "She shakes her head."
-                the_person "No, but for you I'm okay with that risk."
-            elif the_person.get_opinion_score("creampies") < 0:
-                the_person "You'll need to pull out though. I'm not ready to get pregnant yet, okay?"
-            else:
-                if the_person.kids == 0:
-                    the_person "You'll need to pull out though. I don't think either of us want a kid yet, right?"
-                else:
-                    the_person "You'll need to pull out though. I already have enough kids."
-
+    elif the_person.get_opinion_score("bareback sex") > 0:
+        the_person "You want to do me bare? That's so hot to hear you say something like that."
+        if the_person.on_birth_control:
+            the_person "I'm on the pill, so it should be fine. Let's go!"
+        elif the_person.get_opinion_score("creampies") > 0:
+            the_person "You should probably know, before we start, that I'm not on birth control."
+            if the_person.is_highly_fertile():
+                the_person "Also... I'm pretty much at peak fertility right now. I'd almost definitely get pregnant."
+            mc.name "Do you want me to pull out?"
+            "She bites her lip and shakes her head."
+            the_person "No, not particularly."
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "You'll need to pull out though. The last thing in the world I want is to get knocked up."
         else:
-            if the_person.on_birth_control:
-                the_person "You don't want to use protection? I'm on birth control, but isn't there still a chance?"
-                the_person "As long as you pull out it should be fine, I think."
-            elif the_person.has_taboo("vaginal_sex"):
-                the_person "You don't want to use protection? I'm not on birth control, what if you get me pregnant?"
-                mc.name "I'll pull out. Don't you want our first time to be special?"
-                the_person "I do... Fine, just please be careful where you cum."
+            the_person "I'm not on the pill though. You'll need to pull out so you don't knock me up, got it?"
+
+    elif the_person.love > 60:
+        the_person "I want to feel close to you too [the_person.mc_title]."
+        if the_person.on_birth_control:
+            the_person "I'm on birth control, so you don't need to worry about getting me pregnant."
+        elif the_person.get_opinion_score("creampies") > 0:
+            the_person "If we're doing this, I don't want you to pull out when you finish either."
+            mc.name "Are you on the pill?"
+            "She shakes her head."
+            the_person "No, but for you I'm okay with that risk."
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "You'll need to pull out though. I'm not ready to get pregnant yet, okay?"
+        else:
+            if the_person.kids == 0:
+                the_person "You'll need to pull out though. I don't think either of us want a kid yet, right?"
             else:
-                the_person "You don't want to use protection? I'm not on birth control, what if you get me pregnant?"
-                mc.name "I'll pull out. Don't you want to know how much better it feels without a condom on?"
-                the_person "I do... Okay, you can go in raw. Please be careful where you cum though."
-        return
+                the_person "You'll need to pull out though. I already have enough kids."
+
+    else:
+        if the_person.on_birth_control:
+            the_person "You don't want to use protection? I'm on birth control, but isn't there still a chance?"
+            the_person "As long as you pull out it should be fine, I think."
+        elif the_person.has_taboo("vaginal_sex"):
+            the_person "You don't want to use protection? I'm not on birth control, what if you get me pregnant?"
+            mc.name "I'll pull out. Don't you want our first time to be special?"
+            the_person "I do... Fine, just please be careful where you cum."
+        else:
+            the_person "You don't want to use protection? I'm not on birth control, what if you get me pregnant?"
+            mc.name "I'll pull out. Don't you want to know how much better it feels without a condom on?"
+            the_person "I do... Okay, you can go in raw. Please be careful where you cum though."
+    return
 
 label Sarah_underwear_nudity_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):

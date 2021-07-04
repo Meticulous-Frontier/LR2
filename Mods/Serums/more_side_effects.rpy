@@ -47,6 +47,7 @@ init 2 python:
         on_turn = oxytocin_side_effect_on_turn,
         is_side_effect = True)
 
-    list_of_side_effects.append(uncontrollable_arousal_side_effect)
-    list_of_side_effects.append(tryptamine_side_effect)
-    list_of_side_effects.append(oxytocin_side_effect)
+    if "list_of_side_effects" in globals():
+        list_of_side_effects.append(uncontrollable_arousal_side_effect)
+        list_of_side_effects.append(tryptamine_side_effect)
+        list_of_side_effects.append(oxytocin_side_effect)

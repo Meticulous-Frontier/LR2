@@ -68,6 +68,7 @@ init 2:
 
                                     if show_export or show_modify or show_duplicate or show_delete:
                                         hbox:
+                                            yoffset 6
                                             spacing 0
                                             xsize 450
                                             if show_export:

@@ -38,9 +38,6 @@ init 2 python:
     # override image get functions to allow for mod image retrieval #
     #################################################################
 
-    def can_use_animation():
-        return False    # NO ANIMATIONS IN MOD
-
     def clothing_get_image(self, body_type, breast_size = "AA" ): #Generates a proper Image object from the file path strings we have stored previously. Prevents object bloat by storing large objects repeatedly for everyone.
         global mobile_zip_dict
 
@@ -89,16 +86,25 @@ init 2 python:
         if not emotion in self.position_dict[position]:
             return Image("character_images/empty_holder.png")
 
-        base_name = self.position_dict[position][emotion]
-        base_image = ZipContainer(position, base_name)
+        base_image = ZipContainer(position, self.position_dict[position][emotion])
+        mask_image = ZipContainer(position, self.position_dict[position][emotion].replace("_" + self.skin_colour,"_Pattern_1"))
 
-        mask_name = self.position_dict[position][emotion].replace("_" + self.skin_colour,"_Pattern_1")
-        mask_image = ZipContainer(position, mask_name)
-
-        base_image = im.MatrixColor(base_image, im.matrix.tint(*lighting)) #To support the lighting of the room we also retint it here.
-        return AlphaBlend(mask_image, base_image, im.MatrixColor(base_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)), alpha=False)
+        return AlphaBlend(mask_image, im.MatrixColor(base_image, im.matrix.tint(*lighting)), im.MatrixColor(base_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)), alpha=False)
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
+
+    def expression_generate_raw_image(self, position, emotion, special_modifier = None):
+        if not emotion in self.emotion_set:
+            emotion = "default" #Get our default emotion to show if we get an incorrect one.
+        elif special_modifier and special_modifier in self.special_modifiers:
+            emotion = emotion + "_" + special_modifier
+
+        if not emotion in self.position_dict[position]:
+            return Image("character_images/empty_holder.png")
+
+        return ZipContainer(position, self.position_dict[position][emotion])
+
+    Expression.generate_raw_image = expression_generate_raw_image
 
     def clothing_generate_stat_slug(self): #Generates a string of text/tokens representing what layer this clothing item is/covers
         cloth_info = ""

@@ -58,18 +58,28 @@ docs/_build/
 target/
 
 # Exclude Game Folders
+bugfix_additions/
+business_policies/
 animation/
 cache/
 crises/
+customizations/
+fonts/
 game_roles/
+game_screens/
+general_actions/
 gui/
+helper_functions/
 images/
+integration_tests/
+major_game_classes/
 My_personal_files/
 OpenGL/
 personality_types/
 saves/
 sex_positions/
 shader/
+unittest/
 wardrobes/
 # Files from Game Folder
 *.*

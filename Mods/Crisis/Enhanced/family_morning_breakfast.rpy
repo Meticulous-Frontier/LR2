@@ -17,9 +17,9 @@ label family_morning_breakfast_enhanced_label():
         # initialize scene manager for multi person scene
         scene_manager = Scene()
 
-    "In the morning you're awoken by a knock on your bedroom door."
-    mc.name "Uh, come in?!"
-    "Feeling a little groggy, you sit up in bed."
+    "You're woken up in the morning by a knock at your door."
+    mc.name "Uh, come in."
+    "You groan to yourself and sit up in bed."
     if mom.love > lily.love:
         $ scene_manager.add_actor(mom)
         "[mom.possessive_title] cracks open the door and leans in."
@@ -54,6 +54,7 @@ label family_morning_breakfast_enhanced_label():
     else:
         "[mom.possessive_title] is at the stove and humming to herself as she scrambles a pan full of eggs."
 
+    $ mom.update_outfit_taboos()
     $ scene_manager.update_actor(mom, position = "back_peek")
 
     mom "Good morning [mom.mc_title]. I'm almost ready to serve, hopefully your [lily.name] will be here soon."
@@ -73,6 +74,8 @@ label family_morning_breakfast_enhanced_label():
             $ mc.change_locked_clarity(5)
     else:
         "[lily.possessive_title] comes into the room and gives a dramatic yawn before sitting down at the kitchen table."
+
+    $ lily.update_outfit_taboos()
     $ scene_manager.update_actor(lily, position = "sitting")
 
     if mom.effective_sluttiness() > 40 and lily.effective_sluttiness() > 40:

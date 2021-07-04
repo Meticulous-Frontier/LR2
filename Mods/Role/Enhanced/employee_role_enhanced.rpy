@@ -65,7 +65,7 @@ label employee_find_out_home_location_label(the_person):
     else:
         the_person "I have [the_person.kids] children and I love them all very much."
 
-    mc.name "That sounds wonderful, [the_person.title], and were do you live?"
+    mc.name "That sounds wonderful, [the_person.title], and where do you live?"
 
     if the_person.relationship == "Single" and the_person.kids == 0:
         $ ran_num = renpy.random.randint(4, 8)

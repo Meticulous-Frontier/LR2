@@ -40,8 +40,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Multiple characters on screen (in some dialogs)
 
 ## Cheat Mod:
-* Trollden Cheat Mod (press 'z' in game)
-* Cheat Mod new version ('x' key or 'cheats' in bottom action menu)
+* Cheat Mod ('x' key or 'cheats' in bottom action menu)
 * Opinion Editor (press 'p' while talking to someone or 'opinions' in bottom action menu)
 * Traits and Serums Research Cheat Mod (press 't' in game)
 
@@ -62,13 +61,12 @@ This mod collection extends the base game with a range of new features and enhan
  4. You now should have a <Lab Rats 2/game/Mods> folder.
  5. Extract "game" folder of the lab-rats2-v0.x.x-bf.zip into the the <Lab Rats 2> folder replacing the original game folder files with the bug-fix files.
  6. Launch Lab Rats 2
- 7. Disable the animations in the preference screen, this original game feature is unstable and slow at best....
- 8. Start fresh game (when using bugfix, old saves from base game are no longer supported).
- 9. The MOD settings can be configured or en-/disabled from your bedroom.
-10. Done.
+ 7. Start fresh game (when using bugfix, old saves from base game are no longer supported).
+ 8. The MOD settings can be configured or en-/disabled from your bedroom.
+ 9. Done.
 
 ## Android
-The android version of the game including the mod is available on MEGA at https://mega.nz/#F!SvZEDIrR!NBqa7nibwW4toHCxlztLcg
+For Android version check out https://f95zone.to/threads/lab-rats-2-mods.32881/#post-2102913 and the usage of [JoiPlay](https://joiplay.cyou/).
 
 ## Updated Vanilla Game
 Unfortunately the base game is not bug free. Check https://github.com/Tristimdorion/Lab-Rats-2/tree/bugfix for a repository that has updated versions of the game files, with fixes for all bugs people reported on the Patreon page.

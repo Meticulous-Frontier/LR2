@@ -216,7 +216,7 @@ label breeding_fetish_family_intro_label(the_person):
         the_person "Do you think its weird, if I told you I love this feeling? Being pregnant, making babies. It's like my body was made to do this, over and over again."
         the_person "I'm already looking forward to making another one, and this one isn't even here yet!"
 
-    elif the_person.age < 35:
+    elif the_person.age > 35:
         the_person "Do you think I'm too old to have a baby? My hormones are in overdrive lately..."
         mc.name "No way. With modern medical science, women are having babies older and older, into their late forties even."
     else:

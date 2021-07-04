@@ -10,7 +10,7 @@ init 5 python:
         def __init__(self):
             self.Locks = {}
             self.Cache = {}
-            self.max_items = 150 if persistent.zip_cache_size == 0 else 300
+            self.max_items = 300 if persistent.zip_cache_size == 0 else 500
 
             for x in supported_positions + ["character_images"]:
                 self.Locks[x] = threading.RLock()

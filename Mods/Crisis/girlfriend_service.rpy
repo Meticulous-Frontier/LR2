@@ -13,7 +13,7 @@ init 2 python:
 
     girlfriend_service = ActionMod("Girlfriend Service", girlfriend_service_requirement, "girlfriend_service_label",
         menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business",
-        initialization = init_action_mod_disabled,
+        # initialization = init_action_mod_disabled,
         is_crisis = True, crisis_weight = girlfriend_service_weight)
 
 label girlfriend_service_label():
@@ -22,6 +22,7 @@ label girlfriend_service_label():
         return
 
     python:
+        public_session = False
         # actually visit the MC
         old_location = None
         if not the_person.location == mc.location:
@@ -32,6 +33,7 @@ label girlfriend_service_label():
     $ the_person.draw_person()
     the_person "Hey [the_person.mc_title]. Have a sec?"
     mc.name "For you? Of course."
+    #TODO harem content here eventually
     if the_person.get_opinion_score("public sex") > 0:
         the_person "There are so many girls here. Just wanted to make sure you aren't getting to tempted."
         "She starts to rub your crotch through your pants."
@@ -61,8 +63,19 @@ label girlfriend_service_label():
                         the_person "Mmm, you are such a naughty boy..."
                         call get_fucked(the_person, the_goal = "anal creampie") from _girlfriend_service_initiate_06
                 mc.name "That was nice."
+                $ public_session = True
                 "[the_person.possessive_title] slowly starts to clean herself up."
                 the_person "Yeah... I'll have to do that again soon..."
+            "Go somewhere private" if mc.location.get_person_count() > 1 and mc.energy > 50:
+                mc.name "Sounds good to me, but we should find somewhere private."
+                the_person "Why?"
+                mc.name "I don't want other employees to think I'm favoring you... just because you're my girlfriend."
+                "She gives you some pouty lips for a moment, but soon relents."
+                "You grab [the_person.title]'s hand and lead her to an empty storage room and lock the door behind you."
+                mc.name "Now... what exactly did you have in mind?"
+                "[the_person.possessive_title] smiles and moves toward you."
+                call get_fucked(the_person, private = True) from _girlfriend_service_initiate_079
+                $ the_person.change_stats (happiness = 5, slut_temp = 3)
             "Too tired" if mc.energy < 50:
                 mc.name "I'm sorry. Its been a long day and I'm just too tired right now. But I think I would like to do this another time..."
                 "She seems a little disappointed, but understanding."
@@ -105,13 +118,23 @@ label girlfriend_service_label():
                     $ the_person.change_stats (happiness = 5, slut_temp = 3)
                 else:
                     "She looks around at the other girls in the room."
-                    if the_person.effective_sluttiness() > 80 or (the_person.get_opinion_score("public sex") == 0 and the_person.effective_sluttiness() > 40):
+                    if the_person.get_opinion_score("public sex") == -2:
+                        the_person "But... there's people around?"
+                        mc.name "So?"
+                        the_person "I couldn't... you can't possibly think that I'd..."
+                        mc.name "Why not? Its not like our relationship is secret. Besides, who are they going to complain to? I'm the boss, remember?"
+                        "You put your hand on her chin, she looks up at you."
+                        mc.name "A fact that you would be wise to remember."
+                        $ the_person.change_stats (obedience = 15, slut_temp = 3, happiness = -5, love = -3)
+                        "She clearly isn't happy, but appears to accept your request."
+                    elif the_person.effective_sluttiness() > 80 or (the_person.get_opinion_score("public sex") == 0 and the_person.effective_sluttiness() > 40):
                         the_person "Oh my god... right here in front of everyone? That is so hot... Let's do it!"
                     else:
                         the_person "I don't know... I think the other employees are gonna notice..."
                         mc.name "So? It's not like our relationship is a secret. Besides, who are they going to complain to? I'm the boss remember?"
                         the_person "Okay, If you're sure about it."
                     "[the_person.possessive_title] moves toward you."
+                    $ public_session = True
                     call get_fucked(the_person, private = False) from _girlfriend_service_initiate_02
                     $ the_person.change_stats (obedience = 5, slut_temp = 3)
             "Too tired" if mc.energy < 50:
@@ -125,8 +148,13 @@ label girlfriend_service_label():
                 the_person "Ah, right, of course..."
                 "You can tell she is a little saddened, but she backs off and goes back to her work."
 
+    if public_session:
+        "As you put your cock back in your pants, the activity in the room return to normal."
+        "Your girlfriend has a smile on her face as she finishes cleaning up."
+        $ the_person.change_happiness(5)
     $ clear_scene()
     $ the_person.apply_planned_outfit()
+    $ del public_session
     if old_location:
         $ the_person.change_location(old_location)
         $ old_location = None

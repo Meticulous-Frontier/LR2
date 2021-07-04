@@ -140,8 +140,8 @@ init 5 python:
                 return "Requires: intelligence >= 4 and charisma >= 5"
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
-            # if day - the_person.event_triggers_dict.get("stripclub_hire_day", -7) < 7: # Maybe I hired her just because I want to have her as manager (immediately)
-                # return "Too recently hired"
+            if day - person.event_triggers_dict.get("stripclub_hire_day", -7) < 7:
+                return "Too recently hired"
             return True
         return False
 
@@ -469,7 +469,7 @@ label stripper_performance_review_label(the_person):
                         "[the_person.title] stands up and storms out of the room."
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
-                        $ person.location.move(the_person.home)
+                        $ the_person.location.move(the_person.home)
                         return
                 "Threaten to fire her": #She may ask to stay in exchange for some sort of favour, or get fired on the spot.
                     mc.name "I'll be honest with you [the_person.title], your performance here at the club leaves a lot to be desired."

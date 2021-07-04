@@ -801,8 +801,11 @@ label fetish_serum_coding_activity_label():
         mc.name "The program is done. Let's load this on to a batch of those nano bots."
         the_person "That's great! I'll get it up and running."
         the_person "We'll have to make new formulas for it though, and due to production limitations, we can't combine more than one set of bots in a single serum dose."
-        $ temp_string = fetish_serum_get_coding_target().name
+        # fully unlock the newly researched serum
         $ fetish_serum_get_coding_target().tier = 1
+        $ fetish_serum_get_coding_target().researched = True
+        $ mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        $ temp_string = fetish_serum_get_coding_target().name
         "You have now unlocked [temp_string]."
         "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
         "You can learn more about it at mastery level 3.0."
@@ -810,9 +813,8 @@ label fetish_serum_coding_activity_label():
         $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
         $ del temp_string
     else:
-        $ temp_percent = __builtin__.str(fetish_serum_coding_percent_done())
-        "You quickly review your work. Progress is coming along, you estimate it is about [temp_percent] percent complete."
-        $ del temp_percent
+        $ ran_num = __builtin__.int(fetish_serum_coding_percent_done())
+        "You quickly review your work. Progress is coming along, you estimate it is about [ran_num] percent complete."
     call advance_time() from _call_serum_progress_advance_time_01
     return
 

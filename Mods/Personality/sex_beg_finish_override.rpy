@@ -12,13 +12,14 @@ init 5 python:
     def remove_clothing_based_on_preference(person):
         if person.get_opinion_score("showing her tits") > person.get_opinion_score("showing her ass"):
             # tits preference
-            return person.strip_outfit_to_max_sluttiness(exclude_lower = True, temp_sluttiness_boost = 20)
+            person.strip_outfit_to_max_sluttiness(exclude_lower = True, temp_sluttiness_boost = 20)
         elif person.get_opinion_score("showing her tits") < person.get_opinion_score("showing her ass"):
             # vagina/ass preference
-            return person.strip_outfit_to_max_sluttiness(exclude_upper = True, temp_sluttiness_boost = 20)
-        else:
-            # no preference
-            return person.strip_outfit_to_max_sluttiness(temp_sluttiness_boost = 20)
+            person.strip_outfit_to_max_sluttiness(exclude_upper = True, temp_sluttiness_boost = 20)
+
+        # strip remaining if slutty enough
+        person.strip_outfit_to_max_sluttiness()
+        return
 
     def enhanced_sex_beg_finish(hook):
         remove_clothing_based_on_preference(the_person)

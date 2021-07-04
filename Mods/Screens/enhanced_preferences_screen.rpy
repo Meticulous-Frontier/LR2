@@ -101,11 +101,11 @@ init 2: # Add some additional
                         vbox:
                             style_prefix "radio"
                             label "Text Size"
-                            textbutton "18" action [SetField(style.get("textbutton_text_style"), "size", 18), Function(style.rebuild)]
-                            textbutton "20" action [SetField(style.get("textbutton_text_style"), "size", 20), Function(style.rebuild)]
-                            textbutton "22" action [SetField(style.get("textbutton_text_style"), "size", 22), Function(style.rebuild)]
-                            textbutton "24" action [SetField(style.get("textbutton_text_style"), "size", 24), Function(style.rebuild)]
-                            textbutton "26" action [SetField(style.get("textbutton_text_style"), "size", 26), Function(style.rebuild)]
+                            textbutton "18" action [SetField(persistent, "display_text_size", 18), Function(set_text_size, 18)]
+                            textbutton "20" action [SetField(persistent, "display_text_size", 20), Function(set_text_size, 20)]
+                            textbutton "22" action [SetField(persistent, "display_text_size", 22), Function(set_text_size, 22)]
+                            textbutton "24" action [SetField(persistent, "display_text_size", 24), Function(set_text_size, 24)]
+                            textbutton "26" action [SetField(persistent, "display_text_size", 26), Function(set_text_size, 26)]
                             #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
                             #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
 
@@ -179,6 +179,25 @@ init 2: # Add some additional
 
                         ## Additional vboxes of type "radio_pref" or "check_pref" can be
                         ## added here, to add additional creator-defined preferences.
+
+                    null height (2 * gui.pref_spacing)
+
+                    hbox:
+                        spacing 20
+
+                        if not renpy.mobile: #Animations are always disabled on mobile.
+                            vbox:
+                                style_prefix "radio"
+                                label "Animation"
+                                textbutton "Enable" action SetField(persistent, "vren_animation", True)
+                                textbutton "Disable" action SetField(persistent, "vren_animation", False)
+
+                        vbox:
+                            style_prefix "radio"
+                            label "Character Background"
+                            textbutton "Aura" action SetField(persistent, "vren_display_pref", "Float")
+                            textbutton "None" action SetField(persistent, "vren_display_pref", "None")
+
 
                     null height (2 * gui.pref_spacing)
 

@@ -223,7 +223,7 @@ init 2:
                         hbox:
                             xanchor 0.5
                             xalign 0.5
-                            spacing 10
+                            spacing 5
                             xsize 550
                             for num in __builtin__.range(__builtin__.max(starting_serum.slots,effective_traits)):
                                 if num < effective_traits and num < starting_serum.slots:

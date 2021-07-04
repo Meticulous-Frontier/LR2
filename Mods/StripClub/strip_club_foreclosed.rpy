@@ -92,6 +92,7 @@ label club_foreclosed_event_label():
         add_cousin_talk_about_strip_club_action()
         mc.business.remove_mandatory_crisis("club_foreclosed_event_label")
         update_party_schedules(build_people_to_process())
+        strip_club.visible = True   # make sure the strip club is on the map
 
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
     "Perhaps you should talk to your cousin Gabrielle about it, when your aunt cannot overhear your conversation."

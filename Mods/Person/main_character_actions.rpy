@@ -155,11 +155,13 @@ label mc_rename_person_label(person):
         menu rename_person_menu:
             "Name: [person.name]":
                 $ newname = str(renpy.input("Name: ", person.name))
-                $ person.name = newname
+                $ person.name = newname.replace("[", "[[")
+                $ person.home.formal_name = person.name + " " + person.last_name + " home"
 
             "Last name: [person.last_name]":
                 $ new_last_name = str(renpy.input("Last name: ", person.last_name))
-                $ person.last_name = new_last_name
+                $ person.last_name = new_last_name.replace("[", "[[")
+                $ person.home.formal_name = person.name + " " + person.last_name + " home"
 
             "Title: [person.title]":
                 $ new_title = str(renpy.input("Title: ", remove_display_tags(person.title)))

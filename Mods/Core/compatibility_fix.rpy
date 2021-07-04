@@ -131,9 +131,6 @@ init 5 python: # add to stack later then other mods
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
 
-    if take_animation_screenshot in config.interact_callbacks:
-        config.interact_callbacks.remove(take_animation_screenshot)
-
     # disable game saving by setting this flag
     okay_to_save = True
     config.game_menu[3] = ( "save", u"Save Game", ui.jumps("_save_screen"), 'not renpy.context().main_menu and okay_to_save' )
@@ -158,7 +155,7 @@ init 1 python:
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 16
+    config.predict_statements = 32
     config.rollback_length = 32      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False

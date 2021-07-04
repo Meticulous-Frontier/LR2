@@ -14,9 +14,9 @@ init 2:
                 $ mouse_xy = renpy.get_mouse_pos()
                 frame:
                     if mouse_xy[1] > 1080/2:
-                        background "#1a45a1dd" xsize 450 xpos mouse_xy[0] ypos mouse_xy[1] yanchor 1.0 # Find  a better colour scheme, clashes with disabled actions
+                        xsize 450 xpos mouse_xy[0] ypos mouse_xy[1] yanchor 1.0
                     else:
-                        background "#1a45a1dd" xsize 450 xpos mouse_xy[0] ypos mouse_xy[1]
+                        xsize 450 xpos mouse_xy[0] ypos mouse_xy[1]
                     text "[tooltip]":
                         style "serum_text_style"
                         xalign 0.5
