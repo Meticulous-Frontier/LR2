@@ -1165,7 +1165,7 @@ label ashley_second_concert_date_label():
     mc.name "And yet, here you are, with your sister's boyfriend. Maybe you just haven't met someone worth sharing before?"
     "[the_person.title] is quiet. Right on cue, the lights turn down and the music begins."
     #[Change lighting to dark]
-    "The music begins, playing through some classical music that you aren't familiar with, but it is quiet enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
+    "The music begins, playing through some classical music that you aren't familiar with, but it is quite enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
     "After a while, as the music goes through a crescendo, you feel her squeeze your hand, then turn it over, so her palm is against the back of your hand."
     "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
     $ mc.change_locked_clarity(15)
