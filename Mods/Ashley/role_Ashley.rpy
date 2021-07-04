@@ -1589,7 +1589,7 @@ label coffee_time_steph_gets_handsy_label():
         "You and [stephanie.title] pet each other for a few minutes, but stroking each other through you clothes can only take things so far."
         if stephanie.get_opinion_score("public sex") > 0:
             "She decides to push things further. You feel her hand clumsily reach into your pants, eventually pulling your cock out. The soft skin of her hand feels great."
-            "Not to be outdone, you bring your up Stephanie's body, then slowly slide it under her clothes. When you get to her slit, you push you middle finger inside of her, while pushing your palm against her clit."
+            "Not to be outdone, you bring your hand up Stephanie's body, then slowly slide it under her clothes. When you get to her slit, you push you middle finger inside of her, while pressing your palm against her clit."
             "She sighs, but doesn't seem particularly concerned about other people around."
             $ mc.change_locked_clarity(20)
         else:
