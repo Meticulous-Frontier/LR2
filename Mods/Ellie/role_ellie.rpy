@@ -101,7 +101,8 @@ label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher
     "You get an email notification on your phone. Normally you would brish something like this off as spam, but the subject line has your name in it."
     "You open it up and are surprised what you are reading. It is short and to the point."
-    "?????" "I know what your company is doing with the nanobots, and I'll go public with it if you don't meet my demands. Meet me tomorrow night in the alley between 3rd and 5th street, and come alone."
+    "?????" "I know what your company is doing with the nanobots, and I'll go public with it if you don't meet my demands."
+    "?????" "Meet me tomorrow night in alley between 3rd and 5th street downtown. Come alone, and bring cash."
     "Well that's not good. That sounds very not good. You find yourself panicking for a moment."
     "You take a deep breath. You should get with [the_person.possessive_title]. You quickly page her to meet you in your office."
     $ ceo_office.show_background()
@@ -115,69 +116,139 @@ label ellie_start_intro_note_label():
     mc.name "You could say that..."
     "You pull up the email and show it to her."
     "She is just as surprised as you."
-    the_person "Wow... fuck... okay."
-    mc.name "So... "
+    the_person "Wow... fuck... okay. What can I do to help?"
+    mc.name "So, here is what I am thinking. Across from the alley is bar where you can get on the roof fairly easily."
+    mc.name "Can you come with me, but hide up on the roof with like... a camera or binoculars or something? Just watch while I deal with this."
+    the_person "Yeah. I can do that. I think I know where you are talking about."
+    mc.name "I'll pull out some cash the day of and be ready. Although the email doesn't even say how much cash to bring."
+    the_person "Yeah... its a little ambigious... But I can do that."
+    "You spend some time in your office with [the_person.title], making a quick and dirty plan for how to deal with the blackmail threat."
+    mc.name "Alright, its a plan. I won't meet with you tomorrow night, in case we are being watched or tracked, but its a plan atleast."
+    the_person "Ok... We'll talk then."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] gets up and leaves your office. This is a precarious situation, and you can't help but worry about it."
+    $ clear_scene()
+    #TODO link next scene.
     return
 
 label ellie_meet_ellie_intro_label():
+    $ the_person = mc.business.head_researcher
     "As night falls, you make your way downtown. Tonight you are meeting with your mysterious blackmailer."
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
-    "You text (head researcher) to make sure she is still going to meet your there."
-    "In the alley between 3rd and 5th. Did you manage to find a good vantage point?"
-    "Sure did. I don't see anyone yet, and I brought a taser, you know, just in case."
+    "You text [the_person.possessive_title] to make sure she is still going to be there."
+    $ mc.start_text_convo(the_person)
+    mc.name "In the alley between 3rd and 5th. Did you manage to find a good vantage point?"
+    the_person "Sure did. I don't see anyone yet, and I brought a taser, you know, just in case."
+    $ mc.end_text_convo()
     "You have no idea how organized this person or group is, but you doubt that if things turn sour a taser will make much of a difference, but you decide to keep that to yourself."
     "Hopefully she will go unnoticed if the blackmailer decides to have reinforcements of his own."
     "The blackmail note said to bring cash... But not how much. You pulled some strings at the bank and got $1000 in 20s, hopefully that will be enough."
     "Your business is just getting off the ground, so you really don't have the cash to handle a huge demand."
     "Eventually, the time comes, so you head down the alley. As you hit the halfway mark, a shadowy figure emerges from behind a dumpster."
-    "That's far enough right there y'all."
+    $ ellie.draw_person()
+    ellie "That's far enough right there y'all."
     "The first thing you notice is the heavy southern twang in her accent. Secondly, it is heavily feminine. A southern woman is blackmailing you? It catches you completely off gaurd."
-    "You got cash?"
-    "Yeah, although the note failed to mention exactly how much you were expecting."
-    "I'm figurin a million dollars in cold hard cash."
+    ellie "You got cash?"
+    mc.name "Yeah, although the note failed to mention exactly how much you were expecting."
+    eliie "I'm figurin a million dollars in cold hard cash."
     "You pause. She can't be serious? If she knows anything about your business, she has to know you have no way of pulling that kind of liquidity."
-    "I'm sorry, my business is just founded, and I don't have the ability to pull that much, especially on such short notice."
-    "Ah lordie help me. Hmm. How about this. You give me some cash now as a show of good faith, and we'll meet again next week and you kin give me the money then."
-    "As a fellow criminal, surely y'all can understand that I got bills to pay."
+    mc.name "I'm sorry, my business is just founded, and I don't have the ability to pull that much, especially on such short notice."
+    ellie "Ah lordie help me. Hmm. How about this. You give me some cash now as a show of good faith, and we'll meet again next week and you kin give me the money then."
+    ellie "As a fellow criminal, surely y'all can understand that I got bills to pay."
     "You doubt you will be able to find a million dollars between now and next week, but atleast this will give you some time to try and figure things out."
-    "Alright, that's a deal."
-    "Aight. For now, let me have a hundred dollars. That'd outta get me thru until next week..."
+    mc.name "Alright, that's a deal."
+    ellie "Aight. For now, let me have a hundred dollars. That'd outta get me thru until next week..."
     "This whole conversation is throwing up serious red flags. Is she really just asking a hundred for now? The whole thing reeks of amateurism."
-    "You look up and around, trying to see if you see any motion or hunt that she may have someone else watching, but don't see anything. You decide to play along for now."
+    "You look up and around, trying to see if you see any motion or hint that she may have someone else watching, but don't see anything. You decide to play along for now."
     "You pull out a hundred dollars, being careful not to show the remaining bills you have with you, and extend your hand with them."
     "She slowly walks forward and take she money from you. The alley is dark, but is that red hair? She quickly pulls away."
-    "Same time next week."
+    ellie "Same time next week."
     "The mysterious blackmailer turns and quickly leaves the alley. You stand there observing her until she turns the corner, when you turn around and leave the alley."
-    "Once you are a safe distance away from the alley, you pull out your phone and text (head researcher)."
-    "Hey, meet me at the bar. We have a lot to talk about."
-    "Okay, see you there"
-    "Change scene to the bar"
-    "You grab a secluded table away from the crowd around the bar with (head researcher)."
-    "So, how'd it go?"
-    "Confusing, to be honest. You see anything from where you were at?"
-    "Not much, to be honest. I could tell it was a woman, but I didn't see anyone else and couldn't make out much about her."
-    "Well, first thing, she had a heavy southern. She could have been faking it, but I doubt it. The whole thing felt... Like she was an amateur to be honest."
-    "Why do you say that?"
-    "Well, she really seemed to have no idea how much money to ask for, so she just said she needed a million dollars."
-    "Wow, there's no way you could make a ransom like that, atleast as far as I know."
-    "Right? And then when I said I didn't have that kind of money, she told me had she had bills to pay?"
-    "So she just asked for a hundred dollars as a show of good faith, and to meet again next week..."
-    "Wow... That's so weird."
-    "It was hard to see, the alley was so dark but... When she took the money from me... I think she's a redhead."
-    "Ahhh, a southern redhead? Of all the luck you have, your blackmailer happens to be a southern redhead? Did she have another obvious feature? Missing a leg perhaps?"
+    $ clear_scene()
+    "Once you are a safe distance away from the alley, you pull out your phone and text [the_person.possesive_title])."
+    $ mc.start_text_convo(the_person)
+    mc.name "Hey, meet me at the bar. We have a lot to talk about."
+    the_person "Okay, see you there"
+    $ mc.end_text_convo()
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+    $ mc.location.lighting_conditions = standard_indoor_lighting
+    "You grab a secluded table away from the crowd around the bar with [the_person.title]."
+    $ the_person.draw_person(position = "sitting")
+    the_person "So, how'd it go?"
+    mc.name "Confusing, to be honest. You see anything from where you were at?"
+    the_person "Not much, to be honest. I could tell it was a woman, but I didn't see anyone else and couldn't make out much about her."
+    mc.name "Well, first thing, she had a heavy southern accent. She could have been faking it, but I doubt it. The whole thing felt... Like she was an amateur to be honest."
+    the_person "Why do you say that?"
+    mc.name "Well, she really seemed to have no idea how much money to ask for, so she just said she needed a million dollars."
+    the_person "Wow, there's no way you could make a ransom like that, atleast as far as I know."
+    mc.name "Right? And then when I said I didn't have that kind of money, she told me had she had bills to pay?"
+    mc.name "So she just asked for a hundred dollars as a show of good faith, and to meet again next week..."
+    the_person "Wow... That's so weird."
+    mc.name "It was hard to see, the alley was so dark but... When she took the money from me... I think she's a redhead."
+    the_person "Ahhh, a southern redhead? Of all the luck you have, your blackmailer happens to be a southern redhead? Did she have another obvious feature? Missing a leg perhaps?"
     "Your head researcher is joking with you, but you can't help but laugh. This has to be a setup... Right? How many southern redheads could possibly live in this town?"
-    "Nothing else that I noticed, except one thing. When I told her I didn't have the million right then, she said something kind of odd. She said as a fellow criminal, she also has bills to pay..."
-    "You think she's unemployed maybe?"
-    "Maybe. I don't know. Up for helping me out with some research?"
+    mc.name "Nothing else that I noticed. But the bills to pay thing bugs me."
+    the_person "You think she's unemployed maybe?"
+    mc.name "Maybe. I don't know. Up for helping me out with some research?"
+    the_person "Oi. I guess I can do that. I'll do some searching on the internet this weekend and see if anything comes up."
+    mc.name "Thanks. I appreciate it."
+    "You decide you've had quite enough adventure for one night, so you decide to head home."
+    mc.name "Thanks for your help [the_person.title]. I appreciate it."
+    $ the_person.change_happiness(2)
+    the_person "Well, I admit, I feel partially responsible since I was the one to bring in the nanobots in the first place."
+    mc.name "I don't know why, but I feel a lot better about this whole thing. If we can figure out who she is, maybe we can come up with an alternative solution."
+    the_person "Err... you don't mean like... 'taking care of her' do you?"
+    mc.name "Of course not! But there may be other things we can do about this, I think."
+    "With your business concluded, you and [the_person.possesive_title] part ways."
+    $ clear_scene()
     return
 
 label ellie_head_researcher_halfway_intro_label():
-    "Head researcher calls you to the lab, says she's found out more about the mystery girl."
-    "Found out through her contact that her name is Ellie, used to work at the nanobot facility."
-    "Her contact framed Ellie for the missing nanobots, Ellie got fired, and due to a noncompete contract can't find work anywhere."
-    "Says she was pretty fresh there, young, hired straight out of college, from somewhere else."
-    "You come up with a plan with the head researcher to offer her a job. Officially in a different department."
-    "But on the side will complete IT projects for you, including working on the nanobot programs."
+    $ the_person = mc.business.head_researcher
+    "You feel your phone vibrate in your pocket. its [the_person.possesive_title]"
+    $ mc.start_text_convo(the_person)
+    the_person "I'm a genius. Meet me in your office!"
+    mc.name "I'll be right there."
+    $ mc.end_text_convo()
+    $ ceo_office.show_background()
+    "You step into your office, as you do, you see [the_person.title] sitting behind your desk."
+    $ the_person.draw_person(position = "sitting")
+    "You close the door and walk over."
+    mc.name "What is it?"
+    the_person "Well, following a hunch, I contacted the contact I had that got us the nanobots and the program in the first place."
+    the_person "It was just too weird that this girl had so much info about them."
+    the_person "I gave him description of the blackmailer, and he finally got back to me this morning."
+    the_person "The company launched an investigation trying to figure out who leaked the bots, but they got the wrong person."
+    the_person "The company came down hard on a relatively new person. A woman they had hired about a year ago. A fresh computer science college graduate from University of Alabama..."
+    mc.name "Ahhhhh"
+    the_person "He sent me her basic details..."
+    "[the_person.possesive_title] hands you a dossier she has put together on this person. The first thing you notice is her red hair."
+    the_person "[ellie.name] [ellie.last_name]. Redhead, souther computer expert."
+    mc.name "It's perfect. What happened with her employer?"
+    the_person "She got fired. The kicker is, she signed a 5 year non-compete contract when she got hired, and so the company threatened her with lawsuit if she tries to get a job in her field."
+    mc.name "Wow... So now here she is, far away from home, and no way to pay the bills."
+    the_person "That's right!"
+    "You feel conflicted about this. Surely, this is the girl that is blackmailing you... but you are also partially responsible for it, having acquired the nanobots in the first place."
+    "When you look at [the_person.title], she is looking at you funny."
+    the_person "So... you're going to try and help her... aren't you?"
+    mc.name "I mean... I am kind of responsible for her getting fired..."
+    the_person "Maybe. But how do you want to help? You can't just give her easy money every week."
+    mc.name "No. But that non-compete... Those are usually for specific position descriptions, right?"
+    the_person "Yeah, usually..."
+    mc.name "Maybe we could hire her? Having a computer person could be seriously handy around here... but we could make her official position something that isn't obvious."
+    the_person "That might work actually."
+    mc.name "If this other company ever calls us, we could just say she works in HR, for example. She's a college graduate, I'm sure she could handle that work too."
+    the_person "Hey, you don't have to convince me. It would be nice to have a tech person around here for sure though."
+    mc.name "Alright. Next time I meet with her, I'll consider trying to hire her. If nothing else, maybe I can atleast scare her off."
+    the_person "Okay. Let me know if there is anything else I can help out with, [the_person.mc_title]!."
+    $ clear_scene()
+    "[the_person.possesive_title] gets up and leaves you a lone in your office."
+    "You meet again with [ellie.name] on Thursday night. You feel like you could definitely hire her."
+    "WARNING: If you want to hire [ellie.name], make sure you have an open employee position! You may miss the opportunity to hire her if you don't!"
+    #TODO link up next event.
     return
 
 label ellie_unnecessary_payment_label():    #Use this scene each week if MC can't find out info on Ellie for some reason (head researcher fired, etc)
@@ -189,10 +260,52 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
     return
 
 label ellie_end_blackmail_label():
-    "You meet with ellie at the alley. You reveal you know who she is, her background."
-    "She gets scared. She knows she shouldn't be doing this but didn't know what else to do. It was desperation."
-    "You offer to hire her with terms."
-    "She suspicious, but agrees. Agrees to show up early to work on monday and learn more."
+    $ the_person = ellie
+    "As night falls, you make your way downtown. Tonight you are meeting with your blackmailer."
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    $ mc.location.lighting_conditions = dark_lighting
+    "The time comes so you head for the allie. As you approach, you hear the southern twang of her accent as she steps from the shadows."
+    $ the_person.draw_person()
+    the_person "'Ey. Got the money?"
+    "You stop."
+    mc.name "I'm going to be honest. I don't have any money with me [ellie.name] [ellie.last_name]."
+    "She gasps when she hears her full name."
+    the_person "That's... Oh heavens..."
+    mc.name "That's right. I figured out who you are. I did my research. I found out who you used to work for. I found out what happened. That you got fired."
+    $ the_person.draw_person(emotion = "angry")
+    "She hesitates for a moment, then gets angry."
+    the_person "That was it! I'd finally found a good job, I was working hard..."
+    $ the_person.draw_person(emotion = "sad")
+    "Suddenly, she breaks down crying."
+    the_person "Then... they told me that I'd been stealing! That I leaked company secrets! Me!"
+    the_person "They fired me... but it was y'all! And now I can't find another job anywhere! Anytime I give my work history, I get an instant no thanks from any employer."
+    "She seems ready to chat. Do you want to try and hire her?"
+    menu:
+        "Hire Her":
+            pass
+        "Scare her off":
+            "She is so emotional. You can't imagine her being a good fit for your company now."
+            "You scare her off from blackmailing you using dialogue that Starbuck hasn't written yet."
+            #TODO
+            #Figure out a way to remove her from the game without breaking stuff.
+            return
+    mc.name "I get it. You just want to work, and something in your field."
+    the_person "I... I just moved here a year ago... I just want to do my family proud..."
+    mc.name "What if you came and worked for me?"
+    "She startles. She clearly had not expected this at all."
+    the_person "Me? Y'all... after I blackmailed you and..."
+    mc.name "How did you get information on my company anyway? About the nanobots?"
+    the_person "Oh gee, your cyber security is non existent. All y'all have full databases of information without even a firewall to protect it..."
+    mc.name "I could really use someone with your talents to help me with stuff like that."
+    the_person "I could help... but I can't... I signed a non-compete..."
+    mc.name "I run a small company. We all know each other. I could make your official position be in HR, but you could run IT projects for me on the side. Your prior employer doesn't need to know."
+    mc.name "I'll match your previous salary plus ten percent. And if you decide to move on, I'll give you a proper reference."
+    "She seems skeptical, but agrees."
+    the_person "Okay... Let's see I decide I want to try it out."
+    mc.name "Come on out to the business tomorrow morning. I'll show you around, give you a chance to settle in, and then you can think about it over the weekend."
+    the_person "Okay mister. I'll come out tomorrow and y'all can show me the ropes."
+    mc.name ""
     return
 
 label ellie_work_welcome_label():
