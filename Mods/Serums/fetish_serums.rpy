@@ -555,6 +555,18 @@ init -1 python:
             )
         return
 
+    def fetish_anal_serum_is_unlocked():
+        return get_fetish_anal_serum().researched
+
+    def fetish_breeding_serum_is_unlocked():
+        return get_fetish_breeding_serum().researched
+
+    def fetish_cum_serum_is_unlocked():
+        return get_fetish_cum_serum().researched
+
+    def fetish_exhibition_serum_is_unlocked():
+        return get_fetish_exhibition_serum().researched
+
 # any label that starts with serum_mod is added to the serum mod list
 label serum_mod_fetish_serum_trait(stack):
     python:
