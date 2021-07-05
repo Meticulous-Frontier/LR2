@@ -27,19 +27,11 @@ init 2 python:
 
         camilla.generate_home()
         camilla.set_schedule(camilla.home, times = [0,4])
-        camilla.set_schedule(downtown_bar, times = [2,3])
+        #camilla.set_schedule(downtown_bar, times = [2,3])  #Disabled for now
+        camilla.set_schedule(camilla.home, times = [1,2,3])
         camilla.home.add_person(camilla)
 
         camilla.event_triggers_dict["intro_complete"] = False    # True after first talk
-        camilla.event_triggers_dict["excitement_overhear"] = False   #
-        camilla.event_triggers_dict["attitude_discussed"] = False   #
-        camilla.event_triggers_dict["porn_discovered"] = False       #
-        camilla.event_triggers_dict["porn_discussed"] = False    #
-        camilla.event_triggers_dict["concert_overheard"] = False    #True after overhearing
-        camilla.event_triggers_dict["concert_date"] = 0   #0 = not started, 1 = date arranged, 2 = date complete
-        camilla.event_triggers_dict["porn_convo_day"] = 9999
-        camilla.event_triggers_dict["porn_convo_avail"] = False
-        camilla.event_triggers_dict["story_path"] = None
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -57,7 +49,6 @@ init 2 python:
 
 label camilla_get_a_drink_label(the_person):
     mc.name "Care to get a drink, [the_person.title]?"
-
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
     #$ bartender_name = get_random_male_name()

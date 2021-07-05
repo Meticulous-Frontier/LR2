@@ -63,6 +63,7 @@ init 2 python:
 
 init -2 python:
     def kaya_setup_intro_event_requirement():
+        return False    #Disabled for now
         if alexia.is_employee() and day > alexia.event_triggers_dict.get("employed_since", 9999) + 7:
             return True
         return False
@@ -268,12 +269,11 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     else:
         mc.name "Wow, you are very good at pool! That was very impressive."
         the_person "Thank you. I love to play. It is a good exercise for your dexterity and your brain."
-        mc.name "I agree. Now, abotu the wager..."
+        mc.name "I agree. Now, about the wager..."
         the_person "Yes, this should be interesting. Go ahead, think about it and guess my favorite drink."
         "It is clear to you so far that [the_person.possesive_title] is intelligent and practical. However, even though she is strapped for money right now, you get the feeling things haven't always been this way for her."
         "Rum is too simple a spirit for her to favor. She probably favors gin or whiskey."
         "Something about her dark skin has you guessing it might be a darker spirit too, so you decide to guess a classic whiskey cocktail."
-        the_person "Yes yes. Well, my favorite drink, if you are that eager to know, is a Manhattan with an orange twist..."
         menu:
             "Whiskey sour":
                 pass
@@ -284,7 +284,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
         the_person "Wow. I admit, I was thinking that you were pretty full of shit, but that's actually really close! Close enough for me anyway!"
         mc.name "Oh?"
         the_person "My favorite cocktail is definitely a Manhattan with an orange twist."
-    mc.name "Ah, a bold drink indeed. I was definitely thinking something whiskey inspired, but I would not have guess that."
+    mc.name "Ah, a bold drink indeed. I was definitely thinking something whiskey inspired, but I would not have guessed that."
     the_person "Yeah. Sometimes I'll have one, but to make a good one it requires good whiskey. The ones you get with more affordable varieties just aren't as good."
     mc.name "Yes, a quality of many heavy whiskey drinks I think. Well, we seem to be ready for another round?"
     the_person "I umm... I'm kind of out of quarters..."
