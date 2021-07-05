@@ -1,8 +1,8 @@
 init -3 python:
     FETISH_BASIC_OPINION_LIST = ["giving handjobs", "giving tit fucks", "being fingered", "kissing", "masturbating", "big dicks", "getting head", "lingerie"]
-    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "anal creampies", "being submissive", "showing her ass"]
-    FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "taking control", "anal creampies", "creampies"]
-    FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex", "being submissive"]
+    FETISH_ANAL_OPINION_LIST = ["anal sex", "doggy style sex", "anal creampies", "showing her ass"]
+    FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "anal creampies", "creampies"]
+    FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex"]
     FETISH_EXHIBITION_OPINION_LIST = ["public sex", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "skimpy outfits", "skimpy uniforms", "sex standing up" ]
     FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
     FETISH_PRODUCTION_COST = 50    #Production Difficulty
