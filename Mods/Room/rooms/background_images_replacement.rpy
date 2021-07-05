@@ -64,6 +64,7 @@ init -1 python:
     standard_ceo_office_backgrounds = room_background_image("CEO_Office_Background.jpg")
     standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg", darken = False)
     standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
+    standard_coffee_shop_backgrounds = room_background_image("Coffee_Shop_Background.jpg")
     # bedroom backgrounds
     standard_bedroom1_background = room_background_image("Generic_Bedroom1_Background.jpg")
     standard_bedroom2_background = room_background_image("Generic_Bedroom2_Background.jpg")

@@ -339,6 +339,12 @@ init 2:
         add "Paper_Background.png"
         modal True
 
+        frame:
+            background "#ffffff18"
+            xpos 1520
+            ypos 0
+            xysize (400, 1080)
+
         $ renpy.block_rollback()
 
         default fluids_list = [face_cum, mouth_cum, stomach_cum, tits_cum, ass_cum, creampie_cum]
@@ -1061,7 +1067,6 @@ init 2:
                                     viewport:
                                         scrollbars "vertical"
                                         mousewheel True
-                                        yfill True
                                         xfill True
                                         vbox:
                                             spacing 5
@@ -1075,7 +1080,7 @@ init 2:
                                                             SetScreenVariable("selected_from_outfit", cloth),
                                                             SetScreenVariable("category_selected", get_category(cloth)),
                                                             SetScreenVariable("selected_clothing", cloth),
-                                                            Function(preview_apply, cloth),
+                                                            #Function(preview_apply, cloth),
 
                                                             #Function(preview_restore, cloth),
                                                             SetScreenVariable("current_r",cloth.colour[0]),
@@ -1086,14 +1091,15 @@ init 2:
                                                             Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
                                                         ]
                                                         alternate [
+                                                            Function(hide_mannequin),
                                                             Function(item_outfit.remove_clothing, cloth),
                                                             Function(demo_outfit.remove_clothing, cloth),
                                                             Function(preview_outfit)
                                                         ]
                                                         xalign 0.5
                                                         xfill True
-                                                        yfill True
-                                                        text cloth.name xalign 0.5 yalign 0.5 xfill True yfill True style "custom_outfit_style"
+                                                        ysize 34
+                                                        text cloth.name xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
 
                 frame:
                     background "#0a142688"
