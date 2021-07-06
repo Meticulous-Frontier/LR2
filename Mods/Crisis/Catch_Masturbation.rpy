@@ -273,6 +273,68 @@ label SB_caught_masturbating_crisis_label():
                         $ the_person.reset_arousal()
                         "You decide to give [the_person.possessive_title] a chance to recover. You nod at her and then back out of the room."
                         "You finish up your walk and return back to your previous work."
+                    elif the_person.has_anal_fetish():
+                        the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
+                        if not the_person.outfit.vagina_available():
+                            "[the_person.possessive_title] moves her clothes out of the way."
+                            if the_person.outfit.can_half_off_to_vagina():
+                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
+                            else:
+                                "[the_person.possessive_title] begins to pull off her clothes."
+                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
+                        $ mc.change_locked_clarity(50)
+                        $ the_person.break_taboo("bare_pussy")
+                        the_person "Could you just like... stick it in my ass for a bit? I'm trying to masturbate but not getting anywhere with it... you know how much I love it in my ass..."
+                        menu:
+                            "Fuck her ass": # only show sex option if you had sex before
+                                mc.name "Sure, I could spare a few minutes for your ass."
+                                "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
+                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is so wet, your cock is soon nice lubed up."
+                                "When you're ready you move your cock up to her back door. With some gentle pressure, you slip into her well exercised hole."
+                                call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_sex_sb_event_masturbation_30
+                                $ the_report = _return
+                                if the_report.get("girl orgasms", 0) > 1:
+                                    $ the_person.event_triggers_dict["LastAnalFetish"] = day
+                                    "[the_person.possessive_title] is exhausted. She came so hard, it is all she can do to pant and catch her breath."
+                                    $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
+                                else:
+                                    "[the_person.possessive_title] quickly recovers after you finish."
+                                    $ the_person.change_stats(happiness = 3, slut_temp = 3)
+                                    $ the_person.change_happiness(3)
+                                    $ the_person.change_slut_temp(3)
+                                the_person "Mmm, you always know just what I need [the_person.mc_title]"
+                                "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
+                                "You finish up your walk and return back to your previous work."
+
+                            "Just watch":
+                                mc.name "I'm afraid I can't right now, but that's okay, I'm definitely enjoying the view."
+                                "She looks back at you. You can see the hunger in her eyes."
+                                the_person "Ok [the_person.mc_title], but if you change your mind..."
+                                "[the_person.possessive_title] continues rubbing her exposed pussy. Once in a while she peeks back at you to see if you are still watching."
+                                $ the_person.change_arousal(20)
+                                $ mc.change_locked_clarity(10)
+
+                                if the_person.get_opinion_score("public sex") > 0:
+                                    "[the_person.possessive_title]'s cheeks are flush with arousal. She peeks back and stares straight into your eyes as she continues to touch herself."
+                                    the_person "Does it excite you, [the_person.mc_title]? To see me here, touching myself like this...?"
+                                    "You can tell tell she likes having an audience."
+                                    mc.name "Of course, [the_person.title]. And you like having someone here to watch you, don't you?"
+                                    "[the_person.possessive_title] moans. It is clear she enjoys when others watch her doing sexual things..."
+                                    $ the_person.discover_opinion("public sex")
+                                else :
+                                    "[the_person.possessive_title]'s cheeks are flush with arousal. She closes her eyes and concentrates on whatever fantasy she is lost in."
+                                    "Her breathing gets ragged as she nears the finish line."
+                                $ the_person.change_arousal(20)
+                                the_person "Oh fuck... I'm gonna cum!"
+                                $ mc.change_locked_clarity(20)
+                                "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
+                                "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
+                                $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
+                                $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
+                                $ the_person.reset_arousal()
+                                "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
+                                "You finish up your walk and return back to your previous work."
+
                     else: #She is very slutty
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():

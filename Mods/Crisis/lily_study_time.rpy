@@ -246,6 +246,9 @@ label sister_failed_test_label():
                     "She opens the package, then skillfully slides the condom down your penis."
                     the_person "Mmm, now we're ready!"
                     $ mc.condom = True
+                elif the_person.has_breeding_fetish():
+                    "She gives your cock a couple strokes."
+                    the_person "Mmm... its so hard. Do you have a good load saved up for me? I can't wait to feel it splash inside me..."
                 elif the_person.has_taboo("condomless_sex"):
                     the_person "So... I know we've never really done this before but... do you think we could skip the condom?"
                     mc.name "If that is a risk you are willing to take, I'm okay with that [the_person.title]."
