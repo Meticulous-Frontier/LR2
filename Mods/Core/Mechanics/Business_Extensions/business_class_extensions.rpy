@@ -16,6 +16,23 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Business.hr_director = property(get_hr_director, set_hr_director, del_hr_director, "The company HR director position.")
 
+    def get_it_director(self):
+        if not hasattr(self, "_it_director"):
+            self._it_director = None
+        return next((x for x in all_people_in_the_game() if x.identifier == self._it_director), None)
+
+    def set_it_director(self, item):
+        if isinstance(item, Person):
+            self._it_director = item.identifier
+        else:
+            self._it_director = None
+
+    def del_it_director(self):
+        del self._it_director
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Business.it_director = property(get_it_director, set_it_director, del_it_director, "The company IT director position.")
+
     def get_funds_yesterday(self):
         if not hasattr(self, "_funds_yesterday"):
             self._funds_yesterday = 1000 # default start money
@@ -159,6 +176,14 @@ init -1 python:
             cleanup_HR_director_meetings()
 
     Business.fire_HR_director = fire_HR_director
+
+    def fire_IT_director(self):
+        if self.it_director:
+            self.it_director.remove_role(IT_director_role)
+            self.it_director = None
+            #cleanup_HR_director_meetings()
+
+    Business.fire_IT_director = fire_IT_director
 
 
     # wrap default remove_employee function to also trigger the fire_HR_director code when needed

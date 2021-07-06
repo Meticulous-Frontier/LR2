@@ -274,11 +274,11 @@ init -1 python:
         return
 
     def market_photo_filter_project_on_apply():
-        mc.businessself.add_sales_multiplier("Photo Filters", 1.05)
+        mc.business.add_sales_multiplier("Photo Filters", 1.05)
         return
 
     def market_photo_filter_project_on_remove():
-        mc.businessself.remove_sales_multiplier("Photo Filters", 1.05)
+        mc.business.remove_sales_multiplier("Photo Filters", 1.05)
         return
 
     def production_equipment_selftest_project_on_day():

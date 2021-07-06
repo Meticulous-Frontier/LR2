@@ -10,7 +10,7 @@
 
 init 2 python:
     def ellie_mod_initialization():
-        ellie_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
+        ellie_wardrobe = wardrobe_from_xml("Ellie_Wardrobe")
         ellie_base_outfit = Outfit("ellie's base accessories")
         the_eye_shadow = heavy_eye_shadow.get_copy()
         the_eye_shadow.colour = [.71, .4, .85, 0.5]
@@ -60,21 +60,26 @@ init 2 python:
 init -2 python: #Requirement Functions
 
     def ellie_start_intro_note_requirement():
-        return False    #Disabled for now
         if fetish_serum_unlock_count() >= 2 and get_fetish_basic_serum().mastery_level > 3.0 and mc.business.head_researcher:
             if time_of_day == 2 and day%7 == 2 and mc.is_at_work():
                 return True
         return False
+
     def ellie_meet_ellie_intro_requirement():
-        return False
+        if time_of_day == 4 and day%7 == 3:
+            return True
+
     def ellie_head_researcher_halfway_intro_requirement():
-        return False
+        if time_of_day == 3 and day%7 == 0:
+            return True
     def ellie_unnecessary_payment_requirement():
         return False
     def ellie_end_blackmail_requirement():
-        return False
+        if time_of_day == 4 and day%7 == 3:
+            return True
     def ellie_work_welcome_requirement():
-        return False
+        if time_of_day == 0 and day%7 == 4:
+            return True
     def ellie_never_been_kissed_requirement():
         return False
     def ellie_kiss_followup_requirement():
@@ -96,6 +101,10 @@ init -2 python: #Requirement Functions
 
 init -1 python:
     ellie_start_intro_note = Action("Blackmail Note", ellie_start_intro_note_requirement, "ellie_start_intro_note_label")
+    ellie_meet_ellie_intro = Action("Meet Your Blackmailer", ellie_meet_ellie_intro_requirement, "ellie_meet_ellie_intro_label")
+    ellie_head_researcher_halfway_intro = Action("Blackmailer Identity", ellie_head_researcher_halfway_intro_requirement, "ellie_head_researcher_halfway_intro_label")
+    ellie_end_blackmail = Action("End Blackmail", ellie_end_blackmail_requirement, "ellie_end_blackmail_label")
+    ellie_work_welcome = Action("Hire Ellie", ellie_work_welcome_requirement, "ellie_work_welcome_label")
 
 label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher
@@ -128,6 +137,7 @@ label ellie_start_intro_note_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and leaves your office. This is a precarious situation, and you can't help but worry about it."
     $ clear_scene()
+    $ mc.business.add_mandatory_crisis(ellie_meet_ellie_intro)
     #TODO link next scene.
     return
 
@@ -152,7 +162,7 @@ label ellie_meet_ellie_intro_label():
     "The first thing you notice is the heavy southern twang in her accent. Secondly, it is heavily feminine. A southern woman is blackmailing you? It catches you completely off gaurd."
     ellie "You got cash?"
     mc.name "Yeah, although the note failed to mention exactly how much you were expecting."
-    eliie "I'm figurin a million dollars in cold hard cash."
+    ellie "I'm figurin a million dollars in cold hard cash."
     "You pause. She can't be serious? If she knows anything about your business, she has to know you have no way of pulling that kind of liquidity."
     mc.name "I'm sorry, my business is just founded, and I don't have the ability to pull that much, especially on such short notice."
     ellie "Ah lordie help me. Hmm. How about this. You give me some cash now as a show of good faith, and we'll meet again next week and you kin give me the money then."
@@ -167,7 +177,7 @@ label ellie_meet_ellie_intro_label():
     ellie "Same time next week."
     "The mysterious blackmailer turns and quickly leaves the alley. You stand there observing her until she turns the corner, when you turn around and leave the alley."
     $ clear_scene()
-    "Once you are a safe distance away from the alley, you pull out your phone and text [the_person.possesive_title])."
+    "Once you are a safe distance away from the alley, you pull out your phone and text [the_person.possessive_title])."
     $ mc.start_text_convo(the_person)
     mc.name "Hey, meet me at the bar. We have a lot to talk about."
     the_person "Okay, see you there"
@@ -202,13 +212,14 @@ label ellie_meet_ellie_intro_label():
     mc.name "I don't know why, but I feel a lot better about this whole thing. If we can figure out who she is, maybe we can come up with an alternative solution."
     the_person "Err... you don't mean like... 'taking care of her' do you?"
     mc.name "Of course not! But there may be other things we can do about this, I think."
-    "With your business concluded, you and [the_person.possesive_title] part ways."
+    "With your business concluded, you and [the_person.possessive_title] part ways."
     $ clear_scene()
+    $ mc.business.add_mandatory_crisis(ellie_head_researcher_halfway_intro)
     return
 
 label ellie_head_researcher_halfway_intro_label():
     $ the_person = mc.business.head_researcher
-    "You feel your phone vibrate in your pocket. its [the_person.possesive_title]"
+    "You feel your phone vibrate in your pocket. its [the_person.possessive_title]"
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
     mc.name "I'll be right there."
@@ -225,7 +236,7 @@ label ellie_head_researcher_halfway_intro_label():
     the_person "The company came down hard on a relatively new person. A woman they had hired about a year ago. A fresh computer science college graduate from University of Alabama..."
     mc.name "Ahhhhh"
     the_person "He sent me her basic details..."
-    "[the_person.possesive_title] hands you a dossier she has put together on this person. The first thing you notice is her red hair."
+    "[the_person.possessive_title] hands you a dossier she has put together on this person. The first thing you notice is her red hair."
     the_person "[ellie.name] [ellie.last_name]. Redhead, souther computer expert."
     mc.name "It's perfect. What happened with her employer?"
     the_person "She got fired. The kicker is, she signed a 5 year non-compete contract when she got hired, and so the company threatened her with lawsuit if she tries to get a job in her field."
@@ -245,10 +256,11 @@ label ellie_head_researcher_halfway_intro_label():
     mc.name "Alright. Next time I meet with her, I'll consider trying to hire her. If nothing else, maybe I can atleast scare her off."
     the_person "Okay. Let me know if there is anything else I can help out with, [the_person.mc_title]!."
     $ clear_scene()
-    "[the_person.possesive_title] gets up and leaves you a lone in your office."
+    "[the_person.possessive_title] gets up and leaves you a lone in your office."
     "You meet again with [ellie.name] on Thursday night. You feel like you could definitely hire her."
     "WARNING: If you want to hire [ellie.name], make sure you have an open employee position! You may miss the opportunity to hire her if you don't!"
     #TODO link up next event.
+    $ mc.business.add_mandatory_crisis(ellie_end_blackmail)
     return
 
 label ellie_unnecessary_payment_label():    #Use this scene each week if MC can't find out info on Ellie for some reason (head researcher fired, etc)
@@ -302,20 +314,44 @@ label ellie_end_blackmail_label():
     mc.name "I run a small company. We all know each other. I could make your official position be in HR, but you could run IT projects for me on the side. Your prior employer doesn't need to know."
     mc.name "I'll match your previous salary plus ten percent. And if you decide to move on, I'll give you a proper reference."
     "She seems skeptical, but agrees."
-    the_person "Okay... Let's see I decide I want to try it out."
+    the_person "Okay... Let's say I decide I want to try it out."
     mc.name "Come on out to the business tomorrow morning. I'll show you around, give you a chance to settle in, and then you can think about it over the weekend."
     the_person "Okay mister. I'll come out tomorrow and y'all can show me the ropes."
-    mc.name ""
+    mc.name "That's all I ask. I think you'll fit right in."
+    $ the_person.set_possessive_title("Your IT Girl")
+    $ the_person.set_title(the_person.name)
+    $ the_person.set_mc_title(mc.name)
+    "You exchange some information with [the_person.title]. You feel pretty certain she'll decide to stick around."
+    $ mc.business.add_mandatory_crisis(ellie_work_welcome)
     return
 
 label ellie_work_welcome_label():
-    "You meet with Ellie early the next monday. You show her around your company. She's still nervous, but thinks it is quaint."
-    "You ask her if she has a department preference. TODO figure out a dept skill set for her."
-    "You can either let her go to her choice (happy) or pick something different (obedient)."
-    "You also give her the rundown on the nanobot program. She very intrigued on the direction the program is going."
-    "You ask her if she would be willing to work on it for you. She says if you give her time to work on it she can see what she can do."
-    "If you let her work on it, she will be in R&D instead of her dept, and doesn't contribute to overall company production."
-    "However, you can use her to bypass Head researchers contact for developing new nanobot programs and she can also improve existing programs."
+    $ the_person = ellie
+    "You head into work a bit early. You are meeting [the_person.title], who you are hoping will be your new IT girl."
+    $ ceo_office.show_background()
+    "Shortly after you arrive, you hear a knock on your office door."
+    mc.name "Come in."
+    $ the_person.draw_person()
+    the_person "Hello. I'm here..."
+    mc.name "[the_person.title]! I'm glad you came. I wasn't sure if you would show up or not. Please come in."
+    "Sheepishly, [the_person.title] steps inside your office, walks over and sits down across from you at your desk."
+    $ the_person.draw_person(position = "sitting")
+    mc.name "So, basically, this is a small company, as you know. I'd love to bring you onboard and have you primarily running cybersecurity / IT projects."
+    mc.name "However, I'm not sure that, due to the size of the company, I'll be able to keep you busy full time with those projects, so when you have down time, I'll assign you to the HR department."
+    mc.name "We'll make HR department your official job position, with the other projects on side. How does that sound?"
+    the_person "Well... that sounds okay I guess. What kind of security do you currently have in place?"
+    mc.name "Ah, well... we have a fairly short policy book..."
+    the_person "Lordie. You don't have any kind of safety measures in place?"
+    mc.name "Its a small business..."
+    the_person "Alright. Tell you what, I'll look things over today and I'll see what I can do. I'll do some research over the weekend and on Monday I'll let you know what I decide."
+    mc.name "Deal! Why don't we get your onboarding paperwork complete?"
+    the_person "Okay."
+    $ mc.business.hire_person(the_person, "HR")
+    $ mc.business.it_director = the_person
+    $ mc.business.it_director.IT_tags = {}
+    #$ mc.business.hr_director.HR_unlocks = {}
+    $ mc.business.it_director.add_role(IT_director_role)
+
     return
 
 label ellie_never_been_kissed_label():  #This is Ellies 20 sluttiness event.
