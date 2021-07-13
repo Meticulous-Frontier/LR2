@@ -7,7 +7,7 @@ init 2: # Need to allow for None name roles in this screen as well.
         default market_base = the_person.charisma*3 + the_person.market_skill*2 + the_person.focus + 10
         default research_base = the_person.int*3 + the_person.research_skill*2 + the_person.focus + 10
         default prod_base = the_person.focus*3 + the_person.production_skill*2 + the_person.int + 10
-        default supply_base = the_person.focus*3 + the_person.supply_skill*2 + the_person.charisma + 10
+        default supply_base = the_person.focus*5 + the_person.supply_skill*3 + the_person.charisma*3 + 20
         default dict_work_skills = get_work_skills()
         default dict_sex_skills = get_sex_skills()
         default dict_main_skills = get_main_skills()
