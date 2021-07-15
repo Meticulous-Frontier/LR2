@@ -31,8 +31,7 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
-
-        excluded_roles = ["casual_hotwife_role", "casual_FA_role", "stripper_role", "waitress_role", "bdsm_performer_role", "manager_role", "mistress_role", "candace_role", "college_intern_role"]
+        excluded_roles = ["stripper_role", "waitress_role", "bdsm_performer_role", "manager_role", "mistress_role", "candace_role", "college_intern_role"]
         for role in excluded_roles:
             if role in globals():
                 if person.has_role(globals()[role]):
