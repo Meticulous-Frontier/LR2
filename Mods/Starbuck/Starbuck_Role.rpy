@@ -2657,7 +2657,7 @@ label starbuck_intro():
             mc.name "Hello."
             $ title_choice = get_random_title(the_person)
             $ formatted_title = the_person.create_formatted_title(title_choice)
-            the_person "Let me introduce myself, i am [formatted_title]."
+            the_person "Let me introduce myself, I am [formatted_title]."
             $ the_person.set_title(title_choice)
             $ the_person.set_possessive_title(get_random_possessive_title(the_person))
             "She holds her hand out to shake yours."
