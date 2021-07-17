@@ -51,3 +51,10 @@ init -1 python:
             self.actions.remove(act)
 
     Role.remove_action = remove_action
+
+    def get_parent_role(self):
+        if self.looks_like:
+            return self.looks_like[0]
+        return None
+
+    Role.parent_role = property(get_parent_role, None, None, "First looks like role, revisit when needed.")

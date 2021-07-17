@@ -1484,11 +1484,14 @@ init -1 python:
 
     def has_role(self, role):
         if isinstance(role, basestring):
-            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None \
+                or not find_in_list(lambda x: x.parent_role and x.parent_role.role_name == role, self.special_role) is None
         elif isinstance(role, list):
-            return any(x in self.special_role for x in role)
+            return any(x in self.special_role for x in role) \
+                or any(x.parent_role in self.special_role for x in role)
         else:
-            return role in self.special_role
+            return role in self.special_role \
+                or role.parent_role in self.special_role
     Person.has_role = has_role
 
     def add_role(self, role):
