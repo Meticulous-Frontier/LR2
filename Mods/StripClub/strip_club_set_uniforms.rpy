@@ -16,5 +16,10 @@ label activate_strip_club_set_uniforms_label(stack):
     return
 
 label strip_club_set_uniforms_label():
-    call screen import_outfit_manager(mc.designed_wardrobe, None, False, 999, 999, True)
-    return
+    call screen stripclub_uniform_manager()
+    if _return == "Add":
+        call outfit_master_manager() from _call_outfit_master_manager_strip_club_set_uniforms #TODO: Decide if we need to pass this the uniform peramiters, of if we do that purely in what's selectable.
+        if isinstance(_return, Outfit):
+            $ mc.business.stripclub_uniforms.append(StripClubOutfit(_return))
+        jump strip_club_set_uniforms_label
+    return    

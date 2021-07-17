@@ -106,13 +106,69 @@ init -1 python:
 
     Business.mistress_wardrobe = property(get_business_mistress_wardrobe, None, None, "Instance of mistress wardrobe")
 
-    def get_business_stripclub_wardrobe(self):
-        if not hasattr(self, "_stripclub_wardrobe"):
-            self._stripclub_wardrobe = stripclub_wardrobe.merge_wardrobes(waitress_wardrobe).merge_wardrobes(BDSM_performer_wardrobe).merge_wardrobes(manager_wardrobe).merge_wardrobes(mistress_wardrobe)
-        return self._stripclub_wardrobe
+    def get_business_stripclub_uniforms(self):
+        def parse_wardrobe_to_uniform(wardrobe, flag_func):
+            for outfit in wardrobe.outfits:
+                uniform = StripClubOutfit(outfit)
+                uniform.set_full_outfit_flag(True)
+                getattr(uniform, flag_func)(True)
+                mc.business._stripclub_uniforms.append(uniform)
 
-    Business.stripclub_wardrobe = property(get_business_stripclub_wardrobe, None, None, "Instance of total stripclub wardrobe")
+            for outfit in wardrobe.overwear_sets:
+                uniform = StripClubOutfit(outfit)
+                uniform.set_overwear_flag(True)
+                getattr(uniform, flag_func)(True)
+                mc.business._stripclub_uniforms.append(uniform)
 
+            for outfit in wardrobe.underwear_sets:
+                uniform.set_underwear_flag(True)
+                getattr(uniform, flag_func)(True)
+                mc.business._stripclub_uniforms.append(uniform)
+            return
+
+        if not hasattr(self, "_stripclub_uniforms"):
+            self._stripclub_uniforms = []
+
+            parse_wardrobe_to_uniform(stripclub_wardrobe, "set_stripper_flag")
+            parse_wardrobe_to_uniform(waitress_wardrobe, "set_waitress_flag")
+            parse_wardrobe_to_uniform(BDSM_performer_wardrobe, "set_bdsm_flag")
+            parse_wardrobe_to_uniform(manager_wardrobe, "set_manager_flag")
+            parse_wardrobe_to_uniform(mistress_wardrobe, "set_mistress_flag")
+
+        return self._stripclub_uniforms
+
+    Business.stripclub_uniforms = property(get_business_stripclub_uniforms, None, None, "Instance of total stripclub uniforms.")
+
+    def update_stripclub_wardrobes(self):
+        def update_stripclub_uniform(wardrobe, uniform):
+            if uniform.full_outfit_flag:
+                wardrobe.add_outfit(uniform.outfit)
+            if uniform.overwear_flag:
+                wardrobe.add_overwear_set(uniform.outfit)
+            if uniform.underwear_flag:
+                wardrobe.add_underwear_set(uniform.outfit)
+            return
+
+        self.stripper_wardrobe.clear_wardrobe()
+        self.waitress_wardrobe.clear_wardrobe()
+        self.bdsm_wardrobe.clear_wardrobe()
+        self.manager_wardrobe.clear_wardrobe()
+        self.mistress_wardrobe.clear_wardrobe()
+
+        for uniform in self.stripclub_uniforms:
+            if uniform.stripper_flag:
+                update_stripclub_uniform(self.stripper_wardrobe, uniform)
+            if uniform.waitress_flag:
+                update_stripclub_uniform(self.waitress_wardrobe, uniform)
+            if uniform.bdsm_flag:
+                update_stripclub_uniform(self.bdsm_wardrobe, uniform)
+            if uniform.manager_flag:
+                update_stripclub_uniform(self.manager_wardrobe, uniform)
+            if uniform.mistress_flag:
+                update_stripclub_uniform(self.mistress_wardrobe, uniform)
+        return
+
+    Business.update_stripclub_wardrobes = update_stripclub_wardrobes
 
     def hire_person(self, person, target_division, add_to_location = False):
         div_func = {
