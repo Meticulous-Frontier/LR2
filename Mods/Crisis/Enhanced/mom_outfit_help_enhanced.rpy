@@ -315,7 +315,7 @@ label mom_outfit_help_crisis_label_enhanced():
     the_person "Thank you so much for the help [the_person.mc_title]. I don't know why but I've been feeling much more unsure about the way I dress lately."
     mc.name "Any time, I'm just glad to help."
     if the_person.effective_sluttiness(["touching_penis", "sucking_cock"]) > 50:
-        the_person "Is there any I could show you how thankful I am? You are such a helpful son..."
+        the_person "Is there anything I could do to show you how thankful I am? You are such a helpful son..."
         if mc.energy < 50:
             mc.name "I'm sure you could think of something, but honestly I'm exhausted. I think I'll just head for bed."
             the_person "Of course honey. Have a good night!"
