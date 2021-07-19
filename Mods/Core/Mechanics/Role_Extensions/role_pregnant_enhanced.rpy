@@ -101,7 +101,7 @@ init 2 python:
 
             random = renpy.random.randint(12,18)
             preg_announce_action = Action("Pregnancy Announcement", (preg_announce_requirement if not bugfix_installed else pregnant_announce_requirement), target_label, requirement_args = day + random)
-            person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, (5 * random) + 12))
+            person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, random + 14))
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
             person.event_triggers_dict["preg_knows"] = True
