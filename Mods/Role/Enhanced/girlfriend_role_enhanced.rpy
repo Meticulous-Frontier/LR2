@@ -86,6 +86,10 @@ label activate_girlfriend_role_enhancement(stack):
     python:
         girlfriend_role.add_action(girlfriend_sleepover_action)
         girlfriend_role.add_action(girlfriend_underwear_shopping)
+
+        sister_girlfriend_role.add_action(girlfriend_underwear_shopping)
+        mom_girlfriend_role.add_action(girlfriend_underwear_shopping)
+
         execute_hijack_call(stack)
     return
 
@@ -562,7 +566,7 @@ label girlfriend_underwear_shopping_label(the_person):
                     $ the_person.event_triggers_dict["student_lingerie"] = lingerie_outfit
                     the_person "Ahhh, oh teacher? I'm sorry I forgot to study! What can I do to pass this class?"
                     mc.name "You've got exactly the right idea."
-                "Roleplay: My ditzy stepsister":
+                "Roleplay: My ditzy stepsister" if not the_person.has_role(sister_girlfriend_role):
                     $ the_person.event_triggers_dict["stepsister_lingerie"] = lingerie_outfit
                     if the_person.get_opinion_score("incest") > 0:
                         the_person "Oh! That sounds hot... What are you going to do to me... step bro?"
