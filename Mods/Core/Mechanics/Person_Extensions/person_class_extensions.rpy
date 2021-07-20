@@ -1602,13 +1602,17 @@ init -1 python:
     Person.should_wear_uniform = should_wear_uniform_enhanced
 
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
-        self.outfit.remove_all_cum()
-        if self.should_wear_uniform():
-            self.wear_uniform() # Reset uniform
-        elif self.outfit.slut_requirement > self.sluttiness:
+        if not self.has_cum_fetish():
+            self.outfit.remove_all_cum()
+
+        if (self.should_wear_uniform() and not self.is_wearing_uniform()) \
+            or (self.outfit.slut_requirement > self.sluttiness):
             self.apply_planned_outfit()
+            if draw_person:
+                self.draw_person()            
             if dialogue:
                 self.call_dialogue("clothing_review") # must be last call in function
+        return
 
     Person.review_outfit = review_outfit_enhanced
 
