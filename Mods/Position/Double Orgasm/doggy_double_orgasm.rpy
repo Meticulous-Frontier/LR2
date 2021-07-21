@@ -48,7 +48,6 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                     $ the_girl.change_love(-5)          #She loses trust
                     "You planted your seed inside of [the_girl.possessive_title], but it is clear she isn't happy about it."
                 "You slowly pull out of [the_girl.title]. Your cum is dripping down her leg as you sit back."
-                $ stealth_orgasm = False                #MAke sure we set this to false so next sex session doesn't get confused
             elif mc.condom:
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans as you dump your load into her, barely contained by your condom."
                 the_girl "Oh god cum with me!"
@@ -66,7 +65,6 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                     the_girl "Look at all that cum. Well done."
                 "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
             else:
-                $ stealth_orgasm = False
                 "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
                 the_girl "Oh god cum with me!"
                 "You can feel her pussy quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's pulling it deep into her womb."
@@ -78,7 +76,6 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 "You slowly pull out of [the_girl.possessive_title]. Your cum is dripping down her leg as you sit back."
 
         "Cum on her ass":
-            $ stealth_orgasm = False
             if mc.condom:
                 "You pull out of [the_girl.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."
             else:
