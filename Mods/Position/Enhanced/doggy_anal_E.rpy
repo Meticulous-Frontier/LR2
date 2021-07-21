@@ -27,7 +27,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                      "[the_girl.possessive_title] seems to be enjoying the anal penetration a bit more now that she is touching herself."
             "Fuck me with your ass":
                  if the_girl.obedience > 130 or the_girl.get_opinion_score("being submissive") > 0:
-                     the_girl "Yes sir. I'll do my best"
+                     the_girl "Yes sir. I'll do my best."
                  else:
                      the_girl "I'll give it my best, but this better be worth it..."
                  "[the_girl.possessive_title] slowly eases forward until just the tip remains inside, then slowly backs her ass back onto you. She is trying to obey but you can tell she is struggling to take you."

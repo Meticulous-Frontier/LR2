@@ -101,7 +101,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
                 "[the_girl.title] throws her ass back against you hard, forcing you deep."
                 the_girl "You better put it in deep! I need your seed planted as deep as it will go!"
                 "You grab her hips and take control back, resuming fucking her."
-                mc.name "Don't worry bitch, you'll get it when its time."
+                mc.name "Don't worry bitch, you'll get it when it's time."
             "You put your hands on her hips and continue fucking her."
 
         "Play with her clit":
@@ -207,7 +207,7 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
                 $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") + mc.sex_skills["Anal"])
                 "You slowly give her a long, deliberate stroke, pushing your cock and finger into her at the same time."
                 "With your shaft buried inside her, you start to stroke yourself with your finger in her ass. An odd but very pleasurable feeling."
-                "[the_girl.title] starts to get impatient and begins to move her hips forward and back. It feels so good, soon your are matching her."
+                "[the_girl.title] starts to get impatient and begins to move her hips forward and back. It feels so good, soon you are matching her."
                 "You speed up and start to really pound her, her moans increasing in pitch from the double penetration."
                 "Soon though, you feel the urge to really give it to her, so you pull your finger out so you can grab both her hips and fuck her rough."
 
@@ -259,14 +259,14 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
         $ bent_over_breeding.redraw_scene(the_girl)
         if the_girl.has_breeding_fetish():
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."
-            the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
+            the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god it's so good..."
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
         elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
             the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.knows_pregnant():
-            the_girl "Its nice, already being pregnant, I can take a load like that anytime..."
+            the_girl "It's nice, already being pregnant, I can take a load like that anytime..."
         elif the_girl.wants_creampie() or the_girl.get_opinion_score("bareback sex") > 0:
             the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."

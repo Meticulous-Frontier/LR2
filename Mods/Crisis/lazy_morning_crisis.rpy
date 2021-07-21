@@ -38,9 +38,9 @@ label lazy_morning_crisis_action_label:
     elif the_person is aunt:
         the_person "I'm sorry, I didn't realize you weren't up yet!"
     elif the_person is cousin:
-        the_person "Wow, I can't believe you're still sleeping. Up late beating off to crazy porn or something, ya perv?."
+        the_person "Wow, I can't believe you're still sleeping. Up late beating off to crazy porn or something, ya perv?"
     else:
-        the_person "I'm sorry [the_person.mc_title], I forgot its the weekend!"
+        the_person "I'm sorry [the_person.mc_title], I forgot it's the weekend!"
 
     "She looks at you for a minute as she decides what to do."
     if the_person.sluttiness < 30: #Not slutty, she excuses herself.
@@ -66,9 +66,9 @@ label lazy_morning_crisis_action_label:
         if the_person is mom:
             the_person "I remember when it used to be you... climbing in to my bed in the middle of the night, scared from a bad dream."
         elif the_person is lily:
-            the_person "God why is my brother so comfortable?"
+            the_person "God, why is my brother so comfortable?"
         elif the_person is aunt:
-            the_person "Its just nice, cuddling up with someone once in a while. My husband hadn't done anything like that in years before I left him..."
+            the_person "It's just nice, cuddling up with someone once in a while. My husband hadn't done anything like that in years before I left him..."
         elif the_person is cousin:
             the_person "Keep your hands above the clothing there now."
         else:                           #Someone else someday? A live in girlfriend maybe?
@@ -94,7 +94,7 @@ label lazy_morning_crisis_action_label:
         else:
             the_person "Having pleasant dreams when I woke you up?"
             "You feel her hand on your stomach and she starts to move it downwards. When she reaches your underwear, her hand goes between your skin and the band and you gasp when she grasps your cock."
-        the_person "God its so hard..."
+        the_person "God it's so hard..."
         $ mc.change_locked_clarity(30)
         "Her hand stroking your cock feels great, but soon you decide to make the pleasure mutual."
         if the_person.outfit.tits_visible():
@@ -138,7 +138,7 @@ label lazy_morning_crisis_action_label:
             "As she cuddles with you, her leg moves up and across your body. Soon her thigh is laying across your groin, your morning wood eagerly poking against her leg."
             the_person "Ohh... having pleasant dreams before I woke you up?"
         elif the_person is lily:
-            the_person "I swear, you must be the most comfortable person on earth. You're kinda weird, but its nice to be close to you like this bro..."
+            the_person "I swear, you must be the most comfortable person on earth. You're kinda weird, but it's nice to be close to you like this bro..."
             "As she cuddles with you, her leg moves up and across your body. Soon her thigh is laying across your groin, your morning wood eagerly poking against her leg."
             the_person "Oh wow... you must have been having some good dreams when I woke you up!"
         elif the_person is aunt:
@@ -157,9 +157,9 @@ label lazy_morning_crisis_action_label:
         the_person "Hmm... what do you say we start the day out right?"
         "[the_person.title] moves her leg back and take her arm off you. You feel her rustling around under the covers... removing some clothes?"
         $ the_person.outfit.strip_to_vagina()
-        "Her hand comes back to your body, snaking its way down until its on your cock."
+        "Her hand comes back to your body, snaking its way down until it's on your cock."
         "She tugs at your shorts and you lift your butt up, letting her pull your clothes off easily. Her hand quickly returns to your morning wood, giving it a couple strokes."
-        the_person "Mmm... its so hard... I want to taste it!"
+        the_person "Mmm... it's so hard... I want to taste it!"
         mc.name "Why don't you hop on top of me and let me get a taste of you at the same time."
         the_person "Mmm... that sounds nice..."
         $ the_person.draw_person(position = "doggy")

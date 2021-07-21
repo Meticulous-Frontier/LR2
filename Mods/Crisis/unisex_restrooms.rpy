@@ -435,7 +435,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "The tone of voice on the other side of the wall has you a little bit concerned. Maybe this was a bad idea?"
 
     if the_person.has_taboo("touching_penis"):
-        anon_char "Its so big, do you mind if I touch it?"
+        anon_char "It's so big, do you mind if I touch it?"
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
@@ -443,7 +443,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
 
     $ mc.change_locked_clarity(20)
     "You give an appreciative moan as the soft hand starts to slowly work your cock."
-    anon_char "Ohhh... its so big..."
+    anon_char "Ohhh... it's so big..."
     "The hand is warm and soft as it slides up and down your cock. Suddenly you feel it leave you, and you can her the sound of her spitting."
     "A considerably more slippery hand starts to stroke you again. You buck your hips a bit against the sensation."
     "This feels good, you can feel yourself really getting into this. Having no idea who is next door really heightens your arousal."
@@ -514,7 +514,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "Sounds like your bathroom stall neighbor is taking the bait."
 
     if the_person.has_taboo("touching_penis"):
-        anon_char "Its so big, do you mind if I touch it?"
+        anon_char "It's so big, do you mind if I touch it?"
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
@@ -539,7 +539,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
     "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
     #TODO determine if she finishes or not. For now she always finishes with MC.
-    "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
+    "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop!"
     "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
     "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
@@ -567,7 +567,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     #$ anon_char.name = "?????"
 
     if the_person.has_taboo("touching_penis"):
-        anon_char "Its so big, do you mind if I touch it?"
+        anon_char "It's so big, do you mind if I touch it?"
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
@@ -596,7 +596,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     anon_char "Oh fuck its good. Mmmmm"
     "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
     "You are thrusting vigorously now. Her ass is so tight, it's like it it is trying to milk the cum out of you."
-    "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
+    "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop!"
     "You feel yourself getting ready to nut. The urge to bury your cum deep in whoever this girl is ass is too strong."
     "Her ass is quivering all around you. Your penetration is making her finish too!"
@@ -676,7 +676,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
             "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
 
-            "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
+            "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
             anon_char "Oh god don't stop, please don't stop!"
             "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
             "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."

@@ -936,7 +936,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
         # TODO: add watchers to threesome core
         if not ask_for_threesome and willing_to_threesome(the_person, the_watcher):
             $ the_watcher.draw_person()
-            the_watcher "Oh my good, that looks amazing..."
+            the_watcher "Oh my god, that looks amazing..."
             if can_join_threesome(the_watcher, the_person, the_position.position_tag):
                 the_watcher "Can I... can I join you? I want some too!"
                 $ ask_for_threesome = True

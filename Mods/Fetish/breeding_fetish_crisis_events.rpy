@@ -220,7 +220,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                     "Her cream is sweet and plentiful. You suckle her for a long while before the flow starts to slow down."
                     the_person "ohhh, [the_person.mc_title] that felt so good. Can you, you know, do the other one too?"
                     mc.name "Mmm, certainly."
-                    "You switch sides and begin to suckle again. Almost immediately her milk flows forcefully"
+                    "You switch sides and begin to suckle again. Almost immediately her milk flows forcefully."
                     the_person "Ahh! Oh my god..."
                     $ the_person.change_arousal(30)
                     "Her cream just keeps flowing. It's a delicious treat that restores some of your energy."

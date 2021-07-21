@@ -38,7 +38,7 @@ label intro_standing_dildo(the_girl, the_location, the_object):
         if the_girl.sluttiness > 40: #She is excited.
             the_girl "Oh! That looks like fun..."
         else:
-            the_girl "Oh my god, its so big! I don't know about this..."
+            the_girl "Oh my god, it's so big! I don't know about this..."
             mc.name "Don't worry, I'll go slow."
 
         "You get down on your knees in front of her. You bring the dildo up to her pussy, and she spreads her legs to give you easier access."

@@ -199,7 +199,7 @@ label family_morning_breakfast_enhanced_label():
             $ lily.change_slut_temp(3)
             $ mom.change_happiness(5)
             $ scene_manager.update_actor(mom, position = "sitting")
-            "[mom.possessive_title] gives everyone a plate and sits down. [lily.title] eventually gets used to her mothers outfit and joins in on your conversation."
+            "[mom.possessive_title] gives everyone a plate and sits down. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."
             "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
 

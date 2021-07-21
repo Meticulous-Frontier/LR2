@@ -649,7 +649,7 @@ label quest_cuckold_employee_gloryhole_label():
     "Actually... her voice sounds an awful lot like... [the_person.title]? Wasn't she asking you to knock her up the other day?"
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
     "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
-    "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as your are!"
+    "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop! Cum inside me please!!!"
     "This is just too much of a coincidence. Surely this is [the_person.title]! Should you give in and seed her? Or pull out?"
     menu: #The illusion of choice lol
@@ -819,7 +819,7 @@ label breeding_stock_anal_sex_taboo_break(the_person):
 
 label breeding_stock_sex_responses_vaginal(the_person):
     if mc.condom:
-        the_person "Mmm, your cock feel good inside me, but you know what would be better? If we took off that awful condom."
+        the_person "Mmm, your cock feels good inside me, but you know what would be better? If we took off that awful condom."
         if the_person.knows_pregnant():
             the_person "I mean, I'm already pregnant! What's the harm in going bare?"
         else:
@@ -835,7 +835,7 @@ label breeding_stock_sex_responses_vaginal(the_person):
             "Leave it on":
                 mc.name "Sorry, I think this should stay on for now."
                 "She gives you a pouting face."
-                the_person "You know I'm just going to keep asking right?"
+                the_person "You know I'm just going to keep asking, right?"
 
     else:
         the_person "Keep fucking me [the_person.mc_title], it feels fantastic!"
@@ -851,7 +851,7 @@ label breeding_stock_cum_vagina(the_person):
             the_person "Oh fuck, it's so warm. I can feel it inside me..."
             "She sighs happily as you cum inside her."
         elif the_person.is_pregnant():
-            the_person "Mmm, it's so warm... its feels so good, just like the load that knocked me up!"
+            the_person "Mmm, it's so warm... it feels so good, just like the load that knocked me up!"
         else:
-            the_person "Oh my good its sooo good. Come on little swimmers, knock me up!"
+            the_person "Oh my god it's sooo good. Come on little swimmers, knock me up!"
     return

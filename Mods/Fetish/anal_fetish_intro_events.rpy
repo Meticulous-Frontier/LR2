@@ -225,7 +225,7 @@ label anal_fetish_employee_intro_label(the_person):
     "You start to pull your cock out. Still recovering, [the_person.title] takes a moment to register your words."
     the_person "Ah... yeah... on your... what?"
     "Once you pull it out, you smack her ass cheeks back and forth with it a couple times."
-    the_person "Oh! Yeah but... [the_person.mc_title] its so big... I'm not sure..."
+    the_person "Oh! Yeah but... [the_person.mc_title], it's so big... I'm not sure..."
     mc.name "Shhh. Don't worry, I'll give you some time to adjust before I fuck your backdoor raw."
     "[the_person.title] submissively whimpers, but doesn't protest any further. Instead, she leans forward a little farther, preparing herself to get fucked."
     "When you're ready you push forward. Her back passage slowly accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
@@ -462,7 +462,7 @@ label anal_fetish_generic_intro_label(the_person):
     "You run the tip of your saliva soaked meat all around her puckered hole, then start to push. She mewls as you start to push it in."
     "Slow and steady, you push yourself in until you are completely bottomed out in her bottom."
     $ the_person.change_arousal (15) #105
-    the_person "Oh my god... its so big! Oh [the_person.mc_title] its so good!"
+    the_person "Oh my god... it's so big! Oh [the_person.mc_title], it's so good!"
     $ the_person.have_orgasm(half_arousal = True)
     "[the_person.possessive_title]'s ass is twitching wildly all around you as she orgasms. You hold her hips tight and in place with both hands as her body quivers."
     "It feels amazing to have her body gripping you as she cums."
