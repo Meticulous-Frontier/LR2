@@ -321,7 +321,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         mc.name "So... tonight at your place? I'll see you there?"
         the_person "Sounds good. See you then, [the_person.mc_title]."
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her husband
-        the_person "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, its nice to have a break from fucking and just enjoy a stiff drink."
+        the_person "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, it's nice to have a break from fucking and just enjoy a stiff drink."
         mc.name "Yeah, so is [the_person.SO_name] still enjoying your new lifestyle?"
         the_person "Oh god, we both are. I've started fucking around with a couple other guys too. Last time I came home, he tied me up and umm... reclaimed me in every hole he could fit it in..."
         mc.name "Damn! That sounds hot!"
@@ -598,7 +598,7 @@ label casual_hotwife_dancing_sex_label(the_person):
                 "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
             else:       #We assume we finished inside her but could be pussy or ass so make the text more generic#
-                "[the_person.possessive_title]'s is dripping cum from your creampie."
+                "[the_person.possessive_title] is dripping cum from your creampie."
                 "You grab her phone and snap a couple pictures of her cum dripping body."
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh my god... that was amazing. That felt so good."

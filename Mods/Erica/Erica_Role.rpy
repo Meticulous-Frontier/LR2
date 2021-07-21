@@ -577,7 +577,7 @@ label erica_phase_one_label(the_person):
                 "When she reaches your waist, she slowly undoes your pants, then pulls them down and off, revealing your erection."
                 the_person "Oh [the_person.mc_title]..."
                 "[the_person.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
-                "Her mouth opens and you feel the warm, wetness of her gullet envelop your cock. It feels great as she starts to bob her head up and down on it."
+                "Her mouth opens and you feel the warm wetness of her gullet envelop your cock. It feels great as she starts to bob her head up and down on it."
                 $ the_person.break_taboo("sucking_cock")
                 call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = cowgirl_blowjob, start_object = make_bench(), skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_first_oral_02
                 "You lie back and catch your breath as [the_person.title] gets up."
@@ -1479,8 +1479,8 @@ label erica_money_problem_sarah_convincing_employee_label():
             "Sounds like [the_person.possessive_title] is hard at work, convincing some of your employees to give the yoga session a shot!"
             $ the_target.update_opinion_with_score("yoga", 1)
         else:
-            the_person "Its good for you! I'm sure of it!"
-            the_target "There's a lot of things that are good for you. I'm sorry I just don't think I'm interested."
+            the_person "It's good for you! I'm sure of it!"
+            the_target "There's a lot of things that are good for you. I'm sorry, I just don't think I'm interested."
             $ scene_manager.update_actor(the_person, emotion = "sad")
             the_person "... I understand."
             "Sounds like [the_person.possessive_title] is still trying to convince employees to give the yoga class a try. You appreciate her dedication to it."
@@ -1583,7 +1583,7 @@ label erica_yoga_event_intro_label():
         "The girls share a laugh."
 
     "Okay ... [yoga_assistant.title] and [the_person.possessive_title] seem to REALLY be hitting it off. You make a mental note. You walk up to the front and greet them."
-    "Hello [the_person.title] and  [yoga_assistant.title]. Looks like this is going to a good training class!"
+    mc.name "Hello [the_person.title] and [yoga_assistant.title]. Looks like this is going to be a good training class!"
     the_person "Oh hey [the_person.mc_title]!"
     the_person "I'm glad to see you. I wasn't sure if you were going to be here or not."
     yoga_assistant "Hello [yoga_assistant.mc_title]! The man of the hour! Here to make sure company funds are being spent wisely?"
@@ -1981,7 +1981,7 @@ label erica_weekly_yoga_label(the_person):
                     call erica_after_yoga_office_session_label(yoga_assistant) from _erica_after_yoga_fun_03
                 "Get to work":
                     mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work you two!"
-                    "They both look at you disappointed, but nothing more comes of it. You say your goodbyes and soon your are starting your workday."
+                    "They both look at you disappointed, but nothing more comes of it. You say your goodbyes and soon you are starting your workday."
         else:
             "Awkwardly, you decide it would be best to get to work."
             mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work, you two!"
@@ -2128,7 +2128,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             pass
         "Mess around":
             "You reach down and grab her ass, pulling her close to you. Through your pants, you grind your erection against her mound."
-            "Soon, you decide its time to take things to the next level."
+            "Soon, you decide it's time to take things to the next level."
             call fuck_person(the_person, private = True) from _call_fuck_after_yoga_02
     "Finished, you get yourself cleaned up and walk over to your desk."
     $ the_person.apply_outfit(initial_outfit)
@@ -2341,7 +2341,7 @@ label erica_post_photoshoot_label(the_person):
     "[erica.possessive_title] is pushing herself hard on the treadmill as you walk up to her."
     mc.name "Hey, I've got good news."
     the_person "Oh hey [the_person.mc_title]! What's the good news?"
-    mc.name "Its my sister. She said the photos were a huge success and she wants to know if you can take more photos."
+    mc.name "It's my sister. She said the photos were a huge success and she wants to know if you can take more photos."
     the_person "Oh! Were they really? I wasn't sure that whole thing was going to work out."
     mc.name "Apparently they turned out great. She wants to know if you want to meet up every Saturday night from here on out, and offered to double your fee."
     the_person "Holy shit... one second..."
@@ -2386,7 +2386,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ erica_insta_outfit = erica.personalize_outfit(lily_insta_outfit.get_copy())
         "You should wear your own thing":
             $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit())
-    erica "Thanks! I'm still pretty new at this, so its nice to have your opinion on it."
+    erica "Thanks! I'm still pretty new at this, so it's nice to have your opinion on it."
     $ erica.change_happiness(1)
     $ erica.change_obedience(1)
     lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"

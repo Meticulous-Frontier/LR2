@@ -1315,7 +1315,7 @@ label alpha_condomless_sex_taboo_break(the_person):
             the_person "You will pull out, I don't want to get pregnant."
 
     elif the_person.love > 60:
-        the_person "If you think you're ready for this commitment, I am to. I want to feel close to you."
+        the_person "If you think you're ready for this commitment, I am too. I want to feel close to you."
         if the_person.get_opinion_score("creampies") > 0:
             if the_person.on_birth_control:
                 the_person "When you're going to finish, I want you to fill me up with your hot load."

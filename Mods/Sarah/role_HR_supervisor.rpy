@@ -623,7 +623,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
-        "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
+        "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
         $ person_choice.change_slut_temp(1)
         person_choice "Oh...what can I do for you, [person_choice.mc_title]."
 

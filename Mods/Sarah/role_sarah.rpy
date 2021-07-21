@@ -952,7 +952,7 @@ label Sarah_get_drinks_label():
         "You can feel her grip tighten on your hand for a second."
         mc.name "I know it is kind of weird to talk about, but I want you to know that if you want to mess around with another girl... let's just say I'm not the jealous type."
         "She laughs at you before replying."
-        the_person "That's good to know. Honestly, I wasn't sure how you would feel about it, but I figure most guys like to idea of being with two women..."
+        the_person "That's good to know. Honestly, I wasn't sure how you would feel about it, but I figure most guys like the idea of being with two women..."
         mc.name "Yeah, I suppose that much is obvious. But I think I could probably help set something up..."
         "She stops and turns to you."
     else:
@@ -1079,7 +1079,7 @@ label Sarah_get_drinks_label():
     the_person "That feels good... but I'm freezing!"
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You quickly pick her up. You carry her over to your bed and then throw her down on it."
-    mc.name "Don't worry, I'll get your warmed up in a hurry!"
+    mc.name "Don't worry, I'll get you warmed up in a hurry!"
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You start to climb on top of [the_person.possessive_title]. She opens her legs and the wraps them around you."
     "You are still wearing your wet clothes, but you don't care. You slowly start to grind your hardness into her groin through your pants."
@@ -1781,7 +1781,7 @@ label Sarah_threesome_request_label():
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]."
     if the_person.has_role(girlfriend_role):
-        "You admire your girlfriend as she stands in the door. God she is sexy"
+        "You admire your girlfriend as she stands in the door. God she is sexy."
     elif the_person.has_role(affair_role):
         "You admire your mistress as she stands in the door. It's so hot fucking a taken woman."
     else:
@@ -1940,7 +1940,7 @@ label Sarah_threesome_request_label():
     the_person "God babe, you wore me out. I know I promised every room, but I don't think I can go on. I think I'd better catch a cab home..."
     mc.name "Why don't I just get us a cab back to my place? I'm in no condition to walk home either. You can stay over."
     the_person "Ah, charming, AND economical! That's my man."
-    "You call the cab and soon it arrives. You give each other little gropes and quick kisses in the back of the cab, but manage to keep things from getting to heated."
+    "You call the cab and soon it arrives. You give each other little gropes and quick kisses in the back of the cab, but manage to keep things from getting too heated."
     "You get home and walk through the front door."
 
     $ mc.change_location(hall)
@@ -2115,7 +2115,7 @@ label Sarah_initial_threesome_label():
     if sarah.event_triggers_dict.get("initial_threesome_arranged", False) == False:
         $ mc.start_text_convo(sarah)
         sarah "Hey, are we still on for tonight?"
-        mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, It'll be ready next week."
+        mc.name "Actually, I haven't been able to talk to her yet. I'm sorry, it'll be ready next week."
         sarah "Okay..."
         $ mc.end_text_convo()
         $ sarah.change_stats(happiness = -10, love = -3)

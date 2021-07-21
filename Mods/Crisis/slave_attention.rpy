@@ -98,7 +98,7 @@ label slave_attention_crisis_action_label:
                     call fuck_person(the_person, start_position = standing_dildo, start_object = make_pillory(), skip_intro = True, position_locked = True) from _call_slave_attention_crisis_3
                     $ the_report = _return
                     if the_report.get("girl orgasms", 0) > 0:
-                        the_person "Oh Master, you can put that thing inside me whenever you want, It made me cum so hard."
+                        the_person "Oh Master, you can put that thing inside me whenever you want, it made me cum so hard."
                     else:
                         the_person "Please [the_person.mc_title], stick that thing into me, I need to cum so badly."
 

@@ -1369,7 +1369,7 @@ label cougar_condomless_sex_taboo_break(the_person):
             the_person "You will need to pull out though, I hate having it dripping out of me all day or worse getting pregnant."
 
     elif the_person.love > 60:
-        the_person "If you think you're ready for this commitment, I am to. I want to feel close to you."
+        the_person "If you think you're ready for this commitment, I am too. I want to feel close to you."
         if the_person.get_opinion_score("creampies") > 0:
             the_person "When you're going to finish you don't have to pull out unless you want to. Okay?"
             mc.name "Are you on the pill?"

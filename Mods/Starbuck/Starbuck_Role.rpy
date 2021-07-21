@@ -358,7 +358,7 @@ label starbuck_oral_skillup_label(the_person):
     "You explain to [the_person.possessive_title] that you feel like you've stopped improving your skill at oral sex. You ask if she has any tips or products for further improvement, even if the effects are temporary."
     the_person "Oh [the_person.mc_title]... I think I can probably help you with that!"
     "[the_person.possessive_title] leads you over to an area of the store where she sells a number of balms and oils."
-    "She picks a balm up off the shelf. It looks like its some kind of lip balm, but its designed to increase blood flow and pleasure to female partners genitals it comes into contact with."
+    "She picks a balm up off the shelf. It looks like it's some kind of lip balm, but it's designed to increase blood flow and pleasure to female partners genitals it comes into contact with."
     the_person "Personally, I recommend this one."
     menu:
         "Purchase ($250)":
@@ -1281,7 +1281,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "[the_person.possessive_title] reaches one hand between her legs and grabs the dildo. She lines it up with her other hole."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     $ mc.change_locked_clarity(30)
-    the_person "Oh my god! I'm so full... Its so good [the_person.mc_title]! This thing is amazing..."
+    the_person "Oh my god! I'm so full... It's so good [the_person.mc_title]! This thing is amazing..."
     "With your hands on her hips, you slowly start to fuck her."
     call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _call_sex_description_SBS100
     "[the_person.possessive_title] is in a sex induced daze after you finish. She struggles to make a coherent end to the video."
@@ -1296,7 +1296,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         "You decide to interrupt her."
         mc.name "[the_person.possessive_title]. It has been great being your business partner. I know what you are saying, but don't worry. I'd be doing this with you even if we weren't recording it."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
-        "She smiles at you happily"
+        "She smiles at you happily."
         mc.name "But don't worry. If it helps the business grow, there's no reason not to record it. It doesn't make the sex any less meaningful to me. I mean really, you could ask any guy in here to do this stuff..."
         the_person "I can't imagine it though... doing this whole venture with anyone else as my partner. Thank you, [the_person.mc_title]."
     else:
@@ -1507,7 +1507,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "[the_person.title] gives another gasp as you imagine she works a bit of the lube into her tight hole."
         $ the_person.draw_person(position = "cowgirl")
         "[the_person.possessive_title] climbs up on top of you. She takes you in her hand and points it towards her back passage."
-        the_person "Oh god, [the_person.mc_title], its so big! Okay, here we go..."
+        the_person "Oh god, [the_person.mc_title], it's so big! Okay, here we go..."
         $ mc.change_arousal(10)
         "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
         #Fuck her#
@@ -1661,7 +1661,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 "[the_person.possessive_title]'s pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
                 $ mc.change_arousal(10)
                 "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-                the_person "Oh my god! I'm so full... Its so good [the_person.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
+                the_person "Oh my god! I'm so full... It's so good [the_person.mc_title]! Fuck me like you paid for this! Like I'm just a whore!"
                 call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True) from _call_sex_description_SBS124
                 "Finished with your anal plundering, you let yourself collapse onto [the_person.title]'s bed."
                 "She cuddles up next to you."
