@@ -1424,6 +1424,14 @@ init -1 python:
 
     Person.hide_person = hide_person_enhanced
 
+    def is_person_at_work(self): #Checks to see if the character is at work.
+        if not self.work:
+            return False
+
+        return self.location in [mc.business.m_div, mc.business.p_div, mc.business.r_div, mc.business.s_div, mc.business.h_div]
+
+    Person.is_at_work = is_person_at_work
+
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
@@ -1588,16 +1596,23 @@ init -1 python:
     Person.is_wearing_uniform = person_is_wearing_uniform
 
     def should_wear_uniform_enhanced(self):
-        if not mc.business.is_open_for_business():  # quick exit
+        if not mc.business.is_open_for_business():
             return False
 
-        #Check to see if we are: 1) Employed by the PC. 2) At work right now. 3) there is a uniform set for our department.
-        employment_title = mc.business.get_employee_title(self)
-        if employment_title != "None" and self.location == self.work: # is she really at work?
-            if mc.business.get_uniform_wardrobe(employment_title).get_count() > 0 or self.event_triggers_dict.get("forced_uniform", False): #Check to see if there's anything stored in the uniform section.
-                return True
+        if mc.business.get_employee_title(self) == "None":
+            return False
 
-        return False #If we fail to meet any of the above conditions we should return false.
+        if not self.is_at_work():
+            return False
+
+        if self.event_triggers_dict.get("forced_uniform", False):
+            return True
+
+        wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+        if wardrobe and wardrobe.get_count() > 0:  #Check to see if there's anything stored in the uniform section.
+            return True
+
+        return False
 
     Person.should_wear_uniform = should_wear_uniform_enhanced
 

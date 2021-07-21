@@ -66,7 +66,7 @@ init -1 python:
         return True
 
     def breeding_fetish_candace_intro_requirement(the_person):
-        if candace.location == candace.work and mc.is_at_work():
+        if candace.is_at_work() and mc.is_at_work():
             return True
         return False
 
