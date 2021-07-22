@@ -329,7 +329,7 @@ label anal_fetish_family_intro_label(the_person):
         $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal(10) #65
-    "You give her another spank. Her cheeks are starting to redden a bit, but its obvious from her arousal that she loves it."
+    "You give her another spank. Her cheeks are starting to redden a bit, but it's obvious from her arousal that she loves it."
     if the_person.has_taboo("anal_sex"):
         mc.name "I can't believe you want me to stick it in your ass. You are such a naughty little slut."
         "She stays quiet for now, but her ass wiggles a bit, making an enticing target."
@@ -427,7 +427,7 @@ label anal_fetish_generic_intro_label(the_person):
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal (15) # 65
     mc.name "You've got an amazing ass [the_person.title]..."
-    "You give her another spank. Her cheeks are starting to redden a bit, but its obvious from her arousal that she loves it."
+    "You give her another spank. Her cheeks are starting to redden a bit, but it's obvious from her arousal that she loves it."
     if the_person.has_taboo("anal_sex"):
         mc.name "Have you ever tried taking it in your ass? I think its clear that your ass needs some attention."
         the_person "Oh? I umm... not exactly... I not that kind of girl..."

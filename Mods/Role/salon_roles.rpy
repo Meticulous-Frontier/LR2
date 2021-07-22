@@ -939,7 +939,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person "Yeah, I mean why else would you bring up the wage thing? Isn't that what you had in mind?"
     mc.name "I was just trying to give examples of how he had been taking advantage of her..."
     the_person "Alright, it's obvious to me that you DO need my help. So fuck yeah, I'm in!"
-    the_person "Go ahead and talk to her about it, and when you feel like she is ready, have her come visit me here. We'll get it all setup!"
+    the_person "Go ahead and talk to her about it, and when you feel like she is ready, have her come visit me here. We'll get it all set up!"
     mc.name "Thanks [the_person.title]! I owe you one."
     the_person "Nah, I still owe you a couple of favors. This is just you calling one in."
     "Oh dear. It is a little scary how excited she is getting about this."
@@ -1030,7 +1030,7 @@ label ophelia_choose_service_test_label():
     else:
         salon_manager "Oh! This is perfect! Hi I'm [salon_manager.name]."
         the_person "[the_person.name], nice to meet you."
-    salon_manager "I have a private room all setup for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
+    salon_manager "I have a private room all set up for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
     "You and [the_person.title] follow [salon_manager.possessive_title] to the private room. It's a great setup, with a very comfy looking styling chair."
     salon_manager "When I open it, I plan to have wine coolers or mimosas I can offer, along with a hot towel."
     mc.name "Nice, it's a salon VIP lounge."
