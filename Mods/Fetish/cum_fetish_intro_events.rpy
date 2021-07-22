@@ -275,7 +275,7 @@ label cum_fetish_family_intro_label(the_person):
     "Still sitting on the edge of the bed, [the_person.possessive_title] looks up at you as you bring your cock up to her face."
     "You run your hand through her hair a couple times, as she begins to lick around the tip of your dick."
     "She licks up some of your precum."
-    the_person "Mmm... that tastes so... good? It's funny... I'd never though of cum as tasting so good before."
+    the_person "Mmm... that tastes so... good? It's funny... I'd never thought of cum as tasting so good before."
     mc.name "It's because of how turned on you are."
     the_person "Yeah, I suppose."
     "She opens her mouth and then takes you in. Her sultry lips feel amazing as they descend your cock, then slowly pull back off."
@@ -371,7 +371,7 @@ label cum_fetish_generic_intro_label(the_person):
     "You see [the_person.title] standing outside. You open the door before she goes to knock."
     mc.name "[the_person.title], what are you doing here? It's the middle of the night."
     "[the_person.possessive_title] takes a step towards you, running a hand down your chest. You guide her outside so she won't wake up your mother or sister."
-    the_person "Oh [the_person.mc_title], I just keep on thinking about your nice cock and it's sweet nectar, you need to help me!"
+    the_person "Oh [the_person.mc_title], I just keep on thinking about your nice cock and its sweet nectar, you need to help me!"
     "Even before you have time to respond, she drops to her knees and pulls out your flaccid member."
     $ the_person.draw_person(position = "blowjob")
     menu:

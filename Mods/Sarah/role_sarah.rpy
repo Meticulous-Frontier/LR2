@@ -737,7 +737,7 @@ label Sarah_get_drinks_label():
     mc.name "Is that so? I hope he can make it and that he treats you well!"
     the_person "Hahaha, yeah me too. And don't worry, he's always treated me right."
     $ mc.change_locked_clarity(10)
-    "[the_person.possessive_title] looks down at the floor for a minute and mumbles something. Its obvious she is trying to work up the courage to ask you out, but it is cute watching her fumble a bit."
+    "[the_person.possessive_title] looks down at the floor for a minute and mumbles something. It's obvious she is trying to work up the courage to ask you out, but it is cute watching her fumble a bit."
     the_person "So... you uhh, have any big plans for the evening, [the_person.mc_title]?"
     mc.name "Oh, well, certainly nothing as big as what you have planned! I'm just trying to get a little a head of work for next week."
     the_person "Ah! That's good. It is pretty amazing how much work you put into this place. It's something I admire a lot..."
