@@ -108,6 +108,11 @@ init -4 python:
             identifier = self.mapped_list.pop(index)
             return next((x for x in self.list_func() if x.identifier == identifier), None)
 
+        def index(self, item):
+            if isinstance(item, self.type):
+                return self.mapped_list.index(item.identifier)
+            raise ValueError
+
     def parse_version_string(version):
         parts = version.split(".")
         return int(parts[0].strip("v")), int(parts[1]), int(parts[2])
