@@ -1,5 +1,9 @@
 
 init 2 python:
+
+    camilla_spot_at_bar = Action("Camilla at the bar", camilla_spot_at_bar_requirement, "camilla_spot_at_bar_label")
+    camilla_get_a_drink = Action("Get a drink", camilla_get_a_drink_requirement, "camilla_get_a_drink_label")
+
     def camilla_mod_initialization():
         camilla_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
         camilla_base_outfit = Outfit("camilla's base accessories")
@@ -14,7 +18,7 @@ init 2 python:
         camilla_base_outfit.add_accessory(the_rings)
 
         # init camilla role
-        camilla_role = Role(role_name ="camilla", actions =[], hidden = True)
+        camilla_role = Role(role_name ="camilla", actions =[camilla_get_a_drink], hidden = True)
 
         #global camilla_role
         global camilla
@@ -28,10 +32,12 @@ init 2 python:
         camilla.generate_home()
         camilla.set_schedule(camilla.home, times = [0,4])
         #camilla.set_schedule(downtown_bar, times = [2,3])  #Disabled for now
-        camilla.set_schedule(camilla.home, times = [1,2,3])
+        camilla.set_schedule(downtown_bar, times = [3])
+        camilla.set_schedule(mall, times = [1,2], days = [0, 1, 2, 3, 4])
         camilla.home.add_person(camilla)
 
         camilla.event_triggers_dict["intro_complete"] = False    # True after first talk
+        camilla.event_triggers_dict["get_drinks"] = False
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -45,13 +51,84 @@ init 2 python:
         # town_relationships.update_relationship(lily, camilla, "Rival")
 
         camilla.add_role(camilla_role)
+        camilla.add_role(lifestyle_coach_role)
+        camilla.add_unique_on_room_enter_event(lifestyle_coach_intro)
         return
+
+
+
+init -1 python:
+    def camilla_spot_at_bar_requirement(the_person):
+        if the_person.location == downtown_bar:
+            return True
+        return False
+
+    def camilla_get_a_drink_requirement(the_person):
+        return "Disabled for now"
+        if the_person.location == downtown_bar and the_person.event_triggers_dict.get("get_drinks", False):
+            if mc.business.change_funds > 20:
+                return True
+            else:
+                return "Not enough money!"
+        return False
+
+
+label camilla_spot_at_bar_label(the_person):
+    "As you walk into the bar, you take a look around."
+    $ the_person.draw_person(position = "sitting")
+    "Sitting at the bar by herself, you notice [the_person.title], the lifestyle coach from the mall."
+    "You are surprised a woman as pretty as her is sitting by herself at the bar, so you decide to go say hi."
+    "She notices you as you walk up to her."
+    mc.name "Hello [the_person.title]. Out for a drink this evening?"
+    the_person "Hello... [the_person.mc_title] was it?"
+    mc.name "Excellent memory. Yes I worked with you some at the mall the other day."
+    the_person "Yes, I remember. The small business owner."
+    mc.name "I noticed you at the bar by yourself. Mind if I sit with you for a while?"
+    the_person "That's fine."
+    "You sit down in a bar stool next to [the_person.possessive_title]"
+    mc.name "So how long have you been working as a lifestyle coach?"
+    the_person "Honestly, not too long. I mainly just do it as an extra source of income to suppliment what my hubby brings in."
+    "Ah, so she is married. You should probably keep things low key for now."
+    mc.name "That's admirable. How long have you been married?"
+    the_person "Almost 15 years now."
+    mc.name "Wow, you don't look like someone who has been married 15 years!"
+    the_person "Ah, we got married young."
+    mc.name "Kids?"
+    "[the_person.title] hesitates. You might have hit a sore subject with her..."
+    the_person "No, no niños..."
+    mc.name "I'm sorry... I'm probably getting a little personal."
+    the_person "Its okay, that's a perfectly normal question to ask."
+    "You feel bad. You notice that her glass is almost empty. You wave down the bartender. When he walks over, he smiles wide at [the_person.title]"
+    "?????" "Something I can get for you?"
+    mc.name "Can I get a beer and another for my friend?"
+    "?????" "Sure. A beer and another paloma for the lovely miss [the_person.last_name]."
+    "The bartender walks off. He seems to know [the_person.title]. She must be a regular here?"
+    mc.name "Ah, you come here often then?"
+    the_person "I do. I'm here most evenings. I like have a drink before I head home each night. My husband works late."
+    mc.name "I see. I'm here somewhat often as well. Maybe we could have a drink together once in a whlie?"
+    the_person "I... I suppose that would be alright."
+    "You sit back in the chair and chat with [the_person.possessive_title] for a while. You both enjoy the time together, getting to know one another as friends."
+    $ the_person.change_love(3)
+    $ mc.business.change_funds(-20)
+    "Eventually you settle up with the bartender. You notice him gesture at [the_person.title] when she isn't looking, and gives you a little wink."
+    "You aren't sure... is he trying to say she's... available? Maybe since her husband works late she picks up guys at the bar..."
+    "You file it away in your brain. Maybe you could come back and have drinks with her again. A bar would be an ideal place to dose her with a few serums too..."
+    "You get up and say goodbye to [the_person.possessive_title]."
+    mc.name "Thank you for the conversation. I'll see you around [the_person.title]"
+    the_person "Take care [the_person.mc_title]."
+    "You can now have drinks with [the_person.title] at the bar in the evenings."
+    $ camilla.event_triggers_dict["get_drinks"] = True
+    #TODO advance time
+    return
+
 
 label camilla_get_a_drink_label(the_person):
     mc.name "Care to get a drink, [the_person.title]?"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
     #$ bartender_name = get_random_male_name()
+    if camilla_can_go_dancing():
+        $ ran_num = 100
     menu:
         "Offer to Buy\n{color=#ff0000}{size=18}Success Chance: [ran_num]%%{/size}{/color}":
             mc.name "Hey, let me buy you a drink."
@@ -77,21 +154,43 @@ label camilla_get_a_drink_label(the_person):
     "You sit down at a table with [the_person.title]."
 
     #***Event State 0 ####
-    if the_person.event_triggers_dict.get("camilla_progress", 0) < 1:  #This is your first time grabbing a drink Together
-        mc.name "So, you come here often?"
-        the_person "Oh! Yeah, I'm here all the time. I'm on a first name basis with the bartender at this point, haha!"
-        mc.name "That great! This place is pretty nice. I can see why you come here. You said earlier you don't find guys like me very often. It's hard to believe a beautiful girl like you is single!"
-        "You see her cheeks blush a little bit."
-        the_person "Yeah, well, I'm not exactly single. I'm more in, what you might call an open relationship..."
-        "Her responses catches you a little bit by surprise."
-        the_person "It's pretty crazy. To be honest I never thought I would do something like this, but recently my husband has started asking me to go out and meet other guys and then tell him how it goes..."
-        "Ahhh, her husband is some kind of cuckold?"
-        mc.name "Ah, I see. That's interesting! Managed to snag any guys yet?"
-        the_person "Well... to be honest... no. I haven't. I've gone out by myself a few times now... but I'm still too nervous. Something about you though, it puts me at ease to be around you..."
+    if not camilla_is_open():
+        mc.name "Glad to see you here again. How have you been?"
+        the_person "Pretty good. You?"
+        mc.name "I'm doing well. Especially now that I have a chance to have a drink with a beautiful woman such as yourself."
+        "She looks a little embarassed, but doesn't respond negatively to your comment."
+        mc.name "So, your hubby is okay with you going out to the bar all by yourself?"
+        the_person "Si, he doesn't mind. In fact, he kind of encourages it."
+        mc.name "Really? That's interesting."
+        "[the_person.possessive_title] takes a sip of her drink and takes a moment."
+        the_person "Truth me told, hubby has been encouraging me recently to umm... get out and meet new people... men specifically."
+        "Her statement catches you a little bit by surprise."
+        the_person "To be honest... I'm not sure I'm going to... but hubby has this fantasy thing where I... get with other guys..."
+        "Ah her husband is some kind of cuckold."
+        mc.name "That's interesting. Manage to snag any yet?"
+        the_person "No. I'm... I just want to be a good wife... and honestly I never thought my hubby would ask me to do something like this."
+        the_person "I'm still too nervous, but I like to come to the bar and have a couple drinks. Maybe someday I'll actually go through with it."
+        "[the_person.possessive_title] takes another long sip of her drink."
+        the_person "I don't know why but, its nice being able to talk to you. Something about you puts me at ease."
+        mc.name "Ah, I understand what you mean."
         "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
-        $ the_person.event_triggers_dict["camilla_progress"] = 1
+        $ the_person.event_triggers_dict["is_open"] = True
         mc.name "Take care, I'm sure I'll see you here again sometime!"
-
+    elif not camilla_can_go_dancing():
+        mc.name "So, how's it going? Any luck with picking up guys?"
+        if the_person.effective_sluttiness() > 15:
+            "[the_person.possessive_title] ignores your question and looks at you."
+            the_person "Do you like salsa dancing?"
+            mc.name "Ah, I'll admit, I've never really tried it."
+            "[the_person.title] takes a sip of her drink."
+            the_person "Did you know they do salsa dancing here sometimes? Even if you are new at it, it would be fun to try it sometime."
+            the_person "On Wednesday nights they have a salsa dancing for beginners class. You should come and I'll go with you."
+            "That sounds suspiciously like a date. With this smoking hot seniorita in an open relationship, the implications are impossible to ignore."
+            mc.name "Sure, I'll do it next Wednesday."
+            the_person "Great!"
+            "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
+            #TODO write the dancing scene.
+            mc.name "Take care, I'm sure I'll see you here again sometime!"
     #***Event State 1 ####
     elif the_person.event_triggers_dict.get("camilla_progress", 0) == 1:  #You are acquainted, but not yet done anything sexual
         mc.name "So, any luck going squirrel hunting?"
@@ -671,3 +770,17 @@ label camilla_ghost_label(the_person):
     $ the_person.remove_person_from_game()
     $ casual_sex_create_camilla() #Create a new camilla so MC can try again if they choose.
     return
+
+
+init -1 python:
+    def camilla_can_get_drinks():
+        return camilla.event_triggers_dict.get("get_drinks", False)
+
+    def camilla_is_open():
+        return camilla.event_triggers_dict.get("is_open", False)
+
+    def camilla_can_go_dancing():
+        return camilla.event_triggers_dict.get("go_dancing", False)
+
+    def camilla_can_go_to_her_place():
+        return camilla.event_triggers_dict.get("her_place", False)
