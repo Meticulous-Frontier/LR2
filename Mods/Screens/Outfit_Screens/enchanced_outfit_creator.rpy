@@ -456,13 +456,13 @@ init 2:
                     vbox:
                         spacing 5
                         viewport:
-                            ysize 440
+                            ysize 560
                             xminimum 605
                             scrollbars "vertical"
                             mousewheel True
                             frame:
                                 xsize 605
-                                yminimum 440
+                                yminimum 560
                                 background "#0a142688"
                                 padding 0,0
 
@@ -517,35 +517,11 @@ init 2:
                                                     yoffset 10
                         frame:
                             #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
-                            xysize (605, 520)
+                            xysize (605, 400)
                             background "#0a142688"
                             if selected_clothing is not None:
                                 vbox:
-                                    spacing 5
-                                    frame:
-                                        background "#0a142688"
-                                        xfill True
-                                        textbutton "Add " + selected_clothing.name + " to outfit\n" + __builtin__.str(selected_clothing.slut_value) + " Slut Requirement":
-                                            style "textbutton_no_padding_highlight"
-                                            text_style "serum_text_style"
-                                            hover_background "#143869"
-                                            background "#14386988"
-                                            xalign 0.5
-                                            xfill True
-
-                                            sensitive outfit_valid_check()
-
-                                            action [
-                                                #Function(update_outfit_color, selected_clothing), #Make sure color is updated
-                                                Function(replace_cloth, selected_clothing),
-                                                Function(preview_outfit) # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
-                                            ]
-
-                                            hovered [
-                                                Function(preview_apply, selected_clothing),
-                                                #Function(update_outfit_color, selected_clothing),
-                                                Function(preview_outfit)
-                                            ]
+                                    text selected_clothing.name + " " + selected_clothing.generate_stat_slug() style "serum_text_style_header"
 
                                     frame:
                                         background "#0a142688"
@@ -561,16 +537,6 @@ init 2:
                                                 if __builtin__.type(selected_clothing) is Clothing: #Only clothing items have patterns, facial accessories do not (currently).
                                                     vbox:
                                                         spacing 5
-                                                        hbox:
-                                                            frame:
-                                                                background "#0a142688"
-                                                                xfill True
-                                                                textbutton "Cloth Pattern Selection":
-                                                                    style "textbutton_no_padding_highlight"
-                                                                    text_style "serum_text_style"
-                                                                    xfill True
-
-                                                                    action ToggleScreenVariable("cloth_pattern_selection")
                                                         hbox:
                                                             spacing 5
                                                             if cloth_pattern_selection:
@@ -674,16 +640,6 @@ init 2:
 
                                                 vbox:
                                                     spacing 5
-                                                    hbox:
-                                                        spacing 5
-                                                        frame:
-                                                            background "#0a142688"
-                                                            textbutton "Color Selection":
-                                                                style "textbutton_no_padding_highlight"
-                                                                text_style "serum_text_style"
-                                                                xfill True
-
-                                                                action ToggleScreenVariable("color_selection")
                                                     hbox:
                                                         spacing 5
                                                         if color_selection:
@@ -835,89 +791,31 @@ init 2:
                                                                             alternate [
                                                                                 Function(update_colour_palette, count + (block_count * 13), current_r, current_g, current_b, current_a)
                                                                             ]
-                                                # vbox:
-                                                #     spacing 5
-                                                #     hbox:
-                                                #         frame:
-                                                #             background "#0a142688"
-                                                #             xfill True
-                                                #             textbutton "Transparency":
-                                                #                 style "textbutton_no_padding_highlight"
-                                                #                 text_style "serum_text_style"
-                                                #
-                                                #                 xfill True
-                                                #
-                                                #                 action ToggleScreenVariable("transparency_selection")
-                                                #     hbox:
-                                                #         if transparency_selection:
-                                                #             frame:
-                                                #                 background "#0a142688"
-                                                #                 ysize 50
-                                                #                 viewport:
-                                                #                     xfill True
-                                                #                     draggable True
-                                                #                     mousewheel "horizontal"
-                                                #                     ysize 50
-                                                #                     hbox:
-                                                #                         spacing 5
-                                                #                         textbutton "Normal":
-                                                #                             style "textbutton_no_padding_highlight"
-                                                #                             text_style "serum_text_style"
-                                                #                             xalign 0.5
-                                                #                             xsize 200
-                                                #
-                                                #                             if current_a == 1.0:
-                                                #                                 background "#4f7ad6"
-                                                #                             else:
-                                                #                                 background "#1a45a1"
-                                                #                             action [
-                                                #                             SetScreenVariable("current_a", 1.0),
-                                                #                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                #                             Function(preview_outfit)
-                                                #                             ]
-                                                #
-                                                #                         textbutton "Sheer":
-                                                #                             style "textbutton_no_padding_highlight"
-                                                #                             text_style "serum_text_style"
-                                                #                             xalign 0.5
-                                                #                             xsize 200
-                                                #                             if current_a == 0.95:
-                                                #                                 background "#4f7ad6"
-                                                #                             else:
-                                                #                                 background "#1a45a1"
-                                                #
-                                                #                             action [
-                                                #                             SetScreenVariable("current_a", 0.95),
-                                                #                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                #                             Function(preview_outfit)
-                                                #                             ]
-                                                #
-                                                #                         textbutton "Translucent":
-                                                #                             style "textbutton_no_padding_highlight"
-                                                #                             text_style "serum_text_style"
-                                                #                             xalign 0.5
-                                                #                             xsize 200
-                                                #                             if current_a == 0.8:
-                                                #                                 background "#4f7ad6"
-                                                #                             else:
-                                                #                                 background "#1a45a1"
-                                                #
-                                                #
-                                                #                             action [
-                                                #                             SetScreenVariable("current_a", 0.8),
-                                                #                             SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
-                                                #                             Function(preview_outfit)
-                                                #                             ]
 
+                                    frame:
+                                        background "#0a142688"
+                                        xfill True
+                                        textbutton "Add " + selected_clothing.name:
+                                            style "textbutton_no_padding_highlight"
+                                            text_style "serum_text_style"
+                                            hover_background "#143869"
+                                            background "#14386988"
+                                            xalign 0.5
+                                            xfill True
 
+                                            sensitive outfit_valid_check()
 
+                                            action [
+                                                #Function(update_outfit_color, selected_clothing), #Make sure color is updated
+                                                Function(replace_cloth, selected_clothing),
+                                                Function(preview_outfit) # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
+                                            ]
 
-
-
-
-
-
-
+                                            hovered [
+                                                Function(preview_apply, selected_clothing),
+                                                #Function(update_outfit_color, selected_clothing),
+                                                Function(preview_outfit)
+                                            ]
 
 
                 # vbox: #Items selector
