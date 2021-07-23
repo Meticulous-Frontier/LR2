@@ -286,7 +286,7 @@ label fetish_serum_discuss_label(the_person):
         menu:
             "Create a new program yourself":
                 call fetish_serum_self_code_menu(the_person) from _fetish_discussion_coding_menu_02
-            "Reach out to Contact":
+            "Reach out to Contact" if the_person.identifier == get_fetish_serum_contact():
                 call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_01
             "Review current progress":
                 call fetish_serum_discuss_progress_label(the_person) from _fetish_discuss_progress_01
@@ -295,7 +295,7 @@ label fetish_serum_discuss_label(the_person):
     else:
         the_person "Do you want me to reach out to my contact to commission it?"
         menu:
-            "Reach out to Contact":
+            "Reach out to Contact" if the_person.identifier == get_fetish_serum_contact():
                 call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_02
             "Review current progress":
                 call fetish_serum_discuss_progress_label(the_person) from _fetish_discuss_progress_02
