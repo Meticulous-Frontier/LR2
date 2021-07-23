@@ -69,6 +69,8 @@ init -1 python:
 
     def starbuck_vaginal_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 2:
+            if perk_system.has_stat_perk("Vibrating Cock Ring"):
+                return "Already Active"
             if mc.business.funds >= 500:
                 if mc.location == sex_store:
                     return True
@@ -79,6 +81,8 @@ init -1 python:
 
     def starbuck_anal_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 3:
+            if perk_system.has_stat_perk("Perfect Anal Lube"):
+                return "Already Active"
             if mc.business.funds >= 800:
                 if mc.location == sex_store:
                     return True
@@ -88,6 +92,8 @@ init -1 python:
 
     def starbuck_foreplay_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 1:
+            if perk_system.has_stat_perk("Small Finger Vibrator"):
+                return "Already Active"
             if mc.business.funds >= 100:
                 if mc.location == sex_store:
                     return True
@@ -97,6 +103,8 @@ init -1 python:
 
     def starbuck_oral_skillup_requirement(the_person):
         if starbuck.shop_progress_stage >= 2:
+            if perk_system.has_stat_perk("Stimulating Lip Balm"):
+                return "Already Active"
             if mc.business.funds >= 250:
                 if mc.location == sex_store:
                     return True
