@@ -59,6 +59,46 @@ init -1 python:
 
     Business.unisex_restroom_unlocks = property(get_unisex_restroom_unlocks, set_unisex_restroom_unlocks, del_unisex_restroom_unlocks, "Tracking dictionary for the unisex restroom event.")
 
+    def get_uniform_limits_enhanced(self): #Returns three values: the max sluttiness of a full outfit, max sluttiness of an underwear set, and if only overwear sets are allowed or notself.
+        slut_limit = 0
+        underwear_limit = 0
+        limited_to_top = True
+        if maximal_arousal_uniform_policy.is_active():
+            slut_limit = 999 #ie. no limit at all.
+            underwear_limit = 999
+            limited_to_top = False
+        elif corporate_enforced_nudity_policy.is_active():
+            slut_limit = 90
+            underwear_limit = 999
+            limited_to_top = False
+        elif minimal_coverage_uniform_policy.is_active():
+            slut_limit = 70
+            underwear_limit = 30
+            limited_to_top = False
+        elif reduced_coverage_uniform_policy.is_active():
+            slut_limit = 50
+            underwear_limit = 15
+            limited_to_top = False
+        elif casual_uniform_policy.is_active():
+            slut_limit = 35
+            underwear_limit = 0
+            limited_to_top = True
+        elif relaxed_uniform_policy.is_active():
+            slut_limit = 25
+            underwear_limit = 0
+            limited_to_top = True
+        elif strict_uniform_policy.is_active():
+            slut_limit = 15
+            underwear_limit = 0
+            limited_to_top = True
+        else:
+            slut_limit = 0
+            underwear_limit = 0
+            limited_to_top = True
+        return slut_limit, underwear_limit, limited_to_top
+
+    Business.get_uniform_limits = get_uniform_limits_enhanced
+
     def update_employee_status(self, person):
         if person.event_triggers_dict.get("employed_since", -1) == -1:
             person.event_triggers_dict["employed_since"] = day
