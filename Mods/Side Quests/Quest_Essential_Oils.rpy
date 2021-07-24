@@ -42,7 +42,7 @@ init 1 python:
         game_hints.append(Hint("Essential Oils Research Checkup", "Check up on your head researcher.", "quest_essential_oils().get_quest_flag() == 21 and day > quest_essential_oils().quest_event_dict.get('research_day', 0)", "quest_essential_oils().get_quest_flag() != 21"))
         hint_string = "Talk to " + contact.title + " about getting essential oils."
         game_hints.append(Hint("Essential Oils Purchase Research", hint_string , "quest_essential_oils().get_quest_flag() == 31", "quest_essential_oils().get_quest_flag() != 31"))
-        game_hints.append(Hint("Essential Oils Purchase", "Talk with Dawn at the mall about bulk purchase of essential oils.", "quest_essential_oils().get_quest_flag() == 41", "quest_essential_oils().get_quest_flag() != 41"))
+        game_hints.append(Hint("Essential Oils Purchase", "Talk with Camilla at the mall about bulk purchase of essential oils.", "quest_essential_oils().get_quest_flag() == 41", "quest_essential_oils().get_quest_flag() != 41"))
         return
 
     def quest_essential_oils():
@@ -84,7 +84,7 @@ init 1 python:
         if person:
             person.remove_on_room_enter_event(quest_essential_oils_intro)
             person.remove_on_talk_event(quest_essential_oils_discover_supplier)
-        dawn.remove_on_talk_event(quest_essential_oils_decision)
+        camilla.remove_on_talk_event(quest_essential_oils_decision)
         if mc.business.head_researcher:
             mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_start)
             mc.business.head_researcher.remove_on_talk_event(quest_essential_oils_research_end)
@@ -258,10 +258,10 @@ label quest_essential_oils_discover_supplier_label(the_person):
     the_person "Well, I get mine from over at the mall. There's a nice lady over there who sells them. One of those, lifestyle coach, naturalist type people."
     mc.name "Do you remember her name?"
     "She thinks about it for a minute."
-    the_person "Yes, I'm pretty sure her name is [dawn.name]. She has a small kiosk setup in the mall itself."
+    the_person "Yes, I'm pretty sure her name is [camilla.name]. She has a small kiosk setup in the mall itself."
     mc.name "Thank you."
     the_person "Yup! Anything else I can do for you?"
-    $ dawn.add_unique_on_talk_event(quest_essential_oils_decision)
+    $ camilla.add_unique_on_talk_event(quest_essential_oils_decision)
     $ quest_essential_oils().set_quest_flag(41)
     return
 

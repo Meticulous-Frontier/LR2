@@ -14,7 +14,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Two story lines for college athlete and wife in a bar;
 * Become the new Stripclub's owner, hire more girls and open a new BDSM room for special shows;
 * The HR director position (with Sarah story-line and enhanced employee recruitment);
-* Lifestyle Coach Dawn in the Mall (change active goals for main character skills-up);
+* Lifestyle Coach Camilla in the Mall (change active goals for main character skills-up);
 * Adds 18 new sex positions with dialogs and unique positions for some characters;
 * Adds 5 threesome positions (triggered in various situations);
 * Enhances 8 existing sex positions with new dialogs;

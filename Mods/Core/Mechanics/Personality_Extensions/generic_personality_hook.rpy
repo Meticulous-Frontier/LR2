@@ -487,6 +487,15 @@ init 0 python:
         if "camilla" in globals():
             unique_character_list.append(camilla)
 
+        if "kaya" in globals():
+            unique_character_list.append(kaya)
+
+        if "ellie" in globals():
+            unique_character_list.append(ellie)
+
+        if "sakari" in globals():
+            unique_character_list.append(sakari)
+
         return
 
     def update_stripclub_strippers():
