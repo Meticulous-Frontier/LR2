@@ -25,7 +25,6 @@ init -2 python:
             return 3
         return 4 #Edge case, has suggestibility not yet in game
 
-
 init -1 python:
 
     def fetish_serum_unlock_count():
@@ -457,102 +456,100 @@ init -1 python:
         return find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
 
     def add_fetish_serum_traits():
-
-
         fetish_basic_ther = SerumTraitMod(name = "Sexual Proclivity Nanobots",
-                desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
-                positive_slug = "Increases sexual opinions, slowly increases Foreplay skill",
-                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-                value_added = 0,
-                research_added = FETISH_RESEARCH_ADDED,
-                slots_added = 1,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 10,
-                on_apply = fetish_basic_function_on_apply,
-                on_remove = fetish_basic_function_on_remove,
-                on_turn = fetish_basic_function_on_turn,
-                tier = 99,
-                start_researched = False,
-                research_needed = 1000,
-                exclude_tags = ["Nanobots"],
-                clarity_cost = 1000
-            )
+            desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
+            positive_slug = "Increases sexual opinions, slowly increases Foreplay skill",
+            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            value_added = 0,
+            research_added = FETISH_RESEARCH_ADDED,
+            slots_added = 1,
+            production_added = FETISH_PRODUCTION_COST,
+            base_side_effect_chance = 10,
+            on_apply = fetish_basic_function_on_apply,
+            on_remove = fetish_basic_function_on_remove,
+            on_turn = fetish_basic_function_on_turn,
+            tier = 99,
+            start_researched = False,
+            research_needed = 1000,
+            exclude_tags = ["Nanobots"],
+            clarity_cost = 1000
+        )
 
         fetish_exhibition_ther = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
-                desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
-                positive_slug = "Increases exhibitionistic behavior, slow increases sluttiness",
-                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-                value_added = 0,
-                research_added = FETISH_RESEARCH_ADDED,
-                slots_added = 1,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 0,
-                on_apply = fetish_exhibition_function_on_apply,
-                on_remove = fetish_exhibition_function_on_remove,
-                on_turn = fetish_exhibition_on_turn,
-                tier = 99,
-                start_researched =  False,
-                research_needed = 1200,
-                exclude_tags = ["Nanobots"],
-                clarity_cost = 1000
-            )
+            desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
+            positive_slug = "Increases exhibitionistic behavior, slow increases sluttiness",
+            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            value_added = 0,
+            research_added = FETISH_RESEARCH_ADDED,
+            slots_added = 1,
+            production_added = FETISH_PRODUCTION_COST,
+            base_side_effect_chance = 0,
+            on_apply = fetish_exhibition_function_on_apply,
+            on_remove = fetish_exhibition_function_on_remove,
+            on_turn = fetish_exhibition_on_turn,
+            tier = 99,
+            start_researched =  False,
+            research_needed = 1200,
+            exclude_tags = ["Nanobots"],
+            clarity_cost = 1000
+        )
 
         fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
-                desc = "Targeted endorphin emitters increase pleasure received from anal stimulation based on suggestibility.",
-                positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
-                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-                value_added = 0,
-                research_added = FETISH_RESEARCH_ADDED,
-                slots_added = 1,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 10,
-                on_apply = fetish_anal_function_on_apply,
-                on_remove = fetish_anal_function_on_remove,
-                on_turn = fetish_anal_function_on_turn,
-                tier = 99,
-                start_researched =  False,
-                research_needed = 2000,
-                exclude_tags = ["Nanobots"],
-                clarity_cost = 1500
-            )
+            desc = "Targeted endorphin emitters increase pleasure received from anal stimulation based on suggestibility.",
+            positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
+            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            value_added = 0,
+            research_added = FETISH_RESEARCH_ADDED,
+            slots_added = 1,
+            production_added = FETISH_PRODUCTION_COST,
+            base_side_effect_chance = 10,
+            on_apply = fetish_anal_function_on_apply,
+            on_remove = fetish_anal_function_on_remove,
+            on_turn = fetish_anal_function_on_turn,
+            tier = 99,
+            start_researched =  False,
+            research_needed = 2000,
+            exclude_tags = ["Nanobots"],
+            clarity_cost = 1500
+        )
 
         fetish_cum_ther = SerumTraitMod(name = "Semen Proclivity Nanobots",
-                desc = "Targeted endorphin emitters increase pleasure received when in contact with semen based on suggestibility.",
-                positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
-                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-                value_added = 0,
-                research_added = FETISH_RESEARCH_ADDED,
-                slots_added = 1,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 10,
-                on_apply = fetish_cum_function_on_apply,
-                on_remove = fetish_cum_function_on_remove,
-                on_turn = fetish_cum_function_on_turn,
-                tier = 99,
-                start_researched =  False,
-                research_needed = 2000,
-                exclude_tags = ["Nanobots"],
-                clarity_cost = 1500,
-            )
+            desc = "Targeted endorphin emitters increase pleasure received when in contact with semen based on suggestibility.",
+            positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
+            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            value_added = 0,
+            research_added = FETISH_RESEARCH_ADDED,
+            slots_added = 1,
+            production_added = FETISH_PRODUCTION_COST,
+            base_side_effect_chance = 10,
+            on_apply = fetish_cum_function_on_apply,
+            on_remove = fetish_cum_function_on_remove,
+            on_turn = fetish_cum_function_on_turn,
+            tier = 99,
+            start_researched =  False,
+            research_needed = 2000,
+            exclude_tags = ["Nanobots"],
+            clarity_cost = 1500,
+        )
 
         fetish_breeding_ther = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
-                desc = "Targeted endorphin emitters increase reproduction drive and associated opinions based on suggestibility.",
-                positive_slug = "Increases reproduction sexual opinions, slowly increases Vaginal skill",
-                negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-                value_added = 0,
-                research_added = FETISH_RESEARCH_ADDED,
-                slots_added = 1,
-                production_added = FETISH_PRODUCTION_COST,
-                base_side_effect_chance = 10,
-                on_apply = fetish_breeding_function_on_apply,
-                on_remove = fetish_breeding_function_on_remove,
-                on_turn = fetish_breeding_function_on_turn,
-                tier = 99,
-                start_researched =  False,
-                research_needed = 2000,
-                exclude_tags = ["Nanobots"],
-                clarity_cost = 1500
-            )
+            desc = "Targeted endorphin emitters increase reproduction drive and associated opinions based on suggestibility.",
+            positive_slug = "Increases reproduction sexual opinions, slowly increases Vaginal skill",
+            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            value_added = 0,
+            research_added = FETISH_RESEARCH_ADDED,
+            slots_added = 1,
+            production_added = FETISH_PRODUCTION_COST,
+            base_side_effect_chance = 10,
+            on_apply = fetish_breeding_function_on_apply,
+            on_remove = fetish_breeding_function_on_remove,
+            on_turn = fetish_breeding_function_on_turn,
+            tier = 99,
+            start_researched =  False,
+            research_needed = 2000,
+            exclude_tags = ["Nanobots"],
+            clarity_cost = 1500
+        )
         return
 
     def fetish_anal_serum_is_unlocked():
