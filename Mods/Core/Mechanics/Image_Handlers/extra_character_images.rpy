@@ -89,7 +89,11 @@ init 2 python:
         base_image = ZipContainer(position, self.position_dict[position][emotion])
         mask_image = ZipContainer(position, self.position_dict[position][emotion].replace("_" + self.skin_colour,"_Pattern_1"))
 
-        return AlphaBlend(mask_image, im.MatrixColor(base_image, im.matrix.tint(*lighting)), im.MatrixColor(base_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)), alpha=False)
+        shader_image = im.MatrixColor(base_image, im.matrix.tint(*lighting))
+        colour_pattern_matrix = im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)
+        shader_pattern_image = im.MatrixColor(mask_image, colour_pattern_matrix * im.matrix.opacity(.6))
+
+        return AlphaBlend(mask_image, shader_image, shader_pattern_image, alpha=False)
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
 
