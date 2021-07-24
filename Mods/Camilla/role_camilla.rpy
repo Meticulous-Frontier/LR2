@@ -3,6 +3,8 @@ init 2 python:
 
     camilla_spot_at_bar = Action("Camilla at the bar", camilla_spot_at_bar_requirement, "camilla_spot_at_bar_label")
     camilla_get_a_drink = Action("Get a drink", camilla_get_a_drink_requirement, "camilla_get_a_drink_label")
+    camilla_go_dancing = Action("Salsa Dancing", camilla_go_dancing_requirement, "camilla_go_dancing_label")
+    camilla_take_pics = Action("Take Sexy Pics", camilla_take_pics_requirement, "camilla_take_pics_label")
 
     def camilla_mod_initialization():
         camilla_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
@@ -18,7 +20,7 @@ init 2 python:
         camilla_base_outfit.add_accessory(the_rings)
 
         # init camilla role
-        camilla_role = Role(role_name ="camilla", actions =[camilla_get_a_drink], hidden = True)
+        camilla_role = Role(role_name ="camilla", actions =[camilla_get_a_drink, camilla_go_dancing, camilla_take_pics], hidden = True)
 
         #global camilla_role
         global camilla
@@ -70,6 +72,18 @@ init -1 python:
                 return True
             else:
                 return "Not enough money!"
+        return False
+
+    def camilla_go_dancing_requirement(the_person):
+        return "Disabled for now"
+        if the_person.location == downtown_bar and camilla_can_go_dancing():
+            return True
+        return False
+
+    def camilla_take_pics_requirement(the_person):
+        return "Disabled for now"
+        if the_person.location == downtown_bar and camilla_will_take_pics():
+            return True
         return False
 
 
@@ -191,6 +205,30 @@ label camilla_get_a_drink_label(the_person):
             "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
             #TODO write the dancing scene.
             mc.name "Take care, I'm sure I'll see you here again sometime!"
+        else:
+            "[the_person.possessive_title] sighs."
+            the_person "No, not yet. I'm just having a hard time getting myself to open up to that kind of thing."
+            mc.name "Well, it is definitely not something you want to rush into."
+            the_person "Yeah... he keeps telling me... he wants me to seduce a guy, and get pictures, to send him you know?"
+            "Yep! He definitely sounds like a cuckold."
+            the_person "But I don't know, I think maybe I just need a little more time."
+            "Sounds like she might benefit from a few more doses of your serum, too..."
+            "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
+            mc.name "Take care, I'm sure I'll see you here again sometime!"
+
+    elif not camilla_will_take_pics():
+        if the_person.effective_sluttiness() > 40:
+            pass
+        else:
+            pass
+
+    elif not camilla_can_go_to_her_place():
+        if the_person.effective_sluttiness() > 60:
+            pass
+        else:
+            pass
+    # else:
+    #     pass
     #***Event State 1 ####
     elif the_person.event_triggers_dict.get("camilla_progress", 0) == 1:  #You are acquainted, but not yet done anything sexual
         mc.name "So, any luck going squirrel hunting?"
@@ -308,6 +346,20 @@ label camilla_get_a_drink_label(the_person):
         "DEBUG: How did you get here?"
 
     call advance_time from _call_advance_camilla_drink
+    return
+
+label camilla_dance_lessons_label():
+    $ the_person = camilla
+    "TO be written"
+
+    return
+
+label camilla_go_dancing_label(the_person):
+    pass
+    return
+
+label camilla_take_pics_label(the_person):
+    pass
     return
 
 #CSH10
@@ -781,6 +833,9 @@ init -1 python:
 
     def camilla_can_go_dancing():
         return camilla.event_triggers_dict.get("go_dancing", False)
+
+    def camilla_will_take_pics():
+        return camilla.event_triggers_dict.get("take_pics", False)
 
     def camilla_can_go_to_her_place():
         return camilla.event_triggers_dict.get("her_place", False)
