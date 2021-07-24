@@ -42,7 +42,7 @@ init -1 python:
             requires = None, tier = 0, start_researched = False, research_needed=50, exclude_tags=None, is_side_effect = False,
             clarity_cost = 50, start_unlocked = False, start_enabled = True):
 
-            self.enabled = not start_enabled
+            self.enabled = start_enabled
 
             SerumTrait.__init__(self, name, desc, positive_slug, negative_slug, value_added, research_added, slots_added, production_added, duration_added, base_side_effect_chance, clarity_added,
                 on_apply, on_remove, on_turn, on_day,
@@ -54,6 +54,9 @@ init -1 python:
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
+            self.update_serum_trait()
+
+        def update_serum_trait(self)            :
             if self.enabled:
                 found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
                 if not found:
@@ -69,7 +72,7 @@ init 2 python:
         for serum_mod in SerumTraitMod._instances:
             if not serum_mod in serum_mod_list:
                 serum_mod_list.add(serum_mod)
-                serum_mod.toggle_enabled()
+                serum_mod.update_serum_trait()
 
         remove_list = set()
         for serum_mod in serum_mod_list:
