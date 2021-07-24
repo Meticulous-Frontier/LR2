@@ -86,12 +86,14 @@ init 2 python:
         if not emotion in self.position_dict[position]:
             return Image("character_images/empty_holder.png")
 
+        #renpy.notify("Lighting: {r}, {g}, {b}\nEye Color: {r1}, {g1}, {b1}".format(r=lighting[0], g=lighting[1], b=lighting[2], r1=eye_colour[0], g1=eye_colour[1], b1=eye_colour[2]))
+
         base_image = ZipContainer(position, self.position_dict[position][emotion])
         mask_image = ZipContainer(position, self.position_dict[position][emotion].replace("_" + self.skin_colour,"_Pattern_1"))
 
         shader_image = im.MatrixColor(base_image, im.matrix.tint(*lighting))
         colour_pattern_matrix = im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)
-        shader_pattern_image = im.MatrixColor(mask_image, colour_pattern_matrix * im.matrix.opacity(.5))
+        shader_pattern_image = im.MatrixColor(base_image, colour_pattern_matrix * im.matrix.opacity(.8))
 
         return AlphaBlend(mask_image, shader_image, shader_pattern_image, alpha=False)
 
