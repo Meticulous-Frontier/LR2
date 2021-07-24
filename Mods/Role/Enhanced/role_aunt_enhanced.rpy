@@ -139,7 +139,7 @@ label aunt_drunk_cuddle_label():
             the_person "Ahhh... that's it baby..."
             "When you finish, you are exhausted. You consider getting up and cleaning up, but it feels to good to be up against [the_person.title]'s body still..."
             $ the_person.change_slut_core(5)
-            $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = stephanie)
+            $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_person)
             the_person "Goodnight..."
             mc.name "Goodnight..."
         else:
