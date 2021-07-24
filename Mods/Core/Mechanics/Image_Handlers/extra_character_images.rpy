@@ -91,7 +91,7 @@ init 2 python:
 
         shader_image = im.MatrixColor(base_image, im.matrix.tint(*lighting))
         colour_pattern_matrix = im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)
-        shader_pattern_image = im.MatrixColor(mask_image, colour_pattern_matrix * im.matrix.opacity(.6))
+        shader_pattern_image = im.MatrixColor(mask_image, colour_pattern_matrix * im.matrix.opacity(.5))
 
         return AlphaBlend(mask_image, shader_image, shader_pattern_image, alpha=False)
 
