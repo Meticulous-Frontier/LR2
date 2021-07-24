@@ -433,9 +433,11 @@ init 5 python:
         color_prefs["the colour blue"] = {
             "cobalt blue": [0, .278, .671, .95],
             "cornflower blue": [.392, .584, .929, .95],
+            "denim": [.08, .38, .74, .95],
             "dark slate blue": [.282, .239, .545, .95]
         }
         color_prefs["the colour yellow"] = {
+            "khaki": [.765, .69, .569, .95],
             "indian yellow": [.89, .65, .34, .95],
             "saffron": [.96, .77, .19, .95],
             "corn": [.98, .92, .36, .95]
@@ -447,6 +449,7 @@ init 5 python:
         }
         color_prefs["the colour pink"] = {
             "thulian pink": [.87, .44, .63, .95],
+            "pale pink": [.98, .86, .87, .95],
             "hot pink": [1, .41, .71, .95],
             "cotton candy": [1, .73, .85, .95]
         }
@@ -466,10 +469,12 @@ init 5 python:
             "rich lilac": [.71, .4, .85, .95]
         }
         color_prefs["the colour orange"] = {
+            "swiss coffee": [.859, .331, .321, .95],
             "honey orange": [.89, .6, .16, .95],
             "burnt orange": [.8, .33, 0, .95]
         }
         color_prefs["the colour white"] = {
+            "cotton white": [.992, .953, .918, .95],
             "white smoke": [.95, .95, .95, .95],
             "ghost white": [.97, .97, 1, .95],
             "bright white": [1, 1, 1, .95]
@@ -477,7 +482,8 @@ init 5 python:
         color_prefs["the colour brown"] = {
             "saddle brown": [.451, .313, .235, .95],
             "coffee": [.435, .305, .215, .95],
-            "chocolate noir": [.352, 0.239, .239, .95]
+            "chocolate noir": [.352, 0.239, .239, .95],
+            "leather": [.26, .21, .14, .95]
         }
         #color_prefs[""][""] = [, , , ]
 
