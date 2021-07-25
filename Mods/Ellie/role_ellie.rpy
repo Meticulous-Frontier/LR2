@@ -131,9 +131,9 @@ label ellie_start_intro_note_label():
     mc.name "Can you come with me, but hide up on the roof with like... a camera or binoculars or something? Just watch while I deal with this."
     the_person "Yeah. I can do that. I think I know where you are talking about."
     mc.name "I'll pull out some cash the day of and be ready. Although the email doesn't even say how much cash to bring."
-    the_person "Yeah... its a little ambigious... But I can do that."
+    the_person "Yeah... it's a little ambigious... But I can do that."
     "You spend some time in your office with [the_person.title], making a quick and dirty plan for how to deal with the blackmail threat."
-    mc.name "Alright, its a plan. I won't meet with you tomorrow night, in case we are being watched or tracked, but its a plan atleast."
+    mc.name "Alright, it's a plan. I won't meet with you tomorrow night, in case we are being watched or tracked, but it's a plan at least."
     the_person "Ok... We'll talk then."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and leaves your office. This is a precarious situation, and you can't help but worry about it."
@@ -394,12 +394,12 @@ label ellie_never_given_handjob_label():
 
 label ellie_never_tasted_cock_label():  #This is Ellie's 40 sluttiness event.
     "Ellie has an on room entry event."
-    "You hear her asking another girl what its like to suck dick."
+    "You hear her asking another girl what it's like to suck dick."
     "She gets crazy embrassed when she sees you. Cute"
     "You ask her to come with you to your office. Pretend like you're gonna discipline her for lewd talk."
     "Get to your office, close door, lock it."
     "She starts to say sorry, but instead you stop her."
-    "Do you really want to know what its like to suck dick."
+    "Do you really want to know what it's like to suck dick."
     "She says yes. Give MC a choice. Whip it out and go for it, or offer to eat her out first. Best possible ending is non selfish route."
     menu:
         "Lick her first":

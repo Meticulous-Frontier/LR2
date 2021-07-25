@@ -211,7 +211,7 @@ label genius_climax_responses_vaginal(the_person):
 
 label genius_climax_responses_anal(the_person):
     if the_person.sluttiness > 80:
-        the_person "[the_person.mc_title] I'm cumming! Oh fuck its so good!"
+        the_person "[the_person.mc_title] I'm cumming! Oh fuck it's so good!"
     else:
         the_person "Oh fuck, I think... I think I'm going to cum!"
     return
@@ -732,14 +732,14 @@ label genius_flirt_response_affair(the_person):
 label genius_cum_face(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 60:
-            the_person "Mmm, did you know that cum doesn't just taste good, its good for the skin too?"
+            the_person "Mmm, did you know that cum doesn't just taste good, it's good for the skin too?"
             "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
         else:
             the_person "I hope this means I did a good job."
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     else:
         if the_person.sluttiness > 80:
-            the_person "Mmm, it feels so hot on my face, and its good for the skin too!"
+            the_person "Mmm, it feels so hot on my face, and it's good for the skin too!"
         else:
             the_person "Fuck me, you really pumped it out, didn't you?"
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."

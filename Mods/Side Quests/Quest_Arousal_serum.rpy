@@ -186,7 +186,7 @@ label quest_arousal_serum_receive_drug_label():
     $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
     $ clear_scene()
-    "You open up the package. Its the two pills you ordered. The highly acclaimed Female Viagra."
+    "You open up the package. It's the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
     "Hmm... what to do with this? With two doses, you figure you could test one dose, and if it works, use the second one to try and reverse engineer the drug."
     if mc.business.head_researcher == None:

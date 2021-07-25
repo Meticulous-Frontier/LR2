@@ -70,7 +70,7 @@ label mom_breakfast_action_label_low():
             mc.name "You work so hard, [the_person.title]. You are pretty amazing, sacrificing so much for your family."
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
-            the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, its a good reminder why I do what I do sometimes."
+            the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, it's a good reminder why I do what I do sometimes."
             $ the_person.change_love(5)
             $ the_person.change_happiness(2)
 
@@ -78,7 +78,7 @@ label mom_breakfast_action_label_low():
             mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.title] can go shopping or something?"
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
-            the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, its a good reminder why I do what I do sometimes."
+            the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, it's a good reminder why I do what I do sometimes."
             $ the_person.change_love(2)
             $ the_person.change_happiness(5)
         "Emphasize Stability": #This will increase obedience
@@ -260,7 +260,7 @@ label mom_breakfast_action_label_high():
 
     if mc.business.event_triggers_dict.get("family_threesome", False) == True:
         mc.name "Why does it matter if [lily.name] comes out?"
-        the_person "Well, I mean its not that I mind, but your mommy has needs [the_person.mc_title]..."
+        the_person "Well, I mean it's not that I mind, but your mommy has needs [the_person.mc_title]..."
         menu:
             "Insist [lily.title] join you" if willing_to_threesome(the_person, lily):
                 mc.name "Don't worry [the_person.title]. I'll make sure you have your needs met."

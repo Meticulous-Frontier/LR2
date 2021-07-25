@@ -75,7 +75,7 @@ label milk_employee_crisis_label():
         "You step around behind [the_person.possessive_title] while she picks up her milk containers and puts them up against her chest."
         mc.name "Plus, this will be a bit faster than if you did it by hand, since I can milk both at the same time."
         the_person "Exactly! All in the name of efficiency!"
-        "You put your hands on her engorged mammaries. The skin is hot and feels like its pulled tight, her tits are so full of milk."
+        "You put your hands on her engorged mammaries. The skin is hot and feels like it's pulled tight, her tits are so full of milk."
         $ mc.change_locked_clarity(20)
         the_person "Aahhh... I mean... it feels really good too..."
         "You start to squeeze them in rhythm. First one, then the other. It takes several seconds, but soon milk starts to dribble out of the tip."

@@ -587,7 +587,7 @@ label Sarah_third_wheel_label():
     the_person "I've been out with them a couple of times now, hoping maybe they would show interest in me, but so far nothing."
     $ mc.change_locked_clarity(10)
     if sarah_epic_tits_progress() < 2:
-        the_person "Her boyfriend... it's like he just looks right through me. I've seen them leave the bar with a girl before, and its always some dumb looking, busty girl."
+        the_person "Her boyfriend... it's like he just looks right through me. I've seen them leave the bar with a girl before, and it's always some dumb looking, busty girl."
         mc.name "Don't be silly, you are so sexy. There is more to look for in a woman than chest size."
         "She laughs at you sarcastically."
         the_person "Ha! Very funny. No, I'm afraid the guys I meet tend to friend zone me pretty quick. The flat chested third wheel! I suspect that is how things will go tonight."
@@ -595,7 +595,7 @@ label Sarah_third_wheel_label():
         the_person "I though that, you know, after taking those serums that her boyfriend might actually notice me now."
         the_person "Really though, I'm about ready to move on. They still think of me as that flat chested third wheel I used to be!"
     "[the_person.title] considers things for a bit."
-    the_person "However tonight goes... its pretty amazing you are willing to come out here with me like this."
+    the_person "However tonight goes... it's pretty amazing you are willing to come out here with me like this."
     $ mc.change_locked_clarity(10)
     mc.name "Of course, I can't remember the last time I said no to drinks with a single lady as beautiful as you."
     the_person "There you go again! You know, it was a long time ago that we grew up together. But I still have so many fond memories of you. You always used to be so nice to me."
@@ -1230,7 +1230,7 @@ label Sarah_catch_stealing_label():
                 "Insist":
                     pass
                 "Relent":
-                    mc.name "Ok, have it your way, but I still think its a mistake."
+                    mc.name "Ok, have it your way, but I still think it's a mistake."
                     $ try_to_convince = False
                     jump epic_tits_choice_menu
             mc.name "I have to insist [the_person.title] and be happy I don't give you a good spanking for being so dumb as to think men only judge woman by their breast size."
@@ -1270,7 +1270,7 @@ label Sarah_new_tits_label():
 label Sarah_tits_reveal_label():
     $ the_person = sarah
     if not mc.location == office:
-        "Your phone rings. Its [the_person.possessive_title]. You answer it."
+        "Your phone rings. It's [the_person.possessive_title]. You answer it."
         the_person "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
         "You put your phone in your pocket and head to your office."
         $ mc.change_location(office)
@@ -1397,7 +1397,7 @@ label Sarah_stripclub_story_label():
     if not strip_club.visible:
         $ strip_club.visible = True
 
-    mc.name "You know, its against company policy to be moonlighting at a place like this. Even with a body like yours."
+    mc.name "You know, it's against company policy to be moonlighting at a place like this. Even with a body like yours."
     the_person "Ha! No I haven't been working here, I just thought it would be fun to watch a couple shows."
     $ mc.change_locked_clarity(10)
     mc.name "Sounds great!"
@@ -1492,7 +1492,7 @@ label Sarah_stripclub_story_label():
     $ scene_manager.add_actor(showgirl_2)
     showgirl_2 "Alright! We got a couple in here tonight, this should be fun!"
     if showgirl_2 is cousin:
-        "Suddenly, [showgirl_2.title] realizes its you she is getting ready to dance for."
+        "Suddenly, [showgirl_2.title] realizes it's you she is getting ready to dance for."
         "[showgirl_2.possessive_title] lowers her face to your ear and whispers in it."
         showgirl_2 "What the fuck? You want me to give you a lap dance? Here??? In front of your little bimbo? You're a sick fuck..."
         mc.name "Don't worry, I'll make it worth it."
@@ -1595,7 +1595,7 @@ label Sarah_stripclub_story_label():
 
     "Finally, you reach your bedroom and quickly close and lock the door."
     mc.name "God I'm sorry, if you aren't in the mood anymore..."
-    the_person "Sorry for what? Its your mom, I think its sweet."
+    the_person "Sorry for what? It's your mom, I think it's sweet."
     mc.name "So... do you wanna..."
     the_person "Oh fuck yeah, I'm so worked up. But first I want to try something! Why don't you sit down on the bed there."
     "You quickly sit down."
@@ -1792,7 +1792,7 @@ label Sarah_threesome_request_label():
     "You feel yourself raise an eyebrow."
     the_person "But uhh, you know, if we DID happen to get wasted and banged in every room in the business, I'm pretty sure I would be okay with that."
     $ mc.change_locked_clarity(10)
-    "Jesus, this girl is insatiable. Its amazing!"
+    "Jesus, this girl is insatiable. It's amazing!"
     the_person "You got any shot glasses?"
     mc.name "No... I actually don't have any around."
     "You think about a possible solution."
@@ -2073,7 +2073,7 @@ label Sarah_arrange_threesome_label(the_person):
             mc.name "Fine, I'll give you $500, right now."
             the_person "Deal!"
             $ mc.business.change_funds(-500)
-            "You give her the cash. She counts it twice to make sure its all there."
+            "You give her the cash. She counts it twice to make sure it's all there."
             the_person "Alright, I'll call in sick on Saturday. It's been a pleasure doing business with you."
         else:
             the_person "Can't. I have other plans for Saturday night."
@@ -2087,7 +2087,7 @@ label Sarah_arrange_threesome_label(the_person):
             "She looks at you, unwavering."
             mc.name "Fine, I'll give you $500, right now."
             $ mc.business.change_funds(-500)
-            "You give her the cash. She counts it twice to make sure its all there."
+            "You give her the cash. She counts it twice to make sure it's all there."
             the_person "Alright, I'll see you on Saturday. It's been a pleasure doing business with you."
         "You give her the details. maybe picking [the_person.possessive_title] was a bad idea..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
@@ -2176,7 +2176,7 @@ label Sarah_initial_threesome_label():
     $ sarah.change_arousal(10)
     $ the_person.change_arousal(10)
     "The girls are starting to moan into each other's mouths. Things are heating up quickly!"
-    "You decide its time for you to make your presence known. You step directly behind [sarah.title] and hug her from behind."
+    "You decide it's time for you to make your presence known. You step directly behind [sarah.title] and hug her from behind."
     $ mc.change_locked_clarity(20)
     $ scene_manager.update_actor(sarah, position = "back_peek")
     sarah "Oh... oh my god..."
@@ -2916,7 +2916,7 @@ label Sarah_weekend_date_strip_club_label():
             "Get outta here":
                 $ loop_count += 5
         if the_person.arousal >= 70:
-            the_person "Hey, so... don't you think its about time for us to get outta here? I'm not sure I can take much more teasing!"
+            the_person "Hey, so... don't you think it's about time for us to get outta here? I'm not sure I can take much more teasing!"
             $ loop_count += 5
             mc.name "Good idea..."
 

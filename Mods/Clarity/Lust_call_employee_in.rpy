@@ -168,7 +168,7 @@ label lust_blowjob_office_label():
             the_person "Oh god... I can feel how full you are. You've saved up a big load for me, haven't you?"
             "[the_person.possessive_title] leans forward and licks all around the tip, savoring the taste of your cum."
             $ the_person.change_arousal(20)
-            the_person "Oh fuck its so warm... I can't wait to feel it explode!"
+            the_person "Oh fuck it's so warm... I can't wait to feel it explode!"
             "[the_person.title] opens her mouth and takes you easily inside and down her throat. You run a hand through her hair as she starts to blow you."
             call get_fucked(the_person, private= True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_cum_fetish_lust_blowjob_01
             $ the_report = _return

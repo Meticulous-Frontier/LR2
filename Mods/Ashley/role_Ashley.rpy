@@ -1099,7 +1099,7 @@ label ashley_second_concert_intro_label(the_person):
     stephanie "I... errrmm... I guess?"
     the_person "The Los Angeles Philharmonic had sold out for the show tonight... fucking scalpers... but this morning they release a bunch of extra tickets. I managed to grab two!"
     stephanie "Ok... but... why do you need to borrow my boyfriend?"
-    the_person "I mean, I know you hate going to classical shows, and I don't know anyone else who would want to go... Please? Its just one night!"
+    the_person "I mean, I know you hate going to classical shows, and I don't know anyone else who would want to go... Please? It's just one night!"
     "[stephanie.title] mumbles something under her breath. She is clearly not happy with the situation, but relents."
     stephanie "I guess..."
     "She leans over and whispers in your ear."
@@ -1243,7 +1243,7 @@ label ashley_second_concert_date_label():
                         "[the_person.possessive_title] has a bit of cum on her chin, but is able to quickly clean it up."
                     elif the_person.has_tits_cum():
                         if the_person.outfit.is_dress():
-                            "[the_person.possessive_title]'s chest looks great covered in your cum. But you slowly realize... its all over her dress."
+                            "[the_person.possessive_title]'s chest looks great covered in your cum. But you slowly realize... it's all over her dress."
                             $ cum_clue = True
             "Tease her":
                 "You stand up and tease her."
@@ -1320,7 +1320,7 @@ label ashley_second_concert_date_label():
                     "When you look down, you can see some cum running down the inside of [the_person.possessive_title]'s legs, but it doesn't seem like any got on her clothes."
                 elif the_person.has_ass_cum():
                     if the_person.outfit.is_dress():
-                        "[the_person.possessive_title]'s ass looks amazing covered in your cum. But you slowly realize... its all over her dress."
+                        "[the_person.possessive_title]'s ass looks amazing covered in your cum. But you slowly realize... it's all over her dress."
                         $ cum_clue = True
                     else:
                         "[the_person.possessive_title]'s ass looks amazing covered in your cum. Thankfully her dress came off at some point, so no cum got on it."
@@ -1337,7 +1337,7 @@ label ashley_second_concert_date_label():
                 $ the_person.draw_person()
     if date_outcome:
         if cum_clue:
-            the_person "Oh fuck... its all over my dress!"
+            the_person "Oh fuck... it's all over my dress!"
             "[the_person.possessive_title] gets some wipes from her clutch, but despite wiping it down as best as she can, it is still obvious she's been sprayed down."
             the_person "Well... maybe my sister won't notice?"
             mc.name "Yeah. Maybe."
@@ -1845,7 +1845,7 @@ label ashley_clothes_shopping_label(the_person):
             the_person "I think so too. Thanks!"
             $ the_person.wardrobe.add_outfit(the_person.outfit)
         "Not for you":
-            mc.name "Sorry, its an interesting outfit, but I don't think its right for you."
+            mc.name "Sorry, it's an interesting outfit, but I don't think it's right for you."
             the_person "Yeah... I was thinking the same thing..."
     if the_person.is_girlfriend():
         # the_person "So, I know that like... Clothes shopping can be pretty boring for guys... So I was wandering..."

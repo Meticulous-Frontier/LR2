@@ -281,7 +281,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             mc.name "It's okay. It feels so good, don't you want to make me feel good?"
                             the_person "Yes... of course I want to... I just..."
                             "You take her hand in yours. She looks at you and bites her lip. You slowly move her hand down until your cock is resting in her palm."
-                            the_person "Oh my god... its so... warm..."
+                            the_person "Oh my god... it's so... warm..."
                             "Her hand starts to stroke you."
                             $ the_person.break_taboo("touching_penis")
                             $ mc.change_arousal(15)
