@@ -81,7 +81,7 @@ init 2 python:
             lighting = [1,1,1]
 
         if eye_colour is None:
-            eye_colour = [0.75, 0.75, 0.8, 1.0] #grey by default.
+            eye_colour = [0.6, 0.6, 0.65, 1.0] #grey by default.
 
         if not emotion in self.position_dict[position]:
             return Image("character_images/empty_holder.png")
@@ -91,11 +91,16 @@ init 2 python:
         base_image = ZipContainer(position, self.position_dict[position][emotion])
         mask_image = ZipContainer(position, self.position_dict[position][emotion].replace("_" + self.skin_colour,"_Pattern_1"))
 
-        shader_image = im.MatrixColor(base_image, im.matrix.tint(*lighting))
-        colour_pattern_matrix = im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting)
-        shader_pattern_image = im.MatrixColor(base_image, colour_pattern_matrix * im.matrix.opacity(.8))
+        # correctly lighted
+        base_image = im.MatrixColor(base_image, im.matrix.tint(*lighting))
 
-        return AlphaBlend(mask_image, shader_image, shader_pattern_image, alpha=False)
+        # grey-scaled with slight brightness boost
+        shader_image = im.MatrixColor(base_image, im.matrix.saturation(0) * im.matrix.brightness(.2))
+        # colorized with eye colour
+        shader_pattern_image = im.MatrixColor(shader_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting))
+
+        # blend shader pattern into base image (mask location only)
+        return AlphaBlend(mask_image, base_image, shader_pattern_image, alpha=False)
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
 
