@@ -8,7 +8,7 @@
 # Use mod code to have her deny lunch dates due to being at work, require different date time.
 
 style kaya_lang:
-    outlines [ (absolute(2), "#080", absolute(0), absolute(0)) ]
+    outlines [ (absolute(4), "#080", absolute(0), absolute(0)) ]
 
 init 2 python:
     def kaya_mod_initialization():
@@ -154,7 +154,7 @@ label kaya_intro_label(the_person):
     "The person in front of you moves to wait for their drink."
     the_person "Hi, what can I get you?"
     "That accent... where is it from? It's starting to other you..."
-    the_person "{kaya_lang}Kia ora? {/kaya_lang}(?????)... Do you want to order?"
+    the_person "{=kaya_lang}Kia ora? {/=kaya_lang}(?????)... Do you want to order?"
     "Ah! You zoned out for a second. What was that word?"
     mc.name "Yes, sorry. I was trying to place your accent, but I can't. I'll just take a large coffee, leave room for cream."
     the_person "Okay. Is that all?"
@@ -299,7 +299,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "You could probably slip a serum into her drink if you do it quickly..."
     call give_serum(the_person) from _call_give_kaya_serum_bar_01
     "You walk back to the pool table. She smirks when she sees your drink for her."
-    the_person "Ah, so you ARE trying to get me drunk then? Ahhh, {kaya_lang}koretake {/kaya_lang}(?????)."
+    the_person "Ah, so you ARE trying to get me drunk then? Ahhh, {=kaya_lang}koretake {/=kaya_lang}(?????)."
     mc.name "As... what now?"
     the_person "Ah... sorry... as you might have guessed, English isn't my first language."
     "She takes a sip from her drink."
