@@ -48,11 +48,15 @@ init 5 python:
         "yes": "yessir",
         "something": "sumthing",
         "things": "thangs",
+        "because": "cuz",
+        "love": "luv",
+        "what": "whut",
+        "want": "wonna",
     }
 
     # letter replace (in word)
     southern_replace_dict = {
-        "ing": "in'"
+        "ing": "in'",
     }
 
     # word group replacer
