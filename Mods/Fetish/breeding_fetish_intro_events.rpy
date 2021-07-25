@@ -251,7 +251,7 @@ label breeding_fetish_family_intro_label(the_person):
     $ the_person.change_arousal(20)
     "You reach down and start to pull your cock out."
     the_person "but... we're... you know... family..."
-    mc.name "Shhh, its okay. You can trust me, right? We're both consenting adults, who just happen to be related."
+    mc.name "Shhh, it's okay. You can trust me, right? We're both consenting adults, who just happen to be related."
     "She bites her lip. It's clear from the look in her eyes that she wants it badly, but is afraid to take the leap."
     mc.name "Tell you what, let's go a little farther, and if it feels wrong we can stop."
     $ the_person.add_situational_slut("situation",20, "I can stop if I want to...")

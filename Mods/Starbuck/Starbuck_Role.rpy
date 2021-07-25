@@ -1414,7 +1414,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     mc.name "Wow, that was good. You are so sexy."
     the_person "Aww, thanks [the_person.mc_title]. Now, I promised that if you helped me make the video, I'd give you a swing for you to have."
     mc.name "Thanks, but you don't need to do that."
-    the_person "No no, its okay, I want you to have one... I was thinking... you helped me set up this one, why don't you let me come over and I'll help you set up one?"
+    the_person "No no, it's okay, I want you to have one... I was thinking... you helped me set up this one, why don't you let me come over and I'll help you set up one?"
     "Hmm, she is offering to come over to your place!"
     mc.name "Well, it would be rude to say no."
     "[the_person.possessive_title] gives you a big hug."
@@ -2177,7 +2177,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "Well, I'd say the product works as advertised!"
     "[starbuck.title] gives a run down on the product price, and soon the video is complete. You stop recording."
     the_person ".... ffuuuuuuuck... boss I don't think I can get up..."
-    mc.name "Its okay. Take your time and recover."
+    mc.name "It's okay. Take your time and recover."
     the_person "Yeah... you two... can I watch? Like... I can't do anything... now but... if you want to fuck... can I just watch?"
     $ mc.change_locked_clarity(20)
     "Even after getting the pounding of a lifetime, [the_person.possessive_title] still wants to be involved with sexy times."

@@ -380,7 +380,7 @@ label camilla_hookup_accept(the_person):
             "Put on a condom":
                 mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
                 if the_person.effective_sluttiness() > 60:
-                    the_person "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
+                    the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
                         the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"

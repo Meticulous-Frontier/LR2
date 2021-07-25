@@ -63,7 +63,7 @@
 #                 the_person "Mmm, that was so good, thank you [the_person.mc_title]..."
 #                 "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
 #             "You start to get up to go to your room, but [the_person.possessive_title] calls out to you as you start to get up."
-#             the_person "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
+#             the_person "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... it's okay!"
 #             "You slip back into bed next to her."
 #             $ the_person.add_role(anal_fetish_role)
 #             $ add_fuck_doll_collar_to_base_outfit(the_person)

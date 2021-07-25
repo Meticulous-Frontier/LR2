@@ -33,7 +33,7 @@ label aunt_drunk_cuddle_label():
 
     "Before you go to bed, you come out into the kitchen to get a drink of water. [mom.possessive_title] and [the_person.title] are sitting there, drinking some wine."
     "It is pretty clear from their conversation that they have both had a lot to drink. They are cracking dirty jokes to each other."
-    the_person "...So then I said, its okay my partner is no good, I've got a good hand!"
+    the_person "...So then I said, it's okay my partner is no good, I've got a good hand!"
     "[mom.title] laughs at [the_person.possessive_title]'s joke."
     mom "Ah that's too funny. Oh hi [mom.mc_title], your aunt and I were just having some wine before bed. Would you like some?"
     mc.name "No thanks, I'm just grabbing a glass of water."
@@ -63,12 +63,12 @@ label aunt_drunk_cuddle_label():
     the_person "I'm so sorry... oh no the couch is soaked..."
     "She walks over to the couch and starts picking up the pieces of glass."
     the_person "I'll pay for the glass! I didn't mean to..."
-    mc.name "Its okay, its just a glass. I'm glad you aren't hurt."
+    mc.name "It's okay, its just a glass. I'm glad you aren't hurt."
     "You help [the_person.possessive_title] pick up the glass off the floor and grab a towel you lay down on the couch."
     the_person "Ahh, I guess I'll just be a little wet tonight."
     mc.name "Don't be crazy. You can sleep in my bed tonight."
     the_person "Oh my, I don't want to impose..."
-    mc.name "You aren't. Its fine [the_person.title]. You would never get a decent night's sleep out here!"
+    mc.name "You aren't. It's fine [the_person.title]. You would never get a decent night's sleep out here!"
     the_person "Well... okay... I'll go change into my pajamas..."
     $ scene_manager.remove_actor(the_person)
     "[the_person.title] grabs a couple things out of her suitcase and heads to the bathroom. You head to your room and quickly straighten up a bit."
@@ -82,7 +82,7 @@ label aunt_drunk_cuddle_label():
     "After a minute, [the_person.possessive_title] knocks on your door, then slowly enters."
     $ scene_manager.add_actor(the_person)
     the_person "I appreciate this [the_person.mc_title]... sometimes I get a little clumsy when I've had a couple drinks..."
-    mc.name "Its fine, really!"
+    mc.name "It's fine, really!"
     $ scene_manager.update_actor(the_person, position = "missionary")
     "[the_person.title] lays down in your bed and starts to get comfortable."
     mc.name "I'm gonna go check the closet, pretty sure we have a sleeping bag or something in there."
@@ -93,8 +93,8 @@ label aunt_drunk_cuddle_label():
     "[the_person.title] chuckles and shakes her head."
     the_person "[the_person.mc_title], its just me, your aunt! It'll be fine. It might even be kind of nice... I haven't shared a bed with someone since your uncle..."
     "There is a bit of an awkward silence."
-    the_person "Its nonsense. Now get in!"
-    mc.name "Okay... its okay... I usually just sleep in my underwear..."
+    the_person "It's nonsense. Now get in!"
+    mc.name "Okay... it's okay... I usually just sleep in my underwear..."
     the_person "Whatever you need to feel comfortable!"
     "You take your shirt off, then undo your belt and slide your pants down. You can't help but notice [the_person.possessive_title] watching you, her eyes glancing down at your crotch..."
     $ the_person.change_slut_temp(5)
@@ -117,7 +117,7 @@ label aunt_drunk_cuddle_label():
         "After a while she turns her head back to you."
         the_person "Ahh... I'm sorry, I didn't realize... anyone still thought I was..."
         mc.name "[the_person.title] I'm sorry I didn't mean to it just happened..."
-        the_person "Its okay! A young, virile man like you... I shouldn't be surprised."
+        the_person "It's okay! A young, virile man like you... I shouldn't be surprised."
         "You push your hips against her, grind yourself against her ass for a moment. She gasps, but quickly puts a stop to it."
         the_person "I'm sorry, that's enough for tonight..."
         "You roll on your back. It takes a while for your erection to finally subside, but you finally manage it and fall asleep."
@@ -126,7 +126,7 @@ label aunt_drunk_cuddle_label():
         "After a while she turns her head back to you."
         the_person "Ahh... I'm sorry, I didn't realize... anyone still thought I was... sexy..."
         "You start to apologize, but to your surprise, you feel her ass push back and start to grind against you."
-        the_person "You're such a young... sexy... virile man... its okay..."
+        the_person "You're such a young... sexy... virile man... it's okay..."
         $ mc.change_locked_clarity(15)
         "You groan and start to grind your hips against hers. The curves of her ass feel amazing, your cock straining against your underwear as you grind against her."
         if the_person.sluttiness < 30:  # she finishes you like this.
@@ -175,7 +175,7 @@ label aunt_drunk_cuddle_label():
                 $ mc.change_locked_clarity(30)
                 the_person "Do you mind if I... if I... get myself off too?"
                 mc.name "Of course not! Do you want me...?"
-                the_person "No! No its okay, your hand is great right where its at..."
+                the_person "No! No it's okay, your hand is great right where its at..."
                 "You feel her shift a bit as she props one leg up a little bit. You can't see under the covers, but she gasps as she begins to touch herself."
                 "You resume grind your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
                 $ mc.change_locked_clarity(30)

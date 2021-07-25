@@ -357,7 +357,7 @@ label quest_production_line_help_move_label():
         the_person "Sorry, I just, its so weird for someone else to call me that. Could you just stick with [the_person.title]?"
         mc.name "Certainly, if that is what you prefer."
     else:
-        mc.name "Its okay, you can say it."
+        mc.name "It's okay, you can say it."
         "When she realizes that you are okay with it, she finally says it."
         the_person "Daddy, I'm so glad you are here!"
         $ the_person.draw_person(position = "kissing")

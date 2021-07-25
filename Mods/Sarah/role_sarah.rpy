@@ -2078,7 +2078,7 @@ label Sarah_arrange_threesome_label(the_person):
         else:
             the_person "Can't. I have other plans for Saturday night."
             mc.name "You're always doing something late at night. What have you been up to anyway?"
-            the_person "Nothing! Its none of your business, even if I was doing something."
+            the_person "Nothing! It's none of your business, even if I was doing something."
             mc.name "Can't you just give up one Saturday night?"
             the_person "What's it worth to you?"
             mc.name "What?"

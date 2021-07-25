@@ -165,7 +165,7 @@ label mom_sister_snooping_action_label():
         lily "Mom! It's fine! There's nothing wrong with a little fun. Besides, he really enjoys it. Especially if I leave the top couple buttons open on the blouse..."
         mom "Oh my. Lily, what am I gonna do with you."
         "[lily.title] gives a little laugh."
-        lily "Its okay mom. Say, you should try something like this sometime!"
+        lily "It's okay mom. Say, you should try something like this sometime!"
         mom "Why I would never..."
         lily "Didn't you say it felt like your boss was checking you out? It wouldn't hurt to get on his good side..."
         mom "I'm not gonna dress like a slut to get my boss to like me!"

@@ -266,7 +266,7 @@ label lust_blowjob_office_label():
         mc.name "Just come around here, and get on your knees."
         $ the_person.draw_person(position = "blowjob")
         "As [the_person.possessive_title] obediently gets down, you pull your cock out. She gasps when she sees it."
-        the_person "Wow... it looks so hard! Its okay... I'll take care of it!"
+        the_person "Wow... it looks so hard! It's okay... I'll take care of it!"
         $ the_person.add_situational_slut("situation",10, "I'm doing my work duties.")
         "[the_person.title] opens her mouth and begins to suck you off. She starts off tentatively, but soon has a good rhythm going."
         call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _lust_blowjob_at_work_04

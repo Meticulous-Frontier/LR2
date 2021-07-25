@@ -429,7 +429,7 @@ label quest_cuckold_employee_rethink_decision_label():
     "She is fidgeting a bit. She is clearly nervous about what she has to say."
     the_person "Well... ever since the other day, when you offered to help me with my... you know... fertility issue? I just can't seem to get the idea out of my head!"
     the_person "It's been running through my head over and over. Should I? Shouldn't I? My head says its wrong, but my body says MAKE A BABY. I'm going crazy."
-    mc.name "Its okay. Do you need a few days off? Get out from the office for a while?"
+    mc.name "It's okay. Do you need a few days off? Get out from the office for a while?"
     the_person "No, not at all. I want to be here, every day, as much as possible, around you."
     the_person "You offered... you know... to help me. Are you still willing to do that?"
     mc.name "I'll do everything in my power to get you pregnant if that is what you want."

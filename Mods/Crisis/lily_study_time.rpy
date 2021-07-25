@@ -168,7 +168,7 @@ label sister_failed_test_label():
                 if the_person.has_taboo("touching_penis"):
                     "[the_person.possessive_title] begins to falter a bit. You can sense her hesitation to touch you."
                     the_person "Are you sure... this is okay? I feel like we are really crossing a line here..."
-                    mc.name "Its okay. It feels so good, don't you want to make me feel good?"
+                    mc.name "It's okay. It feels so good, don't you want to make me feel good?"
                     the_person "Yes... of course I want to... I just..."
                     "You take her hand in yours. She looks at you and bites her lip. You slowly move her hand down until your cock is resting in her palm."
                     the_person "Oh my god... its so... warm..."
@@ -189,7 +189,7 @@ label sister_failed_test_label():
                 if the_person.has_taboo("sucking_cock"):
                     "[the_person.title] takes your cock in her hand and gives it a couple strokes, but you can tell she is hesitating to go any further."
                     the_person "Are you sure... this is okay? I mean... I'm about to put my brother's cock in my mouth!"
-                    mc.name "Its okay. Its going to feel so good, don't you want to make me feel good?"
+                    mc.name "It's okay. Its going to feel so good, don't you want to make me feel good?"
                     the_person "Yeah... I mean... you were very helpful tonight..."
                     "She pauses for several seconds. You start to get worried she is going to back out."
                     the_person "Okay. Just this once, okay?"

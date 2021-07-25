@@ -124,7 +124,7 @@ label camilla_spot_at_bar_label(the_person):
     "[the_person.title] hesitates. You might have hit a sore subject with her..."
     the_person "No, no niños..."
     mc.name "I'm sorry... I'm probably getting a little personal."
-    the_person "Its okay, that's a perfectly normal question to ask."
+    the_person "It's okay, that's a perfectly normal question to ask."
     "You feel bad. You notice that her glass is almost empty. You wave down the bartender. When he walks over, he smiles wide at [the_person.title]"
     "?????" "Something I can get for you?"
     mc.name "Can I get a beer and another for my friend?"
