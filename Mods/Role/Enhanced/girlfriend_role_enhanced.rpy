@@ -357,7 +357,7 @@ label girlfriend_wakeup_spooning_label(the_person):
             $ the_person.draw_person( position = "back_peek")
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
             "You pull out at the last second. Large, thick ropes of cum rocket out of your cock, coating her ass."
-            the_person "Oh my god... its so warm!"
+            the_person "Oh my god... it's so warm!"
             "When you finish you lay back, admiring your painting skills."
             the_person "That's certainly one way to start the day..."
     $ the_person.reset_arousal()
@@ -392,7 +392,7 @@ label girlfriend_roleplay_step_sister_label(the_person):
         "The roleplaying has begun..."
         mc.name "It's me, [the_person.title]. What's going on?"
         "She is bent over and has her head in the sink."
-        the_person "Oh thank god its you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
+        the_person "Oh thank god it's you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
         mc.name "You got your hair stuck in the sink, again!?! How does this keep happening [the_person.title]?"
         "Her hips start to wiggle a bit as you approach her."
         $ mc.change_locked_clarity(30)
@@ -426,7 +426,7 @@ label girlfriend_underwear_shopping_label(the_person):
     "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
     $ mc.change_location(clothing_store)
     $ mc.location.show_background()
-    "Normally this would be a bit awkward by yourself, but with [the_person.title], its not so bad..."
+    "Normally this would be a bit awkward by yourself, but with [the_person.title], it's not so bad..."
     the_person "Hmm, how should we do this? Want me to pick something out first? Or do you want to?"
     $ lingerie_outfit = None
     $ done = False

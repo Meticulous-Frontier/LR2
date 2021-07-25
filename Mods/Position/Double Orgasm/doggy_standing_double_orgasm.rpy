@@ -3,7 +3,7 @@ init 5 python:
 
 label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
     "[the_girl.title]'s back is arched and she is moaning non stop. Her ass quakes with every rapid thrust."
-    the_girl "Oh god its so good! Oh [the_girl.mc_title] I'm gonna cum!"
+    the_girl "Oh god it's so good! Oh [the_girl.mc_title] I'm gonna cum!"
     "Hearing her call out your name is pushing you over the edge. You are about to cum too."
     mc.name "I'm cumming too!"
     $ the_girl.call_dialogue("cum_pullout")
@@ -77,7 +77,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
                 "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
             else:
-                the_girl "Oh! Its so warm..."
+                the_girl "Oh! It's so warm..."
             "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
         "Cum on her face":
             mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"

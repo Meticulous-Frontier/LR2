@@ -130,7 +130,7 @@ label transition_default_Ophelia_blowjob(the_girl, the_location, the_object):
     $ Ophelia_blowjob.current_modifier = "blowjob"
     $ Ophelia_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] gets onto her knees in front of you and takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides the tip into her mouth."
-    the_girl "Mmm, its time for me to take care of you."
+    the_girl "Mmm, it's time for me to take care of you."
     return
 
 label strip_Ophelia_blowjob(the_girl, the_clothing, the_location, the_object):

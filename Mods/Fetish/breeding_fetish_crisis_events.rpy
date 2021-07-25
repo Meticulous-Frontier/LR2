@@ -260,7 +260,7 @@ label breeding_fetish_happy_breeder_crisis_label():
             $ the_person.draw_person(position = "blowjob")
             the_person "I'm sorry [the_person.mc_title]... I just can't help it. It feels so good inside of me..."
             "[the_person.possessive_title] reaches down and starts to stroke your mostly soft cock."
-            "Her hands feel good but you can tell its going to take a little more to get you aroused again, after cumming twice already."
+            "Her hands feel good but you can tell it's going to take a little more to get you aroused again, after cumming twice already."
             ###IF girl has big tits, ask for a tit fuck
             if the_person.has_large_tits():
                 mc.name "Why don't you put it between your tits for a while?"
@@ -287,7 +287,7 @@ label breeding_fetish_happy_breeder_crisis_label():
             "[the_person.possessive_title] obediently does as you ask and bends over your bed as you stand up and get behind her."
             $ the_person.draw_person(position = "standing_doggy")
             $ mc.change_locked_clarity(50)
-            the_person "Come and get it, [the_person.mc_title]... its yours for the taking!"
+            the_person "Come and get it, [the_person.mc_title]... it's yours for the taking!"
             "You line yourself up with her soaking wet slit and push yourself in."
             ###Sex Doggy Style###
             call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_fuck_person_SBV13
@@ -442,7 +442,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.possessive_title] is still bent over your desk, but has her hands between her legs, trying to hold your cum in."
         "It is beginning to run down the inside of her thighs."
-        the_person "Oh god... its so deep..."
+        the_person "Oh god... it's so deep..."
         $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
         $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         $ the_person.change_happiness(10)

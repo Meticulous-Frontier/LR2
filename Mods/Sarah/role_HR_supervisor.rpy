@@ -578,7 +578,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif HR_tier_talk == 1:
         the_person "Things are running pretty good right now, but they could always be better. Here's my list, who do you want me to call in?"
     elif HR_tier_talk == 2:
-        the_person "Honestly? All the girls here like all the policies I've looked at, but its possible with a bit of persuasion we could make them love them."
+        the_person "Honestly? All the girls here like all the policies I've looked at, but it's possible with a bit of persuasion we could make them love them."
         the_person "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
@@ -612,7 +612,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]. She clearly notices your cum still on her."
         $ mc.change_locked_clarity(20)
         if person_choice.sluttiness > 80:
-            person_choice "Wow, not sure why you called me in here, but I hope its for the same thing you have her in here for..."
+            person_choice "Wow, not sure why you called me in here, but I hope it's for the same thing you have her in here for..."
         else:
             person_choice "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
         $ person_choice.change_slut_temp(5) # give her a temp slut boost to maybe have a threesome later...
@@ -1130,7 +1130,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ the_person.break_taboo("condomless_sex")
                 $ the_person.break_taboo("vaginal_sex")
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
-                the_person "Oh God! its going so deep."
+                the_person "Oh God! it's going so deep."
                 $ mc.change_arousal(20)
                 "You give her ass a solid spank, then begin to fuck her roughly."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four

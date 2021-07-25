@@ -53,10 +53,10 @@ label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object):
         "In her reclined position you have a perfect view of her drooling pussy. Just below it you can see your cock stretching her nice little asshole."
         if the_girl is mom:
             the_girl "Oh god [the_girl.mc_title], you make [the_girl.title] feel so good... You grew up into such a good man!"
-            mc.name "Mmm, [the_girl.title] your ass is amazing. Its so tight!"
+            mc.name "Mmm, [the_girl.title] your ass is amazing. It's so tight!"
         else:
-            the_girl "Does that feel good? It feels even bigger when its in my ass like this."
-            mc.name "Mmm, [the_girl.title] your ass is amazing. Its so tight!"
+            the_girl "Does that feel good? It feels even bigger when it's in my ass like this."
+            mc.name "Mmm, [the_girl.title] your ass is amazing. It's so tight!"
 
     else:
         "[the_girl.possessive_title] leans back, putting her hands in line with your feet, and slows down her rhythm."

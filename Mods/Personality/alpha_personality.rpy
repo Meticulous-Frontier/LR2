@@ -904,7 +904,7 @@ label alpha_cum_vagina(the_person):
                 if the_person.on_birth_control:
                     the_person "Luckily I cannot get pregnant, but if I did, my [so_title] would believe it's his."
                 else:
-                    the_person "If I become pregnant I will tell my [so_title]'s its his, I'm sure he will accept that."
+                    the_person "If I become pregnant I will tell my [so_title]'s it's his, I'm sure he will accept that."
             else:
                 if the_person.on_birth_control:
                     the_person "Mmm, your semen feels warm and sticky, good thing I cannot get pregnant, because this might have done it."

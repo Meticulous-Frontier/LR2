@@ -171,7 +171,7 @@ label anal_fetish_employee_intro_label(the_person):
     mc.name "First off, I want you to know that you aren't in trouble. That isn't why I asked you here."
     the_person "Okay..."
     mc.name "I've noticed you've been acting a bit different lately whenever I am around. Bending over, wiggling your hips at me."
-    the_person "I... sir its not..."
+    the_person "I... sir it's not..."
     if the_person.has_taboo("anal_sex"):
         mc.name "I was wondering if you've ever tried anal before. It's clear that it is something that is on your mind."
     else:

@@ -83,7 +83,7 @@ label cum_fetish_employee_dosage_request_label():
     if mc.business.is_open_for_business():
         mc.name "Hello [the_person.title], come in."
         "[the_person.possessive_title] walks into your office."
-        the_person "Hey [the_person.mc_title]. So... I saw you walk into your office a minute ago and I was just thinking that its been a while..."
+        the_person "Hey [the_person.mc_title]. So... I saw you walk into your office a minute ago and I was just thinking that it's been a while..."
         mc.name "A while since what?"
         "[the_person.possessive_title] stutters for a second."
         the_person "...A while since you let me have your cum, so I thought..."

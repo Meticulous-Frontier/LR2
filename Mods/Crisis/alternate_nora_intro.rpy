@@ -41,7 +41,7 @@ label alternate_nora_intro_label():
     "You quickly make your way down to the lab."
     $ mc.change_location(rd_division)
     $ mc.location.show_background()
-    "When you get there, lo and behold, its your former professor, [nora.title]!"
+    "When you get there, lo and behold, it's your former professor, [nora.title]!"
     $ scene_manager.add_actor(nora, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person)
     mc.name "Wow, [nora.title]? What a surprise!"

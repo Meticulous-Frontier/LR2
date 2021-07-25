@@ -338,7 +338,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     if the_choice == "Cum on her face":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"

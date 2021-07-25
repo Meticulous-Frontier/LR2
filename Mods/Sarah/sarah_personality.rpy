@@ -1098,7 +1098,7 @@ label Sarah_creampie_taboo_break(the_person):
 
             else:
                 if the_person.is_highly_fertile():
-                    the_person "Oh my god, its inside me! I'm ovulating right now! This is so risky..."
+                    the_person "Oh my god, it's inside me! I'm ovulating right now! This is so risky..."
                     "She gets goosebumps and sighs."
                     the_person "... but so worth it. I feels so right inside me..."
                 else:
