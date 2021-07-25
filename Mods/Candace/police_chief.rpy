@@ -116,7 +116,7 @@ label police_chief_grope_body_reject(the_person):
         the_person "Stand back, Sir. You need to keep your hands away from my weapon."
         "You pull your hands back and lift them half up in the air apologetically."
         mc.name "Of course, I'm sorry."
-        the_person "Thank you, you should know its very dangerous to reach for an officers weapon."
+        the_person "Thank you, you should know it's very dangerous to reach for an officers weapon."
         "She seems unconvinced, but decides not to say anything else."
     return
 

@@ -350,7 +350,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 else:
                     "You watch in amazement as she wraps your cock between her tits, you erection now enveloped in her creamy cleavage."
                     if the_person.has_taboo("touching_body"):
-                        the_person "Oh my god... its so hot... I just want to make it feel good!"
+                        the_person "Oh my god... it's so hot... I just want to make it feel good!"
                         the_person "I'll stop if you want me too. You probably think I'm crazy!"
                         mc.name "I don't think your crazy. This is a great way to say thank you. I can't believe I'm so lucky."
                         the_person "I'm glad to hear that... I just... want to feel it blow all over me!"

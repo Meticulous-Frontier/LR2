@@ -319,7 +319,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
     $ the_person.change_slut_temp(5)
     $ mc.change_locked_clarity(10)
-    the_person "Oh god oh god, its happening..."
+    the_person "Oh god oh god, it's happening..."
     $ the_person.change_arousal(30)
     if the_person.outfit.vagina_available():
         "You take your hand off her back and run it down along her ass crack to her cunt. You can feel it is moist and ready for you already!"
@@ -469,7 +469,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     anon_char "Oh! Mmmm, yum..."
     "Well that response certainly sounds promising."
     if the_person.has_taboo("touching_penis"):
-        anon_char "Look at that thing, its huge..."
+        anon_char "Look at that thing, it's huge..."
         "While talking you feel a soft hand grasp your member, giving at couple of strokes. You hear some movement, but you aren't sure what shes doing."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
@@ -530,14 +530,14 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
     "It feels like she is taking you in her pussy! You let out a moan of appreciation."
 
-    anon_char "Mmmm, its so good when it goes in."
+    anon_char "Mmmm, it's so good when it goes in."
     $ mc.change_locked_clarity(30)
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
     "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
     anon_char "Yes! Mmm that feels good."
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
-    "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
+    "The mystery cunt you are fucking feels like it's getting wetter and wetter. The slippery channel feels so good wrapped around you."
     #TODO determine if she finishes or not. For now she always finishes with MC.
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop!"
@@ -593,7 +593,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "She slowly keeps descending until she hits the literal wall, separating you from your anonymous butt slut."
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the damn wall is in the way."
     "You start to thrust a little bit, testing the limits on how far to pull back without pulling out."
-    anon_char "Oh fuck its good. Mmmmm"
+    anon_char "Oh fuck it's good. Mmmmm"
     "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
     "You are thrusting vigorously now. Her ass is so tight, it's like it it is trying to milk the cum out of you."
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
@@ -668,13 +668,13 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             $ mc.change_locked_clarity(20)
             "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
             "It feels like she is taking you in her pussy! You let out a moan of appreciation."
-            anon_char "Mmmm, its so good when it goes in."
+            anon_char "Mmmm, it's so good when it goes in."
             "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
             "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
             anon_char "Yes! Mmm that feels good."
             "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
             "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
-            "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
+            "The mystery cunt you are fucking feels like it's getting wetter and wetter. The slippery channel feels so good wrapped around you."
 
             "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
             anon_char "Oh god don't stop, please don't stop!"

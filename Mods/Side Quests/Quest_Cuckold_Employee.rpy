@@ -428,7 +428,7 @@ label quest_cuckold_employee_rethink_decision_label():
     mc.name "So, what is on your mind?"
     "She is fidgeting a bit. She is clearly nervous about what she has to say."
     the_person "Well... ever since the other day, when you offered to help me with my... you know... fertility issue? I just can't seem to get the idea out of my head!"
-    the_person "It's been running through my head over and over. Should I? Shouldn't I? My head says its wrong, but my body says MAKE A BABY. I'm going crazy."
+    the_person "It's been running through my head over and over. Should I? Shouldn't I? My head says it's wrong, but my body says MAKE A BABY. I'm going crazy."
     mc.name "It's okay. Do you need a few days off? Get out from the office for a while?"
     the_person "No, not at all. I want to be here, every day, as much as possible, around you."
     the_person "You offered... you know... to help me. Are you still willing to do that?"
@@ -539,7 +539,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     "After you walk in, you close the door and lock it."
     the_person "I've been looking forward to this. I know that we're doing this for practical reasons, but that doesn't mean it doesn't feel really good..."
     mc.name "Get ready, cow. I'm just here to breed you."
-    the_person "Oh god, its so hot when you talk to me like that."
+    the_person "Oh god, it's so hot when you talk to me like that."
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
     if the_person.outfit.vagina_available():
@@ -558,7 +558,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         $ the_person.change_love(1, max_modified_to = 80)
         $ the_person.change_stats(happiness = 1, obedience = 1, add_to_log = False)
         "You gently rub her stomach."
-        mc.name "Your hungry cunt feels like its sucking the cum out of me. It's amazing, honestly."
+        mc.name "Your hungry cunt feels like it's sucking the cum out of me. It's amazing, honestly."
         mc.name "A little part of me is hoping it doesn't take right away and we have to keep trying for a while."
         the_person "Mmm, I'd be lying if I said I didn't feel the same way. You always cum so much, you are the perfect bull."
         if the_person.has_role(affair_role) or the_person.has_role(girlfriend_role):
@@ -625,7 +625,7 @@ label quest_cuckold_employee_gloryhole_label():
     "This is crazy. It could be anybody in there! You hear on the other side the toilet flush as the person finishes relieving herself. You take a deep breath, then go for it."
     "You give yourself a couple of strokes to make sure you are good and hard, then stick your cock through the glory hole."
 
-    anon_char "Oh my god... its really happening..."
+    anon_char "Oh my god... it's really happening..."
 
     "Sounds like your bathroom stall neighbor is interested in what she sees!"
 
@@ -641,14 +641,14 @@ label quest_cuckold_employee_gloryhole_label():
     "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
     "It feels like she is taking you in her pussy! You let out a moan of appreciation."
 
-    anon_char "Mmmm, its so good when it goes in."
+    anon_char "Mmmm, it's so good when it goes in."
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
     "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
     anon_char "Yes! Mmm that feels good."
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
     "Actually... her voice sounds an awful lot like... [the_person.title]? Wasn't she asking you to knock her up the other day?"
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
-    "The mystery cunt you are fucking feels like its getting wetter and wetter. The slippery channel feels so good wrapped around you."
+    "The mystery cunt you are fucking feels like it's getting wetter and wetter. The slippery channel feels so good wrapped around you."
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop! Cum inside me please!!!"
     "This is just too much of a coincidence. Surely this is [the_person.title]! Should you give in and seed her? Or pull out?"
@@ -729,7 +729,7 @@ label quest_cuckold_employee_knocked_up_label():
     "As you step into your office, you see [the_person.possessive_title]."
     the_person "Well [the_person.mc_title], you did it! Positive pregnancy test!"
     mc.name "Oh my god, that's amazing! Congratulations!"
-    the_person "I know! I can't wait to tell my husband... Its so weird though, knowing in my head that it isn't even his?"
+    the_person "I know! I can't wait to tell my husband... It's so weird though, knowing in my head that it isn't even his?"
     menu:
         "Leave your [so_title] for me" if the_person.love + 10 > leave_SO_love_calculation(the_person):   #Hide yo wife
             mc.name "[the_person.title], think it's time you left him so we can be together. It isn't right hiding this from him.."
@@ -763,7 +763,7 @@ label quest_cuckold_employee_knocked_up_label():
     call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, skip_condom = True) from _breed_cuckold_victory_lap_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
-        the_person "Sweet Jesus, no wonder you knocked me up. I'm so full of your cum, its amazing..."
+        the_person "Sweet Jesus, no wonder you knocked me up. I'm so full of your cum, it's amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
     $ the_person.change_stats(obedience = 2, slut_temp = 2, slut_core = 2)  #She is now your slutty breeding stock.

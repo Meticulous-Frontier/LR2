@@ -98,7 +98,7 @@ label late_for_work_action_label:
                 if the_person.has_taboo(["touching_penis"]):
                     "She slowly gets down on her knees and opens the zipper on your pants."
                     the_person "Oh my, that's a nice specimen, if only I had known sooner..."
-                    "She pull your cock out and starts pumping until its fully erect."
+                    "She pull your cock out and starts pumping until it's fully erect."
                     $ the_person.break_taboo("touching_penis")
                 else:
                     "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
@@ -165,7 +165,7 @@ label late_for_work_action_label:
                 if the_person.has_taboo(["touching_penis"]):
                     "She slowly gets down on her knees and opens the zipper on your pants."
                     the_person "Oh my, that's a nice specimen, if only I had known sooner..."
-                    "She pull your cock out and starts pumping until its fully erect."
+                    "She pull your cock out and starts pumping until it's fully erect."
                     $ the_person.break_taboo("touching_penis")
                 else:
                     "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
@@ -266,7 +266,7 @@ label late_for_work_action_label:
                 if the_person.has_taboo(["touching_penis"]):
                     "She slowly gets down on her knees and opens the zipper on your pants."
                     the_person "Oh my, that's a nice specimen, if only I had known sooner..."
-                    "She pull your cock out and starts pumping until its fully erect."
+                    "She pull your cock out and starts pumping until it's fully erect."
                     $ the_person.break_taboo("touching_penis")
                 else:
                     "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."

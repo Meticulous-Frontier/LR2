@@ -114,7 +114,7 @@ label SB_caught_masturbating_crisis_label():
                         the_person "Mmm, [fantasy_guy], that's it... I wanna be your slut..."
                         $ the_person.change_arousal(10)
                         "Hmm, she must be fantasizing about some other guy. Does she have a boyfriend or something maybe?"
-                        the_person "Yes [fantasy_guy]... its feels so good when you do that..."
+                        the_person "Yes [fantasy_guy]... it feels so good when you do that..."
                         $ the_person.change_arousal(10)
                         "You aren't sure what she is fantasizing about, but she is getting really into it..."
                         "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."

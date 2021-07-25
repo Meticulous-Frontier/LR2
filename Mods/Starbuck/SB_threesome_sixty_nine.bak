@@ -141,7 +141,7 @@ label scene_SB_threesome_sixty_nine_2(the_girl_1, the_girl_2, the_location, the_
     if current_girl == 1:
         "[the_girl_1.title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
         "You lean forward and grab the back of [the_girl_2.title]'s head, bring her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
-        "You decide its time for [the_girl_2.possessive_title] to put her mouth to better use."
+        "You decide it's time for [the_girl_2.possessive_title] to put her mouth to better use."
         "You pull back from making out with [the_girl_2.title]."
         mc.name "I think [the_girl_1.title] needs a little more attention..."
         "You grab [the_girl_2.possessive_title]'s head by her hair and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
@@ -267,7 +267,7 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
             return
 
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can feel [the_girl_1.title] trembling beneath you. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
+            "You can feel [the_girl_1.title] trembling beneath you. She moans loudly but it's muffled by [the_girl_2.title] grinding her pussy in her face."
             "She orgasms, her pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
             "You don't even both to slow down. As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking."
             return
@@ -286,7 +286,7 @@ label orgasm_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_o
             "As they start to wind down, you put your hand on the back of [the_girl_2.title]'s head and remind her to keep sucking."
             return
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can feel [the_girl_1.title] trembling at your touch. She moans loudly but its muffled by [the_girl_2.title] grinding her pussy in her face."
+            "You can feel [the_girl_1.title] trembling at your touch. She moans loudly but it's muffled by [the_girl_2.title] grinding her pussy in her face."
             "She orgasms, her pussy quivering around your fingers. You thrust them into her roughly."
             "As [the_girl_1.title] comes down from her orgasm you continue stimulating her with your hand."
             return

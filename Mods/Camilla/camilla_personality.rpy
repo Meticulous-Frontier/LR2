@@ -242,7 +242,7 @@ label camilla_seduction_response(the_person):
 label camilla_flirt_response(the_person):
     if mc.location == downtown_bar:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
-            the_person "Didn't your mother ever tell you its rude to hit on a married woman?"
+            the_person "Didn't your mother ever tell you it's rude to hit on a married woman?"
             return
         if the_person.event_triggers_dict.get("camilla_progress", 0) >= 2:
             the_person "Well why don't you meet me in the back in a bit and we'll see what happens?"
@@ -302,7 +302,7 @@ label camilla_flirt_response_mid(the_person):
 
 label camilla_flirt_response_high(the_person):
     if the_person.love > 50: #She is going to ghost soon
-        the_person "Didn't your mother ever tell you its rude to hit on a married woman?"
+        the_person "Didn't your mother ever tell you it's rude to hit on a married woman?"
     else:
         "She looks at you and her eyes narrow."
         the_person "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
@@ -462,7 +462,7 @@ label camilla_hookup_accept(the_person):
             $ the_person.change_happiness(2)
     if the_person.effective_sluttiness() > 70:
         the_person "You should stick a finger in my other hole while you fuck me and take a picture. Then hubby will have to reclaim both holes!"
-        "Wow, its not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
+        "Wow, it's not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
         "You reach a hand forward and put your index finger in front of her face. She quickly gets the idea and opens her mouth with her tongue out, and begins slathering your finger with saliva."
         "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
         "She forces her sphincter to relax and your finger begins to slip inside her."
@@ -470,7 +470,7 @@ label camilla_hookup_accept(the_person):
         "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
         if the_person.arousal > 120:
-            the_person "OH! Its so good... fuck I'm gonna cum again!!!"
+            the_person "OH! It's so good... fuck I'm gonna cum again!!!"
             "You get the now familiar feeling of [the_person.title] cumming around your cock, but this time you can also feel the waves around your finger."
             "You almost forgot to take some pictures! You grab her phone with your free hand and snap a few pics of her getting double penetration."
             "You wonder what it would feel like to make her cum again, but with your cock in her ass instead..."

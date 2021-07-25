@@ -313,7 +313,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     the_person "I think umm... I'm gonna retire to my room for the night..."
                     menu:
                         "Masturbate for me" if the_person.obedience >= 130:
-                            mc.name "I mean, its my cum you're using, just get yourself off right here."
+                            mc.name "I mean, it's my cum you're using, just get yourself off right here."
                             "She thinks about it for second, then agrees."
                             the_person "Okay! Just do me a favor and don't get dressed."
                             $ the_person.draw_person( position = "missionary")

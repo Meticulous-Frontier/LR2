@@ -77,7 +77,7 @@ label girlfriend_service_label():
                 call get_fucked(the_person, private = True) from _girlfriend_service_initiate_079
                 $ the_person.change_stats (happiness = 5, slut_temp = 3)
             "Too tired" if mc.energy < 50:
-                mc.name "I'm sorry. Its been a long day and I'm just too tired right now. But I think I would like to do this another time..."
+                mc.name "I'm sorry. It's been a long day and I'm just too tired right now. But I think I would like to do this another time..."
                 "She seems a little disappointed, but understanding."
                 the_person "Okay... another time then..."
                 "Rejected, she turns around and walks away, going back to her work."
@@ -122,7 +122,7 @@ label girlfriend_service_label():
                         the_person "But... there's people around?"
                         mc.name "So?"
                         the_person "I couldn't... you can't possibly think that I'd..."
-                        mc.name "Why not? Its not like our relationship is secret. Besides, who are they going to complain to? I'm the boss, remember?"
+                        mc.name "Why not? It isn't like our relationship is secret. Besides, who are they going to complain to? I'm the boss, remember?"
                         "You put your hand on her chin, she looks up at you."
                         mc.name "A fact that you would be wise to remember."
                         $ the_person.change_stats (obedience = 15, slut_temp = 3, happiness = -5, love = -3)
@@ -138,7 +138,7 @@ label girlfriend_service_label():
                     call get_fucked(the_person, private = False) from _girlfriend_service_initiate_02
                     $ the_person.change_stats (obedience = 5, slut_temp = 3)
             "Too tired" if mc.energy < 50:
-                mc.name "I'm sorry. Its been a long day and I'm just too tired right now. But I think I would like to do this another time..."
+                mc.name "I'm sorry. It's been a long day and I'm just too tired right now. But I think I would like to do this another time..."
                 "She seems a little disappointed, but understanding."
                 the_person "Okay... another time then..."
                 "Rejected, she turns around and walks away, going back to her work."

@@ -164,7 +164,7 @@ label camilla_get_a_drink_label(the_person):
                 "You head over to the bar and order yourself a beer, and a cocktail for [the_person.title]."
                 the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.name]."
                 "Sounds like the bartender knows [the_person.title] pretty well. She must be in here often!"
-                "The place is busy, so its easy to slip some serum into her drink."
+                "The place is busy, so it's easy to slip some serum into her drink."
                 call give_serum(the_person) from _call_give_serum_camilla_01
             else:                                 #Fail
 
@@ -198,7 +198,7 @@ label camilla_get_a_drink_label(the_person):
         the_person "No. I'm... I just want to be a good wife... and honestly I never thought my hubby would ask me to do something like this."
         the_person "I'm still too nervous, but I like to come to the bar and have a couple drinks. Maybe someday I'll actually go through with it."
         "[the_person.possessive_title] takes another long sip of her drink."
-        the_person "I don't know why but, its nice being able to talk to you. Something about you puts me at ease."
+        the_person "I don't know why but, it's nice being able to talk to you. Something about you puts me at ease."
         mc.name "Ah, I understand what you mean."
         "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
         $ the_person.event_triggers_dict["is_open"] = True
@@ -267,7 +267,7 @@ label camilla_get_a_drink_label(the_person):
             "This analogy is starting to get a little weird though."
             mc.name "I bet your husband would be excited if you did manage to catch one."
             "[the_person.title] stutters for a second, but quickly smiles and regains her composure."
-            the_person "Yeah, he keeps saying he will. I think its probably about time I put his eagerness to the test."
+            the_person "Yeah, he keeps saying he will. I think it's probably about time I put his eagerness to the test."
             if the_person.event_triggers_dict.get("camilla_blowjob_enable", 0) == 1:
                 the_person "Just let me know when you have the time... I think we would both really enjoy our time."
                 "[the_person.title] licks her lips, then gets up."
@@ -305,7 +305,7 @@ label camilla_get_a_drink_label(the_person):
     elif the_person.event_triggers_dict.get("camilla_progress", 0) == 2:  #She has blown you
         mc.name "How are things going? Still going well with the husband?"
         the_person "Oh yes... I haven't had the guts to do anything with any other guys yet, but, those blowjob pictures definitely changed our sex life."
-        mc.name "Good, glad to hear its working out for you."
+        mc.name "Good, glad to hear it's working out for you."
         the_person "Yeah... he umm... he's started asking me if, you know, I'm almost ready to take things to the next level..."
         mc.name "Oh yeah? Meaning what?"
         the_person "Well, you know, not just blowing a guy but, letting him fuck me..." #TODO Finish this
@@ -359,7 +359,7 @@ label camilla_get_a_drink_label(the_person):
         mc.name "So... tonight at your place? I'll see you there?"
         the_person "Sounds good. See you then, [the_person.mc_title]."
     elif the_person.event_triggers_dict.get("camilla_progress", 0) == 5:  #You've fucked in front of her husband
-        the_person "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, its nice to have a break from fucking and just enjoy a stiff drink."
+        the_person "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, it's nice to have a break from fucking and just enjoy a stiff drink."
         mc.name "Yeah, so is [the_person.SO_name] still enjoying your new lifestyle?"
         the_person "Oh god, we both are. I've started fucking around with a couple other guys too. Last time I came home, he tied me up and umm... reclaimed me in every hole he could fit it in..."
         mc.name "Damn! That sounds hot!"
@@ -391,7 +391,7 @@ label camilla_dance_lessons_label():
     "You and [the_person.possessive_title] head over."
     "?????" "Alright, my name is Alvero, and I'll be your instructor tonight! First let's start off with a little..."
     "You listen intently as the instructor begins initial warm up instructions."
-    "Finally, its time to start dancing."
+    "Finally, it's time to start dancing."
     $ scene_manager.update_actor(the_person, position = "kissing")
     "You get close to [the_person.title] as the music starts. You listen as the instructor begins to issue commands."
     "Alvero" "Alright fellas, remember, your sole purpose while salsa dancing is to display the beautiful flower you are partners with."
@@ -566,7 +566,7 @@ label camilla_bathroom_blowjob_label(the_person):
     "One more tug on your underwear, and your erection springs free."
     the_person "Wow! I haven't seen anything other than hubby for... years..."
     "She begins to stroke you softly with her hand."
-    the_person "Mmmmm.... its so hard... and hot!"
+    the_person "Mmmmm.... it's so hard... and hot!"
     "You moan as she strokes you. You make sure to snap a couple pictures."
     $ mc.change_arousal(10)
     $ the_person.change_arousal(10)
@@ -827,7 +827,7 @@ label camilla_her_place_label(the_person):
     "[the_person.SO_name]? Why does that sound so familiar?"
     $ the_person.change_to_bedroom()
     "As you walk into the bedroom, you see [the_person.SO_name], the bartender sitting in a chair, completely naked."
-    "Holy shit! Its the bartender! He had a front row ticket every time you fucked [the_person.title] at the bar! No wonder he went along with all of it!"
+    "Holy shit! It's the bartender! He had a front row ticket every time you fucked [the_person.title] at the bar! No wonder he went along with all of it!"
     "He nods to you, but you are shocked at the revelation."
     the_person "Don't worry about him, get over here and fuck me [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")

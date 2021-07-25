@@ -134,7 +134,7 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
     "You lay your head back for a second and just enjoy the view of [the_girl_2.title]'s ass hovering right about your face. Maybe you should put a finger in?"
     menu:
         "Finger her pussy":
-            "You push two fingers into [the_girl_2.title]'s sopping wet pussy. From this angle, its easy to angle your fingers down and find her G-spot."
+            "You push two fingers into [the_girl_2.title]'s sopping wet pussy. From this angle, it's easy to angle your fingers down and find her G-spot."
             "The girls continue to make out as they ride you. You notice [the_girl_1.title] reach back and spank [the_girl_2.possessive_title]'s ass."
             the_girl_2 "Mmmm..."
             "[the_girl_2.title] begins to twist and pull at [the_girl_1.possessive_title]'s nipples. You can feel her pussy clamp down on you as she stimulates her breasts."
