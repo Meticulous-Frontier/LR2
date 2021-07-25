@@ -25,8 +25,10 @@ init 5 python:
         "yellow": "yellah",
         "hello": "howdie",
         "i": "aah",
+        "a": "uh",
         "you": "yah",
         "it": "aht",
+        "to": "tuh",
         "nice": "fine",
         "your": "yahr",
         "like": "lac",
@@ -43,7 +45,9 @@ init 5 python:
         "pants": "britches",
         "darn": "dagnabit",
         "himself": "hisself",
-        "yes": "yessir"
+        "yes": "yessir",
+        "something": "sumthing",
+        "things": "thangs",
     }
 
     # letter replace (in word)
