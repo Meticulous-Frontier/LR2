@@ -114,7 +114,7 @@ label camilla_spot_at_bar_label(the_person):
     the_person "That's fine."
     "You sit down in a bar stool next to [the_person.possessive_title]"
     mc.name "So how long have you been working as a lifestyle coach?"
-    the_person "Honestly, not too long. I mainly just do it as an extra source of income to suppliment what my hubby brings in."
+    the_person "Honestly, not too long. I mainly just do it as an extra source of income to supplement what my hubby brings in."
     "Ah, so she is married. You should probably keep things low key for now."
     mc.name "That's admirable. How long have you been married?"
     the_person "Almost 15 years now."
@@ -125,14 +125,14 @@ label camilla_spot_at_bar_label(the_person):
     the_person "No, no niños..."
     mc.name "I'm sorry... I'm probably getting a little personal."
     the_person "It's okay, that's a perfectly normal question to ask."
-    "You feel bad. You notice that her glass is almost empty. You wave down the bartender. When he walks over, he smiles wide at [the_person.title]"
+    "You feel bad. You notice that her glass is almost empty. You wave down the bartender. When he walks over, he smiles wide at [the_person.title]."
     "?????" "Something I can get for you?"
     mc.name "Can I get a beer and another for my friend?"
     "?????" "Sure. A beer and another paloma for the lovely miss [the_person.last_name]."
     "The bartender walks off. He seems to know [the_person.title]. She must be a regular here?"
     mc.name "Ah, you come here often then?"
     the_person "I do. I'm here most evenings. I like have a drink before I head home each night. My husband works late."
-    mc.name "I see. I'm here somewhat often as well. Maybe we could have a drink together once in a whlie?"
+    mc.name "I see. I'm here somewhat often as well. Maybe we could have a drink together once in a while?"
     the_person "I... I suppose that would be alright."
     "You sit back in the chair and chat with [the_person.possessive_title] for a while. You both enjoy the time together, getting to know one another as friends."
     $ the_person.change_love(3)
@@ -185,7 +185,7 @@ label camilla_get_a_drink_label(the_person):
         mc.name "Glad to see you here again. How have you been?"
         the_person "Pretty good. You?"
         mc.name "I'm doing well. Especially now that I have a chance to have a drink with a beautiful woman such as yourself."
-        "She looks a little embarassed, but doesn't respond negatively to your comment."
+        "She looks a little embarrassed, but doesn't respond negatively to your comment."
         mc.name "So, your hubby is okay with you going out to the bar all by yourself?"
         the_person "Si, he doesn't mind. In fact, he kind of encourages it."
         mc.name "Really? That's interesting."
@@ -212,7 +212,7 @@ label camilla_get_a_drink_label(the_person):
             "[the_person.title] takes a sip of her drink."
             the_person "Did you know they do salsa dancing here sometimes? Even if you are new at it, it would be fun to try it sometime."
             the_person "On Wednesday nights they have a salsa dancing for beginners class. You should come and I'll go with you."
-            "That sounds suspiciously like a date. With this smoking hot seniorita in an open relationship, the implications are impossible to ignore."
+            "That sounds suspiciously like a date. With this smoking hot senorita in an open relationship, the implications are impossible to ignore."
             mc.name "Sure, I'll do it next Wednesday."
             the_person "Great!"
             "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
@@ -389,7 +389,7 @@ label camilla_dance_lessons_label():
     "You make some idle chatter at the bar as you wait for the lessons to begin. You admit you are pretty nervous, but as people filter in, you see a lot of people around who also look new at this."
     "?????" "Alright, everyone here for salsa lessons, we are forming up over here! Come with your partner!"
     "You and [the_person.possessive_title] head over."
-    "?????" "Alright, my name is Alvero, and I'll be your instructor tonight! First let's start off with a litte..."
+    "?????" "Alright, my name is Alvero, and I'll be your instructor tonight! First let's start off with a little..."
     "You listen intently as the instructor begins initial warm up instructions."
     "Finally, its time to start dancing."
     $ scene_manager.update_actor(the_person, position = "kissing")
@@ -467,11 +467,11 @@ label camilla_take_pics_label(the_person):  #Not the first time.
         "[the_person.possessive_title] steps back suddenly."
         the_person "Let me just get this off... Papi loves it when I have my tits out for this..."
         "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
-        while not the_person.outfit.tits_available():   #TODO change this to use more recent strip code
-            $ the_clothing = the_person.outfit.get_upper_top_layer()
-            "[the_person.possessive_title] takes off her [the_clothing.name]."
-            $ the_person.draw_animated_removal(the_clothing)
-            $ the_clothing = None
+        if the_person.outfit.can_half_off_to_tits():
+            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
+        else:
+            $ generalised_strip_description(the_person, the_person.outfit.get_tit_strip_list())
+
         "With her tits completely exposed, she saunters back over to you then starts to get down on her knees."
     else:
         "[the_person.possessive_title] slowly starts to get down on her knees in front of you."
