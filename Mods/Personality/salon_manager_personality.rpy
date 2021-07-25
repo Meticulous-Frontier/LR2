@@ -62,7 +62,7 @@ label salon_manager_greetings(the_person):
         elif the_person.happiness < 90:
             the_person "Hey. I hope you're having a better day than I am."
         else:
-            the_person "Hey there, [the_person.mc_title]! Its good to see you!"
+            the_person "Hey there, [the_person.mc_title]! It's good to see you!"
             if the_person.sluttiness > 60:
                 "[the_person.possessive_title] smiles playfully."
                 the_person "I was just thinking about you. Anything I can do for you today?"

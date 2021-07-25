@@ -568,7 +568,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
             the_person "Even if I do get pregnant... I'll already have one dirty little secret anyway. Maybe we could still fool around some..."
             "Sounds like she might be open to some kind of an affair in the future..."
         else:
-            the_person "But, its like they say, all good things must come to and end."
+            the_person "But, it's like they say, all good things must come to and end."
             "She looks down at your crotch for a second."
             the_person "In this case, a hard, throbbing, amazing thing..."
         the_person "I'm going to lay here for a while again."

@@ -314,7 +314,7 @@ label fetish_mom_kitchen_label(the_person):
             $ the_person.event_triggers_dict["LastExhibitionFetish"] = day
         "Fuck her loudly\n{color=#ff0000}{size=18}Requires Exhibitionist Fetish{/size}{/color} (disabled)" if not the_person.has_exhibition_fetish():
             pass
-    "Clearly, in her current attire, it will be obvious what [the_person.possessive_title] has been up to. You look at the state of dinner. Its almost done."
+    "Clearly, in her current attire, it will be obvious what [the_person.possessive_title] has been up to. You look at the state of dinner. It's almost done."
     mc.name "You go clean yourself up. I'll finish preparing dinner."
     the_person "Ahhh... okay... thank you honey!"
     $ clear_scene()
@@ -368,7 +368,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
         "You decide to start getting her ready while she looks for the the toy. You start peeling her clothes off."
         $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
-    the_person "Ah! Here it is. I know its hard to wait, but I need to set up the stream first, [the_person.mc_title]."
+    the_person "Ah! Here it is. I know it's hard to wait, but I need to set up the stream first, [the_person.mc_title]."
     "[the_person.possessive_title] goes over to her laptop and sits down."
     $ the_person.draw_person(position = "sitting")
     "It takes her a few minutes to set it up. She sets up her camera and makes sure the angle is pointed at her bed."

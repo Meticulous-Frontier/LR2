@@ -1776,7 +1776,7 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             call advance_time from _call_advance_time_starbuck_close_up_label_2
             return
     mc.name "I can definitely think of something."
-    the_person "Oh yeah? I hope its the same thing I'm thinking..."
+    the_person "Oh yeah? I hope it's the same thing I'm thinking..."
     $ mc.change_locked_clarity(10)
     menu:
         "Just mess around some":

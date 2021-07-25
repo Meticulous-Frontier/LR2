@@ -63,7 +63,7 @@ label aunt_drunk_cuddle_label():
     the_person "I'm so sorry... oh no the couch is soaked..."
     "She walks over to the couch and starts picking up the pieces of glass."
     the_person "I'll pay for the glass! I didn't mean to..."
-    mc.name "It's okay, its just a glass. I'm glad you aren't hurt."
+    mc.name "It's okay, it's just a glass. I'm glad you aren't hurt."
     "You help [the_person.possessive_title] pick up the glass off the floor and grab a towel you lay down on the couch."
     the_person "Ahh, I guess I'll just be a little wet tonight."
     mc.name "Don't be crazy. You can sleep in my bed tonight."
@@ -91,7 +91,7 @@ label aunt_drunk_cuddle_label():
     the_person "No! Absolutely not. There's more than enough room here for both of us."
     mc.name "I don't want it to be awkward..."
     "[the_person.title] chuckles and shakes her head."
-    the_person "[the_person.mc_title], its just me, your aunt! It'll be fine. It might even be kind of nice... I haven't shared a bed with someone since your uncle..."
+    the_person "[the_person.mc_title], it's just me, your aunt! It'll be fine. It might even be kind of nice... I haven't shared a bed with someone since your uncle..."
     "There is a bit of an awkward silence."
     the_person "It's nonsense. Now get in!"
     mc.name "Okay... it's okay... I usually just sleep in my underwear..."
@@ -111,7 +111,7 @@ label aunt_drunk_cuddle_label():
     the_person "Ahhh... that's nice. I haven't had a man hold me like this in so long..."
     $ mc.change_locked_clarity(10)
     "You lay there, holding [the_person.possessive_title] close for a while. However, soon the close proximity with her makes your loins start to stir."
-    "You try to will it down, but its no use."
+    "You try to will it down, but it's no use."
     "Soon, you have a full fledged erection, pressing against [the_person.title]. There's no way she doesn't feel it."
     if the_person.sluttiness < 20:
         "After a while she turns her head back to you."
@@ -175,7 +175,7 @@ label aunt_drunk_cuddle_label():
                 $ mc.change_locked_clarity(30)
                 the_person "Do you mind if I... if I... get myself off too?"
                 mc.name "Of course not! Do you want me...?"
-                the_person "No! No it's okay, your hand is great right where its at..."
+                the_person "No! No it's okay, your hand is great right where it's at..."
                 "You feel her shift a bit as she props one leg up a little bit. You can't see under the covers, but she gasps as she begins to touch herself."
                 "You resume grind your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
                 $ mc.change_locked_clarity(30)

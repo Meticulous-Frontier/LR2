@@ -72,7 +72,7 @@ label scene_anal_on_lap_1(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("sex_responses_anal")
 
     if the_girl.has_anal_fetish():           #Anal fetish
-        the_girl "Yes! Oh fuck its so good!"
+        the_girl "Yes! Oh fuck it's so good!"
         "[the_girl.possessive_title] is impaling her back door on your erection over and over with wild abandon."
         "Her back is arched as she revels in the sensations of fulfilling her anal fetish."
     if the_girl.get_opinion_score("taking control") > 0:
@@ -107,7 +107,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
                 elif the_girl.effective_sluttiness() > 110:
                     the_girl "Mmm, do it! Fuck me hard and make me cum!"
                 elif the_girl.effective_sluttiness() > 80:
-                    the_girl "Fuck [the_girl.mc_title], its so intense I might need you to slow down..."
+                    the_girl "Fuck [the_girl.mc_title], it's so intense I might need you to slow down..."
                 else:
                     the_girl "Oh god I can't take it!"
 
@@ -164,7 +164,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         if the_girl.get_opinion_score("anal creampies") > 0:
             the_girl  "Yes! Fill your slut's ass with your cum! It's so hot!"
         if the_girl.has_anal_fetish():
-            the_girl "Fuck... its so good! Oh yes!"
+            the_girl "Fuck... it's so good! Oh yes!"
             "[the_girl.possessive_title] squeals as you dump your load in her ass. Her anal fetish causes her to orgasm as you cum inside her."
             $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
         $ the_girl.cum_in_ass()
@@ -189,7 +189,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         if the_girl.get_opinion_score("being covered in cum") > 0:
              the_girl "Yes! Paint me with your sticky cum!"
         if the_girl.has_cum_fetish():
-            the_girl "Fuck... its so good! Oh yes!"
+            the_girl "Fuck... it's so good! Oh yes!"
             "[the_girl.possessive_title] squeals as you paint her ass with your cum. Her cum fetish causes her to orgasm as you cum all over her."
             $ the_girl.have_orgasm(the_position = anal_on_lap, the_object = the_object, half_arousal = True)
         $ the_girl.cum_on_ass()
@@ -202,7 +202,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     return
 

@@ -389,7 +389,7 @@ label candace_get_to_know_label(the_person):
         mc.name "You guess?"
         the_person "Yeah... I guess, I just don't understand my boyfriend sometimes."
         mc.name "Guys can be confusing sometimes."
-        the_person "I know! Its like, he's okay with me blowing the supply guys here for discounts on his work supplies."
+        the_person "I know! It's like, he's okay with me blowing the supply guys here for discounts on his work supplies."
         the_person "Then last night, I ordered a pizza and invited him over, and when he got there I was blowing the pizza guy to save some money on the tip..."
         $ mc.change_locked_clarity(10)
         "Does she ever stop sucking cock?"

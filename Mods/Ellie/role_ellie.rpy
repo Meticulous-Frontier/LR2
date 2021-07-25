@@ -220,7 +220,7 @@ label ellie_meet_ellie_intro_label():
 
 label ellie_head_researcher_halfway_intro_label():
     $ the_person = mc.business.head_researcher
-    "You feel your phone vibrate in your pocket. its [the_person.possessive_title]"
+    "You feel your phone vibrate in your pocket. it's [the_person.possessive_title]"
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
     mc.name "I'll be right there."

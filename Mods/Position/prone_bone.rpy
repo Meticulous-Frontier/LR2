@@ -192,7 +192,7 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her tight pussy clenches around you in response."
                 "She decides to just stay quiet for now and accept it as you continue to have you way with her."
             else:
-                the_girl "That's it... oh god its so good..."
+                the_girl "That's it... oh god it's so good..."
                 "You reach forward and grab her hair near the base of her head and pull it back some."
                 the_girl "Oh fuck! Oh god fuck my pussy [the_girl.mc_title]!"
                 $ the_girl.change_obedience(5)

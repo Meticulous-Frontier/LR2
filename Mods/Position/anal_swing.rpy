@@ -134,7 +134,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
     "She is writhing in the swing back against you, but she has no leverage. You have all the control."
 
     if the_girl.arousal > 130:
-        the_girl "Ohhh my god, its so good..."
+        the_girl "Ohhh my god, it's so good..."
         "[the_girl.possessive_title]'s ass is quivering non stop."
         if the_girl.has_role(anal_fetish_role):
             the_girl "I just can't stop cumming! It feels so good [the_girl.mc_title]! Fuck my ass and make it yours!"
@@ -252,7 +252,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     if the_choice == "Cum on her tits":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your tits!"

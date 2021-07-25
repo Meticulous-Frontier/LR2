@@ -179,7 +179,7 @@ label breeding_fetish_employee_intro_label(the_person):
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
     call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _employee_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
-        the_person "Oh god! Its so deep! Oh thank you so much [the_person.mc_title]!"
+        the_person "Oh god! It's so deep! Oh thank you so much [the_person.mc_title]!"
     else:
         #TODO what to put here?
         pass
@@ -213,7 +213,7 @@ label breeding_fetish_family_intro_label(the_person):
     "You lay down next to [the_person.possessive_title] as she lays down on her back. You rest your head on her chest and put your arm across her."
     "For a while you simply enjoy the heat of each other's bodies. She is the first to break the silence."
     if the_person.knows_pregnant():
-        the_person "Do you think its weird, if I told you I love this feeling? Being pregnant, making babies. It's like my body was made to do this, over and over again."
+        the_person "Do you think it's weird, if I told you I love this feeling? Being pregnant, making babies. It's like my body was made to do this, over and over again."
         the_person "I'm already looking forward to making another one, and this one isn't even here yet!"
 
     elif the_person.age > 35:
@@ -239,7 +239,7 @@ label breeding_fetish_family_intro_label(the_person):
             return
     "You decide it's time to train [the_person.possessive_title] to be your own personal breeding stock."
     "You push yourself up and on top of [the_person.title]. She puts her arms around you as your body begins to press against hers."
-    mc.name "Honestly, I think its pretty normal to have desires like that."
+    mc.name "Honestly, I think it's pretty normal to have desires like that."
     the_person "Yeah..."
     "You start to kiss her along her neck and then whisper in her ear."
     mc.name "To have a man pin you down, fuck you senseless, then dump his risky load deep inside you, over and over."
@@ -267,7 +267,7 @@ label breeding_fetish_family_intro_label(the_person):
         the_person "I can't believe I'm saying this, and with you of all people..."
         the_person "But I'm ready! Just... just put it in me! Raw!"
     else:
-        the_person "My brain says this is wrong, but my body keeps saying its so right!"
+        the_person "My brain says this is wrong, but my body keeps saying it's so right!"
         the_person "Fuck me [the_person.mc_title], I want you to fill me with your cum!"
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -439,7 +439,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
     $ the_person.draw_person()
     the_person "Oh hey [the_person.mc_title]! I was wondering if you were going to be around tonight. Want to stream with me tonight?"
-    "Your sister's job, over the last few months, has slowly evolved. From taking sexy snaps, to streaming sex live with you live. Having sex with your sister, AND getting paid for it? Its amazing."
+    "Your sister's job, over the last few months, has slowly evolved. From taking sexy snaps, to streaming sex live with you live. Having sex with your sister, AND getting paid for it? It's amazing."
     "You think about it. Do you want to do another stream tonight?"
     menu:
         "Hell yeah!" if mc.energy > 60:
@@ -489,7 +489,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Ok... from now on, you are my personal cum dumpster. I'll use you like you want!"
     the_person "Oh god... this is amazing! Let's do it!"
     "Suddenly she remembers."
-    the_person "Can we... can we do it on stream? No one on there believes we are actually siblings. They think its all just for show!"
+    the_person "Can we... can we do it on stream? No one on there believes we are actually siblings. They think it's all just for show!"
     mc.name "Go ahead, set it up."
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] walks over to her laptop. You give her a few minutes to get everything setup."
@@ -658,7 +658,7 @@ label breeding_fetish_stephanie_bimbo_label(the_person):
     "Without any hesitation you slide your cock into her cunt."
     call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True) from _call_steph_bimbo_breeding_fetish_01
     $ add_breeding_fetish(the_person)
-    the_person "Oh god its so warm. Its like I can feel the little sperm wriggling inside of me..."
+    the_person "Oh god it's so warm. It's like I can feel the little sperm wriggling inside of me..."
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person "Mmm, thanks for that mister! I know this is kinda crazy but... I'm totally getting the urge for another round. Normally one time is enough but..."
     mc.name "I'm sorry, you'll have to be patient if you want another round."
@@ -741,8 +741,8 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     if the_person.is_girlfriend():
         the_person "I know our relationship is kind of... unique... with how much older I am. But I don't think I've ever been so sure of something."
     else:
-        the_person "I know its kind of weird, with how much older I am. But I don't think I've ever been more sure of something."
-    the_person "Would you be my bull? Cum inside me... over and over... breed me like its your job!"
+        the_person "I know it's kind of weird, with how much older I am. But I don't think I've ever been more sure of something."
+    the_person "Would you be my bull? Cum inside me... over and over... breed me like it's your job!"
     $ mc.change_locked_clarity(30)
     the_person "I want to feel your seed inside me, every second of every day!"
     "Your cock is already hard, listening to [the_person.possessive_title] talk like this. You've been slipping her serums, and it looks like they've finally given her a breeding fetish."
@@ -932,7 +932,7 @@ label breeding_fetish_erica_intro_label():
         the_person "I mean... I'll take a test in a few days to be sure but..."
     else:
         the_person "That's... you didn't finish?"
-        mc.name "I'm sorry [the_person.title]. Its been a long day, and I'm just too tired."
+        mc.name "I'm sorry [the_person.title]. It's been a long day, and I'm just too tired."
         the_person "Seriously? After all our training and everything..."
         $ the_person.change_love(-5)
         the_person "I think you should go."
@@ -961,7 +961,7 @@ label breeding_fetish_erica_unsuccessful_followup_label():
     $ mc.change_energy(mc.max_energy)
     "As you slowly start to wake up, you feel the weight on your bed shift a little bit."
     if mom.sluttiness > 60:
-        "You assume its probably [mom.title], coming in to give you another pleasant wake up call, but as your brain slowly engages, you realize the weight of the person is different."
+        "You assume it's probably [mom.title], coming in to give you another pleasant wake up call, but as your brain slowly engages, you realize the weight of the person is different."
     else:
         "Thinking you are probably still dreaming, your brain is slow to engage and register what is going on."
     "Your pants slide off, exposing your morning wood. You feel a weight around your hips as someone gets on top of you. You slowly open your eyes."
@@ -1012,7 +1012,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         mc.name "That... sounds like a great a video, but I'm not sure what I can help you with."
         if the_person.knows_pregnant():
             the_person "I know that like, I'm already knocked up, OBVIOUSLY. But like, maybe we could make a video like that too?"
-            the_person "You could just like, keep fucking babies into me non stop and every time you cum inside me, its like, this could be the time!"
+            the_person "You could just like, keep fucking babies into me non stop and every time you cum inside me, it's like, this could be the time!"
             mc.name "You want me to keep getting you pregnant?"
             the_person "Like, over and over! That sounds so hot!"
         else:
@@ -1114,7 +1114,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         $ mc.change_locked_clarity(50)
         mc.name "Are you ready to get bred, bitch?"
         "[the_person.title] keeps trying to back herself up onto you, but you move your dick around, frustrating her."
-        the_person "[the_person.mc_title], its not appropriate to tease a lady like this."
+        the_person "[the_person.mc_title], it's not appropriate to tease a lady like this."
         mc.name "I want to hear you beg."
         the_person "PUT IT IN AND FUCK ME AND BREED ME AND CUM OVER AND OVER DEEP MAKE ME YOUR CUM DUMPSTER PLEASE PLEASE PLEASE!!!"
         "Wow, that didn't take much encouragement. You grab her hips, line yourself up and push yourself in deep."

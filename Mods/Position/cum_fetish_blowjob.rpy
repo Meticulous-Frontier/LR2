@@ -42,7 +42,7 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
         "Talk dirty to her":
             mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
             "[the_girl.possessive_title] strokes you a few more times with her skilled mouth. She twirls her tongue around the tip a few times before taking a second to respond."
-            the_girl "Mmm, its been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
+            the_girl "Mmm, it's been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
             the_girl "...or maybe I'll pull off and stroke you while you cover my face in your hot cum..."
             "She slips you back into her mouth and resumes blowing you."
         "Stay quiet":
@@ -135,7 +135,7 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     $ cum_fetish_blowjob.current_modifier = None
     $ cum_fetish_blowjob.redraw_scene(the_girl)
-    the_girl "Yes.. its so hot... It feels so good on my skin..."
+    the_girl "Yes.. it's so hot... It feels so good on my skin..."
     return
 
 label transition_default_cum_fetish_blowjob(the_girl, the_location, the_object):
@@ -211,7 +211,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
         $ cum_fetish_blowjob.current_modifier = None
         $ cum_fetish_blowjob.redraw_scene(the_girl)
         "When she's stopped twitching and moaning you let [the_girl.possessive_title] slide back. She pants loudly, then licks along the length of your cock."
-        the_girl "That was... incredible... Okay, I came... now its your turn!"
+        the_girl "That was... incredible... Okay, I came... now it's your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
     else:
         "[the_girl.possessive_title] closes her eyes as her orgasm peaks. She holds almost perfectly still, your dick still sitting in her mouth, until she's finished."
@@ -220,7 +220,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
         "She pulls off and takes a long, deep breath."
         $ the_girl.change_obedience(1)
         $ the_girl.change_happiness(2)
-        the_girl "Wow, that was amazing... Okay, I came... now its your turn!"
+        the_girl "Wow, that was amazing... Okay, I came... now it's your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
 
     return

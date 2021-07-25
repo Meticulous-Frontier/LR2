@@ -40,7 +40,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
         "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
@@ -106,14 +106,14 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                       mc.name "Wow, your ass is amazing. I love watching my dick disappear in your ass and the dildo into your pussy."
                       if the_girl.get_opinion_score("anal sex") > 0:
                            "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you. The grinding motion stimulates her clit against the vibrator."
-                           the_girl "It's so good... I can't think... its so good!"
+                           the_girl "It's so good... I can't think... it's so good!"
                            "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
                            mc.name "Wow, the things you do with this ass. You are amazing [the_girl.title]."
                            "[the_girl.possessive_title] sighs. You can tell the double penetration is very fulfilling for her."
                       else:
                            "[the_girl.possessive_title] looks back at you."
                            the_girl "Honestly, I'm not usually into butt stuff... but I just want to make you feel so good..."
-                           the_girl "And the dildo makes this so much better than just anal... its AMAZING."
+                           the_girl "And the dildo makes this so much better than just anal... it's AMAZING."
                  "[the_girl.possessive_title] continues to twerk her ass up and down on your penis. How does she make it look so easy?"
             "I'm in charge here":
                  "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
@@ -263,7 +263,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     if the_choice == "Cum on her face":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
@@ -314,7 +314,7 @@ label transition_doggy_anal_SB_doggy_anal_dildo_dp(the_girl, the_location, the_o
         "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
@@ -340,7 +340,7 @@ label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object
         "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."

@@ -532,7 +532,7 @@ label camilla_hookup_accept(the_person):
         menu:
             "Pull Out":
                 "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
-                the_person "Oh! Its so hot on my skin!"
+                the_person "Oh! It's so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
                 "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."

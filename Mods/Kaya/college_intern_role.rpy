@@ -175,7 +175,7 @@ label college_intern_complete_internship(the_person):
             $ the_person.change_happiness(-5)
             $ the_person.change_love(-2)
             the_person "Ah... I understand. Well, if you change your mind, please let me know, okay?"
-            "She hangs up before you can respond. Its unfortunate, but not every intern can transition to a full employee."
+            "She hangs up before you can respond. It's unfortunate, but not every intern can transition to a full employee."
     elif college_intern_happiness_score(the_person) > renpy.random.randint(1,100):  #She might ask to stay on
         the_person "I've been thinking about this a lot, and I keep going back and forth on it. But before I start putting in applications elsewhere, I was wondering something."
         the_person "Would you consider hiring me on full time? I know it's a lot to ask, and if the answer is no that's okay."
