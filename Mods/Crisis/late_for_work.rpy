@@ -59,7 +59,7 @@ label late_for_work_action_label:
                 mc.name "Do you know what time we start here [the_person.title]?"
                 the_person "I am really sorry [the_person.mc_title]."
                 if (upper_clothing):
-                    mc.name "I don't care, next time be on time and cleanup your [upper_clothing.display_name]."
+                    mc.name "I don't care, next time be on time and clean up your [upper_clothing.display_name]."
                 else:
                     mc.name "I don't care, next time be on time and make your tits presentable."
                 $ the_person.change_stats(obedience = 3, happiness = -2)
@@ -74,7 +74,7 @@ label late_for_work_action_label:
             "Let it slide":
                 $ the_person.draw_person(emotion = 'happy')
                 if (upper_clothing):
-                    mc.name "Well at least cleanup your [upper_clothing.display_name], before you start."
+                    mc.name "Well at least clean up your [upper_clothing.display_name], before you start."
                 else:
                     mc.name "At least get that cum of your tits, before you go to work."
                 the_person "Thank you, [the_person.mc_title]!"
@@ -127,7 +127,7 @@ label late_for_work_action_label:
                 $ the_person.change_stats(obedience = 2, slut_temp = 2)
 
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.possessive_title] rushes to the ladies room to cleanup."
+        "[the_person.possessive_title] rushes to the ladies room to clean up."
         $ upper_clothing = None
     elif persistent.show_ntr and the_person.sluttiness > 80 and not the_person.has_role(girlfriend_role): # NTR Enabled very slutty single girls
         $ the_person.cum_on_face()

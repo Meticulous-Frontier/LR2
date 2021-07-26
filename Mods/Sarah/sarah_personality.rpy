@@ -351,7 +351,7 @@ label Sarah_flirt_response_mid(the_person):
         the_person "I know we are childhood friends, and obviously I want you to be honest with me, but I'm not sure it's right for you to say stuff like that."
         mc.name "Like what? That you're hot?"
         the_person "I guess I'm just not used to hearing the guy I used to play hide and seek with when I was little call me \"hot\"."
-        mc.name "Well I suppose you'd better get used to, since it's true and I'm not going to stop reminding you anytime soon."
+        mc.name "Well I suppose you'd better get used to it, since it's true and I'm not going to stop reminding you anytime soon."
         $ mc.change_locked_clarity(10)
         "[the_person.title] rolls her eyes at you, but you also notice the corner of her mouth turn up in a slight smile."
         the_person "Thanks Romeo, though I will admit it is nice to hear."

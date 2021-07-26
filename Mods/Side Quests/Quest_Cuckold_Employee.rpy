@@ -384,7 +384,7 @@ label quest_cuckold_employee_decision_label():
         if mc.energy < 30:
             mc.name "I'm really sorry, but I'm just to tired at the moment, we can try again tomorrow."
             $ the_person.change_stats(happiness = -10, obedience = -10, love = -10)
-            the_person "Alright, for just this once, I will believe you, but you better cleanup your act."
+            the_person "Alright, for just this once, I will believe you, but you better clean up your act."
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
             "[the_person.title] stands up, throws on her clothes and storms out of your office."
@@ -488,7 +488,7 @@ label quest_cuckold_employee_rethink_decision_label():
         if mc.energy < 30:
             mc.name "I'm really sorry, but I'm just to tired at the moment, we can try again tomorrow."
             $ the_person.change_stats(happiness = -10, obedience = -10, love = -10)
-            the_person "Alright, for just this once, I will believe you, but you better cleanup your act."
+            the_person "Alright, for just this once, I will believe you, but you better clean up your act."
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
             "[the_person.title] stands up, throws on her clothes and storms out of your office."
@@ -568,7 +568,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
             the_person "Even if I do get pregnant... I'll already have one dirty little secret anyway. Maybe we could still fool around some..."
             "Sounds like she might be open to some kind of an affair in the future..."
         else:
-            the_person "But, it's like they say, all good things must come to and end."
+            the_person "But, it's like they say, all good things must come to an end."
             "She looks down at your crotch for a second."
             the_person "In this case, a hard, throbbing, amazing thing..."
         the_person "I'm going to lay here for a while again."

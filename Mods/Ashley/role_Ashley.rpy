@@ -1343,7 +1343,7 @@ label ashley_second_concert_date_label():
             mc.name "Yeah. Maybe."
             "There's no way [stephanie.possessive_title] doesn't notice. But you have to get her home..."
         else:
-            the_person "Damn that was hot... let me just cleanup real quick..."
+            the_person "Damn that was hot... let me just clean up real quick..."
             $ the_person.apply_outfit(the_person.planned_outfit)
             $ the_person.draw_person()
             "[the_person.possessive_title] gets some wipes from her clutch and straightens her clothes out."

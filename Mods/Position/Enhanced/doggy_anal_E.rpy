@@ -67,7 +67,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                            "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
                            the_girl "Practicing, dreaming, begging for your cock in my ass! Every moment my rear is empty I'm craving your dick deep inside it."
                            "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
-                           mc.name "Fuck [the_girl.title], I dont't know how you do that, but it's amazing."
+                           mc.name "Fuck [the_girl.title], I don't know how you do that, but it's amazing."
                            "[the_girl.possessive_title] sighs. She is truly addicted to getting her tight back passage fucked"
                       elif the_girl.get_opinion_score("anal sex") > 0:
                            "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."

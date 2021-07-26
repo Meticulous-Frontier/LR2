@@ -109,7 +109,7 @@ init -1 python:
 
 label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher
-    "You get an email notification on your phone. Normally you would brish something like this off as spam, but the subject line has your name in it."
+    "You get an email notification on your phone. Normally you would brush something like this off as spam, but the subject line has your name in it."
     "You open it up and are surprised what you are reading. It is short and to the point."
     "?????" "I know what your company is doing with the nanobots, and I'll go public with it if you don't meet my demands."
     "?????" "Meet me tomorrow night in alley between 3rd and 5th street downtown. Come alone, and bring cash."
@@ -127,11 +127,11 @@ label ellie_start_intro_note_label():
     "You pull up the email and show it to her."
     "She is just as surprised as you."
     the_person "Wow... fuck... okay. What can I do to help?"
-    mc.name "So, here is what I am thinking. Across from the alley is bar where you can get on the roof fairly easily."
+    mc.name "So, here is what I am thinking. Across from the alley is a bar where you can get on the roof fairly easily."
     mc.name "Can you come with me, but hide up on the roof with like... a camera or binoculars or something? Just watch while I deal with this."
     the_person "Yeah. I can do that. I think I know where you are talking about."
     mc.name "I'll pull out some cash the day of and be ready. Although the email doesn't even say how much cash to bring."
-    the_person "Yeah... it's a little ambigious... But I can do that."
+    the_person "Yeah... it's a little ambiguous... But I can do that."
     "You spend some time in your office with [the_person.title], making a quick and dirty plan for how to deal with the blackmail threat."
     mc.name "Alright, it's a plan. I won't meet with you tomorrow night, in case we are being watched or tracked, but it's a plan at least."
     the_person "Ok... We'll talk then."
@@ -220,7 +220,7 @@ label ellie_meet_ellie_intro_label():
 
 label ellie_head_researcher_halfway_intro_label():
     $ the_person = mc.business.head_researcher
-    "You feel your phone vibrate in your pocket. it's [the_person.possessive_title]"
+    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]"
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
     mc.name "I'll be right there."

@@ -1130,7 +1130,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ the_person.break_taboo("condomless_sex")
                 $ the_person.break_taboo("vaginal_sex")
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
-                the_person "Oh God! it's going so deep."
+                the_person "Oh God! It's going so deep."
                 $ mc.change_arousal(20)
                 "You give her ass a solid spank, then begin to fuck her roughly."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four

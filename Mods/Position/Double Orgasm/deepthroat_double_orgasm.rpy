@@ -83,7 +83,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 else:
                     $ the_item = the_girl.outfit.get_lower_top_layer()
                     if the_item.underwear:
-                        "[the_girl.title]'s trembling wet pussy soaked her [the_item.name] and it's dripping fluid while she's cumming."
+                        "[the_girl.title]'s trembling wet pussy has soaked her [the_item.name], and it drips fluid as she cums."
                     else:
                         "[the_girl.title] clenches her thighs together and rides out her orgasm."
                     $ the_item = None

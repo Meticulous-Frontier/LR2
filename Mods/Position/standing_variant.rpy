@@ -145,7 +145,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                               $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
                           elif the_girl.get_opinion_score("showing her ass") > 0:
                               "[the_girl.possessive_title] looks back at you."
-                              the_girl "Mmmm do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
+                              the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
                               mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
                               "The next time you thrust into her, you pause for a second when you are fully embedded within her."
                               the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
@@ -274,7 +274,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                               $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
                           elif the_girl.get_opinion_score("showing her ass") > 0:
                               "[the_girl.possessive_title] looks back at you."
-                              the_girl "Mmmm do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
+                              the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
                               mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
                               "The next time you thrust into her, you pause for a second when you are fully embedded within her."
                               the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
