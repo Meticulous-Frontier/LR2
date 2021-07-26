@@ -322,6 +322,7 @@ label quest_arousal_serum_test_label():
                 the_person "Alright."
                 $ quest_arousal_serum().set_quest_flag(49)
                 $ quest_arousal_serum().quest_completed()
+                return
 
         the_person "I'll start working on the other pill... see if I can reverse engineer the effects."
         the_person "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
