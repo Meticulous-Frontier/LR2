@@ -2204,7 +2204,7 @@ label starbuck_candace_product_demo_label(the_person):
     $ starbuck.change_arousal(20)
     $ mc.change_arousal(25)
     $ mc.change_locked_clarity(30)
-    "[starbuck.title]'s is so smooth, it's getting to be too much to bear. Instead of slowing down to try and last longer though, you speed up even more."
+    "[starbuck.title]'s slit is so smooth, it's getting to be too much to bear. Instead of slowing down to try and last longer though, you speed up even more."
     starbuck "Oh my god I'm gonna cum... I'm gonna cum!"
     mc.name "Oh fuck me too."
     starbuck "Cum with me [starbuck.mc_title]! Shove it in deep and don't pull out until we're both finished!"

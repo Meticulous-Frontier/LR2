@@ -221,7 +221,7 @@ label horny_at_work_crisis_enhanced_label():
                         licker "Let me take care of that, [licker.mc_title]."
                         $ scene_manager.update_actor(licker, position = "doggy", display_transform = character_right, emotion = "happy")
                         $ mc.change_locked_clarity(5)
-                        "You watch [licker.title], get on her hands and knees to cleanup the mess you made."
+                        "You watch [licker.title] get on her hands and knees to clean up the mess you made."
                     $ del licker
                     $ scene_manager.update_scene(position = "sitting", emotion = "happy")
                     "The girls go back to their workstations, happy with the distraction you provided them."

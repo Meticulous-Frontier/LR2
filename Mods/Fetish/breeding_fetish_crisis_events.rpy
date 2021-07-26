@@ -260,7 +260,7 @@ label breeding_fetish_happy_breeder_crisis_label():
             $ the_person.draw_person(position = "blowjob")
             the_person "I'm sorry [the_person.mc_title]... I just can't help it. It feels so good inside of me..."
             "[the_person.possessive_title] reaches down and starts to stroke your mostly soft cock."
-            "Her hands feel good but you can tell it's going to take a little more to get you aroused again, after cumming twice already."
+            "Her hands feel good, but you can tell it's going to take a little more to get you aroused again after cumming twice already."
             ###IF girl has big tits, ask for a tit fuck
             if the_person.has_large_tits():
                 mc.name "Why don't you put it between your tits for a while?"
