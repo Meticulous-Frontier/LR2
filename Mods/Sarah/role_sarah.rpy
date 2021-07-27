@@ -2438,15 +2438,13 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ scene_manager.update_actor(threesome_partner, position = "missionary", display_transform = character_right)
         "All finished, the girls flop onto their backs, one on each side of you."
         if the_report.get("girl one orgasms", 0) > 0 and the_report.get("girl two orgasms", 0) > 0:  #They both finished.
+            $ the_person.increase_opinion_score("incest", max_value = 1)
             the_person "Oh wow, that was so hot..."
-            if the_person.get_opinion_score("incest") < 1:
-                $ the_person.increase_opinion_score("incest")
+            $ threesome_partner.increase_opinion_score("incest")
             if threesome_partner is mom:
                 threesome_partner "I know... I just had a threesome with my son and his girlfriend... and I loved it!"
-                $ threesome_partner.increase_opinion_score("incest")
             else:
                 threesome_partner "I know! A threesome with my bro and his girl... and I loved it!"
-                $ threesome_partner.increase_opinion_score("incest")
             threesome_partner "It was amazing... [the_person.name] don't be a stranger now..."
         else:
             "You lay together for a few moments, enjoying each other's proximity."
