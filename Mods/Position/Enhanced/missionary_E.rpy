@@ -18,7 +18,7 @@ label scene_missionary_3_enhanced(the_girl, the_location, the_object):
     menu:
         "Give her everything you've got":
             if the_girl.is_girlfriend():
-                mc.name "That's it, you little mynx. God I love fucking your tight cunt..."
+                mc.name "That's it, you little minx. God I love fucking your tight cunt..."
             elif the_girl.is_affair():
                 mc.name "Take it, slut. No man in your life fucks you the way I do."
             elif the_girl.is_single():

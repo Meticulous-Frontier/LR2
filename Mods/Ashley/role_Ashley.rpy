@@ -848,7 +848,7 @@ label ashley_post_handjob_convo_label(the_person):
     return
 
 label ashley_stephanie_arrange_relationship_label(the_person):
-    "It's time talk to [the_person.title]. You approach her in the lab."
+    "It's time to talk to [the_person.title]. You approach her in the lab."
     mc.name "Hey, we need to chat. Can you come with me to my office?"
     the_person "Sounds good."
     "You walk to your office. She enters first, and you close the door behind your you both take a seat."
@@ -943,7 +943,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     "She looks over at her sister and starts to tease her. "
     stephanie "I think she said something about hitting up the gym today... I think there's a guy she's trying to impress!"
     the_person "Oh my gosh Steph, stop it!"
-    "[the_person.title] is blushing, and once in a while sneaks a peak up at you. Even though you've already discussed with her how you want things to be with her, it is cute to see her squirm a little."
+    "[the_person.title] is blushing, and once in a while sneaks a peek up at you. Even though you've already discussed with her how you want things to be with her, it is cute to see her squirm a little."
     mc.name "Is that true [the_person.title]? Who might this lucky guy be?"
     the_person "Ah. Errm... Well..."
     "She's sputtering out unintelligible mumbles."
@@ -1114,7 +1114,7 @@ label ashley_second_concert_intro_label(the_person):
     stephanie "I don't know..."
     the_person "Relax Steph! I'm sure [the_person.mc_title] will be a perfect gentleman."
     stephanie "It's not him I'm worried about!"
-    "Desperate to diffuse the situation, you take control of the conversation."
+    "Desperate to defuse the situation, you take control of the conversation."
     mc.name "We'll go to the concert, then I'll bring her straight home. I'll have her home by, say, 10? If you're still up we can hang out a bit."
     stephanie "Why don't you stay the night?"
     "[stephanie.title] is getting territorial. You decide for now to indulge her."
@@ -1170,7 +1170,7 @@ label ashley_second_concert_date_label():
     "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
     $ mc.change_locked_clarity(15)
     $ the_person.change_arousal(arousal_gain)
-    "You are delighted but not surprised to discover she isn't wearing any panties. She lets go of your hand and takes a quick peak around."
+    "You are delighted but not surprised to discover she isn't wearing any panties. She lets go of your hand and takes a quick peek around."
     "With the darkness in the room, no one notices your hand under her dress as you slowly start to push a finger inside her cunt."
     "[the_person.title]'s body responds rapidly to your touch. After barely a minute her pussy is soaked, and you can see her chest rising and falling faster out of the corner of your eye."
     "The angle is rough, but you do your best to rub the palm of your hand against her clit as you finger her."
@@ -1613,7 +1613,7 @@ label coffee_time_steph_gets_handsy_label():
             "You wish your cock was inside her instead of your finger, but in a place like a coffee shop booth, you can't justify risking it."
             $ stephanie.have_orgasm(half_arousal = False, the_position = "sitting")
             if stephanie.get_opinion_score("public sex") > 0: #[If Steph likes public sex, she finishes you no matter what.]
-                "[stephanie.possessive_title] eventually opens her eyes, taking a quick peak around, then begins stroking you again."
+                "[stephanie.possessive_title] eventually opens her eyes, taking a quick peek around, then begins stroking you again."
                 "Seems she is intent on giving you a similar treatment. You slowly pull your hand out of her clothes."
                 stephanie "Are you going to look at those tops we were looking at the other day Ash?"
                 "[stephanie.title] picks up the conversation with her sister."
@@ -1711,7 +1711,7 @@ label coffee_time_steph_gets_handsy_label():
                 $ stephanie.outfit.remove_all_cum()
                 $ scene_manager.draw_scene()
             else:
-                "[stephanie.title] eventually opens her eyes, taking a quick peak around, then begins stroking you again."
+                "[stephanie.title] eventually opens her eyes, taking a quick peek around, then begins stroking you again."
                 "Seems she is intent on giving you a similar treatment. You slowly pull your hand away from her crotch."
                 stephanie "Your cock feels so hot in my hand..."
                 $ mc.change_locked_clarity(20)

@@ -106,7 +106,7 @@ label mom_sister_snooping_action_label():
         $ mom.change_slut_temp(3)
         "Eventually you tear your eyes away. You don't want to get caught snooping."
     elif mc.business.event_triggers_dict.get("family_threesome", False) == True: #You've already had a threesome
-        "As you peak around her door, your cock starts to get hard at what you see."
+        "As you peek around her door, your cock starts to get hard at what you see."
         $ mom.arousal = 55
         $ lily.arousal = 40
         $ girl_swap_pos = False
@@ -115,7 +115,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily, position = "sitting")
         $ Threesome_sixty_nine.update_scene(lily, mom)
-        "When you peak around the corner, you see [mom.title] on top of [lily.title]. They are eating each other out."
+        "When you peek around the corner, you see [mom.title] on top of [lily.title]. They are eating each other out."
         $ mc.change_locked_clarity(50)
         mom "Mmmm, that's it dear, lick right there!"
         $ mom.change_arousal(12)
@@ -158,7 +158,7 @@ label mom_sister_snooping_action_label():
         $ lily.apply_university_outfit()
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
-        "You peak in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
+        "You peek in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
         mom "Isn't there a uniform at the university? That skirt seems a little short..."
         lily "It's fine mom. I just roll it up a little at the top, no one even notices. Well, except for this one professor... I like to sit in the front and..."
         mom "That's enough... I don't need to hear about this! Young lady unroll that skirt right now."

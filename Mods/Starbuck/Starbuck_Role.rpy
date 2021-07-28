@@ -2319,7 +2319,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
 
     "You listen closely and hear... The girls are just chatting?"
     if the_person_one.event_triggers_dict.get("orgasm_denial_discovered", False) == False:
-        "You peak around the corner and see [the_person_two.title] and [the_person_one.possessive_title], sitting at a table, each with a small cup in front of them. [the_person_one.title] is talking about her day."
+        "You peek around the corner and see [the_person_two.title] and [the_person_one.possessive_title], sitting at a table, each with a small cup in front of them. [the_person_one.title] is talking about her day."
         $ scene_manager.add_actor(the_person_one, position = "sitting")
         $ scene_manager.add_actor(the_person_two, position = "sitting", display_transform = character_center_flipped)
         the_person_one "Yeah business was a little slow, except one couple came in. They must have just gotten together or something, because they bought a full set up of stuff."
@@ -2437,7 +2437,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         "As the girls do their thing, you decide to head out. You say goodbye and slip out from the sex shop."
         $ the_person_one.event_triggers_dict["orgasm_denial_discovered"] = True
     else:
-        "You peak around the corner and see [the_person_two.title] and [the_person_one.possessive_title], sitting at a table, each with a small cup in front of them. [the_person_one.title] is talking about her day."
+        "You peek around the corner and see [the_person_two.title] and [the_person_one.possessive_title], sitting at a table, each with a small cup in front of them. [the_person_one.title] is talking about her day."
         python:
             for i in range(3): #This time we start without bottoms
                 the_person_one.outfit.remove_random_lower(top_layer_first = True)
