@@ -99,7 +99,7 @@ init 2 python:
         else:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
 
-            random = renpy.random.randint(12,18)
+            random = renpy.random.randint(10, 14)
             preg_announce_action = Action("Pregnancy Announcement", (preg_announce_requirement if not bugfix_installed else pregnant_announce_requirement), target_label, requirement_args = day + random)
             person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, random + 14))
 
