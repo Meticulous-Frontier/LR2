@@ -60,7 +60,7 @@ label friends_help_friends_be_sluts_enhanced_label():
         "You're passing by the break room when an unusual noise catches your attention. It sounds like distant and passionate feminine moaning."
         $ scene_manager.add_actor(person_one, position = "walking_away")
         $ scene_manager.add_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
-        "Intrigued, you peak your head in and see [person_one.title] and [person_two.title]. They are staring intently at [person_one.title]'s phone while they stand next to the coffee machine."
+        "Intrigued, you peek your head in and see [person_one.title] and [person_two.title]. They are staring intently at [person_one.title]'s phone while they stand next to the coffee machine."
         menu:
             "Investigate":
                 if person_two.effective_sluttiness() < 30: #But the other girl is low sluttiness.

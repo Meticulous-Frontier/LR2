@@ -1346,6 +1346,7 @@ label erica_money_problems_label(the_person):
         if lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
             "Or maybe even talk to [lily.title], see about including Erica in some of her Insta-pic sessions once in a while?"
             $ erica.event_triggers_dict["insta_pic_started"] = True
+            $ lily.add_unique_on_talk_event(erica_lily_instapic_setup)
     elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
         "Maybe you could talk to [lily.title] into letting [the_person.title] join her for some of her Insta-pic sessions once in a while?"
         $ erica.event_triggers_dict["insta_pic_started"] = True

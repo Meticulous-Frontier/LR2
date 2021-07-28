@@ -92,7 +92,7 @@ label mall_introduction_action_label:
                 known_person "I promise you [stranger.name], he is a great boss: you should go out with him sometime."
         else:
             if known_person.sluttiness > 40:
-                known_person "He can show you a really good time [stranger.name], if you know what i mean."
+                known_person "He can show you a really good time [stranger.name], if you know what I mean."
             else:
                 known_person "I have to tell you [stranger.name], he is a great person to hang out with."
 
