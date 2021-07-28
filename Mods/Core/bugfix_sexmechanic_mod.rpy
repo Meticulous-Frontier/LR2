@@ -219,6 +219,12 @@ init 5 python:
                 person.increase_opinion_score(get_random_from_list(record_opinion_map[record_class]), tier - 1)
                 gained_opinion = True
 
+        # Record the total number of orgasms for the girl
+        person.sex_record["Orgasms"] = person.sex_record.get("Orgasms", 0) + report_log.get("girl orgasms", 0)
+        # Record number of times public sex
+        if report_log.get("was_public", False):
+            person.sex_record["Public Sex"] = person.sex_record.get("Public Sex", 0) + 1
+
         # record the last time we had sex
         person.sex_record["Last Sex Day"] = day
         return
