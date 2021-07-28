@@ -7,7 +7,7 @@ init -1 python:
             if person.has_role(stripper_role) and getattr(mc.business, "strippers_serum", None):
                 strip_club_give_daily_serum_to_person(person, mc.business.strippers_serum)
             if person.has_role(waitress_role) and getattr(mc.business, "waitresses_serum", None):
-                strip_club_give_daily_serum_to_person(person, mc.business.strippers_serum)
+                strip_club_give_daily_serum_to_person(person, mc.business.waitresses_serum)
             if person.has_role([manager_role, mistress_role]) and getattr(mc.business, "manager_serum", None):
                 strip_club_give_daily_serum_to_person(person, mc.business.manager_serum)
             if person.has_role(bdsm_performer_role) and getattr(mc.business, "bdsm_performers_serum", None):
