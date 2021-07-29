@@ -504,7 +504,7 @@ label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences
             "Add it to the uniforms"if the_outfit.get_full_outfit_slut_score() <= slut_limit:
                 mc.name "I think I'll do that when we get back to the office."
                 the_person "Yay! Thank you [the_person.mc_title]!"
-                $ clothes_shopping_get_work_wardrobe(the_person).add_outfit(the_outfit)
+                $ mc.business.add_uniform_to_company(the_outfit, full_outfit_flag = True)
                 #TODO figure out a way to make this count toward uniform goal count
             "Add it to the uniforms\n{color=#ff0000}{size=18}Too slutty!{/size}{/color} (disabled)" if the_outfit.get_full_outfit_slut_score() > slut_limit:
                 pass

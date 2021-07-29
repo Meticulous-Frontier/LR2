@@ -111,6 +111,27 @@ init -1 python:
 
     Business.update_employee_status = update_employee_status
 
+    def add_uniform_to_company(self, outfit, full_outfit_flag = False, overwear_flag = False, underwear_flag = False, research = True, production = True, supply = True, marketing = True, hr = True):
+        uniform = UniformOutfit(outfit)
+        if uniform.can_toggle_full_outfit_state():
+            uniform.set_full_outfit_flag(full_outfit_flag)
+        if uniform.can_toggle_overwear_state():
+            uniform.set_overwear_flag(overwear_flag)
+        if uniform.can_toggle_underwear_state():
+            uniform.set_underwear_flag(underwear_flag)
+
+        uniform.set_research_flag(research)
+        uniform.set_production_flag(production)
+        uniform.set_supply_flag(supply)
+        uniform.set_marketing_flag(marketing)
+        uniform.set_hr_flag(hr)
+
+        mc.business.business_uniforms.append(uniform)
+        mc.business.update_uniform_wardrobes()
+        return
+
+    Business.add_uniform_to_company = add_uniform_to_company
+
     def get_business_stripper_wardrobe(self):
         if not hasattr(self, "_stripper_wardrobe"):
             self._stripper_wardrobe = stripclub_wardrobe
