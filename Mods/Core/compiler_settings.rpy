@@ -1,6 +1,7 @@
 init -2 python:
     build.classify("**.rpy", None) # don't include rpy files in build
     build.classify("**.bak", None)
+    build.classify("**.ref", None)
     build.classify('**~', None)
     build.classify('**/#**', None)
     build.classify("**.back", None)
@@ -55,6 +56,10 @@ init -2 python:
         build.classify("game/images/**.png", "tutorial_images")
         build.classify("game/images/**.jpg", "tutorial_images")
         build.classify("game/Mods/Tutorial/**.png", "tutorial_images")
+
+        build.archive("unit_tests")
+        build.classify("game/unittest/**.**", "unit_tests")
+        build.classify("game/integration_tests/**.**", "unit_tests")
 
 init 2 python:
     build.name = "Lab_Rats_2_Mod"
