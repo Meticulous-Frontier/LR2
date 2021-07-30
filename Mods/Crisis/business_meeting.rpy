@@ -95,7 +95,7 @@ label business_meeting_arrousal(the_person):
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
         $ mc.change_arousal(20)
         $ mc.change_locked_clarity(20)
-        the_person "Oh my [the_person.mc_title], it seems my proposal got you all excited."
+        the_person "Oh my, [the_person.mc_title] it seems my proposal got you all excited."
     else:
         the_person "She keeps stroking your legs while she talks, making sure you are focussed on her."
     return
