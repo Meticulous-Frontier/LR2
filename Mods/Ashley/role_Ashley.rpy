@@ -1705,7 +1705,7 @@ label coffee_time_steph_gets_handsy_label():
                 $ stephanie.cum_in_mouth()
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = stephanie)
                 "Her talented mouth takes your load easily. When you finish, her mouth slowly releases your cock and you hear a loud gulp."
-                "You look around to make sure you are still anonymous before putting your hand on her should and then helping her back up and into her seat."
+                "You look around to make sure you are still anonymous before putting your hand on her shoulder and then helping her back up and into her seat."
                 $ scene_manager.update_actor(stephanie, position = "sitting")
                 "Once back up, she wipes what little cum managed to get on her face with a napkin and sets it aside. [stephanie.title] shakes her head."
                 $ stephanie.outfit.remove_all_cum()

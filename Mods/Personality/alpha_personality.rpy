@@ -253,7 +253,7 @@ label alpha_seduction_accept_crowded(the_person):
             "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
             the_person "Okay, but we need to be discreet: I have a repute. Let's find someplace quiet."
         else:
-            the_person "Oh my [the_person.mc_title]... why don't you take care of me right here!"
+            the_person "Oh my, [the_person.mc_title]... why don't you take care of me right here!"
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:

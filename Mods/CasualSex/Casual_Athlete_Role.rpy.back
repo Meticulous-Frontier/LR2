@@ -417,7 +417,7 @@ label casual_athlete_phase_two_label(the_person):
         the_person "That's what I said, isn't it?"
         mc.name "You've got a deal. Saturday morning downtown. I'll be there."
         $ the_person.draw_person (position = "stand4")
-        the_person "Yes! Oh my [the_person.mc_title], no backing out now! I'll have to find my handcuffs..."
+        the_person "Yes! Oh my, [the_person.mc_title] no backing out now! I'll have to find my handcuffs..."
         "[the_person.title] seems pretty confident in herself, but you are pretty sure you have good odds in a race."
         "You wave goodbye to [the_person.title], wondering what you've gotten yourself in to."
 
