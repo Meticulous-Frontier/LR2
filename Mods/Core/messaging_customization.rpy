@@ -47,6 +47,11 @@ init 2 python:
     SerumTrait.run_on_remove = generic_messages_extended(SerumTrait.run_on_remove, persistent.serum_messages, False)
     SerumTrait.run_on_day = generic_messages_extended(SerumTrait.run_on_day, persistent.serum_messages, True)
 
+    SerumTraitMod.run_on_turn = generic_messages_extended(SerumTraitMod.run_on_turn, persistent.serum_messages, False)
+    SerumTraitMod.run_on_apply = generic_messages_extended(SerumTraitMod.run_on_apply, persistent.serum_messages, True)
+    SerumTraitMod.run_on_remove = generic_messages_extended(SerumTraitMod.run_on_remove, persistent.serum_messages, False)
+    SerumTraitMod.run_on_day = generic_messages_extended(SerumTraitMod.run_on_day, persistent.serum_messages, True)
+    
     # clarity messages
     MainCharacter.change_masturbation_novelty = generic_messages_extended(MainCharacter.change_masturbation_novelty, persistent.clarity_messages, True)
     MainCharacter.change_locked_clarity = generic_messages_extended(MainCharacter.change_locked_clarity, persistent.clarity_messages, True)
