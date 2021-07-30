@@ -94,7 +94,7 @@ init -1 python:
             return True
         return False
 
-    def camilla_blowjob_text_requirement():
+    def camilla_blowjob_text_requirement(the_person):
         if day >= camilla.event_triggers_dict.get("camilla_blowjob_pic_day", 9999):
             return True
         return False
