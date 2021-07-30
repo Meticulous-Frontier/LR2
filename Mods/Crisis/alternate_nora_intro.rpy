@@ -5,7 +5,9 @@ init 5 python:
 
 label alternate_nora_intro_mod_core(stack):
     python:
-        alternate_nora_intro_mod_initialization()
+        # only add if university is not unlocked
+        if not university.visible:
+            alternate_nora_intro_mod_initialization()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
