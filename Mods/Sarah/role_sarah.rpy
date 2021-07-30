@@ -2938,6 +2938,10 @@ label Sarah_weekend_date_strip_club_label():
     $ scene_manager.clear_scene()
     return
 
+label Sarah_naomi_visits_to_apologize():
+    # TODO: after threesome unlock, Naomi comes to office to apologize (she's been dumped by her BF)
+    # TODO: add bar date with Sarah and Naomi, where you end up at Sarah's place for a night of fun
+    return
 
 label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.change_location(hall)
