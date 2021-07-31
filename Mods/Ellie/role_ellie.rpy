@@ -122,6 +122,7 @@ init -1 python:
     ellie_work_welcome = Action("Hire Ellie", ellie_work_welcome_requirement, "ellie_work_welcome_label")
     ellie_work_welcome_monday = Action("Review Ellie", ellie_work_welcome_monday_requirement, "ellie_work_welcome_monday_label")
     ellie_self_research_identity = Action("Blackmailer Identity", ellie_self_research_identity_requirement, "ellie_self_research_identity_label")
+    ellie_never_been_kissed = Action("Ellie Gets Kissed", ellie_never_been_kissed_requirement, "ellie_never_been_kissed_label")
 
 label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher
@@ -184,7 +185,7 @@ label ellie_meet_ellie_intro_label():
     mc.name "I'm sorry, my business is just founded, and I don't have the ability to pull that much, especially on such short notice."
     ellie "Ah lordie help me. Hmm. How about this. You give me some cash now as a show of good faith, and we'll meet again next week and you kin give me the money then."
     ellie "As a fellow criminal, surely y'all can understand that I got bills to pay."
-    "You doubt you will be able to find a million dollars between now and next week, but atleast this will give you some time to try and figure things out."
+    "You doubt you will be able to find a million dollars between now and next week, but at least this will give you some time to try and figure things out."
     mc.name "Alright, that's a deal."
     ellie "Aight. For now, let me have a hundred dollars. That'd outta get me thru until next week..."
     "This whole conversation is throwing up serious red flags. Is she really just asking a hundred for now? The whole thing reeks of amateurism."
@@ -211,7 +212,7 @@ label ellie_meet_ellie_intro_label():
     mc.name "Well, first thing, she had a heavy southern accent. She could have been faking it, but I doubt it. The whole thing felt... Like she was an amateur to be honest."
     the_person "Why do you say that?"
     mc.name "Well, she really seemed to have no idea how much money to ask for, so she just said she needed a million dollars."
-    the_person "Wow, there's no way you could make a ransom like that, atleast as far as I know."
+    the_person "Wow, there's no way you could make a ransom like that, at least as far as I know."
     mc.name "Right? And then when I said I didn't have that kind of money, she told me had she had bills to pay?"
     mc.name "So she just asked for a hundred dollars as a show of good faith, and to meet again next week..."
     the_person "Wow... That's so weird."
@@ -252,7 +253,7 @@ label ellie_head_researcher_halfway_intro_label():
     mc.name "What is it?"
     the_person "Well, following a hunch, I contacted the contact I had that got us the nanobots and the program in the first place."
     the_person "It was just too weird that this girl had so much info about them."
-    the_person "I gave him description of the blackmailer, and he finally got back to me this morning."
+    the_person "I gave him a description of the blackmailer, and he finally got back to me this morning."
     the_person "The company launched an investigation trying to figure out who leaked the bots, but they got the wrong person."
     the_person "The company came down hard on a relatively new person. A woman they had hired about a year ago. A fresh computer science college graduate from University of Alabama..."
     mc.name "Ahhhhh"
@@ -274,7 +275,7 @@ label ellie_head_researcher_halfway_intro_label():
     the_person "That might work actually."
     mc.name "If this other company ever calls us, we could just say she works in HR, for example. She's a college graduate, I'm sure she could handle that work too."
     the_person "Hey, you don't have to convince me. It would be nice to have a tech person around here for sure though."
-    mc.name "Alright. Next time I meet with her, I'll consider trying to hire her. If nothing else, maybe I can atleast scare her off."
+    mc.name "Alright. Next time I meet with her, I'll consider trying to hire her. If nothing else, maybe I can at least scare her off."
     the_person "Okay. Let me know if there is anything else I can help out with, [the_person.mc_title]!."
     $ clear_scene()
     "[the_person.possessive_title] gets up and leaves you a lone in your office."
@@ -290,17 +291,17 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
-    "The time comes so you head for the allie. As you approach, you hear the southern twang of her accent as she steps from the shadows."
+    "The time comes so you head for the alley. As you approach, you hear the southern twang of her accent as she steps from the shadows."
     $ the_person.draw_person()
     the_person "'Ey. Got the money?"
     "You stop."
     if ellie.event_triggers_dict.get("blackmail_stage", 0) == 0:    #First time
         mc.name "I have some money... but a million dollars is a lot of money. My business doesn't pull that much in a year."
-        the_person "Sounds like yall have a problem then. I want my money."
+        the_person "Sounds like y'all have a problem then. I want my money."
         mc.name "What are you going to do with a million dollars, anyway? How are you going to keep it secret from the IRS?"
         the_person "You let me worry about that hun."
         mc.name "Well, for now, I have the same amount as last week. I'll keep working on it, but it's going to take me a while to get that much money."
-        the_person "Work on it. I'll be watching yall."
+        the_person "Work on it. I'll be watching y'all."
         "You hand the mysterious blackmailer $100 again. She turns and walks away."
         $ mc.business.change_funds(-100)
         $ ellie.event_triggers_dict["blackmail_stage"] = 1
@@ -309,12 +310,12 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
     elif ellie.event_triggers_dict.get("blackmail_stage", 0) == 1:
         mc.name "I'm still working on the million dollars. For today I have the same amount as last time."
-        the_person "Yall are testing my patience. How am I supposed to live off of $100 a week? Its your fault I got fired in the first place!"
+        the_person "Y'all are testing my patience. How am I supposed to live off of $100 a week? It's your fault I got fired in the first place!"
         "This is an interesting piece of information."
         mc.name "My fault? What did I do to get you fired?"
         the_person "Those damn nanobots..."
         "She suddenly realizes she is giving away too much information."
-        the_person "Forget it. Give me the money yall got. Don't make me wait much longer for my money, or the good Lord help you..."
+        the_person "Forget it. Give me the money y'all got. Don't make me wait much longer for my money, or the good Lord help you..."
         "You hand the mysterious blackmailer $100 again. She turns and walks away."
         $ mc.business.change_funds(-100)
         $ ellie.event_triggers_dict["blackmail_stage"] = 2
@@ -323,12 +324,12 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
     elif ellie.event_triggers_dict.get("blackmail_stage", 0) == 2:
         mc.name "I've almost got the million dollars. For today I have the same amount as last time."
-        the_person "I'm starting to think yall are just dragging this out. I'm not going to wait forever while yall get the money!"
+        the_person "I'm starting to think y'all are just dragging this out. I'm not going to wait forever while y'all get the money!"
         the_person "Being jobless sucks. My family has been asking questions about what I'm doing out here."
         mc.name "Why don't you just get another job?"
         the_person "Lordie knows I've tried! But they told me I got a non-compete..."
-        "You blackmailer gives away a bit more information. You feel like this might finally be the final piece you need to figure out her identity."
-        the_person "What do yall care anyway? Buncha godless drug makers. Just give me what you got, and next week you better have it all or I'm going straight to the police!"
+        "Your blackmailer gives away a bit more information. You feel like this might finally be the final piece you need to figure out her identity."
+        the_person "What do y'all care anyway? Buncha godless drug makers. Just give me what you got, and next week you better have it all or I'm going straight to the police!"
         "You hand the mysterious blackmailer $100 again. She turns and walks away."
         $ mc.business.change_funds(-100)
         $ ellie.event_triggers_dict["blackmail_stage"] = 3
@@ -364,7 +365,7 @@ label ellie_end_blackmail_label():
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
-    "The time comes so you head for the allie. As you approach, you hear the southern twang of her accent as she steps from the shadows."
+    "The time comes so you head for the alley. As you approach, you hear the southern twang of her accent as she steps from the shadows."
     $ the_person.draw_person()
     the_person "'Ey. Got the money?"
     "You stop."
@@ -446,7 +447,7 @@ label ellie_work_welcome_monday_label():
     "When you arrive at work on Monday morning, you head to your office."
     "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]"
     $ the_person.draw_person()
-    ellie "Hello. I've been looking at things over the weekend like I told yall I would."
+    ellie "Hello. I've been looking at things over the weekend like I told y'all I would."
     mc.name "Great. Have a seat."
     $ the_person.draw_person(position = "sitting")
     ellie "Alright. So, your cybersecurity is basically non existant. Or, was, I should say."
@@ -457,17 +458,17 @@ label ellie_work_welcome_monday_label():
     ellie "Well, it means it won't be as easy for someone to log in to your network with bogus credentials like I did anymore..."
     ellie "Anyways, I spent the weekend looking at your IT systems. They are... rather outdated?"
     mc.name "Umm, honestly when I bought the place there were some systems already in place so I just decided to use those..."
-    ellie "Lordie... Okay well I made a short list of some new programs I could set up for yall that will help in each department."
-    ellie "None of them will be miracles, but yall should see decent efficiency increases. Each one will probably take me about a week to set up."
+    ellie "Lordie... Okay well I made a short list of some new programs I could set up for y'all that will help in each department."
+    ellie "None of them will be miracles, but y'all should see decent efficiency increases. Each one will probably take me about a week to set up."
     mc.name "That sounds great."
     ellie "The other thing I looked at..."
     "She lowers her voice a little."
-    ellie "I... I get it that yall are using the nanobots for... fornication..."
+    ellie "I... I get it that y'all are using the nanobots for... fornication..."
     ellie "So I looked through those programs a bit. There are definitely some gains to be made in those programs."
-    ellie "I'm not saying I agree with what yall are doing with them, but the programs themselves look like yall just slapped them together over a weekend or something."
+    ellie "I'm not saying I agree with what y'all are doing with them, but the programs themselves look like y'all just slapped them together over a weekend or something."
     mc.name "That's.... basically what we did. The head researcher had a contact who put together the programs for us over a weekend..."
-    ellie "Yall... bless your hearts. Yall are lucky he didn't put in some kinda back door or tracking program in there. He was probably just lazy."
-    ellie "Anyway, I think I can improve those more for you yall, though if I'm honest, these bots are cutting edge tech. Some improvements might need more research into the bots themselves first."
+    ellie "y'all... bless your hearts. y'all are lucky he didn't put in some kinda back door or tracking program in there. He was probably just lazy."
+    ellie "Anyway, I think I can improve those more for you y'all, though if I'm honest, these bots are cutting edge tech. Some improvements might need more research into the bots themselves first."
     $ mc.business.it_director = the_person
     $ mc.business.it_director.IT_tags = {}
     #$ mc.business.hr_director.HR_unlocks = {}
@@ -476,12 +477,13 @@ label ellie_work_welcome_monday_label():
     ellie "So, here's the first set of things I can work on. Take a look and let me know if you want me to start on something."
     call screen it_project_screen()
     if mc.business.IT_project_in_progress:
-        ellie "Okay, I have starting point. If yall decide to have me work on something else just come talk to me."
+        ellie "Okay, I have starting point. If y'all decide to have me work on something else just come talk to me."
     else:
         ellie "Aight well, when you decide what you want me to work on, let me know, I'll be in HR."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and starts to walk away. You have now unlocked IT projects!"
     "Talk to your IT director to change projects when she is at work. If she is working on developing a new project, she will be in the Research Department."
+    $ ellie.add_unique_on_room_enter_event(ellie_never_been_kissed)
     return
 
 
