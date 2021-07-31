@@ -1,3 +1,48 @@
+init 1 python:  #Multiple init 1 blocks to make organization easier.
+
+    def hr_organized_chaos_project_requirement():
+        return True
+
+    def hr_task_manager_project_requirement():
+        if len(mc.business.hr_team) >= 3:
+            return True
+        return "Requires 3 HR employees"
+
+    def supply_inventory_project_requirement():
+        return True
+
+    def supply_storage_project_requirement():
+        if len(mc.business.supply_team) >= 3:
+            return True
+        return "Requires 3 supply employees"
+
+    def market_photo_filter_project_requirement():
+        return True
+
+    def market_targeted_advertising_project_requirement():
+        return True #TODO lock behind modeling policy
+
+    def research_peerless_review_project_requirement():
+        return True
+
+    def research_group_discovery_project_requirement():
+        return "Unknown Requirement"
+
+    def research_team_building_project_requirement():
+        if len(mc.business.research_team) >= 3:
+            return True
+        return "Requires 3 research employees"
+
+    def production_assembly_line_project_requirement():
+        return True
+
+    def production_equipment_selftest_project_requirement():
+        if len(mc.business.production_team) >= 5:
+            return True
+        return "Requires 3 production employees"
+
+
+
 init 1 python:
     ## Business IT Projects
 
@@ -5,7 +50,7 @@ init 1 python:
 
     hr_organized_chaos_project = IT_Project(name = "Organized Chaos",
         desc = "Inceases the maximum efficiency of the company by 5%.",
-        requirement = IT_proj_test_req_text,
+        requirement = hr_organized_chaos_project_requirement,
         cost = 0,
         toggleable = True,
         on_buy_function = None,
@@ -19,7 +64,7 @@ init 1 python:
         project_progress = 0,
         project_cost = 100,
         category = "HR",
-        tier = 30)
+        tier = 10)
 
     business_IT_project_list.append(hr_organized_chaos_project)
 
@@ -41,11 +86,11 @@ init 1 python:
         category = "HR",
         tier = 5)
 
-    business_IT_project_list.append(hr_test_project)
+    # business_IT_project_list.append(hr_test_project)
 
     hr_task_manager_project = IT_Project(name = "Task Manager",
         desc = "Requires an HR Director. All HR employees give a maximum efficiency bonus at half the rate of the HR Director.",
-        requirement = IT_proj_test_req_text,
+        requirement = hr_task_manager_project_requirement,
         cost = 0,
         toggleable = False,
         on_buy_function = None,
@@ -57,7 +102,7 @@ init 1 python:
         on_day_function = None,
         dependant_policies = None,
         project_progress = 0,
-        project_cost = 100,
+        project_cost = 150,
         category = "HR",
         tier = 20)
 
@@ -66,7 +111,7 @@ init 1 python:
     supply_inventory_project = IT_Project(name = "JiT Inventory",
         desc = "Just in Time inventory practices help increase efficiency. Increased supply procurement when the company is low on supplies.",
         cost = 0,
-        requirement = None,
+        requirement = supply_inventory_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -86,7 +131,7 @@ init 1 python:
     supply_storage_project = IT_Project(name = "Storage Automation",
         desc = "Chemical storage and retrieval automation. Reduces the cost associated with purchasing and storing supplies by 5%.",
         cost = 0,
-        requirement = None,
+        requirement = supply_storage_project_requirement,
         toggleable = True,
         on_buy_function = None,
         extra_arguments = None,
@@ -97,7 +142,7 @@ init 1 python:
         on_day_function = None,
         dependant_policies = None,
         project_progress = 0,
-        project_cost = 100,
+        project_cost = 150,
         category = "supply",
         tier = 20)
 
@@ -106,7 +151,7 @@ init 1 python:
     market_photo_filter_project = IT_Project(name = "Photo Filters",
         desc = "Automated photo filters. Increases the desirability of the subjects used in promotions, increasing product demand. 5% product price increase.",
         cost = 0,
-        requirement = None,
+        requirement = market_photo_filter_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -126,7 +171,7 @@ init 1 python:
     market_targeted_advertising_project = IT_Project(name = "Targeted Adverts", #TODO
         desc = "Know your audience. Refining advertising filters automatically based on the demographics of previous sales. Increases sales by 5%.",
         cost = 0,
-        requirement = None,
+        requirement = market_targeted_advertising_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -137,7 +182,7 @@ init 1 python:
         on_day_function = None,
         dependant_policies = None,
         project_progress = 0,
-        project_cost = 100,
+        project_cost = 150,
         category = "market",
         tier = 20)
 
@@ -146,7 +191,7 @@ init 1 python:
     research_peerless_review_project = IT_Project(name = "Peerless Review", #TODO
         desc = "The sensitive nature of the research hinders peer review. Automatic detection and replacement of sensitive terms allows for increased rate of research. Increases research by 5%",
         cost = 0,
-        requirement = IT_proj_test_req_text,
+        requirement = research_peerless_review_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -166,7 +211,7 @@ init 1 python:
     research_group_discovery_project = IT_Project(name = "Group Discovery",
         desc = "Automates sharing of research among team members who work in similar fields. Allows research to be more evenly distributed. Reduces Clarity costs of serum traits by 5%",
         cost = 0,
-        requirement = IT_proj_test_req_False,
+        requirement = research_group_discovery_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -177,16 +222,16 @@ init 1 python:
         on_day_function = None,
         dependant_policies = None,
         project_progress = 0,
-        project_cost = 100,
+        project_cost = 200,
         category = "research",
         tier = 30)
 
-    # business_IT_project_list.append(research_group_discovery_project)
+    business_IT_project_list.append(research_group_discovery_project)
 
     research_team_building_project = IT_Project(name = "Distributed Research",
         desc = "Distributing research evenly among team members eases workloads, making employees more loyal. Increases researcher obedience.",
         cost = 0,
-        requirement = IT_proj_test_req_False,
+        requirement = research_team_building_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -197,14 +242,16 @@ init 1 python:
         on_day_function = research_team_building_project_on_day,
         dependant_policies = None,
         project_progress = 0,
-        project_cost = 100,
+        project_cost = 150,
         category = "research",
         tier = 20)
+
+    business_IT_project_list.append(research_team_building_project)
 
     production_assembly_line_project = IT_Project(name = "Assembly Line",
         desc = "Serums now created via assembly line instead of in small batches. Production increased by 25%, but also uses 25% more supply. Can be toggled.",
         cost = 0,
-        requirement = IT_proj_test_req_text,
+        requirement = production_assembly_line_project_requirement,
         toggleable = True,
         on_buy_function = None,
         extra_arguments = None,
@@ -224,7 +271,7 @@ init 1 python:
     production_equipment_selftest_project = IT_Project(name = "Equipment Selftest",
         desc = "Production equipment now runs an end of the day self test. Reduces production staff workload, slightly increasing happiness.",
         cost = 0,
-        requirement = None,
+        requirement = production_equipment_selftest_project_requirement,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
@@ -235,7 +282,7 @@ init 1 python:
         on_day_function = production_equipment_selftest_project_on_day,
         dependant_policies = None,
         project_progress = 0,
-        project_cost = 100,
+        project_cost = 150,
         category = "production",
         tier = 20)
 

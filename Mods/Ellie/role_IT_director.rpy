@@ -14,7 +14,7 @@ init 1 python:
 
     def IT_director_on_turn(the_person):
         if the_person.location == mc.business.r_div:
-            mc.business.IT_increase_project_progress(amount = (the_person.int * 3) + (the_person.focus * 2))
+            mc.business.IT_increase_project_progress(amount = (the_person.int * 2) + (the_person.focus))
 
         if mc.business.IT_project_in_progress:
             the_person.set_schedule(mc.business.r_div, days = [0, 1, 2, 3, 4], times = [1,2,3])
