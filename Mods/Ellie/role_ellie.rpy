@@ -94,7 +94,7 @@ init -2 python: #Requirement Functions
     def ellie_work_welcome_monday_requirement():
         if time_of_day == 0 and day%7 == 0:
             return True
-    def ellie_never_been_kissed_requirement():
+    def ellie_never_been_kissed_requirement(the_person):
         return False
     def ellie_kiss_followup_requirement():
         return False
