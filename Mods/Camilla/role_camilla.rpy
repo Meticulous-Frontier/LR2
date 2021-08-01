@@ -614,6 +614,9 @@ label camilla_bathroom_blowjob_label(the_person):
     return
 
 label camilla_blowjob_text_label(the_person):
+    $ the_person.draw_person()
+    "You walk up to [the_person.possesive_title]"
+
     mc.name "So... how did it go with the pictures?"
     "[the_person.possessive_title] gives you a quick smile."
     the_person "Well, I sent them off to him as he was getting off work, and I got an almost immediate response. 'Come home now'. No explanation or anything..."

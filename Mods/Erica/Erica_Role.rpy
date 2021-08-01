@@ -2358,7 +2358,7 @@ label erica_post_photoshoot_label(the_person):
     the_person "That's $200 per session? That would be amazing!"
     mc.name "So I'll tell her you'll be there?"
     the_person "Are you going to be the one taking all the pictures?"
-    mc.name "I'll do my best, but I won't necessarily be able to do it every week. Don't worry, [lily.title] has a pretty good tripod she invested in lately..."
+    mc.name "I'll do my best, but I won't necessarily be able to do it every week. Don't worry, [lily.title] has a pretty good tripod she invested in recently."
     the_person "Okay. I'll do it! But just so you know, it would really mean a lot to me if you were the one there taking pictures. I don't know why, but having you there made it a lot easier."
     mc.name "If I'm not busy, I'll be there."
     the_person "Wow! Okay. This is going to be a huge change for me."
