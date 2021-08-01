@@ -8,7 +8,7 @@ init:
             guy_arousal = 16, guy_energy = 14,
             connections = [],
             intro = "intro_prone_bone",
-            scenes = ["scene_prone_bone_1","scene_prone_bone_2"],
+            scenes = ["scene_prone_bone_1","scene_prone_bone_2","scene_prone_bone_3"],
             outro = "outro_prone_bone",
             transition_default = "transition_default_prone_bone",
             strip_description = "strip_prone_bone", strip_ask_description = "strip_ask_prone_bone",
@@ -204,9 +204,89 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
             "You put both you hands around her, letting your weight pin her to the [the_object.name]."
             "Her body is trying to push back against you as you fuck her, but her exhaustion your weight on top of her leave her helpless."
             the_girl "Mmmfff... god [the_girl.mc_title]... so good..."
+    return
 
+label scene_prone_bone_3(the_girl, the_location, the_object):
+    "Being completely in control of [the_girl.possessive_title]'s body is such a turn on. You push your weight down onto her as you fuck her."
+    the_girl "Oh fuck... [the_girl.mc_title] its so good..."
+    menu:
+        "Threaten to creampie her" if not mc.condom:
+            mc.name "God your pussy is so tight. I can't wait to dump my load inside it."
+            if the_girl.has_breeding_fetish():
+                the_girl "Yes! Oh fuck yes make sure you cum deep [the_girl.mc_title]!"
+                $ the_girl.change_arousal(20)
+                "Goosebumps raise up all along her shoulders. It is a massive turn on for her to hear you threaten to cum inside of her."
+            elif the_girl.wants_creampie():
+                the_girl "Oh god, you can cum inside me if you want... I think I want you to!"
+                $ the_girl.change_arousal(10)
+            elif the_girl.get_opinion_score("creampies") < 0:
+                the_girl "No way... please don't! I hate it when guys cum inside me..."
+                $ the_girl.change_arousal(-5)
+            else:
+                the_girl "Oh my god... you wouldn't... would you?"
+        "Threaten to remove the condom" if mc.condom:
+            mc.name "Your pussy feels great... but I bet it would feel even better raw. Maybe I should just slip this thing off?"
+            if the_girl.has_breeding_fetish():
+                the_girl "You should! I don't know why you wear those stupid things anyway. You should take it off!"
+            elif the_girl.wants_creampie():
+                the_girl "I mean, if you really wanted to... I wouldn't mind it if you went in bare..."
+            elif the_girl.get_opinion_score("bareback sex") < 0:
+                the_girl "No! Please don't, I'm not sure I can handle the anxiety of you doing it unprotected."
+            else:
+                the_girl "I mean, if you really wanted to... its not like I could stop you!"
+            menu:
+                "Remove Condom":
+                    "You slowly pull out of [the_girl.possessive_title]. You reach down and pull the condom off, then toss it up by her face, making sure she sees it."
+                    if the_girl.has_breeding_fetish():
+                        "When she sees the condom and realizes what you are about to do, she pushes her ass back towards you, trying to help you penetrate her bare."
+                        "You slide into her sopping wet cunt without any protection this time. She moans and arches her back in pleasure."
+                        $ the_girl.change_arousal(20)
+                        the_girl "Thats it... now fuck me good [the_girl.mc_title]!"
+                    elif the_girl.wants_creampie():
+                        the_girl "Oh god, you're really going to do it! Oh fuck..."
+                        "You slide into her sopping wet cunt without any protection this time. She moans and arches her back in pleasure."
+                        $ the_girl.change_arousal(20)
+                    elif the_girl.get_opinion_score("bareback sex") < 0:
+                        the_girl "Oh my god. This can't be happening..."
+                        $ the_girl.change_obedience(5)
+                        $ the_girl.change_love(-5)
+                        $ the_girl.change_happiness(-15)
+                        "You slide into her sopping wet cunt without any protection this time. Her body is stiff and unmoving."
+                    else:
+                        the_girl "Oh god, you're really going to do it! Oh fuck..."
+                        "You slide into her sopping wet cunt without any protection this time. She moans at the sensations.."
+                "Leave it on":
+                    "You decide to leave it on for now."
+        "Degrade her":
+            mc.name "Damn right its good. You are such a cock hungry slut, you holes are just begging to stuffed."
+            mc.name "Don't worry, I'm gonna fuck your slutty holes until you can barely walk, bitch!"
+            if the_girl.is_submissive():
+                "[the_girl.possessive_title] moans as you degrade her. Her submission to you is total."
+                the_girl "I'm just glad you find my holes pleasurable, [the_girl.mc_title]!"
+                mc.name "Me too whore."
+                "You grab her by the hair and pull a little bit as you fuck her harder for a bit. She moans and writhes from being treated like a fuck doll."
+                $ the_girl.change_arousal(10)
+            else:
+                the_girl "I just want you to feel good [the_girl.mc_title]..."
+                mc.name "Me too whore."
+                "You grab her by the hair and pull a little bit as you fuck her harder for a bit, showing her who the male alpha is."
+                $ the_girl.change_obedience(3)
+        "Threaten to pull out":
+            mc.name "I can't wait to pull out and cum all over that amazing ass of yours."
+            if the_girl.has_cum_fetish():
+                the_girl "Oh fuck yes! Cover me in your sticky cum [the_girl.mc_title]!"
+                "Goosebumps erupt all over her back as she imagines you cumming all over her. She is such a cum slut."
+                $ the_girl.change_arousal(20)
+            elif the_girl.get_opinion_score("being covered in cum") > 0:
+                the_girl "Ohhh, that sounds nice. I love the feeling of your hot cum on my skin..."
+                "[the_girl.possessive_title] moans a bit as she imagines the feel of your cum splashing all over her."
+                $ the_girl.change_arousal(20)
+            else:
+                "[the_girl.title] stays quiet as you continue to fuck her."
 
     return
+
+
 
 label outro_prone_bone(the_girl, the_location, the_object):
     "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her pussy it's not long before you're pushed past the point of no return."
