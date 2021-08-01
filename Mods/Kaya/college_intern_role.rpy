@@ -155,7 +155,7 @@ label college_intern_complete_internship(the_person):
             $ the_person.change_happiness(-5)
             $ the_person.change_love(-2)
             the_person "Ah... I understand. Well, if you change your mind, please let me know, okay?"
-            "She hangs up before you can respond. Its unfortunate, but not every intern can transition to a full employee."
+            "She hangs up before you can respond. It's unfortunate, but not every intern can transition to a full employee."
     elif college_intern_happiness_score(the_person) > 100:  #She wants to keep working for you
         the_person "I have to admit, I really enjoyed working for you. I was wondering, would you consider hiring me full time?"
         the_person "I know I'm young, and not very experienced, but I can make up for it with enthusiasm, and I learn quick!"
