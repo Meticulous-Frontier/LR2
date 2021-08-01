@@ -12,6 +12,7 @@ label activate_sakari_mod_core(stack):
 
 label update_sakari_mod_core(stack):
     python:
-
+        if "sakari" not in globals():
+            sakari_mod_initialization()
         execute_hijack_call(stack)
     return

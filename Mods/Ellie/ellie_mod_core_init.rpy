@@ -12,6 +12,7 @@ label activate_ellie_mod_core(stack):
 
 label update_ellie_mod_core(stack):
     python:
-
+        if "ellie" not in globals():
+            ellie_mod_initialization()
         execute_hijack_call(stack)
     return
