@@ -1400,6 +1400,9 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person "What about you? Can I count you to come also?"
     "Hmm... A bunch of your employees... In gym gear... Doing a bunch of crazy poses... That would be a pleasant use of the morning. But you don't want to effect the numbers too much."
     mc.name "I think I'd prefer not to be counted in that."
+    if len(mc.business.get_employee_list()) < 5:
+        the_person "But we don't even have that many employees?"
+        mc.name "That's true. It might have to wait until we have enough employees."
     the_person "Ah okay..."
     "She looks a bit disappointed. Your company is pretty small, so you may not have the numbers. She seems to have another idea though."
     the_person "What if, umm... You know... When we do our employee meetings... We could add counseling about... errm... Yoga?"
@@ -1425,13 +1428,13 @@ label erica_money_problems_sarah_update_label():
     if count > 0:
         the_person "Hey... So I was asking around with the girls... unfortunately, I could only get [count] interested in joining the morning yoga class... for now..."
     else:
-        the_person "Hey... So I was asking around with the girls... unfortunately, I could find nobody interested in joining the morning yoga class... for now..."
+        the_person "Hey... So I was asking around with the girls... unfortunately, I couldn't find anybody interested in joining the morning yoga class... for now..."
 
     "You admit you are a bit disappointed as well."
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         the_person "So... Do you think that... you know, it would be okay if I, umm... used some of the serum we have for the one-on-ones...?"
         "You had forgotten about her using the serum, and you are glad she reminded you."
-        mc.name "Yeah, that sounds fine. Let me know if you manage to... convince... enough employees and I'll speak with [erica.title] about starting that morning yoga class."
+        mc.name "Yeah, that sounds fine. Let me know if you manage to convince enough employees and I'll speak with [erica.title] about starting that morning yoga class."
     else:
         the_person "So, do you think it would be okay if I tried to talk people into coming? I think over time I might be able to convince enough people to come."
         mc.name "That sounds fine. Let me know if you manage to convince enough people and I'll speak with [erica.title] about starting that program."
@@ -1448,7 +1451,8 @@ label erica_money_problem_sarah_convincing_employee_label():
         the_target = get_yoga_convince_employee_target()
 
     if the_target is None:
-        #Figure out how to fix this
+        $ mc.business.add_mandatory_crisis(erica_money_problem_sarah_convincing_employee)
+        #For now we add the crisis back so that when we finally have enough employees we can still finish this scenario.
         return
 
     # change location to lobby, since break room is located here
@@ -1498,6 +1502,9 @@ label erica_money_problem_sarah_convincing_employee_label():
 
 
 label erica_money_problems_sarah_final_update_label():
+    if len(erica_get_yoga_class_list()) < 4:
+        $ mc.business.add_mandatory_crisis(erica_money_problem_sarah_convincing_employee)
+        return
     $ the_person = mc.business.hr_director
     $ the_person.draw_person()
     "[the_person.title] comes and finds you as you work. She seems excited."
