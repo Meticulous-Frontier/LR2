@@ -347,7 +347,7 @@ label ellie_self_research_identity_label():
     "The strange southern woman who is blackmailing you. She recently got fired, and blames you. She must work at the company you stole the nanobots from!"
     "Unfortunately, your old head researcher isn't available anymore, but you think you can remember the name of the company."
     "You run a search for local job applications looking for work, with that company as a previous employer."
-    "There are a couple that come up, but one specfically immediately jumps out at you. Her picture is perfect."
+    "There are a couple that come up, but one specifically immediately jumps out at you. Her picture is perfect."
     $ ellie.draw_person()
     "[ellie.name] [ellie.last_name]. Graduate of University of Alabama in Computer Science. Worked at the other company for 6 months. Looking for non IT related work."
     "It HAS to be her! Its just too perfect."
@@ -450,7 +450,7 @@ label ellie_work_welcome_monday_label():
     ellie "Hello. I've been looking at things over the weekend like I told y'all I would."
     mc.name "Great. Have a seat."
     $ the_person.draw_person(position = "sitting")
-    ellie "Alright. So, your cybersecurity is basically non existant. Or, was, I should say."
+    ellie "Alright. So, your cybersecurity is basically non existent. Or, was, I should say."
     mc.name "Oh?"
     ellie "Before I left Friday, I was looking at login logs for your network... the only outside connections were from me, a few weeks ago, you know, when I got the data originally..."
     ellie "So I set up a quick security layer with VPN access so I could work on it from home over the weekend..."
@@ -492,13 +492,13 @@ label ellie_never_been_kissed_label():  #This is Ellies 20 sluttiness event.
      "You find out Ellie grew up religious south (you already suspected and knew some of this). Parents super strict."
      "She lived at home during university and never dated, workaholic at her first job and was too scared to date."
      "She admits she's never been kissed."
-     "She's lookin sexy. You ask her if she wants to. She doesn't answer, just looks down."
+     "She's looking sexy. You ask her if she wants to. She doesn't answer, just looks down."
      "makeout"
      "happy"
      "Grope her"
      "Mega Happy"
      "Finger her"
-     "She cums and can't believe it. Thinks she peed herself. Runs out of the room embrassed."
+     "She cums and can't believe it. Thinks she peed herself. Runs out of the room embarrassed."
      return
 
 label ellie_kiss_followup_label():
@@ -527,7 +527,7 @@ label ellie_never_given_handjob_label():
 label ellie_never_tasted_cock_label():  #This is Ellie's 40 sluttiness event.
     "Ellie has an on room entry event."
     "You hear her asking another girl what it's like to suck dick."
-    "She gets crazy embrassed when she sees you. Cute"
+    "She gets crazy embarrassed when she sees you. Cute"
     "You ask her to come with you to your office. Pretend like you're gonna discipline her for lewd talk."
     "Get to your office, close door, lock it."
     "She starts to say sorry, but instead you stop her."
@@ -536,7 +536,7 @@ label ellie_never_tasted_cock_label():  #This is Ellie's 40 sluttiness event.
     menu:
         "Lick her first":
             "If you eat her out first, her opinion on getting head is min(orgasms, 2)"
-            "You let her take the lead and practice sucking cock. Patient answers increase her opinoin on sucking cock, impatient decrease."
+            "You let her take the lead and practice sucking cock. Patient answers increase her opinion on sucking cock, impatient decrease."
             "When you cum, she is putty and will take your cum wherever you say. If positive interactions so far, she likes or loves cum there now (face, swallow, body)"
             "+1 taking control"
         "Suck it now":
@@ -553,7 +553,7 @@ label ellie_never_been_fucked_label():  #This is Ellie's 60 sluttiness event. Al
     "You check up on Ellie while she is working on nanobot programming stuff."
     "She says working on this program is getting her really worked up. You can tell she's aroused (flushed cheeks, pointy nipples)."
     "She asks if you could fool around a little again. MC says he is tired of foreplay, says she probably just needs a good fucking."
-    "She is embrassed. Says she knows that but she is just scared of having sex for the first time."
+    "She is embarrassed. Says she knows that but she is just scared of having sex for the first time."
     "MC asks if she would be open to sleeping with him if he promises to go slow and be gentle."
     "Ellie is uncertain. Her mama would be so disappointed."
     "MC offers to take her out on a proper date first, have a couple drinks, go back to her place, she can stop any point she wants to."
@@ -576,7 +576,7 @@ label ellie_loses_her_virginity_label():
     "If she likes getting head, asks for just a bit of oral. Arousal gain here that sets up MC to make her orgasm more later."
     "Lays down on bed. MC can be gentle for positive vaginal sex opinion, or rough for negative and obedience gain."
     "Mc can ask if she wants condom. She says she wants her first time natural, but appreciates it if MC asks and likes bareback sex. Otherwise dislikes bareback sex if MC doesn't ask."
-    "After pentration, use creampie_cum but use red color to make it look like virginity taken."
+    "After penetration, use creampie_cum but use red color to make it look like virginity taken."
     "Sex scene. If Ellie cums twice or more she begs MC to finish inside her. Gain creampie like."
     "If not, she asks MC to pull out. If MC pulls out she likes cum on her body. If he doesn't, she dislikes creampies."
     "Taking Ellie's virginity has made her putty in your hands now. She gains large love and obedience bonuses."
@@ -594,7 +594,7 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
     "During a break, you make the rounds to the different departments. When you swing by R&D, you decide to check up on Ellie"
     "Ellie is masturbating, trying to type with one hand and playing with herself with the other."
     "She is sorry. Working on this stuff gets her so horny."
-    "Initially, you can chastise her (dislikes mastubation), encourage her (likes masturbation), or offer to help her."
+    "Initially, you can chastise her (dislikes masturbation), encourage her (likes masturbation), or offer to help her."
     "If you offer to help her, you can do it right there in R&D (likes public sex), or find somewhere private."
     "Her reactions change based on her story and corruption progress. At extreme sluttiness, when she sees you walk up she may jump MC or if submissive, pull down bottoms and bend over her desk and beg."
     "Sex scene."

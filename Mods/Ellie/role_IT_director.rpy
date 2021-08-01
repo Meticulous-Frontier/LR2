@@ -28,7 +28,7 @@ init 1 python:
 
 
     update_IT_projects_action = Action("Review IT Projects", update_IT_projects_requirement, "update_IT_projects_label",
-        menu_tooltip = "Start, change, active, or deactive IT projects.")
+        menu_tooltip = "Start, change, activate, or deactivate IT projects.")
 
     IT_director_role = Role("IT Director", [update_IT_projects_action], on_turn = IT_director_on_turn)
 

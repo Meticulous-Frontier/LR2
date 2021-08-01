@@ -59,7 +59,7 @@ label hire_new_college_intern_label():
     the_person "Hello [the_person.mc_title]. What can I do for you today?"
     mc.name "I'm interested in providing a scholarship for another intern."
     the_person "Oh? Are you able to write a check for the full amount today?"
-    the_person "Okay. What major are you loooking for an intern from?"
+    the_person "Okay. What major are you looking for an intern from?"
     menu:
         "Biology (Research)" if len(mc.business.college_interns_research) < mc.business.max_interns_by_division:
             $ the_dept = "Research"
@@ -81,7 +81,7 @@ label hire_new_college_intern_label():
             pass
         "Logistics (Supply) (disabled)":
             pass
-        "Nevermind":
+        "Never mind":
             mc.name "Actually, I just realized I can't bring on someone right now."
             the_person "I see, well let me know if you change your mind."
             return

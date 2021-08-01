@@ -142,12 +142,12 @@ label kaya_setup_intro_event_label():
     return
 
 label kaya_intro_label(the_person):
-    "Even though it is later in the day, you decide to swing by the coffeeshop for a pick me up."
+    "Even though it is later in the day, you decide to swing by the coffee-shop for a pick me up."
     $ renpy.show("restaurant", what = restaraunt_background)
     $ the_person.draw_person()
     "When you step inside, there's a new girl working there you haven't seen before."
     "You listen as the person ahead of you orders."
-    "?????" "Yes I'd like a tall macchiotto with whipped cream."
+    "?????" "Yes I'd like a tall macchiato with whipped cream."
     the_person "Is that all?"
     "When she talks, there is a slight accent. It's small, and you have trouble placing it."
     "You quickly check behind you. No one in line behind you yet... maybe you can chat with her for a bit?"
@@ -168,7 +168,7 @@ label kaya_intro_label(the_person):
     the_person "[the_person.name]."
     mc.name "It's a pleasure to meet you."
     "Right then another employee puts your coffee on the counter and calls your name."
-    the_person "Right... sorry, there's someone behing you..."
+    the_person "Right... sorry, there's someone behind you..."
     "You hear a throat clear behind you. You grab your coffee and move out of the way."
     "Well, the new barista is cute! Maybe you should try to get to know her more..."
     $ the_person.add_unique_on_talk_event(kaya_ask_out)
@@ -183,7 +183,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "Sure enough, as you step inside, there she is. You've been getting to know her more lately, and you feel ready to ask her out."
     "When you step up to the counter, she smiles at you."
     $ the_person.draw_person( emotion = "happy")
-    the_person "Good evening [the_persom.mc_title]. What can I get you?"
+    the_person "Good evening [the_person.mc_title]. What can I get you?"
     mc.name "I'll take a small coffee with room for cream... and I'd was hoping to ask you something."
     the_person "Okay, I can do that... and what is the question?"
     mc.name "I was ahhh, wondering if you were doing anything after you got off work today?"
@@ -197,7 +197,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ mc.location.show_background()
     "You step outside and sit down, sipping your coffee."
     "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
-    "Pretty soon you hear [the_person.possesive_title] clear her throat nearby. You look up from your phone."
+    "Pretty soon you hear [the_person.possessive_title] clear her throat nearby. You look up from your phone."
     $ the_person.draw_person()
     mc.name "Ah, you're right, that was quick!"
     the_person "Yes... hey... I need to be honest about something..."
@@ -232,22 +232,22 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "You wonder if she's just trying to be considerate? You would hardly expected a girl like her to order that as a first choice..."
     "You must have given her a funny look."
     the_person "What? You seem like a nice guy, I just want to be a cheap date!"
-    "Ah, so she must be very budget concious. You suppose there are certainly worse personality traits to have!"
+    "Ah, so she must be very budget conscious. You suppose there are certainly worse personality traits to have!"
     "You order yourself an old fashioned, something to sip on while you chat."
     "Once you have your drinks, you look around. The table you were looking at is full... looks like everything is full..."
     the_person "Ah! Look! An open pool table! Let's play!"
     $ the_person.discover_opinion("billiards")
-    "[the_person.possesive_title] gets really excited. She must really enjoy billiards?"
+    "[the_person.possessive_title] gets really excited. She must really enjoy billiards?"
     "She takes a sip of her drink, then sets it down on the side of the pool table. You do the same."
     mc.name "So tell me, cheap date, what happens to be your actual favorite cocktail?"
     the_person "Why so interested? Trying to get me drunk?"
     mc.name "Honestly, I feel like a person's favorite drink says a lot about them."
     the_person "Is that so?"
-    mc.name "Absolutely. I know I'm dealing with immature college girls when I get when the answer is some rediculous drink like 'sex on the beach'."
+    mc.name "Absolutely. I know I'm dealing with immature college girls when I get when the answer is some ridiculous drink like 'sex on the beach'."
     the_person "Ha! Yeah I suppose."
-    "[the_person.title] pulls some quarters out of her paurse and puts them in the table. She pays the cost of a game and you hear the billiard balls fall into the gully."
+    "[the_person.title] pulls some quarters out of her purse and puts them in the table. She pays the cost of a game and you hear the billiard balls fall into the gully."
     mc.name "But you... you seem much too practical for something like that. You seem like the type that would enjoy finer spirits."
-    "[the_person.possesive_title] is pulling the balls from the gully and setting them on the table. She looks at you and smirks."
+    "[the_person.possessive_title] is pulling the balls from the gully and setting them on the table. She looks at you and smirks."
     the_person "Ah, is that so?"
     mc.name "Indeed. And the fact that you don't deny it tells me I'm right."
     the_person "You sure seem pretty confident in yourself there, mister! Tell you what. Let's play a round, and if you win, I'll tell you favorite drink. Okay?"
@@ -271,7 +271,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
         the_person "Thank you. I love to play. It is a good exercise for your dexterity and your brain."
         mc.name "I agree. Now, about the wager..."
         the_person "Yes, this should be interesting. Go ahead, think about it and guess my favorite drink."
-        "It is clear to you so far that [the_person.possesive_title] is intelligent and practical. However, even though she is strapped for money right now, you get the feeling things haven't always been this way for her."
+        "It is clear to you so far that [the_person.possessive_title] is intelligent and practical. However, even though she is strapped for money right now, you get the feeling things haven't always been this way for her."
         "Rum is too simple a spirit for her to favor. She probably favors gin or whiskey."
         "Something about her dark skin has you guessing it might be a darker spirit too, so you decide to guess a classic whiskey cocktail."
         menu:
@@ -321,7 +321,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     if _return: #You won
         the_person "Oh no! Now I have to subject myself to another night of free drinks and billiards!"
         mc.name "The horror!"
-        the_person "Guess I'll just have to walk myself home now, dreading the day the mysterious stranger shows up at the coffeeshop and demands my presence again!"
+        the_person "Guess I'll just have to walk myself home now, dreading the day the mysterious stranger shows up at the coffee-shop and demands my presence again!"
 
     else:
         the_person "Well, I won! But... I still think you should have to take me out for drinks again some time."
@@ -334,7 +334,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "You both finish off what is left of your drinks, then leave the bar together."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
-    "You step out on to the sidewalk and start to walk [the_person.possesive_title] home. Sensing a connection with her, you hold out your hand and she takes it."
+    "You step out on to the sidewalk and start to walk [the_person.possessive_title] home. Sensing a connection with her, you hold out your hand and she takes it."
     mc.name "So, you're going to class at the university, right?"
     the_person "That's right."
     mc.name "What are you studying?"
@@ -355,7 +355,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ the_person.draw_person(position = "kissing")
     "[the_person.title] holds her arms out for a hug, and you draw her close. She is looking up at you, and feeling right, you kiss her."
     "She responds immediately and starts kissing you back. Her mouth opens and your tongues intertwine in a passionate kiss."
-    "Your hands start to roam around [the_person.possesive_title]'s back. She gives a little moan when you hand wanders down to her ass, but reaches back and moves your hand back up."
+    "Your hands start to roam around [the_person.possessive_title]'s back. She gives a little moan when you hand wanders down to her ass, but reaches back and moves your hand back up."
     $ the_person.change_arousal(15)
     $ the_person.break_taboo("kissing")
     "You keep making out for several more seconds until [the_person.title] breaks it off and then steps back."
@@ -368,7 +368,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "Sounds great. I'll see you around?"
     the_person "Bye!"
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.possesive_title] turns and starts to walk up the starts to the apartment building."
+    "[the_person.possessive_title] turns and starts to walk up the starts to the apartment building."
     "Wow, what a busy night! You feel like you have a connection with [the_person.title]. She definitely seems eager too..."
     return
 
@@ -380,7 +380,7 @@ label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
     "You grab a couple drinks. Chance to serum her."
     "You find out she likes to play pool. You play a round, barely winning."
     "Grab a couple more drinks."
-    "Before the next round, Kaya talks about her mother being sick, can't pay for her medications, having to work coffeeshop job to help out."
+    "Before the next round, Kaya talks about her mother being sick, can't pay for her medications, having to work coffee-shop job to help out."
     "MC gets the idea of the intern program as a way for the company to provide girls with scholarships and some spending money."
     "If shes slutty, she flashes you at a key moment as a distraction."
     "You lose the second round."
@@ -407,7 +407,7 @@ label kaya_HR_start_internship_program_label():
     $ kaya.add_unique_on_talk_event(kaya_meet_lily_at_uni)
     return
 
-label kaya_meet_lily_at_uni_label():    #This label starts Kaya and Lily friendship storyline. Requires mid Kaya loev (>40?). REquires scholarship program.
+label kaya_meet_lily_at_uni_label():    #This label starts Kaya and Lily friendship storyline. Requires mid Kaya love (>40?). REquires scholarship program.
     "You go the university to meet with them there with your offer to have a small internship and scholarship program."
     "If you have rediscovered Nora she is at the meeting, is impressed with your offers, says going forward she can recommend you interns."
     "After you finish, you happen to spot Kaya and say hello."
@@ -533,7 +533,7 @@ init 2 python:
         return False
 
 
-init 3 python:      #Use this section to make wrappers for determing where we are in relation to Kaya's major story events
+init 3 python:      #Use this section to make wrappers for determining where we are in relation to Kaya's major story events
 
     def kaya_has_finished_intro():
         return kaya.event_triggers_dict.get("intro_complete", False)   # True after first talk

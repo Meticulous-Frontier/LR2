@@ -123,7 +123,7 @@ label business_meeting_seduction(the_person):
 
         if the_person.has_cum_fetish():
             the_person "I'll tell you what. I'll give you the rest of the proposal if you let me have a taste of that cum of yours..."
-            "[the_person.possesive_title]'s cum fetish has driven her to bargain with you. It seems you have the opportunity for an expert cock sucker to get you off."
+            "[the_person.possessive_title]'s cum fetish has driven her to bargain with you. It seems you have the opportunity for an expert cock sucker to get you off."
             menu:
                 "Continue":
                     $ the_person.draw_person(position = "blowjob")

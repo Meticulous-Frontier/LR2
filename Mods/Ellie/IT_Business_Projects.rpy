@@ -49,7 +49,7 @@ init 1 python:
     business_IT_project_list = []
 
     hr_organized_chaos_project = IT_Project(name = "Organized Chaos",
-        desc = "Inceases the maximum efficiency of the company by 5%.",
+        desc = "Increases the maximum efficiency of the company by 5%.",
         requirement = hr_organized_chaos_project_requirement,
         cost = 0,
         toggleable = True,
@@ -346,7 +346,7 @@ init -1 python:
             sluttiness_multiplier = (slut_modifier/100.0) + 1
             serum_value_multiplier = serum_value_multiplier * (sluttiness_multiplier)
 
-        multipliers_used = {} #Generate a dict with only the current max multipliers of each catagory.
+        multipliers_used = {} #Generate a dict with only the current max multipliers of each category.
         for multiplier_source in mc.business.sales_multipliers:
             if not multiplier_source[0] in multipliers_used:
                 multipliers_used[multiplier_source[0]] = multiplier_source[1]
