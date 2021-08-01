@@ -741,7 +741,7 @@ label quest_cuckold_employee_knocked_up_label():
 
         "You're doing the right thing":      #Be the good guy
             mc.name "I'm really happy for you. Don't worry, your secret is safe with me. For all purposes, the baby IS his."
-            the_person "Yeah... I know... Its just hard, you know?"
+            the_person "Yeah... I know... It's just hard, you know?"
             "She gets a sultry tone to her voice."
             the_person "If you want to, you can still cum inside me once in a while... It was kinda hot, playing around with breeding."
             mc.name "I'm happy to be your bull whenever you need it."

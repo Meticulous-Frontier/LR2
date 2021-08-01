@@ -351,7 +351,7 @@ label ellie_self_research_identity_label():
     "There are a couple that come up, but one specifically immediately jumps out at you. Her picture is perfect."
     $ ellie.draw_person()
     "[ellie.name] [ellie.last_name]. Graduate of University of Alabama in Computer Science. Worked at the other company for 6 months. Looking for non IT related work."
-    "It HAS to be her! Its just too perfect."
+    "It HAS to be her! It's just too perfect."
     "You feel conflicted about this. Surely, this is the girl that is blackmailing you... but you are also partially responsible for it, having acquired the nanobots in the first place."
     "Her previous employer must have blamed her for the leak. Now they are keeping her from finding work in her field of study with a non-compete agreement."
     "You think to yourself... she got information on you pretty easily. Your IT setup here is okay... but it could definitely be improved if you brought an expert on board."

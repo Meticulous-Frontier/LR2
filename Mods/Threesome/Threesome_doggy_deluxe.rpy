@@ -369,7 +369,7 @@ label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_loc
         "You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
         mc.name "Your backdoor is so tight, especially with your cunt stuffed at the same time."
         "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
-    the_girl_2 "So full... its so good!"
+    the_girl_2 "So full... it's so good!"
     "You push her head back down, into [the_girl_1.title]'s juicy slit."
 
     return

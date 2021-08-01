@@ -212,7 +212,7 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
 
 label scene_prone_bone_3(the_girl, the_location, the_object):
     "Being completely in control of [the_girl.possessive_title]'s body is such a turn on. You push your weight down onto her as you fuck her."
-    the_girl "Oh fuck... [the_girl.mc_title] its so good..."
+    the_girl "Oh fuck... [the_girl.mc_title] it's so good..."
     menu:
         "Threaten to creampie her" if not mc.condom:
             mc.name "God your pussy is so tight. I can't wait to dump my load inside it."
@@ -237,7 +237,7 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
             elif the_girl.get_opinion_score("bareback sex") < 0:
                 the_girl "No! Please don't, I'm not sure I can handle the anxiety of you doing it unprotected."
             else:
-                the_girl "I mean, if you really wanted to... its not like I could stop you!"
+                the_girl "I mean, if you really wanted to... it's not like I could stop you!"
             menu:
                 "Remove Condom":
                     "You slowly pull out of [the_girl.possessive_title]. You reach down and pull the condom off, then toss it up by her face, making sure she sees it."
@@ -262,7 +262,7 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
                 "Leave it on":
                     "You decide to leave it on for now."
         "Degrade her":
-            mc.name "Damn right its good. You are such a cock hungry slut, you holes are just begging to stuffed."
+            mc.name "Damn right it's good. You are such a cock hungry slut, you holes are just begging to stuffed."
             mc.name "Don't worry, I'm gonna fuck your slutty holes until you can barely walk, bitch!"
             if the_girl.is_submissive():
                 "[the_girl.possessive_title] moans as you degrade her. Her submission to you is total."
