@@ -2222,6 +2222,7 @@ label erica_lily_instapic_intro_label():
     $ scene_manager = Scene()  #Clean Scene
 
     "It's Saturday evening, which means it's time for a sexy photo shoot with [lily.title] and [erica.title]! You head home and knock on [lily.possessive_title]'s door. She swings it open."
+    $ lily_bedroom.show_background()
     $ scene_manager.add_actor(lily)
     lily "Hey, any word from your friend?"
     mc.name "Not yet."
@@ -2230,11 +2231,13 @@ label erica_lily_instapic_intro_label():
     "You chat with [lily.possessive_title] for a bit. Soon you feel a vibration in your pocket as your phone goes off."
     erica "I'm here! Come let me in!"
     $ scene_manager.clear_scene()
+    $ hall.show_background()
     "You go to your front door and open it. [erica.title] gives you a nervous smile as she steps inside."
     $ scene_manager.add_actor(erica)
     erica "Sorry I'm late. I almost didn't come... This whole thing is just a little... crazier than I would normally do."
     mc.name "Don't worry, [lily.title] is great at this. I was pretty skeptical about it at first too, but she's been pretty successful with this."
     "You lead her to [lily.possessive_title]'s room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
+    $ lily_bedroom.show_background()
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
     lily "Oh my gosh... [erica.name]? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
     erica "Ah! Yes I remember you now! You were at the study group for the midterm!"
@@ -2256,13 +2259,13 @@ label erica_lily_instapic_intro_label():
     "After a bit, [lily.title] moves to get things started."
     lily "Alright, let's go with these!"
     # todo start stripping
-    $ scene_manager.strip_full_outfit(person = lily)
+    $ scene_manager.strip_full_outfit(person = lily, strip_feet = True)
     "[lily.title] starts to take her clothes off, surprising [erica.title]."
     erica "Whoa, like, right here? In front of him?"
     "[erica.possessive_title] seems a little unsure."
     lily "It's okay, he doesn't mind!"
     "She starts to protest again, but [lily.title] continues to strip down. Soon she decides to just follow her and starts to strip also."
-    $ scene_manager.strip_full_outfit(person = erica)
+    $ scene_manager.strip_full_outfit(person = erica, strip_feet = True)
     if erica.has_taboo(["bare_pussy", "bare_tits"]):
         "[erica.title] uses her hands to try and cover herself up after she finishes stripping down. She looks at you and blushes."
         $ erica.break_taboo("bare_pussy")
@@ -2310,11 +2313,12 @@ label erica_lily_instapic_intro_label():
     "[erica.title] stands up."
     erica "That was actually really fun... Do you think the pictures will make any money?"
     mc.name "Definitely."
+    $ scene_manager.update_actor(lily, position = "stand3", emotion = "happy")
     "[lily.title] gives [erica.title] money as payment for the session."
     lily "Now, the question is, are you up for doing this again?"
     erica "I'm not sure... I had fun tonight, but I need to think about it."
     "[erica.possessive_title] quickly changes back into her regular clothes. You do your best not to make it obvious you are watching..."
-    $ scene_manager.strip_full_outfit(person = erica)
+    $ scene_manager.strip_full_outfit(person = erica, strip_feet = True)
     "She looks over and gives you a little smirk."
     $ mc.change_locked_clarity(15)
     $ erica.apply_planned_outfit()
@@ -2322,10 +2326,13 @@ label erica_lily_instapic_intro_label():
     erica "Alright, well I have to get up early tomorrow for track practice, so I'd better get going."
     lily "See you soon!"
     $ scene_manager.remove_actor(lily)
+    $ hall.show_background()
     "You walk with [erica.possessive_title] to the front door. When you get there, she turns to you and gives you a big hug."
     $ scene_manager.update_actor(erica, position = "kissing")
     "She gives you a quick kiss, then turns and leaves."
     $ scene_manager.remove_actor(erica)
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You turn and walk about to your room. Damn... what a hot photo session!"
     "You should wait a couple days, then talk to [lily.title] and see how the pics did..."
     $ lily.add_unique_on_talk_event(erica_lily_post_photoshoot)
