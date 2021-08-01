@@ -1,23 +1,28 @@
 #Prone bone position. Girl is pinned down on her front, very submissive position, so we make sure to use lots of references to submissive or dominant girls in dialogue and actions.
 #These actions generally increase obedience and sluttiness in dominant girls,  increase happiness in submissives.
-init:
-    python:
-        prone_bone = Position(name = "Prone", slut_requirement = 60, slut_cap = 90, requires_hard = True, requires_large_tits = False,
-            position_tag = "back_peek", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
-            girl_arousal = 18, girl_energy = 0,
-            guy_arousal = 16, guy_energy = 14,
-            connections = [],
-            intro = "intro_prone_bone",
-            scenes = ["scene_prone_bone_1","scene_prone_bone_2","scene_prone_bone_3"],
-            outro = "outro_prone_bone",
-            transition_default = "transition_default_prone_bone",
-            strip_description = "strip_prone_bone", strip_ask_description = "strip_ask_prone_bone",
-            orgasm_description = "orgasm_prone_bone",
-            taboo_break_description = "taboo_break_prone_bone",
-            opinion_tags = ["doggy style sex","vaginal sex", "being submissive"], record_class = "Vaginal Sex",
-            default_animation = missionary_bob,
-            associated_taboo = "vaginal_sex")
-        list_of_positions.append(prone_bone)
+init python:
+    prone_bone = Position(name = "Prone", slut_requirement = 60, slut_cap = 90, requires_hard = True, requires_large_tits = False,
+        position_tag = "back_peek", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
+        girl_arousal = 18, girl_energy = 0,
+        guy_arousal = 16, guy_energy = 14,
+        connections = [],
+        intro = "intro_prone_bone",
+        scenes = ["scene_prone_bone_1","scene_prone_bone_2","scene_prone_bone_3"],
+        outro = "outro_prone_bone",
+        transition_default = "transition_default_prone_bone",
+        strip_description = "strip_prone_bone", strip_ask_description = "strip_ask_prone_bone",
+        orgasm_description = "orgasm_prone_bone",
+        taboo_break_description = "taboo_break_prone_bone",
+        opinion_tags = ["doggy style sex","vaginal sex", "being submissive"], record_class = "Vaginal Sex",
+        default_animation = missionary_bob,
+        associated_taboo = "vaginal_sex")
+    list_of_positions.append(prone_bone)
+
+    def build_prone_bone_decision_menu(position, person):
+        position_option_list = []
+        position_option_list.append([position.build_position_willingness_string(person, ignore_taboo = True).replace("Prone", "Fuck her prone"), position])
+        position_option_list.append(["Let her take a break", "Nothing"])
+        return position_option_list
 
 # init 1:
 #     python:
@@ -25,12 +30,12 @@ init:
 
 label prone_decision_label(the_girl, the_location, the_object, the_position):
     "[the_girl.possessive_title] seems exhausted, but you are still full of vigor. You could probably push her down and fuck her prone, but she may or may not like it..."
-    menu:
-        "Fuck her prone":
-            pass
-        "Let her take a break":
-            "You decide for now to let her take a break."
-            return False
+
+    $ picked_position = renpy.display_menu(build_prone_bone_decision_menu(prone_bone, the_girl),True,"Choice")
+
+    if not isinstance(picked_position, Position):
+        return None
+
     mc.name "That's too bad. I'm not done with you yet though."
     if not the_object.has_trait(prone_bone.requires_location):
         call pick_object(the_girl, prone_bone) from _call_pick_object_in_prone_01
@@ -54,8 +59,6 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
         "[the_girl.possessive_title] gives a little yelp as you line yourself and push back into her. She is completely helpless but submits to you obediently."
         $ the_person.change_obedience(5)
     return the_object
-
-
 
 label intro_prone_bone(the_girl, the_location, the_object):
     "You turn [the_girl.title] so her back is to you, then push her down onto the [the_object.name]."
