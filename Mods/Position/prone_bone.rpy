@@ -16,7 +16,8 @@ init python:
         opinion_tags = ["doggy style sex","vaginal sex", "being submissive"], record_class = "Vaginal Sex",
         default_animation = missionary_bob,
         associated_taboo = "vaginal_sex")
-    list_of_positions.append(prone_bone)
+    # not available as normal position
+    #list_of_positions.append(prone_bone)
 
     def build_prone_bone_decision_menu(position, person):
         position_option_list = []
