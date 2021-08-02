@@ -40,7 +40,7 @@ init 2 python: # Declare variables to use
                 ["the colour red", 2, False],
                 ["the colour yellow", 1, False]],
                 forced_sexy_opinions = [
-                ["cum facials", 2, False], # ITs good for the skin
+                ["cum facials", 2, False], # it's good for the skin
                 ["giving blowjobs", 2, False],
                 ["skimpy outfits", 1, False], # Fashion forward
             ])

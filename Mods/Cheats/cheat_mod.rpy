@@ -5,7 +5,7 @@
 # it becomes a bit more difficult coming up with good solutions
 
 # Worst case scenario for me right now would be that it's just even easier to keep it up to date at regular intervals
-# Going to see if I can add a separate screen for a "crisis master" as in the previous cheat screen, but only if I find a way to make it somewhat build itself on its own
+# Going to see if I can add a separate screen for a "crisis master" as in the previous cheat screen, but only if I find a way to make it somewhat build itself on it's own
 init -2 style cheat_text_style: # General text style used in the serum screens.
     text_align 0.5
     size 18

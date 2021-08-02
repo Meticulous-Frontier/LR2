@@ -193,7 +193,7 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.identifier = property(get_person_identifier, None, None, "Unique identifier for person class.")
 
-    # generic function to get a person by its identifier
+    # generic function to get a person by it's identifier
     def get_person_by_identifier(identifier):
         return next((x for x in all_people_in_the_game() if x.identifier == identifier), None)
 
