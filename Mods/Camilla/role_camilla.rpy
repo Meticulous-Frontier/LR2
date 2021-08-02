@@ -9,7 +9,7 @@ init 2 python:
     camilla_blowjob_text = Action("Blowjob Discussion", camilla_blowjob_text_requirement, "camilla_blowjob_text_label")
 
     def camilla_mod_initialization():
-        camilla_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
+        camilla_wardrobe = wardrobe_from_xml("Camilla_Wardrobe")
         camilla_base_outfit = Outfit("camilla's base accessories")
         the_makeup = blush.get_copy()
         the_makeup.colour = [.65, .23, .17, 0.75]
@@ -28,11 +28,11 @@ init 2 python:
         global camilla
         camilla = make_person(name = "Camilla", last_name ="Rojas", age = 34, body_type = "standard_body", face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , \
-            #starting_wardrobe = camilla_wardrobe, \
+            starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
-            forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])
+            forced_opinions = [["dancing", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
+            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False]])
 
         camilla.generate_home()
         camilla.set_schedule(camilla.home, times = [0,4])
