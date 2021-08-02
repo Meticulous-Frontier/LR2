@@ -202,7 +202,7 @@ label fetish_mom_kitchen_label(the_person):
             $ the_person.change_arousal(10)
             "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
             the_person "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
-            if the_person.outfit.vagina_available():           #If its available no need to strip.
+            if the_person.outfit.vagina_available():           #If it's available no need to strip.
                 "You quickly pull your cock out and begin to rub it between her cheeks."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
@@ -241,7 +241,7 @@ label fetish_mom_kitchen_label(the_person):
             $ the_person.change_arousal(10)
             "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
             the_person "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
-            if the_person.outfit.vagina_available():           #If its available no need to strip.
+            if the_person.outfit.vagina_available():           #If it's available no need to strip.
                 "You quickly pull your cock out and line it up with her wet slit."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
@@ -285,7 +285,7 @@ label fetish_mom_kitchen_label(the_person):
             the_person "Oh god... Do it! Just go quick."
             mc.name "If I fuck you fast, it might get kinda noisy in here."
             the_person "I don't care! Just do it!"
-            if the_person.outfit.vagina_available():           #If its available no need to strip.
+            if the_person.outfit.vagina_available():           #If it's available no need to strip.
                 "You quickly pull your cock out and line it up with her wet slit."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"

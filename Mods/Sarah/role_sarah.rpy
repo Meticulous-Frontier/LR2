@@ -535,7 +535,7 @@ label Sarah_hire_label():
     mc.name "Hey, I just wanted to let you know, I have the details finalized for an HR Director position."
     the_person "That sounds great! When can I get started?"
     $ day_name = "Tomorrow"
-    if day%7 == 4 or day%7 == 5: # its friday or saturday so next workday is monday
+    if day%7 == 4 or day%7 == 5: # it's friday or saturday so next workday is monday
         $ day_name = "Monday"
 
     mc.name "[day_name] morning. I'll text the address after this call. We will go over your role and responsibilities when you get there."

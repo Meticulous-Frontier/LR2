@@ -13,7 +13,7 @@ init -2 python:
             try:
                 return eval(self._start_condition)
             except NameError:
-                return False    # on error its not active
+                return False    # on error it's not active
 
         # Return the (human understandable) number of the actual stage. 
         @property
@@ -21,7 +21,7 @@ init -2 python:
             try:
                 return eval(self._complete_condition)
             except NameError:
-                return True     # on error its complete
+                return True     # on error it's complete
 
         @property
         def title(self):

@@ -255,7 +255,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "[the_person.possessive_title] is pulling the balls from the gully and setting them on the table. She looks at you and smirks."
     the_person "Ah, is that so?"
     mc.name "Indeed. And the fact that you don't deny it tells me I'm right."
-    the_person "You sure seem pretty confident in yourself there, mister! Tell you what. Let's play a round, and if you win, I'll tell you favorite drink. Okay?"
+    the_person "You sure seem pretty confident in yourself there, mister! Tell you what. Let's play a round, and if you win, I'll tell you my favorite drink. Okay?"
     mc.name "Ah, whose confident now? Placing a wager on a billiards game!"
     "She chuckles and rolls her eyes mockingly."
     the_person "Disclosing my favorite drink hardly seems like a major wager. Maybe I intend to lose, so you can learn my secret? You're the one buying the drinks, remember?"
@@ -479,8 +479,8 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "You make your way over to the coffee shop. When you get there the door is locked, since it is closed for the night, but after knocking [the_person.possessive_title] quickly lets you in."
     $ renpy.show("restaurant", what = restaraunt_background)
     $ the_person.draw_person()
-    the_person "Hey! Thanks for coming... can I get you any coffee? Its on the house..."
-    mc.name "No thanks. Its pretty late for that."
+    the_person "Hey! Thanks for coming... can I get you any coffee? It's on the house..."
+    mc.name "No thanks. It's pretty late for that."
     the_person "Right..."
     "You walk with her over to a booth and you have a seat with her."
     $ the_person.draw_person(position = "sitting")

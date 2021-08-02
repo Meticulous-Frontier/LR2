@@ -1,5 +1,5 @@
 # SERUM MOD CORE by Tristimdorion
-# Its used for adding new SerumTraits to the game
+# It's used for adding new SerumTraits to the game
 # Create a SerumTraitMod class, it has the same parameters as the VREN Action class.
 # SerumTraitMod is added to save games when not present, the matching is based on the name property, so make sure it's unique.
 

@@ -244,7 +244,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
             if mc.condom:  #Not sure how we have a condom on but I guess it could happen
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
-                if condom_break_chance < 15: #15% chance of breaking, because its a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
+                if condom_break_chance < 15: #15% chance of breaking, because it's a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
                     $ the_girl_2.cum_in_vagina()
                     $ scene_manager.draw_scene()
@@ -383,7 +383,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
             if mc.condom:
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
-                if condom_break_chance < 15: #15% chance of breaking, because its a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
+                if condom_break_chance < 15: #15% chance of breaking, because it's a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
                     $ the_girl_2.cum_in_ass()
                     $ scene_manager.draw_scene()

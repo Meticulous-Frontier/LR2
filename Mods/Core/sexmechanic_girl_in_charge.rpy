@@ -472,7 +472,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
             $ finished = True
 
-        #Determine if the current node has completed its finished requirement.
+        #Determine if the current node has completed it's finished requirement.
         if current_node.completion_requirement(the_person, report_log):
             if len(sex_path) > 0:
                 $ current_node = sex_path.pop(0)

@@ -13,7 +13,7 @@
 
 # flags
 # 1: Quest has been initiated X
-# 9: MC has seen infomercial, decided its bullshit (Bad End)
+# 9: MC has seen infomercial, decided it's bullshit (Bad End)
 # 11: MC has ordered
 # 21: MC has received the pills. Discovered fast use by date.
 # 29: MC doesn't use the drug in time. (Bad End)

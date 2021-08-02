@@ -1451,7 +1451,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
                 "She hugs you again and begins kissing you on your neck."
                 the_person "You make me feel so good, [the_person.mc_title]... come visit me soon okay?"
                 $ the_person.shop_owner_relationship_stage = 1.0
-            #TODO its not mutual
+            #TODO it's not mutual
     $the_person.draw_person(position = "stand2")
     the_person "Okay, it's time for me to get to the shop. See you soon [the_person.mc_title]!"
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."

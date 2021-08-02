@@ -81,7 +81,7 @@ init -1 python:
 
         # person home
         add_location(person.home, add_when_not_visible = True)
-        # add the mall and all its connections
+        # add the mall and all it's connections
         add_location(mall)
         for c in mall.connections:
             add_location(c)
