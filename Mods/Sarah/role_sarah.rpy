@@ -24,6 +24,9 @@ init 2 python:
     sarah_strip_pose_list = ["walking_away","back_peek","standing_doggy","stand2","stand3","stand4","stand5", "doggy","kneeling1"]
     sarah_wardrobe = wardrobe_from_xml("Sarah_Wardrobe")
 
+    def alternative_hire_sarah_requirement(the_person):
+        return not mc.business.hr_director and HR_director_creation_policy.is_owned() and the_person.event_triggers_dict.get("alt_hire", False)
+
     def Sarah_mod_initialization(): #Add actionmod as argument#
 
         sarah_base_outfit = Outfit("Sarah's base accessories")
@@ -34,8 +37,11 @@ init 2 python:
         sarah_base_outfit.add_accessory(the_glasses)
         sarah_base_outfit.add_accessory(the_eyeshadow)
 
+        # give player one more chance to hire her as HR director
+        alt_hire_action = Action("Hire her as HR Director", alternative_hire_sarah_requirement, "Sarah_alternative_hire_label")
+
         # init Sarah role
-        sarah_role = Role(role_name ="Childhood Friend", actions =[], role_dates = [sarah_bar_date_ask_action], hidden = True)
+        sarah_role = Role(role_name ="Childhood Friend", actions =[alt_hire_action], role_dates = [sarah_bar_date_ask_action], hidden = True)
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
@@ -523,6 +529,7 @@ label Sarah_intro_label():
             "You say goodbye to [the_person.title]. If you want to hire an HR director, you will need to create the position via the policy menu."
             $ sarah.event_triggers_dict["rejected"] = True
             $ sarah.set_schedule(None, times = [1,2,3])   # make her a free roaming character
+            $ sarah.event_triggers_dict["alt_hire"] = True
 
     # make her a free roaming character
     $ sarah.set_schedule(None, times = [1, 2, 3])
@@ -543,6 +550,24 @@ label Sarah_hire_label():
     "You hang up the phone. You quickly text [the_person.title] the address of your business."
 
     $ add_hr_director_initial_hire_action(the_person)
+    return
+
+label Sarah_alternative_hire_label(the_person):
+    $ the_person.draw_person()
+    mc.name "Hey, are you still selling those solar panels?"
+    the_person "Yeah, still haven't found a better job."
+    mc.name "Interested in becoming my new HR Director?"
+    $ the_person.draw_person(position = "stand3", emotion = "happy")
+    $ the_person.change_happiness(5)
+    $ the_person.change_love(5)
+    the_person "That would be... incredible! I don't know what to say! I can't wait to get started!"
+    $ day_name = "tomorrow"
+    if day%7 == 4 or day%7 == 5: # it's friday or saturday so next workday is monday
+        $ day_name = "Monday"
+    mc.name "Great, here is my card with the address, drop by [day_name] morning so we can go over the details."
+    the_person "Great, thank you again, I will."
+    $ add_hr_director_initial_hire_action(the_person)
+    $ sarah.event_triggers_dict["alt_hire"] = False
     return
 
 label Sarah_third_wheel_label():
