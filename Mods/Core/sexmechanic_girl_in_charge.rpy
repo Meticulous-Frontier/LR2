@@ -341,6 +341,8 @@ init 2:
             return True
 
         def requires_condom(the_person):
+            if the_person == kaya and persistent.pregnancy_pref != 0:
+                return False
             if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold(situational_modifier = 10):  #
                 return True
             return False

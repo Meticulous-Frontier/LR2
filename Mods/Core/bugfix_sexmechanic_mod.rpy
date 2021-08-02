@@ -674,6 +674,26 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
 label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
     $ condom_threshold = the_person.get_no_condom_threshold()
 
+    if the_person == kaya and persistent.pregnancy_pref != 0:
+        "As you look at [the_person.possessive_title], you remember she doesn't want you to use condoms. Should you put one on anyway?"
+        menu:
+            "Put on a condom":
+                mc.name "One sec, let me just get a condom on..."
+                the_person "Really? You know I'm not okay with that."
+                mc.name "I know but..."
+                the_person "I'm sorry. We do it bare, or not at all."
+                menu:
+                    "Fuck her raw":
+                        return 1
+                    "Refuse and do something else":
+                        "[the_person.possessive_title] seems like she's made up her mind, and you doubt you would be able to change it."
+                        mc.name "We can't risk it [the_person.title]. We'll have to do something else."
+                        return 0
+            "Don't":
+                return 1
+
+
+
     if the_person.has_cum_fetish() or the_person.has_breeding_fetish():
         "[the_person.possessive_title] eyes your cock greedily. You could put a condom on if you wanted."
         menu:
