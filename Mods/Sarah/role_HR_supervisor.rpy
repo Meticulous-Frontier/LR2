@@ -1097,6 +1097,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person "Ah, yes, I suspected it would be, sir!"
             $ the_person.apply_planned_outfit()
+            $ set_HR_director_unlock("missionary on desk", True)
             $ scene_manager.update_actor(the_person, position = "stand3")
             "Eventually she cleans herself up and makes herself presentable again."
             return
