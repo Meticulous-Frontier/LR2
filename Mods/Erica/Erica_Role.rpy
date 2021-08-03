@@ -135,16 +135,16 @@ init 2 python:
 
 
 init -2 python:
-
     def erica_apply_gym_outfit(): #No access to self in object specific override
         if erica_workout_wardrobe:
             erica.apply_outfit(erica_workout_wardrobe.decide_on_outfit2(erica))
-        return
+        elif workout_wardrobe:
+            erica.apply_outfit(erica.personalize_outfit(workout_wardrobe.decide_on_outfit2(erica)))
+        return 
 
     def erica_intro_requirement(person):
-        if person.location == gym:
-            return True
-        return False
+        return person.location == gym
+
     def erica_get_to_know_requirement(person):
         if mc.max_energy >= 110:
             if mc.location == gym:
@@ -186,10 +186,7 @@ init -2 python:
         return False
 
     def erica_race_crisis_requirement():
-        if day % 7 == 5:
-            if time_of_day == 1:
-                return True
-        return False
+        return day % 7 == 5 and time_of_day == 1
 
     def erica_buy_protein_shake_requirement(person):
         if person.event_triggers_dict.get("erica_protein", 0) < 1:
@@ -209,9 +206,7 @@ init -2 python:
         return False
 
     def erica_money_problems_sarah_talk_requirement(person):
-        if mc.business.hr_director and person.location == person.work:
-            return True
-        return False
+        return mc.business.hr_director and person.location == person.work
 
     def erica_money_problems_update_requirement(person):
         if mc.business.hr_director and erica_is_looking_for_work():
@@ -243,49 +238,31 @@ init -2 python:
         return False
 
     def erica_money_problems_yoga_start_requirement(person):
-        if mc.business.hr_director and person.location == gym:
-            return True
-        return False
+        return mc.business.hr_director and person.location == gym
 
     def erica_yoga_event_intro_requirement():
-        if mc.business.hr_director and day%7 == 1:
-            return True
-        return False
+        return mc.business.hr_director and day%7 == 1
 
     def erica_weekly_yoga_requirement(person):
-        if mc.business.hr_director and person.location == lobby and day%7 == 1:
-            return True
-        return False
+        return mc.business.hr_director and person.location == lobby and day%7 == 1
 
     def erica_lily_instapic_setup_requirement(person):
-        if person.location == lily_bedroom:
-            return True
-        return False
+        return person.location == lily_bedroom
 
     def erica_lily_instapic_proposal_requirement(person):
-        if person.location == gym:
-            return True
-        return False
+        return person.location == gym
 
     def erica_lily_instapic_intro_requirement():
-        if time_of_day == 4 and day%7 == 5:
-            return True
-        return False
+        return time_of_day == 4 and day%7 == 5
 
     def erica_lily_post_photoshoot_requirement(person):
-        if time_of_day > 0 and day%7 < 5:
-            return True
-        return False
+        return time_of_day > 0 and day%7 < 5
 
     def erica_post_photoshoot_requirement(person):
-        if person.location == gym:
-            return True
-        return False
+        return person.location == gym
 
     def erica_lily_weekly_photoshoot_requirement(person):
-        if person.location == lily.location and time_of_day == 4 and day%7 == 5:
-            return True
-        return False
+        return person.location == lily.location and time_of_day == 4 and day%7 == 5
 
     def erica_ghost_requirement():
         if renpy.random.randint(0,100) < 20:
