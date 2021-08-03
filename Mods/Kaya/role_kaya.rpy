@@ -45,6 +45,7 @@ init 2 python:
         kaya.event_triggers_dict["can_get_barista_quickie"] = False
         kaya.event_triggers_dict["has_moved"] = False
         kaya.event_triggers_dict["has_started_internship"] = False
+        kaya.event_triggers_dict["studies_with_lily"] = False
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -96,14 +97,21 @@ init -2 python:
         return False
 
     def kaya_meet_lily_at_uni_requirement(the_person):
-        if the_person.location == university:
+        if the_person.location == university and day%7 != 1:
             return True
         return False
 
     def kaya_lily_study_night_intro_requirement():
-        if day%7 == 6 and time_of_day == 4:
+        return False
+        if day%7 == 1 and time_of_day == 4:
             return True
         return False
+
+    def kaya_lily_study_night_recurring_requirement(the_person):
+        if day%7 == 1 and time_of_day == 4 and the_person.location == lily.home:    #TODO double check and make sure this actually works...
+            return True
+        return False
+
 
     def kaya_moving_in_with_mother_intro_requirement(the_person):
         if kaya.sluttiness > 40 and the_person.location == coffee_shop:
@@ -138,6 +146,9 @@ init 3 python:
     kaya_moving_in_with_mother_intro = Action("Kaya can't drink",kaya_moving_in_with_mother_intro_requirement,"kaya_moving_in_with_mother_intro_label")
     kaya_asks_for_help_moving = Action("Kaya Needs Help",kaya_asks_for_help_moving_requirement,"kaya_asks_for_help_moving_label")
     kaya_moving_day = Action("Kaya Moves",kaya_moving_day_requirement,"kaya_moving_day_label")
+    kaya_meet_lily_at_uni = Action("Kaya and Lily Meet",kaya_meet_lily_at_uni_requirement,"kaya_meet_lily_at_uni_label")
+    kaya_lily_study_night_intro = Action("Kaya and Lily Study",kaya_lily_study_night_intro_requirement,"kaya_lily_study_night_intro_label")
+    kaya_lily_study_night_recurring = Action("Kaya and Lily Study",kaya_lily_study_night_recurring_requirement,"kaya_lily_study_night_recurring_label")
 
 label kaya_setup_intro_event_label():
     $ the_person = kaya
@@ -171,6 +182,9 @@ label kaya_intro_label(the_person):
     the_person "Ah, thank you..."
     mc.name "I'm [mc.name]."
     the_person "[the_person.name]."
+    $ the_person.set_title(the_person.name)
+    $ the_person.set_possessive_title("Your favorite barista")
+    $ the_person.set_mc_title(mc.name)
     mc.name "It's a pleasure to meet you."
     "Right then another employee puts your coffee on the counter and calls your name."
     the_person "Right... sorry, there's someone behind you..."
@@ -256,7 +270,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     the_person "Ah, is that so?"
     mc.name "Indeed. And the fact that you don't deny it tells me I'm right."
     the_person "You sure seem pretty confident in yourself there, mister! Tell you what. Let's play a round, and if you win, I'll tell you my favorite drink. Okay?"
-    mc.name "Ah, whose confident now? Placing a wager on a billiards game!"
+    mc.name "Ah, who's confident now? Placing a wager on a billiards game!"
     "She chuckles and rolls her eyes mockingly."
     the_person "Disclosing my favorite drink hardly seems like a major wager. Maybe I intend to lose, so you can learn my secret? You're the one buying the drinks, remember?"
     the_person "Tell you what, if I win, I'll even allow you a guess, and I'll tell you if you're right or not."
@@ -381,6 +395,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "[the_person.possessive_title] turns and starts to walk up the starts to the apartment building."
     "Wow, what a busy night! You feel like you have a connection with [the_person.title]. She definitely seems eager too..."
     $ the_person.add_unique_on_room_enter_event(kaya_moving_in_with_mother_intro)   #Link this for now. Probably will change to a different place later on.
+    $ the_person.add_unique_on_room_enter_event(kaya_meet_lily_at_uni)
     return
 
 label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
@@ -418,20 +433,54 @@ label kaya_HR_start_internship_program_label():
     $ kaya.add_unique_on_talk_event(kaya_meet_lily_at_uni)
     return
 
-label kaya_meet_lily_at_uni_label():    #This label starts Kaya and Lily friendship storyline. Requires mid Kaya love (>40?). REquires scholarship program.
-    "You go the university to meet with them there with your offer to have a small internship and scholarship program."
-    "If you have rediscovered Nora she is at the meeting, is impressed with your offers, says going forward she can recommend you interns."
-    "After you finish, you happen to spot Kaya and say hello."
-    "You talk to Kaya about the new internship program. She is impressed and immediately agrees. You assign her to research and development."
-    "As you are talking to Kaya, Lily happens to talk by and sees you talking with her. When Lily walks up, Kaya starts to get territorial."
-    "She starts to get jealous of you talking to another girl."
-    "She's my sister, it's not like that (even though it kind of is)."
-    "Suddenly she is super friendly with Lily. Find out Lily is taking a class Kaya took last semester."
-    "Lily asks if Kaya wants to come over to study some time. Kaya enthusiastically agrees, surprised to find out MC lives with sister and mom."
-    "They are now friends."
-
-    $ town_relationships.update_relationship(sister, kaya, "Friend")
+label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Lily friendship storyline. Requires mid Kaya love (>40?). REquires scholarship program.
+    $ scene_manager = Scene()
+    "You go for a stroll at the university. With no particular aim, you just walk around, checking out some of the girls, stretching your legs a bit."
+    the_person "[the_person.mc_title]? Is that you?"
+    $ scene_manager.add_actor(the_person)
+    "You turn and see [the_person.possessive_title]. She goes to class here, but it is a big school, so you are surprised to see her."
+    mc.name "Ah, hello there [the_person.title]."
+    "She gives you a smile and chirps at you."
+    the_person "We go out one night for drinks and you are stalking me at class, mister?"
+    "[the_person.title] is very quick-witted. You can tell she is half joking... but also seriously wanting to know what you are doing here."
+    mc.name "Ah, sorry I wasn't looking for you, to be honest... I was... er..."
+    "Just then, you are saved by another familiar voice."
+    lily "Oh hey [lily.mc_title]!"
+    $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
+    "[lily.possessive_title] walks up."
+    lily "You didn't tell me you were gonna be here! Want to grab some lunch?"
+    $ scene_manager.update_actor(the_person, emotion = "angry")
+    the_person "Ahhh... I see... you aren't here to see me..."
+    "[lily.title] suddenly realizes you were talking with [the_person.possessive_title]. The edge of jealously is clear in [the_person.title]'s voice."
+    lily "Oh! Sorry, I didn't realize you were talking to her..."
+    mc.name "Ah, let me introduce you. [the_person.name], this is my sister, [lily.name]. She is taking classes here also."
+    $ scene_manager.update_actor(the_person, emotion = "happy")
+    "Relief is obvious on the face of [the_person.title]."
+    the_person "Ah! Of course, you look so similar. Of course you are siblings! Nice to meet you."
+    lily "Nice to meet you! Watch out for this guy though... he probably doesn't want you to know this but... he's a total nerd."
+    the_person "Is that so?"
+    "The two girls start to chat a bit, mostly at your expense. That's okay though, they seem to be hitting it off."
+    if lily.has_taboo(["vaginal_sex", "sucking_cock", "anal_sex"]): #This is our check to see if anything serious has happened with Lily yet.
+        "As you look at the two girls, you are suddenly struck by how similar they are. The way they talk and relate to each other."
+        "[the_person.title] cracks a joke... they almost laugh the same? It's a little crazy how similar they are."
+        "While you are really attracted to [the_person.possessive_title], it is kind of weird seeing her interact with your sister."
+    else:   #You've started down the incest path with Lily
+        "As you watch the two girls interact, you can't help but start to get turned on."
+        "Two hot college coeds. One sleeps in your house and has already started opening up to you sexually, the other is right on the brink."
+        "You can't help but imagine the two girls making out... getting on their knees in front of you, one of them taking the tip of your cock in her mouth while the other licks the shaft..."
+        $ mc.change_locked_clarity(20)
+    the_person "[the_person.mc_title]?"
+    lily "Earth to [mc.name]?"
+    mc.name "I'm sorry... I spaced out for a second."
+    the_person "Your sister just invited me over to study Tuesdsay night... it turns out we have the same class, but at different times!"
+    the_person "I said I wasn't sure you would feel comfortable with that..."
+    mc.name "Oh! That's fine... why would I be uncomfortable with that?"
+    lily "I don't know, sometimes you get weird about stuff..."
+    mc.name "No, that sounds great! I'll make sure not to bug you gals too much."
+    "[the_person.possessive_title] and [lily.title] trade phone numbers. Sounds like you have a study party to crash on Tuesday!"
+    $ town_relationships.update_relationship(lily, kaya, "Friend")
     $ mc.business.add_mandatory_crisis(kaya_lily_study_night_intro)
+    $ kaya.event_triggers_dict["studies_with_lily"] = True
     $ kaya.event_triggers_dict["has_started_internship"] = False
     return
 
@@ -448,7 +497,16 @@ label kaya_lily_study_night_intro_label():
     "You pour another glass for Lily. No serum for her. Girls chat for a minute then go back to Lily's room."
     "Mom turns to you, she seems slightly shaken up. She asks you not to get involved with Kaya, but won't explain why."
     "You go to bed confused."
-    "From now on, Lily and Kaya study together every sunday night."
+    "From now on, Lily and Kaya study together every tuesday night."
+    $ the_person.set_alt_schedule(lily_bedroom, days = [1], times = [4])
+    $ lily.set_alt_schedule(lily_bedroom, days = [1], times = [4])  #This should already be set, but just in case, make sure she is there.
+    $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
+    return
+
+label kaya_lily_study_night_recurring_label(the_person):
+    "Placeholder for recurring study session with Lily and Kaya."
+    pass
+    $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
     return
 
 label kaya_moving_in_with_mother_intro_label(the_person): #This label is called if you ask her to get drinks with you after a few different points in the story. Req 40+ sluttiness
@@ -686,3 +744,6 @@ init 3 python:      #Use this section to make wrappers for determining where we 
         if persistent.pregnancy_pref == 0:
             return True
         return False
+
+    def kaya_studies_with_lily():
+        return kaya.event_triggers_dict.get("studies_with_lily", False)
