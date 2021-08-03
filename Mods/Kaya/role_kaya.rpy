@@ -486,7 +486,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     the_person "[the_person.mc_title]?"
     lily "Earth to [mc.name]?"
     mc.name "I'm sorry... I spaced out for a second."
-    the_person "Your sister just invited me over to study Tuesdsay night... it turns out we have the same class, but at different times!"
+    the_person "Your sister just invited me over to study Tuesday night... it turns out we have the same class, but at different times!"
     the_person "I said I wasn't sure you would feel comfortable with that..."
     mc.name "Oh! That's fine... why would I be uncomfortable with that?"
     lily "I don't know, sometimes you get weird about stuff..."
@@ -593,7 +593,7 @@ label kaya_lily_study_night_intro_label():
         $ kaya.event_triggers_dict["incest_warnings"] += 1
         $ mom.change_happiness(-5)
     else:
-        mom "I know that you are going to date a lot of diffferent girls... I shouldn't be surprised..."
+        mom "I know that you are going to date a lot of different girls... I shouldn't be surprised..."
         mc.name "Surprised by what?"
         $ scene_manager.update_actor(mom, emotion = "sad")
         mom "... just don't forget how much I love you, okay?"
@@ -620,7 +620,7 @@ label kaya_lily_study_night_apology_label(the_person):
     mc.name "Thanks... hey listen... about what happened on Tuesday..."
     the_person "Oh! It was great! Your sister and I had a great time studying and hanging out. She is so funny!"
     mc.name "I just wanted to... wait what?"
-    the_person "I know she was trying to embarass you, and me for that matter, but honestly I had to laugh."
+    the_person "I know she was trying to embarrass you, and me for that matter, but honestly I had to laugh."
     the_person "[lily.name] is great. She's like the sister I never had! I hope it's okay, I'm going to come over again on Tuesday night to study again?"
     mc.name "That is fine of course."
     the_person "In fact, we might be making a thing of it. It was really handy being able to study for that class together."
@@ -659,7 +659,8 @@ label kaya_lily_study_night_recurring_label(the_person):
             call give_serum(lily) from _call_give_serum_lily_study_night_01
             if _return:
                 "You mix the serum into [lily.possessive_title]'s soda."
-            "You decide not to give her any for now."
+            else:
+                "You decide not to give her any for now."
         "Leave her drink alone":
             "You decide not to give her any for now."
     menu:
@@ -667,7 +668,8 @@ label kaya_lily_study_night_recurring_label(the_person):
             call give_serum(the_person) from _call_give_serum_kaya_study_night_02
             if _return:
                 "You mix the serum into [the_person.possessive_title]'s soda."
-            "You decide not to give her any for now."
+            else:
+                "You decide not to give her any for now."
         "Leave her drink alone":
             "You decide not to give her any for now."
     "You bring the snacks and drink to the girls. They are busy studying, so you decide to leave them alone for tonight."
@@ -698,7 +700,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     $ mc.start_text_convo(the_person)
     the_person "Hey, sory to bug you. Are you busy?"
     mc.name "Not particularly. Whatsup?"
-    the_person "Just wondering if you could swing by the coffe shop."
+    the_person "Just wondering if you could swing by the coffee shop."
     mc.name "Sure thing. I'll be right there."
     $ mc.end_text_convo()
     "You make your way over to the coffee shop. When you get there the door is locked, since it is closed for the night, but after knocking [the_person.possessive_title] quickly lets you in."
@@ -734,7 +736,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "There are still a few basic things still out, but most of her belongings have been put into boxes."
     $ the_person.add_situational_slut("Lonely", 20, "I don't want to spend the night alone!")
     "[the_person.possessive_title] turns to you."
-    the_person "Well, this is it! Or atleast it was. I liked having my own place... I'm sure I'll have my own place again soon..."
+    the_person "Well, this is it! Or at least it was. I liked having my own place... I'm sure I'll have my own place again soon..."
     $ the_person.draw_person(emotion = "sad")
     "Clearly distraught, you step forward and put your arms around [the_person.title]."
     "She pushes her face into your chest for a minute. She doesn't cry, but you can feel the emotions stirring inside her."
@@ -824,7 +826,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
             "Put on a condom anyway":
                 mc.name "I want to think about it more... but not while you are naked in front of me."
                 mc.name "For now a condom goes on, and I'll think about it more."
-                the_person "I understsand. Thank you for not being upset."
+                the_person "I understand. Thank you for not being upset."
                 "You unwrap the condom and then roll it onto your erection."
                 $ mc.condom = True
             "Keep it natural":
@@ -866,7 +868,6 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     mc.name "Definitely."
     "You get your clothes back on, and say goodnight to [the_person.title], who is still laying on her bed."
     "You walk home and fall into your bed, exhausted from your long day."
-    "NOTE: This is currently the end of Kaya's content in the mod. Her moving day has not yet been written!"
     $ mc.business.add_mandatory_crisis(kaya_moving_day)
     $ the_person.clear_situational_slut("Lonely")
     return
@@ -892,7 +893,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     "Soon, the single bedroom apartment is empty. [the_person.possessive_title] has switched from loading to cleanup as you load up the last few boxes."
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
     $ the_person.add_situational_slut("Lonely", 20, "Last day at my own apartment")
-    "When you come back in after loading the last box, [the_person.title] is wiping down her countertops, her ass swaying back and forth."
+    "When you come back in after loading the last box, [the_person.title] is wiping down her counter top, her ass swaying back and forth."
     if the_person.is_pregnant():    #We already knocked her up, go right into round 2.
         call kaya_fuck_in_apartment_label(the_person) from _kaya_sex_in_appt_01
         $ came_inside_kaya = _return
@@ -952,7 +953,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
                         "Put on a condom anyway":
                             mc.name "I want to think about it more... but not while you are naked in front of me."
                             mc.name "For now a condom goes on, and I'll think about it more."
-                            the_person "I understsand. Thank you for not being upset."
+                            the_person "I understand. Thank you for not being upset."
                             "You unwrap the condom and then roll it onto your erection."
                             $ mc.condom = True
                         "Keep it natural":
@@ -1044,13 +1045,13 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
         if kaya_had_condom_talk():
             "And you've already fucked her too!"
             if came_inside_kaya:
-                "Your cum is already swimming around inisde her... dripping down her legs as she stands there."
+                "Your cum is already swimming around inside her... dripping down her legs as she stands there."
                 $ mc.change_locked_clarity(50)
-                "You feel yourelf getting turned on. Fuck you can't let yourelf get aroused right now."
+                "You feel yourself getting turned on. Fuck you can't let yourself get aroused right now."
             elif the_person.is_pregnant():
                 "And you came inside her last night! You've already seeded her!"
                 $ mc.change_locked_clarity(30)
-                "You feel yourelf getting turned on. Fuck you can't let yourelf get aroused right now."
+                "You feel yourself getting turned on. Fuck you can't let yourself get aroused right now."
         else:
             "You can't believe you almost fucked her. You should probably talk to her about things before you take things any farther..."
     elif the_person.event_triggers_dict.get("incest_warnings", 0) == 1:
@@ -1091,7 +1092,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ clear_scene()
     $ mc.change_location(downtown)
     $ mc.location.show_background()
-    #TRIST I probably should clean up Kaya's home before this? Not sure how to safely remove it from the list of places, since we probably already know the location of it.
+    # set kaya living with her mom
     $ kaya.home = sakari.home
     $ kaya.set_schedule(the_location = sakari.home, times = [0,4])
     $ kaya.event_triggers_dict["mc_knows_relation"] = True
@@ -1105,7 +1106,8 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
         "And seems eager to fuck."
     "[the_person.title] is going to need some time to settle in anyway. Maybe you should give her a week?"
     #TODO write personality greetings in such a way that makes her impossible to interact with during this week.
-    $ mc.business.add_mandatory_crisis(kaya_share_the_news)
+    # UNCOMMENT THIS LINE TO CONTINUE STORY WHEN WRITTEN
+    # $ mc.business.add_mandatory_crisis(kaya_share_the_news)
     $ kaya.event_triggers_dict["share_news_day"] = day + 7
     $ kaya.event_triggers_dict["has_moved"] = True
     return
@@ -1138,7 +1140,6 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
     "[the_person.possessive_title] disappears for a few minutes, then comes back after cleaning herself up."
     $ the_person.apply_outfit(the_person.planned_outfit)
     return came_inside_kaya
-
 
 label kaya_share_the_news_label():  # Timed event after helping her move.
     "Kaya texts you. Wants to know if you can meet up after she gets off work. IF she's pregnant, she has crazy news for you."
