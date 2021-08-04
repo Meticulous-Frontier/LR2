@@ -24,11 +24,12 @@ init 5 python:
         "sweet": "swate",
         "yellow": "yellah",
         "hello": "howdie",
-        "i": "aah",
+        "i": "ah",
         "a": "uh",
         "you": "yah",
         "it": "aht",
         "to": "tuh",
+        "the": "thu",
         "nice": "fine",
         "your": "yahr",
         "like": "lac",
@@ -56,7 +57,10 @@ init 5 python:
 
     # letter replace (in word)
     southern_replace_dict = {
-        "ing": "in'",
+        "ing": "'n'",
+        "some": "sum",
+        "other": "uther",
+        "irst": "ursd"
     }
 
     # word group replacer
