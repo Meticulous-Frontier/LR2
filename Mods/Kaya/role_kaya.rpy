@@ -1106,8 +1106,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
         "And seems eager to fuck."
     "[the_person.title] is going to need some time to settle in anyway. Maybe you should give her a week?"
     #TODO write personality greetings in such a way that makes her impossible to interact with during this week.
-    # UNCOMMENT THIS LINE TO CONTINUE STORY WHEN WRITTEN
-    # $ mc.business.add_mandatory_crisis(kaya_share_the_news)
+    $ mc.business.add_mandatory_crisis(kaya_share_the_news)
     $ kaya.event_triggers_dict["share_news_day"] = day + 7
     $ kaya.event_triggers_dict["has_moved"] = True
     return
