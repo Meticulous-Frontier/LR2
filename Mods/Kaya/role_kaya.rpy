@@ -738,7 +738,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "[the_person.possessive_title] turns to you."
     the_person "Well, this is it! Or at least it was. I liked having my own place... I'm sure I'll have my own place again soon..."
     $ the_person.draw_person(emotion = "sad")
-    "Clearly distraught, you step forward and put your arms around [the_person.title]."
+    "Seeing that she is clearly distraught, you step forward and put your arms around [the_person.title]."
     "She pushes her face into your chest for a minute. She doesn't cry, but you can feel the emotions stirring inside her."
     the_person "I have a lot to be afraid of right now... but that doesn't mean I can't take time to do things that make me happy sometimes too."
     $ the_person.draw_person(position = "kissing", emotion = "happy")
