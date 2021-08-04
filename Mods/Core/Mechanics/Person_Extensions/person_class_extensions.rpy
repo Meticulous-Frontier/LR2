@@ -1944,6 +1944,11 @@ init -1 python:
 
     Person.decide_on_outfit = person_decide_on_outfit
 
+    def person_get_random_appropriate_outfit(self, guarantee_output = False):
+        return self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), guarantee_output = guarantee_output, preferences = WardrobePreference(self))
+    
+    Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
+
     def person_get_full_strip_list(self, strip_feet = True, strip_accessories = False):
         return self.outfit.get_full_strip_list(strip_feet, strip_accessories)
 

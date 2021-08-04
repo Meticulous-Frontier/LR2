@@ -727,7 +727,7 @@ label modify_wardrobe_label(the_person):
 
     $ test_outfit = the_person.planned_outfit
     if the_person.wardrobe.has_outfit_with_name(test_outfit.name):
-        $ the_person.apply_outfit(wardrobe_get_outfit_with_name(the_person.wardrobe, test_outfit.name))
+        $ the_person.apply_outfit(the_person.wardrobe.get_outfit_with_name(test_outfit.name))
     $ test_outfit = None
 
     if alterations > 10:
