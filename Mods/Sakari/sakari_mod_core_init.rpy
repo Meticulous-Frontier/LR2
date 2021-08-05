@@ -1,4 +1,4 @@
-init 5 python:
+init 6 python:  # init after kaya (relationship setter)
     add_label_hijack("normal_start", "activate_sakari_mod_core")
     add_label_hijack("after_load", "update_sakari_mod_core")
 
