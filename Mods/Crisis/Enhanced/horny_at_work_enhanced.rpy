@@ -533,7 +533,7 @@ label horny_at_work_crisis_enhanced_label():
                             "She places her hands on your thighs and slides your cock into her mouth, licking the tip to get it wet before slipping it further back."
                             $ clear_scene()
                             $ the_person.change_arousal(50)
-                            call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, position_locked = True) from _call_fuck_person_horny_at_work_enhanced_4
+                            call fuck_person(the_person, private = False, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_horny_at_work_enhanced_4
                             $ the_report = _return
                             $ the_person.review_outfit()
                             $ scene_manager.update_actor(the_person, position = "stand3")
