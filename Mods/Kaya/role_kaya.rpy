@@ -513,7 +513,7 @@ label kaya_lily_study_night_intro_label():
     mc.name "Hey, I thought I heard you two in here, so I decided to come say hello."
     lily "Yeah we've been studying pretty hard for the last hour, we were just about to take a break."
     mc.name "Sounds good. Can I get you anything? A soda or a glass of water maybe?"
-    lily "Oh! I bought a bottle of white zinfandel and its in the fridge. Can you get it open for me? I hate opening wine bottles."
+    lily "Oh! I bought a bottle of white zinfandel and it's in the fridge. Can you get it open for me? I hate opening wine bottles."
     the_person "Wine? Now your sister is trying to get me drunk too?"
     lily "If you get drunk off of... wait what do you mean too?"
     "[lily.possessive_title] looks at you when she realizes what she means."
@@ -1075,7 +1075,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
             if came_inside_kaya:
                 "She has your cum swimming around inside her right now! You start to feel a bit sick to your stomach."
             elif the_person.is_pregnant():
-                "You came insider her last night! Oh god, she could be pregnant already! You feel a bit sick to your stomach."
+                "You came inside her last night! Oh god, she could be pregnant already! You feel a bit sick to your stomach."
         else:
             "You can't believe you almost fucked your half sister. You are thankful for the warning [mom.possessive_title] gave you now."
 
