@@ -725,7 +725,9 @@ label ophelia_revenge_date_label():
     $ mc.business.change_funds(-200)
     $ scene_manager.remove_actor(candace)
     "You pay the tab, then head outside. You look around and eventually notice [the_person.title] around the corner."
-    $ scene_manager.show_actor(the_person, emotion = "sad")
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    $ scene_manager.show_actor(the_person, position = "stand3", emotion = "sad")
     mc.name "[the_person.title]... I'm sorry..."
     the_person "No... no... don't be. You've been very nice throughout this whole thing."
     "She takes a deep breath."
