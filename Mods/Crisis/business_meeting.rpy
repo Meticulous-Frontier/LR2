@@ -58,7 +58,7 @@ label business_meeting_action_label:
     call business_meeting_end(the_person, done) from _call_business_meeting_end_1
 
     $ ran_num = renpy.random.randint(1, 3)
-    $ hr_employee = get_random_from_list(mc.business.hr_team)
+    $ hr_employee = mc.business.hr_director or get_random_from_list(mc.business.hr_team)
     if hr_employee == the_person:
         "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
     elif hr_employee is None:
