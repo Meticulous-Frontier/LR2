@@ -163,7 +163,7 @@ label sister_failed_test_label():
         menu:
             "Ask for handjob" if mc.energy > 50:
                 the_person "Okay... I can do that."
-                "Her hand goes under the covers and onto your chest. She slowly rubs your body with her hand as it works its way south."
+                "Her hand goes under the covers and onto your chest. She slowly rubs your body with her hand as it works it's way south."
                 "When she gets to your underwear, you lift your hips up a bit as [the_person.title] pulls them down, setting your erection free."
                 if the_person.has_taboo("touching_penis"):
                     "[the_person.possessive_title] begins to falter a bit. You can sense her hesitation to touch you."
