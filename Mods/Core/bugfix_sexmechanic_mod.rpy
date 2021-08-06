@@ -830,7 +830,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
         elif skill_tag == "Anal":
             the_person "Could you put on a condom? I don't want to have a mess when you start pumping my ass."
         else:
-             $ the_person.call_dialogue("condom_ask")
+            $ the_person.call_dialogue("condom_ask")
 
         menu:
             "Put on a condom":
