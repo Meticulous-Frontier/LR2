@@ -286,9 +286,12 @@ label starbuck_vaginal_skillup_label(the_person):
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, it's only fair you be the first to feel it."
                         the_person "Ah... I can't wait! Let's go!"
                         $ mc.change_locked_clarity(50)
-                        "She quickly takes off some clothes to give you easy access."
-                        $ the_person.strip_outfit(position = "stand3", exclude_upper = True)
-                        call fuck_person(the_person, start_position = missionary, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS10
+                        "She quickly takes off some clothes to give you easy access and hops on the counter."
+                        if the_person.outfit.can_half_off_to_vagina():
+                            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "stand3")
+                        else:
+                            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "stand3")
+                        call fuck_person(the_person, start_position = missionary, start_object = make_counter(), skip_intro = True) from _call_fuck_person_SBS10
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh wow... I've never... I came so many times..."
@@ -336,8 +339,11 @@ label starbuck_anal_skillup_label(the_person):
                         mc.name "Sounds good, [the_person.title]. Since you recommended it, it's only fair I use it on you first!"
                         the_person "Ah... I can't wait! Let's go!"
                         $ mc.change_locked_clarity(50)
-                        "She quickly takes off some clothes to give you easy access."
-                        $ the_person.strip_outfit(position = "stand3", exclude_upper = True)
+                        "She quickly takes off some clothes to give you easy access, turns around and bends over the counter."
+                        if the_person.outfit.can_half_off_to_vagina():
+                            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "stand3")
+                        else:
+                            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "stand3")
                         call fuck_person(the_person, start_position = SB_anal_standing, start_object = mc.location.get_object_with_name("counter"), skip_intro = True) from _call_fuck_person_SBS20
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
@@ -380,9 +386,12 @@ label starbuck_oral_skillup_label(the_person):
                     "Eat her pussy":
                         mc.name "Sounds good, [the_person.title]."
                         the_person "Ah yes!"
-                        "She quickly takes off some clothes to give you easy access."
+                        "She quickly takes off some clothes to give you easy access and leans against her counter."
                         $ mc.change_locked_clarity(25)
-                        $ the_person.strip_outfit(position = "stand3", exclude_upper = True)
+                        if the_person.outfit.can_half_off_to_vagina():
+                            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "stand3")
+                        else:
+                            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "stand3")
                         call fuck_person(the_person, start_position = cunnilingus, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS30
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
@@ -429,7 +438,10 @@ label starbuck_foreplay_skillup_label(the_person):
                         the_person "Ah... I can't wait! Let's go!"
                         $ mc.change_locked_clarity(15)
                         "She quickly takes off some clothes to give you easy access."
-                        $ the_person.strip_outfit(position = "stand3", exclude_upper = True)
+                        if the_person.outfit.can_half_off_to_vagina():
+                            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "stand3")
+                        else:
+                            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "stand3")
                         call fuck_person(the_person, start_position = standing_grope, skip_intro = True) from _call_fuck_person_SBS40
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
