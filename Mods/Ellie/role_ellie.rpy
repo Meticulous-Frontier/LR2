@@ -202,9 +202,9 @@ label ellie_meet_ellie_intro_label():
     mc.name "Hey, meet me at the bar. We have a lot to talk about."
     the_person "Okay, see you there"
     $ mc.end_text_convo()
+    $ mc.location.lighting_conditions = standard_outdoor_lighting
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
-    $ mc.location.lighting_conditions = standard_indoor_lighting
     "You grab a secluded table away from the crowd around the bar with [the_person.title]."
     $ the_person.draw_person(position = "sitting")
     the_person "So, how'd it go?"
@@ -307,7 +307,6 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
         $ mc.business.change_funds(-100)
         $ ellie.event_triggers_dict["blackmail_stage"] = 1
         $ clear_scene()
-        $ mc.location.lighting_conditions = standard_indoor_lighting
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
     elif ellie.event_triggers_dict.get("blackmail_stage", 0) == 1:
         mc.name "I'm still working on the million dollars. For today I have the same amount as last time."
@@ -321,7 +320,6 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
         $ mc.business.change_funds(-100)
         $ ellie.event_triggers_dict["blackmail_stage"] = 2
         $ clear_scene()
-        $ mc.location.lighting_conditions = standard_indoor_lighting
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
     elif ellie.event_triggers_dict.get("blackmail_stage", 0) == 2:
         mc.name "I've almost got the million dollars. For today I have the same amount as last time."
@@ -335,11 +333,11 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
         $ mc.business.change_funds(-100)
         $ ellie.event_triggers_dict["blackmail_stage"] = 3
         $ clear_scene()
-        $ mc.location.lighting_conditions = standard_indoor_lighting
         $ mc.business.add_mandatory_crisis(ellie_self_research_identity)
     else:
         "You shouldn't be here!"
 
+    $ mc.location.lighting_conditions = standard_outdoor_lighting
 
     return
 
@@ -388,8 +386,11 @@ label ellie_end_blackmail_label():
         "Scare her off":
             "She is so emotional. You can't imagine her being a good fit for your company now."
             "You scare her off from blackmailing you using dialogue that Starbuck hasn't written yet."
+            # restore default lighting before exit label
+            $ mc.location.lighting_conditions = standard_outdoor_lighting
             #TODO
             #Figure out a way to remove her from the game without breaking stuff.
+            # Use this: $ the_person.remove_person_from_game()
             return
     mc.name "I get it. You just want to work, and something in your field."
     the_person "I... I just moved here a year ago... I just want to do my family proud..."
@@ -412,6 +413,7 @@ label ellie_end_blackmail_label():
     $ the_person.set_mc_title(mc.name)
     "You exchange some information with [the_person.title]. You feel pretty certain she'll decide to stick around."
     $ mc.business.add_mandatory_crisis(ellie_work_welcome)
+    $ mc.location.lighting_conditions = standard_outdoor_lighting
     return
 
 label ellie_work_welcome_label():
