@@ -341,6 +341,7 @@ init -1 python:
             sales_inc += marketing_potential_stat(person)
         serum_sale_count = __builtin__.round(sales_inc * 0.05)
 
+        slut_modifier = 0
         serum_value_multiplier = 1.00 #For use with value boosting policies. Multipliers are multiplicative.
         if male_focused_marketing_policy.is_active(): #Increase value by the character's outfit sluttiness if you own that policy.
             sluttiness_multiplier = (slut_modifier/100.0) + 1
