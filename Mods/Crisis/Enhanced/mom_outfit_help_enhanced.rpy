@@ -345,7 +345,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'm glad to hear that... I just... need to taste it!!!"
                         $ the_person.break_taboo("sucking_cock")
                     "Suddenly, she opens a bit wider and takes your cock into her mouth. Your hands run through her hair as her head starts to bob up and down."
-                    call fuck_person(the_person, start_position = blowjob, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_01
+                    call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_01
 
                 else:
                     "You watch in amazement as she wraps your cock between her tits, you erection now enveloped in her creamy cleavage."
@@ -356,7 +356,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'm glad to hear that... I just... want to feel it blow all over me!"
                         $ the_person.break_taboo("touching_body")
                     "[the_person.possessive_title] slowly starts to rock her body up and down, stroking your cock with her tits."
-                    call fuck_person(the_person, start_position = tit_fuck, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_02
+                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_02
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
             else:
                 the_person "I mean... you are such a virile young man... maybe you could think of some way I could thank you..."
@@ -365,7 +365,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
                 $ mc.change_locked_clarity(20)
                 "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]"
-                call fuck_person(the_person, start_position = SB_doggy_standing, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
+                call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_bed(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
                 "When you finish up, you put your dick away."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
 
