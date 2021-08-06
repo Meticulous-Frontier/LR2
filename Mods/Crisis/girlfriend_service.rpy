@@ -52,16 +52,16 @@ label girlfriend_service_label():
                         call get_fucked(the_person) from _girlfriend_service_initiate_07
                     "I want to cum on your face":
                         the_person "Mmm, sounds hot..."
-                        call get_fucked(the_person, the_goal = "facial") from _girlfriend_service_initiate_08
+                        call get_fucked(the_person, the_goal = "facial", start_position = blowjob, private = False) from _girlfriend_service_initiate_08
                     "I want to cum in your mouth" if the_person.effective_sluttiness() > 40:
                         the_person "Mmm, sounds yummy..."
-                        call get_fucked(the_person, the_goal = "oral creampie") from _girlfriend_service_initiate_04
+                        call get_fucked(the_person, the_goal = "oral creampie", start_position = deepthroat, private = False) from _girlfriend_service_initiate_04
                     "I want to cum inside you" if the_person.effective_sluttiness() > 60:
                         the_person "Ohhh... that sounds so good..."
-                        call get_fucked(the_person, the_goal = "vaginal creampie") from _girlfriend_service_initiate_05
+                        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = SB_doggy_standing, private = False) from _girlfriend_service_initiate_05
                     "I want to cum in your ass" if the_person.effective_sluttiness() > 80:
                         the_person "Mmm, you are such a naughty boy..."
-                        call get_fucked(the_person, the_goal = "anal creampie") from _girlfriend_service_initiate_06
+                        call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_standing, private = False) from _girlfriend_service_initiate_06
                 mc.name "That was nice."
                 $ public_session = True
                 "[the_person.possessive_title] slowly starts to clean herself up."
