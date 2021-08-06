@@ -602,6 +602,7 @@ label fetish_serum_anal_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Anal Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -627,6 +628,7 @@ label fetish_serum_cum_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -656,6 +658,7 @@ label fetish_serum_breeding_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Reproduction Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -681,6 +684,7 @@ label fetish_serum_exhibition_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Public Sexual Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
