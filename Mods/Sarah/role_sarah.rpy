@@ -1683,7 +1683,7 @@ label Sarah_stripclub_story_label():
     "You quickly strip out of your clothes and get behind her, lining yourself up with her slit."
     if mc.energy < 30:
         $ mc.energy = 30
-    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = False, girl_in_charge = False, position_locked = True) from _call_sex_description_stripclub_aftermath_1
+    call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_stripclub_aftermath_1
     "When you finish with her, [the_person.title] collapses in the bed."
     $ scene_manager.update_actor(the_person, position = "missionary")
     "You cuddle up next to her as you both catch your breath."

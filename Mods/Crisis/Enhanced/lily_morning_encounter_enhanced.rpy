@@ -427,7 +427,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     $ scene_manager.strip_to_vagina(the_watcher, visible_enough = True, prefer_half_off = True)
                                     call fuck_person(the_watcher, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank3
                         else:
-                            call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
+                            call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = True, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
 
             $ the_watcher = None
             $ scene_manager = None
