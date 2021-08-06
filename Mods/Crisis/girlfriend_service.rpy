@@ -35,7 +35,7 @@ label girlfriend_service_label():
     mc.name "For you? Of course."
     #TODO harem content here eventually
     if the_person.get_opinion_score("public sex") > 0:
-        the_person "There are so many girls here. Just wanted to make sure you aren't getting to tempted."
+        the_person "There are so many girls here. Just wanted to make sure you aren't getting too tempted."
         "She starts to rub your crotch through your pants."
         $ mc.change_locked_clarity(10)
         the_person "I was thinking, I could take care of you... right here..."
