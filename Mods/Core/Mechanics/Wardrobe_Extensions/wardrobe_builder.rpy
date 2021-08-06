@@ -949,7 +949,7 @@ init 5 python:
                 for item in personal_outfit.feet:
                     if item.proper_name == "Sneakers":
                         neutralize_item_colour(item)
-                        item.colour_pattern = change_colour_alpha(main_colour)
+                        item.colour_pattern = change_colour_alpha(main_colour, item.colour_pattern)
                     else:
                         neutralize_item_colour(item)
                 for item in personal_outfit.accessories:
