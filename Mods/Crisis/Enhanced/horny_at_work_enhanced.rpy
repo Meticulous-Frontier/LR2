@@ -243,6 +243,7 @@ label horny_at_work_crisis_enhanced_label():
                         if the_report.get("girl orgasms", 0) > 0:
                             "[active_person.title] stumbles back to her desk and collapses into her chair, legs still quivering."
                         else:
+                            $ scene_manager.update_actor(active_person, position = "missionary", emotion = "happy")
                             "[active_person.title] goes back to her desk and sits down when you're finished with her. She spreads her legs and starts to touch herself."
 
                         if len(helpful_people) > 1:
