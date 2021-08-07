@@ -93,7 +93,7 @@ label candace_goes_clothes_shopping_label(the_person):
     mc.name "Ok. Let's go."
     if the_person.should_wear_uniform():
         the_person "Yay! I can't wait! Just let me get changed, real quick."
-        $ the_person.apply_planned_outfit()
+        $ the_person.apply_outfit(the_person.planned_outfit) # wear normal day clothes
         $ the_person.draw_person()
         "After a minute she comes back, ready to go."
     else:
