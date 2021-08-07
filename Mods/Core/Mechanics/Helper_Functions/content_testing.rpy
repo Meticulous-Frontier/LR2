@@ -14,9 +14,6 @@ init 5 python:
         renpy.hide_screen("under_construction_ui")
         return
 
-    ashley_sisterly_jealousy_feature = False     #   set to True if no longer WIP
-    girlfriend_role_sleepover_feature = False    #   set to True if no longer WIP
-
     add_label_hijack("normal_start", "add_content_setting_option")
     add_label_hijack("after_load", "add_content_setting_option")
 

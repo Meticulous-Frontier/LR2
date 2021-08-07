@@ -2318,6 +2318,8 @@ init -1 python:
 ##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
 
     def change_to_lingerie(self):
+        if self.event_triggers_dict.get("girlfriend_sleepover_lingerie", None):
+            self.apply_outfit(self.event_triggers_dict.pop("girlfriend_sleepover_lingerie"))
         if self.event_triggers_dict.get("favorite_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.get("favorite_lingerie", None))
         elif len(self.wardrobe.underwear_sets) > 0:

@@ -94,7 +94,6 @@ label activate_girlfriend_role_enhancement(stack):
     return
 
 label girlfriend_myplace_yourplace_label(the_person):
-    $ show_wip_screen(girlfriend_role_sleepover_feature)
     mc.name "So, I'm kinda busy right now, but I thought that maybe later we could get together."
     the_person "Mmm, that sounds like fun. My place or yours?"
     menu:
@@ -111,11 +110,9 @@ label girlfriend_myplace_yourplace_label(the_person):
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.add_mandatory_crisis(girlfriend_sleepover)
-    $ hide_wip_screen()
     return
 
 label girlfriend_sleepover_label():
-    $ show_wip_screen(girlfriend_role_sleepover_feature)
     $ the_person = schedule_sleepover_get_girlfriend_person()
     if the_person == None:
         return
@@ -278,7 +275,6 @@ label girlfriend_sleepover_label():
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
-    $ hide_wip_screen()
     return
 
 label girlfriend_wakeup_spooning_label(the_person):
@@ -582,6 +578,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 "Come over":
                     mc.name "I'd like to see this outfit in action. My place, say 9pm?"
                     the_person "Okay! See you then!"
+                    $ the_person.event_triggers_dict["girlfriend_sleepover_lingerie"] = lingerie_outfit
                     $ schedule_sleepover_in_story(the_person)
                 "Another time":
                     mc.name "Sorry, I'm running behind on work stuff. Another time, and soon."
