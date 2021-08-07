@@ -2438,7 +2438,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
             lily "Alright, let's get ready!"
             "The girls start to strip down."
-            $ scene_manager.strip_full_outfit() # strip both simultaneously
+            $ scene_manager.strip_full_outfit(strip_feet = True) # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
             $ erica.change_slut_temp(2)
