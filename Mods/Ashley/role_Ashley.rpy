@@ -440,6 +440,8 @@ label ashley_classical_concert_date_label():
     "You head downtown. The plan is just to meet up at the concert hall itself. [stephanie.title] is going to drop her sister off and pick her up afterwards."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
+    # make sure stephanie is wearing normal clothes (instead of uniform)
+    $ stephanie.apply_outfit(stephanie.decide_on_outfit())
     # ashley is wearing something nice
     $ the_person.apply_outfit(the_person.decide_on_outfit(sluttiness_modifier = 0.2))
     "Soon, you see the sisters."
