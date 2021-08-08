@@ -743,7 +743,13 @@ label ashley_post_handjob_convo_label(the_person):
     mc.name "Hey [the_person.title]..."
     the_person "Oh... haha, yeah, I figured something like this was coming... it's okay, I'll clean out my desk and be out before you know it..."
     mc.name "Clean out your desk? I'm not firing you. Come on let's go get some coffee."
-    the_person "Oh, coffee? OK, I'm right behind you..."
+    if the_person.should_wear_uniform():
+        the_person "Oh, coffee? Ok, I'm going to change and we can go."
+        $ the_person.apply_outfit(the_person.planned_outfit)
+        $ the_person.draw_person()
+        the_person "I'm ready."
+    else:
+        the_person "Oh, coffee? I'm right behind you..."
     "[the_person.possessive_title] is blushing hard. It's kind of cute actually."
     $ downtown.show_background()
     "As you step out of the office building, [the_person.title] is following along behind you. You give her a second to catch up so you can walk side by side."
@@ -791,7 +797,7 @@ label ashley_post_handjob_convo_label(the_person):
         the_person "Ever since you started this business thing up, she's been talking about you non-stop. I can tell she really likes you..."
         the_person "But... I know we only just met... but I... errm..."
         mc.name "Yes?"
-        "She sighs"
+        "She sighs."
         the_person "I guess... I kinda like you too..."
         the_person "I know this is kinda weird but... I guess you'll just have to like... decide? Who do you want to be with more?"
     "You consider your conversation carefully before deciding on how you want to proceed."
