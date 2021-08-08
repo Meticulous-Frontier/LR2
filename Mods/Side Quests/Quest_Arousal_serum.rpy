@@ -13,7 +13,7 @@
 
 # flags
 # 1: Quest has been initiated X
-# 9: MC has seen infomercial, decided its bullshit (Bad End)
+# 9: MC has seen infomercial, decided it's bullshit (Bad End)
 # 11: MC has ordered
 # 21: MC has received the pills. Discovered fast use by date.
 # 29: MC doesn't use the drug in time. (Bad End)
@@ -186,7 +186,7 @@ label quest_arousal_serum_receive_drug_label():
     $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
     $ clear_scene()
-    "You open up the package. Its the two pills you ordered. The highly acclaimed Female Viagra."
+    "You open up the package. It's the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
     "Hmm... what to do with this? With two doses, you figure you could test one dose, and if it works, use the second one to try and reverse engineer the drug."
     if mc.business.head_researcher == None:
@@ -322,6 +322,7 @@ label quest_arousal_serum_test_label():
                 the_person "Alright."
                 $ quest_arousal_serum().set_quest_flag(49)
                 $ quest_arousal_serum().quest_completed()
+                return
 
         the_person "I'll start working on the other pill... see if I can reverse engineer the effects."
         the_person "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"

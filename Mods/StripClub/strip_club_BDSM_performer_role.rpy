@@ -521,7 +521,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
     return
 
 label cage_her_label(the_person):
-    mc.name "I think a some time in the cage will improve your attitude."
+    mc.name "I think some time in the cage will improve your attitude."
     if the_person.obedience < 100:
         $ the_person.draw_person(position = "stand3", emotion = "angry")
         the_person "What? Are you crazy?"

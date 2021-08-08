@@ -242,7 +242,7 @@ label quest_production_line_coffee_label():
     mc.name "So, [the_person.name] said you might have some ideas for how I could increase the efficiency of my production."
     dad_name "She's right, I do. I'm willing to help you, however, I need you to do me a favor first."
     mc.name "Oh? What is that?"
-    dad_name "This job that my baby girl is doing... its her first real job, you know? She's had a couple part time jobs, but nothing like this."
+    dad_name "This job that my baby girl is doing... it's her first real job, you know? She's had a couple part time jobs, but nothing like this."
     dad_name "She is right on the verge of being able to afford her own place, with no roommates."
     dad_name "I'm not asking for much, even just a small raise in her salary would be enough to do it."
     mc.name "So... you are proposing an exchange? I give her a raise, and you give me an efficiency consultation?"
@@ -354,10 +354,10 @@ label quest_production_line_help_move_label():
     $ the_person.change_arousal(10)
     the_person "That's... I'm glad to hear that... d... d..."
     if the_person.sluttiness < 20:
-        the_person "Sorry, I just, its so weird for someone else to call me that. Could you just stick with [the_person.title]?"
+        the_person "Sorry, I just, it's so weird for someone else to call me that. Could you just stick with [the_person.title]?"
         mc.name "Certainly, if that is what you prefer."
     else:
-        mc.name "Its okay, you can say it."
+        mc.name "It's okay, you can say it."
         "When she realizes that you are okay with it, she finally says it."
         the_person "Daddy, I'm so glad you are here!"
         $ the_person.draw_person(position = "kissing")
@@ -435,7 +435,7 @@ label quest_production_line_help_move_label():
             the_person "That's... I mean... kind of private!"
             mc.name "It's ok, [the_person.title]. You can tell me."
             "You can see her defenses breaking down."
-            the_person "Oh god [the_person.mc_title], its like you see right through me..."
+            the_person "Oh god [the_person.mc_title], it's like you see right through me..."
             the_person "Its not what you think! Mom left us when I was really young. When I was growing, my dad threw himself into his work, and all his spare time he spent raising me."
             the_person "He didn't have any time to himself. He didn't have time to date or meet anyone. He spent all his time with me. I love him so much."
             the_person "And then it happened. I was older, and I was over at a friend's house. I'd told him I was going to spend the night there, but I decided to come home instead."

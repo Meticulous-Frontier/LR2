@@ -87,6 +87,7 @@ init 1299 python:
         Personality.response_label_ending.append("lingerie_shopping_tame_response")
         Personality.response_label_ending.append("lingerie_shopping_excited_response")
         Personality.response_label_ending.append("lingerie_shopping_wow_response")
+        Personality.response_label_ending.append("GIC_finish_response")
 
 init 1400 python:
     # update default personalities with extra opinions (not in base game)

@@ -31,6 +31,7 @@ label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new
                 "You quickly strip off the condom as quietly as possible, then line yourself up and plunge into [the_girl.title]'s heavenly slick cunt."
                 $ stealth_orgasm = True
                 $ mc.condom = False
+                $ use_condom = False
                 #TODO add a check against focus where she realizes what you are doing
                 "You begin to pound her with renewed vigor, enjoying the steamy sensation of her raw pussy."
                 the_girl "Oh god it feels so good. I can feel you so deep!"
@@ -47,86 +48,88 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
     "[the_girl.title]'s tight cunt draws you closer to your orgasm with each thrust. You finally pass the point of no return and speed up, fucking her as hard as you can manage."
     $the_girl.call_dialogue("sex_responses_vaginal")
     mc.name "Ah, I'm going to cum!"
-    menu:
-        "Cum inside of her":
-            if stealth_orgasm:  #You sly dog
-                "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
-                the_girl "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
-                $ the_girl.cum_in_vagina()
-                $ doggy.redraw_scene(the_girl)
-                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
-                "After you finish, you leave your cock deep inside her. A few drops of your cum start to drip out of her."
-                "[the_girl.title] reaches between her legs and feels it, realizing you just finished inside of her."
-                if the_girl.has_role(prostitute_role):
-                    if the_girl.on_birth_control:
-                        the_girl "What the FUCK? You took the condom off? And then came inside me!?! I know I'm just a working girl, but you can't treat me like this."
-                    else:
-                        the_girl "What? You took the condom off? And then came inside me!?! Fuck, I could get pregnant, not all working girls take birth control, you asshole!"
-                    $ the_girl.change_happiness(-5)
-                    $ the_girl.change_obedience(3)
-                    $ the_girl.change_love(-5)          #She loses trust
-                elif the_girl.wants_creampie():         #She likes creampies...
-                    the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
-                    $ the_girl.discover_opinion("creampies")
-                    if the_girl.on_birth_control:
-                        the_girl "Oh god that's so hot. I love feeling cum deep inside me."
-                    else:
-                        the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
-                    $ the_girl.change_happiness(2)
-                    $ the_girl.change_obedience(3)
-                elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
-                    the_girl "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
-                    $ the_girl.change_obedience(3)
-                else:                                                   #She gets pissed
-                    if the_girl.on_birth_control:
-                        the_girl "What the FUCK? You took the condom off? And then came inside me!?! You asshole!"
-                    else:
-                        the_girl "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
-                    $ the_girl.change_happiness(-5)
-                    $ the_girl.change_obedience(3)
-                    $ the_girl.change_love(-5)          #She loses trust
-                    "You planted your seed inside of [the_girl.possessive_title], but it is clear she isn't happy about it."
-                "You slowly pull out of [the_girl.title]. Your cum is dripping down her leg as you sit back."
-                $ stealth_orgasm = False                #MAke sure we set this to false so next sex session doesn't get confused
-            elif mc.condom:
-                "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps as you dump your load into her, barely contained by your condom."
-                "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
-                if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
-                    $ the_girl.discover_opinion("drinking cum")
-                    "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
-                    the_girl "It would be a shame to waste all of this, right?"
-                    "She winks and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
-                else:
-                    "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot."
-                    the_girl "Look at all that cum. Well done."
-                "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
-            else:
-                $ stealth_orgasm = False
-                "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
-                $ the_girl.call_dialogue("cum_vagina")
-                $ the_girl.cum_in_vagina()
-                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
-                $ doggy.redraw_scene(the_girl)
 
-                "You wait until your orgasm has passed completely, then pull out and sit back. Your cum starts to drip out of [the_girl.title]'s slit almost immediately."
+    $ climax_controller = ClimaxController(["Cum inside of her","pussy"], ["Cum on her ass", "body"])
+    $ the_choice = climax_controller.show_climax_menu()
 
-        "Cum on her ass":
-            $ stealth_orgasm = False
-            if mc.condom:
-                "You pull out of [the_girl.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."
-                "She holds still for you as you cover her with your warm sperm."
-            else:
-                "You pull out of [the_girl.title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
-            $ the_girl.cum_on_ass()
+    if the_choice == "Cum inside of her":
+        if stealth_orgasm:  #You sly dog
+            "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
+            the_girl "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
+            $ the_girl.cum_in_vagina()
             $ doggy.redraw_scene(the_girl)
-            $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
-            if the_girl.sluttiness > 120:
-                the_girl "What a waste, you should have put that inside of me."
-                "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
+            $ climax_controller.do_clarity_release(the_girl)
+            "After you finish, you leave your cock deep inside her. A few drops of your cum start to drip out of her."
+            "[the_girl.title] reaches between her legs and feels it, realizing you just finished inside of her."
+            if the_girl.has_role(prostitute_role):
+                if the_girl.on_birth_control:
+                    the_girl "What the FUCK? You took the condom off? And then came inside me!?! I know I'm just a working girl, but you can't treat me like this."
+                else:
+                    the_girl "What? You took the condom off? And then came inside me!?! Fuck, I could get pregnant, not all working girls take birth control, you asshole!"
+                $ the_girl.change_happiness(-5)
+                $ the_girl.change_obedience(3)
+                $ the_girl.change_love(-5)          #She loses trust
+            elif the_girl.wants_creampie():         #She likes creampies...
+                the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
+                $ the_girl.discover_opinion("creampies")
+                if the_girl.on_birth_control:
+                    the_girl "Oh god that's so hot. I love feeling cum deep inside me."
+                else:
+                    the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
+                $ the_girl.change_happiness(2)
+                $ the_girl.change_obedience(3)
+            elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
+                the_girl "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
+                $ the_girl.change_obedience(3)
+            else:                                                   #She gets pissed
+                if the_girl.on_birth_control:
+                    the_girl "What the FUCK? You took the condom off? And then came inside me!?! You asshole!"
+                else:
+                    the_girl "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
+                $ the_girl.change_happiness(-5)
+                $ the_girl.change_obedience(3)
+                $ the_girl.change_love(-5)          #She loses trust
+                "You planted your seed inside of [the_girl.possessive_title], but it is clear she isn't happy about it."
+            "You slowly pull out of [the_girl.title]. Your cum is dripping down her leg as you sit back."
+        elif mc.condom:
+            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps as you dump your load into her, barely contained by your condom."
+            $ climax_controller.do_clarity_release(the_girl)
+            "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
+            if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                $ the_girl.discover_opinion("drinking cum")
+                "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
+                the_girl "It would be a shame to waste all of this, right?"
+                "She winks and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
+                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
             else:
-                the_girl "Oh wow, there's so much of it..."
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl.title] covered in your semen."
+                "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot."
+                the_girl "Look at all that cum. Well done."
+            "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
+        else:
+            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
+            $ the_girl.call_dialogue("cum_vagina")
+            $ the_girl.cum_in_vagina()
+            $ climax_controller.do_clarity_release(the_girl)
+            $ doggy.redraw_scene(the_girl)
+
+            "You wait until your orgasm has passed completely, then pull out and sit back. Your cum starts to drip out of [the_girl.title]'s slit almost immediately."
+
+    elif the_choice == "Cum on her ass":
+        if mc.condom:
+            "You pull out of [the_girl.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."
+            "She holds still for you as you cover her with your warm sperm."
+        else:
+            "You pull out of [the_girl.title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+        $ the_girl.cum_on_ass()
+        $ doggy.redraw_scene(the_girl)
+        $ climax_controller.do_clarity_release(the_girl)
+        if the_girl.sluttiness > 120:
+            the_girl "What a waste, you should have put that inside of me."
+            "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
+        else:
+            the_girl "Oh wow, there's so much of it..."
+        "You sit back and sigh contentedly, enjoying the sight of [the_girl.title] covered in your semen."
+
     $ stealth_orgasm = False
     return
 

@@ -193,7 +193,7 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.identifier = property(get_person_identifier, None, None, "Unique identifier for person class.")
 
-    # generic function to get a person by its identifier
+    # generic function to get a person by it's identifier
     def get_person_by_identifier(identifier):
         return next((x for x in all_people_in_the_game() if x.identifier == identifier), None)
 
@@ -1424,6 +1424,14 @@ init -1 python:
 
     Person.hide_person = hide_person_enhanced
 
+    def is_person_at_work(self): #Checks to see if the character is at work.
+        if not self.work:
+            return False
+
+        return self.location in [mc.business.m_div, mc.business.p_div, mc.business.r_div, mc.business.s_div, mc.business.h_div]
+
+    Person.is_at_work = is_person_at_work
+
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
@@ -1484,11 +1492,14 @@ init -1 python:
 
     def has_role(self, role):
         if isinstance(role, basestring):
-            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None
+            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None \
+                or not find_in_list(lambda x: x.parent_role and x.parent_role.role_name == role, self.special_role) is None
         elif isinstance(role, list):
-            return any(x in self.special_role for x in role)
+            return any(x in self.special_role for x in role) \
+                or any(x.parent_role in self.special_role for x in role)
         else:
-            return role in self.special_role
+            return role in self.special_role \
+                or role.parent_role in self.special_role
     Person.has_role = has_role
 
     def add_role(self, role):
@@ -1585,27 +1596,38 @@ init -1 python:
     Person.is_wearing_uniform = person_is_wearing_uniform
 
     def should_wear_uniform_enhanced(self):
-        if not mc.business.is_open_for_business():  # quick exit
+        if not mc.business.is_open_for_business():
             return False
 
-        #Check to see if we are: 1) Employed by the PC. 2) At work right now. 3) there is a uniform set for our department.
-        employment_title = mc.business.get_employee_title(self)
-        if employment_title != "None" and self.location == self.work: # is she really at work?
-            if mc.business.get_uniform_wardrobe(employment_title).get_count() > 0 or self.event_triggers_dict.get("forced_uniform", False): #Check to see if there's anything stored in the uniform section.
-                return True
+        if mc.business.get_employee_title(self) == "None":
+            return False
 
-        return False #If we fail to meet any of the above conditions we should return false.
+        if not self.is_at_work():
+            return False
+
+        if self.event_triggers_dict.get("forced_uniform", False):
+            return True
+
+        wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+        if wardrobe and wardrobe.get_count() > 0:  #Check to see if there's anything stored in the uniform section.
+            return True
+
+        return False
 
     Person.should_wear_uniform = should_wear_uniform_enhanced
 
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
-        self.outfit.remove_all_cum()
-        if self.should_wear_uniform():
-            self.wear_uniform() # Reset uniform
-        elif self.outfit.slut_requirement > self.sluttiness:
+        if not self.has_cum_fetish():
+            self.outfit.remove_all_cum()
+
+        if (self.should_wear_uniform() and not self.is_wearing_uniform()) \
+            or (self.outfit.slut_requirement > self.sluttiness):
             self.apply_planned_outfit()
+            if draw_person:
+                self.draw_person()            
             if dialogue:
                 self.call_dialogue("clothing_review") # must be last call in function
+        return
 
     Person.review_outfit = review_outfit_enhanced
 
@@ -1652,6 +1674,8 @@ init -1 python:
     Person.apply_yoga_shoes = apply_yoga_shoes
 
     def apply_planned_outfit(self):
+        self.restore_all_clothing() # restore half-off clothing items of current outfit.
+
         if self.should_wear_uniform():
             self.wear_uniform()
         elif self.should_wear_work_outfit():
@@ -1921,6 +1945,11 @@ init -1 python:
         return self.wardrobe.decide_on_outfit2(self, sluttiness_modifier)
 
     Person.decide_on_outfit = person_decide_on_outfit
+
+    def person_get_random_appropriate_outfit(self, guarantee_output = False):
+        return self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), guarantee_output = guarantee_output, preferences = WardrobePreference(self))
+    
+    Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
     def person_get_full_strip_list(self, strip_feet = True, strip_accessories = False):
         return self.outfit.get_full_strip_list(strip_feet, strip_accessories)
@@ -2291,6 +2320,8 @@ init -1 python:
 ##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
 
     def change_to_lingerie(self):
+        if self.event_triggers_dict.get("girlfriend_sleepover_lingerie", None):
+            self.apply_outfit(self.event_triggers_dict.pop("girlfriend_sleepover_lingerie"))
         if self.event_triggers_dict.get("favorite_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.get("favorite_lingerie", None))
         elif len(self.wardrobe.underwear_sets) > 0:

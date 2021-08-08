@@ -245,6 +245,10 @@ init 5 python:
         if mc.business.hr_director:
             HR_dir_factor = ((person.charisma * 2 ) + person.hr_skill)   #Charisma + HR skill
             #TODO make events later on that factor this to be better
+            if mc.business.IT_project_is_active(hr_task_manager_project):
+                for hr_person in mc.business.HR_employee_list:
+                    if hr_person != mc.business.hr_director:
+                        HR_dir_factor += round(((hr_person.charisma * 2 ) + hr_person.hr_skill) / 2)
         HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
         mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
         return
@@ -574,7 +578,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif HR_tier_talk == 1:
         the_person "Things are running pretty good right now, but they could always be better. Here's my list, who do you want me to call in?"
     elif HR_tier_talk == 2:
-        the_person "Honestly? All the girls here like all the policies I've looked at, but its possible with a bit of persuasion we could make them love them."
+        the_person "Honestly? All the girls here like all the policies I've looked at, but it's possible with a bit of persuasion we could make them love them."
         the_person "Here's my list. Who do you want me to call in?"
 
     # use new menu layout for selecting people
@@ -608,7 +612,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]. She clearly notices your cum still on her."
         $ mc.change_locked_clarity(20)
         if person_choice.sluttiness > 80:
-            person_choice "Wow, not sure why you called me in here, but I hope its for the same thing you have her in here for..."
+            person_choice "Wow, not sure why you called me in here, but I hope it's for the same thing you have her in here for..."
         else:
             person_choice "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
         $ person_choice.change_slut_temp(5) # give her a temp slut boost to maybe have a threesome later...
@@ -619,7 +623,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
-        "[person_choice.title] sits down across from you, but is clearly distracted by the tits of [the_person.title]."
+        "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
         $ person_choice.change_slut_temp(1)
         person_choice "Oh...what can I do for you, [person_choice.mc_title]."
 
@@ -1093,6 +1097,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             mc.name "You were right, [the_person.title]. It IS really hot to fuck you on my desk!"
             the_person "Ah, yes, I suspected it would be, sir!"
             $ the_person.apply_planned_outfit()
+            $ set_HR_director_unlock("missionary on desk", True)
             $ scene_manager.update_actor(the_person, position = "stand3")
             "Eventually she cleans herself up and makes herself presentable again."
             return
@@ -1126,7 +1131,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ the_person.break_taboo("condomless_sex")
                 $ the_person.break_taboo("vaginal_sex")
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
-                the_person "Oh God! its going so deep."
+                the_person "Oh God! It's going so deep."
                 $ mc.change_arousal(20)
                 "You give her ass a solid spank, then begin to fuck her roughly."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four

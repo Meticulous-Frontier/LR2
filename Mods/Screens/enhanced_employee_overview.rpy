@@ -228,3 +228,16 @@ init 2:
                     focus_mask im.Scale("gui/button/choice_idle_background.png", 400, 80)
                     action Hide("employee_overview")
                 textbutton "Return" align [0.5,0.5] style "return_button_style"
+        if mc.business.college_interns_unlocked:
+            frame:
+                background None
+                anchor [0.5,0.5]
+                align [0.8,0.94]
+                xysize [400,80]
+                imagebutton:
+                    align [0.5,0.5]
+                    idle im.Scale("gui/button/choice_idle_background.png", 400, 80)
+                    hover im.Scale("gui/button/choice_hover_background.png", 400, 80)
+                    focus_mask im.Scale("gui/button/choice_idle_background.png", 400, 80)
+                    action [Hide("employee_overview"), Show("intern_overview_screen")]
+                textbutton "Interns" align [0.5,0.5] style "return_button_style"

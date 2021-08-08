@@ -163,15 +163,15 @@ label sister_failed_test_label():
         menu:
             "Ask for handjob" if mc.energy > 50:
                 the_person "Okay... I can do that."
-                "Her hand goes under the covers and onto your chest. She slowly rubs your body with her hand as it works its way south."
+                "Her hand goes under the covers and onto your chest. She slowly rubs your body with her hand as it works it's way south."
                 "When she gets to your underwear, you lift your hips up a bit as [the_person.title] pulls them down, setting your erection free."
                 if the_person.has_taboo("touching_penis"):
                     "[the_person.possessive_title] begins to falter a bit. You can sense her hesitation to touch you."
                     the_person "Are you sure... this is okay? I feel like we are really crossing a line here..."
-                    mc.name "Its okay. It feels so good, don't you want to make me feel good?"
+                    mc.name "It's okay. It feels so good, don't you want to make me feel good?"
                     the_person "Yes... of course I want to... I just..."
                     "You take her hand in yours. She looks at you and bites her lip. You slowly move her hand down until your cock is resting in her palm."
-                    the_person "Oh my god... its so... warm..."
+                    the_person "Oh my god... it's so... warm..."
                     "Her hand starts to stroke you."
                     $ the_person.break_taboo("touching_penis")
                     $ mc.change_arousal(15)
@@ -189,7 +189,7 @@ label sister_failed_test_label():
                 if the_person.has_taboo("sucking_cock"):
                     "[the_person.title] takes your cock in her hand and gives it a couple strokes, but you can tell she is hesitating to go any further."
                     the_person "Are you sure... this is okay? I mean... I'm about to put my brother's cock in my mouth!"
-                    mc.name "Its okay. Its going to feel so good, don't you want to make me feel good?"
+                    mc.name "It's okay. It's going to feel so good, don't you want to make me feel good?"
                     the_person "Yeah... I mean... you were very helpful tonight..."
                     "She pauses for several seconds. You start to get worried she is going to back out."
                     the_person "Okay. Just this once, okay?"
@@ -203,7 +203,7 @@ label sister_failed_test_label():
                     "[the_person.title] takes your cock in her hand and gives it a couple strokes."
                     the_person "Mmm, god it feels so hard. It feels like you really need to get off."
                     mc.name "I know. This is what you do to me [the_person.title]."
-                    the_person "Ahh, so this is my fault? I suppose its only fair that I help you with this problem then."
+                    the_person "Ahh, so this is my fault? I suppose it's only fair that I help you with this problem then."
                     "[the_person.possessive_title] lowers her face until you can feel her breath on your aching cock."
                     "[the_person.title] opens her mouth and runs her tongue along the tip, tasting your precum. The attention makes your penis twitch with need."
                     mc.name "[the_person.title]... please..."
@@ -246,10 +246,13 @@ label sister_failed_test_label():
                     "She opens the package, then skillfully slides the condom down your penis."
                     the_person "Mmm, now we're ready!"
                     $ mc.condom = True
+                elif the_person.has_breeding_fetish():
+                    "She gives your cock a couple strokes."
+                    the_person "Mmm... it's so hard. Do you have a good load saved up for me? I can't wait to feel it splash inside me..."
                 elif the_person.has_taboo("condomless_sex"):
                     the_person "So... I know we've never really done this before but... do you think we could skip the condom?"
                     mc.name "If that is a risk you are willing to take, I'm okay with that [the_person.title]."
-                    the_person "I know its a little risky... I just... I want to feel you inside me, with no latex sleeve between us..."
+                    the_person "I know it's a little risky... I just... I want to feel you inside me, with no latex sleeve between us..."
                     $ mc.condom = False
                     $ the_person.change_arousal(15)
                     $ mc.change_locked_clarity(50)

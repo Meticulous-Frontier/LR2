@@ -99,9 +99,9 @@ init 2 python:
         else:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
 
-            random = renpy.random.randint(12,18)
+            random = renpy.random.randint(10, 14)
             preg_announce_action = Action("Pregnancy Announcement", (preg_announce_requirement if not bugfix_installed else pregnant_announce_requirement), target_label, requirement_args = day + random)
-            person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, (5 * random) + 12))
+            person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, (5 * random) + (5 * 5))) #LTA is turns valid, not days (5 slots per day), yield 5 days after it becomes active
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
             person.event_triggers_dict["preg_knows"] = True

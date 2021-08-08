@@ -63,7 +63,7 @@ label production_failure_action_label:
             $ mc.location.show_background()
 
             $ ran_num = renpy.random.randint(0,100)
-            if ran_num > 45: # 55% chance its a mixture that alters behavior (slutty)
+            if ran_num > 45: # 55% chance it's a mixture that alters behavior (slutty)
                 "For the first half hour everything seems fine, but then you notice a sudden shift in behavior."
                 "The girls are clearly hot and bothered. They barely keep their focus on their work. Spending much of their time eyeing you and each other."
 
@@ -89,7 +89,7 @@ label production_failure_action_label:
                 "The girls seem slightly more respectful."
             elif ran_num > 15: # 15% chance
                 "Everyone appears fine, there doesn't seem to be an effect."
-            else: # 15% chance its a foul mixture
+            else: # 15% chance it's a foul mixture
                 $ production_failure_change_obedience(the_person, -5)
                 "The mood of all the girls turn sour. They spend the next few hours bickering about petty nonsense."
     return

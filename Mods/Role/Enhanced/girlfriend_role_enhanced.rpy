@@ -2,7 +2,7 @@
 #Roleplays: These are scenes that will involve your girlfriend pretending to be someone/something else. Designed to take the place of the initial fucking scene.
 
 init 2 python:
-    girlfriend_morning_action_list = []     #Requirement functions can check mc.location to tell if its myplace/yourplace if necessary.
+    girlfriend_morning_action_list = []     #Requirement functions can check mc.location to tell if it's myplace/yourplace if necessary.
     girlfriend_sleepover_interruption_list = []     #Ideas, daughter/mother walk in, phone call,
     girlfriend_roleplay_list = []           #When a roleplay is created, add it here as an option. list of ACTIONS
 
@@ -86,11 +86,14 @@ label activate_girlfriend_role_enhancement(stack):
     python:
         girlfriend_role.add_action(girlfriend_sleepover_action)
         girlfriend_role.add_action(girlfriend_underwear_shopping)
+
+        sister_girlfriend_role.add_action(girlfriend_underwear_shopping)
+        mom_girlfriend_role.add_action(girlfriend_underwear_shopping)
+
         execute_hijack_call(stack)
     return
 
 label girlfriend_myplace_yourplace_label(the_person):
-    $ show_wip_screen(girlfriend_role_sleepover_feature)
     mc.name "So, I'm kinda busy right now, but I thought that maybe later we could get together."
     the_person "Mmm, that sounds like fun. My place or yours?"
     menu:
@@ -107,11 +110,9 @@ label girlfriend_myplace_yourplace_label(the_person):
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.add_mandatory_crisis(girlfriend_sleepover)
-    $ hide_wip_screen()
     return
 
 label girlfriend_sleepover_label():
-    $ show_wip_screen(girlfriend_role_sleepover_feature)
     $ the_person = schedule_sleepover_get_girlfriend_person()
     if the_person == None:
         return
@@ -274,7 +275,6 @@ label girlfriend_sleepover_label():
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = False  #Reset these so we can have another girlfriend sleepover.
-    $ hide_wip_screen()
     return
 
 label girlfriend_wakeup_spooning_label(the_person):
@@ -353,7 +353,7 @@ label girlfriend_wakeup_spooning_label(the_person):
             $ the_person.draw_person( position = "back_peek")
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
             "You pull out at the last second. Large, thick ropes of cum rocket out of your cock, coating her ass."
-            the_person "Oh my god... its so warm!"
+            the_person "Oh my god... it's so warm!"
             "When you finish you lay back, admiring your painting skills."
             the_person "That's certainly one way to start the day..."
     $ the_person.reset_arousal()
@@ -388,7 +388,7 @@ label girlfriend_roleplay_step_sister_label(the_person):
         "The roleplaying has begun..."
         mc.name "It's me, [the_person.title]. What's going on?"
         "She is bent over and has her head in the sink."
-        the_person "Oh thank god its you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
+        the_person "Oh thank god it's you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
         mc.name "You got your hair stuck in the sink, again!?! How does this keep happening [the_person.title]?"
         "Her hips start to wiggle a bit as you approach her."
         $ mc.change_locked_clarity(30)
@@ -422,7 +422,7 @@ label girlfriend_underwear_shopping_label(the_person):
     "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
     $ mc.change_location(clothing_store)
     $ mc.location.show_background()
-    "Normally this would be a bit awkward by yourself, but with [the_person.title], its not so bad..."
+    "Normally this would be a bit awkward by yourself, but with [the_person.title], it's not so bad..."
     the_person "Hmm, how should we do this? Want me to pick something out first? Or do you want to?"
     $ lingerie_outfit = None
     $ done = False
@@ -562,7 +562,7 @@ label girlfriend_underwear_shopping_label(the_person):
                     $ the_person.event_triggers_dict["student_lingerie"] = lingerie_outfit
                     the_person "Ahhh, oh teacher? I'm sorry I forgot to study! What can I do to pass this class?"
                     mc.name "You've got exactly the right idea."
-                "Roleplay: My ditzy stepsister":
+                "Roleplay: My ditzy stepsister" if not the_person.has_role(sister_girlfriend_role):
                     $ the_person.event_triggers_dict["stepsister_lingerie"] = lingerie_outfit
                     if the_person.get_opinion_score("incest") > 0:
                         the_person "Oh! That sounds hot... What are you going to do to me... step bro?"
@@ -578,6 +578,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 "Come over":
                     mc.name "I'd like to see this outfit in action. My place, say 9pm?"
                     the_person "Okay! See you then!"
+                    $ the_person.event_triggers_dict["girlfriend_sleepover_lingerie"] = lingerie_outfit
                     $ schedule_sleepover_in_story(the_person)
                 "Another time":
                     mc.name "Sorry, I'm running behind on work stuff. Another time, and soon."

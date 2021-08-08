@@ -131,6 +131,8 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
             $ the_sister.change_happiness(5)
             "You get some great pictures of [the_mom.title] and [the_sister.title] playing around on the bed together."
 
+        "Bring up [the_sister.title]'s boobs" if the_person.event_triggers_dict.get("sister_boobjob_convince_mom_enabled", False):
+            call sister_convince_mom_boobjob(the_mom, the_sister) from _call_from_sister_convince_mom_boobjob_enhanced
 
         # TODO: Add some extra variations for this as sluttiness and Obedience rises.
         "All done":
@@ -142,11 +144,14 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     the_mom "That was really fun, thanks for inviting me you two."
     $ scene_manager.update_actor(the_sister, position = "stand3")
     the_sister "It was! Oh, I should give [the_sister.mc_title] his cut for being our photographer."
+    $ money_amount = 100 + 50*(rank_tits(the_sister.tits)-4) + 50*(rank_tits(the_mom.tits)-4)
+    if money_amount < 50:
+        $ money_amount = 50
 
     menu:
-        "Take the money\n{color=#00ff00}{size=18}Income: $100{/size}{/color}":
+        "Take the money\n{color=#00ff00}{size=18}Income: $[money_amount]{/size}{/color}":
             the_mom "It's so nice to see you two working well together."
-            $ mc.business.funds += 100
+            $ mc.business.funds += money_amount
 
         "Let her keep it":
             mc.name "Don't worry about it, I'm just happy to see you doing something cool."

@@ -10,7 +10,7 @@ init python: #For now default init. May change later if we know better.
     class Side_Quest(renpy.store.object):
         def __init__(self, quest_name, quest_init_label, quest_tracker, start_requirement, quest_cleanup):
             #TODO
-            self.quest_name = quest_name #Not sure if we even need this but its here for now.
+            self.quest_name = quest_name #Not sure if we even need this but it's here for now.
             self.quest_init_label = quest_init_label #Run this function if this quest is selected to begin.
             self.quest_tracker = quest_tracker #Run this function every turn to update quest status. Needs to assign appropriate events, crisis, actions, etc. and remove them as necessary.
             self.start_requirement = start_requirement #This function determines if the side quest is available to be run.

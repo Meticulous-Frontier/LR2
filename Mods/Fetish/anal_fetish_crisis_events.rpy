@@ -59,7 +59,7 @@ label aggressive_anal_fetish_employee_label():
     $ mc.change_locked_clarity(20)
     $ the_person.draw_person(position = "kissing")
     if the_person.obedience < 100:
-        the_person "I don't know how long it's been since you've been in my ass, but its been too long!"
+        the_person "I don't know how long it's been since you've been in my ass, but it's been too long!"
         "She pushes you back onto the desk."
         if the_person.vagina_available():
             the_person "Don't worry, I'll take care of everything, you just lay back."
@@ -70,7 +70,7 @@ label aggressive_anal_fetish_employee_label():
         call get_fucked(the_person,  private= True, start_position = SB_anal_cowgirl) from _call_get_fucked_SBA100
     else:
         "She looks up at you and bats her eye lashes."
-        the_person "I... I just really need you in my ass. I don't know how longs its been, but its been too long!"
+        the_person "I... I just really need you in my ass. I don't know how longs it's been, but it's been too long!"
         the_person "Please? I'll take care of everything, all you have to do is lay back."
         $ mc.change_locked_clarity(50)
         menu:

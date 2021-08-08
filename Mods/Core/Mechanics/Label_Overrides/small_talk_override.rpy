@@ -61,7 +61,11 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
                 "She seems uncomfortable with making small talk, but after a little work you manage to get her talking."
 
         python:
-            opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
+            # remove randomness for dark chocolate opinion
+            if person.get_opinion_score("dark chocolate") != person.get_known_opinion_score("dark chocolate"):
+                opinion_learned = "dark chocolate"
+            else:
+                opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
             talk_opinion_text = opinion_learned
             if opinion_learned in opinions_talk_mapping:
                 talk_opinion_text = opinions_talk_mapping[opinion_learned]

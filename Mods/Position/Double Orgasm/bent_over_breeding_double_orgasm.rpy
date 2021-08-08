@@ -3,7 +3,7 @@ init 5 python:
 
 label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
     "[the_girl.title]'s back is arched and she is moaning non stop. Her ass quakes with every rapid thrust."
-    the_girl "Oh god its so good! Oh [the_girl.mc_title] I'm gonna cum!"
+    the_girl "Oh god it's so good! Oh [the_girl.mc_title] I'm gonna cum!"
     "Hearing her call out your name is pushing you over the edge. You are about to cum too."
     mc.name "I'm cumming too!"
     $ the_girl.call_dialogue("cum_pullout")
@@ -28,7 +28,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
         if the_girl.has_breeding_fetish():
             "[the_girl.possessive_title] pushes herself back tightly against you, forcing your cum as deep as she can."
-            the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god its so good..."
+            the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god it's so good..."
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
         elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."

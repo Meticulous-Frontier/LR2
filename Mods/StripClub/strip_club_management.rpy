@@ -198,7 +198,7 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     the_person "But here, in our city, there's nothing like it... yet!"
     mc.name "What do you mean by 'BDSM shows'?"
     the_person "Well, you know there are girls who like to submit themselves completely to their partners during sex, right?"
-    "Your mind wanders of for a bit, of course you know, you know very well!"
+    "Your mind wanders off for a bit, of course you know, you know very well!"
     the_person "And you know that almost every girl, more or less, likes to show herself off, right?"
     "You don't even try to hide your smile, you know that too..."
     the_person "So, in a BDSM show girls submit themselves completely to their partners in a public place like this, showing off their obedience and devotion to their Master."

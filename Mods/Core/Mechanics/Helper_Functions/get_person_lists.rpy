@@ -46,6 +46,14 @@ init -1 python:
             not_met_yet_list.append(sarah)
         if "starbuck" in globals() and starbuck.event_triggers_dict.get("starbuck_intro_complete", False) == False:
             not_met_yet_list.append(starbuck)
+        if "camilla" in globals() and camilla.mc_title == 'Stranger':
+            not_met_yet_list.append(camilla)
+        if "kaya" in globals() and kaya.mc_title == 'Stranger':
+            not_met_yet_list.append(kaya)
+        if "sakari" in globals() and sakari.mc_title == 'Stranger':
+            not_met_yet_list.append(sakari)
+        if "ellie" in globals() and ellie.mc_title == 'Stranger':
+            not_met_yet_list.append(ellie)
         return not_met_yet_list
 
     @lru_cache_function(max_size=10, expiration=3)

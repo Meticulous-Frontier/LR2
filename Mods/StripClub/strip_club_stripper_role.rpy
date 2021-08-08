@@ -105,8 +105,6 @@ init 5 python:
         return False
 
     def strip_club_hire_employee_requirement(person):
-        if person.has_role([casual_hotwife_role, casual_FA_role]):
-            return False
         if person.has_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
             return False
         if person.is_employee() or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action

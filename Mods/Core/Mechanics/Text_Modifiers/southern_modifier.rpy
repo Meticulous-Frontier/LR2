@@ -23,10 +23,13 @@ init 5 python:
         "said": "sayd",
         "sweet": "swate",
         "yellow": "yellah",
-        "hello": "howdie",
-        "i": "aah",
+        "hello": "howdy",
+        #"i": "ah",
+        "a": "uh",
         "you": "yah",
-        "it": "aht",
+        #"it": "aht",
+        "to": "tuh",
+        #"the": "thu",
         "nice": "fine",
         "your": "yahr",
         "like": "lac",
@@ -43,12 +46,22 @@ init 5 python:
         "pants": "britches",
         "darn": "dagnabit",
         "himself": "hisself",
-        "yes": "yessir"
+        "yes": "yessir",
+        "something": "sumthing",
+        "things": "thangs",
+        "because": "cuz",
+        "love": "luv",
+        "what": "whut",
+        "want": "wonna",
+        "nothing": "nuthing",
     }
 
     # letter replace (in word)
     southern_replace_dict = {
-        "ing": "in'"
+        "ing": "in'",
+        "some": "sum",
+        "other": "uther",
+        "irst": "ursd"
     }
 
     # word group replacer
@@ -73,7 +86,7 @@ init 5 python:
         "very good": "real good",
         "yes sir": "yes", # replace with yes (word replacer will make it yessir)
         " is ": " ",   # often dropped in southern accent
-        " are ": " ",  # often dropped in southern accent
+        " are ": "'re ",  # should result in (those are -> those're)
     }
 
     def southern_belle(person, what):

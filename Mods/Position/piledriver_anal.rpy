@@ -31,7 +31,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
     "[the_girl.possessive_title] nods, glancing briefly at the bulge in your pants. She gets onto the [the_object.name] and waits for you."
     the_girl "How's this?"
     "You get your hard cock out and kneel down in front of her. She yelps in surprise when you grab her ankles and bring them up and over her waist."
-    the_girl "Oh god, its crazy when you fuck my pussy like this."
+    the_girl "Oh god, it's crazy when you fuck my pussy like this."
     mc.name "I'm not fucking your pussy."
     "Your run your cock along her slit a few times, getting it lubricated. She understands what you mean after a few seconds."
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:

@@ -49,43 +49,45 @@ label outro_deepthroat_enhanced(the_girl, the_location, the_object):
     $ deepthroat.current_modifier = "blowjob"
     $ deepthroat.redraw_scene(the_girl)
     "The warm, tight feeling of [the_girl.title]'s throat wrapped around your shaft pulls you closer and closer to orgasm. You feel yourself pass the point of no return and let out a soft moan."
-    menu:
-        "Cum on her face":
-            mc.name "Fuck, here I come!"
-            $ deepthroat.current_modifier = None
-            $ deepthroat.redraw_scene(the_girl)
-            call blowjob_enhanced_kneel_face_cum(the_girl) from _call_blowjob_enhanced_kneel_face_cum_outro_deepthroat
-        "Cum in her mouth":
-            $ blowjob.current_modifier = "blowjob"
-            $ blowjob.redraw_scene(the_girl)
-            mc.name "Fuck, I'm about to cum! I'm going to fill that cute mouth of yours up!"
-            "You keep your hand on the back of [the_girl.title]'s head to make it clear you want her to keep sucking."
-            call blowjob_enhanced_kneel_mouth_cum(the_girl) from _call_blowjob_enhanced_kneel_mouth_cum_outro_deepthroat
-        "Cum down her throat":
-            mc.name "Fuck, here I come!"
-            $ blowjob.current_modifier = "blowjob"
-            $ blowjob.redraw_scene(the_girl)
-            "You use your hand on the back of [the_girl.title]'s head to hold her in place, with your cock far in to her mouth."
-            "You grunt and twitch as you start to empty your balls past her tongue and into her stomach."
-            call blowjob_enhanced_kneel_throat_cum(the_girl) from _call_blowjob_enhanced_kneel_throat_cum_outro_deepthroat
+
+    $ climax_controller = ClimaxController(["Cum on her face", "face"],["Cum in her mouth", "mouth"],["Cum down her throat", "throat"])
+    $ the_choice = climax_controller.show_climax_menu()
+
+    if the_choice == "Cum on her face":
+        mc.name "Fuck, here I come!"
+        $ deepthroat.current_modifier = None
+        $ deepthroat.redraw_scene(the_girl)
+        call blowjob_enhanced_kneel_face_cum(the_girl) from _call_blowjob_enhanced_kneel_face_cum_outro_deepthroat
+    elif the_choice == "Cum in her mouth":
+        $ blowjob.current_modifier = "blowjob"
+        $ blowjob.redraw_scene(the_girl)
+        mc.name "Fuck, I'm about to cum! I'm going to fill that cute mouth of yours up!"
+        "You keep your hand on the back of [the_girl.title]'s head to make it clear you want her to keep sucking."
+        call blowjob_enhanced_kneel_mouth_cum(the_girl) from _call_blowjob_enhanced_kneel_mouth_cum_outro_deepthroat
+    elif the_choice == "Cum down her throat":
+        mc.name "Fuck, here I come!"
+        $ blowjob.current_modifier = "blowjob"
+        $ blowjob.redraw_scene(the_girl)
+        call blowjob_enhanced_kneel_throat_cum(the_girl) from _call_blowjob_enhanced_kneel_throat_cum_outro_deepthroat
     return
 
 label outro_skull_fuck_enhanced(the_girl, the_location, the_object):
     "[the_girl.title]'s warm, wet throat wrapped around your cock sends shivers up your spine and the sound of her gagging on your dick pushes you past your limits."
     "You have a brief moment to consider how you want to finish as you jackhammer yourself in and out of her mouth."
-    menu:
-        "Cum on her face":
-            mc.name "Fuck, here I come!"
-            $ deepthroat.current_modifier = None
-            $ deepthroat.redraw_scene(the_girl)
-            call blowjob_enhanced_kneel_face_cum(the_girl) from _call_blowjob_enhanced_kneel_face_cum_outro_skull_fuck
-        "Cum down her throat":
-            mc.name "Fuck, here I come!"
-            $ blowjob.current_modifier = "blowjob"
-            $ blowjob.redraw_scene(the_girl)
-            "You use your hand on the back of [the_girl.title]'s head to pull her close, pushing your cock as deep down her throat as you can manage."
-            "You grunt and twitch as you start to empty your balls right into her stomach."
-            call blowjob_enhanced_kneel_throat_cum(the_girl) from _call_blowjob_enhanced_kneel_throat_cum_outro_skull_fuck
+
+    $ climax_controller = ClimaxController(["Cum on her face", "face"],["Cum down her throat", "throat"])
+    $ the_choice = climax_controller.show_climax_menu()
+
+    if the_choice == "Cum on her face":
+        mc.name "Fuck, here I come!"
+        $ deepthroat.current_modifier = None
+        $ deepthroat.redraw_scene(the_girl)
+        call blowjob_enhanced_kneel_face_cum(the_girl) from _call_blowjob_enhanced_kneel_face_cum_outro_skull_fuck
+    elif the_choice == "Cum down her throat":
+        mc.name "Fuck, here I come!"
+        $ blowjob.current_modifier = "blowjob"
+        $ blowjob.redraw_scene(the_girl)
+        call blowjob_enhanced_kneel_throat_cum(the_girl) from _call_blowjob_enhanced_kneel_throat_cum_outro_skull_fuck
     return
 
 label transition_default_blowjob_enhanced(the_girl, the_location, the_object):
@@ -286,7 +288,6 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
                 $ the_girl.change_arousal(the_girl.get_opinion_score("drinking cum") + the_girl.get_opinion_score("being submissive"))
     return
 
-
 label blowjob_enhanced_kneel_mouth_cum(the_girl):
     if the_girl.get_opinion_score("drinking cum") < 0:
        "[the_girl.title] clearly has other ideas as she brings one hand up to your cock and goes to pull her mouth off of your cock."
@@ -408,7 +409,6 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                 $ blowjob.redraw_scene(the_girl)
                 $ the_girl.call_dialogue("cum_mouth")
     return
-
 
 label blowjob_enhanced_kneel_face_cum(the_girl):
     if the_girl.has_cum_fetish():

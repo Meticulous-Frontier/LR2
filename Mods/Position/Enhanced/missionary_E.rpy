@@ -18,7 +18,7 @@ label scene_missionary_3_enhanced(the_girl, the_location, the_object):
     menu:
         "Give her everything you've got":
             if the_girl.is_girlfriend():
-                mc.name "That's it, you little mynx. God I love fucking your tight cunt..."
+                mc.name "That's it, you little minx. God I love fucking your tight cunt..."
             elif the_girl.is_affair():
                 mc.name "Take it, slut. No man in your life fucks you the way I do."
             elif the_girl.is_single():
@@ -29,7 +29,7 @@ label scene_missionary_3_enhanced(the_girl, the_location, the_object):
             "[the_girl.possessive_title] clings to you as fuck her, harder, faster, stronger."
             "You continue at what seems like an impossible pace for as long as you can."
             the_girl "Oh god [the_girl.mc_title]! OH fuck yes!"
-            "She is moaning your name right in your ear, and its really turning you on."
+            "She is moaning your name right in your ear, and it's really turning you on."
             $ the_girl.change_arousal(10)
             $ mc.change_arousal(10)
         "Tease her":

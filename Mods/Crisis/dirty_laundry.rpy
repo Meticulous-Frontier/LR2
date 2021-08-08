@@ -136,25 +136,27 @@ label dirty_laundry_wash_your_clothes(the_person):
                         $ the_person.draw_person (position = "missionary")
                         the_person "[the_person.mc_title]? Oh god, what are you going to do to me?"
                         "You put your finger over her lips to silence her."
-                        if the_person.outfit.vagina_available():           #If its available no need to strip.
-                            "You lower your face down between her legs. With her pussy exposed you waste no time diving right in"
+                        if the_person.outfit.vagina_available():           #If it's available no need to strip.
+                            "You lower your face down between her legs. With her pussy exposed you waste no time diving right in."
                         else:                                              #Otherwise, strip her down.
-                            "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
+                            "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
+                            if the_person.outfit.can_half_off_to_vagina():
+                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
+                            else:
+                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
 
-                            $ the_person.strip_outfit(exclude_upper = True, position = "missionary")
-
-                            "With her pussy finally exposed you waste no time diving right in"
+                            "With her pussy finally exposed you waste no time diving right in."
                         $ the_person.break_taboo("bare_pussy")
                         $ the_person.break_taboo("licking_pussy")
                         $ mc.change_locked_clarity(10)
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
                         the_person "Oh [the_person.mc_title], you have no idea how bad I need this."
-                        "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole"
+                        "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
                         $ mc.change_locked_clarity(10)
-                        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise"
+                        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
                         the_person "I am so close... you're gonna make me cum!"
                         $ the_person.draw_person(emotion="orgasm", position ="missionary")
-                        "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit"
+                        "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit."
                         "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                         $ mc.change_locked_clarity(10)
                         the_person "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
@@ -313,7 +315,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     the_person "I think umm... I'm gonna retire to my room for the night..."
                     menu:
                         "Masturbate for me" if the_person.obedience >= 130:
-                            mc.name "I mean, its my cum you're using, just get yourself off right here."
+                            mc.name "I mean, it's my cum you're using, just get yourself off right here."
                             "She thinks about it for second, then agrees."
                             the_person "Okay! Just do me a favor and don't get dressed."
                             $ the_person.draw_person( position = "missionary")

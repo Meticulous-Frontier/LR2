@@ -24,7 +24,7 @@ init 1400 python:
             valid_titles.append("Cougar")
         if person.sluttiness > 70:
             valid_titles.append("Old Bitch")
-        if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Harlot")
         return valid_titles
     def cougar_possessive_titles(person):
@@ -34,9 +34,9 @@ init 1400 python:
             valid_possessive_titles.append(person.name)
         if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
-        if person.sluttiness > 100 and (the_person.get_opinion_score("drinking cum") > 0 or the_person.get_opinion_score("being covered in cum") > 0):
+        if person.sluttiness > 100 and (person.get_opinion_score("drinking cum") > 0 or person.get_opinion_score("being covered in cum") > 0):
             valid_possessive_titles.append("Your cum-dump cougar")
-        if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal minx")
         return valid_possessive_titles
     def cougar_player_titles(person):
@@ -246,7 +246,7 @@ label cougar_seduction_accept_crowded(the_person):
             "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
             the_person "Okay, but we need to be careful. I don't think people would understand our relationship. Let's find someplace quiet."
         else:
-            the_person "Oh my [the_person.mc_title] ... why don't you take care of me right here!"
+            the_person "Oh my, [the_person.mc_title] ... why don't you take care of me right here!"
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
@@ -1051,7 +1051,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
-        the_person "Oh my, [the_person.mc_title]? You might want to teach me that someday..."
+        the_person "Oh my [the_person.mc_title]? You might want to teach me that someday..."
         $ the_person.change_slut_temp(2)
         "[title] studies [the_sex_person.name] while you [the_position.verb] her."
 
@@ -1369,7 +1369,7 @@ label cougar_condomless_sex_taboo_break(the_person):
             the_person "You will need to pull out though, I hate having it dripping out of me all day or worse getting pregnant."
 
     elif the_person.love > 60:
-        the_person "If you think you're ready for this commitment, I am to. I want to feel close to you."
+        the_person "If you think you're ready for this commitment, I am too. I want to feel close to you."
         if the_person.get_opinion_score("creampies") > 0:
             the_person "When you're going to finish you don't have to pull out unless you want to. Okay?"
             mc.name "Are you on the pill?"

@@ -351,7 +351,7 @@ label Sarah_flirt_response_mid(the_person):
         the_person "I know we are childhood friends, and obviously I want you to be honest with me, but I'm not sure it's right for you to say stuff like that."
         mc.name "Like what? That you're hot?"
         the_person "I guess I'm just not used to hearing the guy I used to play hide and seek with when I was little call me \"hot\"."
-        mc.name "Well I suppose you'd better get used to, since its true and I'm not going to stop reminding you anytime soon."
+        mc.name "Well I suppose you'd better get used to it, since it's true and I'm not going to stop reminding you anytime soon."
         $ mc.change_locked_clarity(10)
         "[the_person.title] rolls her eyes at you, but you also notice the corner of her mouth turn up in a slight smile."
         the_person "Thanks Romeo, though I will admit it is nice to hear."
@@ -734,6 +734,7 @@ label Sarah_work_enter_greeting(the_person):
 
     else:
         if the_person.sluttiness > 60:
+            $ the_person.draw_person(position = "stand4")
             "[the_person.title] walks over to you when you come into the room."
             the_person "Just the person I was hoping would stop by. I'm here if you need anything."
             "She winks and slides a hand down your chest, stomach, and finally your crotch."
@@ -903,7 +904,7 @@ label Sarah_sucking_cock_taboo_break(the_person):
 label Sarah_licking_pussy_taboo_break(the_person):
     mc.name "I want to taste your pussy [the_person.title]. Are you ready?"
     if the_person.effective_sluttiness() >= 45:
-        the_person "My body is as ready as its ever going to be."
+        the_person "My body is as ready as it's ever going to be."
     elif the_person.love >= 30:
         the_person "I'm not sure if \"ready\" is the right word, but you can keep going."
         the_person "I'm all yours. If you want to do something like that, I'm not going to say no!"
@@ -922,7 +923,7 @@ label Sarah_licking_pussy_taboo_break(the_person):
 
 label Sarah_vaginal_sex_taboo_break(the_person):
         if the_person.effective_sluttiness() >= 60:
-            the_person "Oh my god... its actually happening."
+            the_person "Oh my god... it's actually happening."
             "She looks at you a bit sheepishly."
             the_person "You don't know how long I've fantasized about finally doing this. Let's do it!"
         elif the_person.love >= 45:
@@ -1098,7 +1099,7 @@ label Sarah_creampie_taboo_break(the_person):
 
             else:
                 if the_person.is_highly_fertile():
-                    the_person "Oh my god, its inside me! I'm ovulating right now! This is so risky..."
+                    the_person "Oh my god, it's inside me! I'm ovulating right now! This is so risky..."
                     "She gets goosebumps and sighs."
                     the_person "... but so worth it. I feels so right inside me..."
                 else:

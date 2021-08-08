@@ -176,7 +176,7 @@ init 10 python:
 
         if len(remove_list) > 0:
             for room in remove_list:
-                renpy.say("Warning", "Duplicate room " + room.name + ", game is corrupt, your are advised to start a new game.")
+                renpy.say("Warning", "Duplicate room " + room.name + ", game is corrupt, you are advised to start a new game.")
 
         return
 

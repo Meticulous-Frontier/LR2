@@ -9,6 +9,8 @@ init -1 python:
     def lifestyle_coach_review_goals_requirement(person):
         if mc.business.is_open_for_business() and mc.location is mall:
             return True
+        if person.location is not mall:
+            return "Only at the mall"
         else:
             return "Only during business hours"
         return False
@@ -45,9 +47,12 @@ label lifestyle_coach_intro_label(the_person):
     "As you walk around, you spot a kiosk that catches your attention."
     "Lifestyle Coaches: We help you set and achievement long term and short term goals!"
     "You walk around the kiosk a bit, there are all kinds of testimonials and adverts up for the service."
-    the_person "Hello there! I'm [the_person.title]."
+    the_person "Hello there! I'm [the_person.name]."
     $ scene_manager.add_actor(the_person)
     mc.name "I'm [mc.name]."
+    $ the_person.set_title(the_person.name)
+    $ the_person.set_possessive_title("Your lifestyle coach")
+    $ the_person.set_mc_title(mc.name)
     the_person "Nice to meet you! I'm a lifestyle coach, here to help people achieve their dreams!"
     "The sales pitch is a little... optimistic? But to be honest, she is pretty good looking, so you decide to let her continue."
     the_person "I've personally helped all kinds of people achieve all kinds of things, from giving up drugs, to losing a few pounds!"
@@ -65,14 +70,17 @@ label lifestyle_coach_intro_label(the_person):
     $ show_ui()
     the_person "I hope that was helpful! Come back again and see me if you want to adjust your goals again in the future!"
     mc.name "I think it was. I'll be sure to check back with you again if I need to. Thanks!"
-    $ dawn.event_triggers_dict["met"] = 1
+    $ the_person.event_triggers_dict["met"] = 1
     $ scene_manager.clear_scene()
+    if the_person == camilla:
+        $ camilla.add_unique_on_room_enter_event(camilla_spot_at_bar)
     return
 
 label lifestyle_coach_review_goals_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
-    mc.name "I was wondering, do you have time to talk about goals again?"
+    $ mc.business.change_funds(-20)
+    mc.name "Hey [the_person.title]. Do you have time to talk about goals again?"
     the_person "Certainly! Tell me about how things are going and what you would like to change."
     $ hide_ui()
     call screen lifestyle_goal_sheet()

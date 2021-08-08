@@ -112,7 +112,7 @@ init 2:
                 vbox:
                     yoffset 10
                     if person.arousal > 0:
-                        textbutton "Arousal: [person.arousal]/[person.max_arousal] (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
+                        textbutton "Arousal: "+ str(__builtin__.int(person.arousal)) + "/"+ str(__builtin__.int(person.max_arousal)) + " (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
                             style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
@@ -126,14 +126,14 @@ init 2:
                             action NullAction()
                             sensitive True
 
-                    textbutton "Energy: [person.energy]/[person.max_energy] {image=energy_token_small}":
+                    textbutton "Energy: " + get_energy_string(person):
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
                         action NullAction()
                         sensitive True
 
-                    textbutton "Happiness: [person.happiness]":
+                    textbutton "Happiness: "+ str(__builtin__.int(person.happiness)):
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The happier a girl the more tolerant she will be of low pay and unpleasant interactions. High or low happiness will return to it's default value over time."
@@ -147,7 +147,7 @@ init 2:
                     #     action NullAction()
                     #     sensitive True
 
-                    textbutton "Love: [person.love]":
+                    textbutton "Love: "+ str(__builtin__.int(person.love)):
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Girls who love you will be more willing to have sex when you're in private (as long as they aren't family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."

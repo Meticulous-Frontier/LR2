@@ -44,7 +44,7 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
         "You slide in nice and slow, giving her plenty of time to adjust to being filled in both holes."
 
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
@@ -80,7 +80,7 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
     else:
         $ the_girl.call_dialogue("sex_responses_vaginal")
         "[the_girl.title] holds her legs out wide for you, spreading herself so you can fuck her hard and fast against the [the_object.name]."
-    "[the_girl.title] moans loudly. You do your best to drive your cock all the way to it's base, fitting every last inch into [the_girl.title]'s cunt."
+    "[the_girl.title] moans loudly. You do your best to drive your cock all the way to its base, fitting every last inch into [the_girl.title]'s cunt."
     the_girl "So full... holy hell."
     "You hold yourself in deep. Her holes are completely stuffed. She reaches up and grabs her ankles, helping to hold them apart."
     menu:
@@ -247,7 +247,7 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
         "You slide in nice and slow, giving her plenty of time to adjust to being filled in both holes."
 
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god! I'm so full... Its so good [the_girl.mc_title]!"
+        the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."

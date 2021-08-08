@@ -307,7 +307,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
 
 label SB_working_weekend_crisis_label_low(person_one):
     #if she is not slutty at all
-    person_one "Oh hey there [person_one.mc_title], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know its the weekend right?"
+    person_one "Oh hey there [person_one.mc_title], I didn't expect to see you here! I just stopped by because I forgot something in my desk. Are you... working? You know it's the weekend right?"
     "You can tell by the look on her face that she is impressed by your work ethic. You consider the chance to impress on her the values of the company in this one on one situation."
     menu:
         "Stress the importance of obedience":

@@ -12,6 +12,7 @@ label activate_erica_mod_core(stack):
 
 label update_erica_mod_core(stack):
     python:
-
+        if "erica" not in globals():
+            erica_mod_initialization()
         execute_hijack_call(stack)
     return

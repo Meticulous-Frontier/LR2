@@ -55,6 +55,15 @@ init 2 python:
                     return True
         return False
 
+    def strip_club_foreclosed_countdown_requirement(start_day):
+        if time_of_day >= 3:
+            return False # Don't trigger foreclosed event while strip club is open
+        if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
+            return False
+        if day > start_day:
+            return True
+        return False
+
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
             if person.is_employee():
@@ -72,6 +81,12 @@ init 2 python:
     def add_starbuck_talk_about_strip_club_action():
         starbuck_talk_about_strip_club_action = Action("Starbuck talk about strip club", starbuck_talk_about_strip_club_requirement, "starbuck_talk_about_strip_club_label")
         starbuck.add_unique_on_room_enter_event(starbuck_talk_about_strip_club_action)
+        return
+
+    def add_start_strip_club_foreclosed_countdown_action():
+        strip_club_closes_down_action = Action("Strip Club closes down", strip_club_foreclosed_countdown_requirement, "strip_club_closes_down_label", requirement_args = day + renpy.random.randint(10, 16))
+        mc.business.add_mandatory_crisis(strip_club_closes_down_action)
+        return
 
     strip_club_foreclosed_mod_action = ActionMod("Strip Club Story Line", strip_club_foreclosed_event_requirement, "club_foreclosed_event_label",
         menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc",
@@ -79,6 +94,11 @@ init 2 python:
 
 
 label club_foreclosed_event_label():
+    # delay the actual shutdown for 10 to 16 days after initial requirements are met.
+    $ add_start_strip_club_foreclosed_countdown_action()
+    return
+
+label strip_club_closes_down_label():
     python:
         mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
         mc.business.event_triggers_dict["foreclosed_day"] = day

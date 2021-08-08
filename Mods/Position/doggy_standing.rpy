@@ -234,7 +234,7 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
                 $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") + mc.sex_skills["Anal"])
                 "You slowly give her a long, deliberate stroke, pushing your cock and finger into her at the same time."
                 "With your shaft buried inside her, you start to stroke yourself with your finger in her ass. An odd but very pleasurable feeling."
-                "[the_girl.title] starts to get impatient and begins to move her hips forward and back. It feels so good, soon your are matching her."
+                "[the_girl.title] starts to get impatient and begins to move her hips forward and back. It feels so good, soon you are matching her."
                 "You speed up and start to really pound her, her moans increasing in pitch from the double penetration."
                 "Soon though, you feel the urge to really give it to her, so you pull your finger out so you can grab both her hips and fuck her rough."
 
@@ -338,7 +338,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     if the_choice == "Cum on her face":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"

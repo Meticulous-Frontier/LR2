@@ -253,7 +253,7 @@ label alpha_seduction_accept_crowded(the_person):
             "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
             the_person "Okay, but we need to be discreet: I have a repute. Let's find someplace quiet."
         else:
-            the_person "Oh my [the_person.mc_title]... why don't you take care of me right here!"
+            the_person "Oh my, [the_person.mc_title]... why don't you take care of me right here!"
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
@@ -904,7 +904,7 @@ label alpha_cum_vagina(the_person):
                 if the_person.on_birth_control:
                     the_person "Luckily I cannot get pregnant, but if I did, my [so_title] would believe it's his."
                 else:
-                    the_person "If I become pregnant I will tell my [so_title]'s its his, I'm sure he will accept that."
+                    the_person "If I become pregnant I will tell my [so_title]'s it's his, I'm sure he will accept that."
             else:
                 if the_person.on_birth_control:
                     the_person "Mmm, your semen feels warm and sticky, good thing I cannot get pregnant, because this might have done it."
@@ -1315,7 +1315,7 @@ label alpha_condomless_sex_taboo_break(the_person):
             the_person "You will pull out, I don't want to get pregnant."
 
     elif the_person.love > 60:
-        the_person "If you think you're ready for this commitment, I am to. I want to feel close to you."
+        the_person "If you think you're ready for this commitment, I am too. I want to feel close to you."
         if the_person.get_opinion_score("creampies") > 0:
             if the_person.on_birth_control:
                 the_person "When you're going to finish, I want you to fill me up with your hot load."

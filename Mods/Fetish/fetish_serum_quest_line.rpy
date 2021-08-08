@@ -286,7 +286,7 @@ label fetish_serum_discuss_label(the_person):
         menu:
             "Create a new program yourself":
                 call fetish_serum_self_code_menu(the_person) from _fetish_discussion_coding_menu_02
-            "Reach out to Contact":
+            "Reach out to Contact" if the_person.identifier == get_fetish_serum_contact():
                 call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_01
             "Review current progress":
                 call fetish_serum_discuss_progress_label(the_person) from _fetish_discuss_progress_01
@@ -295,7 +295,7 @@ label fetish_serum_discuss_label(the_person):
     else:
         the_person "Do you want me to reach out to my contact to commission it?"
         menu:
-            "Reach out to Contact":
+            "Reach out to Contact" if the_person.identifier == get_fetish_serum_contact():
                 call fetish_serum_contact_dialogue(the_person) from _fetish_discussion_comission_02
             "Review current progress":
                 call fetish_serum_discuss_progress_label(the_person) from _fetish_discuss_progress_02
@@ -602,6 +602,7 @@ label fetish_serum_anal_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Anal Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -627,6 +628,7 @@ label fetish_serum_cum_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -656,6 +658,7 @@ label fetish_serum_breeding_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Reproduction Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
@@ -681,6 +684,7 @@ label fetish_serum_exhibition_warning_label():
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
+    $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Public Sexual Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."

@@ -5,7 +5,9 @@ init 5 python:
 
 label alternate_nora_intro_mod_core(stack):
     python:
-        alternate_nora_intro_mod_initialization()
+        # only add if university is not unlocked
+        if not university.visible:
+            alternate_nora_intro_mod_initialization()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
@@ -41,7 +43,7 @@ label alternate_nora_intro_label():
     "You quickly make your way down to the lab."
     $ mc.change_location(rd_division)
     $ mc.location.show_background()
-    "When you get there, lo and behold, its your former professor, [nora.title]!"
+    "When you get there, lo and behold, it's your former professor, [nora.title]!"
     $ scene_manager.add_actor(nora, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person)
     mc.name "Wow, [nora.title]? What a surprise!"

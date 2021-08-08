@@ -1,7 +1,7 @@
 #This file contains the generic clothes shoping label as well as Candace specific version.
 #Clothes shopping is unlocked after Candace takes you.
 #Label starts out at a regular store, girl tries on three outfits. If players approves of less than 2, she prompts player to pick something out.
-#After, based on sluttiness,  she picks out a set of new underwear. If not slutty, its regular underwear. If moderately slutty, its lingerie. If very slutty, pulls MC into room with her for sex scene.
+#After, based on sluttiness,  she picks out a set of new underwear. If not slutty, it's regular underwear. If moderately slutty, it's lingerie. If very slutty, pulls MC into room with her for sex scene.
 #Anytime girl tries on outfit that she REALLY likes, if she works for MC, asks MC to wear to work. If yes, add outfit to her department uniform options.
 #TODO, should we give option to add outfit to player's outfit selection?
 init 2 python:
@@ -93,7 +93,7 @@ label candace_goes_clothes_shopping_label(the_person):
     mc.name "Ok. Let's go."
     if the_person.should_wear_uniform():
         the_person "Yay! I can't wait! Just let me get changed, real quick."
-        $ the_person.apply_planned_outfit()
+        $ the_person.apply_outfit(the_person.planned_outfit) # wear normal day clothes
         $ the_person.draw_person()
         "After a minute she comes back, ready to go."
     else:
@@ -495,7 +495,7 @@ label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences
         the_person "I really like this outfit. Do you think maybe, you could add it to the work uniform list?"
         the_person "I'd love to be able to wear it to work!"
         $ slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
-        if limited_to_top: #For now, we don't have clothes shopping for overwear only, so if its limited to overwear then we certainly don't have the required policy
+        if limited_to_top: #For now, we don't have clothes shopping for overwear only, so if it's limited to overwear then we certainly don't have the required policy
             "You take a look at the outfit, but quickly realize that it does not match the current uniform guidelines."
             mc.name "I'm sorry, but the current employee contract wouldn't allow for me to add that to the uniform guidelines."
             "She gives you a little pout, but seems to understand."
@@ -504,7 +504,7 @@ label clothes_shopping_ask_to_add_to_uniform(the_person, the_outfit, preferences
             "Add it to the uniforms"if the_outfit.get_full_outfit_slut_score() <= slut_limit:
                 mc.name "I think I'll do that when we get back to the office."
                 the_person "Yay! Thank you [the_person.mc_title]!"
-                $ clothes_shopping_get_work_wardrobe(the_person).add_outfit(the_outfit)
+                $ mc.business.add_uniform_to_company(the_outfit, full_outfit_flag = True)
                 #TODO figure out a way to make this count toward uniform goal count
             "Add it to the uniforms\n{color=#ff0000}{size=18}Too slutty!{/size}{/color} (disabled)" if the_outfit.get_full_outfit_slut_score() > slut_limit:
                 pass

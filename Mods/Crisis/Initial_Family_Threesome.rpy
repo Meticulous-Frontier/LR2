@@ -136,10 +136,12 @@ label SB_fetish_vaginal_family_threesome_label():
         "Eventually, the girls get up."
         $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)
         $ scene_manager.update_actor(mom, position = "stand4", display_transform = character_right)
+        $ mom.increase_opinion_score("incest")
         mom "Mmm... wow... I guess... that was really good actually... Maybe we should do this more often..."
         $ scene_manager.update_actor(mom, position = "walking_away")
         "[mom.possessive_title] turns and starts to walk out."
         $ scene_manager.remove_actor(mom)
+        $ the_person.increase_opinion_score("incest")
         the_person "Holy fuck [the_person.mc_title], that was so hot, I can't believe you got mom to join us..."
         mc.name "I know! This might not be the last time that happens."
         the_person "Oh god, I can't wait. See you in the morning bro!"

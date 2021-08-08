@@ -222,7 +222,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
         "You run your hands along her hips. You grab her hips and smack her ass roughly as you plow her behind."
 
     if the_girl.arousal > 130:
-        the_girl "Ohhh my god, its so good... I can't believe I came already..."
+        the_girl "Ohhh my god, it's so good... I can't believe I came already..."
         "[the_girl.possessive_title]'s legs are shaking. She is thoroughly enjoying her anal plundering."
         if the_girl.has_role(anal_fetish_role):
             the_girl "This is it, this is why I love anal so much... I just can't stop cumming! It feels so good."
@@ -240,7 +240,7 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
             if the_girl.has_role(anal_fetish_role):
                 the_girl "I love being your anal slut. Fuck me good [the_girl.mc_title]!"
             elif the_girl.sluttiness > 80:
-                the_girl "You are so big... its so full when you push it in me like this."
+                the_girl "You are so big... it's so full when you push it in me like this."
             else:
                 the_girl "It better... I can't believe I let you talk me into this..."
         "Talk Dirty":
@@ -368,7 +368,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     if the_choice == "Cum on her face":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"

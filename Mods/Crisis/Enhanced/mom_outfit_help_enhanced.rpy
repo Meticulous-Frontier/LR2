@@ -315,7 +315,7 @@ label mom_outfit_help_crisis_label_enhanced():
     the_person "Thank you so much for the help [the_person.mc_title]. I don't know why but I've been feeling much more unsure about the way I dress lately."
     mc.name "Any time, I'm just glad to help."
     if the_person.effective_sluttiness(["touching_penis", "sucking_cock"]) > 50:
-        the_person "Is there any I could show you how thankful I am? You are such a helpful son..."
+        the_person "Is there anything I could do to show you how thankful I am? You are such a helpful son..."
         if mc.energy < 50:
             mc.name "I'm sure you could think of something, but honestly I'm exhausted. I think I'll just head for bed."
             the_person "Of course honey. Have a good night!"
@@ -345,18 +345,18 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'm glad to hear that... I just... need to taste it!!!"
                         $ the_person.break_taboo("sucking_cock")
                     "Suddenly, she opens a bit wider and takes your cock into her mouth. Your hands run through her hair as her head starts to bob up and down."
-                    call fuck_person(the_person, start_position = blowjob, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_01
+                    call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_01
 
                 else:
                     "You watch in amazement as she wraps your cock between her tits, you erection now enveloped in her creamy cleavage."
                     if the_person.has_taboo("touching_body"):
-                        the_person "Oh my god... its so hot... I just want to make it feel good!"
+                        the_person "Oh my god... it's so hot... I just want to make it feel good!"
                         the_person "I'll stop if you want me too. You probably think I'm crazy!"
                         mc.name "I don't think your crazy. This is a great way to say thank you. I can't believe I'm so lucky."
                         the_person "I'm glad to hear that... I just... want to feel it blow all over me!"
                         $ the_person.break_taboo("touching_body")
                     "[the_person.possessive_title] slowly starts to rock her body up and down, stroking your cock with her tits."
-                    call fuck_person(the_person, start_position = tit_fuck, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_02
+                    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_02
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
             else:
                 the_person "I mean... you are such a virile young man... maybe you could think of some way I could thank you..."
@@ -364,8 +364,8 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ the_person.strip_outfit(position = "standing_doggy")
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
                 $ mc.change_locked_clarity(20)
-                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]"
-                call fuck_person(the_person, start_position = SB_doggy_standing, skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
+                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]."
+                call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_bed(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
                 "When you finish up, you put your dick away."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
 

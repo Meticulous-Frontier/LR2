@@ -155,13 +155,13 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
     if the_girl_2.arousal > 50:
         "A steady stream of moans are getting drown out as [the_girl_2.title] buries her face in [the_girl_1.title]'s slit."
     else:
-        "You hear a low and steady moan coming from [the_girl_2.possessive_title], but its getting muffled by [the_girl_1.title]'s cunt."
+        "You hear a low and steady moan coming from [the_girl_2.possessive_title], but it's muffled by [the_girl_1.title]'s cunt."
     menu:
         "Talk dirty to [the_girl_2.title]":
             mc.name "How does that feel? Do you like getting used? I bet you do."
             mc.name "Your pussy feels great, how's her tongue, [the_girl_1.title]?"
             if the_girl_1.arousal > 65:
-                the_girl_1 "Mmmmm... God... its so good..."
+                the_girl_1 "Mmmmm... God... it's so good..."
             else:
                 the_girl_1 "It feels great... keep going!"
             if the_girl_2.get_opinion_score("being submissive") > 0 or the_girl_2.get_opinion_score("threesomes") > 0:
@@ -244,7 +244,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
             if mc.condom:  #Not sure how we have a condom on but I guess it could happen
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
-                if condom_break_chance < 15: #15% chance of breaking, because its a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
+                if condom_break_chance < 15: #15% chance of breaking, because it's a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
                     $ the_girl_2.cum_in_vagina()
                     $ scene_manager.draw_scene()
@@ -346,7 +346,7 @@ label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     return
 
 label scene_threesome_doggy_deluxe_dp_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
-    "You give [the_girl_2.possessive_title]'s ass a good hard spank. She lets out a loud yelp, but its muffled between [the_girl_1.title]'s legs."
+    "You give [the_girl_2.possessive_title]'s ass a good hard spank. She lets out a loud yelp, but it's muffled between [the_girl_1.title]'s legs."
     the_girl_1 "Mmm, that felt good. You should spank her again [the_girl_1.mc_title]!"
     "[the_girl_2.title] wiggles her hips in front of you. It's like she's asking for a good spanking!"
     "You rub her ass with your hand, affectionately. You slowly pull out, almost completely, and look down, enjoying watching as her body grips the dildo and your dick as they slide out."
@@ -369,7 +369,7 @@ label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_loc
         "You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
         mc.name "Your backdoor is so tight, especially with your cunt stuffed at the same time."
         "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
-    the_girl_2 "So full... its so good!"
+    the_girl_2 "So full... it's so good!"
     "You push her head back down, into [the_girl_1.title]'s juicy slit."
 
     return
@@ -383,7 +383,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
             if mc.condom:
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
-                if condom_break_chance < 15: #15% chance of breaking, because its a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
+                if condom_break_chance < 15: #15% chance of breaking, because it's a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
                     $ the_girl_2.cum_in_ass()
                     $ scene_manager.draw_scene()

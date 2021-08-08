@@ -30,7 +30,7 @@
 #     "[the_person.possessive_title]'s cheeks turn even redder and she looks up at you."
 #     the_person "I'm sorry honey I just... I can't explain it, but lately I just find myself constantly fantasizing..."
 #     "She stops herself before she says too much."
-#     the_person "The bills are just really starting to pile up. I'm sorry, I know its wrong but, I promise I'll make it good for you!"
+#     the_person "The bills are just really starting to pile up. I'm sorry, I know it's wrong but, I promise I'll make it good for you!"
 #     menu:
 #         "Strip and ride me\nPay $1000" if mc.business.funds >= 1000:
 #             $ mc.business.change_funds(-1000)
@@ -63,7 +63,7 @@
 #                 the_person "Mmm, that was so good, thank you [the_person.mc_title]..."
 #                 "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
 #             "You start to get up to go to your room, but [the_person.possessive_title] calls out to you as you start to get up."
-#             the_person "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... its okay!"
+#             the_person "[the_person.mc_title]? Why don't you just stay in here tonight? [the_person.title] loves you... it's okay!"
 #             "You slip back into bed next to her."
 #             $ the_person.add_role(anal_fetish_role)
 #             $ add_fuck_doll_collar_to_base_outfit(the_person)
@@ -332,8 +332,8 @@
 #                 the_person "Oh! I thought the present was... but this looks great! Would you do the honors mister?"
 #                 $ scene_manager.update_actor(the_person, position = "standing_doggy")
 #                 "She bends over and presents her recently used ass to you. You have no problem pushing it in, with her ass being lubed up from your prior fucking."
-#                 the_person "Ahh! That's the spot! Could you umm... you know... move it in and out a few times? Make sure its reeeaaaallllyyyyy in there good."
-#                 "You grab the base and pull it out. You can feel her clenching it as you try to pull on it. When you get it out a few inches, you let it go. Her ass clenches and pulls it back in until its deep again."
+#                 the_person "Ahh! That's the spot! Could you umm... you know... move it in and out a few times? Make sure it's reeeaaaallllyyyyy in there good."
+#                 "You grab the base and pull it out. You can feel her clenching it as you try to pull on it. When you get it out a few inches, you let it go. Her ass clenches and pulls it back in until it's deep again."
 #                 the_person "Mmmm... that's it. Keep going!"
 #                 mc.name "I'm sorry, but I have to get going."
 #                 the_person "Nnnnoooooo."
@@ -412,8 +412,8 @@
 #                 the_person "Oh! I thought the present was... but this looks great! Would you do the honors mister?"
 #                 $ scene_manager.update_actor(the_person, position = "standing_doggy")
 #                 "She bends over and presents her recently used ass to you. You have no problem pushing it in, with her ass being lubed up from your prior fucking."
-#                 the_person "Ahh! That's the spot! Could you umm... you know... move it in and out a few times? Make sure its reeeaaaallllyyyyy in there good."
-#                 "You grab the base and pull it out. You can feel her clenching it as you try to pull on it. When you get it out a few inches, you let it go. Her ass clenches and pulls it back in until its deep again."
+#                 the_person "Ahh! That's the spot! Could you umm... you know... move it in and out a few times? Make sure it's reeeaaaallllyyyyy in there good."
+#                 "You grab the base and pull it out. You can feel her clenching it as you try to pull on it. When you get it out a few inches, you let it go. Her ass clenches and pulls it back in until it's deep again."
 #                 the_person "Mmmm... that's it. Keep going!"
 #                 mc.name "I'm sorry, but I have to get going."
 #                 the_person "Nnnnoooooo."

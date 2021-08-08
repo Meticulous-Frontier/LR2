@@ -341,6 +341,8 @@ init 2:
             return True
 
         def requires_condom(the_person):
+            if the_person == kaya and persistent.pregnancy_pref != 0:
+                return False
             if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold(situational_modifier = 10):  #
                 return True
             return False
@@ -470,7 +472,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
             $ finished = True
 
-        #Determine if the current node has completed its finished requirement.
+        #Determine if the current node has completed it's finished requirement.
         if current_node.completion_requirement(the_person, report_log):
             if len(sex_path) > 0:
                 $ current_node = sex_path.pop(0)
@@ -498,7 +500,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
             else:
                 $ finished = True    #Sex goal has been accomplished
-                the_person "Mmm, that was exactly what I was hoping for!"
+                $ the_person.call_dialogue("GIC_finish_response", the_goal = the_goal)
         elif len(sex_path) > 0:
             if not sex_path[0].position.check_clothing(the_person): #We don't meet the clothing requirements for the next position, so we strip some
                 $ the_clothing = the_person.choose_strip_clothing_item()

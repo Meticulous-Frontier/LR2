@@ -1,4 +1,4 @@
-﻿init:
+init:
     python:
         cowgirl_blowjob = Position(name = "Cowgirl Blowjob", slut_requirement = 40, slut_cap = 60, requires_hard = True, requires_large_tits = False,
             position_tag = "blowjob", requires_location = "Lay", requires_clothing = "None", skill_tag = "Oral",
@@ -32,7 +32,7 @@ label intro_cowgirl_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
     $ cowgirl_blowjob.current_modifier = "blowjob"
     $ cowgirl_blowjob.redraw_scene(the_girl)
-    "Her mouth opens and you feel the warm, wetness of her gullet envelope your cock. It feels great as she starts to bob her head up and down on it."
+    "Her mouth opens and you feel the warm wetness of her gullet envelope your cock. It feels great as she starts to bob her head up and down on it."
     return
 
 label taboo_break_cowgirl_blowjob(the_girl, the_location, the_object):
@@ -46,7 +46,7 @@ label taboo_break_cowgirl_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
     $ cowgirl_blowjob.current_modifier = "blowjob"
     $ cowgirl_blowjob.redraw_scene(the_girl)
-    "Her mouth opens and you feel the warm, wetness of her gullet envelope your cock. It feels great as she starts to bob her head up and down on it."
+    "Her mouth opens and you feel the warm wetness of her gullet envelope your cock. It feels great as she starts to bob her head up and down on it."
     return
 
 label scene_cowgirl_blowjob_1(the_girl, the_location, the_object):
@@ -54,7 +54,7 @@ label scene_cowgirl_blowjob_1(the_girl, the_location, the_object):
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] is stroking you with her mouth at an easy pace. She has her eyes closed and is just enjoying the taste."
     "She pauses for a second while she licks the tip."
-    the_person "Mmm, its so musky. It tastes good... mmmm"
+    the_person "Mmm, it's so musky. It tastes good... mmmm"
     "Her mouth opens and her silky lips descend your cock again. You try to keep yourself from bucking your hips while she controls the pace."
     return
 
@@ -155,7 +155,7 @@ label transition_default_cowgirl_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
     $ cowgirl_blowjob.current_modifier = "blowjob"
     $ cowgirl_blowjob.redraw_scene(the_girl)
-    "Her mouth opens and you feel the warm, wetness of her gullet envelope your cock. It feels great as she starts to bob her head up and down on it."
+    "Her mouth opens and you feel the warm wetness of her gullet envelope your cock. It feels great as she starts to bob her head up and down on it."
     return
 
 label strip_cowgirl_blowjob(the_girl, the_clothing, the_location, the_object):

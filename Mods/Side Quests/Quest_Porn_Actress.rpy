@@ -137,7 +137,7 @@ label quest_porn_actress_intro_label():
     "You get up to stretch your legs for a bit and to check on the different departments, making sure everything is running smoothly."
     "As you pass by the break room, you overhear something."
     the_person_one "Oh my... is that really [the_person.name]? It looks just like her... That's what the other girls are saying!"
-    the_person_two "Wow, I think it is! If not its her twin sister!"
+    the_person_two "Wow, I think it is! If not it's her twin sister!"
     "You walk into the break room."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person_one)

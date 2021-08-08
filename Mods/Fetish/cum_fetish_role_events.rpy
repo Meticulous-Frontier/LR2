@@ -14,9 +14,9 @@ init 3 python:
     cum_fetish_role = Role(role_name = "Cum Fetish", actions = [ cum_fetish_get_dosage])
 
 label cum_fetish_get_dosage_label(the_person):
-    mc.name "[the_person.title] get on your knees. Its time for your dosage of cum."
+    mc.name "[the_person.title] get on your knees. It's time for your dosage of cum."
     "[the_person.possessive_title] smiles wide."
-    the_person "Oh!? Yes! its my favorite!"
+    the_person "Oh!? Yes! It's my favorite!"
     $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] immediately drops to her knees. She doesn't even seem to care that there could be other people around."
     $ the_person.draw_person(position = "blowjob")

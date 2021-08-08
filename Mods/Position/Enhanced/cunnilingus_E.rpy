@@ -72,7 +72,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             the_girl "Oh god I love it when you do this..."
             "[the_girl.possessive_title] is running her hands through your hair, her breathing heavy. You push your finger deep into her bowel."
             "You attack her clit with your tongue and lips. She bucks her hips against your face, pulling off your finger a bit. She rocks her hips back down, your finger pushing deep into her again."
-            "[the_girl.title]'s hips begin to grind forward and back. With each peak she grinds her clit against your face, and with each trough your finger is fully embedded in her backdoor."
+            "[the_girl.title]'s hips begin to grind forward and back. With each peak she grinds her clit against your face, and with each slide trough your finger is fully embedded in her backdoor."
             the_girl "Oh!!! [the_girl.mc_title] yes!"
             "You continue for a while. [the_girl.title] clearly enjoys the anal penetration. Eventually you pull your finger out and resume eating her out normally."
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 10)
@@ -203,7 +203,7 @@ label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
                 "She starts to rock her hips, grinding herself against your face."
                 the_girl "Oh [the_girl.mc_title]! That feels so good..."
                 $ the_girl.change_arousal(2)
-            "She grinds against you hard, but your are quickly running out of air. When it gets to be too intense you break her hold on you by pushing yourself up on your hands."
+            "She grinds against you hard, but you are quickly running out of air. When it gets to be too intense you break her hold on you by pushing yourself up on your hands."
             the_girl "Mmmm, sorry [the_girl.mc_title], it feels so good when you lick me like this!"
         "Subdue Her":
             "You grab her hand off the back of your head. You arch your back to take away the leverage her legs give."

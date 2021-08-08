@@ -246,7 +246,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
     elif the_girl.get_opinion_score("showing her ass") > 0:
         "[the_girl.possessive_title] lifts her hips up off of you, your twitching cock suddenly cold and aching to be back inside her."
         "She reaches down moving your member between her ass cheeks and her hand."
-        the_girl "I want to feel you shoot your load all over my ass! Its going to feel so hot, knowing I've got your load all over my ass..."
+        the_girl "I want to feel you shoot your load all over my ass! It's going to feel so hot, knowing I've got your load all over my ass..."
         "You don't have time to respond before the first wave of cum erupts from your penis."
         $ the_girl.cum_on_ass()
         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)

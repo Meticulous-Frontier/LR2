@@ -278,10 +278,10 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                         if the_person.has_taboo("touching_penis"):
                             "[the_person.possessive_title] begins to falter a bit. You can sense her hesitation to touch you."
                             the_person "Are you sure... this is okay? I feel like we are really crossing a line here..."
-                            mc.name "Its okay. It feels so good, don't you want to make me feel good?"
+                            mc.name "It's okay. It feels so good, don't you want to make me feel good?"
                             the_person "Yes... of course I want to... I just..."
                             "You take her hand in yours. She looks at you and bites her lip. You slowly move her hand down until your cock is resting in her palm."
-                            the_person "Oh my god... its so... warm..."
+                            the_person "Oh my god... it's so... warm..."
                             "Her hand starts to stroke you."
                             $ the_person.break_taboo("touching_penis")
                             $ mc.change_arousal(15)
@@ -404,7 +404,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             "Just before you bring your hand down on [the_person.title]'s ass you hear a gasp from behind you."
                             the_watcher "[the_watcher.mc_title], [the_person.title] what is going on?"
                             mc.name "Good morning [the_watcher.title], I found this slut walking down the hallway naked and was about to teach her a lesson."
-                            the_watcher "She really has been acting out recently, I guess it is time for someone to disciple her."
+                            the_watcher "She really has been acting out recently, I guess it is time for someone to discipline her."
                             menu:
                                 "Send [the_watcher.title] away":
                                     mc.name "Exactly, and since you don't seem capable I guess I'll take care of it."
@@ -414,7 +414,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True, position_locked = True) from _call_lily_morning_counter_kitchenspank1
 
                                 "Make [the_watcher.title] stay":
-                                    mc.name "I know you've been struggling with her disciple, take a seat and I'll show you how it is done."
+                                    mc.name "I know you've been struggling with her discipline, take a seat and I'll show you how it is done."
                                     the_watcher "Yes, [the_watcher.mc_title]."
                                     $ the_watcher.change_obedience(5)
                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank2
@@ -427,7 +427,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     $ scene_manager.strip_to_vagina(the_watcher, visible_enough = True, prefer_half_off = True)
                                     call fuck_person(the_watcher, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank3
                         else:
-                            call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
+                            call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = True, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
 
             $ the_watcher = None
             $ scene_manager = None

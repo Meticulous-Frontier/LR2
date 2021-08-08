@@ -85,18 +85,21 @@ init 5 python:
 
     def cheating_check_get_watcher(person):
         other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
-        for a_person in [x for x in other_people if x.has_role([girlfriend_role, affair_role]) and x.is_jealous()]:
-            if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness * .6) + (a_person.get_opinion_score("threesomes") * 5) : #You can get away with 60% as slutty as she would do +- threesome inclination
-                caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
-                if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
-                    a_person.add_unique_on_room_enter_event(caught_cheating_action)
-                    renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+        # skip cheating check when person is Office Free Use Slut
+        if not person.has_role(employee_freeuse_role):
+            # only check if she is jealous and not willing to threesome with the girl
+            for a_person in [x for x in other_people if x.has_role([girlfriend_role, affair_role]) and x.is_jealous() and not willing_to_threesome(person, x)]:
+                if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness * .6) + (a_person.get_opinion_score("threesomes") * 5) : #You can get away with 60% as slutty as she would do +- threesome inclination
+                    caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
+                    if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
+                        a_person.add_unique_on_room_enter_event(caught_cheating_action)
+                        renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
-            elif a_person.has_role(affair_role) and the_position.slut_requirement > (a_person.sluttiness * .8) + (a_person.get_opinion_score("threesomes") * 5): #You can get away with 80% as slutty as she would do +- threesome inclination
-                caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
-                if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
-                    a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                    renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                elif a_person.has_role(affair_role) and the_position.slut_requirement > (a_person.sluttiness * .8) + (a_person.get_opinion_score("threesomes") * 5): #You can get away with 80% as slutty as she would do +- threesome inclination
+                    caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
+                    if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
+                        a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
+                        renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
@@ -215,6 +218,12 @@ init 5 python:
             if not gained_opinion and record_class in record_opinion_map and renpy.random.randint(0,100) < 15 + (tier * 5):
                 person.increase_opinion_score(get_random_from_list(record_opinion_map[record_class]), tier - 1)
                 gained_opinion = True
+
+        # Record the total number of orgasms for the girl
+        person.sex_record["Orgasms"] = person.sex_record.get("Orgasms", 0) + report_log.get("girl orgasms", 0)
+        # Record number of times public sex
+        if report_log.get("was_public", False):
+            person.sex_record["Public Sex"] = person.sex_record.get("Public Sex", 0) + 1
 
         # record the last time we had sex
         person.sex_record["Last Sex Day"] = day
@@ -380,6 +389,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
                 the_person "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
                 $ round_choice = "Girl Leave"
+            elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and position_locked:
+                the_person "We should do this again soon."
+                $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) > 0 and not (the_person.love > 40 or the_person.obedience > 150): #She's cum and doesn't care about you finishing.
                 the_person "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
                 $ round_choice = "Girl Leave"
@@ -484,7 +496,15 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
                         if not girl_in_charge:
                             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
-                        $ position_choice = None
+                        if position_choice.skill_tag == "Vaginal" and mc.energy > 50 and mc.location.has_object_with_trait(prone_bone.requires_location): # or position_choice.skill_tag == "Anal")
+                            call prone_decision_label(the_girl = the_person, the_location = mc.location, the_object = object_choice, the_position = position_choice) from _prone_sex_takeover_01
+                            if _return:
+                                $ the_object = _return
+                                $ position_choice = prone_bone
+                            else:
+                                $ position_choice = None
+                        else:
+                            $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
                         if not stop_stripping:
                             call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
@@ -568,7 +588,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     python:
         update_person_sex_record(the_person, report_log)
-        the_person.restore_all_clothing()   # put all half-off clothing back in place
+        # the_person.restore_all_clothing()   # put all half-off clothing back in place
         position_choice = None
         object_choice = None
 
@@ -656,6 +676,26 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
 
 label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
     $ condom_threshold = the_person.get_no_condom_threshold()
+
+    if the_person == kaya and persistent.pregnancy_pref != 0:
+        "As you look at [the_person.possessive_title], you remember she doesn't want you to use condoms. Should you put one on anyway?"
+        menu:
+            "Put on a condom":
+                mc.name "One sec, let me just get a condom on..."
+                the_person "Really? You know I'm not okay with that."
+                mc.name "I know but..."
+                the_person "I'm sorry. We do it bare, or not at all."
+                menu:
+                    "Fuck her raw":
+                        return 1
+                    "Refuse and do something else":
+                        "[the_person.possessive_title] seems like she's made up her mind, and you doubt you would be able to change it."
+                        mc.name "We can't risk it [the_person.title]. We'll have to do something else."
+                        return 0
+            "Don't":
+                return 1
+
+
 
     if the_person.has_cum_fetish() or the_person.has_breeding_fetish():
         "[the_person.possessive_title] eyes your cock greedily. You could put a condom on if you wanted."
@@ -793,7 +833,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
         elif skill_tag == "Anal":
             the_person "Could you put on a condom? I don't want to have a mess when you start pumping my ass."
         else:
-             $ the_person.call_dialogue("condom_ask")
+            $ the_person.call_dialogue("condom_ask")
 
         menu:
             "Put on a condom":
@@ -928,7 +968,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
         # TODO: add watchers to threesome core
         if not ask_for_threesome and willing_to_threesome(the_person, the_watcher):
             $ the_watcher.draw_person()
-            the_watcher "Oh my good, that looks amazing..."
+            the_watcher "Oh my god, that looks amazing..."
             if can_join_threesome(the_watcher, the_person, the_position.position_tag):
                 the_watcher "Can I... can I join you? I want some too!"
                 $ ask_for_threesome = True

@@ -58,7 +58,7 @@ label business_meeting_action_label:
     call business_meeting_end(the_person, done) from _call_business_meeting_end_1
 
     $ ran_num = renpy.random.randint(1, 3)
-    $ hr_employee = get_random_from_list(mc.business.hr_team)
+    $ hr_employee = mc.business.hr_director or get_random_from_list(mc.business.hr_team)
     if hr_employee == the_person:
         "You give [the_person.title] a call and tell her that she can implement the changes you discussed."
     elif hr_employee is None:
@@ -95,7 +95,7 @@ label business_meeting_arrousal(the_person):
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
         $ mc.change_arousal(20)
         $ mc.change_locked_clarity(20)
-        the_person "Oh my [the_person.mc_title], it seems my proposal got you all exited."
+        the_person "Oh my, [the_person.mc_title] it seems my proposal got you all excited."
     else:
         the_person "She keeps stroking your legs while she talks, making sure you are focussed on her."
     return
@@ -121,7 +121,26 @@ label business_meeting_seduction(the_person):
             $ strip_choice = None
             $ mc.change_arousal(20)
 
-        if the_person.effective_sluttiness() > 60:
+        if the_person.has_cum_fetish():
+            the_person "I'll tell you what. I'll give you the rest of the proposal if you let me have a taste of that cum of yours..."
+            "[the_person.possessive_title]'s cum fetish has driven her to bargain with you. It seems you have the opportunity for an expert cock sucker to get you off."
+            menu:
+                "Continue":
+                    $ the_person.draw_person(position = "blowjob")
+                    "[the_person.title] drops to her knees in front of you, and soon you feel her expert tongue running up and down your length."
+                    $ mc.change_locked_clarity(20)
+                    "You sigh and let yourself enjoy the sensations as your employee gets to work."
+                    call get_fucked(the_person, private= True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = False, allow_continue = False) from _call_get_sucked_during_meeting_01
+                    $ the_person.event_triggers_dict["LastCumFetish"] = day
+                    $ the_person.call_dialogue("sex_review", the_report = _return)
+                    return True
+                "Not Now":
+                    mc.name "I'm sorry [the_person.title], i've got another meeting to attend."
+                    $ the_person.draw_person(position = "stand4", emotion="sad")
+                    "[the_person.possessive_title] stands up with a disappointed look on her face."
+                    $ the_person.change_happiness(-5)
+                    return False
+        elif the_person.effective_sluttiness() > 60:
             "After spending a few more minutes talking she suddenly perks up."
             the_person "I'm sorry [the_person.mc_title], it seems i've dropped something..."
 

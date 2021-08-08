@@ -108,6 +108,11 @@ init -4 python:
             identifier = self.mapped_list.pop(index)
             return next((x for x in self.list_func() if x.identifier == identifier), None)
 
+        def index(self, item):
+            if isinstance(item, self.type):
+                return self.mapped_list.index(item.identifier)
+            raise ValueError
+
     def parse_version_string(version):
         parts = version.split(".")
         return int(parts[0].strip("v")), int(parts[1]), int(parts[2])
@@ -141,9 +146,16 @@ init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
 init 1 python:
+    global is64Bit
+    is64Bit = sys.maxsize > 2**32
+
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
-    config.image_cache_size_mb = 384 # fixed at 384 Mb * 4 bytes per pixel result in 1536 Mb Texture Memory
+
+    if is64Bit:
+        config.image_cache_size_mb = 512 # fixed at 512 Mb * 4 bytes per pixel result in 2048 Mb Texture Memory
+    else:
+        config.image_cache_size_mb = 384 # fixed at 384 Mb * 4 bytes per pixel result in 1536 Mb Texture Memory
 
     # heart pasties and cincher (move to level 0)
     heart_pasties.layer = 0
@@ -155,8 +167,8 @@ init 1 python:
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
-    config.predict_statements = 32
-    config.rollback_length = 32      # since refactor we can allow a longer rollback history
+    config.predict_statements = 64 if is64Bit else 32
+    config.rollback_length = 64 if is64Bit else 32      # since refactor we can allow a longer rollback history
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False

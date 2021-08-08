@@ -32,8 +32,10 @@ init -1 python:
         list_of_names.remove("Cara")
     if "Erica" in list_of_names:
         list_of_names.remove("Erica")
-    if "Dawn" in list_of_names:
-        list_of_names.remove("Dawn")
+    # if "Dawn" in list_of_names:
+    #     list_of_names.remove("Dawn")
+    if "Ellie" in list_of_names:
+        list_of_names.remove("Ellie")
     if "Sarah" in list_of_names:
         list_of_names.remove("Sarah")
     if "Ophelia" in list_of_names:
@@ -230,7 +232,7 @@ init -1 python:
 
     # Italian
     list_of_names.append("Aurora")
-    list_of_names.append("Camilla")
+    # list_of_names.append("Camilla")
     list_of_names.append("Chiara")
     list_of_names.append("Giulia")
     list_of_names.append("Eleonora")

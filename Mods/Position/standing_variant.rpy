@@ -145,7 +145,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                               $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
                           elif the_girl.get_opinion_score("showing her ass") > 0:
                               "[the_girl.possessive_title] looks back at you."
-                              the_girl "Mmmm do you think its sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
+                              the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
                               mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
                               "The next time you thrust into her, you pause for a second when you are fully embedded within her."
                               the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
@@ -274,7 +274,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                               $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
                           elif the_girl.get_opinion_score("showing her ass") > 0:
                               "[the_girl.possessive_title] looks back at you."
-                              the_girl "Mmmm do you think its sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
+                              the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
                               mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
                               "The next time you thrust into her, you pause for a second when you are fully embedded within her."
                               the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
@@ -296,7 +296,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
     the_girl "Oh, that's it [the_girl.mc_title], don't stop, it feels so good!"
     "You didn't have any plans of stopping anyway."
     if mc.sex_skills["Vaginal"] > the_girl.sex_skills["Vaginal"]: #If MC is better at sex than girl
-        "In fact, you decide its time to take things to the next level and really pleasure her."
+        "In fact, you decide it's time to take things to the next level and really pleasure her."
         "You shift our hips to the side, changing the angle of penetration to give increased friction against her G-spot."
         "You give [the_girl.possessive_title] a few short, shallow thrusts, the shove yourself deep and bottom out. You reach around her body and grope at her breast with your free hand."
         the_girl "[the_girl.mc_title] you fuck me so good... I don't know how you do it!"
@@ -391,7 +391,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
 
                 $ mc.change_arousal( 5)
                 "Having [the_girl.possessive_title] take charge for a bit is extremely pleasurable, but eventually you can see her start to grow tired."
-                mc.name "Atta girl... its time for me to set the pace now."
+                mc.name "Atta girl... it's time for me to set the pace now."
                 "You release her leg and continue fucking her."
             "Continue normally":
                 "You can tell that [the_girl.possessive_title] isn't getting as much pleasure from this position as you are, so you try to mix up your tactics a bit to keep her interested."
@@ -411,7 +411,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                     if the_girl.arousal > 130:
                         "[the_girl.possessive_title] moans loudly from your attention to her voluptuous chest. She thrusts herself back against you."
-                        "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and its just too much. You are definitely about to cum!"
+                        "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and it's just too much. You are definitely about to cum!"
                         $ mc.change_arousal( 100)
                         return
                 else:
@@ -422,7 +422,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         if the_girl.arousal > 130:
                             "[the_girl.possessive_title] moans loudly from your attention to her petite chest. She thrusts herself back against you."
-                            "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and its just too much. You are definitely about to cum!"
+                            "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and it's just too much. You are definitely about to cum!"
                             $ mc.change_arousal( 100)
                             return
                     else:
@@ -543,7 +543,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
-            the_girl "Oh! Its so warm..."
+            the_girl "Oh! It's so warm..."
         "You stand back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
     if the_choice == "Cum on her face":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"

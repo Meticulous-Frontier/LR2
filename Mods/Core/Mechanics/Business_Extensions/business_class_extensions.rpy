@@ -16,6 +16,23 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Business.hr_director = property(get_hr_director, set_hr_director, del_hr_director, "The company HR director position.")
 
+    def get_it_director(self):
+        if not hasattr(self, "_it_director"):
+            self._it_director = None
+        return next((x for x in all_people_in_the_game() if x.identifier == self._it_director), None)
+
+    def set_it_director(self, item):
+        if isinstance(item, Person):
+            self._it_director = item.identifier
+        else:
+            self._it_director = None
+
+    def del_it_director(self):
+        del self._it_director
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Business.it_director = property(get_it_director, set_it_director, del_it_director, "The company IT director position.")
+
     def get_funds_yesterday(self):
         if not hasattr(self, "_funds_yesterday"):
             self._funds_yesterday = 1000 # default start money
@@ -42,6 +59,46 @@ init -1 python:
 
     Business.unisex_restroom_unlocks = property(get_unisex_restroom_unlocks, set_unisex_restroom_unlocks, del_unisex_restroom_unlocks, "Tracking dictionary for the unisex restroom event.")
 
+    def get_uniform_limits_enhanced(self): #Returns three values: the max sluttiness of a full outfit, max sluttiness of an underwear set, and if only overwear sets are allowed or notself.
+        slut_limit = 0
+        underwear_limit = 0
+        limited_to_top = True
+        if maximal_arousal_uniform_policy.is_active():
+            slut_limit = 999 #ie. no limit at all.
+            underwear_limit = 999
+            limited_to_top = False
+        elif corporate_enforced_nudity_policy.is_active():
+            slut_limit = 90
+            underwear_limit = 999
+            limited_to_top = False
+        elif minimal_coverage_uniform_policy.is_active():
+            slut_limit = 70
+            underwear_limit = 30
+            limited_to_top = False
+        elif reduced_coverage_uniform_policy.is_active():
+            slut_limit = 50
+            underwear_limit = 15
+            limited_to_top = False
+        elif casual_uniform_policy.is_active():
+            slut_limit = 35
+            underwear_limit = 0
+            limited_to_top = True
+        elif relaxed_uniform_policy.is_active():
+            slut_limit = 25
+            underwear_limit = 0
+            limited_to_top = True
+        elif strict_uniform_policy.is_active():
+            slut_limit = 15
+            underwear_limit = 0
+            limited_to_top = True
+        else:
+            slut_limit = 0
+            underwear_limit = 0
+            limited_to_top = True
+        return slut_limit, underwear_limit, limited_to_top
+
+    Business.get_uniform_limits = get_uniform_limits_enhanced
+
     def update_employee_status(self, person):
         if person.event_triggers_dict.get("employed_since", -1) == -1:
             person.event_triggers_dict["employed_since"] = day
@@ -53,6 +110,27 @@ init -1 python:
         person.apply_outfit()   # make sure the wear the correct outfit (uniform if so needed)
 
     Business.update_employee_status = update_employee_status
+
+    def add_uniform_to_company(self, outfit, full_outfit_flag = False, overwear_flag = False, underwear_flag = False, research = True, production = True, supply = True, marketing = True, hr = True):
+        uniform = UniformOutfit(outfit)
+        if uniform.can_toggle_full_outfit_state():
+            uniform.set_full_outfit_flag(full_outfit_flag)
+        if uniform.can_toggle_overwear_state():
+            uniform.set_overwear_flag(overwear_flag)
+        if uniform.can_toggle_underwear_state():
+            uniform.set_underwear_flag(underwear_flag)
+
+        uniform.set_research_flag(research)
+        uniform.set_production_flag(production)
+        uniform.set_supply_flag(supply)
+        uniform.set_marketing_flag(marketing)
+        uniform.set_hr_flag(hr)
+
+        mc.business.business_uniforms.append(uniform)
+        mc.business.update_uniform_wardrobes()
+        return
+
+    Business.add_uniform_to_company = add_uniform_to_company
 
     def get_business_stripper_wardrobe(self):
         if not hasattr(self, "_stripper_wardrobe"):
@@ -89,13 +167,69 @@ init -1 python:
 
     Business.mistress_wardrobe = property(get_business_mistress_wardrobe, None, None, "Instance of mistress wardrobe")
 
-    def get_business_stripclub_wardrobe(self):
-        if not hasattr(self, "_stripclub_wardrobe"):
-            self._stripclub_wardrobe = stripclub_wardrobe.merge_wardrobes(waitress_wardrobe).merge_wardrobes(BDSM_performer_wardrobe).merge_wardrobes(manager_wardrobe).merge_wardrobes(mistress_wardrobe)
-        return self._stripclub_wardrobe
+    def get_business_stripclub_uniforms(self):
+        def parse_wardrobe_to_uniform(wardrobe, flag_func):
+            for outfit in wardrobe.outfits:
+                uniform = StripClubOutfit(outfit)
+                uniform.set_full_outfit_flag(True)
+                getattr(uniform, flag_func)(True)
+                mc.business._stripclub_uniforms.append(uniform)
 
-    Business.stripclub_wardrobe = property(get_business_stripclub_wardrobe, None, None, "Instance of total stripclub wardrobe")
+            for outfit in wardrobe.overwear_sets:
+                uniform = StripClubOutfit(outfit)
+                uniform.set_overwear_flag(True)
+                getattr(uniform, flag_func)(True)
+                mc.business._stripclub_uniforms.append(uniform)
 
+            for outfit in wardrobe.underwear_sets:
+                uniform.set_underwear_flag(True)
+                getattr(uniform, flag_func)(True)
+                mc.business._stripclub_uniforms.append(uniform)
+            return
+
+        if not hasattr(self, "_stripclub_uniforms"):
+            self._stripclub_uniforms = []
+
+            parse_wardrobe_to_uniform(stripclub_wardrobe, "set_stripper_flag")
+            parse_wardrobe_to_uniform(waitress_wardrobe, "set_waitress_flag")
+            parse_wardrobe_to_uniform(BDSM_performer_wardrobe, "set_bdsm_flag")
+            parse_wardrobe_to_uniform(manager_wardrobe, "set_manager_flag")
+            parse_wardrobe_to_uniform(mistress_wardrobe, "set_mistress_flag")
+
+        return self._stripclub_uniforms
+
+    Business.stripclub_uniforms = property(get_business_stripclub_uniforms, None, None, "Instance of total stripclub uniforms.")
+
+    def update_stripclub_wardrobes(self):
+        def update_stripclub_uniform(wardrobe, uniform):
+            if uniform.full_outfit_flag:
+                wardrobe.add_outfit(uniform.outfit)
+            if uniform.overwear_flag:
+                wardrobe.add_overwear_set(uniform.outfit)
+            if uniform.underwear_flag:
+                wardrobe.add_underwear_set(uniform.outfit)
+            return
+
+        self.stripper_wardrobe.clear_wardrobe()
+        self.waitress_wardrobe.clear_wardrobe()
+        self.bdsm_wardrobe.clear_wardrobe()
+        self.manager_wardrobe.clear_wardrobe()
+        self.mistress_wardrobe.clear_wardrobe()
+
+        for uniform in self.stripclub_uniforms:
+            if uniform.stripper_flag:
+                update_stripclub_uniform(self.stripper_wardrobe, uniform)
+            if uniform.waitress_flag:
+                update_stripclub_uniform(self.waitress_wardrobe, uniform)
+            if uniform.bdsm_flag:
+                update_stripclub_uniform(self.bdsm_wardrobe, uniform)
+            if uniform.manager_flag:
+                update_stripclub_uniform(self.manager_wardrobe, uniform)
+            if uniform.mistress_flag:
+                update_stripclub_uniform(self.mistress_wardrobe, uniform)
+        return
+
+    Business.update_stripclub_wardrobes = update_stripclub_wardrobes
 
     def hire_person(self, person, target_division, add_to_location = False):
         div_func = {
@@ -160,6 +294,14 @@ init -1 python:
 
     Business.fire_HR_director = fire_HR_director
 
+    def fire_IT_director(self):
+        if self.it_director:
+            self.it_director.remove_role(IT_director_role)
+            self.it_director = None
+            #cleanup_HR_director_meetings()
+
+    Business.fire_IT_director = fire_IT_director
+
 
     # wrap default remove_employee function to also trigger the fire_HR_director code when needed
     def business_remove_employee_extended(org_func):
@@ -222,3 +364,65 @@ init -1 python:
         return [x for x in self.get_employee_list() if x.has_child_with_mc()]
 
     Business.employees_with_children_with_mc = business_employees_with_children_with_mc
+
+    #College intern realted functions
+
+    Business.college_interns_research = []
+    Business.college_interns_production = []
+    Business.college_interns_market = []    #Adding code support for other divisions even though there is currently no plan to use them.
+    Business.college_interns_supply = []
+    Business.college_interns_HR = []
+    Business.college_interns_unlocked = False
+    Business.max_interns_by_division = 2    #Can be changed in later game code.
+    Business.cost_to_hire_intern = 5000
+
+    def hire_college_intern(self, person, target_division, add_to_location = False):
+        div_func = {
+            "Research" : [ self.college_interns_research, self.r_div],
+            "Production" : [ self.college_interns_production, self.p_div],
+            "Supply" : [ self.college_interns_supply, self.s_div ],
+            "Marketing" : [ self.college_interns_market, self.m_div ],
+            "HR" : [ self.college_interns_HR, self.h_div ]
+        }
+        if not person in div_func[target_division][0]:
+            div_func[target_division][0].append(person)
+        person.add_role(college_intern_role)
+        person.job = "Student Intern"
+        person.set_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
+        if add_to_location:
+            university.add_person(person)
+        if person.event_triggers_dict.get("intern_since", -1) == -1:
+            person.event_triggers_dict["intern_since"] = day
+            self.listener_system.fire_event("new_intern", the_person = person)
+
+        for other_employee in (self.college_interns_research + self.college_interns_production + self.college_interns_HR + self.college_interns_supply + self.college_interns_market):
+            town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+
+    Business.hire_college_intern = hire_college_intern
+
+    def remove_college_intern(self, person):
+        if person in self.college_interns_research:
+            self.college_interns_research.remove(person)
+        elif person in self.college_interns_production:
+            self.college_interns_production.remove(person)
+        elif person in self.college_interns_supply:
+            self.college_interns_supply.remove(person)
+        elif person in self.college_interns_market:
+            self.college_interns_market.remove(person)
+        elif person in self.college_interns_HR:
+            self.college_interns_HR.remove(person)
+        else:
+            pass    #Some kind of error here?
+        person.remove_role(college_intern_role)
+        return
+
+    Business.remove_college_intern = remove_college_intern
+
+    def get_intern_depts_with_openings():
+        dept_list = []
+        if len(self.college_interns_research) < self.max_interns_by_division:
+            dept_list.append("Research")
+        if len(self.college_interns_production) < self.max_interns_by_division:
+            dept_list.append("Production")
+        #TODO find conditions for allowing interns to other departments.
+        return dept_list

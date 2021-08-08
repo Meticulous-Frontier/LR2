@@ -41,7 +41,7 @@ label clone_rent_apartment_label(the_person):
             mc.name "Ok, if that is what you want."
             return
         "Rent the apartment":
-            mc.name "I think its better for your development if you have your own place. Trust me."
+            mc.name "I think it's better for your development if you have your own place. Trust me."
             the_person "Ok [the_person.mc_title], if you think that is best, I will honor your wish."
 
             python:

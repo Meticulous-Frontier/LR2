@@ -42,14 +42,14 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                textbutton "Company Efficiency: [mc.business.team_effectiveness]%":
+                textbutton "Company Efficiency: "+ str(__builtin__.int(mc.business.team_effectiveness)) + "%":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The more employees you have the faster your company will become inefficient. Perform HR work at your office or hire someone to do it for you to raise your company Efficiency. All productivity is modified by company Efficiency."
                     action NullAction()
                     sensitive True
 
-                textbutton "Current Raw Supplies: " + str(__builtin__.int(mc.business.supply_count)) +"/[mc.business.supply_goal]":
+                textbutton "Current Raw Supplies: " + str(__builtin__.int(mc.business.supply_count)) +"/" + str(__builtin__.int(mc.business.supply_goal)):
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "Your current and goal amounts of serum supply. Manufacturing serum requires supplies, spend time ordering supplies from your office or hire someone to do it for you. Raise your supply goal from your office if you want to keep more supply stockpiled."
@@ -57,10 +57,13 @@ init 2:
                     sensitive True
 
                 if not mc.business.active_research_design is None:
-                    text "  Current Research: " style "menu_text_style"
-                    textbutton "    [mc.business.active_research_design.name] (" + str(__builtin__.int(mc.business.active_research_design.current_research))+"/[mc.business.active_research_design.research_needed])":
+                    textbutton "Current Research:":
                         style "transparent_style"
                         text_style "menu_text_style"
+                    textbutton "[mc.business.active_research_design.name] (" + str(__builtin__.int(mc.business.active_research_design.current_research)) + "/" + str(__builtin__.int(mc.business.active_research_design.research_needed)) + ")":
+                        style "transparent_style"
+                        text_style "menu_text_style"
+                        text_color "#43B197"
                         tooltip "The current research task of your R&D division. Visit them to set a new goal or to assemble a new serum design."
                         action NullAction()
                         sensitive True
@@ -69,7 +72,7 @@ init 2:
                     textbutton ("Current Research: None!" if not theoretical_research.is_active() else "Current Research: Theoretical Research"):
                         style "transparent_style"
                         text_style "menu_text_style"
-                        text_color "#DD0000"
+                        text_color "#B14365"
                         tooltip "The current research task of your R&D division. Visit them to set a new goal or to assemble a new serum design."
                         action NullAction()
                         sensitive True

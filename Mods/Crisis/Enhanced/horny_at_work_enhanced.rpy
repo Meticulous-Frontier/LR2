@@ -221,7 +221,7 @@ label horny_at_work_crisis_enhanced_label():
                         licker "Let me take care of that, [licker.mc_title]."
                         $ scene_manager.update_actor(licker, position = "doggy", display_transform = character_right, emotion = "happy")
                         $ mc.change_locked_clarity(5)
-                        "You watch [licker.title], get on her hands and knees to cleanup the mess you made."
+                        "You watch [licker.title] get on her hands and knees to clean up the mess you made."
                     $ del licker
                     $ scene_manager.update_scene(position = "sitting", emotion = "happy")
                     "The girls go back to their workstations, happy with the distraction you provided them."
@@ -243,6 +243,7 @@ label horny_at_work_crisis_enhanced_label():
                         if the_report.get("girl orgasms", 0) > 0:
                             "[active_person.title] stumbles back to her desk and collapses into her chair, legs still quivering."
                         else:
+                            $ scene_manager.update_actor(active_person, position = "missionary", emotion = "happy")
                             "[active_person.title] goes back to her desk and sits down when you're finished with her. She spreads her legs and starts to touch herself."
 
                         if len(helpful_people) > 1:
@@ -533,7 +534,7 @@ label horny_at_work_crisis_enhanced_label():
                             "She places her hands on your thighs and slides your cock into her mouth, licking the tip to get it wet before slipping it further back."
                             $ clear_scene()
                             $ the_person.change_arousal(50)
-                            call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, position_locked = True) from _call_fuck_person_horny_at_work_enhanced_4
+                            call fuck_person(the_person, private = False, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_horny_at_work_enhanced_4
                             $ the_report = _return
                             $ the_person.review_outfit()
                             $ scene_manager.update_actor(the_person, position = "stand3")

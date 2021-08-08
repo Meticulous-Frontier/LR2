@@ -183,7 +183,7 @@ label casual_hotwife_get_a_drink_label(the_person):
                 "You head over to the bar and order yourself a beer, and a cocktail for [the_person.title]."
                 the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.name]."
                 "Sounds like the bartender knows [the_person.title] pretty well. She must be in here often!"
-                "The place is busy, so its easy to slip some serum into her drink."
+                "The place is busy, so it's easy to slip some serum into her drink."
                 call give_serum(the_person) from _call_give_serum_CSH000
             else:                                 #Fail
 
@@ -229,7 +229,7 @@ label casual_hotwife_get_a_drink_label(the_person):
             "This analogy is starting to get a little weird though."
             mc.name "I bet your husband would be excited if you did manage to catch one."
             "[the_person.title] stutters for a second, but quickly smiles and regains her composure."
-            the_person "Yeah, he keeps saying he will. I think its probably about time I put his eagerness to the test."
+            the_person "Yeah, he keeps saying he will. I think it's probably about time I put his eagerness to the test."
             if the_person.event_triggers_dict.get("hotwife_blowjob_enable", 0) == 1:
                 the_person "Just let me know when you have the time... I think we would both really enjoy our time."
                 "[the_person.title] licks her lips, then gets up."
@@ -267,7 +267,7 @@ label casual_hotwife_get_a_drink_label(the_person):
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 2:  #She has blown you
         mc.name "How are things going? Still going well with the husband?"
         the_person "Oh yes... I haven't had the guts to do anything with any other guys yet, but, those blowjob pictures definitely changed our sex life."
-        mc.name "Good, glad to hear its working out for you."
+        mc.name "Good, glad to hear it's working out for you."
         the_person "Yeah... he umm... he's started asking me if, you know, I'm almost ready to take things to the next level..."
         mc.name "Oh yeah? Meaning what?"
         the_person "Well, you know, not just blowing a guy but, letting him fuck me..." #TODO Finish this
@@ -321,7 +321,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         mc.name "So... tonight at your place? I'll see you there?"
         the_person "Sounds good. See you then, [the_person.mc_title]."
     elif the_person.event_triggers_dict.get("hotwife_progress", 0) == 5:  #You've fucked in front of her husband
-        the_person "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, its nice to have a break from fucking and just enjoy a stiff drink."
+        the_person "Thanks for the drink, [the_person.mc_title]. This whole adventure has really supercharged my sex life, it's nice to have a break from fucking and just enjoy a stiff drink."
         mc.name "Yeah, so is [the_person.SO_name] still enjoying your new lifestyle?"
         the_person "Oh god, we both are. I've started fucking around with a couple other guys too. Last time I came home, he tied me up and umm... reclaimed me in every hole he could fit it in..."
         mc.name "Damn! That sounds hot!"
@@ -381,7 +381,7 @@ label casual_hotwife_bathroom_blowjob_label(the_person):
         "One more tug on your underwear, and your erection springs free."
         the_person "Wow! I haven't seen anything other than hubby for... years..."
         "She begins to stroke you softly with her hand."
-        the_person "Mmmmm.... its so hard... and hot!"
+        the_person "Mmmmm.... it's so hard... and hot!"
         "You moan as she strokes you. You make sure to snap a couple pictures."
         $ mc.change_arousal(10)
         $ the_person.change_arousal(10)
@@ -598,7 +598,7 @@ label casual_hotwife_dancing_sex_label(the_person):
                 "[the_person.possessive_title] looks back at you. Her ass is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
             else:       #We assume we finished inside her but could be pussy or ass so make the text more generic#
-                "[the_person.possessive_title]'s is dripping cum from your creampie."
+                "[the_person.possessive_title] is dripping cum from your creampie."
                 "You grab her phone and snap a couple pictures of her cum dripping body."
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh my god... that was amazing. That felt so good."
@@ -701,7 +701,7 @@ label casual_hotwife_her_place_label(the_person):
     "[the_person.SO_name]? Why does that sound so familiar?"
     $ the_person.change_to_bedroom()
     "As you walk into the bedroom, you see [the_person.SO_name], the bartender sitting in a chair, completely naked."
-    "Holy shit! Its the bartender! He had a front row ticket every time you fucked [the_person.title] at the bar! No wonder he went along with all of it!"
+    "Holy shit! It's the bartender! He had a front row ticket every time you fucked [the_person.title] at the bar! No wonder he went along with all of it!"
     "He nods to you, but you are shocked at the revelation."
     the_person "Don't worry about him, get over here and fuck me [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")
@@ -1045,7 +1045,7 @@ label hotwife_seduction_response(the_person):
 label hotwife_flirt_response(the_person):
     if mc.location == downtown_bar:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
-            the_person "Didn't your mother ever tell you its rude to hit on a married woman?"
+            the_person "Didn't your mother ever tell you it's rude to hit on a married woman?"
             return
         if the_person.event_triggers_dict.get("hotwife_progress", 0) >= 2:
             the_person "Well why don't you meet me in the back in a bit and we'll see what happens?"
@@ -1105,7 +1105,7 @@ label hotwife_flirt_response_mid(the_person):
 
 label hotwife_flirt_response_high(the_person):
     if the_person.love > 50: #She is going to ghost soon
-        the_person "Didn't your mother ever tell you its rude to hit on a married woman?"
+        the_person "Didn't your mother ever tell you it's rude to hit on a married woman?"
     else:
         "She looks at you and her eyes narrow."
         the_person "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
@@ -1183,7 +1183,7 @@ label hotwife_hookup_accept(the_person):
             "Put on a condom":
                 mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
                 if the_person.effective_sluttiness() > 60:
-                    the_person "I mean... its okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
+                    the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
                         the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
@@ -1265,7 +1265,7 @@ label hotwife_hookup_accept(the_person):
             $ the_person.change_happiness(2)
     if the_person.effective_sluttiness() > 70:
         the_person "You should stick a finger in my other hole while you fuck me and take a picture. Then hubby will have to reclaim both holes!"
-        "Wow, its not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
+        "Wow, it's not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
         "You reach a hand forward and put your index finger in front of her face. She quickly gets the idea and opens her mouth with her tongue out, and begins slathering your finger with saliva."
         "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
         "She forces her sphincter to relax and your finger begins to slip inside her."
@@ -1273,7 +1273,7 @@ label hotwife_hookup_accept(the_person):
         "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
         if the_person.arousal > 120:
-            the_person "OH! Its so good... fuck I'm gonna cum again!!!"
+            the_person "OH! It's so good... fuck I'm gonna cum again!!!"
             "You get the now familiar feeling of [the_person.title] cumming around your cock, but this time you can also feel the waves around your finger."
             "You almost forgot to take some pictures! You grab her phone with your free hand and snap a few pics of her getting double penetration."
             "You wonder what it would feel like to make her cum again, but with your cock in her ass instead..."
@@ -1335,7 +1335,7 @@ label hotwife_hookup_accept(the_person):
         menu:
             "Pull Out":
                 "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
-                the_person "Oh! Its so hot on my skin!"
+                the_person "Oh! It's so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
                 "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."

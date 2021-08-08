@@ -782,7 +782,7 @@ label sister_ntr_crisis_action_label:
                 "After few seconds they both get off inside [the_person.possessive_title]. You see a trace of their love juice dripping from her pussy and anus."
                 man_name "What a nice view! Our school slut got fucked in both holes and creampied."
                 man_name2 "It felt so good to fill you up, [the_person.name]!"
-                the_person "Hope you like the view. Now I will cleanup so we can get back to studying. I don't want a bad grade on that test."
+                the_person "Hope you like the view. Now I will clean up so we can get back to studying. I don't want a bad grade on that test."
                 "You go back to you room to finally have some sleep."
                 if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                     "While trying to sleep, you hear some loud noises from outside the bedroom."
