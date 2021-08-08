@@ -445,7 +445,7 @@ label ashley_classical_concert_date_label():
     # ashley is wearing something nice
     $ the_person.apply_outfit(the_person.decide_on_outfit(sluttiness_modifier = 0.2))
     "Soon, you see the sisters."
-    $ scene_manager.add_actor (the_person, position = "stand4", emotion = "happy")
+    $ scene_manager.add_actor(the_person, position = "stand4", emotion = "happy")
     $ scene_manager.add_actor(stephanie, display_transform = character_center_flipped)
     stephanie "Oh hey, there's [stephanie.mc_title]. Don't worry, I'm sure everything will be great."
     the_person "I know, I know... are you sure you don't want to go?"
@@ -464,7 +464,7 @@ label ashley_classical_concert_date_label():
     #End of love option
     stephanie "Alright you two, go enjoy your classical concert. Ash, just text me when you get done, I'm gonna go have a couple drinks."
     the_person "Okay. Bye Steph!"
-    $ scene_manager.remove_actor(stephanie)
+    $ scene_manager.hide_actor(stephanie)
     mc.name "Shall we?"
     #TODO find concert hall background image to change to.
     "You step into the concert hall, show your tickets, and make you way to your seats."
@@ -507,7 +507,7 @@ label ashley_classical_concert_date_label():
     the_person "It was, and more. I really had a good time tonight."
     mc.name "Great! If you hear about another orchestra in town, I'd love to go again."
     the_person "I haven't heard anything, but I'll definitely keep it in mind. I'd like to do this again."
-    $ scene_manager.add_actor(stephanie, display_transform = character_center_flipped)
+    $ scene_manager.show_actor(stephanie)
     stephanie "Hey Ash! Hey [stephanie.mc_title]! How'd it go?"
     the_person "Steph! We had a great time. The performers were amazing..."
     stephanie "And I assume you were a perfect gentleman?"
