@@ -585,7 +585,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     python:
         update_person_sex_record(the_person, report_log)
-        the_person.restore_all_clothing()   # put all half-off clothing back in place
+        # the_person.restore_all_clothing()   # put all half-off clothing back in place
         position_choice = None
         object_choice = None
 

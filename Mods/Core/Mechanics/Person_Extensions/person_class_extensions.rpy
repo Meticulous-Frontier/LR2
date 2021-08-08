@@ -1674,6 +1674,8 @@ init -1 python:
     Person.apply_yoga_shoes = apply_yoga_shoes
 
     def apply_planned_outfit(self):
+        self.restore_all_clothing() # restore half-off clothing items of current outfit.
+
         if self.should_wear_uniform():
             self.wear_uniform()
         elif self.should_wear_work_outfit():

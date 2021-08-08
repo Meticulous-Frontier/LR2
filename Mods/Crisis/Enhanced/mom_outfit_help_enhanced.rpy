@@ -364,7 +364,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ the_person.strip_outfit(position = "standing_doggy")
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
                 $ mc.change_locked_clarity(20)
-                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]"
+                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_bed(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
                 "When you finish up, you put your dick away."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
