@@ -2104,7 +2104,7 @@ label starbuck_candace_product_demo_label(the_person):
     "[the_person.title] is starting to moan when [starbuck.possessive_title] walks into the room. She's rigged the enormous double dick to some leather panties with some straps and velcro."
     starbuck "Glad to hear you are getting warmed up. Took me a bit to rig this. It's not perfect, but I think it will work!"
     the_person "Oh my God! That thing looks, like, amazing!"
-    "You watch intently as [starbuck.title] start to strip down..."
+    #"You watch intently as [starbuck.title] start to strip down..."
     "You never thought you would ever be in a position like this. You're about to film [starbuck.title], the sex shop owner, as she fucks [the_person.title], your bimbo office girl, with an enormous double headed dildo."
     "You pinch your arm. Yeah! You aren't dreaming this!"
     "[starbuck.possessive_title] puts on the strap on. You hand her the lube so she can get it ready."
@@ -2116,9 +2116,9 @@ label starbuck_candace_product_demo_label(the_person):
     else:
         starbuck "I'll be surprised if you can walk after this hun, but if so I'm sure we can do something fun!"
     $ scene_manager.update_actor(the_person, display_transform = character_center, z_order = 2, position = "cowgirl")
-    $ scene_manager.update_actor(starbuck, display_transform = character_center_flipped, z_order = 1, position = "kneeling1")
-    "The girls get into position. [the_person.title] is already wiggling her ass back an forth."
+    "Your [the_person.title] gets into position already wiggling her ass back an forth."
     the_person "I'm ready, stick it in!"
+    $ scene_manager.update_actor(starbuck, display_transform = character_right_flipped, z_order = 1, position = "stand3")
     mc.name "Hang on, we have to start the video first. Usually [starbuck.title] does an intro too, then we'll get to the demo."
     the_person "Ugh, fine! What a tease!"
     "Everything appears to be all setup. You give a quick countdown, and then begin the video."
@@ -2129,7 +2129,8 @@ label starbuck_candace_product_demo_label(the_person):
     the_person "Hey, are you gonna put that thing in me or not?"
     "[starbuck.title] just smiles and then introduces her assistant."
     starbuck "Today, to help me with the demonstration, is [the_person.name]. One of my favorite features of this product is the suction cups, which have allowed me to attach it to these!"
-    "[starbuck.possessive_title] motions at the strap on she's fashioned."
+    $ scene_manager.update_actor(starbuck, display_transform = character_center_flipped, z_order = 1, position = "kneeling1")
+    "[starbuck.possessive_title] motions at the strap on she's fashioned. While moving behind [the_person.possessive_title]."
     starbuck "Now, let's see if that guarantee holds up! Are you ready dear?"
     the_person "About time! I wasn't sure you were ever gonna... OHHHH!"
     "[the_person.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputtering a couple of words out."
