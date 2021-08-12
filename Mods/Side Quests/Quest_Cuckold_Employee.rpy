@@ -275,7 +275,7 @@ label quest_cuckold_employee_decision_label():
         "Stay quiet":
             "There is a long moment of silence."
             mc.name "I'm really sorry, I wish I could do something to help."
-            the_person "It's okay. I mean, I just needed to vent, I wasn't expecting a solution to be... starting at me in the face."
+            the_person "It's okay. I mean, I just needed to vent, I wasn't expecting a solution to be... staring me in the face."
             "She's looking straight into your eyes now. You start to feel a bit uncomfortable."
             the_person "You know... you remind me a lot of my husband. Height... hair color..."
             the_person "What if there was something you could do to help? Would you do it?"
