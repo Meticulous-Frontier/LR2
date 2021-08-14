@@ -15,7 +15,5 @@ label update_kaya_mod_core(stack):
     python:
         if "kaya" not in globals():
             kaya_mod_initialization()
-        elif kaya_can_get_drinks() and not kaya_studies_with_lily():
-            kaya.add_unique_on_room_enter_event(kaya_meet_lily_at_uni)
         execute_hijack_call(stack)
     return
