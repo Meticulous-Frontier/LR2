@@ -25,7 +25,7 @@ init 2 python:
         kaya_base_outfit.add_accessory(the_bracelets)
 
         # init kaya role
-        kaya_role = Role(role_name ="kaya", actions =[], hidden = True)
+        kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
 
         #global kaya_role
         global kaya
@@ -41,6 +41,7 @@ init 2 python:
         kaya.home.add_person(kaya)
 
         kaya.event_triggers_dict["intro_complete"] = False    # True after first talk
+        kaya.event_triggers_dict["drink_date_complete"] = False
         kaya.event_triggers_dict["can_get_drinks"] = False
         kaya.event_triggers_dict["can_get_barista_quickie"] = False
         kaya.event_triggers_dict["has_moved"] = False
@@ -84,8 +85,9 @@ init -2 python:
             return True
         return False
 
-    def kaya_get_drinks_requirement():
-        if time_of_day == 3:
+    def kaya_get_drinks_requirement(the_person):
+        # return False
+        if time_of_day == 3 and kaya_can_get_drinks():
             return True
         return False
 
@@ -100,12 +102,11 @@ init -2 python:
         return False
 
     def kaya_meet_lily_at_uni_requirement(the_person):
-        if the_person.location == university and day%7 != 1:
+        if the_person.location == university and day%7 != 1 and the_person.sluttiness > 20 and kaya_has_had_drink_date():
             return True
         return False
 
     def kaya_lily_study_night_intro_requirement():
-        return False
         if day%7 == 1 and time_of_day == 4:
             return True
         return False
@@ -121,46 +122,84 @@ init -2 python:
         return False
 
 
+    def kaya_uni_scholarship_intro_requirement(the_person):
+        if the_person.love > 40 and mc.business.funds > 10000 and the_person.location == university and day%7 < 4:
+            return True
+        return False
+
+    def kaya_HR_start_internship_program_requirement():
+        if mc.business.is_open_for_business():
+            return True
+        return False
+
+    def kaya_first_day_of_internship_requirement():
+        if day%7 == 5 and time_of_day <= 1:
+            return True
+        return False
+
     def kaya_moving_in_with_mother_intro_requirement(the_person):
         if kaya.sluttiness > 40 and the_person.location == coffee_shop and kaya_studies_with_lily():
             return True
         return False
 
     def kaya_asks_for_help_moving_requirement():
-        return False
         if day >= kaya.event_triggers_dict.get("move_help_day", 9999) and time_of_day == 4 and day%7 != 6:#MAke sure moving day does not conflict with monday meeting
             return True
         return False
 
     def kaya_moving_day_requirement():
-        return False    #Disabled, not yet tested
         if time_of_day == 0:
             return True
         return False
 
     def kaya_share_the_news_requirement():
-        return False
-        if day >= the_person.event_triggers_dict.get("move_help_day", 9999) and time_of_day == 3 and the_person.location == the_person.downtown:
+        if day >= kaya.event_triggers_dict.get("share_news_day", 9999) and time_of_day == 3 and kaya.location == coffee_shop:
             return True
         return False
+
+    def kaya_jennifer_reveal_requirement(the_person):
+        return False
+
+    def kaya_lily_reveal_requirement(the_person):
+        return False
+
+    def kaya_barista_fuck_intro_requirement(the_person):
+        return False
+
+    def kaya_barista_fuck_requirement(the_person):
+        return False
+        if kaya_can_get_work_quickie():
+            return True
 
     def kaya_jennifer_confrontation_requirement():
         if willing_to_threesome(kaya, mom):
             return True
         return False
 
+
+
 init 3 python:
     kaya_setup_intro_event = Action("Kaya Setup", kaya_setup_intro_event_requirement, "kaya_setup_intro_event_label")
     kaya_intro = Action("Meet Kaya",kaya_intro_requirement,"kaya_intro_label")
-    kaya_ask_out = Action("Ask to get drinks",kaya_ask_out_requirement,"kaya_ask_out_label")
-    kaya_moving_in_with_mother_intro = Action("Kaya can't drink",kaya_moving_in_with_mother_intro_requirement,"kaya_moving_in_with_mother_intro_label")
-    kaya_asks_for_help_moving = Action("Kaya Needs Help",kaya_asks_for_help_moving_requirement,"kaya_asks_for_help_moving_label")
+    kaya_ask_out = Action("Ask to get drinks",kaya_ask_out_requirement,"kaya_ask_out_label")    #20 love
+    kaya_moving_in_with_mother_intro = Action("Kaya can't drink",kaya_moving_in_with_mother_intro_requirement,"kaya_moving_in_with_mother_intro_label") #40 slut
+    kaya_asks_for_help_moving = Action("Kaya Needs Help",kaya_asks_for_help_moving_requirement,"kaya_asks_for_help_moving_label")   #40 love + 40 slut
     kaya_moving_day = Action("Kaya Moves",kaya_moving_day_requirement,"kaya_moving_day_label")
-    kaya_meet_lily_at_uni = Action("Kaya and Lily Meet",kaya_meet_lily_at_uni_requirement,"kaya_meet_lily_at_uni_label")
+    kaya_meet_lily_at_uni = Action("Kaya and Lily Meet",kaya_meet_lily_at_uni_requirement,"kaya_meet_lily_at_uni_label")    #20 slut
     kaya_lily_study_night_intro = Action("Kaya and Lily Study",kaya_lily_study_night_intro_requirement,"kaya_lily_study_night_intro_label")
     kaya_lily_study_night_recurring = Action("Kaya and Lily Study",kaya_lily_study_night_recurring_requirement,"kaya_lily_study_night_recurring_label")
     kaya_lily_study_night_apology = Action("Apologize to Kaya",kaya_lily_study_night_apology_requirement,"kaya_lily_study_night_apology_label")
-    kaya_share_the_news = Action("Share the news with Kaya",kaya_share_the_news_requirement,"kaya_share_the_news_label")
+    kaya_uni_scholarship_intro = Action("Start scholarship program",kaya_uni_scholarship_intro_requirement,"kaya_uni_scholarship_intro_label")
+    kaya_HR_start_internship_program = Action("Discuss scholarship with HR",kaya_HR_start_internship_program_requirement,"kaya_HR_start_internship_program_label")
+    kaya_first_day_of_internship = Action("Kaya's first day as intern",kaya_first_day_of_internship_requirement,"kaya_first_day_of_internship_label")
+    kaya_share_the_news = Action("Share the news with Kaya",kaya_share_the_news_requirement,"kaya_share_the_news_label")    #60 love
+    kaya_jennifer_reveal = Action("Talk to Jennifer about Kaya",kaya_jennifer_reveal_requirement,"kaya_jennifer_reveal_label")
+    kaya_lily_reveal = Action("Talk to Lily about Kaya", kaya_lily_reveal_requirement,"kaya_lily_reveal_label")
+    kaya_barista_fuck_intro = Action("Kaya takes a break at work", kaya_barista_fuck_intro_requirement,"kaya_barista_fuck_intro_label")
+    kaya_barista_fuck = Action("Fuck her on her break", kaya_barista_fuck_requirement,"kaya_barista_fuck_label")
+    kaya_get_drinks = Action("Ask to get drinks",kaya_get_drinks_requirement,"kaya_get_drinks_label")
+
+
 
 label kaya_setup_intro_event_label():
     $ the_person = kaya
@@ -408,41 +447,17 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "Wow, what a busy night! You feel like you have a connection with [the_person.title]. She definitely seems eager too..."
     $ the_person.add_unique_on_room_enter_event(kaya_moving_in_with_mother_intro)   #Link this for now. Probably will change to a different place later on.
     $ the_person.add_unique_on_room_enter_event(kaya_meet_lily_at_uni)
+    $ kaya.event_triggers_dict["drink_date_complete"] = True
     return
 
 label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
     mc.name "How about a couple drinks tonight?"
     the_person "Sounds great! It's almost closing time, and I'm solo tonight. If you want to just grab a seat while I close up, we can walk over together."
 
-    "You meet with Kaya after she gets off work. You take her to a local bar."
-    "You grab a couple drinks. Chance to serum her."
-    "You find out she likes to play pool. You play a round, barely winning."
-    "Grab a couple more drinks."
-    "Before the next round, Kaya talks about her mother being sick, can't pay for her medications, having to work coffee-shop job to help out."
-    "MC gets the idea of the intern program as a way for the company to provide girls with scholarships and some spending money."
-    "If shes slutty, she flashes you at a key moment as a distraction."
-    "You lose the second round."
-    "She's too tired to play another round but asks for a rain check. Asks if you will walk her home."
-    "At her apartment door, start making out. When MC starts getting handsy, a door slamming down the hall interrupts."
-    "She apologizes, she doesn't want to put out on the first date. Says goodnight to MC."
-    "MC has unlocked grabbing drinks with Kaya. He can ask her to grab drinks when she is working at the coffee shop any evening."
-    if mc.business.hr_director:
-        $ mc.business.hr_director.add_unique_on_talk_event(kaya_HR_start_internship_program)
-    else:
-        $ mc.business.add_mandatory_crisis(kaya_add_HR_program_event)
-    return
-
-label kaya_add_HR_program_event_label():
-    $ the_person = mc.business.hr_director
-    $ the_person.add_unique_on_talk_event(kaya_HR_start_internship_program)
-    "Now that you have an HR director, you should talk to her about an internship program for girls like [kaya.title]."
-    return
-
-label kaya_HR_start_internship_program_label():
-    "You track down your HR director. Have a meeting with her about an internship program."
-    "Decide it should happen on the weekends, have it be a half day (slot 1 and 2), in research and production departments."
-    "She says as a trial it should probably be kept small, maybe 4 girls max."
-    $ kaya.add_unique_on_talk_event(kaya_meet_lily_at_uni)
+    "This will eventually be a full date that you can go on with [the_person.title], but it hasn't been written yet."
+    "You will have the chance to give her a serum though, so for now this is just a placeholder option to give her a serum."
+    "You could probably slip a serum into her drink if you do it quickly..."
+    call give_serum(the_person) from _call_give_kaya_getting_date_01
     return
 
 label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Lily friendship storyline. Requires mid Kaya love (>40?). REquires scholarship program.
@@ -538,8 +553,8 @@ label kaya_lily_study_night_intro_label():
     $ mom.change_happiness(5)
     mc.name "Err, right."
     "You look at the second glass for a moment. This could get awkward when the other two get here."
-    $ scene_manager.add_actor(lily, character_center)
-    $ scene_manager.add_actor(the_person, character_left_flipped)
+    $ scene_manager.add_actor(lily, display_transform = character_center)
+    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped)
     "[the_person.title] and [lily.possessive_title] enter the kitchen right on queue."
     lily "Oh hey mom."
     mom "Hi dear. Who is your friend?"
@@ -559,21 +574,21 @@ label kaya_lily_study_night_intro_label():
     the_person "[the_person.last_name], ma'am."
     mom "I see..."
     lily "Hey, what do you think about having some of this?"
-    $ scene_manager.update_actor(the_person, character_center_flipped(xoffset = -.1), position = "walking_away")
+    $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(xoffset = -.1), position = "walking_away")
     $ scene_manager.update_actor(mom, emotion = "sad")
     "When [the_person.title] turns to the fridge, you notice [mom.possessive_title] struggle for a moment to keep her emotions in check."
     "She looks at you with clear sadness in her eyes. Realization dawns on her though that you notice, and she quickly puts on happy face..."
     $ scene_manager.update_actor(mom, emotion = "happy")
     the_person "That looks good, but what about this..."
-    $ scene_manager.update_actor(the_person, character_center_flipped(xoffset = -.1), position = "standing_doggy")
+    $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(xoffset = -.1), position = "standing_doggy")
     "[the_person.possessive_title] bends over to look at something on the bottom shelf of the fridge. You eyes immediately get drawn to her ass..."
     "God you hope you get a chance to play with her tight little booty soon..."
     $ mc.change_locked_clarity(20)
     "[mom.possessive_title] clears her throat."
     $ scene_manager.update_actor(mom, emotion = "angry")
     "When you look over, you realize she watched you checking out [the_person.title]. God, this whole evening has gotten so awkward!"
-    $ scene_manager.update_actor(the_person, character_center_flipped(xoffset = -.1), position = the_person.idle_pose)
-    $ scene_manager.update_actor(lily, character_center, position = the_person.idle_pose)
+    $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(xoffset = -.1), position = the_person.idle_pose)
+    $ scene_manager.update_actor(lily, display_transform = character_center, position = the_person.idle_pose)
     "The two girls suddenly stand up and turn around. They've got a snack and their wine."
     lily "Alright, let's get back to studying. See ya!"
     $ scene_manager.remove_actor(lily)
@@ -607,6 +622,7 @@ label kaya_lily_study_night_intro_label():
     $ lily.set_alt_schedule(lily_bedroom, days = [1], times = [4])  #This should already be set, but just in case, make sure she is there.
     $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
     $ kaya.add_unique_on_talk_event(kaya_lily_study_night_apology)
+    $ kaya.add_unique_on_talk_event(kaya_uni_scholarship_intro)
     $ kaya.event_triggers_dict["studies_with_lily"] = True
     return
 
@@ -630,6 +646,8 @@ label kaya_lily_study_night_apology_label(the_person):
     "?????""Ahem... excuse me sir are you almost done ordering?"
     "The guy behind you in line is apparently not amused with you holding up the line."
     "[the_person.possessive_title] gives you a wink, you grab your coffee and step out of line."
+    "You sit down at a booth and sip your coffee for a bit. You look over at [the_person.title] and admire her as she works."
+    "She glances over at you and notices you watching her and gives you a smile."
     $ jump_game_loop()
     return
 
@@ -675,6 +693,200 @@ label kaya_lily_study_night_recurring_label(the_person):
     "You bring the snacks and drink to the girls. They are busy studying, so you decide to leave them alone for tonight."
     $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
     return
+
+label kaya_uni_scholarship_intro_label(the_person):
+    "You go for walk, eventually coming to the university grounds. You decide to walk about for a bit, admiring the architecture and the people."
+    "The four years you spent going here, you feel a connection to this place and to the students. It feels good to be on the grounds."
+    "As you walk around, you spot [the_person.possessive_title]. She is stepping out of a building, and seems down."
+    $ the_person.draw_person(emotion = "sad")
+    mc.name "Hey [the_person.title]. Doing okay?"
+    the_person "Wha? Oh hey [the_person.mc_title], I'm doing fine..."
+    "She doesn't seem fine..."
+    mc.name "Are you sure?"
+    the_person "I... just got done withdrawing from my courses for next semester."
+    mc.name "You did what? Isn't next semester your final one before graduating?"
+    the_person "I had to drop out. I can't afford the tuition anymore."
+    mc.name "[the_person.title]... I'm sorry... are you sure there isn't some other way? Where is the money from the coffee shop going?"
+    the_person "Its my mom... the doctor is trying her on this new medication, but insurance won't cover it because it's experimental. They are giving her a good deal on, but it is still really expensive."
+    the_person "My paycheck can just barely cover it. Mom has been almost completely absent from her business lately, so she has been needing some help with bills too..."
+    mc.name "[the_person.title], I didn't know you were so hard up... but your education is important! Isn't there some way of getting a student loan or?"
+    the_person "They only look at last year's family income, and mom was making decent money then."
+    mc.name "Well... what if I gave you the money? I run a business, I could manage."
+    $ the_person.draw_person(emotion = "angry")
+    the_person "What!?! I'm not asking for handouts!"
+    mc.name "I didn't mean it like that! Everyone goes through hard times once in a while."
+    $ the_person.draw_person(emotion = "sad")
+    the_person "I... I know. I'm sorry I didn't mean to blow up like that..."
+    the_person "You're a sweet guy, but I don't think I could accept money like that from you as a gift."
+    the_person "I'm sorry, I have to get going... take care!"
+    mc.name "Goodbye."
+    $ the_person.draw_person(position = "walking_away")
+    "Your brain is working overtime as [the_person.possessive_title] walks away. There has to be some way that you can convince her to keep going to class?"
+    "When things with her mother... resolve... sure she could go back then... but will she?"
+    "Dropping out now, you get the sinking feeling she will probably never finish her degree."
+    "Surely there is something you could do?"
+    "You decide to talk to someone about it. Someone who knows a bit more about the University and its inner workings, financially and otherwise."
+    "Someone who once helped you financially get through your time in university."
+    "You walk to [nora.possessive_title]'s lab and knock on the door."
+    $ nora.draw_person()
+    nora "Ah, hello [nora.mc_title]."
+    mc.name "Hello [nora.title]."
+    nora "Is there something I can do for you?"
+    mc.name "Advice, maybe."
+    $ nora.draw_person(position = "sitting")
+    "[nora.title] invites you into her lab and you sit down with her. You give her a brief history of what is going on with [the_person.title]."
+    if kaya_mc_knows_relation():
+        "Leaving out a few key details about her actual relationship with you."
+    else:
+        "Leaving out a few details about your interest in her."
+    mc.name "So... is there anything I can do?"
+    nora "Well, you could start a scholarship foundation. If you were to start one with the universtiy, it would be up to you to determine who the recipients are."
+    mc.name "Oh... a scholarship?"
+    nora "Yes. However, it sounds like this student isn't interested in free money... maybe you could make some kind of scholarship - internsip program?"
+    mc.name "Ahh, internship?"
+    nora "You are still running that research company right? Many degrees here have electives that involve an internship, especially STEM degrees."
+    nora "You run an internship program where the students come help in your research facility and you pay their schooling costs for a semester."
+    nora "The university would count it as credit accumulated to their degree."
+    nora "Generally though, they want students to focus on their studies, so usually they ask the the hours be kept low, 10 hours a week or less."
+    mc.name "Hmm, how much would it cost to set up something like that?"
+    nora "Last time I checked, other similar programs paid about $5000 per intern. That covers the student's entire tuition, meal plan, and books for a semester."
+    nora "The time for the interns to work is up to you, but most programs I've seen are set up for weekends. Either one full day, or two half days."
+    mc.name "I see... so this is something that I could start with just [the_person.title], but could bring on more people as things go along?"
+    nora "Yes, if you want to I could work with you on identifying potential candidates. However, there are a few people who would be inelegible."
+    nora "While not illegal, the university takes a strong stance against nepotism, so your family member would not be eligible."
+    if kaya_mc_knows_relation():
+        mc.name "I... ha, I would never... of course..."
+    else:
+        mc.name "Family?"
+    nora "So [lily.name], your sister would not be eligible."
+    mc.name "[lily.name], right."
+    mc.name "Are there any other limits to who I can hire? As interns?"
+    nora "Not really, but you should be careful not to discriminate against protected classes with your awards."
+    mc.name "What if I wanted to support a protected class?"
+    nora "Such as?"
+    mc.name "What if I made it... a STEM internship program for girls only?"
+    nora "Oh! [nora.mc_title] that would be a great idea. No such program currently exists that I'm aware of. I think the university would jump at the chance to offer a STEM internship for women."
+    nora "If you want to start this, I want to be your partner for it. To get some of these girls out into the world of research and getting some job experience before they graduate would be invaluable."
+    nora "I'll talk to university CFO right away if you want to get it set up. I'm sure I can convince him to approve it."
+    if nora.sluttiness > 40:
+        nora "I can be VERY persuasive."
+    "You think about it for a moment. This seems like a great opportunity to get impressionable young co-eds in your business..."
+    "However, you should probablyrun the details by your HR director before you go full steam ahead. For now, maybe you could just hire [the_person.possessive_title] until you talk to her."
+    mc.name "Tell you what, let's start with the student that we've already been discussing. I'll talk to my HR supervisor and iron out details and then get this program going."
+    nora "Excellent. What programs are looking to intern from?"
+    mc.name "Well, for a STEM program... we currently do medical research and pharmaceutical manufacturing, so I suppose Chemistry and Biology?"
+    nora "I'll go corner the CFO right away. Can I give him your financial details? We could have this girl you are talking about official by this weekend."
+    mc.name "Do it. I have the funds to start this ASAP."
+    $ nora.change_love(5)
+    $ nora.change_happiness(10)
+    $ nora.change_obedience(10)
+    nora "It's decided then. I'll go find him right now. You're doing a wonderful thing, supporting students [nora.mc_title]."
+    $ clear_scene()
+    "You leave [nora.possessive_title]'s lab. You text [the_person.possessive_title]."
+    $ mc.start_text_convo(the_person)
+    mc.name "Hey, are you still at the unversity?"
+    the_person "Yeah, I have an hour until my next class starts."
+    mc.name "Meet me at the quad."
+    the_person "Okay."
+    $ mc.end_text_convo()
+    "You walk quickly over to a courtyard between 4 of the main university buildings."
+    $ the_person.draw_person(emotion = "sad")
+    the_person "Hey [the_person.mc_title]..."
+    mc.name "Hey. I want you sign back up for your classes."
+    the_person "I'm not taking your money."
+    mc.name "I'm not giving you money, but I just got done talking to one of the professors here, and you've been offered an internship."
+    the_person "A.. what?"
+    mc.name "The [mc.last_name] STEM Internship for Women program."
+    the_person "I've never heard of such a program... or applied for it?"
+    mc.name "That's because it just got created today. I really think you should accept it."
+    the_person "I don't know..."
+    mc.name "It is just for a few hours on the weekends. Half days on Saturdays and Sundays. It will give you some good job experience."
+    mc.name "And if you are ever just too tired from family stuff... just text me and stay home."
+    $ the_person.draw_person(emotion = "happy")
+    the_person "I... I don't know what to say."
+    mc.name "Just say that you'll be there on Saturday. I'm still getting the details worked out."
+    the_person "Okay. I'll do it! I'll see you Saturday... boss?"
+    mc.name "See you then."
+    $ clear_scene()
+    $ mc.business.change_funds(-5000)
+    "You have taken the first step toward beginning an internship program. You should talk with your HR supervisor as soon as possible to establish the details!"
+    $ mc.business.add_mandatory_crisis(kaya_HR_start_internship_program)
+    return
+
+label kaya_HR_start_internship_program_label():
+    $ the_person = mc.business.hr_director
+    "You page your HR director to have her meet you in your office. You need to talk to her about starting up the internship program."
+    $ ceo_office.show_background()
+    $ the_person.draw_person()
+    the_person "You wanted to see me?"
+    mc.name "I do. Have a seat."
+    $ the_person.draw_person(position = "sitting")
+    mc.name "I've partnered up with the local university. I'm starting a STEM internship program for women to help get them work experience and a scholarship toward their studies."
+    the_person "That's... wow! Okay. How can I help?"
+    mc.name "I've partnered with a former professor at the university who will help me decide who to award the internships to. The plan is to have them work here half days on Saturday and Sunday."
+    the_person "Okay..."
+    mc.name "For now, I'm only hiring for Production and Research, since it is a STEM focused scholarship."
+    the_person "So... you know I don't work on weekends, right?"
+    mc.name "I wouldn't expect that of you..."
+    the_person "So... the interns will be here unattended?"
+    mc.name "I'll be here some of the time, I'm sure..."
+    if the_person.sluttiness > 40:
+        the_person "And you'll be able to keep it in your pants for the weekend, until I get here on Monday, right?"
+    else:
+        the_person "So you'll be here alone, as the only male, with a bunch of college age girls?"
+    mc.name "Well..."
+    "[the_person.possessive_title] sighs."
+    the_person "They are also not technically employees, so employee policies and contracts won't technically apply to them."
+    mc.name "Meaning?"
+    the_person "Things like uniform requirements, serum testing requirements, etc. None of those will apply to them."
+    mc.name "That's fine."
+    the_person "They also generally won't quit, but their productivity will probably hinge on how much they enjoy working here."
+    the_person "In addition, if things go badly, or if you can't behave yourself, I'm sure they'll make my life hell with HR paperwork and complaints..."
+    mc.name "I'll be on my best behavior."
+    the_person "Okay... can we start small atleast?"
+    mc.name "Well, for now I only have one person. How small do you think?"
+    the_person "Let's keep it to three people per department. If things go good, we can expand it more."
+    mc.name "That's a good idea."
+    the_person "And [the_person.mc_title]... please don't let me come back to work on Mondays to a mountain of HR paperwork."
+    mc.name "Yes ma'am."
+    the_person "Alright. I'll make up a basic intern onboarding paperwork packet that you can give them."
+    the_person "I hope I don't regret this..."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] gets up and says goodbye, leaving your office."
+    $ clear_scene()
+    "You can now hire college interns! Talk to [nora.title] at the university to hire more. They cost $5000 and will work on weekends for their final semester."
+    "If the intern is happy working here, they can be hired on full time after graduation."
+    "Unhappy interns will hurt company efficiency while working. They will also refuse an employment offer after graduating."
+    "Your first intern is [kaya.title]. For now you are limited to three interns per department. More interns per department, and more available departments may become available in the future."
+    $ mc.business.add_mandatory_crisis(kaya_first_day_of_internship)
+    call unlock_college_interns() from _unlock_intern_with_nora_and_business_01
+    return
+
+label kaya_first_day_of_internship_label():
+    $ the_person = kaya
+    $ mc.business.hire_college_intern(the_person, "Research", add_to_location = False)
+    "Today is the first day of your internship program. You make sure to head to work early to meet your first intern, [the_person.title]."
+    $ ceo_office.show_background()
+    "You go to your office and make sure you are ready to start the day. On your desk is the paperwork packet your HR director made up."
+    "The packet looks great, with very detailed instructions and guidelines. You should consider giving her a bonus..."
+    "KNOCK KNOCK"
+    $ the_person.draw_person()
+    the_person "Hello?"
+    mc.name "Ah! You found your way in. Welcome!"
+    the_person "Thanks. I'm here! I still can't believe it... I enrolled in my classes again, and my university account shows zero balance!"
+    the_person "So I'm ready to work. I'm not sure how much I'll be able to help, but I promise I'll try my best."
+    mc.name "That is great to hear!"
+    $ mc.business.p_div.show_background()
+    "You give her a tour of the facility, showing her all the different departments."
+    $ mc.business.r_div.show_background()
+    "Finally, you get to the research department."
+    mc.name "And, this is where I'll have you working most of the time."
+    the_person "Wow! A real lab. This is amazing!"
+    "You show her around, how to use the computer systems, how to look at research progress, how to figure out what needs to be done, etc."
+    the_person "Wow. This is great. I promise I'll work hard while I'm here. Is it just going to be me?"
+    mc.name "For today, yes, but I'm going to look into providing scholarships to more students soon, so it won't always be that way."
+    return
+
 
 label kaya_moving_in_with_mother_intro_label(the_person): #This label is called if you ask her to get drinks with you after a few different points in the story. Req 40+ sluttiness
     $ the_person.draw_person()
@@ -987,16 +1199,16 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     the_person "Yeah but... she's a native, like me. Sometimes we do things a little differently than you would expect."
     mc.name "I've come to appreciate that. Don't worry, I'll roll with it."
     the_person "Okay. Let's go!"
-    $ the_person.update_actor(the_person, position = "sitting")
+    $ scene_manager.update_actor(the_person, position = "sitting")
     "[the_person.possessive_title] says goodbye to her apartment. You hop in the truck while she drives."
     "The truck ride is pretty quiet. You wonder what her mother is like. You guess you'll find out soon."
     #TODO have different backgrounds for Kaya and Sakari's homesteads. This will not feel right in the mean time.
     $ mc.change_location(sakari.home)
     $ mc.location.show_background()
-    $ the_person.update_actor(the_person, position = "walking_away")
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     "Soon you arrive. [the_person.possessive_title] goes to the front door and let's herself in. You follow closely behind her."
     the_person "{=kaya_lang}Whaea! Kei konei ahau!{/=kaya_lang}(?????)"
-    $ the_person.update_actor(the_person, position = the_person.idle_pose)
+    $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     $ scene_manager.add_actor(sakari, display_transform = character_center_flipped)
     sakari "{=kaya_lang}Tamahine!{/=kaya_lang}"
     "[the_person.title]'s mother steps out from the hallway. She is surprised when she sees you."
@@ -1021,16 +1233,13 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ scene_manager.add_actor(sakari)
     sakari "Ah, thank you for all your help, young man."
     "Her eyes follow yours to the picture on the wall."
-    mc.name "That picture... how do you have that picture?"
-    sakari "Ah yes. You are his son, aren't you? You look just like your father when he was younger. Do you know that?"
-    mc.name "You knew my father?"
-    sakari "Yes, I certainly did. We worked together before he died, among other things."
-    "That's... did your father have a mistress?"
-    mc.name "That's... did you... before he died?"
-    sakari "Yes. I know what you are asking. Your mother was not happy about it when she found out... but in our culture, it is not unusual for powerful men like your father was to have multiple women."
-    "That can only mean one thing. Your father had an affair with her. That would lead to one obvious conclusion..."
-    mc.name "Are you telling me... [the_person.name]..."
-    sakari "Your father gave me one last gift before he died. A wonderful, sacred gift. And yes, if you are his son, that would be your half sister."
+    mc.name "That's a nice picture. Who is the man?"
+    sakari "That would be [the_person.name]'s father. He and I had, I guess you would call it an office romance."
+    "Your father... he had a mistress!?!"
+    sakari "We worked together for a while, but then things got complicated."
+    mc.name "I'm sorry to hear that."
+    sakari "Yes. He died a while ago, and I miss him. He was a good man."
+    "You can't believe it. Your father had an affair? And [the_person.title] is..."
     "You are speechless. How could this happen? Does [mom.possessive_title] know about this?"
     "Of course she does! That's why she was acting so weird around her the other night when [the_person.possessive_title] came over to study with [lily.title]."
     "And that would make [lily.possessive_title] and her half sisters! No wonder they are so similar and have the same laugh and smile!"
@@ -1141,27 +1350,220 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
     return came_inside_kaya
 
 label kaya_share_the_news_label():  # Timed event after helping her move.
-    "Kaya texts you. Wants to know if you can meet up after she gets off work. IF she's pregnant, she has crazy news for you."
-    "You agree to meet up."
-    "You meet with her. She invites you into the coffee shop while she closes down, says she's the only one around."
-    "When she finishes, you sit with her at a table."
+    $ the_person = kaya
+    $ mc.start_text_convo(the_person)
+    the_person "Hey! Sorry I've been really busy this week. Can you swing by the coffee shop? I'm just getting ready to close up!"
+    mc.name "I'll be right there. It would be good to have a chat."
     if kaya.is_pregnant():
-        "If she's pregnant, she excitedly tells MC that. Wants to know how MC feels about it."
-        "MC tells her how he discovered she is actually his half sister. She is conflicted."
-        "In her culture, small tribes sometimes required family members to marry. It's discouraged, but not unheard of."
-        "Says she still wants to be with MC and wants to keep the baby. Says she will keep the secret that you are related."
-        "Give MC choice. He can agree with her to keep it, or ask her to get rid of it."
-        "If MC asks her to get rid of the baby, she is hurt. Asks MC to leave and then leaves the game along with her mother."
+        the_person "And maybe a couple other things too ;)"
     else:
-        "MC breaks the news to her that he discovered they are half siblings. She is conflicted."
-        "In her culture, small tribes sometimes required family members to marry. It's discouraged, but not unheard of."
-        "Says she still wants to be with MC. She offers to keep their relation a secret."
-        "Give MC a choice. He can agree or decline. If he declines, Kaya leaves the game."
-    "All story after this assume MC sticks with Kaya."
-    "If MC sticks with Kaya, she asks if she can be MC's girlfriend, if she isn't already. Agrees to keep your relation secret."
+        the_person "Yeah, I miss you."
+    the_person "See you soon!"
+    $ mc.end_text_convo()
+    $ mc.change_location(coffee_shop)
+    $ mc.location.show_background()
+    "You head to your favorite coffee shop. After a knock on the door, [the_person.possessive_title] swings it open."
+    $ the_person.draw_person()
+    the_person "Hey! Have a seat, everyone else is gone."
+    "You walk over to a booth and sit down. [the_person.title] locks the door and joins you."
+    $ the_person.draw_person(position = "sitting")
+    the_person "Thanks for coming."
+    if kaya.is_pregnant():
+        the_person "I have something I really need to talk to you about..."
+        if the_person.love < 60:
+            $the_person.love = 60
+        the_person "I think... I've really fallen for you. The other day, at my place... that was so hot!"
+        the_person "I'm sorry... I'm really nervous about this!"
+        the_person "I had a doctor appointment this morning just to make sure... I'm pregnant!"
+        "Oh fuck. You've only been with her a bit... what are the odds?"
+        "You get a knot in a your stomach. Normally knocking up a hot piece of ass like [the_person.title] would be exciting..."
+        "[the_person.possessive_title] is looking at you, nervous. You can tell she is excited, but is scared about how you are going to react."
+        mc.name "That's incredible. I can hardly believe it."
+        the_person "I know. I'm sorry, I know we haven't known each other very long but... I'm really excited."
+
+    else:
+        the_person "I'm sorry I haven't been able to talk with you much the last week. It has been stressful, moving back in with my mom."
+        mc.name "I understand. That is a big life change."
+        the_person "I just wanted to tell you I really appreciate everything you've done for me. It means more to me than you know."
+        if the_person.love < 60:
+            $the_person.love = 60
+        the_person "I know we haven't known each other for long but... I'm really falling for you."
+        the_person "You don't have to say anything back, and I understand if you need time... but I feel like I need to be honest about my feelings and how I feel about you."
+        "You get a knot in a your stomach. Normally getting with a hot piece of ass like [the_person.title] would be exciting..."
+        "[the_person.possessive_title] is looking at you, nervous. You can tell she is excited, but is scared about how you are going to react."
+    mc.name "Yeah, well, there is something I need to talk to you about too."
+    mc.name "I'm not sure how to say this, and its going to sound impossible, but, I think... we might be related."
+    the_person "You think... what?"
+    mc.name "When I was helping you move in with your mom, in her bedroom there was a picture of her with a man. She said that the man was your dad..."
+    the_person "Yeah, my dad isn't alive anymore..."
+    mc.name "Same. [the_person.title], the man in the picture is ALSO my father..."
+    the_person "That's... {=kaya_lang}kore e taea{/=kaya_lang}..."
+    "[the_person.title] is quiet for a while."
+    mc.name "[the_person.title], you are my half-sister."
+    "[the_person.possessive_title] bites her lip."
+    the_person "Does that... does that change things... for you?"
+    the_person "I believe you. My stomach... I know you're right. I can feel it."
+    the_person "But, that doesn't change the way I feel about you. In my culture, it isn't unheard of for things like this to happen."
+    mc.name "[the_person.title]..."
+    if the_person.is_pregnant():
+        "[the_person.title] rubs her belly."
+        the_person "I mean... we've already made a baby!"
+    mc.name "What are you saying?"
+    the_person "We could keep it secret! Right? I mean, no one is going to look at us and think..."
+    mc.name "I'm pretty sure my mom knows."
+    the_person "[mom.name]?"
+    mc.name "She was acting really funny when you came over to study with [lily.name]. I'm pretty sure she recognized your name."
+    $ the_person.draw_person(position = "sitting", emotion = "sad")
+    "[the_person.possessive_title] is on the verge of tears."
+    the_person "That's it? You want to just... give up?"
+    mc.name "Whoa whoa. I never said anything about that."
+    mc.name "There's a lot going on here, and I just want to approach things logically."
+    mc.name "I know the way I feel, and this is what I want to do."
+    "Warning! This decision has lasting impact on your relationship with [the_person.title]! Choose carefully!"
+    menu:
+        "Make this work":
+            mc.name "I'll talk to my mom about it. She loves me, and I'm sure in time she'll come to love you too."
+            the_person "[the_person.mc_title], are you saying..."
+            mc.name "I want to make this work. Honestly, I didn't think that you would be open to something like this."
+            $ the_person.draw_person(position = "sitting", emotion = "happy")
+            $ the_person.change_love(10)
+            mc.name "We can figure this whole thing out. Together."
+            if not the_person.is_girlfriend():
+                $ the_person.add_role(girlfriend_role)
+                the_person "Does that mean... are we?"
+                mc.name "[the_person.name], will you be my girlfriend?"
+                the_person "Oh! Yes of course!"
+            else:
+                the_person "I'm so glad to hear that you don't want to give up on things between us."
+        "Let's be friends (disabled)":
+            pass    #TODO
+        "Call it off, and get rid of the baby (disabled)" if kaya.is_pregnant():
+            pass    #TODO this our exit point for Kaya.
+    $ the_person.draw_person(position = the_person.idle_pose)
+    "[the_person.possessive_title] stands up."
+    the_person "Come with me!"
+    "You follow her to a backroom, away from the big windows facing the street."
+    $ the_person.draw_person(position = "kissing")
+    "She pulls you close and you start to make out. She moans when you hand grabs her ass."
+    $ the_person.change_arousal(15)
+    $ mc.change_locked_clarity(30)
+    the_person "You'd better take me. I'm not sure how often we will be able to do this, so we'll need to take advantage of every opportunity."
+    if kaya_had_condom_talk():#You've probably done this by now. If not, we definitely have the talk now.
+        mc.name "You don't have to tell me twice."
+        "You hands are roaming every where over [the_person.possessive_title]'s body, and soon her clothes start to come off."
+        $ the_person.strip_outfit(exclude_lower = True, position = "kissing")
+        "When her tits spring free, you can't help but grope one while lick and suck on the other."
+        $ the_person.change_arousal(15)
+        $ mc.change_locked_clarity(50)
+        if the_person.is_pregnant():
+            the_person "Oh god... is it possible that they are already starting to get more sensitive?"
+        "Her moans drive you into a lust fueled frenzy. Soon you are both stepping out of your remaining clothes."
+        $ the_person.strip_outfit(exclude_feet = False, position = "kissing")
+        $ the_person.draw_person(position = "against_wall")
+        "[the_person.possessive_title] lifts her leg up, allowing you easy access. You push her gently against the wall, lift her weight a bit to line yourself up with her cunt."
+        "Once lined up, you let her body slide down the wall, her weight impaling her on your cock. You slide in easily to her eager pussy."
+        the_person "Oh fuck... you better do this to me often, boyfriend!"
+        call fuck_person(the_person, private=True, start_position = against_wall, skip_condom = kaya_condom_check()) from _call_kaya_sex_at_shop_07
+    else:
+        $ kaya.event_triggers_dict["no_condom_talk"] = True
+        "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
+        $ the_person.strip_outfit(exclude_lower = True, position = "kissing")
+        "With her perky tits out, you quickly kiss down the side of her neck and to her chest. You lick and suckle on one nipple while you grope her other tit with your hands."
+        the_person "{=kaya_lang}He pai te ahua{/=kaya_lang}"
+        $ the_person.change_arousal(20)
+        $ mc.change_locked_clarity(40)
+        "You can't tell what she is saying, but you can tell from her moans she is enjoy your attention."
+        "While you lick at her nipple, you use your hands to remove what is left of her clothing, with her help."
+        $ the_person.strip_outfit(exclude_feet = False, position = "kissing")
+        "You drop your pants and underwear to the floor and step out of them. You reach for her leg to pull up a little so you can get between them."
+        if persistent.pregnancy_pref != 0:
+            $ the_person.on_birth_control = False
+            "Suddenly, she starts to break it off."
+            the_person "Oh my god... wait... we need to talk..."
+            $ the_person.draw_person(position = the_person.idle_pose)
+            "Fuck. She is so hot! You just want to pound her! Not talk!"
+            the_person "I just... I'm sorry I meant to have this conversation before this happened but... you're just so fucking hot and I was scared how this might go."
+            the_person "In my culture... we... well... we don't believe in using birth control."
+            mc.name "Like... the pill?"
+            the_person "Like... anything. Babies are sacred almost, no pills, no condoms..."
+            mc.name "So... what... but..."
+            the_person "I know that I sprung this on you at like, the worst possible time. If you still want to put on a condom this time, I totally understand."
+            the_person "It's okay too, if you want to just pull out. In my culture, if a man has a will strong enough to pull out, he is allowed to..."
+            mc.name "........ You know that makes no sense whatsoever."
+            the_person "I know! I'm so sorry, I know this is totally a mood killer but... if you don't want to... I would really prefer you didn't wear one..."
+            the_person "But this one time it's okay if you decide to anyway."
+            "You think about it for a moment. [the_person.possessive_title] is down to fuck, and wants it raw!"
+            $ kaya.event_triggers_dict["no_condom_talk"] = True
+            $ mc.change_locked_clarity(40)
+            menu:
+                "Put on a condom anyway":
+                    mc.name "I want to think about it more... but not while you are naked in front of me."
+                    mc.name "For now a condom goes on, and I'll think about it more."
+                    the_person "I understand. Thank you for not being upset."
+                    "You unwrap the condom and then roll it onto your erection."
+                    $ mc.condom = True
+                "Keep it natural":
+                    mc.name "Thank you for telling me. I really appreciate it."
+                    the_person "I'm sorry..."
+                    mc.name "I'm honored, honestly, that you would be willing to do this with me. It shows much our relationship has grown so quickly."
+                    the_person "That's true... do you mean...?"
+                    mc.name "Let's do it."
+
+        $ the_person.draw_person(position = "against_wall")
+        "[the_person.possessive_title] lifts her leg up, allowing you easy access. You push her gently against the wall, lift her weight a bit to line yourself up with her cunt."
+        "Once lined up, you let her body slide down the wall, her weight impaling her on your cock. You slide in easily to her eager pussy."
+        the_person "Oh fuck... you better do this to me often, boyfriend!"
+        call fuck_person(the_person, private=True, start_position = against_wall, skip_intro = True, skip_condom = True) from _call_kaya_sex_at_shop_08
+    $ the_person.draw_person()
+    "When you finish, [the_person.possessive_title] looks thoughtful."
+    the_person "Living with my mother... we are going to have to get creative so you can get naughty..."
+    mc.name "I mean, you are always welcome at my place."
+    the_person "Yeah. I'll see if I can come up with something."
+    "As you look at her, [the_person.title] looks happy, but tired."
+    mc.name "It's been a long day. Can I help you close up?"
+    the_person "No, I've got everything closed up already. You go on, I'll see you soon, okay?"
+    mc.name "Okay. Take care."
+    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ clear_scene()
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    "You leave the coffee shop and start to talk around downtown some, lost in your thoughts."
+    "Last week, you found out the hot barista you've been hitting on is actually a long lost half-sister you never knew about."
+    "And now... you are dating?"
+    if the_person.is_pregnant():
+        "And you've knocked her up!"
+    "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be somethign you would plan, but you decide for now to let her see what she can come up with."
+    "The obvious problem you need to deal with is [mom.possessive_title] and [lily.title]."
+    "[mom.title] likely already knows about your relationship with [the_person.title]... how is she going to react when you reveal you are dating?"
+    "And [lily.possessive_title]... she deserves to know that she also has a half-sister!"
+    "For now, there is no rush to reveal everything to them. You decide to take your time, think about it, and wait until the time is right to have those conversations."
+    #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
+    "NOTE: This is the end of Kaya's story content in this build."
+    #Adding on talk events to jennifer and lily that are currently blank, so that in the future when the mod updates we can write those scenes and include save game compatability.
+    $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
+    $ lily.add_unique_on_talk_event(kaya_lily_reveal)
+    $ kaya.add_unique_on_talk_event(kaya_barista_fuck_intro)
     return
 
-    #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
+label kaya_jennifer_reveal_label(the_person):
+    # Use this label to talk to Mom about your incest with Kaya
+    pass
+    return
+
+label kaya_lily_reveal_label(the_person):
+    # Use this label to talk to Lily about Kaya
+    pass
+    return
+
+label kaya_barista_fuck_intro_label(the_person):
+    $ kaya.event_triggers_dict["can_get_barista_quickie"] = False
+    # Kaya works out a deal with a co-worker to fuck you on her break
+    return
+label kaya_barista_fuck_label(the_person):
+    pass
+    # recurring scene, can fuck kaya any day on her break at work.
+    return
+
 
 label kaya_jennifer_confrontation_label():  #Requires sexual actions taken with Jennifer
     "Make a date with Kaya. Plan it for MC's place."
@@ -1200,6 +1602,9 @@ init 3 python:      #Use this section to make wrappers for determining where we 
 
     def kaya_can_get_drinks():
         return kaya.event_triggers_dict.get("can_get_drinks", False)
+
+    def kaya_has_had_drink_date():
+        return kaya.event_triggers_dict.get("drink_date_complete", False)
 
     def kaya_can_get_work_quickie():
         return kaya.event_triggers_dict.get("can_get_barista_quickie", False)

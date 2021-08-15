@@ -3,7 +3,7 @@ init 5 python:
 
 
 label lunch_date_plan_enhanced_label(the_person):
-    if the_person == kaya and the_person.location == downtown:
+    if the_person == kaya and the_person.location == coffee_shop:
         mc.name "I was thinking about getting some lunch. Do you have a lunch break?"
         if the_person.love < 40:
             the_person "Sorry, I work a short shift, so I don't get a lunch break."

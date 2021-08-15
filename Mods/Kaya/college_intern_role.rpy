@@ -21,6 +21,11 @@ init -1 python:
         pass
         return
 
+    def college_intern_is_at_work(the_person):
+        if the_person.location in [rd_division, p_division, m_division, office]:
+            return True
+        return False
+
     def college_intern_happiness_score(the_person):
         happiness_score = the_person.happiness - 100
         happiness_score += the_person.sluttiness
@@ -28,7 +33,7 @@ init -1 python:
         happiness_score += the_person.calculate_base_salary()   #She is happier if you actively developed her skills
         return happiness_score
 
-    def hire_new_college_intern_requirement():
+    def hire_new_college_intern_requirement(the_person):
         if mc.business.funds < 5000:
             return "$5000 scholarship fund"
         if len(mc.business.get_intern_depts_with_openings()) > 0:
@@ -37,18 +42,26 @@ init -1 python:
             return "No internship openings"
         return False
 
-# init 1 python:
-#     hire_new_college_intern = Action()
+    def college_intern_training_requirement(the_person):
+        if college_intern_is_at_work(the_person):
+            return True
+        return False
+
+init 1 python:
+    hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
+    college_intern_training = Action("Train your intern", college_intern_training_requirement, "college_intern_training_label")   #TODO tooltip
 
 
 label unlock_college_interns():
-    $ college_intern_role = Role("College Intern", actions = [], hidden = False, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
+    $ college_intern_role = Role("College Intern", actions = [college_intern_training], hidden = False, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
     $ mc.business.college_interns_research = []
     $ mc.business.college_interns_production = []
     $ mc.business.college_interns_unlocked = True
+    if hire_new_college_intern not in nora_role.actions:
+        $ nora_role.actions.append(hire_new_college_intern)
     return
 
-label hire_new_college_intern_label():
+label hire_new_college_intern_label(the_person):
     $ the_person = nora
     $ the_dept = ""
     $ skill_array = []
@@ -200,5 +213,11 @@ label college_intern_complete_internship(the_person):
         mc.name "That's good to hear. Take care now."
         the_person "Take care [the_person.mc_title]."
         "You say goodbye to her. You aren't sure if you'll see her around again or not."    #TODO delete person?
+    $ mc.business.remove_college_intern(the_person)
 
+
+    return
+
+label college_intern_training_label(the_person):
+    "This is going to be a menu where you can train your intern, but it has not yet been created."
     return
