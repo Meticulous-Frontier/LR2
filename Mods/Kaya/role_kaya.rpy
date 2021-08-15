@@ -50,6 +50,11 @@ init 2 python:
         kaya.event_triggers_dict["incest_warnings"] = 0
         kaya.event_triggers_dict["no_condom_talk"] = False
         kaya.event_triggers_dict["mc_knows_relation"] = False
+        kaya.event_triggers_dict["foreplay_position_filter"] = kaya_foreplay_position_filter
+        kaya.event_triggers_dict["oral_position_filter"] = kaya_oral_position_filter
+        kaya.event_triggers_dict["vaginal_position_filter"] = kaya_vaginal_position_filter
+        kaya.event_triggers_dict["anal_position_filter"] = kaya_anal_position_filter
+        kaya.event_triggers_dict["unique_sex_positions"] = kaya_unique_sex_positions
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -1628,3 +1633,25 @@ init 3 python:      #Use this section to make wrappers for determining where we 
 
     def kaya_mc_knows_relation():
         return kaya.event_triggers_dict.get("mc_knows_relation", False)
+
+
+    def kaya_foreplay_position_filter(foreplay_positions):
+        return True
+
+    def kaya_oral_position_filter(oral_positions):
+        return True
+
+    def kaya_vaginal_position_filter(vaginal_positions):
+        if kaya_had_condom_talk():
+            return True
+        return False
+
+    def kaya_anal_position_filter(anal_positions):
+        if kaya_had_condom_talk():
+            return True
+        return False
+
+    def kaya_unique_sex_positions(person, prohibit_tags = []):
+        positions = []
+
+        return positions
