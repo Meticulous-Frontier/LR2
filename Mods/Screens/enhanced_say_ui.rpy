@@ -47,7 +47,7 @@ init 2:
 
                     if who is not mc.name:
                         imagebutton:
-                            idle portrait_say at character_portrait()
+                            idle portrait_say at character_portrait_say()
 
 
         #     # If there's a side image, display it above the text. Do not display

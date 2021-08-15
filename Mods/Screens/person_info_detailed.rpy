@@ -33,8 +33,13 @@ init 2: # Need to allow for None name roles in this screen as well.
                 xalign 0.5
                 background "#1a45a1aa"
                 hbox:
+                    imagebutton:
+                        idle the_person.build_person_portrait() at zoom(.7)
+                        xoffset -50
+                        yoffset -24
+                        xsize 100
                     vbox:
-                        xsize (1100 if persistent.pregnancy_pref > 0 else 1700)
+                        xsize (1050 if persistent.pregnancy_pref > 0 else 1650)
                         xalign 0.5 xanchor 0.5
                         text "[the_person.name] [the_person.last_name]" style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
                         if not mc.business.get_employee_title(the_person) == "None":

@@ -288,9 +288,12 @@ init 1:
         def calculate_scale(height_factor):
             return 0.7 - ((1 - height_factor) / 2)   # for now render at 70% size
 
-    transform character_portrait():
+    transform character_portrait_say():
         pos (360,-40)
         zoom .5
+
+    transform zoom(factor):
+        zoom factor
 
     transform character_right(xoffset = 0, yoffset = 0, zoom = 1):
         yalign (0.85 + yoffset)
