@@ -1416,10 +1416,49 @@ init -1 python:
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
+    def person_call_extended(org_func):
+        def person_call_wrapper(person, what, *args, **kwargs):
+            global portrait_say
+            portrait_say = person.build_person_portrait()
+
+            org_func(person, what, *args, **kwargs)
+
+        return person_call_wrapper
+
+    Person.__call__ = person_call_extended(Person.__call__)
+
+    def build_person_portrait(self, special_modifier = None):
+        position = "stand5"
+        emotion = "happy"
+        special_modifier = None
+        lighting = [.98,.98,.98]
+
+        displayable_list = []
+        displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
+        displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
+
+        x_size, y_size = position_size_dict.get(position)
+        composite_list = [(x_size,y_size)]
+
+        for display in displayable_list:
+            if isinstance(display, __builtin__.tuple):
+                composite_list.extend(display)
+            else:
+                composite_list.append((0,0))
+                composite_list.append(display)
+
+        final_image = Flatten(Composite(*composite_list))
+        portrait = AlphaMask(final_image, Image("portrait_mask.png"))
+
+        return portrait
+
+    Person.build_person_portrait = build_person_portrait
+
     def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all possible known tags for the character.
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
+        renpy.hide("portrait")
         return
 
     Person.hide_person = hide_person_enhanced
