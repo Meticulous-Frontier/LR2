@@ -413,7 +413,7 @@ label HR_director_first_monday_label(the_person):
         return
 
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
-    "You grab your lunch from the break head to your office and sit down."
+    "You grab your lunch from the break room, head to your office, and sit down."
     $ scene_manager = Scene()
     $ mc.change_location(office)
     $ ceo_office.show_background()
