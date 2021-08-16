@@ -992,7 +992,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         "You break off the kiss for a moment and look at her."
         mc.name "Are you sure you are okay with this? You've been through a lot lately, I feel like I'm kind of taking advantage of you."
         the_person "God... you are just perfect, aren't you?"
-        the_person "Its okay. I know my mom is sick... but its been this way for a while."
+        the_person "Its okay. I know my mom is sick... but it's been this way for a while."
         the_person "I knew this day would come eventually. Besides, I'm a big girl. I can decide what I want for myself!"
         "She runs her hand down your chest and start to stroke you through your pants..."
         $ mc.change_locked_clarity(40)
@@ -1399,7 +1399,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         "You get a knot in a your stomach. Normally getting with a hot piece of ass like [the_person.title] would be exciting..."
         "[the_person.possessive_title] is looking at you, nervous. You can tell she is excited, but is scared about how you are going to react."
     mc.name "Yeah, well, there is something I need to talk to you about too."
-    mc.name "I'm not sure how to say this, and its going to sound impossible, but, I think... we might be related."
+    mc.name "I'm not sure how to say this, and it's going to sound impossible, but, I think... we might be related."
     the_person "You think... what?"
     mc.name "When I was helping you move in with your mom, in her bedroom there was a picture of her with a man. She said that the man was your dad..."
     the_person "Yeah, my dad isn't alive anymore..."
