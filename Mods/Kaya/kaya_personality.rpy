@@ -8,11 +8,16 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
 
     def kaya_possessive_titles(person):
         valid_possessive_titles = [person.title]
+        valid_possessive_titles.append("Your favorite barista")
+        valid_possessive_titles.append("Your native barista")
+        if kaya_mc_knows_relation():
+            valid_possessive_titles.append("Your half-sister")
         return valid_possessive_titles
+
     def kaya_player_titles(person):
         return mc.name
 
-    kaya_personality = Personality("kaya", default_prefix = "relaxed",
+    kaya_personality = Personality("kaya", default_prefix = "wild",
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -39,7 +44,21 @@ label kaya_introduction(the_person):
     return
 
 label kaya_greetings(the_person):
-    if the_person.love < 0:
+    if the_person.location == coffee_shop:
+        if the_person.love < 0:
+            the_person "Back again? What do you want this time?"
+        elif kaya_can_get_drinks() and time_of_day == 3:
+            the_person "Hey! Are we going out for drinks tonight?"
+        elif can_get_barista_quickie():
+            the_person "Hey there... want to take a break with me in the back?"
+        elif the_person.is_pregnant():
+            the_person "Aww, you came to say hi! I can't wait to tell our baby how thoughtful you are."
+        elif the_person.sluttiness > 60:
+            the_person "Hey there good looking. How are you doing today?"
+        else:
+            the_person "Hello! Can I get you something?"
+
+    elif the_person.love < 0:
         the_person "Ugh, what do you want?"
     elif the_person.happiness < 90:
         the_person "Hey..."
@@ -59,33 +78,33 @@ label kaya_greetings(the_person):
 label kaya_sex_responses_foreplay(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm.... You're good at getting me warmed up..."
+            the_person "Mmm.... this feels great. Keep going!"
         else:
-            the_person "Mmmm... Ah..."
+            the_person "Mmmm... that feels good..."
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Oh that's it. Mmm."
+            the_person "Oh! I like it when you touch me there."
             "She purrs warmly."
         else:
-            the_person "Oh my god..."
+            the_person "Oh god that's nice."
             "It seems like she's trying not to moan too loudly."
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
-                the_person "Ah... If you get me any wetter I'm going to soak right through my panties."
+                the_person "Ah... I should probably get my panties off soon before I make a mess."
             elif the_person.outfit.vagina_available():
-                the_person "Good thing I'm not wearing any panties, you'd have me soaking right through them..."
+                the_person "God you've got me so wet"
             else:
                 the_person "Oh god, if I get any wetter it's going to soak right through my clothes."
         else:
-            the_person "I can't believe you're getting me this wet..."
+            the_person "I can't believe it, that feels so good."
 
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "Oh god, you might actually make me cum like this... Wow!"
+                the_person "Oh god, you're going to make me cum soon!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "I wish my [so_title] knew how to touch me like this. You might actually make me cum!"
@@ -97,26 +116,26 @@ label kaya_sex_responses_foreplay(the_person):
 label kaya_sex_responses_oral(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Oh you know what I want [the_person.mc_title]... Ah..."
+            the_person "Oh your tongue is so good [the_person.mc_title]..."
         else:
             the_person "Oh wow... that's... Mph!"
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Mmmm, that's so good. Ah..."
+            the_person "Mmmm, that's so good. Glad you are putting that tongue to such good use."
         else:
             the_person "That... that feels so good [the_person.mc_title]... So fucking good."
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person "God, your tongue feels so good!"
+            the_person "God, your tongue is amazing!"
 
         else:
             "You're so good at that... Fuck, it's starting to drive me crazy!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "You're going to get me there [the_person.mc_title], you're going to get me to cum!"
+                the_person "Keep going [the_person.mc_title], you're going to get me to cum!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "My [so_title] never does this for me any more... I feel horrible, but I need this so badly!"
@@ -129,7 +148,7 @@ label kaya_sex_responses_oral(the_person):
 label kaya_sex_responses_vaginal(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm, your cock feels real good inside me."
+            the_person "God it feels so good when it first goes in."
         else:
             the_person "Oh my god... Ah..."
 
@@ -149,7 +168,7 @@ label kaya_sex_responses_vaginal(the_person):
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "Ah! Fuck me, make me cum!"
+                the_person "Fuck me harder! Don't stop I'm going to cum soon!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "Fuck me, fuck me harder! My [so_title] never fucks me like this, it feels so good!"
@@ -161,7 +180,7 @@ label kaya_sex_responses_vaginal(the_person):
 label kaya_sex_responses_anal(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Oh fuck, you're really stretching me out!"
+            the_person "Oh fuck, I can't believe it actually fit!"
         else:
             the_person "Fuck, it feels so big... That's all of it, right? I can't take any more!"
 
@@ -182,7 +201,7 @@ label kaya_sex_responses_anal(the_person):
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "Oh god, keep going! Stuff my ass and make me cum!"
+                the_person "Oh god, keep going! I'm going to cum... it's so good!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "I never let my [so_title] do this, you know? My tight ass is only for you!"
@@ -195,16 +214,17 @@ label kaya_sex_responses_anal(the_person):
 
 label kaya_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
-        the_person "Oh my god! I'm going to... I'm going to..."
-        the_person "{b}Cum!{/b} Ah!"
+        the_person "Oh thank god I'm going to... I'm... OH!"
+        the_person "{b}I'm Cumming!{/b}{=kaya_lang}Moenga!{/=kaya_lang}"
     else:
         the_person "Mmmmhm!"
     return
 
 label kaya_climax_responses_oral(the_person):
     if the_person.sluttiness > 70:
-        the_person "Oh fuck! Oh fuck, make me cum [the_person.mc_title]!"
+        the_person "That's the spot! I'm done [the_person.mc_title]!"
         "She closes her eyes and squeals with pleasure."
+        the_person "{b}I'm Cumming!{/b}{=kaya_lang}Moenga!{/=kaya_lang}"
     else:
         the_person "Oh my god, I'm going to cum. I'm going to cum!"
         "She closes her eyes and squeals with pleasure."
@@ -212,7 +232,7 @@ label kaya_climax_responses_oral(the_person):
 
 label kaya_climax_responses_vaginal(the_person):
     if the_person.sluttiness > 70:
-        the_person "I'm going to cum! Ah! Fuck me [the_person.mc_title], I want to cum so badly! Ah!"
+        the_person "{=kaya_lang}Mahimahi!{/=kaya_lang} [the_person.mc_title], your cock is going to make me cum!"
         "She closes her eyes and squeals with pleasure."
     else:
         the_person "Ah! I'm cumming! Oh fuck! Ah!"
@@ -220,7 +240,7 @@ label kaya_climax_responses_vaginal(the_person):
 
 label kaya_climax_responses_anal(the_person):
     if the_person.sluttiness > 80:
-        the_person "I'm going to cum! Fuck my ass and make me cum!"
+        the_person "{=kaya_lang}Ekeeke!{/=kaya_lang} Ride me good, I'm cumming!"
     else:
         the_person "Oh fuck, I think... I think I'm going to cum!"
     return
@@ -234,12 +254,12 @@ label kaya_clothing_accept(the_person):
 
 label kaya_clothing_reject(the_person):
     if the_person.obedience > 130:
-        the_person "Is that really for me [the_person.mc_title]? I want to... but I don't think I could wear that without getting in some sort of trouble."
+        the_person "Is that really for me [the_person.mc_title]? I want to... was there more to it that you forgot?"
     else:
         if the_person.sluttiness > 60:
             the_person "Wow. I'm usually up for anything but I think that's going too far."
         else:
-            the_person "Wow. It's a little... skimpy. I don't think I could wear that."
+            the_person "Wow. Where's the rest of it?."
     return
 
 label kaya_clothing_review(the_person):
@@ -254,10 +274,10 @@ label kaya_clothing_review(the_person):
     if the_person.should_wear_uniform():
         the_person "Oh, one second! I need to get back in uniform!"
     elif the_person.obedience > 130:
-        the_person "I'm sorry [the_person.mc_title], you shouldn't have to see me like this. I'll go and get cleaned up so I'm presentable again."
+        the_person "Let me get cleaned up really quick."
     else:
         if the_person.sluttiness > 40:
-            the_person "Whew, I think we messed up my clothes a bit. Just give me a quick second to get dressed into something more decent."
+            the_person "Whew! I think we messed up my clothes a bit. Just give me a quick second to get dressed into something more decent."
         else:
             the_person "My clothes are a mess! I'll be back in a moment, I'm going to go get cleaned up."
     return
@@ -279,34 +299,34 @@ label kaya_strip_obedience_accept(the_person, the_clothing, strip_type = "Full")
         the_person "Wait, I don't know about this..."
     return
 
-label kaya_grope_body_reject(the_person):
-    if the_person.effective_sluttiness("touching_body") < 5: #Fail point for touching shoulder
-        "[the_person.possessive_title] steps back, then laughs awkwardly."
-        the_person "Hey, sorry. We don't need to be that friendly, okay?"
-        mc.name "Oh yeah, of course."
-        "She gives you another awkward smile and stays a little further away."
-    else: #Fail point for touching waist
-        "[the_person.possessive_title] shifts awkwardly, trying to pull away from your hand."
-        the_person "Hey, can you move your hand? It's no big deal, I'm just not super comfortable with it."
-        "You pull your hands back and nod apologetically."
-        mc.name "Of course, sorry."
-        the_person "Don't worry about it, it's no big deal..."
-        "She doesn't say anything more, but she still seems uncomfortable with the situation."
-    return
+# label kaya_grope_body_reject(the_person):
+#     if the_person.effective_sluttiness("touching_body") < 5: #Fail point for touching shoulder
+#         "[the_person.possessive_title] steps back, then laughs awkwardly."
+#         the_person "Hey, sorry. We don't need to be that friendly, okay?"
+#         mc.name "Oh yeah, of course."
+#         "She gives you another awkward smile and stays a little further away."
+#     else: #Fail point for touching waist
+#         "[the_person.possessive_title] shifts awkwardly, trying to pull away from your hand."
+#         the_person "Hey, can you move your hand? It's no big deal, I'm just not super comfortable with it."
+#         "You pull your hands back and nod apologetically."
+#         mc.name "Of course, sorry."
+#         the_person "Don't worry about it, it's no big deal..."
+#         "She doesn't say anything more, but she still seems uncomfortable with the situation."
+#     return
 
-label kaya_sex_accept(the_person):
-    if the_person.sluttiness > 70:
-        if the_person.obedience < 70:
-            the_person "I was just about to suggest the same thing."
-        else:
-            the_person "Mmm, you have a dirty mind [the_person.mc_title], I like it."
-    else:
-        the_person "Okay, we can give that a try."
-    return
+# label kaya_sex_accept(the_person):
+#     if the_person.sluttiness > 70:
+#         if the_person.obedience < 70:
+#             the_person "I was just about to suggest the same thing."
+#         else:
+#             the_person "Mmm, you have a dirty mind [the_person.mc_title], I like it."
+#     else:
+#         the_person "Okay, we can give that a try."
+#     return
 
 label kaya_sex_obedience_accept(the_person):
     if the_person.sluttiness > 70:
-        the_person "Oh god [the_person.mc_title], I should really say no... But you always make me feel so good, I can't say no to you."
+        the_person "Oh god [the_person.mc_title]. I just can't say no to you, can I?"
     else:
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
@@ -314,86 +334,86 @@ label kaya_sex_obedience_accept(the_person):
             the_person "I... Okay, if you really want to, lets give it a try."
     return
 
-label kaya_sex_gentle_reject(the_person):
-    if the_person.sluttiness > 50:
-        the_person "Wait, I don't think I'm warmed up enough for this [the_person.mc_title]. How about we do something else first?"
-    else:
-        the_person "Wait. I don't think I'm comfortable with this. Could we just do something else instead?"
-    return
+# label kaya_sex_gentle_reject(the_person):
+#     if the_person.sluttiness > 50:
+#         the_person "Wait, I don't think I'm warmed up enough for this [the_person.mc_title]. How about we do something else first?"
+#     else:
+#         the_person "Wait. I don't think I'm comfortable with this. Could we just do something else instead?"
+#     return
+#
+# label kaya_sex_angry_reject(the_person):
+#     if not the_person.relationship == "Single":
+#         $ so_title = SO_relationship_to_title(the_person.relationship)
+#         the_person "Wait, what? I have a [so_title], what did you think we were going to be doing?"
+#         "She glares at you and walks away."
+#     elif the_person.sluttiness < 20:
+#         the_person "What the fuck! Do you think I'm just some whore who puts out for anyone who asks?"
+#         the_person "Ugh! Get away from me, I don't even want to talk to you after that."
+#     else:
+#         the_person "What the fuck do you think you're doing, that's disgusting!"
+#         the_person "Get the fuck away from me, I don't even want to talk to you after that!"
+#     return
 
-label kaya_sex_angry_reject(the_person):
-    if not the_person.relationship == "Single":
-        $ so_title = SO_relationship_to_title(the_person.relationship)
-        the_person "Wait, what? I have a [so_title], what did you think we were going to be doing?"
-        "She glares at you and walks away."
-    elif the_person.sluttiness < 20:
-        the_person "What the fuck! Do you think I'm just some whore who puts out for anyone who asks?"
-        the_person "Ugh! Get away from me, I don't even want to talk to you after that."
-    else:
-        the_person "What the fuck do you think you're doing, that's disgusting!"
-        the_person "Get the fuck away from me, I don't even want to talk to you after that!"
-    return
+# label kaya_seduction_response(the_person):
+#     if the_person.obedience > 130:
+#         if the_person.sluttiness > 50:
+#             the_person "Yes [the_person.mc_title]? Do you need help relieving some stress?"
+#         else:
+#             the_person "Yes [the_person.mc_title]? Is there something I can help you with?"
+#     else:
+#         if the_person.sluttiness > 50:
+#             the_person "Mmm, I know that look. Do you want to fool around a little?"
+#         elif the_person.sluttiness > 10:
+#             the_person "Oh, do you see something you like?"
+#         else:
+#             the_person "Oh, I don't really know what to say [the_person.mc_title]..."
+#     return
 
-label kaya_seduction_response(the_person):
-    if the_person.obedience > 130:
-        if the_person.sluttiness > 50:
-            the_person "Yes [the_person.mc_title]? Do you need help relieving some stress?"
-        else:
-            the_person "Yes [the_person.mc_title]? Is there something I can help you with?"
-    else:
-        if the_person.sluttiness > 50:
-            the_person "Mmm, I know that look. Do you want to fool around a little?"
-        elif the_person.sluttiness > 10:
-            the_person "Oh, do you see something you like?"
-        else:
-            the_person "Oh, I don't really know what to say [the_person.mc_title]..."
-    return
+# label kaya_seduction_accept_crowded(the_person):
+#     if the_person.relationship == "Single":
+#         if the_person.sluttiness < 20:
+#             the_person "I suppose we could sneak away for a few minutes. There's nothing wrong with that, right?"
+#         elif the_person.sluttiness < 50:
+#             the_person "Come on, let's go find someplace quiet where we won't be interrupted."
+#         else:
+#             the_person "No point wasting any time then, right? Let's get to it!"
+#     else:
+#         $ so_title = SO_relationship_to_title(the_person.relationship)
+#         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 50:
+#             the_person "No point wasting any time, right? I hope my [so_title] won't be too jealous."
+#         else:
+#             the_person "I guess we could sneak away for a few minutes, but we have to make sure my [so_title] doesn't find out what we're doing."
+#     return
 
-label kaya_seduction_accept_crowded(the_person):
-    if the_person.relationship == "Single":
-        if the_person.sluttiness < 20:
-            the_person "I suppose we could sneak away for a few minutes. There's nothing wrong with that, right?"
-        elif the_person.sluttiness < 50:
-            the_person "Come on, let's go find someplace quiet where we won't be interrupted."
-        else:
-            the_person "No point wasting any time then, right? Let's get to it!"
-    else:
-        $ so_title = SO_relationship_to_title(the_person.relationship)
-        if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 50:
-            the_person "No point wasting any time, right? I hope my [so_title] won't be too jealous."
-        else:
-            the_person "I guess we could sneak away for a few minutes, but we have to make sure my [so_title] doesn't find out what we're doing."
-    return
+# label kaya_seduction_accept_alone(the_person):
+#     if the_person.relationship == "Single":
+#         if the_person.sluttiness < 20:
+#             the_person "Well, there's nobody around to stop us..."
+#         elif the_person.sluttiness < 50:
+#             the_person "Mmm, that's a fun idea. Come on, let's get to it!"
+#         else:
+#             the_person "Oh [the_person.mc_title], don't make me wait!"
+#     else:
+#         $ so_title = SO_relationship_to_title(the_person.relationship)
+#         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 50:
+#             the_person "Don't make me wait then [the_person.mc_title]!"
+#         else:
+#             the_person "This is so dumb, I have a [so_title], I shouldn't be doing this..."
+#             "It's clear she wants to do it anyways."
+#     return
 
-label kaya_seduction_accept_alone(the_person):
-    if the_person.relationship == "Single":
-        if the_person.sluttiness < 20:
-            the_person "Well, there's nobody around to stop us..."
-        elif the_person.sluttiness < 50:
-            the_person "Mmm, that's a fun idea. Come on, let's get to it!"
-        else:
-            the_person "Oh [the_person.mc_title], don't make me wait!"
-    else:
-        $ so_title = SO_relationship_to_title(the_person.relationship)
-        if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 50:
-            the_person "Don't make me wait then [the_person.mc_title]!"
-        else:
-            the_person "This is so dumb, I have a [so_title], I shouldn't be doing this..."
-            "It's clear she wants to do it anyways."
-    return
-
-label kaya_seduction_refuse(the_person):
-    if the_person.sluttiness < 20:
-        "[the_person.title] blushes and looks away from you awkwardly."
-        the_person "I, uh... Sorry [the_person.mc_title], I just don't feel that way about you."
-
-    elif the_person.sluttiness < 50:
-        the_person "Oh, it's tempting, but I'm just not feeling like it right now. Maybe some other time?"
-        "[the_person.title] smiles and gives you a wink."
-
-    else:
-        the_person "It's so, so tempting, but I don't really feel up to it right now [the_person.mc_title]. Hold onto that thought though."
-    return
+# label kaya_seduction_refuse(the_person):
+#     if the_person.sluttiness < 20:
+#         "[the_person.title] blushes and looks away from you awkwardly."
+#         the_person "I, uh... Sorry [the_person.mc_title], I just don't feel that way about you."
+#
+#     elif the_person.sluttiness < 50:
+#         the_person "Oh, it's tempting, but I'm just not feeling like it right now. Maybe some other time?"
+#         "[the_person.title] smiles and gives you a wink."
+#
+#     else:
+#         the_person "It's so, so tempting, but I don't really feel up to it right now [the_person.mc_title]. Hold onto that thought though."
+#     return
 
 label kaya_flirt_response(the_person):
     if the_person.obedience > 130:
@@ -468,8 +488,8 @@ label kaya_flirt_response_low(the_person):
     else:
         #She's in her own outfit.
         $ mc.change_locked_clarity(5)
-        the_person "Thank you, I thought it looked cute too."
-        "[the_person.possessive_title] turns to give you a side on look of her and smiles at you."
+        the_person "Thanks! You're pretty good looking yourself."
+        "[the_person.possessive_title] gives you a smile."
     return
 
 label kaya_flirt_response_mid(the_person):
@@ -526,7 +546,13 @@ label kaya_flirt_response_mid(the_person):
     return
 
 label kaya_flirt_response_high(the_person):
-    if mc.location.get_person_count() > 1 and the_person.effective_sluttiness("kissing") < (25 - (5*the_person.get_opinion_score("public_sex"))):
+    if mc.location == coffee_shop:  #While she's at work at the coffee shop.
+        if can_get_barista_quickie():
+            the_person "Not right here, but I could take my break. You just say the word."
+        else:
+            the_person "I'm working right now, you know I can't step away from the counter!"
+
+    elif mc.location.get_person_count() > 1 and the_person.effective_sluttiness("kissing") < (25 - (5*the_person.get_opinion_score("public_sex"))):
         # There are other people here, if she's not slutty she asks if you want to find somewhere quiet
         the_person "Not very high, unless we can find someplace quiet."
         menu:
@@ -559,7 +585,7 @@ label kaya_flirt_response_high(the_person):
         # She wants to kiss you, leading to other things.
         if mc.location.get_person_count() == 1:
             #She's shy about the whole thing.
-            "She looks around nervously."
+            "She looks around. There's no one here."
             the_person "[the_person.mc_title], I... I mean, it's just us here."
             mc.name "So you're saying my chances are good?"
             $ the_person.draw_person(position = "kissing")
@@ -587,7 +613,7 @@ label kaya_flirt_response_high(the_person):
 
                 $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
-                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_kaya_48
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_kaya_482
                 $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
@@ -602,7 +628,12 @@ label kaya_flirt_response_high(the_person):
 
 label kaya_flirt_response_girlfriend(the_person):
     # Lead in: mc.name "You're so beautiful [the_person.title], I'm so lucky to have a woman like you in my life."
-    if mc.location.get_person_count() > 1:
+    if mc.location == coffee_shop:
+        if can_get_barista_quickie():
+            the_person "And I'm so lucky to have found you. Want me to take my break now? We could fool around in the back..."
+        else:
+            the_person "And I'm so lucky to have you. I wish I wasn't working, maybe we can fool around later?"
+    elif mc.location.get_person_count() > 1:
         # There are other people around, so she'll only start making out with you if she's slutty.
         if the_person.effective_sluttiness("kissing") < (25 - (5*the_person.get_opinion_score("public_sex"))):
             # Not very slutty, so she wants to find somewhere private
@@ -658,13 +689,13 @@ label kaya_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "Oh, you! Come here, I want to kiss you!"
+        the_person "You are so rediculous. Come here, lets make out!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."
-        the_person "This is so nice..."
+        the_person "I love when you hold me like this."
         menu:
-            "Kiss her":
+            "Kiss her more":
                 $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
                 "You place a gentle hand on her chin and raise her lips back to yours."
                 "This time when you kiss her it's slow and sensual. You hear her sigh happily, and she presses her body against yours."
@@ -773,14 +804,14 @@ label kaya_flirt_response_text(the_person):
             the_person "I'd like to spend more time with you. Just hit me up."
     return
 
-label kaya_condom_demand(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
-        the_person "You need to put on a condom first."
-        the_person "I don't like making you wear one either, but we need to be safe."
-    else:
-        the_person "Do you have a condom? You're going to have to put one on."
-    return
-
+# label kaya_condom_demand(the_person):
+#     if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+#         the_person "You need to put on a condom first."
+#         the_person "I don't like making you wear one either, but we need to be safe."
+#     else:
+#         the_person "Do you have a condom? You're going to have to put one on."
+#     return
+#
 label kaya_condom_ask(the_person):
     if the_person.on_birth_control:
         the_person "Hey, do you think you should put on a condom?"
@@ -794,50 +825,31 @@ label kaya_condom_ask(the_person):
     return
 
 label kaya_condom_bareback_ask(the_person):
-    if the_person.get_opinion_score("creampies") > 0:
-        if the_person.on_birth_control:
-            the_person "Don't put on a condom, I'm on the pill. You can cum inside me and we don't have to worry."
-            $ the_person.update_birth_control_knowledge()
-        else:
-            the_person "Please don't put on a condom, I want you to feel everything when you fuck me."
-            the_person "And don't pull out either, it would make me so happy to feel you cum inside me!"
-        $ the_person.discover_opinion("creampies")
-    else:
-        the_person "Don't put on a condom, I want to feel every single thing you do to me."
+    the_person "Don't put on a condom, you know how I feel about those..."
     return
 
 label kaya_condom_bareback_demand(the_person): # Lead in: mc.name "One sec, let me just get a condom on..."
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
-        if the_person.on_birth_control:
-            the_person "What? Forget it, you don't need one of those. Hurry up and fuck me!"
-        else:
-            the_person "Forget it, you don't need one of those. If I was worried about getting pregnant I'd be on the pill."
-            the_person "I want you to fuck me, and I don't care what happens after!"
-            $ the_person.update_birth_control_knowledge()
-    else:
-        if the_person.on_birth_control:
-            the_person "Forget it, I'm on the pill [the_person.mc_title]. I want you to fuck me raw, no condom."
-            $ the_person.update_birth_control_knowledge()
-        else:
-            the_person "Don't waste time with that, just pull out if you're worried about getting me pregnant."
-            the_person "Come on, hurry up and fuck me!"
+    the_person "Don't even think about it. You know how I feel about those."
+    the_person "Just pull out if you don't want to get me pregnant."
+    "[the_person.possessive_title] gives you a mischevious smile."
+    the_person "If I let you anyway!"
     return
 
-label kaya_cum_face(the_person):
-    if the_person.obedience > 130:
-        if the_person.sluttiness > 60:
-            the_person "Do I look cute covered in your cum, [the_person.mc_title]?"
-            "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
-        else:
-            the_person "I hope this means I did a good job."
-            "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
-    else:
-        if the_person.sluttiness > 80:
-            the_person "Ah... I love a nice, hot load on my face. Don't you think I look cute like this?"
-        else:
-            the_person "Fuck me, you really pumped it out, didn't you?"
-            "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
-    return
+# label kaya_cum_face(the_person):
+#     if the_person.obedience > 130:
+#         if the_person.sluttiness > 60:
+#             the_person "Do I look cute covered in your cum, [the_person.mc_title]?"
+#             "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
+#         else:
+#             the_person "I hope this means I did a good job."
+#             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
+#     else:
+#         if the_person.sluttiness > 80:
+#             the_person "Ah... I love a nice, hot load on my face. Don't you think I look cute like this?"
+#         else:
+#             the_person "Fuck me, you really pumped it out, didn't you?"
+#             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
+#     return
 
 label kaya_cum_mouth(the_person):
     if the_person.obedience > 130:
@@ -885,13 +897,13 @@ label kaya_cum_pullout(the_person):
     else:
         if the_person.wants_creampie():
             if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
-                the_person "Cum wherever you want [the_person.mc_title]!"
+                the_person "Give me your cum [the_person.mc_title]! I want to feel you burst inside me!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
                 if the_person.on_birth_control: #She just likes creampies.
                     the_person "Yes! Cum inside me [the_person.mc_title]! Fill me up with your hot load!"
                 else: #Yeah, she's not on BC and asking for you to creampie her. She's looking to get pregnant.
-                    the_person "Yes! Cum inside me and knock me up! Breed me like the slut I am!"
+                    the_person "Yes! Cum inside me! I want to feel it when you burst!"
             elif the_person.on_birth_control: #She's on the pill, so she's probably fine
                 the_person "I'm on the pill, cum wherever you want [the_person.mc_title]!"
                 $ the_person.update_birth_control_knowledge()
@@ -899,7 +911,7 @@ label kaya_cum_pullout(the_person):
                 the_person "Ah! Do it!"
         else:
             if not the_person.on_birth_control: #You need to pull out, I'm not on the pill!
-                the_person "Please pull out! I don't want to get pregnant!"
+                the_person "If you don't pull out, I might get pregnant..."
 
             elif the_person.get_opinion_score("creampies") < 0:
                 the_person "Make sure to pull out, you can cum anywhere else you want!"
@@ -909,10 +921,7 @@ label kaya_cum_pullout(the_person):
     return
 
 label kaya_cum_condom(the_person):
-    if the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
-        the_person "Mmm, your cum feels so warm. I wish you weren't wearing a condom; I bet you would feel amazing raw."
-    else:
-        the_person "Whew... I can feel how warm your cum is through the condom. It feels nice."
+    the_person "I can feel it... I can't believe you wore one of those stupid condoms."
     return
 
 label kaya_cum_vagina(the_person):
@@ -923,7 +932,7 @@ label kaya_cum_vagina(the_person):
 
     if the_person.wants_creampie():
         if the_person.event_triggers_dict.get("preg_knows", False):
-            the_person "Mmm, your cum is so nice and warm..."
+            the_person "Oh my god, it's so warm. I love this feeling..."
             "She sighs happily."
 
         elif the_person.on_birth_control:
@@ -959,7 +968,7 @@ label kaya_cum_vagina(the_person):
                 the_person "Fuck, I told you to pull out! I have a [so_title], what if I got pregnant?"
                 the_person "Whatever, I guess it's already done."
             else:
-                the_person "Fuck, I told you to pull out! What if I got pregnant."
+                the_person "Fuck! What if I get pregnant..."
                 the_person "Whatever, I guess it's already done."
 
         elif the_person.relationship != "Single":
@@ -1120,10 +1129,10 @@ label kaya_date_seduction(the_person):
         $ mc.change_locked_clarity(30)
         if the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
             if the_person.get_opinion_score("creampies") > 0: #No condoms, loves creampies, she's basically asking you to knock her up. So... have her ask you to knock her up!
-                the_person "Would you like to come home with me? You could, oh I don't know, pin me down and fuck me until I'm pregnant?"
-                the_person "We've been dating for a while, I think it's about time you bred me." #TODO Actually check if you've been dating for a while.
+                the_person "Would you like to come home with me? We could fuck until we both cum all over each other..."
+                the_person "...Or inside of me, if you wanted to do that. I promise I'll let you." #TODO Actually check if you've been dating for a while.
             else:
-                the_person "Would you like to come home with me? You could, oh I don't know, pin me down and fuck my unprotected pussy raw?"
+                the_person "Would you like to come home with me? You could ride me and cum anywhere you want!"
         elif the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") > 0:
             the_person "Would you like to come home and fuck me? Only one rule though: no condoms allowed. I want you to take me raw."
         elif the_person.effective_sluttiness(["vaginal_sex"]) > 50 and the_person.get_opinion_score("vaginal sex") > 0:
@@ -1229,7 +1238,7 @@ label kaya_sex_end_early(the_person):
 
 label kaya_sex_take_control(the_person):
     if the_person.arousal > 60:
-        the_person "No no no, you can't just get worked up and then leave. We're finishing this, one way or another."
+        the_person "No no no, I'm not done with you yet!"
     else:
         the_person "Wait, we're just getting started! You just relax and leave this to me."
     return
@@ -1282,8 +1291,8 @@ label kaya_sex_review(the_person, the_report):
     # special condition - you fucked her brains out
     elif the_report.get("girl orgasms", 0) > 2:
         if used_obedience:
-            the_person "Oh wow...I just can't believe...I got so...nasty..."
-            mc.name "A minute ago you were begging me to make you cum again."
+            the_person "Oh wow... that was... fuck I think I lost count how many times you made me cum!"
+            mc.name "And you wound up begging me to do it."
             "[the_person.possessive_title] looks away, embarrassed by what she's done with you."
         else:
             the_person "I have never...fucked like that...It was just amazing..."
@@ -1373,7 +1382,7 @@ label kaya_sex_review(the_person, the_report):
 
     # Gave creampie while she is not on birth control (extra dialog when she could get pregnant)
     if the_report.get("creampies", 0) > 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
-        the_person "Oh my...you know that you could get me pregnant, right?"
+        the_person "Oh my... I wonder if I got pregnant..."
 
     $ del comment_position
     return
@@ -1393,7 +1402,7 @@ label kaya_improved_serum_unlock(the_person):
 ## Taboo break dialogue ##
 label kaya_kissing_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 30:
-        the_person "Don't be shy [the_person.mc_title], come on and kiss me."
+        the_person "Don't be shy [the_person.mc_title], come on and kiss me. I want you to."
     elif the_person.love >= 20:
         the_person "So... Do you want to kiss me?"
         mc.name "I do."
@@ -1409,9 +1418,8 @@ label kaya_touching_body_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 30:
         the_person "Are you as excited as I am? I... I've always wanted to feel your hands on me."
     elif the_person.love >= 20:
-        the_person "Do you think we're ready for this? I like you, but it seems like a big step..."
-        mc.name "Tell me what you think?"
-        "You can see the answer in her eyes before she says anything."
+        the_person "Oh god, I was wondering if this would happen soon..."
+        "You can see the answer in her eyes how bad she wants you to touch her."
         the_person "I'm ready if you are."
     else:
         the_person "I don't know if I'm ready for this [the_person.mc_title]."
@@ -1424,7 +1432,7 @@ label kaya_touching_penis_taboo_break(the_person):
         the_person "Are you ready? I've wondered what your cock would feel like for a while."
         mc.name "Don't let me stop you then. Go for it."
     elif the_person.love >= 20:
-        the_person "Your cock looks so big. I guess I shouldn't keep you waiting any longer then."
+        the_person "Your cock looks so big. I want to make it feel good."
     else:
         the_person "Oh my god, look at how hard you've gotten. I didn't think it would be so big."
         mc.name "Go on, give it a touch."
@@ -1437,9 +1445,9 @@ label kaya_touching_vagina_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 35:
         the_person "Do it [the_person.mc_title]. Touch my pussy."
     elif the_person.love >= 20:
-        the_person "I'm so nervous [the_person.mc_title], do you feel that way too?"
+        the_person "I'm so nervous [the_person.mc_title], but so excited too."
         mc.name "Just take a deep breath and relax. You trust me, right?"
-        the_person "Of course. I trust you."
+        the_person "Of course I trust you. Go ahead, I bet this is going to feel amazing..."
     else:
         the_person "I don't know if we should be doing this [the_person.mc_title]..."
         mc.name "Just take a deep breath and relax. I'm just going to touch you a little, and if you don't like it I'll stop."
@@ -1452,13 +1460,10 @@ label kaya_sucking_cock_taboo_break(the_person):
     the_person "Mhmm? What do you want me to do for you?"
     mc.name "I want you to suck on my cock."
     if the_person.effective_sluttiness() >= 45:
-        the_person "Do you really want me to try? I'm up for it if you are."
+        the_person "Oh! I suppose we haven't done that yet. Are you ready?"
         "You nod and she bites her lip in anticipation."
     elif the_person.love >= 30:
-        the_person "I guess knew this was coming."
-        mc.name "So..."
-        "She rolls her eyes and sighs dramatically."
-        the_person "Alright, I'll do it."
+        the_person "Alright, I'll do it. You are so hot, I kinda want to know what it tastes like..."
     else:
         the_person "Oh my god, do you really want me to do that?"
         "She laughs nervously and shakes her head."
@@ -1478,11 +1483,11 @@ label kaya_sucking_cock_taboo_break(the_person):
 label kaya_licking_pussy_taboo_break(the_person):
     mc.name "I want to taste your pussy [the_person.title]. Are you ready?"
     if the_person.effective_sluttiness() >= 45:
-        the_person "Oh, well that sounds like some fun. I'd be crazy to say no, right?"
-        mc.name "Yeah, you would be."
-        the_person "Well then, go to town!"
+        the_person "Oh! I was worried you didn't like to eat out, since, you know, we hadn't done that yet..."
+        mc.name "So?"
+        the_person "Get to it!"
     elif the_person.love >= 30:
-        the_person "I'm not sure if \"ready\" is the right word, but you can keep going."
+        the_person "I trust you. Go ahead, I want to see how your tongue feels."
         mc.name "Just relax and enjoy, you'll have a great time."
     else:
         if the_person.has_taboo("sucking_cock"):
@@ -1501,7 +1506,7 @@ label kaya_vaginal_sex_taboo_break(the_person): #TODO: add a "I dont do anal""yo
         the_person "Whew, here we go! I'm so excited!"
     elif the_person.love >= 45:
         "[the_person.title] nods eagerly."
-        the_person "I'm ready [the_person.mc_title], I'm ready to feel you inside me."
+        the_person "I'm ready [the_person.mc_title]. I can't wait to feel that monster inside of me!"
     else:
         if the_person.has_taboo("anal_sex"):
             the_person "So this is it, huh?"
@@ -1699,7 +1704,10 @@ label kaya_creampie_taboo_break(the_person):
                 the_person "Mmm, I finally have your cum in me... I'll have to tell my [so_title] I'm sorry, but this feels so good!"
 
             else:
-                the_person "Oh my god, I finally have your cum in me... It feels so good!"
+                the_person "Oh my god... That is so fucking good!"
+                the_person "I'm not sure I'll let you cum ON me again..."
+                "[the_person.possessive_title] touches herself a bit."
+                the_person "It belongs in here, okay? Just let yourself go and cum inside me all the time from now on..."
 
         elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
             if the_person.relationship != "Single":
@@ -1707,11 +1715,12 @@ label kaya_creampie_taboo_break(the_person):
                 the_person "Ah, finally! I've wanted a load inside me for so long, I don't even care that it's not my [so_title] giving it to me!"
 
             else:
-                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!."
+                the_person "Oh my god... That is so fucking good!"
+                the_person "I'm not sure I'll let you cum ON me again..."
+                "[the_person.possessive_title] touches herself a bit."
+                the_person "It belongs in here, okay? Just let yourself go and cum inside me all the time from now on..."
                 $ the_person.update_birth_control_knowledge()
 
-            "She pants happily for a moment."
-            the_person "Now I just have to wait and see if you got me pregnant... We should go for round two, just to make sure you did."
 
         else:
             if the_person.relationship != "Single":
@@ -1766,14 +1775,14 @@ label kaya_sleepover_yourplace_response(the_person): #Invited her over to spend 
     if the_person.sluttiness < 80:
         the_person "Sounds great! Save some energy, we can make it a fun night."
     else:
-        the_person "Are you having the same dirty urges as me? Save some energy for me. We can make it a great night!"
+        the_person "Are you having the same dirty urges as me? Save some energy for me, I want to get more than one load out of your monster cock!"
     return
 
 label kaya_sleepover_herplace_response(the_person): #Spending the night at her place
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine to seduce me. "
+        the_person "You don't need the wine. We can fuck whenever you get there!."
     return
 
 
@@ -1788,7 +1797,7 @@ label kaya_sleepover_herplace_sex_start(the_person): #Right before sexy times at
     "She gives you a smirk. You can't help but frown at the thought of just cuddling..."
     the_person "Hah! Oh my god, you should have seen your face..."
     "She sets her wine down on her nightstand."
-    the_person "Get over here! I'm ready for some fun!"
+    the_person "Get over here! I'm ready to get fucked!"
     return
 
 label kaya_sleepover_impressed_response(the_person):  #If you've made her cum a lot
@@ -1823,5 +1832,33 @@ label kaya_lingerie_shopping_wow_response(the_person):
     the_person "Wow! I can honestly say I was not expecting you to go all in like this!"
     mc.name "If you don't feel comfortable with it, that's okay."
     "She is quiet, but you can hear here rustling around inside as she starts getting changed."
-    the_person "It's okay... This is just to wear in private with you anyway... right?"
+    the_person "It's okay, I'd be proud to wear this for you. Just promise me you'll get that cock inside me before you cum, okay?"
+    return
+
+label kaya_GIC_finish_response(the_person, the_goal):
+    if the_goal == None:
+        the_person "Mmm, that was exactly what I was hoping for!"
+    elif the_goal == "get mc off":
+        the_person "Did that feel good? I just want to make you feel good..."
+    elif the_goal == "anal creampie":
+        the_person "Wow... I can feel it deep inside me..."
+    elif the_goal == "get off":
+        the_person "Oh god I really needed to get off."
+    elif the_goal == "waste cum":
+        the_person "Keep that cum where it belongs... far away from me!"
+    elif the_goal == "hate fuck":
+        the_person "God I needed to get off. Did you finish? Ah nevermind I don't care anyway."
+    elif the_goal == "vaginal creampie":
+        if the_person.has_breeding_fetish():
+            the_person "MMmmm, I can feel your cum so deep..."
+        else:
+            the_person "Oh god it's inside me, right where it belongs..."
+    elif the_goal == "facial":
+        the_person "How do it look? It feels good on my face."
+    elif the_goal == "body shot":
+        the_person "Mmm your cum is so hot. I love the way it feels on my skin."
+    elif the_goal == "oral creampie":
+        the_person "You taste great..."
+    else:
+        the_person "Mmm, that was exactly what I was hoping for!"
     return
