@@ -98,11 +98,11 @@ init 2 python:
         gray_scaled_image = im.MatrixColor(base_image, im.matrix.saturation(0) * im.matrix.brightness(.3))
         # colorized with eye colour
         colorized_image = im.MatrixColor(gray_scaled_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting))
-        # only use eyes from gray scale
+        # only use eyes from colorized gray scale
         shader_image = AlphaMask(colorized_image, mask_image)
 
         # blend shader pattern into base image (mask location only)
-        return AlphaBlend(mask_image, base_image, shader_image, alpha=False)
+        return Composite((0,0), (0,0), base_image, (0,0), shader_image)
 
     Expression.generate_emotion_displayable = expression_generate_emotion_displayable
 
