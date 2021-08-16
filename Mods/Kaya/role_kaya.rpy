@@ -1374,6 +1374,8 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ the_person.draw_person(position = "sitting")
     the_person "Thanks for coming."
     if kaya.is_pregnant():
+        $ kaya.event_triggers_dict["preg_knows"] = True
+        $ kaya.remove_on_room_enter_event("Pregnancy Announcement") #Attempt to remove the default pregnancy announcement event
         the_person "I have something I really need to talk to you about..."
         if the_person.love < 60:
             $the_person.love = 60
@@ -1452,7 +1454,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     "She pulls you close and you start to make out. She moans when you hand grabs her ass."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(30)
-    the_person "You'd better take me. I'm not sure how often we will be able to do this, so we'll need to take advantage of every opportunity."
+    the_person "You'd better take me now. I'm not sure how often we will be able to do this, so we'll need to take advantage of every opportunity."
     if kaya_had_condom_talk():#You've probably done this by now. If not, we definitely have the talk now.
         mc.name "You don't have to tell me twice."
         "You hands are roaming every where over [the_person.possessive_title]'s body, and soon her clothes start to come off."
