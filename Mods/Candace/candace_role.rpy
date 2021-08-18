@@ -920,7 +920,7 @@ label candace_love_path_intro_label():
     "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
-    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
+    call fuck_person(the_person, start_position = piledriver, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
     "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
