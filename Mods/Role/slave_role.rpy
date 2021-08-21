@@ -158,11 +158,11 @@ label slave_trim_pubes_label(the_person):
     else:
         "You show her a picture of the style you want on your phone..."
         if pubes_choice.ordering_variable > the_person.pubes_style.ordering_variable:
-            the_person "Yes [the_person.mc_title], I'll will need to grow out a bit, but as soon as I can I'll trim them the way you prefer [the_person.mc_title]."
+            the_person "Yes Sir, I'll need to grow out a bit, but as soon as I can I'll trim them the way you prefer [the_person.mc_title]."
             #It will take some time for them to grow out.
             $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, renpy.random.randint(2,5))
         else:
-            the_person "Yes [the_person.mc_title], it will be ready for your inspection tomorrow."
+            the_person "Yes Sir, it will be ready for your inspection tomorrow, [the_person.mc_title]."
             $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, 0)
     $ del pubes_choice
     return

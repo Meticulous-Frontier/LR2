@@ -1314,7 +1314,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         "[the_person.possessive_title] slowly stands up. Her feet are a bit wobbly."
         the_person "It has been amazing having you around [the_person.mc_title]. It just feels so right every time we have sex. It almost feels wrong... recording it just to bring in more business..."
         "You decide to interrupt her."
-        mc.name "[the_person.possessive_title]. It has been great being your business partner. I know what you are saying, but don't worry. I'd be doing this with you even if we weren't recording it."
+        mc.name "[the_person.title], it has been great being your business partner. I know what you are saying, but don't worry. I'd be doing this with you even if we weren't recording it."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "She smiles at you happily."
         mc.name "But don't worry. If it helps the business grow, there's no reason not to record it. It doesn't make the sex any less meaningful to me. I mean really, you could ask any guy in here to do this stuff..."
