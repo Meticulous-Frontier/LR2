@@ -45,7 +45,7 @@ init 2:
                         style "namebox"
                         text who id "who" xoffset 80
 
-                    if who is not mc.name:
+                    if "mc" in globals() and who is not mc.name:
                         imagebutton:
                             idle portrait_say at character_portrait_say()
 
