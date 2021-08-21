@@ -293,6 +293,12 @@ init 2 python:
                 return True
         False
 
+    def naomi_reconciliation_requirement():
+        return time_of_day > 0 and time_of_day < 4 and naomi.location in get_mall_locations()
+
+    def talk_to_sarah_about_naomi_requirement():
+        return mc.is_at_work() and mc.business.is_open_for_business()
+
     def roll_dart_odds(target = 50, focus_score = 0):
         dart_roll = 0
         ran_num = renpy.random.randint(0,100)
@@ -395,6 +401,17 @@ init 2 python:
         HR_director_initial_hire_action = Action("Hire HR Director",HR_director_initial_hire_requirement,"HR_director_initial_hire_label", args = person, requirement_args = day)
         mc.business.add_mandatory_crisis(HR_director_initial_hire_action)
 
+    def add_naomi_reconciliation_action():
+        naomi_reconciliation_action = Action("Naomi reconciliation", naomi_reconciliation_requirement, "Sarah_naomi_reconciliation_label")
+        naomi.add_unique_on_room_enter_event(naomi_reconciliation_action)
+
+    def add_talk_to_sarah_about_naomi_action():
+        talk_to_sarah_about_naomi_action = Action("Sarah talk about Naomi", talk_to_sarah_about_naomi_requirement, "Sarah_talk_about_naomi_label")
+        sarah.add_unique_on_talk_event(talk_to_sarah_about_naomi_action)
+
+    def add_naomi_visits_to_apologize_action():
+
+
     def get_sarah_date_outfit_one():
         outfit = Outfit("Sarah Date Outfit One")
         outfit.add_upper(summer_dress.get_copy(), [.95, .7, .87, .95])
@@ -442,8 +459,8 @@ init 2 python:
         naomi.set_title(naomi.name)
         naomi.set_mc_title(mc.name)
         naomi.set_possessive_title(get_random_possessive_title(the_person))
-        # uncomment when no longer free-roam character
-        # naomi.set_schedule(naomi.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
+        # hide her from player until she is reintroduced into the story
+        naomi.set_schedule(naomi.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
         sarah.event_triggers_dict["bar_friend"] = naomi.identifier
         town_relationships.update_relationship(sarah, naomi, "Best Friend")
         unique_character_list.append(naomi) # add her to the unique character list for later story line
@@ -2254,6 +2271,7 @@ label Sarah_initial_threesome_label():
     python: # only add this if she is not already pregnant
         if not sarah.is_pregnant():
             add_sarah_ask_for_baby_action()
+        add_naomi_reconciliation_action()
     return
 
 label Sarah_ask_for_baby_label():
@@ -2961,6 +2979,96 @@ label Sarah_weekend_date_strip_club_label():
             "Sorry! This isn't written yet. You decide actually to not wait for her and just head back to your place."
 
     $ scene_manager.clear_scene()
+    return
+
+label Sarah_naomi_reconciliation_label(the_person):
+    python:
+        if not sarah.is_employee():
+            return
+        so_title = SO_relationship_to_title(the_person.relationship)
+        so_name = the_person.SO_name
+        the_person.SO_name = None
+        the_person.relationship = "Single"
+
+    "As you are walking around, you suddenly here a familiar voice calling you."
+    the_person "Hey [the_person.mc_title], is that you?"
+    $ the_person.draw_person()
+    mc.name "Hello [the_person.title], long time no see. How are you these days?"
+    $ the_person.draw_person(emotion = "sad")
+    if so_title = "Married":
+        the_person "To be honest, not so good. I recently divorced [so_name]."
+    else:
+        the_person "To be honest, not so good. I recently broke up with my [so_title] [so_name]."
+    the_person "It seems we weren't as compatible as I thought."
+    the_person "If you don't mind me asking, are you still seeing [sarah.name]?"
+    mc.name "Of course, she's one of my best employees."
+    the_person "I would like to apologize to her, she's always been a good friend and we didn't part on best terms last time..."
+    mc.name "I remember, you where a real bitch the last time."
+    the_person "I know and I'm really sorry about that, I shouldn't have said that, I guess I let [so_name] influence me too much."
+    mc.name "You know what, I will see what I can do for you, but first I need to talk this over with [sarah.name]."
+    $ the_person.draw_person(emotion = "happy")
+    the_person "That would be awesome, I don't know how I could ever repay you."
+    "You got a few ideas for that and you doubt she is going to like them."
+    if mc.phone.has_number(the_person):
+        mc.name "Don't worry about it, I'll give you a call soon."
+        the_person "Thanks again, talk to you soon."
+    else:
+        mc.name "Don't worry about it, just give me your phone number and I'll give you a call soon."
+        $ mc.phone.register_number(the_person)
+        the_person "Here you are, thanks again and talk to you soon."
+    $ the_person.draw_person(position = "walking_away")
+    "You should talk to [sarah.possessive_title] to give her a heads-up and discuss what just happened."
+    $ clear_scene()
+    $ add_talk_to_sarah_about_naomi_action()
+    return
+
+label Sarah_talk_about_naomi_label(the_person):
+    $ the_person.draw_person()
+    mc.name "Hey [the_person.title], can we have a talk in my office?"
+    the_person "I'm not in trouble, am I?"
+    mc.name "Don't worry, it's personal."
+    the_person "Ok, lets go then."
+    $ mc.change_location(ceo_office)
+    $ mc.location.show_background()
+    $ the_person.draw_person(position = "sitting")
+    "You gesture [the_person.possessive_title] to sit down."
+    mc.name "Guess who I bumped into the other day..."
+    the_person "No clue, come on tell me..."
+    mc.name "Your old friend [naomi.name]."
+    "[sarah.name] looks at you for a few seconds..."
+    the_person "Okay, why should I care?"
+    mc.name "Well, she wants to get back in touch with you, she's sorry about what happened last time."
+    "She is still skeptical, what do you want to propose to her?"
+    menu:
+        "Get some revenge":
+            mc.name "I think she deserves a little punishment for how she treated you last time."
+            $ the_person.draw_person(position = "sitting", emotion = "happy")
+            the_person "Yeah, I agree, she needs to be put in her place."
+            mc.name "And since she's single again, we could make this a little more interesting for you."
+            the_person "Oh, you little devil, what are you planning."
+            mc.name "Don't worry about that, do you trust me? I promise you will love it."
+            the_person "Darn, now you made me really curious, but I will let you surprise me."
+            mc.name "Perfect, now get back to work, you little slacker."
+            $ the_person.draw_person(position = "back_peek")
+            "With that she stands up and leaves your office, looking back to give you a wink."
+            $ clear_scene()
+            "Now lets invite [naomi.name] over to give her the 'good' news."
+            $ mc.start_text_convo(naomi)
+            mc.name "Good news, I talked it over with [the_person.name]."
+            mc.name "Can you come to my business next Wednesday afternoon?"
+            naomi "That's just wonderful, I'll be there."
+            $ mc.end_text_convo()
+            $ add_naomi_visits_to_apologize_action()
+            "The stage is set and you can execute your plan next Wednesday."
+        "Be friends again\n{color=ff0000}{size=18}Not written yet{/size}{/color} (disabled)":
+            
+        "Nothing":
+            mc.name "Looking at how she treated you, I would keep away from her."
+            the_person "Yeah, I agree, I don't need her in my life. Things are just fine. Thanks for telling me though."
+            mc.name "No problem, now back to work."
+            $ the_person.draw_person(position = "walking_away")
+            "With that she stands up and leaves your office."
+            $ clear_scene()
     return
 
 label Sarah_naomi_visits_to_apologize():
