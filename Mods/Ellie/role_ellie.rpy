@@ -470,7 +470,7 @@ label ellie_work_welcome_monday_label():
     ellie "So I looked through those programs a bit. There are definitely some gains to be made in those programs."
     ellie "I'm not saying I agree with what you are doing with them, but the programs themselves look like you just slapped them together over a weekend or something."
     mc.name "That's.... basically what we did. The head researcher had a contact who put together the programs for us over a weekend..."
-    ellie "You... bless your hearts. you are lucky he didn't put in some kinda back door or tracking program in there. He was probably just lazy."
+    ellie "You... bless your hearts. You are lucky he didn't put in some kinda back door or tracking program in there. He was probably just lazy."
     ellie "Anyway, I think I can improve those more for you, though if I'm honest, these bots are cutting edge tech. Some improvements might need more research into the bots themselves first."
     $ mc.business.it_director = the_person
     $ mc.business.it_director.IT_tags = {}
