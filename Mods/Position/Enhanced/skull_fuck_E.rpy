@@ -22,7 +22,7 @@ label orgasm_skull_fuck_enhanced(the_girl, the_location, the_object):
 
         $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
         if the_girl.outfit.vagina_visible():
-            "You can see that [the_girl.title]'s pussy is dripping wet as she cums."
+            "You can see that [the_girl.title]'s [the_girl.pubes_description] pussy is dripping wet as she cums."
         else:
             $ the_item = the_girl.outfit.get_lower_top_layer()
             if the_item.underwear:

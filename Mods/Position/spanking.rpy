@@ -238,7 +238,7 @@ label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
     "You continue your back and forth motion, rubbing your cock along her already wet pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
         the_girl "Oh....Please..."
-    "You continue to move your cock forwards and backwards teasing her pussy."
+    "You continue to move your cock forwards and backwards teasing her [the_girl.pubes_description] pussy."
     if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."

@@ -54,7 +54,7 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
                     $ the_girl.discover_opinion("masturbating")
                     if the_girl.arousal > 60:
-                        "Her moans are muffled by your cock when she slides a finger into her pussy and starts to finger herself."
+                        "Her moans are muffled by your cock when she slides a finger into her [the_girl.pubes_description] pussy and starts to finger herself."
                     else:
                         "She rubs her clit with her middle finger, making little circles around the sensitive nub."
                 else:

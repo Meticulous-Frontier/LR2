@@ -51,7 +51,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             $ climax_controller.do_clarity_release(the_girl)
             $ missionary.redraw_scene(the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
@@ -80,7 +80,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
             $ missionary.redraw_scene(the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
@@ -167,7 +167,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 the_girl "Look at all that cum. Well done."
         else:
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             else:
@@ -201,7 +201,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
             $ against_wall.redraw_scene(the_girl)
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "She throws her head back in pleasure."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"

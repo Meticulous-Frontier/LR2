@@ -42,7 +42,7 @@ label taboo_break_cowgirl_cunnilingus(the_girl, the_location, the_object):  #bec
     the_girl "Not on my lips..."
     "She slowly climbs up your body until her cunt is inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
-    "You bring one hand up to her pussy and spread it open to reveal the tender pink inside."
+    "You bring one hand up to her [the_girl.pubes_description] pussy and spread it open to reveal the tender pink inside."
     "With her thighs pressed against your shoulders you can feel every tremble and shiver of anticipation in her body."
     the_girl "Come on, do it!"
     "You run your tongue along the length of her slit, tasting her sweet juices."

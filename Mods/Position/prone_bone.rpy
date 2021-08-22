@@ -79,7 +79,7 @@ label intro_prone_bone(the_girl, the_location, the_object):
         the_girl "Okay, just don't do anything too crazy, okay?"
         $ the_girl.change_obedience(1)
     "She lies down on the [the_object.name], waiting while you climb on top of her. Before you get started, you give her ass a couple smacks with your dick."
-    "[the_girl.possessive_title] looks back at you as you line your cock up with her pussy. She moans as you slide into her."
+    "[the_girl.possessive_title] looks back at you as you line your cock up with her [the_girl.pubes_description] pussy. She moans as you slide into her."
     return
 
 label taboo_break_prone_bone(the_girl, the_location, the_object):
@@ -89,7 +89,7 @@ label taboo_break_prone_bone(the_girl, the_location, the_object):
     the_girl "Okay, just don't do anything too crazy, okay?"
     $ the_girl.change_obedience(2)
     "She lies down on the [the_object.name] on her belly. She wiggles her ass at you, waiting while you climb on top of her."
-    "[the_girl.possessive_title] loks back at you as you line your cock up with her pussy. She moans as you slide into her."
+    "[the_girl.possessive_title] loks back at you as you line your cock up with her [the_girl.pubes_description] pussy. She moans as you slide into her."
     return
 
 label scene_prone_bone_1(the_girl, the_location, the_object):
@@ -402,7 +402,7 @@ label strip_ask_prone_bone(the_girl, the_clothing, the_location, the_object):
 label orgasm_prone_bone(the_girl, the_location, the_object):
     "[the_girl.title] turns her head and pants loudly. Suddenly she bucks her hips up against yours and gasps."
     $ the_girl.call_dialogue("climax_responses_vaginal")
-    "Her pussy is dripping wet as you fuck through her climax. She paws at the [the_object.name], trying to find something to hold onto."
+    "Her [the_girl.pubes_description] pussy is dripping wet as you fuck through her climax. She paws at the [the_object.name], trying to find something to hold onto."
     "After a few seconds she lets out a long sigh and all the tension drains out of her body. You slow down your thrusts to catch your own breath."
     the_girl "[the_girl.mc_title]... fuck! I Can't... oh my god..."
     "[the_girl.possessive_title] is getting fucked senseless as you continue to have your way with her."

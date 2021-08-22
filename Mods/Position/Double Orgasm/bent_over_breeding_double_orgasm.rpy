@@ -31,7 +31,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
             the_girl "Yes! Yes I needed this so bad! Fill me up! Oh god it's so good..."
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
         elif the_girl.has_cum_fetish():
-            "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+            "[the_girl.possessive_title]'s body goes rigid as your cum pours into her [the_girl.pubes_description] pussy. Goosebumps erupt all over her body as her brain registers her creampie."
             the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.get_opinion_score("bareback sex") > 0:
@@ -51,6 +51,6 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         if the_girl.has_breeding_fetish():
             "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
         else:
-            "You cum leaks out of her dripping wet pussy."
+            "You cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
         $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

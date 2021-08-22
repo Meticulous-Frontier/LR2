@@ -17,7 +17,7 @@ label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
     $ breeding_missionary.redraw_scene(the_girl)
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     if the_girl.has_breeding_fetish():
-        "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+        "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
         the_girl "Yes! Paint my fertile womb white with your cum!"
         "Her body convulses as she begins to cum at the same time. She clings to you as her orgasm hits."
         if the_girl.knows_pregnant():
@@ -25,12 +25,12 @@ label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
         else:
             "[the_girl.title] revels having her breeding fetish fulfilled as you pump her full of a risky creampie."
     elif the_girl.has_cum_fetish():
-        "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+        "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
         the_girl "Oh fuck oh yes!!!"
         "Her body convulses as she begins to cum at the same time. She wraps her legs around you and clings to you as orgasm hits her as you cum inside of her."
         "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
     else:
-        "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+        "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
         "Her body convulses as she begins to cum at the same time. She clings to you as her orgasm hits."
     "When you finish, you wait a few minutes while [the_girl.title] has a few aftershocks. Her pussy grasps your cock with each one."
     "You roll off of [the_girl.possessive_title] and lie beside her."

@@ -33,7 +33,7 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
         "She reaches down and pulls off your condom."
         the_person "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
-    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
+    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her [the_girl.pubes_description] pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
     the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
     return
@@ -51,7 +51,7 @@ label taboo_break_breeding_missionary(the_girl, the_location, the_object):
         "She reaches down and pulls off your condom."
         the_person "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
-    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
+    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her [the_girl.pubes_description] pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
     the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
     return

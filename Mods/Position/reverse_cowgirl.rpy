@@ -152,7 +152,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex" * 5))
             if the_girl.arousal > 130:
                 "You can feel [the_girl.title]'s pussy and ass quaking as she aftershocks from her orgasms. She moans ecstatically."
-                "Her pussy clenching your cock as she grinds you feels amazing, and it turns you on seeing her rolling into multiple orgasms."
+                "Her [the_girl.pubes_description] pussy clenching your cock as she grinds you feels amazing, and it turns you on seeing her rolling into multiple orgasms."
                 $ mc.change_arousal(10)
                 $ the_girl.change_happiness(2)
             else:
@@ -191,7 +191,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
             the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
             "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
-            "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
+            "She moans as the first wave of your cum floods her [the_girl.pubes_description] pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
             the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it it all inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
@@ -215,7 +215,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
     elif the_girl.wants_creampie():
         the_girl "Oh god, I can't wait to feel you shoot it up inside me... Cum for me [the_girl.mc_title]!"
         "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
-        "She moans as the first wave of your cum floods her pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
+        "She moans as the first wave of your cum floods her [the_girl.pubes_description] pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
         $ the_girl.cum_in_vagina()
         $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
         $ SB_reverse_cowgirl.redraw_scene(the_girl)
@@ -224,7 +224,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
     elif the_girl.get_opinion_score("bareback sex") > 0:
         the_girl "That's it, shoot your seed in deep! I want to feel you flood my womb!"
         "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
-        "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy. She holds herself still as you dump your load deep inside her."
+        "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy. She holds herself still as you dump your load deep inside her."
         "You reach your hands forward and grab her hips, and push yourself up slightly, holding her hips in place."
         $ the_girl.cum_in_vagina()
         $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
@@ -390,7 +390,7 @@ label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
     else:
         "She reaches behind her and grabs your cock, rubbing it between her butt cheeks."
     $ the_girl.call_dialogue(cowgirl.associated_taboo+"_taboo_break")
-    "[the_girl.title] lifts herself up, puts your hard cock in line with her pussy, and starts to lower herself down."
+    "[the_girl.title] lifts herself up, puts your hard cock in line with her [the_girl.pubes_description] pussy, and starts to lower herself down."
     "You feel a moment of resistance as your cock spreads her open, then her body weight carries her all the way down your shaft."
     "She closes her eyes and moans, holding your entire length inside of her for a few seconds."
     "When she's ready she leans forward, grabs your legs and starts to move her hips up and down, giving you a perfect view of her ass bouncing up and down on your cock."

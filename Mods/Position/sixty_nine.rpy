@@ -45,7 +45,7 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object):
     if not the_girl.vagina_visible():
         $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
         "She quickly moves some clothes out of the way."
-    "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over you, presenting her pussy to your face. You waste no time and start to flick your tongue around her slit."
+    "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over you, presenting her [the_girl.pubes_description] pussy to your face. You waste no time and start to flick your tongue around her slit."
     if the_girl.get_opinion_score("getting head") > 2 :
         the_girl "Oh! Yes that feels so good already! Oh [the_girl.mc_title] your tongue feels amazing."
     if the_girl.get_opinion_score("giving blowjobs") > 2:
@@ -182,7 +182,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                             $ the_girl.change_arousal(5)
                             $ the_girl.cum_on_face()
                             $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-                            "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
+                            "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her [the_girl.pubes_description] pussy."
                             "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                         else:
                             "After a moment she takes her lips off your dick and continues stroking you."
@@ -302,13 +302,13 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] tenses slightly as you start to push your finger into her back passage and begins to protest."
                 mc.name "Hush [the_girl.title], let me take care of you."
                 "[the_girl.possessive_title] stays pretty tense, so for now you just leave your finger where it is."
-                "You decide to resume licking her pussy, your finger halfway inside her rectum."
+                "You decide to resume licking her [the_girl.pubes_description] pussy, your finger halfway inside her rectum."
                 "[the_girl.possessive_title] delicately licks the tip of your dick for a bit, before parting her lips and resuming her suckling motions."
             "You decide that is enough ass play for now, so you resume eating [the_girl.possessive_title] out."
 
 
         "Finger Her":
-            "You take a finger and push it into her pussy, while your tongue slithers back and forth across her slit."
+            "You take a finger and push it into her [the_girl.pubes_description] pussy, while your tongue slithers back and forth across her slit."
             "[the_girl.possessive_title] moans as she working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
             if mc.sex_skills["Foreplay"] > 2:   #MC is competent at foreplay
                 "You push a second finger into her. [the_girl.possessive_title] moans around the base of your cock as she licks it up and down."

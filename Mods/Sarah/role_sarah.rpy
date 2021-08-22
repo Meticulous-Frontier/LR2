@@ -3106,7 +3106,7 @@ label Sarah_naomi_visits_to_apologize_label():
         "Your pour some coffee and place the cup before her on the desk."
     mc.name "Right, since we are all set, shall I call in [sarah.name]?"
     the_person "Perfect, I have been thinking about what to say for a few days now."
-    "You make a quick call to [sarah.possessive_title] and wait until she knocks on your door."
+    "You make a quick call to [sarah.possessive_title] and wait until she knocks on your door, all the while [the_person.name] is sipping on her coffee."
     $ scene_manager.add_actor(sarah, display_transform = character_right)
     sarah "Good afternoon, [sarah.mc_title]."
     if sarah_epic_tits_progress() > 1:
@@ -3133,6 +3133,8 @@ label Sarah_naomi_visits_to_apologize_label():
     sarah "Right, this won't do at all [the_person.name], a good spanking is done on a bare butt, show it to me."
     "[the_person.name] looks at you and only sees you nodding, reluctantly she moves her clothes out of the way."
     $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = True)
+    $ the_person.change_arousal(10)
+    $ sarah.change_arousal(10)
     sarah "Good, I see you are committed to apologize."
     $ scene_manager.update_actor(sarah, position = "stand5")
     "And with that [sarah.possessive_title] starts slapping away at [the_person.name]'s naked ass cheeks."
@@ -3140,10 +3142,67 @@ label Sarah_naomi_visits_to_apologize_label():
     sarah "Now you little bitch, tell me how sorry you are!"
     the_person "Aaah....I'm...shit...really...Ouch...SORRY!!"
     "As you are watching this scene you see [the_person.name]'s bottom turn a nice shade of red, but what's even more interesting, her pussy seems to get wet also."
-    
+    menu:
+        "Degrade [the_person.title]":
+            mc.name "Hey [sarah.title], I think she is ready to make some further amends."
+            sarah "What did you have in mind, Sir?"
+            mc.name "Why don't you take a seat."
+            $ scene_manager.update_actor(sarah, position = "sitting")
+            mc.name "Well [the_person.name], did you know that [sarah.name] had a girl crush on you since you met?"
+            $ scene_manager.update_actor(the_person, position = "stand2")
+            the_person "Oh...I didn't know that, is that why you where so angry with me after that night? Because my ex didn't let you join us?"
+            $ the_person.change_arousal(10)
+            "[sarah.possessive_title] looks at her and quietly nods."
+            mc.name "[sarah.title], why don't you show her how wet your little snatch is..."
+            $ scene_manager.strip_to_vagina(sarah, visible_enough = True, prefer_half_off = True, position = "missionary", display_transform = Threesome_doggy_deluxe_girl_one_transform)
+            $ sarah.change_arousal(10)
+            "As [sarah.possessive_title] lays back in her chair she reveals her already slick snatch to her friend."
+            mc.name "[the_person.name], why don't you show her how much you value her friendship, by making her cum with your tongue."
+            if sarah_epic_tits_progress() > 1:
+                the_person "Could I also see your magnificent breasts, they just look amazing as far as I can tell."
+                "[sarah.possessive_title] smiles and reveals her new boobs."
+                $ scene_manager.strip_to_tits(sarah, visible_enough = True, prefer_half_off = True, position = "missionary", display_transform = Threesome_doggy_deluxe_girl_one_transform)
+                $ the_person.change_arousal(15)
+                the_person "Oh my, the look truly amazing, you have to give me the number of you doctor."
+                $ scene_manager.update_actor(sarah, emotion = "happy")
+                "[sarah.possessive_title] looks up at you and give you big smile and a wink."
+                mc.name "Well, get down to business [the_person.title]."
+            $ scene_manager.update_actor(the_person, position = "doggy" , display_transform = Threesome_doggy_deluxe_girl_two_transform)
+            $ sarah.change_arousal(10)
+            "[the_person.name] moves between her friends legs, and slowly starts licking her [sarah.pubes_description] fold."
+            call start_threesome(sarah, the_person, start_position = Threesome_doggy_deluxe, skip_intro = True, position_locked = True, affair_ask_after = False)
+            $ the_report = _return
+            if the_report.get("guy orgasms", 0) > 0:
+                mc.name "I loved fucking your wet little cunt, [the_person.name]."
+            if the_report.get("girl one orgasms", 0) > 0:
+                sarah "Hmmm, indeed, her tongue is really magic, you should let her give you a blowjob next time [sarah.mc_title]."
+            else:
+                sarah "Too bad she didn't make cum. I'm a little disappointed in your efforts [the_person.name]."
+            $ scene_manager.update_actor(sarah, position = "sitting", display_transform = character_right)
+            $ scene_manager.update_actor(the_person, position = "stand4", display_transform = character_center_flipped)
+            the_person "I'm really happy I was able to do this for you both, friends?"
 
-    
-    # TODO: after threesome unlock, Naomi comes to office to apologize (she's been dumped by her BF)
+        "End the punishment":
+            mc.name "Right, that will be enough for now."
+            sarah "Ah, well, if you think so [sarah.mc_title]."
+            $ scene_manager.update_actor(sarah, position = "sitting")
+            $ scene_manager.update_actor(the_person, position = "stand4")
+            the_person "Do you think we could be friends again, [sarah.name]?"            
+
+    "You look at [sarah.possessive_title], so she knows it's her decision."
+    sarah "Very well, lets consider this a friendship on trial basis and see where it goes from here."
+    the_person "Thats all I ever wanted."
+    if sarah.vagina_visible():
+        "The girls rearrange their outfits."
+    else:
+        "[the_person.name] puts her clothes in order."
+    $ scene_manager.review_outfits(dialogue = False)
+    the_person "Why don't you give me a tour of this place [sarah.name]?"
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "She grabs [sarah.possessive_title] by the hand and the walk out of your office."
+    $ scene_manager.update_actor(sarah, position = "walking_away")
+    "It seems they are off to a good start, lets see where this relationship goes in the future."
+
     # TODO: add bar date with Sarah and Naomi, where you end up at Sarah's place for a night of fun
     return
 

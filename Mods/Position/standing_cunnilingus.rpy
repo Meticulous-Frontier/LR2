@@ -46,7 +46,7 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
     the_person "Ahh... you scared me there..."
     "She runs her fingers through your hair as you get closer, her cunt inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
-    "You bring one hand up to her pussy and spread it open to reveal the tender pink inside."
+    "You bring one hand up to her [the_girl.pubes_description] pussy and spread it open to reveal the tender pink inside."
     the_girl "Come on, do it!"
     "You run your tongue along the length of her slit, tasting her sweet juices."
     the_girl "Oh my god!"
