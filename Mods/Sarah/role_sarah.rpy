@@ -299,6 +299,13 @@ init 2 python:
     def talk_to_sarah_about_naomi_requirement():
         return mc.is_at_work() and mc.business.is_open_for_business()
 
+    def naomi_visits_to_apologize_requirement(the_day):
+        if day <= the_day:
+            return False
+        if day != 2 or time_of_day != 2:
+            return False
+        return True
+
     def roll_dart_odds(target = 50, focus_score = 0):
         dart_roll = 0
         ran_num = renpy.random.randint(0,100)
@@ -410,7 +417,8 @@ init 2 python:
         sarah.add_unique_on_talk_event(talk_to_sarah_about_naomi_action)
 
     def add_naomi_visits_to_apologize_action():
-
+        naomi_visits_to_apologize_action = Action("Naomi visits to apologize", naomi_visits_to_apologize_requirement, "Sarah_naomi_visits_to_apologize_label", requirement_args = day)
+        mc.business.add_mandatory_crisis(naomi_visits_to_apologize_action)
 
     def get_sarah_date_outfit_one():
         outfit = Outfit("Sarah Date Outfit One")
@@ -2982,9 +2990,10 @@ label Sarah_weekend_date_strip_club_label():
     return
 
 label Sarah_naomi_reconciliation_label(the_person):
+    if not sarah.is_employee(): # quick exit if she no longer works here
+        return
+
     python:
-        if not sarah.is_employee():
-            return
         so_title = SO_relationship_to_title(the_person.relationship)
         so_name = the_person.SO_name
         the_person.SO_name = None
@@ -3022,7 +3031,7 @@ label Sarah_naomi_reconciliation_label(the_person):
     $ add_talk_to_sarah_about_naomi_action()
     return
 
-label Sarah_talk_about_naomi_label(the_person):
+label Sarah_talk_about_naomi_label(the_person): 
     $ the_person.draw_person()
     mc.name "Hey [the_person.title], can we have a talk in my office?"
     the_person "I'm not in trouble, am I?"
@@ -3061,7 +3070,7 @@ label Sarah_talk_about_naomi_label(the_person):
             $ add_naomi_visits_to_apologize_action()
             "The stage is set and you can execute your plan next Wednesday."
         "Be friends again\n{color=ff0000}{size=18}Not written yet{/size}{/color} (disabled)":
-            
+            pass
         "Nothing":
             mc.name "Looking at how she treated you, I would keep away from her."
             the_person "Yeah, I agree, I don't need her in my life. Things are just fine. Thanks for telling me though."
@@ -3071,7 +3080,69 @@ label Sarah_talk_about_naomi_label(the_person):
             $ clear_scene()
     return
 
-label Sarah_naomi_visits_to_apologize():
+label Sarah_naomi_visits_to_apologize_label():
+    if not sarah.is_employee(): # quick exit if she no longer works here
+        return
+
+    "It's Wednesday afternoon and Naomi is visiting, so you go down to the lobby to pick her up."
+    python:
+        the_person = naomi
+        scene_manager = Scene()
+        mc.change_location(lobby)
+        mc.show_background()
+        scene_manager.add_actor(the_person)
+    the_person "Hello [the_person.mc_title], thank you again for doing this for me."
+    mc.name "Hi [the_person.name], good to see you, let's go to my office."
+    $ mc.change_location(ceo_office)
+    $ mc.show_background()
+    $ scene_manager.update_actor(the_person, position = "sitting", display_transform = character_center_flipped)
+    "You motion her to take a seat."
+    mc.name "Would you like some coffee?"
+    $ coffee = get_random_coffee_style()
+    the_person "Yes, [coffee], please."
+    if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
+        "You pour some of your serum enhanced coffee, to make her a little more open to suggestion."
+    else:
+        "Your pour some coffee and place the cup before her on the desk."
+    mc.name "Right, since we are all set, shall I call in [sarah.name]?"
+    the_person "Perfect, I have been thinking about what to say for a few days now."
+    "You make a quick call to [sarah.possessive_title] and wait until she knocks on your door."
+    $ scene_manager.add_actor(sarah, display_transform = character_right)
+    sarah "Good afternoon, [sarah.mc_title]."
+    if sarah_epic_tits_progress() > 1:
+        the_person "Oh my god, [sarah.name] you look absolutely stunning, your breasts...they are...amazing."
+        $ scene_manager.update_actor(sarah, emotion = "happy")
+    else:
+        the_person "Hello [sarah.name], it's good to see you, you look great."
+    "Before you have any chance to say anything, [the_person.name], starts apologizing to [sarah.possessive_title]."
+    the_person "I'm so sorry, for the last time, you are my best friend, you where always there for me, I shouldn't have listened to that shit bag..."
+    "During her rambling, [sarah.possessive_tile] sits down, without saying a word."
+    $ scene_manager.update_actor(sarah, position = "sitting", emotion = "default")
+    mc.name "SILENCE !!"
+    "[the_person.name] stops rambling and both girls look at you."
+    mc.name "We are not here to listen to you babbling, [sarah.name] is here for an apology."
+    mc.name "So it's time we get to it, I think [the_person.name] deserves a good spanking, don't you agree [sarah.title]?"
+    $ scene_manager.update_actor(sarah, emotion = "happy")
+    "A second [the_person.name] looks dumbfounded, but [sarah.title] starts to smile and nods to you."
+    mc.name "Good, I thought you both would agree, [the_person.name] please stand and lean ove my desk."
+    the_person "I...but...well..."
+    $ scene_manager.update_actor(the_person, position = "standing_doggy", display_transform = character_center)
+    mc.name "Right, [sarah.title], I think it would be only fair if you did the spanking."
+    "[sarah.possessive_tile] finally seems to figure out where you are going and leans into the role."
+    $ scene_manager.update_actor(sarah, position = "stand4", emotion = "default")
+    sarah "Right, this won't do at all [the_person.name], a good spanking is done on a bare butt, show it to me."
+    "[the_person.name] looks at you and only sees you nodding, reluctantly she moves her clothes out of the way."
+    $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = True)
+    sarah "Good, I see you are committed to apologize."
+    $ scene_manager.update_actor(sarah, position = "stand5")
+    "And with that [sarah.possessive_title] starts slapping away at [the_person.name]'s naked ass cheeks."
+    the_person "Oh shit!...Fuck!...Aaarg!"
+    sarah "Now you little bitch, tell me how sorry you are!"
+    the_person "Aaah....I'm...shit...really...Ouch...SORRY!!"
+    "As you are watching this scene you see [the_person.name]'s bottom turn a nice shade of red, but what's even more interesting, her pussy seems to get wet also."
+    
+
+    
     # TODO: after threesome unlock, Naomi comes to office to apologize (she's been dumped by her BF)
     # TODO: add bar date with Sarah and Naomi, where you end up at Sarah's place for a night of fun
     return
