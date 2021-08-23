@@ -90,7 +90,7 @@ init -2 python: #Requirement Functions
 
     def ellie_never_been_kissed_requirement(the_person):
         if ellie_is_working_on_nanobots() and ellie.sluttiness > 20:
-            reutrn True
+            return True
         if ellie.sluttiness > 40:
             return True
         return False
