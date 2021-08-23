@@ -73,6 +73,18 @@ init -1 python:
     def breeding_fetish_ashley_intro_requirement():
         return False
 
+    def breeding_fetish_kaya_intro_requirement():
+        return False
+
+    def breeding_fetish_ellie_intro_requirement():
+        return False
+
+    def breeding_fetish_camilla_intro_requirement():
+        return False
+
+    def breeding_fetish_sakari_intro_requirement():
+        return False
+
 
 init 2 python:
     # breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label")
@@ -1148,6 +1160,18 @@ label breeding_fetish_ashley_intro_label():
 label breeding_fetish_dawn_intro_label():
     "Dawn doesn't have a breeding fetish written yet"
     return
+
+label breeding_fetish_kaya_intro_label():
+    return False
+
+label breeding_fetish_ellie_intro_label():
+    return False
+
+label breeding_fetish_camilla_intro_label():
+    return False
+
+label breeding_fetish_sakari_intro_label():
+    return False
 
 label unit_test_breeding_fetish_intro():
 

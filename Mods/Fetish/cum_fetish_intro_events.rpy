@@ -79,6 +79,18 @@ init 1 python:
     def cum_fetish_ashley_intro_requirement():
         return False
 
+    def cum_fetish_kaya_intro_requirement():
+        return False
+
+    def cum_fetish_ellie_intro_requirement():
+        return False
+
+    def cum_fetish_camilla_intro_requirement():
+        return False
+
+    def cum_fetish_sakari_intro_requirement():
+        return False
+
 init 2 python:
     def add_cum_fetish(person):
         person.max_opinion_score("drinking cum")
@@ -781,6 +793,18 @@ label cum_fetish_erica_intro_label():
     return False
 
 label cum_fetish_ashley_intro_label():
+    return False
+
+label cum_fetish_kaya_intro_label():
+    return False
+
+label cum_fetish_ellie_intro_label():
+    return False
+
+label cum_fetish_camilla_intro_label():
+    return False
+
+label cum_fetish_sakari_intro_label():
     return False
 
 label unit_test_cum_fetish_intro():
