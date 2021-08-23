@@ -82,7 +82,7 @@ label scene_sarah_tit_fuck_2(the_girl, the_location, the_object):
     mc.name "I'll hold them for a bit. That way you can have your hands free."
     the_girl "Mmm, fuck my tits [the_girl.mc_title], they're all yours!"
     "You squeeze down hard on her breasts and work your hips, fucking her soft cleavage. [the_girl.title] moans in response."
-    "She reaches down with her free hand and starts to play with her pussy. Her eyes glaze over for a bit as the sensations start to overwhelm her."
+    "She reaches down with her free hand and starts to play with her [the_girl.pubes_description] pussy. Her eyes glaze over for a bit as the sensations start to overwhelm her."
     $ the_girl.change_arousal(10 + (3 * the_girl.get_opinion_score("masturbating")))
     "With her other hand she smacks your ass, then grabs it, urging you to fuck her tits harder."
     the_girl "That's it! My tits are yours to use... Make me cum, then cover me in yours!"

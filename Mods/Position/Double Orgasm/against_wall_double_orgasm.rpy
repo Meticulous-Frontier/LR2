@@ -52,7 +52,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 the_girl "Look at all that cum. Well done."
         else:
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "Having your cum inside of her heightens her orgasm as her fetish for your cum is fulfilled."
             else:
@@ -87,7 +87,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
             $ climax_controller.do_clarity_release(the_girl)
             $ against_wall.redraw_scene(the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "Having your cum inside of her heightens her orgasm as her fetish for you cum is fulfilled."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"

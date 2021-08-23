@@ -35,7 +35,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
         the_girl "I don't know, are you sure that thing is gonna fit in me back there?"
     "[the_girl.possessive_title] gets onto all fours in front of you on the [the_object.name]. She arches her back and presents her ass."
     if the_girl.arousal > 60:
-        "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
+        "Her [the_girl.pubes_description] pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
         "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."

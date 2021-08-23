@@ -164,7 +164,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title]'s tight cunt feels so good, you can't help but slam into it over and over again. Maybe you should touch her a bit or talk dirty in her ear..."
         menu:
             "Touch her":
-                 "You thrust deep inside [the_girl.possessive_title]'s pussy and hold it there for a second. You reach one hand around her hup and trail it down between her legs..."
+                 "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hup and trail it down between her legs..."
                  "You reach her mound and being to work circles around her clit with your fingers"
                  if the_girl.arousal > 130:
                       the_girl "Oh my god you're gonna make me cum again! Holy fuck!"
@@ -411,7 +411,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                     if the_girl.arousal > 130:
                         "[the_girl.possessive_title] moans loudly from your attention to her voluptuous chest. She thrusts herself back against you."
-                        "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and it's just too much. You are definitely about to cum!"
+                        "You feel yet another orgasm roll through her. Her drenched [the_girl.pubes_description] pussy is pulsating wildly and it's just too much. You are definitely about to cum!"
                         $ mc.change_arousal( 100)
                         return
                 else:
@@ -422,7 +422,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         if the_girl.arousal > 130:
                             "[the_girl.possessive_title] moans loudly from your attention to her petite chest. She thrusts herself back against you."
-                            "You feel yet another orgasm roll through her. Her drenched pussy is pulsating wildly and it's just too much. You are definitely about to cum!"
+                            "You feel yet another orgasm roll through her. Her drenched [the_girl.pubes_description] pussy is pulsating wildly and it's just too much. You are definitely about to cum!"
                             $ mc.change_arousal( 100)
                             return
                     else:
@@ -603,7 +603,7 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
     elif the_girl.effective_sluttiness() > 80:
         the_girl "[the_girl.mc_title], it feels so good..."
     else:
-        "[the_girl.possessive_title] arches her back a bit. She steals a glance back at you while you enjoy the warm, slick grip of her pussy."
+        "[the_girl.possessive_title] arches her back a bit. She steals a glance back at you while you enjoy the warm, slick grip of her [the_girl.pubes_description] pussy."
     "You put your hands on [the_girl.possessive_title]'s hips and give her a tentative thrust."
     if the_girl.arousal > 60:
         "[the_girl.possessive_title]'s cunt is already slick and wet with arousal. She places on hand on top of yours, encouraging you fuck her."

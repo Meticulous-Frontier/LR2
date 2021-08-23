@@ -32,7 +32,7 @@ label outro_standing_finger_enhanced(the_girl, the_location, the_object):
 
     if the_girl.get_opinion_score("being fingered") < 0:
         the_girl "Now, you've cum, can we do something else?"
-        "[the_girl.title] gently pulls your hand up from her pussy."
+        "[the_girl.title] gently pulls your hand up from her [the_girl.pubes_description] pussy."
         if the_girl.sluttiness >= 60:
             "She brings your hand up to her mouth. She slides your fingers, fresh from her cunt, into her mouth."
             "Her tongue wraps around them as she sucks gently on your fingers. She works her hips, grinding her ass against you."

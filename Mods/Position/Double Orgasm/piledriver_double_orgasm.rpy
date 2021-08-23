@@ -53,7 +53,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_in_vagina()
             $ missionary.redraw_scene(the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title] moans as the first wave of your cum floods her pussy."
+                "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 the_girl "Oh fuck oh yes!!!"
                 "Her body convulses as she begins to cum at the same time. She wraps her legs around you and clings to you as orgasm hits her as you cum inside of her."
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."

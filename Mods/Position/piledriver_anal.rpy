@@ -96,7 +96,7 @@ label scene_piledriver_anal_1(the_girl, the_location, the_object):
 
 label scene_piledriver_anal_2(the_girl, the_location, the_object):
     "You take [the_girl.possessive_title] legs and spread them wide. Her whole body lays open and surrendered to you."
-    "She reaches down with her hand and starts to play with her pussy as you fuck her buttery back door."
+    "She reaches down with her hand and starts to play with her [the_girl.pubes_description] pussy as you fuck her buttery back door."
     if the_girl.tits_available():
         "[the_girl.title]'s tits are swaying attractively with each thrust. You give her a couple of rough thrusts and enjoy the change in their movement."
     else:

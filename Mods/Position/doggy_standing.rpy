@@ -39,7 +39,7 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
-        "You continue to rub your dick against her pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
+        "You continue to rub your dick against her [the_girl.pubes_description] pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
     else:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt."
     "When you're ready you push forward. Her pussy feels amazing wrapped around your erection."
@@ -296,7 +296,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             $ climax_controller.do_clarity_release(the_girl)
             $ SB_doggy_standing.redraw_scene(the_girl)
             if the_girl.has_cum_fetish():
-                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her [the_girl.pubes_description] pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
 
@@ -424,7 +424,7 @@ label transition_default_SB_doggy_standing(the_girl, the_location, the_object):
     "You continue your back and forth motion, rubbing your cock along her pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
         the_girl "Oh....Please..."
-    "You continue to move your cock forwards and backwards teasing her pussy."
+    "You continue to move your cock forwards and backwards teasing her [the_girl.pubes_description] pussy."
     if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."

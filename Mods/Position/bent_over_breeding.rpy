@@ -34,7 +34,7 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
-        "You continue to rub your dick against her pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
+        "You continue to rub your dick against her [the_girl.pubes_description] pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
     else:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt."
     "When you're ready you push forward. Her pussy feels amazing wrapped around your erection."
@@ -278,7 +278,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             the_girl "Oh fuck... I could get pregnant you know.."
 
         "You wait until your orgasm has passed completely, then pull out and stand back."
-        "You cum leaks out of her dripping wet pussy."
+        "You cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
 
 
     return

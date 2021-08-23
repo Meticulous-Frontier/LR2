@@ -374,6 +374,17 @@ init -1 python:
 
     Person.set_pubic_style = set_pubic_style
 
+    def person_pubes_description_string(self):
+        if self.pubes_style == shaved_pubes:
+            return "bold"
+        if self.pubes_style == landing_strip_pubes:
+            return "brazilian waxed"
+        if self.pubes_style == default_pubes:
+            return "hairy"
+        return "neatly trimmed"
+
+    Person.pubes_description = property(person_pubes_description_string, None, None, "Property that returns pussy pubes description for use in dialogs.")
+
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
     # chance is probability percentage that height change for amount will occur (used by serums)

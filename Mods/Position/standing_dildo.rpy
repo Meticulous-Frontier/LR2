@@ -41,7 +41,7 @@ label intro_standing_dildo(the_girl, the_location, the_object):
             the_girl "Oh my god, it's so big! I don't know about this..."
             mc.name "Don't worry, I'll go slow."
 
-        "You get down on your knees in front of her. You bring the dildo up to her pussy, and she spreads her legs to give you easier access."
+        "You get down on your knees in front of her. You bring the dildo up to her [the_girl.pubes_description] pussy, and she spreads her legs to give you easier access."
         the_girl "Ok. Ready when you are I guess!"
         "You bring the dildo up to her slit and begin to apply light pressure."
         if the_girl.arousal > 50:
