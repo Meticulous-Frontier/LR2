@@ -719,6 +719,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         $ the_person.change_happiness(10)
         $ the_person.change_love(5)
         $ the_person.change_obedience(10)
+    $ clear_scene()
     "You dismiss her. After you get yourself cleaned up, you get back to work."
     return
 
