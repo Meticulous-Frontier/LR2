@@ -24,6 +24,12 @@ init 0 python:
         if height is None: # use non-linear distribution similar to the 2 dice role curve
             height = 0.825 + (renpy.random.random()/14) + (renpy.random.random()/14)
 
+        if pubes_style is None:
+            pubes_style = get_random_pubes_style()
+
+        if hair_style is None:
+            hair_style = get_random_hair_style()
+
         if age is None: # use linear decreasing distribution (more young than old)
             age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + 55 - 18) + 18))
 

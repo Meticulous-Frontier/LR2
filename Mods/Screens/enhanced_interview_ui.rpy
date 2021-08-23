@@ -48,6 +48,7 @@ init 2:
                             text "" style "menu_text_style" size 16
 
                             text "Height: " + height_to_string(the_candidate.height) style "menu_text_style" size 16
+                            text "Eye Colour: " + the_candidate.eyes[0].title() style "menu_text_style" size 16
                             text "Cup size: [the_candidate.tits]" style "menu_text_style" size 16
                             text "Weight: " + get_person_weight_string(the_candidate) style "menu_text_style" size 16
                 frame:
