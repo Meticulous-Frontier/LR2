@@ -736,17 +736,6 @@ label threesome_strip_menu(the_person_one, the_person_two):
     call threesome_strip_menu(the_person_one, the_person_two) from _threesome_recurrent_strip_call_1
     return
 
-# label can_join_threesome(the_person_one, the_person_two, initial_position_tag): #Can use this function to check if there is a threesome position available that a second girl can join.
-#     $ return_bool = False
-#     python:
-#         for threeway in list_of_threesomes:
-#             if threeway.requirements(the_person_one, the_person_two):
-#                 if threeway.position_one_tag == initial_position_tag:            #Look for positions that match with any position taken by girl 1
-#                     return_bool =  True
-#                 elif threeway.position_two_tag == initial_position_tag:
-#                     return_bool =  True
-#     return return_bool                                                          #No acceptable position found, cannot join threesome
-
 label join_threesome(the_person_one, the_person_two, initial_position, private = True, report_log = None):  #We can use this function to add a second girl to an existing sex scene.
                                                                          #Works by selecting a position then calling threesome with the first position pre-set
     $ girl_swap_pos = False # reset swapped
@@ -755,7 +744,6 @@ label join_threesome(the_person_one, the_person_two, initial_position, private =
     call start_threesome(the_person_one, the_person_two, start_position = position_choice, skip_intro = True, private = private, report_log = report_log) from _join_threesome_in_progress_1
 
     return _return
-
 
 init python:
     def get_initial_threesome_pairing(position_tag):
@@ -787,15 +775,16 @@ init python:
             return (["Broken Position", "stand4"])
 
     def can_join_threesome(person_one, person_two, initial_position_tag): #Can use this function to check if there is a threesome position available that a second girl can join.
-        return_bool = False
+        if person_one.energy < 50 or person_two.energy < 50:
+            return False
 
         for threeway in list_of_threesomes:
             if threeway.requirements(person_one, person_two):
                 if threeway.position_one_tag == initial_position_tag:            #Look for positions that match with any position taken by girl 1
-                    return_bool =  True
+                    return True
                 elif threeway.position_two_tag == initial_position_tag:
-                    return_bool =  True
-        return return_bool
+                    return True
+        return False
 
     def willing_to_threesome(person_one, person_two):    #Use this function to check and see if two people are willing to engage in a threesome
         # only allow threesomes when we had sex before (without condom)
