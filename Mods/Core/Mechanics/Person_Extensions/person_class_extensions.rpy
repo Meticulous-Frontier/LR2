@@ -6,7 +6,9 @@ init -1 python:
         if my_location:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
-            list_of_places.remove(self.home) # remove home location from list_of_places
+            # only remove home when not 'dungeon' or any other character has same home location
+            if not self.home == dungeon and not any(x.home == self.home for x in known_people_in_the_game(excluded_people = [self])):
+                list_of_places.remove(self.home) # remove home location from list_of_places
         if self.home in mc.known_home_locations:
             mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
 
