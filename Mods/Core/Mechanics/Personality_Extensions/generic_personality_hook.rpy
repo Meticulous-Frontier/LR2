@@ -7,7 +7,7 @@ init 10 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_generic_personality")
     add_label_hijack("after_load", "update_generic_personality")
 
-init 0 python:
+init 2 python:
     # This will be called in game when a person is created original function in script.rpy
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, tan_style = None, eyes = None, job = None,
@@ -449,6 +449,30 @@ init 0 python:
                 update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
                 create_party_schedule(person)
         return
+
+    def get_premade_character():
+        if len(list_of_unique_characters) == 0: # no more pre-made left
+            return None
+
+        person = get_random_from_list(list_of_unique_characters)
+
+        # improve stats for pre-made characters to be on par with random generated characters
+        if recruitment_skill_improvement_policy.is_active():
+            person.hr_skill += renpy.random.randint(1, 2)
+            person.market_skill += renpy.random.randint(1, 2)
+            person.research_skill += renpy.random.randint(1, 2)
+            person.production_skill += renpy.random.randint(1, 2)
+            person.supply_skill += renpy.random.randint(1, 2)
+
+        if recruitment_stat_improvement_policy.is_active():
+            person.charisma += renpy.random.randint(1, 2)
+            person.int += renpy.random.randint(1, 2)
+            person.focus += renpy.random.randint(1, 2)
+
+        update_person_opinions(person)  # fixes pre-made character opinions and contradictions
+
+        list_of_unique_characters.remove(person)
+        return person
 
     def update_unique_character_wardrobes():
         # Extend unique character wardrobes
