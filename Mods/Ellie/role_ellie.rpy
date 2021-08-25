@@ -513,7 +513,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     mc.name "Are you feeling okay? If you are sick and need to go home that would be quite alright."
     the_person "I'm fine, I'm just... yer know... trying to figure out the details of this darned thing."
     "She leans towards you and lowers her voice."
-    the_person "I just don't understand why y'all gotta use them bots for making women do, ya know, fornicatin'."
+    the_person "I just don't understand why you all got to use them bots for making women do, you know, fornicating."
     the_person "A woman should be keeping to herself, like she's supposed to."
     the_person "'sides, not like sex is such an amazing thing anyway."
     mc.name "Well, it isn't so much making women do something, as lowering inhibitions and giving women the chance to experience what they already want, but are afraid to experience."
@@ -532,7 +532,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "As you look at her, you realize why she is acting funny. She's aroused! Probably from working on the nanobot code..."
     "You give her a wide, genuine smile."
     mc.name "Like I said, I'd be glad to show you. You wouldn't even have to take off any clothes."
-    the_person "Hah, you're such a joker. Like I'd let you... run your hands all o'er me... or whatever..."
+    the_person "Hah, you're such a joker. Like I'd let you... run your hands all over me... or whatever..."
     $ the_person.change_arousal(10) #60
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] sits back down at her desk, and you decide to let her keep working, but you can tell you've struck a nerve with her."
@@ -549,7 +549,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "[the_person.title] does what you ask, then sits down across from you."
     $ the_person.draw_person(position = "sitting")
     mc.name "What can I do for you?"
-    the_person "Well, I was workin' on that bot program, but I was kinda havin' trouble with parts of it..."
+    the_person "Well, I was working on that bot program, but I was kinda having trouble with parts of it..."
     mc.name "What kind of trouble?"
     the_person "It was a part about making some uh, things, a bit more sensitive, for ladies I mean..."
     the_person "And I kinda realized, you know that like... for the sake of being able to code it properly, I should probably have a better idea of... you know... what it feels like..."
@@ -599,19 +599,19 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     mc.name "It's nice, isn't it? Doesn't it make you feel good?"
     the_person "Yeah... It's good... but weird too. It's making me all warm... down there..."
     mc.name "That is arousal building up. We want to build that up as much as we can, and it will make it feel amazing when it releases."
-    the_person "I... I dunno about that, but keep doing what yer doin'... it's nice..."
+    the_person "I... I dunno about that, but keep doing what you're doing... it's nice..."
     mc.name "The weight of her heavy tits feels great in your hands. You really wish you could touch her flesh there, but for now you need to take things one step at a time."
     "When you feel her arousal start to plateau, you make your next move. With two fingers and a thumb, you start to knead her engorged nipples."
     $ the_person.change_arousal(10) #80
     the_person "Ah!"
     "[the_person.possessive_title] cries out and for a second her knees buckle. She catches herself, but when she straightens out, her body rubs up against yours."
-    "You've been rock hard throughout this whole process, but when she straighens up her ass rubs up against you, causing you to moan."
+    "You've been rock hard throughout this whole process, but when she straightens up her ass rubs up against you, causing you to moan."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "Her body goes rigid."
-    the_person "Ah! Was that... yer... yer thing!?!"
+    the_person "Ah! Was that... your... your thing!?!"
     mc.name "Yes that is my penis."
-    the_person "Dont you dare try and put that thing in me!"
+    the_person "Don't you dare try and put that thing in me!"
     mc.name "Shhh, don't worry. I'm not even going to get it out of my pants. I'm just aroused too. It's okay."
     the_person "Ahh... okay..."
     "You go back to groping [the_person.possessive_title]'s big tits. You take turns kneading them and pinching her nipples."
@@ -634,7 +634,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "NO! No... it's kinda nice."
     mc.name "You can move your hips a bit. It will help you control the pace to something that feels good to you, and it'll feel nice for me too."
     the_person "... okay..."
-    "Insinctually, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
+    "Instinctual, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "You can't help pushing your hips a bit up against her as well. It feels nice to have your cock against her ass."
@@ -651,7 +651,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Oh heavens I just... no way... I couldn't have..."
     "She quickly puts a hand down her pants and then pulls it back out. It is shining wet. Did she just... squirt?"
     mc.name "That was just..."
-    the_person "OH MY LORDIE I JUST PEED... oh my I'm sorry I have to go!!!"
+    the_person "OH MY LORDIE I JUST PEED... oh my I'm so sorry, I have to go!!!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] quickly turns and flees your office, flinging your door open and running away."
     $ clear_scene()
@@ -659,7 +659,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "It has left you extremely aroused, and you are sure she is probably very confused."
     "Is she a squirter? You can't say you have much experience with girls who tend to do that. If that was her first orgasm ever, maybe she was just really pent up."
     "A sexually repressed redhead that squirts. How do you feel about that?"
-    "WARNING: The next menu will change future dialogie with [the_person.title]!"
+    "WARNING: The next menu will change future dialogue with [the_person.title]!"
     menu:
         "Squirting is hot!":
             $ ellie.event_triggers_dict["squirts"] = True
@@ -692,26 +692,26 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         $ the_person.draw_person(position = "blowjob")
         $ mc.change_locked_clarity(50)
         "In a flash she has your cock out."
-        call fuck_person(the_person, private=True, start_position = cum_fetish_blowjob) from _call_ellie_arousal_relief_01
+        call fuck_person(the_person, private=True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True) from _call_ellie_arousal_relief_01
     elif the_person.has_anal_fetish():
         "[the_person.title] closes your office door and locks it. Then she walks over to your desk, and bends over it."
         the_person "It's been a while since you had it in my ass... why don't you just take me for a quickie?"
         "You step behind her."
         $ mc.change_locked_clarity(50)
-        call fuck_person(the_person, private=True, start_position = SB_anal_standing) from _call_ellie_arousal_relief_02
+        call fuck_person(the_person, private=True, start_position = SB_anal_standing, start_object = make_desk()) from _call_ellie_arousal_relief_02
     elif the_person.has_breeding_fetish():
         "[the_person.title] closes your office door and locks it. Then she walks over to your desk, and bends over it."
         the_person "My hungry cunt could really use a fresh load of seed... why don't we have a quickie?"
         "You step behind her."
         $ mc.change_locked_clarity(50)
-        call fuck_person(the_person, private=True, start_position = bent_over_breeding) from _call_ellie_arousal_relief_03
+        call fuck_person(the_person, private=True, start_position = bent_over_breeding, start_object = make_desk()) from _call_ellie_arousal_relief_03
     else:
         "[the_person.title] closes your office door and locks it. Then she walks over to you and drops down to her knees."
         $ the_person.draw_person(position = "blowjob")
         $ mc.change_locked_clarity(50)
         "She fumbles with your pants a bit, but eventually managed to pull your cock out."
         "She gives it a couple licks before she gets started."
-        call fuck_person(the_person, private=True, start_position = blowjob) from _call_ellie_arousal_relief_04
+        call fuck_person(the_person, private=True, start_position = blowjob, start_object = make_floor(), skip_intro = True) from _call_ellie_arousal_relief_04
     if mc.arousal < 20:
         "After you finish, you feel much better."
         mc.name "Thank you [the_person.title], I really needed that."
