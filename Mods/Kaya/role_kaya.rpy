@@ -1613,7 +1613,7 @@ init 3 python:      #Use this section to make wrappers for determining where we 
     def kaya_has_had_drink_date():
         return kaya.event_triggers_dict.get("drink_date_complete", False)
 
-    def kaya_can_get_work_quickie():
+    def kaya_can_get_barista_quickie():
         return kaya.event_triggers_dict.get("can_get_barista_quickie", False)
 
     def kaya_has_started_internship():

@@ -49,7 +49,7 @@ label kaya_greetings(the_person):
             the_person "Back again? What do you want this time?"
         elif kaya_can_get_drinks() and time_of_day == 3:
             the_person "Hey! Are we going out for drinks tonight?"
-        elif can_get_barista_quickie():
+        elif kaya_can_get_barista_quickie():
             the_person "Hey there... want to take a break with me in the back?"
         elif the_person.is_pregnant():
             the_person "Aww, you came to say hi! I can't wait to tell our baby how thoughtful you are."
@@ -547,7 +547,7 @@ label kaya_flirt_response_mid(the_person):
 
 label kaya_flirt_response_high(the_person):
     if mc.location == coffee_shop:  #While she's at work at the coffee shop.
-        if can_get_barista_quickie():
+        if kaya_can_get_barista_quickie():
             the_person "Not right here, but I could take my break. You just say the word."
         else:
             the_person "I'm working right now, you know I can't step away from the counter!"
@@ -629,7 +629,7 @@ label kaya_flirt_response_high(the_person):
 label kaya_flirt_response_girlfriend(the_person):
     # Lead in: mc.name "You're so beautiful [the_person.title], I'm so lucky to have a woman like you in my life."
     if mc.location == coffee_shop:
-        if can_get_barista_quickie():
+        if kaya_can_get_barista_quickie():
             the_person "And I'm so lucky to have found you. Want me to take my break now? We could fool around in the back..."
         else:
             the_person "And I'm so lucky to have you. I wish I wasn't working, maybe we can fool around later?"
