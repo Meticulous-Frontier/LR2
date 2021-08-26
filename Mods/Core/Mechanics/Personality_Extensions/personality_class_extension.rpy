@@ -34,6 +34,31 @@ init -1 python:
 
     Personality.__ne__ = personality_ne
 
+    def rebuild_response_dictionary(self):
+        self.response_dict = {}
+        for ending in self.response_label_ending:
+            if renpy.has_label(self.personality_type_prefix + "_" + ending):
+                self.response_dict[ending] = self.personality_type_prefix + "_" + ending
+            elif default_prefix is not None and renpy.has_label(self.default_prefix + "_" + ending):
+                self.response_dict[ending] = self.default_prefix + "_" + ending
+            else:
+                self.response_dict[ending] = "relaxed_" + ending
+        return
+
+    Personality.rebuild_response_dictionary = rebuild_response_dictionary
+
+    def get_dialogue_enhanced(self, the_person, type, **extra_args):
+        target = self.response_dict[type]
+        if not renpy.has_label(target): # self repairing personality response dictionary (helps with upgrades / changes to personality files)
+            self.rebuild_response_dictionary()
+            target = self.response_dict[type]
+
+        renpy.call(target, the_person, **extra_args)
+        return
+
+    Personality.get_dialogue = get_dialogue_enhanced
+
+
 init 4 python:
     list_of_extra_personalities = [] # Personalities not included in list_of_personalities
 
