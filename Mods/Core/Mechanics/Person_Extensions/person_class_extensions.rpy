@@ -1745,7 +1745,10 @@ init -1 python:
         if uniform is None:
             return
 
-        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+        if casual_friday_uniform_policy.is_active() and day % 7 == 4:
+            self.planned_uniform = self.get_random_appropriate_outfit(guarantee_output = True)
+            self.change_happiness(5)
+        elif not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
             (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
             self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
@@ -1757,6 +1760,18 @@ init -1 python:
         return
 
     Person.set_uniform = set_uniform_enhanced
+
+    def person_is_wearing_uniform_extended(org_func):
+        def is_wearing_uniform_wrapper(person):
+            # run extension code
+            if casual_friday_uniform_policy.is_active() and day % 7 == 4:
+                return True
+            # run original function
+            return org_func(person)
+
+        return is_wearing_uniform_wrapper
+
+    Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
     def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
         return WardrobeBuilder(self).personalize_outfit(outfit, the_colour = the_colour, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
