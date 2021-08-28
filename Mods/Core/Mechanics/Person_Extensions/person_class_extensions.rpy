@@ -2384,12 +2384,20 @@ init -1 python:
 
     Person.is_single = is_single
 
+#Intern functions
+
+    def is_intern(self):
+        if self.has_role(college_intern_role):
+            return True
+        return False
+    Person.is_intern = is_intern
+
 ##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
 
     def change_to_lingerie(self):
         if self.event_triggers_dict.get("girlfriend_sleepover_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.pop("girlfriend_sleepover_lingerie"))
-        if self.event_triggers_dict.get("favorite_lingerie", None):
+        elif self.event_triggers_dict.get("favorite_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.get("favorite_lingerie", None))
         elif len(self.wardrobe.underwear_sets) > 0:
             self.apply_outfit(get_random_from_list(self.wardrobe.underwear_sets))
