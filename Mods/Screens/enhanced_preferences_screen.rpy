@@ -198,6 +198,10 @@ init 2: # Add some additional
                             textbutton "Aura" action SetField(persistent, "vren_display_pref", "Float")
                             textbutton "None" action SetField(persistent, "vren_display_pref", "None")
 
+                        vbox:
+                            style_prefix "check"
+                            label "Miscellaneous"
+                            textbutton "Cache Images on Startup" action [ToggleField(persistent, "zip_cache_preload", True, False)]
 
                     null height (2 * gui.pref_spacing)
 

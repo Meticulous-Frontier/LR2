@@ -2,6 +2,9 @@
 # MOD Implementation of ZIP file loading and image caching #
 ############################################################
 
+init 2:
+    default persistent.zip_cache_preload = True
+
 init 5 python:
     from lru import LRUCacheDict
 
@@ -100,7 +103,8 @@ init 5 python:
 
     zip_manager = ZipManager()
 
-    # start background thread for pre-loading zip cache  
-    background_thread = threading.Thread(target=zip_manager.preload)
-    background_thread.setDaemon(True)
-    background_thread.start()
+    if persistent.zip_cache_preload:
+        # start background thread for pre-loading zip cache  
+        background_thread = threading.Thread(target=zip_manager.preload)
+        background_thread.setDaemon(True)
+        background_thread.start()

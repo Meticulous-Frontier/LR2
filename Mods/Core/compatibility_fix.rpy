@@ -151,7 +151,10 @@ init 1 python:
 
     # override some of the default settings to improve performance
     config.image_cache_size = None  # when None the image_cache_size_mb value is used
-    config.image_cache_size_mb = 384 # fixed at 384 Mb * 4 bytes per pixel result in 1536 Mb Texture Memory
+    if is64Bit:
+        config.image_cache_size_mb = 768 # fixed at 768 Mb * 4 bytes per pixel
+    else:
+        config.image_cache_size_mb = 384 # fixed at 384 Mb * 4 bytes per pixel
 
     # heart pasties and cincher (move to level 0)
     heart_pasties.layer = 0
