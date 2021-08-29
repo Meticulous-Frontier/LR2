@@ -80,6 +80,8 @@ init 15 python:
     def make_reception():
         return Object("reception desk",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
+    def make_dryer():
+        return Object("dryer", ["Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
 
 label build_custom_rooms(stack):
