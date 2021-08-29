@@ -1115,7 +1115,7 @@ label candace_begin_cure_research_label(the_person):
     candace "You need something?"
     mc.name "Have a seat."
     "[candace.name] walks in and sits down next to [the_person.name]."
-    $ scene_manager.update_actor(candace, position = "sitting")
+    $ scene_manager.update_actor(candace, display_transform = character_center_flipped, position = "sitting")
     mc.name "Remember how we talked about having [the_person.name] examining you and doing some research?"
     "She looks at you with a puzzled look."
     candace "I... I remember we had a slumber party..."
