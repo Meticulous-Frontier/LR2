@@ -3,43 +3,32 @@
 init 2 python:
     # insert class from bugfix into mod (allows for cleaner and faster menus)
     class MenuItem():
-        def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_scale = 0.9, display_func = None, person_preview_args = None):
-            self.title = ""
-            self.return_value = return_value
+        def __init__(self, title = "", return_value = None, the_tooltip = None, extra_args = None, display = True, is_sensitive = True, display_key = None, display_func = None, person_preview_args = None):
+            self.title = title
+            self.display_func = display_func
             self.the_tooltip = the_tooltip
             self.extra_args = extra_args
             self.display = display
             self.is_sensitive = is_sensitive
             self.display_key = display_key
-            self.display_scale = display_scale
-            self.display_func = display_func
+            self.display_scale = None
             self.person_preview_args = person_preview_args
-            self.display_image = None
+            self.return_value = return_value
 
         def __del__(self):
-            self.display_image = None
-            return
-
-        def load_image(self):
-            if not self.display_func:
-                return
-            if self.display_image:
-                return
-
-            self.display_image = self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args)
+            self.hide_person()
+            self.return_value = None
+            self.display_func = None
             return
 
         def show_person(self):
             if not self.display_func:
                 return
-            if not self.display_image:
-                self.load_image()
 
             # check if we are not running out of memory
             validate_texture_memory()
 
-            if self.display_image:
-                renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer = "solo", what= self.display_image, tag = self.display_key)
+            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer = "solo", what= self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args), tag = self.display_key)
             return
 
         def hide_person(self):
@@ -117,6 +106,8 @@ init 2 python:
 
                 if item.infractions:
                     mi.title += " {image=infraction_token_small}"
+                if item.on_talk_event_list:
+                    mi.title += " {image=speech_bubble_token_small}"
                 if draw_hearts_for_people:
                     mi.title += "\n" + get_heart_image_list(item)
                 if person_preview_args is None:
