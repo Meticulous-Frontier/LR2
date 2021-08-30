@@ -18,6 +18,7 @@ init python:
 
 
 label intro_bent_over_breeding(the_girl, the_location, the_object):
+    $ the_girl.draw_person(position = bent_over_breeding.position_tag)
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
     if mc.condom:
         "She notices you are wearing a condom."
@@ -31,6 +32,10 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
         the_girl "Oh thank god, I've been daydreaming about this all day long."
     else:
         the_girl "Oh thank god, I've been daydreaming about getting filled up all day long."
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = bent_over_breeding.position_tag, visible_enough = True, prefer_half_off = True)
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."

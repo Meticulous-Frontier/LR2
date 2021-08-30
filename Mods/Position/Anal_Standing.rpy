@@ -26,7 +26,7 @@ init 1 python:
 label intro_SB_anal_standing(the_girl, the_location, the_object):
     "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]."
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
-    $ the_girl.draw_person(position = "standing_doggy")
+    $ the_girl.draw_person(position = SB_anal_standing.position_tag)
     mc.name "That's it, [the_girl.title], I'm going to fuck your ass today."
     if the_girl.has_anal_fetish():
         the_girl "Oh thank god, I've been daydreaming about this all day long."
@@ -41,10 +41,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
 
     if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
-        if the_girl.outfit.can_half_off_to_vagina():
-            $ generalised_strip_description(the_girl, the_girl.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
-        else:
-            $ generalised_strip_description(the_girl, the_girl.outfit.get_full_strip_list(), position = "missionary")
+        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
 
     if the_girl.has_anal_fetish():
         if the_girl is mom:
