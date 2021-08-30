@@ -206,6 +206,11 @@ init 2 python:
                 return True
         return False
 
+    def Sarah_watch_yoga_at_gym_requirement(the_person):
+        if sarah.sluttiness > 20 and sarah.location == gym:
+            return True
+        return False
+
     def Sarah_stripclub_story_requirement():
         if sarah_epic_tits_progress() < 2 and not sarah_epic_tits_progress() == -1:  #Don't run until after she has bigger tits of you convinced her not to do it
             return False
@@ -355,6 +360,10 @@ init 2 python:
 
     def test_bra_function(the_person):
         Sarah_remove_bra_from_wardrobe(the_person.wardrobe)
+
+    def add_sarah_watch_yoga_at_gym_action():
+        Sarah_watch_yoga_at_gym_action = Action("Sarah does yoga", Sarah_watch_yoga_at_gym_requirement, "Sarah_watch_yoga_at_gym_label")
+        sarah.add_unique_on_room_enter_event(Sarah_watch_yoga_at_gym_action)
 
     def add_sarah_epic_tits_action():
         Sarah_epic_tits_action = Action("Sarah Epic Tits Action", Sarah_epic_tits_requirement, "Sarah_epic_tits_label")
@@ -561,7 +570,9 @@ label Sarah_intro_label():
 
     # make her a free roaming character
     $ sarah.set_schedule(None, times = [1, 2, 3])
+    $ sarah.set_schedule(gym, days = [5,6], times = [1])    #She tries to stay in shape
     $ sarah.event_triggers_dict["first_meeting"] = True
+    $ add_sarah_watch_yoga_at_gym_action()
     return
 
 label Sarah_hire_label():
@@ -773,6 +784,52 @@ label Sarah_third_wheel_label():
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ add_sarah_get_drinks_action()
     return
+
+label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
+    "You decide to hit up the gym. You go to the lockerroom and change into workout clothes."
+    "When you step out, you look at the different workout equipment. Since it's the weekend, maybe you should focus on some cardio?"
+    "You notice to side of the gym are some bike machines that happen to be facing a glass wall, peaking into a yoga class."
+    "You sit down on the bike and look inside at the women doing their exercises. You realize you recognize someone!"
+    $ the_person.draw_person(position = "stand3")
+    "Inside the room is [the_person.possessive_title]. She is doing the stretches and move with the other women."
+    $ the_person.draw_person(position = "standing_doggy")
+    $ mc.change_locked_clarity(10)
+    "You watch, enjoy the chance to see her bending over and stretching her fit young body..."
+    $ the_person.draw_person(position = "blowjob")
+    "On her knees, just before leaning forward into a stretch, she looks out the window and sees you, recognizing you instantly."
+    "You make eye contact. She immediately realizes you are watching her do her yoga."
+    $ the_person.draw_person(position = "blowjob", emotion = "happy")
+    "She smiles at you, her eyes drifting down your body as well as you workout on the bike machine."
+    $ the_person.draw_person(position = "back_peek")
+    "As she continues following instructions, she watches you carefully. She seems to like that you are watching her!"
+    $ the_person.draw_person(position = "doggy")
+    "At one point, in between leg stretches while she is on her hands on knees, you swear you can see her wiggle her ass at you..."
+    $ mc.change_locked_clarity(15)
+    "It looks nice and tight... she must make an effort to stay in shape. When she shows it off you can't help but let your mind wander a bit..."
+    "You watch for a little longer, but unfortunately the class is almost over."
+    $ clear_scene()
+    "Soon the girls leave the room. You are a little disappointed, but it is probably better for you to finish your workout without anymore distractions."
+    "It would be awkward to stand up from the equipment with a boner..."
+    the_person "Hey [the_person.mc_title]."
+    $ the_person.draw_person()
+    "Aaaand of course, she comes to say hello."
+    mc.name "Hey."
+    the_person "Getting a good workout I see?"
+    mc.name "I sure am. You?"
+    the_person "Yes, I'd say you saw me get a good workout in also."
+    "She gives you a quick wink, clearly flirting with you."
+    $ the_person.change_slut_core(2)
+    mc.name "What can I say, it makes it easier to push the limits of my endurance when I get my testosterone flowing."
+    if the_person.love < 40:
+        the_person "Ahh, is that the secret? Perhaps I should hit up the elliptical facing the pool the next time they are doing the morning men's swimming..."
+    else:
+        the_person "Ahh, I must say, being watched helped motivate me to work hard and have good form as well."
+    the_person "Well, I have other commitments for today, have a good workout!"
+    mc.name "Take care."
+    $ clear_scene()
+    return
+
+
 
 label Sarah_get_drinks_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
@@ -3033,7 +3090,7 @@ label Sarah_naomi_reconciliation_label(the_person):
     $ add_talk_to_sarah_about_naomi_action()
     return
 
-label Sarah_talk_about_naomi_label(the_person): 
+label Sarah_talk_about_naomi_label(the_person):
     $ the_person.draw_person()
     mc.name "Hey [the_person.title], can we have a talk in my office?"
     the_person "I'm not in trouble, am I?"
@@ -3208,7 +3265,7 @@ label Sarah_naomi_visits_to_apologize_label():
             $ the_person.increase_opinion_score("being submissive", 1)
             $ scene_manager.update_actor(sarah, position = "sitting")
             $ scene_manager.update_actor(the_person, position = "stand4")
-            the_person "Do you think we could be friends again, [sarah.name]?"            
+            the_person "Do you think we could be friends again, [sarah.name]?"
 
     "You look at [sarah.possessive_title], so she knows it's her decision."
     sarah "Very well, lets consider this a friendship on trial basis and see where it goes from here."
