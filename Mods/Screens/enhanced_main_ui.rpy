@@ -3,7 +3,7 @@ init 2:
         def get_formatted_date_string():
             day_name = day_names[day%7]
             day_in_month = (day%30) + 1
-            month_name = month_names[int(day/30)%12]
+            month_name = month_names[int((day/30) + 8)%12]
             day_part = time_names[time_of_day]
             return "{day_name} {day_in_month} {month_name} - {day_part}".format(day_name = day_name, day_in_month = day_in_month, month_name = month_name, day_part = day_part)
 
