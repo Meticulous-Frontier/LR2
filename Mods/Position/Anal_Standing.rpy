@@ -26,6 +26,7 @@ init 1 python:
 label intro_SB_anal_standing(the_girl, the_location, the_object):
     "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]."
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
+    $ the_girl.draw_person(position = "standing_doggy")
     mc.name "That's it, [the_girl.title], I'm going to fuck your ass today."
     if the_girl.has_anal_fetish():
         the_girl "Oh thank god, I've been daydreaming about this all day long."
@@ -37,6 +38,13 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
         the_girl "Ok, just be careful [the_girl.mc_title]..."
     else:
         the_girl "I don't know, are you sure that thing is gonna fit in me back there?"
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        if the_girl.outfit.can_half_off_to_vagina():
+            $ generalised_strip_description(the_girl, the_girl.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
+        else:
+            $ generalised_strip_description(the_girl, the_girl.outfit.get_full_strip_list(), position = "missionary")
 
     if the_girl.has_anal_fetish():
         if the_girl is mom:
@@ -65,9 +73,9 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
         "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions"
     else:
         "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her hair to bring her head back around to face you."
-        "You put your other hand in front of her face and she quickly opens her mouth and sucks on them. [the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop"
+        "You put your other hand in front of her face and she quickly opens her mouth and sucks on them. [the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop."
         "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated."
-        "Deciding against making her suck on your fingers again after they've been in her ass, you spit a couple times down on her ass to get a bit more lubrication so you can penetrate her"
+        "Deciding against making her suck on your fingers again after they've been in her ass, you spit a couple times down on her ass to get a bit more lubrication so you can penetrate her."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "Oh my god it's so dirty... but it is so good too..."
