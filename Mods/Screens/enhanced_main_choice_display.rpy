@@ -106,7 +106,9 @@ init 2 python:
 
                 if item.infractions:
                     mi.title += " {image=infraction_token_small}"
-                if any([x.is_action_enabled(item) for x in item.on_talk_event_list]):
+                if any([not isinstance(x, Limited_Time_Action) and x.is_action_enabled(item) for x in item.on_talk_event_list]):
+                    mi.title += " {image=speech_bubble_exclamation_token_small}"
+                elif any([x.is_action_enabled(item) for x in item.on_talk_event_list]):
                     mi.title += " {image=speech_bubble_token_small}"
                 if draw_hearts_for_people:
                     mi.title += "\n" + get_heart_image_list(item)
