@@ -185,12 +185,19 @@ label girlfriend_sleepover_label():
     $ girl_came = the_report.get("girl orgasms", 0)
     $ fuck_time_interrupted = False
     $ energy_gain_amount = 50 #Drops each round, representing your flagging endurance.
+    if perk_system.has_ability_perk("Lustful Youth"):
+        $ energy_gain_amount += 70
     while done == False:
 
         if girl_came > 5:
             $ the_person.change_love(5)
             $ the_person.change_slut_temp(1)
             $ the_person.call_dialogue("sleepover_impressed_response")
+            if not perk_system.has_ability_perk("Lustful Youth"):
+                "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
+                "You feel like no matter what happens or how your day is going, you will always have the energy to make the ones you love cum."
+                $ lustful_youth_perk_unlock()
+                "You have gained the perk 'Lustful Youth'!"
         elif girl_came > 0:
             $ the_person.change_love(1)
             $ the_person.call_dialogue("sleepover_good_response")

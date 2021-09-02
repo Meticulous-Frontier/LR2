@@ -1080,6 +1080,11 @@ label candace_love_path_intro_label():
     the_person "Okay! See you later!"
     "You step out of [the_person.title]'s apartment. You should make it a priority to talk to your head researcher."
     $ mc.business.head_researcher.add_unique_on_talk_event(candace_begin_cure_research)
+    if not perk_system.has_ability_perk("Lustful Youth"):
+        "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
+        "You feel like no matter what happens or how your day is going, you will always have the energy to make the ones you love cum."
+        $ lustful_youth_perk_unlock()
+        "You have gained the perk 'Lustful Youth'!"
     return
 
 label candace_begin_cure_research_label(the_person):
