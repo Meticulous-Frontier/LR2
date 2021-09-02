@@ -115,7 +115,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] pulls off you, reaches down and pulls your condom off and begins stroking you."
             else:
                 "[the_girl.possessive_title] pulls off you, reaches down and begins to stroke you."
-            "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
+            "She grinds the lips of her [the_girl.pubes_description] pussy against your shaft as you climax. You fire your hot load over her stomach."
             $ the_girl.cum_on_stomach()
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
             $ cowgirl.redraw_scene(the_girl)

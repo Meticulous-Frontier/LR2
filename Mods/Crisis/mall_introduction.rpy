@@ -7,6 +7,8 @@ init 2 python:
         locations = [mall, gym, home_store, clothing_store, sex_store]
         if "mall_salon" in globals():
             locations.append(mall_salon)
+        if "coffee_shop" in globals():
+            locations.append(coffee_shop)
         return locations
 
     def mall_introduction_get_people_with_status():

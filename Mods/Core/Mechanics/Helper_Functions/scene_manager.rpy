@@ -45,6 +45,11 @@ init -2 python:
                 self.remove_actor(person, reset_actor = reset_actor)
             clear_scene()
 
+        def review_outfits(self, dialogue = True, draw_person = True):
+            people_in_scene = [actor.person for actor in self.actors]
+            for person in people_in_scene:
+                person.review_outfit(dialogue = dialogue, draw_person = draw_person)
+
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
             actor = find_in_list(lambda x: x.person == person, self.actors)
             if not actor:
@@ -288,6 +293,12 @@ init 1:
         def calculate_scale(height_factor):
             return 0.7 - ((1 - height_factor) / 2)   # for now render at 70% size
 
+    transform character_portrait_say():
+        pos (360,-40)
+        zoom .5
+
+    transform zoom(factor):
+        zoom factor
 
     transform character_right(xoffset = 0, yoffset = 0, zoom = 1):
         yalign (0.85 + yoffset)

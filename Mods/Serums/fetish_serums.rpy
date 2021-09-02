@@ -66,6 +66,14 @@ init -1 python:
             pass
         elif person is alexia and False:
             pass
+        elif person is kaya and False:
+            pass
+        elif person is ellie and False:
+            pass
+        elif person is camilla and False:
+            pass
+        elif person is sakari and False:
+            pass
         elif person.is_employee():
             anal_fetish_employee_intro = Fetish_Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "anal")
             mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
@@ -120,6 +128,14 @@ init -1 python:
             pass
         elif person is alexia and False:
             pass
+        elif person is kaya and False:
+            pass
+        elif person is ellie and False:
+            pass
+        elif person is camilla and False:
+            pass
+        elif person is sakari and False:
+            pass
         elif person.is_employee():
             breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "breeding")
             mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
@@ -150,6 +166,14 @@ init -1 python:
         elif person is sarah:
             mc.business.mandatory_crises_list.append(cum_fetish_sarah_intro)
             return True
+        elif person is kaya and False:
+            pass
+        elif person is ellie and False:
+            pass
+        elif person is camilla and False:
+            pass
+        elif person is sakari and False:
+            pass
         elif person.is_employee():
             cum_fetish_employee_intro = Fetish_Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "cum")
             mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)

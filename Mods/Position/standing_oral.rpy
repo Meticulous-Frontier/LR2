@@ -34,8 +34,10 @@ label intro_standing_oral(the_girl, the_location, the_object):
         else:
             "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
 
+        $ standing_oral.redraw_scene(the_girl)
+
         if not the_girl.vagina_visible():
-            $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+            $ the_girl.strip_to_vagina(position = standing_oral.position_tag, visible_enough = True, prefer_half_off = True)
             "She quickly moves her clothes out of the way."
 
         if the_girl.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
@@ -45,14 +47,15 @@ label intro_standing_oral(the_girl, the_location, the_object):
                 the_girl "Don't be shy. We both know you're good at this."
                 "She shivers slightly in anticipation."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("getting head") + 3)
-        "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
+        "She runs the fingers of one hand through your hair as she pulls your face to her [the_girl.pubes_description] pussy."
         the_girl "Now start licking."
         "You do as you are told."
     else:
         if not the_girl.vagina_visible():
-            $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
+            $ the_girl.strip_to_vagina(position = standing_oral.position_tag, visible_enough = True, prefer_half_off = True)
             "You quickly move her clothes out of the way."
 
+        $ standing_oral.redraw_scene(the_girl)
         "You kneel before [the_girl.title] and gently start to lick her pussy."
         if the_girl.get_opinion_score("taking control")> 0:
             if the_girl.love < 0:
@@ -94,7 +97,7 @@ label taboo_break_standing_oral(the_girl, the_location, the_object):
             $ the_girl.strip_to_vagina(visible_enough = True, prefer_half_off = True)
             "You quickly move her clothes out of the way."
         $ the_girl.call_dialogue("licking_pussy_taboo_break")
-        "You gently lick her pussy."
+        "You gently lick her [the_girl.pubes_description] pussy."
         if the_girl.get_opinion_score("getting head") < 0:
             the_girl "You know you don't have to do that."
     $ the_girl.break_taboo("licking_pussy")
@@ -226,11 +229,11 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
                 the_girl "Don't be shy. We both know you're good at this."
                 "She shivers slightly in anticipation."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("getting head") + 3)
-        "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
+        "She runs the fingers of one hand through your hair as she pulls your face to her [the_girl.pubes_description] pussy."
         the_girl "Now start licking."
         "You do as you are told."
     else:
-        "You kneel before [the_girl.title] and gently start to lick her pussy."
+        "You kneel before [the_girl.title] and gently start to lick her [the_girl.pubes_description] pussy."
         if the_girl.get_opinion_score("taking control")> 0:
             if the_girl.love < 0:
                 the_girl "At least you know your proper place."

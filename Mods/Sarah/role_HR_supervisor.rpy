@@ -246,7 +246,7 @@ init 5 python:
             HR_dir_factor = ((person.charisma * 2 ) + person.hr_skill)   #Charisma + HR skill
             #TODO make events later on that factor this to be better
             if mc.business.IT_project_is_active(hr_task_manager_project):
-                for hr_person in mc.business.HR_employee_list:
+                for hr_person in mc.business.hr_team:
                     if hr_person != mc.business.hr_director:
                         HR_dir_factor += round(((hr_person.charisma * 2 ) + hr_person.hr_skill) / 2)
         HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
@@ -413,7 +413,7 @@ label HR_director_first_monday_label(the_person):
         return
 
     "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
-    "You grab your lunch from the break head to your office and sit down."
+    "You grab your lunch from the break room, head to your office, and sit down."
     $ scene_manager = Scene()
     $ mc.change_location(office)
     $ ceo_office.show_background()

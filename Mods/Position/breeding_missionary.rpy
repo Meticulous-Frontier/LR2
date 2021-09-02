@@ -27,13 +27,19 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
         the_person "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
     else:
         mc.name "Lie down now. It's time for me to put a baby inside you."
+    $ the_girl.draw_person(position = breeding_missionary.position_tag)    
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, visible_enough = True, prefer_half_off = True)
+
     if mc.condom:
         the_person "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."
         the_person "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
-    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
+    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her [the_girl.pubes_description] pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
     the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
     return
@@ -51,7 +57,7 @@ label taboo_break_breeding_missionary(the_girl, the_location, the_object):
         "She reaches down and pulls off your condom."
         the_person "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
-    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
+    "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her [the_girl.pubes_description] pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
     the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
     return

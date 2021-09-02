@@ -22,6 +22,28 @@ init 2 python:
         "Tan": ["tan", 33, 1],
         "Dark": ["black", 33, 2]
     }
+    generic_preference["Hair Style"] = {
+        "Bobbed Hair": ["Bobbed Hair", 8, 0],
+        "Braided Hair": ["Braided Hair", 8, 1],
+        "Coco Hair": ["Coco Hair", 8 , 2],
+        "Curly Bun Hair": ["Curly Bun Hair", 8, 3],
+        "Long Hair": ["Long Hair", 8, 4],
+        "Messy Hair": ["Messy Hair", 8 , 5],
+        "Messy Ponytail": ["Messy Ponytail", 8, 6],
+        "Messy Short Hair": ["Messy Short Hair", 8, 7],
+        "Ponytail": ["Ponytail", 8, 8],
+        "Shaved Side Hair": ["Shaved Side Hair", 8, 9],
+        "Short Hair": ["Short Hair", 8, 10],
+        "Twin Tails": ["Twintails", 8, 11],
+        "Windswept Short Hair": ["Windswept Short Hair", 8, 12]
+    }
+    generic_preference["Pubes Style"] = {
+        "Shaved Pubic Hair": ["Shaved Pubic Hair", 20, 0],
+        "Landing Strip Pubic Hair": ["Landing Strip Pubic Hair", 20, 1],
+        "Diamond Shaped Pubic Hair": ["Diamond Shaped Pubic Hair", 20, 2],
+        "Neatly Trimmed Pubic Hair": ["Neatly Trimmed Pubic Hair", 20, 3],
+        "Untrimmed Pubic Hair": ["Untrimmed Pubic Hair", 20, 4]
+    }
 
     # update defaults when not exist
     for pref in generic_preference:
@@ -39,11 +61,24 @@ init 2 python:
     def get_random_tit():
         return get_random_from_weighted_list(build_generic_weighted_list("Cup Size"))
 
+    def get_random_pubes_style():
+        return get_random_copy_from_named_list(build_generic_weighted_list("Pubes Style"), pube_styles)
+
+    def get_random_hair_style():
+        return get_random_copy_from_named_list(build_generic_weighted_list("Hair Style"), hair_styles)
+
+    def get_random_copy_from_named_list(weighted_list, item_list):
+        name = get_random_from_weighted_list(weighted_list)
+        found = next((x for x in item_list if x.name.lower() == name.lower()), None)
+        if found:
+            return found.get_copy()
+        return None
+
     def build_generic_weighted_list(pref):
         weighted_list = []
         for x in generic_preference[pref]:
-            if getattr(persistent, generic_preference[pref][x][0]) > 0:
-                weighted_list.append([generic_preference[pref][x][0], getattr(persistent, generic_preference[pref][x][0])])
+            if getattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1]) > 0:
+                weighted_list.append([generic_preference[pref][x][0], getattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1])])
         return weighted_list
 
     def change_generic_preferences_requirement():
@@ -82,7 +117,7 @@ screen generic_preference_ui():
 
     frame: # top frame
         background "#888888"
-        xsize 900
+        xsize 1200
         yalign 0.4
         xalign 0.5
         xanchor 0.5
@@ -97,7 +132,7 @@ screen generic_preference_ui():
                 for pref in sorted(generic_preference):
                     textbutton pref:
                         style "textbutton_style"
-                        xsize 280
+                        xsize 220
                         sensitive pref != pref_selected
                         action [
                             Function(switch_preference, pref) # If a clothing item is selected and currently being previewed then remove it from preview.
@@ -110,7 +145,7 @@ screen generic_preference_ui():
                             hbox:
                                 spacing 5
                                 vbox:
-                                    xsize 140
+                                    xsize 340
                                     ysize 50
                                     yoffset 5
                                     text x style "textbutton_text_style"

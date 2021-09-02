@@ -6,7 +6,9 @@ init -1 python:
         if my_location:
             my_location.remove_person(self) # remove person from current location
         if self.home in list_of_places:
-            list_of_places.remove(self.home) # remove home location from list_of_places
+            # only remove home when not 'dungeon' or any other character has same home location
+            if not self.home == dungeon and not any(x.home == self.home for x in known_people_in_the_game(excluded_people = [self])):
+                list_of_places.remove(self.home) # remove home location from list_of_places
         if self.home in mc.known_home_locations:
             mc.known_home_locations.remove(self.home) # remove home location from known_home_locations
 
@@ -373,6 +375,17 @@ init -1 python:
             self.hair_colour = [cs.scope["selected_hair_colour_name"], [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]]
 
     Person.set_pubic_style = set_pubic_style
+
+    def person_pubes_description_string(self):
+        if self.pubes_style == shaved_pubes:
+            return "bold"
+        if self.pubes_style == landing_strip_pubes:
+            return "brazilian waxed"
+        if self.pubes_style == default_pubes:
+            return "hairy"
+        return "neatly trimmed"
+
+    Person.pubes_description = property(person_pubes_description_string, None, None, "Property that returns pussy pubes description for use in dialogs.")
 
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
@@ -1416,10 +1429,49 @@ init -1 python:
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
+    def person_call_extended(org_func):
+        def person_call_wrapper(person, what, *args, **kwargs):
+            global portrait_say
+            portrait_say = person.build_person_portrait()
+
+            org_func(person, what, *args, **kwargs)
+
+        return person_call_wrapper
+
+    Person.__call__ = person_call_extended(Person.__call__)
+
+    def build_person_portrait(self, special_modifier = None):
+        position = "stand5"
+        emotion = "happy"
+        special_modifier = None
+        lighting = [.98,.98,.98]
+
+        displayable_list = []
+        displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
+        displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
+
+        x_size, y_size = position_size_dict.get(position)
+        composite_list = [(x_size,y_size)]
+
+        for display in displayable_list:
+            if isinstance(display, __builtin__.tuple):
+                composite_list.extend(display)
+            else:
+                composite_list.append((0,0))
+                composite_list.append(display)
+
+        final_image = Flatten(Composite(*composite_list))
+        portrait = AlphaMask(final_image, Image("portrait_mask.png"))
+
+        return portrait
+
+    Person.build_person_portrait = build_person_portrait
+
     def hide_person_enhanced(self, draw_layer = "solo"): #Hides the person. Makes sure to hide all possible known tags for the character.
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
+        renpy.hide("portrait")
         return
 
     Person.hide_person = hide_person_enhanced
@@ -1693,7 +1745,10 @@ init -1 python:
         if uniform is None:
             return
 
-        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+        if casual_friday_uniform_policy.is_active() and day % 7 == 4:
+            self.planned_uniform = self.get_random_appropriate_outfit(guarantee_output = True)
+            self.change_happiness(5)
+        elif not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
             (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
             self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
@@ -1705,6 +1760,18 @@ init -1 python:
         return
 
     Person.set_uniform = set_uniform_enhanced
+
+    def person_is_wearing_uniform_extended(org_func):
+        def is_wearing_uniform_wrapper(person):
+            # run extension code
+            if casual_friday_uniform_policy.is_active() and day % 7 == 4:
+                return True
+            # run original function
+            return org_func(person)
+
+        return is_wearing_uniform_wrapper
+
+    Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
     def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
         return WardrobeBuilder(self).personalize_outfit(outfit, the_colour = the_colour, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
@@ -2317,12 +2384,20 @@ init -1 python:
 
     Person.is_single = is_single
 
+#Intern functions
+
+    def is_intern(self):
+        if self.has_role(college_intern_role):
+            return True
+        return False
+    Person.is_intern = is_intern
+
 ##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
 
     def change_to_lingerie(self):
         if self.event_triggers_dict.get("girlfriend_sleepover_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.pop("girlfriend_sleepover_lingerie"))
-        if self.event_triggers_dict.get("favorite_lingerie", None):
+        elif self.event_triggers_dict.get("favorite_lingerie", None):
             self.apply_outfit(self.event_triggers_dict.get("favorite_lingerie", None))
         elif len(self.wardrobe.underwear_sets) > 0:
             self.apply_outfit(get_random_from_list(self.wardrobe.underwear_sets))

@@ -77,6 +77,18 @@ init 1 python:
     def anal_fetish_ashley_intro_requirement():
         return False
 
+    def anal_fetish_kaya_intro_requirement():
+        return False
+
+    def anal_fetish_ellie_intro_requirement():
+        return False
+
+    def anal_fetish_camilla_intro_requirement():
+        return False
+
+    def anal_fetish_sakari_intro_requirement():
+        return False
+
     #This is a list of positions that show off a person's ass. Can grab one randomly for when a girl wants to show off ass specifically
     def get_random_ass_position():
         return get_random_from_list(["back_peek", "standing_doggy", "doggy", "walking_away"])
@@ -1080,6 +1092,18 @@ label anal_fetish_erica_intro_label():
 
 label anal_fetish_ashley_intro_label():
     "Ashley's anal fetish scene has not yet been written."
+    return False
+
+label anal_fetish_kaya_intro_label():
+    return False
+
+label anal_fetish_ellie_intro_label():
+    return False
+
+label anal_fetish_camilla_intro_label():
+    return False
+
+label anal_fetish_sakari_intro_label():
     return False
 
 label unit_test_anal_fetish_intro():

@@ -54,7 +54,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
         elif mc.condom:
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans as you dump your load into her, barely contained by your condom."
             the_girl "Oh god cum with me!"
-            "You can feel her pussy quivering all around you as you cum in unison. Her body is milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
+            "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
             $ climax_controller.do_clarity_release(the_girl)
             "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock"
             "You pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
@@ -71,7 +71,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
         else:
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
             the_girl "Oh god cum with me!"
-            "You can feel her pussy quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's pulling it deep into her womb."
+            "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's pulling it deep into her womb."
             "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock"
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()

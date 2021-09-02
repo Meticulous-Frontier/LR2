@@ -692,7 +692,7 @@ label Sarah_being_watched(the_person, the_watcher, the_position):
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person "I bet she just wishes she was the one being [the_position.verb]ed by you."
+        the_person "I bet she just wishes she was the one [the_position.verbing] you."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.

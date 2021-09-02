@@ -37,7 +37,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
             "Her puckered hole is raw and gaping. You watch as her asshole slowly starts to close, sealing your load inside of it."
             "She slowly lowers her legs until she is laying flat on the [the_object.name]."
 
-    elif the_choice = "Cum on her face":
+    elif the_choice == "Cum on her face":
         $ the_girl.cum_on_face()
         $ missionary.redraw_scene(the_girl)
         $ climax_controller.do_clarity_release(the_girl)

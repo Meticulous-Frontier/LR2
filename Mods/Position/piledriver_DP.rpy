@@ -25,6 +25,12 @@ init:
 label intro_piledriver_DP(the_girl, the_location, the_object):
     "You grab your strap-on from your bag, then turn to [the_girl.title]."
     mc.name "[the_girl.title], I want you to lie down for me. I'm going to fuck your pussy and your ass."
+    $ the_girl.draw_person(position = piledriver_anal.position_tag)
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
+
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
     "She let's out a startled yelp as you grab her ankles and bring them up over her head."
@@ -178,7 +184,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 if the_girl.wants_creampie():
                     the_girl "Yes! Fill me with your cum!"
                 if the_girl.has_cum_fetish():
-                    "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                    "[the_girl.possessive_title]'s body goes rigid as your cum pours into her [the_girl.pubes_description] pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
 

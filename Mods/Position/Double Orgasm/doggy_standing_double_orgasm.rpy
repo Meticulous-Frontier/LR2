@@ -32,7 +32,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
 
             if the_girl.wants_creampie():
                 the_girl "Yes! Fill me with your cum!"
-            "You feel her pussy convulsing around your dick as she also starts to orgasm."
+            "You feel her [the_girl.pubes_description] pussy convulsing around your dick as she also starts to orgasm."
             $ the_girl.cum_in_vagina()
             $ SB_doggy_standing.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)            

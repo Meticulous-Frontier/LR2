@@ -61,6 +61,20 @@ init 1310 python:
 
     uniform_policies_list.append(personal_bottoms_uniform_policy)
 
+    def casual_friday_uniform_policy_requirement():
+        return casual_uniform_policy.is_owned()
+
+    casual_friday_uniform_policy = Policy(
+        name = "Casual Friday Uniform Policy",
+        cost = 2000,
+        desc = "Employees are free to choose their own uniform on Fridays. This would add some variety on Fridays and gives them a small happiness boost.",
+        toggleable = True,
+        requirement = casual_friday_uniform_policy_requirement,
+        dependant_policies =  casual_uniform_policy
+    )
+
+    uniform_policies_list.append(casual_friday_uniform_policy)
+
     def creative_skimpy_uniform_policy_requirement():
         return corporate_enforced_nudity_policy.is_owned()
 

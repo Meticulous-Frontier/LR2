@@ -55,8 +55,8 @@ init 2 python:
 
     # make sure we only call this on the main thread
     def validate_texture_memory():
-        # keep texture memory below 1 Gb (32bit) / 1.8 Gb (64bit), even tough the max size is 2 Gb
-        if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * 3.5):
+        # keep texture memory at configured image_cache_size_in_mb; game slows down when this gets too high
+        if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4):
             renpy.free_memory() # use main free memory function
         return
 

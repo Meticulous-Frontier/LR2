@@ -104,7 +104,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
     "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
     $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.arousal > 80:
-        "[the_girl.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."
+        "[the_girl.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her [the_girl.pubes_description] pussy as a result of your rutting."
         the_girl "Ohhh, you feel so fucking good in my ass."
     else:
         "[the_girl.possessive_title] seems to be enjoying the fucking you are giving her. She yelps in response to one particularly eager thrust."
@@ -113,7 +113,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title] reaches down and begins to stroke and rub your scrotum with one hand, while with the other hand she reaches back and pulls her ass cheeks apart."
         $ the_girl.change_arousal(the_girl.get_opinion_score("giving handjobs" * 2))
     elif the_girl.get_opinion_score("masturbating") > 0:
-        "You notice that[the_girl.possessive_title] now has one hand on her pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
+        "You notice that[the_girl.possessive_title] now has one hand on her [the_girl.pubes_description] pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
         $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 3))
     else:
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."
@@ -195,7 +195,7 @@ label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, t
     mc.name "No, this is what I really want."
     $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
-    "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
+    "After a moment of resistance your cock spreads her [the_girl.pubes_description] pussy open and you slide smoothly inside of her."
     if the_girl.sex_skills["Vaginal"] > 2:
         the_girl "Oh god yes.... keep sliding that monster into me...."
         "You ram your whole length into her wet pussy and start pounding her."

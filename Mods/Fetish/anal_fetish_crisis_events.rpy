@@ -139,7 +139,7 @@ label aggressive_anal_fetish_non_employee_label():
             $ mc.change_locked_clarity(50)
             the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking my ass right now!"
             $ the_person.break_taboo("anal_sex")
-            "You drop your pant, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
+            "You drop your pants, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
 
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_SB_fetish_anal_recurring_non_employee
 

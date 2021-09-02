@@ -18,6 +18,7 @@ init python:
 
 
 label intro_bent_over_breeding(the_girl, the_location, the_object):
+    $ the_girl.draw_person(position = bent_over_breeding.position_tag)
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
     if mc.condom:
         "She notices you are wearing a condom."
@@ -32,9 +33,13 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
     else:
         the_girl "Oh thank god, I've been daydreaming about getting filled up all day long."
 
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = bent_over_breeding.position_tag, visible_enough = True, prefer_half_off = True)
+
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
-        "You continue to rub your dick against her pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
+        "You continue to rub your dick against her [the_girl.pubes_description] pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
     else:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt."
     "When you're ready you push forward. Her pussy feels amazing wrapped around your erection."
@@ -278,7 +283,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             the_girl "Oh fuck... I could get pregnant you know.."
 
         "You wait until your orgasm has passed completely, then pull out and stand back."
-        "You cum leaks out of her dripping wet pussy."
+        "You cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
 
 
     return

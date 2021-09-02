@@ -27,6 +27,13 @@ init python:
 label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
     "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
+
+    $ the_girl.draw_person(position = SB_doggy_anal_dildo_dp.position_tag)
+
     if the_girl.effective_sluttiness() > 110:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
@@ -35,7 +42,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
         the_girl "I don't know, are you sure that thing is gonna fit in me back there?"
     "[the_girl.possessive_title] gets onto all fours in front of you on the [the_object.name]. She arches her back and presents her ass."
     if the_girl.arousal > 60:
-        "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
+        "Her [the_girl.pubes_description] pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
         "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."

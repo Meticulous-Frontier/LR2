@@ -452,10 +452,16 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
                 $ mc.change_locked_clarity(10)
 
-            "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
-            the_person "What the fuck! You're going to fuck me like {i}this{/i}?"
-            mc.name "Yes, and don't pretend that you don't like it, because I know you do."
-            call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer
+            if the_person.has_anal_fetish():
+                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and slide your cock between her ass cheeks."
+                the_person "Oh baby! Are you going to fuck my slutty asshole like {i}this{/i}?"
+                call fuck_person(the_person, start_position = doggy_anal, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_2
+            else:
+                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
+                the_person "What the fuck! You're going to fuck me like {i}this{/i}?"
+                mc.name "Yes, and don't pretend that you don't like it, because I know you do."
+                call fuck_person(the_person, start_position = doggy, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_1
+
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 1:
                 "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."

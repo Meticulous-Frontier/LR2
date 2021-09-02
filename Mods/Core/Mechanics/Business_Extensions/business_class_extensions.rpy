@@ -373,7 +373,7 @@ init -1 python:
     Business.college_interns_supply = []
     Business.college_interns_HR = []
     Business.college_interns_unlocked = False
-    Business.max_interns_by_division = 2    #Can be changed in later game code.
+    Business.max_interns_by_division = 3    #Can be changed in later game code.
     Business.cost_to_hire_intern = 5000
 
     def hire_college_intern(self, person, target_division, add_to_location = False):
@@ -418,7 +418,7 @@ init -1 python:
 
     Business.remove_college_intern = remove_college_intern
 
-    def get_intern_depts_with_openings():
+    def get_intern_depts_with_openings(self):
         dept_list = []
         if len(self.college_interns_research) < self.max_interns_by_division:
             dept_list.append("Research")
@@ -426,3 +426,18 @@ init -1 python:
             dept_list.append("Production")
         #TODO find conditions for allowing interns to other departments.
         return dept_list
+
+    Business.get_intern_depts_with_openings = get_intern_depts_with_openings
+
+    def business_get_intern_list(self):
+        return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available()]
+
+    Business.get_intern_list = business_get_intern_list
+
+    def any_intern_in_office(self):
+        for x in self.get_intern_list():
+            if college_intern_is_at_work(x):
+                return True
+        return False
+
+    Business.any_intern_in_office = any_intern_in_office

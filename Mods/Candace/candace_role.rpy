@@ -920,7 +920,7 @@ label candace_love_path_intro_label():
     "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
-    call fuck_person(the_person, start_position = piledriver, private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
+    call fuck_person(the_person, start_position = piledriver, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
     "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
@@ -1080,6 +1080,11 @@ label candace_love_path_intro_label():
     the_person "Okay! See you later!"
     "You step out of [the_person.title]'s apartment. You should make it a priority to talk to your head researcher."
     $ mc.business.head_researcher.add_unique_on_talk_event(candace_begin_cure_research)
+    if not perk_system.has_ability_perk("Lustful Youth"):
+        "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
+        "You feel like no matter what happens or how your day is going, you will always have the energy to make the ones you love cum."
+        $ lustful_youth_perk_unlock()
+        "You have gained the perk 'Lustful Youth'!"
     return
 
 label candace_begin_cure_research_label(the_person):
@@ -1115,7 +1120,7 @@ label candace_begin_cure_research_label(the_person):
     candace "You need something?"
     mc.name "Have a seat."
     "[candace.name] walks in and sits down next to [the_person.name]."
-    $ scene_manager.update_actor(candace, position = "sitting")
+    $ scene_manager.update_actor(candace, display_transform = character_center_flipped, position = "sitting")
     mc.name "Remember how we talked about having [the_person.name] examining you and doing some research?"
     "She looks at you with a puzzled look."
     candace "I... I remember we had a slumber party..."

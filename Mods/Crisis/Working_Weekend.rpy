@@ -13,7 +13,7 @@ init -1 python:
 
 init 2 python:
     def SB_working_weekend_requirement():
-        if mc.business.is_weekend() and mc.is_at_work():
+        if mc.business.is_weekend() and mc.is_at_work() and mc.location.get_person_count() <= 1:
             return mc.business.get_employee_count() > 2
         return False
 

@@ -65,3 +65,18 @@ init 1 python:
     # Monkeywrench the action method overrides in the Action class
     Action.is_action_enabled = is_action_enabled
     Action.is_disabled_slug_shown = is_disabled_slug_shown
+
+    # hook for logging executed actions
+    def call_action_extended(org_func):
+        def call_action_wrapper(action, extra_args = None):
+            # run extension code
+            if debug_log_enabled:
+                add_to_debug_log("Action: " + remove_display_tags(action.name) + " ({total_time:.3f})", time.time())
+
+            # run original function
+            org_func(action, extra_args)
+
+        return call_action_wrapper
+
+    # wrap up the call_action function
+    Action.call_action = call_action_extended(Action.call_action)

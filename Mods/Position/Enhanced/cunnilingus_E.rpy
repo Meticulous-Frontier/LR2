@@ -129,7 +129,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                             $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") + mc.sex_skills["Foreplay"])
                         the_girl "[the_girl.mc_title]! Oh [the_girl.mc_title] that feels so good."
                     else:
-                        "You do your best to split your focus between rimming [the_girl.possessive_title] and fingering her pussy, but you find yourself struggling to do both."
+                        "You do your best to split your focus between rimming [the_girl.possessive_title] and fingering her [the_girl.pubes_description] pussy, but you find yourself struggling to do both."
                         "You take a break from using your fingers and focus on rimming her."
                 the_girl "That's right. Lick my ass you dirty boy."
                 "[the_girl.title]'s thighs begin to twitch."
@@ -146,7 +146,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") + mc.sex_skills["Foreplay"])
                         the_girl "[the_girl.mc_title]! Oh [the_girl.mc_title] that feels so good."
                     else:
-                        "You do your best to split your focus between rimming [the_girl.possessive_title] and fingering her pussy, but you find yourself struggling to do both."
+                        "You do your best to split your focus between rimming [the_girl.possessive_title] and fingering her [the_girl.pubes_description] pussy, but you find yourself struggling to do both."
                         "You take a break from using your fingers and focus on rimming her."
                 else:
                     "You continue to lick gently at [the_girl.possessive_title]'s ass."
@@ -216,7 +216,7 @@ label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
                 the_girl "Sorry sir! It won't happen again, I promise!"
             else:
                 the_girl "Sorry! It won't happen again!"
-            "You don't believe her, but you quickly dive into her pussy again, wary of her trying to take control again."
+            "You don't believe her, but you quickly dive into her [the_girl.pubes_description] pussy again, wary of her trying to take control again."
 
 
 

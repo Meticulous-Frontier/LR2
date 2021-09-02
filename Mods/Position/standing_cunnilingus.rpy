@@ -28,7 +28,12 @@ label intro_standing_cunnilingus(the_girl, the_location, the_object):
     "[the_girl.title] leans against the [the_object.name]. When you come close to her, she pushes down on your shoulders."
     $ standing_cunnilingus.redraw_scene(the_girl) #Draw her sitting down.
     the_person "I want you to kiss me for a little bit..."
-    "You decide to go with it, for now. You slowy kiss your way down her body. She moans softly when you get close to her groin."
+    "You decide to go with it, for now. You slowly kiss your way down her body. She moans softly when you get close to her groin."
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, visible_enough = True, prefer_half_off = True)
+
     "You lean forward and run your tongue along her slit. She groans as soon as you make contact."
     the_girl "Oh [the_girl.mc_title]..."
     return
@@ -46,7 +51,7 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
     the_person "Ahh... you scared me there..."
     "She runs her fingers through your hair as you get closer, her cunt inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
-    "You bring one hand up to her pussy and spread it open to reveal the tender pink inside."
+    "You bring one hand up to her [the_girl.pubes_description] pussy and spread it open to reveal the tender pink inside."
     the_girl "Come on, do it!"
     "You run your tongue along the length of her slit, tasting her sweet juices."
     the_girl "Oh my god!"
