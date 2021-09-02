@@ -27,7 +27,13 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
         the_person "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
     else:
         mc.name "Lie down now. It's time for me to put a baby inside you."
+    $ the_girl.draw_person(position = breeding_missionary.position_tag)    
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, visible_enough = True, prefer_half_off = True)
+
     if mc.condom:
         the_person "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."

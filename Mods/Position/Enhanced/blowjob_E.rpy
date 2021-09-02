@@ -16,6 +16,7 @@ label intro_blowjob_enhanced(the_girl, the_location, the_object):
     "You unzip your pants and pull your underwear down far enough to let your hard cock out."
     mc.name "How about you take care of this for me?"
     if the_girl.has_cum_fetish() or the_girl.get_opinion_score("giving blowjobs") > 1:
+        $ blowjob.redraw_scene(the_girl)
         "Without hesitation, [the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans forward and slides her lips over the tip of your dick."
     else:
         "[the_girl.possessive_title] grabs your cock with one hand."
@@ -25,6 +26,8 @@ label intro_blowjob_enhanced(the_girl, the_location, the_object):
             "[the_girl.possessive_title] looks down at your shaft, thinks about it for a moment, then drops to her knees in front of you. She leans forward and slides her lips over the tip of your dick."
         else:
             "[the_girl.possessive_title] looks down at your shaft for a moment, thinks about it for a moment, then drops to her knees in front of you. She leans forward and kisses the tip of your dick gingerly."
+        $ blowjob.redraw_scene(the_girl)
+
     $ blowjob.current_modifier = "blowjob"
     $ blowjob.redraw_scene(the_girl)
     return

@@ -25,8 +25,11 @@ init 5 python:
     red_heart_token_small_image = im.Scale(Image("gui/heart/red_heart.png"), 14, 12)
     renpy.image("red_heart_token_small", red_heart_token_small_image)
 
-    speech_bubble_small_image = im.Scale(Image("gui/speech-bubble.png"), 18, 18)
+    speech_bubble_small_image = im.Scale(Image("gui/speech_bubble.png"), 18, 18)
     renpy.image("speech_bubble_token_small", speech_bubble_small_image)
+
+    speech_bubble_exclamation_small_image = im.Scale(Image("gui/speech_bubble_exclamation.png"), 18, 18)
+    renpy.image("speech_bubble_exclamation_token_small", speech_bubble_exclamation_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))

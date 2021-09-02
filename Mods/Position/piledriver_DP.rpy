@@ -25,6 +25,12 @@ init:
 label intro_piledriver_DP(the_girl, the_location, the_object):
     "You grab your strap-on from your bag, then turn to [the_girl.title]."
     mc.name "[the_girl.title], I want you to lie down for me. I'm going to fuck your pussy and your ass."
+    $ the_girl.draw_person(position = piledriver_anal.position_tag)
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
+
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
     "She let's out a startled yelp as you grab her ankles and bring them up over her head."

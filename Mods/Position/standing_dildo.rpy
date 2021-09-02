@@ -29,6 +29,7 @@ label intro_standing_dildo(the_girl, the_location, the_object):
             the_girl "Oh God yes, give it to me [the_girl.mc_title]!"
         else:
             the_girl "Oh really, show me what you got."
+        $ standing_dildo.redraw_scene(the_girl)
         "While you get on your knees she spreads her legs while leaning onto the [the_object.name]."
         the_girl "Ok, slide that bad boy right in there!"
     else:
@@ -41,6 +42,7 @@ label intro_standing_dildo(the_girl, the_location, the_object):
             the_girl "Oh my god, it's so big! I don't know about this..."
             mc.name "Don't worry, I'll go slow."
 
+        $ standing_dildo.redraw_scene(the_girl)
         "You get down on your knees in front of her. You bring the dildo up to her [the_girl.pubes_description] pussy, and she spreads her legs to give you easier access."
         the_girl "Ok. Ready when you are I guess!"
         "You bring the dildo up to her slit and begin to apply light pressure."

@@ -23,6 +23,7 @@ init 1 python:
 
 label intro_SB_doggy_standing(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] around, and she leans over [the_object.name], presenting her ass to you."
+    $ the_girl.draw_person(position = SB_doggy_standing.position_tag)
     mc.name "Good girl, [the_girl.title], I'm going to fuck you hard."
     if the_girl.get_opinion_score("doggy style sex") > 2 :
         the_girl "Oh thank god, I've been daydreaming about you bending me over all day long."
@@ -36,6 +37,10 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
         the_girl "Mmmm, this is gonna be fun."
     else:
         the_girl "Okay [the_girl.mc_title], I'll play along this time."
+
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, visible_enough = True, prefer_half_off = True)
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
