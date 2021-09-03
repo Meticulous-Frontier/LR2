@@ -2009,11 +2009,6 @@ init -1 python:
     Person.has_clothing = person_has_clothing
 
     def person_decide_on_outfit(self, sluttiness_modifier = 0.0):
-        if len(self.wardrobe.outfits + self.wardrobe.underwear_sets + self.wardrobe.overwear_sets) == 0:
-            wardrobe_builder = WardrobeBuilder(self)
-            outfit = wardrobe_builder.build_outfit("FullSets", __builtin__.min(self.effective_sluttiness() / 10, 12), __builtin__.min(self.effective_sluttiness() / 40, 5))
-            return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, swap_bottoms = True)
-
         return self.wardrobe.decide_on_outfit2(self, sluttiness_modifier)
 
     Person.decide_on_outfit = person_decide_on_outfit

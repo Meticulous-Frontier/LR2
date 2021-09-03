@@ -653,7 +653,7 @@ init 5 python:
             # find feet item
             item = self.get_item_from_list("feet", self.build_filter_list(shoes_list, points, min_points))
             if item:
-                outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
+                outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))                
 
             self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
@@ -699,7 +699,8 @@ init 5 python:
                 if item:
                     outfit.add_lower(*make_lower_item_transparent(item, points, color_lower if item in [cincher, heart_pasties] else color_upper))
 
-            if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
+            # random socks
+            if renpy.random.randint(0, 1) == 0:
                 if points >= 5:
                     item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points, min_points))
                 else:
@@ -765,15 +766,9 @@ init 5 python:
                         if item_list: # check if we have any items left, if not use original weighted list
                             weighted_list = item_list
 
-            if points > 4:  # we want high sluttiness so add chance for not wearing an item based on opinion
-                for opinion in empty_item_opinions:
-                    score = self.person.get_opinion_score(opinion)
-                    if score > 0:
-                        weighted_list.append([None, score * (20 + points)])
-
-            # renpy.random.shuffle(weighted_list)
-
             item = get_random_from_weighted_list(weighted_list)
+            if not item:    # make sure we have an item from the list
+                item = get_random_from_list(filtered_list)
 
             if no_pattern:
                 return item
