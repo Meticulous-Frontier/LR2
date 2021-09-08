@@ -23,7 +23,7 @@ init -1 python:
     breeding_fetish_bend_her_over = Action("Bend her over", breeding_fetish_bend_her_over_requirement, "breeding_fetish_bend_her_over_label", menu_tooltip = "Bend her over right here and give your breeding stock a creampie")
 
 #Role
-    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
+    breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeder_fuck_action], on_day = SB_breeding_fetish_on_day) #REmoved custom breeding scene in favor of vanilla breeding scene
 
 #Other breeding fetish calls
 
