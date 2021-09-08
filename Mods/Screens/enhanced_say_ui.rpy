@@ -45,7 +45,7 @@ init 2:
                         style "namebox"
                         text who id "who" xoffset 80
 
-                    if "mc" in globals() and who is not mc.name and "portrait_say" in globals() and isinstance(portrait_say, renpy.display.core.Displayable):
+                    if "portrait_say" in globals() and isinstance(portrait_say, renpy.display.core.Displayable):
                         imagebutton:
                             idle portrait_say at character_portrait_say()
 

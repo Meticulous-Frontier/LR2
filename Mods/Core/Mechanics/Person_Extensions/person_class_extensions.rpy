@@ -1433,8 +1433,8 @@ init -1 python:
         def person_call_wrapper(person, what, *args, **kwargs):
             global portrait_say
             portrait_say = person.build_person_portrait()
-
             org_func(person, what, *args, **kwargs)
+            portrait_say = None # clear portrait when done
 
         return person_call_wrapper
 
