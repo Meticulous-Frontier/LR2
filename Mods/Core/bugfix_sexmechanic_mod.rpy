@@ -574,10 +574,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         clear_sex_modifiers(the_person)
 
         report_log["end arousal"] = the_person.arousal
-        if report_log.get("girl orgasms",0) > 0 or report_log.get("girl one orgasms", 0) > 0:
-            the_person.arousal = 0 # If she came she's satisfied.
-        else:
-            the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
+
+        $ the_person.arousal = (the_person.arousal/(report_log.get("girl orgasms",0)+1)) # The more you make her cum the more satisfied she will be. At 0 orgasms her arousal does not move - you've just edged her!
 
         mc.condom = False
         mc.recently_orgasmed = False
