@@ -724,26 +724,68 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     return
 
 label ellie_grope_followup_label():
-    "Ellie approaches you. Says sorry for peeing on your fingers."
-    "That was an orgasm bitch."
-    "You send her a link of a sex health website. Tell her to take a look at it over the weekend."
+    $ the_person = ellie
+    "You are going about your work, when [the_person.possessive_title] finds you."
+    $ the_person.draw_person()
+    the_person "Hey, can we talk somewhere private?"
+    mc.name "Sure."
+    $ ceo_office.show_background()
+    "You take her to your office and close the door. You offer to let her sit down but she declines."
+    the_person "I'll keep this short, i just didn't want any other girls to hear this..."
+    the_person "I'm sorry for... yah know... peein my pants like that..."
+    $ the_person.draw_person(emotion = "angry")
+    the_person "But to be fair, ya'll didn't tell me something like that could happen!"
+    mc.name "[the_person.title]... did it feel good? When that happened?"
+    the_person "I... I guess so... yeah it was nice..."
+    mc.name "[the_person.title]... I don't think you peed yourself, I think you just had an orgasm."
+    the_person "I had a... a what now?"
+    mc.name "[the_person.title], have you ever masturbated?"
+    the_person "What the heckin kind of question is that? Of course not, that's for unsavory folk."
+    $ the_person.draw_person(emotion = "sad")
+    "You sigh. She is struggling in her brain to overcome her sexual desires, and being exposed to your serums is starting to overwhelm her."
+    "She is making progress, but you can tell it is going to be a long road before you can fully corrupt her."
+    mc.name "I tell you what. I'm going to email you some sexual health websites. I want you to do some research on things this weekend."
+    mc.name "With the work we do here on serums, it is important that you have a good understanding what is actually going on with your body."
+    the_person "You're sayin... this is a work assignment?"
+    mc.name "That's right. It will help you do your job better."
+    mc.name "I'm not saying you have to masturbate, but getting to know your body better might help you better understand what we are trying to achieve here, in general."
+    the_person "Okay, I'll take a look."
+    $ clear_scene()
+    "[the_person.possessive_title] leaves your office. You take a few minutes and email her some links to positive sex health websites and information."
+    #TODO link next event.
     return
 
 label ellie_text_message_apology_label():
-    "Sunday morning, you get a text from Ellie."
-    "She's been up all night reading about stuff. Apologizes for being so naive, wants to know if she can make it up to you."
-    "heck yes"
-    "She asks to meet you early before work on Monday again."
+    $ the_person = ellie
+    "Sunday morning, you roll over and look at your phone. You have several missed text message."
+    "Looking at your phone, you see they are all from [the_person.possessive_title], at about 3 am."
+    $ mc.start_text_convo(the_person)
+    the_person "Sorry, I know it's late, I was just up doing research on stuff you sent me..."
+    the_person "I didn't know... all this stuff about my own body. No one ever told me this stuff."
+    the_person "When I was in school, I just stayed busy with schoolwork and never had a boyfriend or anything."
+    the_person "Anyway, thanks for sending me this, I appreciate yer helping me out with it."
+    $ the_person.change_love(3)
+    $ the_person.change_slut_temp(5)
+    "You decide to send her a quick text back."
+    mc.name "Happy to help. Let me know if you need any further demonstrations."
+    $ mc.end_text_convo()
+    "You lay back down for a bit. You look at your phone and see the message was read, but she doesn't reply."
+    #TODO link next label
     return
 
 label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut event.
-    "Meet with Ellie monday morning in your office."
-    "She locks the door. She asks to see your junk."
-    "She can't stop staring at it. Asks if she can touch it."
-    "heck yes"
-    "She touches it. A little. Then a lot. She ready about men and male orgasms, wants to see one."
-    "You guide her through giving handjobs. Cum. She's ecstatic."
-    "You've now unlocked all her foreplay options."
+    $ the_person = ellie
+    "You are going about your work, when [the_person.possessiBe_title] finds you."
+    $ the_person.draw_person()
+    the_person "Hey, can we talk somewhere private?"
+    mc.name "Sure."
+    $ ceo_office.show_background()
+    "You bring her to your office. After stepping inside, she closes the door and locks it."
+    mc.name "Have a seat?"
+    the_person "Yessir."
+    $ the_person.draw_person(position = "sitting")
+    mc.name "What can I do for you?"
+
     return
 
 label ellie_never_tasted_cock_label():  #This is Ellie's 40 sluttiness event.
