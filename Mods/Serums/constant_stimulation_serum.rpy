@@ -2,15 +2,15 @@
 
 init -1 python:
     def get_slut_tier(person):   #returns the heart value of the person
-        if person.core_sluttiness < 25:
+        if person.sluttiness < 25:
             return 0
-        elif person.core_sluttiness < 50:
+        elif person.sluttiness < 50:
             return 1
-        elif person.core_sluttiness < 75:
+        elif person.sluttiness < 75:
             return 2
-        elif person.core_sluttiness < 100:
+        elif person.sluttiness < 100:
             return 3
-        elif person.core_sluttiness < 125:
+        elif person.sluttiness < 125:
             return 4
         return 5
 

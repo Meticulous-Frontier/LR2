@@ -327,7 +327,7 @@ init -1 python:
         if mc.business.is_work_day() and male_focused_marketing_policy.is_active() and person in mc.business.market_team:
             marketing_score = .05
 
-        target_sluttiness = __builtin__.int(person.core_sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
+        target_sluttiness = __builtin__.int(person.sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
         preferences = WardrobePreference(person)
 

@@ -127,7 +127,7 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
             the_mom "[the_mom.mc_title], make sure to get some shots of me embarrassing your sister."
             "She leans over [the_sister.title]'s shoulder and kisses her on the side of the cheek."
             $ the_mom.change_happiness(10)
-            $ the_mom.change_slut_temp(2)
+            $ the_mom.change_slut(2)
             $ the_sister.change_happiness(5)
             "You get some great pictures of [the_mom.title] and [the_sister.title] playing around on the bed together."
 

@@ -69,7 +69,7 @@ label production_failure_action_label:
 
                 $ production_failure_increase_sluttiness(the_person)
                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                $ the_person.change_slut_temp(3)
+                $ the_person.change_slut(2)
                 "[the_person.name] appears to have been particularly effected."
                 "[the_person.name] looks around desperately trying to figure out the source of her sudden arousal. When she sees you she immediately loses control."
                 the_person "Please [the_person.mc_title], I need you.... please help me... "

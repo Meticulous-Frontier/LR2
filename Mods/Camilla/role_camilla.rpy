@@ -383,7 +383,7 @@ label camilla_dance_lessons_label():
     the_person "Ah, señor! I wasn't sure that you would actually come!"
     mc.name "Of course. Sometimes we need to be adventurous and get out of our comfort zone to try something new."
     "When you finish your statement, you give her a wink. She immediately realizes you are commenting about her situation with her husband..."
-    $ the_person.change_slut_temp(3)
+    $ the_person.change_slut(2)
     the_person "You are right about that, but tonight, it is all about you!"
     "You make some idle chatter at the bar as you wait for the lessons to begin. You admit you are pretty nervous, but as people filter in, you see a lot of people around who also look new at this."
     "?????" "Alright, everyone here for salsa lessons, we are forming up over here! Come with your partner!"
@@ -437,7 +437,7 @@ label camilla_dance_lessons_label():
         "At the end of the lesson, she is close to you again, breathless. A light sheen of sweat makes her skin shine."
         "You hands on her body throughout the dancing has definitely put sexual tension in the air."
         $ mc.change_locked_clarity(30)
-        $ the_person.change_slut_temp(5)
+        $ the_person.change_slut(2)
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "Tired from your evening, you chat with [the_person.possessive_title] before you leave."
     the_person "So, they do this most evenings here. If you ever want a dance partner, I love to dance!"

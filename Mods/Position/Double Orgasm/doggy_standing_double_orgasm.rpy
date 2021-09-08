@@ -23,7 +23,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."

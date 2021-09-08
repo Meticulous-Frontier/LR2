@@ -984,7 +984,7 @@ label ophelia_choose_service_test_label():
     python:
         able_person_list = []
         for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
-            if person.core_sluttiness > 50:
+            if person.sluttiness > 50:
                 able_person_list.append(person)
             elif person.sluttiness > 20:
                 if person.obedience > 150:

@@ -78,7 +78,7 @@ init 5 python:
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
         tit_modifier = 10 - (__builtin__.abs(5 - rank_tits(person.tits)))   # optimal size is DD-Cup
         age_modifier = 8 - (__builtin__.abs(25 - person.age) / 3.0)            # optimal age is 25
-        slut_modifier = person.core_sluttiness / 20.0
+        slut_modifier = person.sluttiness / 20.0
         obed_modifier = 0
         if person.has_role(bdsm_performer_role):
             obed_modifier = person.obedience / 20.0

@@ -317,7 +317,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     the_person "Why? I don't under... oh my god..."
     "With one hand on her back and one firmly on her hip, you slowly bend [the_person.possessive_title] over her desk."
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
-    $ the_person.change_slut_temp(5)
+    $ the_person.change_slut(2)
     $ mc.change_locked_clarity(10)
     the_person "Oh god oh god, it's happening..."
     $ the_person.change_arousal(30)
@@ -339,7 +339,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
         the_person "Oh god, it was even better than I thought... oh my god."
         $ the_person.increase_opinion_score("public sex")
         $ the_person.change_happiness(10)
-        $ the_person.change_slut_core(3)
+        $ the_person.change_slut(3)
     else:
         the_person "Fuck... I need to finish so bad! Why can't I just get off today?"
         $ the_person.change_happiness(-10)
@@ -395,7 +395,7 @@ label unisex_restroom_use_gloryhole_label():
     if person_response == "Refuse":
         "The person inside clears her throat, but doesn't say or do anything."
         "Soon, you hear her exit her stall and quickly leave the restroom. Yikes, looks like whoever it was, wasn't very interested!"
-        $ the_person.change_slut_temp(3, add_to_log = False)
+        $ the_person.change_slut(2, add_to_log = False)
         $ the_person.change_happiness(-5, add_to_log = False)
     elif person_response == "Handjob":
         call unisex_restroom_gloryhole_handjob_label(the_person) from _call_gloryhole_HJ_response_1
@@ -457,7 +457,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut_temp(1, add_to_log = False)
+    $ the_person.change_slut(1, add_to_log = False)
     $ the_person.change_happiness(2, add_to_log = False)
 
     $ del anon_char
@@ -500,7 +500,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut_temp(2, add_to_log = False)
+    $ the_person.change_slut(2, add_to_log = False)
     $ the_person.change_happiness(3, add_to_log = False)
 
     $ del anon_char
@@ -556,7 +556,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
         "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut_temp(2, add_to_log = False)
+    $ the_person.change_slut(2, add_to_log = False)
     $ the_person.change_happiness(5, add_to_log = False)
 
     $ del anon_char
@@ -613,7 +613,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
         "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut_temp(3, add_to_log = False)
+    $ the_person.change_slut(2, add_to_log = False)
     $ the_person.change_happiness(7, add_to_log = False)
 
     $ del anon_char
@@ -694,7 +694,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
                 "You pull out. You grab some toilet paper and wipe your cock off."
 
             # the person is happy and a sluttier (don't log as to preserve anonymity)
-            $ the_person.change_slut_temp(3, add_to_log = False)
+            $ the_person.change_slut(2, add_to_log = False)
             $ the_person.change_happiness(5, add_to_log = False)
 
     $ del anon_char

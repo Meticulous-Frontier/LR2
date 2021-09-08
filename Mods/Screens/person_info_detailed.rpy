@@ -98,7 +98,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                             mousewheel True
                             vbox:
                                 text "Happiness: [the_person.happiness]" style "menu_text_style"
-                                text "Sluttiness: [the_person.sluttiness] (Core: [the_person.core_sluttiness])" style "menu_text_style"
+                                text "Sluttiness: [the_person.sluttiness] (Core: [the_person.sluttiness])" style "menu_text_style"
                                 text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
                                 text "Age: [the_person.age]" style "menu_text_style"
                                 if the_person.has_role(girlfriend_role):

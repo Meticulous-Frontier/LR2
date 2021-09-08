@@ -155,7 +155,7 @@ label quest_wet_tshirt_contest_intro_label(the_person):
     if the_person.has_large_tits():
         mc.name "That's too bad, you've got a great rack..."
         $ the_person.change_happiness(2)
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         the_person "Ah, thank you. It would probably be for the best to pick out girls with larger chests in general for this though."
     else:
         the_person "Besides, I'm a little flat chested for what you have in mind. If you really want to drive interest, try to find girls who are a little more blessed in the chest."
@@ -206,7 +206,7 @@ label quest_wet_tshirt_contest_hr_talk_label(the_person):
         "She rolls her eyes hard, but eventually looks over at you."
         the_person "Fine. Let me see..."
     else:
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         the_person "That's an interesting idea, for sure... but why come talk to me about it?"
         mc.name "Being in HR, I was hoping you could help me find the volunteers."
         "She seems a bit relieved."

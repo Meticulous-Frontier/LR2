@@ -277,7 +277,7 @@ init -1 python:
             mc.log_event((person.title or person.name) + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_anal_fetish_unlocked():
-            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_anal_fetish_quest(person):
                         person.event_triggers_dict["anal_fetish_start"] = True
@@ -327,7 +327,7 @@ init -1 python:
             person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
         if is_breeding_fetish_unlocked():
-            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_breeding_fetish_quest(person):
                         person.event_triggers_dict["breeding_fetish_start"] = True
@@ -365,13 +365,13 @@ init -1 python:
             person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log)
+                person.change_slut(1, add_to_log)
 
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_cum_fetish_unlocked():
-            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_cum_fetish_quest(person):
                         person.event_triggers_dict["cum_fetish_start"] = True
@@ -407,14 +407,14 @@ init -1 python:
         tier = get_suggest_tier(person)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log = True)
+                person.change_slut(1, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
-        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
+        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
                 if start_exhibition_fetish_quest(person):
                     person.event_triggers_dict["exhibition_fetish_start"] = True

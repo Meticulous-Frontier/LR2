@@ -994,13 +994,13 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person "[the_person.mc_title], why are you doing this here..."
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person "Well, [the_person.mc_title]! I might show you my personal skills someday..."
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         "[title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
 
     else:
@@ -1038,14 +1038,14 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], don't do that, not here. I have a reputation to keep."
         $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_slut(-1)
         "[the_person.possessive_title] is very uneasy with [the_watcher.name] watching."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "[the_watcher.name], just have a good look, I may let you try him one day."
         $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
 
     return

@@ -172,7 +172,7 @@ init -1 python:
     def ashley_mandatory_ask_about_porn_requirement():
         if day > ashley_get_porn_convo_day() and ashley_get_concert_date_stage() >= 2:
             if time_of_day > 1:
-                if ashley.core_sluttiness >= 20:
+                if ashley.sluttiness >= 20:
                     return True
         return False
 
@@ -1928,12 +1928,12 @@ label ashley_clothes_shopping_label(the_person):
             the_person "Ahhh, that was nice. Good to know my sister isn't getting ALL your attention!"
             $ the_person.reset_all_jealousy()
             $ the_person.change_love(3)
-            $ the_person.change_slut_temp(3)
+            $ the_person.change_slut(1)
         else:
             the_person "Wow, really? You can't give me the same treatment that [stephanie.name] gave you? She got you all worn out?"
             "She looks pissed."
             $ the_person.change_love(-3)
-            $ the_person.change_slut_temp(3)
+            $ the_person.change_slut(1)
             $ the_person.jealous_change_score(3) #Add points to jealous score so ashley gets more desperate.
         $ the_person.draw_person(position = "stand2")
         "You get yourself put back together."
@@ -1991,7 +1991,7 @@ label ashley_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 0
+        the_person.sluttiness = 0
         the_person.sluttiness = 0
         the_person.obedience = 0
         the_person.happiness = 100
@@ -2026,7 +2026,7 @@ label ashley_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 20
+        the_person.sluttiness = 20
         the_person.sluttiness = 20
         the_person.obedience = 0
         the_person.happiness = 100
@@ -2043,13 +2043,13 @@ label ashley_unit_test2():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 40
+        the_person.sluttiness = 40
         the_person.sluttiness = 40
         the_person.obedience = 0
         the_person.happiness = 100
         the_person.love = 0
         stephanie.love = 100
-        stephanie.core_sluttiness = 40
+        stephanie.sluttiness = 40
         stephanie.sluttiness = 40
         stephanie.energy = stephanie.max_energy
         mc.max_energy = 200
@@ -2062,13 +2062,13 @@ label ashley_unit_test2():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 40
+        the_person.sluttiness = 40
         the_person.sluttiness = 40
         the_person.obedience = 0
         the_person.happiness = 100
         the_person.love = 0
         stephanie.love = 100
-        stephanie.core_sluttiness = 40
+        stephanie.sluttiness = 40
         stephanie.sluttiness = 40
         stephanie.energy = stephanie.max_energy
     "Coffee recurring. She should be ready for second date to proc from this."

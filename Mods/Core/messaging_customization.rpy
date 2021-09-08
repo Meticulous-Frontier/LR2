@@ -62,8 +62,8 @@ init 2 python:
     # stat changes
     Person.change_happiness = generic_messages_extended(Person.change_happiness, persistent.stat_change_messages, True)
     Person.change_love = generic_messages_extended(Person.change_love, persistent.stat_change_messages, True)
-    Person.change_slut_temp = generic_messages_extended(Person.change_slut_temp, persistent.stat_change_messages, True)
-    Person.change_slut_core = generic_messages_extended(Person.change_slut_core, persistent.stat_change_messages, True)
+    Person.change_slut = generic_messages_extended(Person.change_slut, persistent.stat_change_messages, True)
+    Person.change_slut = generic_messages_extended(Person.change_slut, persistent.stat_change_messages, True)
     Person.change_obedience = generic_messages_extended(Person.change_obedience, persistent.stat_change_messages, True)
     Person.change_arousal = generic_messages_extended(Person.change_arousal, persistent.stat_change_messages, True)
     Person.change_max_arousal = generic_messages_extended(Person.change_max_arousal, persistent.stat_change_messages, True)

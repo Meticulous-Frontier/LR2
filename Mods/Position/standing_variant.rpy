@@ -500,7 +500,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches for your cock, removes the condom, and ties the end in a knot."
                 the_girl "Wow that was good. Look at all that cum you made for me..."

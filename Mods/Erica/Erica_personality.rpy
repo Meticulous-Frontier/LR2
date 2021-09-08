@@ -348,7 +348,7 @@ label erica_hookup_accept(the_person):
         $ mc.change_locked_clarity(20)
         "[the_person.title] convulses as she orgasms. She is caught completely off guard by how fast you made her cum."
         "The hand on the back of your head lets go but you continue your assault for several more seconds."
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         $ the_person.change_happiness(2)
     else:
         the_person "Mmm, that's it. Your tongue feels so good. Give it a good workout..."
@@ -416,7 +416,7 @@ label erica_hookup_accept(the_person):
         $ the_person.change_arousal(20) #90 + 8
         if the_person.arousal > 100:
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
-            $ the_person.change_slut_temp(1)
+            $ the_person.change_slut(1)
             $ the_person.change_happiness(2)
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
@@ -435,7 +435,7 @@ label erica_hookup_accept(the_person):
                     the_person  "Yes! Fill me with your cum!"
                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
 
-                    $ the_person.change_slut_temp(1)
+                    $ the_person.change_slut(1)
                     $ the_person.change_happiness(2)
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person( position = "standing_doggy") # draw cum
@@ -470,7 +470,7 @@ label erica_hookup_accept(the_person):
         $ the_person.change_arousal(20) #70 + 8
         if the_person.arousal > 100:
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
-            $ the_person.change_slut_temp(1)
+            $ the_person.change_slut(1)
             $ the_person.change_happiness(2)
 
     if the_person.effective_sluttiness() > 70:
@@ -507,7 +507,7 @@ label erica_hookup_accept(the_person):
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
                     $ the_person.change_arousal(20)#110 + 8
                     "Her ass begins to spasm. Her buttery smooth back passage squeezes you over and over as her body is racked with yet another orgasm. It feels incredible."
-                    $ the_person.change_slut_temp(2)
+                    $ the_person.change_slut(2)
                     $ the_person.change_happiness(5)
                     mc.name "Get ready, I'm gonna cum!"
                     "[the_person.title] is incoherent, and doesn't process your words."
@@ -535,7 +535,7 @@ label erica_hookup_accept(the_person):
         the_person "That's it, cum with me!"
         "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
         $ the_person.change_happiness(5)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         $ the_person.cum_in_vagina()
         $ the_person.draw_person( position = "standing_doggy") # draw cum
         $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
@@ -561,7 +561,7 @@ label erica_hookup_accept(the_person):
                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
                 "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
                 $ the_person.change_happiness(5)
-                $ the_person.change_slut_temp(1)
+                $ the_person.change_slut(1)
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy")
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
@@ -671,13 +671,13 @@ label erica_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.effective_sluttiness() < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "Oh my god, you two are just... Wow..."
-        $ change_report = the_person.change_slut_temp(1)
+        $ change_report = the_person.change_slut(1)
         "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my god that's... Wow that looks...Hot."
-        $ change_report = the_person.change_slut_temp(2)
+        $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
@@ -713,14 +713,14 @@ label erica_being_watched(the_person, the_watcher, the_position):
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
         $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_slut(-1)
         "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
 
     else: #the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return

@@ -282,7 +282,7 @@ label quest_arousal_serum_test_label():
     $ the_person.change_arousal(20)
     the_person "Oh! Yes! Yes yes yes Yes YES YES YES!!!"
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-    $ the_person.change_slut_temp(5)
+    $ the_person.change_slut(2)
     $ the_person.change_happiness(5)
     "Seconds later her body convulses as she orgasms. She moans a bunch of incomprehensible noises."
     $ the_person.change_arousal(-the_person.arousal/3, add_to_log = False)

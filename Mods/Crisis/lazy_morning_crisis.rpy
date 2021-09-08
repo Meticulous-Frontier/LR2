@@ -49,7 +49,7 @@ label lazy_morning_crisis_action_label:
         the_person "I'm sorry, I wasn't staring... I mean... Ah!"
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] turns and flees your room, leaving you tired and frustrated. She was totally checking you out a little though..."
-        $ the_person.change_slut_temp(3)
+        $ the_person.change_slut(2)
         $ mc.change_locked_clarity(10)
 
     elif the_person.sluttiness < 60: #She asks to join you and you wind up with mutual masturbation

@@ -818,7 +818,7 @@ label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
     mc.name "I sure am. You?"
     the_person "Yes, I'd say you saw me get a good workout in also."
     "She gives you a quick wink, clearly flirting with you."
-    $ the_person.change_slut_core(2)
+    $ the_person.change_slut(2)
     mc.name "What can I say, it makes it easier to push the limits of my endurance when I get my testosterone flowing."
     if the_person.love < 40:
         the_person "Ahh, is that the secret? Perhaps I should hit up the elliptical facing the pool the next time they are doing the morning men's swimming..."
@@ -1816,7 +1816,7 @@ label Sarah_stripclub_story_label():
                     "She reaches down and gives your softened cock a few strokes."
                     the_person "But the things you do to me... my husband doesn't even come close!"
                     $ the_person.add_role(affair_role)
-                    $ the_person.change_slut_temp(2)
+                    $ the_person.change_slut(2)
                 "Let's keep it casual":
                     the_person "Ah, okay. So like, friends with benefits? Is that what we are talking about here?"
                     mc.name "Exactly."

@@ -301,7 +301,7 @@ label SB_caught_masturbating_crisis_label():
                                     "[the_person.possessive_title] quickly recovers after you finish."
                                     $ the_person.change_stats(happiness = 3, slut_temp = 3)
                                     $ the_person.change_happiness(3)
-                                    $ the_person.change_slut_temp(3)
+                                    $ the_person.change_slut(1)
                                 the_person "Mmm, you always know just what I need [the_person.mc_title]"
                                 "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
@@ -362,7 +362,7 @@ label SB_caught_masturbating_crisis_label():
                                     "[the_person.possessive_title] quickly recovers after you finish."
                                     $ the_person.change_stats(happiness = 3, slut_temp = 3)
                                     $ the_person.change_happiness(3)
-                                    $ the_person.change_slut_temp(3)
+                                    $ the_person.change_slut(1)
                                 the_person "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
                                 "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."

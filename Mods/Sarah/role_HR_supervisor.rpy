@@ -615,16 +615,16 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
             person_choice "Wow, not sure why you called me in here, but I hope it's for the same thing you have her in here for..."
         else:
             person_choice "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
-        $ person_choice.change_slut_temp(5) # give her a temp slut boost to maybe have a threesome later...
+        $ person_choice.change_slut(2) # give her a temp slut boost to maybe have a threesome later...
     elif the_person.outfit.vagina_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
-        $ person_choice.change_slut_temp(3)
+        $ person_choice.change_slut(2)
         person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
-        $ person_choice.change_slut_temp(1)
+        $ person_choice.change_slut(1)
         person_choice "Oh...what can I do for you, [person_choice.mc_title]."
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
@@ -817,7 +817,7 @@ label HR_director_review_discoveries_label(the_person):
                     $ set_HR_director_tag("business_HR_skimpy_uniform", True)
                     if the_person is sarah:
                         the_person "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
-                        $ the_person.change_slut_temp(3)
+                        $ the_person.change_slut(2)
         if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
             if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
                 the_person "I see here that changes within the company have produced several vacancies."

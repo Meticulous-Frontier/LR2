@@ -26,7 +26,7 @@ label prone_bone_double_orgasm(the_girl, the_location, the_object):
                 "She nods. You take the condom off. Instead of handing it to her though, you put the end of it up to her lips and try to feed it to her."
                 "It drops down her chin but she managed to drink some of it."
                 $ the_girl.cum_in_mouth()
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "You take off the condom, tie the end in a knot and throw it away."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation. [the_girl.possessive_title] can barely move, still face down on the [the_object.name]."

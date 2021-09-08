@@ -27,7 +27,7 @@ label lily_morning_encounter_enhanced_label():
         mc.name "I'm just going to get some breakfast. What are you doing?"
         "[the_person.title] gets her door open and hurries back inside. She leans out so all you can see is her head."
         the_person "I was going to get some laundry and thought you were still asleep. Could you, uh, move along?"
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         "You shrug and continue on your way."
 
     elif the_person.effective_sluttiness("underwear_nudity") < 40:

@@ -16,7 +16,7 @@ init 5 python:
 
     def broken_AC_crisis_update_sluttiness():
         for person in mc.business.p_div.people:
-            person.change_slut_temp(5, add_to_log = False)
+            person.change_slut(2, add_to_log = False)
         mc.log_event("All Production Staff: +5 Sluttiness","float_text_pink")
         return
 
@@ -117,7 +117,7 @@ label broken_AC_crisis_label_enhanced:
                     $ removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(girl_choice, temp_sluttiness_boost = 20)
                     if removed_something:
                         call broken_AC_crisis_break_taboo(girl_choice) from _call_broken_AC_crisis_break_taboo_other_girl
-                        $ girl_choice.change_slut_temp(10)
+                        $ girl_choice.change_slut(2)
                         if girl_choice.effective_sluttiness() < 40:
                             $ scene_manager.update_actor(girl_choice, emotion = "sad")
                             "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you and blushes slightly and avoids making eye contact."

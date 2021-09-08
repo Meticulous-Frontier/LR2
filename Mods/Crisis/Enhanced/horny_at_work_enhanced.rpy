@@ -5,7 +5,7 @@ init 5 python:
         licker = None
         for person in helpful_people:
             person.change_obedience(3)
-            person.change_slut_temp(1)
+            person.change_slut(1)
             if person.has_cum_fetish() and licker is None:
                 licker = person
             if person.get_opinion_score("being submissive") > 0 and person.get_opinion_score("drinking cum") > 0 and licker is None:
@@ -466,7 +466,7 @@ label horny_at_work_crisis_enhanced_label():
 
                         $ mc.change_locked_clarity(10)
                         $ the_person.discover_opinion("not wearing anything")
-                        $ the_person.change_slut_temp(the_person.get_opinion_score("not wearing anything")+1)
+                        $ the_person.change_slut(the_person.get_opinion_score("not wearing anything")+1)
                         $ the_person.change_obedience(the_person.get_opinion_score("not wearing anything")+1)
 
                         if the_person.get_opinion_score("not wearing anything") > 0:

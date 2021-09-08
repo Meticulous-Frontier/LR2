@@ -282,7 +282,7 @@ init -1 python:
             self.happiness = 100 #Higher happiness makes a girl less likely to quit and more willing to put up with you pushing her using obedience.
             self.love = 0
             self.sluttiness = 0 + renpy.random.randint(0,20) #How slutty the girl is by default. Higher will have her doing more things just because she wants to or you asked.
-            self.core_sluttiness = self.sluttiness #Core sluttiness is the base level of what a girl considers normal. normal "sluttiness" is the more variable version, technically refered to as "temporary slutiness".
+            self.sluttiness = self.sluttiness #Core sluttiness is the base level of what a girl considers normal. normal "sluttiness" is the more variable version, technically refered to as "temporary slutiness".
             self.obedience = 100 #How likely the girl is to listen to commands. Default is 100 (normal person), lower actively resists commands, higher follows them.
 
             #Situational modifiers are handled by events. These dicts and related functions provide a convenient way to avoid double contributions. Remember to clear your situational modifiers when you're done with them!!
@@ -881,13 +881,13 @@ label FA_talk_busy(the_person):
 #     elif the_person.sluttiness < the_position.slut_requirement:
 #         $ the_person.draw_person()
 #         the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
-#         $ change_report = the_person.change_slut_temp(1)
+#         $ change_report = the_person.change_slut(1)
 #         "[the_person.title] watches for a moment, then turns away while you and [the_sex_person.name] keep [the_position.verb]."
 #
 #     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
 #         $ the_person.draw_person()
 #         the_person "Oh wow that's hot. You don't mind if I watch, do you?"
-#         $ change_report = the_person.change_slut_temp(2)
+#         $ change_report = the_person.change_slut(2)
 #         "[the_person.title] watches you and [the_sex_person.name] [the_position.verb]."
 #
 #     else:
@@ -923,14 +923,14 @@ label FA_talk_busy(the_person):
 #         #She's into it but shamed by the prude watching her.
 #         the_person "Fuck, maybe we should go somewhere a little quieter..."
 #         $ the_person.change_arousal(-1)
-#         $ the_person.change_slut_temp(-1)
+#         $ the_person.change_slut(-1)
 #         "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
 #
 #     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #They're both into it but not fanatical about it.
 #         the_person "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.name]!"
 #         $ the_person.change_arousal(1)
-#         $ the_person.change_slut_temp(1)
+#         $ the_person.change_slut(1)
 #         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 #
 #     return

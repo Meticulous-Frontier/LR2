@@ -240,7 +240,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
         "When the last moments of your climax have passed you pull back, cock trailing spit and cum as you leave her mouth."
         if the_girl.get_opinion_score("drinking cum") > 0:
             the_girl "I thought you were going to drown me with your cum for a moment... Mmmm."
-            $ the_girl.change_slut_temp(1)
+            $ the_girl.change_slut(1)
             $ the_girl.change_happiness(1)
             "She shivers with pleasure at the thought."
         else:

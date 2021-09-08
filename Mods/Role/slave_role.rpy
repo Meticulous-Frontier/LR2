@@ -217,7 +217,7 @@ label slave_alarm_clock_label(the_person):
             the_person "Oh... I should... Uh..."
             "[the_person.possessive_title] blushes and turns around suddenly. It takes you a moment to realise why: your morning wood pitching an impressive tent with your underwear."
             the_person "No, it's perfectly natural. I'll give you some privacy."
-            $ the_person.change_slut_temp(2)
+            $ the_person.change_slut(2)
             $ the_person.draw_person(position = "back_peek")
             "She can't help but taking some quick glances at you, but seems to be trying her best to respect your privacy."
 
@@ -226,7 +226,7 @@ label slave_alarm_clock_label(the_person):
             "She nods towards your crotch and you realise you're pitching an impressive tent."
             mc.name "Oh, sorry about that."
             the_person "No, it's perfectly natural and nothing to be embarrassed about."
-            $ the_person.change_slut_temp(3)
+            $ the_person.change_slut(2)
             "She stares at it for a short moment before pulling her eyes back up to meet yours."
             #TODO: She offers to pick out an outfit for you while you jerk off "To avoid bothering anyone at work".
             the_person "Certainly nothing to be embarrassed, but I think you should take care of it before you leave."

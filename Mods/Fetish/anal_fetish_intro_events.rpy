@@ -124,7 +124,7 @@ init 50 python:
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
         the_person.max_opinion_score("anal sex")
-        the_person.core_sluttiness = 70
+        the_person.sluttiness = 70
         the_person.sluttiness = 70
         the_person.obedience = 0
         the_person.happiness = 100
@@ -137,7 +137,7 @@ init 50 python:
 ### Function labels
 
 label anal_fetish_employee_intro_label(the_person):
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
@@ -270,7 +270,7 @@ label anal_fetish_employee_intro_label(the_person):
     return True
 
 label anal_fetish_family_intro_label(the_person):
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     $ mc.change_location(the_person.home)
@@ -389,7 +389,7 @@ label anal_fetish_family_intro_label(the_person):
 
 label anal_fetish_generic_intro_label(the_person):
     # Concept, spank her while fingering her ass so she can discover her new submissive, anal loving side.
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     $ the_person.arousal = 40
@@ -701,7 +701,7 @@ label anal_fetish_mom_intro_label():
 
 label anal_fetish_lily_intro_label():
     $ the_person = lily # make sure we use lily for the event
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
@@ -979,7 +979,7 @@ label anal_fetish_christina_intro_label():
 
 label anal_fetish_starbuck_intro_label():
     $ the_person = starbuck
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
 

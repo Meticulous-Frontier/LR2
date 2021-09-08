@@ -140,7 +140,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] blushes. The conflict of the dirtiness of the act of anal sex and her obedience to you are clear in her face."
                 the_girl "Sir... don't you find my ass pleasing? Why did you pull out?"
                 mc.name "Dont worry, [the_girl.title], I'll fuck your ass some more in a second, I just needed to take a moment and how loose your backdoor has gotten so far."
-                $ the_girl.change_slut_temp(2)
+                $ the_girl.change_slut(2)
                 "[the_girl.possessive_title]'s cheeks turn even redder with your dirty talk. She puts her head down again, but leaves her cheeks spread, ready for you to resume fucking her whenever you are ready."
             else:
                 the_girl "Hey, why'd you pull out? I was just getting used to how thick you are..."
@@ -169,7 +169,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
                 "You lower your face down behind her head and whisper into her ear."
                 mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
                 "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
-                $ the_girl.change_slut_temp(2)
+                $ the_girl.change_slut(2)
             elif the_girl.sluttiness > 100:
                 the_girl "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
             else:

@@ -192,7 +192,7 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 mc.name "I don't think so. You're my little slut, and I'll take you the way I want to, when I want to."
                 $ the_girl.change_happiness(-5)
                 $ the_girl.change_obedience(3)
-                $ the_girl.change_slut_temp(3)
+                $ the_girl.change_slut(2)
                 "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her tight pussy clenches around you in response."
                 "She decides to just stay quiet for now and accept it as you continue to have you way with her."
             else:
@@ -312,7 +312,7 @@ label outro_prone_bone(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off do your cum doesn't spill out."
                 the_girl.char "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl.char "Look at all that cum. Well done."

@@ -83,7 +83,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] reaches below her for your cock. With delicate fingers she slides your condom off, pinching above the bulge to keep your cum from spilling out."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                    $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                 else:
                     "[the_girl.possessive_title] reaches for your cock, removes the condom carefully, and ties the end in a knot."
                     the_girl "Look at all that cum. Well done."

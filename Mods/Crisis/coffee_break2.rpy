@@ -62,7 +62,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     if loser.effective_sluttiness() >= 40:
         $ scene_manager.update_actor(loser, emotion = "happy")
         loser "Great, let's give this guy a show!"
-        $ loser.change_slut_temp(3)
+        $ loser.change_slut(1)
 
         if loser.effective_sluttiness() >= 60:
             $ scene_manager.update_actor(winner_one, position = "walking_away")
@@ -238,7 +238,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "[loser.possessive_title] sheepishly walks down the lobby."
         $ scene_manager.update_actor(loser, position = "walking_away")
         "The other girls stand back and watch, giggling amongst themselves."
-        $ loser.change_slut_temp(3)
+        $ loser.change_slut(1)
         $ scene_manager.remove_actor(loser)
         "You walk up to [winner_one.possessive_title] and [winner_two.possessive_title]."
         mc.name "Ok, girls you had your fun, now back to work."

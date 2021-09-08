@@ -27,7 +27,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                    $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
                     $ against_wall.redraw_scene(the_girl)
@@ -46,7 +46,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches for your cock, removes the condom, and ties the end in a knot."
                 the_girl "Look at all that cum. Well done."

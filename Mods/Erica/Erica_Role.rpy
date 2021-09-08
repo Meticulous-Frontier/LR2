@@ -2441,7 +2441,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.strip_full_outfit(strip_feet = True) # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
-            $ erica.change_slut_temp(2)
+            $ erica.change_slut(2)
             $ erica.change_happiness(2)
             $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
             $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)

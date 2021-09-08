@@ -168,7 +168,7 @@ label family_morning_breakfast_enhanced_label():
                     lily "Fine, but this is really weird, okay?"
                     $ scene_manager.update_actor(mom, position = "sitting")
                     "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."
-                    $ lily.change_slut_temp(3)
+                    $ lily.change_slut(2)
                     $ mom.change_happiness(5)
 
 
@@ -196,7 +196,7 @@ label family_morning_breakfast_enhanced_label():
             mom "Now, would you like some breakfast or not?"
             "[lily.title] sighs dramatically."
             lily "Fine, but this is really weird, okay?"
-            $ lily.change_slut_temp(3)
+            $ lily.change_slut(2)
             $ mom.change_happiness(5)
             $ scene_manager.update_actor(mom, position = "sitting")
             "[mom.possessive_title] gives everyone a plate and sits down. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."

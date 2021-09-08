@@ -1021,13 +1021,13 @@ label relationship_sex_watch(the_person, the_relation, the_position):
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
-        $ change_report = the_person.change_slut_temp(1)
+        $ change_report = the_person.change_slut(1)
         "[title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my..."
-        $ change_report = the_person.change_slut_temp(2)
+        $ change_report = the_person.change_slut(2)
         "[title] watches quietly while you and her [the_relation] [the_position.verb]."
 
     else:

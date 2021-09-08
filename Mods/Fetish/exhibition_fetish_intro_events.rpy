@@ -83,7 +83,7 @@ init 50 python:
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
         the_person.max_opinion_score("anal sex")
-        the_person.core_sluttiness = 70
+        the_person.sluttiness = 70
         the_person.sluttiness = 70
         the_person.obedience = 0
         the_person.happiness = 100

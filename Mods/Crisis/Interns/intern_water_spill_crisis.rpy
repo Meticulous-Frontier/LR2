@@ -36,7 +36,7 @@ label intern_water_spill_crisis_label():
         $ the_clothing.colour[3] *= 1.25
         "After a few minutes she's back, with her [the_clothing.name] dried off and no longer transparent."
         $ the_person.draw_person()
-        $ the_person.change_slut_core(1)
+        $ the_person.change_slut(1)
         the_person "Ugh, that was so embarrassing. Lets just forget about that, okay?"
         mc.name "Of course, back to your homework then, right?"
         "You help [the_person.possessive_title] sort out her homework issues, then get back to work."
@@ -56,7 +56,7 @@ label intern_water_spill_crisis_label():
                 "Right, your homework...":
                     the_person "I hope I'm not distracting you. I can dry my shirt off if you'd prefer."
                     mc.name "No, that's fine. Just remind me again what we were talking about."
-                    $ the_person.change_slut_core(1)
+                    $ the_person.change_slut(1)
                     "You help [the_person.possessive_title] with her homework questions while she stands topless beside your desk."
                     $ the_person.int += 1
 
@@ -92,7 +92,7 @@ label intern_water_spill_crisis_label():
 
                     the_person "There, I hope that's good enough."
                     mc.name "Much better. Now, back to your homework."
-                    $ the_person.change_slut_core(3)
+                    $ the_person.change_slut(3)
                     $ the_person.change_obedience(5)
                     $ the_person.int += 1
                     if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
@@ -117,7 +117,7 @@ label intern_water_spill_crisis_label():
                     $ the_clothing.colour[3] *= 1.25
                     "After a few minutes she's back, with her [the_clothing.name] dried off and no longer transparent."
                     $ the_person.draw_person()
-                    $ the_person.change_slut_core(1)
+                    $ the_person.change_slut(1)
                     the_person "Ugh, that was so embarrassing. Lets just forget about that, okay?"
                     mc.name "Of course, back to your homework then, right?"
                     "You help [the_person.possessive_title] with her homework, then get back to work."
@@ -131,7 +131,7 @@ label intern_water_spill_crisis_label():
                         "[the_person.title] looks down at her top, then nods and continues. At least the transparent clothing helps make the boring topic more interesting."
                     $ mc.change_locked_clarity(5)
                     $ the_person.change_obedience(1)
-                    $ the_person.change_slut_core(1)
+                    $ the_person.change_slut(1)
                     "After a few minutes you've answered all of [the_person.possessive_title]'s questions, and she heads off to dry her [the_clothing.name]."
                     $ the_clothing.colour[3] *= 1.25
                     $ the_person.int += 1
@@ -141,7 +141,7 @@ label intern_water_spill_crisis_label():
                     the_person "I... Okay, fine. I really need your help on this."
                     $ the_person.draw_animated_removal(the_clothing)
                     $ the_person.change_happiness(-5)
-                    $ the_person.change_slut_temp(2)
+                    $ the_person.change_slut(2)
                     $ the_person.change_obedience(2)
                     $ mc.business.change_team_effectiveness(-10)
                     "[the_person.title] clearly isn't happy, but she takes off her [the_clothing.name] and resumes talking about her homework."

@@ -103,7 +103,7 @@ label scene_spanking_1(the_girl, the_location, the_object):
          the_girl "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
          "She is really getting into this. With each spank she wiggles her ass, giving you an enticing target."
          $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
-         $ the_girl.change_slut_temp(spank_factor - 5)
+         $ the_girl.change_slut(spank_factor - 5)
     elif spank_factor > 0:
          the_girl "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
          "She keeps her ass still, taking your blows. Her ass makes an enticing target."

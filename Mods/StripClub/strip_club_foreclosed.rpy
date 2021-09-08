@@ -268,7 +268,7 @@ label club_foreclosed_strip_label(the_person):
                 "A moment later she's back in the bathroom changing her clothes again."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
-                $ the_person.change_slut_temp(10)
+                $ the_person.change_slut(5)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
                 the_person "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
@@ -310,7 +310,7 @@ label club_foreclosed_strip_label(the_person):
                 "A moment later she's back in the bathroom changing again her clothes."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
-                $ the_person.change_slut_temp(10)
+                $ the_person.change_slut(5)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
                 the_person "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")
@@ -352,7 +352,7 @@ label club_foreclosed_strip_label(the_person):
                 "A moment later she's back in the bathroom changing again her clothes."
                 $ the_person.update_outfit_taboos()
                 $ the_person.apply_planned_outfit()
-                $ the_person.change_slut_temp(10)
+                $ the_person.change_slut(5)
                 $ the_person.draw_person(emotion = "happy", position = "stand4")
                 the_person "Thank you for the money, see you!"
                 $ the_person.draw_person(position = "walking_away")

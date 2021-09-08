@@ -765,7 +765,7 @@ label ellie_text_message_apology_label():
     the_person "When I was in school, I just stayed busy with schoolwork and never had a boyfriend or anything."
     the_person "Anyway, thanks for sending me this, I appreciate yer helping me out with it."
     $ the_person.change_love(3)
-    $ the_person.change_slut_temp(5)
+    $ the_person.change_slut(2)
     "You decide to send her a quick text back."
     mc.name "Happy to help. Let me know if you need any further demonstrations."
     $ mc.end_text_convo()

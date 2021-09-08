@@ -37,7 +37,7 @@ init 2 python:
 
     def get_heart_image_list(the_person): ##Returns a formatted string that will add coloured hearts in line with text, perfect for menu choices, ect.
         heart_string = ""
-        platinum_count = __builtin__.int(the_person.core_sluttiness // 100)
+        platinum_count = __builtin__.int(the_person.sluttiness // 100)
         if platinum_count > 4:  # prevent div by zero errors
             platinum_count = 4
         if platinum_count < 0: # prevent failure with negative numbers
@@ -51,7 +51,7 @@ init 2 python:
 
         capacity = 100.0 / (5 - platinum_count)
         for x in range(heart_start, heart_end - 15, __builtin__.int(capacity)):
-            heart_string += "{image=" + get_individual_heart(the_person.core_sluttiness - x, the_person.sluttiness - x, the_person.core_sluttiness + the_person.suggestibility - x, capacity) + "}"
+            heart_string += "{image=" + get_individual_heart(the_person.sluttiness - x, the_person.sluttiness - x, the_person.sluttiness + the_person.suggestibility - x, capacity) + "}"
         return heart_string
 
     def get_individual_heart(core_slut, temp_slut, suggest_slut, capacity  = 20): #Give this the core, temp, core+suggest slut, minus 20*(current heart-1) each and it will find out the current heart status for that chunk of the heart array.

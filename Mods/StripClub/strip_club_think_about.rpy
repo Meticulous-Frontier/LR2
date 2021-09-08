@@ -202,7 +202,7 @@ label starbuck_celebration_strip_event(the_person):
                         the_person "Okay, I don't care if someone enters the shop in the next few minutes, let them enjoy the show."
                     $ the_person.change_arousal(4 * (the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
                     $ the_person.change_love(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive"))
-                    $ the_person.change_slut_temp(2 *(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
+                    $ the_person.change_slut(2 *(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
                     $ should_be_private = False
                     "[the_person.title] climbs up on the shop counter using it as a walkway to perform her sexy dance."
             $ the_person.draw_person(emotion = "happy", position = "back_peek")
@@ -215,9 +215,9 @@ label starbuck_celebration_strip_event(the_person):
                     "Throw some cash\n{color=#ff0000}{size=18}Costs: $20{/size}{/color}":
                         $ mc.business.change_funds(-20)
                         "You throw $20 on the counter, [the_person.title] is definitely intrigued by your game."
-                        $ the_person.change_slut_temp(3 * the_person.get_opinion_score("showing her tits"))
+                        $ the_person.change_slut(2 * the_person.get_opinion_score("showing her tits"))
                     "Go on":
-                        $ the_person.change_slut_temp(1 * the_person.get_opinion_score("showing her tits"))
+                        $ the_person.change_slut(1 * the_person.get_opinion_score("showing her tits"))
 
                 $ the_person.draw_animated_removal(the_item)
                 if the_person.outfit.tits_visible():
@@ -234,9 +234,9 @@ label starbuck_celebration_strip_event(the_person):
                 menu:
                     "Throw some cash\n{color=#ff0000}{size=18}Costs: $20{/size}{/color}":
                         $ mc.business.change_funds(-20)
-                        $ the_person.change_slut_temp(3 * the_person.get_opinion_score("showing her ass"))
+                        $ the_person.change_slut(2 * the_person.get_opinion_score("showing her ass"))
                     "Go ahead":
-                        $ the_person.change_slut_temp(1 * the_person.get_opinion_score("showing her ass"))
+                        $ the_person.change_slut(1 * the_person.get_opinion_score("showing her ass"))
 
                 $ the_person.draw_animated_removal(the_item)
                 if the_person.outfit.vagina_visible():

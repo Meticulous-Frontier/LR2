@@ -120,8 +120,8 @@ init -1 python:
         # limit person stat values (anything over these values has no in-game effect)
         if self.sluttiness > 300:
             self.sluttiness = 300
-        if self.core_sluttiness > 300:
-            self.core_sluttiness = 300
+        if self.sluttiness > 300:
+            self.sluttiness = 300
         if self.obedience > 300:
             self.obedience = 300
         if self.love > 100:
@@ -893,7 +893,7 @@ init -1 python:
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
-            self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("skimpy outfits"), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
@@ -909,7 +909,7 @@ init -1 python:
             if self.outfit.get_panties() and self.outfit.get_panties().slut_value > 1:
                 lingerie_bonus += self.get_opinion_score("lingerie")
             lingerie_bonus = __builtin__.int(lingerie_bonus/2.0)
-            self.change_slut_temp(lingerie_bonus, add_to_log = False)
+            self.change_slut(lingerie_bonus, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
         if self.sluttiness < 40 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
@@ -919,17 +919,17 @@ init -1 python:
             if not self.outfit.wearing_panties():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
             underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
-            self.change_slut_temp(underwear_bonus, add_to_log = False)
+            self.change_slut(underwear_bonus, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 50
         if self.sluttiness < 50 and self.outfit and self.outfit.tits_visible():
-            self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("showing her tits"), add_to_log = False)
         if self.sluttiness < 50 and self.outfit and self.outfit.vagina_visible():
-            self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("showing her ass"), add_to_log = False)
 
         # showing everything only impacts sluttiness to level 60
         if self.sluttiness < 60 and self.outfit and self.outfit.full_access():
-            self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
         for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
             removal_list = []
@@ -1217,9 +1217,9 @@ init -1 python:
         if not love is None:
             self.change_love(love, add_to_log)
         if not slut_temp is None:
-            self.change_slut_temp(slut_temp, add_to_log)
+            self.change_slut(slut_temp, add_to_log)
         if not slut_core is None:
-            self.change_slut_core(slut_core, add_to_log)
+            self.change_slut(slut_core, add_to_log)
         if not energy is None:
             self.change_energy(energy, add_to_log)
         return
@@ -1676,7 +1676,7 @@ init -1 python:
             or (self.outfit.slut_requirement > self.sluttiness):
             self.apply_planned_outfit()
             if draw_person:
-                self.draw_person()            
+                self.draw_person()
             if dialogue:
                 self.call_dialogue("clothing_review") # must be last call in function
         return
@@ -2015,7 +2015,7 @@ init -1 python:
 
     def person_get_random_appropriate_outfit(self, guarantee_output = False):
         return self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), guarantee_output = guarantee_output, preferences = WardrobePreference(self))
-    
+
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
     def person_get_full_strip_list(self, strip_feet = True, strip_accessories = False):
@@ -2348,7 +2348,7 @@ init -1 python:
     def have_orgasm(self, the_position = None, the_object = None, half_arousal = True):
         mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
-        self.change_slut_temp(3)
+        self.change_slut(1)
         self.change_happiness(5)
         if half_arousal:
             self.change_arousal(-self.arousal/2)
