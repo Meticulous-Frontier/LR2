@@ -35,8 +35,8 @@ init -1 python:
         return
 
     def lustful_youth_perk_update_func():
-        if mc.energy < mc.max_energy():
-            mc.change_energy((get_lust_tier() * 20),add_to_log = False)
+        if mc.energy < mc.max_energy:
+            mc.change_energy((get_lust_tier() * 20), add_to_log = False)
         return True
 
     def lustful_youth_perk_unlock():
