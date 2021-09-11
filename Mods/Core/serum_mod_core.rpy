@@ -38,14 +38,15 @@ init -1 python:
 
         def __init__(self,name,desc, positive_slug = "", negative_slug = "",
             value_added = 0, research_added = 0, slots_added = 0, production_added = 0, duration_added = 0, base_side_effect_chance = 0, clarity_added = 0,
-            on_apply = None, on_remove = None, on_turn = None, on_day = None,
+            on_apply = None, on_remove = None, on_turn = None, on_day = None, on_move = None,
             requires = None, tier = 0, start_researched = False, research_needed=50, exclude_tags=None, is_side_effect = False,
             clarity_cost = 50, start_unlocked = False, start_enabled = True):
 
             self.enabled = start_enabled
 
-            SerumTrait.__init__(self, name, desc, positive_slug, negative_slug, value_added, research_added, slots_added, production_added, duration_added, base_side_effect_chance, clarity_added,
-                on_apply, on_remove, on_turn, on_day,
+            SerumTrait.__init__(self, name, desc, positive_slug, negative_slug,
+                value_added, research_added, slots_added, production_added, duration_added, base_side_effect_chance, clarity_added,
+                on_apply, on_remove, on_turn, on_day, on_move,
                 requires, tier, start_researched, research_needed, exclude_tags, is_side_effect,
                 clarity_cost, start_unlocked)
 
