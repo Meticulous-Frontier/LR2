@@ -19,21 +19,14 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                if mc.business.funds < 0:
-                    textbutton "Company Funds: $" + str(__builtin__.int(mc.business.funds)):
-                        style "transparent_style"
-                        text_style "menu_text_style"
+                textbutton "Company Funds: ${funds:,}".format(funds = __builtin__.int(mc.business.funds)):
+                    style "transparent_style"
+                    text_style "menu_text_style"
+                    if mc.business.funds < 0:
                         text_color "#DD0000"
-                        tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
-                        action NullAction()
-                        sensitive True
-                else:
-                    textbutton "Company Funds: $" + str(__builtin__.int(mc.business.funds)):
-                        style "transparent_style"
-                        text_style "menu_text_style"
-                        tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
-                        action NullAction()
-                        sensitive True
+                    tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
+                    action NullAction()
+                    sensitive True
 
                 textbutton "Daily Salary Cost: $"+ str(__builtin__.int(mc.business.calculate_salary_cost())):
                     style "transparent_style"

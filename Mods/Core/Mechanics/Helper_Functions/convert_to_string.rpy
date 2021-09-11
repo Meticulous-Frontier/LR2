@@ -14,14 +14,14 @@ init 0 python:
             return str(cm) + " cm"
 
     def get_energy_string(person):
-        percent = person.energy / person.max_energy
+        percent = person.energy * 1.0 / person.max_energy
         color_string = "{color=#43B197}"
         if percent < .5:
             color_string = "{color=#e1e113}"
         if percent < .2:
             color_string = "{color=#B14365}"
 
-        return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}" 
+        return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}"
 
     def get_person_weight_string(person):
         if use_imperial_system:

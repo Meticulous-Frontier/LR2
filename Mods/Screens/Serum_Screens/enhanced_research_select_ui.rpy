@@ -29,7 +29,7 @@ init -1 python:
                     trait_tags += "[" + a_tag + "]"
 
             if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
-                research_needed_string = "Research Impossible"
+                research_needed_string = "\nResearch Impossible"
             else:
                 research_needed_string = "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")"
 
@@ -100,7 +100,7 @@ init 2:
                             vbox:
                                 xsize 370
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    if any([x for x in list_of_traits if x.tier == dt and not x.researched and x.has_required()]):
+                                    if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and not x.researched and x.has_required()]):
                                         frame:
                                             background "#000000"
                                             xsize 365
@@ -235,7 +235,10 @@ init 2:
 
                 elif isinstance(selected_research, SerumTrait): #
                     if not selected_research.unlocked:
-                        $ button_name = "Unlock and Begin Research"
+                        if isinstance(selected_research, SerumTraitBlueprint):
+                            $ button_name = "Design and Unlock Trait"
+                        else:
+                            $ button_name = "Unlock and Begin Research"
                         $ button_name += "\nCosts: " + str(selected_research.clarity_cost) + " Clarity"
                         if selected_research.clarity_cost > mc.free_clarity:
                             $ button_sensitive = False
