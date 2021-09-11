@@ -39,7 +39,7 @@ init 2:
     screen research_select_ui: #How you select serum and trait research
         add "Science_Menu_Background.png"
 
-        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
         default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
         default selected_research = None #If not None a screen is shown, including a "begin research" button or an "unlock and research" button.
 
@@ -141,7 +141,7 @@ init 2:
                             vbox:
                                 xsize 400
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    if any([x for x in list_of_traits if x.tier == dt and x.researched]):
+                                    if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and x.researched]):
                                         frame:
                                             background "#000000"
                                             xsize 395
