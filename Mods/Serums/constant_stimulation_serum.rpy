@@ -18,7 +18,7 @@ init -1 python:
         if get_slut_tier(the_person) < 5:
             suggestion_bonus = (1 + get_suggest_tier(the_person) - get_slut_tier(the_person)) * 10
             if renpy.random.randint(0, 100) < 10 + suggestion_bonus - (the_person.get_opinion_score("taking control") * 5):
-                the_person.change_stats(slut_temp = 1, slut_core = renpy.random.randint(0, 1), add_to_log = add_to_log)
+                the_person.change_stats(slut = renpy.random.randint(0, 1), add_to_log = add_to_log)
 
     def add_constant_stimulation_serum():
         constant_stimulation_ther = SerumTraitMod(name = "Constant Stimulation",

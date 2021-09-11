@@ -1207,7 +1207,7 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, energy = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, slut_max = 30, energy = None, add_to_log = True):
         if not obedience is None:
             self.change_obedience(obedience, add_to_log)
         if not happiness is None:
@@ -1216,10 +1216,8 @@ init -1 python:
             self.change_arousal(arousal, add_to_log)
         if not love is None:
             self.change_love(love, add_to_log)
-        if not slut_temp is None:
-            self.change_slut(slut_temp, add_to_log)
-        if not slut_core is None:
-            self.change_slut(slut_core, add_to_log)
+        if not slut is None:
+            self.change_slut(slut, slut_max, add_to_log)
         if not energy is None:
             self.change_energy(energy, add_to_log)
         return
@@ -2278,7 +2276,7 @@ init -1 python:
         return self.has_role(cum_fetish_role)
 
     def has_breeding_fetish(self):
-        return self.has_role(breeding_fetish_role)
+        return self.has_role([breeder_role, breeding_fetish_role])
 
     def has_exhibition_fetish(self):
         return self.has_role(exhibition_fetish_role)

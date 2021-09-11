@@ -71,7 +71,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                         "She shoos you out of the room, seeming more upset about being interrupted than being seen naked."
                         $ hall.show_background()
                         $ clear_scene()
-                        $ the_person.change_stats(love = -2, slut_temp = 2, happiness = -2)
+                        $ the_person.change_stats(love = -2, happiness = -2)
                         call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_4
                     else:
                         "She looks up at you, slightly startled, and turns her body away from you."

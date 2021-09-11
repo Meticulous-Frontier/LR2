@@ -324,18 +324,18 @@ label quest_cure_discovery_patent_kept_label():
                 if skull_fuck in the_report.get("positions_used", []):  #You really roughed her up
                     "[the_person.possessive_title] mascara is running from tears caused by being gagged when you roughly fucked her throat."
                     mc.name "I know that this story had a happy ending, with the patent going to the Red Cross, but remember, this is my business. Don't do things behind my back again."
-                    $ the_person.change_stats(obedience = 10, love = -10, slut_temp = 5, slut_core = 2)
+                    $ the_person.change_stats(obedience = 10, love = -10, slut = 3, max_slut = 70)
                     "Her voice is trembling as she responds."
                     the_person "Yes... yes sir..."
                 elif deepthroat in the_report.get("positions_used", []):  #She took it deep.
                     "[the_person.possessive_title] is recovering from taking your cock deep down her throat."
                     mc.name "I know this story had a happy ending, with the patent going to the Red Cross, but please don't do things behind my back like that again."
-                    $ the_person.change_stats(obedience = 5, slut_temp = 5, slut_core = 3)
+                    $ the_person.change_stats(obedience = 5, slut = 2, max_slut = 70)
                     the_person "Yes sir, it won't happen again!"
                 else: #Just a BJ
                     "[the_person.possessive_title] licks her lips, she seems to have enjoyed getting on her knees for you."
                     mc.name "Thank you for doing the right thing, but please let me know before you take actions like that again."
-                    $ the_person.change_stats(love = 5, slut_temp = 3, slut_core = 2)
+                    $ the_person.change_stats(love = 5, slut = 1, max_slut = 70)
                     the_person "Yes sir."
                 mc.name "That'll be all for now."
                 $ the_person.draw_person(position = "walking_away")

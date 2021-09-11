@@ -361,14 +361,14 @@ label starbuck_being_watched(the_person, the_watcher, the_position):
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "Fuck [the_person.mc_title], maybe we should have gone to the back room?"
-        $ the_person.change_stats(arousal= -1, slut_temp = -1)
+        $ the_person.change_stats(arousal= -1)
         "[the_person.possessive_title] seems uncomfortable with [the_watcher.name] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.name]!"
         the_person "Orgy day at Starbuck's Sex Shop... that's actually a pretty good idea!"
-        $ the_person.change_stats(arousal = 1, slut_temp = 1)
+        $ the_person.change_stats(arousal = 1, slut = 1, max_slut = 30)
         "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return

@@ -110,7 +110,7 @@ label mom_breakfast_action_label_medium():
             $ scene_manager.update_actor(the_person, position = "stand4")
             the_person "You have a good day at work, I'm going to go umm, get changed!"
             $ the_person.draw_person(position = "walking_away")
-            $ the_person.change_stats(slut_temp = 3, obedience = 5)
+            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
             if the_person.sluttiness > 50:
                 $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
@@ -172,13 +172,13 @@ label mom_breakfast_action_label_medium():
                             "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                             mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
-                            $ the_person.change_stats(obedience = 5, slut_temp = 1)
+                            $ the_person.change_stats(obedience = 5)
                             return "Advance Time"
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                     mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
-                    $ the_person.change_stats(obedience = 5, slut_temp = 1)
+                    $ the_person.change_stats(obedience = 5)
                     return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
                     "You whisper in her ear."
@@ -210,7 +210,6 @@ label mom_breakfast_action_label_medium():
             the_person "Of course dear, I was just getting ready to go get ready for work..."
             $ scene_manager.update_actor(mom, position = "stand2")
             "As [the_person.possessive_title] starts to get up, she looks at you. You make sure she notices as you lick some of her juices off your fingers."
-            $ the_person.change_stats(slut_core = 1, slut_temp = 3)
             the_person "Oh my..."
             $ scene_manager.update_actor(mom, position = "walking_away")
             "[the_person.title] turns and leaves the kitchen in a hurry. You quickly finish breakfast and head out as well."

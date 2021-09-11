@@ -2475,7 +2475,7 @@ label mom_ntr_mod_action_label:
     $ del wife_name
     $ finish = None
     $ position = None
-    $ the_person.change_stats(slut_temp = 5)
+    $ the_person.change_stats(slut = 1, max_slut = 60)
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ mc.change_location(bedroom)

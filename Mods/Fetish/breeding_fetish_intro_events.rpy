@@ -562,7 +562,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "Her hole is quivering as she cums at the same time, milking your cock for every last drop of seed."
     $ the_person.cum_in_vagina()
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
-    $ the_person.change_stats(happiness = 5,  slut_temp = 5, slut_core = 5)
+    $ the_person.change_stats(happiness = 5, slut = 2)
     $ the_person.draw_person(position = "doggy")
     "Eventually the twitching stops, for both of you. You did it. You dumped your seed into your sister's unprotected, fertile snatch."
     "When she slowly pulls off you, your seed immediately begins to leak out of her and down her legs. You make sure to get the whole thing in frame."

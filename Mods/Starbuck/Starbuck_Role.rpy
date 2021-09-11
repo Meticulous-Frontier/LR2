@@ -295,11 +295,11 @@ label starbuck_vaginal_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh wow... I've never... I came so many times..."
-                            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+                            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 60)
                             the_person "Let's do that again soon!"
                         elif the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... The orgasms that thing gives..."
-                            $ the_person.change_stats(obedience = 2, slut_temp = 1, slut_core = 1)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 60)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -348,11 +348,11 @@ label starbuck_anal_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh wow... I've never... I came so many times!"
-                            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+                            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 70)
                             the_person "Let's do that again soon!"
                         elif the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... I came so hard!"
-                            $ the_person.change_stats(obedience = 2, slut_temp = 1, slut_core = 1)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 70)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -396,11 +396,11 @@ label starbuck_oral_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh my god, I came so many times... did you make me squirt?"
-                            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+                            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
                             the_person "Let's do that again soon!"
                         elif the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... That felt so good!"
-                            $ the_person.change_stats(obedience = 2, slut_temp = 1, slut_core = 1)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -446,7 +446,7 @@ label starbuck_foreplay_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... The orgasms that thing gives..."
-                            $ the_person.change_stats(obedience = 2, slut_temp =2, slut_core = 2)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 20)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -971,7 +971,7 @@ label starbuck_sex_store_promo_two_label(the_person):
                 "You get up and start getting dressed. [the_person.possessive_title] calls out to you."
                 the_person "Thank you [the_person.mc_title], for all your help. I wouldn't have made it this far without you."
             mc.name "Thanks [the_person.title]. It has been a pleasure helping you out. Please let me know if you'd like... help... again in the future with your reviews!"
-            $ the_person.change_stats(love = 5, happiness = 10, slut_core = 1, slut_temp = 3)
+            $ the_person.change_stats(love = 5, happiness = 10, slut = 1, max_slut = 50)
             $ perk_system.add_stat_perk(Stat_Perk(description = "Increase vaginal skill after helping Starbuck with her demonstration video. +1 Vaginal Skill", vaginal_bonus = 1, bonus_is_temp =False), "Starbuck Vaginal Bonus")
             "Fucking and pleasing an experienced woman like [the_person.title] makes you feel more confident in your vaginal skills."
             "You go back and take a look at the camera. You accidentally left it recording! It has a recording of you and [the_person.possessive_title] fucking!"
@@ -992,7 +992,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             the_person "Oh... right, I'm sure that's going to be a lot of hard work..."
             "You chat with her for a few minutes about the details of setting up a review site, but eventually it's time to say goodbye."
             the_person "Thanks for the help [the_person.mc_title], if you find yourself needing anything later... just ask okay?"
-            $ the_person.change_stats(love = -5, happiness = -5, slut_core = 1, slut_temp = 3)
+            $ the_person.change_stats(love = -5, happiness = -5, slut = -1)
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
@@ -1115,7 +1115,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "[the_person.possessive_title] struggles a bit against her handcuffs, but she is helpless to defend herself from your spanking."
     "[the_person.possessive_title]'s moaning intensifies rapidly, until finally she takes a sharp breath and tenses up."
     $ the_person.call_dialogue("climax_responses_vaginal")
-    $ the_person.change_stats(happiness = 4, slut_temp = 3, slut_core = 1)
+    $ the_person.change_stats(happiness = 4, slut = 1, max_slut = 50)
     "You keep up your pace while [the_person.possessive_title] cums. With each pulse of her pussy around your cock you spank her ass."
     the_person "Ah!"
     "You enjoy the way her tight ass jiggles and spank it again."
@@ -1127,7 +1127,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person "OHHH! Fuck me [the_person.mc_title]! HOLY FUCK!"
     "[the_person.possessive_title]'s entire body begins to tremble as another orgasm hits her. Her pussy spasms wildly all around you and you can see her hips quaking."
     $ the_person.call_dialogue("climax_responses_vaginal")
-    $ the_person.change_stats(happiness = 4, arousal = 20, slut_temp = 3, slut_core = 1)
+    $ the_person.change_stats(happiness = 4, arousal = 20, slut = 1, max_slut = 50)
     $ mc.change_arousal(20)#80
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title]'s orgasm is milking your cock. It is rapidly pushing you past the point of no return."
@@ -1140,7 +1140,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     mc.name "Ah, I'm going to cum!"
     "You bottom out and explode deep inside of [the_person.possessive_title]. The heat of your semen painting her vaginal walls sends her into another orgasm."
     the_person "OH! I'M CUMMING AGAIN! YES [the_person.mc_title]!"
-    $ the_person.change_stats(happiness = 4, slut_temp = 3, slut_core = 1)
+    $ the_person.change_stats(happiness = 4, slut = 1, max_slut = 50)
     $ the_person.cum_in_vagina()
     $ the_person.draw_person(position = "doggy")
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)

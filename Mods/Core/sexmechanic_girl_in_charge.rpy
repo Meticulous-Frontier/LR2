@@ -552,12 +552,12 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                     "She laughs at your plight while she considers what to do."
                     if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continuing
                         the_person "Hmm, I guess it's only fair. Maybe I'll even finish again!"
-                        $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                        $ the_person.change_stats(obedience = -5)
                         call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
                     else:
                         the_person "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
                         "[the_person.possessive_title] gets up, leaving you hanging."
-                        $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                        $ the_person.change_stats(obedience = -5, slut = -1)
                 "Finish":
                     mc.name "There's nothing special about you. Let's be done, I can always get a more willing cunt."
                     the_person "Whatever [the_person.mc_title], your loss!"

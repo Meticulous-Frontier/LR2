@@ -771,7 +771,7 @@ label ashley_post_handjob_convo_label(the_person):
             mc.name "Don't worry, [the_person.title]. I had a great time at the concert... and what happened in my office was fucking hot..."
             "[the_person.possessive_title] looks up at you, a bit surprised by your comment."
             the_person "Oh... I'm glad you think so..."
-            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+            $ the_person.change_stats(obedience = 5, slut = 1, slut_max = 40)
         "Tell her it was hot \n{color=#ff0000}{size=18}Requires 20 Sluttiness{/size}{/color} (disabled)" if the_person.sluttiness < 20:
             pass
     "You get to the coffee shop. You order a couple coffees and sit down in a booth across from [the_person.possessive_title]."
@@ -1295,7 +1295,7 @@ label ashley_second_concert_date_label():
     else:
         $ the_person.draw_person(position = "standing_doggy")
         "When you finish, [the_person.possessive_title]'s legs wobble, then start to give out. She catches herself up against the wall but has trouble standing up."
-        $ the_person.change_stats(happiness = 10, obedience = 5, love = 5, slut_temp = 20)
+        $ the_person.change_stats(happiness = 10, obedience = 5, love = 5, slut = 2)
         the_person "Fuck that was good... where the hell have you been all my life?"
         "She tries to stand up for a second, but quickly leans against the wall again."
         the_person "My legs... they don't work... I'm going to have to pay you back for this another time. Don't worry I swear I'm good for it."

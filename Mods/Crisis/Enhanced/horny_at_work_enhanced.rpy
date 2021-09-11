@@ -116,7 +116,7 @@ label horny_at_work_crisis_enhanced_label():
                 "You lock eyes with her as you stroke your cock."
                 mc.name "I'm taking a break and blowing off some steam. If you're uncomfortable you're welcome to leave."
 
-                $ active_person.change_stats(happiness = -30, obedience = -2, slut_temp = 2)
+                $ active_person.change_stats(happiness = -30, obedience = -2)
 
                 "She tries to glare at you, but she can't keep her eyes from drifting down to your hard shaft."
                 "When it becomes clear you aren't going to stop, let alone apologize, she stands up and storms out of the room."
@@ -134,7 +134,7 @@ label horny_at_work_crisis_enhanced_label():
 
                 python:
                     for unhappy_person in unhappy_people: #Note that the main person was removed from the list so these penalties aren't being applied twice.
-                        unhappy_person.change_stats(happiness = -30, obedience = -2, slut_temp = 2)
+                        unhappy_person.change_stats(happiness = -30, obedience = -2)
                         unhappy_person.change_location(lobby) #Move everyone to the lobby so they aren't considered observers for the rest of teh event.
                         scene_manager.remove_actor(unhappy_person)
                     unhappy_person = None

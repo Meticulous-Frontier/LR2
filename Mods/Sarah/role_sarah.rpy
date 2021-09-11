@@ -1225,7 +1225,7 @@ label Sarah_get_drinks_label():
         mc.name "Great! Yeah if you get the urge, I'm up for a hookup now and then."
         the_person "Okay. You'd better satisfy me though!"
         "You give her a wink and a nod."
-        $ the_person.change_stats(happiness = 5, slut_temp = 3, slut_core = 1)
+        $ the_person.change_stats(happiness = 5, slut = 1, max_slut = 60)
         the_person "Alright... I'm just gonna lay here for a moment. It's been a long day, I need to take a few minutes before I get up."
         "She rolls over, facing away from and relaxes for a bit, enjoying coming down from the high of fucking."
         "She is starting to doze off, when suddenly she wakes up and gets up."
@@ -1364,7 +1364,7 @@ label Sarah_epic_tits_label():
         the_person = sarah
         the_person.tits = "F"
         the_person.event_triggers_dict["epic_tits_progress"] = 3
-        the_person.change_stats(slut_temp = 5, slut_core = 5)
+        the_person.change_stats(happiness = 5, slut = 1, max_slut = 40)
     call Sarah_tits_reveal_label() from Sarah_epic_tits_call_1
     return
 
@@ -1373,7 +1373,7 @@ label Sarah_new_tits_label():
         the_person = sarah
         the_person.tits = "D"
         the_person.event_triggers_dict["epic_tits_progress"] = 2
-        the_person.change_stats(slut_temp = 3, slut_core = 3)
+        the_person.change_stats(happiness = 3, slut = 1, max_slut = 40)
     call Sarah_tits_reveal_label() from Sarah_new_tits_call_1
     return
 
@@ -1758,7 +1758,7 @@ label Sarah_stripclub_story_label():
     $ the_person.change_arousal(30)
     the_person "Yes! Oh fuck I'm gonna cum!!!"
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "standing_doggy")
-    $ the_person.change_stats(happiness = 5, obedience = 5, slut_temp = 3)
+    $ the_person.change_stats(happiness = 5, obedience = 5, slut = 1, max_slut = 50)
     "You grip her hips roughly to hold her still as you bring her to a climax. Her knees start to buckle but you hold her ass firmly in place."
     "She gives a low, steady moan when she finally finishes climaxing."
     $ the_person.change_arousal(-(the_person.arousal / 3))

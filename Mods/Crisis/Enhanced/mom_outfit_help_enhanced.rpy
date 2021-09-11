@@ -72,7 +72,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
                         $ the_person.draw_person(emotion = "angry")
-                        $ the_person.change_stats(happiness = -5, slut_temp = 1 + the_person.get_opinion_score("not wearing anything"))
+                        $ the_person.change_stats(happiness = -5, slut = 1 + the_person.get_opinion_score("not wearing anything"), max_slut = 20)
                         the_person "[the_person.mc_title], are you watching me change!"
                         mc.name "No, I... The mirror was just sort of there."
                         "She covers herself with her hands and motions for the door."
@@ -172,7 +172,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
                         $ the_person.draw_person(emotion = "angry")
-                        $ the_person.change_stats(happiness = -5, slut_temp = 1 + the_person.get_opinion_score("not wearing anything"))
+                        $ the_person.change_stats(happiness = -5, slut = 1 + the_person.get_opinion_score("not wearing anything"), max_slut = 20)
                         the_person "[the_person.mc_title], are you watching me change!"
                         mc.name "No, I... The mirror was just sort of there."
                         "She covers herself with her hands and motions for the door."
@@ -271,7 +271,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                     the_person "I'll be done in just a second [the_person.mc_title]..."
                                     "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
                                     $ the_person.draw_person(emotion = "angry")
-                                    $ the_person.change_stats(happiness = -5, slut_temp = 1 + the_person.get_opinion_score("not wearing anything"))
+                                    $ the_person.change_stats(happiness = -5, slut = 1 + the_person.get_opinion_score("not wearing anything"), max_slut = 20)
                                     the_person "[the_person.mc_title], are you watching me change!"
                                     mc.name "No, I... The mirror was just sort of there."
                                     "She covers herself with her hands and motions for the door."

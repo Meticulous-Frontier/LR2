@@ -278,6 +278,9 @@ init 5 python:
             if not person.outfit.full_access():
                 option_list.append(["Pause and strip her down","Strip"])
 
+            if person.has_role(hypno_orgasm_role) and object_choice is not None and not person.event_triggers_dict.get("hypno_orgasmed_recently", False):
+                option_list.append(["Trigger an orgasm","Hypno_Orgasm"])
+
             if not hide_leave: #TODO: Double check that we can always get out
                 option_list.append(["Stop " + position_choice.verbing + " her and leave", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
 
@@ -430,7 +433,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
-        if round_choice == "Change" or round_choice == "Continue":
+        if round_choice == "Change" or round_choice == "Continue" or round_choice == "Hypno_Orgasm":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
                     call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
@@ -509,6 +512,11 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         if not stop_stripping:
                             call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
+                        if girl_in_charge and position_choice != None: # girls in charge and wants to spice things up
+                            if the_person.effective_sluttiness() > position_choice.slut_cap and the_person.arousal > position_choice.slut_cap:
+                                "[the_person.title] wants to spice things up."
+                                $ position_choice = None
+
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
             call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix_1
@@ -566,22 +574,30 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 #TODO: Add some personality specific dialogue
                 pass
 
+        elif round_choice == "Hypno_Orgasm":
+            $ the_person.event_triggers_dict["hypno_orgasmed_recently"] = True
+            $ the_word = the_person.event_triggers_dict.get("hypno_trigger_word","Cum").capitalize()
+            mc.name "[the_word]."
+            $ the_person.change_arousal(the_person.max_arousal)
+            "[the_person.possessive_title] whimpers with pleasure as your training takes hold of her brain."
+            call describe_girl_climax(the_person, position_choice, object_choice, private, report_log) from _call_describe_girl_fuck_person_bugfix #Calls just the climax stuff without costing energy.
+
         elif round_choice == "Girl Leave":
             $ finished = True
-        $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the begining of the loop we can set a mandatory choice for the first one.
+
+        $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
 
     python:
         clear_sex_modifiers(the_person)
 
         report_log["end arousal"] = the_person.arousal
-
-        $ the_person.arousal = (the_person.arousal/(report_log.get("girl orgasms",0)+1)) # The more you make her cum the more satisfied she will be. At 0 orgasms her arousal does not move - you've just edged her!
+        the_person.change_arousal(-(the_person.arousal/(report_log.get("girl orgasms",0)+1))) # The more you make her cum the more satisfied she will be. At 0 orgasms her arousal does not move - you've just edged her!
 
         mc.condom = False
         mc.recently_orgasmed = False
 
     if affair_ask_after and private and ask_girlfriend_requirement(the_person) is True and not the_person.relationship == "Single":
-        if the_person.love >= 60 and the_person.sluttiness >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enoguh, is moderately slutty, and you made her cum
+        if the_person.love >= 60 and the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enough, is moderately slutty, and you made her cum
             call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
     python:
@@ -850,7 +866,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     if skill_tag == "Anal":
                         the_person "No way, I want you to fuck my slutty ass raw!"
                     else:
-                        $ the_person.call_dialogue("condom_bareback_demand") #TODO: Write this. Girl demands you fuck her bareback, or she'll force you to do soemthing else. High Obedience will let you ignore her and wear one anyways.
+                        $ the_person.call_dialogue("condom_bareback_demand") #TODO: Write this. Girl demands you fuck her bareback, or she'll force you to do something else. High Obedience will let you ignore her and wear one anyways.
                     menu:
                         "Fuck her raw":
                             mc.name "Alright, as long as you know what you're getting into..."
@@ -950,7 +966,7 @@ label put_on_condom_routine(the_person):
         else:
             "[the_person.title] watches eagerly while you roll the condom on."
     elif the_person.get_opinion_score("bareback sex") > 0:
-        "You pull out a condom from your wallet and rip open the package. [the_person.title] watches disappointedly while you slide it on."
+        "You pull out a condom from your wallet and rip open the package. [the_person.title] watches disappointingly while you slide it on."
     else:
         "You pull out a condom from your wallet and rip open the package. [the_person.title] watches while you slide it on."
 
@@ -1059,13 +1075,13 @@ label relationship_being_watched(the_person, the_watcher, the_relation, the_posi
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
-        $ the_person.change_stats(arousal = -1, slut_temp = -1)
+        $ the_person.change_stats(arousal = -1, slut = -1)
         "[the_person.title] seems uncomfortable with her [the_relation] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
-        $ the_person.change_stats(arousal = 1, slut_temp = 1)
+        $ the_person.change_stats(arousal = 1, slut = 1, slut_max = 60)
         "[the_person.title] seems more comfortable [the_position.verbing] you with her [the_relation] around."
 
     return

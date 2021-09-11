@@ -3,7 +3,7 @@ init 5 python:
 
     def show_satisfying_people_information(person):
         my_string = "The following people currently satisfy the requirements: "
-        satisfying_list = mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130, exclude_list = [person])
+        satisfying_list = mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130, exclude_list = [person])
         if satisfying_list:
             for person in satisfying_list:
                 my_string += person.name + " " + person.last_name + ", "
@@ -14,7 +14,7 @@ init 5 python:
 
 
 label futuristic_serum_stage_2_enhanced_label(the_person):
-    if __builtin__.len(mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130)) <= 3: # If you don't have enough people who meet the requirements just get an update.
+    if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130)) <= 3: # If you don't have enough people who meet the requirements just get an update.
         mc.name "I'm still working on getting your test subjects ready. Could you remind me what you need?"
         the_person "To learn anything useful I need at least three girls who have been seriously affected by our serums. I need them to be obedient and open to some intimate testing procedures."
         "[the_person.title] requires three employees who satisfy the following requirements: Core Sluttiness 50+ and Obedience 130+"
@@ -24,7 +24,7 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
 
     mc.name "[the_person.title], I have your group of test subjects ready."
     the_person "Excellent, let me know who to call down and I'll begin as soon as possible."
-    $ possible_picks = mc.business.get_requirement_employee_list(core_slut_required = 50, obedience_required = 130, exclude_list = [the_person])
+    $ possible_picks = mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130, exclude_list = [the_person])
     call screen employee_overview(white_list = possible_picks, person_select = True)
     $ pick_1 = _return
     call screen employee_overview(white_list = possible_picks, black_list = [pick_1], person_select = True)

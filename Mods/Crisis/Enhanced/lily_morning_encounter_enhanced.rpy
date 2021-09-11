@@ -65,7 +65,7 @@ label lily_morning_encounter_enhanced_label():
                 the_person "You wish this ass was for you."
                 $ mc.change_locked_clarity(5)
                 "She spanks herself lightly and winks at you."
-                $ the_person.change_stats(slut_temp = 4, obedience = 2)
+                $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
 
         $ the_person.draw_person(position = "walking_away")
         "You reach the door to the kitchen and split up. You wait a second and enjoy the view as your [the_person.possessive_title] walks away."
@@ -100,7 +100,7 @@ label lily_morning_encounter_enhanced_label():
                     the_person "Fuck, please don't get me too wet. I don't want to have to explain that to Mom if she finds us."
                     "You flick your finger over [the_person.possessive_title]'s clit, then slide your hand back and kneed her ass some more."
                     $ mc.change_locked_clarity(20)
-                $ the_person.change_stats(slut_temp =5, love = 2)
+                $ the_person.change_stats(love = 2)
                 "When you reach the kitchen [the_person.title] reluctantly pulls away from you."
                 if the_person.effective_sluttiness() > 40:
                     call lily_morning_encounter_follow_up_one_label(the_person) from _call_from_lily_morning_encounter_enhanced_label_1
@@ -129,7 +129,7 @@ label lily_morning_encounter_enhanced_label():
                     mc.name "Sure thing sis. Keep going."
 
                 $ mc.change_locked_clarity(20)
-                $ the_person.change_stats(slut_temp =3, obedience = 3)
+                $ the_person.change_stats(obedience = 3, slut = 1, max_slut = 30)
 
                 "The two of you walk slowly towards the kitchen as [the_person.possessive_title] fondles your dick."
                 "When you reach the door to the kitchen she reluctantly pulls her hand out of your pants."
