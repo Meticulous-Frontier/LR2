@@ -1207,7 +1207,7 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, slut_max = 30, energy = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, slut_max = None, energy = None, add_to_log = True):
         if not obedience is None:
             self.change_obedience(obedience, add_to_log)
         if not happiness is None:
