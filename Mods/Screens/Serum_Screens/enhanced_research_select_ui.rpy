@@ -243,8 +243,8 @@ init 2:
                         if selected_research.clarity_cost > mc.free_clarity:
                             $ button_sensitive = False
                         else:
-                            $ button_actions.append(Function(selected_research.unlock_trait))
-                            $ button_actions.append(Function(mc.business.set_serum_research,selected_research))
+                            $ button_actions.append(Function(mc.business.set_serum_research, selected_research.unlock_trait))
+                            $ button_actions.append(SetScreenVariable("selected_research", None))
 
                     elif not selected_research.researched:
                         $ button_name = "Continue Unlocked Research"

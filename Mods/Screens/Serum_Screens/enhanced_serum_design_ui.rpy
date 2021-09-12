@@ -17,7 +17,7 @@ init 2:
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
 
-        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
         default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
 
         add "Science_Menu_Background.png"
