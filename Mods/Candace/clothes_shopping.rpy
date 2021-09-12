@@ -273,7 +273,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                 $ clear_scene()
                 "She closes the door. Damn, you must have gone a little overboard with that outfit..."
                 the_person "I'm going to change back into, you know, DECENT clothes."
-                $ the_person.change_stats(happiness = -5, slut = 1, slut_max = 60)
+                $ the_person.change_stats(happiness = -5, slut = 1, max_slut = 60)
             else:
                 the_person "Alright, what do you think?"
                 $ the_person.draw_person(position = "back_peek")
@@ -332,14 +332,14 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                 "Looks great!":
                     mc.name "The color and cut looks great on you!"
                     the_person "Aww, thank you! Okay that's enough peaking..."
-                    $ the_person.change_stats(slut = 1, slut_max = 40, happiness = 2)
+                    $ the_person.change_stats(slut = 1, max_slut = 40, happiness = 2)
                     $ count += 1
                     $ the_person.change_novelty(3)
                     $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person "Yeah I was afraid of that. Thank you for your honesty! Okay that's enough peaking..."
-                    $ the_person.change_stats(slut = 1, slut_max = 40, obedience = 2)
+                    $ the_person.change_stats(slut = 1, max_slut = 40, obedience = 2)
             $ clear_scene()
             $ the_person.apply_planned_outfit()
             "In another few moments, [the_person.title] emerges from the dressing room."
@@ -470,12 +470,12 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                 "Too risky\n{color=#ff0000}{size=18}Too aroused to say no{/size}{/color} (disabled)" if mc.arousal > 50:
                                     pass
 
-                    $ the_person.change_stats(slut = 1, slut_max = 40, happiness = 2)
+                    $ the_person.change_stats(slut = 1, max_slut = 40, happiness = 2)
                     $ the_person.wardrobe.add_underwear_set(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
                     the_person "Yeah I was afraid of that. Thank you for your honesty!"
-                    $ the_person.change_stats(slut = 1, slut_max = 40, obedience = 2)
+                    $ the_person.change_stats(slut = 1, max_slut = 40, obedience = 2)
                     $ clear_scene()
                     "You gawk for another moment, but eventually the door closes and [the_person.title] begins changing back into her normal outfit."
             $ the_person.apply_planned_outfit()

@@ -13,7 +13,7 @@ init 2 python:
     def production_failure_increase_sluttiness(person):
         for team_member in person.work.people:
             team_member.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
-            team_member.change_stats(slut = 1 + person.get_opinion_score("not wearing anything"), slut_max = 30, arousal = 50, add_to_log = False)
+            team_member.change_stats(slut = 1 + person.get_opinion_score("not wearing anything"), max_slut = 30, arousal = 50, add_to_log = False)
 
         mc.log_event("All " + person.work.formal_name + " staff affected","float_text_pink")
         return

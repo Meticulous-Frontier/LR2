@@ -1081,7 +1081,7 @@ label relationship_being_watched(the_person, the_watcher, the_relation, the_posi
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
-        $ the_person.change_stats(arousal = 1, slut = 1, slut_max = 60)
+        $ the_person.change_stats(arousal = 1, slut = 1, max_slut = 60)
         "[the_person.title] seems more comfortable [the_position.verbing] you with her [the_relation] around."
 
     return

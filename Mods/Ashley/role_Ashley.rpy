@@ -771,7 +771,7 @@ label ashley_post_handjob_convo_label(the_person):
             mc.name "Don't worry, [the_person.title]. I had a great time at the concert... and what happened in my office was fucking hot..."
             "[the_person.possessive_title] looks up at you, a bit surprised by your comment."
             the_person "Oh... I'm glad you think so..."
-            $ the_person.change_stats(obedience = 5, slut = 1, slut_max = 40)
+            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 40)
         "Tell her it was hot \n{color=#ff0000}{size=18}Requires 20 Sluttiness{/size}{/color} (disabled)" if the_person.sluttiness < 20:
             pass
     "You get to the coffee shop. You order a couple coffees and sit down in a booth across from [the_person.possessive_title]."

@@ -119,7 +119,7 @@ label lust_blowjob_intro_label():
     "[the_person.title] stands up."
     the_person "Wow, I hope that helps you focus again [the_person.mc_title]. If you need this again, just let me know..."
     mc.name "Don't worry, I will."
-    $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, slut_max = 50)
+    $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, max_slut = 50)
     $ the_person.review_outfit()
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] turns and walks out of your office. That went great!"
@@ -239,7 +239,7 @@ label lust_blowjob_office_label():
         "[the_person.title] stands up."
         the_person "Wow, I hope that helps you focus again [the_person.mc_title]. If you need this again, just let me know..."
         mc.name "Don't worry, I will."
-        $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, slut_max = 50)
+        $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, max_slut = 50)
         $ the_person.review_outfit()
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] turns and walks out of your office."
