@@ -97,6 +97,8 @@ init 2: # Add some additional
                             label "Text Style"
                             textbutton "{i}Italic{/i}" action [ToggleField(style.get("textbutton_text_style"), "italic", True, False), Function(style.rebuild)]
                             textbutton "{b}Bold{/b}" action [ToggleField(style.get("textbutton_text_style"), "bold", True, False), Function(style.rebuild)]
+                            label "Text Effects"
+                            textbutton "All Effects" action [ToggleField(persistent, "text_effects", True, False)]
 
                         vbox:
                             style_prefix "radio"
