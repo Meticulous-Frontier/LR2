@@ -174,7 +174,7 @@ init 2:
                         textbutton "Sluttiness: " + get_heart_image_list(person):
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is added to her sluttiness based on effect modifiers {image=question_mark_small}."
                             action NullAction()
                             sensitive True
 
