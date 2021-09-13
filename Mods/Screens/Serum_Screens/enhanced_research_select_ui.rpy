@@ -21,19 +21,26 @@ init -1 python:
             else: # Green
                 return "{color=#98fb98}" + str(trait.mastery_level) + "{/color}"
 
-        def get_trait_display_title(trait):
+        def get_trait_tags(trait):
             trait_tags = ""
             if trait.exclude_tags:
                 trait_tags = "\nExcludes Other: "
                 for a_tag in trait.exclude_tags:
                     trait_tags += "[" + a_tag + "]"
+            return trait_tags
 
+        def get_trait_display_title(trait):
+            trait_tags = get_trait_tags(trait)
             if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
                 research_needed_string = "\nResearch Impossible"
             else:
                 research_needed_string = "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")"
 
             return trait.name + " " + research_needed_string + trait_tags
+
+        def get_blueprint_display_title(trait):
+            trait_tags = get_trait_tags(trait)
+            return trait.name + " " + trait_tags
 
 init 2:
     screen research_select_ui: #How you select serum and trait research
@@ -94,20 +101,20 @@ init 2:
 
                         viewport:
                             xsize 380
-                            ysize 780
+                            ysize 560
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
                                 xsize 370
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and not x.researched and x.has_required()]):
+                                    if any([x for x in sorted_traits if x.tier == dt and not isinstance(x, SerumTraitBlueprint) and not x.researched and x.has_required()]):
                                         frame:
                                             background "#000000"
                                             xsize 365
                                             text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
 
                                         for trait in sorted_traits:
-                                            if trait.tier == dt and not trait.researched and trait.has_required():
+                                            if trait.tier == dt and not isinstance(trait, SerumTraitBlueprint) and not trait.researched and trait.has_required():
                                                 $ trait_title = get_trait_display_title(trait)
                                                 textbutton "[trait_title]":
                                                     style "textbutton_style"
@@ -127,6 +134,48 @@ init 2:
                                                         hover_background "#1a45a1"
                                                     xsize 365
 
+                        frame:
+                            background "#000080"
+                            xsize 380
+                            text "Design Blueprints" style "menu_text_title_style" xalign 0.5
+
+                        viewport:
+                            xsize 380
+                            ysize 100
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
+                                xsize 370
+                                for dt in range(mc.business.research_tier, -1, -1):
+                                    if any([x for x in sorted_traits if x.tier == dt and isinstance(x, SerumTraitBlueprint) and not x.researched and x.has_required()]):
+                                        # frame:
+                                        #     background "#000000"
+                                        #     xsize 365
+                                        #     text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+
+                                        for trait in sorted_traits:
+                                            if trait.tier == dt and isinstance(trait, SerumTraitBlueprint) and not trait.researched and trait.has_required():
+                                                $ trait_title = get_blueprint_display_title(trait)
+                                                textbutton "[trait_title]":
+                                                    style "textbutton_style"
+                                                    text_style "serum_text_style_traits"
+                                                    action SetScreenVariable("selected_research", trait)
+                                                    if selected_research == trait:
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#593f85"
+                                                        else:
+                                                            background "#59853f"
+                                                        hover_background "#a9d59f"
+                                                    else:
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#008000"
+                                                        else:
+                                                            background "#000080"
+                                                        hover_background "#1a45a1"
+                                                    xsize 365
+
+
+
                     vbox:
                         frame:
                             background "#000080"
@@ -141,7 +190,7 @@ init 2:
                             vbox:
                                 xsize 400
                                 for dt in range(mc.business.research_tier, -1, -1):
-                                    if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and x.researched]):
+                                    if any([x for x in sorted_traits if x.tier == dt and x.researched]):
                                         frame:
                                             background "#000000"
                                             xsize 395
