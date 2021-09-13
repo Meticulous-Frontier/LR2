@@ -17,7 +17,7 @@ init 2 python:
 
     ## oxytocin_side_effect_functions ##
     def oxytocin_side_effect_on_turn(the_person, the_serum, add_to_log):
-        the_person.change_love(1, add_to_log = False, max_modified_to = 40)
+        the_person.change_love(1, max_modified_to = 40, add_to_log = False)
 
     uncontrollable_arousal_side_effect = SerumTrait(name = "Uncontrollable Arousal",
         desc = "An unintended interaction produces a sudden and noticeable spike in the recipient's promiscuity, making them more agreeable to lewd interactions.",
