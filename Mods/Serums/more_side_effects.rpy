@@ -3,11 +3,9 @@ init 2 python:
 
     ## uncontrollable_arousal_side_effect_functions ##
     def uncontrollable_arousal_side_effect_on_apply(the_person, the_serum, add_to_log):
-        the_person.change_slut(20, add_to_log, fire_event = False)
         the_person.change_slut(20, add_to_log)
 
     def uncontrollable_arousal_side_effect_on_remove(the_person, the_serum, add_to_log):
-        the_person.change_slut(-20, add_to_log, fire_event = False)
         the_person.change_slut(-20, add_to_log)
 
     ## tryptamine_side_effect_functions ##
