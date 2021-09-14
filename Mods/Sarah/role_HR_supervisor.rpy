@@ -1438,7 +1438,7 @@ label HR_director_headhunt_interview_label(the_person):
             the_person "Ah... OK, well try to let me know next time, okay?"
             "You promise to do so."
             return
-        mc.name "Sure, meet me in my office"
+        mc.name "Sure, meet me in my office."
         $ mc.change_location(office)
         $ ceo_office.show_background()
         the_person "Hello [the_person.mc_title]!"

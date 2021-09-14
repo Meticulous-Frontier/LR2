@@ -1,7 +1,7 @@
 
 init 2 python:
     def sakari_mod_initialization():
-        sakari_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
+        #sakari_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
         sakari_base_outfit = Outfit("sakari's base accessories")
         the_glasses = modern_glasses.get_copy()
         the_glasses.colour = [.15, .15, .15, 1.0]
@@ -19,7 +19,7 @@ init 2 python:
         #global sakari_role
         global sakari
         sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour=["bald", [0.414, 0.305, 0.258,0]], hair_style = long_hair, skin="tan" , \
-            eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = sakari_wardrobe, \
+            eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = 18, start_happiness = 88, start_love = 0, \
             relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit,
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
