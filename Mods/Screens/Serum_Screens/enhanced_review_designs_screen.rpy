@@ -80,7 +80,7 @@ init 2:
                             action [Function(mc.business.remove_serum_design,selected_research), SetScreenVariable("selected_research", None)]
                         style "textbutton_style" text_style "menu_text_title_style" xanchor 0.5 xalign 0.5
             if isinstance(selected_research, SerumTrait):
-                use trait_tooltip(selected_research, , given_align = (0.97,0.07), given_anchor = (1.0,0.0)):
+                use trait_tooltip(selected_research, given_align = (0.97,0.07), given_anchor = (1.0,0.0)):
                     textbutton research_verb + " Trait":
                         if select_instead_of_delete:
                             action Return(selected_research)

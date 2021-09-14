@@ -34,6 +34,8 @@ init 2:
                     xsize 505
                     text the_trait.desc style "serum_text_style"
 
+                transclude
+
     screen trait_list_tooltip(the_traits, given_align = (0.0,0.0), given_anchor = (0.0,0.0)):
         vbox:
             align given_align
