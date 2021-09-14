@@ -1549,7 +1549,9 @@ init -1 python:
                 or any(x.parent_role in self.special_role for x in role)
         else:
             return role in self.special_role \
-                or role.parent_role in self.special_role
+                or role.parent_role in self.special_role \
+                or not find_in_list(lambda x: x.check_looks_like(role), self.special_role) is None
+
     Person.has_role = has_role
 
     def add_role(self, role):
