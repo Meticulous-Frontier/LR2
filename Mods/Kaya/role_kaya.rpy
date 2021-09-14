@@ -12,7 +12,7 @@ style kaya_lang:
 
 init 2 python:
     def kaya_mod_initialization():
-        kaya_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
+        #kaya_wardrobe = wardrobe_from_xml("ashley_Wardrobe")
         kaya_base_outfit = Outfit("kaya's base accessories")
         the_eye_shadow = heavy_eye_shadow.get_copy()
         the_eye_shadow.colour = [.26, .14, .21, 0.33]
@@ -30,7 +30,7 @@ init 2 python:
         #global kaya_role
         global kaya
         kaya = make_person(name = "Kaya", last_name ="Greene", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="black", hair_style = messy_hair, skin="tan" , \
-            eyes = "brown", personality = kaya_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = kaya_wardrobe, \
+            eyes = "brown", personality = kaya_personality, name_color = "#228b22", dial_color = "228b22",  \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 88, start_love = 0, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = kaya_base_outfit,
             forced_opinions = [["billiards", 2, False], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour yellow", 2, False], ["the colour red", 1, False]],
