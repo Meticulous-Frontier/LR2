@@ -126,7 +126,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
                 the_girl_1 "Damn that was hot... is it my turn next?"
                 return
             "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
-            if the_girl_2.get_opinion_score("creampies") > 0:
+            if the_girl_2.wants_creampie():
                 the_girl_2 "Yes! Fill me up with your cum!"
             if the_girl_2.get_opinion_score("bareback sex") > 0:
                 the_girl_2 "I love it when you shoot your seed so deep!"
