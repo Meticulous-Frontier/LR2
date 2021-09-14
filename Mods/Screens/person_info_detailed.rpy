@@ -156,6 +156,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                             vbox:
                                 for skill in dict_sex_skills:
                                     text dict_sex_skills[skill][0] + " Skill: " + str(the_person.sex_skills[dict_sex_skills[skill][0]]) style "menu_text_style"
+                                text "Novelty: " + str(the_person.novelty) + "%" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
