@@ -1,9 +1,9 @@
 init 0 python:
     # Overrides VREN's height function, so we display the height based on the weight property
     # instead of the fixed weight on zoom factor
-    # currently between 60 inch (152.4) - 70 inch (177.8) (based on * 50 + 20).
+    # currently between (147cm) - (197cm).
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
-        total_inches = __builtin__.round((person_height * 50) + 20)
+        total_inches = __builtin__.round(((person_height * 250) - 53) / 2.54)
         feet = __builtin__.int(total_inches // 12)
         inches = __builtin__.int(total_inches % 12)
 
