@@ -1,10 +1,10 @@
 init python:
     def essential_oil_function_on_apply(the_person, the_serum, add_to_log):
-        the_person.change_happiness(5)
+        the_person.change_happiness(5, add_to_log = add_to_log)
         return
 
     def essential_oil_function_on_remove(the_person, the_serum, add_to_log):
-        the_person.change_happiness(-5)
+        the_person.change_happiness(-5, add_to_log = add_to_log)
         return
 
 
