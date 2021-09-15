@@ -581,7 +581,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "It feels like saliva is dripping off your cock now, when you hear more motion coming from the stall."
 
     if the_person.has_taboo(["condomless_sex", "anal_sex"]):
-        anon_char "I really need to feel you cock, but I didn't bring any condoms, do you mind?"
+        anon_char "I really need to feel your cock, but I didn't bring any condoms, do you mind?"
         mc.name "I don't mind, show me what you can do."
         $ the_person.break_taboo("condomless_sex", add_to_log = False)
         $ the_person.break_taboo("anal_sex", add_to_log = False)
@@ -660,7 +660,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "You aren't sure who is on the other side of the wall but her disappointment is tangible."
             "You hear movement coming from the stall next to you but you aren't sure what's they are doing."
             if the_person.has_taboo(["condomless_sex", "vaginal_sex"]):
-                anon_char "I really need to feel you cock, but I didn't bring any condoms, do you mind?"
+                anon_char "I really need to feel your cock, but I didn't bring any condoms, do you mind?"
                 mc.name "I don't mind, show me what you can do."
                 $ the_person.break_taboo("condomless_sex", add_to_log = False)
                 $ the_person.break_taboo("vaginal_sex", add_to_log = False)

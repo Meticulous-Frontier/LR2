@@ -430,7 +430,7 @@ label fetish_serum_self_code_menu(the_person):
             mc.name "This is too complicated, I think."
             the_person "Sorry, I'm not sure what to suggest."
             mc.name "Maybe we will have an opportunity to create new programs in the future."
-            #TODO create a HINT here that tells players to get atleast 15 total stats to proceed
+            #TODO create a HINT here that tells players to get at least 15 total stats to proceed
             return False
         else:
             "You look through the code for several minutes, and you start to catch on to how it works."
@@ -448,7 +448,7 @@ label fetish_serum_self_code_menu(the_person):
             "In addition, it would make them more willing to show their body, even out in public."
             the_person "Alright, let's see what we can do."
             "You spend some time setting up a new working directory while [the_person.title] starts making a list of possible dopamine triggers."
-            "Everything is now setup. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
+            "Everything is now set up. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_exhibition_serum()
@@ -459,7 +459,7 @@ label fetish_serum_self_code_menu(the_person):
             "You give [the_person.title] specifications that would make a person more willing to have anal sexual activity and be submissive to their partner."
             the_person "Alright, let's see what we can do."
             "You spend some time setting up a new working directory while [the_person.title] starts making a list of possible dopamine triggers."
-            "Everything is now setup. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
+            "Everything is now set up. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_anal_serum()
@@ -469,7 +469,7 @@ label fetish_serum_self_code_menu(the_person):
             "You give [the_person.title] specifications that would make a person enjoy semen exposure."
             the_person "Alright, let's see what we can do."
             "You spend some time setting up a new working directory while [the_person.title] starts making a list of possible dopamine triggers."
-            "Everything is now setup. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
+            "Everything is now set up. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_cum_serum()
@@ -479,7 +479,7 @@ label fetish_serum_self_code_menu(the_person):
             "You give [the_person.title] specifications that would make a person more willing to engage in reproduction and acts associated with it."
             the_person "Alright, let's see what we can do."
             "You spend some time setting up a new working directory while [the_person.title] starts making a list of possible dopamine triggers."
-            "Everything is now setup. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
+            "Everything is now set up. You can now spend time working on the new program in the lab. Your head researcher must be present to help."
             $ mc.business.event_triggers_dict["fetish_serum_coding_active"] = True
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_breeding_serum()
@@ -664,7 +664,7 @@ label fetish_serum_breeding_warning_label():
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
     the_person "Obviously, we expected the rats in the experimental group to produce more offspring, but the numbers were actually staggering."
     the_person "Normal rats produce about 80-120 offspring a year. The ones in our experimental group? On pace to produce over 500."
-    the_person "Gestation period for rats is fairly short in comparison to humans, but if we saw a similar effect, it would be like a woman produced 20-25 children..."
+    the_person "Gestation period for rats is fairly short in comparison to humans, but if we saw a similar effect, it would be like if a woman produced 20-25 children..."
     mc.name "That is very interesting."
     the_person "It wouldn't surprise me if repeated doses could lead someone to develop a breeding fixation or fetish."
     mc.name "I understand. Thank you for the update."

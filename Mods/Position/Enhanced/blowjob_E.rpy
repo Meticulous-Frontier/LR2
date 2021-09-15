@@ -185,7 +185,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
             if the_girl.has_cum_fetish() or the_girl.get_opinion_score("giving blowjobs") > 1:
                 "Without hesitation, [the_girl.possessive_title] leans forward and slides your dick down her throat."
             else:
-                "She gives a nod and slowly slides you cock half way down, until she starts gagging and pulls back."
+                "She gives a nod and slowly slides your cock half way down, until she starts gagging and pulls back."
                 the_girl "Erm, I still need to get used to your size."
 
         "Guide her":

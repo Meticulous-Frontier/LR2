@@ -561,7 +561,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Well, I don't. I'm no whore! Working on this program just has me curious and distracted..."
     mc.name "It's okay. It's called getting aroused, and it is perfectly natural for this to happen in response to being exposed to sexual situations."
     the_person "I... I don't think I can talk about this stuff!"
-    mc.name "It's okay. Tell you what, I'm going to talk to your through everything I'm doing, you don't have to say a word. If I start doing something you don't like, just stop me."
+    mc.name "It's okay. Tell you what, I'm going to talk to you through everything I'm doing, you don't have to say a word. If I start doing something you don't like, just stop me."
     the_person "Okay..."
     mc.name "Stand up."
     $ the_person.draw_person(position = the_person.idle_pose)
@@ -600,7 +600,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Yeah... It's good... but weird too. It's making me all warm... down there..."
     mc.name "That is arousal building up. We want to build that up as much as we can, and it will make it feel amazing when it releases."
     the_person "I... I dunno about that, but keep doing what you're doing... it's nice..."
-    mc.name "The weight of her heavy tits feels great in your hands. You really wish you could touch her flesh there, but for now you need to take things one step at a time."
+    "The weight of her heavy tits feels great in your hands. You really wish you could touch her flesh there, but for now you need to take things one step at a time."
     "When you feel her arousal start to plateau, you make your next move. With two fingers and a thumb, you start to knead her engorged nipples."
     $ the_person.change_arousal(10) #80
     the_person "Ah!"
@@ -610,7 +610,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     $ mc.change_locked_clarity(30)
     "Her body goes rigid."
     the_person "Ah! Was that... your... your thing!?!"
-    mc.name "Yes that is my penis."
+    mc.name "Yes, that is my penis."
     the_person "Don't you dare try and put that thing in me!"
     mc.name "Shhh, don't worry. I'm not even going to get it out of my pants. I'm just aroused too. It's okay."
     the_person "Ahh... okay..."
@@ -634,7 +634,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "NO! No... it's kinda nice."
     mc.name "You can move your hips a bit. It will help you control the pace to something that feels good to you, and it'll feel nice for me too."
     the_person "... okay..."
-    "Instinctual, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
+    "Instinctually, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "You can't help pushing your hips a bit up against her as well. It feels nice to have your cock against her ass."

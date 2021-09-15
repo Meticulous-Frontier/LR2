@@ -177,7 +177,7 @@ label aunt_drunk_cuddle_label():
                 mc.name "Of course not! Do you want me...?"
                 the_person "No! No it's okay, your hand is great right where it's at..."
                 "You feel her shift a bit as she props one leg up a little bit. You can't see under the covers, but she gasps as she begins to touch herself."
-                "You resume grind your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
+                "You resume grinding your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
                 $ mc.change_locked_clarity(30)
                 "After a few minutes, you feel yourself getting ready to cum."
                 mc.name "[the_person.title]... I'm..."

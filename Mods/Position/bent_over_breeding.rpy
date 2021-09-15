@@ -136,7 +136,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
                     "You can feel her juices dripping down from her slit in response to your touch."
             if the_girl.arousal > 90:
                 the_girl "Oh fuck! Don't stop! Don't you dare stop!"
-                "Her moans clearly indicate an impending orgasm. As best as you can, you fuck her while you roughly rub her clit."
+                "Her moans clearly indicate an impending orgasm. As best you can, you fuck her while you roughly rub her clit."
             else:
                 "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her."
     return

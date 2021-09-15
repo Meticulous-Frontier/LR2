@@ -36,7 +36,7 @@ init 1 python: #Original code is at -1, so make sure we are higher than that for
                 person.sex_skills["Oral"] = min(4, person.sex_skills["Oral"] + 1)
 
                 if person.get_opinion_score("giving blowjobs") <= -2:
-                    person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she atleast tries to give MC a blowjob.
+                    person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she at least tries to give MC a blowjob.
 
                 practice_cocksucking_report_action = Action("Cocksucking practice report crisis", employee_cocksucking_practice_report_requirement, "employee_cocksucking_practice_report_label", args = person, requirement_args = person)
                 mc.business.add_mandatory_crisis(practice_cocksucking_report_action)

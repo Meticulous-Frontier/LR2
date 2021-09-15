@@ -537,7 +537,7 @@ label HR_director_monday_meeting_label(the_person):
         the_person "Can do! Did you want to call in a girl for a counselling session this week?"
         menu:
             "Call one in":
-                mc.name "Yes I want to do that."
+                mc.name "Yes, I want to do that."
                 the_person "OK! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 if _return:
@@ -732,7 +732,7 @@ label HR_director_review_discoveries_label(the_person):
                 the_person "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
                 mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
                 "[the_person.title] looks into more details of the serum."
-                the_person "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably setup an something long term for the monday meetings..."
+                the_person "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably set up something long term for the monday meetings..."
                 mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                 the_person "Sounds good [the_person.mc_title]!"
 
@@ -746,11 +746,11 @@ label HR_director_review_discoveries_label(the_person):
                 if get_HR_director_tag("business_HR_coffee_tier", 0) == 0:
                     the_person "I know I brought this up last time we researched a similar serum, but having a serum like that to give employees when they come in for reviews would be very useful."
                     the_person "You should definitely consider it. I think it would give our meetings more impact with employees."
-                    the_person "This version of the serum... I think we could get something setup for about $1500. It's a little difficult to synthesize."
+                    the_person "This version of the serum... I think we could get something set up for about $1500. It's a little difficult to synthesize."
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                     the_person "Sounds good [the_person.mc_title]!"
                 else:
-                    the_person "We already have the equipment setup from the previously researched serum. We should be able to modify it to take advantage of this advancement."
+                    the_person "We already have the equipment set up from the previously researched serum. We should be able to modify it to take advantage of this advancement."
                     "[the_person.title] checks her notes on the synthesis process."
                     the_person "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."

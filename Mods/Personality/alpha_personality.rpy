@@ -694,7 +694,7 @@ label alpha_flirt_response_affair(the_person):
                     $ mc.change_locked_clarity(10)
                     "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
                     mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
-                    "She leans her body against yours for a moment and squeezes you cock. You give her butt a final slap and let go of her."
+                    "She leans her body against yours for a moment and squeezes your cock. You give her butt a final slap and let go of her."
 
         else: #She's shy or nervous about being discovered
             "[the_person.possessive_title] glances around, then glares at you sternly."

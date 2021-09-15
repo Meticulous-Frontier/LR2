@@ -70,7 +70,7 @@ label scene_SB_reverse_cowgirl_1(the_girl, the_location, the_object):
         "[the_girl.title] moans as she continues to ride you."
 
     else:
-        "[the_girl.possessive_title] works her hips up and down on you as best as she can."
+        "[the_girl.possessive_title] works her hips up and down on you as best she can."
         "She makes a couple shallow dips, then then sheathes you entirely. She makes a few awkward gyrations with her hips."
         the_girl "Mmm, it feels good. I wish I could fuck you as good as you fuck me."
         mc.name "Don't worry, it feels great, keep going."
@@ -474,7 +474,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             the_girl "That's it! Inside me! I need that seed deep!"
             $ the_girl.cum_in_vagina()
             $ SB_reverse_cowgirl.redraw_scene(the_girl)
-            "As you finish, you can feel her working her vaginal muscles, milking the cum from you cock as best as a she can."
+            "As you finish, you can feel her working her vaginal muscles, milking the cum from your cock as best she can."
             "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
             "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
         else:

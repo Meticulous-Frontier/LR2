@@ -34,7 +34,7 @@ init 1 python:
         for person in mc.business.production_team:
             if person.age < 25 and person.kids == 0: # young enough and no kids (she's daddy's little girl)
                 if not quest_director.is_person_blocked(person):
-                    if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for atleast 7 days#
+                    if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for at least 7 days#
                         if len(town_relationships.get_existing_parents(person)) == 0 and len(town_relationships.get_existing_sisters(person)) == 0: # no mother / sisters in game
                             able_person_list.append(person)
         return get_random_from_list(able_person_list)
@@ -185,7 +185,7 @@ label quest_production_line_intro_label(the_person):
     $ the_person.draw_person()
     mc.name "Hello there, [the_person.title]. Are you doing okay over here?"
     the_person "Hello [the_person.mc_title]. Yeah I guess, just struggling a bit with the small quantities of chemicals I am mixing up today."
-    the_person "You know, I was talking to my daddy last night about the work I'm doing here. He is a chemist at a big petrol company, and I was explaining to him the work I am doing."
+    the_person "You know, I was talking to my daddy last night about the work I'm doing here. He is a chemist at a big petroleum company, and I was explaining to him the work I am doing."
     mc.name "Oh yeah?"
     the_person "Yeah, he said he was surprised at a couple of our methods. He tried to explain some of it to me but to be honest I didn't really understand it."
     mc.name "Hmm, that sounds like it would be useful to have someone like that as a consultant."
@@ -370,7 +370,7 @@ label quest_production_line_help_move_label():
     #TODO her apartment which is actually different than the place she was earlier.
     $ the_person.draw_person()
     $ the_person.learn_home()
-    "Before we get to work, would you do me a favor? Could you grab a couple bottles of water from the fridge? I'm so thirsty!"
+    the_person "Before we get to work, would you do me a favor? Could you grab a couple bottles of water from the fridge? I'm so thirsty!"
     $ clear_scene()
     "You grab a couple of water bottles. [the_person.title] is still out in the trailer. Now would be a good time to drop a serum in her drink..."
     menu:

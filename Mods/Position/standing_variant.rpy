@@ -75,7 +75,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         menu:
             "Punish Her":
                  "SMACK"
-                 "You give [the_girl.possessive_title]'s ass hard swat. It leaves a clear red handprint on her behind."
+                 "You give [the_girl.possessive_title]'s ass a hard swat. It leaves a clear red handprint on her behind."
                  the_girl "Yow!"
                  mc.name "Sorry? That's not what I expect from you. Count how many times I spank you. How many times do you think you deserve?"
                  if the_girl.get_opinion_score("being submissive") > 0:

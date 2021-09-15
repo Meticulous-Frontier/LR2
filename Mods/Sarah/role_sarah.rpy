@@ -537,7 +537,7 @@ label Sarah_intro_label():
     the_person "Well, I would be in charge of the direction of the company in general, as far as work values, help with company morale..."
     "She goes on to list multiple duties, aspects of running a small business that you had honestly never considered before."
     "When she finishes, you consider things for a moment. It would be REALLY handy to have someone around like this. She already has some work experience, and is young and ready to prove herself."
-    "But, before you hire her, you would need to set up the HR director position at the company. Alternatively, you could still setup the new position, but hire someone else to fill the position."
+    "But, before you hire her, you would need to set up the HR director position at the company. Alternatively, you could still set up the new position, but hire someone else to fill the position."
     menu:
         "Offer to hire her":
             mc.name "So, as it turns out, I just recently started a new business making small run pharmaceuticals. You seem pretty knowledgeable, would you consider running the HR department?"
@@ -686,7 +686,7 @@ label Sarah_third_wheel_label():
     "She nods towards you."
     the_person "Yup! This is my bo... I mean, an old friend of mine. [mc.name] this is [naomi.title]!"
     "You make acquaintance and sit down. [naomi.title] also introduces you to her boyfriend."
-    "You chat for a bit, but notice that [naomi.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leary."
+    "You chat for a bit, but notice that [naomi.title] keeps checking you out. Normally you would be testing the waters with her, but with [the_person.title] here, you are a little leery."
     mc.name "Hey, how about I get us a couple drinks, [the_person.title]?"
     the_person "Oh! That sounds great! Can you get me an appletini?"
     "As you start to get up, [naomi.title]'s boyfriend also excuses himself to the restroom, leaving the girls alone."
@@ -733,7 +733,7 @@ label Sarah_third_wheel_label():
     the_person "Well, [naomi.title] said... she was asking me about you, asked if we were involved, and when I said no said she was going to make a pass at you tonight..."
     the_person "I just assumed, when I left the table that, I mean, why didn't you go with her?"
     "She assumed when her friend made a pass at you that you would bail on her! You quickly reassure her."
-    mc.name "[the_person.title], I came here to support you, and to spend time with my long lost friend having some fun and a few drinks."
+    mc.name "[the_person.title], I came here to support you, and to spend time with my long-lost friend having some fun and a few drinks."
     mc.name "If you think I'm going to miss out on that for a silly one night stand, you are mistaken."
     $ scene_manager.update_actor(the_person, position = "stand2", emotion = "happy")
     the_person "I'm sorry! I didn't mean that I think you're shallow or anything I just... Look, give me one more minute and I'll be right out, okay?"
@@ -741,7 +741,7 @@ label Sarah_third_wheel_label():
     "You step out of he lady's room and shortly after [the_person.title] steps out and joins you. You hand her the appletini."
     the_person "Thanks for waiting! I'm so sorry, I honestly thought you were going to go with them."
     the_person "Thank you for... I mean, everything you've done for me. You gave me a job, you let me drag you out to a bar with strangers, and then stuck with me even when you probably shouldn't have..."
-    mc.name "You're crazy, it's not everyday a long lost childhood friend literally knocks on your front door."
+    mc.name "You're crazy, it's not everyday a long-lost childhood friend literally knocks on your front door."
     the_person "You've always been amazing to me. I should have known better."
     $ the_person.change_stats(happiness = 10, obedience = 5, love = 5)
     "She takes a long sip of her drink. You begin to chat and catch up a bit."
@@ -788,7 +788,7 @@ label Sarah_third_wheel_label():
 label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
     "You decide to hit up the gym. You go to the lockerroom and change into workout clothes."
     "When you step out, you look at the different workout equipment. Since it's the weekend, maybe you should focus on some cardio?"
-    "You notice to side of the gym are some bike machines that happen to be facing a glass wall, peaking into a yoga class."
+    "You notice to side of the gym are some bike machines that happen to be facing a glass wall, peeking into a yoga class."
     "You sit down on the bike and look inside at the women doing their exercises. You realize you recognize someone!"
     $ the_person.draw_person(position = "stand3")
     "Inside the room is [the_person.possessive_title]. She is doing the stretches and move with the other women."
@@ -954,7 +954,7 @@ label Sarah_get_drinks_label():
         $ the_person.change_love(5)
         "You surprise yourself with your sappy toast. It seems to have the desired effect though, as she smiles wide with your toast."
     else:
-        the_person "Hey, let me grab the next round. I want to play a game though! Can you go get us a dart game setup?"
+        the_person "Hey, let me grab the next round. I want to play a game though! Can you go get us a dart game set up?"
         mc.name "Yeah, that actually sounds pretty fun. I'll do that."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.possessive_title] gets up and walks over to the bar while you head over to reserve a dart board."
@@ -976,7 +976,7 @@ label Sarah_get_drinks_label():
     "You notice the drinks are empty."
     mc.name "That was a good game. Want another round and another game?"
     $ scene_manager.update_actor(the_person, position = "stand4", emotion = "happy")
-    the_person "Oh! That sounds great! I'll get it setup!"
+    the_person "Oh! That sounds great! I'll get it set up!"
     "You walk over to the bartender and order another round. You walk back to the dart board and give [the_person.possessive_title] her drink."
     $ mc.business.change_funds(-20)
     the_person "Thanksh! I love these things..."
@@ -1566,7 +1566,7 @@ label Sarah_stripclub_story_label():
     mc.name "I've got a better idea. Why don't we both get a private dance?"
     "[the_person.title] raises an eyebrow."
     the_person "You mean... I figured that they only did private dances for guys..."
-    mc.name "Nah, if you give me a minute, I bet I can get it setup."
+    mc.name "Nah, if you give me a minute, I bet I can get it set up."
     the_person "But I don't have the money for two..."
     mc.name "Ah! Forget about it. I'll put it on the company card. This is a team building exercise, right?"
     the_person "Team building... right! I can get behind that!"
@@ -1953,7 +1953,7 @@ label Sarah_threesome_request_label():
     mc.name "So, I know we've talked about this before, but, is a threesome still something that you would be interested in doing sometime?"
     the_person "Oh god I would do anything, just to try it once. I know it may not turn out to be as good as I hope, but, I just want to TRY, you know!?!"
     "You don't remember pouring this shot, but you grab the drink in front of you and drain it."
-    mc.name "Alright, how about this. This time, next week, I'll have something setup."
+    mc.name "Alright, how about this. This time, next week, I'll have something set up."
     the_person "What? You mean it?"
     mc.name "Absolutely."
     the_person "That would be incredible... but... I mean, I feel like I have a right to know... who do you have in mind?"
@@ -2020,7 +2020,7 @@ label Sarah_threesome_request_label():
     $ scene_manager.strip_full_outfit(person = the_person)
     $ mc.change_locked_clarity(30)
     the_person "Aaahhhh, that's better."
-    "You cock is getting hard, looking at [the_person.title], completely naked in front of you."
+    "Your cock is getting hard, looking at [the_person.title], completely naked in front of you."
     call fuck_person(the_person) from _sarah_threesome_request_aftermath_1
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
@@ -2295,7 +2295,7 @@ label Sarah_initial_threesome_label():
     $ sarah.change_arousal(25)
     $ the_person.change_arousal(10)
     "You grind your erection into her backside. She is beginning to pant heavily."
-    sarah "Oh god... I need to stop... Give me as second!"
+    sarah "Oh god... I need to stop... Give me a second!"
     "You both pause while you wait for her. She looks [the_person.title] in the eyes..."
     sarah "I want to taste you. I've never kissed another woman down there... I want to try it!"
     the_person "Mmm, that sounds nice. Let's do it!"
@@ -3016,7 +3016,7 @@ label Sarah_weekend_date_strip_club_label():
                 $ mc.change_arousal(renpy.random.randint(5,15))
                 $ showgirl = None
             "Get a private dance  -$200":
-                mc.name "Want to get a private dance? I'll get it setup."
+                mc.name "Want to get a private dance? I'll get it set up."
                 the_person "Ohh, now we're talking! Sounds great!"
                 $ scene_manager.hide_actor(the_person)
                 call Sarah_date_strip_club_private_dance_label(the_person) from weekend_date_strip_club_strip_dance_01
@@ -3071,7 +3071,7 @@ label Sarah_naomi_reconciliation_label(the_person):
     the_person "If you don't mind me asking, are you still seeing [sarah.name]?"
     mc.name "Of course, she's one of my best employees."
     the_person "I would like to apologize to her, she's always been a good friend and we didn't part on best terms last time..."
-    mc.name "I remember, you where a real bitch the last time."
+    mc.name "I remember, you were a real bitch the last time."
     the_person "I know and I'm really sorry about that, I shouldn't have said that, I guess I let [so_name] influence me too much."
     mc.name "You know what, I will see what I can do for you, but first I need to talk this over with [sarah.name]."
     $ the_person.draw_person(emotion = "happy")
@@ -3175,7 +3175,7 @@ label Sarah_naomi_visits_to_apologize_label():
     else:
         the_person "Hello [sarah.name], it's good to see you, you look great."
     "Before you have any chance to say anything, [the_person.name], starts apologizing to [sarah.possessive_title]."
-    the_person "I'm so sorry, for the last time, you are my best friend, you where always there for me, I shouldn't have listened to that shit bag..."
+    the_person "I'm so sorry, for the last time, you are my best friend, you were always there for me, I shouldn't have listened to that shit bag..."
     "During her rambling, [sarah.possessive_title] sits down, without saying a word."
     $ scene_manager.update_actor(sarah, position = "sitting", emotion = "default")
     mc.name "SILENCE !!"
@@ -3211,7 +3211,7 @@ label Sarah_naomi_visits_to_apologize_label():
             $ scene_manager.update_actor(sarah, position = "sitting")
             mc.name "Well [the_person.name], did you know that [sarah.name] had a girl crush on you since you met?"
             $ scene_manager.update_actor(the_person, position = "stand2")
-            the_person "Oh...I didn't know that, is that why you where so angry with me after that night? Because my ex didn't let you join us?"
+            the_person "Oh...I didn't know that, is that why you were so angry with me after that night? Because my ex didn't let you join us?"
             $ the_person.change_arousal(10)
             "[sarah.possessive_title] looks at her and quietly nods."
             mc.name "[sarah.title], why don't you show her how wet your little snatch is..."
