@@ -147,7 +147,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
                     the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
-                    "You eat her out for several seconds, as best as you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
+                    "You eat her out for several seconds, as best you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
                 else:
                     "[the_girl.possessive_title] moans, the vibrations it causes around your shaft feels great."
@@ -251,7 +251,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
                     the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
-                    "You eat her out for several seconds, as best as you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
+                    "You eat her out for several seconds, as best you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
                 else:
                     "Lost in the pleasure, [the_girl.possessive_title] suddenly pulls you out of her throat."

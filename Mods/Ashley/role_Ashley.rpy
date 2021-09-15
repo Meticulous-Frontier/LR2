@@ -913,7 +913,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         mc.name "I honestly was not expecting this to happen so quickly either. We went on that date, and had a great time"
         mc.name "We started with just chatting, but it was like we couldn't keep our hands off each other... And then you walked in..."
         if the_person.love > 50:
-            "[the_person.title] is looking down, not making eye contact. You know she has feelings for you also, and is struggling with your new found affection for her sister."
+            "[the_person.title] is looking down, not making eye contact. You know she has feelings for you also, and is struggling with your newfound affection for her sister."
             the_person "That's... I mean, I guess I'm a good matchmaker, eh? I encouraged the whole thing, I shouldn't be surprised by it..."
             mc.name "And thank you for that. If it weren't for you, I never would have met [ashley.title]."
             the_person "Yeah... Just being honest here... It's hard not to be a little jealous?"
@@ -1346,7 +1346,7 @@ label ashley_second_concert_date_label():
     if date_outcome:
         if cum_clue:
             the_person "Oh fuck... it's all over my dress!"
-            "[the_person.possessive_title] gets some wipes from her clutch, but despite wiping it down as best as she can, it is still obvious she's been sprayed down."
+            "[the_person.possessive_title] gets some wipes from her clutch, but despite wiping it down as best she can, it is still obvious she's been sprayed down."
             the_person "Well... maybe my sister won't notice?"
             mc.name "Yeah. Maybe."
             "There's no way [stephanie.possessive_title] doesn't notice. But you have to get her home..."
@@ -1749,7 +1749,7 @@ label coffee_time_steph_gets_handsy_label():
                 "[the_person.title] just watches as [stephanie.title] brings her hand up from underneath the table and begins to lick your cum off of it."
                 $ the_person.add_jealous_event("She gave you a handjob at the coffee shop!", 1)
         else:
-            "You pick up a napkin and bring it under the table. You hold it in place as [stephanie.title] wipes her hand off on it. You grab another napkin and use it to clean yourself off as best as you can, hoping no one will notice."
+            "You pick up a napkin and bring it under the table. You hold it in place as [stephanie.title] wipes her hand off on it. You grab another napkin and use it to clean yourself off as best you can, hoping no one will notice."
     return
 
 label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the person one in this label.

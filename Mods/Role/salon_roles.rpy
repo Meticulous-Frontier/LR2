@@ -44,7 +44,7 @@ init 2 python:
         return False
 
     def ophelia_ex_bf_phone_overhear_requirement(person):
-        if day >= ophelia_get_day_dumped() + 14: #Wait atleast two weeks after getting dumped
+        if day >= ophelia_get_day_dumped() + 14: #Wait at least two weeks after getting dumped
             if person.location == mall_salon:
                 if person.sluttiness >= 20:
                     return True

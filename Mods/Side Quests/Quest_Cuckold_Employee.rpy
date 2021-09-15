@@ -1,5 +1,5 @@
 #Mid game quest. Is available mid game, will allow you to knock an employee up early..
-#Requires a married woman with no children atleast sluttiness... 40? 60?
+#Requires a married woman with no children at least sluttiness... 40? 60?
 #Employee approaches MC, asking if company has had any luck with fertility serum for males.
 #If fertility serum for males exist, she asks if anything else has been researched.
 #After no, she gets sad, goes away. 2 days later she approaches MC and says she is distraught because her husband is infertile, doesn't know what to do.
@@ -106,7 +106,7 @@ init 1 python:
     def quest_cuckold_employee_decision_requirement():
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if quest_cuckold_employee().quest_event_dict.get("start_day", 0) + 2 < day: #Atleast two days after first convo
+                if quest_cuckold_employee().quest_event_dict.get("start_day", 0) + 2 < day: #at least two days after first convo
                 #TODO random element so it isn't necessarily in the morning?
                     return True
         return False
@@ -677,7 +677,7 @@ label quest_cuckold_employee_gloryhole_label():
 label quest_cuckold_employee_after_window_label():
     $ the_person = quest_cuckold_employee_get_target()
     if not the_person.is_pregnant():
-        if quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her atleast 5 times via the event. #TODO we should probably track this via person.sex_record instead...
+        if quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her at least 5 times via the event. #TODO we should probably track this via person.sex_record instead...
             $ become_pregnant(the_person)
 
     if the_person.is_pregnant():#Success

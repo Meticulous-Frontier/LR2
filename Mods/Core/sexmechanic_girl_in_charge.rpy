@@ -215,7 +215,7 @@ init 2:
                 if the_goal in position.opinion_tags:
                     if the_person.sluttiness >= position.slut_requirement:
                         if not position.skill_tag in prohibit_tags:
-                            position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has atleast weight 20, with higher weights if actual sluttiness is close to requirement
+                            position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has at least weight 20, with higher weights if actual sluttiness is close to requirement
 
             if len(position_option_list) == 0: #Somehow no positions available for this requirement.
                 return None
@@ -527,7 +527,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person "Okay."
-        #Second condition, she isn't obedient but atleast likes MC a little bit. She offers to continue
+        #Second condition, she isn't obedient but at least likes MC a little bit. She offers to continue
         elif sex_can_continue(the_person, the_node = current_node) and the_person.love > 0 and mc.arousal > 50:
             "As she finishes up, [the_person.title] gives your erection a couple strokes."
             the_person "Wow, you are still rock hard. Do you want me to keep going?"

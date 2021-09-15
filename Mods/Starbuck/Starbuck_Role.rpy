@@ -1011,7 +1011,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     mc.name "Absolutely. It's only fair. You've already put yourself out there, I'm ready to do my part."
     "[the_person.possessive_title] gives you a bright, beaming smile."
     the_person "Yes! Okay! Give me minute I'll meet you in the back! Get the camera ready!"
-    "You make your way to the back. You get the camera setup and ready to go."
+    "You make your way to the back. You get the camera set up and ready to go."
     $ SB_advert_five_outfit = Outfit("Lingerie Just Red Panties")
     $ SB_advert_five_outfit.add_lower(panties.get_copy(), colour_red)
     $ the_person.draw_person(position = "stand4")
@@ -1199,7 +1199,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ mc.change_locked_clarity(20)
     the_person "Tell you what... set up the camera and meet me in back in a few minutes... I've got a couple things in mind I wouldn't mind..."
     mc.name "Sounds great!"
-    "You make your way to the back. You get the camera setup and ready to go."
+    "You make your way to the back. You get the camera set up and ready to go."
     $ SB_advert_six_outfit = Outfit("Starbuck's Pink Lingerie")
     $ SB_advert_six_outfit.add_upper(corset.get_copy(),colour_pink)
     $ SB_advert_six_outfit.add_feet(garter_with_fishnets.get_copy(),colour_pink)
@@ -1411,7 +1411,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You step into frame and start to walk up behind her."
     the_person "Today, he is going to show us how it could be used for a relaxed sodomy session. I'll be able to relax here in the swing, while my ass is at just the right height for him to fuck it..."
     "As you get close behind her, you put your hands on her hips. She reaches back and grasps your cock, and begins to guide it toward her bottom."
-    "When you cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
+    "When your cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with a wonderful pop. With more gentle pressure you are soon deep inside her bowel."
@@ -2075,7 +2075,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You walk with [the_person.title] up to the front of the store where [starbuck.possessive_title] is at. She looks at you two and hesitantly starts to ask."
     starbuck "Hey, so umm... Did [starbuck.mc_title] talk to you about..."
     the_person "I'll do it. Are you going to be in it too?"
-    starbuck "Ah! I umm... I don't think I can't the toy is just a little too big for me..."
+    starbuck "Ah! I umm... I don't think I can, the toy is just a little too big for me..."
     the_person "You don't like, have to use the toy! Just like, maybe you could hold it and fuck me with it, or just let me eat you out or something!"
     "[starbuck.title] eyes widen a little in surprise. It seems, even as a sex shop owner, she was not expecting this level of excitement."
     starbuck "Well, I mean it does have suction cups... So I could probably mount it to some of the latex panties..."
@@ -2121,7 +2121,7 @@ label starbuck_candace_product_demo_label(the_person):
     $ scene_manager.update_actor(starbuck, display_transform = character_right_flipped, z_order = 1, position = "stand3")
     mc.name "Hang on, we have to start the video first. Usually [starbuck.title] does an intro too, then we'll get to the demo."
     the_person "Ugh, fine! What a tease!"
-    "Everything appears to be all setup. You give a quick countdown, and then begin the video."
+    "Everything appears to be all set up. You give a quick countdown, and then begin the video."
     starbuck "Hello folks! This is [starbuck.name], from [starbuck.name]'s Sex Shop, here with another demonstration video! This time we are demonstrating the brand new, Double Girth Maxx 5000!"
     "[starbuck.title] has an extra that she picks up and begins to go over the details to the camera."
     starbuck "Have a size queen in your life that won't shut up about big dicks? This double dildo has a full money-back guarantee that it will shut her up! Made with..."
@@ -2133,7 +2133,7 @@ label starbuck_candace_product_demo_label(the_person):
     "[starbuck.possessive_title] motions at the strap on she's fashioned. While moving behind [the_person.possessive_title]."
     starbuck "Now, let's see if that guarantee holds up! Are you ready dear?"
     the_person "About time! I wasn't sure you were ever gonna... OHHHH!"
-    "[the_person.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputtering a couple of words out."
+    "[the_person.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputter a couple of words out."
     the_person "So...full..."
     starbuck "Don't worry dear, it's about halfway in."
     "For a short moment, you think you notice a look of fear on [the_person.possessive_title]'s face, but it quickly changes to resolve."
@@ -2708,7 +2708,7 @@ label starbuck_intro():
         "You can tell that she is a hard worker, and is dedicated to making her shop work. Maybe you should consider investing in her shop?"
         mc.name "How much money would you need, say if someone were interested in investing in your shop, to get some basic stock on the shelves?"
         "[the_person.possessive_title] considers for a moment."
-        the_person "Well, I really want the stock to be good, quality product. I'd say I could probably get everything setup for a basic shop for... say $1000?"
+        the_person "Well, I really want the stock to be good, quality product. I'd say I could probably get everything set up for a basic shop for... say $1000?"
         "That seems pretty reasonable. You decide to consider investing. You should talk to [the_person.title] again if you decide to invest in the shop!"
     elif (the_person.shop_progress_stage) == 0:
         the_person "Hello there sir! Welcome back to Starbuck's Sex Shop! Feel free to look around."

@@ -25,7 +25,7 @@ init 2 python:
 label mom_sister_snooping_action_label():
     "You wake up. You're a little groggy, but you manage to get out of bed."
     "You grab yourself some clothes and quietly leave your room. You aren't sure if you are the first one awake or not."
-    "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peak."
+    "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peek."
     # show lily her bedroom
     $ lily_bedroom.show_background()
     $ scene_manager = Scene()

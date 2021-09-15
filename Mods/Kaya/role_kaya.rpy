@@ -571,7 +571,7 @@ label kaya_lily_study_night_intro_label():
     "Before you can say anything, your annoyingly wonderful little sister speaks up."
     lily "Oh yeah, they've already been on one date. She just told me she thinks his butt is cute!"
     the_person "{=kaya_lang}Aue kahore{/=kaya_lang}..."
-    "You aren't sure if your sister is actively cock blocking you or if she is just ineptly trying to help set you up, but the awkwardness in the room is hard to bare."
+    "You aren't sure if your sister is actively cock blocking you or if she is just ineptly trying to help set you up, but the awkwardness in the room is hard to bear."
     mom "I see."
     "You hand the girls their glasses, [lily.title] goes over to the fridge to look for a snack."
     $ scene_manager.update_actor(lily, position = "walking_away")
@@ -604,7 +604,7 @@ label kaya_lily_study_night_intro_label():
     "She takes a long drink of her glass of wine, then looks at you."
     if mom.has_taboo(["vaginal_sex", "sucking_cock", "anal_sex"]):  #You have not started incest content with her yet.
         mom "I don't expect you to understand this... but I want you to stay away from that girl."
-        "Her strong stance startles you. She's never really mettled in your love life before... why now?"
+        "Her strong stance startles you. She's never really meddled in your love life before... why now?"
         mc.name "What? Why?"
         mom "I... [mom.mc_title]... I can't explain it, okay? Sometimes you just need to trust your mother."
         $ scene_manager.update_actor(mom, emotion = "sad")
@@ -700,7 +700,7 @@ label kaya_lily_study_night_recurring_label(the_person):
     return
 
 label kaya_uni_scholarship_intro_label(the_person):
-    "You go for walk, eventually coming to the university grounds. You decide to walk about for a bit, admiring the architecture and the people."
+    "You go for a walk, eventually coming to the university grounds. You decide to walk about for a bit, admiring the architecture and the people."
     "The four years you spent going here, you feel a connection to this place and to the students. It feels good to be on the grounds."
     "As you walk around, you spot [the_person.possessive_title]. She is stepping out of a building, and seems down."
     $ the_person.draw_person(emotion = "sad")
@@ -721,7 +721,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     the_person "What!?! I'm not asking for handouts!"
     mc.name "I didn't mean it like that! Everyone goes through hard times once in a while."
     $ the_person.draw_person(emotion = "sad")
-    the_person "I... I know. I'm sorry I didn't mean to blow up like that..."
+    the_person "I... I know. I'm sorry, I didn't mean to blow up like that..."
     the_person "You're a sweet guy, but I don't think I could accept money like that from you as a gift."
     the_person "I'm sorry, I have to get going... take care!"
     mc.name "Goodbye."
@@ -747,7 +747,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     mc.name "So... is there anything I can do?"
     nora "Well, you could start a scholarship foundation. If you were to start one with the universtiy, it would be up to you to determine who the recipients are."
     mc.name "Oh... a scholarship?"
-    nora "Yes. However, it sounds like this student isn't interested in free money... maybe you could make some kind of scholarship - internsip program?"
+    nora "Yes. However, it sounds like this student isn't interested in free money... maybe you could make some kind of scholarship - internship program?"
     mc.name "Ahh, internship?"
     nora "You are still running that research company right? Many degrees here have electives that involve an internship, especially STEM degrees."
     nora "You run an internship program where the students come help in your research facility and you pay their schooling costs for a semester."
@@ -763,29 +763,29 @@ label kaya_uni_scholarship_intro_label(the_person):
         mc.name "I... ha, I would never... of course..."
     else:
         mc.name "Family?"
-    nora "So [lily.name], your sister would not be eligible."
+    nora "So [lily.name], your sister, would not be eligible."
     mc.name "[lily.name], right."
     mc.name "Are there any other limits to who I can hire? As interns?"
     nora "Not really, but you should be careful not to discriminate against protected classes with your awards."
     mc.name "What if I wanted to support a protected class?"
     nora "Such as?"
     mc.name "What if I made it... a STEM internship program for girls only?"
-    nora "Oh! [nora.mc_title] that would be a great idea. No such program currently exists that I'm aware of. I think the university would jump at the chance to offer a STEM internship for women."
+    nora "Oh! [nora.mc_title], that would be a great idea. No such program currently exists that I'm aware of. I think the university would jump at the chance to offer a STEM internship for women."
     nora "If you want to start this, I want to be your partner for it. To get some of these girls out into the world of research and getting some job experience before they graduate would be invaluable."
-    nora "I'll talk to university CFO right away if you want to get it set up. I'm sure I can convince him to approve it."
+    nora "I'll talk to the university CFO right away if you want to get it set up. I'm sure I can convince him to approve it."
     if nora.sluttiness > 40:
         nora "I can be VERY persuasive."
     "You think about it for a moment. This seems like a great opportunity to get impressionable young co-eds in your business..."
-    "However, you should probablyrun the details by your HR director before you go full steam ahead. For now, maybe you could just hire [the_person.possessive_title] until you talk to her."
-    mc.name "Tell you what, let's start with the student that we've already been discussing. I'll talk to my HR supervisor and iron out details and then get this program going."
-    nora "Excellent. What programs are looking to intern from?"
+    "However, you should probably run the details by your HR director before you go full steam ahead. For now, maybe you could just hire [the_person.possessive_title] until you talk to her."
+    mc.name "Tell you what, let's start with the student that we've already been discussing. I'll talk to my HR supervisor and iron out the details, and then get this program going."
+    nora "Excellent. What programs are you looking to intern from?"
     mc.name "Well, for a STEM program... we currently do medical research and pharmaceutical manufacturing, so I suppose Chemistry and Biology?"
     nora "I'll go corner the CFO right away. Can I give him your financial details? We could have this girl you are talking about official by this weekend."
     mc.name "Do it. I have the funds to start this ASAP."
     $ nora.change_love(5)
     $ nora.change_happiness(10)
     $ nora.change_obedience(10)
-    nora "It's decided then. I'll go find him right now. You're doing a wonderful thing, supporting students [nora.mc_title]."
+    nora "It's decided then. I'll go find him right now. You're doing a wonderful thing, supporting students, [nora.mc_title]."
     $ clear_scene()
     "You leave [nora.possessive_title]'s lab. You text [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
@@ -800,7 +800,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     mc.name "Hey. I want you sign back up for your classes."
     the_person "I'm not taking your money."
     mc.name "I'm not giving you money, but I just got done talking to one of the professors here, and you've been offered an internship."
-    the_person "A.. what?"
+    the_person "A... what?"
     mc.name "The [mc.last_name] STEM Internship for Women program."
     the_person "I've never heard of such a program... or applied for it?"
     mc.name "That's because it just got created today. I really think you should accept it."
@@ -848,7 +848,7 @@ label kaya_HR_start_internship_program_label():
     the_person "They also generally won't quit, but their productivity will probably hinge on how much they enjoy working here."
     the_person "In addition, if things go badly, or if you can't behave yourself, I'm sure they'll make my life hell with HR paperwork and complaints..."
     mc.name "I'll be on my best behavior."
-    the_person "Okay... can we start small atleast?"
+    the_person "Okay... can we start small at least?"
     mc.name "Well, for now I only have one person. How small do you think?"
     the_person "Let's keep it to three people per department. If things go good, we can expand it more."
     mc.name "That's a good idea."
@@ -1255,7 +1255,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     if came_inside_kaya:
         "Oh god... your cum is inside her right now!"
     if the_person.event_triggers_dict.get("incest_warnings", 0) == 0:   #You've fucked around with lily and jennifer already, before this happened.
-        "You've been messing around already with [lily.title] and [mom.possessive_title]... and now you have discovered a long lost half sister."
+        "You've been messing around already with [lily.title] and [mom.possessive_title]... and now you have discovered a long-lost half sister."
         if kaya_had_condom_talk():
             "And you've already fucked her too!"
             if came_inside_kaya:
@@ -1269,7 +1269,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
         else:
             "You can't believe you almost fucked her. You should probably talk to her about things before you take things any farther..."
     elif the_person.event_triggers_dict.get("incest_warnings", 0) == 1:
-        "You've already messed around a little bit with your family since you started up the serum business, and now you have discovered a long lost half sister!"
+        "You've already messed around a little bit with your family since you started up the serum business, and now you have discovered a long-lost half sister!"
         if kaya_had_condom_talk():
             "You feel a bit conflicted. You've already fucked her!"
             if came_inside_kaya:
@@ -1451,7 +1451,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     the_person "Come with me!"
     "You follow her to a backroom, away from the big windows facing the street."
     $ the_person.draw_person(position = "kissing")
-    "She pulls you close and you start to make out. She moans when you hand grabs her ass."
+    "She pulls you close and you start to make out. She moans when your hand grabs her ass."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(30)
     the_person "You'd better take me now. I'm not sure how often we will be able to do this, so we'll need to take advantage of every opportunity."
@@ -1535,7 +1535,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "You leave the coffee shop and start to talk around downtown some, lost in your thoughts."
-    "Last week, you found out the hot barista you've been hitting on is actually a long lost half-sister you never knew about."
+    "Last week, you found out the hot barista you've been hitting on is actually a long-lost half-sister you never knew about."
     "And now... you are dating?"
     if the_person.is_pregnant():
         "And you've knocked her up!"

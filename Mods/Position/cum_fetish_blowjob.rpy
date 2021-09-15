@@ -1,4 +1,4 @@
-﻿init python:
+init python:
     cum_fetish_blowjob = Position(name = "Blowjob", slut_requirement = 40, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "None", skill_tag = "Oral",
         girl_arousal = 13, girl_energy = 10,
@@ -103,7 +103,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         the_girl "Oh god you taste so good. Just promise me you'll warn me before you cum..."
         the_girl "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
         $ the_girl.discover_opinion("cum facials")
-        "You cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
+        "Your cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
     return
 
 label outro_cum_fetish_blowjob(the_girl, the_location, the_object):

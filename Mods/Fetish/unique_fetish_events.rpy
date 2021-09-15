@@ -382,7 +382,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     $ the_person.draw_person(position = "doggy")
     "You put the dildo on and lube yourself up. You get behind [the_person.possessive_title] on the bed and start to line yourself up."
     the_person "Oh god I can't wait. This feel feels amazing when it goes in..."
-    "You cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accommodates you easily."
+    "Your cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accommodates you easily."
     the_person "Aaaahhhhhh yes! Now fuck me good! I'm ready for it!"
     call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_lily_fetish_stream_anal_01
     #TODO orgasm dialogue to her streamers

@@ -1,5 +1,5 @@
 #Designed for the mid game. Your employee model brainstorms marketing ideas with you and comes up with a wet-tshirt contest.
-#Requires company model with atleast moderate sluttiness (>40)
+#Requires company model with at least moderate sluttiness (>40)
 #Depending on how slutty the company is in general, some girls may come out for fun, others with persuasion, some require a bribe (extra pay)
 #Once completed, get a temporary sales boost based on how slutty the girls were who participated.
 #Unlocks the wet-shirt scene permanently and MC can run one again once a week if desired.

@@ -271,7 +271,7 @@ label erica_flirt_response(the_person):
             the_person "Thank you for the compliment, [the_person.mc_title]."
     else:
         if the_person.effective_sluttiness() > 50:
-            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
             the_person "Hey, maybe if you buy me dinner first."

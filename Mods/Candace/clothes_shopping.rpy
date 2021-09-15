@@ -230,7 +230,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             mc.name "I'm not sure that outfit works. What else do you have?"
     the_person "Okay, I have one more, I'll be right back with the last one."
     $ clear_scene()
-    "Hmm... [the_person.title] is back there right now, stripping down, slipping into something else... maybe you should try and sneak a peak..."
+    "Hmm... [the_person.title] is back there right now, stripping down, slipping into something else... maybe you should try and sneak a peek..."
     $ the_person.apply_outfit(outfits[2])
     $ the_person.draw_person()
     "You are just starting to consider trying to sneak back there when she pops out of the dressing room."
@@ -331,14 +331,14 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
             menu:
                 "Looks great!":
                     mc.name "The color and cut looks great on you!"
-                    the_person "Aww, thank you! Okay that's enough peaking..."
+                    the_person "Aww, thank you! Okay that's enough peeking..."
                     $ the_person.change_stats(slut = 1, max_slut = 40, happiness = 2)
                     $ count += 1
                     $ the_person.change_novelty(3)
                     $ the_person.wardrobe.add_outfit(outfits[3])
                 "Not your style":
                     mc.name "Your body looks great, but this particular cut isn't flattering."
-                    the_person "Yeah I was afraid of that. Thank you for your honesty! Okay that's enough peaking..."
+                    the_person "Yeah I was afraid of that. Thank you for your honesty! Okay that's enough peeking..."
                     $ the_person.change_stats(slut = 1, max_slut = 40, obedience = 2)
             $ clear_scene()
             $ the_person.apply_planned_outfit()
