@@ -1209,17 +1209,17 @@ init -1 python:
     # Change Multiple Stats for a person at once (less lines of code, better readability)
     def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, energy = None, add_to_log = True):
         if not obedience is None:
-            self.change_obedience(obedience, add_to_log)
+            self.change_obedience(obedience, add_to_log = add_to_log)
         if not happiness is None:
-            self.change_happiness(happiness, add_to_log)
+            self.change_happiness(happiness, add_to_log = add_to_log)
         if not arousal is None:
-            self.change_arousal(arousal, add_to_log)
+            self.change_arousal(arousal, add_to_log = add_to_log)
         if not love is None:
-            self.change_love(love, add_to_log)
+            self.change_love(love, add_to_log = add_to_log)
         if not slut is None:
-            self.change_slut(slut, max_slut, add_to_log)
+            self.change_slut(slut, max_slut, add_to_log = add_to_log)
         if not energy is None:
-            self.change_energy(energy, add_to_log)
+            self.change_energy(energy, add_to_log = add_to_log)
         return
 
     Person.change_stats = change_stats
