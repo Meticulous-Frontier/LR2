@@ -433,7 +433,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
-        if round_choice == "Change" or round_choice == "Continue":
+        if round_choice == "Change" or round_choice == "Continue" or round_choice == "Hypno_Orgasm":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
                     call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
@@ -574,16 +574,16 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 #TODO: Add some personality specific dialogue
                 pass
 
-        elif round_choice == "Hypno_Orgasm":
+        elif round_choice == "Girl Leave":
+            $ finished = True
+
+        if round_choice == "Hypno_Orgasm":
             $ the_person.event_triggers_dict["hypno_orgasmed_recently"] = True
             $ the_word = the_person.event_triggers_dict.get("hypno_trigger_word","Cum").capitalize()
             mc.name "[the_word]."
             $ the_person.change_arousal(the_person.max_arousal)
             "[the_person.possessive_title] whimpers with pleasure as your training takes hold of her brain."
             call describe_girl_climax(the_person, position_choice, object_choice, private, report_log) from _call_describe_girl_fuck_person_bugfix #Calls just the climax stuff without costing energy.
-
-        elif round_choice == "Girl Leave":
-            $ finished = True
 
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
 
