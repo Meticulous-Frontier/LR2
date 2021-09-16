@@ -2022,7 +2022,7 @@ init -1 python:
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
     def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets"):
-        return self.wardrobe.generate_random_appropriate_outfit(self, outfit_type = outfit_type)
+        return generate_random_appropriate_outfit(self, outfit_type = outfit_type)
 
     Person.generate_random_appropriate_outfit = person_generate_random_appropriate_outfit
 
