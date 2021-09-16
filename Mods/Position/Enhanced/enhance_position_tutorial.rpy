@@ -72,8 +72,10 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
             elif the_girl.wants_creampie():         #She likes creampies...
                 the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                 $ the_girl.discover_opinion("creampies")
-                if the_girl.on_birth_control:
-                    the_girl "Oh god that's so hot. I love feeling cum deep inside me."
+                if the_girl.on_birth_control and not the_girl.is_pregnant:
+                    the_girl "Oh god, that's so hot! I love feeling cum deep inside me."
+                elif the_girl.is_pregnant():
+                    the_girl "So fucking hot! Bathe my pregnant womb with your hot cum!"
                 else:
                     the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
                 $ the_girl.change_happiness(2)
