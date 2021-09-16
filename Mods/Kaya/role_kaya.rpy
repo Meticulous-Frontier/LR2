@@ -1337,7 +1337,7 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
     the_person "Ah! You don't have to tease me... just stick it in!"
     call fuck_person(the_person, private=True, start_position = SB_doggy_standing, skip_condom = kaya_condom_check()) from _call_kaya_doggy_at_home_04
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
-    if the_person.has_creampie_cum() and not the_person.is_pregnant and persistent.pregnancy_pref != 0: #Knock her up, first try
+    if the_person.has_creampie_cum() and not the_person.is_pregnant() and persistent.pregnancy_pref != 0: #Knock her up, first try
         the_person "Oh my god... I never knew how good it could be to get filled like that!"
         $ become_pregnant(the_person, mc_father = True) #For story reasons, knock her up for sure.
         "[the_person.possessive_title]'s legs are shaking. A bit of your cum is dribbling down her slit, the rest deposited deep inside of her."
