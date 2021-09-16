@@ -30,7 +30,7 @@ init -1 python:
         return mc.business.event_triggers_dict.get("dungeon_unlocked", False) == True
 
     def main_character_change_locked_clarity_extended(org_func):
-        def change_locked_clarity_wrapper(main_character, amount, add_to_log = True):
+        def change_locked_clarity_wrapper(main_character, amount, add_to_log):
             # run extension code
             if "perk_system" in globals():
                 amount = amount * get_clarity_multiplier()
@@ -39,7 +39,7 @@ init -1 python:
                     amount += 5
 
             # run original function
-            org_func(main_character, amount, add_to_log = True)
+            org_func(main_character, amount, add_to_log = add_to_log)
 
         return change_locked_clarity_wrapper
 

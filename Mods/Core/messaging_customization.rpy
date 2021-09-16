@@ -16,6 +16,7 @@ init 2 python:
     def generic_messages_extended(org_func, message_flag, default_value):
         func_args = inspect.getargspec(org_func)
         if not "add_to_log" in func_args[0]:    # fix when argument not found
+            print("Unable to wrap: " + org_func.__name__)
             return org_func
         idx = func_args[0].index("add_to_log")
 
@@ -48,10 +49,10 @@ init 2 python:
     SerumTrait.run_on_remove = generic_messages_extended(SerumTrait.run_on_remove, persistent.serum_messages, False)
     SerumTrait.run_on_day = generic_messages_extended(SerumTrait.run_on_day, persistent.serum_messages, True)
 
-    SerumTraitMod.run_on_turn = generic_messages_extended(SerumTraitMod.run_on_turn, persistent.serum_messages, False)
-    SerumTraitMod.run_on_apply = generic_messages_extended(SerumTraitMod.run_on_apply, persistent.serum_messages, True)
-    SerumTraitMod.run_on_remove = generic_messages_extended(SerumTraitMod.run_on_remove, persistent.serum_messages, False)
-    SerumTraitMod.run_on_day = generic_messages_extended(SerumTraitMod.run_on_day, persistent.serum_messages, True)
+    #SerumTraitMod.run_on_turn = generic_messages_extended(SerumTraitMod.run_on_turn, persistent.serum_messages, False)
+    #SerumTraitMod.run_on_apply = generic_messages_extended(SerumTraitMod.run_on_apply, persistent.serum_messages, True)
+    #SerumTraitMod.run_on_remove = generic_messages_extended(SerumTraitMod.run_on_remove, persistent.serum_messages, False)
+    #SerumTraitMod.run_on_day = generic_messages_extended(SerumTraitMod.run_on_day, persistent.serum_messages, True)
 
     # clarity messages
     MainCharacter.change_masturbation_novelty = generic_messages_extended(MainCharacter.change_masturbation_novelty, persistent.clarity_messages, True)
