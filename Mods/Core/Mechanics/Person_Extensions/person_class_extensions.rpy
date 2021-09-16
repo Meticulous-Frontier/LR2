@@ -1469,7 +1469,6 @@ init -1 python:
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
-        renpy.hide("portrait")
         return
 
     Person.hide_person = hide_person_enhanced
