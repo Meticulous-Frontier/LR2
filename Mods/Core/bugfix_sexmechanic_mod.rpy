@@ -433,7 +433,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
-        if round_choice == "Change" or round_choice == "Continue" or round_choice == "Hypno_Orgasm":
+        if round_choice == "Change" or round_choice == "Continue":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
                     call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
