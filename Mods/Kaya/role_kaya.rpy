@@ -992,7 +992,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         "You break off the kiss for a moment and look at her."
         mc.name "Are you sure you are okay with this? You've been through a lot lately, I feel like I'm kind of taking advantage of you."
         the_person "God... you are just perfect, aren't you?"
-        the_person "Its okay. I know my mom is sick... but it's been this way for a while."
+        the_person "It's okay. I know my mom is sick... but it's been this way for a while."
         the_person "I knew this day would come eventually. Besides, I'm a big girl. I can decide what I want for myself!"
         "She runs her hand down your chest and start to stroke you through your pants..."
         $ mc.change_locked_clarity(40)
@@ -1232,7 +1232,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     sakari "Oh, that can probably just go in my closet for now. My room is the one on the right."
     $ scene_manager.clear_scene()
     "You walk into [sakari.possessive_title]'s room and place the box on an empty shelf in her closet. When you finish putting it up, you glance around her room."
-    "Suddenly, you see a picture on her wall and you stop in your tracks. It is a picture of a much younger [sakari.title], but she is standing suspiciously close to a man you recognize isntantly."
+    "Suddenly, you see a picture on her wall and you stop in your tracks. It is a picture of a much younger [sakari.title], but she is standing suspiciously close to a man you recognize instantly."
     "The picture is of [sakari.possessive_title] and your father! And they are clearly close to one another in the picture."
     "You are stunned... Why would she have a picture of her and your father on the wall? Did they know each other? Did they..."
     $ scene_manager.add_actor(sakari)
