@@ -140,13 +140,6 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    # textbutton "Suggestibility: [the_person.suggestibility]%":
-                    #     ysize 24
-                    #     text_style "menu_text_style"
-                    #     tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
-                    #     action NullAction()
-                    #     sensitive True
-
                     textbutton "Love: "+ str(__builtin__.int(person.love)):
                         style "transparent_style"
                         text_style "menu_text_style"
@@ -187,14 +180,24 @@ init 2:
                                 sensitive True
 
                 vbox:
+                    xoffset -40
                     hbox:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
                         if person.serum_effects:
-                            textbutton "{image=serum_vial} +[person.suggestibility]%":
+                            textbutton "{image=serum_vial}":
                                 yoffset 16
                                 style "transparent_style"
                                 text_style "menu_text_style"
                                 tooltip person_info_ui_get_serum_info_tooltip(person)
+                                action NullAction()
+                                sensitive True
+
+                        if person.suggestibility > 0:
+                            textbutton "+[person.suggestibility]%":
+                                yoffset 16
+                                style "transparent_style"
+                                text_style "menu_text_style"
+                                tooltip "How likely a girl is to slip into a trance when she cums. While in a trance she will be highly suggestible, and you will be able to directly influence her stats, skills, and opinions."
                                 action NullAction()
                                 sensitive True
 
@@ -215,13 +218,6 @@ init 2:
                                 tooltip "The home address is known."
                                 action NullAction()
                                 sensitive True
-
-                    textbutton "Suggestibility: {}%".format(person.suggestibility):
-                        style "transparent_style"
-                        text_style "menu_text_style"
-                        tooltip "How likely a girl is to slip into a trance when she cums. While in a trance she will be highly suggestible, and you will be able to directly influence her stats, skills, and opinions."
-                        action NullAction()
-                        sensitive True
 
                     textbutton "Age: [person.age]":
                         style "transparent_style"

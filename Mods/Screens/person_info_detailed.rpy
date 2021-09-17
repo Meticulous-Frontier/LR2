@@ -263,10 +263,10 @@ init 2: # Need to allow for None name roles in this screen as well.
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
+                                text "Suggestibility: [the_person.suggestibility]%" style "menu_text_style"
                                 if not the_person.serum_effects:
-                                    text "No active serums." style "menu_text_style"
+                                    text "No active serums" style "menu_text_style"
                                 else:
-                                    text "Suggestibility: [the_person.suggestibility]" style "menu_text_style"
                                     for serum in the_person.serum_effects:
                                         text serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left" style "menu_text_style"
 
