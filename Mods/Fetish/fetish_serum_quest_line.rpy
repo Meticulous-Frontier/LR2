@@ -378,26 +378,26 @@ label fetish_serum_contact_dialogue(the_person):
 
 label fetish_serum_unlock_choice_menu(the_person):
     menu:
-        "Exhibitionist Program" if get_fetish_exhibition_serum().tier > 5:
+        "Exhibitionist Program" if not fetish_exhibition_serum_is_unlocked():
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have sexual activity in front of others."
             "In addition, it would make them more willing to show their body, even out in public."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
             $ fetish_serum_exhibition.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition)
-        "Anal Program" if get_fetish_anal_serum().tier > 5:
+        "Anal Program" if not fetish_anal_serum_is_unlocked():
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have anal sexual activity and be submissive to their partner."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
             $ fetish_serum_anal.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_anal)
-        "Semen Program" if get_fetish_cum_serum().tier > 5:
+        "Semen Program" if not fetish_cum_serum_is_unlocked():
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person enjoy semen exposure."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
             $ fetish_serum_cum.requirement_args = [day]
             $ mc.business.mandatory_crises_list.append(fetish_serum_cum)
-        "Reproduction Program" if get_fetish_breeding_serum().tier > 5:
+        "Reproduction Program" if not fetish_breeding_serum_is_unlocked():
             mc.name "I'd like to commission a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to engage in reproduction and acts associated with it."
             the_person "Alright, I'll make up a specification sheet and pass it along to him, along with the payment."
@@ -442,7 +442,7 @@ label fetish_serum_self_code_menu(the_person):
                 $ mc.business.r_div.actions.append(fetish_serum_coding_activity)
     the_person "Okay, what kind of program do you think we should make?"
     menu:
-        "Exhibitionist Program" if get_fetish_exhibition_serum().tier > 5:
+        "Exhibitionist Program" if not fetish_exhibition_serum_is_unlocked():
             mc.name "I'd like to create a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have sexual activity in front of others."
             "In addition, it would make them more willing to show their body, even out in public."
@@ -454,7 +454,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_exhibition_serum()
             # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhibitionist fetish is created
 
-        "Anal Program" if get_fetish_anal_serum().tier > 5:
+        "Anal Program" if not fetish_anal_serum_is_unlocked():
             mc.name "I'd like to create a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to have anal sexual activity and be submissive to their partner."
             the_person "Alright, let's see what we can do."
@@ -464,7 +464,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_anal_serum()
             $ mc.business.mandatory_crises_list.append(fetish_serum_anal_warning)
-        "Semen Program" if get_fetish_cum_serum().tier > 5:
+        "Semen Program" if not fetish_cum_serum_is_unlocked():
             mc.name "I'd like to create a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person enjoy semen exposure."
             the_person "Alright, let's see what we can do."
@@ -474,7 +474,7 @@ label fetish_serum_self_code_menu(the_person):
             $ mc.business.event_triggers_dict["fetish_serum_code_progress"] = 0
             $ mc.business.event_triggers_dict["fetish_serum_coding_target"] = get_fetish_cum_serum()
             $ mc.business.mandatory_crises_list.append(fetish_serum_cum_warning)
-        "Reproduction Program" if get_fetish_breeding_serum().tier > 5:
+        "Reproduction Program" if not fetish_breeding_serum_is_unlocked():
             mc.name "I'd like to create a new program, based on these specifications."
             "You give [the_person.title] specifications that would make a person more willing to engage in reproduction and acts associated with it."
             the_person "Alright, let's see what we can do."
@@ -806,9 +806,7 @@ label fetish_serum_coding_activity_label():
         the_person "That's great! I'll get it up and running."
         the_person "We'll have to make new formulas for it though, and due to production limitations, we can't combine more than one set of bots in a single serum dose."
         # fully unlock the newly researched serum
-        $ fetish_serum_get_coding_target().tier = 1
-        $ fetish_serum_get_coding_target().researched = True
-        $ mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        $ unlock_fetish_serum(fetish_serum_get_coding_target())
         $ temp_string = fetish_serum_get_coding_target().name
         "You have now unlocked [temp_string]."
         "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
@@ -836,24 +834,24 @@ label fetish_serum_discuss_progress_label(the_person):
         the_person "I think we have exhausted all the possibilities for new nanobot programs, for now at least."
 
     "Here is the current status of our specialize nanobot programs."
-    if get_fetish_exhibition_serum().tier < 5:
+    if fetish_exhibition_serum_is_unlocked():
         # if not is_exhibition_fetish_unlocked(): #TODO once we make an exhibitionist fetish, uncomment this
         #     the_person "I think there are more possibilities with the Social Sexual Proclivity Nanobots. You should observe the effects of them on test subjects more!"
         # else:
         the_person "I think we are at the limit of how far we can take the program on Social Sexual Proclivity Nanobots."
-    if get_fetish_anal_serum().tier < 5:
+    if fetish_anal_serum_is_unlocked():
         if not is_anal_fetish_unlocked():
             the_person "I think there are more possibilities with the Anal Proclivity Nanobots. You should observe the effects of them on test subjects more!"
             "To unlock their potential, raise the mastery of Anal Proclivity Nanobots to at least 3.0"
         else:
             the_person "I think we are at the limit of how far we can take the program on Anal Proclivity Nanobots."
-    if get_fetish_cum_serum().tier < 5:
+    if fetish_cum_serum_is_unlocked():
         if not is_cum_fetish_unlocked():
             the_person "I think there are more possibilities with the Semen Proclivity Nanobots. You should observe the effects of them on test subjects more!"
             "To unlock their potential, raise the mastery of Semen Proclivity Nanobots to at least 3.0"
         else:
             the_person "I think we are at the limit of how far we can take the program on Semen Proclivity Nanobots."
-    if get_fetish_breeding_serum().tier < 5:
+    if fetish_breeding_serum_is_unlocked():
         if not is_breeding_fetish_unlocked():
             the_person "I think there are more possibilities with the Reproduction Proclivity Nanobots. You should observe the effects of them on test subjects more!"
             "To unlock their potential, raise the mastery of Reproduction Proclivity Nanobots to at least 3.0"

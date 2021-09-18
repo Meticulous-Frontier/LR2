@@ -429,7 +429,7 @@ init -1 python:
             return
         serum.tier = 2
         serum.researched = True
-        mc.business.event_triggers_dict["fetish_serum_count"] = 1
+        mc.business.event_triggers_dict["fetish_serum_count"] = fetish_serum_unlock_count() + 1
         return
 
     def fetish_unlock_basic_serum():
@@ -495,7 +495,7 @@ init -1 python:
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
-            base_side_effect_chance = 0,
+            base_side_effect_chance = 0, #0 on purpose or typo?
             on_apply = fetish_exhibition_function_on_apply,
             on_remove = fetish_exhibition_function_on_remove,
             on_turn = fetish_exhibition_on_turn,
