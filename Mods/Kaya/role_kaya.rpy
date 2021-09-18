@@ -29,7 +29,7 @@ init 2 python:
 
         #global kaya_role
         global kaya
-        kaya = make_person(name = "Kaya", last_name ="Greene", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.92, hair_colour="black", hair_style = messy_hair, skin="tan" , \
+        kaya = make_person(name = "Kaya", last_name ="Greene", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.94, hair_colour="black", hair_style = messy_hair, skin="tan" , \
             eyes = "brown", personality = kaya_personality, name_color = "#228b22", dial_color = "228b22",  \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 88, start_love = 0, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = kaya_base_outfit,

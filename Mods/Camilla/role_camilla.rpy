@@ -26,7 +26,7 @@ init 2 python:
 
         #global camilla_role
         global camilla
-        camilla = make_person(name = "Camilla", last_name ="Rojas", age = 34, face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
+        camilla = make_person(name = "Camilla", last_name ="Rojas", age = 34, face_style = "Face_2",  tits="D", height = 0.94, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
             personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
