@@ -66,7 +66,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     $ modified_fertility = the_person.calculate_realistic_fertility()
                                     $ named_chance = the_person.pregnancy_chance_string()
                                     text "Fertility: " + str(__builtin__.round(modified_fertility, 1)) + "% -> " + named_chance style "menu_text_style"
-                                    text "Monthly Peak Day: " + str(the_person.ideal_fertile_day) style "menu_text_style"
+                                    text "Monthly Peak Day: " + str(the_person.ideal_fertile_day + 1) style "menu_text_style"
 
                         vbox:
                             xsize 350
