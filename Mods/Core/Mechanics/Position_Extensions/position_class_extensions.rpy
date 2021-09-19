@@ -1,6 +1,6 @@
 # Overrides part of the existing Position class with enhanced versions
 init 5 python:
-    def calculate_position_requirements(self, person, ignore_taboo = False):
+    def calculate_position_requirements(self, person, ignore_taboo = False, only_known_opinions = False):
         position_taboo = self.associated_taboo
         if ignore_taboo:
             position_taboo = None
@@ -16,9 +16,8 @@ init 5 python:
 
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
-                final_slut_cap -= person.get_opinion_score(opinion_tag) * 5
-                final_slut_requirement -= person.get_opinion_score(opinion_tag) * 5
-
+                final_slut_cap -= (person.get_known_opinion_score(opinion_tag) if only_known_opinions else person.get_opinion_score(opinion_tag)) * 5
+                final_slut_requirement -= (person.get_known_opinion_score(opinion_tag) if only_known_opinions else person.get_opinion_score(opinion_tag)) * 5
         if person.has_taboo(position_taboo):
             final_slut_requirement += 10    # when she has a taboo increase slut requirement
             final_slut_cap += 10
@@ -46,7 +45,7 @@ init 5 python:
         if ignore_taboo:
             position_taboo = None
 
-        final_slut_requirement, final_slut_cap = self.calculate_position_requirements(person, ignore_taboo)
+        final_slut_requirement, final_slut_cap = self.calculate_position_requirements(person, ignore_taboo, only_known_opinions = True)
 
         taboo_break_string = ""
         if person.has_taboo(position_taboo):
@@ -55,7 +54,7 @@ init 5 python:
         opinion_score = 0
         if self.opinion_tags:
             for opinion_tag in self.opinion_tags:
-                opinion_score += person.get_opinion_score(opinion_tag)
+                opinion_score += person.get_known_opinion_score(opinion_tag)
 
         #NOTE: Removed the (tooltip) and (disabled) tags as they aren't needed in the screen which is their only use case at the moment, but consider adding those back in if being used in the renpy.display_menu
         if person.effective_sluttiness(position_taboo) > final_slut_cap:

@@ -982,6 +982,17 @@ init -1 python:
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
 
+    def person_call_dialogue_extended(org_func):
+        def person_call_dialogue_wrapper(person, type, **extra_args):
+            if type == "sex_review" and extra_args.get("the_report", {}).get("is_angry", False):
+                renpy.say(person, "Now leave me alone, I'm done.")
+            else:
+                org_func(person, type, **extra_args)
+
+        return person_call_dialogue_wrapper
+
+    Person.call_dialogue = person_call_dialogue_extended(Person.call_dialogue)
+
     # NO FUNCTIONALITY YET, BEDROOMS HAS BEEN MOVED TO PERSON CLASS EXTENSIONS
     # def person_generate_home_extended(org_func):
     #     def generate_home_wrapper(person, set_home_time = True):

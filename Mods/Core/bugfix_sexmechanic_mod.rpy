@@ -179,7 +179,7 @@ init 5 python:
     def allow_position(person, position):
         if position.opinion_tags:
             for opinion in position.opinion_tags:
-                if person.get_opinion_score(opinion) == -2:
+                if person.get_known_opinion_score(opinion) == -2:
                     if person.has_role(slave_role) and person.obedience > 200: #A slave does what she is told.
                         return True
                     return False
@@ -190,7 +190,7 @@ init 5 python:
         if position.opinion_tags:
             hates = []
             for opinion in position.opinion_tags:
-                if person.get_opinion_score(opinion) == -2:
+                if person.get_known_opinion_score(opinion) == -2:
                     hates.append(opinion)
             result += " - ".join(hates)
         result += " (disabled)"
@@ -448,6 +448,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if not _return == 1: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
                         if _return == -1: # angry reject ends interactions
                             $ finished = True
+                            $ report_log["is_angry"] = True
                         $ position_choice = None
                         $ object_choice = None
                         call clear_object_effects(the_person) from _call_clear_object_effects_bugfix
@@ -617,12 +618,13 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         $ the_taboo = None
 
     $ final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(the_person, ignore_taboo)
+    $ hates_position = len([the_person.discover_opinion(x) for x in the_position.opinion_tags if the_person.get_opinion_score(x) == -2]) != 0
 
-    if the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
+    if not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
         if not (skip_dialog or the_person.has_taboo(the_taboo)):
             $ the_person.call_dialogue("sex_accept")
 
-    elif the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= final_slut_requirement:
+    elif not hates_position and the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= final_slut_requirement:
         "[the_person.possessive_title] doesn't seem enthusiastic, but a little forceful encouragement would probably convince her."
         menu:
             "Order her":
@@ -642,13 +644,13 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                 mc.name "Let's try something else that you might be more comfortable with."
                 $ willing = 0
 
-    elif the_person.effective_sluttiness(the_taboo) > final_slut_requirement * .6:
+    elif not hates_position and the_person.effective_sluttiness(the_taboo) > final_slut_requirement * .6:
         # She's not willing to do it, but gives you a soft reject.
         $ the_person.call_dialogue("sex_gentle_reject")
         $ willing = 0
 
     else:
-        # You're nowhere close to the required sluttiness, lose some love for even trying and end interaction
+        # You're nowhere close to the required sluttiness or hates position, lose some love for even trying and end interaction
         python:
             ran_num = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #A negative number
             ran_num = __builtin__.round(ran_num/5)
