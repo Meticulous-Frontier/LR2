@@ -707,6 +707,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
+    $ the_person.break_taboo("underwear_nudity")
     "Now dressed in her outfit, [the_person.possessive_title] hands you her phone. She grabs the first item, the bottle of lubricant."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
@@ -797,6 +798,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ mc.change_locked_clarity(50)
             "You walk up to [the_person.possessive_title]. She unzips your pants and pulls your cock out from your pants."
             "She runs her tongue up and down the sides a few times, then opens her mouth and sucks you into her hot mouth."
+            $ the_person.break_taboo("sucking_cock")
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBS70
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
@@ -960,6 +962,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             else:
                 "[the_person.possessive_title] runs her hands along your sides as you get into position."
                 "She grabs your cock with your hand and points it at her soaked slit. With one smooth motion you thrust into her. She's so wet you glide in with no resistance."
+            $ the_person.break_taboo("condomless_sex")
             "Wasting no time, you begin thrusting into her. Her pussy feels amazing wrapped around you."
             call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBS80
             "[the_person.possessive_title] lays there in a daze. Between the toy and your cock, she had multiple orgasms."
