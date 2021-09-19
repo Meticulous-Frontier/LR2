@@ -145,7 +145,7 @@ label lifestyle_coach_choose_sexy_goal_label(the_person):
         "You can't wait to cum all over her incredible tits."
         call get_fucked(the_person, the_goal = "body shot", private= True, start_position = tit_fuck, skip_intro = True, allow_continue = False) from _life_coach_tit_fuck_01
         the_person "Oh my god... that was so hot..."
-        $ the_person.draw_person(position = the_person.idle_pos)
+        $ the_person.draw_person(position = the_person.idle_pose)
         "[the_person.title] stands up, her tits coated in your cum."
         "It felt amazing, but something also felt different."
         "You made the decision to just let yourself go, enjoy the moment, and cover her tits in cum."
