@@ -16,7 +16,6 @@ init 2 python:
             self.return_value = return_value
 
         def __del__(self):
-            self.hide_person()
             self.return_value = None
             self.display_func = None
             return
