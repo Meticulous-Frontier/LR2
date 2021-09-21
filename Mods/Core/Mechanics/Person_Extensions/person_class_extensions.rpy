@@ -273,7 +273,7 @@ init -1 python:
             self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
 
         if renpy.call_stack_depth() < 2:
-            # we are in the main menu (alternative idle_pos)
+            # we are in the main menu (alternative idle_pose)
             if self.location == self.work or self.location == downtown_bar:
                  return "sitting"
             if self.location == gym:
@@ -1267,6 +1267,7 @@ init -1 python:
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
 
         validate_texture_memory()
+        renpy.pause(.01)    # fixes renpy draw issue
         if position is None:
             position = self.idle_pose
 
