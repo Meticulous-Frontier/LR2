@@ -66,6 +66,8 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
                 opinion_learned = "dark chocolate"
             else:
                 opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
+                while opinion_learned == the_person.event_triggers_dict.get("last_opinion_learned", "unknown"):
+                    opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
             talk_opinion_text = opinion_learned
             if opinion_learned in opinions_talk_mapping:
                 talk_opinion_text = opinions_talk_mapping[opinion_learned]
@@ -73,6 +75,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
         if not opinion_learned is None:
             $ opinion_state = person.get_opinion_topic(opinion_learned)
             $ opinion_string = opinion_score_to_string(opinion_state[0])
+            $ the_person.event_triggers_dict["last_opinion_learned"] = opinion_learned
 
             if is_phone:
                 person "Oh, this and that."
