@@ -1267,7 +1267,7 @@ init -1 python:
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
 
         validate_texture_memory()
-        renpy.pause(.01)    # fixes renpy draw issue
+        renpy.pause(.0001) # fix redraw issue?
         if position is None:
             position = self.idle_pose
 
