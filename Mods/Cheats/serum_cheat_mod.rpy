@@ -58,7 +58,7 @@ screen serum_cheat_menu():
                                                 style "textbutton_style"
                                                 text_style "serum_text_style_traits"
                                                 sensitive not isinstance(trait, SerumTraitBlueprint)
-                                                action [Hide("trait_tooltip"), SetField(trait, "researched", True)]
+                                                action [Hide("trait_tooltip"), SetField(trait, "researched", True), SetField(trait, "unlocked", True)]
                                                 hovered Show("trait_tooltip",None,trait, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                 unhovered Hide("trait_tooltip")
                                                 xsize 365
