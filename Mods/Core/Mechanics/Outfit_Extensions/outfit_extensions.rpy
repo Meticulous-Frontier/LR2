@@ -247,7 +247,7 @@ init -1 python:
 # initialize this part after wardrobe builder is initialized
 init 6 python:
     def wearing_bra_enhanced(self): # specific cloth items don't count as bra
-        if self.get_upper_ordered():
+        if self.upper_body:
             if self.get_upper_ordered()[0].underwear and not self.get_upper_ordered()[0] in [cincher, heart_pasties]:
                 return True
         return False
