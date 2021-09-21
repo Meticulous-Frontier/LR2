@@ -19,37 +19,38 @@ init 3 python:
         menu_tooltip = "Modify the appearance of a person through magic, not science")
 
     def biotech_change_body_requirement():
-        if mc.business.is_trait_researched("Hypothyroidism") and mc.business.is_trait_researched("Methabolizer"):
+        if mc.business.is_trait_researched(weight_gain) and mc.business.is_trait_researched(weight_loss):
             return True
-        else:
-            return "Requires: Hypothyroidism Trait and Methabolizer Trait researched"
+        return "Requires: Weight Promoter traits researched"
 
-    biotech_change_body = Action("Change body: [person.body_type]", biotech_change_body_requirement, "biotech_change_body",
-        menu_tooltip = "Modify [person.title]'s body type.")
+    biotech_change_body = Action("Change body: [the_person.body_type]", biotech_change_body_requirement, "biotech_change_body",
+        menu_tooltip = "Modify [the_person.title]'s body type.")
     biotech_body_modifications.append(biotech_change_body)
 
     def biotech_change_skin_requirement():
         if mc.business.is_trait_researched("Pigment"):
             return True
-        else:
-            return "Requires: Pigment Trait researched"
+        return "Requires: Pigment Trait researched"
 
-    biotech_change_skin = Action("Change skin: [person.skin]", biotech_change_skin_requirement, "biotech_change_skin",
-        menu_tooltip = "Modify [person.title]'s skin tone.")
+    biotech_change_skin = Action("Change skin: [the_person.skin]", biotech_change_skin_requirement, "biotech_change_skin",
+        menu_tooltip = "Modify [the_person.title]'s skin tone.")
     biotech_body_modifications.append(biotech_change_skin)
 
     def biotech_change_face_requirement():
         return True
 
-    biotech_change_face = Action("Change face: [person.face_style]", biotech_change_face_requirement, "biotech_change_face",
-        menu_tooltip = "Modify [person.title]'s face style.")
+    biotech_change_face = Action("Change face: [the_person.face_style]", biotech_change_face_requirement, "biotech_change_face",
+        menu_tooltip = "Modify [the_person.title]'s face style.")
     biotech_body_modifications.append(biotech_change_face)
 
     def biotech_change_breasts_requirement():
-        if mc.business.is_trait_researched(breast_enhancement):
+        if mc.business.is_trait_researched(breast_enhancement) and mc.business.is_trait_researched(breast_reduction):
             return True
-        else:
-            return "Requires: [breast_enhancement.name] and [breast_reduction.name]"
+        return "Requires: Breast modification traits"
+
+    biotech_change_breasts = Action("Change breasts: [the_person.tits]", biotech_change_breasts_requirement, "biotech_change_breasts",
+        menu_tooltip = "Modify [the_person.title]'s cup size.")
+    biotech_body_modifications.append(biotech_change_breasts)
 
     def create_clone(person, clone_name, clone_last_name, clone_age):
         if clone_name is None:
@@ -68,10 +69,6 @@ init 3 python:
 
         dungeon.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
         return
-
-    biotech_change_breasts = Action("Change breasts: [person.tits]", biotech_change_breasts_requirement, "biotech_change_breasts",
-        menu_tooltip = "Modify [person.title]'s cup size.")
-    biotech_body_modifications.append(biotech_change_breasts)
 
     def build_body_type_choice_menu():
         body_types = []
@@ -97,124 +94,125 @@ init 3 python:
         cup_sizes.append("Back")
         return renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"), True, "Choice")
 
+    def build_gene_modification_menu():
+        gene_modification_options = []
+        for act in biotech_gene_modifications:
+            gene_modification_options.append(act)
+        gene_modification_options.append("Back")
+        return gene_modification_options
+
+    def build_body_modification_options_menu():
+        body_modification_options = []
+        for act in biotech_body_modifications:
+            body_modification_options.append(act)
+        body_modification_options.append("Back")
+        return body_modification_options
+
 label biotech_gene_modifications():
-    while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            gene_modification_options = []
-            for act in biotech_gene_modifications:
-                gene_modification_options.append(act)
-            gene_modification_options.append("Back")
-            act_choice = call_formated_action_choice(gene_modification_options)
-            del gene_modification_options
-
-        if act_choice == "Back":
-            return
-        else:
-            $ act_choice.call_action()
-
+    $ act_choice = call_formated_action_choice(build_gene_modification_menu())
+    if act_choice == "Back":
+        return
+    else:
+        $ act_choice.call_action()
+        $ del act_choice
+    jump biotech_gene_modifications
 
 label biotech_clone_person():
     # only known people who are not unique character or clone herself (genetic degradation too high)
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list([x for x in known_people_in_the_game(unique_character_list) if x.can_clone()], "Clone Person", ["Back"])]))
     if _return != "Back":
-        call cloning_process(_return) from _call_cloning_process
+        $ the_person = _return
+        call cloning_process() from _call_cloning_process
     return
 
-label cloning_process(person = the_person): # default to the_person when not passed as parameter
-    $ person.draw_person(emotion = "default")
-    $ clone_name = None
-    $ clone_last_name = None
-    $ clone_age = None
+label cloning_process(): # default to the_person when not passed as parameter
+    $ the_person.draw_person()
+    $ clone_name = the_person.name
+    $ clone_last_name = the_person.last_name
+    $ clone_age = the_person.age
 
-    while True:
-        menu:
-
-            "Give the clone a name":
-                $ clone_name = str(renpy.input("Name: ", person.name))
-                $ clone_last_name = str(renpy.input("Last name: ", person.last_name))
-            "Age":
-                $ clone_age = __builtin__.int(renpy.input("Age: ", person.age))
-                if clone_age < 18:
-                    $ clone_age = 18
-            "Begin production: {image=gui/heart/Time_Advance.png}\n{color=#ff0000}{size=18}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}{/color}":
-                $ create_clone(person, clone_name, clone_last_name, clone_age)
-                "The clone has been created and is now awaiting you in the [dungeon.formal_name]."
-                call advance_time from _call_advance_time_cloning_process
-                return
-            "Back":
-                return
+label .continue_cloning_process:
+    menu:
+        "Give the clone a name":
+            $ clone_name = str(renpy.input("Name: ", clone_name))
+            $ clone_last_name = str(renpy.input("Last name: ", clone_last_name))
+        "Age":
+            $ clone_age = __builtin__.int(renpy.input("Age: ", clone_age))
+            if clone_age < 18:
+                $ clone_age = 18
+        "Begin production: {image=gui/heart/Time_Advance.png}\n{color=#ff0000}{size=18}Name: [clone_name] [clone_last_name], Age: [clone_age]{/size}{/color}":
+            $ create_clone(the_person, clone_name, clone_last_name, clone_age)
+            "The clone has been created and is now awaiting you in the [dungeon.formal_name]."
+            call advance_time from _call_advance_time_cloning_process
+            return
+        "Back":
+            return
+    jump cloning_process.continue_cloning_process
 
 label biotech_modify_person():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_in_the_game(), "Modify Person", ["Back"])]))
     if _return != "Back":
-        call modification_process(_return) from _call_modification_process
+        $ the_person = _return
+        call modification_process() from _call_modification_process
     return
 
-label modification_process(person = the_person): # when called without specific person use the_person variable
-    $ person.draw_person(emotion = "default")
-    while True:
-        python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-            body_modification_options = []
-            for act in biotech_body_modifications:
-                body_modification_options.append(act)
-            body_modification_options.append("Back")
-            act_choice = call_formated_action_choice(body_modification_options)
-            del body_modification_options
-
-        if act_choice == "Back":
-            $ clear_scene()
-            return
-        else:
-            $ act_choice.call_action()
-            $ del act_choice
+label modification_process(): # when called without specific person use the_person variable
+    $ the_person.draw_person()
+    $ act_choice = call_formated_action_choice(build_body_modification_options_menu())
+    if act_choice == "Back":
+        $ clear_scene()
+        return
+    else:
+        $ act_choice.call_action()
+        $ del act_choice
+    jump modification_process
 
 label biotech_change_body():
-    while True:
-        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-        $ body_choice = build_body_type_choice_menu()
+    #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+    $ body_choice = build_body_type_choice_menu()
 
-        if body_choice == "Back":
-            return
-        else:
-            $ person.body_type = body_choice
-            $ person.draw_person()
-            $ del body_choice
+    if body_choice == "Back":
+        return
+    else:
+        $ the_person.body_type = body_choice
+        $ the_person.draw_person()
+        $ del body_choice
+    jump biotech_change_body
 
 label biotech_change_skin():
-    while True:
-        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-        $ skin_choice = build_skin_style_choice_menu()
+    #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+    $ skin_choice = build_skin_style_choice_menu()
 
-        if skin_choice == "Back":
-            return
-
-        else:
-            $ person.skin = skin_choice
-            $ person.match_skin(skin_choice)
-            $ person.draw_person()
-            $ del skin_choice
+    if skin_choice == "Back":
+        return
+    else:
+        $ the_person.skin = skin_choice
+        $ the_person.match_skin(skin_choice)
+        $ the_person.draw_person()
+        $ del skin_choice
+    jump biotech_change_skin
 
 label biotech_change_face():
-    while True:
-        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-        $ face_choice = build_face_style_choice_menu()
+    #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+    $ face_choice = build_face_style_choice_menu()
 
-        if face_choice == "Back":
-            return
-        else:
-            $ person.face_style = face_choice
-            $ person.match_skin(person.skin)
-            $ person.draw_person()
-            $ del face_choice
+    if face_choice == "Back":
+        return
+    else:
+        $ the_person.face_style = face_choice
+        $ the_person.match_skin(the_person.skin)
+        $ the_person.draw_person()
+        $ del face_choice
+    jump biotech_change_face
 
 label biotech_change_breasts():
-    while True:
-        #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
-        $ cup_choice = build_cup_size_choice_menu()
+    #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.
+    $ cup_choice = build_cup_size_choice_menu()
 
-        if cup_choice == "Back":
-            return
-        else:
-            $ person.tits = cup_choice
-            $ person.draw_person()
-            $ del cup_choice
+    if cup_choice == "Back":
+        return
+    else:
+        $ the_person.tits = cup_choice
+        $ the_person.draw_person()
+        $ del cup_choice
+    jump biotech_change_breasts
