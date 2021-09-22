@@ -1,14 +1,14 @@
 init -2 python:
 #    custom_layers = []
-    config.layers.insert(10,"2") # Definitively Infront of "Active" layer
-    config.layers.insert(11,"3")
-    config.layers.insert(12,"4")
-    config.layers.insert(13,"5")
-    config.layers.insert(14,"6")
-    config.layers.insert(15,"7")
-    config.layers.insert(16,"8")
-    config.layers.insert(17,"9")
-    config.layers.insert(18,"10")
+    #config.layers.insert(10,"2") # Definitively Infront of "Active" layer
+    #config.layers.insert(11,"3")
+    #config.layers.insert(12,"4")
+    config.layers.insert(10,"5")
+    #config.layers.insert(14,"6")
+    #config.layers.insert(15,"7")
+    config.layers.insert(11,"8")
+    #config.layers.insert(17,"9")
+    #config.layers.insert(18,"10")
 
 #    custom_layers.append("2")
 #    custom_layers.append("3")
@@ -20,28 +20,29 @@ init -2 python:
 #    custom_layers.append("9")
 #    custom_layers.append("10")
 
-    config.menu_clear_layers.append("2")
-    config.menu_clear_layers.append("3")
-    config.menu_clear_layers.append("4")
+    #config.menu_clear_layers.append("2")
+    #config.menu_clear_layers.append("3")
+    #config.menu_clear_layers.append("4")
     config.menu_clear_layers.append("5")
-    config.menu_clear_layers.append("6")
-    config.menu_clear_layers.append("7")
+    #config.menu_clear_layers.append("6")
+    #config.menu_clear_layers.append("7")
     config.menu_clear_layers.append("8")
-    config.menu_clear_layers.append("9")
-    config.menu_clear_layers.append("10")
+    #config.menu_clear_layers.append("9")
+    #config.menu_clear_layers.append("10")
 
-    config.context_clear_layers.append("2")
-    config.context_clear_layers.append("3")
-    config.context_clear_layers.append("4")
+    #config.context_clear_layers.append("2")
+    #config.context_clear_layers.append("3")
+    #config.context_clear_layers.append("4")
     config.context_clear_layers.append("5")
-    config.context_clear_layers.append("6")
-    config.context_clear_layers.append("7")
+    #config.context_clear_layers.append("6")
+    #config.context_clear_layers.append("7")
     config.context_clear_layers.append("8")
-    config.context_clear_layers.append("9")
-    config.context_clear_layers.append("10")
+    #config.context_clear_layers.append("9")
+    #config.context_clear_layers.append("10")
 
+    config.layer_clipping["5"] = [1380, 0, 540, 1080] # for menu hover draw
+    config.layer_clipping["8"] = [1380, 0, 540, 1080] # for outfit manager mannequin
 
-    
     #config.menu_clear_layers.append(custom_layers)
     #config.context_clear_layers.append(custom_layers)
 

@@ -27,12 +27,12 @@ init 2 python:
             # check if we are not running out of memory
             validate_texture_memory()
 
-            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer = "solo", what= self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args), tag = self.display_key)
+            renpy.show(self.display_key, at_list=[character_right, self.display_scale], layer = "5", what= self.display_func(lighting = mc.location.get_lighting_conditions(), **self.person_preview_args), tag = self.display_key)
             return
 
         def hide_person(self):
             if self.display_key:
-                renpy.hide(self.display_key, layer = "solo")
+                renpy.hide(self.display_key, layer = "5")
             return
 
         def preload(self):
