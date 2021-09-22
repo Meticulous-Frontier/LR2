@@ -365,7 +365,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     else:
         "You step up behind [the_person.possessive_title] and start to grope her ass. She sighs as you massage it."
-        "You decide to start getting her ready while she looks for the the toy. You start peeling her clothes off."
+        "You decide to start getting her ready while she looks for the toy. You start peeling her clothes off."
         $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     the_person "Ah! Here it is. I know it's hard to wait, but I need to set up the stream first, [the_person.mc_title]."

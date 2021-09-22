@@ -134,9 +134,9 @@ label broken_AC_crisis_label_enhanced:
                         "For a while all of the girls work in various states of undress while under your watchful eye."
                         $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
                         if time_of_day >= 3:
-                            "The repair man shows up quickly, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature the next day."
+                            "The repair man shows up quickly, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature the next day."
                         else:
-                            "The repair man shows up quickly, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature within an hour."
+                            "The repair man shows up quickly, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature within an hour."
 
                     $ girl_choice = None
                 else:
@@ -148,7 +148,7 @@ label broken_AC_crisis_label_enhanced:
                     "The repair man shows up early, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
                 else:
                     "[the_person.title] gets back to work, still fully clothed."
-                    "The repair man shows up early, and you lead him directly to the the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
+                    "The repair man shows up early, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
 
             if removed_something:
                 $ broken_AC_crisis_update_sluttiness();
