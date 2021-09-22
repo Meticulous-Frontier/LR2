@@ -385,7 +385,7 @@ label Sarah_flirt_response_high(the_person):
             the_person "Don't worry, I want to get naked for you."
 
             menu:
-                "Kiss her.":
+                "Kiss her":
                     "You put an arm around [the_person.possessive_title]'s waist and pull her close."
 
                     if the_person.has_taboo("kissing"):
@@ -398,7 +398,7 @@ label Sarah_flirt_response_high(the_person):
                     $ the_person.call_dialogue("sex_review", the_report = _return)
                     $ the_person.review_outfit()
 
-                "Just flirt.":
+                "Just flirt":
                     mc.name "Believe me, I want to get naked for you too. Hopefully soon I'll have the time."
                     "[the_person.possessive_title] gives you a little pout."
                     the_person "We make time for what's important. But I understand, running a business is a lot of work."
