@@ -233,7 +233,8 @@ label quest_production_line_coffee_label():
     $ dad_name = quest_production_line().quest_event_dict.get("father_name", "Gregory")
     $ the_person = quest_production_line_get_target()
     "You text [the_person.title]'s father, [dad_name]. He tells you the name of the coffee shop. You quickly find it."
-    #TODO location = shop
+    $ mc.change_location(coffee_shop)
+    $ mc.location.show_background()
     #TODO get generic dad sprite to use? Placeholder? There's no male images in the game...
     mc.name "Hello there, you must be [dad_name]."
     dad_name "Ah, nice to meet you."
