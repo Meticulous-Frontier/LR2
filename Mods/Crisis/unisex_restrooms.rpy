@@ -457,7 +457,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(1, add_to_log = False)
+    $ the_person.change_slut(1, 50, add_to_log = False)
     $ the_person.change_happiness(2, add_to_log = False)
 
     $ del anon_char
@@ -500,7 +500,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(2, add_to_log = False)
+    $ the_person.change_slut(2, 70, add_to_log = False)
     $ the_person.change_happiness(3, add_to_log = False)
 
     $ del anon_char
@@ -556,7 +556,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
         "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(2, add_to_log = False)
+    $ the_person.change_slut(2, 80, add_to_log = False)
     $ the_person.change_happiness(5, add_to_log = False)
 
     $ del anon_char
@@ -613,7 +613,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
         "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(2, add_to_log = False)
+    $ the_person.change_slut(2, 90, add_to_log = False)
     $ the_person.change_happiness(7, add_to_log = False)
 
     $ del anon_char
@@ -694,7 +694,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
                 "You pull out. You grab some toilet paper and wipe your cock off."
 
             # the person is happy and a sluttier (don't log as to preserve anonymity)
-            $ the_person.change_slut(2, add_to_log = False)
+            $ the_person.change_slut(2, 60, add_to_log = False)
             $ the_person.change_happiness(5, add_to_log = False)
 
     $ del anon_char
