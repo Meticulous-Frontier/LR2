@@ -319,7 +319,7 @@ label quest_cure_discovery_patent_kept_label():
                 mc.name "You know what to do."
                 "You could let her just give you a blowjob, but if you push things a little rougher, it would really drive the point home, but her admiration for you would probably decrease."
                 "[the_person.title] opens her mouth and takes the tip of your cock in her hot mouth. She gives you a few strokes as you rapidly harden in her mouth."
-                call fuck_person(the_person, start_position = blowjob, skip_intro = True, position_locked = True, ignore_taboo = True) from _quest_cure_sex_path_01
+                call fuck_person(the_person, start_position = blowjob, start_object = mc.location.get_object_with_trait("Kneel"), skip_intro = True, position_locked = True, ignore_taboo = True) from _quest_cure_sex_path_01
                 $ the_report = _return
                 if skull_fuck in the_report.get("positions_used", []):  #You really roughed her up
                     "[the_person.possessive_title] mascara is running from tears caused by being gagged when you roughly fucked her throat."
