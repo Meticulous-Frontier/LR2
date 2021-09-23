@@ -1500,6 +1500,8 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum facials"] = report_log.get("cum facials", 0) + 1
 
         return cum_on_face_wrapper
 
@@ -1512,6 +1514,8 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum on tits"] = report_log.get("cum on tits", 0) + 1
 
         return cum_on_tits_wrapper
 
@@ -1524,6 +1528,8 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum on stomach"] = report_log.get("cum on stomach", 0) + 1
 
         return cum_on_stomach_wrapper
 
@@ -1536,11 +1542,26 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum on ass"] = report_log.get("cum on ass", 0) + 1
 
         return cum_on_ass_wrapper
 
     # wrap up the cum_on_ass function
     Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
+
+    def cum_in_mouth_extended(org_func):
+        def cum_in_mouth_wrapper(person, add_to_record = True):
+            # run original function
+            org_func(person, add_to_record)
+            # run extension code
+            if "report_log" in globals():   # add to report log if exists
+                report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1
+
+        return cum_in_mouth_wrapper
+
+    # wrap up the cum_on_ass function
+    Person.cum_in_mouth = cum_in_mouth_extended(Person.cum_in_mouth)
 
 
 ##################
