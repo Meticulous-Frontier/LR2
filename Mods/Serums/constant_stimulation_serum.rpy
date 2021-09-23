@@ -15,8 +15,8 @@ init -1 python:
         return 5
 
     def constant_stimulation_on_turn(the_person, the_serum, add_to_log):
-        if renpy.random.randint(0, 100) < (the_person.suggestability + 10) - the_person.sluttiness:
-            the_person.change_slut(1)
+        if renpy.random.randint(0, 100) < (the_person.suggestibility + 10) - the_person.sluttiness:
+            the_person.change_slut(1)   #No cap because the condition should cap it for us, gives reward for extremely high suggestability values also.
 
     def add_constant_stimulation_serum():
         constant_stimulation_ther = SerumTraitMod(name = "Constant Stimulation",
