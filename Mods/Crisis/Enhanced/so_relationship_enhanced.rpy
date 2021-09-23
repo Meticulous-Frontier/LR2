@@ -131,11 +131,15 @@ label so_relationship_quarrel_label(the_person):
     $ so_title = SO_relationship_to_title(the_person.relationship)
 
     if renpy.random.randint(0, 100) >= 20: # she will only break up 20% of the time
-        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight."
-        mc.name "I'm sorry to hear that, are you ok?"
-        the_person "Yeah, I'm ok. Sorry to bother you."
-        mc.name "That's fine, let me know if I can help."
-        the_person "Thanks."
+        if renpy.random.randint(0,3) == 1: # 25% change to complain, otherwise go to talk
+            the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight."
+            mc.name "I'm sorry to hear that, are you ok?"
+            the_person "Yeah, I'm ok. Sorry to bother you."
+            mc.name "That's fine, let me know if I can help."
+            the_person "Thanks."
+        else:
+            "[the_person.title] looks at you as if she's going to say something, but instead just waits for you to talk with her."
+        call talk_person(the_person) from _call_talk_person_so_relationship_quarrel
         return
 
     if the_person.has_role(affair_role):
