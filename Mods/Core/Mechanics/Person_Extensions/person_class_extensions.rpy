@@ -1492,6 +1492,11 @@ init -1 python:
 
     Person.is_at_work = is_person_at_work
 
+    def is_person_at_mc_house(self):
+        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
+
+    Person.is_person_at_mc_house = is_person_at_mc_house
+
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
