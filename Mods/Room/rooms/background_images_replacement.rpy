@@ -89,6 +89,11 @@ init -1 python:
             found.background_image = standard_biotech_backgrounds
         return
 
+    def show_lily_room_background(*args, **kwargs):
+        bedroom_image = lily_bedroom_background[time_of_day]
+        renpy.show("emily_bedroom", what = Image(bedroom_image))
+        return
+
 label updated_room_background(stack):
     # Load extra GUI images
     image serum_vial = "[vial_image.filename]"
@@ -142,7 +147,10 @@ label updated_room_background(stack):
         cousin.home.background_image = cousin_bedroom_background
         #mom.home.background_image = standard_bedroom1_background
         aunt.home.background_image = standard_bedroom4_background
-        emily.home.background_image = lily_bedroom_background
+
+        # instead of changing the role label, just hook a python function before the label
+        # to show the correct background for emily study at home
+        hook_label("student_study_home", show_lily_room_background)
 
         # update rd division when genetics are unlocked
         update_rd_div_with_genetics_unlocked()
