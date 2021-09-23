@@ -43,6 +43,7 @@ init 1 python:
         quest.set_quest_flag(1)
         person.add_opinion("creampies", 2, discovered = False, add_to_log = False)
         person.add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
+        person.add_opinion("vaginal sex", 2, discovered = False, add_to_log = False)
         person.on_birth_control = False
         mc.business.add_mandatory_crisis(quest_cuckold_employee_intro)
         game_hints.append(Hint("Cuckold Employee", "An employee is having trouble conceiving.", "quest_cuckold_employee().get_quest_flag() <= 11", "quest_cuckold_employee().get_quest_flag() > 11"))
