@@ -331,8 +331,7 @@ label SB_working_weekend_crisis_label_low(person_one):
             mc.name "It is important though, that when you work hard, you can also play hard."
             "[person_one.possessive_title] nods in agreement."
             mc.name "You are doing a great job for me so far, [person_one.title]. Maybe some time we should play hard together?"
-            $ person_one.change_slut(2)
-            $ person_one.change_slut(1)
+            $ person_one.change_slut(1, 30)
             person_one "Oh! I suppose I might be up for something like that, sometime anyway."
 
     "After a minute of chit chat, [person_one.possessive_title] eventually says goodbye and walks out of the room."
