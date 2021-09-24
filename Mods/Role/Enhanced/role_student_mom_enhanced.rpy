@@ -6,8 +6,8 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     #TODO Have a unique dining room background
     python:
         clear_scene()
-        renpy.show(name = "living room", what = house_background, layer = "master")
         scene_manager = Scene()
+        christina.home.show_background()
         scene_manager.add_actor(the_student, emotion = "happy")
 
     if first_time:
