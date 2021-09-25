@@ -206,7 +206,7 @@ label camilla_seduction_response(the_person):
 #     elif the_person.effective_sluttiness() < 50:
 #         the_person "Come on, let's go find someplace quiet where we won't be interrupted."
 #     else:
-#         the_person "No point waisting any time then, right? Let's get to it!"
+#         the_person "No point wasting any time then, right? Let's get to it!"
 #     return
 
 # label camilla_seduction_accept_alone(the_person):

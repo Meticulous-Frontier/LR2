@@ -595,7 +595,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "You start to thrust a little bit, testing the limits on how far to pull back without pulling out."
     anon_char "Oh fuck it's good. Mmmmm"
     "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
-    "You are thrusting vigorously now. Her ass is so tight, it's like it it is trying to milk the cum out of you."
+    "You are thrusting vigorously now. Her ass is so tight, it's like it is trying to milk the cum out of you."
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop!"
     "You feel yourself getting ready to nut. The urge to bury your cum deep in whoever this girl is ass is too strong."

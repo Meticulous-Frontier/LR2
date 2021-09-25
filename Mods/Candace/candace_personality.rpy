@@ -299,7 +299,7 @@ label candace_sex_angry_reject(the_person):
         the_person "Perv."
     elif the_person.sluttiness < 20:
         the_person "Uh, what the ACTUAL FUCK?! What do you think you're doing? Just saying that must be... illegal, or something!"
-        "[the_person.title] glares at you you and walks away."
+        "[the_person.title] glares at you and walks away."
     else:
         the_person "Eew! No, no, no! I will NEVER do that with ANYONE! Eew!"
         "[the_person.title] shakes her head and walks away."

@@ -73,7 +73,7 @@ label scene_Ophelia_blowjob_1(the_girl, the_location, the_object):
             "You rest your hand on her head, guiding her as she sucks you off."
             if the_girl.get_opinion_score("masturbating") > 0:
                 if the_girl.outfit.vagina_available():
-                    "[the_girl.title] puts a hand between her legs and starts to touch herself while she she blows you."
+                    "[the_girl.title] puts a hand between her legs and starts to touch herself while she blows you."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
                     $ the_girl.discover_opinion("masturbating")
                     if the_girl.arousal > 60:
