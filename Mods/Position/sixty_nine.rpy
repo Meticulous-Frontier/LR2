@@ -218,8 +218,8 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
 
     else: #Amazing at oral
         "[the_girl.possessive_title] slides your cock all the way down into her throat. She uses one hand to cup and lightly stroke your balls while she hungrily throat you."
-        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
-        "You can feel [the_girl.possessive_title]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensly pleasurable."
+        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise"
+        "You can feel [the_girl.possessive_title]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensely pleasurable."
         "It feels so good it is making it hard for you to concentrate on pleasuring her."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 5:

@@ -789,7 +789,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     $ clear_scene()
     "You leave [nora.possessive_title]'s lab. You text [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
-    mc.name "Hey, are you still at the unversity?"
+    mc.name "Hey, are you still at the university?"
     the_person "Yeah, I have an hour until my next class starts."
     mc.name "Meet me at the quad."
     the_person "Okay."

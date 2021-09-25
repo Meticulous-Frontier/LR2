@@ -462,7 +462,7 @@ label ophelia_make_blowjob_pics_label():
     $ the_person.draw_person()
     "As [the_person.title] stands up, you put your cock away. You see her slowly rubbing your cum into the skin on her face with two fingers..."
     mc.name "Okay, I admit it. You have the best mouth I have ever experienced."
-    the_person "I told you! I guess years of practising and being born without a gag reflex will do that though."
+    the_person "I told you! I guess years of practicing and being born without a gag reflex will do that though."
     "A hah! There's the secret... no gag reflex..."
     "You feel amazing, but this is a bit awkward. You decide to offer to reciprocate."
     mc.name "So uhh, it just so happens I'm not too bad with my tongue, either."

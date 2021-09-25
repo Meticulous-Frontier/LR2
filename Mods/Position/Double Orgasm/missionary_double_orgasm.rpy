@@ -129,7 +129,7 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
             the_girl "Ohhhh yes! Shower me with your hot cum!"
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum splashes onto her skin. Goosebumps erupt all over her body as her brain registers your cum on her."
-                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heighterns her orgasm."
+                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heightens her orgasm."
                 "She truly is addicted to your cum."
             else:
                 the_girl "Ah... Good job... Ah..."

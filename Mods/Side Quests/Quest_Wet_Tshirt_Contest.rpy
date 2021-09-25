@@ -130,9 +130,9 @@ label quest_wet_tshirt_contest_intro_label(the_person):
     the_person "Hello [the_person.mc_title], I could use your help with something."
     mc.name "What do you need?"
     the_person "I've been looking into different methods we could use to help market product, but I've kind of hit a wall."
-    the_person "As you know, there's been a huge reason rise in livestreaming as a source of marketing potential, but I can't figure out what we could do that would get us the eyeballs we are looking for."
+    the_person "As you know, there's been a huge reason rise in live-streaming as a source of marketing potential, but I can't figure out what we could do that would get us the eyeballs we are looking for."
     mc.name "You mean you want to have... some kind of broadcast?"
-    the_person "Right. I think we could make a livestream for our product, and if we targetted the right audience, it would help drive up demand for the product, while being extremely cheap to produce."
+    the_person "Right. I think we could make a live-stream for our product, and if we targeted the right audience, it would help drive up demand for the product, while being extremely cheap to produce."
     mc.name "Hmm... that's an interesting idea."
     the_person "I just can't figure out what exactly we could stream. Obviously the nature of the product lends itself to certain activities, but for the most possible eyeballs, we need to keep everyone clothed."
     "Hmmm, you think about it for a while."
@@ -142,11 +142,11 @@ label quest_wet_tshirt_contest_intro_label(the_person):
         "Wet T-shirt Contest":
             pass
         "Forget it":
-            mc.name "I'm sorry, I'm not sure it is a good idea for us to do a livestream for a pharmaceutical. I appreciate the hard work you put into it though."
+            mc.name "I'm sorry, I'm not sure it is a good idea for us to do a live-stream for a pharmaceutical. I appreciate the hard work you put into it though."
             the_person "Aww, really? Okay... I'll try to think of something else."
             #TODO end quest.
             $ quest_wet_tshirt_contest().set_quest_flag(19)
-    mc.name "What if we got say 3 employees, and on livestream we had them do a wet t-shirt contest?"
+    mc.name "What if we got say 3 employees, and on live-stream we had them do a wet t-shirt contest?"
     mc.name "Everyone would stay clothed, but that would be sexy and help drive demand for serum."
     the_person "Hmmm, that might just work! If you got it set up, I could do some advertising to drive up hype."
     "You consider how to go about setting it up."
@@ -217,7 +217,7 @@ label quest_wet_tshirt_contest_hr_talk_label(the_person):
     #TODO link next event.
     return
 
-# 
+#
 # label quest_essential_oils_abandon_label():
 #     "It's been over a week now since you started considering adding essential oil as a serum trait. The more you think about it, the dumber it sounds."
 #     "You a run a legitimate pharmaceutical business, there's no room for that bullshit around here."

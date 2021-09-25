@@ -689,7 +689,7 @@ label kaya_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "You are so rediculous. Come here, lets make out!"
+        the_person "You are so ridiculous. Come here, lets make out!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."

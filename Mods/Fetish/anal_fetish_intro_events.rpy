@@ -213,7 +213,7 @@ label anal_fetish_employee_intro_label(the_person):
     "[the_person.possessive_title] can only moan as you slide two fingers inside her cunt. With your other hand you give her another spank."
     $ the_person.change_arousal(10)
     mc.name "There, that should be good."
-    "You remove yor fingers briefly, then bring them up slightly. She sighs as you wiggle them around her puckered hole."
+    "You remove your fingers briefly, then bring them up slightly. She sighs as you wiggle them around her puckered hole."
     "You push against her. Your fingers easily begin to slip into [the_person.possessive_title]'s back door."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(30)

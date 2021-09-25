@@ -339,7 +339,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
                 if the_goal == "hate fuck":
                     the_person "Oh fuck it."
                     "[the_person.possessive_title] drops her hips back down onto you, sheathing your cock in her tight asshole completely."
-                    "There's a hint of develish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
+                    "There's a hint of devilish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
                     "You finally erupt. She gasps as she feels the heat of it in her body."
                     $ the_girl.cum_in_ass()
                     $ SB_anal_cowgirl.redraw_scene(the_girl)

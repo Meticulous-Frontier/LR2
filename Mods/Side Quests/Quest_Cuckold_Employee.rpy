@@ -513,7 +513,7 @@ label quest_cuckold_employee_rethink_decision_label():
         the_person "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
+        "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
         $ quest_cuckold_employee().set_quest_flag(28)
         $ quest_cuckold_employee().quest_completed()
     return

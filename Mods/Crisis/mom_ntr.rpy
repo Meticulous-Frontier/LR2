@@ -541,7 +541,7 @@ label mom_ntr_mod_action_label:
                                 if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                                     "[the_person.possessive_title] leans back against the side of her bed, relieved to me able to breathe once more. Her chest is heaving with panting breaths."
-                                    "[man_name] grabs her tits in both hands and lines his cock up between them, squeezing the hot flesh together and puping his hips."
+                                    "[man_name] grabs her tits in both hands and lines his cock up between them, squeezing the hot flesh together and pumping his hips."
                                     man_name "These tits are great, [the_person.name]. You were born to be a fucktoy, weren't you?"
                                     the_person "Y-yes sir. Please, u-use them however you wish."
                                     man_name "Ha! I knew I could fuck the defiance out of your whore mouth. Fuck, I'm close!"
@@ -550,7 +550,7 @@ label mom_ntr_mod_action_label:
                                     "[man_name] keeps pumping his hips, groaning as his cum shoots up between them. [the_person.possessive_title] flinches as it splashes off her chin and covers her tits."
                                     $ cum_on_stomach_ntr(the_person) #$ the_person.cum_on_stomach()
                                     $ the_person.draw_person(position = "blowjob")
-                                    "There's so much it even drips down on her stomach. With a final sated sigh, [man_name] steps back and rreleases her, enjoying the sight of his handiwork."
+                                    "There's so much it even drips down on her stomach. With a final sated sigh, [man_name] steps back and releases her, enjoying the sight of his handiwork."
                                     man_name "There, now isn't it easier when you don't fight, [the_person.name]?"
                                 else:
                                     $ the_person.draw_person(position = "blowjob", emotion = "sad")
@@ -1854,7 +1854,7 @@ label mom_ntr_mod_action_label:
                                 man_name "It really turned me on! I feel I can do another round shortly."
                                 the_person "We will discuss it later, [man_name2]. First - I need to taste [man_name]."
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
-                                "She puts another dick int oher mouth and sucks it off."
+                                "She puts another dick into her mouth and sucks it off."
                                 man_name "This is so great. I can't hold much longer!"
                                 $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")

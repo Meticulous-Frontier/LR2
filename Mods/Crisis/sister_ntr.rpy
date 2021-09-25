@@ -559,12 +559,12 @@ label sister_ntr_crisis_action_label:
                 "His weakened dick falls out from [the_person.possessive_title]'s mouth. She looks up and smiles. She swallows the sperm, but you still see traces of it."
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "After finishing with [man_name], [the_person.possessive_title] starts sucking [man_name2]'s cock."
-                man_name2 "Shit, your mouth is so good! I'm gonna expode right now!"
+                man_name2 "Shit, your mouth is so good! I'm gonna explode right now!"
                 $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "You see [man_name2] body shrugs as he starts to shoot his load into [the_person.possessive_title] mouth."
                 $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                "She gulps and looks up to men with a broad simle."
+                "She gulps and looks up to men with a broad smile."
                 the_person "Such a wonderful taste, [man_name]! Now I go for a glass of water and then we have to study. I need a straight A on that test."
                 "You go back to you room to finally have some sleep."
                 if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:

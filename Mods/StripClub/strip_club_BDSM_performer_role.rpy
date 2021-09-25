@@ -626,7 +626,7 @@ label caged_doggy_label(the_person):
             the_person "If it's the only way to please my master..."
         else:
             the_person "Don't you think it's degrading enough for me to being inside... 'this'?"
-            "Disappointed by her behaviour you slap her pussy and [the_person.title] moans loudly: she can't deny anymore what her body disperately want."
+            "Disappointed by her behaviour you slap her pussy and [the_person.title] moans loudly: she can't deny anymore what her body desperately wants."
             mc.name "My dear slave... Push your ass closer, would you?"
     call fuck_person(the_person, private = False, start_position = doggy, start_object = bdsm_room.get_object_with_name("Cage"), skip_intro = True, girl_in_charge = False, position_locked = True, ignore_taboo = True, affair_ask_after = False) from _call_caged_doggy
     $ the_person.clear_situational_slut("being_used_in_the_cage")

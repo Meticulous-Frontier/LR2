@@ -584,7 +584,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     the_person "Well, I don't know about EVERY thing, but we definitely have a great selection now."
     mc.name "What do you mean?"
     the_person "Well, goodness, there is so much stuff out there, there's no way we could fit it all in this little store. That's why I'm saving up."
-    the_person "The store next to us recently went ouf of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
+    the_person "The store next to us recently went out of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
     "You consider what she is saying."
     mc.name "What kind of stuff could you carry with the extra space that you aren't carrying now?"
     the_person "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furniture, like chairs and swings, massage tables..."

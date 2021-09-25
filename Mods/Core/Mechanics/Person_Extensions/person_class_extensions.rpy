@@ -1921,7 +1921,7 @@ init -1 python:
 ##########################################
 # Expose outfit methods on Person object #
 ##########################################
-    # many coding errors are related to missing .oufit in the sequence to check a persons state based on her outfit
+    # many coding errors are related to missing .outfit in the sequence to check a persons state based on her outfit
     # these extension methods on the Person class just redirect it to the outfit class, so the code still works as intended
 
     def person_tits_available(self):

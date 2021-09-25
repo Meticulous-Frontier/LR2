@@ -99,13 +99,13 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
     "Soon, you are bouncing her up and down, impaling her forbidden hole. You speed up, intent on fucking her raw."
     if the_girl.sex_skills["Anal"] > 2 : #She begs you to fuck her good.
         the_girl "Yes! Fuck me good [the_girl.mc_title]!"
-        "Empowered by her encouragement, you speed up, pounding her hole with wild abandon. The sound of her ass clapping against you crescendos, filling you with primaly lust."
+        "Empowered by her encouragement, you speed up, pounding her hole with wild abandon. The sound of her ass clapping against you crescendos, filling you with primally lust."
         menu:
             "Talk dirty":
                 mc.name "Take it bitch! I'm gonna destroy your tight little asshole."
                 if the_girl.get_opinion_score("being submissive") > 0:
                     $ the_girl.discover_opinion("being submissive")
-                    "[the_girl.title] just moans, leaning back against you. You sieze the opportunity."
+                    "[the_girl.title] just moans, leaning back against you. You seize the opportunity."
                     "Pulling her back against you, you reach under her legs and force them up and open, so she is spread wide."
                     "She whimpers helplessly as you fuck her backdoor mercilessly."
                     $ the_girl.change_arousal(10)
@@ -314,7 +314,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                 if the_goal == "hate fuck":
                     the_person "Oh fuck it."
                     "[the_person.possessive_title] drops her hips back down onto you, sheathing your cock in her tight asshole completely."
-                    "There's a hint of develish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
+                    "There's a hint of devilish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
                     "You finally erupt. She gasps as she feels the heat of it in her body."
                     $ the_girl.cum_in_ass()
                     $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)

@@ -66,7 +66,7 @@ label genius_sex_responses_foreplay(the_person):
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
             the_person "Oh wow you are hitting all the right places."
-            "She purs warmly."
+            "She purrs warmly."
         else:
             the_person "Oh my god..."
             "It seems like she's trying not to moan too loudly."

@@ -97,7 +97,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  elif the_girl.sluttiness > 80 or the_girl.obedience > 130:
                      the_girl "I'm sorry [the_girl.mc_title]! I'll try to get better at this. Having you fuck me like this is so intense..."
                      "SMACK"
-                     mc.name "You didn't anser the question! Answer how many spankings you deserve for being such a tease"
+                     mc.name "You didn't answer the question! Answer how many spankings you deserve for being such a tease"
                      the_girl "Oh god, five! I deserve five for being such a tease!"
                      "You continue your punishment, alternating giving her a few thrusts and then another smack."
                  elif the_girl.get_opinion_score("being submissive") < 0:
@@ -170,7 +170,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title]'s tight cunt feels so good, you can't help but slam into it over and over again. Maybe you should touch her a bit or talk dirty in her ear..."
         menu:
             "Touch her":
-                 "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hup and trail it down between her legs..."
+                 "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hip and trail it down between her legs..."
                  "You reach her mound and being to work circles around her clit with your fingers"
                  if the_girl.arousal > 130:
                       the_girl "Oh my god you're gonna make me cum again! Holy fuck!"

@@ -2318,7 +2318,7 @@ label erica_lily_instapic_intro_label():
 label erica_lily_post_photoshoot_label(the_person):
     the_person "[the_person.mc_title]! You won't believe it."
     mc.name "Yeah?"
-    the_person "My follower count went up alost FORTY PERCENT from the pics we did with [erica.name] the other night!"
+    the_person "My follower count went up almost FORTY PERCENT from the pics we did with [erica.name] the other night!"
     mc.name "Wow, that's great!"
     the_person "I know! I'm already getting all kinds of requests from people. You HAVE to convince her to do it again, okay?"
     the_person "Do you think we could make this a regular thing? Every Saturday night?"

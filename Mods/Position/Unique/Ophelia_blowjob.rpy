@@ -21,7 +21,7 @@
 label intro_Ophelia_blowjob(the_girl, the_location, the_object):
     "You unzip your pants and pull your underwear down far enough to let your hard cock out."
     the_girl "Mmm, it looks so hard! Let me take care of that for you..."
-    "[the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans foward and slides her lips over the tip of your dick."
+    "[the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans forward and slides her lips over the tip of your dick."
     $ Ophelia_blowjob.current_modifier = "blowjob"
     $ Ophelia_blowjob.redraw_scene(the_girl)
     "She teases and licks at the tip, but you know this girl is just toying with you."
