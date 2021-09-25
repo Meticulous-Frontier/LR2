@@ -90,7 +90,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 260
+                    ysize 264
                     vbox:
                         text "Status and Info" style "serum_text_style_header"
                         viewport:
@@ -100,7 +100,11 @@ init 2: # Need to allow for None name roles in this screen as well.
                                 text "Happiness: [the_person.happiness]" style "menu_text_style"
                                 text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
                                 text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
-                                text "Age: [the_person.age]" style "menu_text_style"
+                                text "Love: [the_person.love]" style "menu_text_style"
+                                if the_person.personality.default_prefix:
+                                    text "Personality: " + the_person.personality.default_prefix.capitalize() style "menu_text_style"
+                                else:
+                                    text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
                                 if the_person.has_role(girlfriend_role):
                                     text "Relationship: Girlfriend" style "menu_text_style"
                                 else:
@@ -116,7 +120,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 260
+                    ysize 264
                     vbox:
                         text "Characteristics" style "serum_text_style_header"
                         viewport:
@@ -125,16 +129,16 @@ init 2: # Need to allow for None name roles in this screen as well.
                             vbox:
                                 for skill in dict_main_skills:
                                     text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
-                                text "Love: [the_person.love]" style "menu_text_style"
-                                if the_person.personality.default_prefix:
-                                    text "Personality: " + the_person.personality.default_prefix.capitalize() style "menu_text_style"
-                                else:
-                                    text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
+                                text "Age: [the_person.age]" style "menu_text_style"
+                                text "Cup size: [the_person.tits]" style "menu_text_style"
+                                text "Height: " + height_to_string(the_person.height) style "menu_text_style"
+                                text "Hair: " + the_person.hair_colour[0].title() style "menu_text_style"
+                                text "Eyes: " + the_person.eyes[0].title() style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 260
+                    ysize 264
                     vbox:
                         text "Work Skills" style "serum_text_style_header"
                         viewport:
@@ -147,7 +151,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 260
+                    ysize 264
                     vbox:
                         text "Sex Skills" style "serum_text_style_header"
                         viewport:
@@ -161,7 +165,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                 frame:
                     background "#1a45a1aa"
                     xsize 325
-                    ysize 260
+                    ysize 264
                     vbox:
                         text "Sex Record" style "serum_text_style_header"
                         viewport:
