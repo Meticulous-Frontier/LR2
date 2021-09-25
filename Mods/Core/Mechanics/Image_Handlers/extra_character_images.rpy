@@ -81,7 +81,7 @@ init 2 python:
             lighting = [1,1,1]
 
         if eye_colour is None:
-            eye_colour = [0.6, 0.6, 0.65, 1.0] #grey by default.
+            eye_colour = [.62, .42, .29, 1.0] #brown by default.
 
         if not emotion in self.position_dict[position]:
             return Image("character_images/empty_holder.png")
