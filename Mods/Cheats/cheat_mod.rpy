@@ -69,6 +69,8 @@ init 2 python:
         if hasattr(person.char, "who_args"):
             person.char.who_args["color"] = color
 
+        person.what_color = color
+
         if person.title:
             person.set_title(remove_display_tags(person.title))
         if person.possessive_title:
