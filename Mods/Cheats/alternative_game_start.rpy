@@ -14,7 +14,7 @@ label alternative_start:
     "Vren" "[config.version] represents an early iteration of Lab Rats 2. Expect to run into limited content, unexplained features, and unbalanced game mechanics."
     "Vren" "Would you like to view the FAQ?"
     menu:
-        "View the FAQ.":
+        "View the FAQ":
             call faq_loop from _call_faq_loop_alternative_start
         "Get on with the game!":
             "You can access the FAQ from your bedroom at any time."
@@ -73,9 +73,9 @@ label alternative_start:
 
     $ renpy.block_rollback()
     menu:
-        "Play introduction and tutorial.":
+        "Play introduction and tutorial":
             call tutorial_start
 
-        "Skip introduction and tutorial.":
+        "Skip introduction and tutorial":
             $ mc.business.event_triggers_dict["Tutorial_Section"] = False
     jump normal_start
