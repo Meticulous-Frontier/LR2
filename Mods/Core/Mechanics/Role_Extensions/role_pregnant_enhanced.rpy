@@ -78,8 +78,8 @@ init 2 python:
         return
 
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
-        # prevent issues when function is called for already pregnant person
-        if not person or person.is_pregnant():
+        # prevent issues when function is called for already pregnant person / clones are sterile
+        if not person or person.is_pregnant() or person.has_role(clone_role):
             return
 
         # historic start date of pregnancy

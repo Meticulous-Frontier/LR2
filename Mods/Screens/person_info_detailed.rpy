@@ -59,6 +59,8 @@ init 2: # Need to allow for None name roles in this screen as well.
                                     text "- Visible Day: " + str(the_person.pregnancy_show_day()) style "menu_text_style"
                                 elif day < the_person.get_due_day():
                                     text "- Delivery Day: " + str(the_person.get_due_day()) style "menu_text_style"
+                            elif the_person.has_role(clone_role):
+                                text "Pregnant: Sterile" style "menu_text_style"
                             else:
                                 if persistent.pregnancy_pref == 1:
                                     text "Fertility: " + str(__builtin__.round(the_person.fertility_percent, 1)) + "%" style "menu_text_style"
@@ -70,7 +72,9 @@ init 2: # Need to allow for None name roles in this screen as well.
 
                         vbox:
                             xsize 350
-                            if the_person.knows_pregnant():
+                            if the_person.has_role(clone_role):
+                                pass
+                            elif the_person.knows_pregnant():
                                 text "Birth Control: No" style "menu_text_style"
                             elif the_person.event_triggers_dict.get("birth_control_status", None) is None:
                                 text "Birth Control: Unknown" style "menu_text_style"
