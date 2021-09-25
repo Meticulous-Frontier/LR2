@@ -30,42 +30,46 @@ label alternative_start:
         "Realistic pregnancy content\n{size=16}Birth control is not 100%% effective. Girls may not be taking birth control.{/size}":
             $ persistent.pregnancy_pref = 2
 
+    $ easy_mode = False
     "MOD" "Do you want to play with original game difficulty or make the game easier?"
     menu:
         "Default Game Play":
             pass
         "Easier Game Play":
             "MOD" "All options for making the game easier will be applied after character creation."
+            $ easy_mode = True
 
     $ renpy.block_rollback()
     call screen character_create_screen()
     $ return_arrays = _return #These are the stat, skill, and sex arrays returned from the character creator.
 
     python:
-        for array in range(0, len(return_arrays)):
-            for val in range(0, len(return_arrays[array])):
-                return_arrays[array][val] += 2
+        if easy_mode:
+            for array in range(0, len(return_arrays)):
+                for val in range(0, len(return_arrays[array])):
+                    return_arrays[array][val] += 2
 
     call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2])
 
     python:
-        # increased business stats
-        mc.business.funds = 10000
-        mc.business.supply_count = 1000
-        mc.business.supply_goal = 1000
-        mc.business.effectiveness_cap = 110
-        mc.business.marketability = 100
-        # increased player stats
-        mc.max_energy = 120
-        mc.free_clarity += 500
-        # default unlock policies
-        purchase_policy(mandatory_paid_serum_testing_policy, ignore_cost = True)
-        purchase_policy(serum_size_1_policy, ignore_cost = True)
-        purchase_policy(recruitment_batch_one_policy, ignore_cost = True)
-        purchase_policy(recruitment_knowledge_one_policy, ignore_cost = True)
-        purchase_policy(recruitment_skill_improvement_policy, ignore_cost = True)
-        purchase_policy(business_size_1_policy, ignore_cost = True)
-        purchase_policy(theoretical_research, ignore_cost = True)
+        if easy_mode:
+            # increased business stats
+            mc.business.funds = 10000
+            mc.business.supply_count = 1000
+            mc.business.supply_goal = 1000
+            mc.business.effectiveness_cap = 110
+            mc.business.marketability = 100
+            # increased player stats
+            mc.max_energy = 120
+            mc.free_clarity += 500
+            # default unlock policies
+            purchase_policy(mandatory_paid_serum_testing_policy, ignore_cost = True)
+            purchase_policy(serum_size_1_policy, ignore_cost = True)
+            purchase_policy(recruitment_batch_one_policy, ignore_cost = True)
+            purchase_policy(recruitment_knowledge_one_policy, ignore_cost = True)
+            purchase_policy(recruitment_skill_improvement_policy, ignore_cost = True)
+            purchase_policy(business_size_1_policy, ignore_cost = True)
+            purchase_policy(theoretical_research, ignore_cost = True)
 
     $ renpy.block_rollback()
     menu:
