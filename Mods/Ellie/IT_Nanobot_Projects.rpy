@@ -46,13 +46,13 @@ init 1 python:
         return
 
     def exhibition_clarity_reduction_on_apply():
-        get_fetish_exhbition_serum().research_added = 100
-        get_fetish_exhbition_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
+        get_fetish_exhibition_serum().research_added = 100
+        get_fetish_exhibition_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def exhibition_clarity_reduction_on_remove():
-        get_fetish_exhbition_serum().research_added = FETISH_RESEARCH_ADDED
-        get_fetish_exhbition_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
+        get_fetish_exhibition_serum().research_added = FETISH_RESEARCH_ADDED
+        get_fetish_exhibition_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def anal_incest_project_on_apply():
