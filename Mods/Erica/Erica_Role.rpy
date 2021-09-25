@@ -1444,7 +1444,7 @@ label erica_money_problem_sarah_convincing_employee_label():
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         the_person "I'm sure you are... more coffee? I just brewed some!"
         $ scene_manager.update_actor(the_person, position = "back_peek")
-        the_target "Yeah! That looks nice."
+        the_target "Yeah! That would be great."
         "Sounds like she is using some of the serum you produced for HR meetings to help her persuade [the_target.possessive_title] to come to the yoga class."
         $ scene_manager.update_actor(the_person, position = "stand3")
         the_person "Here you go... now, I know we're all busy, but trust me, the benefits of doing yoga really are worth the time!"
