@@ -239,6 +239,7 @@ label ellie_meet_ellie_intro_label():
     the_person "Err... you don't mean like... 'taking care of her' do you?"
     mc.name "Of course not! But there may be other things we can do about this, I think."
     "With your business concluded, you and [the_person.possessive_title] part ways."
+    $ mc.change_location(bedroom)
     $ clear_scene()
     $ mc.business.add_mandatory_crisis(ellie_head_researcher_halfway_intro)
     return
