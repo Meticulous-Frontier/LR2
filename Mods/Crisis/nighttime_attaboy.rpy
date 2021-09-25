@@ -153,8 +153,8 @@ label crisis_nighttime_attaboy_label():
     $ text_1 = get_attaboy_string_1(attaboy_record, the_person)
     $ text_2 = get_attaboy_string_2(attaboy_record, the_person)
     $ text_3 = get_attaboy_fetish_string(attaboy_record, the_person)
-    "After you get in bed, as you are drifting off to sleep, you hear your phone vibtrate."
-    "You roll over and look at it. It's a text from [the_person.possessive_title]"
+    "After you get in bed, as you are drifting off to sleep, you hear your phone vibrate."
+    "You roll over and look at it. It's a text from [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey! Sorry, I'm not sure if you're still up or not, but just wanted to text you."
     the_person "I'm lying in bed, I can't stop thinking about earlier today when you made me cum my brains out."
