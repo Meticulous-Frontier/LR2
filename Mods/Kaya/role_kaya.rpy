@@ -757,7 +757,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     nora "Last time I checked, other similar programs paid about $5000 per intern. That covers the student's entire tuition, meal plan, and books for a semester."
     nora "The time for the interns to work is up to you, but most programs I've seen are set up for weekends. Either one full day, or two half days."
     mc.name "I see... so this is something that I could start with just [the_person.title], but could bring on more people as things go along?"
-    nora "Yes, if you want to I could work with you on identifying potential candidates. However, there are a few people who would be inelegible."
+    nora "Yes, if you want to I could work with you on identifying potential candidates. However, there are a few people who would be ineligible."
     nora "While not illegal, the university takes a strong stance against nepotism, so your family member would not be eligible."
     if kaya_mc_knows_relation():
         mc.name "I... ha, I would never... of course..."

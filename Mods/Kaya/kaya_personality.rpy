@@ -831,7 +831,7 @@ label kaya_condom_bareback_ask(the_person):
 label kaya_condom_bareback_demand(the_person): # Lead in: mc.name "One sec, let me just get a condom on..."
     the_person "Don't even think about it. You know how I feel about those."
     the_person "Just pull out if you don't want to get me pregnant."
-    "[the_person.possessive_title] gives you a mischevious smile."
+    "[the_person.possessive_title] gives you a mischievous smile."
     the_person "If I let you anyway!"
     return
 

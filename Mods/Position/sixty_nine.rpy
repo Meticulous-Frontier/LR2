@@ -65,7 +65,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         return
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take you very deep, so she focuses on licking and sucking your tip."
-        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
+        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
                 "After a few teasing licks, you bury your face in her pussy. You make a few swiping licks across her clit and the lap up some of the juices flowing from her nethers."
@@ -120,7 +120,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
 
     elif the_girl.sex_skills["Oral"] < 6: #competent at oral
         "[the_girl.possessive_title] bobs her head up and down to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
-        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
+        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
                 "After a few teasing licks, you bury your face in her pussy. You make a few swiping licks across her clit and the lap up some of the juices flowing from her nethers."

@@ -39,7 +39,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "Ahh, that feels really nice. You know I like it like that..."
     elif the_girl.effective_sluttiness() > 110:
-        the_girl "Mmm, sounds kinky! Let'd do it!"
+        the_girl "Mmm, sounds kinky! Let's do it!"
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
     else:
@@ -99,7 +99,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
     "Soon, you are bouncing her up and down, impaling her forbidden hole. You speed up, intent on fucking her raw."
     if the_girl.sex_skills["Anal"] > 2 : #She begs you to fuck her good.
         the_girl "Yes! Fuck me good [the_girl.mc_title]!"
-        "Empowered by her encouragement, you speed up, pounding her hole with wild abandon. The sound of her ass clapping against you crescendos, filling you with primally lust."
+        "Empowered by her encouragement, you speed up, pounding her hole with wild abandon. The sound of her ass clapping against you crescendos, filling you with primal lust."
         menu:
             "Talk dirty":
                 mc.name "Take it bitch! I'm gonna destroy your tight little asshole."
