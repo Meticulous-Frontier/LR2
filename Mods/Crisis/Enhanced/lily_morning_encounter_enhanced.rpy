@@ -418,6 +418,10 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     the_watcher "Yes, [the_watcher.mc_title]."
                                     $ the_watcher.change_obedience(5)
                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank2
+                                    $ scene_manager.update_actor(the_watcher, position = "sitting")
+                                    $ scene_manager.update_actor(the_person, position = "stand2")
+                                    mc.name "You see, it isn't that hard, to make her behave."
+                                    the_watcher "Indeed, I see your point. I will do better from now on."
 
                                 "Punish [the_watcher.title] instead":
                                     mc.name "And you've barely done anything about it."
@@ -426,10 +430,16 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     $ the_watcher.change_obedience(10)
                                     $ scene_manager.strip_to_vagina(the_watcher, visible_enough = True, prefer_half_off = True)
                                     call fuck_person(the_watcher, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank3
+                                    $ scene_manager.update_actor(the_watcher, position = "sitting")
+                                    $ scene_manager.update_actor(the_person, position = "stand2")
+                                    mc.name "I hope this has taught you a lesson and that you will take your responsibilities more seriously now."
+                                    the_person "Yes [the_person.mc_title]."
+                                    the_watcher "Yes [the_watcher.mc_title], I will try harder."
                         else:
                             call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = True, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
 
             $ the_watcher = None
+            $ scene_manager.clear_scene()
             $ scene_manager = None
             return True
 

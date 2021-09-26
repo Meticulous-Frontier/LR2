@@ -1309,6 +1309,7 @@ init -1 python:
             weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
 
         renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
+        renpy.force_full_redraw() # test for android
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
