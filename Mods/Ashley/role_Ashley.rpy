@@ -973,15 +973,15 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     menu:
         "[the_person.title]" if not ashley_is_secret_path():    #Depending on previous choices, MC may have to sit next to a particular girl.
             "[the_person.possessive_title] scoots over to give you room to sit next to her. She sneaks a peek at you and you see a slight smile on her lips."
-            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.125, zoom = 0.75))
-            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .125, zoom = 1.25))
+            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .125, zoom = 1.25))
+            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.125, zoom = 0.75))
             $ the_person.change_stats(love = 3, happiness = 5)
             $ ashley_set_coffee_partner(the_person)
         "[stephanie.title]" if not ashley_is_normal_path():
             "[stephanie.possessive_title] scoots over so you have room to sit next to her."
             stephanie "Have a seat, [stephanie.mc_title]."
-            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .125, zoom = 1.25)) #TODO this is broken and I don't know why
-            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.125, zoom = .75))
+            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.125, zoom = 0.75)) #TODO this is broken and I don't know why
+            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .125, zoom = 1.25))
             "She pats the seat next to her. You sit down and see her smirking at you before she keeps talking to her sister."
             $ stephanie.change_stats(love = 3, happiness = 5)
             $ ashley_set_coffee_partner(stephanie)
@@ -1034,16 +1034,16 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     if the_person.is_girlfriend():
         the_person "Ohh, that looks good..."
         "[the_person.possessive_title] spots your muffin. You slide into the booth next to her."
-        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.125, zoom = 0.75))
-        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .125, zoom = 1.25))
+        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
+        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .1, zoom = 1.1))
         mc.name "Got it for us to share."
         "You glance over at [stephanie.title]. A hint of jealousy crosses her face, but she quickly hides it."
         $ ashley_set_coffee_partner(the_person)
     elif stephanie.is_girlfriend():
         stephanie "Ohh! Yum, that looks tasty [stephanie.mc_title]."
         "[stephanie.possessive_title] spots your muffin. You slide into the booth next to her."
-        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .125, zoom = 1.25))
-        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.125, zoom = 0.75))
+        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
+        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
         mc.name "Got it for us to share."
         "You glance over at [the_person.title]. A hint of jealousy crosses her face, but she quickly hides it."
         $ ashley_set_coffee_partner(stephanie)
@@ -1052,15 +1052,15 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
         menu:
             "[the_person.title]":    #Depending on previous choices, MC may have to sit next to a particular girl.
                 "[the_person.possessive_title] scoots over to give you room to sit next to her. She sneaks a peek at you and you see a slight smile on her lips."
-                $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.125, zoom = 0.75))
-                $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .125, zoom = 1.25))
+                $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
+                $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
                 $ the_person.change_stats(love = 3, happiness = 5)
                 $ ashley_set_coffee_partner(the_person)
             "[stephanie.title]":
                 "[stephanie.possessive_title] scoots over so you have room to sit next to her."
                 stephanie "Have a seat, [stephanie.mc_title]."
-                $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .125, zoom = 1.25))
-                $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.125, zoom = 0.75))
+                $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
+                $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .1, zoom = 1.1))
                 "She pats the seat next to her. You sit down and see her smirking at you before she keeps talking to her sister."
                 $ stephanie.change_stats(love = 3, happiness = 5)
                 $ ashley_set_coffee_partner(stephanie)
