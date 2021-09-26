@@ -326,14 +326,12 @@ label mom_breakfast_action_label_high():
         "Your balls are beginning to tense, you are seconds away from ejaculating!"
         the_person "Claim my asshole! Mark your territory with your cum! Then spank me and do it again and again!"
         "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her rectum. Her orgasm hits immediately after yours."
+        $ the_person.have_orgasm(the_position = "cowgirl")
         "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum inside her."
 
         $ the_person.cum_in_ass()
         $ scene_manager.update_actor(the_person) # redraw for cum
         $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
-
-        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
-        $ the_person.change_stats(happiness = 5, obedience = 3)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
         the_person "Oh god... [lily.name] could walk out any second!"
@@ -358,14 +356,12 @@ label mom_breakfast_action_label_high():
     "Your balls are beginning to tense, you are seconds away from ejaculating! She begins to make a short, fast humping motion, grinding her clit against your stomach."
     the_person "Claim mommy! Mark your territory with your cum! Fill me up!"
     "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her womb. Her orgasm hits immediately after yours."
+    $ the_person.have_orgasm(the_position = "cowgirl")
     "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her pussy as orgasmic waves hit her. You sigh happily, dumping the last of your cum inside her."
 
     $ the_person.cum_in_vagina()
     $ scene_manager.update_actor(the_person) # redraw for cum
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
-
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
-    $ the_person.change_stats(happiness = 5, obedience = 3)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
     the_person "Oh god... [lily.name] could walk out any second!"

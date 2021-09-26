@@ -343,10 +343,9 @@ label camilla_hookup_accept(the_person):
     if the_person.arousal > 100: #She is surprised how fast you make her cum
         "Suddenly, you feel her body go stiff and her moans ramp up quickly."
         the_person "Fuck! I'm gonna... you're gonna make me...!"
+        $ the_person.have_orgasm()
         "[the_person.title] convulses as she orgasms. She is caught completely off guard by how fast you made her cum."
         "The hand on the back of your head lets go but you continue to stroke her G-spot for several more seconds."
-        $ the_person.change_slut(1)
-        $ the_person.change_happiness(2)
     else:
         the_person "Mmm, that's it. Your fingers feel so good."
         "[the_person.title]'s hand on the back of your head guides your face down to one of her breasts. You like and suck at her nipples as you continue to finger her."
@@ -354,6 +353,7 @@ label camilla_hookup_accept(the_person):
         $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #80 + 8
         if the_person.arousal > 100: #She orgasms
             the_person "Yes! That's it! I'm gonna cum!"
+            $ the_person.have_orgasm()
             "[the_person.title] convulses as she orgasms. She moans and runs her hands through your hair."
             "You continue to stroke her G-spot for several more seconds."
         else:   #Not skilled enough to make her orgasm.
@@ -413,9 +413,8 @@ label camilla_hookup_accept(the_person):
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
         $ the_person.change_arousal(20) #90 + 8
         if the_person.arousal > 100:
+            $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
-            $ the_person.change_slut(1)
-            $ the_person.change_happiness(2)
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
         if the_person.effective_sluttiness() > 100: #She is so slutty, she begs for your cum.
@@ -457,9 +456,9 @@ label camilla_hookup_accept(the_person):
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
         if the_person.arousal > 100:
+            $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
-            $ the_person.change_slut(1)
-            $ the_person.change_happiness(2)
+
     if the_person.effective_sluttiness() > 70:
         the_person "You should stick a finger in my other hole while you fuck me and take a picture. Then hubby will have to reclaim both holes!"
         "Wow, it's not every day you have a beautiful married woman ask you to finger her ass while you bend her over and fuck her!"
@@ -472,6 +471,7 @@ label camilla_hookup_accept(the_person):
         if the_person.arousal > 120:
             the_person "OH! It's so good... fuck I'm gonna cum again!!!"
             "You get the now familiar feeling of [the_person.title] cumming around your cock, but this time you can also feel the waves around your finger."
+            $ the_person.have_orgasm()
             "You almost forgot to take some pictures! You grab her phone with your free hand and snap a few pics of her getting double penetration."
             "You wonder what it would feel like to make her cum again, but with your cock in her ass instead..."
             menu:
@@ -493,8 +493,7 @@ label camilla_hookup_accept(the_person):
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
                     $ the_person.change_arousal(20)#110 + 8
                     "Her ass begins to spasm. Her buttery smooth back passage squeezes you over and over as her body is racked with yet another orgasm. It feels incredible."
-                    $ the_person.change_slut(2)
-                    $ the_person.change_happiness(5)
+                    $ the_person.have_orgasm()
                     mc.name "Get ready, I'm gonna cum!"
                     "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
@@ -518,8 +517,7 @@ label camilla_hookup_accept(the_person):
         "Her grip is startlingly strong. You don't think you could pull out even if you wanted to!"
         the_person "That's it, cum with me!"
         "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
-        $ the_person.change_happiness(5)
-        $ the_person.change_slut(1)
+        $ the_person.have_orgasm()
         $ the_person.cum_in_vagina()
         $ the_person.draw_person(position = "standing_doggy") # redraw for cum
         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
@@ -542,8 +540,7 @@ label camilla_hookup_accept(the_person):
             "Creampie":
                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
                 "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
-                $ the_person.change_happiness(5)
-                $ the_person.change_slut(1)
+                $ the_person.have_orgasm()
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy") # redraw for cum
                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."

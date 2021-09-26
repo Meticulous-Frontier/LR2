@@ -544,6 +544,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
     "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
     anon_char "Yes. Yes! Oh fuck yes!"
+    $ the_person.have_orgasm(add_to_log = False)
     $ the_person.cum_in_vagina(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
@@ -601,6 +602,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "You feel yourself getting ready to nut. The urge to bury your cum deep in whoever this girl is ass is too strong."
     "Her ass is quivering all around you. Your penetration is making her finish too!"
     anon_char "Yes! Fuck my ass! YES!"
+    $ the_person.have_orgasm(add_to_log = False)
     $ the_person.cum_in_ass(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
@@ -682,6 +684,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
             anon_char "Yes. Yes! Oh fuck yes!"
 
+            $ the_person.have_orgasm(add_to_log = False)
             $ the_person.cum_in_vagina(add_to_record = False)
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
             "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"

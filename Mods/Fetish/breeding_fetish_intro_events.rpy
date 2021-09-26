@@ -562,11 +562,11 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Ah, I'm going to cum!"
     the_person "Oh god me too! Oh fuck bro I'm cumming! Fill me up I need your cum too!"
     "She slams her hips down. As deep as your cock can go, you start to cum, filling [the_person.possessive_title]."
+    $ the_person.have_orgasm()
     "Her hole is quivering as she cums at the same time, milking your cock for every last drop of seed."
     $ the_person.cum_in_vagina()
-    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
-    $ the_person.change_stats(happiness = 5, slut = 2)
     $ the_person.draw_person(position = "doggy")
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
     "Eventually the twitching stops, for both of you. You did it. You dumped your seed into your sister's unprotected, fertile snatch."
     "When she slowly pulls off you, your seed immediately begins to leak out of her and down her legs. You make sure to get the whole thing in frame."
     $ mc.reset_arousal()

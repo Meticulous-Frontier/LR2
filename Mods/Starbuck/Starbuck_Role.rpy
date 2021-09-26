@@ -935,6 +935,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ mc.change_arousal(25)
     $ mc.change_locked_clarity(50)
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+    $ the_person.have_orgasm(half_arousal = True)
     "[the_person.possessive_title]'s body begins to spasm as she orgasms. She shoves the toy in deep inside her. Her juices are trickling down beneath her out of her cunt."
     "Her body relaxes after she finishes. She slowly pulls the toy from her sopping wet cunt."
     the_person "So... overall... I rate this toy... a solid 9 out of 10... thanks for watching!"
@@ -1143,7 +1144,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     mc.name "Ah, I'm going to cum!"
     "You bottom out and explode deep inside of [the_person.possessive_title]. The heat of your semen painting her vaginal walls sends her into another orgasm."
     the_person "OH! I'M CUMMING AGAIN! YES [the_person.mc_title]!"
-    $ the_person.change_stats(happiness = 4, slut = 1, max_slut = 50)
+    $ the_person.have_orgasm()
     $ the_person.cum_in_vagina()
     $ the_person.draw_person(position = "doggy")
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
@@ -2931,7 +2932,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
         "To one side you see [person_one.title], clearly touching herself, after watching you and [the_person.title] fuck."
         person_one "Oh wow... maybe I should... I wonder if..."
         "She is muttering things under her breath as she touches herself. She closes her eyes and you see her body tense as she orgasms."
-        $ person_one.change_happiness(5)
+        $ person_one.have_orgasm()
         $ the_person.draw_person(position = "sitting")
         "[the_person.title] has noticed and is smiling wide."
         the_person "So... as you can see... the swing makes a wide variety of sexual maneuvers possible... For anyone who attended, I'd like to offer a discount!"

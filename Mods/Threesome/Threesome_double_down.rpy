@@ -192,6 +192,8 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel the moaning and gasps from the girls on top of you coming to a crescendo."
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
         the_girl_2 "Oh god I'm cumming too!"
         "[the_girl_2.title] is grinding your face when she cums, her juices running down the sides of her legs."
         "[the_girl_2.possessive_title] slams her body down on top of you as she begins to cum at the same time. Her pussy is convulsing all around you."
@@ -201,6 +203,7 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "[the_girl_1.title] is moaning loudly now. [the_girl_2.title] is pinching and twisting her nipples, driving her over the edge."
         $ the_girl_1.call_dialogue("climax_responses_vaginal")
+        $ the_girl_1.run_orgasm()
         "She orgasms, her pussy quivering around your cock. You enjoy the sensation of her pussy convulsing around you.."
         "She takes a moment to recover, but soon [the_girl_1.title] begins to bounce up and down again on top of you.."
         return
@@ -208,6 +211,7 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "[the_girl_2.title] opens her mouth and moans as you assault her pussy with your skilled tongue."
         $ the_girl_2.call_dialogue("climax_responses_oral")
+        $ the_girl_2.run_orgasm()
         "[the_girl_2.title] grinds her pussy against you. [the_girl_1.title] pinches and pulls at her nipples, sending her over the edge."
         "[the_girl_2.title]'s juices are beginning to run down the inside of her legs, you do your best to lap them up and then continue licking her."
 

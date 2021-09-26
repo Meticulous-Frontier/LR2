@@ -1022,7 +1022,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     if stephanie.sluttiness > 20:
         stephanie "That's what she said!"
         "The girls are laughing at [stephanie.possessive_title]'s joke as you head up to the counter and order the coffees."
-    "TODO: add serums to coffees here"
+    # TODO: add serums to coffees here
     $ mc.business.funds -= 15
     if the_person.is_girlfriend():
         "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [the_person.title]."
@@ -1705,7 +1705,7 @@ label coffee_time_steph_gets_handsy_label():
                     the_person "Wow. I bet that feels good."
                 elif ashley_is_secret_path():
                     "[the_person.title] doesn't say a word, but she puts two fingers in the shape of a V, the brings it to her face and sticks her tongue out between them, then points to herself."
-                    "She is making it clear she is expecting you to get her off later"
+                    "She is making it clear she is expecting you to get her off later."
                     $ mc.change_locked_clarity(20)
                     $ the_person.add_jealous_event("She blew you at the coffee shop!", 2)
                 "The wet tongue of [stephanie.title] is driving you quickly to orgasm. Between the public setting, her partial handjob, and talented mouth, you are sure you can't take any more."

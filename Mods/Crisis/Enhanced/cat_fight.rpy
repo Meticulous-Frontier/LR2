@@ -248,8 +248,9 @@ label cat_fight_crisis_enhanced_label():
                     $ loser.change_arousal(25)
                     $ scene_manager.update_actor(loser, emotion = "orgasm")
                     winner "That's it, cum for me slut!"
+                    $ loser.have_orgasm()
                     "[loser.title] screams loudly and shivers wildly. She only stays on her feet because [winner.title] is holding her in place."
-                    $ loser.change_stats(slut = 1, max_slut = 90, happiness = 5, obedience = -5)
+                    $ loser.change_stats(obedience = -5)
                     $ scene_manager.update_actor(loser, position = "sitting", emotion = "default")
                     "[winner.title] holds [loser.title] up a little longer, then lets her go. [loser.title] stumbles forward on wobbly legs until she finds a chair to collapse into. She pants loudly."
                     $ mc.change_locked_clarity(20)

@@ -148,6 +148,8 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "You can feel the pace of the double blowjob pick up a bit as both girls begin moaning at each other."
         "When you look down, you can see that each girl has a hand along the other's crotch... have they been doing that the whole time?"
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
         "They both orgasm, almost in unison. As they do the kiss and grope each other, momentarily ignoring your erection."
         "As they start to wind down, you turn the attention back to you."
         mc.name "That was hot, but don't forget about me."
@@ -155,6 +157,7 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
 
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
+        $ the_girl_1.run_orgasm()
         "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
         "When she finishes, she briefly comes up for air."
         the_girl_1 "Oh fuck that was good. I need a second."
@@ -163,6 +166,7 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
 
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
+        $ the_girl_2.run_orgasm()
         "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
         "When she finishes, she briefly comes up for air."
         the_girl_2 "Oh fuck that was good. I need a second."
@@ -264,12 +268,15 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
             "You can feel the pace and urgency of the girls moaning increase as the kiss each other."
             "When you look down, you can see that each girl has a hand along the other's crotch."
+            $ the_girl_1.run_orgasm()
+            $ the_girl_2.run_orgasm()
             "They both orgasm, almost in unison."
             "As they start to wind down, they continue kissing and caressing each other."
             return
 
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
             "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
+            $ the_girl_1.run_orgasm()
             "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
             "When she finishes, she briefly comes up for air."
             the_girl_1 "Oh fuck that was good. I need a second."
@@ -278,6 +285,7 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
 
         elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
             "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
+            $ the_girl_2.run_orgasm()
             "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
             "When she finishes, she briefly comes up for air."
             the_girl_2 "Oh fuck that was good. I need a second."

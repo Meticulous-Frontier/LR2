@@ -323,7 +323,10 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                 "Continue with [the_person.title]":
                                     mc.name "I can't argue with that, do you want to stay and watch?"
                                     the_other_person "Well I was going to make breakfast, but I guess a little show with my meal wouldn't hurt."
+                                    $ scene_manager.update_actor(the_other_person, position = "sitting", emotion = "happy")
                                     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, position_locked = True) from _call_lily_morning_encounter_kitchenblow2
+                                    $ scene_manager.update_actor(the_person, position = "kneeling1")
+                                    the_other_person "Thanks for the show."
                         else:
                             mc.name "Don't be shy [the_person.title], I know how much you want this."
                             call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _call_lily_morning_encounter_kitchenblow3

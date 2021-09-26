@@ -2487,6 +2487,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ the_person.change_arousal(40) #110
         $ mc.change_arousal(35) #90
         the_person "Oh fuck, yes! YES!"
+        $ the_person.have_orgasm()
         "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
         $ mc.change_arousal(20) #110
         $ mc.change_locked_clarity(50)

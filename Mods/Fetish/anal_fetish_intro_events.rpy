@@ -480,6 +480,7 @@ label anal_fetish_generic_intro_label(the_person):
     the_person "Oh my god... it's so big! Oh [the_person.mc_title], it's so good!"
     $ the_person.have_orgasm(half_arousal = True)
     "[the_person.possessive_title]'s ass is twitching wildly all around you as she orgasms. You hold her hips tight and in place with both hands as her body quivers."
+    $ the_person.have_orgasm()
     "It feels amazing to have her body gripping you as she cums."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)

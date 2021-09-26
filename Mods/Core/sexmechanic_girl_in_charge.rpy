@@ -607,10 +607,8 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
         report_log["end arousal"] = the_person.arousal
         report_log["girl orgasms"] = report_log.get("girl orgasms",0) + start_girl_orgasm
-        if report_log.get("girl orgasms",0) > 0 or report_log.get("girl one orgasms", 0) > 0:
-            the_person.arousal = 0 # If she came she's satisfied.
-        else:
-            the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
+
+        the_person.change_arousal(-the_person.arousal/(report_log.get("girl orgasms", 0)+2))
 
         report_log["guy orgasms"] = report_log.get("guy orgasms",0) + start_mc_orgasm
         mc.condom = False
