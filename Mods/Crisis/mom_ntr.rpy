@@ -668,6 +668,7 @@ label mom_ntr_mod_action_label:
                                     the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me as fast as you can, [man_name]!"
                                     "He starts to pump [the_person.possessive_title] with some ferocity, grunting with effort and fully burying his dick in her ove rand over again."
                                     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+                                    $ the_person.run_orgasm()
                                     the_person "Yes! Yes! That's it! I love it, [man_name]!"
                                     man_name "Shit, [the_person.name], your pussy is driving me crazy! I'm going to cum soon!"
                                     $ finish = mom_ntr_select_finish(the_person)
@@ -790,6 +791,7 @@ label mom_ntr_mod_action_label:
                                             the_person "Take me again, [man_name]. Bang me with your big, amazing dick!"
                                             man_name "Turn around, [the_person.name]. I want you from behind."
                                             the_person "Oh, [man_name]! I'm cumming again! Slap my ass! Harder!"
+                                            $ the_person.run_orgasm()
                                             "Screams go on long into the night..."
                                         else:
                                             "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
@@ -812,6 +814,7 @@ label mom_ntr_mod_action_label:
                                 the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! As fast as you can, [man_name]!"
                                 "He starts to pump [the_person.possessive_title] with some ferocity, fully burying his dick in her."
                                 $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+                                $ the_person.run_orgasm()
                                 the_person "Yes! Yes! That's it! I love you, [man_name]!"
                                 man_name "Shit, [the_person.name], your pussy is driving me crazy! I'm gonna cum soon!"
                                 $ finish = mom_ntr_select_finish(the_person)
@@ -923,6 +926,7 @@ label mom_ntr_mod_action_label:
                                         the_person "Take me again, [man_name]. Bang me with your amazing big thing!"
                                         man_name "Turn around, [the_person.name]. I want you from behind."
                                         the_person "Oh, [man_name]! I'm cumming again. Slap my ass! Harder!"
+                                        $ the_person.run_orgasm()
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
@@ -976,6 +980,7 @@ label mom_ntr_mod_action_label:
                                     "After being fucked by [man_name] for quite some time, [the_person.possessive_title] seems to be closing to orgasm."
                                     the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me as fast as you can, [man_name]!"
                                     "He starts to pump [the_person.possessive_title] with some ferocity, his balls slam into her clit. And there is a loud sound as he slaps into her ass."
+                                    $ the_person.run_orgasm()
                                     the_person "Yes! Yes! That's it! I love it, [man_name]!"
                                     if the_person.get_opinion_score("being submissive") > 0:
                                         the_person "You own me tonight, Master [man_name]!"
@@ -1102,6 +1107,7 @@ label mom_ntr_mod_action_label:
                                             the_person "Take me again, [man_name]. Bang me with your amazing big thing!"
                                             man_name "Turn around, [the_person.name]. I want you from behind."
                                             the_person "Oh, [man_name]! I'm cumming again. Slap my ass! Harder!"
+                                            $ the_person.run_orgasm()
                                             "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
@@ -1123,6 +1129,7 @@ label mom_ntr_mod_action_label:
                                 "After being fucked by [man_name] for quite some time, [the_person.possessive_title] seems to be closing to orgasm."
                                 the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! Fuck me as hard as you can, [man_name]!"
                                 "He starts to pump [the_person.possessive_title] with some ferocity, fully burying his dick in her. His balls smash against [the_person.title]'s pussy."
+                                $ the_person.run_orgasm()
                                 the_person "Yes! Yes! That's it! I love this, [man_name]!"
                                 man_name "Shit, [the_person.name], your pussy is driving me crazy! I think I will come soon!"
                                 $ finish = mom_ntr_select_finish(the_person)
@@ -1235,6 +1242,7 @@ label mom_ntr_mod_action_label:
                                         the_person "Take me again, [man_name]. Bang me with your amazing big thing!"
                                         man_name "Turn around, [the_person.name]. I want you from behind."
                                         the_person "Oh, [man_name]! I'm cumming again. Slap my ass! Harder!"
+                                        $ the_person.run_orgasm()
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
@@ -1599,6 +1607,7 @@ label mom_ntr_mod_action_label:
                                 "After being fucked by [man_name2] for quite some time, [the_person.possessive_title] seems to be closing to orgasm."
                                 the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! Do me more, [man_name2]!"
                                 "He starts to pump [the_person.possessive_title] real fast, his balls are smashing against [the_person.title]'s ass."
+                                $ the_person.run_orgasm()
                                 $ the_person.draw_person(position = "missionary", emotion = "orgasm")
                                 the_person "Yes! Yes! That's it! I love you guys!"
                                 man_name2 "Shit, [the_person.name], your pussy is driving me crazy! I think I will come soon!"
@@ -1758,6 +1767,7 @@ label mom_ntr_mod_action_label:
                             the_person "Oh, God! I'm cumming! Fuck me! Keep doing this, [man_name2]!"
                             "He starts to pump [the_person.possessive_title] faster and faster, fully burying his dick in her."
                             $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+                            $ the_person.run_orgasm()
                             the_person "Yes! Yes! That's it! You made me cum, [man_name2]!"
                             man_name2 "Shit, [the_person.name], your pussy is driving me crazy! I think I will come soon!"
                             man_name "Me too!"
@@ -1945,6 +1955,7 @@ label mom_ntr_mod_action_label:
                                 the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! Fill my holes!"
                                 "Both men start to pump [the_person.possessive_title] real fast, their bodies slamming into her."
                                 the_person "Aaaaaahhh...! Fuuuuuuck! Cumming!"
+                                $ the_person.run_orgasm()
                                 "Both men don't stop there, they keep on going. [the_person.possessive_title] seems to have reached multiple orgasms."
                                 the_person "Yeah! More! Harder! Fuck me! Screw me! Rip me apart!"
                                 man_name2 "Shit, [the_person.name], your ass is so tight! I think I will come soon!"
@@ -2113,6 +2124,7 @@ label mom_ntr_mod_action_label:
                             "After being fucked by two men at once for quite some time, [the_person.possessive_title] seems to be closing to orgasm."
                             the_person "Oh, God! I'm cumming! Fuck me! Fuck me more! Fill my holes!"
                             "Men start to pump [the_person.possessive_title] real fast, their bodies slamming into her."
+                            $ the_person.run_orgasm()
                             the_person "Aaaaaahhh...! Fuuuuuuck! Cumming!"
                             "Guys do not stop there, they keep on going. [the_person.possessive_title] seems to have reached multiple orgasms."
                             the_person "Yeah! More! More! Fuck me! Do me!"

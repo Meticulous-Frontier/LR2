@@ -163,7 +163,6 @@ init -1 python:
             renpy.say(person.char, "Oh my god, I'm cumming....Ahhh....YES!....please " + person.mc_title + ", increase the speed!")
             scene_manager.update_actor(person, emotion = "happy")
             person.have_orgasm(the_position = "sitting")
-            person.change_slut(2)
         return
 
     def dildochair_pleasure_loop_intensity(person, arousal = 0, energy = 0):

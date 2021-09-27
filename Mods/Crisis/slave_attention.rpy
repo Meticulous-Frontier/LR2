@@ -70,7 +70,7 @@ label slave_attention_crisis_action_label:
 
                     if the_person.arousal >= 100:
                         the_person "Oh my god, I'm cumming....Aaargh....YES....please [the_person.mc_title], continue abusing my body..."
-                        $ the_person.arousal //= 2
+                        $ the_person.have_orgasm(half_arousal = True, the_position = "against_wall")
 
                     "Looking at her welted body, you decide what to do next."
                     jump slave_attention_comfort_menu

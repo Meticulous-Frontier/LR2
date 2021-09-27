@@ -2577,14 +2577,14 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
             $ the_round += 1
 
         if (the_person_one.arousal >= 100 and the_person_two.arousal >= 100): #They both orgasm together.
+            $ the_person_one.have_orgasm(the_position = "sitting", half_arousal = False)
             the_person_one "Oh... OH! OH FUCK!"
+            $ the_person_two.have_orgasm(the_position = "sitting", half_arousal = False)
             the_person_two "Oh fuck me! OH I'M CUMMING!"
             "The two girls both begin to moan as they cum together in unison. Geeze, this one seems too close to call?"
             "You give your shaft a couple strokes... two girls orgasming on either side of you is pretty fucking hot!"
             $ mc.change_locked_clarity(50)
             if willing_to_threesome(the_person_one, the_person_two):
-                $ the_person_one.have_orgasm(the_position = "sitting")
-                $ the_person_two.have_orgasm(the_position = "sitting")
                 "As the girl slowly finish their orgasms, they both notice you, stroking yourself. [the_person_two.title] reaches out and grabs your arm, stopping you."
                 the_person_one "Wow... was that a tie?"
                 the_person_two "Yes it was."
@@ -2604,7 +2604,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 the_person_one "Next week?"
                 "The girls agree to meet again next week."
             else:
-                "Some how though, you manage the will to stop. The girls are both exhausted from their contest. Slowly, they start to get up."
+                "Somehow though, you manage the will to stop. The girls are both exhausted from their contest. Slowly, they start to get up."
                 $ scene_manager.update_actor(the_person_one, position = None)
                 $ scene_manager.update_actor(the_person_two, position = None)
                 the_person_one "Damn. A tie? What does that mean?"

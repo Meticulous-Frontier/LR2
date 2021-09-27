@@ -95,6 +95,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.change_arousal (26)
                 "After a few more moves, [the_person.possessive_title] seems to have reached an orgasm."
                 $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+                $ the_person.run_orgasm()
                 the_person "Keep fucking me, [man_name]! I'm... cumming!..."
                 "Her body shrugs and you see happy smile on her face."
                 the_person "You made me cum, [man_name]! I needed that so much!"
@@ -195,6 +196,7 @@ label sister_ntr_crisis_action_label:
                 $ the_person.change_arousal (26)
                 "After a few more thrusts, [the_person.possessive_title] seems to have reached an orgasm."
                 $ the_person.draw_person(position = "against_wall", emotion = "orgasm")
+                $ the_person.run_orgasm()
                 the_person "Keep fucking me, [man_name]! I'm... cumming!..."
                 "Her body shrugs and you see happy smile on her face."
                 the_person "You made me cum, [man_name]! I needed that so much!"
@@ -480,6 +482,7 @@ label sister_ntr_crisis_action_label:
             $ the_person.change_arousal (26)
             "After a few more moves, [the_person.possessive_title] seems to have reached an orgasm."
             $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+            $ the_person.run_orgasm()
             the_person "Keep fucking me, [man_name]! I'm... cumming!..."
             "Her body shrugs and you see happy smile on her face."
             the_person "You made me cum, guys! I really love being fucked by both of you."

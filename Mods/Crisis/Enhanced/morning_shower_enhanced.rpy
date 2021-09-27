@@ -154,6 +154,7 @@ label morning_shower_masturbation():
         $ the_person.change_arousal(renpy.random.randint(20,35))
         $ mc.change_locked_clarity(10)
     the_person "Shit, I'm cumming!"
+    $ the_person.run_orgasm()
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
     "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
     the_person "Wow, that was intense. Need to be quieter or someone might just hear me."

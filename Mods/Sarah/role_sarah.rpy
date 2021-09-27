@@ -3248,10 +3248,10 @@ label Sarah_naomi_visits_to_apologize_label():
             $ the_person.change_arousal(30)
             $ sarah.change_arousal(30)
             sarah "Oh yes, right there [the_person.name], make me cum....Oh God, YES, I'm CUMMING!!!"
+            $ sarah.have_orgasm()
             "As [sarah.possessive_title] starts squirting, her friend starts to shudder indicating that she's having an orgasm as well."
+            $ the_person.have_orgasm()
             the_person "MMMM!!!....Oh my, this is so good, I never thought you could taste this good."
-            $ the_person.reset_arousal()
-            $ sarah.reset_arousal()
             $ sarah.increase_opinion_score("getting head", 2)
             sarah "You really know you way around down there, I came like a freight train."
             "After [the_person.name] gives [sarah.possessive_title] a few more licks along her dripping slit, she stands up."

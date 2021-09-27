@@ -102,6 +102,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser "Ah yes, fill me up. Fuck me you sweaty pig."
                     "His face turns bright red as he pushes [loser.possessive_title]'s face into the desk."
                     loser "Oh yes. I'm cumming!"
+                    $ loser.run_orgasm()
                     $ loser.change_stats(slut = 1, max_slut = 100)
                     $ mc.change_locked_clarity(20)
                     "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
