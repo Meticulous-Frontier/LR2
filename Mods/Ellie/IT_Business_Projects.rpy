@@ -37,7 +37,7 @@ init 1 python:  #Multiple init 1 blocks to make organization easier.
         return True
 
     def production_equipment_selftest_project_requirement():
-        if len(mc.business.production_team) >= 5:
+        if len(mc.business.production_team) >= 3:
             return True
         return "Requires 3 production employees"
 
