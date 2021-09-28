@@ -251,6 +251,9 @@ label late_for_work_action_label:
                 $ the_person.draw_person()
                 mc.name "That's enough for now. Try to be on time from now on, or I'll have to spank you again."
                 the_person "Yes sir!"
+                $ the_person.outfit.restore_all_clothing()
+                $ the_person.draw_person()
+                "She quickly brings her clothing in order."
 
 
             "Make it up to me":
