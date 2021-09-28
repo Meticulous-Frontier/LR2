@@ -448,7 +448,8 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "Sounds great. I'll see you around?"
     the_person "Bye!"
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] turns and starts to walk up the starts to the apartment building."
+    "[the_person.possessive_title] turns and starts to walk up the stairs of her apartment building."
+    $ clear_scene()
     "Wow, what a busy night! You feel like you have a connection with [the_person.title]. She definitely seems eager too..."
     $ the_person.add_unique_on_room_enter_event(kaya_moving_in_with_mother_intro)   #Link this for now. Probably will change to a different place later on.
     $ the_person.add_unique_on_room_enter_event(kaya_meet_lily_at_uni)
@@ -477,7 +478,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     "[the_person.title] is very quick-witted. You can tell she is half joking... but also seriously wanting to know what you are doing here."
     mc.name "Ah, sorry I wasn't looking for you, to be honest... I was... er..."
     "Just then, you are saved by another familiar voice."
-    lily "Oh hey [lily.mc_title]!"
+    lily "Oh hey, [lily.mc_title]!"
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
     "[lily.possessive_title] walks up."
     lily "You didn't tell me you were gonna be here! Want to grab some lunch?"
