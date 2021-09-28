@@ -1805,11 +1805,11 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             $ the_person.change_love(amount = 3, max_modified_to = 30)
         "Dress up for you" if the_person.shop_investment_rate >= 2.0:
             call starbuck_replay_dressup_label(the_person) from _call_starbuck_replay_SBS132
-        # "Play with a dildo for you." if the_person.shop_investment_rate >= 3.0:   #TODO these options.
+        # "Play with a dildo for you" if the_person.shop_investment_rate >= 3.0:   #TODO these options.
         #     pass
-        # "Try more edible underwear." if the_person.shop_investment_rate >= 4.0:
+        # "Try more edible underwear" if the_person.shop_investment_rate >= 4.0:
         #     pass
-        # "Use whip and strap on." if the_person.shop_investment_rate >= 5.0:
+        # "Use whip and strap on" if the_person.shop_investment_rate >= 5.0:
         #     pass
         # "Anal on the swingset" if the_person.shop_investment_rate >= 6.0:
     "[the_person.title] lets out a big yawn."
@@ -1834,16 +1834,16 @@ label starbuck_replay_dressup_label(the_person):
     the_person "I guess when you put it that way. Anyway, go pick out something!"
     "You head out into the store and look at the lingerie. You try to come up with a racy outfit to put [the_person.possessive_title] in."
 
-    call screen outfit_creator(Outfit("New Outfit"))
+    call screen outfit_creator(Outfit("New Outfit"), outfit_type="under", slut_limit = the_person.effective_sluttiness())
     $ the_person.draw_person()
     if _return != "Not_New":
         $ created_outfit = _return
         "You pull out a few pieces of clothing and take them to [the_person.possessive_title]."
         "She looks at the outfit you've picked out for her and seems to think for a second."
-        if created_outfit.slut_requirement <= 40: #She likes it enough to try it on.
+        if created_outfit.slut_requirement <= the_person.effective_sluttiness() * .2: #She likes it enough to try it on.
             the_person "Are you sure? This seems kinda tame..."
             mc.name "I know. I just want to see what it looks like on you."
-        elif created_outfit.slut_requirement >= 80:
+        elif created_outfit.slut_requirement >= the_person.effective_sluttiness() * .8:
             the_person "Wow! I can honestly say I was not expecting you to go all in like this!"
             mc.name "If you don't feel comfortable..."
             "She interrupts you."
@@ -1852,63 +1852,69 @@ label starbuck_replay_dressup_label(the_person):
             the_person "Ah, this look great! I bet this generates a lot of interest..."
             "She gives you a quick wink."
             the_person "And I bet if we put it on an ad it would get some interest too!"
-        "[the_person.possessive_title] starts to get undressed in front of you."
+    else:
+        mc.name "It seems I've lost my touch, why don't you surprise me?"
+        the_person "Oh hotshot, give me a minute."
+        $ created_outfit = the_person.generate_random_appropriate_outfit(outfit_type = "UnderwearSets")
+        "After a few minutes she is back, holding an outfit in her hand."
+
+    "[the_person.possessive_title] starts to get undressed in front of you."
+    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    while strip_choice is not None:
+        $ the_person.draw_animated_removal(strip_choice)
+        "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
-        $ strip_choice = None
-        "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
-        $ the_person.apply_outfit(created_outfit, update_taboo = True)
-        $ the_person.draw_person()
+    $ strip_choice = None
+    "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
+    $ the_person.apply_outfit(created_outfit, update_taboo = True)
+    $ the_person.draw_person()
 
-        $ mc.change_arousal(10)
-        $ mc.change_locked_clarity(30)
-        the_person "Mmm, I like it! Alright, lets take some pictures!"
-        $ the_person.wardrobe.add_outfit(created_outfit)
-        "[the_person.title] hands you her phone with the photo app already up."
-        $ the_person.draw_person(position = "back_peek")
-        "In the first photo, you get some great shots of her backside. She sways her ass slowly, being careful not to go too fast in a way that would make the photos blurry."
-        $ the_person.draw_person(position = "against_wall")
-        "Next, she props up her leg on a stool and adopts a really sultry pose, with her legs open. She runs her hands down her sides and then back up between her legs..."
-        $ the_person.change_arousal(10)
-        $ the_person.draw_person(position = "cowgirl")
-        "Finally, she gets down on her knees and slowly starts crawling over to you in a sultry display of her femininity."
-        $ the_person.change_arousal(10)
-        $ mc.change_arousal(10)
-        $ mc.change_locked_clarity(30)
-        mc.name "Jesus girl, you are stunning..."
-        the_person "Showing off for you is getting me all worked up again. Will you ummm... lay down for me?"
-        "Thank god, things are about to get steamy."
-        mc.name "For you? Anything."
-        "You lay down on your back."
-        if not the_person.outfit.vagina_available():
-            "As you lay down, you notice [the_person.possessive_title] is stripping her bottoms off."
-            $the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
-        $ the_person.draw_person(position = "stand4")
-        "From the floor, you look up at the stunning sex shop owner. You notice a hint of moisture starting to form on her labia."
-        the_person "When we made the first ad, I sucked you off. But this time, I want a little action too..."
-        "[the_person.title] gets down beside you, then swings her leg over your body, her pussy right in your face. She adjusts her body into the classic sixty nine positions."
-        $ the_person.draw_person(position = "doggy")
-        mc.name "I suppose that is only fair."
-        "You put your hands on her heavenly ass cheeks and get her to adjust her body a bit until she is in the perfect position for you to dive in."
-        "You push your nose into her slit and begin to lick and suck on her clit. She exhales forcefully and you feel her hot breath on your dick."
-        the_person "Mmmm, that's it. Oh god you are so hard, I have to taste it..."
-        $ the_person.change_arousal(10)
-        $ mc.change_arousal(10)
-        $ mc.change_locked_clarity(30)
-        "You feel her tongue circling around the tip. She gives the head a couple of quick kisses and then parts her lips."
-        "Her lips slowly descend your length, entering her blissfully hot mouth. You refrain from bucking your hips to keep from gagging her."
-        call fuck_person(the_person, start_position = SB_sixty_nine, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS141
-        "When you finish, you slowly get up off the floor. You help [the_person.title] up as well."
-        $ the_person.draw_person()
-        the_person "So... you'll help me close up every night, right?"
-        mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
-        the_person "Damn. A girl can dream though."
-        $ the_person.change_love(amount = 3, max_modified_to = 40)
-        $ created_outfit = None
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    the_person "Mmm, I like it! Alright, lets take some pictures!"
+    $ the_person.wardrobe.add_outfit(created_outfit)
+    "[the_person.title] hands you her phone with the photo app already up."
+    $ the_person.draw_person(position = "back_peek")
+    "In the first photo, you get some great shots of her backside. She sways her ass slowly, being careful not to go too fast in a way that would make the photos blurry."
+    $ the_person.draw_person(position = "against_wall")
+    "Next, she props up her leg on a stool and adopts a really sultry pose, with her legs open. She runs her hands down her sides and then back up between her legs..."
+    $ the_person.change_arousal(10)
+    $ the_person.draw_person(position = "cowgirl")
+    "Finally, she gets down on her knees and slowly starts crawling over to you in a sultry display of her femininity."
+    $ the_person.change_arousal(10)
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    mc.name "Jesus girl, you are stunning..."
+    the_person "Showing off for you is getting me all worked up again. Will you ummm... lay down for me?"
+    "Thank god, things are about to get steamy."
+    mc.name "For you? Anything."
+    "You lay down on your back."
+    if not the_person.outfit.vagina_available():
+        "As you lay down, you notice [the_person.possessive_title] is stripping her bottoms off."
+        $the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
+    $ the_person.draw_person(position = "stand4")
+    "From the floor, you look up at the stunning sex shop owner. You notice a hint of moisture starting to form on her labia."
+    the_person "When we made the first ad, I sucked you off. But this time, I want a little action too..."
+    "[the_person.title] gets down beside you, then swings her leg over your body, her pussy right in your face. She adjusts her body into the classic sixty nine positions."
+    $ the_person.draw_person(position = "doggy")
+    mc.name "I suppose that is only fair."
+    "You put your hands on her heavenly ass cheeks and get her to adjust her body a bit until she is in the perfect position for you to dive in."
+    "You push your nose into her slit and begin to lick and suck on her clit. She exhales forcefully and you feel her hot breath on your dick."
+    the_person "Mmmm, that's it. Oh god you are so hard, I have to taste it..."
+    $ the_person.change_arousal(10)
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    "You feel her tongue circling around the tip. She gives the head a couple of quick kisses and then parts her lips."
+    "Her lips slowly descend your length, entering her blissfully hot mouth. You refrain from bucking your hips to keep from gagging her."
+    call fuck_person(the_person, start_position = SB_sixty_nine, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS141
+    "When you finish, you slowly get up off the floor. You help [the_person.title] up as well."
+    $ the_person.draw_person()
+    the_person "So... you'll help me close up every night, right?"
+    mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
+    the_person "Damn. A girl can dream though."
+    $ the_person.change_love(amount = 3, max_modified_to = 40)
+    $ created_outfit = None
     return
 
 #SBS150
