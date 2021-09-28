@@ -215,7 +215,8 @@ label kaya_setup_intro_event_label():
 
 label kaya_intro_label(the_person):
     "Even though it is later in the day, you decide to swing by the coffee-shop for a pick me up."
-    $ renpy.show("restaurant", what = restaraunt_background)
+    $ mc.change_location(coffee_shop)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     "When you step inside, there's a new girl working there you haven't seen before."
     "You listen as the person ahead of you orders."
@@ -253,7 +254,6 @@ label kaya_intro_label(the_person):
 label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first date.
     $ kaya.event_triggers_dict["can_get_drinks"] = True
     "You step into the coffee shop. You wonder if [the_person.title] is working. It is almost closing time."
-    $ renpy.show("restaurant", what = restaraunt_background)
     $ the_person.draw_person()
     "Sure enough, as you step inside, there she is. You've been getting to know her more lately, and you feel ready to ask her out."
     "When you step up to the counter, she smiles at you."
@@ -921,7 +921,8 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     mc.name "Sure thing. I'll be right there."
     $ mc.end_text_convo()
     "You make your way over to the coffee shop. When you get there the door is locked, since it is closed for the night, but after knocking [the_person.possessive_title] quickly lets you in."
-    $ renpy.show("restaurant", what = restaraunt_background)
+    $ mc.change_location(coffee_shop)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "Hey! Thanks for coming... can I get you any coffee? It's on the house..."
     mc.name "No thanks. It's pretty late for that."
@@ -1534,12 +1535,12 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ clear_scene()
     $ mc.change_location(downtown)
     $ mc.location.show_background()
-    "You leave the coffee shop and start to talk around downtown some, lost in your thoughts."
+    "You leave the coffee shop and start to walk around downtown some, lost in your thoughts."
     "Last week, you found out the hot barista you've been hitting on is actually a long-lost half-sister you never knew about."
     "And now... you are dating?"
     if the_person.is_pregnant():
         "And you've knocked her up!"
-    "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be somethign you would plan, but you decide for now to let her see what she can come up with."
+    "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be something you would plan, but you decide for now to let her see what she can come up with."
     "The obvious problem you need to deal with is [mom.possessive_title] and [lily.title]."
     "[mom.title] likely already knows about your relationship with [the_person.title]... how is she going to react when you reveal you are dating?"
     "And [lily.possessive_title]... she deserves to know that she also has a half-sister!"
