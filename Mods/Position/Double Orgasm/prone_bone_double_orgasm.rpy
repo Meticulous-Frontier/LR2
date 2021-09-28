@@ -17,7 +17,7 @@ label prone_bone_double_orgasm(the_girl, the_location, the_object):
             the_girl "Oh god!"
             $ climax_controller.do_clarity_release(the_girl)
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
-            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock"
+            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
             "You pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
             if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                 $ the_girl.discover_opinion("drinking cum")
@@ -34,7 +34,7 @@ label prone_bone_double_orgasm(the_girl, the_location, the_object):
             "You push your weight down on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
             the_girl "Oh fuck..."
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's pulling it deep into her womb."
-            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock"
+            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
             $ prone_bone.redraw_scene(the_girl)
