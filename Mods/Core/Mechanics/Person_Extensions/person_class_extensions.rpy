@@ -2369,7 +2369,7 @@ init -1 python:
             return False
         if self.love > 90 and self.obedience > 200:
             return False
-        return True
+        return self.event_triggers_dict.get("is_jealous", True) 
 
     Person.is_jealous = is_jealous
 
