@@ -85,7 +85,7 @@ init 2 python:
             return "ashley"
         elif stephanie.is_girlfriend():
             return "stephanie"
-        elif ashley.love - stephanie.love < 20 and ashley.love - stephanie.love > -20:
+        elif __builtin__.abs(ashley.love - stephanie.love) < 20: # love difference < 20
             return "both"
         elif ashley.love > stephanie.love:
             return "ashley"
@@ -972,15 +972,15 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     menu:
         "[the_person.title]" if not ashley_is_secret_path():    #Depending on previous choices, MC may have to sit next to a particular girl.
             "[the_person.possessive_title] scoots over to give you room to sit next to her. She sneaks a peek at you and you see a slight smile on her lips."
-            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .125, zoom = 1.25))
-            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.125, zoom = 0.75))
+            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
+            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
             $ the_person.change_stats(love = 3, happiness = 5)
             $ ashley_set_coffee_partner(the_person)
         "[stephanie.title]" if not ashley_is_normal_path():
             "[stephanie.possessive_title] scoots over so you have room to sit next to her."
             stephanie "Have a seat, [stephanie.mc_title]."
-            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.125, zoom = 0.75)) #TODO this is broken and I don't know why
-            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .125, zoom = 1.25))
+            $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
+            $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .1, zoom = 1.1))
             "She pats the seat next to her. You sit down and see her smirking at you before she keeps talking to her sister."
             $ stephanie.change_stats(love = 3, happiness = 5)
             $ ashley_set_coffee_partner(stephanie)
@@ -1004,10 +1004,9 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about the sisters."
     $ the_person.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
     $ ashley_reset_coffee_partner()
-    call advance_time from _call_advance_ashley_coffee_advance_01
+    $ scene_manager.clear_scene()
 
-    python:
-        scene_manager.clear_scene()
+    call advance_time from _call_advance_ashley_coffee_advance_01
     return
 
 label ashley_stephanie_saturday_coffee_recur_label(the_person):
@@ -1087,10 +1086,9 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     stephanie "Hey, you know where to find us next week!"
     the_person "Bye [the_person.mc_title]..."
     $ the_person.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_recur)
-    call advance_time from _call_advance_ashley_coffee_advance_02
+    $ scene_manager.clear_scene()
 
-    python:
-        scene_manager.clear_scene()
+    call advance_time from _call_advance_ashley_coffee_advance_02
     return
 
 label ashley_second_concert_intro_label(the_person):
@@ -1127,7 +1125,6 @@ label ashley_second_concert_intro_label(the_person):
     "[stephanie.title] is getting territorial. You decide for now to indulge her."
     mc.name "Okay. I'll plan to stay the night."
     "You take a sip of your coffee. It seems the sisters are finally ready to move on with their conversation."
-    #TODO link up mandatory event for the date itself.
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.add_mandatory_crisis(ashley_second_concert_date)
     return
@@ -1457,7 +1454,7 @@ label ashley_second_concert_date_label():
             mc.name "Chill out, we had sex earlier today, remember?"
             stephanie "That's... right..."
             stephanie "Wow! I am so sorry, I must seem completely paranoid..."
-            "Whew... you also fucked her sister, but atleast she seems to have bought it for now..."
+            "Whew... you also fucked her sister, but at least she seems to have bought it for now..."
             "She starts to suck on your cock again. Her tongue swirls all around you, licking up your pre-cum and soon you are hard as a rock."
         elif cum_clue:
             stephanie "I knew that was cum all over her dress in the hall! Just admit it! You fucked her!"
@@ -1571,7 +1568,7 @@ label ashley_blows_during_meeting_label():
     mc.name "What can I do for you?"
     stephanie "Ah, well, I'm having some trouble with the synthesis on one of the latest serum designs, I was wondering if you could look at it."
     "Fuck, you aren't sure you can handle science talk right now..."
-    "Those poutty lips are working wonders sliding up and down your cock... you just wanna grab her by the hair..."
+    "Those pouty lips are working wonders sliding up and down your cock... you just wanna grab her by the hair..."
     $ mc.change_arousal(20)
     $ mc.change_locked_clarity(40)
     mc.name "What issues are you having?"
@@ -1589,7 +1586,7 @@ label ashley_blows_during_meeting_label():
     "[ashley.possessive_title] takes you in her mouth again as her sister continues to talk about the serum issue."
     "[ashley.title]'s soft mouth is working your shaft hard. There is no way you don't cum soon."
     stephanie "Actually, maybe if homogenized the base before we mixed in the catalyst, that would help..."
-    mc.name "Yes I think that sounds... goood..."
+    mc.name "Yes I think that sounds... good..."
     $ mc.change_arousal(20)
     $ mc.change_locked_clarity(40)
     "You put your hand on [ashley.possessive_title]'s head again and force her down again as you start to cum, right down her throat."
@@ -1610,7 +1607,7 @@ label ashley_blows_during_meeting_label():
     ashley "Sure, but it wouldn't have been as fun otherwise."
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ scene_manager.update_actor(ashley, position = "stand3", display_transform = character_center_flipped(yoffset = 0, zoom = 1.0))
-    "[ashley.possessive_title] gets up and straighterns her outfit."
+    "[ashley.possessive_title] gets up and straightens her outfit."
     ashley "Until next time..."
     $ scene_manager.clear_scene()
     "Your office now empty, you can't help but shake your head. Are you in over your head with those two sisters?"
