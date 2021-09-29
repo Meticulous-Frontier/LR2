@@ -161,9 +161,8 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_arousal(10)
                             "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                             the_person "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
-                            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                            $ the_person.change_stats(happiness = 5, obedience = 5, slut = 1, max_slut = 30, love = 3)
-                            $ the_person.reset_arousal()
+                            $ the_person.have_orgasm(the_position = "missionary")
+                            $ the_person.change_stats(obedience = 5, love = 3)
                             $ mc.change_locked_clarity(25)
                             #show screen float_up_screen(["+5 Happiness","+5 Obedience","+2 Core Sluttiness" ],["float_text_yellow","float_text_grey","float_text_pink"])
                             "[the_person.possessive_title] runs her hands through your hair one last time. You get up and give her a kiss, letting her taste herself on your tongue."

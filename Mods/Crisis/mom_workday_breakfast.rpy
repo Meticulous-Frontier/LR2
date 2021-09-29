@@ -195,8 +195,8 @@ label mom_breakfast_action_label_medium():
             the_person "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
             $ the_person.call_dialogue("climax_responses_foreplay")
-            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "sitting") #TODO check and make sure this works...
-            $ the_person.change_stats(obedience = 3, happiness = 3)
+            $ the_person.have_orgasm(the_position = "sitting")
+            $ the_person.change_stats(obedience = 3)
             "When she has finished climaxing, you slowly withdraw your finger and sit back down at the table. You take a quick sip of your coffee."
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
             $ the_person.apply_planned_outfit()

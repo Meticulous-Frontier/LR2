@@ -160,8 +160,8 @@ label dirty_laundry_wash_your_clothes(the_person):
                         "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                         $ mc.change_locked_clarity(10)
                         the_person "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
-                        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                        $ the_person.change_stats(obedience = 5, happiness = 5, love = 3, slut = 1, max_slut = 50)
+                        $ the_person.have_orgasm(the_position = "missionary")
+                        $ the_person.change_stats(obedience = 5, love = 3)
                         "[the_person.possessive_title] runs her hands through your hair one last time. She sits up and gives you a kiss, tasting herself on your tongue."
                         the_person "Remember... this is our little secret... okay?"
                         "You hear the sound of the washing machine stopping. You start to open it up and move your laundry over to the dryer."
