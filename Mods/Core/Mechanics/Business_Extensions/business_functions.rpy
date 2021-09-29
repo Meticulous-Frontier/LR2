@@ -69,32 +69,22 @@ init -1 python:
 
     Business.is_trait_researched = is_trait_researched
 
-    def get_IT_projects(self):
-        if not hasattr(self, "_IT_projects"):
-            self._IT_projects = []
-        return self._IT_projects
+    def all_IT_projects():
+        return [x for x in business_IT_project_list + nanobot_IT_project_list]
 
-    def set_IT_projects(self, value):
-        self._IT_projects = value
+    def IT_projects(self):
+        if not hasattr(self, "_IT_project_map"):
+            self._IT_project_map = MappedList(IT_Project, all_IT_projects)
+        return self._IT_project_map
 
-    def del_IT_projects(self):
-        del self._IT_projects
+    Business.IT_projects = property(IT_projects, None, None, "Owned IT Project List")
 
-    Business.IT_projects = property(get_IT_projects, set_IT_projects, del_IT_projects, "Owned IT Project List")
+    def active_IT_projects(self):
+        if not hasattr(self, "_active_IT_project_map"):
+            self._active_IT_project_map = MappedList(IT_Project, all_IT_projects)
+        return self._active_IT_project_map
 
-
-    def get_active_IT_projects(self):
-        if not hasattr(self, "_active_IT_projects"):
-            self._active_IT_projects = []
-        return self._active_IT_projects
-
-    def set_active_IT_projects(self, value):
-        self._active_IT_projects = value
-
-    def del_active_IT_projects(self):
-        del self._active_IT_projects
-
-    Business.active_IT_projects = property(get_active_IT_projects, set_active_IT_projects, del_active_IT_projects, "Active IT Project List")
+    Business.active_IT_projects = property(active_IT_projects, None, None, "Active IT Project List")
 
     Business.IT_project_in_progress = None
 
@@ -115,19 +105,11 @@ init -1 python:
 
     def IT_toggle_project(project):
         if project in mc.business.active_IT_projects:
-            mc.business.active_IT_projects.remove(project)
-            if project.on_remove_function:
-                project.on_remove_function()
+            project.remove_policy()
+            # print("Toggle project: " + project.name + " -> Removed")
         else:
-            mc.business.active_IT_projects.append(project)
-            if project.on_apply_function:
-                project.on_apply_function()
-        return
-
-    def get_IT_project_by_identifier(identifier):
-        return next((x for x in (business_IT_project_list + nanobot_IT_project_list) if x.identifier == identifier), None)
-
-    Business.get_IT_project_by_identifier = get_IT_project_by_identifier
+            project.apply_policy()
+            # print("Toggle project: " + project.name + " -> Added")
 
     def IT_increase_project_progress(self, amount = 0, add_to_log = False):
         if not self.IT_project_in_progress:
@@ -146,26 +128,18 @@ init -1 python:
         if project:
             if project not in self.IT_projects:
                 self.IT_projects.append(project)
+                project.apply_policy()  # enable project at completion
+
                 if add_to_log:
                     mc.log_event( project.name + " IT Project Complete!", "float_text_green")
-        else:
-            if self.get_IT_project_by_identifier(self.IT_project_in_progress[0]) not in self.IT_projects:
-                self.IT_projects.append(self.get_IT_project_by_identifier(self.IT_project_in_progress[0]))
-                temp_name = self.get_IT_project_by_identifier(self.IT_project_in_progress[0]).name
-                if add_to_log:
-                    mc.log_event( temp_name + " IT Project Complete!", "float_text_green")
         return
 
     Business.IT_unlock_project = IT_unlock_project
 
     def IT_project_is_active(self, project):
-        if project in mc.business.active_IT_projects:
-            return True
-        return False
+        return project in mc.business.active_IT_projects
 
     Business.IT_project_is_active = IT_project_is_active
-
-
 
 
 

@@ -495,7 +495,7 @@ init -1 python:
             if the_person_one.sluttiness + 1 > self.slut_cap:
                 slut_report = "Position Max Reached."
             else:
-                slut_report = the_person_one.change_slut_temp(1)
+                slut_report = the_person_one.change_slut(1)
             #SBNOTE Hard to imagine girls being too slutty for Threesomes
             #if the_person.arousal > the_position.slut_cap:
             #    if the_person.sluttiness > the_position.slut_cap: #She's too slutty to find this interesting.
@@ -519,7 +519,7 @@ init -1 python:
             if the_person_two.sluttiness + 1 > self.slut_cap:
                 slut_report = "Position Max Reached."
             else:
-                slut_report = the_person_two.change_slut_temp(1)
+                slut_report = the_person_two.change_slut(1)
 
             the_person_two.change_arousal(change_amount)
 
@@ -575,9 +575,9 @@ label SB_threesome_description(the_person_one, the_person_two, the_position, the
         $ mc.listener_system.fire_event("girl_climax", the_person = the_person_one, the_position = the_position, the_object = the_object)
         #
         $ the_position.current_modifier = None
-        if the_person_one.sluttiness > the_person_one.core_sluttiness and the_person_one.core_sluttiness < the_position.slut_cap:
-            $ the_person_one.change_slut_core(1)
-            $ the_person_one.change_slut_temp(-1)
+        if the_person_one.sluttiness > the_person_one.sluttiness and the_person_one.sluttiness < the_position.slut_cap:
+            $ the_person_one.change_slut(1)
+            $ the_person_one.change_slut(-1)
         $the_person_one.change_happiness(2) #Orgasms are good, right?
     if the_person_two.arousal >= 100:
         #She's climaxing.
@@ -586,9 +586,9 @@ label SB_threesome_description(the_person_one, the_person_two, the_position, the
         $ mc.listener_system.fire_event("girl_climax", the_person = the_person_two, the_position = the_position, the_object = the_object)
         #
         $ the_position.current_modifier = None
-        if the_person_two.sluttiness > the_person_two.core_sluttiness and the_person_two.core_sluttiness < the_position.slut_cap:
-            $ the_person_two.change_slut_core(1)
-            $ the_person_two.change_slut_temp(-1)
+        if the_person_two.sluttiness > the_person_two.sluttiness and the_person_two.sluttiness < the_position.slut_cap:
+            $ the_person_two.change_slut(1)
+            $ the_person_two.change_slut(-1)
         $the_person_two.change_happiness(2) #Orgasms are good, right?
 
 

@@ -5,7 +5,7 @@ init 5 python:
         licker = None
         for person in helpful_people:
             person.change_obedience(3)
-            person.change_slut_temp(1)
+            person.change_slut(1)
             if person.has_cum_fetish() and licker is None:
                 licker = person
             if person.get_opinion_score("being submissive") > 0 and person.get_opinion_score("drinking cum") > 0 and licker is None:
@@ -88,7 +88,7 @@ label horny_at_work_crisis_enhanced_label():
 
         "Jerk off at your desk (tooltip)With nobody around, what's stopping you?" if not mc.location.people:
             "There's no reason to be self conscious when you're all by yourself inside your own business. You lean back in your chair and unzip your pants."
-            call bedroom_masturbation(location_description = "work", edging_available = False, should_advance_time = False)
+            call bedroom_masturbation(location_description = "work", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation
             "You tidy up and get back to work, feeling much more focused."
 
         "Jerk off at your desk, loud and proud (tooltip)Your company, your rules, right?" if mc.location.people:
@@ -116,7 +116,7 @@ label horny_at_work_crisis_enhanced_label():
                 "You lock eyes with her as you stroke your cock."
                 mc.name "I'm taking a break and blowing off some steam. If you're uncomfortable you're welcome to leave."
 
-                $ active_person.change_stats(happiness = -30, obedience = -2, slut_temp = 2)
+                $ active_person.change_stats(happiness = -30, obedience = -2)
 
                 "She tries to glare at you, but she can't keep her eyes from drifting down to your hard shaft."
                 "When it becomes clear you aren't going to stop, let alone apologize, she stands up and storms out of the room."
@@ -134,7 +134,7 @@ label horny_at_work_crisis_enhanced_label():
 
                 python:
                     for unhappy_person in unhappy_people: #Note that the main person was removed from the list so these penalties aren't being applied twice.
-                        unhappy_person.change_stats(happiness = -30, obedience = -2, slut_temp = 2)
+                        unhappy_person.change_stats(happiness = -30, obedience = -2)
                         unhappy_person.change_location(lobby) #Move everyone to the lobby so they aren't considered observers for the rest of teh event.
                         scene_manager.remove_actor(unhappy_person)
                     unhappy_person = None
@@ -361,7 +361,7 @@ label horny_at_work_crisis_enhanced_label():
                         $ active_person.draw_person(position = "walking_away")
                         "She blushes and turns around, leaving quickly."
                         $ clear_scene()
-                        call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False)
+                        call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation_1
                         "When you're finished you clean up and get back to work, your mind now crystal clear."
 
                     "Punish her for inappropriate behaviour" if office_punishment.is_active():
@@ -381,7 +381,7 @@ label horny_at_work_crisis_enhanced_label():
 
             else:
                 "Once you have some privacy you pull some porn up on your phone, pull out your dick, and take matters into your own hand."
-                call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False)
+                call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation_2
                 "When you're finished you clean up and get back to work, your mind now crystal clear."
 
 
@@ -466,7 +466,7 @@ label horny_at_work_crisis_enhanced_label():
 
                         $ mc.change_locked_clarity(10)
                         $ the_person.discover_opinion("not wearing anything")
-                        $ the_person.change_slut_temp(the_person.get_opinion_score("not wearing anything")+1)
+                        $ the_person.change_slut(the_person.get_opinion_score("not wearing anything")+1)
                         $ the_person.change_obedience(the_person.get_opinion_score("not wearing anything")+1)
 
                         if the_person.get_opinion_score("not wearing anything") > 0:

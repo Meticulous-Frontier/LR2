@@ -66,7 +66,7 @@ label genius_sex_responses_foreplay(the_person):
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
             the_person "Oh wow you are hitting all the right places."
-            "She purs warmly."
+            "She purrs warmly."
         else:
             the_person "Oh my god..."
             "It seems like she's trying not to moan too loudly."
@@ -393,7 +393,7 @@ label genius_flirt_response(the_person):
             "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
-            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
             the_person "Hey, maybe if you buy me dinner first."
@@ -940,13 +940,13 @@ label genius_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "Oh my god, you two are just... Wow..."
-        $ change_report = the_person.change_slut_temp(1)
+        $ change_report = the_person.change_slut(1)
         "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my god that's... Wow that looks...Hot."
-        $ change_report = the_person.change_slut_temp(2)
+        $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
@@ -982,14 +982,14 @@ label genius_being_watched(the_person, the_watcher, the_position):
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
         $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_slut(-1)
         "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return

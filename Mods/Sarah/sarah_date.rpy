@@ -24,7 +24,7 @@ label sarah_bar_date_ask_label(the_person):
         if the_person.get_opinion_score("cheating on men") > 0:
             the_person "Oh, that sounds like a lot of fun!"
             "She gives you a playful smile."
-            the_person "Just don't tell my [so_title], okay? He might not like megoing to a bar with a hot guy like you."
+            the_person "Just don't tell my [so_title], okay? He might not like me going to a bar with a hot guy like you."
             mc.name "My lips are sealed."
             if the_person.effective_sluttiness() > 60:
                 the_person "Treat me right and mine might not be. He's normally out late playing poker with the boys on Saturday. How does that sound?"

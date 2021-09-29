@@ -841,7 +841,7 @@
 #     elif the_person.effective_sluttiness() < 50:
 #         the_person "Come on, let's go find someplace quiet where we won't be interrupted."
 #     else:
-#         the_person "No point waisting any time then, right? Let's get to it!"
+#         the_person "No point wasting any time then, right? Let's get to it!"
 #     return
 #
 # label athlete_seduction_accept_alone(the_person):
@@ -893,7 +893,7 @@
 #             the_person "Thank you for the compliment, [the_person.mc_title]."
 #     else:
 #         if the_person.effective_sluttiness() > 50:
-#             the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+#             the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
 #             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
 #         else:
 #             the_person "Hey, maybe if you buy me dinner first."
@@ -966,7 +966,7 @@
 #         the_person "Fuck! I'm gonna... you're gonna make me...!"
 #         "[the_person.title] convulses as she orgasms. She is caught completely off guard by how fast you made her cum."
 #         "The hand on the back of your head lets go but you continue your assault for several more seconds."
-#         $ the_person.change_slut_temp(1)
+#         $ the_person.change_slut(1)
 #         $ the_person.change_happiness(2)
 #     else:
 #         the_person "Mmm, that's it. Your tongue feels so good. Give it a good workout..."
@@ -1030,7 +1030,7 @@
 #         $ the_person.change_arousal(20) #90 + 8
 #         if the_person.arousal > 100:
 #             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
-#             $ the_person.change_slut_temp(1)
+#             $ the_person.change_slut(1)
 #             $ the_person.change_happiness(2)
 #         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
 #         mc.name "That's it, bitch. I'm about to cum!"
@@ -1046,7 +1046,7 @@
 #                     "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
 #                     the_person  "Yes! Fill me with your cum!"
 #                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
-#                     $ the_person.change_slut_temp(1)
+#                     $ the_person.change_slut(1)
 #                     $ the_person.change_happiness(2)
 #                     $ the_person.cum_in_vagina()
 #                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
@@ -1072,7 +1072,7 @@
 #         $ the_person.change_arousal(20) #70 + 8
 #         if the_person.arousal > 100:
 #             "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
-#             $ the_person.change_slut_temp(1)
+#             $ the_person.change_slut(1)
 #             $ the_person.change_happiness(2)
 #     if the_person.effective_sluttiness() > 70:
 #         the_person "You should umm, you know, stick a finger in my other hole..."
@@ -1106,7 +1106,7 @@
 #                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
 #                     $ the_person.change_arousal(20)#110 + 8
 #                     "Her ass begins to spasm. Her buttery smooth back passage squeezes you over and over as her body is racked with yet another orgasm. It feels incredible."
-#                     $ the_person.change_slut_temp(2)
+#                     $ the_person.change_slut(2)
 #                     $ the_person.change_happiness(5)
 #                     mc.name "Get ready, I'm gonna cum!"
 #                     "[the_person.title] is incoherent, and doesn't process your words."
@@ -1130,7 +1130,7 @@
 #         the_person "That's it, cum with me!"
 #         "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
 #         $ the_person.change_happiness(5)
-#         $ the_person.change_slut_temp(1)
+#         $ the_person.change_slut(1)
 #         $ the_person.cum_in_vagina()
 #         "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
 #         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
@@ -1151,7 +1151,7 @@
 #                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
 #                 "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
 #                 $ the_person.change_happiness(5)
-#                 $ the_person.change_slut_temp(1)
+#                 $ the_person.change_slut(1)
 #                 $ the_person.cum_in_vagina()
 #                 "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
 #                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
@@ -1257,13 +1257,13 @@
 #     elif the_person.effective_sluttiness() < the_position.slut_requirement:
 #         $ the_person.draw_person()
 #         the_person "Oh my god, you two are just... Wow..."
-#         $ change_report = the_person.change_slut_temp(1)
+#         $ change_report = the_person.change_slut(1)
 #         "[the_person.title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
 #         $ the_person.draw_person()
 #         the_person "Oh my god that's... Wow that looks...Hot."
-#         $ change_report = the_person.change_slut_temp(2)
+#         $ change_report = the_person.change_slut(2)
 #         "[the_person.title] watches you and [the_sex_person.name] [the_position.verb]."
 #
 #     else:
@@ -1299,14 +1299,14 @@
 #         #She's into it but shamed by the prude watching her.
 #         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
 #         $ the_person.change_arousal(-1)
-#         $ the_person.change_slut_temp(-1)
+#         $ the_person.change_slut(-1)
 #         "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
 #
 #     else: #the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
 #         #They're both into it but not fanatical about it.
 #         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
 #         $ the_person.change_arousal(1)
-#         $ the_person.change_slut_temp(1)
+#         $ the_person.change_slut(1)
 #         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 #
 #     return

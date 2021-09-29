@@ -25,7 +25,7 @@ init 1400 python:
             valid_titles.append("Milady")
         if person.sluttiness > 60 and person.has_role(mistress_role):
             valid_titles.append("Mistress")
-        if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
         return valid_titles
     def alpha_possessive_titles(person):
@@ -37,9 +37,9 @@ init 1400 python:
             valid_possessive_titles.append("Your naughty Manager")
         if person.sluttiness > 60 and person.has_role(mistress_role):
             valid_possessive_titles.append("Your kinky Mistress")
-        if person.sluttiness > 100 and (the_person.get_opinion_score("threesomes") > 0 or the_person.get_opinion_score("other girls") > 0):
+        if person.sluttiness > 100 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
             valid_possessive_titles.append("Your bi-sexual queen")
-        if person.sluttiness > 100 and the_person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal queen")
         return valid_possessive_titles
     def alpha_player_titles(person):
@@ -694,7 +694,7 @@ label alpha_flirt_response_affair(the_person):
                     $ mc.change_locked_clarity(10)
                     "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
                     mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
-                    "She leans her body against yours for a moment and squeezes you cock. You give her butt a final slap and let go of her."
+                    "She leans her body against yours for a moment and squeezes your cock. You give her butt a final slap and let go of her."
 
         else: #She's shy or nervous about being discovered
             "[the_person.possessive_title] glances around, then glares at you sternly."
@@ -994,13 +994,13 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person "[the_person.mc_title], why are you doing this here..."
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person "Well, [the_person.mc_title]! I might show you my personal skills someday..."
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         "[title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
 
     else:
@@ -1038,14 +1038,14 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], don't do that, not here. I have a reputation to keep."
         $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_slut(-1)
         "[the_person.possessive_title] is very uneasy with [the_watcher.name] watching."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "[the_watcher.name], just have a good look, I may let you try him one day."
         $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
 
     return

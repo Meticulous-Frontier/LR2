@@ -1,5 +1,5 @@
 #Designed for the mid game. Your employee model brainstorms marketing ideas with you and comes up with a wet-tshirt contest.
-#Requires company model with atleast moderate sluttiness (>40)
+#Requires company model with at least moderate sluttiness (>40)
 #Depending on how slutty the company is in general, some girls may come out for fun, others with persuasion, some require a bribe (extra pay)
 #Once completed, get a temporary sales boost based on how slutty the girls were who participated.
 #Unlocks the wet-shirt scene permanently and MC can run one again once a week if desired.
@@ -130,9 +130,9 @@ label quest_wet_tshirt_contest_intro_label(the_person):
     the_person "Hello [the_person.mc_title], I could use your help with something."
     mc.name "What do you need?"
     the_person "I've been looking into different methods we could use to help market product, but I've kind of hit a wall."
-    the_person "As you know, there's been a huge reason rise in livestreaming as a source of marketing potential, but I can't figure out what we could do that would get us the eyeballs we are looking for."
+    the_person "As you know, there's been a huge reason rise in live-streaming as a source of marketing potential, but I can't figure out what we could do that would get us the eyeballs we are looking for."
     mc.name "You mean you want to have... some kind of broadcast?"
-    the_person "Right. I think we could make a livestream for our product, and if we targetted the right audience, it would help drive up demand for the product, while being extremely cheap to produce."
+    the_person "Right. I think we could make a live-stream for our product, and if we targeted the right audience, it would help drive up demand for the product, while being extremely cheap to produce."
     mc.name "Hmm... that's an interesting idea."
     the_person "I just can't figure out what exactly we could stream. Obviously the nature of the product lends itself to certain activities, but for the most possible eyeballs, we need to keep everyone clothed."
     "Hmmm, you think about it for a while."
@@ -142,11 +142,11 @@ label quest_wet_tshirt_contest_intro_label(the_person):
         "Wet T-shirt Contest":
             pass
         "Forget it":
-            mc.name "I'm sorry, I'm not sure it is a good idea for us to do a livestream for a pharmaceutical. I appreciate the hard work you put into it though."
+            mc.name "I'm sorry, I'm not sure it is a good idea for us to do a live-stream for a pharmaceutical. I appreciate the hard work you put into it though."
             the_person "Aww, really? Okay... I'll try to think of something else."
             #TODO end quest.
             $ quest_wet_tshirt_contest().set_quest_flag(19)
-    mc.name "What if we got say 3 employees, and on livestream we had them do a wet t-shirt contest?"
+    mc.name "What if we got say 3 employees, and on live-stream we had them do a wet t-shirt contest?"
     mc.name "Everyone would stay clothed, but that would be sexy and help drive demand for serum."
     the_person "Hmmm, that might just work! If you got it set up, I could do some advertising to drive up hype."
     "You consider how to go about setting it up."
@@ -155,7 +155,7 @@ label quest_wet_tshirt_contest_intro_label(the_person):
     if the_person.has_large_tits():
         mc.name "That's too bad, you've got a great rack..."
         $ the_person.change_happiness(2)
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         the_person "Ah, thank you. It would probably be for the best to pick out girls with larger chests in general for this though."
     else:
         the_person "Besides, I'm a little flat chested for what you have in mind. If you really want to drive interest, try to find girls who are a little more blessed in the chest."
@@ -206,7 +206,7 @@ label quest_wet_tshirt_contest_hr_talk_label(the_person):
         "She rolls her eyes hard, but eventually looks over at you."
         the_person "Fine. Let me see..."
     else:
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         the_person "That's an interesting idea, for sure... but why come talk to me about it?"
         mc.name "Being in HR, I was hoping you could help me find the volunteers."
         "She seems a bit relieved."
@@ -217,7 +217,7 @@ label quest_wet_tshirt_contest_hr_talk_label(the_person):
     #TODO link next event.
     return
 
-# 
+#
 # label quest_essential_oils_abandon_label():
 #     "It's been over a week now since you started considering adding essential oil as a serum trait. The more you think about it, the dumber it sounds."
 #     "You a run a legitimate pharmaceutical business, there's no room for that bullshit around here."

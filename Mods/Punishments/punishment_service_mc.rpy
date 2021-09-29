@@ -36,7 +36,7 @@ init 1 python: #Original code is at -1, so make sure we are higher than that for
                 person.sex_skills["Oral"] = min(4, person.sex_skills["Oral"] + 1)
 
                 if person.get_opinion_score("giving blowjobs") <= -2:
-                    person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she atleast tries to give MC a blowjob.
+                    person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she at least tries to give MC a blowjob.
 
                 practice_cocksucking_report_action = Action("Cocksucking practice report crisis", employee_cocksucking_practice_report_requirement, "employee_cocksucking_practice_report_label", args = person, requirement_args = person)
                 mc.business.add_mandatory_crisis(practice_cocksucking_report_action)
@@ -86,7 +86,7 @@ label punishment_service_mc_label(the_person, the_infraction):
         the_person "That's... that's crazy!"
         mc.name "What's crazy is how bad at giving head you are. You heard me, now get back to work."
 
-        $ the_person.change_stats(happiness = -5, obedience = 3, slut_temp = 2)
+        $ the_person.change_stats(happiness = -5, obedience = 3)
         $ add_practice_cocksucking_work_action(the_person)
     else:
         "You give a sigh, satisfied after [the_person.possessive_title] drained your balls."
@@ -132,7 +132,7 @@ label employee_cocksucking_practice_report_label(the_person):
         mc.name "Fine... next time I'll just have you service me with a different hole."
         the_person "Yes sir."
         mc.name "It's crazy how bad at giving head you are. Now get back to work."
-        $ the_person.change_stats(happiness = -5, obedience = 3, slut_temp = 2)
+        $ the_person.change_stats(happiness = -5, obedience = 3)
     else:
         "You give a sigh, satisfied after [the_person.possessive_title] drained your balls."
         mc.name "Much better performance."

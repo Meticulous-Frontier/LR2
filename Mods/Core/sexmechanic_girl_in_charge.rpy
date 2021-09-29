@@ -215,7 +215,7 @@ init 2:
                 if the_goal in position.opinion_tags:
                     if the_person.sluttiness >= position.slut_requirement:
                         if not position.skill_tag in prohibit_tags:
-                            position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has atleast weight 20, with higher weights if actual sluttiness is close to requirement
+                            position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has at least weight 20, with higher weights if actual sluttiness is close to requirement
 
             if len(position_option_list) == 0: #Somehow no positions available for this requirement.
                 return None
@@ -527,7 +527,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person "Okay."
-        #Second condition, she isn't obedient but atleast likes MC a little bit. She offers to continue
+        #Second condition, she isn't obedient but at least likes MC a little bit. She offers to continue
         elif sex_can_continue(the_person, the_node = current_node) and the_person.love > 0 and mc.arousal > 50:
             "As she finishes up, [the_person.title] gives your erection a couple strokes."
             the_person "Wow, you are still rock hard. Do you want me to keep going?"
@@ -552,12 +552,12 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                     "She laughs at your plight while she considers what to do."
                     if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continuing
                         the_person "Hmm, I guess it's only fair. Maybe I'll even finish again!"
-                        $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                        $ the_person.change_stats(obedience = -5)
                         call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
                     else:
                         the_person "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
                         "[the_person.possessive_title] gets up, leaving you hanging."
-                        $ the_person.change_stats(obedience = -5, slut_temp = 5)
+                        $ the_person.change_stats(obedience = -5, slut = -1)
                 "Finish":
                     mc.name "There's nothing special about you. Let's be done, I can always get a more willing cunt."
                     the_person "Whatever [the_person.mc_title], your loss!"
@@ -607,10 +607,8 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
         report_log["end arousal"] = the_person.arousal
         report_log["girl orgasms"] = report_log.get("girl orgasms",0) + start_girl_orgasm
-        if report_log.get("girl orgasms",0) > 0 or report_log.get("girl one orgasms", 0) > 0:
-            the_person.arousal = 0 # If she came she's satisfied.
-        else:
-            the_person.change_arousal(-the_person.arousal/2) #Otherwise they are half as aroused as you leave them.
+
+        the_person.change_arousal(-the_person.arousal/(report_log.get("girl orgasms", 0)+2))
 
         report_log["guy orgasms"] = report_log.get("guy orgasms",0) + start_mc_orgasm
         mc.condom = False

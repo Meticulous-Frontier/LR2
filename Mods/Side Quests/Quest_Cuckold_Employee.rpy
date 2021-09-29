@@ -1,5 +1,5 @@
 #Mid game quest. Is available mid game, will allow you to knock an employee up early..
-#Requires a married woman with no children atleast sluttiness... 40? 60?
+#Requires a married woman with no children at least sluttiness... 40? 60?
 #Employee approaches MC, asking if company has had any luck with fertility serum for males.
 #If fertility serum for males exist, she asks if anything else has been researched.
 #After no, she gets sad, goes away. 2 days later she approaches MC and says she is distraught because her husband is infertile, doesn't know what to do.
@@ -43,6 +43,7 @@ init 1 python:
         quest.set_quest_flag(1)
         person.add_opinion("creampies", 2, discovered = False, add_to_log = False)
         person.add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
+        person.add_opinion("vaginal sex", 2, discovered = False, add_to_log = False)
         person.on_birth_control = False
         mc.business.add_mandatory_crisis(quest_cuckold_employee_intro)
         game_hints.append(Hint("Cuckold Employee", "An employee is having trouble conceiving.", "quest_cuckold_employee().get_quest_flag() <= 11", "quest_cuckold_employee().get_quest_flag() > 11"))
@@ -106,7 +107,7 @@ init 1 python:
     def quest_cuckold_employee_decision_requirement():
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if quest_cuckold_employee().quest_event_dict.get("start_day", 0) + 2 < day: #Atleast two days after first convo
+                if quest_cuckold_employee().quest_event_dict.get("start_day", 0) + 2 < day: #at least two days after first convo
                 #TODO random element so it isn't necessarily in the morning?
                     return True
         return False
@@ -154,7 +155,7 @@ init 1 python:
         able_person_list = []
         for person in mc.business.get_employee_list():
             if not quest_director.is_person_blocked(person):
-                if person.core_sluttiness > 50 and not person.is_pregnant():
+                if person.sluttiness > 50 and not person.is_pregnant():
                     if person.relationship == "Married" and person.kids == 0:
                         able_person_list.append(person)
         return get_random_from_list(able_person_list)
@@ -456,7 +457,7 @@ label quest_cuckold_employee_rethink_decision_label():
     $ the_person.break_taboo("vaginal_sex")
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person "Oh god, I can feel it inside me! We really did it."
-        $ the_person.change_stats(happiness = 2, obedience = 2, love = 1, slut_temp = 1)
+        $ the_person.change_stats(happiness = 2, obedience = 2, love = 1)
         the_person "There's so much, god I have such a good bull."
         mc.name "Do you think that did it?"
         the_person "I hope so!... but you never know."
@@ -512,7 +513,7 @@ label quest_cuckold_employee_rethink_decision_label():
         the_person "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreperably."
+        "[the_person.title] stands up, throws on her clothes and storms out of your office. Unfortunately, you may have damaged your relationship with her irreparably."
         $ quest_cuckold_employee().set_quest_flag(28)
         $ quest_cuckold_employee().quest_completed()
     return
@@ -665,7 +666,7 @@ label quest_cuckold_employee_gloryhole_label():
     "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_stats(happiness = 3, slut_temp = 3, add_to_log = False)
+    $ the_person.change_stats(happiness = 3, slut = 1, max_slut = 60, add_to_log = False)
     if not the_person.is_pregnant():
         $ become_pregnant(the_person)
     $ quest_cuckold_employee().set_quest_flag(35)
@@ -677,7 +678,7 @@ label quest_cuckold_employee_gloryhole_label():
 label quest_cuckold_employee_after_window_label():
     $ the_person = quest_cuckold_employee_get_target()
     if not the_person.is_pregnant():
-        if quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her atleast 5 times via the event. #TODO we should probably track this via person.sex_record instead...
+        if quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) >= 5:  #You creamed her at least 5 times via the event. #TODO we should probably track this via person.sex_record instead...
             $ become_pregnant(the_person)
 
     if the_person.is_pregnant():#Success
@@ -759,14 +760,14 @@ label quest_cuckold_employee_knocked_up_label():
     the_person "Yes my [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")
     "Her ass in position, you quickly get her ready."
-    $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
+    $ the_person.strip_to_vagina(position = "doggy", prefer_half_off = True)
     call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, skip_condom = True) from _breed_cuckold_victory_lap_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person "Sweet Jesus, no wonder you knocked me up. I'm so full of your cum, it's amazing..."
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
-    $ the_person.change_stats(obedience = 2, slut_temp = 2, slut_core = 2)  #She is now your slutty breeding stock.
+    $ the_person.change_stats(obedience = 2, slut = 2, max_slut = 70)  #She is now your slutty breeding stock.
     #TODO consider giving her a collar?
     $ quest_cuckold_employee().set_quest_flag(101)
     $ the_person.personality = get_breeding_stock_personality(the_person)

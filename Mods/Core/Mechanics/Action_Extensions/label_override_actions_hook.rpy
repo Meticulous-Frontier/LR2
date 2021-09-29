@@ -9,7 +9,7 @@ init 10 python:
             if found:
                 try:
                     idx = action_mod_list.index(found)
-                    found.enable = action_mod_list[idx].enabled
+                    found.enabled = action_mod_list[idx].enabled
 
                     # replace the one in the action_mod_list with the current action implementation from the instance list
                     action_mod_list[idx] = found

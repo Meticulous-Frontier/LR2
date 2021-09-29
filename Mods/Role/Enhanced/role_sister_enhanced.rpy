@@ -127,11 +127,12 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
             the_mom "[the_mom.mc_title], make sure to get some shots of me embarrassing your sister."
             "She leans over [the_sister.title]'s shoulder and kisses her on the side of the cheek."
             $ the_mom.change_happiness(10)
-            $ the_mom.change_slut_temp(2)
+            $ the_mom.change_slut(2)
             $ the_sister.change_happiness(5)
             "You get some great pictures of [the_mom.title] and [the_sister.title] playing around on the bed together."
 
         "Bring up [the_sister.title]'s boobs" if the_person.event_triggers_dict.get("sister_boobjob_convince_mom_enabled", False):
+            $ the_group = GroupDisplayManager([the_sister, the_mom], primary_speaker = the_sister)
             call sister_convince_mom_boobjob(the_mom, the_sister) from _call_from_sister_convince_mom_boobjob_enhanced
 
         # TODO: Add some extra variations for this as sluttiness and Obedience rises.

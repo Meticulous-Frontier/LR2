@@ -70,7 +70,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
     else:
         "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
         the_girl "Oh god, you fuck me so good, I can barely keep up!"
-        "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
+        "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     menu:
         "Spank her":
@@ -136,7 +136,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
                     "You can feel her juices dripping down from her slit in response to your touch."
             if the_girl.arousal > 90:
                 the_girl "Oh fuck! Don't stop! Don't you dare stop!"
-                "Her moans clearly indicate an impending orgasm. As best as you can, you fuck her while you roughly rub her clit."
+                "Her moans clearly indicate an impending orgasm. As best you can, you fuck her while you roughly rub her clit."
             else:
                 "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her."
     return

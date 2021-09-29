@@ -13,9 +13,9 @@ init 2 python:
     def production_failure_increase_sluttiness(person):
         for team_member in person.work.people:
             team_member.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
-            team_member.change_stats(slut_temp = 3, slut_core = 3, arousal = 50, add_to_log = False)
+            team_member.change_stats(slut = 1 + person.get_opinion_score("not wearing anything"), max_slut = 30, arousal = 50, add_to_log = False)
 
-        mc.log_event("All " + person.work.formal_name + " staff: +3 sluttiness","float_text_pink")
+        mc.log_event("All " + person.work.formal_name + " staff affected","float_text_pink")
         return
 
     def production_failure_clear_situational_sluttiness(person):
@@ -69,7 +69,7 @@ label production_failure_action_label:
 
                 $ production_failure_increase_sluttiness(the_person)
                 $ the_person.draw_person(position = "stand2", emotion = "happy")
-                $ the_person.change_slut_temp(3)
+                $ the_person.change_slut(2)
                 "[the_person.name] appears to have been particularly effected."
                 "[the_person.name] looks around desperately trying to figure out the source of her sudden arousal. When she sees you she immediately loses control."
                 the_person "Please [the_person.mc_title], I need you.... please help me... "

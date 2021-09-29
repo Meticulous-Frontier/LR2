@@ -17,7 +17,7 @@ init 2:
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
 
-        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+        default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
         default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
 
         add "Science_Menu_Background.png"
@@ -54,7 +54,7 @@ init 2:
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                for trait in sorted(list_of_traits, key = lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                for trait in sorted(list_of_traits + mc.business.blueprinted_traits, key = lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
                                     if trait not in starting_serum.traits and trait.researched and "Production" in trait.exclude_tags:
                                         $ trait_tags = get_exclude_tags(trait)
                                         $ trait_allowed = get_trait_allowed(starting_serum, trait)
@@ -95,7 +95,7 @@ init 2:
 
                             vbox:
                                 for dt in range(mc.business.research_tier + 1, -1, -1):
-                                    if any([x for x in list_of_traits if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
+                                    if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
 
                                         frame:
                                             background "#000000"
@@ -150,7 +150,7 @@ init 2:
                                     $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                     $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                    textbutton trait.name + trait_tags + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                    textbutton trait.name + trait_tags + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
                                         style "textbutton_style"
                                         text_style "serum_text_style"
                                         xsize 520

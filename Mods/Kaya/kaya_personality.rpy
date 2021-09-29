@@ -431,7 +431,7 @@ label kaya_flirt_response(the_person):
             "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
-            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
             the_person "Hey, maybe if you buy me dinner first."
@@ -689,7 +689,7 @@ label kaya_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "You are so rediculous. Come here, lets make out!"
+        the_person "You are so ridiculous. Come here, lets make out!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."
@@ -831,7 +831,7 @@ label kaya_condom_bareback_ask(the_person):
 label kaya_condom_bareback_demand(the_person): # Lead in: mc.name "One sec, let me just get a condom on..."
     the_person "Don't even think about it. You know how I feel about those."
     the_person "Just pull out if you don't want to get me pregnant."
-    "[the_person.possessive_title] gives you a mischevious smile."
+    "[the_person.possessive_title] gives you a mischievous smile."
     the_person "If I let you anyway!"
     return
 
@@ -1042,13 +1042,13 @@ label kaya_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "Oh my god, you two are just... Wow..."
-        $ change_report = the_person.change_slut_temp(1)
+        $ change_report = the_person.change_slut(1)
         "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my god that's... Wow that looks...Hot."
-        $ change_report = the_person.change_slut_temp(2)
+        $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
@@ -1084,14 +1084,14 @@ label kaya_being_watched(the_person, the_watcher, the_position):
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
         $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_slut(-1)
         "[the_person.title] seems uncomfortable with [the_watcher.title] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.title] around."
 
     return
@@ -1298,6 +1298,12 @@ label kaya_sex_review(the_person, the_report):
             the_person "I have never...fucked like that...It was just amazing..."
             "She seems dazed by her orgasm as she struggles to put full sentences together."
             the_person "Something took over...and I did....just gimme a second."
+
+    # special condition abort due to lack of girl energy without orgasm
+    elif the_report.get("girl orgasms", 0) == 0 and the_person.energy < 20:
+        the_person "I'm sorry, but I'm totally spent. I promise I will make it up to you next time."
+        mc.name "No problem, we had fun, right?"
+        the_person "Yes, we did!"
 
     #No special conditions, just respond based on how orgasmed and how slutty the position was.
     elif the_report.get("girl orgasms", 0) > 0 and the_report.get("guy orgasms", 0) > 0: #You both came

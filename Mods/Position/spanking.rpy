@@ -66,7 +66,7 @@ label intro_spanking(the_girl, the_location, the_object):
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
         mc.name "Let's get these out of the way first."
-        $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
+        $ the_girl.strip_to_vagina(prefer_half_off = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     $ update_ass_condition(the_girl)
@@ -84,7 +84,7 @@ label taboo_break_spanking(the_girl, the_location, the_object):
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
         mc.name "Let's get these out of the way first."
-        $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
+        $ the_girl.strip_to_vagina(prefer_half_off = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     $ update_ass_condition(the_girl)
@@ -103,7 +103,7 @@ label scene_spanking_1(the_girl, the_location, the_object):
          the_girl "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
          "She is really getting into this. With each spank she wiggles her ass, giving you an enticing target."
          $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
-         $ the_girl.change_slut_temp(spank_factor - 5)
+         $ the_girl.change_slut(spank_factor - 5)
     elif spank_factor > 0:
          the_girl "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
          "She keeps her ass still, taking your blows. Her ass makes an enticing target."
@@ -189,7 +189,7 @@ label transition_default_spanking(the_girl, the_location, the_object):
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
         mc.name "Let's get these out of the way first."
-        $ the_girl.strip_outfit(exclude_upper = True, position = spanking.position_tag)
+        $ the_girl.strip_to_vagina(prefer_half_off = True, position = spanking.position_tag)
         "You put both hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     $ update_ass_condition(the_girl)

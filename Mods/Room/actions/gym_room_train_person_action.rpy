@@ -130,7 +130,7 @@ label train_in_gym(the_person):
 
     if body_changed or the_person.sluttiness > 50:
         $ the_person.draw_person()
-        $ the_person.change_stats(arousal = renpy.random.randint(15, 35), slut_temp = 3)
+        $ the_person.change_stats(arousal = renpy.random.randint(15, 35))
         if the_person.sluttiness > 20:
             if (the_person.get_opinion_score("yoga") < 0 and ran_num < 1) or (the_person.get_opinion_score("sports") < 0 and ran_num >= 1): #she didn't enjoy it
                 the_person "Glad that's over with. Want to find somewhere private and make it up to me?"

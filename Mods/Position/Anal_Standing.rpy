@@ -166,7 +166,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                         "She moans loudly. She grinds herself up against your fingers while your cock is buried deep inside her ass. The stirring motion feels great."
                         the_girl "Oh fuck, here I go again!"
                         "[the_girl.possessive_title]'s legs start to give out as she cums yet again. You hold her body in place as she cums, your hips in the back and your hand in her crotch."
-                        $the_girl.change_happiness(5)
+                        $ the_girl.change_happiness(5)
                         the_girl "Oh Jesus... you made me cum again... I... god keep going, I'm going to cum again!"
                         return
             "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her ass."
@@ -326,7 +326,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl "Mmmm, look at all that cum. I guess that means my ass was pretty good!"

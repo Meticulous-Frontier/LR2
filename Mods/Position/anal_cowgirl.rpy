@@ -171,7 +171,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
             "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
             the_girl "It would be a shame to waste all of this, right?"
             "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-            $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+            $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
         else:
             "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
             the_girl "Wow, is all that cum for me? I guess my ass must be pretty good!"
@@ -339,7 +339,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
                 if the_goal == "hate fuck":
                     the_person "Oh fuck it."
                     "[the_person.possessive_title] drops her hips back down onto you, sheathing your cock in her tight asshole completely."
-                    "There's a hint of develish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
+                    "There's a hint of devilish mischief in her eyes as she rocks her hips back and forth, coaxing your cum from your body."
                     "You finally erupt. She gasps as she feels the heat of it in her body."
                     $ the_girl.cum_in_ass()
                     $ SB_anal_cowgirl.redraw_scene(the_girl)
@@ -360,7 +360,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
             $ mc.condom = False
         "Instead of going up and down, she starts rocking her hips forward and back, milking your cock while keeping it buried deep."
         the_person "Do it... I want to feel it deep!"
-        "Her words push you over the edge. You cock explodes deep inside her bowel. She moans a she feels her body filling up."
+        "Her words push you over the edge. Your cock explodes deep inside her bowel. She moans a she feels her body filling up."
         $ the_girl.change_obedience(3)
         $ the_girl.cum_in_ass()
         $ SB_anal_cowgirl.redraw_scene(the_girl)

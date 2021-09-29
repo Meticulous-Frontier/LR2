@@ -5,7 +5,7 @@ init 2:
             day_in_month = (day%30) + 1
             month_name = month_names[int((day/30) + 8)%12]
             day_part = time_names[time_of_day]
-            return "{day_name} {day_in_month} {month_name} - {day_part}".format(day_name = day_name, day_in_month = day_in_month, month_name = month_name, day_part = day_part)
+            return "{day_name} {month_name} {day_in_month} - {day_part}".format(day_name = day_name, day_in_month = day_in_month, month_name = month_name, day_part = day_part)
 
     screen main_ui(): #The UI that shows most of the important information to the screen.
         python:
@@ -18,7 +18,7 @@ init 2:
             ysize 400
             yalign 0.0
             vbox:
-                text get_formatted_date_string() + " (day [day])" style "menu_text_style" size 18
+                text "{size=16}" + get_formatted_date_string() + " (day [day]){/size}" style "menu_text_style" size 18
                 textbutton "Outfit Manager" action Call("outfit_master_manager",from_current=True) style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Design outfits to set as uniforms or give to suggest to women."
                 textbutton "Check Inventory" action ui.callsinnewcontext("check_inventory_loop") style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Check what serums you are currently carrying."
                 if mc.stat_goal.completed or mc.work_goal.completed or mc.sex_goal.completed:

@@ -110,7 +110,7 @@ label mom_breakfast_action_label_medium():
             $ scene_manager.update_actor(the_person, position = "stand4")
             the_person "You have a good day at work, I'm going to go umm, get changed!"
             $ the_person.draw_person(position = "walking_away")
-            $ the_person.change_stats(slut_temp = 3, obedience = 5)
+            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
             if the_person.sluttiness > 50:
                 $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
@@ -172,13 +172,13 @@ label mom_breakfast_action_label_medium():
                             "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                             mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
-                            $ the_person.change_stats(obedience = 5, slut_temp = 1)
+                            $ the_person.change_stats(obedience = 5)
                             return "Advance Time"
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
                     mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
-                    $ the_person.change_stats(obedience = 5, slut_temp = 1)
+                    $ the_person.change_stats(obedience = 5)
                     return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
                     "You whisper in her ear."
@@ -195,8 +195,8 @@ label mom_breakfast_action_label_medium():
             the_person "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
             $ the_person.call_dialogue("climax_responses_foreplay")
-            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "sitting") #TODO check and make sure this works...
-            $ the_person.change_stats(obedience = 3, happiness = 3)
+            $ the_person.have_orgasm(the_position = "sitting")
+            $ the_person.change_stats(obedience = 3)
             "When she has finished climaxing, you slowly withdraw your finger and sit back down at the table. You take a quick sip of your coffee."
             "[the_person.title] is just putting her clothing back in place when your sister comes out of her room."
             $ the_person.apply_planned_outfit()
@@ -210,7 +210,6 @@ label mom_breakfast_action_label_medium():
             the_person "Of course dear, I was just getting ready to go get ready for work..."
             $ scene_manager.update_actor(mom, position = "stand2")
             "As [the_person.possessive_title] starts to get up, she looks at you. You make sure she notices as you lick some of her juices off your fingers."
-            $ the_person.change_stats(slut_core = 1, slut_temp = 3)
             the_person "Oh my..."
             $ scene_manager.update_actor(mom, position = "walking_away")
             "[the_person.title] turns and leaves the kitchen in a hurry. You quickly finish breakfast and head out as well."
@@ -327,14 +326,12 @@ label mom_breakfast_action_label_high():
         "Your balls are beginning to tense, you are seconds away from ejaculating!"
         the_person "Claim my asshole! Mark your territory with your cum! Then spank me and do it again and again!"
         "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her rectum. Her orgasm hits immediately after yours."
+        $ the_person.have_orgasm(the_position = "cowgirl")
         "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her sphincter as orgasmic waves hit her. You sigh happily, dumping the last of your cum inside her."
 
         $ the_person.cum_in_ass()
         $ scene_manager.update_actor(the_person) # redraw for cum
         $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
-
-        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
-        $ the_person.change_stats(happiness = 5, obedience = 3)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
         the_person "Oh god... [lily.name] could walk out any second!"
@@ -359,14 +356,12 @@ label mom_breakfast_action_label_high():
     "Your balls are beginning to tense, you are seconds away from ejaculating! She begins to make a short, fast humping motion, grinding her clit against your stomach."
     the_person "Claim mommy! Mark your territory with your cum! Fill me up!"
     "You climax in a frenzy. She arches her back and moans involuntarily when she feels your cum flood her womb. Her orgasm hits immediately after yours."
+    $ the_person.have_orgasm(the_position = "cowgirl")
     "Finally speechless, [the_person.title]'s body stops rocking, but you feel the twitching of her pussy as orgasmic waves hit her. You sigh happily, dumping the last of your cum inside her."
 
     $ the_person.cum_in_vagina()
     $ scene_manager.update_actor(the_person) # redraw for cum
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
-
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "cowgirl") #TODO check and make sure this works...
-    $ the_person.change_stats(happiness = 5, obedience = 3)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
     the_person "Oh god... [lily.name] could walk out any second!"

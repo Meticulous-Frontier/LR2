@@ -24,10 +24,10 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
     #TODO next line only if the girl is already pregnant. change this statement after 29.1 to match the pregnancy condition
     if the_girl.knows_pregnant():
         mc.name "I want to practice putting another baby inside you. Let's pretend like we are trying to make another one."
-        the_person "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
+        the_girl "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
     else:
         mc.name "Lie down now. It's time for me to put a baby inside you."
-    $ the_girl.draw_person(position = breeding_missionary.position_tag)    
+    $ the_girl.draw_person(position = breeding_missionary.position_tag)
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
 
     if not the_girl.vagina_visible():
@@ -35,31 +35,31 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
         $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, visible_enough = True, prefer_half_off = True)
 
     if mc.condom:
-        the_person "Why are you wearing that thing? Let's get that off of you."
+        the_girl "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."
-        the_person "You aren't getting anyone pregnant wearing that silly thing!"
+        the_girl "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
     "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her [the_girl.pubes_description] pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
-    the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
+    the_girl "Make sure you are this deep when you cum, OK [the_girl.mc_title]?"
     return
 
 label taboo_break_breeding_missionary(the_girl, the_location, the_object):
     "You run your hands along [the_girl.title]'s hips, feeling the shape of her body."
     mc.name "Lie down now. It's time for me to put a baby inside you."
-    the_person "Oh god... are we really doing this? I mean... we've never even had sex before."
+    the_girl "Oh god... are we really doing this? I mean... we've never even had sex before."
     mc.name "Don't worry, we'll have the next 9 months, while your belly bloats and your tits swell with milk, to make up for lost time and fuck each other's brains out before the baby gets here."
-    $ the_person.change_arousal(10)
-    the_person "Oh fuck, that sounds amazing. You'd better!"
+    $ the_girl.change_arousal(10)
+    the_girl "Oh fuck, that sounds amazing. You'd better!"
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
     if mc.condom:
-        the_person "Why are you wearing that thing? Let's get that off of you."
+        the_girl "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."
-        the_person "You aren't getting anyone pregnant wearing that silly thing!"
+        the_girl "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
     "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her [the_girl.pubes_description] pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
-    the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
+    the_girl "Make sure you are this deep when you cum, OK [the_girl.mc_title]?"
     return
 
 label scene_breeding_missionary_1(the_girl, the_location, the_object):
@@ -76,13 +76,13 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
                 "You decide you want some quality time with her tits."
                 mc.name "Let's get these off you."
                 if the_girl.obedience > 120:
-                    the_person "Yes sir."
+                    the_girl "Yes sir."
                 else:
-                    the_person "Mmm, you wanna play with my tits? Okay."
-                if the_person.outfit.can_half_off_to_tits():
-                    $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True, position = breeding_missionary.position_tag)
+                    the_girl "Mmm, you wanna play with my tits? Okay."
+                if the_girl.outfit.can_half_off_to_tits():
+                    $ generalised_strip_description(the_girl, the_girl.outfit.get_half_off_to_tits_list(), half_off_instead = True, position = breeding_missionary.position_tag)
                 else:
-                    $ generalised_strip_description(the_person, the_person.outfit.get_tit_strip_list(), position = breeding_missionary.position_tag)
+                    $ generalised_strip_description(the_girl, the_girl.outfit.get_tit_strip_list(visible_enough = False), position = breeding_missionary.position_tag)
             "You lean down and start to kiss at [the_girl.possessive_title]'s tits. She arches her back, presenting them to your lips."
             $ the_girl.discover_opinion("kissing")
             $ the_girl.change_arousal(the_girl.get_opinion_score("kissing"))
@@ -178,18 +178,18 @@ label transition_default_breeding_missionary(the_girl, the_location, the_object)
     #TODO next line only if the girl is already pregnant. change this statement after 29.1 to match the pregnancy condition
     if False:
         mc.name "I want to practice putting another baby inside you. Let's pretend like we are trying to make another one."
-        the_person "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
+        the_girl "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
     else:
         mc.name "Lie down now. It's time for me to put a baby inside you."
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
     if mc.condom:
-        the_person "Why are you wearing that thing? Let's get that off of you."
+        the_girl "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."
-        the_person "You aren't getting anyone pregnant wearing that silly thing!"
+        the_girl "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
     "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."
-    the_person "Make sure you are this deep when you cum, OK [the_person.mc_title]?"
+    the_girl "Make sure you are this deep when you cum, OK [the_girl.mc_title]?"
     return
 
 label strip_breeding_missionary(the_girl, the_clothing, the_location, the_object):

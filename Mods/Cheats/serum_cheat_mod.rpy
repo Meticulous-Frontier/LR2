@@ -19,7 +19,7 @@ screen keybindT():
 screen serum_cheat_menu():
     add "Science_Menu_Background.png"
 
-    default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits)])
+    default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
     default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
 
     vbox:
@@ -45,7 +45,7 @@ screen serum_cheat_menu():
                         vbox:
                             xsize 370
                             for dt in range(mc.business.research_tier, -1, -1):
-                                if any([x for x in list_of_traits if x.tier == dt and not x.researched and x.has_required()]):
+                                if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and not x.researched and x.has_required()]):
                                     frame:
                                         background "#000000"
                                         xsize 365
@@ -57,7 +57,8 @@ screen serum_cheat_menu():
                                             textbutton "[trait_title]":
                                                 style "textbutton_style"
                                                 text_style "serum_text_style_traits"
-                                                action [Hide("trait_tooltip"), SetField(trait, "researched", True)]
+                                                sensitive not isinstance(trait, SerumTraitBlueprint)
+                                                action [Hide("trait_tooltip"), SetField(trait, "researched", True), SetField(trait, "unlocked", True)]
                                                 hovered Show("trait_tooltip",None,trait, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                                 unhovered Hide("trait_tooltip")
                                                 xsize 365
@@ -76,7 +77,7 @@ screen serum_cheat_menu():
                             xsize 400
 
                             for dt in range(mc.business.research_tier, -1, -1):
-                                if any([x for x in list_of_traits if x.tier == dt and x.researched]):
+                                if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and x.researched]):
                                     frame:
                                         background "#000000"
                                         xsize 395

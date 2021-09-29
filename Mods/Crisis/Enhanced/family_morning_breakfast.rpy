@@ -94,7 +94,7 @@ label family_morning_breakfast_enhanced_label():
             "It takes a second, but soon a stream of her milk is pouring out into you coffee."
             mom "Just say when!"
             "You let her continue for a few more moments, until you can see the cream start to circulate around your hot coffee."
-            $ mom.change_stats(slut_temp = 2, happiness = 5)
+            $ mom.change_stats(slut = 1, max_slut = 30, happiness = 5)
             mc.name "That's good!"
         lily "Thanks Mom, you're the best!"
         $ scene_manager.update_actor(mom, position = "sitting")
@@ -102,8 +102,8 @@ label family_morning_breakfast_enhanced_label():
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
         $ mc.change_locked_clarity(10)
-        $ lily.change_stats(love = 3, slut_temp = 2)
-        $ mom.change_stats(love = 3, slut_temp = 2, happiness = 5)
+        $ lily.change_stats(love = 3)
+        $ mom.change_stats(love = 3, happiness = 5)
         if mc.business.event_triggers_dict.get("family_threesome", False) == True:
             "While no one else seems to be bothered by all the skin in the room, it is starting to take a toll on you."
             "You try to focus on something work related, but instead all you can focus on are [mom.possessive_title]'s heaving tits, across the table from you."
@@ -168,14 +168,14 @@ label family_morning_breakfast_enhanced_label():
                     lily "Fine, but this is really weird, okay?"
                     $ scene_manager.update_actor(mom, position = "sitting")
                     "[mom.possessive_title] dishes out three portions and sits down at the table with you. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."
-                    $ lily.change_slut_temp(3)
+                    $ lily.change_slut(2)
                     $ mom.change_happiness(5)
 
 
                 "Side with [lily.title]":
                     mc.name "I actually think [lily.title] is right, this is a little weird. Could you go put something on, for our sakes?"
-                    $ lily.change_stats(obedience = -2, slut_temp = 2)
-                    $ mom.change_stats(obedience = 5, slut_temp = 3)
+                    $ lily.change_stats(obedience = -2, slut = 1, max_slut = 30)
+                    $ mom.change_stats(happiness = -10, obedience = 2)
                     mom "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
                     $ scene_manager.hide_actor(mom)
                     $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_left_flipped)
@@ -196,7 +196,7 @@ label family_morning_breakfast_enhanced_label():
             mom "Now, would you like some breakfast or not?"
             "[lily.title] sighs dramatically."
             lily "Fine, but this is really weird, okay?"
-            $ lily.change_slut_temp(3)
+            $ lily.change_slut(2)
             $ mom.change_happiness(5)
             $ scene_manager.update_actor(mom, position = "sitting")
             "[mom.possessive_title] gives everyone a plate and sits down. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."
@@ -218,7 +218,7 @@ label family_morning_breakfast_enhanced_label():
             $ scene_manager.update_actor(mom, position = "walking_away", emotion = None)
             "[mom.possessive_title] sighs loudly and turns back to the stove."
             mom "Fine! You're so stubborn [lily.name], I don't know how I survive around here!"
-            $ lily.change_stats(obedience = -2, happiness = 5, slut_temp = 3)
+            $ lily.change_stats(obedience = -2, happiness = 5)
             $ mom.change_obedience(10)
             $ scene_manager.update_actor(lily, emotion = "happy")
             "[lily.possessive_title] looks at you, obviously pleased with herself, and winks."

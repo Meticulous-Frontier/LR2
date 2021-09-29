@@ -126,7 +126,7 @@ label town_walk_crisis_action_label:
         #"You see [the_person.possessive_title]'s body shiver as she reaches orgasm." NOTE: Things like this gets mentioned in the climax_responses
         the_person "Wow, that was intense. Need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."
         $ the_person.reset_arousal()
-        $ the_person.change_stats(arousal = renpy.random.randint(0,60), slut_temp = renpy.random.randint(2,5))
+        $ the_person.change_stats(arousal = renpy.random.randint(0,60))
 
     menu:
         "Join her":

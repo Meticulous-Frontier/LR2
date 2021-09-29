@@ -282,11 +282,14 @@ label quest_arousal_serum_test_label():
     $ the_person.change_arousal(20)
     the_person "Oh! Yes! Yes yes yes Yes YES YES YES!!!"
     $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-    $ the_person.change_slut_temp(5)
+    $ the_person.add_role(heavy_trance_role)
+    $ the_person.change_slut(2)
     $ the_person.change_happiness(5)
+    $ mc.free_clarity += 200
     "Seconds later her body convulses as she orgasms. She moans a bunch of incomprehensible noises."
     $ the_person.change_arousal(-the_person.arousal/3, add_to_log = False)
     the_person "Oh my god... that felt so good."
+    call trance_train_label(the_person) from _call_trance_train_label_quest_arousal_serum_test
     if the_person.sluttiness > 60:
         $ the_person.draw_person(position = "doggy")
         "[the_person.title] turns over onto her hands and knees. She starts to wiggle her ass at you."

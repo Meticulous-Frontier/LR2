@@ -27,7 +27,7 @@ label SB_tutorial_event():
         "Looking good girl!":
             the_person "Aww, thanks! You're looking pretty sexy yourself..."
             "[the_person.possessive_title] looks you up and down a few times. Her eyes tend to linger on your crotch each time they pass."
-            $ the_person.change_slut_temp(3)
+            $ the_person.change_slut(2)
             "You flirt back and forth with [the_person.possessive_title], but soon it is time to part ways."
             the_person "It was great seeing you! Take care [the_person.mc_title]!"
         "Thank you":

@@ -81,7 +81,7 @@ init 2 python:
             lighting = [1,1,1]
 
         if eye_colour is None:
-            eye_colour = [0.6, 0.6, 0.65, 1.0] #grey by default.
+            eye_colour = [.62, .42, .29, 1.0] #brown by default.
 
         if not emotion in self.position_dict[position]:
             return Image("character_images/empty_holder.png")
@@ -95,7 +95,7 @@ init 2 python:
         base_image = im.MatrixColor(base_image, im.matrix.tint(*lighting))
 
         # grey-scaled with slight brightness boost
-        gray_scaled_image = im.MatrixColor(base_image, im.matrix.saturation(0) * im.matrix.brightness(.3))
+        gray_scaled_image = im.MatrixColor(base_image, im.matrix.saturation(0) * im.matrix.brightness(.2))
         # colorized with eye colour
         colorized_image = im.MatrixColor(gray_scaled_image, im.matrix.tint(eye_colour[0], eye_colour[1], eye_colour[2]) * im.matrix.tint(*lighting))
         # only use eyes from colorized gray scale

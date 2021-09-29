@@ -62,7 +62,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     if loser.effective_sluttiness() >= 40:
         $ scene_manager.update_actor(loser, emotion = "happy")
         loser "Great, let's give this guy a show!"
-        $ loser.change_slut_temp(3)
+        $ loser.change_slut(1, 40)
 
         if loser.effective_sluttiness() >= 60:
             $ scene_manager.update_actor(winner_one, position = "walking_away")
@@ -102,7 +102,8 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser "Ah yes, fill me up. Fuck me you sweaty pig."
                     "His face turns bright red as he pushes [loser.possessive_title]'s face into the desk."
                     loser "Oh yes. I'm cumming!"
-                    $ loser.change_stats(slut_temp = 3, slut_core = 3)
+                    $ loser.run_orgasm()
+                    $ loser.change_stats(slut = 1, max_slut = 100)
                     $ mc.change_locked_clarity(20)
                     "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
                     $ loser.cum_on_ass()
@@ -113,7 +114,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ scene_manager.update_actor(loser, position = "stand3")
                     $ mc.change_locked_clarity(20)
                     "[loser.possessive_title] indicates the guy to come forward, she spreads her legs a little to give him a nice view."
-                    $ loser.change_stats(slut_temp = 2)
+                    $ loser.change_stats(slut = 1, max_slut = 100)
                     "After a while she tells him the food is getting cold. He nods, turns around and as he walks away he says: 'Enjoy your food, slut!'"
                 $ scene_manager.update_actor(loser, position = "walking_away")
                 if winner_one.effective_sluttiness() > 60 and winner_two.effective_sluttiness() > 60:
@@ -158,7 +159,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         $ scene_manager.update_actor(winner_one, position = "kneeling1")
                         "While watching you, [winner_one.title] begins to touch herself and masturbate."
                         $ mc.change_locked_clarity(10)
-                        $ winner_one.change_stats(happiness = 3, slut_temp = 2)
+                        $ winner_one.change_stats(happiness = 3, slut = 1, max_slut = 100)
                     else:
                         winner_one "Holy!... Wow I was not expecting this!"
                         "[winner_one.title] watches you closely."
@@ -169,7 +170,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         winner_two "Fuck yeah! Give it to her good [winner_two.mc_title]!"
                         $ mc.change_locked_clarity(10)
                         "[winner_two.title] is watching intently, cheering you on as you give it to [loser.possessive_title]."
-                        $ winner_two.change_stats(happiness = 3, slut_temp = 2)
+                        $ winner_two.change_stats(happiness = 3, slut = 1, max_slut = 100)
                     else:
                         winner_two "Wow, that looks like it feels good..."
                         "[winner_two.title] is watching intently."
@@ -177,24 +178,24 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ scene_manager.update_actor(loser, position = "standing_doggy")
                     "[loser.title] bends over the lunch table and pushes herself back against you as she orgasms."
                     loser "Yes... YES!!!"
+                    $ loser.have_orgasm(the_position = "standing_doggy")
                     "Her pussy clenching you drives you over the edge as well. You ram yourself deep and dump your cum inside of her."
                     $ loser.cum_in_vagina()
-                    $ scene_manager.update_actor(loser, position = "standing_doggy")
+                    $ scene_manager.draw_scene()
                     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = loser)
                     if loser.has_face_cum():
                         "You pull out and look at [loser.possessive_title]. She has your old cum on her face and now also running down the inside of her legs as your seed spills out of her."
                     else:
                         "You pull out and look at [loser.possessive_title]. Your cum is running down the inside of her legs as your seed spills out of her."
 
-                    $ mc.listener_system.fire_event("girl_climax", the_person = loser, the_position = "standing_doggy")
-                    $ loser.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 3)
+                    $ loser.change_stats(obedience = 5, love = 3)
                     if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():
                         winner_one "Oh god, so hot..."
                         "[winner_one.title] can't help herself. She is so turned on watching, she makes herself cum."
                         winner_one "Oh Fuck!"
                         $ mc.change_locked_clarity(20)
-                        $ mc.listener_system.fire_event("girl_climax", the_person = winner_one, the_position = "kneeling1")
-                        $ winner_one.change_stats(obedience = 5,slut_temp = 5, slut_core = 2)
+                        $ winner_one.have_orgasm(the_position = "kneeling1")
+                        $ winner_one.change_stats(obedience = 5)
                     if winner_two.effective_sluttiness() > 90 and winner_two.get_opinion_score("public sex") > 0:
                         winner_two "God... Damn... maybe next time I can set it up so I get the short straw."
                     "You pull up your pants, turn around and walk out of the room without saying a word. You can feel the three girls looking at you as you leave the room."
@@ -238,7 +239,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "[loser.possessive_title] sheepishly walks down the lobby."
         $ scene_manager.update_actor(loser, position = "walking_away")
         "The other girls stand back and watch, giggling amongst themselves."
-        $ loser.change_slut_temp(3)
+        $ loser.change_slut(1)
         $ scene_manager.remove_actor(loser)
         "You walk up to [winner_one.possessive_title] and [winner_two.possessive_title]."
         mc.name "Ok, girls you had your fun, now back to work."

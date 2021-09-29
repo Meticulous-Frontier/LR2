@@ -365,7 +365,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     else:
         "You step up behind [the_person.possessive_title] and start to grope her ass. She sighs as you massage it."
-        "You decide to start getting her ready while she looks for the the toy. You start peeling her clothes off."
+        "You decide to start getting her ready while she looks for the toy. You start peeling her clothes off."
         $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     the_person "Ah! Here it is. I know it's hard to wait, but I need to set up the stream first, [the_person.mc_title]."
@@ -382,7 +382,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     $ the_person.draw_person(position = "doggy")
     "You put the dildo on and lube yourself up. You get behind [the_person.possessive_title] on the bed and start to line yourself up."
     the_person "Oh god I can't wait. This feel feels amazing when it goes in..."
-    "You cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accommodates you easily."
+    "Your cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accommodates you easily."
     the_person "Aaaahhhhhh yes! Now fuck me good! I'm ready for it!"
     call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_lily_fetish_stream_anal_01
     #TODO orgasm dialogue to her streamers

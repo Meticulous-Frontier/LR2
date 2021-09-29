@@ -6,8 +6,8 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     #TODO Have a unique dining room background
     python:
         clear_scene()
-        renpy.show(name = "living room", what = house_background, layer = "master")
         scene_manager = Scene()
+        christina.home.show_background()
         scene_manager.add_actor(the_student, emotion = "happy")
 
     if first_time:
@@ -111,7 +111,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             "[the_mom.possessive_title] laughs and waves you off."
             the_mom "You're too kind."
             "You flirt with [the_mom.possessive_title] as much as you think you can get away with while her daughter is in the room."
-            $ the_mom.change_slut_temp(1)
+            $ the_mom.change_slut(1)
             $ the_mom.change_love(2, max_modified_to = 25)
 
         "Touch [the_student.possessive_title]" if the_student.effective_sluttiness("touching_body") > 35:
@@ -125,14 +125,14 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
                 $ mc.change_locked_clarity(20)
                 "She runs her hand along the bulge of your crotch, stroking you slowly through the fabric."
                 the_student "He's been such a strong, firm presence in my life since I met him. I'm really learning a lot."
-                $ the_student.change_slut_temp(1)
+                $ the_student.change_slut(1)
                 $ mc.change_locked_clarity(20)
                 "You and [the_student.possessive_title] fondle each other while you eat dessert, doing your best to keep [the_mom.possessive_title] from noticing everything."
 
             else:
                 "You fondle [the_student.possessive_title] as you eat your dessert, doing your best to keep [the_mom.possessive_title] from noticing."
 
-            $ the_student.change_slut_temp(1 + the_student.get_opinion_score("public sex"))
+            $ the_student.change_slut(1 + the_student.get_opinion_score("public sex"))
             $ the_student.discover_opinion("public sex")
             "Eventually you finish your ice cream."
             the_mom "[the_student.name], could you clean things up for us?"
@@ -183,7 +183,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             $ mc.change_locked_clarity(10)
             "She presses her body against you and holds the back of your neck. After a long moment she pulls back, panting softly."
             $ scene_manager.update_actor(the_mom, special_modifier = None)
-            $ the_mom.change_slut_temp(1)
+            $ the_mom.change_slut(1)
             $ the_mom.break_taboo("kissing")
             the_mom "Thank you for staying for dinner [the_mom.mc_title]. I hope I see you again soon..."
             $ scene_manager.update_actor(the_mom, position = "stand3")

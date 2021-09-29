@@ -115,14 +115,14 @@ init 2:
                         textbutton "Arousal: "+ str(__builtin__.int(person.arousal)) + "/"+ str(__builtin__.int(person.max_arousal)) + " (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
+                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
                             action NullAction()
                             sensitive True
                     else:
                         textbutton "Arousal: 0%":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
+                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
                             action NullAction()
                             sensitive True
 
@@ -139,13 +139,6 @@ init 2:
                         tooltip "The happier a girl the more tolerant she will be of low pay and unpleasant interactions. High or low happiness will return to it's default value over time."
                         action NullAction()
                         sensitive True
-
-                    # textbutton "Suggestibility: [the_person.suggestibility]%":
-                    #     ysize 24
-                    #     text_style "menu_text_style"
-                    #     tooltip "How likely this character is to increase her core sluttiness. Every time chunk there is a chance to change 1 point of temporary sluttiness (" + get_red_heart(5) + ") into core sluttiness (" + get_gold_heart(5) + ") as long as temporary sluttiness is higher."
-                    #     action NullAction()
-                    #     sensitive True
 
                     textbutton "Love: "+ str(__builtin__.int(person.love)):
                         style "transparent_style"
@@ -174,7 +167,7 @@ init 2:
                         textbutton "Sluttiness: " + get_heart_image_list(person):
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is added to her sluttiness based on effect modifiers {image=question_mark_small}."
                             action NullAction()
                             sensitive True
 
@@ -187,14 +180,24 @@ init 2:
                                 sensitive True
 
                 vbox:
+                    xoffset -40
                     hbox:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
                         if person.serum_effects:
-                            textbutton "{image=serum_vial} +[person.suggestibility]%":
+                            textbutton "{image=serum_vial}":
                                 yoffset 16
                                 style "transparent_style"
                                 text_style "menu_text_style"
                                 tooltip person_info_ui_get_serum_info_tooltip(person)
+                                action NullAction()
+                                sensitive True
+
+                        if person.suggestibility > 0:
+                            textbutton "+[person.suggestibility]%":
+                                yoffset 16
+                                style "transparent_style"
+                                text_style "menu_text_style"
+                                tooltip "How likely a girl is to slip into a trance when she cums. While in a trance she will be highly suggestible, and you will be able to directly influence her stats, skills, and opinions."
                                 action NullAction()
                                 sensitive True
 

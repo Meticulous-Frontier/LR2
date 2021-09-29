@@ -29,19 +29,18 @@ init -1 python:
     def is_dungeon_unlocked():
         return mc.business.event_triggers_dict.get("dungeon_unlocked", False) == True
 
-    def change_locked_clarity_extended(self, amount, add_to_log = True):
-        amount = amount * get_clarity_multiplier()
-        amount = __builtin__.int(__builtin__.round(amount))
-        if perk_system.get_ability_flag("Lustful Priorities"):
-            amount += 5
-        self.locked_clarity += amount
-        if add_to_log and amount != 0:
-            mc.log_event("You: " + ("+" if amount > 0 else "") + str(amount) + " Lust", "float_text_blue")
+    def main_character_change_locked_clarity_extended(org_func):
+        def change_locked_clarity_wrapper(main_character, amount, add_to_log = True):
+            # run extension code
+            if "perk_system" in globals():
+                amount = amount * get_clarity_multiplier()
+                amount = __builtin__.int(amount)
+                if perk_system.get_ability_flag("Lustful Priorities"):
+                    amount += 5
 
-            effect_strength = (amount/80.0) + 0.4
-            if effect_strength > 1.0:
-                effect_strength = 1.0
-            renpy.show_screen("border_pulse", effect_strength, _transient = True)
-        return
+            # run original function
+            org_func(main_character, amount, add_to_log = add_to_log)
 
-    MainCharacter.change_locked_clarity = change_locked_clarity_extended
+        return change_locked_clarity_wrapper
+
+    MainCharacter.change_locked_clarity = main_character_change_locked_clarity_extended(MainCharacter.change_locked_clarity)

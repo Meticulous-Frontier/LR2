@@ -97,7 +97,7 @@ label business_meeting_arrousal(the_person):
         $ mc.change_locked_clarity(20)
         the_person "Oh my, [the_person.mc_title] it seems my proposal got you all excited."
     else:
-        the_person "She keeps stroking your legs while she talks, making sure you are focussed on her."
+        the_person "She keeps stroking your legs while she talks, making sure you are focused on her."
     return
 
 label business_meeting_seduction(the_person):

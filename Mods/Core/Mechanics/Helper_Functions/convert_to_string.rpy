@@ -1,9 +1,9 @@
 init 0 python:
     # Overrides VREN's height function, so we display the height based on the weight property
     # instead of the fixed weight on zoom factor
-    # currently between 60 inch (152.4) - 70 inch (177.8) (based on * 50 + 20).
+    # currently between (147cm) - (197cm).
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
-        total_inches = __builtin__.round((person_height * 50) + 20)
+        total_inches = __builtin__.round(((person_height * 250) - 53) / 2.54)
         feet = __builtin__.int(total_inches // 12)
         inches = __builtin__.int(total_inches % 12)
 
@@ -14,14 +14,14 @@ init 0 python:
             return str(cm) + " cm"
 
     def get_energy_string(person):
-        percent = person.energy / person.max_energy
+        percent = person.energy * 1.0 / person.max_energy
         color_string = "{color=#43B197}"
         if percent < .5:
             color_string = "{color=#e1e113}"
         if percent < .2:
             color_string = "{color=#B14365}"
 
-        return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}" 
+        return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}"
 
     def get_person_weight_string(person):
         if use_imperial_system:

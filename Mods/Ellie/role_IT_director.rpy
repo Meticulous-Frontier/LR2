@@ -17,9 +17,9 @@ init 1 python:
             mc.business.IT_increase_project_progress(amount = (the_person.int * 2) + (the_person.focus))
 
         if mc.business.IT_project_in_progress:
-            the_person.set_schedule(mc.business.r_div, days = [0, 1, 2, 3, 4], times = [1,2,3])
+            the_person.set_alt_schedule(mc.business.r_div, days = [0, 1, 2, 3, 4], times = [1,2,3])
         else:
-            the_person.set_schedule(mc.business.h_div, days = [0, 1, 2, 3, 4], times = [1,2,3])
+            the_person.set_alt_schedule(None, days = [0, 1, 2, 3, 4], times = [1,2,3])
 
         return
 
@@ -28,7 +28,7 @@ init 1 python:
 
 
     update_IT_projects_action = Action("Review IT Projects", update_IT_projects_requirement, "update_IT_projects_label",
-        menu_tooltip = "Start, change, activate, or deactivate IT projects.")
+        menu_tooltip = "Start, change, activate, or deactivate IT projects.", priority = 5)
 
     IT_director_role = Role("IT Director", [update_IT_projects_action], on_turn = IT_director_on_turn)
 

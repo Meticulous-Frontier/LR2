@@ -1,10 +1,10 @@
 init -1 python:
     def TEMPLATE_on_apply(the_person, the_serum, add_to_log):
-        the_person.change_slut_temp(5)
+        the_person.change_slut(2)
         return
 
     def TEMPLATE_on_remove(the_person, the_serum, add_to_log):
-        the_person.change_love(-20, add_to_log) #She realizes she's been drugged?
+        the_person.change_love(-20, add_to_log = add_to_log) #She realizes she's been drugged?
         return
 
     def TEMPLATE_on_turn(the_person, the_serum, add_to_log):

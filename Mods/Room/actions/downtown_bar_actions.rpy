@@ -18,7 +18,7 @@ label downtown_bar_drink_label():
 
 
         $ new_person.draw_person(position = "sitting")
-        "She seats herself in the longue area, seemingly puzzled by the lack of attendance at the only bar in town."
+        "She seats herself in the lounge area, seemingly puzzled by the lack of attendance at the only bar in town."
         "She sits quietly minding her own business..."
 
         "Do you wish to introduce yourself, perhaps grace her with a free- of charge drink?"

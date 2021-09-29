@@ -88,10 +88,10 @@ label late_for_work_action_label:
                 else:
                     mc.name "That's right. Get on your knees, I won't be content with just your tits."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(arousal = 30, obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(arousal = 30, obedience = 5, happiness = 5, slut = 1, max_slut = 50)
                     the_person "Oh god, I love it when you take charge like this..."
                 else:
-                    $ the_person.change_stats(arousal = 20, obedience = 2, happiness = 2, slut_temp = 2)
+                    $ the_person.change_stats(arousal = 20, obedience = 2, happiness = 2)
                     the_person "Mmm, sounds fun..."
                 $ the_person.draw_person(position = "blowjob")
 
@@ -124,7 +124,7 @@ label late_for_work_action_label:
                     "You decide not to cum for her at this time."
                 mc.name "That's enough for now. Try to be on time from now on, or at least be ready to service me again if you ARE going to be late."
                 the_person "Anything for you, [the_person.mc_title]!"
-                $ the_person.change_stats(obedience = 2, slut_temp = 2)
+                $ the_person.change_stats(obedience = 2)
 
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] rushes to the ladies room to clean up."
@@ -155,10 +155,10 @@ label late_for_work_action_label:
             "Request her service":
                 mc.name "Very good, now I require the same level of dedication, make your boss happy and get on your knees."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(arousal = 50, obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(arousal = 50, obedience = 5, happiness = 5, slut = 1, max_slut = 50)
                     the_person "Yes boss, I love it when you command me..."
                 else:
-                    $ the_person.change_stats(arousal = 30, obedience = 2, happiness = 2, slut_temp = 2)
+                    $ the_person.change_stats(arousal = 30, obedience = 2, happiness = 2)
                     the_person "If you insist, [the_person.mc_title]!"
 
                 $ the_person.draw_person(position = "blowjob")
@@ -237,10 +237,10 @@ label late_for_work_action_label:
                 the_person "I'm not sure what you're saying..."
                 mc.name "Turn around, [the_person.title]. I'm going to give you the spanking you deserve."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut = 1, max_slut = 30)
                     the_person "Oh god, yes sir anything you say!"
                 else:
-                    $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2, slut_temp = 2)
+                    $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2)
                     the_person "If you insist, [the_person.mc_title]."
                 call fuck_person(the_person, start_position = spanking, position_locked = True) from _spank_employee_coming_in_late_01
                 if the_person.get_opinion_score("being submissive") > 0:
@@ -251,15 +251,18 @@ label late_for_work_action_label:
                 $ the_person.draw_person()
                 mc.name "That's enough for now. Try to be on time from now on, or I'll have to spank you again."
                 the_person "Yes sir!"
+                $ the_person.outfit.restore_all_clothing()
+                $ the_person.draw_person()
+                "She quickly brings her clothing in order."
 
 
             "Make it up to me":
                 mc.name "If you want to make it up to me, get on your knees."
                 if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut = 1, max_slut = 50)
                     the_person "Oh god, I love it when you take charge like this..."
                 else:
-                    $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2, slut_temp = 2)
+                    $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2)
                     the_person "If you insist, [the_person.mc_title]!"
 
                 $ the_person.draw_person(position = "blowjob")
@@ -293,7 +296,7 @@ label late_for_work_action_label:
                     "You decide not to cum for her at this time."
                 mc.name "That's enough for now. Try to be on time from now on, or at least be ready to service me again if you ARE going to be late."
                 the_person "It will be my pleasure, [the_person.mc_title]!"
-                $ the_person.change_stats(obedience = 2, slut_temp = 2)
+                $ the_person.change_stats(obedience = 2)
 
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] rushes away."

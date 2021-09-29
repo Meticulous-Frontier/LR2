@@ -94,10 +94,10 @@ label SB_fetish_vaginal_family_threesome_label():
 
     else:
         $ scene_manager.add_actor(mom, emotion = "angry")
-        mom "Is that... [the_person.name]!?! What are you... why are you naked in [mom.mc_title]'s room?" #NOTE: the_person doesn't nescessarily know mom's title for the MC, but still somewhat makes sense.
+        mom "Is that... [the_person.name]!?! What are you... why are you naked in [mom.mc_title]'s room?" #NOTE: the_person doesn't necessarily know mom's title for the MC, but still somewhat makes sense.
         "[mom.possessive_title] is shocked to discover that you and [the_person.possessive_title] are in your room, clearly about to get busy."
         the_person "Mom! Nothing was... wait... what are you wearing?"
-        "[mom.possessive_title] quickly realizes that [the_person.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarassment."
+        "[mom.possessive_title] quickly realizes that [the_person.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarrassment."
         "You think quickly. Maybe you can salvage this situation?"
         mc.name "Hey [mom.title]... you look amazing! Want to come in for a little bit? [the_person.title] and I are just getting started."
         "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title] "

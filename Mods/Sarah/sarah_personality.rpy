@@ -50,7 +50,7 @@ label Sarah_greetings(the_person):
         the_person "Hey. Did you need something? I'm sorry I'm having a bit of a rough day."
     else:
         if the_person.sluttiness > 60:
-            if Sarah_is_fertile():
+            if the_person.is_highly_fertile():
                 the_person "Hello. Need something? I hope so, I know I really need something soon..."
                 "She lowers her voice and whispers in your ear."
                 the_person "I'm fertile right now."
@@ -187,7 +187,7 @@ label Sarah_strip_reject(the_person, the_clothing, strip_type = "Full"):
 
 label Sarah_sex_accept(the_person):
     if the_person.sluttiness > 70:
-        if Sarah_is_fertile():
+        if the_person.is_highly_fertile():
             the_person "My body is yours to use, [the_person.mc_title]. Just try to cum inside me... it's a good time of the month for that!"
         elif the_person.event_triggers_dict.get("dating_path", False) == True:
             the_person "Yes! Let's go! I'm glad I'm not the only one feeling needy."
@@ -385,7 +385,7 @@ label Sarah_flirt_response_high(the_person):
             the_person "Don't worry, I want to get naked for you."
 
             menu:
-                "Kiss her.":
+                "Kiss her":
                     "You put an arm around [the_person.possessive_title]'s waist and pull her close."
 
                     if the_person.has_taboo("kissing"):
@@ -398,7 +398,7 @@ label Sarah_flirt_response_high(the_person):
                     $ the_person.call_dialogue("sex_review", the_report = _return)
                     $ the_person.review_outfit()
 
-                "Just flirt.":
+                "Just flirt":
                     mc.name "Believe me, I want to get naked for you too. Hopefully soon I'll have the time."
                     "[the_person.possessive_title] gives you a little pout."
                     the_person "We make time for what's important. But I understand, running a business is a lot of work."
@@ -668,13 +668,13 @@ label Sarah_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
-        $ change_report = the_person.change_slut_temp(1)
+        $ change_report = the_person.change_slut(1)
         "[title] watches for a moment, then turns away while you and [the_sex_person.name] keep [the_position.verbing]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh wow that's hot. You don't mind if I watch, do you?"
-        $ change_report = the_person.change_slut_temp(2)
+        $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
@@ -709,13 +709,13 @@ label Sarah_being_watched(the_person, the_watcher, the_position):
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "Fuck, maybe we should go somewhere a little quieter..."
-        $ the_person.change_stats(arousal = -1, slut_temp = -1)
+        $ the_person.change_stats(arousal = -1)
         "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.name]!"
-        $ the_person.change_stats(arousal = 1, slut_temp = 1)
+        $ the_person.change_stats(arousal = 1, slut = 1, max_slut = 50)
         "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return

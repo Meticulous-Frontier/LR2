@@ -21,7 +21,7 @@
 label intro_Ophelia_blowjob(the_girl, the_location, the_object):
     "You unzip your pants and pull your underwear down far enough to let your hard cock out."
     the_girl "Mmm, it looks so hard! Let me take care of that for you..."
-    "[the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans foward and slides her lips over the tip of your dick."
+    "[the_girl.possessive_title] drops to her knees in front of you. She runs her hands along your hips, then leans forward and slides her lips over the tip of your dick."
     $ Ophelia_blowjob.current_modifier = "blowjob"
     $ Ophelia_blowjob.redraw_scene(the_girl)
     "She teases and licks at the tip, but you know this girl is just toying with you."
@@ -73,7 +73,7 @@ label scene_Ophelia_blowjob_1(the_girl, the_location, the_object):
             "You rest your hand on her head, guiding her as she sucks you off."
             if the_girl.get_opinion_score("masturbating") > 0:
                 if the_girl.outfit.vagina_available():
-                    "[the_girl.title] puts a hand between her legs and starts to touch herself while she she blows you."
+                    "[the_girl.title] puts a hand between her legs and starts to touch herself while she blows you."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
                     $ the_girl.discover_opinion("masturbating")
                     if the_girl.arousal > 60:
@@ -188,9 +188,9 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
 
             mc.name "A cock sleeve like you deserves to have her throat stuffed when she cums."
             if the_girl.get_opinion_score("being submissive") > 0:
-                if the_girl.sluttiness > the_girl.core_sluttiness and the_girl.core_sluttiness < Ophelia_blowjob.slut_cap:
-                    $ the_girl.change_slut_core(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
-                    $ the_girl.change_slut_temp(-the_girl.get_opinion_score("being submissive"))
+                if the_girl.sluttiness > the_girl.sluttiness and the_girl.sluttiness < Ophelia_blowjob.slut_cap:
+                    $ the_girl.change_slut(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
+                    $ the_girl.change_slut(-the_girl.get_opinion_score("being submissive"))
                 $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
                 "[the_girl.possessive_title] closes her eyes tight. You can feel her throat spasm around your shaft in time with her orgasmic contractions."
                 if the_girl.outfit.vagina_visible():

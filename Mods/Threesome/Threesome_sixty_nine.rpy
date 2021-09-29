@@ -207,7 +207,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_loc
     "You pull back from making out with [the_girl_2.title]."
     mc.name "I think [the_girl_1.title] needs a little more attention..."
     "You grab [the_girl_2.possessive_title]'s head by her hair and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
-    "She starts to lap at [the_girl_1.title]'s cunt. You can feel her tongue brushing up against you cock."
+    "She starts to lap at [the_girl_1.title]'s cunt. You can feel her tongue brushing up against your cock."
     "You give [the_girl_1.title] a few slow thrusts, making sure to give [the_girl_2.title] room to work."
     the_girl_1 "Mmmm..."
     "Muffled moans come from [the_girl_1.title]. Your cock is buried deep inside her while [the_girl_2.possessive_title] licks and sucks at her clit."
@@ -322,12 +322,15 @@ label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_loca
         "You can feel [the_girl_1.title] trembling beneath you. [the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
         $ the_girl_2.call_dialogue("climax_responses_oral")
         "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
         "They both orgasm. [the_girl_1.title]'s cunt pulses around your cock as she cums, while [the_girl_2.title] moans and closes her eyes."
         "As they start to wind down, you continue fucking [the_girl_1.title]'s now considerably slicker pussy."
         return
 
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "You can feel [the_girl_1.title] trembling beneath you. She moans loudly but it's muffled by [the_girl_2.title] grinding her pussy in her face."
+        $ the_girl_1.run_orgasm()
         "She orgasms, her pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
         "You don't even bother to slow down. As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking."
         return
@@ -335,6 +338,7 @@ label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_loca
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "[the_girl_2.title] opens her mouth and moans as [the_girl_1.title] licks her in just the right spot."
         $ the_girl_2.call_dialogue("climax_responses_oral")
+        $ the_girl_2.run_orgasm()
         "[the_girl_2.title] grinds her pussy against the other girl's face as she orgasms."
 
     return
@@ -345,17 +349,21 @@ label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_loca
         "You can feel [the_girl_1.title] trembling as you finger her. [the_girl_2.title] moans around your cock as [the_girl_1.title] licks her in just the right spot."
         $ the_girl_2.call_dialogue("climax_responses_oral")
         "[the_girl_1.title] is moaning loudly but it all gets muffled as [the_girl_2.title] grinds against her face roughly."
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
         "They both orgasm. [the_girl_1.title]'s cunt quivers around your fingers as she cums, while [the_girl_2.title] moans and closes her eyes."
         "As they start to wind down, you put your hand on the back of [the_girl_2.title]'s head and remind her to keep sucking."
         return
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "You can feel [the_girl_1.title] trembling at your touch. She moans loudly but it's muffled by [the_girl_2.title] grinding her pussy in her face."
+        $ the_girl_1.run_orgasm()
         "She orgasms, her pussy quivering around your fingers. You thrust them into her roughly."
         "As [the_girl_1.title] comes down from her orgasm you continue stimulating her with your hand."
         return
 
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "[the_girl_2.title] moans around your cock as [the_girl_1.title] licks her in just the right spot."
+        $ the_girl_2.run_orgasm()
         "She grinds her pussy against the other girl's face as she orgasms."
     return
 
@@ -424,18 +432,22 @@ label strip_ask_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_loc
 
 label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
         if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
-            "Both girls are moaning wildly into each other's crotches"
+            "Both girls are moaning wildly into each other's crotches."
+            $ the_girl_1.run_orgasm()
             "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
+            $ the_girl_2.run_orgasm()
             "[the_girl_2.title] is right behind her, her hips pushing back against [the_girl_1.title]'s face as she cums too."
             return
         elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
+            $ the_girl_1.run_orgasm()
             "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
             "Her moans are muffled by [the_girl_2.title]'s pussy."
             return
 
         elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
-            "[the_girl_2.title] stops eating out [the_girl_1.title] for moment as she orgasms."
+            "[the_girl_2.title] stops eating out [the_girl_1.title] for a moment as she is starting to climax."
             the_girl_2 "Oh god... that's the spot. Fuck!"
+            $ the_girl_2.run_orgasm()
             "She grinds her pussy against the other girl's face as she orgasms."
         return
 

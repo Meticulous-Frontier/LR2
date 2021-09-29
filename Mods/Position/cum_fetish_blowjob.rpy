@@ -1,4 +1,4 @@
-﻿init python:
+init python:
     cum_fetish_blowjob = Position(name = "Blowjob", slut_requirement = 40, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "None", skill_tag = "Oral",
         girl_arousal = 13, girl_energy = 10,
@@ -50,7 +50,7 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
             "With a little encouragement, you pull [the_girl.possessive_title]'s head down a little further with each stroke."
             if the_girl.get_opinion_score("masturbating") > 0:
                 if the_girl.outfit.vagina_available():
-                    "[the_girl.possessive_title] puts a hand between her legs and starts to touch herself while she she blows you."
+                    "[the_girl.possessive_title] puts a hand between her legs and starts to touch herself while she blows you."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
                     $ the_girl.discover_opinion("masturbating")
                     if the_girl.arousal > 60:
@@ -103,7 +103,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         the_girl "Oh god you taste so good. Just promise me you'll warn me before you cum..."
         the_girl "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
         $ the_girl.discover_opinion("cum facials")
-        "You cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
+        "Your cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
     return
 
 label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
@@ -194,9 +194,9 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
     "You push her back down, hard. [the_girl.possessive_title] keeps her mouth open wide and fits you all the way in, quivering as she climaxes."
     mc.name "A cock sleeve like you deserves to have her throat stuffed when she cums."
     if the_girl.get_opinion_score("being submissive") > 0:
-        if the_girl.sluttiness > the_girl.core_sluttiness and the_girl.core_sluttiness < cum_fetish_blowjob.slut_cap:
-            $ the_girl.change_slut_core(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
-            $ the_girl.change_slut_temp(-the_girl.get_opinion_score("being submissive"))
+        if the_girl.sluttiness > the_girl.sluttiness and the_girl.sluttiness < cum_fetish_blowjob.slut_cap:
+            $ the_girl.change_slut(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
+            $ the_girl.change_slut(-the_girl.get_opinion_score("being submissive"))
         $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
         "[the_girl.possessive_title] closes her eyes tight. You can feel her throat spasm around your shaft in time with her orgasmic contractions."
         if the_girl.outfit.vagina_visible():

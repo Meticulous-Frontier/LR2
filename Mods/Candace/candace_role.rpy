@@ -919,7 +919,7 @@ label candace_love_path_intro_label():
     $ the_person.draw_person(position = "missionary")
     "You grab legs and push them up over her head. You waste no time, lining yourself up with her slit, you push yourself into her."
     the_person "Oh! Fucking... Finally!"
-    "[the_person.title] grabs her own legs, holding them back for you as best as she can. It's time to give her pounding she's been looking for!"
+    "[the_person.title] grabs her own legs, holding them back for you as best she can. It's time to give her pounding she's been looking for!"
     call fuck_person(the_person, start_position = piledriver, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
     "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
@@ -946,7 +946,7 @@ label candace_love_path_intro_label():
     $ mc.change_locked_clarity(5)
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
     $ the_person.draw_person(position = "walking_away")
-    "Still naked, you cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
+    "Still naked, your cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
     "She grabs your hand and brings it around her front, placing it on her chest. She sighs, then turns her head."
     the_person "Goodnight boss. Thanks for spending the night... I've... Like... always wanted to try sleeping like this..."
     mc.name "Goodnight..."
@@ -1453,7 +1453,7 @@ label candace_meet_doctor_candace_label():
                 "[the_person.title] turns her head back to look at you. Are those puppy dog eyes?"
                 the_person "Please, I need you again sir. Please!"
                 "God damn no wonder she is so good at negotiating supply contracts, she knows just how to ask."
-                "You cock is rock hard and ready to seal the deal. It's time to fuck [the_person.title] properly now that you have everything out in the open."
+                "Your cock is rock hard and ready to seal the deal. It's time to fuck [the_person.title] properly now that you have everything out in the open."
                 $ mc.change_locked_clarity(50)
                 "Your grab her hips and move in close. She reaches between her legs and holds the tip of your erection, guiding you inside of her."
                 "You easily bottom out inside of her in one smooth stroke. She groans at the sensations of being filled again."
@@ -1595,8 +1595,8 @@ init 3 python:
         old_dict = candace.event_triggers_dict.get("sex_record_snapshot", None)
         if old_dict == None:
             return 0
-        if old_dict["Vaginal Sex"] < candace.sex_record["Vaginal Sex"] or old_dict["Anal Sex"] < candace.sex_record["Anal Sex"]: #You fucked her atleast once
-            if old_dict["Vaginal Sex"] + old_dict["Anal Sex"] + 2 <= candace.sex_record["Vaginal Sex"] + candace.sex_record["Anal Sex"]: #Sex atleast twice
+        if old_dict["Vaginal Sex"] < candace.sex_record["Vaginal Sex"] or old_dict["Anal Sex"] < candace.sex_record["Anal Sex"]: #You fucked her at least once
+            if old_dict["Vaginal Sex"] + old_dict["Anal Sex"] + 2 <= candace.sex_record["Vaginal Sex"] + candace.sex_record["Anal Sex"]: #Sex at least twice
                 if old_dict["Vaginal Creampies"] + old_dict["Anal Creampies"] + 2 <= candace.sex_record["Vaginal Creampies"] + candace.sex_record["Anal Creampies"]:
                     return 4
                 else:

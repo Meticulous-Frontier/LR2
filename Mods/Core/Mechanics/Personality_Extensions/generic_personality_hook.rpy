@@ -2,6 +2,8 @@
 # overrides the default make person function in the game
 # so we can add / change person characteristics based on custom personalities.
 # if you need person customizations, extend the hijacked labels
+init 2:
+    default persistent.low_memory_wardrobes = True
 
 init 10 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_generic_personality")
@@ -274,6 +276,10 @@ init 2 python:
             return
 
         base_wardrobe = Wardrobe("[person.name]_[person.last_name]_wardrobe")
+        if persistent.low_memory_wardrobes:
+            person.wardrobe = base_wardrobe
+            return
+
         preferences = WardrobePreference(person)
         outfit_builder = WardrobeBuilder(person)
 
@@ -368,8 +374,9 @@ init 2 python:
 
     def create_bimbo():
         # add one bimbo to the game (on start of game)
-        person = make_person(age=renpy.random.randint(25, 35), tits="DD", body_type = "standard_body", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
-            hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True)
+        person = make_person(age=renpy.random.randint(21, 35), tits="DD", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
+            hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
+            forced_opinions = [["high heels", 2, False], ["skimpy outfits", 2, False]])
         person.generate_home()
         person.home.add_person(person)
         return

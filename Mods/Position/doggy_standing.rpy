@@ -75,7 +75,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
     else:
         "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
         the_girl "Oh god, you fuck me so good, I can barely keep up!"
-        "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
+        "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     menu:
         "Spank her":
@@ -155,7 +155,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
                     "You can feel her juices dripping down from her slit in response to your touch."
             if the_girl.arousal > 90:
                 the_girl "Oh fuck! Don't stop! Don't you dare stop!"
-                "Her moans clearly indicate an impending orgasm. As best as you can, you fuck her while you roughly rub her clit."
+                "Her moans clearly indicate an impending orgasm. As best you can, you fuck her while you roughly rub her clit."
             else:
                 "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her."
     return
@@ -285,7 +285,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
@@ -508,7 +508,7 @@ label taboo_break_SB_doggy_standing(the_girl, the_location, the_object):
         $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
         "She speeds up."
     the_girl "Is that what you wanted?"
-    "You move behind her and slide you cock between her thighs, brushing softly along her already wet snatch."
+    "You move behind her and slide your cock between her thighs, brushing softly along her already wet snatch."
     mc.name "Not quite, you seem pretty excited, perhaps I should slide it in to see if you can take it."
     $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her wet hole."

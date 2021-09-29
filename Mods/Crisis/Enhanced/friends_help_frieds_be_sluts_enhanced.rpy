@@ -50,7 +50,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                 person_two "Hey! That's... Come on [person_one.title], we should get back to work. Goodbye [person_two.mc_title]."
                 $ scene_manager.remove_actor(person_two)
                 "She hurries out of the room, blushing."
-                $ person_one.change_slut_temp(2)
+                $ person_one.change_slut(2)
                 person_one "She's so cute when she's embarrassed. See you around [person_two.mc_title]."
             "Ignore them":
                 "You leave them to their discussion and circle back to your desk."
@@ -87,7 +87,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     mc.name "Of course I'm sure, but if I'm making you self conscious I'll give you some privacy."
                     $ scene_manager.update_actor(person_two, emotion = "happy")
                     mc.name "Once you're done your break I expect to see you both back at work."
-                    $ person_two.change_slut_temp(3)
+                    $ person_two.change_slut(2)
                     $ person_two.change_obedience(2)
                     $ mc.change_locked_clarity(5)
                     "You leave the room, and a few seconds later you can hear them resume watching porn together."
@@ -112,7 +112,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ person_one.discover_opinion(person_one.get_random_opinion(include_known = True, include_sexy = True, include_normal = False, only_positive = True))
                     $ person_one.discover_opinion(person_one.get_random_opinion(include_known = True, include_sexy = True, include_normal = False, only_positive = True))
                     $ person_one.change_love(1)
-                    $ person_two.change_slut_temp(1 + person_two.get_opinion_score("public sex"))
+                    $ person_two.change_slut(1 + person_two.get_opinion_score("public sex"))
                     $ person_two.change_love(1)
                     $ mc.change_locked_clarity(10)
                     "After a few minutes the video ends and you've discovered a few things about [person_one.title]'s sexual preferences."
@@ -177,7 +177,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     $ scene_manager.remove_actor(person_one)
                     "You hear them chatting and laughing as they head back to work."
                     $ person_one.change_obedience(1)
-                    $ person_two.change_slut_temp(3)
+                    $ person_two.change_slut(2)
                     $ person_two.change_obedience(2)
 
                 elif person_two.effective_sluttiness() < 40:
@@ -226,7 +226,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 mc.name "I've got to give it to [person_two.title]. I like them big."
                             $ scene_manager.update_actor(person_one, emotion = "happy")
                             person_one "Exactly! You're just going to have to accept that you're smoking hot [person_two.title]."
-                            $ person_two.change_slut_temp(2 + person_one.get_opinion_score("showing her tits"))
+                            $ person_two.change_slut(2 + person_one.get_opinion_score("showing her tits"))
                             $ person_two.change_love(1 + person_one.get_opinion_score("showing her tits"))
                             $ scene_manager.update_actor(person_two, emotion = "happy")
                             person_two "Fine, I guess my tits are pretty nice. Shouldn't we be getting back to work."
@@ -270,7 +270,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                         "She starts to strip down, eagerly pulling her [the_item.display_name] up."
                                     else:
                                         "She starts to strip down, eagerly pulling off her [the_item.display_name]."
-                                    $ person_two.change_slut_temp(person_two.discover_opinion("showing her tits"))
+                                    $ person_two.change_slut(person_two.discover_opinion("showing her tits"))
                                 elif person_two.obedience >= 120:
                                     person_two "Do you really want me to do this [person_two.mc_title]?"
                                     mc.name "I do, now show them to us."
@@ -329,7 +329,7 @@ label friends_help_friends_be_sluts_enhanced_label():
 
                                     $ person_one.change_happiness(5)
                                     $ person_one.change_love(1 + person_one.get_opinion_score("showing her tits"))
-                                    $ person_two.change_slut_temp(1 + person_two.get_opinion_score("showing her tits"))
+                                    $ person_two.change_slut(1 + person_two.get_opinion_score("showing her tits"))
 
                                     $ scene_manager.update_actor(person_two, emotion = "sad")
                                     person_two "So I got naked just to lose, huh?"
@@ -345,7 +345,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                         mc.name "I've got to give it to [person_two.title]. I like them big."
                                     $ scene_manager.update_actor(person_two, emotion = "happy")
                                     person_two "Well, at least I didn't get naked just to lose."
-                                    $ person_two.change_slut_temp(1 + person_one.get_opinion_score("showing her tits"))
+                                    $ person_two.change_slut(1 + person_one.get_opinion_score("showing her tits"))
                                     $ person_two.change_love(1 + person_one.get_opinion_score("showing her tits"))
                                     $ scene_manager.update_actor(person_one, emotion = "happy")
                                     person_one "You've got some award winning tits on you, you should be proud of them!"

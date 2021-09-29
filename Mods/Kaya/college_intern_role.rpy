@@ -66,7 +66,7 @@ label hire_new_college_intern_label(the_person):
     $ the_dept = ""
     $ skill_array = []
     $ stat_array = []
-    "You walk around the university campus a bit. You decide to look into hiring a new college intern for you business."
+    "You walk around the university campus a bit. You decide to look into hiring a new college intern for your business."
     "You track down [the_person.title]."
     $ the_person.draw_person()
     the_person "Hello [the_person.mc_title]. What can I do for you today?"
@@ -98,8 +98,8 @@ label hire_new_college_intern_label(the_person):
             mc.name "Actually, I just realized I can't bring on someone right now."
             the_person "I see, well let me know if you change your mind."
             return
-    "Ok. Here's my list of candidates from that program."
-    "These are all girls who are doing good academically, are starting their final semester, and have applied for the scholarship."
+    the_person "OK. Here's my list of candidates from that program."
+    the_person "These are all girls who are doing good academically, are starting their final semester, and have applied for the scholarship."
 
     $ count = 3 #Num of people to generate, by default is 3. Changed with some policies
     $ clear_scene()
@@ -140,7 +140,7 @@ label hire_new_college_intern_label(the_person):
 
 
 label college_intern_complete_internship(the_person):
-    "As you are going about you day, you get a phone call. It's from [the_person.title], one of your college interns."
+    "As you are going about your day, you get a phone call. It's from [the_person.title], one of your college interns."
     the_person "Hey [the_person.mc_title]. Guess what! I graduated today!"
     mc.name "Congratulations! I suppose that means you won't be participating in the scholarship internship anymore."
     the_person "Yeah... that's true..."
@@ -205,7 +205,7 @@ label college_intern_complete_internship(the_person):
             call hire_someone(the_person) from _call_hire_intern_work__03
         else:
             mc.name "I'm sorry, but I can't do that right now, the logistics aren't good for a new full time employee."
-            the_person "That's okay. I appreciate the experience I got while I was there. Take care [the_person.mc_title]"
+            the_person "That's okay. I appreciate the experience I got while I was there. Take care, [the_person.mc_title]."
             "You say goodbye to her. You aren't sure if you'll see her around again or not."    #TODO delete person?
     else:#She doesn't want to work for you
         the_person "I don't think I could work there full time, but I appreciate the opportunity to come and learn from you."

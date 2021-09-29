@@ -22,9 +22,8 @@ init 5 python:
             return True
         elif person.int >= 7 and person.charisma >= 7 and person.focus >= 7 and nora_reward_genius_trait not in list_of_traits:
             return True
-        # NEW TRAIT ENABLE AFTER UPGRADE TO v0.43 or greater
-        # elif person.has_exact_role(very_heavy_trance_role) and nora_reward_instant_trance not in list_of_traits:
-        #     return True
+        elif person.has_exact_role(very_heavy_trance_role) and nora_reward_instant_trance not in list_of_traits:
+            return True
         return False
 
 

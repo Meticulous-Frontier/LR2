@@ -119,7 +119,7 @@ label lust_blowjob_intro_label():
     "[the_person.title] stands up."
     the_person "Wow, I hope that helps you focus again [the_person.mc_title]. If you need this again, just let me know..."
     mc.name "Don't worry, I will."
-    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 3)
+    $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, max_slut = 50)
     $ the_person.review_outfit()
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] turns and walks out of your office. That went great!"
@@ -239,7 +239,7 @@ label lust_blowjob_office_label():
         "[the_person.title] stands up."
         the_person "Wow, I hope that helps you focus again [the_person.mc_title]. If you need this again, just let me know..."
         mc.name "Don't worry, I will."
-        $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 3)
+        $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, max_slut = 50)
         $ the_person.review_outfit()
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] turns and walks out of your office."
@@ -284,7 +284,7 @@ label lust_blowjob_office_label():
         $ the_person.draw_person(position = "stand3")
         "[the_person.title] stands up."
         mc.name "See? That was exactly what I needed. Thank you [the_person.title]."
-        $ the_person.change_stats(obedience = 5, happiness = -5, slut_temp = 5, slut_core = 1)
+        $ the_person.change_stats(obedience = 5, happiness = -5, slut = 1, max_slut = 50)
         the_person "I suppose that was okay... let's not make a habit of this... okay?"
         mc.name "Don't worry, I won't."
         $ the_person.review_outfit()
@@ -296,7 +296,7 @@ label lust_blowjob_office_label():
         "Her face grows red in anger."
         the_person "You're a sick man. I'm not some floozy for you to get your rocks off with!"
         $ the_person.draw_person(position = "walking_away")
-        $ the_person.change_stats(happiness = -5, obedience = -1, love = -2, slut_temp = 1)
+        $ the_person.change_stats(happiness = -5, obedience = -1, love = -2)
         "[the_person.possessive_title] quickly stands up and storms out of your office. Maybe you should be more careful who you pick for this?"
     call advance_time from _call_advance_time_lusty_blowjob_01
     return

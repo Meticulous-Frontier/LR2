@@ -217,7 +217,7 @@ label slave_alarm_clock_label(the_person):
             the_person "Oh... I should... Uh..."
             "[the_person.possessive_title] blushes and turns around suddenly. It takes you a moment to realise why: your morning wood pitching an impressive tent with your underwear."
             the_person "No, it's perfectly natural. I'll give you some privacy."
-            $ the_person.change_slut_temp(2)
+            $ the_person.change_slut(2)
             $ the_person.draw_person(position = "back_peek")
             "She can't help but taking some quick glances at you, but seems to be trying her best to respect your privacy."
 
@@ -226,7 +226,7 @@ label slave_alarm_clock_label(the_person):
             "She nods towards your crotch and you realise you're pitching an impressive tent."
             mc.name "Oh, sorry about that."
             the_person "No, it's perfectly natural and nothing to be embarrassed about."
-            $ the_person.change_slut_temp(3)
+            $ the_person.change_slut(2)
             "She stares at it for a short moment before pulling her eyes back up to meet yours."
             #TODO: She offers to pick out an outfit for you while you jerk off "To avoid bothering anyone at work".
             the_person "Certainly nothing to be embarrassed, but I think you should take care of it before you leave."
@@ -261,7 +261,7 @@ label slave_alarm_clock_label(the_person):
                                     "You slide forward a little, place the tip of your cock on her bottom lip, and start to fire your load into her mouth."
                                     "[the_person.possessive_title] stays perfectly still while you cum. When you're done you sit back and sigh."
                                     $ the_person.call_dialogue("cum_mouth")
-                                    $ the_person.change_stats(obedience = 5, slut_temp = 3)
+                                    $ the_person.change_stats(obedience = 5)
                                     $ the_person.draw_person()
                                     "She stands up and heads for the door."
 
@@ -277,7 +277,7 @@ label slave_alarm_clock_label(the_person):
                                     $ the_person.call_dialogue("cum_face")
                                     $ the_person.draw_person()
                                     $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
-                                    $ the_person.change_stats(obedience = 3, slut_temp = 3)
+                                    $ the_person.change_stats(obedience = 3)
 
                                     # TODO: She should seem a little shocked, but otherwise okay with how things turned out
                                 "Continue": # An escape if you get locked since obedience is less than 140 and has_large_tits() is false. #NOTE: Can write other alternatives
@@ -337,7 +337,7 @@ label slave_alarm_clock_label(the_person):
                 "[the_person.possessive_title] strokes you slowly for a few seconds, then lets go and places her hand on her lap while you take a second to recover."
 
         the_person "Whew, that was a lot. I hope that leaves you feeling relaxed for the rest of the day."
-        $ the_person.change_stats(love = 2, happiness = 5, slut_temp = 3)
+        $ the_person.change_stats(love = 2, happiness = 5)
         $ the_person.draw_person(position = "back_peek")
         "She smiles and gets up. She pauses before she leaves your room."
         the_person "You better get ready now or you're going to be late!"
@@ -385,14 +385,14 @@ label slave_alarm_clock_label(the_person):
 
         the_person "Whew, I'm glad I was able to help with that [the_person.mc_title]. That was a lot more than I was expecting."
         mc.name "Thanks [the_person.title], you're the best."
-        $ the_person.change_stats(love = 2, slut_temp = 3)
+        $ the_person.change_stats(love = 2)
         the_person "My pleasure, now you should be getting up or you'll be late for work!"
 
 
 
     else:
         # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
-        # This makes sure skirts are kept on (because this is suppose to be a quicky).
+        # This makes sure skirts are kept on (because this is suppose to be a quickly).
         $ the_person.strip_outfit(exclude_upper = True, position = "cowgirl", emotion = "happy")
         "You're woken up by your bed shifting under you and a sudden weight around your waist."
         $ the_person.draw_person(position = "cowgirl", emotion = "happy")

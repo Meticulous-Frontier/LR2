@@ -101,76 +101,10 @@ init 5:
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
                         text "Basic Bots" style "menu_text_title_style" size 32 xalign 0.5
                         for proj in IT_get_basic_bot_projects():
-                            hbox:
-                                xalign 0.5
-                                if proj not in mc.business.IT_projects:
-                                    if proj.requirement() == True:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_idle
-                                            hover it_imagebutton_hover
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (set_active_IT_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            if mc.business.IT_project_in_progress != None:
-                                                selected proj == mc.business.IT_project_in_progress[0]
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    elif proj.requirement():
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    else:
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                if proj in mc.business.IT_projects:
-                                    imagebutton:
-                                        insensitive it_imagebutton_inactive
-                                        idle it_imagebutton_inactive
-                                        hover it_imagebutton_hover
-                                        selected proj in mc.business.active_IT_projects
-                                        selected_idle it_imagebutton_active
-                                        selected_hover it_imagebutton_hover
-                                        action Function (IT_toggle_project, proj)
-                                        sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                        hovered [
-                                            Show("IT_tooltip",None,proj)
-                                            ]
-
-                            text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                            if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                bar:
-                                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                    range proj.project_cost
-                                    xalign 0.5
-                                    yalign 0.5
-                                    ypos -70
-                                    xysize (200, 10)
-                            python:
-                                supplemental_text = ""
-                                if mc.business.IT_project_in_progress != None:
-                                    if proj == mc.business.IT_project_in_progress[0]:
-                                        supplemental_text = "In Progress"
-                                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                elif proj not in mc.business.IT_projects and not  proj.requirement():
-                                    supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                            text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                            use screen_IT_project_button(proj)
 
                 frame:
                     background "#1a45a1aa"
@@ -182,72 +116,7 @@ init 5:
                         text "Breeder Bots" style "menu_text_title_style" size 32 xalign 0.5
                         if fetish_breeding_serum_is_unlocked():
                             for proj in IT_get_breeder_bot_projects():
-                                hbox:
-                                    xalign 0.5
-                                    if proj not in mc.business.IT_projects:
-                                        if proj.requirement() == True:
-                                            imagebutton:
-                                                insensitive it_imagebutton_inactive
-                                                idle it_imagebutton_idle
-                                                hover it_imagebutton_hover
-                                                selected_idle it_imagebutton_active
-                                                selected_hover it_imagebutton_hover
-                                                action Function (set_active_IT_project, proj)
-                                                sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                                if mc.business.IT_project_in_progress != None:
-                                                    selected proj == mc.business.IT_project_in_progress[0]
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        elif proj.requirement():
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        else:
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-
-                                    if proj in mc.business.IT_projects:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_inactive
-                                            hover it_imagebutton_hover
-                                            selected proj in mc.business.active_IT_projects
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (IT_toggle_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                                if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                    bar:
-                                        value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                        range proj.project_cost
-                                        xalign 0.5
-                                        yalign 0.5
-                                        ypos -70
-                                        xysize (200, 10)
-                                python:
-                                    supplemental_text = ""
-                                    if mc.business.IT_project_in_progress != None:
-                                        if proj == mc.business.IT_project_in_progress[0]:
-                                            supplemental_text = "In Progress"
-                                    if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                        supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                    elif proj not in mc.business.IT_projects and not  proj.requirement():
-                                        supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                                text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                                use screen_IT_project_button(proj)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -261,72 +130,7 @@ init 5:
                         text "Anal Bots" style "menu_text_title_style" size 32 xalign 0.5
                         if fetish_anal_serum_is_unlocked():
                             for proj in IT_get_anal_bot_projects():
-                                hbox:
-                                    xalign 0.5
-                                    if proj not in mc.business.IT_projects:
-                                        if proj.requirement() == True:
-                                            imagebutton:
-                                                insensitive it_imagebutton_inactive
-                                                idle it_imagebutton_idle
-                                                hover it_imagebutton_hover
-                                                selected_idle it_imagebutton_active
-                                                selected_hover it_imagebutton_hover
-                                                action Function (set_active_IT_project, proj)
-                                                sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                                if mc.business.IT_project_in_progress != None:
-                                                    selected proj == mc.business.IT_project_in_progress[0]
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        elif proj.requirement():
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        else:
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-
-                                    if proj in mc.business.IT_projects:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_inactive
-                                            hover it_imagebutton_hover
-                                            selected proj in mc.business.active_IT_projects
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (IT_toggle_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                                if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                    bar:
-                                        value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                        range proj.project_cost
-                                        xalign 0.5
-                                        yalign 0.5
-                                        ypos -70
-                                        xysize (200, 10)
-                                python:
-                                    supplemental_text = ""
-                                    if mc.business.IT_project_in_progress != None:
-                                        if proj == mc.business.IT_project_in_progress[0]:
-                                            supplemental_text = "In Progress"
-                                    if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                        supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                    elif proj not in mc.business.IT_projects and not  proj.requirement():
-                                        supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                                text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                                use screen_IT_project_button(proj)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -335,77 +139,11 @@ init 5:
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
                         text "Cum Bots" style "menu_text_title_style" size 32 xalign 0.5
                         if fetish_cum_serum_is_unlocked():
                             for proj in IT_get_cum_bot_projects():
-                                hbox:
-                                    xalign 0.5
-                                    if proj not in mc.business.IT_projects:
-                                        if proj.requirement() == True:
-                                            imagebutton:
-                                                insensitive it_imagebutton_inactive
-                                                idle it_imagebutton_idle
-                                                hover it_imagebutton_hover
-                                                selected_idle it_imagebutton_active
-                                                selected_hover it_imagebutton_hover
-                                                action Function (set_active_IT_project, proj)
-                                                sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                                if mc.business.IT_project_in_progress != None:
-                                                    selected proj == mc.business.IT_project_in_progress[0]
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        elif proj.requirement():
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        else:
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-
-                                    if proj in mc.business.IT_projects:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_inactive
-                                            hover it_imagebutton_hover
-                                            selected proj in mc.business.active_IT_projects
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (IT_toggle_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                                if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                    bar:
-                                        value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                        range proj.project_cost
-                                        xalign 0.5
-                                        yalign 0.5
-                                        ypos -70
-                                        xysize (200, 10)
-                                python:
-                                    supplemental_text = ""
-                                    if mc.business.IT_project_in_progress != None:
-                                        if proj == mc.business.IT_project_in_progress[0]:
-                                            supplemental_text = "In Progress"
-                                    if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                        supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                    elif proj not in mc.business.IT_projects and not  proj.requirement():
-                                        supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                                text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                                use screen_IT_project_button(proj)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -414,77 +152,11 @@ init 5:
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
                         text "Exhbitionism Bots" style "menu_text_title_style" size 32 xalign 0.5
                         if fetish_exhibition_serum_is_unlocked():
                             for proj in IT_get_exhibition_bot_projects():
-                                hbox:
-                                    xalign 0.5
-                                    if proj not in mc.business.IT_projects:
-                                        if proj.requirement() == True:
-                                            imagebutton:
-                                                insensitive it_imagebutton_inactive
-                                                idle it_imagebutton_idle
-                                                hover it_imagebutton_hover
-                                                selected_idle it_imagebutton_active
-                                                selected_hover it_imagebutton_hover
-                                                action Function (set_active_IT_project, proj)
-                                                sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                                if mc.business.IT_project_in_progress != None:
-                                                    selected proj == mc.business.IT_project_in_progress[0]
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        elif proj.requirement():
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-                                        else:
-                                            imagebutton:
-                                                idle it_imagebutton_locked
-                                                hover it_imagebutton_locked
-                                                hovered [
-                                                    Show("IT_tooltip",None,proj)
-                                                    ]
-
-                                    if proj in mc.business.IT_projects:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_inactive
-                                            hover it_imagebutton_hover
-                                            selected proj in mc.business.active_IT_projects
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (IT_toggle_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                                if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                    bar:
-                                        value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                        range proj.project_cost
-                                        xalign 0.5
-                                        yalign 0.5
-                                        ypos -70
-                                        xysize (200, 10)
-                                python:
-                                    supplemental_text = ""
-                                    if mc.business.IT_project_in_progress != None:
-                                        if proj == mc.business.IT_project_in_progress[0]:
-                                            supplemental_text = "In Progress"
-                                    if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                        supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                    elif proj not in mc.business.IT_projects and not  proj.requirement():
-                                        supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                                text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                                use screen_IT_project_button(proj)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -511,228 +183,30 @@ init 5:
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
-
                         text "HR" style "menu_text_title_style" size 32 xalign 0.5
                         for proj in IT_get_HR_projects():
-                            hbox:
-                                xalign 0.5
-                                if proj not in mc.business.IT_projects:
-                                    if proj.requirement() == True:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_idle
-                                            hover it_imagebutton_hover
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (set_active_IT_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            if mc.business.IT_project_in_progress != None:
-                                                selected proj == mc.business.IT_project_in_progress[0]
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    elif proj.requirement():
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    else:
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
+                            use screen_IT_project_button(proj)
 
-                                if proj in mc.business.IT_projects:
-                                    imagebutton:
-                                        insensitive it_imagebutton_inactive
-                                        idle it_imagebutton_inactive
-                                        hover it_imagebutton_hover
-                                        selected proj in mc.business.active_IT_projects
-                                        selected_idle it_imagebutton_active
-                                        selected_hover it_imagebutton_hover
-                                        action Function (IT_toggle_project, proj)
-                                        sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                        hovered [
-                                            Show("IT_tooltip",None,proj)
-                                            ]
-
-                            text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                            if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                bar:
-                                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                    range proj.project_cost
-                                    xalign 0.5
-                                    yalign 0.5
-                                    ypos -70
-                                    xysize (200, 10)
-                            python:
-                                supplemental_text = ""
-                                if mc.business.IT_project_in_progress != None:
-                                    if proj == mc.business.IT_project_in_progress[0]:
-                                        supplemental_text = "In Progress"
-                                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                elif proj not in mc.business.IT_projects and not  proj.requirement():
-                                    supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                            text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
                 frame:
                     background "#1a45a1aa"
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
                         text "Supply" style "menu_text_title_style" size 32 xalign 0.5
                         for proj in IT_get_supply_projects():
-                            hbox:
-                                xalign 0.5
-                                if proj not in mc.business.IT_projects:
-                                    if proj.requirement() == True:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_idle
-                                            hover it_imagebutton_hover
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (set_active_IT_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            if mc.business.IT_project_in_progress != None:
-                                                selected proj == mc.business.IT_project_in_progress[0]
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    elif proj.requirement():
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    else:
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                if proj in mc.business.IT_projects:
-                                    imagebutton:
-                                        insensitive it_imagebutton_inactive
-                                        idle it_imagebutton_inactive
-                                        hover it_imagebutton_hover
-                                        selected proj in mc.business.active_IT_projects
-                                        selected_idle it_imagebutton_active
-                                        selected_hover it_imagebutton_hover
-                                        action Function (IT_toggle_project, proj)
-                                        sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                        hovered [
-                                            Show("IT_tooltip",None,proj)
-                                            ]
-
-                            text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                            if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                bar:
-                                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                    range proj.project_cost
-                                    xalign 0.5
-                                    yalign 0.5
-                                    ypos -70
-                                    xysize (200, 10)
-                            python:
-                                supplemental_text = ""
-                                if mc.business.IT_project_in_progress != None:
-                                    if proj == mc.business.IT_project_in_progress[0]:
-                                        supplemental_text = "In Progress"
-                                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                elif proj not in mc.business.IT_projects and not proj.requirement():
-                                    supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                            text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                            use screen_IT_project_button(proj)
 
                 frame:
                     background "#1a45a1aa"
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
                         text "Marketing" style "menu_text_title_style" size 32 xalign 0.5
                         for proj in IT_get_market_projects():
-                            hbox:
-                                xalign 0.5
-                                if proj not in mc.business.IT_projects:
-                                    if proj.requirement() == True:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_idle
-                                            hover it_imagebutton_hover
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (set_active_IT_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            if mc.business.IT_project_in_progress != None:
-                                                selected proj == mc.business.IT_project_in_progress[0]
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    elif proj.requirement():
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    else:
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                if proj in mc.business.IT_projects:
-                                    imagebutton:
-                                        insensitive it_imagebutton_inactive
-                                        idle it_imagebutton_inactive
-                                        hover it_imagebutton_hover
-                                        selected proj in mc.business.active_IT_projects
-                                        selected_idle it_imagebutton_active
-                                        selected_hover it_imagebutton_hover
-                                        action Function (IT_toggle_project, proj)
-                                        sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                        hovered [
-                                            Show("IT_tooltip",None,proj)
-                                            ]
-
-                            text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                            if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                bar:
-                                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                    range proj.project_cost
-                                    xalign 0.5
-                                    yalign 0.5
-                                    ypos -70
-                                    xysize (200, 10)
-                            python:
-                                supplemental_text = ""
-                                if mc.business.IT_project_in_progress != None:
-                                    if proj == mc.business.IT_project_in_progress[0]:
-                                        supplemental_text = "In Progress"
-                                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                elif proj not in mc.business.IT_projects and not proj.requirement():
-                                    supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                            text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                            use screen_IT_project_button(proj)
 
                 frame:
                     background "#1a45a1aa"
@@ -743,155 +217,17 @@ init 5:
                         xsize 300
                         text "Research" style "menu_text_title_style" size 32 xalign 0.5
                         for proj in IT_get_research_projects():
-                            hbox:
-                                xalign 0.5
-                                if proj not in mc.business.IT_projects:
-                                    if proj.requirement() == True:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_idle
-                                            hover it_imagebutton_hover
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (set_active_IT_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            if mc.business.IT_project_in_progress != None:
-                                                selected proj == mc.business.IT_project_in_progress[0]
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    elif proj.requirement():
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    else:
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                if proj in mc.business.IT_projects:
-                                    imagebutton:
-                                        insensitive it_imagebutton_inactive
-                                        idle it_imagebutton_inactive
-                                        hover it_imagebutton_hover
-                                        selected proj in mc.business.active_IT_projects
-                                        selected_idle it_imagebutton_active
-                                        selected_hover it_imagebutton_hover
-                                        action Function (IT_toggle_project, proj)
-                                        sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                        hovered [
-                                            Show("IT_tooltip",None,proj)
-                                            ]
-
-                            text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                            if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                bar:
-                                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                    range proj.project_cost
-                                    xalign 0.5
-                                    yalign 0.5
-                                    ypos -70
-                                    xysize (200, 10)
-                            python:
-                                supplemental_text = ""
-                                if mc.business.IT_project_in_progress != None:
-                                    if proj == mc.business.IT_project_in_progress[0]:
-                                        supplemental_text = "In Progress"
-                                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                elif proj not in mc.business.IT_projects and not proj.requirement():
-                                    supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-                            text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
+                            use screen_IT_project_button(proj)
 
                 frame:
                     background "#1a45a1aa"
                     xalign 0.5
                     xanchor 0.5
                     vbox:
-
                         xsize 300
                         text "Production" style "menu_text_title_style" size 32 xalign 0.5
                         for proj in IT_get_production_projects():
-                            hbox:
-                                xalign 0.5
-                                if proj not in mc.business.IT_projects:
-                                    if proj.requirement() == True:
-                                        imagebutton:
-                                            insensitive it_imagebutton_inactive
-                                            idle it_imagebutton_idle
-                                            hover it_imagebutton_hover
-                                            selected_idle it_imagebutton_active
-                                            selected_hover it_imagebutton_hover
-                                            action Function (set_active_IT_project, proj)
-                                            sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                            if mc.business.IT_project_in_progress != None:
-                                                selected proj == mc.business.IT_project_in_progress[0]
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    elif proj.requirement():
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-                                    else:
-                                        imagebutton:
-                                            idle it_imagebutton_locked
-                                            hover it_imagebutton_locked
-                                            hovered [
-                                                Show("IT_tooltip",None,proj)
-                                                ]
-
-                                if proj in mc.business.IT_projects:
-                                    imagebutton:
-                                        insensitive it_imagebutton_inactive
-                                        idle it_imagebutton_inactive
-                                        hover it_imagebutton_hover
-                                        selected proj in mc.business.active_IT_projects
-                                        selected_idle it_imagebutton_active
-                                        selected_hover it_imagebutton_hover
-                                        action Function (IT_toggle_project, proj)
-                                        sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                                        hovered [
-                                            Show("IT_tooltip",None,proj)
-                                            ]
-
-                            text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-                            if mc.business.IT_partial_projects.has_key(proj.identifier):
-                                bar:
-                                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
-                                    range proj.project_cost
-                                    xalign 0.5
-                                    yalign 0.5
-                                    ypos -70
-                                    xysize (200, 10)
-                            python:
-                                supplemental_text = ""
-                                if mc.business.IT_project_in_progress != None:
-                                    if proj == mc.business.IT_project_in_progress[0]:
-                                        supplemental_text = "In Progress"
-                                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-                                elif proj not in mc.business.IT_projects and not proj.requirement():
-                                    supplemental_text = "{color=#ff0000} Unknown Requirement {/color}"
-
-                            text supplemental_text  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
-                            # if mc.business.IT_project_in_progress != None:
-                            #     if proj == mc.business.IT_project_in_progress[0]:
-                            #         text "In Progress" style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
-                            #     else:
-                            #         text "" style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75
-                            # if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-                            #     text proj.requirement() style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5 ypos -75 color "#DD0000"
+                            use screen_IT_project_button(proj)
 
 screen IT_tooltip(the_project):
     $ hint_height = 150
@@ -958,6 +294,79 @@ screen screen_IT_active_project():
                             left_bar prog_bar_left
                             right_bar prog_bar_right
                             xysize (200, 20)
+
+screen screen_IT_project_button(proj):
+    hbox:
+        xalign 0.5
+        if proj not in mc.business.IT_projects:
+            if proj.requirement() == True:
+                imagebutton:
+                    insensitive it_imagebutton_inactive
+                    idle it_imagebutton_idle
+                    hover it_imagebutton_hover
+                    selected_idle it_imagebutton_active
+                    selected_hover it_imagebutton_hover
+                    action Function (set_active_IT_project, proj)
+                    sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
+                    if mc.business.IT_project_in_progress != None:
+                        selected proj == mc.business.IT_project_in_progress[0]
+                    hovered [
+                        Show("IT_tooltip",None,proj)
+                        ]
+            elif proj.requirement():
+                imagebutton:
+                    idle it_imagebutton_locked
+                    hover it_imagebutton_locked
+                    hovered [
+                        Show("IT_tooltip",None,proj)
+                        ]
+            else:
+                imagebutton:
+                    idle it_imagebutton_locked
+                    hover it_imagebutton_locked
+                    hovered [
+                        Show("IT_tooltip",None,proj)
+                        ]
+
+        if proj in mc.business.IT_projects:
+            imagebutton:
+                insensitive it_imagebutton_inactive
+                idle it_imagebutton_inactive
+                hover it_imagebutton_hover
+                selected proj in mc.business.active_IT_projects
+                selected_idle it_imagebutton_active
+                selected_hover it_imagebutton_hover
+                action Function (IT_toggle_project, proj)
+                sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
+                hovered [
+                    Show("IT_tooltip",None,proj)
+                    ]
+
+    text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
+    if mc.business.IT_partial_projects.has_key(proj.identifier):
+        bar:
+            value mc.business.IT_partial_projects.get(proj.identifier, 0)
+            range proj.project_cost
+            xalign 0.5
+            yalign 0.5
+            ypos -70
+            xysize (200, 10)
+
+    use supplemental_text_info(proj)
+
+
+screen supplemental_text_info(proj):
+    python:
+        supplemental_text = ""
+        if mc.business.IT_project_in_progress != None:
+            if proj == mc.business.IT_project_in_progress[0]:
+                supplemental_text = "In Progress"
+        if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
+            supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
+        elif proj not in mc.business.IT_projects and not  proj.requirement():
+            supplemental_text = "{color=#ff0000} Unknown Req {/color}"
+
+    text supplemental_text  style "menu_text_style" size 16 xanchor 0.5 xalign 0.5 ypos -75
 
 screen screen_IT_return_button():
     frame:

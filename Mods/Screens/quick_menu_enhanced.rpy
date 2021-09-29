@@ -32,8 +32,10 @@ init 5:
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             if okay_to_save:
                 textbutton _("Save") action ShowMenu('save')
-                textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
+                if config.has_quicksave:
+                    textbutton _("Q.Save") action QuickSave()
+            if config.has_quicksave:
+                textbutton _("Q.Load") action QuickLoad()
             textbutton _("Prefs") action ShowMenu('preferences')
             textbutton _("Cheat") action ToggleScreen("cheat_menu")
             textbutton _("Research") action ToggleScreen("serum_cheat_menu")

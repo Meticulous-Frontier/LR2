@@ -23,7 +23,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She winks and brings the condom to her mouth. Squeezing all your cum right into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
@@ -35,12 +35,17 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             "You feel her [the_girl.pubes_description] pussy convulsing around your dick as she also starts to orgasm."
             $ the_girl.cum_in_vagina()
             $ SB_doggy_standing.redraw_scene(the_girl)
-            $ climax_controller.do_clarity_release(the_girl)            
+            $ climax_controller.do_clarity_release(the_girl)
             if the_girl.has_cum_fetish() or the_girl.has_breeding_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
-            if the_girl.get_opinion_score("bareback sex") > 0:
+            if the_girl.knows_pregnant():
+                "[the_girl.possessive_title] groans deeply in pleasure, feeling your hot load spread inside her well fucked pussy."
+                the_girl "Oh, yeah, [the_girl.mc_title]... so hot... fill me with another hot load..."
+                if the_girl.pregnancy_is_visible():
+                    the_girl "That one made the baby kick!"
+            elif the_girl.get_opinion_score("bareback sex") > 0 and not the_girl.knows_pregnant():
                 the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                 "[the_girl.possessive_title]'s voice starts to trail off."
             elif the_girl.wants_creampie():

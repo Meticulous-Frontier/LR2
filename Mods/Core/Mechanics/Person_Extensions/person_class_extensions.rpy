@@ -120,8 +120,8 @@ init -1 python:
         # limit person stat values (anything over these values has no in-game effect)
         if self.sluttiness > 300:
             self.sluttiness = 300
-        if self.core_sluttiness > 300:
-            self.core_sluttiness = 300
+        if self.sluttiness > 300:
+            self.sluttiness = 300
         if self.obedience > 300:
             self.obedience = 300
         if self.love > 100:
@@ -273,7 +273,7 @@ init -1 python:
             self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
 
         if renpy.call_stack_depth() < 2:
-            # we are in the main menu (alternative idle_pos)
+            # we are in the main menu (alternative idle_pose)
             if self.location == self.work or self.location == downtown_bar:
                  return "sitting"
             if self.location == gym:
@@ -893,7 +893,7 @@ init -1 python:
 
         #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
-            self.change_slut_temp(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("skimpy outfits"), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
@@ -909,7 +909,7 @@ init -1 python:
             if self.outfit.get_panties() and self.outfit.get_panties().slut_value > 1:
                 lingerie_bonus += self.get_opinion_score("lingerie")
             lingerie_bonus = __builtin__.int(lingerie_bonus/2.0)
-            self.change_slut_temp(lingerie_bonus, add_to_log = False)
+            self.change_slut(lingerie_bonus, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
         if self.sluttiness < 40 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
@@ -919,17 +919,17 @@ init -1 python:
             if not self.outfit.wearing_panties():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
             underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
-            self.change_slut_temp(underwear_bonus, add_to_log = False)
+            self.change_slut(underwear_bonus, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 50
         if self.sluttiness < 50 and self.outfit and self.outfit.tits_visible():
-            self.change_slut_temp(self.get_opinion_score("showing her tits"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("showing her tits"), add_to_log = False)
         if self.sluttiness < 50 and self.outfit and self.outfit.vagina_visible():
-            self.change_slut_temp(self.get_opinion_score("showing her ass"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("showing her ass"), add_to_log = False)
 
         # showing everything only impacts sluttiness to level 60
         if self.sluttiness < 60 and self.outfit and self.outfit.full_access():
-            self.change_slut_temp(self.get_opinion_score("not wearing anything"), add_to_log = False)
+            self.change_slut(self.get_opinion_score("not wearing anything"), add_to_log = False)
 
         for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
             removal_list = []
@@ -981,6 +981,17 @@ init -1 python:
 
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
+
+    def person_call_dialogue_extended(org_func):
+        def person_call_dialogue_wrapper(person, type, **extra_args):
+            if type == "sex_review" and extra_args.get("the_report", {}).get("is_angry", False):
+                renpy.say(person, "Now leave me alone, I'm done.")
+            else:
+                org_func(person, type, **extra_args)
+
+        return person_call_dialogue_wrapper
+
+    Person.call_dialogue = person_call_dialogue_extended(Person.call_dialogue)
 
     # NO FUNCTIONALITY YET, BEDROOMS HAS BEEN MOVED TO PERSON CLASS EXTENSIONS
     # def person_generate_home_extended(org_func):
@@ -1207,21 +1218,19 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut_temp = None, slut_core = None, energy = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, energy = None, add_to_log = True):
         if not obedience is None:
-            self.change_obedience(obedience, add_to_log)
+            self.change_obedience(obedience, add_to_log = add_to_log)
         if not happiness is None:
-            self.change_happiness(happiness, add_to_log)
+            self.change_happiness(happiness, add_to_log = add_to_log)
         if not arousal is None:
-            self.change_arousal(arousal, add_to_log)
+            self.change_arousal(arousal, add_to_log = add_to_log)
         if not love is None:
-            self.change_love(love, add_to_log)
-        if not slut_temp is None:
-            self.change_slut_temp(slut_temp, add_to_log)
-        if not slut_core is None:
-            self.change_slut_core(slut_core, add_to_log)
+            self.change_love(love, add_to_log = add_to_log)
+        if not slut is None:
+            self.change_slut(slut, max_slut, add_to_log = add_to_log)
         if not energy is None:
-            self.change_energy(energy, add_to_log)
+            self.change_energy(energy, add_to_log = add_to_log)
         return
 
     Person.change_stats = change_stats
@@ -1300,6 +1309,7 @@ init -1 python:
             weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
 
         renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
+        renpy.force_full_redraw() # test for android
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1433,8 +1443,8 @@ init -1 python:
         def person_call_wrapper(person, what, *args, **kwargs):
             global portrait_say
             portrait_say = person.build_person_portrait()
-
             org_func(person, what, *args, **kwargs)
+            portrait_say = None # clear portrait when done
 
         return person_call_wrapper
 
@@ -1471,7 +1481,6 @@ init -1 python:
         # We keep track of tags used to display a character so that they can always be unique, but still tied to them so they can be hidden
         renpy.hide(self.identifier, draw_layer)
         renpy.hide(self.identifier + "_old", draw_layer)
-        renpy.hide("portrait")
         return
 
     Person.hide_person = hide_person_enhanced
@@ -1484,6 +1493,11 @@ init -1 python:
 
     Person.is_at_work = is_person_at_work
 
+    def is_person_at_mc_house(self):
+        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
+
+    Person.is_person_at_mc_house = is_person_at_mc_house
+
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):
@@ -1492,6 +1506,8 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum facials"] = report_log.get("cum facials", 0) + 1
 
         return cum_on_face_wrapper
 
@@ -1504,6 +1520,8 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum on tits"] = report_log.get("cum on tits", 0) + 1
 
         return cum_on_tits_wrapper
 
@@ -1516,6 +1534,8 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum on stomach"] = report_log.get("cum on stomach", 0) + 1
 
         return cum_on_stomach_wrapper
 
@@ -1528,11 +1548,26 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
+            if "report_log" in globals():   # add to report log if exists
+                report_log["cum on ass"] = report_log.get("cum on ass", 0) + 1
 
         return cum_on_ass_wrapper
 
     # wrap up the cum_on_ass function
     Person.cum_on_ass = cum_on_ass_extended(Person.cum_on_ass)
+
+    def cum_in_mouth_extended(org_func):
+        def cum_in_mouth_wrapper(person, add_to_record = True):
+            # run original function
+            org_func(person, add_to_record)
+            # run extension code
+            if "report_log" in globals():   # add to report log if exists
+                report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1
+
+        return cum_in_mouth_wrapper
+
+    # wrap up the cum_on_ass function
+    Person.cum_in_mouth = cum_in_mouth_extended(Person.cum_in_mouth)
 
 
 ##################
@@ -1551,7 +1586,9 @@ init -1 python:
                 or any(x.parent_role in self.special_role for x in role)
         else:
             return role in self.special_role \
-                or role.parent_role in self.special_role
+                or role.parent_role in self.special_role \
+                or not find_in_list(lambda x: x.check_looks_like(role), self.special_role) is None
+
     Person.has_role = has_role
 
     def add_role(self, role):
@@ -1676,7 +1713,7 @@ init -1 python:
             or (self.outfit.slut_requirement > self.sluttiness):
             self.apply_planned_outfit()
             if draw_person:
-                self.draw_person()            
+                self.draw_person()
             if dialogue:
                 self.call_dialogue("clothing_review") # must be last call in function
         return
@@ -1885,7 +1922,7 @@ init -1 python:
 ##########################################
 # Expose outfit methods on Person object #
 ##########################################
-    # many coding errors are related to missing .oufit in the sequence to check a persons state based on her outfit
+    # many coding errors are related to missing .outfit in the sequence to check a persons state based on her outfit
     # these extension methods on the Person class just redirect it to the outfit class, so the code still works as intended
 
     def person_tits_available(self):
@@ -2014,9 +2051,17 @@ init -1 python:
     Person.decide_on_outfit = person_decide_on_outfit
 
     def person_get_random_appropriate_outfit(self, guarantee_output = False):
-        return self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), guarantee_output = guarantee_output, preferences = WardrobePreference(self))
-    
+        outfit = self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), preferences = WardrobePreference(self))
+        if guarantee_output and not outfit: # when no outfit and we need one, generate one
+            outfit = self.generate_random_appropriate_outfit()
+        return outfit
+
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
+
+    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets"):
+        return generate_random_appropriate_outfit(self, outfit_type = outfit_type)
+
+    Person.generate_random_appropriate_outfit = person_generate_random_appropriate_outfit
 
     def person_get_full_strip_list(self, strip_feet = True, strip_accessories = False):
         return self.outfit.get_full_strip_list(strip_feet, strip_accessories)
@@ -2074,7 +2119,7 @@ init -1 python:
 
     def remove_on_talk_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect == the_crisis, self.on_talk_event_list)
+            found = find_in_list(lambda x: x.effect == the_crisis or x.name == the_crisis, self.on_talk_event_list)
             if found:
                 self.on_talk_event_list.remove(found)
 
@@ -2084,7 +2129,7 @@ init -1 python:
 
     def remove_on_room_enter_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect == the_crisis, self.on_room_enter_event_list)
+            found = find_in_list(lambda x: x.effect == the_crisis or x.name == the_crisis, self.on_room_enter_event_list)
             if found:
                 self.on_room_enter_event_list.remove(found)
 
@@ -2278,7 +2323,7 @@ init -1 python:
         return self.has_role(cum_fetish_role)
 
     def has_breeding_fetish(self):
-        return self.has_role(breeding_fetish_role)
+        return self.has_role([breeder_role, breeding_fetish_role])
 
     def has_exhibition_fetish(self):
         return self.has_role(exhibition_fetish_role)
@@ -2324,7 +2369,7 @@ init -1 python:
             return False
         if self.love > 90 and self.obedience > 200:
             return False
-        return True
+        return self.event_triggers_dict.get("is_jealous", True) 
 
     Person.is_jealous = is_jealous
 
@@ -2345,18 +2390,21 @@ init -1 python:
 
     Person.attempt_opinion_training = attempt_opinion_training
 
-    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True):
+    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, force_trance = False, trance_chance_modifier = 0, sluttiness_increase_limit = 30, add_to_log = True):
         mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
-        self.change_slut_temp(3)
-        self.change_happiness(5)
-        if half_arousal:
-            self.change_arousal(-self.arousal/2)
-        else:
-            self.change_arousal(-self.arousal)
+        self.run_orgasm(show_dialogue = add_to_log, force_trance = force_trance, trance_chance_modifier = trance_chance_modifier, add_to_log = add_to_log, sluttiness_increase_limit = sluttiness_increase_limit)
+        self.change_happiness(3, add_to_log = add_to_log)
+
         if "report_log" in globals():
             report_log["girl orgasms"] = report_log.get("girl orgasms", 0) + 1
 
+        if half_arousal:
+            self.change_arousal(-self.arousal/2, add_to_log = add_to_log)
+        elif "report_log" in globals():
+            self.change_arousal(-self.arousal/(report_log.get("girl orgasms", 0)+2), add_to_log = add_to_log)
+        else:
+            self.change_arousal(-self.arousal, add_to_log = add_to_log)
         return
 
     Person.have_orgasm = have_orgasm

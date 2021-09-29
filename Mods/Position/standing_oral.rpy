@@ -10,11 +10,13 @@ init:
             scenes = ["scene_standing_oral_1","scene_standing_oral_2"],
             outro = "outro_standing_oral",
             transition_default = "transition_default_standing_oral",
-            strip_description = "strip_standing_oral", strip_ask_description = "strip_ask_standing_oral",
+            strip_description = "strip_standing_oral",
+            strip_ask_description = "strip_ask_standing_oral",
             orgasm_description = "orgasm_standing_oral",
             taboo_break_description = "taboo_break_standing_oral",
             verb = "lick",
-            opinion_tags = ["sex standing up", "getting head"], record_class = "Cunnilingus",
+            opinion_tags = ["sex standing up", "getting head"],
+            record_class = "Cunnilingus",
             associated_taboo = "licking_pussy")
         # don't add to list of positions, you need to unlock it ;)
         list_of_positions.append(standing_oral)
@@ -273,7 +275,7 @@ label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
             "Let her strip":
                 "You look up from between her legs and nod."
                 mc.name "Take it off for me."
-                $ the_girl.draw_animated_removal(the_clothing, position = cunnilingus.position_tag)
+                $ the_girl.draw_animated_removal(the_clothing, position = standing_oral.position_tag)
                 "She strips out of her [the_clothing.name] and throws it to the side while you move back in and lick at her cunt."
                 return True
             "Leave it on":

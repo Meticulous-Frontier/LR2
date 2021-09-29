@@ -25,14 +25,13 @@ init 2 python:
         if quest_director.is_person_blocked(person):
             return False
 
-        # for people you know, set quarrel chance to 20% else too many relationships will be split up by the limited time event selector.
-        if person.relationship != "Single" and not (person.mc_title == "Stranger" or not person.title) and renpy.random.randint(0, 100) < 20:
-            return True
+        if time_of_day > 0 and time_of_day < 4:
+            return person.relationship != "Single" and not (person.mc_title == "Stranger" or not person.title)
         return False
 
     # changed to on-talk event, so it won't light up on the house map
     # she stays mad for two time-slots and if you don't talk to her, she won't break-up
-    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 3)
+    relation_ship_quarrel = Action("Girl had a fight with her SO", so_relationship_quarrel_requirement, "so_relationship_quarrel_label", event_duration = 2)
     limited_time_event_pool.append([relation_ship_quarrel, 1, "on_talk"])
 
     # replace action requirement functions with newly defined functions (cPickle resolver)
@@ -130,16 +129,31 @@ label so_relationship_worsen_label_enhanced():
 # triggered randomly for a person (fight with her SO)
 label so_relationship_quarrel_label(the_person):
     $ so_title = SO_relationship_to_title(the_person.relationship)
+
+    if renpy.random.randint(0, 100) >= 20: # she will only break up 20% of the time
+        if renpy.random.randint(0,3) == 1: # 25% change to complain, otherwise go to talk
+            the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight."
+            mc.name "I'm sorry to hear that, are you ok?"
+            the_person "Yeah, I'm ok. Sorry to bother you."
+            mc.name "That's fine, let me know if I can help."
+            the_person "Thanks."
+        else:
+            "[the_person.title] looks at you as if she's going to say something, but instead just waits for you to talk with her."
+        call talk_person(the_person) from _call_talk_person_so_relationship_quarrel
+        return
+
     if the_person.has_role(affair_role):
         the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
         the_person "We don't have to hide what's going on between us any more."
         $ the_person.add_role(girlfriend_role)
         mc.name "That's good news! So we don't have to sneak around anymore."
         $ the_person.change_love(5)
+        the_person "Indeed, I would love to go out sometime..."
     else:
         $ the_person.change_happiness(-20)
         the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
         mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
+        the_person "Thanks, it's appreciated."
 
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None

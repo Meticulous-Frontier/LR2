@@ -171,7 +171,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                     "When you let [the_girl.possessive_title] down she reaches for your cock. With delicate fingers she slides the condom off of you."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                    $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                 else:
                     "When you let [the_girl.possessive_title] down she reaches for your cock, removes the condom, and ties the end in a knot."
                     the_girl "Look at all that cum. Well done."

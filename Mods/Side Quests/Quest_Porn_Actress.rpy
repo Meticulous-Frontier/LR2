@@ -40,7 +40,7 @@ init 1 python:
         able_person_list = []
         for person in mc.business.get_employee_list(): #TODO is there a method that grabs ENTIRE employee list?
             if not quest_director.is_person_blocked(person):
-                if person.core_sluttiness > 60:
+                if person.sluttiness > 60:
                     able_person_list.append(person)
         return get_random_from_list(able_person_list)
 

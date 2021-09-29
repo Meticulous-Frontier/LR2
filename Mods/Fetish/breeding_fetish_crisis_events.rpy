@@ -191,7 +191,7 @@ label breeding_fetish_happy_breeder_crisis_label():
     "[the_person.possessive_title] looks at you with hopeful eyes."
     menu:
         "Accept":  #This begins the sex scene
-            "[the_person.possessive_title] walks over to the windows and looks out of it. You see her hips move side to side for a second and the peaks back at you."
+            "[the_person.possessive_title] walks over to the windows and looks out of it. You see her hips move side to side for a second, and then she peeks back at you."
             $ the_person.draw_person(position = "back_peek")
             the_person "It so pretty out tonight... Why don't you come over here?"
             "You walk over and stand behind [the_person.possessive_title] as she looks by the window."

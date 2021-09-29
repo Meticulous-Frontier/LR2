@@ -184,42 +184,10 @@ init -1 python:
             assembled_outfit.accessories.append(acc.get_copy())
         return assembled_outfit
 
-    def get_random_appropriate_outfit_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):
-        # We also want to make sure it's something she would personally wear.
-        # current wardrobe
-        outfit = wardrobe.get_random_appropriate_outfit(slut_limit_remaining, preferences = preferences)
-        if not outfit:
-            # We need to get a bottom from her personal wardrobe.
-            outfit = person.wardrobe.get_random_appropriate_outfit(slut_limit_remaining, preferences = preferences)
-            if not outfit:
-                # Dive into the default wardrobe
-                outfit = default_wardrobe.get_random_appropriate_outfit(slut_limit_remaining, preferences = preferences)
-
-        return outfit
-
-    def get_random_appropriate_underwear_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):
-        # We also want to make sure it's something she would personally wear.
-        # current wardrobe
-        underwear = wardrobe.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
-        if not underwear:
-            # We need to get a bottom from her personal wardrobe.
-            underwear = person.wardrobe.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
-            if not underwear:
-                # Dive into the default wardrobe
-                underwear = default_wardrobe.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
-        return underwear
-
-    def get_random_appropriate_overwear_from_wardrobes(wardrobe, person, slut_limit_remaining, preferences):
-        # We also want to make sure it's something she would personally wear.
-        # current wardrobe
-        overwear = wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
-        if not overwear:
-            # We need to get a bottom from her personal wardrobe.
-            overwear = person.wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
-            if not overwear:
-                # Dive into the default wardrobe
-                overwear = default_wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
-        return overwear
+    def generate_random_appropriate_outfit(person, outfit_type = "FullSets"):
+        wardrobe_builder = WardrobeBuilder(person)
+        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(person.effective_sluttiness() / 10, 12), __builtin__.min(person.effective_sluttiness() / 40, 5))
+        return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, allow_skimpy = person.effective_sluttiness() > 80)
 
     def build_valid_uniform_wardrobe(self, person):
         valid_full_outfits = [] #We begin by building lists of all the uniform pieces that might be valid given our current uniform rules. This allows for the rules to update without requring any changes to the uniform wardrobe directly.
@@ -289,11 +257,7 @@ init -1 python:
 
         if __builtin__.len(valid_wardrobe.underwear_sets + valid_wardrobe.overwear_sets) == 0:
             #We have nothing else to make a uniform out of. Return None and let the pick uniform function handle that.
-            full_outfit = get_random_appropriate_outfit_from_wardrobes(valid_wardrobe, person, target_sluttiness, None)
-            if full_outfit:
-                return full_outfit.get_copy()
-            else:
-                return default_outfit.get_copy()
+            return generate_random_appropriate_outfit(person)
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         uniform_over = None
@@ -316,7 +280,7 @@ init -1 python:
 
             if not uniform_under:
                 # renpy.say(None, "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
-                uniform_under = get_random_appropriate_underwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
+                uniform_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets")
 
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the persons tops.
@@ -327,7 +291,7 @@ init -1 python:
 
             if not uniform_under:
                 # renpy.say(None, "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
-                uniform_under = get_random_appropriate_underwear_from_wardrobes(self, person, target_sluttiness, preferences)
+                uniform_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets")
 
             if uniform_under:
                 slut_limit_remaining = target_sluttiness - uniform_under.get_underwear_slut_score()
@@ -341,17 +305,13 @@ init -1 python:
 
             if not uniform_over:
                 # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobe.")
-                uniform_over = get_random_appropriate_overwear_from_wardrobes(self, person, target_sluttiness, preferences)
+                uniform_over = generate_random_appropriate_outfit(person, outfit_type = "OverwearSets")
 
         #At this point we have our under and over, if at all possible.
         if not uniform_over or not uniform_under:
             # renpy.say(None, "Failed to find any combined uniform, select generic outfit.")
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
-            full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
-            if full_outfit:
-                return full_outfit.get_copy()
-            else:
-                return default_outfit.get_copy()
+            return generate_random_appropriate_outfit(person)
 
         return build_assembled_outfit(uniform_under, uniform_over)
 
@@ -367,7 +327,7 @@ init -1 python:
         if mc.business.is_work_day() and male_focused_marketing_policy.is_active() and person in mc.business.market_team:
             marketing_score = .05
 
-        target_sluttiness = __builtin__.int(person.core_sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
+        target_sluttiness = __builtin__.int(person.sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
         preferences = WardrobePreference(person)
 
@@ -394,11 +354,7 @@ init -1 python:
 
         if __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a outfit out of. Use default builder function.
-            full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
-            if full_outfit:
-                return full_outfit.get_copy()
-            else:
-                return Outfit("Nude")
+            return generate_random_appropriate_outfit(person)
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = None
@@ -419,7 +375,7 @@ init -1 python:
 
             if not outfit_under:
                 # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
-                outfit_under = get_random_appropriate_underwear_from_wardrobes(self, person, slut_limit_remaining, preferences)
+                outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets")
 
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the persons tops.
@@ -430,7 +386,7 @@ init -1 python:
 
             if not outfit_under:
                 # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
-                outfit_under = get_random_appropriate_underwear_from_wardrobes(self, person, target_sluttiness, preferences)
+                outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets")
 
             if outfit_under:
                 slut_limit_remaining = target_sluttiness - outfit_under.get_underwear_slut_score()
@@ -444,16 +400,12 @@ init -1 python:
 
             if not outfit_over:
                 # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobes.")
-                outfit_over = get_random_appropriate_overwear_from_wardrobes(self, person, target_sluttiness, preferences)
+                outfit_over = generate_random_appropriate_outfit(person, outfit_type = "OverwearSets")
 
         #At this point we have our under and over, if at all possible.
         if not outfit_over or not outfit_under:
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
-            full_outfit = get_random_appropriate_outfit_from_wardrobes(self, person, target_sluttiness, None)
-            if full_outfit:
-                return full_outfit.get_copy()
-            else:
-                return Outfit("Nude")
+            return generate_random_appropriate_outfit(person)
 
         return build_assembled_outfit(outfit_under, outfit_over)
 

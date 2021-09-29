@@ -1,13 +1,13 @@
 init 3 python:
     def get_clarity_multiplier():
         multiplier = 1.0
-        if perk_system.has_ability_perk("Intelligent Clarity"):
-            multiplier += (mc.int * .05) #5% increase per intelligence point
-        if perk_system.has_ability_perk("Charismatic Clarity"):
-            multiplier += (mc.charisma * .05) #5% increase per charisma point
-        if perk_system.has_ability_perk("Focused Clarity"):
-            multiplier += (mc.focus * .05) #5% increase per charisma point
-
+        if "perk_system" in globals():
+            if perk_system.has_ability_perk("Intelligent Clarity"):
+                multiplier += (mc.int * .05) #5% increase per intelligence point
+            if perk_system.has_ability_perk("Charismatic Clarity"):
+                multiplier += (mc.charisma * .05) #5% increase per charisma point
+            if perk_system.has_ability_perk("Focused Clarity"):
+                multiplier += (mc.focus * .05) #5% increase per charisma point
         return multiplier
 
     def lust_drip_perk_update_func():

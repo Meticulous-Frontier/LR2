@@ -1046,13 +1046,13 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person "[the_person.mc_title], Why are you doing this here..."
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person "Oh my [the_person.mc_title]? You might want to teach me that someday..."
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         "[title] studies [the_sex_person.name] while you [the_position.verb] her."
 
     else:
@@ -1090,7 +1090,7 @@ label cougar_being_watched(the_person, the_watcher, the_position):
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], we shouldn't do this. Not here. What would people think of you with an older woman?"
         $ the_person.change_arousal(-1)
-        $ the_person.change_slut_temp(-1)
+        $ the_person.change_slut(-1)
         "[the_person.possessive_title] seems uneasy with [the_watcher.name] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
@@ -1098,7 +1098,7 @@ label cougar_being_watched(the_person, the_watcher, the_position):
         the_person "[the_watcher.name], I'm glad you don't criticize me."
         the_person "People say I shouldn't do this, but this young man makes me feel alive."
         $ the_person.change_arousal(1)
-        $ the_person.change_slut_temp(1)
+        $ the_person.change_slut(1)
         "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
 
     return

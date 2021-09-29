@@ -59,7 +59,7 @@ label breeding_mom_intro_label_enhanced(the_person):
                 else:
                     the_person "Chances are not very high, but I'm still hopeful."
 
-                $ the_person.change_stats(slut_temp = 2, love = 2)
+                $ the_person.change_stats(love = 2)
 
                 "You lie together in silence. [the_person.possessive_title] rocks herself side to side. You imagine your cum sloshing around her womb."
                 $ the_person.draw_person(position = "sitting")
@@ -84,7 +84,7 @@ label breeding_mom_intro_label_enhanced(the_person):
             the_person "But why..."
             mc.name "[the_person.title], I love you but I can't give you what you want."
             "She nods and turns her head."
-            $ the_person.change_stats(slut_temp = -2, love = -2)
+            $ the_person.change_stats(love = -2)
             the_person "Of course... I was just being silly. I should know better."
 
     $ clear_scene()

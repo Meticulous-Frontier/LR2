@@ -174,7 +174,10 @@ init 1 python:
 
     # disable auto save
     config.autosave_on_choice = False
+    config.autosave_on_quit = False
+    config.autosave_on_input = False
     config.has_autosave = False
+    config.has_quicksave = True
     config.autosave_slots = 6
     # config.autosave_frequency = 200 # default: 200
 

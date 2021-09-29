@@ -32,8 +32,10 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
             elif the_girl.wants_creampie():         #She likes creampies...
                 the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                 $ the_girl.discover_opinion("creampies")
-                if the_girl.on_birth_control:
-                    the_girl "Oh god that's so hot. I love feeling cum deep inside me."
+                if the_girl.on_birth_control and not the_girl.is_pregnant():
+                    the_girl "Oh god, that's so hot! I love feeling cum deep inside me."
+                elif the_girl.is_pregnant():
+                    the_girl "So fucking hot! Bathe my pregnant womb with your hot cum!"
                 else:
                     the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
                 $ the_girl.change_happiness(2)
@@ -56,14 +58,14 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
             the_girl "Oh god cum with me!"
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
             $ climax_controller.do_clarity_release(the_girl)
-            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock"
+            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
             "You pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
             if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                 $ the_girl.discover_opinion("drinking cum")
                 "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She winks and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot."
                 the_girl "Look at all that cum. Well done."
@@ -72,7 +74,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
             the_girl "Oh god cum with me!"
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's pulling it deep into her womb."
-            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock"
+            "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
             $ doggy.redraw_scene(the_girl)

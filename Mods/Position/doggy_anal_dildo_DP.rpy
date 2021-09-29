@@ -170,7 +170,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
         "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
         "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]. The vibrating dildo stimulates her pussy mercilessly."
         if the_girl.has_role(anal_fetish_role):
-            "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
+            "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
             "You enjoy her efforts before you speak clearly to her."
             mc.name "You are such a slut. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
             "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled. The extra stimulation from the dildo just makes it even better."
@@ -186,15 +186,15 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
             "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title]'s ass, even when you pull out not a drop of your seed leaks out."
             "You give the idea serious consideration. You can tell she would love it if you did."
         elif the_girl.get_opinion_score("anal sex") > 0:
-            "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best as she can. Even with no room to move, her love for anal sex drives her to milk your cock"
+            "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to milk your cock"
             "You lower your face down behind her head and whisper into her ear."
             mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
             "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
-            $ the_girl.change_slut_temp(2)
+            $ the_girl.change_slut(2)
         elif the_girl.sluttiness > 100:
             the_girl "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
         else:
-            "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best as she can."
+            "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best she can."
             the_girl "God [the_girl.mc_title] that is so intense... please just try to be gentle okay?"
         "You take a few seconds to enjoy being engulfed by her back passage, then give her a few slow, probing thrusts."
         "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
@@ -237,7 +237,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl "Mmmm, look at all that cum. I guess that means my ass was pretty good!"

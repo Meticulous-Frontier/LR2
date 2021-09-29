@@ -90,6 +90,19 @@ init 2 python:
         the_goal.arg_dict["required"] += __builtin__.int(the_difficulty/4)
         return
 
+    def tits_cum_count_function(the_goal, the_person):
+        if not the_person in the_goal.arg_dict["people"]:
+            the_goal.arg_dict["people"].append(the_person)
+            the_goal.arg_dict["count"] += 1
+            if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+                return True
+        return False
+
+    def tits_cum_count_difficulty_function(the_goal, the_difficulty):
+        the_goal.arg_dict["required"] += __builtin__.int(the_difficulty/6)  #Unlocked goal, so we make it slightly easier than other similar ones.
+        return
+
+
     daily_profit_goal = Goal("Daily Profit", "Profitability is always a concern when running a business. Have your business make at least a certain amount in one day.", "daily_profit", "Business", always_valid_goal_function, daily_profit_count_function,
     {"count": 0, "required": 50},
     difficulty_scale_function = daily_profit_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
@@ -117,6 +130,10 @@ init 2 python:
     face_cum_goal = Goal("Paint the Town White", "Show the world that various girls belong to you, by cumming all over their faces.", "sex_cum_on_face", "MC", always_valid_goal_function, face_cum_count_function,
     {"count": 0, "required": 1, "people": []},
     difficulty_scale_function = face_cum_count_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
+
+    tits_cum_goal = Goal("Frosted Cupcakes", "Mark you territoy. Cum on multiple girl's tits.", "sex_cum_on_tits", "MC", always_valid_goal_function, tits_cum_count_function,
+    {"count": 0, "required": 1, "people": []},
+    difficulty_scale_function = tits_cum_count_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     sex_goals.append(face_cum_goal)
     sex_goals.append(ass_cum_goal)

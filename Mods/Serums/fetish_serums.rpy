@@ -277,7 +277,7 @@ init -1 python:
             mc.log_event((person.title or person.name) + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_anal_fetish_unlocked():
-            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_anal_fetish_quest(person):
                         person.event_triggers_dict["anal_fetish_start"] = True
@@ -327,7 +327,7 @@ init -1 python:
             person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
         if is_breeding_fetish_unlocked():
-            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_breeding_fetish_quest(person):
                         person.event_triggers_dict["breeding_fetish_start"] = True
@@ -365,13 +365,13 @@ init -1 python:
             person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log)
+                person.change_slut(1, add_to_log)
 
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if is_cum_fetish_unlocked():
-            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.core_sluttiness > 70:
+            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.sluttiness > 70:
                 if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
                     if start_cum_fetish_quest(person):
                         person.event_triggers_dict["cum_fetish_start"] = True
@@ -407,14 +407,14 @@ init -1 python:
         tier = get_suggest_tier(person)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut_temp(1, add_to_log = True)
+                person.change_slut(1, add_to_log = True)
         if renpy.random.randint(0,100) < (person.suggestibility - (person.obedience - 90)) * 3:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
-        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.core_sluttiness > 70:
+        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.sluttiness > 70:
             if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
                 if start_exhibition_fetish_quest(person):
                     person.event_triggers_dict["exhibition_fetish_start"] = True
@@ -424,63 +424,51 @@ init -1 python:
                     pass
         return
 
+    def unlock_fetish_serum(serum):
+        if not serum or serum.researched: # prevent duplicate unlock calls
+            return
+        serum.tier = 2
+        serum.researched = True
+        mc.business.event_triggers_dict["fetish_serum_count"] = fetish_serum_unlock_count() + 1
+        return
+
     def fetish_unlock_basic_serum():
-        found = get_fetish_basic_serum()
-        if found:
-            found.tier = 1
-            found.researched = True
-            mc.business.event_triggers_dict["fetish_serum_count"] = 1
+        unlock_fetish_serum(get_fetish_basic_serum())
         return
 
     def get_fetish_basic_serum():
         return find_in_list(lambda x: x.name == "Sexual Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_anal_serum():
-        found = get_fetish_anal_serum()
-        if found:
-            found.tier = 1
-            found.researched = True
-            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        unlock_fetish_serum(get_fetish_anal_serum())
         return
 
     def get_fetish_anal_serum():
         return find_in_list(lambda x: x.name == "Anal Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_exhibition_serum():
-        found = get_fetish_exhibition_serum()
-        if found:
-            found.tier = 1
-            found.researched = True
-            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        unlock_fetish_serum(get_fetish_exhibition_serum())
         return
 
     def get_fetish_exhibition_serum():
         return find_in_list(lambda x: x.name == "Social Sexual Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_cum_serum():
-        found = get_fetish_cum_serum()
-        if found:
-            found.tier = 1
-            found.researched = True
-            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        unlock_fetish_serum(get_fetish_cum_serum())
         return
 
     def get_fetish_cum_serum():
         return find_in_list(lambda x: x.name == "Semen Proclivity Nanobots", list_of_traits)
 
     def fetish_unlock_breeding_serum():
-        found = get_fetish_breeding_serum()
-        if found:
-            found.tier = 1
-            found.researched = True
-            mc.business.event_triggers_dict["fetish_serum_count"] += 1
+        unlock_fetish_serum(get_fetish_breeding_serum())
         return
 
     def get_fetish_breeding_serum():
         return find_in_list(lambda x: x.name == "Reproduction Proclivity Nanobots", list_of_traits)
 
     def add_fetish_serum_traits():
-        fetish_basic_ther = SerumTraitMod(name = "Sexual Proclivity Nanobots",
+        fetish_basic_serum = SerumTraitMod(name = "Sexual Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
             positive_slug = "Increases sexual opinions, slowly increases Foreplay skill",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
@@ -499,7 +487,7 @@ init -1 python:
             clarity_cost = 1000
         )
 
-        fetish_exhibition_ther = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
+        fetish_exhibition_serum = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
             positive_slug = "Increases exhibitionistic behavior, slow increases sluttiness",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
@@ -507,7 +495,7 @@ init -1 python:
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
-            base_side_effect_chance = 0,
+            base_side_effect_chance = 0, #0 on purpose or typo?
             on_apply = fetish_exhibition_function_on_apply,
             on_remove = fetish_exhibition_function_on_remove,
             on_turn = fetish_exhibition_on_turn,
@@ -518,7 +506,7 @@ init -1 python:
             clarity_cost = 1000
         )
 
-        fetish_anal_ther = SerumTraitMod(name = "Anal Proclivity Nanobots",
+        fetish_anal_serum = SerumTraitMod(name = "Anal Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase pleasure received from anal stimulation based on suggestibility.",
             positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
@@ -537,7 +525,7 @@ init -1 python:
             clarity_cost = 1500
         )
 
-        fetish_cum_ther = SerumTraitMod(name = "Semen Proclivity Nanobots",
+        fetish_cum_serum = SerumTraitMod(name = "Semen Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase pleasure received when in contact with semen based on suggestibility.",
             positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
@@ -556,7 +544,7 @@ init -1 python:
             clarity_cost = 1500,
         )
 
-        fetish_breeding_ther = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
+        fetish_breeding_serum = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase reproduction drive and associated opinions based on suggestibility.",
             positive_slug = "Increases reproduction sexual opinions, slowly increases Vaginal skill",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",

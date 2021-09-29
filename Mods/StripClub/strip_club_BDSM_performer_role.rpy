@@ -163,7 +163,6 @@ init -1 python:
             renpy.say(person.char, "Oh my god, I'm cumming....Ahhh....YES!....please " + person.mc_title + ", increase the speed!")
             scene_manager.update_actor(person, emotion = "happy")
             person.have_orgasm(the_position = "sitting")
-            person.change_slut_temp(5)
         return
 
     def dildochair_pleasure_loop_intensity(person, arousal = 0, energy = 0):
@@ -353,7 +352,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
                 the_person "Oh! YES! YES! Wreck my ass with this monster, more, give me more!"
             $ scene_manager.update_actor(the_person, emotion = "orgasm")
             "She finally reaches her coveted orgasm, the chair is now wet with her flowing juices."
-            $ the_person.change_stats(obedience = 10, slut_temp = 3, slut_core = 1, happiness = 10, love = 2)
+            $ the_person.change_stats(obedience = 5, happiness = 10, love = 2)
             $ scene_manager.update_actor(the_person, emotion = "happy")
             $ the_person.have_orgasm(the_position = "sitting")
             the_person "Thank you [the_person.mc_title], make me cum like this and I'll be your devoted slave!"
@@ -382,8 +381,8 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
                     mc.name "Please me and you'll be pleased. Now you can get dressed."
                 $ the_person.apply_planned_outfit()
                 $ scene_manager.draw_scene()
-                $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 1, happiness = 10, love = 2)
-                $ mistress.change_stats(obedience = 3, slut_temp = 3, slut_core = 1)
+                $ the_person.change_stats(obedience = 5, happiness = 10, love = 2)
+                $ mistress.change_stats(obedience = 3)
                 "Her eyes are full of love for her Master."
             elif the_person.energy < 15:
                 the_person "I'm exhausted, but I got your lesson [the_person.mc_title], I promise I'll be your devoted slave."
@@ -391,7 +390,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
                 "You release her from the chair's restraints."
                 $ the_person.apply_planned_outfit()
                 $ scene_manager.update_actor(the_person, position = "stand3", emotion = "sad")
-                $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 1)
+                $ the_person.change_stats(obedience = 5)
                 "Her eyes are full of love for her Master."
             elif the_person.arousal >= 90:
                 "While you stop the chair and start to release the restraints she looks at you with hopeful eyes."
@@ -399,7 +398,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
                 mc.name "I will consider you request for the next time, Slave. Now you can get dressed."
                 $ the_person.apply_planned_outfit()
                 $ scene_manager.update_actor(the_person, position = "stand3", emotion = "sad")
-                $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 1, happiness = -5)
+                $ the_person.change_stats(obedience = 5, happiness = -5)
                 the_person "I promise I'll do my best to please my Master!"
             else:
                 "After a while you turn off the chair and remove her restraints."
@@ -407,7 +406,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
                 mc.name "Perhaps, continue to serve me and I might grant your request, now put on your clothes"
                 $ the_person.apply_planned_outfit()
                 $ scene_manager.update_actor(the_person, position = "stand3", emotion = "sad")
-                $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 1, happiness = -5)
+                $ the_person.change_stats(obedience = 5, happiness = -5)
                 the_person "As you wish, my Master!"
     return
 
@@ -626,7 +625,7 @@ label caged_doggy_label(the_person):
             the_person "If it's the only way to please my master..."
         else:
             the_person "Don't you think it's degrading enough for me to being inside... 'this'?"
-            "Disappointed by her behaviour you slap her pussy and [the_person.title] moans loudly: she can't deny anymore what her body disperately want."
+            "Disappointed by her behaviour you slap her pussy and [the_person.title] moans loudly: she can't deny anymore what her body desperately wants."
             mc.name "My dear slave... Push your ass closer, would you?"
     call fuck_person(the_person, private = False, start_position = doggy, start_object = bdsm_room.get_object_with_name("Cage"), skip_intro = True, girl_in_charge = False, position_locked = True, ignore_taboo = True, affair_ask_after = False) from _call_caged_doggy
     $ the_person.clear_situational_slut("being_used_in_the_cage")

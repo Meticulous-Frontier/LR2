@@ -69,7 +69,7 @@ init 2:
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top)
+                                for trait in sorted(sorted(list_of_traits + mc.business.blueprinted_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top)
                                     if trait not in starting_serum.traits and trait.researched and "Suggest" in trait.exclude_tags:
                                         $ trait_tags = get_exclude_tags(trait)
                                         $ trait_allowed = get_trait_allowed(starting_serum, trait)
@@ -105,7 +105,7 @@ init 2:
                             mousewheel True
 
                             vbox:
-                                for trait in sorted(sorted(list_of_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
+                                for trait in sorted(sorted(list_of_traits + mc.business.blueprinted_traits, key = lambda trait: trait.exclude_tags, reverse = True), key=lambda trait: trait.name, reverse = False): # Sort traits by exclude tags (So all production traits are grouped, for example), then by name since tier does not matter.
                                     if trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags and "Suggest" not in trait.exclude_tags:
                                         $ trait_tags = get_exclude_tags(trait)
                                         $ trait_allowed = get_trait_allowed(starting_serum, trait)

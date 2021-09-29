@@ -71,7 +71,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                         "She shoos you out of the room, seeming more upset about being interrupted than being seen naked."
                         $ hall.show_background()
                         $ clear_scene()
-                        $ the_person.change_stats(love = -2, slut_temp = 2, happiness = -2)
+                        $ the_person.change_stats(love = -2, happiness = -2)
                         call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_4
                     else:
                         "She looks up at you, slightly startled, and turns her body away from you."
@@ -105,7 +105,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ hall.show_background()
                 $ clear_scene()
                 $ the_person.change_love(-1)
-                $ the_person.change_slut_temp(2)
+                $ the_person.change_slut(2)
                 call girl_shower_leave_enhanced(the_person) from _call_girl_shower_leave_enhanced_3
             else:
                 $ home_shower.show_background()
@@ -154,6 +154,7 @@ label morning_shower_masturbation():
         $ the_person.change_arousal(renpy.random.randint(20,35))
         $ mc.change_locked_clarity(10)
     the_person "Shit, I'm cumming!"
+    $ the_person.run_orgasm()
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
     "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
     the_person "Wow, that was intense. Need to be quieter or someone might just hear me."
@@ -186,12 +187,12 @@ label girl_shower_enter_enhanced(the_person):
                 $ the_person.discover_opinion("showing her tits")
                 $ the_person.discover_opinion("showing her ass")
                 "She notices you watching, but doesn't seem to mind the attention."
-                $ the_person.change_slut_temp(1+(the_person.get_opinion_score("showing her tits")+the_person.get_opinion_score("showing her ass")))
+                $ the_person.change_slut(1+(the_person.get_opinion_score("showing her tits")+the_person.get_opinion_score("showing her ass")))
             else:
                 the_person "It's strange to shower with someone else in the room."
                 mc.name "Nothing to worry about, we're all family here, right?"
                 "She shrugs and nods, but you notice she's always trying to shield her body from your view."
-                $ the_person.change_slut_temp(1)
+                $ the_person.change_slut(1)
                 $ the_person.change_obedience(1)
             $ the_person.update_outfit_taboos()
             $ mc.change_locked_clarity(10)
@@ -225,7 +226,7 @@ label girl_shower_enter_enhanced(the_person):
                 the_person "I think I'm just about done, so you can take care of this..."
                 "She wiggles her butt and strokes your tip against her cheeks."
                 $ mc.change_locked_clarity(10)
-                $ the_person.change_slut_temp(1 + the_person.get_opinion_score("showing her ass"))
+                $ the_person.change_slut(1 + the_person.get_opinion_score("showing her ass"))
                 "She steps out of the shower and grabs a towel."
                 $ apply_towel_outfit(the_person)
                 $ the_person.draw_person()
@@ -251,7 +252,7 @@ label girl_shower_enter_enhanced(the_person):
                 $ mc.change_locked_clarity(10)
                 the_person "Well we need to take care of this, don't we..."
                 "She turns around and faces you. It might be the hot water, but her face is flush."
-                $ the_person.change_slut_temp(2)
+                $ the_person.change_slut(2)
                 menu:
                     "Fuck her" if not the_person.has_taboo("vaginal_sex"): # only show sex option if you had sex before
                         $ mc.change_location(home_shower)

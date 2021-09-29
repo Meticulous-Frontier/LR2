@@ -514,16 +514,24 @@ label HR_director_monday_meeting_label(the_person):
                 the_person "Ahh, okay. I know this was short notice, but you can plan on it next week, okay?"
                 "She reaches down to her backpack and begins to pull out her notes from the previous week."
     elif get_HR_director_tag("business_HR_sexy_meeting", False) == True:
-        "She looks at you intently."
-        the_person "So, need some relief before we get started today?"
-        menu:
-            "Let's go":
-                call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_two
-                $ scene_manager.update_actor(the_person, position = "sitting")
-                "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
-            "Not Today":
-                the_person "Ahh, damn. Okay, give me a second and we can get started here."
-                "She reaches down to her backpack and begins to pull out her notes from the previous week."
+        if the_person.energy < 60:
+            "She looks at you before she begins."
+            the_person "So, normally I would offer to help with your... you know... needs..."
+            the_person "But honestly I'm pretty wore out from earlier. If you are still feeling needy later, let me know, okay?"
+            mc.name "Okay."
+            "She reaches down to her backpack and begins to pull out her notes from the previous week."
+
+        else:
+            "She looks at you intently."
+            the_person "So, need some relief before we get started today?"
+            menu:
+                "Let's go":
+                    call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_two
+                    $ scene_manager.update_actor(the_person, position = "sitting")
+                    "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
+                "Not Today":
+                    the_person "Ahh, damn. Okay, give me a second and we can get started here."
+                    "She reaches down to her backpack and begins to pull out her notes from the previous week."
     the_person "Here are my plans for the week. I think I have a few tweaks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
     $ HR_director_calculate_eff(the_person)
     "She hands you a few documents. You check them over."
@@ -537,7 +545,7 @@ label HR_director_monday_meeting_label(the_person):
         the_person "Can do! Did you want to call in a girl for a counselling session this week?"
         menu:
             "Call one in":
-                mc.name "Yes I want to do that."
+                mc.name "Yes, I want to do that."
                 the_person "OK! Let me see who I have on my list here..."
                 call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_2
                 if _return:
@@ -615,16 +623,16 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
             person_choice "Wow, not sure why you called me in here, but I hope it's for the same thing you have her in here for..."
         else:
             person_choice "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
-        $ person_choice.change_slut_temp(5) # give her a temp slut boost to maybe have a threesome later...
+        $ person_choice.change_slut(2) # give her a temp slut boost to maybe have a threesome later...
     elif the_person.outfit.vagina_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
-        $ person_choice.change_slut_temp(3)
+        $ person_choice.change_slut(2)
         person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
     elif the_person.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
-        $ person_choice.change_slut_temp(1)
+        $ person_choice.change_slut(1)
         person_choice "Oh...what can I do for you, [person_choice.mc_title]."
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
@@ -732,7 +740,7 @@ label HR_director_review_discoveries_label(the_person):
                 the_person "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
                 mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
                 "[the_person.title] looks into more details of the serum."
-                the_person "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably setup an something long term for the monday meetings..."
+                the_person "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably set up something long term for the monday meetings..."
                 mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                 the_person "Sounds good [the_person.mc_title]!"
 
@@ -746,11 +754,11 @@ label HR_director_review_discoveries_label(the_person):
                 if get_HR_director_tag("business_HR_coffee_tier", 0) == 0:
                     the_person "I know I brought this up last time we researched a similar serum, but having a serum like that to give employees when they come in for reviews would be very useful."
                     the_person "You should definitely consider it. I think it would give our meetings more impact with employees."
-                    the_person "This version of the serum... I think we could get something setup for about $1500. It's a little difficult to synthesize."
+                    the_person "This version of the serum... I think we could get something set up for about $1500. It's a little difficult to synthesize."
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                     the_person "Sounds good [the_person.mc_title]!"
                 else:
-                    the_person "We already have the equipment setup from the previously researched serum. We should be able to modify it to take advantage of this advancement."
+                    the_person "We already have the equipment set up from the previously researched serum. We should be able to modify it to take advantage of this advancement."
                     "[the_person.title] checks her notes on the synthesis process."
                     the_person "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."
@@ -817,7 +825,7 @@ label HR_director_review_discoveries_label(the_person):
                     $ set_HR_director_tag("business_HR_skimpy_uniform", True)
                     if the_person is sarah:
                         the_person "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
-                        $ the_person.change_slut_temp(3)
+                        $ the_person.change_slut(2)
         if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
             if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
                 the_person "I see here that changes within the company have produced several vacancies."
@@ -1147,6 +1155,117 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "Eventually she cleans herself up and makes herself presentable again."
                 return
 
+    if get_HR_director_unlock("anal lapdance") == False:
+        if the_person is sarah and sarah.love >= 80 and sarah.sluttiness >= 60 and sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1: #This is Sarah's 80 love event.
+            if the_person.is_girlfriend():
+                the_person "[the_person.mc_title]... you know I love you, right?"
+                "Oh god, that is a very serious line to just throw out there."
+                mc.name "Of course."
+                the_person "Good."
+            else:
+                the_person "[the_person.mc_title]... you know I care about you, right?"
+                mc.name "Of course."
+                the_person "Good"
+            $ the_person.draw_person(position = "stand3")
+            "[the_person.possessive_title] stands up."
+            mc.name "Is there something wrong?"
+            the_person "No. You know, I love these monday meetings. Do you know why?"
+            $ scene_manager.strip_to_tits(person = the_person)
+            $ mc.change_locked_clarity(30)
+            "[the_person.title] starts taking some of her clothes off."
+            mc.name "No, why?"
+            the_person "It just feels like we are starting the week off right."
+            "[the_person.title] bends over and keeps stripping."
+            $ scene_manager.update_actor(the_person, position = "standing_doggy")
+            $ scene_manager.strip_to_vagina(the_person, visible_enough = False, prefer_half_off = False)
+            $ mc.change_locked_clarity(50)
+            the_person "Especially when it starts us messing around in your office!"
+            "[the_person.possessive_title] gives her ass a little shake before standing back up."
+            $ scene_manager.update_actor(the_person, position = "stand3")
+            if the_person.has_taboo("anal_sex"):
+                the_person "I kind of want to try something... we've never really done before..."
+                mc.name "Oh?"
+                if the_person.is_girlfriend():
+                    the_person "I want to be a good girlfriend, who meets all your needs, no matter what they are."
+                    the_person "So far you've claimed my mouth... and my pussy..."
+                    the_person "I want you to claim me in one more hole... I think you know what I mean!"
+                else:
+                    the_person "I just want you to feel good, and I think I might like it as well, if you let me sit on your lap."
+                    the_person "I wouldn't normally do this, but your cock is so amazing... I just have to know what it would feel like in my ass!"
+                the_person "Don't worry, I want to do it for you. Just sit back in your chair and let me!"
+            else:
+                the_person "This morning, I just want to make you feel good, and judging on last time, I think it will make me feel good too."
+                mc.name "Oh yeah? What do you have in mind?"
+                the_person "Why don't you just sit back in your chair and find out."
+            mc.name "Sounds good, do you thing."
+            $ scene_manager.update_actor(the_person, position = "back_peek")
+            "[the_person.possessive_title] turns away from you, her ass now right at eye level. She pulls her cheeks apart slightly, giving you an amazing view of her puckered hole."
+            $ mc.change_locked_clarity(50)
+            "She brings up one hand to her mouth and spits in it, then runs it back along her crack, giving you a show as she lubes up her ass a bit. You pull your cock out and give it a couple strokes."
+            $ scene_manager.update_actor(the_person, position = "standing_doggy")
+            "[the_person.title] bends over your desk, reaching for her purse she left on the far side. She wiggles her hips a bit as she pulls some lube out of her purse."
+            the_person "Would you mind?"
+            "[the_person.possessive_title] hands you the lube. You squirt a generous amount onto your fingers and work them around her sphincter and then slowly push a finger inside her."
+            $ the_person.change_arousal (20)
+            the_person "Ahhhhh..."
+            $ mc.change_locked_clarity(50)
+            "Her hips push back against you a bit as you work your finger in and out of her a bit, getting her good and lubed up. She moans at the penetration."
+            the_person "Ok, let's do this."
+            $ scene_manager.update_actor(the_person, position = "sitting")
+            "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
+            "[the_person.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
+            $ the_person.break_taboo("anal_sex")
+            the_person "Oh god! It's in!"
+            call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = anal_on_lap, skip_intro = True, allow_continue = False) from _sarah_gives_anal_lapdance_monday_01
+            $ the_report = _return
+            if the_report.get("guy orgasms", 0) > 0:
+                "[the_person.possessive_title] stands up. Some of your cum has managed to escape, running down her leg."
+            else:
+                mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
+                the_person "Of course..."
+                "[the_person.possessive_title] stands up."
+            $ the_person.apply_planned_outfit()
+            $ scene_manager.update_actor(the_person, position = "stand3")
+            $ set_HR_director_unlock("anal lapdance", True)
+            "You make a mental note that from now on you can ask your HR director for some anal on mondays."
+            return
+
+    if get_HR_director_unlock("breeding fetish session") == False:
+        if the_person.has_breeding_fetish() and the_person.is_highly_fertile():
+            the_person "So, I know this is usually about you, and making sure your needs are met before the start of the week..."
+            mc.name "...but?"
+            the_person "But... I swear to god I feel like I'm heat right now. It is all I can do to keep myself from jumping you everytime I see you in the hall!"
+            the_person "I know this is out of line... but would you mind? It's a good time for it too..."
+            mc.name "Hmmm, I don't know..."
+            the_person "Please? I'm not sure I can concentrate on my work until you give me a big fertile load!"
+            mc.name "Okay. Get over here and bend over."
+            the_person "Yes!"
+            $ scene_manager.update_actor(the_person, position = "standing_doggy")
+            $ mc.change_locked_clarity(50)
+            "[the_person.title] turns around. You quickly get her ready to fuck."
+            $ the_person.strip_to_vagina(the_person, prefer_half_off = True)
+            call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_01
+            if the_person.has_creampie_cum():
+                the_person "Oh fuck... every time you finish inside me is just so good..."
+                "She rubs her belly and sighs."
+                $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+            "When you finish, [the_person.possessive_title] cleans herself up a bit."
+            $ the_person.apply_planned_outfit()
+            the_person "Mmm, that was nice..."
+            $ scene_manager.update_actor(the_person, position = "stand3")
+            $ set_HR_director_unlock("breeding fetish session", True)
+            return
+
+
+    if get_HR_director_unlock("anal fetish session") == False:
+        if the_person.has_anal_fetish():
+            pass
+
+    if get_HR_director_unlock("cum fetish session") == False:
+        if the_person.has_cum_fetish():
+            pass
+
+
 
     the_person "Okay! How do you want me to take care of you this week, [the_person.mc_title]?"
 
@@ -1240,8 +1359,76 @@ label HR_director_sexy_meeting_start_label(the_person):
         "You eagerly begin to pump your hips and fuck your HR director over your desk."
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 
+    elif position_choice == "anal lapdance":
+        the_person "Oh god, you want your HR directors ass, do you? What a naughty CEO!"
+        $ the_person.change_arousal(20)
+        if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
+            if the_person.outfit.can_half_off_to_vagina():
+                "[the_person.possessive_title] moves her clothes out of the way."
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
+            else:
+                "[the_person.possessive_title] begins to take off her clothes. "
+                $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
+            "When she finishes getting naked, she gives you a big smile."
+        $ scene_manager.update_actor(the_person, position = "back_peek")
+        the_person "In here was it? Where you wanted to stick that incredible dick you've got?"
+        "[the_person.possessive_title] spreads her cheeks, revealing her puckered hole."
+        $ mc.change_locked_clarity(50)
+        mc.name "You know it."
+        the_person "Hmm... I'm not sure it'll go in easily..."
+        $ scene_manager.update_actor(the_person, position = "standing_doggy")
+        "She bends over your desk and grabs her purse, looking through it."
+        "Her ass is on full display for you, so you make sure to give it a couple of spanks and a firm grope."
+        "[the_person.title] hands back to you a bottle a lube she pulled from her bag."
+        the_person "Here, can you lube me up?"
+        mc.name "With pleasure."
+        "You squirt a generous amount onto [the_person.title]'s ass. You work it all along her crack and then push a finger inside."
+        $ the_person.change_arousal (20)
+        the_person "Ahhhhh..."
+        $ mc.change_locked_clarity(50)
+        "It isn't long until you've got two fingers working her backdoor good."
+        the_person "Ok, let's do this."
+        $ scene_manager.update_actor(the_person, position = "sitting")
+        "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
+        "[the_person.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
+        $ the_person.break_taboo("anal_sex")
+        the_person "Oh god! It's in!"
+        call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = anal_on_lap, skip_intro = True, allow_continue = False) from _sarah_gives_anal_lapdance_monday_02
+        $ the_report = _return
+        if the_report.get("guy orgasms", 0) > 0:
+            "[the_person.possessive_title] stands up. Some of your cum has managed to escape, running down her leg."
+        else:
+            mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
+            the_person "Of course..."
+            "[the_person.possessive_title] stands up."
+        $ scene_manager.update_actor(the_person, position = "stand3")
 
-    if ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
+    elif position_choice == "breeding fetish session":
+        mc.name "Get over here, I'm going to bend you over my desk and creampie you."
+        the_person "Fuck I love mondays. Let's do it!"
+        $ scene_manager.update_actor(the_person, position = "standing_doggy")
+        $ mc.change_locked_clarity(50)
+        "[the_person.title] turns around. You quickly get her ready to fuck."
+        $ the_person.strip_to_vagina(the_person, prefer_half_off = True)
+        call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_02
+        if the_person.has_creampie_cum():
+            the_person "Oh fuck... every time you finish inside me is just so good..."
+            "She rubs her belly and sighs."
+            $ the_person.event_triggers_dict["LastBreedingFetish"] = day
+        the_person "Mmm, that was nice..."
+        $ scene_manager.update_actor(the_person, position = "stand3")
+
+    elif position_choice == "anal fetish session":
+        pass
+
+    elif position_choice == "cum fetish session":
+        pass
+
+
+    if the_person.has_cum_fetish() or the_person.has_exhibition_fetish():
+        the_person "Alright, I'm ready to continue the meeting."
+        "[the_person.title] doesn't appear to be concerned with her appearance whatsoever."
+    elif ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
         menu:
             "Tell her to stay like that for the meeting":
                 mc.name "I'm very busy, lets just continue the meeting. Don't bother to clean up."
@@ -1438,7 +1625,7 @@ label HR_director_headhunt_interview_label(the_person):
             the_person "Ah... OK, well try to let me know next time, okay?"
             "You promise to do so."
             return
-        mc.name "Sure, meet me in my office"
+        mc.name "Sure, meet me in my office."
         $ mc.change_location(office)
         $ ceo_office.show_background()
         the_person "Hello [the_person.mc_title]!"

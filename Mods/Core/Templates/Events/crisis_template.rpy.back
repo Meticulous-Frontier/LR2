@@ -30,7 +30,7 @@ label crisis_template_label():
         else:
             call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _crisis_template_02
     "Yay her stats get updated."
-    $ the_person.change_stats(love = 5, happiness = 5, obedience = 5, slut_temp = 3, slut_core = 3)
+    $ the_person.change_stats(love = 5, happiness = 5, obedience = 5)
 
     #Make sure to clean up after your crisis event.
     $ scene_manager.clear_scene()

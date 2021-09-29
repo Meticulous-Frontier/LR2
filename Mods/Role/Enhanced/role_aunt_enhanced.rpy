@@ -97,7 +97,7 @@ label aunt_drunk_cuddle_label():
     mc.name "Okay... it's okay... I usually just sleep in my underwear..."
     the_person "Whatever you need to feel comfortable!"
     "You take your shirt off, then undo your belt and slide your pants down. You can't help but notice [the_person.possessive_title] watching you, her eyes glancing down at your crotch..."
-    $ the_person.change_slut_temp(5)
+    $ the_person.change_slut(2)
     $ mc.change_locked_clarity(10)
     "You slide into bed next to her. You have to admit, the heat of her body is kind of nice. [the_person.title] rolls over on her side, her back facing you."
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -121,7 +121,7 @@ label aunt_drunk_cuddle_label():
         "You push your hips against her, grind yourself against her ass for a moment. She gasps, but quickly puts a stop to it."
         the_person "I'm sorry, that's enough for tonight..."
         "You roll on your back. It takes a while for your erection to finally subside, but you finally manage it and fall asleep."
-        $ the_person.change_slut_core(3)
+        $ the_person.change_slut(3)
     else:
         "After a while she turns her head back to you."
         the_person "Ahh... I'm sorry, I didn't realize... anyone still thought I was... sexy..."
@@ -138,7 +138,7 @@ label aunt_drunk_cuddle_label():
             "[the_person.possessive_title]'s soothing encouragement pushes you over the edge. You gasp and moan as you dump your load in your underwear against her."
             the_person "Ahhh... that's it baby..."
             "When you finish, you are exhausted. You consider getting up and cleaning up, but it feels to good to be up against [the_person.title]'s body still..."
-            $ the_person.change_slut_core(5)
+            $ the_person.change_slut(5)
             $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_person)
             the_person "Goodnight..."
             mc.name "Goodnight..."
@@ -163,7 +163,7 @@ label aunt_drunk_cuddle_label():
                 $ scene_manager.update_actor(the_person, position = "walking_away")
                 $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                 "Your sticky cum coats her ass, but she doesn't seem to mind."
-                $ the_person.change_slut_core(5)
+                $ the_person.change_slut(5)
                 the_person "Oh [the_person.mc_title]... I didn't know anyone... would feel that way about me..."
                 "She grabs your arm and holds you close to her. You consider getting up to try and get cleaned up, but you are so tired..."
                 the_person "Goodnight..."
@@ -177,7 +177,7 @@ label aunt_drunk_cuddle_label():
                 mc.name "Of course not! Do you want me...?"
                 the_person "No! No it's okay, your hand is great right where it's at..."
                 "You feel her shift a bit as she props one leg up a little bit. You can't see under the covers, but she gasps as she begins to touch herself."
-                "You resume grind your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
+                "You resume grinding your hips against her and fondling her tits as she plays with herself. Things really start to get heated."
                 $ mc.change_locked_clarity(30)
                 "After a few minutes, you feel yourself getting ready to cum."
                 mc.name "[the_person.title]... I'm..."
@@ -188,7 +188,7 @@ label aunt_drunk_cuddle_label():
                 $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                 "Your sticky cum coats her ass. Her body goes rigid as she has an orgasm of her own."
                 $ the_person.have_orgasm()
-                $ the_person.change_slut_core(5)
+                $ the_person.change_slut(5)
                 the_person "Oh [the_person.mc_title]... I didn't know anyone... would feel that way about me..."
                 "She grabs your arm and holds you close to her. You consider getting up to try and get cleaned up, but you are so tired..."
                 the_person "Goodnight..."
@@ -250,7 +250,7 @@ label unit_test_role_aunt_enhanced():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 0
+        the_person.sluttiness = 0
         the_person.sluttiness = 0
         the_person.obedience = 0
         the_person.happiness = 100
@@ -264,7 +264,7 @@ label unit_test_role_aunt_enhanced():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 10
+        the_person.sluttiness = 10
         the_person.sluttiness = 10
         the_person.obedience = 0
         the_person.happiness = 100
@@ -277,7 +277,7 @@ label unit_test_role_aunt_enhanced():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 20
+        the_person.sluttiness = 20
         the_person.sluttiness = 20
         the_person.obedience = 0
         the_person.happiness = 100
@@ -290,7 +290,7 @@ label unit_test_role_aunt_enhanced():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 30
+        the_person.sluttiness = 30
         the_person.sluttiness = 30
         the_person.obedience = 0
         the_person.happiness = 100
@@ -303,7 +303,7 @@ label unit_test_role_aunt_enhanced():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 40
+        the_person.sluttiness = 40
         the_person.sluttiness = 40
         the_person.obedience = 0
         the_person.happiness = 100
@@ -316,7 +316,7 @@ label unit_test_role_aunt_enhanced():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 50
+        the_person.sluttiness = 50
         the_person.sluttiness = 50
         the_person.obedience = 0
         the_person.happiness = 100

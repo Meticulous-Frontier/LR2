@@ -120,8 +120,9 @@ label SB_caught_masturbating_crisis_label():
                         "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."
                         $ the_person.change_arousal(10)
                         $ mc.change_locked_clarity(20)
+                        $ the_person.have_orgasm()
                         "[the_person.possessive_title] whimpers as she cums. Her legs spasm and she gasps for air."
-                        $ the_person.change_stats(happiness = 3, slut_temp = 2)
+                        $ the_person.change_stats(happiness = 3, slut = 1, max_slut = 30)
                         "You decide to make a quick exit before she has a chance to recover. As quietly as you can, you close the door behind you and head back to your previous work."
                     else:
                         if mc.sex_skills["Oral"] > 4 or the_person.get_opinion_score("getting head") > 0 :    #Reward oral skill, OR if girl loves "getting head" ?
@@ -160,9 +161,8 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_arousal(10)
                             "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                             the_person "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
-                            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                            $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 2, love = 3)
-                            $ the_person.reset_arousal()
+                            $ the_person.have_orgasm(the_position = "missionary")
+                            $ the_person.change_stats(obedience = 5, love = 3)
                             $ mc.change_locked_clarity(25)
                             #show screen float_up_screen(["+5 Happiness","+5 Obedience","+2 Core Sluttiness" ],["float_text_yellow","float_text_grey","float_text_pink"])
                             "[the_person.possessive_title] runs her hands through your hair one last time. You get up and give her a kiss, letting her taste herself on your tongue."
@@ -188,10 +188,8 @@ label SB_caught_masturbating_crisis_label():
                             "[the_person.possessive_title]'s hand continues to work furiously on her pussy. You can tell from her proficiency that she probably does this often."
                             "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."
                             $ the_person.change_arousal(10)
+                            $ the_person.have_orgasm(the_position = "doggy")
                             "[the_person.possessive_title] whimpers as she cums. Her legs spasm and she gasps for air."
-                            $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
-                            $ the_person.change_stats(happiness = 5, slut_temp = 2)
-                            $ the_person.reset_arousal()
                             $ mc.change_locked_clarity(20)
                             "You back out of the room before she has a chance to recover. You can't believe your good luck, catching an employee masturbating... while thinking of you of all people!"
                             "On your way back to your work, you swing by [the_person.possessive_title]'s desk. You write her a quick note."
@@ -228,14 +226,14 @@ label SB_caught_masturbating_crisis_label():
                                 the_person "I know I shouldn't have been... but you shouldn't just... UGH!!!"
                                 $ the_person.draw_person(position = "walking_away")
                                 "[the_person.possessive_title] storms off. While the situation was awkward, it left a bit of tension in the air..."
-                                $ the_person.change_stats(happiness = -5, obedience = -5, slut_temp = 5)
+                                $ the_person.change_stats(happiness = -5, obedience = -5, slut = 1, max_slut = 35)
                                 "You finish up your walk and return back to your previous work."
                         else: #She's embarrassed
                             "Mortified, [the_person.possessive_title] makes a run for the door."
                             $ the_person.draw_person(position = "walking_away")
                             the_person "Oh my god... I'm so sorry [the_person.mc_title]. I just couldn't help myself. I won't let this happen again!"
                             "You try to reassure [the_person.possessive_title], but she quickly runs off before you can speak."
-                            $ the_person.change_stats(happiness = -5, obedience = 5, slut_temp = 5)
+                            $ the_person.change_stats(happiness = -5, obedience = 5, slut = 1, max_slut = 35)
                             #show screen float_up_screen(["-5 Happiness","+5 Obedience"],["float_text_yellow","float_text_grey","float_text_pink"])    ###OLD code
                             "You finish up your walk and return back to your previous work."
                     elif the_person.effective_sluttiness() < 60:#She is a bit slutty
@@ -266,11 +264,9 @@ label SB_caught_masturbating_crisis_label():
                         the_person "Oh fuck... I'm gonna cum!"
                         $ the_person.draw_person(emotion="orgasm", position ="missionary")
                         $ mc.change_locked_clarity(20)
+                        $ the_person.have_orgasm(the_position = "missionary")
                         "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
                         "Catching her breath, [the_person.possessive_title] looks up at you but doesn't say a word. It is clear that masturbating in front of her boss has left a lasting impression."
-                        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                        $ the_person.change_stats(happiness = 5, obedience = 5, slut_temp = 3)
-                        $ the_person.reset_arousal()
                         "You decide to give [the_person.possessive_title] a chance to recover. You nod at her and then back out of the room."
                         "You finish up your walk and return back to your previous work."
                     elif the_person.has_anal_fetish():
@@ -296,12 +292,10 @@ label SB_caught_masturbating_crisis_label():
                                 if the_report.get("girl orgasms", 0) > 1:
                                     $ the_person.event_triggers_dict["LastAnalFetish"] = day
                                     "[the_person.possessive_title] is exhausted. She came so hard, it is all she can do to pant and catch her breath."
-                                    $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
+                                    $ the_person.change_stats(happiness = 5, obedience = 5, slut = 1, max_slut = 60)
                                 else:
                                     "[the_person.possessive_title] quickly recovers after you finish."
-                                    $ the_person.change_stats(happiness = 3, slut_temp = 3)
-                                    $ the_person.change_happiness(3)
-                                    $ the_person.change_slut_temp(3)
+                                    $ the_person.change_stats(happiness = 3)
                                 the_person "Mmm, you always know just what I need [the_person.mc_title]"
                                 "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
@@ -327,11 +321,9 @@ label SB_caught_masturbating_crisis_label():
                                 $ the_person.change_arousal(20)
                                 the_person "Oh fuck... I'm gonna cum!"
                                 $ mc.change_locked_clarity(20)
+                                $ the_person.have_orgasm(the_position = "doggy")
                                 "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
                                 "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
-                                $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
-                                $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
-                                $ the_person.reset_arousal()
                                 "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
@@ -357,12 +349,10 @@ label SB_caught_masturbating_crisis_label():
                                 $ the_report = _return
                                 if the_report.get("girl orgasms", 0) > 1:
                                     "[the_person.possessive_title] is exhausted. She came so hard, it is all she can do to pant and catch her breath."
-                                    $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
+                                    $ the_person.change_stats(happiness = 5, obedience = 5, slut = 1, max_slut = 80)
                                 else:
                                     "[the_person.possessive_title] quickly recovers after you finish."
-                                    $ the_person.change_stats(happiness = 3, slut_temp = 3)
-                                    $ the_person.change_happiness(3)
-                                    $ the_person.change_slut_temp(3)
+                                    $ the_person.change_stats(happiness = 3)
                                 the_person "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
                                 "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
@@ -388,11 +378,9 @@ label SB_caught_masturbating_crisis_label():
                                 $ the_person.change_arousal(20)
                                 the_person "Oh fuck... I'm gonna cum!"
                                 $ mc.change_locked_clarity(20)
+                                $ the_person.have_orgasm(the_position = "doggy")
                                 "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
                                 "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
-                                $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "doggy")
-                                $ the_person.change_stats(happiness = 5, obedience = 5, slut_core = 2, slut_temp = 3)
-                                $ the_person.reset_arousal()
                                 "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 

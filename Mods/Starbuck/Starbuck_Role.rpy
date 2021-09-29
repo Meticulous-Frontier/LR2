@@ -41,7 +41,7 @@ init 2 python:
         starbuck_lipstick = lipstick.get_copy()
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
-        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.92,  body_images = white_skin, expression_images = None, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
+        starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.89,  body_images = white_skin, expression_images = None, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
 
@@ -295,11 +295,11 @@ label starbuck_vaginal_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh wow... I've never... I came so many times..."
-                            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+                            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 60)
                             the_person "Let's do that again soon!"
                         elif the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... The orgasms that thing gives..."
-                            $ the_person.change_stats(obedience = 2, slut_temp = 1, slut_core = 1)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 60)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -348,11 +348,11 @@ label starbuck_anal_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh wow... I've never... I came so many times!"
-                            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+                            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 70)
                             the_person "Let's do that again soon!"
                         elif the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... I came so hard!"
-                            $ the_person.change_stats(obedience = 2, slut_temp = 1, slut_core = 1)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 70)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -396,11 +396,11 @@ label starbuck_oral_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 1:
                             the_person "Oh my god, I came so many times... did you make me squirt?"
-                            $ the_person.change_stats(obedience = 5, slut_temp = 3, slut_core = 3)
+                            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
                             the_person "Let's do that again soon!"
                         elif the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... That felt so good!"
-                            $ the_person.change_stats(obedience = 2, slut_temp = 1, slut_core = 1)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -446,7 +446,7 @@ label starbuck_foreplay_skillup_label(the_person):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
                             the_person "Oh wow... The orgasms that thing gives..."
-                            $ the_person.change_stats(obedience = 2, slut_temp =2, slut_core = 2)
+                            $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 20)
                             the_person "Let's do that again soon!"
                         else:
                             the_person "Thanks for the fuck!"
@@ -584,7 +584,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     the_person "Well, I don't know about EVERY thing, but we definitely have a great selection now."
     mc.name "What do you mean?"
     the_person "Well, goodness, there is so much stuff out there, there's no way we could fit it all in this little store. That's why I'm saving up."
-    the_person "The store next to us recently went ouf of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
+    the_person "The store next to us recently went out of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
     "You consider what she is saying."
     mc.name "What kind of stuff could you carry with the extra space that you aren't carrying now?"
     the_person "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furniture, like chairs and swings, massage tables..."
@@ -707,6 +707,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             "Once she finishes stripping, she grabs the lingerie set and puts it on."
             $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
+    $ the_person.break_taboo("underwear_nudity")
     "Now dressed in her outfit, [the_person.possessive_title] hands you her phone. She grabs the first item, the bottle of lubricant."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
@@ -797,6 +798,7 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ mc.change_locked_clarity(50)
             "You walk up to [the_person.possessive_title]. She unzips your pants and pulls your cock out from your pants."
             "She runs her tongue up and down the sides a few times, then opens her mouth and sucks you into her hot mouth."
+            $ the_person.break_taboo("sucking_cock")
             call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_fuck_person_SBS70
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
@@ -933,6 +935,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ mc.change_arousal(25)
     $ mc.change_locked_clarity(50)
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
+    $ the_person.have_orgasm(half_arousal = True)
     "[the_person.possessive_title]'s body begins to spasm as she orgasms. She shoves the toy in deep inside her. Her juices are trickling down beneath her out of her cunt."
     "Her body relaxes after she finishes. She slowly pulls the toy from her sopping wet cunt."
     the_person "So... overall... I rate this toy... a solid 9 out of 10... thanks for watching!"
@@ -960,6 +963,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             else:
                 "[the_person.possessive_title] runs her hands along your sides as you get into position."
                 "She grabs your cock with your hand and points it at her soaked slit. With one smooth motion you thrust into her. She's so wet you glide in with no resistance."
+            $ the_person.break_taboo("condomless_sex")
             "Wasting no time, you begin thrusting into her. Her pussy feels amazing wrapped around you."
             call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBS80
             "[the_person.possessive_title] lays there in a daze. Between the toy and your cock, she had multiple orgasms."
@@ -971,7 +975,7 @@ label starbuck_sex_store_promo_two_label(the_person):
                 "You get up and start getting dressed. [the_person.possessive_title] calls out to you."
                 the_person "Thank you [the_person.mc_title], for all your help. I wouldn't have made it this far without you."
             mc.name "Thanks [the_person.title]. It has been a pleasure helping you out. Please let me know if you'd like... help... again in the future with your reviews!"
-            $ the_person.change_stats(love = 5, happiness = 10, slut_core = 1, slut_temp = 3)
+            $ the_person.change_stats(love = 5, happiness = 10, slut = 1, max_slut = 50)
             $ perk_system.add_stat_perk(Stat_Perk(description = "Increase vaginal skill after helping Starbuck with her demonstration video. +1 Vaginal Skill", vaginal_bonus = 1, bonus_is_temp =False), "Starbuck Vaginal Bonus")
             "Fucking and pleasing an experienced woman like [the_person.title] makes you feel more confident in your vaginal skills."
             "You go back and take a look at the camera. You accidentally left it recording! It has a recording of you and [the_person.possessive_title] fucking!"
@@ -992,7 +996,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             the_person "Oh... right, I'm sure that's going to be a lot of hard work..."
             "You chat with her for a few minutes about the details of setting up a review site, but eventually it's time to say goodbye."
             the_person "Thanks for the help [the_person.mc_title], if you find yourself needing anything later... just ask okay?"
-            $ the_person.change_stats(love = -5, happiness = -5, slut_core = 1, slut_temp = 3)
+            $ the_person.change_stats(love = -5, happiness = -5, slut = -1)
 
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
@@ -1011,7 +1015,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     mc.name "Absolutely. It's only fair. You've already put yourself out there, I'm ready to do my part."
     "[the_person.possessive_title] gives you a bright, beaming smile."
     the_person "Yes! Okay! Give me minute I'll meet you in the back! Get the camera ready!"
-    "You make your way to the back. You get the camera setup and ready to go."
+    "You make your way to the back. You get the camera set up and ready to go."
     $ SB_advert_five_outfit = Outfit("Lingerie Just Red Panties")
     $ SB_advert_five_outfit.add_lower(panties.get_copy(), colour_red)
     $ the_person.draw_person(position = "stand4")
@@ -1115,7 +1119,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "[the_person.possessive_title] struggles a bit against her handcuffs, but she is helpless to defend herself from your spanking."
     "[the_person.possessive_title]'s moaning intensifies rapidly, until finally she takes a sharp breath and tenses up."
     $ the_person.call_dialogue("climax_responses_vaginal")
-    $ the_person.change_stats(happiness = 4, slut_temp = 3, slut_core = 1)
+    $ the_person.change_stats(happiness = 4, slut = 1, max_slut = 50)
     "You keep up your pace while [the_person.possessive_title] cums. With each pulse of her pussy around your cock you spank her ass."
     the_person "Ah!"
     "You enjoy the way her tight ass jiggles and spank it again."
@@ -1127,7 +1131,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person "OHHH! Fuck me [the_person.mc_title]! HOLY FUCK!"
     "[the_person.possessive_title]'s entire body begins to tremble as another orgasm hits her. Her pussy spasms wildly all around you and you can see her hips quaking."
     $ the_person.call_dialogue("climax_responses_vaginal")
-    $ the_person.change_stats(happiness = 4, arousal = 20, slut_temp = 3, slut_core = 1)
+    $ the_person.change_stats(happiness = 4, arousal = 20, slut = 1, max_slut = 50)
     $ mc.change_arousal(20)#80
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title]'s orgasm is milking your cock. It is rapidly pushing you past the point of no return."
@@ -1140,7 +1144,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     mc.name "Ah, I'm going to cum!"
     "You bottom out and explode deep inside of [the_person.possessive_title]. The heat of your semen painting her vaginal walls sends her into another orgasm."
     the_person "OH! I'M CUMMING AGAIN! YES [the_person.mc_title]!"
-    $ the_person.change_stats(happiness = 4, slut_temp = 3, slut_core = 1)
+    $ the_person.have_orgasm()
     $ the_person.cum_in_vagina()
     $ the_person.draw_person(position = "doggy")
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
@@ -1199,7 +1203,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ mc.change_locked_clarity(20)
     the_person "Tell you what... set up the camera and meet me in back in a few minutes... I've got a couple things in mind I wouldn't mind..."
     mc.name "Sounds great!"
-    "You make your way to the back. You get the camera setup and ready to go."
+    "You make your way to the back. You get the camera set up and ready to go."
     $ SB_advert_six_outfit = Outfit("Starbuck's Pink Lingerie")
     $ SB_advert_six_outfit.add_upper(corset.get_copy(),colour_pink)
     $ SB_advert_six_outfit.add_feet(garter_with_fishnets.get_copy(),colour_pink)
@@ -1411,7 +1415,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You step into frame and start to walk up behind her."
     the_person "Today, he is going to show us how it could be used for a relaxed sodomy session. I'll be able to relax here in the swing, while my ass is at just the right height for him to fuck it..."
     "As you get close behind her, you put your hands on her hips. She reaches back and grasps your cock, and begins to guide it toward her bottom."
-    "When you cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
+    "When your cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with a wonderful pop. With more gentle pressure you are soon deep inside her bowel."
@@ -1801,11 +1805,11 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             $ the_person.change_love(amount = 3, max_modified_to = 30)
         "Dress up for you" if the_person.shop_investment_rate >= 2.0:
             call starbuck_replay_dressup_label(the_person) from _call_starbuck_replay_SBS132
-        # "Play with a dildo for you." if the_person.shop_investment_rate >= 3.0:   #TODO these options.
+        # "Play with a dildo for you" if the_person.shop_investment_rate >= 3.0:   #TODO these options.
         #     pass
-        # "Try more edible underwear." if the_person.shop_investment_rate >= 4.0:
+        # "Try more edible underwear" if the_person.shop_investment_rate >= 4.0:
         #     pass
-        # "Use whip and strap on." if the_person.shop_investment_rate >= 5.0:
+        # "Use whip and strap on" if the_person.shop_investment_rate >= 5.0:
         #     pass
         # "Anal on the swingset" if the_person.shop_investment_rate >= 6.0:
     "[the_person.title] lets out a big yawn."
@@ -1830,16 +1834,16 @@ label starbuck_replay_dressup_label(the_person):
     the_person "I guess when you put it that way. Anyway, go pick out something!"
     "You head out into the store and look at the lingerie. You try to come up with a racy outfit to put [the_person.possessive_title] in."
 
-    call screen outfit_creator(Outfit("New Outfit"))
+    call screen outfit_creator(Outfit("New Outfit"), outfit_type="under", slut_limit = the_person.effective_sluttiness())
     $ the_person.draw_person()
     if _return != "Not_New":
         $ created_outfit = _return
         "You pull out a few pieces of clothing and take them to [the_person.possessive_title]."
         "She looks at the outfit you've picked out for her and seems to think for a second."
-        if created_outfit.slut_requirement <= 40: #She likes it enough to try it on.
+        if created_outfit.slut_requirement <= the_person.effective_sluttiness() * .2: #She likes it enough to try it on.
             the_person "Are you sure? This seems kinda tame..."
             mc.name "I know. I just want to see what it looks like on you."
-        elif created_outfit.slut_requirement >= 80:
+        elif created_outfit.slut_requirement >= the_person.effective_sluttiness() * .8:
             the_person "Wow! I can honestly say I was not expecting you to go all in like this!"
             mc.name "If you don't feel comfortable..."
             "She interrupts you."
@@ -1848,63 +1852,69 @@ label starbuck_replay_dressup_label(the_person):
             the_person "Ah, this look great! I bet this generates a lot of interest..."
             "She gives you a quick wink."
             the_person "And I bet if we put it on an ad it would get some interest too!"
-        "[the_person.possessive_title] starts to get undressed in front of you."
+    else:
+        mc.name "It seems I've lost my touch, why don't you surprise me?"
+        the_person "Oh hotshot, give me a minute."
+        $ created_outfit = the_person.generate_random_appropriate_outfit(outfit_type = "UnderwearSets")
+        "After a few minutes she is back, holding an outfit in her hand."
+
+    "[the_person.possessive_title] starts to get undressed in front of you."
+    $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
+    while strip_choice is not None:
+        $ the_person.draw_animated_removal(strip_choice)
+        "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
         $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
-        while strip_choice is not None:
-            $ the_person.draw_animated_removal(strip_choice)
-            "You watch as [the_person.possessive_title] takes off her [strip_choice.name]."
-            $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
 
-        $ strip_choice = None
-        "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
-        $ the_person.apply_outfit(created_outfit, update_taboo = True)
-        $ the_person.draw_person()
+    $ strip_choice = None
+    "Once she's stripped out of her clothing, [the_person.possessive_title] puts on the outfit you've made for her."
+    $ the_person.apply_outfit(created_outfit, update_taboo = True)
+    $ the_person.draw_person()
 
-        $ mc.change_arousal(10)
-        $ mc.change_locked_clarity(30)
-        the_person "Mmm, I like it! Alright, lets take some pictures!"
-        $ the_person.wardrobe.add_outfit(created_outfit)
-        "[the_person.title] hands you her phone with the photo app already up."
-        $ the_person.draw_person(position = "back_peek")
-        "In the first photo, you get some great shots of her backside. She sways her ass slowly, being careful not to go too fast in a way that would make the photos blurry."
-        $ the_person.draw_person(position = "against_wall")
-        "Next, she props up her leg on a stool and adopts a really sultry pose, with her legs open. She runs her hands down her sides and then back up between her legs..."
-        $ the_person.change_arousal(10)
-        $ the_person.draw_person(position = "cowgirl")
-        "Finally, she gets down on her knees and slowly starts crawling over to you in a sultry display of her femininity."
-        $ the_person.change_arousal(10)
-        $ mc.change_arousal(10)
-        $ mc.change_locked_clarity(30)
-        mc.name "Jesus girl, you are stunning..."
-        the_person "Showing off for you is getting me all worked up again. Will you ummm... lay down for me?"
-        "Thank god, things are about to get steamy."
-        mc.name "For you? Anything."
-        "You lay down on your back."
-        if not the_person.outfit.vagina_available():
-            "As you lay down, you notice [the_person.possessive_title] is stripping her bottoms off."
-            $the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
-        $ the_person.draw_person(position = "stand4")
-        "From the floor, you look up at the stunning sex shop owner. You notice a hint of moisture starting to form on her labia."
-        the_person "When we made the first ad, I sucked you off. But this time, I want a little action too..."
-        "[the_person.title] gets down beside you, then swings her leg over your body, her pussy right in your face. She adjusts her body into the classic sixty nine positions."
-        $ the_person.draw_person(position = "doggy")
-        mc.name "I suppose that is only fair."
-        "You put your hands on her heavenly ass cheeks and get her to adjust her body a bit until she is in the perfect position for you to dive in."
-        "You push your nose into her slit and begin to lick and suck on her clit. She exhales forcefully and you feel her hot breath on your dick."
-        the_person "Mmmm, that's it. Oh god you are so hard, I have to taste it..."
-        $ the_person.change_arousal(10)
-        $ mc.change_arousal(10)
-        $ mc.change_locked_clarity(30)
-        "You feel her tongue circling around the tip. She gives the head a couple of quick kisses and then parts her lips."
-        "Her lips slowly descend your length, entering her blissfully hot mouth. You refrain from bucking your hips to keep from gagging her."
-        call fuck_person(the_person, start_position = SB_sixty_nine, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS141
-        "When you finish, you slowly get up off the floor. You help [the_person.title] up as well."
-        $ the_person.draw_person()
-        the_person "So... you'll help me close up every night, right?"
-        mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
-        the_person "Damn. A girl can dream though."
-        $ the_person.change_love(amount = 3, max_modified_to = 40)
-        $ created_outfit = None
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    the_person "Mmm, I like it! Alright, lets take some pictures!"
+    $ the_person.wardrobe.add_outfit(created_outfit)
+    "[the_person.title] hands you her phone with the photo app already up."
+    $ the_person.draw_person(position = "back_peek")
+    "In the first photo, you get some great shots of her backside. She sways her ass slowly, being careful not to go too fast in a way that would make the photos blurry."
+    $ the_person.draw_person(position = "against_wall")
+    "Next, she props up her leg on a stool and adopts a really sultry pose, with her legs open. She runs her hands down her sides and then back up between her legs..."
+    $ the_person.change_arousal(10)
+    $ the_person.draw_person(position = "cowgirl")
+    "Finally, she gets down on her knees and slowly starts crawling over to you in a sultry display of her femininity."
+    $ the_person.change_arousal(10)
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    mc.name "Jesus girl, you are stunning..."
+    the_person "Showing off for you is getting me all worked up again. Will you ummm... lay down for me?"
+    "Thank god, things are about to get steamy."
+    mc.name "For you? Anything."
+    "You lay down on your back."
+    if not the_person.outfit.vagina_available():
+        "As you lay down, you notice [the_person.possessive_title] is stripping her bottoms off."
+        $the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
+    $ the_person.draw_person(position = "stand4")
+    "From the floor, you look up at the stunning sex shop owner. You notice a hint of moisture starting to form on her labia."
+    the_person "When we made the first ad, I sucked you off. But this time, I want a little action too..."
+    "[the_person.title] gets down beside you, then swings her leg over your body, her pussy right in your face. She adjusts her body into the classic sixty nine positions."
+    $ the_person.draw_person(position = "doggy")
+    mc.name "I suppose that is only fair."
+    "You put your hands on her heavenly ass cheeks and get her to adjust her body a bit until she is in the perfect position for you to dive in."
+    "You push your nose into her slit and begin to lick and suck on her clit. She exhales forcefully and you feel her hot breath on your dick."
+    the_person "Mmmm, that's it. Oh god you are so hard, I have to taste it..."
+    $ the_person.change_arousal(10)
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    "You feel her tongue circling around the tip. She gives the head a couple of quick kisses and then parts her lips."
+    "Her lips slowly descend your length, entering her blissfully hot mouth. You refrain from bucking your hips to keep from gagging her."
+    call fuck_person(the_person, start_position = SB_sixty_nine, start_object = mc.location.get_object_with_name("floor"), skip_intro = True) from _call_fuck_person_SBS141
+    "When you finish, you slowly get up off the floor. You help [the_person.title] up as well."
+    $ the_person.draw_person()
+    the_person "So... you'll help me close up every night, right?"
+    mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
+    the_person "Damn. A girl can dream though."
+    $ the_person.change_love(amount = 3, max_modified_to = 40)
+    $ created_outfit = None
     return
 
 #SBS150
@@ -2075,7 +2085,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You walk with [the_person.title] up to the front of the store where [starbuck.possessive_title] is at. She looks at you two and hesitantly starts to ask."
     starbuck "Hey, so umm... Did [starbuck.mc_title] talk to you about..."
     the_person "I'll do it. Are you going to be in it too?"
-    starbuck "Ah! I umm... I don't think I can't the toy is just a little too big for me..."
+    starbuck "Ah! I umm... I don't think I can, the toy is just a little too big for me..."
     the_person "You don't like, have to use the toy! Just like, maybe you could hold it and fuck me with it, or just let me eat you out or something!"
     "[starbuck.title] eyes widen a little in surprise. It seems, even as a sex shop owner, she was not expecting this level of excitement."
     starbuck "Well, I mean it does have suction cups... So I could probably mount it to some of the latex panties..."
@@ -2121,7 +2131,7 @@ label starbuck_candace_product_demo_label(the_person):
     $ scene_manager.update_actor(starbuck, display_transform = character_right_flipped, z_order = 1, position = "stand3")
     mc.name "Hang on, we have to start the video first. Usually [starbuck.title] does an intro too, then we'll get to the demo."
     the_person "Ugh, fine! What a tease!"
-    "Everything appears to be all setup. You give a quick countdown, and then begin the video."
+    "Everything appears to be all set up. You give a quick countdown, and then begin the video."
     starbuck "Hello folks! This is [starbuck.name], from [starbuck.name]'s Sex Shop, here with another demonstration video! This time we are demonstrating the brand new, Double Girth Maxx 5000!"
     "[starbuck.title] has an extra that she picks up and begins to go over the details to the camera."
     starbuck "Have a size queen in your life that won't shut up about big dicks? This double dildo has a full money-back guarantee that it will shut her up! Made with..."
@@ -2133,7 +2143,7 @@ label starbuck_candace_product_demo_label(the_person):
     "[starbuck.possessive_title] motions at the strap on she's fashioned. While moving behind [the_person.possessive_title]."
     starbuck "Now, let's see if that guarantee holds up! Are you ready dear?"
     the_person "About time! I wasn't sure you were ever gonna... OHHHH!"
-    "[the_person.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputtering a couple of words out."
+    "[the_person.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputter a couple of words out."
     the_person "So...full..."
     starbuck "Don't worry dear, it's about halfway in."
     "For a short moment, you think you notice a look of fear on [the_person.possessive_title]'s face, but it quickly changes to resolve."
@@ -2573,14 +2583,14 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
             $ the_round += 1
 
         if (the_person_one.arousal >= 100 and the_person_two.arousal >= 100): #They both orgasm together.
+            $ the_person_one.have_orgasm(the_position = "sitting", half_arousal = False)
             the_person_one "Oh... OH! OH FUCK!"
+            $ the_person_two.have_orgasm(the_position = "sitting", half_arousal = False)
             the_person_two "Oh fuck me! OH I'M CUMMING!"
             "The two girls both begin to moan as they cum together in unison. Geeze, this one seems too close to call?"
             "You give your shaft a couple strokes... two girls orgasming on either side of you is pretty fucking hot!"
             $ mc.change_locked_clarity(50)
             if willing_to_threesome(the_person_one, the_person_two):
-                $ the_person_one.have_orgasm(the_position = "sitting")
-                $ the_person_two.have_orgasm(the_position = "sitting")
                 "As the girl slowly finish their orgasms, they both notice you, stroking yourself. [the_person_two.title] reaches out and grabs your arm, stopping you."
                 the_person_one "Wow... was that a tie?"
                 the_person_two "Yes it was."
@@ -2600,7 +2610,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 the_person_one "Next week?"
                 "The girls agree to meet again next week."
             else:
-                "Some how though, you manage the will to stop. The girls are both exhausted from their contest. Slowly, they start to get up."
+                "Somehow though, you manage the will to stop. The girls are both exhausted from their contest. Slowly, they start to get up."
                 $ scene_manager.update_actor(the_person_one, position = None)
                 $ scene_manager.update_actor(the_person_two, position = None)
                 the_person_one "Damn. A tie? What does that mean?"
@@ -2708,7 +2718,7 @@ label starbuck_intro():
         "You can tell that she is a hard worker, and is dedicated to making her shop work. Maybe you should consider investing in her shop?"
         mc.name "How much money would you need, say if someone were interested in investing in your shop, to get some basic stock on the shelves?"
         "[the_person.possessive_title] considers for a moment."
-        the_person "Well, I really want the stock to be good, quality product. I'd say I could probably get everything setup for a basic shop for... say $1000?"
+        the_person "Well, I really want the stock to be good, quality product. I'd say I could probably get everything set up for a basic shop for... say $1000?"
         "That seems pretty reasonable. You decide to consider investing. You should talk to [the_person.title] again if you decide to invest in the shop!"
     elif (the_person.shop_progress_stage) == 0:
         the_person "Hello there sir! Welcome back to Starbuck's Sex Shop! Feel free to look around."
@@ -2928,7 +2938,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
         "To one side you see [person_one.title], clearly touching herself, after watching you and [the_person.title] fuck."
         person_one "Oh wow... maybe I should... I wonder if..."
         "She is muttering things under her breath as she touches herself. She closes her eyes and you see her body tense as she orgasms."
-        $ person_one.change_happiness(5)
+        $ person_one.have_orgasm()
         $ the_person.draw_person(position = "sitting")
         "[the_person.title] has noticed and is smiling wide."
         the_person "So... as you can see... the swing makes a wide variety of sexual maneuvers possible... For anyone who attended, I'd like to offer a discount!"

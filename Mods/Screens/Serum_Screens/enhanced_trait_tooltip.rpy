@@ -12,7 +12,9 @@ init 2:
                 frame:
                     background "#000080"
                     xsize 505
-                    text the_trait.name style "menu_text_title_style" xalign 0.5
+                    text the_trait.name + (" (C)" if isinstance(the_trait, SerumTraitBlueprint) else ""):
+                        style "menu_text_title_style"
+                        xalign 0.5
 
                 hbox:
                     spacing 5
@@ -31,6 +33,8 @@ init 2:
                     background "#000080"
                     xsize 505
                     text the_trait.desc style "serum_text_style"
+
+                transclude
 
     screen trait_list_tooltip(the_traits, given_align = (0.0,0.0), given_anchor = (0.0,0.0)):
         vbox:

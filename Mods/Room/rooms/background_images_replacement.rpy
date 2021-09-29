@@ -71,6 +71,8 @@ init -1 python:
     standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg", darken = False)
     standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
     standard_coffee_shop_backgrounds = room_background_image("Coffee_Shop_Background.jpg")
+    luxury_apartment_backgrounds = room_background_image("Luxury_Apartment_Background.jpg", darken = False)
+    university_library_backgrounds = room_background_image("University_Library_Background.jpg")
     # bedroom backgrounds
     standard_bedroom1_background = room_background_image("Generic_Bedroom1_Background.jpg")
     standard_bedroom2_background = room_background_image("Generic_Bedroom2_Background.jpg")
@@ -87,6 +89,16 @@ init -1 python:
         found = find_in_list(lambda x: x.name == "R&D division", list_of_places)
         if found:
             found.background_image = standard_biotech_backgrounds
+        return
+
+    def show_lily_room_background(*args, **kwargs):
+        bedroom_image = lily_bedroom_background[time_of_day]
+        renpy.show("emily_bedroom", what = Image(bedroom_image))
+        return
+
+    def show_university_library_background(*args, **kwargs):
+        library_image = university_library_backgrounds[time_of_day]
+        renpy.show("university_library", what=Image(library_image))
         return
 
 label updated_room_background(stack):
@@ -142,7 +154,13 @@ label updated_room_background(stack):
         cousin.home.background_image = cousin_bedroom_background
         #mom.home.background_image = standard_bedroom1_background
         aunt.home.background_image = standard_bedroom4_background
-        emily.home.background_image = lily_bedroom_background
+
+        # student mom (rich uptown snob)
+        christina.home.background_image = luxury_apartment_backgrounds
+        # instead of changing the role label, just hook a python function before the label
+        # to show the correct background for emily study at home
+        hook_label("student_study_home", show_lily_room_background)
+        hook_label("student_study_university", show_university_library_background)
 
         # update rd division when genetics are unlocked
         update_rd_div_with_genetics_unlocked()

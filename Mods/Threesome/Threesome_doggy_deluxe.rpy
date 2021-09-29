@@ -216,7 +216,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
         "Fucking her hard, [the_girl_2.possessive_title] moans, matching each hip movement of yours with movement of her own."
-        "[the_girl_2.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accomodate you."
+        "[the_girl_2.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     the_girl_1 "I know it feels good, but don't forget you need to get me off too!"
     "[the_girl_1.possessive_title] reaches down and runs her hands through [the_girl_2.title]'s hair."
@@ -259,7 +259,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "You tie the end in a knot and sit back, enjoying the post-orgasm feeling of relaxation."
             else:
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load as deep inside of her as you can get it."
-                if the_girl_2.get_opinion_score("creampies") > 0:
+                if the_girl_2.wants_creampie():
                     the_girl_2  "MMMM! Yes yes yeessshhhh"
                     "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
@@ -301,6 +301,8 @@ label orgasm_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_lo
         "[the_girl_2.possessive_title] is moaning urgently now a she continues to service [the_girl_1.title] orally."
         the_girl_1 "Oh hell that's so good. You're gonna cum soon too aren't you? Cum with me [the_girl_2.name]!"
         "[the_girl_2.title] is moaning loudly but it all gets muffled as [the_girl_1.title] grinds against her face roughly."
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
         "They both orgasm. You can feel [the_girl_2.possessive_title]'s cunt gripping you in time with her orgasmic waves."
         "As they start to wind down, you continue fucking [the_girl_2.title]'s now considerably slicker pussy."
         return
@@ -308,12 +310,14 @@ label orgasm_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_lo
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "[the_girl_1.possessive_title] is starting to moan more urgently. Her hips are moving on their own in time with [the_girl_2.title]'s oral ministrations."
         the_girl_1 "Yes! That's it... right there! YES!!!"
+        $ the_girl_1.run_orgasm()
         "[the_girl_1.title] grinds her pussy against the other girl's face as she orgasms."
         return
 
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "[the_girl_2.possessive_title]'s legs start to quiver, and then suddenly she tenses up."
         $ the_girl_2.call_dialogue("climax_responses_vaginal")
+        $ the_girl_2.run_orgasm()
         "She orgasms, her pussy quivering around your cock. You grab her hips and give a few extra rough thrusts."
 
     return
@@ -430,6 +434,8 @@ label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_loca
         "[the_girl_2.possessive_title] is moaning urgently now as she continues to service [the_girl_1.title] orally."
         the_girl_1 "Oh hell that's so good. You're gonna cum soon too aren't you? Cum with me [the_girl_2.name]!"
         "[the_girl_2.title] is moaning loudly but it all gets muffled as [the_girl_1.title] grinds against her face roughly."
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
         "They both orgasm. You can feel [the_girl_2.possessive_title]'s sphincter gripping you in time with her orgasmic waves."
         "As they start to wind down, you continue fucking [the_girl_2.title]'s tight back passage."
         return
@@ -437,12 +443,14 @@ label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_loca
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "[the_girl_1.possessive_title] is starting to moan more urgently. Her hips are moving on their own in time with [the_girl_2.title]'s oral ministrations."
         the_girl_1 "Yes! That's it... right there! YES!!!"
+        $ the_girl_1.run_orgasm()
         "[the_girl_1.title] grinds her pussy against the other girl's face as she orgasms."
         return
 
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "[the_girl_2.possessive_title]'s legs start to quiver, and then suddenly she tenses up. She pulls her head back from between [the_girl_1.title]'s legs."
         $ the_girl_2.call_dialogue("climax_responses_anal")
+        $ the_girl_2.run_orgasm()
         "She orgasms, her ass quaking around your cock. You grab her hips and give a few extra rough thrusts."
 
     return

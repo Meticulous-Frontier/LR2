@@ -27,7 +27,7 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                    $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
                     "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
@@ -44,7 +44,7 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl "Look at all that cum. Well done."
@@ -129,7 +129,7 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
             the_girl "Ohhhh yes! Shower me with your hot cum!"
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum splashes onto her skin. Goosebumps erupt all over her body as her brain registers your cum on her."
-                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heighterns her orgasm."
+                "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her. Your cum on her skin heightens her orgasm."
                 "She truly is addicted to your cum."
             else:
                 the_girl "Ah... Good job... Ah..."

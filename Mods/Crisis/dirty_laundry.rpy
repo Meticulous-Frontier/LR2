@@ -101,7 +101,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     "You try to respond but just stammer. You're pretty sure there's no way to salvage this."
                     the_person "God I can't believe you. Don't touch my stuff! This is so gross! I'm gonna have to rewash these!"
                     "She quickly grabs her panties from your hand. She grabs the rest of her laundry and walks out of the laundry room."
-                    $ the_person.change_stats(happiness = -10, obedience = -10, slut_temp = 10)
+                    $ the_person.change_stats(happiness = -10, obedience = -10, slut = 1, max_slut = 20)
                     "Soon the washer is done. You swap your clothes to the dryer and start it, then head for bed. They should be dry in the morning!"
                 elif the_person.sluttiness < 50:
                     $ the_person.draw_person(position = "stand4")
@@ -160,8 +160,8 @@ label dirty_laundry_wash_your_clothes(the_person):
                         "[the_person.possessive_title] begins to orgasm convulsively, and she cries out."
                         $ mc.change_locked_clarity(10)
                         the_person "Yes [the_person.mc_title]! Yes! Yes! Oh fuck, how do you do that!"
-                        $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "missionary")
-                        $ the_person.change_stats(obedience = 5, happiness = 5, love = 3, slut_temp = 5, slut_core = 2)
+                        $ the_person.have_orgasm(the_position = "missionary")
+                        $ the_person.change_stats(obedience = 5, love = 3)
                         "[the_person.possessive_title] runs her hands through your hair one last time. She sits up and gives you a kiss, tasting herself on your tongue."
                         the_person "Remember... this is our little secret... okay?"
                         "You hear the sound of the washing machine stopping. You start to open it up and move your laundry over to the dryer."
@@ -183,7 +183,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         "You wait a few minutes until the washer is done. You move your laundry over to the dryer then walk to your room."
                         "You walk by [the_person.title]'s room as you go. You stop for a second outside her door and can hear soft moans coming from inside. You wonder if she is playing with those panties..."
                         "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
-                        $ the_person.change_stats(happiness = 3, slut_core = 2, slut_temp = 3)
+                        $ the_person.change_stats(happiness = 3, slut = 1, max_slut = 50)
                 elif the_person.sluttiness < 75:
                     $ the_person.draw_person(position = "stand4", emotion = "happy")
                     the_person "Oh! You're using my panties!"
@@ -227,7 +227,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     $ the_person.draw_person(emotion = "happy")
                     "When you come back to your senses, you look and see [the_person.title]. She is licking a little bit of cum that got on her hand."
                     the_person "Mmm... that was hot! I can't wait to wear these tomorrow."
-                    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, max_slut = 75)
                     $ the_person.draw_person(position = "walking_away")
                     "She grabs her other laundry and you say goodnight before she leaves you alone in the laundry room, recovering."
                     $ clear_scene()
@@ -343,7 +343,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             "You go back to your room and get to sleep. Your laundry should be dry in the morning!"
                         "Masturbate for me\n{color=#ff0000}{size=18}Requires 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                             pass
-                    $ the_person.change_stats(obedience = 5, happiness = 5, slut_temp = 5)
+                    $ the_person.change_stats(obedience = 5, happiness = 5, slut = 1, max_slut = 80)
             else:      #Someone else catches you! for now this is disabled
                 pass
                 #TODO this
@@ -411,7 +411,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
 
                 mc.name "Maybe I will. See ya."
 
-                $ the_person.change_stats(obedience = -2, happiness = 5, slut_temp = 5)
+                $ the_person.change_stats(obedience = -2, happiness = 5, slut = 1, max_slut = 50)
             else:
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 if the_person is mom:
@@ -429,7 +429,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                     the_person "What would your mother and sister say if they find out about your behavior?"
                     the_person "Now get out of my way, so I can get out of these clothes."
 
-                $ the_person.change_stats(happiness = -5, slut_temp = 2)
+                $ the_person.change_stats(happiness = -5, slut = 1, max_slut = 50)
 
         "Fuck her" if not the_person.has_taboo("vaginal_sex") and the_person.effective_sluttiness("bare_pussy") > 40:
             mc.name "Hey [the_person.title], what are you doing in there?"

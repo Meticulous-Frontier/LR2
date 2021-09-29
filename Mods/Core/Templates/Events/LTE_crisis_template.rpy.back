@@ -25,14 +25,14 @@ label LTE_crisis_TEMPLATE_label(the_person):
         "[the_person.title] is pretty flustered."
         the_person "That's none of your business. Now let me do my shopping in peace!"
         $ the_person.change_happiness(-2)
-        $ the_person.change_slut_temp(3)
+        $ the_person.change_slut(1)
         "You laught but leave her alone."
     elif the_person.sluttiness < 60:    #Embarassed but not too prude either.
         the_person "Ahh, [the_person.mc_title]! I was just, you know, seeing what all is available."
         "She is embarassed you found her here."
         mc.name "Hey, I'm not judging. If you need a toy to help with masturbating that's your business."
         $ the_person.change_obedience(2)
-        $ the_person.change_slut_temp(3)
+        $ the_person.change_slut(1)
         the_person "Ahh, I wasn't buying anything... could I have some privacy while I look please?"
         "You laught but leave her alone."
     else:   #slutty version asks for MC opinion while dildo shopping.

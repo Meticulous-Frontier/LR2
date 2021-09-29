@@ -25,7 +25,7 @@ init 2 python:
 label mom_sister_snooping_action_label():
     "You wake up. You're a little groggy, but you manage to get out of bed."
     "You grab yourself some clothes and quietly leave your room. You aren't sure if you are the first one awake or not."
-    "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peak."
+    "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peek."
     # show lily her bedroom
     $ lily_bedroom.show_background()
     $ scene_manager = Scene()
@@ -102,8 +102,8 @@ label mom_sister_snooping_action_label():
         $ lily.change_arousal(15)
         "You feel yourself getting hard watching [mom.title] and [lily.title] comparing their assets..."
         $ mc.change_locked_clarity(30)
-        $ lily.change_slut_temp(3)
-        $ mom.change_slut_temp(3)
+        $ lily.change_slut(2)
+        $ mom.change_slut(2)
         "Eventually you tear your eyes away. You don't want to get caught snooping."
     elif mc.business.event_triggers_dict.get("family_threesome", False) == True: #You've already had a threesome
         "As you peek around her door, your cock starts to get hard at what you see."
@@ -151,7 +151,7 @@ label mom_sister_snooping_action_label():
         mom "Sure you might get a little extra attention, but there's nothing wrong with that!"
         "[lily.title] laughs this time."
         lily "I guess it couldn't hurt to try..."
-        $ lily.change_slut_temp(3)
+        $ lily.change_slut(2)
         $ mc.change_locked_clarity(10)
         "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     elif lily.sluttiness >= 20:
@@ -173,7 +173,7 @@ label mom_sister_snooping_action_label():
         lily "Sure, you might get a little extra attention, but there's nothing wrong with that!"
         "[mom.title] gives a laugh."
         mom "I guess it couldn't hurt to try..."
-        $ mom.change_slut_temp(3)
+        $ mom.change_slut(2)
         $ mc.change_locked_clarity(10)
         "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
     $ scene_manager.clear_scene()

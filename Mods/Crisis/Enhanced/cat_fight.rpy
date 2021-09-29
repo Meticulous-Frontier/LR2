@@ -82,14 +82,14 @@ label cat_fight_crisis_enhanced_label():
                 $ scene_manager.update_actor(person_one, position = "stand3")
                 $ scene_manager.update_actor(person_two, position = "stand2")
                 "[person_one.title] breaks the kiss and steps back, blushing and panting softly."
-                $ person_one.change_stats(obedience = 5, slut_temp = 3)
+                $ person_one.change_stats(obedience = 5, slut = 1, max_slut = 65)
                 person_one.name "I should... I should get back to work. Sorry for causing any trouble."
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, emotion = "happy")
                 "[person_two.title] watches [person_one.title] leave, eyes lingering on her ass as she walks away."
                 $ scene_manager.remove_actor(person_one)
                 mc.name "Go on, you should get back to work too."
-                $ person_two.change_stats(obedience = 5, slut_temp = 3)
+                $ person_two.change_stats(obedience = 5, slut = 1, max_slut = 65)
                 $ scene_manager.update_actor(person_two, position = "back_peek")
                 "You give [person_two.title] a light slap on the butt to pull her attention back to you. She nods quickly and heads the other way."
             else:
@@ -139,7 +139,7 @@ label cat_fight_crisis_enhanced_label():
                     $ scene_manager.update_actor(winner, emotion = "happy")
                     winner "I hope that teaches you a lesson."
                     $ scene_manager.update_actor(loser, emotion = "sad")
-                    $ loser.change_stats(obedience = -5, happiness = -5, slut_temp = 3)
+                    $ loser.change_stats(obedience = -5, happiness = -5)
                     loser "Fuck you. Bitch."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] grabs her [the_clothing.name] and hurries off to find somewhere private."
@@ -156,7 +156,7 @@ label cat_fight_crisis_enhanced_label():
                     $ scene_manager.update_actor(winner, emotion = "happy")
                     "[winner.title] pushes [loser.title] away from her and smiles in victory."
                     winner "I hope that teaches you a lesson."
-                    $ loser.change_stats(obedience = -5, happiness = -5, slut_temp = 3)
+                    $ loser.change_stats(obedience = -5, happiness = -5)
                     loser "Fuck you. Bitch."
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] storms off to find somewhere private to nurse her wounds."
@@ -248,12 +248,13 @@ label cat_fight_crisis_enhanced_label():
                     $ loser.change_arousal(25)
                     $ scene_manager.update_actor(loser, emotion = "orgasm")
                     winner "That's it, cum for me slut!"
+                    $ loser.have_orgasm()
                     "[loser.title] screams loudly and shivers wildly. She only stays on her feet because [winner.title] is holding her in place."
-                    $ loser.change_stats(slut_core = 3, slut_temp = 5, happiness = 5, obedience = -5)
+                    $ loser.change_stats(obedience = -5)
                     $ scene_manager.update_actor(loser, position = "sitting", emotion = "default")
                     "[winner.title] holds [loser.title] up a little longer, then lets her go. [loser.title] stumbles forward on wobbly legs until she finds a chair to collapse into. She pants loudly."
                     $ mc.change_locked_clarity(20)
-                    $ winner.change_stats(slut_core = 2, slut_temp = 2, obedience = -5)
+                    $ winner.change_stats(slut = 1, max_slut = 90, obedience = -5)
                     winner "There we go, that should have sorted her out. I'm sorry about that [winner.mc_title]."
                     mc.name "You did what you had to, I understand."
                     $ scene_manager.update_actor(winner, position = "walking_away")
@@ -262,7 +263,7 @@ label cat_fight_crisis_enhanced_label():
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "It takes a few more minutes before [loser.title] is any state to go anywhere. When she's able to she gathers her things and head off to get cleaned up."
                 else:
-                    $ loser.change_stats(slut_core = 2, slut_temp = 5, happiness = -10, obedience = -10)
+                    $ loser.change_stats(slut = 1, max_slut = 80, happiness = -10, obedience = -10)
                     $ scene_manager.update_actor(loser, position = "walking_away")
                     "[loser.title] gathers up what clothes she can from the ground, then hurries away to find somewhere private."
                     $ scene_manager.remove_actor(loser)
@@ -308,8 +309,8 @@ label cat_fight_crisis_enhanced_label():
             if the_report.get("guy orgasms", 0) > 0:
                 "You watch as [person_one.title] and [person_two.title] begin to kiss and lick your cum off of each other's faces"
                 "This turned out to be a success!"
-                $ person_one.change_stats(obedience = 5, slut_temp = 3, happiness = 5)
-                $ person_two.change_stats(obedience = 5, slut_temp = 3, happiness = 5)
+                $ person_one.change_stats(obedience = 5, happiness = 5)
+                $ person_two.change_stats(obedience = 5, happiness = 5)
                 mc.name "See what you can do if you just work together? Go on now, get back to work."
                 $ scene_manager.update_actor(person_one, position = "walking_away")
                 $ scene_manager.update_actor(person_two, position = "walking_away")

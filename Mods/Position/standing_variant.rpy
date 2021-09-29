@@ -75,7 +75,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         menu:
             "Punish Her":
                  "SMACK"
-                 "You give [the_girl.possessive_title]'s ass hard swat. It leaves a clear red handprint on her behind."
+                 "You give [the_girl.possessive_title]'s ass a hard swat. It leaves a clear red handprint on her behind."
                  the_girl "Yow!"
                  mc.name "Sorry? That's not what I expect from you. Count how many times I spank you. How many times do you think you deserve?"
                  if the_girl.get_opinion_score("being submissive") > 0:
@@ -97,7 +97,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                  elif the_girl.sluttiness > 80 or the_girl.obedience > 130:
                      the_girl "I'm sorry [the_girl.mc_title]! I'll try to get better at this. Having you fuck me like this is so intense..."
                      "SMACK"
-                     mc.name "You didn't anser the question! Answer how many spankings you deserve for being such a tease"
+                     mc.name "You didn't answer the question! Answer how many spankings you deserve for being such a tease"
                      the_girl "Oh god, five! I deserve five for being such a tease!"
                      "You continue your punishment, alternating giving her a few thrusts and then another smack."
                  elif the_girl.get_opinion_score("being submissive") < 0:
@@ -170,7 +170,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title]'s tight cunt feels so good, you can't help but slam into it over and over again. Maybe you should touch her a bit or talk dirty in her ear..."
         menu:
             "Touch her":
-                 "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hup and trail it down between her legs..."
+                 "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hip and trail it down between her legs..."
                  "You reach her mound and being to work circles around her clit with your fingers"
                  if the_girl.arousal > 130:
                       the_girl "Oh my god you're gonna make me cum again! Holy fuck!"
@@ -500,7 +500,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"
                 "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
             else:
                 "[the_girl.possessive_title] reaches for your cock, removes the condom, and ties the end in a knot."
                 the_girl "Wow that was good. Look at all that cum you made for me..."

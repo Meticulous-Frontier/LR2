@@ -78,7 +78,7 @@ init 5 python:
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
         tit_modifier = 10 - (__builtin__.abs(5 - rank_tits(person.tits)))   # optimal size is DD-Cup
         age_modifier = 8 - (__builtin__.abs(25 - person.age) / 3.0)            # optimal age is 25
-        slut_modifier = person.core_sluttiness / 20.0
+        slut_modifier = person.sluttiness / 20.0
         obed_modifier = 0
         if person.has_role(bdsm_performer_role):
             obed_modifier = person.obedience / 20.0
@@ -362,7 +362,7 @@ label strip_club_fire_employee_label(the_person):
             $ the_person.clear_situational_slut("seduction_approach")
             $ the_person.clear_situational_obedience("seduction_approach")
             $ the_person.apply_planned_outfit()
-            $ the_person.change_stats(happiness = -5, obedience = 5, slut_temp = 3)
+            $ the_person.change_stats(happiness = -5, obedience = 5, slut = 1, max_slut = 60)
             mc.name "Okay [the_person.title], I'll keep you around for a little while longer, but you really need to work on your act, I'm not running a charity."
             if the_person.effective_sluttiness() < 50:
                 the_person "I'll do my best [the_person.mc_title], I promise."
@@ -433,10 +433,10 @@ label stripper_performance_review_label(the_person):
                     $ the_person.clear_situational_slut("seduction_approach")
                     $ the_person.clear_situational_obedience("seduction_approach")
                     if the_report.get("girl orgasms", 0) > 1: #We made her cum multiple times! Congratulations!
-                        $ the_person.change_stats(happiness = 10, slut_temp = 3, love = 2)
+                        $ the_person.change_stats(happiness = 10, slut = 1, max_slut = 60)
                         the_person "Oh [the_person.mc_title], that was wonderful! I couldn't have asked for a better performance bonus!"
                     elif the_report.get("girl orgasms", 0) == 1:
-                        $ the_person.change_stats(happiness = 5, slut_temp = 1)
+                        $ the_person.change_stats(happiness = 5, slut = 1, max_slut = 50)
                         the_person "Well, that was a good time [the_person.mc_title]. It's a lot more fun than a normal performance bonus, that's for sure!"
                     else:
                         $ the_person.change_stats(happiness = -5, obedience = -2)
@@ -497,7 +497,7 @@ label stripper_performance_review_label(the_person):
                                     $ the_person.clear_situational_slut("seduction_approach")
                                     $ the_person.clear_situational_obedience("seduction_approach")
                                     $ the_person.apply_planned_outfit()
-                                    $ the_person.change_stats(happiness = -5, obedience = 5, slut_temp = 3)
+                                    $ the_person.change_stats(happiness = -5, obedience = 5, slut = 1, max_slut = 50)
                                     mc.name "Okay [the_person.title], I'll keep you around for a little while longer, but you're going need to work on your act, else I might change my mind about keeping you here."
                                     if the_person.effective_sluttiness() < 50:
                                         the_person "I'll do my best [the_person.mc_title], I promise."
@@ -530,11 +530,11 @@ label stripper_performance_review_label(the_person):
                     $ the_person.clear_situational_slut("seduction_approach")
                     $ the_person.clear_situational_obedience("seduction_approach")
                     if the_report.get("girl orgasms", 0) > 0: #We made her cum! Congratulations!
-                        $ the_person.change_stats(happiness = 5, slut_temp = 1, love = 2)
+                        $ the_person.change_stats(happiness = 5, slut = 1, max_slut = 50)
                         the_person "You just can't resist pleasing me, can you [the_person.mc_title]? I thought I wasn't supposed to cum?"
                         "[the_person.title] seems smug about her orgasmic victory."
                     elif the_report.get("end arousal", 0) >= 80:
-                        $ the_person.change_stats(happiness = 5, slut_temp = 2, obedience = 3)
+                        $ the_person.change_stats(happiness = 5, slut = 1, max_slut = 60)
                         the_person "Oh my god [the_person.mc_title], you got me so close... Can't you just finish me off, real quick?"
                         mc.name "Do a better job and I'll let you cum next time, understood?"
                         "[the_person.title] nods meekly."

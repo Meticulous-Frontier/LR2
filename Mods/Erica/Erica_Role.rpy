@@ -17,7 +17,7 @@ init 2 python:
 
         #global erica_role
         global erica
-        erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_8",  tits="B", height = 0.92, hair_colour="chestnut brown", hair_style = short_hair, skin="white" , \
+        erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_8",  tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = short_hair, skin="white" , \
             eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
@@ -140,7 +140,7 @@ init -2 python:
             erica.apply_outfit(erica_workout_wardrobe.decide_on_outfit2(erica))
         elif workout_wardrobe:
             erica.apply_outfit(erica.personalize_outfit(workout_wardrobe.decide_on_outfit2(erica)))
-        return 
+        return
 
     def erica_intro_requirement(person):
         return person.location == gym
@@ -1444,7 +1444,7 @@ label erica_money_problem_sarah_convincing_employee_label():
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         the_person "I'm sure you are... more coffee? I just brewed some!"
         $ scene_manager.update_actor(the_person, position = "back_peek")
-        the_target "Yeah! That looks nice."
+        the_target "Yeah! That would be great."
         "Sounds like she is using some of the serum you produced for HR meetings to help her persuade [the_target.possessive_title] to come to the yoga class."
         $ scene_manager.update_actor(the_person, position = "stand3")
         the_person "Here you go... now, I know we're all busy, but trust me, the benefits of doing yoga really are worth the time!"
@@ -1971,8 +1971,8 @@ label erica_weekly_yoga_label(the_person):
             "Awkwardly, you decide it would be best to get to work."
             mc.name "I'm sorry, I have some work that I need to accomplish. The session today was great though. Keep up the good work, you two!"
             "They are both watching the orgy unfolding. You say your goodbyes and soon you are starting your workday."
-        $ the_person.change_stats(slut_temp = 2, slut_core = 2)
-        $ yoga_assistant.change_stats(slut_temp = 2, slut_core = 2)
+        $ the_person.change_stats(slut = 1, max_slut = 70)
+        $ yoga_assistant.change_stats(slut = 1, max_slut = 70)
     else:
         the_person "Yeah, that was great!"
         yoga_assistant "Hey [the_person.name], did you want to get together this weekend?"
@@ -2003,27 +2003,27 @@ label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A s
     if watched_count == 0:
         return  # we didn't look at her
 
-    if (watched_count * 20) + 10 > the_person.sluttiness:  #She is embarrassed how much you watched her. sluttiness gain.
+    if (watched_count * 20) + 10 > the_person.effective_sluttiness():  #She is embarrassed how much you watched her. sluttiness gain.
         if watched_count == 1:
             the_person "I couldn't help but notice you sneaking glances at me... during the session."
             "She is blushing slightly."
             mc.name "Sorry, being in the same room as you doing yoga is a little bit distracting."
             the_person "It's okay! I actually don't mind. That's totally normal, right?"
             mc.name "Of course."
-            $ the_person.change_stats(slut_core = 1, slut_temp = 1, love = -1)
+            $ the_person.change_stats(love = -1, slut = 1, max_slut = 20)
         # elif watched_count == 2:
         #     the_person "I couldn't help but notice you looking at me during the session."
         #     "She is blushing."
         #     mc.name "You're a beautiful woman, [the_person.title]. I'm sorry, I'll try not to stare so much next time."
         #     the_person "It's okay! I mean, I guess that's pretty normal, considering the circumstances."
-        #     $ the_person.change_stats(slut_core = 2, slut_temp = 2, happiness = 2)
+        #     $ the_person.change_stats(happiness = 2)
         else:
             the_person "I couldn't help but notice you staring at me the entire session. I could feel your eyes every time I posed..."
             "She is blushing heavily and looking down."
             mc.name "I'm sorry. You're a sexy woman, and having you in the same room doing yoga is very distracting."
             "She smiles at you, but you can tell she is a little uncomfortable."
             the_person "It's okay I guess... considering the circumstances."
-            $ the_person.change_stats(slut_core = 2, slut_temp = 2, love = -3)
+            $ the_person.change_stats(love = -3)
     else:
         if watched_count == 1:
             the_person "I couldn't help but notice you sneaking glances at me during the session."
@@ -2031,14 +2031,14 @@ label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A s
             the_person "It's kind of nice, having you here to watch. Did you like what you saw?"
             mc.name "Of course. You're very flexible, and a great yoga instructor."
             the_person "Aww, thank you."
-            $ the_person.change_stats(love = 1, slut_temp = 1, happiness = 1, add_to_log = False)
+            $ the_person.change_stats(love = 1, happiness = 1, slut = 1, max_slut = 20, add_to_log = False)
         # elif watched_count == 2:
         #     the_person "I couldn't help but notice you looking at me during the session."
         #     "She is smiling wide."
         #     the_person "I can't say I blame you. Should I assume from the drool that was coming out of the side of your mouth that you liked what you saw?"
         #     mc.name "Definitely. You have a great figure, and being in the same room during yoga, I couldn't help but watch."
         #     the_person "Aww, you're sweet."
-        #     $ the_person.change_stats(love = 2, slut_temp = 2, happiness = 2)
+        #     $ the_person.change_stats(love = 2, happiness = 2)
         else:
             the_person "I couldn't help but notice you staring at me the entire session. I could feel your eyes every time I posed..."
             "She is giving you a mischievous smile."
@@ -2053,7 +2053,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A s
                 "She lowers her voice to a soft growl."
                 the_person "Maybe later you can undress me with your hands."
                 mc.name "Don't worry, I intend to."
-            $ the_person.change_stats(happiness = 3, slut_temp = 3, love = 3, add_to_log = False)
+            $ the_person.change_stats(happiness = 3, love = 3, add_to_log = False)
     return
 
 label erica_after_yoga_office_session_label(the_person): #Theoretically this could be anyone, don't use any specific reference to a person.
@@ -2095,7 +2095,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             if the_person.love < 0:
                 the_person "You? What about what I want? I didn't come in here so you could have all the fun."
                 mc.name "Shut up, slut. You came in here because you love cock and you know it. If you want to have some fun, then use your pussy. Either way, service me."
-                $ the_person.change_stats(obedience = 5, love = -3, slut_temp = 3)
+                $ the_person.change_stats(obedience = 5, love = -3, slut = 1, max_slut = 50)
                 $ mc.change_locked_clarity(20)
                 "She looks upset, but you can tell her obedience and her sluttiness are overcoming her reservations."
                 the_person "Fine, since  you asked so nicely."
@@ -2261,7 +2261,7 @@ label erica_lily_instapic_intro_label():
     $ scene_manager.update_actor(erica, position = "back_peek")
     "[erica.title] turns and gives you a good look at her back side. There's a large lump in your throat as you try to reply."
     mc.name "I mean... I can only speak for myself, and I would check it out..."
-    $ erica.change_stats(happiness = 3, love = 2, slut_temp = 2)
+    $ erica.change_stats(happiness = 3, love = 2, slut = 1, max_slut = 30)
     lily "Oh god, look at him! His brain cells can barely respond! You gonna be able to take these pictures [lily.mc_title]?"
     $ scene_manager.update_actor(erica, position = "stand3")
     mc.name "Yeah, of course, I got this."
@@ -2318,7 +2318,7 @@ label erica_lily_instapic_intro_label():
 label erica_lily_post_photoshoot_label(the_person):
     the_person "[the_person.mc_title]! You won't believe it."
     mc.name "Yeah?"
-    the_person "My follower count went up alost FORTY PERCENT from the pics we did with [erica.name] the other night!"
+    the_person "My follower count went up almost FORTY PERCENT from the pics we did with [erica.name] the other night!"
     mc.name "Wow, that's great!"
     the_person "I know! I'm already getting all kinds of requests from people. You HAVE to convince her to do it again, okay?"
     the_person "Do you think we could make this a regular thing? Every Saturday night?"
@@ -2441,7 +2441,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.strip_full_outfit(strip_feet = True) # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
-            $ erica.change_slut_temp(2)
+            $ erica.change_slut(2)
             $ erica.change_happiness(2)
             $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
             $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)

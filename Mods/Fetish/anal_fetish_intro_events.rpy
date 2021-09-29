@@ -124,7 +124,7 @@ init 50 python:
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
         the_person.max_opinion_score("anal sex")
-        the_person.core_sluttiness = 70
+        the_person.sluttiness = 70
         the_person.sluttiness = 70
         the_person.obedience = 0
         the_person.happiness = 100
@@ -137,18 +137,18 @@ init 50 python:
 ### Function labels
 
 label anal_fetish_employee_intro_label(the_person):
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     "You are just finishing up with business for the day. As you are closing up your workstation, something is bothering you."
     "You couldn't help but notice one of your employees, [the_person.title], has been acting a little bit... different."
     "She seems to be using her ass to try and get attention."
-    "Even now, as you walk around he business in your closing rounds, [the_person.possessive_title] bends over her desk when she notices you are nearby."
+    "Even now, as you walk around the business in your closing rounds, [the_person.possessive_title] bends over her desk when she notices you are nearby."
 
     $ the_person.draw_person(position = "standing_doggy")
     $ mc.change_locked_clarity(10)
     "She tries to pretend like she doesn't notice you, but you notice subtle shifts in her hips, wiggling a bit as you walk by her."
-    "[the_person.possessive_title] has been doses recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
+    "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
     if the_person in get_anal_fetish_unique_dialogue_list():
         "Warning, this character is unique, and may have unique fetish dialogue. If you continue, you may miss this dialogue!"
     menu:
@@ -213,7 +213,7 @@ label anal_fetish_employee_intro_label(the_person):
     "[the_person.possessive_title] can only moan as you slide two fingers inside her cunt. With your other hand you give her another spank."
     $ the_person.change_arousal(10)
     mc.name "There, that should be good."
-    "You remove yor fingers briefly, then bring them up slightly. She sighs as you wiggle them around her puckered hole."
+    "You remove your fingers briefly, then bring them up slightly. She sighs as you wiggle them around her puckered hole."
     "You push against her. Your fingers easily begin to slip into [the_person.possessive_title]'s back door."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(30)
@@ -270,7 +270,7 @@ label anal_fetish_employee_intro_label(the_person):
     return True
 
 label anal_fetish_family_intro_label(the_person):
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     $ mc.change_location(the_person.home)
@@ -371,7 +371,7 @@ label anal_fetish_family_intro_label(the_person):
     "[the_person.possessive_title] slowly stands up."
     $ the_person.draw_person(position = the_person.idle_pose)
     the_person "That was amazing, [the_person.mc_title]."
-    the_person "I... I think I need to get some new toys... something a little more purposefully made for anal use..."
+    the_person "I... I think I need to get some new toys... something a little more purpose-made for anal use..."
     "You think about it for a minute."
     if starbuck_is_business_partner():
         mc.name "I have a friend who runs a sex shop over at the mall. Head over there sometime and tell her I sent you."
@@ -381,7 +381,7 @@ label anal_fetish_family_intro_label(the_person):
         mc.name "Maybe they have something there that would be good for you if I'm not around to fuck that ass."
     the_person "You know, I think I'll do that. Thank you [the_person.mc_title]. My ass is yours if you want to do this again sometime..."
     mc.name "A tempting offer to be sure."
-    "You part ways with [the_person.title], confident that her new found anal fetish will bring you a lot of pleasure in the future."
+    "You part ways with [the_person.title], confident that her newfound anal fetish will bring you a lot of pleasure in the future."
     $ add_anal_fetish(the_person)
     $ the_person.clear_situational_slut("situation")
     $ clear_scene() #TODO does this leave you talking to the girl? If so figure out how to part ways cleanly here.
@@ -389,7 +389,7 @@ label anal_fetish_family_intro_label(the_person):
 
 label anal_fetish_generic_intro_label(the_person):
     # Concept, spank her while fingering her ass so she can discover her new submissive, anal loving side.
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     $ the_person.arousal = 40
@@ -397,10 +397,13 @@ label anal_fetish_generic_intro_label(the_person):
     "You walk up to [the_person.title] to say hello. However, something about her demeanor seems a little off."
     mc.name "Hello [the_person.title]. How are you doing today?"
     the_person "Hello [the_person.mc_title]! It's good to see you..."
-    "You take a moment to look at her. Her cheeks seem flushed... Her nipples are poking against the fabric of her shirt. Is she... Aroused?"
+    if the_person.tits_visible():
+        "You take a moment to look at her. Her cheeks are flushed, and her exposed nipples look hard as diamond. She is definitely aroused."
+    else:
+        "You take a moment to look at her. Her cheeks seem flushed... Her nipples are poking against the fabric of her outfit. Is she... Aroused?"
     the_person "... Actually... I do have something you could help me with."
     "She leans forward and talks quietly in your ear."
-    the_person "I woke up super horny this morning, but none of my usually masturbation techniques seemed to work... Can you help me out?"
+    the_person "I woke up super horny this morning, but none of my usual masturbation techniques seemed to work... Can you help me out?"
     $ mc.change_locked_clarity(20)
     "Hmm, very interesting. Recently, you've been dosing her with your anal proclivity serums. Maybe that's why she's having trouble getting off?"
     "Helping her might develop her anal interest into a fetish!"
@@ -424,7 +427,7 @@ label anal_fetish_generic_intro_label(the_person):
     "You give her ass a rough spank."
     $ the_person.change_arousal(5) #45
     $ mc.change_locked_clarity(20)
-    the_person "Oh! Mmm I've been bad haven't I..."
+    the_person "Oh! Mmm~ I've been bad, haven't I..."
     "You give her a couple more spanks. She moans appreciatively."
     $ the_person.change_arousal(5) # 50
     mc.name "You really have been bad. Turn around, I need to punish you more appropriately."
@@ -442,7 +445,7 @@ label anal_fetish_generic_intro_label(the_person):
     "You give her another spank. Her cheeks are starting to redden a bit, but it's obvious from her arousal that she loves it."
     if the_person.has_taboo("anal_sex"):
         mc.name "Have you ever tried taking it in your ass? I think it's clear that your ass needs some attention."
-        the_person "Oh? I umm... not exactly... I not that kind of girl..."
+        the_person "Oh? I umm... not exactly... I'm not that kind of girl..."
         "You give her another spank."
         the_person "Ah! Oh fuck..."
         $ the_person.change_arousal(5) # 70
@@ -477,6 +480,7 @@ label anal_fetish_generic_intro_label(the_person):
     the_person "Oh my god... it's so big! Oh [the_person.mc_title], it's so good!"
     $ the_person.have_orgasm(half_arousal = True)
     "[the_person.possessive_title]'s ass is twitching wildly all around you as she orgasms. You hold her hips tight and in place with both hands as her body quivers."
+    $ the_person.have_orgasm()
     "It feels amazing to have her body gripping you as she cums."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
@@ -503,7 +507,7 @@ label anal_fetish_generic_intro_label(the_person):
         mc.name "Maybe they have something that would help you out, with masturbating, if you find yourself in this position again."
     the_person "You know, I think I'll do that. Thank you [the_person.mc_title]. My ass is yours if you want to do this again sometime..."
     mc.name "A tempting offer to be sure."
-    "You part ways with [the_person.title], confident that her new found anal fetish will bring you a lot of pleasure in the future."
+    "You part ways with [the_person.title], confident that her newfound anal fetish will bring you a lot of pleasure in the future."
     $ add_anal_fetish(the_person)
     $ clear_scene() #TODO does this leave you talking to the girl? If so figure out how to part ways cleanly here.
     return True
@@ -550,14 +554,14 @@ label anal_fetish_mom_intro_label():
     the_person "Here... let me help..."
     $ the_person.draw_person (position = "blowjob")
     "[the_person.possessive_title] gets down on her knees in front of you. She undoes your pants, grasps the waistband and begins to pull them off you. You arch your back a bit to make it easier."
-    "Naked from the waist down, [the_person.title] looks up at you."
+    "Having stripped you from the waist down, [the_person.title] looks up at you."
     the_person "Can you get your shirt?"
     mc.name "Ahhh... Oh! Right..."
     "You start to lift your shirt up over your head. As you do, you feel [the_person.possessive_title] lean forward and run her tongue up and down your cock."
     "Her mouth opens and her soft lips slowly descend your erection as you finish pulling your shirt off. When you look, she has her eyes closed, just enjoying servicing her son's erection."
     $ mc.change_arousal(20)
     $ mc.change_locked_clarity(50)
-    "You run you hands through her hair. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
+    "You run your hands through her hair. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
     the_person "Mmm, sorry, I needed a taste. Ready to start the movie?"
     mc.name "Ugghhh, yeah..."
     $ the_person.draw_person("standing_doggy")
@@ -605,7 +609,7 @@ label anal_fetish_mom_intro_label():
     "After spending some time getting her good and ready, you set the lubricant to the side. [the_person.possessive_title] slowly starts to sit down on your lap again."
     the_person "God you have such a monster. I can't wait to feel it..."
     $ the_person.draw_person(position = "sitting")
-    "She takes your cock in hand points it at her puckered hole, then slowly backs up onto it. It takes several seconds, but eventually her ass rests on your lap, fully impaled on your shaft."
+    "She takes your cock in hand, points it at her puckered hole, then slowly backs up onto it. It takes several seconds, but eventually her ass rests on your lap, fully impaled on your shaft."
     $ the_person.break_taboo("anal_sex")
     "It takes her a few moments, but eventually she starts to move her hips."
     the_person "Okay... don't hold back! Mommy wants your cum baby!"
@@ -701,7 +705,7 @@ label anal_fetish_mom_intro_label():
 
 label anal_fetish_lily_intro_label():
     $ the_person = lily # make sure we use lily for the event
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
     $ the_person.event_triggers_dict["LastAnalFetish"] = day
@@ -786,11 +790,11 @@ label anal_fetish_lily_intro_label():
     "You grab a few squirts of the lube and get your cock and the dildo all lubed up. You grab another squirt and start working it in her rear entry."
     the_person "Mmm... that is so good... I don't know why, lately I just haven't been to stop thinking about your cock fucking me back there..."
     "You've been having her test some of your anal enhancing serums. It sounds like she might be developing an anal fetish!"
-    "You push two fingers into her tight rump. They grip and squeeze at your fingers."
+    "You push two fingers into her tight rump. It grips and squeezes at your fingers."
     $ the_person.change_arousal(10)
     $ mc.change_locked_clarity(50)
     the_person "Oh! That feels good... but I'm ready for you. Let me have it [the_person.mc_title]!"
-    "You use your hand to line yourself cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
+    "You use your hand to line your cock up with her puckered hole. She reaches down and grabs the dildo and lines it up with her pussy."
     "With one slow, smooth motion, you push your cock past her well lubed sphincter. It goes in with a small pop, and then you continue with a slow thrust until your cock is buried in her ass."
     $ the_person.break_taboo("anal_sex")
     the_person "Fuck! Holy hell... [the_person.mc_title] that is intense! I've never felt... I'm so full!!!"
@@ -808,7 +812,7 @@ label anal_fetish_lily_intro_label():
     "You give her a reassuring smile."
     $ the_person.clear_situational_slut("situation")
     mc.name "Don't worry [the_person.title], we'll be careful."
-    the_person "Good... because lately I've just been craving you so bad. We don't have to always use the strap on. But just thinking about you fucking my ass makes me so horny."
+    the_person "Good... because lately I've just been craving you so bad. We don't have to always use the strapon. But just thinking about you fucking my ass makes me so horny."
     $ add_anal_fetish(the_person)
 
     "It is pretty clear from the way she got off while you were fucking her and the way she was talking afterwards, you're convinced [the_person.possessive_title] has developed an anal fetish!"
@@ -859,9 +863,9 @@ label anal_fetish_stephanie_intro_label():
             "[the_person.possessive_title] turns and locks your office door."
             the_person "So... I saw this crazy video last night, and I thought maybe we could re-create it!"
             mc.name "Oh yeah? What was it about?"
-            the_person "Basically, this guy with a monster cock bent his secretary over his desk and fucked in the ass!"
+            the_person "Basically, this guy with a monster cock bent his secretary over his desk and fucked her in the ass!"
             the_person "I was dreaming about it all night. Can we do it please please please pleeeeeaaaassseee???"
-            "Sounds like [the_person.title] has start to develop an anal fetish from the serums. You suppose you should indulge her with this as well."
+            "Sounds like [the_person.title] has started to develop an anal fetish from the serums. You suppose you should indulge her with this as well."
             mc.name "Sounds good. Get over here."
             the_person "Oh! Yes sir. What are you going to do to me?"
             call anal_fetish_stephanie_bimbo_label(the_person) from _anal_fetish_steph_bimbo_02
@@ -926,7 +930,7 @@ label anal_fetish_stephanie_bimbo_label(the_person):
     mc.name "It doesn't matter, you can take the rest of the day off."
     the_person "Oh? That eager to get rid of me? Guess I'll just go find someone else to play with for a while. Your loss mister!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosy ass cheeks."
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peeking out between her rosy ass cheeks."
     "Looks like [the_person.title] has an anal fetish now! But she is also a bimbo."
     if the_person == mc.business.head_researcher:
         "You are guessing she is probably not particularly fit for her job in research. Maybe you can move her somewhere else in the company?"
@@ -956,7 +960,7 @@ label anal_fetish_stephanie_normal_label(the_person):
     $ mc.change_locked_clarity(20)
     the_person "Ah! Mmm I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peaking out between her rosy ass cheeks."
+    "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peeking out between her rosy ass cheeks."
     "Looks like [the_person.title] has an anal fetish now!"
     $ scene_manager.clear_scene()
     return
@@ -979,7 +983,7 @@ label anal_fetish_christina_intro_label():
 
 label anal_fetish_starbuck_intro_label():
     $ the_person = starbuck
-    if the_person.core_sluttiness < 70:
+    if the_person.sluttiness < 70:
         $ abort_anal_fetish_intro(the_person)
         return
 
@@ -1013,7 +1017,7 @@ label anal_fetish_starbuck_intro_label():
     $ mc.change_locked_clarity(50)
     the_person "I've had it in all day... but all I've been able to think about is your amazing cock, ramming up inside me, filling me up!"
     "You walk up behind her and begin to run your hands along her delicious hips. You can see goosebumps break out along her skin."
-    mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days?"
+    mc.name "Thinking of getting fucked in the ass? My my, [the_person.possessive_title], you seem to have quite the affinity for anal these days."
     "[the_person.title] looks back at you."
     the_person "It's true... I don't understand why, but lately I just find myself constantly daydreaming about taking it in the ass. I can't even masturbate anymore without some kind of plug back there!"
     "Sounds like [the_person.title] has developed an anal fetish!"
@@ -1039,7 +1043,7 @@ label anal_fetish_starbuck_intro_label():
     the_person "It's about fucking time! Give it to me good, [the_person.mc_title], you know I can take it!"
     call fuck_person(the_person, start_position = doggy_anal, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_starbuck_anal_fetish_intro_01
     $ add_anal_fetish(the_person)
-    "It's pretty clear from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
+    "It's pretty clear, from her sexual performance and the way she talks to you, that [the_person.title] has developed an anal fetish."
     "[the_person.title] takes a few minutes to recover. She eventually stands up and turns to you."
     $ the_person.draw_person(position = "stand4")
     the_person "Hey so, what you said earlier about, you know, being the man to help me with all these urges I've been dealing with lately... were you being serious?"

@@ -97,6 +97,8 @@ init 2: # Add some additional
                             label "Text Style"
                             textbutton "{i}Italic{/i}" action [ToggleField(style.get("textbutton_text_style"), "italic", True, False), Function(style.rebuild)]
                             textbutton "{b}Bold{/b}" action [ToggleField(style.get("textbutton_text_style"), "bold", True, False), Function(style.rebuild)]
+                            label "Text Effects"
+                            textbutton "All Effects" action [ToggleField(persistent, "text_effects", True, False)]
 
                         vbox:
                             style_prefix "radio"
@@ -200,8 +202,10 @@ init 2: # Add some additional
 
                         vbox:
                             style_prefix "check"
-                            label "Miscellaneous"
+                            label "Misc (Requires Restart)"
                             textbutton "Cache Images on Startup" action [ToggleField(persistent, "zip_cache_preload", True, False)]
+                            textbutton "Empty Wardrobe for Random Girls" action [ToggleField(persistent, "low_memory_wardrobes", True, False)]
+
 
                     null height (2 * gui.pref_spacing)
 

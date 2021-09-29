@@ -56,7 +56,7 @@ init 5 python:
             [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
             [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
             [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95], [.435, .305, .215, .95], [.352, 0.239, .239, .95],
-            [.765, .69, .569, .95], [.4, .4, .4, .95], [.94, .94, .78, .95], [.26, .21, .14, .95], [.62, .46, .14, .95], [.98, .86, .87, .95], 
+            [.765, .69, .569, .95], [.4, .4, .4, .95], [.94, .94, .78, .95], [.26, .21, .14, .95], [.62, .46, .14, .95], [.98, .86, .87, .95],
             [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 1 unused user definable colors
         ]
 
@@ -217,7 +217,7 @@ init 5 python:
     def neutralize_item_colour(the_item, the_colour = None):
         if the_item == None:
             return None
-        
+
         current_alpha = the_item.colour[3]
 
         if the_item in real_bra_list or the_item in panties_list:
@@ -699,7 +699,8 @@ init 5 python:
                 if item:
                     outfit.add_lower(*make_lower_item_transparent(item, points, color_lower if item in [cincher, heart_pasties] else color_upper))
 
-            if renpy.random.randint(0, 3 if points >= 5 else 1) == 0:
+            # random socks
+            if renpy.random.randint(0, 1) == 0:
                 if points >= 5:
                     item = self.get_item_from_list("feet", self.build_filter_list([x for x in socks_list if x not in [short_socks, medium_socks]], points, min_points))
                 else:
@@ -765,15 +766,9 @@ init 5 python:
                         if item_list: # check if we have any items left, if not use original weighted list
                             weighted_list = item_list
 
-            if points > 4:  # we want high sluttiness so add chance for not wearing an item based on opinion
-                for opinion in empty_item_opinions:
-                    score = self.person.get_opinion_score(opinion)
-                    if score > 0:
-                        weighted_list.append([None, score * (20 + points)])
-
-            # renpy.random.shuffle(weighted_list)
-
             item = get_random_from_weighted_list(weighted_list)
+            if not item:    # make sure we have an item from the list
+                item = get_random_from_list(filtered_list)
 
             if no_pattern:
                 return item
@@ -793,11 +788,9 @@ init 5 python:
                 item_list.append([item, 0])
             for pref in self.preferences:
                 score = self.person.get_opinion_score(pref)
-                for name in self.preferences[pref]:
-                    if name == item_group:
-                        for item in self.preferences[pref][name]:
-                            if item in filtered_list:
-                                [x for x in item_list if item in x][0][1] += (score + 2) * 10
+                for name in [x for x in self.preferences[pref] if x == item_group]:
+                    for item in [x for x in self.preferences[pref][name] if x in filtered_list]:
+                        [x for x in item_list if item in x][0][1] += (score + 2) ^ 3
 
             return [x for x in item_list if x[1] > 0]
 
@@ -829,7 +822,7 @@ init 5 python:
             for cp in [x for x in self.color_prefs if x not in get_excluded(base_color)]:
                 score = self.person.get_opinion_score(cp)
                 for col in self.color_prefs[cp]:
-                    color_list.append([self.color_prefs[cp][col], (score + 2) * 10])
+                    color_list.append([self.color_prefs[cp][col], (score + 2) ^ 3])
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])

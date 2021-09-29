@@ -72,7 +72,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
                         $ the_person.draw_person(emotion = "angry")
-                        $ the_person.change_stats(happiness = -5, slut_temp = 1 + the_person.get_opinion_score("not wearing anything"))
+                        $ the_person.change_stats(happiness = -5, slut = 1 + the_person.get_opinion_score("not wearing anything"), max_slut = 20)
                         the_person "[the_person.mc_title], are you watching me change!"
                         mc.name "No, I... The mirror was just sort of there."
                         "She covers herself with her hands and motions for the door."
@@ -118,7 +118,7 @@ label mom_outfit_help_crisis_label_enhanced():
     menu:
         "Say it's too revealing":
             mc.name "I don't think it's very appropriate for work Mom. Maybe you should try something a little less... revealing."
-            $ the_person.change_slut_temp(-2)
+            $ the_person.change_slut(-2)
             the_person "Maybe you're right. Okay, I'll try something a little more conservative for this next outfit."
             $ second_outfit = the_person.decide_on_outfit(sluttiness_modifier = -.2) #Note that if we have impossible values for this function it'll keep exanding the threshold until it's possible
 
@@ -133,7 +133,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
         "Say it's not revealing enough":
             mc.name "I don't know Mom, it's a little stuffy, isn't it? Maybe you should pick something that's a little more modern and fun."
-            $ the_person.change_slut_temp(1+the_person.get_opinion_score("skimpy uniforms"))
+            $ the_person.change_slut(1+the_person.get_opinion_score("skimpy uniforms"))
             $ the_person.discover_opinion("skimpy uniforms")
             if the_person.get_opinion_score("skimpy uniforms") >= 0:
                 the_person "Do you think so? Maybe it is a little too conservative."
@@ -172,7 +172,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         the_person "I'll be done in just a second [the_person.mc_title]..."
                         "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
                         $ the_person.draw_person(emotion = "angry")
-                        $ the_person.change_stats(happiness = -5, slut_temp = 1 + the_person.get_opinion_score("not wearing anything"))
+                        $ the_person.change_stats(happiness = -5, slut = 1 + the_person.get_opinion_score("not wearing anything"), max_slut = 20)
                         the_person "[the_person.mc_title], are you watching me change!"
                         mc.name "No, I... The mirror was just sort of there."
                         "She covers herself with her hands and motions for the door."
@@ -271,7 +271,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                     the_person "I'll be done in just a second [the_person.mc_title]..."
                                     "Her eyes glance at the mirror you're using to watch her. You try to look away, but your eyes meet."
                                     $ the_person.draw_person(emotion = "angry")
-                                    $ the_person.change_stats(happiness = -5, slut_temp = 1 + the_person.get_opinion_score("not wearing anything"))
+                                    $ the_person.change_stats(happiness = -5, slut = 1 + the_person.get_opinion_score("not wearing anything"), max_slut = 20)
                                     the_person "[the_person.mc_title], are you watching me change!"
                                     mc.name "No, I... The mirror was just sort of there."
                                     "She covers herself with her hands and motions for the door."

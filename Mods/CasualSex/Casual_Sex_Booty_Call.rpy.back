@@ -39,8 +39,8 @@ label casual_sex_booty_call_label:
             $ the_person.event_triggers_dict["last_booty_call"] = day
             $ the_person.strip_outfit(delay = 0)
             $ the_person.call_dialogue("hookup_accept")
-            if the_person.arousal > 100 and the_person.core_sluttiness < 100:
-                $ the_person.change_slut_core(2)
+            if the_person.arousal > 100 and the_person.sluttiness < 100:
+                $ the_person.change_slut(2)
 
         "Not Now":
             mc.name "Sorry, I'm busy."

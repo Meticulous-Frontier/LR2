@@ -12,7 +12,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
     if the_girl.has_creampie_cum():
         "You lap at the juices flowing down from [the_girl.possessive_title]'s slit. It's an arousing mix of her juices and semen."
     elif the_girl.arousal > 70:
-        "[the_girl.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue aroud her clit a few times."
+        "[the_girl.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue around her clit a few times."
     else:
         "[the_girl.possessive_title]'s pussy is still getting wet. You lick it slow, giving her time to warm up."
 

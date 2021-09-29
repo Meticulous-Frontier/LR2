@@ -7,6 +7,7 @@ init 2 python:
         for role in [x.role_name for x in person.special_role if not x.hidden]:
             tooltip += role + "\n"
         tooltip += "Love: " + str(person.love) + "\n"
+        tooltip += "Suggestibility: " + str(person.suggestibility) + "%\n"
         tooltip += "Age: " + str(person.age) + "\n"
         tooltip += "Height: " + height_to_string(person.height) + "\n"
         tooltip += "Cup size: " + str(person.tits) + "\n"

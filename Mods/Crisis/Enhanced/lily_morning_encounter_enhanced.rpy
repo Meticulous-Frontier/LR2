@@ -27,7 +27,7 @@ label lily_morning_encounter_enhanced_label():
         mc.name "I'm just going to get some breakfast. What are you doing?"
         "[the_person.title] gets her door open and hurries back inside. She leans out so all you can see is her head."
         the_person "I was going to get some laundry and thought you were still asleep. Could you, uh, move along?"
-        $ the_person.change_slut_temp(2)
+        $ the_person.change_slut(2)
         "You shrug and continue on your way."
 
     elif the_person.effective_sluttiness("underwear_nudity") < 40:
@@ -65,7 +65,7 @@ label lily_morning_encounter_enhanced_label():
                 the_person "You wish this ass was for you."
                 $ mc.change_locked_clarity(5)
                 "She spanks herself lightly and winks at you."
-                $ the_person.change_stats(slut_temp = 4, obedience = 2)
+                $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
 
         $ the_person.draw_person(position = "walking_away")
         "You reach the door to the kitchen and split up. You wait a second and enjoy the view as your [the_person.possessive_title] walks away."
@@ -100,7 +100,7 @@ label lily_morning_encounter_enhanced_label():
                     the_person "Fuck, please don't get me too wet. I don't want to have to explain that to Mom if she finds us."
                     "You flick your finger over [the_person.possessive_title]'s clit, then slide your hand back and kneed her ass some more."
                     $ mc.change_locked_clarity(20)
-                $ the_person.change_stats(slut_temp =5, love = 2)
+                $ the_person.change_stats(love = 2)
                 "When you reach the kitchen [the_person.title] reluctantly pulls away from you."
                 if the_person.effective_sluttiness() > 40:
                     call lily_morning_encounter_follow_up_one_label(the_person) from _call_from_lily_morning_encounter_enhanced_label_1
@@ -129,7 +129,7 @@ label lily_morning_encounter_enhanced_label():
                     mc.name "Sure thing sis. Keep going."
 
                 $ mc.change_locked_clarity(20)
-                $ the_person.change_stats(slut_temp =3, obedience = 3)
+                $ the_person.change_stats(obedience = 3, slut = 1, max_slut = 30)
 
                 "The two of you walk slowly towards the kitchen as [the_person.possessive_title] fondles your dick."
                 "When you reach the door to the kitchen she reluctantly pulls her hand out of your pants."
@@ -184,12 +184,12 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 kitchen_threesome = False
                 jealous_person = False
                 jealous_watcher = False
-                the_watcher = None
+                the_other_person = None
                 scene_manager = Scene()
-                if renpy.random.randint(0, 1) == 0: # 50% we have a second person (if someone is in the house)
-                    the_watcher = get_random_from_list(people_in_mc_home(excluded_people = [the_person]))
-                if the_watcher and the_watcher.effective_sluttiness() < 40:
-                    the_watcher = None
+                if renpy.random.randint(0, 0) == 1: # 50% we have a second person (if someone is in the house)
+                    the_other_person = get_random_from_list(people_in_mc_home(excluded_people = [the_person]))
+                if the_other_person and the_other_person.effective_sluttiness() < 40:
+                    the_other_person = None
 
             "Not satisfied by a little groping you grab [the_person.title] by the wrist and pull her along with you towards the kitchen."
             the_person "Hey, [the_person.mc_title], what do you think you are doing?"
@@ -200,35 +200,38 @@ label lily_morning_encounter_follow_up_two_label(the_person):
             mc.name "She'll have to wait her turn."
             $ mc.change_location(kitchen)
             $ mc.location.show_background()
-            if the_watcher and renpy.random.randint(0, 2) == 1: #someone is there
+            if the_other_person and renpy.random.randint(0, 2) == 1: #someone is there
                 the_person "I'm serious, what if sh..."
-                $ scene_manager.add_actor(the_watcher, display_transform = character_left_flipped, position = "sitting", emotion = "happy")
-                the_watcher "Good morning [the_watcher.mc_title]..."
-                if the_watcher.sluttiness < 80:
-                    the_watcher "...and, [the_person.title], what do you think you are doing walking around naked?"
-                    the_person "Sorry, [the_watcher.name] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
+                $ scene_manager.add_actor(the_other_person, display_transform = character_left_flipped, position = "sitting", emotion = "happy")
+                the_other_person "Good morning [the_other_person.mc_title]..."
+                if the_other_person.sluttiness < 80:
+                    the_other_person "...and, [the_person.title], what do you think you are doing walking around naked?"
+                    the_person "Sorry, [the_other_person.name] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
                 else:
-                    the_watcher "...and, [the_person.title], walking around naked again I see."
+                    the_other_person "...and, [the_person.title], walking around naked again I see."
                     the_person "Well, since [the_person.mc_title] likes it so much I didn't want to disappoint him."
-                the_watcher "Well I can understand that, now [the_watcher.mc_title] what are you doing dragging [the_person.possessive_title] around?"
+                the_other_person "Well I can understand that, now [the_other_person.mc_title] what are you doing dragging [the_person.possessive_title] around?"
                 mc.name "She got me so excited that I figured she could help me take care of this."
                 if the_person.sex_record.get("Last Sex Day", 0) > day + 7:
                     $ jealous_person = True
-                    the_watcher "Well, you can hardly blame her for wanting to get your attention."
-                    if willing_to_threesome(the_person, the_watcher) and the_watcher.sex_record.get("Last Sex Day", 0) > day + 7:
-                        the_watcher "You've been so busy and hardly paid any attention to either of us this week."
+                    the_other_person "Well, you can hardly blame her for wanting to get your attention."
+                    if willing_to_threesome(the_person, the_other_person) and the_other_person.sex_record.get("Last Sex Day", 0) > day + 7:
+                        the_other_person "You've been so busy and hardly paid any attention to either of us this week."
                         $ jealous_watcher = True
                     else:
-                        the_watcher "She mentioned the other day that you've been ignoring her, loneliness can lead to desperation."
+                        the_other_person "She mentioned the other day that you've been ignoring her, loneliness can lead to desperation."
                 else:
-                    the_watcher "Ah, the insatiability of youth. I sort of miss that."
-                    if willing_to_threesome(the_person, the_watcher) and the_watcher.sex_record.get("Last Sex Day", 0) > day + 7:
-                        the_watcher "I wouldn't mind some attention myself you know."
+                    the_other_person "Ah, the insatiability of youth. I sort of miss that."
+                    if willing_to_threesome(the_person, the_other_person) and the_other_person.sex_record.get("Last Sex Day", 0) > day + 7:
+                        the_other_person "I wouldn't mind some attention myself you know."
                         $ jealous_watcher = True
                     else:
-                        the_watcher "I'll let you two have your fun."
-                if jealous_watcher == True and willing_to_threesome(the_person, the_watcher):
-                    mc.name "Sorry, [the_watcher.title] I can give you my attention now, and let [the_person.title] get on with her day."
+                        $ scene_manager.update_actor(the_other_person, position = "stand2")
+                        the_other_person "I'll let you two have your fun."
+                        $ scene_manager.remove_actor(the_other_person)
+
+                if jealous_watcher == True and willing_to_threesome(the_person, the_other_person):
+                    mc.name "Sorry, [the_other_person.title] I can give you my attention now, and let [the_person.title] get on with her day."
                     if jealous_person == True:
                         $ scene_manager.update_actor(the_person, emotion = "sad")
                         the_person "Hey, I don't want to miss out on some quality time with you."
@@ -237,18 +240,18 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                         the_person "Are you sure?"
                         menu:
                             "Yes":
-                                mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_watcher.title]"
+                                mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_other_person.title]"
                                 the_person "Ok, you two have fun. I'll see you tonight."
                                 $ scene_manager.remove_actor(the_person)
-                                $ the_person = the_watcher
+                                $ the_person = the_other_person
 
                             "No":
-                                mc.name "Actually, I think you could help me take care of [the_watcher.title]."
+                                mc.name "Actually, I think you could help me take care of [the_other_person.title]."
                                 $ kitchen_threesome = True
                 if kitchen_threesome == True:
                     mc.name "Well then, I guess we need to decide who goes first."
                     $ scene_manager.strip_full_outfit()     # they both undress
-                    call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen1
+                    call start_threesome(the_person, the_other_person, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen1
 
                 else:
                     mc.name "Now get over here [the_person.title]."
@@ -300,27 +303,30 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                         the_person "Wow, [the_person.mc_title], that is certainly a big problem but I think I can handle it."
                         $ scene_manager.update_actor(the_person, position = "blowjob")
                         "She gently takes you in her hand as she leans in and begins to lick your shaft"
-                        if the_watcher:
-                            $ scene_manager.add_actor(the_watcher, display_transform = character_left_flipped, position = "stand4", emotion = "angry")
+                        if the_other_person:
+                            $ scene_manager.add_actor(the_other_person, display_transform = character_left_flipped, position = "stand4", emotion = "angry")
                             "Suddenly you hear a gasp from the door behind you."
-                            the_watcher "[the_watcher.mc_title], [the_person.title] what do you think you are doing?"
-                            mc.name "Oh, hey [the_watcher.title] I was just teaching [the_person.title] a lesson for walking around the house naked."
-                            if the_watcher.sluttiness < 80:
-                                the_watcher "Again, what a little slut, although I have to admit the view is pretty nice."
+                            the_other_person "[the_other_person.mc_title], [the_person.title] what do you think you are doing?"
+                            mc.name "Oh, hey [the_other_person.title] I was just teaching [the_person.title] a lesson for walking around the house naked."
+                            if the_other_person.sluttiness < 80:
+                                the_other_person "Again, what a little slut, although I have to admit the view is pretty nice."
                             else:
-                                the_watcher "You can hardly blame her, with a body like that I would walk around naked as much as I could."
+                                the_other_person "You can hardly blame her, with a body like that I would walk around naked as much as I could."
                             menu:
-                                "Invite [the_watcher.title]" if willing_to_threesome(the_person, the_watcher):
-                                    mc.name "Your body is nothing to be ashamed of [the_watcher.possessive_title], in fact you could join us if you want."
-                                    the_watcher "That is such a generous offer. I guess I can change my breakfast plans."
+                                "Invite [the_other_person.title]" if willing_to_threesome(the_person, the_other_person):
+                                    mc.name "Your body is nothing to be ashamed of [the_other_person.possessive_title], in fact you could join us if you want."
+                                    the_other_person "That is such a generous offer. I guess I can change my breakfast plans."
                                     mc.name "Well then, I guess we need to decide who goes first."
                                     $ scene_manager.strip_full_outfit()
-                                    call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen2
+                                    call start_threesome(the_person, the_other_person, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen2
 
                                 "Continue with [the_person.title]":
                                     mc.name "I can't argue with that, do you want to stay and watch?"
-                                    the_watcher "Well I was going to make breakfast, but I guess a little show with my meal wouldn't hurt."
+                                    the_other_person "Well I was going to make breakfast, but I guess a little show with my meal wouldn't hurt."
+                                    $ scene_manager.update_actor(the_other_person, position = "sitting", emotion = "happy")
                                     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, position_locked = True) from _call_lily_morning_encounter_kitchenblow2
+                                    $ scene_manager.update_actor(the_person, position = "kneeling1")
+                                    the_other_person "Thanks for the show."
                         else:
                             mc.name "Don't be shy [the_person.title], I know how much you want this."
                             call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _call_lily_morning_encounter_kitchenblow3
@@ -334,35 +340,35 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                         the_person "I can hardly disagree with that, I was hoping something like this would happen."
                         "You pull down your pants and step between her legs, slowly running your hard shaft along her wet folds."
                         the_person "Mmm, now who is the one teasing."
-                        if the_watcher:
-                            $ scene_manager.add_actor(the_watcher, display_transform = character_left_flipped, position = "stand4", emotion = "angry")
+                        if the_other_person:
+                            $ scene_manager.add_actor(the_other_person, display_transform = character_left_flipped, position = "stand4", emotion = "angry")
                             "Before you can respond you hear a gasp behind you at the kitchen door."
-                            the_watcher "[the_watcher.mc_title], [the_person.title] what are you are doing?"
-                            mc.name "Oh, hey [the_watcher.title] I was just about to give [the_person.title] a bit of my attention."
-                            if the_watcher.sluttiness < 80:
-                                the_watcher "Right here in the middle of the kitchen?"
+                            the_other_person "[the_other_person.mc_title], [the_person.title] what are you are doing?"
+                            mc.name "Oh, hey [the_other_person.title] I was just about to give [the_person.title] a bit of my attention."
+                            if the_other_person.sluttiness < 80:
+                                the_other_person "Right here in the middle of the kitchen?"
                             else:
-                                the_watcher "Getting an early start today aren't you?"
+                                the_other_person "Getting an early start today aren't you?"
                             mc.name "Sure, no time like the present."
                             if the_person.sex_record.get("Last Sex Day", 0) > day + 7:
                                 $ jealous_person = True
-                                the_watcher "Well, you can hardly blame her for wanting to get your attention."
-                                if willing_to_threesome(the_person, the_watcher) and the_watcher.sex_record.get("Last Sex Day", 0) > day + 7:
-                                    the_watcher "You've been to busy to make time for either of us this week."
+                                the_other_person "Well, you can hardly blame her for wanting to get your attention."
+                                if willing_to_threesome(the_person, the_other_person) and the_other_person.sex_record.get("Last Sex Day", 0) > day + 7:
+                                    the_other_person "You've been to busy to make time for either of us this week."
                                     $ jealous_watcher = True
                                 else:
-                                    the_watcher "She mentioned the other day that you've been ignoring her, loneliness can lead to desperation."
+                                    the_other_person "She mentioned the other day that you've been ignoring her, loneliness can lead to desperation."
                             else:
-                                the_watcher "Ah, the insatiability of youth. I sort of miss that."
-                                if willing_to_threesome(the_person, the_watcher) and the_watcher.sex_record.get("Last Sex Day", 0) > day + 7:
-                                    the_watcher "I wouldn't mind some attention myself you know."
+                                the_other_person "Ah, the insatiability of youth. I sort of miss that."
+                                if willing_to_threesome(the_person, the_other_person) and the_other_person.sex_record.get("Last Sex Day", 0) > day + 7:
+                                    the_other_person "I wouldn't mind some attention myself you know."
                                     $ jealous_watcher = True
                                 else:
-                                    the_watcher "I'll let you two have your fun."
-                                    $ scene_manager.remove_actor(the_watcher)
+                                    the_other_person "I'll let you two have your fun."
+                                    $ scene_manager.remove_actor(the_other_person)
 
                             if jealous_watcher == True:
-                                mc.name "Sorry, [the_watcher.title] I can give you my attention now, and let [the_person.title] get on with her day."
+                                mc.name "Sorry, [the_other_person.title] I can give you my attention now, and let [the_person.title] get on with her day."
                                 if jealous_person == True:
                                     $ scene_manager.update_actor(the_person, emotion = "sad")
                                     the_person "Hey, now I don't what to miss out on time with you again."
@@ -371,18 +377,18 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     the_person "Are you sure?"
                                     menu:
                                         "Yes":
-                                            mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_watcher.title]"
+                                            mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_other_person.title]"
                                             the_person "Ok, you two have fun. I'll see you tonight."
                                             $ scene_manager.remove_actor(the_person)
-                                            $ the_person = the_watcher
+                                            $ the_person = the_other_person
 
                                         "No":
-                                            mc.name "Actually, I think you could help me take care of [the_watcher.title]."
+                                            mc.name "Actually, I think you could help me take care of [the_other_person.title]."
                                             $ kitchen_threesome = True
                             if kitchen_threesome == True:
                                 mc.name "Well then, I guess we need to decide who goes first."
                                 $ scene_manager.strip_full_outfit()
-                                call start_threesome(the_person, the_watcher, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen3
+                                call start_threesome(the_person, the_other_person, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen3
                             else:
                                 call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_lily_morning_encounter_kitchenfuck2
                         else:
@@ -399,37 +405,48 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             the_person "I'm not sure this is the deterrent you think it is, but I'm not complaining."
                         else:
                             the_person "I'm not a big fan of punishments [the_person.mc_title]."
-                        if the_watcher:
-                            $ scene_manager.add_actor(the_watcher, display_transform = character_left_flipped, position = "stand4", emotion = "angry")
+                        if the_other_person:
+                            $ scene_manager.add_actor(the_other_person, display_transform = character_left_flipped, position = "stand4", emotion = "angry")
                             "Just before you bring your hand down on [the_person.title]'s ass you hear a gasp from behind you."
-                            the_watcher "[the_watcher.mc_title], [the_person.title] what is going on?"
-                            mc.name "Good morning [the_watcher.title], I found this slut walking down the hallway naked and was about to teach her a lesson."
-                            the_watcher "She really has been acting out recently, I guess it is time for someone to discipline her."
+                            the_other_person "[the_other_person.mc_title], [the_person.title] what is going on?"
+                            mc.name "Good morning [the_other_person.title], I found this slut walking down the hallway naked and was about to teach her a lesson."
+                            the_other_person "She really has been acting out recently, I guess it is time for someone to discipline her."
                             menu:
-                                "Send [the_watcher.title] away":
+                                "Send [the_other_person.title] away":
                                     mc.name "Exactly, and since you don't seem capable I guess I'll take care of it."
                                     mc.name "You can go."
-                                    the_watcher "Yes, [the_watcher.mc_title]."
-                                    $ scene_manager.remove_actor(the_watcher)
+                                    the_other_person "Yes, [the_other_person.mc_title]."
+                                    $ scene_manager.remove_actor(the_other_person)
                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = True, position_locked = True) from _call_lily_morning_counter_kitchenspank1
 
-                                "Make [the_watcher.title] stay":
+                                "Make [the_other_person.title] stay":
                                     mc.name "I know you've been struggling with her discipline, take a seat and I'll show you how it is done."
-                                    the_watcher "Yes, [the_watcher.mc_title]."
-                                    $ the_watcher.change_obedience(5)
+                                    $ scene_manager.update_actor(the_other_person, position = "sitting")
+                                    the_other_person "Yes, [the_other_person.mc_title]."
+                                    $ the_other_person.change_obedience(5)
                                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank2
+                                    $ scene_manager.update_actor(the_person, position = "stand2")
+                                    mc.name "You see, it isn't that hard, to make her behave."
+                                    the_other_person "Indeed, I see your point. I will do better from now on."
 
-                                "Punish [the_watcher.title] instead":
+                                "Punish [the_other_person.title] instead":
                                     mc.name "And you've barely done anything about it."
                                     mc.name "I think maybe you need to be punished in her place."
-                                    the_watcher "If you think that is best [the_watcher.mc_title]."
-                                    $ the_watcher.change_obedience(10)
-                                    $ scene_manager.strip_to_vagina(the_watcher, visible_enough = True, prefer_half_off = True)
-                                    call fuck_person(the_watcher, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank3
+                                    $ scene_manager.update_actor(the_other_person, position = "stand2", display_transform = character_right)
+                                    $ scene_manager.update_actor(the_person, position = "sitting", display_transform = character_left_flipped)
+                                    the_other_person "If you think that is best [the_other_person.mc_title]."
+                                    $ the_other_person.change_obedience(10)
+                                    $ scene_manager.strip_to_vagina(the_other_person, visible_enough = True, prefer_half_off = True)
+                                    call fuck_person(the_other_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank3
+                                    $ scene_manager.draw_scene()
+                                    mc.name "I hope this has taught you a lesson and that you will take your responsibilities more seriously now."
+                                    the_person "Yes [the_person.mc_title]."
+                                    the_other_person "Yes [the_other_person.mc_title], I will try harder."
                         else:
                             call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = True, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
 
-            $ the_watcher = None
+            $ the_other_person = None
+            $ scene_manager.clear_scene()
             $ scene_manager = None
             return True
 

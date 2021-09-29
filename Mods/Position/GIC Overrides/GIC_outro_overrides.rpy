@@ -83,7 +83,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] reaches below her for your cock. With delicate fingers she slides your condom off, pinching above the bulge to keep your cum from spilling out."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
-                    $ the_girl.change_slut_temp(the_girl.get_opinion_score("drinking cum"))
+                    $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                 else:
                     "[the_girl.possessive_title] reaches for your cock, removes the condom carefully, and ties the end in a knot."
                     the_girl "Look at all that cum. Well done."
@@ -148,8 +148,24 @@ label GIC_outro_handjob(the_girl, the_location, the_object):
 
 label GIC_outro_tit_fuck(the_girl, the_location, the_object):
     $ the_goal = the_girl.get_sex_goal()
-    #TODO
-    $ tit_fuck.call_default_outro(the_girl, the_location, the_object)
+    if the_goal == "body shot": #Code for cum on tits
+        "With each stroke of her tits [the_girl.title] brings you closer and closer to cumming. You're finally driven past the point of no return."
+        mc.name "Fuck, I'm going to cum!"
+        the_girl "Yes! Ah! Cover my tits with it!"
+        "You watch closely as [the_girl.possessive_title]'s warm tits bring you to your orgasm."
+        $ the_girl.cum_on_tits()
+        $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_girl)
+        "Your orgasm builds to a peak and you grunt, blasting your load up between [the_girl.title]'s tits and out the top of her cleavage."
+        $ the_girl.draw_person(position = "kneeling1")
+        $ blocker = the_girl.outfit.get_upper_top_layer()
+        if blocker: #There's something on her top
+            "Your cum splatters down over [the_girl.title]'s [blocker.name]. She gasps as the warm liquid covers her and drips back down between her tits."
+        else:
+            "Your cum splatters down over the top of [the_girl.title]'s tits. She gasps as the warm liquid covers her and drips back down between her tits."
+        $ del blocker
+        the_person "Oh my god, its so warm..."
+    else:
+        $ tit_fuck.call_default_outro(the_girl, the_location, the_object)
     return
 
 init 7 python:

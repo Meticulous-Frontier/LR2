@@ -65,7 +65,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         return
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
         "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take you very deep, so she focuses on licking and sucking your tip."
-        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
+        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
                 "After a few teasing licks, you bury your face in her pussy. You make a few swiping licks across her clit and the lap up some of the juices flowing from her nethers."
@@ -120,7 +120,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
 
     elif the_girl.sex_skills["Oral"] < 6: #competent at oral
         "[the_girl.possessive_title] bobs her head up and down to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
-        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
+        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
                 "After a few teasing licks, you bury your face in her pussy. You make a few swiping licks across her clit and the lap up some of the juices flowing from her nethers."
@@ -147,7 +147,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
                     the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
-                    "You eat her out for several seconds, as best as you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
+                    "You eat her out for several seconds, as best you can, while she grinds back against you. She moans lewdly and her pussy drips with excitement."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
                 else:
                     "[the_girl.possessive_title] moans, the vibrations it causes around your shaft feels great."
@@ -218,8 +218,8 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
 
     else: #Amazing at oral
         "[the_girl.possessive_title] slides your cock all the way down into her throat. She uses one hand to cup and lightly stroke your balls while she hungrily throat you."
-        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smackin noise"
-        "You can feel [the_girl.possessive_title]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensly pleasurable."
+        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise"
+        "You can feel [the_girl.possessive_title]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensely pleasurable."
         "It feels so good it is making it hard for you to concentrate on pleasuring her."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 5:
@@ -251,7 +251,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
                     the_girl "Mmm, that's it [the_girl.mc_title]."
                     $ the_girl.change_arousal(5 * the_girl.get_opinion_score("taking control"))
-                    "You eat her out for several seconds, as best as you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
+                    "You eat her out for several seconds, as best you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
                 else:
                     "Lost in the pleasure, [the_girl.possessive_title] suddenly pulls you out of her throat."

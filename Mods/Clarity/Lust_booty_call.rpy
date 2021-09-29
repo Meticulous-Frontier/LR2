@@ -124,7 +124,7 @@ label lust_booty_call_intro_label():
     "You make small talk for a bit, but soon her ride is here, so you walk her to the door."
     $ hall.show_background()
     $ the_person.draw_person()
-    mc.name "Thanks [the_person.title], you where amazing."
+    mc.name "Thanks [the_person.title], you were amazing."
     the_person "Anytime [the_person.mc_title], goodnight."
     $ the_person.draw_person(position = "walking_away")
     "She turns around, and hurries to her ride."
@@ -213,7 +213,7 @@ label lust_booty_call_label():
     "You make small talk for a bit, but soon her ride is here, so you walk her to the door."
     $ hall.show_background()
     $ the_person.draw_person()
-    mc.name "Thanks [the_person.title], you where amazing."
+    mc.name "Thanks [the_person.title], you were amazing."
     the_person "Anytime [the_person.mc_title], goodnight."
     $ the_person.draw_person(position = "walking_away")
     "She turns around, and hurries to her ride."

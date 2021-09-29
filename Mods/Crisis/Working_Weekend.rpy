@@ -127,7 +127,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             mc.name "Hey, I'm almost done with this, but I tell you what. Why don't you give me a show while I finish and then maybe when I'm done I'll take you up on that."
             "[person_one.possessive_title] smiles mischievously at you, before nodding."
             person_one "I can do that, [person_one.mc_title]... I hope you like the show!"
-            $ person_one.change_slut_temp(2)
+            $ person_one.change_slut(2)
             call free_strip_scene(person_one) from _free_strip_scene_3
             $ mc.change_locked_clarity(50)
             $ person_two = get_random_employees(1)
@@ -144,12 +144,12 @@ label SB_working_weekend_crisis_label_high(person_one):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
                             "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a while, recovering from her orgasm."
-                            $ person_one.change_slut_core(1)
-                            $ person_one.change_slut_temp(3)
+                            $ person_one.change_slut(1)
+                            $ person_one.change_slut(2)
                             $ person_one.change_love(5)
                         else:   #She didn't cum
                             "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a bit, clearly disappointed she didn't orgasm."
-                            $ person_one.change_slut_temp(3)
+                            $ person_one.change_slut(2)
                             $ person_one.change_happiness(-5)
                         $ person_one.apply_outfit()
                         $ person_one.draw_person()
@@ -158,8 +158,8 @@ label SB_working_weekend_crisis_label_high(person_one):
                         mc.name "Thanks for that very pleasant distraction, [person_one.title], but I need to get back to work now."
                         "[person_one.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
                         person_one "Wow, really? After I stripped for you? Okay then, I hope your day goes better than mine..."
-                        $ person_one.change_slut_temp(3)
-                        $ person_one.change_slut_core(1)
+                        $ person_one.change_slut(2)
+                        $ person_one.change_slut(1)
                         $ person_one.change_happiness(-5)
                         $ person_one.change_love(-5)
 
@@ -195,8 +195,8 @@ label SB_working_weekend_crisis_label_high(person_one):
                 $ scene_manager.remove_actor(person_two)
                 if the_report.get("girl one orgasms", 0) > 0:
                     "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a while, recovering from her orgasm."
-                    $ person_one.change_slut_core(1)
-                    $ person_one.change_slut_temp(3)
+                    $ person_one.change_slut(1)
+                    $ person_one.change_slut(2)
                     $ person_one.change_love(5)
                 person_one "Holy fuck [person_one.mc_title], that was so hot."
                 $ person_one.apply_planned_outfit()
@@ -272,8 +272,8 @@ label SB_working_weekend_crisis_label_medium(person_one):
                 if person_one.get_opinion_score("showing her tits") > 0:
                     "You can see a blush in [person_one.possessive_title]'s cheeks. She likes to show off her [person_one.tits] tits!"
                     $ person_one.discover_opinion("showing her tits")
-                    $ person_one.change_slut_core(1)
-                    $ person_one.change_slut_temp(3)
+                    $ person_one.change_slut(1)
+                    $ person_one.change_slut(2)
             "You back your chair up and move it to the side while [person_one.possessive_title] gets down on her knees in front of you."
             $ person_one.break_taboo("sucking_cock")
             $ scene_manager.update_actor(person_one, position = "blowjob")
@@ -331,8 +331,7 @@ label SB_working_weekend_crisis_label_low(person_one):
             mc.name "It is important though, that when you work hard, you can also play hard."
             "[person_one.possessive_title] nods in agreement."
             mc.name "You are doing a great job for me so far, [person_one.title]. Maybe some time we should play hard together?"
-            $ person_one.change_slut_temp(3)
-            $ person_one.change_slut_core(1)
+            $ person_one.change_slut(1, 30)
             person_one "Oh! I suppose I might be up for something like that, sometime anyway."
 
     "After a minute of chit chat, [person_one.possessive_title] eventually says goodbye and walks out of the room."

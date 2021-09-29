@@ -79,7 +79,7 @@ label sister_failed_test_label():
                 $ the_person.strip_to_underwear(position = "stand3")
                 $ mc.change_locked_clarity(20)
                 "When she finishes, she stands there for a moment, letting you check her out."
-                $ the_person.change_slut_temp(5)
+                $ the_person.change_slut(2)
                 the_person "Okay... let's get started before this gets more awkward!"
             elif the_person.sluttiness > 60: #Eager
                 the_person "Oh! That's a great idea! I know how much you like to look at me naked."
@@ -87,7 +87,7 @@ label sister_failed_test_label():
                 "[the_person.title] stands up and starts to take some clothing off..."
                 $ the_person.strip_outfit(position = "stand3")
                 $ mc.change_locked_clarity(20)
-                $ the_person.change_slut_temp(5)
+                $ the_person.change_slut(2)
                 "You check her out when she finishes. She even strikes a little pose for you."
                 $ the_person.draw_person(position = "back_peek")
                 the_person "There. Does this convince you to help me study?"
@@ -144,8 +144,8 @@ label sister_failed_test_label():
         the_person "Ahhh, I'm sorry [the_person.mc_title], I didn't mean to get you excited."
         mc.name "It's okay, it happens when you are around sometimes."
         "[the_person.title] stays quiet, but you can see her blushing."
-        $ the_person.change_slut_temp(3)
-        $ the_person.change_slut_core(3)
+        $ the_person.change_slut(2)
+        $ the_person.change_slut(3)
         $ the_person.draw_person(position = "stand2")
         "She gets up and slowly collects her books."
         mc.name "Goodnight"
@@ -277,8 +277,8 @@ label sister_failed_test_label():
             "Decline":
                 mc.name "I appreciate that, but I'm just too tired tonight."
                 "[the_person.title] stays quiet, but you can see her blushing."
-                $ the_person.change_slut_temp(2)
-                $ the_person.change_slut_core(2)
+                $ the_person.change_slut(2)
+                $ the_person.change_slut(2)
         $ the_person.draw_person(position = "stand2")
         "She gets up and slowly collects her books."
         mc.name "Goodnight"
@@ -296,7 +296,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 0
+        the_person.sluttiness = 0
         the_person.sluttiness = 0
         the_person.obedience = 0
         the_person.happiness = 100
@@ -310,7 +310,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 10
+        the_person.sluttiness = 10
         the_person.sluttiness = 10
         the_person.obedience = 0
         the_person.happiness = 100
@@ -325,7 +325,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 20
+        the_person.sluttiness = 20
         the_person.sluttiness = 20
         the_person.obedience = 0
         the_person.happiness = 100
@@ -339,7 +339,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 30
+        the_person.sluttiness = 30
         the_person.sluttiness = 30
         the_person.obedience = 0
         the_person.happiness = 100
@@ -353,7 +353,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 40
+        the_person.sluttiness = 40
         the_person.sluttiness = 40
         the_person.obedience = 0
         the_person.happiness = 100
@@ -367,7 +367,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 60
+        the_person.sluttiness = 60
         the_person.sluttiness = 60
         the_person.obedience = 0
         the_person.happiness = 100
@@ -381,7 +381,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 80
+        the_person.sluttiness = 80
         the_person.sluttiness = 80
         the_person.obedience = 0
         the_person.happiness = 100
@@ -395,7 +395,7 @@ label sister_failed_test_unit_test():
         the_person.situational_obedience = {}
         the_person.arousal = 0
         the_person.energy = the_person.max_energy
-        the_person.core_sluttiness = 100
+        the_person.sluttiness = 100
         the_person.sluttiness = 100
         the_person.obedience = 0
         the_person.happiness = 100

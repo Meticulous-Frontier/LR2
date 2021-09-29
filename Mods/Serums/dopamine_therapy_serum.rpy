@@ -3,7 +3,7 @@
 init -1 python:
     def dopamine_therapy_on_turn(the_person, the_serum, add_to_log):
         if renpy.random.randint(0,100) < (the_person.suggestibility - (the_person.happiness - 100)) * 5:
-            the_person.change_happiness(1, add_to_log)
+            the_person.change_happiness(1, add_to_log = add_to_log)
 
     def add_dopamine_therapy_serum():
         dopamine_therapy_ther = SerumTraitMod(name = "Dopamine Therapy",

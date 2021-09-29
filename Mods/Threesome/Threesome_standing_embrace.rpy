@@ -126,7 +126,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
                 the_girl_1 "Damn that was hot... is it my turn next?"
                 return
             "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
-            if the_girl_2.get_opinion_score("creampies") > 0:
+            if the_girl_2.wants_creampie():
                 the_girl_2 "Yes! Fill me up with your cum!"
             if the_girl_2.get_opinion_score("bareback sex") > 0:
                 the_girl_2 "I love it when you shoot your seed so deep!"
@@ -168,7 +168,9 @@ label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, th
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "Both girls are moaning aggressively into each other's mouths as they make out. [the_girl_2.title] has her fingers vigorously working [the_girl_1.possessive_title]'s slit."
         $ the_girl_2.call_dialogue("climax_responses_vaginal")
+        $ the_girl_2.run_orgasm()
         "You can feel [the_girl_2.possessive_title]'s legs buckle for a second as she starts to cum. You grab her hips and hold them firmly in place while you fuck her."
+        $ the_girl_1.run_orgasm()
         "[the_girl_2.title]'s cunt squeezes your cock as she cums, while [the_girl_1.title] moans and closes her eyes as she cums at the same time."
         "As they start to wind down, you continue fucking [the_girl_2.title]'s now considerably slicker pussy."
         return
@@ -176,6 +178,7 @@ label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, th
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         "[the_girl_1.title] is moaning loudly as [the_girl_2.possessive_title]'s fingers work her cunt and she kisses and licks at her breasts."
         the_girl_1 "Oh fuck! Yes!!!"
+        $ the_girl_1.run_orgasm()
         "She orgasms, her moans reaching a fevered pitch.."
         "As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking of [the_girl_2.possessive_title]."
         return
@@ -184,6 +187,7 @@ label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, th
         "[the_girl_2.title] moans loud as you and [the_girl_1.possessive_title] pleasure her."
         "[the_girl_1.title] is holding [the_girl_2.possessive_title]'s leg up at an angle while she sucks eagerly on her nipples."
         $ the_girl_2.call_dialogue("climax_responses_vaginal")
+        $ the_girl_2.run_orgasm()
         "The stimulation is overwhelming and she cums. Her legs start to buckle but you and [the_girl_1.title] hold her up as she orgasms."
         "As she starts to wind down, you continue fucking [the_girl_2.title]'s now considerably slicker pussy."
     return
