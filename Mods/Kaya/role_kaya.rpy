@@ -1014,7 +1014,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
                 "You leave [the_person.possessive_title]'s place. It hurts to leave her like that, but something about it still just feels off."
                 return
     "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
-    $ the_person.strip_outfit(exclude_lower = True, position = "kissing")
+    $ the_person.strip_to_tits(prefer_half_off = True, position = "kissing")
     "With her perky tits out, you quickly kiss down the side of her neck and to her chest. You lick and suckle on one nipple while you grope her other tit with your hands."
     the_person "{=kaya_lang}He pai te ahua{/=kaya_lang}"
     $ the_person.change_arousal(20)
@@ -1080,13 +1080,15 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "You lay in bed for a while with [the_person.possessive_title], but it is getting very late."
     mc.name "Hey... I'm sorry, but I didn't bring stuff to stay the night. I need to get going."
     the_person "Ahh. I know you can't stay. But that's okay. We're going to be doing this again... right?"
-    mc.name "Yes"
+    mc.name "Yes, I would love to."
     the_person "Good. I have a pretty high sex drive... Are you sure you can keep up?"
     mc.name "No, but I'm willing to try."
     the_person "Ah, you're funny. Okay then. I'll see you tomorrow? You're still going to help me move, right?"
     mc.name "Definitely."
     "You get your clothes back on, and say goodnight to [the_person.title], who is still laying on her bed."
     "You walk home and fall into your bed, exhausted from your long day."
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     $ mc.business.add_mandatory_crisis(kaya_moving_day)
     $ the_person.clear_situational_slut("Lonely")
     return
@@ -1142,7 +1144,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
                 $ scene_manager.update_actor(the_person, position = "kissing")
                 "The sexual tension is incredible. Her body responds to every touch and caress as your hands roam all over her."
                 "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
-                $ scene_manager.strip_to_tits(person = the_person)
+                $ scene_manager.strip_to_tits(person = the_person, prefer_half_off = True)
                 "With her perky tits out, you quickly kiss down the side of her neck and to her chest. You lick and suckle on one nipple while you grope her other tit with your hands."
                 the_person "{=kaya_lang}He pai te ahua{/=kaya_lang}"
                 $ the_person.change_arousal(20)
@@ -1476,7 +1478,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     else:
         $ kaya.event_triggers_dict["no_condom_talk"] = True
         "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
-        $ the_person.strip_outfit(exclude_lower = True, position = "kissing")
+        $ the_person.strip_to_tits(prefer_half_off = True, position = "kissing")
         "With her perky tits out, you quickly kiss down the side of her neck and to her chest. You lick and suckle on one nipple while you grope her other tit with your hands."
         the_person "{=kaya_lang}He pai te ahua{/=kaya_lang}"
         $ the_person.change_arousal(20)
