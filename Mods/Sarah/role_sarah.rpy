@@ -251,13 +251,13 @@ init 2 python:
 
     def Sarah_fertile_period_start_requirement():  #When this returns true, start the fertile period
         if sarah.event_triggers_dict.get("try_for_baby", 0) == 1:
-            if Sarah_is_fertile():
+            if sarah.is_highly_fertile():
                 return True
         return False
 
     def Sarah_fertile_period_end_requirement():     #When this returns true, end the fertile period
         if sarah.event_triggers_dict.get("try_for_baby", 0) == 1:
-            if not Sarah_is_fertile():
+            if not sarah.is_highly_fertile():
                 return True
         return False
 
@@ -266,14 +266,10 @@ init 2 python:
             return True
         return False
 
-    def Sarah_is_fertile():
-        return sarah.is_highly_fertile()
-
     def Sarah_has_bigger_tits():
         if sarah_epic_tits_progress() > 1 or sarah.has_large_tits():
             return True
         return False #Just in case we used serums later
-
 
     def Sarah_remove_bra_from_wardrobe(wardrobe):  #Test this function
         for outfit in wardrobe.outfits:
@@ -1497,7 +1493,7 @@ label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event
     "So far, it appears that no one has really taken notice, so you continue to watch."
     $ the_clothing.colour[3] *= .8
     $ the_person.draw_person(position = "walking_away")
-    "After a couple more miles, the effect of her sweat on her shirt has gotten very noticable. As she works out, guys walking by have started to stop and gawk at her."
+    "After a couple more miles, the effect of her sweat on her shirt has gotten very noticeable. As she works out, guys walking by have started to stop and gawk at her."
     "You slow your treadmill down to a walk as you start to cool down, and eventually [the_person.possessive_title] stops her elliptical and gets off."
     $ the_person.draw_person()
     "?????" "Holy shit those tits are... AH!"
@@ -1810,8 +1806,8 @@ label Sarah_stripclub_story_label():
     "You reach up and grab her hips with your hands. You give one cheek a hard spank while your tongue snakes its way inside of her."
     $ the_person.change_arousal(30)
     the_person "Yes! Oh fuck I'm gonna cum!!!"
-    $ mc.listener_system.fire_event("girl_climax", the_person = the_person, the_position = "standing_doggy")
-    $ the_person.change_stats(happiness = 5, obedience = 5, slut = 1, max_slut = 50)
+    $ the_person.have_orgasm(the_position = "standing_doggy")
+    $ the_person.change_stats(obedience = 5)
     "You grip her hips roughly to hold her still as you bring her to a climax. Her knees start to buckle but you hold her ass firmly in place."
     "She gives a low, steady moan when she finally finishes climaxing."
     $ the_person.change_arousal(-(the_person.arousal / 3))
@@ -2493,7 +2489,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
         the_person "Mmmmmmmm......"
         "[the_person.title] moans but doesn't stir. Maybe you could surprise her with a little good morning dicking."
-        if Sarah_is_fertile():
+        if the_person.is_highly_fertile():
             "You're sure she wouldn't mind an extra creampie to start the day. The more cum in her the better during her fertile period!"
         menu:
             "Try to slide yourself in":
@@ -2543,7 +2539,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         $ mc.change_arousal(20) #110
         $ mc.change_locked_clarity(50)
         mc.name "I'm gonna cum!"
-        if Sarah_is_fertile():
+        if the_person.is_highly_fertile():
             the_person "Cum deep! Knock me up with your hot cum, [the_person.mc_title]!"
         else:
             the_person "Shove it in deep! I want to feel your seed inside me all day long!"
@@ -3341,7 +3337,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.change_location(hall)
     $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_right)
-    if Sarah_is_fertile():
+    if the_person.is_highly_fertile():
         the_person "Oh god, I can't wait to feel you fill me up again..."
     else:
         the_person "Oh god, I can't wait to feel your hands all over me again..."
@@ -3376,7 +3372,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
     the_person "Well, I think we both know where this is going!"
     $ scene_manager.strip_full_outfit(person = the_person)
     $ skip_condom = False
-    if Sarah_is_fertile():
+    if the_person.is_highly_fertile():
         the_person "Let's go! Ovulation is driving me crazy, I've been daydreaming about your cock filling me with seed all night long!"
         $ skip_condom = True
     else:

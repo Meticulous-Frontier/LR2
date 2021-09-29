@@ -50,7 +50,7 @@ label Sarah_greetings(the_person):
         the_person "Hey. Did you need something? I'm sorry I'm having a bit of a rough day."
     else:
         if the_person.sluttiness > 60:
-            if Sarah_is_fertile():
+            if the_person.is_highly_fertile():
                 the_person "Hello. Need something? I hope so, I know I really need something soon..."
                 "She lowers her voice and whispers in your ear."
                 the_person "I'm fertile right now."
@@ -187,7 +187,7 @@ label Sarah_strip_reject(the_person, the_clothing, strip_type = "Full"):
 
 label Sarah_sex_accept(the_person):
     if the_person.sluttiness > 70:
-        if Sarah_is_fertile():
+        if the_person.is_highly_fertile():
             the_person "My body is yours to use, [the_person.mc_title]. Just try to cum inside me... it's a good time of the month for that!"
         elif the_person.event_triggers_dict.get("dating_path", False) == True:
             the_person "Yes! Let's go! I'm glad I'm not the only one feeling needy."

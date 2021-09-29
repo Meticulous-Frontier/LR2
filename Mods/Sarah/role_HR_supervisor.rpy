@@ -1179,7 +1179,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ scene_manager.update_actor(the_person, position = "standing_doggy")
             $ scene_manager.strip_to_vagina(the_person, visible_enough = False, prefer_half_off = False)
             $ mc.change_locked_clarity(50)
-            the_person "Especially when it starts us messing aroundin your office!"
+            the_person "Especially when it starts us messing around in your office!"
             "[the_person.possessive_title] gives her ass a little shake before standing back up."
             $ scene_manager.update_actor(the_person, position = "stand3")
             if the_person.has_taboo("anal_sex"):
