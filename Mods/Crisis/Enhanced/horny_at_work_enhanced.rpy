@@ -88,7 +88,7 @@ label horny_at_work_crisis_enhanced_label():
 
         "Jerk off at your desk (tooltip)With nobody around, what's stopping you?" if not mc.location.people:
             "There's no reason to be self conscious when you're all by yourself inside your own business. You lean back in your chair and unzip your pants."
-            call bedroom_masturbation(location_description = "work", edging_available = False, should_advance_time = False)
+            call bedroom_masturbation(location_description = "work", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation
             "You tidy up and get back to work, feeling much more focused."
 
         "Jerk off at your desk, loud and proud (tooltip)Your company, your rules, right?" if mc.location.people:
@@ -361,7 +361,7 @@ label horny_at_work_crisis_enhanced_label():
                         $ active_person.draw_person(position = "walking_away")
                         "She blushes and turns around, leaving quickly."
                         $ clear_scene()
-                        call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False)
+                        call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation_1
                         "When you're finished you clean up and get back to work, your mind now crystal clear."
 
                     "Punish her for inappropriate behaviour" if office_punishment.is_active():
@@ -381,7 +381,7 @@ label horny_at_work_crisis_enhanced_label():
 
             else:
                 "Once you have some privacy you pull some porn up on your phone, pull out your dick, and take matters into your own hand."
-                call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False)
+                call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation_2
                 "When you're finished you clean up and get back to work, your mind now crystal clear."
 
 

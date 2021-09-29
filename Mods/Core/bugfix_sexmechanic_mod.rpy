@@ -408,7 +408,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if has_taken_control:
                     $ has_taken_control = False
                     $ the_person.call_dialogue("sex_take_control")
-                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags)
+                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_get_fucked
                     $ round_choice = "Girl Leave"
 
                 if round_choice == "Change" and position_choice and object_choice:

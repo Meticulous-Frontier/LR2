@@ -49,7 +49,7 @@ label alternative_start:
                 for val in range(0, len(return_arrays[array])):
                     return_arrays[array][val] += 2
 
-    call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2])
+    call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2]) from _call_initialize_game_state
 
     python:
         if easy_mode:
@@ -74,7 +74,7 @@ label alternative_start:
     $ renpy.block_rollback()
     menu:
         "Play introduction and tutorial":
-            call tutorial_start
+            call tutorial_start from _call_tutorial_start
 
         "Skip introduction and tutorial":
             $ mc.business.event_triggers_dict["Tutorial_Section"] = False
