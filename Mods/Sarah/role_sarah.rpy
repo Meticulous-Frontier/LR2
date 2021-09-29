@@ -192,7 +192,7 @@ init 2 python:
         if sarah_epic_tits_progress() == 1: #Don't run this if epic tits is in progress
             return False
         if time_of_day > 2:
-            if sarah.sluttiness > 15:
+            if sarah.sluttiness >= 20 and sarah.love >= 20:
                 if day%7 == 5:  #Saturday
                     if mc.is_at_work():
                         return True
@@ -202,7 +202,7 @@ init 2 python:
         if sarah_epic_tits_progress() == 1: #Don't run this if epic tits is in progress
             return False
         if time_of_day > 2 and day%7 == 5:  #Saturday
-            if sarah.sluttiness > 50 and mc.is_at_work():
+            if sarah.sluttiness > 40 and mc.is_at_work() and sarah.love > 40 and get_HR_director_tag("business_HR_sexy_meeting", False) == True:
                 return True
         return False
 
@@ -222,9 +222,14 @@ init 2 python:
                 return True
         return False
 
+    def Sarah_workout_in_tshirt_requirement(the_person):
+        if sarah.sluttiness > 60 and sarah.location == gym:
+            return True
+        return False
+
     def Sarah_threesome_request_requirement():
         if time_of_day > 2 and day%7 == 5: #Saturday
-            if mc.is_at_work():
+            if mc.is_at_work() and sarah.sluttiness >= 80:
                 if __builtin__.len(get_Sarah_willing_threesome_list()) >= 3: #at least three choices for who to hook up with.
                     return True
         return False
@@ -238,6 +243,7 @@ init 2 python:
         return False
 
     def Sarah_ask_for_baby_requirement():
+        return False    #Disabling this event since it is covered by breeding fetish intro.
         if mc_asleep() and sarah.has_role(girlfriend_role) and not sarah.is_pregnant():
             if sarah_threesomes_unlocked() and sarah.sex_record["Vaginal Creampies"] >= 10:
                 return True
@@ -261,15 +267,7 @@ init 2 python:
         return False
 
     def Sarah_is_fertile():
-        if sarah.event_triggers_dict.get("try_for_baby", 0) != 1:  #Only fertile if actively trying
-            return False
-        if sarah.knows_pregnant(): # She won't ask to be bred if she already knows she's pregnant
-            return False
-        if sarah.event_triggers_dict.get("fertile_start_day", -1) == -1:
-            return False
-        elif (day - sarah.event_triggers_dict.get("fertile_start_day", -1)) % 28 < 5:   #  Generally fertile for 5 days every 28 days
-            return True
-        return False
+        return sarah.is_highly_fertile()
 
     def Sarah_has_bigger_tits():
         if sarah_epic_tits_progress() > 1 or sarah.has_large_tits():
@@ -293,7 +291,7 @@ init 2 python:
         return False
 
     def Sarah_unlock_special_tit_fuck_requirement():  #Not an action, but make a requirement to make it easy to test anyway.
-        if sarah.sex_record.get("Tit Fucks", 0) > 5:
+        if sarah.sex_record.get("Tit Fucks", 0) > 3:
             if not sarah_get_special_titfuck_unlocked():
                 return True
         False
@@ -389,6 +387,10 @@ init 2 python:
         Sarah_new_tits_action = Action("Sarah new tits",Sarah_new_tits_requirement,"Sarah_new_tits_label")
         mc.business.add_mandatory_crisis(Sarah_new_tits_action)
 
+    def add_sarah_workout_in_tshirt_action():
+        Sarah_workout_in_tshirt_action = Action("Sarah works out",Sarah_workout_in_tshirt_requirement,"Sarah_workout_in_tshirt_label")
+        sarah.add_unique_on_room_enter_event(Sarah_workout_in_tshirt_action)
+
     def add_sarah_threesome_request_action():
         Sarah_threesome_request_action = Action("Sarah Threesome Request",Sarah_threesome_request_requirement,"Sarah_threesome_request_label")
         mc.business.add_mandatory_crisis(Sarah_threesome_request_action)
@@ -451,6 +453,15 @@ init 2 python:
         outfit.add_accessory(light_eye_shadow.get_copy(), [.1, .1, .12, .9])
         outfit.add_accessory(lipstick.get_copy(), [.745, .117, .235, .8])
         return outfit
+
+    def get_sarah_workout_event_outfit():
+        outfit = Outfit("Sarah Workout Outfit")
+        outfit.add_upper(tanktop.get_copy(), [1.0, 1.0, 1.0, 1.0])
+        outfit.add_lower(booty_shorts.get_copy(), [.15, .15, .15, .95])
+        outfit.add_feet(short_socks.get_copy(), [1.0, 1.0, 1.0, 1.0])
+        outfit.add_feet(sneakers.get_copy(), [.71, .4, .85, 1.0], "Pattern_1", [1.0, 1.0, 1.0, 1.0])
+        return outfit
+
 
     def create_naomi():     # initializes her and returns person
         if "naomi" in globals():
@@ -829,8 +840,6 @@ label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
     $ clear_scene()
     return
 
-
-
 label Sarah_get_drinks_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ the_person = sarah
@@ -992,6 +1001,7 @@ label Sarah_get_drinks_label():
     "You run your fingertips along her arm, until you are holding her hand as she holds her dart."
     mc.name "That's right, there was something about your posture that caught my eye."
     "You are now pushing yourself lightly up against [the_person.title]. She catches her breath when she feels your erection beginning to grow against her backside."
+    $ the_person.change_slut(2, 60)
     the_person "Ah, something caught your eye then?"
     "You quickly release her and then walk back to the table."
     the_person "Yeah, something like that. I'm not sure what it was, but I'll let you know if I can put my finger on it..."
@@ -1026,6 +1036,7 @@ label Sarah_get_drinks_label():
     "You slowly grab your darts, one by one. She pushes herself back against you."
     the_person "Of course, be careful though! The tipsh are sharp."
     mc.name "Of course, you needn't worry, I'll handle them gently..."
+    $ the_person.change_slut(2, 60)
     "As you finish your sentence, you run your free hand down along her back. You slowly stand up and move away from her. You don't want to be too lewd in a public setting like this... not yet anyway..."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.possessive_title] walks over to the line and looks at the dart board, then back at you. She is so distracted, she can barely focus on the board."
@@ -1458,6 +1469,48 @@ label Sarah_tits_reveal_label():
     $ the_person.draw_person(position = "walking_away")
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
     $ the_person.apply_planned_outfit()
+    $ add_sarah_workout_in_tshirt_action()
+    return
+
+label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event
+    $ the_person = sarah
+    $ the_person.apply_outfit(get_sarah_workout_event_outfit())
+    $ the_clothing = the_person.outfit.get_upper_top_layer()
+    "You step into the gym. You change in the locker room and get ready for a good workout."
+    "You step out and look around, trying to decide how you want to warm up. As you look around, you notice [the_person.possessive_title] stepping out from the women's lockers."
+    $ the_person.draw_person()
+    "She has on a pair of tight workout shorts and a white camisole, and you are pretty sure she isn't wearing a bra underneath it..."
+    "You walk over to her to say hello."
+    mc.name "Hello [the_person.title]. Here for some yoga?"
+    the_person "Oh hi [the_person.mc_title]! actually yoga was cancelled today, so I decided to come and get a good workout today!"
+    mc.name "I see... are you sure your outfit is appropriate?"
+    the_person "Of course... I've got everything covered! Although the shorts might be a little short."
+    "[the_person.title] gives you a wink. It appears she knows exactly what is going to happen when she works up a good sweat."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] walks off and finds an elliptical machine. She starts it up and starts working out."
+    "You decide this is too good of an opportunity to pass up, so you find a treadmill near her machine where you can watch."
+    "At first, you just kind of zone out. You hit a good pace and are enjoying your workout, almost forgetting about [the_person.title]."
+    "However, after a couple of miles, you remember her and look over to see how she is doing."
+    $ the_clothing.colour[3] *= .8
+    $ the_person.draw_person(position = "walking_away")
+    "It appears that she has started sweating, and the moisture has begun to soak into her shirt, making it a little transparent."
+    "So far, it appears that no one has really taken notice, so you continue to watch."
+    $ the_clothing.colour[3] *= .8
+    $ the_person.draw_person(position = "walking_away")
+    "After a couple more miles, the effect of her sweat on her shirt has gotten very noticable. As she works out, guys walking by have started to stop and gawk at her."
+    "You slow your treadmill down to a walk as you start to cool down, and eventually [the_person.possessive_title] stops her elliptical and gets off."
+    $ the_person.draw_person()
+    "?????" "Holy shit those tits are... AH!"
+    "When she turns around, you hear the guy on a treadmill a couple down from you trip and fall off."
+    "[the_person.title] walks over to you."
+    the_person "Hey! Wow, looks like you got a good workout in too!"
+    $ mc.change_locked_clarity(30)
+    "You can barely formulate a response with her sweat drenched titties heaving up and down as she breathes heavily."
+    mc.name "Yeah, I've certainly got my heart rate up."
+    the_person "Well, I'm gonna go shower, see you around!"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] walks off, towards the locker room."
+    "She walks by a guy and girl who are working out together. The guy stares at her tits as she walks by, and the girl he is working out with notices and smacks him."
     return
 
 label Sarah_stripclub_story_label():
@@ -1931,7 +1984,7 @@ label Sarah_threesome_request_label():
     "You drink, gossip, and laugh with [the_person.possessive_title] for a while."
     "You aren't sure how many shots you've both done. You look at the bottle. There's only about a third of it left! That feels like a lot, but you're not sure, maybe that's a normal amount."
     "[the_person.title] is talking about a meeting she had recently an employee."
-    the_person "So then I said... what exactly am I supposed to do with these pictures of [gossip_target.name] getting fucked in the backseat of Jeep Wrangler?"
+    the_person "So then I said... what exactly am I supposed to do with these pictures of [gossip_target.name] getting fucked in the backseat of a Jeep Wrangler?"
     the_person "And she said... nothing! She just thought the pictures were hot and so she was showing all the girls in the office."
     the_person "So I said, that is pretty hot... can you text me those? Hahahahaha."
     mc.name "That's great... so do you have them?"
@@ -2117,7 +2170,7 @@ label Sarah_threesome_request_label():
     $ mc.location.show_background()
     "You get to your room. When you walk in, [the_person.possessive_title] starts to strip down."
     the_person "Hope you don't mind if I sleep naked!"
-    mc.name "Umm, that would actually be ideal, if I'm being honest."
+    mc.name "That would actually be ideal, if I'm being honest."
     $ scene_manager.strip_full_outfit(person = the_person)
     $ scene_manager.update_actor(the_person, position = "missionary")
     "She flops down on your bed. You hop in bed next to her."
@@ -2337,8 +2390,6 @@ label Sarah_initial_threesome_label():
     call Sarah_spend_the_night() from sarah_threesome_spend_the_night
 
     python: # only add this if she is not already pregnant
-        if not sarah.is_pregnant():
-            add_sarah_ask_for_baby_action()
         add_naomi_reconciliation_action()
     return
 
@@ -2386,10 +2437,10 @@ label Sarah_ask_for_baby_label():
             the_person "Come fill me up, [the_person.mc_title]!"
             if the_person.get_opinion_score("creampies") < 2:   #From now on, she loves getting creamed, and has relevant dialogue
                 $ the_person.update_opinion_with_score("creampies", 2)
-            if the_person.get_opinion_score("bareback sex") < 2:    #TODO see if we can actually make her refuse condoms?
+            if the_person.get_opinion_score("bareback sex") < 2:
                 $ the_person.update_opinion_with_score("bareback sex", 2)
             $ the_person.event_triggers_dict["try_for_baby"] = 1
-            $ the_person.event_triggers_dict["fertile_start_day"] = day  #Her 5 day fertility period starts today.
+            #$ the_person.event_triggers_dict["fertile_start_day"] = day  #Her 5 day fertility period starts today.
             call Sarah_fertile_period_start_label() from sarah_initial_fertile_period_start_01
             #TODO create mandatory event for starting fertility period. Stores creampies before fertility period. Then second mandatory event at the end of the fertility period determines if pregnant based on # of creampies and RNG
             call fuck_person(the_person, start_position = missionary, start_object = bedroom.get_object_with_name("bed"), skip_intro = False, skip_condom = True, girl_in_charge = False, position_locked = True) from _sarah_ask_for_baby_01
@@ -3564,4 +3615,7 @@ label Sarah_fertile_period_end_label():
         #TODO make her pregnant!
     else:
         $ add_sarah_fertile_period_start_action()
+    return
+
+label Sarah_titfuck_mentor_label():
     return
