@@ -120,6 +120,7 @@ init -1 python:
         if self.IT_project_in_progress[1] >= self.IT_project_in_progress[0].project_cost:
             self.IT_unlock_project(self.IT_project_in_progress[0])
             self.IT_project_in_progress = None
+            self.add_mandatory_crisis(IT_project_complete_action)
         return
 
     Business.IT_increase_project_progress = IT_increase_project_progress
