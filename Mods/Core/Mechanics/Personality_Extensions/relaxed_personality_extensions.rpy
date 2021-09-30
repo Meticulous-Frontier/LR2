@@ -4,9 +4,9 @@ init 1310 python:
         valid_titles.append("Mrs. " + person.last_name)
         valid_titles.append(person.name)
         if person.sluttiness > 40:
-           valid_titles.append("Chill Bitch")
+           valid_titles.append("Candy")
         if person.sluttiness > 60:
-            valid_titles.append("Easy Slut")
+            valid_titles.append("Hot Stuff")
 
         return valid_titles
 

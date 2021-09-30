@@ -602,6 +602,28 @@ init 2 python:
         alexia.sexy_opinions["cheating on men"] = [-2, False]  # she loves her boyfriend
         return
 
+    def get_titles_extended(org_func):
+        def get_titles_wrapper(person):
+            list_of_titles = org_func(person)
+
+            if person.height > 0.94:
+                list_of_titles.append("Sexy Legs")
+                list_of_titles.append("Sky High")
+
+            if person.height < 0.85:
+                list_of_titles.append("Tinkerbell")
+                list_of_titles.append("Little Lady")
+
+            if person.get_opinion_score("high heels"):
+                list_of_titles.append("Killer Heels")
+
+            return list(set(list_of_titles))
+
+        return get_titles_wrapper
+
+    # wrap original function
+    get_titles = get_titles_extended(get_titles)
+
 init 2 python:
     global lingerie_wardrobe
     lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"), keep_primary_name = True)

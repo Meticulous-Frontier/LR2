@@ -125,9 +125,11 @@ init 1299 python:
 init 1400 python:
     # update default personalities with extra opinions (not in base game)
     relaxed_personality.common_likes.append("high heels")
+    relaxed_personality.common_dislikes.append("boots")
     introvert_personality.common_likes.append("boots")
     introvert_personality.common_dislikes.append("high heels")
     reserved_personality.common_likes.append("dresses")
+    reserved_personality.common_likes.append("boots")
     reserved_personality.common_dislikes.append("skirts")
     wild_personality.common_likes.append("high heels")
     wild_personality.common_likes.append("dresses")
