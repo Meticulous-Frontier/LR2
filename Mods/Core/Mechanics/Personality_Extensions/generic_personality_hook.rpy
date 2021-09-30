@@ -376,15 +376,16 @@ init 2 python:
         # add one bimbo to the game (on start of game)
         person = make_person(age=renpy.random.randint(21, 35), tits="DD", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
             hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
-            forced_opinions = [["high heels", 2, False], ["skimpy outfits", 2, False]])
+            forced_opinions = [["high heels", 2, False]],
+            forced_sexy_opinions = [["skimpy outfits", 2, False]])
         person.generate_home()
         person.home.add_person(person)
         return
 
     def create_alpha_personality():
         person = make_person(age = renpy.random.randint(25,35), personality = alpha_personality, relationship = "Single", stat_array = [5, 4, 3], force_random = True,
-            forced_opinions = [["high heels", 2, False], ["skimpy outfits", 2, False], ["the colour black", 2, False], ["the colour pink", -2, False], ["the colour green", -2, False]],
-            forced_sexy_opinions = [["being submissive", -1, False], ["taking control", 2, False]])
+            forced_opinions = [["high heels", 2, False], ["the colour black", 2, False], ["the colour pink", -2, False], ["the colour green", -2, False]],
+            forced_sexy_opinions = [["skimpy outfits", 2, False], ["being submissive", -1, False], ["taking control", 2, False]])
         person.generate_home()
         person.home.add_person(person)
         return
