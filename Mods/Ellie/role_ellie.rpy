@@ -405,7 +405,7 @@ label ellie_end_blackmail_label():
     "She startles. She clearly had not expected this at all."
     the_person "Me? You... after I blackmailed you and..."
     mc.name "How did you get information on my company anyway? About the nanobots?"
-    the_person "Oh gee, your cyber security is non existent. All you have full databases of information without even a firewall to protect it..."
+    the_person "Oh gee, finding your involvement was the hard part. Your password security is non existent. I used a dictionary attack and accessed Stephanie's emails using those stolen passwords." #BB- Even dated servers would have some kind of firewall. Having poor password policies is much more common and exploitable
     mc.name "I could really use someone with your talents to help me with stuff like that."
     the_person "I could help... but I can't... I signed a non-compete..."
     mc.name "I run a small company. We all know each other. I could make your official position be in HR, but you could run IT projects for me on the side. Your prior employer doesn't need to know."
@@ -437,10 +437,10 @@ label ellie_work_welcome_label():
     mc.name "So, basically, this is a small company, as you know. I'd love to bring you onboard and have you primarily running cybersecurity / IT projects."
     mc.name "However, I'm not sure that, due to the size of the company, I'll be able to keep you busy full time with those projects, so when you have down time, I'll assign you to the HR department."
     mc.name "We'll make HR department your official job position, with the other projects on side. How does that sound?"
-    the_person "Well... that sounds okay I guess. What kind of security do you currently have in place?"
-    mc.name "Ah, well... we have a fairly short policy book..."
-    the_person "Lordie. You don't have any kind of safety measures in place?"
-    mc.name "Its a small business..."
+    the_person "Well... that sounds okay I guess. What kind of security policies do you currently have in place?"
+    mc.name "Ah, well... we use the anti-virus software that came with the computers..." #BB- I changed it to this because it seems like something someone unfamiliar with network security would say
+    the_person "Lordie. You don't have any kind of security measures in place?"
+    mc.name "That's just something we haven't given much thought..." #BB- Network security would be an oversight for a small business
     the_person "Alright. Tell you what, I'll look things over today and I'll see what I can do. I'll do some research over the weekend and on Monday I'll let you know what I decide."
     mc.name "Deal! Why don't we get your onboarding paperwork complete?"
     the_person "Okay."
@@ -455,14 +455,14 @@ label ellie_work_welcome_monday_label():
     $ the_person = ellie
     $ ceo_office.show_background()
     "When you arrive at work on Monday morning, you head to your office."
-    "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]."
+    "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]"
     $ the_person.draw_person()
     ellie "Hello. I've been looking at things over the weekend like I told you I would."
     mc.name "Great. Have a seat."
     $ the_person.draw_person(position = "sitting")
     ellie "Alright. So, your cybersecurity is basically non existent. Or, was, I should say."
     mc.name "Oh?"
-    ellie "Before I left Friday, I was looking at login logs for your network... the only outside connections were from me, a few weeks ago, you know, when I got the data originally..."
+    ellie "Before I left Friday, I was looking at login logs for your network... the only outside connections were from me, a few weeks ago, you know, when I got the access originally..." #Another reason to switch from no firewall to poor password - the servers are auditing events which AFAIK is not enabled by default
     ellie "So I set up a quick security layer with VPN access so I could work on it from home over the weekend..."
     mc.name "That's... good?"
     ellie "Well, it means it won't be as easy for someone to log in to your network with bogus credentials like I did anymore..."
