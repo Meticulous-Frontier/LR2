@@ -58,6 +58,14 @@ init -1 python:
 
     Personality.get_dialogue = get_dialogue_enhanced
 
+    def get_base_personality_prefix(self):
+        if self.default_prefix:
+            return self.default_prefix
+        return self.personality_type_prefix
+
+    Personality.base_personality_prefix = property(get_base_personality_prefix, None, None, "Returns one of the base personality types.")
+
+
 
 init 4 python:
     list_of_extra_personalities = [] # Personalities not included in list_of_personalities

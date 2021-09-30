@@ -99,7 +99,7 @@ label serum_give_label_enhanced(the_person):
         if ran_num <= chances[1]:
             #Success
             if mc.business.get_employee_title(the_person) == "None":
-                if the_person.personality.personality_type_prefix == "nora":
+                if the_person == nora:
                     the_person "I'd be happy to help. I've seen your work, I have complete confidence you've tested this design thoroughly."
                 else:
                     the_person "I'd be happy to help, as long as you promise it's not dangerous of course. I've always wanted to be a proper scientist!"

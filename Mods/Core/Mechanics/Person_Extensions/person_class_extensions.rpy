@@ -337,6 +337,38 @@ init -1 python:
 
     Person.tan_style = property(get_person_tan_style, set_person_tan_style, None, "The tan style to render for a person.")
 
+    # Suggestibility changes
+
+    def get_base_suggestibility(self):
+        if not hasattr(self, "_base_suggestibility"):
+            self._base_suggestibility = renpy.random.randint(5, 15)
+            if self.personality.base_personality_prefix == wild_personality.personality_type_prefix:
+                self._base_suggestibility += 5
+            elif self.personality.base_personality_prefix == bimbo_personality.personality_type_prefix:
+                self._base_suggestibility += 10
+            elif self.personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
+                self._base_suggestibility += 3
+            elif self.personality.base_personality_prefix == reserved_personality.personality_type_prefix:
+                self._base_suggestibility -= 3
+            elif self.personality.base_personality_prefix == introvert_personality.personality_type_prefix:
+                self._base_suggestibility -= 5
+        return self._base_suggestibility
+
+    def set_base_suggestibility(self, value):
+        self._base_suggestibility = value
+
+    Person.base_suggestibility = property(get_base_suggestibility, set_base_suggestibility, None, "Every person has a base suggestibility, but varies per person.")
+
+    def get_person_suggestibility(self):
+        if not hasattr(self, "_suggestibility"):
+            self._suggestibility = 0
+        return self._suggestibility + self.base_suggestibility
+
+    def set_person_suggestibility(self, value):
+        self._suggestibility = value
+
+    Person.suggestibility = property(get_person_suggestibility, set_person_suggestibility, None, "The actual suggestibility of the person.")
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -993,25 +1025,6 @@ init -1 python:
 
     Person.call_dialogue = person_call_dialogue_extended(Person.call_dialogue)
 
-    # NO FUNCTIONALITY YET, BEDROOMS HAS BEEN MOVED TO PERSON CLASS EXTENSIONS
-    # def person_generate_home_extended(org_func):
-    #     def generate_home_wrapper(person, set_home_time = True):
-    #         result = org_func(person, set_home_time)
-    #         return result
-
-    #     return generate_home_wrapper
-
-    # Person.generate_home = person_generate_home_extended(Person.generate_home)
-
-    # BUGFIX: Remove suggest effect
-    # Sometimes an effect is no longer in bag causing an exception, fix: check if effect exists before trying to remove
-    def remove_suggest_effect_fixed(self, amount):
-        self.change_suggest(- __builtin__.max(self.suggest_bag or [0])) #Subtract the max
-        if amount in self.suggest_bag:
-            self.suggest_bag.remove(amount)
-        self.change_suggest(__builtin__.max(self.suggest_bag or [0])) # Add the new max. If we were max, it is now lower, otherwise it cancels out.
-
-    Person.remove_suggest_effect = remove_suggest_effect_fixed
 
     ## ADD OPINION EXTENSION
     ## Adds add_opinion function to Person class
@@ -1842,32 +1855,6 @@ init -1 python:
 # HELPER METHODS FOR CLASS EXTENSIONS #
 #######################################
 
-    # calculates current player mental powers
-    def player_willpower():
-        mc.power = 0
-
-        mc.power += __builtin__.int(mc.charisma*5) # Positive character modifiers
-        mc.power += __builtin__.int((mc.energy / 20) * 1.5)
-        return mc.power
-
-    # calculates current willpower of a person
-    def calculate_willpower(person):
-        willpower = __builtin__.int(person.focus * 10 + person.happiness * 0.2 - person.obedience * 0.1 - person.love * 0.2 - person.suggestibility * 0.5)
-
-        if willpower < 0:
-            willpower = 0
-        return willpower
-
-    # log will power to event log in ui
-    def log_willpower(person):
-        if (person is mc):
-            message = "Your: " + str(person.power)
-        else:
-            message = (person.title or person.name) + ": " + str(person.willpower)
-        message += " Willpower"
-        mc.log_event(message, "float_text_blue")
-        return
-
     def reset_opinions(self):
         self.opinions = {}
 
@@ -2369,26 +2356,9 @@ init -1 python:
             return False
         if self.love > 90 and self.obedience > 200:
             return False
-        return self.event_triggers_dict.get("is_jealous", True) 
+        return self.event_triggers_dict.get("is_jealous", True)
 
     Person.is_jealous = is_jealous
-
-    def attempt_opinion_training(self, the_opinion, modifier = 0):
-        if self.suggestibility + modifier > renpy.random.randint(0, 100):
-            self.increase_opinion_score(the_opinion)
-        return
-
-    def attempt_sex_skill_training(self, the_skill, modifier = 0):
-        if self.suggestibility + modifier > renpy.random.randint(0, 100):
-            self.increase_sex_skill(the_skill)
-        return
-
-    def attempt_skill_training(self, the_skill, modifier = 0):
-        if self.suggestibility + modifier > renpy.random.randint(0, 100):
-            self.increase_opinion_score(the_opinion)
-        return
-
-    Person.attempt_opinion_training = attempt_opinion_training
 
     def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, force_trance = False, trance_chance_modifier = 0, sluttiness_increase_limit = 30, add_to_log = True):
         mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
