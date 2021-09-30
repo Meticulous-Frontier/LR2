@@ -203,7 +203,7 @@ init 2:
                                 action NullAction()
                                 sensitive True
 
-                    textbutton "Suggestibility: [the_person.suggestibility]%":
+                    textbutton "Suggestibility: [person.suggestibility]%":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "How likely a girl is to slip into a trance when she cums. While in a trance she will be highly suggestible, and you will be able to directly influence her stats, skills, and opinions."
