@@ -365,6 +365,8 @@ init -1 python:
         return self._suggestibility + self.base_suggestibility
 
     def set_person_suggestibility(self, value):
+        if value < 0:   # prevent going below 0
+            value = 0
         self._suggestibility = value
 
     Person.suggestibility = property(get_person_suggestibility, set_person_suggestibility, None, "The actual suggestibility of the person.")
