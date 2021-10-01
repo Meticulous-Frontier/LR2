@@ -699,7 +699,8 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 $ the_person.change_arousal(10)
                 $ mc.change_arousal(10)
                 $ mc.change_locked_clarity(10)
-                $ the_person.add_situational_slut("horny", 10, "She submits to you")
+                $ the_person.add_situational_slut("horny", 10, "You take charge")
+                $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
                 the_person "Mmm, I'm ready... do whatever you want, [the_person.mc_title]..."
                 call fuck_person(the_person, private = True) from _erica_gets_fucked_by_her_man_in_lockerroom_01
             "Let her take the lead":
@@ -707,17 +708,19 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 "You give your dick a stroke. She chuckles and leans forward."
                 $ mc.change_locked_clarity(20)
                 the_person "Don't worry, I know just what to do."
-                $ the_person.add_situational_slut("horny", 20, "She takes the lead")
+                $ the_person.add_situational_slut("horny", 10, "She takes the lead")
+                $ the_person.add_situational_obedience("submissive", -20, "You submit to her")
                 "She is excited to take the lead."
                 call get_fucked(the_person, private= True) from _erica_pleases_her_man_in_lockerroom_01
         $ the_report = _return
         $ the_person.draw_person(position = "sitting")
+        $ the_person.clear_situational_slut("horny")
+        $ the_person.clear_situational_obedience("submissive")
         if the_report.get("girl orgasms", 0) > 0:
             "[the_person.title] sits down on the bench. You can see her trembling, feeling the aftershocks of her orgasm."
             the_person "Mmm... god I'm glad you know how to use that cock."
         else:
             "[the_person.title] sits down on the bench, catching her breath."
-        $ the_person.clear_situational_slut("horny")
         "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
         "You share a quick kiss before you part ways."
     elif erica_on_hate_path():
@@ -759,7 +762,8 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     "She starts to protest, but quickly stops when she realizes you are going to eat her out."
                     $ the_person.change_happiness(-3)
                     $ the_person.change_obedience(5)
-                    $ the_person.add_situational_slut("horny", 10, "She submits to you")
+                    $ the_person.add_situational_slut("horny", 10, "You take charge")
+                    $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
                     $ the_person.draw_person(position = "missionary")
                     call fuck_person(the_person, private = True, start_position = cunnilingus, start_object = make_bench()) from _erica_gets_fucked_by_her_man_in_lockerroom_02
                 "Let her take the lead":
@@ -768,19 +772,20 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     $ the_person.change_obedience(-5)
                     $ mc.change_locked_clarity(20)
                     the_person "Don't worry, I know just what to do."
-                    $ the_person.add_situational_slut("horny", 20, "She takes the lead")
+                    $ the_person.add_situational_slut("horny", 10, "She takes the lead")
+                    $ the_person.add_situational_obedience("submissive", -20, "You submit to her")
                     "She is excited to take the lead."
                     call get_fucked(the_person, private= True) from _erica_pleases_her_man_in_lockerroom_02
 
             $ the_report = _return
             $ the_person.clear_situational_slut("horny")
+            $ the_person.clear_situational_obedience("submissive")
             $ the_person.draw_person(position = "sitting")
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.title] sits down on the bench. You can see her trembling, feeling the aftershocks of her orgasm."
                 the_person "Mmm... god I'm glad you know how to make a girl cum so hard."
             else:
                 "[the_person.title] sits down on the bench, catching her breath."
-            $ the_person.clear_situational_slut("horny")
             "Without another word, you and [the_person.title] take a quick shower, then get ready and leave the gym."
     return
 
