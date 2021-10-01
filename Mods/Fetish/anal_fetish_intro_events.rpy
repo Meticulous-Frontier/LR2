@@ -583,7 +583,7 @@ label anal_fetish_mom_intro_label():
     $ the_person.change_arousal(15) #30
     $ mc.change_arousal(10) #40
     "You make out for a while with [the_person.possessive_title], the heat and passion between the two of you growing constantly. Finally, she breaks the kiss."
-    the_person "Oh [the_person.mc_title]... let your mother take of you tonight, okay?"
+    the_person "Oh [the_person.mc_title]... let your mother take care of you tonight, okay?"
     mc.name "Okay [the_person.title]."
     if the_person.has_breeding_fetish(): #She likes getting pregnant
         the_person "I know we normally do this more traditionally... but tonight I want to do things a little bit differently."
