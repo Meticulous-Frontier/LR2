@@ -197,8 +197,7 @@ screen cheat_menu():
         }
     default relation_stats = {
         "Love": ["love", "love", 10, 0, (-100, 100)],
-        "Base Suggestibility": ["_base_suggestibility", "_base_suggestibility", 1, 1, (0, 25)],
-        "Suggestibility": ["_suggestibility", "_suggestibility", 10, 2, (0, 100)],
+        "Suggestibility": ["suggestibility", "suggestibility", 10, 2, (0, 100)],
         "Obedience": ["obedience", "obedience", 10, 3, (0, 300)],
         "Happiness": ["happiness", "happiness", 10, 4, (0, 300)],
         "Arousal": ["arousal", "arousal", 10, 5, (0, 100)],

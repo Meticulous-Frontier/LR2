@@ -14,7 +14,7 @@ init 2 python:
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, tan_style = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
-        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
+        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None, start_suggest = None,
         title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
         generate_insta = None, generate_dikdok = None, generate_onlyfans = None,
         force_random = False, forced_opinions = None, forced_sexy_opinions = None):
@@ -76,6 +76,23 @@ init 2 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit,
                 generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans)
+
+        # initialize start suggestibility
+        if return_character.suggestibility == 0:
+            start_suggest = renpy.random.randint(5, 15)
+
+            if return_character.personality.base_personality_prefix == wild_personality.personality_type_prefix:
+                start_suggest += 5
+            elif return_character.personality.base_personality_prefix == bimbo_personality.personality_type_prefix:
+                start_suggest += 10
+            elif return_character.personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
+                start_suggest += 3
+            elif return_character.personality.base_personality_prefix == reserved_personality.personality_type_prefix:
+                start_suggest -= 3
+            elif return_character.personality.base_personality_prefix == introvert_personality.personality_type_prefix:
+                start_suggest -= 5
+
+            return_character.change_suggest(start_suggest)
 
         if tan_style is None:
             if renpy.random.randint(0, 1) == 1: # 50% chance on random tan (could be no_tan)

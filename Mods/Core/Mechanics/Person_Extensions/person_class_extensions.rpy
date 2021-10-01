@@ -337,40 +337,6 @@ init -1 python:
 
     Person.tan_style = property(get_person_tan_style, set_person_tan_style, None, "The tan style to render for a person.")
 
-    # Suggestibility changes
-
-    def get_base_suggestibility(self):
-        if not hasattr(self, "_base_suggestibility"):
-            self._base_suggestibility = renpy.random.randint(5, 15)
-            if self.personality.base_personality_prefix == wild_personality.personality_type_prefix:
-                self._base_suggestibility += 5
-            elif self.personality.base_personality_prefix == bimbo_personality.personality_type_prefix:
-                self._base_suggestibility += 10
-            elif self.personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
-                self._base_suggestibility += 3
-            elif self.personality.base_personality_prefix == reserved_personality.personality_type_prefix:
-                self._base_suggestibility -= 3
-            elif self.personality.base_personality_prefix == introvert_personality.personality_type_prefix:
-                self._base_suggestibility -= 5
-        return self._base_suggestibility
-
-    def set_base_suggestibility(self, value):
-        self._base_suggestibility = value
-
-    Person.base_suggestibility = property(get_base_suggestibility, set_base_suggestibility, None, "Every person has a base suggestibility, but varies per person.")
-
-    def get_person_suggestibility(self):
-        if not hasattr(self, "_suggestibility"):
-            self._suggestibility = 0
-        return self._suggestibility + self.base_suggestibility
-
-    def set_person_suggestibility(self, value):
-        if value < 0:   # prevent going below 0
-            value = 0
-        self._suggestibility = value
-
-    Person.suggestibility = property(get_person_suggestibility, set_person_suggestibility, None, "The actual suggestibility of the person.")
-
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
