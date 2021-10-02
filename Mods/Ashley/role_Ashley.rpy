@@ -320,7 +320,7 @@ label ashley_hire_directed_label():
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
-        $ scene_manager.update_actor(the_person, position = "walking_away")
+        $ the_person.draw_person(position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as you leave the room. You hope you made the right decision!"
         $ ashley.add_unique_on_talk_event(ashley_first_talk)
