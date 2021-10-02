@@ -365,7 +365,7 @@ label ashley_room_excitement_overhear_label(the_person):
     return
 
 label ashley_ask_sister_about_attitude_label(the_person):
-    "You approach [the_person.title], intent to ask her about her sister."
+    "You approach [the_person.title], intent on asking her about her sister."
     mc.name "Hello [the_person.title]. Do you have a moment?"
     the_person "Of course sir. What can I do for you?"
     "You lower your voice. You don't necessarily need anyone overhearing you."

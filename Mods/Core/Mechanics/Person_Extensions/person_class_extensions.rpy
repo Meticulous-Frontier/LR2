@@ -378,7 +378,7 @@ init -1 python:
 
     def person_pubes_description_string(self):
         if self.pubes_style == shaved_pubes:
-            return "bold"
+            return "bald"
         if self.pubes_style == landing_strip_pubes:
             return "brazilian waxed"
         if self.pubes_style == default_pubes:
