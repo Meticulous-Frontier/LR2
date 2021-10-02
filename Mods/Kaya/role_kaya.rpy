@@ -497,13 +497,13 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
         "As you look at the two girls, you are suddenly struck by how similar they are. The way they talk and relate to each other."
         "[the_person.title] cracks a joke... they almost laugh the same? It's a little crazy how similar they are."
         "While you are really attracted to [the_person.possessive_title], it is kind of weird seeing her interact with your sister."
-        $ kaya.event_triggers_dict["incest_warnings"] = 0
+        $ kaya.event_triggers_dict["incest_warnings"] = 1
     else:   #You've started down the incest path with Lily
         "As you watch the two girls interact, you can't help but start to get turned on."
         "Two hot college coeds. One sleeps in your house and has already started opening up to you sexually, the other is right on the brink."
         "You can't help but imagine the two girls making out... getting on their knees in front of you, one of them taking the tip of your cock in her mouth while the other licks the shaft..."
         $ mc.change_locked_clarity(20)
-        $ kaya.event_triggers_dict["incest_warnings"] = 1
+        $ kaya.event_triggers_dict["incest_warnings"] = 0
     the_person "[the_person.mc_title]?"
     lily "Earth to [mc.name]?"
     mc.name "I'm sorry... I spaced out for a second."
