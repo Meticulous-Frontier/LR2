@@ -789,7 +789,7 @@ label HR_director_review_discoveries_label(the_person):
                     the_person "That's amazing! And it says here it won't leave behind stretch marks?"
                     mc.name "Correct. We were able to combine the enhancement of fatty tissue with a temporary increase in skin elasticity."
                     the_person "That incredible... but I can't afford..."
-                    "She furrows her brow when she sees the initial estimate of the cost of the synthesization."
+                    "She furrows her brow when she sees the initial estimate for the cost of synthesis."
                     the_person "I mean uh, it'll be interesting to see how this progresses..."
                     "You notice [the_person.title] writing herself a note to visit the research department later."
                     #TODO add breast serum sneak event to mandatory list
