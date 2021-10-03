@@ -318,7 +318,7 @@ label casual_athlete_phase_one_label(the_person):
         $ the_person.apply_planned_outfit()
 
         "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
-        $ renpy.show("restaurant", what = restaraunt_background)
+        $ renpy.show("restaurant", what = restaraunt_background, layer = "master")
         $ the_person.draw_person( position = "sitting")
 
         the_person "So... are you interested in a friends with benefits set up?"
