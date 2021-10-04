@@ -546,7 +546,7 @@ label kaya_lily_study_night_intro_label():
     $ mc.location.show_background()
     "Once in the kitchen you find the bottle of wine in the fridge and quickly get it open."
     "You grab two wine glasses and pour one. Hmm... maybe you could slip a serum into the girls drink really quick..."
-    call give_serum(mom) from _call_give_kaya_serum_home_study_01
+    call give_serum(mom, add_to_log = False) from _call_give_kaya_serum_home_study_01
     if _return:
         "You have JUST finished mixing a serum into one glass and are getting ready to pour another when a voice from behind startles you."
     else:
