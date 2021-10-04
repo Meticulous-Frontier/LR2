@@ -34,7 +34,7 @@ init -1 python:
             if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
                 research_needed_string = "\nResearch Impossible"
             else:
-                research_needed_string = "(" +str(trait.current_research)+"/"+ str(trait.research_needed) + ")"
+                research_needed_string = "(" +str(__builtin__.round(trait.current_research, 1))+"/"+ str(int(trait.research_needed)) + ")"
 
             return trait.name + " " + research_needed_string + trait_tags
 
