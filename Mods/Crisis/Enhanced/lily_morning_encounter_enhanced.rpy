@@ -4,24 +4,25 @@ init 5 python:
 
 label lily_morning_encounter_enhanced_label():
     # You run into Lily early in the morning as she's going to get some fresh laundry. At low sluttiness she is embarrassed, at high she is completely naked.
-    $ the_person = lily
-    $ comfortable = False
-    if the_person.effective_sluttiness() >= 60:
-        $ the_person.apply_outfit(Outfit("Nude"))
-    else:
-        $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, guarantee_output = True))
+    python:
+        the_person = lily
+        comfortable = False
+        if the_person.effective_sluttiness() >= 60:
+            the_person.apply_outfit(Outfit("Nude"))
+        else:
+            the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, guarantee_output = True))
 
-    if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
-        $ comfortable = True
-    elif the_person.outfit.wearing_panties():
-        if the_person.effective_sluttiness("bare_tits") > 40:
-            $ comfortable = True
-    elif the_person.outfit.wearing_bra():
-        if the_person.effective_sluttiness("bare_pussy") > 40:
-            $ comfortable = True
-    else: #nude
-        if the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) > 40:
-            $ comfortable = True
+        if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
+            comfortable = True
+        elif the_person.outfit.wearing_panties() and the_person.effective_sluttiness("bare_tits") > 40:
+            comfortable = True
+        elif the_person.outfit.wearing_bra() and the_person.effective_sluttiness("bare_pussy") > 40:
+            comfortable = True
+        elif the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) > 40:
+            comfortable = True
+
+        mc.change_location(hall)
+        mc.location.show_background()
 
     "You wake up in the morning to your alarm. You get dressed and leave your room to get some breakfast."
     $ the_person.draw_person()
@@ -215,9 +216,10 @@ label lily_morning_encounter_enhanced_label():
                 "Follow her" if the_person.effective_sluttiness("bare_pussy") > 40:
                     call lily_morning_encounter_follow_up_one_label(the_person) from _call_from_lily_morning_encounter_enhanced_label_1
                 "Grab her wrist" if mc.business.event_triggers_dict.get("family_threesome", False) == True:
-                     call lily_morning_encounter_follow_up_two_label(the_person) from _call_from_lily_morning_encounter_enhanced_label_2
+                    call lily_morning_encounter_follow_up_two_label(the_person) from _call_from_lily_morning_encounter_enhanced_label_2
                 "Let her go":
-                    pass
+                    $ _return = False
+
         if _return:
             "Very happy with how your morning has gone so far you head back to your room to start getting ready for the day."
             $ mc.change_location(bedroom)
@@ -311,7 +313,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 the_person "He is just so good, I can't get enough."
                 the_other_person "I'll let you two have your fun."
                 mc.name "Thanks, [the_other_person.title], but you don't need to be left out."
-        the_other_person "What ever will make you happiest [the_other_person.mc_title]"
+        the_other_person "What ever will make you happiest [the_other_person.mc_title]."
         the_person "Yeah [the_person.mc_title], tell us what you want to do."
         "It seems like you have full control over what happens next. Who do you want to spend more time with?"
         menu:
@@ -337,6 +339,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
             "Both" if willing_to_threesome(the_person, the_other_person):
                 mc.name "We're all here, and time as a family is important. [the_person.title] why don't you help me take care of [the_other_person.title]."
                 mc.name "First I think there are far too many clothes being worn in this room."
+                $ scene_manager.update_actor(the_other_person, position = "stand3")
                 $ scene_manager.strip_full_outfit()     # they both undress
                 call start_threesome(the_person, the_other_person, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen1
             "No one":
@@ -414,6 +417,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             mc.name "Your body is nothing to be ashamed of [the_other_person.possessive_title], in fact you could join us if you want."
                             the_other_person "That is such a generous offer. I guess I can change my breakfast plans."
                             mc.name "Well then, you are wearing far too many clothes."
+                            $ scene_manager.update_actor(the_other_person, position = "stand3")
                             $ scene_manager.strip_full_outfit()
                             call start_threesome(the_person, the_other_person, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen2
 
@@ -483,6 +487,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     $ kitchen_threesome = True
                     if kitchen_threesome == True:
                         mc.name "Well then, I guess we need to decide who goes first."
+                        $ scene_manager.update_actor(other_person, position = "stand3", emotion = "happy")
                         $ scene_manager.strip_full_outfit()
                         call start_threesome(the_person, the_other_person, start_position = Threesome_double_down) from _call_lily_morning_encounter_threesome_event_kitchen3
                     else:
