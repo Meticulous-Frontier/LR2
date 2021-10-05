@@ -186,8 +186,8 @@ init -1 python:
 
     def generate_random_appropriate_outfit(person, outfit_type = "FullSets"):
         wardrobe_builder = WardrobeBuilder(person)
-        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(person.effective_sluttiness() / 10, 12), __builtin__.min(person.effective_sluttiness() / 40, 5))
-        return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, allow_skimpy = person.effective_sluttiness() > 80)
+        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(person.sluttiness / 10, 12), __builtin__.min(person.sluttiness / 40, 5))
+        return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, allow_skimpy = person.sluttiness > 80)
 
     def build_valid_uniform_wardrobe(self, person):
         valid_full_outfits = [] #We begin by building lists of all the uniform pieces that might be valid given our current uniform rules. This allows for the rules to update without requring any changes to the uniform wardrobe directly.
