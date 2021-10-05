@@ -88,7 +88,7 @@ init 2 python:
         person.event_triggers_dict["immaculate_conception"] = person.has_taboo("vaginal_sex")
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
         person.event_triggers_dict["preg_start_date"] = start_day
-        person.event_triggers_dict["preg_announce_day"] = start_day + renpy.random.randint(10, 14)
+        person.event_triggers_dict["preg_announce_day"] = start_day + renpy.random.randint(7, 11)
         person.event_triggers_dict["preg_tits_date"] = start_day + 14 + renpy.random.randint(0,5)
         person.event_triggers_dict["preg_transform_day"] = start_day + 30 + renpy.random.randint(0,10)
         person.event_triggers_dict["preg_finish_announce_day"] = start_day + 90 + renpy.random.randint(0,10)
