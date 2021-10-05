@@ -1197,7 +1197,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 the_person "This morning, I just want to make you feel good, and judging on last time, I think it will make me feel good too."
                 mc.name "Oh yeah? What do you have in mind?"
                 the_person "Why don't you just sit back in your chair and find out."
-            mc.name "Sounds good, do you thing."
+            mc.name "Sounds good, do your thing."
             $ scene_manager.update_actor(the_person, position = "back_peek")
             "[the_person.possessive_title] turns away from you, her ass now right at eye level. She pulls her cheeks apart slightly, giving you an amazing view of her puckered hole."
             $ mc.change_locked_clarity(50)
