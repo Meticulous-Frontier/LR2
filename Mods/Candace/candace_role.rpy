@@ -591,6 +591,7 @@ label candace_talk_about_pay(the_person):
 label candace_convince_to_quit_label(the_person):
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person)
+    $ ex_name = ophelia_get_ex_name()
     "Alright. This is it. It's now or never."
     mc.name "[the_person.title]... can I talk to you about something? Something important?"
     the_person "Oh, of course! What is it?"
@@ -608,7 +609,7 @@ label candace_convince_to_quit_label(the_person):
     $ scene_manager.update_actor(the_person, emotion = "sad")
     the_person "I want to... I really do..."
     mc.name "Then why don't you?"
-    the_person "I'm... I'm so scared! [the_person.SO_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
+    the_person "I'm... I'm so scared! [ex_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
     the_person "He says it's illegal! That I'll go to jail for being a prostitute!"
     mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
@@ -639,7 +640,7 @@ label candace_convince_to_quit_label(the_person):
     $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
     salon_manager "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
     the_person "Hi! You can call me [the_person.name]."
-    salon_manager "You know, I used to date [the_person.SO_name] too!"
+    salon_manager "You know, I used to date [ex_name] too!"
     the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
     salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
     the_person "Okay! I love selfies."
@@ -647,7 +648,7 @@ label candace_convince_to_quit_label(the_person):
     salon_manager "There we go! That will be a great picture to send with your break up text..."
     "Oh boy. Things are about to get juicy."
     salon_manager "Let me see your phone now. Okay here we go."
-    salon_manager "Guess who I met today, [the_person.SO_name]! Turns out we having something in common!.."
+    salon_manager "Guess who I met today, [ex_name]! Turns out we having something in common!.."
     "You spend the next hour or so getting [the_person.title] all set up. [salon_manager.title] really does think of everything."
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
