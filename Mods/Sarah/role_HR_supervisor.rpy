@@ -1086,7 +1086,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "She spreads her legs, her pussy on display in front of you."
             else:
                 if the_person.outfit.can_half_off_to_vagina():
-                    "You move [the_person.possessive_title] clothes out of the way."
+                    "You move [the_person.possessive_title]'s clothes out of the way."
                     $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                 else:
                     "You start to strip [the_person.possessive_title] down."
@@ -1129,7 +1129,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
                 else:
                     if the_person.outfit.can_half_off_to_vagina():
-                        "You move [the_person.possessive_title] clothes out of the way."
+                        "You move [the_person.possessive_title]'s clothes out of the way."
                         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                     else:
                         "You start to strip [the_person.possessive_title] down."
@@ -1342,7 +1342,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
             if the_person.outfit.can_half_off_to_vagina():
-                "You move [the_person.possessive_title] clothes out of the way."
+                "You move [the_person.possessive_title]'s clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
                 "You start to strip [the_person.possessive_title] down."
