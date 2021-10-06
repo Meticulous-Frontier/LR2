@@ -891,7 +891,8 @@ label candace_midnight_wakeup_label():
     "Oh boy, this is going to be interesting..."
     police_chief "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
     police_chief "When he said no and walked away, he could hear her making passes at the other girls in the cell."
-    police_chief "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing."
+    police_chief "So I get here, bring her to my office and wouldn't you know it, it's the woman that was walking around topless at the mall the other day!."
+    police_chief "I start asking her questions, you know. Where are you from, where's your family, that sort of thing."
     police_chief "She says she doesn't know, so I ask about friends and she says she just has a couple..."
     police_chief "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
     "You take a moment to consider how to answer this. You are going to need to proceed carefully."
@@ -1326,7 +1327,7 @@ label candace_cure_bimbo_label():
     "Her brow furrows as she starts to recall."
     candace "I was the lead researcher, at another company, but we had just received word that our government funding was going to get cut if we couldn't get results."
     "She clears her throat and continues."
-    candace "I was desperate, but also overconfident. I decided to rush human trials, but my boss said no. So I decided to take it myself."
+    candace "I was desperate, but also overconfident. I wanted to rush human trials, but my boss said no. So I decided to take it myself."
     the_person "What were you trying to make?"
     candace "It seems so silly now. It was a drug designed for espionage. To reduce someone to their basest desires and to be completely open to suggestion and to be truthful."
     candace "The implications of the drug in the hands of the intelligence agency were immense."
@@ -1428,6 +1429,7 @@ label candace_meet_doctor_candace_label():
     the_person "But beyond that, to be in this industry, to be in a position to actually help, and to make the pushes necessary to formulate the cure, and to give it to me."
     "[the_person.title] looks you right in the eye and delivers her judgement."
     the_person "It could have only been you. You saved me. And for that, I owe you everything."
+    $ the_person.change_love(100, 100)
     mc.name "Don't be ridiculous, you don't owe me anything..."
     the_person "I know you feel that way. But it goes beyond that too. You have your flaws, sure. Every man has a vice. But you mean everything to me."
     if the_person.is_girlfriend():
