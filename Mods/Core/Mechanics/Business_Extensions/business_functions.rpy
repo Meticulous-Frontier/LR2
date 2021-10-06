@@ -142,14 +142,17 @@ init -1 python:
 
     Business.IT_project_is_active = IT_project_is_active
 
+    ##### Public sex related functions. Right now just placeholders, but we need these functions for later use when developing exhibitionism ####
 
+    def topless_is_legal(self):
+        return False
 
-label test_IT_screen:
-    # hide screen main_ui
-    # hide screen phone_hud_ui
-    # hide screen business_ui
-    call screen it_project_screen
-    # show screen phone_hud_ui
-    # show screen business_ui
-    # show screen main_ui
-    return
+    def nudity_is_legal(self):
+        return False
+
+    def public_sex_is_legal(self):
+        return False
+
+    Business.topless_is_legal = topless_is_legal
+    Business.nudity_is_legal = nudity_is_legal
+    Business.public_sex_is_legal = public_sex_is_legal

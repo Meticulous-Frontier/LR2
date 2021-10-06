@@ -155,7 +155,7 @@ init -2 python:
                         if delay > 0:
                             actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = am[2]) #Draw the strip choice being removed from our current outfit
                         else:
-                            self.outfit.remove_clothing(the_clothing)
+                            actor.person.outfit.remove_clothing(the_clothing)
                         keep_stripping = True
                         renpy.pause(delay)
             return

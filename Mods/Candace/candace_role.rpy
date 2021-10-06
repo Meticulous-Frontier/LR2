@@ -49,10 +49,16 @@ init 2 python:
                 return True
         return False
 
+    def candace_topless_at_mall_requirement(the_person):
+        if the_person.location in [mall, gym, home_store, clothing_store, office_store, mall_salon]:
+            if the_person.love >= 40:
+                return True
+        return False
+
     def candace_midnight_wakeup_requirement():
-        if mc.business.research_tier >= 3 and candace_starbuck_are_friends():
+        if mc.business.research_tier >= 3 and candace_starbuck_are_friends() and candace.love >= 60:
             if time_of_day == 4:
-                if renpy.random.randint(0,100) < 10: #Average 10 days
+                if renpy.random.randint(0,100) < 15: #Average 7 days
                     return True
         return False
 
@@ -88,6 +94,7 @@ init 2 python:
     candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
     candace_overhear_supply_order = Action("Overhear supply call", candace_overhear_supply_order_requirement, "candace_overhear_supply_order_label")
     candace_supply_order_discount = Action("Candi reports success", candace_supply_order_discount_requirement, "candace_supply_order_discount_label")
+    candace_topless_at_mall = Action("Candi going topless", candace_topless_at_mall_requirement, "candace_topless_at_mall_label")
     candace_midnight_wakeup = Action("Candi gets arrested", candace_midnight_wakeup_requirement, "candace_midnight_wakeup_label")
     candace_begin_cure_research = Action("Candi moves", candace_begin_cure_research_requirement, "candace_begin_cure_research_label")
     candace_anti_bimbo_serum = Action("Head Researcher makes a plan", candace_anti_bimbo_serum_requirement, "candace_anti_bimbo_serum_label")
@@ -738,6 +745,7 @@ label candace_overhear_supply_order_label(the_person):
     $ mc.business.add_mandatory_crisis(candace_supply_order_discount)
     return
 
+
 label candace_supply_order_discount_label():
     $ the_person = candace
     $ scene_manager = Scene()  #Clean Scene
@@ -758,6 +766,78 @@ label candace_supply_order_discount_label():
     $ candace.event_triggers_dict["supply_discount_active"] = True
     $ scene_manager.clear_scene()
     "You now receive a 10\% discount on all supply orders."
+
+    $ candace.add_unique_on_room_enter_event(candace_topless_at_mall)
+    return
+
+label candace_topless_at_mall_label(the_person):
+    $ scene_manager = Scene()
+    python:
+        if not "police_chief" in globals(): # save compatibility
+            add_police_chief_character()
+
+        if police_chief.title is None:  # haven't met, set title
+            police_chief.set_possessive_title("the police chief")
+            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_title("Officer " + police_chief.last_name)
+    "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
+    "When you walk over, you find [the_person.possessive_title], and it immediately becomes clear why there is a crowd gathering around..."
+    if mc.business.topless_is_legal():  #Right now it is always illegal
+        pass
+    else:
+        $ scene_manager.add_actor(the_person)
+        $ scene_manager.strip_to_tits(person = the_person, delay = 0)
+        $ scene_manager.update_actor(the_person)
+        "[the_person.title] is walking around the PUBLIC mall topless. Something that you are pretty sure is illegal."
+        mc.name "[the_person.title], what are you doing?"
+        the_person "Oh hey [the_person.mc_title]! Not much, I was just going for a little walk."
+        "?????" "Alright everyone, what seems to be the issue here? Let's move along now, okay?"
+        "You look over. It's a police officer!"
+        $ scene_manager.add_actor(police_chief, display_transform = character_left_flipped)
+        police_chief "Come on now, let's all just go back to our shopping."
+        "Suddenly, she sees [the_person.title]"
+        police_chief "Move along now... holy shit!"
+        $ scene_manager.update_actor(police_chief, emotion = "angry")
+        police_chief "Excuse me Ma'am? You can't just walk around the mall with your titties out!"
+        $ scene_manager.update_actor(the_person, emotion = "sad")
+        the_person "I... I can't? Really? Why not?"
+        police_chief "Ma'am... That's ILLEGAL! That is called public indecency!"
+        the_person "But... everyone always loves it when I get my tits out..."
+        police_chief "Sure, in the privacy of your own home you can do whatever, but this is a public place!"
+        police_chief "I'm gonna have to run you in, now put your hands behind you back."
+        "You decide to intervene."
+        mc.name "I'm sorry officer, I know this looks bad, but I know her. I'll buy her a shirt really quick and get her covered up."
+        mc.name "I'm sure she won't do it again!"
+        "[police_chief.possessive_title] looks at you, then back at [the_person.title], then shakes her head."
+        police_chief "I mean, there are worse crimes that could be committed here... Okay, just make it quick."
+        "You quickly grab [the_person.possessive_title]'s hand and lead her into the clothing store."
+        $ scene_manager.remove_actor(police_chief)
+        $ mc.change_location(clothing_store)
+        $ mc.location.show_background()
+        "You grab the first t-shirt you find and have her put it on."
+        $ the_person.outfit.add_upper(tanktop.get_copy(), [1.0, 1.0, 1.0, 1.0])
+        the_person "This shirt is boring!"
+        mc.name "[the_person.title], I know. But you can't be doing that, okay?"
+        the_person "I still don't understand what I was doing wrong!"
+        mc.name "There are laws in place! As nice as it would be, you can just walked around in public, topless."
+        mc.name "If you want to do that at work, that is fine, but you have to wear a shirt to the mall!"
+        "[the_person.possessive_title] pouts."
+        the_person "Okay. I'm sorry [the_person.mc_title], I didn't mean to cause you trouble."
+        "You walk with [the_person.title] to the check out counter. You have the cashier ring up the shirt."
+        $ mc.business.change_funds(-20)
+        "After you check out, suddenly [the_person.possessive_title] turns to you and hugs you."
+        $ scene_manager.update_actor(the_person, position = "kissing")
+        the_person "Thank you. You've always been so nice to me..."
+        "You put your hands on her back and hold her for a few seconds."
+        "You start to wonder if she is going to be okay. Whatever happened that turned her into a bimbo, she seems to be barely functional."
+        mc.name "You stay out of trouble, okay?"
+        $ scene_manager.update_actor(the_person, emotion = "happy", position = "stand3")
+        "[the_person.title] let's go of you and gives you a big smile."
+        the_person "Okay!"
+        mc.name "I'll see you at work."
+        the_person "Yes Sir!"
+    $ the_person.change_love(5, 60)
+    $ scene_manager.clear_scene()
     $ mc.business.add_mandatory_crisis(candace_midnight_wakeup)
     return
 
@@ -787,7 +867,7 @@ label candace_midnight_wakeup_label():
     $ mc.change_locked_clarity(10)
     police_chief "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
     police_chief "We were just gonna send her off, but I didn't feel good about her walking home alone this time of night so I asked if she could call anyone and she gave me your name and number."
-    "That... Sounds exactly like something [the_person.name] would do."
+    "That sounds exactly like something [the_person.name] would do."
     mc.name "Okay... I'll be there in 20 minutes."
     "You hang up the phone and take a minute. [the_person.name], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
     "You get up and quickly get yourself dressed. You leave a quick note on the counter in case anyone notices you are gone in the middle of the night and head out. It's a fairly short walk to the police station."
