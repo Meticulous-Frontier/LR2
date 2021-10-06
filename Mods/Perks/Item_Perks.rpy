@@ -9,7 +9,9 @@ init -1 python:
     def male_strapon_save_load():
         if SB_doggy_anal_dildo_dp not in list_of_positions:
             list_of_positions.append(SB_doggy_anal_dildo_dp)
+        if SB_doggy_anal_dildo_dp not in doggy.connections:
             doggy.link_positions(SB_doggy_anal_dildo_dp,"transition_doggy_SB_doggy_anal_dildo_dp")
+        if SB_doggy_anal_dildo_dp not in doggy_anal.connections:
             doggy_anal.link_positions(SB_doggy_anal_dildo_dp,"transition_doggy_anal_SB_doggy_anal_dildo_dp")
         if piledriver_DP not in piledriver.connections:
             piledriver.link_positions(piledriver_DP,"transition_piledriver_piledriver_DP")
