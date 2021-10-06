@@ -425,20 +425,14 @@ init -1 python:
         if mc.business.serum_production_array is None:
             return
 
+        # calculate bonus production
         prod_inc = 0
-        for person in mc.business.production_team:
-            prod_inc += production_potential_stat(person)
+        for person in [x for x in mc.business.production_team if x in mc.business.p_div.people]:
+            prod_inc += __builtin__.int(((3*person.focus) + person.int + (2*person.production_skill) + 10) * (mc.business.team_effectiveness / 100.0))
+
         production_amount = __builtin__.round(prod_inc * 0.25)
 
         #Calculate the supplies used from the normal production amount
-        supply_hit = production_amount
-        if production_amount > mc.business.supply_count:
-            mc.business.supply_count = 0
-            return 0
-        else:
-            mc.business.supply_count -= supply_hit
-
-        #Now calculate bonus production
         if production_amount > mc.business.supply_count:
             production_amount = mc.business.supply_count
 
@@ -449,7 +443,7 @@ init -1 python:
 
             proportional_production = __builtin__.int((serum_weight/100.0) * production_amount) #Get the closest integer value for the weighted production we put into the serum
             mc.business.production_used += proportional_production #Update our usage stats and subtract supply needed.
-            mc.business.supply_count += -proportional_production
+            mc.business.supply_count -= proportional_production
 
 
             mc.business.serum_production_array[production_line][2] += proportional_production
@@ -461,8 +455,7 @@ init -1 python:
                 mc.business.add_counted_message("Produced " + mc.business.serum_production_array[production_line][0].name,serum_count*mc.business.batch_size) #Give a note to the player on the end of day screen for how many we made.
                 mc.business.serum_production_array[production_line][2] -= serum_count * mc.business.serum_production_array[production_line][0].production_cost
                 mc.business.inventory.change_serum(mc.business.serum_production_array[production_line][0],serum_count*mc.business.batch_size) #Add the number serums we made to our inventory.
-        if mc.business.supply_count < 0:
-            mc.business.supply_count = 0
+
         return production_amount
 
     def research_team_building_project_on_day():
