@@ -482,7 +482,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                                     $ scene_manager.remove_actor(the_person)
                                     $ the_person = the_other_person
 
-                                "No":
+                                "No" if willing_to_threesome(the_person, the_other_person):
                                     mc.name "Actually, I think you could help me take care of [the_other_person.title]."
                                     $ kitchen_threesome = True
                     if kitchen_threesome == True:
