@@ -354,13 +354,12 @@ label erica_intro_label(the_person):
     "[the_person.title] seems like an interesting person. You should keep an eye out for her at the gym in the future."
     return
 
-
 label erica_get_to_know_label(the_person):
     if "erica_progress" not in the_person.event_triggers_dict:
         $ the_person.event_triggers_dict["erica_progress"] = 0
         call erica_intro_label(the_person) from _erica_recall_intro_if_skipped_somehow_01
         #Introduction scene#
-    elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False:
+    elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False and the_person.love>20:
         call erica_money_problems_label(the_person) from _erica_start_job_quest_01
     elif the_person.event_triggers_dict.get("erica_progress", 0) == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
@@ -1481,7 +1480,6 @@ label erica_money_problem_sarah_convincing_employee_label():
             mc.business.add_mandatory_crisis(erica_money_problems_sarah_final_update)
         the_target = None
     return
-
 
 label erica_money_problems_sarah_final_update_label():
     if len(erica_get_yoga_class_list()) < 4:
