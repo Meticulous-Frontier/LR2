@@ -91,6 +91,8 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
         the_girl_1 "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
         the_girl_2 "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
+    $ the_girl_1.break_taboo("sucking_cock")
+    $ the_girl_2.break_taboo("sucking_cock")
     "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
     return
 
@@ -265,33 +267,33 @@ label strip_ask_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_loc
     "This scene in progress"
 
 label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
-        if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
-            "You can feel the pace and urgency of the girls moaning increase as the kiss each other."
-            "When you look down, you can see that each girl has a hand along the other's crotch."
-            $ the_girl_1.run_orgasm()
-            $ the_girl_2.run_orgasm()
-            "They both orgasm, almost in unison."
-            "As they start to wind down, they continue kissing and caressing each other."
-            return
-
-        elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
-            $ the_girl_1.run_orgasm()
-            "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
-            "When she finishes, she briefly comes up for air."
-            the_girl_1 "Oh fuck that was good. I need a second."
-            "She sits back and [the_girl_2.title] takes over for her while she recovers."
-            return
-
-        elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
-            "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
-            $ the_girl_2.run_orgasm()
-            "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
-            "When she finishes, she briefly comes up for air."
-            the_girl_2 "Oh fuck that was good. I need a second."
-            "She sits back and [the_girl_1.title] takes over for her while she recovers."
-            return
+    if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
+        "You can feel the pace and urgency of the girls moaning increase as the kiss each other."
+        "When you look down, you can see that each girl has a hand along the other's crotch."
+        $ the_girl_1.run_orgasm()
+        $ the_girl_2.run_orgasm()
+        "They both orgasm, almost in unison."
+        "As they start to wind down, they continue kissing and caressing each other."
         return
+
+    elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
+        "You can feel [the_girl_1.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_2.title]'s hand petting her crotch."
+        $ the_girl_1.run_orgasm()
+        "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
+        "When she finishes, she briefly comes up for air."
+        the_girl_1 "Oh fuck that was good. I need a second."
+        "She sits back and [the_girl_2.title] takes over for her while she recovers."
+        return
+
+    elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
+        "You can feel [the_girl_2.title] moaning around your cock with increasing intensity. When you look down, you notice [the_girl_1.title]'s hand petting her crotch."
+        $ the_girl_2.run_orgasm()
+        "An orgasm hits her. She takes your cock into her mouth and moans around it loudly. The vibrations feel amazing."
+        "When she finishes, she briefly comes up for air."
+        the_girl_2 "Oh fuck that was good. I need a second."
+        "She sits back and [the_girl_1.title] takes over for her while she recovers."
+        return
+    return
 
 label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     mc.name "Why don't you two makeout for a bit. I want to watch."
