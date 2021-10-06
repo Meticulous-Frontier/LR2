@@ -38,7 +38,7 @@ init 2 python:
     def candace_overhear_supply_order_requirement(person):
         if day > candace_get_hire_date() + 14:
             if time_of_day > 1:
-                if person.sluttiness > 80:
+                if person.sluttiness > 40:
                     if person.location == person.work:
                         return True
         return False
@@ -319,7 +319,7 @@ label candace_meet_at_office_store_label(the_person):
     mc.name "Hey there... [the_person.title], right?"
     "She looks at you. She seems to recognize you."
     the_person "Ah! You must be the new guy. I'm here to pick up the umm... supplies... that we talked about on the phone."
-    "Or probably not."
+    "Or not."
     mc.name "Sorry, you must have me confused with someone else. We met the other night, at a restaurant."
     "She squints at you for several seconds."
     the_person "Wait... you're the host? Right? I had a great time that night, at your restaurant!"
@@ -374,6 +374,9 @@ label candace_get_to_know_label(the_person):
             if candace_get_can_convince_to_quit():
                 if ophelia_get_will_help_candace():
                     "You already talked to [salon_manager.title]. Next time you see [the_person.title], you should put the pressure on and see if you can convince her to quit and come work for you."
+                elif the_person.love < 20:
+                    "You can tell that [the_person.title] is wavering, but you sense hestitation. The conditions aren't quite right to get her to convince her to split with her boyfriend."
+                    "Maybe if you got closer with her? If she had more affection for you, she might be more willing to break up with her asshole boyfriend."
                 else:
                     "You feel like with one more push, you could probably get [the_person.title] to quit. But what will happen when you do?"
                     "You consider if for a few moments. You should probably ask for help. This guy sounds like a narcissist, and he could be trouble if you aren't careful."
