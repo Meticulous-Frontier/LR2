@@ -1,7 +1,8 @@
 init 10 python:
+    add_label_hijack("normal_start", "update_base_serums")
     add_label_hijack("after_load", "update_base_serums")
 
-    def massive_pregnancy_accelerator_on_turn(the_person, the_serum, add_to_log):
+    def massive_pregnancy_accelerator_on_turn_enhanced(the_person, the_serum, add_to_log):
         if not the_person.has_role(pregnant_role):
             return
 
@@ -18,7 +19,7 @@ init 10 python:
                 the_person.event_triggers_dict["preg_finish_announce_day"] = the_person.event_triggers_dict.get("preg_finish_announce_day", day) - 1
         return
 
-    def pregnancy_accelerator_on_day(the_person, the_serum, add_to_log):
+    def pregnancy_accelerator_on_day_enhanced(the_person, the_serum, add_to_log):
         if not the_person.has_role(pregnant_role):
             return
 
@@ -35,7 +36,7 @@ init 10 python:
                 the_person.event_triggers_dict["preg_finish_announce_day"] = the_person.event_triggers_dict.get("preg_finish_announce_day", day) - 1
         return
 
-    def pregnancy_decelerator_on_day(the_person, the_serum, add_to_log):
+    def pregnancy_decelerator_on_day_enhanced(the_person, the_serum, add_to_log):
         if not the_person.has_role(pregnant_role):
             return
 
@@ -52,13 +53,13 @@ init 10 python:
     def fix_base_game_serums(): # fix existing save games
         mpa = next((x for x in list_of_traits if x == massive_pregnancy_accelerator), None)
         if mpa:
-            mpa.on_turn = massive_pregnancy_accelerator_on_turn
+            mpa.on_turn = massive_pregnancy_accelerator_on_turn_enhanced
         pa = next((x for x in list_of_traits if x == pregnancy_accelerator_trait), None)
         if pa:
-            pa.on_day = pregnancy_accelerator_on_day
+            pa.on_day = pregnancy_accelerator_on_day_enhanced
         pd = next((x for x in list_of_traits if x == pregnancy_decelerator_trait), None)
         if pd:
-            pd.on_day = pregnancy_decelerator_on_day
+            pd.on_day = pregnancy_decelerator_on_day_enhanced
         return
 
 
