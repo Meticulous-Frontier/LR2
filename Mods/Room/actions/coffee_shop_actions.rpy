@@ -12,7 +12,7 @@ init -1 python:
 
 label  coffee_shop_get_coffee_label():
     if kaya.location == coffee_shop:
-        $ the_person == kaya
+        $ the_person = kaya
         "You step up to the coffee shop counter. [the_person.possessive_title] is working today."
         $ the_person.draw_person()
         if kaya_can_get_barista_quickie():
