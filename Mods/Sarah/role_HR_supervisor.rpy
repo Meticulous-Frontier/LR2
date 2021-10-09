@@ -789,7 +789,7 @@ label HR_director_review_discoveries_label(the_person):
                     the_person "That's amazing! And it says here it won't leave behind stretch marks?"
                     mc.name "Correct. We were able to combine the enhancement of fatty tissue with a temporary increase in skin elasticity."
                     the_person "That incredible... but I can't afford..."
-                    "She furrows her brow when she sees the initial estimate of the cost of the synthesization."
+                    "She furrows her brow when she sees the initial estimate for the cost of synthesis."
                     the_person "I mean uh, it'll be interesting to see how this progresses..."
                     "You notice [the_person.title] writing herself a note to visit the research department later."
                     #TODO add breast serum sneak event to mandatory list
@@ -1086,7 +1086,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "She spreads her legs, her pussy on display in front of you."
             else:
                 if the_person.outfit.can_half_off_to_vagina():
-                    "You move [the_person.possessive_title] clothes out of the way."
+                    "You move [the_person.possessive_title]'s clothes out of the way."
                     $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                 else:
                     "You start to strip [the_person.possessive_title] down."
@@ -1129,7 +1129,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
                 else:
                     if the_person.outfit.can_half_off_to_vagina():
-                        "You move [the_person.possessive_title] clothes out of the way."
+                        "You move [the_person.possessive_title]'s clothes out of the way."
                         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                     else:
                         "You start to strip [the_person.possessive_title] down."
@@ -1197,7 +1197,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 the_person "This morning, I just want to make you feel good, and judging on last time, I think it will make me feel good too."
                 mc.name "Oh yeah? What do you have in mind?"
                 the_person "Why don't you just sit back in your chair and find out."
-            mc.name "Sounds good, do you thing."
+            mc.name "Sounds good, do your thing."
             $ scene_manager.update_actor(the_person, position = "back_peek")
             "[the_person.possessive_title] turns away from you, her ass now right at eye level. She pulls her cheeks apart slightly, giving you an amazing view of her puckered hole."
             $ mc.change_locked_clarity(50)
@@ -1342,7 +1342,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
             if the_person.outfit.can_half_off_to_vagina():
-                "You move [the_person.possessive_title] clothes out of the way."
+                "You move [the_person.possessive_title]'s clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
                 "You start to strip [the_person.possessive_title] down."

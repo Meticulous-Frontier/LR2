@@ -58,6 +58,14 @@ init -1 python:
 
     Personality.get_dialogue = get_dialogue_enhanced
 
+    def get_base_personality_prefix(self):
+        if self.default_prefix:
+            return self.default_prefix
+        return self.personality_type_prefix
+
+    Personality.base_personality_prefix = property(get_base_personality_prefix, None, None, "Returns one of the base personality types.")
+
+
 
 init 4 python:
     list_of_extra_personalities = [] # Personalities not included in list_of_personalities
@@ -117,9 +125,11 @@ init 1299 python:
 init 1400 python:
     # update default personalities with extra opinions (not in base game)
     relaxed_personality.common_likes.append("high heels")
+    relaxed_personality.common_dislikes.append("boots")
     introvert_personality.common_likes.append("boots")
     introvert_personality.common_dislikes.append("high heels")
     reserved_personality.common_likes.append("dresses")
+    reserved_personality.common_likes.append("boots")
     reserved_personality.common_dislikes.append("skirts")
     wild_personality.common_likes.append("high heels")
     wild_personality.common_likes.append("dresses")

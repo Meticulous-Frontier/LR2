@@ -197,11 +197,11 @@ screen cheat_menu():
         }
     default relation_stats = {
         "Love": ["love", "love", 10, 0, (-100, 100)],
-        "Suggestibility": ["suggestibility", "suggestibility", 10, 1, (0, 100)],
-        "Obedience": ["obedience", "obedience", 10, 2, (0, 300)],
-        "Happiness": ["happiness", "happiness", 10, 3, (0, 300)],
-        "Arousal": ["arousal", "arousal", 10, 4, (0, 100)],
-        "Sluttiness": ["sluttiness", "sluttiness", 5, 5, (0, 300)],
+        "Suggestibility": ["suggestibility", "suggestibility", 10, 2, (0, 100)],
+        "Obedience": ["obedience", "obedience", 10, 3, (0, 300)],
+        "Happiness": ["happiness", "happiness", 10, 4, (0, 300)],
+        "Arousal": ["arousal", "arousal", 10, 5, (0, 100)],
+        "Sluttiness": ["sluttiness", "sluttiness", 5, 6, (0, 300)],
         }
     default sex_stats = { # Sex Skills are stored in a dict
         "Foreplay": ["sex_skills", "Foreplay", 1, 0, (0, 20)],

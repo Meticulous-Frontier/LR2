@@ -110,12 +110,14 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
         the_girl_2 "Sounds good! [the_girl_1.name] could you move your tongue into my little sphincter too, that would drive me wild..."
     else:
         the_girl_2 "Sounds good! Don't forget to change it up once in a while... I'd be glad to take a turn sucking you off..."
-    "[the_girl_2.title] climbs on top of [the_girl_1.title] and slowly lowers her pussy down onto her face. She moans as [the_girl_1.title] starts to lick between her legs"
+    "[the_girl_2.title] climbs on top of [the_girl_1.title] and slowly lowers her pussy down onto her face. She moans as [the_girl_1.title] starts to lick between her legs."
     "You get down on your knees and spread [the_girl_1.title]'s legs. You position your hips in line with hers and move your cock along her slit."
     if the_girl_2.arousal > 60:
         "Her pussy is soaking wet. As you run your length along her hole you are soon slick with her juices."
     else:
         "Her pussy looks absolutely perfect. As you run your length along her hole she starts to squirm."
+    $ the_girl_1.break_taboo("vaginal_sex")
+    $ the_girl_1.break_taboo("condomless_sex")
     "You push yourself into [the_girl_1.title]'s steamy cunt and start to fuck her while [the_girl_2.title] rides on her face."
     return
 
@@ -200,7 +202,6 @@ label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_loc
 
 
 label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object):
-
     "[the_girl_1.title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
     "You lean forward and grab the back of [the_girl_2.title]'s head, bring her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
     "You decide it's time for [the_girl_2.possessive_title] to put her mouth to better use."
@@ -368,12 +369,12 @@ label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_loca
     return
 
 label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
-
     "Stepping back for a moment, you decide you want to fuck [the_girl_1.possessive_title]."
     mc.name "Mmm, here it comes [the_girl_1.title]..."
+    $ the_girl_1.break_taboo("vaginal_sex")
+    $ the_girl_1.break_taboo("condomless_sex")
     "You lower yourself down until you are lined up with [the_girl_1.title]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_girl_2.title]'s hips as she rides her face."
     "You slide yourself into her slick cunt a few times, filling her eager hole with your dick."
-
     return
 
 label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
@@ -431,31 +432,29 @@ label strip_ask_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_loc
     return
 
 label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
-        if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
-            "Both girls are moaning wildly into each other's crotches."
-            $ the_girl_1.run_orgasm()
-            "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
-            $ the_girl_2.run_orgasm()
-            "[the_girl_2.title] is right behind her, her hips pushing back against [the_girl_1.title]'s face as she cums too."
-            return
-        elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-            $ the_girl_1.run_orgasm()
-            "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
-            "Her moans are muffled by [the_girl_2.title]'s pussy."
-            return
-
-        elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
-            "[the_girl_2.title] stops eating out [the_girl_1.title] for a moment as she is starting to climax."
-            the_girl_2 "Oh god... that's the spot. Fuck!"
-            $ the_girl_2.run_orgasm()
-            "She grinds her pussy against the other girl's face as she orgasms."
+    if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
+        "Both girls are moaning wildly into each other's crotches."
+        $ the_girl_1.run_orgasm()
+        "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
+        $ the_girl_2.run_orgasm()
+        "[the_girl_2.title] is right behind her, her hips pushing back against [the_girl_1.title]'s face as she cums too."
         return
+    elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
+        $ the_girl_1.run_orgasm()
+        "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
+        "Her moans are muffled by [the_girl_2.title]'s pussy."
+        return
+
+    elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
+        "[the_girl_2.title] stops eating out [the_girl_1.title] for a moment as she is starting to climax."
+        the_girl_2 "Oh god... that's the spot. Fuck!"
+        $ the_girl_2.run_orgasm()
+        "She grinds her pussy against the other girl's face as she orgasms."
+    return
 
 label swap_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You step back for a second and just watch [the_girl_1.title] and [the_girl_2.title] as they eat each other out."
     if mc.recently_orgasmed:
         "You put your hand on your soften cock and start to stroke it."
-    else:
-        pass
     "The sound of muffled moans and slick licking motions fill the air."
     return

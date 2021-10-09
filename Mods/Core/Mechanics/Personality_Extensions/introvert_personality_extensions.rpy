@@ -5,7 +5,7 @@ init 1310 python:
         if person.sluttiness > 40:
             valid_titles.append("Baby Girl")
         if person.sluttiness > 60:
-            valid_titles.append("Shy Slut")
+            valid_titles.append("Lollipop")
 
         return valid_titles
 

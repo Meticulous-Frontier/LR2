@@ -93,12 +93,12 @@ init -1 python:
 
     def show_lily_room_background(*args, **kwargs):
         bedroom_image = lily_bedroom_background[time_of_day]
-        renpy.show("emily_bedroom", what = Image(bedroom_image))
+        renpy.show("emily_bedroom", what = Image(bedroom_image), layer = "master")
         return
 
     def show_university_library_background(*args, **kwargs):
         library_image = university_library_backgrounds[time_of_day]
-        renpy.show("university_library", what=Image(library_image))
+        renpy.show("university_library", what=Image(library_image), layer = "master")
         return
 
 label updated_room_background(stack):

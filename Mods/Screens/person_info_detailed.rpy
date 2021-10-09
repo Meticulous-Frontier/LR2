@@ -101,10 +101,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
                         text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
-                        if the_person.personality.default_prefix:
-                            text "Personality: " + the_person.personality.default_prefix.capitalize() style "menu_text_style"
-                        else:
-                            text "Personality: " + the_person.personality.personality_type_prefix.capitalize() style "menu_text_style"
+                        text "Personality: " + the_person.personality.base_personality_prefix.capitalize() style "menu_text_style"
                         if the_person.has_role(girlfriend_role):
                             text "Relationship: Girlfriend" style "menu_text_style"
                         else:

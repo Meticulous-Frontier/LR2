@@ -111,20 +111,12 @@ init 2:
 
                 vbox:
                     yoffset 10
-                    if person.arousal > 0:
-                        textbutton "Arousal: "+ str(__builtin__.int(person.arousal)) + "/"+ str(__builtin__.int(person.max_arousal)) + " (+" + get_red_heart(__builtin__.int(person.arousal/4)) + ")":
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
-                            action NullAction()
-                            sensitive True
-                    else:
-                        textbutton "Arousal: 0%":
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
-                            action NullAction()
-                            sensitive True
+                    textbutton "Arousal: "+ str(__builtin__.int(person.arousal)) + "/"+ str(__builtin__.int(person.max_arousal)) + " {image=arousal_token_small}":
+                        style "transparent_style"
+                        text_style "menu_text_style"
+                        tooltip "When a girl is brought to a state of high arousal she will start to climax. Climaxing will make the girl happy and has a chance to put her into a trance state."
+                        action NullAction()
+                        sensitive True
 
                     textbutton "Energy: " + get_energy_string(person):
                         style "transparent_style"
@@ -181,6 +173,7 @@ init 2:
 
                 vbox:
                     xoffset -40
+                    yoffset -8
                     hbox:
                         textbutton "Detailed Information" action Show("person_info_detailed",the_person=person) style "textbutton_style" text_style "textbutton_text_style"
                         if person.serum_effects:
@@ -189,15 +182,6 @@ init 2:
                                 style "transparent_style"
                                 text_style "menu_text_style"
                                 tooltip person_info_ui_get_serum_info_tooltip(person)
-                                action NullAction()
-                                sensitive True
-
-                        if person.suggestibility > 0:
-                            textbutton "+[person.suggestibility]%":
-                                yoffset 16
-                                style "transparent_style"
-                                text_style "menu_text_style"
-                                tooltip "How likely a girl is to slip into a trance when she cums. While in a trance she will be highly suggestible, and you will be able to directly influence her stats, skills, and opinions."
                                 action NullAction()
                                 sensitive True
 
@@ -218,6 +202,13 @@ init 2:
                                 tooltip "The home address is known."
                                 action NullAction()
                                 sensitive True
+
+                    textbutton "Suggestibility: [person.suggestibility]%":
+                        style "transparent_style"
+                        text_style "menu_text_style"
+                        tooltip "How likely a girl is to slip into a trance when she cums. While in a trance she will be highly suggestible, and you will be able to directly influence her stats, skills, and opinions."
+                        action NullAction()
+                        sensitive True
 
                     textbutton "Age: [person.age]":
                         style "transparent_style"

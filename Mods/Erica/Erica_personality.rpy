@@ -289,7 +289,7 @@ label erica_flirt_response_low(the_person):
 label erica_flirt_response_mid(the_person):
     if the_person.effective_sluttiness() < 20:
         $ mc.change_locked_clarity(10)
-        the_person "Thanks! I work hard to take of myself. It's kind of weird to hear, but I'm glad it shows."
+        the_person "Thanks! I work hard to take care of myself. It's kind of weird to hear, but I'm glad it shows."
     else:
         the_person "Thanks! One of the benefits of being in shape I guess, you can wear clothing to show off your body."
         the_person "You want a better look, right? Here, how does it make my ass look?"

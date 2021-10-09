@@ -275,8 +275,8 @@ init -1 python:
             self.idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"]) #Get a random idle pose that you will use while people are talking to you.
 
             ##Personality Stats##
-            #Things like sugestability, that change over the course of the game when the player interacts with the girl
-            self.suggestibility = 0 #How quickly/efficently bleeding temporary sluttiness is turned into core sluttiness.
+            #Things like suggestibility, that change over the course of the game when the player interacts with the girl
+            self.suggestibility = 0 #How quickly/efficiently bleeding temporary sluttiness is turned into core sluttiness.
             self.suggest_bag = [] #This will store a list of ints which are the different suggestion values fighting for control. Only the highest is used, maintained when serums are added and removed.
 
             self.happiness = 100 #Higher happiness makes a girl less likely to quit and more willing to put up with you pushing her using obedience.
@@ -286,8 +286,8 @@ init -1 python:
             self.obedience = 100 #How likely the girl is to listen to commands. Default is 100 (normal person), lower actively resists commands, higher follows them.
 
             #Situational modifiers are handled by events. These dicts and related functions provide a convenient way to avoid double contributions. Remember to clear your situational modifiers when you're done with them!!
-            self.situational_sluttiness = {} #A dict that stores a "situation" string and the corrisponding amount it is contributing to the girls sluttiness.
-            self.situational_obedience = {} #A dictthat stores a "situation" string and a corrisponding amount that it has affected their obedience by.
+            self.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
+            self.situational_obedience = {} #A dictthat stores a "situation" string and a corresponding amount that it has affected their obedience by.
 
             ##Sex Stats##
             #These are physical stats about the girl that impact how she behaves in a sex scene. Future values might include things like breast sensitivity, pussy tighness, etc.

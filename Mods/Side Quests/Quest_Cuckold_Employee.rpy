@@ -79,7 +79,8 @@ init 1 python:
     def quest_cuckold_employee_start_requirement():
         if day < 50: # don't start this until we have a better employee base
             return False
-        if persistent.pregnancy_pref > 0:
+        # wait until we unlocked the glory hole until we trigger the quest (moves quest back to later in game)
+        if persistent.pregnancy_pref > 0 and mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 1:
             if quest_cuckold_employee_person_find_employee():
                 return True
         return False
@@ -656,7 +657,7 @@ label quest_cuckold_employee_gloryhole_label():
     menu: #The illusion of choice lol
         "Seed Her":
             pass
-        "Pull Out\n{color=#ff0000}{size=18}Too horny[cost]{/size}{/color} (disabled)":
+        "Pull Out\n{color=#ff0000}{size=18}Too horny{/size}{/color} (disabled)":
             pass
 
     "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"

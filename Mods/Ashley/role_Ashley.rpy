@@ -320,7 +320,7 @@ label ashley_hire_directed_label():
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
-        $ scene_manager.update_actor(the_person, position = "walking_away")
+        $ the_person.draw_person(position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as you leave the room. You hope you made the right decision!"
         $ ashley.add_unique_on_talk_event(ashley_first_talk)
@@ -365,7 +365,7 @@ label ashley_room_excitement_overhear_label(the_person):
     return
 
 label ashley_ask_sister_about_attitude_label(the_person):
-    "You approach [the_person.title], intent to ask her about her sister."
+    "You approach [the_person.title], intending to ask her about her sister."
     mc.name "Hello [the_person.title]. Do you have a moment?"
     the_person "Of course sir. What can I do for you?"
     "You lower your voice. You don't necessarily need anyone overhearing you."
@@ -785,7 +785,7 @@ label ashley_post_handjob_convo_label(the_person):
         "Tell her it was hot \n{color=#ff0000}{size=18}Requires 20 Sluttiness{/size}{/color} (disabled)" if the_person.sluttiness < 20:
             pass
     "You get to the coffee shop. You order a couple coffees and sit down in a booth across from [the_person.possessive_title]."
-    $ renpy.show("restaurant", what = restaraunt_background)
+    $ renpy.show("restaurant", what = restaraunt_background, layer = "master")
     #TODO if Alexia still works here
     $ the_person.draw_person(position = "sitting")
     "You take a few sips of your coffee. Finally you break the silence."

@@ -88,6 +88,7 @@ init 2 python:
         person.event_triggers_dict["immaculate_conception"] = person.has_taboo("vaginal_sex")
         person.event_triggers_dict["preg_accident"] = person.on_birth_control # If a girl is on birth control the pregnancy is an accident.
         person.event_triggers_dict["preg_start_date"] = start_day
+        person.event_triggers_dict["preg_announce_day"] = start_day + renpy.random.randint(7, 11)
         person.event_triggers_dict["preg_tits_date"] = start_day + 14 + renpy.random.randint(0,5)
         person.event_triggers_dict["preg_transform_day"] = start_day + 30 + renpy.random.randint(0,10)
         person.event_triggers_dict["preg_finish_announce_day"] = start_day + 90 + renpy.random.randint(0,10)
@@ -99,9 +100,8 @@ init 2 python:
         else:
             target_label = "pregnant_announce" if person.is_mc_father() else "silent_pregnant_announce"
 
-            random = renpy.random.randint(10, 14)
-            preg_announce_action = Action("Pregnancy Announcement", (preg_announce_requirement if not bugfix_installed else pregnant_announce_requirement), target_label, requirement_args = day + random)
-            person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, (5 * random) + (5 * 5))) #LTA is turns valid, not days (5 slots per day), yield 5 days after it becomes active
+            preg_announce_action = Action("Pregnancy Announcement", (preg_announce_requirement if not bugfix_installed else pregnant_announce_requirement), target_label)
+            person.on_room_enter_event_list.append(Limited_Time_Action(preg_announce_action, (5 * 10) + (5 * 5))) #LTA is turns valid, not days (5 slots per day), yield 5 days after it becomes active
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
             person.event_triggers_dict["preg_knows"] = True

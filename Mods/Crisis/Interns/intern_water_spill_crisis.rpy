@@ -13,7 +13,6 @@ label intern_water_spill_crisis_label():
     $ the_clothing = the_person.outfit.get_upper_top_layer() #Get the very top item of clothing.
     "You're hard at work when [the_person.title] comes up to you. She has a textbook in one hand, a water bottle in the other."
     $ the_person.draw_person()
-    $ the_person.call_dialogue("greetings")
     mc.name "Hey [the_person.title], how can I help you?"
     the_person "I was working on some homework during my break and I hit some snags. I heard you are pretty good with academics?"
     "You listen as [the_person.possessive_title] dives into her homework problem."

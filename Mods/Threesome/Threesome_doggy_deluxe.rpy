@@ -145,6 +145,8 @@ label intro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
     if the_girl_2.has_breeding_fetish():
         the_girl_2 "Go ahead and fuck me! I can't wait to feel you cumming deep inside me again..."
     else:
+        $ the_girl_2.break_taboo("vaginal_sex")
+        $ the_girl_2.break_taboo("condomless_sex")
         the_girl_2 "I think I'm ready for you... go ahead and push it in!"
     "You don't need any encouragement! "
     return
@@ -328,6 +330,8 @@ label swap_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loca
     if the_girl_2.has_breeding_fetish():
         the_girl_2 "Go ahead and fuck me! I can't wait to feel you deep inside me again..."
     else:
+        $ the_girl_2.break_taboo("vaginal_sex")
+        $ the_girl_2.break_taboo("condomless_sex")
         the_girl_2 "I'm ready for you... go ahead and push it in!"
     "You don't need any encouragement!"
     return
@@ -339,6 +343,7 @@ label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     "You grab your strap on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
     "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title]'s hips and get into position."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+    $ the_girl_2.break_taboo("anal_sex")
     if the_girl_2.has_role(anal_fetish_role):
         "[the_girl_2.title] moans pushes herself back against you, eagerly taking you inside her ass."
     elif the_girl_2.get_opinion_score("anal sex") > 0 :
@@ -346,7 +351,6 @@ label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
         $ the_girl_2.discover_opinion("anal sex")
     else:
         "[the_girl_2.title] grimaces a bit, but manages to take you completely by forcing herself to relax."
-
     return
 
 label scene_threesome_doggy_deluxe_dp_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
@@ -458,6 +462,7 @@ label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_loca
 label swap_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "You grab your strap on and secure it around you. You use a little saliva to make sure your cock is good and lubed up."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+    $ the_girl_2.break_taboo("anal_sex")
     if the_girl_2.has_role(anal_fetish_role):
         "[the_girl_2.title] moans pushes herself back against you, eagerly taking you inside her ass."
     elif the_girl_2.get_opinion_score("anal sex") > 0 :

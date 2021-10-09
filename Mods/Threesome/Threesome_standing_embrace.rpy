@@ -92,6 +92,8 @@ label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     the_girl_1 "Mmm, come on [the_girl_1.mc_title]."
     the_girl_2 "I'm ready for you!"
     "You step up behind [the_girl_2.possessive_title]. She arches her back a bit to give you easier access."
+    $ the_girl_2.break_taboo("vaginal_sex")
+    $ the_girl_2.break_taboo("condomless_sex")
     "With one smooth stroke you push yourself inside of her, she moans as you begin to fuck her."
     return
 
@@ -195,5 +197,7 @@ label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, th
 
 label swap_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
     "As the girls make out with each other, you step up behind [the_girl_2.possessive_title]. She arches her back a bit to give you easier access."
+    $ the_girl_2.break_taboo("vaginal_sex")
+    $ the_girl_2.break_taboo("condomless_sex")
     "With one smooth stroke you push yourself inside of her, she moans as you begin to fuck her."
     return

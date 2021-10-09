@@ -941,8 +941,6 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
             the_person "I love it when you fill me up with your spunk."
         elif skill_tag == "Anal" and the_person.get_opinion_score("anal creampies") > 0:
             the_person "Just pump my ass full with that hot spunk of yours."
-        else:
-            the_person "I'm not a big fan of bare sex, but if you like it that way, show me what you got."
 
         if skill_tag == "Vaginal":
             if not the_person.wants_creampie():

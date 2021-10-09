@@ -867,7 +867,6 @@ label breeding_fetish_sarah_intro_label():   #Needs Testing
         the_person "That's okay. Maybe in the morning?"
     "You snuggle up with [the_person.possessive_title]. Your serums have turned her into your personal breeding mare."
     $ add_breeding_fetish(the_person)
-    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_sarah_breeding_request_5
     call Sarah_spend_the_night() from sarah_ask_for_baby_overnight_15
 
     return #Needs testing

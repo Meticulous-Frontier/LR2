@@ -27,7 +27,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
     # they are covered by the new title system.
     # so start with the exceptions and run down to the default response.
 
-    if the_person.personality.personality_type_prefix == "bimbo":
+    if the_person.personality.base_personality_prefix == "bimbo":
         $ the_person.draw_person(emotion = "happy")
         the_person "Oh, [the_person.mc_title], like, I love doing my hair."
 

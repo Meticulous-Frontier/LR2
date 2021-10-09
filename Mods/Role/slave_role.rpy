@@ -229,7 +229,7 @@ label slave_alarm_clock_label(the_person):
             $ the_person.change_slut(2)
             "She stares at it for a short moment before pulling her eyes back up to meet yours."
             #TODO: She offers to pick out an outfit for you while you jerk off "To avoid bothering anyone at work".
-            the_person "Certainly nothing to be embarrassed, but I think you should take care of it before you leave."
+            the_person "Certainly nothing to be embarrassed about, but I think you should take care of it before you leave."
             "[the_person.possessive_title] turns around and starts rifling through your closet."
             $ the_person.draw_person(position = "walking_away")
             the_person "I'll find you a nice outfit to wear to save you some time. Go ahead [the_person.mc_title], pretend I'm not even here. It's nothing I haven't seen before."
@@ -483,7 +483,7 @@ label increase_slave_submission_label(the_person):
         "You smile and pat her on the head."
         $ the_person.max_opinion_score("being submissive")
         if not the_person.outfit.full_access():
-            mc.name "Now stand up and take of your clothes."
+            mc.name "Now stand up and take off your clothes."
             $ the_person.strip_outfit(position = "stand3", emotion = "happy")
             $ the_person.change_stats(obedience = 2, arousal = 10)
         mc.name "I think you deserve a reward, get on your hands and knees, like a good little pet."

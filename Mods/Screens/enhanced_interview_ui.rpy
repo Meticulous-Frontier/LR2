@@ -47,6 +47,7 @@ init 2:
                         if recruitment_knowledge_three_policy.is_active():
                             text "" style "menu_text_style" size 16
 
+                            text "Suggestibility: [the_candidate.suggestibility]%" style "menu_text_style" size 16
                             text "Height: " + height_to_string(the_candidate.height) style "menu_text_style" size 16
                             text "Eye Colour: " + the_candidate.eyes[0].title() style "menu_text_style" size 16
                             text "Cup size: [the_candidate.tits]" style "menu_text_style" size 16

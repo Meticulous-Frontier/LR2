@@ -137,7 +137,7 @@ label build_custom_rooms(stack):
         list_of_places.append(police_jail)
 
         #Coffee shop
-        coffee_shop = Room("coffee_shop", "Coffee Shop", [], standard_coffee_shop_backgrounds, coffee_shop_objects, [], [], True, [7,3], None, True, lighting_conditions = standard_indoor_lighting)
+        coffee_shop = Room("coffee_shop", "Coffee Shop", [], standard_coffee_shop_backgrounds, coffee_shop_objects, [], [coffee_shop_get_coffee_action], True, [7,3], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(coffee_shop)
 
         # initialize dungeon room creation action

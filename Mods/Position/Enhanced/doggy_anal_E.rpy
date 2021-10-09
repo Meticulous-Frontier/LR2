@@ -113,7 +113,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title] reaches down and begins to stroke and rub your scrotum with one hand, while with the other hand she reaches back and pulls her ass cheeks apart."
         $ the_girl.change_arousal(the_girl.get_opinion_score("giving handjobs" * 2))
     elif the_girl.get_opinion_score("masturbating") > 0:
-        "You notice that[the_girl.possessive_title] now has one hand on her [the_girl.pubes_description] pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
+        "You notice that [the_girl.possessive_title] now has one hand on her [the_girl.pubes_description] pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
         $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 3))
     else:
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."

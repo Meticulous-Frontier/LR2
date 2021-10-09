@@ -14,7 +14,7 @@ init 2 python:
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
         hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, tan_style = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
-        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
+        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None, start_suggest = None,
         title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
         generate_insta = None, generate_dikdok = None, generate_onlyfans = None,
         force_random = False, forced_opinions = None, forced_sexy_opinions = None):
@@ -76,6 +76,23 @@ init 2 python:
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit,
                 generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans)
+
+        # initialize start suggestibility
+        if return_character.suggestibility == 0:
+            start_suggest = renpy.random.randint(5, 15)
+
+            if return_character.personality.base_personality_prefix == wild_personality.personality_type_prefix:
+                start_suggest += 5
+            elif return_character.personality.base_personality_prefix == bimbo_personality.personality_type_prefix:
+                start_suggest += 10
+            elif return_character.personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
+                start_suggest += 3
+            elif return_character.personality.base_personality_prefix == reserved_personality.personality_type_prefix:
+                start_suggest -= 3
+            elif return_character.personality.base_personality_prefix == introvert_personality.personality_type_prefix:
+                start_suggest -= 5
+
+            return_character.change_suggest(start_suggest)
 
         if tan_style is None:
             if renpy.random.randint(0, 1) == 1: # 50% chance on random tan (could be no_tan)
@@ -376,15 +393,16 @@ init 2 python:
         # add one bimbo to the game (on start of game)
         person = make_person(age=renpy.random.randint(21, 35), tits="DD", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
             hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
-            forced_opinions = [["high heels", 2, False], ["skimpy outfits", 2, False]])
+            forced_opinions = [["high heels", 2, False]],
+            forced_sexy_opinions = [["skimpy outfits", 2, False]])
         person.generate_home()
         person.home.add_person(person)
         return
 
     def create_alpha_personality():
         person = make_person(age = renpy.random.randint(25,35), personality = alpha_personality, relationship = "Single", stat_array = [5, 4, 3], force_random = True,
-            forced_opinions = [["high heels", 2, False], ["skimpy outfits", 2, False], ["the colour black", 2, False], ["the colour pink", -2, False], ["the colour green", -2, False]],
-            forced_sexy_opinions = [["being submissive", -1, False], ["taking control", 2, False]])
+            forced_opinions = [["high heels", 2, False], ["the colour black", 2, False], ["the colour pink", -2, False], ["the colour green", -2, False]],
+            forced_sexy_opinions = [["skimpy outfits", 2, False], ["being submissive", -1, False], ["taking control", 2, False]])
         person.generate_home()
         person.home.add_person(person)
         return
@@ -601,6 +619,28 @@ init 2 python:
         alexia.sexy_opinions["kissing"] = [1, False]  # she likes kissing
         alexia.sexy_opinions["cheating on men"] = [-2, False]  # she loves her boyfriend
         return
+
+    def get_titles_extended(org_func):
+        def get_titles_wrapper(person):
+            list_of_titles = org_func(person)
+
+            if person.love > 30 and person.height > 0.94:
+                list_of_titles.append("Sexy Legs")
+                list_of_titles.append("Sky High")
+
+            if person.love > 30 and person.height < 0.85:
+                list_of_titles.append("Tinkerbell")
+                list_of_titles.append("Little Lady")
+
+            if person.love > 30 and person.sluttiness > 20 and person.get_opinion_score("high heels"):
+                list_of_titles.append("Killer Heels")
+
+            return list(set(list_of_titles))
+
+        return get_titles_wrapper
+
+    # wrap original function
+    get_titles = get_titles_extended(get_titles)
 
 init 2 python:
     global lingerie_wardrobe

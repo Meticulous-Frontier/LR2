@@ -117,7 +117,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
                     the_girl "Oh god I can't take it!"
 
             "Finger her too":
-                "You reach forward and wrap your arms around her. With one arm you lift her entire body and down, with the other you reach between her legs and shove two fingers into her cunt."
+                "You reach forward and wrap your arms around her. With one arm you lift her entire body up and down, with the other you reach between her legs and shove two fingers into her cunt."
                 if the_girl.get_opinion_score("being fingered") or the_girl.get_opinion_score("being submissive") > 0:
                     $ the_girl.discover_opinion("being fingered")
                     "You use your fingers inside of her as extra leverage to push her up and down. She gasps at the intense sensations."

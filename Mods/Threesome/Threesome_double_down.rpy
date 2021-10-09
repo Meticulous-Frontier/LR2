@@ -88,6 +88,8 @@ init:
 
 label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You lay down on your back as the girls get into position."
+    $ the_girl_1.break_taboo("vaginal_sex")
+    $ the_girl_1.break_taboo("condomless_sex")
     "You briefly see [the_girl_1.title] sigh as she sinks down onto your cock, before [the_girl_2.possessive_title] swings a leg over your head."
     "With both girls on top of you, you waste no time diving into [the_girl_2.title]'s pussy."
     return
@@ -218,6 +220,8 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
     return
 
 label swap_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
+    $ the_girl_1.break_taboo("vaginal_sex")
+    $ the_girl_1.break_taboo("condomless_sex")
     "[the_girl_1.title] slowly sinks down onto your cock, enjoying the sensations as you penetrate her pussy."
     "[the_girl_2.title] wiggles her hips back and forth, so your grab her ass cheeks with your hands and spread them apart."
     "You dive into her pussy with vigor, determined to get her off with your tongue."

@@ -20,7 +20,7 @@ init 2 python:
         self.enabled = False
         return
     def give_uniform_mod_initialization(self):
-        office.add_action(self)
+        lobby.add_action(self)
         self.enabled = False
         return
 
@@ -31,13 +31,13 @@ init 2 python:
         return False
 
     import_wardrobe_action = ActionMod("Import Wardrobe from XML", import_wardrobe_requirement, "import_wardrobe_label",
-        initialization = import_wardrobe_mod_initialization, menu_tooltip = "Import wardrobe into player wardrobe from xml", category = "Wardrobe")
+        initialization = import_wardrobe_mod_initialization, menu_tooltip = "Import wardrobe into player wardrobe from xml (Bedroom)", category = "Wardrobe")
 
     give_wardrobe_action = ActionMod("Add Wardrobe from XML", import_wardrobe_requirement, "give_wardrobe_label",
-        initialization = give_wardrobe_mod_initialization, menu_tooltip = "Import wardrobe into person wardrobe from xml", category = "Wardrobe")
+        initialization = give_wardrobe_mod_initialization, menu_tooltip = "Import wardrobe into person wardrobe from xml (Clothing Store)", category = "Wardrobe")
 
     give_uniform_action = ActionMod("Add Uniforms from XML", give_uniform_requirement, "give_uniform_label",
-        initialization = give_uniform_mod_initialization, menu_tooltip = "Import wardrobe into company division wardrobe from xml", category = "Wardrobe")
+        initialization = give_uniform_mod_initialization, menu_tooltip = "Import wardrobe into company division wardrobe from xml (Lobby)", category = "Wardrobe")
 
 label import_wardrobe_label():
     "Speaker" "Enter the file name e.g Lily_Wardrobe (case sensitive) then hit enter to import to your wardrobe"
@@ -75,31 +75,12 @@ label give_wardrobe_input(person = the_person): # when called from action defaul
     return
 
 label give_uniform_label():
-    $ target_wardrobe = None
-    "Speaker" "Choose what division to assign uniforms to"
-    menu:
-        "All Divisions":
-            $ target_wardrobe = mc.business.all_uniform
-        "Marketing Division":
-            $ target_wardrobe = mc.business.m_uniform
-        "Production":
-            $ target_wardrobe = mc.business.p_uniform
-        "Research Division":
-            $ target_wardrobe = mc.business.r_uniform
-        "Supply Division":
-            $ target_wardrobe = mc.business.s_uniform
-        "Human Resources Division":
-            $ target_wardrobe = mc.business.h_uniform
-        "Back":
-            return
-
-    "Speaker" "Enter the file name e.g Lily_Wardrobe (case sensitive) then hit enter to import uniforms"
+    "Speaker" "Enter the file name e.g Lily_Wardrobe (case sensitive) then hit enter to import uniforms."
 
     $ xml_filename = str(renpy.input("Wardrobe to import:"))
     if check_import_xml_file(xml_filename):
-        $ import_wardrobe(target_wardrobe, xml_filename)
-        "Speaker" "Uniforms assigned"
+        $ import_uniform(xml_filename)
+        "Speaker" "Uniforms added to business."
     else:
         "Speaker" "File not found."
-
     return

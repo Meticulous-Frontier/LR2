@@ -322,7 +322,7 @@
 #         $ the_person.apply_planned_outfit()
 #
 #         "You head to a nearby coffee shop. You grab yourself a coffee, letting [the_person.title] pay for her own. You grab a seat at a booth away from any other people."
-#         $ renpy.show("restaurant", what = restaraunt_background)
+#         $ renpy.show("restaurant", what = restaraunt_background, layer = "master")
 #         $ the_person.draw_person( position = "sitting")
 #
 #         the_person "So... are you interested in a friends with benefits set up?"
@@ -910,7 +910,7 @@
 # label athlete_flirt_response_mid(the_person):
 #
 #     if the_person.effective_sluttiness() < 20:
-#         the_person "Thanks! I work hard to take of myself. It's kind of weird to hear, but I'm glad it shows."
+#         the_person "Thanks! I work hard to take care of myself. It's kind of weird to hear, but I'm glad it shows."
 #
 #     else:
 #         the_person "Thanks! One of the benefits of being in shape I guess, you can wear clothing to show off your body."

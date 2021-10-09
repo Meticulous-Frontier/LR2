@@ -131,7 +131,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             call free_strip_scene(person_one) from _free_strip_scene_3
             $ mc.change_locked_clarity(50)
             $ person_two = get_random_employees(1)
-            if (person_one is person_two or person_two.sluttiness < 70) or (person_two == sarah and sarah_epic_tits_progress() == 1):
+            if not willing_to_threesome(person_one, person_two) or (person_two == sarah and sarah_epic_tits_progress() == 1):
                 "You're pretty sure she's ready for next step if you are ready."
                 menu:
                     "Fuck her on your desk" if not person_one.has_taboo("vaginal_sex"): # only show sex option if you had sex before:

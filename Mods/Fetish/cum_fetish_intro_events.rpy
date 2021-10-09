@@ -619,7 +619,7 @@ label cum_fetish_rebecca_intro_label(the_person):
         "The blowjob lessons she has received from [salon_manager.title] have really paid off. In no time she has your cock down her throat and is swallowing you like a pro."
     else:
         "With enthusiasm, [the_person.title] takes your cock in her mouth and goes to work."
-    $ the_person.add_situational_slut("Thirsty", 20, "Needs your cum.")
+    $ the_person.add_situational_slut("Thirsty", 20, "Needs your cum")
     call fuck_person(the_person, start_position = cum_fetish_blowjob, skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_aunt_intro_01
     $ the_person.clear_situational_slut("Thirsty")
     $ scene_manager.update_actor(the_person, position = "kneeling1")

@@ -38,7 +38,7 @@ init 2 python:
     def candace_overhear_supply_order_requirement(person):
         if day > candace_get_hire_date() + 14:
             if time_of_day > 1:
-                if person.sluttiness > 80:
+                if person.sluttiness > 40:
                     if person.location == person.work:
                         return True
         return False
@@ -49,10 +49,16 @@ init 2 python:
                 return True
         return False
 
+    def candace_topless_at_mall_requirement(the_person):
+        if the_person.location in [mall, gym, home_store, clothing_store, office_store, mall_salon]:
+            if the_person.love >= 40:
+                return True
+        return False
+
     def candace_midnight_wakeup_requirement():
-        if mc.business.research_tier >= 3 and candace_starbuck_are_friends():
+        if mc.business.research_tier >= 3 and candace_starbuck_are_friends() and candace.love >= 60:
             if time_of_day == 4:
-                if renpy.random.randint(0,100) < 10: #Average 10 days
+                if renpy.random.randint(0,100) < 15: #Average 7 days
                     return True
         return False
 
@@ -88,6 +94,7 @@ init 2 python:
     candace_goes_clothes_shopping = Action("Clothes shopping", candace_goes_clothes_shopping_requirement, "candace_goes_clothes_shopping_label")
     candace_overhear_supply_order = Action("Overhear supply call", candace_overhear_supply_order_requirement, "candace_overhear_supply_order_label")
     candace_supply_order_discount = Action("Candi reports success", candace_supply_order_discount_requirement, "candace_supply_order_discount_label")
+    candace_topless_at_mall = Action("Candi going topless", candace_topless_at_mall_requirement, "candace_topless_at_mall_label")
     candace_midnight_wakeup = Action("Candi gets arrested", candace_midnight_wakeup_requirement, "candace_midnight_wakeup_label")
     candace_begin_cure_research = Action("Candi moves", candace_begin_cure_research_requirement, "candace_begin_cure_research_label")
     candace_anti_bimbo_serum = Action("Head Researcher makes a plan", candace_anti_bimbo_serum_requirement, "candace_anti_bimbo_serum_label")
@@ -319,7 +326,7 @@ label candace_meet_at_office_store_label(the_person):
     mc.name "Hey there... [the_person.title], right?"
     "She looks at you. She seems to recognize you."
     the_person "Ah! You must be the new guy. I'm here to pick up the umm... supplies... that we talked about on the phone."
-    "Or probably not."
+    "Or not."
     mc.name "Sorry, you must have me confused with someone else. We met the other night, at a restaurant."
     "She squints at you for several seconds."
     the_person "Wait... you're the host? Right? I had a great time that night, at your restaurant!"
@@ -374,6 +381,9 @@ label candace_get_to_know_label(the_person):
             if candace_get_can_convince_to_quit():
                 if ophelia_get_will_help_candace():
                     "You already talked to [salon_manager.title]. Next time you see [the_person.title], you should put the pressure on and see if you can convince her to quit and come work for you."
+                elif the_person.love < 20:
+                    "You can tell that [the_person.title] is wavering, but you sense hestitation. The conditions aren't quite right to get her to convince her to split with her boyfriend."
+                    "Maybe if you got closer with her? If she had more affection for you, she might be more willing to break up with her asshole boyfriend."
                 else:
                     "You feel like with one more push, you could probably get [the_person.title] to quit. But what will happen when you do?"
                     "You consider if for a few moments. You should probably ask for help. This guy sounds like a narcissist, and he could be trouble if you aren't careful."
@@ -591,6 +601,7 @@ label candace_talk_about_pay(the_person):
 label candace_convince_to_quit_label(the_person):
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person)
+    $ ex_name = ophelia_get_ex_name()
     "Alright. This is it. It's now or never."
     mc.name "[the_person.title]... can I talk to you about something? Something important?"
     the_person "Oh, of course! What is it?"
@@ -608,7 +619,7 @@ label candace_convince_to_quit_label(the_person):
     $ scene_manager.update_actor(the_person, emotion = "sad")
     the_person "I want to... I really do..."
     mc.name "Then why don't you?"
-    the_person "I'm... I'm so scared! [the_person.SO_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
+    the_person "I'm... I'm so scared! [ex_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
     the_person "He says it's illegal! That I'll go to jail for being a prostitute!"
     mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
@@ -639,7 +650,7 @@ label candace_convince_to_quit_label(the_person):
     $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
     salon_manager "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
     the_person "Hi! You can call me [the_person.name]."
-    salon_manager "You know, I used to date [the_person.SO_name] too!"
+    salon_manager "You know, I used to date [ex_name] too!"
     the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
     salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
     the_person "Okay! I love selfies."
@@ -647,7 +658,7 @@ label candace_convince_to_quit_label(the_person):
     salon_manager "There we go! That will be a great picture to send with your break up text..."
     "Oh boy. Things are about to get juicy."
     salon_manager "Let me see your phone now. Okay here we go."
-    salon_manager "Guess who I met today, [the_person.SO_name]! Turns out we having something in common!.."
+    salon_manager "Guess who I met today, [ex_name]! Turns out we having something in common!.."
     "You spend the next hour or so getting [the_person.title] all set up. [salon_manager.title] really does think of everything."
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
@@ -734,6 +745,7 @@ label candace_overhear_supply_order_label(the_person):
     $ mc.business.add_mandatory_crisis(candace_supply_order_discount)
     return
 
+
 label candace_supply_order_discount_label():
     $ the_person = candace
     $ scene_manager = Scene()  #Clean Scene
@@ -754,6 +766,78 @@ label candace_supply_order_discount_label():
     $ candace.event_triggers_dict["supply_discount_active"] = True
     $ scene_manager.clear_scene()
     "You now receive a 10\% discount on all supply orders."
+
+    $ candace.add_unique_on_room_enter_event(candace_topless_at_mall)
+    return
+
+label candace_topless_at_mall_label(the_person):
+    $ scene_manager = Scene()
+    python:
+        if not "police_chief" in globals(): # save compatibility
+            add_police_chief_character()
+
+        if police_chief.title is None:  # haven't met, set title
+            police_chief.set_possessive_title("the police chief")
+            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_title("Officer " + police_chief.last_name)
+    "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
+    "When you walk over, you find [the_person.possessive_title], and it immediately becomes clear why there is a crowd gathering around..."
+    if mc.business.topless_is_legal():  #Right now it is always illegal
+        pass
+    else:
+        $ scene_manager.add_actor(the_person)
+        $ scene_manager.strip_to_tits(person = the_person, delay = 0)
+        $ scene_manager.update_actor(the_person)
+        "[the_person.title] is walking around the PUBLIC mall topless. Something that you are pretty sure is illegal."
+        mc.name "[the_person.title], what are you doing?"
+        the_person "Oh hey [the_person.mc_title]! Not much, I was just going for a little walk."
+        "?????" "Alright everyone, what seems to be the issue here? Let's move along now, okay?"
+        "You look over. It's a police officer!"
+        $ scene_manager.add_actor(police_chief, display_transform = character_left_flipped)
+        police_chief "Come on now, let's all just go back to our shopping."
+        "Suddenly, she sees [the_person.title]"
+        police_chief "Move along now... holy shit!"
+        $ scene_manager.update_actor(police_chief, emotion = "angry")
+        police_chief "Excuse me Ma'am? You can't just walk around the mall with your titties out!"
+        $ scene_manager.update_actor(the_person, emotion = "sad")
+        the_person "I... I can't? Really? Why not?"
+        police_chief "Ma'am... That's ILLEGAL! That is called public indecency!"
+        the_person "But... everyone always loves it when I get my tits out..."
+        police_chief "Sure, in the privacy of your own home you can do whatever, but this is a public place!"
+        police_chief "I'm gonna have to run you in, now put your hands behind you back."
+        "You decide to intervene."
+        mc.name "I'm sorry officer, I know this looks bad, but I know her. I'll buy her a shirt really quick and get her covered up."
+        mc.name "I'm sure she won't do it again!"
+        "[police_chief.possessive_title] looks at you, then back at [the_person.title], then shakes her head."
+        police_chief "I mean, there are worse crimes that could be committed here... Okay, just make it quick."
+        "You quickly grab [the_person.possessive_title]'s hand and lead her into the clothing store."
+        $ scene_manager.remove_actor(police_chief)
+        $ mc.change_location(clothing_store)
+        $ mc.location.show_background()
+        "You grab the first t-shirt you find and have her put it on."
+        $ the_person.outfit.add_upper(tanktop.get_copy(), [1.0, 1.0, 1.0, 1.0])
+        the_person "This shirt is boring!"
+        mc.name "[the_person.title], I know. But you can't be doing that, okay?"
+        the_person "I still don't understand what I was doing wrong!"
+        mc.name "There are laws in place! As nice as it would be, you can just walked around in public, topless."
+        mc.name "If you want to do that at work, that is fine, but you have to wear a shirt to the mall!"
+        "[the_person.possessive_title] pouts."
+        the_person "Okay. I'm sorry [the_person.mc_title], I didn't mean to cause you trouble."
+        "You walk with [the_person.title] to the check out counter. You have the cashier ring up the shirt."
+        $ mc.business.change_funds(-20)
+        "After you check out, suddenly [the_person.possessive_title] turns to you and hugs you."
+        $ scene_manager.update_actor(the_person, position = "kissing")
+        the_person "Thank you. You've always been so nice to me..."
+        "You put your hands on her back and hold her for a few seconds."
+        "You start to wonder if she is going to be okay. Whatever happened that turned her into a bimbo, she seems to be barely functional."
+        mc.name "You stay out of trouble, okay?"
+        $ scene_manager.update_actor(the_person, emotion = "happy", position = "stand3")
+        "[the_person.title] let's go of you and gives you a big smile."
+        the_person "Okay!"
+        mc.name "I'll see you at work."
+        the_person "Yes Sir!"
+    $ the_person.change_love(5, 60)
+    $ scene_manager.clear_scene()
     $ mc.business.add_mandatory_crisis(candace_midnight_wakeup)
     return
 
@@ -783,7 +867,7 @@ label candace_midnight_wakeup_label():
     $ mc.change_locked_clarity(10)
     police_chief "But it turns out she was doing it for free. We got multiple witnesses so we are gonna let her go."
     police_chief "We were just gonna send her off, but I didn't feel good about her walking home alone this time of night so I asked if she could call anyone and she gave me your name and number."
-    "That... Sounds exactly like something [the_person.name] would do."
+    "That sounds exactly like something [the_person.name] would do."
     mc.name "Okay... I'll be there in 20 minutes."
     "You hang up the phone and take a minute. [the_person.name], you REALLY need to be more careful. Who knows what kind of guy you could have wound up with? You wonder if it isn't time to do something more drastic with her."
     "You get up and quickly get yourself dressed. You leave a quick note on the counter in case anyone notices you are gone in the middle of the night and head out. It's a fairly short walk to the police station."
@@ -807,7 +891,8 @@ label candace_midnight_wakeup_label():
     "Oh boy, this is going to be interesting..."
     police_chief "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
     police_chief "When he said no and walked away, he could hear her making passes at the other girls in the cell."
-    police_chief "So I get here, bring her to my office and start asking her questions, you know. Where are you from, where's your family, that sort of thing."
+    police_chief "So I get here, bring her to my office and wouldn't you know it, it's the woman that was walking around topless at the mall the other day!."
+    police_chief "I start asking her questions, you know. Where are you from, where's your family, that sort of thing."
     police_chief "She says she doesn't know, so I ask about friends and she says she just has a couple..."
     police_chief "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
     "You take a moment to consider how to answer this. You are going to need to proceed carefully."
@@ -1242,7 +1327,7 @@ label candace_cure_bimbo_label():
     "Her brow furrows as she starts to recall."
     candace "I was the lead researcher, at another company, but we had just received word that our government funding was going to get cut if we couldn't get results."
     "She clears her throat and continues."
-    candace "I was desperate, but also overconfident. I decided to rush human trials, but my boss said no. So I decided to take it myself."
+    candace "I was desperate, but also overconfident. I wanted to rush human trials, but my boss said no. So I decided to take it myself."
     the_person "What were you trying to make?"
     candace "It seems so silly now. It was a drug designed for espionage. To reduce someone to their basest desires and to be completely open to suggestion and to be truthful."
     candace "The implications of the drug in the hands of the intelligence agency were immense."
@@ -1344,6 +1429,7 @@ label candace_meet_doctor_candace_label():
     the_person "But beyond that, to be in this industry, to be in a position to actually help, and to make the pushes necessary to formulate the cure, and to give it to me."
     "[the_person.title] looks you right in the eye and delivers her judgement."
     the_person "It could have only been you. You saved me. And for that, I owe you everything."
+    $ the_person.change_love(100, 100)
     mc.name "Don't be ridiculous, you don't owe me anything..."
     the_person "I know you feel that way. But it goes beyond that too. You have your flaws, sure. Every man has a vice. But you mean everything to me."
     if the_person.is_girlfriend():
