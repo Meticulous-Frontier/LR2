@@ -14,7 +14,7 @@ init 2:
         add "Science_Menu_Background.png"
         modal True
         frame:
-            background "#888888"
+            background "#0a1426dd"
             xalign 0.5
             xsize 1000
             yalign 0.5
@@ -26,7 +26,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 480
-                        text "Crisis Events" style "serum_text_style"
+                        text "Mod Modules" style "menu_text_header_style"
 
                     viewport:
                         xsize 480
@@ -56,7 +56,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 480
-                        text "Serum Traits" style "serum_text_style"
+                        text "Serum Traits" style "menu_text_header_style"
 
                     viewport:
                         xsize 480

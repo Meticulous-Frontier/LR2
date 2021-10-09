@@ -6,7 +6,7 @@ screen crisis_chance_setting(disabled, morning_disabled):
     default current_morning_crisis_base_chance = morning_crisis_base_chance
 
     frame: # top frame
-        background "#aaaaaa"
+        background "#0a1426dd"
         xsize 900
         ysize 400
         yalign 0.4
@@ -15,10 +15,10 @@ screen crisis_chance_setting(disabled, morning_disabled):
         vbox:
             yalign 0
             xalign .5
-            text "Crisis Event Chance" style "textbutton_text_style"
-
+            text "Crisis Event Chance" style "menu_text_header_style"
 
         vbox:
+            yoffset 10
             yalign 0.1
             xalign .5
             text "Crisis Event [[Total: " + str(__builtin__.len(crisis_list) - disabled) + "]" style "textbutton_text_style"
@@ -30,7 +30,7 @@ screen crisis_chance_setting(disabled, morning_disabled):
         vbox:
             yalign 0.5
             xalign .5
-            text "Morning Crisis Event [[Total: " + str(__builtin__.len(morning_crisis_list) - morning_disabled) + "]" style "textbutton_text_style"           
+            text "Morning Crisis Event [[Total: " + str(__builtin__.len(morning_crisis_list) - morning_disabled) + "]" style "textbutton_text_style"
             hbox:
                 bar value ScreenVariableValue("current_morning_crisis_base_chance", 100, step = 1) range 100 xsize 800 ysize 45 style style.slider
                 yalign 1.0
