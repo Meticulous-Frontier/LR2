@@ -40,6 +40,20 @@ init 1 python:
 
         return parse_wardrobe_tree(wardrobe, ET.parse(file_name).getroot())
 
+    def import_uniform(xml_filename):
+        file_name = get_wardrobe_file(xml_filename)
+        if file_name is None:
+            return
+
+        xml_root = ET.parse(file_name).getroot()
+        for outfit_element in xml_root.find("FullSets"):
+            mc.business.business_uniforms.append(UniformOutfit(outfit_from_xml(outfit_element)))
+        for outfit_element in xml_root.find("UnderwearSets"):
+            mc.business.business_uniforms.append(UniformOutfit(outfit_from_xml(outfit_element)))
+        for outfit_element in xml_root.find("OverwearSets"):
+            mc.business.business_uniforms.append(UniformOutfit(outfit_from_xml(outfit_element)))
+        return
+
     def parse_wardrobe_tree(wardrobe, xml_root):
         for outfit_element in xml_root.find("FullSets"):
             wardrobe.add_outfit(outfit_from_xml(outfit_element))

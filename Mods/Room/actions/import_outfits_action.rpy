@@ -75,31 +75,12 @@ label give_wardrobe_input(person = the_person): # when called from action defaul
     return
 
 label give_uniform_label():
-    $ target_wardrobe = None
-    "Speaker" "Choose what division to assign uniforms to"
-    menu:
-        "All Divisions":
-            $ target_wardrobe = mc.business.all_uniform
-        "Marketing Division":
-            $ target_wardrobe = mc.business.m_uniform
-        "Production":
-            $ target_wardrobe = mc.business.p_uniform
-        "Research Division":
-            $ target_wardrobe = mc.business.r_uniform
-        "Supply Division":
-            $ target_wardrobe = mc.business.s_uniform
-        "Human Resources Division":
-            $ target_wardrobe = mc.business.h_uniform
-        "Back":
-            return
-
-    "Speaker" "Enter the file name e.g Lily_Wardrobe (case sensitive) then hit enter to import uniforms"
+    "Speaker" "Enter the file name e.g Lily_Wardrobe (case sensitive) then hit enter to import uniforms."
 
     $ xml_filename = str(renpy.input("Wardrobe to import:"))
     if check_import_xml_file(xml_filename):
-        $ import_wardrobe(target_wardrobe, xml_filename)
-        "Speaker" "Uniforms assigned"
+        $ import_uniform(xml_filename)
+        "Speaker" "Uniforms added to business."
     else:
         "Speaker" "File not found."
-
     return
