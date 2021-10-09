@@ -137,35 +137,3 @@ init 1310 python:
         on_buy_function = unlock_genetic_manipulation,
     )
     organisation_policies_list.append(genetic_manipulation_policy)
-
-
-
-
-    # def body_customizer_policy_requirement():
-    #     return rd_division_policy.is_owned()
-
-    # body_customizer_policy = Policy(
-    #     name = "Genetic Manipulation Permit",
-    #     cost = 15000,
-    #     desc = "Allows the modification of DNA on human subjects with the intent of cosmetic changes in the [rd_division.formal_name]",
-    #     requirement = body_customizer_policy_requirement,
-    #     on_buy_function = rd_division.add_action,
-    #     extra_arguments = {"act": body_customizer_action},
-    #     parent = rd_division_policy
-
-    # body_customizer_action = Action("Modify Person", body_customizer_policy_requirement, "body_customizer_action_label", menu_tooltip = "Bring a person in for modifications")
-
-
-# label body_customizer_action_label():
-#     while True:
-#         $ people_list = get_sorted_people_list(known_people_in_the_game(), "Modify Person", ["Back"])
-
-#         call screen enhanced_main_choice_display(build_menu_items([people_list]))
-#         $ person_choice = _return
-#         $ del people_list
-
-#         if person_choice == "Back":
-#             return # Where to go if you hit "Back".
-#         else:
-#             show screen body_customizer(person_choice)
-#     return
