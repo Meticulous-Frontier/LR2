@@ -52,9 +52,7 @@ init 2 python:
 
     def ophelia_ex_bf_plan_pics_requirement(person):
         # prevent conflict with planned dates
-        if (mc.business.event_triggers_dict.get("movie_date_scheduled", False) and day%7 == 1) \
-            or (mc.business.event_triggers_dict.get("fuck_date_scheduled", False) and day%7 == 3) \
-            or (mc.business.event_triggers_dict.get("dinner_date_scheduled", False) and day%7 == 4):
+        if mc.business.date_scheduled_today():
             return False
         if person.location == mall_salon:
             if ophelia_get_ex_pics_planned() < 2:
@@ -64,9 +62,7 @@ init 2 python:
 
     def ophelia_make_blowjob_pics_requirement():
         # prevent conflict with planned dates
-        if (mc.business.event_triggers_dict.get("movie_date_scheduled", False) and day%7 == 1) \
-            or (mc.business.event_triggers_dict.get("fuck_date_scheduled", False) and day%7 == 3) \
-            or (mc.business.event_triggers_dict.get("dinner_date_scheduled", False) and day%7 == 4):
+        if mc.business.date_scheduled_today():
             return False
         if not salon_manager.location == mall_salon:
             return False
