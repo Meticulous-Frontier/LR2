@@ -108,15 +108,28 @@ init 10 python:
     def switch_preference(pref):
         cs = renpy.current_screen()
         cs.scope["pref_selected"] = pref
+        preference_value_changed(pref)
+        return
+
+    def preference_value_changed(pref):
+        cs = renpy.current_screen()
+
+        total = 0
+        for x in generic_preference[pref]:
+            total += getattr(persistent, generic_preference[pref][x][0])
+
+        cs.scope["current_total"] = total
+        return
 
 screen generic_preference_ui():
     modal True
     zorder 49
 
     default pref_selected = "Body Type"
+    default current_total = 100
 
     frame: # top frame
-        background "#888888"
+        background "#0a1426dd"
         xsize 1200
         yalign 0.4
         xalign 0.5
@@ -132,6 +145,7 @@ screen generic_preference_ui():
                 for pref in sorted(generic_preference):
                     textbutton pref:
                         style "textbutton_style"
+                        text_style "menu_text_title_style"
                         xsize 220
                         sensitive pref != pref_selected
                         action [
@@ -152,12 +166,17 @@ screen generic_preference_ui():
                                 vbox:
                                     xsize 600
                                     ysize 50
-                                    bar value FieldValue(persistent, generic_preference[pref][x][0], 100, step = 1, style = "slider") xsize 600 ysize 45
+                                    bar value FieldValue(persistent, generic_preference[pref][x][0], 100, step = 1, style = "slider", action = [ Function(preference_value_changed, pref_selected) ]) xsize 600 ysize 45
                                 vbox:
                                     xsize 60
                                     ysize 50
                                     yoffset 5
                                     text (str(getattr(persistent, generic_preference[pref][x][0])) + "%" if getattr(persistent, generic_preference[pref][x][0]) > 0 else "None") style "menu_text_style" xsize 100
+
+            hbox:
+                text "Total: {current}%".format(current = current_total):
+                    xalign 1.0
+                    style "menu_text_style"
 
             hbox:
                 xsize 800

@@ -50,6 +50,16 @@ init 10 python:
             the_person.event_triggers_dict["preg_finish_announce_day"] = the_person.event_triggers_dict.get("preg_finish_announce_day", day) + 1
         return
 
+    def self_generating_serum_on_remove(the_person, the_serum, add_to_log):
+        generated_serum = copy.copy(the_serum)
+        generated_serum.duration -= 1
+        generated_serum.duration_counter = 0
+
+        if generated_serum.duration > 1: # when duration is one, the serum fizzles out
+            the_person.give_serum(generated_serum, add_to_log = False)
+        return
+
+
     def fix_base_game_serums(): # fix existing save games
         mpa = next((x for x in list_of_traits if x == massive_pregnancy_accelerator), None)
         if mpa:
@@ -60,6 +70,14 @@ init 10 python:
         pd = next((x for x in list_of_traits if x == pregnancy_decelerator_trait), None)
         if pd:
             pd.on_day = pregnancy_decelerator_on_day_enhanced
+
+        sgs = next((x for x in list_of_traits if x == self_generating_serum), None)
+        if sgs:
+            sgs.duration = 0
+            sgs.positive_slug = "+$40 Value, Long Lasting Duration"
+            sgs.negative_slug = "+800 Serum Research, Long Lasting Duration"
+            sgs.desc = "Inserts instructions for the creation of this serum into the subject's cells, allowing them to create a copy of the serum in the body, each copy will decrease its duration by 1, until it fades away."
+            sgs.on_remove = self_generating_serum_on_remove
         return
 
 

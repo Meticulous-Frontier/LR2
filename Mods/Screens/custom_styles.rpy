@@ -139,6 +139,13 @@ init 2 style menu_text_style_left:
 init 2 style menu_text_title_style is menu_text_style:
     font "Mods/Core/Fonts/ethnocentric rg.ttf"
 
+init 2 style menu_text_header_style is menu_text_title_style:
+    size (persistent.display_text_size + 10)
+    yoffset 0
+    line_spacing 4
+    text_align 0.5
+    xalign 0.5
+
 init 2 style float_text:
     size 24
     italic False

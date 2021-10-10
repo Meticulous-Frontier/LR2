@@ -365,7 +365,16 @@ init -1 python:
 
     Business.employees_with_children_with_mc = business_employees_with_children_with_mc
 
-    #College intern realted functions
+    # Date schedule related functions
+
+    def date_scheduled_today(self):
+        return (self.event_triggers_dict.get("movie_date_scheduled", False) and day%7 == 1) \
+            or (self.event_triggers_dict.get("fuck_date_scheduled", False) and day%7 == 3) \
+            or (self.event_triggers_dict.get("dinner_date_scheduled", False) and day%7 == 4)
+
+    Business.date_scheduled_today = date_scheduled_today
+
+    # College intern related functions
 
     Business.college_interns_research = []
     Business.college_interns_production = []

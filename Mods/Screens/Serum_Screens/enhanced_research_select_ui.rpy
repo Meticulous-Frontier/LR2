@@ -4,9 +4,7 @@ init -1 python:
 
             if trait.research_needed > 10000:
                 return "{color=#cd5c5c}Always Guaranteed{/color}"
-            if trait_side_effects > 100:
-                return "{color=#cd5c5c}100%{/color}"
-            if trait_side_effects >= 60: # Red (Color code the side effect risk for quicker identification)
+            if trait_side_effects >= 70: # Red (Color code the side effect risk for quicker identification)
                 return "{color=#cd5c5c}" + str(trait_side_effects) + "%{/color}"
             elif trait_side_effects >= 20: # Yellow
                 return "{color=#eee000}" + str(trait_side_effects) + "%{/color}"

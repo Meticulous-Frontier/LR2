@@ -1468,6 +1468,12 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
                 the_person "You make me feel so good, [the_person.mc_title]... come visit me soon okay?"
                 $ the_person.shop_owner_relationship_stage = 1.0
             #TODO it's not mutual
+    else:
+        # alternative to learning her home location (needed for 'spend the night' event)
+        the_person "Anyway, if you are ever in my neighborhood make sure to drop by for a beer."
+        $ the_person.learn_home()
+        "She tells you her home address, so make sure you go visit her sometime."
+
     $the_person.draw_person(position = "stand2")
     the_person "Okay, it's time for me to get to the shop. See you soon [the_person.mc_title]!"
     "You walk her to the door and say goodbye. Wow, you are now the proud owner of a sex swing! And with everything going on with [the_person.possessive_title], you brain is swimming a bit."
@@ -2731,7 +2737,7 @@ label starbuck_intro():
             the_person "I was just thinking about you. Anything I can help you with?"
         else:
             the_person "Is there anything I can help you with?"
-    elif (the_person.shop_progress_stage) >= 2 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
+    elif the_person.shop_progress_stage >= 2 and the_person.shop_investment_rate >= 3.0 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
         if candace.sluttiness >= 60: #Separate candace slut check since I never check to make sure she exists in globals
             call starbuck_cargo_shipment_label(the_person) from _begin_candi_duo_event_intro_01
         else:

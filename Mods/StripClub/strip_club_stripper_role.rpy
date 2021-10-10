@@ -408,12 +408,16 @@ label stripper_performance_review_label(the_person):
             the_person "I don't really have anything positive to say. The pay isn't great and it isn't exactly the most pleasant work environment."
     "You nod and take some notes while you think of how you want to respond."
     $ ran_num = calculate_stripper_salary(the_person)
-    "Her actual salary is $[the_person.stripper_salary], but for her current performance level it should be $[ran_num], what will you do?"
+    if ran_num > the_person.stripper_salary:
+        "Her actual salary is $[the_person.stripper_salary], but for her current performance level it should be $[ran_num], what will you do?"
+    else:
+        "Her current performance level does not warrant a raise of her salary, what will you do?"
+
     menu:
         "Reward her for work well done":
             $ raise_amount = __builtin__.round(the_person.stripper_salary * 0.1)
             menu:
-                "Give her a raise\n{color=#ff0000}{size=18}Costs: $[raise_amount] / day{/size}{/color}": #Pay her more money. Large happiness and obedience raise.
+                "Give her a 10% raise\n{color=#ff0000}{size=18}Costs: $[raise_amount] / day{/size}{/color}": #Pay her more money. Large happiness and obedience raise.
                     mc.name "I've been very impressed by your work lately, and I'd like to make sure you stay happy with your decision to work here."
                     mc.name "I'm going to put you down for a 10%% raise. How does that sound?"
                     $ the_person.stripper_salary += raise_amount
@@ -446,7 +450,7 @@ label stripper_performance_review_label(the_person):
         "Punish her for poor performance":
             $ cut_amount = __builtin__.round(the_person.salary * 0.1)
             menu:
-                "Cut her pay\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}": #Pay her less. Large happiness and obedience drop.
+                "Cut her pay by 10%\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}": #Pay her less. Large happiness and obedience drop.
                     mc.name "I'm really sorry to do this [the_person.title], but your performance lately just doesn't justify what I'm paying you."
                     mc.name "I'm going to have to cut your pay by 10%%."
                     $ the_person.change_salary(-cut_amount)
@@ -473,7 +477,7 @@ label stripper_performance_review_label(the_person):
                     mc.name "I'll be honest with you [the_person.title], your performance here at the club leaves a lot to be desired."
                     mc.name "I've been running the numbers and I think, unless you can convince me otherwise, we'd be better off without you."
                     if the_person.get_job_happiness_score() > -10:
-                        if the_person.effective_sluttiness() < 20:
+                        if the_person.effective_sluttiness() < 30:
                             the_person "No sir, I really need this job. What if I took a pay cut? Would that be enough?"
                             menu:
                                 "Cut her pay\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}":

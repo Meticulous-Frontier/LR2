@@ -56,15 +56,8 @@ init 2 python:
         kaya.event_triggers_dict["anal_position_filter"] = kaya_anal_position_filter
         kaya.event_triggers_dict["unique_sex_positions"] = kaya_unique_sex_positions
 
-        # add appoint
-        #office.add_action(HR_director_appointment_action)
-
-        # kaya_intro = Action("kaya_intro",kaya_intro_requirement,"kaya_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.add_mandatory_crisis(kaya_setup_intro_event) #Add the event here so that it pops when the requirements are met.
 
-        # set relationships
-        # town_relationships.update_relationship(kaya, stephanie, "Sister")
-        # town_relationships.update_relationship(nora, kaya, "Friend")
         if persistent.pregnancy_pref != 0:
             kaya.on_birth_control = False
 
@@ -86,14 +79,13 @@ init -2 python:
 
     def kaya_ask_out_requirement(the_person):
         if the_person.location == coffee_shop and the_person.love > 20 and time_of_day == 3:
-            #TODO False if we already have a date scheduled for tonight. Maybe make this only non date nights?
-            return True
+            return not mc.business.date_scheduled_today()
         return False
 
     def kaya_get_drinks_requirement(the_person):
         # return False
         if time_of_day == 3 and kaya_can_get_drinks():
-            return True
+            return not mc.business.date_scheduled_today()
         return False
 
     def kaya_add_HR_program_event_requirement():

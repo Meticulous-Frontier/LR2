@@ -45,7 +45,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         if not mc.business.get_employee_title(the_person) == "None":
                             text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
                         if get_strip_club_foreclosed_stage() >= 5 and the_person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):
-                            text "Position: " + strip_club_get_job_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
+                            text "Position: " + strip_club_get_job_title(the_person) + " ($[the_person.stripper_salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
 
                         if visible_roles:
                             text "Special Roles: " + ", ".join(visible_roles) style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
