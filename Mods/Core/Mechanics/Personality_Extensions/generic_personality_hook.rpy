@@ -92,7 +92,7 @@ init 2 python:
             elif return_character.personality.base_personality_prefix == introvert_personality.personality_type_prefix:
                 start_suggest -= 5
 
-            return_character.change_suggest(start_suggest)
+            return_character.change_suggest(start_suggest, add_to_log = False)
 
         if tan_style is None:
             if renpy.random.randint(0, 1) == 1: # 50% chance on random tan (could be no_tan)
