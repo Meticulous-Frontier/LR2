@@ -365,7 +365,7 @@ init -1 python:
             person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
         if person.sluttiness < person.suggestibility:
             if renpy.random.randint(0,100) < (30 - (person.suggestibility - person.sluttiness)):
-                person.change_slut(1, add_to_log)
+                person.change_slut(1, add_to_log = add_to_log)
 
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
