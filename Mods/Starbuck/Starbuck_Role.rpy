@@ -2737,7 +2737,7 @@ label starbuck_intro():
             the_person "I was just thinking about you. Anything I can help you with?"
         else:
             the_person "Is there anything I can help you with?"
-    elif (the_person.shop_progress_stage) >= 2 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
+    elif the_person.shop_progress_stage >= 2 and the_person.shop_investment_rate >= 3.0 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
         if candace.sluttiness >= 60: #Separate candace slut check since I never check to make sure she exists in globals
             call starbuck_cargo_shipment_label(the_person) from _begin_candi_duo_event_intro_01
         else:
