@@ -163,6 +163,11 @@ init 1 python:
     # pencil skirt pussy usable to False
     pencil_skirt.anchor_below = True
 
+    # disable gl2 extensions
+    if renpy.android:
+        config.gl2 = False
+        persistent.vren_animation = False
+
     # allow for more idle objects
     config.automatic_images = None
     config.optimize_texture_bounds = True
